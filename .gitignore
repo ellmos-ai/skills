@@ -10,3 +10,6 @@ build/
 Thumbs.db
 *.db
 *.sqlite3
+
+# Private Skills (nicht fuer Veroeffentlichung)
+skills/education/foerderplaner/
