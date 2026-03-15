@@ -1,0 +1,13 @@
+{
+  "name": "STANDARD",
+  "description": "Vollstaendige S-Tests + L-Test Prompt-Generierung. Empfohlen fuer neue Skills.",
+  "duration_estimate": "~5 Min (S-Tests auto, L-Tests in separater Session)",
+  "s_tests": ["S001", "S002", "S003", "S004", "S005"],
+  "l_tests": ["L001", "L002", "L003", "L004", "L005", "L006"],
+  "u_tests": [],
+  "weights": {
+    "s_tests": 0.25,
+    "l_tests": 0.50,
+    "u_tests": 0.25
+  }
+}

@@ -286,6 +286,65 @@ def cmd_categories(args):
     print()
 
 
+def cmd_quality(args):
+    """Quality-Scores anzeigen oder S-Tests ausfuehren."""
+    import json as json_mod
+
+    results_dir = Path(__file__).parent / "testing" / "results"
+
+    if args.name:
+        # Einzelnen Skill
+        if args.run:
+            os.system(f'PYTHONIOENCODING=utf-8 python testing/skill_tester.py test {args.name} --type static')
+            return
+
+        # Letztes Ergebnis anzeigen
+        skill_dir = results_dir / args.name
+        if skill_dir.exists():
+            results = sorted(skill_dir.glob("*.json"), reverse=True)
+            if results:
+                data = json_mod.loads(results[0].read_text(encoding="utf-8"))
+                score = data.get("quality_score", "?")
+                rating = data.get("rating", "?")
+                date_str = data.get("meta", {}).get("date", "?")[:10]
+                print(f"\n  {args.name}: {score}/5 ({rating}) -- {date_str}")
+
+                dims = data.get("dimensions", {})
+                if dims:
+                    labels = {
+                        "d1_clarity": "Klarheit",
+                        "d2_completeness": "Vollstaendigkeit",
+                        "d3_independence": "Unabhaengigkeit",
+                        "d4_effectiveness": "Wirksamkeit",
+                        "d5_efficiency": "Effizienz",
+                    }
+                    for k, v in dims.items():
+                        print(f"    {labels.get(k, k)}: {v}/5")
+                print()
+                return
+
+        print(f"  Keine Testergebnisse fuer '{args.name}'.")
+        print(f"  Ausfuehren: python catalog.py quality {args.name} --run")
+        return
+
+    # Alle Skills -- letzten Batch laden
+    if args.run:
+        os.system('PYTHONIOENCODING=utf-8 python testing/skill_tester.py batch')
+        return
+
+    batch_files = sorted(results_dir.glob("batch_*.json"), reverse=True)
+    if batch_files:
+        data = json_mod.loads(batch_files[0].read_text(encoding="utf-8"))
+        print(f"\n  Batch vom {data['date'][:10]} ({data['total']} Skills)\n")
+        for r in sorted(data["results"], key=lambda x: x["quality"], reverse=True):
+            status = "OK" if r["quality"] >= 3 else "!!"
+            print(f"  [{status}] {r['skill']:30s} {r['quality']:.1f}/5")
+        print(f"\n  Durchschnitt: {data['average']}/5\n")
+    else:
+        print("  Keine Batch-Ergebnisse vorhanden.")
+        print("  Ausfuehren: python catalog.py quality --run")
+
+
 # ─── Main ───
 
 
@@ -318,6 +377,11 @@ def main():
     # categories
     sub.add_parser("categories", help="Alle Kategorien auflisten")
 
+    # quality
+    p_quality = sub.add_parser("quality", help="Quality-Score anzeigen")
+    p_quality.add_argument("name", nargs="?", help="Skill-Name (ohne = alle)")
+    p_quality.add_argument("--run", action="store_true", help="S-Tests ausfuehren")
+
     args = parser.parse_args()
 
     if args.command == "list":
@@ -330,6 +394,8 @@ def main():
         cmd_info(args)
     elif args.command == "categories":
         cmd_categories(args)
+    elif args.command == "quality":
+        cmd_quality(args)
     else:
         parser.print_help()
 

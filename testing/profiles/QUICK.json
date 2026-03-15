@@ -1,0 +1,8 @@
+{
+  "name": "QUICK",
+  "description": "Schnelltest: Nur Frontmatter + Standalone-Check + Lesbarkeit.",
+  "duration_estimate": "~2 Min",
+  "s_tests": ["S001", "S005"],
+  "l_tests": ["L001", "L002"],
+  "u_tests": []
+}
