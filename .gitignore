@@ -17,3 +17,11 @@ skills/dev/swarm-operations/
 
 # Test-Ergebnisse
 testing/results/
+
+# Policy-Standard (GITHUB-POLICY.md)
+AUFGABEN.txt
+Plan.txt
+.claude/
+.vscode/
+desktop.ini
+_archive/
