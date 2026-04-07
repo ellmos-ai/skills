@@ -1,80 +1,82 @@
 # Skills Library
 
-**Standalone-Skillbibliothek** -- portierbare KI-Skills im Anthropic-kompatiblen Format.
+**🇩🇪 [Deutsche Version](README_de.md)**
 
-Skills koennen eigenstaendig (standalone) oder als Teil eines groesseren Systems (z.B. BACH) genutzt werden. Die Herkunft, der Sync-Status und die Abhaengigkeiten sind **direkt in jeder SKILL.md** im YAML-Frontmatter hinterlegt -- keine zentrale Steuerdatei noetig.
+**Standalone skill library** -- portable AI skills in Anthropic-compatible format.
 
-## Struktur
+Skills can be used independently (standalone) or as part of a larger system (e.g. BACH). Origin, sync status, and dependencies are stored **directly in each SKILL.md** via YAML frontmatter -- no central control file needed.
+
+## Structure
 
 ```
 skills/
-  <kategorie>/
+  <category>/
     <skill-name>/
-      SKILL.md              # Definition + Provenance + Abhaengigkeiten
-      scripts/              # Optional: ausfuehrbarer Code
-      references/           # Optional: Referenzdokumente
-  _templates/               # Vorlagen fuer neue Skills
-  _examples/                # Beispiel-Skills
+      SKILL.md              # Definition + Provenance + Dependencies
+      scripts/              # Optional: executable code
+      references/           # Optional: reference documents
+  _templates/               # Templates for new skills
+  _examples/                # Example skills
 docs/
-  CONVENTIONS.md            # Frontmatter-Spezifikation
-catalog.py                  # CLI: Katalog, Sync-Status, Suche
+  CONVENTIONS.md            # Frontmatter specification
+catalog.py                  # CLI: catalog, sync status, search
 ```
 
-## Skill-Typen
+## Skill Types
 
-| Typ | Beschreibung |
-|-----|-------------|
-| `skill` | Allgemeine Faehigkeit (Standard) |
-| `agent` | Orchestriert andere Skills/Experten |
-| `expert` | Tiefes Domaenenwissen |
-| `service` | Hintergrunddienst |
-| `protocol` | Ablauf-/Workflow-Anleitung |
-| `tool` | Ausfuehrbares Werkzeug (mit Script) |
+| Type | Description |
+|------|------------|
+| `skill` | General capability (default) |
+| `agent` | Orchestrates other skills/experts |
+| `expert` | Deep domain knowledge |
+| `service` | Background service |
+| `protocol` | Process/workflow guide |
+| `tool` | Executable tool (with script) |
 
-## Standalone vs. System-gebunden
+## Standalone vs. System-bound
 
-Jede SKILL.md deklariert ueber Frontmatter-Felder, ob sie eigenstaendig funktioniert:
+Each SKILL.md declares via frontmatter fields whether it works independently:
 
 ```yaml
-standalone: true             # Funktioniert ohne externes System
-bach_compatible: true        # Kann in BACH geladen werden
-bach_origin: true            # Stammt aus BACH
+standalone: true             # Works without external system
+bach_compatible: true        # Can be loaded in BACH
+bach_origin: true            # Originated from BACH
 ```
 
 Details: [docs/CONVENTIONS.md](docs/CONVENTIONS.md)
 
-## Schnellstart
+## Quick Start
 
 ```bash
-# Katalog anzeigen
+# Show catalog
 python catalog.py list
 
-# Skill nach Kategorie filtern
+# Filter by category
 python catalog.py list --category productivity
 
-# Sync-Status pruefen (welche Skills sind veraltet?)
+# Check sync status (which skills are outdated?)
 python catalog.py sync-status
 
-# Neuen Skill aus Template erstellen
-python catalog.py create "mein-skill" --category productivity --type skill
+# Create new skill from template
+python catalog.py create "my-skill" --category productivity --type skill
 ```
 
-## Provenance-System
+## Provenance System
 
-Jeder Skill traegt seine Herkunft in sich:
+Each skill carries its own origin metadata:
 
 ```yaml
 provenance:
   origin: "bach"                          # bach | custom | community
-  origin_path: "system/skills/therapie/"  # Quellpfad im Ursprungssystem
-  origin_version: "1.0.0"                # Version beim Export
-  last_sync_from_origin: "2026-03-12"    # Letzter Import
-  last_sync_to_origin: null              # Letzter Rueckfluss
-  local_changes_since_sync: false        # Lokale Aenderungen?
+  origin_path: "system/skills/therapie/"  # Source path in origin system
+  origin_version: "1.0.0"                # Version at time of export
+  last_sync_from_origin: "2026-03-12"    # Last import from source
+  last_sync_to_origin: null              # Last backflow to source
+  local_changes_since_sync: false        # Local changes?
 ```
 
-So ist jederzeit nachvollziehbar: Woher kommt der Skill? Auf welchem Stand ist er? Wurde er lokal veraendert?
+This ensures full traceability: Where does the skill come from? What version is it at? Has it been locally modified?
 
-## Lizenz
+## License
 
-MIT License -- siehe [LICENSE](LICENSE)
+MIT License -- see [LICENSE](LICENSE)
