@@ -1,0 +1,34 @@
+# Skills - Portable Skill Library for LLM Agents
+
+> A standalone, portable library of AI skills in the Anthropic-compatible SKILL.md format. Skills work either on their own or inside larger systems (like BACH). Each skill carries its own provenance, sync state, and dependencies in YAML frontmatter -- no central control file needed.
+
+This repository is the skill catalog of the ellmos family (Extra Large Language Model Operating Systems). Where BACH is the full text-based OS and Rinnsal is the lightweight infrastructure layer, this library is the **content** layer: reusable capability definitions that any compatible agent runtime can load. Skills can originate from BACH, be custom-written, or come from the community, and each SKILL.md declares whether it runs standalone and whether it is BACH-compatible. Author: Lukas Geiger. License: MIT.
+
+Skill types: skill (general capability), agent (orchestrates other skills/experts), expert (deep domain knowledge), service (background service), protocol (workflow playbook), tool (executable with script). Provenance fields track origin, origin_path, origin_version, last_sync timestamps, and whether local changes diverged from the source.
+
+## Docs
+
+- [README (Deutsch)](https://github.com/ellmos-ai/skills/blob/master/README.md): Overview, structure, skill types, provenance, CLI quickstart
+- [README (English)](https://github.com/ellmos-ai/skills/blob/master/README_EN.md): English version
+- [CONVENTIONS](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): Frontmatter specification, full field reference
+- [catalog.py](https://github.com/ellmos-ai/skills/blob/master/catalog.py): CLI for listing, filtering, sync-status, skill creation
+- [LICENSE](https://github.com/ellmos-ai/skills/blob/master/LICENSE): MIT license text
+
+## Skill categories
+
+- [skills/](https://github.com/ellmos-ai/skills/tree/master/skills): All skills, organized by category
+- [skills/_templates/](https://github.com/ellmos-ai/skills/tree/master/skills/_templates): Templates for new skills
+- [skills/_examples/](https://github.com/ellmos-ai/skills/tree/master/skills/_examples): Example skills
+
+## ellmos family (related projects)
+
+- [USMC](https://github.com/ellmos-ai/usmc): Tier 1 -- shared memory primitive
+- [Rinnsal](https://github.com/ellmos-ai/rinnsal): Tier 2 -- lightweight LLM agent infrastructure
+- [BACH](https://github.com/ellmos-ai/bach): Tier 3 -- full text-based OS, loads skills from this library
+- [Gardener](https://github.com/ellmos-ai/gardener): Database-based OS counterpart
+- [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun): LLM chain-execution framework
+
+## Optional
+
+- [GitHub Issues](https://github.com/ellmos-ai/skills/issues): Bug reports and contribution proposals
+- [testing/](https://github.com/ellmos-ai/skills/tree/master/testing): Skill validation tests
