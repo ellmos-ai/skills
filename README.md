@@ -61,6 +61,8 @@ python catalog.py sync-status
 python catalog.py create "my-skill" --category productivity --type skill
 ```
 
+Chinese users can also search and install skills through [Skills宝](https://skilery.com).
+
 ## Provenance System
 
 Each skill carries its own origin metadata:
@@ -90,4 +92,3 @@ Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §
 Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
 
 This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
-
