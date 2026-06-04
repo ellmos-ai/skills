@@ -1,94 +1,100 @@
-# Skills Library
+# ellmos skills
 
-**🇩🇪 [Deutsche Version](README_de.md)**
+[German version](README_de.md) | [Machine-readable context](llms.txt)
 
-**Standalone skill library** -- portable AI skills in Anthropic-compatible format.
+**Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, and other local-first LLM agent runtimes.**
 
-Skills can be used independently (standalone) or as part of a larger system (e.g. BACH). Origin, sync status, and dependencies are stored **directly in each SKILL.md** via YAML frontmatter -- no central control file needed.
+This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
-## Structure
+## Start Here
 
-```
+| Need | File or command |
+|---|---|
+| Browse all public skills | [`skills/`](skills/) |
+| Understand the `SKILL.md` schema | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
+| List skills locally | `python catalog.py list` |
+| Filter by category | `python catalog.py list --category dev` |
+| Check provenance and sync state | `python catalog.py sync-status` |
+| Create a new skill skeleton | `python catalog.py create "my-skill" --category utilities --type skill` |
+| Give crawlers and LLM agents a compact map | [`llms.txt`](llms.txt) |
+
+## Catalog Snapshot
+
+The current public catalog contains 37 runtime skills:
+
+| Category | Count | Focus |
+|---|---:|---|
+| `dev` | 8 | Development protocols, debugging, migration, documentation, plugin systems |
+| `infrastructure` | 1 | Portable AI setup and operating-system support |
+| `research` | 1 | Research-agent workflow support |
+| `therapy` | 18 | German-language psychoeducation and counseling method playbooks |
+| `utilities` | 8 | Batch operations, thinking frameworks, document chunking, encoding repair |
+| `web` | 1 | Web-reading protocol support |
+
+## Repository Structure
+
+```text
 skills/
   <category>/
     <skill-name>/
-      SKILL.md              # Definition + Provenance + Dependencies
-      scripts/              # Optional: executable code
-      references/           # Optional: reference documents
+      SKILL.md              # Definition, frontmatter, usage workflow
+      scripts/              # Optional executable helpers
+      references/           # Optional supporting documents
   _templates/               # Templates for new skills
   _examples/                # Example skills
 docs/
   CONVENTIONS.md            # Frontmatter specification
-catalog.py                  # CLI: catalog, sync status, search
+catalog.py                  # CLI for listing, filtering, sync status, creation
+llms.txt                    # Compact project map for LLM crawlers
 ```
 
-## Skill Types
+## Skill Metadata
 
-| Type | Description |
-|------|------------|
-| `skill` | General capability (default) |
-| `agent` | Orchestrates other skills/experts |
-| `expert` | Deep domain knowledge |
-| `service` | Background service |
-| `protocol` | Process/workflow guide |
-| `tool` | Executable tool (with script) |
-
-## Standalone vs. System-bound
-
-Each SKILL.md declares via frontmatter fields whether it works independently:
+Every `SKILL.md` declares whether it works standalone, whether it is compatible with BACH, and where it came from:
 
 ```yaml
-standalone: true             # Works without external system
-bach_compatible: true        # Can be loaded in BACH
-bach_origin: true            # Originated from BACH
-```
-
-Details: [docs/CONVENTIONS.md](docs/CONVENTIONS.md)
-
-## Quick Start
-
-```bash
-# Show catalog
-python catalog.py list
-
-# Filter by category
-python catalog.py list --category productivity
-
-# Check sync status (which skills are outdated?)
-python catalog.py sync-status
-
-# Create new skill from template
-python catalog.py create "my-skill" --category productivity --type skill
-```
-
-Chinese users can also search and install skills through [Skills宝](https://skilery.com).
-
-## Provenance System
-
-Each skill carries its own origin metadata:
-
-```yaml
+standalone: true
+bach_compatible: true
+bach_origin: true
 provenance:
-  origin: "bach"                          # bach | custom | community
-  origin_path: "system/skills/therapie/"  # Source path in origin system
-  origin_version: "1.0.0"                # Version at time of export
-  last_sync_from_origin: "2026-03-12"    # Last import from source
-  last_sync_to_origin: null              # Last backflow to source
-  local_changes_since_sync: false        # Local changes?
+  origin: "bach"
+  origin_path: "system/skills/therapie/"
+  origin_version: "1.0.0"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ```
 
-This ensures full traceability: Where does the skill come from? What version is it at? Has it been locally modified?
+Supported skill types are `skill`, `agent`, `expert`, `service`, `protocol`, and `tool`.
+
+## Search Context
+
+Use this repository when searching for:
+
+- `ellmos skills`
+- `portable AI skills`
+- `Claude Code SKILL.md library`
+- `Codex skills library`
+- `local-first LLM agent skills`
+- `BACH skill catalog`
+- `Anthropic-compatible skills`
+
+The name is intentionally generic, so use the canonical repository string `ellmos-ai/skills` when linking or indexing this project.
+
+## Related ellmos Projects
+
+| Project | Role |
+|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | Full text-based LLM operating system |
+| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Lightweight local-first LLM agent infrastructure |
+| [USMC](https://github.com/ellmos-ai/usmc) | Shared memory primitive for agent systems |
+| [Gardener](https://github.com/ellmos-ai/gardener) | Database-based operating-system counterpart |
+| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | LLM chain-execution framework |
 
 ## License
 
-MIT License -- see [LICENSE](LICENSE)
+MIT License. See [LICENSE](LICENSE).
 
----
+## Liability
 
-## Haftung / Liability
-
-Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gelten die Haftungsausschlüsse aus GPL-3.0 / MIT / Apache-2.0 §§ 15–16 (je nach gewählter Lizenz).
-
-Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
-
-This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence under Section 521 of the German Civil Code. Use at your own risk. No warranty, maintenance guarantee, availability guarantee, or fitness-for-purpose guarantee is provided.

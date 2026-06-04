@@ -1,82 +1,100 @@
-# Skills Library
+# ellmos skills
 
-**🇬🇧 [English Version](README.md)**
+[Englische Version](README.md) | [Maschinenlesbarer Kontext](llms.txt)
 
-**Standalone-Skillbibliothek** -- portierbare KI-Skills im Anthropic-kompatiblen Format.
+**Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.**
 
-Skills können eigenständig (standalone) oder als Teil eines größeren Systems (z.B. BACH) genutzt werden. Die Herkunft, der Sync-Status und die Abhängigkeiten sind **direkt in jeder SKILL.md** im YAML-Frontmatter hinterlegt -- keine zentrale Steuerdatei nötig.
+Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
-## Struktur
+## Einstieg
 
-```
+| Bedarf | Datei oder Befehl |
+|---|---|
+| Alle öffentlichen Skills ansehen | [`skills/`](skills/) |
+| Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
+| Skills lokal auflisten | `python catalog.py list` |
+| Nach Kategorie filtern | `python catalog.py list --category dev` |
+| Herkunft und Sync-Status prüfen | `python catalog.py sync-status` |
+| Neues Skill-Gerüst erzeugen | `python catalog.py create "mein-skill" --category utilities --type skill` |
+| Kompakte Projektkarte für LLMs lesen | [`llms.txt`](llms.txt) |
+
+## Katalogstand
+
+Der aktuelle öffentliche Katalog enthält 37 Laufzeit-Skills:
+
+| Kategorie | Anzahl | Fokus |
+|---|---:|---|
+| `dev` | 8 | Entwicklungsprotokolle, Debugging, Migration, Dokumentation, Plugin-Systeme |
+| `infrastructure` | 1 | Portables KI-Setup und Betriebssystem-Unterstützung |
+| `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
+| `therapy` | 18 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
+| `utilities` | 8 | Batch-Operationen, Denkrahmen, Dokumenten-Chunking, Encoding-Reparatur |
+| `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
+
+## Repository-Struktur
+
+```text
 skills/
   <kategorie>/
     <skill-name>/
-      SKILL.md              # Definition + Provenance + Abhängigkeiten
-      scripts/              # Optional: ausführbarer Code
-      references/           # Optional: Referenzdokumente
+      SKILL.md              # Definition, Frontmatter, Nutzungsablauf
+      scripts/              # Optional ausführbare Hilfsprogramme
+      references/           # Optional unterstützende Dokumente
   _templates/               # Vorlagen für neue Skills
   _examples/                # Beispiel-Skills
 docs/
   CONVENTIONS.md            # Frontmatter-Spezifikation
-catalog.py                  # CLI: Katalog, Sync-Status, Suche
+catalog.py                  # CLI für Liste, Filter, Sync-Status, Anlage
+llms.txt                    # Kompakte Projektkarte für LLM-Crawler
 ```
 
-## Skill-Typen
+## Skill-Metadaten
 
-| Typ | Beschreibung |
-|-----|-------------|
-| `skill` | Allgemeine Fähigkeit (Standard) |
-| `agent` | Orchestriert andere Skills/Experten |
-| `expert` | Tiefes Domänenwissen |
-| `service` | Hintergrunddienst |
-| `protocol` | Ablauf-/Workflow-Anleitung |
-| `tool` | Ausführbares Werkzeug (mit Script) |
-
-## Standalone vs. System-gebunden
-
-Jede SKILL.md deklariert über Frontmatter-Felder, ob sie eigenständig funktioniert:
+Jede `SKILL.md` deklariert, ob sie eigenständig läuft, ob sie BACH-kompatibel ist und woher sie stammt:
 
 ```yaml
-standalone: true             # Funktioniert ohne externes System
-bach_compatible: true        # Kann in BACH geladen werden
-bach_origin: true            # Stammt aus BACH
-```
-
-Details: [docs/CONVENTIONS.md](docs/CONVENTIONS.md)
-
-## Schnellstart
-
-```bash
-# Katalog anzeigen
-python catalog.py list
-
-# Skill nach Kategorie filtern
-python catalog.py list --category productivity
-
-# Sync-Status prüfen (welche Skills sind veraltet?)
-python catalog.py sync-status
-
-# Neuen Skill aus Template erstellen
-python catalog.py create "mein-skill" --category productivity --type skill
-```
-
-## Provenance-System
-
-Jeder Skill trägt seine Herkunft in sich:
-
-```yaml
+standalone: true
+bach_compatible: true
+bach_origin: true
 provenance:
-  origin: "bach"                          # bach | custom | community
-  origin_path: "system/skills/therapie/"  # Quellpfad im Ursprungssystem
-  origin_version: "1.0.0"                # Version beim Export
-  last_sync_from_origin: "2026-03-12"    # Letzter Import
-  last_sync_to_origin: null              # Letzter Rückfluss
-  local_changes_since_sync: false        # Lokale Änderungen?
+  origin: "bach"
+  origin_path: "system/skills/therapie/"
+  origin_version: "1.0.0"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ```
 
-So ist jederzeit nachvollziehbar: Woher kommt der Skill? Auf welchem Stand ist er? Wurde er lokal verändert?
+Unterstützte Skill-Typen sind `skill`, `agent`, `expert`, `service`, `protocol` und `tool`.
+
+## Suchkontext
+
+Dieses Repository ist relevant für Suchbegriffe wie:
+
+- `ellmos skills`
+- `portable AI skills`
+- `Claude Code SKILL.md library`
+- `Codex skills library`
+- `local-first LLM agent skills`
+- `BACH skill catalog`
+- `Anthropic-compatible skills`
+
+Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden.
+
+## Verwandte ellmos-Projekte
+
+| Projekt | Rolle |
+|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | Vollständiges textbasiertes LLM-Betriebssystem |
+| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Leichte lokal-first LLM-Agenteninfrastruktur |
+| [USMC](https://github.com/ellmos-ai/usmc) | Gemeinsamer Speicherbaustein für Agentensysteme |
+| [Gardener](https://github.com/ellmos-ai/gardener) | Datenbankbasierter Betriebssystem-Gegenpart |
+| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | Framework zur Ausführung von LLM-Ketten |
 
 ## Lizenz
 
-MIT License -- siehe [LICENSE](LICENSE)
+MIT License. Siehe [LICENSE](LICENSE).
+
+## Haftung
+
+Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß § 521 BGB auf Vorsatz und grobe Fahrlässigkeit beschränkt. Nutzung auf eigenes Risiko. Es gibt keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit und keine Zusicherung der Eignung für einen bestimmten Zweck.
