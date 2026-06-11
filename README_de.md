@@ -16,6 +16,7 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 | Nach Kategorie filtern | `python catalog.py list --category dev` |
 | Herkunft und Sync-Status prüfen | `python catalog.py sync-status` |
 | Neues Skill-Gerüst erzeugen | `python catalog.py create "mein-skill" --category utilities --type skill` |
+| Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
 | Kompakte Projektkarte für LLMs lesen | [`llms.txt`](llms.txt) |
 
 ## Katalogstand
@@ -72,14 +73,18 @@ Unterstützte Skill-Typen sind `skill`, `agent`, `expert`, `service`, `protocol`
 Dieses Repository ist relevant für Suchbegriffe wie:
 
 - `ellmos skills`
+- `ellmos-ai/skills`
+- `agent skill library`
+- `SKILL.md catalog`
 - `portable AI skills`
 - `Claude Code SKILL.md library`
 - `Codex skills library`
+- `Claude Code and Codex skills`
 - `local-first LLM agent skills`
 - `BACH skill catalog`
 - `Anthropic-compatible skills`
 
-Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden.
+Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden. Es handelt sich um einen wiederverwendbaren Skill-Katalog, nicht um einen MCP-Server, einen gehosteten SaaS-Marktplatz, ein Prompt-Pack oder einen privaten Skill-Installer.
 
 ## Verwandte ellmos-Projekte
 

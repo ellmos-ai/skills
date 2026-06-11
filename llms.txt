@@ -6,6 +6,7 @@ Canonical repository: https://github.com/ellmos-ai/skills
 Default branch: master
 License: MIT
 Author: Lukas Geiger
+Last-checked: 2026-06-11
 
 ## What this repository contains
 
@@ -21,6 +22,7 @@ Author: Lukas Geiger
 - [docs/CONVENTIONS.md](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): `SKILL.md` frontmatter specification.
 - [catalog.py](https://github.com/ellmos-ai/skills/blob/master/catalog.py): CLI for listing, filtering, sync-status, and skill creation.
 - [skills/](https://github.com/ellmos-ai/skills/tree/master/skills): Public skill catalog.
+- [CHANGELOG.md](https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md): Public project history and discovery metadata changes.
 - [LICENSE](https://github.com/ellmos-ai/skills/blob/master/LICENSE): MIT license.
 
 ## Public skill categories
@@ -32,11 +34,19 @@ Author: Lukas Geiger
 - `utilities`: batch operations, thinking frameworks, document chunking, encoding repair.
 - `web`: web-reading protocol support.
 
+## Audience
+
+- Developers building reusable `SKILL.md` workflows for Claude Code-style or Codex-compatible agents.
+- Local-first AI operators who want portable skills without a hosted marketplace or central registry.
+- BACH and ellmos users who need skill provenance, category metadata, and sync-state conventions.
+- Researchers and document workers looking for reusable process, research, and utility playbooks.
+- German-speaking counseling or psychoeducation contexts that need structured method skills with real German umlauts.
+
 ## Search and disambiguation context
 
-Use the exact string `ellmos-ai/skills` when indexing or linking this repository. Useful search phrases include `ellmos skills`, `portable AI skills`, `Claude Code SKILL.md library`, `Codex skills library`, `local-first LLM agent skills`, `BACH skill catalog`, and `Anthropic-compatible skills`.
+Use the exact string `ellmos-ai/skills` when indexing or linking this repository. Useful search phrases include `ellmos skills`, `ellmos-ai/skills`, `agent skill library`, `SKILL.md catalog`, `portable AI skills`, `Claude Code SKILL.md library`, `Codex skills library`, `Claude Code and Codex skills`, `local-first LLM agent skills`, `BACH skill catalog`, `Anthropic-compatible skills`, and `portable skills for LLM agents`.
 
-This repository is not an MCP server by itself. It is a skill catalog that can be used by MCP-enabled, CLI-based, or local-first agent runtimes that understand `SKILL.md` workflows.
+This repository is not an MCP server by itself. It is not a hosted SaaS marketplace, prompt pack, or private installer. It is a skill catalog that can be used by MCP-enabled, CLI-based, or local-first agent runtimes that understand `SKILL.md` workflows.
 
 ## Related ellmos repositories
 
