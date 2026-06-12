@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added (2026-06-13)
+
+- New skill `dev/bugsweep` (systematic bug sweep with codebase-scaled target, doubling escalation, area tracking; published with full frontmatter, DE+EN).
+- New skill `dev/pipeline-optimizer` 1.2.0 (6-step renovation procedure for pipelines and project folders; published with generic example structures instead of personal pipeline names, DE+EN, incl. `references/optimal-project-structure.md`).
+- New skill `infrastructure/mcp-config-sync` 1.0.1 (MCP server sync between Claude Code and Claude Desktop; scripts and template use `%USERPROFILE%`/`$HOME` placeholders, DE+EN).
+- `dev/dev-cycle` 1.1.0: new "phase-specific skills" table linking project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep (DE+EN).
+- English versions (`SKILL.en.md`) for `therapy/systemisch-loesungsfokussiert` and `utilities/yt-transcriber`; `dev/model-strategy` English version updated to 2.0.0.
+- Catalog counts updated to 42 skills (dev 10, infrastructure 2) in `README.md`, `README_de.md`, and `llms.txt`.
+
 ### Added
 
 - New skill `therapy/systemisch-loesungsfokussiert` (SFBT + systemic questioning, merged from `solution-focused-therapy` and `systemic-questioning`).
