@@ -23,7 +23,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 42 runtime skills:
+The current public catalog contains 43 runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -31,7 +31,7 @@ The current public catalog contains 42 runtime skills:
 | `infrastructure` | 2 | Portable AI setup, operating-system support, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 9 | Batch operations, thinking frameworks, document chunking, encoding repair, YouTube transcripts |
+| `utilities` | 10 | Batch operations, thinking frameworks, document chunking, encoding repair, YouTube transcripts |
 | `web` | 1 | Web-reading protocol support |
 
 ## Repository Structure
