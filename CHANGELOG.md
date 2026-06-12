@@ -4,6 +4,8 @@
 
 ### Added (2026-06-13)
 
+- New tool `skill_sync.py`: deploy/drift CLI between the repo (source of truth, `skills/<category>/<name>/`) and the local deployment (`~/.claude/skills/<name>/`, flat). Commands: `status` (drift report), `deploy [skill ...] [--dry-run]`, `diff <skill>`. Understands the local deregistration pattern (`SKILL.md` deployed as `CONTENT.md`) and a hold list (`.sync-hold`) for deliberate local forks; never deletes target-only skills. Tests in `testing/test_skill_sync.py` (24 cases, tmp-path fixtures).
+- `dev/bugsweep` 1.1.0: backported the model rule for final review (newer model classes self-verify via tests + a real smoke run; no external review needed) from the local installation, DE+EN.
 - New skill `dev/bugsweep` (systematic bug sweep with codebase-scaled target, doubling escalation, area tracking; published with full frontmatter, DE+EN).
 - New skill `dev/pipeline-optimizer` 1.2.0 (6-step renovation procedure for pipelines and project folders; published with generic example structures instead of personal pipeline names, DE+EN, incl. `references/optimal-project-structure.md`).
 - New skill `infrastructure/mcp-config-sync` 1.0.1 (MCP server sync between Claude Code and Claude Desktop; scripts and template use `%USERPROFILE%`/`$HOME` placeholders, DE+EN).

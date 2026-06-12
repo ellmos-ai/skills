@@ -16,6 +16,8 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 | Filter by category | `python catalog.py list --category dev` |
 | Check provenance and sync state | `python catalog.py sync-status` |
 | Create a new skill skeleton | `python catalog.py create "my-skill" --category utilities --type skill` |
+| Check drift against the local skill installation | `python skill_sync.py status` |
+| Deploy skills into `~/.claude/skills/` | `python skill_sync.py deploy [skill ...] [--dry-run]` |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |
 | Give crawlers and LLM agents a compact map | [`llms.txt`](llms.txt) |
 
@@ -45,6 +47,7 @@ skills/
 docs/
   CONVENTIONS.md            # Frontmatter specification
 catalog.py                  # CLI for listing, filtering, sync status, creation
+skill_sync.py               # Deploy/drift tool: repo (source of truth) -> ~/.claude/skills
 llms.txt                    # Compact project map for LLM crawlers
 ```
 

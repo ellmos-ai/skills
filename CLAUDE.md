@@ -28,5 +28,8 @@ Repo: github.com/ellmos-ai/skills
 
 - **`skills/` in diesem Repo ist die Quelle der Wahrheit** fuer alle Skills: kategorisiert, mit Frontmatter, Provenance und Tests.
 - **`~/.claude/skills/` ist nur Deployment-Ziel** (flache Skill-Ordner fuer die Claude-Code-Runtime). Dort NICHT direkt editieren -- Aenderungen immer hier machen und anschliessend deployen.
-- Einen automatischen Sync-/Deploy-Mechanismus gibt es noch nicht; bekannte Drift zwischen Repo und `~/.claude/skills/` wird in der (internen) TODO.md getrackt.
+- **Sync-Tool:** `python skill_sync.py status` (Drift-Report), `python skill_sync.py deploy [skill ...]` (Quelle → Ziel, `--dry-run` zum Testen), `python skill_sync.py diff <skill>` (Unified-Diff). Sammel-Deploy (`deploy` ohne Argumente) aktualisiert nur Skills, die im Ziel schon existieren — Erstinstallation eines Skills nur mit explizitem Namen (das Deployment ist eine kuratierte Auswahl).
+- **Deregistrierung:** Im Deployment kann `SKILL.md` bewusst zu `CONTENT.md` umbenannt sein (Skill wird von der Runtime nicht geladen, bleibt aber per Read-Tool nutzbar — Routing über Einstiegs-Skills). Das Sync-Tool erkennt und erhält das beim Deploy.
+- **Hold-Liste:** `~/.claude/skills/.sync-hold` markiert Skills, deren Deployment-Version bewusst lokal abweicht (lokale Forks, z.B. Therapy-Einstiegs-Skills mit Routing-Tabellen). Sie werden beim Sammel-Deploy übersprungen; explizites Deploy braucht `--force`.
+- Nur-Ziel-Skills (existieren nicht in der Quelle) werden NIE gelöscht, nur gemeldet.
 - Privacy-Regel: Persoenliche Konkretwerte (Pfade, Hostnames, IPs, Key-Namen) gehoeren NICHT in veroeffentlichte Skills -- generische Platzhalter (`<host>`, `~/.ssh/<key>`) verwenden oder den Skill per `.gitignore` privat halten.
