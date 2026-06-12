@@ -163,3 +163,5 @@ Quantitaet vor Qualitaet — 50+ Ideen in 20 Min.
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+**Siehe auch:** [think](../think/SKILL.md) (Analyse, Root Cause, SWOT) | [decide](../decide/SKILL.md) (Entscheidungs-Frameworks)

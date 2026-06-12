@@ -176,22 +176,9 @@ Was nehme ich mit: [...]
 
 ## 6. Verhaltensaktivierung
 
-**Zusatz zu kognitiver Arbeit:** Verhalten veraendern unterstuetzt Gedanken-Veraenderung.
+Kognitive Umstrukturierung und Verhaltensaktivierung bilden zusammen die beiden Saeulen der KVT. Positive Aktivitaeten unterstuetzen Gedanken-Veraenderung: "Handeln erzeugt Motivation."
 
-**Prinzip:** Positive Aktivitaeten -> Bessere Stimmung -> Hilfreichere Gedanken
-
-**Schritte:**
-1. Liste angenehmer/bedeutungsvoller Aktivitaeten erstellen
-2. Aktivitaeten planen (konkret: wann, wie, wo)
-3. Umsetzung tracken
-4. Stimmung vor/nach bewerten
-
-**Beispiel-Aktivitaeten:**
-- Spaziergang (Natur, frische Luft)
-- Kontakt zu wichtigen Menschen
-- Kreative Taetigkeiten
-- Koerperliche Bewegung
-- Dinge, die frueher Freude gemacht haben
+Ausfuehrliche Methodik (Stimmungs-Tagebuch, Wochenplan, werte-basierte Aktivitaeten) siehe [behavioral-activation](../behavioral-activation/SKILL.md).
 
 ---
 
@@ -220,6 +207,14 @@ Was nehme ich mit: [...]
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
+
+---
+
+## Siehe auch
+
+- [behavioral-activation](../behavioral-activation/SKILL.md) — Verhaltenssaeule der KVT (Stimmungs-Tagebuch, Wochenplan)
+- [act-techniques](../act-techniques/SKILL.md) — Alternativer Ansatz: Defusion statt Umstrukturierung
+- [exposure-guidance](../exposure-guidance/SKILL.md) — Konfrontationstherapie (oft kombiniert mit KVT)
 
 ---
 

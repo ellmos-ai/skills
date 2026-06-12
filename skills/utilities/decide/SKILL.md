@@ -183,3 +183,5 @@ Vor finaler Empfehlung pruefen:
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+**Siehe auch:** [think](../think/SKILL.md) (Analyse, Root Cause, SWOT) | [brainstorm](../brainstorm/SKILL.md) (Kreativmethoden, Ideenfindung)

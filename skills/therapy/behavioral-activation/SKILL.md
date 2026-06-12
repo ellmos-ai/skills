@@ -210,20 +210,9 @@ WOCHENPLAN
 Aktivitaeten, die mit persoenlichen Werten uebereinstimmen, erzeugen nachhaltiges
 Wohlbefinden — im Gegensatz zu reinem Vergnuegen, das schnell verfliegt.
 
-### Lebensbereiche und Werte
-
-```
-WERTE-KOMPASS
-
-Beziehungen:     Was fuer ein Partner/Freund/Familienmitglied moechte ich sein?
-Arbeit/Bildung:  Was ist mir bei meiner Arbeit wichtig?
-Freizeit:        Wie moechte ich meine freie Zeit verbringen?
-Gesundheit:      Wie moechte ich mit meinem Koerper umgehen?
-Gemeinschaft:    Welchen Beitrag moechte ich leisten?
-Persoenliches:   Welcher Mensch moechte ich sein?
-```
-
 ### Werte-Aktivitaeten-Mapping
+
+Aktivitaeten an persoenlichen Werten ausrichten (Beziehungen, Arbeit, Freizeit, Gesundheit, Gemeinschaft). Fuer jede Aktivitaet festlegen: Welcher Wert steckt dahinter? Wie oft pro Woche?
 
 **Beispiel:**
 
@@ -232,13 +221,8 @@ Persoenliches:   Welcher Mensch moechte ich sein?
 | Verbundenheit | Freund anrufen | 2x pro Woche |
 | Gesundheit | 20 Min spazieren | Taeglich |
 | Kreativitaet | Gitarre spielen | 1x pro Woche |
-| Hilfsbereitschaft | Nachbarin beim Einkauf helfen | 1x pro Woche |
-| Lernen | 15 Min Fachbuch lesen | 3x pro Woche |
 
-### Werte vs. Ziele
-- **Wert:** Eine Richtung, in die man gehen moechte (z.B. "liebevoller Partner sein")
-- **Ziel:** Ein erreichbarer Endpunkt (z.B. "Hochzeitstag planen")
-- Werte koennen nie "abgehakt" werden — sie geben dauerhaft Orientierung
+Ausfuehrliche Werteklaerung (Lebensbereiche, Grabstein-Uebung, Kompass-Uebung, Werte vs. Ziele) siehe [act-techniques](../act-techniques/SKILL.md), Abschnitt 5.
 
 ---
 
@@ -291,6 +275,14 @@ Verhaltensaktivierung ist Ergaenzung, nicht Ersatz.
 - Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
 - Psychiatrischer Notdienst: 112
 - Krisenchat: krisenchat.de
+
+---
+
+## Siehe auch
+
+- [cognitive-restructuring](../cognitive-restructuring/SKILL.md) — Kognitive Saeule der KVT (ABC-Modell, Gedankenprotokoll)
+- [act-techniques](../act-techniques/SKILL.md) — Ausfuehrliche Werteklaerung (Hexaflex, Grabstein-Uebung, Kompass)
+- [positive-psychology](../positive-psychology/SKILL.md) — PERMA-Modell, Dankbarkeitsuebungen (ergaenzend)
 
 ---
 

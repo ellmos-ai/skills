@@ -185,6 +185,13 @@ Bei akuten Krisen immer an professionelle Hilfe verweisen.
 
 ---
 
+## Siehe auch
+
+- [motivational-interviewing](../motivational-interviewing/SKILL.md) — OARS-Techniken bauen auf diesen Grundlagen auf
+- [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) — Zirkulaere und hypothetische Fragetechniken
+
+---
+
 ## Quellenangaben
 
 - Rogers, C. R. (1951). *Client-Centered Therapy.* Houghton Mifflin.

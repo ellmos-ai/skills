@@ -157,6 +157,16 @@ der "richtige" Therapeut.
 
 ---
 
+## 8. Skills in dieser Bibliothek — Zuordnung zu Verfahren
+
+| Verfahren | Zugehoerige Skills |
+|-----------|-------------------|
+| **VT** (Verhaltenstherapie) | [cognitive-restructuring](../cognitive-restructuring/SKILL.md), [behavioral-activation](../behavioral-activation/SKILL.md), [exposure-guidance](../exposure-guidance/SKILL.md), [problem-solving-training](../problem-solving-training/SKILL.md), [act-techniques](../act-techniques/SKILL.md), [schema-therapy](../schema-therapy/SKILL.md) |
+| **ST** (Systemische Therapie) | [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md), [genogram-work](../genogram-work/SKILL.md) |
+| **Verfahrensuebergreifend** | [counseling-basics](../counseling-basics/SKILL.md), [motivational-interviewing](../motivational-interviewing/SKILL.md), [mindfulness-basics](../mindfulness-basics/SKILL.md), [stabilization-techniques](../stabilization-techniques/SKILL.md), [psychoeducation](../psychoeducation/SKILL.md), [trauma-psychoeducation](../trauma-psychoeducation/SKILL.md), [pmr-autogenic-training](../pmr-autogenic-training/SKILL.md), [positive-psychology](../positive-psychology/SKILL.md) |
+
+---
+
 ## Ethik und Grenzen
 
 **Ein KI-Assistent darf:**
