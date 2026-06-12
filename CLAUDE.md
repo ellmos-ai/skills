@@ -23,3 +23,10 @@ Repo: github.com/ellmos-ai/skills
 - Versionen: Semantic Versioning (1.0.0)
 - Kategorien = Ordnernamen unter `skills/`
 - Details: `docs/CONVENTIONS.md`
+
+## Quelle der Wahrheit & Deployment
+
+- **`skills/` in diesem Repo ist die Quelle der Wahrheit** fuer alle Skills: kategorisiert, mit Frontmatter, Provenance und Tests.
+- **`~/.claude/skills/` ist nur Deployment-Ziel** (flache Skill-Ordner fuer die Claude-Code-Runtime). Dort NICHT direkt editieren -- Aenderungen immer hier machen und anschliessend deployen.
+- Einen automatischen Sync-/Deploy-Mechanismus gibt es noch nicht; bekannte Drift zwischen Repo und `~/.claude/skills/` wird in der (internen) TODO.md getrackt.
+- Privacy-Regel: Persoenliche Konkretwerte (Pfade, Hostnames, IPs, Key-Namen) gehoeren NICHT in veroeffentlichte Skills -- generische Platzhalter (`<host>`, `~/.ssh/<key>`) verwenden oder den Skill per `.gitignore` privat halten.
