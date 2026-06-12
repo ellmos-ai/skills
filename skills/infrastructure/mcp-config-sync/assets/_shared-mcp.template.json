@@ -1,0 +1,21 @@
+{
+  "_comment": "Master-Datei fuer gemeinsam genutzte MCP-Server zwischen Claude Code und Claude Desktop. Kopieren nach ~/.claude/_shared-mcp.json (Windows: %USERPROFILE%/.claude/_shared-mcp.json) und an das Zielsystem anpassen.",
+  "_stand": "YYYY-MM-DD",
+
+  "mcpServers": {
+    "example-local-mcp": {
+      "command": "node",
+      "args": [
+        "C:/Users/<user>/.claude/mcp-servers/example-mcp/node_modules/example-mcp/dist/index.js"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    }
+  }
+}
