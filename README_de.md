@@ -21,15 +21,15 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 37 Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 39 Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | `dev` | 8 | Entwicklungsprotokolle, Debugging, Migration, Dokumentation, Plugin-Systeme |
 | `infrastructure` | 1 | Portables KI-Setup und Betriebssystem-Unterstützung |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
-| `therapy` | 18 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 8 | Batch-Operationen, Denkrahmen, Dokumenten-Chunking, Encoding-Reparatur |
+| `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
+| `utilities` | 9 | Batch-Operationen, Denkrahmen, Dokumenten-Chunking, Encoding-Reparatur, YouTube-Transkripte |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Repository-Struktur
@@ -42,7 +42,6 @@ skills/
       scripts/              # Optional ausführbare Hilfsprogramme
       references/           # Optional unterstützende Dokumente
   _templates/               # Vorlagen für neue Skills
-  _examples/                # Beispiel-Skills
 docs/
   CONVENTIONS.md            # Frontmatter-Spezifikation
 catalog.py                  # CLI für Liste, Filter, Sync-Status, Anlage

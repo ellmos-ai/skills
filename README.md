@@ -21,15 +21,15 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 37 runtime skills:
+The current public catalog contains 39 runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
 | `dev` | 8 | Development protocols, debugging, migration, documentation, plugin systems |
 | `infrastructure` | 1 | Portable AI setup and operating-system support |
 | `research` | 1 | Research-agent workflow support |
-| `therapy` | 18 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 8 | Batch operations, thinking frameworks, document chunking, encoding repair |
+| `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
+| `utilities` | 9 | Batch operations, thinking frameworks, document chunking, encoding repair, YouTube transcripts |
 | `web` | 1 | Web-reading protocol support |
 
 ## Repository Structure
@@ -42,7 +42,6 @@ skills/
       scripts/              # Optional executable helpers
       references/           # Optional supporting documents
   _templates/               # Templates for new skills
-  _examples/                # Example skills
 docs/
   CONVENTIONS.md            # Frontmatter specification
 catalog.py                  # CLI for listing, filtering, sync status, creation
