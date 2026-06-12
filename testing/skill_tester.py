@@ -621,10 +621,11 @@ def calculate_quality_score(s_results, l_results, u_results):
 
 def find_skill(identifier):
     """Findet Skill-Pfad anhand Name oder Pfad."""
-    # Direkter Pfad
+    # Direkter Pfad (resolve: relative Pfade normalisieren, sonst crasht
+    # spaeter skill_path.relative_to(SKILLS_ROOT) mit ValueError)
     p = Path(identifier)
     if p.exists() and (p / "SKILL.md").exists():
-        return p
+        return p.resolve()
 
     # Relative zum Skills-Root
     rel = SKILLS_ROOT / identifier
@@ -682,7 +683,11 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
 
     print(f"\n{'='*60}")
     print(f"  SKILL-TEST: {name}")
-    print(f"  Pfad: {skill_path.relative_to(SKILLS_ROOT)}")
+    try:
+        rel_path = skill_path.resolve().relative_to(SKILLS_ROOT.resolve())
+    except ValueError:
+        rel_path = skill_path
+    print(f"  Pfad: {rel_path}")
     print(f"  Profil: {profile_name}")
     print(f"  Datum: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"{'='*60}\n")
