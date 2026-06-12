@@ -172,15 +172,23 @@ Jede SKILL.md sollte am Ende einen Changelog-Abschnitt haben:
 
 ---
 
-## Zweisprachigkeit (DE/EN)
+## Mehrsprachigkeit
 
-Skills koennen in mehreren Sprachen vorliegen. Die Bibliothek unterstuetzt
-Deutsch und Englisch als primaere Sprachen.
+Skills können in mehreren Sprachen vorliegen. Unterstützte Sprachen:
+
+| Code | Sprache | Ausbaustufe | Datei-Suffix |
+|------|---------|-------------|--------------|
+| `de` | Deutsch | 1 (Primär) | `SKILL.md` (kein Suffix) |
+| `en` | Englisch | 1 | `SKILL.en.md` |
+| `es` | Spanisch | 2 | `SKILL.es.md` |
+| `zh` | Chinesisch | 2 | `SKILL.zh.md` |
+| `ja` | Japanisch | 2 | `SKILL.ja.md` |
+| `ru` | Russisch | 2 | `SKILL.ru.md` |
 
 ### Sprach-Feld
 
 ```yaml
-language: de            # de = Deutsch, en = Englisch, multi = mehrsprachig
+language: de            # de, en, es, zh, ja, ru, multi
 ```
 
 ### Umsetzungsmodelle
@@ -188,15 +196,19 @@ language: de            # de = Deutsch, en = Englisch, multi = mehrsprachig
 | Modell | Struktur | Wann verwenden |
 |--------|----------|----------------|
 | **Einsprachig** | `SKILL.md` (eine Sprache) | Standard, einfachste Variante |
-| **Parallel** | `SKILL.md` (DE) + `SKILL.en.md` (EN) | Wenn beide Sprachen gepflegt werden |
+| **Parallel** | `SKILL.md` (DE) + `SKILL.{code}.md` | Wenn mehrere Sprachen gepflegt werden |
 | **Multi** | `SKILL.md` mit `language: multi` + Sektionen | Kurze Skills, wo beides passt |
 
 ### Paralleles Modell (empfohlen)
 
 ```
 skills/<kategorie>/<skill-name>/
-  SKILL.md          # Primaer-Version (Deutsch)
-  SKILL.en.md       # Englische Version (gleiche Frontmatter, uebersetzter Body)
+  SKILL.md          # Primär-Version (Deutsch)
+  SKILL.en.md       # Englische Version
+  SKILL.es.md       # Spanische Version (optional, Ausbaustufe 2)
+  SKILL.zh.md       # Chinesische Version (optional, Ausbaustufe 2)
+  SKILL.ja.md       # Japanische Version (optional, Ausbaustufe 2)
+  SKILL.ru.md       # Russische Version (optional, Ausbaustufe 2)
   scripts/          # Scripts bleiben sprachneutral (Code ist englisch)
 ```
 
@@ -205,7 +217,8 @@ skills/<kategorie>/<skill-name>/
 - Nur `language:` und `description:` unterscheiden sich
 - Scripts/Code werden NICHT dupliziert -- Code ist sprachneutral (englisch)
 - Docstrings in Scripts bleiben auf Englisch
-- Die `SKILL.md` (ohne Suffix) ist immer die Primaersprache
+- Die `SKILL.md` (ohne Suffix) ist immer die Primärsprache (Deutsch)
+- Ausbaustufe 2 Dateien werden nur bei Bedarf erstellt (kein Vorab-Stub)
 
 ### BACH-DB als Quelle
 
