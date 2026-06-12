@@ -14,6 +14,18 @@ Thumbs.db
 # Private Skills (nicht fuer Veroeffentlichung)
 skills/education/foerderplaner/
 skills/dev/swarm-operations/
+skills/dev/pipeline-bootstrapper/
+skills/dev/project-bootstrapper/
+skills/dev/update-cli-docs/
+skills/dev/code-skill-index/
+skills/infrastructure/system-onboarding/
+skills/infrastructure/agents-bridge/
+skills/utilities/bewerbungsexperte/
+skills/utilities/selbstmanagement/
+
+# Interne Arbeitsdateien (nicht fuer Veroeffentlichung)
+TODO.md
+DONE.md
 
 # Test-Ergebnisse
 testing/results/
