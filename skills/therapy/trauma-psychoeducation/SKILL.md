@@ -40,6 +40,8 @@ provenance:
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
+**Siehe auch:** [stabilization-techniques](../stabilization-techniques/SKILL.md) (Grounding, Sicherer Ort, Containment — Soforttechniken) | [psychoeducation](../psychoeducation/SKILL.md) (PTBS im Kontext anderer Stoerungsbilder)
+
 ---
 
 ## Kontext

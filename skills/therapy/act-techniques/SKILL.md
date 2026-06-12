@@ -121,8 +121,8 @@ Das Hexaflex ist das zentrale Modell der ACT. Sechs Kernprozesse bilden zusammen
 
 #### Techniken
 
-- **5-4-3-2-1 Uebung:** 5 Dinge sehen, 4 hoeren, 3 fuehlen, 2 riechen, 1 schmecken
-- **Atemachtsamkeit:** 3 bewusste Atemzuege -- nur beobachten, nicht steuern
+- **5-4-3-2-1 Uebung:** Sensorisches Grounding (ausfuehrliche Anleitung: [stabilization-techniques](../stabilization-techniques/SKILL.md))
+- **Atemachtsamkeit:** 3 bewusste Atemzuege -- nur beobachten, nicht steuern (vertieft: [mindfulness-basics](../mindfulness-basics/SKILL.md))
 - **Sensorisches Ankern:** Einen Gegenstand mit voller Aufmerksamkeit erforschen (Textur, Gewicht, Temperatur)
 - **Check-in-Fragen:** "Was passiert gerade in meinem Koerper? Was fuer Gedanken sind da? Was fuer Gefuehle?"
 
@@ -234,6 +234,14 @@ Siehe: [ETHICS.md](../ETHICS.md)
 - Hayes, S. C., Strosahl, K. D., & Wilson, K. G. (2012). *Acceptance and Commitment Therapy: The Process and Practice of Mindful Change.* 2nd Edition.
 - Harris, R. (2009). *ACT Made Simple.*
 - Hayes, S. C. (2005). *Get Out of Your Mind and Into Your Life.*
+
+---
+
+## Siehe auch
+
+- [cognitive-restructuring](../cognitive-restructuring/SKILL.md) — Anderer Ansatz: Gedanken veraendern (KVT) vs. Beziehung zu Gedanken veraendern (ACT/Defusion)
+- [mindfulness-basics](../mindfulness-basics/SKILL.md) — Vertiefung: MBSR, Bodyscan, formelle Achtsamkeitspraxis
+- [behavioral-activation](../behavioral-activation/SKILL.md) — Werte-basierte Aktivitaetenplanung bei Depression
 
 ---
 

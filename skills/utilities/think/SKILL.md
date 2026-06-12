@@ -107,3 +107,5 @@ Neues Problem -> Aehnliches bekanntes Problem -> Loesung adaptieren
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+**Siehe auch:** [brainstorm](../brainstorm/SKILL.md) (Kreativmethoden, Ideenfindung) | [decide](../decide/SKILL.md) (Entscheidungs-Frameworks)

@@ -40,6 +40,8 @@ provenance:
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
+**Siehe auch:** [stabilization-techniques](../stabilization-techniques/SKILL.md) (Grounding/Atemuebungen fuer Notfallplan) | [cognitive-restructuring](../cognitive-restructuring/SKILL.md) (Gedanken hinterfragen vor/nach Exposition)
+
 ---
 
 ## Kontext

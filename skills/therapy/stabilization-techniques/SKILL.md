@@ -100,15 +100,8 @@ Bringt die Aufmerksamkeit gezielt in den Koerper.
 
 #### Progressive Muskelentspannung (Kurzversion)
 
-Jeden Muskelbereich 5 Sekunden anspannen, dann 10 Sekunden entspannen:
-
-1. **Haende:** Fauste ballen -- loslassen
-2. **Arme:** Bizeps anspannen -- loslassen
-3. **Schultern:** Zu den Ohren hochziehen -- fallen lassen
-4. **Gesicht:** Zusammenkneifen -- entspannen
-5. **Bauch:** Anspannen -- loslassen
-6. **Beine:** Anspannen -- loslassen
-7. **Fuesse:** Zehen krallen -- loslassen
+PMR-Kurzform (7 Bereiche, je 5s anspannen / 10s entspannen): Haende, Arme, Schultern, Gesicht, Bauch, Beine, Fuesse.
+Ausfuehrliche Anleitungen (16- und 7-Gruppen-Version + Autogenes Training) siehe [pmr-autogenic-training](../pmr-autogenic-training/SKILL.md).
 
 ---
 

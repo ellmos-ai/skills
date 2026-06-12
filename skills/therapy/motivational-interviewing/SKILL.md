@@ -271,5 +271,12 @@ mitgehen (Rolling with Resistance), nicht dagegen.
 
 ---
 
+## Siehe auch
+
+- [counseling-basics](../counseling-basics/SKILL.md) — Grundlagen (Aktives Zuhoeren, Spiegeln, Validierung)
+- [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) — Skalierungstechniken (Wichtigkeits-/Zuversichts-Skala)
+
+---
+
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Keine professionelle Therapie*

@@ -40,6 +40,8 @@ provenance:
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
+**Siehe auch:** [decide](../../utilities/decide/SKILL.md) (Weighted Scoring, Eisenhower Matrix fuer komplexe Multi-Kriterien-Entscheidungen) | [behavioral-activation](../behavioral-activation/SKILL.md) (Aktivitaetenplanung bei Depression)
+
 ---
 
 ## Kontext

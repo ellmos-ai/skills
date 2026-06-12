@@ -40,6 +40,8 @@ provenance:
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
+**Siehe auch:** [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) (Zirkulaere Fragen, systemische Interventionen)
+
 ---
 
 ## Kontext

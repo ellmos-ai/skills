@@ -85,30 +85,13 @@ ist das bekannteste evidenzbasierte Achtsamkeitsprogramm.
 
 ---
 
-### 2.2 4-7-8 Atemtechnik (Beruhigung)
+### 2.2 Weitere Atemtechniken (Krisenkontext)
 
-**Ziel:** Aktivierung des Parasympathikus, Stressreduktion.
-
-**Ablauf:**
-1. Einatmen: 4 Sekunden
-2. Halten: 7 Sekunden
-3. Ausatmen: 8 Sekunden (laenger als einatmen!)
-4. Wiederholen: 3-4 Zyklen
-
-**Wann einsetzen:** Vor dem Schlafen, bei akutem Stress, vor schwierigen Situationen.
-
----
-
-### 2.3 Box Breathing (Quadrat-Atmung)
-
-**Ziel:** Ausgeglichenheit, Konzentration (auch Navy SEALs, Leistungssportler).
-
-**Ablauf:**
-1. Einatmen: 4 Sekunden
-2. Halten: 4 Sekunden
-3. Ausatmen: 4 Sekunden
-4. Halten: 4 Sekunden
-5. Wiederholen: 4 Zyklen
+Fuer gezielte Stressreduktion und Krisenintervention siehe [stabilization-techniques](../stabilization-techniques/SKILL.md):
+- **4-7-8 Atemtechnik** (Parasympathikus-Aktivierung, Einschlafen)
+- **Box Breathing** (Fokussierung, schnelle Regulation)
+- **Physiologisches Seufzen** (schnellste Einzeltechnik)
+- **Verlaengertes Ausatmen** (Basis-Beruhigung)
 
 ---
 
