@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 43 runtime skills organized by category.
+- 44 runtime skills organized by category.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
 - A local CLI (`catalog.py`) for listing skills, filtering by category, checking sync state, and creating new skill skeletons.
 - German and English documentation for humans plus this compact file for crawlers and LLM agents.
@@ -32,7 +32,7 @@ Author: Lukas Geiger
 - `infrastructure`: portable AI setup, operating-system support, MCP config sync between agent apps.
 - `research`: research-agent workflow support.
 - `therapy`: German-language psychoeducation and counseling method playbooks.
-- `utilities`: batch operations, thinking frameworks, document chunking, encoding repair.
+- `utilities`: batch operations, thinking frameworks, decision briefings, document chunking, encoding repair.
 - `web`: web-reading protocol support.
 
 ## Audience

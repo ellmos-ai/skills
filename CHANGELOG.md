@@ -4,6 +4,7 @@
 
 ### Added (2026-06-13)
 
+- New skill `utilities/decision-briefing` 1.0.0 (work through many open decisions on one topic: capture and inventory, numbered briefing with A/B/C/D options and a marked recommendation, letter/batch answers like "1A 2C 3B", results table and write-back into source documents; ported from the BACH expert `decision-briefing`, scanner component deliberately removed; DE+EN). Catalog counts updated to 44 skills (utilities 11) in `README.md`, `README_de.md`, and `llms.txt`.
 - New skill `utilities/structured-thinking` 1.0.0 (meta-skill combining think, brainstorm, and decide into a 3-phase workflow: analyze, ideate, decide; DE+EN). Catalog counts updated to 43 skills (utilities 10) in `README.md`, `README_de.md`, and `llms.txt`.
 - New tool `skill_sync.py`: deploy/drift CLI between the repo (source of truth, `skills/<category>/<name>/`) and the local deployment (`~/.claude/skills/<name>/`, flat). Commands: `status` (drift report), `deploy [skill ...] [--dry-run]`, `diff <skill>`. Understands the local deregistration pattern (`SKILL.md` deployed as `CONTENT.md`) and a hold list (`.sync-hold`) for deliberate local forks; never deletes target-only skills. Tests in `testing/test_skill_sync.py` (24 cases, tmp-path fixtures).
 - `dev/bugsweep` 1.1.0: backported the model rule for final review (newer model classes self-verify via tests + a real smoke run; no external review needed) from the local installation, DE+EN.
