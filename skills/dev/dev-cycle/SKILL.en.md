@@ -1,10 +1,10 @@
 ---
 name: dev-cycle
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-06-13
 description: >
   8-phase development cycle: Feature requests, current state, functional
   planning, frontend, backend planning, backend code, tests, use cases.
@@ -271,6 +271,31 @@ The "frontend" here is the functional description layer:
 
 The cycle is a loop: Use cases validate features and simultaneously
 generate new requirements.
+
+---
+
+## Phase-specific skills
+
+| Phase | Specialized skill | Trigger |
+|-------|-------------------|---------|
+| Phases 1-3 | Project bootstrapper (if available) | Create a new project (greenfield) |
+| Phase 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Take on an existing project |
+| Phases 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Check requirement documents against code |
+| Phases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
+| Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
+| Phases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
+
+If your skill collection has a skill index, search it for further phase-specific skills.
+
+---
+
+## Changelog
+
+### 1.1.0 (2026-06-13)
+- New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep
+
+### 1.0.0 (2026-03-12)
+- Ported from BACH (dev-zyklus v1.0.0)
 
 ---
 

@@ -1,10 +1,10 @@
 ---
 name: dev-zyklus
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-06-13
 description: >
   8-Phasen Entwicklungszyklus: Feature-Wuensche, Ist-Stand, funktionale
   Planung, Frontend, Backend-Planung, Backend-Code, Tests, Usecases.
@@ -271,6 +271,31 @@ Das "Frontend" ist hier die funktionale Beschreibungsebene:
 
 Der Zyklus ist ein Kreislauf: Usecases validieren Features und
 generieren gleichzeitig neue Anforderungen.
+
+---
+
+## Phasen-spezifische Skills
+
+| Phase | Spezialisierter Skill | Trigger |
+|-------|----------------------|---------|
+| Phase 1-3 | Projekt-Bootstrapper (falls vorhanden) | Neues Projekt anlegen (Greenfield) |
+| Phase 2 | [project-onboarding](../project-onboarding/SKILL.md) | Bestehendes Projekt aufnehmen |
+| Phase 2-3 | [docs-analysis](../docs-analysis/SKILL.md) | Anforderungsdokumente gegen Code pruefen |
+| Phase 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.md) | Bestehende Strukturen renovieren |
+| Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.md) | Systematisches 6-Phasen Debugging |
+| Phase 7-8 | [bugsweep](../bugsweep/SKILL.md) | Konvergierender Bug-Sweep vor Release |
+
+Falls deine Skill-Sammlung einen Skill-Index hat, dort nach weiteren phasen-spezifischen Skills suchen.
+
+---
+
+## Changelog
+
+### 1.1.0 (2026-06-13)
+- Neue Tabelle "Phasen-spezifische Skills" mit Verweisen auf project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol und bugsweep
+
+### 1.0.0 (2026-03-12)
+- Portiert aus BACH (dev-zyklus v1.0.0)
 
 ---
 
