@@ -5,6 +5,7 @@ import argparse
 import os
 import re
 import shutil
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
@@ -124,6 +125,20 @@ def find_all_skills() -> list[tuple[Path, dict]]:
     return results
 
 
+def run_skill_tester(*tester_args: str) -> int:
+    """Startet skill_tester.py portabel mit UTF-8-Umgebung."""
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+    tester = Path(__file__).parent / "testing" / "skill_tester.py"
+    result = subprocess.run(
+        [sys.executable, str(tester), *tester_args],
+        cwd=Path(__file__).parent,
+        env=env,
+        check=False,
+    )
+    return result.returncode
+
+
 # ─── Befehle ───
 
 
@@ -143,17 +158,20 @@ def cmd_list(args):
         skills = [(p, fm) for p, fm in skills if fm.get("standalone") is True]
     if args.bach_origin:
         skills = [(p, fm) for p, fm in skills if fm.get("bach_origin") is True]
+    if args.language:
+        skills = [(p, fm) for p, fm in skills if fm.get("language") == args.language]
 
-    print(f"\n{'Name':<30} {'Version':<10} {'Typ':<10} {'SA':<4} {'BACH':<5} {'Kategorie'}")
-    print("─" * 85)
+    print(f"\n{'Name':<30} {'Version':<10} {'Typ':<10} {'Lang':<7} {'SA':<4} {'BACH':<5} {'Kategorie'}")
+    print("─" * 94)
     for path, fm in skills:
         name = fm.get("name", "?")
         version = fm.get("version", "?")
         typ = fm.get("type", "?")
+        lang = fm.get("language", "-")
         sa = "Y" if fm.get("standalone") else "N"
         bach = "Y" if fm.get("bach_origin") else "N"
         cat = fm.get("category", fm["_path"].split("/")[0] if "/" in fm["_path"] else fm["_path"])
-        print(f"  {name:<28} {version:<10} {typ:<10} {sa:<4} {bach:<5} {cat}")
+        print(f"  {name:<28} {version:<10} {typ:<10} {lang:<7} {sa:<4} {bach:<5} {cat}")
 
     print(f"\n  {len(skills)} Skill(s) gefunden.")
 
@@ -247,6 +265,7 @@ def cmd_info(args):
         print(f"  Aktualisiert: {fm.get('updated')}")
         print(f"  Status: {fm.get('status', '-')}")
         print(f"  Pfad: {fm['_path']}")
+        print(f"  Sprache: {fm.get('language', '-')}")
         print(f"  Standalone: {fm.get('standalone', '-')}")
         print(f"  BACH-kompatibel: {fm.get('bach_compatible', '-')}")
         print(f"  BACH-Ursprung: {fm.get('bach_origin', '-')}")
@@ -295,8 +314,7 @@ def cmd_quality(args):
     if args.name:
         # Einzelnen Skill
         if args.run:
-            os.system(f'PYTHONIOENCODING=utf-8 python testing/skill_tester.py test {args.name} --type static')
-            return
+            raise SystemExit(run_skill_tester("test", args.name, "--type", "static"))
 
         # Letztes Ergebnis anzeigen
         skill_dir = results_dir / args.name
@@ -329,8 +347,7 @@ def cmd_quality(args):
 
     # Alle Skills -- letzten Batch laden
     if args.run:
-        os.system('PYTHONIOENCODING=utf-8 python testing/skill_tester.py batch')
-        return
+        raise SystemExit(run_skill_tester("batch"))
 
     batch_files = sorted(results_dir.glob("batch_*.json"), reverse=True)
     if batch_files:
@@ -358,6 +375,7 @@ def main():
     # list
     p_list = sub.add_parser("list", help="Alle Skills auflisten")
     p_list.add_argument("--category", "-c", help="Nach Kategorie filtern")
+    p_list.add_argument("--language", "-l", help="Nach Sprachcode filtern (z.B. de, en, multi)")
     p_list.add_argument("--standalone", "-s", action="store_true", help="Nur standalone Skills")
     p_list.add_argument("--bach-origin", "-b", action="store_true", help="Nur BACH-Ursprungs-Skills")
 
