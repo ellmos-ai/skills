@@ -1,6 +1,6 @@
 ---
 name: bugsweep
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-06-01
@@ -30,7 +30,7 @@ provenance:
   origin: "custom"
   origin_path: "~/.claude/skills/bugsweep/"
   origin_version: "1.0.0"
-  last_sync_from_origin: "2026-06-01"
+  last_sync_from_origin: "2026-06-13"
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
@@ -73,7 +73,7 @@ LOOP:
   IF Bug gefunden:
     je_bug_gefunden = True
     Fix nach bugfix-protocol (Phase 4+5)
-    Review: alternierend Advisor / Codex
+    Review: siehe Modell-Regel (neuere Modellklassen: kein externer Review nötig)
     Commit + Push
     zähler = 0  # RESET
   ELSE:
@@ -130,9 +130,16 @@ Nachdem zähler >= ziel UND je_bug_gefunden:
 - [ ] Lint (wenn konfiguriert)
 - [ ] Edge Cases der Session-Fixes geprüft
 
-**Schritt B — Advisor-Review:**
-- Abschließende Besprechung mit Advisor
-- Advisor bestätigt oder findet Lücken
+**Schritt B — Review (Modell-Regel):**
+- **Neuere Modellklassen (z.B. Claude 5 / Fable-Klasse):** KEIN externer Advisor-/Zweitmodell-Review erforderlich.
+  Schritt A (Tests + realer Smoke-Lauf) ist die Verifikation. Optional bei echter
+  Unsicherheit: frischer Review-Subagent — dessen Befunde aber empirisch gegenprüfen
+  (Test gegen unveränderten Code), bevor sie als Bug gewertet werden.
+  Hintergrund (Sweep-Erfahrung 2026-06-11): Der Zweit-Reviewer war nicht verfügbar, der
+  Ersatz-Subagent lieferte 1 Befund (Konfidenz 85), der sich per Test als Nicht-Bug
+  erwies — externer Review änderte das Ergebnis nicht.
+- **Ältere Modelle:** Abschließende Besprechung mit Advisor (Fallback: zweites
+  Modell als Reviewer); Advisor bestätigt oder findet Lücken.
 
 **Bei Bug-Fund in Verifikation:**
 → Fix + Test + Commit
@@ -157,7 +164,7 @@ Nachdem zähler >= ziel UND je_bug_gefunden:
   - {titel} — {commit_hash}
   - ...
 - **Finale Test-Suite:** {passed}/{total} grün
-- **Advisor-Verdict:** bestätigt / Lücken benannt
+- **Review-Verdict:** Selbstverifikation (neuere Modellklasse) / Advisor bestätigt / Lücken benannt
 ```
 
 ## Wann diesen Workflow nutzen
@@ -176,6 +183,9 @@ Nachdem zähler >= ziel UND je_bug_gefunden:
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-06-13)
+- Modell-Regel für Schritt B zurückportiert (aus lokaler Skill-Installation, Stand 2026-06-11): neuere Modellklassen verifizieren per Tests + realem Smoke-Lauf selbst, kein externer Review nötig; Protokoll-Feld "Review-Verdict" entsprechend erweitert
 
 ### 1.0.0 (2026-06-13)
 - Erstveröffentlichung in der Skill-Bibliothek (übernommen aus lokaler Skill-Installation, Stand 2026-06-01)

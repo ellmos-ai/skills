@@ -1,6 +1,6 @@
 ---
 name: bugsweep
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-06-01
@@ -30,7 +30,7 @@ provenance:
   origin: "custom"
   origin_path: "~/.claude/skills/bugsweep/"
   origin_version: "1.0.0"
-  last_sync_from_origin: "2026-06-01"
+  last_sync_from_origin: "2026-06-13"
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
@@ -73,7 +73,7 @@ LOOP:
   IF bug found:
     any_bug_found = True
     Fix following bugfix-protocol (phases 4+5)
-    Review: alternating advisor / second reviewer (e.g. Codex)
+    Review: see model rule (newer model classes: no external review needed)
     Commit + push
     counter = 0  # RESET
   ELSE:
@@ -130,9 +130,16 @@ Once counter >= target AND any_bug_found:
 - [ ] Lint (if configured)
 - [ ] Edge cases of the session's fixes checked
 
-**Step B — advisor review:**
-- Closing discussion with the advisor
-- Advisor confirms or names gaps
+**Step B — review (model rule):**
+- **Newer model classes (e.g. Claude 5 / Fable class):** NO external advisor/second-model
+  review required. Step A (tests + a real smoke run) is the verification. Optionally, on
+  genuine uncertainty: a fresh review subagent — but verify its findings empirically
+  (test against the unchanged code) before counting them as bugs.
+  Background (sweep experience 2026-06-11): the second reviewer was unavailable, the
+  substitute subagent delivered 1 finding (confidence 85) that a test proved to be a
+  non-bug — an external review did not change the outcome.
+- **Older models:** closing discussion with the advisor (fallback: a second model as
+  reviewer); the advisor confirms or names gaps.
 
 **If a bug is found during verification:**
 → Fix + test + commit
@@ -157,7 +164,7 @@ Once counter >= target AND any_bug_found:
   - {title} — {commit_hash}
   - ...
 - **Final test suite:** {passed}/{total} green
-- **Advisor verdict:** confirmed / gaps named
+- **Review verdict:** self-verification (newer model class) / advisor confirmed / gaps named
 ```
 
 ## When to use this workflow
@@ -176,6 +183,9 @@ Once counter >= target AND any_bug_found:
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-06-13)
+- Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly
 
 ### 1.0.0 (2026-06-13)
 - First publication in the skill library (adopted from local skill installation, state 2026-06-01)
