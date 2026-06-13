@@ -1,12 +1,13 @@
 ---
 name: decision-briefing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
 description: >
-  Work through many open decisions on one topic in a structured way: inventory them,
+  Use whenever several decisions are pending or have accumulated -- whether within
+  a topic, project, document, or over the course of a session: inventory them,
   present a numbered briefing with options A/B/C/D and a marked recommendation,
   accept letter answers (including batches), record the results, and write them
   back into the source documents.
@@ -48,9 +49,12 @@ provenance:
 
 ## When to use?
 
-- Many open decisions have piled up in ONE area/topic
+**Always, as soon as several decisions are pending** -- regardless of topic. Typical situations:
+
+- Many open decisions have piled up in one area/topic
 - A document (plan, TODO list, concept) contains several undecided points
 - Several decision questions have accumulated during a conversation
+- The agent itself has several questions for the user -- bundle them as a briefing instead of asking one by one
 - The user wants to clear open items quickly and on a solid basis
 
 **Trigger words:** open decisions, decision session, briefing, work through, go through, let's decide all of this
