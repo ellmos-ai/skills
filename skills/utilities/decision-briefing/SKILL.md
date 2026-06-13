@@ -1,15 +1,16 @@
 ---
 name: decision-briefing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
 description: >
-  Viele offene Entscheidungen eines Themas strukturiert abarbeiten: Inventarisieren,
-  als nummeriertes Briefing mit Optionen A/B/C/D und markierter Empfehlung vorlegen,
-  Buchstaben-Antworten (auch im Batch) entgegennehmen, Ergebnisse protokollieren
-  und in die Quelldokumente zurueckschreiben.
+  Immer einsetzen, sobald mehrere Entscheidungen anstehen oder aufgelaufen sind --
+  egal ob in einem Thema, Projekt, Dokument oder waehrend einer Session:
+  Inventarisieren, als nummeriertes Briefing mit Optionen A/B/C/D und markierter
+  Empfehlung vorlegen, Buchstaben-Antworten (auch im Batch) entgegennehmen,
+  Ergebnisse protokollieren und in die Quelldokumente zurueckschreiben.
 
 standalone: true
 anthropic_compatible: true
@@ -48,9 +49,12 @@ provenance:
 
 ## Wann nutzen?
 
-- In EINEM Bereich/Thema haben sich viele offene Entscheidungen angesammelt
+**Immer, sobald mehrere Entscheidungen anstehen** — themenunabhängig. Typische Situationen:
+
+- In einem Bereich/Thema haben sich viele offene Entscheidungen angesammelt
 - Ein Dokument (Plan, TODO-Liste, Konzept) enthält mehrere unentschiedene Punkte
 - Im Gespräch sind nacheinander mehrere Entscheidungsfragen aufgelaufen
+- Der Agent hat selbst mehrere Rückfragen an den User — statt sie einzeln zu stellen, als Briefing bündeln
 - Der User will offene Punkte schnell und fundiert "wegarbeiten"
 
 **Trigger-Wörter:** offene Entscheidungen, Entscheidungs-Session, Briefing, abarbeiten, durchgehen, entscheiden wir das mal alles
