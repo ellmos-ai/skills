@@ -1,0 +1,128 @@
+<svg viewBox="0 0 1200 340" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="340" rx="16" fill="#090A0F"/>
+  
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&amp;display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&amp;display=swap');
+      .wordmark {
+        font-family: 'Outfit', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 68px;
+        fill: #FFFFFF;
+        letter-spacing: -1.5px;
+      }
+      .wordmark-skills {
+        fill: url(#goldGrad);
+      }
+      .tagline {
+        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        fill: #94A3B8;
+        letter-spacing: 0.5px;
+      }
+      .badge-rect {
+        fill: #FFA751;
+        fill-opacity: 0.1;
+        stroke: #FFA751;
+        stroke-width: 1.5;
+        stroke-opacity: 0.4;
+      }
+      .badge-text {
+        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        fill: #FFE259;
+        letter-spacing: 2px;
+      }
+    </style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.03"/>
+    </pattern>
+    <linearGradient id="goldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFE259" />
+      <stop offset="100%" stop-color="#FFA751" />
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="25%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFA751" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#090A0F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coreLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FFF4D0" stop-opacity="0.95"/>
+      <stop offset="70%" stop-color="#FFA751" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#FFA751" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Glow filters -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur1"/>
+      <feGaussianBlur stdDeviation="10" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="lightGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur1"/>
+      <feGaussianBlur stdDeviation="20" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background fills -->
+  <rect width="1200" height="340" rx="16" fill="url(#bgGlow)"/>
+  <rect width="1200" height="340" rx="16" fill="url(#grid)"/>
+  
+  <!-- Motif: Glowing hands + energy -->
+  <g>
+    <!-- Ambient light glow in the center of the hands -->
+    <circle cx="240" cy="180" r="70" fill="url(#coreLight)" filter="url(#lightGlow)" opacity="0.8"/>
+    <circle cx="240" cy="180" r="14" fill="#FFFFFF" filter="url(#glow)"/>
+    
+    <!-- Orbits/Diagram elements -->
+    <circle cx="240" cy="180" r="45" fill="none" stroke="#FFE259" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.4"/>
+    <circle cx="240" cy="180" r="80" fill="none" stroke="#FFA751" stroke-width="1.5" stroke-dasharray="10 15" opacity="0.3"/>
+    <circle cx="240" cy="180" r="115" fill="none" stroke="#FFA751" stroke-width="1" stroke-dasharray="2 6" opacity="0.2"/>
+    
+    <!-- Particles -->
+    <circle cx="210" cy="140" r="3.5" fill="#FFF" filter="url(#glow)"/>
+    <circle cx="270" cy="220" r="2.5" fill="#FFE259" filter="url(#glow)"/>
+    <circle cx="290" cy="150" r="3" fill="#FFF" filter="url(#glow)"/>
+    <circle cx="180" cy="200" r="2" fill="#FFA751" opacity="0.8"/>
+    <circle cx="230" cy="230" r="2" fill="#FFE259" opacity="0.8"/>
+    
+    <!-- Continuous Wireframe Left Hand -->
+    <path id="left-hand" d="M 90,245 C 105,255 125,255 145,245 C 175,230 215,220 235,225 C 240,226 242,228 240,230 C 220,235 180,240 150,248 C 175,240 215,228 242,208 C 245,206 247,208 245,210 C 220,222 180,232 152,238 C 178,228 215,212 245,190 C 248,188 250,190 248,192 C 222,210 182,222 148,228 C 172,215 210,195 238,172 C 240,170 242,172 240,174 C 215,195 175,210 142,218 C 135,205 145,188 165,180 C 168,178 170,180 168,182 C 152,192 142,208 128,212 C 112,210 98,218 90,225" 
+          fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+          
+    <!-- Right Hand -->
+    <use href="#left-hand" transform="rotate(180, 240, 180)"/>
+  </g>
+  
+  <!-- Typography Group -->
+  <g>
+    <!-- Badge -->
+    <g transform="translate(460, 80)">
+      <rect class="badge-rect" width="180" height="28" rx="14"/>
+      <text class="badge-text" x="90" y="18" text-anchor="middle">PORTABLE SKILLS</text>
+    </g>
+
+    <!-- Wordmark -->
+    <text class="wordmark" x="460" y="175">
+      ellmos <tspan class="wordmark-skills">skills</tspan>
+    </text>
+
+    <!-- Tagline -->
+    <text class="tagline" x="460" y="222">
+      Portable AI skill library
+    </text>
+  </g>
+</svg>
