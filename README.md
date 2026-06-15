@@ -1,8 +1,14 @@
+<img src="assets/banner.svg" width="100%" alt="ellmos skills Banner">
+
 # ellmos skills
 
-[German version](README_de.md) | [Machine-readable context](llms.txt)
+**[🇩🇪 German version](README_de.md)** · **🇬🇧 English** · [Machine-readable context](llms.txt)
 
-**Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, and other local-first LLM agent runtimes.**
+> Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, and other local-first LLM agent runtimes.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+**Quick links:** [Start Here](#start-here) · [Skills](skills/) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
