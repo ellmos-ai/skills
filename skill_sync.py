@@ -19,6 +19,8 @@ Besonderheiten:
   markiert Skills, deren Deployment-Version bewusst lokal abweicht. Sie werden
   beim Sammel-Deploy uebersprungen; explizites Deploy braucht --force.
 - Nur-Ziel-Skills werden NIE geloescht, nur gemeldet.
+- Runtime-Dateien (PRESERVE_TARGET_FILES, z.B. config.json) leben per Design nur
+  im Ziel und werden beim Deploy erhalten (keep) statt geprunt.
 """
 
 import argparse
@@ -32,6 +34,10 @@ SOURCE_ROOT = Path(__file__).parent / "skills"
 TARGET_ROOT = Path.home() / ".claude" / "skills"
 HOLD_FILENAME = ".sync-hold"
 IGNORE_DIRS = {"__pycache__", ".git"}
+# Runtime-Dateien, die das Deployment selbst erzeugt/pflegt und die per Design nur
+# im Ziel leben (nicht aus der Quelle stammen). Sie werden beim Deploy NICHT geprunt,
+# sonst geht persistierter Laufzeit-Zustand verloren (z.B. skill-explorer/config.json).
+PRESERVE_TARGET_FILES = {"config.json"}
 
 # Windows Encoding Fix
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
@@ -227,10 +233,15 @@ def deploy_skill(name: str, source_dir: Path, target_root: Path,
             dst_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src_path, dst_path)
 
-    # Veraltete Dateien im Ziel entfernen (Quelle der Wahrheit = Repo)
+    # Veraltete Dateien im Ziel entfernen (Quelle der Wahrheit = Repo).
+    # Ausnahme: Runtime-Dateien (PRESERVE_TARGET_FILES) leben per Design nur im Ziel
+    # und werden erhalten statt geprunt (sonst Verlust von persistiertem Zustand).
     if target_dir.is_dir():
         for f in list_files(target_dir):
             if f not in expected:
+                if Path(f).name in PRESERVE_TARGET_FILES:
+                    actions.append(f"keep   {name}/{f}  (Runtime-Datei, nicht geprunt)")
+                    continue
                 actions.append(f"prune  {name}/{f}")
                 if not dry_run:
                     (target_dir / f).unlink()
