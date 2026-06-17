@@ -1,0 +1,37 @@
+{
+  "name": "GameTemplate",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$path": "src/server"
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$path": "src/client"
+      }
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$path": "src/shared"
+    },
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$path": "src/gui"
+    },
+    "ServerStorage": {
+      "$className": "ServerStorage"
+    },
+    "Workspace": {
+      "$className": "Workspace"
+    },
+    "Lighting": {
+      "$className": "Lighting"
+    },
+    "SoundService": {
+      "$className": "SoundService"
+    }
+  }
+}
