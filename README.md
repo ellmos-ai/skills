@@ -24,6 +24,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 | Create a new skill skeleton | `python catalog.py create "my-skill" --category utilities --type skill` |
 | Check drift against the local skill installation | `python skill_sync.py status` |
 | Deploy skills into `~/.claude/skills/` | `python skill_sync.py deploy [skill ...] [--dry-run]` |
+| Understand branch protection (forks, routers) | [`docs/BRANCH-SYNC.md`](docs/BRANCH-SYNC.md) |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |
 | Give crawlers and LLM agents a compact map | [`llms.txt`](llms.txt) |
 
