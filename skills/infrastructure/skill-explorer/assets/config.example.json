@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "updated": "YYYY-MM-DD",
+  "last_audit": "YYYY-MM-DD",
+  "register": {
+    "exists": true,
+    "artifacts": [
+      "~/.claude/skills/code-skill-index",
+      "<skill register: index>",
+      "<skill register: family/cross-reference map>"
+    ]
+  },
+  "families": {
+    "denkwerkzeuge": {
+      "members": ["think", "decide", "brainstorm"],
+      "router": "neue Ideen -> /brainstorm; Analyse -> /think; Auswahl -> /decide",
+      "linked": false,
+      "umbrella": null
+    }
+  },
+  "subskills_created": {
+    "skill-finder": { "installed": false, "updated": null },
+    "skill-family-care": { "installed": false, "updated": null },
+    "skill-register-care": { "installed": false, "updated": null }
+  },
+  "decisions_log": [
+    { "date": "YYYY-MM-DD", "chosen": ["2c2", "F"] }
+  ]
+}
