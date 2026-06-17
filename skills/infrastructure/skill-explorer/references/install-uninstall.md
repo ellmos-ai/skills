@@ -76,5 +76,9 @@ Beim externen Pfad **kein** `LIB_CAT`-Eintrag (sonst zöge der Sync ihn fälschl
 Eine „nutzerneutrale Variante unter `.SKILLS`" gibt es nur für user-authored Skills — Drittanbieter-
 Code wird nicht umgeschrieben/nutzerneutralisiert, nur referenziert.
 
+Wer einen installierten Drittanbieter-Skill **anpassen** will, erzeugt einen **Branch** (Fork-Kopie;
+Original bleibt read-only) — Branches bleiben privat und gehen ebenfalls nicht in die Library.
+Detail: `references/skill-branching.md`.
+
 > Nach Abschluss in der `skill-explorer/config.json` vermerken (installierter Skill, Familie,
 > Vernetzung) und die Index-/Map-Dateien erweitern.

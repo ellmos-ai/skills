@@ -31,7 +31,11 @@ Die Datei wird **zur Laufzeit** angelegt/aktualisiert (nicht mitausgeliefert —
 | `families[name].linked` | ob c2 (Header-Router) gesetzt wurde |
 | `families[name].umbrella` | Name des c1-Umbrella-Skills oder null |
 | `subskills_created` | Status von `skill-finder` / `skill-family-care` / `skill-register-care` |
+| `branches` | erzeugte Branches von Drittanbieter-Skills (Original, Datum, Grund, Status) |
 | `decisions_log` | Historie der pro Lauf gewählten Nummern |
+
+Wenn ein Branch angelegt wird, wird er unter `branches` vermerkt — damit erkennt ein Re-Run, dass
+der Branch bereits existiert, und legt keinen zweiten an (Idempotenz).
 
 > Das Datum wird vom ausführenden Modell gesetzt (aktuelles Datum), nicht geraten. Pfade nutzerneutral
 > als `~/...` speichern.

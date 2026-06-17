@@ -1,6 +1,6 @@
 ---
 name: skill-explorer
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
@@ -21,7 +21,7 @@ bach_compatible: false
 bach_origin: false
 
 category: infrastructure
-tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow]
+tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: de
 status: active
 
@@ -74,6 +74,16 @@ Entscheidungen werden in `~/.claude/skills/skill-explorer/config.json` persistie
 (`references/config.md`, Vorlage `assets/config.example.json`): beim Start lesen (bekannte
 Familien/Router/erzeugte Subskills), nach Ausführung aktualisieren — so legt ein Re-Run nichts doppelt an.
 
+## Branch-Mechanismus (Drittanbieter anpassen)
+
+Ein read-only-Skill (Plugin, importierter Drittanbieter) kann angepasst werden, ohne das Original zu
+verändern: Das Original-Verzeichnis wird vollständig kopiert (**Branch**); anschließend wird nur die
+Kopie bearbeitet. Der Branch trägt vier Pflichtangaben: Verweis aufs Original, Branch-Datum,
+Bearbeiter und Grund. Sobald der Branch das Original ablöst, wird das Original für die Runtime
+deregistriert (`SKILL.md` → `CONTENT.md`) oder der Familien-Router auf den Branch gezeigt, damit
+zwei nahezu identische Skills nicht kollidieren. Drittanbieter-Branches bleiben **privat** — sie
+gehen nicht in die öffentliche `.AI/.SKILLS`-Library. Detail: `references/skill-branching.md`.
+
 ## Ablauf
 
 1. **Modus wählen:** Bestand sichten/aufräumen → Audit-Modus. Von außen suchen/installieren →
@@ -88,7 +98,9 @@ Familien/Router/erzeugte Subskills), nach Ausführung aktualisieren — so legt 
 ## Eiserne Regeln
 
 - **Survey ≠ Mutation:** alles clustern, aber nur **user-eigene** Skills editieren; Plugin-/Drittanbieter-
-  Skills sind read-only (nie Header/Löschung).
+  Skills sind read-only (nie Header/Löschung). Wer ein Drittanbieter-Skill anpassen will, erzeugt
+  stattdessen einen **Branch** (Fork-Kopie) — das Original bleibt unangetastet, die Anpassung erfolgt
+  ausschließlich an der Kopie (→ `references/skill-branching.md`).
 - **Register erweitern, nicht duplizieren:** existiert ein Skill-Register (Index + Familien-Map +
   Index-Skill), dieses erweitern statt ein viertes anzulegen.
 - **Sicherheit primär manuell:** vor jeder Installation liest das Modell den Skill selbst und urteilt;
@@ -107,12 +119,19 @@ beauftragen und als Orchestrator nur konsolidieren/prüfen (Spezialist-Schwarm).
 - **Geteilt:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
 - **Audit:** `references/family-care.md`, `references/skill-finder.md`
 - **Explore:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
+- **Branch:** `references/skill-branching.md`
 - **Skripte:** `scripts/inventory_skills.py` (Inventar), `scripts/inject_family_header.py` (Header-Router),
   `scripts/scan_skill_security.py` (Security-Triage)
 - **Vorlagen:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`,
-  `assets/skill-register-template.md`, `assets/config.example.json`
+  `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Changelog
+
+### 1.1.0 (2026-06-17)
+- Branch-Mechanismus ergänzt: Drittanbieter-/read-only-Skills können per Fork-Kopie (Branch)
+  angepasst werden — mit Verweis aufs Original, Datum, Bearbeiter und Grund; Original bleibt
+  unangetastet. Eiserne Regel „Survey ≠ Mutation" um Branch-Ausweg erweitert. Neuer Abschnitt
+  `## Branch-Mechanismus`. Neu: `references/skill-branching.md`, `assets/branch-header.example.md`.
 
 ### 1.0.0 (2026-06-17)
 - Initiale Version. Vereint Bestands-Audit (Familien-Clustering, nummerierte Entscheidungen) und

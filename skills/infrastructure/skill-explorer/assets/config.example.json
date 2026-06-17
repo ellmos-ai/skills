@@ -23,6 +23,14 @@
     "skill-family-care": { "installed": false, "updated": null },
     "skill-register-care": { "installed": false, "updated": null }
   },
+  "branches": {
+    "<original>-fork": {
+      "branched_from": "<original>",
+      "branch_date": "YYYY-MM-DD",
+      "branch_reason": "<grund>",
+      "superseded_original": true
+    }
+  },
   "decisions_log": [
     { "date": "YYYY-MM-DD", "chosen": ["2c2", "F"] }
   ]

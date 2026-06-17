@@ -1,6 +1,6 @@
 ---
 name: skill-explorer
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
@@ -21,7 +21,7 @@ bach_compatible: false
 bach_origin: false
 
 category: infrastructure
-tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow]
+tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: en
 status: active
 
@@ -74,6 +74,16 @@ Decisions are persisted in `~/.claude/skills/skill-explorer/config.json`
 (`references/config.md`, template `assets/config.example.json`): read at startup (known
 families/routers/generated subskills), update after execution — so a re-run never creates anything twice.
 
+## Branch Mechanism (Customizing Third-Party Skills)
+
+A read-only skill (plugin, imported third-party) can be customized without modifying the original:
+the original directory is copied in full (**branch**); only the copy is then edited. The branch
+carries four mandatory fields: a reference to the original, the branch date, the author, and the
+reason. Once the branch supersedes the original, the original is deregistered from the runtime
+(`SKILL.md` → `CONTENT.md`) or the family router is pointed to the branch, so two nearly identical
+skills do not collide. Third-party branches stay **private** — they do not go into the public
+`.AI/.SKILLS` library. Details: `references/skill-branching.md`.
+
 ## Workflow
 
 1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
@@ -88,7 +98,9 @@ families/routers/generated subskills), update after execution — so a re-run ne
 ## Iron Rules
 
 - **Survey ≠ mutation:** cluster everything, but only edit **user-owned** skills; plugin/third-party
-  skills are read-only (never modify the header/delete).
+  skills are read-only (never modify the header/delete). To customize a third-party skill, create a
+  **branch** (fork copy) instead — the original remains untouched, all changes are made exclusively
+  on the copy (→ `references/skill-branching.md`).
 - **Extend the register, do not duplicate:** if a skill register exists (index + family map +
   index skill), extend it instead of creating a fourth one.
 - **Security primarily manual:** before every installation, the model reads the skill itself and judges;
@@ -107,12 +119,19 @@ and, as orchestrator, only consolidate/verify (specialist swarm). Otherwise sequ
 - **Shared:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
 - **Audit:** `references/family-care.md`, `references/skill-finder.md`
 - **Explore:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
+- **Branch:** `references/skill-branching.md`
 - **Scripts:** `scripts/inventory_skills.py` (inventory), `scripts/inject_family_header.py` (header router),
   `scripts/scan_skill_security.py` (security triage)
 - **Templates:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`,
-  `assets/skill-register-template.md`, `assets/config.example.json`
+  `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Changelog
+
+### 1.1.0 (2026-06-17)
+- Added branch mechanism: third-party/read-only skills can be customized via a fork copy (branch)
+  — with a reference to the original, date, author, and reason; the original remains untouched.
+  Iron rule "Survey ≠ mutation" extended with branch escape hatch. New section
+  `## Branch Mechanism`. New files: `references/skill-branching.md`, `assets/branch-header.example.md`.
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Unites inventory audit (family clustering, numbered decisions) and
