@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added (2026-06-18)
+
+- New skill `dev/github-repo-care` 1.0.0 (safe GitHub repository creation and maintenance workflow: local rules, locks, `.gitignore`, privacy gate, README/i18n/banner/metadata, release tag, GitHub release, CI verification, organization profile links, `llms.txt`, and registry updates; DE+EN). Catalog counts updated to 45 skills (dev 11) in `README.md`, `README_de.md`, and `llms.txt`.
+
 ### Added (2026-06-13)
 
 - New skill `utilities/decision-briefing` 1.0.0 (work through many open decisions on one topic: capture and inventory, numbered briefing with A/B/C/D options and a marked recommendation, letter/batch answers like "1A 2C 3B", results table and write-back into source documents; ported from the BACH expert `decision-briefing`, scanner component deliberately removed; DE+EN). Catalog counts updated to 44 skills (utilities 11) in `README.md`, `README_de.md`, and `llms.txt`.

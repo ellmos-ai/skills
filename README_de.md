@@ -29,11 +29,11 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 44 Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 45 Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
-| `dev` | 10 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme |
+| `dev` | 11 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | `infrastructure` | 2 | Portables KI-Setup, Betriebssystem-Unterstützung, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
