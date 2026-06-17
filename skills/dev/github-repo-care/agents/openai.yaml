@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Repo Care"
+  short_description: "Prepare, publish, and maintain GitHub repositories safely."
+  default_prompt: "Use github-repo-care to prepare a repository for publication, privacy checks, metadata, release tags, and profile links."
