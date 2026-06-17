@@ -18,6 +18,11 @@ Besonderheiten:
 - Hold-Liste: <deployment>/.sync-hold (eine Skill-Zeile pro Zeile, # = Kommentar)
   markiert Skills, deren Deployment-Version bewusst lokal abweicht. Sie werden
   beim Sammel-Deploy uebersprungen; explizites Deploy braucht --force.
+- Branch-Awareness: Skills, deren SKILL.md im Frontmatter `provenance.origin: branch`
+  enthaelt (Fremdskill-Fork) ODER deren Body den Marker `<!-- FAMILY-ROUTER:` traegt
+  (Head-Router-Branch), werden automatisch wie HOLD behandelt: beim Sammel-Deploy
+  uebersprungen, beim namentlichen Deploy nur mit --force ueberschreibbar. Status-
+  Ausgabe zeigt [BRANCH:<grund>]-Label; Zusammenfassung zaehlt gebranchte Skills.
 - Nur-Ziel-Skills werden NIE geloescht, nur gemeldet.
 - Runtime-Dateien (PRESERVE_TARGET_FILES, z.B. config.json) leben per Design nur
   im Ziel und werden beim Deploy erhalten (keep) statt geprunt.
@@ -60,6 +65,8 @@ class SkillStatus:
     status: str
     deregistered: bool = False
     on_hold: bool = False
+    branched: bool = False
+    branch_reason: str = ""
     changed: list[str] = field(default_factory=list)      # Dateien mit Inhalts-Diff
     source_only: list[str] = field(default_factory=list)  # Dateien nur in Quelle
     target_only: list[str] = field(default_factory=list)  # Dateien nur im Ziel
@@ -114,6 +121,65 @@ def read_hold_list(target_root: Path) -> set[str]:
 def is_deregistered(target_dir: Path) -> bool:
     """Deregistriert = Ziel hat CONTENT.md, aber keine SKILL.md."""
     return (target_dir / "CONTENT.md").is_file() and not (target_dir / "SKILL.md").is_file()
+
+
+def detect_branch(target_dir: Path) -> "str | None":
+    """Prueft ob ein lokaler Skill gebrancht ist (Fremd-Fork oder Router-Branch).
+
+    Liest die SKILL.md (bzw. CONTENT.md bei deregistrierten Skills) des Ziel-Verzeichnisses.
+    Gitbt einen Grund-String zurueck:
+      'fork'        -- Frontmatter enthaelt 'origin: branch' (Fremdskill-Fork)
+      'router'      -- Body enthaelt '<!-- FAMILY-ROUTER:' (Head-Router-Branch)
+      'fork+router' -- beides
+      None          -- nicht gebrancht
+
+    Robust gegen fehlende Dateien und Encoding-Fehler (errors='ignore').
+    """
+    if not target_dir.is_dir():
+        return None
+
+    # Skill-Datei bestimmen (SKILL.md bevorzugt, CONTENT.md als Fallback)
+    skill_file = target_dir / "SKILL.md"
+    if not skill_file.is_file():
+        skill_file = target_dir / "CONTENT.md"
+    if not skill_file.is_file():
+        return None
+
+    try:
+        text = skill_file.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return None
+
+    # ── Fork-Erkennung: origin: branch IM FRONTMATTER ──
+    is_fork = False
+    lines = text.splitlines()
+    if lines and lines[0].strip() == "---":
+        # Frontmatter: alles zwischen dem ersten und zweiten '---'
+        in_frontmatter = False
+        for line in lines:
+            stripped = line.strip()
+            if stripped == "---":
+                if not in_frontmatter:
+                    in_frontmatter = True
+                    continue
+                else:
+                    break  # Ende Frontmatter
+            if in_frontmatter and stripped.startswith("origin:"):
+                value = stripped[len("origin:"):].strip().strip('"').strip("'")
+                if value == "branch":
+                    is_fork = True
+                break
+
+    # ── Router-Erkennung: FAMILY-ROUTER-Marker IM GESAMTEN TEXT ──
+    is_router = "<!-- FAMILY-ROUTER:" in text
+
+    if is_fork and is_router:
+        return "fork+router"
+    if is_fork:
+        return "fork"
+    if is_router:
+        return "router"
+    return None
 
 
 def map_filename(rel_path: str, deregistered: bool) -> str:
@@ -189,6 +255,11 @@ def scan(source_root: Path, target_root: Path) -> list[SkillStatus]:
     for name, src_dir in mapping.items():
         st = compare_skill(name, src_dir, target_root)
         st.on_hold = name in hold
+        if st.status != ST_SOURCE_ONLY:
+            branch_reason = detect_branch(target_root / name)
+            if branch_reason:
+                st.branched = True
+                st.branch_reason = branch_reason
         results.append(st)
 
     # Nur-Ziel-Skills (nie loeschen, nur melden)
@@ -197,7 +268,12 @@ def scan(source_root: Path, target_root: Path) -> list[SkillStatus]:
             if entry.name.startswith(".") or entry.name in mapping:
                 continue
             if entry.is_dir():
-                results.append(SkillStatus(entry.name, None, ST_TARGET_ONLY))
+                st = SkillStatus(entry.name, None, ST_TARGET_ONLY)
+                branch_reason = detect_branch(entry)
+                if branch_reason:
+                    st.branched = True
+                    st.branch_reason = branch_reason
+                results.append(st)
             elif entry.is_symlink() or not entry.exists():
                 # Auch Git-Bash-/Cygwin-Symlinks, die Windows-Python nicht als
                 # Symlink erkennt (is_symlink() False, exists() False)
@@ -256,6 +332,8 @@ def _label(st: SkillStatus) -> str:
     label = st.status
     if st.on_hold:
         label += " [HOLD]"
+    if st.branched:
+        label += f" [BRANCH:{st.branch_reason}]"
     if st.deregistered:
         label += " [dereg]"
     return label
@@ -288,9 +366,10 @@ def cmd_status(args, source_root: Path = None, target_root: Path = None):
     ok = sum(1 for r in results if r.status == ST_OK)
     src_only = sum(1 for r in results if r.status == ST_SOURCE_ONLY)
     dst_only = sum(1 for r in results if r.status == ST_TARGET_ONLY)
+    branched_count = sum(1 for r in results if r.branched)
     print("─" * 100)
     print(f"  {len(results)} Skills: {ok} OK, {len(drift)} abweichend, "
-          f"{src_only} nur Quelle, {dst_only} nur Ziel"
+          f"{src_only} nur Quelle, {dst_only} nur Ziel, {branched_count} gebrancht"
           + ("" if args.all else "   (OK-Zeilen ausgeblendet, --all zeigt alle)"))
     print()
 
@@ -307,19 +386,28 @@ def cmd_deploy(args, source_root: Path = None, target_root: Path = None):
             if n not in mapping:
                 print(f"FEHLER: Skill '{n}' nicht in der Quelle gefunden.")
                 sys.exit(1)
+            # Branch-Check: detect_branch liest das Ziel-Verzeichnis direkt
+            branch_reason = detect_branch(target_root / n)
+            if branch_reason and not args.force:
+                print(f"UEBERSPRUNGEN (BRANCH:{branch_reason}): '{n}' ist lokal gebrancht "
+                      f"(nicht ueberschrieben). Deploy erzwingen mit --force.")
+                continue
             if n in hold and not args.force:
                 print(f"UEBERSPRUNGEN (HOLD): '{n}' ist als bewusst lokal abweichend "
                       f"markiert ({target_root / HOLD_FILENAME}). Deploy mit --force.")
                 continue
             names.append(n)
     else:
-        # Alle abweichenden Skills, die in BEIDEN Seiten existieren (ohne HOLD).
+        # Alle abweichenden Skills, die in BEIDEN Seiten existieren (ohne HOLD/BRANCH).
         # NUR-QUELLE-Skills werden bewusst NICHT automatisch deployt -- das
         # Deployment ist eine kuratierte Auswahl. Erstinstallation nur mit
         # explizitem Namen: python skill_sync.py deploy <skill>
         names = []
         for st in scan(source_root, target_root):
             if st.status != ST_DRIFT or st.category is None:
+                continue
+            if st.branched:
+                print(f"UEBERSPRUNGEN (BRANCH:{st.branch_reason}): {st.name}")
                 continue
             if st.on_hold:
                 print(f"UEBERSPRUNGEN (HOLD): {st.name}")
