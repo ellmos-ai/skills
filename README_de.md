@@ -8,7 +8,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**Schnelleinstieg:** [Einstieg](#einstieg) · [Skills](skills/) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
@@ -29,16 +29,32 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 45 Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 50 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | `dev` | 11 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
-| `infrastructure` | 2 | Portables KI-Setup, Betriebssystem-Unterstützung, MCP-Config-Sync zwischen Agent-Apps |
+| `game-dev` | 4 | Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
+| `infrastructure` | 3 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
 | `utilities` | 11 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, YouTube-Transkripte |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
+
+## Besondere Skills
+
+Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koordinieren, chaotische Agentenabläufe verhindern oder lokale Verfahren als wiederholbare Playbooks nutzbar machen:
+
+| Skill | Warum er heraussticht |
+|---|---|
+| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.md) | Meta-Skill zur Pflege der Skill-Landschaft: auditiert vorhandene Skills, clustert sie in Familien, recherchiert externe Skills/Plugins und installiert erst nach Sicherheitsprüfung und ausdrücklicher Freigabe. |
+| [`model-strategy`](skills/dev/model-strategy/SKILL.md) | Multi-Modell-Routing für Claude, Codex, Gemini und Ollama mit Score-basierter Auswahl, Delegationswegen, Eskalations-Triggern und Kosten-/Qualitätsabwägung. |
+| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | Sechs-Schritte-Renovierungsprotokoll für bestehende Projektordner, Dokumentationssysteme und Software-Stacks; verhindert Parallelstandards und gebrochene Workflows. |
+| [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Veröffentlichungs- und Pflege-Gate für GitHub-Repos: lokale Regeln, Sperren, `.gitignore`, Privacy-Checks, README/i18n, Releases und Repository-Metadaten. |
+| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Synchronisiert MCP-Server-Konfigurationen zwischen Claude Code und Claude Desktop über eine gemeinsame Master-Datei und Windows-/macOS-Hilfsskripte. |
+| [`yt-transcriber`](skills/utilities/yt-transcriber/SKILL.md) | Holt YouTube-Untertitel/Transkripte plus Metadaten als Markdown, JSON oder Plaintext, damit Videoanalyse mit quellennahem Text beginnt. |
+| [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Deckt Studio/Rojo-Szene-vs.-Code-Arbeit, MCP-Steuerung von Roblox Studio, Asset-Pipeline-Übergaben und Pflicht-Malware-Checks für Creator-Store-Assets ab. |
+| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Macht aus vielen offenen Entscheidungen ein nummeriertes A/B/C/D-Briefing mit Empfehlung, nimmt Batch-Antworten an und protokolliert die Ergebnisse. |
 
 ## Repository-Struktur
 
