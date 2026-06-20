@@ -50,7 +50,7 @@ Spieleentwicklung ist Teamarbeit aus klar getrennten Disziplinen — auch wenn e
 oder ein KI-Agent mehrere davon übernimmt. Dieser Skill liefert das **Organisationsmodell**:
 welche Rollen es gibt, welche Teilaufgaben dazugehören, in welcher Reihenfolge sie zusammenwirken
 und wie man ein Spiel als Konzept (GDD) festhält. Für das *technische* Wie siehe `/rojo` (Sync),
-`/roblox-studio` (Editor/Assets) und den Metaskill `/roblox-dev` (Architektur).
+`/rbx-studio` (Editor/Assets) und den Metaskill `/rbx-dev` (Architektur).
 
 Nutze diesen Skill beim Planen eines neuen Spiels, beim Aufteilen der Arbeit (auch zwischen
 mehreren KI-Agenten) und beim Schreiben/Prüfen eines Game Design Documents.
@@ -149,7 +149,7 @@ Plattform-Wissen, das die Konzeptarbeit für Roblox erdet (keine Garantie, nur F
 
 ## Weiterführend
 
-- Schwesterskills: `/rojo`, `/roblox-studio`; Metaskill `/roblox-dev` (Architektur-Pattern,
+- Schwesterskills: `/rojo`, `/rbx-studio`; Metaskill `/rbx-dev` (Architektur-Pattern,
   Projektstruktur, Luau-Lessons).
 - Referenz-Pipeline (falls vorhanden): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
   `IDEAS.md`, Marktanalysen).

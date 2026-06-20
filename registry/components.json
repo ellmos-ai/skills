@@ -1,7 +1,7 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-06-20T14:15:59.283206+00:00",
+    "generated_at": "2026-06-20T20:44:36.953563+00:00",
     "schema_version": "skill-v1",
     "component_count": 53
   },
@@ -897,7 +897,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:113b20d570ecdf78a83d92754d078417e40a3530e1a4c103950cfc3aad3e2187",
+      "content_hash": "sha256:0a3fb8ebfb2124486ed67f44659f479852750843d24e2c887d38955781be1a77",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -952,19 +952,19 @@
       "warnings": []
     },
     {
-      "id": "skill:game-dev:roblox-dev",
-      "name": "roblox-dev",
+      "id": "skill:game-dev:rbx-dev",
+      "name": "rbx-dev",
       "type": "skill",
-      "path": "skills/game-dev/roblox-dev/SKILL.md",
+      "path": "skills/game-dev/rbx-dev/SKILL.md",
       "category": "game-dev",
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:42891173d3b7098a0b54cfd2d30e52ada31980a8904570e06b663f7cbf0e437f",
+      "content_hash": "sha256:b89dcb0e3b71ad8c4d7372f9836d9c5deb42f50e5ec79aae40d314c758b2989c",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
-        "origin_path": "~/.claude/skills/roblox-dev/",
+        "origin_path": "~/.claude/skills/rbx-dev/",
         "origin_version": "1.0.0",
         "origin_commit": null,
         "last_sync_from_origin": null,
@@ -1015,19 +1015,19 @@
       "warnings": []
     },
     {
-      "id": "skill:game-dev:roblox-studio",
-      "name": "roblox-studio",
+      "id": "skill:game-dev:rbx-studio",
+      "name": "rbx-studio",
       "type": "skill",
-      "path": "skills/game-dev/roblox-studio/SKILL.md",
+      "path": "skills/game-dev/rbx-studio/SKILL.md",
       "category": "game-dev",
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:d57b2c3521327ec6aee185c07194777fe058930c58b91c5fb317b77db1ec9c43",
+      "content_hash": "sha256:173cbc8bb482cedef1594a558bcc17ec3cab3a334625081053f714fc7d69eada",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
-        "origin_path": "~/.claude/skills/roblox-studio/",
+        "origin_path": "~/.claude/skills/rbx-studio/",
         "origin_version": "1.0.0",
         "origin_commit": null,
         "last_sync_from_origin": null,
@@ -1086,7 +1086,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:344d15e6d247c4d01e01cacda633ca60e9cb7604b0c8c456b0c5c080306649ba",
+      "content_hash": "sha256:2ef362bb03ef98302ac321c97e0142a70d21a52e457d4586b6467fe4fb136bd8",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
