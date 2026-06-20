@@ -30,11 +30,12 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 50 tracked runtime skills:
+The current public catalog contains 65 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
 | `dev` | 11 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
+| `education` | 3 | Academic planning, source-based learning, and exam preparation workflows |
 | `game-dev` | 4 | Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | `infrastructure` | 3 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
@@ -56,6 +57,16 @@ Some skills are especially useful as entry points because they coordinate other 
 | [`yt-transcriber`](skills/utilities/yt-transcriber/SKILL.md) | Extracts YouTube subtitles/transcripts plus metadata into Markdown, JSON, or plain text so video analysis starts from source-backed text. |
 | [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Covers Studio/Rojo scene-vs-code work, MCP control of Roblox Studio, asset-pipeline handoff, and mandatory malware checks for Creator Store assets. |
 | [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Turns many open decisions into a numbered A/B/C/D briefing with recommendations, accepts batch replies, and records the chosen outcomes. |
+
+## Education Skills
+
+Three institution-neutral skills for academic study. Placeholders (`<INSTITUTION>`, `<LMS>`, `<MODULE_PREFIX>`, etc.) are resolved to the concrete context on first use. All three skills are available in German (base) and English; ES, JA, RU, ZH are planned for Stage 2.
+
+| Skill | What it does |
+|---|---|
+| [`academic-study-control`](skills/education/academic-study-control/SKILL.md) | Semester planning, deadline tracking, exam registration, re-enrollment, mail/portal checks, and calendar reminders with source verification and privacy guardrails. |
+| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.md) | Five-phase source-based learning cycle: clarify objective → extract key ideas → build glossary → transfer/apply → retrieval practice with gap tracking. |
+| [`academic-study-test`](skills/education/academic-study-test/SKILL.md) | Five test modes (quick test, exam block, oral exam, assignment training, error diagnosis) with a rubric-based assessment system and a strict ethics boundary against live-exam support. |
 
 ## Repository Structure
 

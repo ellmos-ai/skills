@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Added (2026-06-20)
+
+- New skill `education/academic-study-control` 1.0.0 (institution-neutral semester and deadline management: source-checked planning, optional calendar and mail integration, privacy-first data handling; fully generic placeholders for institution, LMS, module prefix, and status files; DE).
+- New skill `education/academic-study-learn` 1.0.0 (source-based learning workflow: five-phase cycle of goal-setting, core-idea extraction, glossary, transfer, and retrieval practice; works with any field of study and material type; DE).
+- New skill `education/academic-study-test` 1.0.0 (exam and test preparation: five modes — quick test, exam block, oral exam, assignment training, error diagnosis — with a five-criterion scoring rubric and strict ethics boundary against supporting live exams; DE).
+- Catalog counts updated to 65 skills (education +3) in `README.md`, `README_de.md`, and `llms.txt`. `education` category added to public catalog in all three files.
+
 ### Added (2026-06-18)
 
 - New skill `dev/github-repo-care` 1.0.0 (safe GitHub repository creation and maintenance workflow: local rules, locks, `.gitignore`, privacy gate, README/i18n/banner/metadata, release tag, GitHub release, CI verification, organization profile links, `llms.txt`, and registry updates; DE+EN). Catalog counts updated to 45 skills (dev 11) in `README.md`, `README_de.md`, and `llms.txt`.
