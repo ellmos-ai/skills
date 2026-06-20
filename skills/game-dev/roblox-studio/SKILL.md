@@ -111,9 +111,24 @@ Editor + Rojo  ──(persistenter Code-Sync)──►  Studio (laufend)  ◄─
 | `generate_material` | KI-Material/Textur erzeugen (MaterialVariant) |
 | `character_navigation` / `user_keyboard_input` / `user_mouse_input` | Eingabe simulieren |
 
+### Server-Optionen (drei mögliche Brücken)
+
+Es gibt mehr als eine Studio-MCP-Brücke; sie ergänzen sich:
+
+| Server | Lizenz/Herkunft | Fähigkeiten | Wann nehmen |
+| --- | --- | --- | --- |
+| **Built-in Studio-MCP** (`StudioMCP.exe`) | proprietär (Teil von Studio) | volle Write/Execute-Brücke: `execute_luau`, Insert, Material, Multi-Edit, Play/Stop, Console, Screenshot, Input-Sim | Standard für Assistant-native Aktionen/Execute |
+| **`robloxstudio-mcp`** (boshyxd) | MIT (Handle `boshyxd`) | Inspektion: `get_file_tree`, `search_files`, `grep_scripts`, `capture_screenshot`; Full-Edition zusätzlich Bulk-Edits | Code lesen, Struktur erkunden, Inspektion |
+| **`robloxstudio-mcp`** (Chrrxs) | MIT (Handle `Chrrxs`, aktiver Nachfolger von boshyxd) | **Live-Runtime-Debugging** (Game-VM-Eval Server **oder** per-Client), Multiplayer-Playtest-Steuerung, Log-/Memory-Capture pro Peer, Viewport-Screenshots, Virtual-Input, `.rbxm` Import/Export; 75 Tools / 35 read-only (Inspector) | **Runtime-/Multiplayer-Debugging** — laufende VMs auswerten, Logs/Memory pro Peer, Playtests automatisieren |
+
+> **Chrrxs-Setup (optional):** Node-basiert via `npx`; Plugin-Auto-Install mit `--auto-install-plugin`,
+> dann in Studio „Allow HTTP Requests" (Experience Settings → Security) aktivieren und Studio neu
+> starten. Nicht alle drei Server gleichzeitig denselben Schreibzugriff nutzen. Herkunft MIT,
+> GitHub-Handle `Chrrxs`; wir kopieren keinen Code, sondern nutzen den Server.
+
 ### Setup (nutzerneutral)
 
-Das MCP läuft als von Studio mitgelieferter Server, oft über einen schmalen JSON-Filter-Wrapper
+Das Built-in-MCP läuft als von Studio mitgelieferter Server, oft über einen schmalen JSON-Filter-Wrapper
 angebunden (filtert Nicht-JSON-Banner heraus, den manche Clients sonst nicht parsen):
 
 - MCP-Batch (Windows): `%LOCALAPPDATA%\Roblox\mcp.bat`
