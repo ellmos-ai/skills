@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Changed (2026-06-20)
+
+- Renamed `utilities/yt-transcriber` → `utilities/video-transcriber` (v1.1.0): YouTube branding
+  policy prohibits „yt" as an abbreviation in product/tool names; script renamed from
+  `yt_transcriber.py` to `video_transcriber.py`; usage disclaimer and dependency licenses
+  (MIT / Unlicense) added; YouTube referenced descriptively only. Backward-compat wrapper
+  `skills/utilities/yt-transcriber/yt_transcriber.py` retained for old references.
+  Root `README.md` entry updated; `SKILL.md` + `SKILL.en.md` debrand to `video-transcriber`.
+
 ### Added (2026-06-20)
 
 - New skill `education/academic-study-control` 1.0.0 (institution-neutral semester and deadline management: source-checked planning, optional calendar and mail integration, privacy-first data handling; fully generic placeholders for institution, LMS, module prefix, and status files; DE).
