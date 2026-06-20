@@ -1,14 +1,14 @@
 ---
-name: yt-transcriber
-version: 1.0.0
+name: video-transcriber
+version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-04-04
-updated: 2026-06-13
+updated: 2026-06-20
 description: >
-  Fetch YouTube transcripts (subtitles) and video metadata and output them as
-  Markdown, JSON, or plain text. Prefers manually created subtitles, falls back
-  to auto-generated ones.
+  Fetch video transcripts (subtitles) and metadata from online video sources and
+  output them as Markdown, JSON, or plain text. Currently supported: YouTube.
+  Prefers manually created subtitles, falls back to auto-generated ones.
 
 standalone: true
 anthropic_compatible: true
@@ -16,7 +16,7 @@ bach_compatible: true
 bach_origin: true
 
 category: utilities
-tags: [youtube, transcript, subtitles, metadata, research, video]
+tags: [video, transcript, subtitles, metadata, research, youtube]
 language: en
 status: active
 
@@ -33,23 +33,32 @@ provenance:
   origin_repo: "github.com/ellmos-ai/bach"
   last_sync_from_origin: "2026-04-04"
   last_sync_to_origin: null
-  local_changes_since_sync: false
+  local_changes_since_sync: true
 ---
 
-# YouTube Transcriber
+# Video Transcriber
 
 Fetches transcripts (subtitles) and metadata (title, channel, date, views,
-description) of YouTube videos. Prefers manually created subtitles, falls back
+description) of online videos. Prefers manually created subtitles, falls back
 to auto-generated ones. Output as Markdown, JSON, or plain text.
 
-For YouTube videos, use this tool instead of summarizing content manually —
+Currently supported source: **YouTube** (youtube.com, youtu.be, youtube-nocookie.com).
+
+For videos, use this tool instead of summarizing content manually —
 the transcript is the reliable source.
 
-## Dependencies
+> **Notice:** This tool is not affiliated with, endorsed by, or sponsored by
+> YouTube or Google. Use is at the user's own responsibility. Users are solely
+> responsible for complying with the terms of service of the respective platform
+> and applicable copyright law. No circumvention of DRM, paywalls, or access
+> restrictions. No mass scraping. No redistribution of copyrighted transcripts
+> without the rights holder's consent.
+
+## Dependencies and licenses
 
 ```bash
-pip install youtube-transcript-api   # transcripts (required)
-pip install yt-dlp                   # metadata (optional, fallback: noembed)
+pip install youtube-transcript-api   # transcripts (required) — MIT license
+pip install yt-dlp                   # metadata (optional, fallback: noembed) — Unlicense (Public Domain)
 ```
 
 ## Usage
@@ -59,16 +68,16 @@ pip install yt-dlp                   # metadata (optional, fallback: noembed)
 
 ```bash
 # Default: Markdown with timestamps
-PYTHONIOENCODING=utf-8 python yt_transcriber.py "https://www.youtube.com/watch?v=VIDEO_ID"
+PYTHONIOENCODING=utf-8 python video_transcriber.py "https://www.youtube.com/watch?v=VIDEO_ID"
 
 # Choose output format
-PYTHONIOENCODING=utf-8 python yt_transcriber.py URL --format markdown|json|plain
+PYTHONIOENCODING=utf-8 python video_transcriber.py URL --format markdown|json|plain
 
 # Save to file
-PYTHONIOENCODING=utf-8 python yt_transcriber.py URL -o transcript.md
+PYTHONIOENCODING=utf-8 python video_transcriber.py URL -o transcript.md
 
 # Prefer languages (default: de en)
-PYTHONIOENCODING=utf-8 python yt_transcriber.py URL --lang de en fr
+PYTHONIOENCODING=utf-8 python video_transcriber.py URL --lang de en fr
 ```
 
 ### Options
@@ -86,7 +95,7 @@ PYTHONIOENCODING=utf-8 python yt_transcriber.py URL --lang de en fr
 ### As a Python library
 
 ```python
-from yt_transcriber import extract_video_id, fetch_metadata, fetch_transcript, format_markdown
+from video_transcriber import extract_video_id, fetch_metadata, fetch_transcript, format_markdown
 
 video_id = extract_video_id("https://www.youtube.com/watch?v=VIDEO_ID")
 meta = fetch_metadata(video_id)
@@ -107,6 +116,14 @@ output = format_markdown(meta, transcript)
 - No audio download, no built-in speech recognition
 
 ## Changelog
+
+### 1.1.0 (2026-06-20)
+- Renamed from `yt-transcriber` → `video-transcriber` (YouTube branding policy:
+  "yt" is an explicitly forbidden abbreviation; see RECHTSCHECK_2026-06-20.md)
+- Script: `yt_transcriber.py` → `video_transcriber.py`
+- Disclaimer and dependency licenses added (user responsibility, ToS, no endorsement)
+- YouTube mentioned descriptively as a source only, not as a name/brand component
+- Backward-compat wrapper `yt_transcriber.py` retained at the old path
 
 ### 1.0.0 (2026-06-12)
 - SKILL.md added (the tool already existed as a script + README)
