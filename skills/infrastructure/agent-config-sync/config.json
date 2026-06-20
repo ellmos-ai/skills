@@ -1,0 +1,87 @@
+{
+  "_comment": "Anbieter-Standardspezifikationen (publizierbar/neutral). Nur Platzhalter, keine echten Pfade. Vom Lernmechanismus aktualisierbar (sources + updated je Anbieter). Pfade: <HOME>=~ / %USERPROFILE%, <APPDATA>=%APPDATA% (Win), <APPSUPPORT>=~/Library/Application Support (Mac).",
+  "_stand": "2026-06-20",
+  "providers": {
+    "claude-code": {
+      "display_name": "Claude Code",
+      "kind": "cli",
+      "mcp": { "path": "<HOME>/.claude/profiles/<name>.json", "format": "json", "key": "mcpServers", "merge": "file" },
+      "skills": { "path": "<HOME>/.claude/skills/", "kind": "dir" },
+      "notes": "Profilbasiert via --mcp-config; globaler Fallback <HOME>/.claude.json. Skills via skill_sync.py deployen.",
+      "sources": ["https://docs.anthropic.com/en/docs/claude-code"],
+      "updated": "2026-06-20"
+    },
+    "claude-desktop": {
+      "display_name": "Claude Desktop",
+      "kind": "app",
+      "mcp": { "path": "<APPDATA>/Claude/claude_desktop_config.json", "path_mac": "<APPSUPPORT>/Claude/claude_desktop_config.json", "format": "json", "key": "mcpServers", "merge": "block-replace" },
+      "skills": { "path": null, "kind": "redirect", "notes": "Session-interner Pfad, kein direkter User-Zugriff. Bridge-Skill verwenden." },
+      "notes": "Nach Sync App komplett beenden (Tray -> Quit) und neu starten.",
+      "sources": ["mcp-config-sync skill"],
+      "updated": "2026-06-20"
+    },
+    "codex-cli": {
+      "display_name": "Codex CLI (GPT)",
+      "kind": "cli",
+      "mcp": { "path": "<HOME>/.codex/config.toml", "format": "toml", "key": "mcp_servers", "merge": "block-replace" },
+      "skills": { "path": "<HOME>/.codex/", "kind": "dir" },
+      "notes": "TOML statt JSON. Key heisst mcp_servers (nicht mcpServers).",
+      "sources": ["https://developers.openai.com/codex", "https://github.com/openai/codex"],
+      "updated": "2026-06-20"
+    },
+    "antigravity-gemini": {
+      "display_name": "Antigravity / Gemini (agy)",
+      "kind": "ide",
+      "mcp": { "path": "<HOME>/.gemini/", "format": "json", "key": "UNVERIFIED", "merge": "block-replace" },
+      "skills": { "path": "<HOME>/.gemini/config/plugins/", "kind": "dir" },
+      "notes": "MCP-Schema per Lernmechanismus verifizieren (UNVERIFIED).",
+      "sources": [],
+      "updated": null
+    },
+    "kimi-code": {
+      "display_name": "Kimi Code",
+      "kind": "cli",
+      "mcp": { "path": "<HOME>/.kimi-code/", "format": "json", "key": "UNVERIFIED", "merge": "block-replace" },
+      "skills": { "path": null, "kind": "none" },
+      "notes": "Pfad/Format/Key per Lernmechanismus verifizieren (UNVERIFIED).",
+      "sources": [],
+      "updated": null
+    },
+    "cursor": {
+      "display_name": "Cursor",
+      "kind": "ide",
+      "mcp": { "path": "<HOME>/.cursor/mcp.json", "path_project": "<PROJECT>/.cursor/mcp.json", "format": "json", "key": "mcpServers", "merge": "block-replace" },
+      "skills": { "path": "<PROJECT>/.cursor/rules/", "kind": "redirect" },
+      "notes": "Globaler vs. projektbezogener Scope.",
+      "sources": ["https://docs.cursor.com"],
+      "updated": "2026-06-20"
+    },
+    "cline": {
+      "display_name": "Cline (VS Code)",
+      "kind": "ide",
+      "mcp": { "path": "VSCODE_GLOBALSTORAGE/cline_mcp_settings.json", "format": "json", "key": "mcpServers", "merge": "block-replace" },
+      "skills": { "path": "<PROJECT>/.clinerules", "kind": "redirect" },
+      "notes": "Realer globalStorage-Pfad per Lernmechanismus (Systemsuche) aufloesen.",
+      "sources": [],
+      "updated": null
+    },
+    "windsurf": {
+      "display_name": "Windsurf",
+      "kind": "ide",
+      "mcp": { "path": "<HOME>/.codeium/windsurf/mcp_config.json", "format": "json", "key": "mcpServers", "merge": "block-replace" },
+      "skills": { "path": "<PROJECT>/.windsurfrules", "kind": "redirect" },
+      "notes": "Pfad zu verifizieren.",
+      "sources": [],
+      "updated": null
+    },
+    "github-copilot": {
+      "display_name": "GitHub Copilot",
+      "kind": "ide",
+      "mcp": { "path": "<PROJECT>/.vscode/mcp.json", "format": "json", "key": "servers", "merge": "block-replace" },
+      "skills": { "path": "<PROJECT>/.github/copilot-instructions.md", "kind": "redirect" },
+      "notes": "Abweichender MCP-Key: servers (nicht mcpServers).",
+      "sources": [],
+      "updated": null
+    }
+  }
+}
