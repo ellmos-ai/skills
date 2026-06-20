@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/component-v1.schema.json",
+  "title": ".SKILLS Component v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "name",
+    "type",
+    "path",
+    "version",
+    "schema_version",
+    "status",
+    "content_hash",
+    "provenance",
+    "ownership",
+    "privacy",
+    "compatibility",
+    "fork",
+    "branch"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z]+:[a-z0-9_.-]+(:[a-z0-9_.-]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["skill", "prompt", "workflow", "agent", "role", "tool", "protocol", "expert", "service", "pointer"]
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\\+[0-9A-Za-z.-]+)?$"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated", "archived", "needs-review"]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "git_commit": {
+      "type": ["string", "null"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["origin"],
+      "properties": {
+        "origin": {
+          "type": ["string", "null"]
+        },
+        "origin_path": {
+          "type": ["string", "null"]
+        },
+        "origin_version": {
+          "type": ["string", "null"]
+        },
+        "origin_commit": {
+          "type": ["string", "null"]
+        },
+        "last_sync_from_origin": {
+          "type": ["string", "null"]
+        },
+        "last_sync_to_origin": {
+          "type": ["string", "null"]
+        },
+        "local_changes_since_sync": {
+          "type": ["boolean", "null"]
+        }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source_kind", "neutrality", "proposed_class"],
+      "properties": {
+        "source_kind": {
+          "type": "string",
+          "enum": ["own", "foreign", "unknown", "needs-review"]
+        },
+        "neutrality": {
+          "type": "string",
+          "enum": ["neutral", "neutral-candidate", "personalized", "personalized-candidate", "needs-review"]
+        },
+        "proposed_class": {
+          "type": "string"
+        },
+        "upstream_component": {
+          "type": ["string", "null"]
+        },
+        "personalized_for": {
+          "type": ["string", "null"]
+        },
+        "sanitization_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["level", "export_allowed", "contains_local_paths", "contains_personal_data"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["public", "internal", "private", "secret", "needs-review"]
+        },
+        "export_allowed": {
+          "type": "boolean"
+        },
+        "contains_local_paths": {
+          "type": "boolean"
+        },
+        "contains_personal_data": {
+          "type": "boolean"
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "anthropic": {
+          "type": ["boolean", "null"]
+        },
+        "bach": {
+          "type": ["boolean", "null"]
+        },
+        "promptboard": {
+          "type": ["boolean", "null"]
+        },
+        "profiprompt": {
+          "type": ["boolean", "null"]
+        },
+        "explorerpro": {
+          "type": ["boolean", "null"]
+        }
+      }
+    },
+    "fork": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["is_fork"],
+      "properties": {
+        "is_fork": {
+          "type": "boolean"
+        },
+        "fork_of": {
+          "type": ["string", "null"]
+        },
+        "fork_reason": {
+          "type": ["string", "null"]
+        },
+        "merge_policy": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "base": {
+          "type": ["string", "null"]
+        },
+        "purpose": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

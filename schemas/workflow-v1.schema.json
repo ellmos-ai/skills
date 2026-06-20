@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/workflow-v1.schema.json",
+  "title": ".SKILLS Workflow v1",
+  "allOf": [
+    {
+      "$ref": "component-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "workflow"
+        },
+        "workflow": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "triggers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "inputs": {
+              "type": "array"
+            },
+            "steps": {
+              "type": "array"
+            },
+            "gates": {
+              "type": "array"
+            },
+            "outputs": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
