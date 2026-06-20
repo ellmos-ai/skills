@@ -1,0 +1,3286 @@
+{
+  "summary": {
+    "generated_by": "versionctl registry-generate",
+    "generated_at": "2026-06-20T13:56:59.401975+00:00",
+    "schema_version": "skill-v1",
+    "component_count": 52
+  },
+  "components": [
+    {
+      "id": "protocol:dev:bugfix-protokoll",
+      "name": "bugfix-protokoll",
+      "type": "protocol",
+      "path": "skills/dev/bugfix-protocol/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:870cac247114dd6d592e582f5c4a77c52e32420e762290c3a5c7b3e0c9e157d1",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/bugfix-protokoll.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:bugsweep",
+      "name": "bugsweep",
+      "type": "protocol",
+      "path": "skills/dev/bugsweep/SKILL.md",
+      "category": "dev",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:cecb4280a83c47992a82bf539945839be1041405a142bb3fe268f6dfd23046e4",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/bugsweep/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-13",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:dev-zyklus",
+      "name": "dev-zyklus",
+      "type": "protocol",
+      "path": "skills/dev/dev-cycle/SKILL.md",
+      "category": "dev",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:bfbc6bafc4fe4975506e7c6ea271546ac5b37dbc79af11353a5f87f415c5c888",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/dev-zyklus.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "agent:dev:dev-soft-agent",
+      "name": "dev-soft-agent",
+      "type": "agent",
+      "path": "skills/dev/dev-soft-agent/SKILL.md",
+      "category": "dev",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:da0b0f1b24a0ca8891b88e72e93708150f1260afa637224185f370610a37ec04",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "MODULAR_AGENTS/devSoftAgent",
+        "origin_version": "0.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 17
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:dev:docs-analysis",
+      "name": "docs-analysis",
+      "type": "skill",
+      "path": "skills/dev/docs-analysis/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:aba11aa40c48324410df86227b587190a1e5225296d6deffa3fbe4ca9aac5cf2",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/docs-analyse.md",
+        "origin_version": "1.2.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:github-repo-care",
+      "name": "github-repo-care",
+      "type": "protocol",
+      "path": "skills/dev/github-repo-care/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:09aaf7dfdab41a14b363283ab44b2549ce840d517acf901572828bc0df824565",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.codex/skills/github-repo-care/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-18",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:dev:migrate-rename",
+      "name": "migrate-rename",
+      "type": "skill",
+      "path": "skills/dev/migrate-rename/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:d91f191e8144662a8aecef107f214e12c6d81bf81ba6890a50bd0a385ace42f4",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/migrate-rename.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:dev:model-strategy",
+      "name": "model-strategy",
+      "type": "skill",
+      "path": "skills/dev/model-strategy/SKILL.md",
+      "category": "dev",
+      "version": "2.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ecae5b058afb1184eb8b2f763b44b5bc17f74431322512b45cf29b1dbc0283d0",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/ing-strategie.md",
+        "origin_version": "2.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:pipeline-optimizer",
+      "name": "pipeline-optimizer",
+      "type": "protocol",
+      "path": "skills/dev/pipeline-optimizer/SKILL.md",
+      "category": "dev",
+      "version": "1.2.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:0971ebffd60ba3225ed1beb7beb9f8f122f9d4752c904b0bb3bdd6e457fc03b4",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/pipeline-optimizer/",
+        "origin_version": "1.1.1",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-05-16",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:dev:plugin-system",
+      "name": "plugin-system",
+      "type": "tool",
+      "path": "skills/dev/plugin-system/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:fe4fba16006365fedc5fb3c0b77ac2c020427c0b893f97302632b260f2f43a01",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "MODULAR_AGENTS/plugins",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": true,
+        "language": "de",
+        "file_count": 9
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:projekt-aufnahme",
+      "name": "projekt-aufnahme",
+      "type": "protocol",
+      "path": "skills/dev/project-onboarding/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:884fc620b9cd670f195ffe980f2deb3696918e0a74141680d23d038cbe00662e",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/projekt-aufnahme.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:education:academic-study-control",
+      "name": "academic-study-control",
+      "type": "skill",
+      "path": "skills/education/academic-study-control/SKILL.md",
+      "category": "education",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:52cd3c80e46ead65b54a4c1044f3d7042c5194175495ed204566dfd6041c2d89",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:education:academic-study-learn",
+      "name": "academic-study-learn",
+      "type": "skill",
+      "path": "skills/education/academic-study-learn/SKILL.md",
+      "category": "education",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:873f5e8147df0ee2a4cdd2ce3aa8de16fa31a8fa7ad85c2e686d1bae90f38c1c",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:education:academic-study-test",
+      "name": "academic-study-test",
+      "type": "skill",
+      "path": "skills/education/academic-study-test/SKILL.md",
+      "category": "education",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:e2a9cb7558939a7a15e8552ccbb3ad80e121d2cee14c09903b206929326dd85e",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:game-dev:game-design",
+      "name": "game-design",
+      "type": "skill",
+      "path": "skills/game-dev/game-design/SKILL.md",
+      "category": "game-dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:113b20d570ecdf78a83d92754d078417e40a3530e1a4c103950cfc3aad3e2187",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/game-design/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 4
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:game-dev:roblox-dev",
+      "name": "roblox-dev",
+      "type": "skill",
+      "path": "skills/game-dev/roblox-dev/SKILL.md",
+      "category": "game-dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:42891173d3b7098a0b54cfd2d30e52ada31980a8904570e06b663f7cbf0e437f",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/roblox-dev/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:game-dev:roblox-studio",
+      "name": "roblox-studio",
+      "type": "skill",
+      "path": "skills/game-dev/roblox-studio/SKILL.md",
+      "category": "game-dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:d57b2c3521327ec6aee185c07194777fe058930c58b91c5fb317b77db1ec9c43",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/roblox-studio/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 4
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:game-dev:rojo",
+      "name": "rojo",
+      "type": "skill",
+      "path": "skills/game-dev/rojo/SKILL.md",
+      "category": "game-dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:344d15e6d247c4d01e01cacda633ca60e9cb7604b0c8c456b0c5c080306649ba",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/rojo/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 6
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:infrastructure:ai-portable-setup",
+      "name": "ai-portable-setup",
+      "type": "tool",
+      "path": "skills/infrastructure/ai-portable-setup/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ce1b517aa008310fb4a2bbf40b9beb168b8b49afebc80b69fbdc72fd6e697579",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "MODULAR_AGENTS/AI-Portable",
+        "origin_version": "0.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:mcp-config-sync",
+      "name": "mcp-config-sync",
+      "type": "skill",
+      "path": "skills/infrastructure/mcp-config-sync/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.1",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:8053bc586b5e123bd3eebdf313c64a34067a115e83e90b578d3a2e7139f12ffc",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/mcp-config-sync/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-05-16",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 7
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:skill-explorer",
+      "name": "skill-explorer",
+      "type": "skill",
+      "path": "skills/infrastructure/skill-explorer/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:40e53f1aa90ff87d38b40e9b89db520cdc5b9249b7d5623a4138edf7f4236fc7",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/skill-explorer/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 21
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:research:research-agent",
+      "name": "research-agent",
+      "type": "tool",
+      "path": "skills/research/research-agent/SKILL.md",
+      "category": "research",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:305be8ef9cc3125e137cae123d399cbae2a8b68867e8c2b19f265c724d5ef0f3",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "MODULAR_AGENTS/ResearchAgent",
+        "origin_version": "0.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 12
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:act-techniken",
+      "name": "act-techniken",
+      "type": "skill",
+      "path": "skills/therapy/act-techniques/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:451e15346dc23810001b5b4be7a65a9eea9598b3b073b2f8d77b127217262d5e",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/act_techniken.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:verhaltensaktivierung",
+      "name": "verhaltensaktivierung",
+      "type": "skill",
+      "path": "skills/therapy/behavioral-activation/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:56f1579c3dc9b6a0449816dcdd892a914b0515f92352d85312aea2713f4ba2a1",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/verhaltensaktivierung.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:kognitive-umstrukturierung",
+      "name": "kognitive-umstrukturierung",
+      "type": "skill",
+      "path": "skills/therapy/cognitive-restructuring/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:b8d9242d6b4c131eba39231fab3f9d547e2560877dac7151defc90ae2eb09cd2",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/kognitive_umstrukturierung.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:gespraechsfuehrung-basis",
+      "name": "gespraechsfuehrung-basis",
+      "type": "skill",
+      "path": "skills/therapy/counseling-basics/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:aa221d82f10b538fb987486850d64972bc0128f538e1a7ea9336c4e263cbe448",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/gespraechsfuehrung_basis.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:exposition-begleitung",
+      "name": "exposition-begleitung",
+      "type": "skill",
+      "path": "skills/therapy/exposure-guidance/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:958be0148ad7055d427dbf3b68c4ce4359b2393b5b641303214d80d535935040",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/exposition_begleitung.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:genogram-work",
+      "name": "genogram-work",
+      "type": "skill",
+      "path": "skills/therapy/genogram-work/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:5ec85b3f13eb8fe525e539dcd9aa526c83ab3ce23371e043ad95c79e1ff82736",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/genogramm_arbeit.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:guideline-therapies-overview",
+      "name": "guideline-therapies-overview",
+      "type": "skill",
+      "path": "skills/therapy/guideline-therapies-overview/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:3e14ae1634b4792925396aefd6dfa8806d5731652327209a10a68dfe5589e0c4",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/richtlinienverfahren_ueberblick.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:achtsamkeit-basis",
+      "name": "achtsamkeit-basis",
+      "type": "skill",
+      "path": "skills/therapy/mindfulness-basics/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:9db1ad42e798e174383c94d6c224a1a408e8cb03fb2ac04c5b7efc3f9bf3cda3",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/achtsamkeit_basis.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:motivational-interviewing",
+      "name": "motivational-interviewing",
+      "type": "skill",
+      "path": "skills/therapy/motivational-interviewing/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:d42de2dd16047f63fec25592a3f9b3ccb03dd41258752e7dec896c180b882885",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/motivational_interviewing.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:pmr-autogenes-training",
+      "name": "pmr-autogenes-training",
+      "type": "skill",
+      "path": "skills/therapy/pmr-autogenic-training/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:81e8a50cb2a863416ceba8bc5d95d8ded6b07af49aaa8d8edc769b49c57bf943",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/pmr_autogenes_training.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:positive-psychologie",
+      "name": "positive-psychologie",
+      "type": "skill",
+      "path": "skills/therapy/positive-psychology/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:4901ce0c9f0aecb7f2cd9bb6c3272fdcb656a68a919c13f9da9dad055994cd7a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/positive_psychologie.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:problemloese-training",
+      "name": "problemloese-training",
+      "type": "skill",
+      "path": "skills/therapy/problem-solving-training/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:0a70beea1d4575766044efff4dfe5a7f7772dd989fa9ca120244b81ce23a9084",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/problemloese_training.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:psychoedukation",
+      "name": "psychoedukation",
+      "type": "skill",
+      "path": "skills/therapy/psychoeducation/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:3b003f8daac1edaa2db72965f8c5d3d1f10206304b6abf700cd3adea268c20b9",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/psychoedukation.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:schema-therapy",
+      "name": "schema-therapy",
+      "type": "skill",
+      "path": "skills/therapy/schema-therapy/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:02a278f06fe2fa82289a5936da55e77ab88b3b14213663cb72b576ddb5b5947a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/schematherapie.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:solution-focused-therapy",
+      "name": "solution-focused-therapy",
+      "type": "skill",
+      "path": "skills/therapy/solution-focused-therapy/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:127f8c9e6157695c149d2e968989aef539fb531fb6d3a7f8a8f28aa9203a8e46",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/loesungsfokussierte_therapie.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:stabilisierungstechniken",
+      "name": "stabilisierungstechniken",
+      "type": "skill",
+      "path": "skills/therapy/stabilization-techniques/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:fc781ede076bfd0859c08e6dda66498e51463791e7cf53b52146f8933ad4aa08",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/stabilisierungstechniken.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:systemische-fragetechniken",
+      "name": "systemische-fragetechniken",
+      "type": "skill",
+      "path": "skills/therapy/systemic-questioning/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:1f8ee05c9241ed5322d6ea01e6de47f9ccda09ac305351c32d6b4fb5f0b98f9b",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/systemische_fragetechniken.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:systemisch-loesungsfokussiert",
+      "name": "systemisch-loesungsfokussiert",
+      "type": "skill",
+      "path": "skills/therapy/systemisch-loesungsfokussiert/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:91d59e3f77b9411d30319d11bed8c1c57804194f60f0ea3304de690771c6bc1a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-05-19",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:therapy:trauma-psychoedukation",
+      "name": "trauma-psychoedukation",
+      "type": "skill",
+      "path": "skills/therapy/trauma-psychoeducation/SKILL.md",
+      "category": "therapy",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:9675ee050dc225fe3d76625cdbc079f17992a225ad3b702cb91c28deccbce2fb",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/therapie/trauma_psychoedukation.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:batch-file-ops",
+      "name": "batch-file-ops",
+      "type": "tool",
+      "path": "skills/utilities/batch-file-ops/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:686ce51b14520ba4167d0870a5f4dacb6375ba7914849cbd520eecc2e4750a64",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/tools/batch_file_ops.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:brainstorm",
+      "name": "brainstorm",
+      "type": "skill",
+      "path": "skills/utilities/brainstorm/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:106b95c1f20910d42fc9c2e67ea7fd358e9e6f443c63e50de10286e03453abfa",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/_services/brainstorm.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:decide",
+      "name": "decide",
+      "type": "skill",
+      "path": "skills/utilities/decide/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:20549f0de87900ecb571a399de46afd188503ae0f9f1fe511fe234fc90f45594",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/_services/decide.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:document-chunker",
+      "name": "document-chunker",
+      "type": "tool",
+      "path": "skills/utilities/document-chunker/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:fc178c45dc55ee4a84eb2914ab8c79e69ae0adf1e4e77e1c6c432e6cccb8e646",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/tools/document_chunker.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:encoding-fix",
+      "name": "encoding-fix",
+      "type": "tool",
+      "path": "skills/utilities/encoding-fix/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:2159f1a0ee0daddfd4bad84149d114f58735398ef00f6cb9a88e7fa17401ecae",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/tools/encoding_fix.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:ordner-flattening",
+      "name": "ordner-flattening",
+      "type": "tool",
+      "path": "skills/utilities/folder-flattening/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:224595c4fbfa906497445e5206c355c79debd66ec3872e26cdafb2425933ac1c",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/ordner-flattening.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:nulcleaner",
+      "name": "nulcleaner",
+      "type": "tool",
+      "path": "skills/utilities/nulcleaner/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:bdd0392c92e57c67dd57533ded8fc503c3c09165f1bf67d98cb69a65501b5726",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/tools/nulcleaner.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:structured-thinking",
+      "name": "structured-thinking",
+      "type": "skill",
+      "path": "skills/utilities/structured-thinking/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:f1b014e8fae3479e8d3d205416a5a4fc5a5a1723175a9bd2955dbf26392bd1b8",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:think",
+      "name": "think",
+      "type": "skill",
+      "path": "skills/utilities/think/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:503e620fcc4c857a212dfecf4862d992bc9843ab0032a486e74634139e3133bb",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/_services/think.md",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:utilities:video-transcriber",
+      "name": "video-transcriber",
+      "type": "tool",
+      "path": "skills/utilities/video-transcriber/SKILL.md",
+      "category": "utilities",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:63076fbd6afc34e015902dc8927b0e11be19a1826298998b75a388a8a3957dfb",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/tools/youtube_extractor.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-04-04",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 5
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:web:webseiten-lesen",
+      "name": "webseiten-lesen",
+      "type": "protocol",
+      "path": "skills/web/web-reading/SKILL.md",
+      "category": "web",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:56dd213f173d0efccf74919287579ec10e56f82709a82b8fd8d898e74f43951a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/webseiten-lesen.md",
+        "origin_version": "3.8.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/skill-v1.schema.json",
+  "title": ".SKILLS Skill v1",
+  "allOf": [
+    {
+      "$ref": "component-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["skill", "tool", "protocol", "expert", "service", "pointer"]
+        },
+        "skill": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "standalone": {
+              "type": ["boolean", "null"]
+            },
+            "has_scripts": {
+              "type": "boolean"
+            },
+            "has_references": {
+              "type": "boolean"
+            },
+            "has_assets": {
+              "type": "boolean"
+            },
+            "has_tests": {
+              "type": "boolean"
+            },
+            "language": {
+              "type": ["string", "null"]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

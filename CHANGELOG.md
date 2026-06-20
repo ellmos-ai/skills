@@ -11,6 +11,13 @@
   `skills/utilities/yt-transcriber/yt_transcriber.py` retained for old references.
   Root `README.md` entry updated; `SKILL.md` + `SKILL.en.md` debrand to `video-transcriber`.
 
+### Added (2026-06-20) — Versionierungs-Kern (Etappen 5, 6, 8)
+
+- `versionctl.py` 1.0.0 (Etappe 5): Neues CLI mit vier Befehlen: `status` (Drift skills/ vs. Registry), `validate` (Skills gegen skill-v1-Schema + CONVENTIONS prüfen), `inventory` (reproduzierbarer Inventory-Report ohne absolute Pfade), `registry-generate` (produktive Registry aus realem Skill-Bestand erzeugen). Stdlib-only, kein externer JSON-Schema-Validator, eigener Inline-Validator mit allOf/$ref-Unterstützung. 22 pytest-Tests in `testing/test_versionctl.py` (tmp_path-Fixtures, keine echten Dateisystem-Zugriffe).
+- `registry/components.json` + `registry/forks.json` + `registry/branches.json` + `registry/releases.json` + `registry/deployments.json` (Etappe 8): Produktive Registry, auto-generiert aus 52 öffentlichen Skills via `versionctl registry-generate`. Gitignorierte private Skills werden durch `git ls-files`-Filter automatisch ausgeschlossen. Schema-valide, reproduzierbar, privatsicher (kein absoluter Systempfad).
+- `templates/SKILL.md`, `templates/PROMPT.md`, `templates/WORKFLOW.md`, `templates/AGENT.md` (Etappe 6): Neue Komponenten-Templates mit vollständigem Frontmatter (Pflichtfelder + Provenance-Block gemäß CONVENTIONS.md und Konzept). Additiv — keine bestehenden Skills geändert.
+- `testing/test_versionctl.py`: 22 Tests für versionctl (Schema-Validation positiv+negativ, Registry-Generierung, Reproduzierbarkeit, Drift-Erkennung, Inventory-Privatsicherheit, Pfad-Leak-Check).
+
 ### Added (2026-06-20)
 
 - New skill `education/academic-study-control` 1.0.0 (institution-neutral semester and deadline management: source-checked planning, optional calendar and mail integration, privacy-first data handling; fully generic placeholders for institution, LMS, module prefix, and status files; DE).
