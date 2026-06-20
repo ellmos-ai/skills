@@ -1,0 +1,41 @@
+{
+  "_comment": "TEMPLATE (publizierbar). Kopieren nach registry.json und mit echtem host/Pfaden fuellen. registry.json ist gitignored.",
+  "host": "<HOST>",
+  "tools": {
+    "claude-code": { "installed": true, "role": "hub" },
+    "claude-desktop": { "installed": true, "role": "member" },
+    "codex-cli": { "installed": true, "role": "leaf" },
+    "antigravity-gemini": { "installed": true, "role": "leaf" },
+    "kimi-code": { "installed": false, "role": "leaf" },
+    "cursor": { "installed": false, "role": "leaf" },
+    "cline": { "installed": false, "role": "leaf" },
+    "windsurf": { "installed": false, "role": "leaf" },
+    "github-copilot": { "installed": false, "role": "leaf" }
+  },
+  "relations": [
+    {
+      "name": "claude-pair",
+      "members": ["claude-code", "claude-desktop"],
+      "mode": "pull",
+      "source": "claude-code",
+      "scope": "mcp",
+      "notes": "Legacy-Fall von mcp-config-sync: Desktop zieht Code-MCP-Stand."
+    },
+    {
+      "name": "cli-mcp-fanout",
+      "members": ["claude-code", "codex-cli", "antigravity-gemini"],
+      "mode": "push",
+      "source": "claude-code",
+      "scope": "mcp",
+      "notes": "Code verteilt kuratierten MCP-Satz; Codex braucht JSON->TOML-Konvertierung."
+    },
+    {
+      "name": "skills-hub",
+      "members": ["claude-code", "claude-desktop"],
+      "mode": "push",
+      "source": "claude-code",
+      "scope": "skills",
+      "notes": "~/.claude/skills/ ist Quelle; Desktop via Bridge-Skill, kein hartes Kopieren."
+    }
+  ]
+}

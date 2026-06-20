@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-06-20T13:56:59.401975+00:00",
+    "generated_at": "2026-06-20T14:15:59.283206+00:00",
     "schema_version": "skill-v1",
-    "component_count": 52
+    "component_count": 53
   },
   "components": [
     {
@@ -1137,6 +1137,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 6
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:infrastructure:agent-config-sync",
+      "name": "agent-config-sync",
+      "type": "protocol",
+      "path": "skills/infrastructure/agent-config-sync/SKILL.md",
+      "category": "infrastructure",
+      "version": "0.2.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:630b17cd2d76e78c6f99545300a96b84cffd55b6210e203f0e9645e9d3cd771c",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "skills/infrastructure/agent-config-sync/",
+        "origin_version": "0.2.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": true,
+        "language": "de",
+        "file_count": 14
       },
       "warnings": []
     },

@@ -23,6 +23,14 @@ skills/infrastructure/agents-bridge/
 skills/utilities/bewerbungsexperte/
 skills/utilities/selbstmanagement/
 
+# Private Mail-Writer-Profilstores (nicht für Veröffentlichung)
+skills/utilities/privat-mail-writer/kontaktprofile.local.json
+skills/utilities/privat-mail-writer/*.private.json
+
+# agent-config-sync: reale (lokale) Instanzen mit echten Pfaden/Hosts (Templates bleiben publizierbar)
+skills/infrastructure/agent-config-sync/registry.json
+skills/infrastructure/agent-config-sync/cache.json
+
 # Interne Arbeitsdateien (nicht fuer Veroeffentlichung)
 TODO.md
 DONE.md

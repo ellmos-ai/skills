@@ -1,0 +1,31 @@
+{
+  "_comment": "TEMPLATE (publizierbar). Der echte Lauf-Cache cache.json (mit realen Pfaden) ist gitignored.",
+  "host": "<HOST>",
+  "resolved_at": "YYYY-MM-DDTHH:MM:SS",
+  "providers": {
+    "claude-code": {
+      "mcp_path": "<HOME>/.claude/profiles/shared.json",
+      "mcp_exists": false,
+      "skills_path": "<HOME>/.claude/skills/",
+      "skills_exists": false,
+      "resolved_via": "config",
+      "last_verified": null
+    },
+    "claude-desktop": {
+      "mcp_path": "<APPDATA>/Claude/claude_desktop_config.json",
+      "mcp_exists": false,
+      "skills_path": null,
+      "skills_exists": false,
+      "resolved_via": "config",
+      "last_verified": null
+    },
+    "codex-cli": {
+      "mcp_path": "<HOME>/.codex/config.toml",
+      "mcp_exists": false,
+      "skills_path": "<HOME>/.codex/",
+      "skills_exists": false,
+      "resolved_via": "config",
+      "last_verified": null
+    }
+  }
+}
