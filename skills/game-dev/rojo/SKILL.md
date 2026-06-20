@@ -67,7 +67,7 @@ VS Code / Claude Code          rojo serve            Roblox Studio
 Connect die gemappten Studio-Bereiche mit dem Filesystem-Inhalt. Bearbeite Code daher **nie**
 in Studio (geht beim nächsten Sync verloren), sondern nur im Editor. Der `Workspace`
 (3D-Szene, Terrain) wird von Rojo **nicht** gemappt und bleibt erhalten — siehe Skill
-`/roblox-studio` für den Szene-vs-Code-Workflow.
+`/rbx-studio` für den Szene-vs-Code-Workflow.
 
 ## Dateiendungen → Roblox-Typ (Rojo-Konvention)
 
@@ -197,8 +197,8 @@ sie für geteilten Client-State nutzt. Selene aus dem Verzeichnis mit der Roblox
 
 ## Weiterführend
 
-- Schwesterskills: `/roblox-studio` (Studio-Bedienung, MCP, Assets), `/game-design`
-  (Rollen, Workflows, GDD), Metaskill `/roblox-dev` (vereint alle drei + Architektur-Pattern).
+- Schwesterskills: `/rbx-studio` (Studio-Bedienung, MCP, Assets), `/game-design`
+  (Rollen, Workflows, GDD), Metaskill `/rbx-dev` (vereint alle drei + Architektur-Pattern).
 - Aktuelle Engine-/Rojo-Doku: Context7 MCP (`resolve-library-id` →
   `/websites/create_roblox_reference_engine`, `/roblox/creator-docs`) oder
   <https://rojo.space/docs/>.

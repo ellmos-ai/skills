@@ -1,5 +1,5 @@
 ---
-name: roblox-studio
+name: rbx-studio
 version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
@@ -34,13 +34,17 @@ dependencies:
 
 provenance:
   origin: "custom"
-  origin_path: "~/.claude/skills/roblox-studio/"
+  origin_path: "~/.claude/skills/rbx-studio/"
   origin_version: "1.0.0"
   origin_repo: null
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+> **Hinweis:** Nicht mit der Roblox Corporation affiliiert; „Roblox" ist eine Marke ihrer Inhaber. „rbx" ist das gängige Community-Kürzel.
+
+
 
 # Roblox Studio — Editor, Test, Assets, MCP
 
@@ -198,7 +202,7 @@ in der Referenz-Pipeline).
 
 ## Wichtige Luau-/Studio-Fallstricke (Auszug)
 
-Die häufigsten, die in Studio beißen — die vollständige Liste hält der Skill `/roblox-dev`:
+Die häufigsten, die in Studio beißen — die vollständige Liste hält der Skill `/rbx-dev`:
 
 - `Model.Position` existiert nicht → `model:GetPivot().Position`.
 - `tick()` ist deprecated → `os.clock()` / `workspace:GetServerTimeNow()`.
@@ -211,7 +215,7 @@ Die häufigsten, die in Studio beißen — die vollständige Liste hält der Ski
 ## Weiterführend
 
 - Schwesterskills: `/rojo` (Sync, Projekt-Setup), `/game-design` (Rollen, Workflows, GDD),
-  Metaskill `/roblox-dev` (Architektur-Pattern + alle Luau-Lessons).
+  Metaskill `/rbx-dev` (Architektur-Pattern + alle Luau-Lessons).
 - Engine-/Creator-Doku: Context7 MCP (`/websites/create_roblox_reference_engine`,
   `/roblox/creator-docs`) oder <https://create.roblox.com/docs>.
 - Referenz-Pipeline (falls vorhanden): `<your Roblox project pipeline>`

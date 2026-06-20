@@ -50,7 +50,7 @@ Game development is teamwork made of clearly separated disciplines — even when
 or one AI agent takes on several of them. This skill provides the **organizational model**:
 which roles exist, which subtasks belong to them, in what order they interact
 and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync),
-`/roblox-studio` (editor/assets) and the meta-skill `/roblox-dev` (architecture).
+`/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
 
 Use this skill when planning a new game, when dividing up the work (also across
 several AI agents) and when writing/reviewing a Game Design Document.
@@ -149,7 +149,7 @@ Platform knowledge that grounds the concept work for Roblox (no guarantee, just 
 
 ## Further reading
 
-- Sister skills: `/rojo`, `/roblox-studio`; meta-skill `/roblox-dev` (architecture patterns,
+- Sister skills: `/rojo`, `/rbx-studio`; meta-skill `/rbx-dev` (architecture patterns,
   project structure, Luau lessons).
 - Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
   `IDEAS.md`, market analyses).

@@ -1,5 +1,5 @@
 ---
-name: roblox-dev
+name: rbx-dev
 version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
@@ -7,7 +7,7 @@ created: 2026-06-17
 updated: 2026-06-17
 description: >
   Meta-Skill für die komplette Roblox-Spieleentwicklung mit Rojo — der Einstiegspunkt, der die drei
-  Spezialskills `/rojo` (Filesystem→Studio-Sync, Projekt-Setup), `/roblox-studio` (Editor, MCP, Assets,
+  Spezialskills `/rojo` (Filesystem→Studio-Sync, Projekt-Setup), `/rbx-studio` (Editor, MCP, Assets,
   Malware-Scan) und `/game-design` (Rollen, Workflows, GDD) kennt und vereint. Nutze diesen Skill bei
   JEDEM Roblox-Game-Dev-Vorhaben: ein Roblox-Spiel planen/bauen/aufsetzen, ein neues Projekt scaffolden,
   Code-Architektur (Main + Manager-Module, _G.ClientState + HUD, Remotes in GameEnums) festlegen,
@@ -33,13 +33,17 @@ dependencies:
 
 provenance:
   origin: "custom"
-  origin_path: "~/.claude/skills/roblox-dev/"
+  origin_path: "~/.claude/skills/rbx-dev/"
   origin_version: "1.0.0"
   origin_repo: null
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+> **Hinweis:** Nicht mit der Roblox Corporation affiliiert; „Roblox" ist eine Marke ihrer Inhaber. „rbx" ist das gängige Community-Kürzel.
+
+
 
 # Roblox-Dev — Meta-Skill für Roblox-Spieleentwicklung
 
@@ -52,11 +56,11 @@ wichtigsten Luau-Fallstricke — und leitet für Spezialfragen an die drei Unter
 | Unterskill | Wofür |
 | --- | --- |
 | **`/rojo`** | Filesystem→Studio-Sync, `default.project.json`, rokit/Wally/Lune, Projekt-Skelett, Sync-Probleme |
-| **`/roblox-studio`** | Studio-Bedienung, Szene-vs-Code-Modus, Studio-MCP, Asset-Pipeline, **Malware-Scan** |
+| **`/rbx-studio`** | Studio-Bedienung, Szene-vs-Code-Modus, Studio-MCP, Asset-Pipeline, **Malware-Scan** |
 | **`/game-design`** | Rollen & Teilaufgaben, Entwicklungs-Chains, Game Design Document (KONZEPT.md), Multi-Agent |
 
 > Routing-Regel: Geht es um **Sync/Build/Setup** → `/rojo`. Um **Editor/Assets/Testen in Studio**
-> → `/roblox-studio`. Um **Konzept/Rollen/Prozess** → `/game-design`. Um **Code-Architektur,
+> → `/rbx-studio`. Um **Konzept/Rollen/Prozess** → `/game-design`. Um **Code-Architektur,
 > Luau-Stolperfallen oder den Gesamtablauf** → hier bleiben.
 
 ## Stack auf einen Blick
@@ -126,8 +130,8 @@ String-Mismatches zwischen Server und Client.
 2. **Setup** (`/rojo`): Skelett scaffolden, `default.project.json`-Mapping festlegen.
 3. **Backend**: Config → GameEnums → *Defs → Main.server → *Manager.
 4. **Frontend**: GameClient → HUD.
-5. **Greybox-Playtest** (`/roblox-studio`): Gameplay zuerst, Parts + ggf. KI-Materials.
-6. **Asset-Upgrade** (`/roblox-studio`): Creator-Store-Assets, **Malware-Scan**, Szene als .rbxl.
+5. **Greybox-Playtest** (`/rbx-studio`): Gameplay zuerst, Parts + ggf. KI-Materials.
+6. **Asset-Upgrade** (`/rbx-studio`): Creator-Store-Assets, **Malware-Scan**, Szene als .rbxl.
 7. **Test** (`/game-design`): QA + Spielkritiker + Persona-Blindtests, iterieren.
 8. **Release** (`/game-design` Business-Rolle): Store-Seite, Monetarisierung, Live-Ops.
 
@@ -154,7 +158,7 @@ Die häufigsten Stolperfallen — vollständige, kommentierte Liste:
 - [ ] Event-Namen matchen Server↔Client (über GameEnums)
 - [ ] alle RemoteEvents in `Main.server.luau` erstellt
 - [ ] keine zirkulären Requires
-- [ ] Marketplace-Assets gescannt (`/roblox-studio` → Malware-Scan), Reports abgelegt
+- [ ] Marketplace-Assets gescannt (`/rbx-studio` → Malware-Scan), Reports abgelegt
 
 ## Wissensquellen
 
@@ -168,5 +172,5 @@ Die häufigsten Stolperfallen — vollständige, kommentierte Liste:
 ## Changelog
 
 ### 1.0.0 (2026-06-17)
-- Initiale Version. Meta-Skill über `/rojo`, `/roblox-studio`, `/game-design`; Projektstruktur,
+- Initiale Version. Meta-Skill über `/rojo`, `/rbx-studio`, `/game-design`; Projektstruktur,
   Architektur-Pattern und Luau-Lessons destilliert aus der `.ROBLOX`-Pipeline, nutzerneutral.

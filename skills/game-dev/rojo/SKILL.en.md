@@ -67,7 +67,7 @@ VS Code / Claude Code          rojo serve            Roblox Studio
 the mapped Studio areas with the filesystem content. Therefore, **never** edit code
 in Studio (it is lost on the next sync), only in the editor. The `Workspace`
 (3D scene, terrain) is **not** mapped by Rojo and is preserved — see skill
-`/roblox-studio` for the scene-vs-code workflow.
+`/rbx-studio` for the scene-vs-code workflow.
 
 ## File Extensions → Roblox Type (Rojo Convention)
 
@@ -197,8 +197,8 @@ uses them for shared client state. Run Selene from the directory containing the 
 
 ## Further Reading
 
-- Sister skills: `/roblox-studio` (Studio operation, MCP, assets), `/game-design`
-  (roles, workflows, GDD), meta-skill `/roblox-dev` (combines all three + architecture patterns).
+- Sister skills: `/rbx-studio` (Studio operation, MCP, assets), `/game-design`
+  (roles, workflows, GDD), meta-skill `/rbx-dev` (combines all three + architecture patterns).
 - Current engine/Rojo docs: Context7 MCP (`resolve-library-id` →
   `/websites/create_roblox_reference_engine`, `/roblox/creator-docs`) or
   <https://rojo.space/docs/>.

@@ -50,7 +50,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | neue Ideen / Kreativität | Denkwerkzeuge | `/brainstorm` (vs `/think` Analyse, `/decide` Auswahl) |
 | Bug / Testfehler | Coding & Debugging | `/bugfix-protocol`, `/bugsweep` |
 | Recherche mit Quellen | Wissen/Recherche | `/deep-research`, `/find-docs` |
-| Roblox-Spiel | Game-Dev | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Roblox-Spiel | Game-Dev | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | Skills vergleichen/aufräumen | System/Meta | den Audit-Modus, den Explore-Modus |
 | {{weitere aus Register}} | {{Familie}} | {{Skill}} |
 
