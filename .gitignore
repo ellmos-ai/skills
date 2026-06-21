@@ -52,3 +52,19 @@ _reports/
 UMSETZUNGSPLAN.md
 *VERSIONIERUNG*.md
 WEITERE-VERSIONIERUNGS-RESSOURCEN.md
+
+# Internes Wartungs-Tooling (nicht veroeffentlichen) [Leak-Fix 2026-06-21]
+skill_sync.py
+versionctl.py
+catalog.py
+CLAUDE.md
+AGENTS.md
+docs/PORTING_CHECKLIST.md
+docs/BRANCH-SYNC.md
+testing/
+registry/branches.json
+registry/deployments.json
+registry/forks.json
+registry/releases.json
+# Stale Deprecation-Wrapper (ersetzt durch video-transcriber)
+skills/utilities/yt-transcriber/
