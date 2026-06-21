@@ -18,25 +18,21 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 |---|---|
 | Browse all public skills | [`skills/`](skills/) |
 | Understand the `SKILL.md` schema | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
-| List skills locally | `python catalog.py list` |
-| Filter by category | `python catalog.py list --category dev` |
-| Check provenance and sync state | `python catalog.py sync-status` |
-| Create a new skill skeleton | `python catalog.py create "my-skill" --category utilities --type skill` |
-| Check drift against the local skill installation | `python skill_sync.py status` |
-| Deploy skills into `~/.claude/skills/` | `python skill_sync.py deploy [skill ...] [--dry-run]` |
-| Understand branch protection (forks, routers) | [`docs/BRANCH-SYNC.md`](docs/BRANCH-SYNC.md) |
+| Machine-readable catalog index | [`registry/components.json`](registry/components.json) |
+| Browse by category | [`skills/`](skills/) (one subfolder per category) |
+| Use a skill | Copy `skills/<category>/<name>/` into your agent's skills directory (e.g. `~/.claude/skills/`) |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |
 | Give crawlers and LLM agents a compact map | [`llms.txt`](llms.txt) |
 
 ## Catalog Snapshot
 
-The current public catalog contains 65 tracked runtime skills:
+The current public catalog contains 66 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
 | `dev` | 11 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
 | `education` | 3 | Academic planning, source-based learning, and exam preparation workflows |
-| `game-dev` | 4 | Roblox, Rojo, Studio, asset safety, and game-design workflows |
+| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | `infrastructure` | 3 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
@@ -55,7 +51,8 @@ Some skills are especially useful as entry points because they coordinate other 
 | [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Publication and maintenance gate for GitHub repos: local rules, locks, `.gitignore`, privacy checks, README/i18n, releases, and repository metadata. |
 | [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Synchronizes MCP server configuration between Claude Code and Claude Desktop with a shared master file and Windows/macOS helper scripts. |
 | [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | Extracts video subtitles/transcripts plus metadata (supports YouTube sources) into Markdown, JSON, or plain text so video analysis starts from source-backed text. |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Covers Studio/Rojo scene-vs-code work, MCP control of Roblox Studio, asset-pipeline handoff, and mandatory malware checks for Creator Store assets. |
+| [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Covers Studio/Rojo scene-vs-code work, MCP control of Roblox Studio, asset-pipeline handoff, and mandatory malware checks for Creator Store assets. |
+| [`using-blender`](skills/game-dev/using-blender/SKILL.md) | Routes Blender work between GUI, headless `bpy`, export/reimport checks, and reviewed MCP options without forcing a specific local setup. |
 | [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Turns many open decisions into a numbered A/B/C/D briefing with recommendations, accepts batch replies, and records the chosen outcomes. |
 
 ## Education Skills
@@ -80,8 +77,7 @@ skills/
   _templates/               # Templates for new skills
 docs/
   CONVENTIONS.md            # Frontmatter specification
-catalog.py                  # CLI for listing, filtering, sync status, creation
-skill_sync.py               # Deploy/drift tool: repo (source of truth) -> ~/.claude/skills
+registry/components.json    # Machine-readable catalog index
 llms.txt                    # Compact project map for LLM crawlers
 ```
 

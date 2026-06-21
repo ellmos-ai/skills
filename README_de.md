@@ -18,24 +18,21 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 |---|---|
 | Alle öffentlichen Skills ansehen | [`skills/`](skills/) |
 | Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
-| Skills lokal auflisten | `python catalog.py list` |
-| Nach Kategorie filtern | `python catalog.py list --category dev` |
-| Herkunft und Sync-Status prüfen | `python catalog.py sync-status` |
-| Neues Skill-Gerüst erzeugen | `python catalog.py create "mein-skill" --category utilities --type skill` |
-| Drift zur lokalen Skill-Installation prüfen | `python skill_sync.py status` |
-| Skills in `~/.claude/skills/` deployen | `python skill_sync.py deploy [skill ...] [--dry-run]` |
+| Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
+| Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
+| Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
 | Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
 | Kompakte Projektkarte für LLMs lesen | [`llms.txt`](llms.txt) |
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 65 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 66 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | `dev` | 11 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | `education` | 3 | Akademische Studienplanung, quellenbasiertes Lernen und Prüfungsvorbereitung |
-| `game-dev` | 4 | Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
+| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
 | `infrastructure` | 3 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
@@ -54,7 +51,8 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Veröffentlichungs- und Pflege-Gate für GitHub-Repos: lokale Regeln, Sperren, `.gitignore`, Privacy-Checks, README/i18n, Releases und Repository-Metadaten. |
 | [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Synchronisiert MCP-Server-Konfigurationen zwischen Claude Code und Claude Desktop über eine gemeinsame Master-Datei und Windows-/macOS-Hilfsskripte. |
 | [`yt-transcriber`](skills/utilities/yt-transcriber/SKILL.md) | Holt YouTube-Untertitel/Transkripte plus Metadaten als Markdown, JSON oder Plaintext, damit Videoanalyse mit quellennahem Text beginnt. |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Deckt Studio/Rojo-Szene-vs.-Code-Arbeit, MCP-Steuerung von Roblox Studio, Asset-Pipeline-Übergaben und Pflicht-Malware-Checks für Creator-Store-Assets ab. |
+| [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Deckt Studio/Rojo-Szene-vs.-Code-Arbeit, MCP-Steuerung von Roblox Studio, Asset-Pipeline-Übergaben und Pflicht-Malware-Checks für Creator-Store-Assets ab. |
+| [`using-blender`](skills/game-dev/using-blender/SKILL.md) | Routet Blender-Arbeit zwischen GUI, Headless-`bpy`, Export-/Reimport-Prüfung und geprüften MCP-Optionen, ohne ein bestimmtes lokales Setup zu erzwingen. |
 | [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Macht aus vielen offenen Entscheidungen ein nummeriertes A/B/C/D-Briefing mit Empfehlung, nimmt Batch-Antworten an und protokolliert die Ergebnisse. |
 
 ## Education-Skills
@@ -79,8 +77,7 @@ skills/
   _templates/               # Vorlagen für neue Skills
 docs/
   CONVENTIONS.md            # Frontmatter-Spezifikation
-catalog.py                  # CLI für Liste, Filter, Sync-Status, Anlage
-skill_sync.py               # Deploy-/Drift-Tool: Repo (Quelle) -> ~/.claude/skills
+registry/components.json    # Maschinenlesbarer Katalog-Index
 llms.txt                    # Kompakte Projektkarte für LLM-Crawler
 ```
 
