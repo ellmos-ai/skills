@@ -18,6 +18,7 @@ skills/dev/pipeline-bootstrapper/
 skills/dev/project-bootstrapper/
 skills/dev/update-cli-docs/
 skills/dev/code-skill-index/
+skills/game-dev/build-assets-with-blender/
 skills/infrastructure/system-onboarding/
 skills/infrastructure/agents-bridge/
 skills/utilities/bewerbungsexperte/
@@ -45,3 +46,9 @@ Plan.txt
 .vscode/
 desktop.ini
 _archive/
+
+# Interne Planungs-/Versionierungs-/Report-Dokumente (NICHT veroeffentlichen) [Leak-Fix 2026-06-21]
+_reports/
+UMSETZUNGSPLAN.md
+*VERSIONIERUNG*.md
+WEITERE-VERSIONIERUNGS-RESSOURCEN.md
