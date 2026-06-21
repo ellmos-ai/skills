@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-06-20T20:44:36.953563+00:00",
+    "generated_at": "2026-06-21T01:23:02.526820+00:00",
     "schema_version": "skill-v1",
-    "component_count": 53
+    "component_count": 54
   },
   "components": [
     {
@@ -700,6 +700,69 @@
       "warnings": []
     },
     {
+      "id": "skill:dev:trampelpfadanalyse",
+      "name": "trampelpfadanalyse",
+      "type": "skill",
+      "path": "skills/dev/trampelpfadanalyse/SKILL.md",
+      "category": "dev",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:5a2e9edd7b617e1b5c3422f1c97059c101c9428ce820af62c3f09482197466ec",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/skills/workflows/system/trampelpfadanalyse.md",
+        "origin_version": "2.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-21",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:education:academic-study-control",
       "name": "academic-study-control",
       "type": "skill",
@@ -1199,7 +1262,7 @@
         "has_assets": false,
         "has_tests": true,
         "language": "de",
-        "file_count": 14
+        "file_count": 12
       },
       "warnings": []
     },
