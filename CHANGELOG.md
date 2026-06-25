@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- `utilities/video-transcriber`: YouTube-URL-Erkennung prüft jetzt exakte
+  Hostnamen oder vertrauenswürdige Subdomains statt freier Suffix-Treffer.
+
 ### Changed (2026-06-20)
 
 - Renamed `utilities/yt-transcriber` → `utilities/video-transcriber` (v1.1.0): YouTube branding

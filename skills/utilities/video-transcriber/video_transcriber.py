@@ -48,6 +48,13 @@ os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
 # --- Video-ID Extraktion (aus BACH youtube_extractor.py) ---
 
+def _host_matches(host: str | None, allowed_domains: set[str]) -> bool:
+    if not host:
+        return False
+    normalized = host.lower().rstrip(".")
+    return any(normalized == domain or normalized.endswith(f".{domain}") for domain in allowed_domains)
+
+
 def extract_video_id(url: str) -> str:
     """Extrahiert YouTube Video-ID aus URL oder direkter ID."""
     if not url:
@@ -62,11 +69,11 @@ def extract_video_id(url: str) -> str:
     except Exception:
         return ""
 
-    if parsed.netloc in ("youtu.be", "www.youtu.be"):
+    if _host_matches(parsed.hostname, {"youtu.be"}):
         vid = parsed.path.lstrip("/").split("/")[0].split("?")[0]
         return vid if re.fullmatch(r"[A-Za-z0-9_-]{11}", vid) else ""
 
-    if parsed.netloc.endswith("youtube.com") or parsed.netloc.endswith("youtube-nocookie.com"):
+    if _host_matches(parsed.hostname, {"youtube.com", "youtube-nocookie.com"}):
         if parsed.path == "/watch":
             v = parse_qs(parsed.query).get("v", [""])[0]
             return v if re.fullmatch(r"[A-Za-z0-9_-]{11}", v) else ""
