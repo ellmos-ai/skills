@@ -99,6 +99,24 @@ Tests, Asset-Insertion und Materialerzeugung.
 Editor + Rojo  ──(persistenter Code-Sync)──►  Studio (laufend)  ◄──(Inspektion/Test/Insert)──  MCP ◄── KI
 ```
 
+> **WICHTIG — zwei Wege, das MCP zu erreichen (häufige Fehlerquelle):**
+> 1. **Native Session-MCP-Tools** (`mcp__Roblox_Studio__*`): nur da, wenn der `Roblox_Studio`-
+>    MCP-Server im Profil DIESER Session geladen ist. Fehlt oft.
+> 2. **Eigenständiger MCP-Client-Script** (`<roblox-pipeline>/_llmauto/scripts/roblox_mcp_call.py`):
+>    spawnt `StudioMCP.exe` (via `%LOCALAPPDATA%\Roblox\mcp.bat`) SELBST und spricht JSON-RPC —
+>    **umgeht die Session-Registrierung komplett**, braucht weder geladenes Session-MCP noch
+>    ein bestimmtes Profil.
+>
+> **Wenn die nativen Tools (1) in der Session FEHLEN (nicht in der Tool-Liste auffindbar), NICHT
+> zu computer-use / Screen-Capture ausweichen** — sofort Weg (2) nehmen. Aufruf: JSON-Plan
+> schreiben, dann `python roblox_mcp_call.py --plan plan.json [--output out.json]`.
+> Tool-Schemas vorab via `tools/list` holen (z. B. `execute_luau` braucht `code` +
+> `datamodel_type`; gültige `datamodel_type`-Werte via `get_studio_state`).
+>
+> **Remote-Desktop-unabhängig:** `screen_capture` rendert IN Studio und schickt das Bild über die
+> Bridge (kein Desktop-Grab). Über RDP scheitern GDI/`mss`/WGC/`dxcam` an Zugriffsfehlern /
+> leerer DXGI-Enumeration — das MCP `screen_capture` funktioniert trotzdem.
+
 ### Verfügbare MCP-Tools (typisch)
 
 | Tool | Zweck |

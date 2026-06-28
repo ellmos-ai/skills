@@ -7,10 +7,10 @@ created: 2026-06-13
 updated: 2026-06-13
 description: >
   Immer einsetzen, sobald mehrere Entscheidungen anstehen oder aufgelaufen sind --
-  egal ob in einem Thema, Projekt, Dokument oder waehrend einer Session:
+  egal ob in einem Thema, Projekt, Dokument oder während einer Session:
   Inventarisieren, als nummeriertes Briefing mit Optionen A/B/C/D und markierter
   Empfehlung vorlegen, Buchstaben-Antworten (auch im Batch) entgegennehmen,
-  Ergebnisse protokollieren und in die Quelldokumente zurueckschreiben.
+  Ergebnisse protokollieren und in die Quelldokumente zurückschreiben.
 
 standalone: true
 anthropic_compatible: true
@@ -37,7 +37,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
   # Hinweis: Die Scanner-Komponente des BACH-Originals (scanner.py, sources.json,
-  # systemweite Marker-Scans) wurde fuer die Standalone-Version bewusst entfernt.
+  # systemweite Marker-Scans) wurde für die Standalone-Version bewusst entfernt.
   # Erfassung erfolgt leichtgewichtig aus dem vorliegenden Kontext.
 ---
 
@@ -99,7 +99,7 @@ Phase 2: BRIEFING AUFBEREITEN
 Phase 3: DECISION-SESSION
      |
      v
-Phase 4: PROTOKOLL & RUECKSCHREIBEN
+Phase 4: PROTOKOLL & RÜCKSCHREIBEN
 ```
 
 ### Phase 1: Erfassen & Inventarisieren
@@ -118,7 +118,7 @@ Pro Entscheidung:
 
 ```
 [E01] <Kurze Frage>
-  Kontext: <1-2 Saetze: Warum steht das an? Was haengt dran?>
+  Kontext: <1-2 Sätze: Warum steht das an? Was hängt dran?>
   A) <Option>
   B) <Option>
   C) <Option>
@@ -146,7 +146,7 @@ Regeln für gute Optionen:
 1. **Ergebnis-Tabelle** erstellen:
 
 ```
-| Nr.  | Entscheidung        | Gewaehlt | Status   |
+| Nr.  | Entscheidung        | Gewählt | Status   |
 |------|---------------------|----------|----------|
 | E01  | <Kurztitel>         | A        | getroffen|
 | E02  | <Kurztitel>         | C        | getroffen|
@@ -158,7 +158,7 @@ Regeln für gute Optionen:
 ```
 ENTSCHEIDUNG: <Frage>
   → GETROFFEN 2026-06-13: Option A (<Kurzfassung>)
-  → Naechste Aktion: <falls die Entscheidung eine Folgeaktion impliziert>
+  → Nächste Aktion: <falls die Entscheidung eine Folgeaktion impliziert>
 ```
 
 3. **Vertagtes explizit als offen führen** (im Quelldokument oder in der TODO-Liste), damit es beim nächsten Briefing wieder auftaucht
@@ -170,26 +170,26 @@ ENTSCHEIDUNG: <Frage>
 Thema: Relaunch einer Vereinswebsite — 3 offene Entscheidungen aus dem Projektplan.
 
 ```
-[E01] Welches System fuer die neue Website?
-  Kontext: Aktuelle Seite ist handgepflegtes HTML; 2 Personen sollen kuenftig Inhalte pflegen.
+[E01] Welches System für die neue Website?
+  Kontext: Aktuelle Seite ist handgepflegtes HTML; 2 Personen sollen künftig Inhalte pflegen.
   A) Static-Site-Generator (schnell, sicher, Pflege via Git)
-  B) Klassisches CMS mit Admin-Oberflaeche
+  B) Klassisches CMS mit Admin-Oberfläche
   C) Website-Baukasten (gehostet)
-  → Empfehlung: B — zwei nicht-technische Redakteure brauchen eine Oberflaeche, kein Git.
+  → Empfehlung: B — zwei nicht-technische Redakteure brauchen eine Oberfläche, kein Git.
 
 [E02] Wie wird gehostet?
   Kontext: Budget ~10 EUR/Monat, kein eigener Admin im Verein.
   A) Shared Hosting beim bestehenden Anbieter
   B) Eigener kleiner VPS
-  C) Managed Hosting passend zum gewaehlten System
-  → Empfehlung: C — am wenigsten Wartungsaufwand ohne Admin; Konsequenz: haengt von E01 ab.
+  C) Managed Hosting passend zum gewählten System
+  → Empfehlung: C — am wenigsten Wartungsaufwand ohne Admin; Konsequenz: hängt von E01 ab.
 
 [E03] Wann geht die neue Seite live?
-  Kontext: Inhalte sind zu 60% migriert; Vereinsjubilaeum in 3 Monaten.
+  Kontext: Inhalte sind zu 60% migriert; Vereinsjubiläum in 3 Monaten.
   A) Sofort als Soft-Launch (Rest nachziehen)
-  B) Nach vollstaendiger Inhaltsmigration
+  B) Nach vollständiger Inhaltsmigration
   C) Zum Jubilaeum als Stichtag
-  → Empfehlung: A — umkehrbar und liefert frueh Feedback; finale Inhalte folgen.
+  → Empfehlung: A — umkehrbar und liefert früh Feedback; finale Inhalte folgen.
 ```
 
 User antwortet im Batch: **"1B 2C 3A"** → Ergebnis-Tabelle, dann werden die drei Entscheidungen im Projektplan als GETROFFEN eingetragen.
