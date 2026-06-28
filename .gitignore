@@ -1,17 +1,79 @@
+# ============================================================
+# .SKILLS .gitignore  (Privacy-Gate wiederhergestellt 2026-06-28)
+# Quelle der Wahrheit fuer Publikation ist dieses Repo (ellmos-ai/skills, PUBLIC).
+# Privater/personalisierter Inhalt MUSS hier ignoriert bleiben, bis er als
+# nutzerneutral klassifiziert ist (siehe UMSETZUNGSPLAN.md, ownership.neutrality).
+# Operativer Publikations-Gate ist zusaetzlich sync_skills.sh (LIB_CAT + Branch-Schutz).
+# ============================================================
+
+# ---- Python / Build / OS ----
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .env
 .venv/
+venv/
 *.egg-info/
 dist/
 build/
 .DS_Store
 Thumbs.db
+desktop.ini
+.claude/
+.vscode/
 *.db
 *.sqlite3
 
-# Private Skills (nicht fuer Veroeffentlichung)
+# ---- Laufzeit-/Versionierungs-Cache ----
+.cache.json
+*.cache.json
+CACHEDIR.TAG
+v/
+
+# ---- Interne Arbeits-/Steuerdateien (nicht veroeffentlichen) ----
+TODO.md
+DONE.md
+AUFGABEN.txt
+Plan.txt
+_archive/
+_reports/
+CLAUDE.md
+AGENTS.md
+
+# ---- Internes Wartungs-/Versionierungs-Tooling (nicht veroeffentlichen) ----
+skill_sync.py
+versionctl.py
+catalog.py
+testing/
+tools/
+registry/
+docs/PORTING_CHECKLIST.md
+docs/BRANCH-SYNC.md
+
+# ---- Interne Planungs-/Versionierungs-/Konzept-Dokumente (nicht veroeffentlichen) ----
+UMSETZUNGSPLAN.md
+*VERSIONIERUNG*.md
+WEITERE-VERSIONIERUNGS-RESSOURCEN.md
+
+# ---- Host-spezifische Dateien (nicht veroeffentlichen) ----
+*-ASUS-GEI.md
+*-WORKSTATION-LG.md
+*-MACSTUDIO.md
+
+# ---- Persoenliche Praeferenzen / Nutzerdaten ----
+skills/assist/prefs.json
+skills/utilities/privat-mail-writer/kontaktprofile.local.json
+skills/utilities/privat-mail-writer/*.private.json
+skills/infrastructure/agent-config-sync/registry.json
+skills/infrastructure/agent-config-sync/cache.json
+
+# ============================================================
+# Private / personalisierte Skills (Privacy-Gate, bis nutzerneutral)
+# In Schritt B (Neutralitaets-Klassifikation) werden bestaetigt-neutrale
+# Skills hier gezielt WIEDER FREIGEGEBEN (z. B. using-blender).
+# ============================================================
+# -- bekannter Privatblock (Audit 2026-06-12/13) --
 skills/education/foerderplaner/
 skills/dev/swarm-operations/
 skills/dev/pipeline-bootstrapper/
@@ -23,48 +85,13 @@ skills/infrastructure/system-onboarding/
 skills/infrastructure/agents-bridge/
 skills/utilities/bewerbungsexperte/
 skills/utilities/selbstmanagement/
-
-# Private Mail-Writer-Profilstores (nicht für Veröffentlichung)
-skills/utilities/privat-mail-writer/kontaktprofile.local.json
-skills/utilities/privat-mail-writer/*.private.json
-
-# agent-config-sync: reale (lokale) Instanzen mit echten Pfaden/Hosts (Templates bleiben publizierbar)
-skills/infrastructure/agent-config-sync/registry.json
-skills/infrastructure/agent-config-sync/cache.json
-
-# Interne Arbeitsdateien (nicht fuer Veroeffentlichung)
-TODO.md
-DONE.md
-
-# Test-Ergebnisse
-testing/results/
-
-# Policy-Standard (GITHUB-POLICY.md)
-AUFGABEN.txt
-Plan.txt
-.claude/
-.vscode/
-desktop.ini
-_archive/
-
-# Interne Planungs-/Versionierungs-/Report-Dokumente (NICHT veroeffentlichen) [Leak-Fix 2026-06-21]
-_reports/
-UMSETZUNGSPLAN.md
-*VERSIONIERUNG*.md
-WEITERE-VERSIONIERUNGS-RESSOURCEN.md
-
-# Internes Wartungs-Tooling (nicht veroeffentlichen) [Leak-Fix 2026-06-21]
-skill_sync.py
-versionctl.py
-catalog.py
-CLAUDE.md
-AGENTS.md
-docs/PORTING_CHECKLIST.md
-docs/BRANCH-SYNC.md
-testing/
-registry/branches.json
-registry/deployments.json
-registry/forks.json
-registry/releases.json
-# Stale Deprecation-Wrapper (ersetzt durch video-transcriber)
+# -- neue, noch nicht klassifizierte untracked Skills/Kategorien (Safety-Net) --
+skills/assist/
+skills/production/
+skills/dev/bugfix-library-transfer/
+skills/dev/ticket-master/
+skills/utilities/mail-clean-grab/
+skills/utilities/privat-mail-writer/
 skills/utilities/yt-transcriber/
+skills/utilities/video-transcriber/_reports/
+skills/game-dev/using-blender/

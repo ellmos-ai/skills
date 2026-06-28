@@ -4,6 +4,10 @@
 
 - `utilities/video-transcriber`: YouTube-URL-Erkennung prüft jetzt exakte
   Hostnamen oder vertrauenswürdige Subdomains statt freier Suffix-Treffer.
+### Added (2026-06-20)
+
+- New public skill `game-dev/using-blender` 1.0.0 (user-agnostic Blender workflow routing across GUI, headless `bpy`, export/reimport validation, and reviewed MCP options; DE). Catalog counts updated to 66 public skills (game-dev 5) in `README.md`, `README_de.md`, and `llms.txt`.
+- New private skill `game-dev/build-assets-with-blender` 1.0.0 for the local Roblox/game-asset pipeline; it is intentionally listed in `.gitignore` and not part of the public catalog.
 
 ### Changed (2026-06-20)
 
