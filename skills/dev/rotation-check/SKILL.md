@@ -1,6 +1,6 @@
 ---
 name: rotation-check
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -78,6 +78,10 @@ erfassen kann. Registry-Zeilenformat:
 3. Ausweichen, wenn das Ziel kürzlich von einem **eng verwandten** Check angefasst wurde
    (z. B. Zitations-Check direkt nach Quellencheck bringt nichts) oder gerade gesperrt/in
    Bearbeitung ist (Locks respektieren).
+   **Geschwister-Cooldown:** Laufen mehrere verwandte Checks über dieselbe Zielmenge
+   (z. B. Entwicklung, Bugsuche und Review derselben Pipeline), eine Karenzzeit vereinbaren
+   (Erfahrungswert: ~24 h), in der ein von einem Geschwister-Check bearbeitetes Ziel nicht
+   erneut gewählt wird — verhindert Kollisionen und widersprüchliche Parallel-Änderungen.
 4. Vorziehen außer der Reihe nur mit gutem Grund (z. B. große Überarbeitung seit letztem
    Check) — den Grund im Log nennen.
 
@@ -148,6 +152,10 @@ ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
   Optimizer renoviert).
 
 ## Changelog
+
+### 1.1.0 (2026-07-03)
+- Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten
+  Checks über dieselbe Zielmenge; Befund aus der Vollklassifikation des Automations-Bestands).
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Abstrahiert aus dem Codex-Automations-Bestand (Rotations-Muster in
