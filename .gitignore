@@ -32,6 +32,7 @@ CACHEDIR.TAG
 v/
 
 # ---- Interne Arbeits-/Steuerdateien (nicht veroeffentlichen) ----
+LOCK*.txt
 TODO.md
 DONE.md
 AUFGABEN.txt
