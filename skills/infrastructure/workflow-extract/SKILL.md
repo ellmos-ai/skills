@@ -1,6 +1,6 @@
 ---
 name: workflow-extract
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -13,7 +13,10 @@ description: >
   „das soll regelmäßig/nächtlich laufen", „extrahiere Workflows aus diesen
   Chatverläufen/Automationen", „Automation aus dieser Session bauen", oder bei
   `/workflow-extract`. Ergänzt fehlende Automations-Bausteine (Rotations-Auswahl,
-  Check-Registry, Idempotenz, Log-Hygiene) systematisch. Soll stattdessen ein abrufbarer
+  Check-Registry, Idempotenz, Log-Hygiene, Freigabe-Gate, Eskalations-Handoff,
+  Monitor-Meldedisziplin) systematisch. Enthält auch den Fleet-Audit-Modus: bestehende
+  Automations-Flotten auf Silent-Failures, Redundanz, Drift und Lücken prüfen („prüfe
+  meine Automatisierungen/Scheduled Tasks/Cron-Jobs"). Soll stattdessen ein abrufbarer
   Skill (Fähigkeit auf Zuruf) entstehen, den Schwester-Skill skill-extractor nutzen.
 
 standalone: true
@@ -130,6 +133,23 @@ Logs, Kollisionen mit parallelen Agenten).
    Automatisierungen scheitern am häufigsten an Pfad-Drift (Ziel wurde verschoben) und an
    wachsenden Logdateien.
 
+## Fleet-Audit-Modus: eine laufende Automations-Flotte prüfen
+
+Für „prüfe meine Automatisierungen": nicht extrahieren, sondern den BESTAND betreiben
+helfen. Über die Automations-Quelle des Zielsystems (Prompt-/Config-Dateien, Schedules,
+Run-Logs/Memories) systematisch prüfen:
+
+1. **Silent-Failure/No-op-Erkennung:** Läuft die Automation, tut aber nichts mehr?
+   (Run-Memories/Logs der letzten Läufe lesen: nur noch Leerläufe, Fehler, tote Pfade?)
+2. **Redundanz + Ertrag:** Überschneiden sich Automationen im Scope? Steht der Ertrag
+   (Output, behobene Befunde) noch im Verhältnis zum Verbrauch (Tokens, Läufe)?
+3. **Drift:** Passen Prompt-Pfade, Konventionen und Schedules noch zur Realität?
+   (Ziele verschoben, Policies geändert, Takt zu hoch für die Änderungsrate.)
+4. **Katalog-Abgleich:** Fehlt eine Automation, die es geben sollte (Lücken im
+   Muster-Raster)? Vorschläge nur freigabe-gegated (Baustein 12), nie selbst scharf schalten.
+5. **Befund-Bericht:** pro Automation eine Zeile (behalten | anpassen | pausieren |
+   zusammenlegen | löschen) + Begründung; Änderungen selbst nur nach Freigabe.
+
 ## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
 
 Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
@@ -179,6 +199,12 @@ das soll ab jetzt wöchentlich über alle Paper laufen."
 - `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
 
 ## Changelog
+
+### 1.1.0 (2026-07-03)
+- Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
+  Drift, Lücken) — integriert statt als eigener Skill (Dedup-Entscheid).
+- Drei neue Bausteine in automation-bausteine.md: Freigabe-Gate über Sentinel-Dateien (12),
+  Gestaffelte Eskalation mit Handoff-Artefakt (13), Melde-Disziplin für Monitore (14).
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Entstanden aus der Abstraktion des Codex-Automations-Bestands

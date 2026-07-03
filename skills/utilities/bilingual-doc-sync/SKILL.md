@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -12,7 +12,9 @@ description: >
   kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill
   bei „sind DE und EN synchron?", „zieh die englische/deutsche Version nach",
   „Übersetzung ist veraltet", bei zweisprachigen Papers/READMEs/Skills, oder als
-  periodischen Check über einen Dokumentbestand.
+  periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit:
+  bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach
+  Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).
 
 standalone: true
 anthropic_compatible: true
@@ -94,6 +96,23 @@ Ergebnis festhalten (was war divergent, was wurde übernommen, was rücktransfer
 Als periodischer Lauf über einen Bestand: mit dem Rotations-Gerüst kombinieren
 (`rotation-check`) — ein Dokument(-Paar) pro Lauf, Registry als Gedächtnis.
 
+## Erweiterung: Expansions-Audit (sollten MEHR Sprachen existieren?)
+
+Neben dem Synchronhalten bestehender Fassungen gehört zur Sprachpflege die Frage, ob ein
+Dokument/Projekt WEITERE Sprachen verdient:
+
+1. **Eignung bewerten** statt blind übersetzen: Zielgruppe, internationale Nutzbarkeit,
+   Store-/Web-Präsenz, Mobilität des Inhalts. Nicht jedes interne Dokument braucht Englisch;
+   nicht jede App braucht fünf Sprachen.
+2. **Technische Vorbereitung prüfen:** Ist das Ziel überhaupt auf Sprachdateien/Parallel-
+   Fassungen vorbereitet (i18n-Struktur, Namenskonvention)? Wenn nein, ist DAS die erste
+   Aufgabe, nicht die Übersetzung.
+3. **Befund dokumentieren, nicht sofort massenübersetzen:** Konkrete Übersetzungsaufgaben
+   in die projektlokale TODO-Datei; „keine weitere Sprache sinnvoll" ist ein gültiges,
+   festzuhaltendes Ergebnis.
+4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
+   gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
+
 ## Beispiel
 
 ```text
@@ -124,6 +143,11 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.1.0 (2026-07-03)
+- Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für
+  nachgezogene Fassungen) — integriert statt als eigener i18n-coverage-audit-Skill
+  (Dedup-Entscheid).
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Abstrahiert aus der Codex-Automation

@@ -77,6 +77,35 @@ Sprach- und Encoding-Regeln des Zielsystems explizit in den Prompt (z. B. „deu
 End-User-Texte mit echten Umlauten: ä ö ü ß, nicht ae/oe/ue") — Automationen ohne diese
 Zeile driften bei jedem Lauf ein Stück.
 
+## 12. Freigabe-Gate über Sentinel-Dateien (Mensch-in-der-Schleife, asynchron)
+
+Wenn eine Automatisierung Aktionen mit Außenwirkung vorbereitet (Publizieren, Löschen,
+Konfigurationsänderung), Diagnose- und Umsetzungslauf trennen: Der Diagnoselauf legt einen
+Vorschlag als Datei mit Pending-Präfix in einen vereinbarten Freigabe-Ordner; der Mensch
+genehmigt durch Umbenennen/Entfernen des Präfixes (oder lehnt per Löschen ab); erst der
+nächste Lauf setzt Genehmigtes um und archiviert die Freigabedatei mit Zeitstempel.
+So bleibt die Automation vollautonom lauffähig UND der Mensch behält die Kontrolle über
+irreversible Schritte — ohne synchron anwesend sein zu müssen.
+
+## 13. Gestaffelte Eskalation mit Handoff-Artefakt
+
+Bei Arbeitsteilung zwischen einer Breitband-Automation (viel erledigen, günstig) und einer
+High-End-Instanz (schwere Fälle): Die Breitband-Stufe schreibt ein strukturiertes
+Handoff-Artefakt (Erledigt | READY: vorbereitet, wartet auf Umsetzung | BLOCKED: braucht
+Entscheidung | Zustands-Snapshot). Die High-End-Stufe liest NUR das Artefakt, entscheidet
+zuerst selbst und eskaliert ausschließlich echte Blocker an den Menschen. Strikte Datei-/
+Rollengrenzen (wer schreibt was) und eine Startbedingung (Artefakt vorhanden + frisch)
+verhindern Doppelarbeit. Verwandt, aber nicht identisch mit Schwarm-Mustern — es ist eine
+Qualitätspipeline zwischen zwei ZEITVERSETZT laufenden Automationen.
+
+## 14. Melde-Disziplin für Monitor-Automationen
+
+Für Automationen, die Langläufer/Ressourcen überwachen: eigene Memory/Registry ZUERST lesen
+(letzter gemeldeter Zustand), dann den Ist-Zustand erheben, und NUR bei Materialänderung
+melden (Ergebnis fertig, Prozess tot, materieller Fortschritt, Blocker-Wechsel) — sonst
+stiller Kurzstatus ins Log und Ende. Ohne diese Disziplin erzeugt ein Monitor mehr Rauschen
+als Information und wird ignoriert.
+
 ## Minimal-Gerüst (Vorlage)
 
 ```text

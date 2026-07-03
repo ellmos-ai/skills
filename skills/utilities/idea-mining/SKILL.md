@@ -1,6 +1,6 @@
 ---
 name: idea-mining
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -114,6 +114,18 @@ Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
 - Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
 - Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
 
+## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+
+Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
+Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
+kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+
+- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
+  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
+  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
+- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
+  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+
 ## Als periodischer Lauf
 
 Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
@@ -155,6 +167,11 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
 ## Changelog
+
+### 1.1.0 (2026-07-03)
+- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
+  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
+  cross-project-transfer-Skill (Dedup-Entscheid).
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
