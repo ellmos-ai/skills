@@ -13,7 +13,7 @@ auslesen, um Skills zu katalogisieren, zu synchronisieren oder zu validieren.
 ---
 name: skill-name                    # Eindeutiger Identifier (kebab-case)
 version: 1.0.0                      # Semantic Versioning (MAJOR.MINOR.PATCH)
-type: skill                         # skill | agent | expert | service | protocol | tool
+type: skill                         # skill | agent | expert | service | protocol | tool | assist
 author: Name                        # Ersteller (Person oder KI-Partner)
 created: 2026-03-12                 # Erstelldatum (ISO 8601)
 updated: 2026-03-12                 # Letzte Aenderung (ISO 8601)
@@ -57,6 +57,22 @@ Typische Indikatoren fuer BACH-gebundene Skills:
 
 Ein `standalone: true` Skill darf KEINE dieser Abhaengigkeiten haben,
 es sei denn sie sind als optional markiert (Fallback-Logik).
+
+---
+
+## Typ `assist` -- persoenliche Assistenz-Skills
+
+`type: assist` kennzeichnet persoenliche Assistenz-Skills (Kalender, Medizin-Daten,
+Tageszeitung, Transkription, Voice, ...), die typischerweise lokal-first arbeiten,
+optional mehrere Backends via Presence-Check und/oder `assist/prefs.json` waehlen
+und haeufig personenbezogene Daten beruehren. Eigenes Schema: `schemas/assist-v1.schema.json`
+(analog `agent-v1`/`workflow-v1`/`prompt-v1`, `type: "assist"` const).
+
+**Privacy-Sonderfall:** Die konkreten `assist`-Skills sind ueber `skills/assist/`
+in `.gitignore` als privat/untracked markiert und werden von `registry-generate`
+NICHT erfasst (Registry bleibt git-tracked-only, Privacy-Gate unveraendert).
+Zur lokalen Qualitaetspruefung kann `versionctl validate --include-untracked`
+auch diese Skills mitpruefen, ohne sie in die Registry aufzunehmen.
 
 ---
 

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/assist-v1.schema.json",
+  "title": ".SKILLS Assist v1",
+  "allOf": [
+    {
+      "$ref": "component-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "assist"
+        },
+        "assist": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "standalone": {
+              "type": ["boolean", "null"]
+            },
+            "local_only": {
+              "type": ["boolean", "null"]
+            },
+            "backends": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prefs_key": {
+              "type": ["string", "null"]
+            },
+            "presence_check": {
+              "type": ["boolean", "null"]
+            },
+            "language": {
+              "type": ["string", "null"]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
