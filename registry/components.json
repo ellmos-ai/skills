@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-06-21T01:23:02.526820+00:00",
+    "generated_at": "2026-07-04T12:56:56.790956+00:00",
     "schema_version": "skill-v1",
-    "component_count": 54
+    "component_count": 61
   },
   "components": [
     {
@@ -700,6 +700,69 @@
       "warnings": []
     },
     {
+      "id": "skill:dev:rotation-check",
+      "name": "rotation-check",
+      "type": "skill",
+      "path": "skills/dev/rotation-check/SKILL.md",
+      "category": "dev",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:2d783c2eed82f4e28f19a0fca6c411dc58449765fe8215d7fc75e6c66a4022e3",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:dev:trampelpfadanalyse",
       "name": "trampelpfadanalyse",
       "type": "skill",
@@ -1086,7 +1149,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:173cbc8bb482cedef1594a558bcc17ec3cab3a334625081053f714fc7d69eada",
+      "content_hash": "sha256:37655ecdf1ccd75563da36aa3cb26e5d73c93f4193e144732b922e6f6e25276a",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1452,6 +1515,132 @@
         "has_tests": false,
         "language": "de",
         "file_count": 21
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:skill-extractor",
+      "name": "skill-extractor",
+      "type": "skill",
+      "path": "skills/infrastructure/skill-extractor/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:d29cd9d4fe495ce08677be1ade06f0601b016c6602a7ef5d2456deb41ac79693",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:workflow-extract",
+      "name": "workflow-extract",
+      "type": "skill",
+      "path": "skills/infrastructure/workflow-extract/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ab55cc40c436e77963b24a87a986c20bc2eccb1ef79be57b15127aea06e4b8b9",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
       },
       "warnings": []
     },
@@ -2779,6 +2968,69 @@
       "warnings": []
     },
     {
+      "id": "skill:utilities:bilingual-doc-sync",
+      "name": "bilingual-doc-sync",
+      "type": "skill",
+      "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
+      "category": "utilities",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:6e798c3988d48a5da7ded855ba64c8f162c785a2bf0a71ccb0e7c44d7a182e97",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:utilities:brainstorm",
       "name": "brainstorm",
       "type": "skill",
@@ -2858,6 +3110,69 @@
         "origin_version": "1.0.0",
         "origin_commit": null,
         "last_sync_from_origin": "2026-03-15",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:decision-briefing",
+      "name": "decision-briefing",
+      "type": "skill",
+      "path": "skills/utilities/decision-briefing/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.1",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:d7271df913520ccb33ecb611fbd5903a6d54883a0066cf04a4d99fbf2abb86fc",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/agents/_experts/decision-briefing/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-13",
         "last_sync_to_origin": null,
         "local_changes_since_sync": true
       },
@@ -3090,6 +3405,132 @@
         "has_tests": false,
         "language": "de",
         "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:idea-mining",
+      "name": "idea-mining",
+      "type": "skill",
+      "path": "skills/utilities/idea-mining/SKILL.md",
+      "category": "utilities",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ca45fe0b32d6d65af2d55f6b05cea6d328b460d9b194889a5efc71477eb0cf3a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:llm-text-hygiene",
+      "name": "llm-text-hygiene",
+      "type": "skill",
+      "path": "skills/utilities/llm-text-hygiene/SKILL.md",
+      "category": "utilities",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:98883399a7e44543ff3fc5360158c7069a209e5de0aae5234ad9e258082cd418",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
       },
       "warnings": []
     },
@@ -3339,9 +3780,9 @@
         "has_scripts": true,
         "has_references": false,
         "has_assets": false,
-        "has_tests": false,
+        "has_tests": true,
         "language": "de",
-        "file_count": 5
+        "file_count": 6
       },
       "warnings": []
     },
