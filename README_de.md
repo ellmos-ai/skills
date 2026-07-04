@@ -26,17 +26,17 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 66 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 61 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
-| `dev` | 11 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
+| `dev` | 13 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | `education` | 3 | Akademische Studienplanung, quellenbasiertes Lernen und Prüfungsvorbereitung |
-| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| `infrastructure` | 3 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
+| `game-dev` | 4 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
+| `infrastructure` | 6 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 11 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, YouTube-Transkripte |
+| `utilities` | 14 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, YouTube-Transkripte |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills

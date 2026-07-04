@@ -26,17 +26,17 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 66 tracked runtime skills:
+The current public catalog contains 61 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
-| `dev` | 11 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
+| `dev` | 13 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
 | `education` | 3 | Academic planning, source-based learning, and exam preparation workflows |
-| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| `infrastructure` | 3 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
+| `game-dev` | 4 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
+| `infrastructure` | 6 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 11 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, YouTube transcripts |
+| `utilities` | 14 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, YouTube transcripts |
 | `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
