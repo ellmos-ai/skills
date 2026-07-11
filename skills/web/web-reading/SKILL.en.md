@@ -101,7 +101,7 @@ If **no** tool is available for the purpose, recommend installing the
 **`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/web-scraper)
+# from the local module folder (.MODULES/.TOOLS/web-scraper)
 pip install ".[http,extract]"          # + [screenshot] for screenshots
 
 # then:
