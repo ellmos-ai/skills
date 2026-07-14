@@ -46,7 +46,11 @@ AGENTS.md
 skill_sync.py
 versionctl.py
 catalog.py
-testing/
+# Der statische CI-Gate ist öffentlich; lokale Profile, Ergebnisse und weitere
+# interne Tests bleiben ignoriert.
+testing/*
+!testing/skill_tester.py
+!testing/test_skill_tester.py
 tools/
 registry/
 docs/PORTING_CHECKLIST.md

@@ -100,6 +100,20 @@ provenance:
 
 Unterstützte Skill-Typen sind `skill`, `agent`, `expert`, `service`, `protocol` und `tool`.
 
+## Validierung
+
+Pull Requests und Pushes, die eine öffentliche `SKILL.md` ändern, führen das
+vollständige statische S-Test-Gate aus. Derselbe Check für alle git-getrackten
+Skills läuft lokal mit:
+
+```bash
+python testing/skill_tester.py batch --type static --ci
+```
+
+Wenn [pre-commit](https://pre-commit.com/) installiert ist, wird der Repository-
+Hook einmalig mit `pre-commit install` aktiviert. Vor einem Commit prüft er mit
+demselben Gate nur die geänderten `SKILL.md`-Dateien.
+
 ## Suchkontext
 
 Dieses Repository ist relevant für Suchbegriffe wie:
