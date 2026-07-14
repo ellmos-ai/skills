@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: skill-static-s-tests
+        name: Validate changed skill frontmatter and static quality
+        entry: python testing/skill_tester.py batch --type static --ci
+        language: system
+        files: ^skills/.+/SKILL\.md$
+        types: [text]

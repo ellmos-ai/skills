@@ -1,0 +1,37 @@
+name: Skill frontmatter validation
+
+on:
+  pull_request:
+    paths:
+      - "skills/**/SKILL.md"
+      - "testing/skill_tester.py"
+      - "testing/test_skill_tester.py"
+      - ".github/workflows/skill-validation.yml"
+  push:
+    paths:
+      - "skills/**/SKILL.md"
+      - "testing/skill_tester.py"
+      - "testing/test_skill_tester.py"
+      - ".github/workflows/skill-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-s-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test the static gate
+        run: python -m unittest testing/test_skill_tester.py
+
+      - name: Validate tracked skills
+        run: python testing/skill_tester.py batch --type static --ci
