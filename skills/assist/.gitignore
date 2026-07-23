@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Laufzeit-Cache und Stores
+.cache.json
+*.cache.json
+store.db
+*.db
+*.db-shm
+*.db-wal
+
+# Skill-Outputs (generierte Nutzerdaten)
+tageszeitung/output/
+buero/berichte/
+
+# Versionierungs-Cache
+CACHEDIR.TAG
+v/
+
+# Virtuelle Umgebungen
+.venv/
+venv/
