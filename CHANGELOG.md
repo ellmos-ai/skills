@@ -17,6 +17,9 @@
     with lazy, data-sparing per-contact style profiles.
   - Catalog grows 64 -> 76 tracked runtime skills; registry, README catalog
     tables, `SKILLS-MAP.md`, and `llms.txt` updated accordingly.
+- `utilities/bewerbungsexperte` published after explicit owner decision
+  (end-to-end job-application support with a database/folder-driven ASCII CV
+  generator, standalone since v1.1) — catalog now 77.
 - README (EN/DE): six additions to Featured Skills (`research-agent`,
   `agent-config-sync`, `dev-soft-agent`, `llm-text-hygiene`, `idea-mining`,
   and the 19-skill `therapy/` collection) based on a quality re-rating of the

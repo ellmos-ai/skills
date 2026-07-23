@@ -27,7 +27,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 76 tracked runtime skills:
+The current public catalog contains 77 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -39,7 +39,7 @@ The current public catalog contains 76 tracked runtime skills:
 | `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 17 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, German-law and German-tax first-look pointer skills |
+| `utilities` | 18 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, German-law and German-tax first-look pointer skills |
 | `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills

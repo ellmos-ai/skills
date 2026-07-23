@@ -27,7 +27,7 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 76 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 77 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
@@ -39,7 +39,7 @@ Der aktuelle öffentliche Katalog enthält 76 getrackte Laufzeit-Skills:
 | `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 17 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| `utilities` | 18 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills

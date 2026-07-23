@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-23T13:17:56.175417+00:00",
+    "generated_at": "2026-07-23T13:39:43.630389+00:00",
     "schema_version": "skill-v1",
-    "component_count": 76
+    "component_count": 77
   },
   "components": [
     {
@@ -3720,6 +3720,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "expert:utilities:bewerbungsexperte",
+      "name": "bewerbungsexperte",
+      "type": "expert",
+      "path": "skills/utilities/bewerbungsexperte/SKILL.md",
+      "category": "utilities",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:65825a4d4132b495513be005b8d876087471aeed56b18426542f2b1eb1ec59cc",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/agents/_experts/bewerbungsexperte/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
       },
       "warnings": []
     },

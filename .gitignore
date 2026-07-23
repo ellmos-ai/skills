@@ -88,13 +88,11 @@ skills/dev/code-skill-index/
 skills/game-dev/build-assets-with-blender/
 skills/infrastructure/system-onboarding/
 skills/infrastructure/agents-bridge/
-skills/utilities/bewerbungsexperte/
 skills/utilities/selbstmanagement/
-# -- Publikations-Audit 2026-07-23: pr-ready-Skills freigegeben (dev, dossier-briefing,
-#    kalender, location-suche, medizin-daten, reiseroute, tageszeitung, transkription,
-#    voice, wetter, textproduction, using-blender, privat-mail-writer).
-#    bewerbungsexperte bleibt bis Commercial-Entscheid privat. Verbleibende private
-#    assist-Skills einzeln gelistet (statt Pauschal-Ignore skills/assist/):
+# -- Publikations-Audit 2026-07-23: pr-ready-Skills freigegeben (assist-Batch,
+#    textproduction, using-blender, privat-mail-writer; bewerbungsexperte nach
+#    Entscheid 6a ebenfalls public). voice zurückgestellt (S003). Verbleibende
+#    private assist-Skills einzeln gelistet (statt Pauschal-Ignore skills/assist/):
 skills/assist/AGENT-LOOP.md
 skills/assist/FLUIDE-SKILLS.md
 skills/assist/buero/
