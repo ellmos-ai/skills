@@ -1,4 +1,4 @@
-## Last-checked: 2026-06-20
+## Last-checked: 2026-07-23
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 66 runtime skills organized by category.
+- 64 runtime skills organized by category.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
 - A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, and provenance.
 - German and English documentation for humans plus this compact file for crawlers and LLM agents.

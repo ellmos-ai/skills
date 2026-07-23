@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-04T12:56:56.790956+00:00",
+    "generated_at": "2026-07-23T12:59:02.222955+00:00",
     "schema_version": "skill-v1",
-    "component_count": 61
+    "component_count": 64
   },
   "components": [
     {
@@ -988,6 +988,69 @@
       "compatibility": {
         "anthropic": true,
         "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:education:worksheet-generator",
+      "name": "worksheet-generator",
+      "type": "skill",
+      "path": "skills/education/worksheet-generator/SKILL.md",
+      "category": "education",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:da770fd93c948cc79ec7a67342d8ef85705291da4b9b75d10218c09a08cbbd61",
+      "git_commit": null,
+      "provenance": {
+        "origin": "external",
+        "origin_path": "SKILL.md, worksheet_generator/ (Python-Modul), _tools/icf_fetch.py",
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-23",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
         "promptboard": null,
         "profiprompt": null,
         "explorerpro": null
@@ -3472,6 +3535,69 @@
       "warnings": []
     },
     {
+      "id": "skill:utilities:law-checker",
+      "name": "law-checker",
+      "type": "skill",
+      "path": "skills/utilities/law-checker/SKILL.md",
+      "category": "utilities",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:66d111647a8c7892c69444b2594a1a0ea542282870a32240f5b40b1075b7d2f3",
+      "git_commit": null,
+      "provenance": {
+        "origin": "external",
+        "origin_path": "SKILL.md, config.json, agents/gesetzbuch.md, references/",
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-23",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:utilities:llm-text-hygiene",
       "name": "llm-text-hygiene",
       "type": "skill",
@@ -3594,6 +3720,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:steuer-assistent",
+      "name": "steuer-assistent",
+      "type": "skill",
+      "path": "skills/utilities/steuer-assistent/SKILL.md",
+      "category": "utilities",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:dcaa4e4c3975f99891f712dff4c25fcfdab95789548ac4ea1ae63570a39150c6",
+      "git_commit": null,
+      "provenance": {
+        "origin": "external",
+        "origin_path": "SKILL.md, steuer_assistent/ (CLI-Modul)",
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-23",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 2
       },
       "warnings": []
     },
@@ -3787,15 +3976,15 @@
       "warnings": []
     },
     {
-      "id": "protocol:web:webseiten-lesen",
-      "name": "webseiten-lesen",
+      "id": "protocol:web:web-reading",
+      "name": "web-reading",
       "type": "protocol",
       "path": "skills/web/web-reading/SKILL.md",
       "category": "web",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:56dd213f173d0efccf74919287579ec10e56f82709a82b8fd8d898e74f43951a",
+      "content_hash": "sha256:c0e298fd2d08e30d8bb0d434b599cbb69cf397b9aec7c8522d5e56c6f6668b6f",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3804,7 +3993,7 @@
         "origin_commit": null,
         "last_sync_from_origin": "2026-03-12",
         "last_sync_to_origin": null,
-        "local_changes_since_sync": false
+        "local_changes_since_sync": true
       },
       "ownership": {
         "source_kind": "own",

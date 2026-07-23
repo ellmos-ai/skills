@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### Fixed (2026-07-23)
+
+- `registry/components.json` regenerated (61 → 64 components): the three pointer
+  skills `law-checker`, `steuer-assistent`, and `worksheet-generator` were tracked
+  but missing from the catalog index. `llms.txt` skill count updated accordingly
+  (61 → 64). All 64 skills validate against their type-matched schemas.
+
+### Fixed (2026-07-13)
+
+- `llms.txt`: Skill-Gesamtzahl korrigiert (66 → 61 getrackte Runtime-Skills, entsprach
+  bereits `README.md`/`README_de.md`). Wird künftig über ein internes `readme-sync`-Tool
+  gegen den git-getrackten Bestand geprüft, um erneute Zähl-Drift zu vermeiden.
+
 - `utilities/video-transcriber`: YouTube-URL-Erkennung prüft jetzt exakte
   Hostnamen oder vertrauenswürdige Subdomains statt freier Suffix-Treffer.
 ### Added (2026-06-20)
