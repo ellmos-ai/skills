@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 64 runtime skills organized by category.
+- 76 runtime skills organized by category.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
 - A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, and provenance.
 - German and English documentation for humans plus this compact file for crawlers and LLM agents.
@@ -28,10 +28,12 @@ Author: Lukas Geiger
 
 ## Public skill categories
 
+- `assist`: personal-assistant skills (weather, routing, location search, calendar, news digest, transcription, medical self-tracking, dossier scaffolding).
 - `dev`: development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication.
 - `education`: academic study planning, source-based learning, and exam preparation workflows.
 - `game-dev`: Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
 - `infrastructure`: portable AI setup, operating-system support, MCP config sync between agent apps.
+- `production`: text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
 - `research`: research-agent workflow support.
 - `therapy`: German-language psychoeducation and counseling method playbooks.
 - `utilities`: batch operations, thinking frameworks, decision briefings, document chunking, encoding repair.

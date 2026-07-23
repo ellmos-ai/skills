@@ -1,11 +1,578 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-23T12:59:02.222955+00:00",
+    "generated_at": "2026-07-23T13:17:56.175417+00:00",
     "schema_version": "skill-v1",
-    "component_count": 64
+    "component_count": 76
   },
   "components": [
+    {
+      "id": "expert:assist:dev",
+      "name": "dev",
+      "type": "expert",
+      "path": "skills/assist/dev/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:6907a5fcd75f929252df5067fb79c1d2caeb061f6172159f172e8339b6d37b63",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/agents/ati/ + system/agents/entwickler/",
+        "origin_version": "n/a",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:dossier-briefing",
+      "name": "dossier-briefing",
+      "type": "assist",
+      "path": "skills/assist/dossier-briefing/SKILL.md",
+      "category": "assist",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:111f1daa7776efe5f553af3be6fc14bf3fa7dee6026725171340f00ce43eb58b",
+      "git_commit": null,
+      "provenance": {
+        "origin": "BACH persoenlicher-assistent",
+        "origin_path": "system/agents/persoenlicher-assistent/tools/dossier_generator.py",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": ">"
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": null,
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:kalender",
+      "name": "kalender",
+      "type": "assist",
+      "path": "skills/assist/kalender/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:f6b94bcc5edd528c593f767119783241077c4f47f94f88cd7fbc041bcc46b12d",
+      "git_commit": null,
+      "provenance": {
+        "origin": "eigenentwurf",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": null
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:location-suche",
+      "name": "location-suche",
+      "type": "assist",
+      "path": "skills/assist/location-suche/SKILL.md",
+      "category": "assist",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:5aee2527096b1fb1c27d3d6c898b1704b8cfd4ad2212e5aa03fac5d3a853b004",
+      "git_commit": null,
+      "provenance": {
+        "origin": "BACH persoenlicher-assistent",
+        "origin_path": "system/agents/persoenlicher-assistent/tools/location_search.py",
+        "origin_version": "1.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": ">"
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": null,
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:medizin-daten",
+      "name": "medizin-daten",
+      "type": "assist",
+      "path": "skills/assist/medizin-daten/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:35def6ee83c159b9ac43308367dec88fd1da66d9e2096b4b87d7de96c015fdf8",
+      "git_commit": null,
+      "provenance": {
+        "origin": "eigenentwurf",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": null
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:reiseroute",
+      "name": "reiseroute",
+      "type": "assist",
+      "path": "skills/assist/reiseroute/SKILL.md",
+      "category": "assist",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:1daee4ae53c881a002546fbdfdc34c2ef7691ae003ec2f783538fac1e33db6ee",
+      "git_commit": null,
+      "provenance": {
+        "origin": "BACH hub routing-service",
+        "origin_path": "system/hub/_services/routing/routing_service.py",
+        "origin_version": "1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": ">"
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": null,
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:tageszeitung",
+      "name": "tageszeitung",
+      "type": "assist",
+      "path": "skills/assist/tageszeitung/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:36433c118170dad5e574228b98d51b49952ed1935ffd0883158aa9664a7b690b",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach-port",
+        "origin_path": "BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py",
+        "origin_version": "news.py v1.x, newspaper_generator.py v1.x",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": null
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "assist:assist:transkription",
+      "name": "transkription",
+      "type": "assist",
+      "path": "skills/assist/transkription/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:fd801a95e4ceaaeb5a0b2779f79559e789513c06e964cd0cfcd4a8bca815f740",
+      "git_commit": null,
+      "provenance": {
+        "origin": "eigenentwurf",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": null
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "expert:assist:wetter",
+      "name": "wetter",
+      "type": "expert",
+      "path": "skills/assist/wetter/SKILL.md",
+      "category": "assist",
+      "version": "0.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:5e8fa0734cd93b0289c20f6d41593ae8f4f1c10a84a841b5e5e5d5e65c6fb174",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/hub/_services/weather/weather_service.py",
+        "origin_version": "1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
     {
       "id": "protocol:dev:bugfix-protokoll",
       "name": "bugfix-protokoll",
@@ -1330,6 +1897,69 @@
       "warnings": []
     },
     {
+      "id": "skill:game-dev:using-blender",
+      "name": "using-blender",
+      "type": "skill",
+      "path": "skills/game-dev/using-blender/SKILL.md",
+      "category": "game-dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:6157c9660e88c15a126a7c04cf7c3ad3b506d89a5cd5c1e57ecd93c0a33689e8",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "skills/game-dev/using-blender",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 3
+      },
+      "warnings": []
+    },
+    {
       "id": "protocol:infrastructure:agent-config-sync",
       "name": "agent-config-sync",
       "type": "protocol",
@@ -1704,6 +2334,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 2
+      },
+      "warnings": []
+    },
+    {
+      "id": "expert:production:textproduction",
+      "name": "textproduction",
+      "type": "expert",
+      "path": "skills/production/textproduction/SKILL.md",
+      "category": "production",
+      "version": "2.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:de95601471d930f1c995991762f64a1ac6522db4a0646109b17108dd0c35c97a",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "system/agents/_experts/textproduction/ + system/agents/_experts/press/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-06-22",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 8
       },
       "warnings": []
     },
@@ -3720,6 +4413,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 3
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:utilities:privat-mail-writer",
+      "name": "privat-mail-writer",
+      "type": "skill",
+      "path": "skills/utilities/privat-mail-writer/SKILL.md",
+      "category": "utilities",
+      "version": "0.2.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:79f110457d27b5a9699ab6f702e24dc552c63ea432591f00d31fb5c61d829340",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 7
       },
       "warnings": []
     },

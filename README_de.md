@@ -27,17 +27,19 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 64 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 76 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
+| `assist` | 9 | Persönliche-Assistenz-Skills: Wetter, Routen, Ortssuche, Kalender, Tageszeitung, Transkription, medizinische Selbsterfassung, Dossier-Gerüste, Entwickler-Assistent |
 | `dev` | 13 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | `education` | 4 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung und ein Verweis-Skill für Fördermaterial-Generierung |
-| `game-dev` | 4 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
+| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
 | `infrastructure` | 6 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
+| `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 16 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| `utilities` | 17 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
@@ -61,6 +63,12 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | [`law-checker`](skills/utilities/law-checker/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/law-checker`: quellenbasierte KI-Ersteinschätzungen für deutsches Recht mit Gesetzes-Registry und Gesetzbuch-Verkörperungs-Agent — KI-Ersteinschätzung, kein Anwaltsersatz. |
 | [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/steuer-assistent`: offline-first lokale Beleg-Arbeitsunterlage für Arbeitnehmer-Werbungskosten — keine Steuerberatung, keine Steuererklärung. |
 | [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/worksheet-generator`: erzeugt individualisierte Arbeitsblätter aus Förderziel, Niveau und Alter für pädagogische/therapeutische Fachkräfte, ICF-Referenz bring-your-own — Material-Generator, kein Therapieprogramm. |
+| [`research-agent`](skills/research/research-agent/SKILL.md) | In sich geschlossener Workflow für wissenschaftliche Literatur rund um PubMed und arXiv (reine Python-Stdlib) — macht aus wilder Paper-Suche einen wiederholbaren, quellengestützten Recherche-Durchlauf, voll portabel ohne das ellmos-Ökosystem. |
+| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Synchronisiert MCP-Server und Skills über mehrere Agent-Apps aus einer Registry mit Config-Templates und Cache — löst den realen Schmerzpunkt, mehrere Agenten-Laufzeiten konsistent konfiguriert zu halten. |
+| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Eigenständige Entwicklungs-Automatisierungs-Pipeline (Code-Analyse, Task-Engine, Policies, Prompt-Templates) in Zero-Dependency-Python — ein vollständiger Dev-Agent-Workflow ohne externe Dienste. |
+| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Entfernt KI-Spuren und Chat-Reste aus fertigen Texten und behandelt KI-Disclosure-Stufen — hält publizierte Dokumente frei von LLM-Artefakten. |
+| [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Eigenständige Mehrtechniken-Methodik, um Ideen aus festgefahrenen Problemen zu schürfen — die strukturierte Alternative zum freien Brainstorming, wenn ein Projekt feststeckt. |
+| [`therapy/`-Kollektion](skills/therapy/) | Die 19-teilige Therapie-Familie (Flaggschiffe: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.md)) — evidenzzitierte, zweisprachige, ethik-gegatete Psychoedukations- und Gesprächsführungs-Playbooks; der tiefste zusammenhängende Block der Bibliothek. |
 
 ## Education-Skills
 

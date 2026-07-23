@@ -2,7 +2,31 @@
 
 ## Unreleased
 
+### Added (2026-07-23)
+
+- 12 skills published after a full publication audit of the private skill pool
+  (privacy-checked, user-neutralized, both validation gates green):
+  - New category `assist` (9): `dev`, `dossier-briefing`, `kalender`,
+    `location-suche`, `medizin-daten`, `reiseroute`, `tageszeitung`,
+    `transkription`, `wetter` — key-free personal-assistant skills built on
+    free/open endpoints (wttr.in, OSM/Nominatim/OSRM) or local SQLite stores.
+  - New category `production` (1): `textproduction` — text-production router
+    with a local LaTeX press-release compiler.
+  - `game-dev/using-blender` — general Blender workflow for AI agents.
+  - `utilities/privat-mail-writer` — privacy-by-design private-mail drafting
+    with lazy, data-sparing per-contact style profiles.
+  - Catalog grows 64 -> 76 tracked runtime skills; registry, README catalog
+    tables, `SKILLS-MAP.md`, and `llms.txt` updated accordingly.
+- README (EN/DE): six additions to Featured Skills (`research-agent`,
+  `agent-config-sync`, `dev-soft-agent`, `llm-text-hygiene`, `idea-mining`,
+  and the 19-skill `therapy/` collection) based on a quality re-rating of the
+  whole public catalog.
+
 ### Fixed (2026-07-23)
+
+- `testing/skill_tester.py`: stdlib classification — `wave`, `__future__`,
+  `ast`, `queue`, `zipfile`, `tarfile`, `gzip`, `pickle`, `array` are no longer
+  miscounted as external pip dependencies in S003.
 
 - `registry/components.json` regenerated (61 → 64 components): the three pointer
   skills `law-checker`, `steuer-assistent`, and `worksheet-generator` were tracked

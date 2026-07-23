@@ -27,17 +27,19 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 64 tracked runtime skills:
+The current public catalog contains 76 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
+| `assist` | 9 | Personal-assistant skills: weather, routing, location search, calendar, news digest, transcription, medical self-tracking, dossier scaffolding, dev assistant |
 | `dev` | 13 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
 | `education` | 4 | Academic planning, source-based learning, exam preparation, and a support-worksheet generator pointer skill |
-| `game-dev` | 4 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
+| `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | `infrastructure` | 6 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
+| `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 16 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, German-law and German-tax first-look pointer skills |
+| `utilities` | 17 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, German-law and German-tax first-look pointer skills |
 | `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
@@ -61,6 +63,12 @@ Some skills are especially useful as entry points because they coordinate other 
 | [`law-checker`](skills/utilities/law-checker/SKILL.md) | Pointer skill to the standalone `ellmos-ai/law-checker` module: source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent -- AI orientation only, not a substitute for a lawyer. |
 | [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Pointer skill to the standalone `ellmos-ai/steuer-assistent` module: an offline-first local worksheet for German employee income-related expenses (Werbungskosten) -- not tax advice, no tax-return filing. |
 | [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Pointer skill to the standalone `ellmos-ai/worksheet-generator` module: generates individualized worksheets from a support goal, level, and age for educational/therapeutic professionals, with bring-your-own ICF references -- a material generator, not a therapy program. |
+| [`research-agent`](skills/research/research-agent/SKILL.md) | Self-contained scientific literature workflow around PubMed and arXiv (pure Python stdlib) -- turns ad hoc paper hunting into a repeatable, source-backed research pass, fully portable without the ellmos ecosystem. |
+| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Synchronizes MCP servers and skills across multiple agent apps from one registry with config templates and cache -- addresses the real painpoint of keeping several agent runtimes configured consistently. |
+| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Standalone development-automation pipeline (code analysis, task engine, policies, prompt templates) in zero-dependency Python -- a complete dev-agent workflow without external services. |
+| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Removes AI traces and chat residue from finished texts and handles AI-disclosure levels -- keeps published documents clean of LLM artifacts. |
+| [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Distinctive multi-technique method for mining ideas out of stuck problems -- the structured alternative to free-form brainstorming when a project has hit a wall. |
+| [`therapy/` collection](skills/therapy/) | The 19-skill therapy family (flagships: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.md)) -- evidence-cited, bilingual, ethics-gated psychoeducation and counseling method playbooks; the deepest coherent block of the library. |
 
 ## Education Skills
 
