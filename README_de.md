@@ -27,17 +27,17 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 62 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 64 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | `dev` | 13 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
-| `education` | 3 | Akademische Studienplanung, quellenbasiertes Lernen und Prüfungsvorbereitung |
+| `education` | 4 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung und ein Verweis-Skill für Fördermaterial-Generierung |
 | `game-dev` | 4 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
 | `infrastructure` | 6 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 15 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, ein Verweis-Skill für deutsche Rechts-Erstorientierung |
+| `utilities` | 16 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
@@ -58,6 +58,9 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Generisches Plugin-System für Python-Anwendungen: Auto-Discovery, Validierung und Fehlertoleranz ohne externe Abhängigkeiten (nur Python-Stdlib). |
 | [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Hält parallel geführte Sprachfassungen (Paper, README, `SKILL.md`/`SKILL.en.md`) synchron: erkennt fehlende Übersetzungen und Abschnitts-Drift, inklusive Expansions-Audit, ob ein Dokument weitere Sprachen verdient. |
 | [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Empirische Baseline-Intervention-Retest-Methode, um zu prüfen, ob eine Agenten-Konvention oder README-Regel überhaupt sichtbar ist und befolgt wird — misst mit isolierten Sandbox-Subagenten, ob eine Doku-Änderung das Verhalten ändert. |
+| [`law-checker`](skills/utilities/law-checker/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/law-checker`: quellenbasierte KI-Ersteinschätzungen für deutsches Recht mit Gesetzes-Registry und Gesetzbuch-Verkörperungs-Agent — KI-Ersteinschätzung, kein Anwaltsersatz. |
+| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/steuer-assistent`: offline-first lokale Beleg-Arbeitsunterlage für Arbeitnehmer-Werbungskosten — keine Steuerberatung, keine Steuererklärung. |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/worksheet-generator`: erzeugt individualisierte Arbeitsblätter aus Förderziel, Niveau und Alter für pädagogische/therapeutische Fachkräfte, ICF-Referenz bring-your-own — Material-Generator, kein Therapieprogramm. |
 
 ## Education-Skills
 

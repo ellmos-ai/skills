@@ -27,17 +27,17 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 62 tracked runtime skills:
+The current public catalog contains 64 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
 | `dev` | 13 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
-| `education` | 3 | Academic planning, source-based learning, and exam preparation workflows |
+| `education` | 4 | Academic planning, source-based learning, exam preparation, and a support-worksheet generator pointer skill |
 | `game-dev` | 4 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | `infrastructure` | 6 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 15 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, a German-law first-look pointer skill |
+| `utilities` | 16 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, German-law and German-tax first-look pointer skills |
 | `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
@@ -58,6 +58,9 @@ Some skills are especially useful as entry points because they coordinate other 
 | [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Generic auto-discovery plugin system for Python applications: zero dependencies (stdlib only), validation, and fault tolerance for turning your own scripts into a pluggable architecture. |
 | [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Keeps parallel-language documents (papers, READMEs, `SKILL.md`/`SKILL.en.md` pairs) in sync: detects missing translations and section drift, plus an expansion audit for whether a document deserves further languages. |
 | [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Empirical baseline-intervention-retest method for checking whether an agent convention or README rule is actually visible and followed, using isolated sandbox subagents to measure whether a doc change changed behavior. |
+| [`law-checker`](skills/utilities/law-checker/SKILL.md) | Pointer skill to the standalone `ellmos-ai/law-checker` module: source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent -- AI orientation only, not a substitute for a lawyer. |
+| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Pointer skill to the standalone `ellmos-ai/steuer-assistent` module: an offline-first local worksheet for German employee income-related expenses (Werbungskosten) -- not tax advice, no tax-return filing. |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Pointer skill to the standalone `ellmos-ai/worksheet-generator` module: generates individualized worksheets from a support goal, level, and age for educational/therapeutic professionals, with bring-your-own ICF references -- a material generator, not a therapy program. |
 
 ## Education Skills
 
