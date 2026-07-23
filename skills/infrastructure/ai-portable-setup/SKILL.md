@@ -40,6 +40,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="ai-portable-setup banner">
+
 # AI Portable Setup
 
 Erstellt eine portable KI-Arbeitsumgebung mit lokaler RAG-Pipeline.
