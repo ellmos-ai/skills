@@ -1,0 +1,14 @@
+{
+  "_comment": "Kopiere diese Datei nach config.json und trage eigene Daten ein.",
+  "author": "Vorname Nachname",
+  "organization": "Organisation / Unternehmen (optional)",
+  "contact_email": "kontakt@beispiel.de",
+  "contact_phone": "+49 ...",
+  "logo_path": "",
+  "_logo_note": "Optionaler absoluter Pfad zu einer Logo-Bilddatei (.png/.pdf). Leer lassen wenn kein Logo.",
+  "default_language": "ngerman",
+  "output_dir": "",
+  "_output_dir_note": "Ausgabeverzeichnis relativ zu cwd. Leer = press_output/ im aktuellen Verzeichnis. Beispiel: 'projects/meinprojekt/press/'",
+  "latex_compiler": "pdflatex",
+  "fallback_compiler": "xelatex"
+}

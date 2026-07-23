@@ -276,7 +276,8 @@ def s003_dependencies(skill_path):
         'platform', 'socket', 'contextlib', 'warnings', 'traceback',
         'inspect', 'importlib', 'pkgutil', 'pprint', 'difflib',
         'configparser', 'threading', 'multiprocessing', 'concurrent',
-        'asyncio', 'signal', 'getpass', 'secrets',
+        'asyncio', 'signal', 'getpass', 'secrets', 'wave', '__future__',
+        'ast', 'queue', 'zipfile', 'tarfile', 'gzip', 'pickle', 'array',
     }
 
     for py_file in py_files:
