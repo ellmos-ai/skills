@@ -90,16 +90,26 @@ skills/infrastructure/system-onboarding/
 skills/infrastructure/agents-bridge/
 skills/utilities/bewerbungsexperte/
 skills/utilities/selbstmanagement/
-# -- neue, noch nicht klassifizierte untracked Skills/Kategorien (Safety-Net) --
-skills/assist/
-skills/production/
+# -- Publikations-Audit 2026-07-23: pr-ready-Skills freigegeben (dev, dossier-briefing,
+#    kalender, location-suche, medizin-daten, reiseroute, tageszeitung, transkription,
+#    voice, wetter, textproduction, using-blender, privat-mail-writer).
+#    bewerbungsexperte bleibt bis Commercial-Entscheid privat. Verbleibende private
+#    assist-Skills einzeln gelistet (statt Pauschal-Ignore skills/assist/):
+skills/assist/buero/
+skills/assist/finanz-versicherung/
+skills/assist/formbuilder-reader/
+skills/assist/gesundheit/
+skills/assist/haushalt-manager/
+skills/assist/hauslagerist-reader/
+skills/assist/kontaktbuch/
+skills/assist/mediabrain-reader/
+skills/assist/notizblock/
+skills/assist/rpg/
 skills/dev/bugfix-library-transfer/
 skills/dev/ticket-master/
 skills/utilities/mail-clean-grab/
-skills/utilities/privat-mail-writer/
 skills/utilities/yt-transcriber/
 skills/utilities/video-transcriber/_reports/
-skills/game-dev/using-blender/
 
 # ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
 SKILLS-MAP-PRIVATE.md

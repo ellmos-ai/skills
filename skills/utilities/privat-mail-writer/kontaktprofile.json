@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.1.0",
+  "skill": "privat-mail-writer",
+  "store_kind": "neutral_empty_profile_store",
+  "created": "2026-06-19",
+  "updated": "2026-06-19",
+  "config": {
+    "config_file": "CONFIG.md",
+    "blacklist_file": "BLACKLIST.md",
+    "blacklist_enabled": true,
+    "profile_creation_mode": "lazy_on_concrete_mail_task"
+  },
+  "last_age_check": "2026-06-18",
+  "cleanup_policy": {
+    "interval": "monthly",
+    "delete_profiles_without_contact_after_days": 365,
+    "rule": "Wenn der Monat des aktuellen Datums vom Monat von last_age_check abweicht, Profile mit last_contact_at älter als 365 Tage löschen und last_age_check auf das aktuelle Datum setzen."
+  },
+  "privacy_policy": {
+    "store_raw_mail_bodies": false,
+    "store_long_quotes": false,
+    "store_only_paraphrased_evidence": true,
+    "max_messages_to_analyze_per_profile_update": 10,
+    "create_profiles_proactively": false,
+    "note": "Diese Datei enthält keine echten Profile. Produktive Profile erst bei konkretem Mail-Schreibauftrag, datensparsam und lokal führen."
+  },
+  "profile_schema": {
+    "contact_key": "string, stabiler lokaler Schlüssel, z. B. E-Mail oder Hash",
+    "display_name": "string|null",
+    "contact_identifiers": [
+      "string"
+    ],
+    "created_at": "YYYY-MM-DD",
+    "updated_at": "YYYY-MM-DD",
+    "last_contact_at": "YYYY-MM-DD|null",
+    "profile_status": "active|blocked|stale|unknown",
+    "blacklist": {
+      "checked": true,
+      "matched": false,
+      "matched_rules": [
+        "string"
+      ],
+      "override": {
+        "enabled": false,
+        "source": "user|null",
+        "reason": "string|null"
+      }
+    },
+    "categories": [
+      {
+        "label": "family|inner-circle|friends|colleagues|professional-network|official|services|medical|education|unknown",
+        "source": "user|mail-text|address-book|signature|domain|inference",
+        "evidence_level": "user-confirmed|strong|medium|weak",
+        "evidence": "kurze paraphrasierte Begründung",
+        "date": "YYYY-MM-DD|null"
+      }
+    ],
+    "sample_window": {
+      "max_messages": 10,
+      "message_count": 0,
+      "sent_count": 0,
+      "received_count": 0,
+      "date_range": {
+        "from": "YYYY-MM-DD|null",
+        "to": "YYYY-MM-DD|null"
+      }
+    },
+    "relationship_assessment": {
+      "label": "unbekannt|formal|halbformal|kollegial|freundschaftlich|familiär|angespannt",
+      "confidence": "low|medium|high",
+      "evidence": [
+        {
+          "signal": "string",
+          "basis": "paraphrasierter empirischer Beleg",
+          "date": "YYYY-MM-DD|null",
+          "direction": "sent|received|mixed"
+        }
+      ]
+    },
+    "writing_style": {
+      "language": "de|en|multi|unknown",
+      "address_form": "du|sie|mixed|unknown",
+      "formality": "formal|halbformal|informal|unknown",
+      "tone": "kurz, freundlich, sachlich, warm, direkt usw.",
+      "sentence_length": "short|medium|long|mixed",
+      "typical_greeting": "string|null",
+      "typical_closing": "string|null",
+      "signature_style": "string|null",
+      "dos": [
+        "string"
+      ],
+      "donts": [
+        "string"
+      ],
+      "evidence": [
+        {
+          "signal": "string",
+          "basis": "paraphrasierter empirischer Beleg",
+          "date": "YYYY-MM-DD|null",
+          "direction": "sent|received|mixed"
+        }
+      ]
+    },
+    "usecase_preferences": {
+      "usecase_id": {
+        "preferred_length": "short|medium|long",
+        "notes": "string"
+      }
+    }
+  },
+  "profiles": {}
+}

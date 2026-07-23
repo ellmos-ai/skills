@@ -1,0 +1,4 @@
+interface:
+  display_name: "Using Blender"
+  short_description: "Blender workflows and safe automation"
+  default_prompt: "Use $using-blender to inspect, automate, export, or verify a Blender asset workflow."
