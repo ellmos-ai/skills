@@ -100,3 +100,8 @@ skills/utilities/privat-mail-writer/
 skills/utilities/yt-transcriber/
 skills/utilities/video-transcriber/_reports/
 skills/game-dev/using-blender/
+# -- wartet auf Public-Stellung des Modul-Repos (Wrapper-Skill vorbereitet, T-20260723 skills-showcase) --
+skills/utilities/steuer-assistent/
+
+# ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
+SKILLS-MAP-PRIVATE.md

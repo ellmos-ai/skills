@@ -8,7 +8,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Skills Map](SKILLS-MAP.md) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
@@ -17,6 +17,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 | Need | File or command |
 |---|---|
 | Browse all public skills | [`skills/`](skills/) |
+| See a tree map of every tracked skill | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
 | Understand the `SKILL.md` schema | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Machine-readable catalog index | [`registry/components.json`](registry/components.json) |
 | Browse by category | [`skills/`](skills/) (one subfolder per category) |
@@ -26,7 +27,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 61 tracked runtime skills:
+The current public catalog contains 62 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -36,7 +37,7 @@ The current public catalog contains 61 tracked runtime skills:
 | `infrastructure` | 6 | Portable AI setup, skill landscape management, MCP config sync between agent apps |
 | `research` | 1 | Research-agent workflow support |
 | `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
-| `utilities` | 14 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, YouTube transcripts |
+| `utilities` | 15 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, a German-law first-look pointer skill |
 | `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
@@ -51,9 +52,12 @@ Some skills are especially useful as entry points because they coordinate other 
 | [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Publication and maintenance gate for GitHub repos: local rules, locks, `.gitignore`, privacy checks, README/i18n, releases, and repository metadata. |
 | [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Synchronizes MCP server configuration between Claude Code and Claude Desktop with a shared master file and Windows/macOS helper scripts. |
 | [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | Extracts video subtitles/transcripts plus metadata (supports YouTube sources) into Markdown, JSON, or plain text so video analysis starts from source-backed text. |
-| [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Covers Studio/Rojo scene-vs-code work, MCP control of Roblox Studio, asset-pipeline handoff, and mandatory malware checks for Creator Store assets. |
-| [`using-blender`](skills/game-dev/using-blender/SKILL.md) | Routes Blender work between GUI, headless `bpy`, export/reimport checks, and reviewed MCP options without forcing a specific local setup. |
+| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Roblox Studio operation: Explorer/Play-Test workflow, Rojo scene-vs-code hookup, AI control of Studio via MCP, and a mandatory malware scan for Creator Store assets. |
 | [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Turns many open decisions into a numbered A/B/C/D briefing with recommendations, accepts batch replies, and records the chosen outcomes. |
+| [`bugsweep`](skills/dev/bugsweep/SKILL.md) | Systematic bug-sweep protocol with a codebase-scaled target count, doubling escalation, area tracking, and completion verification -- turns ad hoc bug hunting into a repeatable, measurable pass. |
+| [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Generic auto-discovery plugin system for Python applications: zero dependencies (stdlib only), validation, and fault tolerance for turning your own scripts into a pluggable architecture. |
+| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Keeps parallel-language documents (papers, READMEs, `SKILL.md`/`SKILL.en.md` pairs) in sync: detects missing translations and section drift, plus an expansion audit for whether a document deserves further languages. |
+| [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Empirical baseline-intervention-retest method for checking whether an agent convention or README rule is actually visible and followed, using isolated sandbox subagents to measure whether a doc change changed behavior. |
 
 ## Education Skills
 

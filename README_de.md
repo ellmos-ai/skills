@@ -8,7 +8,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
@@ -17,6 +17,7 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 | Bedarf | Datei oder Befehl |
 |---|---|
 | Alle öffentlichen Skills ansehen | [`skills/`](skills/) |
+| Baumkarte aller getrackten Skills ansehen | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
 | Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
 | Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
@@ -26,7 +27,7 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 61 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 62 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
@@ -36,7 +37,7 @@ Der aktuelle öffentliche Katalog enthält 61 getrackte Laufzeit-Skills:
 | `infrastructure` | 6 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |
 | `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| `utilities` | 14 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, YouTube-Transkripte |
+| `utilities` | 15 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, ein Verweis-Skill für deutsche Rechts-Erstorientierung |
 | `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
@@ -50,10 +51,13 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | Sechs-Schritte-Renovierungsprotokoll für bestehende Projektordner, Dokumentationssysteme und Software-Stacks; verhindert Parallelstandards und gebrochene Workflows. |
 | [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Veröffentlichungs- und Pflege-Gate für GitHub-Repos: lokale Regeln, Sperren, `.gitignore`, Privacy-Checks, README/i18n, Releases und Repository-Metadaten. |
 | [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Synchronisiert MCP-Server-Konfigurationen zwischen Claude Code und Claude Desktop über eine gemeinsame Master-Datei und Windows-/macOS-Hilfsskripte. |
-| [`yt-transcriber`](skills/utilities/yt-transcriber/SKILL.md) | Holt YouTube-Untertitel/Transkripte plus Metadaten als Markdown, JSON oder Plaintext, damit Videoanalyse mit quellennahem Text beginnt. |
-| [`roblox-studio`](skills/game-dev/roblox-studio/SKILL.md) | Deckt Studio/Rojo-Szene-vs.-Code-Arbeit, MCP-Steuerung von Roblox Studio, Asset-Pipeline-Übergaben und Pflicht-Malware-Checks für Creator-Store-Assets ab. |
-| [`using-blender`](skills/game-dev/using-blender/SKILL.md) | Routet Blender-Arbeit zwischen GUI, Headless-`bpy`, Export-/Reimport-Prüfung und geprüften MCP-Optionen, ohne ein bestimmtes lokales Setup zu erzwingen. |
+| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | Holt Video-Untertitel/Transkripte plus Metadaten (auch YouTube-Quellen) als Markdown, JSON oder Plaintext, damit Videoanalyse mit quellennahem Text beginnt. |
+| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Deckt Roblox-Studio-Grundbedienung (Explorer, Play-Test), Rojo-Szene-vs.-Code-Anbindung, KI-Steuerung von Studio per MCP und Pflicht-Malware-Checks für Creator-Store-Assets ab. |
 | [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Macht aus vielen offenen Entscheidungen ein nummeriertes A/B/C/D-Briefing mit Empfehlung, nimmt Batch-Antworten an und protokolliert die Ergebnisse. |
+| [`bugsweep`](skills/dev/bugsweep/SKILL.md) | Systematisches Bug-Sweep-Protokoll mit codebase-skaliertem Zielwert, Verdoppelungs-Eskalation, Bereichs-Tracking und Abschluss-Verifikation — macht aus wildem Bugfixing einen wiederholbaren, messbaren Durchlauf. |
+| [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Generisches Plugin-System für Python-Anwendungen: Auto-Discovery, Validierung und Fehlertoleranz ohne externe Abhängigkeiten (nur Python-Stdlib). |
+| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Hält parallel geführte Sprachfassungen (Paper, README, `SKILL.md`/`SKILL.en.md`) synchron: erkennt fehlende Übersetzungen und Abschnitts-Drift, inklusive Expansions-Audit, ob ein Dokument weitere Sprachen verdient. |
+| [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Empirische Baseline-Intervention-Retest-Methode, um zu prüfen, ob eine Agenten-Konvention oder README-Regel überhaupt sichtbar ist und befolgt wird — misst mit isolierten Sandbox-Subagenten, ob eine Doku-Änderung das Verhalten ändert. |
 
 ## Education-Skills
 
