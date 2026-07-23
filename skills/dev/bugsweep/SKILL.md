@@ -35,6 +35,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="bugsweep banner">
+
 # /bugsweep — Systematischer Bug-Sweep Workflow
 
 Iterative Bug-Suche mit konvergierendem Abbruchkriterium. Skaliert mit der Codebasis, eskaliert bei Verdacht auf oberflächliche Suche, und verhindert Wiederholung durch Bereichs-Tracking.

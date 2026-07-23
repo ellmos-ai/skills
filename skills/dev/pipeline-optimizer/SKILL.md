@@ -34,6 +34,8 @@ provenance:
   local_changes_since_sync: true
 ---
 
+<img src="banner.png" width="100%" alt="pipeline-optimizer banner">
+
 # Pipeline-Optimizer / Projekt-Ordner-Optimizer
 
 **6-Schritte-Renovierung ohne Inkompatibilitäten** — anwendbar auf zwei Größenordnungen:

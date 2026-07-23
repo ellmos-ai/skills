@@ -40,6 +40,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="dev-soft-agent banner">
+
 # Dev Soft Agent
 
 Automatisierte Software-Entwicklungspipeline. Extrahiert aus BACHs ATI-Agent,

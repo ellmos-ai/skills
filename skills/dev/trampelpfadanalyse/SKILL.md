@@ -41,6 +41,8 @@ provenance:
   local_changes_since_sync: true
 ---
 
+<img src="banner.png" width="100%" alt="trampelpfadanalyse banner">
+
 # Trampelpfadanalyse — LLM-sichtbare Konventionen empirisch herstellen
 
 Eine Methode, um Fehler in Pipeline- und Steuerdatei-Abläufen aufzudecken, die nicht

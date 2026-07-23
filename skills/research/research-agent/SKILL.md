@@ -39,6 +39,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="research-agent banner">
+
 # Research Agent
 
 Modulare Forschungspipeline fuer wissenschaftliche Literaturrecherche.

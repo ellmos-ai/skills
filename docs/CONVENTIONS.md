@@ -251,3 +251,20 @@ python skill_export.py --skill <name> --format anthropic --language en
 
 `catalog.py list` zeigt die Sprache jedes Skills an.
 `catalog.py list --language en` filtert nach Sprache.
+
+## Banner (visuelle Identitaet)
+
+Jeder Skill erhaelt schrittweise ein eigenes Banner (Rollout seit 2026-07-23,
+beginnend mit den Featured-Skills aus dem README):
+
+- **Datei:** `banner.png` flat im Skill-Ordner (Ausnahme Kollektionen: ein Banner
+  pro Kategorie-Ordner, z. B. `skills/therapy/banner.png`).
+- **Format:** 1200x300 px, PNG, moeglichst < 400 KB.
+- **Design-Familie:** angelehnt an das Repo-Banner (`assets/banner_v2.svg`) --
+  heller Off-White-Grund, Paint-Splatter-Akzente, kraeftiger Farbverlauf im
+  Skill-Namen, dezentes thematisches Motiv pro Skill.
+- **Einbettung:** erste Zeile nach dem YAML-Frontmatter in `SKILL.md`:
+  `<img src="banner.png" width="100%" alt="<skill-name> banner">`
+  (in `SKILL.en.md` optional identisch).
+- Banner sind rein dekorativ: keine inhaltstragenden Informationen, damit
+  Runtimes, die nur Text lesen, nichts verlieren.

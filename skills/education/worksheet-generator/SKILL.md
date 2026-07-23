@@ -36,6 +36,8 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 # worksheet-generator -- Verweis-Skill
 
 Dieser Skill ist ein **schlanker Verweis (Wrapper)** auf das eigenstaendige,
