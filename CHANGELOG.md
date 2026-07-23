@@ -24,6 +24,11 @@
   `agent-config-sync`, `dev-soft-agent`, `llm-text-hygiene`, `idea-mining`,
   and the 19-skill `therapy/` collection) based on a quality re-rating of the
   whole public catalog.
+- Banner rollout started: every skill will gradually receive its own banner
+  (`banner.png`, 1200x300, embedded after the frontmatter in `SKILL.md`; design
+  family matches the repository banner). First wave: all 20 featured skills
+  plus a collection banner for `skills/therapy/`. New "Banner" section in
+  `docs/CONVENTIONS.md`.
 
 ### Fixed (2026-07-23)
 

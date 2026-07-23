@@ -33,6 +33,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="mcp-config-sync banner">
+
 # MCP Config Sync
 
 Synchronisiert die drei Bereiche, in denen Claude Code und Claude Desktop sich Inhalte teilen koennen — MCP-Server, Skills-Status, Plugin/Extension-Paritaet.

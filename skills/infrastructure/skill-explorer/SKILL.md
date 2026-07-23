@@ -41,6 +41,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="skill-explorer banner">
+
 # Skill-Explorer — Skill-Landschaft verwalten (Audit · Explore · Installer)
 
 ## Zweck

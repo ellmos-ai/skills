@@ -33,6 +33,8 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="law-checker banner">
+
 # law-checker (Rechtsabteilung) -- Verweis-Skill
 
 Dieser Skill ist ein **schlanker Verweis (Wrapper)** auf das eigenstaendige,

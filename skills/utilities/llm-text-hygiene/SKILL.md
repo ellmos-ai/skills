@@ -41,6 +41,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 # LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
 
 ## Zweck

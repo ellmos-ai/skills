@@ -36,6 +36,8 @@ provenance:
   local_changes_since_sync: true
 ---
 
+<img src="banner.png" width="100%" alt="model-strategy banner">
+
 # Model-Switching Strategie
 
 > Multi-Modell Orchestrierung: Score-basierte Modellauswahl, Cross-Agent-Delegation, Advisor-Pairing, Eskalations-Trigger und Kosten-Effizienz-Optimierung

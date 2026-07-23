@@ -41,6 +41,8 @@ provenance:
   # Erfassung erfolgt leichtgewichtig aus dem vorliegenden Kontext.
 ---
 
+<img src="banner.png" width="100%" alt="decision-briefing banner">
+
 # Decision-Briefing — Viele Entscheidungen eines Themas strukturiert abarbeiten
 
 > Aus einem Berg offener Entscheidungen wird ein nummeriertes Briefing mit Empfehlungen, das der User blitzschnell per Buchstaben beantworten kann — einzeln oder im Batch.

@@ -36,6 +36,8 @@ provenance:
   local_changes_since_sync: true
 ---
 
+<img src="banner.png" width="100%" alt="video-transcriber banner">
+
 # Video-Transkriber
 
 Holt Transkripte (Untertitel) und Metadaten (Titel, Kanal, Datum, Views,
