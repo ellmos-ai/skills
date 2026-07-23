@@ -36,6 +36,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
+<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1
 
 > Dein strategischer Partner fuer den naechsten Karriereschritt.
