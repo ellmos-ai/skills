@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.2.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -335,6 +335,20 @@ Die Historie umschreiben (und damit `--force-with-lease` pushen) ist nur bei **e
 
 Im Zweifel zwischen „unkritisch" und „heikel": als heikel behandeln und vorlegen. Die Kosten sind asymmetrisch.
 
+## Befunde werden Aufgaben, nicht nur Protokollzeilen
+
+Eine Pflegerunde findet regelmäßig mehr, als sie in derselben Runde beheben kann oder soll: eine fehlende Sprachfassung, ein Modernisierungsrückstand, eine Veröffentlichung, die nie stattgefunden hat. **Solche Befunde werden im Moment der Entdeckung zu Aufgaben** — sonst hängen sie im Protokoll eines abgeschlossenen Laufs, wo der nächste Bearbeiter des Projekts nicht hinsieht.
+
+Die Aufgabe gehört in das **ordnerlokale Aufgabensystem des Projekts** — dorthin, wo derjenige nachschaut, der als Nächstes an diesem Projekt arbeitet. Typischerweise ist das `AUFGABEN.txt` oder `TODO.md` im Projektordner, und der liegt oft **nicht im Git-Klon**, sondern in der Ablage, in der die Planung lebt. Der Klon enthält den Code, der Projektordner die Steuerung; ein Eintrag im Klon, der beim nächsten `git clean` verschwindet, ist keine Aufgabe.
+
+Drei Dinge dabei beachten:
+
+1. **Interne Aufgabenliste von öffentlicher Roadmap trennen.** Ein `TODO.md` kann eine gepflegte öffentliche Roadmap sein — dann ist es kein Ablageplatz für interne Nacharbeit. Sieh hinein, bevor du anhängst: Findet sich dort eine Überschrift wie „Public roadmap", schreib in die interne Datei daneben (`AUFGABEN.txt`) und markiere sie als intern.
+2. **Bestehende Einträge prüfen, statt zu duplizieren.** Oft steht der Befund schon da. Dann wird er nicht neu angelegt, sondern **angereichert** — mit dem empirischen Beleg aus diesem Lauf („bestätigt: `--help` gibt vollständig deutsche Ausgaben aus"). Ein bekannter Punkt mit frischem Beweis ist wertvoller als ein zweiter Eintrag daneben.
+3. **Erledigtes mitschreiben.** Was die Runde behoben hat, gehört als abgehakter Punkt mit Commit-Hash dazu. Das erklärt der nächsten Runde, warum ein Befund verschwunden ist, und verhindert, dass sie ihn erneut „entdeckt".
+
+Formuliere die Aufgabe so, dass sie ohne den Kontext dieses Laufs verständlich ist: was gefunden wurde, warum es zählt, was der nächste Schritt wäre. „i18n unvollständig" ist keine Aufgabe; „Katalog enthält nur `status.title`, dort sind es/zh/ja/ru leer — erst CLI-Strings in den Katalog überführen, dann alle sechs Sprachen befüllen" ist eine.
+
 ## Laufprotokoll
 
 Halte das Ergebnis in `_after-care/LOG.md` fest (der Ordner gehört in die `.gitignore` — er ist Pipeline-Material, kein Repo-Inhalt, genau nach der Regel aus Schritt 2b). Pro Lauf eine Zeile mit Datum, Stufe und den bewussten Entscheidungen:
@@ -375,6 +389,9 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 | Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
 | Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
 | Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
+| Befund nur ins Laufprotokoll geschrieben | Er wird zur Aufgabe im ordnerlokalen Aufgabensystem — ins Protokoll sieht später niemand |
+| Interne Nacharbeit an eine öffentliche Roadmap gehängt | Erst hineinsehen; „Public roadmap" heißt: interne Datei daneben nutzen |
+| Bekannten Befund als neuen Eintrag dupliziert | Bestehenden Punkt mit dem empirischen Beleg aus diesem Lauf anreichern |
 | Bei einer Bearbeitungssperre eine TODO-Zeile ins gesperrte Repo geschrieben | Diese Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
 | Push-Sperre als Komplettverbot gelesen und das Repo ganz übersprungen | Lock lesen: sperrt er nur die Veröffentlichung, läuft die lokale Runde auf einem eigenen Branch weiter |
 | Unter Push-Sperre zwar nicht gepusht, aber Topics oder Beschreibung geändert | Auch Metadaten sind remote sichtbar — unter einer Veröffentlichungssperre entfallen sie mit |
@@ -397,9 +414,16 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Issues und PRs in einen definierten Zustand gebracht.
 - [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
 - [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
+- [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
 ## Changelog
+
+### 1.3.0 (2026-07-24)
+- Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
+  der Entdeckung ein Eintrag im ordnerlokalen Aufgabensystem des Projekts — dort, wo der nächste
+  Bearbeiter hinsieht, nicht im Protokoll eines abgeschlossenen Laufs. Inklusive Trennung von
+  interner Liste und öffentlicher Roadmap, Anreichern statt Duplizieren, Erledigtes mit Commit.
 
 ### 1.2.0 (2026-07-24)
 - Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
