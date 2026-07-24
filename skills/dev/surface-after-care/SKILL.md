@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -116,6 +116,14 @@ git ls-files
 rg -n "C:\\\\Us[e]rs\\\\|/home/[a-z]|s[k]-[A-Za-z0-9]{16}|gh[p]_|gh[o]_|AKIA[0-9A-Z]{16}|API[_-]?KEY|TO[K]EN|PASS[W]ORD|SEC[R]ET|BEGIN [A-Z ]*PRIVATE KEY" $(git ls-files)
 rg -n "\x{C3}\x{83}|\x{C2}\x{A0}|\x{FFFD}" $(git ls-files -- '*.md' '*.txt' '*.json')
 ```
+
+Ergänze das Muster um die **Namen deiner eigenen internen Ablagen** — Pipeline-Ordner, Themenverzeichnisse, private Arbeitsbereiche:
+
+```bash
+rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<weitere eigene Ordnernamen>" $(git ls-files)
+```
+
+Solche Verweise sind keine Secrets und lösen keinen Alarm aus, deshalb rutschen sie durch — aber sie sind für Leser **unauflösbar** („zurückübertragen aus der .SOFTWARE-Pipeline" sagt Fremden nichts) und geben die eigene Struktur preis. Sie werden ersetzt oder entfernt, nicht bloß toleriert. Eine Suche, die nur nach `C:\Users\…` und Token-Mustern fahndet, findet sie garantiert nicht.
 
 Fündig geworden? Dann entscheidet die **Art** des Fundes über das Vorgehen — siehe Abschnitt „Force-Push-Regel". Ein Secret, das jemals committet wurde, ist verbrannt: Entfernen aus `HEAD` genügt nicht, es muss rotiert werden.
 
@@ -350,6 +358,7 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 | Fehler | Korrektur |
 |---|---|
 | Nur den Arbeitsbaum betrachtet, nicht `git ls-files` | Immer das getrackte Set prüfen — dort liegt das Problem |
+| Privacy-Gate nur auf Pfade und Token gerichtet | Auch nach eigenen Pipeline-/Ordnernamen suchen — sie lösen keinen Alarm aus und rutschen durch |
 | Interne Datei entfernt und dabei Historie umgeschrieben | Bei unkritischen Dateien reicht `git rm --cached` + normaler Push |
 | Secret aus `HEAD` entfernt und Vorgang als erledigt betrachtet | Secret rotieren; alles andere ist Kosmetik |
 | Dateien nach Namen klassifiziert | Kurz hineinsehen — Namen tragen die Absicht nicht zuverlässig |
@@ -391,6 +400,11 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
 ## Changelog
+
+### 1.2.0 (2026-07-24)
+- Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
+  Secrets, lösen daher keinen Alarm aus und überleben ein Gate, das nur auf Pfade und Token
+  zielt — bleiben für Leser aber unauflösbar und geben die eigene Struktur preis.
 
 ### 1.1.0 (2026-07-24)
 - Sperren werden gelesen statt pauschal als Verbot behandelt: eine reine Veröffentlichungs-/
