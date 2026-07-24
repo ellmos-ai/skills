@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.5.0
+version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -170,6 +170,14 @@ Hier entsteht der meiste Wert. Das README behauptet Dinge — prüfe sie nach, s
 - **Screenshots** gegen die aktuelle Oberfläche.
 - **Requirements** (Python-/Node-Version, Abhängigkeiten) gegen die Manifeste.
 - **Links** auf Nachbarprojekte, Doku und Registries: laufen sie noch?
+
+**Eine Korrektur gilt für alle Flächen, nicht nur für die, auf der sie auffiel.** Wenn sich eine inhaltliche Aussage als falsch erweist — besonders wenn der Auftraggeber sie richtigstellt —, dann steht dieselbe Aussage mit hoher Wahrscheinlichkeit noch anderswo: im Organisationsprofil, in der `llms.txt`, in der zweiten Sprachfassung, im README eines Nachbarprojekts. Suche gezielt danach, bevor du den Punkt abhakst:
+
+```bash
+gh search code "<prägnante Formulierung>" --owner ORG
+```
+
+Sonst korrigierst du eine Stelle und lässt drei stehen — und der Widerspruch fällt erst auf, wenn das nächste Repo an die Reihe kommt. Das kostet nicht nur Zeit, es beschädigt auch das Vertrauen in die Doku: Wer zwei Beschreibungen derselben Sache findet, glaubt keiner mehr.
 
 Anschließend die **Darstellung** verbessern, wo sie schwach ist: lange Aufzählungen von Optionen werden als Tabelle lesbarer; Codeblöcke brauchen Sprach-Tags; eine Struktur- oder Ablaufübersicht ist als Mermaid-Diagramm oder ASCII-Baum schneller erfasst als in Prosa; die erste Bildschirmhöhe sollte Zweck, Installation und ein Nutzungsbeispiel zeigen, nicht Badges und Vorgeschichte. Wenn das README über ~400 Zeilen geht, lagere Details nach `docs/` aus und verlinke.
 
@@ -397,6 +405,7 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 | Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
 | Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
 | CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
+| Falsche Aussage nur dort korrigiert, wo sie auffiel | Org-weit nach der Formulierung suchen — sie steht meist auch im Org-Profil, in `llms.txt` und in der zweiten Sprachfassung |
 | Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
 | Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
 | Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
@@ -429,6 +438,11 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
 ## Changelog
+
+### 1.6.0 (2026-07-24)
+- Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine
+  Nutzer-Klarstellung wurde in Durchlauf 1 im Hub korrigiert, stand aber unbemerkt noch fünfmal
+  im Organisationsprofil (EN, DE, `llms.txt`) und fiel erst neun Durchläufe später auf.
 
 ### 1.5.0 (2026-07-24)
 - Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
