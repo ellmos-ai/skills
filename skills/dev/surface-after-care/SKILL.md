@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.3.0
+version: 1.4.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -244,6 +244,8 @@ gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
+**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der häufigste Fall: ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine Dependency wie `ruff>=0.12` und fehlt eine `[tool.ruff.lint] select = [...]`-Auswahl, dann folgt der Lint dem Default der jeweils frisch installierten Version — und ein neues Linter-Release verschiebt diesen Default. Eine unveränderte Codebasis wird rot, oft nur auf manchen Plattformen (der Runner mit gecachter älterer Version bleibt grün). Diagnose: den fehlgeschlagenen Job-Log auf die Linter-Version und die Regel-Codes ansehen; wenn Regeln feuern, die das Projekt nie hatte, ist es dieser Fall. Fix: den Regelsatz festschreiben, der vorher grün war (`select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults), und die neuen Regeln als **Aufgabe** eintragen — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter Befund, kein Umweg: Ohne den Pin bricht die CI beim nächsten Linter-Release erneut.
+
 Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
 
 Bei einer Veröffentlichungssperre wird die Runde nicht abgebrochen, sondern **umgeleitet**: auf einem eigenen Branch (`judging-hold/…`, `freeze/…`) lokal committen, den Hauptbranch unangetastet auf dem eingereichten Stand lassen, den Sperrgrund im Laufprotokoll vermerken und nach Aufhebung nachziehen. Wichtig ist dabei, konsequent zu sein: Gesperrt ist nicht nur `git push`, sondern **jede remote sichtbare Änderung** — Topics, Beschreibung, Homepage, Releases, Issue- und PR-Aktionen verändern das veröffentlichte Projekt genauso.
@@ -386,6 +388,7 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 | Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
 | Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
 | Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
+| CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
 | Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
 | Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
 | Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
@@ -418,6 +421,12 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
 ## Changelog
+
+### 1.4.0 (2026-07-24)
+- Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
+  Ursache ein ungepinnter Linter ohne festgeschriebenen Regelsatz — ein neues Tool-Release
+  verschiebt den Default und macht unveränderten Code rot. Fix: Regelsatz pinnen, neue Regeln
+  als Aufgabe. Zweimal in Folge aufgetreten (n8n-workflow-manager mit ruff 0.15, clirec mit 0.16).
 
 ### 1.3.0 (2026-07-24)
 - Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
