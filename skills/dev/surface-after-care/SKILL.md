@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.4.0
+version: 1.5.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -244,7 +244,15 @@ gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
-**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der häufigste Fall: ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine Dependency wie `ruff>=0.12` und fehlt eine `[tool.ruff.lint] select = [...]`-Auswahl, dann folgt der Lint dem Default der jeweils frisch installierten Version — und ein neues Linter-Release verschiebt diesen Default. Eine unveränderte Codebasis wird rot, oft nur auf manchen Plattformen (der Runner mit gecachter älterer Version bleibt grün). Diagnose: den fehlgeschlagenen Job-Log auf die Linter-Version und die Regel-Codes ansehen; wenn Regeln feuern, die das Projekt nie hatte, ist es dieser Fall. Fix: den Regelsatz festschreiben, der vorher grün war (`select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults), und die neuen Regeln als **Aufgabe** eintragen — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter Befund, kein Umweg: Ohne den Pin bricht die CI beim nächsten Linter-Release erneut.
+**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der mit Abstand häufigste Fall — bei dieser Repo-Familie an einem einzigen Tag **dreimal** getroffen — ist ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Prüfe das **zuerst**, bevor du irgendetwas an deinem Commit vermutest.
+
+Der Mechanismus: Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine ungepinnte Dependency (`ruff>=0.12`, oder gar keine Version), und fehlt eine explizite Regel-Auswahl (`[tool.ruff.lint] select = [...]`, bei fehlendem `pyproject.toml` eine eigene `ruff.toml`), dann folgt der Lint dem Default der **jeweils frisch installierten** Version. Ein neues Linter-Release verschiebt diesen Default, und eine unveränderte Codebasis wird rot. Die Verräter:
+
+- Regel-Codes, die das Projekt nie hatte (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), teils in dreistelliger Zahl.
+- Der Bruch fällt oft **plattform-gespalten** aus: Runner mit gecachter älterer Version bleiben grün, frische werden rot.
+- Manchmal beanstandet eine Regel etwas Unbehebbares (`N999` den Paketnamen selbst) — sicheres Zeichen, dass sie nie Standard war.
+
+Fix: den Regelsatz festschreiben, der vorher grün war — `select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults. Existiert kein `pyproject.toml`, lege eine `ruff.toml` an. Verifiziere gegen die **neue** Linter-Version selbst (installieren, ohne Config die Funde reproduzieren, mit Config „passed"). Die neuen Regeln kommen als **Aufgabe** ins Projekt — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter, wiederkehrender Befund: Ohne den Pin bricht die CI beim nächsten Linter-Release wieder, und zwar in **jedem** so konfigurierten Repo.
 
 Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
 
@@ -421,6 +429,12 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
 ## Changelog
+
+### 1.5.0 (2026-07-24)
+- Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
+  (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): „zuerst prüfen", die konkreten
+  Verräter-Regelcodes, der Plattform-Split, `ruff.toml` als Fix bei fehlendem `pyproject.toml`,
+  Verifikation gegen die neue Linter-Version.
 
 ### 1.4.0 (2026-07-24)
 - Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
