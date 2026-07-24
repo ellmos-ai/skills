@@ -136,7 +136,7 @@ Der Ertrag entsteht nicht durch das Auflisten, sondern durch das Erkennen von Be
 
 Setze die Verweise **bidirektional**. Eine Einbahnstraße ist der häufigste Fehler dieses Schritts: Man ergänzt im gepflegten Repo eine Liste verwandter Projekte, und in den verwandten Projekten steht nichts. Wer dort landet, findet den Weg nie zurück.
 
-Der Rückverweis wird im Gegen-Repo also tatsächlich gesetzt, committet und gepusht — nach der **Dirty-Tree-Regel** aus Schritt 11 der Stufe 1: bei sauberem Arbeitsbaum in einem eigenen Commit erledigen; bei uncommitteten Fremdänderungen oder aktiver Sperre nicht anfassen, sondern als offenen Punkt ins Laufprotokoll schreiben. Der Pflegelauf, der sich später jenem Repo zuwendet, findet dort einen sauberen Baum vor und trägt es nach. So bleibt die Runde in sich abgeschlossen, ohne fremde Arbeitsstände zu gefährden.
+Der Rückverweis wird im Gegen-Repo also tatsächlich gesetzt — nach der **Dirty-Tree-Regel** aus Schritt 11 der Stufe 1, kurz zusammengefasst: sauberer Baum → eigener Commit und Push; dirty in anderen Dateien → pfadgenau committen, nicht pushen; dirty in der Zieldatei oder aktive Sperre → nicht anfassen. Wird der Verweis nicht gesetzt, gehört er in die Aufgabenliste des Ziel-Repos (`AUFGABEN.txt`/`TODO.md`), bei Sperre nur ins eigene Laufprotokoll. So bleibt die Runde in sich abgeschlossen, ohne fremde Arbeitsstände zu gefährden und ohne dass der Verweis verloren geht.
 
 Formuliere Verweise nutzenorientiert, nicht als Namensliste: „**projekt-b** — liest die von diesem Werkzeug erzeugten Exporte und macht daraus Berichte" ist brauchbar, „siehe auch: projekt-b" nicht.
 

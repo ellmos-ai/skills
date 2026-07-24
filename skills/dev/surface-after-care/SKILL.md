@@ -252,7 +252,31 @@ git -C <pfad> status --porcelain
 
 **Sauberer Arbeitsbaum** → Änderung vornehmen, in einem **eigenen, thematisch klaren Commit** (`docs: link <projekt>`) committen und pushen. Nicht mit den Commits des gepflegten Repos vermischen: Es ist ein anderes Repo mit eigener Historie und eigenen Lesern.
 
-**Dirty, also uncommittete Fremdänderungen vorhanden** → nicht anfassen. Man müsste entweder fremde, ungeprüfte Arbeit mit-committen oder sie wegstashen; beides ist riskant, und den fremden Stand erst zu verstehen kostet mehr, als dieser eine Verweis wert ist. Stattdessen: Vorhaben im Laufprotokoll als offenen Punkt notieren (welches Repo, welcher Verweis, warum übersprungen). Der nächste Pflegelauf, der sich **diesem** Repo zuwendet, findet dort einen sauberen Baum vor und erledigt es. Genauso wird verfahren, wenn im Ziel-Repo eine aktive Sperre liegt.
+**Dirty, aber die Fremdänderungen liegen in anderen Dateien** → die eigene Änderung ist trotzdem sauber machbar. Stage und committe **pfadgenau nur die eigene Datei**, damit fremde, ungeprüfte Arbeit nicht mitwandert:
+
+```bash
+git -C <pfad> add README.md
+git -C <pfad> commit -m "docs: link <projekt>"     # nur der gestagte Pfad
+```
+
+Aber **nicht pushen**. Der Commit ist lokal harmlos; ein Push wäre es nicht unbedingt: Du weißt nicht, worauf der andere Arbeitsstand hinausläuft — vielleicht wird er gerade amendiert, rebased oder anders geschnitten, und dein Commit zwingt ihn dazu, sich damit auseinanderzusetzen. Der lokale Commit sichert die Arbeit, ohne jemandem etwas aufzuzwingen; der Lauf, der sich später jenem Repo zuwendet, findet ihn vor und nimmt ihn mit.
+
+**Dirty in genau der Datei, die du ändern müsstest** → nicht anfassen. Hier müsstest du auf einem fremden Zwischenstand aufsetzen und ihn mit-committen; den erst zu verstehen kostet mehr, als dieser eine Verweis wert ist.
+
+**Aktive Sperre (`LOCK*.txt`) im Ziel-Repo** → nichts anfassen, auch keine Nebendatei. Eine Sperre ist eine Aussage über das ganze Projekt, nicht über einzelne Dateien.
+
+#### Der Wunsch darf nicht verloren gehen
+
+Wird die Änderung aus einem dieser Gründe **nicht** ausgeführt, wandert sie in die Aufgabenliste des Ziel-Repos — `AUFGABEN.txt`, `TODO.md` oder `TODO.txt`, je nachdem, was dort existiert. Ein Eintrag mit Datum, gewünschter Änderung und Grund:
+
+```markdown
+- [ ] [2026-07-24, after-care] Rückverweis auf <projekt> im README ergänzen
+      (übersprungen: README hatte uncommittete Fremdänderungen)
+```
+
+Das ist der Unterschied zwischen „verschoben" und „vergessen": Die Aufgabenliste liegt dort, wo der nächste Bearbeiter dieses Repos ohnehin hineinsieht — verlässlicher als ein Vermerk im Protokoll eines fremden Laufs. Existiert keine Aufgabenliste, lege keine an; dann genügt der offene Punkt im eigenen Laufprotokoll.
+
+Bei einer **aktiven Sperre gilt auch das nicht** — dann wird die Datei nicht angefasst und der Vermerk bleibt im eigenen Laufprotokoll. Notiere ihn in beiden Fällen auch dort, damit die Rotation den offenen Punkt kennt.
 
 Zum Schluss die Flächen aus Schritt 0 bedienen — siehe nächster Abschnitt.
 
@@ -332,8 +356,10 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 | Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
 | Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
 | Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
-| Fremdes Repo mit uncommitteten Änderungen trotzdem bearbeitet | Dirty-Tree-Regel: überspringen und als offenen Punkt notieren |
-| Änderung im Org-Profil-Repo gemacht, aber nicht gepusht | Fremd-Repos bekommen einen eigenen Commit und einen eigenen Push |
+| Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
+| Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
+| Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
+| Bei aktiver Sperre eine TODO-Zeile ins gesperrte Repo geschrieben | Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
 
 ## Abschluss-Checkliste
 
@@ -348,7 +374,8 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] README-Sprachmatrix vollständig; Entscheidungen zu weiteren Sprachen dokumentiert.
 - [ ] Sichtbarkeitsmaßnahmen umgesetzt bzw. zur Freigabe vorgelegt.
 - [ ] Eintrag im eigenen Org-Profil geprüft, sinnvolle Fremd-Orga-Verweise gesetzt.
-- [ ] Änderungen an Fremd-Repos committet und gepusht — oder wegen dirty/Sperre notiert.
+- [ ] Änderungen an Fremd-Repos: sauber → committet und gepusht; dirty → lokal committet;
+      nicht ausgeführt → in der Aufgabenliste des Ziel-Repos eingetragen.
 - [ ] Issues und PRs in einen definierten Zustand gebracht.
 - [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
 - [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
