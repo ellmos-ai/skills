@@ -8,6 +8,12 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
+> [!IMPORTANT]
+> **Du liest möglicherweise eine Kopie.** Die aktuelle Fassung dieser Bibliothek steht unter
+> **[github.com/ellmos-ai/skills](https://github.com/ellmos-ai/skills)**.
+> Forks und Spiegel werden **nicht** automatisch aktualisiert und können viele Commits
+> zurückliegen — prüfe dort, bevor du dich auf Inhalte hier verlässt.
+
 **Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
