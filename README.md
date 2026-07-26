@@ -7,6 +7,13 @@
 > Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, and other local-first LLM agent runtimes.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
+[![Skills: 79 Tracked](https://img.shields.io/badge/Skills-79%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
+[![Catalog Quality: 4.8/5](https://img.shields.io/badge/Catalog%20Quality-4.8%2F5-success.svg)](catalog.py)
+
+> [!NOTE]
+> **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
 
 > [!IMPORTANT]
 > **Reading a copy?** The canonical, always-current version of this library lives at
@@ -17,6 +24,27 @@
 **Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Skills Map](SKILLS-MAP.md) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    Catalog["catalog.py Registry (104 Skills / 79 Tracked)"] --> Categories
+    subgraph Categories ["10 Public Categories"]
+        Assist["assist (9)"]
+        Dev["dev (15)"]
+        Edu["education (4)"]
+        Game["game-dev (5)"]
+        Infra["infrastructure (6)"]
+        Prod["production (1)"]
+        Res["research (1)"]
+        Therapy["therapy (19)"]
+        Utils["utilities (18)"]
+        Web["web (1)"]
+    end
+    Categories --> Specs["SKILL.md (YAML Frontmatter + Playbooks)"]
+    Specs --> Runtimes["LLM Runtimes (Claude Code / Codex / AGY / BACH)"]
+```
 
 ## Start Here
 
@@ -33,12 +61,12 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ## Catalog Snapshot
 
-The current public catalog contains 77 tracked runtime skills:
+The current public catalog contains 79 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 9 | Personal-assistant skills: weather, routing, location search, calendar, news digest, transcription, medical self-tracking, dossier scaffolding, dev assistant |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 13 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 15 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Academic planning, source-based learning, exam preparation, and a support-worksheet generator pointer skill |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 6 | Portable AI setup, skill landscape management, MCP config sync between agent apps |

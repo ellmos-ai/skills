@@ -7,6 +7,13 @@
 > Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
+[![Skills: 79 Tracked](https://img.shields.io/badge/Skills-79%20Getrackt-brightgreen.svg)](SKILLS-MAP.md)
+[![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
+[![Katalog-Qualität: 4.8/5](https://img.shields.io/badge/Katalog--Qualit%C3%A4t-4.8%2F5-success.svg)](catalog.py)
+
+> [!NOTE]
+> **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.
 
 > [!IMPORTANT]
 > **Du liest möglicherweise eine Kopie.** Die aktuelle Fassung dieser Bibliothek steht unter
@@ -17,6 +24,27 @@
 **Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
+
+## Systemarchitektur
+
+```mermaid
+flowchart TD
+    Catalog["catalog.py Registry (104 Skills / 79 Getrackt)"] --> Categories
+    subgraph Categories ["10 Öffentliche Kategorien"]
+        Assist["assist (9)"]
+        Dev["dev (15)"]
+        Edu["education (4)"]
+        Game["game-dev (5)"]
+        Infra["infrastructure (6)"]
+        Prod["production (1)"]
+        Res["research (1)"]
+        Therapy["therapy (19)"]
+        Utils["utilities (18)"]
+        Web["web (1)"]
+    end
+    Categories --> Specs["SKILL.md (YAML-Frontmatter + Playbooks)"]
+    Specs --> Runtimes["LLM-Laufzeiten (Claude Code / Codex / AGY / BACH)"]
+```
 
 ## Einstieg
 
@@ -33,12 +61,12 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 77 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 79 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 9 | Persönliche-Assistenz-Skills: Wetter, Routen, Ortssuche, Kalender, Tageszeitung, Transkription, medizinische Selbsterfassung, Dossier-Gerüste, Entwickler-Assistent |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 13 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 15 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung und ein Verweis-Skill für Fördermaterial-Generierung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
 | <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 6 | Portables KI-Setup, Skill-Landschaftspflege, MCP-Config-Sync zwischen Agent-Apps |

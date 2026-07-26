@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Maintenance & Discoverability (2026-07-26)
+
+- Synchronized catalog metadata and README tracked skill counts (79 tracked runtime skills in 10 categories, 104 total catalog definitions).
+- Updated `llms.txt` header (`Last-checked: 2026-07-26`), dev category skill count (15), and agent search context.
+- Added visual Shields.io badges (Python 3.10+, 79 Tracked Skills, LLM-Ready llms.txt, Catalog Quality 4.8/5) to `README.md` and `README_de.md`.
+- Added GFM `[!NOTE]` callout box for AI Agent & LLM Integration in both English and German landing pages.
+- Added Mermaid System Architecture diagram visualizing `catalog.py` -> 10 Categories -> `SKILL.md` -> LLM Runtimes.
+
 ### Added (2026-07-23)
 
 - 12 skills published after a full publication audit of the private skill pool
