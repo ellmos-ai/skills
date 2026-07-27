@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-07-27
+
+- `agent-config-sync` 0.3.0: provider/app-class discovery, topology offers and
+  user-selected single or multi-file truth.
+- `mcp-config-sync` 2.0.0: provider-neutral MCP entry point; the former Claude
+  pair is now an explicit legacy profile.
+
 ## Unreleased
 
 ### Maintenance & Discoverability (2026-07-27)

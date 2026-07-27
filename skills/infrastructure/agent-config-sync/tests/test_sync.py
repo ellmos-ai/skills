@@ -83,7 +83,8 @@ def skill_dir(tmp_path: Path, fixture_root: Path) -> Path:
                 "display_name": "Claude Desktop",
                 "kind": "app",
                 "mcp": {"path": "<APPDATA>/Claude/claude_desktop_config.json",
-                        "format": "json", "key": "mcpServers", "merge": "block-replace"},
+                        "format": "json", "key": "mcpServers", "merge": "block-replace",
+                        "write_adapter": "ellmos-controlcenter-mcp"},
                 "skills": {"path": None, "kind": "redirect"},
             },
             "codex-cli": {
@@ -146,6 +147,28 @@ def test_resolve_placeholders_blocks_without_root(monkeypatch) -> None:
 
 def test_resolve_placeholders_passthrough_none() -> None:
     assert sync._resolve_placeholders(None) is None
+
+
+def test_relation_members_supports_provider_and_class_axes() -> None:
+    providers = {
+        "a-cli": {"provider": "a", "kind": "cli"},
+        "a-app": {"provider": "a", "kind": "app"},
+        "b-cli": {"provider": "b", "kind": "cli"},
+    }
+    relation = {
+        "selection": {"providers": ["a"], "app_classes": ["cli", "app"]}
+    }
+    assert sync._relation_members(relation, providers) == ["a-cli", "a-app"]
+
+
+def test_topology_offers_cover_provider_class_and_all_axes() -> None:
+    items = [
+        {"id": "a-cli", "provider": "a", "app_class": "cli", "detected": True},
+        {"id": "a-app", "provider": "a", "app_class": "app", "detected": True},
+        {"id": "b-cli", "provider": "b", "app_class": "cli", "detected": True},
+    ]
+    axes = {offer["axis"] for offer in sync.topology_offers(items)}
+    assert axes == {"provider", "app-class", "all"}
 
 
 # ── JSON block-replace ────────────────────────────────────────────────────────
@@ -270,7 +293,7 @@ def test_cmd_plan_prints_relations(skill_dir: Path, fixture_root: Path,
     out = capsys.readouterr().out
     assert "claude-pair" in out
     assert "cli-mcp-fanout" in out
-    assert "ControlCenter" in out  # Claude delegation message
+    assert "ellmos-controlcenter-mcp" in out  # configured adapter, not hardcoded routing
 
 
 # ── --apply guard without --yes ──────────────────────────────────────────────
@@ -288,7 +311,7 @@ def test_apply_requires_yes(capsys) -> None:
 
 
 def test_apply_full_integration(skill_dir: Path, fixture_root: Path, monkeypatch) -> None:
-    """Full apply run: claude-pair (Claude->Desktop skipped via ControlCenter),
+    """Full apply run: claude-pair (Desktop uses configured external adapter),
     cli-mcp-fanout writes TOML for Codex."""
     monkeypatch.setattr(sync, "SKILL_DIR", skill_dir)
     # Build cache first
