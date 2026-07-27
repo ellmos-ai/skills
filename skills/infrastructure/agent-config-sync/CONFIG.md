@@ -4,8 +4,9 @@
 > Maschinenlesbares Gegenstueck: `config.json`. Wird vom Lernmechanismus aktualisiert
 > (Feld `sources` + `updated` je Anbieter).
 
-Diese Datei beschreibt **je Agent-Anbieter**, wo dessen MCP- und/oder Skill-Konfiguration
-liegt und in welchem Format. Pfade nutzen `<HOME>` (= `~` bzw. `%USERPROFILE%`),
+Diese Datei beschreibt **je Endpoint**, zu welchem Anbieter und welcher
+App-Klasse er gehört und wo dessen MCP-, Skill- oder Regel-Konfiguration liegen
+kann. Pfade nutzen `<HOME>` (= `~` bzw. `%USERPROFILE%`),
 `<APPDATA>` (Windows `%APPDATA%`), `<APPSUPPORT>` (macOS `~/Library/Application Support`).
 
 ## Felder je Anbieter (`config.json`)
@@ -13,13 +14,16 @@ liegt und in welchem Format. Pfade nutzen `<HOME>` (= `~` bzw. `%USERPROFILE%`),
 | Feld | Bedeutung |
 |---|---|
 | `display_name` | Menschlicher Name |
+| `provider` | Anbieterachse, z.B. `openai`, `anthropic`, `google` |
 | `kind` | `app` (GUI) \| `cli` \| `ide` |
+| `commands` | mögliche CLI-Namen für lokale Evidenz |
 | `mcp.path` | Datei/Ordner der MCP-Konfiguration (Platzhalter) |
 | `mcp.format` | `json` \| `toml` \| `none` |
 | `mcp.key` | JSON/TOML-Schluessel des MCP-Server-Blocks (z.B. `mcpServers`) |
 | `mcp.merge` | `block-replace` (nur den Block ersetzen, Rest erhalten) \| `file` |
 | `skills.path` | Ordner/Datei fuer Skills (oder `null` wenn nicht unterstuetzt) |
 | `skills.kind` | `dir` \| `redirect` \| `none` |
+| `rules.path` | mögliche Regeldatei; niemals automatisch als Truth gewählt |
 | `notes` | Eigenheiten / Fallstricke |
 | `sources` | Quellen-Hinweise (URL/Doku/Stand) fuer den Lernmechanismus |
 | `updated` | letztes Verifikationsdatum dieses Eintrags |

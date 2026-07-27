@@ -1,41 +1,51 @@
 {
-  "_comment": "TEMPLATE (publizierbar). Kopieren nach registry.json und mit echtem host/Pfaden fuellen. registry.json ist gitignored.",
+  "_comment": "TEMPLATE (publizierbar). Keine Truth-Quelle ist voreingestellt. Erst --discover und --offer ausführen, dann User Auswahl in registry.json festhalten.",
   "host": "<HOST>",
   "tools": {
-    "claude-code": { "installed": true, "role": "hub" },
-    "claude-desktop": { "installed": true, "role": "member" },
-    "codex-cli": { "installed": true, "role": "leaf" },
-    "antigravity-gemini": { "installed": true, "role": "leaf" },
-    "kimi-code": { "installed": false, "role": "leaf" },
-    "cursor": { "installed": false, "role": "leaf" },
-    "cline": { "installed": false, "role": "leaf" },
-    "windsurf": { "installed": false, "role": "leaf" },
-    "github-copilot": { "installed": false, "role": "leaf" }
+    "claude-code": { "installed": false, "role": "unassigned" },
+    "claude-desktop": { "installed": false, "role": "unassigned" },
+    "codex-cli": { "installed": false, "role": "unassigned" },
+    "antigravity-gemini": { "installed": false, "role": "unassigned" },
+    "kimi-code": { "installed": false, "role": "unassigned" },
+    "cursor": { "installed": false, "role": "unassigned" },
+    "cline": { "installed": false, "role": "unassigned" },
+    "windsurf": { "installed": false, "role": "unassigned" },
+    "github-copilot": { "installed": false, "role": "unassigned" }
   },
-  "relations": [
+  "relations": [],
+  "relation_examples": [
     {
-      "name": "claude-pair",
-      "members": ["claude-code", "claude-desktop"],
-      "mode": "pull",
-      "source": "claude-code",
+      "name": "same-provider-across-classes",
+      "selection": {
+        "providers": ["<PROVIDER>"],
+        "app_classes": ["cli", "app"]
+      },
+      "mode": "push",
+      "source": null,
       "scope": "mcp",
-      "notes": "Legacy-Fall von mcp-config-sync: Desktop zieht Code-MCP-Stand."
+      "notes": "User muss Truth-Quelle und konkrete Teilnehmer wählen."
     },
     {
-      "name": "cli-mcp-fanout",
-      "members": ["claude-code", "codex-cli", "antigravity-gemini"],
+      "name": "cross-provider-one-class",
+      "selection": {
+        "providers": ["*"],
+        "app_classes": ["cli"]
+      },
       "mode": "push",
-      "source": "claude-code",
-      "scope": "mcp",
-      "notes": "Code verteilt kuratierten MCP-Satz; Codex braucht JSON->TOML-Konvertierung."
+      "source": null,
+      "scope": "mcp"
     },
     {
-      "name": "skills-hub",
-      "members": ["claude-code", "claude-desktop"],
+      "name": "explicit-rule-truth",
+      "members": ["<ENDPOINT-A>", "<ENDPOINT-B>"],
       "mode": "push",
-      "source": "claude-code",
-      "scope": "skills",
-      "notes": "~/.claude/skills/ ist Quelle; Desktop via Bridge-Skill, kein hartes Kopieren."
+      "source": null,
+      "scope": "rules",
+      "truth": {
+        "sources": ["<PATH-TO-AGENTS.md>", "<PATH-TO-OPTIONAL-OVERLAY.md>"],
+        "strategy": "ordered-overlay"
+      },
+      "notes": "Eine oder mehrere Dateien sind erlaubt; Reihenfolge und Konfliktregel bestimmt der User."
     }
   ]
 }

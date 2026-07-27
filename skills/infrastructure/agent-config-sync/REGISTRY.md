@@ -1,60 +1,44 @@
-# REGISTRY — was syncen welche Tools wie?
+# REGISTRY — User-Auswahl statt Anbieter-Default
 
-> Das **Template** (`registry.example.json`) ist publizierbar. Die mit echten Pfaden/Hosts
-> gefuellte **reale Instanz** (`registry.json`) ist LOKAL und wird per `.gitignore`
-> ausgeschlossen.
+`registry.example.json` ist neutral und enthält keine aktive Relation. Die
+lokale `registry.json` dokumentiert eine konkrete User-Entscheidung.
 
-Die Registry ist die **Steuerebene**: sie deklariert pro System, welche Agent-Tools
-installiert sind, welche davon synchronisieren sollen und in welcher Beziehung
-(Gruppen/Paare), mit welchem Modus und welchem Scope.
+## Endpoint-Auswahl
 
-## Struktur (`registry.json`)
+Eine Relation kann `members` explizit nennen oder einen Selektor verwenden:
 
-```jsonc
-{
-  "host": "<HOST>",                 // dieses System (z.B. LAPTOP / WORKSTATION / MAC)
-  "tools": {                         // welche Anbieter sind HIER installiert?
-    "<provider-id>": { "installed": true, "role": "hub|member|leaf" }
-  },
-  "relations": [                     // wie wird gesynct?
-    {
-      "name": "claude-pair",
-      "members": ["claude-code", "claude-desktop"],
-      "mode": "pull",               // pull | push | bidirectional
-      "source": "claude-code",      // bei pull/push: der Master/Quell-Provider
-      "scope": "mcp"                // mcp | skills | both
-    }
-  ]
+```json
+"selection": {
+  "providers": ["anthropic", "openai"],
+  "app_classes": ["cli"],
+  "members": []
 }
 ```
 
-### Felder
+`"*"` wählt alle katalogisierten Werte der Achse. Vor Apply werden nur lokal
+erkannte und vom User bestätigte Mitglieder in die aktive Registry übernommen.
 
-| Feld | Bedeutung |
-|---|---|
-| `host` | Identifier dieses Systems (real in `registry.json`, Platzhalter im Template) |
-| `tools.<id>.installed` | ist der Anbieter hier vorhanden? |
-| `tools.<id>.role` | `hub` (zentrale Quelle), `member` (nimmt teil), `leaf` (nur Empfaenger) |
-| `relations[].mode` | `pull` (Ziele holen vom `source`), `push` (`source` verteilt an Ziele), `bidirectional` (Union, Konflikt → eskalieren) |
-| `relations[].source` | der Master-Provider bei `pull`/`push` |
-| `relations[].scope` | `mcp` \| `skills` \| `both` |
+## Truth
 
-## Modellierung „braucht jedes System alles?"
+Für MCP/Skills kann `source` einen Endpoint bezeichnen. Für Regeln sind auch
+eine oder mehrere Dateien zulässig:
 
-- **Nein, Teilmengen sind erlaubt.** `role` und `relations` druecken aus, dass z.B. ein
-  Laptop nur eine Teilmenge der MCP-Server fuehrt oder ein bestimmtes Tool nur Empfaenger
-  (`leaf`) ist.
-- **Multi-System-fähig, aber per Default single-host.** Das Feld `host` erlaubt spaeter
-  System-uebergreifende Registries (Laptop/Workstation/Mac); die mitgelieferte reale
-  Instanz fuellt nur DIESES System. System-uebergreifender Transport laeuft ueber
-  `~/OneDrive/.SYNC/` (siehe `agents-bridge`, Achse 2) — dieser Skill regelt den
-  Tool-Abgleich, nicht den Datei-Transport zwischen Rechnern.
+```json
+"truth": {
+  "sources": [
+    "<HOME>/AGENTS.md",
+    "<PROJECT>/AGENTS.md"
+  ],
+  "strategy": "ordered-overlay"
+}
+```
 
-## Beispiel-Beziehungen (siehe `registry.example.json`)
+Zulässige Strategien müssen vom User gewählt werden:
 
-1. **claude-pair** (`pull`, scope `mcp`): Claude Code ist Hub, Claude Desktop zieht dessen
-   MCP-Stand — exakt der Fall, den der Legacy-Skill `mcp-config-sync` abdeckte.
-2. **cli-mcp-fanout** (`push`, scope `mcp`): Claude Code verteilt einen kuratierten
-   MCP-Satz an Codex (TOML) und weitere CLIs.
-3. **skills-hub** (`push`, scope `skills`): `<HOME>/.claude/skills/` ist die Skill-Quelle,
-   andere Tools bekommen Redirect/Bridge (kein hartes Kopieren).
+- `copy`: eine Quelle unverändert kopieren,
+- `redirect`: Ziel verweist auf die Truth,
+- `ordered-overlay`: mehrere Quellen in festgelegter Reihenfolge,
+- `generated-loader`: kleine Bootstrap-Datei lädt mehrere Quellen.
+
+Leere `source`/`truth.sources` bedeuten keine Autorisierung. Plan und Apply
+bleiben dann blockiert.

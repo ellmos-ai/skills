@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""agent-config-sync -- Cross-agent MCP and skill synchronization (v0.2.0).
+"""agent-config-sync -- Provider-neutral agent configuration sync (v0.3.0).
 
 Reads three data layers:
   registry.json   (control: which tools sync how)   -> fallback registry.example.json
@@ -7,6 +7,8 @@ Reads three data layers:
   cache.json      (resolved real paths, written on --status if missing)
 
 Commands:
+  --discover  Detect known providers, app classes and configuration surfaces.
+  --offer     Offer safe sync topologies from the detected local surfaces.
   --status    Resolve paths, check presence, report drift (read-only except cache.json).
   --plan      Print the sync plan that --apply would execute (read-only, no writes).
   --apply     Apply the plan: block-replace MCP/skills per relation (requires --yes).
@@ -14,10 +16,8 @@ Commands:
               Each write is preceded by a timestamped backup. After writing, re-reads and
               diffs. NEVER touches real configs during tests (use --root for fixture dirs).
 
-Claude MCP profile management (claude-code / claude-desktop) delegates to the
-ellmos-controlcenter-mcp backend (resolve_profile / switch_profile MCP tools) instead of
-implementing its own Claude-profile logic. The plan output signals which ControlCenter
-action to call; the agent executes it at runtime via the MCP tool.
+Provider-specific read/write adapters are declared in config.json. The engine
+does not infer a privileged provider or backend from an endpoint name.
 
 SAFETY: --apply writes ONLY inside the resolved cache paths (real agent config files).
         Tests must pass --root pointing at a temp fixture dir. Default real resolution
@@ -207,6 +207,170 @@ def _build_cache(config: dict, registry: dict, test_root: Path | None) -> dict:
     }
 
 
+def _provider_detected(spec: dict, resolved: dict) -> bool:
+    """Return True only for locally evidenced provider presence."""
+    command_found = any(shutil.which(command) for command in spec.get("commands", []))
+    surface_found = any(
+        resolved.get(key) is True for key in ("mcp_exists", "skills_exists", "rules_exists")
+    )
+    if spec.get("detection") == "command":
+        return command_found
+    if spec.get("detection") == "surface":
+        return surface_found
+    return command_found or surface_found
+
+
+def _resolve_provider(spec: dict, test_root: Path | None) -> dict:
+    """Resolve all supported resource surfaces for one provider."""
+    result: dict = {}
+    for resource in ("mcp", "skills", "rules"):
+        raw = spec.get(resource, {}).get("path")
+        real = _resolve_placeholders(raw, test_root) if raw else None
+        result[f"{resource}_path"] = real
+        result[f"{resource}_exists"] = bool(
+            real and "<" not in real and Path(real).exists()
+        )
+    return result
+
+
+def discover(config: dict, test_root: Path | None = None) -> list[dict]:
+    """Inventory configured provider/app-class surfaces without writing."""
+    found: list[dict] = []
+    for provider_id, spec in sorted(config.get("providers", {}).items()):
+        resolved = _resolve_provider(spec, test_root)
+        found.append(
+            {
+                "id": provider_id,
+                "provider": spec.get("provider", "unknown"),
+                "app_class": spec.get("kind", "unknown"),
+                "detected": _provider_detected(spec, resolved),
+                "commands": [
+                    command
+                    for command in spec.get("commands", [])
+                    if shutil.which(command)
+                ],
+                **resolved,
+            }
+        )
+    return found
+
+
+def topology_offers(items: list[dict]) -> list[dict]:
+    """Build provider-axis, class-axis and all-axis offers."""
+    detected = [item for item in items if item.get("detected")]
+    offers: list[dict] = []
+
+    for provider in sorted({item["provider"] for item in detected}):
+        members = [item["id"] for item in detected if item["provider"] == provider]
+        classes = {
+            item["app_class"] for item in detected if item["provider"] == provider
+        }
+        if len(members) > 1 and len(classes) > 1:
+            offers.append(
+                {
+                    "axis": "provider",
+                    "label": f"{provider}: zwischen App-Klassen",
+                    "members": members,
+                }
+            )
+
+    for app_class in sorted({item["app_class"] for item in detected}):
+        members = [
+            item["id"] for item in detected if item["app_class"] == app_class
+        ]
+        providers = {
+            item["provider"] for item in detected if item["app_class"] == app_class
+        }
+        if len(members) > 1 and len(providers) > 1:
+            offers.append(
+                {
+                    "axis": "app-class",
+                    "label": f"{app_class}: zwischen Anbietern",
+                    "members": members,
+                }
+            )
+
+    if len(detected) > 1:
+        offers.append(
+            {
+                "axis": "all",
+                "label": "alle erkannten Anbieter und App-Klassen",
+                "members": [item["id"] for item in detected],
+            }
+        )
+    return offers
+
+
+def _relation_members(rel: dict, providers_spec: dict) -> list[str]:
+    """Resolve explicit members or a provider/app-class selector."""
+    if rel.get("members"):
+        return list(dict.fromkeys(rel["members"]))
+
+    selector = rel.get("selection", {})
+    providers = set(selector.get("providers", ["*"]))
+    classes = set(selector.get("app_classes", ["*"]))
+    explicit = set(selector.get("members", []))
+    result = []
+    for provider_id, spec in providers_spec.items():
+        provider_match = "*" in providers or spec.get("provider") in providers
+        class_match = "*" in classes or spec.get("kind") in classes
+        explicit_match = not explicit or provider_id in explicit
+        if provider_match and class_match and explicit_match:
+            result.append(provider_id)
+    return result
+
+
+def cmd_discover(args) -> int:
+    test_root = Path(args.root) if getattr(args, "root", None) else None
+    try:
+        config, cfg_src = _load_json("config.json", "config.json", skill_dir=SKILL_DIR)
+    except FileNotFoundError as exc:
+        print(f"FEHLER: {exc}", file=sys.stderr)
+        return 1
+
+    items = discover(config, test_root)
+    print(f"[agent-config-sync --discover] config={cfg_src}")
+    print(f"  {'Endpoint':<22} {'Provider':<12} {'Klasse':<8} {'Status':<12} Oberflächen")
+    print("  " + "-" * 90)
+    for item in items:
+        surfaces = [
+            name
+            for name in ("mcp", "skills", "rules")
+            if item.get(f"{name}_exists")
+        ]
+        if item.get("commands"):
+            surfaces.append("cli")
+        status = "ERKANNT" if item["detected"] else "nicht belegt"
+        print(
+            f"  {item['id']:<22} {item['provider']:<12} "
+            f"{item['app_class']:<8} {status:<12} {', '.join(surfaces) or '-'}"
+        )
+    print()
+    print("  Erkennung ist Inventar, keine Sync-Freigabe. Quelle und Ziele wählt der User.")
+    return 0
+
+
+def cmd_offer(args) -> int:
+    test_root = Path(args.root) if getattr(args, "root", None) else None
+    try:
+        config, _ = _load_json("config.json", "config.json", skill_dir=SKILL_DIR)
+    except FileNotFoundError as exc:
+        print(f"FEHLER: {exc}", file=sys.stderr)
+        return 1
+
+    offers = topology_offers(discover(config, test_root))
+    print("[agent-config-sync --offer] read-only")
+    if not offers:
+        print("  Keine belegte Mehrfach-Topologie gefunden.")
+        return 0
+    for index, offer in enumerate(offers, start=1):
+        print(f"  {index}. [{offer['axis']}] {offer['label']}")
+        print(f"     Mitglieder: {', '.join(offer['members'])}")
+    print()
+    print("  Nächste Entscheidung: Ressourcen, Truth-Quelle(n), Richtung und Ziele.")
+    return 0
+
+
 # ── --status ──────────────────────────────────────────────────────────────────
 
 
@@ -313,17 +477,34 @@ def cmd_plan(args) -> int:
         mode = rel.get("mode", "?")
         scope = rel.get("scope", "?")
         source_id = rel.get("source")
-        members = rel.get("members", [])
+        members = _relation_members(rel, providers_spec)
         notes = rel.get("notes", "")
 
         print(f"  Relation '{name}'  mode={mode}  scope={scope}")
         if notes:
             print(f"    Anmerkung: {notes}")
 
+        truth_sources = rel.get("truth", {}).get("sources", [])
+        has_file_truth = scope in ("rules", "all") and bool(truth_sources)
+        if not source_id and not has_file_truth:
+            print("    BLOCKIERT: keine Truth-Quelle gewählt; keine Mutation geplant.")
+            print("    Setze 'source' oder 'truth.sources' erst nach einer User-Entscheidung.")
+            print()
+            continue
+
         source_spec = providers_spec.get(source_id, {})
         source_cache = cache.get("providers", {}).get(source_id, {})
 
-        targets = [m for m in members if m != source_id]
+        targets = [m for m in members if m != source_id] if source_id else members
+
+        if scope in ("rules", "all"):
+            truth = rel.get("truth", {})
+            sources = truth.get("sources", [])
+            strategy = truth.get("strategy")
+            print(f"    [RULES] Quellen: {sources or '[nicht gewählt]'}")
+            print(f"    [RULES] Strategie: {strategy or '[nicht gewählt]'}")
+            print(f"    [RULES] Ziele: {targets}")
+            print("    [RULES] Apply gesperrt, bis ein User einen Adapter gewählt hat.")
 
         if scope in ("mcp", "both"):
             source_mcp_path = source_cache.get("mcp_path")
@@ -332,12 +513,11 @@ def cmd_plan(args) -> int:
 
             print(f"    [MCP] Quelle: {source_id}  ({source_mcp_path or 'Pfad unbekannt'})")
 
-            if source_id in ("claude-code", "claude-desktop"):
-                print("    [MCP] Claude-Profile -> Backend: ellmos-controlcenter-mcp")
-                print("          MCP-Tool aufrufen: resolve_profile() dann switch_profile()")
-                print("          (keine eigene Claude-Profil-Logik in sync.py)")
-            elif source_mcp_path and source_cache.get("mcp_exists"):
+            source_adapter = source_spec.get("mcp", {}).get("read_adapter")
+            if source_mcp_path and source_cache.get("mcp_exists"):
                 print(f"    [MCP] Quelle existiert -> lesen (key: {source_mcp_key})")
+            elif source_adapter:
+                print(f"    [MCP] Quelle über konfigurierten Adapter lesen: {source_adapter}")
             else:
                 print(f"    [MCP] WARNUNG: Quelle nicht gefunden ({source_mcp_path})")
 
@@ -355,9 +535,9 @@ def cmd_plan(args) -> int:
                           f"Lernmechanismus starten)")
                     continue
 
-                if target_id in ("claude-code", "claude-desktop"):
-                    print(f"    [MCP] -> {target_id}: via ControlCenter (switch_profile / "
-                          f"generate mcp-config)")
+                write_adapter = t_spec.get("mcp", {}).get("write_adapter")
+                if write_adapter:
+                    print(f"    [MCP] -> {target_id}: via Adapter {write_adapter}")
                     continue
 
                 action = "ERSTELLEN" if not t_exists else "BLOCK-REPLACE"
@@ -498,9 +678,21 @@ def cmd_apply(args) -> int:
         mode = rel.get("mode", "?")
         scope = rel.get("scope", "?")
         source_id = rel.get("source")
-        members = rel.get("members", [])
+        members = _relation_members(rel, providers_spec)
 
         print(f"  Relation '{name}'  mode={mode}  scope={scope}")
+
+        if scope in ("rules", "all"):
+            print("    FEHLER: Regeldatei-Apply braucht einen explizit gewählten Adapter.")
+            errors_total += 1
+            print()
+            continue
+
+        if not source_id:
+            print("    FEHLER: keine Truth-Quelle gewählt; Relation bleibt unverändert.")
+            errors_total += 1
+            print()
+            continue
 
         targets = [m for m in members if m != source_id]
 
@@ -510,22 +702,20 @@ def cmd_apply(args) -> int:
             source_mcp_path = source_cache.get("mcp_path")
             source_mcp_key = source_spec.get("mcp", {}).get("key", "mcpServers")
 
-            # Claude providers: reading a static profile JSON file works directly.
-            # ControlCenter is only needed for Claude *targets* (writing) or profile selection.
-            if source_id in ("claude-code", "claude-desktop"):
-                # Try to read the source config directly first (simple profile JSON)
-                mcp_data = _read_source_mcp(source_mcp_path, source_mcp_key) if source_mcp_path else None
-                if mcp_data is None:
-                    # Path not found / not resolvable -> delegate to ControlCenter
-                    print(f"    [MCP] Quelle {source_id}: Direkte Datei nicht gefunden.")
-                    print("          Fallback -> ellmos-controlcenter-mcp: resolve_profile()")
-                    print("          MCP-Tool manuell aufrufen und Daten einpflegen.")
-                    errors_total += 1
-                    continue
-            else:
-                mcp_data = _read_source_mcp(source_mcp_path, source_mcp_key) if source_mcp_path else None
+            mcp_data = (
+                _read_source_mcp(source_mcp_path, source_mcp_key)
+                if source_mcp_path
+                else None
+            )
             if mcp_data is None:
-                print(f"    [MCP] FEHLER: Quelldaten nicht lesbar ({source_mcp_path})")
+                read_adapter = source_spec.get("mcp", {}).get("read_adapter")
+                if read_adapter:
+                    print(
+                        f"    [MCP] FEHLER: Quelle braucht Adapter {read_adapter}; "
+                        "direkter Apply bleibt gesperrt."
+                    )
+                else:
+                    print(f"    [MCP] FEHLER: Quelldaten nicht lesbar ({source_mcp_path})")
                 errors_total += 1
                 continue
 
@@ -540,8 +730,12 @@ def cmd_apply(args) -> int:
                     print(f"    [MCP] -> {target_id}: UEBERSPRUNGEN (nicht verifiziert)")
                     continue
 
-                if target_id in ("claude-code", "claude-desktop"):
-                    print(f"    [MCP] -> {target_id}: via ControlCenter (switch_profile); uebersprungen")
+                write_adapter = t_spec.get("mcp", {}).get("write_adapter")
+                if write_adapter:
+                    print(
+                        f"    [MCP] -> {target_id}: Adapter {write_adapter} erforderlich; "
+                        "direkter Write uebersprungen"
+                    )
                     continue
 
                 if not t_path:
@@ -615,10 +809,14 @@ def cmd_apply(args) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description="agent-config-sync -- Cross-agent MCP/skill synchronization (v0.2.0)",
+        description="agent-config-sync -- provider-neutral config synchronization (v0.3.0)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--discover", action="store_true",
+                   help="Detect known providers, app classes and config surfaces")
+    g.add_argument("--offer", action="store_true",
+                   help="Offer provider/class/all-axis topologies (read-only)")
     g.add_argument("--status", action="store_true",
                    help="Resolve paths, check presence, update cache.json (read-only for agent configs)")
     g.add_argument("--plan", action="store_true",
@@ -633,6 +831,10 @@ def main() -> int:
                     help="Override base dir for path resolution (tests/fixtures only)")
     args = ap.parse_args()
 
+    if args.discover:
+        return cmd_discover(args)
+    if args.offer:
+        return cmd_offer(args)
     if args.status:
         return cmd_status(args)
     if args.plan:
