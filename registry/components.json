@@ -2023,6 +2023,69 @@
       "warnings": []
     },
     {
+      "id": "skill:infrastructure:agents-bridge",
+      "name": "agents-bridge",
+      "type": "skill",
+      "path": "skills/infrastructure/agents-bridge/SKILL.md",
+      "category": "infrastructure",
+      "version": "2.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ab1d0c99ee911ff28856c798dc9662e21ab497ab752c9a85015a9ca109ab45c6",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "skills/infrastructure/agents-bridge/",
+        "origin_version": "1.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-27",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": true,
+        "has_tests": true,
+        "language": "de",
+        "file_count": 10
+      },
+      "warnings": []
+    },
+    {
       "id": "tool:infrastructure:ai-portable-setup",
       "name": "ai-portable-setup",
       "type": "tool",

@@ -6,6 +6,11 @@
   user-selected single or multi-file truth.
 - `mcp-config-sync` 2.0.0: provider-neutral MCP entry point; the former Claude
   pair is now an explicit legacy profile.
+- `agents-bridge` 2.0.0: removed the implicit personal CLAUDE.md/OneDrive truth,
+  added neutral boot-surface discovery, ordered user-selected truth profiles
+  and a read-only loader renderer.
+- Refreshed public catalog counts to 80 tracked skills / 105 definitions and
+  the verified test badge to 46 passing pytest tests.
 
 ## Unreleased
 

@@ -2,7 +2,7 @@
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
-> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, and other local-first LLM agent runtimes. Tested with 56 passing test suite assertions (100% green).
+> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, and other local-first LLM agent runtimes. Tested with 46 passing pytest tests (100% green).
 
 Canonical repository: https://github.com/ellmos-ai/skills
 Default branch: master
@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 79 tracked runtime skills (104 total catalog definitions) organized by 10 categories.
+- 80 tracked runtime skills (105 total catalog definitions) organized by 10 categories.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
 - A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, and provenance.
 - German and English documentation for humans plus this compact file for crawlers and LLM agents.

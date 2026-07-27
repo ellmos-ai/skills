@@ -87,7 +87,8 @@ skills/dev/update-cli-docs/
 skills/dev/code-skill-index/
 skills/game-dev/build-assets-with-blender/
 skills/infrastructure/system-onboarding/
-skills/infrastructure/agents-bridge/
+# agents-bridge 2.0.0 is provider-neutral and public. Personal truth profiles
+# stay outside the repository.
 skills/utilities/selbstmanagement/
 # -- Publikations-Audit 2026-07-23: pr-ready-Skills freigegeben (assist-Batch,
 #    textproduction, using-blender, privat-mail-writer; bewerbungsexperte nach

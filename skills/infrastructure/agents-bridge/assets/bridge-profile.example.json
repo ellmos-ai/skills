@@ -1,0 +1,25 @@
+{
+  "profile_id": "example-local-profile",
+  "truth_sources": [
+    {
+      "path": "<absolute-or-project-relative-path>",
+      "order": 10,
+      "scope": "global"
+    },
+    {
+      "path": "<second-explicitly-selected-path>",
+      "order": 20,
+      "scope": "project"
+    }
+  ],
+  "targets": [
+    {
+      "actor_id": "<provider-or-agent>@<system>",
+      "boot_surface": "<target-path-or-channel>",
+      "target_kind": "generic"
+    }
+  ],
+  "strategy": "ordered-loader",
+  "conflict_policy": "later-overrides-only-when-explicit",
+  "inventory": null
+}
