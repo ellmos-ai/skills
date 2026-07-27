@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Maintenance & Discoverability (2026-07-27)
+
+- Updated `llms.txt` header (`Last-checked: 2026-07-27`) and documented test suite verification (56 passing test suite assertions, 100% green).
+- Added Shields.io test suite badges (56 passed tests) to `README.md` and `README_de.md`.
+
 ### Maintenance & Discoverability (2026-07-26)
 
 - Synchronized catalog metadata and README tracked skill counts (79 tracked runtime skills in 10 categories, 104 total catalog definitions).

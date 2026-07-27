@@ -11,6 +11,7 @@
 [![Skills: 79 Tracked](https://img.shields.io/badge/Skills-79%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Catalog Quality: 4.8/5](https://img.shields.io/badge/Catalog%20Quality-4.8%2F5-success.svg)](catalog.py)
+[![Tests: 56 Passed](https://img.shields.io/badge/Tests-56%20Passed-brightgreen.svg)](testing/)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
