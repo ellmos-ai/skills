@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-28T00:00:00+00:00",
+    "generated_at": "2026-07-28T17:11:07.545792+00:00",
     "schema_version": "skill-v1",
-    "component_count": 80
+    "component_count": 83
   },
   "components": [
     {
@@ -15,7 +15,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:6907a5fcd75f929252df5067fb79c1d2caeb061f6172159f172e8339b6d37b63",
+      "content_hash": "sha256:138471a9aa240a4f9ef8ec40702e2f9707bc8276da33d07b0b5de65a583189a1",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -78,7 +78,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:111f1daa7776efe5f553af3be6fc14bf3fa7dee6026725171340f00ce43eb58b",
+      "content_hash": "sha256:7ddaf47145738ea1de4682acd5c7b2feead74071443fa3e1ff6468add26f2e8b",
       "git_commit": null,
       "provenance": {
         "origin": "BACH persoenlicher-assistent",
@@ -141,7 +141,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:f6b94bcc5edd528c593f767119783241077c4f47f94f88cd7fbc041bcc46b12d",
+      "content_hash": "sha256:13d0ac01403528aa40a888a6adc26a1ec6a6bc67ec820290ded8b2cb4d9c1fad",
       "git_commit": null,
       "provenance": {
         "origin": "eigenentwurf",
@@ -204,7 +204,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:5aee2527096b1fb1c27d3d6c898b1704b8cfd4ad2212e5aa03fac5d3a853b004",
+      "content_hash": "sha256:87b3f921e8b3d85f2ddfe50c49f4c5e0802b5fe59b21d80d1816e10a540a3559",
       "git_commit": null,
       "provenance": {
         "origin": "BACH persoenlicher-assistent",
@@ -267,7 +267,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:35def6ee83c159b9ac43308367dec88fd1da66d9e2096b4b87d7de96c015fdf8",
+      "content_hash": "sha256:664035fcec1b6bb0e004e743a300c24fa7f68b62c937201866b00234d79a8427",
       "git_commit": null,
       "provenance": {
         "origin": "eigenentwurf",
@@ -330,7 +330,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:1daee4ae53c881a002546fbdfdc34c2ef7691ae003ec2f783538fac1e33db6ee",
+      "content_hash": "sha256:e6550c6687e2a16b318a208f22acdda077017a1aa6216e17b093cd39c29a6575",
       "git_commit": null,
       "provenance": {
         "origin": "BACH hub routing-service",
@@ -393,7 +393,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:36433c118170dad5e574228b98d51b49952ed1935ffd0883158aa9664a7b690b",
+      "content_hash": "sha256:052cdc32565be31050324a8659f90a3483ef24767ccca657488b66d6b44bac5c",
       "git_commit": null,
       "provenance": {
         "origin": "bach-port",
@@ -456,7 +456,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:fd801a95e4ceaaeb5a0b2779f79559e789513c06e964cd0cfcd4a8bca815f740",
+      "content_hash": "sha256:7afd1adb2dc610bea723e1e2ca5bc448bc0b8725d25c7b4b81ddd7958f192b10",
       "git_commit": null,
       "provenance": {
         "origin": "eigenentwurf",
@@ -519,7 +519,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:5e8fa0734cd93b0289c20f6d41593ae8f4f1c10a84a841b5e5e5d5e65c6fb174",
+      "content_hash": "sha256:0144614eb15ff321e6c7d0a520a83b3b1281eab621c64fddae28d919077efcc8",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -645,7 +645,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:cecb4280a83c47992a82bf539945839be1041405a142bb3fe268f6dfd23046e4",
+      "content_hash": "sha256:2b4fc96ecbbea6a3f6b10f931ec407d9afc03bae5fe7fc4d5a1be3c4953385d5",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -692,10 +692,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -771,7 +771,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:da0b0f1b24a0ca8891b88e72e93708150f1260afa637224185f370610a37ec04",
+      "content_hash": "sha256:c0e1c27f3babf724ee05d75f2b80e73afdb2cdddb84b828f1561e8f080c6b179",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -818,10 +818,10 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 17
+        "file_count": 18
       },
       "warnings": []
     },
@@ -834,7 +834,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:aba11aa40c48324410df86227b587190a1e5225296d6deffa3fbe4ca9aac5cf2",
+      "content_hash": "sha256:c7de10831ca70b48335acfafffe315e77e3902f885637d5cd4aca01f22639ad5",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -889,6 +889,69 @@
       "warnings": []
     },
     {
+      "id": "protocol:dev:full-after-care",
+      "name": "full-after-care",
+      "type": "protocol",
+      "path": "skills/dev/full-after-care/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:cf3c3d5e0ffe0c85eda0e3a48d99f50295657f889db4be51de3f20497ac22d63",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
       "id": "protocol:dev:github-repo-care",
       "name": "github-repo-care",
       "type": "protocol",
@@ -897,7 +960,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:09aaf7dfdab41a14b363283ab44b2549ce840d517acf901572828bc0df824565",
+      "content_hash": "sha256:3363edcd8f71a0b959d1832acd7b2bfd82c1153e38743d4874f60cca9a0545ef",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -944,10 +1007,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 3
+        "file_count": 4
       },
       "warnings": []
     },
@@ -960,7 +1023,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:d91f191e8144662a8aecef107f214e12c6d81bf81ba6890a50bd0a385ace42f4",
+      "content_hash": "sha256:387d6bd46befb96db0b4e5b15423fc08805529292ff6855ea347f9d594452608",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -1023,7 +1086,7 @@
       "version": "2.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:ecae5b058afb1184eb8b2f763b44b5bc17f74431322512b45cf29b1dbc0283d0",
+      "content_hash": "sha256:861e996fe7d9d0bc4df45bd001c1fa59664dcda45936fd801803116fb6056645",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -1070,10 +1133,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -1086,7 +1149,7 @@
       "version": "1.2.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:0971ebffd60ba3225ed1beb7beb9f8f122f9d4752c904b0bb3bdd6e457fc03b4",
+      "content_hash": "sha256:52e80c2cedc90c43fb369d6f171fef6e0460dd35a20f71113a129751d0e8c4d0",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1133,10 +1196,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": true,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 3
+        "file_count": 4
       },
       "warnings": []
     },
@@ -1149,7 +1212,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:fe4fba16006365fedc5fb3c0b77ac2c020427c0b893f97302632b260f2f43a01",
+      "content_hash": "sha256:23990583558c5a1d3fc1c5d45ae909b066196b2c09b59017dabf42626cf7051c",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -1196,7 +1259,7 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": true,
         "language": "de",
         "file_count": 9
@@ -1275,7 +1338,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:2d783c2eed82f4e28f19a0fca6c411dc58449765fe8215d7fc75e6c66a4022e3",
+      "content_hash": "sha256:b3f6ef0e23a703b23a8e846d60f79f8f56db782576e87041fef50d58ddbd5e5b",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1330,6 +1393,132 @@
       "warnings": []
     },
     {
+      "id": "protocol:dev:store-welle-usertest",
+      "name": "store-welle-usertest",
+      "type": "protocol",
+      "path": "skills/dev/store-welle-usertest/SKILL.md",
+      "category": "dev",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:26ba59a2f0df973145bb02a22b4a4c61386ce38ac324be0f1dc7a09248e5b5e1",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "session://store-wave-user-test/2026-07-23",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-23",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
+      "id": "protocol:dev:surface-after-care",
+      "name": "surface-after-care",
+      "type": "protocol",
+      "path": "skills/dev/surface-after-care/SKILL.md",
+      "category": "dev",
+      "version": "1.6.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:daf5b848f60055475f27fddefeaae3ec22c7c52a255b90c1ce40ae4635793102",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": false,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 1
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:dev:trampelpfadanalyse",
       "name": "trampelpfadanalyse",
       "type": "skill",
@@ -1338,7 +1527,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:5a2e9edd7b617e1b5c3422f1c97059c101c9428ce820af62c3f09482197466ec",
+      "content_hash": "sha256:48fc663bd39e73337b2ca965c609a4468c20f26b6b1c9c66b6b8ce532a5f73b3",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -1385,10 +1574,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -1401,7 +1590,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:52cd3c80e46ead65b54a4c1044f3d7042c5194175495ed204566dfd6041c2d89",
+      "content_hash": "sha256:0ef5452776652718c3314b00081f3924271c33b632c28d2ac11dc8033d3d7dce",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1464,7 +1653,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:873f5e8147df0ee2a4cdd2ce3aa8de16fa31a8fa7ad85c2e686d1bae90f38c1c",
+      "content_hash": "sha256:669d92d9dce738d6b15bb970a36ea7505d0ad972e281c920d6cf25349690f041",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1527,7 +1716,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:e2a9cb7558939a7a15e8552ccbb3ad80e121d2cee14c09903b206929326dd85e",
+      "content_hash": "sha256:3584a5fba7cb1b944b32b208b85b9bbe380b5c523c6c895ae21ee00668abfdd6",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1590,7 +1779,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:da770fd93c948cc79ec7a67342d8ef85705291da4b9b75d10218c09a08cbbd61",
+      "content_hash": "sha256:cefdb9d65fc2c0df445aba618f5cdd257cd3b986bb358782597172311e58d1d0",
       "git_commit": null,
       "provenance": {
         "origin": "external",
@@ -1637,10 +1826,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -1716,7 +1905,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:b89dcb0e3b71ad8c4d7372f9836d9c5deb42f50e5ec79aae40d314c758b2989c",
+      "content_hash": "sha256:f0e05f33f4c9c8ba9b62b15875b251cf481fa61db4ec8c55ffb1f36c40dd6995",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1779,7 +1968,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:37655ecdf1ccd75563da36aa3cb26e5d73c93f4193e144732b922e6f6e25276a",
+      "content_hash": "sha256:a686f19c82aec5dd8844d6fcfd28ad48c97d0b9ffbf9bf4974f5f646cd84db9b",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -1826,10 +2015,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": true,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 4
+        "file_count": 5
       },
       "warnings": []
     },
@@ -1905,7 +2094,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:6157c9660e88c15a126a7c04cf7c3ad3b506d89a5cd5c1e57ecd93c0a33689e8",
+      "content_hash": "sha256:bff9bedb7d11e0cdff7fe0adfe206785cd6431dd6b2c7f171a8ec558603dd09f",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2015,10 +2204,136 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": true,
+        "has_assets": true,
+        "has_tests": true,
+        "language": "de",
+        "file_count": 13
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:agents-bridge",
+      "name": "agents-bridge",
+      "type": "skill",
+      "path": "skills/infrastructure/agents-bridge/SKILL.md",
+      "category": "infrastructure",
+      "version": "2.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:ab1d0c99ee911ff28856c798dc9662e21ab497ab752c9a85015a9ca109ab45c6",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "skills/infrastructure/agents-bridge/",
+        "origin_version": "1.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-27",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": true
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
         "has_assets": false,
         "has_tests": true,
         "language": "de",
-        "file_count": 12
+        "file_count": 10
+      },
+      "warnings": []
+    },
+    {
+      "id": "tool:infrastructure:ai-portable-setup",
+      "name": "ai-portable-setup",
+      "type": "tool",
+      "path": "skills/infrastructure/ai-portable-setup/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:0c4a1a0d435f96577c441ffeddc90a8fce330fad72e54927e4ccd6dd88731ca5",
+      "git_commit": null,
+      "provenance": {
+        "origin": "bach",
+        "origin_path": "MODULAR_AGENTS/AI-Portable",
+        "origin_version": "0.1.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-03-12",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": false,
+        "has_assets": true,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 4
       },
       "warnings": []
     },
@@ -2086,132 +2401,6 @@
       "warnings": []
     },
     {
-      "id": "skill:infrastructure:agents-bridge",
-      "name": "agents-bridge",
-      "type": "skill",
-      "path": "skills/infrastructure/agents-bridge/SKILL.md",
-      "category": "infrastructure",
-      "version": "2.0.0",
-      "schema_version": "skill-v1",
-      "status": "active",
-      "content_hash": "sha256:ab1d0c99ee911ff28856c798dc9662e21ab497ab752c9a85015a9ca109ab45c6",
-      "git_commit": null,
-      "provenance": {
-        "origin": "custom",
-        "origin_path": "skills/infrastructure/agents-bridge/",
-        "origin_version": "1.1.0",
-        "origin_commit": null,
-        "last_sync_from_origin": "2026-07-27",
-        "last_sync_to_origin": null,
-        "local_changes_since_sync": true
-      },
-      "ownership": {
-        "source_kind": "own",
-        "neutrality": "neutral-candidate",
-        "proposed_class": "own-neutral",
-        "upstream_component": null,
-        "personalized_for": null,
-        "sanitization_required": false
-      },
-      "privacy": {
-        "level": "public",
-        "export_allowed": true,
-        "contains_local_paths": false,
-        "contains_personal_data": false
-      },
-      "compatibility": {
-        "anthropic": true,
-        "bach": true,
-        "promptboard": null,
-        "profiprompt": null,
-        "explorerpro": null
-      },
-      "fork": {
-        "is_fork": false,
-        "fork_of": null,
-        "fork_reason": null,
-        "merge_policy": null
-      },
-      "branch": {
-        "name": "main",
-        "base": null,
-        "purpose": "current source tree baseline"
-      },
-      "skill": {
-        "standalone": true,
-        "has_scripts": true,
-        "has_references": true,
-        "has_assets": true,
-        "has_tests": true,
-        "language": "de",
-        "file_count": 10
-      },
-      "warnings": []
-    },
-    {
-      "id": "tool:infrastructure:ai-portable-setup",
-      "name": "ai-portable-setup",
-      "type": "tool",
-      "path": "skills/infrastructure/ai-portable-setup/SKILL.md",
-      "category": "infrastructure",
-      "version": "1.0.0",
-      "schema_version": "skill-v1",
-      "status": "active",
-      "content_hash": "sha256:ce1b517aa008310fb4a2bbf40b9beb168b8b49afebc80b69fbdc72fd6e697579",
-      "git_commit": null,
-      "provenance": {
-        "origin": "bach",
-        "origin_path": "MODULAR_AGENTS/AI-Portable",
-        "origin_version": "0.1.0",
-        "origin_commit": null,
-        "last_sync_from_origin": "2026-03-12",
-        "last_sync_to_origin": null,
-        "local_changes_since_sync": false
-      },
-      "ownership": {
-        "source_kind": "own",
-        "neutrality": "neutral-candidate",
-        "proposed_class": "own-neutral",
-        "upstream_component": null,
-        "personalized_for": null,
-        "sanitization_required": false
-      },
-      "privacy": {
-        "level": "public",
-        "export_allowed": true,
-        "contains_local_paths": false,
-        "contains_personal_data": false
-      },
-      "compatibility": {
-        "anthropic": true,
-        "bach": true,
-        "promptboard": null,
-        "profiprompt": null,
-        "explorerpro": null
-      },
-      "fork": {
-        "is_fork": false,
-        "fork_of": null,
-        "fork_reason": null,
-        "merge_policy": null
-      },
-      "branch": {
-        "name": "main",
-        "base": null,
-        "purpose": "current source tree baseline"
-      },
-      "skill": {
-        "standalone": true,
-        "has_scripts": true,
-        "has_references": false,
-        "has_assets": false,
-        "has_tests": false,
-        "language": "de",
-        "file_count": 3
-      },
-      "warnings": []
-    },
-    {
       "id": "skill:infrastructure:mcp-config-sync",
       "name": "mcp-config-sync",
       "type": "skill",
@@ -2267,73 +2456,10 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": true,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 7
-      },
-      "warnings": []
-    },
-    {
-      "id": "skill:infrastructure:skill-explorer",
-      "name": "skill-explorer",
-      "type": "skill",
-      "path": "skills/infrastructure/skill-explorer/SKILL.md",
-      "category": "infrastructure",
-      "version": "1.1.0",
-      "schema_version": "skill-v1",
-      "status": "active",
-      "content_hash": "sha256:40e53f1aa90ff87d38b40e9b89db520cdc5b9249b7d5623a4138edf7f4236fc7",
-      "git_commit": null,
-      "provenance": {
-        "origin": "custom",
-        "origin_path": "~/.claude/skills/skill-explorer/",
-        "origin_version": "1.0.0",
-        "origin_commit": null,
-        "last_sync_from_origin": null,
-        "last_sync_to_origin": null,
-        "local_changes_since_sync": false
-      },
-      "ownership": {
-        "source_kind": "own",
-        "neutrality": "neutral-candidate",
-        "proposed_class": "own-neutral",
-        "upstream_component": null,
-        "personalized_for": null,
-        "sanitization_required": false
-      },
-      "privacy": {
-        "level": "public",
-        "export_allowed": true,
-        "contains_local_paths": false,
-        "contains_personal_data": false
-      },
-      "compatibility": {
-        "anthropic": true,
-        "bach": false,
-        "promptboard": null,
-        "profiprompt": null,
-        "explorerpro": null
-      },
-      "fork": {
-        "is_fork": false,
-        "fork_of": null,
-        "fork_reason": null,
-        "merge_policy": null
-      },
-      "branch": {
-        "name": "main",
-        "base": null,
-        "purpose": "current source tree baseline"
-      },
-      "skill": {
-        "standalone": true,
-        "has_scripts": true,
-        "has_references": true,
-        "has_assets": false,
-        "has_tests": false,
-        "language": "de",
-        "file_count": 21
+        "file_count": 8
       },
       "warnings": []
     },
@@ -2401,6 +2527,69 @@
       "warnings": []
     },
     {
+      "id": "skill:infrastructure:skill-explorer",
+      "name": "skill-explorer",
+      "type": "skill",
+      "path": "skills/infrastructure/skill-explorer/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.1.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:5535fb6f227dda17b859965f005d76516868b2e265a82303e0fbb138578fff67",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "~/.claude/skills/skill-explorer/",
+        "origin_version": "1.0.0",
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": false,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": true,
+        "has_tests": false,
+        "language": "de",
+        "file_count": 22
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:infrastructure:skill-extractor",
       "name": "skill-extractor",
       "type": "skill",
@@ -2409,7 +2598,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:d29cd9d4fe495ce08677be1ade06f0601b016c6602a7ef5d2456deb41ac79693",
+      "content_hash": "sha256:0642a38cf01cf6dc80d7952a977ed6b6c611c0e2692516dab383246a9c2b1d46",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2456,10 +2645,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 3
+        "file_count": 5
       },
       "warnings": []
     },
@@ -2472,7 +2661,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:ab55cc40c436e77963b24a87a986c20bc2eccb1ef79be57b15127aea06e4b8b9",
+      "content_hash": "sha256:57dbef8aec0cc2d10e963654f515dd29f27c10cb50843d9f09cd8eb87d9e7e16",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2519,10 +2708,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -2535,7 +2724,7 @@
       "version": "2.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:de95601471d930f1c995991762f64a1ac6522db4a0646109b17108dd0c35c97a",
+      "content_hash": "sha256:445d1e8c5070da4a4496dc37b5a7ca2bb7889d8de953e65c961144f97fa625f0",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -2598,7 +2787,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:305be8ef9cc3125e137cae123d399cbae2a8b68867e8c2b19f265c724d5ef0f3",
+      "content_hash": "sha256:6b296a03d17156bd1dd2d1583ec43e49082f777294cee243b75458a82af40c35",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -2645,10 +2834,10 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 12
+        "file_count": 13
       },
       "warnings": []
     },
@@ -2976,7 +3165,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:5ec85b3f13eb8fe525e539dcd9aa526c83ab3ce23371e043ad95c79e1ff82736",
+      "content_hash": "sha256:aab364d2c508da132c71243d1b7373c677f185336dc8a0627417dc5083d38c72",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3039,7 +3228,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:3e14ae1634b4792925396aefd6dfa8806d5731652327209a10a68dfe5589e0c4",
+      "content_hash": "sha256:dbc498c952d9fae4c20a2bba8c693f77b1775ef8f189ec73e2342e80f07d8aa4",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3480,7 +3669,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:02a278f06fe2fa82289a5936da55e77ab88b3b14213663cb72b576ddb5b5947a",
+      "content_hash": "sha256:93fb70d36183701d9dbe5bedef655fda90910cafcfe38e4380c677b6a85058a7",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3543,7 +3732,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:127f8c9e6157695c149d2e968989aef539fb531fb6d3a7f8a8f28aa9203a8e46",
+      "content_hash": "sha256:a4e823e2b73991d7cd26ebf2923e8b656e4b1f0a49d13cbc9dde56b21946d0dd",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3732,7 +3921,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:91d59e3f77b9411d30319d11bed8c1c57804194f60f0ea3304de690771c6bc1a",
+      "content_hash": "sha256:157f3b10d4490b73dcfab364cdb8d21f9bcb7199b07fa3256fbc3896aef622f8",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -3921,7 +4110,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:65825a4d4132b495513be005b8d876087471aeed56b18426542f2b1eb1ec59cc",
+      "content_hash": "sha256:197ddc965736aa4a1b68119e3c60a2df511229ab364b638919d33e98a3c03971",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -3968,10 +4157,10 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -3984,7 +4173,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:6e798c3988d48a5da7ded855ba64c8f162c785a2bf0a71ccb0e7c44d7a182e97",
+      "content_hash": "sha256:9e6eb997b1f102ec62c5acc84899afe3cacfc457ff59db34b9124738b451d760",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -4031,10 +4220,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 1
+        "file_count": 2
       },
       "warnings": []
     },
@@ -4047,7 +4236,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:106b95c1f20910d42fc9c2e67ea7fd358e9e6f443c63e50de10286e03453abfa",
+      "content_hash": "sha256:52bfa6254b2287395f6fcd94d3df8036a5f1625b5ac536cc2e18584d93a444c0",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -4110,7 +4299,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:20549f0de87900ecb571a399de46afd188503ae0f9f1fe511fe234fc90f45594",
+      "content_hash": "sha256:360a6daa5b74640e46fee0fe938e4ab8dad6e9d81d29067934e08e6b6b9b2620",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -4173,7 +4362,7 @@
       "version": "1.0.1",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:d7271df913520ccb33ecb611fbd5903a6d54883a0066cf04a4d99fbf2abb86fc",
+      "content_hash": "sha256:6495fd5bb28b1434113505bd6b4311c345de707ff47d18dbd2c34d1c262cac68",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -4220,10 +4409,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -4425,7 +4614,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:ca45fe0b32d6d65af2d55f6b05cea6d328b460d9b194889a5efc71477eb0cf3a",
+      "content_hash": "sha256:657a272d2c28135e87a468ab5c0fcd109c9c40a29836e7594a517460e760c03d",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -4472,10 +4661,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 1
+        "file_count": 2
       },
       "warnings": []
     },
@@ -4488,7 +4677,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:66d111647a8c7892c69444b2594a1a0ea542282870a32240f5b40b1075b7d2f3",
+      "content_hash": "sha256:3f8dcb8f9725acf459a904547eb9511ffaa2127504225181ac4ccccb5e2d1445",
       "git_commit": null,
       "provenance": {
         "origin": "external",
@@ -4535,10 +4724,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -4551,7 +4740,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:98883399a7e44543ff3fc5360158c7069a209e5de0aae5234ad9e258082cd418",
+      "content_hash": "sha256:a61e4016fa4c7c123b23b9f76e01cc4c0a9a8ccbdfb7900c29b64fc0d138194d",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -4598,10 +4787,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 1
+        "file_count": 2
       },
       "warnings": []
     },
@@ -4677,7 +4866,7 @@
       "version": "0.2.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:79f110457d27b5a9699ab6f702e24dc552c63ea432591f00d31fb5c61d829340",
+      "content_hash": "sha256:3fe27228d251956da593890749dfef3aebc0e98e48e23a73e7d3479ca724e02f",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -4740,7 +4929,7 @@
       "version": "0.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:dcaa4e4c3975f99891f712dff4c25fcfdab95789548ac4ea1ae63570a39150c6",
+      "content_hash": "sha256:da5b74b6f803baabd1b22cd4daebc29f68fc997580792d83ca9e1f82a0dc5b80",
       "git_commit": null,
       "provenance": {
         "origin": "external",
@@ -4787,10 +4976,10 @@
         "standalone": true,
         "has_scripts": false,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": false,
         "language": "de",
-        "file_count": 2
+        "file_count": 3
       },
       "warnings": []
     },
@@ -4803,7 +4992,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:f1b014e8fae3479e8d3d205416a5a4fc5a5a1723175a9bd2955dbf26392bd1b8",
+      "content_hash": "sha256:0a00008896b08c41ceb7dffbfe27db43e621a52488c7d3d764b752d4cee126c5",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -4866,7 +5055,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:503e620fcc4c857a212dfecf4862d992bc9843ab0032a486e74634139e3133bb",
+      "content_hash": "sha256:4b5e35a148888143507502d9299df75c60d72805bc41c154d39ed112569d597a",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -4929,7 +5118,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:63076fbd6afc34e015902dc8927b0e11be19a1826298998b75a388a8a3957dfb",
+      "content_hash": "sha256:b5f0f6a54b8dff2175f6eac6e1ae72278071ce678d0efe9afc93fd1a4b1c47c8",
       "git_commit": null,
       "provenance": {
         "origin": "bach",
@@ -4976,7 +5165,7 @@
         "standalone": true,
         "has_scripts": true,
         "has_references": false,
-        "has_assets": false,
+        "has_assets": true,
         "has_tests": true,
         "language": "de",
         "file_count": 6
@@ -4992,7 +5181,7 @@
       "version": "1.1.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:c0e298fd2d08e30d8bb0d434b599cbb69cf397b9aec7c8522d5e56c6f6668b6f",
+      "content_hash": "sha256:fc39887bda086b88571a77dad124d2c82421e8ef4c6b2fe4dcb9770557bb961d",
       "git_commit": null,
       "provenance": {
         "origin": "bach",

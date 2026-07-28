@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 82 tracked runtime skills (107 total catalog definitions) organized by 10 categories.
+- 83 tracked runtime skills (108 total catalog definitions) organized by 10 categories.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
 - A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, and provenance.
 - German and English documentation for humans plus this compact file for crawlers and LLM agents.

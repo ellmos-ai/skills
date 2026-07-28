@@ -2,6 +2,15 @@
 
 ## 2026-07-28
 
+- Added `store-welle-usertest` 1.0.0: a portable, safety-gated protocol for
+  sequential Microsoft Store wave reviews, immediate user-feedback capture,
+  numbered asset reviews, submission sheets and verified Store-ID readback.
+- Refreshed the public catalog surfaces to 83 tracked skills / 108 definitions
+  and regenerated the 83-component registry, including the two previously
+  omitted After-Care skills.
+- Extended the privacy gate for local catalog-analysis output and the
+  host-specific `sync-procedure` skill so neither can enter the public repo
+  accidentally.
 - Added `automation-self-care` 1.0.0: provider-neutral discovery, planning and
   staged installation of a self-maintaining scheduler core set derived from the
   original ANTIGRAVITY maintenance family and its later F1-F6 adaptations.
