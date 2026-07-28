@@ -1,0 +1,4 @@
+interface:
+  display_name: "Automation Self-Care"
+  short_description: "Build and maintain scheduled automation fleets"
+  default_prompt: "Use $automation-self-care to create a safe self-maintenance core set for this app scheduler."

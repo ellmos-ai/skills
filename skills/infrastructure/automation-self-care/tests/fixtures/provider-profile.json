@@ -1,0 +1,24 @@
+{
+  "schema": "automation-self-care.provider.v1",
+  "actor_id": "example-desktop@example-host",
+  "provider": "example",
+  "app_class": "desktop-app",
+  "timezone": "Etc/UTC",
+  "capabilities": [
+    "inventory",
+    "run-history",
+    "create",
+    "update",
+    "pause",
+    "readback",
+    "workspace-bindings",
+    "permissions"
+  ],
+  "native_surface": {
+    "kind": "api",
+    "identifier": "example-scheduler-api"
+  },
+  "recovery_floor": {
+    "minimum_core_runs_per_day": 1
+  }
+}

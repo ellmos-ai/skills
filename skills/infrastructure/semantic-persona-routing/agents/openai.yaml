@@ -1,0 +1,4 @@
+interface:
+  display_name: "Semantic Persona Routing"
+  short_description: "Route tasks through personas, roles, and skills"
+  default_prompt: "Use $semantic-persona-routing to map this request to the right role, expert, and live skill endpoint."
