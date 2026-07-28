@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-07-28
+
+- Added `automation-self-care` 1.0.0: provider-neutral discovery, planning and
+  staged installation of a self-maintaining scheduler core set derived from the
+  original ANTIGRAVITY maintenance family and its later F1-F6 adaptations.
+- Added `semantic-persona-routing` 1.0.0: portable coordinator-role, expert,
+  persona and live-skill routing maps with exact provenance resolution,
+  conservative candidates and visible endpoint gaps.
+- Updated catalog documentation to 82 tracked skills / 107 definitions and
+  verified the complete suite with 52 passing tests.
+
 ## 2026-07-27
 
 - `agent-config-sync` 0.3.0: provider/app-class discovery, topology offers and

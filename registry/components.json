@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-23T13:39:43.630389+00:00",
+    "generated_at": "2026-07-28T00:00:00+00:00",
     "schema_version": "skill-v1",
-    "component_count": 77
+    "component_count": 80
   },
   "components": [
     {
@@ -2023,6 +2023,69 @@
       "warnings": []
     },
     {
+      "id": "skill:infrastructure:automation-self-care",
+      "name": "automation-self-care",
+      "type": "skill",
+      "path": "skills/infrastructure/automation-self-care/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:e45d4803a4a7fcefba37e6cb0559207aee3120f09a81b4f36b203669ab848da1",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": true,
+        "language": "en",
+        "file_count": 7
+      },
+      "warnings": []
+    },
+    {
       "id": "skill:infrastructure:agents-bridge",
       "name": "agents-bridge",
       "type": "skill",
@@ -2271,6 +2334,69 @@
         "has_tests": false,
         "language": "de",
         "file_count": 21
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:semantic-persona-routing",
+      "name": "semantic-persona-routing",
+      "type": "skill",
+      "path": "skills/infrastructure/semantic-persona-routing/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.0.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:8a4bc6cb00b6152d930831a05e6d39dd66be199a5bc83f0d2da63c72a1e7fe19",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": null,
+        "origin_version": null,
+        "origin_commit": null,
+        "last_sync_from_origin": null,
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": true,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": true,
+        "language": "en",
+        "file_count": 6
       },
       "warnings": []
     },

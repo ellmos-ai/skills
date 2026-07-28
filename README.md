@@ -8,10 +8,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
-[![Skills: 80 Tracked](https://img.shields.io/badge/Skills-80%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Skills: 82 Tracked](https://img.shields.io/badge/Skills-82%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Catalog Quality: 4.8/5](https://img.shields.io/badge/Catalog%20Quality-4.8%2F5-success.svg)](catalog.py)
-[![Tests: 46 Passed](https://img.shields.io/badge/Tests-46%20Passed-brightgreen.svg)](testing/)
+[![Tests: 52 Passed](https://img.shields.io/badge/Tests-52%20Passed-brightgreen.svg)](testing/)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
@@ -30,13 +30,13 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Catalog["catalog.py Registry (105 Skills / 80 Tracked)"] --> Categories
+    Catalog["catalog.py Registry (107 Skills / 82 Tracked)"] --> Categories
     subgraph Categories ["10 Public Categories"]
         Assist["assist (9)"]
         Dev["dev (15)"]
         Edu["education (4)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (6)"]
+        Infra["infrastructure (9)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (19)"]
@@ -62,7 +62,7 @@ flowchart TD
 
 ## Catalog Snapshot
 
-The current public catalog contains 80 tracked runtime skills:
+The current public catalog contains 82 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -70,7 +70,7 @@ The current public catalog contains 80 tracked runtime skills:
 | <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 15 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Academic planning, source-based learning, exam preparation, and a support-worksheet generator pointer skill |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 7 | Portable AI setup, skill landscape management, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 9 | Portable AI setup, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 19 | German-language psychoeducation and counseling method playbooks |
@@ -101,6 +101,8 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | Self-contained scientific literature workflow around PubMed and arXiv (pure Python stdlib) -- turns ad hoc paper hunting into a repeatable, source-backed research pass, fully portable without the ellmos ecosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Discovers provider/app-class surfaces and plans user-selected MCP, skill and rule-file truth topologies. |
 | [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Provider-neutral agent boot bridge: discovers rule surfaces and renders loaders from user-selected single or ordered multi-file truth. |
+| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Builds a provider-neutral maintenance core set for scheduled LLM tasks and desktop-app automations with native readback, rollback and cross-system coverage. |
+| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routes requests through coordinator roles, experts and verified live skill endpoints while keeping persona overlays separate from capabilities and permissions. |
 | <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Standalone development-automation pipeline (code analysis, task engine, policies, prompt templates) in zero-dependency Python -- a complete dev-agent workflow without external services. |
 | <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Removes AI traces and chat residue from finished texts and handles AI-disclosure levels -- keeps published documents clean of LLM artifacts. |
 | <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Distinctive multi-technique method for mining ideas out of stuck problems -- the structured alternative to free-form brainstorming when a project has hit a wall. |

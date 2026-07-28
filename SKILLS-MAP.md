@@ -7,7 +7,7 @@
 > lokal, nie gepusht).
 
 Quelle: `git ls-files skills/` + Frontmatter-`description` (erste Zeile/Satzanfang).
-Stand: 2026-07-23.
+Stand: 2026-07-28.
 
 ```text
 skills/
@@ -46,11 +46,13 @@ skills/
 │   ├── rbx-studio — Bedienung von Roblox Studio für die Spieleentwicklung — der visuelle Editor, in dem die 3D-Szene gebaut, getestet und...
 │   ├── rojo — Bedienung von Rojo — dem Filesystem-zu-Roblox-Studio-Sync-Tool für professionelle Roblox-Entwicklung in VS Code / Claude Code...
 │   └── using-blender — General Blender workflow skill for AI agents working with .blend, .fbx, .obj,...
-├── infrastructure/  (7)
+├── infrastructure/  (9)
 │   ├── agent-config-sync — Entdeckt Anbieter- und App-Klassen-Flächen und plant nutzergewählte Wahrheits-Topologien für MCPs, Skills und Regeldateien.
 │   ├── agents-bridge — Anbieter- und nutzerneutrale Brücke für Boot-Regeln: entdeckt Flächen und erzeugt Loader aus explizit gewählten Wahrheitsquellen.
 │   ├── ai-portable-setup — Erstellt eine portable KI-Arbeitsumgebung auf einem USB-Stick oder beliebigem Laufwerk. RAG-Pipeline mit lokalen LLM-Modellen...
+│   ├── automation-self-care — Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations.
 │   ├── mcp-config-sync — Anbieterneutraler MCP-Einstieg in agent-config-sync; entdeckt Flächen und plant explizit gewählte Synchronisierungen.
+│   ├── semantic-persona-routing — Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints.
 │   ├── skill-explorer — Verwaltet die eigene Skill-Landschaft: sichtet und vergleicht vorhandene Skills (Audit-Modus), recherchiert im Web nach neuen...
 │   ├── skill-extractor — Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert...
 │   └── workflow-extract — Baut aus einem Chatverlauf oder aus bestehenden Automatisierungs-Prompts (z. B. eines anderen Agenten-Systems) eine...

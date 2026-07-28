@@ -8,10 +8,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
-[![Skills: 80 Tracked](https://img.shields.io/badge/Skills-80%20Getrackt-brightgreen.svg)](SKILLS-MAP.md)
+[![Skills: 82 Tracked](https://img.shields.io/badge/Skills-82%20Getrackt-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 [![Katalog-Qualität: 4.8/5](https://img.shields.io/badge/Katalog--Qualit%C3%A4t-4.8%2F5-success.svg)](catalog.py)
-[![Tests: 46 Erfolgreich](https://img.shields.io/badge/Tests-46%20Erfolgreich-brightgreen.svg)](testing/)
+[![Tests: 52 Erfolgreich](https://img.shields.io/badge/Tests-52%20Erfolgreich-brightgreen.svg)](testing/)
 
 > [!NOTE]
 > **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.
@@ -30,13 +30,13 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ```mermaid
 flowchart TD
-    Catalog["catalog.py Registry (105 Skills / 80 Getrackt)"] --> Categories
+    Catalog["catalog.py Registry (107 Skills / 82 Getrackt)"] --> Categories
     subgraph Categories ["10 Öffentliche Kategorien"]
         Assist["assist (9)"]
         Dev["dev (15)"]
         Edu["education (4)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (6)"]
+        Infra["infrastructure (9)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (19)"]
@@ -62,7 +62,7 @@ flowchart TD
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 80 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 82 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
@@ -70,7 +70,7 @@ Der aktuelle öffentliche Katalog enthält 80 getrackte Laufzeit-Skills:
 | <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 15 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung und ein Verweis-Skill für Fördermaterial-Generierung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 7 | Portables KI-Setup, Skill-Landschaftspflege, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 9 | Portables KI-Setup, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
@@ -101,6 +101,8 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | In sich geschlossener Workflow für wissenschaftliche Literatur rund um PubMed und arXiv (reine Python-Stdlib) — macht aus wilder Paper-Suche einen wiederholbaren, quellengestützten Recherche-Durchlauf, voll portabel ohne das ellmos-Ökosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Entdeckt Anbieter- und App-Klassen-Flächen und plant nutzergewählte Wahrheits-Topologien für MCPs, Skills und Regeldateien. |
 | [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Anbieterneutrale Boot-Brücke: entdeckt Regel-Flächen und erzeugt Loader aus einer vom Nutzer gewählten einzelnen oder geordneten mehrteiligen Wahrheit. |
+| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
+| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
 | <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Eigenständige Entwicklungs-Automatisierungs-Pipeline (Code-Analyse, Task-Engine, Policies, Prompt-Templates) in Zero-Dependency-Python — ein vollständiger Dev-Agent-Workflow ohne externe Dienste. |
 | <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Entfernt KI-Spuren und Chat-Reste aus fertigen Texten und behandelt KI-Disclosure-Stufen — hält publizierte Dokumente frei von LLM-Artefakten. |
 | <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Eigenständige Mehrtechniken-Methodik, um Ideen aus festgefahrenen Problemen zu schürfen — die strukturierte Alternative zum freien Brainstorming, wenn ein Projekt feststeckt. |
