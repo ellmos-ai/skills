@@ -103,7 +103,10 @@ Classify a failure before changing anything:
 
 ## Four safeguards
 
-1. Self-protection: care tasks cannot disable the recovery core.
+1. Self-protection: care tasks cannot disable the recovery core or reduce their
+   own cadence below `recovery_floor.minimum_core_runs_per_day`. A controlled
+   pause remains possible only after an explicit user decision, a security gate
+   or an evidenced emergency.
 2. Deletion protection: deleted tasks remain suppressed until the user reverses
    the decision.
 3. Effect check and rollback: every change has a before-state and follow-up.
@@ -111,6 +114,25 @@ Classify a failure before changing anything:
 
 Locks, publication gates, privacy boundaries and explicit user decisions remain
 stronger than every tuning recommendation.
+
+## Visible naming and stable identity
+
+Each adapter profile supplies a non-sensitive `app_display_name`. The generated
+visible title is always:
+
+```text
+<APP_DISPLAY_NAME> — <CARE_TITLE>
+```
+
+A Codex adapter therefore emits `CODEX — ...`; other providers use their own app
+label. The stable IDs in the topology tables (`automation-care.*`) do not change.
+Adapters reconcile by stable ID and semantic role before considering legacy
+unprefixed titles, update one matched task in place and block ambiguous matches.
+They never create a replacement merely because the visible title differs.
+
+The prefix helps humans recognize protected core tasks but does not confer
+permissions and does not replace the recovery floor, deletion/suppression log,
+rollback or native readback.
 
 ## Rollout order
 

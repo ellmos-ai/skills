@@ -1,6 +1,6 @@
 ---
 name: automation-self-care
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
@@ -37,7 +37,7 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
   last_sync_from_origin: null
   last_sync_to_origin: null
-  local_changes_since_sync: false
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="automation-self-care banner">
@@ -59,7 +59,11 @@ requiring evidence, reversible changes and native readback.
   produce a manual installation plan and stop before mutation.
 - Make at most one independently testable tuning change per care run.
 - Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
+  below the configured recovery floor. Only an explicit user decision, a
+  security gate or an evidenced emergency may authorize a controlled pause.
+- Keep stable machine task IDs independent from visible titles. Treat an app
+  prefix as an additional recognition safeguard, never as identity or as a
+  replacement for recovery, suppression, rollback and readback controls.
 - Preserve the previous prompt, schedule, model, permissions and enabled state so
   every mutation can be rolled back.
 - Count success only after outcome evidence, not merely scheduler start or exit 0.
@@ -69,9 +73,9 @@ requiring evidence, reversible changes and native readback.
 
 ### 1. Discover the native automation surface
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
+Inventory the current actor, provider, non-sensitive `app_display_name`, app
+class, scheduler surface, supported operations, state files, run history, usage
+telemetry and readback method. Record capabilities using the profile contract in
 [provider-adapter-contract.md](references/provider-adapter-contract.md).
 
 Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
@@ -81,9 +85,15 @@ mutation path.
 
 ### 2. Inventory the fleet
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+For each task capture a stable local identifier, semantic role, visible title,
+purpose, prompt fingerprint, schedule, enabled state, model, reasoning,
+permissions, target paths, last scheduler event, last successful outcome and
+current owner. Keep prompt content local.
+
+Match existing tasks semantically before proposing creation. Prefer stable task
+ID, then provider-native ID, semantic role and known legacy title. A different
+visible title is not evidence that a new task is needed. Ambiguous matches block
+the plan instead of creating a duplicate.
 
 Check the authoritative live surface twice before mutation when the app can rewrite
 state from memory.
@@ -100,10 +110,14 @@ Generate a provider-neutral plan:
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
+python scripts/build_core_set.py --lint-plan automation-care-plan.json
 ```
 
 The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+collision-free local times before applying the plan. New provider profiles set
+`app_display_name` explicitly; CI can enforce that with `--strict-profile`.
+Generated visible titles use `<APP_DISPLAY_NAME> — <CARE_TITLE>` while
+`automation-care.*` task IDs remain unchanged. A Codex profile uses `CODEX`.
 
 ### 4. Stage installation
 
@@ -114,6 +128,11 @@ Install through the native provider adapter:
 3. Add prompt-quality tuning with rollback.
 4. Add frequency and load tuning only after enough run evidence exists.
 5. Add cross-system coordination last.
+
+For a title-only migration, update the semantically matched task in place through
+the supported native surface. Read back the stable ID and all non-title fields;
+any unexpected operational delta requires rollback. A second plan/apply cycle
+must report no change and must not create another task.
 
 Create new or imported tasks disabled unless the user explicitly approved active
 installation. For an unattended pilot, require a deletion log, before-state
@@ -170,6 +189,15 @@ approved tasks through the native surface. A folder containing a task prompt
 without a live scheduler registration is not a completed setup.
 
 ## Changelog
+
+### 1.1.0 (2026-07-29)
+
+- Added provider-neutral `app_display_name` and the visible title format
+  `<APP_DISPLAY_NAME> — <CARE_TITLE>`, including `CODEX — ...` through the
+  Codex adapter profile.
+- Added plan linting, stable-ID/semantic reconciliation and duplicate guards.
+- Clarified that naming is additive to the recovery floor and that title-only
+  migrations must preserve every non-title fingerprint.
 
 ### 1.0.1 (2026-07-30)
 

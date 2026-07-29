@@ -2,6 +2,7 @@
   "schema": "automation-self-care.provider.v1",
   "actor_id": "example-desktop@example-host",
   "provider": "example",
+  "app_display_name": "EXAMPLE",
   "app_class": "desktop-app",
   "timezone": "Etc/UTC",
   "capabilities": [
