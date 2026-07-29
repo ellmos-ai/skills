@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: [Français] Compétence d'agent pour decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
+description: [Français] Documentation complète traduite en français pour la compétence decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `decision-briefing`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `decision-briefing`.
 
 
 
@@ -66,7 +66,7 @@ Defer:     "E03: later"
 
 ---
 
-## Flux de Travail (4 Phases)
+## Flux de Travail et Étapes (4 Phases)
 
 ```
 Topic + decisions at hand
@@ -147,7 +147,7 @@ DECISION: <question>
 
 ---
 
-## Exemple Briefing (fictional)
+## Exemple d'Utilisation Briefing (fictional)
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
 

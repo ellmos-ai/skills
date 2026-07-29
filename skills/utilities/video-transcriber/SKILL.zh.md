@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-06-20
-description: [中文] 智能体技能: video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
+description: [中文] 针对该技能的完整中文文档: video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `video-transcriber`.
+> **中文** — [中文] 针对该技能的完整中文文档: `video-transcriber`.
 
 
 
@@ -102,7 +102,7 @@ output = format_markdown(meta, transcript)
 - Automatic subtitles can contain recognition errors
 - No audio download, no built-in speech recognition
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-06-20)
 - Renamed from `yt-transcriber` → `video-transcriber` (YouTube branding policy:

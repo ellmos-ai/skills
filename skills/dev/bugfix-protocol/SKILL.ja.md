@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+description: [日本語] スキルに関する完全な日本語ドキュメント: bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `bugfix-protocol`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `bugfix-protocol`.
 
 
 
@@ -30,7 +30,7 @@ Prevents aimless trial-and-error and ensures fixes are sustainable.
 
 ---
 
-## 概要
+## 概要と目的
 
 | Phase | Name | Goal | Max. Time |
 |-------|------|------|-----------|

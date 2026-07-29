@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para motivational-interviewing: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
+description: [Español] Documentación completa traducida al español para la habilidad motivational-interviewing: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `motivational-interviewing`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `motivational-interviewing`.
 
 
 
-# Motivational Interviewing (Versión en Español)
+# Motivational Interviewing
 
 > OARS techniques, stages of change, and change talk: Fostering intrinsic motivation for change without pressure or manipulation
 
@@ -64,7 +64,7 @@ OARS are the four core competencies of motivational interviewing.
 
 **Principle:** Ask questions that invite reflection and storytelling, that cannot be answered with yes/no.
 
-**Ejemplos:**
+**Examples:**
 - "What would you like to see change?"
 - "How would your life look if you had made this change?"
 - "What brought you to think about this?"
@@ -82,7 +82,7 @@ OARS are the four core competencies of motivational interviewing.
 
 **Principle:** Acknowledge strengths, efforts, and positive steps of the other person. Not praising ("You're great"), but specifically naming what was observed.
 
-**Ejemplos:**
+**Examples:**
 - "It takes courage to speak openly about this."
 - "You managed to hold on for three days — that shows you're serious."
 - "Despite the difficult situation, you came today — that shows commitment."
@@ -101,7 +101,7 @@ OARS are the four core competencies of motivational interviewing.
 
 **Types of reflections:**
 
-| Type | Description | Ejemplo |
+| Type | Description | Example |
 |------|-------------|---------|
 | Simple | Repeat/paraphrase content | "You're saying it's hard for you." |
 | Deepening | Pick up on what's beneath the surface | "It sounds like you're torn." |
@@ -126,7 +126,7 @@ Both make sense."
 - **Linking:** Connect earlier statements with current ones
 - **Transitional:** At the end of a conversation, leading to next steps
 
-**Ejemplo:**
+**Example:**
 ```
 "Let me summarize what I've heard so far:
 You've noticed that your sleep has gotten worse and it's

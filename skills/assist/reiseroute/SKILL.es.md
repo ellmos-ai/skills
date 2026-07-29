@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: Habilidad de agente para reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: [Español] Documentación completa traducida al español para la habilidad reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
@@ -17,17 +17,17 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `reiseroute`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `reiseroute`.
 
 
 
-# Travel Route (Versión en Español)
+# Travel Route
 
 **Route planning via OSRM (Open Source Routing Machine)**
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -47,7 +47,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.
@@ -60,22 +60,22 @@ mode of transport. No API key, no account required.
 ## CLI
 
 ```bash
-# Car route between two places (Versión en Español)
+# Car route between two places
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Bicycle (Versión en Español)
+# Bicycle
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# On foot (Versión en Español)
+# On foot
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Coordinates directly (lat,lon) (Versión en Español)
+# Coordinates directly (lat,lon)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON output (Versión en Español)
+# JSON output
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Munich" "Vienna" --json
 
-# Help (Versión en Español)
+# Help
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 

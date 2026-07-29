@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: Habilidad de agente para worksheet-generator: Points to the standalone module worksheet-generator: generates individualized worksheets and practice material for educational and therapeutic professionals from a support goal (free text + optional ICF codes), level, and age -- optionally enriched by a scan of existing material. Use this skill when a worksheet, exercise sheet, or support material should be created. No client/person reference (only goal/level/age). The ICF reference is bring-your-own -- with a clear boundary: a material generator, not a therapy program; generated sheets must be professionally reviewed before use.
+description: [Español] Documentación completa traducida al español para la habilidad worksheet-generator: Points to the standalone module worksheet-generator: generates individualized worksheets and practice material for educational and therapeutic professionals from a support goal (free text + optional ICF codes), level, and age -- optionally enriched by a scan of existing material. Use this skill when a worksheet, exercise sheet, or support material should be created. No client/person reference (only goal/level/age). The ICF reference is bring-your-own -- with a clear boundary: a material generator, not a therapy program; generated sheets must be professionally reviewed before use.
 
 standalone: true
 anthropic_compatible: true
@@ -18,11 +18,11 @@ language: es
 status: active
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `worksheet-generator`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `worksheet-generator`.
 
 
 
-# worksheet-generator -- Pointer Skill (Versión en Español)
+# worksheet-generator -- Pointer Skill
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository

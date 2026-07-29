@@ -2,14 +2,14 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `decision-avatar`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `decision-avatar`.
 
 
 
-> **English Translation** — Versión oficial en español of `decision-avatar`.
+> **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar (Versión en Español)
+# Decision Avatar
 
 ## Zweck
 

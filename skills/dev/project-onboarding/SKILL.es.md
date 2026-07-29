@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para project-onboarding: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
+description: [Español] Documentación completa traducida al español para la habilidad project-onboarding: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,18 +19,18 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `project-onboarding`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `project-onboarding`.
 
 
 
-# Standard Onboarding Procedure for New Software Projects (Versión en Español)
+# Standard Onboarding Procedure for New Software Projects
 
 **Version:** 1.0
 **Date:** 2026-03-12
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
 
@@ -56,7 +56,7 @@ This procedure defines which steps to perform on newly discovered software folde
 ### Template
 
 ```markdown
-# Feature Analysis: <ToolName> (Versión en Español)
+# Feature Analysis: <ToolName>
 
 ## Brief Description
 A short sentence describing what the tool does.
@@ -214,22 +214,22 @@ Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
 
 ---
 
-## Example: New Tool "MyTool"
+## Ejemplo de Uso: New Tool "MyTool"
 
 ```bash
-# 1. Feature analysis (Versión en Español)
-# -> Create Feature_Analysis_MyTool.md (see template) (Versión en Español)
+# 1. Feature analysis
+# -> Create Feature_Analysis_MyTool.md (see template)
 
-# 2. Code quality (Versión en Español)
+# 2. Code quality
 pylint MyTool/main.py
 flake8 MyTool/main.py
 file -i MyTool/main.py  # Check encoding
 
-# 3. TASKS.txt (Versión en Español)
-# -> Create in tool folder with status "QUALITY REVIEW" (Versión en Español)
+# 3. TASKS.txt
+# -> Create in tool folder with status "QUALITY REVIEW"
 
-# 4. Create tasks (Versión en Español)
-# -> Capture TASKS.txt entries as issues/tickets (Versión en Español)
+# 4. Create tasks
+# -> Capture TASKS.txt entries as issues/tickets
 ```
 
 ---

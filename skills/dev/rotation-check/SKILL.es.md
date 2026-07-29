@@ -2,14 +2,14 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rotation-check`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `rotation-check`.
 
 
 
-> **English Translation** — Versión oficial en español of `rotation-check`.
+> **English Translation** — Official English version of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (Versión en Español)
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
 
 ## Zweck
 

@@ -2,16 +2,16 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `llm-text-hygiene`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `llm-text-hygiene`.
 
 
 
-> **English Translation** — Versión oficial en español of `llm-text-hygiene`.
+> **English Translation** — Official English version of `llm-text-hygiene`.
 
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Versión en Español)
+# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
 
 ## Zweck
 

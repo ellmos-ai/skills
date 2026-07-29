@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
 updated: 2026-07-03
-description: Habilidad de agente para skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
+description: [Español] Documentación completa traducida al español para la habilidad skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,16 +18,16 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `skill-extractor`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `skill-extractor`.
 
 
 
-> **English Translation** — Versión oficial en español of `skill-extractor`.
+> **English Translation** — Official English version of `skill-extractor`.
 
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-# Skill-Extractor — aus Chatverläufen Skills gewinnen (Versión en Español)
+# Skill-Extractor — aus Chatverläufen Skills gewinnen
 
 ## Zweck
 
@@ -82,7 +82,7 @@ Bevor irgendetwas geschrieben wird, die bestehende Landschaft prüfen:
 
 | Befund | Aktion |
 | --- | --- |
-| Kandidat ist im Kern schon abgedeckt | **Erweitern:** fehlende Elemente in den bestehenden Skill einarbeiten (neue Sektion, neue Technik, neuer Fallstrick), Version MINOR erhöhen, Registro de Cambios-Eintrag |
+| Kandidat ist im Kern schon abgedeckt | **Erweitern:** fehlende Elemente in den bestehenden Skill einarbeiten (neue Sektion, neue Technik, neuer Fallstrick), Version MINOR erhöhen, Changelog-Eintrag |
 | Teilüberlappung, aber anderer Kern | **Neuer Skill** mit Querverweis („Verwandte Skills") auf die Nachbarn — keine Inhalte duplizieren, sondern verweisen |
 | Nichts Vergleichbares | **Neuer Skill** |
 
@@ -100,7 +100,7 @@ andere Projekte.
 ### 5. Skill schreiben
 
 - **Format:** Konventionen der Ziel-Bibliothek beachten (Frontmatter, Namensschema, Sprache,
-  Registro de Cambios). In dieser Bibliothek: `docs/CONVENTIONS.md` (vollständiger YAML-Header,
+  Changelog). In dieser Bibliothek: `docs/CONVENTIONS.md` (vollständiger YAML-Header,
   kebab-case-Name, Deutsch primär, Semantic Versioning).
 - **Description „pushy" formulieren:** Die description ist der Trigger-Mechanismus. Sowohl WAS
   der Skill tut als auch WANN er greifen soll (typische User-Formulierungen) hineinschreiben —
@@ -161,7 +161,7 @@ mach daraus einen Skill."
    `invoice-parsing` mit Querverweis auf `pdf`.
 3. Neutralisieren: konkreter Ablageordner und Firmenname → Konfigurationsblock.
 4. Skill schreiben: Schema-Tabelle, die Komma/Punkt-Korrektur als Fallstrick,
-   Registro de Cambios 1.0.0. Trigger-Test mit „lies diese Rechnung ein".
+   Changelog 1.0.0. Trigger-Test mit „lies diese Rechnung ein".
 ```
 
 ## Red Flags

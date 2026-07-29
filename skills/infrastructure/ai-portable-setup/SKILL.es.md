@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
+description: [Español] Documentación completa traducida al español para la habilidad ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': [
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `ai-portable-setup`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `ai-portable-setup`.
 
 
 
-# AI Portable Setup (Versión en Español)
+# AI Portable Setup
 
 Creates a portable AI workspace with a local RAG pipeline.
 Designed for USB drives or external drives — works offline
@@ -32,19 +32,19 @@ with Ollama and local embedding models.
 ## Quick Start
 
 ```bash
-# Create structure on USB drive (Versión en Español)
+# Create structure on USB drive
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system: (Versión en Español)
+# Then on the target system:
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents (Versión en Español)
+# Index documents
 python rag/ingest.py
 
-# Query (Versión en Español)
+# Query
 python rag/query.py "My question..."
 python rag/query.py --mode icf "Observations about the client"
 ```

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [Русский] Навык агента для academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
+description: [Русский] Полное руководство и документация на русском языке для навыка academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
 
 standalone: true
 anthropic_compatible: true
@@ -19,13 +19,13 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `academic-study-test`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `academic-study-test`.
 
 
 
 # Academic Study Test
 
-## Общее описание
+## Общий обзор и цели
 
 Support exam preparation with structured self-tests, realistic simulations,
 and diagnostic feedback. The skill is subject- and institution-neutral and

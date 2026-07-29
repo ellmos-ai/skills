@@ -5,7 +5,7 @@ type: agent
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: Habilidad de agente para dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
+description: [Español] Documentación completa traducida al español para la habilidad dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `dev-soft-agent`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `dev-soft-agent`.
 
 
 
-# Dev Soft Agent (Versión en Español)
+# Dev Soft Agent
 
 Automated software development pipeline. Extracted from BACH's ATI agent,
 runs fully standalone with pure Python standard library.
@@ -56,22 +56,22 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects (Versión en Español)
+# Scan projects
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention) (Versión en Español)
+# Select project (weighted random selection by naming convention)
 project = loop.select_project()
 
-# Analyze code (Versión en Español)
+# Analyze code
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks (Versión en Español)
+# Load and prioritize tasks
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session (Versión en Español)
+# Complete dev session
 result = loop.run_session()
 loop.save_session()
 ```
@@ -106,8 +106,8 @@ Weight determines the probability in random selection.
 ## TASKS.txt Format
 
 ```markdown
-# TASKS - ProjectName (Versión en Español)
-# As of: 2026-03-12 (Versión en Español)
+# TASKS - ProjectName
+# As of: 2026-03-12
 
 ## OPEN
 - [ ] [BUG] Description of the bug

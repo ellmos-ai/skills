@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [中文] 智能体技能: research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+description: [中文] 针对该技能的完整中文文档: research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `research-agent`.
+> **中文** — [中文] 针对该技能的完整中文文档: `research-agent`.
 
 
 
@@ -107,7 +107,7 @@ from scripts.agent import ResearchAgent
 agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 0.1.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/ResearchAgent to skill library

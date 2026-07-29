@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: Habilidad de agente para law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
+description: [Español] Documentación completa traducida al español para la habilidad law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
@@ -18,11 +18,11 @@ language: es
 status: active
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `law-checker`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `law-checker`.
 
 
 
-# law-checker (Legal Department) -- Pointer Skill (Versión en Español)
+# law-checker (Legal Department) -- Pointer Skill
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)

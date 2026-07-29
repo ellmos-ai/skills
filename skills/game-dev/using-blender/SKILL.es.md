@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-06-20
 updated: 2026-06-20
-description: Habilidad de agente para using-blender: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
+description: [Español] Documentación completa traducida al español para la habilidad using-blender: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,14 +18,14 @@ status: active
 provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `using-blender`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `using-blender`.
 
 
 
-> **English Translation** — Versión oficial en español of `using-blender`.
+> **English Translation** — Official English version of `using-blender`.
 
 
-# Using Blender (Versión en Español)
+# Using Blender
 
 ## Kernregel
 

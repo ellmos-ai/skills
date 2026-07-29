@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [Français] Compétence d'agent pour web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: [Français] Documentation complète traduite en français pour la compétence web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 
 standalone: true
 anthropic_compatible: true
@@ -20,7 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `web-reading`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `web-reading`.
 
 
 

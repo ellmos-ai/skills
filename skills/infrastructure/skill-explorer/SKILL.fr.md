@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: [Français] Compétence d'agent pour skill-explorer: Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for "compare/audit skills", "which skills are duplicated", "form skill families", "clean up/consolidate skills", "maintain the skill register", "find skills/plugins for topic X", "install new skills", "browse the skill marketplace", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.
+description: [Français] Documentation complète traduite en français pour la compétence skill-explorer: Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for "compare/audit skills", "which skills are duplicated", "form skill families", "clean up/consolidate skills", "maintain the skill register", "find skills/plugins for topic X", "install new skills", "browse the skill marketplace", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'py
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `skill-explorer`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `skill-explorer`.
 
 
 
@@ -66,7 +66,7 @@ reason. Once the branch supersedes the original, the original is deregistered fr
 skills do not collide. Third-party branches stay **private** — they do not go into the public
 `.AI/.SKILLS` library. Details: `references/skill-branching.md`.
 
-## Flux de Travail
+## Flux de Travail et Étapes
 
 1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
    Explore mode. (Explore can build on a previous audit/`config.json`.)

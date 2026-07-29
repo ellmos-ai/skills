@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [Русский] Навык агента для location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: [Русский] Полное руководство и документация на русском языке для навыка location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ru
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `location-suche`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `location-suche`.
 
 
 
@@ -27,7 +27,7 @@ language: ru
 
 ---
 
-## Общее описание
+## Общий обзор и цели
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -47,7 +47,7 @@ No API key required. No persistent store.
 
 ---
 
-## Рабочий процесс
+## Рабочий процесс и шаги
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.

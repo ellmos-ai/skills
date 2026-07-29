@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-06-13
-description: [中文] 智能体技能: dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
+description: [中文] 针对该技能的完整中文文档: dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `dev-cycle`.
+> **中文** — [中文] 针对该技能的完整中文文档: `dev-cycle`.
 
 
 
@@ -30,7 +30,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 ---
 
-## 概述
+## 概述与目标
 
 ```
   +--------------------------------------------------------------+
@@ -276,7 +276,7 @@ If your skill collection has a skill index, search it for further phase-specific
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-06-13)
 - New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep

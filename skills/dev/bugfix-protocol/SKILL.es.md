@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+description: [Español] Documentación completa traducida al español para la habilidad bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
 
 standalone: true
 anthropic_compatible: true
@@ -19,18 +19,18 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `bugfix-protocol`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `bugfix-protocol`.
 
 
 
-# Bugfix Protocol: Systematic 6-Phase Debugging (Versión en Español)
+# Bugfix Protocol: Systematic 6-Phase Debugging
 
 A structured approach to bugs — from symptom analysis to verification.
 Prevents aimless trial-and-error and ensures fixes are sustainable.
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 | Phase | Name | Goal | Max. Time |
 |-------|------|------|-----------|
@@ -62,14 +62,14 @@ Before diving deep — check the most common causes:
 ### Quick Actions
 
 ```bash
-# Clear cache (Versión en Español)
+# Clear cache
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports (Versión en Español)
+# Check imports
 python -c "import modulename"
 
-# Check syntax (Versión en Español)
+# Check syntax
 python -m py_compile file.py
 ```
 
@@ -99,17 +99,17 @@ Depending on the project, specialized diagnostic scripts may be helpful:
 ### Debugging Techniques
 
 ```python
-# 1. Print debugging (quick but effective) (Versión en Español)
+# 1. Print debugging (quick but effective)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive) (Versión en Español)
+# 2. Breakpoint (interactive)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback (Versión en Español)
+# 3. Extended traceback
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print (Versión en Español)
+# 4. Logging instead of print
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -125,21 +125,21 @@ logger.debug(f"State: {state!r}")
 Goal: Reproduce the bug with minimal code.
 
 ```python
-# test_bug.py — Minimal Reproduction Test (Versión en Español)
+# test_bug.py — Minimal Reproduction Test
 """
 Bug: [Short description]
 Expected: [What should happen]
 Actual: [What happens instead]
 """
 
-# Minimal setup (Versión en Español)
-# ... only the essentials (Versión en Español)
+# Minimal setup
+# ... only the essentials
 
-# Bug trigger (Versión en Español)
-# ... exact code that triggers the bug (Versión en Español)
+# Bug trigger
+# ... exact code that triggers the bug
 
-# Expected result (Versión en Español)
-# assert result == expected, f"Got {result}" (Versión en Español)
+# Expected result
+# assert result == expected, f"Got {result}"
 ```
 
 ### Isolation Strategies
@@ -163,13 +163,13 @@ Actual: [What happens instead]
 ### Fix Patterns
 
 ```python
-# BAD: Treating the symptom (Versión en Español)
+# BAD: Treating the symptom
 try:
     result = broken_function()
 except:  # Swallow everything
     result = default_value
 
-# GOOD: Fix the root cause (Versión en Español)
+# GOOD: Fix the root cause
 def broken_function():
     if input_data is None:  # Actual cause: missing None check
         return default_value
@@ -203,16 +203,16 @@ def broken_function():
 ### Test Commands
 
 ```bash
-# Unit tests (Versión en Español)
+# Unit tests
 python -m pytest tests/ -v
 
-# Only affected tests (Versión en Español)
+# Only affected tests
 python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type check (Versión en Español)
+# Type check
 python -m mypy file.py
 
-# Lint (Versión en Español)
+# Lint
 python -m flake8 file.py
 ```
 
@@ -275,14 +275,14 @@ Test: [How verified]
 ### PyQt6 Debug Helpers
 
 ```python
-# Dump widget hierarchy (Versión en Español)
+# Dump widget hierarchy
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging (Versión en Español)
+# Signal debugging
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):

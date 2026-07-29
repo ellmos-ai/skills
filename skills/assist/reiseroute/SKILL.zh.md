@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [中文] 智能体技能: reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: [中文] 针对该技能的完整中文文档: reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `reiseroute`.
+> **中文** — [中文] 针对该技能的完整中文文档: `reiseroute`.
 
 
 
@@ -27,7 +27,7 @@ language: zh
 
 ---
 
-## 概述
+## 概述与目标
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -47,7 +47,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.
@@ -121,7 +121,7 @@ no persistent data storage.
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

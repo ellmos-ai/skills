@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para act-techniques: Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
+description: [Español] Documentación completa traducida al español para la habilidad act-techniques: Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `act-techniques`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `act-techniques`.
 
 
 
-# ACT Techniques — Acceptance & Commitment Therapy (Versión en Español)
+# ACT Techniques — Acceptance & Commitment Therapy
 
 ## Foundation
 

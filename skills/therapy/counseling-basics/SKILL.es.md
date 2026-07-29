@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para counseling-basics: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
+description: [Español] Documentación completa traducida al español para la habilidad counseling-basics: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `counseling-basics`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `counseling-basics`.
 
 
 
-# Counseling Basics (Versión en Español)
+# Counseling Basics
 
 > Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
 
@@ -74,7 +74,7 @@ This template describes basic therapeutic communication techniques. It serves as
 - Don't overdo it — too much mirroring feels artificial
 - Don't over-elaborate interpretations
 
-**Ejemplos:**
+**Examples:**
 > Person: "I don't know what to do anymore."
 > Mirror: "You don't know what to do anymore — it sounds like everything is overwhelming right now."
 
@@ -94,7 +94,7 @@ This template describes basic therapeutic communication techniques. It serves as
 **Formula:**
 > "If I understand you correctly, you're saying [paraphrase]. Is that right?"
 
-**Ejemplos:**
+**Examples:**
 > Person: "My mother nags me every day with the same accusations and I can't take it anymore."
 > Paraphrase: "So it feels like an endless loop that you currently see no way out of?"
 
@@ -109,7 +109,7 @@ This template describes basic therapeutic communication techniques. It serves as
 - Leave room for personal answers
 - Cannot be answered with yes/no
 
-**Ejemplos:**
+**Examples:**
 - "How did that feel?"
 - "What happens inside you when that occurs?"
 - "How do you usually deal with this?"

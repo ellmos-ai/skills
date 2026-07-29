@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: [中文] 智能体技能: model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+description: [中文] 针对该技能的完整中文文档: model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `model-strategy`.
+> **中文** — [中文] 针对该技能的完整中文文档: `model-strategy`.
 
 
 
@@ -251,7 +251,7 @@ curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" 
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 2.0.0 (2026-06-12)
 - Cross-agent delegation: Gemini, Codex, Ollama (local host) as routing targets

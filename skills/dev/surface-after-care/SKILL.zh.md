@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `surface-after-care`.
+> **中文** — [中文] 针对该技能的完整中文文档: `surface-after-care`.
 
 
 
@@ -398,7 +398,7 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.6.0 (2026-07-24)
 - Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine

@@ -2,7 +2,7 @@
 language: ru
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `textproduction`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `textproduction`.
 
 
 
@@ -22,7 +22,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Рабочий процесс
+## Рабочий процесс и шаги
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

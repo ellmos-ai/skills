@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
+description: [中文] 针对该技能的完整中文文档: ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': [
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `ai-portable-setup`.
+> **中文** — [中文] 针对该技能的完整中文文档: `ai-portable-setup`.
 
 
 
@@ -107,7 +107,7 @@ Query -> Embedding -> Similarity Search -> Top-K Chunks
 - Ollama (with `mistral:instruct` and `nomic-embed-text`)
 - ~8 GB RAM for Mistral
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-03-12)
 - Consolidation from MODULAR_AGENTS/AI-Portable

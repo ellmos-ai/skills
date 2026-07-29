@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: problem-solving-training: Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.
+description: [日本語] スキルに関する完全な日本語ドキュメント: problem-solving-training: Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `problem-solving-training`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `problem-solving-training`.
 
 
 

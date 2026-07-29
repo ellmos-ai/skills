@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-06-13
-description: Habilidad de agente para systemisch-loesungsfokussiert: Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.
+description: [Español] Documentación completa traducida al español para la habilidad systemisch-loesungsfokussiert: Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `systemisch-loesungsfokussiert`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `systemisch-loesungsfokussiert`.
 
 
 
-# Systemic & Solution-Focused Methods (Versión en Español)
+# Systemic & Solution-Focused Methods
 
 > Miracle question, scaling, exceptions, circular questions, hypothetical questions — one integrated skill
 
@@ -98,7 +98,7 @@ What would be the first thing tomorrow morning that tells you the miracle has ha
 
 ### Variants
 
-| Type | Ejemplo question |
+| Type | Example question |
 |------|------------------|
 | **State scaling** | "How burdened do you feel right now?" |
 | **Coping scaling** | "How well do you manage your everyday life despite the problem?" |

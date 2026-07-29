@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [中文] 智能体技能: bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
+description: [中文] 针对该技能的完整中文文档: bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'p
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `bugsweep`.
+> **中文** — [中文] 针对该技能的完整中文文档: `bugsweep`.
 
 
 
@@ -170,7 +170,7 @@ Once counter >= target AND any_bug_found:
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-06-13)
 - Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly

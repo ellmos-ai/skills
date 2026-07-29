@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Habilidad de agente para kalender: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
+description: [Español] Documentación completa traducida al español para la habilidad kalender: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'option
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `kalender`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `kalender`.
 
 
 
@@ -59,7 +59,7 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 
 ---
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 1. **Check backend**: read `assist/prefs.json` → `kalender_backend`.
 2. **Without preference**: LLM asks user: local calendar, Google Calendar or other?
@@ -72,31 +72,31 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 ## CLI Entry Point
 
 ```bash
-# Create appointment (Versión en Español)
+# Create appointment
 python kalender_core.py add "Dentist" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Dr. X practice"]
 
-# Today's appointments (Versión en Español)
+# Today's appointments
 python kalender_core.py today
 
-# Weekly overview (Versión en Español)
+# Weekly overview
 python kalender_core.py week [--from 2026-06-22]
 
-# Monthly overview (Versión en Español)
+# Monthly overview
 python kalender_core.py month [--month 2026-07]
 
-# All appointments (optionally with search term) (Versión en Español)
+# All appointments (optionally with search term)
 python kalender_core.py list [--search "Dentist"] [--limit 50]
 
-# Delete appointment (Versión en Español)
+# Delete appointment
 python kalender_core.py delete <id>
 
-# ICS export (Versión en Español)
+# ICS export
 python kalender_core.py export [--id <id>] [--out calendar.ics]
 
-# Backend check (Versión en Español)
+# Backend check
 python kalender_core.py check-backend
 
-# Alternative store (e.g. for tests) (Versión en Español)
+# Alternative store (e.g. for tests)
 python kalender_core.py --store /tmp/kal_test.db today --dry-run
 ```
 

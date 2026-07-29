@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [日本語] エージェントスキル: wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
+description: [日本語] スキルに関する完全な日本語ドキュメント: wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `wayfinding-routing`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `wayfinding-routing`.
 
 
 
@@ -43,7 +43,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## 5つの緊急・方向性プロトコル
+## 5つの緊急・方向性判定プロトコル
 
 ### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
 - **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.

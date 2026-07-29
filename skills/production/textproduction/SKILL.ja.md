@@ -2,7 +2,7 @@
 language: ja
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `textproduction`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `textproduction`.
 
 
 
@@ -22,7 +22,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## ワークフロー
+## 実行ワークフローと手順
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

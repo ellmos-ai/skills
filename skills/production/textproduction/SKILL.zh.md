@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `textproduction`.
+> **中文** — [中文] 针对该技能的完整中文文档: `textproduction`.
 
 
 
@@ -22,7 +22,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## 工作流程
+## 工作流程与执行步骤
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.
@@ -40,7 +40,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
   nach `pr/config.json` kopieren und Kontaktdaten eintragen.
 - Optionale Stiloptimierung: DeepL Write (kostenlos bis 500.000 Zeichen/Monat).
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 2.0.0 (2026-06-22)
 - Umstrukturierung auf Router-Muster: SKILL.md = Einstieg + Routing-Tabelle.

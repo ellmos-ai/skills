@@ -2,7 +2,7 @@
 language: fr
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `llm-text-hygiene`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `llm-text-hygiene`.
 
 
 

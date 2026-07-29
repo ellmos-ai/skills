@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: Habilidad de agente para model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+description: [Español] Documentación completa traducida al español para la habilidad model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `model-strategy`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `model-strategy`.
 
 
 
-# Model-Switching Strategy (Versión en Español)
+# Model-Switching Strategy
 
 > Multi-model orchestration: score-based model selection, cross-agent delegation, advisor pairing, escalation triggers, and cost-efficiency optimization
 
@@ -90,7 +90,7 @@ SCORE = (10 - CLARITY) + COMPLEXITY + CREATIVITY + CONTEXT + CRITICALITY
 
 ### Score thresholds
 
-| Score | Model | Ejemplos |
+| Score | Model | Examples |
 |-------|-------|----------|
 | 0-8 | Ollama (local host) | prompt generation, summaries, simple texts |
 | 9-12 | Haiku | __init__.py, formatting, boilerplate |

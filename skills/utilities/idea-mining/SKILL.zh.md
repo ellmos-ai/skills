@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `idea-mining`.
+> **中文** — [中文] 针对该技能的完整中文文档: `idea-mining`.
 
 
 
@@ -135,7 +135,7 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `rotation-check` — Gerüst für den periodischen Einsatz.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-03)
 - Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in

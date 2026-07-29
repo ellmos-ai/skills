@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: Habilidad de agente para research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+description: [Español] Documentación completa traducida al español para la habilidad research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `research-agent`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `research-agent`.
 
 
 
-# Research Agent (Versión en Español)
+# Research Agent
 
 Modular research pipeline for scientific literature search.
 Uses exclusively Python standard library (urllib, xml, json).
@@ -48,15 +48,15 @@ from scripts.agent import ResearchAgent
 
 agent = ResearchAgent()
 
-# Quick search (Versión en Español)
+# Quick search
 result = agent.search("machine learning diagnostics", max_results=10)
 print(result)
 
-# Structured literature review (Versión en Español)
+# Structured literature review
 plan = agent.create_review_plan("transformer architectures", years=3)
 print(plan.total_articles, "articles found")
 
-# Save result (Versión en Español)
+# Save result
 agent.save_result(result, "research_ml.md", fmt="markdown")
 ```
 

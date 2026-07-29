@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: [日本語] スキルに関する完全な日本語ドキュメント: batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `batch-file-ops`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `batch-file-ops`.
 
 
 
@@ -58,7 +58,7 @@ python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-
 
 ---
 
-## 実行例s
+## 実行例と使用方法s
 
 ```bash
 # List all Python files in a directory

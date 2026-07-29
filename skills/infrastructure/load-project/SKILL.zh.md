@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `load-project`.
+> **中文** — [中文] 针对该技能的完整中文文档: `load-project`.
 
 
 
@@ -124,7 +124,7 @@ Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
 - Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
   geladen werden soll.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-28)
 - Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.

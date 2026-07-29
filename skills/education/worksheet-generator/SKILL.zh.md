@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [中文] 智能体技能: worksheet-generator: Points to the standalone module worksheet-generator: generates individualized worksheets and practice material for educational and therapeutic professionals from a support goal (free text + optional ICF codes), level, and age -- optionally enriched by a scan of existing material. Use this skill when a worksheet, exercise sheet, or support material should be created. No client/person reference (only goal/level/age). The ICF reference is bring-your-own -- with a clear boundary: a material generator, not a therapy program; generated sheets must be professionally reviewed before use.
+description: [中文] 针对该技能的完整中文文档: worksheet-generator: Points to the standalone module worksheet-generator: generates individualized worksheets and practice material for educational and therapeutic professionals from a support goal (free text + optional ICF codes), level, and age -- optionally enriched by a scan of existing material. Use this skill when a worksheet, exercise sheet, or support material should be created. No client/person reference (only goal/level/age). The ICF reference is bring-your-own -- with a clear boundary: a material generator, not a therapy program; generated sheets must be professionally reviewed before use.
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: zh
 status: active
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `worksheet-generator`.
+> **中文** — [中文] 针对该技能的完整中文文档: `worksheet-generator`.
 
 
 
@@ -101,7 +101,7 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 and versioning stay solely in the `ellmos-ai/worksheet-generator` module
 repo.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/worksheet-generator`.

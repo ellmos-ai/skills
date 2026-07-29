@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour stabilization-techniques: Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks.
+description: [Français] Documentation complète traduite en français pour la compétence stabilization-techniques: Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `stabilization-techniques`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `stabilization-techniques`.
 
 
 

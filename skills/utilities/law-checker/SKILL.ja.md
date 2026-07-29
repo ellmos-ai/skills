@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [日本語] エージェントスキル: law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
+description: [日本語] スキルに関する完全な日本語ドキュメント: law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: ja
 status: active
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `law-checker`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `law-checker`.
 
 
 

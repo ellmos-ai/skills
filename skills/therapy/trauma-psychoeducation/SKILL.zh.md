@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: trauma-psychoeducation: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
+description: [中文] 针对该技能的完整中文文档: trauma-psychoeducation: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `trauma-psychoeducation`.
+> **中文** — [中文] 针对该技能的完整中文文档: `trauma-psychoeducation`.
 
 
 

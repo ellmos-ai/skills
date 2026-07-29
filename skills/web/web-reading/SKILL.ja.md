@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [日本語] エージェントスキル: web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: [日本語] スキルに関する完全な日本語ドキュメント: web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 
 standalone: true
 anthropic_compatible: true
@@ -20,7 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `web-reading`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `web-reading`.
 
 
 

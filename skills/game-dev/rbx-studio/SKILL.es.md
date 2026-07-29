@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: Habilidad de agente para rbx-studio: Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on "embed an asset from the Store", "Studio MCP not working", "studios: []", "generate material", "save scene", "is this Roblox asset safe", "scripts disappear after Play".
+description: [Español] Documentación completa traducida al español para la habilidad rbx-studio: Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on "embed an asset from the Store", "Studio MCP not working", "studios: []", "generate material", "save scene", "is this Roblox asset safe", "scripts disappear after Play".
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': ['rojo'], 'services': ['roblox-studio-mcp'], 'protocols'
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rbx-studio`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `rbx-studio`.
 
 
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 
 
 
 
-# Roblox Studio — Editor, Test, Assets, MCP (Versión en Español)
+# Roblox Studio — Editor, Test, Assets, MCP
 
 ## Purpose
 
@@ -106,7 +106,7 @@ The MCP runs as a server shipped with Studio, often connected via a thin JSON-fi
   (if present on this system; shared by Claude/Codex/Gemini)
 - Client configs: `~/.claude/mcp.json` · `~/.codex/config.toml` · `~/.gemini/antigravity/mcp_config.json`
 
-Ejemplo entry (`~/.claude/mcp.json`):
+Example entry (`~/.claude/mcp.json`):
 ```json
 {
   "mcpServers": {

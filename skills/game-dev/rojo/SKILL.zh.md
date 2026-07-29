@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: [中文] 智能体技能: rojo: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
+description: [中文] 针对该技能的完整中文文档: rojo: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rojo/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `rojo`.
+> **中文** — [中文] 针对该技能的完整中文文档: `rojo`.
 
 
 
@@ -187,7 +187,7 @@ uses them for shared client state. Run Selene from the directory containing the 
 - If present on this system, a project-rich reference pipeline is located at
   `<your Roblox project pipeline>` (incl. `ROJO_FAQ.md`, `SKILL.md`).
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Distilled from the `.ROBLOX` pipeline (ROJO_FAQ, ROJO_START, _template),

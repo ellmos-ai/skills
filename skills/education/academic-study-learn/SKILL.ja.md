@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [日本語] エージェントスキル: academic-study-learn: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
+description: [日本語] スキルに関する完全な日本語ドキュメント: academic-study-learn: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
 
 standalone: true
 anthropic_compatible: true
@@ -19,13 +19,13 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `academic-study-learn`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `academic-study-learn`.
 
 
 
 # Academic Study Learn
 
-## 概要
+## 概要と目的
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

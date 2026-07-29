@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: Habilidad de agente para location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: [Español] Documentación completa traducida al español para la habilidad location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
@@ -17,17 +17,17 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `location-suche`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `location-suche`.
 
 
 
-# Location Search (Versión en Español)
+# Location Search
 
 **Location, restaurant and hotel search via OpenStreetMap**
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -47,7 +47,7 @@ No API key required. No persistent store.
 
 ---
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.
@@ -61,16 +61,16 @@ No API key required. No persistent store.
 ## CLI
 
 ```bash
-# POI search (category + location) (Versión en Español)
+# POI search (category + location)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Geocode location (Versión en Español)
+# Geocode location
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburg Gate Berlin"
 
-# Adjust radius (default: 1000 m) (Versión en Español)
+# Adjust radius (default: 1000 m)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Help (Versión en Español)
+# Help
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 

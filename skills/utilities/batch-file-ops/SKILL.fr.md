@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: [Français] Documentation complète traduite en français pour la compétence batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `batch-file-ops`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `batch-file-ops`.
 
 
 
@@ -58,7 +58,7 @@ python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-
 
 ---
 
-## Exemples
+## Exemple d'Utilisations
 
 ```bash
 # List all Python files in a directory

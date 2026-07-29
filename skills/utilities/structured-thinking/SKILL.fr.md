@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: [Français] Compétence d'agent pour structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
+description: [Français] Documentation complète traduite en français pour la compétence structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `structured-thinking`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `structured-thinking`.
 
 
 
@@ -29,7 +29,7 @@ provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'ut
 
 ---
 
-## Flux de Travail Overview
+## Flux de Travail et Étapes Overview
 
 ```
 Problem/Question

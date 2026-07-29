@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-21
 updated: 2026-06-21
-description: [中文] 智能体技能: trampelpfadanalyse: Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
+description: [中文] 针对该技能的完整中文文档: trampelpfadanalyse: Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `trampelpfadanalyse`.
+> **中文** — [中文] 针对该技能的完整中文文档: `trampelpfadanalyse`.
 
 
 
@@ -213,7 +213,7 @@ content, problems.
 - `bugfix-protocol` / systematic debugging — for real code bugs rather than visibility
   problems.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 0.1.0 (2026-06-21)
 - Initial port from Desire-Path Analysis v2.0 (source: swarm-ai/BACH).

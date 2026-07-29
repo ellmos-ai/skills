@@ -2,7 +2,7 @@
 language: fr
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `textproduction`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `textproduction`.
 
 
 
@@ -22,7 +22,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Flux de Travail
+## Flux de Travail et Étapes
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

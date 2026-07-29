@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `decision-avatar`.
+> **中文** — [中文] 针对该技能的完整中文文档: `decision-avatar`.
 
 
 
@@ -140,7 +140,7 @@ sensiblen Rohdaten wiedergeben.
 - Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
   erforderlich wäre.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-07-28)
 - Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer

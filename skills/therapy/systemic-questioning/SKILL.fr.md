@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour systemic-questioning: Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.
+description: [Français] Documentation complète traduite en français pour la compétence systemic-questioning: Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `systemic-questioning`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `systemic-questioning`.
 
 
 

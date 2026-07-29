@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [中文] 智能体技能: academic-study-learn: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
+description: [中文] 针对该技能的完整中文文档: academic-study-learn: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
 
 standalone: true
 anthropic_compatible: true
@@ -19,13 +19,13 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `academic-study-learn`.
+> **中文** — [中文] 针对该技能的完整中文文档: `academic-study-learn`.
 
 
 
 # Academic Study Learn
 
-## 概述
+## 概述与目标
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

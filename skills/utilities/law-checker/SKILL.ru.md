@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [Русский] Навык агента для law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
+description: [Русский] Полное руководство и документация на русском языке для навыка law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: ru
 status: active
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `law-checker`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `law-checker`.
 
 
 

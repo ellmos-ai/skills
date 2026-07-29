@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
 updated: 2026-07-27
-description: [日本語] エージェントスキル: agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
+description: [日本語] スキルに関する完全な日本語ドキュメント: agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
 
 standalone: true
 anthropic_compatible: true
@@ -20,7 +20,7 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `agent-config-sync`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `agent-config-sync`.
 
 
 

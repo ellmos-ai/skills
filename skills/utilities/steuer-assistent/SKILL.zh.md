@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [中文] 智能体技能: steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
+description: [中文] 针对该技能的完整中文文档: steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: zh
 status: active
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `steuer-assistent`.
+> **中文** — [中文] 针对该技能的完整中文文档: `steuer-assistent`.
 
 
 
@@ -81,7 +81,7 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 `ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
 and versioning stay solely in the `ellmos-ai/steuer-assistent` module repo.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/steuer-assistent`.

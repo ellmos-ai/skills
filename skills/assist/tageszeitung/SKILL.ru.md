@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [Русский] Навык агента для tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
+description: [Русский] Полное руководство и документация на русском языке для навыка tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HT
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `tageszeitung`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `tageszeitung`.
 
 
 
@@ -43,7 +43,7 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 
 ---
 
-## Рабочий процесс
+## Рабочий процесс и шаги
 
 1. **Check sources**: Read all active sources from `news_sources`.
 2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.

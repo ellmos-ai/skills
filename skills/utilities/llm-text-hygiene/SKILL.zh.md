@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `llm-text-hygiene`.
+> **中文** — [中文] 针对该技能的完整中文文档: `llm-text-hygiene`.
 
 
 
@@ -130,7 +130,7 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-07-04)
 - Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"

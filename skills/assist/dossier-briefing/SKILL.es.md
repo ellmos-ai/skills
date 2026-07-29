@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: Habilidad de agente para dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: [Español] Documentación completa traducida al español para la habilidad dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
 
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
@@ -17,17 +17,17 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `dossier-briefing`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `dossier-briefing`.
 
 
 
-# Dossier-Briefing (Versión en Español)
+# Dossier-Briefing
 
 **Structured research briefing for a topic or person**
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 Generates an empty, structured Markdown briefing for any subject
 (person, company, event, concept). The scaffold serves as a starting point for
@@ -46,7 +46,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).
@@ -60,22 +60,22 @@ subsequent research with `research-agent` or `web-reading`.
 ## CLI
 
 ```bash
-# Briefing to stdout (Versión en Español)
+# Briefing to stdout
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# Write to file (Versión en Español)
+# Write to file
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Topic briefing (Versión en Español)
+# Topic briefing
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantum computing" --typ topic
 
-# Event (Versión en Español)
+# Event
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Without type (generic) (Versión en Español)
+# Without type (generic)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "My topic"
 
-# Help (Versión en Español)
+# Help
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 
@@ -87,9 +87,9 @@ PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 |---|---|
 | `person` | Basic data, biography/background, work & contributions, sources, notes |
 | `organization` | Profile, history, products/services, key people, sources, notes |
-| `topic` | Descripción General, background/context, current developments, key sources, open questions, notes |
+| `topic` | Overview, background/context, current developments, key sources, open questions, notes |
 | `event` | Key facts, participants, background/timeline, significance, sources, notes |
-| `unspecified` | Descripción General, background, details, sources, notes |
+| `unspecified` | Overview, background, details, sources, notes |
 
 ---
 

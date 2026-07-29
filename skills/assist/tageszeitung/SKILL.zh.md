@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [中文] 智能体技能: tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
+description: [中文] 针对该技能的完整中文文档: tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HT
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `tageszeitung`.
+> **中文** — [中文] 针对该技能的完整中文文档: `tageszeitung`.
 
 
 
@@ -43,7 +43,7 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Check sources**: Read all active sources from `news_sources`.
 2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

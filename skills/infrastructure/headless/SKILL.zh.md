@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `headless`.
+> **中文** — [中文] 针对该技能的完整中文文档: `headless`.
 
 
 
@@ -112,7 +112,7 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-28)
 - Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.

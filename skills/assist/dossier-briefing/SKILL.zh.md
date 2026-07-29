@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: [中文] 智能体技能: dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: [中文] 针对该技能的完整中文文档: dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
 
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `dossier-briefing`.
+> **中文** — [中文] 针对该技能的完整中文文档: `dossier-briefing`.
 
 
 
@@ -27,7 +27,7 @@ language: zh
 
 ---
 
-## 概述
+## 概述与目标
 
 Generates an empty, structured Markdown briefing for any subject
 (person, company, event, concept). The scaffold serves as a starting point for
@@ -46,7 +46,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).
@@ -121,7 +121,7 @@ No network access. No store. Purely local processing.
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: Habilidad de agente para structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
+description: [Español] Documentación completa traducida al español para la habilidad structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 
 standalone: true
 anthropic_compatible: true
@@ -19,17 +19,17 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `structured-thinking`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `structured-thinking`.
 
 
 
-# Structured Thinking — Analyze, Ideate, Decide (Versión en Español)
+# Structured Thinking — Analyze, Ideate, Decide
 
 > Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
 
 ---
 
-## Workflow Overview
+## Flujo de Trabajo y Pasos Overview
 
 ```
 Problem/Question

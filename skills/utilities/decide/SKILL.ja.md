@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [日本語] エージェントスキル: decide: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
+description: [日本語] スキルに関する完全な日本語ドキュメント: decide: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `decide`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `decide`.
 
 
 
@@ -148,7 +148,7 @@ Check before final recommendation:
 
 ---
 
-## ワークフロー
+## 実行ワークフローと手順
 
 ```
 1. User request

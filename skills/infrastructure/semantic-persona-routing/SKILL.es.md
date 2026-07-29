@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: Habilidad de agente para semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
+description: [Español] Documentación completa traducida al español para la habilidad semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `semantic-persona-routing`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `semantic-persona-routing`.
 
 
 
-# Semantic Persona Routing (Versión en Español)
+# Semantic Persona Routing
 
 Route by capability first and apply personality second. Build a portable map that
 keeps semantic role choice, deterministic endpoint lookup and provider-specific
@@ -129,7 +129,7 @@ Rebuild the map when source roles or skill inventory change. A live resolver may
 supersede a stale map for endpoint availability, but it must not silently rewrite
 the semantic role taxonomy.
 
-## Ejemplo
+## Ejemplo de Uso
 
 Request: "Organize my receipts and prepare the tax-year overview."
 

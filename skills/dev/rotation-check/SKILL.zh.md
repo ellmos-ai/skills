@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `rotation-check`.
+> **中文** — [中文] 针对该技能的完整中文文档: `rotation-check`.
 
 
 
@@ -119,7 +119,7 @@ ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
 - `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
   Optimizer renoviert).
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-03)
 - Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten

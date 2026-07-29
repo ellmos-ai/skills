@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-06-20
-description: Habilidad de agente para video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
+description: [Español] Documentación completa traducida al español para la habilidad video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `video-transcriber`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `video-transcriber`.
 
 
 
-# Video Transcriber (Versión en Español)
+# Video Transcriber
 
 Fetches transcripts (subtitles) and metadata (title, channel, date, views,
 description) of online videos. Prefers manually created subtitles, falls back
@@ -54,16 +54,16 @@ pip install yt-dlp                   # metadata (optional, fallback: noembed) �
 > special characters break in the output (cp1252 encoding).
 
 ```bash
-# Default: Markdown with timestamps (Versión en Español)
+# Default: Markdown with timestamps
 PYTHONIOENCODING=utf-8 python video_transcriber.py "https://www.youtube.com/watch?v=VIDEO_ID"
 
-# Choose output format (Versión en Español)
+# Choose output format
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --format markdown|json|plain
 
-# Save to file (Versión en Español)
+# Save to file
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL -o transcript.md
 
-# Prefer languages (default: de en) (Versión en Español)
+# Prefer languages (default: de en)
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --lang de en fr
 ```
 

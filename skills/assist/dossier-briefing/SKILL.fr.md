@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: [Français] Compétence d'agent pour dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: [Français] Documentation complète traduite en français pour la compétence dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
 
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: fr
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `dossier-briefing`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `dossier-briefing`.
 
 
 
@@ -27,7 +27,7 @@ language: fr
 
 ---
 
-## Overview
+## Aperçu Général
 
 Generates an empty, structured Markdown briefing for any subject
 (person, company, event, concept). The scaffold serves as a starting point for
@@ -46,7 +46,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## Flux de Travail
+## Flux de Travail et Étapes
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).

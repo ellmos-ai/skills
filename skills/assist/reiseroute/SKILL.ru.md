@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [Русский] Навык агента для reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: [Русский] Полное руководство и документация на русском языке для навыка reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: ru
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `reiseroute`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `reiseroute`.
 
 
 
@@ -27,7 +27,7 @@ language: ru
 
 ---
 
-## Общее описание
+## Общий обзор и цели
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -47,7 +47,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## Рабочий процесс
+## Рабочий процесс и шаги
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.

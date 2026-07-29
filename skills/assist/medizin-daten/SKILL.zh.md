@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [中文] 智能体技能: medizin-daten: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
+description: [中文] 针对该技能的完整中文文档: medizin-daten: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `medizin-daten`.
+> **中文** — [中文] 针对该技能的完整中文文档: `medizin-daten`.
 
 
 
@@ -48,7 +48,7 @@ statements — it is a structured notebook for personal health data.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Detect mode**: diagnosis / symptom / examination plan
 2. **Structure input**: date, name, notes, optional ICD-10 code
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS examination_plans (
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

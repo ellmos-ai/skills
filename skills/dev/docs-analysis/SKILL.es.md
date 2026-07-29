@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Habilidad de agente para docs-analysis: Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.
+description: [Español] Documentación completa traducida al español para la habilidad docs-analysis: Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `docs-analysis`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `docs-analysis`.
 
 
 
-# Document Requirements Analysis (Versión en Español)
+# Document Requirements Analysis
 
 > Analyzes all concept and requirements documents, checks their requirements against the current code, and creates a consolidated difference report.
 

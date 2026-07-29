@@ -2,14 +2,14 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `load-project`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `load-project`.
 
 
 
-> **English Translation** — Versión oficial en español of `load-project`.
+> **English Translation** — Official English version of `load-project`.
 
 
-# Load Project (Versión en Español)
+# Load Project
 
 ## Zweck
 

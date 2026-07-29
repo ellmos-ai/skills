@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: Habilidad de agente para academic-study-control: Use when managing studies, semester planning, module prioritisation, deadlines, exam registrations, or institutional emails need to be checked, planned, or converted into reminders. Coordinates web research, local status files, and optional calendar and mail integration.
+description: [Español] Documentación completa traducida al español para la habilidad academic-study-control: Use when managing studies, semester planning, module prioritisation, deadlines, exam registrations, or institutional emails need to be checked, planned, or converted into reminders. Coordinates web research, local status files, and optional calendar and mail integration.
 
 standalone: true
 anthropic_compatible: true
@@ -19,13 +19,13 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `academic-study-control`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `academic-study-control`.
 
 
 
-# Academic Study Control (Versión en Español)
+# Academic Study Control
 
-## Descripción General
+## Descripción General y Objetivos
 
 Manage studies and deadlines with source verification, privacy compliance, and
 realistic planning. This skill is institution- and LMS-neutral: placeholders
@@ -33,7 +33,7 @@ realistic planning. This skill is institution- and LMS-neutral: placeholders
 
 ## Configuration
 
-| Placeholder | Ejemplo value | Meaning |
+| Placeholder | Example value | Meaning |
 |---|---|---|
 | `<INSTITUTION>` | University of A, TU Berlin | Official name of the institution |
 | `<LMS>` | ILIAS, Canvas, Stud.IP | Learning management system |
@@ -43,7 +43,7 @@ realistic planning. This skill is institution- and LMS-neutral: placeholders
 | `<CALENDAR>` | Google Calendar, iCal | Calendar application (optional) |
 | `<MAIL>` | Gmail, Outlook, Thunderbird | Mail client or connector (optional) |
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 1. **Clarify the goal:** Semester plan, weekly plan, exam registration, re-enrollment,
    deadline check, mail check, module change, or reminders.

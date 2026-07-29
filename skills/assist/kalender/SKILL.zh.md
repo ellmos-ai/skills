@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [中文] 智能体技能: kalender: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
+description: [中文] 针对该技能的完整中文文档: kalender: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'option
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `kalender`.
+> **中文** — [中文] 针对该技能的完整中文文档: `kalender`.
 
 
 
@@ -59,7 +59,7 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Check backend**: read `assist/prefs.json` → `kalender_backend`.
 2. **Without preference**: LLM asks user: local calendar, Google Calendar or other?
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS events (
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

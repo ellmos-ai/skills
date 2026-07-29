@@ -2,22 +2,22 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `workflow-extract`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `workflow-extract`.
 
 
 
-> **English Translation** — Versión oficial en español of `workflow-extract`.
+> **English Translation** — Official English version of `workflow-extract`.
 
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (Versión en Español)
+# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen
 
 ## Zweck
 
 Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
 **Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
-periodische Pflege-Läufe. Dieser Skill extrahiert solche Flujo de Trabajos aus zwei Quellenarten —
+periodische Pflege-Läufe. Dieser Skill extrahiert solche Workflows aus zwei Quellenarten —
 Chatverläufen (ein Ablauf wurde interaktiv entwickelt und soll künftig unbeaufsichtigt laufen)
 und bestehenden Automations-Prompts anderer Systeme (z. B. Codex-Automations, Scheduled
 Tasks, n8n-Flows) — und macht daraus user-neutrale, robuste Automatisierungs-Prompts oder
@@ -40,7 +40,7 @@ Zielformen (eine oder mehrere):
 
 - **Automations-Prompt:** eigenständiger, user-neutraler Prompt-Text, einsetzbar in jedem
   Scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
-- **Flujo de Trabajo-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
+- **Workflow-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
   Automations-Prompt nur noch aufgerufen/parametrisiert wird (bevorzugt, wenn derselbe
   Ablauf für mehrere Pipelines/Systeme gelten soll — eine Quelle der Wahrheit).
 - **Command:** dünner Slash-Command für manuelle Auslösung desselben Ablaufs.
@@ -72,7 +72,7 @@ werden — konkrete Werte gehören an EINE Stelle am Prompt-Anfang.
 
 Den extrahierten Kern gegen die Checkliste in `automation-bausteine.md` halten und fehlende
 Bausteine ergänzen — insbesondere Rotations-Auswahl mit Check-Registry, Idempotenz,
-Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Flujo de Trabajo ohne diese
+Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Workflow ohne diese
 Bausteine funktioniert im Test und degeneriert im Dauerbetrieb (Doppelprüfungen, wachsende
 Logs, Kollisionen mit parallelen Agenten).
 
@@ -118,7 +118,7 @@ Run-Logs/Memories) systematisch prüfen:
 
 ## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
 
-Für „prüfe alle Automationen von System X auf abstrahierbare Flujo de Trabajos" oder „extrahiere
+Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
 Automatisierungs-Kandidaten aus alten Chatverläufen":
 
 1. **Datenreduktion wie im skill-extractor** (Map-Reduce über Subagenten,

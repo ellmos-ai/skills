@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: [日本語] エージェントスキル: dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: [日本語] スキルに関する完全な日本語ドキュメント: dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
 
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ja
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `dossier-briefing`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `dossier-briefing`.
 
 
 
@@ -27,7 +27,7 @@ language: ja
 
 ---
 
-## 概要
+## 概要と目的
 
 Generates an empty, structured Markdown briefing for any subject
 (person, company, event, concept). The scaffold serves as a starting point for
@@ -46,7 +46,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## ワークフロー
+## 実行ワークフローと手順
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).

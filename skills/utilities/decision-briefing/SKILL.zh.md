@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: [中文] 智能体技能: decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
+description: [中文] 针对该技能的完整中文文档: decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `decision-briefing`.
+> **中文** — [中文] 针对该技能的完整中文文档: `decision-briefing`.
 
 
 
@@ -66,7 +66,7 @@ Defer:     "E03: later"
 
 ---
 
-## 工作流程 (4 Phases)
+## 工作流程与执行步骤 (4 Phases)
 
 ```
 Topic + decisions at hand
@@ -147,7 +147,7 @@ DECISION: <question>
 
 ---
 
-## 示例 Briefing (fictional)
+## 使用示例与实践 Briefing (fictional)
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
 
@@ -213,7 +213,7 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-06-13)
 - Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand

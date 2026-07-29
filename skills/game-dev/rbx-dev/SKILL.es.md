@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: Habilidad de agente para rbx-dev: Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on "develop Roblox game", "build Roblox game", "new Roblox project", "Luau project structure", "how do I organize Roblox code", "Roblox dev setup".
+description: [Español] Documentación completa traducida al español para la habilidad rbx-dev: Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on "develop Roblox game", "build Roblox game", "new Roblox project", "Luau project structure", "how do I organize Roblox code", "Roblox dev setup".
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rbx-dev`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `rbx-dev`.
 
 
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'or
 
 
 
-# Roblox-Dev — Meta-Skill for Roblox Game Development (Versión en Español)
+# Roblox-Dev — Meta-Skill for Roblox Game Development
 
 ## Purpose
 

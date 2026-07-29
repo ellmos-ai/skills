@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-06-13
-description: Habilidad de agente para dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
+description: [Español] Documentación completa traducida al español para la habilidad dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
 
 standalone: true
 anthropic_compatible: true
@@ -19,18 +19,18 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `dev-cycle`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `dev-cycle`.
 
 
 
-# Development Cycle (Dev Cycle) (Versión en Español)
+# Development Cycle (Dev Cycle)
 
 > **Goal:** Structured process from feature request to validated system.
 > Every development goes through these 8 phases.
 
 ---
 
-## Descripción General
+## Descripción General y Objetivos
 
 ```
   +--------------------------------------------------------------+
@@ -44,7 +44,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
   |     |                                                          |
   |     v                                                          |
   |  Phase 3   Functional Planning                                 |
-  |            (Flujo de Trabajos, Agents, Experts, Skills, Services)      |
+  |            (Workflows, Agents, Experts, Skills, Services)      |
   |     |                                                          |
   |     v                                                          |
   |  Phase 4   Implement Functional Frontend                       |
@@ -123,7 +123,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 | Level | Question | Artifact |
 |-------|----------|----------|
-| Flujo de Trabajo | WHEN/HOW is coordination done? | workflows/*.md |
+| Workflow | WHEN/HOW is coordination done? | workflows/*.md |
 | Agent | WHO executes? | agents/*.txt |
 | Expert | WHO has domain knowledge? | experts/*/ |
 | Skill | WHAT is done? | skills/*.md |
@@ -131,7 +131,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 **Rules:**
 - Think functionally first, then technically
-- Flujo de Trabajos describe processes, not implementation details
+- Workflows describe processes, not implementation details
 - Every agent needs a clear profile
 - Services must work without user data
 
@@ -142,7 +142,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 **What:** Create skill files, workflow markdown, agent profiles.
 
 The "frontend" here is the functional description layer:
-- Flujo de Trabajo files (.md)
+- Workflow files (.md)
 - Agent profiles (.txt)
 - Expert knowledge
 - Service descriptions

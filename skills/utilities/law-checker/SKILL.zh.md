@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [中文] 智能体技能: law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
+description: [中文] 针对该技能的完整中文文档: law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: zh
 status: active
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `law-checker`.
+> **中文** — [中文] 针对该技能的完整中文文档: `law-checker`.
 
 
 
@@ -80,7 +80,7 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 `ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
 and versioning stay solely in the `ellmos-ai/law-checker` module repo.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/law-checker`.

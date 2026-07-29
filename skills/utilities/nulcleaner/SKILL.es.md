@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
+description: [Español] Documentación completa traducida al español para la habilidad nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `nulcleaner`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `nulcleaner`.
 
 
 
-# nulcleaner - Windows NUL File Cleanup (Versión en Español)
+# nulcleaner - Windows NUL File Cleanup
 
 ## The Problem
 
@@ -49,13 +49,13 @@ This tool finds and deletes such NUL files via the extended UNC path (`\\?\`).
 ## CLI Usage
 
 ```bash
-# Scan only (shows found NUL files) (Versión en Español)
+# Scan only (shows found NUL files)
 python nulcleaner.py scan /path/to/directory
 
-# Scan and delete (Versión en Español)
+# Scan and delete
 python nulcleaner.py delete /path/to/directory
 
-# Start GUI mode (Versión en Español)
+# Start GUI mode
 python nulcleaner.py gui
 ```
 

@@ -2,14 +2,14 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `textproduction`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `textproduction`.
 
 
 
-> **English Translation** — Versión oficial en español of `textproduction`.
+> **English Translation** — Official English version of `textproduction`.
 
 
-# Textproduction — Router (Versión en Español)
+# Textproduction — Router
 
 Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
 passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
@@ -22,7 +22,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Flujo de Trabajo
+## Flujo de Trabajo y Pasos
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [日本語] エージェントスキル: medizin-daten: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
+description: [日本語] スキルに関する完全な日本語ドキュメント: medizin-daten: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `medizin-daten`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `medizin-daten`.
 
 
 
@@ -48,7 +48,7 @@ statements — it is a structured notebook for personal health data.
 
 ---
 
-## ワークフロー
+## 実行ワークフローと手順
 
 1. **Detect mode**: diagnosis / symptom / examination plan
 2. **Structure input**: date, name, notes, optional ICD-10 code

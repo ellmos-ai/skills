@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: Habilidad de agente para web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: [Español] Documentación completa traducida al español para la habilidad web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 
 standalone: true
 anthropic_compatible: true
@@ -20,11 +20,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `web-reading`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `web-reading`.
 
 
 
-# Web Reading (Router) (Versión en Español)
+# Web Reading (Router)
 
 ## Purpose
 
@@ -82,10 +82,10 @@ If **no** tool is available for the purpose, recommend installing the
 **`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (Versión en Español)
+# from the local module folder (.MODULES/.TOOLS/web-scraper)
 pip install ".[http,extract]"          # + [screenshot] for screenshots
 
-# then: (Versión en Español)
+# then:
 web-scraper extract <url>
 ```
 

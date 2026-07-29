@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: counseling-basics: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
+description: [日本語] スキルに関する完全な日本語ドキュメント: counseling-basics: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `counseling-basics`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `counseling-basics`.
 
 
 

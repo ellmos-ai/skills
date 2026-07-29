@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: Habilidad de agente para decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
+description: [Español] Documentación completa traducida al español para la habilidad decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `decision-briefing`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `decision-briefing`.
 
 
 
-# Decision-Briefing — Work Through Many Decisions on One Topic (Versión en Español)
+# Decision-Briefing — Work Through Many Decisions on One Topic
 
 > A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
 
@@ -66,7 +66,7 @@ Defer:     "E03: later"
 
 ---
 
-## Workflow (4 Phases)
+## Flujo de Trabajo y Pasos (4 Phases)
 
 ```
 Topic + decisions at hand
@@ -147,7 +147,7 @@ DECISION: <question>
 
 ---
 
-## Example Briefing (fictional)
+## Ejemplo de Uso Briefing (fictional)
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
 

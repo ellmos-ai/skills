@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `bilingual-doc-sync`.
+> **中文** — [中文] 针对该技能的完整中文文档: `bilingual-doc-sync`.
 
 
 
@@ -111,7 +111,7 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-03)
 - Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für

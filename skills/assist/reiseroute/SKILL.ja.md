@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [日本語] エージェントスキル: reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: [日本語] スキルに関する完全な日本語ドキュメント: reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: ja
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `reiseroute`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `reiseroute`.
 
 
 
@@ -27,7 +27,7 @@ language: ja
 
 ---
 
-## 概要
+## 概要と目的
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -47,7 +47,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## ワークフロー
+## 実行ワークフローと手順
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.

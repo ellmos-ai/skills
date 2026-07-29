@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [Русский] Навык агента для steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
+description: [Русский] Полное руководство и документация на русском языке для навыка steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
 
 standalone: true
 anthropic_compatible: true
@@ -18,7 +18,7 @@ language: ru
 status: active
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `steuer-assistent`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `steuer-assistent`.
 
 
 

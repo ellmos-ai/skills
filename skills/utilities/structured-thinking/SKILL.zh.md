@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: [中文] 智能体技能: structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
+description: [中文] 针对该技能的完整中文文档: structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `structured-thinking`.
+> **中文** — [中文] 针对该技能的完整中文文档: `structured-thinking`.
 
 
 
@@ -29,7 +29,7 @@ provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'ut
 
 ---
 
-## 工作流程 Overview
+## 工作流程与执行步骤 Overview
 
 ```
 Problem/Question
@@ -188,7 +188,7 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-05-19)
 - Created as a meta-skill from think, brainstorm, and decide

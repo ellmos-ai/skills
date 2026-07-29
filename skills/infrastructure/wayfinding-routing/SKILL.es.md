@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: Habilidad de agente para wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
+description: [Español] Documentación completa traducida al español para la habilidad wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `wayfinding-routing`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `wayfinding-routing`.
 
 
 
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (Versión en Español)
+# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
 
@@ -31,7 +31,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## Resumen de Sinónimos y Estrategias
+## Synonym & Strategy Overview
 
 | Synonym Strategy | Metaphor & Core Principle | Applied Use Case |
 | :--- | :--- | :--- |

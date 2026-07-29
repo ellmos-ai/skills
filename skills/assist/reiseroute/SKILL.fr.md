@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [Français] Compétence d'agent pour reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: [Français] Documentation complète traduite en français pour la compétence reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: fr
 ---
 
-> **Version Officielle en Français** — Documentation complète traduite en français pour la compétence `reiseroute`.
+> **Français** — [Français] Documentation complète traduite en français pour la compétence `reiseroute`.
 
 
 
@@ -27,7 +27,7 @@ language: fr
 
 ---
 
-## Overview
+## Aperçu Général
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -47,7 +47,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## Flux de Travail
+## Flux de Travail et Étapes
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.

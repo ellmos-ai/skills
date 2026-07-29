@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: Habilidad de agente para plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
+description: [Español] Documentación completa traducida al español para la habilidad plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `plugin-system`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `plugin-system`.
 
 
 
-# Plugin System (Versión en Español)
+# Plugin System
 
 Fault-tolerant plugin system for Python CLI applications.
 A faulty plugin never stops the rest of the application.
@@ -71,10 +71,10 @@ from plugin_system import PluginManager
 manager = PluginManager(plugins_dir="./my_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins (Versión en Español)
+# List all plugins
 manager.list_plugins()
 
-# Execute a plugin (Versión en Español)
+# Execute a plugin
 success, result = manager.execute_plugin("MyPlugin", param="value")
 if success:
     print(result)

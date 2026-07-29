@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [日本語] エージェントスキル: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: [日本語] スキルに関する完全な日本語ドキュメント: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ja
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `location-suche`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `location-suche`.
 
 
 
@@ -27,7 +27,7 @@ language: ja
 
 ---
 
-## 概要
+## 概要と目的
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -47,7 +47,7 @@ No API key required. No persistent store.
 
 ---
 
-## ワークフロー
+## 実行ワークフローと手順
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.

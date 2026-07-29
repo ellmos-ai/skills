@@ -2,7 +2,7 @@
 name: agents-bridge
 version: 2.0.0
 type: skill
-description: [日本語] エージェントスキル: agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+description: [日本語] スキルに関する完全な日本語ドキュメント: agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
 
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
@@ -10,7 +10,7 @@ language: ja
 status: active
 ---
 
-> **公式日本語版** — スキルに関する完全な日本語ドキュメント: `agents-bridge`.
+> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `agents-bridge`.
 
 
 
@@ -19,7 +19,7 @@ status: active
 Use this skill to connect an agent or IDE to explicitly selected rule files.
 No provider, filename, host, or cloud directory is implicitly canonical.
 
-## ワークフロー
+## 実行ワークフローと手順
 
 1. Read all local instructions that govern the source and target paths.
 2. Run `python scripts/bridge.py discover` and optionally pass `--project`.

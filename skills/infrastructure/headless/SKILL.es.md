@@ -2,14 +2,14 @@
 language: es
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `headless`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `headless`.
 
 
 
-> **English Translation** — Versión oficial en español of `headless`.
+> **English Translation** — Official English version of `headless`.
 
 
-# Headless (Versión en Español)
+# Headless
 
 ## Zweck
 

@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: project-onboarding: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
+description: [中文] 针对该技能的完整中文文档: project-onboarding: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `project-onboarding`.
+> **中文** — [中文] 针对该技能的完整中文文档: `project-onboarding`.
 
 
 
@@ -30,7 +30,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-a
 
 ---
 
-## 概述
+## 概述与目标
 
 This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
 
@@ -214,7 +214,7 @@ Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
 
 ---
 
-## 示例: New Tool "MyTool"
+## 使用示例与实践: New Tool "MyTool"
 
 ```bash
 # 1. Feature analysis

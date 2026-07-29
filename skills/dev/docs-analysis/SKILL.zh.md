@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [中文] 智能体技能: docs-analysis: Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.
+description: [中文] 针对该技能的完整中文文档: docs-analysis: Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `docs-analysis`.
+> **中文** — [中文] 针对该技能的完整中文文档: `docs-analysis`.
 
 
 
@@ -107,7 +107,7 @@ For each requirement:
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
+description: [中文] 针对该技能的完整中文文档: folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `folder-flattening`.
+> **中文** — [中文] 针对该技能的完整中文文档: `folder-flattening`.
 
 
 

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [中文] 智能体技能: brainstorm: Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.
+description: [中文] 针对该技能的完整中文文档: brainstorm: Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `brainstorm`.
+> **中文** — [中文] 针对该技能的完整中文文档: `brainstorm`.
 
 
 
@@ -129,7 +129,7 @@ Quantity over quality — 50+ ideas in 20 min.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 ```
 1. User request
@@ -144,7 +144,7 @@ Quantity over quality — 50+ ideas in 20 min.
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [中文] 智能体技能: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: [中文] 针对该技能的完整中文文档: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
@@ -17,7 +17,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `location-suche`.
+> **中文** — [中文] 针对该技能的完整中文文档: `location-suche`.
 
 
 
@@ -27,7 +27,7 @@ language: zh
 
 ---
 
-## 概述
+## 概述与目标
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -47,7 +47,7 @@ No API key required. No persistent store.
 
 ---
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.
@@ -115,7 +115,7 @@ User-Agent is set according to Nominatim policy.
 
 ---
 
-## 变更日志
+## 变更日志与历史记录
 
 | Version | Date | Change |
 |---|---|---|

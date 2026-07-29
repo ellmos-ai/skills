@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: [Русский] Навык агента для structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
+description: [Русский] Полное руководство и документация на русском языке для навыка structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **Официальная Русская Версия** — Полное руководство и документация на русском языке для навыка `structured-thinking`.
+> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `structured-thinking`.
 
 
 
@@ -29,7 +29,7 @@ provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'ut
 
 ---
 
-## Рабочий процесс Overview
+## Рабочий процесс и шаги Overview
 
 ```
 Problem/Question

@@ -6,7 +6,7 @@ author: Lukas Geiger + Codex
 created: 2026-06-18
 updated: 2026-06-18
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: [中文] 智能体技能: github-repo-care: Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.
+description: [中文] 针对该技能的完整中文文档: github-repo-care: Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.
 
 standalone: true
 anthropic_compatible: true
@@ -20,7 +20,7 @@ dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols'
 provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `github-repo-care`.
+> **中文** — [中文] 针对该技能的完整中文文档: `github-repo-care`.
 
 
 
@@ -36,7 +36,7 @@ Do not use it for pure implementation work without a GitHub publication step. Fi
 
 Prepare the repository before the first public push. A correct `.gitignore`, privacy gate, license, README, metadata, and release story are much cheaper before public history exists.
 
-## 工作流程
+## 工作流程与执行步骤
 
 1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
 2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.
@@ -113,7 +113,7 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] GitHub description, topics, tag, release, and CI verified.
 - [ ] Organization profile, registry, and ecosystem links updated.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.0.0 (2026-06-18)
 - Created initial repository care and publication protocol.

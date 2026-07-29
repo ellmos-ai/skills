@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Habilidad de agente para cognitive-restructuring: Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.
+description: [Español] Documentación completa traducida al español para la habilidad cognitive-restructuring: Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.
 
 standalone: true
 anthropic_compatible: true
@@ -19,11 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `cognitive-restructuring`.
+> **Español** — [Español] Documentación completa traducida al español para la habilidad `cognitive-restructuring`.
 
 
 
-# Cognitive Restructuring (Versión en Español)
+# Cognitive Restructuring
 
 > Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
 
@@ -51,7 +51,7 @@ Trigger                     Evaluation / Belief           Emotional consequence
 
 **Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
 
-**Ejemplo:**
+**Example:**
 ```
 A: Boss criticizes a report in a meeting
 B: "I am incompetent, everyone thinks so now"
@@ -84,7 +84,7 @@ C: Shame, withdrawal, avoiding future contributions
 
 ## 3. Cognitive Distortions (Thinking Errors)
 
-| Distortion | Description | Ejemplo |
+| Distortion | Description | Example |
 |------------|-------------|---------|
 | All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
 | Overgeneralization | One case = general pattern | "This always goes wrong for me" |
@@ -173,7 +173,7 @@ Takeaway: [...]
 3. Track implementation
 4. Rate mood before/after
 
-**Ejemplo activities:**
+**Example activities:**
 - Walk (nature, fresh air)
 - Contact with important people
 - Creative activities

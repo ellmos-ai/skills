@@ -2,7 +2,7 @@
 language: zh
 ---
 
-> **官方中文版** — 针对该技能的完整中文文档: `workflow-extract`.
+> **中文** — [中文] 针对该技能的完整中文文档: `workflow-extract`.
 
 
 
@@ -164,7 +164,7 @@ das soll ab jetzt wöchentlich über alle Paper laufen."
   Automations-Typ); als Baustein referenzieren statt neu erfinden.
 - `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
 
-## 变更日志
+## 变更日志与历史记录
 
 ### 1.1.0 (2026-07-03)
 - Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
