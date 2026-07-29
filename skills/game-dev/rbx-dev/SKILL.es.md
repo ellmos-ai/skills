@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: [Español] Habilidad y protocolo de agente para rbx-dev: Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on "develop Roblox game", "build Roblox game", "new Roblox project", "Luau project structure", "how do I organize Roblox code", "Roblox dev setup".
+description: Habilidad de agente para rbx-dev: Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on "develop Roblox game", "build Roblox game", "new Roblox project", "Luau project structure", "how do I organize Roblox code", "Roblox dev setup".
 
 standalone: true
 anthropic_compatible: true
@@ -19,14 +19,15 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `rbx-dev` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rbx-dev`.
+
 
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
 
 
-# Roblox-Dev — Meta-Skill for Roblox Game Development
+# Roblox-Dev — Meta-Skill for Roblox Game Development (Versión en Español)
 
 ## Purpose
 
@@ -150,7 +151,7 @@ The most common pitfalls — full, annotated list:
   including `SKILL.md`, `GUIDE.md`, `LESSONS_LEARNED.md`, `ROJO_FAQ.md`, `ROBLOX_MCP_FAQ.md`,
   `AGENT_ROLES.md`, `_malware_reports/PATTERNS.md`, `_knowledge/` (local API cache).
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Meta-skill over `/rojo`, `/rbx-studio`, `/game-design`; project structure,

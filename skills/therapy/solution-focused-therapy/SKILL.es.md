@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Habilidad y protocolo de agente para solution-focused-therapy: Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation.
+description: Habilidad de agente para solution-focused-therapy: Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `solution-focused-therapy` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `solution-focused-therapy`.
 
 
-# Solution-Focused Therapy
+
+# Solution-Focused Therapy (Versión en Español)
 
 > Fundamentals of Solution-Focused Brief Therapy according to Steve de Shazer and Insoo Kim Berg: Miracle question, exception exploration, scaling, resource activation
 

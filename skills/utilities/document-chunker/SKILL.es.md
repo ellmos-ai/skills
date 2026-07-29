@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
+description: Habilidad de agente para document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `document-chunker` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `document-chunker`.
 
 
-# Document Chunker
+
+# Document Chunker (Versión en Español)
 
 Splits documents into overlapping token chunks. Optimized for RAG pipelines
 and LLM context windows. Zero dependencies — Python stdlib + re only.
@@ -69,7 +70,7 @@ python document_chunker.py ./docs/        # Entire directory
 
 `.txt`, `.md`, `.py`, `.sh`
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-03-12)
 - Ported from BACH system/tools/document_chunker.py

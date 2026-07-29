@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Habilidad y protocolo de agente para guideline-therapies-overview: Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.
+description: Habilidad de agente para guideline-therapies-overview: Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `guideline-therapies-overview` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `guideline-therapies-overview`.
 
 
-# Guideline Therapies Overview
+
+# Guideline Therapies Overview (Versión en Español)
 
 > Comparison of the four approved guideline psychotherapy approaches in Germany: CBT, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide
 
@@ -32,7 +33,7 @@ See: [ETHICS.md](../ETHICS.md)
 
 ## Context
 
-In Germany, there are four recognized guideline psychotherapy approaches whose costs are covered by statutory health insurance. Many people don't know which approach might be suitable for them. This skill provides a psychoeducational overview for orientation.
+In Germany, there are four recognized guideline psychotherapy approaches whose costs are covered by statutory health insurance. Many people don't know which approach might be suitable for them. Esta habilidad proporciona a psychoeducational overview for orientation.
 
 Legal basis: Guideline therapies are approved by the Federal Joint Committee (G-BA) based on scientific evidence.
 - Cognitive Behavioral Therapy (CBT): Guideline therapy since 1987

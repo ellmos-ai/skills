@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: [Español] Habilidad y protocolo de agente para game-design: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
+description: Habilidad de agente para game-design: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
 
 standalone: true
 anthropic_compatible: true
@@ -19,15 +19,16 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `game-design` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `game-design`.
 
 
-# Game Design — Roles, Subtasks & Workflows
+
+# Game Design — Roles, Subtasks & Workflows (Versión en Español)
 
 ## Purpose
 
 Game development is teamwork made of clearly separated disciplines — even when a single person
-or one AI agent takes on several of them. This skill provides the **organizational model**:
+or one AI agent takes on several of them. Esta habilidad proporciona the **organizational model**:
 which roles exist, which subtasks belong to them, in what order they interact
 and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync),
 `/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
@@ -80,7 +81,7 @@ Each iteration should leave a short changelog. Stop condition: time budget reach
 A game only survives if very different players can cope with it. Therefore test (also
 simulated by agents) from several **personas** instead of only from your own perspective — varied
 by age, experience, platform (PC/mobile/tablet/console), attention span, language and
-accessibility. Examples: a 9-year-old casual kid on a tablet who only wants to press buttons; a
+accessibility. Ejemplos: a 9-year-old casual kid on a tablet who only wants to press buttons; a
 12-year-old core player on PC who looks for the meta; a 60+ beginner who needs big buttons.
 Persona tests should run **blind** (the tester does not know the design intent).
 
@@ -134,7 +135,7 @@ Platform knowledge that grounds the concept work for Roblox (no guarantee, just 
 - Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
   `IDEAS.md`, market analyses).
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Generic role/workflow framework, distilled from `.ROBLOX/AGENT_ROLES.md`

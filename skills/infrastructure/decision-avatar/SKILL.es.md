@@ -2,13 +2,14 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `decision-avatar` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `decision-avatar`.
 
 
-> **English Translation** — Official English version of `decision-avatar`.
+
+> **English Translation** — Versión oficial en español of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (Versión en Español)
 
 ## Zweck
 
@@ -139,7 +140,7 @@ sensiblen Rohdaten wiedergeben.
 - Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
   erforderlich wäre.
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-07-28)
 - Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer

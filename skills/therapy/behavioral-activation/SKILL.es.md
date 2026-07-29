@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para behavioral-activation: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
+description: Habilidad de agente para behavioral-activation: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `behavioral-activation` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `behavioral-activation`.
 
 
-# Behavioral Activation
+
+# Behavioral Activation (Versión en Español)
 
 > Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
 
@@ -205,7 +206,7 @@ Personal:          What kind of person do I want to be?
 
 ### Values-Activity Mapping
 
-**Example:**
+**Ejemplo:**
 
 | Value | Activity | Frequency |
 |-------|----------|-----------|

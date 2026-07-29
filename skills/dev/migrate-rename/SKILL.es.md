@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Habilidad y protocolo de agente para migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
+description: Habilidad de agente para migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `migrate-rename` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `migrate-rename`.
 
 
-# File Renaming with Wrappers (Evolutionary Migration)
+
+# File Renaming with Wrappers (Evolutionary Migration) (Versión en Español)
 
 > Enables file renames WITHOUT hard breaks. References are organically updated through daily usage.
 
@@ -62,7 +63,7 @@ mv old_file.md new_file.md
 Create `old_file.md` with the following content:
 
 ```markdown
-# OLD_FILE.md - REDIRECTED
+# OLD_FILE.md - REDIRECTED (Versión en Español)
 
 **Status:** This file has been renamed to `new_file.md`
 
@@ -120,7 +121,7 @@ After approximately 30 days or when the log shows no new entries:
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

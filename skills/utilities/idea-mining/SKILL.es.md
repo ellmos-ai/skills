@@ -2,22 +2,23 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `idea-mining` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `idea-mining`.
 
 
-> **English Translation** — Official English version of `idea-mining`.
+
+> **English Translation** — Versión oficial en español of `idea-mining`.
 
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen
+# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (Versión en Español)
 
 ## Zweck
 
 Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
 Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
 Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
+**zu Ende verfolgt**. Dieser Flujo de Trabajo trennt die drei Phasen hart: erst divergent schürfen
 (ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
 substanziell explorieren.
 
@@ -96,7 +97,7 @@ kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
 
 ## Als periodischer Lauf
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
+Der Flujo de Trabajo eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
 Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
 verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
 Versuchs-Doku sind hier das Gedächtnis.
@@ -134,7 +135,7 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `rotation-check` — Gerüst für den periodischen Einsatz.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-03)
 - Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in

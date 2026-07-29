@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [Español] Habilidad y protocolo de agente para location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: Habilidad de agente para location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
@@ -17,16 +17,17 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `location-suche` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `location-suche`.
 
 
-# Location Search
+
+# Location Search (Versión en Español)
 
 **Location, restaurant and hotel search via OpenStreetMap**
 
 ---
 
-## Overview
+## Descripción General
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -46,7 +47,7 @@ No API key required. No persistent store.
 
 ---
 
-## Workflow
+## Flujo de Trabajo
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.
@@ -60,16 +61,16 @@ No API key required. No persistent store.
 ## CLI
 
 ```bash
-# POI search (category + location)
+# POI search (category + location) (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Geocode location
+# Geocode location (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburg Gate Berlin"
 
-# Adjust radius (default: 1000 m)
+# Adjust radius (default: 1000 m) (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Help
+# Help (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 
@@ -114,7 +115,7 @@ User-Agent is set according to Nominatim policy.
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 | Version | Date | Change |
 |---|---|---|

@@ -6,7 +6,7 @@ author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
 updated: 2026-06-13
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: [Español] Habilidad y protocolo de agente para pipeline-optimizer: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
+description: Habilidad de agente para pipeline-optimizer: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
 
 standalone: true
 anthropic_compatible: true
@@ -20,14 +20,15 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `pipeline-optimizer` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `pipeline-optimizer`.
 
 
-# Pipeline Optimizer / Project-Folder Optimizer
+
+# Pipeline Optimizer / Project-Folder Optimizer (Versión en Español)
 
 **6-step renovation without incompatibilities** — applicable at two scales:
 
-| Trigger name | Scope | Example |
+| Trigger name | Scope | Ejemplo |
 |---|---|---|
 | **Pipeline optimizer** | Whole pipelines, stacks, documentation structures | Your topic pipelines, e.g. `software/`, `research/`, `games/`, an agent system |
 | **Project-folder optimizer** | Individual project folders within a pipeline | A software tool, a paper project, a game project |
@@ -78,7 +79,7 @@ Renovating a house first requires knowing **what it is made of** (stone, wood, p
 - [ ] Policy files: e.g. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, publication procedures, …
 - [ ] Status snapshots: e.g. PROJECT_STATUS.md, status overviews, releases.json, registry files
 - [ ] Checklists: e.g. release checklists, build/PDF checklists
-- [ ] Workflows: AGENTS.md, GUIDE.md, SKILL.md
+- [ ] Flujo de Trabajos: AGENTS.md, GUIDE.md, SKILL.md
 - [ ] Lessons-learned files: LESSONS_LEARNED.md, MEMORY.md, loop-state files
 
 **Project-folder scope** (single-project substance + relevant pipeline conventions):
@@ -132,7 +133,7 @@ The purpose **steers every intervention** — measures that do not serve the pur
 **Four questions per pipeline:**
 
 1. **What does the house already have?** — Even if solved differently from the ideal but **functionally equivalent**.
-   *Example:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
+   *Ejemplo:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
 
 2. **What impedes the function?** — Existing structures that cause breaks or extra effort today.
 
@@ -231,7 +232,7 @@ When the skill is applied to **a single project folder**, the following combined
 
 ### Your own project-docs template (recommended)
 
-If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Example split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
+If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Ejemplo split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
 
 → **Use such a template as the base for new projects** (copy instead of creating manually).
 
@@ -246,7 +247,7 @@ Depending on the pipeline, further mandatory files come on top — typical patte
 ### Full detail reference
 
 → See **`references/optimal-project-structure.md`** in this skill folder (German). Contains:
-- Example `settings.json` (Anthropic schema)
+- Ejemplo `settings.json` (Anthropic schema)
 - Mandatory `.gitignore` entries
 - Anti-patterns (what does NOT belong in project folders)
 - Recommended workflows per pipeline type (software/research/game)
@@ -287,7 +288,7 @@ At **project-folder scope**, additionally always briefly check the parent pipeli
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 ### 1.2.0 (2026-06-13)
 - First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged

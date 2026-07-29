@@ -2,13 +2,14 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `headless` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `headless`.
 
 
-> **English Translation** — Official English version of `headless`.
+
+> **English Translation** — Versión oficial en español of `headless`.
 
 
-# Headless
+# Headless (Versión en Español)
 
 ## Zweck
 
@@ -111,7 +112,7 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-28)
 - Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.

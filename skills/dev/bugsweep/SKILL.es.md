@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [Español] Habilidad y protocolo de agente para bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
+description: Habilidad de agente para bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'p
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `bugsweep` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `bugsweep`.
 
 
-# /bugsweep — Systematic Bug-Sweep Workflow
+
+# /bugsweep — Systematic Bug-Sweep Workflow (Versión en Español)
 
 Iterative bug hunting with a converging stop criterion. Scales with the codebase, escalates when the search looks superficial, and prevents repetition through area tracking.
 
@@ -169,7 +170,7 @@ Once counter >= target AND any_bug_found:
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-06-13)
 - Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly

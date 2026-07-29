@@ -5,7 +5,7 @@ type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
 updated: 2026-06-22
-description: [Español] Habilidad y protocolo de agente para bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
+description: Habilidad de agente para bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,30 +18,31 @@ dependencies: {'tools': ['cv_generator.py'], 'services': [], 'protocols': [], 'p
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `bewerbungsexperte` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `bewerbungsexperte`.
 
 
-> **English Translation** — Official English version of `bewerbungsexperte`.
+
+> **English Translation** — Versión oficial en español of `bewerbungsexperte`.
 
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
-# BEWERBUNGSEXPERTE v1.1
+# BEWERBUNGSEXPERTE v1.1 (Versión en Español)
 
 > Dein strategischer Partner fuer den naechsten Karriereschritt.
 
 ## AKTIVIERUNG
 
 ```bash
-# Beispiel-CV ohne Datenbankzugriff
+# Beispiel-CV ohne Datenbankzugriff (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --dry-run
 
-# CV aus SQLite-Datenbank generieren
+# CV aus SQLite-Datenbank generieren (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad/zu/daten.db>
 
-# CV in Datei speichern
+# CV in Datei speichern (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --output lebenslauf.txt
 
-# Mit Ordner-Scan
+# Mit Ordner-Scan (Versión en Español)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --career-path <ordner>
 ```
 

@@ -5,7 +5,7 @@ type: agent
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
+description: Habilidad de agente para dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `dev-soft-agent` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `dev-soft-agent`.
 
 
-# Dev Soft Agent
+
+# Dev Soft Agent (Versión en Español)
 
 Automated software development pipeline. Extracted from BACH's ATI agent,
 runs fully standalone with pure Python standard library.
@@ -55,22 +56,22 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects
+# Scan projects (Versión en Español)
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention)
+# Select project (weighted random selection by naming convention) (Versión en Español)
 project = loop.select_project()
 
-# Analyze code
+# Analyze code (Versión en Español)
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks
+# Load and prioritize tasks (Versión en Español)
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session
+# Complete dev session (Versión en Español)
 result = loop.run_session()
 loop.save_session()
 ```
@@ -105,8 +106,8 @@ Weight determines the probability in random selection.
 ## TASKS.txt Format
 
 ```markdown
-# TASKS - ProjectName
-# As of: 2026-03-12
+# TASKS - ProjectName (Versión en Español)
+# As of: 2026-03-12 (Versión en Español)
 
 ## OPEN
 - [ ] [BUG] Description of the bug
@@ -127,7 +128,7 @@ Quality policies that can be automatically checked against code:
 - **EncodingPolicy:** Enforce UTF-8, detect BOM, flag CRLF
 - **PathPolicy:** Detect and report hardcoded absolute paths
 
-## Changelog
+## Registro de Cambios
 
 ### 0.1.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/devSoftAgent to skill library

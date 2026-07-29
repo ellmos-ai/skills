@@ -2,13 +2,14 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `rotation-check` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rotation-check`.
 
 
-> **English Translation** — Official English version of `rotation-check`.
+
+> **English Translation** — Versión oficial en español of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (Versión en Español)
 
 ## Zweck
 
@@ -118,7 +119,7 @@ ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
 - `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
   Optimizer renoviert).
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-03)
 - Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten

@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [Español] Habilidad y protocolo de agente para transkription: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
+description: Habilidad de agente para transkription: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name':
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `transkription` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `transkription`.
+
 
 
 ## Purpose
@@ -45,7 +46,7 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 
 ---
 
-## Workflow
+## Flujo de Trabajo
 
 1. **Backend check**: Check whether `whisper` or `vosk` is importable.
 2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
@@ -58,28 +59,28 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 ## CLI Entry Point
 
 ```bash
-# Transcribe file
+# Transcribe file (Versión en Español)
 python transkription_core.py transcribe audio.wav
 
-# With explicit language
+# With explicit language (Versión en Español)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-run (no backend required)
+# Dry-run (no backend required) (Versión en Español)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# List transcripts
+# List transcripts (Versión en Español)
 python transkription_core.py list [--limit 20]
 
-# Full-text search
+# Full-text search (Versión en Español)
 python transkription_core.py search "term"
 
-# Export
+# Export (Versión en Español)
 python transkription_core.py export <id> [--out file.txt]
 
-# Backend check
+# Backend check (Versión en Español)
 python transkription_core.py check
 
-# Alternative store path (e.g. for tests)
+# Alternative store path (e.g. for tests) (Versión en Español)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
@@ -139,7 +140,7 @@ CREATE TABLE IF NOT EXISTS transcripts (
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 | Version | Date | Change |
 |---|---|---|

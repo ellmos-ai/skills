@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
+description: Habilidad de agente para ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': [
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `ai-portable-setup` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `ai-portable-setup`.
 
 
-# AI Portable Setup
+
+# AI Portable Setup (Versión en Español)
 
 Creates a portable AI workspace with a local RAG pipeline.
 Designed for USB drives or external drives — works offline
@@ -31,19 +32,19 @@ with Ollama and local embedding models.
 ## Quick Start
 
 ```bash
-# Create structure on USB drive
+# Create structure on USB drive (Versión en Español)
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system:
+# Then on the target system: (Versión en Español)
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents
+# Index documents (Versión en Español)
 python rag/ingest.py
 
-# Query
+# Query (Versión en Español)
 python rag/query.py "My question..."
 python rag/query.py --mode icf "Observations about the client"
 ```
@@ -106,7 +107,7 @@ Query -> Embedding -> Similarity Search -> Top-K Chunks
 - Ollama (with `mistral:instruct` and `nomic-embed-text`)
 - ~8 GB RAM for Mistral
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-03-12)
 - Consolidation from MODULAR_AGENTS/AI-Portable

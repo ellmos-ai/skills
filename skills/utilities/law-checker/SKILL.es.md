@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [Español] Habilidad y protocolo de agente para law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
+description: Habilidad de agente para law-checker: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
@@ -18,10 +18,11 @@ language: es
 status: active
 ---
 
-> **Traducción al Español** — Versión oficial en español de `law-checker` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `law-checker`.
 
 
-# law-checker (Legal Department) -- Pointer Skill
+
+# law-checker (Legal Department) -- Pointer Skill (Versión en Español)
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)
@@ -79,7 +80,7 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 `ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
 and versioning stay solely in the `ellmos-ai/law-checker` module repo.
 
-## Changelog
+## Registro de Cambios
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/law-checker`.

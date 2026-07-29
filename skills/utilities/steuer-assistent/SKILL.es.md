@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: [Español] Habilidad y protocolo de agente para steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
+description: Habilidad de agente para steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
 
 standalone: true
 anthropic_compatible: true
@@ -18,10 +18,11 @@ language: es
 status: active
 ---
 
-> **Traducción al Español** — Versión oficial en español de `steuer-assistent` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `steuer-assistent`.
 
 
-# steuer-assistent -- Pointer Skill
+
+# steuer-assistent -- Pointer Skill (Versión en Español)
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository
@@ -80,7 +81,7 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 `ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
 and versioning stay solely in the `ellmos-ai/steuer-assistent` module repo.
 
-## Changelog
+## Registro de Cambios
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/steuer-assistent`.

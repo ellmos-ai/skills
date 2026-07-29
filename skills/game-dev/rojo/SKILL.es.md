@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: [Español] Habilidad y protocolo de agente para rojo: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
+description: Habilidad de agente para rojo: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rojo/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `rojo` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `rojo`.
 
 
-# Rojo — Filesystem → Roblox Studio Sync
+
+# Rojo — Filesystem → Roblox Studio Sync (Versión en Español)
 
 ## Purpose
 
@@ -186,7 +187,7 @@ uses them for shared client state. Run Selene from the directory containing the 
 - If present on this system, a project-rich reference pipeline is located at
   `<your Roblox project pipeline>` (incl. `ROJO_FAQ.md`, `SKILL.md`).
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Distilled from the `.ROBLOX` pipeline (ROJO_FAQ, ROJO_START, _template),

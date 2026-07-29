@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Habilidad y protocolo de agente para schema-therapy: Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.
+description: Habilidad de agente para schema-therapy: Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `schema-therapy` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `schema-therapy`.
 
 
-# Schema Therapy
+
+# Schema Therapy (Versión en Español)
 
 > Fundamentals of Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented
 
@@ -165,7 +166,7 @@ Write a brief letter to your younger self:
 
 ### The Three Basic Patterns
 
-| Coping Style | Strategy | Example |
+| Coping Style | Strategy | Ejemplo |
 |-------------|----------|---------|
 | Surrender | Accept the schema, submit | "That's just how I am, I can't change it" |
 | Avoidance | Not wanting to feel the schema | Distraction, substance use, overwork |

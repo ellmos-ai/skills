@@ -2,13 +2,14 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `load-project` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `load-project`.
 
 
-> **English Translation** — Official English version of `load-project`.
+
+> **English Translation** — Versión oficial en español of `load-project`.
 
 
-# Load Project
+# Load Project (Versión en Español)
 
 ## Zweck
 
@@ -123,7 +124,7 @@ Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
 - Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
   geladen werden soll.
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-28)
 - Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.

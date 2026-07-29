@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [Español] Habilidad y protocolo de agente para web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: Habilidad de agente para web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 
 standalone: true
 anthropic_compatible: true
@@ -20,10 +20,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `web-reading` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `web-reading`.
 
 
-# Web Reading (Router)
+
+# Web Reading (Router) (Versión en Español)
 
 ## Purpose
 
@@ -81,10 +82,10 @@ If **no** tool is available for the purpose, recommend installing the
 **`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper)
+# from the local module folder (.MODULES/.TOOLS/web-scraper) (Versión en Español)
 pip install ".[http,extract]"          # + [screenshot] for screenshots
 
-# then:
+# then: (Versión en Español)
 web-scraper extract <url>
 ```
 
@@ -111,7 +112,7 @@ def extract_content(url: str) -> str:
     return soup.get_text(separator="\n", strip=True)
 ```
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-05)
 - Reworked from a plain protocol into a **router**: detects available web

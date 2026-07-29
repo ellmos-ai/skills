@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para systemic-questioning: Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.
+description: Habilidad de agente para systemic-questioning: Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `systemic-questioning` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `systemic-questioning`.
 
 
-# Systemic Questioning Techniques
+
+# Systemic Questioning Techniques (Versión en Español)
 
 ## Foundation
 

@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: Habilidad de agente para batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `batch-file-ops` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `batch-file-ops`.
 
 
-# batch_file_ops - Batch File Operations
+
+# batch_file_ops - Batch File Operations (Versión en Español)
 
 CLI tool for efficient batch operations on files using glob patterns.
 Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
@@ -60,20 +61,20 @@ python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-
 ## Examples
 
 ```bash
-# List all Python files in a directory
+# List all Python files in a directory (Versión en Español)
 python batch_file_ops.py list /path/to/directory --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!)
+# Delete all .tmp files (dry-run first!) (Versión en Español)
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
 
-# Move files
+# Move files (Versión en Español)
 python batch_file_ops.py move /source /target --pattern "*.txt"
 
-# Copy files (recursive)
+# Copy files (recursive) (Versión en Español)
 python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
 
-# Pattern examples
+# Pattern examples (Versión en Español)
 python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
 python batch_file_ops.py list /path --pattern "backup_202?-*"
 ```

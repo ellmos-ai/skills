@@ -2,15 +2,16 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `bilingual-doc-sync` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `bilingual-doc-sync`.
 
 
-> **English Translation** — Official English version of `bilingual-doc-sync`.
+
+> **English Translation** — Versión oficial en español of `bilingual-doc-sync`.
 
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten
+# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (Versión en Español)
 
 ## Zweck
 
@@ -45,7 +46,7 @@ Struktur zuerst, dann Inhalt:
 1. **Gliederungsvergleich:** Abschnitte/Überschriften beider Fassungen nebeneinander —
    fehlende, zusätzliche, umsortierte Abschnitte sind die groben Divergenzen.
 2. **Abschnittsweise Stichprobe** der übereinstimmenden Gliederung: Aussagen, Zahlen,
-   Verweise, Beispiele identisch? Besonders divergenzanfällig: Changelogs, Tabellen,
+   Verweise, Beispiele identisch? Besonders divergenzanfällig: Registro de Cambioss, Tabellen,
    Zahlenwerte, Literatur-/Linkverzeichnisse, zuletzt bearbeitete Abschnitte.
 3. **Nicht übersetzbare Invarianten** prüfen: Code-Blöcke, Identifier, Formeln, Pfade
    müssen in beiden Fassungen IDENTISCH sein (Code wird nie übersetzt).
@@ -55,8 +56,8 @@ Struktur zuerst, dann Inhalt:
 - Divergenzen in Richtung Leitsprache auflösen (bzw. nach Rücktransfer).
 - Sprachtypografie der Zielsprache respektieren (im Deutschen echte Umlaute ä ö ü ß,
   keine ae/oe/ue-Ersatzschreibung; Anführungszeichen-Konventionen).
-- Metadaten nachziehen: Versionsnummern, Datumsfelder, Changelog-Einträge in BEIDEN
-  Fassungen (der Changelog selbst ist der häufigste Divergenzpunkt).
+- Metadaten nachziehen: Versionsnummern, Datumsfelder, Registro de Cambios-Einträge in BEIDEN
+  Fassungen (der Registro de Cambios selbst ist der häufigste Divergenzpunkt).
 
 ### 5. Dokumentieren
 
@@ -101,7 +102,7 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 | Gedanke | Realität |
 | --- | --- |
 | „Ich übersetze die Unterschiede einfach frisch" | Erst Leitsprache + Rücktransfer-Frage klären — sonst wird die bessere Lösung überschrieben. |
-| „Die Gliederung passt, also ist es synchron" | Zahlen, Changelogs und Verweise divergieren zuerst — Stichprobe in die Tiefe ist Pflicht. |
+| „Die Gliederung passt, also ist es synchron" | Zahlen, Registro de Cambioss und Verweise divergieren zuerst — Stichprobe in die Tiefe ist Pflicht. |
 | „Code-Kommentare übersetze ich mit" | Code-Blöcke und Identifier bleiben in beiden Fassungen identisch (englisch). |
 | „Ich synchronisiere alle Dokumente in einem Rutsch" | Ein Paar pro Lauf (Rotations-Gerüst) hält den Abgleich prüfbar. |
 
@@ -110,7 +111,7 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-07-03)
 - Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für

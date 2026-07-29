@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
 updated: 2026-07-27
-description: [Español] Habilidad y protocolo de agente para mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.
+description: Habilidad de agente para mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `mcp-config-sync` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `mcp-config-sync`.
 
 
-# MCP Config Sync
+
+# MCP Config Sync (Versión en Español)
 
 This is the MCP-focused entry point to `agent-config-sync`. It assumes no
 provider, app or master file.

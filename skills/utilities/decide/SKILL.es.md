@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Habilidad y protocolo de agente para decide: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
+description: Habilidad de agente para decide: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `decide` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `decide`.
 
 
-# Decide — Structured Decision Making
+
+# Decide — Structured Decision Making (Versión en Español)
 
 > Rational decisions through structured frameworks and evaluation methods
 
@@ -147,7 +148,7 @@ Check before final recommendation:
 
 ---
 
-## Workflow
+## Flujo de Trabajo
 
 ```
 1. User request
@@ -163,7 +164,7 @@ Check before final recommendation:
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

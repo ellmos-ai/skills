@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [Español] Habilidad y protocolo de agente para wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
+description: Habilidad de agente para wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `wayfinding-routing` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `wayfinding-routing`.
 
 
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
+
+# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (Versión en Español)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
 
@@ -30,7 +31,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## Synonym & Strategy Overview
+## Resumen de Sinónimos y Estrategias
 
 | Synonym Strategy | Metaphor & Core Principle | Applied Use Case |
 | :--- | :--- | :--- |
@@ -42,7 +43,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## The 5 Core Emergency & Orientation Protocols
+## Los 5 Protocolos Principales de Emergencia y Orientación
 
 ### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
 - **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.

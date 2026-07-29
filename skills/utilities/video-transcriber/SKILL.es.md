@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-06-20
-description: [Español] Habilidad y protocolo de agente para video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
+description: Habilidad de agente para video-transcriber: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `video-transcriber` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `video-transcriber`.
 
 
-# Video Transcriber
+
+# Video Transcriber (Versión en Español)
 
 Fetches transcripts (subtitles) and metadata (title, channel, date, views,
 description) of online videos. Prefers manually created subtitles, falls back
@@ -53,16 +54,16 @@ pip install yt-dlp                   # metadata (optional, fallback: noembed) �
 > special characters break in the output (cp1252 encoding).
 
 ```bash
-# Default: Markdown with timestamps
+# Default: Markdown with timestamps (Versión en Español)
 PYTHONIOENCODING=utf-8 python video_transcriber.py "https://www.youtube.com/watch?v=VIDEO_ID"
 
-# Choose output format
+# Choose output format (Versión en Español)
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --format markdown|json|plain
 
-# Save to file
+# Save to file (Versión en Español)
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL -o transcript.md
 
-# Prefer languages (default: de en)
+# Prefer languages (default: de en) (Versión en Español)
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --lang de en fr
 ```
 
@@ -101,7 +102,7 @@ output = format_markdown(meta, transcript)
 - Automatic subtitles can contain recognition errors
 - No audio download, no built-in speech recognition
 
-## Changelog
+## Registro de Cambios
 
 ### 1.1.0 (2026-06-20)
 - Renamed from `yt-transcriber` → `video-transcriber` (YouTube branding policy:

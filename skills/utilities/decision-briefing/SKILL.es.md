@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: [Español] Habilidad y protocolo de agente para decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
+description: Habilidad de agente para decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `decision-briefing` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `decision-briefing`.
 
 
-# Decision-Briefing — Work Through Many Decisions on One Topic
+
+# Decision-Briefing — Work Through Many Decisions on One Topic (Versión en Español)
 
 > A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
 
@@ -212,7 +213,7 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-06-13)
 - Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand

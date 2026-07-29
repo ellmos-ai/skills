@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: [Español] Habilidad y protocolo de agente para automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+description: Habilidad de agente para automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
 
 standalone: true
 anthropic_compatible: true
@@ -19,16 +19,17 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `automation-self-care` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `automation-self-care`.
 
 
-# Automation Self-Care
+
+# Automation Self-Care (Versión en Español)
 
 Create a native, provider-specific maintenance fleet from one provider-neutral
 control loop. Preserve the original intent of the ANTIGRAVITY task family while
 requiring evidence, reversible changes and native readback.
 
-## Non-negotiable boundaries
+## Límites No Negociables
 
 - Treat discovery, planning, approval, mutation and readback as separate phases.
 - Use the target app's supported automation API, command or UI. Never assume that
@@ -45,7 +46,7 @@ requiring evidence, reversible changes and native readback.
 - Count success only after outcome evidence, not merely scheduler start or exit 0.
 - Never copy secrets, private prompts or personal data into a shared registry.
 
-## Workflow
+## Flujo de Trabajo
 
 ### 1. Discover the native automation surface
 
@@ -140,7 +141,7 @@ Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-ho
 Treat token or subscription limitation as capacity state, not a broken actor.
 Return delegated coverage after the original actor produces a successful receipt.
 
-## Required outputs
+## Resultados Requeridos
 
 For each setup or care run report:
 
@@ -151,7 +152,7 @@ For each setup or care run report:
 - rollback location and return condition;
 - shared coverage update, if a coordination registry exists.
 
-## Example
+## Ejemplo
 
 User: "Set up self-maintaining schedules in this desktop app."
 
@@ -160,7 +161,7 @@ Generate the compact plan, present unsupported capabilities, then install only t
 approved tasks through the native surface. A folder containing a task prompt
 without a live scheduler registration is not a completed setup.
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-07-28)
 

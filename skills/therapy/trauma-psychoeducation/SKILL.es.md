@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Habilidad y protocolo de agente para trauma-psychoeducation: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
+description: Habilidad de agente para trauma-psychoeducation: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
 
 standalone: true
 anthropic_compatible: true
@@ -19,10 +19,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `trauma-psychoeducation` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `trauma-psychoeducation`.
 
 
-# Trauma Psychoeducation
+
+# Trauma Psychoeducation (Versión en Español)
 
 > Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
 
@@ -49,7 +50,7 @@ A trauma is an event that exceeds a person's coping capacity and is accompanied 
 
 ### Trauma Types
 
-| Type | Description | Examples |
+| Type | Description | Ejemplos |
 |------|-------------|----------|
 | Type I (Single trauma) | Single, unexpected event | Accident, assault, natural disaster |
 | Type II (Complex trauma) | Repeated, prolonged traumatization | Abuse, neglect, war |

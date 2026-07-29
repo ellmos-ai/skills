@@ -2,15 +2,16 @@
 language: es
 ---
 
-> **Traducción al Español** — Versión oficial en español de `llm-text-hygiene` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `llm-text-hygiene`.
 
 
-> **English Translation** — Official English version of `llm-text-hygiene`.
+
+> **English Translation** — Versión oficial en español of `llm-text-hygiene`.
 
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
+# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Versión en Español)
 
 ## Zweck
 
@@ -129,7 +130,7 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
 
-## Changelog
+## Registro de Cambios
 
 ### 1.0.0 (2026-07-04)
 - Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"

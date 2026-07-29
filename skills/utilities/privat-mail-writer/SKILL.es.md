@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
 updated: 2026-06-19
-description: [Español] Habilidad y protocolo de agente para privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+description: Habilidad de agente para privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,13 +18,14 @@ dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path'
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `privat-mail-writer` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `privat-mail-writer`.
 
 
-> **English Translation** — Official English version of `privat-mail-writer`.
+
+> **English Translation** — Versión oficial en español of `privat-mail-writer`.
 
 
-# Privat-Mail-Writer
+# Privat-Mail-Writer (Versión en Español)
 
 ## Zweck
 
@@ -119,7 +120,7 @@ Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere
 
 Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
 
-## Changelog
+## Registro de Cambios
 
 ### 0.2.0 (2026-06-19)
 - `CONFIG.md` und `BLACKLIST.md` ergänzt.

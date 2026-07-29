@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [Español] Habilidad y protocolo de agente para tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
+description: Habilidad de agente para tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
 
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,8 @@ dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HT
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
 
-> **Traducción al Español** — Versión oficial en español de `tageszeitung` (Fase 3: Multilingüe).
+> **Versión Oficial en Español** — Documentación completa traducida al español para la habilidad `tageszeitung`.
+
 
 
 ## Purpose
@@ -42,7 +43,7 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 
 ---
 
-## Workflow
+## Flujo de Trabajo
 
 1. **Check sources**: Read all active sources from `news_sources`.
 2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
@@ -55,25 +56,25 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 ## CLI Entry Point
 
 ```bash
-# Add source
+# Add source (Versión en Español)
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Fetch all sources
+# Fetch all sources (Versión en Español)
 python tageszeitung_core.py fetch
 
-# Render daily newspaper (HTML + PDF if Edge available)
+# Render daily newspaper (HTML + PDF if Edge available) (Versión en Español)
 python tageszeitung_core.py render [--date 2026-06-22] [--out /path/]
 
-# List sources
+# List sources (Versión en Español)
 python tageszeitung_core.py sources
 
-# Unread articles
+# Unread articles (Versión en Español)
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Mark article as read
+# Mark article as read (Versión en Español)
 python tageszeitung_core.py read <item_id>
 
-# Alternative store (e.g. for tests)
+# Alternative store (e.g. for tests) (Versión en Español)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
-## Changelog
+## Registro de Cambios
 
 | Version | Date | Change |
 |---|---|---|
