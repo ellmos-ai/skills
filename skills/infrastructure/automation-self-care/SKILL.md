@@ -138,6 +138,20 @@ Keep local app state authoritative. Share only task contracts, coverage, status,
 receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
 single-writer mutations require a claim or an equivalent native lock.
 
+### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+
+For AI frameworks that lack native, event-driven JSON hook loaders (such as
+Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
+Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
+
+- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
+  evaluate logs and execution state.
+- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
+  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
+  directly into target `sidecar.json` prompt texts.
+- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
+  `gardener`, `workflowhooker`, and `.SKILLS`.
+
 Treat token or subscription limitation as capacity state, not a broken actor.
 Return delegated coverage after the original actor produces a successful receipt.
 
