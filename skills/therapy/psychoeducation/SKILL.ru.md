@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Полное руководство и документация на русском языке для навыка psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
-
+description: [Русский] Навык агента для psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,14 +15,17 @@ tags: [psychoeducation, depression, anxiety, ptsd, adhd, borderline, knowledge]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `psychoeducation`.
+> **Русский** — Официальная полная документация на русском языке для навыка `psychoeducation`.
 
 
 
-# Psychoeducation
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Psychoeducation (English)
 
 > Knowledge sharing about mental disorders, symptoms, and treatment approaches
 

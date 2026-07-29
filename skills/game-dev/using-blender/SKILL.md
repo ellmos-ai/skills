@@ -5,36 +5,26 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  General Blender workflow skill for AI agents working with .blend, .fbx, .obj,
-  .glb, glTF, materials, scene inspection, bpy automation, headless Blender
-  batch runs, export/reimport validation, previews, and optional Blender MCP
-  control. Use when a task asks to open, inspect, create, automate, convert,
-  optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
+description: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-dependencies:
-  tools: [blender]
-  services: []
-  protocols: []
-  python: []
+dependencies: {'tools': ['blender'], 'services': [], 'protocols': [], 'python': []}
 category: game-dev
 tags: [blender, bpy, 3d, assets, fbx, glb, gltf, mcp]
 language: de
 status: active
-provenance:
-  origin: "custom"
-  origin_path: "skills/game-dev/using-blender"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/skills"
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-# Using Blender
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+
+
+> **English Translation** — Official English version of `using-blender`.
+
+
+# Using Blender (Deutsch)
 
 ## Kernregel
 
@@ -72,7 +62,7 @@ Arbeite mit Blender in drei Modi, passend zur Aufgabe:
 
 Für Live-Steuerung lies [references/blender-mcp-review.md](references/blender-mcp-review.md), wenn ein Blender-MCP-Server ausgewählt, installiert oder bewertet werden soll.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-06-20)
 - Initialer nutzeragnostischer Blender-Skill mit GUI-, Headless- und MCP-Routing.

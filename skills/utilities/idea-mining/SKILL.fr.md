@@ -2,8 +2,11 @@
 language: fr
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `idea-mining`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `idea-mining`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `idea-mining`.
@@ -11,9 +14,9 @@ language: fr
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen
+# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 
-## Zweck
+## Présentation et Objectif & Purpose
 
 Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
 Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
@@ -102,7 +105,7 @@ Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): R
 verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
 Versuchs-Doku sind hier das Gedächtnis.
 
-## Beispiel
+## Exemple et Mode d'Emploi & Usage
 
 ```text
 Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.

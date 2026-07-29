@@ -5,107 +5,90 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  Einsetzen, wenn Lerninhalte aus Studienmaterialien (Skripte, Bücher, PDFs,
-  Vorlesungsfolien) strukturiert erarbeitet, zusammengefasst oder durch
-  Retrieval-Practice gefestigt werden sollen. Leitet durch einen vollständigen
-  Lernzyklus: Lernziel, Kernideen, Glossar, Transfer und Selbsttest.
+description: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: education
-tags: [lernen, lernziele, retrieval, glossar, zusammenfassung, studium, didaktik]
+tags: [learning, objectives, retrieval, glossary, summary, studies, didactics]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Academic Study Learn
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Übersicht
 
-Begleite das quellenbasierte Lernen mit einem fünfstufigen Lernzyklus. Der Skill
-ist institution- und fachunabhängig: er funktioniert mit jedem Studienmaterial,
-das als Datei, Texteingabe oder per Webzugang verfügbar ist.
+# Academic Study Learn (Deutsch)
 
-## Konfiguration
+## Übersicht & Zweck
 
-| Platzhalter | Bedeutung |
+Support source-based learning with a five-phase learning cycle. The skill is
+institution- and subject-neutral: it works with any study material available
+as a file, text input, or via web access.
+
+## Configuration
+
+| Placeholder | Meaning |
 |---|---|
-| `<MODUL_PREFIX>` | Kürzel für Modulbezeichnungen (z. B. MM, MF, MO) |
-| `<LMS>` | Lernmanagementsystem (z. B. ILIAS, Canvas, Stud.IP) |
-| `<INDEX_DATEI>` | Lokale Indexdatei des Studienordners (z. B. LLM_INDEX.md) |
+| `<MODULE_PREFIX>` | Abbreviation used in module codes (e.g. MM, MF, MO) |
+| `<LMS>` | Learning management system (e.g. ILIAS, Canvas, Stud.IP) |
+| `<INDEX_FILE>` | Local index file of the study folder (e.g. LLM_INDEX.md) |
 
-## Lernzyklus (5 Phasen)
+## Learning Cycle (5 Phases)
 
-### 1. Lernziel klären
+### 1. Clarify the Learning Objective
 
-- Was soll nach dieser Einheit können, verstanden oder angewendet werden?
-- Ziel in einem Satz formulieren und am Ende der Einheit prüfen.
+- What should be possible, understood, or applied after this unit?
+- State the objective in one sentence and review it at the end of the unit.
 
-### 2. Kernideen extrahieren (3–7)
+### 2. Extract Key Ideas (3–7)
 
-- Wichtigste Konzepte, Theorien oder Verfahren aus dem Material herausarbeiten.
-- Jede Kernidee in 2–4 Sätzen erklären.
-- Verbindungen zwischen den Kernideen benennen.
+- Identify the most important concepts, theories, or procedures from the material.
+- Explain each key idea in 2–4 sentences.
+- Name the connections between the key ideas.
 
-### 3. Glossar anlegen
+### 3. Build a Glossary
 
-- Fachbegriffe mit Kurzdefinition und — wenn vorhanden — Quellenangabe auflisten.
-- Nur Begriffe aufnehmen, die für das Lernziel relevant sind.
+- List technical terms with a brief definition and — where available — a source reference.
+- Only include terms that are relevant to the learning objective.
 
-### 4. Transfer und Anwendung
+### 4. Transfer and Application
 
-- Mindestens ein Beispiel oder eine Anwendung aus dem eigenen Kontext formulieren.
-- Unterschiede zwischen ähnlichen Konzepten herausarbeiten.
-- Offene Fragen und Unklarheiten explizit benennen.
+- Formulate at least one example or application from your own context.
+- Work out the differences between similar concepts.
+- Explicitly name open questions and uncertainties.
 
-### 5. Retrieval Practice (5–10 Fragen)
+### 5. Retrieval Practice (5–10 questions)
 
-- Fragen ohne Blick ins Material beantworten lassen.
-- Antworten mit dem Quellmaterial abgleichen.
-- Lücken und Irrtümer als Grundlage für die nächste Wiederholung notieren.
+- Answer questions without looking at the material.
+- Compare answers with the source material.
+- Note gaps and errors as the basis for the next revision session.
 
-## Quellen und Materialzugang
+## Sources and Material Access
 
-- Lokale Modulordner nach Schema `<MODUL_PREFIX><Nummer>` prüfen (z. B.
-  `<MODUL_PREFIX>1`, `<MODUL_PREFIX>2`).
-- Bei Online-Materialien (Skripte, Aufgaben, Literaturlisten) `<LMS>` oder die
-  offizielle Hochschulwebseite nutzen, wenn ein Connector oder Browser-Zugang
-  verfügbar ist.
-- `<INDEX_DATEI>` als Einstieg verwenden, wenn ein lokaler Studienordner vorliegt.
-- Optional: Uni-Mails nach relevanten Hinweisen zu Pflichtlektüre oder Aufgaben
-  durchsuchen, wenn ein Mail-Connector verfügbar ist.
+- Check local module folders following the pattern `<MODULE_PREFIX><Number>`
+  (e.g. `<MODULE_PREFIX>1`, `<MODULE_PREFIX>2`).
+- For online materials (scripts, assignments, reading lists) use `<LMS>` or the
+  official institutional website when a connector or browser access is available.
+- Use `<INDEX_FILE>` as the entry point when a local study folder exists.
+- Optional: search institutional emails for hints about required reading or
+  assignments if a mail connector is available.
 
-## Qualitätskriterien
+## Quality Criteria
 
-- Kernideen sind in eigenen Worten formuliert, nicht wörtlich kopiert.
-- Retrieval-Fragen decken verschiedene kognitive Niveaus ab: Wiedererkennen,
-  Verstehen, Anwenden.
-- Offene Fragen und Unsicherheiten sind explizit markiert, nicht weggelassen.
-- Quellennachweise sind vollständig (Dokument, Kapitel oder Seitenzahl).
+- Key ideas are formulated in your own words, not copied verbatim.
+- Retrieval questions cover different cognitive levels: recognition,
+  understanding, application.
+- Open questions and uncertainties are explicitly marked, not omitted.
+- Source references are complete (document, chapter, or page number).
 
-## Hinweise
+## Notes
 
-- Der Skill eignet sich für jedes Fach und jeden Materialtyp (Text, Tabelle,
-  Code, Diagramm).
-- Für Prüfungsvorbereitung und Selbsttests den Skill `academic-study-test`
-  nutzen.
-- Für Semesterplanung und Fristen den Skill `academic-study-control` nutzen.
+- The skill is suitable for any subject and any material type (text, table,
+  code, diagram).
+- For exam preparation and self-tests, use the skill `academic-study-test`.
+- For semester planning and deadlines, use the skill `academic-study-control`.

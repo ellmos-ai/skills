@@ -5,36 +5,24 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: >
-  Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
+description: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: dev
 tags: [migration, renaming, wrapper, evolutionary, refactoring]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/workflows/migrate-rename.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# File Renaming with Wrappers (Evolutionary Migration)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# File Renaming with Wrappers (Evolutionary Migration) (English)
 
 > Enables file renames WITHOUT hard breaks. References are organically updated through daily usage.
 
@@ -74,7 +62,7 @@ mv old_file.md new_file.md
 Create `old_file.md` with the following content:
 
 ```markdown
-# OLD_FILE.md - REDIRECTED
+# OLD_FILE.md - REDIRECTED (English)
 
 **Status:** This file has been renamed to `new_file.md`
 

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
 updated: 2026-07-03
-description: [中文] 针对该技能的完整中文文档: skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
+description: [中文] 智能体技能: skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,8 +18,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `skill-extractor`.
+> **中文** — 针对该技能的官方完整中文文档: `skill-extractor`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `skill-extractor`.
@@ -27,9 +30,9 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-# Skill-Extractor — aus Chatverläufen Skills gewinnen
+# Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Wertvolle Arbeitsweisen entstehen in Sessions: Ein Problem wurde mühsam gelöst, der User hat
 mehrfach korrigiert, am Ende steht ein funktionierender Ablauf — und beim nächsten Mal fängt
@@ -148,7 +151,7 @@ Map-Reduce über Subagenten (Muster: `swarm-operations`-Skill, Aufgabenschwarm):
    Dem User vor dem Massenbau eine nummerierte Kandidatenliste zur Auswahl vorlegen —
    Bulk-Extraktion erzeugt sonst Skill-Müll.
 
-## Beispiel
+## 使用示例与实践 & Usage
 
 ```text
 User: „Wir haben jetzt dreimal PDF-Rechnungen nach demselben Schema geparst —
@@ -180,7 +183,7 @@ mach daraus einen Skill."
 - `skill-creator` (Plugin) — Eval-Loop und Beschreibungs-Optimierung für fertige Skills.
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Entstanden aus dem Auftrag, Codex-Automatisierungen und Chatverläufe

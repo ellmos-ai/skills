@@ -2,16 +2,19 @@
 language: fr
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `decision-avatar`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `decision-avatar`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (English)
 
-## Zweck
+## Présentation et Objectif & Purpose
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz

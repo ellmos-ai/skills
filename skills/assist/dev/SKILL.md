@@ -5,100 +5,83 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: >
-  Entwickler-Assistent (ATI-Nachfolger). Verschafft schnellen Projekt-Überblick
-  per headless Scan und routet auf die vorhandenen Coding-Werkzeuge:
-  CodeCommander-MCP (Analyse/Refactor/Diagnose) und das ellmos-code-tools-Modul.
-  Reines Werkzeug-Routing + Scan, kein eigener Store.
+description: Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: assist
 tags: [dev, coding, projekt-scan, ati, codecommander]
 language: de
 status: active
-
-dependencies:
-  tools: [dev_core.py]
-  services: []
-  protocols: []
-  python: [pathlib]
-  external: [codecommander-mcp, ellmos-code-tools]
-
-provenance:
-  origin: "bach"
-  origin_path: "system/agents/ati/ + system/agents/entwickler/"
-  origin_version: "n/a"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-06-22"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Dev — Entwickler-Assistent (ATI)
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-Verschafft Überblick, dann übergibt er an die richtigen Werkzeuge.
 
-## Zweck
+# Dev — Developer Assistant (ATI) (Deutsch)
 
-Nachfolger von BACHs ATI/entwickler-Agent. Zwei Aufgaben:
-1. **Projekt-Scan** (headless, stdlib): schneller, tokensparender Überblick über
-   Struktur, Sprachen und Build-Marker eines Projekts — bevor teure Analyse läuft.
-2. **Werkzeug-Routing:** leitet auf die vorhandenen Coding-Tools weiter statt eigene
-   zu duplizieren.
+Gets an overview first, then hands off to the right tools.
 
-## Trigger
+## Übersicht & Zweck
 
-| Nutzereingabe | Aktion |
+Successor to BACH's ATI/entwickler agent. Two tasks:
+1. **Project scan** (headless, stdlib): fast, token-efficient overview of
+   structure, languages and build markers of a project — before expensive analysis runs.
+2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
+
+## Triggers
+
+| User input | Action |
 |---|---|
-| „Verschaff dir Überblick über das Projekt X" | `dev_core.py scan <pfad>` |
-| „Was ist das für ein Projekt / welcher Stack?" | `dev_core.py scan <pfad>` |
-| „Analysiere diese Datei / refactor" | → CodeCommander-MCP |
-| „Generiere/prüfe Python-Code" | → CodeCommander-MCP / ellmos-code-tools |
+| "Get an overview of project X" | `dev_core.py scan <path>` |
+| "What kind of project is this / which stack?" | `dev_core.py scan <path>` |
+| "Analyse this file / refactor" | → CodeCommander MCP |
+| "Generate/check Python code" | → CodeCommander MCP / ellmos-code-tools |
 
-## Werkzeug-Landschaft (Routing-Ziele)
+## Tool Landscape (Routing Targets)
 
-- **CodeCommander-MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
+- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
   `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` u.a.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI-Devtools (Structural-Edit,
-  pycutter-Kontext, Method-Analyzer).
-- **FileCommander-MCP**: Datei-/Verzeichnis-Operationen über große Bäume.
+  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
+  pycutter context, Method-Analyzer).
+- **FileCommander MCP**: File/directory operations over large trees.
 
-## CLI-Einstieg (dev_core.py)
+## CLI Entry Point (dev_core.py)
 
 ```bash
-python dev_core.py scan .              # aktuelles Projekt
-python dev_core.py scan /pfad/projekt  # Struktur + Sprachen + Marker
+python dev_core.py scan .              # current project
+python dev_core.py scan /path/project  # structure + languages + markers
 ```
 
-Erkennt u.a.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git-Repo.
+Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
+Java, Roblox (Rojo), Docker, Git repo.
 
 ## Store
 
-Kein Store. Reiner Scan + Routing.
+No store. Pure scan + routing.
 
-## Haltung
+## Attitude
 
-Wir empfehlen CodeCommander/ellmos-code-tools als Coding-Werkzeuge, sind aber offen
-für andere (z.B. ruff/pylint/eslint), falls der Nutzer das vorzieht.
+We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
+to others (e.g. ruff/pylint/eslint) if the user prefers them.
 
-## Datenschutz
+## Privacy
 
-- `dev_core.py` liest nur Datei-/Verzeichnisnamen (Struktur), keine Inhalte, kein Upload.
-- Übersprungen werden u.a. `.git`, `node_modules`, `.venv`, `__pycache__`.
+- `dev_core.py` only reads file/directory names (structure), no content, no upload.
+- Skipped: `.git`, `node_modules`, `.venv`, `__pycache__` etc.
 
-## Verwandte Ressourcen
+## Related Resources
 
-- `assist/AGENTS.md` — Umbrella-Router
+- `assist/AGENTS.md` — Umbrella router
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
-## Changelog
+## Änderungsprotokoll
 
 ### 0.1.0 (2026-06-22)
-- Initiale Version. ATI/entwickler-Nachfolger: headless Projekt-Scan (stdlib) +
-  Routing auf CodeCommander-MCP / ellmos-code-tools. Userneutral, kein Store.
+- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
+  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.

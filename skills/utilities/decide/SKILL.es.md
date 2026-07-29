@@ -1,29 +1,15 @@
 ---
-name: decide
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-15
-updated: 2026-03-15
-description: [Español] Documentación completa traducida al español para la habilidad decide: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: utilities
-tags: [decision, evaluation, prioritization, framework]
 language: es
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `decide`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `decide`.
 
 
 
-# Decide — Structured Decision Making
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Decide — Structured Decision Making (English)
 
 > Rational decisions through structured frameworks and evaluation methods
 
@@ -148,7 +134,7 @@ Check before final recommendation:
 
 ---
 
-## Flujo de Trabajo y Pasos
+## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
 
 ```
 1. User request

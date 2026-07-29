@@ -5,139 +5,115 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  Einsetzen, wenn Studienverwaltung, Semesterplanung, Modulpriorisierung,
-  Fristen, Prüfungsanmeldungen oder institutionelle Mails geprüft, geplant
-  oder in Erinnerungen überführt werden sollen. Koordiniert Webrecherche,
-  lokale Statusdateien und optionale Kalender- und Mail-Integration.
+description: Use when managing studies, semester planning, module prioritisation, deadlines, exam registrations, or institutional emails need to be checked, planned, or converted into reminders. Coordinates web research, local status files, and optional calendar and mail integration.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: education
-tags: [studium, semester, fristen, pruefung, planung, kalender, mail, hochschule]
+tags: [studies, semester, deadlines, exams, planning, calendar, mail, university]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Academic Study Control
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Übersicht
 
-Steuere Studium und Fristen mit Quellenprüfung, Datenschutz und realistischer
-Planung. Dieser Skill ist institution- und LMS-neutral: Platzhalter (in spitzen
-Klammern) werden in der ersten Nutzung durch den Agent an den konkreten Kontext
-angepasst.
+# Academic Study Control (Deutsch)
 
-## Konfiguration
+## Übersicht & Zweck
 
-| Platzhalter | Beispielwert | Bedeutung |
+Manage studies and deadlines with source verification, privacy compliance, and
+realistic planning. This skill is institution- and LMS-neutral: placeholders
+(in angle brackets) are adapted to the concrete context by the agent on first use.
+
+## Configuration
+
+| Placeholder | Example value | Meaning |
 |---|---|---|
-| `<HOCHSCHULE>` | Universität A, TU Berlin | Offizieller Name der Hochschule |
-| `<LMS>` | ILIAS, Canvas, Stud.IP | Lernmanagementsystem |
-| `<MODUL_PREFIX>` | MM, MF, MO | Kürzel für Modulbezeichnungen |
-| `<STATUS_DATEI>` | STATE.md, SEMESTER.md | Lokale Statusdatei der Studierenden |
-| `<INDEX_DATEI>` | LLM_INDEX.md, INDEX.md | Lokale Indexdatei |
-| `<KALENDER>` | Google Calendar, iCal | Kalenderanwendung (optional) |
-| `<MAIL>` | Gmail, Outlook, Thunderbird | Mailprogramm oder -connector (optional) |
+| `<INSTITUTION>` | University of A, TU Berlin | Official name of the institution |
+| `<LMS>` | ILIAS, Canvas, Stud.IP | Learning management system |
+| `<MODULE_PREFIX>` | MM, MF, MO | Abbreviation used in module codes |
+| `<STATUS_FILE>` | STATE.md, SEMESTER.md | Local status file of the student |
+| `<INDEX_FILE>` | LLM_INDEX.md, INDEX.md | Local index file |
+| `<CALENDAR>` | Google Calendar, iCal | Calendar application (optional) |
+| `<MAIL>` | Gmail, Outlook, Thunderbird | Mail client or connector (optional) |
 
-## Ablauf
+## Workflow & Vorgehen
 
-1. **Ziel klären:** Semesterplan, Wochenplan, Prüfungsanmeldung, Rückmeldung,
-   Fristencheck, Mailcheck, Modulwechsel oder Erinnerungen.
-2. **Lokale Lage prüfen:** `<STATUS_DATEI>`, `<INDEX_DATEI>`, relevante
-   Modulordner, vorhandene Pläne und Originaldokumente der Hochschule.
-3. **Aktuelle institutionelle Lage live prüfen:** offizielle Webseiten der
-   `<HOCHSCHULE>`, Prüfungsamt, `<LMS>`-Ankündigungen und — sofern verfügbar
-   und beauftragt — institutionelle Mails.
-4. **Zeitbezug absolut notieren:** heutiges Datum, Semester, Fristdatum, Quelle,
-   Abrufdatum.
-5. **Entscheidung oder Plan ableiten** — nicht nur Links oder Informationen
-   sammeln.
+1. **Clarify the goal:** Semester plan, weekly plan, exam registration, re-enrollment,
+   deadline check, mail check, module change, or reminders.
+2. **Check local state:** `<STATUS_FILE>`, `<INDEX_FILE>`, relevant module folders,
+   existing plans, and official documents from the institution.
+3. **Check current institutional state live:** Official websites of `<INSTITUTION>`,
+   examination office, `<LMS>` announcements, and — if available and requested —
+   institutional emails.
+4. **Record time references absolutely:** today's date, semester, deadline date,
+   source, retrieval date.
+5. **Derive a decision or plan** — do not just collect links or information.
 
-## Recherche
+## Research
 
-- Für aktuelle Informationen immer Webrecherche oder Originaldokumente nutzen.
-  Termine, Prüfungsformen, Rückmeldezeiträume, Gebühren und Ankündigungen
-  ändern sich regelmäßig.
-- Bevorzugte Quellen: offizielle Seiten der `<HOCHSCHULE>`, Fakultätsseiten,
-  Prüfungsamt, Modulhandbuch, Prüfungsportal, `<LMS>` und offizielle
-  Hochschulmails.
-- Bei Loginbedarf Computer-Use oder Browser-Steuerung einsetzen, aber
-  Authentifizierung beim Nutzenden lassen. Niemals Credentials, MFA-Codes oder
-  Sessiondaten speichern.
-- `<MAIL>` nur nutzen, wenn ein passender Connector oder explizit bereitgestellte
-  Mailinhalte verfügbar sind. Suche eng formulieren (Absender der Hochschule,
-  Modulcodes, Prüfungsamt, Rückmeldung, Fristbegriffe).
-- Quellenkonflikte offen markieren und die offiziellere oder neuere Quelle
-  bevorzugen.
+- Always use web research or original documents for current information.
+  Dates, exam formats, re-enrollment windows, fees, and announcements change
+  regularly.
+- Preferred sources: official pages of `<INSTITUTION>`, faculty pages, examination
+  office, module handbook, exam portal, `<LMS>`, and official institutional emails.
+- When login is required, use computer-use or browser control, but leave
+  authentication to the user. Never store credentials, MFA codes, or session data.
+- Use `<MAIL>` only when a suitable connector or explicitly provided mail content
+  is available. Keep the search query narrow (sender from the institution, module
+  codes, examination office, re-enrollment, deadline keywords).
+- Mark source conflicts openly and prefer the more official or more recent source.
 
-## Planen
+## Planning
 
-Baue Planungen mit Puffer:
+Build plans with buffer time:
 
-1. Pflichttermine und harte Fristen zuerst.
-2. Prüfungs- und Abgabentermine rückwärts planen.
-3. Module nach Aufwand, Risiko, Vorwissen und Prüfungsnähe priorisieren.
-4. Pro Woche realistische Lernblöcke setzen, inklusive Wiederholung und freier
-   Puffer.
-5. Planänderungen begründen: was fällt weg, was rückt vor, welches Risiko
-   entsteht.
-6. Ergebnis in einer kompakten Tabelle ausgeben:
-   `Datum | Aufgabe | Quelle | Status | Nächster Schritt`.
+1. Mandatory dates and hard deadlines first.
+2. Plan backwards from exam and submission dates.
+3. Prioritise modules by effort, risk, prior knowledge, and proximity to exams.
+4. Set realistic learning blocks per week, including revision and free buffer.
+5. Justify plan changes: what is dropped, what moves forward, what risk arises.
+6. Output the result in a compact table:
+   `Date | Task | Source | Status | Next step`.
 
-## Erinnerungen und Kalender (optional)
+## Reminders and Calendar (optional)
 
-Wird nur genutzt, wenn der `<KALENDER>`-Connector verfügbar ist und explizit
-beauftragt wurde:
+Used only when the `<CALENDAR>` connector is available and explicitly requested:
 
-- Erstelle Erinnerungen mit Vorwarnzeiten: harte Frist, 7 Tage vorher, 2 Tage
-  vorher und am Vortag (anpassbar).
-- Änderungen im Kalender vor dem Schreiben knapp bestätigen lassen, sofern die
-  Handlung nicht eindeutig beauftragt ist.
-- Keine Frist übernehmen, bevor sie aus offizieller Quelle oder lokalem
-  Originaldokument bestätigt wurde.
+- Create reminders with advance notice: hard deadline, 7 days before, 2 days before,
+  and the day before (adjustable).
+- Confirm calendar writes briefly before committing, unless the action is
+  unambiguously authorised.
+- Do not transfer any deadline until it is confirmed from an official source or
+  local original document.
 
-## Mail- und Portalcheck (optional)
+## Mail and Portal Check (optional)
 
-Bei Aufträgen wie „prüf mal Hochschulmails" oder ähnlichem:
+For requests such as "check my institutional emails" or similar:
 
-1. Institutionelle Mails nach relevanten neuen Nachrichten durchsuchen.
-2. Offizielle Terminseiten und Modul-/Prüfungsseiten prüfen.
-3. `<LMS>` nur bei Bedarf und mit Nutzenden-Login öffnen.
-4. Änderungen als Delta ausgeben: neu, geändert, unverändert, unklar.
-5. Nächste Aktionen nennen: anmelden, herunterladen, nachfragen, planen,
-   erinnern.
+1. Search institutional emails for relevant new messages.
+2. Check official deadline pages and module/exam pages.
+3. Open `<LMS>` only when needed and with the user's login.
+4. Output changes as a delta: new, changed, unchanged, unclear.
+5. Name next actions: register, download, follow up, plan, remind.
 
-## Datenschutz
+## Privacy
 
-- Immatrikulationsnummern, Bescheinigungen, Mailvolltexte, Gesundheitsdaten
-  und Prüfungsdaten nicht unnötig ausgeben.
-- Bei Dateischreibungen zuerst fragen, wenn sensible Inhalte in neue
-  Planungsdateien übernommen würden.
-- In Antworten genügen abstrahierte Angaben: „Rückmeldefrist endet am …" —
-  keine kompletten Mail- oder Dokumentzitate.
+- Do not output enrollment numbers, certificates, mail full texts, health data,
+  or exam data unnecessarily.
+- Ask before writing files if sensitive content would be transferred into new
+  planning files.
+- Abstracted references are sufficient in replies: "Re-enrollment deadline ends
+  on …" — no complete mail or document quotations.
 
-## Offene Punkte
+## Open Points
 
-- `author`-Feld folgt der `.SKILLS`-Konvention (Repo-Autorenschaft); der Wert
-  enthält einen Eigennamen, ist aber für die Repo-Öffentlichkeit intendiert.
-- Tool-Integrationen (`<MAIL>`, `<KALENDER>`) sind bewusst optional — der Skill
-  funktioniert vollständig auch ohne sie.
+- The `author` field follows the `.SKILLS` convention (repository authorship);
+  the value contains a personal name but is intended for public repository use.
+- Tool integrations (`<MAIL>`, `<CALENDAR>`) are intentionally optional — the skill
+  functions fully without them.

@@ -5,8 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
-
+description: [日本語] エージェントスキル: bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,21 +15,24 @@ tags: [debugging, bugfix, protocol, python, pyqt6, systematic]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `bugfix-protocol`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bugfix-protocol`.
 
 
 
-# Bugfix Protocol: Systematic 6-Phase Debugging
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Bugfix Protocol: Systematic 6-Phase Debugging (English)
 
 A structured approach to bugs — from symptom analysis to verification.
 Prevents aimless trial-and-error and ensures fixes are sustainable.
 
 ---
 
-## 概要と目的
+## 概要と目的 & Purpose
 
 | Phase | Name | Goal | Max. Time |
 |-------|------|------|-----------|
@@ -62,14 +64,14 @@ Before diving deep — check the most common causes:
 ### Quick Actions
 
 ```bash
-# Clear cache
+# Clear cache (English)
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports
+# Check imports (English)
 python -c "import modulename"
 
-# Check syntax
+# Check syntax (English)
 python -m py_compile file.py
 ```
 
@@ -99,17 +101,17 @@ Depending on the project, specialized diagnostic scripts may be helpful:
 ### Debugging Techniques
 
 ```python
-# 1. Print debugging (quick but effective)
+# 1. Print debugging (quick but effective) (English)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive)
+# 2. Breakpoint (interactive) (English)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback
+# 3. Extended traceback (English)
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print
+# 4. Logging instead of print (English)
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -125,21 +127,21 @@ logger.debug(f"State: {state!r}")
 Goal: Reproduce the bug with minimal code.
 
 ```python
-# test_bug.py — Minimal Reproduction Test
+# test_bug.py — Minimal Reproduction Test (English)
 """
 Bug: [Short description]
 Expected: [What should happen]
 Actual: [What happens instead]
 """
 
-# Minimal setup
-# ... only the essentials
+# Minimal setup (English)
+# ... only the essentials (English)
 
-# Bug trigger
-# ... exact code that triggers the bug
+# Bug trigger (English)
+# ... exact code that triggers the bug (English)
 
-# Expected result
-# assert result == expected, f"Got {result}"
+# Expected result (English)
+# assert result == expected, f"Got {result}" (English)
 ```
 
 ### Isolation Strategies
@@ -163,13 +165,13 @@ Actual: [What happens instead]
 ### Fix Patterns
 
 ```python
-# BAD: Treating the symptom
+# BAD: Treating the symptom (English)
 try:
     result = broken_function()
 except:  # Swallow everything
     result = default_value
 
-# GOOD: Fix the root cause
+# GOOD: Fix the root cause (English)
 def broken_function():
     if input_data is None:  # Actual cause: missing None check
         return default_value
@@ -203,16 +205,16 @@ def broken_function():
 ### Test Commands
 
 ```bash
-# Unit tests
+# Unit tests (English)
 python -m pytest tests/ -v
 
-# Only affected tests
+# Only affected tests (English)
 python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type check
+# Type check (English)
 python -m mypy file.py
 
-# Lint
+# Lint (English)
 python -m flake8 file.py
 ```
 
@@ -275,14 +277,14 @@ Test: [How verified]
 ### PyQt6 Debug Helpers
 
 ```python
-# Dump widget hierarchy
+# Dump widget hierarchy (English)
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging
+# Signal debugging (English)
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):

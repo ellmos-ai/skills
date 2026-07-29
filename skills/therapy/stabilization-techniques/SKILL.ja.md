@@ -1,29 +1,15 @@
 ---
-name: stabilization-techniques
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: stabilization-techniques: Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [stabilization, grounding, safe-place, containment, breathing-exercises, crisis-management]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `stabilization-techniques`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `stabilization-techniques`.
 
 
 
-# Stabilization Techniques
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Stabilization Techniques (English)
 
 ## Foundation
 

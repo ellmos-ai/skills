@@ -5,8 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [中文] 针对该技能的完整中文文档: tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
-
+description: [中文] 智能体技能: tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,14 +15,17 @@ tags: [zeitung, news, rss, feed, pdf, tageszeitung]
 language: zh
 status: stable
 dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HTML → PDF (Edge Headless); without Edge: HTML output only'}], 'services': [], 'protocols': [], 'python': [{'name': 'feedparser', 'optional': True, 'install': 'pip install feedparser', 'purpose': 'RSS parsing (main backend). Fallback: defusedxml → regex'}, {'name': 'defusedxml', 'optional': True, 'install': 'pip install defusedxml', 'purpose': 'XXE-safe XML parser as fallback when feedparser is missing. Without defusedxml a regex fallback is used (no ET.fromstring on network data).'}]}
-provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
+provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\\n'}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `tageszeitung`.
+> **中文** — 针对该技能的官方完整中文文档: `tageszeitung`.
 
 
 
-## Purpose
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+## 概述与执行目标 & Purpose
 
 Fetch articles from configured RSS feeds and web sources, sort them by category
 and render them as an HTML/PDF daily newspaper. Articles are stored locally in
@@ -43,7 +45,7 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 
 ---
 
-## 工作流程与执行步骤
+## 工作流程与执行步骤 & Execution Steps
 
 1. **Check sources**: Read all active sources from `news_sources`.
 2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
@@ -56,25 +58,25 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 ## CLI Entry Point
 
 ```bash
-# Add source
+# Add source (English)
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Fetch all sources
+# Fetch all sources (English)
 python tageszeitung_core.py fetch
 
-# Render daily newspaper (HTML + PDF if Edge available)
+# Render daily newspaper (HTML + PDF if Edge available) (English)
 python tageszeitung_core.py render [--date 2026-06-22] [--out /path/]
 
-# List sources
+# List sources (English)
 python tageszeitung_core.py sources
 
-# Unread articles
+# Unread articles (English)
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Mark article as read
+# Mark article as read (English)
 python tageszeitung_core.py read <item_id>
 
-# Alternative store (e.g. for tests)
+# Alternative store (e.g. for tests) (English)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 
@@ -147,7 +149,7 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 | Version | Date | Change |
 |---|---|---|

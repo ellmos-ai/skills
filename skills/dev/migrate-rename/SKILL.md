@@ -5,138 +5,126 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: >
-  Evolutionaere Datei-Umbenennung mit Wrapper-Dateien. Ermoeglicht Umbenennungen ohne harte Brueche — Verweise werden organisch durch Nutzung aktualisiert.
+description: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: dev
-tags: [migration, umbenennung, wrapper, evolutionaer, refactoring]
+tags: [migration, renaming, wrapper, evolutionary, refactoring]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/workflows/migrate-rename.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Datei-Umbenennung mit Wrapper (Evolutionaere Migration)
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Ermoeglicht Datei-Umbenennungen OHNE harte Brueche. Verweise werden organisch durch taegliche Nutzung aktualisiert.
+
+# File Renaming with Wrappers (Evolutionary Migration) (Deutsch)
+
+> Enables file renames WITHOUT hard breaks. References are organically updated through daily usage.
 
 ---
 
-## Prinzip: Evolutionaere Migration
+## Principle: Evolutionary Migration
 
 ```
-VORHER:                          NACHHER:
-alte_datei.md                    neue_datei.md (umbenannt)
+BEFORE:                          AFTER:
+old_file.md                      new_file.md (renamed)
    |                                |
-   +-- Verweis A                    +-- alte_datei.md (Wrapper)
-   +-- Verweis B                           |
-   +-- Verweis C                           +-- Log-Tabelle
-                                           +-- Anleitung
-                                           +-- Link zu neue_datei.md
+   +-- Reference A                  +-- old_file.md (wrapper)
+   +-- Reference B                         |
+   +-- Reference C                         +-- Log table
+                                           +-- Instructions
+                                           +-- Link to new_file.md
 ```
 
-Wer den alten Pfad aufruft:
-1. Landet bei der Wrapper-Datei
-2. Traegt sich ins Log ein
-3. Korrigiert den Verweis der ihn herschickte
-4. Geht zur eigentlichen Datei
+When someone accesses the old path:
+1. Lands at the wrapper file
+2. Adds an entry to the log
+3. Corrects the reference that brought them here
+4. Proceeds to the actual file
 
 ---
 
-## Schritt-fuer-Schritt
+## Step by Step
 
-### 1. Datei umbenennen
+### 1. Rename the File
 
 ```bash
-mv alte_datei.md neue_datei.md
+mv old_file.md new_file.md
 ```
 
-### 2. Wrapper-Datei erstellen
+### 2. Create Wrapper File
 
-Erstelle `alte_datei.md` mit folgendem Inhalt:
+Create `old_file.md` with the following content:
 
 ```markdown
-# ALTE_DATEI.md - UMGELEITET
+# OLD_FILE.md - REDIRECTED (Deutsch)
 
-**Status:** Diese Datei wurde umbenannt zu `neue_datei.md`
-
----
-
-## Migration-Log
-
-| Datum | Wer | Herkunft | Verweis korrigiert? |
-|-------|-----|----------|---------------------|
-| YYYY-MM-DD | [Name] | Initiale Migration | n/a (Wrapper erstellt) |
+**Status:** This file has been renamed to `new_file.md`
 
 ---
 
-## Anleitung
+## Migration Log
 
-1. **Log-Eintrag hinterlassen** (oben in Tabelle)
-2. **Herkunft pruefen**: Was hat dich hierher geschickt?
-3. **Verweis korrigieren**: Aendere `alte_datei.md` -> `neue_datei.md`
-4. **Zur eigentlichen Datei gehen**: [neue_datei.md](neue_datei.md)
+| Date | Who | Origin | Reference corrected? |
+|------|-----|--------|---------------------|
+| YYYY-MM-DD | [Name] | Initial migration | n/a (wrapper created) |
 
 ---
 
-**Zieldatei:** [neue_datei.md](neue_datei.md)
+## Instructions
+
+1. **Leave a log entry** (in table above)
+2. **Check origin**: What sent you here?
+3. **Correct reference**: Change `old_file.md` -> `new_file.md`
+4. **Go to the actual file**: [new_file.md](new_file.md)
+
+---
+
+**Target file:** [new_file.md](new_file.md)
 ```
 
-### 3. Kritische Verweise sofort korrigieren
-- Help-Dateien (primaere Dokumentation)
-- System-Prompt Referenzen
-- CLI-Code der den Pfad direkt verwendet
+### 3. Immediately Correct Critical References
+- Help files (primary documentation)
+- System prompt references
+- CLI code that directly uses the path
 
-### 4. Uebrige Verweise evolutionaer migrieren
-Der Rest wird automatisch korrigiert bei Nutzung.
+### 4. Migrate Remaining References Evolutionarily
+The rest is automatically corrected through usage.
 
 ---
 
-## Wann Wrapper-Methode verwenden?
+## When to Use the Wrapper Method?
 
-**JA - Wrapper sinnvoll:**
-- Viele potenzielle Verweise
-- Datei wird von verschiedenen Partnern/Tools referenziert
-- Keine kritische System-Datei
+**YES - Wrapper useful:**
+- Many potential references
+- File is referenced by various partners/tools
+- Not a critical system file
 
-**NEIN - Direkt alle aendern:**
-- Wenige, bekannte Verweise
-- Kritische System-Dateien (config, DB-Schema)
-- Performance-kritische Pfade
+**NO - Change all directly:**
+- Few, known references
+- Critical system files (config, DB schema)
+- Performance-critical paths
 
 ---
 
 ## Cleanup
 
-Nach ca. 30 Tagen oder wenn Log zeigt dass keine neuen Eintraege:
-1. Wrapper-Datei nach `_archive/deprecated/` verschieben
-2. Oder komplett loeschen (wenn keine Eintraege mehr)
+After approximately 30 days or when the log shows no new entries:
+1. Move wrapper file to `_archive/deprecated/`
+2. Or delete completely (if no more entries)
 
 ---
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-03-15)
-- Portiert aus BACH v3.8.0
+- Ported from BACH v3.8.0
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
+*Ported from BACH v3.8.0 | Standalone Version*

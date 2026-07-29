@@ -2,8 +2,11 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `workflow-extract`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `workflow-extract`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `workflow-extract`.
@@ -11,9 +14,9 @@ language: ja
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen
+# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
 **Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
@@ -131,7 +134,7 @@ Automatisierungs-Kandidaten aus alten Chatverläufen":
 3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
    Kandidatenliste an den User vor dem Massenbau.
 
-## Beispiel
+## 使用例と実行モデル & Usage
 
 ```text
 User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —

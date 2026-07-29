@@ -5,41 +5,26 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  Use when study materials (scripts, books, PDFs, lecture slides) need to
-  be worked through systematically, summarised, or consolidated through
-  retrieval practice. Guides through a complete learning cycle: learning
-  objective, key ideas, glossary, transfer, and self-test.
+description: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: education
 tags: [learning, objectives, retrieval, glossary, summary, studies, didactics]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Academic Study Learn
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Overview
+
+# Academic Study Learn (English)
+
+## Overview & Purpose
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

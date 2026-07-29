@@ -5,213 +5,199 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: >
-  Loesungsfokussierte Kurztherapie nach de Shazer und Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung.
+description: Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [sfbt, loesungsfokussiert, wunderfrage, skalierung, kurztherapie, ressourcen]
+tags: [sfbt, solution-focused, miracle-question, scaling, brief-therapy, resources]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/loesungsfokussierte_therapie.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Loesungsfokussierte Therapie
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Grundlagen der loesungsfokussierten Kurztherapie nach Steve de Shazer und Insoo Kim Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Solution-Focused Therapy (Deutsch)
+
+> Fundamentals of Solution-Focused Brief Therapy according to Steve de Shazer and Insoo Kim Berg: Miracle question, exception exploration, scaling, resource activation
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Die loesungsfokussierte Kurztherapie (Solution-Focused Brief Therapy, SFBT) wurde
-von Steve de Shazer und Insoo Kim Berg am Brief Family Therapy Center in Milwaukee
-entwickelt. Sie gehoert zu den am besten erforschten Kurztherapieverfahren.
+Solution-Focused Brief Therapy (SFBT) was developed by Steve de Shazer and Insoo Kim Berg at the Brief Family Therapy Center in Milwaukee. It is one of the most well-researched brief therapy approaches.
 
-Kernidee: Statt Probleme zu analysieren, wird direkt an Loesungen gearbeitet.
-"Problem talk creates problems, solution talk creates solutions" (de Shazer).
+Core idea: Instead of analyzing problems, work directly on solutions. "Problem talk creates problems, solution talk creates solutions" (de Shazer).
 
-Evidenz: Meta-Analysen belegen Wirksamkeit bei Depression, Angst, Verhaltensproblemen,
-Substanzmissbrauch und Paarkonflikten (Gingerich & Peterson 2013, Kim et al. 2019).
+Evidence: Meta-analyses support effectiveness for depression, anxiety, behavioral problems, substance abuse, and couple conflicts (Gingerich & Peterson 2013, Kim et al. 2019).
 
-**Hinweis:** Dies ist Psychoedukation, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is psychoeducation, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Grundhaltungen der SFBT
+## 1. Core Principles of SFBT
 
-### Die drei Grundregeln (de Shazer)
+### The Three Basic Rules (de Shazer)
 
-1. **"If it ain't broke, don't fix it"** — Was funktioniert, nicht veraendern
-2. **"If it works, do more of it"** — Was klappt, verstaerken
-3. **"If it doesn't work, do something different"** — Was nicht hilft, aendern
+1. **"If it ain't broke, don't fix it"** — Don't change what works
+2. **"If it works, do more of it"** — Strengthen what works
+3. **"If it doesn't work, do something different"** — Change what doesn't help
 
-### Menschenbild
-- Jeder Mensch hat Ressourcen und Kompetenzen
-- Der Klient ist Experte fuer sein eigenes Leben
-- Kleine Veraenderungen loesen groessere aus (Schmetterlingseffekt)
-- Die Loesung muss nichts mit dem Problem zu tun haben
+### View of the Person
+- Every person has resources and competencies
+- The client is the expert on their own life
+- Small changes trigger larger ones (butterfly effect)
+- The solution doesn't have to be related to the problem
 
 ---
 
-## 2. Die Wunderfrage — Vertiefte Anwendung
+## 2. The Miracle Question — In-Depth Application
 
-### Grundform
+### Basic Form
 
 ```
-"Stell dir vor, heute Nacht passiert ein Wunder, waehrend du schlaefst.
-Das Problem, das dich beschaeftigt, ist geloest.
-Du weisst es aber nicht, weil du geschlafen hast.
+"Imagine that tonight, while you are sleeping, a miracle happens.
+The problem that has been troubling you is solved.
+But you don't know it, because you were asleep.
 
-Woran wuerdest du morgen frueh als Erstes merken, dass das Wunder passiert ist?"
+What would you notice first thing tomorrow morning that tells you
+the miracle has happened?"
 ```
 
-### Vertiefende Nachfragen
+### Deepening Follow-Up Questions
 
-**Sinnesebene konkretisieren:**
-- "Was genau wuerdest du morgen frueh anders machen?"
-- "Wie wuerdest du aufstehen? Was wuerdest du als Erstes tun?"
-- "Was wuerdest du fuehlen, wenn du die Augen oeffnest?"
+**Making it concrete on a sensory level:**
+- "What exactly would you do differently tomorrow morning?"
+- "How would you get up? What would you do first?"
+- "What would you feel when you open your eyes?"
 
-**Beziehungsebene:**
-- "Woran wuerde dein Partner / deine Partnerin das Wunder bemerken?"
-- "Was wuerde er/sie anders an dir sehen?"
-- "Wer in deinem Umfeld wuerde es als Erstes bemerken?"
+**Relationship level:**
+- "How would your partner notice the miracle?"
+- "What would they see differently about you?"
+- "Who in your circle would notice it first?"
 
-**Bruchteile des Wunders finden:**
-- "Welcher Teil dieses Wunders passiert vielleicht schon ein kleines bisschen?"
-- "Auf einer Skala von 0 bis 10 — wie weit bist du schon in Richtung Wunder?"
+**Finding fragments of the miracle:**
+- "Which part of this miracle is perhaps already happening a little bit?"
+- "On a scale of 0 to 10 — how far along are you already toward the miracle?"
 
 ---
 
-## 3. Ausnahmen-Exploration
+## 3. Exception Exploration
 
-### Prinzip
-Ausnahmen sind Momente, in denen das Problem nicht oder weniger auftritt.
-Sie enthalten bereits funktionierende Loesungsansaetze.
+### Principle
+Exceptions are moments when the problem does not occur or occurs less. They already contain functioning solution approaches.
 
-### Systematische Ausnahmen-Suche
+### Systematic Exception Search
 
-**Phase 1: Ausnahmen finden**
-- "Wann war es in letzter Zeit einmal etwas besser — auch nur minimal?"
-- "Gibt es Tage, an denen das Problem weniger stark auftritt?"
+**Phase 1: Finding exceptions**
+- "When was it a bit better recently — even just minimally?"
+- "Are there days when the problem is less severe?"
 
-**Phase 2: Ausnahmen detailliert beschreiben**
-- "Beschreibe diesen Moment so genau wie moeglich"
-- "Was war an diesem Tag anders?"
+**Phase 2: Describing exceptions in detail**
+- "Describe that moment as precisely as possible"
+- "What was different about that day?"
 
-**Phase 3: Eigenen Beitrag erkennen**
-- "Was hast DU dazu beigetragen, dass es besser war?"
-- "Welche Entscheidung hast du getroffen?"
+**Phase 3: Recognizing one's own contribution**
+- "What did YOU contribute to it being better?"
+- "What decision did you make?"
 
-**Phase 4: Ausnahmen verstaerken**
-- "Wie koenntest du das bewusst wiederholen?"
-- "Was waere ein erster kleiner Schritt in diese Richtung?"
+**Phase 4: Strengthening exceptions**
+- "How could you deliberately repeat that?"
+- "What would be a first small step in that direction?"
 
-### Typen von Ausnahmen
+### Types of Exceptions
 
-| Typ | Beschreibung | Nachfrage |
-|-----|-------------|-----------|
-| Absichtliche Ausnahme | Klient hat bewusst etwas anders gemacht | "Mach mehr davon!" |
-| Zufaellige Ausnahme | Etwas war anders, ohne bewusstes Zutun | "Was war anders an den Umstaenden?" |
-| Externe Ausnahme | Andere haben etwas getan | "Was koenntest du tun, um das wahrscheinlicher zu machen?" |
+| Type | Description | Follow-up |
+|------|-------------|-----------|
+| Deliberate exception | Client consciously did something different | "Do more of that!" |
+| Random exception | Something was different without conscious effort | "What was different about the circumstances?" |
+| External exception | Others did something | "What could you do to make that more likely?" |
 
 ---
 
-## 4. Skalierungstechniken
+## 4. Scaling Techniques
 
-### Basis-Skalierung
-"Auf einer Skala von 0 bis 10, wobei 0 das Schlimmste und 10 das Bestmoegliche ist..."
+### Basic Scaling
+"On a scale of 0 to 10, where 0 is the worst and 10 is the best possible..."
 
-### Erweiterte Skalierungsformen
+### Extended Scaling Forms
 
-**Bewaeltigungsskalierung:**
-- "Wie gut schaffst du es gerade, trotz des Problems deinen Alltag zu bewaeltigen?"
+**Coping scaling:**
+- "How well are you managing to cope with daily life despite the problem?"
 
-**Zuversichtsskalierung:**
-- "Wie zuversichtlich bist du, dass du Fortschritte machen kannst?"
+**Confidence scaling:**
+- "How confident are you that you can make progress?"
 
-**Fortschrittsskalierung:**
-- "Wo standest du vor einer Woche / einem Monat?"
-- "Was hat zum Anstieg beigetragen?"
+**Progress scaling:**
+- "Where were you a week / a month ago?"
+- "What contributed to the increase?"
 
-### Der "Ein-Punkt-hoeher"-Trick
-Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
+### The "One Point Higher" Trick
+Always ask only about the next point — never about the final goal.
 
 ```
-"Was waere bei einer 6 anders als bei der jetzigen 5?"
-"Was koenntest du MORGEN tun, das in Richtung 6 geht?"
+"What would be different at a 6 compared to the current 5?"
+"What could you do TOMORROW that moves toward a 6?"
 ```
 
 ---
 
-## 5. Weitere SFBT-Techniken
+## 5. Additional SFBT Techniques
 
-### Coping-Fragen
-- "Wie schaffst du es trotzdem, jeden Tag aufzustehen?"
-- "Was haelt dich aufrecht?"
+### Coping Questions
+- "How do you manage to get up every day despite everything?"
+- "What keeps you going?"
 
-### Beziehungsfragen
-- "Wenn ich deine Partnerin fragen wuerde, was wuerde sie sagen?"
-- "Wer in deinem Umfeld wuerde die Veraenderung als Erstes bemerken?"
+### Relationship Questions
+- "If I asked your partner, what would they say?"
+- "Who in your circle would notice the change first?"
 
-### Komplimente / Ressourcen-Kommentare
-- "Es beeindruckt mich, dass du trotz der Schwierigkeiten hier bist."
-
----
-
-## 6. Reflexionsfragen zur Selbstanwendung
-
-- "Was funktioniert in meinem Leben gut — und wie mache ich das?"
-- "Was ist eine kleine Ausnahme, auf die ich aufbauen koennte?"
-- "Wenn das Problem morgen weg waere — was wuerde ich als Erstes tun?"
-- "Was habe ich frueher schon einmal geschafft, obwohl es schwer war?"
+### Compliments / Resource Comments
+- "I'm impressed that despite the difficulties, you're here."
 
 ---
 
-## Ethik und Grenzen
+## 6. Reflection Questions for Self-Application
 
-**Ein KI-Assistent darf:**
-- SFBT-Konzepte erklaeren und einordnen
-- Wunderfrage, Ausnahmen-Exploration und Skalierung anleiten
-- Reflexionsfragen stellen
-- Auf Ressourcen und Staerken hinweisen
-
-**Ein KI-Assistent darf NICHT:**
-- Loesungsfokussierte Therapie durchfuehren
-- Persistierende Probleme verharmlosen ("Denk einfach positiv")
-- Akute Krisen mit Loesungsorientierung uebergehen
-- Versprechen, dass SFBT-Techniken Probleme loesen
-
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+- "What is working well in my life — and how am I doing that?"
+- "What is one small exception I could build on?"
+- "If the problem were gone tomorrow — what would I do first?"
+- "What have I accomplished before, even though it was hard?"
 
 ---
 
-## Quellenangaben
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Explain and contextualize SFBT concepts
+- Guide the miracle question, exception exploration, and scaling
+- Ask reflection questions
+- Point out resources and strengths
+
+**An AI assistant must NOT:**
+- Conduct solution-focused therapy
+- Trivialize persistent problems ("Just think positive")
+- Bypass acute crises with solution orientation
+- Promise that SFBT techniques will solve problems
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+## References
 
 - de Shazer, S. (1988). *Clues: Investigating Solutions in Brief Therapy.* Norton.
 - Berg, I. K. & Miller, S. D. (1992). *Working with the Problem Drinker.* Norton.
@@ -220,5 +206,5 @@ Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: de Shazer (1988), Berg & Miller (1992), Gingerich & Peterson (2013), Kim et al. (2019) — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: de Shazer (1988), Berg & Miller (1992), Gingerich & Peterson (2013), Kim et al. (2019) — Not professional therapy*

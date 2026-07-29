@@ -1,31 +1,17 @@
 ---
-name: academic-study-learn
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-06-20
-updated: 2026-06-20
-description: [Français] Documentation complète traduite en français pour la compétence academic-study-learn: Use when study materials (scripts, books, PDFs, lecture slides) need to be worked through systematically, summarised, or consolidated through retrieval practice. Guides through a complete learning cycle: learning objective, key ideas, glossary, transfer, and self-test.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: true
-bach_origin: false
-category: education
-tags: [learning, objectives, retrieval, glossary, summary, studies, didactics]
 language: fr
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `academic-study-learn`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `academic-study-learn`.
 
 
 
-# Academic Study Learn
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Aperçu Général
+
+# Academic Study Learn (English)
+
+## Présentation et Objectif & Purpose
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

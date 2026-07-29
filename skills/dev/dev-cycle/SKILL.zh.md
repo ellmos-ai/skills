@@ -1,36 +1,22 @@
 ---
-name: dev-cycle
-version: 1.1.0
-type: protocol
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-06-13
-description: [中文] 针对该技能的完整中文文档: dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: dev
-tags: [development, dev-cycle, phases, workflow, systematic, iterative]
 language: zh
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `dev-cycle`.
+> **中文** — 针对该技能的官方完整中文文档: `dev-cycle`.
 
 
 
-# Development Cycle (Dev Cycle)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Development Cycle (Dev Cycle) (English)
 
 > **Goal:** Structured process from feature request to validated system.
 > Every development goes through these 8 phases.
 
 ---
 
-## 概述与目标
+## 概述与执行目标 & Purpose
 
 ```
   +--------------------------------------------------------------+
@@ -276,7 +262,7 @@ If your skill collection has a skill index, search it for further phase-specific
 
 ---
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-06-13)
 - New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep

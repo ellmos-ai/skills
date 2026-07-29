@@ -2,16 +2,19 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `decision-avatar`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `decision-avatar`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz

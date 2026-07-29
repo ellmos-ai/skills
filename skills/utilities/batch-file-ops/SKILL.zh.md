@@ -5,8 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 针对该技能的完整中文文档: batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
-
+description: [中文] 智能体技能: batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [batch, file-ops, glob, cli, filesystem, cleanup]
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `batch-file-ops`.
+> **中文** — 针对该技能的官方完整中文文档: `batch-file-ops`.
 
 
 
-# batch_file_ops - Batch File Operations
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# batch_file_ops - Batch File Operations (English)
 
 CLI tool for efficient batch operations on files using glob patterns.
 Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
@@ -58,23 +60,23 @@ python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-
 
 ---
 
-## 使用示例与实践s
+## 使用示例与实践 & Usage
 
 ```bash
-# List all Python files in a directory
+# List all Python files in a directory (English)
 python batch_file_ops.py list /path/to/directory --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!)
+# Delete all .tmp files (dry-run first!) (English)
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
 
-# Move files
+# Move files (English)
 python batch_file_ops.py move /source /target --pattern "*.txt"
 
-# Copy files (recursive)
+# Copy files (recursive) (English)
 python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
 
-# Pattern examples
+# Pattern examples (English)
 python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
 python batch_file_ops.py list /path --pattern "backup_202?-*"
 ```

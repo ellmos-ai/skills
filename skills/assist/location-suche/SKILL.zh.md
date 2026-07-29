@@ -2,8 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [中文] 针对该技能的完整中文文档: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
-
+description: [中文] 智能体技能: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -13,21 +12,24 @@ languages: [de, en]
 dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json', 'time']}
 runtime: python3
 entry_point: location_suche_core.py
-provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\n'}
+provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\\n'}
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `location-suche`.
+> **中文** — 针对该技能的官方完整中文文档: `location-suche`.
 
 
 
-# Location Search
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Location Search (English)
 
 **Location, restaurant and hotel search via OpenStreetMap**
 
 ---
 
-## 概述与目标
+## 概述与执行目标 & Purpose
 
 Searches for restaurants, hotels, cafes and other places using the
 OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
@@ -47,7 +49,7 @@ No API key required. No persistent store.
 
 ---
 
-## 工作流程与执行步骤
+## 工作流程与执行步骤 & Execution Steps
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.
@@ -61,16 +63,16 @@ No API key required. No persistent store.
 ## CLI
 
 ```bash
-# POI search (category + location)
+# POI search (category + location) (English)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Geocode location
+# Geocode location (English)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburg Gate Berlin"
 
-# Adjust radius (default: 1000 m)
+# Adjust radius (default: 1000 m) (English)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Help
+# Help (English)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 
@@ -115,7 +117,7 @@ User-Agent is set according to Nominatim policy.
 
 ---
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 | Version | Date | Change |
 |---|---|---|

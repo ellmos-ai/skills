@@ -5,162 +5,107 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: >
-  Bedienung von Roblox Studio für die Spieleentwicklung — der visuelle Editor, in dem die 3D-Szene
-  gebaut, getestet und veröffentlicht wird. Nutze diesen Skill für: Studio-Grundbedienung (Explorer,
-  Workspace, Play-Test, Place als .rbxl speichern), das Zusammenspiel mit Rojo (Connect, Szene-vs-Code-
-  Modus), die KI-Steuerung von Studio per Roblox-Studio-MCP (execute_luau, insert_from_creator_store,
-  generate_material, screen_capture, Play/Stop, Console lesen), den kompletten Asset-Pipeline-Workflow
-  (Creator Store → bereinigen → Kit → Szene → .rbxl → Rojo belebt) und vor allem den PFLICHT-Malware-Scan
-  für Marketplace-Assets. Auch auslösen bei "Asset aus dem Store einbauen", "Studio MCP geht nicht",
-  "studios: []", "Material generieren", "Szene speichern", "ist dieses Roblox-Asset sicher", "Scripts
-  verschwinden nach Play".
+description: Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on "embed an asset from the Store", "Studio MCP not working", "studios: []", "generate material", "save scene", "is this Roblox asset safe", "scripts disappear after Play".
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
 category: game-dev
 tags: [roblox, studio, mcp, assets, creator-store, malware, luau, gamedev]
 language: de
 status: active
-
-dependencies:
-  tools: [rojo]
-  services: [roblox-studio-mcp]
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "~/.claude/skills/rbx-studio/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': ['rojo'], 'services': ['roblox-studio-mcp'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-<img src="banner.png" width="100%" alt="rbx-studio banner">
-
-> **Hinweis:** Nicht mit der Roblox Corporation affiliiert; „Roblox" ist eine Marke ihrer Inhaber. „rbx" ist das gängige Community-Kürzel.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+> **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
-# Roblox Studio — Editor, Test, Assets, MCP
 
-## Zweck
 
-Roblox Studio ist der offizielle Editor: 3D-Szene bauen, das Spiel im Play-Modus testen,
-Assets aus dem Creator Store einfügen und den Place veröffentlichen. In einem Rojo-Workflow
-übernimmt Studio die **Szene** (Workspace, Terrain, platzierte Modelle) und das **Testen** —
-der **Code** kommt per Rojo aus dem Dateisystem (siehe Skill `/rojo`).
+# Roblox Studio — Editor, Test, Assets, MCP (Deutsch)
 
-Dieser Skill deckt ab: Studio-Grundbedienung, die saubere Trennung von Szene- und Code-Arbeit,
-die KI-Steuerung über das Roblox-Studio-MCP und den Asset-Workflow inklusive des
-**Pflicht-Malware-Scans** für jedes Marketplace-Asset.
+## Übersicht & Zweck
 
-## Grundbedienung
+Roblox Studio is the official editor: build the 3D scene, test the game in play mode,
+insert assets from the Creator Store, and publish the place. In a Rojo workflow,
+Studio owns the **scene** (Workspace, Terrain, placed models) and the **testing** —
+the **code** comes via Rojo from the filesystem (see skill `/rojo`).
 
-- **Explorer** — Baum aller Instanzen (Workspace, ServerScriptService, ReplicatedStorage, …).
-  Bei aktivem Rojo werden die gemappten Bereiche live aus dem Dateisystem befüllt.
-- **Play-Test** — grüner Play-Button (oder F5) startet eine lokale Server+Client-Session.
-  Nach jedem Start **die Output-Console auf Fehler prüfen** — der wichtigste Debug-Reflex.
-- **Place speichern** — File → Save As → `.rbxl` (binär) oder `.rbxlx` (XML, diffbar).
-  Der gespeicherte Place enthält die **Szene**. Code lebt im Dateisystem, nicht im Place.
+This skill covers: Studio basics, the clean separation of scene and code work,
+AI control via the Roblox-Studio-MCP, and the asset workflow including the
+**mandatory malware scan** for every marketplace asset.
 
-## Der kritische Workflow: Szene-Modus vs. Code-Modus
+## Basics
 
-Rojo überschreibt beim Connect alle gemappten Skript-Bereiche mit dem Dateisystem-Inhalt.
-Der `Workspace` (3D-Szene) wird **nicht** gemappt und bleibt erhalten. Daraus folgt die
-wichtigste Regel der täglichen Arbeit — niemals beide Modi vermischen:
+- **Explorer** — tree of all instances (Workspace, ServerScriptService, ReplicatedStorage, …).
+  With Rojo active, the mapped areas are populated live from the filesystem.
+- **Play-Test** — the green Play button (or F5) starts a local server+client session.
+  After every start, **check the Output console for errors** — the most important debug reflex.
+- **Save place** — File → Save As → `.rbxl` (binary) or `.rbxlx` (XML, diffable).
+  The saved place contains the **scene**. Code lives in the filesystem, not in the place.
 
-**Modus A — Szene bearbeiten (Rojo AUS):**
-1. Rojo-Server stoppen (`taskkill //F //IM rojo.exe` bzw. Ctrl+C).
-2. Place in Studio öffnen, Assets platzieren, Welt bauen, anordnen.
-3. File → Save → die `.rbxl` hat jetzt die neue Szene.
+## The critical workflow: scene mode vs. code mode
 
-**Modus B — Code testen (Rojo AN):**
-1. Denselben Place in Studio öffnen.
-2. `rojo serve` starten → in Studio Rojo-Plugin → Connect.
-3. Play drücken und testen. Rojo synct die Scripts; der Workspace kommt aus der `.rbxl`.
-4. Während Rojo läuft **nicht** speichern (sonst friert der Rojo-Zustand in die `.rbxl` ein).
+On Connect, Rojo overwrites all mapped script areas with the filesystem content.
+The `Workspace` (3D scene) is **not** mapped and stays intact. From this follows the
+most important rule of daily work — never mix the two modes:
 
-So können Szenen-Arbeit (Studio) und Code-Arbeit (Editor + Rojo) parallel und konfliktfrei
-laufen — Künstler bauen Szenen, Entwickler schreiben Code.
+**Mode A — edit the scene (Rojo OFF):**
+1. Stop the Rojo server (`taskkill //F //IM rojo.exe` or Ctrl+C).
+2. Open the place in Studio, place assets, build the world, arrange.
+3. File → Save → the `.rbxl` now holds the new scene.
 
-## Roblox-Studio-MCP — KI steuert Studio
+**Mode B — test the code (Rojo ON):**
+1. Open the same place in Studio.
+2. Start `rojo serve` → in Studio's Rojo plugin → Connect.
+3. Press Play and test. Rojo syncs the scripts; the Workspace comes from the `.rbxl`.
+4. While Rojo is running, **do not** save (otherwise the Rojo state freezes into the `.rbxl`).
 
-Das Roblox-Studio-MCP erlaubt Claude/Gemini/Codex, eine **laufende** Studio-Instanz direkt zu
-steuern: Code ausführen, inspizieren, Play/Stop, Console lesen, Assets einfügen. Es ersetzt
-Rojo **nicht** — es ergänzt es: Rojo für persistente Code-Änderungen, MCP für Inspektion,
-Tests, Asset-Insertion und Materialerzeugung.
+This way, scene work (Studio) and code work (editor + Rojo) can run in parallel and
+conflict-free — artists build scenes, developers write code.
+
+## Roblox-Studio-MCP — AI controls Studio
+
+The Roblox-Studio-MCP lets Claude/Gemini/Codex directly control a **running** Studio
+instance: execute code, inspect, Play/Stop, read the Console, insert assets. It does **not**
+replace Rojo — it complements it: Rojo for persistent code changes, MCP for inspection,
+tests, asset insertion, and material generation.
 
 ```
 Editor + Rojo  ──(persistenter Code-Sync)──►  Studio (laufend)  ◄──(Inspektion/Test/Insert)──  MCP ◄── KI
 ```
 
-> **WICHTIG — zwei Wege, das MCP zu erreichen (häufige Fehlerquelle):**
-> 1. **Native Session-MCP-Tools** (`mcp__Roblox_Studio__*`): nur da, wenn der `Roblox_Studio`-
->    MCP-Server im Profil DIESER Session geladen ist. Fehlt oft.
-> 2. **Eigenständiger MCP-Client-Script** (`<roblox-pipeline>/_llmauto/scripts/roblox_mcp_call.py`):
->    spawnt `StudioMCP.exe` (via `%LOCALAPPDATA%\Roblox\mcp.bat`) SELBST und spricht JSON-RPC —
->    **umgeht die Session-Registrierung komplett**, braucht weder geladenes Session-MCP noch
->    ein bestimmtes Profil.
->
-> **Wenn die nativen Tools (1) in der Session FEHLEN (nicht in der Tool-Liste auffindbar), NICHT
-> zu computer-use / Screen-Capture ausweichen** — sofort Weg (2) nehmen. Aufruf: JSON-Plan
-> schreiben, dann `python roblox_mcp_call.py --plan plan.json [--output out.json]`.
-> Tool-Schemas vorab via `tools/list` holen (z. B. `execute_luau` braucht `code` +
-> `datamodel_type`; gültige `datamodel_type`-Werte via `get_studio_state`).
->
-> **Remote-Desktop-unabhängig:** `screen_capture` rendert IN Studio und schickt das Bild über die
-> Bridge (kein Desktop-Grab). Über RDP scheitern GDI/`mss`/WGC/`dxcam` an Zugriffsfehlern /
-> leerer DXGI-Enumeration — das MCP `screen_capture` funktioniert trotzdem.
+### Available MCP tools (typical)
 
-### Verfügbare MCP-Tools (typisch)
-
-| Tool | Zweck |
+| Tool | Purpose |
 | --- | --- |
-| `list_roblox_studios` / `set_active_studio` | offene Instanzen auflisten / aktive wählen |
-| `search_game_tree` / `inspect_instance` | Hierarchie durchsuchen / Properties auslesen |
-| `execute_luau` | Luau-Code direkt in Studio ausführen |
-| `script_read` / `script_grep` / `script_search` | Scripts analysieren |
-| `multi_edit` | mehrere Instanzen/Scripts gebündelt ändern |
-| `start_stop_play` | Play/Stop steuern |
-| `get_console_output` | Output-Log lesen |
-| `screen_capture` | Screenshot der Szene |
-| `insert_from_creator_store` | Asset aus dem Creator Store einfügen |
-| `generate_material` | KI-Material/Textur erzeugen (MaterialVariant) |
-| `character_navigation` / `user_keyboard_input` / `user_mouse_input` | Eingabe simulieren |
+| `list_roblox_studios` / `set_active_studio` | list open instances / select the active one |
+| `search_game_tree` / `inspect_instance` | search the hierarchy / read properties |
+| `execute_luau` | execute Luau code directly in Studio |
+| `script_read` / `script_grep` / `script_search` | analyze scripts |
+| `multi_edit` | change multiple instances/scripts in a batch |
+| `start_stop_play` | control Play/Stop |
+| `get_console_output` | read the Output log |
+| `screen_capture` | screenshot of the scene |
+| `insert_from_creator_store` | insert an asset from the Creator Store |
+| `generate_material` | generate an AI material/texture (MaterialVariant) |
+| `character_navigation` / `user_keyboard_input` / `user_mouse_input` | simulate input |
 
-### Server-Optionen (drei mögliche Brücken)
+### Setup (user-neutral)
 
-Es gibt mehr als eine Studio-MCP-Brücke; sie ergänzen sich:
+The MCP runs as a server shipped with Studio, often connected via a thin JSON-filter wrapper
+(it filters out non-JSON banners that some clients otherwise cannot parse):
 
-| Server | Lizenz/Herkunft | Fähigkeiten | Wann nehmen |
-| --- | --- | --- | --- |
-| **Built-in Studio-MCP** (`StudioMCP.exe`) | proprietär (Teil von Studio) | volle Write/Execute-Brücke: `execute_luau`, Insert, Material, Multi-Edit, Play/Stop, Console, Screenshot, Input-Sim | Standard für Assistant-native Aktionen/Execute |
-| **`robloxstudio-mcp`** (boshyxd) | MIT (Handle `boshyxd`) | Inspektion: `get_file_tree`, `search_files`, `grep_scripts`, `capture_screenshot`; Full-Edition zusätzlich Bulk-Edits | Code lesen, Struktur erkunden, Inspektion |
-| **`robloxstudio-mcp`** (Chrrxs) | MIT (Handle `Chrrxs`, aktiver Nachfolger von boshyxd) | **Live-Runtime-Debugging** (Game-VM-Eval Server **oder** per-Client), Multiplayer-Playtest-Steuerung, Log-/Memory-Capture pro Peer, Viewport-Screenshots, Virtual-Input, `.rbxm` Import/Export; 75 Tools / 35 read-only (Inspector) | **Runtime-/Multiplayer-Debugging** — laufende VMs auswerten, Logs/Memory pro Peer, Playtests automatisieren |
+- MCP batch (Windows): `%LOCALAPPDATA%\Roblox\mcp.bat`
+- optional wrapper: `<your roblox-mcp wrapper>`
+  (if present on this system; shared by Claude/Codex/Gemini)
+- Client configs: `~/.claude/mcp.json` · `~/.codex/config.toml` · `~/.gemini/antigravity/mcp_config.json`
 
-> **Chrrxs-Setup (optional):** Node-basiert via `npx`; Plugin-Auto-Install mit `--auto-install-plugin`,
-> dann in Studio „Allow HTTP Requests" (Experience Settings → Security) aktivieren und Studio neu
-> starten. Nicht alle drei Server gleichzeitig denselben Schreibzugriff nutzen. Herkunft MIT,
-> GitHub-Handle `Chrrxs`; wir kopieren keinen Code, sondern nutzen den Server.
-
-### Setup (nutzerneutral)
-
-Das Built-in-MCP läuft als von Studio mitgelieferter Server, oft über einen schmalen JSON-Filter-Wrapper
-angebunden (filtert Nicht-JSON-Banner heraus, den manche Clients sonst nicht parsen):
-
-- MCP-Batch (Windows): `%LOCALAPPDATA%\Roblox\mcp.bat`
-- optionaler Wrapper: `<your roblox-mcp wrapper>`
-  (falls auf diesem System vorhanden; teilen sich Claude/Codex/Gemini)
-- Client-Configs: `~/.claude/mcp.json` · `~/.codex/config.toml` · `~/.gemini/antigravity/mcp_config.json`
-
-Beispiel-Eintrag (`~/.claude/mcp.json`):
+Example entry (`~/.claude/mcp.json`):
 ```json
 {
   "mcpServers": {
@@ -173,18 +118,18 @@ Beispiel-Eintrag (`~/.claude/mcp.json`):
 }
 ```
 
-### Häufige MCP-Probleme
+### Common MCP problems
 
-| Symptom | Bedeutung / Lösung |
+| Symptom | Meaning / fix |
 | --- | --- |
-| `studios: []` oder `Not connected to WS host` | nicht sofort "kaputt": `initialize` senden → 2–3 s warten → `list_roblox_studios`; sonst Studio neu starten |
-| `Error: connection closed: initialized request` | Studio ist gar nicht offen — Studio starten, Place laden, erneut versuchen |
-| per MCP geschriebene Scripts weg nach Play/Stop | MCP-Edits am Code sind nicht persistent — für bleibende Code-Änderungen **Rojo** nutzen |
-| Wert per `require()` im Plugin-VM stimmt nicht | Plugin-VM hat eigenen require-Cache — zur Verifikation `.Source` direkt lesen oder Server-Log nach Play prüfen |
+| `studios: []` or `Not connected to WS host` | not immediately "broken": send `initialize` → wait 2–3 s → `list_roblox_studios`; otherwise restart Studio |
+| `Error: connection closed: initialized request` | Studio is not open at all — start Studio, load the place, try again |
+| scripts written via MCP gone after Play/Stop | MCP edits to code are not persistent — for lasting code changes use **Rojo** |
+| value via `require()` in the plugin VM is wrong | the plugin VM has its own require cache — to verify, read `.Source` directly or check the server log after Play |
 
-## Asset-Pipeline (Creator Store → Spiel)
+## Asset pipeline (Creator Store → game)
 
-Greybox zuerst (Gameplay), Assets später (vor Release). Der bewährte Ablauf:
+Greybox first (gameplay), assets later (before release). The proven sequence:
 
 ```
 STORE DURCHSUCHEN   → z. B. "medieval" → mehrere Kandidaten laden
@@ -196,53 +141,53 @@ ALS .RBXL SPEICHERN → die Kulisse ist die "Bühne"
 ROJO BELEBT ES      → Scripts/Gameplay/HUD kommen per Rojo dazu; Workspace bleibt unangetastet
 ```
 
-**Varianten-Technik ("Modular Kit"):** Ein gutes Basis-Asset nehmen und daraus ein ganzes
-Set ableiten (Haus → Turm, Scheune, Schmiede, Ruine). Alle teilen Materials, Farben und
-Proportionen → konsistenter Look mit minimalem Aufwand, wie es Profi-Studios tun.
+**Variant technique ("modular kit"):** Take a good base asset and derive a whole
+set from it (house → tower, barn, smithy, ruin). They all share materials, colors, and
+proportions → a consistent look with minimal effort, the way pro studios do it.
 
-**Asset-Quellen (Priorität):** Creator Store (gratis, riesig, **Malware-Check Pflicht**) →
-KI-Materials (`generate_material`) → eigene Meshes (Blender → .fbx) → gekaufte Asset-Packs.
+**Asset sources (priority):** Creator Store (free, huge, **malware check mandatory**) →
+AI materials (`generate_material`) → your own meshes (Blender → .fbx) → purchased asset packs.
 
-## PFLICHT: Malware-Scan für Marketplace-Assets
+## MANDATORY: malware scan for marketplace assets
 
-Creator-Store-Assets können obfuskierte Schad-Scripts enthalten (Backdoors, Remote-Code,
-Bot-Netzwerk-Hooks). **Jedes** importierte Asset vor der Nutzung scannen und alle Scripts
-entfernen — behalte nur Geometrie/Meshes.
+Creator Store assets can contain obfuscated malicious scripts (backdoors, remote code,
+bot-network hooks). Scan **every** imported asset before use and remove all scripts —
+keep only geometry/meshes.
 
-- Muster-Referenz: [`references/malware-patterns.md`](references/malware-patterns.md) — die 8
-  bekannten Obfuskationsmuster (reversed Attribute-Payload, fake System-Script, remote
+- Pattern reference: [`references/malware-patterns.md`](references/malware-patterns.md) — the 8
+  known obfuscation patterns (reversed attribute payload, fake system script, remote
   `require()`, `loadstring`, `string.char`, `getfenv/setfenv`, hidden Values, delayed execution).
-- Scanner: [`scripts/scan_asset_malware.luau`](scripts/scan_asset_malware.luau) — in Studio per
-  `execute_luau` (oder Command Bar) ausführen; prüft eine Instanz auf alle Muster und meldet Funde.
+- Scanner: [`scripts/scan_asset_malware.luau`](scripts/scan_asset_malware.luau) — run it in Studio via
+  `execute_luau` (or the Command Bar); it checks an instance against all patterns and reports finds.
 
-**Red Flags sofort:** großes Script in einem reinen Deko-Modell · reversed Strings in
-Attributen · `require(<Zahl>)` · `loadstring` · `HttpService` in einem Asset, das keine Netzwerk
-braucht. Im Zweifel: Script löschen. Funde dokumentieren (z. B. `_malware_reports/YYYY-MM-DD_*.md`
-in der Referenz-Pipeline).
+**Red flags immediately:** a large script in a pure decoration model · reversed strings in
+attributes · `require(<number>)` · `loadstring` · `HttpService` in an asset that needs no
+networking. When in doubt: delete the script. Document finds (e.g. `_malware_reports/YYYY-MM-DD_*.md`
+in the reference pipeline).
 
-## Wichtige Luau-/Studio-Fallstricke (Auszug)
+## Important Luau/Studio pitfalls (excerpt)
 
-Die häufigsten, die in Studio beißen — die vollständige Liste hält der Skill `/rbx-dev`:
+The most common ones that bite in Studio — the full list is kept by the skill `/rbx-dev`:
 
-- `Model.Position` existiert nicht → `model:GetPivot().Position`.
-- `tick()` ist deprecated → `os.clock()` / `workspace:GetServerTimeNow()`.
+- `Model.Position` does not exist → `model:GetPivot().Position`.
+- `tick()` is deprecated → `os.clock()` / `workspace:GetServerTimeNow()`.
 - `SetPrimaryPartCFrame()` deprecated → `model:PivotTo(cf)`.
-- DataStore-Calls **immer** in `pcall`.
-- Baseplate + prozeduraler Boden auf gleicher Höhe → Z-Fighting (Flackern): Baseplate entfernen
-  oder Boden +0.1 Studs anheben.
-- Part-Budget im Blick behalten (~50–80 Parts pro prozedural generiertem Raum).
+- DataStore calls **always** in `pcall`.
+- Baseplate + procedural floor at the same height → Z-fighting (flicker): remove the baseplate
+  or raise the floor by +0.1 studs.
+- Keep an eye on the part budget (~50–80 parts per procedurally generated room).
 
-## Weiterführend
+## Further reading
 
-- Schwesterskills: `/rojo` (Sync, Projekt-Setup), `/game-design` (Rollen, Workflows, GDD),
-  Metaskill `/rbx-dev` (Architektur-Pattern + alle Luau-Lessons).
-- Engine-/Creator-Doku: Context7 MCP (`/websites/create_roblox_reference_engine`,
-  `/roblox/creator-docs`) oder <https://create.roblox.com/docs>.
-- Referenz-Pipeline (falls vorhanden): `<your Roblox project pipeline>`
+- Sister skills: `/rojo` (sync, project setup), `/game-design` (roles, workflows, GDD),
+  meta skill `/rbx-dev` (architecture patterns + all Luau lessons).
+- Engine/Creator docs: Context7 MCP (`/websites/create_roblox_reference_engine`,
+  `/roblox/creator-docs`) or <https://create.roblox.com/docs>.
+- Reference pipeline (if present): `<your Roblox project pipeline>`
   (`ROBLOX_MCP_FAQ.md`, `ASSET_PIPELINE.md`, `_malware_reports/PATTERNS.md`).
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-06-17)
-- Initiale Version. Destilliert aus der `.ROBLOX`-Pipeline (ROBLOX_MCP_FAQ, ASSET_PIPELINE,
-  PATTERNS, LESSONS_LEARNED), nutzerneutral gefasst.
+- Initial version. Distilled from the `.ROBLOX` pipeline (ROBLOX_MCP_FAQ, ASSET_PIPELINE,
+  PATTERNS, LESSONS_LEARNED), written user-neutral.

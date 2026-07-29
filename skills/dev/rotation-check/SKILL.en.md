@@ -1,30 +1,16 @@
 ---
-name: rotation-check
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-03
-updated: 2026-07-03
-description: Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: dev
-tags: [automation, check, rotation, registry, pipeline, log, audit, wartung]
 language: en
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
 
-## Zweck
+## Overview & Purpose
 
 Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
 Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu

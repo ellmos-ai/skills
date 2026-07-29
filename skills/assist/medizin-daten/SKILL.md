@@ -5,99 +5,79 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: >
-  Lokale, private Erfassung medizinischer Daten: Diagnosen, Symptomverläufe
-  und Untersuchungspläne. Kein BACH-Origin — Eigenentwurf mit eigenem
-  SQLite-Store. Strikt lokal, keine Cloud-Übertragung.
+description: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: assist
-tags:
-  - medizin
-  - diagnose
-  - symptome
-  - gesundheit
-  - privat
-  - lokal
+tags: [medizin, diagnose, symptome, gesundheit, privat, lokal]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: eigenentwurf
-  origin_path: ""
-  origin_version: ""
-  origin_repo: ""
-  origin_license: MIT
-  last_sync_from_origin: ""
-  notes: >
-    Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes
-    Implementierungs-Vorbild im Ökosystem gefunden.
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-## Zweck
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-Medizinische Eigendaten sicher und lokal erfassen: Diagnosen (ICD-10-Code
-optional), Symptomverläufe mit Datumsreihen und Untersuchungspläne. Alle
-Daten bleiben ausschließlich lokal in `medizin-daten/store.db`.
 
-Der Skill ersetzt keine ärztliche Beratung und trifft keine medizinischen
-Aussagen — er ist ein strukturiertes Notizbuch für persönliche Gesundheitsdaten.
+## Übersicht & Zweck
+
+Securely and locally capture personal medical data: diagnoses (ICD-10 code
+optional), symptom histories with date series and examination plans. All
+data stays exclusively local in `medizin-daten/store.db`.
+
+The skill does not replace medical consultation and makes no medical
+statements — it is a structured notebook for personal health data.
 
 ---
 
-## Trigger
+## Triggers
 
-| Phrase | Aktion |
+| Phrase | Action |
 |---|---|
-| „Diagnose erfassen" | Neue Diagnose anlegen |
-| „Diagnose [Name] hinzufügen" | Benannte Diagnose anlegen |
-| „Symptomverlauf" | Symptome für heute erfassen |
-| „Symptom [Name] erfassen" | Einzelnes Symptom eintragen |
-| „Untersuchungsplan" | Nächste Termine/Untersuchungen anzeigen |
-| „Termin hinzufügen" | Untersuchungstermin eintragen |
-| „Zeig meine Diagnosen" | Diagnosenliste ausgeben |
+| "Record a diagnosis" | Create new diagnosis |
+| "Add diagnosis [name]" | Create named diagnosis |
+| "Symptom history" | Record today's symptoms |
+| "Record symptom [name]" | Log a single symptom |
+| "Examination plan" | Show upcoming appointments/examinations |
+| "Add appointment" | Enter examination appointment |
+| "Show my diagnoses" | Output diagnosis list |
 
 ---
 
-## Workflow
+## Workflow & Vorgehen
 
-1. **Modus erkennen**: Diagnose / Symptom / Untersuchungsplan
-2. **Eingabe strukturieren**: Datum, Bezeichnung, Notizen, optionaler ICD-10-Code
-3. **Speichern**: In `store.db` (lokal, kein Netzwerkzugriff)
-4. **Ausgeben**: Lesbare Zusammenfassung für LLM-Kontext
+1. **Detect mode**: diagnosis / symptom / examination plan
+2. **Structure input**: date, name, notes, optional ICD-10 code
+3. **Save**: into `store.db` (local, no network access)
+4. **Output**: readable summary for LLM context
 
 ---
 
-## CLI-Einstieg
+## CLI Entry Point
 
 ```bash
-# Diagnose anlegen
-python medizin_daten_core.py add-diagnosis "Hypertonie" [--icd I10] [--note "Anmerkung"]
+# Create diagnosis (Deutsch)
+python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "note"]
 
-# Diagnosen auflisten
+# List diagnoses (Deutsch)
 python medizin_daten_core.py diagnoses
 
-# Symptom erfassen
-python medizin_daten_core.py add-symptom "Kopfschmerzen" [--severity 7] [--date 2026-06-22] [--note "..."]
+# Record symptom (Deutsch)
+python medizin_daten_core.py add-symptom "Headache" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptomverlauf für eine Bezeichnung
-python medizin_daten_core.py symptom-history "Kopfschmerzen" [--limit 30]
+# Symptom history for a name (Deutsch)
+python medizin_daten_core.py symptom-history "Headache" [--limit 30]
 
-# Untersuchung planen
-python medizin_daten_core.py add-exam "Blutbild" [--date 2026-07-01] [--note "nüchtern"]
+# Plan examination (Deutsch)
+python medizin_daten_core.py add-exam "Blood count" [--date 2026-07-01] [--note "fasting"]
 
-# Anstehende Untersuchungen
+# Upcoming examinations (Deutsch)
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternativer Store (z.B. für Tests)
+# Alternative store (e.g. for tests) (Deutsch)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 
@@ -105,42 +85,42 @@ python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 
 ## Store
 
-| Eigenschaft | Wert |
+| Property | Value |
 |---|---|
-| Typ | SQLite |
-| Pfad (Standard) | `skills/assist/medizin-daten/store.db` |
-| Override | `--store <pfad>` oder Env `MEDIZIN_STORE` |
-| Tabellen | `diagnoses`, `symptoms`, `examination_plans` |
+| Type | SQLite |
+| Path (default) | `skills/assist/medizin-daten/store.db` |
+| Override | `--store <path>` or env `MEDIZIN_STORE` |
+| Tables | `diagnoses`, `symptoms`, `examination_plans` |
 
 ### Schema
 
 ```sql
 CREATE TABLE IF NOT EXISTS diagnoses (
-    id          TEXT PRIMARY KEY,     -- UUID (kurz: 8 Hex)
-    name        TEXT NOT NULL,        -- Bezeichnung (z.B. "Hypertonie")
-    icd_code    TEXT,                 -- ICD-10-Code optional (z.B. "I10")
-    onset_date  TEXT,                 -- Beginn (ISO-8601, optional)
+    id          TEXT PRIMARY KEY,     -- UUID (short: 8 hex)
+    name        TEXT NOT NULL,        -- name (e.g. "Hypertension")
+    icd_code    TEXT,                 -- ICD-10 code optional (e.g. "I10")
+    onset_date  TEXT,                 -- onset (ISO-8601, optional)
     status      TEXT DEFAULT 'aktiv', -- aktiv | remission | abgeschlossen
-    note        TEXT,                 -- Freitext-Notiz
+    note        TEXT,                 -- free-text note
     created_at  TEXT NOT NULL,
     updated_at  TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS symptoms (
     id           TEXT PRIMARY KEY,
-    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: Zuordnung
-    name         TEXT NOT NULL,       -- Bezeichnung (z.B. "Kopfschmerzen")
-    severity     INTEGER,             -- 1–10 Skala (optional)
-    recorded_at  TEXT NOT NULL,       -- ISO-8601 Zeitstempel
+    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: assignment
+    name         TEXT NOT NULL,       -- name (e.g. "Headache")
+    severity     INTEGER,             -- 1–10 scale (optional)
+    recorded_at  TEXT NOT NULL,       -- ISO-8601 timestamp
     note         TEXT
 );
 
 CREATE TABLE IF NOT EXISTS examination_plans (
     id           TEXT PRIMARY KEY,
-    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: Zuordnung
-    exam_name    TEXT NOT NULL,       -- Untersuchungsbezeichnung
-    planned_date TEXT,                -- Geplantes Datum (ISO-8601)
-    done_date    TEXT,                -- Durchgeführt am (NULL = ausstehend)
+    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: assignment
+    exam_name    TEXT NOT NULL,       -- examination name
+    planned_date TEXT,                -- planned date (ISO-8601)
+    done_date    TEXT,                -- completed on (NULL = pending)
     note         TEXT,
     created_at   TEXT NOT NULL
 );
@@ -148,38 +128,38 @@ CREATE TABLE IF NOT EXISTS examination_plans (
 
 ---
 
-## Haltung
+## Attitude
 
-- Keine medizinischen Empfehlungen, keine Diagnosestellung durch den Skill.
-- ICD-10-Codes werden als Freitext gespeichert — keine Validierung gegen eine externe Datenbank.
-- Severity-Skala 1–10 ist nutzer-subjektiv.
-- Fehlende Werte (Datum, Schweregrad) sind immer erlaubt — das Notizbuch-Prinzip gilt.
-
----
-
-## Datenschutz (Privacy-Gate)
-
-> **WARNUNG: Medizinische Daten sind besonders schützenswert.**
-
-- `store.db` enthält höchst sensible Gesundheitsdaten — **niemals in Git committen**.
-- **Kein Netzwerkzugriff** — alle Operationen laufen vollständig lokal.
-- **Keine Weitergabe** an externe Dienste, keine Sync mit Cloud-Backends.
-- Backup-Empfehlung: Verschlüsseltes lokales Backup (z.B. `age`/`gpg`).
-- Der Skill prüft beim Start, ob `store.db` außerhalb des lokalen Dateisystems liegt,
-  und gibt eine Warnung aus wenn der Pfad in einem Sync-Ordner (OneDrive etc.) liegt.
-- `~/.gitignore_global` oder lokales `.gitignore` sollte `store.db` ausschließen.
+- No medical recommendations, no diagnosis by the skill.
+- ICD-10 codes are stored as free text — no validation against an external database.
+- Severity scale 1–10 is user-subjective.
+- Missing values (date, severity) are always allowed — the notebook principle applies.
 
 ---
 
-## Verwandte Ressourcen
+## Privacy (Privacy Gate)
 
-- Skill `assist/gesundheit` — allgemeine Gesundheitsassistenz (nicht medizinische Daten)
-- MediPlaner (`tools/module-installer` → `mediplaner`) — Medikamenten-Verwaltung (separates Programm)
+> **WARNING: Medical data is particularly sensitive.**
+
+- `store.db` contains highly sensitive health data — **never commit to Git**.
+- **No network access** — all operations run entirely locally.
+- **No sharing** with external services, no sync with cloud backends.
+- Backup recommendation: encrypted local backup (e.g. `age`/`gpg`).
+- The skill checks at startup whether `store.db` is outside the local file system
+  and issues a warning if the path is in a sync folder (OneDrive etc.).
+- `~/.gitignore_global` or local `.gitignore` should exclude `store.db`.
 
 ---
 
-## Changelog
+## Related Resources
 
-| Version | Datum | Änderung |
+- Skill `assist/gesundheit` — general health assistance (not medical data)
+- MediPlaner (`tools/module-installer` → `mediplaner`) — medication management (separate programme)
+
+---
+
+## Änderungsprotokoll
+
+| Version | Date | Change |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Erstanlage — Eigenentwurf, Privacy-Gate, 3-Tabellen-Schema |
+| 0.1.0 | 2026-06-22 | Initial creation — custom design, privacy gate, 3-table schema |

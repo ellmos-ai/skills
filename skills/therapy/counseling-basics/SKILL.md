@@ -1,198 +1,179 @@
 ---
-name: gespraechsfuehrung-basis
+name: counseling-basics
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Grundlagen therapeutischer Kommunikation: Aktives Zuhoeren, Spiegeln, Paraphrasieren, offene Fragen und Validierung.
+description: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [gespraechsfuehrung, aktives-zuhoeren, kommunikation, beratung, therapie]
+tags: [counseling, active-listening, communication, therapy]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/gespraechsfuehrung_basis.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Gespraechsfuehrung Basis
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Grundlagen therapeutischer Kommunikation: Aktives Zuhoeren, Spiegeln, Paraphrasieren
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Counseling Basics (Deutsch)
+
+> Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Dieses Template beschreibt therapeutische Grundtechniken der Gespraechsfuehrung.
-Es dient als Kontext-Vorlage fuer therapeutische Unterstuetzung.
+This template describes basic therapeutic communication techniques. It serves as a context template for therapeutic support.
 
-**Hinweis:** Diese Techniken sind Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-Bei akuten Krisen immer an professionelle Hilfe verweisen.
+**Note:** These techniques are support, not a substitute for professional therapy. In acute crises, always refer to professional help.
 
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Aktives Zuhoeren
+## 1. Active Listening
 
-**Ziel:** Vollstaendiges Verstaendnis signalisieren, Gesprochenes wirklich aufnehmen.
+**Goal:** Signal complete understanding, truly absorb what is said.
 
-**Techniken:**
+**Techniques:**
 
-- **Verbale Bestaetigung:** "Ich verstehe", "Mhm", "Das klingt schwer"
-- **Nachfragen:** "Kannst du das genauer beschreiben?" / "Was meinst du damit?"
-- **Zusammenfassen:** Am Ende eines Abschnitts kurz wiederholen was gehoert wurde
-- **Non-Direktives Zuhoeren:** Keine Ratschlaege geben, bevor die Person fertig ist
+- **Verbal acknowledgment:** "I understand," "Mm-hmm," "That sounds difficult"
+- **Inquiry:** "Can you describe that in more detail?" / "What do you mean by that?"
+- **Summarizing:** At the end of a section, briefly repeat what was heard
+- **Non-directive listening:** No advice before the person has finished
 
-**Haltung:** Volle Aufmerksamkeit, keine Unterbrechungen, keine Wertung.
+**Attitude:** Full attention, no interruptions, no judgment.
 
-**Gespraeches-Formel:**
-> "Was ich gehoert habe, ist [Zusammenfassung]. Ist das korrekt?"
-
----
-
-## 2. Spiegeln (Mirroring)
-
-**Ziel:** Empfundene Emotionen zurueckgeben, Gefuehle sichtbar machen.
-
-**Techniken:**
-
-- **Einfaches Spiegeln:** Letztes Wort oder letzten Satz leicht umformuliert wiederholen
-- **Emotionales Spiegeln:** Benannte oder implizierte Emotion ansprechen
-  > "Es klingt, als ob du gerade sehr erschoepft bist."
-- **Koerpersprache spiegeln:** (in Praesenz) Haltung anpassen
-
-**Vorsicht:**
-- Nicht uebertreiben — zu viel Spiegeln wirkt kuenstlich
-- Keine Interpretation uebermaessig ausbauen
-
-**Beispiele:**
-> Person: "Ich weiss nicht mehr weiter."
-> Spiegel: "Du weisst nicht mehr weiter — das klingt, als waere alles sehr viel gerade."
+**Conversation formula:**
+> "What I heard is [summary]. Is that correct?"
 
 ---
 
-## 3. Paraphrasieren
+## 2. Mirroring
 
-**Ziel:** Den Kerninhalt in eigenen Worten wiedergeben, Verstaendnis pruefen.
+**Goal:** Reflect perceived emotions, make feelings visible.
 
-**Unterschied zu Spiegeln:** Spiegeln gibt Emotion zurueck, Paraphrasieren gibt Inhalt/Bedeutung zurueck.
+**Techniques:**
 
-**Aufbau:**
-1. Inhalt kurz zusammenfassen
-2. Kernaussage hervorheben
-3. Rueckfrage stellen
+- **Simple mirroring:** Repeat the last word or sentence slightly rephrased
+- **Emotional mirroring:** Address named or implied emotions
+  > "It sounds like you are very exhausted right now."
+- **Body language mirroring:** (in person) Adjust posture
 
-**Formel:**
-> "Wenn ich dich richtig verstehe, sagst du [Paraphrase]. Stimmt das so?"
+**Caution:**
+- Don't overdo it — too much mirroring feels artificial
+- Don't over-elaborate interpretations
 
-**Beispiele:**
-> Person: "Meine Mutter nervt mich jeden Tag mit denselben Vorwuerfen und ich kann nicht mehr."
-> Paraphrase: "Also fuehlt sich das an wie eine Endlosschleife, aus der du gerade keinen Ausweg siehst?"
-
----
-
-## 4. Offene Fragen
-
-**Ziel:** Exploration anregen, ohne Antworten vorzugeben.
-
-**Merkmale offener Fragen:**
-- Beginnen mit: Wie, Was, Inwiefern, Beschreibe, Erklaere
-- Lassen Raum fuer eigene Antworten
-- Keine Ja/Nein-Antworten moeglich
-
-**Beispiele:**
-- "Wie hat sich das angefuehlt?"
-- "Was passiert in dir, wenn das geschieht?"
-- "Wie gehst du normalerweise damit um?"
-
-**Geschlossene Fragen vermeiden:**
-- "Hat das weh getan?" -> besser: "Wie hat sich das angefuehlt?"
-- "Bist du traurig?" -> besser: "Was geht dir gerade durch den Kopf?"
+**Examples:**
+> Person: "I don't know what to do anymore."
+> Mirror: "You don't know what to do anymore — it sounds like everything is overwhelming right now."
 
 ---
 
-## 5. Validierung
+## 3. Paraphrasing
 
-**Ziel:** Gefuehle und Reaktionen als nachvollziehbar und berechtigt bestaetigen.
+**Goal:** Restate the core content in your own words, check understanding.
 
-**Wichtig:** Validierung bedeutet nicht Zustimmung, sondern Verstaendnis.
+**Difference from mirroring:** Mirroring reflects emotion, paraphrasing reflects content/meaning.
 
-**Formel:**
-> "Es macht total Sinn, dass du dich so fuehlst, angesichts [Situation]."
+**Structure:**
+1. Briefly summarize content
+2. Highlight the key message
+3. Ask for confirmation
 
-**Stufen der Validierung (nach Linehan):**
-1. Aufmerksam zuhoeren (Anwesenheit zeigen)
-2. Genau reflektieren (was wurde gesagt?)
-3. Nicht-Ausgesprochenes erkennen
-4. Ursache im Kontext verstehen
-5. Reaktion als nachvollziehbar anerkennen
-6. Radikale Echtheit (ehrliche, gleichwertige Reaktion)
+**Formula:**
+> "If I understand you correctly, you're saying [paraphrase]. Is that right?"
 
----
-
-## 6. Gespraeches-Phasen
-
-| Phase | Ziel | Techniken |
-|-------|------|-----------|
-| Opening | Ankommen, Sicherheit schaffen | Begruessung, offene Fragen, Wertfreiheit signalisieren |
-| Exploration | Thema ergruenden | Aktives Zuhoeren, Nachfragen, Paraphrasieren |
-| Vertiefung | Tiefere Ebenen erreichen | Spiegeln, Validierung, emotionale Resonanz |
-| Integration | Zusammenfuehren, Naechstes | Zusammenfassen, Hypothesen pruefen, Ausblick |
-| Closing | Abschliessen, Uebergang | Rueckblick, Hausaufgabe, Verabschiedung |
+**Examples:**
+> Person: "My mother nags me every day with the same accusations and I can't take it anymore."
+> Paraphrase: "So it feels like an endless loop that you currently see no way out of?"
 
 ---
 
-## Ethik und Grenzen
+## 4. Open Questions
 
-**Ein KI-Assistent darf:**
-- Gespraechstechniken erklaeren und demonstrieren
-- Aktives Zuhoeren, Spiegeln, Paraphrasieren anleiten
-- Offene Fragen stellen und Validierung anbieten
-- Psychoedukativ ueber Gespraechsfuehrung informieren
+**Goal:** Encourage exploration without prescribing answers.
 
-**Ein KI-Assistent darf NICHT:**
-- Professionelle therapeutische Gespraeche ersetzen
-- Diagnosen stellen oder Behandlungsempfehlungen geben
-- Krisenintervention durchfuehren
-- EMDR, Prolonged Exposure (PE) oder Narrative Exposure Therapy (NET) anwenden
+**Characteristics of open questions:**
+- Start with: How, What, In what way, Describe, Explain
+- Leave room for personal answers
+- Cannot be answered with yes/no
 
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+**Examples:**
+- "How did that feel?"
+- "What happens inside you when that occurs?"
+- "How do you usually deal with this?"
 
----
-
-## Siehe auch
-
-- [motivational-interviewing](../motivational-interviewing/SKILL.md) — OARS-Techniken bauen auf diesen Grundlagen auf
-- [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) — Zirkulaere und hypothetische Fragetechniken
+**Avoid closed questions:**
+- "Did that hurt?" -> better: "How did that feel?"
+- "Are you sad?" -> better: "What's going through your mind right now?"
 
 ---
 
-## Quellenangaben
+## 5. Validation
+
+**Goal:** Confirm feelings and reactions as understandable and legitimate.
+
+**Important:** Validation does not mean agreement, but understanding.
+
+**Formula:**
+> "It makes complete sense that you feel this way, given [situation]."
+
+**Levels of validation (after Linehan):**
+1. Attentive listening (showing presence)
+2. Accurately reflecting (what was said?)
+3. Recognizing the unspoken
+4. Understanding the cause in context
+5. Acknowledging the reaction as understandable
+6. Radical genuineness (honest, equal-level response)
+
+---
+
+## 6. Conversation Phases
+
+| Phase | Goal | Techniques |
+|-------|------|------------|
+| Opening | Settling in, creating safety | Greeting, open questions, signaling non-judgment |
+| Exploration | Exploring the topic | Active listening, inquiry, paraphrasing |
+| Deepening | Reaching deeper levels | Mirroring, validation, emotional resonance |
+| Integration | Bringing together, next steps | Summarizing, testing hypotheses, outlook |
+| Closing | Wrapping up, transition | Review, homework, farewell |
+
+---
+
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Explain and demonstrate conversation techniques
+- Guide active listening, mirroring, paraphrasing
+- Ask open questions and offer validation
+- Provide psychoeducation about counseling skills
+
+**An AI assistant must NOT:**
+- Replace professional therapeutic conversations
+- Make diagnoses or treatment recommendations
+- Conduct crisis intervention
+- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+## References
 
 - Rogers, C. R. (1951). *Client-Centered Therapy.* Houghton Mifflin.
 - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
@@ -200,5 +181,5 @@ Bei akuten Krisen immer an professionelle Hilfe verweisen.
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: Rogers (1951, 1961), Linehan (1993) — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: Rogers (1951, 1961), Linehan (1993) — Not professional therapy*

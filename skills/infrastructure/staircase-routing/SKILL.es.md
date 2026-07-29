@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [Español] Documentación completa traducida al español para la habilidad staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
-
+description: [Español] Documentación completa para la habilidad staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, si
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `staircase-routing`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `staircase-routing`.
 
 
 
-# Staircase-Routing (Up-and-Down / Walking Bass Routing)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
 
 The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
 

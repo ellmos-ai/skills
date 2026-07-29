@@ -2,8 +2,11 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `bilingual-doc-sync`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bilingual-doc-sync`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
@@ -11,9 +14,9 @@ language: ja
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten
+# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
 wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
@@ -82,7 +85,7 @@ Dokument/Projekt WEITERE Sprachen verdient:
 4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
    gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
 
-## Beispiel
+## 使用例と実行モデル & Usage
 
 ```text
 Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."

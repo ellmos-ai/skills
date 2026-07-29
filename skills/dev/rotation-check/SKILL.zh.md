@@ -2,16 +2,19 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `rotation-check`.
+> **中文** — 针对该技能的官方完整中文文档: `rotation-check`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
 Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
@@ -119,7 +122,7 @@ ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
 - `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
   Optimizer renoviert).
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-03)
 - Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten

@@ -2,8 +2,11 @@
 language: ru
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `workflow-extract`.
+> **Русский** — Официальная полная документация на русском языке для навыка `workflow-extract`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `workflow-extract`.
@@ -11,9 +14,9 @@ language: ru
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen
+# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
 
-## Zweck
+## Общий обзор и назначение & Purpose
 
 Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
 **Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
@@ -131,7 +134,7 @@ Automatisierungs-Kandidaten aus alten Chatverläufen":
 3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
    Kandidatenliste an den User vor dem Massenbau.
 
-## Beispiel
+## Пример и применение & Usage
 
 ```text
 User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —

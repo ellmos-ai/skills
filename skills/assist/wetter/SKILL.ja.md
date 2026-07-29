@@ -5,8 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [日本語] スキルに関する完全な日本語ドキュメント: wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
-
+description: [日本語] エージェントスキル: wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,18 +15,21 @@ tags: [wetter, wttr, vorschau, assist]
 language: ja
 status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
-provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `wetter`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `wetter`.
 
 
 
-# Weather
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Weather (English)
 
 Fast, key-free weather information for everyday use.
 
-## Purpose
+## 概要と目的 & Purpose
 
 Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
 Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
@@ -44,7 +46,7 @@ which the LLM fills in interactively with the user.
 | "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
 | Coordinates known | `wetter_core.py <lat> <lon>` |
 
-## 実行ワークフローと手順
+## ワークフローと実行手順 & Execution Steps
 
 ```
 1. Determine location: from request; else prefs.json (wetter_default_location);

@@ -2,16 +2,19 @@
 language: ru
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `load-project`.
+> **Русский** — Официальная полная документация на русском языке для навыка `load-project`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `load-project`.
 
 
-# Load Project
+# Load Project (English)
 
-## Zweck
+## Общий обзор и назначение & Purpose
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,

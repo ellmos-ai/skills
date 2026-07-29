@@ -5,8 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa traducida al español para la habilidad encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.
-
+description: [Español] Documentación completa para la habilidad encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [encoding, utf-8, mojibake, windows, cp1252, text-repair]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `encoding-fix`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `encoding-fix`.
 
 
 
-# Encoding Fix
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Encoding Fix (English)
 
 Repairs mojibake (double/triple encoded UTF-8) caused by Windows cp1252/Latin-1
 misinterpretation. Zero dependencies — Python stdlib only.

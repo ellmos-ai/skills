@@ -2,16 +2,19 @@
 language: fr
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `headless`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `headless`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## Présentation et Objectif & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die

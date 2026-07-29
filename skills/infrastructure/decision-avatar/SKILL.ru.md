@@ -2,16 +2,19 @@
 language: ru
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `decision-avatar`.
+> **Русский** — Официальная полная документация на русском языке для навыка `decision-avatar`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (English)
 
-## Zweck
+## Общий обзор и назначение & Purpose
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz

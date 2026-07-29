@@ -5,53 +5,28 @@ type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
 updated: 2026-06-19
-description: >
-  Dieser Skill sollte genutzt werden, wenn der User private oder halbformale
-  E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren
-  oder im eigenen Stil entwerfen lassen will, besonders bei Terminen,
-  offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton.
-  Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
-
-# Kompatibilität
+description: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
-# Kategorisierung
 category: utilities
 tags: [mail, email, privat, antwort, absage, termin, schreibstil, kontaktprofil]
 language: de
 status: active
-
-# Abhängigkeiten
-dependencies:
-  tools: []
-  optional_tools:
-    - name: mail-connector
-      path: ".AI/.MODULES/mail-connector/"
-      cli: "mailc"
-      python_module: "mail_connector.cli"
-      usage: "mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau"
-      note: "Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff."
-  services: [mail-backend-optional]
-  protocols: [kontaktprofil, usecase-registry]
-  python: []
-
-# Provenance (Herkunfts-Tracking)
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-# Privat-Mail-Writer
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
+
+> **English Translation** — Official English version of `privat-mail-writer`.
+
+
+# Privat-Mail-Writer (Deutsch)
+
+## Übersicht & Zweck
 
 Privat-Mail-Writer erstellt kurze, freundliche und kontaktabhängig passende Mailentwürfe. Der Skill ist nutzerneutral angelegt: Er enthält keine echten Kontakte, keine echten Signaturen und keine echten Mailinhalte.
 
@@ -144,7 +119,7 @@ Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere
 
 Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 0.2.0 (2026-06-19)
 - `CONFIG.md` und `BLACKLIST.md` ergänzt.

@@ -5,80 +5,61 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: >
-  Forschungspipeline fuer PubMed und arXiv. Schnellrecherche und
-  strukturierte Literatur-Reviews mit reiner Python-Standardbibliothek.
+description: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
 
-# Kompatibilitaet
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: true
-
-# Kategorisierung
 category: research
 tags: [pubmed, arxiv, literature-review, research, science]
 language: de
 status: active
-
-# Abhaengigkeiten
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-# Provenance
-provenance:
-  origin: "bach"
-  origin_path: "MODULAR_AGENTS/ResearchAgent"
-  origin_version: "0.1.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-<img src="banner.png" width="100%" alt="research-agent banner">
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-# Research Agent
 
-Modulare Forschungspipeline fuer wissenschaftliche Literaturrecherche.
-Nutzt ausschliesslich Python-Standardbibliothek (urllib, xml, json).
+# Research Agent (Deutsch)
 
-## Architektur
+Modular research pipeline for scientific literature search.
+Uses exclusively Python standard library (urllib, xml, json).
+
+## Architecture
 
 ```
 ResearchAgent (Orchestrator)
-  sources/          Datenquellen (PubMed, arXiv)
-    base.py         Article/SearchResult Dataclasses, Source ABC
+  sources/          Data sources (PubMed, arXiv)
+    base.py         Article/SearchResult dataclasses, Source ABC
     pubmed.py       NCBI E-utilities (esearch + efetch)
     arxiv.py        arXiv Atom API
-  workflows/        Recherche-Ablauefe
-    quick_search.py Schnellrecherche ueber mehrere Quellen
-    literature_review.py  4-Phasen Literatur-Review
+  workflows/        Research workflows
+    quick_search.py Quick search across multiple sources
+    literature_review.py  4-phase literature review
 ```
 
-## Nutzung als Python-Library
+## Usage as Python Library
 
 ```python
 from scripts.agent import ResearchAgent
 
 agent = ResearchAgent()
 
-# Schnellrecherche
+# Quick search (Deutsch)
 result = agent.search("machine learning diagnostics", max_results=10)
 print(result)
 
-# Strukturierter Literatur-Review
+# Structured literature review (Deutsch)
 plan = agent.create_review_plan("transformer architectures", years=3)
-print(plan.total_articles, "Artikel gefunden")
+print(plan.total_articles, "articles found")
 
-# Ergebnis speichern
-agent.save_result(result, "recherche_ml.md", fmt="markdown")
+# Save result (Deutsch)
+agent.save_result(result, "research_ml.md", fmt="markdown")
 ```
 
-## Nutzung als CLI
+## Usage as CLI
 
 ```bash
 cd scripts
@@ -86,16 +67,16 @@ python -m ResearchAgent search "quantum computing" --max 20
 python -m ResearchAgent review "CRISPR gene editing" --years 5
 ```
 
-## Datenquellen
+## Data Sources
 
-| Quelle | API | Rate-Limit | Zugang |
+| Source | API | Rate Limit | Access |
 |--------|-----|------------|--------|
-| PubMed | NCBI E-utilities | 3/s (ohne Key), 10/s (mit Key) | Frei |
-| arXiv | Atom REST API | Keine dokumentiert | Frei |
+| PubMed | NCBI E-utilities | 3/s (without key), 10/s (with key) | Free |
+| arXiv | Atom REST API | None documented | Free |
 
-Erweiterbar: Neue Quellen implementieren `Source` ABC aus `sources/base.py`.
+Extensible: New sources implement the `Source` ABC from `sources/base.py`.
 
-## Erweiterung
+## Extension
 
 ```python
 from scripts.sources.base import Source, SearchResult
@@ -106,7 +87,7 @@ class MySource(Source):
         return "my-source"
 
     def search(self, query, max_results=10, **kwargs):
-        # API-Abfrage implementieren
+        # Implement API query
         ...
 
     def get_article(self, article_id):
@@ -116,18 +97,18 @@ class MySource(Source):
         return True
 ```
 
-## BACH-Hinweise
+## BACH Notes
 
-> Nur relevant bei Nutzung innerhalb von BACH.
+> Only relevant when used within BACH.
 
 ```python
 from scripts.agent import ResearchAgent
-agent = ResearchAgent(use_bach=True)  # Optionale BACH-Integration
+agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
-## Changelog
+## Änderungsprotokoll
 
 ### 0.1.0 (2026-03-12)
-- Migration aus MODULAR_AGENTS/ResearchAgent in Skillbibliothek
-- PubMed + arXiv Quellen
-- QuickSearch + LiteratureReview Workflows
+- Migration from MODULAR_AGENTS/ResearchAgent to skill library
+- PubMed + arXiv sources
+- QuickSearch + LiteratureReview workflows

@@ -2,16 +2,19 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `decision-avatar`.
+> **中文** — 针对该技能的官方完整中文文档: `decision-avatar`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
@@ -140,7 +143,7 @@ sensiblen Rohdaten wiedergeben.
 - Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
   erforderlich wäre.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.0.0 (2026-07-28)
 - Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer

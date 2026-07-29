@@ -5,44 +5,31 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Standard procedure for onboarding new software projects: Feature analysis,
-  code quality review, onboarding checklist, and task creation.
+description: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: dev
 tags: [onboarding, project, intake, analysis, checklist, code-review]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/workflows/projekt-aufnahme.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Standard Onboarding Procedure for New Software Projects
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Standard Onboarding Procedure for New Software Projects (English)
 
 **Version:** 1.0
 **Date:** 2026-03-12
 
 ---
 
-## Overview
+## Overview & Purpose
 
 This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
 
@@ -68,7 +55,7 @@ This procedure defines which steps to perform on newly discovered software folde
 ### Template
 
 ```markdown
-# Feature Analysis: <ToolName>
+# Feature Analysis: <ToolName> (English)
 
 ## Brief Description
 A short sentence describing what the tool does.
@@ -226,22 +213,22 @@ Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
 
 ---
 
-## Example: New Tool "MyTool"
+## Example & Usage
 
 ```bash
-# 1. Feature analysis
-# -> Create Feature_Analysis_MyTool.md (see template)
+# 1. Feature analysis (English)
+# -> Create Feature_Analysis_MyTool.md (see template) (English)
 
-# 2. Code quality
+# 2. Code quality (English)
 pylint MyTool/main.py
 flake8 MyTool/main.py
 file -i MyTool/main.py  # Check encoding
 
-# 3. TASKS.txt
-# -> Create in tool folder with status "QUALITY REVIEW"
+# 3. TASKS.txt (English)
+# -> Create in tool folder with status "QUALITY REVIEW" (English)
 
-# 4. Create tasks
-# -> Capture TASKS.txt entries as issues/tickets
+# 4. Create tasks (English)
+# -> Capture TASKS.txt entries as issues/tickets (English)
 ```
 
 ---

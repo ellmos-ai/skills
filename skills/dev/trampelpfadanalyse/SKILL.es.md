@@ -1,29 +1,15 @@
 ---
-name: trampelpfadanalyse
-version: 0.1.0
-type: skill
-author: Lukas Geiger
-created: 2026-06-21
-updated: 2026-06-21
-description: [Español] Documentación completa traducida al español para la habilidad trampelpfadanalyse: Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: dev
-tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: es
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `trampelpfadanalyse`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `trampelpfadanalyse`.
 
 
 
-# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs (English)
 
 A method for uncovering errors in pipeline and control-file workflows that do not come
 from broken code, but from a **convention being invisible to an LLM**. Instead of

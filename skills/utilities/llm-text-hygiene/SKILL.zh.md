@@ -2,8 +2,11 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `llm-text-hygiene`.
+> **中文** — 针对该技能的官方完整中文文档: `llm-text-hygiene`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `llm-text-hygiene`.
@@ -11,9 +14,9 @@ language: zh
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
+# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
 erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
@@ -98,7 +101,7 @@ fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-
 Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
 `encoding-fix`-Territorium, nicht dieses Skills.
 
-## Beispiel
+## 使用示例与实践 & Usage
 
 ```text
 Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
@@ -130,7 +133,7 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.0.0 (2026-07-04)
 - Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"

@@ -1,28 +1,14 @@
 ---
-name: textproduction
-version: 2.0.0
-type: expert
-author: ellmos
-created: 2026-06-22
-updated: 2026-06-22
-description: KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: production
-tags: [text, blogpost, social-media, newsletter, marketing, email, bericht, copy, story, drehbuch, rpg, weltenbau, pressemitteilung, positionspapier, pr, latex]
 language: en
-status: active
-dependencies: {'tools': ['pr/press_compiler.py'], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/textproduction/ + system/agents/_experts/press/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `textproduction`.
 
 
-# Textproduction — Router
+# Textproduction — Router (English)
 
 Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
 passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
@@ -35,7 +21,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Workflow
+## Workflow & Execution Steps
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

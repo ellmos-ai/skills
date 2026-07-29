@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Documentation complète traduite en français pour la compétence pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
-
+description: [Français] Compétence d'agent pour pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,14 +15,17 @@ tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation
 language: fr
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `pmr-autogenic-training`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `pmr-autogenic-training`.
 
 
 
-# Progressive Muscle Relaxation & Autogenic Training
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Progressive Muscle Relaxation & Autogenic Training (English)
 
 > Body-based relaxation techniques according to Jacobson and Schultz
 

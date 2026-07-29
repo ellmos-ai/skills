@@ -2,14 +2,17 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `surface-after-care`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `surface-after-care`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `surface-after-care`.
 
 
-# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo
+# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo (English)
 
 ## Wann dieser Skill greift
 
@@ -41,11 +44,11 @@ Die Reihenfolge ist nicht willkürlich. Schritt 0 steht am Anfang, weil er den U
 **Bevor irgendetwas geändert wird: klären, wo dieses Projekt überall liegt.** Das GitHub-Repo ist selten die einzige Fläche. Eine korrigierte README nützt wenig, wenn die npm-Paketseite weiter die alte Fassung mit der falschen Installationsanweisung zeigt — und genau dort landen die meisten Nutzer, denn Paketregister ranken in Suchmaschinen oft besser als das Repo.
 
 ```bash
-# Manifeste verraten die Kanäle
+# Manifeste verraten die Kanäle (English)
 cat package.json pyproject.toml setup.py Cargo.toml 2>/dev/null | rg -n "name|version|keywords|repository|homepage"
 rg -n "npmjs.com|pypi.org|marketplace|registry|crates.io|hub.docker|zenodo|doi" README* docs/ .github/ 2>/dev/null
 
-# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft)
+# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft) (English)
 npm view <paket> version description keywords 2>/dev/null
 pip index versions <paket> 2>/dev/null
 gh release list --repo ORG/REPO --limit 5
@@ -300,7 +303,7 @@ Der Standard ist **kein Force-Push**. Interne Planungsdateien nachträglich zu i
 
 ```bash
 git rm --cached <datei>            # aus dem Tracking, bleibt lokal erhalten
-# .gitignore ergänzen
+# .gitignore ergänzen (English)
 git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
 git push
 ```

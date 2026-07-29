@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [日本語] スキルに関する完全な日本語ドキュメント: academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
-
+description: [日本語] エージェントスキル: academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,16 +15,19 @@ tags: [exams, mock-exam, self-test, simulation, rubric, assessment, feedback, st
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `academic-study-test`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `academic-study-test`.
 
 
 
-# Academic Study Test
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## 概要と目的
+
+# Academic Study Test (English)
+
+## 概要と目的 & Purpose
 
 Support exam preparation with structured self-tests, realistic simulations,
 and diagnostic feedback. The skill is subject- and institution-neutral and

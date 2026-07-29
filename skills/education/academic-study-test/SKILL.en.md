@@ -5,40 +5,26 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  Use when exam preparation, self-tests, mock exams or simulations, written
-  coursework, or error diagnosis are needed. Provides five modes and a
-  rubric-based assessment system with a strict boundary around live exams.
+description: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: education
 tags: [exams, mock-exam, self-test, simulation, rubric, assessment, feedback, studies]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Academic Study Test
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Overview
+
+# Academic Study Test (English)
+
+## Overview & Purpose
 
 Support exam preparation with structured self-tests, realistic simulations,
 and diagnostic feedback. The skill is subject- and institution-neutral and

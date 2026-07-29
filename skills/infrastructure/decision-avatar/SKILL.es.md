@@ -2,16 +2,19 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `decision-avatar`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `decision-avatar`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `decision-avatar`.
 
 
-# Decision Avatar
+# Decision Avatar (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz

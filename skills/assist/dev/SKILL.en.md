@@ -5,44 +5,28 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: >
-  Developer assistant (ATI successor). Provides a quick project overview
-  via headless scan and routes to the available coding tools:
-  CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools
-  module. Pure tool routing + scan, no own store.
+description: Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: assist
 tags: [dev, coding, projekt-scan, ati, codecommander]
 language: en
 status: active
-
-dependencies:
-  tools: [dev_core.py]
-  services: []
-  protocols: []
-  python: [pathlib]
-  external: [codecommander-mcp, ellmos-code-tools]
-
-provenance:
-  origin: "bach"
-  origin_path: "system/agents/ati/ + system/agents/entwickler/"
-  origin_version: "n/a"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-06-22"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Dev — Developer Assistant (ATI)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Dev — Developer Assistant (ATI) (English)
 
 Gets an overview first, then hands off to the right tools.
 
-## Purpose
+## Overview & Purpose
 
 Successor to BACH's ATI/entwickler agent. Two tasks:
 1. **Project scan** (headless, stdlib): fast, token-efficient overview of

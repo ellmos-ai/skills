@@ -2,8 +2,11 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `idea-mining`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `idea-mining`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `idea-mining`.
@@ -11,9 +14,9 @@ language: ja
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen
+# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
 Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
@@ -102,7 +105,7 @@ Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): R
 verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
 Versuchs-Doku sind hier das Gedächtnis.
 
-## Beispiel
+## 使用例と実行モデル & Usage
 
 ```text
 Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.

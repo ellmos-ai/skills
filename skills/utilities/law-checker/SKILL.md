@@ -5,96 +5,81 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: >
-  Zeigt auf das eigenstaendige Modul law-checker ("Law-Checker"): quellenbasierte
-  KI-Ersteinschaetzungen fuer deutsches Recht mit Gesetzes-Registry und
-  Gesetzbuch-Verkoerperungs-Agent. Nutze diesen Skill, wenn ein Sachverhalt, Vertrag,
-  Bescheid oder eine Rechtsfrage nach deutschem Recht mit exakten Fundstellen
-  (Artikel/Paragraph, Absatz, Satz) geprueft werden soll -- mit klarer Grenze:
-  KI-Ersteinschaetzung, kein Anwaltsersatz.
+description: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
-provenance:
-  origin: "external"
-  origin_repo: "https://github.com/ellmos-ai/law-checker"
-  origin_path: "SKILL.md, config.json, agents/gesetzbuch.md, references/"
-  origin_version: null
-  last_sync_from_origin: "2026-07-23"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
-
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/law-checker', 'origin_path': 'SKILL.md, config.json, agents/gesetzbuch.md, references/', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 category: utilities
-tags: [legal, law, germany, law-checker, gutachten, wrapper, pointer-skill]
+tags: [legal, law, germany, wrapper, pointer-skill]
 language: de
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="law-checker banner">
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-# law-checker (Law-Checker) -- Verweis-Skill
 
-Dieser Skill ist ein **schlanker Verweis (Wrapper)** auf das eigenstaendige,
-oeffentliche Modul-Repository
-[`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker) (MIT-Lizenz,
-public). Der eigentliche Skill lebt dort -- dieses Repository verlinkt und
-dokumentiert nur die Installation, damit das Modul ueber den zentralen
-Skill-Katalog auffindbar ist.
+# law-checker (Legal Department) -- Pointer Skill (Deutsch)
 
-## Was das Modul tut
+This skill is a **thin pointer (wrapper)** to the standalone, public module
+repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)
+(MIT license, public). The actual skill lives there -- this repository only
+links to it and documents installation, so the module is discoverable through
+the central skill catalog.
 
-`law-checker` liefert quellenbasierte KI-Ersteinschaetzungen fuer deutsches
-Recht:
+## What the module does
 
-- **Gesetzes-Registry** (`config.json`): zuschaltbare Gesetzbuecher; jede
-  Gesetzesaussage muss aus lokal geladenen, amtlichen Normtexten belegt werden
-  (Artikel/Paragraph, Absatz, Satz, Kurzzitat, Quelle, Abrufdatum).
-- **Gesetzbuch-Verkoerperungs-Agent** (`agents/gesetzbuch.md`): generischer
-  Agent, der fuer jedes registrierte Gesetz "aus dem Gesetz heraus" antwortet
-  -- skaliert auf beliebige Gesetze in der Registry.
-- **Getrennte Rechtsprechungsschicht:** Urteile werden nur nach
-  Web-Verifikation zitiert (Gericht, Datum, Aktenzeichen, ECLI wo verfuegbar).
-- **Risiko- und Eskalations-Workflow:** Gutachtenformat mit Risiko-Ampel,
-  Fristen-Disziplin und Anwalts-Fachgebiets-Matrix.
+`law-checker` produces source-grounded AI first-look legal assessments for
+German law:
 
-## Grenzen (wichtig)
+- **Statute registry** (`config.json`): togglable statutes; every statute
+  claim must be backed by locally fetched official law texts (article or
+  section, paragraph, sentence where needed, short quote, source, retrieval
+  date).
+- **Statute-embodiment agent** (`agents/gesetzbuch.md`): a generic agent that
+  answers "from inside the statute" for any registered law -- scales to
+  arbitrary statutes added to the registry.
+- **Separate case-law layer:** court decisions are cited only after web
+  verification (court, date, docket number, ECLI where available).
+- **Risk and escalation workflow:** report format with a risk-level scale,
+  deadline discipline, and a lawyer-specialty routing matrix.
 
-- **KI-gestuetzte Erstorientierung, kein Ersatz fuer individuelle
-  Rechtsberatung und keine Anwaltszulassung.**
-- Kein Kanzleibetrieb, kein gehosteter Rechtsdienst, kein Fristenkalender.
-- Bei echter Rechtspost (Abmahnung, Bescheid, Klage, Frist): Original sichern,
-  Frist notieren, qualifizierte anwaltliche Beratung einholen -- den Vorgang
-  NICHT automatisieren.
+## Boundaries (important)
 
-## Installation (generisch, ohne lokale Konkretpfade)
+- **AI-assisted first orientation only, not a substitute for individual legal
+  advice, and not performed by a licensed lawyer.**
+- Not a law firm, not a hosted legal service, not a deadline calendar.
+- If real legal mail is involved (warning letter, official notice, lawsuit,
+  deadline): secure the original document, note the deadline, and consult a
+  qualified lawyer -- do not automate the matter.
 
-1. Modul klonen:
+## Installation (generic, no local paths)
+
+1. Clone the module:
    ```bash
-   git clone https://github.com/ellmos-ai/law-checker.git <klon-pfad>
+   git clone https://github.com/ellmos-ai/law-checker.git <clone-path>
    ```
-2. `<klon-pfad>/SKILL.md` in die eigene Skill-Umgebung uebernehmen (z. B.
-   `~/.claude/skills/law-checker/` oder das Aequivalent der genutzten
-   Agenten-Runtime).
-3. Den Modulpfad in der uebernommenen `SKILL.md` bzw. den zugehoerigen
-   Referenzen auf `<klon-pfad>` setzen -- KEINE realen lokalen Pfade oder
-   Hostnamen in eine versionierte Skill-Umgebung committen.
-4. Gesetzes-Registry laden: `python <klon-pfad>/_tools/gesetze_fetch.py`
-   (holt die konfigurierten amtlichen Normtexte; die Normtexte selbst liegen
-   bewusst nicht im Repo, damit keine veralteten Portal-Abzuege
-   redistribuiert werden).
-5. Details zu Struktur, Lizenz und Haftung: siehe README des Modul-Repos.
+2. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
+   `~/.claude/skills/law-checker/` or the equivalent for your agent runtime).
+3. Set the module path in the adopted `SKILL.md` and its references to
+   `<clone-path>` -- do NOT commit real local paths or hostnames into a
+   versioned skill environment.
+4. Load the statute registry: `python <clone-path>/_tools/gesetze_fetch.py`
+   (fetches the configured official statute texts; the texts themselves are
+   deliberately not in the repo, to avoid redistributing stale portal
+   snapshots).
+5. For structure, license, and liability details, see the module repo's
+   README.
 
-## Herkunft dieses Verweis-Skills
+## Origin of this pointer skill
 
-Dieser Wrapper wurde am 2026-07-23 als Showcase-Eintrag fuer das
-`ellmos-ai/skills`-Repository angelegt. Es findet **keine Code-Duplikation**
-statt -- Pflege und Versionierung bleiben allein im Modul-Repo
-`ellmos-ai/law-checker`.
+This wrapper was added on 2026-07-23 as a showcase entry for the
+`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
+and versioning stay solely in the `ellmos-ai/law-checker` module repo.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 0.1.0 (2026-07-23)
-- Initialer Verweis-Skill auf `ellmos-ai/law-checker`.
+- Initial pointer skill for `ellmos-ai/law-checker`.

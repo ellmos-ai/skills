@@ -1,29 +1,15 @@
 ---
-name: guideline-therapies-overview
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-15
-updated: 2026-03-15
-description: [日本語] スキルに関する完全な日本語ドキュメント: guideline-therapies-overview: Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [guideline-therapies, cbt, psychodynamic, psychoanalysis, systemic-therapy, orientation]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `guideline-therapies-overview`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `guideline-therapies-overview`.
 
 
 
-# Guideline Therapies Overview
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Guideline Therapies Overview (English)
 
 > Comparison of the four approved guideline psychotherapy approaches in Germany: CBT, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide
 

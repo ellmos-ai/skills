@@ -2,16 +2,19 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `headless`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `headless`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die

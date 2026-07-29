@@ -2,16 +2,19 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `headless`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `headless`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die

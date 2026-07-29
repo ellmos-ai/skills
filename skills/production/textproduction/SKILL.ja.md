@@ -2,14 +2,17 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `textproduction`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `textproduction`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `textproduction`.
 
 
-# Textproduction — Router
+# Textproduction — Router (English)
 
 Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
 passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
@@ -22,7 +25,7 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 | **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
 | **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## 実行ワークフローと手順
+## ワークフローと実行手順 & Execution Steps
 
 ```
 1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.

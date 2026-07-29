@@ -5,101 +5,88 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Findet und loescht Windows-reservierte NUL-Dateien, die durch
-  /dev/null-Verwendung in Git Bash entstehen. Headless oder mit GUI.
+description: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: true
-
 category: utilities
 tags: [windows, nul, cleanup, git-bash, filesystem]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/tools/nulcleaner.py"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# nulcleaner - Windows NUL-Datei Bereinigung
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Das Problem
 
-Wenn in Git Bash unter Windows `/dev/null` in Befehlen verwendet wird (z.B. `> /dev/null`),
-entsteht anstatt einer Umleitung ins Nichts eine echte **Datei namens `nul`** im aktuellen
-Verzeichnis. Windows reserviert "NUL" als Device-Name, weshalb diese Dateien nicht normal
-geloescht werden koennen.
+# nulcleaner - Windows NUL File Cleanup (Deutsch)
 
-Dieses Tool findet und loescht solche NUL-Dateien ueber den erweiterten UNC-Pfad (`\\?\`).
+## The Problem
+
+When `/dev/null` is used in commands under Git Bash on Windows (e.g., `> /dev/null`),
+instead of redirecting to nowhere, an actual **file named `nul`** is created in the current
+directory. Windows reserves "NUL" as a device name, which means these files cannot be
+deleted normally.
+
+This tool finds and deletes such NUL files via the extended UNC path (`\\?\`).
 
 ---
 
-## Modi
+## Modes
 
-| Modus | Beschreibung |
-|-------|-------------|
-| `scan` | Verzeichnis rekursiv nach NUL-Dateien durchsuchen |
-| `delete` | NUL-Dateien finden und loeschen |
-| `gui` | Grafische Oberflaeche mit Dateiauswahl |
+| Mode | Description |
+|------|-------------|
+| `scan` | Recursively scan directory for NUL files |
+| `delete` | Find and delete NUL files |
+| `gui` | Graphical interface with file selection |
 
 ---
 
 ## CLI Usage
 
 ```bash
-# Nur scannen (zeigt gefundene NUL-Dateien)
-python nulcleaner.py scan /pfad/zum/verzeichnis
+# Scan only (shows found NUL files) (Deutsch)
+python nulcleaner.py scan /path/to/directory
 
-# Scannen und loeschen
-python nulcleaner.py delete /pfad/zum/verzeichnis
+# Scan and delete (Deutsch)
+python nulcleaner.py delete /path/to/directory
 
-# GUI-Modus starten
+# Start GUI mode (Deutsch)
 python nulcleaner.py gui
 ```
 
 ---
 
-## Headless-API (fuer Integration)
+## Headless API (for Integration)
 
-Das Tool bietet auch eine Python-API fuer headless-Betrieb:
+The tool also provides a Python API for headless operation:
 
 ```python
 from nulcleaner import clean_nul_files_headless
 
-result = clean_nul_files_headless("/pfad/zum/verzeichnis", verbose=True)
-print(f"Gefunden: {result['found']}, Geloescht: {result['deleted']}")
+result = clean_nul_files_headless("/path/to/directory", verbose=True)
+print(f"Found: {result['found']}, Deleted: {result['deleted']}")
 ```
 
-**Rueckgabe:** `{'found': int, 'deleted': int, 'errors': list}`
+**Return value:** `{'found': int, 'deleted': int, 'errors': list}`
 
 ---
 
-## Technische Details
+## Technical Details
 
-- Nutzt den erweiterten UNC-Pfad (`\\?\`) um Windows-reservierte Dateinamen zu loeschen
-- Rekursiver Scan mit `os.walk()`
-- GUI mit tkinter (keine externen Dependencies)
-- Funktioniert nur unter Windows (dort entsteht das Problem)
+- Uses the extended UNC path (`\\?\`) to delete Windows-reserved filenames
+- Recursive scan with `os.walk()`
+- GUI with tkinter (no external dependencies)
+- Only works on Windows (where the problem occurs)
 
 ---
 
-## Praevention
+## Prevention
 
-Am besten `/dev/null` in Git Bash vermeiden. Stattdessen:
-- Ausgabe einfach weglassen
-- `2>&1` fuer Stderr-Umleitung verwenden
-- In Shell-Skripten auf Windows-Kompatibilitaet achten
+Best to avoid `/dev/null` in Git Bash altogether. Instead:
+- Simply omit the output
+- Use `2>&1` for stderr redirection
+- Pay attention to Windows compatibility in shell scripts

@@ -5,198 +5,172 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: >
-  Vergleich der vier in Deutschland zugelassenen Richtlinienverfahren: Verhaltenstherapie, Tiefenpsychologisch fundierte Psychotherapie, Psychoanalyse, Systemische Therapie — Orientierungshilfe.
+description: Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [richtlinienverfahren, verhaltenstherapie, tiefenpsychologie, psychoanalyse, systemische-therapie, orientierung]
+tags: [guideline-therapies, cbt, psychodynamic, psychoanalysis, systemic-therapy, orientation]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/richtlinienverfahren_ueberblick.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Richtlinienverfahren Ueberblick
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Vergleich der vier in Deutschland zugelassenen Richtlinienverfahren: Verhaltenstherapie, Tiefenpsychologisch fundierte Psychotherapie, Psychoanalyse, Systemische Therapie — Orientierungshilfe
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Guideline Therapies Overview (Deutsch)
+
+> Comparison of the four approved guideline psychotherapy approaches in Germany: CBT, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-In Deutschland gibt es vier anerkannte Richtlinienverfahren, deren Kosten von
-gesetzlichen Krankenkassen uebernommen werden. Viele Menschen wissen nicht,
-welches Verfahren fuer sie geeignet sein koennte. Dieser Skill bietet einen
-psychoedukativen Ueberblick zur Orientierung.
+In Germany, there are four recognized guideline psychotherapy approaches whose costs are covered by statutory health insurance. Many people don't know which approach might be suitable for them. This skill provides a psychoeducational overview for orientation.
 
-Rechtsgrundlage: Die Richtlinienverfahren werden vom Gemeinsamen Bundesausschuss
-(G-BA) auf Basis wissenschaftlicher Evidenz zugelassen.
-- Verhaltenstherapie (VT): Richtlinienverfahren seit 1987
-- Tiefenpsychologisch fundierte Psychotherapie (TP): seit 1967
-- Analytische Psychotherapie (AP): seit 1967
-- Systemische Therapie (ST): seit 2019 (Erwachsene) / 2024 (Kinder & Jugendliche)
+Legal basis: Guideline therapies are approved by the Federal Joint Committee (G-BA) based on scientific evidence.
+- Cognitive Behavioral Therapy (CBT): Guideline therapy since 1987
+- Psychodynamic Psychotherapy (PDT): since 1967
+- Psychoanalytic Psychotherapy (AP): since 1967
+- Systemic Therapy (ST): since 2019 (adults) / 2024 (children & adolescents)
 
-**Hinweis:** Dies ist eine Orientierungshilfe, keine Therapieempfehlung.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is an orientation guide, not a therapy recommendation.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Die vier Richtlinienverfahren im Ueberblick
+## 1. The Four Guideline Therapies at a Glance
 
-| Merkmal | VT | TP | AP | ST |
-|---------|----|----|----|----|
-| **Grundidee** | Verhalten und Denkmuster aendern | Unbewusste Konflikte verstehen | Tiefe Persoenlichkeitsveraenderung | Beziehungen und Systeme veraendern |
-| **Zeitfokus** | Gegenwart und Zukunft | Vergangenheit und Gegenwart | Vergangenheit (Kindheit) | Gegenwart und Beziehungen |
-| **Sitzungen** | 12-80 Std. | 12-100 Std. | 80-300 Std. | 12-48 Std. |
-| **Frequenz** | 1x/Woche | 1x/Woche | 2-3x/Woche | 1x/Woche oder seltener |
-| **Setting** | Meist Einzeln | Meist Einzeln | Einzeln (Couch) | Einzeln, Paar, Familie |
-
----
-
-## 2. Verhaltenstherapie (VT)
-
-### Grundannahmen
-- Verhalten wird gelernt und kann umgelernt werden
-- Denkmuster beeinflussen Gefuehle und Verhalten (kognitive Wende, Beck)
-- Veraenderung geschieht durch aktives Ueben und neue Erfahrungen
-
-### Wann besonders geeignet?
-- Angststoerungen, Phobien, Panikattacken
-- Depressionen
-- Zwangsstoerungen, PTBS, Essstoerungen
+| Feature | CBT | PDT | AP | ST |
+|---------|-----|-----|----|----|
+| **Core idea** | Change behavior and thought patterns | Understand unconscious conflicts | Deep personality change | Change relationships and systems |
+| **Time focus** | Present and future | Past and present | Past (childhood) | Present and relationships |
+| **Sessions** | 12-80 hrs | 12-100 hrs | 80-300 hrs | 12-48 hrs |
+| **Frequency** | 1x/week | 1x/week | 2-3x/week | 1x/week or less |
+| **Setting** | Mostly individual | Mostly individual | Individual (couch) | Individual, couple, family |
 
 ---
 
-## 3. Tiefenpsychologisch fundierte Psychotherapie (TP)
+## 2. Cognitive Behavioral Therapy (CBT)
 
-### Grundannahmen
-- Unbewusste Konflikte beeinflussen unser Erleben und Verhalten
-- Fruehere Beziehungserfahrungen praegen aktuelle Muster
-- Einsicht in unbewusste Zusammenhaenge foerdert Veraenderung
+### Core Assumptions
+- Behavior is learned and can be unlearned
+- Thought patterns influence feelings and behavior (cognitive revolution, Beck)
+- Change happens through active practice and new experiences
 
-### Wann besonders geeignet?
-- Depressionen (besonders chronische)
-- Beziehungsprobleme mit wiederkehrenden Mustern
-- Persoenlichkeitsstoerungen, psychosomatische Beschwerden
-
----
-
-## 4. Analytische Psychotherapie (Psychoanalyse, AP)
-
-### Grundannahmen
-- Tief verwurzelte unbewusste Konflikte aus der fruehen Kindheit beeinflussen das gesamte Erleben
-- Umfassende Persoenlichkeitsveraenderung ist moeglich durch tiefes Verstehen
-
-### Wann besonders geeignet?
-- Tiefgreifende Persoenlichkeitsprobleme
-- Chronische, wiederkehrende Probleme
-- Wenn kuerzere Verfahren nicht ausreichend geholfen haben
+### When particularly suitable?
+- Anxiety disorders, phobias, panic attacks
+- Depression
+- OCD, PTSD, eating disorders
 
 ---
 
-## 5. Systemische Therapie (ST)
+## 3. Psychodynamic Psychotherapy (PDT)
 
-### Grundannahmen
-- Probleme entstehen und bestehen in Beziehungssystemen
-- Veraenderung bei einem Mitglied veraendert das ganze System
-- Jeder Mensch hat Ressourcen und Loesungskompetenzen
+### Core Assumptions
+- Unconscious conflicts influence our experience and behavior
+- Earlier relationship experiences shape current patterns
+- Insight into unconscious connections promotes change
 
-### Wann besonders geeignet?
-- Familien- und Paarkonflikte
-- Kinder- und Jugendprobleme (im Familiensystem)
-- Bei Wunsch nach kuerzerer Therapie
-
----
-
-## 6. Praktische Orientierung
-
-### Entscheidungshilfe (KEINE Empfehlung, nur Orientierung)
-
-| Ich moechte... | Eher passendes Verfahren |
-|----------------|-------------------------|
-| Konkrete Werkzeuge gegen Aengste | VT |
-| Verstehen, warum ich immer wieder in gleiche Muster falle | TP |
-| Mich grundlegend besser kennenlernen | AP |
-| Beziehungsprobleme im System verstehen | ST |
-| Schnell praktische Hilfe | VT oder ST |
-
-### Therapeutische Beziehung
-
-Forschung zeigt konsistent: Der wichtigste Wirkfaktor ist die therapeutische
-Beziehung (Wampold 2015). Das "richtige" Verfahren ist weniger wichtig als
-der "richtige" Therapeut.
+### When particularly suitable?
+- Depression (especially chronic)
+- Relationship problems with recurring patterns
+- Personality disorders, psychosomatic complaints
 
 ---
 
-## 7. Praktische Informationen (Deutschland)
+## 4. Psychoanalytic Psychotherapy (Psychoanalysis, AP)
 
-### Therapeutensuche
-- Terminservicestelle: 116 117
-- Therapeutensuche der Kassenaerztlichen Vereinigung
-- Psychotherapeutenkammer des Bundeslandes
+### Core Assumptions
+- Deeply rooted unconscious conflicts from early childhood influence all experience
+- Comprehensive personality change is possible through deep understanding
 
----
-
-## 8. Skills in dieser Bibliothek — Zuordnung zu Verfahren
-
-| Verfahren | Zugehoerige Skills |
-|-----------|-------------------|
-| **VT** (Verhaltenstherapie) | [cognitive-restructuring](../cognitive-restructuring/SKILL.md), [behavioral-activation](../behavioral-activation/SKILL.md), [exposure-guidance](../exposure-guidance/SKILL.md), [problem-solving-training](../problem-solving-training/SKILL.md), [act-techniques](../act-techniques/SKILL.md), [schema-therapy](../schema-therapy/SKILL.md) |
-| **ST** (Systemische Therapie) | [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md), [genogram-work](../genogram-work/SKILL.md) |
-| **Verfahrensuebergreifend** | [counseling-basics](../counseling-basics/SKILL.md), [motivational-interviewing](../motivational-interviewing/SKILL.md), [mindfulness-basics](../mindfulness-basics/SKILL.md), [stabilization-techniques](../stabilization-techniques/SKILL.md), [psychoeducation](../psychoeducation/SKILL.md), [trauma-psychoeducation](../trauma-psychoeducation/SKILL.md), [pmr-autogenic-training](../pmr-autogenic-training/SKILL.md), [positive-psychology](../positive-psychology/SKILL.md) |
+### When particularly suitable?
+- Deep-seated personality problems
+- Chronic, recurring problems
+- When shorter approaches haven't been sufficient
 
 ---
 
-## Ethik und Grenzen
+## 5. Systemic Therapy (ST)
 
-**Ein KI-Assistent darf:**
-- Die vier Richtlinienverfahren sachlich vorstellen und vergleichen
-- Orientierungshilfe geben (keine Empfehlung)
-- Praktische Informationen zur Therapeutensuche geben
-- Reflexionsfragen stellen zur Selbstklaerung
+### Core Assumptions
+- Problems arise and persist in relationship systems
+- Change in one member changes the entire system
+- Every person has resources and solution competencies
 
-**Ein KI-Assistent darf NICHT:**
-- Ein bestimmtes Verfahren empfehlen
-- Von einem Verfahren abraten
-- Diagnosen stellen oder Indikationen ableiten
-- Therapeuten bewerten oder empfehlen
-- Laufende Therapien kommentieren oder infrage stellen
-
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+### When particularly suitable?
+- Family and couple conflicts
+- Child and adolescent problems (within the family system)
+- When shorter therapy is desired
 
 ---
 
-## Quellenangaben
+## 6. Practical Orientation
+
+### Decision Aid (NOT a recommendation, only orientation)
+
+| I want to... | Potentially suitable approach |
+|--------------|------------------------------|
+| Get concrete tools against anxiety | CBT |
+| Understand why I keep falling into the same patterns | PDT |
+| Fundamentally get to know myself better | AP |
+| Understand relationship problems in their systemic context | ST |
+| Get quick practical help | CBT or ST |
+
+### Therapeutic Relationship
+
+Research consistently shows: The most important therapeutic factor is the therapeutic relationship (Wampold 2015). The "right" approach is less important than the "right" therapist.
+
+---
+
+## 7. Practical Information
+
+### Finding a Therapist
+- In the US: Psychology Today therapist finder, insurance provider directories
+- In the UK: NHS psychological therapies, BACP therapist directory
+- In Germany: Appointment service: 116 117, Association of Statutory Health Insurance Physicians
+
+---
+
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Present and compare the four guideline therapies objectively
+- Provide orientation (not recommendations)
+- Give practical information about finding a therapist
+- Ask reflection questions for self-clarification
+
+**An AI assistant must NOT:**
+- Recommend a specific approach
+- Advise against an approach
+- Make diagnoses or derive indications
+- Evaluate or recommend therapists
+- Comment on or question ongoing therapies
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+## References
 
 - Wampold, B. E. (2015). *The Great Psychotherapy Debate.* Routledge.
 - Leichsenring, F. & Rabung, S. (2011). Long-term psychodynamic psychotherapy in complex mental disorders. *British Journal of Psychiatry*, 199(1), 15-22.
 - von Sydow, K. et al. (2010). *Die Wirksamkeit der Systemischen Therapie/Familientherapie.* Hogrefe.
-- G-BA Psychotherapie-Richtlinie
+- G-BA Psychotherapy Guideline
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: G-BA Richtlinien, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: G-BA Guidelines, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Not professional therapy*

@@ -5,107 +5,93 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: >
-  Problemloesung und Analyse: Strukturierte Denkprozesse fuer komplexe Probleme. Divide & Conquer, Root Cause Analysis, SWOT, Pareto und Entscheidungs-Heuristiken.
+description: Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: utilities
-tags: [denken, problemloesung, analyse, swot, root-cause, heuristiken]
+tags: [thinking, problem-solving, analysis, swot, root-cause, heuristics]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/_services/think.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/think.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Think — Problemloesung & Analyse
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Strukturierte Denkprozesse fuer komplexe Probleme
+
+# Think — Problem Solving & Analysis (Deutsch)
+
+> Structured thinking processes for complex problems
 
 ---
 
-## Problemloesungs-Ansaetze
+## Problem-Solving Approaches
 
 ### 1. Divide & Conquer
 
 ```
-Problem -> Teilprobleme -> Loese einzeln -> Kombiniere
+Problem -> Sub-problems -> Solve individually -> Combine
 ```
 
 ### 2. Root Cause Analysis
 
 ```
-Symptom -> Warum? -> Warum? -> Warum? -> Ursache -> Loesung
+Symptom -> Why? -> Why? -> Why? -> Root cause -> Solution
 ```
 
 ### 3. Constraint Relaxation
 
 ```
-Unloesbares Problem -> Constraints lockern -> Loesen -> Constraints wieder anziehen
+Unsolvable problem -> Relax constraints -> Solve -> Re-apply constraints
 ```
 
-### 4. Analogie-Suche
+### 4. Analogy Search
 
 ```
-Neues Problem -> Aehnliches bekanntes Problem -> Loesung adaptieren
-```
-
----
-
-## Analyse-Methoden
-
-| Methode | Anwendung |
-|---------|-----------|
-| **SWOT** | Staerken/Schwaechen/Chancen/Risiken |
-| **Pro/Contra** | Entscheidungsfindung |
-| **Pareto** | 80/20 Priorisierung |
-| **Fishbone** | Ursachenanalyse |
-
----
-
-## Entscheidungs-Heuristiken
-
-### Bei Unsicherheit
-
-```
-1. Was ist das Worst-Case-Szenario?
-2. Ist es reversibel?
-3. Was kostet Nicht-Handeln?
-```
-
-### Bei Komplexitaet
-
-```
-1. Was ist der einfachste erste Schritt?
-2. Was wuerde ein Experte tun?
-3. Was waere die 80%-Loesung?
+New problem -> Similar known problem -> Adapt solution
 ```
 
 ---
 
-## Changelog
+## Analysis Methods
+
+| Method | Application |
+|--------|-------------|
+| **SWOT** | Strengths/Weaknesses/Opportunities/Threats |
+| **Pro/Con** | Decision making |
+| **Pareto** | 80/20 prioritization |
+| **Fishbone** | Root cause analysis |
+
+---
+
+## Decision Heuristics
+
+### Under Uncertainty
+
+```
+1. What is the worst-case scenario?
+2. Is it reversible?
+3. What is the cost of inaction?
+```
+
+### Under Complexity
+
+```
+1. What is the simplest first step?
+2. What would an expert do?
+3. What would the 80% solution be?
+```
+
+---
+
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-03-15)
-- Portiert aus BACH v3.8.0
+- Ported from BACH v3.8.0
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-
-**Siehe auch:** [brainstorm](../brainstorm/SKILL.md) (Kreativmethoden, Ideenfindung) | [decide](../decide/SKILL.md) (Entscheidungs-Frameworks)
+*Ported from BACH v3.8.0 | Standalone Version*

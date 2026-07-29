@@ -1,32 +1,18 @@
 ---
-name: bilingual-doc-sync
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-03
-updated: 2026-07-03
-description: Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?", „zieh die englische/deutsche Version nach", „Übersetzung ist veraltet", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: utilities
-tags: [übersetzung, zweisprachig, synchronisation, paper, readme, i18n, dokumentation]
 language: en
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
 
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten
+# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 
-## Zweck
+## Overview & Purpose
 
 Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
 wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
@@ -95,7 +81,7 @@ Dokument/Projekt WEITERE Sprachen verdient:
 4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
    gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
 
-## Beispiel
+## Example & Usage
 
 ```text
 Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."

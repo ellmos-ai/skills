@@ -1,31 +1,17 @@
 ---
-name: skill-explorer
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-06-17
-updated: 2026-06-17
-description: [Français] Documentation complète traduite en français pour la compétence skill-explorer: Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for "compare/audit skills", "which skills are duplicated", "form skill families", "clean up/consolidate skills", "maintain the skill register", "find skills/plugins for topic X", "install new skills", "browse the skill marketplace", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: infrastructure
-tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: fr
-status: active
-dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `skill-explorer`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `skill-explorer`.
 
 
 
-# Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer)
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Purpose
+
+# Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)
+
+## Présentation et Objectif & Purpose
 
 As the skill inventory grows, duplicates, unused resources, and unclear "which skill instead of which"
 situations arise — and there are constantly new skills/plugins out there. `skill-explorer`
@@ -66,7 +52,7 @@ reason. Once the branch supersedes the original, the original is deregistered fr
 skills do not collide. Third-party branches stay **private** — they do not go into the public
 `.AI/.SKILLS` library. Details: `references/skill-branching.md`.
 
-## Flux de Travail et Étapes
+## Flux de Travail et Étapes d'Exécution & Execution Steps
 
 1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
    Explore mode. (Explore can build on a previous audit/`config.json`.)

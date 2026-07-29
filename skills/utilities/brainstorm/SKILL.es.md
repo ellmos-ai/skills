@@ -1,29 +1,15 @@
 ---
-name: brainstorm
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-15
-updated: 2026-03-15
-description: [Español] Documentación completa traducida al español para la habilidad brainstorm: Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: utilities
-tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
 language: es
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `brainstorm`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `brainstorm`.
 
 
 
-# Brainstorm
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Brainstorm (English)
 
 > Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
 
@@ -129,7 +115,7 @@ Quantity over quality — 50+ ideas in 20 min.
 
 ---
 
-## Flujo de Trabajo y Pasos
+## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
 
 ```
 1. User request

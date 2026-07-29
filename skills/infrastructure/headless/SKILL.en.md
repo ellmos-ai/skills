@@ -1,30 +1,16 @@
 ---
-name: headless
-version: 1.1.0
-type: protocol
-author: Claude + Codex
-created: 2026-06-17
-updated: 2026-07-28
-description: Providerneutraler Modus für lange autonome Läufe: sichere Arbeit fortsetzen, Entscheidungen nach Evidenz und Konfidenz treffen und blockierte Punkte gebündelt zurückstellen, ohne neue Autorität zu erfinden.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: infrastructure
-tags: [headless, autonomie, entscheidung, fortsetzung, checkpoint, autorität]
 language: en
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/headless/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## Overview & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die

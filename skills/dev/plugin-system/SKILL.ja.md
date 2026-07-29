@@ -5,8 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
-
+description: [日本語] エージェントスキル: plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [plugin, framework, extensibility, cli, architecture]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `plugin-system`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `plugin-system`.
 
 
 
-# Plugin System
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Plugin System (English)
 
 Fault-tolerant plugin system for Python CLI applications.
 A faulty plugin never stops the rest of the application.
@@ -71,10 +73,10 @@ from plugin_system import PluginManager
 manager = PluginManager(plugins_dir="./my_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins
+# List all plugins (English)
 manager.list_plugins()
 
-# Execute a plugin
+# Execute a plugin (English)
 success, result = manager.execute_plugin("MyPlugin", param="value")
 if success:
     print(result)

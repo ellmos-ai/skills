@@ -19,10 +19,10 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `wayfinding-routing`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
+# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (Deutsch)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
 
@@ -42,7 +42,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## The 5 Core Emergency & Orientation Protocols
+## Die 5 Notfall- & Orientierungs-Protokolle
 
 ### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
 - **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.

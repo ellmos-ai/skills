@@ -1,29 +1,15 @@
 ---
-name: trauma-psychoeducation
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: trauma-psychoeducation: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [trauma, psychoeducation, window-of-tolerance, trigger, self-care, ptsd]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `trauma-psychoeducation`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `trauma-psychoeducation`.
 
 
 
-# Trauma Psychoeducation
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Trauma Psychoeducation (English)
 
 > Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
 

@@ -2,16 +2,19 @@
 language: ru
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `headless`.
+> **Русский** — Официальная полная документация на русском языке для навыка `headless`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## Общий обзор и назначение & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die

@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [Français] Documentation complète traduite en français pour la compétence academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
-
+description: [Français] Compétence d'agent pour academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,16 +15,19 @@ tags: [exams, mock-exam, self-test, simulation, rubric, assessment, feedback, st
 language: fr
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `academic-study-test`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `academic-study-test`.
 
 
 
-# Academic Study Test
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Aperçu Général
+
+# Academic Study Test (English)
+
+## Présentation et Objectif & Purpose
 
 Support exam preparation with structured self-tests, realistic simulations,
 and diagnostic feedback. The skill is subject- and institution-neutral and

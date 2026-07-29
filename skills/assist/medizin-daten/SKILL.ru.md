@@ -1,29 +1,15 @@
 ---
-name: medizin-daten
-version: 0.1.0
-type: assist
-author: ellmos-ai
-created: 2026-06-22
-updated: 2026-06-22
-description: [Русский] Полное руководство и документация на русском языке для навыка medizin-daten: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: assist
-tags: [medizin, diagnose, symptome, gesundheit, privat, lokal]
 language: ru
-status: stable
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `medizin-daten`.
+> **Русский** — Официальная полная документация на русском языке для навыка `medizin-daten`.
 
 
 
-## Purpose
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+## Общий обзор и назначение & Purpose
 
 Securely and locally capture personal medical data: diagnoses (ICD-10 code
 optional), symptom histories with date series and examination plans. All
@@ -48,7 +34,7 @@ statements — it is a structured notebook for personal health data.
 
 ---
 
-## Рабочий процесс и шаги
+## Рабочий процесс и этапы выполнения & Execution Steps
 
 1. **Detect mode**: diagnosis / symptom / examination plan
 2. **Structure input**: date, name, notes, optional ICD-10 code
@@ -60,25 +46,25 @@ statements — it is a structured notebook for personal health data.
 ## CLI Entry Point
 
 ```bash
-# Create diagnosis
+# Create diagnosis (English)
 python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "note"]
 
-# List diagnoses
+# List diagnoses (English)
 python medizin_daten_core.py diagnoses
 
-# Record symptom
+# Record symptom (English)
 python medizin_daten_core.py add-symptom "Headache" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptom history for a name
+# Symptom history for a name (English)
 python medizin_daten_core.py symptom-history "Headache" [--limit 30]
 
-# Plan examination
+# Plan examination (English)
 python medizin_daten_core.py add-exam "Blood count" [--date 2026-07-01] [--note "fasting"]
 
-# Upcoming examinations
+# Upcoming examinations (English)
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternative store (e.g. for tests)
+# Alternative store (e.g. for tests) (English)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 

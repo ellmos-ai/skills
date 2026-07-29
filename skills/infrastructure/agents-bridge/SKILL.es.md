@@ -2,24 +2,26 @@
 name: agents-bridge
 version: 2.0.0
 type: skill
-description: [Español] Documentación completa traducida al español para la habilidad agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
-
+description: [Español] Documentación completa para la habilidad agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: es
 status: active
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `agents-bridge`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `agents-bridge`.
 
 
 
-# AGENTS-BRIDGE
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# AGENTS-BRIDGE (English)
 
 Use this skill to connect an agent or IDE to explicitly selected rule files.
 No provider, filename, host, or cloud directory is implicitly canonical.
 
-## Flujo de Trabajo y Pasos
+## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
 
 1. Read all local instructions that govern the source and target paths.
 2. Run `python scripts/bridge.py discover` and optionally pass `--project`.

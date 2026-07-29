@@ -1,32 +1,18 @@
 ---
-name: workflow-extract
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-03
-updated: 2026-07-03
-description: Baut aus einem Chatverlauf oder aus bestehenden Automatisierungs-Prompts (z. B. eines anderen Agenten-Systems) eine selbstlaufende, user-neutrale Workflow-Automatisierung: einen wiederkehrenden Prompt bzw. Automations-Skill für Cron/Schedule/Loop. Alias: automations-extractor. Nutze diesen Skill bei „mach daraus eine Automatisierung", „das soll regelmäßig/nächtlich laufen", „extrahiere Workflows aus diesen Chatverläufen/Automationen", „Automation aus dieser Session bauen", oder bei `/workflow-extract`. Ergänzt fehlende Automations-Bausteine (Rotations-Auswahl, Check-Registry, Idempotenz, Log-Hygiene, Freigabe-Gate, Eskalations-Handoff, Monitor-Meldedisziplin) systematisch. Enthält auch den Fleet-Audit-Modus: bestehende Automations-Flotten auf Silent-Failures, Redundanz, Drift und Lücken prüfen („prüfe meine Automatisierungen/Scheduled Tasks/Cron-Jobs"). Soll stattdessen ein abrufbarer Skill (Fähigkeit auf Zuruf) entstehen, den Schwester-Skill skill-extractor nutzen.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: infrastructure
-tags: [automation, workflow, extraction, cron, schedule, loop, transcript, meta, rotation]
 language: en
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `workflow-extract`.
 
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen
+# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
 
-## Zweck
+## Overview & Purpose
 
 Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
 **Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
@@ -144,7 +130,7 @@ Automatisierungs-Kandidaten aus alten Chatverläufen":
 3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
    Kandidatenliste an den User vor dem Massenbau.
 
-## Beispiel
+## Example & Usage
 
 ```text
 User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —

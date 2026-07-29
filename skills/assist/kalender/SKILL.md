@@ -5,126 +5,97 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: >
-  Kalender-Skill mit nutzungsadaptiver Backend-Wahl (Flag 3). Standard: lokaler
-  SQLite-Store. Optional: Google-Calendar-MCP, Routinika oder UpToday als
-  Backend — gesteuert über assist/prefs.json. Ohne Präferenz fragt das LLM
-  den Nutzer interaktiv.
+description: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: assist
-tags:
-  - kalender
-  - termine
-  - events
-  - ics
-  - google-calendar
-  - routinika
+tags: [kalender, termine, events, ics, google-calendar, routinika]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services:
-    - name: Google Calendar MCP
-      optional: true
-      purpose: "Backend-Option wenn kalender_backend=google in prefs.json"
-  protocols:
-    - name: ICS / iCalendar
-      optional: true
-      purpose: "Import/Export von Terminen (RFC 5545 Subset)"
-  python: []
-
-provenance:
-  origin: eigenentwurf
-  origin_path: ""
-  origin_version: ""
-  origin_repo: ""
-  origin_license: MIT
-  last_sync_from_origin: ""
-  notes: >
-    Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/).
-    Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend).
-    ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.
+status: stable
+dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'optional': True, 'purpose': 'Backend option when kalender_backend=google in prefs.json'}], 'protocols': [{'name': 'ICS / iCalendar', 'optional': True, 'purpose': 'Import/export of appointments (RFC 5545 subset)'}], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
 
-## Zweck
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-Termine erfassen, abfragen und verwalten — mit wählbarem Backend. Der Core
-(`kalender_core.py`) arbeitet immer mit dem **lokalen SQLite-Store** als
-Default. Das LLM wählt bei Bedarf ein alternatives Backend anhand von
-`assist/prefs.json`.
 
-**Flag 3 — Backend-Wahl:**
+## Übersicht & Zweck
 
-| `kalender_backend` in prefs.json | Verhalten |
+Capture, query and manage appointments — with a selectable backend. The core
+(`kalender_core.py`) always uses the **local SQLite store** as the default.
+The LLM selects an alternative backend from `assist/prefs.json` if needed.
+
+**Flag 3 — Backend selection:**
+
+| `kalender_backend` in prefs.json | Behaviour |
 |---|---|
-| `local` (Standard/Default) | SQLite-Store in diesem Skill-Ordner |
-| `google` | Google-Calendar-MCP (nur LLM-Pfad, nicht in core.py) |
-| `routinika` | Routinika-Kalender via module-installer (nicht impl. v0.1) |
-| `uptoday` | UpToday-Kalender via module-installer (nicht impl. v0.1) |
-| nicht gesetzt | LLM fragt den Nutzer interaktiv nach bevorzugtem Backend |
+| `local` (default) | SQLite store in this skill folder |
+| `google` | Google Calendar MCP (LLM path only, not in core.py) |
+| `routinika` | Routinika calendar via module-installer (not impl. v0.1) |
+| `uptoday` | UpToday calendar via module-installer (not impl. v0.1) |
+| not set | LLM asks the user interactively for preferred backend |
 
-> `kalender_core.py` implementiert ausschließlich das `local`-Backend.
-> Google-Calendar-MCP und weitere Backends sind LLM-gesteuert und werden
-> im SKILL.md dokumentiert, nicht im Core.
+> `kalender_core.py` implements the `local` backend exclusively.
+> Google Calendar MCP and further backends are LLM-driven and are
+> documented in SKILL.md, not in the core.
 
 ---
 
-## Trigger
+## Triggers
 
-| Phrase | Aktion |
+| Phrase | Action |
 |---|---|
-| „Trag Termin ein" | Neuen Termin erfassen |
-| „Was steht heute an?" | Heutige Termine abfragen |
-| „Was steht diese Woche an?" | 7-Tage-Überblick |
-| „Termin [Titel] am [Datum]" | Termin mit Datum anlegen |
-| „Alle Termine im [Monat]" | Monatsübersicht |
-| „Termin löschen [ID]" | Termin entfernen |
-| „Termin exportieren" | ICS-Export aller/einzelner Termine |
+| "Add an appointment" | Capture a new appointment |
+| "What is on today?" | Query today's appointments |
+| "What is on this week?" | 7-day overview |
+| "Appointment [title] on [date]" | Create appointment with date |
+| "All appointments in [month]" | Monthly overview |
+| "Delete appointment [ID]" | Remove appointment |
+| "Export appointment" | ICS export of all/individual appointments |
 
 ---
 
-## Workflow
+## Workflow & Vorgehen
 
-1. **Backend prüfen**: `assist/prefs.json` → `kalender_backend` lesen.
-2. **Ohne Präferenz**: LLM fragt Nutzer: lokaler Kalender, Google Calendar oder anderer?
-3. **Local-Backend**: core.py — Termin in SQLite-Store anlegen/abfragen/löschen.
-4. **Google-Backend**: LLM ruft Google-Calendar-MCP direkt auf (core.py nicht beteiligt).
-5. **Ausgabe**: Lesbare Terminliste oder Bestätigung.
+1. **Check backend**: read `assist/prefs.json` → `kalender_backend`.
+2. **Without preference**: LLM asks user: local calendar, Google Calendar or other?
+3. **Local backend**: core.py — create/query/delete appointment in SQLite store.
+4. **Google backend**: LLM calls Google Calendar MCP directly (core.py not involved).
+5. **Output**: Readable appointment list or confirmation.
 
 ---
 
-## CLI-Einstieg
+## CLI Entry Point
 
 ```bash
-# Termin anlegen
-python kalender_core.py add "Zahnarzt" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Praxis Dr. X"]
+# Create appointment (Deutsch)
+python kalender_core.py add "Dentist" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Dr. X practice"]
 
-# Heutige Termine
+# Today's appointments (Deutsch)
 python kalender_core.py today
 
-# Wochenübersicht
+# Weekly overview (Deutsch)
 python kalender_core.py week [--from 2026-06-22]
 
-# Monatsübersicht
+# Monthly overview (Deutsch)
 python kalender_core.py month [--month 2026-07]
 
-# Alle Termine (optional mit Suchbegriff)
-python kalender_core.py list [--search "Zahnarzt"] [--limit 50]
+# All appointments (optionally with search term) (Deutsch)
+python kalender_core.py list [--search "Dentist"] [--limit 50]
 
-# Termin löschen
+# Delete appointment (Deutsch)
 python kalender_core.py delete <id>
 
-# ICS-Export
-python kalender_core.py export [--id <id>] [--out kalender.ics]
+# ICS export (Deutsch)
+python kalender_core.py export [--id <id>] [--out calendar.ics]
 
-# Backend-Check
+# Backend check (Deutsch)
 python kalender_core.py check-backend
 
-# Alternativer Store (z.B. für Tests)
+# Alternative store (e.g. for tests) (Deutsch)
 python kalender_core.py --store /tmp/kal_test.db today --dry-run
 ```
 
@@ -132,26 +103,26 @@ python kalender_core.py --store /tmp/kal_test.db today --dry-run
 
 ## Store
 
-| Eigenschaft | Wert |
+| Property | Value |
 |---|---|
-| Typ | SQLite (local-Backend) |
-| Pfad (Standard) | `skills/assist/kalender/store.db` |
-| Override | `--store <pfad>` oder Env `KALENDER_STORE` |
-| Tabellen | `events` |
+| Type | SQLite (local backend) |
+| Path (default) | `skills/assist/kalender/store.db` |
+| Override | `--store <path>` or env `KALENDER_STORE` |
+| Tables | `events` |
 
 ### Schema
 
 ```sql
 CREATE TABLE IF NOT EXISTS events (
-    id           TEXT PRIMARY KEY,      -- UUID (kurz: 8 Hex)
-    title        TEXT NOT NULL,         -- Termin-Bezeichnung
-    date         TEXT NOT NULL,         -- ISO-Datum YYYY-MM-DD
+    id           TEXT PRIMARY KEY,      -- UUID (short: 8 hex)
+    title        TEXT NOT NULL,         -- appointment name
+    date         TEXT NOT NULL,         -- ISO date YYYY-MM-DD
     time         TEXT,                  -- HH:MM (optional)
-    duration_min INTEGER,               -- Dauer in Minuten (optional)
-    location     TEXT,                  -- Ort (optional)
-    description  TEXT,                  -- Notiz/Beschreibung
-    recurrence   TEXT,                  -- ICS RRULE (optional, z.B. "FREQ=WEEKLY")
-    ics_uid      TEXT UNIQUE,           -- ICS UID für Import/Export
+    duration_min INTEGER,               -- duration in minutes (optional)
+    location     TEXT,                  -- location (optional)
+    description  TEXT,                  -- note/description
+    recurrence   TEXT,                  -- ICS RRULE (optional, e.g. "FREQ=WEEKLY")
+    ics_uid      TEXT UNIQUE,           -- ICS UID for import/export
     created_at   TEXT NOT NULL,
     updated_at   TEXT NOT NULL
 );
@@ -159,33 +130,33 @@ CREATE TABLE IF NOT EXISTS events (
 
 ---
 
-## Haltung
+## Attitude
 
-- Der Core implementiert nur das `local`-Backend — leichtgewichtig, keine externen Deps.
-- ICS-Export erzeugt valides RFC 5545-Subset (VCALENDAR + VEVENT), importierbar in alle gängigen Kalender-Apps.
-- ICS-Import (Parsing) ist v0.1 noch nicht implementiert — geplant für v0.2.
-- Wiederholungsregeln (`recurrence`/RRULE) werden gespeichert aber nicht ausgewertet — Auswertung ist v0.2.
-
----
-
-## Datenschutz
-
-- Lokale Termine bleiben in `store.db` — kein Netzwerkzugriff im Core.
-- Beim Google-Calendar-Backend-Pfad verarbeitet Google-Calendar-MCP die Daten — Google-Datenschutzbestimmungen gelten.
-- `store.db` nicht in Git committen (empfohlen: `.gitignore`).
+- The core implements only the `local` backend — lightweight, no external dependencies.
+- ICS export generates a valid RFC 5545 subset (VCALENDAR + VEVENT), importable into all common calendar apps.
+- ICS import (parsing) is not yet implemented in v0.1 — planned for v0.2.
+- Recurrence rules (`recurrence`/RRULE) are stored but not evaluated — evaluation is v0.2.
 
 ---
 
-## Verwandte Ressourcen
+## Privacy
 
-- Google-Calendar-MCP (`mcp__claude_ai_Google_Calendar__*`) — alternatives Backend, LLM-gesteuert
-- Skill `assist/haushalt-manager` — Routinika-Integration (Presence-Check-Muster)
-- `tools/module-installer/module_installer.py` — für zukünftige Routinika/UpToday-Backend-Integration
+- Local appointments stay in `store.db` — no network access in the core.
+- When using the Google Calendar backend, Google Calendar MCP processes the data — Google's privacy policy applies.
+- Do not commit `store.db` to Git (recommended: `.gitignore`).
 
 ---
 
-## Changelog
+## Related Resources
 
-| Version | Datum | Änderung |
+- Google Calendar MCP (`mcp__claude_ai_Google_Calendar__*`) — alternative backend, LLM-driven
+- Skill `assist/haushalt-manager` — Routinika integration (presence check pattern)
+- `tools/module-installer/module_installer.py` — for future Routinika/UpToday backend integration
+
+---
+
+## Änderungsprotokoll
+
+| Version | Date | Change |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Erstanlage — Flag-3-Logik, local-Backend, ICS-Export |
+| 0.1.0 | 2026-06-22 | Initial creation — Flag-3 logic, local backend, ICS export |

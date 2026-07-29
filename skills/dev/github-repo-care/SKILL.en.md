@@ -6,39 +6,24 @@ author: Lukas Geiger + Codex
 created: 2026-06-18
 updated: 2026-06-18
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: >
-  Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories:
-  check local rules and locks, create .gitignore before the first add, run privacy checks,
-  prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update
-  organization profiles, llms.txt files, and registry links.
+description: Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: dev
 tags: [github, repo, release, privacy, i18n, marketing, ci, documentation]
 language: en
 status: active
-
-dependencies:
-  tools: [git, gh, rg]
-  services: [GitHub]
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "~/.codex/skills/github-repo-care/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: "2026-06-18"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# GitHub Repo Care — Publish and Maintain Repositories Cleanly
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# GitHub Repo Care — Publish and Maintain Repositories Cleanly (English)
 
 ## When To Use
 
@@ -50,7 +35,7 @@ Do not use it for pure implementation work without a GitHub publication step. Fi
 
 Prepare the repository before the first public push. A correct `.gitignore`, privacy gate, license, README, metadata, and release story are much cheaper before public history exists.
 
-## Workflow
+## Workflow & Execution Steps
 
 1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
 2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.

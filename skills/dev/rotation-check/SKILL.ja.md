@@ -2,16 +2,19 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `rotation-check`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `rotation-check`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
 Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu

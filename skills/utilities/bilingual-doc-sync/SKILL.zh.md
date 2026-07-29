@@ -2,8 +2,11 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `bilingual-doc-sync`.
+> **中文** — 针对该技能的官方完整中文文档: `bilingual-doc-sync`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
@@ -11,9 +14,9 @@ language: zh
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten
+# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
 wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
@@ -82,7 +85,7 @@ Dokument/Projekt WEITERE Sprachen verdient:
 4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
    gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
 
-## Beispiel
+## 使用示例与实践 & Usage
 
 ```text
 Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
@@ -111,7 +114,7 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-03)
 - Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für

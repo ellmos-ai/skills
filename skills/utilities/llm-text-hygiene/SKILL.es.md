@@ -2,8 +2,11 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `llm-text-hygiene`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `llm-text-hygiene`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `llm-text-hygiene`.
@@ -11,9 +14,9 @@ language: es
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
+# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
 erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
@@ -98,7 +101,7 @@ fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-
 Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
 `encoding-fix`-Territorium, nicht dieses Skills.
 
-## Beispiel
+## Ejemplo y Uso & Usage
 
 ```text
 Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."

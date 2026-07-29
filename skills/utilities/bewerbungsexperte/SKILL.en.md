@@ -6,7 +6,6 @@ author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
 updated: 2026-06-22
 description: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,30 +15,33 @@ tags: [bewerbung, cv, anschreiben, linkedin]
 language: en
 status: active
 dependencies: {'tools': ['cv_generator.py'], 'services': [], 'protocols': [], 'python': ['sqlite3', 'pathlib', 'argparse', 're']}
-provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `bewerbungsexperte`.
 
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
-# BEWERBUNGSEXPERTE v1.1
+# BEWERBUNGSEXPERTE v1.1 (English)
 
 > Dein strategischer Partner fuer den naechsten Karriereschritt.
 
 ## AKTIVIERUNG
 
 ```bash
-# Beispiel-CV ohne Datenbankzugriff
+# Beispiel-CV ohne Datenbankzugriff (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --dry-run
 
-# CV aus SQLite-Datenbank generieren
+# CV aus SQLite-Datenbank generieren (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad/zu/daten.db>
 
-# CV in Datei speichern
+# CV in Datei speichern (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --output lebenslauf.txt
 
-# Mit Ordner-Scan
+# Mit Ordner-Scan (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --career-path <ordner>
 ```
 

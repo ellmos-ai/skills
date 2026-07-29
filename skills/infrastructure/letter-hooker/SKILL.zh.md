@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [中文] 针对该技能的完整中文文档: letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.
-
+description: [中文] 智能体技能: letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,11 +18,14 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kon
 provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `letter-hooker`.
+> **中文** — 针对该技能的官方完整中文文档: `letter-hooker`.
 
 
 
-# Letter-Hooker (Prompt-Level Preflight & Governance Engine)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Letter-Hooker (Prompt-Level Preflight & Governance Engine) (English)
 
 The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
 
@@ -31,7 +33,7 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## 核心能力与关键特性
+## 核心能力与关键特性 & Features
 
 1. **Preflight Bootloaders & Document Traversal Rules**:
    - **Upward & Downward Search**: Enforces strict instructions for agents to inspect `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md`, and `README.md` at the current working directory level. If missing, traverse upwards until found; then inspect downwards.
@@ -59,10 +61,10 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## 工作流程与执行步骤 Integration
+## 工作流程与执行步骤 & Execution Steps
 
 ```bash
-# Execute the Letter-Hooker Maintenance Engine
+# Execute the Letter-Hooker Maintenance Engine (English)
 python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ```
 

@@ -1,29 +1,15 @@
 ---
-name: decision-briefing
-version: 1.0.1
-type: skill
-author: Lukas Geiger
-created: 2026-06-13
-updated: 2026-06-13
-description: [Русский] Полное руководство и документация на русском языке для навыка decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: utilities
-tags: [entscheidung, briefing, batch, decision-session, priorisierung, workflow]
 language: ru
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `decision-briefing`.
+> **Русский** — Официальная полная документация на русском языке для навыка `decision-briefing`.
 
 
 
-# Decision-Briefing — Work Through Many Decisions on One Topic
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Decision-Briefing — Work Through Many Decisions on One Topic (English)
 
 > A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
 
@@ -66,7 +52,7 @@ Defer:     "E03: later"
 
 ---
 
-## Рабочий процесс и шаги (4 Phases)
+## Рабочий процесс и этапы выполнения & Execution Steps
 
 ```
 Topic + decisions at hand
@@ -147,7 +133,7 @@ DECISION: <question>
 
 ---
 
-## Пример использования Briefing (fictional)
+## Пример и применение & Usage
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
 

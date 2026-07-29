@@ -1,51 +1,18 @@
 ---
-name: llm-text-hygiene
-version: 1.0.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-04
-updated: 2026-07-04
-description: >
-  Text-Skill zum Prüfen und Bereinigen von LLM-Spuren in fertigen Texten (Paper, README,
-  Bericht, Blogpost, Bewerbung): Chat-/Prompt-Reste und Regieanweisungen („Wie besprochen
-  lassen wir diesen Teil …"), stehengebliebene Platzhalter, LLM-Danksagungen, typische
-  LLM-Stilmuster und typografische Artefakte — plus Korrektheits-Check der AI-Disclosure.
-  Nutze diesen Skill bei „LLM-Muster/KI-Spuren entfernen", „klingt nach ChatGPT/KI",
-  „Chat-Reste im Text", „Paper vor Publikation auf KI-Rückstände prüfen", „AI-Disclosure
-  prüfen", oder als periodischen Check über einen Dokumentbestand. Immer über ALLE
-  Sprachfassungen eines Dokuments. Für Byte-/Encoding-Reparatur stattdessen encoding-fix.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-
-category: utilities
-tags: [text, llm, hygiene, cleanup, paper, publikation, disclosure, chat-residue, stil, qa]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: "github.com/ellmos-ai/skills"
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
 ---
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+
+
+> **English Translation** — Official English version of `llm-text-hygiene`.
+
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen
+# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Deutsch)
 
-## Zweck
+## Übersicht & Zweck
 
 KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
 erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
@@ -130,7 +97,7 @@ fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-
 Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
 `encoding-fix`-Territorium, nicht dieses Skills.
 
-## Beispiel
+## Beispiel & Anwendung
 
 ```text
 Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
@@ -162,7 +129,7 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-04)
 - Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"

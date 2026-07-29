@@ -1,49 +1,16 @@
 ---
-name: rotation-check
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-03
-updated: 2026-07-03
-description: >
-  Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge
-  (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check
-  durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze
-  diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll
-  („prüfe regelmäßig alle X auf Y"), wenn eine Automatisierung Doppelprüfungen vermeiden
-  muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn
-  eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über
-  eine Pipeline fair verteilt werden soll.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-
-category: dev
-tags: [automation, check, rotation, registry, pipeline, log, audit, wartung]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: "github.com/ellmos-ai/skills"
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
 ---
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
+
+> **English Translation** — Official English version of `rotation-check`.
+
+
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (Deutsch)
+
+## Übersicht & Zweck
 
 Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
 Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
@@ -151,7 +118,7 @@ ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
 - `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
   Optimizer renoviert).
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.1.0 (2026-07-03)
 - Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten

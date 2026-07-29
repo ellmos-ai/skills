@@ -1,31 +1,17 @@
 ---
-name: game-design
-version: 1.0.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-06-17
-updated: 2026-06-17
-description: [日本語] スキルに関する完全な日本語ドキュメント: game-design: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: game-dev
-tags: [game-design, roblox, rollen, workflow, gdd, konzept, monetarisierung, qa, gamedev]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `game-design`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `game-design`.
 
 
 
-# Game Design — Roles, Subtasks & Workflows
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Purpose
+
+# Game Design — Roles, Subtasks & Workflows (English)
+
+## 概要と目的 & Purpose
 
 Game development is teamwork made of clearly separated disciplines — even when a single person
 or one AI agent takes on several of them. This skill provides the **organizational model**:
@@ -54,7 +40,7 @@ A proven, compact role distribution. Full descriptions with all subtasks:
 **Basic rule:** Development and testing are **separate** roles — ideally separate people
 or agents. Whoever writes code does not test it objectively. The Game Critic may be tough.
 
-## 実行ワークフローと手順s (development chains)
+## ワークフローと実行手順 & Execution Steps
 
 Work flows as a chain from role to role. The most important patterns:
 

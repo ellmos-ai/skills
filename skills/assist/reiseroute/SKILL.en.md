@@ -2,51 +2,31 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: >
-  Route planning from A to B via OSRM (Open Source Routing Machine).
-  Supports car, bicycle and pedestrian. No API key required.
-tags:
-  - routing
-  - navigation
-  - osrm
-  - openstreetmap
-  - reise
+description: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+
+tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-languages:
-  - de
-  - en
-dependencies:
-  python:
-    - urllib.request
-    - urllib.parse
-    - urllib.error
-    - json
+languages: [de, en]
+dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json']}
 runtime: python3
 entry_point: reiseroute_core.py
-provenance:
-  origin: BACH hub routing-service
-  origin_path: system/hub/_services/routing/routing_service.py
-  origin_version: "1.0"
-  origin_repo: github.com/ellmos-ai/bach
-  origin_license: MIT
-  last_sync_from_origin: "2026-06-22"
-  last_sync_to_origin: null
-  local_changes_since_sync: >
-    urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig).
-    geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store.
-    Userneutral, headless, nur Stdlib.
+provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\n'}
+language: en
 ---
 
-# Travel Route
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Travel Route (English)
 
 **Route planning via OSRM (Open Source Routing Machine)**
 
 ---
 
-## Overview
+## Overview & Purpose
 
 Plans routes between two locations (names or coordinates) via the public
 OSRM service (`router.project-osrm.org`). Returns distance, travel time and
@@ -66,7 +46,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## Workflow
+## Workflow & Execution Steps
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.
@@ -79,22 +59,22 @@ mode of transport. No API key, no account required.
 ## CLI
 
 ```bash
-# Car route between two places
+# Car route between two places (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Bicycle
+# Bicycle (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# On foot
+# On foot (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Coordinates directly (lat,lon)
+# Coordinates directly (lat,lon) (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON output
+# JSON output (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Munich" "Vienna" --json
 
-# Help
+# Help (English)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 

@@ -5,121 +5,105 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: >
-  Einsetzen, wenn Prüfungsvorbereitung, Selbsttests, Klausur- oder
-  Prüfungssimulationen, schriftliche Hausarbeiten oder Fehlerdiagnosen
-  durchgeführt werden sollen. Bietet fünf Modi und ein Rubrik-basiertes
-  Bewertungssystem mit strikter Abgrenzung zu laufenden Prüfungen.
+description: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
-
 category: education
-tags: [pruefung, klausur, selbsttest, simulation, rubrik, bewertung, feedback, studium]
+tags: [exams, mock-exam, self-test, simulation, rubric, assessment, feedback, studies]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: null
-  origin_version: null
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Academic Study Test
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Übersicht
 
-Unterstütze die Prüfungsvorbereitung mit strukturierten Selbsttests, realistischen
-Simulationen und diagnostischem Feedback. Der Skill ist fach- und
-institutions-neutral und kann mit beliebigen Lernmaterialien eingesetzt werden.
+# Academic Study Test (Deutsch)
 
-## Konfiguration
+## Übersicht & Zweck
 
-| Platzhalter | Bedeutung |
+Support exam preparation with structured self-tests, realistic simulations,
+and diagnostic feedback. The skill is subject- and institution-neutral and
+can be used with any study materials.
+
+## Configuration
+
+| Placeholder | Meaning |
 |---|---|
-| `<MODUL_PREFIX>` | Kürzel für Modulbezeichnungen (z. B. MM, MF, MO) |
-| `<AUFGABENTYP>` | Art der Abgabe (z. B. Hausarbeit, Portfolio, Seminararbeit) |
-| `<LMS>` | Lernmanagementsystem (z. B. ILIAS, Canvas, Stud.IP) |
+| `<MODULE_PREFIX>` | Abbreviation used in module codes (e.g. MM, MF, MO) |
+| `<ASSIGNMENT_TYPE>` | Type of submission (e.g. essay, portfolio, seminar paper) |
+| `<LMS>` | Learning management system (e.g. ILIAS, Canvas, Stud.IP) |
 
-## Modi
+## Modes
 
-### Modus 1 — Schnelltest (5–10 Minuten)
+### Mode 1 — Quick Test (5–10 minutes)
 
-- 5 gezielte Fragen zum gewählten Thema oder Modul.
-- Sofortfeedback nach jeder Antwort.
-- Empfehlung: für tägliche Wiederholung und Lernstandskontrolle.
+- 5 targeted questions on the chosen topic or module.
+- Immediate feedback after each answer.
+- Recommended for daily revision and progress tracking.
 
-### Modus 2 — Klausurblock (60–90 Minuten)
+### Mode 2 — Exam Block (60–90 minutes)
 
-- Vollständige Klausursimulation nach dem Zeitrahmen und Format der Zielprüfung.
-- Alle Fragen werden zuerst beantwortet, dann gemeinsam ausgewertet.
-- Bewertung nach Rubrik (siehe unten), Gesamtpunktzahl und Stärken/Lücken-Profil.
+- Full exam simulation following the time frame and format of the target exam.
+- All questions are answered first, then evaluated together.
+- Assessment using the rubric below, total score, and strengths/gaps profile.
 
-### Modus 3 — Mündliche Prüfung
+### Mode 3 — Oral Examination
 
-- Simuliertes Prüfungsgespräch: offene Fragen, Nachfragen, Einwände.
-- Rückmeldung zu Inhalt, Argumentation und Kommunikationsstil.
-- Eignet sich für Bachelor-/Masterprüfungen, Referate und Kolloquien.
+- Simulated examination conversation: open questions, follow-up questions, objections.
+- Feedback on content, argumentation, and communication style.
+- Suitable for Bachelor's/Master's examinations, presentations, and colloquia.
 
-### Modus 4 — `<AUFGABENTYP>`-Training
+### Mode 4 — `<ASSIGNMENT_TYPE>` Training
 
-- Bearbeitung von Übungsaufgaben im Format der abzugebenden Aufgabe.
-- Qualitätsprüfung nach Inhalt, Struktur, Quellenbezug und formalen Vorgaben.
-- Rückmeldung mit konkreten Verbesserungsvorschlägen.
+- Work through practice tasks in the format of the assignment to be submitted.
+- Quality check on content, structure, source references, and formal requirements.
+- Feedback with concrete suggestions for improvement.
 
-### Modus 5 — Fehlerdiagnose
+### Mode 5 — Error Diagnosis
 
-- Analyse von Fehlern aus früheren Tests, Korrekturen oder Abgaben.
-- Muster identifizieren: Konzeptlücken, Flüchtigkeitsfehler, Missverständnisse.
-- Priorisierte Wiederholungsempfehlung.
+- Analysis of errors from previous tests, corrections, or submissions.
+- Identify patterns: conceptual gaps, careless mistakes, misunderstandings.
+- Prioritised revision recommendation.
 
-## Bewertungsrubrik
+## Assessment Rubric
 
-| Kriterium | 0 Punkte | 1 Punkt | 2 Punkte |
+| Criterion | 0 points | 1 point | 2 points |
 |---|---|---|---|
-| Inhaltliche Korrektheit | Fehlerhaft | Teilweise korrekt | Vollständig korrekt |
-| Vollständigkeit | Wesentliches fehlt | Lücken vorhanden | Vollständig |
-| Begründung | Keine Begründung | Angedeutet | Nachvollziehbar begründet |
-| Fachsprache | Nicht verwendet | Teilweise | Durchgängig korrekt |
-| Struktur | Unklar | Erkennbar | Klar und folgerichtig |
+| Factual correctness | Incorrect | Partially correct | Fully correct |
+| Completeness | Essential parts missing | Gaps present | Complete |
+| Justification | No justification | Hinted at | Clearly justified |
+| Technical language | Not used | Partial | Consistently correct |
+| Structure | Unclear | Recognisable | Clear and coherent |
 
-Maximalpunktzahl: 10 Punkte. Bewertungsskala: 9–10 = sehr gut, 7–8 = gut,
-5–6 = befriedigend, 3–4 = ausreichend, 0–2 = nicht bestanden.
+Maximum score: 10 points. Scale: 9–10 = excellent, 7–8 = good,
+5–6 = satisfactory, 3–4 = pass, 0–2 = fail.
 
-## Materialzugang
+## Material Access
 
-- Lokale Modulordner nach Schema `<MODUL_PREFIX><Nummer>` nutzen.
-- Bei Online-Materialien `<LMS>` oder Hochschulwebseite verwenden.
-- Optional: institutionelle Mails nach Aufgabenstellungen oder Korrekturen
-  durchsuchen, wenn Mail-Connector verfügbar ist.
+- Use local module folders following the pattern `<MODULE_PREFIX><Number>`.
+- For online materials use `<LMS>` or the institutional website.
+- Optional: search institutional emails for assignment briefs or corrections
+  if a mail connector is available.
 
-## Ethik und Grenzen
+## Ethics and Limits
 
-Dieser Skill dient ausschließlich der Vorbereitung und Übung.
+This skill is used exclusively for preparation and practice.
 
-**Absolutes Verbot:**
-- Keine Unterstützung während laufender Prüfungen, Klausuren oder
-  abzugebender `<AUFGABENTYP>`-Abgaben.
-- Kein Formulieren von Antworten, die ohne Kennzeichnung als eigene Leistung
-  eingereicht werden.
-- Keine Umgehung von Prüfungsordnungen oder Hochschulrichtlinien.
+**Absolute prohibitions:**
+- No support during live examinations, tests, or `<ASSIGNMENT_TYPE>` submissions
+  that are currently in progress.
+- No formulating of answers that would be submitted without attribution as the
+  student's own work.
+- No circumvention of examination regulations or institutional guidelines.
 
-Im Zweifel: Aufgabe als „zu prüfen" markieren, bis Klärung erfolgt ist.
+When in doubt: mark the task as "to be clarified" until clarification is obtained.
 
-## Hinweise
+## Notes
 
-- Für quellenbasiertes Lernen und Vertiefung den Skill `academic-study-learn`
-  nutzen.
-- Für Semesterplanung und Fristen den Skill `academic-study-control` nutzen.
+- For source-based learning and consolidation, use the skill `academic-study-learn`.
+- For semester planning and deadlines, use the skill `academic-study-control`.

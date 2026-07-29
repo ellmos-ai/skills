@@ -2,51 +2,31 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: >
-  Generates a structured research briefing for a topic or person
-  as a Markdown scaffold (stdout or file). No persistent store.
-tags:
-  - briefing
-  - dossier
-  - recherche
-  - markdown
-  - research
+description: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+
+tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-languages:
-  - de
-  - en
-dependencies:
-  python:
-    - datetime
-    - pathlib
-    - textwrap
+languages: [de, en]
+dependencies: {'python': ['datetime', 'pathlib', 'textwrap']}
 runtime: python3
 entry_point: dossier_briefing_core.py
-provenance:
-  origin: BACH persoenlicher-assistent
-  origin_path: system/agents/persoenlicher-assistent/tools/dossier_generator.py
-  origin_version: "1.0.0"
-  origin_repo: github.com/ellmos-ai/bach
-  origin_license: MIT
-  last_sync_from_origin: "2026-06-22"
-  last_sync_to_origin: null
-  local_changes_since_sync: >
-    Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier,
-    DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden).
-    Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt).
-    Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.
+provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\n'}
+language: en
 ---
 
-# Dossier-Briefing
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Dossier-Briefing (English)
 
 **Structured research briefing for a topic or person**
 
 ---
 
-## Overview
+## Overview & Purpose
 
 Generates an empty, structured Markdown briefing for any subject
 (person, company, event, concept). The scaffold serves as a starting point for
@@ -65,7 +45,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## Workflow
+## Workflow & Execution Steps
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).
@@ -79,22 +59,22 @@ subsequent research with `research-agent` or `web-reading`.
 ## CLI
 
 ```bash
-# Briefing to stdout
+# Briefing to stdout (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# Write to file
+# Write to file (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Topic briefing
+# Topic briefing (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantum computing" --typ topic
 
-# Event
+# Event (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Without type (generic)
+# Without type (generic) (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "My topic"
 
-# Help
+# Help (English)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 

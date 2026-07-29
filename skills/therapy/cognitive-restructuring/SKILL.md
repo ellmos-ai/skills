@@ -1,222 +1,215 @@
 ---
-name: kognitive-umstrukturierung
+name: cognitive-restructuring
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken, Denkfehler erkennen und Gedankenprotokoll fuehren.
+description: Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [kvt, cbt, kognitive-umstrukturierung, denkfehler, gedankenprotokoll, abc-modell]
+tags: [cbt, cognitive-restructuring, cognitive-distortions, thought-record, abc-model]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/kognitive_umstrukturierung.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Kognitive Umstrukturierung
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Verhaltenstherapeutische Kerntechnik: ABC-Schema, dysfunktionale Gedanken erkennen und veraendern
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Cognitive Restructuring (Deutsch)
+
+> Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Kognitive Umstrukturierung ist eine Kerntechnik der kognitiven Verhaltenstherapie (KVT).
-Sie hilft dabei, automatische negative Gedanken zu erkennen, zu hinterfragen und durch
-hilfreichere Alternativen zu ersetzen.
+Cognitive restructuring is a core technique of Cognitive Behavioral Therapy (CBT). It helps identify automatic negative thoughts, challenge them, and replace them with more helpful alternatives.
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. ABC-Modell (Ellis)
+## 1. ABC Model (Ellis)
 
-Das ABC-Modell erklaert wie Ereignisse, Gedanken und Gefuehle zusammenhaengen.
+The ABC model explains how events, thoughts, and feelings are connected.
 
 ```
-A (Activating Event)   ->  B (Beliefs / Gedanken)  ->  C (Consequences / Gefuehle/Verhalten)
-Ausloser                   Bewertung / Ueberzeugung     Emotionale Folge
+A (Activating Event)   ->  B (Beliefs / Thoughts)  ->  C (Consequences / Feelings/Behavior)
+Trigger                     Evaluation / Belief           Emotional consequence
 ```
 
-**Wichtig:** Nicht das Ereignis (A) erzeugt die Emotion (C), sondern die Bewertung (B)!
+**Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
 
-**Beispiel:**
+**Example:**
 ```
-A: Chef kritisiert einen Bericht im Meeting
-B: "Ich bin inkompetent, alle denken das jetzt"
-C: Scham, Rueckzug, Vermeidung zukuenftiger Beitraege
+A: Boss criticizes a report in a meeting
+B: "I am incompetent, everyone thinks so now"
+C: Shame, withdrawal, avoiding future contributions
 ```
 
-**Ziel:** B veraendern, um C zu beeinflussen.
+**Goal:** Change B to influence C.
 
 ---
 
-## 2. Automatische Negative Gedanken (ANGs) erkennen
+## 2. Identifying Automatic Negative Thoughts (ANTs)
 
-**Was sind ANGs?**
-- Schnelle, automatische Bewertungen in stressigen Situationen
-- Oft als Fakten wahrgenommen, obwohl sie Interpretationen sind
-- Tendieren zu Uebertreibung, Verallgemeinerung, Katastrophisierung
+**What are ANTs?**
+- Quick, automatic evaluations in stressful situations
+- Often perceived as facts, although they are interpretations
+- Tend toward exaggeration, generalization, catastrophizing
 
-**Typische Erkennungsmerkmale:**
-- Absolutes Denken: "immer", "nie", "alle", "niemand"
-- Katastrophisierung: "Das wird furchtbar enden"
-- Gedankenlesen: "Er denkt bestimmt, dass..."
-- Uebergeneralisierung: "Das klappt bei mir nie"
+**Typical recognition features:**
+- Absolute thinking: "always," "never," "everyone," "nobody"
+- Catastrophizing: "This will end terribly"
+- Mind reading: "They must think that..."
+- Overgeneralization: "This never works for me"
 
-**Erkennungs-Fragen:**
-- "Was ist dir durch den Kopf gegangen, als das passiert ist?"
-- "Wenn du an die Situation denkst, welche Worte kommen?"
-- "Was befuerchtest du koennte passieren?"
-
----
-
-## 3. Kognitive Verzerrungen (Denkfehler)
-
-| Denkfehler | Beschreibung | Beispiel |
-|------------|--------------|---------|
-| Alles-oder-nichts | Schwarz-Weiss-Denken | "Wenn ich nicht perfekt bin, bin ich ein Versager" |
-| Uebergeneralisierung | Ein Fall = Allgemeines Muster | "Das geht bei mir immer schief" |
-| Gedankenfilter | Nur Negatives wahrnehmen | Focussieren auf einzigen Kritikpunkt im Feedback |
-| Gedankenlesen | Andere wissen was andere denken | "Er hasst mich sicher" |
-| Katastrophisieren | Schlimmsten Fall annehmen | "Das wird eine Katastrophe werden" |
-| Emotionale Begruendung | Gefuehl = Realitaet | "Ich fuehle mich dumm, also bin ich dumm" |
-| Sollte/Muss-Denken | Starre Regeln | "Ich muesste das koennen" |
-| Personalisierung | Alles auf sich beziehen | "Der schlechte Auftrag war meine Schuld" |
+**Recognition questions:**
+- "What went through your mind when that happened?"
+- "When you think about the situation, what words come up?"
+- "What do you fear might happen?"
 
 ---
 
-## 4. Gedanken hinterfragen (Sokratisches Fragen)
+## 3. Cognitive Distortions (Thinking Errors)
 
-**Ziel:** Gedanken nicht direkt widerlegen, sondern Pruefung anregen.
-
-**Fragen-Set:**
-
-1. **Beweise pruefen:**
-   - "Welche Beweise gibt es dafuer?"
-   - "Welche Beweise sprechen dagegen?"
-
-2. **Alternative Erklaerungen:**
-   - "Gibt es andere Erklaerungen dafuer?"
-   - "Wie wuerde jemand anderes diese Situation sehen?"
-
-3. **Konsequenzen einschaetzen:**
-   - "Was ist das Schlimmste, was passieren koennte? Wie wahrscheinlich ist das?"
-   - "Was ist das Beste, was passieren koennte?"
-   - "Was ist das Realistischste?"
-
-4. **Nuetzlichkeit pruefen:**
-   - "Hilft mir dieser Gedanke dabei, meine Ziele zu erreichen?"
-   - "Was wuerde ich einem guten Freund sagen, der so denkt?"
+| Distortion | Description | Example |
+|------------|-------------|---------|
+| All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
+| Overgeneralization | One case = general pattern | "This always goes wrong for me" |
+| Mental filter | Only perceiving negatives | Focusing on the single criticism in feedback |
+| Mind reading | Believing to know what others think | "They surely hate me" |
+| Catastrophizing | Assuming the worst case | "This will be a catastrophe" |
+| Emotional reasoning | Feeling = reality | "I feel stupid, so I am stupid" |
+| Should/must thinking | Rigid rules | "I should be able to do this" |
+| Personalization | Relating everything to oneself | "The bad project was my fault" |
 
 ---
 
-## 5. Kognitive Umstrukturierung Schritt-fuer-Schritt
+## 4. Challenging Thoughts (Socratic Questioning)
 
-### Protokoll-Format (Gedankenprotokoll)
+**Goal:** Not directly refute thoughts, but encourage examination.
+
+**Question set:**
+
+1. **Examine evidence:**
+   - "What evidence is there for this?"
+   - "What evidence speaks against it?"
+
+2. **Alternative explanations:**
+   - "Are there other explanations for this?"
+   - "How would someone else view this situation?"
+
+3. **Assess consequences:**
+   - "What is the worst that could happen? How likely is that?"
+   - "What is the best that could happen?"
+   - "What is the most realistic outcome?"
+
+4. **Check usefulness:**
+   - "Does this thought help me achieve my goals?"
+   - "What would I say to a good friend who thinks this way?"
+
+---
+
+## 5. Cognitive Restructuring Step by Step
+
+### Record Format (Thought Record)
 
 ```
 SITUATION
-Was ist passiert? (Wann? Wo? Wer war dabei?)
-[Freitext]
+What happened? (When? Where? Who was there?)
+[Free text]
 
-GEDANKE
-Was bin ich dadurch durch den Kopf gegangen?
-Automatischer Gedanke: [...]
-Glaube ich daran? (0-100%): [...]%
+THOUGHT
+What went through my mind?
+Automatic thought: [...]
+How much do I believe it? (0-100%): [...]%
 
 EMOTION
-Welche Emotionen hatte ich?
-Emotion: [...]    Intensitaet (0-100%): [...]%
+What emotions did I have?
+Emotion: [...]    Intensity (0-100%): [...]%
 
-DENKFEHLER
-Welche kognitiven Verzerrungen stecken darin?
-[Liste aus Tabelle oben]
+COGNITIVE DISTORTION
+Which cognitive distortions are involved?
+[List from table above]
 
-PRUEFEN
-Beweise dafuer: [...]
-Beweise dagegen: [...]
-Alternative Sichtweise: [...]
+EXAMINE
+Evidence for: [...]
+Evidence against: [...]
+Alternative perspective: [...]
 
-ALTERNATIVER GEDANKE
-Ausgewogener, realistischerer Gedanke:
+ALTERNATIVE THOUGHT
+More balanced, realistic thought:
 [...]
-Glaube ich daran? (0-100%): [...]%
+How much do I believe it? (0-100%): [...]%
 
-ERGEBNIS
-Emotion danach: [...]   Intensitaet: [...]%
-Was nehme ich mit: [...]
+RESULT
+Emotion afterward: [...]   Intensity: [...]%
+Takeaway: [...]
 ```
 
 ---
 
-## 6. Verhaltensaktivierung
+## 6. Behavioral Activation
 
-Kognitive Umstrukturierung und Verhaltensaktivierung bilden zusammen die beiden Saeulen der KVT. Positive Aktivitaeten unterstuetzen Gedanken-Veraenderung: "Handeln erzeugt Motivation."
+**Supplement to cognitive work:** Changing behavior supports thought change.
 
-Ausfuehrliche Methodik (Stimmungs-Tagebuch, Wochenplan, werte-basierte Aktivitaeten) siehe [behavioral-activation](../behavioral-activation/SKILL.md).
+**Principle:** Positive activities -> Better mood -> More helpful thoughts
 
----
+**Steps:**
+1. Create list of pleasant/meaningful activities
+2. Plan activities (specifically: when, how, where)
+3. Track implementation
+4. Rate mood before/after
 
-## Ethik und Grenzen
-
-**Ein KI-Assistent darf:**
-- Kognitive Verzerrungen und das ABC-Modell erklaeren
-- Sokratische Fragen stellen
-- Gedankenprotokolle anleiten
-- Psychoedukativ ueber KVT-Techniken informieren
-
-**Ein KI-Assistent darf NICHT:**
-- Professionelle kognitive Verhaltenstherapie ersetzen
-- Diagnosen stellen oder Behandlungsempfehlungen geben
-- Krisenintervention durchfuehren
-- EMDR, Prolonged Exposure (PE) oder Narrative Exposure Therapy (NET) anwenden
-
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+**Example activities:**
+- Walk (nature, fresh air)
+- Contact with important people
+- Creative activities
+- Physical exercise
+- Things that used to bring joy
 
 ---
 
-## Quellenangaben
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Explain cognitive distortions and the ABC model
+- Ask Socratic questions
+- Guide thought records
+- Provide psychoeducation about CBT techniques
+
+**An AI assistant must NOT:**
+- Replace professional cognitive behavioral therapy
+- Make diagnoses or treatment recommendations
+- Conduct crisis intervention
+- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+## References
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
 
 ---
 
-## Siehe auch
-
-- [behavioral-activation](../behavioral-activation/SKILL.md) — Verhaltenssaeule der KVT (Stimmungs-Tagebuch, Wochenplan)
-- [act-techniques](../act-techniques/SKILL.md) — Alternativer Ansatz: Defusion statt Umstrukturierung
-- [exposure-guidance](../exposure-guidance/SKILL.md) — Konfrontationstherapie (oft kombiniert mit KVT)
-
----
-
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: Beck (1979), Ellis (1962) — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: Beck (1979), Ellis (1962) — Not professional therapy*

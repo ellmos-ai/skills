@@ -5,35 +5,23 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: >
-  Points to the standalone module law-checker ("Legal Department"): source-grounded
-  AI first-look legal assessments for German law with a statute registry and a
-  statute-embodiment agent. Use this skill when a situation, contract, official
-  notice, or legal question under German law should be checked with exact
-  citations (article/section, paragraph, sentence) -- with a clear boundary:
-  AI-assisted first orientation, not a substitute for a lawyer.
+description: Points to the standalone module law-checker ("Legal Department"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
-provenance:
-  origin: "external"
-  origin_repo: "https://github.com/ellmos-ai/law-checker"
-  origin_path: "SKILL.md, config.json, agents/gesetzbuch.md, references/"
-  origin_version: null
-  last_sync_from_origin: "2026-07-23"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
-
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/law-checker', 'origin_path': 'SKILL.md, config.json, agents/gesetzbuch.md, references/', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 category: utilities
 tags: [legal, law, germany, wrapper, pointer-skill]
 language: en
 status: active
 ---
 
-# law-checker (Legal Department) -- Pointer Skill
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# law-checker (Legal Department) -- Pointer Skill (English)
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)

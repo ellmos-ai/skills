@@ -5,38 +5,24 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: >
-  Multi-model orchestration and model-switching strategy. Score-based model selection,
-  cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers,
-  permission matrix, and cost-efficiency optimization.
+description: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: dev
 tags: [model-switching, orchestration, multi-model, cost-optimization, routing, cross-agent, advisor]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/workflows/ing-strategie.md"
-  origin_version: "2.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-15"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Model-Switching Strategy
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Model-Switching Strategy (English)
 
 > Multi-model orchestration: score-based model selection, cross-agent delegation, advisor pairing, escalation triggers, and cost-efficiency optimization
 

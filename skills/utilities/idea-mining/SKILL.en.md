@@ -1,32 +1,18 @@
 ---
-name: idea-mining
-version: 1.1.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-07-03
-updated: 2026-07-03
-description: Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen, hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik, Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X" gebraucht werden, bei „wir drehen uns im Kreis", oder für periodische Innovations-Läufe über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen brainstorm (SCAMPER, Six Hats etc.).
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: utilities
-tags: [ideen, kreativität, forschung, beweis, analogie, allegorie, recherche, innovation]
 language: en
-status: active
-dependencies: {'tools': [], 'services': ['websearch'], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
 
 > **English Translation** — Official English version of `idea-mining`.
 
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen
+# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 
-## Zweck
+## Overview & Purpose
 
 Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
 Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
@@ -115,7 +101,7 @@ Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): R
 verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
 Versuchs-Doku sind hier das Gedächtnis.
 
-## Beispiel
+## Example & Usage
 
 ```text
 Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.

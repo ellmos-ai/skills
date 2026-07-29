@@ -2,16 +2,19 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `headless`.
+> **中文** — 针对该技能的官方完整中文文档: `headless`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `headless`.
 
 
-# Headless
+# Headless (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
 autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
@@ -112,7 +115,7 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-28)
 - Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.

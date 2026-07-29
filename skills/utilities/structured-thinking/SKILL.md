@@ -5,205 +5,193 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: >
-  Meta-Skill: Strukturiertes Denken als 3-Phasen-Workflow. Vereint Analyse (think),
-  Ideenfindung (brainstorm) und Entscheidungsfindung (decide) in einem durchgaengigen Prozess.
+description: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
 category: utilities
 tags: [denken, analyse, kreativitaet, entscheidung, workflow, meta-skill]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  merged_from:
-    - "utilities/think (v1.0.0)"
-    - "utilities/brainstorm (v1.0.0)"
-    - "utilities/decide (v1.0.0)"
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-# Structured Thinking — Analysieren, Ideenfinden, Entscheiden
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Meta-Workflow fuer strukturiertes Denken: Von der Problemanalyse ueber kreative Loesungen bis zur fundierten Entscheidung
+
+# Structured Thinking — Analyze, Ideate, Decide (Deutsch)
+
+> Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
 
 ---
 
-## Workflow-Ueberblick
+## Workflow & Vorgehen
 
 ```
-Problem/Frage
+Problem/Question
      |
      v
-Phase 1: ANALYSIEREN (think)
+Phase 1: ANALYZE (think)
   Divide & Conquer, Root Cause, Constraint Relaxation
      |
      v
-Phase 2: IDEENFINDEN (brainstorm)
+Phase 2: IDEATE (brainstorm)
   SCAMPER, Six Hats, Reverse Brainstorming, Rapid Ideation
      |
      v
-Phase 3: ENTSCHEIDEN (decide)
+Phase 3: DECIDE (decide)
   Pro/Con, Weighted Scoring, Scenario Analysis, Eisenhower
      |
      v
-Ergebnis + Begruendung
+Result + Rationale
 ```
 
 ---
 
-## Phase 1: Analysieren
+## Phase 1: Analyze
 
-Ziel: Problem verstehen, Ursachen identifizieren, Struktur erkennen.
+Goal: Understand the problem, identify causes, recognize structure.
 
-### Ansaetze
+### Approaches
 
-| Methode | Wann | Ablauf |
-|---------|------|--------|
-| **Divide & Conquer** | Komplexes Problem | Problem → Teilprobleme → Einzeln loesen → Kombinieren |
-| **Root Cause (5x Warum)** | Symptom sichtbar, Ursache unklar | Symptom → Warum? → Warum? → ... → Ursache → Loesung |
-| **Constraint Relaxation** | Problem erscheint unloesbar | Constraints lockern → Loesen → Constraints wieder anziehen |
-| **Analogie-Suche** | Neuartiges Problem | Aehnliches bekanntes Problem finden → Loesung adaptieren |
+| Method | When | Procedure |
+|--------|------|-----------|
+| **Divide & Conquer** | Complex problem | Problem → sub-problems → solve individually → combine |
+| **Root Cause (5x Why)** | Symptom visible, cause unclear | Symptom → Why? → Why? → ... → cause → solution |
+| **Constraint Relaxation** | Problem appears unsolvable | Relax constraints → solve → re-tighten constraints |
+| **Analogy Search** | Novel problem | Find a similar known problem → adapt its solution |
 
-### Analyse-Frameworks
+### Analysis Frameworks
 
-| Framework | Anwendung |
-|-----------|-----------|
-| **SWOT** | Staerken / Schwaechen / Chancen / Risiken |
-| **Pareto** | 80/20 — Was bringt den groessten Hebel? |
-| **Fishbone** | Systematische Ursachenanalyse (Ishikawa) |
+| Framework | Application |
+|-----------|-------------|
+| **SWOT** | Strengths / Weaknesses / Opportunities / Threats |
+| **Pareto** | 80/20 — What provides the biggest leverage? |
+| **Fishbone** | Systematic cause analysis (Ishikawa) |
 
-### Heuristiken bei Unsicherheit
+### Heuristics under Uncertainty
 
-1. Was ist das Worst-Case-Szenario?
-2. Ist es reversibel?
-3. Was kostet Nicht-Handeln?
+1. What is the worst-case scenario?
+2. Is it reversible?
+3. What is the cost of not acting?
 
-### Heuristiken bei Komplexitaet
+### Heuristics under Complexity
 
-1. Was ist der einfachste erste Schritt?
-2. Was wuerde ein Experte tun?
-3. Was waere die 80%-Loesung?
-
----
-
-## Phase 2: Ideenfinden
-
-Ziel: Moeglichst viele Loesungsansaetze generieren. Quantitaet vor Qualitaet. KEINE Kritik waehrend dieser Phase.
-
-### Methoden
-
-**SCAMPER** — Bestehende Loesungen systematisch verbessern:
-- **S**ubstitute: Was ersetzen? | **C**ombine: Was kombinieren? | **A**dapt: Was anpassen?
-- **M**odify: Was veraendern? | **P**ut to other use: Wofuer sonst? | **E**liminate: Was weglassen?
-- **R**everse: Was umkehren?
-
-**Six Thinking Hats** (de Bono) — 6 Perspektiven nacheinander:
-1. Blau: Prozess-Kontrolle ("Was ist die Frage?")
-2. Weiss: Fakten ("Was wissen wir?")
-3. Rot: Emotion ("Was fuehlt sich richtig an?")
-4. Schwarz: Kritik ("Was koennte schiefgehen?")
-5. Gelb: Optimismus ("Was sind die Chancen?")
-6. Gruen: Kreativitaet ("Welche neuen Ideen gibt es?")
-
-**Reverse Brainstorming** — Problem umkehren:
-1. "Wie machen wir es SCHLIMMER?"
-2. Schlechte Ideen sammeln
-3. Umkehren = Gute Ideen
-
-**Rapid Ideation** — 50+ Ideen in 20 Min:
-- Runde 1 (5 Min): Offene Ideation
-- Runde 2 (5 Min): Variationen
-- Runde 3 (5 Min): Kombinationen
-- Runde 4 (5 Min): Extreme Ideen
-
-### Nach der Ideation
-
-1. Clustering: Aehnliche Ideen gruppieren
-2. Feasibility/Impact Matrix: Machbarkeit vs. Wirkung bewerten
-3. Top 5-10 Auswahl fuer Phase 3
+1. What is the simplest first step?
+2. What would an expert do?
+3. What would the 80% solution be?
 
 ---
 
-## Phase 3: Entscheiden
+## Phase 2: Ideate
 
-Ziel: Beste Option auswaehlen mit transparenter Begruendung.
+Goal: Generate as many solution approaches as possible. Quantity over quality. NO criticism during this phase.
 
-### Framework-Auswahl
+### Methods
+
+**SCAMPER** — Systematically improve existing solutions:
+- **S**ubstitute: What to replace? | **C**ombine: What to combine? | **A**dapt: What to adapt?
+- **M**odify: What to change? | **P**ut to other use: What else could it serve? | **E**liminate: What to drop?
+- **R**everse: What to invert?
+
+**Six Thinking Hats** (de Bono) — 6 perspectives in sequence:
+1. Blue: Process control ("What is the question?")
+2. White: Facts ("What do we know?")
+3. Red: Emotion ("What feels right?")
+4. Black: Criticism ("What could go wrong?")
+5. Yellow: Optimism ("What are the opportunities?")
+6. Green: Creativity ("What new ideas are there?")
+
+**Reverse Brainstorming** — Invert the problem:
+1. "How do we make it WORSE?"
+2. Collect bad ideas
+3. Invert = good ideas
+
+**Rapid Ideation** — 50+ ideas in 20 minutes:
+- Round 1 (5 min): Open ideation
+- Round 2 (5 min): Variations
+- Round 3 (5 min): Combinations
+- Round 4 (5 min): Extreme ideas
+
+### After Ideation
+
+1. Clustering: Group similar ideas
+2. Feasibility/Impact matrix: Rate feasibility vs. impact
+3. Select top 5-10 for Phase 3
+
+---
+
+## Phase 3: Decide
+
+Goal: Select the best option with a transparent rationale.
+
+### Framework Selection
 
 | Situation | Framework |
 |-----------|-----------|
-| 2 Optionen, schnelle Entscheidung | **Pro/Con Matrix** |
-| 3+ Optionen, mehrere Kriterien | **Weighted Scoring** |
-| Sequenzielle Wenn-Dann-Entscheidung | **Decision Tree** |
-| Hohe Unsicherheit | **Scenario Analysis** |
-| Aufgaben priorisieren | **Eisenhower Matrix** |
+| 2 options, quick decision | **Pro/Con Matrix** |
+| 3+ options, multiple criteria | **Weighted Scoring** |
+| Sequential if-then decision | **Decision Tree** |
+| High uncertainty | **Scenario Analysis** |
+| Prioritizing tasks | **Eisenhower Matrix** |
 
-### Weighted Scoring (Kernmethode)
+### Weighted Scoring (core method)
 
-1. Kriterien sammeln (3-7, spezifisch und messbar)
-2. Gewichte festlegen (Summe = 100%, wichtigstes >= 25%)
-3. Optionen bewerten (1-10 Skala)
-4. Scores berechnen (Bewertung x Gewicht)
-5. Vergleichen und empfehlen
+1. Collect criteria (3-7, specific and measurable)
+2. Set weights (sum = 100%, most important >= 25%)
+3. Rate options (1-10 scale)
+4. Compute scores (rating x weight)
+5. Compare and recommend
 
 ### Scenario Analysis
 
 ```
-Best Case (X%):      Ergebnis → Erwartungswert
-Realistic Case (X%): Ergebnis → Erwartungswert
-Worst Case (X%):     Ergebnis → Erwartungswert
-Gesamt-Erwartungswert: [Summe]
+Best Case (X%):      Outcome → expected value
+Realistic Case (X%): Outcome → expected value
+Worst Case (X%):     Outcome → expected value
+Total expected value: [sum]
 ```
 
 ### Eisenhower Matrix
 
 ```
-              DRINGEND        NICHT DRINGEND
-WICHTIG       1. TUN          2. PLANEN
-NICHT WICHTIG 3. DELEGIEREN   4. ELIMINIEREN
+              URGENT          NOT URGENT
+IMPORTANT     1. DO           2. PLAN
+NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ```
 
-### Quality Checklist vor finaler Empfehlung
+### Quality Checklist before the Final Recommendation
 
-- [ ] Alle relevanten Kriterien identifiziert?
-- [ ] User-Werte beruecksichtigt?
-- [ ] Langfristige Auswirkungen bedacht?
-- [ ] Risiken identifiziert und bewertet?
-- [ ] Bias-Check durchgefuehrt?
-- [ ] Reversibilitaet geprueft?
-
----
-
-## Kontextsensitive Auswahl
-
-| Situation | Empfohlene Phase(n) |
-|-----------|---------------------|
-| "Ich habe ein Problem" | Phase 1 (Analyse) → ggf. Phase 2+3 |
-| "Ich brauche Ideen" | Phase 2 (Ideenfindung) |
-| "Ich muss mich entscheiden" | Phase 3 (Entscheidung) |
-| "Ich bin festgefahren" | Phase 2 (Reverse Brainstorming) |
-| "Was soll ich priorisieren?" | Phase 3 (Eisenhower) |
-| "Komplexes Problem verstehen" | Phase 1 (Divide & Conquer + SWOT) |
+- [ ] All relevant criteria identified?
+- [ ] User values taken into account?
+- [ ] Long-term effects considered?
+- [ ] Risks identified and assessed?
+- [ ] Bias check performed?
+- [ ] Reversibility checked?
 
 ---
 
-## Changelog
+## Context-Sensitive Selection
+
+| Situation | Recommended Phase(s) |
+|-----------|----------------------|
+| "I have a problem" | Phase 1 (analysis) → possibly Phase 2+3 |
+| "I need ideas" | Phase 2 (ideation) |
+| "I have to decide" | Phase 3 (decision) |
+| "I am stuck" | Phase 2 (reverse brainstorming) |
+| "What should I prioritize?" | Phase 3 (Eisenhower) |
+| "Understand a complex problem" | Phase 1 (Divide & Conquer + SWOT) |
+
+---
+
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-05-19)
-- Erstellt als Meta-Skill aus think, brainstorm und decide
+- Created as a meta-skill from think, brainstorm, and decide
 
 ---
 
-*Meta-Skill | Detailreferenz: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | Detailed reference: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*

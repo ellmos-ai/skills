@@ -5,8 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
-
+description: [日本語] エージェントスキル: document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [chunking, rag, tokens, nlp, text-processing, embedding]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `document-chunker`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `document-chunker`.
 
 
 
-# Document Chunker
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Document Chunker (English)
 
 Splits documents into overlapping token chunks. Optimized for RAG pipelines
 and LLM context windows. Zero dependencies — Python stdlib + re only.

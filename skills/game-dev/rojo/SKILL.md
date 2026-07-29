@@ -5,55 +5,36 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: >
-  Bedienung von Rojo — dem Filesystem-zu-Roblox-Studio-Sync-Tool für professionelle
-  Roblox-Entwicklung in VS Code / Claude Code statt im Studio-Editor. Nutze diesen Skill
-  immer, wenn es um Rojo geht: `rojo serve`/`rojo build`, `default.project.json` schreiben
-  oder debuggen, rokit/rokit.toml und Tool-Versionen (Rojo, Lune, Wally), das verschachtelte
-  vs. flache Pfad-Mapping (ReplicatedStorage.Projekt.shared), Connect-/Port-/Sync-Probleme,
-  oder wenn ein Roblox-Projekt-Skelett angelegt werden soll. Auch auslösen bei "rojo connect
-  geht nicht", "scripts landen falsch in Studio", "wie mappe ich src/ nach Studio", "Port 34872
-  belegt", "ModuleScript vs Script in Rojo".
+description: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
 category: game-dev
 tags: [rojo, roblox, luau, rokit, wally, lune, sync, build, gamedev]
 language: de
 status: active
-
-dependencies:
-  tools: [rojo, rokit]
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "~/.claude/skills/rojo/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rojo/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Rojo — Filesystem → Roblox Studio Sync
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
 
-Rojo verbindet ein normales Dateisystem-Projekt (`.luau`-Dateien in `src/`, versioniert mit Git)
-mit Roblox Studio. Du schreibst Code im Editor deiner Wahl (VS Code, Claude Code), Rojo
-synchronisiert ihn live in eine laufende Studio-Instanz. So wird Roblox-Code versionierbar,
-diffbar und mit echten Tools bearbeitbar — statt im eingebauten Studio-Skripteditor zu leben.
+# Rojo — Filesystem → Roblox Studio Sync (Deutsch)
 
-Nutze diesen Skill für alles rund um Rojo-Setup, das `default.project.json`-Mapping, die
-Toolchain (rokit/Wally/Lune) und typische Sync-Probleme.
+## Übersicht & Zweck
 
-## Mentales Modell
+Rojo connects a normal filesystem project (`.luau` files in `src/`, versioned with Git)
+to Roblox Studio. You write code in the editor of your choice (VS Code, Claude Code), and Rojo
+syncs it live into a running Studio instance. This makes Roblox code versionable,
+diffable and editable with real tools — instead of living in the built-in Studio script editor.
+
+Use this skill for everything around Rojo setup, the `default.project.json` mapping, the
+toolchain (rokit/Wally/Lune) and typical sync problems.
+
+## Mental Model
 
 ```
 VS Code / Claude Code          rojo serve            Roblox Studio
@@ -63,28 +44,28 @@ VS Code / Claude Code          rojo serve            Roblox Studio
    src/gui/*.luau                                       StarterGui.*
 ```
 
-**Kernregel:** Das Dateisystem ist die Quelle der Wahrheit. Rojo überschreibt bei jedem
-Connect die gemappten Studio-Bereiche mit dem Filesystem-Inhalt. Bearbeite Code daher **nie**
-in Studio (geht beim nächsten Sync verloren), sondern nur im Editor. Der `Workspace`
-(3D-Szene, Terrain) wird von Rojo **nicht** gemappt und bleibt erhalten — siehe Skill
-`/rbx-studio` für den Szene-vs-Code-Workflow.
+**Core rule:** The filesystem is the source of truth. On every connect, Rojo overwrites
+the mapped Studio areas with the filesystem content. Therefore, **never** edit code
+in Studio (it is lost on the next sync), only in the editor. The `Workspace`
+(3D scene, terrain) is **not** mapped by Rojo and is preserved — see skill
+`/rbx-studio` for the scene-vs-code workflow.
 
-## Dateiendungen → Roblox-Typ (Rojo-Konvention)
+## File Extensions → Roblox Type (Rojo Convention)
 
-Rojo leitet den Instanztyp aus der Endung ab. Das ist die häufigste Fehlerquelle:
+Rojo derives the instance type from the extension. This is the most common source of errors:
 
-| Datei              | Roblox-Typ    | `require()`-bar | Rolle                     |
+| File               | Roblox Type   | `require()`-able | Role                      |
 | ------------------ | ------------- | --------------- | ------------------------- |
-| `Foo.luau`         | ModuleScript  | **ja**          | Logik-Modul, Definitionen |
-| `Foo.server.luau`  | Script        | nein            | Server-Entry-Point        |
-| `Foo.client.luau`  | LocalScript   | nein            | Client-Entry-Point        |
-| `init.luau`        | wird zum Ordner-Knoten selbst | ja | macht Ordner zum ModuleScript |
+| `Foo.luau`         | ModuleScript  | **yes**         | Logic module, definitions |
+| `Foo.server.luau`  | Script        | no              | Server entry point        |
+| `Foo.client.luau`  | LocalScript   | no              | Client entry point        |
+| `init.luau`        | becomes the folder node itself | yes | makes the folder a ModuleScript |
 
-> Faustregel: **Nur Entry-Points** sind `.server.luau`/`.client.luau`. Alles, was per
-> `require()` geladen wird, **muss** ein `.luau`-ModuleScript sein. `require()` auf ein
-> Script/LocalScript wirft "Attempted to call require with invalid argument(s)".
+> Rule of thumb: **Only entry points** are `.server.luau`/`.client.luau`. Everything loaded via
+> `require()` **must** be a `.luau` ModuleScript. Calling `require()` on a
+> Script/LocalScript throws "Attempted to call require with invalid argument(s)".
 
-## CLI-Befehle
+## CLI Commands
 
 ```bash
 rojo serve default.project.json     # Live-Sync-Server starten (Standard-Port 34872)
@@ -95,49 +76,49 @@ rojo plugin install                 # Rojo-Studio-Plugin installieren (einmalig)
 rojo --version                      # installierte Version prüfen
 ```
 
-Nach `rojo serve`: in Studio das Rojo-Plugin öffnen → **Connect** (localhost:34872).
-`rojo build` braucht kein laufendes Studio — ideal für CI, Smoke-Tests und Releases.
+After `rojo serve`: in Studio, open the Rojo plugin → **Connect** (localhost:34872).
+`rojo build` does not need a running Studio — ideal for CI, smoke tests and releases.
 
-## `default.project.json` — das Mapping
+## `default.project.json` — the Mapping
 
-Diese Datei mappt Dateisystem-Pfade auf die Roblox-Datamodel-Hierarchie. Schlüssel:
+This file maps filesystem paths onto the Roblox data model hierarchy. Keys:
 
-- `name` — Projektname (Anzeige)
-- `$className` — Roblox-Klasse des Knotens (`DataModel`, `ServerScriptService`, `Folder`, …)
-- `$path` — Dateisystem-Pfad, der unter diesen Knoten gesynct wird (relativ zur Projektwurzel)
+- `name` — project name (display)
+- `$className` — Roblox class of the node (`DataModel`, `ServerScriptService`, `Folder`, …)
+- `$path` — filesystem path that is synced under this node (relative to the project root)
 
-Ein einsatzfertiges Standard-Template liegt unter [`assets/default.project.json`](assets/default.project.json).
+A ready-to-use standard template is located at [`assets/default.project.json`](assets/default.project.json).
 
-### Flach vs. verschachtelt — die wichtigste Entscheidung
+### Flat vs. Nested — the most important decision
 
-Dein Code muss zum Mapping passen. Zwei Varianten:
+Your code must match the mapping. Two variants:
 
-**Flach** — Inhalt von `src/server` landet direkt in `ServerScriptService`:
+**Flat** — the content of `src/server` ends up directly in `ServerScriptService`:
 ```json
 "ServerScriptService": { "$className": "ServerScriptService", "$path": "src/server" }
 ```
-→ Code referenziert z. B. `ReplicatedStorage.Config`, `ReplicatedStorage.GameEnums`.
+→ Code references e.g. `ReplicatedStorage.Config`, `ReplicatedStorage.GameEnums`.
 
-**Verschachtelt** — Inhalt landet in `ServerScriptService.ProjektName`:
+**Nested** — the content ends up in `ServerScriptService.ProjectName`:
 ```json
 "ServerScriptService": {
   "$className": "ServerScriptService",
   "ProjektName": { "$path": "src/server" }
 }
 ```
-→ Code referenziert `ReplicatedStorage.ProjektName.shared.Config` usw.
+→ Code references `ReplicatedStorage.ProjectName.shared.Config` etc.
 
-Beide sind gültig. Entscheide dich projektweit für **eine** Variante und halte jeden
-`require`/`WaitForChild`-Pfad konsistent dazu. Symptom bei Mismatch: `WaitForChild(...)`
-hängt endlos (Infinite yield), weil der erwartete Knoten an anderer Stelle liegt.
+Both are valid. Decide project-wide on **one** variant and keep every
+`require`/`WaitForChild` path consistent with it. Symptom on mismatch: `WaitForChild(...)`
+hangs indefinitely (infinite yield), because the expected node is located elsewhere.
 
 ## Toolchain via rokit
 
-[rokit](https://github.com/rojo-rbx/rokit) ist der Toolchain-Manager. Eine `rokit.toml` im
-Projekt (oder Elternordner) pinnt exakte Tool-Versionen → reproduzierbare Builds auf allen
-Maschinen. Fehlt sie, kommt `Failed to find tool 'rojo' in any project manifest file`.
+[rokit](https://github.com/rojo-rbx/rokit) is the toolchain manager. A `rokit.toml` in the
+project (or parent folder) pins exact tool versions → reproducible builds on all
+machines. If it is missing, you get `Failed to find tool 'rojo' in any project manifest file`.
 
-Standard-`rokit.toml` (siehe [`assets/rokit.toml`](assets/rokit.toml)):
+Standard `rokit.toml` (see [`assets/rokit.toml`](assets/rokit.toml)):
 ```toml
 [tools]
 rojo = "rojo-rbx/rojo@7.4.4"
@@ -145,68 +126,68 @@ lune = "lune-org/lune@0.10.4"
 wally = "UpliftGames/wally@0.3.2"
 ```
 
-> Versions-Hinweis: 7.4.4 ist die in der Referenz-Pipeline durchgängig gepinnte Version.
-> Neuere Projekte können auf 7.6.x gehen — vorher mit `rojo build` gegen das Projekt prüfen,
-> da sich das Projektformat zwischen Major-Versionen ändern kann.
+> Version note: 7.4.4 is the version pinned consistently throughout the reference pipeline.
+> Newer projects can go to 7.6.x — but check first with `rojo build` against the project,
+> since the project format can change between major versions.
 
-Nach Klonen/Setup: `rokit install` zieht alle gepinnten Tools.
+After cloning/setup: `rokit install` pulls all pinned tools.
 
-- **Lune** — Luau-Runner außerhalb Studio (Unit-Tests, Build-Skripte, Asset-Verarbeitung).
-- **Wally** — Paketmanager: `wally install` → `Packages/` → in Studio unter
-  `ReplicatedStorage.Packages`. Dependencies stehen in `wally.toml` (siehe
-  [`assets/wally.toml`](assets/wally.toml)), z. B. das Framework `sleitnick/knit@1.7.0`.
+- **Lune** — Luau runner outside Studio (unit tests, build scripts, asset processing).
+- **Wally** — package manager: `wally install` → `Packages/` → in Studio under
+  `ReplicatedStorage.Packages`. Dependencies are listed in `wally.toml` (see
+  [`assets/wally.toml`](assets/wally.toml)), e.g. the framework `sleitnick/knit@1.7.0`.
 
-## Neues Projekt anlegen
+## Creating a New Project
 
-Das Skript [`scripts/scaffold_roblox_project.sh`](scripts/scaffold_roblox_project.sh) legt ein
-komplettes Rojo-Skelett an (project.json, rokit.toml, wally.toml, `src/{shared,server,client,gui}/`
-mit Starter-Dateien, KONZEPT-Stub):
+The script [`scripts/scaffold_roblox_project.sh`](scripts/scaffold_roblox_project.sh) creates a
+complete Rojo skeleton (project.json, rokit.toml, wally.toml, `src/{shared,server,client,gui}/`
+with starter files, KONZEPT stub):
 
 ```bash
 bash scripts/scaffold_roblox_project.sh MeinSpiel        # flaches Mapping (Default)
 bash scripts/scaffold_roblox_project.sh MeinSpiel --nested   # verschachteltes Mapping
 ```
 
-Danach: `cd MeinSpiel && rokit install && rojo serve`.
+After that: `cd MeinSpiel && rokit install && rojo serve`.
 
 ## Troubleshooting
 
-| Symptom | Ursache | Lösung |
+| Symptom | Cause | Solution |
 | --- | --- | --- |
-| `Failed to find tool 'rojo'` | keine `rokit.toml` | `rokit.toml` mit Rojo-Pin im Projekt/Elternordner anlegen, `rokit install` |
-| `require` wirft "invalid argument(s)" | `require()` auf ein Script/LocalScript | nur `.luau`-ModuleScripts sind require-bar; Endung prüfen |
-| Port 34872 belegt (`os error 10048`) | alter Rojo-Prozess läuft | `tasklist \| grep -i rojo` → `taskkill //PID <PID> //F`, dann neu `rojo serve` |
-| Scripts landen falsch in Studio | flaches statt verschachteltes Mapping (oder umgekehrt) | `default.project.json` an die Code-Pfade anpassen (siehe oben) |
-| `WaitForChild` hängt endlos | erwarteter Knoten existiert nicht / Server-Fehler vor Erstellung | **zuerst Server-Console auf Fehler prüfen**; Mapping + Erstellungsreihenfolge checken |
-| Sync nach Datei-Umbenennung bleibt aus | Rojo erkennt Rename nicht sofort | Server stoppen (Ctrl+C) + neu starten, in Studio Disconnect→Reconnect |
-| Änderung in Studio weg nach Reconnect | Studio-Edit statt Filesystem-Edit | Code **nur** im Editor ändern; Rojo überschreibt gemappte Bereiche |
+| `Failed to find tool 'rojo'` | no `rokit.toml` | create `rokit.toml` with a Rojo pin in the project/parent folder, `rokit install` |
+| `require` throws "invalid argument(s)" | `require()` on a Script/LocalScript | only `.luau` ModuleScripts are require-able; check the extension |
+| Port 34872 in use (`os error 10048`) | old Rojo process is running | `tasklist \| grep -i rojo` → `taskkill //PID <PID> //F`, then `rojo serve` again |
+| Scripts end up in the wrong place in Studio | flat instead of nested mapping (or vice versa) | adjust `default.project.json` to the code paths (see above) |
+| `WaitForChild` hangs indefinitely | expected node does not exist / server error before creation | **check the server console for errors first**; check mapping + creation order |
+| Sync stops after file rename | Rojo does not detect the rename immediately | stop the server (Ctrl+C) + restart it, in Studio Disconnect→Reconnect |
+| Change in Studio gone after reconnect | Studio edit instead of filesystem edit | change code **only** in the editor; Rojo overwrites mapped areas |
 
-### Bekannte Rojo-Grenzen
+### Known Rojo Limitations
 
-1. **Kein Terrain-/Workspace-Sync** — 3D-Szene & Terrain in Studio bauen oder per Code generieren.
-2. **Kein `.rbxl`-Merge** — Place-Dateien sind binär, nicht git-mergebar. Nie als primäre Quelle.
-3. **Kein Live-Sync im Play-Modus** — Änderungen während Play werden bei Stop verworfen.
-4. **Git Bash Path-Translation** — `/c/...` kann zu `C:/...` übersetzt werden und Rojo-Pfade brechen; im Zweifel relative Pfade oder native Windows-Pfade nutzen.
+1. **No terrain/Workspace sync** — build the 3D scene & terrain in Studio or generate it via code.
+2. **No `.rbxl` merge** — place files are binary, not git-mergeable. Never use as the primary source.
+3. **No live sync in Play mode** — changes during Play are discarded on Stop.
+4. **Git Bash path translation** — `/c/...` can be translated to `C:/...` and break Rojo paths; when in doubt, use relative paths or native Windows paths.
 
 ## Linting (Selene)
 
-Roblox-Luau-Projekte werden üblicherweise mit **Selene** gelintet (`selene.toml` im Root,
-`std = "roblox"`). Globals wie `_G` per `global_usage = "allow"` freigeben, wenn das Projekt
-sie für geteilten Client-State nutzt. Selene aus dem Verzeichnis mit der Roblox-API-Definition
-(`roblox.yml`) ausführen.
+Roblox Luau projects are usually linted with **Selene** (`selene.toml` in the root,
+`std = "roblox"`). Allow globals like `_G` via `global_usage = "allow"` if the project
+uses them for shared client state. Run Selene from the directory containing the Roblox API definition
+(`roblox.yml`).
 
-## Weiterführend
+## Further Reading
 
-- Schwesterskills: `/rbx-studio` (Studio-Bedienung, MCP, Assets), `/game-design`
-  (Rollen, Workflows, GDD), Metaskill `/rbx-dev` (vereint alle drei + Architektur-Pattern).
-- Aktuelle Engine-/Rojo-Doku: Context7 MCP (`resolve-library-id` →
-  `/websites/create_roblox_reference_engine`, `/roblox/creator-docs`) oder
+- Sister skills: `/rbx-studio` (Studio operation, MCP, assets), `/game-design`
+  (roles, workflows, GDD), meta-skill `/rbx-dev` (combines all three + architecture patterns).
+- Current engine/Rojo docs: Context7 MCP (`resolve-library-id` →
+  `/websites/create_roblox_reference_engine`, `/roblox/creator-docs`) or
   <https://rojo.space/docs/>.
-- Falls auf diesem System vorhanden, liegt eine projektreiche Referenz-Pipeline unter
-  `<your Roblox project pipeline>` (u. a. `ROJO_FAQ.md`, `SKILL.md`).
+- If present on this system, a project-rich reference pipeline is located at
+  `<your Roblox project pipeline>` (incl. `ROJO_FAQ.md`, `SKILL.md`).
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-06-17)
-- Initiale Version. Destilliert aus der `.ROBLOX`-Pipeline (ROJO_FAQ, ROJO_START, _template),
-  nutzerneutral gefasst.
+- Initial version. Distilled from the `.ROBLOX` pipeline (ROJO_FAQ, ROJO_START, _template),
+  written in a user-neutral way.

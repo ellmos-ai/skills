@@ -5,36 +5,24 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
+description: Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
 tags: [act, acceptance, defusion, values, psychological-flexibility, hayes]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/act_techniken.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# ACT Techniques — Acceptance & Commitment Therapy
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# ACT Techniques — Acceptance & Commitment Therapy (English)
 
 ## Foundation
 

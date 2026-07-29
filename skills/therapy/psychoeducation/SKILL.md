@@ -1,216 +1,195 @@
 ---
-name: psychoedukation
+name: psychoeducation
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Psychoedukation zu Depression, Angststoerungen, PTBS, Bipolarer Stoerung, Schizophrenie, ADHS und Borderline. Wissensvermittlung ohne Diagnose.
+description: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [psychoedukation, depression, angst, ptbs, adhs, borderline, wissensvermittlung]
+tags: [psychoeducation, depression, anxiety, ptsd, adhd, borderline, knowledge]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/psychoedukation.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Psychoedukation
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Wissensvermittlung ueber psychische Erkrankungen, Symptome und Behandlungsansaetze
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Psychoeducation (Deutsch)
+
+> Knowledge sharing about mental disorders, symptoms, and treatment approaches
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Psychoedukation bezeichnet die systematische Wissensvermittlung ueber psychische
-Erkrankungen an Betroffene und Angehoerige. Ziel ist es, Verstaendnis fuer die
-Erkrankung zu foerdern, Selbstmanagement zu staerken und Stigmatisierung abzubauen.
+Psychoeducation refers to the systematic sharing of knowledge about mental disorders with affected individuals and their families. The goal is to foster understanding of the disorder, strengthen self-management, and reduce stigmatization.
 
-Evidenz: Psychoedukation ist als Baustein in allen Therapierichtlinien empfohlen
-(DGPPN, NICE, APA) und reduziert nachweislich Rueckfallraten (Xia et al. 2011,
-Cochrane Review).
+Evidence: Psychoeducation is recommended as a component in all treatment guidelines (DGPPN, NICE, APA) and demonstrably reduces relapse rates (Xia et al. 2011, Cochrane Review).
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Was ist Psychoedukation?
+## 1. What is Psychoeducation?
 
 ### Definition
-Strukturierte Vermittlung von Wissen ueber psychische Erkrankungen mit dem Ziel,
-Betroffene zu "Experten ihrer eigenen Erkrankung" zu machen.
+Structured communication of knowledge about mental disorders with the goal of making affected individuals "experts of their own condition."
 
-### Ziele
-- Krankheitsverstaendnis: Was habe ich? Warum?
-- Fruehwarnsignale erkennen
-- Behandlungsmoeglichkeiten kennen
-- Selbstwirksamkeit foerdern
-- Stigma reduzieren
-- Adherence (Therapietreue) verbessern
+### Goals
+- Understanding the illness: What do I have? Why?
+- Recognizing early warning signs
+- Knowing treatment options
+- Fostering self-efficacy
+- Reducing stigma
+- Improving adherence (treatment compliance)
 
-### Evidenz
-- Rueckfallpraevention bei Schizophrenie: NNT = 9 (Xia et al. 2011)
-- Depression: Verbesserung der Therapietreue um 30-50% (Donker et al. 2009)
-- Angststoerungen: Psychoedukation allein bereits mild wirksam (Donker et al. 2009)
-
----
-
-## 2. Krankheitsbilder im Ueberblick
-
-### 2.1 Depression (Major Depression)
-
-**Was ist das?** Anhaltende Niedergeschlagenheit, Interessenverlust und Antriebslosigkeit
-ueber mindestens 2 Wochen, die ueber normale Traurigkeit hinausgehen.
-
-**Kernsymptome (ICD-11):**
-- Depressive Stimmung (fast den ganzen Tag, fast jeden Tag)
-- Interessenverlust / Freudlosigkeit (Anhedonie)
-- Verminderter Antrieb / erhoehte Ermuedbarkeit
-
-**Zusatzsymptome:** Konzentrationsprobleme, Schuldgefuehle, Schlafprobleme,
-Appetitveraenderung, Suizidgedanken, psychomotorische Hemmung/Agitation
-
-**Behandlung:** KVT, medikamentoes (SSRI, SNRI), Bewegung, Lichttherapie (saisonal)
-**Selbsthilfe:** Tagesstruktur, Aktivitaetsaufbau, soziale Kontakte, Bewegung, Schlafhygiene
-
-### 2.2 Angststoerungen
-
-**Was ist das?** Uebermaessige, unkontrollierbare Angst oder Furcht, die das
-alltaegliche Leben beeintraechtigt.
-
-**Formen:**
-- Generalisierte Angststoerung (GAS): Chronisches Sich-Sorgen
-- Panikstoorung: Ploetzliche Angstanfaelle mit koerperlichen Symptomen
-- Soziale Phobie: Angst vor Bewertung in sozialen Situationen
-- Spezifische Phobien: Angst vor konkreten Objekten/Situationen
-- Agoraphobie: Angst vor Orten/Situationen ohne Fluchtmoeglichkeit
-
-**Behandlung:** KVT (Exposition, kognitive Umstrukturierung), SSRI, Entspannung
-**Selbsthilfe:** Angst-Tagebuch, Atemuebungen, schrittweise Konfrontation
-
-### 2.3 Posttraumatische Belastungsstoerung (PTBS)
-
-**Was ist das?** Anhaltende Reaktion auf ein traumatisches Erlebnis (Bedrohung,
-Gewalt, Unfall, Katastrophe) mit Wiedererleben, Vermeidung und Uebererregung.
-
-**Kernsymptome:**
-- Intrusionen (Flashbacks, Alptraeume)
-- Vermeidungsverhalten
-- Emotionale Taubheit oder Uebererregung
-- Negative Veraenderungen von Gedanken und Stimmung
-
-**Behandlung:** Traumafokussierte KVT, EMDR, Narrative Expositionstherapie
-**Selbsthilfe:** Stabilisierungstechniken, Grounding, sichere Orte — KEINE Selbstexposition
-
-### 2.4 Bipolare Stoerung
-
-**Was ist das?** Wechsel zwischen depressiven und (hypo-)manischen Episoden.
-Chronische Erkrankung mit hohem Rueckfallrisiko.
-
-**Manische Episode:** Gehobene Stimmung, vermindertes Schlafbeduerfnis,
-Groessenideen, gesteigerte Aktivitaet, Risikobereitschaft, Rededrang
-
-**Behandlung:** Stimmungsstabilisierer (Lithium, Valproat), atypische Antipsychotika
-**Selbsthilfe:** Stimmungstagebuch, regelmaessiger Schlafrhythmus, Fruehwarnsignale kennen
-
-### 2.5 Schizophrenie
-
-**Was ist das?** Schwere psychische Erkrankung mit Stoerungen des Denkens,
-der Wahrnehmung und des Erlebens. Betrifft ca. 1% der Bevoelkerung.
-
-**Positivsymptome:** Halluzinationen, Wahn, desorganisiertes Denken
-**Negativsymptome:** Antriebslosigkeit, sozialer Rueckzug, Affektverflachung
-**Kognitive Symptome:** Aufmerksamkeit, Gedaechtnis, exekutive Funktionen
-
-**Behandlung:** Antipsychotika, KVT fuer Psychosen, Soziotherapie, Familieninterventionen
-**Selbsthilfe:** Medikamenten-Adherence, Stressvermeidung, Fruehwarnsignale, Tagesstruktur
-
-### 2.6 ADHS (Aufmerksamkeitsdefizit-Hyperaktivitaetsstoerung)
-
-**Was ist das?** Neurobiologische Entwicklungsstoerung mit Unaufmerksamkeit,
-Impulsivitaet und/oder Hyperaktivitaet. Beginnt in der Kindheit, persistiert
-bei ca. 50% ins Erwachsenenalter.
-
-**Behandlung:** Multimodal (Medikation, Psychoedukation, Coaching, KVT)
-**Selbsthilfe:** Externe Strukturhilfen, Timer, Listen, Routinen, Bewegung
-
-### 2.7 Borderline-Persoenlichkeitsstoerung (BPS)
-
-**Was ist das?** Muster von Instabilitaet in Beziehungen, Selbstbild und
-Affekten mit ausgepraegte Impulsivitaet. Hohe emotionale Verletzlichkeit.
-
-**Kernsymptome:** Instabile Beziehungen, Identitaetsstoerung, Impulsivitaet,
-affektive Instabilitaet, Selbstverletzung, chronische Leere, Dissoziationen
-
-**Behandlung:** DBT (Linehan), Schematherapie, MBT, TFP
-**Selbsthilfe:** Skills-Koffer, Notfallplan, Stresstoleranz-Skills
+### Evidence
+- Relapse prevention in schizophrenia: NNT = 9 (Xia et al. 2011)
+- Depression: Improvement of treatment adherence by 30-50% (Donker et al. 2009)
+- Anxiety disorders: Psychoeducation alone already mildly effective (Donker et al. 2009)
 
 ---
 
-## 3. Stigma-Reduktion
+## 2. Mental Disorders Overview
 
-### Haeufige Mythen und Fakten
+### 2.1 Depression (Major Depressive Disorder)
 
-| Mythos | Fakt |
-|--------|------|
-| "Psychisch Kranke sind gefaehrlich" | Betroffene sind haeufiger Opfer als Taeter |
-| "Depression ist Willensschwaeche" | Depression ist eine neurobiologische Erkrankung |
-| "Therapie ist nur Reden" | Evidenzbasierte Therapie veraendert nachweislich Hirnstrukturen |
-| "Das waechst sich aus" | Viele Erkrankungen chronifizieren ohne Behandlung |
-| "Medikamente machen abhaengig" | Antidepressiva erzeugen keine Abhaengigkeit |
+**What is it?** Persistent low mood, loss of interest, and lack of drive for at least 2 weeks, going beyond normal sadness.
 
-### Sprache und Stigma
-- "An Schizophrenie erkrankt" statt "schizophren"
-- "Mensch mit Depression" statt "Depressiver"
-- Person-first Language reduziert Stigma nachweislich (Granello & Gibbs, 2016)
+**Core symptoms (ICD-11):**
+- Depressed mood (most of the day, nearly every day)
+- Loss of interest / inability to feel pleasure (anhedonia)
+- Reduced drive / increased fatigue
+
+**Additional symptoms:** Concentration difficulties, feelings of guilt, sleep problems, appetite changes, suicidal thoughts, psychomotor retardation/agitation
+
+**Treatment:** CBT, medication (SSRIs, SNRIs), exercise, light therapy (seasonal)
+**Self-help:** Daily structure, activity scheduling, social contacts, exercise, sleep hygiene
+
+### 2.2 Anxiety Disorders
+
+**What is it?** Excessive, uncontrollable anxiety or fear that impairs everyday life.
+
+**Types:**
+- Generalized Anxiety Disorder (GAD): Chronic worrying
+- Panic Disorder: Sudden anxiety attacks with physical symptoms
+- Social Anxiety Disorder: Fear of evaluation in social situations
+- Specific Phobias: Fear of specific objects/situations
+- Agoraphobia: Fear of places/situations without escape
+
+**Treatment:** CBT (exposure, cognitive restructuring), SSRIs, relaxation
+**Self-help:** Anxiety diary, breathing exercises, gradual confrontation
+
+### 2.3 Post-Traumatic Stress Disorder (PTSD)
+
+**What is it?** Persistent reaction to a traumatic experience (threat, violence, accident, disaster) with re-experiencing, avoidance, and hyperarousal.
+
+**Core symptoms:**
+- Intrusions (flashbacks, nightmares)
+- Avoidance behavior
+- Emotional numbing or hyperarousal
+- Negative changes in thoughts and mood
+
+**Treatment:** Trauma-focused CBT, EMDR, Narrative Exposure Therapy
+**Self-help:** Stabilization techniques, grounding, safe place — NO self-exposure
+
+### 2.4 Bipolar Disorder
+
+**What is it?** Alternation between depressive and (hypo)manic episodes. Chronic condition with high relapse risk.
+
+**Manic episode:** Elevated mood, decreased need for sleep, grandiose ideas, increased activity, risk-taking behavior, pressured speech
+
+**Treatment:** Mood stabilizers (lithium, valproate), atypical antipsychotics
+**Self-help:** Mood diary, regular sleep schedule, knowing early warning signs
+
+### 2.5 Schizophrenia
+
+**What is it?** Severe mental disorder with disturbances of thought, perception, and experience. Affects approximately 1% of the population.
+
+**Positive symptoms:** Hallucinations, delusions, disorganized thinking
+**Negative symptoms:** Lack of drive, social withdrawal, flat affect
+**Cognitive symptoms:** Attention, memory, executive functions
+
+**Treatment:** Antipsychotics, CBT for psychosis, social therapy, family interventions
+**Self-help:** Medication adherence, stress avoidance, early warning signs, daily structure
+
+### 2.6 ADHD (Attention Deficit Hyperactivity Disorder)
+
+**What is it?** Neurobiological developmental disorder with inattention, impulsivity, and/or hyperactivity. Begins in childhood, persists into adulthood in approximately 50% of cases.
+
+**Treatment:** Multimodal (medication, psychoeducation, coaching, CBT)
+**Self-help:** External structural aids, timers, lists, routines, exercise
+
+### 2.7 Borderline Personality Disorder (BPD)
+
+**What is it?** Pattern of instability in relationships, self-image, and affect with pronounced impulsivity. High emotional vulnerability.
+
+**Core symptoms:** Unstable relationships, identity disturbance, impulsivity, affective instability, self-harm, chronic emptiness, dissociation
+
+**Treatment:** DBT (Linehan), Schema Therapy, MBT, TFP
+**Self-help:** Skills kit, emergency plan, distress tolerance skills
 
 ---
 
-## 4. Angehoerigen-Perspektive
+## 3. Stigma Reduction
 
-- Psychische Erkrankungen betreffen das gesamte soziale Umfeld
-- Angehoerige brauchen eigene Psychoedukation und Entlastung
-- Expressed Emotion (EE): Hohe Kritik/Ueberinvolvement erhoehen Rueckfallrisiko
-- Empfehlung: Angehoerigengruppen, Familien-Psychoedukation
+### Common Myths and Facts
 
----
+| Myth | Fact |
+|------|------|
+| "Mentally ill people are dangerous" | Affected individuals are more often victims than perpetrators |
+| "Depression is weakness of will" | Depression is a neurobiological disorder |
+| "Therapy is just talking" | Evidence-based therapy demonstrably changes brain structures |
+| "It will pass on its own" | Many conditions become chronic without treatment |
+| "Medications cause addiction" | Antidepressants do not cause dependence |
 
-## Ethik und Grenzen
-
-**Ein KI-Assistent kann:**
-- Sachliche Informationen zu Krankheitsbildern geben
-- Haeufige Fragen beantworten
-- Auf weiterfuehrende Ressourcen verweisen
-
-**Ein KI-Assistent kann NICHT:**
-- Diagnosen stellen oder bestaetigen
-- Individuelle Behandlungsempfehlungen geben
-- Professionelle Psychoedukation in Gruppenformat ersetzen
+### Language and Stigma
+- "Person with schizophrenia" instead of "schizophrenic"
+- "Person with depression" instead of "depressive person"
+- Person-first language demonstrably reduces stigma (Granello & Gibbs, 2016)
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: ICD-11, DGPPN-Leitlinien, Xia et al. (2011), Donker et al. (2009), Cochrane Reviews — Keine professionelle Therapie*
+## 4. Family Perspective
+
+- Mental disorders affect the entire social environment
+- Families need their own psychoeducation and relief
+- Expressed Emotion (EE): High criticism/overinvolvement increases relapse risk
+- Recommendation: Family support groups, family psychoeducation
+
+---
+
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Provide factual information about mental disorders
+- Answer common questions
+- Refer to further resources
+
+**An AI assistant must NOT:**
+- Make or confirm diagnoses
+- Give individual treatment recommendations
+- Replace professional psychoeducation in group format
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: ICD-11, DGPPN Guidelines, Xia et al. (2011), Donker et al. (2009), Cochrane Reviews — Not professional therapy*

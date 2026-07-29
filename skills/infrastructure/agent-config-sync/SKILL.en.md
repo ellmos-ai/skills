@@ -5,10 +5,8 @@ type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
 updated: 2026-07-27
-description: >
-  Provider-neutral planner for synchronizing MCP configuration, skills and rule
-  files across agent providers and app classes. It discovers evidenced local
-  options and lets the user choose truth, targets, direction and conflicts.
+description: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,21 +16,14 @@ tags: [mcp, skills, rules, sync, provider-neutral, discovery, multi-agent]
 language: en
 status: active
 aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
-dependencies:
-  tools: [python]
-  services: []
-  protocols: []
-  python: []
-provenance:
-  origin: "custom"
-  origin_path: "skills/infrastructure/agent-config-sync/"
-  origin_version: "0.3.0"
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Agent Config Sync
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Agent Config Sync (English)
 
 The skill separates endpoint selection, resources and truth. Run:
 

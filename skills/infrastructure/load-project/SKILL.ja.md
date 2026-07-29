@@ -2,16 +2,19 @@
 language: ja
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `load-project`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `load-project`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `load-project`.
 
 
-# Load Project
+# Load Project (English)
 
-## Zweck
+## 概要と目的 & Purpose
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,

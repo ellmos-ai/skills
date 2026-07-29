@@ -1,29 +1,15 @@
 ---
-name: wayfinding-routing
-version: 1.0.0
-type: skill
-author: Lukas Geiger + Gemini (Antigravity)
-created: 2026-07-29
-updated: 2026-07-29
-description: [Français] Documentation complète traduite en français pour la compétence wayfinding-routing: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: true
-bach_origin: false
-category: infrastructure
-tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
 language: fr
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `wayfinding-routing`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `wayfinding-routing`.
 
 
 
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (English)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
 
@@ -43,7 +29,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## Les 5 Protocoles Majeurs de Secours et d'Orientation
+## Les 5 Protocoles Majeurs de Secours et d'Orientation & Orientation Protocols
 
 ### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
 - **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.

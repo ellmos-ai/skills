@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [Español] Documentación completa traducida al español para la habilidad orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: [Español] Documentación completa para la habilidad orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,16 +18,19 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `orchestrator`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `orchestrator`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `orchestrator`.
 
 
-# Orchestrator
+# Orchestrator (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
 Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder

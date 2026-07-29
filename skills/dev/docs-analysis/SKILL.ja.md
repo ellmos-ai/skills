@@ -1,35 +1,21 @@
 ---
-name: docs-analysis
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-15
-updated: 2026-03-15
-description: [日本語] スキルに関する完全な日本語ドキュメント: docs-analysis: Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: dev
-tags: [docs-analysis, requirements, code-review, diff-report, quality-assurance]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `docs-analysis`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `docs-analysis`.
 
 
 
-# Document Requirements Analysis
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Document Requirements Analysis (English)
 
 > Analyzes all concept and requirements documents, checks their requirements against the current code, and creates a consolidated difference report.
 
 ---
 
-## Purpose
+## 概要と目的 & Purpose
 
 Analyzes all concept and requirements documents in the ../docs/ folder, checks their requirements against the current code, and creates a consolidated difference report.
 

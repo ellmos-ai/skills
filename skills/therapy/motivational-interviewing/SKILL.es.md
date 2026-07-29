@@ -1,29 +1,15 @@
 ---
-name: motivational-interviewing
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-03-12
-description: [Español] Documentación completa traducida al español para la habilidad motivational-interviewing: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [motivational-interviewing, oars, change-talk, ambivalence, miller-rollnick]
 language: es
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `motivational-interviewing`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `motivational-interviewing`.
 
 
 
-# Motivational Interviewing
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Motivational Interviewing (English)
 
 > OARS techniques, stages of change, and change talk: Fostering intrinsic motivation for change without pressure or manipulation
 

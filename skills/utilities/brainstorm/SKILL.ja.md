@@ -1,29 +1,15 @@
 ---
-name: brainstorm
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-15
-updated: 2026-03-15
-description: [日本語] スキルに関する完全な日本語ドキュメント: brainstorm: Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: utilities
-tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `brainstorm`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `brainstorm`.
 
 
 
-# Brainstorm
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Brainstorm (English)
 
 > Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
 
@@ -129,7 +115,7 @@ Quantity over quality — 50+ ideas in 20 min.
 
 ---
 
-## 実行ワークフローと手順
+## ワークフローと実行手順 & Execution Steps
 
 ```
 1. User request

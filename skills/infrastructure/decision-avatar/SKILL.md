@@ -1,44 +1,16 @@
 ---
-name: decision-avatar
-version: 1.0.0
-type: protocol
-author: Claude + Codex
-created: 2026-07-28
-updated: 2026-07-28
-description: >
-  Bei vorhandenem und ausdrücklich autorisiertem lokalem Entscheidungsprofil:
-  wiederkehrende Entscheidungen aus belegtem Feedback vorhersagen, Konfidenz
-  kalibrieren und Vorhersage, Entscheidung und Ausführung strikt trennen.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-
-category: infrastructure
-tags: [entscheidung, avatar, theory-of-mind, feedback, konfidenz, provenance]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "local-agent-skills/build-your-users-mind/"
-  origin_version: "1.2.0"
-  origin_repo: null
-  last_sync_from_origin: "2026-07-28"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
 ---
 
-# Decision Avatar
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
+
+> **English Translation** — Official English version of `decision-avatar`.
+
+
+# Decision Avatar (Deutsch)
+
+## Übersicht & Zweck
 
 Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
 bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
@@ -167,7 +139,7 @@ sensiblen Rohdaten wiedergeben.
 - Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
   erforderlich wäre.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-28)
 - Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer

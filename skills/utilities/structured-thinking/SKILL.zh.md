@@ -1,35 +1,21 @@
 ---
-name: structured-thinking
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-05-19
-updated: 2026-05-19
-description: [中文] 针对该技能的完整中文文档: structured-thinking: Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: utilities
-tags: [denken, analyse, kreativitaet, entscheidung, workflow, meta-skill]
 language: zh
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `structured-thinking`.
+> **中文** — 针对该技能的官方完整中文文档: `structured-thinking`.
 
 
 
-# Structured Thinking — Analyze, Ideate, Decide
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Structured Thinking — Analyze, Ideate, Decide (English)
 
 > Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
 
 ---
 
-## 工作流程与执行步骤 Overview
+## 工作流程与执行步骤 & Execution Steps
 
 ```
 Problem/Question
@@ -188,7 +174,7 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.0.0 (2026-05-19)
 - Created as a meta-skill from think, brainstorm, and decide

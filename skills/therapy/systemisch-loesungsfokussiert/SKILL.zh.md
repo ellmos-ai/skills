@@ -1,29 +1,15 @@
 ---
-name: systemisch-loesungsfokussiert
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-05-19
-updated: 2026-06-13
-description: [中文] 针对该技能的完整中文文档: systemisch-loesungsfokussiert: Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [sfbt, systemic, solution-focused, miracle-question, scaling, circular, questioning-techniques, de-shazer]
 language: zh
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `systemisch-loesungsfokussiert`.
+> **中文** — 针对该技能的官方完整中文文档: `systemisch-loesungsfokussiert`.
 
 
 
-# Systemic & Solution-Focused Methods
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Systemic & Solution-Focused Methods (English)
 
 > Miracle question, scaling, exceptions, circular questions, hypothetical questions — one integrated skill
 
@@ -315,7 +301,7 @@ Strengthen the sense of control: whoever can describe how to make the problem wo
 
 ---
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.0.0 (2026-05-19)
 - Merged from `solution-focused-therapy` (v1.0.0) and `systemic-questioning` (v1.0.0)

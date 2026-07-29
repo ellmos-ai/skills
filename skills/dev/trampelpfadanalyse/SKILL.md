@@ -5,245 +5,217 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-21
 updated: 2026-06-21
-description: >
-  Fehleranalyse in Pipeline- und Steuerdatei-Abläufen: prüfen, ob eine Konvention
-  oder ein Verfahren für ein LLM überhaupt sichtbar und auffindbar ist. Empirischer
-  Baseline → Intervention → Retest-Vergleich mit naiven Subagenten (eigene isolierte
-  Sandbox-Kopien, gleicher Testfall, quantitative Erfolgsmessung). Nutze diesen Skill,
-  wenn Agenten eine Regel/README/Konvention wiederholt ignorieren oder falsch
-  navigieren und du messen willst, ob eine Doku-Änderung das Verhalten tatsächlich
-  ändert. Triggert bei "wird die Konvention überhaupt gesehen", "warum hält sich
-  kein Agent an die Regel", "Doku-Schild messbar wirksam machen", "Trampelpfadanalyse".
+description: Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: dev
-tags: [workflow, fehleranalyse, llm-ux, doku-audit, baseline-retest, naive-subagent, empirisch, pipeline, steuerdatei]
+tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/workflows/system/trampelpfadanalyse.md"
-  origin_version: "2.0"
-  origin_repo: "github.com/ellmos-ai/swarm-ai"
-  last_sync_from_origin: "2026-06-21"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="trampelpfadanalyse banner">
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-# Trampelpfadanalyse — LLM-sichtbare Konventionen empirisch herstellen
 
-Eine Methode, um Fehler in Pipeline- und Steuerdatei-Abläufen aufzudecken, die nicht
-durch falschen Code entstehen, sondern dadurch, dass eine **Konvention für ein LLM
-unsichtbar** ist. Statt zu raten, ob eine README oder Regel "klar genug" ist, wird
-empirisch gemessen: naive Subagenten ohne Vorwissen werden auf den Ablauf losgelassen,
-ihr Verhalten wird zur **Baseline**, eine gezielte Doku-Änderung ("Schild") ist die
-**Intervention**, und frische naive Subagenten liefern den **Retest**. Der Diff zur
-Baseline ist die Erfolgsmessung.
+# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs (Deutsch)
 
-Der Name kommt vom Trampelpfad (engl. *desire path*): dort, wo Menschen tatsächlich
-laufen statt auf dem angelegten Weg, gehört ein Weg hin. Analog zeigen die Pfade naiver
-LLMs, wo Doku/Leitplanken tatsächlich gebraucht werden — nicht dort, wo wir sie vermuten.
+A method for uncovering errors in pipeline and control-file workflows that do not come
+from broken code, but from a **convention being invisible to an LLM**. Instead of
+guessing whether a README or rule is "clear enough", you measure it empirically: naive
+subagents with no prior knowledge are turned loose on the workflow, their behavior
+becomes the **baseline**, a targeted documentation change (a "signpost") is the
+**intervention**, and fresh naive subagents provide the **retest**. The diff against the
+baseline is the success measurement.
 
-## Wann diesen Skill nutzen
+The name comes from the *desire path* (German: *Trampelpfad*): where people actually walk
+instead of on the paved route is where a path belongs. By analogy, the paths of naive
+LLMs show where documentation/guardrails are actually needed — not where we assume them.
 
-- Agenten ignorieren wiederholt eine Regel/Konvention, obwohl sie dokumentiert ist.
-- Du willst wissen, ob ein Verfahren für ein LLM **sichtbar/auffindbar** ist, bevor du
-  weitere Doku schreibst ("redet hier jemand gegen eine Wand?").
-- Nach einer Umstrukturierung (neue Verzeichnisse, Umbenennungen): Finden Agenten noch
-  die Einstiegspunkte?
-- Du hast eine Doku-Änderung gemacht und willst **belegen**, dass sie wirkt — nicht nur
-  hoffen.
-- Onboarding-Test vor dem Einbinden neuer LLM-Partner in eine Pipeline.
+## When to use this skill
 
-Nicht hierfür: reine Code-Bugs (→ systematisches Debugging), oder die Auswahl von
-Schwarm-Koordinationsmustern für eine Produktivaufgabe (→ siehe `swarm-operations`).
-Dieser Skill nutzt einen Schwarm naiver Agenten ausschließlich als **Messinstrument**.
+- Agents repeatedly ignore a rule/convention even though it is documented.
+- You want to know whether a procedure is **visible/discoverable** to an LLM before
+  writing more docs ("is anyone here talking to a wall?").
+- After a restructuring (new directories, renames): can agents still find the entry points?
+- You made a documentation change and want to **prove** it works — not just hope so.
+- Onboarding test before integrating new LLM partners into a pipeline.
 
-## Kernidee in einem Satz
+Not for: pure code bugs (→ systematic debugging), or selecting swarm coordination patterns
+for a production task (→ see `swarm-operations`). This skill uses a swarm of naive agents
+exclusively as a **measuring instrument**.
 
-Behandle Dokumentation wie UX: was zählt, ist nicht was du geschrieben hast, sondern
-was ein unvoreingenommener Nutzer (hier: ein naiver Agent) damit tatsächlich tut —
-und das misst man, ändert man, und misst man erneut.
+## Core idea in one sentence
+
+Treat documentation like UX: what counts is not what you wrote, but what an unbiased user
+(here: a naive agent) actually does with it — and you measure that, change it, and measure
+again.
 
 ---
 
-## Der Prozess: 5 Schritte
+## The process: 5 steps
 
 ```
-1. BASELINE        naive Subagenten → Ist-Verhalten messen (quantitativ)
-2. PFAD-ANALYSE    wo genau scheitert es? welche Doku-Stelle führt fehl?
-3. INTERVENTION    "Schild" aufstellen (README/Konvention prominenter)
-4. RETEST          FRISCHE naive Subagenten, gleicher Testfall
-5. DIFF            Retest vs. Baseline → Erfolgsmessung + ehrliche Einordnung
+1. BASELINE       naive subagents → measure current behavior (quantitative)
+2. PATH ANALYSIS  where exactly does it fail? which doc location misleads?
+3. INTERVENTION   put up a "signpost" (README/convention made more prominent)
+4. RETEST         FRESH naive subagents, identical test case
+5. DIFF           retest vs. baseline → success measurement + honest assessment
 ```
 
-### Schritt 1 — Baseline: Ist-Verhalten naiv messen
+### Step 1 — Baseline: measure current behavior naively
 
-Formuliere zuerst die **Problemlage als prüfbare Frage**, z. B. "Legt ein Agent ein
-Log an der konventionsgemäßen Stelle an?" oder "Findet ein Agent den Einstiegspunkt
-der Pipeline?".
+First phrase the problem as a **testable question**, e.g. "Does an agent create a log at
+the convention-mandated location?" or "Does an agent find the pipeline's entry point?".
 
-Setze dann naive Subagenten auf:
+Then turn naive subagents loose:
 
-- **Naiv heißt:** kein Projekt-Gedächtnis, keine Skills, keine Vorab-Hinweise — der
-  Agent kennt nur den Einstiegspfad und den Auftrag. So misst du **reine Auffindbarkeit
-  über die vorhandene Doku**, nicht das Vorwissen des Agenten.
-- **Isolierte Sandbox-Kopien:** Jeder Probe-Agent arbeitet auf einer eigenen Kopie des
-  betroffenen Ordners/Ablaufs, damit sich die Proben nicht gegenseitig beeinflussen und
-  der echte Stand unverändert bleibt.
-- **Gleicher Testfall, mehrere Wiederholungen:** Variabilität ist real. Eine Probe ist
-  ein Anekdote; n Wiederholungen (z. B. 3, oder bei Bedarf mehr) ergeben eine Quote.
-- **Günstiges, "naives" Modell** ist ausreichend und realistisch — es soll nicht klug
-  raten, sondern zeigen, wohin die Doku einen durchschnittlichen Agenten führt.
+- **Naive means:** no project memory, no skills, no prior hints — the agent only knows the
+  entry path and the task. This measures **pure discoverability via the existing docs**,
+  not the agent's prior knowledge.
+- **Isolated sandbox copies:** each probe agent works on its own copy of the affected
+  folder/workflow, so probes do not influence each other and the real state stays untouched.
+- **Same test case, multiple repetitions:** variability is real. One probe is an anecdote;
+  n repetitions (e.g. 3, or more if needed) yield a rate.
+- **A cheap, "naive" model** is sufficient and realistic — it should not guess cleverly,
+  but show where the docs lead an average agent.
 
-Minimaler Probe-Prompt (Platzhalter anpassen):
+Minimal probe prompt (adjust placeholders):
 
 ```
-Du erkundest <SYSTEM>. Es liegt unter: <PFAD>.
-AUFTRAG: <konkreter Auftrag>.
-REGELN:
-1. Du weißt NUR den Pfad oben, sonst nichts.
-2. Erkunde, um den Auftrag zu erfüllen. Max. <N> Schritte.
-3. Berichte am Ende: BESUCHTE_VERZEICHNISSE, GELESENE_DATEIEN,
-   AUFTRAG_ERFÜLLT (ja/nein), HILFREICHSTE_DATEI.
+You are exploring <SYSTEM>. It is located at: <PATH>.
+TASK: <specific task>.
+RULES:
+1. You only know the path above, nothing else.
+2. Explore to complete the task. Max. <N> steps.
+3. Report at the end: VISITED_DIRECTORIES, READ_FILES,
+   TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE.
 ```
 
-**Festhalten als Baseline-Metriken** (immer quantitativ, nie "fühlt sich besser an"):
+**Record as baseline metrics** (always quantitative, never "feels better"):
 
-| Metrik | Bedeutung |
+| Metric | Meaning |
 |---|---|
-| Erfolgsquote | wie oft wurde der Auftrag konventionsgemäß erfüllt (z. B. 0/3) |
-| Falschverhalten | wie oft die falsche Stelle/Methode (z. B. 3/3 Sammel-Log statt per-Eintrag) |
-| Pfade bis Ziel | wie viele Schritte/Umwege bis zum Ziel |
-| Blind Spots | welche relevante Datei/Stelle niemand öffnet |
+| Success rate | how often the task was completed per convention (e.g. 0/3) |
+| Wrong behavior | how often the wrong location/method (e.g. 3/3 collective log instead of per-entry) |
+| Paths to goal | how many steps/detours to reach the goal |
+| Blind spots | which relevant file/location nobody opens |
 
-### Schritt 2 — Pfad-Analyse: wo scheitert es real?
+### Step 2 — Path analysis: where does it really fail?
 
-Werte die Probe-Berichte gemeinsam aus (eine "Heatmap" über besuchte Stellen reicht):
+Evaluate the probe reports together (a "heatmap" of visited locations is enough):
 
-- Welche Datei wird **häufig** gelesen (HOT)? Wenn dort die Orientierung fehlt, ist das
-  der wirksamste Ort für ein Schild.
-- Welche relevante Stelle wird **nie** geöffnet (COLD / Blind Spot)? Sie ist faktisch
-  unsichtbar — egal wie gut ihr Inhalt ist.
-- Wo dreht ein Agent **Schleifen** oder greift an der Konvention vorbei (Sackgasse,
-  Umgehung)? Das markiert die konkrete Doku-Lücke.
+- Which file is read **often** (HOT)? If orientation is missing there, that is the most
+  effective place for a signpost.
+- Which relevant location is **never** opened (COLD / blind spot)? It is effectively
+  invisible — no matter how good its content is.
+- Where does an agent loop or bypass the convention (dead end, circumvention)? That marks
+  the concrete documentation gap.
 
-Befund-Tabelle:
+Findings table:
 
-| Befund | Bedeutung | Maßnahme (→ Schritt 3) |
+| Finding | Meaning | Action (→ Step 3) |
 |---|---|---|
-| HOT + keine Orientierung | viel Traffic, kein Wegweiser | Schild genau dort platzieren |
-| WARM + Fehler | Agenten kommen hin, straucheln | Beispiel/Klarstellung ergänzen |
-| COLD | Stelle wird nie gefunden | von einer HOT-Datei aus verlinken |
-| Umgehung | Konvention wird übergangen | Hinweis an den Ort der Umgehung |
+| HOT + no orientation | high traffic, no signpost | place the signpost right there |
+| WARM + errors | agents arrive, stumble | add example/clarification |
+| COLD | location is never found | link to it from a HOT file |
+| Circumvention | convention is bypassed | hint at the point of circumvention |
 
-Ergebnis von Schritt 2: **eine konkrete, lokalisierte Hypothese** — "Agenten lesen X,
-aber X erwähnt die Konvention nicht; deshalb landen sie bei Y."
+Outcome of Step 2: **one concrete, localized hypothesis** — "Agents read X, but X does not
+mention the convention; that is why they end up at Y."
 
-### Schritt 3 — Intervention: ein Schild aufstellen
+### Step 3 — Intervention: put up a signpost
 
-Stelle **genau ein** Schild auf (eine Variable pro Durchgang, sonst ist der Diff nicht
-interpretierbar). Typische Schilder:
+Put up **exactly one** signpost (one variable per pass, otherwise the diff is not
+interpretable). Typical signposts:
 
-- Die Konvention **dort** prominent platzieren, wo der HOT-Pfad ohnehin vorbeikommt
-  (z. B. ein kurzer, expliziter Hinweis ganz oben in der meistgelesenen README/Steuerdatei).
-- Eine **Schnellnavigations-Tabelle** am Anfang der zentralen Architektur-/Übersichtsdatei,
-  die auf bisherige Blind Spots zeigt.
-- Einen **Wegweiser/Verweis** von einer HOT-Datei zu einer COLD-Stelle.
-- Optional eine **Leitplanke** (z. B. ein PreToolUse-Hinweis) für gefährliche oder
-  konventionswidrige Aktionen.
+- Place the convention **prominently where the HOT path already passes** (e.g. a short,
+  explicit hint at the very top of the most-read README/control file).
+- A **quick-navigation table** at the start of the central architecture/overview file that
+  points to former blind spots.
+- A **signpost/cross-reference** from a HOT file to a COLD location.
+- Optionally a **guardrail** (e.g. a PreToolUse hint) for dangerous or convention-violating
+  actions.
 
-Halte das Schild kurz und unübersehbar — Agenten überfliegen, sie lesen selten lang.
+Keep the signpost short and unmissable — agents skim, they rarely read at length.
 
-### Schritt 4 — Retest mit FRISCHEN naiven Subagenten
+### Step 4 — Retest with FRESH naive subagents
 
-Wiederhole Schritt 1 **identisch** — gleicher Auftrag, gleiche Wiederholungszahl,
-gleiches Modell, gleiche Naiv-Bedingung — aber auf Sandbox-Kopien **mit** dem neuen
-Schild. Wichtig:
+Repeat Step 1 **identically** — same task, same number of repetitions, same model, same
+naive condition — but on sandbox copies **with** the new signpost. Important:
 
-- **Frische** Agenten ohne Erinnerung an den Baseline-Lauf (sonst misst du Lernen statt
-  Auffindbarkeit).
-- **Nur das Schild** unterscheidet sich vom Baseline-Setup.
+- **Fresh** agents with no memory of the baseline run (otherwise you measure learning, not
+  discoverability).
+- **Only the signpost** differs from the baseline setup.
 
-### Schritt 5 — Diff zur Baseline + ehrliche Erfolgsmessung
+### Step 5 — Diff against baseline + honest success measurement
 
-Stelle Retest und Baseline direkt gegenüber:
+Put retest and baseline directly side by side:
 
-| Metrik | Baseline | Nach Schild | Δ |
+| Metric | Baseline | After signpost | Δ |
 |---|---|---|---|
-| Erfolgsquote | z. B. 0/3 | z. B. 3/3 | +3 |
-| Falschverhalten | z. B. 3/3 | z. B. 0/3 | −3 |
-| Blind Spots | z. B. 1 | z. B. 0 | −1 |
+| Success rate | e.g. 0/3 | e.g. 3/3 | +3 |
+| Wrong behavior | e.g. 3/3 | e.g. 0/3 | −3 |
+| Blind spots | e.g. 1 | e.g. 0 | −1 |
 
-Einordnung — und hier nicht schönen:
+Assessment — and do not sugarcoat here:
 
-- **Wirkt** (Falschverhalten geht messbar zurück): Schild behalten, dokumentieren.
-- **Wirkt nicht** (kaum Δ): Schild war am falschen Ort oder zu unauffällig → zurück zu
-  Schritt 2/3, anderes Schild, erneut messen.
-- **Grenzen offen benennen:** kleine n sind Indizien, keine Beweise; ein naiver Agent
-  ist ein Modell für "durchschnittlich uninformiert", nicht für jeden realen Nutzer;
-  False Positives/Negatives bei der Erfolgsbewertung explizit prüfen (was genau zählte
-  als "erfüllt"?).
-
----
-
-## Mini-Fallbeispiel (real, mit echten Zahlen)
-
-Problemlage: Eine Ticket-Pipeline schrieb vor, dass triviale Erledigungen je **ein**
-eigenes Per-Ticket-Log bekommen — Agenten legten aber stattdessen alles in **ein
-Sammel-Log**.
-
-- **Schritt 1 (Baseline):** 3 naive Subagenten, gleicher Auftrag → **3/3 nutzten das
-  Sammel-Log** (Konvention nicht befolgt).
-- **Schritt 2 (Pfad-Analyse):** Die meistgelesene README erwähnte die Per-Ticket-Regel
-  nicht an sichtbarer Stelle → der naive Pfad führte zum Sammel-Log.
-- **Schritt 3 (Intervention):** Ein kurzes, explizites "Schild" zur Logging-Konvention
-  prominent in der README platziert.
-- **Schritt 4 (Retest):** 3 frische naive Subagenten, identischer Auftrag.
-- **Schritt 5 (Diff):** **3/3 falsch → 0/3 falsch**, alle drei legten ein korrektes
-  Per-Ticket-Log an. (Dokumentiert in Ticket T-20260621-44.)
-
-Lehre: Die Konvention war nicht "zu schwach formuliert" — sie war am gelesenen Pfad
-**unsichtbar**. Das Schild am richtigen Ort, empirisch verifiziert, löste das Problem.
+- **Works** (wrong behavior measurably drops): keep the signpost, document it.
+- **Does not work** (little Δ): the signpost was in the wrong place or too subtle → back to
+  Step 2/3, different signpost, measure again.
+- **State limits openly:** small n are indicators, not proofs; a naive agent models "average
+  uninformed", not every real user; explicitly check for false positives/negatives in the
+  success scoring (what exactly counted as "completed"?).
 
 ---
 
-## Quelle und verwandte Methoden
+## Mini case study (real, with actual numbers)
 
-Diese Methode stammt aus der Trampelpfadanalyse v2.0 (Schwarm als empirisches
-Messinstrument für LLM-Verhalten). Die ursprünglichen Referenzergebnisse eines
-Großversuchs (100 naive Proben) sind als Beleg der Quelle dokumentiert: größter Blind
-Spot war ein Hilfe-Verzeichnis, das **0/100** Agenten besuchten (trotz vieler
-Hilfe-Dateien), und die Aufgabe "neuen Skill erstellen" gelang **0%**, weil niemand das
-Templates-Verzeichnis fand — beides klassische Sichtbarkeits-, keine Inhaltsprobleme.
+Problem: A ticket pipeline mandated that trivial completions each get **one** dedicated
+per-ticket log — but agents instead put everything into **one collective log**.
 
-## Siehe auch
+- **Step 1 (baseline):** 3 naive subagents, same task → **3/3 used the collective log**
+  (convention not followed).
+- **Step 2 (path analysis):** the most-read README did not mention the per-ticket rule at a
+  visible spot → the naive path led to the collective log.
+- **Step 3 (intervention):** a short, explicit "signpost" about the logging convention
+  placed prominently in the README.
+- **Step 4 (retest):** 3 fresh naive subagents, identical task.
+- **Step 5 (diff):** **3/3 wrong → 0/3 wrong**, all three created a correct per-ticket log.
+  (Documented in ticket T-20260621-44.)
 
-- `swarm-operations` (dev) — Katalog der Schwarm-**Koordinationsmuster** für
-  Produktivaufgaben; führt die Trampelpfadanalyse dort nur als Konzept-Abschnitt.
-  Dieser Skill ist die anwendbare **Prozess**-Variante mit Baseline→Retest-Loop.
-- `pipeline-optimizer` (dev) — 6-Schritte-Renovierung von Pipelines; der Retest mit
-  frischen Subagenten dort entspricht Schritt 4–5 hier.
-- `bugfix-protocol` / systematisches Debugging — für echte Code-Bugs statt
-  Sichtbarkeitsprobleme.
+Lesson: The convention was not "worded too weakly" — it was **invisible** on the path that
+was actually read. The signpost in the right place, empirically verified, solved the problem.
 
-## Changelog
+---
+
+## Source and related methods
+
+This method comes from Desire-Path Analysis v2.0 (swarm as an empirical measuring instrument
+for LLM behavior). The original reference results of a large run (100 naive probes) are
+documented as evidence from the source: the biggest blind spot was a help directory that
+**0/100** agents visited (despite many help files), and the task "create a new skill"
+succeeded **0%** because nobody found the templates directory — both classic visibility, not
+content, problems.
+
+## See also
+
+- `swarm-operations` (dev) — catalog of swarm **coordination patterns** for production
+  tasks; it carries desire-path analysis only as a conceptual section. This skill is the
+  applicable **process** variant with a baseline→retest loop.
+- `pipeline-optimizer` (dev) — 6-step pipeline renovation; its retest with fresh subagents
+  corresponds to Steps 4–5 here.
+- `bugfix-protocol` / systematic debugging — for real code bugs rather than visibility
+  problems.
+
+## Änderungsprotokoll
 
 ### 0.1.0 (2026-06-21)
-- Initiale Portierung aus der Trampelpfadanalyse v2.0 (Quelle: swarm-ai/BACH).
-- Auf den anwendbaren 5-Schritte-Prozess fokussiert (Baseline → Pfad-Analyse →
-  Intervention → Retest → Diff); Schwarm-Koordinationsmuster bewusst ausgelassen
-  (bleiben bei `swarm-operations`). Nutzerneutral mit Platzhaltern; reales Mini-Beispiel.
+- Initial port from Desire-Path Analysis v2.0 (source: swarm-ai/BACH).
+- Focused on the applicable 5-step process (baseline → path analysis → intervention →
+  retest → diff); swarm coordination patterns deliberately omitted (they stay in
+  `swarm-operations`). User-neutral with placeholders; real mini case study.

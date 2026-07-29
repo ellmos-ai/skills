@@ -1,29 +1,15 @@
 ---
-name: transkription
-version: 0.1.0
-type: assist
-author: ellmos-ai
-created: 2026-06-22
-updated: 2026-06-22
-description: [Русский] Полное руководство и документация на русском языке для навыка transkription: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: assist
-tags: [transkription, audio, speech-to-text, whisper, vosk, offline]
 language: ru
-status: stable
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
-provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `transkription`.
+> **Русский** — Официальная полная документация на русском языке для навыка `transkription`.
 
 
 
-## Purpose
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+## Общий обзор и назначение & Purpose
 
 Convert audio/video files to text — locally, without mandatory cloud access. The skill
 automatically detects whether Whisper or Vosk is installed and selects the best
@@ -46,7 +32,7 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 
 ---
 
-## Рабочий процесс и шаги
+## Рабочий процесс и этапы выполнения & Execution Steps
 
 1. **Backend check**: Check whether `whisper` or `vosk` is importable.
 2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
@@ -59,28 +45,28 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 ## CLI Entry Point
 
 ```bash
-# Transcribe file
+# Transcribe file (English)
 python transkription_core.py transcribe audio.wav
 
-# With explicit language
+# With explicit language (English)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-run (no backend required)
+# Dry-run (no backend required) (English)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# List transcripts
+# List transcripts (English)
 python transkription_core.py list [--limit 20]
 
-# Full-text search
+# Full-text search (English)
 python transkription_core.py search "term"
 
-# Export
+# Export (English)
 python transkription_core.py export <id> [--out file.txt]
 
-# Backend check
+# Backend check (English)
 python transkription_core.py check
 
-# Alternative store path (e.g. for tests)
+# Alternative store path (e.g. for tests) (English)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 

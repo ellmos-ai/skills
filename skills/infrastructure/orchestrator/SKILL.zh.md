@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [中文] 针对该技能的完整中文文档: orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: [中文] 智能体技能: orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,16 +18,19 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `orchestrator`.
+> **中文** — 针对该技能的官方完整中文文档: `orchestrator`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `orchestrator`.
 
 
-# Orchestrator
+# Orchestrator (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
 Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
@@ -125,7 +128,7 @@ Stoppe die gesamte Delegation, wenn:
 - die erwarteten Kosten den erkennbaren Nutzen übersteigen,
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-28)
 - Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.

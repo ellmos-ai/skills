@@ -5,8 +5,7 @@ type: skill
 author: ellmos contributors
 created: 2026-05-16
 updated: 2026-07-29
-description: [Русский] Полное руководство и документация на русском языке для навыка system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.
-
+description: [Русский] Навык агента для system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [onboarding, setup, agent-runtimes, windows, macos, verification, sync]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `system-onboarding`.
+> **Русский** — Официальная полная документация на русском языке для навыка `system-onboarding`.
 
 
 
-# System Onboarding
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# System Onboarding (English)
 
 Use this protocol to establish a new or rebuilt workstation for local-first agent
 work. It is a sequencing and verification guide, not an installer and not a source

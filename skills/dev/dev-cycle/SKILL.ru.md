@@ -1,36 +1,22 @@
 ---
-name: dev-cycle
-version: 1.1.0
-type: protocol
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-06-13
-description: [Русский] Полное руководство и документация на русском языке для навыка dev-cycle: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: dev
-tags: [development, dev-cycle, phases, workflow, systematic, iterative]
 language: ru
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `dev-cycle`.
+> **Русский** — Официальная полная документация на русском языке для навыка `dev-cycle`.
 
 
 
-# Development Cycle (Dev Cycle)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Development Cycle (Dev Cycle) (English)
 
 > **Goal:** Structured process from feature request to validated system.
 > Every development goes through these 8 phases.
 
 ---
 
-## Общий обзор и цели
+## Общий обзор и назначение & Purpose
 
 ```
   +--------------------------------------------------------------+

@@ -2,16 +2,19 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `rotation-check`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `rotation-check`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `rotation-check`.
 
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis
+# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
 Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu

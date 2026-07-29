@@ -1,35 +1,21 @@
 ---
-name: rbx-dev
-version: 1.0.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-06-17
-updated: 2026-06-17
-description: [日本語] スキルに関する完全な日本語ドキュメント: rbx-dev: Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on "develop Roblox game", "build Roblox game", "new Roblox project", "Luau project structure", "how do I organize Roblox code", "Roblox dev setup".
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: game-dev
-tags: [roblox, luau, rojo, studio, game-design, architektur, meta, gamedev]
 language: ja
-status: active
-dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `rbx-dev`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `rbx-dev`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
 
 
-# Roblox-Dev — Meta-Skill for Roblox Game Development
+# Roblox-Dev — Meta-Skill for Roblox Game Development (English)
 
-## Purpose
+## 概要と目的 & Purpose
 
 The central entry point for Roblox game dev with a Rojo-based, version-controllable workflow.
 This skill bundles the overarching knowledge — project structure, architecture patterns and the

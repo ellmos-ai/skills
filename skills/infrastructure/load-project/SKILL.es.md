@@ -2,16 +2,19 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `load-project`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `load-project`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `load-project`.
 
 
-# Load Project
+# Load Project (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,

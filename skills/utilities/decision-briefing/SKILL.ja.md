@@ -1,29 +1,15 @@
 ---
-name: decision-briefing
-version: 1.0.1
-type: skill
-author: Lukas Geiger
-created: 2026-06-13
-updated: 2026-06-13
-description: [日本語] スキルに関する完全な日本語ドキュメント: decision-briefing: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: utilities
-tags: [entscheidung, briefing, batch, decision-session, priorisierung, workflow]
 language: ja
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `decision-briefing`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `decision-briefing`.
 
 
 
-# Decision-Briefing — Work Through Many Decisions on One Topic
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Decision-Briefing — Work Through Many Decisions on One Topic (English)
 
 > A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
 
@@ -66,7 +52,7 @@ Defer:     "E03: later"
 
 ---
 
-## 実行ワークフローと手順 (4 Phases)
+## ワークフローと実行手順 & Execution Steps
 
 ```
 Topic + decisions at hand
@@ -147,7 +133,7 @@ DECISION: <question>
 
 ---
 
-## 実行例と使用方法 Briefing (fictional)
+## 使用例と実行モデル & Usage
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
 

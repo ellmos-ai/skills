@@ -2,16 +2,19 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `load-project`.
+> **中文** — 针对该技能的官方完整中文文档: `load-project`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `load-project`.
 
 
-# Load Project
+# Load Project (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
@@ -124,7 +127,7 @@ Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
 - Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
   geladen werden soll.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-28)
 - Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.

@@ -19,16 +19,16 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `automation-self-care`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# Automation Self-Care
+# Automation Self-Care (Deutsch)
 
 Create a native, provider-specific maintenance fleet from one provider-neutral
 control loop. Preserve the original intent of the ANTIGRAVITY task family while
 requiring evidence, reversible changes and native readback.
 
-## Non-negotiable boundaries
+## Nichtverhandelbare Grenzen & Regeln
 
 - Treat discovery, planning, approval, mutation and readback as separate phases.
 - Use the target app's supported automation API, command or UI. Never assume that
@@ -45,7 +45,7 @@ requiring evidence, reversible changes and native readback.
 - Count success only after outcome evidence, not merely scheduler start or exit 0.
 - Never copy secrets, private prompts or personal data into a shared registry.
 
-## Workflow
+## Workflow & Vorgehen
 
 ### 1. Discover the native automation surface
 
@@ -140,7 +140,7 @@ Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-ho
 Treat token or subscription limitation as capacity state, not a broken actor.
 Return delegated coverage after the original actor produces a successful receipt.
 
-## Required outputs
+## Erforderliche Ergebnisse & Deliverables
 
 For each setup or care run report:
 
@@ -151,7 +151,7 @@ For each setup or care run report:
 - rollback location and return condition;
 - shared coverage update, if a coordination registry exists.
 
-## Example
+## Beispiel & Anwendung
 
 User: "Set up self-maintaining schedules in this desktop app."
 
@@ -160,7 +160,7 @@ Generate the compact plan, present unsupported capabilities, then install only t
 approved tasks through the native surface. A folder containing a task prompt
 without a live scheduler registration is not a completed setup.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-28)
 

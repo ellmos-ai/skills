@@ -5,36 +5,24 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
+description: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
 tags: [behavioral-activation, depression, activity, weekly-plan, values]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/verhaltensaktivierung.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Behavioral Activation
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Behavioral Activation (English)
 
 > Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
 

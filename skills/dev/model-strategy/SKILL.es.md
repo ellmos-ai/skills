@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: [Español] Documentación completa traducida al español para la habilidad model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
-
+description: [Español] Documentación completa para la habilidad model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,14 +15,17 @@ tags: [model-switching, orchestration, multi-model, cost-optimization, routing, 
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `model-strategy`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `model-strategy`.
 
 
 
-# Model-Switching Strategy
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Model-Switching Strategy (English)
 
 > Multi-model orchestration: score-based model selection, cross-agent delegation, advisor pairing, escalation triggers, and cost-efficiency optimization
 

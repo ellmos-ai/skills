@@ -19,10 +19,10 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `staircase-routing`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# Staircase-Routing (Up-and-Down / Walking Bass Routing)
+# Staircase-Routing (Up-and-Down / Walking Bass Routing) (Deutsch)
 
 The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
 

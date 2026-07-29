@@ -1,290 +1,278 @@
 ---
-name: verhaltensaktivierung
+name: behavioral-activation
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Verhaltensaktivierung bei Depression: Teufelskreis durchbrechen, Aktivitaetsprotokoll, Wochenplanung und werte-basierte Aktivitaeten.
+description: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [verhaltensaktivierung, depression, aktivitaet, wochenplan, werte, behavioral-activation]
+tags: [behavioral-activation, depression, activity, weekly-plan, values]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/verhaltensaktivierung.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Verhaltensaktivierung
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Aktivitaetenplanung, Stimmungs-Aktivitaets-Tagebuch und werte-basierte Aktivitaetenauswahl: Dem Teufelskreis aus Inaktivitaet und Niedergeschlagenheit entgegenwirken
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Behavioral Activation (Deutsch)
+
+> Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Verhaltensaktivierung (Behavioral Activation, BA) ist eine evidenzbasierte Intervention
-aus der Verhaltenstherapie zur Behandlung von Depression. Sie basiert auf der Erkenntnis,
-dass Depression zu Rueckzug und Inaktivitaet fuehrt, was die Stimmung weiter verschlechtert
-(Teufelskreis). Durch gezielten Aufbau positiver Aktivitaeten wird dieser Kreislauf
-durchbrochen.
+Behavioral Activation (BA) is an evidence-based intervention from behavioral therapy for treating depression. It is based on the insight that depression leads to withdrawal and inactivity, which further worsens mood (vicious cycle). Through targeted building of positive activities, this cycle is broken.
 
-Evidenz: Verhaltensaktivierung ist als eigenstaendige Therapieform wirksam und der
-kognitiven Therapie ebenbuertig (Dimidjian et al. 2006, Richards et al. 2016 COBRA-Studie).
-Bei leichter bis mittelschwerer Depression als Erstintervention empfohlen (NICE Guidelines).
+Evidence: Behavioral activation is effective as a standalone therapy and is equivalent to cognitive therapy (Dimidjian et al. 2006, Richards et al. 2016 COBRA study). Recommended as first-line intervention for mild to moderate depression (NICE Guidelines).
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-Bei schwerer Depression oder Suizidgedanken IMMER professionelle Hilfe empfehlen.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+For severe depression or suicidal thoughts, ALWAYS recommend professional help.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Das Depressions-Modell der Verhaltensaktivierung
+## 1. The Behavioral Activation Model of Depression
 
-### Der Teufelskreis
+### The Vicious Cycle
 
 ```
-Ausloesende Situation (Verlust, Stress, Veraenderung)
+Triggering situation (loss, stress, change)
         |
         v
-Niedergeschlagenheit, Energielosigkeit
+Low mood, lack of energy
         |
         v
-Rueckzug, Vermeidung, Inaktivitaet
+Withdrawal, avoidance, inactivity
         |
         v
-Weniger positive Erfahrungen, Isolation
+Fewer positive experiences, isolation
         |
         v
-Noch tiefere Niedergeschlagenheit
+Even deeper low mood
         |
         v
-Noch mehr Rueckzug ... (Spirale)
+Even more withdrawal ... (downward spiral)
 ```
 
-### Das Gegenprinzip
+### The Counter-Principle
 
 ```
-Gezielte Aktivitaet (auch bei geringer Motivation)
+Targeted activity (even with low motivation)
         |
         v
-Positive Erfahrung / Erfolgserlebnis / Kontakt
+Positive experience / sense of accomplishment / connection
         |
         v
-Leichte Stimmungsverbesserung
+Slight mood improvement
         |
         v
-Etwas mehr Energie und Motivation
+Somewhat more energy and motivation
         |
         v
-Weitere Aktivitaet ... (Aufwaertsspirale)
+Further activity ... (upward spiral)
 ```
 
-**Kernprinzip:** Nicht warten, bis die Motivation kommt — Handeln erzeugt Motivation.
-"Act first, feel second." (Nicht: "Erst fuehlen, dann handeln.")
+**Core principle:** Don't wait for motivation to come — action creates motivation.
+"Act first, feel second." (Not: "Feel first, then act.")
 
 ---
 
-## 2. Stimmungs-Aktivitaets-Tagebuch
+## 2. Mood-Activity Diary
 
-### Ziel
-Zusammenhaenge zwischen Aktivitaeten und Stimmung sichtbar machen.
-Erkennen, welche Aktivitaeten die Stimmung verbessern und welche verschlechtern.
+### Goal
+Make connections between activities and mood visible. Recognize which activities improve mood and which worsen it.
 
-### Tagebuch-Format
+### Diary Format
 
 ```
-STIMMUNGS-AKTIVITAETS-TAGEBUCH
+MOOD-ACTIVITY DIARY
 
-Datum: [...]
+Date: [...]
 
-| Uhrzeit | Aktivitaet | Stimmung (0-10) | Freude (0-10) | Wichtigkeit (0-10) |
-|---------|-----------|-----------------|---------------|---------------------|
-| 07:00   | Aufgestanden, gefruestueckt | 3 | 2 | 5 |
-| 08:00   | Arbeit: E-Mails | 4 | 1 | 6 |
-| 10:00   | Spaziergang | 6 | 5 | 4 |
-| 12:00   | Mittagessen mit Kollegin | 7 | 6 | 7 |
-| 14:00   | Arbeit: Projekt | 5 | 3 | 7 |
-| 18:00   | Fernsehen (allein) | 3 | 2 | 1 |
-| 20:00   | Telefonat mit Freund | 6 | 5 | 8 |
+| Time  | Activity | Mood (0-10) | Enjoyment (0-10) | Importance (0-10) |
+|-------|----------|-------------|-------------------|---------------------|
+| 07:00 | Got up, had breakfast | 3 | 2 | 5 |
+| 08:00 | Work: emails | 4 | 1 | 6 |
+| 10:00 | Walk | 6 | 5 | 4 |
+| 12:00 | Lunch with colleague | 7 | 6 | 7 |
+| 14:00 | Work: project | 5 | 3 | 7 |
+| 18:00 | Watching TV (alone) | 3 | 2 | 1 |
+| 20:00 | Phone call with friend | 6 | 5 | 8 |
 
-Tagesdurchschnitt Stimmung: [...]
-Beste Aktivitaet heute: [...]
-Erkenntnis: [...]
+Daily mood average: [...]
+Best activity today: [...]
+Insight: [...]
 ```
 
-### Auswertung nach einer Woche
+### Weekly Review
 
-**Leitfragen:**
-- Welche Aktivitaeten heben die Stimmung regelmaessig?
-- Welche Aktivitaeten druecken die Stimmung?
-- Gibt es Zeiten, die besonders schwierig sind?
-- Wie viel Zeit verbringe ich mit angenehmen vs. unangenehmen Aktivitaeten?
-- Welche Aktivitaeten habe ich vermieden?
+**Guiding questions:**
+- Which activities regularly lift my mood?
+- Which activities lower my mood?
+- Are there times that are particularly difficult?
+- How much time do I spend on pleasant vs. unpleasant activities?
+- Which activities have I been avoiding?
 
 ---
 
-## 3. Aktivitaetenplanung
+## 3. Activity Planning
 
-### Schritt 1: Aktivitaetenliste erstellen
+### Step 1: Create Activity List
 
-Drei Kategorien von Aktivitaeten sammeln:
+Collect three categories of activities:
 
-**A) Angenehme Aktivitaeten (Freude, Genuss)**
-- Natur: Spaziergang, Park, Wald
-- Sozial: Freunde treffen, telefonieren, gemeinsam kochen
-- Kreativ: Musik, Malen, Schreiben, Basteln
-- Koerperlich: Sport, Yoga, Tanzen, Schwimmen
-- Genuss: Lieblingsgericht kochen, Buch lesen, Musik hoeren
-- Entspannung: Bad nehmen, Meditation, Atemuebung
+**A) Pleasant Activities (joy, enjoyment)**
+- Nature: Walk, park, forest
+- Social: Meet friends, phone calls, cook together
+- Creative: Music, painting, writing, crafting
+- Physical: Sports, yoga, dancing, swimming
+- Enjoyment: Cook favorite meal, read a book, listen to music
+- Relaxation: Take a bath, meditation, breathing exercise
 
-**B) Notwendige Aktivitaeten (Struktur, Selbstfuersorge)**
-- Haushalt: Aufraeumen, Kochen, Einkaufen
-- Koerperpflege: Duschen, Anziehen, Zaehneputzen
-- Administration: Rechnungen, Termine, Papierkram
-- Gesundheit: Arzttermine, Medikamente, Ernaehrung
+**B) Necessary Activities (structure, self-care)**
+- Household: Tidying up, cooking, shopping
+- Personal care: Showering, getting dressed, brushing teeth
+- Administration: Bills, appointments, paperwork
+- Health: Doctor's appointments, medication, nutrition
 
-**C) Werte-basierte Aktivitaeten (Sinn, Bedeutung)**
-- Siehe Abschnitt 4 unten
+**C) Values-Based Activities (meaning, significance)**
+- See section 4 below
 
-### Schritt 2: Wochenplan erstellen
-
-```
-WOCHENPLAN
-
-| Tag | Morgens | Mittags | Nachmittags | Abends |
-|-----|---------|---------|-------------|--------|
-| Mo  | [...]   | [...]   | [...]       | [...]  |
-| Di  | [...]   | [...]   | [...]       | [...]  |
-| Mi  | [...]   | [...]   | [...]       | [...]  |
-| Do  | [...]   | [...]   | [...]       | [...]  |
-| Fr  | [...]   | [...]   | [...]       | [...]  |
-| Sa  | [...]   | [...]   | [...]       | [...]  |
-| So  | [...]   | [...]   | [...]       | [...]  |
-```
-
-### Planungsregeln
-1. **Klein anfangen:** Nicht den ganzen Tag durchplanen, sondern 1-2 Aktivitaeten pro Tag
-2. **Mischung:** Angenehm + Notwendig + Werte-basiert
-3. **Konkret:** "Dienstag 15:00 Spaziergang im Park" statt "Mehr bewegen"
-4. **Realistisch:** Machbar auch bei wenig Energie
-5. **Flexibel:** Plan ist Orientierung, kein Zwang
-6. **Abgestuft:** Bei sehr geringer Energie: Mini-Schritte (5 Minuten reichen)
-
-### Umgang mit Hindernissen
-
-| Hindernis | Strategie |
-|-----------|-----------|
-| "Ich habe keine Energie" | Aktivitaet auf 5 Minuten reduzieren |
-| "Ich habe keine Lust" | Erinnerung: Motivation kommt durch Handeln |
-| "Es bringt sowieso nichts" | Experiment: Ausprobieren und Stimmung danach messen |
-| "Ich schaffe es nicht allein" | Jemanden einbinden (Verabredung = Verbindlichkeit) |
-| "Ich habe keine Zeit" | Kleine Aktivitaeten einbauen (Treppen steigen, 5 Min Pause draussen) |
-
----
-
-## 4. Werte-basierte Aktivitaetenauswahl
-
-### Prinzip
-Aktivitaeten, die mit persoenlichen Werten uebereinstimmen, erzeugen nachhaltiges
-Wohlbefinden — im Gegensatz zu reinem Vergnuegen, das schnell verfliegt.
-
-### Werte-Aktivitaeten-Mapping
-
-Aktivitaeten an persoenlichen Werten ausrichten (Beziehungen, Arbeit, Freizeit, Gesundheit, Gemeinschaft). Fuer jede Aktivitaet festlegen: Welcher Wert steckt dahinter? Wie oft pro Woche?
-
-**Beispiel:**
-
-| Wert | Aktivitaet | Haeufigkeit |
-|------|-----------|-------------|
-| Verbundenheit | Freund anrufen | 2x pro Woche |
-| Gesundheit | 20 Min spazieren | Taeglich |
-| Kreativitaet | Gitarre spielen | 1x pro Woche |
-
-Ausfuehrliche Werteklaerung (Lebensbereiche, Grabstein-Uebung, Kompass-Uebung, Werte vs. Ziele) siehe [act-techniques](../act-techniques/SKILL.md), Abschnitt 5.
-
----
-
-## 5. Fortschritt messen
-
-### Wochen-Review
+### Step 2: Create Weekly Plan
 
 ```
-WOCHEN-REVIEW
+WEEKLY PLAN
 
-Woche: [Datum]
-Geplante Aktivitaeten: [Anzahl]
-Umgesetzte Aktivitaeten: [Anzahl]
-Durchschnittliche Stimmung: [0-10]
-
-Was lief gut: [...]
-Was war schwierig: [...]
-Erkenntnis der Woche: [...]
-Plan fuer naechste Woche: [...]
+| Day | Morning | Midday | Afternoon | Evening |
+|-----|---------|--------|-----------|---------|
+| Mon | [...]   | [...]  | [...]     | [...]   |
+| Tue | [...]   | [...]  | [...]     | [...]   |
+| Wed | [...]   | [...]  | [...]     | [...]   |
+| Thu | [...]   | [...]  | [...]     | [...]   |
+| Fri | [...]   | [...]  | [...]     | [...]   |
+| Sat | [...]   | [...]  | [...]     | [...]   |
+| Sun | [...]   | [...]  | [...]     | [...]   |
 ```
 
-### Langzeit-Tracking
-- Stimmungsverlauf ueber Wochen beobachten
-- Zusammenhang zwischen Aktivitaetsgrad und Stimmung erkennen
-- Erfolge sichtbar machen (auch kleine)
+### Planning Rules
+1. **Start small:** Don't plan the whole day, but 1-2 activities per day
+2. **Mix:** Pleasant + necessary + values-based
+3. **Specific:** "Tuesday 3:00 PM walk in the park" instead of "Move more"
+4. **Realistic:** Achievable even with low energy
+5. **Flexible:** Plan is guidance, not obligation
+6. **Graduated:** For very low energy: mini-steps (5 minutes is enough)
+
+### Dealing with Obstacles
+
+| Obstacle | Strategy |
+|----------|----------|
+| "I have no energy" | Reduce activity to 5 minutes |
+| "I don't feel like it" | Reminder: motivation comes through action |
+| "It won't help anyway" | Experiment: try it and measure mood afterward |
+| "I can't do it alone" | Involve someone (appointment = commitment) |
+| "I don't have time" | Build in small activities (take stairs, 5 min break outside) |
 
 ---
 
-## Ethik und Grenzen
+## 4. Values-Based Activity Selection
 
-**Ein KI-Assistent darf:**
-- Durch das Tagebuch und die Aktivitaetenplanung fuehren
-- Aktivitaetenvorschlaege machen (nie verordnen)
-- Stimmungs-Daten dokumentieren und Muster zurueckmelden
-- Werte-Reflexion begleiten
-- Kleine Fortschritte wuerdigen
+### Principle
+Activities that align with personal values create sustainable well-being — as opposed to mere pleasure, which fades quickly.
 
-**Ein KI-Assistent darf NICHT:**
-- Bei schwerer Depression alleinige Unterstuetzung sein
-- Medikamentenbezogene Empfehlungen geben
-- Suizidalitaet einschaetzen
-- Diagnosen stellen
-- Garantieren, dass Verhaltensaktivierung ausreicht
+### Life Domains and Values
 
-**Wichtig:** Bei schwerer Depression (anhaltende Antriebslosigkeit, Suizidgedanken,
-Unfaehigkeit den Alltag zu bewaeltigen) ist professionelle Hilfe unabdingbar.
-Verhaltensaktivierung ist Ergaenzung, nicht Ersatz.
+```
+VALUES COMPASS
 
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+Relationships:     What kind of partner/friend/family member do I want to be?
+Work/Education:    What is important to me about my work?
+Leisure:           How do I want to spend my free time?
+Health:            How do I want to treat my body?
+Community:         What contribution do I want to make?
+Personal:          What kind of person do I want to be?
+```
+
+### Values-Activity Mapping
+
+**Example:**
+
+| Value | Activity | Frequency |
+|-------|----------|-----------|
+| Connection | Call a friend | 2x per week |
+| Health | 20 min walk | Daily |
+| Creativity | Play guitar | 1x per week |
+| Helpfulness | Help neighbor with shopping | 1x per week |
+| Learning | 15 min reading non-fiction | 3x per week |
+
+### Values vs. Goals
+- **Value:** A direction you want to move toward (e.g., "being a loving partner")
+- **Goal:** An achievable endpoint (e.g., "plan anniversary celebration")
+- Values can never be "checked off" — they provide ongoing orientation
 
 ---
 
-## Siehe auch
+## 5. Measuring Progress
 
-- [cognitive-restructuring](../cognitive-restructuring/SKILL.md) — Kognitive Saeule der KVT (ABC-Modell, Gedankenprotokoll)
-- [act-techniques](../act-techniques/SKILL.md) — Ausfuehrliche Werteklaerung (Hexaflex, Grabstein-Uebung, Kompass)
-- [positive-psychology](../positive-psychology/SKILL.md) — PERMA-Modell, Dankbarkeitsuebungen (ergaenzend)
+### Weekly Review
+
+```
+WEEKLY REVIEW
+
+Week: [Date]
+Planned activities: [Number]
+Completed activities: [Number]
+Average mood: [0-10]
+
+What went well: [...]
+What was difficult: [...]
+Insight of the week: [...]
+Plan for next week: [...]
+```
+
+### Long-Term Tracking
+- Observe mood trends over weeks
+- Recognize the connection between activity level and mood
+- Make successes visible (even small ones)
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Keine professionelle Therapie*
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Guide through the diary and activity planning
+- Suggest activities (never prescribe)
+- Document mood data and reflect back patterns
+- Accompany values reflection
+- Acknowledge small progress
+
+**An AI assistant must NOT:**
+- Be the sole support for severe depression
+- Make medication-related recommendations
+- Assess suicidality
+- Make diagnoses
+- Guarantee that behavioral activation is sufficient
+
+**Important:** For severe depression (persistent lack of drive, suicidal thoughts, inability to manage daily life), professional help is essential. Behavioral activation is a complement, not a substitute.
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Not professional therapy*

@@ -2,8 +2,11 @@
 language: es
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `bilingual-doc-sync`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `bilingual-doc-sync`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
@@ -11,9 +14,9 @@ language: es
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten
+# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 
-## Zweck
+## Descripción General y Propósito & Purpose
 
 Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
 wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
@@ -82,7 +85,7 @@ Dokument/Projekt WEITERE Sprachen verdient:
 4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
    gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
 
-## Beispiel
+## Ejemplo y Uso & Usage
 
 ```text
 Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."

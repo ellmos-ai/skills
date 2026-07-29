@@ -5,8 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [Français] Documentation complète traduite en français pour la compétence wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
-
+description: [Français] Compétence d'agent pour wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,18 +15,21 @@ tags: [wetter, wttr, vorschau, assist]
 language: fr
 status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
-provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `wetter`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `wetter`.
 
 
 
-# Weather
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Weather (English)
 
 Fast, key-free weather information for everyday use.
 
-## Purpose
+## Présentation et Objectif & Purpose
 
 Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
 Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
@@ -44,7 +46,7 @@ which the LLM fills in interactively with the user.
 | "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
 | Coordinates known | `wetter_core.py <lat> <lon>` |
 
-## Flux de Travail et Étapes
+## Flux de Travail et Étapes d'Exécution & Execution Steps
 
 ```
 1. Determine location: from request; else prefs.json (wetter_default_location);

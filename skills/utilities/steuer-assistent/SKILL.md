@@ -5,95 +5,82 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: >
-  Zeigt auf das eigenstaendige Modul steuer-assistent: eine lokale,
-  offline-first Beleg-Arbeitsunterlage fuer Arbeitnehmer-Werbungskosten
-  (Erfassen, centgenaues Summieren, privater ZIP-Export). Nutze diesen Skill,
-  wenn Werbungskosten-Belege strukturiert vorbereitet werden sollen -- mit
-  klarer Grenze: keine Steuerberatung, keine Pruefung der Abziehbarkeit,
-  keine Erstellung oder Uebermittlung einer Steuererklaerung (das erfolgt
-  ueber ELSTER oder zugelassene Software).
+description: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
-provenance:
-  origin: "external"
-  origin_repo: "https://github.com/ellmos-ai/steuer-assistent"
-  origin_path: "SKILL.md, steuer_assistent/ (CLI-Modul)"
-  origin_version: null
-  last_sync_from_origin: "2026-07-23"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
-
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/steuer-assistent', 'origin_path': 'SKILL.md, steuer_assistent/ (CLI module)', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 category: utilities
-tags: [steuer, werbungskosten, beleg, finanzen, wrapper, pointer-skill]
+tags: [tax, germany, receipts, finance, wrapper, pointer-skill]
 language: de
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="steuer-assistent banner">
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-# steuer-assistent -- Verweis-Skill
 
-Dieser Skill ist ein **schlanker Verweis (Wrapper)** auf das eigenstaendige,
-oeffentliche Modul-Repository
+# steuer-assistent -- Pointer Skill (Deutsch)
+
+This skill is a **thin pointer (wrapper)** to the standalone, public module
+repository
 [`ellmos-ai/steuer-assistent`](https://github.com/ellmos-ai/steuer-assistent)
-(MIT-Lizenz, public). Der eigentliche Skill lebt dort -- dieses Repository
-verlinkt und dokumentiert nur die Installation.
+(MIT license, public). The actual skill lives there -- this repository only
+links to it and documents installation.
 
-## Was das Modul tut
+Note: `steuer-assistent` is scoped to German tax law (employee
+income-related expenses, "Werbungskosten"); its CLI and documentation are
+German-language by design.
 
-`steuer-assistent` ist ein kleines, offline-first Python-Modul fuer
-selbst-kategorisierte Werbungskosten-Belege (Arbeitnehmer-Werbungskosten):
+## What the module does
 
-- Belege erfassen (Kategorie, Betrag, Datum, optionale Notiz).
-- Erfasste Werbungskosten centgenau nach Jahr summieren.
-- Eine private, nicht-amtliche ZIP-Arbeitsunterlage exportieren (CSV +
-  Zusammenfassung + Nicht-Amtlichkeits-Hinweis, ohne Belegdateien).
-- Lokaler Store (Standard `%USERPROFILE%\.steuer-assistent\steuer.db`), kein
-  Netzwerkzugriff, kein Cloud-Upload, kein Zugriff auf fremde Datenbanken.
+`steuer-assistent` is a small, offline-first Python module for
+self-categorized receipts for German employee income-related expenses
+(Werbungskosten):
 
-## Grenzen (wichtig)
+- Record receipts (category, amount, date, optional note).
+- Sum recorded expenses to the cent, per year.
+- Export a private, non-official ZIP worksheet (CSV + summary + a
+  non-official notice, without the receipt files themselves).
+- Local store (default `%USERPROFILE%\.steuer-assistent\steuer.db`), no
+  network access, no cloud upload, no access to other databases.
 
-- **Keine Steuerberatung.** Das Modul prueft weder die steuerliche
-  Abziehbarkeit einzelner Positionen noch erstellt oder uebermittelt es eine
-  Steuererklaerung.
-- Die offizielle elektronische Uebermittlung erfolgt ausschliesslich ueber
-  ELSTER bzw. dafuer zugelassene Software -- nicht ueber dieses Modul.
-- Scope: private Arbeitsunterlage fuer Arbeitnehmer-Werbungskosten; keine
-  Gewerbe- oder Betriebsausgaben-Erfassung.
+## Boundaries (important)
 
-## Installation (generisch, ohne lokale Konkretpfade)
+- **Not tax advice.** The module does not assess the deductibility of
+  individual items, and it does not create or submit a tax return.
+- Official electronic submission happens exclusively through ELSTER or
+  approved software -- not through this module.
+- Scope: a private worksheet for employee income-related expenses; no
+  business/self-employment expense tracking.
 
-1. Modul klonen:
+## Installation (generic, no local paths)
+
+1. Clone the module:
    ```bash
-   git clone https://github.com/ellmos-ai/steuer-assistent.git <klon-pfad>
+   git clone https://github.com/ellmos-ai/steuer-assistent.git <clone-path>
    ```
-2. Modul installieren und pruefen:
+2. Install and verify:
    ```bash
-   cd <klon-pfad>
+   cd <clone-path>
    python -m pip install -e .
    python -B -m pytest tests -q -p no:cacheprovider
    ```
-3. `<klon-pfad>/SKILL.md` in die eigene Skill-Umgebung uebernehmen (z. B.
-   `~/.claude/skills/steuer-assistent/`). KEINE realen lokalen Pfade oder
-   Hostnamen in eine versionierte Skill-Umgebung committen.
-4. Store-Pfad bei Bedarf ueber `STEUER_ASSISTENT_DB=<pfad>` bzw.
-   `--store <pfad>` anpassen; Standard ist das Benutzerverzeichnis.
-5. Details zu CLI-Befehlen, Datenschutz und Grenzen: siehe README des
-   Modul-Repos.
+3. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
+   `~/.claude/skills/steuer-assistent/`). Do NOT commit real local paths or
+   hostnames into a versioned skill environment.
+4. Adjust the store path if needed via `STEUER_ASSISTENT_DB=<path>` or
+   `--store <path>`; the default is the user's home directory.
+5. For CLI commands, privacy, and boundaries, see the module repo's README.
 
-## Herkunft dieses Verweis-Skills
+## Origin of this pointer skill
 
-Dieser Wrapper wurde am 2026-07-23 als Showcase-Eintrag fuer das
-`ellmos-ai/skills`-Repository vorbereitet. Es findet **keine
-Code-Duplikation** statt -- Pflege und Versionierung bleiben allein im
-Modul-Repo `ellmos-ai/steuer-assistent`.
+This wrapper was added on 2026-07-23 as a showcase entry for the
+`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
+and versioning stay solely in the `ellmos-ai/steuer-assistent` module repo.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 0.1.0 (2026-07-23)
-- Initialer Verweis-Skill auf `ellmos-ai/steuer-assistent`.
+- Initial pointer skill for `ellmos-ai/steuer-assistent`.

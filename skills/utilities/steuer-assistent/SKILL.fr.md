@@ -1,28 +1,15 @@
 ---
-name: steuer-assistent
-version: 0.1.0
-type: skill
-author: Lukas Geiger
-created: 2026-07-23
-updated: 2026-07-23
-description: [Français] Documentation complète traduite en français pour la compétence steuer-assistent: Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/steuer-assistent', 'origin_path': 'SKILL.md, steuer_assistent/ (CLI module)', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
-category: utilities
-tags: [tax, germany, receipts, finance, wrapper, pointer-skill]
 language: fr
-status: active
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `steuer-assistent`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `steuer-assistent`.
 
 
 
-# steuer-assistent -- Pointer Skill
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# steuer-assistent -- Pointer Skill (English)
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository

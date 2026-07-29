@@ -5,39 +5,28 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: >
-  Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen
-  unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
-
+description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
 category: infrastructure
 tags: [orchestrierung, multi-agent, delegation, evidenz, checkpoint, workflow]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "local-agent-skills/orchestrator/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: "2026-07-28"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-# Orchestrator
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
+
+> **English Translation** — Official English version of `orchestrator`.
+
+
+# Orchestrator (Deutsch)
+
+## Übersicht & Zweck
 
 Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
 Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
@@ -135,7 +124,7 @@ Stoppe die gesamte Delegation, wenn:
 - die erwarteten Kosten den erkennbaren Nutzen übersteigen,
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.1.0 (2026-07-28)
 - Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.

@@ -1,198 +1,208 @@
 ---
-name: achtsamkeit-basis
+name: mindfulness-basics
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  MBSR-Grundlagen, Bodyscan und Atemuebungen. Evidenzbasierte Achtsamkeitstechniken nach Jon Kabat-Zinn fuer den Alltag.
+description: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [mbsr, achtsamkeit, mindfulness, meditation, atemuebungen, bodyscan]
+tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/achtsamkeit_basis.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Achtsamkeit Basis
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> MBSR-Grundlagen, Bodyscan und Atemuebungen fuer den Alltag
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Mindfulness Basics (Deutsch)
+
+> MBSR fundamentals, body scan, and breathing exercises for everyday life
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Achtsamkeit (Mindfulness) ist die absichtsvolle, wertungsfreie Aufmerksamkeit auf den
-gegenwaertigen Moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979)
-ist das bekannteste evidenzbasierte Achtsamkeitsprogramm.
+Mindfulness is the intentional, non-judgmental attention to the present moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979) is the most well-known evidence-based mindfulness program.
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Grundhaltungen der Achtsamkeit (Kabat-Zinn)
+## 1. Core Attitudes of Mindfulness (Kabat-Zinn)
 
-| Haltung | Beschreibung | Gegenteil vermeiden |
-|---------|-------------|---------------------|
-| Nicht-Urteilen | Beobachten ohne zu bewerten | "Das ist gut/schlecht" |
-| Geduld | Dinge entfalten sich in ihrer eigenen Zeit | Hetzen, erzwingen |
-| Anfaengergeist | Offen sein, als waere es das erste Mal | Annahmen, Expertenstatus |
-| Vertrauen | In die eigene Erfahrung und Intuition | Auf andere verlassen |
-| Nicht-Streben | Einfach sein, nicht muessen | Leistungsorientierung |
-| Akzeptanz | Die Dinge so sehen wie sie sind | Kaempfen gegen Realitaet |
-| Loslassen | Erfahrungen ziehen lassen | Festhalten, Klammern |
-
----
-
-## 2. Atemuebungen
-
-### 2.1 Einfaches Atemgewahrsein (5 Minuten)
-
-**Ziel:** Ankern im gegenwaertigen Moment, Beruhigung des Nervensystems.
-
-**Anleitung:**
-1. Angenehme Sitzposition einnehmen (Stuhl, Boden, Kissen)
-2. Augen schliessen oder Blick sanft nach unten
-3. Aufmerksamkeit auf den Atem richten
-4. Wahrnehmen: Wo spuere ich den Atem? (Nasenspitze, Brustkorb, Bauch)
-5. Gedanken kommen? -> Freundlich bemerken, zurueck zum Atem
-6. Kein Ziel ausser: Beim Atem sein
-
-**Erkenntnis:** Gedanken kommen und gehen wie Wolken — du bist der Himmel dahinter.
+| Attitude | Description | Opposite to Avoid |
+|----------|-------------|-------------------|
+| Non-Judging | Observing without evaluating | "That is good/bad" |
+| Patience | Things unfold in their own time | Rushing, forcing |
+| Beginner's Mind | Being open, as if for the first time | Assumptions, expert stance |
+| Trust | In one's own experience and intuition | Relying solely on others |
+| Non-Striving | Simply being, without having to achieve | Performance orientation |
+| Acceptance | Seeing things as they are | Fighting against reality |
+| Letting Go | Allowing experiences to pass | Holding on, clinging |
 
 ---
 
-### 2.2 Weitere Atemtechniken (Krisenkontext)
+## 2. Breathing Exercises
 
-Fuer gezielte Stressreduktion und Krisenintervention siehe [stabilization-techniques](../stabilization-techniques/SKILL.md):
-- **4-7-8 Atemtechnik** (Parasympathikus-Aktivierung, Einschlafen)
-- **Box Breathing** (Fokussierung, schnelle Regulation)
-- **Physiologisches Seufzen** (schnellste Einzeltechnik)
-- **Verlaengertes Ausatmen** (Basis-Beruhigung)
+### 2.1 Simple Breath Awareness (5 Minutes)
+
+**Goal:** Anchoring in the present moment, calming the nervous system.
+
+**Instructions:**
+1. Assume a comfortable sitting position (chair, floor, cushion)
+2. Close your eyes or softly lower your gaze
+3. Direct attention to the breath
+4. Notice: Where do I feel the breath? (tip of the nose, chest, abdomen)
+5. Thoughts arise? -> Kindly notice, return to the breath
+6. No goal other than: Being with the breath
+
+**Insight:** Thoughts come and go like clouds — you are the sky behind them.
 
 ---
 
-## 3. Bodyscan
+### 2.2 4-7-8 Breathing Technique (Calming)
 
-**Ziel:** Koerperbewusstsein entwickeln, Anspannungen erkennen und loesen.
-**Dauer:** 10-30 Minuten (kuerze Variante: 5 Minuten moeglich)
+**Goal:** Activating the parasympathetic nervous system, stress reduction.
 
-**Anleitung (Kurzform):**
+**Procedure:**
+1. Inhale: 4 seconds
+2. Hold: 7 seconds
+3. Exhale: 8 seconds (longer than inhaling!)
+4. Repeat: 3-4 cycles
+
+**When to use:** Before sleep, during acute stress, before difficult situations.
+
+---
+
+### 2.3 Box Breathing (Square Breathing)
+
+**Goal:** Balance, concentration (also used by Navy SEALs, elite athletes).
+
+**Procedure:**
+1. Inhale: 4 seconds
+2. Hold: 4 seconds
+3. Exhale: 4 seconds
+4. Hold: 4 seconds
+5. Repeat: 4 cycles
+
+---
+
+## 3. Body Scan
+
+**Goal:** Developing body awareness, recognizing and releasing tension.
+**Duration:** 10-30 minutes (shorter version: 5 minutes possible)
+
+**Instructions (Short Form):**
 
 ```
-1. Rueckenlage oder bequemes Sitzen
-2. Augen schliessen, 3 tiefe Atemzuege
-3. Aufmerksamkeit zu den Fusssohlen bringen
-   - Wahrnehmen: Temperatur, Druck, Kontakt zum Boden
-   - Kein Veraendern, nur beobachten
-4. Langsam hinaufwandern:
-   Fuesse -> Unterschenkel -> Knie -> Oberschenkel
-   -> Becken -> Bauch -> Brust -> Schultern
-   -> Arme -> Haende -> Hals -> Gesicht -> Kopf
-5. Bei Anspannung: Einatmen in den Bereich, beim Ausatmen loslassen
-6. Am Ende: Gesamten Koerper als Ganzes wahrnehmen
-7. Sanft zurueck in den Raum kommen
+1. Lie on your back or sit comfortably
+2. Close eyes, take 3 deep breaths
+3. Bring attention to the soles of your feet
+   - Notice: Temperature, pressure, contact with the ground
+   - No changing, just observing
+4. Slowly move upward:
+   Feet -> Lower legs -> Knees -> Thighs
+   -> Pelvis -> Abdomen -> Chest -> Shoulders
+   -> Arms -> Hands -> Neck -> Face -> Head
+5. At tension: Breathe into the area, release on exhale
+6. At the end: Perceive the entire body as a whole
+7. Gently return to the room
 ```
 
-**Dokumentation danach:**
-- Was habe ich bemerkt?
-- Wo war Anspannung?
-- Wie fuehle ich mich jetzt im Vergleich vorher?
+**Documentation afterward:**
+- What did I notice?
+- Where was there tension?
+- How do I feel now compared to before?
 
 ---
 
-## 4. STOP-Technik (Mini-Achtsamkeit im Alltag)
+## 4. STOP Technique (Mini-Mindfulness in Everyday Life)
 
-**S** — **Stop:** Innehalten, was auch immer du gerade tust
-**T** — **Take a breath:** Einen tiefen Atemzug nehmen
-**O** — **Observe:** Beobachten: Gedanken, Gefuehle, Koerpersensationen
-**P** — **Proceed:** Bewusst weitermachen (oder entscheiden was als naechstes)
+**S** — **Stop:** Pause whatever you are doing
+**T** — **Take a breath:** Take one deep breath
+**O** — **Observe:** Observe: thoughts, feelings, body sensations
+**P** — **Proceed:** Consciously continue (or decide what to do next)
 
-**Einsatz:** Kurze Pause jederzeit, besonders bei Stress oder Entscheidungen.
-
----
-
-## 5. Achtsamkeit im Alltag (Informal Practice)
-
-Keine Zeit fuer formelle Uebungen? Alltagstaetigkeiten achtsam gestalten:
-
-| Aktivitaet | Achtsamkeits-Fokus |
-|------------|-------------------|
-| Essen | Geschmack, Textur, Geruch bewusst wahrnehmen |
-| Gehen | Jeden Schritt spueren (Bodenkontakt, Gewichtsverlagerung) |
-| Zaehneputzen | Nur das tun, nichts nebenbei denken |
-| Abwasch | Temperatur des Wassers, Geraeusche, Bewegungen |
-| Autofahren | Vollstaendig praesent (kein Radio, kein Grubeln) |
-| Wartezeiten | Statt Handy: Umgebung beobachten, atmen |
+**Use:** Brief pause at any time, especially during stress or decisions.
 
 ---
 
-## 6. MBSR-Programm Ueberblick (8 Wochen)
+## 5. Mindfulness in Daily Life (Informal Practice)
 
-Das vollstaendige MBSR-Programm als Referenz:
+No time for formal exercises? Make everyday activities mindful:
 
-| Woche | Fokus |
-|-------|-------|
-| 1 | Automatischer Pilot vs. Achtsamkeit |
-| 2 | Umgang mit Hindernissen |
-| 3 | Achtsamkeit im Koerper (Yoga) |
-| 4 | Stressreaktionen erkennen |
-| 5 | Stressfaktoren und reagieren vs. antworten |
-| 6 | Achtsame Kommunikation |
-| 7 | Selbstfuersorge |
-| 8 | Achtsamkeit im alltaeglichen Leben |
+| Activity | Mindfulness Focus |
+|----------|------------------|
+| Eating | Consciously notice taste, texture, smell |
+| Walking | Feel each step (ground contact, weight shift) |
+| Brushing teeth | Only do that, nothing else on the side |
+| Doing dishes | Temperature of the water, sounds, movements |
+| Driving | Fully present (no radio, no ruminating) |
+| Waiting | Instead of phone: observe surroundings, breathe |
 
 ---
 
-## Ethik und Grenzen
+## 6. MBSR Program Overview (8 Weeks)
 
-**Ein KI-Assistent darf:**
-- Achtsamkeitsuebungen erklaeren und anleiten
-- MBSR-Inhalte vermitteln (Psychoedukation)
-- Atemuebungen und Bodyscan anleiten
-- STOP-Technik erklaeren und ermutigen
+The complete MBSR program as reference:
 
-**Ein KI-Assistent darf NICHT:**
-- Formelle MBSR-Kurse ersetzen
-- Achtsamkeit bei Trauma-Patienten ohne professionelle Begleitung anleiten
-- Dissoziation oder Flashbacks therapeutisch bearbeiten
-- Medikamentenbezogene Empfehlungen geben
-
-**Verlaufsmessung:**
-- Stimmung vor/nach Uebung (0-10 Skala)
-- Regelmaessigkeit tracken (hab ich heute geubt?)
-- Auffaelligkeiten: Wo war die Aufmerksamkeit schwer zu halten?
+| Week | Focus |
+|------|-------|
+| 1 | Autopilot vs. mindfulness |
+| 2 | Dealing with obstacles |
+| 3 | Mindfulness in the body (yoga) |
+| 4 | Recognizing stress reactions |
+| 5 | Stressors and reacting vs. responding |
+| 6 | Mindful communication |
+| 7 | Self-care |
+| 8 | Mindfulness in everyday life |
 
 ---
 
-## Quellenangaben
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Explain and guide mindfulness exercises
+- Convey MBSR content (psychoeducation)
+- Guide breathing exercises and body scan
+- Explain and encourage the STOP technique
+
+**An AI assistant must NOT:**
+- Replace formal MBSR courses
+- Guide mindfulness for trauma patients without professional supervision
+- Therapeutically address dissociation or flashbacks
+- Make medication-related recommendations
+
+**Progress tracking:**
+- Mood before/after exercise (0-10 scale)
+- Track regularity (did I practice today?)
+- Observations: Where was attention hard to maintain?
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+## References
 
 - Kabat-Zinn, J. (1990). *Full Catastrophe Living: Using the Wisdom of Your Body and Mind to Face Stress, Pain, and Illness.* Delacorte Press.
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: Kabat-Zinn (1990), MBSR-Programm — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: Kabat-Zinn (1990), MBSR Program — Not professional therapy*

@@ -1,31 +1,17 @@
 ---
-name: rojo
-version: 1.0.0
-type: skill
-author: Lukas Geiger + Claude
-created: 2026-06-17
-updated: 2026-06-17
-description: [Français] Documentation complète traduite en français pour la compétence rojo: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-category: game-dev
-tags: [rojo, roblox, luau, rokit, wally, lune, sync, build, gamedev]
 language: fr
-status: active
-dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rojo/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `rojo`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `rojo`.
 
 
 
-# Rojo — Filesystem → Roblox Studio Sync
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Purpose
+
+# Rojo — Filesystem → Roblox Studio Sync (English)
+
+## Présentation et Objectif & Purpose
 
 Rojo connects a normal filesystem project (`.luau` files in `src/`, versioned with Git)
 to Roblox Studio. You write code in the editor of your choice (VS Code, Claude Code), and Rojo

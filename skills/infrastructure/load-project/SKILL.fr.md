@@ -2,16 +2,19 @@
 language: fr
 ---
 
-> **Français** — [Français] Documentation complète traduite en français pour la compétence `load-project`.
+> **Français** — Documentation officielle complète traduite en français pour la compétence `load-project`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `load-project`.
 
 
-# Load Project
+# Load Project (English)
 
-## Zweck
+## Présentation et Objectif & Purpose
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,

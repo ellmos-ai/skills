@@ -19,10 +19,10 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `system-onboarding`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# System Onboarding
+# System Onboarding (Deutsch)
 
 Use this protocol to establish a new or rebuilt workstation for local-first agent
 work. It is a sequencing and verification guide, not an installer and not a source
@@ -83,7 +83,7 @@ extensions deployed, unsupported capabilities, and any deferred user decisions. 
 successful command exit alone is not evidence that an application loaded its new
 configuration or that a scheduled task achieved its intended outcome.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.2.0 (2026-07-29)
 

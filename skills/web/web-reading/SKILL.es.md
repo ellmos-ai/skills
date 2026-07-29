@@ -5,8 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [Español] Documentación completa traducida al español para la habilidad web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
-
+description: [Español] Documentación completa para la habilidad web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,17 +15,20 @@ tags: [web-scraping, content-extraction, research, router]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['requests', 'beautifulsoup4']}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `web-reading`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `web-reading`.
 
 
 
-# Web Reading (Router)
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
-## Purpose
+
+# Web Reading (Router) (English)
+
+## Descripción General y Propósito & Purpose
 
 Fetch and process web content — but don't pick a tool blindly. This skill
 routes: **purpose first, then the best available tool.** The actual
@@ -82,10 +84,10 @@ If **no** tool is available for the purpose, recommend installing the
 **`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper)
+# from the local module folder (.MODULES/.TOOLS/web-scraper) (English)
 pip install ".[http,extract]"          # + [screenshot] for screenshots
 
-# then:
+# then: (English)
 web-scraper extract <url>
 ```
 

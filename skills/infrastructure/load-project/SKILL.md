@@ -1,44 +1,16 @@
 ---
-name: load-project
-version: 1.1.0
-type: protocol
-author: Claude + Codex
-created: 2026-06-17
-updated: 2026-07-28
-description: >
-  Zu Beginn einer konkreten Projektaufgabe oder bei unklarem Kontext: Ziel
-  auflösen, geltende Regelhierarchie laden, verbindliche Referenzen verfolgen
-  und vor der eigentlichen Arbeit einen evidenzbasierten Lagebericht erstellen.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: false
-
-category: infrastructure
-tags: [projekt, boot, kontext, regeln, locks, orientierung, onboarding]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "local-agent-skills/load-project/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: "2026-07-28"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
 ---
 
-# Load Project
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
+
+> **English Translation** — Official English version of `load-project`.
+
+
+# Load Project (Deutsch)
+
+## Übersicht & Zweck
 
 Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
 Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
@@ -151,7 +123,7 @@ Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
 - Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
   geladen werden soll.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.1.0 (2026-07-28)
 - Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.

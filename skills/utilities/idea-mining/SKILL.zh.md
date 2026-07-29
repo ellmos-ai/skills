@@ -2,8 +2,11 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `idea-mining`.
+> **中文** — 针对该技能的官方完整中文文档: `idea-mining`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `idea-mining`.
@@ -11,9 +14,9 @@ language: zh
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen
+# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
 Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
@@ -102,7 +105,7 @@ Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): R
 verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
 Versuchs-Doku sind hier das Gedächtnis.
 
-## Beispiel
+## 使用示例与实践 & Usage
 
 ```text
 Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
@@ -135,7 +138,7 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `rotation-check` — Gerüst für den periodischen Einsatz.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-03)
 - Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in

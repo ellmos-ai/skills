@@ -1,33 +1,19 @@
 ---
-name: dev
-version: 0.1.0
-type: expert
-author: ellmos
-created: 2026-06-22
-updated: 2026-06-22
-description: [中文] 针对该技能的完整中文文档: dev: Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: assist
-tags: [dev, coding, projekt-scan, ati, codecommander]
 language: zh
-status: active
-dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
-provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `dev`.
+> **中文** — 针对该技能的官方完整中文文档: `dev`.
 
 
 
-# Dev — Developer Assistant (ATI)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Dev — Developer Assistant (ATI) (English)
 
 Gets an overview first, then hands off to the right tools.
 
-## Purpose
+## 概述与执行目标 & Purpose
 
 Successor to BACH's ATI/entwickler agent. Two tasks:
 1. **Project scan** (headless, stdlib): fast, token-efficient overview of
@@ -81,7 +67,7 @@ to others (e.g. ruff/pylint/eslint) if the user prefers them.
 - `assist/AGENTS.md` — Umbrella router
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 0.1.0 (2026-06-22)
 - Initial version. ATI/entwickler successor: headless project scan (stdlib) +

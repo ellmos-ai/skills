@@ -2,8 +2,11 @@
 language: zh
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `workflow-extract`.
+> **中文** — 针对该技能的官方完整中文文档: `workflow-extract`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `workflow-extract`.
@@ -11,9 +14,9 @@ language: zh
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen
+# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
 
-## Zweck
+## 概述与执行目标 & Purpose
 
 Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
 **Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
@@ -131,7 +134,7 @@ Automatisierungs-Kandidaten aus alten Chatverläufen":
 3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
    Kandidatenliste an den User vor dem Massenbau.
 
-## Beispiel
+## 使用示例与实践 & Usage
 
 ```text
 User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —
@@ -164,7 +167,7 @@ das soll ab jetzt wöchentlich über alle Paper laufen."
   Automations-Typ); als Baustein referenzieren statt neu erfinden.
 - `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
 
-## 变更日志与历史记录
+## 变更日志与历史
 
 ### 1.1.0 (2026-07-03)
 - Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,

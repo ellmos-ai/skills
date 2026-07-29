@@ -5,112 +5,81 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: >
-  Transkribiert Audio-/Video-Dateien in Text. Nutzt Whisper (openai-whisper)
-  oder Vosk (offline) als optionales Backend — beide werden per Presence-Check
-  erkannt. Ohne Backend: Platzhalter-Modus mit Dummy-Ausgabe (Dry-Run).
+description: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: assist
-tags:
-  - transkription
-  - audio
-  - speech-to-text
-  - whisper
-  - vosk
-  - offline
+tags: [transkription, audio, speech-to-text, whisper, vosk, offline]
 language: de
-status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python:
-    - name: openai-whisper
-      optional: true
-      install: "pip install openai-whisper"
-      purpose: "STT-Backend Option 1 (cloud/local model)"
-    - name: vosk
-      optional: true
-      install: "pip install vosk"
-      purpose: "STT-Backend Option 2 (vollständig offline)"
-
-provenance:
-  origin: eigenentwurf
-  origin_path: ""
-  origin_version: ""
-  origin_repo: ""
-  origin_license: MIT
-  last_sync_from_origin: ""
-  notes: >
-    Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht
-    als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus
-    BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale
-    Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-## Zweck
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-Audio-/Video-Dateien in Text umwandeln — lokal, ohne Cloud-Pflicht. Der Skill
-erkennt selbst, ob Whisper oder Vosk installiert ist, und wählt das beste
-verfügbare Backend. Ohne Backend läuft er im Dry-Run-Modus und gibt einen
-Platzhaltertext zurück, sodass der Workflow immer funktioniert.
 
-Transkripte werden lokal in `transkription/store.db` gespeichert und können
-abgefragt werden.
+## Übersicht & Zweck
+
+Convert audio/video files to text — locally, without mandatory cloud access. The skill
+automatically detects whether Whisper or Vosk is installed and selects the best
+available backend. Without a backend it runs in dry-run mode and returns a
+placeholder text, so the workflow always works.
+
+Transcripts are stored locally in `transkription/store.db` and can be queried.
 
 ---
 
-## Trigger
+## Triggers
 
-| Phrase | Aktion |
+| Phrase | Action |
 |---|---|
-| „Transkribiere diese Audio" | Audio-Datei transkribieren |
-| „Transkribiere [Datei]" | Benannte Datei transkribieren |
-| „Zeig meine Transkripte" | Letzte Transkripte auflisten |
-| „Suche Transkript [Begriff]" | Volltextsuche in Transkripten |
-| „Exportiere Transkript [ID]" | Transkript als TXT exportieren |
+| "Transcribe this audio" | Transcribe audio file |
+| "Transcribe [file]" | Transcribe named file |
+| "Show my transcripts" | List latest transcripts |
+| "Search transcript [term]" | Full-text search in transcripts |
+| "Export transcript [ID]" | Export transcript as TXT |
 
 ---
 
-## Workflow
+## Workflow & Vorgehen
 
-1. **Backend-Check**: Prüfen ob `whisper` oder `vosk` importierbar ist.
-2. **Datei-Prüfung**: Eingabedatei muss existieren (Audio: wav, mp3, m4a, ogg, flac; Video: mp4, mkv, webm — Extraktion via ffmpeg).
-3. **Transkription**: Backend aufrufen und Rohtext erhalten.
-4. **Speichern**: Ergebnis mit Metadaten (Datei, Dauer, Sprache, Backend, Zeitstempel) in `store.db`.
-5. **Ausgabe**: Text zurückgeben; optional als `.txt` exportieren.
+1. **Backend check**: Check whether `whisper` or `vosk` is importable.
+2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
+3. **Transcription**: Call backend and obtain raw text.
+4. **Save**: Store result with metadata (file, duration, language, backend, timestamp) in `store.db`.
+5. **Output**: Return text; optionally export as `.txt`.
 
 ---
 
-## CLI-Einstieg
+## CLI Entry Point
 
 ```bash
-# Datei transkribieren
+# Transcribe file (Deutsch)
 python transkription_core.py transcribe audio.wav
 
-# Mit expliziter Sprache
+# With explicit language (Deutsch)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-Run (kein Backend nötig)
+# Dry-run (no backend required) (Deutsch)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# Transkripte auflisten
+# List transcripts (Deutsch)
 python transkription_core.py list [--limit 20]
 
-# Volltextsuche
-python transkription_core.py search "Begriff"
+# Full-text search (Deutsch)
+python transkription_core.py search "term"
 
-# Exportieren
-python transkription_core.py export <id> [--out datei.txt]
+# Export (Deutsch)
+python transkription_core.py export <id> [--out file.txt]
 
-# Backend-Check
+# Backend check (Deutsch)
 python transkription_core.py check
 
-# Alternativer Store-Pfad (z.B. für Tests)
+# Alternative store path (e.g. for tests) (Deutsch)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
@@ -118,60 +87,60 @@ python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 
 ## Store
 
-| Eigenschaft | Wert |
+| Property | Value |
 |---|---|
-| Typ | SQLite |
-| Pfad (Standard) | `skills/assist/transkription/store.db` |
-| Override | `--store <pfad>` oder Env `TRANSKRIPTION_STORE` |
-| Tabellen | `transcripts` |
+| Type | SQLite |
+| Path (default) | `skills/assist/transkription/store.db` |
+| Override | `--store <path>` or env `TRANSKRIPTION_STORE` |
+| Tables | `transcripts` |
 
 ### Schema `transcripts`
 
 ```sql
 CREATE TABLE IF NOT EXISTS transcripts (
-    id          TEXT PRIMARY KEY,  -- UUID (kurz: 8 Hex)
-    file_path   TEXT NOT NULL,     -- Originalpfad der Audiodatei
-    file_name   TEXT NOT NULL,     -- Dateiname (ohne Pfad, für Anzeige)
-    text        TEXT NOT NULL,     -- Transkribierter Text
-    language    TEXT,              -- Sprache (z.B. "de", "en")
+    id          TEXT PRIMARY KEY,  -- UUID (short: 8 hex)
+    file_path   TEXT NOT NULL,     -- original path of audio file
+    file_name   TEXT NOT NULL,     -- filename (without path, for display)
+    text        TEXT NOT NULL,     -- transcribed text
+    language    TEXT,              -- language (e.g. "de", "en")
     backend     TEXT,              -- "whisper" | "vosk" | "dry-run"
-    duration_s  REAL,              -- Dauer in Sekunden (wenn bekannt)
-    created_at  TEXT NOT NULL,     -- ISO-8601 Timestamp
-    tags        TEXT               -- Komma-getrennte Tags (optional)
+    duration_s  REAL,              -- duration in seconds (if known)
+    created_at  TEXT NOT NULL,     -- ISO-8601 timestamp
+    tags        TEXT               -- comma-separated tags (optional)
 );
 ```
 
 ---
 
-## Haltung
+## Attitude
 
-- Ohne installiertes Backend funktioniert der Skill im Dry-Run-Modus (Demo-Text).
-- Whisper wird gegenüber Vosk bevorzugt (bessere Deutsch-Qualität).
-- Die Wahl zwischen Whisper und Vosk kann per `assist/prefs.json` (`transkription_backend: "whisper"|"vosk"|"auto"`) festgelegt werden.
-- ffmpeg für Video-Extraktion wird separat benötigt und ist nicht im Skill enthalten.
-
----
-
-## Datenschutz
-
-- **Alle Transkripte bleiben lokal** — keine Cloud-Übertragung ohne Whisper-Online-Modus.
-- Whisper kann lokal (tiny/base/medium-Modell) oder über OpenAI-API genutzt werden.
-  Standardmäßig wird das lokale Modell verwendet.
-- `store.db` enthält potenziell sensible Gesprächsinhalte — **nicht in Git committen**.
-- Empfehlung: `.gitignore` um `store.db` ergänzen.
+- Without an installed backend the skill works in dry-run mode (demo text).
+- Whisper is preferred over Vosk (better German quality).
+- The choice between Whisper and Vosk can be set via `assist/prefs.json` (`transkription_backend: "whisper"|"vosk"|"auto"`).
+- ffmpeg for video extraction is needed separately and is not included in the skill.
 
 ---
 
-## Verwandte Ressourcen
+## Privacy
 
-- BACH `hub/_services/voice/voice_stt.py` — Backend-Muster (Inspiration, read-only)
-- Skill `utilities/yt-transcriber` — YouTube-Transkription (separater Skill, kein Duplikat: YT-spezifisch)
-- `tools/module-installer/module_installer.py` — Registry enthält whisper + vosk
+- **All transcripts stay local** — no cloud transfer without Whisper online mode.
+- Whisper can be used locally (tiny/base/medium model) or via OpenAI API.
+  By default the local model is used.
+- `store.db` may contain sensitive conversation content — **do not commit to Git**.
+- Recommendation: add `store.db` to `.gitignore`.
 
 ---
 
-## Changelog
+## Related Resources
 
-| Version | Datum | Änderung |
+- BACH `hub/_services/voice/voice_stt.py` — backend pattern (inspiration, read-only)
+- Skill `utilities/yt-transcriber` — YouTube transcription (separate skill, not a duplicate: YT-specific)
+- `tools/module-installer/module_installer.py` — registry contains whisper + vosk
+
+---
+
+## Änderungsprotokoll
+
+| Version | Date | Change |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Erstanlage — eigener SQLite-Store, Whisper/Vosk-Presence-Check |
+| 0.1.0 | 2026-06-22 | Initial creation — own SQLite store, Whisper/Vosk presence check |

@@ -5,8 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa traducida al español para la habilidad folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
-
+description: [Español] Documentación completa para la habilidad folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,14 +15,17 @@ tags: [folder, flattening, filesystem, bash, reorganization, cleanup]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `folder-flattening`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `folder-flattening`.
 
 
 
-# Workflow: Folder Flattening
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Workflow: Folder Flattening (English)
 
 Goal: Convert nested folder structures into a flat, machine-readable structure.
 Advantage: No more clicking through directories — search via database (Verzeichnis.db) instead.
@@ -99,11 +101,11 @@ Simply add a new line to the `MEDIA_TYPES` array:
 ## Execution
 
 ```bash
-# Complete run:
+# Complete run: (English)
 cd /path/to/target/directory
 bash ordner_flattening_komplett.sh
 
-# Or individual phases:
+# Or individual phases: (English)
 bash ordner_flattening_komplett.sh --phase flatten
 bash ordner_flattening_komplett.sh --phase tripel
 bash ordner_flattening_komplett.sh --phase media

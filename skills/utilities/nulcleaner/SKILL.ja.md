@@ -5,8 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] スキルに関する完全な日本語ドキュメント: nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
-
+description: [日本語] エージェントスキル: nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [windows, nul, cleanup, git-bash, filesystem]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **日本語** — [日本語] スキルに関する完全な日本語ドキュメント: `nulcleaner`.
+> **日本語** — スキルに関する完全な公式日本語ドキュメント: `nulcleaner`.
 
 
 
-# nulcleaner - Windows NUL File Cleanup
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# nulcleaner - Windows NUL File Cleanup (English)
 
 ## The Problem
 
@@ -49,13 +51,13 @@ This tool finds and deletes such NUL files via the extended UNC path (`\\?\`).
 ## CLI Usage
 
 ```bash
-# Scan only (shows found NUL files)
+# Scan only (shows found NUL files) (English)
 python nulcleaner.py scan /path/to/directory
 
-# Scan and delete
+# Scan and delete (English)
 python nulcleaner.py delete /path/to/directory
 
-# Start GUI mode
+# Start GUI mode (English)
 python nulcleaner.py gui
 ```
 

@@ -5,8 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [Русский] Полное руководство и документация на русском языке для навыка bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
-
+description: [Русский] Навык агента для bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [bugs, debugging, sweep, quality-assurance, workflow, convergence]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `bugsweep`.
+> **Русский** — Официальная полная документация на русском языке для навыка `bugsweep`.
 
 
 
-# /bugsweep — Systematic Bug-Sweep Workflow
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# /bugsweep — Systematic Bug-Sweep Workflow (English)
 
 Iterative bug hunting with a converging stop criterion. Scales with the codebase, escalates when the search looks superficial, and prevents repetition through area tracking.
 

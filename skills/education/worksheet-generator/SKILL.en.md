@@ -5,38 +5,23 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: >
-  Points to the standalone module worksheet-generator: generates
-  individualized worksheets and practice material for educational and
-  therapeutic professionals from a support goal (free text + optional ICF
-  codes), level, and age -- optionally enriched by a scan of existing
-  material. Use this skill when a worksheet, exercise sheet, or support
-  material should be created. No client/person reference (only
-  goal/level/age). The ICF reference is bring-your-own -- with a clear
-  boundary: a material generator, not a therapy program; generated sheets
-  must be professionally reviewed before use.
+description: Points to the standalone module worksheet-generator: generates individualized worksheets and practice material for educational and therapeutic professionals from a support goal (free text + optional ICF codes), level, and age -- optionally enriched by a scan of existing material. Use this skill when a worksheet, exercise sheet, or support material should be created. No client/person reference (only goal/level/age). The ICF reference is bring-your-own -- with a clear boundary: a material generator, not a therapy program; generated sheets must be professionally reviewed before use.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
-provenance:
-  origin: "external"
-  origin_repo: "https://github.com/ellmos-ai/worksheet-generator"
-  origin_path: "SKILL.md, worksheet_generator/ (Python module), _tools/icf_fetch.py"
-  origin_version: null
-  last_sync_from_origin: "2026-07-23"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
-
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/worksheet-generator', 'origin_path': 'SKILL.md, worksheet_generator/ (Python module), _tools/icf_fetch.py', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 category: education
 tags: [worksheets, icf, education, therapy-support, wrapper, pointer-skill]
 language: en
 status: active
 ---
 
-# worksheet-generator -- Pointer Skill
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# worksheet-generator -- Pointer Skill (English)
 
 This skill is a **thin pointer (wrapper)** to the standalone, public module
 repository

@@ -19,10 +19,10 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `semantic-persona-routing`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# Semantic Persona Routing
+# Semantic Persona Routing (Deutsch)
 
 Route by capability first and apply personality second. Build a portable map that
 keeps semantic role choice, deterministic endpoint lookup and provider-specific
@@ -128,7 +128,7 @@ Rebuild the map when source roles or skill inventory change. A live resolver may
 supersede a stale map for endpoint availability, but it must not silently rewrite
 the semantic role taxonomy.
 
-## Example
+## Beispiel & Anwendung
 
 Request: "Organize my receipts and prepare the tax-year overview."
 
@@ -137,7 +137,7 @@ installed tax skill, and finally applies an explicitly linked meticulous tax
 persona. If the tax expert exists but no portable tax skill is installed, report
 `GAP` and continue only through an explicitly configured fallback.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-28)
 

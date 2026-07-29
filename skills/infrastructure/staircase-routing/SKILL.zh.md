@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [中文] 针对该技能的完整中文文档: staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
-
+description: [中文] 智能体技能: staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,14 +15,17 @@ tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, si
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **中文** — [中文] 针对该技能的完整中文文档: `staircase-routing`.
+> **中文** — 针对该技能的官方完整中文文档: `staircase-routing`.
 
 
 
-# Staircase-Routing (Up-and-Down / Walking Bass Routing)
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
 
 The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
 

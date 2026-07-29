@@ -5,8 +5,7 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: [Русский] Полное руководство и документация на русском языке для навыка automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
-
+description: [Русский] Навык агента для automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,20 +15,23 @@ tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cr
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `automation-self-care`.
+> **Русский** — Официальная полная документация на русском языке для навыка `automation-self-care`.
 
 
 
-# Automation Self-Care
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Automation Self-Care (English)
 
 Create a native, provider-specific maintenance fleet from one provider-neutral
 control loop. Preserve the original intent of the ANTIGRAVITY task family while
 requiring evidence, reversible changes and native readback.
 
-## Обязательные ограничения и правила
+## Non-negotiable Boundaries & Rules
 
 - Treat discovery, planning, approval, mutation and readback as separate phases.
 - Use the target app's supported automation API, command or UI. Never assume that
@@ -46,7 +48,7 @@ requiring evidence, reversible changes and native readback.
 - Count success only after outcome evidence, not merely scheduler start or exit 0.
 - Never copy secrets, private prompts or personal data into a shared registry.
 
-## Рабочий процесс и шаги
+## Рабочий процесс и этапы выполнения & Execution Steps
 
 ### 1. Discover the native automation surface
 
@@ -141,7 +143,7 @@ Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-ho
 Treat token or subscription limitation as capacity state, not a broken actor.
 Return delegated coverage after the original actor produces a successful receipt.
 
-## Обязательные результаты и артефакты
+## Required Outputs & Deliverables
 
 For each setup or care run report:
 
@@ -152,7 +154,7 @@ For each setup or care run report:
 - rollback location and return condition;
 - shared coverage update, if a coordination registry exists.
 
-## Пример использования
+## Пример и применение & Usage
 
 User: "Set up self-maintaining schedules in this desktop app."
 

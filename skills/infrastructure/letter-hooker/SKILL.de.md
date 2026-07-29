@@ -19,10 +19,10 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kon
 provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
-> **Deutsche Übersetzung** — Offizielle deutsche Version von `letter-hooker`.
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# Letter-Hooker (Prompt-Level Preflight & Governance Engine)
+# Letter-Hooker (Prompt-Level Preflight & Governance Engine) (Deutsch)
 
 The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
 
@@ -30,7 +30,7 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Core Capabilities
+## Kernfähigkeiten & Funktionen
 
 1. **Preflight Bootloaders & Document Traversal Rules**:
    - **Upward & Downward Search**: Enforces strict instructions for agents to inspect `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md`, and `README.md` at the current working directory level. If missing, traverse upwards until found; then inspect downwards.
@@ -49,7 +49,7 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Key Letter Hooks
+## Wichtige Letter Hooks
 
 - **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
 - **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
@@ -58,10 +58,10 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Workflow Integration
+## Workflow & Vorgehen
 
 ```bash
-# Execute the Letter-Hooker Maintenance Engine
+# Execute the Letter-Hooker Maintenance Engine (Deutsch)
 python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ```
 

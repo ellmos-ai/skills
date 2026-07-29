@@ -1,29 +1,15 @@
 ---
-name: counseling-basics
-version: 1.0.0
-type: skill
-author: Lukas Geiger
-created: 2026-03-12
-updated: 2026-03-12
-description: [Español] Documentación completa traducida al español para la habilidad counseling-basics: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
-
-standalone: true
-anthropic_compatible: true
-bach_compatible: false
-bach_origin: true
-category: therapy
-tags: [counseling, active-listening, communication, therapy]
 language: es
-status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — [Español] Documentación completa traducida al español para la habilidad `counseling-basics`.
+> **Español** — Documentación oficial completa traducida al español para la habilidad `counseling-basics`.
 
 
 
-# Counseling Basics
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# Counseling Basics (English)
 
 > Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
 

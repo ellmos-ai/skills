@@ -5,278 +5,248 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Motivational Interviewing (MI) nach Miller und Rollnick: OARS-Techniken, Change Talk, Veraenderungsbereitschaft foerdern.
+description: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [motivational-interviewing, oars, change-talk, ambivalenz, miller-rollnick]
+tags: [motivational-interviewing, oars, change-talk, ambivalence, miller-rollnick]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/motivational_interviewing.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Motivierende Gespraechsfuehrung (Motivational Interviewing)
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> OARS-Techniken, Stadien der Veraenderungsbereitschaft und Change Talk: Veraenderungsmotivation foerdern ohne Druck oder Manipulation
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Motivational Interviewing (Deutsch)
+
+> OARS techniques, stages of change, and change talk: Fostering intrinsic motivation for change without pressure or manipulation
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Motivational Interviewing (MI) wurde von William R. Miller und Stephen Rollnick
-entwickelt. Es ist ein klientenzentrierter, direktiver Beratungsansatz zur Foerderung
-intrinsischer Veraenderungsmotivation. MI wird evidenzbasiert eingesetzt bei
-Suchtbehandlung, Gesundheitsverhalten, Therapie-Adherence und Verhaltensaenderung.
+Motivational Interviewing (MI) was developed by William R. Miller and Stephen Rollnick. It is a client-centered, directive counseling approach for fostering intrinsic motivation for change. MI is used evidence-based in addiction treatment, health behavior, therapy adherence, and behavior change.
 
-Evidenz: Ueber 200 RCTs belegen die Wirksamkeit von MI, insbesondere bei
-Suchtverhalten (Lundahl et al. 2010, Cochrane Review), Gesundheitsverhalten
-und Therapietreue.
+Evidence: Over 200 RCTs support the effectiveness of MI, particularly for addictive behaviors (Lundahl et al. 2010, Cochrane Review), health behaviors, and treatment adherence.
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Grundhaltung des MI
+## 1. MI Spirit and Principles
 
-### Die vier Grundprinzipien
+### The Four Principles
 
-1. **Partnerschaftlichkeit:** Zusammenarbeit auf Augenhoehe, nicht Expertentum
-2. **Akzeptanz:** Autonomie respektieren, Staerken anerkennen, absoluter Wert der Person
-3. **Mitgefuehl:** Das Wohl der Person steht im Vordergrund
-4. **Evokation:** Die Motivation steckt bereits in der Person — sie wird hervorgelockt, nicht eingepflanzt
+1. **Partnership:** Collaboration on equal footing, not expert authority
+2. **Acceptance:** Respecting autonomy, acknowledging strengths, absolute worth of the person
+3. **Compassion:** The well-being of the person comes first
+4. **Evocation:** Motivation already resides within the person — it is elicited, not implanted
 
-### Der Geist des MI
-MI ist keine Technik-Sammlung, sondern eine Haltung. Die Techniken funktionieren
-nur im Kontext dieser Grundhaltung. Ohne sie wird MI zu Manipulation.
-
----
-
-## 2. OARS-Techniken
-
-OARS sind die vier Kernkompetenzen der motivierenden Gespraechsfuehrung.
-
-### O — Open Questions (Offene Fragen)
-
-**Prinzip:** Fragen stellen, die zum Nachdenken und Erzaehlen einladen, nicht mit
-Ja/Nein beantwortet werden koennen.
-
-**Beispiele:**
-- "Was wuerdest du dir wuenschen, dass sich veraendert?"
-- "Wie wuerde dein Leben aussehen, wenn du diese Veraenderung geschafft haettest?"
-- "Was hat dich dazu gebracht, darueber nachzudenken?"
-- "Was ist dir an deiner Gesundheit wichtig?"
-- "Was wuerdest du gewinnen, wenn du das aenderst?"
-
-**Vermeiden:**
-- Geschlossene Fragen: "Willst du aufhoeren zu rauchen?"
-- Suggestivfragen: "Du weisst doch, dass das schaedlich ist?"
-- Warum-Fragen: "Warum hast du das gemacht?" (wirkt vorwurfsvoll)
+### The Spirit of MI
+MI is not a collection of techniques, but an attitude. The techniques only work within the context of this foundational spirit. Without it, MI becomes manipulation.
 
 ---
 
-### A — Affirming (Wuerdigen / Bestaerken)
+## 2. OARS Techniques
 
-**Prinzip:** Staerken, Bemuehungen und positive Schritte des Gegenueber anerkennen.
-Nicht Loben ("Du bist toll"), sondern konkret benennen, was beobachtet wurde.
+OARS are the four core competencies of motivational interviewing.
 
-**Beispiele:**
-- "Es braucht Mut, darueber offen zu sprechen."
-- "Du hast es geschafft, drei Tage durchzuhalten — das zeigt, dass du es ernst meinst."
-- "Trotz der schwierigen Situation bist du heute gekommen — das zeigt Engagement."
-- "Du hast dir offensichtlich viele Gedanken gemacht."
+### O — Open Questions
 
-**Wann einsetzen:**
-- Wenn die Person Schritte in Richtung Veraenderung beschreibt
-- Wenn sie trotz Rueckschlaegen nicht aufgibt
-- Um Selbstwirksamkeit zu staerken
+**Principle:** Ask questions that invite reflection and storytelling, that cannot be answered with yes/no.
+
+**Examples:**
+- "What would you like to see change?"
+- "How would your life look if you had made this change?"
+- "What brought you to think about this?"
+- "What is important to you about your health?"
+- "What would you gain if you made this change?"
+
+**Avoid:**
+- Closed questions: "Do you want to quit smoking?"
+- Leading questions: "You know that's harmful, right?"
+- Why-questions: "Why did you do that?" (sounds accusatory)
 
 ---
 
-### R — Reflecting (Reflektieren / Spiegeln)
+### A — Affirming
 
-**Prinzip:** Das Gesagte in eigenen Worten zurueckgeben — um Verstaendnis zu zeigen
-und die Person zum Weiterdenken anzuregen.
+**Principle:** Acknowledge strengths, efforts, and positive steps of the other person. Not praising ("You're great"), but specifically naming what was observed.
 
-**Arten des Reflektierens:**
+**Examples:**
+- "It takes courage to speak openly about this."
+- "You managed to hold on for three days — that shows you're serious."
+- "Despite the difficult situation, you came today — that shows commitment."
+- "You've clearly given this a lot of thought."
 
-| Art | Beschreibung | Beispiel |
-|-----|-------------|---------|
-| Einfach | Inhalt wiederholen/paraphrasieren | "Du sagst, es faellt dir schwer." |
-| Vertiefend | Unterschwelliges aufgreifen | "Klingt so, als waerst du hin- und hergerissen." |
-| Beidseitig | Beide Seiten der Ambivalenz spiegeln | "Einerseits moechtest du aufhoeren, andererseits gibt es dir etwas." |
-| Uebertreibend | Leicht ueberspitzen (vorsichtig!) | "Es gibt also ueberhaupt keinen Grund, etwas zu aendern?" |
+**When to use:**
+- When the person describes steps toward change
+- When they persist despite setbacks
+- To strengthen self-efficacy
 
-**Beidseitiges Reflektieren (Ambivalenz):**
+---
+
+### R — Reflecting
+
+**Principle:** Give back what was said in your own words — to show understanding and encourage further thinking.
+
+**Types of reflections:**
+
+| Type | Description | Example |
+|------|-------------|---------|
+| Simple | Repeat/paraphrase content | "You're saying it's hard for you." |
+| Deepening | Pick up on what's beneath the surface | "It sounds like you're torn." |
+| Double-sided | Mirror both sides of ambivalence | "On one hand you want to stop, on the other it gives you something." |
+| Amplified | Slightly overstate (carefully!) | "So there's absolutely no reason to change anything?" |
+
+**Double-sided reflection (ambivalence):**
 ```
-"Einerseits sagst du, dass du gerne weniger Alkohol trinken wuerdest.
-Andererseits ist dir der soziale Aspekt beim Feierabendbier wichtig.
-Beides macht Sinn."
+"On one hand, you say you'd like to drink less alcohol.
+On the other hand, the social aspect of after-work drinks is important to you.
+Both make sense."
 ```
 
 ---
 
-### S — Summarizing (Zusammenfassen)
+### S — Summarizing
 
-**Prinzip:** Das Gespraech buendeln — besonders Change Talk hervorheben.
+**Principle:** Bundle the conversation — especially highlighting change talk.
 
-**Arten:**
-- **Sammelnd:** Mehrere Punkte zusammenfassen
-- **Verbindend:** Frueheres mit Aktuellem verbinden
-- **Ueberleigend:** Am Ende des Gespraechs, leitet naechste Schritte ein
+**Types:**
+- **Collecting:** Summarize multiple points
+- **Linking:** Connect earlier statements with current ones
+- **Transitional:** At the end of a conversation, leading to next steps
 
-**Beispiel:**
+**Example:**
 ```
-"Lass mich zusammenfassen, was ich bisher gehoert habe:
-Du hast bemerkt, dass dein Schlaf sich verschlechtert hat und das
-deine Arbeit beeinflusst. Du hast schon mal versucht, weniger Koffein
-zu trinken, und das hat teilweise geholfen. Dir ist wichtig, fit und
-leistungsfaehig zu sein. Gleichzeitig ist dir der Kaffee-Genuss am Morgen
-wichtig. Stimmt das so? Was moechtest du ergaenzen?"
+"Let me summarize what I've heard so far:
+You've noticed that your sleep has gotten worse and it's
+affecting your work. You've tried reducing caffeine before,
+and that partly helped. Being fit and productive is important
+to you. At the same time, your morning coffee enjoyment matters.
+Does that sound right? What would you like to add?"
 ```
 
 ---
 
-## 3. Stadien der Veraenderungsbereitschaft (Transtheoretisches Modell)
+## 3. Stages of Change (Transtheoretical Model)
 
-### Die Stadien (Prochaska & DiClemente)
+### The Stages (Prochaska & DiClemente)
 
-| Stadium | Beschreibung | MI-Strategie |
-|---------|-------------|-------------|
-| Absichtslosigkeit | Kein Problembewusstsein, keine Veraenderungsabsicht | Informieren, Neugier wecken, nicht draengen |
-| Absichtsbildung | Ambivalenz: "Vielleicht sollte ich..." | Ambivalenz erkunden, Change Talk foerdern |
-| Vorbereitung | Entschluss gefasst, Plan wird gemacht | Planung unterstuetzen, Zuversicht staerken |
-| Handlung | Aktive Umsetzung der Veraenderung | Bestaerken, Hindernisse bearbeiten |
-| Aufrechterhaltung | Veraenderung stabilisieren | Rueckfallpraevention, Erfolge wuerdigen |
-| Rueckfall | Rueckkehr zu altem Verhalten | Normalisieren, neu motivieren, aus Erfahrung lernen |
+| Stage | Description | MI Strategy |
+|-------|-------------|-------------|
+| Precontemplation | No problem awareness, no intention to change | Inform, spark curiosity, don't push |
+| Contemplation | Ambivalence: "Maybe I should..." | Explore ambivalence, foster change talk |
+| Preparation | Decision made, making plans | Support planning, strengthen confidence |
+| Action | Actively implementing change | Affirm, work through obstacles |
+| Maintenance | Stabilizing the change | Relapse prevention, acknowledge successes |
+| Relapse | Return to old behavior | Normalize, re-motivate, learn from experience |
 
-**Wichtig:** Rueckfall ist kein Scheitern, sondern Teil des Veraenderungsprozesses.
+**Important:** Relapse is not failure, but part of the change process.
 
-### Stadium erkennen
+### Recognizing the Stage
 
-**Leitfragen:**
-- "Hast du schon darueber nachgedacht, etwas zu veraendern?" (Absichtslosigkeit vs. Absichtsbildung)
-- "Was spricht dafuer, was dagegen?" (Ambivalenz erkunden)
-- "Hast du schon konkrete Ideen, wie du es angehen wuerdest?" (Vorbereitung)
-- "Was hast du schon versucht?" (Handlungserfahrung)
+**Guide questions:**
+- "Have you thought about changing something?" (Precontemplation vs. Contemplation)
+- "What speaks for it, what against it?" (Exploring ambivalence)
+- "Do you have concrete ideas about how you'd approach it?" (Preparation)
+- "What have you already tried?" (Action experience)
 
 ---
 
-## 4. Change Talk erkennen und verstaerken
+## 4. Recognizing and Strengthening Change Talk
 
-### Was ist Change Talk?
+### What is Change Talk?
 
-Change Talk sind Aussagen der Person, die in Richtung Veraenderung weisen.
-MI zielt darauf ab, Change Talk zu erhoehen und Sustain Talk (Beibehalten des
-Status quo) nicht zu verstaerken.
+Change talk consists of statements by the person that point toward change. MI aims to increase change talk and not reinforce sustain talk (maintaining the status quo).
 
 ### DARN-CAT Framework
 
-**Vorbereitender Change Talk (DARN):**
-- **D**esire (Wunsch): "Ich wuerde gerne..."
-- **A**bility (Faehigkeit): "Ich koennte..."
-- **R**easons (Gruende): "Es waere besser, weil..."
-- **N**eed (Notwendigkeit): "Ich muss etwas aendern..."
+**Preparatory Change Talk (DARN):**
+- **D**esire: "I would like to..."
+- **A**bility: "I could..."
+- **R**easons: "It would be better because..."
+- **N**eed: "I need to change something..."
 
-**Mobilisierender Change Talk (CAT):**
-- **C**ommitment (Verpflichtung): "Ich werde..."
-- **A**ctivation (Aktivierung): "Ich bin bereit..."
-- **T**aking Steps (Schritte): "Ich habe bereits..."
+**Mobilizing Change Talk (CAT):**
+- **C**ommitment: "I will..."
+- **A**ctivation: "I'm ready to..."
+- **T**aking Steps: "I've already..."
 
-### Change Talk foerdern
+### Fostering Change Talk
 
-**Strategien:**
-1. **Offene Fragen stellen:**
-   - "Was wuerdest du gewinnen, wenn sich etwas aendert?"
-   - "Was gibt dir Zuversicht, dass du das schaffen koenntest?"
+**Strategies:**
+1. **Ask open questions:**
+   - "What would you gain if something changed?"
+   - "What gives you confidence that you could do this?"
 
-2. **Wichtigkeits- und Zuversichts-Skala:**
-   - "Wie wichtig ist dir diese Veraenderung auf einer Skala von 0 bis 10?"
-   - "Wie zuversichtlich bist du, dass du es schaffen koenntest?"
-   - "Warum eine 5 und nicht eine 2?" (staerkt vorhandene Motivation)
+2. **Importance and confidence scaling:**
+   - "How important is this change to you on a scale of 0 to 10?"
+   - "How confident are you that you could manage it?"
+   - "Why a 5 and not a 2?" (strengthens existing motivation)
 
-3. **Extreme erkunden:**
-   - "Was koennte im schlimmsten Fall passieren, wenn sich nichts aendert?"
-   - "Was waere das Beste, das passieren koennte, wenn du es aenderst?"
+3. **Exploring extremes:**
+   - "What could happen in the worst case if nothing changes?"
+   - "What would be the best thing that could happen if you changed it?"
 
-4. **Zurueckschauen und Vorausschauen:**
-   - "Wie war das frueher, bevor dieses Thema aufkam?"
-   - "Wo siehst du dich in fuenf Jahren, wenn alles so bleibt?"
+4. **Looking back and looking forward:**
+   - "What was it like before this issue came up?"
+   - "Where do you see yourself in five years if everything stays the same?"
 
 ---
 
-## 5. Umgang mit Widerstand
+## 5. Dealing with Resistance
 
-### Widerstand als Signal
+### Resistance as a Signal
 
-In MI wird "Widerstand" als Zeichen gedeutet, dass der Berater zu schnell vorgeht
-oder die Autonomie der Person nicht ausreichend respektiert.
+In MI, "resistance" is interpreted as a sign that the counselor is moving too fast or not adequately respecting the person's autonomy.
 
-### Strategien
+### Strategies
 
-| Situation | Reaktion |
+| Situation | Response |
 |-----------|----------|
-| "Ich habe kein Problem" | Akzeptieren, nicht argumentieren, Neugier zeigen |
-| "Sie verstehen mich nicht" | Reflektieren: "Es ist dir wichtig, verstanden zu werden" |
-| "Das klappt sowieso nicht" | Fruehere Erfolge erkunden, Zuversicht staerken |
-| Person wird aergerlich | Tempo reduzieren, Autonomie betonen, empathisch spiegeln |
+| "I don't have a problem" | Accept, don't argue, show curiosity |
+| "You don't understand me" | Reflect: "Being understood is important to you" |
+| "That won't work anyway" | Explore past successes, strengthen confidence |
+| Person becomes angry | Slow down, emphasize autonomy, reflect empathically |
 
-**Goldene Regel:** Nie gegen Widerstand argumentieren. Mit dem Widerstand
-mitgehen (Rolling with Resistance), nicht dagegen.
-
----
-
-## Ethik und Grenzen
-
-**Ein KI-Assistent darf:**
-- OARS-Techniken anwenden, um Reflexion zu foerdern
-- Change Talk erkennen und zurueckspiegeln
-- Informationen zu Veraenderungsprozessen geben
-- Ambivalenz respektvoll erkunden
-
-**Ein KI-Assistent darf NICHT:**
-- Veraenderung erzwingen oder manipulieren
-- Entscheidungen fuer die Person treffen
-- Suchttherapie oder Entzugsbegleitung durchfuehren
-- Drohungen oder Angstappelle einsetzen
-- Die Autonomie der Person untergraben
-
-**Kernprinzip:** Die Person entscheidet. Ein KI-Assistent unterstuetzt den Reflexionsprozess.
-
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+**Golden rule:** Never argue against resistance. Roll with the resistance, don't push against it.
 
 ---
 
-## Siehe auch
+## Ethics and Boundaries
 
-- [counseling-basics](../counseling-basics/SKILL.md) — Grundlagen (Aktives Zuhoeren, Spiegeln, Validierung)
-- [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) — Skalierungstechniken (Wichtigkeits-/Zuversichts-Skala)
+**An AI assistant may:**
+- Use OARS techniques to foster reflection
+- Recognize and reflect back change talk
+- Provide information about change processes
+- Respectfully explore ambivalence
+
+**An AI assistant must NOT:**
+- Force or manipulate change
+- Make decisions for the person
+- Conduct addiction therapy or withdrawal support
+- Use threats or fear appeals
+- Undermine the person's autonomy
+
+**Core principle:** The person decides. An AI assistant supports the reflection process.
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Keine professionelle Therapie*
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Not professional therapy*

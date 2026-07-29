@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
 updated: 2026-06-19
-description: [Русский] Полное руководство и документация на русском языке для навыка privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+description: [Русский] Навык агента для privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,16 +18,19 @@ dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path'
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — [Русский] Полное руководство и документация на русском языке для навыка `privat-mail-writer`.
+> **Русский** — Официальная полная документация на русском языке для навыка `privat-mail-writer`.
 
+
+
+> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `privat-mail-writer`.
 
 
-# Privat-Mail-Writer
+# Privat-Mail-Writer (English)
 
-## Zweck
+## Общий обзор и назначение & Purpose
 
 Privat-Mail-Writer erstellt kurze, freundliche und kontaktabhängig passende Mailentwürfe. Der Skill ist nutzerneutral angelegt: Er enthält keine echten Kontakte, keine echten Signaturen und keine echten Mailinhalte.
 

@@ -5,38 +5,24 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Creates a portable AI workspace on a USB drive or any drive.
-  RAG pipeline with local LLM models (Ollama), vector database
-  (ChromaDB), and preconfigured prompts.
+description: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: infrastructure
 tags: [portable, rag, ollama, usb-drive, offline, local-llm]
 language: en
 status: active
-
-dependencies:
-  tools: []
-  services: [ollama]
-  protocols: []
-  python: [chromadb, ollama]
-
-provenance:
-  origin: "bach"
-  origin_path: "MODULAR_AGENTS/AI-Portable"
-  origin_version: "0.1.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# AI Portable Setup
+> **English** — Offizielle English-Version / Documento Oficial en English.
+
+
+# AI Portable Setup (English)
 
 Creates a portable AI workspace with a local RAG pipeline.
 Designed for USB drives or external drives — works offline
@@ -45,19 +31,19 @@ with Ollama and local embedding models.
 ## Quick Start
 
 ```bash
-# Create structure on USB drive
+# Create structure on USB drive (English)
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system:
+# Then on the target system: (English)
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents
+# Index documents (English)
 python rag/ingest.py
 
-# Query
+# Query (English)
 python rag/query.py "My question..."
 python rag/query.py --mode icf "Observations about the client"
 ```

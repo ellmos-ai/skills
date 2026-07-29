@@ -5,157 +5,137 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: >
-  Wie Spieleentwicklung als Prozess funktioniert — Rollen, Teilaufgaben, Workflows und Rollen-
-  beschreibungen, speziell (aber nicht nur) für Roblox. Nutze diesen Skill, wenn es um die
-  ORGANISATION von Game-Dev geht statt um konkreten Code: Welche Rollen gibt es (Creative Director,
-  Engineer, Artist, Polish/Audio, Business, QA-Tester, Spielkritiker)? Wer macht welche Teilaufgabe?
-  Wie sieht eine Entwicklungs-Chain (Konzept → Backend → Frontend → Polish → Test) aus? Wie schreibt
-  man ein Game Design Document / KONZEPT.md? Wie teilen sich mehrere (KI-)Agenten ein Spiel auf?
-  Auch auslösen bei "neues Spiel planen", "Game Design Document erstellen", "welche Rollen brauche ich
-  für mein Spiel", "Entwicklungs-Workflow für ein Game", "wer testet das Spiel", "Spielidee strukturieren",
-  "Roblox Genre/Monetarisierung".
+description: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
-
 category: game-dev
 tags: [game-design, roblox, rollen, workflow, gdd, konzept, monetarisierung, qa, gamedev]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "custom"
-  origin_path: "~/.claude/skills/game-design/"
-  origin_version: "1.0.0"
-  origin_repo: null
-  last_sync_from_origin: null
-  last_sync_to_origin: null
-  local_changes_since_sync: false
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-# Game Design — Rollen, Teilaufgaben & Workflows
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-## Zweck
 
-Spieleentwicklung ist Teamarbeit aus klar getrennten Disziplinen — auch wenn eine Einzelperson
-oder ein KI-Agent mehrere davon übernimmt. Dieser Skill liefert das **Organisationsmodell**:
-welche Rollen es gibt, welche Teilaufgaben dazugehören, in welcher Reihenfolge sie zusammenwirken
-und wie man ein Spiel als Konzept (GDD) festhält. Für das *technische* Wie siehe `/rojo` (Sync),
-`/rbx-studio` (Editor/Assets) und den Metaskill `/rbx-dev` (Architektur).
+# Game Design — Roles, Subtasks & Workflows (Deutsch)
 
-Nutze diesen Skill beim Planen eines neuen Spiels, beim Aufteilen der Arbeit (auch zwischen
-mehreren KI-Agenten) und beim Schreiben/Prüfen eines Game Design Documents.
+## Übersicht & Zweck
 
-## Die Rollen (5 Entwicklung + 2 Test)
+Game development is teamwork made of clearly separated disciplines — even when a single person
+or one AI agent takes on several of them. This skill provides the **organizational model**:
+which roles exist, which subtasks belong to them, in what order they interact
+and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync),
+`/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
 
-Eine bewährte, kompakte Rollenaufteilung. Vollständige Beschreibungen mit allen Teilaufgaben:
+Use this skill when planning a new game, when dividing up the work (also across
+several AI agents) and when writing/reviewing a Game Design Document.
+
+## The Roles (5 development + 2 test)
+
+A proven, compact role distribution. Full descriptions with all subtasks:
 [`references/roles-and-workflows.md`](references/roles-and-workflows.md).
 
-| Rolle | Fokus | Kern-Teilaufgaben |
+| Role | Focus | Core subtasks |
 | --- | --- | --- |
-| **Creative Director** | WAS & WARUM & für WEN | GDD/KONZEPT, Mechaniken entwerfen & balancen, Priorisierung/Sprints, Story, UX-Flow |
-| **Engineer** | WIE (technisch) | Server/Client/Shared-Code, Game-Loop, Netzwerk/Remotes, DevOps (Rojo, Build), Bugfixing |
-| **Artist** | wie die Welt aussieht | Welt-/Level-Aufbau, Beleuchtung & Atmosphäre, Partikel, Asset-Beschaffung (inkl. Malware-Check) |
-| **Polish / Audio** | wie es sich anfühlt & klingt | SFX/Musik/Ambient, Animationen, UI/UX-Feinschliff, "Juice" (Screen-Shake, Hit-Stop), Feedback |
-| **Business** | nach außen | Store-Seite, Icon/Thumbnail, Monetarisierung (Gamepass/Products/Pass), Analytics, Community |
-| **QA-Tester** | technisch korrekt? | Bug-Scans im Code, Playtests + Console prüfen, reproduzierbare Reports, Regression, Performance |
-| **Spielkritiker** | macht es Spaß? | First-/Long-Impression aus Spielersicht, ehrliche Bewertung (Fun, Klarheit, Fairness), Vorschläge |
+| **Creative Director** | WHAT & WHY & for WHOM | GDD/KONZEPT, design & balance mechanics, prioritization/sprints, story, UX flow |
+| **Engineer** | HOW (technical) | Server/client/shared code, game loop, networking/remotes, DevOps (Rojo, build), bugfixing |
+| **Artist** | how the world looks | World/level building, lighting & atmosphere, particles, asset sourcing (incl. malware check) |
+| **Polish / Audio** | how it feels & sounds | SFX/music/ambient, animations, UI/UX fine-tuning, "juice" (screen shake, hit-stop), feedback |
+| **Business** | outward-facing | Store page, icon/thumbnail, monetization (gamepass/products/pass), analytics, community |
+| **QA-Tester** | technically correct? | Bug scans in code, playtests + check console, reproducible reports, regression, performance |
+| **Game Critic** | is it fun? | First/long impression from the player's view, honest assessment (fun, clarity, fairness), suggestions |
 
-**Grundregel:** Entwicklung und Test sind **getrennte** Rollen — idealerweise getrennte Personen
-oder Agenten. Wer Code schreibt, testet ihn nicht objektiv. Der Spielkritiker darf hart sein.
+**Basic rule:** Development and testing are **separate** roles — ideally separate people
+or agents. Whoever writes code does not test it objectively. The Game Critic may be tough.
 
-## Workflows (Entwicklungs-Chains)
+## Workflow & Vorgehen
 
-Arbeit fließt als Kette von Rolle zu Rolle. Die wichtigsten Muster:
+Work flows as a chain from role to role. The most important patterns:
 
-**Standard-Feature-Chain:**
+**Standard feature chain:**
 ```
-Creative Director (plant Feature) → Engineer (Backend) → Artist (Frontend/Assets)
-→ Polish/Audio (Sound + Feinschliff) → QA-Tester (technischer Test)
-→ Spielkritiker (Spielerperspektive) → Creative Director (Feedback → nächste Iteration)
+Creative Director (plans feature) → Engineer (backend) → Artist (frontend/assets)
+→ Polish/Audio (sound + fine-tuning) → QA-Tester (technical test)
+→ Game Critic (player perspective) → Creative Director (feedback → next iteration)
 ```
 
-**Quick-Fix-Chain:** QA-Tester (Bug) → Engineer (Fix) → QA-Tester (verifiziert).
+**Quick-fix chain:** QA-Tester (bug) → Engineer (fix) → QA-Tester (verifies).
 
-**Asset-Chain:** Artist (Store-Suche) → Artist (Malware-Scan) → Artist (einbinden) → QA (visuell).
+**Asset chain:** Artist (store search) → Artist (malware scan) → Artist (integrate) → QA (visual).
 
-**Polish-Chain:** Spielkritiker (Schwäche) → Polish/Audio → Artist → Spielkritiker (Re-Check).
+**Polish chain:** Game Critic (weakness) → Polish/Audio → Artist → Game Critic (re-check).
 
-**Mensch-im-Loop:** [Agenten-Chain] → menschlicher Tester → Creative Director (Feedback) → [Chain].
+**Human-in-the-loop:** [agent chain] → human tester → Creative Director (feedback) → [chain].
 
-Jede Iteration sollte ein kurzes Changelog hinterlassen. Abbruchbedingung: Zeitbudget erreicht
-**oder** Qualitätsziel erfüllt.
+Each iteration should leave a short changelog. Stop condition: time budget reached
+**or** quality goal met.
 
-### Persona-basiertes Testen
+### Persona-based testing
 
-Ein Spiel überlebt nur, wenn ganz unterschiedliche Spieler damit klarkommen. Teste daher (auch
-simuliert durch Agenten) aus mehreren **Personas** statt nur aus deiner eigenen Sicht — variiert
-nach Alter, Erfahrung, Plattform (PC/Mobile/Tablet/Konsole), Aufmerksamkeitsspanne, Sprache und
-Zugänglichkeit. Beispiele: ein 9-jähriges Casual-Kind am Tablet, das nur Knöpfe drücken will; ein
-12-jähriger Core-Spieler am PC, der die Meta sucht; ein Anfänger 60+, der große Buttons braucht.
-Persona-Tests sollten **blind** laufen (Tester kennt die Design-Absicht nicht).
+A game only survives if very different players can cope with it. Therefore test (also
+simulated by agents) from several **personas** instead of only from your own perspective — varied
+by age, experience, platform (PC/mobile/tablet/console), attention span, language and
+accessibility. Examples: a 9-year-old casual kid on a tablet who only wants to press buttons; a
+12-year-old core player on PC who looks for the meta; a 60+ beginner who needs big buttons.
+Persona tests should run **blind** (the tester does not know the design intent).
 
 ## Game Design Document (KONZEPT.md)
 
-Halte jedes Spiel in einem knappen GDD fest — Vorlage:
-[`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Mindest-Struktur:
+Capture every game in a concise GDD — template:
+[`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Minimum structure:
 
-- **Vision** — 1–2 Sätze: Was ist das Spiel?
-- **Genre / Vorbild** — Einordnung + Referenztitel.
-- **Kern-Mechaniken** — **max. 3–4** (Fokus erzwingt Qualität).
-- **Gameplay-Loop** — die Minute-für-Minute-Schleife des Spielers.
-- **Spielmodi / Zeitformate** — falls relevant.
-- **Monetarisierung** — Gamepasses, Developer Products, Battle Pass, Shop.
-- **Technik** — Stack (Rojo/Frameworks), grobe Architektur.
-- **Nächste Schritte** — Implementierungs-Checkliste.
-- **Bekannte Bugs / offene Punkte**.
+- **Vision** — 1–2 sentences: What is the game?
+- **Genre / reference** — classification + reference titles.
+- **Core mechanics** — **max. 3–4** (focus forces quality).
+- **Gameplay loop** — the player's minute-by-minute loop.
+- **Game modes / time formats** — if relevant.
+- **Monetization** — gamepasses, developer products, battle pass, shop.
+- **Tech** — stack (Rojo/frameworks), rough architecture.
+- **Next steps** — implementation checklist.
+- **Known bugs / open issues**.
 
-## Multi-Agent-Arbeitsteilung
+## Multi-agent division of labor
 
-Mehrere KI-Agenten (oder Mensch+KI) können sich ein Spiel aufteilen — zwei Modi:
+Several AI agents (or human+AI) can divide up a game — two modes:
 
-- **Schwarm** — gleiche Aufgabe, verschiedene Bereiche (z. B. drei Agenten balancen je ein System).
-- **Team** — verschiedene Rollen, aufeinander abgestimmt (Engineer + Artist + Polish parallel an
-  einem Feature, koordiniert vom Creative Director).
+- **Swarm** — same task, different areas (e.g. three agents each balance one system).
+- **Team** — different roles, coordinated with each other (Engineer + Artist + Polish in parallel on
+  one feature, coordinated by the Creative Director).
 
-Praxisbewährt: Entwicklung und Test **nie** demselben Agenten geben; Rollen-Prompts pro Rolle
-fixieren (System-Prompt = Rollenbeschreibung); jede Chain-Iteration endet mit Changelog +
-Testbericht; der Mensch bleibt Qualitäts-Gate.
+Proven in practice: **never** give development and testing to the same agent; fix role prompts per role
+(system prompt = role description); each chain iteration ends with a changelog +
+test report; the human remains the quality gate.
 
-## Roblox-spezifischer Markt-Kontext (Orientierung)
+## Roblox-specific market context (orientation)
 
-Plattform-Wissen, das die Konzeptarbeit für Roblox erdet (keine Garantie, nur Faustregeln):
+Platform knowledge that grounds the concept work for Roblox (no guarantee, just rules of thumb):
 
-- **Profitable Genres:** Simulator, RPG, Tycoon, Horror, Obby — sehr unterschiedliche Skalierung
-  und Aufwand.
-- **Unterversorgte Nischen (höheres Risiko, weniger Konkurrenz):** echtes Strategie/RTS-Lite,
-  qualitativ hochwertige Sportspiele, Cozy/Life-Sim, Coop-Puzzle/Escape, Auto-Battler.
-- **Goldene Monetarisierungs-Regeln:** (1) LiveOps ist Pflicht (Updates alle 2–4 Wochen),
-  (2) Monetarisierung soll Gameplay *unterstützen*, nicht blockieren, (3) Social-Design (Trading,
-  Coop) ist Infrastruktur, (4) Mobile-First (50 %+ spielen am Handy), (5) Content-Creator-
-  Tauglichkeit (YouTube/TikTok) ist Marketing.
+- **Profitable genres:** Simulator, RPG, Tycoon, Horror, Obby — very different scaling
+  and effort.
+- **Underserved niches (higher risk, less competition):** real strategy/RTS-lite,
+  high-quality sports games, cozy/life sim, co-op puzzle/escape, auto-battler.
+- **Golden monetization rules:** (1) LiveOps is mandatory (updates every 2–4 weeks),
+  (2) monetization should *support* gameplay, not block it, (3) social design (trading,
+  co-op) is infrastructure, (4) mobile-first (50%+ play on phones), (5) content-creator
+  suitability (YouTube/TikTok) is marketing.
 
-> Für aktuelle, belastbare Marktzahlen recherchieren statt schätzen — die obigen Punkte sind
-> stabile Heuristiken, keine Live-Daten.
+> For current, reliable market figures, research instead of estimating — the points above are
+> stable heuristics, not live data.
 
-## Weiterführend
+## Further reading
 
-- Schwesterskills: `/rojo`, `/rbx-studio`; Metaskill `/rbx-dev` (Architektur-Pattern,
-  Projektstruktur, Luau-Lessons).
-- Referenz-Pipeline (falls vorhanden): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
-  `IDEAS.md`, Marktanalysen).
+- Sister skills: `/rojo`, `/rbx-studio`; meta-skill `/rbx-dev` (architecture patterns,
+  project structure, Luau lessons).
+- Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
+  `IDEAS.md`, market analyses).
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-06-17)
-- Initiale Version. Generisches Rollen-/Workflow-Framework, destilliert aus `.ROBLOX/AGENT_ROLES.md`
-  & `GUIDE.md`, nutzerneutral (ohne projektspezifisches Portfolio).
+- Initial version. Generic role/workflow framework, distilled from `.ROBLOX/AGENT_ROLES.md`
+  & `GUIDE.md`, user-neutral (without project-specific portfolio).

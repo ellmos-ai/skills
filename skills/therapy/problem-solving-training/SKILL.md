@@ -1,159 +1,141 @@
 ---
-name: problemloese-training
+name: problem-solving-training
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: >
-  Strukturiertes Problemloesen in 6 Schritten: Problem definieren, Ziele, Brainstorming, Bewertung, Umsetzung und Evaluation.
+description: Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
-
 category: therapy
-tags: [problemloesung, entscheidung, strukturiert, sechs-schritte, coping]
+tags: [problem-solving, decision, structured, six-steps, coping]
 language: de
 status: active
-
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-
-provenance:
-  origin: "bach"
-  origin_path: "system/skills/therapie/problemloese_training.md"
-  origin_version: "1.0.0"
-  origin_repo: "github.com/ellmos-ai/bach"
-  last_sync_from_origin: "2026-03-12"
-  last_sync_to_origin: null
-  local_changes_since_sync: true
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-# Problemloese-Training
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
-> Strukturiertes Problemloesen in 6 Schritten nach D'Zurilla und Goldfried: Probleme systematisch angehen statt gruebelnd im Kreis drehen
 
-Siehe: [ETHICS.md](../ETHICS.md)
+# Problem-Solving Training (Deutsch)
 
-**Siehe auch:** [decide](../../utilities/decide/SKILL.md) (Weighted Scoring, Eisenhower Matrix fuer komplexe Multi-Kriterien-Entscheidungen) | [behavioral-activation](../behavioral-activation/SKILL.md) (Aktivitaetenplanung bei Depression)
+> Structured problem solving in 6 steps according to D'Zurilla and Goldfried: Approaching problems systematically instead of ruminating in circles
+
+See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Kontext
+## Context
 
-Das Problemloese-Training (Social Problem-Solving, SPS) ist eine evidenzbasierte
-Intervention aus der kognitiven Verhaltenstherapie. Es hilft Menschen, Probleme
-systematisch und loesungsorientiert anzugehen statt sich in Gruebeln, Vermeidung
-oder impulsivem Handeln zu verlieren.
+Problem-Solving Training (Social Problem-Solving, SPS) is an evidence-based intervention from cognitive behavioral therapy. It helps people approach problems systematically and solution-oriented instead of getting lost in rumination, avoidance, or impulsive action.
 
-Evidenz: Meta-Analysen zeigen signifikante Effekte bei Depression (d=0.83),
-Angststoerungen und Stressbelastung (Malouff et al. 2007, Bell & D'Zurilla 2009).
+Evidence: Meta-analyses show significant effects for depression (d=0.83), anxiety disorders, and stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
 
-**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
-**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Note:** This is support, not a substitute for professional therapy.
+**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Problemloese-Orientierung
+## 1. Problem-Solving Orientation
 
-Bevor die eigentlichen Schritte beginnen, ist die innere Haltung entscheidend.
+Before the actual steps begin, the inner attitude is decisive.
 
-### Foerderliche Haltung
-- "Probleme gehoeren zum Leben — sie sind loesbar"
-- "Ich kann Schritt fuer Schritt vorgehen"
-- "Es gibt selten nur eine richtige Loesung"
-- "Nicht-Handeln ist auch eine Entscheidung — meist keine gute"
+### Helpful Attitude
+- "Problems are part of life — they are solvable"
+- "I can proceed step by step"
+- "There is rarely only one right solution"
+- "Not acting is also a decision — usually not a good one"
 
-### Hinderliche Haltung
-- "Das hat alles keinen Sinn"
-- "Ich kann das sowieso nicht"
-- "Es gibt keine Loesung"
-- Impulsives Handeln ohne Nachdenken
-- Vermeidung und Aufschieben
+### Unhelpful Attitude
+- "None of this makes any sense"
+- "I can't do it anyway"
+- "There is no solution"
+- Impulsive action without thinking
+- Avoidance and procrastination
 
-**Erster Schritt:** Die eigene Problemloese-Haltung reflektieren.
+**First step:** Reflect on your own problem-solving attitude.
 
 ---
 
-## 2. Das 6-Schritte-Modell
+## 2. The 6-Step Model
 
-### Schritt 1: Problem definieren
+### Step 1: Define the Problem
 
-**Ziel:** Das Problem klar, konkret und bearbeitbar formulieren.
+**Goal:** Formulate the problem clearly, concretely, and manageably.
 
-**Leitfragen:**
-- Was genau ist das Problem? (Fakten, nicht Interpretationen)
-- Wer ist beteiligt?
-- Wann und wo tritt es auf?
-- Warum ist es ein Problem fuer mich?
+**Guide questions:**
+- What exactly is the problem? (Facts, not interpretations)
+- Who is involved?
+- When and where does it occur?
+- Why is it a problem for me?
 
-**Arbeitsblatt:**
+**Worksheet:**
 
 ```
-PROBLEMDEFINITION
+PROBLEM DEFINITION
 
-Situation: [Was passiert konkret?]
-Beteiligte: [Wer ist beteiligt?]
-Haeufigkeit: [Wie oft? Wann?]
-Auswirkung: [Was macht es zum Problem?]
+Situation: [What is happening concretely?]
+People involved: [Who is involved?]
+Frequency: [How often? When?]
+Impact: [What makes it a problem?]
 
-Konkrete Problemformulierung:
+Concrete problem statement:
 [...]
 ```
 
-**Typische Fehler:**
-- Problem zu vage ("Alles ist schlecht")
-- Mehrere Probleme vermischen
-- Loesung schon in die Formulierung packen
+**Common mistakes:**
+- Problem too vague ("Everything is bad")
+- Mixing multiple problems together
+- Including the solution in the problem statement
 
 ---
 
-### Schritt 2: Ziele festlegen
+### Step 2: Set Goals
 
-**Ziel:** Was soll nach der Problemloesung anders sein?
+**Goal:** What should be different after solving the problem?
 
-**SMART-Kriterien:**
-- Spezifisch: Was genau?
-- Messbar: Woran erkenne ich den Erfolg?
-- Attraktiv: Warum will ich das?
-- Realistisch: Ist es machbar?
-- Terminiert: Bis wann?
+**SMART Criteria:**
+- Specific: What exactly?
+- Measurable: How will I recognize success?
+- Attractive: Why do I want this?
+- Realistic: Is it achievable?
+- Time-bound: By when?
 
-**Arbeitsblatt:**
+**Worksheet:**
 
 ```
-ZIELSETZUNG
+GOAL SETTING
 
-Mein Ziel: [...]
-Woran erkenne ich, dass ich es erreicht habe? [...]
-Bis wann? [...]
-Realistisch (0-10)? [...]
-Wichtig fuer mich (0-10)? [...]
+My goal: [...]
+How will I know I've achieved it? [...]
+By when? [...]
+Realistic (0-10)? [...]
+Important to me (0-10)? [...]
 ```
 
 ---
 
-### Schritt 3: Alternativen sammeln (Brainstorming)
+### Step 3: Generate Alternatives (Brainstorming)
 
-**Ziel:** Moeglichst viele Loesungsideen generieren — ohne sofortige Bewertung.
+**Goal:** Generate as many solution ideas as possible — without immediate evaluation.
 
-**Brainstorming-Regeln:**
-1. Quantitaet vor Qualitaet — je mehr Ideen, desto besser
-2. Keine Bewertung waehrend des Sammelns
-3. Kreativ und ungewoehnlich denken ist erlaubt
-4. Kombinieren und Variieren bestehender Ideen
+**Brainstorming rules:**
+1. Quantity over quality — the more ideas, the better
+2. No evaluation during collection
+3. Creative and unusual thinking is allowed
+4. Combine and vary existing ideas
 
-**Arbeitsblatt:**
+**Worksheet:**
 
 ```
 BRAINSTORMING
 
-Loesungsideen (mindestens 5-8):
+Solution ideas (at least 5-8):
 1. [...]
 2. [...]
 3. [...]
@@ -164,125 +146,127 @@ Loesungsideen (mindestens 5-8):
 8. [...]
 ```
 
-**Hilfsfragen:**
-- "Was wuerde jemand tun, der dieses Problem nicht hat?"
-- "Was habe ich frueher in aehnlichen Situationen gemacht?"
-- "Was wuerde ich einem Freund raten?"
-- "Was waere die mutigste Loesung?"
-- "Was waere die einfachste Loesung?"
+**Helper questions:**
+- "What would someone do who doesn't have this problem?"
+- "What have I done in similar situations before?"
+- "What would I advise a friend?"
+- "What would be the boldest solution?"
+- "What would be the simplest solution?"
 
 ---
 
-### Schritt 4: Alternativen bewerten
+### Step 4: Evaluate Alternatives
 
-**Ziel:** Vor- und Nachteile jeder Alternative systematisch abwaegen.
+**Goal:** Systematically weigh pros and cons of each alternative.
 
-**Bewertungskriterien:**
-- Wirksamkeit: Loest es das Problem?
-- Machbarkeit: Kann ich es umsetzen?
-- Zeitaufwand: Wie lange dauert es?
-- Auswirkungen: Auf mich? Auf andere?
-- Risiken: Was koennte schiefgehen?
+**Evaluation criteria:**
+- Effectiveness: Does it solve the problem?
+- Feasibility: Can I implement it?
+- Time required: How long will it take?
+- Consequences: For me? For others?
+- Risks: What could go wrong?
 
-**Arbeitsblatt:**
+**Worksheet:**
 
 ```
-BEWERTUNGSMATRIX
+EVALUATION MATRIX
 
-| Alternative | Wirksamkeit (0-10) | Machbarkeit (0-10) | Aufwand (0-10) | Risiko (0-10) | Gesamt |
-|-------------|-------------------|--------------------|--------------|--------------||--------|
-| 1. [...]    |                   |                    |              |              |        |
-| 2. [...]    |                   |                    |              |              |        |
-| 3. [...]    |                   |                    |              |              |        |
+| Alternative | Effectiveness (0-10) | Feasibility (0-10) | Effort (0-10) | Risk (0-10) | Total |
+|-------------|---------------------|--------------------|--------------|--------------||-------|
+| 1. [...]    |                     |                    |              |              |       |
+| 2. [...]    |                     |                    |              |              |       |
+| 3. [...]    |                     |                    |              |              |       |
 
-Bevorzugte Loesung: [...]
-Begruendung: [...]
+Preferred solution: [...]
+Reasoning: [...]
 ```
 
 ---
 
-### Schritt 5: Umsetzen
+### Step 5: Implement
 
-**Ziel:** Die gewaehlte Loesung konkret planen und durchfuehren.
+**Goal:** Concretely plan and carry out the chosen solution.
 
-**Umsetzungsplan:**
+**Action plan:**
 
 ```
-AKTIONSPLAN
+ACTION PLAN
 
-Gewaehlte Loesung: [...]
+Chosen solution: [...]
 
-Konkrete Schritte:
-1. [Was?] — [Wann?] — [Wo?]
-2. [Was?] — [Wann?] — [Wo?]
-3. [Was?] — [Wann?] — [Wo?]
+Concrete steps:
+1. [What?] — [When?] — [Where?]
+2. [What?] — [When?] — [Where?]
+3. [What?] — [When?] — [Where?]
 
-Moegliche Hindernisse: [...]
+Possible obstacles: [...]
 Plan B: [...]
-Unterstuetzung die ich brauche: [...]
-Erster Schritt (heute/morgen): [...]
+Support I need: [...]
+First step (today/tomorrow): [...]
 ```
 
 ---
 
-### Schritt 6: Evaluieren
+### Step 6: Evaluate
 
-**Ziel:** Ergebnis pruefen und bei Bedarf nachsteuern.
+**Goal:** Review the outcome and adjust if needed.
 
-**Evaluationsfragen:**
-- Wurde das Problem geloest? (Ganz / teilweise / gar nicht)
-- Bin ich mit dem Ergebnis zufrieden? (0-10)
-- Was hat gut funktioniert?
-- Was wuerde ich naechstes Mal anders machen?
-- Brauche ich einen neuen Versuch mit einer anderen Alternative?
+**Evaluation questions:**
+- Was the problem solved? (Fully / partially / not at all)
+- Am I satisfied with the result? (0-10)
+- What worked well?
+- What would I do differently next time?
+- Do I need a new attempt with a different alternative?
 
-**Arbeitsblatt:**
+**Worksheet:**
 
 ```
 EVALUATION
 
-Ergebnis: [Geloest / Teilweise / Nicht geloest]
-Zufriedenheit (0-10): [...]
-Was hat funktioniert: [...]
-Was nicht: [...]
-Naechster Schritt: [Abschluss / Neuer Versuch / Anderer Ansatz]
+Result: [Solved / Partially / Not solved]
+Satisfaction (0-10): [...]
+What worked: [...]
+What didn't: [...]
+Next step: [Conclude / New attempt / Different approach]
 ```
 
 ---
 
-## 3. Haeufige Probleme beim Problemloesen
+## 3. Common Problems in Problem Solving
 
-| Problem | Abhilfe |
-|---------|---------|
-| "Ich weiss nicht, wo anfangen" | Zurueck zu Schritt 1, Problem kleiner formulieren |
-| "Keine Loesung ist gut genug" | Perfektionismus hinterfragen, "gut genug" akzeptieren |
-| "Ich trau mich nicht" | Kleinsten moeglichen Schritt identifizieren |
-| "Es klappt nicht" | Evaluation: Was genau klappt nicht? Neuer Versuch |
-| Problem ist zu gross | In Teilprobleme zerlegen, eins nach dem anderen |
-| Emotionen blockieren | Erst Emotionsregulation (Atemtechnik, PMR), dann Problemloesen |
-
----
-
-## Ethik und Grenzen
-
-**Ein KI-Assistent darf:**
-- Durch die 6 Schritte fuehren und Arbeitsblatt-Struktur bereitstellen
-- Brainstorming-Fragen stellen
-- Bei der Bewertung von Alternativen unterstuetzen
-- Fortschritt dokumentieren
-
-**Ein KI-Assistent darf NICHT:**
-- Loesungen vorgeben oder "die richtige Antwort" suggerieren
-- Beziehungs- oder Lebensberatung im therapeutischen Sinne durchfuehren
-- Bei schweren psychischen Belastungen alleinige Unterstuetzung sein
-- Diagnosen stellen
-
-**Bei Anzeichen akuter Krise IMMER verweisen auf:**
-- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
-- Psychiatrischer Notdienst: 112
-- Krisenchat: krisenchat.de
+| Problem | Remedy |
+|---------|--------|
+| "I don't know where to start" | Back to Step 1, formulate problem smaller |
+| "No solution is good enough" | Question perfectionism, accept "good enough" |
+| "I don't dare" | Identify the smallest possible step |
+| "It doesn't work" | Evaluation: What exactly doesn't work? New attempt |
+| Problem is too big | Break into sub-problems, one at a time |
+| Emotions block | First emotion regulation (breathing, PMR), then problem solving |
 
 ---
 
-*Portiert aus BACH v3.8.0 | Standalone-Version*
-*Quellen: D'Zurilla & Goldfried (1971), Nezu et al. (2013), Malouff et al. (2007) — Keine professionelle Therapie*
+## Ethics and Boundaries
+
+**An AI assistant may:**
+- Guide through the 6 steps and provide worksheet structure
+- Ask brainstorming questions
+- Support evaluation of alternatives
+- Document progress
+
+**An AI assistant must NOT:**
+- Prescribe solutions or suggest "the right answer"
+- Conduct relationship or life counseling in the therapeutic sense
+- Be the sole support for severe psychological distress
+- Make diagnoses
+
+**In case of acute crisis, ALWAYS refer to:**
+- 988 Suicide & Crisis Lifeline (US): 988
+- Crisis Text Line (US): Text HOME to 741741
+- Samaritans (UK): 116 123
+- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
+- Emergency services: 911 (US) / 112 (EU)
+
+---
+
+*Ported from BACH v3.8.0 | Standalone Version*
+*Sources: D'Zurilla & Goldfried (1971), Nezu et al. (2013), Malouff et al. (2007) — Not professional therapy*
