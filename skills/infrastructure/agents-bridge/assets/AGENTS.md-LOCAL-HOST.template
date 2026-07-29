@@ -1,0 +1,16 @@
+# Agent bootstrap
+
+> Generated from truth profile: {{PROFILE_ID}}
+> Strategy: ordered loader
+> Edit the selected truth sources, not this loader.
+
+Read and follow these files in order before starting work:
+
+{{TRUTH_SOURCE_LIST}}
+
+If a source is missing or unreadable, report the exact path and continue only
+when the remaining rules authorize it. Do not silently replace a source or
+invent a different precedence order.
+
+Target-specific instructions may be added below this line, but shared rules
+remain in the selected truth sources.

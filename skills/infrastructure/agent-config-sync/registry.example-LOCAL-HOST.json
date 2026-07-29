@@ -1,0 +1,51 @@
+{
+  "_comment": "TEMPLATE (publizierbar). Keine Truth-Quelle ist voreingestellt. Erst --discover und --offer ausführen, dann User Auswahl in registry.json festhalten.",
+  "host": "<HOST>",
+  "tools": {
+    "claude-code": { "installed": false, "role": "unassigned" },
+    "claude-desktop": { "installed": false, "role": "unassigned" },
+    "codex-cli": { "installed": false, "role": "unassigned" },
+    "antigravity-gemini": { "installed": false, "role": "unassigned" },
+    "kimi-code": { "installed": false, "role": "unassigned" },
+    "cursor": { "installed": false, "role": "unassigned" },
+    "cline": { "installed": false, "role": "unassigned" },
+    "windsurf": { "installed": false, "role": "unassigned" },
+    "github-copilot": { "installed": false, "role": "unassigned" }
+  },
+  "relations": [],
+  "relation_examples": [
+    {
+      "name": "same-provider-across-classes",
+      "selection": {
+        "providers": ["<PROVIDER>"],
+        "app_classes": ["cli", "app"]
+      },
+      "mode": "push",
+      "source": null,
+      "scope": "mcp",
+      "notes": "User muss Truth-Quelle und konkrete Teilnehmer wählen."
+    },
+    {
+      "name": "cross-provider-one-class",
+      "selection": {
+        "providers": ["*"],
+        "app_classes": ["cli"]
+      },
+      "mode": "push",
+      "source": null,
+      "scope": "mcp"
+    },
+    {
+      "name": "explicit-rule-truth",
+      "members": ["<ENDPOINT-A>", "<ENDPOINT-B>"],
+      "mode": "push",
+      "source": null,
+      "scope": "rules",
+      "truth": {
+        "sources": ["<PATH-TO-AGENTS.md>", "<PATH-TO-OPTIONAL-OVERLAY.md>"],
+        "strategy": "ordered-overlay"
+      },
+      "notes": "Eine oder mehrere Dateien sind erlaubt; Reihenfolge und Konfliktregel bestimmt der User."
+    }
+  ]
+}
