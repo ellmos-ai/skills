@@ -1,77 +1,76 @@
 ---
+name: wayfinding-routing
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Gemini (Antigravity)
+created: 2026-07-29
+updated: 2026-07-29
+description: Habilidad universal de navegación, orientación y resiliencia de emergencia para agentes LLM. Proporciona heurísticas activas de navegación, autoorientación y recuperación cuando los agentes enfrentan desviación de contexto, herramientas fallidas, bucles o caminos sin salida.
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+category: infrastructure
+tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, autoorientacion, resiliencia, recuperacion, heuristicas]
 language: es
+status: active
 ---
 
 > **Español** — Documentación oficial completa traducida al español para la habilidad `wayfinding-routing`.
 
+# Navegación y Orientación (Wayfinding-Routing)
 
+La habilidad **Wayfinding-Routing** (también conocida como **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`** y **`celestial-routing`**) sirve como el marco definitivo de navegación y recuperación de emergencia para agentes LLM.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (English)
-
-The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
-
-It equips agents with proactive wayfinding heuristics during normal execution and emergency protocols when encountering context drift, recurring execution errors, failing APIs, or dead ends.
+Equipa a los agentes con heurísticas proactivas de orientación durante la ejecución normal y con protocolos de emergencia cuando se enfrentan a desviaciones de contexto, errores de ejecución recurrentes, fallos de API o caminos sin salida.
 
 ---
 
-## Synonym & Strategy Overview
+## Resumen de Sinónimos y Estrategias
 
-| Synonym Strategy | Metaphor & Core Principle | Applied Use Case |
+| Estrategia de Sinónimo | Metáfora y Principio Fundamental | Caso de Uso Aplicado |
 | :--- | :--- | :--- |
-| **`wayfinding-routing`** (Primary) | **Wayfinding / Spatial Orientation:** Navigating without external GPS by reading signposts and environmental cues. | Primary navigation loop for sidecars, `workflowhooker`, and `automation-self-care`. |
-| **`survival-routing`** | **Emergency Fallback & Self-Preservation:** Circuit-breaking and graceful degradation when tools fail or loops form. | Emergency recovery when commands time out, fail repeatedly, or hit permission walls. |
-| **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | Tracking execution steps in scratch files or `TODO.md` to enable precise backtracking. |
-| **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | Preflight inspection of directory trees, locks, and task dependencies. |
-| **`celestial-routing`** | **Astronavigation:** Aligning with immutable North-Star anchor documents when local context is noisy. | Fallback to `CLAUDE.md`, `AGENTS.md`, `START.md` when prompt instructions conflict. |
+| **`wayfinding-routing`** (Principal) | **Orientación Espacial:** Navegar sin GPS externo leyendo señales y pistas ambientales. | Bucle principal de navegación para sidecars, `workflowhooker` y `automation-self-care`. |
+| **`survival-routing`** | **Navegación de Supervivencia:** Interrupción de circuito y degradación gradual cuando fallan las herramientas. | Recuperación de emergencia cuando los comandos expiran, fallan repetidamente o chocan con permisos. |
+| **`dead-reckoning`** | **Navegación por Estima (Koppelnavigation):** Reconstruir el estado exacto paso a paso a partir de migas de pan. | Seguimiento de pasos de ejecución en archivos temporales o `TODO.md` para permitir un retroceso preciso. |
+| **`pathfinder-routing`** | **Explorador / Pionero:** Inspección previa y apertura de caminos para equipos multi-agente. | Inspección previa de árboles de directorios, bloqueos y dependencias de tareas. |
+| **`celestial-routing`** | **Navegación Astronómica:** Alineación con documentos ancla inmutables cuando el contexto local tiene ruido. | Recuperación con respaldo en `CLAUDE.md`, `AGENTS.md`, `START.md` cuando las instrucciones del prompt chocan. |
 
 ---
 
-## Los 5 Protocolos Principales de Emergencia y Orientación & Orientation Protocols
+## Los 5 Protocolos Principales de Emergencia y Orientación
 
-### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
-- **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.
-- **Heuristic Rule:** Stop free text generation. Clear transient assumptions. Re-read root anchor documents (`CLAUDE.md`, `AGENTS.md`, `START.md`). Reset goal state to the authoritative root directive before taking further action.
+### 1. `PROTOCOL-ANCHOR-RESET` (Reinicio de Ancla / Navegación Astronómica)
+- **Disparador (Trigger):** Desviación de contexto, instrucciones contradictorias del usuario o pérdida de orientación en sesiones largas.
+- **Regla Heurística:** Detener la generación de texto libre. Limpiar suposiciones transitorias. Releer los documentos ancla raíz (`CLAUDE.md`, `AGENTS.md`, `START.md`). Restablecer el estado del objetivo a la directiva raíz autorizada antes de tomar cualquier otra medida.
 
-### 2. `PROTOCOL-STOP-EXPLAIN` (Rubber-Duck Reflection Loop)
-- **Trigger:** A terminal command, file edit, or API request fails twice with an identical error.
-- **Heuristic Rule:** **Lock command execution.** The agent MUST output a formal self-reflection before trying a 3rd attempt:
-  1. *What exact error occurred in attempt 1 & 2?*
-  2. *Why did the previous diagnostic hypothesis fail?*
-  3. *What is the new alternative approach?*
-  Execution is unlocked ONLY after writing this explicit justification.
+### 2. `PROTOCOL-STOP-EXPLAIN` (Bucle de Reflexión y Explicación)
+- **Disparador (Trigger):** Un comando de terminal, edición de archivo o solicitud de API falla dos veces con un error idéntico.
+- **Regla Heurística:** **Bloquear la ejecución de comandos.** El agente DEBE emitir una reflexión escrita formal antes de intentar un tercer intento:
+  1. *¿Qué error exacto ocurrió en los intentos 1 y 2?*
+  2. *¿Por qué falló la hipótesis de diagnóstico anterior?*
+  3. *¿Cuál es el nuevo enfoque alternativo?*
+  La ejecución se desbloquea ÚNICAMENTE después de escribir esta justificación explícita.
 
-### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Multi-Tiered Fallback Cascade)
-- **Trigger:** Primary tool, MCP server, or external API is unavailable or returns errors.
-- **Heuristic Rule:** Never fail abruptly or loop blindly. Step down through degradation tiers:
-  - **Tier 1 (Optimal):** Full Native API / MCP Tool
-  - **Tier 2 (Fallback Tool):** Local Python CLI / Script
-  - **Tier 3 (Read-Only State):** Direct file parsing (`view_file` / raw text)
-  - **Tier 4 (Handoff):** Present structured status report and open options to the user.
+### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Cascada de Degradación Gradual)
+- **Disparador (Trigger):** La herramienta principal, el servidor MCP o la API externa no está disponible o devuelve errores.
+- **Regla Heurística:** Nunca fallar abruptamente ni entrar en bucles a ciegas. Degradar por niveles:
+  - **Nivel 1 (Óptimo):** API nativa completa / Herramienta MCP
+  - **Nivel 2 (Herramienta de Reserva):** CLI local en Python / Script
+  - **Nivel 3 (Estado de Solo Lectura):** Análisis directo de archivos (`view_file` / texto plano)
+  - **Nivel 4 (Transferencia):** Presentar un informe de estado estructurado y opciones abiertas al usuario.
 
-### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Sackgassen-Erkennung)
-- **Trigger:** A complex multi-step refactoring or workflow path hits an unresolvable block at step N.
-- **Heuristic Rule:** Record breadcrumbs before making destructive changes. If a path fails:
-  1. Revert uncommitted changes (`git checkout` / restore state).
-  2. Jump back to the last clean breadcrumb checkpoint.
-  3. Mark the failed route as blocked in `TODO.md`.
-  4. Attempt alternative path B.
+### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Retroceso por Migas de Pan)
+- **Disparador (Trigger):** Un flujo de trabajo complejo o una refactorización encuentra un bloqueo insuperable en el paso N.
+- **Regla Heurística:** Registrar migas de pan antes de realizar cambios destructivos. Si una ruta falla:
+  1. Revertir los cambios no confirmados (`git checkout` / restaurar estado).
+  2. Saltar al último punto de control limpio de migas de pan.
+  3. Marcar la ruta fallida como bloqueada en `TODO.md`.
+  4. Intentar la ruta alternativa B.
 
-### 5. `PROTOCOL-CIRCUIT-BREAKER` (Notaus & Safe Exit)
-- **Trigger:** Execution limits reached, infinite loop detected, or critical system lock error.
-- **Heuristic Rule:** Execute emergency shutdown sequence:
-  1. Release all acquired file and git locks (`python -m workflowhooker check`).
-  2. Save current partial state to `.SYNC/SURVIVAL_STATE.json` or `AUTOMATIONS-MEMORY.md`.
-  3. Log incident in `ANTIGRAVITY-LOG.txt`.
-  4. Exit cleanly with actionable summary for the user or orchestrator.
-
----
-
-## Integration with `automation-self-care` & `workflowhooker`
-
-`wayfinding-routing` provides the underlying navigation logic for:
-- **`automation-self-care`**: Evaluates sidecar prompts against the 5 protocols to ensure self-healing capabilities.
-- **`workflowhooker`**: Provides standard heuristics for step-by-step lock checking and breadcrumb recording.
-- **`staircase-routing`**: Leverages `PROTOCOL-ANCHOR-RESET` for vertical directory navigation.
+### 5. `PROTOCOL-CIRCUIT-BREAKER` (Interruptor de Circuito y Salida Segura)
+- **Disparador (Trigger):** Se alcanzan los límites de ejecución, se detecta un bucle infinito o se produce un error crítico del sistema.
+- **Regla Heurística:** Ejecutar la secuencia de apagado de emergencia:
+  1. Liberar todos los bloqueos de archivos y git adquiridos (`python -m workflowhooker check`).
+  2. Guardar el estado parcial actual en `.SYNC/SURVIVAL_STATE.json` o `AUTOMATIONS-MEMORY.md`.
+  3. Registrar el incidente en `ANTIGRAVITY-LOG.txt`.
+  4. Salir de forma segura con un resumen ejecutable para el usuario o el orquestador.

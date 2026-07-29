@@ -17,14 +17,14 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 
 ---
 
-## Synonym & Strategy Overview
+## シノニムと戦略の概要
 
-| Synonym Strategy | Metaphor & Core Principle | Applied Use Case |
+| シノニム戦略 | 比喩と核心原則 | 適用ユースケース |
 | :--- | :--- | :--- |
-| **`wayfinding-routing`** (Primary) | **Wayfinding / Spatial Orientation:** Navigating without external GPS by reading signposts and environmental cues. | Primary navigation loop for sidecars, `workflowhooker`, and `automation-self-care`. |
-| **`survival-routing`** | **Emergency Fallback & Self-Preservation:** Circuit-breaking and graceful degradation when tools fail or loops form. | Emergency recovery when commands time out, fail repeatedly, or hit permission walls. |
-| **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | Tracking execution steps in scratch files or `TODO.md` to enable precise backtracking. |
-| **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | Preflight inspection of directory trees, locks, and task dependencies. |
+| **`wayfinding-routing`** (Primary) | **Wayfinding / Spatial Orientation:** Navigating without external GPS by reading signposts and environmental cues. | サイドカーの主要ナビゲーションループ, `workflowhooker`, and `automation-self-care`. |
+| **`survival-routing`** | **Emergency Fallback & Self-Preservation:** Circuit-breaking and graceful degradation when tools fail or loops form. | コマンドタイムアウト時の緊急回復, fail repeatedly, or hit permission walls. |
+| **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | 作業ファイルでの実行ステップ追跡 or `TODO.md` to enable precise backtracking. |
+| **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | ディレクトリツリーの事前検査, locks, and task dependencies. |
 | **`celestial-routing`** | **Astronavigation:** Aligning with immutable North-Star anchor documents when local context is noisy. | Fallback to `CLAUDE.md`, `AGENTS.md`, `START.md` when prompt instructions conflict. |
 
 ---
@@ -32,36 +32,36 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 ## 5つの緊急・方向性判定プロトコル & Orientation Protocols
 
 ### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
-- **Trigger:** Context drift, conflicting user instructions, or loss of orientation in long multi-turn sessions.
-- **Heuristic Rule:** Stop free text generation. Clear transient assumptions. Re-read root anchor documents (`CLAUDE.md`, `AGENTS.md`, `START.md`). Reset goal state to the authoritative root directive before taking further action.
+- ****トリガー (Trigger):**** コンテキストの逸脱、衝突するユーザー指示, or loss of orientation in long multi-turn sessions.
+- ****ヒューリスティックルール:**** 自由テキスト生成を停止。一時的仮定をクリア. Re-read root anchor documents (`CLAUDE.md`, `AGENTS.md`, `START.md`). Reset goal state to the authoritative root directive before taking further action.
 
 ### 2. `PROTOCOL-STOP-EXPLAIN` (Rubber-Duck Reflection Loop)
-- **Trigger:** A terminal command, file edit, or API request fails twice with an identical error.
-- **Heuristic Rule:** **Lock command execution.** The agent MUST output a formal self-reflection before trying a 3rd attempt:
+- ****トリガー (Trigger):**** ターミナルコマンドまたは編集が2回失敗 with an identical error.
+- ****ヒューリスティックルール:**** **Lock command execution.** The agent MUST output a formal self-reflection before trying a 3rd attempt:
   1. *What exact error occurred in attempt 1 & 2?*
   2. *Why did the previous diagnostic hypothesis fail?*
   3. *What is the new alternative approach?*
   Execution is unlocked ONLY after writing this explicit justification.
 
 ### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Multi-Tiered Fallback Cascade)
-- **Trigger:** Primary tool, MCP server, or external API is unavailable or returns errors.
-- **Heuristic Rule:** Never fail abruptly or loop blindly. Step down through degradation tiers:
-  - **Tier 1 (Optimal):** Full Native API / MCP Tool
-  - **Tier 2 (Fallback Tool):** Local Python CLI / Script
-  - **Tier 3 (Read-Only State):** Direct file parsing (`view_file` / raw text)
-  - **Tier 4 (Handoff):** Present structured status report and open options to the user.
+- ****トリガー (Trigger):**** 主要ツールまたはAPIが利用不能 or returns errors.
+- ****ヒューリスティックルール:**** 突然失敗したり盲目的ループに入らない. Step down through degradation tiers:
+  - ****レベル 1 (最適):**** Full Native API / MCP Tool
+  - ****レベル 2 (フォールバック):**** Local Python CLI / Script
+  - ****レベル 3 (読み取り専用):**** Direct file parsing (`view_file` / raw text)
+  - ****レベル 4 (引き継ぎ):**** Present structured status report and open options to the user.
 
 ### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Sackgassen-Erkennung)
-- **Trigger:** A complex multi-step refactoring or workflow path hits an unresolvable block at step N.
-- **Heuristic Rule:** Record breadcrumbs before making destructive changes. If a path fails:
+- ****トリガー (Trigger):**** 複雑なリファクタリングが行き止まりに遭遇 an unresolvable block at step N.
+- ****ヒューリスティックルール:**** 破壊的変更の前にパンくずを記録. If a path fails:
   1. Revert uncommitted changes (`git checkout` / restore state).
   2. Jump back to the last clean breadcrumb checkpoint.
   3. Mark the failed route as blocked in `TODO.md`.
   4. Attempt alternative path B.
 
 ### 5. `PROTOCOL-CIRCUIT-BREAKER` (Notaus & Safe Exit)
-- **Trigger:** Execution limits reached, infinite loop detected, or critical system lock error.
-- **Heuristic Rule:** Execute emergency shutdown sequence:
+- ****トリガー (Trigger):**** 実行制限到達または無限ループ検出, or critical system lock error.
+- ****ヒューリスティックルール:**** 緊急シャットダウンシーケンスを実行:
   1. Release all acquired file and git locks (`python -m workflowhooker check`).
   2. Save current partial state to `.SYNC/SURVIVAL_STATE.json` or `AUTOMATIONS-MEMORY.md`.
   3. Log incident in `ANTIGRAVITY-LOG.txt`.
