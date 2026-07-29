@@ -1,17 +1,18 @@
 ---
 language: ja
+aliases:
+- ''
+- -ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `academic-study-learn`.
+> **Japanese** — 公式日本語ドキュメント.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Learn (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Learn (English)
-
-## 概要と目的 & Purpose
+## 1. 概要と目的 & Zweck
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

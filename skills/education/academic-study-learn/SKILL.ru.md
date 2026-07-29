@@ -1,17 +1,18 @@
 ---
 language: ru
+aliases:
+- ''
+- -ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `academic-study-learn`.
+> **Russian** — Официальный документ на русском языке.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Learn (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Learn (English)
-
-## Общий обзор и назначение & Purpose
+## 1. Общий обзор и цели & Zweck
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

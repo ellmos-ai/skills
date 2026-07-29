@@ -5,29 +5,52 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [Русский] Навык агента для academic-study-control: Use when managing studies, semester planning, module prioritisation, deadlines, exam registrations, or institutional emails need to be checked, planned, or converted into reminders. Coordinates web research, local status files, and optional calendar and mail integration.
+description: Use when managing studies, semester planning, module prioritisation,
+  deadlines, exam registrations, or institutional emails need to be checked, planned,
+  or converted into reminders. Coordinates web research, local status files, and optional
+  calendar and mail integration.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: education
-tags: [studies, semester, deadlines, exams, planning, calendar, mail, university]
+tags:
+- studies
+- semester
+- deadlines
+- exams
+- planning
+- calendar
+- mail
+- university
 language: ru
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: custom
+  origin_path: None
+  origin_version: None
+  origin_repo: None
+  last_sync_from_origin: None
+  last_sync_to_origin: None
+  local_changes_since_sync: false
+aliases:
+- academic-study-control
+- academic-study-control-ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `academic-study-control`.
+> **Russian** — Официальный документ на русском языке.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Control (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Control (English)
-
-## Общий обзор и назначение & Purpose
+## 1. Общий обзор и цели & Zweck
 
 Manage studies and deadlines with source verification, privacy compliance, and
 realistic planning. This skill is institution- and LMS-neutral: placeholders
@@ -45,7 +68,7 @@ realistic planning. This skill is institution- and LMS-neutral: placeholders
 | `<CALENDAR>` | Google Calendar, iCal | Calendar application (optional) |
 | `<MAIL>` | Gmail, Outlook, Thunderbird | Mail client or connector (optional) |
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## 2. Рабочий процесс и шаги & Vorgehen
 
 1. **Clarify the goal:** Semester plan, weekly plan, exam registration, re-enrollment,
    deadline check, mail check, module change, or reminders.

@@ -1,94 +1,47 @@
 ---
+name: worksheet-generator
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-07-23
+updated: 2026-07-23
+description: >
+  根据支持目标、年龄及难度生成个性化工作单与练习材料。
+standalone: true
+anthropic_compatible: true
+category: education
+tags: [worksheets, icf, education, therapy-support, wrapper]
+aliases: [worksheet-generator, worksheet-generator-zh]
 language: zh
+status: active
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `worksheet-generator`.
+> **Chinese** — 官方中文文档。
 
+# 练习工作单与教学材料生成指南 (中文版)
 
+本技能支持根据具体支持目标与年龄层，生成结构化的教学工作单及练习材料。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 1. 概述与目标
 
+- **自适应生成：** 围绕明确的教学与康复目标构建练习题。
+- **ICF 编码关联：** 可选关联官方 ICF 功能编码。
+- **多格式导出：** 支持导出为 Markdown、HTML 及 DOCX 格式。
 
-# worksheet-generator -- Pointer Skill (English)
+## 2. 工作流程与执行步骤
 
-This skill is a **thin pointer (wrapper)** to the standalone, public module
-repository
-[`ellmos-ai/worksheet-generator`](https://github.com/ellmos-ai/worksheet-generator)
-(MIT license, public). The actual skill lives there -- this repository only
-links to it and documents installation.
+1. **输入目标：** 设定教学支持目标（不含任何个人隐私数据）。
+2. **设定难度：** 指定适用年龄段与难易程度。
+3. **生成初稿：** 构建练习工作单框架与具体题目。
+4. **专业审阅：** 在教学使用前由专业人员复核修改。
 
-Note: the module's CLI, config, and documentation are German-language by
-design (built for German-speaking educational/therapeutic professionals);
-this pointer skill's own instructions are in English for discoverability.
+## 3. 不可逾越的边界与规则
 
-## What the module does
+- **严禁个人信息：** 仅使用抽象的目标与年龄参数。
+- **必须专业复核：** 生成材料为初稿草案，必须经教师或专业人员审阅。
+- **教学辅助定位：** 仅作为练习辅助材料，非医疗诊疗方案。
 
-`worksheet-generator` turns a support goal (free text + optional ICF codes),
-level, and age into a structured worksheet JSON, then rendered to Markdown,
-HTML, or DOCX:
+## 4. 必需输出与产出物
 
-- **Deterministic and offline** -- no LLM calls, no network access inside
-  the generator itself; topic-specific placeholders are marked
-  `(ANZUPASSEN)` ("to be adapted"); fine-grained content elaboration is left
-  to the calling LLM agent.
-- **Material folder scan:** `config.json` (`material_dirs`) can pull in
-  existing material (txt/md/docx), and already-researched bullet points are
-  carried over directly as concrete task prompts.
-- **Renderers:** Markdown and HTML always available, DOCX optional (needs
-  `python-docx`); PDF/PowerPoint/Canva only as external delegation.
-- **No client/person reference:** controlled exclusively via
-  goal/level/age -- never by name or diagnosis.
-
-## ICF reference: bring-your-own (important)
-
-The module contains **no** ICF short titles or full texts -- only official
-ICF codes as neutral identifiers (this repo's MIT license does NOT extend to
-ICF content; separate WHO/BfArM licensing applies). The bundled fetch script
-`_tools/icf_fetch.py` builds a local, gitignored `icf_local.json` (code +
-short title, source + retrieval date in the file header):
-
-- **Mode A** (no network access): read your own CSV/JSON source file.
-- **Mode B** (live lookup): WHO ICD-11 API with your own registration
-  (`icd.who.int/icdapi`, your own `WHO_ICD_CLIENT_ID`/`_SECRET`).
-
-## Boundaries (important)
-
-- **A material generator, not a therapy program and not a promise of
-  healing.** Does not replace professional judgment by qualified
-  educational/therapeutic professionals.
-- **Generated worksheets must be professionally reviewed and adapted before
-  use** -- the module delivers raw material, not ready-to-use documents.
-- No client/person reference: this module is not meant for reports or
-  client data.
-
-## Installation (generic, no local paths)
-
-1. Clone the module:
-   ```bash
-   git clone https://github.com/ellmos-ai/worksheet-generator.git <clone-path>
-   ```
-2. No mandatory dependencies (pure Python stdlib, Python >= 3.10).
-   Optional, for the DOCX renderer:
-   ```bash
-   pip install python-docx
-   ```
-3. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
-   `~/.claude/skills/worksheet-generator/`). Do NOT commit real local paths
-   or hostnames into a versioned skill environment.
-4. Local overrides (`material_dirs`, `icf_source`, ...) belong in
-   `config.local.json` (gitignored) -- template: `config.local.example.json`.
-5. Load the ICF reference: `python <clone-path>/_tools/icf_fetch.py --source
-   <path>` (Mode A) or with your own WHO registration (Mode B, see above).
-6. For CLI, schema, and renderer details, see the module repo's README.
-
-## Origin of this pointer skill
-
-This wrapper was added on 2026-07-23 as a showcase entry for the
-`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
-and versioning stay solely in the `ellmos-ai/worksheet-generator` module
-repo.
-
-## 变更日志与历史
-
-### 0.1.0 (2026-07-23)
-- Initial pointer skill for `ellmos-ai/worksheet-generator`.
+- 结构化的练习工作单（Markdown / HTML / DOCX 格式）。
+- 供教师使用的参考答案与评分说明。

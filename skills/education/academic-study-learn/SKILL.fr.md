@@ -1,17 +1,18 @@
 ---
 language: fr
+aliases:
+- ''
+- -fr
 ---
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `academic-study-learn`.
+> **French** — Document Officiel en Français.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Learn (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Learn (English)
-
-## Présentation et Objectif & Purpose
+## 1. Aperçu Général et Objectifs & Zweck
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

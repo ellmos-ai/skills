@@ -5,29 +5,51 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [日本語] エージェントスキル: academic-study-test: Use when exam preparation, self-tests, mock exams or simulations, written coursework, or error diagnosis are needed. Provides five modes and a rubric-based assessment system with a strict boundary around live exams.
+description: Use when exam preparation, self-tests, mock exams or simulations, written
+  coursework, or error diagnosis are needed. Provides five modes and a rubric-based
+  assessment system with a strict boundary around live exams.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: education
-tags: [exams, mock-exam, self-test, simulation, rubric, assessment, feedback, studies]
+tags:
+- exams
+- mock-exam
+- self-test
+- simulation
+- rubric
+- assessment
+- feedback
+- studies
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: custom
+  origin_path: None
+  origin_version: None
+  origin_repo: None
+  last_sync_from_origin: None
+  last_sync_to_origin: None
+  local_changes_since_sync: false
+aliases:
+- academic-study-test
+- academic-study-test-ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `academic-study-test`.
+> **Japanese** — 公式日本語ドキュメント.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Test (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Test (English)
-
-## 概要と目的 & Purpose
+## 1. 概要と目的 & Zweck
 
 Support exam preparation with structured self-tests, realistic simulations,
 and diagnostic feedback. The skill is subject- and institution-neutral and

@@ -1,17 +1,18 @@
 ---
 language: es
+aliases:
+- ''
+- -es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `academic-study-learn`.
+> **Spanish** — Documento Oficial en Español.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Learn (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Learn (English)
-
-## Descripción General y Propósito & Purpose
+## 1. Descripción General y Objetivos & Zweck
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available

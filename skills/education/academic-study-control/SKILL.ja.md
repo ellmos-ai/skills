@@ -5,29 +5,52 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-20
 updated: 2026-06-20
-description: [日本語] エージェントスキル: academic-study-control: Use when managing studies, semester planning, module prioritisation, deadlines, exam registrations, or institutional emails need to be checked, planned, or converted into reminders. Coordinates web research, local status files, and optional calendar and mail integration.
+description: Use when managing studies, semester planning, module prioritisation,
+  deadlines, exam registrations, or institutional emails need to be checked, planned,
+  or converted into reminders. Coordinates web research, local status files, and optional
+  calendar and mail integration.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: education
-tags: [studies, semester, deadlines, exams, planning, calendar, mail, university]
+tags:
+- studies
+- semester
+- deadlines
+- exams
+- planning
+- calendar
+- mail
+- university
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: custom
+  origin_path: None
+  origin_version: None
+  origin_repo: None
+  last_sync_from_origin: None
+  last_sync_to_origin: None
+  local_changes_since_sync: false
+aliases:
+- academic-study-control
+- academic-study-control-ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `academic-study-control`.
+> **Japanese** — 公式日本語ドキュメント.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Control (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Control (English)
-
-## 概要と目的 & Purpose
+## 1. 概要と目的 & Zweck
 
 Manage studies and deadlines with source verification, privacy compliance, and
 realistic planning. This skill is institution- and LMS-neutral: placeholders
@@ -45,7 +68,7 @@ realistic planning. This skill is institution- and LMS-neutral: placeholders
 | `<CALENDAR>` | Google Calendar, iCal | Calendar application (optional) |
 | `<MAIL>` | Gmail, Outlook, Thunderbird | Mail client or connector (optional) |
 
-## ワークフローと実行手順 & Execution Steps
+## 2. 実行ワークフローと手順 & Vorgehen
 
 1. **Clarify the goal:** Semester plan, weekly plan, exam registration, re-enrollment,
    deadline check, mail check, module change, or reminders.

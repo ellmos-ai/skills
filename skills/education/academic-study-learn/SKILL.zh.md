@@ -1,17 +1,18 @@
 ---
 language: zh
+aliases:
+- ''
+- -zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `academic-study-learn`.
+> **Chinese** — 官方中文文档.
+
+> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
+# Academic Study Learn (Deutsch)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Academic Study Learn (English)
-
-## 概述与执行目标 & Purpose
+## 1. 概述与目标 & Zweck
 
 Support source-based learning with a five-phase learning cycle. The skill is
 institution- and subject-neutral: it works with any study material available
