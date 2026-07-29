@@ -1,9 +1,9 @@
 {
   "summary": {
     "generated_by": "versionctl registry-generate",
-    "generated_at": "2026-07-28T17:11:07.545792+00:00",
+    "generated_at": "2026-07-29T20:30:45.414415+00:00",
     "schema_version": "skill-v1",
-    "component_count": 83
+    "component_count": 84
   },
   "components": [
     {
@@ -1401,7 +1401,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:26ba59a2f0df973145bb02a22b4a4c61386ce38ac324be0f1dc7a09248e5b5e1",
+      "content_hash": "sha256:a687e49bdfdfd44a2be4fd9f49aa6e875352c049b8327cd035af56357e17f792",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2157,7 +2157,7 @@
       "version": "0.3.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:8d3a84b496d8ea92e949983cb27dc375f42290dcac0740d206e73858f4e511ff",
+      "content_hash": "sha256:db86e3a93618e34a3a3634c0d8cf2ee5a0ebbb2d5141fc81399748d0b88ad415",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2220,7 +2220,7 @@
       "version": "2.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:ab1d0c99ee911ff28856c798dc9662e21ab497ab752c9a85015a9ca109ab45c6",
+      "content_hash": "sha256:598dc6f8b50843a848f2d7eac0ff9b2b0294c0a46c6ee703faccb0ab5ba4ecf4",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2346,7 +2346,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:e45d4803a4a7fcefba37e6cb0559207aee3120f09a81b4f36b203669ab848da1",
+      "content_hash": "sha256:57df9116f693ad45cdde64bf27fbdc985c861a7e898360cd3a41dfcb66f00f7f",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2409,7 +2409,7 @@
       "version": "2.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:e71ad73320b903c0e5cd707d79c8bbcff31dfd43c132bf049ff5d64fcd5882b4",
+      "content_hash": "sha256:b701868a794b9a5d3a973513ac7f335c8e8004e2c0c81f8757fb815576f0eafe",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2472,7 +2472,7 @@
       "version": "1.0.0",
       "schema_version": "skill-v1",
       "status": "active",
-      "content_hash": "sha256:8a4bc6cb00b6152d930831a05e6d39dd66be199a5bc83f0d2da63c72a1e7fe19",
+      "content_hash": "sha256:4c786f1da2a8a6a894057637bd3baa02e575213b8b25b804c37c1546ce400de5",
       "git_commit": null,
       "provenance": {
         "origin": "custom",
@@ -2648,6 +2648,69 @@
         "has_assets": true,
         "has_tests": false,
         "language": "de",
+        "file_count": 5
+      },
+      "warnings": []
+    },
+    {
+      "id": "skill:infrastructure:system-onboarding",
+      "name": "system-onboarding",
+      "type": "skill",
+      "path": "skills/infrastructure/system-onboarding/SKILL.md",
+      "category": "infrastructure",
+      "version": "1.2.0",
+      "schema_version": "skill-v1",
+      "status": "active",
+      "content_hash": "sha256:05e4147a2e1fb069bb1cab845ac7f6ee9efb1e26cb76531e620c685284278db2",
+      "git_commit": null,
+      "provenance": {
+        "origin": "custom",
+        "origin_path": "internal onboarding protocol (sanitized for portable publication)",
+        "origin_version": "1.2.0",
+        "origin_commit": null,
+        "last_sync_from_origin": "2026-07-29",
+        "last_sync_to_origin": null,
+        "local_changes_since_sync": false
+      },
+      "ownership": {
+        "source_kind": "own",
+        "neutrality": "neutral-candidate",
+        "proposed_class": "own-neutral",
+        "upstream_component": null,
+        "personalized_for": null,
+        "sanitization_required": false
+      },
+      "privacy": {
+        "level": "public",
+        "export_allowed": true,
+        "contains_local_paths": false,
+        "contains_personal_data": false
+      },
+      "compatibility": {
+        "anthropic": true,
+        "bach": true,
+        "promptboard": null,
+        "profiprompt": null,
+        "explorerpro": null
+      },
+      "fork": {
+        "is_fork": false,
+        "fork_of": null,
+        "fork_reason": null,
+        "merge_policy": null
+      },
+      "branch": {
+        "name": "main",
+        "base": null,
+        "purpose": "current source tree baseline"
+      },
+      "skill": {
+        "standalone": true,
+        "has_scripts": false,
+        "has_references": true,
+        "has_assets": false,
+        "has_tests": false,
+        "language": "en",
         "file_count": 5
       },
       "warnings": []

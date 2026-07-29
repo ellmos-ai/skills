@@ -8,7 +8,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
-[![Skills: 83 Tracked](https://img.shields.io/badge/Skills-83%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Skills: 84 Tracked](https://img.shields.io/badge/Skills-84%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Catalog Quality: 4.8/5](https://img.shields.io/badge/Catalog%20Quality-4.8%2F5-success.svg)](catalog.py)
 [![Tests: 52 Passed](https://img.shields.io/badge/Tests-52%20Passed-brightgreen.svg)](testing/)
@@ -30,13 +30,13 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Catalog["catalog.py Registry (108 Skills / 83 Tracked)"] --> Categories
+    Catalog["catalog.py Registry (109 Skills / 84 Tracked)"] --> Categories
     subgraph Categories ["10 Public Categories"]
         Assist["assist (9)"]
         Dev["dev (16)"]
         Edu["education (4)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (9)"]
+        Infra["infrastructure (10)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (19)"]
@@ -62,7 +62,7 @@ flowchart TD
 
 ## Catalog Snapshot
 
-The current public catalog contains 83 tracked runtime skills:
+The current public catalog contains 84 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -70,7 +70,7 @@ The current public catalog contains 83 tracked runtime skills:
 | <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 16 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication and Store-wave user testing |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Academic planning, source-based learning, exam preparation, and a support-worksheet generator pointer skill |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 9 | Portable AI setup, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 10 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 19 | German-language psychoeducation and counseling method playbooks |

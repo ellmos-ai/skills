@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -140,6 +141,21 @@ class StaticGateTests(unittest.TestCase):
             ])
 
             self.assertEqual(0, exit_code)
+
+    def test_system_onboarding_is_publicly_registered(self) -> None:
+        repository_root = MODULE_PATH.parent.parent
+        skill_dir = repository_root / "skills" / "infrastructure" / "system-onboarding"
+        registry = json.loads(
+            (repository_root / "registry" / "components.json").read_text(encoding="utf-8")
+        )
+
+        self.assertEqual([], skill_tester.frontmatter_gate_errors(skill_dir))
+        component = next(
+            item
+            for item in registry["components"]
+            if item["path"] == "skills/infrastructure/system-onboarding/SKILL.md"
+        )
+        self.assertEqual("skill:infrastructure:system-onboarding", component["id"])
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](catalog.py)
-[![Skills: 83 Tracked](https://img.shields.io/badge/Skills-83%20Getrackt-brightgreen.svg)](SKILLS-MAP.md)
+[![Skills: 84 Tracked](https://img.shields.io/badge/Skills-84%20Getrackt-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 [![Katalog-Qualität: 4.8/5](https://img.shields.io/badge/Katalog--Qualit%C3%A4t-4.8%2F5-success.svg)](catalog.py)
 [![Tests: 52 Erfolgreich](https://img.shields.io/badge/Tests-52%20Erfolgreich-brightgreen.svg)](testing/)
@@ -30,13 +30,13 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ```mermaid
 flowchart TD
-    Catalog["catalog.py Registry (108 Skills / 83 Getrackt)"] --> Categories
+    Catalog["catalog.py Registry (109 Skills / 84 Getrackt)"] --> Categories
     subgraph Categories ["10 Öffentliche Kategorien"]
         Assist["assist (9)"]
         Dev["dev (16)"]
         Edu["education (4)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (9)"]
+        Infra["infrastructure (10)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (19)"]
@@ -62,7 +62,7 @@ flowchart TD
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 83 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 84 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
@@ -70,7 +70,7 @@ Der aktuelle öffentliche Katalog enthält 83 getrackte Laufzeit-Skills:
 | <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 16 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme, Repository-Veröffentlichung und Store-Wellen-Usertests |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 4 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung und ein Verweis-Skill für Fördermaterial-Generierung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 9 | Portables KI-Setup, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 10 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 19 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
