@@ -3,143 +3,40 @@ name: academic-study-control
 version: 1.0.0
 type: skill
 author: Lukas Geiger
-created: 2026-06-20
-updated: 2026-06-20
-description: Use when managing studies, semester planning, module prioritisation,
-  deadlines, exam registrations, or institutional emails need to be checked, planned,
-  or converted into reminders. Coordinates web research, local status files, and optional
-  calendar and mail integration.
+created: 2026-03-12
+updated: 2026-07-30
+description: >
+  Gestión académica de estudios y plazos con verificación de fuentes, privacidad
+  y planificación realista de acciones.
 standalone: true
 anthropic_compatible: true
-bach_compatible: true
-bach_origin: false
 category: education
-tags:
-- studies
-- semester
-- deadlines
-- exams
-- planning
-- calendar
-- mail
-- university
+tags: [academic, study-management, deadlines, organization, university]
+aliases: [academic-study-control, academic-study-control-es]
 language: es
 status: active
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-provenance:
-  origin: custom
-  origin_path: None
-  origin_version: None
-  origin_repo: None
-  last_sync_from_origin: None
-  last_sync_to_origin: None
-  local_changes_since_sync: false
-aliases:
-- academic-study-control
-- academic-study-control-es
 ---
 
-> **Spanish** — Documento Oficial en Español.
+# Gestión Académica de Estudios y Plazos (Español)
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+Esta habilidad proporciona un marco sistemático para la organización de estudios universitarios, seguimiento de plazos y planificación de exámenes.
 
+## 1. Descripción General y Objetivos
 
-# Academic Study Control (Deutsch)
+- **Control de Plazos y Exámenes:** Elaboración de calendarios de estudio obligatorios.
+- **Verificación Normativa:** Contrastación con reglamentos de examen oficiales y guías docentes.
+- **Protección de Datos:** Separación estricta de la información personal de los contenidos académicos.
 
-## 1. Descripción General y Objetivos & Zweck
+## 2. Flujo de Trabajo y Pasos
 
-Manage studies and deadlines with source verification, privacy compliance, and
-realistic planning. This skill is institution- and LMS-neutral: placeholders
-(in angle brackets) are adapted to the concrete context by the agent on first use.
+1. **Aclaración del Objetivo:** Identificar fechas límite de entrega o exámenes.
+2. **Revisión del Estado Actual:** Analizar el expediente académico y el aula virtual.
+3. **Investigación Oficial:** Verificar plazos en la web institucional.
+4. **Planificación Inversa:** Calcular bloques de trabajo desde la fecha de entrega incorporando margen de seguridad.
+5. **Resumen de Resultados:** Presentar un cuadro síntesis con tareas y plazos.
 
-## Configuration
+## 3. Reglas y Limites Inviolables
 
-| Placeholder | Example value | Meaning |
-|---|---|---|
-| `<INSTITUTION>` | University of A, TU Berlin | Official name of the institution |
-| `<LMS>` | ILIAS, Canvas, Stud.IP | Learning management system |
-| `<MODULE_PREFIX>` | MM, MF, MO | Abbreviation used in module codes |
-| `<STATUS_FILE>` | STATE.md, SEMESTER.md | Local status file of the student |
-| `<INDEX_FILE>` | LLM_INDEX.md, INDEX.md | Local index file |
-| `<CALENDAR>` | Google Calendar, iCal | Calendar application (optional) |
-| `<MAIL>` | Gmail, Outlook, Thunderbird | Mail client or connector (optional) |
-
-## 2. Flujo de Trabajo y Pasos & Vorgehen
-
-1. **Clarify the goal:** Semester plan, weekly plan, exam registration, re-enrollment,
-   deadline check, mail check, module change, or reminders.
-2. **Check local state:** `<STATUS_FILE>`, `<INDEX_FILE>`, relevant module folders,
-   existing plans, and official documents from the institution.
-3. **Check current institutional state live:** Official websites of `<INSTITUTION>`,
-   examination office, `<LMS>` announcements, and — if available and requested —
-   institutional emails.
-4. **Record time references absolutely:** today's date, semester, deadline date,
-   source, retrieval date.
-5. **Derive a decision or plan** — do not just collect links or information.
-
-## Research
-
-- Always use web research or original documents for current information.
-  Dates, exam formats, re-enrollment windows, fees, and announcements change
-  regularly.
-- Preferred sources: official pages of `<INSTITUTION>`, faculty pages, examination
-  office, module handbook, exam portal, `<LMS>`, and official institutional emails.
-- When login is required, use computer-use or browser control, but leave
-  authentication to the user. Never store credentials, MFA codes, or session data.
-- Use `<MAIL>` only when a suitable connector or explicitly provided mail content
-  is available. Keep the search query narrow (sender from the institution, module
-  codes, examination office, re-enrollment, deadline keywords).
-- Mark source conflicts openly and prefer the more official or more recent source.
-
-## Planning
-
-Build plans with buffer time:
-
-1. Mandatory dates and hard deadlines first.
-2. Plan backwards from exam and submission dates.
-3. Prioritise modules by effort, risk, prior knowledge, and proximity to exams.
-4. Set realistic learning blocks per week, including revision and free buffer.
-5. Justify plan changes: what is dropped, what moves forward, what risk arises.
-6. Output the result in a compact table:
-   `Date | Task | Source | Status | Next step`.
-
-## Reminders and Calendar (optional)
-
-Used only when the `<CALENDAR>` connector is available and explicitly requested:
-
-- Create reminders with advance notice: hard deadline, 7 days before, 2 days before,
-  and the day before (adjustable).
-- Confirm calendar writes briefly before committing, unless the action is
-  unambiguously authorised.
-- Do not transfer any deadline until it is confirmed from an official source or
-  local original document.
-
-## Mail and Portal Check (optional)
-
-For requests such as "check my institutional emails" or similar:
-
-1. Search institutional emails for relevant new messages.
-2. Check official deadline pages and module/exam pages.
-3. Open `<LMS>` only when needed and with the user's login.
-4. Output changes as a delta: new, changed, unchanged, unclear.
-5. Name next actions: register, download, follow up, plan, remind.
-
-## Privacy
-
-- Do not output enrollment numbers, certificates, mail full texts, health data,
-  or exam data unnecessarily.
-- Ask before writing files if sensitive content would be transferred into new
-  planning files.
-- Abstracted references are sufficient in replies: "Re-enrollment deadline ends
-  on …" — no complete mail or document quotations.
-
-## Open Points
-
-- The `author` field follows the `.SKILLS` convention (repository authorship);
-  the value contains a personal name but is intended for public repository use.
-- Tool integrations (`<MAIL>`, `<CALENDAR>`) are intentionally optional — the skill
-  functions fully without them.
+- **Prioridad Normativa:** Prevalece siempre el reglamento oficial de exámenes.
+- **Sin Almacenamiento de Claves:** No guardar credenciales de acceso institucional.
+- **Márgenes de Tiempo Obligatorios:** Todo plan debe contener tiempo de amortiguación.
