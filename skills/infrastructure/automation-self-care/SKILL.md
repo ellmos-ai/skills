@@ -37,7 +37,6 @@ provenance:
   local_changes_since_sync: false
 ---
 
-<img src="banner.png" width="100%" alt="automation-self-care banner">
 # Automation Self-Care
 
 Create a native, provider-specific maintenance fleet from one provider-neutral

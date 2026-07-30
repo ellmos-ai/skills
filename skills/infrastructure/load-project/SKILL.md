@@ -2,7 +2,6 @@
 language: de
 ---
 
-<img src="banner.png" width="100%" alt="load-project banner">
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

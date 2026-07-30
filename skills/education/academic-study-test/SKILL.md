@@ -16,7 +16,6 @@ language: de
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="academic-study-test banner">
 # Prüfungsvorbereitung und Selbsttests (Deutsch)
 
 Dieser Skill ermöglicht die Erstellung realistischer Übungsaufgaben und die Durchführung objektiver Leistungskontrollen.

@@ -19,7 +19,6 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-<img src="banner.png" width="100%" alt="structured-thinking banner">
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

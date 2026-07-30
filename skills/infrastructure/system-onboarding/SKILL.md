@@ -32,7 +32,6 @@ provenance:
   local_changes_since_sync: false
 ---
 
-<img src="banner.png" width="100%" alt="system-onboarding banner">
 # System Onboarding
 
 Use this protocol to establish a new or rebuilt workstation for local-first agent
