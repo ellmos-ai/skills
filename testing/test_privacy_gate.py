@@ -39,6 +39,11 @@ class PrivacyGateTests(unittest.TestCase):
         )
         self.assertEqual([], findings)
 
+    def test_rejects_host_scoped_device_names(self) -> None:
+        pattern = privacy_gate.CONTENT_PATTERNS["host-scoped device name"]
+        self.assertIsNotNone(pattern.search("WORKSTATION-ABC"))
+        self.assertIsNotNone(pattern.search("LAPTOP-123"))
+
 
 if __name__ == "__main__":
     unittest.main()

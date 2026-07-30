@@ -26,7 +26,11 @@ ALLOWED_HOME_SEGMENTS = {
     "user", "username", "|",
 }
 CONTENT_PATTERNS = {
-    "known private host": re.compile(r"\b(?:<LOCAL_HOST>|<LOCAL_HOST>)\b", re.IGNORECASE),
+    "host-scoped device name": re.compile(
+        r"\b(?:ASUS|WORKSTATION|DESKTOP|LAPTOP|MACSTUDIO)-"
+        r"[A-Z0-9][A-Z0-9-]*\b",
+        re.IGNORECASE,
+    ),
     "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
