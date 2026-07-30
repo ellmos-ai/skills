@@ -31,6 +31,7 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
 # Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.

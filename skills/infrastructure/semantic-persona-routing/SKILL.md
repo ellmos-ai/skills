@@ -37,6 +37,7 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
 # Semantic Persona Routing
 
 Route by capability first and apply personality second. Build a portable map that

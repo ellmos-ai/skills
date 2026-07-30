@@ -19,6 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="document-chunker banner">
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

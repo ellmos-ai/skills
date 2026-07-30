@@ -19,6 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
+<img src="banner.png" width="100%" alt="decide banner">
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

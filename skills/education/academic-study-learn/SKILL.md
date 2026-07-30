@@ -16,6 +16,7 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
 # Aktives Lernen und Wissensaufbereitung (Deutsch)
 
 Dieser Skill bietet Methoden zur aktiven Erarbeitung komplexer wissenschaftlicher Inhalte.

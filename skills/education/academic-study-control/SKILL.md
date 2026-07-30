@@ -17,6 +17,7 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
 # Akademisches Studien- und Fristenmanagement (Deutsch)
 
 Dieser Skill bietet eine systematische Unterstützung für die Studienorganisation, Fristenüberwachung und Prüfungsplanung.
