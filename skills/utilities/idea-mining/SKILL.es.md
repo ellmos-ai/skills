@@ -1,150 +1,101 @@
 ---
 language: es
+description: Extraer ideas, filtrar contra el historial y explorar una hasta completarla. Un flujo de trabajo de 5 fases (A-E) para la resolución de problemas complejos.
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `idea-mining`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
+> **Español** — Versión oficial en español de `idea-mining`.
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
+# Idea-Mining — Extraer ideas, filtrar, ejecutar una
 
-## Descripción General y Propósito & Purpose
+## Descripción general y propósito
 
-Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
-Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
-Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
-(ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
-substanziell explorieren.
+Ante problemas complejos, la generación de ideas raras veces falla por falta de ocurrencias, sino por tres razones: las ideas no se **registran**, no se comprueban contra **lo que ya se ha intentado** (volviendo a caer en los mismos callejones sin salida) y ninguna se **persigue de forma consistente hasta el final**. Este flujo de trabajo separa estrictamente las tres fases: primero, extraer de forma divergente (sin evaluación); luego, filtrar (contra la documentación del proyecto); y, finalmente, explorar SUBSTANCIALMENTE UNA idea.
 
-Herkunft: destilliert aus einem produktiven Forschungs-Automations-Lauf über offene
-mathematische Probleme; funktioniert genauso für Architektur-, Design- und Konzeptblockaden.
+Origen: destilado de una sesión de automatización de investigación productiva sobre problemas matemáticos abiertos; funciona de igual manera para bloqueos de arquitectura, diseño y conceptos.
 
-## Phase A — Ideenspeicher füllen (divergent, ohne Bewertung)
+## Fase A — Llenar el depósito de ideas (divergente, sin evaluación)
 
-Alle Fundstücke in eine Datei `IDEENSPEICHER.md` im Projektordner schreiben (Stichworte +
-2–3 Sätze, Quelle/Auslöser notieren). Die acht Techniken nacheinander durchgehen — sie
-zielen auf unterschiedliche Assoziationsräume, deshalb bei wirklich festgefahrenen
-Problemen keine überspringen (bei leichteren Blockaden oder knapper Zeit genügt eine
-begründete Teilmenge, mindestens aber eine weiche Technik aus 3–5 plus die Recherche):
+Escribir todos los hallazgos en un archivo `IDEENSPEICHER.md` en la carpeta del proyecto (palabras clave + 2–3 frases, anotar fuente/disparador). Recorrer las ocho técnicas secuencialmente —se dirigen a diferentes espacios asociativos, por lo que en problemas verdaderamente bloqueados no se debe omitir ninguna (para bloqueos menores o tiempo limitado, basta con un subconjunto justificado, pero al menos una técnica blanda de la 3–5 más la investigación):
 
-1. **Wiedererkennung:** Kommt mir das bekannt vor? Habe ich diese Struktur schon einmal
-   in anderem Kontext gesehen?
-2. **Fern-Disziplin:** Gibt es ein ähnliches Problem/eine ähnliche Formel in einer weit
-   entfernten Disziplin (Physik↔Ökonomie, Biologie↔Informatik, …)? Wo genau liegt die
-   Verbindung?
-3. **Alltags-Allegorie:** Das Problem in einer naturnahen Allegorie erzählen (Wellen,
-   Sand, Strömung, Wachstum …). Wirksam: die Allegorie von einem **unbelasteten
-   Subagenten** erfinden lassen und dann schauen, wohin sie führt — die eigene Sicht ist
-   vom Problem schon deformiert.
-4. **Störgefühl / Frosch→Prinz:** Was stört mich am aktuellen Stand, was finde ich
-   hässlich? Was müsste sich ändern, damit ich es plötzlich schön fände? Ästhetisches
-   Unbehagen zeigt oft auf die falsch gewählte Darstellung.
-5. **Märchen-Reframing:** Das Problem als Märchen erzählen: Wer ist der Held, wer die
-   Bösewichte, welche Gefahren lauern, was könnte dem Helden helfen? Die Rollenzuweisung
-   erzwingt eine Kausalstruktur, die im Formalismus unsichtbar bleibt.
-6. **Recherche:** Web, Fachdatenbanken, Preprint-Server, Foren (Reddit/ResearchGate/GitHub)
-   nach neuen Veröffentlichungen, Scripts, Ansätzen durchsuchen. Relevante Quellen in einen
-   Ordner `_sources/` laden und auf Innovationen lesen — bei Preprints kritisch bleiben.
-7. **Geschwisterprojekte:** Verwandte eigene Projekte auf rücktransferierbare Lösungsideen
-   prüfen (dort gelöste Teilprobleme, dort gebaute Werkzeuge).
-8. **Bestandsquerlauf:** Den gesamten eigenen Projektbestand (Pipeline) auf Ansätze
-   durchgehen, die auf DIESES Problem passen könnten.
+1. **Reconocimiento:** ¿Me resulta familiar? ¿He visto esta estructura antes en otro contexto?
+2. **Disciplina distante:** ¿Existe un problema o fórmula similar en una disciplina lejana (Física↔Economía, Biología↔Informática, …)? ¿Dónde reside exactamente la conexión?
+3. **Alegoría cotidiana:** Contar el problema en una alegoría inspirada en la naturaleza (olas, arena, corriente, crecimiento…). Efectivo: hacer que un **subagente imparcial** invente la alegoría y ver a dónde conduce —la propia visión ya está deformada por el problema.
+4. **Incomodidad / Rana→Príncipe:** ¿Qué me molesta del estado actual, qué me parece feo? ¿Qué tendría que cambiar para que de repente me parezca hermoso? El malestar estético a menudo señala una representación mal elegida.
+5. **Reencuadre de cuento de hadas:** Contar el problema como un cuento de hadas: ¿Quién es el héroe, quiénes los villanos, qué peligros acechan, qué podría ayudar al héroe? La asignación de roles fuerza una estructura causal que permanece invisible en el formalismo.
+6. **Investigación:** Buscar en la web, bases de datos especializadas, servidores de preprints, foros (Reddit/ResearchGate/GitHub) nuevas publicaciones, scripts y enfoques. Cargar fuentes relevantes en una carpeta `_sources/` y leer en busca de innovaciones —mantener una postura crítica con los preprints.
+7. **Proyectos hermanos:** Revisar proyectos personales/internos relacionados en busca de ideas de solución retrotransferibles (subproblemas resueltos allí, herramientas construidas allí).
+8. **Revisión transversal del inventario:** Revisar todo el inventario de proyectos propios (pipeline) en busca de enfoques que puedan encajar en ESTE problema.
 
-## Phase B — Filter (gegen bereits Versuchtes)
+## Fase B — Filtro (contra lo ya intentado)
 
-Den Ideenspeicher gegen die Projektdokumentation abgleichen: Beweisnotizen, Proof-Notes,
-Entscheidungs-Logs, TODO/DONE, frühere Ideenspeicher. **Eliminiert wird, was dokumentiert
-bereits versucht und abgeschlossen ist** — nicht, was nur „unwahrscheinlich klingt"
-(Bewertung nach Attraktivität kommt erst in Phase C). Überlebende nach
-`IDEENSPEICHER_FILTERED.md`.
+Cotejar el depósito de ideas con la documentación del proyecto: notas de prueba, registros de decisiones, TODO/DONE, depósitos de ideas anteriores. **Se elimina aquello que esté documentado como ya intentado y finalizado** —no lo que simplemente "suene poco probable" (la evaluación por atractivo llega solo en la Fase C). Guardar las ideas supervivientes en `IDEENSPEICHER_FILTERED.md`.
 
-Voraussetzung ist eine gepflegte Versuchs-Dokumentation — existiert keine, ist der erste
-Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
+Es requisito previo contar con una documentación de experimentos bien mantenida —si no existe, el primer paso es crearla (de lo contrario, cada ejecución futura producirá duplicación de esfuerzos).
 
-## Phase C — Wählen und durchziehen
+## Fase C — Elegir y ejecutar
 
-1. Ein bis drei Ideen aus dem Filtrat kurz anexplorieren (je ein Absatz: was wäre der
-   erste konkrete Schritt, was das Erfolgssignal?).
-2. **Eine** wählen — die mit der stärksten Anziehung. Attraktion ist hier ein legitimes
-   Kriterium: Bei schweren Problemen trägt nur eine Idee, der man nachgehen *will*.
-3. Die Wahl bis zum Ende oder zumindest substanziell weiterführen — nicht nach dem ersten
-   Hindernis zur nächsten Idee springen (das wäre Phase-A-Verhalten in Phase C).
+1. Explorar brevemente de una a tres ideas del filtrado (un párrafo cada una: ¿cuál sería el primer paso concreto, cuál la señal de éxito?).
+2. Elegir **una** —la que tenga la mayor atracción. La atracción es aquí un criterio legítimo: en problemas difíciles, solo una idea que *desees* seguir te llevará adelante.
+3. Llevar la elección hasta el final o al menos hacerla avanzar sustancialmente —no saltar a la siguiente idea ante el primer obstáculo (eso sería un comportamiento de Fase A durante la Fase C).
 
-## Phase D — Dokumentieren
+## Fase D — Documentar
 
-- Erkenntnisse in die Projektdokumentation (Beweisnotiz, Entscheidungs-Log, ADR) —
-  **auch die Fehlschläge**, sie sind der Filter für den nächsten Lauf.
-- Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
-- Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
+- Registrar los hallazgos en la documentación del proyecto (nota de prueba, registro de decisiones, ADR) —**incluidos los fallos**, ya que constituyen el filtro para la siguiente ejecución.
+- Devolver las ideas de seguimiento abiertas a `IDEENSPEICHER.md` o TODO.
+- Informe breve: extraídas (cantidad) | filtradas (supervivientes) | exploradas | resultado | siguiente paso.
 
-## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+## Fase E — Siembra (transferencia externa opcional)
 
-Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
-Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
-kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+La Técnica 7 trae ideas DESDE proyectos hermanos —la Fase E invierte la dirección: Si la exploración ha dado un resultado transferible (método, herramienta, patrón de solución), revisar brevemente el inventario de proyectos propios: ¿A quién ayudaría esto?
 
-- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
-  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
-  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
-- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
-  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+- **Sembrar de forma selectiva, no dispersar:** Como máximo ~3 proyectos receptores provistos directamente de una entrada TODO concreta (qué adoptar, dónde se encuentra, por qué encaja); anotar otros candidatos solo como una lista priorizada en el proyecto propio.
+- Razón del límite: La dispersión amplia crea tareas difusas en muchos proyectos que nadie asume —tres semillas precisas superan a diez difusas.
 
-## Als periodischer Lauf
+## Como ejecución periódica
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
-Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
-verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
-Versuchs-Doku sind hier das Gedächtnis.
+El flujo de trabajo es muy adecuado como automatización recurrente para un proyecto fijo (ronda de innovación). Para ello, combinarlo con la estructura de rotación (skill `rotation-check`): el registro evita que las mismas ideas sean "redescubiertas" múltiples veces —el depósito de ideas y la documentación de experimentos actúan aquí como memoria.
 
-## Ejemplo y Uso & Usage
+## Ejemplo y aplicación
 
 ```text
-Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
+Problema: Una prueba de convergencia lleva semanas atascada en una estimación.
 
-A) Schürfen → IDEENSPEICHER.md: u. a. (2) ähnliche Struktur in der Warteschlangen-
-   theorie?; (3) Subagent-Allegorie „Sand rieselt durch immer feinere Siebe" →
-   Idee: Abschätzung stufenweise statt global; (6) Preprint von 2026 mit neuem
-   Lemma, nach _sources/ geladen; (7) Nachbarprojekt hat ein numerisches
-   Prüfscript, das sich rücktransferieren lässt.
-B) Filter gegen BEWEISNOTIZ.md: „globale Abschätzung verschärfen" wurde 2× versucht
-   und dokumentiert verworfen → raus. 3 Ideen überleben → IDEENSPEICHER_FILTERED.md.
-C) Prime-Wahl: die Sieb-Idee (stärkste Anziehung) — bis zu einem Teilresultat
-   durchgezogen.
-D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
+A) Extracción → IDEENSPEICHER.md: p. ej., (2) ¿estructura similar en la teoría
+   de colas?; (3) Alegoría de subagente "la arena cae a través de tamices cada vez más finos" →
+   idea: estimar paso a paso en lugar de globalmente; (6) Preprint de 2026 con nuevo
+   lema, descargado en _sources/; (7) El proyecto vecino tiene un script de comprobación
+   numérica que se puede retrotransferir.
+B) Filtro contra BEWEISNOTIZ.md: "reforzar estimación global" se intentó 2 veces
+   y se descartó de forma documentada → eliminado. 3 ideas sobreviven → IDEENSPEICHER_FILTERED.md.
+C) Elección principal: la idea del tamiz (mayor atracción) — llevada a cabo hasta un resultado parcial.
+D) BEWEISNOTIZ.md actualizado (incluido el fallo de la idea 2), informe breve.
 ```
 
-## Red Flags
+## Banderas rojas (Red Flags)
 
-| Gedanke | Realität |
+| Pensamiento | Realidad |
 | --- | --- |
-| „Technik 3–5 sind Spielerei" | Die weichen Techniken liefern die Ideen, die Recherche nicht liefern kann — sie adressieren andere Assoziationsräume. |
-| „Ich bewerte schon beim Sammeln" | Bewertung in Phase A tötet die divergente Ausbeute. Erst speichern, dann filtern. |
-| „Der Filter dauert zu lange, ich erinnere mich schon" | Gedächtnis glättet Fehlversuche — nur die Doku zählt. |
-| „Idee klemmt, ich nehme die nächste" | In Phase C wird durchgezogen; Springen zurück nach A nur mit dokumentiertem Grund. |
+| "Las técnicas 3–5 son un juego" | Las técnicas blandas aportan las ideas que la investigación no puede proporcionar —abordan diferentes espacios asociativos. |
+| "Evalúo mientras recopilo" | La evaluación en la Fase A destruye el rendimiento divergente. Guardar primero, filtrar después. |
+| "El filtro tarda demasiado, ya me acuerdo" | La memoria suaviza los intentos fallidos —solo la documentación cuenta. |
+| "La idea se atasca, tomo la siguiente" | En la Fase C se sigue adelante; volver a la Fase A solo con un motivo documentado. |
 
-## Verwandte Skills
+## Skills relacionadas
 
-- `brainstorm` — breite Kreativmethoden (SCAMPER, Six Hats) ohne Filter-/Explorations-Pipeline.
-- `think` / `decide` — Analyse und Auswahlentscheidung, nutzbar innerhalb Phase C.
-- `rotation-check` — Gerüst für den periodischen Einsatz.
-- `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
+- `brainstorm` — métodos creativos amplios (SCAMPER, Six Hats) sin pipeline de filtro/exploración.
+- `think` / `decide` — análisis y decisión de selección, utilizables dentro de la Fase C.
+- `rotation-check` — estructura para despliegue periódico.
+- `swarm-operations` — subagentes imparciales para la técnica 3 y exploración paralela.
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.1.0 (2026-07-03)
-- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
-  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
-  cross-project-transfer-Skill (Dedup-Entscheid).
+- Fase E "Siembra": transferencia externa opcional de resultados transferibles a
+  proyectos hermanos (máx. ~3 receptores directos) —integrada en lugar de un skill
+  cross-project-transfer independiente (decisión de deduplicación).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
-  (Ideenspeicher → Filter → Prime-Wahl → Exploration) und user-neutral verallgemeinert.
+- Versión inicial. Abstraído de la automatización Codex "ultra-deep-idea-search-single-project"
+  (depósito de ideas → filtro → elección principal → exploración) y generalizado para ser neutro al usuario.

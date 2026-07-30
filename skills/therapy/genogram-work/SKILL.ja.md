@@ -1,52 +1,64 @@
 ---
+name: genogram-work
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: ジェノグラム（家族関係図）ワーク：家族の関係性パターンの把握とリフレクション。多世代的視点、ジェノグラム記号、パターン認識、家族史におけるリソース。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [genogram, systemic-therapy, family-therapy, multigenerational, relationship-patterns]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `genogram-work`.
+> **日本語** — `genogram-work` の公式日本語版。
 
 
+# ジェノグラム・ワーク (Genogram Work)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 家族の関係性パターンの把握とリフレクション：多世代的視点、ジェノグラム記号、パターン認識、家族史におけるリソース
 
-
-# Genogram Work (English)
-
-> Recognizing and reflecting on family relationship patterns: Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-The genogram is a tool from systemic therapy and family therapy. It was significantly shaped by Murray Bowen (multigenerational approach) and Monica McGoldrick (genogram standardization). It graphically represents family relationships across multiple generations and makes patterns, roles, and dynamics visible.
-
-Evidence: Genogram work is a component of all systemic therapy training programs and is established in clinical practice as a diagnostic and reflective tool (McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012).
-
-**Note:** This is a reflection tool, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is a Genogram?
+## 背景 (Context)
 
-### Definition
-A genogram is an extended graphical representation of a family tree that captures not only biological descent but also relationship qualities, emotional patterns, conflicts, illnesses, and important life events — typically across three generations.
+ジェノグラム（Genogram / 家族関係図）は、システム療法および家族療法における重要手法です。マレー・ボーエン（Murray Bowen：多世代的家族療法）やモニカ・マゴールドリック（Monica McGoldrick：ジェノグラムの標準化）らによって確立されました。数世代にわたる家族関係を視覚的に描画し、家族内のパターン、役割、ダイナミクスを可視化します。
 
-### Difference from a Family Tree
+エビデンス：ジェノグラム・ワークは、システム療法のすべての研修プログラムに組み込まれており、臨床実践においてアセスメントおよびリフレクションのツールとして定着しています（McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012）。
 
-| Family Tree | Genogram |
-|-------------|----------|
-| Who is related to whom? | How do people relate to each other? |
-| Biological descent | Emotional relationship quality |
-| Static facts | Dynamic patterns |
-| Historically oriented | Pattern-oriented |
+**注意：** 本ツールはリフレクション（自己省察）のためのものであり、専門的な心理療法の代替となるものではありません。
+**絶対に使用不可：** EMDR、持続暴露療法（PE）、叙述暴露療法（NET）
 
 ---
 
-## 2. Genogram Symbols (Standard after McGoldrick)
+## 1. ジェノグラムとは？
 
-### Persons
+### 定義
+ジェノグラムとは、単なる家系図を超えて、生物学的な血縁関係だけでなく、関係性の質、感情的パターン、葛藤、疾患、主要なライフイベントを通常3世代にわたって捉える拡張グラフィック表示です。
+
+### 家系図との違い
+
+| 家系図 (Family Tree) | ジェノグラム (Genogram) |
+|----------------------|-------------------------|
+| 誰と誰が血縁関係にあるか？ | 人々がどのように関係し合っているか？ |
+| 生物学的血縁関係 | 感情的な関係性の質 |
+| 静的な事実 | 動的なパターン |
+| 歴史的指向 | パターン指向 |
+
+---
+
+## 2. ジェノグラム記号（マゴールドリック標準）
+
+### 人物記号
 
 ```
 Male:         [ ]     (Square)
@@ -56,7 +68,7 @@ Deceased:     [X]     (Symbol with X)
 Index person: [=]     (Double border)
 ```
 
-### Relationships
+### 関係性記号
 
 ```
 Marriage/Partnership:   ———————      (solid line)
@@ -71,130 +83,130 @@ Cutoff:                ——||——      (line with double bar)
 
 ---
 
-## 3. How Do I Create a Genogram?
+## 3. ジェノグラムの作成方法
 
-### Step-by-Step Guide
+### ステップ別ガイド
 
-**Step 1: Gather Data**
-For each person (at least 3 generations):
-- Name, birth year, death year if applicable
-- Occupation, place of residence
-- Special life events (migration, illness, losses)
-- Relationship status
+**ステップ 1: データの収集**
+各人物について（少なくとも3世代）：
+- 氏名、生年、没年（該当する場合）
+- 職業、居住地
+- 特殊なライフイベント（移住、疾患、喪失体験）
+- 関係性の状態（既婚、離婚等）
 
-**Step 2: Draw Basic Structure**
-- Grandparents at top, children at bottom
-- Partners side by side
-- Children from left to right (oldest first)
+**ステップ 2: 基本構造の描画**
+- 最上部に祖父母、最下部に子ども
+- パートナーは横並び
+- 子どもは左から右の順（最年長が左）
 
-**Step 3: Add Relationship Qualities**
-- Which relationships are close, which are distant?
-- Where are conflicts?
-- Where are enmeshments or cutoffs?
+**ステップ 3: 関係性の質の追加**
+- 親密な関係と距離のある関係はどこか？
+- 葛藤が存在する部分はどこか？
+- 密着（過干渉）や遮断（関係断絶）はどこにあるか？
 
-**Step 4: Mark Patterns**
-- Color-code recurring themes
-- E.g.: Addiction (red), mental illness (blue), separation (orange)
-
----
-
-## 4. Recognizing Patterns — Multigenerational Perspective
-
-### Typical Multigenerational Patterns
-
-**Repetition patterns:**
-- Divorces across multiple generations
-- Addictive behavior (alcohol, work, ...)
-- Early parenthood
-- Career choices / role distribution
-
-**Relationship patterns:**
-- Enmeshment (too-close relationship, no boundaries)
-- Cutoff (contact break, exclusion)
-- Triangulation (child drawn into parental conflict)
-- Parentification (child takes on parental role)
-
-**Roles and mandates:**
-- "The strong one" / "The caretaker"
-- "The black sheep"
-- "The peacemaker"
-- Unspoken family mandates ("You should have it better")
-
-### Reflection Questions on Patterns
-- "What themes appear in your family across generations?"
-- "What role have you taken on in your family?"
-- "Are there family rules that were never spoken aloud?"
-- "Who in the family do you resemble most — and in what way?"
-- "Which relationship patterns of your parents do you recognize in yourself?"
+**ステップ 4: パターンのマーキング**
+- 繰り返し現れるテーマを色分け
+- 例：依存症（赤）、精神疾患（青）、離婚・別居（オレンジ）
 
 ---
 
-## 5. Resources in the Genogram
+## 4. パターンの認識 — 多世代的視点
 
-### Not Just Problems — Also Strengths
+### 典型的な多世代パターン
 
-The genogram shows not only burdens but also resources:
-- Who has mastered difficult times?
-- What strengths exist in the family?
-- Who was a positive role model?
-- What values were passed on that are helpful?
+**反復パターン：**
+- 世代を超えた離婚
+- 依存行動（アルコール、仕事等）
+- 若年出産
+- キャリアの選択 / 役割の割り当て
 
-### Reflection Questions on Resources
-- "Who in your family admires you? For what?"
-- "From whom did you inherit or learn a strength?"
-- "Which family member handled a crisis particularly well?"
-- "Which positive family traditions would you like to continue?"
-- "What has held your family together?"
+**関係性パターン：**
+- 密着 / 融合（過度に親密な関係、境界の欠如）
+- 遮断（連絡の中断、排除）
+- 三角化（子どもが親同士の葛藤に巻き込まれる）
+- 親代わり化（子どもが親の役割を担う）
 
----
+**役割と期待（マンデート）：**
+- 「強い人」 / 「ケアをする人」
+- 「厄介者（ブラックシープ）」
+- 「仲裁者（平和主義者）」
+- 暗黙の家族の命題（「自分たちより良い生活を送ってほしい」）
 
-## 6. Exercises
-
-### Exercise 1: My Genogram
-Draw your own genogram (3 generations). Use the symbols from section 2. Note 2-3 keywords for each person.
-
-### Exercise 2: Relationship Qualities
-Add relationship qualities to your genogram:
-- Where are the closest relationships?
-- Where are conflicts?
-- Where is distance or cutoff?
-
-### Exercise 3: Pattern Search
-Look at your finished genogram and answer:
-1. What themes repeat?
-2. What roles do you recognize?
-3. Which patterns do you want to continue — and which not?
-
-### Exercise 4: Resource Genogram
-Mark all positive resources in your genogram: Strengths, talents, mastered crises, positive values.
+### パターンに関するリフレクションの問いかけ
+- 「世代を超えてあなたの家族に繰り返し現れるテーマは何ですか？」
+- 「あなたは家族の中でどのような役割を担ってきましたか？」
+- 「言葉にされたことはないものの、存在する家族のルールはありますか？」
+- 「家族の中で誰に最も似ていますか？またどのような点で似ていますか？」
+- 「両親の関係性パターンのうち、自分自身にも見られるものはどれですか？」
 
 ---
 
-## Ethics and Boundaries
+## 5. ジェノグラムにおけるリソース
 
-**An AI assistant may:**
-- Explain genogram concepts and symbols
-- Support creating a simple genogram
-- Ask reflection questions about family patterns
-- Point out resources in family history
+### 問題だけでなく — 強みにも着目する
 
-**An AI assistant must NOT:**
-- Make family diagnoses
-- Process family secrets or traumas
-- Conduct family constellations
-- Promote blame toward family members
-- Perform family therapeutic interventions
+ジェノグラムは困難や負担だけでなく、リソース（資源）も示します：
+- 困難な時期を乗り越えたのは誰ですか？
+- 家族の中にどのような強みが存在しますか？
+- 誰がポジティブなロールモデルでしたか？
+- 役立つ価値観として受け継がれたものは何ですか？
 
-**In case of acute crisis, ALWAYS refer to:**
+### リソースに関するリフレクションの問いかけ
+- 「家族の中で誰があなたを称賛していますか？どのような点で？」
+- 「誰から強みを引き継いだり学んだりしましたか？」
+- 「危機に特に上手に対処した家族は誰ですか？」
+- 「どのポジティブな家族の伝統を継続したいですか？」
+- 「何があなたの家族を一つに繋ぎ止めてきましたか？」
+
+---
+
+## 6. エクササイズ
+
+### エクササイズ 1: マイ・ジェノグラム
+自分自身のジェノグラム（3世代）を描きます。セクション2の記号を使用してください。各人物について2〜3のキーワードをメモします。
+
+### エクササイズ 2: 関係性の質
+ジェノグラムに関係性の質を追加します：
+- 最も親密な関係はどこですか？
+- 葛藤はどこにありますか？
+- 距離や遮断はどこにありますか？
+
+### エクササイズ 3: パターン探し
+完成したジェノグラムを見て、以下に答えてください：
+1. どのようなテーマが繰り返されていますか？
+2. どのような役割が見られますか？
+3. どのパターンを継続したく、どのパターンを終わりにしたいですか？
+
+### エクササイズ 4: リソース・ジェノグラム
+ジェノグラム内のすべてのポジティブなリソースをマークします：強み、才能、乗り越えた危機、ポジティブな価値観。
+
+---
+
+## 倫理と限界
+
+**AIアシスタントができること：**
+- ジェノグラムの概念と記号の説明
+- シンプルなジェノグラム作成のサポート
+- 家族パターンに関するリフレクションの問いかけ
+- 家族史におけるリソースの提示
+
+**AIアシスタントがやってはならないこと：**
+- 家族の心理診断を行うこと
+- 家族の秘密やトラウマを扱うこと
+- 家族コンステレーション（家族配置）を実施すること
+- 家族構成員への非難を助長すること
+- 家族療法的な介入を行うこと
+
+**急性の危機が発生した場合は、必ず以下にリファーしてください：**
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- よりそいホットライン (JP): 0120-279-338 / 緊急通報: 110, 119 (JP) / 911 (US) / 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - McGoldrick, M., Gerson, R. & Petry, S. (2020). *Genograms: Assessment and Treatment.* Norton.
 - Bowen, M. (1978). *Family Therapy in Clinical Practice.* Jason Aronson.
@@ -202,5 +214,5 @@ Mark all positive resources in your genogram: Strengths, talents, mastered crise
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — 専門的な心理療法の代替ではありません*

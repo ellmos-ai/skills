@@ -2,57 +2,50 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `textproduction`.
+> **Español** — Versión oficial en español de `textproduction`.
 
 
+# Textproduction — Router (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Esta habilidad cubre todas las formas de producción de texto. Redirige a la
+subhabilidad adecuada: lee las instrucciones detalladas en la subcarpeta.
 
+## Tabla de enrutamiento
 
-> **English Translation** — Official English version of `textproduction`.
-
-
-# Textproduction — Router (English)
-
-Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
-passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
-
-## Routing-Tabelle
-
-| Teilskill | Trigger-Beispiele | Detail-Anleitung |
+| Subhabilidad | Ejemplos de activadores | Instrucciones detalladas |
 |---|---|---|
-| **text** | „Schreib einen Blogpost", „5 LinkedIn-Posts", „Newsletter", „Produktbeschreibung", „Formelle E-Mail", „Fasse X zusammen" | `text/WORKFLOW.md` |
-| **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
-| **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
+| **text** | «Escribe una entrada de blog», «5 publicaciones de LinkedIn», «Boletín informativo», «Descripción de producto», «Correo electrónico formal», «Resume X» | `text/WORKFLOW.md` |
+| **storys** | «Escribe un guión», «Historia corta», «Crear aventura de RPG», «Ficha de personaje», «Construcción de mundos» | `storys/WORKFLOW.md` |
+| **pr** | «Redactar comunicado de prensa», «Documento de posición», «Paquete de RR. PP.», «Generar PDF» | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
 ```
-1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.
-2. Detail-Anleitung im Unterordner lesen (WORKFLOW.md).
-3. Prompt-Muster auswaehlen, Platzhalter fuellen, Text generieren.
-4. Qualitaetspruefung (je Teilskill angegeben).
+1. Solicitud del usuario → Tabla de enrutamiento arriba → determinar la subhabilidad adecuada.
+2. Leer las instrucciones detalladas en la subcarpeta (WORKFLOW.md).
+3. Seleccionar plantilla de prompt, rellenar marcadores de posición, generar texto.
+4. Control de calidad (especificado por subhabilidad).
 ```
 
-## Hinweise
+## Notas
 
-- **Userneutral:** Keine persoenlichen Daten, API-Keys oder Kontodaten im Skill.
-  Konfiguration (Tonalitaet, Zeichenlimits, Kontaktdaten fuer PR) obliegt dem Nutzer.
-- **PR-Tool:** `pr/press_compiler.py` kompiliert Pressemitteilungen und Positionspapiere
-  zu PDF via LaTeX (pdflatex/xelatex). Setup einmalig: `pr/config.example.json`
-  nach `pr/config.json` kopieren und Kontaktdaten eintragen.
-- Optionale Stiloptimierung: DeepL Write (kostenlos bis 500.000 Zeichen/Monat).
+- **Neutral para el usuario:** Sin datos personales, claves de API ni datos de cuenta en la habilidad.
+  La configuración (tonalidad, límites de caracteres, datos de contacto para RR. PP.) corresponde al usuario.
+- **Herramienta de RR. PP.:** `pr/press_compiler.py` compila comunicados de prensa y documentos de posición
+  a PDF a través de LaTeX (pdflatex/xelatex). Configuración única: copiar `pr/config.example.json`
+  a `pr/config.json` e introducir los datos de contacto.
+- Optimización de estilo opcional: DeepL Write (gratuito hasta 500.000 caracteres/mes).
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 2.0.0 (2026-06-22)
-- Umstrukturierung auf Router-Muster: SKILL.md = Einstieg + Routing-Tabelle.
-- Drei Teilskills: text/ (6 Texttypen), storys/ (4 narrative Formate),
-  pr/ (Pressemitteilung + Positionspapier + LaTeX-PDF-Compiler).
-- press_compiler.py + LaTeX-Templates + config.example.json aus
-  ai-media-editor/production/pr/ hierher verschoben (SSOT).
-- Verwandte-Skills-Verweise auf interne Teilskill-Pfade aktualisiert.
+- Reestructuración al patrón de enrutador: SKILL.md = punto de entrada + tabla de enrutamiento.
+- Tres subhabilidades: text/ (6 tipos de texto), storys/ (4 formatos narrativos),
+  pr/ (comunicado de prensa + documento de posición + compilador PDF LaTeX).
+- press_compiler.py + plantillas LaTeX + config.example.json movidos aquí desde
+  ai-media-editor/production/pr/ (SSOT).
+- Referencias de habilidades relacionadas actualizadas a rutas internas de subhabilidades.
 
 ### 1.0.0 (2026-06-22)
-- Initiale Version. Herausgeloest aus ai-media-editor/production/text/WORKFLOW.md.
-- Provenance: BACH agents/_experts/textproduction/ (MIT).
+- Versión inicial. Extraído de ai-media-editor/production/text/WORKFLOW.md.
+- Procedencia: BACH agents/_experts/textproduction/ (MIT).

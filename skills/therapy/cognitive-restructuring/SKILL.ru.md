@@ -1,202 +1,213 @@
 ---
+name: cognitive-restructuring
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Когнитивно-поведенческая терапия: модель ABC, автоматические мысли, выявление когнитивных искажений и ведение дневников мыслей.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [cbt, cognitive-restructuring, cognitive-distortions, thought-record, abc-model]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `cognitive-restructuring`.
+> **Русский** — Официальная русская версия `cognitive-restructuring`.
 
 
+# Когнитивная реструктуризация (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Ключевая техника КПТ: схема ABC, выявление и изменение дисфункциональных мыслей
 
-
-# Cognitive Restructuring (English)
-
-> Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Cognitive restructuring is a core technique of Cognitive Behavioral Therapy (CBT). It helps identify automatic negative thoughts, challenge them, and replace them with more helpful alternatives.
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. ABC Model (Ellis)
+## Контекст
 
-The ABC model explains how events, thoughts, and feelings are connected.
+Когнитивная реструктуризация — это центральная техника когнитивно-поведенческой терапии (КПТ). Она помогает выявлять автоматические негативные мысли, подвергать их сомнению и заменять более адаптивными и реалистичными альтернативами.
+
+**Примечание:** Это поддержка, а не замена профессиональной терапии.
+**Никогда не применять:** EMDR (ДПДГ), длительную экспозицию (PE), нарративную экспозиционную терапию (NET).
+
+---
+
+## 1. Модель ABC (Эллис)
+
+Модель ABC объясняет, как связаны между собой события, мысли и эмоции.
 
 ```
-A (Activating Event)   ->  B (Beliefs / Thoughts)  ->  C (Consequences / Feelings/Behavior)
-Trigger                     Evaluation / Belief           Emotional consequence
+A (Активирующее событие)  ->  B (Убеждения / Мысли)  ->  C (Последствия / Эмоции и Поведение)
+Триггер                       Оценка / Интерпретация     Эмоциональное и поведенческое следствие
 ```
 
-**Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
+**Важно:** Эмоцию (C) вызывает не само событие (A), а его интерпретация и оценка (B)!
 
-**Example:**
+**Пример:**
 ```
-A: Boss criticizes a report in a meeting
-B: "I am incompetent, everyone thinks so now"
-C: Shame, withdrawal, avoiding future contributions
+A: Начальник критикует отчет на совещании
+B: «Я некомпетентен, теперь все так думают»
+C: Стыд, отстранение, избегание выступлений в будущем
 ```
 
-**Goal:** Change B to influence C.
+**Цель:** Изменить B, чтобы позитивно повлиять на C.
 
 ---
 
-## 2. Identifying Automatic Negative Thoughts (ANTs)
+## 2. Выявление автоматических негативных мыслей (АНМ)
 
-**What are ANTs?**
-- Quick, automatic evaluations in stressful situations
-- Often perceived as facts, although they are interpretations
-- Tend toward exaggeration, generalization, catastrophizing
+**Что такое АНМ?**
+- Быстрые, автоматические оценки в стрессовых ситуациях
+- Часто воспринимаются как факты, хотя являются лишь интерпретациями
+- Склонны к преувеличению, обобщению и катастрофизации
 
-**Typical recognition features:**
-- Absolute thinking: "always," "never," "everyone," "nobody"
-- Catastrophizing: "This will end terribly"
-- Mind reading: "They must think that..."
-- Overgeneralization: "This never works for me"
+**Типичные признаки АНМ:**
+- Абсолютистское мышление: «всегда», «никогда», «все», «никто»
+- Катастрофизация: «Всё закончится ужасно»
+- Чтение мыслей: «Они точно думают, что...»
+- Сверхобобщение: «У меня никогда ничего не получается»
 
-**Recognition questions:**
-- "What went through your mind when that happened?"
-- "When you think about the situation, what words come up?"
-- "What do you fear might happen?"
-
----
-
-## 3. Cognitive Distortions (Thinking Errors)
-
-| Distortion | Description | Example |
-|------------|-------------|---------|
-| All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
-| Overgeneralization | One case = general pattern | "This always goes wrong for me" |
-| Mental filter | Only perceiving negatives | Focusing on the single criticism in feedback |
-| Mind reading | Believing to know what others think | "They surely hate me" |
-| Catastrophizing | Assuming the worst case | "This will be a catastrophe" |
-| Emotional reasoning | Feeling = reality | "I feel stupid, so I am stupid" |
-| Should/must thinking | Rigid rules | "I should be able to do this" |
-| Personalization | Relating everything to oneself | "The bad project was my fault" |
+**Вопросы для выявления:**
+- «Что промелькнуло у вас в голове, когда это произошло?»
+- «Когда вы думаете об этой ситуации, какие слова возникают?»
+- «Чего именно вы боитесь?»
 
 ---
 
-## 4. Challenging Thoughts (Socratic Questioning)
+## 3. Когнитивные искажения (Ошибки мышления)
 
-**Goal:** Not directly refute thoughts, but encourage examination.
-
-**Question set:**
-
-1. **Examine evidence:**
-   - "What evidence is there for this?"
-   - "What evidence speaks against it?"
-
-2. **Alternative explanations:**
-   - "Are there other explanations for this?"
-   - "How would someone else view this situation?"
-
-3. **Assess consequences:**
-   - "What is the worst that could happen? How likely is that?"
-   - "What is the best that could happen?"
-   - "What is the most realistic outcome?"
-
-4. **Check usefulness:**
-   - "Does this thought help me achieve my goals?"
-   - "What would I say to a good friend who thinks this way?"
+| Искажение | Описание | Пример |
+|-----------|----------|--------|
+| Чёрно-белое мышление («всё или ничего») | Полярное мышление | «Если я не идеален, то я неудачник» |
+| Сверхобобщение | Единичный случай = общее правило | «У меня всегда всё идет не так» |
+| Мыслительный фильтр | Фиксация только на негативе | Зацикливание на одной критике среди множества похвал |
+| Чтение мыслей | Уверенность в знании чужих мыслей | «Они наверняка меня ненавидят» |
+| Катастрофизация | Ожидание наихудшего сценария | «Это будет полная катастрофа» |
+| Эмоциональное обоснование | Чувство = реальность | «Я чувствую себя глупо, значит, я глуп» |
+| Долженствование | Жесткие, негибкие правила | «Я должен быть способен сделать это» |
+| Персонализация | Принятие всего на свой счет | «Проект провалился исключительно по моей вине» |
 
 ---
 
-## 5. Cognitive Restructuring Step by Step
+## 4. Оспаривание мыслей (Сократический диалог)
 
-### Record Format (Thought Record)
+**Цель:** Не опровергать мысли напрямую, а побуждать к самостоятельной проверке и анализу.
+
+**Набор вопросов:**
+
+1. **Проверка доказательств:**
+   - «Какие есть доказательства в пользу этой мысли?»
+   - «Какие факты говорят против нее?»
+
+2. **Поиск альтернативных объяснений:**
+   - «Есть ли другие объяснения происходящему?»
+   - «Как на эту ситуацию посмотрел бы другой человек?»
+
+3. **Оценка последствий:**
+   - «Что самое худшее может произойти? Насколько это вероятно?»
+   - «Что самое лучшее может произойти?»
+   - «Какой исход наиболее реалистичен?»
+
+4. **Проверка полезности:**
+   - «Помогает ли мне эта мысль достигать моих целей?»
+   - «Что бы я сказал близкому другу, если бы он думал таким образом?»
+
+---
+
+## 5. Пошаговая когнитивная реструктуризация
+
+### Формат дневника мыслей (Thought Record)
 
 ```
-SITUATION
-What happened? (When? Where? Who was there?)
-[Free text]
+СИТУАЦИЯ
+Что произошло? (Когда? Где? Кто присутствовал?)
+[Свободный текст]
 
-THOUGHT
-What went through my mind?
-Automatic thought: [...]
-How much do I believe it? (0-100%): [...]%
+АВТОМАТИЧЕСКАЯ МЫСЛЬ
+Что промелькнуло в голове?
+Мысль: [...]
+Насколько я в это верю? (0-100%): [...]%
 
-EMOTION
-What emotions did I have?
-Emotion: [...]    Intensity (0-100%): [...]%
+ЭМОЦИЯ
+Какие эмоции я испытывал(а)?
+Эмоция: [...]    Интенсивность (0-100%): [...]%
 
-COGNITIVE DISTORTION
-Which cognitive distortions are involved?
-[List from table above]
+КОГНИТИВНОЕ ИСКАЖЕНИЕ
+Какое когнитивное искажение присутствовало?
+[Список из таблицы выше]
 
-EXAMINE
-Evidence for: [...]
-Evidence against: [...]
-Alternative perspective: [...]
+ИССЛЕДОВАНИЕ МЫСЛИ
+Доказательства «ЗА»: [...]
+Доказательства «ПРОТИВ»: [...]
+Альтернативный взгляд: [...]
 
-ALTERNATIVE THOUGHT
-More balanced, realistic thought:
+АЛЬТЕРНАТИВНАЯ МЫСЛЬ
+Более взвешенная, реалистичная мысль:
 [...]
-How much do I believe it? (0-100%): [...]%
+Насколько я в нее верю? (0-100%): [...]%
 
-RESULT
-Emotion afterward: [...]   Intensity: [...]%
-Takeaway: [...]
+РЕЗУЛЬТАТ
+Эмоция после реструктуризации: [...]   Интенсивность: [...]%
+Вывод: [...]
 ```
 
 ---
 
-## 6. Behavioral Activation
+## 6. Поведенческая активация
 
-**Supplement to cognitive work:** Changing behavior supports thought change.
+**Дополнение к когнитивной работе:** Изменение поведения поддерживает изменение мышления.
 
-**Principle:** Positive activities -> Better mood -> More helpful thoughts
+**Принцип:** Положительная активность -> Улучшение настроения -> Более адаптивные мысли
 
-**Steps:**
-1. Create list of pleasant/meaningful activities
-2. Plan activities (specifically: when, how, where)
-3. Track implementation
-4. Rate mood before/after
+**Шаги:**
+1. Составить список приятных / значимых занятий
+2. Запланировать действия (конкретно: когда, как, где)
+3. Отслеживать выполнение
+4. Оценивать настроение до и после
 
-**Example activities:**
-- Walk (nature, fresh air)
-- Contact with important people
-- Creative activities
-- Physical exercise
-- Things that used to bring joy
+**Примеры занятий:**
+- Прогулка (природа, свежий воздух)
+- Контакт с важными людьми
+- Творческие занятия
+- Физические упражнения
+- Дела, которые раньше приносили радость
 
 ---
 
-## Ethics and Boundaries
+## Этика и границы
 
-**An AI assistant may:**
-- Explain cognitive distortions and the ABC model
-- Ask Socratic questions
-- Guide thought records
-- Provide psychoeducation about CBT techniques
+**ИИ-ассистент может:**
+- Объяснять когнитивные искажения и модель ABC
+- Задавать сократические вопросы
+- Сопровождать ведение дневников мыслей
+- Предоставлять психообразование по техникам КПТ
 
-**An AI assistant must NOT:**
-- Replace professional cognitive behavioral therapy
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Заменять профессиональную когнитивно-поведенческую терапию
+- Ставить диагнозы или давать лечебные назначения
+- Осуществлять кризисную интервенцию
+- Применять EMDR (ДПДГ), длительную экспозицию (PE) или нарративную экспозиционную терапию (NET)
 
-**In case of acute crisis, ALWAYS refer to:**
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи: +7 (495) 051 (Москва)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная служба: 112 (РФ / ЕС) / 911 (US)
 
 ---
 
-## References
+## Литература
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Beck (1979), Ellis (1962) — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Beck (1979), Ellis (1962) — Не является профессиональной терапией*

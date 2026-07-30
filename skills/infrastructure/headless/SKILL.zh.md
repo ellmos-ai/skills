@@ -2,75 +2,57 @@
 language: zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `headless`.
+> **中文** — `headless` 官方中文版本。
 
 
+# Headless (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概述与目的
 
+当需求方明确要求进行长时间、无持续返问的自主运行时使用此 Skill。该模式增加的是持续执行能力，而非操作权限。
 
-> **English Translation** — Official English version of `headless`.
+单个无法执行的项切勿无故中止独立、安全的剩余工作。
 
+## 前置条件
 
-# Headless (English)
+在开始前明确记录：
 
-## 概述与执行目标 & Purpose
+- 具体目标与成功标准，
+- 明确的包含范围与排除范围（正向与负向 Scope），
+- 可用的时间或成本预算，
+- 允许的副作用，
+- 项目规则、锁和外部变更，
+- Checkpoint（检查点）的路径或机制，
+- （可选）允许的本地决策配置文件。
 
-Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
-autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
-Ausdauer, nicht die Berechtigung.
+若缺少决策配置文件，则仅使用明确规则和安全默认假设。Runtime 切勿冒充任何个人。
 
-Ein einzelner nicht ausführbarer Punkt darf unabhängige, sichere Restarbeit nicht
-unnötig stoppen.
+## 决策级别
 
-## Startbedingungen
-
-Vor Beginn festhalten:
-
-- konkretes Ziel und Erfolgskriterium,
-- positiver und negativer Scope,
-- verfügbare Zeit- oder Kostenbudgets,
-- erlaubte Seiteneffekte,
-- Projektregeln, Sperren und fremde Änderungen,
-- Pfad oder Mechanismus für Checkpoints,
-- optional ein zulässiges lokales Entscheidungsprofil.
-
-Fehlt ein Entscheidungsprofil, werden nur explizite Regeln und sichere
-Standardannahmen verwendet. Die Runtime darf keine Person imitieren.
-
-## Entscheidungsstufen
-
-| Stufe | Grundlage | Verhalten |
+| 级别 | 依据 | 行为 |
 |---|---|---|
-| hoch | explizite Regel oder mehrfach bestätigtes Muster | entscheiden; nur bei vorhandener Autorität ausführen |
-| mittel | plausible, reversible Standardentscheidung | entscheiden, Annahme markieren, sicher fortsetzen |
-| niedrig | neuartig, widersprüchlich oder ohne belastbaren Rahmen | nicht raten; zurückstellen oder eskalieren |
+| 高 | 明确规则或经多次确认的模式 | 作出决策；仅在具备相应权限时执行 |
+| 中 | 合理且可逆的默认决策 | 作出决策，标记假设，安全继续 |
+| 低 | 新颖、矛盾或缺乏可靠框架 | 切勿猜测；暂缓或向上升级 |
 
-Konfidenz in die Entscheidung und Autorität zur Ausführung sind getrennte Achsen.
+决策置信度与执行权限是两个独立的维度。
 
-## Laufprotokoll
+## 执行流程
 
-1. **Kontext laden.** Regeln, Zustand, Locks und Ziel prüfen.
-2. **Arbeit zerlegen.** Unabhängige Pakete, Entscheidungspunkte und
-   Freigabepunkte markieren. Werden mindestens zwei unabhängige Worker eingesetzt,
-   das Auftrags- und Evidenzprotokoll des `orchestrator` anwenden, sofern es
-   verfügbar ist.
-3. **Sichere Arbeit ausführen.** Reversible, autorisierte Schritte fortsetzen.
-4. **Entscheidungen behandeln.**
-   - Mit zulässigem Profil: Verfahren des `decision-avatar` verwenden.
-   - Ohne Profil: nur aus expliziten Projekt- oder Auftragsregeln ableiten.
-5. **Nicht ausführbare Punkte parken.** Entscheidung oder Empfehlung festhalten,
-   Ausführung aber nicht vorwegnehmen.
-6. **Unabhängige Arbeit fortsetzen.** Ein geparkter Punkt blockiert nur seine
-   echten Abhängigkeiten.
-7. **Checkpoint schreiben.** Ziel, erledigte Schritte, Evidenz, Annahmen,
-   geparkte Punkte und nächsten Schritt sichern.
-8. **Abschluss prüfen.** Ergebnisse selbst verifizieren und offene Entscheidungen
-   in einer kompakten Liste bündeln.
+1. **加载上下文。** 检查规则、状态、锁和目标。
+2. **拆分任务。** 标记独立任务包、决策点和审批点。若使用至少两个独立 Worker，在可用时应用 `orchestrator` 的任务与证据协议。
+3. **执行安全工作。** 继续进行可逆、已授权的步骤。
+4. **处理决策。**
+   - 具备允许的配置文件：使用 `decision-avatar` 的流程。
+   - 无配置文件：仅从明确的项目或任务规则中推导。
+5. **挂起无法执行的项。** 记录决策或建议，但不预先执行。
+6. **继续独立工作。** 被挂起的项仅阻塞其真实的依赖项。
+7. **写入检查点。** 保存目标、已完成步骤、证据、假设、挂起项和下一步计划。
+8. **检查完成状态。** 自行验证结果并将待决策事项归拢为简明列表。
 
-## Entscheidungsprotokoll
+## 决策日志
 
-Für jede nicht triviale Annahme erfassen:
+对每个非平庸假设均需记录：
 
 ```text
 ID:
@@ -82,29 +64,24 @@ Evidenz:
 Rücknahme oder Korrektur:
 ```
 
-Agentenentscheidungen dürfen später nicht als Aussagen der auftraggebenden Person
-behandelt werden.
+Agent 的决策后续绝不能被视为需求方的声明。
 
-## Paketlokale Stopps
+## 任务包局部停止
 
-Ein einzelnes Paket stoppen und parken, wenn es neue Autorität, eine irreversible
-externe Aktion, unklare Regeln oder einen Konflikt benötigt. Danach prüfen, welche
-anderen Pakete davon wirklich abhängig sind.
+若单个任务包需要新权限、不可逆的外部操作、规则不明确或存在冲突，则停止并挂起该任务包。随后检查哪些其他任务包真正依赖于它。
 
-## Stop-Bedingungen des Gesamtlaufs
+## 全局运行停止条件
 
-Der gesamte Lauf stoppt nur, wenn:
+仅在以下情况下停止整个运行：
 
-- keine sichere, unabhängige Arbeit mehr möglich ist,
-- eine notwendige Entscheidung niedrige Konfidenz hat,
-- alle verbleibenden Arbeitspakete neue externe oder irreversible Autorität
-  erfordern,
-- eine Sperre, ein Konflikt oder ein Sicherheitsrisiko den gesamten verbleibenden
-  Scope betrifft,
-- das vereinbarte Budget erreicht ist,
-- der aktuelle Zustand nicht mehr zuverlässig gesichert werden kann.
+- 无法再进行任何安全、独立的工作，
+- 某项必要决策的置信度较低，
+- 所有剩余任务包都需要新的外部或不可逆权限，
+- 锁、冲突或安全风险波及整个剩余范围，
+- 已达到约定的预算限额，
+- 当前状态无法再可靠保存。
 
-## Abschlussformat
+## 结束报告格式
 
 ```text
 Erreicht:
@@ -115,13 +92,13 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## 变更日志与历史
+## 更新日志
 
 ### 1.1.0 (2026-07-28)
-- Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.
-- Konfidenz und Ausführungsautorität getrennt.
-- Fortsetzung unabhängiger Arbeit und gebündelte Eskalation präzisiert.
-- Paketlokale Blocker ausdrücklich vom Stopp des Gesamtlaufs getrennt.
+- 移除了个人 Avatar、路径、命令和 Provider 绑定。
+- 分离了置信度与执行权限。
+- 明确了独立工作的继续进行与集中升级机制。
+- 将任务包局部阻塞与全局运行停止进行了明确区分。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- 本地初始版本。

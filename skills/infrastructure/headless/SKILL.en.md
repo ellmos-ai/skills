@@ -2,71 +2,57 @@
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `headless`.
+> **English** — Official English version of `headless`.
 
 
 # Headless (English)
 
 ## Overview & Purpose
 
-Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
-autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
-Ausdauer, nicht die Berechtigung.
+Use this skill when the requesting person explicitly desires a longer, autonomous run without continuous inquiries. This mode increases stamina, not authorization.
 
-Ein einzelner nicht ausführbarer Punkt darf unabhängige, sichere Restarbeit nicht
-unnötig stoppen.
+A single non-executable item must not unnecessarily halt independent, safe remaining work.
 
-## Startbedingungen
+## Prerequisites
 
-Vor Beginn festhalten:
+Record prior to start:
 
-- konkretes Ziel und Erfolgskriterium,
-- positiver und negativer Scope,
-- verfügbare Zeit- oder Kostenbudgets,
-- erlaubte Seiteneffekte,
-- Projektregeln, Sperren und fremde Änderungen,
-- Pfad oder Mechanismus für Checkpoints,
-- optional ein zulässiges lokales Entscheidungsprofil.
+- concrete goal and success criterion,
+- in-scope and out-of-scope items (positive and negative scope),
+- available time or cost budgets,
+- permissible side effects,
+- project rules, locks, and external changes,
+- path or mechanism for checkpoints,
+- optionally, a permissible local decision profile.
 
-Fehlt ein Entscheidungsprofil, werden nur explizite Regeln und sichere
-Standardannahmen verwendet. Die Runtime darf keine Person imitieren.
+If a decision profile is missing, only explicit rules and safe default assumptions are used. The runtime must not impersonate any person.
 
-## Entscheidungsstufen
+## Decision Levels
 
-| Stufe | Grundlage | Verhalten |
+| Level | Basis | Behavior |
 |---|---|---|
-| hoch | explizite Regel oder mehrfach bestätigtes Muster | entscheiden; nur bei vorhandener Autorität ausführen |
-| mittel | plausible, reversible Standardentscheidung | entscheiden, Annahme markieren, sicher fortsetzen |
-| niedrig | neuartig, widersprüchlich oder ohne belastbaren Rahmen | nicht raten; zurückstellen oder eskalieren |
+| high | explicit rule or repeatedly confirmed pattern | decide; execute only if authority is present |
+| medium | plausible, reversible default decision | decide, mark assumption, safely continue |
+| low | novel, contradictory, or lacking a resilient framework | do not guess; defer or escalate |
 
-Konfidenz in die Entscheidung und Autorität zur Ausführung sind getrennte Achsen.
+Confidence in the decision and authority for execution are separate axes.
 
-## Laufprotokoll
+## Execution Protocol
 
-1. **Kontext laden.** Regeln, Zustand, Locks und Ziel prüfen.
-2. **Arbeit zerlegen.** Unabhängige Pakete, Entscheidungspunkte und
-   Freigabepunkte markieren. Werden mindestens zwei unabhängige Worker eingesetzt,
-   das Auftrags- und Evidenzprotokoll des `orchestrator` anwenden, sofern es
-   verfügbar ist.
-3. **Sichere Arbeit ausführen.** Reversible, autorisierte Schritte fortsetzen.
-4. **Entscheidungen behandeln.**
-   - Mit zulässigem Profil: Verfahren des `decision-avatar` verwenden.
-   - Ohne Profil: nur aus expliziten Projekt- oder Auftragsregeln ableiten.
-5. **Nicht ausführbare Punkte parken.** Entscheidung oder Empfehlung festhalten,
-   Ausführung aber nicht vorwegnehmen.
-6. **Unabhängige Arbeit fortsetzen.** Ein geparkter Punkt blockiert nur seine
-   echten Abhängigkeiten.
-7. **Checkpoint schreiben.** Ziel, erledigte Schritte, Evidenz, Annahmen,
-   geparkte Punkte und nächsten Schritt sichern.
-8. **Abschluss prüfen.** Ergebnisse selbst verifizieren und offene Entscheidungen
-   in einer kompakten Liste bündeln.
+1. **Load context.** Verify rules, state, locks, and goal.
+2. **Decompose work.** Mark independent packages, decision points, and approval points. If at least two independent workers are deployed, apply the task and evidence protocol of `orchestrator` if available.
+3. **Execute safe work.** Continue reversible, authorized steps.
+4. **Handle decisions.**
+   - With permissible profile: use the procedure of `decision-avatar`.
+   - Without profile: derive strictly from explicit project or task rules.
+5. **Park non-executable items.** Record decision or recommendation without anticipating execution.
+6. **Continue independent work.** A parked item blocks only its actual dependencies.
+7. **Write checkpoint.** Save goal, completed steps, evidence, assumptions, parked items, and next step.
+8. **Verify completion.** Self-verify results and bundle open decisions into a compact list.
 
-## Entscheidungsprotokoll
+## Decision Log
 
-Für jede nicht triviale Annahme erfassen:
+Record for every non-trivial assumption:
 
 ```text
 ID:
@@ -78,29 +64,24 @@ Evidenz:
 Rücknahme oder Korrektur:
 ```
 
-Agentenentscheidungen dürfen später nicht als Aussagen der auftraggebenden Person
-behandelt werden.
+Agent decisions must not later be treated as statements of the requesting person.
 
-## Paketlokale Stopps
+## Package-Local Stops
 
-Ein einzelnes Paket stoppen und parken, wenn es neue Autorität, eine irreversible
-externe Aktion, unklare Regeln oder einen Konflikt benötigt. Danach prüfen, welche
-anderen Pakete davon wirklich abhängig sind.
+Stop and park an individual package if it requires new authority, an irreversible external action, unclear rules, or involves a conflict. Subsequently check which other packages truly depend on it.
 
-## Stop-Bedingungen des Gesamtlaufs
+## Overall Run Stop Conditions
 
-Der gesamte Lauf stoppt nur, wenn:
+The overall run stops only if:
 
-- keine sichere, unabhängige Arbeit mehr möglich ist,
-- eine notwendige Entscheidung niedrige Konfidenz hat,
-- alle verbleibenden Arbeitspakete neue externe oder irreversible Autorität
-  erfordern,
-- eine Sperre, ein Konflikt oder ein Sicherheitsrisiko den gesamten verbleibenden
-  Scope betrifft,
-- das vereinbarte Budget erreicht ist,
-- der aktuelle Zustand nicht mehr zuverlässig gesichert werden kann.
+- no safe, independent work is possible anymore,
+- a necessary decision has low confidence,
+- all remaining work packages require new external or irreversible authority,
+- a lock, conflict, or security risk affects the entire remaining scope,
+- the agreed budget has been reached,
+- the current state can no longer be reliably saved.
 
-## Abschlussformat
+## Final Report Format
 
 ```text
 Erreicht:
@@ -114,10 +95,10 @@ Nächster sinnvoller Schritt:
 ## Changelog
 
 ### 1.1.0 (2026-07-28)
-- Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.
-- Konfidenz und Ausführungsautorität getrennt.
-- Fortsetzung unabhängiger Arbeit und gebündelte Eskalation präzisiert.
-- Paketlokale Blocker ausdrücklich vom Stopp des Gesamtlaufs getrennt.
+- Removed personal avatar, path, command, and provider bindings.
+- Separated confidence and execution authority.
+- Clarified continuation of independent work and bundled escalation.
+- Explicitly separated package-local blockers from overall run stops.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Initial local version.

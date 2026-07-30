@@ -19,7 +19,7 @@ dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HT
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `tageszeitung`.
 
 
 ## Overview & Purpose
@@ -42,7 +42,7 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Check sources**: Read all active sources from `news_sources`.
 2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
@@ -55,25 +55,25 @@ and render them as an HTML/PDF daily newspaper. Articles are stored locally in
 ## CLI Entry Point
 
 ```bash
-# Add source (English)
+# Add source (Deutsch)
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Fetch all sources (English)
+# Fetch all sources (Deutsch)
 python tageszeitung_core.py fetch
 
-# Render daily newspaper (HTML + PDF if Edge available) (English)
+# Render daily newspaper (HTML + PDF if Edge available) (Deutsch)
 python tageszeitung_core.py render [--date 2026-06-22] [--out /path/]
 
-# List sources (English)
+# List sources (Deutsch)
 python tageszeitung_core.py sources
 
-# Unread articles (English)
+# Unread articles (Deutsch)
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Mark article as read (English)
+# Mark article as read (Deutsch)
 python tageszeitung_core.py read <item_id>
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 

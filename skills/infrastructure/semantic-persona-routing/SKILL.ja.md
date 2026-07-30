@@ -5,7 +5,8 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: [日本語] エージェントスキル: semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
+description: >
+  ペルソナ、コーディネート役のロール、エキスパート、およびライブなスキルエンドポイントから、プロバイダーに依存しないセマンティックルーティンググラフを構築および使用します。LLMがボスロールからエキスパート、スキルへとリクエストをルーティングする場合、既存のエージェントシステムからポータブルなペルソナルーターを抽出する場合、セマンティックドメインマップと辞書的スキルレジストリを組み合わせる場合、またはサイレントフォールバックの代わりに欠落しているロールからスキルへのポートを露出させる場合に使用します。セマンティックペルソナルーティング、ペルソナアンブレラ、ロールルーター、ボスエージェント・エキスパート・スキルルーティング、エージェントロールエクスポート、またはペルソナをLLMプロバイダー間で再利用可能にするリクエストでトリガーされます。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,24 +15,28 @@ category: infrastructure
 tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `semantic-persona-routing`.
+> **日本語** — `semantic-persona-routing` の公式日本語版。
 
+# セマンティックペルソナルーティング (Semantic Persona Routing)
 
+最初に能力に基づいてルーティングし、次にペルソナ（性格）を適用します。セマンティックなロールの選択、決定論的なエンドポイント検索、およびプロバイダー固有のロードを分離して保持するポータブルなマップを構築します。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Semantic Persona Routing (English)
-
-Route by capability first and apply personality second. Build a portable map that
-keeps semantic role choice, deterministic endpoint lookup and provider-specific
-loading separate.
-
-## Routing model
+## ルーティングモデル (Routing model)
 
 ```text
 request
@@ -42,13 +47,11 @@ request
   -> provider adapter loads and executes
 ```
 
-A persona controls communication style, priorities and interaction patterns. It
-does not grant tools, permissions or subject-matter capability. A role coordinates;
-an expert narrows the domain; a skill is the executable endpoint.
+ペルソナは、コミュニケーションスタイル、優先順位、および相互作用パターンを制御します。ツール、権限、または専門分野の能力を付与するものではありません。ロールは調整（コーディネート）し、エキスパートはドメインを絞り込み、スキルは実行可能なエンドポイントです。
 
-## Build the routing map
+## ルーティングマップの構築 (Build the routing map)
 
-Use explicit metadata as authority and lexical similarity only as a candidate:
+明示的なメタデータを正解（オーソリティ）として使用し、辞書的類似性は候補としてのみ使用します：
 
 ```bash
 python scripts/build_routing_map.py \
@@ -58,63 +61,46 @@ python scripts/build_routing_map.py \
   --out routing-map.json
 ```
 
-The builder understands common `SKILL.md` fields such as `type`,
-`orchestrates.experts`, `parent_agents`, `skills`, descriptions and provenance.
-It produces a runtime map without requiring the source system to be installed.
-Read [routing-map-schema.md](references/routing-map-schema.md) before extending the
-format.
+ビルダーは、`type`、`orchestrates.experts`、`parent_agents`、`skills`、説明文、プロヴェナンス（由来情報）などの一般的な `SKILL.md` フィールドを理解します。ソースシステムをインストールすることなくランタイムマップを生成します。フォーマットを拡張する前に [routing-map-schema.md](references/routing-map-schema.md) をお読みください。
 
-Do not automatically promote `candidate_skills`. Confirm them against a live skill
-resolver or source metadata first.
+`candidate_skills` を自動的に昇格させないでください。最初にライブのスキルリゾルバーまたはソースメタデータに対して確認してください。
 
-## Route a request
+## リクエストのルーティング (Route a request)
 
-### 1. Select the coordinator role semantically
+### 1. コーディネーターロールをセマンティックに選択する
 
-Compare the request with role names, descriptions and use cases. Prefer the
-narrowest role that can coordinate the whole request. Keep multiple candidates
-visible when confidence is low; ask the user only when the choice materially
-changes the result.
+リクエストをロール名、説明、およびユースケースと比較します。リクエスト全体を調整できる最も限定的なロールを優先します。確信度が低い場合は複数の候補を表示したままにし、選択が結果を実質的に変える場合にのみユーザーに問い合せてください。
 
-### 2. Select an expert within the role
+### 2. ロール内のエキスパートを選択する
 
-Use only experts connected to the chosen coordinator unless the request clearly
-spans roles. A direct expert request may skip the coordinator for execution, but
-retain the coordinator link in the route explanation.
+リクエストが明らかに複数のロールにわたる場合を除き、選択したコーディネーターに接続されているエキスパートのみを使用します。直接のエキスパートリクエストは実行時にコーディネーターをスキップできますが、ルートの説明にはコーディネーターへのリンクを保持します。
 
-### 3. Resolve executable endpoints
+### 3. 実行可能エンドポイントの解決
 
-Resolve in this order:
+次の順序で解決します：
 
-1. `endpoint_skills` from explicit source metadata or exact provenance;
-2. a current external skill resolver or local skill finder;
-3. verified `candidate_skills`;
-4. visible `GAP` when no endpoint exists.
+1. 明示的なソースメタデータまたは正確なプロヴェナンスからの `endpoint_skills`；
+2. 現在の外部スキルリゾルバーまたはローカルスキルファインダー；
+3. 検証済みの `candidate_skills`；
+4. エンドポイントが存在しない場合の可視化された `GAP`。
 
-Never route to an expert name as though it were an installed skill. A missing
-endpoint is a porting gap, not permission to fabricate one.
+インストールされたスキルであるかのようにエキスパート名へルーティングしないでください。欠落しているエンドポイントは移植上のギャップ（porting gap）であり、捏造する許可ではありません。
 
-Read [endpoint-resolution.md](references/endpoint-resolution.md) when connecting a
-live registry, lexical finder or provider-specific skill loader.
+ライブレジストリ、辞書的ファインダー、またはプロバイダー固有のスキルローダーを接続する場合は [endpoint-resolution.md](references/endpoint-resolution.md) をお読みください。
 
-### 4. Apply the persona overlay
+### 4. ペルソナオーバーレイの適用
 
-Choose a persona attached to the selected role or expert. If several personas fit,
-prefer one whose declared limits and style match the task. Apply no persona when
-none is explicitly connected.
+選択したロールまたはエキスパートに紐付けられたペルソナを選択します。複数のペルソナが適合する場合は、宣言された制限とスタイルがタスクに一致するものを優先します。明示的に接続されているペルソナがない場合は、ペルソナを適用しません。
 
-Persona instructions cannot override safety rules, locks, user decisions,
-professional boundaries or tool permissions.
+ペルソナの指示は、安全規則、ロック、ユーザーの決定、専門的境界、またはツール権限をオーバーライドすることはできません。
 
-### 5. Load and execute
+### 5. ロードと実行
 
-Use the provider's native skill/agent loading mechanism. Load the selected live
-skill instructions before execution. Keep the router lean; execution belongs to
-the worker or current agent with the resolved skills loaded.
+プロバイダーネイティブのスキル/エージェントロードメカニズムを使用します。実行前に選択したライブスキル指示をロードします。ルーターは軽量に保ち、実行は解決されたスキルがロードされたワーカーまたは現在のエージェントに属します。
 
-## Route receipt
+## ルート受領書 (Route receipt)
 
-Return or record:
+以下を返却または記録します：
 
 ```text
 ROLE: <coordinator or direct>
@@ -127,22 +113,16 @@ WHY: <one short reason>
 GAPS: <missing endpoints or stale-map warnings>
 ```
 
-Rebuild the map when source roles or skill inventory change. A live resolver may
-supersede a stale map for endpoint availability, but it must not silently rewrite
-the semantic role taxonomy.
+ソースのロールまたはスキルインベントリが変更された場合は、マップを再構築します。ライブリゾルバーはエンドポイントの可用性について古くなったマップを差し替えることができますが、セマンティックロールのタキソノミー（分類体系）を暗黙のうちに書き換えてはなりません。
 
-## 使用例と実行モデル & Usage
+## 例 (Example)
 
-Request: "Organize my receipts and prepare the tax-year overview."
+リクエスト：「領収書を整理して、課税年度の概要を準備してください。」
 
-The router selects an office coordinator, then the tax expert, resolves the
-installed tax skill, and finally applies an explicitly linked meticulous tax
-persona. If the tax expert exists but no portable tax skill is installed, report
-`GAP` and continue only through an explicitly configured fallback.
+ルーターはオフィスコーディネーター、次に税務エキスパートを選択し、インストールされている税務スキルを解決し、最後に明示的にリンクされた綿密な税務ペルソナを適用します。税務エキスパートは存在するがポータブルな税務スキルがインストールされていない場合は、`GAP` を報告し、明示的に設定されたフォールバックを通じてのみ継続します。
 
-## 変更履歴
+## 変更履歴 (Changelog)
 
 ### 1.0.0 (2026-07-28)
 
-- Extracted the provider-neutral role/expert/skill chain from a proven domain
-  router pattern and added portable map generation with visible endpoint gaps.
+- 実証済みのドメインルーターパターンから、プロバイダーに依存しない ロール/エキスパート/スキル チェーンを抽出し、可視化されたエンドポイントギャップを備えたポータブルマップ生成を追加しました。

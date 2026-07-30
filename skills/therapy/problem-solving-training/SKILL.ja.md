@@ -1,67 +1,79 @@
 ---
+name: problem-solving-training
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 6つのステップによる構造化された問題解決：問題の定義、目標設定、ブレインストーミング、評価、実行、振り返り。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [problem-solving, decision, structured, six-steps, coping]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `problem-solving-training`.
+> **日本語** — `problem-solving-training` の公式日本語版。
 
 
+# 問題解決トレーニング (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> ズリラ＆ゴールドフリードに基づく6つのステップによる構造化された問題解決：反芻思考に陥るのではなく体系的に問題へアプローチする
 
-
-# Problem-Solving Training (English)
-
-> Structured problem solving in 6 steps according to D'Zurilla and Goldfried: Approaching problems systematically instead of ruminating in circles
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Problem-Solving Training (Social Problem-Solving, SPS) is an evidence-based intervention from cognitive behavioral therapy. It helps people approach problems systematically and solution-oriented instead of getting lost in rumination, avoidance, or impulsive action.
-
-Evidence: Meta-analyses show significant effects for depression (d=0.83), anxiety disorders, and stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Problem-Solving Orientation
+## 背景とコンテキスト
 
-Before the actual steps begin, the inner attitude is decisive.
+問題解決トレーニング（社会的問題解決法、Social Problem-Solving, SPS）は、認知行動療法（CBT）におけるエビデンスに基づいた介入技法です。熟考のループ（反芻）、回避、あるいは衝動的な行動に迷い込むことなく、問題を体系的かつ解決志向でアプローチできるように支援します。
 
-### Helpful Attitude
-- "Problems are part of life — they are solvable"
-- "I can proceed step by step"
-- "There is rarely only one right solution"
-- "Not acting is also a decision — usually not a good one"
+エビデンス：メタアナリシスにより、うつ病（d=0.83）、不安障害、ストレス管理において有意な効果が示されています（Malouff et al. 2007, Bell & D'Zurilla 2009）。
 
-### Unhelpful Attitude
-- "None of this makes any sense"
-- "I can't do it anyway"
-- "There is no solution"
-- Impulsive action without thinking
-- Avoidance and procrastination
-
-**First step:** Reflect on your own problem-solving attitude.
+**注意：** 本スキルは心理教育的サポートを提供するものであり、専門的な心理療法や治療の代わりになるものではありません。
+**絶対に実施してはならない手法：** EMDR、受容・持続ばく露療法（PE）、ナラティブばく露療法（NET）。
 
 ---
 
-## 2. The 6-Step Model
+## 1. 問題解決に対する心構え（オリエンテーション）
 
-### Step 1: Define the Problem
+具体的なステップに入る前に、内面的な姿勢や心構えが非常に重要となります。
 
-**Goal:** Formulate the problem clearly, concretely, and manageably.
+### 役立つ心構え（建設的姿勢）
+- 「問題は人生の一部であり、解決可能なものである」
+- 「一歩一歩着実に進めることができる」
+- 「唯一の『正しい』解決策しか存在しないわけではない」
+- 「何もしないことも一つの決断であり、通常それはあまり良くない選択である」
 
-**Guide questions:**
-- What exactly is the problem? (Facts, not interpretations)
-- Who is involved?
-- When and where does it occur?
-- Why is it a problem for me?
+### 役立たない心構え（非建設的姿勢）
+- 「こんなことには何の味の価値もない」
+- 「どうせ自分にはできない」
+- 「解決策なんて存在しない」
+- 考える前の衝動的な行動
+- 回避と先延ばし
 
-**Worksheet:**
+**最初のステップ：** 自分自身の問題解決に対する姿勢を振り返ること。
+
+---
+
+## 2. 6つのステップモデル
+
+### ステップ 1：問題の明確化・定義
+
+**目的：** 問題を明確かつ具体的、そして扱いやすい形に言語化する。
+
+**ガイドとなる質問：**
+- 具体的に何が問題なのか？（解釈ではなく客観的事実）
+- 誰が関わっているか？
+- いつ、どこで発生しているか？
+- なぜそれが自分にとって問題なのか？
+
+**ワークシート：**
 
 ```
 PROBLEM DEFINITION
@@ -75,25 +87,25 @@ Concrete problem statement:
 [...]
 ```
 
-**Common mistakes:**
-- Problem too vague ("Everything is bad")
-- Mixing multiple problems together
-- Including the solution in the problem statement
+**陥りがちな誤り：**
+- 問題が曖昧すぎる（「すべてがうまくいかない」等）
+- 複数の問題を混ぜ合わせてしまう
+- 問題の定義の中に解決策を混ぜ込んでしまう
 
 ---
 
-### Step 2: Set Goals
+### ステップ 2：目標の設定
 
-**Goal:** What should be different after solving the problem?
+**目的：** 問題が解決された後、どのような状態になっていてほしいかを明確にする。
 
-**SMART Criteria:**
-- Specific: What exactly?
-- Measurable: How will I recognize success?
-- Attractive: Why do I want this?
-- Realistic: Is it achievable?
-- Time-bound: By when?
+**SMART基準：**
+- 具体性 (Specific)：具体的に何か？
+- 測定可能性 (Measurable)：達成できたかをどう判断するか？
+- 魅力・達成可能性 (Attractive)：なぜそれを達成したいのか？
+- 現実性 (Realistic)：実現可能か？
+- 期限 (Time-bound)：いつまでに？
 
-**Worksheet:**
+**ワークシート：**
 
 ```
 GOAL SETTING
@@ -107,17 +119,17 @@ Important to me (0-10)? [...]
 
 ---
 
-### Step 3: Generate Alternatives (Brainstorming)
+### ステップ 3：解決案の創出（ブレインストーミング）
 
-**Goal:** Generate as many solution ideas as possible — without immediate evaluation.
+**目的：** 即座に評価することなく、できるだけ多くの解決案を出す。
 
-**Brainstorming rules:**
-1. Quantity over quality — the more ideas, the better
-2. No evaluation during collection
-3. Creative and unusual thinking is allowed
-4. Combine and vary existing ideas
+**ブレインストーミングのルール：**
+1. 質より量 — 案が多ければ多いほどよい
+2. アイデア出しの最中は一切の評価・批判を行わない
+3. 奇抜な思考や自由な発想を歓迎する
+4. 既存のアイデアを組み合わせたり変化させたりする
 
-**Worksheet:**
+**ワークシート：**
 
 ```
 BRAINSTORMING
@@ -133,27 +145,27 @@ Solution ideas (at least 5-8):
 8. [...]
 ```
 
-**Helper questions:**
-- "What would someone do who doesn't have this problem?"
-- "What have I done in similar situations before?"
-- "What would I advise a friend?"
-- "What would be the boldest solution?"
-- "What would be the simplest solution?"
+**発想を助ける質問：**
+- 「この問題で悩んでいない人ならどうするだろうか？」
+- 「似たような状況で以前自分はどう対処したか？」
+- 「友人に相談されたら何とアドバイスするか？」
+- 「最も思い切った解決策は何か？」
+- 「最もシンプルな解決策は何か？」
 
 ---
 
-### Step 4: Evaluate Alternatives
+### ステップ 4：解決案の評価・選択
 
-**Goal:** Systematically weigh pros and cons of each alternative.
+**目的：** 各代替案の長所と短所を体系的に検討する。
 
-**Evaluation criteria:**
-- Effectiveness: Does it solve the problem?
-- Feasibility: Can I implement it?
-- Time required: How long will it take?
-- Consequences: For me? For others?
-- Risks: What could go wrong?
+**評価基準：**
+- 有効性：問題は解決されるか？
+- 実行可能性：自分に実行できるか？
+- 所要時間：どのくらい時間がかかるか？
+- 影響・結果：自分への影響？他者への影響？
+- リスク：どのようなリスクが考えられるか？
 
-**Worksheet:**
+**ワークシート：**
 
 ```
 EVALUATION MATRIX
@@ -170,11 +182,11 @@ Reasoning: [...]
 
 ---
 
-### Step 5: Implement
+### ステップ 5：実行・計画
 
-**Goal:** Concretely plan and carry out the chosen solution.
+**目的：** 選択した解決策を具体的に計画し、実行する。
 
-**Action plan:**
+**行動計画：**
 
 ```
 ACTION PLAN
@@ -194,18 +206,18 @@ First step (today/tomorrow): [...]
 
 ---
 
-### Step 6: Evaluate
+### ステップ 6：振り返り・評価
 
-**Goal:** Review the outcome and adjust if needed.
+**目的：** 結果を確認し、必要に応じて修正・再調整を行う。
 
-**Evaluation questions:**
-- Was the problem solved? (Fully / partially / not at all)
-- Am I satisfied with the result? (0-10)
-- What worked well?
-- What would I do differently next time?
-- Do I need a new attempt with a different alternative?
+**評価のための質問：**
+- 問題は解決したか？（完全に / 部分的に / 全く解決していない）
+- 結果に満足しているか？（0〜10の評価）
+- 何がうまくいったか？
+- 次回はどのように工夫するか？
+- 別の代替案で再挑戦する必要があるか？
 
-**Worksheet:**
+**ワークシート：**
 
 ```
 EVALUATION
@@ -219,39 +231,38 @@ Next step: [Conclude / New attempt / Different approach]
 
 ---
 
-## 3. Common Problems in Problem Solving
+## 3. 問題解決におけるよくある課題と対処法
 
-| Problem | Remedy |
+| 生じやすい問題 | 対処法 |
 |---------|--------|
-| "I don't know where to start" | Back to Step 1, formulate problem smaller |
-| "No solution is good enough" | Question perfectionism, accept "good enough" |
-| "I don't dare" | Identify the smallest possible step |
-| "It doesn't work" | Evaluation: What exactly doesn't work? New attempt |
-| Problem is too big | Break into sub-problems, one at a time |
-| Emotions block | First emotion regulation (breathing, PMR), then problem solving |
+| 「どこから手をつければいいか分からない」 | ステップ1に戻り、問題をより小さく定義し直す |
+| 「どの解決策も不十分に思える」 | 完璧主義を疑い、「十分によい（good enough）」を受け入れる |
+| 「一歩を踏み出す勇気が出ない」 | 実行可能な最小限のステップを特定する |
+| 「うまくいかない」 | 再評価：具体的にどこがうまくいかなかったのか？再トライ |
+| 問題が大きすぎる | サブ問題に分割し、一度に一つずつ取り組む |
+| 感情的に混乱して進まない | 最初に感情調節（呼吸法、筋弛緩法等）を行い、その後問題解決に入る |
 
 ---
 
-## Ethics and Boundaries
+## 伦理と限界
 
-**An AI assistant may:**
-- Guide through the 6 steps and provide worksheet structure
-- Ask brainstorming questions
-- Support evaluation of alternatives
-- Document progress
+**AIアシスタントができること：**
+- 6つのステップのガイドおよびワークシート構造の提示
+- ブレインストーミングを促す質問の投げかけ
+- 解決案の評価・比較のサポート
+- 進捗の記録と管理
 
-**An AI assistant must NOT:**
-- Prescribe solutions or suggest "the right answer"
-- Conduct relationship or life counseling in the therapeutic sense
-- Be the sole support for severe psychological distress
-- Make diagnoses
+**AIアシスタントが禁止されていること：**
+- 解決策を決定・指示したり「唯一の正解」を押し付けること
+- 治療的な意味合いでのパートナー関係や人生のカウンセリングを行うこと
+- 深刻な心理的苦痛に対する唯一の相談窓口となること
+- 診断を行うこと
 
-**In case of acute crisis, ALWAYS refer to:**
+**急性危機・自傷他害のおそれがある場合は必ず以下に繋いでください：**
+- こころの健康相談統一ダイヤル (JP): 0570-064-556
+- よりそいホットライン (JP): 0120-279-338
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 119 / 110 (JP), 911 (US), 112 (EU)
 
 ---
 

@@ -1,330 +1,337 @@
 ---
+name: trauma-psychoeducation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Психообразование по травме: Определение травмы, нормальные реакции, окно толерантности, управление триггерами и самопомощь.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [trauma, psychoeducation, window-of-tolerance, trigger, self-care, ptsd]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `trauma-psychoeducation`.
+> **Русский** — Официальная русская версия `trauma-psychoeducation`.
 
 
+# Психообразование по травме (Trauma Psychoeducation)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Знания о травме, последствиях травматизации и окне толерантности: Понимание нормальных реакций на ненормальные события — чистое психообразование, НИКАКОЙ переработки травмы
 
-
-# Trauma Psychoeducation (English)
-
-> Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Psychoeducation about trauma helps affected individuals understand and contextualize their reactions. The knowledge that symptoms like flashbacks, hyperarousal, or avoidance are NORMAL reactions to ABNORMAL events is already relieving and reduces shame and self-blame.
-
-Evidence: Psychoeducation is a recognized component of trauma therapy (Flatten et al. 2011, S3 Guideline PTSD). As a standalone intervention, it is insufficient, but it can increase therapy motivation and alleviate symptoms.
-
-**IMPORTANT:** This skill exclusively conveys KNOWLEDGE about trauma. It does NOT conduct trauma processing, does NOT explore distressing memories, and does NOT ask for trauma details.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is Trauma?
+## Контекст
 
-### Definition
+Психообразование о травме помогает пострадавшим понять и контекстуализировать свои реакции. Знание того, что такие симптомы, как флешбэки, гиперактивация или избегание, являются НОРМАЛЬНЫМИ реакциями на НЕНОРМАЛЬНЫЕ события, уже сам по себе приносит облегчение и снижает чувство стыда и вины.
 
-A trauma is an event that exceeds a person's coping capacity and is accompanied by the experience of helplessness, loss of control, and/or fear of death. It is not the event alone that defines the trauma, but the subjective experience.
+Доказательная база: Психообразование является признанным компонентом терапии травмы (Flatten et al. 2011, S3 Guideline PTSD). Как самостоятельное вмешательство оно недостаточно, однако оно способно повысить мотивацию к терапии и облегчить симптоматику.
 
-### Trauma Types
+**ВАЖНО:** Этот навык передает исключительно ЗНАНИЯ о травме. Он НЕ проводит переработку травмы, НЕ исследует болезненные воспоминания и НЕ запрашивает детали травмы.
+**Никогда не применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
-| Type | Description | Examples |
+---
+
+## 1. Что такое травма?
+
+### Определение
+
+Психологическая травма — это событие, которое превышает копинг-сознание и адаптационные возможности человека и сопровождается переживанием беспомощности, утраты контроля и/или страха смерти. Травму определяет не само событие как таковое, а его субъективное проживание и восприятие.
+
+### Типы травм
+
+| Тип | Описание | Примеры |
 |------|-------------|----------|
-| Type I (Single trauma) | Single, unexpected event | Accident, assault, natural disaster |
-| Type II (Complex trauma) | Repeated, prolonged traumatization | Abuse, neglect, war |
-| Accidental trauma | Random events | Traffic accident, house fire, workplace accident |
-| Interpersonal trauma | Caused by humans | Violence, abuse, torture |
-| Secondary trauma | Through co-experiencing/witnessing | Helping professions, family members |
+| Тип I (Однократная травма) | Единичное, неожиданное событие | Авария, нападение, стихийное бедствие |
+| Тип II (Комплексная травма) | Повторяющаяся, длительная травматизация | Насилие в детстве, пренебрежение, война |
+| Случайная травма | Непреднамеренные происшествия | ДТП, пожар, несчастный случай на производстве |
+| Интерперсональная травма | Причиненная человеком | Насилие, абьюз, пытки |
+| Вторичная травма | Через сопереживание / свидетельствование | Помогающие профессии, члены семьи |
 
-### What Is NOT Trauma (Differentiation)
+### Что НЕ является травмой (Дифференциация)
 
-Not every distressing event is a trauma in the clinical sense:
-- Breakup, job loss, arguments — distressing, but usually not trauma
-- Bullying — can be traumatizing (especially for children), but is not automatically trauma
-- The individual appraisal determines, not the type of event
-
----
-
-## 2. Normal Reactions to Abnormal Events
-
-### The Three Response Patterns
-
-```
-HYPERAROUSAL
-- Constant vigilance and tension
-- Startle response
-- Sleep problems
-- Irritability, anger outbursts
-- Concentration difficulties
-
-RE-EXPERIENCING (Intrusion)
-- Flashbacks (memories that feel real)
-- Nightmares
-- Distressing memories that arise suddenly
-- Physical reactions upon remembering (racing heart, sweating)
-
-AVOIDANCE AND NUMBING (Constriction)
-- Avoidance of places, people, situations
-- Emotional numbness
-- Withdrawal from other people
-- Feeling of alienation
-- Loss of interest and pleasure
-```
-
-### Important Message for Affected Individuals
-
-```
-"These reactions are NORMAL reactions to ABNORMAL events.
-
-Your body and mind are trying to protect you.
-The vigilance protects you from renewed danger.
-The memories are trying to process what happened.
-The avoidance protects you from being overwhelmed.
-
-You are not 'crazy.' You are not 'weak.'
-Your nervous system is responding the way it is programmed
-to respond to extreme threat."
-```
-
-### Timeline
-
-```
-COURSE AFTER TRAUMATIC EVENT
-
-0-4 weeks:  Acute Stress Reaction (NORMAL)
-            - Shock, numbness, restlessness
-            - Sleep problems, startle response
-            - Flashbacks, nightmares
-            - For most people: Spontaneous recovery
-
-4+ weeks:   If symptoms persist: Possible PTSD
-            - Professional assessment recommended
-            - Early intervention improves prognosis
-
-Months-Years: Chronification possible
-            - Therapy is effective even after a long time
-            - "It is never too late to seek help"
-```
+Не каждое тяжелое или стрессовое событие является травмой в клиническом смысле:
+- Расставание, потеря работы, ссоры — болезненны, но обычно не являются клинической травмой
+- Буллинг (травля) — может быть травматичным (особенно для детей), но не становится травмой автоматически
+- Определяющим является индивидуальное восприятие и проживание, а не только тип события
 
 ---
 
-## 3. The Window of Tolerance (Dan Siegel)
+## 2. Нормальные реакции на ненормальные события
 
-### The Model
+### Три паттерна реакций
+
+```
+ГИПЕРАКТИВАЦИЯ (Hyperarousal)
+- Постоянная настороженность и телесное напряжение
+- Гипертрофированная реакция вздрагивания
+- Нарушения сна, бессонница
+- Раздражительность, вспышки гнева
+- Трудностей с концентрацией внимания
+
+ПОВТОРНОЕ ПРОЖИВАНИЕ / ИНТРУЗИИ (Intrusion)
+- Флешбэки (навязчивые воспоминания с чувством реальности происходящего)
+- Кошмарные сны
+- Внезапно возникающие тягостные воспоминания
+- Физиологические реакции при воспоминаниях (учащенное сердцебиение, потливость)
+
+ИЗБЕГАНИЕ И ОЦЕНЕНЕНИЕ (Constriction / Avoidance)
+- Избегание мест, людей, ситуаций
+- Эмоциональное онемение, отчуждение
+- Замыкание в себе, изоляция от людей
+- Чувство отчужденности
+- Утрата интереса и способности получать удовольствие (ангедония)
+```
+
+### Важное послание для пострадавших
+
+```
+«Эти реакции — НОРМАЛЬНЫЕ реакции на НЕНОРМАЛЬНЫЕ события.
+
+Ваше тело и ваша психика пытаются защитить вас.
+Гипервигильность (сверхбдительность) защищает вас от новой опасности.
+Воспоминания пытаются переработать то, что произошло.
+Избегание защищает вас от эмоционального затопления.
+
+Вы не "сошли с ума". Вы не "слабый человек".
+Ваша нервная система реагирует именно так, как она запрограммирована
+реагировать на экстремальную угрозу.»
+```
+
+### Временная динамика
+
+```
+ДИНАМИКА ПОСЛЕ ТРАВМАТИЧЕСКОГО СОБЫТИЯ
+
+0-4 недели:   Острая реакция на стресс (НОРМА)
+              - Шок, онемение, беспокойство
+              - Проблемы со сном, вздрагивание
+              - Флешбэки, кошмары
+              - Для большинства людей: Спонтанное восстановление
+
+4+ недели:    Если симптомы сохраняются: Возможна тенденция к ПТСР
+              - Рекомендуется профессиональная оценка
+              - Раннее вмешательство улучшает прогноз
+
+Месяцы-Годы:  Возможна хронификация
+              - Терапия эффективна даже спустя долгое время
+              - «Обратиться за помощью никогда не поздно»
+```
+
+---
+
+## 3. Окно толерантности (Dan Siegel Window of Tolerance)
+
+### Модель
 
 ```
             ________________________________________________
            |                                                |
-           |   ABOVE THE WINDOW: Hyperarousal               |
-           |   Panic, rage, overactivation, flashbacks      |
-           |   Racing heart, sweating, trembling            |
-           |   "Fight or flight"                            |
+           |   ВЫШЕ ОКНА: Гиперактивация (Hyperarousal)      |
+           |   Паника, ярость, перевозбуждение, флешбэки    |
+           |   Тахикардия, потливость, тремор               |
+           |   Реакция «Бей или беги»                       |
            |________________________________________________|
            |                                                |
-           |   WINDOW OF TOLERANCE                          |
+           |   ОКНО ТОЛЕРАНТНОСТИ (WINDOW OF TOLERANCE)     |
            |                                                |
-           |   Here we can:                                 |
-           |   - Think and feel at the same time            |
-           |   - Process information                        |
-           |   - Maintain relationships                     |
-           |   - Solve problems                             |
-           |   - Learn and grow                             |
+           |   Здесь мы можем:                              |
+           |   - Мыслить и чувствовать одновременно         |
+           |   - Перерабатывать информацию                  |
+           |   - Поддерживать отношения                     |
+           |   - Решать задачи                              |
+           |   - Учиться и расти                            |
            |________________________________________________|
            |                                                |
-           |   BELOW THE WINDOW: Hypoarousal                |
-           |   Freeze, numbness, dissociation               |
-           |   Lack of energy, emptiness, shutdown           |
-           |   "Playing dead reflex"                         |
+           |   НИЖЕ ОКНА: Гипоактивация (Hypoarousal)       |
+           |   Замирание (Freeze), онемение, диссоциация    |
+           |   Упад сил, пустота, отключение                |
+           |   Рефлекс «Притвориться мертвым»               |
            |________________________________________________|
 ```
 
-### What Does This Mean?
+### Что это означает?
 
-- **In the window:** We can regulate stress and function
-- **Above the window:** Too much activation — body in alarm mode
-- **Below the window:** Too little activation — body shuts down
+- **Внутри окна:** Мы можем регулировать стресс и нормально функционировать
+- **Выше окна:** Слишком высокая активация — тело в режиме аварийной тревоги
+- **Ниже окна:** Слишком низкая активация — тело выключается / замирает
 
-### Trauma and the Window
+### Травма и окно толерантности
 
 ```
-BEFORE trauma:            AFTER trauma (untreated):
+ДО травмы:                 ПОСЛЕ травмы (без терапии):
 
 |_______________|         |_____|
-|               |         |     |  <- Window has NARROWED
-|    WINDOW     |         | W.  |
-|   (wide)      |         |     |
+|               |         |     |  <- Окно СУЗИЛОСЬ
+|     ОКНО      |         |  О. |
+|   (широкое)   |         |     |
 |_______________|         |_____|
 
-Even small stimuli can cause falling out of the window
-after trauma (triggers).
+После травмы даже незначительные стимулы (триггеры)
+могут выбивать человека из окна толерантности.
 
-GOAL of therapy: WIDEN the window again.
+ЦЕЛЬ терапии: Снова РАСШИРИТЬ окно толерантности.
 ```
 
-### Understanding Triggers
+### Понимание триггеров
 
 ```
-TRIGGERS are stimuli that remind of the trauma and put
-the nervous system into alarm mode — often unconsciously.
+ТРИГГЕРЫ — это стимулы, которые напоминают о травме и
+бессознательно переключают нервную систему в режим тревоги.
 
-Triggers can be:
-- Sounds (bang, screaming, certain music)
-- Smells (smoke, perfume, alcohol)
-- Images (news, movies, places)
-- Body sensations (tightness, touch, pain)
-- Calendar dates (anniversaries)
-- Relationship situations (arguments, loss of control)
+Триггерами могут быть:
+- Звуки (хлопок, крик, определенная музыка)
+- Запахи (дым, духи, алкоголь)
+- Визуальные образы (новости, фильмы, места)
+- Телесные ощущения (стеснение в груди, прикосновение, боль)
+- Календарные даты (годовщины)
+- Ситуации в отношениях (ссора, потеря контроля)
 
-Triggers are NOT weakness. They are stored warning signals
-of the nervous system. In therapy, one learns to recognize
-triggers and regulate the nervous system.
-```
-
----
-
-## 4. Self-Care Strategies
-
-### Ensuring Basic Needs
-
-```
-BASIC NEEDS CHECKLIST
-
-[ ] Sleep: Regular bedtimes, at least 7 hours
-[ ] Nutrition: Regular meals, sufficient water
-[ ] Exercise: At least 20 minutes daily (a walk is enough)
-[ ] Social contacts: At least one trusted person
-[ ] Safety: Feeling safe in one's own environment
-[ ] Structure: Daily routine with fixed anchor points
-```
-
-### Self-Care Strategies in Daily Life
-
-**Physical:**
-- Regular exercise (lowers stress hormones)
-- Breathing exercises
-- Sufficient sleep (observe sleep hygiene)
-- Reduce caffeine and alcohol (amplify hyperarousal/numbing)
-
-**Social:**
-- Have a trusted person (doesn't have to talk about trauma)
-- Avoid isolation — even small contacts help
-- Learn to set boundaries (being allowed to say "no")
-- Accept support
-
-**Emotional:**
-- Name feelings (don't judge them)
-- Use stabilization techniques (5-4-3-2-1, safe place)
-- Keep a journal (optional, don't force it)
-- Find creative expression (painting, music, writing)
-
-**Cognitive:**
-- Inform yourself (psychoeducation — this skill)
-- Challenge self-blame ("It was not my fault")
-- Reality-check catastrophizing
-- Be patient with yourself (healing takes time)
-
----
-
-## 5. Finding Professional Help
-
-### When to Seek Professional Help?
-
-```
-PROFESSIONAL HELP IS INDICATED WHEN:
-
-- Symptoms persist for more than 4 weeks
-- Symptoms worsen instead of improving
-- Daily life is no longer manageable (work, relationships)
-- Flashbacks or nightmares occur very frequently
-- Avoidance behavior severely restricts life
-- Substance use as a coping strategy
-- Suicidal thoughts or self-harm
-- The feeling: "I can't do this alone"
-```
-
-### Resources
-
-```
-IMMEDIATE HELP:
-- 988 Suicide & Crisis Lifeline (US): 988 (24/7, free)
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222 (24/7, free)
-- Emergency services: 911 (US) / 112 (EU)
-
-TRAUMA-SPECIFIC:
-- Trauma outpatient clinics (at many hospitals, no referral needed)
-- Victim support organizations (e.g., RAINN in US: 1-800-656-4673)
-- Domestic violence hotline (US): 1-800-799-7233
-- National Sexual Assault Hotline (US): 1-800-656-4673
-
-FINDING A THERAPIST:
-- Psychology Today therapist directory: psychologytoday.com/us/therapists
-- SAMHSA helpline (US): 1-800-662-4357
-- Important: Look for therapists specializing in "trauma therapy"
+Триггеры — это НЕ слабость. Это сохраненные предупредительные сигналы
+нервной системы. В терапии человек учится распознавать триггеры
+и регулировать нервную систему.
 ```
 
 ---
 
-## 6. Frequently Asked Questions (FAQ)
+## 4. Стратегии самопомощи (Самозабота)
 
-### "Am I traumatized now?"
+### Обеспечение базовых потребностей
 
-Not everyone who experiences a distressing event develops a trauma-related disorder. The majority of people recover spontaneously within weeks. Whether PTSD is present can only be determined by a professional.
+```
+ЧЕК-ЛИСТ БАЗОВЫХ ПОТРЕБНОСТЕЙ
 
-### "Do I have to talk about it?"
+[ ] Сон: Регулярный режим, не менее 7 часов
+[ ] Питание: Регулярный прием пищи, достаточное количество воды
+[ ] Движение: Не менее 20 минут в день (достаточно прогулки)
+[ ] Социальные контакты: Как минимум один доверенный человек
+[ ] Безопасность: Ощущение безопасности в своем окружении
+[ ] Структура: Дневной распорядок с фиксированными якорями
+```
 
-No. Forcing yourself to talk can be harmful. Some people benefit from talking about it, others don't. There is no "must." In therapy, the right timing is determined together.
+### Стратегии самозаботы в повседневной жизни
 
-### "Why do I react this way even though it was long ago?"
+**Телесные:**
+- Регулярные физические нагрузки (снижают уровень гормонов стресса)
+- Дыхательные упражнения
+- Достаточный сон (соблюдение гигиены сна)
+- Снижение употребления кофеина и алкоголя (усиливают гиперактивацию/онемение)
 
-Traumatic memories are stored differently than normal memories. They can be reactivated by triggers and feel as though the event is happening NOW. The brain does not distinguish between "then" and "now." Therapy helps "re-sort" these memories.
+**Социальные:**
+- Иметь доверенное лицо (не обязательно говорить о самой травме)
+- Избегать изоляции — помогают даже небольшие контакты
+- Учиться выстраивать границы (разрешить себе говорить «нет»)
+- Принимать поддержку
 
-### "Am I weak because I can't handle this alone?"
+**Эмоциональные:**
+- Называть чувства (не судить их)
+- Использовать техники стабилизации (5-4-3-2-1, безопасное место)
+- Вести дневник (по желанию, без принуждения)
+- Находить творческое выражение (рисование, музыка, письмо)
 
-No. Seeking help is a sign of strength. Trauma therapy is effective — most people can improve significantly with professional help.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Convey knowledge about trauma and trauma sequelae (psychoeducation)
-- Normalize normal reactions and provide relief
-- Explain the window of tolerance
-- Suggest self-care strategies
-- Refer to professional help
-- Offer stabilization techniques
-
-**An AI assistant must NOT:**
-- Conduct trauma processing (EMDR, exposure, NET, IRRT)
-- Ask for or explore trauma details
-- Process flashback content (only stabilize)
-- Diagnose PTSD or other trauma-related disorders
-- Assess suicidality
-- Make medication-related recommendations
-- Make statements about blame or responsibility
-- "Work through" or "process" memories
-- Ask suggestive questions ("Could it be that...")
-
-**PARTICULARLY STRICT BOUNDARY:** Trauma processing belongs in the hands of trained trauma therapists. This skill offers exclusively psychoeducation and stabilization. For any form of trauma exploration: STOP and refer to a professional.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Когнитивные:**
+- Информировать себя (психообразование — данный навык)
+- Подвергать сомнению самообвинение («Это не моя вина»)
+- Проверять реальности катастрофических мыслей
+- Проявлять терпение к себе (исцеление требует времени)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — Not professional therapy*
+## 5. Поиск профессиональной помощи
+
+### Когда необходима профессиональная помощь?
+
+```
+ПРОФЕССИОНАЛЬНАЯ ПОМОЩЬ ПОКАЗАНА, ЕСЛИ:
+
+- Симптомы сохраняются более 4 недель
+- Симптомы ухудшаются вместо того, чтобы улучшаться
+- Повседневная жизнь сильно нарушена (работа, отношения)
+- Флешбэки или кошмары возникают очень часто
+- Избегающее поведение резко ограничивает жизнь
+- Употребление веществ используется как стратегия справления
+- Возникают суицидальные мысли или самоповреждения
+- Чувство: «Я не справляюсь с этим в одиночку»
+```
+
+### Ресурсы помощи
+
+```
+ЭКСТРЕННАЯ ПОМОЩЬ:
+- Единый телефон доверия (РФ): 8-800-2000-122 / 8-800-200-47-03
+- Горячая линия психологической помощи (МЧС РФ): +7 (495) 989-50-50
+- 988 Suicide & Crisis Lifeline (США): 988
+- Экстренные службы: 112 (РФ / ЕС) / 911 (США)
+
+СПЕЦИАЛИЗИРОВАННАЯ ПОМОЩЬ:
+- Психоневрологические диспансеры, кабинеты кризисной помощи
+- Центры помощи жертвам насилия
+
+ПОИСК ТЕРАПЕВТА:
+- Реестры клинических психологов и психотерапевтов
+- Важно: Искать специалистов со специализацией «Терапия травмы / ПТСР / ДПДГ»
+```
+
+---
+
+## 6. Часто задаваемые вопросы (FAQ)
+
+### «Травмирован(а) ли я теперь?»
+
+Не у каждого человека, пережившего тяжелое событие, развиваются травматические расстройства. Большинство людей спонтанно восстанавливаются в течение нескольких недель. Наличие ПТСР может определить только специалист.
+
+### «Обязан(а) ли я рассказывать об этом?»
+
+Нет. Принуждение себя к разговору может навредить. Некоторым людям помогает разговор, другим — нет. Никаких «должен» не существует. В терапии подходящий момент выбирается совместно.
+
+### «Почему я так реагирую, хотя это было давно?»
+
+Травматические воспоминания сохраняются иначе, чем обычные. Они могут реактивироваться триггерами и ощущаться так, будто событие происходит ПРЯМО СЕЙЧАС. Мозг не различает «тогда» и «сейчас». Терапия помогает «пересортировать» эти воспоминания.
+
+### «Слаб(а) ли я оттого, что не могу справиться сам(а)?»
+
+Нет. Обращение за помощью — признак силы. Терапия травмы эффективна — большинство людей ощущают значительное улучшение при профессиональной поддержке.
+
+---
+
+## Этика и границы
+
+**ИИ-ассистент может:**
+- Передавать знания о травме и ее последствиях (психообразование)
+- Нормализовать нормальные реакции и давать эмоциональную поддержку
+- Объяснять модель окна толерантности
+- Предлагать стратегии самозаботы
+- Направлять к профессиональной помощи
+- Предлагать техники стабилизации
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Проводить переработку травмы (EMDR, экспозицию, NET, IRRT)
+- Запрашивать или исследовать детали травматического события
+- Перерабатывать содержание флешбэков (только стабилизировать)
+- Диагностировать ПТСР или другие расстройства
+- Оценивать суицидальный риск
+- Давать рекомендации по медикаментам
+- Делать заявления о вине или ответственности
+- «Прорабатывать» воспоминания
+- Задавать наводящие вопросы («Может ли быть так, что...»)
+
+**ОСОБО СТРОГАЯ ГРАНИЦА:** Переработка травмы находится исключительно в руках обученных травматерапевтов. Данный навык предлагает исключительно психообразование и стабилизацию. При любой форме исследования детализации травмы: ОСТАНОВИТЬСЯ и перенаправить к профессионалу.
+
+**В случае острого кризиса ВСЕГДА направляйте на:**
+- Единый телефон доверия (РФ): 8-800-2000-122 / 8-800-200-47-03
+- Горячая линия психологической помощи (МЧС РФ): +7 (495) 989-50-50
+- 988 Suicide & Crisis Lifeline (США): 988
+- Экстренные службы: 112 (РФ / ЕС) / 911 (США)
+
+---
+
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — Не является профессиональной терапией*

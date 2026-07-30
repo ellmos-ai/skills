@@ -2,179 +2,116 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `workflow-extract`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `workflow-extract`.
-
+> **Русский** — Официальная русская версия `workflow-extract`.
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
+# Workflow-Extract — Создание автоматизаций из историй чатов и сторонних автоматизаций
 
-## Общий обзор и назначение & Purpose
+## Обзор и назначение
 
-Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
-**Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
-periodische Pflege-Läufe. Dieser Skill extrahiert solche Workflows aus zwei Quellenarten —
-Chatverläufen (ein Ablauf wurde interaktiv entwickelt und soll künftig unbeaufsichtigt laufen)
-und bestehenden Automations-Prompts anderer Systeme (z. B. Codex-Automations, Scheduled
-Tasks, n8n-Flows) — und macht daraus user-neutrale, robuste Automatisierungs-Prompts oder
--Skills.
+Некоторые процессы подходят не для вызова в качестве навыка по запросу, а для **автономной автоматизации**: ночные проверки, ротационный аудит проектов, периодические регламентные запуски. Этот навык извлекает такие рабочие процессы из двух типов источников — историй чатов (где процесс разрабатывался интерактивно и в дальнейшем должен выполняться без участия человека) и существующих промптов автоматизации из других систем (например, Codex-Automations, Scheduled Tasks, n8n-flows) — и преобразует их в пользовательско-нейтральные, надежные промпты автоматизации или навыки.
 
-Der Unterschied zum interaktiven Ablauf: Eine Automatisierung hat **niemanden, der korrigiert**.
-Alles, was in der Session der User abgefangen hat, muss die Automatisierung selbst abfangen.
-Genau dafür gibt es die Bausteine in `automation-bausteine.md`.
+Ключевое отличие от интерактивного процесса: в автоматизации **нет пользователя, способного исправить ошибку**. Все, что пользователь корректировал в ходе сессии, автоматизация должна перехватывать самостоятельно. Именно для этого предназначены строительные блоки в `automation-bausteine.md`.
 
-## Ablauf
+## Порядок действий
 
-### 1. Quelle und Zielform klären
+### 1. Определение источника и целевой формы
 
-| Quelle | typischer Fall |
+| Источник | Типичный случай |
 | --- | --- |
-| Aktuelle Session / Transkript | Ablauf wurde interaktiv entwickelt, soll periodisch weiterlaufen |
-| Fremd-Automation (Prompt-Datei, Cron-Task, n8n-Flow) | Portierung/Abstraktion auf ein anderes System oder in die Bibliothek |
+| Текущая сессия / Транскрипт | Процесс был разработан интерактивно и должен продолжать выполняться периодически |
+| Сторонняя автоматизация (файл промпта, Cron-задача, n8n-поток) | Перенос/абстрагирование в другую систему или библиотеку |
 
-Zielformen (eine oder mehrere):
+Целевые формы (одна или несколько):
 
-- **Automations-Prompt:** eigenständiger, user-neutraler Prompt-Text, einsetzbar in jedem
-  Scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
-- **Workflow-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
-  Automations-Prompt nur noch aufgerufen/parametrisiert wird (bevorzugt, wenn derselbe
-  Ablauf für mehrere Pipelines/Systeme gelten soll — eine Quelle der Wahrheit).
-- **Command:** dünner Slash-Command für manuelle Auslösung desselben Ablaufs.
+- **Промпт автоматизации (Automation Prompt):** Самостоятельный, нейтральный к пользователю текст промпта, применимый в любом планировщике (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
+- **Навык процесса (Workflow Skill):** Навык в библиотеке, описывающий процесс, который промпт автоматизации лишь вызывает или параметризует (предпочтительно, если один и тот же процесс применяется к нескольким пайплайнам/системам — единый источник истины).
+- **Команда (Command):** Легковесный slash-command для ручного вызова того же процесса.
 
-### 2. Workflow-Kern extrahieren
+### 2. Извлечение ядра рабочего процесса
 
-Aus der Quelle herausarbeiten:
+Извлечь из источника:
 
-- **Kernaufgabe:** Was wird geprüft/gepflegt/erzeugt? (ein Satz)
-- **Auswahllogik:** Worauf wird die Aufgabe angewandt — festes Ziel oder Rotation über eine
-  Menge (ein Projekt pro Lauf)?
-- **Vorbedingungen:** Was muss vor der Arbeit gelesen/geprüft werden (Root-Dokumente,
-  Registries, Locks)?
-- **Dokumentationspflichten:** Wohin werden Ergebnis, Log, Folgeaufgaben geschrieben?
-- **Abbruchpfade:** Wann endet der Lauf read-only („nichts zu tun" ist ein gültiges Ergebnis)?
+- **Основная задача:** Что проверяется/обслуживается/создается? (одно предложение)
+- **Логика выбора:** К чему применяется задача — фиксированная цель или ротация по множеству (один проект за запуск)?
+- **Предусловия:** Что должно быть прочитано/проверено перед началом работы (корневые документы, реестры/registries, блокировки/locks)?
+- **Обязанности по документированию:** Куда записываются результаты, логи и последующие задачи?
+- **Пути отмены/выхода:** Когда запуск завершается в режиме «только чтение» («нечего делать» является валидным результатом)?
 
-Bei Chatverläufen zusätzlich die Korrekturschleifen auswerten (siehe
-`../skill-extractor/transcript-quellen.md`): Jede User-Korrektur ist ein Kandidat für einen
-Guard, den die Automatisierung künftig selbst braucht.
+Для историй чатов дополнительно проанализируйте циклы коррекции (см. `../skill-extractor/transcript-quellen.md`): Каждая исправленная пользователем ошибка — кандидат на создание защиты (guard), которая потребуется автоматизации при автономной работе.
 
-### 3. Neutralisieren
+### 3. Нейтрализация (Neutralize)
 
-Nach den Regeln in `../skill-extractor/neutralisierung.md`: Mechanik von Konfiguration
-trennen, Pfade/Hosts/Projektnamen in einen Konfigurationsblock ziehen. Automations-Prompts
-brauchen den Konfigurationsblock besonders dringend, weil sie wörtlich in Scheduler kopiert
-werden — konkrete Werte gehören an EINE Stelle am Prompt-Anfang.
+По правилам из `../skill-extractor/neutralisierung.md`: Отделить механику от конфигурации, вынести пути, хосты и имена проектов в блок конфигурации. Промпты автоматизации особенно нуждаются в блоке конфигурации, так как они копируются в планировщики дословно — конкретные значения должны находиться в ЕДИНОМ месте в начале промпта.
 
-### 4. Automations-Bausteine ergänzen
+### 4. Добавление строительных блоков автоматизации
 
-Den extrahierten Kern gegen die Checkliste in `automation-bausteine.md` halten und fehlende
-Bausteine ergänzen — insbesondere Rotations-Auswahl mit Check-Registry, Idempotenz,
-Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Workflow ohne diese
-Bausteine funktioniert im Test und degeneriert im Dauerbetrieb (Doppelprüfungen, wachsende
-Logs, Kollisionen mit parallelen Agenten).
+Сопоставить извлеченное ядро с чек-листом в `automation-bausteine.md` и добавить недостающие строительные блоки — в частности, ротационный выбор с реестром проверок, идемпотентность, гигиену логов, учет блокировок (locks), выход в режиме только чтения и итоговый отчет. Процесс без этих блоков работает при тестировании, но деградирует при длительной эксплуатации (дублирующие проверки, разрастание логов, коллизии с параллельными агентами).
 
-### 5. Takt und Budget setzen
+### 5. Установка такта и бюджета
 
-- **Frequenz an Änderungsrate koppeln:** Ein Check muss nicht öfter laufen, als sich sein
-  Gegenstand ändert. Erfahrungswert aus gewachsenen Automations-Beständen: Viele anfangs
-  stündliche Checks wurden auf täglich/wöchentlich reduziert — mit Rotations-Auswahl deckt
-  auch ein seltener Takt die ganze Pipeline ab.
-- **Nachtfenster für Schweres**, kurze Read-only-Checks dürfen häufiger.
-- **Kostenbewusstsein:** Jeder Lauf kostet Tokens/Compute; ein Lauf, der meist read-only
-  endet, soll das früh feststellen (Registry lesen VOR teurer Analyse).
+- **Привязать частоту к скорости изменений:** Проверка не должна выполняться чаще, чем меняется ее объект. Опыт эксплуатации развитых систем автоматизации: Многие изначально почасовые проверки были сокращены до ежедневных/еженедельных — благодаря ротационному выбору даже редкий такт охватывает весь пайплайн.
+- **Ночное окно для ресурсоемких задач**, короткие проверки в режиме «только чтение» могут выполняться чаще.
+- **Экономия ресурсов:** Каждый запуск расходует токены/вычислительные мощности; запуск, который чаще всего завершается без действий, должен определять это как можно раньше (чтение реестра ДО дорогостоящего анализа).
 
-### 6. Testen und einsetzen
+### 6. Тестирование и внедрение
 
-1. **Trockenlauf:** Den fertigen Prompt einmal interaktiv ausführen (als wäre man der
-   Scheduler) und prüfen: Endet er sauber? Schreibt er Registry/Log korrekt? Bleibt er
-   im Scope?
-2. **Grenzfall-Test:** Einen Lauf simulieren, bei dem nichts zu tun ist — er muss read-only
-   mit kurzem Logeintrag enden, nicht „Arbeit erfinden".
-3. **Einsetzen:** In den Ziel-Scheduler eintragen; bei Skill-Form zusätzlich in Bibliothek
-   ablegen und deployen.
-4. **Fehlerpfad beobachten:** Nach den ersten 2–3 echten Läufen Log/Registry kontrollieren —
-   Automatisierungen scheitern am häufigsten an Pfad-Drift (Ziel wurde verschoben) und an
-   wachsenden Logdateien.
+1. **Тестовый запуск (Dry run):** Выполнить готовый промпт один раз интерактивно (эмулируя поведение планировщика) и проверить: Завершается ли он корректно? Правильно ли записываются реестр и лог? Остается ли он в пределах области охвата (scope)?
+2. **Тест граничного случая:** Симоделировать запуск, в котором нет задач — он должен завершиться в режиме «только чтение» с короткой записью в логе, не «придумывая работу».
+3. **Внедрение:** Внести в целевой планировщик; в случае формы навыка — дополнительно поместить в библиотеку и развернуть.
+4. **Мониторинг ошибок:** После первых 2–3 реальных запусков проверить лог/реестр — автоматизации чаще всего сбоят из-за смещения путей (цель перемещена) и разрастания файлов логов.
 
-## Fleet-Audit-Modus: eine laufende Automations-Flotte prüfen
+## Режим Fleet-Audit: аудит действующего парка автоматизаций
 
-Für „prüfe meine Automatisierungen": nicht extrahieren, sondern den BESTAND betreiben
-helfen. Über die Automations-Quelle des Zielsystems (Prompt-/Config-Dateien, Schedules,
-Run-Logs/Memories) systematisch prüfen:
+Для запроса «проверь мои автоматизации»: не извлекать новые процессы, а помогать в эксплуатации СУЩЕСТВУЮЩЕГО парка. Систематически проверить источники автоматизации целевой системы (файлы промптов/конфигураций, расписания, логи/память запусков):
 
-1. **Silent-Failure/No-op-Erkennung:** Läuft die Automation, tut aber nichts mehr?
-   (Run-Memories/Logs der letzten Läufe lesen: nur noch Leerläufe, Fehler, tote Pfade?)
-2. **Redundanz + Ertrag:** Überschneiden sich Automationen im Scope? Steht der Ertrag
-   (Output, behobene Befunde) noch im Verhältnis zum Verbrauch (Tokens, Läufe)?
-3. **Drift:** Passen Prompt-Pfade, Konventionen und Schedules noch zur Realität?
-   (Ziele verschoben, Policies geändert, Takt zu hoch für die Änderungsrate.)
-4. **Katalog-Abgleich:** Fehlt eine Automation, die es geben sollte (Lücken im
-   Muster-Raster)? Vorschläge nur freigabe-gegated (Baustein 12), nie selbst scharf schalten.
-5. **Befund-Bericht:** pro Automation eine Zeile (behalten | anpassen | pausieren |
-   zusammenlegen | löschen) + Begründung; Änderungen selbst nur nach Freigabe.
+1. **Обнаружение скрытых сбоев и холостого хода (Silent-Failure/No-op):** Работает ли автоматизация, но больше ничего не делает? (Прочитать память/логи последних запусков: только холостые запуски, ошибки, недействительные пути?)
+2. **Избыточность + Эффективность:** Пересекаются ли автоматизации по области охвата? Соответствует ли результат (выходные данные, устраненные замечания) затраченным ресурсам (токены, запуски)?
+3. **Смещение (Drift):** Соответствуют ли пути промптов, соглашения и расписания текущей реальности? (Цели перемещены, политики изменены, такт слишком высок для скорости изменений.)
+4. **Сверка с каталогом:** Отсутствует ли автоматизация, которая должна существовать (пробелы в сетке шаблонов)? Предложения вносить только с условием подтверждения (Блок 12), никогда не активировать автоматически.
+5. **Отчет с выводами:** По одной строке на автоматизацию (сохранить | изменить | приостановить | объединить | удалить) + обоснование; изменения выполнять только после получения подтверждения.
 
-## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
+## Режим Bulk: аудит парка автоматизаций или множества транскриптов
 
-Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
-Automatisierungs-Kandidaten aus alten Chatverläufen":
+Для запроса «проверь все автоматизации системы X на предмет абстрагируемых процессов» или «извлеки кандидатов на автоматизацию из старых историй чатов»:
 
-1. **Datenreduktion wie im skill-extractor** (Map-Reduce über Subagenten,
-   `swarm-operations`-Muster): Pro Bündel ein Subagent, der je Quelle meldet:
-   Kernaufgabe | Muster (z. B. Rotation-Check, Health-Check, Ideen-Mining) |
-   einzigartige Elemente | user-neutral abstrahierbar? | abgedeckt durch existierenden Skill?
-2. **Muster vor Einzelstücken:** Wenn viele Quellen dasselbe Gerüst teilen (z. B. 40
-   Rotations-Checks), wird das GERÜST ein Skill und die Einzelfälle werden Parametrisierungen —
-   nicht 40 Einzel-Skills.
-3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
-   Kandidatenliste an den User vor dem Massenbau.
+1. **Сжатие данных как в `skill-extractor`** (Map-Reduce через субагентов, шаблон `swarm-operations`): По одному субагенту на пакет, передающему отчет по каждому источнику: Основная задача | Шаблон (например, ротационная проверка, проверка работоспособности, поиск идей) | Уникальные элементы | Возможна ли нейтральная абстракция? | Покрывается ли существующим навыком?
+2. **Шаблоны важнее отдельных случаев:** Если многие источники используют один и тот же каркас (например, 40 ротационных проверок), КАРКАС становится навыком, а отдельные случаи — параметрами (вместо создания 40 отдельных навыков).
+3. **Дедупликация относительно существующей экосистемы навыков/команд**, затем представление нумерованного списка кандидатов пользователю перед массовым созданием.
 
-## Пример и применение & Usage
+## Пример и применение
 
 ```text
-User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —
-das soll ab jetzt wöchentlich über alle Paper laufen."
+User: "Мы сегодня отработали проверку цитирования для статьи — с этого момента она должна выходить еженедельно по всем статьям."
 
-1. Zielform: Automations-Prompt für den Scheduler + Verweis auf rotation-check.
-2. Kern: Zitate eines Papers gegen Originalquellen prüfen (Web/Datenbank),
-   Korrekturen einpflegen, bei Änderungen Folgeaufgabe „Neu-Upload" in TODO.md.
-3. Neutralisieren: Pipeline-Root, Registry-/Log-Pfade → Konfigurationsblock.
-4. Bausteine ergänzen: Rotations-Auswahl (ein Paper pro Lauf), Registry lesen VOR
-   Auswahl, Read-only-Exit („alle Quellen ok"), Log-Hygiene, Abschlussbericht.
-5. Takt: wöchentlich reicht (Papers ändern sich langsam); Trockenlauf + Leerlauf-Test,
-   dann in den Scheduler.
+1. Целевая форма: Промпт автоматизации для планировщика + ссылка на rotation-check.
+2. Ядро: Проверить цитаты статьи по оригинальным источникам (веб/БД), внести исправления, при наличии изменений внести задачу «Повторная загрузка» в TODO.md.
+3. Нейтрализация: Корень пайплайна, пути к реестру/логам → блок конфигурации.
+4. Добавление блоков: Ротационный выбор (одна статья за запуск), чтение реестра ДО выбора, выход в режиме «только чтение» («все источники в порядке»), гигиена логов, итоговый отчет.
+5. Такт: Достаточно еженедельного запуска (статьи меняются медленно); тестовый запуск + проверка холостого хода, затем внесение в планировщик.
 ```
 
-## Red Flags
+## Красные флаги (Red Flags)
 
-| Gedanke | Realität |
+| Мысль | Реальность |
 | --- | --- |
-| „Der Ablauf lief in der Session, also läuft er auch als Automation" | Ohne User fehlen alle Korrektive — Bausteine-Checkliste ist Pflicht. |
-| „Stündlich schadet nicht" | Doch: Tokens, Log-Wachstum, Kollisionsrisiko. Takt an Änderungsrate koppeln. |
-| „Ich baue für jede Variante eine eigene Automation" | Gemeinsames Gerüst als Skill, Varianten als Parameter. |
-| „Nichts gefunden — dann suche ich mir eben andere Arbeit" | Read-only-Exit mit Logeintrag ist das korrekte Ergebnis eines Leerlaufs. |
+| «Процесс работал в сессии, значит, будет работать и в автоматизации» | Без пользователя отсутствуют все корректирующие действия — чек-лист строительных блоков обязателен. |
+| «Почасовой запуск не повредит» | Повредит: расход токенов, рост логов, риск коллизий. Привязывайте такт к скорости изменений. |
+| «Я создам отдельную автоматизацию для каждого варианта» | Общий каркас в виде навыка, варианты — в качестве параметров. |
+| «Ничего не найдено — найду себе другую работу» | Выход в режиме «только чтение» с записью в лог — это правильный результат холостого запуска. |
 
-## Verwandte Skills
+## Связанные навыки
 
-- `skill-extractor` — gleiche Extraktion, Ziel ist ein abrufbarer Skill; teilt
-  Neutralisierung und Transcript-Quellen (dort dokumentiert).
-- `rotation-check` — das Standard-Gerüst für rotierende Pipeline-Checks (häufigster
-  Automations-Typ); als Baustein referenzieren statt neu erfinden.
-- `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
+- `skill-extractor` — Аналогичное извлечение, целевая форма — вызываемый навык; общие правила нейтрализации и источники транскриптов (задокументированы там).
+- `rotation-check` — Стандартный каркас для ротационных проверок пайплайна (наиболее частый тип автоматизации); ссылаться как на строительный блок вместо повторного изобретения.
+- `swarm-operations` — Шаблон работы роем для массового аудита.
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-03)
-- Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
-  Drift, Lücken) — integriert statt als eigener Skill (Dedup-Entscheid).
-- Drei neue Bausteine in automation-bausteine.md: Freigabe-Gate über Sentinel-Dateien (12),
-  Gestaffelte Eskalation mit Handoff-Artefakt (13), Melde-Disziplin für Monitore (14).
+- Режим Fleet-Audit (аудит действующего парка автоматизаций: скрытые сбои, избыточность, смещение, пробелы) — интегрирован вместо создания отдельного навыка (решение по дедупликации).
+- Три новых строительных блока в `automation-bausteine.md`: Ворота подтверждения через sentinel-файлы (12), Поэтапная эскалация с артефактом передачи (13), Дисциплина отчетности для мониторов (14).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus der Abstraktion des Codex-Automations-Bestands
-  (77 Automationen, dominantes Rotations-Check-Muster) in user-neutrale Bausteine.
+- Начальная версия. Создан на основе абстрагирования парка Codex-Automations (77 автоматизаций, доминирующий шаблон ротационной проверки) в нейтральные строительные блоки.

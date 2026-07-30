@@ -6,7 +6,7 @@ author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
 updated: 2026-06-13
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: [中文] 智能体技能: pipeline-optimizer: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
+description: 用于改进、改造或重建现有流水线、独立项目文件夹、文档结构或软件栈的结构化 6 步流程。可通过“流水线优化器”（针对整个主题流水线，如软件、研究或游戏开发流水线）或“项目文件夹优化器”（针对流水线内的单个项目文件夹，如单个软件工具或论文项目）进行调用。在诸如“改进流水线 X”、“优化技术栈”、“重建 Y”、“改造”、“流水线重构”、“清理项目文件夹”、“改进文件夹结构”、“统一规范”、“文档整合”、“集成到现有系统”或对已建立结构进行任何实质性干预的任务中触发。提供现有资产分析、目标明确、理想图景、差距计划、经验痛点识别以及使用全新子代理的重新测试。防止并行标准、重复和流水线中断。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,284 +16,280 @@ tags: [pipeline, renovation, refactoring, stack, workflow, lessons-learned]
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `pipeline-optimizer`.
+> **中文** — `pipeline-optimizer` 官方中文版本。
 
 
+# Pipeline Optimizer / Project-Folder Optimizer (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+**无不兼容性的 6 步改造流程** — 适用于两个层级：
 
-
-# Pipeline Optimizer / Project-Folder Optimizer (English)
-
-**6-step renovation without incompatibilities** — applicable at two scales:
-
-| Trigger name | Scope | Example |
+| 触发名称 | 范围 | 示例 |
 |---|---|---|
-| **Pipeline optimizer** | Whole pipelines, stacks, documentation structures | Your topic pipelines, e.g. `software/`, `research/`, `games/`, an agent system |
-| **Project-folder optimizer** | Individual project folders within a pipeline | A software tool, a paper project, a game project |
+| **Pipeline optimizer（流水线优化器）** | 整个流水线、技术栈、文档结构 | 您的主题流水线，例如 `software/`、`research/`、`games/`、代理系统 |
+| **Project-folder optimizer（项目文件夹优化器）** | 流水线内的独立项目文件夹 | 某软件工具、论文项目、游戏项目 |
 
-A **pipeline** here means a topic-oriented top-level structure in which multiple projects live under shared conventions (e.g. a software pipeline with release rules, a research pipeline with a publication procedure).
+这里的 **pipeline（流水线）** 是指面向主题的顶层结构，多个项目在其中按照共享的规范共存（例如具有发布规则的软件流水线、具有出版流程的研究流水线）。
 
-Both use the same 6-step workflow — the only difference is the **scope** (pipeline-wide vs. single project) and, accordingly, the depth of the building-stock survey in step A.
+两者使用相同的 6 步工作流 — 唯一的区别是 **范围**（全流水线 vs. 单个项目），并由此决定步骤 A 中资产调查的深度。
 
-## When this skill applies
+## 何时适用此技能
 
-The skill applies as soon as you are asked to improve, rebuild, or extend an **existing** structure — not for greenfield construction. Concrete triggers:
+只要要求改进、重建或扩展 **现有** 结构，而非进行全新的绿地建设时，即适用此技能。具体触发条件：
 
-**Pipeline level** (scope: whole pipeline):
-- "Make pipeline X better"
-- "Optimize the stack"
-- "Renovate the software pipeline"
-- "Documentation consolidation in the research pipeline"
-- Substantial intervention in a topic pipeline, central `_tools/`, or system components
+**流水线层级**（范围：整个流水线）：
+- “改进流水线 X”
+- “优化技术栈”
+- “改造软件流水线”
+- “研究流水线中的文档整合”
+- 对主题流水线、中央 `_tools/` 或系统组件进行实质性干预
 
-**Project-folder level** (scope: single project folder):
-- "Clean up / optimize project folder X"
-- "Improve the folder structure in Y"
-- "Refactor a single tool"
-- "Unify a paper-project setup"
-- "Align a game project folder with the pipeline standard"
+**项目文件夹层级**（范围：单个项目文件夹）：
+- “清理 / 优化项目文件夹 X”
+- “改进 Y 中的文件夹结构”
+- “重构单个工具”
+- “统一论文项目设置”
+- “使游戏项目文件夹与流水线标准保持一致”
 
-**Cross-cutting:**
-- "Rebuild X / integrate it into existing Y"
-- "Refactoring", "consolidation"
-- "Unify conventions"
-- "Integrate into an existing system"
+**跨层级：**
+- “重建 X / 将其集成到现有的 Y 中”
+- “重构”、“整合”
+- “统一规范”
+- “集成到现有系统”
 
-## The building-stock metaphor
+## 现有建筑隐喻
 
-Renovating a house first requires knowing **what it is made of** (stone, wood, plastic), **what it is for** (mountain hut, software forge), and **where it already fulfills functions**. The same discipline applies to pipelines.
+改造房屋首先需要了解 **它是由什么构成的**（石头、木材、塑料）、**它的用途是什么**（高山小屋、软件工坊）以及 **它在哪些方面已经发挥作用**。这一原则同样适用于流水线。
 
 ---
 
-## Procedure — 6 steps (do NOT skip, do NOT reorder)
+## 操作步骤 — 6 个步骤（请勿跳过，请勿重排）
 
-### Step A — Survey the building stock
+### 步骤 A — 调查现有资产
 
-**Question:** What is the house made of?
+**问题：** 房屋是由什么构成的？
 
-**Pipeline scope** (all root docs + tools + templates):
-- [ ] **Read all root documents completely** (not just snippets/insertion points)
-- [ ] Go through template folders (`_templates/`, `_TEMPLATES/`) and tool folders (`_tools/`)
-- [ ] Policy files: e.g. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, publication procedures, …
-- [ ] Status snapshots: e.g. PROJECT_STATUS.md, status overviews, releases.json, registry files
-- [ ] Checklists: e.g. release checklists, build/PDF checklists
-- [ ] Workflows: AGENTS.md, GUIDE.md, SKILL.md
-- [ ] Lessons-learned files: LESSONS_LEARNED.md, MEMORY.md, loop-state files
+**流水线范围**（所有根文档 + 工具 + 模板）：
+- [ ] **完整阅读所有根文档**（不仅是片段/插入点）
+- [ ] 检查模板文件夹（`_templates/`、`_TEMPLATES/`）和工具文件夹（`_tools/`）
+- [ ] 策略文件：例如 GITHUB-POLICY.md、RELEASE-MANAGEMENT.md、QUALITY_RULES.md、NAMING-SYSTEM.md、出版流程等
+- [ ] 状态快照：例如 PROJECT_STATUS.md、状态概述、releases.json、注册表文件
+- [ ] 检查清单：例如发布检查清单、构建/PDF 检查清单
+- [ ] 工作流：AGENTS.md、GUIDE.md、SKILL.md
+- [ ] 经验教训文件：LESSONS_LEARNED.md、MEMORY.md、循环状态文件
 
-**Project-folder scope** (single-project substance + relevant pipeline conventions):
-- [ ] **Read all markdown and control files in the project folder** (README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, action plan, proof notes, …)
-- [ ] **Survey the code structure:** src/, tests/, build configuration (pyproject.toml, requirements.txt, project manifests, toolchain files, …)
-- [ ] **Take the parent pipeline's conventions into account** (e.g. for a software project: GitHub policy, naming system, release management, templates)
-- [ ] **Scan existing tools/scripts in the project** (`_tools/`, `_scripts/`, build_*.bat, START scripts)
-- [ ] **Configuration files:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
+**项目文件夹范围**（单项目实质 + 相关的流水线规范）：
+- [ ] **阅读项目文件夹中的所有 markdown 和控制文件**（README、CHANGELOG、TASKS/TODO、DONE、CONCEPT、行动计划、证明笔记等）
+- [ ] **调查代码结构：** src/、tests/、构建配置（pyproject.toml、requirements.txt、项目清单、工具链文件等）
+- [ ] **考虑父流水线的规范**（例如对于软件项目：GitHub 策略、命名系统、发布管理、模板）
+- [ ] **扫描项目中现有的工具/脚本**（`_tools/`、`_scripts/`、build_*.bat、START 脚本）
+- [ ] **配置文件：** `.gitignore`、LICENSE、NOTICE、SECURITY.md、CODE_OF_CONDUCT.md
 
-**Anti-pattern:** Using `grep -l "<keyword>"` to find insertion points and inserting there without knowing the file's context.
+**反模式：** 使用 `grep -l "<keyword>"` 查找插入点，并在不知道文件上下文的情况下在此处插入。
 
-**Output:** Inventory note with all relevant conventions, tools, and templates at the chosen scope.
+**输出：** 包含所选范围内所有相关规范、工具和模板的资产清单笔记。
 
-### Step B — Identify the purpose
+### 步骤 B — 明确目标用途
 
-**Question:** What does the house exist for?
+**问题：** 这座房屋存在的目的是什么？
 
-State the purpose explicitly in 1-2 sentences.
+用 1-2 句话明确说明用途。
 
-**Pipeline examples:**
+**流水线示例：**
 
-| Pipeline | Purpose |
+| 流水线 | 用途 |
 |---|---|
-| Software pipeline | Develop, test, and release desktop apps + browser tools to stores/GitHub |
-| Research pipeline | Write scientific papers, peer-review them, publish to repositories/preprint servers |
-| Game pipeline | Develop games and publish them on the target platform |
-| Agent system | LLM system for multi-agent orchestration |
+| 软件流水线 | 开发、测试并将桌面应用 + 浏览器工具发布到应用商店/GitHub |
+| 研究流水线 | 撰写学术论文、进行同行评审、发布到代码库/预印本服务器 |
+| 游戏流水线 | 开发游戏并在目标平台上发布 |
+| 代理系统 | 用于多代理协调的 LLM 系统 |
 
-**Project-folder examples:**
+**项目文件夹示例：**
 
-| Project folder | Purpose |
+| 项目文件夹 | 用途 |
 |---|---|
-| `software/PlannerApp` | Planning desktop app, commercial, private repo |
-| `research/CosmologyModel` | Model paper series + numerical computations |
-| `games/SortingChaos` | Sorting game, alpha stage, level progression |
+| `software/PlannerApp` | 规划桌面应用，商业项目，私有仓库 |
+| `research/CosmologyModel` | 模型论文系列 + 数值计算 |
+| `games/SortingChaos` | 分类游戏，Alpha 阶段，关卡推进 |
 
-The purpose **steers every intervention** — measures that do not serve the purpose are dropped.
+用途 **引导每一次干预** — 不服务于该用途的措施将被放弃。
 
-### Step C — Sketch the ideal picture
+### 步骤 C — 构思理想图景
 
-**Question:** What would a perfect house for this purpose look like?
+**问题：** 为此用途而建的完美房屋会是什么样子？
 
-- Sketch it from your own perspective (short, max. 10 points)
-- Bring in a best-practice comparison (e.g. Vercel stack for SaaS, scientific-python stack for research)
-- Do not descend into detail optimization — a top-level sketch is enough
+- 从您自己的角度构思（简短，最多 10 点）
+- 引入最佳实践对比（例如 SaaS 的 Vercel 栈，研究的 scientific-python 栈）
+- 不要陷于细节优化 — 顶层构思即可
 
-**Output:** 5-10 points "ideal state per pipeline"
+**输出：** 5-10 点“每个流水线的理想状态”
 
-### Step D — Gap analysis + plan
+### 步骤 D — 差距分析 + 计划
 
-**Four questions per pipeline:**
+**每个流水线需回答四个问题：**
 
-1. **What does the house already have?** — Even if solved differently from the ideal but **functionally equivalent**.
-   *Example:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
+1. **房屋中已经具备了什么？** — 即使与理想实现不同，但 **功能等效**。
+   *示例：* 理想方案建议用 "pip-licenses 获取第三方许可证"。现实：自定义生成脚本对其进行了封装 → 功能等效，无需干预。
 
-2. **What impedes the function?** — Existing structures that cause breaks or extra effort today.
+2. **什么妨碍了功能？** — 当前造成中断或额外精力的现有结构。
 
-3. **What is non-functional?** — Dead code, outdated conventions, unused tools.
+3. **什么是无用的？** — 死代码、过时的规范、未使用的工具。
 
-4. **What would measurably improve functions?** — Concrete interventions with expected benefit.
+4. **什么能显著改进功能？** — 具有预期收益的具体干预措施。
 
-→ From this, a **concrete plan**:
-- What gets **newly built**?
-- What gets **extended**?
-- What gets **demolished**?
-- What stays **unchanged** (important to name!)
+→ 由此得出 **具体计划**：
+- 什么需要 **新建**？
+- 什么需要 **扩展**？
+- 什么需要 **拆除**？
+- 什么保持 **不变**（必须明确指出！）
 
-**Output:** Plan table with columns *Intervention* / *Existing* / *Measure* / *Rationale*
+**输出：** 包含 *干预* / *现有* / *措施* / *理由* 列的计划表
 
-### Step E — Work empirically
+### 步骤 E — 经验实践
 
-Do not only plan top-down — collect pain points:
+不要仅自顶向下计划 — 收集痛点：
 
-- [ ] **Known bugs**: issue tracker, TASKS/TODO/DONE files
-- [ ] **Error history**: lessons-learned files, bugfix logs, check registries
-- [ ] **Automation breaks**: "What do I always have to do manually?"
-- [ ] **User interview**: ask specifically — pain points, wishes, workarounds
-- [ ] **Self-test**: walk through the pipeline (create a new project, run a build, simulate a release) — where does it break?
+- [ ] **已知 Bug**：Issue 跟踪器、TASKS/TODO/DONE 文件
+- [ ] **错误历史**：经验教训文件、Bug 修复日志、检查注册表
+- [ ] **自动化中断**：“有哪些工作我总是需要手动完成？”
+- [ ] **用户访谈**：针对性询问 — 痛点、期望、临时替代方案
+- [ ] **自我测试**：走一遍流水线（创建新项目、运行构建、模拟发布）— 何处会出现中断？
 
-The empirically found pain points **prioritize the plan** from step D.
+经验找到的痛点用于 **确定步骤 D 中计划的优先级**。
 
-### Step F — Retests after implementation
+### 步骤 F — 实施后的重新测试
 
-- [ ] Commission **fresh subagents** (unburdened by the renovation context) to walk through the changed workflow
-- [ ] **Measurable before/after values**: setup time, error rate, number of manual steps, build time
-- [ ] **Anti-regression check**: do existing workflows still work after the change?
-- [ ] If there is **no measurable improvement** or a regression: **roll back** the renovation or readjust
+- [ ] 委派 **全新的子代理**（不受改造上下文影响）走一遍修改后的工作流
+- [ ] **可测量的前后对比值**：设置时间、错误率、手动步骤数量、构建时间
+- [ ] **防回归检查**：修改后现有的工作流是否仍能正常运行？
+- [ ] 如果 **没有可测量的改进** 或出现回归：**回滚** 改造或重新调整
 
-## Anti-patterns (forbidden)
+## 反模式（禁止行为）
 
-| Anti-pattern | Damage | Antidote |
+| 反模式 | 损害 | 解毒剂 |
 |---|---|---|
-| Searching insertion points instead of reading docs | Parallel standards | Step A in full |
-| Transferring "best practice from X" 1:1 | Incompatibility | Step D compares functionally |
-| Creating a new file without checking conventions | Duplication (e.g. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Step A + step D |
-| Planning top-down without empirics | Solution misses the pain point | Step E before finalizing the plan |
-| Not testing your own change | Undetected regression | Step F with a fresh agent |
-| "Clarify later" with unclear status | User discovers the conflict afterwards | When unsure, walk step D through with the user again |
+| 搜索插入点而非阅读文档 | 并行标准 | 完整执行步骤 A |
+| 1:1 搬用“X 的最佳实践” | 不兼容 | 步骤 D 进行功能对比 |
+| 创建新文件而不检查规范 | 重复（例如 NOTICE.md ↔ THIRD_PARTY_LICENSES.txt） | 步骤 A + 步骤 D |
+| 无经验基础的自顶向下计划 | 解决方案未解决痛点 | 在确定计划前执行步骤 E |
+| 不测试自己的更改 | 未察觉的回归 | 使用新代理执行步骤 F |
+| 在状态不明时“稍后明确” | 用户随后发现冲突 | 存在疑问时，与用户重新梳理步骤 D |
 
-## Case study — the NOTICE.md incident
+## 案例研究 — NOTICE.md 事件
 
-**Assignment:** Implement pipeline improvements across several topic pipelines (software, research, games).
+**任务：** 在多个主题流水线（软件、研究、游戏）中实施流水线改进。
 
-**Mistake:** Step A skipped — only insertion points searched instead of reading the full policy files.
+**错误：** 跳过了步骤 A — 仅搜索插入点，未阅读完整的策略文件。
 
-**Consequence:** `NOTICE.md` introduced as a "new license file" in 7 files, although `THIRD_PARTY_LICENSES.txt` + a custom license generator (wrapper around `pip-licenses`) were already established — documented in the pipeline's GitHub policy (mandatory files + license checklist). All software projects already had THIRD_PARTY files.
+**后果：** 在 7 个文件中引入了 `NOTICE.md` 作为“新许可证文件”，尽管 `THIRD_PARTY_LICENSES.txt` + 自定义许可证生成器（对 `pip-licenses` 的封装）已经确立 — 且记录在流水线的 GitHub 策略中（必需文件 + 许可证检查清单）。所有软件项目都已经包含了 THIRD_PARTY 文件。
 
-**Detection:** Only after the user asked ("I'm fairly sure we already had rights management").
+**发现：** 仅在用户询问后才察觉（“我非常确定我们之前已经有权限管理了”）。
 
-**Correction:** NOTICE.md removed from the project template, 6 further files adjusted, the existing license generator referenced instead of `pip-licenses`.
+**纠正：** 从项目模板中删除了 NOTICE.md，调整了另外 6 个文件，引用了现有的许可证生成器而非直接使用 `pip-licenses`。
 
-**Lesson:** Had step A been executed in full, the conflict would have been detected before writing.
+**教训：** 如果完整执行了步骤 A，冲突在编写之前就会被发现。
 
-## Rules of thumb
+## 经验法则
 
-1. **For "improve the pipeline", first read as long as you write.**
-2. **No new standard without proof that no existing one exists.**
-3. **Use existing tools/wrappers instead of new parallel ones.**
-4. **"More of the same" is usually worse than "extend what exists".**
-5. **Rolling back on conflict** is always better than running two parallel standards.
+1. **对于“改进流水线”，阅读的时间应与编写的时间一样长。**
+2. **在未证实不存在现有标准前，不得引入新标准。**
+3. **使用现有的工具/封装器，而非新建并行的工具。**
+4. **“重复已有事物”通常比“扩展现有事物”更差。**
+5. **发生冲突时回滚** 永远好于维持两个并行标准。
 
-## Completion checklist
+## 完成检查清单
 
-Before reporting a pipeline renovation as "done":
+在报告流水线改造“完成”之前：
 
-- [ ] Step A: all relevant root docs read?
-- [ ] Step B: pipeline purpose stated in 1-2 sentences?
-- [ ] Step C: ideal picture sketched (5-10 points)?
-- [ ] Step D: gap analysis with table (what stays / what is extended / what is new / what goes)?
-- [ ] Step E: empirics checked (bugs, lessons, self-test, user interview)?
-- [ ] Plan agreed with the user?
-- [ ] Step F: tested with a fresh subagent — improvement measurable?
-- [ ] No parallel standards introduced?
-- [ ] On conflicts: rolled back or honestly accounted for?
+- [ ] 步骤 A：是否阅读了所有相关的根文档？
+- [ ] 步骤 B：是否用 1-2 句话说明了流水线用途？
+- [ ] 步骤 C：是否构思了理想图景（5-10 点）？
+- [ ] 步骤 D：带有表格的差距分析（保留什么 / 扩展什么 / 新增什么 / 废弃什么）？
+- [ ] 步骤 E：是否进行了经验检查（Bug、教训、自测、用户访谈）？
+- [ ] 计划是否与用户达成一致？
+- [ ] 步骤 F：是否使用全新子代理进行了测试 — 改进是否可测量？
+- [ ] 是否没有引入并行标准？
+- [ ] 冲突处理：是否已回滚或如实报告？
 
-## Optimal project-folder structure (for the project-folder optimizer)
+## 最佳项目文件夹结构（适用于项目文件夹优化器）
 
-When the skill is applied to **a single project folder**, the following combined recommendation helps as an ideal reference (step C):
+当技能应用于 **单个项目文件夹** 时，以下组合建议可作为理想参考（步骤 C）：
 
-### Anthropic standard (Claude Code)
+### Anthropic 标准 (Claude Code)
 
-| File/folder | Function |
+| 文件/文件夹 | 功能 |
 |---|---|
-| `CLAUDE.md` (root) | Auto-loaded by Claude Code, project-specific instructions |
-| `.claude/settings.json` | Permissions, env vars, model selection (committed) |
-| `.claude/settings.local.json` | Local overrides (do NOT commit, add to `.gitignore`) |
-| `.claude/commands/*.md` | Custom slash commands |
-| `.claude/agents/*.md` | Custom subagents |
-| `.claude/skills/<name>/SKILL.md` | Project skills |
+| `CLAUDE.md` (根目录) | Claude Code 自动加载，特定于项目的指令 |
+| `.claude/settings.json` | 权限、环境变量、模型选择（提交到 git） |
+| `.claude/settings.local.json` | 本地覆盖（切勿提交到 git，添加到 `.gitignore`） |
+| `.claude/commands/*.md` | 自定义斜杠命令 |
+| `.claude/agents/*.md` | 自定义子代理 |
+| `.claude/skills/<名称>/SKILL.md` | 项目技能 |
 
-### Your own project-docs template (recommended)
+### 您自己的项目文档模板（推荐）
 
-If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Example split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
+如果您维护自己的项目文档模板（例如在 `<您的工作区>/_templates/project-docs/` 下），**三种扩展配置** 会非常有用。示例划分：**MINIMAL** 提供包含 7 个根文件（`AGENTS.md`、`CLAUDE.md`、`README.md`、`START.md`、`STATE.md`、`TODO.md`、`DONE.md`）及 `_tools/` 的核心集。**STANDARD** 增加了 `CHANGELOG.md`、`DECISIONS.md` 和 `PATTERNS.md`。**FULL** 扩展至 14 个根文件，并额外增加了 `ARCHITECTURE.md`、`WORKFLOWS.md`、`TOOLS.md`、`GLOSSARY.md` 以及 `workflows/` 和 `.github/`。
 
-→ **Use such a template as the base for new projects** (copy instead of creating manually).
+→ **使用此类模板作为新项目的基础**（复制而非手动创建）。
 
-### Pipeline-specific additions (examples)
+### 特定于流水线的补充（示例）
 
-Depending on the pipeline, further mandatory files come on top — typical patterns:
+根据流水线的不同，还会增加其他必需文件 — 典型模式：
 
-- **Software project:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (generated), pyproject.toml/requirements.txt, entry in the pipeline's central release registry. → If available: use the pipeline's cookiecutter template.
-- **Research project:** concept document, action plan, publication plan, archive/source/result/data folders (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` for LaTeX. For proof projects: a proof-note file with the proof chain and status.
-- **Game project:** project manifest and toolchain files of the engine (e.g. for Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), game design document, `src/{server,client,shared}/` per engine convention.
+- **软件项目：** LICENSE、CODE_OF_CONDUCT.md、SECURITY.md、CONTRIBUTING.md、THIRD_PARTY_LICENSES.txt（自动生成）、pyproject.toml/requirements.txt、流水线中央发布注册表条目。→ 如果可用：使用流水线的 cookiecutter 模板。
+- **研究项目：** 概念文档、行动计划、出版计划、归档/来源/结果/数据文件夹（`_archive/`、`_sources/`、`_results/`、`_data/`）、用于 LaTeX 的 `paper/`。对于证明项目：包含证明链和状态的证明笔记文件。
+- **游戏项目：** 引擎的项目清单和工具链文件（例如针对 Roblox/Rojo：default.project.json、rokit.toml、wally.toml、selene.toml）、游戏设计文档、按引擎规范排列的 `src/{server,client,shared}/`。
 
-### Full detail reference
+### 完整细节参考
 
-→ See **`references/optimal-project-structure.md`** in this skill folder (German). Contains:
-- Example `settings.json` (Anthropic schema)
-- Mandatory `.gitignore` entries
-- Anti-patterns (what does NOT belong in project folders)
-- Recommended workflows per pipeline type (software/research/game)
-- YAML header convention for documentation files
-- Auto-check sketch
+→ 参见本技能文件夹中的 **`references/optimal-project-structure.md`**（德语）。包含：
+- `settings.json` 示例（Anthropic 模式）
+- 必需的 `.gitignore` 条目
+- 反模式（项目文件夹中不属于的内容）
+- 按流水线类型推荐的工作流（软件/研究/游戏）
+- 文档文件的 YAML 标头规范
+- 自动检查构思
 
-## Related skills (when to use instead of this one?)
+## 相关技能（何时替代使用此技能？）
 
-| Skill | When to use |
+| 技能 | 何时使用 |
 |---|---|
-| **`project-onboarding`** | Take an EXTERNAL existing repo into your own system |
-| Project bootstrapper (if available) | Create a NEW project in an existing pipeline (greenfield, no rebuild) |
-| Pipeline bootstrapper (if available) | Create a COMPLETELY NEW pipeline (rare case) |
-| System onboarding (if available) | Set up a new machine |
+| **`project-onboarding`** | 将外部现有仓库接管到您自己的系统中 |
+| Project bootstrapper (若可用) | 在现有流水线中创建新项目（绿地开发，非重建） |
+| Pipeline bootstrapper (若可用) | 创建全新的流水线（罕见情况） |
+| System onboarding (若可用) | 设置新机器 |
 
-The **pipeline optimizer** is responsible for **renovation**, not new construction or adoption. If your skill collection has a skill index, search it for matching bootstrapping skills.
+**pipeline optimizer** 负责 **改造**，而非新建或接管。如果您的技能库有技能索引，请搜索匹配的引导技能。
 
-## Cross-references
+## 交叉引用
 
-- Detail reference: `references/optimal-project-structure.md` (in this skill folder)
-- Anthropic Claude Code docs: `https://docs.claude.com/en/docs/claude-code`
-- If available: global user rules (e.g. a "renovations" section in your `~/CLAUDE.md`) and pipeline-specific stack descriptions
+- 细节参考：`references/optimal-project-structure.md`（本技能文件夹中）
+- Anthropic Claude Code 文档：`https://docs.claude.com/en/docs/claude-code`
+- 若可用：全局用户规则（例如 `~/CLAUDE.md` 中的“改造”章节）和特定于流水线的技术栈描述
 
-## Scope choice: pipeline vs. project folder
+## 范围选择：流水线 vs. 项目文件夹
 
-If it is unclear which scope is meant, **clarify before step A**:
+如果不清楚指的是哪个范围，**请在步骤 A 前予以明确**：
 
-| Clue | Scope |
+| 线索 | 范围 |
 |---|---|
-| "Improve the whole software pipeline" | Pipeline |
-| "Clean up the folder of tool X" | Project folder |
-| "Synchronize the central release registry" | Pipeline (central asset) |
-| "Refactor the AssetBuilder in game Y" | Project folder |
-| "Introduce a check convention pipeline-wide" | Pipeline |
-| "Create a check file in project Z" | Project folder |
+| “改进整个软件流水线” | 流水线 |
+| “清理工具 X 的文件夹” | 项目文件夹 |
+| “同步中央发布注册表” | 流水线（中央资产） |
+| “重构游戏 Y 中的 AssetBuilder” | 项目文件夹 |
+| “在全流水线范围内引入检查规范” | 流水线 |
+| “在项目 Z 中创建检查文件” | 项目文件夹 |
 
-At **project-folder scope**, additionally always briefly check the parent pipeline's conventions (step A extended) so the intervention stays compatible with the pipeline.
+在 **项目文件夹范围** 内，还需始终简要检查父流水线的规范（步骤 A 的扩展），以使干预与流水线保持兼容。
 
 ---
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.2.0 (2026-06-13)
-- First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged
+- 首次在技能库中发布：个人路径、具体流水线/项目名称以及对私有技能的引用均已替换为通用示例；流程本身（6 个步骤、反模式、案例研究、检查清单）保持不变
 
-### 1.1.1 (2026-06-01) and earlier
-- Internal versions (private skill directory, before publication)
+### 1.1.1 (2026-06-01) 及更早版本
+- 内部版本（私有技能目录，发布前）

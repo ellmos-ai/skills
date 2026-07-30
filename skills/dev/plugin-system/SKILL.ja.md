@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [日本語] エージェントスキル: plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
+description: Python アプリケーション向けの汎用プラグインシステム。自動検出、検証、耐障害性を備える。依存関係ゼロ（Python 標準ライブラリのみ）。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,44 +15,40 @@ tags: [plugin, framework, extensibility, cli, architecture]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `plugin-system`.
+> **日本語** — `plugin-system` の公式日本語版。
 
 
+# Plugin System (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Python CLI アプリケーション向けの耐障害性の高いプラグインシステム。
+欠陥のあるプラグインがあっても、アプリケーションの残りの部分が停止することはありません。
 
+## 主な機能
 
-# Plugin System (English)
+- **自動検出（Auto-Discovery）:** ディレクトリ内のプラグインを自動的に検索
+- **検証（Validation）:** 各プラグインクラスの `name`、`version`、`execute()` をチェック
+- **耐障害性（Fault Tolerance）:** 不具合のあるプラグインはログに記録されますが、読み込まれません
+- **依存関係ゼロ（Zero Dependencies）:** Python 標準ライブラリのみを使用
 
-Fault-tolerant plugin system for Python CLI applications.
-A faulty plugin never stops the rest of the application.
-
-## Core Features
-
-- **Auto-Discovery:** Automatically finds plugins in a directory
-- **Validation:** Checks `name`, `version`, `execute()` on each plugin class
-- **Fault Tolerance:** Defective plugins are logged but not loaded
-- **Zero Dependencies:** Python standard library only
-
-## Files
+## 構成ファイル
 
 ```
 scripts/
-  plugin_system.py       Core: PluginBase (ABC) + PluginManager
-  cli_demo.py            Demo CLI with argparse
-  test_plugin_system.py  16+ unit tests
+  plugin_system.py       コア：PluginBase (ABC) + PluginManager
+  cli_demo.py            argparse を使用したデモ CLI
+  test_plugin_system.py  16 以上の単体テスト
 examples/
-  hello.py               Hello World plugin
-  calculator.py          Calculator plugin
-  systeminfo.py          System Info plugin
+  hello.py               Hello World プラグイン
+  calculator.py          電卓プラグイン
+  systeminfo.py          システム情報プラグイン
 ```
 
-## Quick Start
+## クイックスタート
 
-### 1. Create a Plugin
+### 1. プラグインの作成
 
 ```python
 from plugin_system import PluginBase
@@ -65,7 +61,7 @@ class MyPlugin(PluginBase):
         return {"status": "ok", "message": "Hello!"}
 ```
 
-### 2. Use PluginManager
+### 2. PluginManager の使用
 
 ```python
 from plugin_system import PluginManager
@@ -73,16 +69,16 @@ from plugin_system import PluginManager
 manager = PluginManager(plugins_dir="./my_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins (English)
+# すべてのプラグインを一覧表示
 manager.list_plugins()
 
-# Execute a plugin (English)
+# プラグインの実行
 success, result = manager.execute_plugin("MyPlugin", param="value")
 if success:
     print(result)
 ```
 
-### 3. Integrate into Your App
+### 3. アプリケーションへの統合
 
 ```python
 class MyApp:
@@ -95,31 +91,31 @@ class MyApp:
         return result if success else None
 ```
 
-## Plugin Interface
+## プラグインインターフェース
 
-Every plugin must:
+すべてのプラグインは以下を満たす必要があります：
 
-| Requirement | Details |
+| 要求事項 | 詳細 |
 |-------------|---------|
-| Inherit `PluginBase` | `from plugin_system import PluginBase` |
-| Set `name` | Class attribute, non-empty |
-| Set `version` | Class attribute, semantic versioning |
-| Implement `execute()` | Arbitrary `*args, **kwargs` |
+| `PluginBase` の継承 | `from plugin_system import PluginBase` |
+| `name` の設定 | クラス属性、空不可 |
+| `version` の設定 | クラス属性、セマンティックバージョニング |
+| `execute()` の実装 | 任意の `*args, **kwargs` を受け取る |
 
-## Fault Tolerance
+## 耐障害性
 
-| Error Type | Behavior |
+| エラー種別 | 挙動 |
 |-----------|----------|
-| SyntaxError in plugin | Plugin is skipped, rest loads |
-| Missing attributes | Plugin is marked as `is_valid=False` |
-| Exception in `execute()` | Returns `(False, error_message)` |
-| No plugin in directory | Empty list, no crash |
+| プラグイン内の `SyntaxError` | プラグインはスキップされ、残りが読み込まれます |
+| 属性の欠落 | プラグインは `is_valid=False` とマークされます |
+| `execute()` 内の例外 | `(False, error_message)` を返します |
+| ディレクトリ内にプラグインなし | クラッシュせず、空のリストを返します |
 
 ## 変更履歴
 
 ### 1.0.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/plugins to skill library
+- MODULAR_AGENTS/plugins からスキルライブラリへの移行
 - PluginBase ABC + PluginManager
-- 3 example plugins (Hello, Calculator, SystemInfo)
-- 16+ unit tests
-- CLI demo with argparse
+- 3つのサンプルプラグイン（Hello, Calculator, SystemInfo）
+- 16以上の単体テスト
+- argparse を使用した CLI デモ

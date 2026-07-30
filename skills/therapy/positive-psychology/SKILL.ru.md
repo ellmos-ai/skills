@@ -1,129 +1,141 @@
 ---
+name: positive-psychology
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Позитивная психология по Мартину Селигману: модель PERMA, сильные стороны характера (VIA), упражнения на благодарность, теория потока и факторы жизнестойкости.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [positive-psychology, perma, flow, gratitude, resilience, seligman]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `positive-psychology`.
+> **Русский** — Официальная русская версия `positive-psychology`.
 
 
+# Позитивная психология (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Опора на сильные стороны, благодарность, состояние потока и модель PERMA по Селигману и Чиксентмихайи
 
-
-# Positive Psychology (English)
-
-> Strengths focus, gratitude, flow, and PERMA according to Seligman and Csikszentmihalyi
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Positive Psychology is the scientific study of what makes life worth living (Seligman & Csikszentmihalyi, 2000). In contrast to clinical psychology (What causes illness?), it asks: What makes people healthy, happy, and resilient?
-
-Founders: Martin Seligman (APA President 1998) initiated the movement. Other pioneers: Mihaly Csikszentmihalyi (Flow), Christopher Peterson (Character Strengths), Barbara Fredrickson (Broaden-and-Build), Ed Diener (Subjective Well-Being).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. PERMA Model (Seligman, 2011)
+## Контекст
 
-Five pillars of well-being according to Seligman ("Flourish"):
+Позитивная психология — это научное исследование того, что делает жизнь полноценной и достойной того, чтобы жить (Seligman & Csikszentmihalyi, 2000). В отличие от классической клинической психологии («Что вызывает патологию?»), она задает вопрос: «Что делает людей здоровыми, счастливыми и психологически устойчивыми?»
 
-### P — Positive Emotions
-- Joy, gratitude, serenity, interest, hope, pride, love
-- Fredrickson: At least a 3:1 ratio of positive to negative emotions
-- Exercise: "Three Good Things" (see below)
+Основатели: Мартин Селигман (президент АПА в 1998 г.) инициировал данное движение. Другие пионеры: Михай Чиксентмихайи (состояние потока / Flow), Кристофер Питерсон (сильные стороны характера), Барбара Фредриксон (теория расширения и построения / Broaden-and-Build), Эд Динер (субъективное благополучие).
 
-### E — Engagement
-- Being fully absorbed in an activity (flow state)
-- Using one's strengths in daily life
-- Challenge and skill in balance
-
-### R — Relationships (Positive Relationships)
-- Social connectedness as the strongest predictor of well-being
-- Active-constructive responding to others' good news
-- Small kindnesses (Random Acts of Kindness)
-
-### M — Meaning
-- Belonging to and serving something greater than oneself
-- Meaning through work, family, community, spirituality
-- Frankl: "He who has a why can bear almost any how"
-
-### A — Achievement
-- Experiencing mastery and competence
-- Setting and achieving realistic goals
-- Grit: Perseverance + passion for long-term goals (Duckworth, 2016)
+**Примечание:** Данный материал носит психообразовательный характер и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. Character Strengths (VIA Classification)
+## 1. Модель PERMA (Seligman, 2011)
 
-Peterson and Seligman (2004) identified 24 universal character strengths in 6 virtue categories:
+Пять столпов благополучия по Селигману («Flourish»):
 
-| Virtue | Strengths |
+### P — Положительные эмоции (Positive Emotions)
+- Радость, благодарность, умиротворение, интерес, надежда, гордость, любовь
+- Фредриксон: Соотношение положительных и отрицательных эмоций не менее 3:1
+- Упражнение: «Три хороших события» (см. ниже)
+
+### E — Вовлеченность (Engagement)
+- Полное погружение в деятельность (состояние потока)
+- Использование своих сильных сторон в повседневной жизни
+- Баланс между вызовом и навыками
+
+### R — Позитивные отношения (Positive Relationships)
+- Социальные связи как сильнейший предиктор благополучия
+- Активно-конструктивный отклик на хорошие новости окружающих
+- Спонтанные проявления доброты (Random Acts of Kindness)
+
+### M — Смысл (Meaning)
+- Принадлежность к чему-то большему, чем собственное «Я», и служение ему
+- Поиск смысла через работу, семью, сообщество, духовность
+- Франкл: «Тот, кто знает, "зачем" жить, может вынести почти любое "как"»
+
+### A — Достижения (Achievement)
+- Переживание мастерства и компетентности
+- Постановка и достижение реалистичных целей
+- Твердость характера (Grit): Упорство + страсть к долгосрочным целям (Duckworth, 2016)
+
+---
+
+## 2. Сильные стороны характера (Классификация VIA)
+
+Питерсон и Селигман (2004) выделили 24 универсальные сильные стороны характера в 6 категориях добродетелей:
+
+| Добродетель | Сильные стороны |
 |--------|----------|
-| Wisdom | Creativity, Curiosity, Judgment, Love of Learning, Perspective |
-| Courage | Bravery, Perseverance, Honesty, Zest |
-| Humanity | Love, Kindness, Social Intelligence |
-| Justice | Teamwork, Fairness, Leadership |
-| Temperance | Forgiveness, Humility, Prudence, Self-Regulation |
-| Transcendence | Appreciation of Beauty, Gratitude, Hope, Humor, Spirituality |
+| Мудрость | Креативность, Любознательность, Критическое мышление / Суждение, Любовь к обучению, Мудрость / Перспектива |
+| Мужество | Смелость, Упорство / Настойчивость, Честность, Энергичность / Жизнелюбие |
+| Гуманность | Любовь, Доброта, Социальный интеллект |
+| Справедливость | Командная работа, Справедливость, Лидерство |
+| Умеренность | Прощение, Скромность, Осмотрительность, Саморегуляция |
+| Трансцендентность | Ценить красоту, Благодарность, Надежда, Юмор, Духовность |
 
-**Signature strengths:** The 3-5 strengths that feel most authentic. Those who use their signature strengths daily are demonstrably more satisfied and less depressed (Seligman et al. 2005).
+**Ключевые сильные стороны (Signature strengths):** 3–5 сильных сторон, которые ощущаются наиболее аутентично. Люди, ежедневно использующие свои ключевые сильные стороны, субъективно более удовлетворены жизнью и менее склонны к депрессии (Seligman et al. 2005).
 
-**VIA Survey:** Free at viacharacter.org (scientifically validated)
-
----
-
-## 3. Gratitude Exercises
-
-### 3.1 Three Good Things (Seligman et al. 2005)
-
-**Procedure:**
-1. Every evening, write down 3 good things from the day
-2. For each one note: Why did it happen?
-3. Duration: At least 1 week, ideally ongoing
-
-**Evidence:** Significantly increased well-being and reduced depressive symptoms over 6 months (Seligman et al. 2005)
-
-### 3.2 Gratitude Journal
-
-Extension of Three Good Things:
-- Morning: What am I grateful for today? (3 items)
-- Evening: What was good today? What did I contribute?
-- Shift perspective: People, experiences, abilities, everyday things
-
-### 3.3 Gratitude Letter (Gratitude Visit)
-
-**Procedure:**
-1. Identify a person you never properly thanked
-2. Write a specific letter (300 words, concrete)
-3. Visit the person and read the letter aloud
-
-**Evidence:** Strongest short-term effect of all positive psychology interventions (Seligman et al. 2005). Effect lasts approximately 1 month.
+**Опросник VIA:** Бесплатно на viacharacter.org (научно валидирован).
 
 ---
 
-## 4. Flow Theory (Csikszentmihalyi, 1990)
+## 3. Упражнения на благодарность
 
-### Definition
-Flow is a state of complete immersion in an activity, where action flows effortlessly and time and self-consciousness recede into the background.
+### 3.1 Три хороших события (Seligman et al. 2005)
 
-### Conditions for Flow
+**Порядок выполнения:**
+1. Каждый вечер записывайте 3 хороших события, произошедших за день.
+2. Для каждого из них ответьте на вопрос: «Почему это произошло?»
+3. Продолжительность: Минимум 1 неделя, в идеале — регулярно.
 
-| Condition | Description |
+**Доказательная база:** Значительное повышение уровня благополучия и снижение симптомов депрессии на протяжении 6 месяцев (Seligman et al. 2005).
+
+### 3.2 Дневник благодарности
+
+Расширенная версия упражнения «Три хороших события»:
+- Утро: За что я благодарен(на) сегодня? (3 пункта)
+- Вечер: Что было хорошего сегодня? Каков мой вклад?
+- Смена фокуса: Люди, опыт, способности, повседневные мелочи.
+
+### 3.3 Письмо благодарности (Визит благодарности)
+
+**Порядок выполнения:**
+1. Подумайте о человеком, которого вы никогда должным образом не благодарили.
+2. Напишите подробное письмо (около 300 слов, с конкретными деталями).
+3. Навестите человека и прочитайте письмо вслух.
+
+**Доказательная база:** Самый мощный краткосрочный эффект среди всех интервенций позитивной психологии (Seligman et al. 2005). Эффект сохраняется около 1 месяца.
+
+---
+
+## 4. Теория потока (Csikszentmihalyi, 1990)
+
+### Определение
+Поток (Flow) — это состояние полного погружения в деятельность, при котором действия совершаются без видимых усилий, а время и самосознание отходят на задний план.
+
+### Условия возникновения потока
+
+| Условие | Описание |
 |-----------|-------------|
-| Balance | Challenge matches skill level |
-| Clear goals | You know exactly what to do |
-| Immediate feedback | Instant feedback on progress |
-| Concentration | Full attention on the task |
-| Control | Feeling of being able to master the situation |
-| Intrinsic motivation | The activity is rewarding in itself |
+| Баланс | Сложность задачи соответствует уровню навыков |
+| Четкие цели | Вы точно знаете, что нужно делать |
+| Мгновенная обратная связь | Немедленный отклик о прогрессе |
+| Концентрация | Полное внимание сосредоточено на задаче |
+| Контроль | Ощущение способности управлять ситуацией |
+| Внутренняя мотивация | Деятельность ценна сама по себе |
 
-### Flow Channel
+### Канал потока
 
 ```
 Challenge
@@ -135,64 +147,63 @@ Challenge
                     Skill
 ```
 
-### Fostering Flow
-- Eliminate distractions (phone away, door closed)
-- Break tasks into manageable units
-- Adjust difficulty level (not too easy, not too hard)
-- Establish regular practice times
+### Стимулирование состояния потока
+- Устранить отвлекающие факторы (убрать телефон, закрыть дверь)
+- Разбить задачи на управляемые блоки
+- Настроить уровень сложности (не слишком легко и не слишком сложно)
+- Установить регулярное время для глубокой работы
 
 ---
 
-## 5. Resilience Factors
+## 5. Факторы жизнестойкости (резильентности)
 
-Resilience = psychological resistance to adversity.
+Жизнестойкость = психологическая сопротивляемость трудности и стрессу.
 
-### The 7 Pillars of Resilience (after Reivich & Shatte, 2002)
+### 7 столпов жизнестойкости (по Reivich & Shatte, 2002)
 
-1. **Emotion regulation:** Perceiving and managing one's own feelings
-2. **Impulse control:** Consciously directing actions rather than reacting
-3. **Causal analysis:** Realistically assessing causes
-4. **Self-efficacy:** Confidence in one's own competence
-5. **Empathy:** Recognizing and understanding others' emotions
-6. **Optimism:** Realistic, positive expectations for the future
-7. **Goal orientation:** Setting and pursuing meaningful goals
+1. **Регуляция эмоций:** Осознание и управление собственными чувствами
+2. **Контроль импульсов:** Осознанное направление действий вместо импульсивных реакций
+3. **Анализ причин:** Реалистичная оценка причин происходящего
+4. **Самоэффективность:** Уверенность в собственной компетентности
+5. **Эмпатия:** Распознавание и понимание эмоций других людей
+6. **Оптимизм:** Реалистичные, позитивные ожидания от будущего
+7. **Целеполагание:** Постановка и достижение значимых целей
 
-### Building Resilience
-- Consciously use strengths (VIA strengths)
-- Maintain social network (relationships as the #1 protective factor)
-- Self-care: Sleep, exercise, nutrition, recovery
-- Cognitive flexibility: Seek alternative perspectives
-- Find meaning and significance (even in difficult situations)
+### Укрепление жизнестойкости
+- Осознанно использовать свои сильные стороны (VIA)
+- Поддерживать социальные связи (отношения — защитный фактор №1)
+- Забота о себе: Сон, физическая активность, питание, восстановление
+- Когнитивная гибкость: Поиск альтернативных точек зрения
+- Поиск смысла и ценности (даже в тяжелых ситуациях)
 
 ---
 
-## Ethics and Boundaries
+## Этика и границы применения
 
-**An AI assistant may:**
-- Explain the PERMA model and character strengths (psychoeducation)
-- Guide and support gratitude exercises
-- Discuss flow conditions
-- Convey resilience factors
-- Support signature strengths reflection
+**ИИ-ассистент имеет право:**
+- Объяснять модель PERMA и сильные стороны характера (психообразование)
+- Направлять и поддерживать выполнение упражнений на благодарность
+- Обсуждать условия вхождения в состояние потока
+- Разъяснять факторы жизнестойкости
+- Помогать в рефлексии ключевых сильных сторон
 
-**An AI assistant must NOT:**
-- Treat clinical depression solely with positive psychology
-- Clinically interpret VIA survey results
-- Recommend positive psychology as a substitute for therapy
-- Foster toxic positivity ("Just be grateful")
+**ИИ-ассистент НЕ имеет права:**
+- Лечить клиническую депрессию исключительно методами позитивной психологии
+- Клинически интерпретировать результаты опросника VIA
+- Рекомендовать позитивную психологию как замену психотерапии
+- Поощрять токсичный позитив («Просто будь благодарен»)
 
-**Progress tracking:**
-- Well-being before/after exercise (0-10 scale)
-- Gratitude streak: How many consecutive days?
-- Flow log: When and during which activities do I experience flow?
-- Signature strengths: How often used this week?
+**Мониторинг прогресса:**
+- Уровень благополучия до/после упражнения (шкала 0–10)
+- Серия благодарности: Сколько дней подряд выполняется упражнение?
+- Дневник потока: Когда и при каких занятиях возникает состояние потока?
+- Ключевые сильные стороны: Как часто использовались на этой неделе?
 
-**In case of acute crisis, ALWAYS refer to:**
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (RU): 8-800-2000-122
+- Горячая линия психологической помощи (RU): +7 (495) 051
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная помощь: 112 (RU/EU), 911 (US)
 
 ---
 

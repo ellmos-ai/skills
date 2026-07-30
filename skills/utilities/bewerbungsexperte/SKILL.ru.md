@@ -5,7 +5,7 @@ type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
 updated: 2026-06-22
-description: [Русский] Навык агента для bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
+description: Специалист по всему процессу подачи заявок на работу. Анализирует вакансии, оптимизирует профили (LinkedIn/CV) и генерирует персональные сопроводительные письма. Генерирует ASCII-резюме из базы данных SQLite и структуры папок. cv_generator.py перенесен в автономном режиме -- среда выполнения BACH не требуется.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,67 +18,60 @@ dependencies: {'tools': ['cv_generator.py'], 'services': [], 'protocols': [], 'p
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `bewerbungsexperte`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bewerbungsexperte`.
+> **Русский** — Официальная русская версия `bewerbungsexperte`.
 
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
-# BEWERBUNGSEXPERTE v1.1 (English)
+# BEWERBUNGSEXPERTE v1.1 (Русский)
 
-> Dein strategischer Partner fuer den naechsten Karriereschritt.
+> Ваш стратегический партнер для следующего карьерного шага.
 
-## AKTIVIERUNG
+## АКТИВАЦИЯ
 
 ```bash
-# Beispiel-CV ohne Datenbankzugriff (English)
+# Пример CV без доступа к базе данных (Русский)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --dry-run
 
-# CV aus SQLite-Datenbank generieren (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad/zu/daten.db>
+# Генерация CV из базы данных SQLite (Русский)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <путь/к/данным.db>
 
-# CV in Datei speichern (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --output lebenslauf.txt
+# Сохранение CV в файл (Русский)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <путь> --output lebenslauf.txt
 
-# Mit Ordner-Scan (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --career-path <ordner>
+# Со сканированием папок (Русский)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <путь> --career-path <папка>
 ```
 
-## LEISTUNGSKATALOG
+## КАТАЛОГ УСЛУГ
 
-### 1. CV-Generierung (`cv_generator.py`)
-- **Persoenliche Daten:** Aus `assistant_user_profile`-Tabelle lesen (key/value)
-- **Berufserfahrung:** Arbeitgeber-Ordner scannen (Zeugnisse, Vertraege)
-- **Ausbildung:** Abschluesse-Ordner scannen
-- **Fortbildungen:** Zertifikate-Ordner scannen
-- **Referenzen:** Aus `contacts`-Tabelle (category='beruflich')
-- **Dry-Run:** Ohne Datenbank -- Beispieldaten fuer Tests
+### 1. Генерация CV (`cv_generator.py`)
+- **Личные данные:** чтение из таблицы `assistant_user_profile` (ключ/значение)
+- **Опыт работы:** сканирование папки работодателей (рекомендации, контракты)
+- **Образование:** сканирование папки дипломов
+- **Повышение квалификации:** сканирование папки сертификатов
+- **Рекомендации:** из таблицы `contacts` (category='beruflich')
+- **Dry-Run:** без базы данных -- тестовые данные для проверки
 
-### 2. Stellendiagnose
-- **Keyword-Matching:** Abgleich von CV mit Job-Requirements (ATS-Safe)
-- **Unternehmens-Check:** Recherche zu Firmenkultur und Benefits
+### 2. Диагностика вакансии
+- **Совпадение ключевых слов:** сопоставление CV с требованиями вакансии (ATS-Safe)
+- **Проверка компании:** исследование корпоративной культуры и льгот
 
-### 3. Unterlagen-Service
-- **CV-Tuning:** Strukturierung und Pointierung von Erfahrungen
-- **Anschreiben:** Erstellung von individuellen, ueberzeugenden Briefen
-- **Portfolio:** Beratung zu Arbeitsproben und Referenzen
+### 3. Сервис документов
+- **Настройка CV:** структурирование и акцентирование опыта
+- **Сопроводительные письма:** создание индивидуальных и убедительных писем
+- **Портфолио:** консультации по примерам работ и рекомендациям
 
-## DATENBANK-TABELLEN (optional)
+## ТАБЛИЦЫ БАЗЫ ДАННЫХ (опционально)
 
-`cv_generator.py` liest aus diesen Tabellen, wenn vorhanden:
+`cv_generator.py` читает из этих таблиц, если они существуют:
 
-- `assistant_user_profile` (key TEXT, value TEXT) — Persoenliche Daten
-  - Felder: name, full_name, email, phone, address, birthday, nationality, marital_status
-- `contacts` (name, organization, position, phone, email, is_active, category) — Referenzen
+- `assistant_user_profile` (key TEXT, value TEXT) — Личные данные
+  - Поля: name, full_name, email, phone, address, birthday, nationality, marital_status
+- `contacts` (name, organization, position, phone, email, is_active, category) — Рекомендации
 
-Fehlende Tabellen werden ignoriert (leere Sektionen im CV).
+Отсутствующие таблицы игнорируются (пустые секции в CV).
 
-## ORDNERSTRUKTUR (fuer --career-path etc.)
+## СТРУКТУРА ПАПОК (для --career-path и т.д.)
 
 ```
 _Arbeitgeber/
@@ -94,51 +87,51 @@ _Fortbildungen/
   Zertifikat_Cloud_AWS_2024.pdf
 ```
 
-## CLI-OPTIONEN
+## ОПЦИИ CLI
 
 ```
---db <pfad>           Pfad zur SQLite-Datenbank (Pflicht ohne --dry-run)
---output, -o          Ausgabedatei (ansonsten stdout)
---career-path         Pfad zum Arbeitgeber-Ordner
---education-path      Pfad zum Abschluesse-Ordner
---certs-path          Pfad zum Fortbildungen-Ordner
---dry-run             Beispiel-CV ohne Datenbankzugriff
+--db <путь>           Путь к базе данных SQLite (обязательно без --dry-run)
+--output, -o          Выходной файл (иначе stdout)
+--career-path         Путь к папке работодателей
+--education-path      Путь к папке дипломов
+--certs-path          Путь к папке сертификатов
+--dry-run             Пример CV без доступа к базе данных
 ```
 
-## WORKFLOW: CV-GENERIERUNG
+## РАБОЧИЙ ПРОЦЕСС: ГЕНЕРАЦИЯ CV
 
-1. **Vorbereitung**
-   - SQLite-DB bereitstellen (BACH-DB oder eigene)
-   - Ordnerstruktur mit Dokumenten anlegen (optional)
+1. **Подготовка**
+   - Подготовить БД SQLite (БД BACH или собственную)
+   - Создать структуру папок с документами (опционально)
 
-2. **Test ohne DB**
-   - `python cv_generator.py --dry-run` -- prueft ob Tool funktioniert
+2. **Тест без БД**
+   - `python cv_generator.py --dry-run` -- проверяет работу инструмента
 
-3. **Generierung**
-   - `python cv_generator.py --db <pfad> --career-path <arbeitgeber>`
-   - Ausgabe pruefen und ggf. anpassen
+3. **Генерация**
+   - `python cv_generator.py --db <путь> --career-path <работодатель>`
+   - Проверить результат и при необходимости скорректировать
 
-4. **Export**
-   - `python cv_generator.py --db <pfad> --output lebenslauf.txt`
+4. **Экспорт**
+   - `python cv_generator.py --db <путь> --output lebenslauf.txt`
 
-## ABHÄNGIGKEITEN
+## ЗАВИСИМОСТИ
 
-Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
-Kein pip-Install noetig, kein BACH-Runtime-Import.
+Только стандартная библиотека Python: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
+Установка через pip не требуется, импорт среды выполнения BACH не требуется.
 
-## ÄNDERUNGSLOG
+## ЖУРНАЛ ИЗМЕНЕНИЙ
 
 ### 1.1.0 (2026-06-22)
-- Standalone portiert aus BACH v1.0.0
-- `--db <pfad>` statt hardcodiertem Origin-DB-Pfad
-- `--dry-run`-Modus hinzugefuegt
-- `--scan-folders` entfernt (erforderte BACH user_data_folders-Tabelle)
-- Footer-Text neutralisiert
-- BACH-Runtime-Unabhaengigkeit verifiziert
+- Автономный перенос из BACH v1.0.0
+- Использование `--db <путь>` вместо жестко запрограммированного исходного пути к БД
+- Добавлен режим `--dry-run`
+- Удален параметр `--scan-folders` (требовалась таблица user_data_folders из BACH)
+- Нейтрализован текст подвала
+- Проверена независимость от среды выполнения BACH
 
-### 1.0.0 (2026-01-25, BACH-intern)
-- Initiale Version in BACH system/agents/_experts/bewerbungsexperte/
+### 1.0.0 (2026-01-25, внутренний BACH)
+- Начальная версия в BACH system/agents/_experts/bewerbungsexperte/
 
 ---
-Status: AKTIV
-Domain: Karriereberatung
+Статус: АКТИВЕН
+Домен: Карьерное консультирование

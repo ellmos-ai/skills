@@ -1,142 +1,100 @@
 ---
 language: ru
+description: Удаление следов ИИ, обрывков чата, заполнителей и стилистических паттернов LLM из готовых текстов, а также аудит раскрытия информации об ИИ.
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `llm-text-hygiene`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `llm-text-hygiene`.
-
+> **Русский** — Официальная русская версия `llm-text-hygiene`.
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
+# LLM-Text-Hygiene — Удаление артефактов ИИ из готовых текстов
 
-## Общий обзор и назначение & Purpose
+## Обзор и цель
 
-KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
-erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
-Regieanweisungen, die aus der Argumentationsstruktur herausfallen, Danksagungen an das
-Sprachmodell, stehengebliebene Platzhalter, aufdringliche LLM-Stilmuster — und eine
-AI-Disclosure, die fehlt, falsch platziert oder nicht mehr wahr ist. Dieser Skill ist der
-systematische Reinigungs-Pass davor: prüfen, konservativ bereinigen, Disclosure richtig
-stellen. **Er verändert nie die Substanz** — er entfernt, was nicht Teil des Werks ist.
+Тексты, созданные с помощью ИИ, накапливают артефакты, которые остаются невидимыми в черновиках и становятся конфузными в опубликованном документе: обрывки разговора из чат-сессии, ремарки и режиссерские указания, выпадающие из аргументации, выражения благодарности языковой модели, оставшиеся заполнители, навязчивые стилистические паттерны LLM — и раскрытие информации об ИИ (AI Disclosure), которое отсутствует, неверно расположено или не соответствует действительности. Этот скилл представляет собой систематический этап очистки перед публикацией: проверить, консервативно очистить, исправить раскрытие информации. **Он никогда не меняет суть** — он удаляет то, что не является частью произведения.
 
-## Prüfkatalog
+## Каталог проверки (Аудит)
 
-Fünf Befundklassen, von eindeutig (direkt fixen) nach heikel (nur markieren):
+Пять классов находок, от однозначных (исправлять напрямую) до чувствительных (только помечать):
 
-### 1. Chat-Residue und Regieanweisungen (eindeutig → streichen/ausbessern)
+### 1. Обрывки чата и режиссерские указания (однозначные → удалить/исправить)
 
-Sätze, die zur ENTSTEHUNG des Texts gehören, nicht zum Text: „Wie besprochen lassen wir
-diesen Teil im Paper, da …", „Hier ist der überarbeitete Abschnitt:", „Gerne ergänze
-ich …", übrig gebliebene Prompt-Fragmente, Meta-Kommentare an den Auftraggeber.
-**Erkennungsprinzip:** Der Satz fällt aus der Text- und Argumentationsstruktur heraus —
-er adressiert eine Gesprächssituation statt den Leser. Beim Streichen prüfen, ob ein
-inhaltlicher Rest gerettet werden muss (Begründung in Fußnote/Text überführen).
+Предложения, относящиеся к СОЗДАНИЮ текста, а не к самому тексту: «Как обсуждалось, мы оставляем эту часть в статье, так как...», «Вот переработанный раздел:», «С удовольствием добавлю...», оставшиеся фрагменты промптов, мета-комментарии заказчику/заявителю.
+**Принцип обнаружения:** Предложение выпадает из структуры текста и аргументации — оно обращено к ситуации общения, а не к читателю. При удалении проверить, нужно ли сохранить содержательное ядро (перенести объяснение в сноску/основной текст).
 
-### 2. Platzhalter und Baustellen-Marker (eindeutig → auflösen)
+### 2. Заполнители и маркеры незавершенной работы (однозначные → разрешить)
 
-`[TODO: …]`, `[Referenz einfügen]`, `XXX`, `<hier Beispiel>`, leere Abschnitte mit
-Überschrift, „(Quelle?)". Auflösen oder — wenn nicht auflösbar — als echte offene
-Aufgabe in die Projekt-TODO überführen und aus dem Deliverable entfernen.
+`[TODO: …]`, `[вставить ссылку]`, `XXX`, `<здесь пример>`, пустые разделы с заголовком, «(источник?)». Разрешить или — если это невозможно — перенести как реальные открытые задачи в TODO проекта и удалить из готового документа.
 
-### 3. LLM-Danksagungen und Anthropomorphes (eindeutig → entfernen)
+### 3. Благодарности LLM и антропоморфные выражения (однозначные → удалить)
 
-Danksagungen an ChatGPT/Claude/Gemini & Co. gehören nicht in die Danksagung — Werkzeuge
-werden nicht bedankt, ihr Einsatz wird in der AI-Disclosure deklariert. Ebenso entfernen:
-anthropomorphe Formulierungen über das Werkzeug („die KI schlug freundlicherweise vor").
+Благодарности в адрес ChatGPT/Claude/Gemini и др. не относятся к разделу благодарностей — инструменты не благодарят, их использование декларируется в AI Disclosure. Также следует удалить антропоморфные формулировки об инструменте («ИИ любезно предложил»).
 
-### 4. AI-Disclosure (prüfen → korrigieren)
+### 4. Раскрытие информации об ИИ (AI Disclosure) (проверить → скорректировать)
 
-- **Vorhanden?** Wenn das Dokument KI-gestützt entstand und Venue/Projekt eine Disclosure
-  verlangt oder vorsieht: existiert der Abschnitt?
-- **Korrekt?** Beschreibt sie den tatsächlichen Einsatz (nicht unter-, nicht übertrieben)?
-  Nutzt sie das Disclosure-Schema des Projekts/der Venue, falls eines definiert ist
-  (z. B. abgestufte Level)?
-- **Richtig platziert?** An der venue-üblichen Stelle (Methoden/Acknowledgements-Umfeld/
-  eigener Abschnitt), identisch in allen Sprachfassungen.
+- **Присутствует ли?** Если документ создан с использованием ИИ и площадка/проект требует или предусматривает раскрытие информации: существует ли данный раздел?
+- **Корректно ли?** Описывает ли оно фактическое использование (не приуменьшая и не преувеличивая)? Использует ли оно схему раскрытия проекта/площадки, если таковая определена (например, с градуированными уровнями)?
+- **Правильно ли расположено?** В привычном для площадки месте (методы/окружение благодарностей/отдельный раздел), идентично во всех языковых версиях.
 
-### 5. LLM-Stilmuster (heikel → nur klare Fälle fixen, Rest markieren)
+### 5. Стилистические паттерны LLM (чувствительные → исправлять только явные случаи, остальное помечать)
 
-Formelhafte Übergänge („Zusammenfassend lässt sich sagen", „Es ist wichtig zu betonen"),
-Aufzählungs-Inflation wo Fließtext hingehört, „nicht nur … sondern auch"-Ketten,
-Gedankenstrich-Dichte, Hedging-Floskeln, im Englischen die bekannten Marker (u. a.
-„delve", „tapestry", „it's worth noting"). **Vorsicht:** Stil ist Urheber-Territorium —
-nur eindeutige Formelhaftigkeit glätten, alles andere als Befundliste an den Autor geben
-statt den Text umzuschreiben. Ein menschlich klingender Text ist nicht das Ziel des
-Skills; das Ziel ist ein Text ohne Fremdkörper.
+Шаблонные переходы («Подводя итог, можно сказать», «Важно подчеркнуть»), инфляция маркированных списков там, где должен быть сплошной текст, цепочки «не только..., но и», высокая плотность тире, клише хеджирования (уклонения от прямых утверждений), а в английском языке — известные маркеры (включая "delve", "tapestry", "it's worth noting"). **Осторожно:** Стиль — это территория автора; сглаживать только явную шаблонность, все остальное предоставлять автору в виде списка находок, а не переписывать текст. Текст, звучащий «по-человечески», не является целью скилла; цель — текст без инородных тел.
 
-## Ablauf
+## Рабочий процесс
 
-1. **Scope klären:** Welche Deliverables (Dateien), welche Sprachfassungen? Änderungen
-   IMMER synchron über alle Fassungen (Abgleich: `bilingual-doc-sync`).
-2. **Mechanischer Scan:** Volltextsuche nach den Signal-Mustern (Tabelle unten) —
-   billig, findet Klasse 2/3 und Teile von 1 zuverlässig.
-3. **Lese-Pass:** Das Dokument entlang der Argumentationsstruktur lesen — Klasse-1-Funde
-   erkennt man nur strukturell (Satz adressiert Gespräch statt Leser). Besonders prüfen:
-   Abschnittsanfänge/-enden, Danksagungen, Einleitung/Fazit (dort landet Residue zuerst).
-4. **Bereinigen:** Klassen 1–3 direkt fixen (konservativ, Substanz erhalten), Klasse 4
-   korrigieren, Klasse 5 als Befundliste ausgeben; nur eindeutige Fälle direkt glätten.
-5. **Dokumentieren:** Was gefunden/geändert/nur markiert wurde — bei Papern mit
-   Versionierungspflicht vermerken, ob eine neue Version/ein Re-Upload nötig wird.
-6. **Periodisch über einen Bestand:** mit `rotation-check` kombinieren (ein Dokument/
-   Projekt pro Lauf, Registry als Gedächtnis).
+1. **Уточнить объем:** Какие готовые документы (файлы), какие языковые версии? Изменения ВСЕГДА вносить синхронно во все версии (сверка: `bilingual-doc-sync`).
+2. **Механическое сканирование:** Полнотекстовый поиск по сигнальным паттернам (таблица ниже) — недорогой способ, надежно находит классы 2/3 и часть класса 1.
+3. **Чтение и анализ:** Прочитать документ вдоль структуры аргументации — находки класса 1 распознаются только структурно (предложение обращено к беседе, а не к читателю). Особо проверить: начала/концы разделов, благодарности, введение/заключение (артефакты чаще всего попадают туда).
+4. **Очистка:** Напрямую исправить классы 1–3 (консервативно, сохраняя суть), скорректировать класс 4, выдать класс 5 в виде списка находок; напрямую сглаживать только недвусмысленные случаи.
+5. **Документирование:** Зафиксировать, что было найдено/изменено/помечено — для статей с обязательным версионированием отметить, требуется ли новая версия/повторная загрузка.
+6. **Периодический прогон по репозиторию:** Совместить с `rotation-check` (один документ/проект за прогон, реестр как память).
 
-## Signal-Muster für den mechanischen Scan
+## Сигнальные паттерны для механического сканирования
 
-| Klasse | Suchmuster (DE) | Suchmuster (EN) |
+| Класс | Паттерн поиска (DE) | Паттерн поиска (EN) |
 | --- | --- | --- |
-| Chat-Residue | „wie besprochen", „wie gewünscht", „hier ist", „gerne", „im Chat", „wie du sagtest", „lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
-| Platzhalter | `TODO`, `XXX`, `[…einfügen]`, `<…>`, „Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
-| LLM-Dank | „Dank an ChatGPT/Claude/Gemini", „mithilfe von KI erstellt" (außerhalb Disclosure) | "thanks to ChatGPT/Claude", "grateful to the AI" |
-| Stilmarker | „zusammenfassend lässt sich", „es ist wichtig zu betonen", „nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
+| Обрывки чата | "wie besprochen", "wie gewünscht", "hier ist", "gerne", "im Chat", "wie du sagtest", "lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
+| Заполнители | `TODO`, `XXX`, `[…einfügen]`, `<…>`, "Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
+| Благодарности LLM | "Dank an ChatGPT/Claude/Gemini", "mithilfe von KI erstellt" (вне раскрытия) | "thanks to ChatGPT/Claude", "grateful to the AI" |
+| Маркеры стиля | "zusammenfassend lässt sich", "es ist wichtig zu betonen", "nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
 
-Die Tabelle ist Startpunkt, kein Filter-Ersatz: Muster liefern Kandidaten, die Entscheidung
-fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-Scan,
-Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
-`encoding-fix`-Territorium, nicht dieses Skills.
+Таблица является отправной точкой, а не заменой фильтра: паттерны дают кандидатов, решение принимается в контексте (шаги 3–4). Для чисто механической текстовой гигиены (сканирование эмодзи, управляющие символы, поврежденные умлауты) используйте существующие инструменты — повреждения кодировки относятся к скиллу `encoding-fix`, а не к этому.
 
-## Пример и применение & Usage
+## Пример и применение
 
 ```text
-Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
+Запрос: «Проверь статью на наличие артефактов ИИ перед загрузкой.»
 
-1. Scope: paper_de.tex + paper_en.tex.
-2. Scan: 1× "as discussed" (EN, Abschnitt 4), 1× "[TODO: Referenz Smith]" (beide),
-   Danksagung erwähnt "wertvolle Hilfe von Claude".
-3. Lese-Pass: In der Einleitung ein Satz, der den Reviewer direkt adressiert
-   („Diesen Einwand behandeln wir wie gewünscht in 3.2") → Regieanweisung.
-4. Fixes: Regieanweisung gestrichen (Inhalt steckte schon in 3.2), TODO als Aufgabe
-   in TODO.md überführt + Platzhalter entfernt, LLM-Dank gestrichen, stattdessen
-   AI-Disclosure-Abschnitt auf tatsächlichen Einsatz präzisiert — alles in DE und EN.
-5. Vermerk: inhaltliche Änderung → neue Paperversion nötig, in TODO.md eingetragen.
+1. Объем: paper_de.tex + paper_en.tex.
+2. Сканирование: 1× "as discussed" (EN, раздел 4), 1× "[TODO: вставить ссылку Smith]" (в обоих),
+   в благодарностях упоминается «ценная помощь Claude».
+3. Чтение и анализ: Во введении предложение, напрямую адресованное рецензенту
+   («Мы рассматриваем это возражение, как и просилось, в 3.2») → режиссерское указание.
+4. Исправления: Режиссерское указание удалено (содержание уже было в 3.2), TODO перенесено
+   как задача в TODO.md + заполнитель удален, благодарность LLM удалена, вместо этого
+   раздел AI Disclosure уточнен относительно фактического использования — все в DE и EN.
+5. Заметка: Содержательное изменение → требуется новая версия статьи, внесено в TODO.md.
 ```
 
-## Red Flags
+## Красные флаги (Red Flags)
 
-| Gedanke | Realität |
+| Мысль | Реальность |
 | --- | --- |
-| „Ich schreibe den Text gleich flüssiger" | Substanz und Stimme gehören dem Autor — der Skill entfernt Fremdkörper, er poliert nicht. |
-| „Stilmarker gefunden → löschen" | Klasse 5 wird markiert, nicht automatisch umgeschrieben; nur eindeutige Formelhaftigkeit glätten. |
-| „Die deutsche Fassung reicht" | Residue sitzt oft nur in EINER Fassung — immer alle Sprachfassungen prüfen und synchron halten. |
-| „Disclosure raus, dann ist es sauber" | Falsch herum: LLM-Dank raus, korrekte Disclosure REIN — Verschleiern ist keine Hygiene. |
+| «Попутно сделаю текст более гладким» | Суть и голос принадлежат автору — скилл удаляет инородные тела, а не шлифует стиль. |
+| «Найден маркер стиля → удалить» | Класс 5 помечается, а не переписывается автоматически; сглаживать только явную шаблонность. |
+| «Немецкой версии достаточно» | Артефакты часто присутствуют только в ОДНОЙ версии — всегда проверяйте все языковые версии и синхронизируйте их. |
+| «Удалю Disclosure, и будет чисто» | Все наоборот: удалить благодарности LLM, добавить корректное AI Disclosure — сокрытие не является гигиеной. |
 
-## Verwandte Skills
+## Связанные скиллы
 
-- `encoding-fix` — Byte-/Encoding-Reparatur (Mojibake); dieser Skill hier arbeitet auf Inhaltsebene.
-- `bilingual-doc-sync` — Synchronhaltung der Sprachfassungen, in die Fixes eingepflegt werden.
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
+- `encoding-fix` — Ремонт байтов/кодировки (можибаке); этот скилл работает на уровне содержания.
+- `bilingual-doc-sync` — Поддержание синхронизации языковых версий, в которые вносятся исправления.
+- `rotation-check` — Каркас для периодических прогонов по репозиторию документов.
+- `textproduction` — Генерация текста (этот скилл является этапом QA после нее).
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-07-04)
-- Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"
-  (Chat-Anteile in Papern, LLM-Danksagungen, AI-Disclosure) und auf beliebige
-  Deliverable-Texte verallgemeinert; Prüfkatalog um Platzhalter, Stilmuster und
-  Scan-Signaltabelle erweitert.
+- Первоначальная версия. Абстрагировано из автоматизации Codex «research-llm-muster-check»
+  (фрагменты чата в статьях, благодарности LLM, AI Disclosure) и обобщено до произвольных
+  готовых текстов; каталог проверки расширен заполнителями, стилистическими паттернами и таблицей сигналов сканирования.

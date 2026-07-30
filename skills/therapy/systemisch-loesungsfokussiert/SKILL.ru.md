@@ -1,294 +1,306 @@
 ---
+name: systemisch-loesungsfokussiert
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-05-19
+updated: 2026-06-13
+description: Системные и ориентированные на решение методы: чудесный вопрос, шкалирование, исследование исключений, циркулярные вопросы, гипотетические вопросы, вопросы на ухудшение, вопросы на преодоление. Объединено из ориентированной на решение терапии и системных вопросов.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [sfbt, systemic, solution-focused, miracle-question, scaling, circular, questioning-techniques, de-shazer]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `systemisch-loesungsfokussiert`.
+> **Русский** — Официальная русская версия `systemisch-loesungsfokussiert`.
 
 
+# Системные и ориентированные на решение методы (Systemic & Solution-Focused Methods)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Чудесный вопрос, шкалирование, исключения, циркулярные вопросы, гипотетические вопросы — единый интегрированный навык
 
-
-# Systemic & Solution-Focused Methods (English)
-
-> Miracle question, scaling, exceptions, circular questions, hypothetical questions — one integrated skill
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Foundations
-
-### Solution-Focused Brief Therapy (SFBT)
-
-Developed by Steve de Shazer and Insoo Kim Berg at the Brief Family Therapy Center (Milwaukee).
-Core idea: instead of analyzing problems, work directly on solutions.
-"Problem talk creates problems, solution talk creates solutions" (de Shazer).
-
-**The three basic rules:**
-1. **"If it ain't broke, don't fix it"** — do not change what works
-2. **"If it works, do more of it"** — reinforce what succeeds
-3. **"If it doesn't work, do something different"** — change what does not help
-
-### Systemic perspective
-
-Problems do not arise within persons but in relationships and patterns between persons.
-Questions aim to broaden perspectives, make patterns visible, and open up new possibilities.
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The miracle question
+## Основы
 
-### Basic form
+### Ориентированная на решение краткосрочная терапия (ОРКТ / SFBT)
+
+Разработана Стивом де Шейзером и Инсу Ким Берг в Центре краткосрочной семейной терапии (Милуоки).
+Основная идея: вместо анализа проблем работать непосредственно над решениями.
+«Разговоры о проблемах порождают проблемы, разговоры о решениях создают решения» (де Шейзер).
+
+**Три базовых правила:**
+1. **«Если что-то работает — не чини это»** — не меняйте то, что приносит результат
+2. **«Если что-то работает — делай этого больше»** — подкрепляйте успешные действия
+3. **«Если что-то не работает — сделай что-то другое»** — меняйте то, что не помогает
+
+### Системный подход
+
+Проблемы возникают не внутри конкретных людей, а в отношениях и паттернах между ними.
+Вопросы направлены на расширение перспектив, проявление паттернов и открытие новых возможностей.
+
+**Примечание:** Это психообразование, а не замена профессиональной терапии.
+**Никогда не применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
+
+---
+
+## 1. Чудесный вопрос (The Miracle Question)
+
+### Базовая форма
 
 ```
-"Imagine that tonight, while you are asleep, a miracle happens.
-The problem that has been troubling you is solved.
-But you don't know it, because you were asleep.
+«Представьте, что сегодня вечером, пока вы спите, произойдет чудо.
+Проблема, которая вас беспокоила, решена.
+Но вы об этом не знаете, потому что спали.
 
-What would be the first thing tomorrow morning that tells you the miracle has happened?"
+Что будет первым, что вы заметите завтра утром, что подскажет вам: чудо произошло?»
 ```
 
-### Deepening follow-ups
+### Углубляющие вопросы
 
-**Sensory level:**
-- "What exactly would you do differently tomorrow morning?"
-- "How would you get up? What would you do first?"
-- "What would you feel when you open your eyes?"
+**Сенсорный уровень:**
+- «Что именно вы сделаете по-другому завтра утром?»
+- «Как вы встанете? Что сделаете в первую очередь?»
+- «Что вы почувствуете, открыв глаза?»
 
-**Relationship level:**
-- "How would your partner notice the miracle?"
-- "What would he/she see differently about you?"
-- "Who in your environment would notice it first?"
+**Уровень отношений:**
+- «Как ваш партнер заметит это чудо?»
+- «Что он/она увидит в вас нового?»
+- «Кто в вашем окружении заметит это первым?»
 
-**Fractions of the miracle:**
-- "Which part of this miracle is perhaps already happening a little bit?"
-- "On a scale from 0 to 10 — how far are you already toward the miracle?"
+**Фракции (фрагменты) чуда:**
+- «Какая часть этого чуда уже немного происходит в вашей жизни?»
+- «По шкале от 0 до 10 — насколько далеко вы уже продвинулись к чуду?»
 
-### Shortened variants
+### Сокращенные варианты
 
-- "If the problem were gone tomorrow — what would be different?"
-- "What would your ideal everyday life look like?"
-- "If everything were the way you wish — what would you be doing?"
+- «Если бы проблема исчезла завтра — что было бы по-другому?»
+- «Как выглядел бы ваш идеальный день?»
+- «Если бы все было так, как вы желаете, — чем бы вы занимались?»
 
 ---
 
-## 2. Scaling techniques
+## 2. Техники шкалирования
 
-### Basic structure
+### Базовая структура
 
-"On a scale from 0 to 10, where 0 is [pole A] and 10 is [pole B] — where are you right now?"
+«По шкале от 0 до 10, где 0 — это [полюс А], а 10 — это [полюс Б], — где вы находитесь прямо сейчас?»
 
-### Variants
+### Варианты
 
-| Type | Example question |
+| Тип | Пример вопроса |
 |------|------------------|
-| **State scaling** | "How burdened do you feel right now?" |
-| **Coping scaling** | "How well do you manage your everyday life despite the problem?" |
-| **Confidence scaling** | "How confident are you that you can make progress?" |
-| **Progress scaling** | "Where were you a week / a month ago?" |
-| **Relationship scaling** | "Where on the scale would your partner rate your relationship?" |
+| **Шкалирование состояния** | «Насколько тяжело вы себя чувствуете прямо сейчас?» |
+| **Шкалирование справления (coping)** | «Насколько хорошо вы справляетесь с повседневной жизнью, несмотря на проблему?» |
+| **Шкалирование уверенности** | «Насколько вы уверены, что сможете продвинуться вперед?» |
+| **Шкалирование прогресса** | «Где вы находились неделю / месяц назад?» |
+| **Шкалирование отношений** | «На какой балл ваш партнер оценил бы ваши отношения?» |
 
-### The "one point higher" trick
+### Прием «На один балл выше»
 
-Always ask only about the next point — never about the end goal.
+Всегда спрашивайте только про следующий балл — никогда про конечную цель.
 
 ```
-"What would be different at a 6 compared to the current 5?"
-"What could you do TOMORROW that moves you toward a 6?"
+«Что было бы иначе на 6 баллах по сравнению с текущими 5?»
+«Что вы могли бы сделать ЗАВТРА, чтобы продвинуться к 6?»
 ```
 
-### Follow-up questions (essential!)
+### Уточняющие вопросы (крайне важны!)
 
-- "What has kept you from being at 0?" (resource activation)
-- "What would have to happen for you to move one point higher?" (small-step solution orientation)
-- "How would you notice that you are at [target value]?" (concretization)
+- «Что удержало вас от того, чтобы оказаться на 0?» (активация ресурсов)
+- «Что должно произойти, чтобы вы поднялись на один балл выше?» (ориентация на решения мелкими шагами)
+- «Как вы поймете, что находитесь на [целевом значении]?» (конкретизация)
 
 ---
 
-## 3. Exception exploration
+## 3. Исследование исключений
 
-### Principle
+### Принцип
 
-Exceptions are moments in which the problem does not occur or occurs less.
-They already contain working solution elements.
+Исключения — это моменты, когда проблема не возникает или проявляется слабее.
+Они уже содержат работающие элементы решения.
 
-### Systematic search
+### Систематический поиск
 
-**Phase 1 — Find:**
-- "When was it recently a bit better — even minimally?"
-- "Are there days when the problem is less intense?"
+**Фаза 1 — Найти:**
+- «Когда в последнее время было немного лучше — хотя бы минимально?»
+- «Бывают ли дни, когда проблема менее интенсивна?»
 
-**Phase 2 — Describe in detail:**
-- "Describe that moment as precisely as possible"
-- "What was different about that day?"
+**Фаза 2 — Подробно описать:**
+- «Опишите этот момент как можно точнее»
+- «Что было по-другому в тот день?»
 
-**Phase 3 — Recognize one's own contribution:**
-- "What did YOU contribute to it being better?"
-- "What decision did you make?"
+**Фаза 3 — Признать свой вклад:**
+- «Что именно ВЫ сделали для того, чтобы стало лучше?»
+- «Какое решение вы приняли?»
 
-**Phase 4 — Reinforce:**
-- "How could you deliberately repeat that?"
-- "What would be a first small step in that direction?"
+**Фаза 4 — Закрепить:**
+- «Как вы могли бы намеренно повторить это?»
+- «Каковым был бы первый маленький шаг в этом направлении?»
 
-### Types of exceptions
+### Типы исключений
 
-| Type | Description | Follow-up |
+| Тип | Описание | Дальнейшие шаги |
 |------|-------------|-----------|
-| Deliberate | The client consciously did something differently | "Do more of it!" |
-| Random | Something was different without conscious action | "What was different about the circumstances?" |
-| External | Others did something | "What could you do to make that more likely?" |
+| Намеренное | Клиент осознанно сделал что-то по-другому | «Делай этого больше!» |
+| Случайное | Что-то изменилось без осознанных действий клиента | «Что было иначе в обстоятельствах?» |
+| Внешнее | Другие сделали что-то по-другому | «Что вы можете сделать, чтобы это происходило чаще?» |
 
 ---
 
-## 4. Circular questions
+## 4. Циркулярные вопросы
 
-### Principle
+### Принцип
 
-Encourage perspective shifts — the person is invited to put themselves in others' positions and to recognize relationship patterns.
+Побуждать к смене перспективы — человеку предлагается встать на позицию другого и распознать паттерны отношений.
 
-### Basic structure
+### Базовая структура
 
-"What do you think — how does [person X] see/feel/judge this?"
+«Как вы думаете — как [человек X] видит/чувствует/оценивает это?»
 
-### Variants
+### Варианты
 
-**Relationship questions:**
-- "What do you think your partner thinks when you withdraw?"
-- "How would your best friend describe your relationship?"
-- "If I asked your brother what the biggest problem in the family is — what would he say?"
+**Вопросы об отношениях:**
+- «Как вы думаете, о чем думает ваш партнер, когда вы замыкаетесь в себе?»
+- «Как ваш лучший друг описал бы ваши отношения?»
+- «Если бы я спросил вашего брата, в чем главная проблема вашей семьи, — что бы он ответил?»
 
-**Difference questions:**
-- "Who in the family suffers most from the situation?"
-- "Who notices the change first?"
+**Вопросы о различиях:**
+- «Кто в семье больше всего страдает от сложившейся ситуации?»
+- «Кто первым заметит изменения?»
 
-**Agreement questions:**
-- "Would your partner agree with that?"
-- "Who in your environment sees it similarly to you?"
+**Вопросы о согласии:**
+- «Согласился бы с этим ваш партнер?»
+- «Кто в вашем окружении видит ситуацию так же, как и вы?»
 
-**Classification questions:**
-- "If you ranked your family members by who handles conflict best — what would the order be?"
-
----
-
-## 5. Hypothetical questions
-
-Open new thinking spaces, loosen rigid convictions, rehearse options for action.
-
-- "Suppose you just tried it — what could happen in the best case?"
-- "What would happen if you did the opposite of what you normally do?"
-- "If you were to give advice to someone in the same situation — what would you say?"
-- "If fear played no role — what would you do?"
-- "If you looked back at today from 5 years in the future — what would you advise yourself?"
+**Вопросы на ранжирование:**
+- «Если отранжировать членов семьи по тому, кто лучше справляется с конфликтами, — каков будет порядок?»
 
 ---
 
-## 6. Worsening questions (paradoxical intervention)
+## 5. Гипотетические вопросы
 
-Strengthen the sense of control: whoever can describe how to make the problem worse has influence — and can therefore also improve it.
+Открывают новое пространство мысли, размягчают жесткие убеждения, тестируют варианты действий.
 
-- "What could you do to make it guaranteed worse?"
-- "How could you make sure the argument escalates?"
-- "What would have to happen for everything to go completely wrong?"
-
-**Important:** NOT suitable in acute crisis, suicidality, or severe depression.
-
----
-
-## 7. Coping questions & resource comments
-
-- "How do you still manage to get up every day?"
-- "What keeps you going?"
-- "I am impressed that you are here despite the difficulties."
+- «Предположим, вы просто попробовали это — что может произойти в лучшем случае?»
+- «Что произошло бы, если бы вы сделали прямо противоположное тому, что делаете обычно?»
+- «Если бы вы давали совет человеку в такой же ситуации — что бы вы сказали?»
+- «Если бы страх не играл никакой роли — что бы вы сделали?»
+- «Если бы вы посмотрели на сегодняшний день из будущего через 5 лет — что бы вы себе посоветовали?»
 
 ---
 
-## Context-sensitive selection
+## 6. Вопросы на ухудшение (Парадоксальная интервенция)
 
-| Situation | Recommended technique | Rationale |
+Укрепляют чувство контроля: тот, кто может описать, как сделать проблему хуже, имеет на нее влияние — и, следовательно, может ее улучшить.
+
+- «Что вы могли бы сделать, чтобы гарантированно ухудшить ситуацию?»
+- «Как бы вы могли сделать так, чтобы ссора точно эскалировала?»
+- «Что должно произойти, чтобы все окончательно пошло не так?»
+
+**Важно:** НЕ подходит при остром кризисе, суицидальном риске или тяжелой депрессии.
+
+---
+
+## 7. Вопросы на преодоление (Coping questions) и поддержка ресурсов
+
+- «Как вам удается вставать каждый день, несмотря на все сложности?»
+- «Что помогает вам продолжать двигаться дальше?»
+- «Я впечатлен(а) тем, что вы пришли сюда сегодня, несмотря на все трудности.»
+
+---
+
+## Контекстный выбор техник
+
+| Ситуация | Рекомендуемая техника | Обоснование |
 |---|---|---|
-| Person is stuck in the problem | Miracle question | Releases from the problem trance |
-| Progress not visible | Scaling questions | Makes small steps measurable |
-| Relationship conflicts | Circular questions | Enables perspective shifts |
-| "It is ALWAYS like this" | Exception questions | Breaks generalization |
-| Fear of change | Hypothetical questions | Risk-free trial thinking |
-| Helplessness / loss of control | Worsening questions | Shows one's own influence |
-| Unclear goals | Miracle question + scaling | Clarifies direction and starting point |
+| Человек застрял в проблеме | Чудесный вопрос | Выводит из проблемного транса |
+| Прогресс незаметен | Шкалирующие вопросы | Делает мелкие шаги измеримыми |
+| Конфликты в отношениях | Циркулярные вопросы | Позволяет сменить перспективу |
+| «Это ВСЕГДА так» | Вопросы об исключениях | Разрушает генерализацию |
+| Страх изменений | Гипотетические вопросы | Безопасное мысленное тестирование |
+| Беспомощность / потеря контроля | Вопросы на ухудшение | Показывает собственное влияние |
+| Неясные цели | Чудесный вопрос + шкалирование | Проясняет направление и точку старта |
 
 ---
 
-## Combination patterns
+## Паттерны комбинаций
 
-### Scaling + exception + small step
+### Шкалирование + Исключение + Маленький шаг
 
-1. "On a scale of 0-10, where are you right now?" → e.g. "4"
-2. "What has kept you from being at 0?" (resources!)
-3. "Were there moments when you were at 5 or higher?" (exceptions!)
-4. "What was different then?" (recognize patterns!)
-5. "What would be the smallest step to get from 4 to 5?" (action!)
+1. «По шкале от 0 до 10, где вы сейчас?» → например, «4»
+2. «Что удержало вас от того, чтобы оказаться на 0?» (ресурсы!)
+3. «Бывали ли моменты, когда вы были на 5 или выше?» (исключения!)
+4. «Что тогда было иначе?» (распознать паттерны!)
+5. «Каковым был бы самый маленький шаг, чтобы перейти с 4 на 5?» (действие!)
 
-### Miracle question + circular + scaling
+### Чудесный вопрос + Циркулярный + Шкалирование
 
-1. Ask the miracle question (create a target image)
-2. "Who would notice it first?" (circular — relationship context)
-3. "How far along are you already on the way to the miracle?" (scaling — progress)
+1. Задать чудесный вопрос (сформировать целевой образ)
+2. «Кто заметит это первым?» (циркулярный — контекст отношений)
+3. «Насколько далеко вы уже продвинулись по пути к чуду?» (шкалирование — прогресс)
 
-### Circular + hypothetical
+### Циркулярный + Гипотетический
 
-1. "What do you think — how does your boss see the situation?"
-2. "Suppose he said exactly that — what could you do then?"
-
----
-
-## Reflection questions for self-application
-
-- "What works well in my life — and how do I do that?"
-- "What is a small exception I could build on?"
-- "If the problem were gone tomorrow — what would I do first?"
-- "What have I managed before, even though it was hard?"
+1. «Как вы думаете — как ваш начальник видит эту ситуацию?»
+2. «Предположим, он сказал бы именно это, — что вы могли бы сделать тогда?»
 
 ---
 
-## Dos and Don'ts
+## Вопросы для рефлексии и самоприменения
 
-### Dos
-- **Ask openly** — no leading questions
-- **Stay curious** — the answer is more valuable than the question
-- **Allow pauses** — good questions need time
-- **Build on answers** — follow-up matters more than the next technique
-- **Phrase appreciatively** — "What did you succeed at?" instead of "What did you do wrong?"
-
-### Don'ts
-- **Do not interrogate** — max. 2-3 questions in a row, then reflect
-- **Not in acute crisis** — stabilize first, then explore
-- **Not as manipulation** — questions must be authentically curious
-- **Never use worsening questions with suicidality** — never
+- «Что работает хорошо в моей жизни — и как я это делаю?»
+- «Какое маленькое исключение я мог(ла) бы взять за основу?»
+- «Если бы проблема исчезла завтра — что бы я сделал(а) в первую очередь?»
+- «С чем я успешно справлялся(лась) раньше, даже когда было тяжело?»
 
 ---
 
-## Ethics and limits
+## Правила (Dos and Don'ts)
 
-**An AI assistant may:**
-- Explain and contextualize SFBT and systemic concepts
-- Guide the miracle question, exception exploration, and scaling
-- Ask circular and hypothetical questions
-- Ask reflection questions and point out resources
+### Dos (Рекомендуется)
+- **Задавать открытые вопросы** — никаких наводящих вопросов
+- **Сохранять искреннее любопытство** — ответ ценнее самого вопроса
+- **Давать паузы** — хорошим вопросам нужно время
+- **Опираться на ответы** — углубление важнее перехода к следующей технике
+- **Формулировать с уважением** — «В чем вы преуспели?» вместо «Что вы сделали не так?»
 
-**An AI assistant may NOT:**
-- Conduct or replace therapy
-- Trivialize persistent problems ("just think positive")
-- Brush over acute crises with solution orientation
-- Give relationship counseling that replaces professional therapy
-- Use worsening questions in fragile states
-
-**At signs of an acute crisis, ALWAYS refer to local emergency services and crisis hotlines** (in Germany e.g.: Telefonseelsorge 0800 111 0 111 / 0800 111 0 222, psychiatric emergency service 112, krisenchat.de).
+### Don'ts (Не рекомендуется)
+- **Не устраивать допрос** — макс. 2-3 вопроса подряд, затем отражение
+- **Не в остром кризисе** — сначала стабилизация, затем исследование
+- **Не использовать для манипуляции** — вопросы должны отражать подлинный интерес
+- **Никогда не применять вопросы на ухудшение при суицидальном риске** — никогда
 
 ---
 
-## References
+## Этика и ограничения
+
+**ИИ-ассистент может:**
+- Объяснять и контекстуализировать концепты ОРКТ и системного подхода
+- Направлять выполнение чудесного вопроса, поиска исключений и шкалирования
+- Задавать циркулярные и гипотетические вопросы
+- Задавать вопросы для рефлексии и указывать на ресурсы
+
+**ИИ-ассистент НЕ МОЖЕТ / НЕ ДОЛЖЕН:**
+- Проводить или заменять терапию
+- Обесценивать длительные проблемы («просто думай позитивно»)
+- Замазывать острые кризисы ориентацией на решения
+- Проводить парное консультирование, заменяющее профессиональную терапию
+- Использовать вопросы на ухудшение в хрупких состояниях
+
+**При признаках острого кризиса ВСЕГДА направляйте в местные экстренные службы и на линии кризисной помощи.**
+
+---
+
+## Литература
 
 - de Shazer, S. (1985). *Keys to Solution in Brief Therapy.* Norton.
 - de Shazer, S. (1988). *Clues: Investigating Solutions in Brief Therapy.* Norton.
@@ -301,13 +313,13 @@ Strengthen the sense of control: whoever can describe how to make the problem wo
 
 ---
 
-## Журнал изменений
+## История изменений
 
 ### 1.0.0 (2026-05-19)
-- Merged from `solution-focused-therapy` (v1.0.0) and `systemic-questioning` (v1.0.0)
-- All unique content of both sources integrated
+- Объединено из `solution-focused-therapy` (v1.0.0) и `systemic-questioning` (v1.0.0)
+- Интегрировано всё уникальное содержимое обоих источников
 
 ---
 
-*Merged from BACH v3.8.0 exports | Standalone version*
-*Not professional therapy — psychoeducation and reflection*
+*Объединено из экспортов BACH v3.8.0 | Автономная версия*
+*Не является профессиональной терапией — психообразование и рефлексия*

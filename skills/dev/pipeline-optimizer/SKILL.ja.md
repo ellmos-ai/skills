@@ -6,7 +6,7 @@ author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
 updated: 2026-06-13
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: [日本語] エージェントスキル: pipeline-optimizer: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
+description: 既存のパイプライン、個別プロジェクトフォルダ、ドキュメント構造、またはソフトウェアスタックを改善、刷新、再構築するための構造化された6段階の手順。「パイプライン最適化」（ソフトウェア、研究、ゲーム開発などのトピック全体のパイプライン対象）または「プロジェクトフォルダ最適化」（単一のソフトウェアツールや論文プロジェクトなど、パイプライン内の個別プロジェクトフォルダ対象）として呼び出し可能。「パイプラインXの改善」、「スタックの最適化」、「Yの再構築」、「リノベーション」、「パイプラインのリファクタリング」、「プロジェクトフォルダのクリーンアップ」、「フォルダ構造の改善」、「規約の統一」、「ドキュメント統合」、「既存システムへの統合」などのタスクで起動。現況構造の分析、目的の明確化、理想像のスケッチ、ギャップ計画、経験的課題の特定、新規サブエージェントによる再テストを提供。並行標準、重複、パイプラインの破損を防止。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,284 +16,280 @@ tags: [pipeline, renovation, refactoring, stack, workflow, lessons-learned]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `pipeline-optimizer`.
+> **日本語** — `pipeline-optimizer` の公式日本語版。
 
 
+# Pipeline Optimizer / Project-Folder Optimizer (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+**互換性の問題を発生させない6段階のリノベーション** — 2つのスケールに適用可能：
 
-
-# Pipeline Optimizer / Project-Folder Optimizer (English)
-
-**6-step renovation without incompatibilities** — applicable at two scales:
-
-| Trigger name | Scope | Example |
+| トリガー名 | スコープ | 例 |
 |---|---|---|
-| **Pipeline optimizer** | Whole pipelines, stacks, documentation structures | Your topic pipelines, e.g. `software/`, `research/`, `games/`, an agent system |
-| **Project-folder optimizer** | Individual project folders within a pipeline | A software tool, a paper project, a game project |
+| **Pipeline optimizer** | パイプライン全体、スタック、ドキュメント構造 | トピック全体のパイプライン（例：`software/`, `research/`, `games/`、エージェントシステム） |
+| **Project-folder optimizer** | パイプライン内の個別プロジェクトフォルダ | ソフトウェアツール、論文プロジェクト、ゲームプロジェクト |
 
-A **pipeline** here means a topic-oriented top-level structure in which multiple projects live under shared conventions (e.g. a software pipeline with release rules, a research pipeline with a publication procedure).
+ここでの **パイプライン** とは、共有規約のもとで複数のプロジェクトが存在するトピック指向のトップレベル構造を指します（例：リリースルールを持つソフトウェアパイプライン、公開手順を持つ研究パイプライン）。
 
-Both use the same 6-step workflow — the only difference is the **scope** (pipeline-wide vs. single project) and, accordingly, the depth of the building-stock survey in step A.
+両者とも同じ6段階のワークフローを使用します。唯一の違いは **スコープ**（パイプライン全体 vs. 単一プロジェクト）であり、それに応じてステップAでの既存構造調査の深さが変わります。
 
-## When this skill applies
+## このスキルが適用されるケース
 
-The skill applies as soon as you are asked to improve, rebuild, or extend an **existing** structure — not for greenfield construction. Concrete triggers:
+このスキルは、新規構築（グリーンフィールド）ではなく、**既存**の構造を改善、再構築、または拡張するよう求められた際に適用されます。具体的なトリガー：
 
-**Pipeline level** (scope: whole pipeline):
-- "Make pipeline X better"
-- "Optimize the stack"
-- "Renovate the software pipeline"
-- "Documentation consolidation in the research pipeline"
-- Substantial intervention in a topic pipeline, central `_tools/`, or system components
+**パイプラインレベル**（スコープ：パイプライン全体）：
+- 「パイプラインXを改善する」
+- 「スタックを最適化する」
+- 「ソフトウェアパイプラインを刷新する」
+- 「研究パイプラインにおけるドキュメントの統合」
+- トピックパイプライン、中央の `_tools/`、またはシステムコンポーネントへの大幅な変更
 
-**Project-folder level** (scope: single project folder):
-- "Clean up / optimize project folder X"
-- "Improve the folder structure in Y"
-- "Refactor a single tool"
-- "Unify a paper-project setup"
-- "Align a game project folder with the pipeline standard"
+**プロジェクトフォルダレベル**（スコープ：単一プロジェクトフォルダ）：
+- 「プロジェクトフォルダXのクリーンアップ／最適化」
+- 「Yのフォルダ構造を改善する」
+- 「単一ツールのリファクタリング」
+- 「論文プロジェクト設定の統一」
+- 「ゲームプロジェクトフォルダをパイプライン標準に合わせる」
 
-**Cross-cutting:**
-- "Rebuild X / integrate it into existing Y"
-- "Refactoring", "consolidation"
-- "Unify conventions"
-- "Integrate into an existing system"
+**横断的:**
+- 「Xを再構築／既存のYに統合する」
+- 「リファクタリング」、「統合」
+- 「規約の統一」
+- 「既存システムへの統合」
 
-## The building-stock metaphor
+## 既存建造物のメタファー
 
-Renovating a house first requires knowing **what it is made of** (stone, wood, plastic), **what it is for** (mountain hut, software forge), and **where it already fulfills functions**. The same discipline applies to pipelines.
+家をリノベーションするには、まず **それが何でできているか**（石、木材、プラスチック）、**何のためにあるか**（山小屋、ソフトウェア工房）、そして **どこがすでに機能しているか** を知る必要があります。同じ規律がパイプラインにも適用されます。
 
 ---
 
-## Procedure — 6 steps (do NOT skip, do NOT reorder)
+## 手順 — 6つのステップ（スキップ不可、順序変更不可）
 
-### Step A — Survey the building stock
+### ステップA — 既存構造の調査
 
-**Question:** What is the house made of?
+**問い:** 家は何でできているか？
 
-**Pipeline scope** (all root docs + tools + templates):
-- [ ] **Read all root documents completely** (not just snippets/insertion points)
-- [ ] Go through template folders (`_templates/`, `_TEMPLATES/`) and tool folders (`_tools/`)
-- [ ] Policy files: e.g. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, publication procedures, …
-- [ ] Status snapshots: e.g. PROJECT_STATUS.md, status overviews, releases.json, registry files
-- [ ] Checklists: e.g. release checklists, build/PDF checklists
-- [ ] Workflows: AGENTS.md, GUIDE.md, SKILL.md
-- [ ] Lessons-learned files: LESSONS_LEARNED.md, MEMORY.md, loop-state files
+**パイプラインスコープ**（すべてのルートドキュメント + ツール + テンプレート）：
+- [ ] **すべてのルートドキュメントを完全に読む**（スニペットや挿入ポイントだけでなく）
+- [ ] テンプレートフォルダ（`_templates/`, `_TEMPLATES/`）およびツールフォルダ（`_tools/`）の確認
+- [ ] ポリシーファイル：例 GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, 出版手順など
+- [ ] スナップショットファイル：例 PROJECT_STATUS.md, ステータス概要, releases.json, レジストリファイル
+- [ ] チェックリスト：例 リリースチェックリスト, ビルド／PDFチェックリスト
+- [ ] ワークフロー：AGENTS.md, GUIDE.md, SKILL.md
+- [ ] 経験教訓ファイル：LESSONS_LEARNED.md, MEMORY.md, ループ状態ファイル
 
-**Project-folder scope** (single-project substance + relevant pipeline conventions):
-- [ ] **Read all markdown and control files in the project folder** (README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, action plan, proof notes, …)
-- [ ] **Survey the code structure:** src/, tests/, build configuration (pyproject.toml, requirements.txt, project manifests, toolchain files, …)
-- [ ] **Take the parent pipeline's conventions into account** (e.g. for a software project: GitHub policy, naming system, release management, templates)
-- [ ] **Scan existing tools/scripts in the project** (`_tools/`, `_scripts/`, build_*.bat, START scripts)
-- [ ] **Configuration files:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
+**プロジェクトフォルダスコープ**（単一プロジェクトの実体 + 関連するパイプライン規約）：
+- [ ] **プロジェクトフォルダ内のすべてのMarkdownおよび制御ファイルを完全に読む**（README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, アクションプラン, 証明メモなど）
+- [ ] **コード構造の調査：** src/, tests/, ビルド構成（pyproject.toml, requirements.txt, プロジェクトマニフェスト, ツールチェーンファイルなど）
+- [ ] **親パイプラインの規約を考慮する**（例：ソフトウェアプロジェクトの場合：GitHubポリシー, 命名システム, リリース管理, テンプレート）
+- [ ] **プロジェクト内の既存ツール／スクリプトのスキャン**（`_tools/`, `_scripts/`, build_*.bat, STARTスクリプト）
+- [ ] **設定ファイル：** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
 
-**Anti-pattern:** Using `grep -l "<keyword>"` to find insertion points and inserting there without knowing the file's context.
+**アンチパターン:** ファイルのコンテキストを理解せずに `grep -l "<keyword>"` で挿入ポイントを探し、そこに挿入すること。
 
-**Output:** Inventory note with all relevant conventions, tools, and templates at the chosen scope.
+**成果物:** 選択したスコープにおける関連するすべての規約、ツール、テンプレートをまとめたインベントリメモ。
 
-### Step B — Identify the purpose
+### ステップB — 目的の特定
 
-**Question:** What does the house exist for?
+**問い:** 家は何のために存在するか？
 
-State the purpose explicitly in 1-2 sentences.
+目的を1〜2文で明確に記述します。
 
-**Pipeline examples:**
+**パイプラインの例：**
 
-| Pipeline | Purpose |
+| パイプライン | 目的 |
 |---|---|
-| Software pipeline | Develop, test, and release desktop apps + browser tools to stores/GitHub |
-| Research pipeline | Write scientific papers, peer-review them, publish to repositories/preprint servers |
-| Game pipeline | Develop games and publish them on the target platform |
-| Agent system | LLM system for multi-agent orchestration |
+| ソフトウェアパイプライン | デスクトップアプリ + ブラウザツールを開発・テストし、ストア／GitHubにリリースする |
+| 研究パイプライン | 科学論文を執筆・査読し、リポジトリ／プレプリントサーバーに公開する |
+| ゲームパイプライン | ゲームを開発し、ターゲットプラットフォームで公開する |
+| エージェントシステム | マルチエージェントオーケストレーションのためのLLMシステム |
 
-**Project-folder examples:**
+**プロジェクトフォルダの例：**
 
-| Project folder | Purpose |
+| プロジェクトフォルダ | 目的 |
 |---|---|
-| `software/PlannerApp` | Planning desktop app, commercial, private repo |
-| `research/CosmologyModel` | Model paper series + numerical computations |
-| `games/SortingChaos` | Sorting game, alpha stage, level progression |
+| `software/PlannerApp` | 計画用デスクトップアプリ、商用、プライベートリポジトリ |
+| `research/CosmologyModel` | モデル論文シリーズ + 数値計算 |
+| `games/SortingChaos` | ソートゲーム、アルファ段階、レベル進行 |
 
-The purpose **steers every intervention** — measures that do not serve the purpose are dropped.
+目的は **すべての介入を誘導します** — 目的を果たさない施策は破棄されます。
 
-### Step C — Sketch the ideal picture
+### ステップC — 理想像のスケッチ
 
-**Question:** What would a perfect house for this purpose look like?
+**問い:** この目的のための理想的な家とはどのようなものか？
 
-- Sketch it from your own perspective (short, max. 10 points)
-- Bring in a best-practice comparison (e.g. Vercel stack for SaaS, scientific-python stack for research)
-- Do not descend into detail optimization — a top-level sketch is enough
+- 自分自身の視点からスケッチする（簡潔に、最大10項目）
+- ベストプラクティスの比較を取り入れる（例：SaaSにはVercelスタック、研究にはscientific-pythonスタック）
+- 詳細な最適化に陥らない — トップレベルのスケッチで十分
 
-**Output:** 5-10 points "ideal state per pipeline"
+**成果物:** 5〜10項目の「パイプラインごとの理想状態」
 
-### Step D — Gap analysis + plan
+### ステップD — ギャップ分析 + 計画
 
-**Four questions per pipeline:**
+**パイプラインごとの4つの問い：**
 
-1. **What does the house already have?** — Even if solved differently from the ideal but **functionally equivalent**.
-   *Example:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
+1. **家にはすでに何があるか？** — 理想とは異なる解決策であっても、**機能的に同等**である場合を含む。
+   *例:* 理想では「サードパーティライセンス用にpip-licenses」とある。現実：カスタム生成スクリプトがそれをラップしている → 機能的に同等であり、変更不要。
 
-2. **What impedes the function?** — Existing structures that cause breaks or extra effort today.
+2. **何が機能を阻害しているか？** — 現在、破損や過剰な労力を引き起こしている既存の構造。
 
-3. **What is non-functional?** — Dead code, outdated conventions, unused tools.
+3. **何が機能していないか？** — デッドコード、時代遅れの規約、未使用のツール。
 
-4. **What would measurably improve functions?** — Concrete interventions with expected benefit.
+4. **何が機能を測定可能な形改善するか？** — 期待される利益を伴う具体的な介入。
 
-→ From this, a **concrete plan**:
-- What gets **newly built**?
-- What gets **extended**?
-- What gets **demolished**?
-- What stays **unchanged** (important to name!)
+→ これらから **具体的な計画** を作成：
+- 何を **新しく構築** するか？
+- 何を **拡張** するか？
+- 何を **撤コ（解体）** するか？
+- 何を **変更せずに維持** するか（明確に命名することが重要！）
 
-**Output:** Plan table with columns *Intervention* / *Existing* / *Measure* / *Rationale*
+**成果物:** 列 *介入* / *既存* / *施策* / *根拠* を持つ計画表
 
-### Step E — Work empirically
+### ステップE — 経験的作業
 
-Do not only plan top-down — collect pain points:
+トップダウンで計画するだけでなく、課題（ペインポイント）を収集します：
 
-- [ ] **Known bugs**: issue tracker, TASKS/TODO/DONE files
-- [ ] **Error history**: lessons-learned files, bugfix logs, check registries
-- [ ] **Automation breaks**: "What do I always have to do manually?"
-- [ ] **User interview**: ask specifically — pain points, wishes, workarounds
-- [ ] **Self-test**: walk through the pipeline (create a new project, run a build, simulate a release) — where does it break?
+- [ ] **既知のバグ**: イシュートラッカー、TASKS/TODO/DONEファイル
+- [ ] **エラー履歴**: 経験教訓ファイル、バグ修正ログ、チェックレジストリ
+- [ ] **自動化の破損**: 「いつも手動で行わなければならない作業は何か？」
+- [ ] **ユーザーインタビュー**: 具体的に尋ねる — 課題、要望、回避策
+- [ ] **セルフテスト**: パイプラインを実際に進めてみる（新規プロジェクトの作成、ビルドの実行、リリースのシミュレーション） — どこで破損するか？
 
-The empirically found pain points **prioritize the plan** from step D.
+経験的に見つかった課題が **ステップDの計画の優先順位を決定** します。
 
-### Step F — Retests after implementation
+### ステップF — 実施後の再テスト
 
-- [ ] Commission **fresh subagents** (unburdened by the renovation context) to walk through the changed workflow
-- [ ] **Measurable before/after values**: setup time, error rate, number of manual steps, build time
-- [ ] **Anti-regression check**: do existing workflows still work after the change?
-- [ ] If there is **no measurable improvement** or a regression: **roll back** the renovation or readjust
+- [ ] **フレッシュなサブエージェント**（リノベーションの文脈に囚われていない）を割り当て、変更されたワークフローを実行させる
+- [ ] **測定可能な事前／事後数値**: セットアップ時間、エラー率、手動ステップ数、ビルド時間
+- [ ] **防回帰チェック**: 変更後も既存のワークフローが正常に機能するか？
+- [ ] **測定可能な改善がない**、または回帰が発生した場合：リノベーションを **ロールバック** するか再調整する
 
-## Anti-patterns (forbidden)
+## アンチパターン（禁止事項）
 
-| Anti-pattern | Damage | Antidote |
+| アンチパターン | 弊害 | 対策 |
 |---|---|---|
-| Searching insertion points instead of reading docs | Parallel standards | Step A in full |
-| Transferring "best practice from X" 1:1 | Incompatibility | Step D compares functionally |
-| Creating a new file without checking conventions | Duplication (e.g. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Step A + step D |
-| Planning top-down without empirics | Solution misses the pain point | Step E before finalizing the plan |
-| Not testing your own change | Undetected regression | Step F with a fresh agent |
-| "Clarify later" with unclear status | User discovers the conflict afterwards | When unsure, walk step D through with the user again |
+| ドキュメントを読まずに挿入ポイントを探す | 並行標準の発生 | ステップAの完全実行 |
+| 「Xのベストプラクティス」を1:1で移植する | 不互換性 | ステップDで機能同等性を比較 |
+| 規約を確認せずに新規ファイルを作成する | 重複（例：NOTICE.md ↔ THIRD_PARTY_LICENSES.txt） | ステップA + ステップD |
+| 経験的データなしでのトップダウン計画 | 課題を解決できないソリューション | 計画確定前にステップEを実行 |
+| 自分の変更をテストしない | 未検知のデグレーション | フレッシュなエージェントでステップFを実行 |
+| 不明確な状態での「後で明確化」 | 後からユーザーがコンフリクトを発見 | 疑問がある場合はステップDをユーザーと再確認 |
 
-## Case study — the NOTICE.md incident
+## ケーススタディ — NOTICE.md インシデント
 
-**Assignment:** Implement pipeline improvements across several topic pipelines (software, research, games).
+**割り当て:** 複数のトピックパイプライン（ソフトウェア、研究、ゲーム）にわたってパイプライン改善を実施する。
 
-**Mistake:** Step A skipped — only insertion points searched instead of reading the full policy files.
+**失敗:** ステップAをスキップ — 完全なポリシーファイルを読まずに挿入ポイントのみを検索した。
 
-**Consequence:** `NOTICE.md` introduced as a "new license file" in 7 files, although `THIRD_PARTY_LICENSES.txt` + a custom license generator (wrapper around `pip-licenses`) were already established — documented in the pipeline's GitHub policy (mandatory files + license checklist). All software projects already had THIRD_PARTY files.
+**結果:** `THIRD_PARTY_LICENSES.txt` + カスタムライセンスジェネレータ（`pip-licenses` のラッパー）がすでに確立されていたにもかかわらず、7つのファイルに「新しいライセンスファイル」として `NOTICE.md` を導入してしまった。これはパイプラインのGitHubポリシー（必須ファイル + ライセンスチェックリスト）にドキュメント化されていた。すべてのソフトウェアプロジェクトにはすでに THIRD_PARTY ファイルが存在していた。
 
-**Detection:** Only after the user asked ("I'm fairly sure we already had rights management").
+**発覚:** ユーザーが尋ねた後に初めて判明（「権利管理はすでに存在していたと記憶しているが」）。
 
-**Correction:** NOTICE.md removed from the project template, 6 further files adjusted, the existing license generator referenced instead of `pip-licenses`.
+**修正:** プロジェクトテンプレートから NOTICE.md を削除し、他6ファイルを調整、`pip-licenses` の代わりに既存のライセンスジェネレータを参照させた。
 
-**Lesson:** Had step A been executed in full, the conflict would have been detected before writing.
+**教訓:** ステップAが完全に実行されていれば、執筆前にコンフリクトが検知されていた。
 
-## Rules of thumb
+## 経験則
 
-1. **For "improve the pipeline", first read as long as you write.**
-2. **No new standard without proof that no existing one exists.**
-3. **Use existing tools/wrappers instead of new parallel ones.**
-4. **"More of the same" is usually worse than "extend what exists".**
-5. **Rolling back on conflict** is always better than running two parallel standards.
+1. **「パイプラインの改善」においては、書く時間と同じくらいまず読むこと。**
+2. **既存の標準が存在しないという証明なしに、新しい標準を導入しない。**
+3. **新しい並行ツールではなく、既存のツール／ラッパーを使用する。**
+4. **「同じものの追加」は通常「既存の拡張」よりも悪手である。**
+5. **コンフリクト時のロールバック** は、2つの並行標準を維持するよりも常に望ましい。
 
-## Completion checklist
+## 完了チェックリスト
 
-Before reporting a pipeline renovation as "done":
+パイプラインリノベーションを「完了」と報告する前に：
 
-- [ ] Step A: all relevant root docs read?
-- [ ] Step B: pipeline purpose stated in 1-2 sentences?
-- [ ] Step C: ideal picture sketched (5-10 points)?
-- [ ] Step D: gap analysis with table (what stays / what is extended / what is new / what goes)?
-- [ ] Step E: empirics checked (bugs, lessons, self-test, user interview)?
-- [ ] Plan agreed with the user?
-- [ ] Step F: tested with a fresh subagent — improvement measurable?
-- [ ] No parallel standards introduced?
-- [ ] On conflicts: rolled back or honestly accounted for?
+- [ ] ステップA：関連するすべてのルートドキュメントを読み込んだか？
+- [ ] ステップB：パイプラインの目的を1〜2文で記述したか？
+- [ ] ステップC：理想像をスケッチしたか（5〜10項目）？
+- [ ] ステップD：表付きのギャップ分析（維持／拡張／新規／削除）を作成したか？
+- [ ] ステップE：経験的データを確認したか（バグ、教訓、セルフテスト、ユーザーインタビュー）？
+- [ ] 計画についてユーザーと合意したか？
+- [ ] ステップF：フレッシュなサブエージェントでテストし、改善が測定可能か？
+- [ ] 並行標準が導入されていないか？
+- [ ] コンフリクト発生時：ロールバックされたか、あるいは誠意を持って説明されたか？
 
-## Optimal project-folder structure (for the project-folder optimizer)
+## 最適なプロジェクトフォルダ構造（プロジェクトフォルダ最適化用）
 
-When the skill is applied to **a single project folder**, the following combined recommendation helps as an ideal reference (step C):
+スキルが **単一のプロジェクトフォルダ** に適用される場合、以下の統合された推奨事項が理想的な参照（ステップC）となります：
 
-### Anthropic standard (Claude Code)
+### Anthropic 標準 (Claude Code)
 
-| File/folder | Function |
+| ファイル／フォルダ | 機能 |
 |---|---|
-| `CLAUDE.md` (root) | Auto-loaded by Claude Code, project-specific instructions |
-| `.claude/settings.json` | Permissions, env vars, model selection (committed) |
-| `.claude/settings.local.json` | Local overrides (do NOT commit, add to `.gitignore`) |
-| `.claude/commands/*.md` | Custom slash commands |
-| `.claude/agents/*.md` | Custom subagents |
-| `.claude/skills/<name>/SKILL.md` | Project skills |
+| `CLAUDE.md` (ルート) | Claude Codeにより自動読み込み、プロジェクト固有の指示 |
+| `.claude/settings.json` | 権限、環境変数、モデル選択（Gitコミット対象） |
+| `.claude/settings.local.json` | ローカルオーバーライド（Gitコミット不可、`.gitignore` に追加） |
+| `.claude/commands/*.md` | カスタムスラッシュコマンド |
+| `.claude/agents/*.md` | カスタムサブエージェント |
+| `.claude/skills/<name>/SKILL.md` | プロジェクトスキル |
 
-### Your own project-docs template (recommended)
+### 独自のプロジェクトドキュメントテンプレート（推奨）
 
-If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Example split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
+独自のプロジェクトドキュメントテンプレート（例：`<workspace>/_templates/project-docs/`）を維持している場合、**3つの構築プロファイル** が効果的です。分割例：**MINIMAL** は、7つのルートファイル（`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`）と `_tools/` を含むセッションコアセットを提供します。**STANDARD** は `CHANGELOG.md`, `DECISIONS.md`, `PATTERNS.md` を追加します。**FULL** は14個のルートファイルに拡張し、さらに `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` ならびに `workflows/`, `.github/` を追加します。
 
-→ **Use such a template as the base for new projects** (copy instead of creating manually).
+→ **このようなテンプレートを新規プロジェクトのベースとして使用する**（手動作成ではなくコピー）。
 
-### Pipeline-specific additions (examples)
+### パイプライン固有の追加事項（例）
 
-Depending on the pipeline, further mandatory files come on top — typical patterns:
+パイプラインに応じて、さらに必須ファイルが追加されます — 典型的なパターン：
 
-- **Software project:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (generated), pyproject.toml/requirements.txt, entry in the pipeline's central release registry. → If available: use the pipeline's cookiecutter template.
-- **Research project:** concept document, action plan, publication plan, archive/source/result/data folders (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` for LaTeX. For proof projects: a proof-note file with the proof chain and status.
-- **Game project:** project manifest and toolchain files of the engine (e.g. for Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), game design document, `src/{server,client,shared}/` per engine convention.
+- **ソフトウェアプロジェクト:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt（自動生成）, pyproject.toml/requirements.txt、パイプラインの中央リリースレジストリへのエントリ。 → 利用可能な場合：パイプラインのcookiecutterテンプレートを使用。
+- **研究プロジェクト:** コンセプトドキュメント、アクションプラン、出版プラン、アーカイブ／ソース／結果／データフォルダ（`_archive/`, `_sources/`, `_results/`, `_data/`）、LaTeX用 `paper/`。証明プロジェクト用：証明チェーンとステータスを含む証明メモファイル。
+- **ゲームプロジェクト:** エンジンのプロジェクトマニフェストおよびツールチェーンファイル（例：Roblox/Rojoの場合：default.project.json, rokit.toml, wally.toml, selene.toml）、ゲームデザインドキュメント、エンジン規約に従った `src/{server,client,shared}/`。
 
-### Full detail reference
+### 詳細リファレンス
 
-→ See **`references/optimal-project-structure.md`** in this skill folder (German). Contains:
-- Example `settings.json` (Anthropic schema)
-- Mandatory `.gitignore` entries
-- Anti-patterns (what does NOT belong in project folders)
-- Recommended workflows per pipeline type (software/research/game)
-- YAML header convention for documentation files
-- Auto-check sketch
+→ このスキルフォルダ内の **`references/optimal-project-structure.md`** を参照（ドイツ語）。以下を含む：
+- `settings.json` の例（Anthropicスキーマ）
+- 必須の `.gitignore` エントリ
+- アンチパターン（プロジェクトフォルダに含まれるべきでないもの）
+- パイプラインタイプごとの推奨ワークフロー（ソフトウェア／研究／ゲーム）
+- ドキュメントファイルのYAMLヘッダー規約
+- 自動チェックのスケッチ
 
-## Related skills (when to use instead of this one?)
+## 関連スキル（このスキルの代わりに使用するタイミング）
 
-| Skill | When to use |
+| スキル | 使用タイミング |
 |---|---|
-| **`project-onboarding`** | Take an EXTERNAL existing repo into your own system |
-| Project bootstrapper (if available) | Create a NEW project in an existing pipeline (greenfield, no rebuild) |
-| Pipeline bootstrapper (if available) | Create a COMPLETELY NEW pipeline (rare case) |
-| System onboarding (if available) | Set up a new machine |
+| **`project-onboarding`** | 外部の既存リポジトリを自身のシステムに取り込む |
+| Project bootstrapper (利用可能な場合) | 既存パイプライン内に新しいプロジェクトを作成する（新規開発、再構築なし） |
+| Pipeline bootstrapper (利用可能な場合) | 完全に新しいパイプラインを作成する（稀なケース） |
+| System onboarding (利用可能な場合) | 新しいマシンをセットアップする |
 
-The **pipeline optimizer** is responsible for **renovation**, not new construction or adoption. If your skill collection has a skill index, search it for matching bootstrapping skills.
+**pipeline optimizer** は **リノベーション** を担当し、新規構築や導入は担当しません。スキルコレクションにスキルインデックスがある場合は、一致するブートストラップスキルを検索してください。
 
-## Cross-references
+## 相互参照
 
-- Detail reference: `references/optimal-project-structure.md` (in this skill folder)
-- Anthropic Claude Code docs: `https://docs.claude.com/en/docs/claude-code`
-- If available: global user rules (e.g. a "renovations" section in your `~/CLAUDE.md`) and pipeline-specific stack descriptions
+- 詳細リファレンス：`references/optimal-project-structure.md`（このスキルフォルダ内）
+- Anthropic Claude Code ドキュメント：`https://docs.claude.com/en/docs/claude-code`
+- 利用可能な場合：グローバルユーザールール（例：`~/CLAUDE.md` 内の「リノベーション」セクション）およびパイプライン固有のスタック記述
 
-## Scope choice: pipeline vs. project folder
+## スコープの選択：パイプライン vs. プロジェクトフォルダ
 
-If it is unclear which scope is meant, **clarify before step A**:
+どちらのスコープを意味しているか不明な場合は、**ステップAの前に明確化** してください：
 
-| Clue | Scope |
+| ヒント | スコープ |
 |---|---|
-| "Improve the whole software pipeline" | Pipeline |
-| "Clean up the folder of tool X" | Project folder |
-| "Synchronize the central release registry" | Pipeline (central asset) |
-| "Refactor the AssetBuilder in game Y" | Project folder |
-| "Introduce a check convention pipeline-wide" | Pipeline |
-| "Create a check file in project Z" | Project folder |
+| 「ソフトウェアパイプライン全体を改善する」 | パイプライン |
+| 「ツールXのフォルダをクリーンアップする」 | プロジェクトフォルダ |
+| 「中央リリースレジストリを同期する」 | パイプライン（中央アセット） |
+| 「ゲームYの AssetBuilder をリファクタリングする」 | プロジェクトフォルダ |
+| 「パイプライン全体でチェック規約を導入する」 | パイプライン |
+| 「プロジェクトZにチェックファイルを作成する」 | プロジェクトフォルダ |
 
-At **project-folder scope**, additionally always briefly check the parent pipeline's conventions (step A extended) so the intervention stays compatible with the pipeline.
+**プロジェクトフォルダスコープ** では、変更がパイプラインとの互換性を維持できるよう、親パイプラインの規約も常に簡単に確認してください（ステップAの拡張）。
 
 ---
 
 ## 変更履歴
 
 ### 1.2.0 (2026-06-13)
-- First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged
+- スキルライブラリでの最初の公開：個人パス、具体的なパイプライン／プロジェクト名、およびプライベートスキルへの参照を汎用的な例に置換。手順自体（6つのステップ、アンチパターン、ケーススタディ、チェックリスト）は変更なし。
 
-### 1.1.1 (2026-06-01) and earlier
-- Internal versions (private skill directory, before publication)
+### 1.1.1 (2026-06-01) 以前
+- 内部バージョン（公開前のプライベートスキルディレクトリ）

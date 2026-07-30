@@ -5,7 +5,10 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [日本語] エージェントスキル: staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
+description: >
+  ディレクトリ階層を上下に検索して道標ドキュメント（CLAUDE.md、AGENTS.md、README.md、RULES.md）や
+  ユーザー設定可能なキーワード（staircase-config.json または config.json 経由）を探す
+  独立したナビゲーションおよびルーティング戦略。Up-and-Down Routing または Walking Bass Routing としても知られています。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,35 +17,38 @@ category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `staircase-routing`.
+> **日本語** — `staircase-routing` の公式日本語版。
 
+# Staircase-Routing (Up-and-Down / Walking Bass ルーティング)
 
+**Staircase-Routing** スキル（*Up-and-Down Routing* または *Walking Bass Routing* とも呼ばれます）は、AI エージェント向けのディレクトリドキュメント検証戦略を独立・隔離させたものです。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
-
-The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
-
-When an agent enters a directory or works on a file, it uses this strategy to locate authoritative context, rules, and signpost documents before modifying code or taking action.
-
----
-
-## 1. Signpost Document Standards
-
-By default, Staircase-Routing looks for standard signpost documents:
-- **Global & Project Controls:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
-- **Project Overview & Tasks:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
-- **Custom User Buzzwords:** Configured via `staircase-config.json` or `config.json`.
+エージェントがディレクトリに入ったりファイルを操作したりする際、コードの変更やアクションを実行する前に、この戦略を使用して信頼できるコンテキスト、ルール、および道標ドキュメントを特定します。
 
 ---
 
-## 2. Traversal Algorithm
+## 1. 道標ドキュメント規格
+
+デフォルトでは、Staircase-Routing は以下の標準的な道標ドキュメントを検索します:
+- **グローバルおよびプロジェクト制御:** `CLAUDE.md`、`AGENTS.md`、`START.md`、`RULES.md`
+- **プロジェクト概要およびタスク:** `README.md`、`TODO.md`、`NOTIZ.md`、`BEWEISNOTIZ.md`
+- **カスタムユーザーキーワード:** `staircase-config.json` または `config.json` 経由で設定。
+
+---
+
+## 2. トラバースアルゴリズム
 
 ```
                            [ Root / Workspace Level ]
@@ -60,24 +66,24 @@ By default, Staircase-Routing looks for standard signpost documents:
                            └────────────────────────┘
 ```
 
-### Step 1: Current Working Directory (CWD) Inspection
-- Inspect the directory of the target file or active working directory.
-- If signpost documents exist, read them immediately.
+### ステップ 1: カレントワーキングディレクトリ (CWD) の検証
+- ターゲットファイルのディレクトリまたはアクティブな作業ディレクトリを検証します。
+- 道標ドキュメントが存在する場合は、直ちに読み込みます。
 
-### Step 2: Upward Traversal (Staircase Up)
-- If **no** signpost document is found in CWD, move up to the parent directory (`..`).
-- Repeat step-by-step upward until a root signpost document (`CLAUDE.md` or `AGENTS.md`) or the workspace boundary is reached.
-- Read all discovered root signposts to establish global directives and project rules.
+### ステップ 2: 上方向へのトラバース (Staircase Up)
+- CWD 内に道標ドキュメントが**存在しない**場合、親ディレクトリ (`..`) へ移動します。
+- ルート道標ドキュメント (`CLAUDE.md` または `AGENTS.md`) またはワークスペースの境界に達するまで、段階的に上方向への移動を繰り返します。
+- 発見されたすべてのルート道標を読み込み、グローバルな指示およびプロジェクトルールを確立します。
 
-### Step 3: Downward Inspection (Staircase Down)
-- From the established root directory, step downward into child directories relevant to the task.
-- Discover specialized module-level signposts, domain rules, or component configs. Read them.
+### ステップ 3: 下方向への検証 (Staircase Down)
+- 確立されたルートディレクトリから、タスクに関連するサブディレクトリへ段階的に下ります。
+- モジュールレベルの専用道標ドキュメント、ドメインルール、またはコンポーネント設定を発見し、それらを読み込みます。
 
 ---
 
-## 3. User-Configurable Buzzwords (`staircase-config.json`)
+## 3. ユーザー設定可能なキーワード (`staircase-config.json`)
 
-Agents can read a local or global `staircase-config.json` to customize target signposts:
+エージェントはローカルまたはグローバルの `staircase-config.json` を読み込み、ターゲットとなる道標をカスタマイズできます:
 
 ```json
 {
@@ -109,6 +115,6 @@ Agents can read a local or global `staircase-config.json` to customize target si
 
 ---
 
-## 4. Integration with `letter-hooker` & Scheduled Tasks
+## 4. `letter-hooker` およびスケジュールタスクとの統合
 
-`staircase-routing` is embedded as a core preflight bootloader in the **`letter-hooker`** skill and the **`antigravity-kontext-and-workflow-loader-and-divider`** scheduled task, ensuring agents always locate and obey signpost documents before initiating edits.
+`staircase-routing` は、**`letter-hooker`** スキルおよび **`antigravity-kontext-and-workflow-loader-and-divider`** スケジュールタスクにコアプレフライトブートローダーとして組み込まれており、エージェントが編集を開始する前に常に道標ドキュメントを特定し遵守することを保証します。

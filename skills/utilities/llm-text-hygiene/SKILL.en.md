@@ -1,138 +1,100 @@
 ---
 language: en
+description: Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures.
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `llm-text-hygiene`.
-
+> **English** — Official English version of `llm-text-hygiene`.
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
+# LLM-Text-Hygiene — Remove AI residue from finished texts
 
 ## Overview & Purpose
 
-KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
-erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
-Regieanweisungen, die aus der Argumentationsstruktur herausfallen, Danksagungen an das
-Sprachmodell, stehengebliebene Platzhalter, aufdringliche LLM-Stilmuster — und eine
-AI-Disclosure, die fehlt, falsch platziert oder nicht mehr wahr ist. Dieser Skill ist der
-systematische Reinigungs-Pass davor: prüfen, konservativ bereinigen, Disclosure richtig
-stellen. **Er verändert nie die Substanz** — er entfernt, was nicht Teil des Werks ist.
+AI-assisted texts accumulate residue that remains invisible in draft form and only becomes embarrassing in the published document: snippets of conversation from the chat session, stage directions that break out of the argumentative structure, thank-yous to the language model, leftover placeholders, pushy LLM style patterns — and an AI disclosure that is missing, misplaced, or no longer true. This skill is the systematic cleaning pass before publishing: inspect, clean conservatively, correct the disclosure. **It never changes the substance** — it removes what is not part of the work.
 
-## Prüfkatalog
+## Audit Checklist
 
-Fünf Befundklassen, von eindeutig (direkt fixen) nach heikel (nur markieren):
+Five finding classes, from clear-cut (fix directly) to sensitive (mark only):
 
-### 1. Chat-Residue und Regieanweisungen (eindeutig → streichen/ausbessern)
+### 1. Chat Residue and Stage Directions (clear-cut → remove/fix)
 
-Sätze, die zur ENTSTEHUNG des Texts gehören, nicht zum Text: „Wie besprochen lassen wir
-diesen Teil im Paper, da …", „Hier ist der überarbeitete Abschnitt:", „Gerne ergänze
-ich …", übrig gebliebene Prompt-Fragmente, Meta-Kommentare an den Auftraggeber.
-**Erkennungsprinzip:** Der Satz fällt aus der Text- und Argumentationsstruktur heraus —
-er adressiert eine Gesprächssituation statt den Leser. Beim Streichen prüfen, ob ein
-inhaltlicher Rest gerettet werden muss (Begründung in Fußnote/Text überführen).
+Sentences that belong to the CREATION of the text, not to the text itself: "As discussed, we keep this part in the paper because...", "Here is the revised section:", "I'd be glad to add...", leftover prompt fragments, meta-comments to the client/requester.
+**Detection principle:** The sentence falls out of the text and argument structure — it addresses a conversation situation instead of the reader. When deleting, check if a substantive core needs to be saved (transfer explanation into a footnote/body text).
 
-### 2. Platzhalter und Baustellen-Marker (eindeutig → auflösen)
+### 2. Placeholders and Work-in-Progress Markers (clear-cut → resolve)
 
-`[TODO: …]`, `[Referenz einfügen]`, `XXX`, `<hier Beispiel>`, leere Abschnitte mit
-Überschrift, „(Quelle?)". Auflösen oder — wenn nicht auflösbar — als echte offene
-Aufgabe in die Projekt-TODO überführen und aus dem Deliverable entfernen.
+`[TODO: …]`, `[insert reference]`, `XXX`, `<example here>`, empty sections with headings, "(source?)". Resolve them or — if unresolvable — transfer them as open tasks into the project TODO and remove from the deliverable.
 
-### 3. LLM-Danksagungen und Anthropomorphes (eindeutig → entfernen)
+### 3. LLM Acknowledgments and Anthropomorphic Expressions (clear-cut → remove)
 
-Danksagungen an ChatGPT/Claude/Gemini & Co. gehören nicht in die Danksagung — Werkzeuge
-werden nicht bedankt, ihr Einsatz wird in der AI-Disclosure deklariert. Ebenso entfernen:
-anthropomorphe Formulierungen über das Werkzeug („die KI schlug freundlicherweise vor").
+Thanking ChatGPT/Claude/Gemini & Co. does not belong in the acknowledgments section — tools are not thanked, their usage is declared in the AI disclosure. Likewise, remove anthropomorphic phrasing about the tool ("the AI kindly suggested").
 
-### 4. AI-Disclosure (prüfen → korrigieren)
+### 4. AI Disclosure (verify → correct)
 
-- **Vorhanden?** Wenn das Dokument KI-gestützt entstand und Venue/Projekt eine Disclosure
-  verlangt oder vorsieht: existiert der Abschnitt?
-- **Korrekt?** Beschreibt sie den tatsächlichen Einsatz (nicht unter-, nicht übertrieben)?
-  Nutzt sie das Disclosure-Schema des Projekts/der Venue, falls eines definiert ist
-  (z. B. abgestufte Level)?
-- **Richtig platziert?** An der venue-üblichen Stelle (Methoden/Acknowledgements-Umfeld/
-  eigener Abschnitt), identisch in allen Sprachfassungen.
+- **Present?** If the document was created with AI assistance and the venue/project requires or foresees a disclosure: does the section exist?
+- **Correct?** Does it describe the actual usage (neither understated nor exaggerated)? Does it use the disclosure schema of the project/venue if defined (e.g., tiered levels)?
+- **Properly placed?** At the venue-standard location (methods/acknowledgments area/dedicated section), identical across all language versions.
 
-### 5. LLM-Stilmuster (heikel → nur klare Fälle fixen, Rest markieren)
+### 5. LLM Style Patterns (sensitive → fix clear cases only, mark the rest)
 
-Formelhafte Übergänge („Zusammenfassend lässt sich sagen", „Es ist wichtig zu betonen"),
-Aufzählungs-Inflation wo Fließtext hingehört, „nicht nur … sondern auch"-Ketten,
-Gedankenstrich-Dichte, Hedging-Floskeln, im Englischen die bekannten Marker (u. a.
-„delve", „tapestry", „it's worth noting"). **Vorsicht:** Stil ist Urheber-Territorium —
-nur eindeutige Formelhaftigkeit glätten, alles andere als Befundliste an den Autor geben
-statt den Text umzuschreiben. Ein menschlich klingender Text ist nicht das Ziel des
-Skills; das Ziel ist ein Text ohne Fremdkörper.
+Formulaic transitions ("In summary, it can be said", "It is important to emphasize"), bullet-point inflation where running text belongs, "not only ... but also" chains, em-dash density, hedging phrases, and in English, well-known markers (including "delve", "tapestry", "it's worth noting"). **Caution:** Style is author territory — smooth out only unambiguous formulaic phrasing; present everything else as a findings list to the author instead of rewriting the text. A human-sounding text is not the goal of the skill; the goal is a text free of foreign bodies.
 
-## Ablauf
+## Workflow
 
-1. **Scope klären:** Welche Deliverables (Dateien), welche Sprachfassungen? Änderungen
-   IMMER synchron über alle Fassungen (Abgleich: `bilingual-doc-sync`).
-2. **Mechanischer Scan:** Volltextsuche nach den Signal-Mustern (Tabelle unten) —
-   billig, findet Klasse 2/3 und Teile von 1 zuverlässig.
-3. **Lese-Pass:** Das Dokument entlang der Argumentationsstruktur lesen — Klasse-1-Funde
-   erkennt man nur strukturell (Satz adressiert Gespräch statt Leser). Besonders prüfen:
-   Abschnittsanfänge/-enden, Danksagungen, Einleitung/Fazit (dort landet Residue zuerst).
-4. **Bereinigen:** Klassen 1–3 direkt fixen (konservativ, Substanz erhalten), Klasse 4
-   korrigieren, Klasse 5 als Befundliste ausgeben; nur eindeutige Fälle direkt glätten.
-5. **Dokumentieren:** Was gefunden/geändert/nur markiert wurde — bei Papern mit
-   Versionierungspflicht vermerken, ob eine neue Version/ein Re-Upload nötig wird.
-6. **Periodisch über einen Bestand:** mit `rotation-check` kombinieren (ein Dokument/
-   Projekt pro Lauf, Registry als Gedächtnis).
+1. **Clarify scope:** Which deliverables (files), which language versions? ALWAYS apply changes synchronously across all versions (cross-check: `bilingual-doc-sync`).
+2. **Mechanical scan:** Full-text search for signal patterns (table below) — cheap, finds class 2/3 and parts of class 1 reliably.
+3. **Reading pass:** Read the document along the argument structure — class 1 findings are recognised structurally (sentence addresses conversation instead of reader). Check especially: section beginnings/ends, acknowledgments, introduction/conclusion (residue lands there first).
+4. **Clean up:** Fix classes 1–3 directly (conservatively, preserving substance), correct class 4, output class 5 as a findings list; smooth out directly only unequivocal cases.
+5. **Document:** Record what was found/changed/marked — for papers with versioning obligations, note whether a new version/re-upload is necessary.
+6. **Periodic pass over a repository:** Combine with `rotation-check` (one document/project per run, registry as memory).
 
-## Signal-Muster für den mechanischen Scan
+## Signal Patterns for Mechanical Scanning
 
-| Klasse | Suchmuster (DE) | Suchmuster (EN) |
+| Class | Search Pattern (DE) | Search Pattern (EN) |
 | --- | --- | --- |
-| Chat-Residue | „wie besprochen", „wie gewünscht", „hier ist", „gerne", „im Chat", „wie du sagtest", „lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
-| Platzhalter | `TODO`, `XXX`, `[…einfügen]`, `<…>`, „Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
-| LLM-Dank | „Dank an ChatGPT/Claude/Gemini", „mithilfe von KI erstellt" (außerhalb Disclosure) | "thanks to ChatGPT/Claude", "grateful to the AI" |
-| Stilmarker | „zusammenfassend lässt sich", „es ist wichtig zu betonen", „nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
+| Chat Residue | "wie besprochen", "wie gewünscht", "hier ist", "gerne", "im Chat", "wie du sagtest", "lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
+| Placeholders | `TODO`, `XXX`, `[…einfügen]`, `<…>`, "Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
+| LLM Thanks | "Dank an ChatGPT/Claude/Gemini", "mithilfe von KI erstellt" (outside disclosure) | "thanks to ChatGPT/Claude", "grateful to the AI" |
+| Style Markers | "zusammenfassend lässt sich", "es ist wichtig zu betonen", "nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
 
-Die Tabelle ist Startpunkt, kein Filter-Ersatz: Muster liefern Kandidaten, die Entscheidung
-fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-Scan,
-Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
-`encoding-fix`-Territorium, nicht dieses Skills.
+The table is a starting point, not a filter substitute: patterns deliver candidates; the decision is made in context (steps 3–4). For purely mechanical character hygiene (emoji scan, control characters, broken umlauts), use existing tools — encoding damage is `encoding-fix` territory, not this skill's.
 
-## Example & Usage
+## Example & Application
 
 ```text
-Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
+Request: "Check the paper for AI residue before upload."
 
 1. Scope: paper_de.tex + paper_en.tex.
-2. Scan: 1× "as discussed" (EN, Abschnitt 4), 1× "[TODO: Referenz Smith]" (beide),
-   Danksagung erwähnt "wertvolle Hilfe von Claude".
-3. Lese-Pass: In der Einleitung ein Satz, der den Reviewer direkt adressiert
-   („Diesen Einwand behandeln wir wie gewünscht in 3.2") → Regieanweisung.
-4. Fixes: Regieanweisung gestrichen (Inhalt steckte schon in 3.2), TODO als Aufgabe
-   in TODO.md überführt + Platzhalter entfernt, LLM-Dank gestrichen, stattdessen
-   AI-Disclosure-Abschnitt auf tatsächlichen Einsatz präzisiert — alles in DE und EN.
-5. Vermerk: inhaltliche Änderung → neue Paperversion nötig, in TODO.md eingetragen.
+2. Scan: 1× "as discussed" (EN, section 4), 1× "[TODO: insert reference Smith]" (both),
+   acknowledgments mention "valuable help from Claude".
+3. Reading pass: In the introduction, a sentence directly addressing the reviewer
+   ("We address this objection as requested in 3.2") → stage direction.
+4. Fixes: Stage direction deleted (content was already in 3.2), TODO transferred as a task
+   to TODO.md + placeholder removed, LLM thank-you deleted, instead
+   AI disclosure section clarified regarding actual usage — all in DE and EN.
+5. Note: Substantive change → new paper version required, entered into TODO.md.
 ```
 
 ## Red Flags
 
-| Gedanke | Realität |
+| Thought | Reality |
 | --- | --- |
-| „Ich schreibe den Text gleich flüssiger" | Substanz und Stimme gehören dem Autor — der Skill entfernt Fremdkörper, er poliert nicht. |
-| „Stilmarker gefunden → löschen" | Klasse 5 wird markiert, nicht automatisch umgeschrieben; nur eindeutige Formelhaftigkeit glätten. |
-| „Die deutsche Fassung reicht" | Residue sitzt oft nur in EINER Fassung — immer alle Sprachfassungen prüfen und synchron halten. |
-| „Disclosure raus, dann ist es sauber" | Falsch herum: LLM-Dank raus, korrekte Disclosure REIN — Verschleiern ist keine Hygiene. |
+| "I'll make the text flow better while I'm at it" | Substance and voice belong to the author — the skill removes foreign bodies, it does not polish style. |
+| "Style marker found → delete" | Class 5 is marked, not automatically rewritten; smooth out only unambiguous formulaic phrasing. |
+| "The German version is enough" | Residue often resides in only ONE version — always check all language versions and keep them in sync. |
+| "Remove disclosure, then it's clean" | Backwards: Remove LLM thank-yous, put correct disclosure IN — concealing is not hygiene. |
 
-## Verwandte Skills
+## Related Skills
 
-- `encoding-fix` — Byte-/Encoding-Reparatur (Mojibake); dieser Skill hier arbeitet auf Inhaltsebene.
-- `bilingual-doc-sync` — Synchronhaltung der Sprachfassungen, in die Fixes eingepflegt werden.
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
+- `encoding-fix` — Byte/encoding repair (mojibake); this skill works on the content level.
+- `bilingual-doc-sync` — Keeping language versions in sync where fixes are applied.
+- `rotation-check` — Scaffolding for periodic runs across a document repository.
+- `textproduction` — Text generation (this skill is the QA afterwards).
 
 ## Changelog
 
 ### 1.0.0 (2026-07-04)
-- Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"
-  (Chat-Anteile in Papern, LLM-Danksagungen, AI-Disclosure) und auf beliebige
-  Deliverable-Texte verallgemeinert; Prüfkatalog um Platzhalter, Stilmuster und
-  Scan-Signaltabelle erweitert.
+- Initial version. Abstracted from Codex automation "research-llm-muster-check"
+  (chat fragments in papers, LLM thank-yous, AI disclosure) and generalized to arbitrary
+  deliverable texts; audit catalog extended with placeholders, style patterns, and scan signal table.

@@ -2,78 +2,70 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `surface-after-care`.
+> **Русский** — Официальная русская версия `surface-after-care`.
 
+# Surface After Care — регулярное обслуживание опубликованного репозитория (Русский)
 
+## Когда применяется этот навык
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Используйте его для репозитория, который **уже публично доступен** и требует регулярного планового обслуживания. Это экономный уровень: всё, что можно решить в рамках самого репозитория, без инвентаризации сторонних репозиториев и без запроса юридической экспертизы.
 
+Разграничение со смежными навыками:
 
-> **English Translation** — Official English version of `surface-after-care`.
-
-
-# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo (English)
-
-## Wann dieser Skill greift
-
-Nutze ihn für ein Repository, das **bereits öffentlich ist** und turnusmäßig durchgesehen werden soll. Er ist die günstige Stufe: alles, was sich am Repo selbst entscheiden lässt, ohne fremde Repos zu inventarisieren oder ein Rechtsgutachten anzustoßen.
-
-Abgrenzung zu den Nachbarskills:
-
-| Situation | Skill |
+| Ситуация | Навык |
 |---|---|
-| Repo wird zum ersten Mal veröffentlicht | `github-repo-care` |
-| Repo ist public, regelmäßige Pflegerunde | **dieser Skill** |
-| Zusätzlich Rechtscheck + Querverweise über alle Orgas + App-i18n | `full-after-care` (Alias `deep-after-care`) |
-| Reine Rechts-/Privacy-/Lizenzprüfung vor dem Public-Stellen | `repo-publish-check` |
-| Sprachfassungen inhaltlich synchron halten | `bilingual-doc-sync` |
-| Verteilung dieser Runde über viele Repos, fair rotierend | `rotation-check` |
+| Репозиторий публикуется впервые | `github-repo-care` |
+| Репозиторий публичный, плановый раунд обслуживания | **этот навык** |
+| Дополнительная юридическая проверка + перекрёстные ссылки по всем организациям + i18n приложения | `full-after-care` (псевдоним `deep-after-care`) |
+| Чистая проверка права/приватности/лицензий перед публикацией | `repo-publish-check` |
+| Синхронизация содержания языковых версий | `bilingual-doc-sync` |
+| Распределение этого раунда по многим репозиториям в порядке ротации | `rotation-check` |
 
-## Kernidee
+## Основная идея
 
-Ein veröffentlichtes Repo driftet in zwei Richtungen auseinander: **Die Doku beschreibt eine ältere Software als die, die im Repo liegt**, und **es sammeln sich Dateien an, die nie für fremde Augen gedacht waren**. Beides ist selten dramatisch, aber beides kostet genau die Nutzer, die man gewinnen will — der eine springt ab, weil die Installationsanleitung nicht mehr passt, der andere, weil er im Wurzelverzeichnis auf `AUFGABEN.txt` und `Plan.txt` stößt und den Eindruck bekommt, hier arbeite jemand nur für sich selbst.
+Опубликованный репозиторий имеет тенденцию расходиться в двух направлениях: **документация описывает более старое программное обеспечение, чем то, которое находится в репозитории**, и **накапливаются файлы, никогда не предназначавшиеся для посторонних глаз**. Ни то, ни другое обычно не катастрофично, но отпугивает именно тех пользователей, которых вы хотите привлечь — один уходит из-за неработающих инструкций по установке, другой натыкается в корневом каталоге на `AUFGABEN.txt` или `Plan.txt` и получает впечатление, что здесь кто-то работает исключительно для себя.
 
-Diese Runde räumt beides auf. Sie ist bewusst wiederholbar: lieber viermal im Jahr eine halbe Stunde als einmal ein Großputz.
+Этот раунд устраняет обе проблемы. Он специально сделан воспроизводимым: лучше четыре раза в год по полчаса, чем одна генеральная уборка в год.
 
-## Ablauf
+## Порядок действий
 
-Die Reihenfolge ist nicht willkürlich. Schritt 0 steht am Anfang, weil er den Umfang aller folgenden Schritte bestimmt. Schritt 2 läuft vor allem, was Änderungen pusht — sonst schiebt man Verbesserungen über einen Stand, der erst noch bereinigt werden muss. Schritt 1 ist rein serverseitig und stört dabei nicht.
+Последовательность действий не случайна. Шаг 0 стоит в начале, так как он определяет объём всех последующих шагов. Шаг 2 выполняется перед любыми операциями, отправляющими изменения (push) — иначе улучшения накладываются на состояние, которое ещё требует очистки. Шаг 1 выполняется исключительно на стороне сервера и не создает помех.
 
-### 0. Distributionsflächen inventarisieren
+### 0. Инвентаризация площадок дистрибуции
 
-**Bevor irgendetwas geändert wird: klären, wo dieses Projekt überall liegt.** Das GitHub-Repo ist selten die einzige Fläche. Eine korrigierte README nützt wenig, wenn die npm-Paketseite weiter die alte Fassung mit der falschen Installationsanweisung zeigt — und genau dort landen die meisten Nutzer, denn Paketregister ranken in Suchmaschinen oft besser als das Repo.
+**Перед внесением каких-либо изменений: выясните, где именно размещён этот проект.** Репозиторий GitHub редко является единственной площадкой. Исправленный README малополезен, если страница пакета npm продолжает показывать старую версию с неверными инструкциями по установке — а именно туда попадает большинство пользователей, так как реестры пакетов часто ранжируются в поисковых системах выше самого репозитория.
 
 ```bash
-# Manifeste verraten die Kanäle (English)
+# Манифесты показывают каналы дистрибуции
 cat package.json pyproject.toml setup.py Cargo.toml 2>/dev/null | rg -n "name|version|keywords|repository|homepage"
 rg -n "npmjs.com|pypi.org|marketplace|registry|crates.io|hub.docker|zenodo|doi" README* docs/ .github/ 2>/dev/null
 
-# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft) (English)
-npm view <paket> version description keywords 2>/dev/null
-pip index versions <paket> 2>/dev/null
+# Запрос опубликованного состояния каналов (только применимые)
+npm view <пакет> version description keywords 2>/dev/null
+pip index versions <пакет> 2>/dev/null
 gh release list --repo ORG/REPO --limit 5
 ```
 
-Typische Flächen: npm, PyPI, Crates, Docker Hub, MCP-Registry, Plugin-/Skill-Verzeichnisse, VS-Code- oder Browser-Marketplaces, App-Stores, Zenodo/DOI, Projektwebsite, Organisationsprofil, `llms.txt`, Spiegel-Repos auf anderen Hosts.
+Типичные площадки: npm, PyPI, Crates, Docker Hub, реестр MCP, каталоги плагинов/навыков, маркетплейсы VS Code или браузеров, магазины приложений, Zenodo/DOI, сайт проекта, профиль организации, `llms.txt`, зеркала репозитория на других хостах.
 
-Notiere die gefundene Liste im Laufprotokoll. Sie ist ab jetzt die **Zielmenge**: Jede Änderung aus den folgenden Schritten wird am Ende gegen diese Liste gespiegelt (siehe „Parität über alle Flächen"). Findest du eine Fläche, die niemand mehr pflegt und die auf einen toten Stand zeigt, ist das ein eigener Befund — entweder aktualisieren oder bewusst zurückziehen, aber nicht stehen lassen.
+Зафиксируйте найденный список в журнале выполнения. Отныне он является **целевым множеством**: каждое изменение из следующих шагов в конце будет сопоставлено с этим списком (см. раздел «Паритет по всем площадкам»). Если вы обнаружите площадку, которую никто не поддерживает и которая указывает на заброшенное состояние, это отдельное замечание — либо обновите её, либо сознательно отозовите, но не оставляйте в заброшенном виде.
 
-### 1. Topics setzen
+### 1. Установка тегов (Topics)
 
-Topics sind die wichtigste Suchfläche innerhalb von GitHub und kosten fast nichts.
+Topics — это важнейшая поисковая поверхность внутри GitHub, не требующая почти никаких затрат.
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,description,repositoryTopics,homepageUrl,visibility
 gh repo edit ORG/REPO --add-topic <topic> --add-topic <topic>
 ```
 
-Ziel sind ungefähr 5–12 Topics aus drei Richtungen: **was es ist** (`cli`, `mcp-server`, `python-library`), **worum es geht** (`file-management`, `tax`, `note-taking`) und **wie es arbeitet** (`local-first`, `offline`, `privacy`). Orientiere dich an Topics, die bei vergleichbaren Projekten tatsächlich verwendet werden — erfundene Topics finden keine Nutzer. Description und Homepage gleich mitprüfen, sie stehen in derselben Ansicht.
+Цель — примерно 5–12 тегов с трёх точек зрения: **чем является** (`cli`, `mcp-server`, `python-library`), **о чём проект** (`file-management`, `tax`, `note-taking`) и **как работает** (`local-first`, `offline`, `privacy`). Ориентируйтесь на теги, реально используемые в аналогичных проектах — выдуманные теги не привлекут пользователей. Проверьте также Description и Homepage, они отображаются в том же представлении.
 
-Topics haben auf den anderen Flächen aus Schritt 0 ein Pendant: `keywords` in `package.json`, `keywords`/`classifiers` in `pyproject.toml`, Kategorien und Tags in Marketplaces und Stores. Halte sie inhaltlich gleich — sie sind dieselbe Entscheidung, nur an mehreren Orten.
+Теги имеют аналог на других площадках из шага 0: `keywords` в `package.json`, `keywords`/`classifiers` в `pyproject.toml`, категории и теги в маркетплейсах и магазинах. Поддерживайте их смысловую идентичность — это одно и то же решение, выраженное в разных местах.
 
-### 2a. Privacy-Gate — läuft immer
+### 2a. Проверка приватности (Privacy Gate) — выполняется всегда
 
-Dieser Schritt entfällt nie, auch nicht bei einer scheinbar harmlosen Runde. Gesucht wird im **getrackten** Set, nicht im sichtbaren Arbeitsbaum, denn genau das ist der Unterschied zwischen "sieht sauber aus" und "ist sauber".
+Этот шаг никогда не пропускается, даже при кажущемся безобидным раунде. Поиск выполняется по **отслеживаемому (tracked)** множеству файлов Git, а не по абсолютному рабочему дереву, так как именно в этом заключается разница между «выглядит чисто» и «является чистым».
 
 ```bash
 git ls-files
@@ -81,361 +73,344 @@ rg -n "C:\\\\Us[e]rs\\\\|/home/[a-z]|s[k]-[A-Za-z0-9]{16}|gh[p]_|gh[o]_|AKIA[0-9
 rg -n "\x{C3}\x{83}|\x{C2}\x{A0}|\x{FFFD}" $(git ls-files -- '*.md' '*.txt' '*.json')
 ```
 
-Ergänze das Muster um die **Namen deiner eigenen internen Ablagen** — Pipeline-Ordner, Themenverzeichnisse, private Arbeitsbereiche:
+Дополните шаблон **названиями ваших собственных внутренних папок** — папок пайплайнов, тематических каталогов, приватных рабочих областей:
 
 ```bash
-rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<weitere eigene Ordnernamen>" $(git ls-files)
+rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<другие имена внутренних папок>" $(git ls-files)
 ```
 
-Solche Verweise sind keine Secrets und lösen keinen Alarm aus, deshalb rutschen sie durch — aber sie sind für Leser **unauflösbar** („zurückübertragen aus der .SOFTWARE-Pipeline" sagt Fremden nichts) und geben die eigene Struktur preis. Sie werden ersetzt oder entfernt, nicht bloß toleriert. Eine Suche, die nur nach `C:\Users\…` und Token-Mustern fahndet, findet sie garantiert nicht.
+Такие ссылки не являются секретами и не вызывают срабатывания сканеров, поэтому они проскакивают — но они **нераскрываемы** для внешних читателей («перенесено из конвейера .SOFTWARE» ничего не говорит постороннему) и раскрывают внутреннюю структуру. Их следует заменить или удалить. Поиск, отслеживающий только `C:\Users\…` и шаблоны токенов, их гарантированно не найдёт.
 
-Fündig geworden? Dann entscheidet die **Art** des Fundes über das Vorgehen — siehe Abschnitt „Force-Push-Regel". Ein Secret, das jemals committet wurde, ist verbrannt: Entfernen aus `HEAD` genügt nicht, es muss rotiert werden.
+Что-то найдено? Тогда **тип** находки определяет порядок действий — см. раздел «Правило Force Push». Секрет, который хотя бы раз был закоммичен, скомпрометирован: удаления из `HEAD` недостаточно, требуется ротация.
 
-### 2b. Veröffentlichungsabsicht der Dokumente prüfen
+### 2b. Проверка намерения публикации документов
 
-Der eigentliche Kern dieser Runde. Gehe die getrackten `.md`, `.txt` und `.json` durch und frage bei jeder Datei: **War die je für Fremde gedacht?**
+Самая суть этого раунда. Пройдитесь по отслеживаемым файлам `.md`, `.txt` и `.json` и задайте вопрос по каждому файлу: **Предназначался ли он когда-либо для внешних пользователей?**
 
 ```bash
 git ls-files -- '*.md' '*.txt' '*.json' | sort
 ```
 
-Nicht anhand des Dateinamens raten — kurz hineinsehen. Ein `PLAN.md` kann eine öffentliche Roadmap sein, ein harmlos klingendes `notes.md` die interne Preisstrategie. Drei Kategorien:
+Не угадывайте по имени файла — бегло загляните внутрь. Файл `PLAN.md` может быть публичной дорожной картой, а безобидный на вид `notes.md` — внутренней стратегией ценообразования. Три категории:
 
-**Gehört ins Repo** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, API-Referenzen, Beispiel-Configs, echte Roadmaps, Manifeste (`package.json`, `pyproject.toml`), Lockfiles, CI-Konfiguration.
+**Относится к репозиторию** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, ссылки на API, примеры конфигураций, реальные дорожные карты, манифесты (`package.json`, `pyproject.toml`), локфайлы, конфигурация CI.
 
-**Gehört nicht ins Repo, ist aber unkritisch** — der Normalfall dieser Runde. Aufgaben- und Planungsdateien (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), Session-Notizen und Übergaben (`HANDOFF`, `BRIEFING`, `_handoff/`), Statusdateien der eigenen Pipeline, Entwicklungstagebücher, `_archive/`, Registry- und Index-JSONs mit lokalen Pfaden, Zwischenstände und generierte Artefakte, Agenten-Arbeitsdateien. Solche Dateien sind nicht gefährlich, aber sie erzeugen Unübersichtlichkeit und den Eindruck einer fremden Baustelle. Behandlung: `.gitignore` ergänzen, `git rm --cached <datei>` und **ganz normal pushen**.
+**Не относится к репозиторию, но не содержит чувствительных данных** — стандартный случай для этого раунда. Файлы задач и планирования (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), заметки сессий и передачи дел (`HANDOFF`, `BRIEFING`, `_handoff/`), файлы состояния внутренних конвейеров, дневники разработки, `_archive/`, JSON-файлы реестров и индексов с локальными путями, промежуточные состояния и сгенерированные артефакты, рабочие файлы агентов. Такие файлы не опасны, но они создают беспорядок и впечатление неряшливой стройки. Обработка: добавить в `.gitignore`, выполнить `git rm --cached <файл>` и **отправить обычным push**.
 
-**Gehört nicht ins Repo und ist heikel** — Credentials, personenbezogene Daten, Kundendaten, interne Kalkulationen, Preis- und Verhandlungsstrategien, unveröffentlichte Geschäftspläne, Vertragsentwürfe, alles mit Wettbewerbswert. Hier reicht ein normaler Commit nicht, siehe Force-Push-Regel.
+**Не относится к репозиторию и содержит чувствительные данные** — учетные данные, персональные данные, данные клиентов, внутренние калькуляции, стратегии цен и переговоров, неопубликованные бизнес-планы, проекты договоров, всё с коммерческой ценностью. Здесь обычного коммита недостаточно, см. Правило Force Push.
 
-Bei `.json` lohnt ein zweiter Blick: Manifeste und Lockfiles bleiben, aber lokale Configs, Task-/Registry-Dateien, Export-Dumps und alles mit absoluten Pfaden oder Hostnamen sind typische blinde Passagiere.
+Для `.json` стоит сделать повторную проверку: манифесты и локфайлы остаются, но локальные конфиги, файлы задач/реестров, дампы экспорта и всё с абсолютными путями или именами хостов являются типичными «безбилетниками».
 
-Wenn du eine Datei entfernst, die jemand suchen könnte (eine Roadmap etwa), erwähne im Commit oder im README kurz, wo die Information jetzt lebt — sonst wirkt es wie ein Rückschritt.
+Если вы удаляете файл, который кто-то может искать (например, дорожную карту), кратко упомяните в коммите или в README, где теперь находится эта информация — иначе это выглядит как регрессия.
 
-### 3. Banner
+### 3. Баннер
 
-Ein Banner entscheidet mit darüber, ob jemand überhaupt anfängt zu lesen. Prüfe, ob eines existiert und im README als erstes Element eingebunden ist.
+Баннер определяет, начнёт ли посетитель читать страницу. Проверьте, существует ли он и включен ли как первый элемент в README.
 
-Fehlt es, gibt es drei Wege — in dieser Reihenfolge sinnvoll:
+Если он отсутствует, есть три пути (в следующем порядке приоритета):
 
-1. **Bildgenerator eines Agenten** (z. B. agy; das Wort „generiere" ist dort der Trigger für echte PNG-Erzeugung), wenn ein Bildmotiv besser passt als Typografie.
-2. **Codex**, wenn das Banner aus Code entstehen soll und ein Stilvorbild existiert, an dem es sich orientieren kann.
-3. **Selbst als SVG**, wenn das Banner primär Wortmarke plus Formsprache ist — das ist oft die schnellste und am besten kontrollierbare Variante, und SVG bleibt später änderbar.
+1. **Генератор изображений агента** (например, agy; слово «сгенерируй» является триггером для создания настоящего PNG), если визуальный мотив подходит лучше тиспографики.
+2. **Codex**, если баннер должен быть создан из кода и существует образец стиля.
+3. **Собственный SVG**, если баннер представляет собой в первую очередь текстовый логотип и фирменный стиль — это часто самый быстрый и управляемый вариант, а SVG легко редактировать в дальнейшем.
 
-Halte die Familie ein, wenn das Projekt zu einer Gruppe gehört: gleiche Grundfarbe, gleiche Ästhetik, gleiche Wortmarken-Behandlung. Ein Banner, das aus der Reihe fällt, wirkt schlechter als keines. Übliche Größe 1200x300; als PNG ins Repo, das SVG als Quelle daneben.
+Соблюдайте стиль семейства, если проект принадлежит к группе: единый базовый цвет, единая эстетика, единая подача логотипа. Выбивающийся из общего стиля баннер выглядит хуже, чем его отсутствие. Обычный размер 1200x300; PNG коммитится в репозиторий, исходный SVG сохраняется рядом.
 
-### 4. Aussagen gegen den echten Stand abgleichen
+### 4. Сверка заявлений с реальным состоянием
 
-Hier entsteht der meiste Wert. Das README behauptet Dinge — prüfe sie nach, statt sie zu glauben:
+Здесь создаётся наибольшая ценность. README содержит утверждения — проверьте их вместо того, чтобы верить на слово:
 
-- **Version** im README/Badge gegen `pyproject.toml`/`package.json`/`__version__` und gegen den letzten Release-Tag. Bei mehreren Versionsträgern alle prüfen, nicht nur einen.
-- **Installationsweg** wirklich durchspielen, zumindest lesend: Existiert das Paket unter dem genannten Namen? Stimmen Kommandos und Flags?
-- **Feature-Liste** gegen den Code: Ist alles Genannte da, und fehlt Neues in der Liste?
-- **Zahlen** (Anzahl Tools, unterstützte Formate, Testabdeckung) an der Quelle nachzählen statt fortzuschreiben. Zahlen im README veralten still.
-- **Screenshots** gegen die aktuelle Oberfläche.
-- **Requirements** (Python-/Node-Version, Abhängigkeiten) gegen die Manifeste.
-- **Links** auf Nachbarprojekte, Doku und Registries: laufen sie noch?
+- **Версия** в README/значке сверяется с `pyproject.toml`/`package.json`/`__version__` и с последним тегом релиза. Если источников версии несколько, проверьте все.
+- **Инструкция по установке**: реально проверьте шаги (как минимум прочтением): Существует ли пакет под указанным именем? Верны ли команды и флаги?
+- **Список функций** сверяется с кодом: Всё ли упомянутое на месте, и не отсутствуют ли новые функции в списке?
+- **Числовые показатели** (количество инструментов, поддерживаемые форматы, покрытие тестами): пересчитайте в источнике. Числа в README молча устаревают.
+- **Скриншоты** сверяются с текущим интерфейсом.
+- **Требования** (версии Python/Node, зависимости) сверяются с манифестами.
+- **Ссылки** на соседние проекты, документацию и реестры: работают ли они?
 
-**Eine Korrektur gilt für alle Flächen, nicht nur für die, auf der sie auffiel.** Wenn sich eine inhaltliche Aussage als falsch erweist — besonders wenn der Auftraggeber sie richtigstellt —, dann steht dieselbe Aussage mit hoher Wahrscheinlichkeit noch anderswo: im Organisationsprofil, in der `llms.txt`, in der zweiten Sprachfassung, im README eines Nachbarprojekts. Suche gezielt danach, bevor du den Punkt abhakst:
+**Исправление применяется ко всем площадкам, а не только к той, где оно замечено.** Если утверждение оказывается ложным — особенно при уточнении от владельца проекта —, то то же самое утверждение с высокой вероятностью присутствует в других местах: в профиле организации, в `llms.txt`, во второй языковой версии, в README соседнего проекта. Выполните целевой поиск, прежде чем закрыть пункт:
 
 ```bash
-gh search code "<prägnante Formulierung>" --owner ORG
+gh search code "<характерная формулировка>" --owner ORG
 ```
 
-Sonst korrigierst du eine Stelle und lässt drei stehen — und der Widerspruch fällt erst auf, wenn das nächste Repo an die Reihe kommt. Das kostet nicht nur Zeit, es beschädigt auch das Vertrauen in die Doku: Wer zwei Beschreibungen derselben Sache findet, glaubt keiner mehr.
+Иначе вы исправите одно место и оставите три — и противоречие всплывёт только при обслуживании следующего репозитория. Это не только тратит время, но и подрывает доверие к документации.
 
-Anschließend die **Darstellung** verbessern, wo sie schwach ist: lange Aufzählungen von Optionen werden als Tabelle lesbarer; Codeblöcke brauchen Sprach-Tags; eine Struktur- oder Ablaufübersicht ist als Mermaid-Diagramm oder ASCII-Baum schneller erfasst als in Prosa; die erste Bildschirmhöhe sollte Zweck, Installation und ein Nutzungsbeispiel zeigen, nicht Badges und Vorgeschichte. Wenn das README über ~400 Zeilen geht, lagere Details nach `docs/` aus und verlinke.
+Затем улучшите **подачу**, где она слаба: длинные списки опций становятся понятнее в виде таблиц; блокам кода нужны теги языка; обзор структуры или процессов нагляднее передаётся диаграммой Mermaid или деревом ASCII, чем прозой; первый экран должен показывать назначение, установку и пример использования, а не значки и предысторию. Если README превышает ~400 строк, вынесите детали в `docs/` и поставьте ссылки.
 
-**Sprachregel für READMEs:** Standard ist eine **englische `README.md`** plus **deutsche Zweitfassung**. Ausnahme: Der Gegenstandsbereich der Anwendung ist selbst deutsch (deutsches Recht, deutsches Steuer- oder Förderwesen, deutschsprachige Zielgruppe) oder es existiert bisher ausschließlich eine deutsche Fassung — dann bleibt Deutsch die Hauptsprache. Für jede weitere Sprache, die das Projekt bereits spricht, gehört eine eigene README-Fassung dazu. Halte dich an die im Repo schon verwendete Namenskonvention (`README_de.md`, `README.de.md`, `docs/README.de.md`) und erfinde keine zweite daneben. Verlinke die Fassungen gegenseitig in der Kopfzeile.
+**Правило языка для README:** Стандартом является **английский `README.md`** плюс **русская/немецкая вторая версия**. Исключение: доменная область приложения является локальной либо до сих пор существовала исключительно одна версия — тогда этот язык остаётся основным. Для каждого дополнительного языка, поддерживаемого проектом, создаётся собственная версия README. Придерживайтесь соглашения об именовании, уже используемого в репозитории (`README_ru.md`, `README.ru.md`, `docs/README.ru.md`), и не вводите параллельно второе. Перекрёстно связывайте версии ссылками в заголовке.
 
-### 6. Fehlende Standardsprachen anlegen
+### 6. Создание отсутствующих стандартных языковых версий
 
-Ergänze die READMEs, die von den **Standardsprachen** fehlen: Deutsch, Englisch, Spanisch, vereinfachtes Chinesisch, Japanisch, Russisch. Der Zweck ist Reichweite, deshalb gilt das vor allem für nutzernahe Projekte — bei einer entwicklernahen Bibliothek mit rein englischem Publikum ist eine russische README kein Gewinn, sondern nur weitere Pflegelast. Entscheide bewusst und halte die Entscheidung im Laufprotokoll fest, damit die nächste Runde sie nicht neu diskutiert.
+Добавьте README для отсутствующих **стандартных языков**: немецкий, английский, испанский, упрощенный китайский, японский, русский. Цель — охват, поэтому это касается прежде всего пользовательских проектов. Для библиотеки разработчика с исключительно англоязычной аудиторией русскоязычный README — это не плюс, а дополнительная обуза по обслуживанию. Принимайте осознанное решение и фиксируйте его в журнале выполнения.
 
-Neue Fassungen werden **befüllt, nicht angelegt und leer gelassen** — ein Stub mit „TODO: translate" ist schlechter als gar keine Datei, weil er Vollständigkeit vortäuscht. Inhaltliche Parallelität und Rückangleichung regelt `bilingual-doc-sync`; bei mehr als zwei Fassungen lohnt es sich, diesen Skill für den Abgleich hinzuzuziehen.
+Новые версии **заполняются переведённым содержимым, а не создаются пустыми** — заглушка с «TODO: translate» хуже отсутствия файла, так как создаёт ложную видимость полноты. Параллелизм содержания и обратную синхронизацию регулирует `bilingual-doc-sync`; при наличии более двух версий имеет смысл привлечь этот навык.
 
-### 7. Sichtbarkeit und Werbung
+### 7. Видимость и продвижение
 
-Ueberlege, welche Maßnahmen für **dieses** Projekt tatsächlich Nutzer bringen, und setze sie um:
+Подумайте, какие меры действительно приведут пользователей для **данного** проекта, и реализуйте их:
 
-- **Registries**, in die das Projekt technisch gehört: Paketregister (npm, PyPI), MCP-Registry, Plugin-/Skill-Verzeichnisse, Marketplaces.
-- **Kuratierte Listen** (`awesome-*` und thematische Sammlungen), sofern die Aufnahmekriterien wirklich erfüllt sind. Ein PR an eine Liste, deren Kriterien das Projekt verfehlt, kostet Reputation.
-- **Eigene Flächen**: Organisationsprofil, `llms.txt`, Projektwebsite, README des Oekosystems, Verweise aus verwandten eigenen Repos.
-- **Release-Notes** als Anlass: Ein Release ohne erzählte Neuerung wird nicht wahrgenommen.
+- **Реестры**, к которым проект технически относится: реестры пакетов (npm, PyPI), реестр MCP, каталоги плагинов/навыков, маркетплейсы.
+- **Курируемые списки** (`awesome-*` и тематические подборки), если критерии приёма действительно соблюдены. PR в список, критериям которого проект не соответствует, наносит вред репутации.
+- **Собственные площадки**: профиль организации, `llms.txt`, сайт проекта, README экосистемы, ссылки из связанных собственных репозиториев.
+- **Заметки о релизе (Release Notes)** как повод: релиз без рассказа о новшествах остаётся незамеченным.
 
-**Freigabe-Gate:** Alles, was nach außen geht — PRs an fremde Repos, Einträge in fremde Listen, Posts, Einreichungen — wird **vorgeschlagen und erst nach ausdrücklicher Freigabe ausgeführt**, sofern keine Dauerfreigabe für diesen Kanal existiert. Änderungen an eigenen Flächen brauchen dieses Gate nicht. Der Grund ist schlicht: Ein zurückgezogener PR an ein fremdes Repo ist öffentlich sichtbar und fällt auf das Projekt zurück.
+**Ворота одобрения (Approval Gate):** Всё, что выходит вовне — PR в чужие репозитории, записи в чужие списки, публикации, заявки — **предлагается и выполняется только после явного одобрения**, если для этого канала нет постоянного разрешения. Изменения на собственных площадках не требуют этого согласования. Причина проста: отозванный PR в чужой репозиторий публично виден и бросает тень на проект.
 
-### 8. Eintrag auf den Organisationsseiten
+### 8. Запись на страницах организации
 
-Zuerst die eigene Organisation: Ist das Repo im Profil-README (`ORG/.github` → `profile/README.md`) überhaupt aufgeführt, in der richtigen Rubrik, mit aktueller Beschreibung?
+Сначала собственная организация: внесен ли репозиторий в профильный README (`ORG/.github` → `profile/README.md`), в правильный ли раздел, с актуальным ли описанием?
 
 ```bash
 gh api user/orgs --jq '.[].login'
 ```
 
-Dann durch **alle** Organisationen gehen und je Organisation eine einzige Frage beantworten: Würde ein Besucher dieser Organisationsseite von diesem Repo profitieren? Meist lautet die Antwort nein — dann ist „nicht verlinken" das richtige Ergebnis und keine Lücke. Wo die Antwort ja lautet (thematische Nähe, gemeinsame Nutzer, ein Werkzeug, das die dortigen Projekte ergänzt), setze den Verweis mit einer Zeile, die den Nutzen erklärt, nicht nur den Namen nennt.
+Затем пройдите по **всем** организациям и ответьте на один вопрос по каждой: Получит ли посетитель этой страницы организации пользу от данного репозитория? Чаще всего ответ «нет» — тогда «не ссылаться» является правильным результатом, а не пробелом. Если ответ «да» (тематическая близость, общие пользователи, инструмент, дополняющий тамошние проекты), добавьте ссылку с одной строкой, объясняющей пользу, а не просто название.
 
-Das Profil liegt in einem eigenen Repo (`ORG/.github`). Änderungen dort werden mitgepflegt und gepusht — nach der Dirty-Tree-Regel aus Schritt 11.
+Профиль находится в отдельном репозитории (`ORG/.github`). Изменения там поддерживаются и отправляются по правилу грязного дерева из шага 11.
 
-### 10. Issues und Pull Requests
+### 10. Задачи (Issues) и Пул-реквесты (Pull Requests)
 
 ```bash
 gh issue list --repo ORG/REPO --state open --limit 50
 gh pr list --repo ORG/REPO --state open --limit 30
 ```
 
-Arbeite sie durch statt sie nur zu zählen:
+Обработайте их, а не просто посчитайте:
 
-- **Fixbare Bugs** direkt beheben — in dieser Runde ist der Kontext ohnehin geladen. Kleine, klar umrissene Fixes mit Test und Verweis auf die Issue-Nummer.
-- **Bereits erledigte Issues** schließen, mit einem Satz, was sie gelöst hat.
-- **Unklare Meldungen** brauchen eine gezielte Rückfrage (Version, Betriebssystem, Reproduktionsschritte).
-- **PRs**: Diff wirklich lesen, Tests laufen lassen, dann mergen oder begründet zurückmelden. Ein PR, der monatelang unbeantwortet liegt, kostet mehr Wohlwollen als eine höfliche Ablehnung.
-- **Stale-Fälle** auflösen statt weiterschleppen.
+- **Исправимые баги** исправляйте сразу — в этом раунде контекст всё равно загружен. Небольшие, чётко очерченные фиксы с тестами и ссылкой на номер Issue.
+- **Уже решённые Issue** закрывайте с описанием в одно предложение, что именно их решило.
+- **Неясные сообщения** требуют уточняющего вопроса (версия, ОС, шаги воспроизведения).
+- **PR**: прочтите Diff, запустите тесты, затем слейте (merge) или дайте аргументированный ответ. PR, висящий месяцами без ответа, приносит больше вреда, чем вежливый отказ.
+- **Застрявшие (stale) случаи** разбирайте, а не тяните дальше.
 
-**Freigabe-Gate:** Öffentliche Kommentare, Schließungen mit Begründung und Merges fremder Beiträge sind Kommunikation nach außen — vor der Ausführung vorlegen, sofern keine Dauerfreigabe besteht. Reine Code-Fixes im eigenen Repo sind davon nicht betroffen.
+**Ворота одобрения:** Публичные комментарии, закрытия с обоснованием и слияния чужих вкладов являются внешней коммуникацией — предоставляйте их перед выполнением, если нет постоянного разрешения. Чистые исправления кода в собственном репозитории этим не затрагиваются.
 
-### 11. Committen, pushen, verifizieren
+### 11. Коммит, пуш, верификация
 
-Die Runde endet nicht mit den Änderungen, sondern damit, dass sie **draussen sind**. Ein Arbeitsbaum voller ungepushter Verbesserungen ist das schlechteste Ergebnis: Die nächste Session — möglicherweise ein anderer Agent oder ein anderes Gerät — muss sich erst in einen fremden, halbfertigen Stand einarbeiten, und auf den öffentlichen Flächen hat sich nichts verbessert.
+Раунд заканчивается не изменениями, а тем, что они **опубликованы вовне**. Рабочее дерево, полное неотправленных улучшений — наихудший результат: следующая сессия (возможно, другой агент или устройство) должна сначала вникать в чужое полуготовое состояние, а на публичных площадках ничего не изменилось.
 
-Vor dem Push kurz absichern, was überprüfbar ist: Tests und Smokes laufen lassen, bei Doku-Änderungen die Links und die gerenderte Ansicht prüfen. Dann in **thematisch getrennten Commits** bündeln, statt alles in einen Sammel-Commit zu werfen — Aufräumen, Doku-Aktualisierung und Bugfixes sind drei verschiedene Dinge, und wer später einen davon zurückdrehen will, ist dankbar dafür:
+Перед push кратко проверьте то, что поддаётся проверке: запустите тесты и smoke-проверки, при изменениях документации проверьте ссылки и отрендеренный вид. Затем сгруппируйте в **тематически разделённые коммиты**, вместо того чтобы сваливать всё в один коммит — уборка, обновление документации и исправление багов являются тремя разными вещами:
 
 ```bash
-git add .gitignore && git rm --cached <interne dateien>
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
-git commit -am "docs: README auf aktuellen Stand (Version, Toolzahl, Screenshots)"
-git commit -am "fix: <Issue-Nummer> ..."
+git add .gitignore && git rm --cached <внутренние файлы>
+git commit -m "chore: убрать внутренние рабочие файлы из репозитория"
+git commit -am "docs: обновить README до текущего состояния (версия, число инструментов, скриншоты)"
+git commit -am "fix: <номер Issue> ..."
 
-git pull --rebase        # bei divergiertem Branch, vor dem Push
+git pull --rebase        # при расхождении веток, перед push
 git push
 ```
 
-Danach verifizieren statt annehmen: Remote-README in der gerenderten Ansicht, CI-Lauf, Release- und Tag-Stand.
+После этого верифицируйте вместо предположений: проверьте удалённый README в отрендеренном виде, прогон CI, состояние релизов и тегов.
 
 ```bash
 gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
-**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der mit Abstand häufigste Fall — bei dieser Repo-Familie an einem einzigen Tag **dreimal** getroffen — ist ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Prüfe das **zuerst**, bevor du irgendetwas an deinem Commit vermutest.
+**Если CI горит красным, хотя ваш коммит затрагивал только документацию**, причина почти никогда не в вас. Самый частый случай — в этом семействе репозиториев встретившийся **трижды** за один день — это **незафиксированный линтер без жёстко заданного набора правил**. Проверьте это **в первую очередь**, прежде чем подозревать свой коммит.
 
-Der Mechanismus: Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine ungepinnte Dependency (`ruff>=0.12`, oder gar keine Version), und fehlt eine explizite Regel-Auswahl (`[tool.ruff.lint] select = [...]`, bei fehlendem `pyproject.toml` eine eigene `ruff.toml`), dann folgt der Lint dem Default der **jeweils frisch installierten** Version. Ein neues Linter-Release verschiebt diesen Default, und eine unveränderte Codebasis wird rot. Die Verräter:
+Механизм: если в workflow выполняется `ruff check` (или flake8, eslint …) с незафиксированной зависимостью (`ruff>=0.12` или вообще без указания версии), и отсутствует явный выбор правил (`[tool.ruff.lint] select = [...]`, при отсутствии `pyproject.toml` — собственный `ruff.toml`), то линтер следует дефолтам **свежеустановленной** версии. Новый релиз линтера смещает этот дефолт, и неизменённая кодовая база становится «красной». Признаки:
 
-- Regel-Codes, die das Projekt nie hatte (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), teils in dreistelliger Zahl.
-- Der Bruch fällt oft **plattform-gespalten** aus: Runner mit gecachter älterer Version bleiben grün, frische werden rot.
-- Manchmal beanstandet eine Regel etwas Unbehebbares (`N999` den Paketnamen selbst) — sicheres Zeichen, dass sie nie Standard war.
+- Коды правил, которых в проекте никогда не было (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), иногда сотнями.
+- Сбой часто происходит **кроссплатформенно разрозненно**: раннеры с закэшированной старой версией остаются зелёными, свежие становятся красными.
+- Иногда правило бракует нечто неустранимое (`N999` само имя пакета) — верный признак, что оно никогда не было стандартом.
 
-Fix: den Regelsatz festschreiben, der vorher grün war — `select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults. Existiert kein `pyproject.toml`, lege eine `ruff.toml` an. Verifiziere gegen die **neue** Linter-Version selbst (installieren, ohne Config die Funde reproduzieren, mit Config „passed"). Die neuen Regeln kommen als **Aufgabe** ins Projekt — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter, wiederkehrender Befund: Ohne den Pin bricht die CI beim nächsten Linter-Release wieder, und zwar in **jedem** so konfigurierten Repo.
+Исправление: зафиксировать набор правил, который раньше был зелёным — `select = ["E4","E7","E9","F"]` являются классическими дефолтами ruff. Если `pyproject.toml` отсутствует, создайте `ruff.toml`. Проверьте на **новой** версии линтера (установить, без конфига воспроизвести находки, с конфигом подтвердить "passed"). Новые правила вносятся в проект как **задача** — осознанное принятие является рішенням, а не побочным эффектом обновления инструмента.
 
-Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
+Два случая, когда push **не** выполняется: если для проекта действует заморозка публикаций/сдачи, или если состояние объявлено незавершённым. И то, и другое — исключения с обоснованием; нормальный случай: закоммитить и запушить.
 
-Bei einer Veröffentlichungssperre wird die Runde nicht abgebrochen, sondern **umgeleitet**: auf einem eigenen Branch (`judging-hold/…`, `freeze/…`) lokal committen, den Hauptbranch unangetastet auf dem eingereichten Stand lassen, den Sperrgrund im Laufprotokoll vermerken und nach Aufhebung nachziehen. Wichtig ist dabei, konsequent zu sein: Gesperrt ist nicht nur `git push`, sondern **jede remote sichtbare Änderung** — Topics, Beschreibung, Homepage, Releases, Issue- und PR-Aktionen verändern das veröffentlichte Projekt genauso.
+При заморозке публикации раунд не отменяется, а **перенаправляется**: закоммитить локально в отдельной ветке (`judging-hold/…`, `freeze/…`), оставив главную ветку нетронутой в сданном состоянии, указать причину в журнале выполнения и догнать после снятия. Важно быть последовательным: заморозка касается не только `git push`, но и **любого удалённо видимого изменения** — теги, описание, домашняя страница, релизы, действия с Issue/PR меняют опубликованный проект точно так же.
 
-Existieren weitere Klone desselben Repos (zweites Gerät, Deploy-Kopie, Spiegel), ziehe sie unmittelbar nach dem Push nach. Ein Klon, der zehn Commits zurückliegt, produziert bei der nächsten Fehlersuche Diagnosen an einem Stand, den es nicht mehr gibt.
+Если существуют другие клоны этого репозитория (второе устройство, копия для деплоя, зеркало), подтяните их сразу после push. Клон, отстающий на десять коммитов, при следующей отладке выдаст диагностику по несуществующему состоянию.
 
-#### Änderungen an anderen Repos — Dirty-Tree-Ausnahme
+#### Изменения в других репозиториях — исключение грязного дерева (Dirty Tree)
 
-Diese Runde erzeugt regelmäßig Änderungen **außerhalb** des gepflegten Repos: eine Zeile im Organisationsprofil (Schritt 8), später in der tiefen Runde ein Rückverweis in einem verwandten Repo. Solche Änderungen werden ebenfalls committet und gepusht — ein unveröffentlichter Rückverweis ist kein Rückverweis.
+Этот раунд регулярно создаёт изменения **за пределами** обслуживаемого репозитория: строка в профиле организации (шаг 8), обратная ссылка в связанном репозитории. Такие изменения также коммитятся и пушатся — неопубликованная обратная ссылка ссылкой не является.
 
-Vor dem Anfassen eines fremden Repos kurz dessen Zustand prüfen:
-
-```bash
-git -C <pfad> status --porcelain
-```
-
-**Sauberer Arbeitsbaum** → Änderung vornehmen, in einem **eigenen, thematisch klaren Commit** (`docs: link <projekt>`) committen und pushen. Nicht mit den Commits des gepflegten Repos vermischen: Es ist ein anderes Repo mit eigener Historie und eigenen Lesern.
-
-**Dirty, aber die Fremdänderungen liegen in anderen Dateien** → die eigene Änderung ist trotzdem sauber machbar. Stage und committe **pfadgenau nur die eigene Datei**, damit fremde, ungeprüfte Arbeit nicht mitwandert:
+Перед изменением чужого репозитория кратко проверьте его состояние:
 
 ```bash
-git -C <pfad> add README.md
-git -C <pfad> commit -m "docs: link <projekt>"     # nur der gestagte Pfad
+git -C <путь> status --porcelain
 ```
 
-Aber **nicht pushen**. Der Commit ist lokal harmlos; ein Push wäre es nicht unbedingt: Du weißt nicht, worauf der andere Arbeitsstand hinausläuft — vielleicht wird er gerade amendiert, rebased oder anders geschnitten, und dein Commit zwingt ihn dazu, sich damit auseinanderzusetzen. Der lokale Commit sichert die Arbeit, ohne jemandem etwas aufzuzwingen; der Lauf, der sich später jenem Repo zuwendet, findet ihn vor und nimmt ihn mit.
+**Чистое рабочее дерево** → внести изменение, закоммитить в **отдельном, тематически чётком коммите** (`docs: link <проект>`) и запушить. Не смешивайте с коммитами обслуживаемого репозитория: это другой репозиторий со своей историей и читателями.
 
-**Dirty in genau der Datei, die du ändern müsstest** → nicht anfassen. Hier müsstest du auf einem fremden Zwischenstand aufsetzen und ihn mit-committen; den erst zu verstehen kostet mehr, als dieser eine Verweis wert ist.
+**Грязное дерево, но чужие изменения в других файлах** → ваше изменение всё равно можно сделать чисто. Сделайте Stage и закоммитьте **строго точечно только ваш файл**, чтобы чужая непроверенная работа не ушла вместе с ним:
 
-**Aktive Sperre (`LOCK*.txt`) im Ziel-Repo** → **zuerst den Lock lesen, statt ihn als pauschales Verbot zu behandeln.** Eine Sperre beschreibt ihren eigenen Umfang, und der ist oft enger als „gar nichts". Typische Fälle:
+```bash
+git -C <путь> add README.md
+git -C <путь> commit -m "docs: link <проект>"     # только staged-путь
+```
 
-- **Bearbeitungssperre** („hier arbeitet gerade jemand") → nichts anfassen, auch keine Nebendatei.
-- **Reine Veröffentlichungs-/Push-Sperre** (Einreichung, Judging, Freeze) → lokale Arbeit bleibt erlaubt, nur der Remote-Kontakt ist gesperrt. Dann auf einem eigenen Branch arbeiten und lokal committen; **remote-wirksame Schritte entfallen** — nicht nur der Push, sondern auch Topics, Beschreibung, Homepage, Releases und Issue-/PR-Aktionen, denn auch die verändern das veröffentlichte Projekt.
+Но **не пуште**. Локальный коммит безвреден; push — не обязательно: вы не знаете, к чему ведёт чужое рабочее состояние (возможно, его сейчас правят, переписывают через rebase), и ваш push заставит других разбираться с этим. Локальный коммит сохраняет работу, никому ничего не навязывая; прогон, который позже обратится к тому репозиторию, найдёт и заберёт его.
 
-Ein Lock, der nur den Push sperrt, als Komplettverbot zu lesen, kostet den gesamten lokalen Teil der Runde ohne Sicherheitsgewinn. Umgekehrt reicht es nicht, nur den Push zu unterlassen und trotzdem Metadaten zu ändern. Im Zweifel den Lock zitieren und nachfragen.
+**Грязное дерево именно в том файле, который нужно изменить** → не трогать. Здесь вам пришлось бы накладывать изменения поверх чужого промежуточного состояния и коммитить его вместе со своим; разбор той работы стоит дороже, чем эта ссылка.
 
-#### Der Wunsch darf nicht verloren gehen
+**Активная блокировка (`LOCK*.txt`) в целевом репозитории** → **сначала прочтите локфайлы, вместо того чтобы относиться к ним как к тотальному запрету.** Блокировка описывает свой объём, и он часто узкий. Типичные случаи:
 
-Wird die Änderung aus einem dieser Gründe **nicht** ausgeführt, wandert sie in die Aufgabenliste des Ziel-Repos — `AUFGABEN.txt`, `TODO.md` oder `TODO.txt`, je nachdem, was dort existiert. Ein Eintrag mit Datum, gewünschter Änderung und Grund:
+- **Блокировка редактирования** («здесь кто-то сейчас работает») → ничего не трогать, даже второстепенные файлы.
+- **Чистая блокировка публикации/push** (сдача, оценивание, заморозка) → локальная работа остаётся разрешённой, заблокирован только удаленный контакт. Работайте в отдельной ветке и коммитьте локально; **шаги с удалённым эффектом опускаются** — не только push, но и теги, описание, домашняя страница, релизы и действия с Issue/PR.
+
+Трактовка локфайла, запрещающего только push, как полного запрета, теряет всю локальную часть раунда без выигрыша в безопасности. И наоборот, недостаточно просто не пушить, продолжая менять метаданные. При сомнениях процитируйте локфайл и спросите.
+
+#### Намерение не должно потеряться
+
+Если изменение **не** выполняется по одной из этих причин, оно переносится в список задач целевого репозитория — `AUFGABEN.txt`, `TODO.md` или `TODO.txt`, в зависимости от того, что там существует. Запись с датой, желаемым изменением и причиной:
 
 ```markdown
-- [ ] [2026-07-24, after-care] Rückverweis auf <projekt> im README ergänzen
-      (übersprungen: README hatte uncommittete Fremdänderungen)
+- [ ] [2026-07-24, after-care] Добавить обратную ссылку на <проект> в README
+      (пропущено: в README были незакоммиченные чужие изменения)
 ```
 
-Das ist der Unterschied zwischen „verschoben" und „vergessen": Die Aufgabenliste liegt dort, wo der nächste Bearbeiter dieses Repos ohnehin hineinsieht — verlässlicher als ein Vermerk im Protokoll eines fremden Laufs. Existiert keine Aufgabenliste, lege keine an; dann genügt der offene Punkt im eigenen Laufprotokoll.
+В этом разница между «отложено» и «забыто»: список задач находится там, куда заглянет следующий разработчик — это надежнее записи в журнале чужого прогона. Если списка задач нет, не создавайте его; достаточно открытого пункта в собственном журнале выполнения.
 
-Bei einer **aktiven Sperre gilt auch das nicht** — dann wird die Datei nicht angefasst und der Vermerk bleibt im eigenen Laufprotokoll. Notiere ihn in beiden Fällen auch dort, damit die Rotation den offenen Punkt kennt.
+При **активной блокировке это правило также не применяется** — файл не трогают, и запись остаётся только в собственном журнале выполнения. Зафиксируйте её в обоих случаях, чтобы ротация знала об открытом пункте.
 
-Zum Schluss die Flächen aus Schritt 0 bedienen — siehe nächster Abschnitt.
+В завершение обновите площадки из шага 0 — см. следующий раздел.
 
-## Parität über alle Distributionsflächen
+## Паритет по всем площадкам дистрибуции
 
-Zum Abschluss der Runde gegen die Liste aus Schritt 0 gehen: **Jede Änderung, die ein Nutzer sehen würde, muss auf jeder Fläche ankommen, auf der er sie sucht.** Ein Repo, dessen npm-Seite eine andere Geschichte erzählt, ist schlechter dran als eines mit nur einer Fläche.
+В завершение раунда сверьтесь со списком из шага 0: **Каждое изменение, которое увидел бы пользователь, должно поступить на каждую площадку, где он может его искать.** Репозиторий, страница npm которого рассказывает другую историю, находится в худшем положении, чем репозиторий с единственной площадкой.
 
-Der entscheidende Mechanismus: **Paketregister zeigen die README des letzten Publish, nicht den aktuellen Repo-Stand.** Eine README-Korrektur wird auf npm oder PyPI erst mit einer neuen Version sichtbar. Wenn die Korrektur inhaltlich relevant ist (falsche Installation, falsche Version, veraltete Feature-Liste), gehört ein Patch-Release dazu — sonst bleibt der Fix wirkungslos.
+Решающий механизм: **Реестры пакетов показывают README последнего Publish, а не текущее состояние репозитория.** Исправление README становится видимым на npm или PyPI только с новой версией. Если исправление существенно по содержанию (неверная установка, неверная версия, устаревший список функций), требуется патч-релиз — иначе фикс останется неэффективным.
 
-| Fläche | Was dort gepflegt wird | Wie es ankommt |
+| Площадка | Что там поддерживается | Как поступает |
 |---|---|---|
-| npm | README, `description`, `keywords`, Repository-Link | Nur per `npm publish` (Patch-Version); Metadaten kommen aus `package.json` |
-| PyPI | README (`long_description`), Classifiers, Projekt-URLs | Nur per neuem Upload; Metadaten aus `pyproject.toml` |
-| MCP-Registry / Plugin-Verzeichnisse | Beschreibung, Version, Toolliste, Einstiegsdoku | Je nach Registry Manifest-Update oder erneute Einreichung |
-| Marketplace / Store | Beschreibung, Screenshots, Kategorien, Sprachfassungen | Über die jeweilige Verwaltungsoberfläche; Screenshots altern dort besonders schnell |
-| Docker Hub / Container-Registry | Beschreibung, Tags, Nutzungsbeispiel | Repository-Beschreibung plus neuer Tag |
-| Zenodo / DOI | Metadaten, Autoren, Version | In-Place-Edit für Metadaten, neue Version für Inhalte |
-| Website / Org-Profil / `llms.txt` | Kurzbeschreibung, Link, Positionierung | Direkt editierbar — die günstigsten Flächen, deshalb nie vergessen |
+| npm | README, `description`, `keywords`, ссылка на репозиторий | Только через `npm publish` (патч-версия); метаданные из `package.json` |
+| PyPI | README (`long_description`), Classifiers, URL проекта | Только через новый Upload; метаданные из `pyproject.toml` |
+| Реестр MCP / Каталоги плагинов | Описание, версия, список инструментов, вводная документация | В зависимости от реестра: обновление манифеста или повторная сдача |
+| Маркетплейс / Магазин | Описание, скриншоты, категории, языковые версии | Через соответствующую панель управления; скриншоты устаревают особенно быстро |
+| Docker Hub / Реестр контейнеров | Описание, теги, пример использования | Описание репозитория плюс новый тег |
+| Zenodo / DOI | Метаданные, авторы, версия | Прямое редактирование метаданных, новая версия для контента |
+| Сайт / Профиль Org / `llms.txt` | Краткое описание, ссылка, позиционирование | Прямое редактирование — самые дешёвые площадки, никогда не забывайте |
 
-Wenn eine Version angehoben wird, müssen **alle Versionsträger** gleichzeitig mitwandern: Manifest, Code-Konstante, README-Badge, Changelog, Release-Tag, `llms.txt`. Ein halb angehobener Versionsstand ist schwerer zu diagnostizieren als ein durchgängig alter.
+При поднятии версии **все носители версии** должны обновляться одновременно: манифест, константы кода, значки README, чейнджлог, релизный тег, `llms.txt`. Наполовину поднятая версия диагностируется сложнее, чем стабильно старая.
 
-Ist eine Aktualisierung auf einer Fläche gerade nicht möglich oder nicht sinnvoll (z. B. ein Release nur wegen eines Tippfehlers), halte das im Laufprotokoll fest, damit die nächste Runde die Abweichung nicht für ein Versehen hält.
+Если обновление на какой-то площадке сейчас невозможно или нецелесообразно (например, релиз только из-за опечатки), зафиксируйте это в журнале выполнения, чтобы следующий раунд не принял расхождение за оплошность.
 
-## Force-Push-Regel
+## Правило Force Push
 
-Der Standard ist **kein Force-Push**. Interne Planungsdateien nachträglich zu ignorieren rechtfertigt keine Historien-Umschreibung: Der Aufwand ist hoch, jeder Klon und jeder Fork bricht, offene PRs werden unbrauchbar — und der Gewinn ist gering, weil der Inhalt harmlos ist. Normaler Weg:
+Стандарт — **никаких Force Push**. Попадание внутренних файлов планирования в историю не оправдывает переписывание истории: затраты высоки, каждый клон и форк ломаются, открытые PR становятся непригодными — а выигрыш мал, так как контент безвреден. Обычный путь:
 
 ```bash
-git rm --cached <datei>            # aus dem Tracking, bleibt lokal erhalten
-# .gitignore ergänzen (English)
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
+git rm --cached <файл>            # из отслеживания, локально сохраняется
+# дополнить .gitignore
+git commit -m "chore: убрать внутренние рабочие файлы из репозитория"
 git push
 ```
 
-Die Historie umschreiben (und damit `--force-with-lease` pushen) ist nur bei **echten Leaks** gerechtfertigt: Credentials und Keys, personenbezogene oder Kundendaten, sowie Dokumente mit echtem Wettbewerbswert — interne Kalkulationen, Preisstrategien, unveröffentlichte Pläne, Vertragsinterna. In diesem Fall:
+Переписывание истории (и тем самым push с `--force-with-lease`) оправдано только при **реальных утечках (Leaks)**: учетные данные и ключи, персональные данные или данные клиентов, а также документы с реальной коммерческой ценностью — внутренние расчёты, стратегии цен, неопубликованные планы, детали договоров. В этом случае:
 
-1. Betroffene Secrets **zuerst rotieren** — die Historie ist zu diesem Zeitpunkt bereits kopiert, geforkt und in Caches. Rotation wirkt, Löschen nur kosmetisch.
-2. Historie bereinigen (`git filter-repo` oder BFG), `--force-with-lease` pushen.
-3. Forks und Caches prüfen; bei Bedarf GitHub-Support für verwaiste Objekte kontaktieren.
-4. Vorgang im Laufprotokoll festhalten: was, wann, welche Rotation.
+1. **Сначала смените (ротируйте) затронутые секреты** — история к этому моменту уже скопирована, зафоркана и попала в кэши. Ротация устраняет риск, удаление — лишь косметика.
+2. Очистите историю (`git filter-repo` или BFG), запушьте с `--force-with-lease`.
+3. Проверьте форки и кэши; при необходимости обратитесь в поддержку GitHub для удаления осиротевших объектов.
+4. Зафиксируйте операцию в журнале выполнения: что, когда, какая ротация.
 
-Im Zweifel zwischen „unkritisch" und „heikel": als heikel behandeln und vorlegen. Die Kosten sind asymmetrisch.
+При сомнениях между «некритично» и «чувствительно»: обращайтесь как с чувствительным и эскалируйте. Затраты асимметричны.
 
-## Befunde werden Aufgaben, nicht nur Protokollzeilen
+## Находки становятся задачами, а не просто строками в журнале
 
-Eine Pflegerunde findet regelmäßig mehr, als sie in derselben Runde beheben kann oder soll: eine fehlende Sprachfassung, ein Modernisierungsrückstand, eine Veröffentlichung, die nie stattgefunden hat. **Solche Befunde werden im Moment der Entdeckung zu Aufgaben** — sonst hängen sie im Protokoll eines abgeschlossenen Laufs, wo der nächste Bearbeiter des Projekts nicht hinsieht.
+Раунд обслуживания регулярно находит больше, чем может или должен исправить в рамках той же сессии: отсутствующая языковая версия, отставание в модернизации, публикация, которая так и не состоялась. **Такие находки в момент обнаружения становятся задачами** — иначе они зависнут в журнале завершённого прогона, куда следующий разработчик не заглянет.
 
-Die Aufgabe gehört in das **ordnerlokale Aufgabensystem des Projekts** — dorthin, wo derjenige nachschaut, der als Nächstes an diesem Projekt arbeitet. Typischerweise ist das `AUFGABEN.txt` oder `TODO.md` im Projektordner, und der liegt oft **nicht im Git-Klon**, sondern in der Ablage, in der die Planung lebt. Der Klon enthält den Code, der Projektordner die Steuerung; ein Eintrag im Klon, der beim nächsten `git clean` verschwindet, ist keine Aufgabe.
+Задача относится к **локальной системе задач проекта** — туда, куда заглянет тот, кто следующим будет работать над этим проектом. Обычно это `AUFGABEN.txt` или `TODO.md` в папке проекта, и она часто лежит **не в Git-клоне**, а в хранилище, где живёт управление проектом. Клон содержит код, папка проекта — управление; запись в клоне, которая исчезнет при следующем `git clean`, задачей не является.
 
-Drei Dinge dabei beachten:
+Обратите внимание на три вещи:
 
-1. **Interne Aufgabenliste von öffentlicher Roadmap trennen.** Ein `TODO.md` kann eine gepflegte öffentliche Roadmap sein — dann ist es kein Ablageplatz für interne Nacharbeit. Sieh hinein, bevor du anhängst: Findet sich dort eine Überschrift wie „Public roadmap", schreib in die interne Datei daneben (`AUFGABEN.txt`) und markiere sie als intern.
-2. **Bestehende Einträge prüfen, statt zu duplizieren.** Oft steht der Befund schon da. Dann wird er nicht neu angelegt, sondern **angereichert** — mit dem empirischen Beleg aus diesem Lauf („bestätigt: `--help` gibt vollständig deutsche Ausgaben aus"). Ein bekannter Punkt mit frischem Beweis ist wertvoller als ein zweiter Eintrag daneben.
-3. **Erledigtes mitschreiben.** Was die Runde behoben hat, gehört als abgehakter Punkt mit Commit-Hash dazu. Das erklärt der nächsten Runde, warum ein Befund verschwunden ist, und verhindert, dass sie ihn erneut „entdeckt".
+1. **Разделяйте внутренний список задач и публичную дорожную карту.** `TODO.md` может быть аккуратной публичной дорожной картой — тогда это не место для внутренних доработок. Загляните внутрь, прежде чем дополнять: если там есть заголовок «Public roadmap», пишите во внутренний файл рядом (`AUFGABEN.txt`) и помечайте как внутренний.
+2. **Проверяйте существующие записи вместо дублирования.** Часто замечание уже записано. Тогда оно не создаётся заново, а **обогащается** — эмпирическим подтверждением из этого прогона («подтверждено: `--help` выдаёт полностью русскоязычные сообщения»). Известный пункт со свежим доказательством ценнее второго продублированного рядом.
+3. **Записывайте выполненное.** То, что раунд исправил, вносится как отмеченный пункт с хэшем коммита. Это объясняет следующему раунду, почему замечание исчезло, и предотвращает его повторное «открытие».
 
-Formuliere die Aufgabe so, dass sie ohne den Kontext dieses Laufs verständlich ist: was gefunden wurde, warum es zählt, was der nächste Schritt wäre. „i18n unvollständig" ist keine Aufgabe; „Katalog enthält nur `status.title`, dort sind es/zh/ja/ru leer — erst CLI-Strings in den Katalog überführen, dann alle sechs Sprachen befüllen" ist eine.
+Сформулируйте задачу так, чтобы она была понятна без контекста данного прогона: что найдено, почему это важно, каков следующий шаг. «i18n неполная» — это не задача; «Каталог содержит только `status.title`, там es/zh/ja/ru пустые — сначала перенести строки CLI в каталог, затем заполнить все шесть языков» — это задача.
 
-## Laufprotokoll
+## Журнал выполнения (Run Log)
 
-Halte das Ergebnis in `_after-care/LOG.md` fest (der Ordner gehört in die `.gitignore` — er ist Pipeline-Material, kein Repo-Inhalt, genau nach der Regel aus Schritt 2b). Pro Lauf eine Zeile mit Datum, Stufe und den bewussten Entscheidungen:
+Зафиксируйте результат в `_after-care/LOG.md` (папка должна быть в `.gitignore` — это материал конвейера, а не содержимое репозитория, по шагу 2b). На каждый прогон одна строка с датой, уровнем и осознанными решениями:
 
 ```markdown
 ## 2026-07-24 — surface
-- Flächen: GitHub, npm (<paket>), MCP-Registry, Org-Profil, llms.txt
-- Topics: +local-first, +mcp-server; keywords in package.json angeglichen
-- Entfernt: AUFGABEN.txt, _handoff/ (gitignored, kein Force-Push nötig)
-- README: Version 0.9 -> 1.2 korrigiert, Toolzahl 23 -> 26 nachgezählt
-- Sprachen: EN + DE gepflegt; ES/ZH/JA/RU bewusst nicht (entwicklernahes Publikum)
-- Issues: #12 gefixt, #7 geschlossen (erledigt), #15 Rückfrage gestellt
-- Push: 3 Commits, CI grün; npm-Republish 1.2.1 wegen README-Korrektur
-- Offen: Store-Screenshots veraltet, brauchen neuen Build
+- Площадки: GitHub, npm (<пакет>), реестр MCP, профиль Org, llms.txt
+- Topics: +local-first, +mcp-server; keywords в package.json выровнены
+- Удалено: AUFGABEN.txt, _handoff/ (в gitignore, force push не нужен)
+- README: Версия 0.9 -> 1.2 исправлена, число инструментов 23 -> 26 пересчитано
+- Языки: EN + RU поддерживаются; ES/ZH/JA сознательно не делались (разработчики)
+- Issues: #12 исправлена, #7 закрыта (решено), по #15 задан вопрос
+- Push: 3 коммита, CI зелёный; npm republish 1.2.1 из-за правки README
+- Открыто: Скриншоты в магазине устарели, нужен новый билд
 ```
 
-Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treffen, und ist die Grundlage für rotierende Pflegeläufe über viele Repos (`rotation-check`).
+Журнал избавляет следующий раунд от повторного обсуждения тех же решений и является основой для ротационных раундов обслуживания по многим репозиториям (`rotation-check`).
 
-## Häufige Fehler
+## Частые ошибки
 
-| Fehler | Korrektur |
+| Ошибка | Исправление |
 |---|---|
-| Nur den Arbeitsbaum betrachtet, nicht `git ls-files` | Immer das getrackte Set prüfen — dort liegt das Problem |
-| Privacy-Gate nur auf Pfade und Token gerichtet | Auch nach eigenen Pipeline-/Ordnernamen suchen — sie lösen keinen Alarm aus und rutschen durch |
-| Interne Datei entfernt und dabei Historie umgeschrieben | Bei unkritischen Dateien reicht `git rm --cached` + normaler Push |
-| Secret aus `HEAD` entfernt und Vorgang als erledigt betrachtet | Secret rotieren; alles andere ist Kosmetik |
-| Dateien nach Namen klassifiziert | Kurz hineinsehen — Namen tragen die Absicht nicht zuverlässig |
-| Zahlen im README fortgeschrieben statt nachgezählt | An der Quelle zählen (Tool-Liste, Testlauf, Manifest) |
-| Neue Sprachfassung als leerer Stub angelegt | Befüllen oder weglassen — ein Stub täuscht Vollständigkeit vor |
-| Zweite README-Namenskonvention neben der bestehenden eingeführt | Vorhandene Konvention übernehmen |
-| PR an eine fremde Liste ohne Freigabe gestellt | Außenkommunikation vorlegen; nur eigene Flächen sind frei |
-| Issues gezählt statt bearbeitet | Fixen, schließen oder gezielt nachfragen — jeder Fall bekommt einen Zustand |
-| Banner im Alleingang in fremdem Stil erzeugt | Design-Familie des Oekosystems einhalten |
-| README im Repo korrigiert, npm-/PyPI-Seite zeigt weiter die alte | Registry-Seiten stammen vom letzten Publish — Patch-Release nachziehen |
-| Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
-| Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
-| Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
-| CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
-| Falsche Aussage nur dort korrigiert, wo sie auffiel | Org-weit nach der Formulierung suchen — sie steht meist auch im Org-Profil, in `llms.txt` und in der zweiten Sprachfassung |
-| Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
-| Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
-| Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
-| Befund nur ins Laufprotokoll geschrieben | Er wird zur Aufgabe im ordnerlokalen Aufgabensystem — ins Protokoll sieht später niemand |
-| Interne Nacharbeit an eine öffentliche Roadmap gehängt | Erst hineinsehen; „Public roadmap" heißt: interne Datei daneben nutzen |
-| Bekannten Befund als neuen Eintrag dupliziert | Bestehenden Punkt mit dem empirischen Beleg aus diesem Lauf anreichern |
-| Bei einer Bearbeitungssperre eine TODO-Zeile ins gesperrte Repo geschrieben | Diese Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
-| Push-Sperre als Komplettverbot gelesen und das Repo ganz übersprungen | Lock lesen: sperrt er nur die Veröffentlichung, läuft die lokale Runde auf einem eigenen Branch weiter |
-| Unter Push-Sperre zwar nicht gepusht, aber Topics oder Beschreibung geändert | Auch Metadaten sind remote sichtbar — unter einer Veröffentlichungssperre entfallen sie mit |
+| Рассмотрено только рабочее дерево, а не `git ls-files` | Всегда проверять отслеживаемое множество — проблема там |
+| Проверка приватности направлена только на пути и токены | Искать также имена собственных внутренних папок/пайплайнов — они не вызывают тревоги, но раскрывают структуру |
+| Внутренний файл удалён с переписыванием истории | Для некритичных файлов достаточно `git rm --cached` + обычный push |
+| Секрет удалён из `HEAD`, и процесс сочтён завершённым | Ротировать секрет; всё остальное — косметика |
+| Файлы классифицированы по имени | Бегло заглянуть внутрь — имена не всегда отражают суть |
+| Числа в README переписаны по аналогии, а не пересчитаны | Считать в источнике (список инструментов, прогон тестов, манифест) |
+| Новая языковая версия создана как пустая заглушка | Заполнить или не создавать — заглушка имитирует полноту |
+| Введена вторая конвенция именования README рядом с существующей | Перенять существующую конвенцию репозитория |
+| PR в чужой список отправлен без одобрения | Согласовать внешнюю коммуникацию; только собственные площадки свободны |
+| Issues посчитаны вместо обработки | Исправить, закрыть или задать вопрос — каждый случай получает статус |
+| Баннер создан в одиночку в чужом стиле | Соблюдать дизайн-код семейства экосистемы |
+| README в репозитории исправлен, страница npm/PyPI показывает старое | Страницы реестров берутся из последнего Publish — сделать патч-релиз |
+| Версия поднята только в манифесте | Все носители версии одновременно: манифест, код, значок, чейнджлог, тег, `llms.txt` |
+| Изменения готовы, но оставлены незапушенными | Коммит и push входят в раунд; только заморозка оправдывает исключение |
+| Всё в одном коммите-свалке | Разделять уборку, документацию и фиксы — иначе ничего нельзя откатить по отдельности |
+| CI после документационного коммита горит красным, вините себя | Незафиксированный линтер без `select` следует дефолту новой версии — зафиксировать набор правил |
+| Ложное утверждение исправлено только там, где замечено | Искать формулировку по всей Org — она часто есть в профиле, `llms.txt` и во второй версии |
+| В грязном чужом репозитории работали с `commit -a` | Стейджить точечно по путям и коммитить, не пушить — чужая работа остаётся нетронутой |
+| Изменение в чистом репозитории профиля Org сделано, но не запушено | Чистые чужие репозитории получают собственный коммит **и** собственный push |
+| Пропущенное изменение отмечено только в собственном журнале | Дополнительно внести в список задач целевого репозитория, если он есть |
+| Замечание написано только в журнал выполнения | Перевести в задачу в локальной системе задач — в старые журналы никто не заглянет |
+| Внутренняя доработка привязана к публичной дорожной карте | Сначала заглянуть; «Public roadmap» означает: использовать внутренний файл рядом |
+| Известное замечание продублировано как новая запись | Обогатить существующий пункт эмпирическим доказательством из текущего прогона |
+| При заморозке редактирования строка TODO записана в заблокированный репозиторий | Заморозка действует на весь проект — ничего там не трогать |
+| Заморозка push прочитана как полный запрет, и репозиторий пропущен | Прочитать локфайл: если он запрещает только публикацию, продолжить в локальной ветке |
+| При заморозке push сам push не сделан, но метаданные изменены | Метаданные видны удалённо — при заморозке push метаданные тоже не меняются |
 
-## Abschluss-Checkliste
+## Итоговый чек-лист
 
-- [ ] Distributionsflächen ermittelt und im Laufprotokoll notiert.
-- [ ] Topics, Description und Homepage gesetzt und überprüft.
-- [ ] Privacy-Gate über das getrackte Set gelaufen, Funde behandelt.
-- [ ] `.md`/`.txt`/`.json` auf Veröffentlichungsabsicht geprüft, interne Dateien ignoriert.
-- [ ] Kein Force-Push ohne echten Leak; bei Leak Rotation durchgeführt.
-- [ ] Banner vorhanden und im README eingebunden.
-- [ ] Version, Features, Zahlen, Screenshots, Links gegen den echten Stand geprüft.
-- [ ] Darstellung verbessert (Tabellen, Diagramme, erste Bildschirmhöhe).
-- [ ] README-Sprachmatrix vollständig; Entscheidungen zu weiteren Sprachen dokumentiert.
-- [ ] Sichtbarkeitsmaßnahmen umgesetzt bzw. zur Freigabe vorgelegt.
-- [ ] Eintrag im eigenen Org-Profil geprüft, sinnvolle Fremd-Orga-Verweise gesetzt.
-- [ ] Änderungen an Fremd-Repos: sauber → committet und gepusht; dirty → lokal committet;
-      nicht ausgeführt → in der Aufgabenliste des Ziel-Repos eingetragen.
-- [ ] Issues und PRs in einen definierten Zustand gebracht.
-- [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
-- [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
-- [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
-- [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
+- [ ] Площадки дистрибуции выявлены и записаны в журнал выполнения.
+- [ ] Topics, Description и Homepage заданы и проверены.
+- [ ] Проверка приватности по отслеживаемому множеству выполнена, находки обработаны.
+- [ ] Файлы `.md`/`.txt`/`.json` проверены на предмет намерения публикации, внутренние файлы проигнорированы/удалены из отслеживания.
+- [ ] Никаких Force Push без реальной утечки; при утечке выполнена ротация.
+- [ ] Баннер присутствует и включен в README.
+- [ ] Версия, функции, цифры, скриншоты, ссылки проверены по реальному коду.
+- [ ] Подача улучшена (таблицы, диаграммы, первый экран).
+- [ ] Матрица языков README полна; решения по другим языкам задокументированы.
+- [ ] Меры по повышению видимости выполнены либо отправлены на одобрение.
+- [ ] Запись в собственном профиле Org проверена, разумные ссылки на чужие Org установлены.
+- [ ] Изменения в чужих репозиториях: чистое → закоммичено и запушено; грязное → закоммичено локально; не выполнено → внесено в список задач целевого репозитория.
+- [ ] Issues и PR переведены в определённое состояние.
+- [ ] Раздельные коммиты созданы, запушены, CI и удалённое отображение верифицированы.
+- [ ] Все площадки дистрибуции приведены к одному состоянию (при необходимости патч-релиз).
+- [ ] Неустранённые замечания внесены как задачи в локальную систему задач.
+- [ ] Журнал выполнения записан в `_after-care/LOG.md`.
 
-## Журнал изменений
+## История изменений
 
 ### 1.6.0 (2026-07-24)
-- Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine
-  Nutzer-Klarstellung wurde in Durchlauf 1 im Hub korrigiert, stand aber unbemerkt noch fünfmal
-  im Organisationsprofil (EN, DE, `llms.txt`) und fiel erst neun Durchläufe später auf.
+- Добавлено правило: Исправление по существу действует для всех площадок. Урок практики — уточнение пользователя в прогоне 1 было исправлено в Hub, но незаметно оставалось в 5 местах профиля организации (EN, DE, `llms.txt`) и всплыло только спустя 9 прогонов.
 
 ### 1.5.0 (2026-07-24)
-- Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
-  (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): „zuerst prüfen", die konkreten
-  Verräter-Regelcodes, der Plattform-Split, `ruff.toml` als Fix bei fehlendem `pyproject.toml`,
-  Verifikation gegen die neue Linter-Version.
+- Усилена диагностика линтера после того, как паттерн проявился трижды за день (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): «проверять в первую очередь», конкретные разоблачающие коды правил, разрыв по платформам, `ruff.toml` как фикс при отсутствии `pyproject.toml`, верификация на новой версии линтера.
 
 ### 1.4.0 (2026-07-24)
-- Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
-  Ursache ein ungepinnter Linter ohne festgeschriebenen Regelsatz — ein neues Tool-Release
-  verschiebt den Default und macht unveränderten Code rot. Fix: Regelsatz pinnen, neue Regeln
-  als Aufgabe. Zweimal in Folge aufgetreten (n8n-workflow-manager mit ruff 0.15, clirec mit 0.16).
+- Добавлена диагностика: Если CI становится красным после коммита с одной лишь документацией, частейшая причина — незафиксированный линтер без заданного набора правил. Новый релиз инструмента смещает дефолт и делает неизменённый код красным. Фикс: зафиксировать набор правил, новые правила — в задачи.
 
 ### 1.3.0 (2026-07-24)
-- Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
-  der Entdeckung ein Eintrag im ordnerlokalen Aufgabensystem des Projekts — dort, wo der nächste
-  Bearbeiter hinsieht, nicht im Protokoll eines abgeschlossenen Laufs. Inklusive Trennung von
-  interner Liste und öffentlicher Roadmap, Anreichern statt Duplizieren, Erledigtes mit Commit.
+- Новый раздел «Находки становятся задачами»: То, что раунд не исправляет сам, в момент обнаружения становится записью в локальной системе задач проекта — там, куда заглянет следующий разработчик, а не в журнале завершённого прогона. Включая разделение внутреннего списка и публичного roadmap, обогащение вместо дублирования, запись выполненного с коммитом.
 
 ### 1.2.0 (2026-07-24)
-- Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
-  Secrets, lösen daher keinen Alarm aus und überleben ein Gate, das nur auf Pfade und Token
-  zielt — bleiben für Leser aber unauflösbar und geben die eigene Struktur preis.
+- Проверка приватности дополнительно ищет имена собственных внутренних папок. Они не являются секретами, не вызывают тревоги и проходят проверку, нацеленную только на пути и токены, но остаются нераскрываемыми для читателей и выдают внутреннюю структуру.
 
 ### 1.1.0 (2026-07-24)
-- Sperren werden gelesen statt pauschal als Verbot behandelt: eine reine Veröffentlichungs-/
-  Push-Sperre leitet die Runde auf einen lokalen Branch um, statt sie abzubrechen. Zugleich
-  klargestellt, dass unter einer solchen Sperre auch Metadaten, Releases und Issue-/PR-Aktionen
-  entfallen — sie sind ebenso remote sichtbar wie ein Push.
+- Блокировки читаются, а не трактуются как поголовный запрет: чистая блокировка публикации/push перенаправляет раунд на локальную ветку вместо отмены. Одновременно уточнено, что при такой блокировке метаданные, релизы и действия с Issue/PR также опускаются — они так же видны удалённо, как и push.
 
 ### 1.0.0 (2026-07-24)
-- Initiale Version. Stufe 1 der Repo-Nachpflege, abgeleitet aus `github-repo-care`.
+- Начальная версия. Уровень 1 обслуживания репозиториев, производный от `github-repo-care`.

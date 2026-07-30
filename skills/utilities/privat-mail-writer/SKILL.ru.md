@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
 updated: 2026-06-19
-description: [Русский] Навык агента для privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+description: Этот навык следует использовать, когда пользователь хочет написать, ответить, отклонить, уточнить, сократить, переформулировать или составить черновик личных или полуформальных электронных писем в своем собственном стиле, особенно при согласовании встреч, официальных отказах, дружелюбных кратких ответах и тоне, зависящем от контакта. Начинайте анализ профиля только при наличии конкретного поручения по написанию письма.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,93 +18,85 @@ dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path'
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `privat-mail-writer`.
+> **Русский** — Официальная русская версия `privat-mail-writer`.
 
+# Privat-Mail-Writer (Русский)
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Privat-Mail-Writer создает короткие, дружелюбные и подходящие для конкретного контакта черновики писем. Навык разработан нейтральным по отношению к пользователю: он не содержит реальных контактов, реальных подписей и реального содержимого писем.
 
+Основной принцип — отложенность (lazy) и эмпиричность: только когда пользователь хочет написать конкретное письмо контакту, создается или обновляется профиль для этого конкретного контакта. Профили не создаются впрок. Если история писем недоступна, не выдумывайте утверждений о стиле, а пишите нейтрально и кратко или целенаправленно просите примеры.
 
-> **English Translation** — Official English version of `privat-mail-writer`.
+## Ресурсы
 
+- `CONFIG.md` - центральные настройки, правила «если-то», пороги разрешений (permission-gates) и переключатели черного списка.
+- `BLACKLIST.md` - исключения для рассылок, системных отправителей и контактов без профиля.
+- `USECASES.md` - реестр вариантов использования (usecases) и правила для новых вариантов.
+- `SIGNATURES.md` - нейтральные правила подписей и формул прощания.
+- `MUSTER-BLOCKS.md` - короткие многоразовые текстовые блоки.
+- `kontaktprofile.json` - пустая нейтральная схема для профилей контактов. Хранить реальные профили только локально и экономно по отношению к данным.
 
-# Privat-Mail-Writer (English)
+## Рабочий процесс
 
-## Общий обзор и назначение & Purpose
+1. **Загрузить конфигурацию:** Прочитать `CONFIG.md`. Если черный список активен, дополнительно проверить `BLACKLIST.md`.
+2. **Проверить триггер:** Создавать профиль только при конкретном поручении по написанию письма определенному контакту, например, «напиши письмо брату Симону». Не сканировать входящие только ради создания профилей.
+3. **Проверить черный список:** Рассылки, No-Reply, системные отправители и исключенные домены/контакты не получают профиль контакта. В таких случаях отвечать нейтрально или не отвечать.
+4. **Определить задачу письма:** Определить цель, получателя, повод, желаемую краткость, язык, тон и необходимые факты.
+5. **Определить вариант использования (Usecase):** Прочитать `USECASES.md` и выбрать наиболее подходящий вариант. Если ничего не подходит, создать новый многоразовый вариант использования или кратко уточнить при отсутствии обязательных данных.
+6. **Проверить профиль контакта:** Для каждого неисключенного получателя найти существующий профиль в `kontaktprofile.json` или в локальной приватной копии профиля.
+7. **Создать или обновить профиль:** Если надежный профиль отсутствует, прочитать до 10 последних релевантных писем с этим контактом из доступного почтового бэкенда. Отправленные письма должны весить больше полученных при определении стиля письма.
+8. **Сохранить эмпирические данные:** Сохранять в профиле контакта только обобщенные и проверяемые сигналы о стиле, отношениях и категории. Не сохранять исходные письма, длинные цитаты и ненужные личные детали.
+9. **Применить пороги разрешений (Permission-Gate):** Перед отправкой, при чувствительном содержимом или отсутствии обязательных данных соблюдать пороги из `CONFIG.md`.
+10. **Составить черновик:** Объединить форму варианта использования, профиль контакта и текущую задачу. Имитировать стиль без выдумывания ложной близости, ложных обещаний или необснованных причин.
+11. **Выдать результат:** По умолчанию выводить тему и текст письма. Отправлять только в том случае, если пользователь явно разрешил отправку и доступен подходящий почтовый инструмент.
 
-Privat-Mail-Writer erstellt kurze, freundliche und kontaktabhängig passende Mailentwürfe. Der Skill ist nutzerneutral angelegt: Er enthält keine echten Kontakte, keine echten Signaturen und keine echten Mailinhalte.
+## Профили контактов
 
-Der Kern ist lazy und empirisch: Erst wenn der User eine konkrete Mail an einen Kontakt schreiben will, das Profil für genau diesen Kontakt anlegen oder aktualisieren. Keine Profile auf Vorrat erzeugen. Wenn keine Mailhistorie verfügbar ist, keine Stilbehauptungen erfinden, sondern neutral kurz schreiben oder gezielt nach Beispielen fragen.
+Профиль контакта описывает не саму личность, а наблюдаемые коммуникационные отношения и стиль письма владельца аккаунта по отношению к этой личности.
 
-## Ressourcen
+Поля профиля должны оставаться краткими:
 
-- `CONFIG.md` - zentrale Präferenzen, Wenn-dann-Regeln, Permission-Gates und Blacklist-Schalter.
-- `BLACKLIST.md` - Ausschlüsse für Newsletter, Systemsender und Kontakte ohne Profil.
-- `USECASES.md` - Usecase-Registry und Regeln für neue Usecases.
-- `SIGNATURES.md` - neutrale Signatur- und Grußformel-Regeln.
-- `MUSTER-BLOCKS.md` - kurze wiederverwendbare Textbausteine.
-- `kontaktprofile.json` - leeres, nutzerneutrales Schema für Kontaktprofile. Echte Profile nur lokal und datensparsam führen.
+- время последнего контакта
+- количество и период проанализированных писем
+- обращение и формула прощания
+- обращение на «ты»/«вы»/формальность
+- длина предложений и типичная краткость
+- степень теплоты, прямоты, обязательности
+- оценка отношений с уровнем уверенности
+- категория контакта, например, `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`
+- источник категории: заявление пользователя, текст письма, адресная книга, подпись или инференция
+- уровень доказательности категории: `user-confirmed`, `strong`, `medium`, `weak`
+- короткие перефразированные доказательства, например «несколько отправленных писем заканчиваются на "С наилучшими пожеланиями"» или «ответы остаются в пределах пяти предложений»
 
-## Arbeitsablauf
+Ежемесячно проверять необходимость проверки возраста записей. Если месяц текущей даты отличается от сохраненного `last_age_check`, удалять профили, чей `last_contact_at` давнее одного года, и устанавливать `last_age_check` на текущую дату. Начальное значение в нейтральном JSON — `2026-06-18`.
 
-1. **Konfig laden:** `CONFIG.md` lesen. Wenn Blacklist aktiv ist, zusätzlich `BLACKLIST.md` prüfen.
-2. **Trigger prüfen:** Nur bei einem konkreten Schreibauftrag für einen bestimmten Kontakt profilieren, z. B. "schreib eine Mail an Bruder Simon". Keine Inbox-Sweeps nur zur Profilanlage.
-3. **Blacklist prüfen:** Newsletter, No-Reply, Systemsender und ausgeschlossene Domains/Kontakte bekommen kein Kontaktprofil. Für solche Fälle neutral antworten oder nicht antworten.
-4. **Mailaufgabe erkennen:** Ziel, Empfänger, Anlass, gewünschte Kürze, Sprache, Ton und notwendige Fakten bestimmen.
-5. **Usecase bestimmen:** `USECASES.md` lesen und den passendsten Usecase auswählen. Wenn kein Usecase passt, einen neuen wiederverwendbaren Usecase anlegen oder bei fehlenden Pflichtangaben kurz nachfragen.
-6. **Kontaktprofil prüfen:** Für jeden nicht ausgeschlossenen Empfänger ein vorhandenes Profil in `kontaktprofile.json` oder in einer privaten lokalen Profilkopie suchen.
-7. **Profil erstellen oder aktualisieren:** Wenn kein belastbares Profil vorhanden ist, bis zu die letzten zehn relevanten Mails mit genau diesem Kontakt aus dem verfügbaren Mail-Backend lesen. Gesendete Mails sind für Schreibstil stärker zu gewichten als empfangene Mails.
-8. **Empirie speichern:** Im Kontaktprofil nur zusammenfassende, belegbare Stil-, Verhältnis- und Kategorie-Signale speichern. Keine Rohmails, keine langen Zitate und keine unnötigen personenbezogenen Details ablegen.
-9. **Permission-Gate anwenden:** Vor Senden, heiklen Inhalten oder fehlenden Pflichtangaben die Gates aus `CONFIG.md` beachten.
-10. **Entwurf schreiben:** Usecase-Form, Kontaktprofil und aktuelle Aufgabe zusammenführen. Den Stil nachahmen, ohne falsche Nähe, falsche Zusagen oder unbelegte Gründe zu erfinden.
-11. **Ausgabe liefern:** Standardmäßig Betreff und Mailtext ausgeben. Nur senden, wenn der User ausdrücklich das Senden freigegeben hat und ein passendes Mail-Tool verfügbar ist.
+## Правила стиля
 
-## Kontaktprofile
+- Писать кратко. Личным письмам редко нужны длинные вступления.
+- Оставаться дружелюбным, но не объяснять лишнего.
+- Называть реальные причины только если они указаны пользователем или достоверны из контекста.
+- При официальных отказах: вежливо, четко, без оправдательных романов.
+- При неуверенности в фактах: задать краткий уточняющий вопрос перед финализацией черновика.
+- Немецкие тексты писать с настоящими умлаутами: ä, ö, ü, Ä, Ö, Ü, ß.
 
-Ein Kontaktprofil beschreibt nicht die Person an sich, sondern das beobachtete Kommunikationsverhältnis und den Schreibstil des Kontoinhabers gegenüber dieser Person.
+## Новые варианты использования (Usecases)
 
-Profilfelder sollen knapp bleiben:
+Если задача письма выглядит многоразовой и еще не охвачена в `USECASES.md`, добавить вариант использования:
 
-- letzte Kontaktzeit
-- Anzahl und Zeitraum der ausgewerteten Mails
-- Anrede und Grußformel
-- Du/Sie/Formalität
-- Satzlänge und typische Kürze
-- Wärmegrad, Direktheit, Verbindlichkeit
-- Verhältnis-Einschätzung mit Konfidenz
-- Kontaktkategorie, z. B. `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`
-- Quelle der Kategorie: User-Aussage, Mailtext, Adressbuch, Signatur oder Inferenz
-- Evidenzgrad der Kategorie: `user-confirmed`, `strong`, `medium`, `weak`
-- kurze paraphrasierte Belege wie "mehrere gesendete Mails enden mit 'Viele Grüße'" oder "Antworten bleiben unter fünf Sätzen"
+- стабильный ID, например `UC-002`
+- название и типичные триггеры
+- цель письма
+- обязательные и опциональные данные
+- стандартная длина и тон
+- короткий шаблон или последовательность блоков
+- открытые вопросы при отсутствии обязательных данных
 
-Monatlich prüfen, ob ein Alters-Check fällig ist. Wenn der Monat des aktuellen Datums vom gespeicherten `last_age_check` abweicht, Profile löschen, deren `last_contact_at` mehr als ein Jahr zurückliegt, und `last_age_check` auf das aktuelle Datum setzen. Der Startwert im neutralen JSON ist `2026-06-18`.
+Разовый особый случай не расширяется до варианта использования. В таком случае предоставить только текущий черновик.
 
-## Stilregeln
+## Формат вывода
 
-- Kurz schreiben. Privatmails brauchen selten lange Vorreden.
-- Freundlich bleiben, aber nicht übererklären.
-- Echte Gründe nur nennen, wenn sie vom User genannt oder aus dem Kontext sicher sind.
-- Bei offiziellen Absagen: höflich, klar, ohne Rechtfertigungsroman.
-- Bei Unsicherheit über Fakten: eine knappe Rückfrage stellen, bevor der Entwurf finalisiert wird.
-- Deutsche Texte mit echten Umlauten schreiben: ä, ö, ü, Ä, Ö, Ü, ß.
-
-## Neue Usecases
-
-Wenn eine Mailaufgabe wiederverwendbar wirkt und in `USECASES.md` noch nicht abgedeckt ist, den Usecase ergänzen:
-
-- stabile ID, z. B. `UC-002`
-- Name und typische Trigger
-- Ziel der Mail
-- Pflichtangaben und optionale Angaben
-- Standardlänge und Ton
-- kurze Vorlage oder Bausteinfolge
-- offene Rückfragen, falls Pflichtangaben fehlen
-
-Ein einmaliger Sonderfall wird nicht als Usecase aufgebläht. In diesem Fall nur den aktuellen Entwurf liefern.
-
-## Ausgabeformat
-
-Für normale Entwürfe:
+Для обычных черновиков:
 
 ```text
 Betreff: ...
@@ -117,18 +109,18 @@ Mit freundlichen Grüßen
 [Signatur]
 ```
 
-Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere Varianten sinnvoll sind, höchstens zwei Varianten anbieten: "sehr kurz" und "etwas wärmer".
+Если пользователю нужен только текст без темы, предоставлять только текст письма. Если имеет смысл несколько вариантов, предлагать максимум два варианта: «очень короткий» и «чуть более теплый».
 
-## Grenzen
+## Ограничения
 
-Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
+Не выдумывать профили контактов. Не копировать конфиденциальные детали из писем в ответ без необходимости. Не отправлять письма без явного разрешения. Не формулировать юридических, медицинских или финансовых обязательств, если пользователь четко их не задал.
 
 ## Журнал изменений
 
 ### 0.2.0 (2026-06-19)
-- `CONFIG.md` und `BLACKLIST.md` ergänzt.
-- Profilanlage auf konkrete Mail-Schreibaufträge begrenzt.
-- Kontaktkategorien mit Quelle und Evidenzgrad in das Profilschema aufgenommen.
+- Добавлены `CONFIG.md` и `BLACKLIST.md`.
+- Создание профиля ограничено конкретными поручениями по написанию писем.
+- В схему профиля включены категории контактов с источником и уровнем доказательности.
 
 ### 0.1.0 (2026-06-19)
-- Initiale Version mit Usecase-Registry, Signaturregeln, Musterblöcken und leerem Kontaktprofil-JSON.
+- Начальная версия с реестром вариантов использования, правилами подписей, образцами блоков и пустым JSON профиля контакта.

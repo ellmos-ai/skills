@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Русский] Навык агента для plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
+description: Универсальная система плагинов для приложений Python. Автоматическое обнаружение, валидация, отказоустойчивость. Нулевые зависимости (только стандартная библиотека Python).
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,44 +15,40 @@ tags: [plugin, framework, extensibility, cli, architecture]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `plugin-system`.
+> **Русский** — Официальная русская версия `plugin-system`.
 
 
+# Plugin System (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Отказоустойчивая система плагинов для CLI-приложений на Python.
+Дефектный плагин никогда не останавливает работу остальной части приложения.
 
+## Основные возможности
 
-# Plugin System (English)
+- **Автоматическое обнаружение (Auto-Discovery):** Автоматически находит плагины в директории
+- **Валидация:** Проверяет `name`, `version`, `execute()` у каждого класса плагина
+- **Отказоустойчивость:** Неисправные плагины логируются, но не загружаются
+- **Нулевые зависимости:** Использует только стандартную библиотеку Python
 
-Fault-tolerant plugin system for Python CLI applications.
-A faulty plugin never stops the rest of the application.
-
-## Core Features
-
-- **Auto-Discovery:** Automatically finds plugins in a directory
-- **Validation:** Checks `name`, `version`, `execute()` on each plugin class
-- **Fault Tolerance:** Defective plugins are logged but not loaded
-- **Zero Dependencies:** Python standard library only
-
-## Files
+## Файлы
 
 ```
 scripts/
-  plugin_system.py       Core: PluginBase (ABC) + PluginManager
-  cli_demo.py            Demo CLI with argparse
-  test_plugin_system.py  16+ unit tests
+  plugin_system.py       Ядро: PluginBase (ABC) + PluginManager
+  cli_demo.py            Демонстрационный CLI с argparse
+  test_plugin_system.py  16+ юнит-тестов
 examples/
-  hello.py               Hello World plugin
-  calculator.py          Calculator plugin
-  systeminfo.py          System Info plugin
+  hello.py               Демонстрационный плагин Hello World
+  calculator.py          Плагин калькулятора
+  systeminfo.py          Плагин информации о системе
 ```
 
-## Quick Start
+## Быстрый старт
 
-### 1. Create a Plugin
+### 1. Создание плагина
 
 ```python
 from plugin_system import PluginBase
@@ -65,7 +61,7 @@ class MyPlugin(PluginBase):
         return {"status": "ok", "message": "Hello!"}
 ```
 
-### 2. Use PluginManager
+### 2. Использование PluginManager
 
 ```python
 from plugin_system import PluginManager
@@ -73,16 +69,16 @@ from plugin_system import PluginManager
 manager = PluginManager(plugins_dir="./my_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins (English)
+# Вывести список всех плагинов
 manager.list_plugins()
 
-# Execute a plugin (English)
+# Выполнить плагин
 success, result = manager.execute_plugin("MyPlugin", param="value")
 if success:
     print(result)
 ```
 
-### 3. Integrate into Your App
+### 3. Интеграция в ваше приложение
 
 ```python
 class MyApp:
@@ -95,31 +91,31 @@ class MyApp:
         return result if success else None
 ```
 
-## Plugin Interface
+## Интерфейс плагина
 
-Every plugin must:
+Каждый плагин должен:
 
-| Requirement | Details |
+| Требование | Детали |
 |-------------|---------|
-| Inherit `PluginBase` | `from plugin_system import PluginBase` |
-| Set `name` | Class attribute, non-empty |
-| Set `version` | Class attribute, semantic versioning |
-| Implement `execute()` | Arbitrary `*args, **kwargs` |
+| Наследовать `PluginBase` | `from plugin_system import PluginBase` |
+| Задавать `name` | Атрибут класса, непустой |
+| Задавать `version` | Атрибут класса, семантическое версионирование |
+| Реализовать `execute()` | Принимает произвольные `*args, **kwargs` |
 
-## Fault Tolerance
+## Отказоустойчивость
 
-| Error Type | Behavior |
+| Тип ошибки | Поведение |
 |-----------|----------|
-| SyntaxError in plugin | Plugin is skipped, rest loads |
-| Missing attributes | Plugin is marked as `is_valid=False` |
-| Exception in `execute()` | Returns `(False, error_message)` |
-| No plugin in directory | Empty list, no crash |
+| `SyntaxError` в плагине | Плагин пропускается, остальные загружаются |
+| Отсутствуют атрибуты | Плагин помечается как `is_valid=False` |
+| Исключение в `execute()` | Возвращает `(False, error_message)` |
+| Нет плагинов в директории | Пустой список, без сбоев |
 
-## Журнал изменений
+## История изменений
 
 ### 1.0.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/plugins to skill library
+- Миграция из MODULAR_AGENTS/plugins в библиотеку навыков
 - PluginBase ABC + PluginManager
-- 3 example plugins (Hello, Calculator, SystemInfo)
-- 16+ unit tests
-- CLI demo with argparse
+- 3 примера плагинов (Hello, Calculator, SystemInfo)
+- 16+ юнит-тестов
+- Демонстрационный CLI с argparse

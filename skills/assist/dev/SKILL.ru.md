@@ -1,74 +1,79 @@
 ---
+name: dev
+version: 0.1.0
+type: expert
+author: ellmos
+created: 2026-06-22
+updated: 2026-06-22
+description: Ассистент разработчика (преемник ATI). Предоставляет быстрый обзор проекта с помощью автономного сканирования и маршрутизирует запросы к доступным инструментам разработки: CodeCommander MCP (анализ/рефакторинг/диагностика) и модулю ellmos-code-tools. Чистая маршрутизация инструментов + сканирование, без собственного хранилища.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: assist
+tags: [dev, coding, projekt-scan, ati, codecommander]
 language: ru
+status: active
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `dev`.
+> **Русский** — Официальная русская версия `dev`.
 
 
+# Dev — Ассистент разработчика (ATI) (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Сначала получает обзор, затем передаёт управление соответствующим инструментам.
 
+## Обзор и назначение
 
-# Dev — Developer Assistant (ATI) (English)
+Преемник агента ATI/entwickler из BACH. Две основные задачи:
+1. **Сканирование проекта** (автономное/headless, стандартная библиотека): быстрый и экономный по токенам обзор структуры, языков и маркеров сборки проекта — до запуска затратного анализа.
+2. **Маршрутизация инструментов:** делегирует задачи существующим инструментам разработки вместо дублирования их функций.
 
-Gets an overview first, then hands off to the right tools.
+## Триггеры (Triggers)
 
-## Общий обзор и назначение & Purpose
-
-Successor to BACH's ATI/entwickler agent. Two tasks:
-1. **Project scan** (headless, stdlib): fast, token-efficient overview of
-   structure, languages and build markers of a project — before expensive analysis runs.
-2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
-
-## Triggers
-
-| User input | Action |
+| Ввод пользователя | Действие |
 |---|---|
-| "Get an overview of project X" | `dev_core.py scan <path>` |
-| "What kind of project is this / which stack?" | `dev_core.py scan <path>` |
-| "Analyse this file / refactor" | → CodeCommander MCP |
-| "Generate/check Python code" | → CodeCommander MCP / ellmos-code-tools |
+| "Получи обзор проекта X" | `dev_core.py scan <path>` |
+| "Что это за проект / какой стек?" | `dev_core.py scan <path>` |
+| "Проанализируй этот файл / сделай рефакторинг" | → CodeCommander MCP |
+| "Сгенерируй/проверь код на Python" | → CodeCommander MCP / ellmos-code-tools |
 
-## Tool Landscape (Routing Targets)
+## Ландшафт инструментов (Цели маршрутизации)
 
-- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
-  `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
-  pycutter context, Method-Analyzer).
-- **FileCommander MCP**: File/directory operations over large trees.
+- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`, `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`, `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` и т. д.
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): Инструменты разработки CLI (Structural-Edit, pycutter context, Method-Analyzer).
+- **FileCommander MCP**: Операции с файлами и каталогами в больших деревьях.
 
-## CLI Entry Point (dev_core.py)
+## Точка входа CLI (dev_core.py)
 
 ```bash
 python dev_core.py scan .              # current project
 python dev_core.py scan /path/project  # structure + languages + markers
 ```
 
-Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git repo.
+Определяет, например: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go, Java, Roblox (Rojo), Docker, репозиторий Git.
 
-## Store
+## Хранилище (Store)
 
-No store. Pure scan + routing.
+Без хранилища. Только сканирование + маршрутизация.
 
-## Attitude
+## Подход
 
-We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
-to others (e.g. ruff/pylint/eslint) if the user prefers them.
+Мы рекомендуем CodeCommander/ellmos-code-tools в качестве инструментов разработки, но открыты для использования других (например, ruff/pylint/eslint), если пользователь предпочитает их.
 
-## Privacy
+## Конфиденциальность
 
-- `dev_core.py` only reads file/directory names (structure), no content, no upload.
-- Skipped: `.git`, `node_modules`, `.venv`, `__pycache__` etc.
+- `dev_core.py` считывает только имена файлов/каталогов (структуру), без содержимого и без загрузки на внешние сервисы.
+- Пропускаются: `.git`, `node_modules`, `.venv`, `__pycache__` и т. д.
 
-## Related Resources
+## Связанные ресурсы
 
-- `assist/AGENTS.md` — Umbrella router
+- `assist/AGENTS.md` — Главный маршрутизатор
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
-## Журнал изменений
+## История изменений
 
 ### 0.1.0 (2026-06-22)
-- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
-  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.
+- Начальная версия. Преемник ATI/entwickler: автономное сканирование проекта (стандартная библиотека) + маршрутизация к CodeCommander MCP / ellmos-code-tools. Нейтрален к пользователю, без хранилища.

@@ -5,7 +5,8 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Español] Documentación completa para la habilidad research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+description: Pipeline de investigación para PubMed y arXiv. Búsqueda rápida y revisiones de literatura estructuradas usando solo la biblioteca estándar de Python.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,22 +16,18 @@ tags: [pubmed, arxiv, literature-review, research, science]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `research-agent`.
+> **Español** — Versión oficial en español de `research-agent`.
 
 
+# Research Agent (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Pipeline de investigación modular para búsqueda de literatura científica.
+Utiliza exclusivamente la biblioteca estándar de Python (urllib, xml, json).
 
-
-# Research Agent (English)
-
-Modular research pipeline for scientific literature search.
-Uses exclusively Python standard library (urllib, xml, json).
-
-## Architecture
+## Arquitectura
 
 ```
 ResearchAgent (Orchestrator)
@@ -43,26 +40,26 @@ ResearchAgent (Orchestrator)
     literature_review.py  4-phase literature review
 ```
 
-## Usage as Python Library
+## Uso como biblioteca de Python
 
 ```python
 from scripts.agent import ResearchAgent
 
 agent = ResearchAgent()
 
-# Quick search (English)
+# Quick search (Deutsch)
 result = agent.search("machine learning diagnostics", max_results=10)
 print(result)
 
-# Structured literature review (English)
+# Structured literature review (Deutsch)
 plan = agent.create_review_plan("transformer architectures", years=3)
 print(plan.total_articles, "articles found")
 
-# Save result (English)
+# Save result (Deutsch)
 agent.save_result(result, "research_ml.md", fmt="markdown")
 ```
 
-## Usage as CLI
+## Uso como CLI
 
 ```bash
 cd scripts
@@ -70,16 +67,16 @@ python -m ResearchAgent search "quantum computing" --max 20
 python -m ResearchAgent review "CRISPR gene editing" --years 5
 ```
 
-## Data Sources
+## Fuentes de datos
 
-| Source | API | Rate Limit | Access |
-|--------|-----|------------|--------|
-| PubMed | NCBI E-utilities | 3/s (without key), 10/s (with key) | Free |
-| arXiv | Atom REST API | None documented | Free |
+| Fuente | API | Límite de velocidad | Acceso |
+|--------|-----|----------------------|--------|
+| PubMed | NCBI E-utilities | 3/s (sin clave), 10/s (con clave) | Gratuito |
+| arXiv | Atom REST API | Ninguno documentado | Gratuito |
 
-Extensible: New sources implement the `Source` ABC from `sources/base.py`.
+Extensible: Las nuevas fuentes implementan la ABC `Source` de `sources/base.py`.
 
-## Extension
+## Extensión
 
 ```python
 from scripts.sources.base import Source, SearchResult
@@ -100,18 +97,18 @@ class MySource(Source):
         return True
 ```
 
-## BACH Notes
+## Notas de BACH
 
-> Only relevant when used within BACH.
+> Solo relevante cuando se utiliza dentro de BACH.
 
 ```python
 from scripts.agent import ResearchAgent
 agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/ResearchAgent to skill library
-- PubMed + arXiv sources
-- QuickSearch + LiteratureReview workflows
+- Migración de MODULAR_AGENTS/ResearchAgent a la biblioteca de habilidades
+- Fuentes de PubMed + arXiv
+- Flujos de trabajo QuickSearch + LiteratureReview

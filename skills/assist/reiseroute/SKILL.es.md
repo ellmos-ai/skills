@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [Español] Documentación completa para la habilidad reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: Planificación de rutas de A a B a través de OSRM (Open Source Routing Machine). Admite coche, bicicleta y peatón. No requiere clave de API.
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -12,119 +12,115 @@ languages: [de, en]
 dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json']}
 runtime: python3
 entry_point: reiseroute_core.py
-provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\\n'}
+provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\n'}
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `reiseroute`.
+> **Español** — Versión oficial en español de `reiseroute`.
 
 
+# Travel Route (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Travel Route (English)
-
-**Route planning via OSRM (Open Source Routing Machine)**
+**Planificación de rutas a través de OSRM (Open Source Routing Machine)**
 
 ---
 
-## Descripción General y Propósito & Purpose
+## Descripción general y propósito
 
-Plans routes between two locations (names or coordinates) via the public
-OSRM service (`router.project-osrm.org`). Returns distance, travel time and
-mode of transport. No API key, no account required.
+Planifica rutas entre dos ubicaciones (nombres o coordenadas) a través del servicio
+público de OSRM (`router.project-osrm.org`). Devuelve la distancia, el tiempo de viaje y
+el modo de transporte. Sin clave de API, sin necesidad de cuenta.
 
 ---
 
-## Triggers
+## Activadores
 
-| Phrase | Action |
+| Frase | Acción |
 |---|---|
-| "Plan the route from Berlin to Hamburg" | Car route, geocode place names |
-| "How long does the drive from Munich to Vienna take by car?" | Car route + time |
-| "Cycle route from Potsdam to Berlin" | Bicycle mode |
-| "Walk from Kreuzberg to Mitte, Berlin" | Pedestrian mode |
-| "Route from 52.52,13.41 to 53.55,9.99" | Direct coordinates |
+| "Planifica la ruta de Berlín a Hamburgo" | Ruta en coche, geocodificar nombres de lugares |
+| "¿Cuánto se tarda en coche de Múnich a Viena?" | Ruta en coche + tiempo |
+| "Ruta en bicicleta de Potsdam a Berlín" | Modo bicicleta |
+| "Ir a pie de Kreuzberg a Mitte, Berlín" | Modo peatonal |
+| "Ruta de 52.52,13.41 a 53.55,9.99" | Coordenadas directas |
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
-1. **Extract start and destination** from the user input.
-2. **Detect mode:** car (default), bicycle, foot.
-3. **Geocode:** place names → coordinates via Nominatim.
-4. **Query OSRM:** returns distance (km) + duration (formatted).
-5. **Output result:** concise text summary.
+1. **Extraer origen y destino** de la entrada del usuario.
+2. **Detectar modo:** coche (predeterminado), bicicleta, a pie.
+3. **Geocodificar:** nombres de lugares → coordenadas a través de Nominatim.
+4. **Consultar OSRM:** devuelve la distancia (km) + duración (formateada).
+5. **Mostrar resultado:** resumen de texto conciso.
 
 ---
 
 ## CLI
 
 ```bash
-# Car route between two places (English)
+# Ruta en coche entre dos lugares (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Bicycle (English)
+# Bicicleta (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# On foot (English)
+# A pie (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Coordinates directly (lat,lon) (English)
+# Coordenadas directamente (lat,lon) (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON output (English)
+# Salida en JSON (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Munich" "Vienna" --json
 
-# Help (English)
+# Ayuda (Español)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 
 ---
 
-## Modes
+## Modos
 
-| Mode | Alias | OSRM profile |
+| Modo | Alias | Perfil OSRM |
 |---|---|---|
-| auto (default) | car, pkw, fahren | driving |
+| auto (predeterminado) | car, pkw, fahren | driving |
 | fahrrad | bike, rad, radfahren | cycling |
 | fuss | foot, laufen, gehen, zu fuss | foot |
 
 ---
 
-## Store
+## Almacenamiento
 
-No persistent store. Routes are not saved.
-
----
-
-## Attitude
-
-- Always name start and destination before calculating.
-- Clarify if a place is ambiguous (e.g. "Vienna" = Austria or a city of the same name?).
-- Note: OSRM provides the fastest route without real-time traffic.
-- Issue a note for very long pedestrian routes (> 20 km).
+Sin almacenamiento permanente. Las rutas no se guardan.
 
 ---
 
-## Privacy
+## Actitud
 
-Requests go to `nominatim.openstreetmap.org` (geocoding) and
-`router.project-osrm.org` (routing). No login, no API key,
-no persistent data storage.
-
----
-
-## Related Resources
-
-- `location-suche` — POI search (also uses Nominatim)
-- `wetter` — weather at the destination
+- Indicar siempre el origen y el destino antes de realizar el cálculo.
+- Aclarar si un lugar es ambiguo (p. ej., "¿Viena?" = ¿Austria o una ciudad del mismo nombre?).
+- Nota: OSRM proporciona la ruta más rápida sin datos de tráfico en tiempo real.
+- Mostrar una advertencia para rutas peatonales muy largas (> 20 km).
 
 ---
 
-## Registro de Cambios
+## Privacidad
 
-| Version | Date | Change |
+Las solicitudes se envían a `nominatim.openstreetmap.org` (geocodificación) y
+`router.project-osrm.org` (enrutamiento). Sin inicio de sesión, sin clave de API,
+sin almacenamiento persistente de datos.
+
+---
+
+## Recursos relacionados
+
+- `location-suche` — Búsqueda de POI (también utiliza Nominatim)
+- `wetter` — Tiempo atmosférico en el destino
+
+---
+
+## Registro de cambios
+
+| Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH routing_service.py v1.0; geocoding integrated |
+| 1.0.0 | 2026-06-22 | Creado a partir de BACH routing_service.py v1.0; geocodificación integrada |

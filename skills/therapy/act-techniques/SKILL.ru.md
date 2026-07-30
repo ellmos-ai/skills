@@ -1,27 +1,39 @@
 ---
+name: act-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Терапия принятия и ответственности (ACT) Стивена Хейса: модель гексафлекса с шестью ключевыми процессами психологической гибкости.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [act, acceptance, defusion, values, psychological-flexibility, hayes]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `act-techniques`.
+> **Русский** — Официальная русская версия `act-techniques`.
 
 
+# Техники ACT — Терапия принятия и ответственности (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Основы
 
+Терапия принятия и ответственности (ACT, произносится как английское слово "act") была разработана **Стивеном Хейсом** (Steven C. Hayes) и относится к третьей волне когнитивно-поведенческой терапии. ACT направлена не на редукцию симптомов, а на развитие **психологической гибкости** — способности действовать открыто и осознанно в настоящем моменте, руководствуясь личными ценностями.
 
-# ACT Techniques — Acceptance & Commitment Therapy (English)
-
-## Foundation
-
-Acceptance & Commitment Therapy (ACT, pronounced as the word "act") was developed by **Steven C. Hayes** and belongs to the third wave of behavioral therapy. ACT does not aim at symptom reduction, but at **psychological flexibility** — the ability to act openly and consciously in the present moment, guided by personal values.
-
-Core message: **The pain is not the problem — the struggle against the pain is.**
+Главная идея: **Боль сама по себе не является проблемой — проблемой является борьба с болью.**
 
 ---
 
-## The Hexaflex Model
+## Модель гексафлекса (Hexaflex)
 
-The Hexaflex is the central model of ACT. Six core processes together form psychological flexibility. Each process is the counterpart to a pathological process (psychological inflexibility).
+Гексафлекс — центральная модель ACT. Шесть ключевых процессов вместе формируют психологическую гибкость. Каждый процесс является противоположностью патологического процесса (психологической негибкости).
 
 ```
                     Present Moment
@@ -38,180 +50,179 @@ The Hexaflex is the central model of ACT. Six core processes together form psych
                     Committed Action
 ```
 
-### Flexibility vs. Inflexibility
+### Гибкость против Негибкости
 
-| Core Process (flexible) | Counterpart (inflexible) |
+| Ключевой процесс (гибкий) | Противоположность (негибкий) |
 |---|---|
-| Acceptance | Experiential avoidance |
-| Cognitive Defusion | Cognitive fusion |
-| Present Moment Awareness | Past/future focus |
-| Self-as-Context | Conceptualized self |
-| Values | Lack of values clarity |
-| Committed Action | Inaction/impulsivity |
+| Принятие (Acceptance) | Избегание опыта (Experiential avoidance) |
+| Когнитивное разделение (Cognitive Defusion) | Когнитивное слияние (Cognitive fusion) |
+| Контакт с настоящим моментом (Present Moment) | Фиксация на прошлом/будущем (Past/future focus) |
+| Я как контекст (Self-as-Context) | Концептуализированное Я (Conceptualized self) |
+| Ценности (Values) | Неясность ценностей (Lack of values clarity) |
+| Обязательство к действию (Committed Action) | Бездействие/импульсивность (Inaction/impulsivity) |
 
 ---
 
-## The Six Core Processes
+## Шесть ключевых процессов
 
-### 1. Acceptance
+### 1. Принятие (Acceptance)
 
-**Definition:** Willingness to allow inner experiences (feelings, thoughts, bodily sensations) without trying to change, avoid, or control them.
+**Определение:** Готовность позволить внутренним переживаниям (чувствам, мыслям, телесным ощущениям) быть, не пытаясь их изменить, избежать или контролировать.
 
-**Important:** Acceptance is NOT resignation. It is an active, conscious decision to make room for experience.
+**Важно:** Принятие — это НЕ смирение или пассивность. Это активное, осознанное решение предоставить пространство своим переживаниям.
 
-#### Techniques
+#### Техники
 
-- **Willingness Scale (0-10):** "How willing are you right now to just let this feeling be there?"
-- **Expansion:** Locate the feeling in the body, give it shape/color/texture, let it "breathe"
-- **Struggle Switch Metaphor:** There's a switch inside us — not for pain, but for the struggle against pain. Acceptance means flipping the struggle switch.
+- **Шкала готовности (0-10):** «Насколько вы готовы прямо сейчас просто позволить этому чувству быть?»
+- **Расширение (Expansion):** Локализовать чувство в теле, придать ему форму/цвет/текстуру, позволить ему «дышать»
+- **Метафора выключателя борьбы:** Внутри нас есть тумблер — не для боли, а для борьбы с болью. Принятие означает выключение тумблера борьбы.
 
-#### Metaphor: Quicksand
+#### Метафора: Зыбучие пески
 
-> If you've fallen into quicksand, the natural instinct is to fight, resist, thrash. But that's exactly what pulls you deeper. The only helpful thing: Lie flat, increase the surface area, accept contact with the quicksand. Not because quicksand is great — but because the struggle against it is the real problem.
-
----
-
-### 2. Cognitive Defusion
-
-**Definition:** Detaching from thoughts — seeing them for what they are: mental events, not reality itself. Instead of "I am worthless" -> "I am having the thought that I am worthless."
-
-#### Techniques
-
-- **"I am having the thought that..."** — Linguistically distance thoughts
-- **"Thank you, mind!"** — Acknowledge the mind as an overactive advisor without obeying it
-- **Singing thoughts:** Sing the distressing thought to the melody of "Happy Birthday" (reduces its credibility)
-- **Leaves on a stream:** Imagine a stream. Place each thought on a leaf and let it float by
-- **Passenger naming:** Give the inner critic a name ("Ah, there's Perfectionist Pete again")
-- **Repetition exercise:** Rapidly repeat a distressing word for 30 seconds — it loses its emotional charge
-
-#### Metaphor: The Uninvited Guest
-
-> Imagine you're throwing a party and an uninvited guest shows up. You have three options: (1) You throw them out — but they keep coming back and making noise. (2) You let them in and spend the whole evening monitoring them — then you miss your own party. (3) You let them in, acknowledge they're there, and continue enjoying your party. Option 3 is defusion.
+> Если вы попали в зыбучие пески, естественный инстинкт — барахтаться, сопротивляться, пытаться вырваться. Но именно это затягивает вас глубже. Единственное эффективное действие: лечь на спину, увеличить площадь соприкосновения и принять контакт с песком. Не потому что зыбучие пески прекрасны, а потому что борьба с ними — настоящая угроза.
 
 ---
 
-### 3. Present Moment Awareness (Contact with the Present Moment)
+### 2. Когнитивное разделение (Cognitive Defusion)
 
-**Definition:** Intentional, non-judgmental attention to the here and now. Neither ruminating about the past nor worrying about the future.
+**Определение:** Отстранение от мыслей — восприятие их тем, чем они являются на самом деле: ментальными событиями, а не самой реальностью. Вместо «Я ничтожество» -> «У меня возникла мысль, что я ничтожество».
 
-#### Techniques
+#### Техники
 
-- **5-4-3-2-1 Exercise:** 5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste
-- **Breath awareness:** 3 conscious breaths — just observe, don't control
-- **Sensory anchoring:** Explore an object with full attention (texture, weight, temperature)
-- **Check-in questions:** "What is happening in my body right now? What thoughts are here? What feelings?"
+- **«У меня есть мысль, что...»** — Лингвистическое дистанцирование от мыслей
+- **«Спасибо, разум!»** — Благодарить разум как гиперактивного советчика, не подчиняясь ему слепо
+- **Пение мыслей:** Напевать дистрессовую мысль на мотив песни «Happy Birthday» (снижает её убедительность)
+- **Листья в ручье:** Представить ручей. Поместить каждую мысль на листок и позволить ему уплыть
+- **Имя для пассажира:** Дать имя внутреннему критику («О, снова пришел Пит-Перфекционист»)
+- **Упражнение с повторением:** Быстро repeating тревожное слово в течение 30 секунд — оно теряет эмоциональный заряд
 
----
+#### Metaphor: Незваный гость
 
-### 4. Self-as-Context (Observing Self)
-
-**Definition:** Distinguishing between the self as content ("I AM anxious") and the self as context ("I NOTICE anxiety"). The observing self is the space in which all experiences occur — but it is not those experiences.
-
-#### Techniques
-
-- **Sky Metaphor:** "You are the sky, not the weather. Clouds, storms, sunshine — everything passes through. But the sky is always there."
-- **Chessboard Metaphor:** "You are not the white or black pieces. You are the board on which the game takes place."
-- **Observer Exercise:** Close your eyes. Observe thoughts. Observe feelings. Observe bodily sensations. Then: "Who is it that observes all of this?"
-- **Perspective Exercises:** "If your 80-year-old self were to look back at this situation — what would they say?"
+> Представьте, что вы устраиваете вечеринку, и приходит незваный гость. У вас три варианта: (1) Выгнать его — но он продолжает ломиться в дверь и шуметь. (2) Впустить его и весь вечер следить за ним — тогда вы пропустите собственный праздник. (3) Впустить его, признать его присутствие и продолжить наслаждаться вечеринкой. Вариант 3 — это разделение.
 
 ---
 
-### 5. Values
+### 3. Контакт с настоящим моментом (Present Moment Awareness)
 
-**Definition:** Freely chosen life directions. Values are not goals (which can be achieved) but compass directions (which are followed). You never "complete" the value of "being a loving partner" — you live it, moment by moment.
+**Определение:** Направленное, безоценочное внимание к «здесь и сейчас». Без обдумывания прошлого и тревоги о будущем.
 
-#### Values Clarification — Life Domains
+#### Техники
 
-| Life Domain | Guiding Question |
+- **Упражнение 5-4-3-2-1:** 5 предметов вокруг, 4 звука, 3 телесных ощущения, 2 запаха, 1 вкус
+- **Осознание дыхания:** 3 осознанных вдоха и выдоха — просто наблюдать, не контролировать
+- **Заземление через чувства:** Внимательно изучить предмет (текстуру, вес, температуру)
+- **Вопросы для проверки:** «Что прямо сейчас происходит в моем теле? Какие мысли здесь присутствуют? Какие чувства?»
+
+---
+
+### 4. Я как контекст (Self-as-Context / Наблюдающее Я)
+
+**Определение:** Разграничение между «Я как содержание» («Я тревожный») и «Я как контекст» («Я НАБЛЮДАЮ тревогу»). Наблюдающее Я — это пространство, в котором происходят все переживания, но оно не идентично им.
+
+#### Техники
+
+- **Метафора неба:** «Вы — небо, а не погода. Облака, грозы, солнце — всё проходит. Но небо остается всегда.»
+- **Метафора шахматной доски:** «Вы не белые и не черные фигуры. Вы — доска, на которой идет игра.»
+- **Упражнение «Наблюдатель»:** Закрыть глаза. Наблюдать мысли. Наблюдать чувства. Наблюдать ощущения. Затем спросить: «Кто тот, кто всё это наблюдает?»
+- **Перспективные упражнения:** «Если бы ваш 80-летний Я посмотрел на эту ситуацию из будущего — что бы он сказал?»
+
+---
+
+### 5. Ценности (Values)
+
+**Определение:** Свободно выбранные жизненные ориентиры. Ценности — это не цели (которые можно достигнуть), а направления компаса (которым следуют). Вы никогда не «завершите» ценность «быть любящим партнером» — вы проживаете её момент за моментом.
+
+#### Прояснение ценностей — Сферы жизни
+
+| Сфера жизни | Направляющий вопрос |
 |---|---|
-| Relationships | What kind of partner/friend/family member do I want to be? |
-| Work/Career | What makes work meaningful to me? |
-| Personal Growth | In what direction do I want to develop? |
-| Health | How do I want to treat my body? |
-| Leisure/Recreation | What truly nourishes me? |
-| Spirituality | What gives my life deeper meaning? |
-| Community | What do I want to contribute to the world? |
+| Отношения | Каким партнером/другом/членом семьи я хочу быть? |
+| Работа/Карьера | Что делает работу осмысленной для меня? |
+| Личностный рост | В каком направлении я хочу развиваться? |
+| Здоровье | Как я хочу относиться к своему телу? |
+| Досуг/Отдых | Что действительно наполняет меня ресурсом? |
+| Духовность | Что придает моей жизни глубокий смысл? |
+| Сообщество | Какой вклад я хочу внести в окружающий мир? |
 
-#### Techniques
+#### Техники
 
-- **Tombstone Exercise:** "What should be written on your tombstone? Not what you achieved, but what you stood for."
-- **Compass Exercise:** Determine a direction for each life domain and rate on a scale of 1-10: "How important is this to me?" and "How much am I living this right now?"
-- **Sweet Spot of Pain:** "Behind every pain lies a value. Those who don't love can't be hurt. That it hurts shows that something matters to you."
+- **Упражнение с надгробием:** «Что должно быть написано на вашем надгробии? Не то, чего вы достигли, а то, за что вы стояли.»
+- **Упражнение с компасом:** Определить направление для каждой сферы жизни и оценить по шкале от 1 до 10: «Насколько это важно для меня?» и «Насколько я проживаю это сейчас?»
+- **Исток боли:** «За каждой болью скрывается ценность. Тот, кто не любит, не может быть ранен. То, что вам больно, показывает, что нечто имеет для вас значение.»
 
 ---
 
-### 6. Committed Action
+### 6. Обязательство к действию (Committed Action)
 
-**Definition:** Concrete actions that align with one's own values. Not perfect, not "when I'm ready," but NOW, with all difficulties.
+**Определение:** Конкретные actions, соответствующие личным ценностям. Не идеальные, не «когда я буду готов», а СЕЙЧАС, со всеми трудностями.
 
-#### Techniques
+#### Техники
 
-- **SMART Value-Goals:** Specific, Measurable, Attractive, Realistic, Time-bound — but always linked to a value
-- **Smallest possible step:** "What is the smallest step you could take TODAY toward this value?"
-- **Willingness check:** "Are you willing to bring [unpleasant feeling] along if it shows up while you take this step?"
-- **Plan for obstacles:** "What inner barriers might arise? How do you want to handle them?" (not: "How will you eliminate them?")
+- **SMART-цели, основанные на ценностях:** Конкретные (Specific), Измеримые (Measurable), Привлекательные (Attractive), Реалистичные (Realistic), Ограниченные по времени (Time-bound) — но всегда связанные с ценностью
+- **Минимально возможный шаг:** «Какой наименьший шаг вы могли бы сделать СЕГОДНЯ на пути к этой ценности?»
+- **Проверка готовности:** «Готовы ли вы взять с собой [неприятное чувство], если оно возникнет при выполнении этого шага?»
+- **План преодоления препятствий:** «Какие внутренние барьеры могут возникнуть? Как вы планируете с ними обходиться?» (не «как их уничтожить»)
 
-#### Metaphor: Passengers on the Bus
+#### Метафора: Пассажиры в автобусе
 
-> You are the bus driver of your life. On the bus sit passengers — your thoughts, feelings, memories, bodily sensations. Some are loud, threatening, ugly. They shout: "Turn right! Turn left! Stop!" You have three options:
+> Вы — водитель автобуса своей жизни. В автобусе сидят пассажиры — ваши мысли, чувства, воспоминания, телесные ощущения. Некоторые из них шумные, угрожающие, неприятные. Они кричат: «Поворачивай направо! Поворачивай налево! Остановись!» У вас есть три варианта:
 >
-> 1. **Stop and fight:** You stop driving and try to throw the passengers out. But you don't move forward.
-> 2. **Negotiate:** You drive where the passengers want. But it's not YOUR direction.
-> 3. **Keep driving:** You let the passengers shout, take them along — and still drive in YOUR direction. The passengers are allowed to be there. But THEY don't determine the route.
+> 1. **Остановиться и драться:** Вы прекращаете движение и пытаетесь вытолкнуть пассажиров. Но вы не двигаетесь вперед.
+> 2. **Уступить:** Вы едете туда, куда хотят пассажиры. Но это не ВАШ маршрут.
+> 3. **Продолжать движение:** Вы позволяете пассажирам кричать, везете их с собой — и продолжаете двигаться в ВАШЕМ направлении. Пассажирам разрешено быть там, но НЕ ОНИ управляют автобусом.
 >
-> Committed action means: Driving the bus toward your values, no matter which passengers are on board.
+> Проактивное действие означает: Вести автобус к своим ценностям, независимо от того, какие пассажиры находятся на борту.
 
 ---
 
-## Areas of Application
+## Области применения
 
-ACT is evidence-based and effective for:
+ACT имеет доказательную базу и эффективна при:
 
-- **Depression and anxiety disorders**
-- **Chronic pain**
-- **Substance use disorders**
-- **Eating disorders**
-- **Burnout and workplace stress**
-- **Trauma and PTSD** (complementary)
-- **Psychotic disorders** (complementary)
+- **Депрессии и тревожных расстройствах**
+- **Хронической боли**
+- **Расстройствах, связанных с употреблением веществ**
+- **Расстройствах приема пищи (РПП)**
+- **Выгорании и рабочем стрессе**
+- **Травме и ПТСР** (как вспомогательный метод)
+- **Психотических расстройствах** (как вспомогательный метод)
 
 ---
 
-## When to Address Which Process?
+## Когда фокусироваться на каком процессе?
 
-| User's Situation | Primary ACT Process |
+| Ситуация клиента/пользователя | Первичный процесс ACT |
 |---|---|
-| Avoids certain feelings/situations | Acceptance |
-| Trapped in rumination/worry | Defusion |
-| Living on autopilot, dissociated | Present Moment Awareness |
-| Defines self through problems ("I AM...") | Self-as-Context |
-| Feels directionless, meaningless | Values |
-| Knows what matters but doesn't act | Committed Action |
+| Избегает определенных чувств/ситуаций | Принятие |
+| Застрял в жвачке мыслей / тревожных накручиваниях | Когнитивное разделение |
+| Живет на автопилоте, испытывает диссоциацию | Контакт с настоящим моментом |
+| Определяет себя через проблемы («Я — тревожный») | Я как контекст |
+| Чувствует дезориентацию, потерянность смысла | Ценности |
+| Знает, что важно, но не действует | Обязательство к действию |
 
 ---
 
-## Ethical Guidelines
+## Этические принципы
 
-An AI assistant may explain ACT techniques psychoeducationally and guide exercises.
+ИИ-ассистент может разъяснять техники ACT в психообразовательных целях и сопровождать базовые упражнения.
 
-An AI assistant must NOT:
-- Make diagnoses
-- Simulate a therapeutic relationship
-- Act alone in cases of acute suicidality — refer to professional help
-- Present ACT as a substitute for psychotherapy
+ИИ-ассистент НЕ ДОЛЖЕН:
+- Ставить диагнозы
+- Имитировать терапевтические отношения
+- Действовать в одиночку при остром суицидальном риске — перенаправлять к специалистам
+- Предоставлять ACT как замену психотерапии
 
-See: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../ETHICS.md)
 
-**In case of acute crisis, ALWAYS refer to:**
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи: +7 (495) 051 (Москва)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная служба: 112 (РФ / ЕС) / 911 (US)
 
 ---
 
-## References
+## Литература
 
 - Hayes, S. C., Strosahl, K. D., & Wilson, K. G. (2012). *Acceptance and Commitment Therapy: The Process and Practice of Mindful Change.* 2nd Edition.
 - Harris, R. (2009). *ACT Made Simple.*
@@ -219,4 +230,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Перенесено из BACH v3.8.0 | Автономная версия*

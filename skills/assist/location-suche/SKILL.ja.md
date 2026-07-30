@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [日本語] エージェントスキル: location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: OpenStreetMap（Nominatim + Overpass API）を使用した場所、レストラン、ホテルの検索。指定位置周辺の POI（Point of Interest）を返したり、フリーテキストで検索します。
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -12,79 +12,75 @@ languages: [de, en]
 dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json', 'time']}
 runtime: python3
 entry_point: location_suche_core.py
-provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\\n'}
+provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\n'}
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `location-suche`.
+> **日本語** — `location-suche` の公式日本語版。
 
 
+# 場所検索 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Location Search (English)
-
-**Location, restaurant and hotel search via OpenStreetMap**
+**OpenStreetMap を使用した場所・レストラン・ホテル検索**
 
 ---
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Searches for restaurants, hotels, cafes and other places using the
-OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
-No API key required. No persistent store.
+OpenStreetMap のサービスである Nominatim（ジオコーディング）と Overpass（POI 検索）を
+使用して、レストラン、ホテル、カフェなどの場所を検索します。
+API キーは不要です。永続ストレージはありません。
 
 ---
 
-## Triggers
+## トリガー
 
-| Phrase | Action |
+| フレーズ | アクション |
 |---|---|
-| "Find a restaurant in Munich" | POI search: category=restaurant, near=Munich |
-| "Hotels near Vienna" | POI search: category=hotel, near=Vienna |
-| "Where is the Eiffel Tower?" | Nominatim free-text search |
-| "Find cafes in Berlin" | POI search: category=cafe, near=Berlin |
-| "Search for pharmacy near Potsdam" | POI search: category=pharmacy, near=Potsdam |
+| "Find a restaurant in Munich"（ミュンヘンのレストランを探す） | POI 検索：category=restaurant, near=Munich |
+| "Hotels near Vienna"（ウィーン周辺のホテル） | POI 検索：category=hotel, near=Vienna |
+| "Where is the Eiffel Tower?"（エッフェル塔はどこ？） | Nominatim フリーテキスト検索 |
+| "Find cafes in Berlin"（ベルリンのカフェを探す） | POI 検索：category=cafe, near=Berlin |
+| "Search for pharmacy near Potsdam"（ポツダム周辺の薬局を検索） | POI 検索：category=pharmacy, near=Potsdam |
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
-1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
-   and a location → step 2. Otherwise free text → step 4.
-2. **Geocode location:** Nominatim provides coordinates for the named location.
-3. **Search POIs:** Overpass API searches for venues of the category within radius.
-4. **Display result:** List with name, address, distance (m).
-5. **Free-text search (fallback):** Nominatim free-text provides direct hits.
+1. **トリガーの検出:** リクエストにカテゴリ（レストラン、ホテルなど）
+   と場所が含まれているか確認 → ステップ 2。含まれていない場合はフリーテキスト → ステップ 4。
+2. **場所のジオコーディング:** Nominatim が指定された場所の座標を取得します。
+3. **POI 検索:** Overpass API が指定検索半径内にある該当カテゴリの施設を検索します。
+4. **結果の表示:** 名称、住所、距離（m）のリストを表示します。
+5. **フリーテキスト検索（フォールバック）:** Nominatim フリーテキスト検索により直接一致する結果を取得します。
 
 ---
 
 ## CLI
 
 ```bash
-# POI search (category + location) (English)
+# POI search (category + location) (日本語)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Geocode location (English)
+# Geocode location (日本語)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburg Gate Berlin"
 
-# Adjust radius (default: 1000 m) (English)
+# Adjust radius (default: 1000 m) (日本語)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Help (English)
+# Help (日本語)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 
 ---
 
-## Store
+## ストレージ
 
-No persistent store. Results are only displayed, not saved.
+永続ストレージはありません。結果は表示のみ行われ、保存されません。
 
 ---
 
-## Supported Categories
+## サポートされているカテゴリ
 
 restaurant, cafe, bar, pub, fast_food, hotel, hostel, guest_house, supermarket,
 pharmacy, hospital, bank, atm, fuel, parking, bus_stop, train_station, museum,
@@ -92,33 +88,33 @@ cinema, theatre, library, school, university, church
 
 ---
 
-## Attitude
+## 振る舞い・方針
 
-- Always ask the user for a location if none was given.
-- With more than 10 results only show the 5 nearest, rest on request.
-- State distance in metres, from 1 km in km (1 decimal place).
-- Privacy: no location data is stored or transmitted except to the
-  public Nominatim/Overpass API (openstreetmap.org).
-
----
-
-## Privacy
-
-Search requests go to `nominatim.openstreetmap.org` and `overpass-api.de`.
-No login, no API key, no persistent data storage.
-User-Agent is set according to Nominatim policy.
+- 場所が指定されていない場合は、常にユーザーに場所を確認してください。
+- 検索結果が 10 件を超える場合は、最も近い 5 件のみを表示し、残りはリクエストに応じて表示します。
+- 距離はメートル単位で表示し、1 km 以上の場合は km 単位（小数第 1 位まで）で表示します。
+- プライバシー: 公共の Nominatim/Overpass API（openstreetmap.org）以外に
+  位置データが保存または送信されることはありません。
 
 ---
 
-## Related Resources
+## プライバシー
 
-- `reiseroute` — route planning from A to B (also uses Nominatim for geocoding)
-- `wetter` — weather at current location
+検索リクエストは `nominatim.openstreetmap.org` および `overpass-api.de` に送信されます。
+ログイン不要、API キー不要、永続的なデータ保存なし。
+User-Agent は Nominatim ポリシーに従って設定されます。
+
+---
+
+## 関連リソース
+
+- `reiseroute` — A から B へのルート計画（ジオコーディングに Nominatim を使用）
+- `wetter` — 現在地の天気
 
 ---
 
 ## 変更履歴
 
-| Version | Date | Change |
+| バージョン | 日付 | 変更内容 |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH location_search.py v1.1.0; store removed |
+| 1.0.0 | 2026-06-22 | BACH location_search.py v1.1.0 から作成。ストレージ機能を削除 |

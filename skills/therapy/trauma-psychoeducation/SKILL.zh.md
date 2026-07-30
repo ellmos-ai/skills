@@ -1,330 +1,335 @@
 ---
+name: trauma-psychoeducation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 创伤心理教育：创伤定义、正常应激反应、容忍窗、触发因素管理及自我关怀。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [trauma, psychoeducation, window-of-tolerance, trigger, self-care, ptsd]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `trauma-psychoeducation`.
+> **中文** — `trauma-psychoeducation` 官方中文版本。
 
 
+# 创伤心理教育（Trauma Psychoeducation）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 关于创伤、创伤后遗症状及容忍窗的知识普及：理解对异常事件作出的正常反应——纯粹的心理教育，非创伤加工处理。
 
-
-# Trauma Psychoeducation (English)
-
-> Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Psychoeducation about trauma helps affected individuals understand and contextualize their reactions. The knowledge that symptoms like flashbacks, hyperarousal, or avoidance are NORMAL reactions to ABNORMAL events is already relieving and reduces shame and self-blame.
-
-Evidence: Psychoeducation is a recognized component of trauma therapy (Flatten et al. 2011, S3 Guideline PTSD). As a standalone intervention, it is insufficient, but it can increase therapy motivation and alleviate symptoms.
-
-**IMPORTANT:** This skill exclusively conveys KNOWLEDGE about trauma. It does NOT conduct trauma processing, does NOT explore distressing memories, and does NOT ask for trauma details.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参阅：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is Trauma?
+## 背景介绍
 
-### Definition
+关于创伤的心理教育有助于受影响的个体理解并理性看待自身的反应。得知闪回、过度警觉或回避等症状是人类对“异常事件”作出的“正常反应”，本身就能带来极大的心理释怀，减轻内疚感与自责。
 
-A trauma is an event that exceeds a person's coping capacity and is accompanied by the experience of helplessness, loss of control, and/or fear of death. It is not the event alone that defines the trauma, but the subjective experience.
+循证依据：心理教育是公认的创伤治疗重要组成部分（Flatten et al. 2011, S3 指南 PTSD）。虽然作为独立干预手段尚显不足，但它能显著提高求治动机并缓解症状。
 
-### Trauma Types
+**重要提示：** 本技能仅传授关于创伤的“知识”。严禁实施创伤加工/再加工，严禁深入探寻痛苦回忆，严禁索要创伤细节。
+**严禁实施：** EMDR（眼动脱敏与再加工）、延长暴露疗法（PE）、叙事暴露疗法（NET）。
 
-| Type | Description | Examples |
+---
+
+## 1. 什么是创伤？
+
+### 定义
+
+创伤是指超出个体应对能力的事件，并伴随着无助感、失控感和/或对死亡的恐惧体验。定义创伤的关键不仅在于事件本身，更在于个体的“主观体验”。
+
+### 创伤类型
+
+| 类型 | 描述 | 示例 |
 |------|-------------|----------|
-| Type I (Single trauma) | Single, unexpected event | Accident, assault, natural disaster |
-| Type II (Complex trauma) | Repeated, prolonged traumatization | Abuse, neglect, war |
-| Accidental trauma | Random events | Traffic accident, house fire, workplace accident |
-| Interpersonal trauma | Caused by humans | Violence, abuse, torture |
-| Secondary trauma | Through co-experiencing/witnessing | Helping professions, family members |
+| Ⅰ 型创伤（单次创伤） | 单次、突发的意外事件 | 车祸、突发袭击、自然灾害 |
+| Ⅱ 型创伤（复合/复杂创伤） | 长期、反复遭受的创伤体验 | 童年虐待、忽略、战争体验 |
+| 意外事故创伤 | 偶然发生的突发事件 | 交通事故、火灾、工伤事故 |
+| 人际创伤 | 由人类人为因素造成的创伤 | 暴力犯罪、性侵、虐待、折磨 |
+| 替代性/继发性创伤 | 通过旁观、倾听或陪伴受害者体验 | 助人专业人员（医生/心理咨询师）、家属 |
 
-### What Is NOT Trauma (Differentiation)
+### 什么是非创伤（临床鉴别）
 
-Not every distressing event is a trauma in the clinical sense:
-- Breakup, job loss, arguments — distressing, but usually not trauma
-- Bullying — can be traumatizing (especially for children), but is not automatically trauma
-- The individual appraisal determines, not the type of event
-
----
-
-## 2. Normal Reactions to Abnormal Events
-
-### The Three Response Patterns
-
-```
-HYPERAROUSAL
-- Constant vigilance and tension
-- Startle response
-- Sleep problems
-- Irritability, anger outbursts
-- Concentration difficulties
-
-RE-EXPERIENCING (Intrusion)
-- Flashbacks (memories that feel real)
-- Nightmares
-- Distressing memories that arise suddenly
-- Physical reactions upon remembering (racing heart, sweating)
-
-AVOIDANCE AND NUMBING (Constriction)
-- Avoidance of places, people, situations
-- Emotional numbness
-- Withdrawal from other people
-- Feeling of alienation
-- Loss of interest and pleasure
-```
-
-### Important Message for Affected Individuals
-
-```
-"These reactions are NORMAL reactions to ABNORMAL events.
-
-Your body and mind are trying to protect you.
-The vigilance protects you from renewed danger.
-The memories are trying to process what happened.
-The avoidance protects you from being overwhelmed.
-
-You are not 'crazy.' You are not 'weak.'
-Your nervous system is responding the way it is programmed
-to respond to extreme threat."
-```
-
-### Timeline
-
-```
-COURSE AFTER TRAUMATIC EVENT
-
-0-4 weeks:  Acute Stress Reaction (NORMAL)
-            - Shock, numbness, restlessness
-            - Sleep problems, startle response
-            - Flashbacks, nightmares
-            - For most people: Spontaneous recovery
-
-4+ weeks:   If symptoms persist: Possible PTSD
-            - Professional assessment recommended
-            - Early intervention improves prognosis
-
-Months-Years: Chronification possible
-            - Therapy is effective even after a long time
-            - "It is never too late to seek help"
-```
+并非所有令人痛苦或有压力的事件都属于临床意义上的创伤：
+- 分手、失业、争吵——令人痛苦，但通常不构成临床创伤
+- 霸凌（Bullying）——可能具有创伤性（特别是对儿童），但并不自动等同于创伤
+- 个体的心理评估与主观感受决定了事件的影响，而非仅由事件类别决定
 
 ---
 
-## 3. The Window of Tolerance (Dan Siegel)
+## 2. 对异常事件的正常反应
 
-### The Model
+### 三种主要反应模式
+
+```
+过度警觉（Hyperarousal）
+- 持续的警觉与生理紧张
+- 过度的惊跳反应
+- 睡眠障碍、失眠
+- 易怒、情绪暴躁或发怒
+- 注意力集中困难
+
+重新体验 / 侵入性症状（Intrusion）
+- 闪回（Flashbacks，如临其境的侵入性回忆）
+- 噩梦
+- 突如其来的痛苦回忆
+- 回想时的躯体反应（心跳过速、出汗）
+
+回避与麻木（Constriction / Avoidance）
+- 回避特定地点、人物、情境
+- 情感麻木、感觉丧失
+- 从人际关系中退缩、孤立
+- 疏离感与陌生感
+- 丧失兴趣与体验快乐的能力（安hedonia）
+```
+
+### 给受影响者的重要信息
+
+```
+“这些反应是人类对‘异常事件’作出的‘正常反应’。
+
+你的身体和心灵正在试图保护你。
+警觉是为了保护你免受新的危险。
+记忆的浮现是在试图消化和加工发生过的事情。
+回避是为了保护你免遭压倒性情绪的淹没。
+
+你没有‘疯’，你也不‘软弱’。
+你的神经系统只是在按照其面对极端威胁时的预设机制做出反应。”
+```
+
+### 时间病程
+
+```
+创伤事件后的转归过程
+
+0-4 周：    急性应激反应（正常现象）
+            - 震惊、麻木、不安
+            - 睡眠问题、惊跳反应
+            - 闪回、噩梦
+            - 对大多数人而言：属于自然康复期
+
+4 周以上：  如果症状持续存在：可能存在 PTSD 倾向
+            - 建议寻求专业评估
+            - 早期干预有助于改善预后
+
+数月至数年：可能演变为慢性化
+            - 即使历时久远，心理治疗依然有效
+            - “寻求帮助永远都不晚”
+```
+
+---
+
+## 3. 容忍窗模型（Dan Siegel 容忍窗）
+
+### 模型图解
 
 ```
             ________________________________________________
            |                                                |
-           |   ABOVE THE WINDOW: Hyperarousal               |
-           |   Panic, rage, overactivation, flashbacks      |
-           |   Racing heart, sweating, trembling            |
-           |   "Fight or flight"                            |
+           |   窗口上方：过度激活（Hyperarousal）            |
+           |   惊恐、暴怒、过度兴奋、闪回                    |
+           |   心跳过速、出汗、发抖                          |
+           |   “打或逃”反应（Fight or Flight）              |
            |________________________________________________|
            |                                                |
-           |   WINDOW OF TOLERANCE                          |
+           |   容忍窗（WINDOW OF TOLERANCE）                |
            |                                                |
-           |   Here we can:                                 |
-           |   - Think and feel at the same time            |
-           |   - Process information                        |
-           |   - Maintain relationships                     |
-           |   - Solve problems                             |
-           |   - Learn and grow                             |
+           |   在此状态下我们可以：                          |
+           |   - 同时思考与感受                             |
+           |   - 处理与消化信息                             |
+           |   - 维持健康的人际关系                         |
+           |   - 解决问题                                   |
+           |   - 学习与成长                                 |
            |________________________________________________|
            |                                                |
-           |   BELOW THE WINDOW: Hypoarousal                |
-           |   Freeze, numbness, dissociation               |
-           |   Lack of energy, emptiness, shutdown           |
-           |   "Playing dead reflex"                         |
+           |   窗口下方：激活不足（Hypoarousal）             |
+           |   冻结、麻木、解离                              |
+           |   缺乏精力、内心空虚、关机/瘫痪状态             |
+           |   “假死反射”（Freeze / Shutdown）              |
            |________________________________________________|
 ```
 
-### What Does This Mean?
+### 容忍窗的含义
 
-- **In the window:** We can regulate stress and function
-- **Above the window:** Too much activation — body in alarm mode
-- **Below the window:** Too little activation — body shuts down
+- **在窗口内部：** 我们能够调节压力并维持正常功能
+- **在窗口上方：** 激活水平过高——身体处于报警状态
+- **在窗口下方：** 激活水平过低——身体陷入瘫痪关机
 
-### Trauma and the Window
+### 创伤与容忍窗
 
 ```
-BEFORE trauma:            AFTER trauma (untreated):
+创伤前：                   创伤后（未干预）：
 
 |_______________|         |_____|
-|               |         |     |  <- Window has NARROWED
-|    WINDOW     |         | W.  |
-|   (wide)      |         |     |
+|               |         |     |  <- 容忍窗变窄了
+|    容忍窗     |         | 容. |
+|    (宽阔)     |         |     |
 |_______________|         |_____|
 
-Even small stimuli can cause falling out of the window
-after trauma (triggers).
+创伤发生后，微小的刺激（触发因素）
+就可能导致个体跌出容忍窗之外。
 
-GOAL of therapy: WIDEN the window again.
+心理治疗的目标：重新“拓宽”容忍窗。
 ```
 
-### Understanding Triggers
+### 理解触发因素（Triggers）
 
 ```
-TRIGGERS are stimuli that remind of the trauma and put
-the nervous system into alarm mode — often unconsciously.
+触发因素是能够让人联想到创伤的刺激，
+它们会在无意识中将神经系统推入报警状态。
 
-Triggers can be:
-- Sounds (bang, screaming, certain music)
-- Smells (smoke, perfume, alcohol)
-- Images (news, movies, places)
-- Body sensations (tightness, touch, pain)
-- Calendar dates (anniversaries)
-- Relationship situations (arguments, loss of control)
+常见的触发因素包括：
+- 声音（巨响、尖叫、特定音乐）
+- 气味（烟味、香水味、酒精味）
+- 画面（新闻、电影、特定场所）
+- 身体感觉（胸闷、触碰、疼痛）
+- 日历日期（纪念日）
+- 人际情境（争吵、失去掌控感）
 
-Triggers are NOT weakness. They are stored warning signals
-of the nervous system. In therapy, one learns to recognize
-triggers and regulate the nervous system.
-```
-
----
-
-## 4. Self-Care Strategies
-
-### Ensuring Basic Needs
-
-```
-BASIC NEEDS CHECKLIST
-
-[ ] Sleep: Regular bedtimes, at least 7 hours
-[ ] Nutrition: Regular meals, sufficient water
-[ ] Exercise: At least 20 minutes daily (a walk is enough)
-[ ] Social contacts: At least one trusted person
-[ ] Safety: Feeling safe in one's own environment
-[ ] Structure: Daily routine with fixed anchor points
-```
-
-### Self-Care Strategies in Daily Life
-
-**Physical:**
-- Regular exercise (lowers stress hormones)
-- Breathing exercises
-- Sufficient sleep (observe sleep hygiene)
-- Reduce caffeine and alcohol (amplify hyperarousal/numbing)
-
-**Social:**
-- Have a trusted person (doesn't have to talk about trauma)
-- Avoid isolation — even small contacts help
-- Learn to set boundaries (being allowed to say "no")
-- Accept support
-
-**Emotional:**
-- Name feelings (don't judge them)
-- Use stabilization techniques (5-4-3-2-1, safe place)
-- Keep a journal (optional, don't force it)
-- Find creative expression (painting, music, writing)
-
-**Cognitive:**
-- Inform yourself (psychoeducation — this skill)
-- Challenge self-blame ("It was not my fault")
-- Reality-check catastrophizing
-- Be patient with yourself (healing takes time)
-
----
-
-## 5. Finding Professional Help
-
-### When to Seek Professional Help?
-
-```
-PROFESSIONAL HELP IS INDICATED WHEN:
-
-- Symptoms persist for more than 4 weeks
-- Symptoms worsen instead of improving
-- Daily life is no longer manageable (work, relationships)
-- Flashbacks or nightmares occur very frequently
-- Avoidance behavior severely restricts life
-- Substance use as a coping strategy
-- Suicidal thoughts or self-harm
-- The feeling: "I can't do this alone"
-```
-
-### Resources
-
-```
-IMMEDIATE HELP:
-- 988 Suicide & Crisis Lifeline (US): 988 (24/7, free)
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222 (24/7, free)
-- Emergency services: 911 (US) / 112 (EU)
-
-TRAUMA-SPECIFIC:
-- Trauma outpatient clinics (at many hospitals, no referral needed)
-- Victim support organizations (e.g., RAINN in US: 1-800-656-4673)
-- Domestic violence hotline (US): 1-800-799-7233
-- National Sexual Assault Hotline (US): 1-800-656-4673
-
-FINDING A THERAPIST:
-- Psychology Today therapist directory: psychologytoday.com/us/therapists
-- SAMHSA helpline (US): 1-800-662-4357
-- Important: Look for therapists specializing in "trauma therapy"
+触发因素并非软弱的表现。它们是神经系统储存的预警信号。
+在治疗中，人们学会识别触发因素并调节神经系统。
 ```
 
 ---
 
-## 6. Frequently Asked Questions (FAQ)
+## 4. 自我关怀策略
 
-### "Am I traumatized now?"
+### 满足基础需求
 
-Not everyone who experiences a distressing event develops a trauma-related disorder. The majority of people recover spontaneously within weeks. Whether PTSD is present can only be determined by a professional.
+```
+基础需求清单
 
-### "Do I have to talk about it?"
+[ ] 睡眠：规律的作息，保证至少 7 小时睡眠
+[ ] 营养：定时进餐，摄入充足水分
+[ ] 运动：每天至少 20 分钟（散步即可）
+[ ] 社交：至少与一位信任的人保持联系
+[ ] 安全：在自身环境中感到安全
+[ ] 结构：带有固定锚点的每日生活作息
+```
 
-No. Forcing yourself to talk can be harmful. Some people benefit from talking about it, others don't. There is no "must." In therapy, the right timing is determined together.
+### 日常生活中的自我关怀策略
 
-### "Why do I react this way even though it was long ago?"
+**身体层面：**
+- 定期适度运动（降低应激激素）
+- 呼吸练习
+- 充足睡眠（注意睡眠卫生）
+- 减少咖啡因和酒精（会加重过度警觉或麻木感）
 
-Traumatic memories are stored differently than normal memories. They can be reactivated by triggers and feel as though the event is happening NOW. The brain does not distinguish between "then" and "now." Therapy helps "re-sort" these memories.
+**社交层面：**
+- 拥有信任的人（不需要谈论创伤本身）
+- 避免自我孤立——即使微小的社交接触也有帮助
+- 学会设定边界（允许自己说“不”）
+- 接受他人的支持
 
-### "Am I weak because I can't handle this alone?"
+**情绪层面：**
+- 命名情绪（不作道德评价或自我评判）
+- 使用稳定技术（5-4-3-2-1 技术、安全岛）
+- 撰写日记（可选，切勿强求）
+- 寻找创造性表达（绘画、音乐、写作）
 
-No. Seeking help is a sign of strength. Trauma therapy is effective — most people can improve significantly with professional help.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Convey knowledge about trauma and trauma sequelae (psychoeducation)
-- Normalize normal reactions and provide relief
-- Explain the window of tolerance
-- Suggest self-care strategies
-- Refer to professional help
-- Offer stabilization techniques
-
-**An AI assistant must NOT:**
-- Conduct trauma processing (EMDR, exposure, NET, IRRT)
-- Ask for or explore trauma details
-- Process flashback content (only stabilize)
-- Diagnose PTSD or other trauma-related disorders
-- Assess suicidality
-- Make medication-related recommendations
-- Make statements about blame or responsibility
-- "Work through" or "process" memories
-- Ask suggestive questions ("Could it be that...")
-
-**PARTICULARLY STRICT BOUNDARY:** Trauma processing belongs in the hands of trained trauma therapists. This skill offers exclusively psychoeducation and stabilization. For any form of trauma exploration: STOP and refer to a professional.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**认知层面：**
+- 充实相关知识（心理教育——即本技能）
+- 挑战自责倾向（“这不是我的错”）
+- 针对灾难化思维做现实检验
+- 对自己保持耐心（康复需要时间）
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — Not professional therapy*
+## 5. 寻找专业帮助
+
+### 何时需要寻求专业心理帮助？
+
+```
+存在以下情况时建议寻求专业帮助：
+
+- 症状持续超过 4 周
+- 症状未见好转反而加重
+- 日常生活受到严重干扰（工作、人际关系）
+- 频繁出现闪回或噩梦
+- 回避行为严重限制了正常生活
+- 依靠物质（酒精/药物）作为应对策略
+- 出现自杀念头或自伤行为
+- 产生“我无法独自应对”的感觉
+```
+
+### 求助资源
+
+```
+紧急求助：
+- 中国心理危机干预热线：400-161-9995 / 010-82951332
+- 全国希望热线：400-810-7980
+- 988 自杀与危机生命线（美国）：988
+- 紧急救助电话：110 / 120（中国） / 911（美国） / 112（欧洲）
+
+创伤专向资源：
+- 精神卫生中心 / 心理科创伤门诊
+- 妇女儿童保护热线 / 法律援助中心
+
+寻找心理咨询师/治疗师：
+- 卫生健康委注册精神科医师 / 临床心理学家
+- 关键提示：寻找具备“创伤治疗 / EMDR / PTSD”专业背景的心理治疗师
+```
+
+---
+
+## 6. 常见问题解答（FAQ）
+
+### “我现在算不算受创伤了？”
+
+并不是每一个经历过应激事件的人都会发展出创伤相关障碍。大多数人在数周内都能自然康复。是否存在 PTSD 需要由专业人员进行评估诊断。
+
+### “我必须把事情讲出来吗？”
+
+不需要。强迫自己讲出细节可能会造成二次伤害。有些人从讲述中获益，而有些人则不然。没有所谓的“必须”。在心理治疗中，合适的时机由你和治疗师共同决定。
+
+### “为什么事情过去很久了我还会这样反应？”
+
+创伤性记忆的储存方式与普通记忆不同。它们可能会被触发因素重新激活，让人感觉事情“此时此刻”正在发生。大脑无法自动区分“当时”与“现在”。心理治疗有助于重新“整理和归档”这些记忆。
+
+### “我无法独自应对，是不是说明我很软弱？”
+
+不是。寻求帮助是勇敢和有力量的表现。创伤心理治疗非常有效——绝大多数人在专业帮助下都能取得显著改善。
+
+---
+
+## 伦理与边界
+
+**AI 助手可以：**
+- 普及关于创伤及创伤后遗症状的知识（心理教育）
+- 使正常应激反应正常化，减轻心理负担
+- 讲解容忍窗模型
+- 建议自我关怀策略
+- 转介专业心理帮助
+- 提供稳定技术
+
+**AI 助手绝对不可以：**
+- 实施创伤加工/再加工（EMDR、暴露疗法、NET、IRRT 等）
+- 询问或探索创伤事件的细节
+- 处理闪回的具体内容（仅做稳定化干预）
+- 诊断 PTSD 或其他创伤相关障碍
+- 评估自杀风险
+- 提供药物相关建议
+- 对责任或过错做出表态
+- “深入加工”或“消化”创伤记忆
+- 提出诱导性提问（如“会不会是因为……”）
+
+**极其严格的边界：** 创伤加工处理必须由受过专门训练的创伤心理治疗师亲自实施。本技能仅提供心理教育与稳定化技术。对于任何形式的创伤细节探索：必须立刻停止并转介至专业人员。
+
+**出现急性危机时，务必转介至：**
+- 中国心理危机干预热线：400-161-9995 / 010-82951332
+- 全国希望热线：400-810-7980
+- 988 自杀与危机生命线（美国）：988
+- 紧急救助电话：110 / 120（中国） / 911（美国） / 112（欧洲）
+
+---
+
+*移植自 BACH v3.8.0 | 独立版本*
+*参考来源：Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 指南 PTSD (2019) — 非专业心理治疗*

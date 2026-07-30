@@ -1,74 +1,79 @@
 ---
+name: dev
+version: 0.1.0
+type: expert
+author: ellmos
+created: 2026-06-22
+updated: 2026-06-22
+description: 開発者アシスタント（ATI の後継）。ヘッドレススキャンによりプロジェクトの概要を迅速に取得し、利用可能なコーディングツール（CodeCommander MCP（分析/リファクタリング/診断）および ellmos-code-tools モジュール）へルーティングします。独自のストアを持たず、純粋なツールルーティングとスキャンを実行します。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: assist
+tags: [dev, coding, projekt-scan, ati, codecommander]
 language: ja
+status: active
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `dev`.
+> **日本語** — `dev` の公式日本語版。
 
 
+# Dev — 開発者アシスタント (ATI) (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+最初に概要を取得し、最適なツールへ引き継ぎます。
 
+## 概要と目的
 
-# Dev — Developer Assistant (ATI) (English)
+BACH の ATI/entwickler エージェントの後継。2つのタスクを実行します：
+1. **プロジェクトスキャン**（ヘッドレス、標準ライブラリのみ）：高コストな分析を実行する前に、プロジェクトの構造、言語、ビルドマーカーの概要を高速かつトークン効率良く取得します。
+2. **ツールルーティング：** 機能を重複させることなく、既存のコーディングツールに委任します。
 
-Gets an overview first, then hands off to the right tools.
+## トリガー (Triggers)
 
-## 概要と目的 & Purpose
-
-Successor to BACH's ATI/entwickler agent. Two tasks:
-1. **Project scan** (headless, stdlib): fast, token-efficient overview of
-   structure, languages and build markers of a project — before expensive analysis runs.
-2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
-
-## Triggers
-
-| User input | Action |
+| ユーザー入力 | アクション |
 |---|---|
-| "Get an overview of project X" | `dev_core.py scan <path>` |
-| "What kind of project is this / which stack?" | `dev_core.py scan <path>` |
-| "Analyse this file / refactor" | → CodeCommander MCP |
-| "Generate/check Python code" | → CodeCommander MCP / ellmos-code-tools |
+| 「プロジェクト X の概要を取得して」 | `dev_core.py scan <path>` |
+| 「これはどんなプロジェクト？ / 技術スタックは？」 | `dev_core.py scan <path>` |
+| 「このファイルを分析/リファクタリングして」 | → CodeCommander MCP |
+| 「Python コードを生成/チェックして」 | → CodeCommander MCP / ellmos-code-tools |
 
-## Tool Landscape (Routing Targets)
+## ツールランドスケープ（ルーティング対象）
 
-- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
-  `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
-  pycutter context, Method-Analyzer).
-- **FileCommander MCP**: File/directory operations over large trees.
+- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`)：`cc_analyze_code`、`cc_analyze_methods`、`cc_extract_classes`、`cc_diagnose_imports`、`cc_runtime_import_diagnose`、`cc_generate_python_code`、`cc_check_indentation` など。
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`)：CLI 開発ツール（Structural-Edit、pycutter context、Method-Analyzer）。
+- **FileCommander MCP**：大規模ツリーでのファイル/ディレクトリ操作。
 
-## CLI Entry Point (dev_core.py)
+## CLI エントリーポイント (dev_core.py)
 
 ```bash
 python dev_core.py scan .              # current project
 python dev_core.py scan /path/project  # structure + languages + markers
 ```
 
-Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git repo.
+検出例：Python (pyproject/requirements/setup)、Node/TypeScript、Rust、Go、Java、Roblox (Rojo)、Docker、Git リポジトリ。
 
-## Store
+## ストア (Store)
 
-No store. Pure scan + routing.
+ストアなし。純粋なスキャン + ルーティング。
 
-## Attitude
+## スタンス
 
-We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
-to others (e.g. ruff/pylint/eslint) if the user prefers them.
+コーディングツールとして CodeCommander/ellmos-code-tools を推奨しますが、ユーザーが他のツール（例: ruff/pylint/eslint）を希望する場合は柔軟に対応します。
 
-## Privacy
+## プライバシー
 
-- `dev_core.py` only reads file/directory names (structure), no content, no upload.
-- Skipped: `.git`, `node_modules`, `.venv`, `__pycache__` etc.
+- `dev_core.py` はファイル/ディレクトリ名（構造）のみを読み取り、コンテンツの読み取りやアップロードは行いません。
+- スキップ対象：`.git`、`node_modules`、`.venv`、`__pycache__` など。
 
-## Related Resources
+## 関連リソース
 
-- `assist/AGENTS.md` — Umbrella router
+- `assist/AGENTS.md` — 統括ルーター
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
 ## 変更履歴
 
 ### 0.1.0 (2026-06-22)
-- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
-  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.
+- 初版。ATI/entwickler の後継：ヘッドレスプロジェクトスキャン（標準ライブラリ） + CodeCommander MCP / ellmos-code-tools へのルーティング。ユーザー中立、ストアなし。

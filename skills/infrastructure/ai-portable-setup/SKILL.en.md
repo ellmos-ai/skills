@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': [
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `ai-portable-setup`.
 
 
 # AI Portable Setup (English)
@@ -31,19 +31,19 @@ with Ollama and local embedding models.
 ## Quick Start
 
 ```bash
-# Create structure on USB drive (English)
+# Create structure on USB drive (Deutsch)
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system: (English)
+# Then on the target system: (Deutsch)
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents (English)
+# Index documents (Deutsch)
 python rag/ingest.py
 
-# Query (English)
+# Query (Deutsch)
 python rag/query.py "My question..."
 python rag/query.py --mode icf "Observations about the client"
 ```

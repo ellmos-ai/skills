@@ -1,280 +1,291 @@
 ---
+name: stabilization-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Техники стабилизации: Заземление, безопасное место, контейнирование и дыхательные упражнения. Экспресс-техники при остром дистрессе и панических атаках.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [stabilization, grounding, safe-place, containment, breathing-exercises, crisis-management]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `stabilization-techniques`.
+> **Русский** — Официальная русская версия `stabilization-techniques`.
 
 
+# Техники стабилизации (Stabilization Techniques)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Основы
 
+Техники стабилизации — это **методы экстренного вмешательства** в ситуациях острого психологического дистресса. Они помогают вернуться из состояния захлестывающих эмоций, паники, диссоциации или флешбэков в «здесь и сейчас». Они не заменяют полноценную терапию, а служат **первой психологической помощью**.
 
-# Stabilization Techniques (English)
-
-## Foundation
-
-Stabilization techniques are **immediate interventions** for acute distress situations. They help return from overwhelming emotions, panic, dissociation, or flashbacks to the here and now. They do not replace therapy but serve as **psychological first aid**.
-
-Core principle: **Back into the body, back into the moment, back into control.**
-
----
-
-## 1. Grounding Techniques
-
-Grounding brings attention back to the present moment and one's own body. Particularly effective for dissociation, flashbacks, and panic.
-
-### 1.1 Sensory Grounding: The 5-4-3-2-1 Technique
-
-The most well-known and accessible grounding technique. Systematically activates all five senses.
-
-#### Instructions
-
-> **5 things you SEE:**
-> Look around. Name five things you can see right now. Anything — the wall, your hand, a light switch. Describe details: color, shape, size.
->
-> **4 things you HEAR:**
-> Close your eyes briefly. What do you hear? The hum of the refrigerator, birds, your own breath, traffic.
->
-> **3 things you FEEL (touch):**
-> What is touching your body right now? The chair beneath you, fabric on your skin, the temperature of the air.
->
-> **2 things you SMELL:**
-> Consciously sniff. Room air, your shampoo, coffee, fresh air.
->
-> **1 thing you TASTE:**
-> What do you taste right now? The last coffee, toothpaste, simply your mouth.
-
-#### Variation: Intensive Grounding
-
-For stronger dissociation — work with physical stimuli:
-- Hold an ice cube in your hand
-- Run cold water over your wrists
-- Smell something strong (peppermint oil, smelling salts)
-- Hot candy or chili
-- Stomp feet firmly on the ground
+Основной принцип: **Назад в тело, назад в настоящий момент, назад под контроль.**
 
 ---
 
-### 1.2 Physical Grounding (Body Grounding)
+## 1. Техники заземления (Grounding Techniques)
 
-Brings attention deliberately into the body.
+Заземление возвращает внимание к текущему моменту и собственному телу. Особo эффективно при диссоциации, флешбэках и панических атаках.
 
-#### Instructions: Body Scan (Short Version)
+### 1.1 Сенсорное заземление: Техника 5-4-3-2-1
 
-> Sit upright. Feet flat on the floor.
+Самая известная и доступная техника заземления. Последовательно активирует все пять органов чувств.
+
+#### Инструкция
+
+> **5 предметов, которые вы ВИДИТЕ:**
+> Оглядитесь вокруг. Назовите пять предметов, которые вы видите прямо сейчас. Все что угодно: стена, ваша рука, выключатель. Опишите детали: цвет, форму, размер.
 >
-> **Feet:** Feel the contact with the ground. Actively press your feet down. Feel the weight.
+> **4 звука, которые вы СЛЫШИТЕ:**
+> Зажмурьтесь или прикройте глаза. Что вы слышите? Гул холодильника, пение птиц, собственное дыхание, шум дороги.
 >
-> **Legs:** Feel your thighs on the chair. The weight they carry.
+> **3 ощущения, которые вы ЧУВСТВУЕТЕ (осязание):**
+> Что касается вашего тела прямо сейчас? Стул под вами, ткань одежды на коже, температура воздуха.
 >
-> **Back:** Feel the backrest. Consciously lean against it.
+> **2 запаха, которые вы ОЩУЩАЕТЕ:**
+> Осознанно вдохните. Воздух в комнате, ваш шампунь, кофе, свежий воздух.
 >
-> **Hands:** Place them on your thighs. Feel the warmth, the contact.
->
-> **Breath:** Feel how your belly rises and falls. Don't control it — just observe.
+> **1 вкус, который вы ОЩУЩАЕТЕ:**
+> Какой вкус вы чувствуете во рту прямо сейчас? Недавно выпитый кофе, зубная паста или просто вкус во рту.
 
-#### Progressive Muscle Relaxation (Short Version)
+#### Вариант: Интенсивное заземление
 
-Tense each muscle area for 5 seconds, then relax for 10 seconds:
-
-1. **Hands:** Clench fists — release
-2. **Arms:** Tense biceps — release
-3. **Shoulders:** Pull up to ears — drop
-4. **Face:** Squeeze together — relax
-5. **Abdomen:** Tense — release
-6. **Legs:** Tense — release
-7. **Feet:** Curl toes — release
+При глубокой диссоциации — работа с физическими раздражителями:
+- Подержать в руке кубик льда
+- Подержать запястья под холодной проточной водой
+- Вдохнуть резкий запах (эфирное масло мяты, нашатырный спирт)
+- Съесть кислую конфету или кусочек перца чили
+- Потопать ногами по полу
 
 ---
 
-### 1.3 Cognitive Grounding
+## 1.2 Физическое заземление (Телесное заземление)
 
-Uses mental activity to exit emotional flooding.
+Направляет внимание непосредственно на телесные ощущения.
 
-#### Techniques
+#### Инструкция: Сканирование тела (краткая версия)
 
-- **Count backward:** From 100 in steps of 7 (100, 93, 86, 79...)
-- **List categories:** "5 car brands, 5 cities starting with B, 5 forest animals..."
-- **Orientation:** State the date, time, location, own name: "I am [name]. It is [day], [time]. I am in [place]. I am safe."
-- **Color game:** Find all red objects in the room. Then all blue. Then all green.
-- **Alphabet game:** For a category (e.g., animals), find a word for each letter
+> Сядьте прямо. Стопы плотно стоят на полу.
+>
+> **Стопы:** Ощутите контакт с полом. Активно придавите стопы к полу. Ощутите их вес.
+>
+> **Ноги:** Ощутите бедра на стуле. Вес, который они удерживают.
+>
+> **Спина:** Ощутите спинку стула. Осознанно обопритесь на нее.
+>
+> **Руки:** Положите их на бедра. Ощутите тепло, контакт.
+>
+> **Дыхание:** Ощутите, как поднимается и опускается живот. Не контролируйте дыхание — просто наблюдайте.
+
+#### Прогрессивная мышечная релаксация (краткая версия)
+
+Напрягайте каждую группу мышц на 5 секунд, затем расслабляйте на 10 секунд:
+
+1. **Кисти рук:** Сжать кулаки — расслабить
+2. **Руки:** Напрячь бицепсы — расслабить
+3. **Плечи:** Поднять к ушам — опустить
+4. **Лицо:** Сморщить лицо — расслабить
+5. **Живот:** Напрячь — расслабить
+6. **Ноги:** Напрячь мышцы ног — расслабить
+7. **Стопы:** Поджать пальцы ног — расслабить
 
 ---
 
-## 2. Safe Place
+## 1.3 Когнитивное заземление
 
-An imaginative stabilization technique. Frequently used in trauma therapy (including EMDR protocol). Creates an inner refuge that can be accessed at any time.
+Использует мыслительную активность для выхода из состояния эмоционального затопления.
 
-### Instructions for Building
+#### Приемы
 
-> **Step 1: Find the place**
-> "Imagine a place where you feel completely safe and secure. It can be a real place (a beach, a room, a forest) or a completely imagined place. What matters is: YOU feel safe there."
->
-> **Step 2: Activate the senses**
-> "What do you see at your safe place? What colors, what light?
-> What do you hear? Silence, birds, water, music?
-> What do you smell? Sea, forest, fresh laundry?
-> What do you feel on your skin? Warmth, wind, soft grass?
-> What is the temperature?"
->
-> **Step 3: Anchor the body feeling**
-> "How does your body feel at this place? Where do you feel the safety? In your belly? In your chest? Let that feeling grow larger."
->
-> **Step 4: Choose a signal word**
-> "Choose a word or a brief image that instantly takes you to this place. For example, 'cove' or 'forest clearing.' When you think this word, you are there."
->
-> **Step 5: Practice**
-> "Over the next few days, briefly visit your safe place again and again (30-60 seconds). The more you practice, the faster and deeper you arrive there."
-
-### Important Notes
-
-- The safe place should NOT contain real people (relationships can change)
-- With trauma: Sometimes no place feels safe enough — then a "safe room" can be built (with walls, locks, protective shield)
-- The place can change — this is normal and allowed
-- Don't force it if it doesn't work — choose a different technique instead
+- **Обратный счет:** От 100 с шагом 7 (100, 93, 86, 79...)
+- **Перечисление категорий:** «5 марок автомобилей, 5 городов на букву Б, 5 лесных животных...»
+- **Ориентировка:** Произнести дату, время, место и свое имя: «Я [имя]. Сегодня [день недели], время [время]. Я нахожусь в [место]. Я в безопасности.»
+- **Игра с цветом:** Найти все красные предметы в комнате. Затем синие. Затем зеленые.
+- **Алфавит:** Для выбранной категории (например, животные) назвать слово на каждую букву алфавита.
 
 ---
 
-## 3. Containment Technique (Vault Exercise)
+## 2. Безопасное место (Safe Place)
 
-Helps temporarily "lock away" distressing thoughts, images, or feelings when they cannot be processed at the moment. **Not suppression**, but conscious regulation of timing.
+Техника визуализации и стабилизации. Часто используется в терапии травмы (включая протокол EMDR). Создает внутреннее убежище, в которое можно вернуться в любой момент.
 
-### Instructions
+### Инструкция по созданию
 
-> **Step 1: Choose a container**
-> "Imagine a container that is absolutely secure. A vault, a chest, a bunker — big enough for everything you want to put in. It has a lock, and only you have the key."
+> **Шаг 1: Найдите место**
+> «Представьте себе место, где вы чувствуете себя в полной безопасности и защищенности. Это может быть реальное место (пляж, комната, лес) или полностью вымышленное. Главное: ВЫ чувствуете себя там в безопасности.»
 >
-> **Step 2: Name what is distressing**
-> "What would you like to put in there right now? Name it. It can be images, feelings, thoughts, memories."
+> **Шаг 2: Подключите органы чувств**
+> «Что вы видите в своем безопасном месте? Какие цвета, какой свет?
+> Что вы слышите? Тишину, птиц, шум воды, музыку?
+> Что вы чувствуете органами обоняния? Морской воздух, лес, свежее белье?
+> Что ощущает ваша кожа? Тепло, ветер, мягкую траву?
+> Какая там температура?»
 >
-> **Step 3: Place it inside**
-> "Put it in. Piece by piece. Watch as it slides into the container. It is safely stored."
+> **Шаг 3: Закрепите телесное ощущение**
+> «Как чувствует себя ваше тело в этом месте? Где именно вы ощущаете безопасность? В животе? В груди? Позвольте этому чувству расшириться.»
 >
-> **Step 4: Lock it**
-> "Close the container. Turn the key. Hear the lock click shut. Take the key with you."
+> **Шаг 4: Выберите ключевое слово**
+> «Выберите слово или короткий образ, который мгновенно переносит вас в это место. Например, "бухта" или "лесная поляна". Когда вы думаете об этом слове, вы оказываетесь там.»
 >
-> **Step 5: Store it**
-> "Place the container somewhere you choose. It stands there safely. You can return at any time and take something out — but YOU decide when."
+> **Шаг 5: Практика**
+> «В течение следующих дней периодически возвращайтесь в свое безопасное место на короткое время (30-60 секунд). Чем больше вы практикуетесь, тем быстрее и глубже погружаетесь.»
 
-### Important
+### Важные примечания
 
-- Containment is a TEMPORARY strategy
-- What is postponed must be processed later (ideally in therapy)
-- Not suitable as a permanent solution — otherwise it becomes avoidance
+- В безопасном месте НЕ должно быть реальных людей (отношения могут меняться)
+- При травме: иногда ни одно место не кажется достаточно безопасным — тогда можно построить «безопасную комнату» (со стенами, замками, защитным экраном)
+- Место может меняться — это нормально и допустимо
+- Не форсируйте процесс, если не получается — используйте другую технику
 
 ---
 
-## 4. Breathing Exercises
+## 3. Техника контейнирования (Упражнение «Сейф / Контейнер»)
 
-The breath is the fastest bridge between body and psyche. Slow, deep breathing activates the parasympathetic nervous system and reduces the stress response.
+Помогает временно «запереть» тревожащие мысли, образы или чувства, когда их невозможно переработать прямо сейчас. **Это не подавление**, а осознанная регуляция времени работы с ними.
 
-### 4.1 Extended Exhale (Basic Technique)
+### Инструкция
 
-**Effect:** Activates the parasympathetic nervous system. Lowers heart rate and blood pressure.
-
-> **Inhale:** 4 seconds through the nose
-> **Exhale:** 6-8 seconds through the mouth (longer than inhaling!)
+> **Шаг 1: Выберите контейнер**
+> «Представьте контейнер, который абсолютно надежен. Сейф, сундук, бункер — достаточно большой для всего, что вы хотите туда поместить. У него есть замок, и ключ есть только у вас.»
 >
-> The exhale is the key. The longer the exhale relative to the inhale, the stronger the relaxation response.
-
-### 4.2 Box Breathing (4-4-4-4)
-
-**Effect:** Calming and focusing. Used by Navy SEALs and first responders.
-
-> **Inhale:** 4 seconds
-> **Hold:** 4 seconds
-> **Exhale:** 4 seconds
-> **Hold:** 4 seconds
+> **Шаг 2: Назовите то, что тревожит**
+> «Что вы хотите поместить туда прямо сейчас? Назовите это. Это могут быть образы, чувства, мысли, воспоминания.»
 >
-> Repeat 4-6 cycles.
-
-### 4.3 Physiological Sigh (Huberman Technique)
-
-**Effect:** Fastest known method for stress reduction. A single double-inhale is sufficient.
-
-> **Double inhale:** Short and sharp through the nose, then IMMEDIATELY take another short breath (without exhaling in between)
-> **Long exhale:** Slowly and completely through the mouth
+> **Шаг 3: Поместите это внутрь**
+> «Положите это внутрь. Предмет за предметом. Наблюдайте, как это помещается в контейнер. Теперь это надежно спрятано.»
 >
-> Even a single cycle measurably lowers heart rate.
-
-### 4.4 4-7-8 Breathing Exercise (Andrew Weil)
-
-**Effect:** Deep relaxation. Particularly good for falling asleep.
-
-> **Inhale:** 4 seconds through the nose
-> **Hold:** 7 seconds
-> **Exhale:** 8 seconds through the mouth
+> **Шаг 4: Заприте его**
+> «Закройте контейнер. Поверните ключ. Услышьте щелчок замка. Заберите ключ с собой.»
 >
-> 4 cycles. No more at the beginning — can cause dizziness.
+> **Шаг 5: Разместите его**
+> «Поставьте контейнер в выбранное вами место. Он стоит там надежно. Вы можете вернуться в любой момент и достать что-то, но именно ВЫ решаете, когда.»
+
+### Важно
+
+- Контейнирование — это ВРЕМЕННАЯ стратегия
+- То, что отложено, должно быть переработано позже (желательно в терапии)
+- Не подходит в качестве постоянного решения — иначе это превратится в избегание
 
 ---
 
-## When to Use Which Technique?
+## 4. Дыхательные упражнения
 
-| Situation | Recommended Technique | Rationale |
+Дыхание — самый быстрый мост между телом и психикой. Медленное, глубокое дыхание активирует парасимпатическую нервную систему и снижает стрессовый ответ.
+
+### 4.1 Удлиненный выдох (Базовая техника)
+
+**Эффект:** Активирует парасимпатическую нервную систему. Снижает частоту сердечных сокращений и артериальное давление.
+
+> **Вдох:** 4 секунды через нос
+> **Выдох:** 6-8 секунд через рот (дольше, чем вдох!)
+>
+> Выдох является ключевым элементом. Чем дольше выдох по отношению к вдоху, тем сильнее расслабление.
+
+### 4.2 Квадратное дыхание (Box Breathing 4-4-4-4)
+
+**Эффект:** Успокоение и фокус. Используется подразделениями Navy SEALs и службами экстренного реагирования.
+
+> **Вдох:** 4 секунды
+> **Задержка:** 4 секунды
+> **Выдох:** 4 секунды
+> **Задержка:** 4 секунды
+>
+> Повторить 4-6 циклов.
+
+### 4.3 Физиологический вздох (Техника Хубермана)
+
+**Эффект:** Быстрейший из известных способов снижения стресса. Достаточно одного двойного вдоха.
+
+> **Двойной вдох:** Короткий резкий вдох через нос, и СРАЗУ ЖЕ еще один короткий вдох (без выдоха между ними)
+> **Длинный выдох:** Медленно и полностью через рот
+>
+> Даже один цикл измеримо снижает пульс.
+
+### 4.4 Дыхание 4-7-8 (Эндрю Вейл)
+
+**Эффект:** Глубокое расслабление. Особенно эффективно при засыпании.
+
+> **Вдох:** 4 секунды через нос
+> **Задержка:** 7 секунд
+> **Выдох:** 8 секунд через рот
+>
+> 4 цикла. На первых порах не делайте больше — может возникнуть головокружение.
+
+---
+
+## Какую технику когда использовать?
+
+| Ситуация | Рекомендуемая техника | Обоснование |
 |-----------|----------------------|-----------|
-| Panic attack | Extended exhale + 5-4-3-2-1 | Activate parasympathetic, sensory anchoring |
-| Flashback / Intrusion | Cognitive grounding + orientation | Back to the here and now |
-| Dissociation | Intensive grounding (ice, cold water) | Strong sensory stimuli break through dissociation |
-| Overwhelming emotions | Containment + breathing exercise | Postponement + physical calming |
-| Sleep problems (rumination) | 4-7-8 breathing + safe place | Deep relaxation + positive imagery |
-| Acute stress | Box breathing or physiological sigh | Rapid regulation |
-| Before stressful situations | Safe place + breathing exercise | Activate resource |
-| After stressful conversations | Physical grounding + extended exhale | Calm down nervous system |
+| Паническая атака | Удлиненный выдох + 5-4-3-2-1 | Активация парасимпатики, сенсорная анкоризация |
+| Флешбэк / Интрузия | Когнитивное заземление + ориентировка | Возврат в «здесь и сейчас» |
+| Диссоциация | Интенсивное заземление (лед, холодная вода) | Сильные раздражители прерывают диссоциацию |
+| Захлестывающие эмоции | Контейнирование + дыхание | Откладывание + телесное успокоение |
+| Проблемы со сном (руминация) | Дыхание 4-7-8 + безопасное место | Глубокая релаксация + позитивные образы |
+| Острый стресс | Квадратное дыхание или физиологический вздох | Быстрая саморегуляция |
+| Перед стрессовой ситуацией | Безопасное место + дыхание | Активация ресурсов |
+| После тяжелого разговора | Телесное заземление + удлиненный выдох | Успокоение нервной системы |
 
 ---
 
-## Daily Plan for Stabilization Practice
+## Ежедневный план практики стабилизации
 
-Regular practice makes techniques accessible in emergencies. Recommended routine:
+Регулярная практика делает техники доступными в кризисных ситуациях. Рекомендуемый режим:
 
-| Time | Exercise | Duration |
+| Время | Упражнение | Длительность |
 |------|----------|----------|
-| Morning after waking | 3x physiological sigh | 1 minute |
-| Midday | Brief body scan | 3 minutes |
-| During stress (ad hoc) | Box breathing or 5-4-3-2-1 | 2-5 minutes |
-| Evening before sleep | 4-7-8 breathing + safe place | 5 minutes |
+| Утром после пробуждения | 3x физиологический вздох | 1 минута |
+| Днем | Краткое сканирование тела | 3 минуты |
+| При стрессе (по ситуации) | Квадратное дыхание или 5-4-3-2-1 | 2-5 минут |
+| Вечером перед сном | Дыхание 4-7-8 + безопасное место | 5 минут |
 
-**Total effort: approximately 10-15 minutes daily.**
-
----
-
-## Emergency Short Protocol
-
-When someone is in acute distress — follow this sequence:
-
-1. **BREATHE:** "Breathe with me. In... and out... In... and out..." (Guide extended exhale)
-2. **ORIENT:** "Tell me: Where are you right now? What day is it? What is your name?"
-3. **FEEL:** "Feel your feet on the ground. Press them down firmly."
-4. **SEE:** "Look around. Name 5 things you see."
-5. **NAME:** "What just happened? You don't need to go into detail — just one word or one sentence."
-
-**After that: Clarify safety.** Is the person safe? Do they need professional help?
+**Общее время: около 10-15 минут в день.**
 
 ---
 
-## Ethical Guidelines
+## Экспресс-протокол для экстренных ситуаций
 
-An AI assistant may guide stabilization techniques when a person describes stress, anxiety, or overwhelm.
+Если кто-то находится в состоянии острого дистресса — следуйте алгоритму:
 
-An AI assistant must NOT:
-- Use stabilization techniques as a substitute for emergency help (for acute suicidality: refer to 988 / 112 / Telefonseelsorge 0800-1110111)
-- Conduct trauma processing — stabilization is NOT therapy
-- Guarantee effectiveness ("This will help" -> instead "This may help")
-- Ignore physical causes (panic attack vs. heart attack -> when in doubt, recommend medical evaluation)
+1. **ДЫШИТЕ:** «Дыши со мной. Вдох... и выдох... Вдох... и выдох...» (Направляйте удлиненный выдох)
+2. **ОРИЕНТИРУЙТЕ:** «Скажи мне: Где ты сейчас? Какой сегодня день? Как тебя зовут?»
+3. **ОЩУЩАЙТЕ:** «Почувствуй свои стопы на полу. Придави их к полу.»
+4. **СМОТРИТЕ:** «Посмотри вокруг. Назови 5 предметов, которые ты видишь.»
+5. **НАЗОВИТЕ:** «Что только что произошло? Не нужно вдаваться в детали — буквально одно слово или одно предложение.»
 
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**После этого: Проверьте безопасность.** Находится ли человек в безопасности? Нужна ли профессиональная помощь?
 
 ---
 
-## References
+## Этические принципы
+
+ИИ-ассистент может направлять выполнение техник стабилизации, когда пользователь описывает стресс, тревогу или подавленность.
+
+ИИ-ассистент НЕ ДОЛЖЕН:
+- Использовать техники стабилизации как замену экстренной помощи (при острой суицидальной угрозе: направлять на горячие линии 988 / 112 / 8-800-200-01-22)
+- Проводить проработку травмы — стабилизация НЕ является терапией
+- Гарантировать эффективность («Это обязательно поможет» -> вместо этого «Это может помочь»)
+- Игнорировать соматические причины (паническая атака vs. инфаркт -> при сомнениях рекомендовать медицинский осмотр)
+
+См.: [ETHICS.md](../ETHICS.md)
+
+**В случае острого кризиса ВСЕГДА направляйте на:**
+- Единый телефон доверия (РФ): 8-800-2000-122 / 8-800-200-47-03
+- Горячая линия психологической помощи (МЧС РФ): +7 (495) 989-50-50
+- 988 Suicide & Crisis Lifeline (США): 988
+- Экстренные службы: 112 (РФ / ЕС) / 911 (США)
+
+---
+
+## Литература
 
 - Reddemann, L. (2001). *Imagination als heilsame Kraft.* Klett-Cotta.
 - Levine, P. A. (1997). *Waking the Tiger: Healing Trauma.*
@@ -284,4 +295,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Перенесено из BACH v3.8.0 | Автономная версия*

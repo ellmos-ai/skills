@@ -2,126 +2,90 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `bilingual-doc-sync`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bilingual-doc-sync`.
+> **Español** — Versión oficial en español de `bilingual-doc-sync`.
 
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
+# Bilingual-Doc-Sync — Mantener sincronizadas las versiones lingüísticas paralelas (Español)
 
-## Descripción General y Propósito & Purpose
+## Descripción general y propósito
 
-Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
-wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
-Skill macht die Synchronprüfung zu einem definierten Ablauf mit einer entscheidenden
-Vorab-Festlegung: **Welche Fassung führt?** Ohne Leitsprache-Regel wird jede Divergenz
-zur Einzelfallentscheidung und der Abgleich unwiederholbar.
+Los documentos bilingües divergen gradualmente: la versión que se edita activamente crece, mientras que la otra queda desfasada, hasta que la "traducción" solo lo es de nombre. Esta habilidad convierte la verificación de sincronización en un proceso definido con una regla previa decisiva: **¿qué versión es la principal?** Sin una regla de idioma principal, cada divergencia se convierte en una decisión caso por caso y la comparación resulta irrepetible.
 
-## Ablauf
+## Proceso
 
-### 1. Bestand feststellen
+### 1. Determinar el estado del inventario
 
-- Liegen beide (alle) Sprachfassungen vor? Fehlt eine ganz → **nachziehen** (vollständige
-  Übersetzung der führenden Fassung, nicht Neudichtung).
-- Namenskonvention prüfen (z. B. `DOKUMENT.md` + `DOKUMENT.en.md` oder `_de`/`_en`-Suffixe)
-  und Abweichler angleichen — Auffindbarkeit ist die halbe Synchronität.
+- ¿Están presentes ambas (o todas) las versiones lingüísticas? Si falta alguna por completo → **actualizar/igualar** (traducción completa de la versión principal, no una nueva redacción).
+- Comprobar la convención de nombres (p. ej., `DOCUMENTO.md` + `DOCUMENTO.en.md` o sufijos `_de`/`_en`) y unificar las desviaciones: la capacidad de localización es la mitad de la sincronización.
 
-### 2. Leitsprache klären (vor jedem Abgleich)
+### 2. Aclarar el idioma principal (antes de cada sincronización)
 
-- Die Leitsprache ist die Fassung, in der inhaltlich gearbeitet wird (bei Papers oft EN,
-  bei lokaler Doku oft die Muttersprache). Sie gewinnt bei Widerspruch.
-- **Rücktransfer-Ausnahme:** Löst die Nebenfassung etwas nachweislich besser (klarere
-  Formulierung, korrigierter Fehler), wird es in die Leitfassung ÜBERNOMMEN — erst
-  rücktransferieren, dann normal synchronisieren. Fachliche Korrektheit prüfen, bevor
-  eine „schönere" Formulierung übernommen wird.
+- El idioma principal (o leitsprache) es la versión en la que se trabaja en cuanto a contenido (en artículos académicos suele ser EN, en documentación local suele ser la lengua materna). Prevalece en caso de contradicción.
+- **Excepción de transferencia inversa:** Si la versión secundaria resuelve algo de manera demostrablemente mejor (formulación más clara, error corregido), se ADOPTA en la versión principal: primero realizar la transferencia inversa y luego sincronizar normalmente. Verificar la corrección técnica antes de adoptar una formulación "más bonita".
 
-### 3. Parallelität prüfen
+### 3. Comprobar la paralelidad
 
-Struktur zuerst, dann Inhalt:
+Estructura primero, luego el contenido:
 
-1. **Gliederungsvergleich:** Abschnitte/Überschriften beider Fassungen nebeneinander —
-   fehlende, zusätzliche, umsortierte Abschnitte sind die groben Divergenzen.
-2. **Abschnittsweise Stichprobe** der übereinstimmenden Gliederung: Aussagen, Zahlen,
-   Verweise, Beispiele identisch? Besonders divergenzanfällig: Changelogs, Tabellen,
-   Zahlenwerte, Literatur-/Linkverzeichnisse, zuletzt bearbeitete Abschnitte.
-3. **Nicht übersetzbare Invarianten** prüfen: Code-Blöcke, Identifier, Formeln, Pfade
-   müssen in beiden Fassungen IDENTISCH sein (Code wird nie übersetzt).
+1. **Comparación de la estructura:** Secciones y encabezados de ambas versiones lado a lado; las secciones faltantes, adicionales o reordenadas constituyen las divergencias más notorias.
+2. **Muestreo por secciones** de la estructura coincidente: ¿Son idénticas las afirmaciones, números, referencias y ejemplos? Especialmente propensos a divergencias: registros de cambios (changelogs), tablas, valores numéricos, listas de referencias/enlaces y secciones editadas recientemente.
+3. **Comprobar invariantes no traducibles:** Los bloques de código, identificadores, fórmulas y rutas deben ser IDÉNTICOS en ambas versiones (el código nunca se traduce).
 
-### 4. Beheben
+### 4. Resolver divergencias
 
-- Divergenzen in Richtung Leitsprache auflösen (bzw. nach Rücktransfer).
-- Sprachtypografie der Zielsprache respektieren (im Deutschen echte Umlaute ä ö ü ß,
-  keine ae/oe/ue-Ersatzschreibung; Anführungszeichen-Konventionen).
-- Metadaten nachziehen: Versionsnummern, Datumsfelder, Changelog-Einträge in BEIDEN
-  Fassungen (der Changelog selbst ist der häufigste Divergenzpunkt).
+- Resolver las divergencias en dirección al idioma principal (o tras la transferencia inversa).
+- Respetar la tipografía lingüística del idioma de destino (en español, uso correcto de tildes, signos de apertura `¿` `¡`, convenciones de comillas).
+- Actualizar metadatos: números de versión, campos de fecha y entradas de changelog en AMBAS versiones (el propio changelog es el punto de divergencia más frecuente).
 
-### 5. Dokumentieren
+### 5. Documentar
 
-Ergebnis festhalten (was war divergent, was wurde übernommen, was rücktransferiert).
-Als periodischer Lauf über einen Bestand: mit dem Rotations-Gerüst kombinieren
-(`rotation-check`) — ein Dokument(-Paar) pro Lauf, Registry als Gedächtnis.
+Registrar el resultado (qué era divergente, qué se adoptó y qué se transfirió de forma inversa).
+Como ejecución periódica sobre un conjunto de documentos: combinar con la estructura de rotación (`rotation-check`) — un documento (o par) por ejecución, usando el registro como memoria.
 
-## Erweiterung: Expansions-Audit (sollten MEHR Sprachen existieren?)
+## Extensión: Auditoría de expansión (¿deberían existir MÁS idiomas?)
 
-Neben dem Synchronhalten bestehender Fassungen gehört zur Sprachpflege die Frage, ob ein
-Dokument/Projekt WEITERE Sprachen verdient:
+Además de mantener sincronizadas las versiones existentes, la gestión lingüística incluye evaluar si un documento o proyecto merece idiomas ADICIONALES:
 
-1. **Eignung bewerten** statt blind übersetzen: Zielgruppe, internationale Nutzbarkeit,
-   Store-/Web-Präsenz, Mobilität des Inhalts. Nicht jedes interne Dokument braucht Englisch;
-   nicht jede App braucht fünf Sprachen.
-2. **Technische Vorbereitung prüfen:** Ist das Ziel überhaupt auf Sprachdateien/Parallel-
-   Fassungen vorbereitet (i18n-Struktur, Namenskonvention)? Wenn nein, ist DAS die erste
-   Aufgabe, nicht die Übersetzung.
-3. **Befund dokumentieren, nicht sofort massenübersetzen:** Konkrete Übersetzungsaufgaben
-   in die projektlokale TODO-Datei; „keine weitere Sprache sinnvoll" ist ein gültiges,
-   festzuhaltendes Ergebnis.
-4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
-   gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
+1. **Evaluar la idoneidad** en lugar de traducir a ciegas: público objetivo, usabilidad internacional, presencia en tiendas/web, movilidad del contenido. No todo documento interno necesita inglés; no toda aplicación necesita cinco idiomas.
+2. **Comprobar la preparación técnica:** ¿Está el objetivo preparado para archivos de idioma/versiones paralelas (estructura i18n, convención de nombres)? Si no, ESA es la primera tarea, no la traducción.
+3. **Documentar el hallazgo, no realizar traducciones masivas de inmediato:** Asignar tareas de traducción concretas al archivo TODO local del proyecto; la conclusión "ningún otro idioma es necesario" es un resultado válido que debe registrarse.
+4. **Control de calidad en versiones actualizadas:** Comprobar aleatoriamente las traducciones autogeneradas contra la versión principal (Sección 3) antes de considerarlas "existentes".
 
-## Ejemplo y Uso & Usage
+## Ejemplo y aplicación
 
 ```text
-Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
+Encargo: "Comprueba si el artículo está sincronizado en DE y EN."
 
-1. Bestand: paper_en.tex (führend) + paper_de.tex vorhanden.
-2. Gliederung: DE fehlt der neue Abschnitt 4.2 (letzte EN-Revision); DE hat einen
-   besseren Beweis-Absatz in 3.1.
-3. Rücktransfer: 3.1-Formulierung fachlich geprüft → in EN übernommen.
-4. Nachziehen: 4.2 nach DE übersetzt; Zahlen in Tabelle 2 abgeglichen (DE hatte
-   veraltete Werte); Literaturverzeichnis identisch gemacht.
-5. Registry-Eintrag: „paper-X | 2026-07-03 | de-en-sync | 3 Divergenzen behoben,
-   1 Rücktransfer | nächster Check nach nächster EN-Revision".
+1. Inventario: paper_en.tex (principal) + paper_de.tex presentes.
+2. Estructura: A DE le falta la nueva sección 4.2 (última revisión de EN); DE tiene un
+   párrafo de demostración mejor en 3.1.
+3. Transferencia inversa: Formulación de 3.1 verificada técnicamente → adoptada en EN.
+4. Actualización: 4.2 traducido a DE; números en la Tabla 2 cotejados (DE tenía
+   valores desfasados); bibliografía igualada.
+5. Entrada en registro: "paper-X | 2026-07-03 | de-en-sync | 3 divergencias resueltas,
+   1 transferencia inversa | próxima revisión tras la siguiente versión de EN".
 ```
 
-## Red Flags
+## Red Flags (Señales de advertencia)
 
-| Gedanke | Realität |
+| Pensamiento | Realidad |
 | --- | --- |
-| „Ich übersetze die Unterschiede einfach frisch" | Erst Leitsprache + Rücktransfer-Frage klären — sonst wird die bessere Lösung überschrieben. |
-| „Die Gliederung passt, also ist es synchron" | Zahlen, Changelogs und Verweise divergieren zuerst — Stichprobe in die Tiefe ist Pflicht. |
-| „Code-Kommentare übersetze ich mit" | Code-Blöcke und Identifier bleiben in beiden Fassungen identisch (englisch). |
-| „Ich synchronisiere alle Dokumente in einem Rutsch" | Ein Paar pro Lauf (Rotations-Gerüst) hält den Abgleich prüfbar. |
+| "Simplemente traduciré las diferencias desde cero" | Aclarar primero el idioma principal y la transferencia inversa — de lo contrario, se sobrescribirá la mejor solución. |
+| "La estructura coincide, por lo tanto está sincronizado" | Los números, changelogs y referencias divergen primero — es obligatorio hacer muestreos en profundidad. |
+| "También traduciré los comentarios del código" | Los bloques de código y los identificadores permanecen idénticos en ambas versiones (en inglés). |
+| "Sincronizaré todos los documentos de una sola vez" | Un par por ejecución (usando la estructura de rotación) mantiene la comparación verificable. |
 
-## Verwandte Skills
+## Habilidades relacionadas
 
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
+- `rotation-check` — Estructura para ejecuciones periódicas sobre un fondo de documentos.
+- `workflow-extract` — Si esta comprobación se va a configurar como una automatización permanente.
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.1.0 (2026-07-03)
-- Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für
-  nachgezogene Fassungen) — integriert statt als eigener i18n-coverage-audit-Skill
-  (Dedup-Entscheid).
+- Se añadió la auditoría de expansión (evaluar idoneidad i18n, preparación técnica, control de calidad para versiones actualizadas) — integrada en lugar de crear un skill independiente i18n-coverage-audit (decisión de desduplicación).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation
-  „research-paper-de-en-synchronisationscheck", verallgemeinert auf beliebige parallel
-  geführte Sprachfassungen (Papers, READMEs, Skills, Website-Texte).
+- Versión inicial. Abstraído de la automatización Codex "research-paper-de-en-synchronisationscheck", generalizado para cualquier par de versiones lingüísticas paralelas (artículos, READMEs, skills, textos web).

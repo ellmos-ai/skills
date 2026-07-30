@@ -1,208 +1,172 @@
 ---
+name: trampelpfadanalyse
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-06-21
+updated: 2026-06-21
+description: 针对流水线与控制文件工作流的错误分析：检查一项规范或规程对 LLM 是否真正可见和可发现。通过朴素子 Agent（隔离沙盒副本、相同测试用例、定量成功率测量）执行实证基线 → 干预 → 重测对比。当 Agent 反复忽略规则/README/规范或导航错误，且希望测量文档修改是否真正改变行为时使用本 Skill。由 'is the convention even seen'、'why does no agent follow the rule'、'make a doc signpost measurably effective'、'desire-path analysis'、'trampelpfadanalyse' 触发。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `trampelpfadanalyse`.
+> **中文** — `trampelpfadanalyse` 官方中文版本。
 
 
+# 径路分析 (Desire-Path Analysis) — 让规范对 LLM 实证可见 (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+一种用于揭示流水线和控制文件工作流中错误的方法。这类错误并非源于损坏的代码，而是源于**某项规范对 LLM 而言不可见**。该方法不凭空猜测 README 或规则是否“足够清晰”，而是进行实证测量：让无先验知识的朴素子 Agent 在工作流中自由运行，其行为构成**基线 (Baseline)**；针对性的文档修改（即设立“路标”）作为**干预 (Intervention)**；全新的朴素子 Agent 提供**重测 (Retest)**。与基线的 Diff 即为成功测量值。
 
+该名称源自*径路/欲望小径*（德语：*Trampelpfad*，英语：*Desire path*）：人们实际踩出的小路所在之处，才是应该铺设道路的地方。同理，朴素 LLM 的实际行走路径展示了何处真正需要文档/护栏——而非我们主观假设的地方。
 
-# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs (English)
+## 何时使用本 Skill
 
-A method for uncovering errors in pipeline and control-file workflows that do not come
-from broken code, but from a **convention being invisible to an LLM**. Instead of
-guessing whether a README or rule is "clear enough", you measure it empirically: naive
-subagents with no prior knowledge are turned loose on the workflow, their behavior
-becomes the **baseline**, a targeted documentation change (a "signpost") is the
-**intervention**, and fresh naive subagents provide the **retest**. The diff against the
-baseline is the success measurement.
+- Agent 反复忽略某项规则/规范，即使该规则已记录在文档中。
+- 在编写更多文档前，你想知道某项规程对 LLM 是否**可见/可发现**（“这里有人在对着墙说话吗？”）。
+- 重构后（新目录、重命名）：Agent 是否仍能找到入口点？
+- 你修改了文档，并希望**证明**其有效——而非仅仅寄希望于此。
+- 在将新 LLM 伙伴集成到流水线之前进行入职测试。
 
-The name comes from the *desire path* (German: *Trampelpfad*): where people actually walk
-instead of on the paved route is where a path belongs. By analogy, the paths of naive
-LLMs show where documentation/guardrails are actually needed — not where we assume them.
+不适用于：纯代码 Bug（→ 系统化调试），或为生产任务选择蜂群协调模式（→ 参阅 `swarm-operations`）。本 Skill 仅将朴素 Agent 蜂群用作**测量工具**。
 
-## When to use this skill
+## 一句话核心理念
 
-- Agents repeatedly ignore a rule/convention even though it is documented.
-- You want to know whether a procedure is **visible/discoverable** to an LLM before
-  writing more docs ("is anyone here talking to a wall?").
-- After a restructuring (new directories, renames): can agents still find the entry points?
-- You made a documentation change and want to **prove** it works — not just hope so.
-- Onboarding test before integrating new LLM partners into a pipeline.
-
-Not for: pure code bugs (→ systematic debugging), or selecting swarm coordination patterns
-for a production task (→ see `swarm-operations`). This skill uses a swarm of naive agents
-exclusively as a **measuring instrument**.
-
-## Core idea in one sentence
-
-Treat documentation like UX: what counts is not what you wrote, but what an unbiased user
-(here: a naive agent) actually does with it — and you measure that, change it, and measure
-again.
+将文档视同 UX（用户体验）：重要的不是你写了什么，而是未经偏置的用户（此处指朴素 Agent）实际拿它做了什么——对此进行测量、修改，并再次测量。
 
 ---
 
-## The process: 5 steps
+## 执行过程：5 个步骤
 
 ```
-1. BASELINE       naive subagents → measure current behavior (quantitative)
-2. PATH ANALYSIS  where exactly does it fail? which doc location misleads?
-3. INTERVENTION   put up a "signpost" (README/convention made more prominent)
-4. RETEST         FRESH naive subagents, identical test case
-5. DIFF           retest vs. baseline → success measurement + honest assessment
+1. 基线 (BASELINE)        朴素子 Agent → 测量当前行为（定量）
+2. 路径分析 (PATH ANALYSIS) 究竟在何处失败？哪个文档位置产生了误导？
+3. 干预 (INTERVENTION)     设立“路标”（使 README/规范更加突出）
+4. 重测 (RETEST)          全新的朴素子 Agent，相同的测试用例
+5. 差异对比 (DIFF)         重测 vs. 基线 → 成功测量 + 客观评估
 ```
 
-### Step 1 — Baseline: measure current behavior naively
+### 步骤 1 — 基线：朴素测量当前行为
 
-First phrase the problem as a **testable question**, e.g. "Does an agent create a log at
-the convention-mandated location?" or "Does an agent find the pipeline's entry point?".
+首先将问题表达为一个**可测试的问题**，例如：“Agent 是否在规范指定的路径下创建了日志？”或“Agent 能否找到流水线的入口点？”。
 
-Then turn naive subagents loose:
+然后释放朴素子 Agent：
 
-- **Naive means:** no project memory, no skills, no prior hints — the agent only knows the
-  entry path and the task. This measures **pure discoverability via the existing docs**,
-  not the agent's prior knowledge.
-- **Isolated sandbox copies:** each probe agent works on its own copy of the affected
-  folder/workflow, so probes do not influence each other and the real state stays untouched.
-- **Same test case, multiple repetitions:** variability is real. One probe is an anecdote;
-  n repetitions (e.g. 3, or more if needed) yield a rate.
-- **A cheap, "naive" model** is sufficient and realistic — it should not guess cleverly,
-  but show where the docs lead an average agent.
+- **朴素的定义：** 无项目记忆、无 Skill、无先验提示——Agent 仅知道入口路径和任务。这测量的是**基于现有文档的纯粹可发现性**，而非 Agent 的先验知识。
+- **隔离沙盒副本：** 每个探测 Agent 在受影响文件夹/工作流的独立副本中工作，因此探测之间互不影响，且真实状态保持不受干扰。
+- **相同测试用例，多次重复：** 波动性是客观存在的。单次探测只是偶然现象；n 次重复（例如 3 次，或必要时更多）才能得出成功率。
+- **低成本的“朴素”模型**即足够且切合实际——它不需要聪明地猜测，而是展现文档会将平均水平的 Agent 引导至何处。
 
-Minimal probe prompt (adjust placeholders):
+最小探测 Prompt（请调整占位符）：
 
 ```
-You are exploring <SYSTEM>. It is located at: <PATH>.
-TASK: <specific task>.
-RULES:
-1. You only know the path above, nothing else.
-2. Explore to complete the task. Max. <N> steps.
-3. Report at the end: VISITED_DIRECTORIES, READ_FILES,
-   TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE.
+你正在探索 <SYSTEM>。它位于：<PATH>。
+任务：<特定任务>。
+规则：
+1. 你仅知道上述路径，此外一无所知。
+2. 进行探索以完成任务。最多 <N> 步。
+3. 最后汇报：VISITED_DIRECTORIES, READ_FILES,
+   TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE。
 ```
 
-**Record as baseline metrics** (always quantitative, never "feels better"):
+**记录为基线指标**（始终保持定量，绝不使用“感觉更好”）：
 
-| Metric | Meaning |
+| 指标 | 含义 |
 |---|---|
-| Success rate | how often the task was completed per convention (e.g. 0/3) |
-| Wrong behavior | how often the wrong location/method (e.g. 3/3 collective log instead of per-entry) |
-| Paths to goal | how many steps/detours to reach the goal |
-| Blind spots | which relevant file/location nobody opens |
+| 成功率 | 按照规范完成任务的频率（如 0/3） |
+| 错误行为 | 使用错误位置/方法的频率（如 3/3 使用了集中式日志而非单条日志） |
+| 通往目标的路径 | 达到目标所需的步骤/迂回次数 |
+| 盲区 | 没有任何 Agent 打开的相关文件/位置 |
 
-### Step 2 — Path analysis: where does it really fail?
+### 步骤 2 — 路径分析：究竟在何处失败？
 
-Evaluate the probe reports together (a "heatmap" of visited locations is enough):
+共同评估探测报告（访问位置的“热力图”即已足够）：
 
-- Which file is read **often** (HOT)? If orientation is missing there, that is the most
-  effective place for a signpost.
-- Which relevant location is **never** opened (COLD / blind spot)? It is effectively
-  invisible — no matter how good its content is.
-- Where does an agent loop or bypass the convention (dead end, circumvention)? That marks
-  the concrete documentation gap.
+- 哪个文件被**频繁**读取 (HOT)？如果那里缺乏导航指引，该处就是设立路标最有效的位置。
+- 哪个相关位置**从未**被打开 (COLD / 盲区)？无论其内容多优秀，它实际上都是不可见的。
+- Agent 在何处打转或绕过了规范（死胡同、规避行为）？这标志着具体的文档漏洞。
 
-Findings table:
+发现汇总表：
 
-| Finding | Meaning | Action (→ Step 3) |
+| 发现 | 含义 | 措施 (→ 步骤 3) |
 |---|---|---|
-| HOT + no orientation | high traffic, no signpost | place the signpost right there |
-| WARM + errors | agents arrive, stumble | add example/clarification |
-| COLD | location is never found | link to it from a HOT file |
-| Circumvention | convention is bypassed | hint at the point of circumvention |
+| HOT + 无指引 | 高访问量，无路标 | 就在此处放置路标 |
+| WARM + 错误 | Agent 抵达但绊倒 | 添加示例/说明 |
+| COLD | 位置从未被找到 | 从 HOT 文件中添加链接 |
+| 规避行为 | 规范被绕过 | 在规避发生点添加提示 |
 
-Outcome of Step 2: **one concrete, localized hypothesis** — "Agents read X, but X does not
-mention the convention; that is why they end up at Y."
+步骤 2 的产出：**一个具体的、局部化的假设**——“Agent 读取了 X，但 X 未提及该规范；因此他们最终走向了 Y。”
 
-### Step 3 — Intervention: put up a signpost
+### 步骤 3 — 干预：设立路标
 
-Put up **exactly one** signpost (one variable per pass, otherwise the diff is not
-interpretable). Typical signposts:
+**只设立一个**路标（每次测试仅改变一个变量，否则 Diff 将无法解释）。典型路标：
 
-- Place the convention **prominently where the HOT path already passes** (e.g. a short,
-  explicit hint at the very top of the most-read README/control file).
-- A **quick-navigation table** at the start of the central architecture/overview file that
-  points to former blind spots.
-- A **signpost/cross-reference** from a HOT file to a COLD location.
-- Optionally a **guardrail** (e.g. a PreToolUse hint) for dangerous or convention-violating
-  actions.
+- 将规范放置在 **HOT 路径已经经过的显著位置**（例如在阅读量最大的 README/控制文件最顶部放置简短、明确的提示）。
+- 在中央架构/概览文件的开头提供**快速导航表**，指向以前的盲区。
+- 从 HOT 文件向 COLD 位置添加**导航/交叉引用**。
+- 可选：针对危险或违反规范的操作添加**护栏 (Guardrail)**（例如 PreToolUse 提示）。
 
-Keep the signpost short and unmissable — agents skim, they rarely read at length.
+保持路标简短且醒目——Agent 习惯扫读，很少长篇大论地阅读。
 
-### Step 4 — Retest with FRESH naive subagents
+### 步骤 4 — 使用全新的朴素子 Agent 重测
 
-Repeat Step 1 **identically** — same task, same number of repetitions, same model, same
-naive condition — but on sandbox copies **with** the new signpost. Important:
+**完全相同地**重复步骤 1——相同的任务、相同的重复次数、相同的模型、相同的朴素条件——但在**带有**新路标的沙盒副本上执行。注意：
 
-- **Fresh** agents with no memory of the baseline run (otherwise you measure learning, not
-  discoverability).
-- **Only the signpost** differs from the baseline setup.
+- 使用**全新**的 Agent，不带有基线运行的任何记忆（否则测量的是学习能力而非可发现性）。
+- **仅路标**与基线设置不同。
 
-### Step 5 — Diff against baseline + honest success measurement
+### 5. 差异对比 (Diff) 与客观成功测量
 
-Put retest and baseline directly side by side:
+将重测与基线进行直接对比：
 
-| Metric | Baseline | After signpost | Δ |
+| 指标 | 基线 | 放置路标后 | Δ |
 |---|---|---|---|
-| Success rate | e.g. 0/3 | e.g. 3/3 | +3 |
-| Wrong behavior | e.g. 3/3 | e.g. 0/3 | −3 |
-| Blind spots | e.g. 1 | e.g. 0 | −1 |
+| 成功率 | 如 0/3 | 如 3/3 | +3 |
+| 错误行为 | 如 3/3 | 如 0/3 | −3 |
+| 盲区 | 如 1 | 如 0 | −1 |
 
-Assessment — and do not sugarcoat here:
+评估——在此不要美化结果：
 
-- **Works** (wrong behavior measurably drops): keep the signpost, document it.
-- **Does not work** (little Δ): the signpost was in the wrong place or too subtle → back to
-  Step 2/3, different signpost, measure again.
-- **State limits openly:** small n are indicators, not proofs; a naive agent models "average
-  uninformed", not every real user; explicitly check for false positives/negatives in the
-  success scoring (what exactly counted as "completed"?).
+- **有效**（错误行为显著下降）：保留路标并记录在案。
+- **无效**（Δ 很小）：路标位置放错或过于隐晦 → 返回步骤 2/3，尝试不同的路标并再次测量。
+- **坦诚说明局限性：** 小样本 n 是指标而非绝对证明；朴素 Agent 模拟的是“平均未获知信息的普通用户”，而非每一个真实用户；在成功评分中显式检查假阳性/假阴性（究竟什么才算作“完成”？）。
 
 ---
 
-## Mini case study (real, with actual numbers)
+## 迷你案例研究（真实数据）
 
-Problem: A ticket pipeline mandated that trivial completions each get **one** dedicated
-per-ticket log — but agents instead put everything into **one collective log**.
+问题：某个 Ticket 流水线要求每个常规完成项获得**一个**专门的单 Ticket 日志——但 Agent 却将所有内容放入了**一个集中式日志**中。
 
-- **Step 1 (baseline):** 3 naive subagents, same task → **3/3 used the collective log**
-  (convention not followed).
-- **Step 2 (path analysis):** the most-read README did not mention the per-ticket rule at a
-  visible spot → the naive path led to the collective log.
-- **Step 3 (intervention):** a short, explicit "signpost" about the logging convention
-  placed prominently in the README.
-- **Step 4 (retest):** 3 fresh naive subagents, identical task.
-- **Step 5 (diff):** **3/3 wrong → 0/3 wrong**, all three created a correct per-ticket log.
-  (Documented in ticket T-20260621-44.)
+- **步骤 1（基线）：** 3 个朴素子 Agent，相同任务 → **3/3 使用了集中式日志**（未遵循规范）。
+- **步骤 2（路径分析）：** 阅读量最大的 README 未在显著位置提及单 Ticket 规则 → 朴素路径导向了集中式日志。
+- **步骤 3（干预）：** 在 README 的显著位置放置了关于日志规范的简短、明确的“路标”。
+- **步骤 4（重测）：** 3 个全新的朴素子 Agent，相同任务。
+- **步骤 5（差异对比）：** **3/3 错误 → 0/3 错误**，三个 Agent 均创建了正确的单 Ticket 日志。（记录于 Ticket T-20260621-44 中。）
 
-Lesson: The convention was not "worded too weakly" — it was **invisible** on the path that
-was actually read. The signpost in the right place, empirically verified, solved the problem.
+教训：规范并非“措辞太弱”，而是在实际被阅读的路径上**不可见**。在正确的位置设立路标，经实证检验，解决了问题。
 
 ---
 
-## Source and related methods
+## 来源与相关方法
 
-This method comes from Desire-Path Analysis v2.0 (swarm as an empirical measuring instrument
-for LLM behavior). The original reference results of a large run (100 naive probes) are
-documented as evidence from the source: the biggest blind spot was a help directory that
-**0/100** agents visited (despite many help files), and the task "create a new skill"
-succeeded **0%** because nobody found the templates directory — both classic visibility, not
-content, problems.
+本方法源自 Desire-Path Analysis v2.0（将蜂群作为 LLM 行为的实证测量工具）。大规模运行（100 个朴素探测）的原始参考结果已作为源证据记录：最大的盲区是一个帮助目录，**0/100** 的 Agent 访问了它（尽管包含许多帮助文件）；而“创建新 Skill”任务成功率为 **0%**，因为没有人找到模板目录——两者都是典型的可见性问题，而非内容问题。
 
-## See also
+## 参见
 
-- `swarm-operations` (dev) — catalog of swarm **coordination patterns** for production
-  tasks; it carries desire-path analysis only as a conceptual section. This skill is the
-  applicable **process** variant with a baseline→retest loop.
-- `pipeline-optimizer` (dev) — 6-step pipeline renovation; its retest with fresh subagents
-  corresponds to Steps 4–5 here.
-- `bugfix-protocol` / systematic debugging — for real code bugs rather than visibility
-  problems.
+- `swarm-operations` (dev) — 生产任务的蜂群**协调模式**目录；它仅将径路分析作为概念章节引入。本 Skill 是带有 基线→重测 循环的可落地**流程**变体。
+- `pipeline-optimizer` (dev) — 6 步流水线改造；其使用全新子 Agent 的重测对应于此处的步骤 4–5。
+- `bugfix-protocol` / 系统化调试 — 针对真正的代码 Bug 而非可见性问题。
 
-## 变更日志与历史
+## 更新日志
 
 ### 0.1.0 (2026-06-21)
-- Initial port from Desire-Path Analysis v2.0 (source: swarm-ai/BACH).
-- Focused on the applicable 5-step process (baseline → path analysis → intervention →
-  retest → diff); swarm coordination patterns deliberately omitted (they stay in
-  `swarm-operations`). User-neutral with placeholders; real mini case study.
+- 从 Desire-Path Analysis v2.0 初始移植（来源：swarm-ai/BACH）。
+- 专注于可落地的 5 步流程（基线 → 路径分析 → 干预 → 重测 → 差异对比）；蜂群协调模式被特意省去（保留在 `swarm-operations` 中）。包含占位符的通用设计；真实迷你案例研究。

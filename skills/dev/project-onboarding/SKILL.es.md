@@ -1,223 +1,235 @@
 ---
+name: project-onboarding
+version: 1.0.0
+type: protocol
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Procedimiento estándar para la incorporación (onboarding) de nuevos proyectos de software: Análisis de características, revisión de calidad de código, lista de verificación de incorporación y creación de tareas.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [onboarding, project, intake, analysis, checklist, code-review]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `project-onboarding`.
+> **Español** — Versión oficial en español de `project-onboarding`.
 
 
+# Procedimiento Estándar de Incorporación (Onboarding) para Nuevos Proyectos de Software (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Standard Onboarding Procedure for New Software Projects (English)
-
-**Version:** 1.0
-**Date:** 2026-03-12
+**Versión:** 1.0
+**Fecha:** 2026-03-12
 
 ---
 
-## Descripción General y Propósito & Purpose
+## Visión General y Propósito
 
-This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
+Este procedimiento define los pasos a realizar sobre carpetas de software recién descubiertas antes de agregarlas a un sistema de gestión de tareas.
 
 ```
 +─────────────────────────────────────────────────────+
-|           STANDARD ONBOARDING PROCEDURE              |
+|       PROCEDIMIENTO ESTÁNDAR DE INCORPORACIÓN       |
 +─────────────────────────────────────────────────────+
-|  1. Create feature analysis                          |
-|  2. Code quality review (standard tests)             |
-|  3. Create TASKS.txt                                 |
-|  4. Add to task management                           |
+|  1. Crear análisis de características              |
+|  2. Revisión de calidad de código (pruebas std)     |
+|  3. Crear TASKS.txt                                 |
+|  4. Agregar a la gestión de tareas                  |
 +─────────────────────────────────────────────────────+
 ```
 
 ---
 
-## Phase 1: Feature Analysis
+## Fase 1: Análisis de Características
 
-**Purpose:** Understand the tool, its functions, and development status.
+**Propósito:** Comprender la herramienta, sus funciones y el estado de desarrollo.
 
-**Create file:** `Feature_Analysis_<ToolName>.md`
+**Crear archivo:** `Feature_Analysis_<ToolName>.md`
 
-### Template
+### Plantilla
 
 ```markdown
-# Feature Analysis: <ToolName> (English)
+# Análisis de Características: <ToolName> (Español)
 
-## Brief Description
-A short sentence describing what the tool does.
+## Descripción Breve
+Una oración corta que describe lo que hace la herramienta.
 
 ---
 
-## Highlights
+## Aspectos Destacados
 
-| Feature | Description |
+| Característica | Descripción |
 |---------|-------------|
-| **Feature 1** | Description |
-| **Feature 2** | Description |
+| **Característica 1** | Descripción |
+| **Característica 2** | Descripción |
 
 ---
 
-## Development Stage Assessment
+## Evaluación de la Etapa de Desarrollo
 
-### Current Status: **<Status> (<X>%)**
+### Estado Actual: **<Estado> (<X>%)**
 
-Possible statuses:
-- Prototype (0-30%)
-- Alpha (30-60%)
+Posibles estados:
+- Prototipo (0-30%)
+- Alfa (30-60%)
 - Beta (60-85%)
-- Production Ready (85-95%)
-- Release (95-100%)
+- Listo para Producción (85-95%)
+- Lanzamiento / Release (95-100%)
 
-| Category | Rating (1-5) | Details |
+| Categoría | Calificación (1-5) | Detalles |
 |----------|:------------:|---------|
-| **Functionality** | 3 | |
+| **Funcionalidad** | 3 | |
 | **UI/UX** | 3 | |
-| **Stability** | 3 | |
-| **Documentation** | 3 | |
+| **Estabilidad** | 3 | |
+| **Documentación** | 3 | |
 
 ---
 
-## Recommended Extensions
+## Extensiones Recomendadas
 
-### Priority: High
+### Prioridad: Alta
 1. ...
 
-### Priority: Medium
+### Prioridad: Media
 2. ...
 
-### Priority: Low
+### Prioridad: Baja
 3. ...
 
 ---
 
-## Technical Details
+## Detalles Técnicos
 
-Framework:      <Framework>
-File size:      <X> lines of Python
-Main file:      <main.py>
+Framework:            <Framework>
+Tamaño de archivos:   <X> líneas de Python
+Archivo principal:    <main.py>
 
 ---
-*Analysis created: <Date>*
+*Análisis creado: <Fecha>*
 ```
 
 ---
 
-## Phase 2: Code Quality Review
+## Fase 2: Revisión de Calidad de Código
 
-**Purpose:** Ensure technical quality, identify known issues.
+**Propósito:** Garantizar la calidad técnica e identificar problemas conocidos.
 
-### Recommended Checks
+### Comprobaciones Recomendadas
 
-| Test | Tool | Description |
+| Prueba | Herramienta | Descripción |
 |------|------|-------------|
-| **Encoding** | Encoding checker (e.g., `chardet`, `file`) | Ensure UTF-8 |
-| **Method Analysis** | Linter (e.g., `pylint`, `flake8`) | Find large methods |
-| **Indentation** | Formatter (e.g., `black`, `autopep8`) | Check consistency |
-| **Imports** | Import checker (e.g., `isort`, `pylint`) | Find unused imports |
+| **Codificación** | Verificador de codificación (ej., `chardet`, `file`) | Asegurar UTF-8 |
+| **Análisis de Métodos** | Linter (ej., `pylint`, `flake8`) | Encontrar métodos demasiado grandes |
+| **Sangría** | Formateador (ej., `black`, `autopep8`) | Verificar consistencia |
+| **Importaciones** | Verificador de importaciones (ej., `isort`, `pylint`) | Encontrar importaciones sin usar |
 
-### Check Points
+### Puntos de Comprobación
 
-- [ ] All .py files UTF-8 encoded?
-- [ ] No unusually large methods (>100 lines)?
-- [ ] Consistent indentation (spaces vs tabs)?
-- [ ] Unused imports removed?
-- [ ] Docstrings present?
+- [ ] ¿Todos los archivos .py están codificados en UTF-8?
+- [ ] ¿Sin métodos inusualmente grandes (>100 líneas)?
+- [ ] ¿Sangría consistente (espacios vs tabulaciones)?
+- [ ] ¿Se eliminaron las importaciones sin usar?
+- [ ] ¿Docstrings presentes?
 
-### Document Results
+### Documentar Resultados
 
-Record issues in TASKS.txt under "QUALITY REVIEW".
+Registrar los problemas en TASKS.txt bajo "QUALITY REVIEW".
 
 ---
 
-## Phase 3: Create TASKS.txt
+## Fase 3: Crear TASKS.txt
 
-**Purpose:** Capture open tasks in a structured format.
+**Propósito:** Capturar tareas pendientes en un formato estructurado.
 
-**Create file:** `TASKS.txt` in the project folder
+**Crear archivo:** `TASKS.txt` en la carpeta del proyecto
 
-### Template
+### Plantilla
 
 ```
 TASKS - <ToolName> V<Version>
 ==============================
-Status: <Status>
-Date: <Date>
+Estado: <Estado>
+Fecha: <Fecha>
 
-OPEN TASKS:
-[ ] <Task 1> - Effort: <LOW|MEDIUM|HIGH>
-[ ] <Task 2> - Effort: <LOW|MEDIUM|HIGH>
+TAREAS PENDIENTES:
+[ ] <Tarea 1> - Esfuerzo: <BAJO|MEDIO|ALTO>
+[ ] <Tarea 2> - Esfuerzo: <BAJO|MEDIO|ALTO>
 
 ---
-DONE (Archive):
-- <Completed task> (<Version>, <Date>)
+COMPLETADO (Archivo):
+- <Tarea completada> (<Versión>, <Fecha>)
 ```
 
-### Status Values
+### Valores de Estado
 
-| Status | Meaning |
+| Estado | Significado |
 |--------|---------|
-| NEWLY DISCOVERED | Not yet analyzed |
-| ANALYSIS NEEDED | Feature analysis in progress |
-| QUALITY REVIEW | Code tests running |
-| VALIDATED & READY | Ready for features |
-| MVP | Minimum Viable Product |
-| BUILD ONLY | Only compilation needed |
-| BLOCKED | Waiting for user test/decision |
+| NEWLY DISCOVERED | Aún no analizado |
+| ANALYSIS NEEDED | Análisis de características en progreso |
+| QUALITY REVIEW | Pruebas de código en ejecución |
+| VALIDATED & READY | Listo para nuevas características |
+| MVP | Producto Mínimo Viable |
+| BUILD ONLY | Solo se requiere compilación |
+| BLOCKED | Esperando prueba de usuario/decisión |
 
 ---
 
-## Phase 4: Task Management Integration
+## Fase 4: Integración en la Gestión de Tareas
 
-After completing phases 1-3:
+Después de completar las fases 1-3:
 
-1. **Transfer tasks:** Create TASKS.txt entries as tasks/issues
-2. **Verify:** All tasks correctly categorized?
-3. **Categorize:** Assign project to appropriate category (single tool, suite, library, etc.)
+1. **Transferir tareas:** Crear entradas de TASKS.txt como tareas/tickets
+2. **Verificar:** ¿Todas las tareas clasificadas correctamente?
+3. **Categorizar:** Asignar el proyecto a la categoría adecuada (herramienta individual, suite, biblioteca, etc.)
 
-### Automatic Onboarding Tasks
+### Tareas Automáticas de Incorporación
 
-For new projects, create the following standard tasks:
+Para proyectos nuevos, crear las siguientes tareas estándar:
 
-| Task | Description | Effort |
+| Tarea | Descripción | Esfuerzo |
 |------|-------------|--------|
-| onb_1 | Create feature analysis | medium |
-| onb_2 | Code quality review | low |
-| onb_3 | Create TASKS.txt | low |
+| onb_1 | Crear análisis de características | medio |
+| onb_2 | Revisión de calidad de código | bajo |
+| onb_3 | Crear TASKS.txt | bajo |
 
-Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
-
----
-
-## Quick Checklist
-
-```
-[ ] 1. Feature_Analysis_<Name>.md created
-[ ] 2. Code quality review completed (linter, encoding, imports)
-[ ] 3. TASKS.txt created with status
-[ ] 4. Tasks added to task management
-```
+Las tareas tienen dependencias: onb_2 depende de onb_1, onb_3 depende de onb_2.
 
 ---
 
-## Ejemplo y Uso & Usage
+## Lista de Verificación Rápida
+
+```
+[ ] 1. Feature_Analysis_<Name>.md creado
+[ ] 2. Revisión de calidad de código completada (linter, codificación, importaciones)
+[ ] 3. TASKS.txt creado con estado
+[ ] 4. Tareas agregadas a la gestión de tareas
+```
+
+---
+
+## Ejemplo y Aplicación
 
 ```bash
-# 1. Feature analysis (English)
-# -> Create Feature_Analysis_MyTool.md (see template) (English)
+# 1. Análisis de características
+# -> Crear Feature_Analysis_MyTool.md (ver plantilla)
 
-# 2. Code quality (English)
+# 2. Calidad de código
 pylint MyTool/main.py
 flake8 MyTool/main.py
-file -i MyTool/main.py  # Check encoding
+file -i MyTool/main.py  # Comprobar codificación
 
-# 3. TASKS.txt (English)
-# -> Create in tool folder with status "QUALITY REVIEW" (English)
+# 3. TASKS.txt
+# -> Crear en la carpeta de la herramienta con estado "QUALITY REVIEW"
 
-# 4. Create tasks (English)
-# -> Capture TASKS.txt entries as issues/tickets (English)
+# 4. Crear tareas
+# -> Registrar entradas de TASKS.txt como tickets/issues
 ```
 
 ---
 
-*Created: 2026-01-10 | Ported: 2026-03-12*
+*Creado: 2026-01-10 | Portado: 2026-03-12*

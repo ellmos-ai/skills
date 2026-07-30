@@ -1,21 +1,34 @@
 ---
+name: structured-thinking
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-05-19
+updated: 2026-05-19
+description: メタスキル：3つのフェーズからなるワークフローとしての構造化思考。分析（think）、発想（brainstorm）、意思決定（decide）を1つの連続したプロセスに統合します。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: utilities
+tags: [denken, analyse, kreativitaet, entscheidung, workflow, meta-skill]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `structured-thinking`.
+> **日本語** — `structured-thinking` の公式日本語版。
 
 
+# Structured Thinking — 分析、発想、意思決定
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Structured Thinking — Analyze, Ideate, Decide (English)
-
-> Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
+> 構造化思考のためのメタワークフロー：問題分析から創造的な解決策、根拠ある意思決定まで
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
 ```
 Problem/Question
@@ -38,102 +51,102 @@ Result + Rationale
 
 ---
 
-## Phase 1: Analyze
+## フェーズ 1: 分析 (Analyze)
 
-Goal: Understand the problem, identify causes, recognize structure.
+目標：問題を理解し、原因を特定し、構造を把握する。
 
-### Approaches
+### アプローチ
 
-| Method | When | Procedure |
-|--------|------|-----------|
-| **Divide & Conquer** | Complex problem | Problem → sub-problems → solve individually → combine |
-| **Root Cause (5x Why)** | Symptom visible, cause unclear | Symptom → Why? → Why? → ... → cause → solution |
-| **Constraint Relaxation** | Problem appears unsolvable | Relax constraints → solve → re-tighten constraints |
-| **Analogy Search** | Novel problem | Find a similar known problem → adapt its solution |
+| 手法 | 適用時 | 手順 |
+|------|--------|------|
+| **Divide & Conquer** | 複雑な問題 | 問題 → サブ問題 → 個別に解決 → 統合 |
+| **Root Cause (5x Why)** | 症状は明確、原因が不明 | 症状 → なぜ？ → なぜ？ → ... → 原因 → 解決策 |
+| **Constraint Relaxation** | 問題が解決不可能に見える | 制約を緩和 → 解決 → 制約を再適用 |
+| **Analogy Search** | 新しい問題 | 似た既存の既知の問題を探す → その解決策を適応 |
 
-### Analysis Frameworks
+### 分析フレームワーク
 
-| Framework | Application |
-|-----------|-------------|
-| **SWOT** | Strengths / Weaknesses / Opportunities / Threats |
-| **Pareto** | 80/20 — What provides the biggest leverage? |
-| **Fishbone** | Systematic cause analysis (Ishikawa) |
+| フレームワーク | 適用 |
+|----------------|------|
+| **SWOT** | 強み / 弱み / 機会 / 脅威 |
+| **Pareto** | 80/20 — 最大のレバレッジをもたらすものは何か？ |
+| **Fishbone** | 体系的な原因分析（石川図） |
 
-### Heuristics under Uncertainty
+### 不確実性下のヒューリスティクス
 
-1. What is the worst-case scenario?
-2. Is it reversible?
-3. What is the cost of not acting?
+1. 最悪のシナリオは何か？
+2. それは不可逆か？
+3. 行動しないことのコストは何か？
 
-### Heuristics under Complexity
+### 複雑性下のヒューリスティクス
 
-1. What is the simplest first step?
-2. What would an expert do?
-3. What would the 80% solution be?
-
----
-
-## Phase 2: Ideate
-
-Goal: Generate as many solution approaches as possible. Quantity over quality. NO criticism during this phase.
-
-### Methods
-
-**SCAMPER** — Systematically improve existing solutions:
-- **S**ubstitute: What to replace? | **C**ombine: What to combine? | **A**dapt: What to adapt?
-- **M**odify: What to change? | **P**ut to other use: What else could it serve? | **E**liminate: What to drop?
-- **R**everse: What to invert?
-
-**Six Thinking Hats** (de Bono) — 6 perspectives in sequence:
-1. Blue: Process control ("What is the question?")
-2. White: Facts ("What do we know?")
-3. Red: Emotion ("What feels right?")
-4. Black: Criticism ("What could go wrong?")
-5. Yellow: Optimism ("What are the opportunities?")
-6. Green: Creativity ("What new ideas are there?")
-
-**Reverse Brainstorming** — Invert the problem:
-1. "How do we make it WORSE?"
-2. Collect bad ideas
-3. Invert = good ideas
-
-**Rapid Ideation** — 50+ ideas in 20 minutes:
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
-
-### After Ideation
-
-1. Clustering: Group similar ideas
-2. Feasibility/Impact matrix: Rate feasibility vs. impact
-3. Select top 5-10 for Phase 3
+1. 最もシンプルな第一歩は何か？
+2. 専門家ならどうするか？
+3. 80%の解決策とは何か？
 
 ---
 
-## Phase 3: Decide
+## フェーズ 2: 発想 (Ideate)
 
-Goal: Select the best option with a transparent rationale.
+目標：できるだけ多くの解決アプローチを生成する。質より量。このフェーズでは批判厳禁。
 
-### Framework Selection
+### 手法
 
-| Situation | Framework |
-|-----------|-----------|
-| 2 options, quick decision | **Pro/Con Matrix** |
-| 3+ options, multiple criteria | **Weighted Scoring** |
-| Sequential if-then decision | **Decision Tree** |
-| High uncertainty | **Scenario Analysis** |
-| Prioritizing tasks | **Eisenhower Matrix** |
+**SCAMPER** —— 既存の解決策を体系的に改善する：
+- **S**ubstitute（代用）：何を置き換えるか？ | **C**ombine（結合）：何を組み合わせるか？ | **A**dapt（適応）：何を適応させるか？
+- **M**odify（修正）：何を修正するか？ | **P**ut to other use（転用）：他に何に使えるか？ | **E**liminate（削減）：何を削るか？
+- **R**everse（逆転）：何を逆転させるか？
 
-### Weighted Scoring (core method)
+**6つの思考帽子**（de Bono）—— 6つの視点を順番に適用：
+1. 青：プロセス管理（「問いは何か？」）
+2. 白：事実（「何が分かっているか？」）
+3. 赤：感情（「直感はどう感じるか？」）
+4. 黒：批判（「何が失敗し得るか？」）
+5. 黄：楽観（「どんな機会があるか？」）
+6. 緑：創造性（「どんな新しいアイデアがあるか？」）
 
-1. Collect criteria (3-7, specific and measurable)
-2. Set weights (sum = 100%, most important >= 25%)
-3. Rate options (1-10 scale)
-4. Compute scores (rating x weight)
-5. Compare and recommend
+**逆ブレインストーミング** —— 問題を逆転させる：
+1. 「どうすれば状況を悪化させられるか？」
+2. 悪いアイデアを集める
+3. 逆転＝良いアイデア
 
-### Scenario Analysis
+**ラピッド・アイディエーション** —— 20分で50以上のアイデア：
+- ラウンド1（5分）：オープンな発想
+- ラウンド2（5分）：バリエーション
+- ラウンド3（5分）：組み合わせ
+- ラウンド4（5分）：極端なアイデア
+
+### 発想の後
+
+1. クラスタリング：似たアイデアをグループ化
+2. 実現可能性/インパクトマトリクス：実現可能性とインパクトを評価
+3. フェーズ3のために上位5〜10個を選択
+
+---
+
+## フェーズ 3: 意思決定 (Decide)
+
+目標：透明性のある根拠を持って最適な選択肢を選定する。
+
+### フレームワークの選択
+
+| 状況 | フレームワーク |
+|------|----------------|
+| 2つの選択肢、迅速な決定 | **メリット/デメリットマトリクス (Pro/Con Matrix)** |
+| 3つ以上の選択肢、複数の基準 | **重み付きスコアリング (Weighted Scoring)** |
+| 順序立った If-Then 決定 | **意思決定ツリー (Decision Tree)** |
+| 高い不確実性 | **シナリオ分析 (Scenario Analysis)** |
+| タスクの優先順位付け | **アイゼンハワーマトリクス (Eisenhower Matrix)** |
+
+### 重み付きスコアリング（コア手法）
+
+1. 基準の収集（3〜7個、具体的かつ測定可能）
+2. 重みの設定（合計＝100%、最も重要なものは>=25%）
+3. 選択肢の評価（1〜10段階）
+4. スコアの計算（評価 x 重み）
+5. 比較と推奨
+
+### シナリオ分析
 
 ```
 Best Case (X%):      Outcome → expected value
@@ -142,7 +155,7 @@ Worst Case (X%):     Outcome → expected value
 Total expected value: [sum]
 ```
 
-### Eisenhower Matrix
+### アイゼンハワーマトリクス
 
 ```
               URGENT          NOT URGENT
@@ -150,35 +163,35 @@ IMPORTANT     1. DO           2. PLAN
 NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ```
 
-### Quality Checklist before the Final Recommendation
+### 最終推奨前の品質チェックリスト
 
-- [ ] All relevant criteria identified?
-- [ ] User values taken into account?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and assessed?
-- [ ] Bias check performed?
-- [ ] Reversibility checked?
+- [ ] 関連するすべての基準が特定されているか？
+- [ ] ユーザーの価値観が考慮されているか？
+- [ ] 長期的な影響が考慮されているか？
+- [ ] リスクが特定され評価されているか？
+- [ ] バイアスチェックが実施されているか？
+- [ ] 可逆性が確認されているか？
 
 ---
 
-## Context-Sensitive Selection
+## 文脈に応じた選択
 
-| Situation | Recommended Phase(s) |
-|-----------|----------------------|
-| "I have a problem" | Phase 1 (analysis) → possibly Phase 2+3 |
-| "I need ideas" | Phase 2 (ideation) |
-| "I have to decide" | Phase 3 (decision) |
-| "I am stuck" | Phase 2 (reverse brainstorming) |
-| "What should I prioritize?" | Phase 3 (Eisenhower) |
-| "Understand a complex problem" | Phase 1 (Divide & Conquer + SWOT) |
+| 状況 | 推奨フェーズ |
+|------|--------------|
+| 「問題がある」 | フェーズ1（分析）→ 場合によりフェーズ2+3 |
+| 「アイデアが必要」 | フェーズ2（発想） |
+| 「決断しなければならない」 | フェーズ3（意思決定） |
+| 「行き詰まっている」 | フェーズ2（逆ブレインストーミング） |
+| 「何を優先すべきか？」 | フェーズ3（アイゼンハワー） |
+| 「複雑な問題を理解する」 | フェーズ1（Divide & Conquer + SWOT） |
 
 ---
 
 ## 変更履歴
 
 ### 1.0.0 (2026-05-19)
-- Created as a meta-skill from think, brainstorm, and decide
+- think, brainstorm, decide からメタスキルとして作成
 
 ---
 
-*Meta-skill | Detailed reference: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | 詳細参照：[think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*

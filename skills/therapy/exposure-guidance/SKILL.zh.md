@@ -1,41 +1,53 @@
 ---
+name: exposure-guidance
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 针对焦虑障碍的阶梯式暴露疗法：恐惧等级表、SUDs 主观痛苦评分、暴露计划与引导。仅限于心理教育，不包含实际实施。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [exposure, anxiety, phobia, suds, graded, behavioral-therapy]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `exposure-guidance`.
+> **中文** — `exposure-guidance` 官方中文版本。
 
 
+# 暴露疗法引导（中文）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 恐惧等级表、SUDs 主观痛苦量表、阶梯式暴露与习惯化：计划与科普引导 — 实际暴露实施须在专业治疗师指导下进行
 
-
-# Exposure Guidance (English)
-
-> Fear hierarchy, SUDs scale, graded exposure and habituation: Planning and guidance — actual exposure only with a therapist
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Exposure (confrontation therapy) is one of the most effective methods in behavioral therapy for anxiety disorders, phobias, OCD, and PTSD. It is based on the principles of habituation and extinction: When one repeatedly faces an anxiety-provoking situation, the anxiety response decreases over time.
-
-Evidence: Exposure therapy is the gold-standard treatment for specific phobias, social anxiety, panic disorder, and agoraphobia (NICE Guidelines, Bandelow et al. 2014, S3 Guideline Anxiety Disorders). Effect sizes are among the highest in psychotherapy research.
-
-**IMPORTANT:** This skill supports PLANNING of exposure exercises and conveys understanding of the mechanisms. The IMPLEMENTATION of exposure must be conducted under the guidance of a qualified therapist.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参见：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Understanding the Mechanisms
+## 背景
 
-### Habituation
+暴露疗法（Exposure Therapy / 冲击与对抗疗法）是行为疗法中治疗焦虑障碍、恐惧症、强迫症（OCD）和创伤后应激障碍（PTSD）最有效的核心方法之一。它基于习惯化（Habituation）和消退（Extinction）原理：当一个人反复面对引发焦虑的情境时，焦虑反应会随着时间推移自然下降。
+
+循证支持：暴露疗法是特定恐惧症、社交焦虑症、惊恐障碍和场所恐惧症的金标准治疗方法（NICE 指南，Bandelow 等 2014 年，S3 焦虑障碍指南）。其效应量在心理治疗研究中处于最高水平之列。
+
+**重要说明：** 本技能仅支持暴露练习的**计划制定**以及对作用机制的科普理解。暴露疗法的**实际实施**必须在有资质的心理治疗师指导下进行。
+**严禁实施：** EMDR（眼动脱敏再加工）、Prolonged Exposure（持续暴露疗法 PE）、Narrative Exposure Therapy（叙事暴露疗法 NET）
+
+---
+
+## 1. 理解作用机制
+
+### 习惯化（Habituation）
 
 ```
-HABITUATION: Adaptation through repeated confrontation
+习惯化：通过反复对抗与面对产生的适应
 
-Anxiety level
+焦虑水平
 100 |  *
     | * *
  80 |*   *
@@ -47,128 +59,127 @@ Anxiety level
  20 |          **  * *
     |                  * * * * * *
   0 |________________________________
-    Time (during exposure)
+    时间（暴露过程中）
 
-Anxiety initially rises, reaches a peak,
-and then drops on its own WITHOUT flight or avoidance.
+焦虑最初上升，达到峰值，
+然后即使在没有逃跑或回避的情况下也会自行下降。
 
-Key experience: "The anxiety passes, even when
-I stay in the situation."
+核心体验：“即使我留在该情境中，
+焦虑也会慢慢过去。”
 ```
 
-### Extinction (New Learning)
+### 消退（Extinction / 新学习）
 
 ```
-EXTINCTION: New experiences overwrite old fear associations
+消退：新的体验覆盖旧的恐惧联想
 
-Old experience: Dog -> Danger -> Fear -> Flight
-New experience: Dog -> No danger -> Fear decreases -> I am safe
+旧体验：狗 -> 危险 -> 焦虑 -> 逃跑
+新体验：狗 -> 无危险 -> 焦虑下降 -> 我是安全的
 
-The old association is not erased but overlaid by new
-experiences. Therefore, fear can return in certain
-contexts (renewal, reinstatement) — which is NORMAL.
+旧的联想并没有被完全抹去，而是被新的体验所重叠覆盖。
+因此，恐惧可能会在特定语境下重现（恢复、再现）— 这是完全正常的。
 ```
 
-### Why Avoidance Maintains the Problem
+### 为什么回避会维持并加剧问题
 
 ```
-THE AVOIDANCE CYCLE:
+回避的恶性循环：
 
-Anxiety-provoking situation
+引发焦虑的情境
         |
         v
-Anxiety rises (unpleasant)
+焦虑上升（令人不适）
         |
         v
-Avoidance/flight
+回避 / 逃跑
         |
         v
-Short-term relief (anxiety drops immediately)
+短期缓解（焦虑立刻下降）
         |
         v
-Long-term reinforcement of anxiety
-("The situation IS dangerous, good that I fled")
+长期强化了焦虑
+（“那个情境果然很危险，幸好我逃跑了”）
         |
         v
-Next time: Even more anxiety, even more avoidance
+下一次：更加焦虑，更加回避
 ```
 
 ---
 
-## 2. The SUDs Scale
+## 2. SUDs 主观痛苦量表
 
-### Subjective Units of Distress (0-100)
+### 主观痛苦单位（Subjective Units of Distress: 0-100）
 
 ```
-SUDs SCALE (Subjective Units of Distress)
+SUDs 量表 (主观痛苦单位)
 
-  0  Completely relaxed, no anxiety
- 10  Minimal tension, barely noticeable
- 20  Slight unease, easily tolerable
- 30  Noticeably unpleasant, but controllable
- 40  Noticeable anxiety, still able to function
- 50  Moderate anxiety, strenuous but manageable
- 60  Strong anxiety, clear urge to avoid
- 70  Very strong anxiety, hard to endure
- 80  Intense anxiety, at the edge of tolerance
- 90  Extreme anxiety, feeling of panic
-100  Maximum anxiety, worst imaginable distress
+  0  完全放松，没有任何焦虑
+ 10  极轻微紧张，几乎察觉不到
+ 20  轻微不适，完全可以轻松忍受
+ 30  明显不适，但处于可控范围
+ 40  明显的焦虑，仍能维持正常功能
+ 50  中度焦虑，感到吃力但仍可应对
+ 60  较强焦虑，产生明确的回避冲动
+ 70  非常强的焦虑，感到难以忍受
+ 80  剧烈焦虑，处于耐受力的边缘
+ 90  极度焦虑，产生恐慌感
+100  最大程度的焦虑，能想象到的最惨烈痛苦
 ```
 
-### Using the SUDs Scale
+### 使用 SUDs 量表
 
-**Before exposure:**
-- Estimated anxiety in the planned situation (expected value)
+**暴露前：**
+- 预估在计划情境中的焦虑值（预期值）
 
-**During exposure:**
-- Assess current SUDs value every 5 minutes
-- Document the progression (rising, falling, fluctuating)
+**暴露过程中：**
+- 每 5 分钟评估一次当前的 SUDs 值
+- 记录变化趋势（上升、下降、波动）
 
-**After exposure:**
-- Highest SUDs value? Final value? How quickly did anxiety decrease?
-- Was it as bad as expected?
+**暴露后：**
+- 最高 SUDs 值是多少？最终值是多少？焦虑下降的速度有多快？
+- 事情是否像预想的那样糟糕？
 
 ---
 
-## 3. Creating a Fear Hierarchy
+## 3. 制定恐惧等级表（Fear Hierarchy）
 
-### Principle
+### 原理
 
-A fear hierarchy ranks anxiety-provoking situations from lowest to highest anxiety level. Exposure begins with easy situations and increases step by step.
+恐惧等级表将引发焦虑的情境按照焦虑程度从低到高进行排序。暴露练习从简单的情境开始，循序渐进地提升等级。
 
-### Example: Fear of Dogs
+### 示例：特定恐惧症（怕狗）
 
 ```
-FEAR HIERARCHY: Dog Phobia
+恐惧等级表：狗恐惧症
 
-SUDs | Situation
+SUDs | 情境描述
 -----|--------------------------------------------------
- 10  | Look at a picture of a dog
- 15  | Watch a video of playing dogs
- 25  | Talk about own experiences with dogs
- 30  | Watch a small dog from 10 meters away
- 40  | Watch a small dog from 5 meters away
- 50  | Stand next to a leashed small dog (2 meters)
- 55  | Touch a small leashed dog (owner holding)
- 60  | Watch a medium dog from 5 meters
- 65  | Sit next to a leashed medium dog
- 70  | Pet a medium dog
- 75  | Walk past an unleashed dog (park)
- 80  | Be alone in a room with a calm dog
- 85  | Pet a large dog
- 90  | Be in a park with multiple unleashed dogs
- 95  | Feed a dog
-100  | Let an unfamiliar dog run toward you
+ 10  | 看一张狗的照片
+ 15  | 观看小狗玩耍的视频
+ 25  | 谈论自己与狗接触的经历
+ 30  | 在 10 米外观看一只小狗
+ 40  | 在 5 米外观看一只小狗
+ 50  | 站在牵着绳的小狗旁边（距离 2 米）
+ 55  | 触摸一只牵着绳的小狗（主人抱住）
+ 60  | 在 5 米外观看一只中型犬
+ 65  | 坐在牵着绳的中型犬旁边
+ 70  | 抚摸一只中型犬
+ 75  | 走过没牵绳的狗身边（公园里）
+ 80  | 和一只温顺的狗独处在一间屋子里
+ 85  | 抚摸一只大型犬
+ 90  | 身处有许多未牵绳狗的公园中
+ 95  | 给狗喂食
+100  | 让一只陌生的狗朝自己跑过来
 ```
 
-### Template for Completion
+### 填写模板
 
 ```
-MY FEAR HIERARCHY
+我的恐惧等级表
 
-Anxiety topic: [...]
+焦虑主题：[...]
 
-SUDs | Situation
+SUDs | 情境描述
 -----|--------------------------------------------------
      | [...]
      | [...]
@@ -179,154 +190,155 @@ SUDs | Situation
 
 ---
 
-## 4. Types of Exposure
+## 4. 暴露的类型
 
-### Graded Exposure (In Vivo)
+### 阶梯式暴露（Graded Exposure / In Vivo 实景暴露）
 
-**Principle:** Step-by-step confrontation with real situations, starting at low SUDs values.
+**原理：** 在现实情境中循序渐进地进行面对，从较低 SUDs 值的项目开始。
 
-### Flooding
+### 满贯疗法（Flooding / 冲击疗法）
 
-**Principle:** Direct confrontation with highly anxiety-provoking situations for extended periods. Only under therapeutic guidance. NOT to be guided by an AI assistant — only explained.
+**原理：** 长时间直接面对引发高度焦虑的情境。必须在治疗师亲自指导下进行。AI 助手**不得**进行引导，仅可进行概念解释。
 
-### Exposure in Sensu (Imaginal)
+### 想象暴露（Exposure in Sensu / Imaginal Exposure）
 
-**Principle:** Experiencing anxiety-provoking situations in imagination. Helpful as preparation for real exposure.
+**原理：** 在头脑想象中体验引发焦虑的情境。常作为实景暴露的前期准备。
 
-### Interoceptive Exposure
+### 内感性暴露（Interoceptive Exposure）
 
-**Principle:** Deliberately inducing physical anxiety symptoms (e.g., rapid heartbeat through exercise, dizziness through spinning). ONLY under therapeutic guidance.
-
----
-
-## 5. Guided Exposure Planning
-
-### Preparation Protocol
-
-```
-EXPOSURE PLANNING PROTOCOL
-
-Date: [...]
-Therapist informed: [ ] Yes  [ ] No (MANDATORY!)
-
-Anxiety topic: [...]
-Chosen situation: [...]
-Expected SUDs value: [...]
-Level in hierarchy: [...]
-
-What exactly will I do: [...]
-Where: [...]
-When: [...]
-How long: [...]
-Alone or accompanied: [...]
-
-My greatest fear: [...]
-What will realistically happen: [...]
-
-Emergency plan (if SUDs > 90 or dissociation):
-1. Grounding (5-4-3-2-1)
-2. Breathing exercise (box breathing)
-3. [Call trusted person]: Tel. [...]
-4. Leave situation in an orderly manner (no panicked fleeing)
-```
-
-### Post-Session Protocol
-
-```
-EXPOSURE DEBRIEFING
-
-Date: [...]
-Situation: [...]
-
-SUDs before (expectation): [...]
-SUDs highest value during: [...]
-SUDs at the end: [...]
-
-How long stayed in situation: [...]
-Habituation occurred: [ ] Yes  [ ] Partial  [ ] No
-
-What I learned: [...]
-Was it as bad as feared: [ ] Worse  [ ] As expected  [ ] Less bad
-
-What I want to do differently next time: [...]
-Next level: [...]
-```
+**原理：** 故意诱发躯体焦虑症状（例如通过剧烈运动诱发心跳过速，通过旋转诱发头晕）。**仅限**在治疗师指导下实施。
 
 ---
 
-## 6. Safety Notes and Abort Criteria
+## 5. 暴露计划引导 protocol
 
-### Prerequisites for Exposure
-
-```
-CHECKLIST BEFORE STARTING EXPOSURE:
-
-[ ] Qualified therapist is involved
-[ ] Sufficient stabilization is present
-[ ] Fear hierarchy is created and discussed
-[ ] Emergency plan is prepared
-[ ] Person understands the mechanism (habituation)
-[ ] No acute suicidality
-[ ] No uncontrolled psychotic symptoms
-[ ] No severe dissociative disorder (without therapeutic support)
-[ ] No acute substance intoxication
-[ ] Person has voluntarily consented (no forced exposure!)
-```
-
-### Abort Criteria
+### 准备工作协议
 
 ```
-ABORT EXPOSURE IF:
+暴露计划协议
 
-- Dissociation occurs (person is "gone," unresponsive)
-- Panic attack with loss of control
-- Person explicitly wants to stop (respect autonomy!)
-- Physical symptoms: chest pain, shortness of breath, fainting
-- Suicidal thoughts during exposure
-- The situation becomes objectively unsafe
+日期：[...]
+治疗师已知情并同意：[ ] 是  [ ] 否（必须满足！）
 
-ON ABORT:
-1. Grounding and stabilization (5-4-3-2-1, breathing exercise)
-2. Ensure person is oriented and stable
-3. Discuss experience (what happened, what was learned)
-4. No blame ("You should have stayed")
-5. Plan next step with therapist
+焦虑主题：[...]
+选定的情境：[...]
+预期的 SUDs 值：[...]
+在等级表中的位置：[...]
+
+具体要做什么：[...]
+地点：[...]
+时间：[...]
+持续多久：[...]
+独自进行还是有人陪同：[...]
+
+我最大的担忧：[...]
+现实中更有可能发生的情况：[...]
+
+紧急预案（若 SUDs > 90 或出现解离）：
+1. 身体 заземление/着陆（5-4-3-2-1 练习）
+2. 呼吸调节（箱式呼吸）
+3. [联系信任的人]：电话 [...]
+4. 有秩序地离开该情境（不得恐慌逃跑）
+```
+
+### 暴露后复盘协议
+
+```
+暴露后复盘记录
+
+日期：[...]
+暴露情境：[...]
+
+暴露前 SUDs（预估）：[...]
+过程中最高 SUDs：[...]
+结束时 SUDs：[...]
+
+在该情境中停留了多长时间：[...]
+是否发生了习惯化：[ ] 是  [ ] 部分发生  [ ] 否
+
+我的心得与收获：[...]
+是否如预想的那样糟糕：[ ] 更糟糕  [ ] 符合预期  [ ] 没那么糟糕
+
+下一次我想做哪些调整：[...]
+下一个等级的目标：[...]
 ```
 
 ---
 
-## Ethics and Boundaries
+## 6. 安全须知与中止标准
 
-**An AI assistant may:**
-- Explain exposure principles (psychoeducation)
-- Create fear hierarchies together
-- Explain and use the SUDs scale
-- Support exposure planning (fill out protocols)
-- Document debriefing
-- Provide safety information
-- Motivate and normalize ("Anxiety during exposure is desired and normal")
+### 开展暴露的前置条件
 
-**An AI assistant must NOT:**
-- Independently conduct or guide exposure
-- Guide flooding (ONLY therapist)
-- Guide interoceptive exposure (ONLY therapist)
-- Conduct prolonged exposure for PTSD
-- Accompany exposure in severe dissociation
-- Pressure toward exposure ("You must face this")
-- Guarantee results
-- Make diagnoses or create treatment plans
-- Make medication-related recommendations
+```
+开展暴露前的检查清单：
 
-**PARTICULARLY STRICT BOUNDARY:** An AI assistant plans and explains. Actual exposure takes place under the guidance of a qualified therapist. For any request regarding implementation: refer to professional. Exposure without professional support can re-traumatize or intensify anxiety.
+[ ] 专业心理治疗师已参与并指导
+[ ] 具备充分的稳定化基础
+[ ] 恐惧等级表已制定并讨论完毕
+[ ] 紧急预案已准备就绪
+[ ] 当事人理解习惯化机制
+[ ] 无急性自杀风险
+[ ] 无未控制的精神病性症状
+[ ] 无重度解离障碍（在无治疗师在场时）
+[ ] 无急性物质中毒
+[ ] 当事人出于自愿知情同意（绝不强迫暴露！）
+```
 
-**In case of acute crisis, ALWAYS refer to:**
+### 中止标准
+
+```
+在以下情况下须立即中止暴露：
+
+- 出现解离现象（当事人“掉线”、失去回应）
+- 恐慌发作且失去控制感
+- 当事人明确要求停止（尊重自主权！）
+- 严重躯体症状：胸痛、严重呼吸困难、晕厥
+- 暴露过程中产生自杀念头
+- 情境本身客观上变得不安全
+
+中止后的处理步骤：
+1. 进行 заземление/着陆与稳定化（5-4-3-2-1，呼吸练习）
+2. 确保当事人恢复定向力与稳定状态
+3. 讨论经历（发生了什么，学到了什么）
+4. 切勿责备（“你本应该坚持住的”）
+5. 与治疗师一起协商安排下一步
+```
+
+---
+
+## 伦理与边界
+
+**AI 助手可以：**
+- 讲解暴露疗法原理（心理教育）
+- 共同制定恐惧等级表
+- 解释并使用 SUDs 量表
+- 支持暴露计划制定（填写协议表）
+- 记录暴露后的复盘总结
+- 提供安全提示信息
+- 给予鼓励与规范化说明（“暴露过程中的焦虑是预期中且正常的”）
+
+**AI 助手不得：**
+- 独立开展或引导暴露过程
+- 引导满贯疗法/冲击疗法（仅限治疗师）
+- 引导内感性暴露（仅限治疗师）
+- 对创伤后应激障碍开展持续暴露（PE）
+- 在重度解离状态下伴随暴露
+- 施加压力逼迫暴露（“你必须去面对”）
+- 保证治疗效果
+- 提供诊断或制定治疗方案
+- 提供药物相关建议
+
+**极为严格的边界线：** AI 助手仅负责计划与科普讲解。实际暴露实施必须在有资质的心理治疗师指导下完成。对于任何关于实际实施的请求：必须转介给专业人士。缺乏专业支持的暴露可能会导致重新创伤化或加重焦虑。
+
+**在发生急性危机时，请务必联系：**
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
+- Crisis Text Line (US): 发送 HOME 至 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 中国心理危机干预热线: 010-82951332 / 400-161-9995
+- 紧急救援电话: 911 (US) / 112 (EU) / 110 (CN)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3 Guideline Anxiety Disorders (2014) — Not professional therapy*
+*移植自 BACH v3.8.0 | 独立版本*
+*参考文献：Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3 焦虑障碍指南 (2014) — 非专业替代医疗服务*

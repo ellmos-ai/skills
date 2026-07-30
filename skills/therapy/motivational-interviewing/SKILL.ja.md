@@ -1,239 +1,252 @@
 ---
+name: motivational-interviewing
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: ミラーとロールニックに基づく動機づけ面接（MI）：OARS手法、チェンジトーク、変容への準備性の促進。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [motivational-interviewing, oars, change-talk, ambivalence, miller-rollnick]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `motivational-interviewing`.
+> **日本語** — `motivational-interviewing` の公式日本語版。
 
 
+# 動機づけ面接 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> OARS手法、行動変容ステージ、チェンジトーク：プレッシャーや操作なしに変化への内発的動機づけを促進する
 
-
-# Motivational Interviewing (English)
-
-> OARS techniques, stages of change, and change talk: Fostering intrinsic motivation for change without pressure or manipulation
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Motivational Interviewing (MI) was developed by William R. Miller and Stephen Rollnick. It is a client-centered, directive counseling approach for fostering intrinsic motivation for change. MI is used evidence-based in addiction treatment, health behavior, therapy adherence, and behavior change.
-
-Evidence: Over 200 RCTs support the effectiveness of MI, particularly for addictive behaviors (Lundahl et al. 2010, Cochrane Review), health behaviors, and treatment adherence.
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. MI Spirit and Principles
+## 背景・文脈
 
-### The Four Principles
+動機づけ面接（Motivational Interviewing, MI）は、ウィリアム・R・ミラー（William R. Miller）とスティーブン・ロールニック（Stephen Rollnick）によって開発されました。これは、行動変容に対する内発的動機づけを高めるための、クライエント中心でありながら指示的なカウンセリングスタイルです。MIは、アディクション（依存症）治療、健康行動の改善、治療順守（アドヒアランス）、行動変容においてエビデンスに基づいて活用されています。
 
-1. **Partnership:** Collaboration on equal footing, not expert authority
-2. **Acceptance:** Respecting autonomy, acknowledging strengths, absolute worth of the person
-3. **Compassion:** The well-being of the person comes first
-4. **Evocation:** Motivation already resides within the person — it is elicited, not implanted
+エビデンス：200以上のランダム化比較試験（RCT）がMIの有効性を支持しており、特に依存行動（Lundahl et al. 2010, コクラン・レビュー）、健康行動、治療順守において高い効果が示されています。
 
-### The Spirit of MI
-MI is not a collection of techniques, but an attitude. The techniques only work within the context of this foundational spirit. Without it, MI becomes manipulation.
+**注意：** 本スキルはサポートを提供するものであり、専門的な心理療法・カウンセリングの代わりとなるものではありません。
+**絶対に使用・実施してはならない技法：** EMDR（眼球運動による脱感作と再処理法）、持続暴露療法（PE）、ナラティブ暴露療法（NET）
 
 ---
 
-## 2. OARS Techniques
+## 1. MIのスピリット（精神）と原則
 
-OARS are the four core competencies of motivational interviewing.
+### 4つの原則
 
-### O — Open Questions
+1. **協同（Partnership）：** 専門家としての権威的な姿勢ではなく、対等な立場での協同
+2. **受容（Acceptance）：** 自律性の尊重、強みの承認、個人の絶対的価値の重視
+3. **慈愛（Compassion）：** 相手のウェルビーイング（幸福・福祉）を最優先する
+4. **喚起（Evocation）：** 動機はすでに相手の中に存在する — 植え付けるのではなく引き出す
 
-**Principle:** Ask questions that invite reflection and storytelling, that cannot be answered with yes/no.
-
-**Examples:**
-- "What would you like to see change?"
-- "How would your life look if you had made this change?"
-- "What brought you to think about this?"
-- "What is important to you about your health?"
-- "What would you gain if you made this change?"
-
-**Avoid:**
-- Closed questions: "Do you want to quit smoking?"
-- Leading questions: "You know that's harmful, right?"
-- Why-questions: "Why did you do that?" (sounds accusatory)
+### MIのスピリット
+MIは単なるスキルの集集ではなく、姿勢・精神（Spirit）です。技法はこの根底にあるスピリットの文脈においてのみ機能します。スピリットがなければ、MIは誘導や操作（マニピュレーション）になってしまいます。
 
 ---
 
-### A — Affirming
+## 2. OARS手法
 
-**Principle:** Acknowledge strengths, efforts, and positive steps of the other person. Not praising ("You're great"), but specifically naming what was observed.
+OARSは動機づけ面接における4つの核心的コンピテンシー（スキル）です。
 
-**Examples:**
-- "It takes courage to speak openly about this."
-- "You managed to hold on for three days — that shows you're serious."
-- "Despite the difficult situation, you came today — that shows commitment."
-- "You've clearly given this a lot of thought."
+### O — 開かれた質問（Open Questions）
 
-**When to use:**
-- When the person describes steps toward change
-- When they persist despite setbacks
-- To strengthen self-efficacy
+**原則：** 「はい/いいえ」で答えられない、内省や自発的な語りを促す質問をする。
+
+**具体例：**
+- 「どのような変化を望んでいらっしゃいますか？」
+- 「もしこの変化を達成できたら、あなたの生活はどのようになりますか？」
+- 「このことについて考え始めたきっかけは何ですか？」
+- 「ご自身の健康に関して、何が一番大切ですか？」
+- 「この変化を起こすことで、どのようなメリットが得られるでしょうか？」
+
+**避けるべき問い掛け：**
+- 閉じられた質問：「禁煙したいですか？」
+- 誘導尋問：「それが体に悪いことは分かっていますよね？」
+- 「なぜ」で始まる質問：「なぜそんなことをしたのですか？」（責められているように感じられます）
 
 ---
 
-### R — Reflecting
+### A — 肯定（Affirming）
 
-**Principle:** Give back what was said in your own words — to show understanding and encourage further thinking.
+**原則：** 相手の強み、努力、肯定的なステップを認める。単に大雑把に褒める（「素晴らしいですね」）のではなく、観察された具体的事実を明確に伝える。
 
-**Types of reflections:**
+**具体例：**
+- 「このことについてオープンにお話しされるには、勇気が必要だったと思います。」
+- 「3日間持ちこたえられたのですね。真剣に取り組まれている証拠です。」
+- 「難しい状況にもかかわらず今日お越しいただけたことに、あなたの強いコミットメントを感じます。」
+- 「この問題について、本当に深く考え抜かれてきたのですね。」
 
-| Type | Description | Example |
+**使用すべき場面：**
+- 相手が変化に向けたステップについて述べているとき
+- 挫折に直面しながらも粘り強く取り組んでいるとき
+- 自己効力感（Self-efficacy）を高めたいとき
+
+---
+
+### R — 傾聴・聞き返し（Reflecting）
+
+**原則：** 相手の発言を自分の言葉で返し、理解を示し、さらなる熟考を促す。
+
+**聞き返し（リフレクション）の種類：**
+
+| タイプ | 説明 | 具体例 |
 |------|-------------|---------|
-| Simple | Repeat/paraphrase content | "You're saying it's hard for you." |
-| Deepening | Pick up on what's beneath the surface | "It sounds like you're torn." |
-| Double-sided | Mirror both sides of ambivalence | "On one hand you want to stop, on the other it gives you something." |
-| Amplified | Slightly overstate (carefully!) | "So there's absolutely no reason to change anything?" |
+| 単純な聞き返し | 内容をそのまま繰り返す／言い換える | 「大変だと感じていらっしゃるのですね。」 |
+| 深める聞き返し | 表面下の感情や意味を拾い上げる | 「気持ちが二つに引き裂かれているように聞こえます。」 |
+| 両価性の聞き返し | 両価性（アンビバレンス）の両面を映し出す | 「お酒を減らしたい思いがある一方で、付き合いの席も大切なのですね。」 |
+| 誇張した聞き返し | 少し大げさに返す（慎重に！） | 「つまり、何も変える理由はまったくないということですね？」 |
 
-**Double-sided reflection (ambivalence):**
+**両価性の聞き返し（アンビバレンス）：**
 ```
-"On one hand, you say you'd like to drink less alcohol.
-On the other hand, the social aspect of after-work drinks is important to you.
-Both make sense."
-```
-
----
-
-### S — Summarizing
-
-**Principle:** Bundle the conversation — especially highlighting change talk.
-
-**Types:**
-- **Collecting:** Summarize multiple points
-- **Linking:** Connect earlier statements with current ones
-- **Transitional:** At the end of a conversation, leading to next steps
-
-**Example:**
-```
-"Let me summarize what I've heard so far:
-You've noticed that your sleep has gotten worse and it's
-affecting your work. You've tried reducing caffeine before,
-and that partly helped. Being fit and productive is important
-to you. At the same time, your morning coffee enjoyment matters.
-Does that sound right? What would you like to add?"
+「一方では、お酒の量を減らしたいとおっしゃっていますね。
+他方では、仕事終わりの飲み会という社交の場もあなたにとって大切です。
+どちらの気持ちもよく分かります。」
 ```
 
 ---
 
-## 3. Stages of Change (Transtheoretical Model)
+## 3. 要約（Summarizing）
 
-### The Stages (Prochaska & DiClemente)
+**原則：** 会話の内容をまとめ、特にチェンジトークを強調して提示する。
 
-| Stage | Description | MI Strategy |
+**種類：**
+- **収集型要約：** 複数のポイントをまとめる
+- **リンク型要約：** 以前の発言と現在の発言を結びつける
+- **移行型要約：** 会話の節目で使い、次のステップへと導く
+
+**具体例：**
+```
+「これまでにお話しいただいたことを整理させてください。
+睡眠の質が低下し、仕事に影響が出ていることに気づかれたのですね。
+以前カフェインを減らした際には、ある程度効果があったとおっしゃいました。
+心身ともに健康で生産的であることがあなたにとって重要です。
+同時に、朝のコーヒーを楽しむ時間も大切にされています。
+この理解で合っているでしょうか？ 他に追加したい点はありますか？」
+```
+
+---
+
+## 3. 行動変容ステージモデル（トランスセオレティカル・モデル）
+
+### 変容のステージ（Prochaska & DiClemente）
+
+| ステージ | 説明 | MIの戦略 |
 |-------|-------------|-------------|
-| Precontemplation | No problem awareness, no intention to change | Inform, spark curiosity, don't push |
-| Contemplation | Ambivalence: "Maybe I should..." | Explore ambivalence, foster change talk |
-| Preparation | Decision made, making plans | Support planning, strengthen confidence |
-| Action | Actively implementing change | Affirm, work through obstacles |
-| Maintenance | Stabilizing the change | Relapse prevention, acknowledge successes |
-| Relapse | Return to old behavior | Normalize, re-motivate, learn from experience |
+| 前熟考期 (Precontemplation) | 問題の認識がなく、変容の意図もない | 情報を提供し、好奇心を刺激する（押しつけない） |
+| 熟考期 (Contemplation) | 両価性（「変えた方がいいかも…」） | 両価性を探索し、チェンジトークを促す |
+| 準備期 (Preparation) | 決意が固まり、計画を立てている | 計画立案をサポートし、自信を強める |
+| 実行期 (Action) | 変化を積極的に実行している | 肯定し、障害の克服に取り組む |
+| 保持期 (Maintenance) | 変化を定着・安定させている | 再発予防、成功体験の承認 |
+| 再発 (Relapse) | 以前の行動パターンに戻る | 正常なプロセスとして受け止め、再動機づけし、経験から学ぶ |
 
-**Important:** Relapse is not failure, but part of the change process.
+**重要：** 再発は失敗ではなく、変容プロセスの一環です。
 
-### Recognizing the Stage
+### ステージの識別
 
-**Guide questions:**
-- "Have you thought about changing something?" (Precontemplation vs. Contemplation)
-- "What speaks for it, what against it?" (Exploring ambivalence)
-- "Do you have concrete ideas about how you'd approach it?" (Preparation)
-- "What have you already tried?" (Action experience)
-
----
-
-## 4. Recognizing and Strengthening Change Talk
-
-### What is Change Talk?
-
-Change talk consists of statements by the person that point toward change. MI aims to increase change talk and not reinforce sustain talk (maintaining the status quo).
-
-### DARN-CAT Framework
-
-**Preparatory Change Talk (DARN):**
-- **D**esire: "I would like to..."
-- **A**bility: "I could..."
-- **R**easons: "It would be better because..."
-- **N**eed: "I need to change something..."
-
-**Mobilizing Change Talk (CAT):**
-- **C**ommitment: "I will..."
-- **A**ctivation: "I'm ready to..."
-- **T**aking Steps: "I've already..."
-
-### Fostering Change Talk
-
-**Strategies:**
-1. **Ask open questions:**
-   - "What would you gain if something changed?"
-   - "What gives you confidence that you could do this?"
-
-2. **Importance and confidence scaling:**
-   - "How important is this change to you on a scale of 0 to 10?"
-   - "How confident are you that you could manage it?"
-   - "Why a 5 and not a 2?" (strengthens existing motivation)
-
-3. **Exploring extremes:**
-   - "What could happen in the worst case if nothing changes?"
-   - "What would be the best thing that could happen if you changed it?"
-
-4. **Looking back and looking forward:**
-   - "What was it like before this issue came up?"
-   - "Where do you see yourself in five years if everything stays the same?"
+**ガイドとなる質問：**
+- 「何かを変えようと考えたことはありますか？」（前熟考期 vs. 熟考期）
+- 「変えることのメリットとデメリットは何ですか？」（両価性の探索）
+- 「どのように取り組むか、具体的なアイデアはありますか？」（準備期）
+- 「これまでにどのようなことを試されましたか？」（実行体験）
 
 ---
 
-## 5. Dealing with Resistance
+## 4. チェンジトークの識別と強化
 
-### Resistance as a Signal
+### チェンジトークとは？
 
-In MI, "resistance" is interpreted as a sign that the counselor is moving too fast or not adequately respecting the person's autonomy.
+チェンジトークとは、変化に向かう方向性を示すクライエント自身の発言のことです。MIはチェンジトークを増やし、サステイントーク（現状維持を望む発言）を強化しないことを目指します。
 
-### Strategies
+### DARN-CAT フレームワーク
 
-| Situation | Response |
+**準備的チェンジトーク (Preparatory Change Talk - DARN)：**
+- **D**esire（欲求）: 「〜したい」
+- **A**bility（能力）: 「〜できる」
+- **R**easons（理由）: 「〜だから earned その方がよい」
+- **N**eed（必要性）: 「〜を変える必要がある」
+
+**動員的チェンジトーク (Mobilizing Change Talk - CAT)：**
+- **C**ommitment（コミットメント）: 「〜するつもりだ」
+- **A**ctivation（活性化／準備性）: 「〜する準備ができている」
+- **T**aking Steps（一歩を踏み出す）: 「すでに〜を始めた」
+
+### チェンジトークを促す方法
+
+**戦略：**
+1. **開かれた質問をする：**
+   - 「もし変化が起きたら、どのようなメリットがありますか？」
+   - 「自分ならできるという自信は、どこから湧いてきますか？」
+
+2. **重要性と自信のスケール（尺度）：**
+   - 「0から10のスケールで、この変化はあなたにとってどれくらい重要ですか？」
+   - 「やり遂げられるという自信はどれくらいありますか？」
+   - 「なぜ2ではなく5なのですか？」（既存の動機づけを強化する）
+
+3. **両極端を探索する：**
+   - 「もし何も変えなかった場合、最悪どのようなことが起こり得ますか？」
+   - 「もし変えた場合、起こり得る最高の出来事は何ですか？」
+
+4. **過去を振り返り、未来を展望する：**
+   - 「この問題が生じる前は、どのような感じでしたか？」
+   - 「すべてがこのままだとしたら、5年後の自分はどうなっていると思いますか？」
+
+---
+
+## 5. 抵抗への対処
+
+### シグナルとしての抵抗
+
+MIにおいて「抵抗」は、援助者が焦りすぎているか、相手の自律性を十分に尊重できていないことを示すサイン（シグナル）と解釈されます。
+
+### 対処戦略
+
+| 状況 | 応答 |
 |-----------|----------|
-| "I don't have a problem" | Accept, don't argue, show curiosity |
-| "You don't understand me" | Reflect: "Being understood is important to you" |
-| "That won't work anyway" | Explore past successes, strengthen confidence |
-| Person becomes angry | Slow down, emphasize autonomy, reflect empathically |
+| 「自分には何の問題もない」 | 受容し、議論せず、関心を示す |
+| 「あなたは私のことを理解していない」 | 聞き返す：「理解されることがあなたにとって大切なのだと伝わってきます」 |
+| 「どうせうまくいかない」 | 過去の成功体験を探り、自信を強める |
+| 相手が怒りを示す | ペースを落とし、自律性を強調し、共感的に聞き返す |
 
-**Golden rule:** Never argue against resistance. Roll with the resistance, don't push against it.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Use OARS techniques to foster reflection
-- Recognize and reflect back change talk
-- Provide information about change processes
-- Respectfully explore ambivalence
-
-**An AI assistant must NOT:**
-- Force or manipulate change
-- Make decisions for the person
-- Conduct addiction therapy or withdrawal support
-- Use threats or fear appeals
-- Undermine the person's autonomy
-
-**Core principle:** The person decides. An AI assistant supports the reflection process.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**黄金律：** 抵抗に対して絶対に議論・反論しないこと。抵抗とともにながれる（Roll with the resistance）。力で押し返してはならない。
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Not professional therapy*
+## 倫理と限界
+
+**AIアシスタントができること：**
+- OARS手法を用いて内省を促す
+- チェンジトークを識別し、聞き返して返す
+- 変化のプロセスに関する情報を提供する
+- 尊重を持って両価性を探索する
+
+**AIアシスタントがしてはならないこと：**
+- 変化を強制・操作すること
+- 相手の代わりに意思決定をすること
+- 依存症の専門的治療や離脱症状のサポートを行うこと
+- 脅迫や恐怖感を煽るアプローチを用いること
+- 相手の自律性を損なうこと
+
+**コア原則：** 決定するのは相手自身です。AIアシスタントは内省（リフレクション）のプロセスを支援します。
+
+**急性の危機状況の場合は、必ず以下にリファー（繋ぎ）してください：**
+- 988 Suicide & Crisis Lifeline（米国）: 988
+- Crisis Text Line（米国）: HOME とテキスト送信 741741
+- Samaritans（英国）: 116 123
+- Telefonseelsorge（ドイツ）: 0800 111 0 111 / 0800 111 0 222
+- よりそいホットライン（日本）: 0120-279-338
+- 緊急通報: 110/119（日本） / 911（米国） / 112（EU）
+
+---
+
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — 専門的な心理療法ではありません*

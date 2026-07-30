@@ -5,7 +5,8 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: ヤコブソンによる筋弛緩法（PMR）およびシュルツによる自律訓練法。短縮版と完全版。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,184 +16,182 @@ tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `pmr-autogenic-training`.
+> **日本語** — `pmr-autogenic-training` の公式日本語版。
 
 
+# 漸進的筋弛緩法 & 自律訓練法
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> ヤコブソンおよびシュルツに基づく身体アプローチの弛緩技法
 
-
-# Progressive Muscle Relaxation & Autogenic Training (English)
-
-> Body-based relaxation techniques according to Jacobson and Schultz
-
-See: [ETHICS.md](../ETHICS.md)
+参照: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景・コンテキスト
 
-Progressive Muscle Relaxation (PMR, Jacobson 1929) and Autogenic Training (AT, Schultz 1932) are the two most extensively researched relaxation techniques. Both work through conscious influence on the autonomic nervous system and can be learned as self-help methods without therapeutic supervision.
+漸進的筋弛緩法（PMR, Jacobson 1929）および自律訓練法（AT, Schultz 1932）は、最も実証研究が進んでいる2大リラクゼーション技法です。どちらも自律神経系への意識的な働きかけを通じて効果を発揮し、専門家の直接的な指導がなくてもセルフヘルプ手法として学習可能です。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**注記：** 本技法は支援を目的とするものであり、専門的な心理療法や医療行為の代わりになるものではありません。
+**絶対に実施しないこと：** EMDR（眼球運動による脱感作と再処理法）、持続暴露療法（PE）、ナラティブ暴露療法（NET）
 
 ---
 
-## 1. Progressive Muscle Relaxation (PMR) according to Jacobson
+## 1. ヤコブソンによる漸進的筋弛緩法（PMR）
 
-### Basic Principle
+### 基本原理
 
-Systematic tensing and releasing of muscle groups. Through the contrast between tension and release, the body learns deeper relaxation than possible in its normal state.
+筋肉群の系統的な緊張と緩め（弛緩）。「緊張」と「緩み」の対比を通じて、身体は通常の状態よりも深いリラクゼーション状態を学習します。
 
-**Mechanism:** Muscle tension -> conscious release -> parasympathetic activation -> reduction of heart rate, blood pressure, muscle tone
+**メカニズム：** 筋肉の緊張 -> 意識的な弛緩 -> 副交感神経の活性化 -> 心拍数・血圧・筋緊張（トーン）の低下
 
-### 1.1 Long Form: 16 Muscle Groups
+### 1.1 完全版：16の筋肉群
 
-| No | Muscle Group | Tension |
+| No | 筋肉群 | 緊張動作 |
 |----|-------------|---------|
-| 1 | Right hand/forearm | Clench fist |
-| 2 | Right upper arm | Tense biceps |
-| 3 | Left hand/forearm | Clench fist |
-| 4 | Left upper arm | Tense biceps |
-| 5 | Forehead | Raise eyebrows |
-| 6 | Mid-face | Squeeze eyes shut, wrinkle nose |
-| 7 | Lower face | Clench teeth, pull corners of mouth wide |
-| 8 | Neck | Press chin toward chest (counter-pressure) |
-| 9 | Chest/shoulders | Raise shoulders, inhale deeply |
-| 10 | Abdomen | Tense abdominal muscles |
-| 11 | Lower back | Slight arch |
-| 12 | Right thigh | Slightly lift leg |
-| 13 | Right lower leg | Pull foot toward shin |
-| 14 | Right foot | Curl toes |
-| 15 | Left thigh | Slightly lift leg |
-| 16 | Left lower leg/foot | Pull foot up, curl toes |
+| 1 | 右手・前腕 | 拳を強く握りしめる |
+| 2 | 右上腕 | 上腕二頭筋に力を入れる |
+| 3 | 左手・前腕 | 拳を強く握りしめる |
+| 4 | 左上腕 | 上腕二頭筋に力を入れる |
+| 5 | 額 | 眉毛を上に引き上げる |
+| 6 | 顔の中央部 | 目を強く閉じ、鼻にシワを寄せる |
+| 7 | 顔の下部 | 歯をくいしばり、口角を左右に大きく引く |
+| 8 | 首 | 顎を胸に向けて押し付ける（抵抗をかける） |
+| 9 | 胸・肩 | 肩を引き上げ、深く息を吸う |
+| 10 | 腹部 | 腹筋に力を入れる |
+| 11 | 下背部（腰） | 背中を軽く反らせる |
+| 12 | 右大腿部 | 腿を少し持ち上げる |
+| 13 | 右下腿部 | 足先をすねの方へ引き寄せる |
+| 14 | 右足 | 足の指を下に丸める |
+| 15 | 左大腿部 | 腿を少し持ち上げる |
+| 16 | 左下腿部・足 | 足先を引き寄せ、足の指を丸める |
 
-**Procedure per muscle group:**
-1. Direct attention to the muscle group
-2. Tense: 5-7 seconds (approximately 70% of maximum strength)
-3. Release: Let go abruptly
-4. Notice: 20-30 seconds, perceive the relaxation
-5. Next muscle group
+**各筋肉群の手順：**
+1. 該当する筋肉群に意識を向ける
+2. 緊張させる：5〜7秒間（最大筋力の約70%程度）
+3. 緩める：一気に力を抜く
+4. 味わう：20〜30秒間、弛緩感覚を感じ取る
+5. 次の筋肉群へ進む
 
-### 1.2 Short Form: 7 Muscle Groups
+### 1.2 短縮版：7つの筋肉群
 
-For experienced practitioners or when time is limited:
+熟練者または時間が限られている場合：
 
-| No | Combination | Tension |
+| No | 組み合わせ | 緊張動作 |
 |----|------------|---------|
-| 1 | Both arms | Clench fists, bend arms |
-| 2 | Entire face | Grimace: furrow brow, close eyes, mouth wide |
-| 3 | Neck/shoulders | Pull shoulders up to ears |
-| 4 | Chest/abdomen | Inhale, tense abdomen |
-| 5 | Back | Shoulder blades together, slight arch |
-| 6 | Both thighs | Slightly lift legs |
-| 7 | Both lower legs/feet | Pull feet up |
+| 1 | 両腕 | 拳を握り、肘を曲げて力を入れる |
+| 2 | 顔全体 | 変顔を作る：眉間にシワを寄せ、目を閉じ、口を大きく開く |
+| 3 | 首・肩 | 肩を耳に近づけるように引き上げる |
+| 4 | 胸・腹部 | 息を吸い、腹部に力を入れる |
+| 5 | 背中 | 肩甲骨を引き寄せ、背中を軽く反らせる |
+| 6 | 両大腿部 | 両脚を少し持ち上げる |
+| 7 | 両下腿部・足 | 足先を上に引き寄せる |
 
-### 1.3 Recall Technique (Advanced)
+### 1.3 イメージ弛緩技法（上級）
 
-After several weeks of practice: Relaxation of muscle groups ONLY through imagination (without actual tensing). The body has conditioned the relaxation response.
+数週間の練習後：イメージ（実際の筋緊張を伴わない）のみで筋肉群を弛緩させます。身体にリラクゼーション反応が条件づけられています。
 
 ---
 
-## 2. Autogenic Training (AT) according to Schultz
+## 2. シュルツによる自律訓練法（AT）
 
-### Basic Principle
+### 基本原理
 
-Concentrative self-relaxation through formulaic autosuggestion. The practitioner induces a state of deep relaxation through repeated guiding phrases (autonomic switching).
+言語公式による自己暗示を通じた集中性自己弛緩法。練習者は導きの言葉（公式）を反復することにより、深度のリラクゼーション状態（自律神経の切り替え）を誘導します。
 
-**Mechanism:** Concentration on formulas -> ideomotor response -> actual physical changes (blood flow, warmth, calm)
+**メカニズム：** 公式への集中 -> 観念運動反応 -> 実際の生理的変化（血流量増加、温感、平静）
 
-### 2.1 The 6 Basic Exercises (Lower Level)
+### 2.1 6つの標準練習（下位段階）
 
-| Exercise | Formula | Goal |
+| 練習項目 | 言語公式 | 目的 |
 |----------|---------|------|
-| 1. Heaviness | "My right arm is very heavy" | Muscle relaxation |
-| 2. Warmth | "My right arm is very warm" | Vasodilation, blood flow |
-| 3. Heart | "My heart beats calmly and steadily" | Heart regulation |
-| 4. Breathing | "My breathing is calm and steady" | Breath regulation |
-| 5. Solar plexus | "My solar plexus is streaming warm" | Abdominal organ relaxation |
-| 6. Forehead | "My forehead is pleasantly cool" | Mental clarity |
+| 1. 重感練習 | 「右腕がとても重い」 | 筋弛緩 |
+| 2. 温感練習 | 「右腕がとても温かい」 | 血管拡張・血流促進 |
+| 3. 心臓練習 | 「心臓が静かに規則正しく打っている」 | 心拍の調整 |
+| 4. 呼吸練習 | 「息が静かに規則正しく流れている」 | 呼吸の調整 |
+| 5. 腹部練習 | 「お腹（太陽神経叢）が温かい」 | 腹部内臓の弛緩 |
+| 6. 額涼感練習 | 「額が心地よく涼しい」 | 精神的明瞭さ |
 
-**Progression:** Gradual over 6-8 weeks. Add one new exercise each week.
+**進展段階：** 6〜8週間かけて段階的に進めます。毎週新しい練習を1つずつ追加します。
 
-### 2.2 Session Procedure
+### 2.2 セッションの手順
 
 ```
-1. Basic posture: Coachman's posture, armchair position, or lying down
-2. Opening: Close eyes, "I am completely calm"
-3. Internally repeat formulas (6x each, slowly):
-   - "My right arm is very heavy" (6x)
-   - "My right arm is very warm" (6x)
-   - [additional formulas depending on practice level]
-4. Rest formula in between: "I am completely calm"
-5. Recall: Firmly tense arms, inhale deeply, open eyes
-   IMPORTANT: Never skip the recall (except before falling asleep)
+1. 基本姿勢：御者（ぎょしゃ）の姿勢、安楽椅子坐位、または仰臥位（仰向け）
+2. 開始：目を閉じ、「気持ちがとても落ち着いている」
+3. 心の中で公式を反復（各6回、ゆっくりと）：
+   - 「右腕がとても重い」（6回）
+   - 「右腕がとても温かい」（6回）
+   - [練習段階に応じて追加公式を実施]
+4. 中間公式：「気持ちがとても落ち着いている」
+5. 消去動作（Recall）：両腕を強く屈伸し、深呼吸をし、目を開ける
+   重要：消去動作は絶対に省略しないこと（入眠前を除く）
 ```
 
-### 2.3 Learning Plan
+### 2.3 学習計画表
 
-| Week | Exercise | Duration |
+| 週数 | 実施内容 | 所要時間 |
 |------|----------|----------|
-| 1-2 | Heaviness exercise | 5 min |
-| 3-4 | Heaviness + Warmth | 8 min |
-| 5-6 | Heaviness + Warmth + Heart + Breathing | 12 min |
-| 7-8 | All 6 basic exercises | 15 min |
+| 1-2週目 | 重感練習 | 5分 |
+| 3-4週目 | 重感 ＋ 温感 | 8分 |
+| 5-6週目 | 重感 ＋ 温感 ＋ 心臓 ＋ 呼吸 | 12分 |
+| 7-8週目 | 全6項目の標準練習 | 15分 |
 
 ---
 
-## 3. PMR vs. AT: Decision Guide
+## 3. PMR vs. AT：選択ガイド
 
-| Criterion | PMR | AT |
+| 判断基準 | PMR（漸進的筋弛緩法） | AT（自律訓練法） |
 |-----------|-----|-----|
-| Learnability | Easy, immediately effective | Requires practice (4-8 weeks) |
-| Physical activity | Yes (tensing) | No (imagination only) |
-| For muscle tension | Very suitable | Moderately suitable |
-| For inner restlessness | Good | Very good |
-| For sleep problems | Good | Very good |
-| Usable anywhere | Limited (movement needed) | Yes (inconspicuous) |
-| For children | From approx. age 8 | From approx. age 10 |
+| 習得の容易さ | 容易・即効性あり | 練習が必要（4〜8週間） |
+| 身体活動 | あり（筋緊張） | なし（イメージのみ） |
+| 筋肉のこり・緊張に対して | 非常に適している | 中程度に適している |
+| 内面的な焦燥感・不安 | 効果的 | 非常によく効く |
+| 睡眠問題 | 効果的 | 非常によく効く |
+| 実施場所 | 限定的（動作が必要） | どこでも可能（目立たない） |
+| 対象年齢（子供） | およそ8歳以上 | およそ10歳以上 |
 
 ---
 
-## 4. Contraindications
+## 4. 禁忌事項
 
-**PMR:**
-- Acute muscle injuries or inflammation
-- Severe spasticity
-- Epilepsy (tensing may trigger seizures — rare)
+**PMRの禁忌：**
+- 急性筋肉損傷および炎症
+- 重度の痙縮（けいしゅく）
+- てんかん（筋緊張が発作を誘発する可能性あり — 稀）
 
-**AT:**
-- Acute psychosis
-- Severe depression (risk of excessive introspection)
-- Cardiac arrhythmia (omit heart exercise)
-- Dissociative disorders
-- Severe hypotension (circulatory problems possible)
+**ATの禁忌：**
+- 急性精神病状態
+- 重度うつ病（過度な内省・内向リスク）
+- 心律不整・不整脈（心臓練習を省略すること）
+- 解離性障害
+- 重度低血圧（循環器系トラブルの可能性）
 
-**Both methods:**
-- Stop immediately if trauma flashbacks occur
-- Not a substitute for medical/psychotherapeutic treatment
-
----
-
-## Progress Tracking
-
-- Tension level before/after exercise (0-10 scale)
-- Which muscle groups were particularly tense?
-- AT: Which formulas are already effective, which not yet?
-- Regularity: Goal 1x daily, at least 4x/week
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**両手法共通：**
+- トラウマのフラッシュバックが発生した場合は直ちに中止すること
+- 医療・心理療法の代わりにはなりません
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Jacobson (1929), Schultz (1932) — Not professional therapy*
+## 進捗の記録と評価
+
+- 練習前後での緊張度（0〜10段階スケール）
+- 特に緊張が強かった筋肉群の把握
+- AT：効果が出ている公式と、まだ馴染んでいない公式の整理
+- 定期性：目標は毎日1回、最低でも週4回以上
+
+**急性の危機状況が発生した場合は、必ず以下にご相談ください：**
+- 988 Suicide & Crisis Lifeline (米国): 988
+- Crisis Text Line (米国): Text HOME to 741741
+- Samaritans (英国): 116 123
+- Telefonseelsorge (ドイツ): 0800 111 0 111 / 0800 111 0 222
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556
+- 緊急通報ダイヤル: 119/110（日本） / 911（米国） / 112（EU）
+
+---
+
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Jacobson (1929), Schultz (1932) — 本内容は専門的な治療行為ではありません*

@@ -6,7 +6,7 @@ author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
 updated: 2026-06-13
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: [Русский] Навык агента для pipeline-optimizer: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
+description: Структурированная 6-шаговая процедура для улучшения, обновления или перестройки существующих пайплайнов, отдельных папок проектов, структур документации или программных стеков. Вызывается как «оптимизатор пайплайнов» (для целых тематических пайплайнов, например, разработки ПО, исследований или игр) или «оптимизатор папок проектов» (для отдельных папок проектов внутри пайплайна). Срабатывает при задачах вида «улучшить пайплайн X», «оптимизировать стек», «перестроить Y», «реновация», «рефакторинг пайплайна», «навести порядок в папке проекта», «улучшить структуру папок», «унифицировать соглашения», «консолидация документации», «интегрировать в существующую систему» или любых существенных вмешательствах в сложившиеся структуры. Обеспечивает анализ существующей базы, уточнение целей, эскиз идеального состояния, план устранения пробелов, эмпирическое выявление проблемных мест и повторное тестирование с помощью новых субагентов. Предотвращает параллельные стандарты, дублирование и сбои в пайплайне.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,284 +16,280 @@ tags: [pipeline, renovation, refactoring, stack, workflow, lessons-learned]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `pipeline-optimizer`.
+> **Русский** — Официальная русская версия `pipeline-optimizer`.
 
 
+# Pipeline Optimizer / Project-Folder Optimizer (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+**Обновление в 6 шагов без несовместимостей** — применимо на двух уровнях:
 
-
-# Pipeline Optimizer / Project-Folder Optimizer (English)
-
-**6-step renovation without incompatibilities** — applicable at two scales:
-
-| Trigger name | Scope | Example |
+| Название триггера | Масштаб (Scope) | Пример |
 |---|---|---|
-| **Pipeline optimizer** | Whole pipelines, stacks, documentation structures | Your topic pipelines, e.g. `software/`, `research/`, `games/`, an agent system |
-| **Project-folder optimizer** | Individual project folders within a pipeline | A software tool, a paper project, a game project |
+| **Pipeline optimizer** | Целые пайплайны, стеки, структуры документации | Ваши тематические пайплайны, напр. `software/`, `research/`, `games/`, система агентов |
+| **Project-folder optimizer** | Отдельные папки проектов внутри пайплайна | Программный инструмент, научный проект статьи, проект игры |
 
-A **pipeline** here means a topic-oriented top-level structure in which multiple projects live under shared conventions (e.g. a software pipeline with release rules, a research pipeline with a publication procedure).
+Под **пайплайном** здесь понимается тематическая структура верхнего уровня, в которой несколько проектов сосуществуют по общим соглашениям (напр. пайплайн разработки ПО с правилами релизов, исследовательский пайплайн с процедурой публикаций).
 
-Both use the same 6-step workflow — the only difference is the **scope** (pipeline-wide vs. single project) and, accordingly, the depth of the building-stock survey in step A.
+Оба используют один и тот же 6-шаговый рабочий процесс — единственное отличие заключается в **масштабе** (весь пайплайн против одного проекта) и, соответственно, в глубине анализа существующей базы на шаге A.
 
-## When this skill applies
+## Когда применяется этот навык
 
-The skill applies as soon as you are asked to improve, rebuild, or extend an **existing** structure — not for greenfield construction. Concrete triggers:
+Навык применяется, как только вас просят улучшить, перестроить или расширить **существующую** структуру, а не создавать проект с нуля (greenfield). Конкретные триггеры:
 
-**Pipeline level** (scope: whole pipeline):
-- "Make pipeline X better"
-- "Optimize the stack"
-- "Renovate the software pipeline"
-- "Documentation consolidation in the research pipeline"
-- Substantial intervention in a topic pipeline, central `_tools/`, or system components
+**Уровень пайплайна** (масштаб: весь пайплайн):
+- «Улучшить пайплайн X»
+- «Оптимизировать стек»
+- «Обновить пайплайн разработки ПО»
+- «Консолидация документации в исследовательском пайплайне»
+- Существенное вмешательство в тематический пайплайн, центральную папку `_tools/` или системные компоненты
 
-**Project-folder level** (scope: single project folder):
-- "Clean up / optimize project folder X"
-- "Improve the folder structure in Y"
-- "Refactor a single tool"
-- "Unify a paper-project setup"
-- "Align a game project folder with the pipeline standard"
+**Уровень папки проекта** (масштаб: одна папка проекта):
+- «Навести порядок / оптимизировать папку проекта X»
+- «Улучшить структуру папок в Y»
+- «Провести рефакторинг отдельного инструмента»
+- «Унифицировать структуру проекта статьи»
+- «Привести папку игрового проекта к стандарту пайплайна»
 
-**Cross-cutting:**
-- "Rebuild X / integrate it into existing Y"
-- "Refactoring", "consolidation"
-- "Unify conventions"
-- "Integrate into an existing system"
+**Сквозные задачи:**
+- «Перестроить X / интегрировать его в существующий Y»
+- «Рефакторинг», «консолидация»
+- «Унифицировать соглашения»
+- «Интегрировать в существующую систему»
 
-## The building-stock metaphor
+## Метафора существующего здания
 
-Renovating a house first requires knowing **what it is made of** (stone, wood, plastic), **what it is for** (mountain hut, software forge), and **where it already fulfills functions**. The same discipline applies to pipelines.
+Чтобы отремонтировать дом, сначала нужно знать, **из чего он построен** (камень, дерево, пластик), **для чего он служит** (горный приют, кузница ПО) и **где он уже выполняет свои функции**. Та же дисциплина применима и к пайплайнам.
 
 ---
 
-## Procedure — 6 steps (do NOT skip, do NOT reorder)
+## Процедура — 6 шагов (НЕ пропускать, НЕ менять порядок)
 
-### Step A — Survey the building stock
+### Шаг A — Анализ существующей базы
 
-**Question:** What is the house made of?
+**Вопрос:** Из чего построен дом?
 
-**Pipeline scope** (all root docs + tools + templates):
-- [ ] **Read all root documents completely** (not just snippets/insertion points)
-- [ ] Go through template folders (`_templates/`, `_TEMPLATES/`) and tool folders (`_tools/`)
-- [ ] Policy files: e.g. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, publication procedures, …
-- [ ] Status snapshots: e.g. PROJECT_STATUS.md, status overviews, releases.json, registry files
-- [ ] Checklists: e.g. release checklists, build/PDF checklists
-- [ ] Workflows: AGENTS.md, GUIDE.md, SKILL.md
-- [ ] Lessons-learned files: LESSONS_LEARNED.md, MEMORY.md, loop-state files
+**Масштаб пайплайна** (все корневые документы + инструменты + шаблоны):
+- [ ] **Полностью прочитать все корневые документы** (не только фрагменты или точки вставки)
+- [ ] Изучить папки шаблонов (`_templates/`, `_TEMPLATES/`) и папки инструментов (`_tools/`)
+- [ ] Файлы политик: напр. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, процедуры публикаций, …
+- [ ] Снимки состояния: напр. PROJECT_STATUS.md, обзоры статусов, releases.json, файлы реестров
+- [ ] Чек-листы: напр. чек-листы релизов, чек-листы сборки/PDF
+- [ ] Рабочие процессы: AGENTS.md, GUIDE.md, SKILL.md
+- [ ] Файлы извлеченных уроков: LESSONS_LEARNED.md, MEMORY.md, файлы состояния циклов
 
-**Project-folder scope** (single-project substance + relevant pipeline conventions):
-- [ ] **Read all markdown and control files in the project folder** (README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, action plan, proof notes, …)
-- [ ] **Survey the code structure:** src/, tests/, build configuration (pyproject.toml, requirements.txt, project manifests, toolchain files, …)
-- [ ] **Take the parent pipeline's conventions into account** (e.g. for a software project: GitHub policy, naming system, release management, templates)
-- [ ] **Scan existing tools/scripts in the project** (`_tools/`, `_scripts/`, build_*.bat, START scripts)
-- [ ] **Configuration files:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
+**Масштаб папки проекта** (содержимое отдельного проекта + релевантные соглашения пайплайна):
+- [ ] **Прочитать все markdown- и управляющие файлы в папке проекта** (README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, план действий, заметки о доказательствах, …)
+- [ ] **Исследовать структуру кода:** src/, tests/, конфигурации сборки (pyproject.toml, requirements.txt, манифесты проектов, файлы тулчейнов, …)
+- [ ] **Учесть соглашения родительского пайплайна** (напр. для проекта ПО: политика GitHub, система именования, управление релизами, шаблоны)
+- [ ] **Просканировать существующие инструменты/скрипты в проекте** (`_tools/`, `_scripts/`, build_*.bat, скрипты START)
+- [ ] **Конфигурационные файлы:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
 
-**Anti-pattern:** Using `grep -l "<keyword>"` to find insertion points and inserting there without knowing the file's context.
+**Антипаттерн:** Использование `grep -l "<keyword>"` для поиска точек вставки и вставка туда без понимания контекста файла.
 
-**Output:** Inventory note with all relevant conventions, tools, and templates at the chosen scope.
+**Результат:** Инвентаризационная заметка со всеми релевантными соглашениями, инструментами и шаблонами в выбранном масштабе.
 
-### Step B — Identify the purpose
+### Шаг B — Определение назначения
 
-**Question:** What does the house exist for?
+**Вопрос:** Для чего существует дом?
 
-State the purpose explicitly in 1-2 sentences.
+Сформулируйте назначение явно в 1-2 предложениях.
 
-**Pipeline examples:**
+**Примеры пайплайнов:**
 
-| Pipeline | Purpose |
+| Пайплайн | Назначение |
 |---|---|
-| Software pipeline | Develop, test, and release desktop apps + browser tools to stores/GitHub |
-| Research pipeline | Write scientific papers, peer-review them, publish to repositories/preprint servers |
-| Game pipeline | Develop games and publish them on the target platform |
-| Agent system | LLM system for multi-agent orchestration |
+| Пайплайн ПО | Разрабатывать, тестировать и выпускать настольные приложения + веб-инструменты в магазины/GitHub |
+| Исследовательский пайплайн | Писать научные статьи, рецензировать их, публиковать в репозиториях/серверах препринтов |
+| Игровой пайплайн | Разрабатывать игры и публиковать их на целевой платформе |
+| Система агентов | LLM-система для оркестрации множества агентов |
 
-**Project-folder examples:**
+**Примеры папок проектов:**
 
-| Project folder | Purpose |
+| Папка проекта | Назначение |
 |---|---|
-| `software/PlannerApp` | Planning desktop app, commercial, private repo |
-| `research/CosmologyModel` | Model paper series + numerical computations |
-| `games/SortingChaos` | Sorting game, alpha stage, level progression |
+| `software/PlannerApp` | Настольное приложение для планирования, коммерческое, приватный репозиторий |
+| `research/CosmologyModel` | Серия статей по модели + численные расчеты |
+| `games/SortingChaos` | Игра-сортировка, стадия альфа, прогрессия уровней |
 
-The purpose **steers every intervention** — measures that do not serve the purpose are dropped.
+Назначение **направляет каждое вмешательство** — меры, не служащие назначению, отбрасываются.
 
-### Step C — Sketch the ideal picture
+### Шаг C — Эскиз идеальной картины
 
-**Question:** What would a perfect house for this purpose look like?
+**Вопрос:** Как выглядел бы идеальный дом для этого назначения?
 
-- Sketch it from your own perspective (short, max. 10 points)
-- Bring in a best-practice comparison (e.g. Vercel stack for SaaS, scientific-python stack for research)
-- Do not descend into detail optimization — a top-level sketch is enough
+- Набросайте его с собственной точки зрения (кратко, макс. 10 пунктов)
+- Сравните с лучшими практиками (напр. стек Vercel для SaaS, стек scientific-python для исследований)
+- Не вдавайтесь в детализацию оптимизаций — достаточно эскиза верхнего уровня
 
-**Output:** 5-10 points "ideal state per pipeline"
+**Результат:** 5-10 пунктов «идеального состояния пайплайна»
 
-### Step D — Gap analysis + plan
+### Шаг D — Анализ пробелов + план
 
-**Four questions per pipeline:**
+**Четыре вопроса на пайплайн:**
 
-1. **What does the house already have?** — Even if solved differently from the ideal but **functionally equivalent**.
-   *Example:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
+1. **Что уже есть в доме?** — Даже если решено иначе, чем в идеале, но **функционально эквивалентно**.
+   *Пример:* В идеале указано «pip-licenses для сторонних лицензий». Реальность: собственный скрипт-генератор обертывает его → функционально эквивалентно, вмешательство не требуется.
 
-2. **What impedes the function?** — Existing structures that cause breaks or extra effort today.
+2. **Что препятствует функционированию?** — Существующие структуры, вызвающие сбои или лишние затраты усилий сегодня.
 
-3. **What is non-functional?** — Dead code, outdated conventions, unused tools.
+3. **Что не функционирует?** — Мертвый код, устаревшие соглашения, неиспользуемые инструменты.
 
-4. **What would measurably improve functions?** — Concrete interventions with expected benefit.
+4. **Что измеримо улучшило бы функции?** — Конкретные вмешательства с ожидаемой пользой.
 
-→ From this, a **concrete plan**:
-- What gets **newly built**?
-- What gets **extended**?
-- What gets **demolished**?
-- What stays **unchanged** (important to name!)
+→ На основе этого составляется **конкретный план**:
+- Что создается **заново**?
+- Что **расширяется**?
+- Что **демонтируется**?
+- Что остается **без изменений** (важно указать!)
 
-**Output:** Plan table with columns *Intervention* / *Existing* / *Measure* / *Rationale*
+**Результат:** Таблица плана с колонками *Вмешательство* / *Существующее* / *Мера* / *Обоснование*
 
-### Step E — Work empirically
+### Шаг E — Эмпирическая работа
 
-Do not only plan top-down — collect pain points:
+Не планируйте только сверху вниз — собирайте проблемные места (pain points):
 
-- [ ] **Known bugs**: issue tracker, TASKS/TODO/DONE files
-- [ ] **Error history**: lessons-learned files, bugfix logs, check registries
-- [ ] **Automation breaks**: "What do I always have to do manually?"
-- [ ] **User interview**: ask specifically — pain points, wishes, workarounds
-- [ ] **Self-test**: walk through the pipeline (create a new project, run a build, simulate a release) — where does it break?
+- [ ] **Известные баги**: баг-трекер, файлы TASKS/TODO/DONE
+- [ ] **История ошибок**: файлы извлеченных уроков, логи исправления багов, реестры проверок
+- [ ] **Сбои автоматизации**: «Что мне всегда приходится делать вручную?»
+- [ ] **Интервью с пользователем**: спросите специально — проблемы, пожелания, обходные пути
+- [ ] **Самотестирование**: пройдите по пайплайну (создайте новый проект, запустите сборку, сымитируйте релиз) — где происходит сбой?
 
-The empirically found pain points **prioritize the plan** from step D.
+Эмпирически найденные проблемные места **определяют приоритеты плана** из шага D.
 
-### Step F — Retests after implementation
+### Шаг F — Повторное тестирование после реализации
 
-- [ ] Commission **fresh subagents** (unburdened by the renovation context) to walk through the changed workflow
-- [ ] **Measurable before/after values**: setup time, error rate, number of manual steps, build time
-- [ ] **Anti-regression check**: do existing workflows still work after the change?
-- [ ] If there is **no measurable improvement** or a regression: **roll back** the renovation or readjust
+- [ ] Поручите **новым субагентам** (не обремененным контекстом обновления) пройти по измененному рабочему процессу
+- [ ] **Измеримые показатели до/после**: время настройки, уровень ошибок, количество ручных шагов, время сборки
+- [ ] **Проверка на отсутствие регрессий**: работают ли существующие процессы после изменений?
+- [ ] Если **нет измеримого улучшения** или произошла регрессия: **откатите** обновления или скорректируйте их
 
-## Anti-patterns (forbidden)
+## Антипаттерны (запрещено)
 
-| Anti-pattern | Damage | Antidote |
+| Антипаттерн | Вред | Противоядие |
 |---|---|---|
-| Searching insertion points instead of reading docs | Parallel standards | Step A in full |
-| Transferring "best practice from X" 1:1 | Incompatibility | Step D compares functionally |
-| Creating a new file without checking conventions | Duplication (e.g. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Step A + step D |
-| Planning top-down without empirics | Solution misses the pain point | Step E before finalizing the plan |
-| Not testing your own change | Undetected regression | Step F with a fresh agent |
-| "Clarify later" with unclear status | User discovers the conflict afterwards | When unsure, walk step D through with the user again |
+| Поиск точек вставки вместо чтения документации | Параллельные стандарты | Полный шаг A |
+| Перенос «лучших практик X» 1:1 | Несовместимость | Шаг D сравнивает функциональность |
+| Создание нового файла без проверки соглашений | Дублирование (напр. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Шаг A + шаг D |
+| Планирование сверху вниз без эмпирики | Решение не устраняет проблему | Шаг E до утверждения плана |
+| Отсутствие проверки собственных изменений | Незамеченная регрессия | Шаг F с новым агентом |
+| «Уточнить позже» при неясном статусе | Пользователь позже обнаруживает конфликт | При сомнениях снова пройдите шаг D с пользователем |
 
-## Case study — the NOTICE.md incident
+## Разбор случая — инцидент с NOTICE.md
 
-**Assignment:** Implement pipeline improvements across several topic pipelines (software, research, games).
+**Задача:** Реализовать улучшения пайплайнов в нескольких тематических направлениях (ПО, исследования, игры).
 
-**Mistake:** Step A skipped — only insertion points searched instead of reading the full policy files.
+**Ошибка:** Пропущен шаг A — выполнялся только поиск точек вставки вместо чтения полных файлов политик.
 
-**Consequence:** `NOTICE.md` introduced as a "new license file" in 7 files, although `THIRD_PARTY_LICENSES.txt` + a custom license generator (wrapper around `pip-licenses`) were already established — documented in the pipeline's GitHub policy (mandatory files + license checklist). All software projects already had THIRD_PARTY files.
+**Последствие:** Файл `NOTICE.md` был внедрен как «новый файл лицензий» в 7 файлах, хотя `THIRD_PARTY_LICENSES.txt` + собственный генератор лицензий (обертка над `pip-licenses`) уже были установлены — что было задокументировано в политике GitHub пайплайна (обязательные файлы + чек-лист лицензий). Все проекты ПО уже имели файлы THIRD_PARTY.
 
-**Detection:** Only after the user asked ("I'm fairly sure we already had rights management").
+**Обнаружение:** Только после вопроса пользователя («Я уверен, что у нас уже было управление правами»).
 
-**Correction:** NOTICE.md removed from the project template, 6 further files adjusted, the existing license generator referenced instead of `pip-licenses`.
+**Исправление:** NOTICE.md удален из шаблона проекта, скорректированы еще 6 файлов, добавлен reb-ссылка на существующий генератор лицензий вместо `pip-licenses`.
 
-**Lesson:** Had step A been executed in full, the conflict would have been detected before writing.
+**Урок:** Если бы шаг A был выполнен полностью, конфликт обнаружили бы до записи файлов.
 
-## Rules of thumb
+## Практические правила
 
-1. **For "improve the pipeline", first read as long as you write.**
-2. **No new standard without proof that no existing one exists.**
-3. **Use existing tools/wrappers instead of new parallel ones.**
-4. **"More of the same" is usually worse than "extend what exists".**
-5. **Rolling back on conflict** is always better than running two parallel standards.
+1. **Для «улучшения пайплайна» сначала читайте столько же, сколько пишите.**
+2. **Никаких новых стандартов без доказательства отсутствия существующих.**
+3. **Используйте существующие инструменты/обертки вместо новых параллельных.**
+4. **«Еще одно то же самое» обычно хуже, чем «расширение существующего».**
+5. **Откат при конфликте** всегда лучше, чем поддержка двух параллельных стандартов.
 
-## Completion checklist
+## Чек-лист завершения
 
-Before reporting a pipeline renovation as "done":
+Перед тем как доложить о завершении обновления пайплайна:
 
-- [ ] Step A: all relevant root docs read?
-- [ ] Step B: pipeline purpose stated in 1-2 sentences?
-- [ ] Step C: ideal picture sketched (5-10 points)?
-- [ ] Step D: gap analysis with table (what stays / what is extended / what is new / what goes)?
-- [ ] Step E: empirics checked (bugs, lessons, self-test, user interview)?
-- [ ] Plan agreed with the user?
-- [ ] Step F: tested with a fresh subagent — improvement measurable?
-- [ ] No parallel standards introduced?
-- [ ] On conflicts: rolled back or honestly accounted for?
+- [ ] Шаг A: прочитаны ли все релевантные корневые документы?
+- [ ] Шаг B: сформулировано ли назначение пайплайна в 1-2 предложениях?
+- [ ] Шаг C: набросан ли эскиз идеального состояния (5-10 пунктов)?
+- [ ] Шаг D: анализ пробелов с таблицей (что остается / что расширяется / что новое / что удаляется)?
+- [ ] Шаг E: проверена ли эмпирика (баги, уроки, самотест, интервью)?
+- [ ] Согласован ли план с пользователем?
+- [ ] Шаг F: проверено ли с новым субагентом — есть ли измеримое улучшение?
+- [ ] Не внедрены ли параллельные стандарты?
+- [ ] При конфликтах: выполнен ли откат или дана честная оценка?
 
-## Optimal project-folder structure (for the project-folder optimizer)
+## Оптимальная структура папки проекта (для оптимизатора папок проектов)
 
-When the skill is applied to **a single project folder**, the following combined recommendation helps as an ideal reference (step C):
+Когда навык применяется к **отдельной папке проекта**, в качестве идеального ориентира служит следующая комбинированная рекомендация (шаг C):
 
-### Anthropic standard (Claude Code)
+### Стандарт Anthropic (Claude Code)
 
-| File/folder | Function |
+| Файл/Папка | Функция |
 |---|---|
-| `CLAUDE.md` (root) | Auto-loaded by Claude Code, project-specific instructions |
-| `.claude/settings.json` | Permissions, env vars, model selection (committed) |
-| `.claude/settings.local.json` | Local overrides (do NOT commit, add to `.gitignore`) |
-| `.claude/commands/*.md` | Custom slash commands |
-| `.claude/agents/*.md` | Custom subagents |
-| `.claude/skills/<name>/SKILL.md` | Project skills |
+| `CLAUDE.md` (корень) | Автоматически загружается Claude Code, инструкции для конкретного проекта |
+| `.claude/settings.json` | Разрешения, переменные окружения, выбор модели (коммитится в git) |
+| `.claude/settings.local.json` | Локальные переопределения (НЕ коммитить, добавить в `.gitignore`) |
+| `.claude/commands/*.md` | Пользовательские слэш-команды |
+| `.claude/agents/*.md` | Пользовательские субагенты |
+| `.claude/skills/<name>/SKILL.md` | Навыки проекта |
 
-### Your own project-docs template (recommended)
+### Ваш собственный шаблон документации проекта (рекомендуется)
 
-If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Example split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
+Если вы поддерживаете собственный шаблон документации проекта (напр. в `<workspace>/_templates/project-docs/`), выгодно использовать **три профиля детализации**. Пример разделения: **MINIMAL** предоставляет базовый набор из 7 корневых файлов (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) плюс `_tools/`. **STANDARD** добавляет `CHANGELOG.md`, `DECISIONS.md` и `PATTERNS.md`. **FULL** расширяет набор до 14 корневых файлов и дополнительно включает `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md`, а также `workflows/` и `.github/`.
 
-→ **Use such a template as the base for new projects** (copy instead of creating manually).
+→ **Используйте такой шаблон в качестве основы для новых проектов** (копирование вместо создания вручную).
 
-### Pipeline-specific additions (examples)
+### Специфичные дополнения пайплайна (примеры)
 
-Depending on the pipeline, further mandatory files come on top — typical patterns:
+В зависимости от пайплайна добавляются дополнительные обязательные файлы — типичные шаблоны:
 
-- **Software project:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (generated), pyproject.toml/requirements.txt, entry in the pipeline's central release registry. → If available: use the pipeline's cookiecutter template.
-- **Research project:** concept document, action plan, publication plan, archive/source/result/data folders (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` for LaTeX. For proof projects: a proof-note file with the proof chain and status.
-- **Game project:** project manifest and toolchain files of the engine (e.g. for Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), game design document, `src/{server,client,shared}/` per engine convention.
+- **Проект ПО:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (генерируемый), pyproject.toml/requirements.txt, запись в центральном реестре релизов пайплайна. → Если доступно: используйте cookiecutter-шаблон пайплайна.
+- **Исследовательский проект:** концептуальный документ, план действий, план публикаций, папки архива/источников/результатов/данных (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` для LaTeX. Для проектов доказательств: файл заметок доказательства с цепочкой и статусом.
+- **Игровой проект:** манифест проекта и файлы тулчейна движка (напр. для Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), документ дизайна игры, `src/{server,client,shared}/` по соглашению движка.
 
-### Full detail reference
+### Полный детальный справочник
 
-→ See **`references/optimal-project-structure.md`** in this skill folder (German). Contains:
-- Example `settings.json` (Anthropic schema)
-- Mandatory `.gitignore` entries
-- Anti-patterns (what does NOT belong in project folders)
-- Recommended workflows per pipeline type (software/research/game)
-- YAML header convention for documentation files
-- Auto-check sketch
+→ См. **`references/optimal-project-structure.md`** в этой папке навыка (на немецком языке). Содержит:
+- Пример `settings.json` (схема Anthropic)
+- Обязательные записи `.gitignore`
+- Антипаттерны (чему НЕ место в папках проектов)
+- Рекомендуемые процессы по типам пайплайнов (ПО/исследования/игры)
+- Соглашение по заголовкам YAML для файлов документации
+- Эскиз автопроверки
 
-## Related skills (when to use instead of this one?)
+## Сопутствующие навыки (когда использовать вместо этого?)
 
-| Skill | When to use |
+| Навык | Когда использовать |
 |---|---|
-| **`project-onboarding`** | Take an EXTERNAL existing repo into your own system |
-| Project bootstrapper (if available) | Create a NEW project in an existing pipeline (greenfield, no rebuild) |
-| Pipeline bootstrapper (if available) | Create a COMPLETELY NEW pipeline (rare case) |
-| System onboarding (if available) | Set up a new machine |
+| **`project-onboarding`** | Интеграция ВНЕШНЕГО существующего репозитория в вашу систему |
+| Project bootstrapper (если доступен) | Создание НОВОГО проекта в существующем пайплайне (с нуля, без перестройки) |
+| Pipeline bootstrapper (если доступен) | Создание СОВЕРШЕННО НОВОГО пайплайна (редкий случай) |
+| System onboarding (если доступен) | Настройка нового компьютера |
 
-The **pipeline optimizer** is responsible for **renovation**, not new construction or adoption. If your skill collection has a skill index, search it for matching bootstrapping skills.
+**pipeline optimizer** отвечает за **реновацию/обновление**, а не за новое строительство или прием внешних проектов. Если в вашей коллекции навыков есть индекс, найдите в нем подходящие навыки начальной настройки (bootstrapping).
 
-## Cross-references
+## Перекрестные ссылки
 
-- Detail reference: `references/optimal-project-structure.md` (in this skill folder)
-- Anthropic Claude Code docs: `https://docs.claude.com/en/docs/claude-code`
-- If available: global user rules (e.g. a "renovations" section in your `~/CLAUDE.md`) and pipeline-specific stack descriptions
+- Детальный справочник: `references/optimal-project-structure.md` (в папе навыка)
+- Документация Anthropic Claude Code: `https://docs.claude.com/en/docs/claude-code`
+- Если доступно: глобальные правила пользователя (напр. раздел «реновации» в вашем `~/CLAUDE.md`) и описания стеков конкретных пайплайнов
 
-## Scope choice: pipeline vs. project folder
+## Выбор масштаба: пайплайн против папки проекта
 
-If it is unclear which scope is meant, **clarify before step A**:
+Если непонятно, какой масштаб имеется в виду, **уточните до выполнения шага A**:
 
-| Clue | Scope |
+| Подсказка | Масштаб (Scope) |
 |---|---|
-| "Improve the whole software pipeline" | Pipeline |
-| "Clean up the folder of tool X" | Project folder |
-| "Synchronize the central release registry" | Pipeline (central asset) |
-| "Refactor the AssetBuilder in game Y" | Project folder |
-| "Introduce a check convention pipeline-wide" | Pipeline |
-| "Create a check file in project Z" | Project folder |
+| «Улучшить весь пайплайн ПО» | Пайплайн |
+| «Навести порядок в папке инструмента X» | Папка проекта |
+| «Синхронизировать центральный реестр релизов» | Пайплайн (центральный ресурс) |
+| «Выполнить рефакторинг AssetBuilder в игре Y» | Папка проекта |
+| «Внедрить соглашение о проверках во весь пайплайн» | Пайплайн |
+| «Создать файл проверки в проекте Z» | Папка проекта |
 
-At **project-folder scope**, additionally always briefly check the parent pipeline's conventions (step A extended) so the intervention stays compatible with the pipeline.
+При **масштабе папки проекта** также всегда кратко проверяйте соглашения родительского пайплайна (расширенный шаг A), чтобы вмешательство оставалось совместимым с пайплайном.
 
 ---
 
-## Журнал изменений
+## История изменений
 
 ### 1.2.0 (2026-06-13)
-- First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged
+- Первое публичное издание в библиотеке навыков: личные пути, конкретные названия пайплайнов/проектов и ссылки на приватные навыки заменены общими примерами; сама процедура (6 шагов, антипаттерны, разбор случая, чек-листы) оставлена без изменений
 
-### 1.1.1 (2026-06-01) and earlier
-- Internal versions (private skill directory, before publication)
+### 1.1.1 (2026-06-01) и ранее
+- Внутренние версии (приватный каталог навыков до публикации)

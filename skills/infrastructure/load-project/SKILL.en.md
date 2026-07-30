@@ -2,99 +2,80 @@
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `load-project`.
-
+> **English** — Official English version of `load-project`.
 
 # Load Project (English)
 
 ## Overview & Purpose
 
-Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
-Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
-sondern der kleinste belastbare Kontext, mit dem sicher weitergearbeitet werden
-kann.
+Use this skill at the beginning of a specific project task or when the working context has become unclear. The goal is not a full repository audit, but the smallest viable context needed to proceed safely with work.
 
-## Konfiguration
+## Configuration
 
-Der Skill benötigt keine festen Verzeichnisnamen. Lokale Installationen können
-optional folgende Werte in ihren allgemeinen Agentenregeln oder einer
-projektlokalen Konfiguration festlegen:
+The skill does not require fixed directory names. Local installations can optionally define the following values in their general agent rules or in a project-local configuration:
 
-- bekannte Workspace-Wurzeln,
-- bevorzugte Dateiwerkzeuge,
-- Namen zusätzlicher Boot- oder Registry-Dateien,
-- Lock-Prüfer,
-- projektspezifische Rollen und Prioritäten.
+- known workspace roots,
+- preferred file tools,
+- names of additional boot or registry files,
+- lock checkers,
+- project-specific roles and priorities.
 
-Fehlt eine solche Konfiguration, arbeitet der Skill ausschließlich mit dem
-angegebenen Ziel und den dort auffindbaren Projektregeln.
+If no such configuration exists, the skill operates exclusively with the specified target and the project rules found there.
 
-## Ablauf
+## Workflow
 
-### 1. Ziel auflösen
+### 1. Resolve Target
 
-1. Expliziten Pfad, Projektnamen oder aktuelle Arbeitsmappe als Startpunkt nehmen.
-2. Den tatsächlichen Projekt- oder Repository-Root bestimmen.
-3. Mehrdeutige Treffer anhand von Aufgabe, Root-Dokumenten und Repository-Grenzen
-   eingrenzen; bei materiell unterschiedlichen Zielen nicht raten.
+1. Take an explicit path, project name, or current working directory as the starting point.
+2. Determine the actual project or repository root.
+3. Narrow down ambiguous matches based on the task, root documents, and repository boundaries; do not guess when targets are materially different.
 
-### 2. Regelhierarchie laden
+### 2. Load Rule Hierarchy
 
-Vom allgemeinen zum spezifischen Kontext lesen:
+Read from general to specific context:
 
-1. globale Agenten- und Sicherheitsregeln,
-2. Workspace- oder Pipeline-Regeln,
-3. Projekt- und Repository-Regeln,
-4. aufgabenbezogene Anweisungen.
+1. global agent and security rules,
+2. workspace or pipeline rules,
+3. project and repository rules,
+4. task-specific instructions.
 
-Spezifischere Regeln gelten innerhalb ihres Scopes; höherrangige Sicherheits- und
-Autorisierungsgrenzen bleiben bestehen.
+More specific rules apply within their scope; higher-level security and authorization boundaries remain in force.
 
-### 3. Root-Dokumente nach Rollen lesen
+### 3. Read Root Documents by Role
 
-Dateinamen sind Hinweise, keine feste Norm. Suche gezielt nach Dokumenten mit
-diesen Rollen:
+Filenames are hints, not a fixed standard. Target documents with these roles specifically:
 
-| Rolle | Typischer Inhalt |
+| Role | Typical Content |
 |---|---|
-| Einstieg | Zweck, Navigation, Startanweisung |
-| Regeln | Arbeitsweise, Sprache, Sicherheit, Konventionen |
-| Architektur | Komponenten, Datenfluss, Grenzen |
-| Status | aktueller Stand, offene Probleme, letzte Prüfung |
-| Aufgaben | priorisierte nächste Arbeit |
-| Register | kanonische Projekte, Checks oder Veröffentlichungen |
-| Nachweis | Tests, Prüfprotokolle, Beweisnotizen |
-| Übergabe | laufende Arbeit, fremde Änderungen, nächster Schritt |
+| Entry | Purpose, navigation, startup instructions |
+| Rules | Working methods, language, security, conventions |
+| Architecture | Components, data flow, boundaries |
+| Status | Current state, open issues, last verification |
+| Tasks | Prioritized upcoming work |
+| Registry | Canonical projects, checks, or publications |
+| Evidence | Tests, audit logs, proof notes |
+| Handover | Work in progress, third-party changes, next step |
 
-Nur die für die konkrete Aufgabe relevanten Rollen laden.
+Load only the roles relevant to the specific task.
 
-### 4. Verbindliche Referenzen verfolgen
+### 4. Follow Binding References
 
-Wenn eine gelesene Regel weitere Dateien ausdrücklich als Pflichtlektüre nennt,
-diese gezielt nachladen. Referenzketten beenden, sobald sie für die Aufgabe keinen
-zusätzlichen verbindlichen Kontext mehr liefern.
+If a read rule explicitly designates additional files as required reading, load them specifically. Terminate reference chains as soon as they no longer provide additional binding context for the task.
 
-### 5. Zustand und Sperren prüfen
+### 5. Check State and Locks
 
-- Locks anhand der lokalen Policy auf Owner, Scope, Zeitstempel und
-  Gültigkeitskriterium prüfen; ohne definierte Stale-Regel einen Lock nie
-  eigenmächtig für veraltet erklären,
-- Versionskontrollstatus und fremde Änderungen,
-- laufende Prozesse oder Checkpoints, sofern relevant,
-- Aktualität von Registern, Tests und Statusangaben.
+- Check locks against the local policy for owner, scope, timestamp, and validity criteria; without a defined stale rule, never unilaterally declare a lock stale,
+- Version control status and third-party changes,
+- Running processes or checkpoints, if relevant,
+- Currency of registries, tests, and status reports.
 
-Den Ausgangszustand der betroffenen Bereiche vor Änderungen als Status-/Diff-
-Baseline sichern. Lassen sich vorhandene Änderungen nicht sicher zuordnen, gelten
-sie vorsorglich als fremd und bleiben unberührt.
+Save the initial state of the affected areas before making changes as a status/diff baseline. If existing changes cannot be confidently attributed, treat them as third-party modifications as a precaution and leave them untouched.
 
-Momentaufnahmen als solche behandeln und vor riskanten Aktionen erneut prüfen.
+Treat snapshots as temporary state and recheck them before taking risky actions.
 
-### 6. Lagebericht erstellen
+### 6. Create Situation Report
 
-Vor der Umsetzung knapp festhalten:
+Document briefly before implementation:
 
 ```text
 Ziel:
@@ -108,28 +89,24 @@ Erfolgskriterium:
 Nächster sicherer Schritt:
 ```
 
-Quellen nur so genau nennen, wie es zur Überprüfbarkeit nötig ist. Secrets,
-personenbezogene Daten und vertrauliche Inhalte redigieren und nicht in den
-Lagebericht kopieren.
+Name sources only as precisely as necessary for verifiability. Redact secrets, personal data, and confidential content; do not copy them into the situation report.
 
-Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
+If the task is clear and authorized as a result, proceed directly with execution.
 
-## Grenzen
+## Limitations
 
-- Keine breite, unbeschränkte Dateisuche als Standard.
-- Keine fehlenden Regeln oder Register neu erfinden.
-- Keine alte Statusmeldung als aktuellen Nachweis behandeln.
-- Keine fremden Änderungen überschreiben.
-- Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
-  geladen werden soll.
+- No broad, unrestricted file searches by default.
+- Do not invent missing rules or registries.
+- Do not treat old status reports as current evidence.
+- Do not overwrite third-party changes.
+- Do not perform project onboarding when only loading context for a specific task.
 
 ## Changelog
 
 ### 1.1.0 (2026-07-28)
-- Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.
-- Rollenbasierte Dokumenterkennung und optionale lokale Konfiguration eingeführt.
-- Lock-Gültigkeit, Dirty-Tree-Provenienz, Snapshot-Nachweise und redigierte
-  Lageberichte operationalisiert.
+- Removed fixed user, workspace, tool, and provider bindings.
+- Introduced role-based document discovery and optional local configuration.
+- Operationalized lock validity, dirty-tree provenance, snapshot evidence, and redacted situation reports.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Initial local version.

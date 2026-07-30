@@ -2,103 +2,80 @@
 language: zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `load-project`.
+> **中文** — `load-project` 官方中文版本。
 
+# 加载项目 (中文)
 
+## 概述与目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+在开始执行具体项目任务或工作上下文变得模糊时使用此技能。其目的并非对代码库进行全面审计，而是获取能够确保安全继续工作的最小可靠上下文。
 
+## 配置
 
-> **English Translation** — Official English version of `load-project`.
+该技能不需要固定的目录名称。本地安装可以选择在其通用 Agent 规则或项目本地配置中指定以下值：
 
+- 已知的工作区根目录，
+- 首选的文件工具，
+- 附加启动文件或注册表文件的名称，
+- 锁检查器，
+- 项目特定的角色与优先级。
 
-# Load Project (English)
+如果缺少此类配置，该技能将仅根据指定的目标及其包含的项目规则运行。
 
-## 概述与执行目标 & Purpose
+## 流程
 
-Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
-Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
-sondern der kleinste belastbare Kontext, mit dem sicher weitergearbeitet werden
-kann.
+### 1. 解析目标
 
-## Konfiguration
+1. 将明确的路径、项目名称或当前工作目录作为起点。
+2. 确定实际的项目或代码库根目录。
+3. 根据任务、根文档和代码库边界缩小存在歧义的匹配项；对于实质上不同的目标切勿凭空猜测。
 
-Der Skill benötigt keine festen Verzeichnisnamen. Lokale Installationen können
-optional folgende Werte in ihren allgemeinen Agentenregeln oder einer
-projektlokalen Konfiguration festlegen:
+### 2. 加载规则层级
 
-- bekannte Workspace-Wurzeln,
-- bevorzugte Dateiwerkzeuge,
-- Namen zusätzlicher Boot- oder Registry-Dateien,
-- Lock-Prüfer,
-- projektspezifische Rollen und Prioritäten.
+按从通用到具体的上下文读取：
 
-Fehlt eine solche Konfiguration, arbeitet der Skill ausschließlich mit dem
-angegebenen Ziel und den dort auffindbaren Projektregeln.
+1. 全局 Agent 与安全规则，
+2. 工作区或流水线规则，
+3. 项目与代码库规则，
+4. 与任务相关的指令。
 
-## Ablauf
+更具体的规则在其作用域内适用；级别更高的安全与授权边界依然有效。
 
-### 1. Ziel auflösen
+### 3. 按角色读取根文档
 
-1. Expliziten Pfad, Projektnamen oder aktuelle Arbeitsmappe als Startpunkt nehmen.
-2. Den tatsächlichen Projekt- oder Repository-Root bestimmen.
-3. Mehrdeutige Treffer anhand von Aufgabe, Root-Dokumenten und Repository-Grenzen
-   eingrenzen; bei materiell unterschiedlichen Zielen nicht raten.
+文件名仅为提示，并非固定标准。有针对性地查找具备以下角色的文档：
 
-### 2. Regelhierarchie laden
-
-Vom allgemeinen zum spezifischen Kontext lesen:
-
-1. globale Agenten- und Sicherheitsregeln,
-2. Workspace- oder Pipeline-Regeln,
-3. Projekt- und Repository-Regeln,
-4. aufgabenbezogene Anweisungen.
-
-Spezifischere Regeln gelten innerhalb ihres Scopes; höherrangige Sicherheits- und
-Autorisierungsgrenzen bleiben bestehen.
-
-### 3. Root-Dokumente nach Rollen lesen
-
-Dateinamen sind Hinweise, keine feste Norm. Suche gezielt nach Dokumenten mit
-diesen Rollen:
-
-| Rolle | Typischer Inhalt |
+| 角色 | 典型内容 |
 |---|---|
-| Einstieg | Zweck, Navigation, Startanweisung |
-| Regeln | Arbeitsweise, Sprache, Sicherheit, Konventionen |
-| Architektur | Komponenten, Datenfluss, Grenzen |
-| Status | aktueller Stand, offene Probleme, letzte Prüfung |
-| Aufgaben | priorisierte nächste Arbeit |
-| Register | kanonische Projekte, Checks oder Veröffentlichungen |
-| Nachweis | Tests, Prüfprotokolle, Beweisnotizen |
-| Übergabe | laufende Arbeit, fremde Änderungen, nächster Schritt |
+| 入口 | 目的、导航、启动指令 |
+| 规则 | 工作方式、语言、安全、规范 |
+| 架构 | 组件、数据流、边界 |
+| 状态 | 当前状态、待解决问题、上次检查 |
+| 任务 | 已排定优先级的后续工作 |
+| 注册表 | 规范项目、检查或发布 |
+| 证据 | 测试、审计日志、证明笔记 |
+| 交接 | 正在推进的工作、第三方更改、下一步计划 |
 
-Nur die für die konkrete Aufgabe relevanten Rollen laden.
+仅加载与具体任务相关的角色文档。
 
-### 4. Verbindliche Referenzen verfolgen
+### 4. 追踪具有约束力的引用
 
-Wenn eine gelesene Regel weitere Dateien ausdrücklich als Pflichtlektüre nennt,
-diese gezielt nachladen. Referenzketten beenden, sobald sie für die Aufgabe keinen
-zusätzlichen verbindlichen Kontext mehr liefern.
+如果已读取的规则明确将其他文件列为必读，则有针对性地补充加载。一旦引用链不再为任务提供额外的约束性上下文，即终止追踪。
 
-### 5. Zustand und Sperren prüfen
+### 5. 检查状态与锁
 
-- Locks anhand der lokalen Policy auf Owner, Scope, Zeitstempel und
-  Gültigkeitskriterium prüfen; ohne definierte Stale-Regel einen Lock nie
-  eigenmächtig für veraltet erklären,
-- Versionskontrollstatus und fremde Änderungen,
-- laufende Prozesse oder Checkpoints, sofern relevant,
-- Aktualität von Registern, Tests und Statusangaben.
+- 根据本地策略检查锁的所有者、作用域、时间戳及有效性标准；在没有明确过期规则的情况下，切勿擅自宣布锁已失效，
+- 版本控制状态及第三方更改，
+- 运行中的进程或检查点（若相关），
+- 注册表、测试及状态信息的时效性。
 
-Den Ausgangszustand der betroffenen Bereiche vor Änderungen als Status-/Diff-
-Baseline sichern. Lassen sich vorhandene Änderungen nicht sicher zuordnen, gelten
-sie vorsorglich als fremd und bleiben unberührt.
+在修改前将受影响区域的初始状态保存为状态/Diff 基线。如果无法确定现有更改的归属，预防起见将其视为第三方更改并不予变动。
 
-Momentaufnahmen als solche behandeln und vor riskanten Aktionen erneut prüfen.
+将快照视为临时状态，在执行高风险操作前重新检查。
 
-### 6. Lagebericht erstellen
+### 6. 生成局势报告
 
-Vor der Umsetzung knapp festhalten:
+在实施前简要记录：
 
 ```text
 Ziel:
@@ -112,28 +89,24 @@ Erfolgskriterium:
 Nächster sicherer Schritt:
 ```
 
-Quellen nur so genau nennen, wie es zur Überprüfbarkeit nötig ist. Secrets,
-personenbezogene Daten und vertrauliche Inhalte redigieren und nicht in den
-Lagebericht kopieren.
+仅在可验证性所需的精度内说明数据源。脱敏密钥、个人数据及机密内容，切勿将其复制到局势报告中。
 
-Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
+若任务由此得以明确并获得授权，则直接开始执行。
 
-## Grenzen
+## 限制与边界
 
-- Keine breite, unbeschränkte Dateisuche als Standard.
-- Keine fehlenden Regeln oder Register neu erfinden.
-- Keine alte Statusmeldung als aktuellen Nachweis behandeln.
-- Keine fremden Änderungen überschreiben.
-- Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
-  geladen werden soll.
+- 默认不进行广泛、无限制的文件搜索。
+- 切勿虚构缺失的规则或注册表。
+- 切勿将旧的状态报告视为当前的有效证据。
+- 切勿覆盖第三方更改。
+- 当仅需要为具体任务加载上下文时，切勿执行项目入职/全面了解流程。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.1.0 (2026-07-28)
-- Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.
-- Rollenbasierte Dokumenterkennung und optionale lokale Konfiguration eingeführt.
-- Lock-Gültigkeit, Dirty-Tree-Provenienz, Snapshot-Nachweise und redigierte
-  Lageberichte operationalisiert.
+- 移除了对特定用户、工作区、工具及提供商的固定绑定。
+- 引入了基于角色的文档识别及可选的本地配置。
+- 实现了锁有效性、工作树变更归属（dirty tree provenance）、快照证据及脱敏局势报告的规范化操作。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- 初始本地版本。

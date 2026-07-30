@@ -2,46 +2,40 @@
 name: agents-bridge
 version: 2.0.0
 type: skill
-description: [日本語] エージェントスキル: agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+description: プロバイダーおよびユーザーに依存しない、エージェント、CLI、IDE のブートルール用ブリッジ。既知的ブートストラップサーフェスを検出し、ユーザーに順序付けられた1つ以上の真実のソースの選択を求め、ルールを重複させることなく軽量ローダーをレンダリングします。
+
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: ja
 status: active
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `agents-bridge`.
+> **日本語** — `agents-bridge` の公式日本語版。
 
 
+# AGENTS-BRIDGE (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+このスキルを使用して、エージェントまたは IDE を明示的に選択されたルールファイルに接続します。
+どのプロバイダー、ファイル名、ホスト、クラウドディレクトリも暗黙的に正格（canonical）ではありません。
 
+## ワークフローと手順
 
-# AGENTS-BRIDGE (English)
-
-Use this skill to connect an agent or IDE to explicitly selected rule files.
-No provider, filename, host, or cloud directory is implicitly canonical.
-
-## ワークフローと実行手順 & Execution Steps
-
-1. Read all local instructions that govern the source and target paths.
-2. Run `python scripts/bridge.py discover` and optionally pass `--project`.
-3. Ask the user to select the ordered truth sources and the target. An empty
-   selection authorizes no write.
-4. Prefer a redirect or ordered loader. Use a generated copy only when the
-   target cannot load references, and record provenance plus drift checks.
-5. Preview with:
+1. ソースパスおよびターゲットパスを制御するすべてのローカル指示を読み取ります。
+2. `python scripts/bridge.py discover` を実行し、必要に応じて `--project` を渡します。
+3. 順序付けられた真実のソース（truth sources）とターゲットをユーザーに選択させます。空の選択は書き込みを許可しません。
+4. リダイレクトまたは順序付けられたローダーを優先します。ターゲットが参照をロードできない場合にのみ生成されたコピーを使用し、出所（provenance）とドリフトチェックを記録します。
+5. 以下でプレビューします:
 
    ```text
    python scripts/bridge.py render --truth <path> --target-kind generic
    ```
 
-6. Create or change the target only after reviewing the preview.
-7. Prove that the target agent actually read every selected source.
+6. プレビューを確認した後にのみ、ターゲットを作成または変更します。
+7. ターゲットエージェントが実際に選択されたすべてのソースを読み取ったことを証明します。
 
-See `references/agent-conventions.md`,
-`references/truth-topologies.md`, and
-`references/inventory-contract.md`.
+`references/agent-conventions.md`、
+`references/truth-topologies.md`、および
+`references/inventory-contract.md` を参照してください。
 
-`agent-config-sync` manages broader configuration topologies.
-`agents-bridge` is limited to boot and rule access. Runtime partner bridges and
-schedulers are separate components.
+`agent-config-sync` は、より広範な構成トポロジを管理します。
+`agents-bridge` はブートおよびルールアクセスに限定されています。ランタイムパートナーブリッジおよびスケジューラは別個のコンポーネントです。

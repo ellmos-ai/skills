@@ -1,52 +1,64 @@
 ---
+name: genogram-work
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Trabajo con genogramas: Reconocimiento y reflexión sobre los patrones de relaciones familiares. Perspectiva multigeneracional, símbolos del genograma, reconocimiento de patrones y recursos en la historia familiar.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [genogram, systemic-therapy, family-therapy, multigenerational, relationship-patterns]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `genogram-work`.
+> **Español** — Versión oficial en español de `genogram-work`.
 
 
+# Trabajo con Genogramas
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Reconocimiento y reflexión sobre los patrones de relaciones familiares: Perspectiva multigeneracional, símbolos del genograma, reconocimiento de patrones y recursos en la historia familiar
 
-
-# Genogram Work (English)
-
-> Recognizing and reflecting on family relationship patterns: Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-The genogram is a tool from systemic therapy and family therapy. It was significantly shaped by Murray Bowen (multigenerational approach) and Monica McGoldrick (genogram standardization). It graphically represents family relationships across multiple generations and makes patterns, roles, and dynamics visible.
-
-Evidence: Genogram work is a component of all systemic therapy training programs and is established in clinical practice as a diagnostic and reflective tool (McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012).
-
-**Note:** This is a reflection tool, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is a Genogram?
+## Contexto
 
-### Definition
-A genogram is an extended graphical representation of a family tree that captures not only biological descent but also relationship qualities, emotional patterns, conflicts, illnesses, and important life events — typically across three generations.
+El genograma es una herramienta de la terapia sistémica y la terapia familiar. Fue desarrollado significativamente por Murray Bowen (enfoque multigeneracional) y Monica McGoldrick (estandarización del genograma). Representa gráficamente las relaciones familiares a lo largo de varias generaciones y visibiliza patrones, roles y dinámicas.
 
-### Difference from a Family Tree
+Evidencia: El trabajo con genogramas es un componente de todos los programas de formación en terapia sistémica y está consolidado en la práctica clínica como una herramienta diagnóstica y reflexiva (McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012).
 
-| Family Tree | Genogram |
-|-------------|----------|
-| Who is related to whom? | How do people relate to each other? |
-| Biological descent | Emotional relationship quality |
-| Static facts | Dynamic patterns |
-| Historically oriented | Pattern-oriented |
+**Nota:** Esta es una herramienta de reflexión, no un sustituto de la terapia profesional.
+**Nunca implementar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET)
 
 ---
 
-## 2. Genogram Symbols (Standard after McGoldrick)
+## 1. ¿Qué es un genograma?
 
-### Persons
+### Definición
+Un genograma es una representación gráfica ampliada de un árbol genealógico que recoge no solo la descendencia biológica, sino también la calidad de las relaciones, los patrones emocionales, los conflictos, las enfermedades y los acontecimientos vitales significativos, normalmente a lo largo de tres generaciones.
+
+### Diferencia respecto a un árbol genealógico
+
+| Árbol genealógico | Genograma |
+|-------------------|-----------|
+| ¿Quién está emparentado con quién? | ¿Cómo se relacionan las personas entre sí? |
+| Descendencia biológica | Calidad relacional y emocional |
+| Hechos estáticos | Patrones dinámicos |
+| Orientado a la historia | Orientado a los patrones |
+
+---
+
+## 2. Símbolos del genograma (Estándar de McGoldrick)
+
+### Personas
 
 ```
 Male:         [ ]     (Square)
@@ -56,7 +68,7 @@ Deceased:     [X]     (Symbol with X)
 Index person: [=]     (Double border)
 ```
 
-### Relationships
+### Relaciones
 
 ```
 Marriage/Partnership:   ———————      (solid line)
@@ -71,130 +83,130 @@ Cutoff:                ——||——      (line with double bar)
 
 ---
 
-## 3. How Do I Create a Genogram?
+## 3. ¿Cómo crear un genograma?
 
-### Step-by-Step Guide
+### Guía paso a paso
 
-**Step 1: Gather Data**
-For each person (at least 3 generations):
-- Name, birth year, death year if applicable
-- Occupation, place of residence
-- Special life events (migration, illness, losses)
-- Relationship status
+**Paso 1: Recopilar datos**
+Para cada persona (al menos 3 generaciones):
+- Nombre, año de nacimiento, año de fallecimiento si procede
+- Ocupación, lugar de residencia
+- Acontecimientos vitales especiales (migración, enfermedad, pérdidas)
+- Estado relacional / civil
 
-**Step 2: Draw Basic Structure**
-- Grandparents at top, children at bottom
-- Partners side by side
-- Children from left to right (oldest first)
+**Paso 2: Dibujar la estructura básica**
+- Abuelos en la parte superior, hijos en la parte inferior
+- Parejas lado a lado
+- Hijos de izquierda a derecha (el mayor primero)
 
-**Step 3: Add Relationship Qualities**
-- Which relationships are close, which are distant?
-- Where are conflicts?
-- Where are enmeshments or cutoffs?
+**Paso 3: Añadir la calidad de las relaciones**
+- ¿Qué relaciones son cercanas y cuáles distantes?
+- ¿Dónde hay conflictos?
+- ¿Dónde hay aglutinamiento (fusión) o cortes emocionales?
 
-**Step 4: Mark Patterns**
-- Color-code recurring themes
-- E.g.: Addiction (red), mental illness (blue), separation (orange)
-
----
-
-## 4. Recognizing Patterns — Multigenerational Perspective
-
-### Typical Multigenerational Patterns
-
-**Repetition patterns:**
-- Divorces across multiple generations
-- Addictive behavior (alcohol, work, ...)
-- Early parenthood
-- Career choices / role distribution
-
-**Relationship patterns:**
-- Enmeshment (too-close relationship, no boundaries)
-- Cutoff (contact break, exclusion)
-- Triangulation (child drawn into parental conflict)
-- Parentification (child takes on parental role)
-
-**Roles and mandates:**
-- "The strong one" / "The caretaker"
-- "The black sheep"
-- "The peacemaker"
-- Unspoken family mandates ("You should have it better")
-
-### Reflection Questions on Patterns
-- "What themes appear in your family across generations?"
-- "What role have you taken on in your family?"
-- "Are there family rules that were never spoken aloud?"
-- "Who in the family do you resemble most — and in what way?"
-- "Which relationship patterns of your parents do you recognize in yourself?"
+**Paso 4: Marcar patrones**
+- Código de colores para temas recurrentes
+- P. ej.: Adicciones (rojo), enfermedades mentales (azul), separaciones (naranja)
 
 ---
 
-## 5. Resources in the Genogram
+## 4. Reconocimiento de patrones — Perspectiva multigeneracional
 
-### Not Just Problems — Also Strengths
+### Patrones multigeneracionales típicos
 
-The genogram shows not only burdens but also resources:
-- Who has mastered difficult times?
-- What strengths exist in the family?
-- Who was a positive role model?
-- What values were passed on that are helpful?
+**Patrones de repetición:**
+- Divorcios a lo largo de varias generaciones
+- Conductas adictivas (alcohol, trabajo, ...)
+- Maternidad / paternidad temprana
+- Elección de carrera / distribución de roles
 
-### Reflection Questions on Resources
-- "Who in your family admires you? For what?"
-- "From whom did you inherit or learn a strength?"
-- "Which family member handled a crisis particularly well?"
-- "Which positive family traditions would you like to continue?"
-- "What has held your family together?"
+**Patrones relacionales:**
+- Aglutinamiento / Fusión (relación demasiado estrecha, sin límites)
+- Corte emocional (ruptura de contacto, exclusión)
+- Triangulación (el hijo es arrastrado al conflicto parental)
+- Parentificación (el hijo asume el rol de los padres)
 
----
+**Roles y mandatos:**
+- "El/la fuerte" / "El/la cuidador(a)"
+- "La oveja negra"
+- "El/la pacificador(a)"
+- Mandatos familiares no expresados ("Tú deberías tenerlo mejor")
 
-## 6. Exercises
-
-### Exercise 1: My Genogram
-Draw your own genogram (3 generations). Use the symbols from section 2. Note 2-3 keywords for each person.
-
-### Exercise 2: Relationship Qualities
-Add relationship qualities to your genogram:
-- Where are the closest relationships?
-- Where are conflicts?
-- Where is distance or cutoff?
-
-### Exercise 3: Pattern Search
-Look at your finished genogram and answer:
-1. What themes repeat?
-2. What roles do you recognize?
-3. Which patterns do you want to continue — and which not?
-
-### Exercise 4: Resource Genogram
-Mark all positive resources in your genogram: Strengths, talents, mastered crises, positive values.
+### Preguntas de reflexión sobre patrones
+- "¿Qué temas aparecen en su familia a lo largo de las generaciones?"
+- "¿Qué rol ha asumido en su familia?"
+- "¿Existen reglas familiares que nunca se dijeron en voz alta?"
+- "¿A quién de la familia se parece más y en qué aspecto?"
+- "¿Qué patrones relacionales de sus padres reconoce en usted mismo/a?"
 
 ---
 
-## Ethics and Boundaries
+## 5. Recursos en el genograma
 
-**An AI assistant may:**
-- Explain genogram concepts and symbols
-- Support creating a simple genogram
-- Ask reflection questions about family patterns
-- Point out resources in family history
+### No solo problemas, también fortalezas
 
-**An AI assistant must NOT:**
-- Make family diagnoses
-- Process family secrets or traumas
-- Conduct family constellations
-- Promote blame toward family members
-- Perform family therapeutic interventions
+El genograma no solo muestra cargas, sino también recursos:
+- ¿Quién superó momentos difíciles?
+- ¿Qué fortalezas existen en la familia?
+- ¿Quién fue un modelo a seguir positivo?
+- ¿Qué valores transmitidos resultan de ayuda?
 
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Preguntas de reflexión sobre recursos
+- "¿Quién en su familia le admira? ¿Por qué?"
+- "¿De quién heredó o aprendió una fortaleza?"
+- "¿Qué miembro de la familia gestionó especialmente bien una crisis?"
+- "¿Qué tradiciones familiares positivas le gustaría continuar?"
+- "¿Qué es lo que ha mantenido unida a su familia?"
 
 ---
 
-## References
+## 6. Ejercicios
+
+### Ejercicio 1: Mi genograma
+Dibuje su propio genograma (3 generaciones). Utilice los símbolos de la sección 2. Anote 2-3 palabras clave para cada persona.
+
+### Ejercicio 2: Calidad relacional
+Añada la calidad de las relaciones a su genograma:
+- ¿Dónde están las relaciones más cercanas?
+- ¿Dónde hay conflictos?
+- ¿Dónde hay distancia o corte emocional?
+
+### Ejercicio 3: Búsqueda de patrones
+Observe su genograma terminado y responda:
+1. ¿Qué temas se repiten?
+2. ¿Qué roles reconoce?
+3. ¿Qué patrones desea continuar y cuáles no?
+
+### Ejercicio 4: Genograma de recursos
+Marque todos los recursos positivos en su genograma: fortalezas, talentos, crisis superadas, valores positivos.
+
+---
+
+## Ética y límites
+
+**Un asistente de IA PUEDE:**
+- Explicar conceptos y símbolos del genograma
+- Apoyar en la creación de un genograma sencillo
+- Formular preguntas de reflexión sobre los patrones familiares
+- Señalar recursos en la historia familiar
+
+**Un asistente de IA NO DEBE:**
+- Realizar diagnósticos familiares
+- Procesar secretos familiares o traumas
+- Realizar constelaciones familiares
+- Fomentar la culpabilización hacia miembros de la familia
+- Llevar a cabo intervenciones terapéuticas familiares
+
+**En caso de crisis aguda, derivar SIEMPRE a:**
+- 988 Línea de Prevención del Suicidio y Crisis (EE. UU.): 988
+- Crisis Text Line (EE. UU.): Envía HOME al 741741
+- Samaritans (Reino Unido): 116 123
+- Telefonseelsorge (Alemania): 0800 111 0 111 / 0800 111 0 222
+- Servicios de emergencia: 911 (EE. UU.) / 112 (UE)
+
+---
+
+## Referencias
 
 - McGoldrick, M., Gerson, R. & Petry, S. (2020). *Genograms: Assessment and Treatment.* Norton.
 - Bowen, M. (1978). *Family Therapy in Clinical Practice.* Jason Aronson.
@@ -202,5 +214,5 @@ Mark all positive resources in your genogram: Strengths, talents, mastered crise
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — Not professional therapy*
+*Adaptado de BACH v3.8.0 | Versión independiente*
+*Fuentes: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — No sustituye la terapia profesional*

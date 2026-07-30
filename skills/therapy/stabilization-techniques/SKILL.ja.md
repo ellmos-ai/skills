@@ -1,280 +1,292 @@
 ---
+name: stabilization-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 安定化技法：グラウンディング、安心感のある場所（セーフ・プレイス）、コンテインメント（容器法）、呼吸法。急性ストレスやパニック発作に対する即時介入技法。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [stabilization, grounding, safe-place, containment, breathing-exercises, crisis-management]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `stabilization-techniques`.
+> **日本語** — `stabilization-techniques` の公式日本語版。
 
 
+# 安定化技法（Stabilization Techniques）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基礎概念
 
+安定化技法は、急性ストレス状態における**即時介入法**です。圧倒的な感情、パニック、解離、あるいはフラッシュバックから、「今、ここ」の現実と自分自身へと連れ戻す手助けをします。これらは専門的な心理療法に代わるものではなく、**心理的応急処置（応急手当）**として機能します。
 
-# Stabilization Techniques (English)
-
-## Foundation
-
-Stabilization techniques are **immediate interventions** for acute distress situations. They help return from overwhelming emotions, panic, dissociation, or flashbacks to the here and now. They do not replace therapy but serve as **psychological first aid**.
-
-Core principle: **Back into the body, back into the moment, back into control.**
-
----
-
-## 1. Grounding Techniques
-
-Grounding brings attention back to the present moment and one's own body. Particularly effective for dissociation, flashbacks, and panic.
-
-### 1.1 Sensory Grounding: The 5-4-3-2-1 Technique
-
-The most well-known and accessible grounding technique. Systematically activates all five senses.
-
-#### Instructions
-
-> **5 things you SEE:**
-> Look around. Name five things you can see right now. Anything — the wall, your hand, a light switch. Describe details: color, shape, size.
->
-> **4 things you HEAR:**
-> Close your eyes briefly. What do you hear? The hum of the refrigerator, birds, your own breath, traffic.
->
-> **3 things you FEEL (touch):**
-> What is touching your body right now? The chair beneath you, fabric on your skin, the temperature of the air.
->
-> **2 things you SMELL:**
-> Consciously sniff. Room air, your shampoo, coffee, fresh air.
->
-> **1 thing you TASTE:**
-> What do you taste right now? The last coffee, toothpaste, simply your mouth.
-
-#### Variation: Intensive Grounding
-
-For stronger dissociation — work with physical stimuli:
-- Hold an ice cube in your hand
-- Run cold water over your wrists
-- Smell something strong (peppermint oil, smelling salts)
-- Hot candy or chili
-- Stomp feet firmly on the ground
+核心原則：**身体に戻り、今この瞬間に戻り、コントロールを取り戻す。**
 
 ---
 
-### 1.2 Physical Grounding (Body Grounding)
+## 1. グラウンディング技法（Grounding Techniques）
 
-Brings attention deliberately into the body.
+グラウンディングは、意識を現在の瞬間と自分自身の身体に向け直す技法です。特に解離、フラッシュバック、パニック状態に対して効果的です。
 
-#### Instructions: Body Scan (Short Version)
+### 1.1 五感グラウンディング：5-4-3-2-1 法
 
-> Sit upright. Feet flat on the floor.
+最も知られており、実践しやすいグラウンディング技法です。五感を段階的に活性化します。
+
+#### 手順
+
+> **5つの「目に見えるもの」：**
+> 周囲を見回してください。今目に見えるものを5つ言葉に出してみましょう。壁、自分の手、照明のスイッチなど何でも構いません。色、形、大きさなどの詳細を観察します。
 >
-> **Feet:** Feel the contact with the ground. Actively press your feet down. Feel the weight.
+> **4つの「耳に聞こえるもの」：**
+> 短く目を閉じてみます。何が聞こえますか？ 冷蔵庫のブーンという音、鳥の鳴き声、自分の呼吸音、屋外の交通音など。
 >
-> **Legs:** Feel your thighs on the chair. The weight they carry.
+> **3つの「体に触れている感覚（触角）」：**
+> 今、自分の体に触れているものは何ですか？ 座っている椅子、肌に触れる服の生地、空気の温度など。
 >
-> **Back:** Feel the backrest. Consciously lean against it.
+> **2つの「におい（嗅覚）」：**
+> 意識してにおいを嗅いでみます。部屋の空気、シャンプーの香り、コーヒー、外の空気など。
 >
-> **Hands:** Place them on your thighs. Feel the warmth, the contact.
->
-> **Breath:** Feel how your belly rises and falls. Don't control it — just observe.
+> **1つの「味（味覚）」：**
+> 今、口の中にどんな味がしますか？ 最後に飲んだコーヒー、歯磨き粉の味、あるいは口の中の感覚そのもの。
 
-#### Progressive Muscle Relaxation (Short Version)
+#### 応用：強力なグラウンディング
 
-Tense each muscle area for 5 seconds, then relax for 10 seconds:
-
-1. **Hands:** Clench fists — release
-2. **Arms:** Tense biceps — release
-3. **Shoulders:** Pull up to ears — drop
-4. **Face:** Squeeze together — relax
-5. **Abdomen:** Tense — release
-6. **Legs:** Tense — release
-7. **Feet:** Curl toes — release
+重度の解離に対しては、直接的な身体的刺激を活用します：
+- 氷を手に握る
+- 手首に冷水を流しかける
+- 強いにおいを嗅ぐ（ペパーミントオイル、アンモニア塩など）
+- 酸っぱいキャンディや唐辛子を口にする
+- 足の裏で床を強く踏みしめる
 
 ---
 
-### 1.3 Cognitive Grounding
+## 1.2 身体的グラウンディング（ボディ・グラウンディング）
 
-Uses mental activity to exit emotional flooding.
+意識を意図的に身体感覚へと向けます。
 
-#### Techniques
+#### 手順：ボディスキャン（短縮版）
 
-- **Count backward:** From 100 in steps of 7 (100, 93, 86, 79...)
-- **List categories:** "5 car brands, 5 cities starting with B, 5 forest animals..."
-- **Orientation:** State the date, time, location, own name: "I am [name]. It is [day], [time]. I am in [place]. I am safe."
-- **Color game:** Find all red objects in the room. Then all blue. Then all green.
-- **Alphabet game:** For a category (e.g., animals), find a word for each letter
+> 背筋を伸ばして座ります。足の裏を床に平らにつけます。
+>
+> **足：** 床との接触面を感じます。足の裏で床をしっかりと押し込みます。重みを感じてください。
+>
+> **脚：** 椅子に触れている太ももの感覚を感じます。身体を支えている重みを感じます。
+>
+> **背中：** 背もたれの感触を感じます。意識的に寄りかかります。
+>
+> **手：** 太ももの上に手を置きます。温かさと接触感を感じます。
+>
+> **呼吸：** お腹が膨らんだり凹んだりする動きを感じます。コントロールしようとせず、ただ観察します。
+
+#### 漸進的筋筋緊張緩和法（PMR・短縮版）
+
+各部位の筋肉を5秒間緊張させ、その後10秒間弛緩（脱力）させます：
+
+1. **両手：** 拳を強く握りしめる — 緩める
+2. **両腕：** 力こぶを作るように力を入れる — 緩める
+3. **肩：** 耳に引き寄せるように持ち上げる — ストンと落とす
+4. **顔：** 顔の中心に寄せるようにギュッとすぼめる — 緩める
+5. **お腹：** 力を入れて硬くする — 緩める
+6. **両脚：** 全体に力を入れる — 緩める
+7. **両足：** 足の指を丸める — 緩める
 
 ---
 
-## 2. Safe Place
+## 1.3 認知的グラウンディング
 
-An imaginative stabilization technique. Frequently used in trauma therapy (including EMDR protocol). Creates an inner refuge that can be accessed at any time.
+精神的活動を利用して、感情の圧倒状態から脱出します。
 
-### Instructions for Building
+#### 具体手法
 
-> **Step 1: Find the place**
-> "Imagine a place where you feel completely safe and secure. It can be a real place (a beach, a room, a forest) or a completely imagined place. What matters is: YOU feel safe there."
->
-> **Step 2: Activate the senses**
-> "What do you see at your safe place? What colors, what light?
-> What do you hear? Silence, birds, water, music?
-> What do you smell? Sea, forest, fresh laundry?
-> What do you feel on your skin? Warmth, wind, soft grass?
-> What is the temperature?"
->
-> **Step 3: Anchor the body feeling**
-> "How does your body feel at this place? Where do you feel the safety? In your belly? In your chest? Let that feeling grow larger."
->
-> **Step 4: Choose a signal word**
-> "Choose a word or a brief image that instantly takes you to this place. For example, 'cove' or 'forest clearing.' When you think this word, you are there."
->
-> **Step 5: Practice**
-> "Over the next few days, briefly visit your safe place again and again (30-60 seconds). The more you practice, the faster and deeper you arrive there."
-
-### Important Notes
-
-- The safe place should NOT contain real people (relationships can change)
-- With trauma: Sometimes no place feels safe enough — then a "safe room" can be built (with walls, locks, protective shield)
-- The place can change — this is normal and allowed
-- Don't force it if it doesn't work — choose a different technique instead
+- **逆算計算：** 100から7ずつ引いていく（100, 93, 86, 79...）
+- **カテゴリ列挙：** 「車のブランド5つ」「『き』で始まる都市5つ」「森の動物5匹」など
+- **現実見当識の確認：** 日付、時刻、場所、自分の名前を声に出す：「私は[名前]です。今日は[曜日]、時間は[時刻]です。私は[場所]にいます。私は安全です。」
+- **カラー探し：** 部屋の中にある赤色のものをすべて探す。次に青色。次に緑色。
+- **五十音/アルファベットゲーム：** あるテーマ（例：動物）について、あかさたな順に名前を挙げる。
 
 ---
 
-## 3. Containment Technique (Vault Exercise)
+## 2. 安心感のある場所（セーフ・プレイス / 安全島）
 
-Helps temporarily "lock away" distressing thoughts, images, or feelings when they cannot be processed at the moment. **Not suppression**, but conscious regulation of timing.
+イメージを用いた安定化技法です。トラウマ療法（EMDRプロトコルを含む）で頻繁に使用されます。いつでも避難できる心の中の安全地帯を作ります。
 
-### Instructions
+### 構築の手順
 
-> **Step 1: Choose a container**
-> "Imagine a container that is absolutely secure. A vault, a chest, a bunker — big enough for everything you want to put in. It has a lock, and only you have the key."
+> **ステップ 1：場所を見つける**
+> 「完全に安全で守られていると感じられる場所をイメージしてください。実在の場所（海辺、自分の部屋、森の中）でも、完全に想像上の場所でも構いません。大切なのは『あなたがそこで安全だと感じられること』です。」
 >
-> **Step 2: Name what is distressing**
-> "What would you like to put in there right now? Name it. It can be images, feelings, thoughts, memories."
+> **ステップ 2：五感を呼び覚ます**
+> 「その安全な場所で何が見えますか？ どんな色や光がありますか？
+> 何が聞こえますか？ 静寂、鳥のさえずり、波の音、音楽？
+> どんなにおいがしますか？ 潮風、森の香り、洗いたての洗濯物？
+> 肌には何を感じますか？ 太陽の温もり、風、柔らかい草？
+> 温度はどれくらいですか？」
 >
-> **Step 3: Place it inside**
-> "Put it in. Piece by piece. Watch as it slides into the container. It is safely stored."
+> **ステップ 3：身体感覚をアンカー（固定）する**
+> 「その場所であなたの身体はどのように感じていますか？ 安らぎを身体のどの部分で感じますか？ お腹のあたり？ 胸のあたり？ その感覚を広げていきましょう。」
 >
-> **Step 4: Lock it**
-> "Close the container. Turn the key. Hear the lock click shut. Take the key with you."
+> **ステップ 4：キーワード（合図）を決める**
+> 「その場所に瞬時に連れて行ってくれる言葉や短いイメージを1つ選びます。例えば『静かな入江』や『木漏れ日』などです。その言葉を思い浮かべると、あなたはその場所に立つことができます。」
 >
-> **Step 5: Store it**
-> "Place the container somewhere you choose. It stands there safely. You can return at any time and take something out — but YOU decide when."
+> **ステップ 5：練習**
+> 「これからの数日間、この安全な場所を短時間（30〜60秒）何度も訪れてみてください。練習を重ねるほど、より素早く深くその場所へ入ることができるようになります。」
 
-### Important
+### 重要な注意点
 
-- Containment is a TEMPORARY strategy
-- What is postponed must be processed later (ideally in therapy)
-- Not suitable as a permanent solution — otherwise it becomes avoidance
+- 安全な場所には「実在の人物」を含めないでください（人間関係は変化する可能性があるため）
+- トラウマを抱えている方：安全だと感じられる場所が見つからない場合があります。その場合は「安全な部屋」（丈夫な壁、鍵、防護壁を備えた部屋）を構築することも可能です
+- 場所は途中で変わっても問題ありません（正常な過程です）
+- うまくイメージできない場合は無理強いせず、別の技法を選択してください
 
 ---
 
-## 4. Breathing Exercises
+## 3. コンテインメント技法（容器法 / 保管庫のワーク）
 
-The breath is the fastest bridge between body and psyche. Slow, deep breathing activates the parasympathetic nervous system and reduces the stress response.
+今すぐに処理することができない辛い思考、イメージ、感情を一時的に「保管箱にしまう」手助けをします。**抑圧ではなく**、扱うタイミングを意識的にコントロールする技法です。
 
-### 4.1 Extended Exhale (Basic Technique)
+### 手順
 
-**Effect:** Activates the parasympathetic nervous system. Lowers heart rate and blood pressure.
-
-> **Inhale:** 4 seconds through the nose
-> **Exhale:** 6-8 seconds through the mouth (longer than inhaling!)
+> **ステップ 1：容器を選ぶ**
+> 「絶対に安全な容器をイメージしてください。金庫、宝箱、シェルターなど、しまいたいものがすべて入る十分な大きさのものです。頑丈な鍵がかかり、鍵を持っているのはあなただけです。」
 >
-> The exhale is the key. The longer the exhale relative to the inhale, the stronger the relaxation response.
-
-### 4.2 Box Breathing (4-4-4-4)
-
-**Effect:** Calming and focusing. Used by Navy SEALs and first responders.
-
-> **Inhale:** 4 seconds
-> **Hold:** 4 seconds
-> **Exhale:** 4 seconds
-> **Hold:** 4 seconds
+> **ステップ 2：しまうものを命名する**
+> 「今、そこに何をしまいたいですか？ 言葉にしてみましょう。イメージ、感情、思考、記憶など何でも構いません。」
 >
-> Repeat 4-6 cycles.
-
-### 4.3 Physiological Sigh (Huberman Technique)
-
-**Effect:** Fastest known method for stress reduction. A single double-inhale is sufficient.
-
-> **Double inhale:** Short and sharp through the nose, then IMMEDIATELY take another short breath (without exhaling in between)
-> **Long exhale:** Slowly and completely through the mouth
+> **ステップ 3：中に入れる**
+> 「それを容器の中に入れます。一つひとつ丁寧に入れていきましょう。容器の中に収まっていく様子を見届けます。安全に保管されました。」
 >
-> Even a single cycle measurably lowers heart rate.
-
-### 4.4 4-7-8 Breathing Exercise (Andrew Weil)
-
-**Effect:** Deep relaxation. Particularly good for falling asleep.
-
-> **Inhale:** 4 seconds through the nose
-> **Hold:** 7 seconds
-> **Exhale:** 8 seconds through the mouth
+> **ステップ 4：鍵をかける**
+> 「容器の蓋を閉じます。鍵を回します。カチッと鍵がかかる音を聞いてください。鍵はあなたが持ちます。」
 >
-> 4 cycles. No more at the beginning — can cause dizziness.
+> **ステップ 5：保管する**
+> 「その容器を、あなたが決めた安全な場所に置きます。容器はそこで安全に存在しています。必要な時にはいつでも戻って中身を取り出すことができますが、いつ取り出すかは『あなた自身』が決めます。」
+
+### 重要
+
+- コンテインメントは「一時的な戦略」です
+- 後回しにした課題は、後日（理想的にはセラピーの中で）取り扱う必要があります
+- 永久的な解決策として使用すると「回避」になってしまうため注意が必要です
 
 ---
 
-## When to Use Which Technique?
+## 4. 呼吸法
 
-| Situation | Recommended Technique | Rationale |
+呼吸は身体と心を結ぶ最も速い架け橋です。ゆっくりとした深呼吸は副交感神経を優位にし、ストレス反応を和らげます。
+
+### 4.1 呼気延長法（基本呼吸法）
+
+**効果：** 副交感神経を活性化し、心拍数や血圧を下げます。
+
+> **吸う：** 鼻から 4 秒間
+> **吐く：** 口から 6〜8 秒間（吸う時間よりも長く！）
+>
+> 吐く息（呼気）が鍵となります。吸う息に対して吐く息を長くするほど、高いリラックス効果が得られます。
+
+### 4.2 ボックスブリージング（4-4-4-4 呼吸法）
+
+**効果：** 気持ちを落ち着かせ、集中力を高めます。米海軍特殊部隊（Navy SEALs）や救急隊員も採用しています。
+
+> **吸う：** 4 秒
+> **止める：** 4 秒
+> **吐く：** 4 秒
+> **止める：** 4 秒
+>
+> これを 4〜6 サイクル繰り返します。
+
+### 4.3 生理的ため息（Huberman テクニック）
+
+**効果：** 即効性のあるストレス軽減法として知られています。二段吸気（ダブル・インヘール）を1回行うだけでも効果があります。
+
+> **二段吸気：** 鼻から短く息を吸い、吐き出さずに「直直ちに」もう一度鼻から短く息を吸い足す
+> **長吐気：** 口からゆっくりと息を吐ききる
+>
+> 1サイクル行うだけでも、心拍数が測定可能なレベルで低下します。
+
+### 4.4 4-7-8 呼吸法（Andrew Weil 博士提案）
+
+**効果：** 深いリラックス状態をもたらします。特に入眠時に有効です。
+
+> **吸う：** 鼻から 4 秒間
+> **止める：** 7 秒間
+> **吐く：** 口から 8 秒間
+>
+> 4サイクル行います。慣れないうちはめまいを起こす可能性があるため、回数を増やしすぎないようにしてください。
+
+---
+
+## どの技法をいつ使うか？
+
+| 状況 | 推奨される技法 | 根拠・理由 |
 |-----------|----------------------|-----------|
-| Panic attack | Extended exhale + 5-4-3-2-1 | Activate parasympathetic, sensory anchoring |
-| Flashback / Intrusion | Cognitive grounding + orientation | Back to the here and now |
-| Dissociation | Intensive grounding (ice, cold water) | Strong sensory stimuli break through dissociation |
-| Overwhelming emotions | Containment + breathing exercise | Postponement + physical calming |
-| Sleep problems (rumination) | 4-7-8 breathing + safe place | Deep relaxation + positive imagery |
-| Acute stress | Box breathing or physiological sigh | Rapid regulation |
-| Before stressful situations | Safe place + breathing exercise | Activate resource |
-| After stressful conversations | Physical grounding + extended exhale | Calm down nervous system |
+| パニック発作 | 呼気延長法 ＋ 5-4-3-2-1 法 | 副交感神経の活性化、感覚のアンカリング |
+| フラッシュバック / 侵入的記憶 | 認知的グラウンディング ＋ 現实見当識確認 | 「今、ここ」の現実に戻る |
+| 解離状態 | 強力なグラウンディング（氷、冷水） | 強い感覚刺激で解離を打破する |
+| 圧倒的な感情 | コンテインメント ＋ 呼吸法 | 一時保管 ＋ 身体的鎮静 |
+| 睡眠障害（思考のぐるぐる巡り） | 4-7-8 呼吸法 ＋ セーフ・プレイス | 深いリラックス ＋ 肯定的なイメージ |
+| 急性ストレス | ボックスブリージング または 生理的ため息 | 迅速な神経系の調整 |
+| ストレス状況の前 | セーフ・プレイス ＋ 呼吸法 | リソースの活性化 |
+| 辛い会話の後 | 身体的グラウンディング ＋ 呼気延長法 | 神経系を落ち着かせる |
 
 ---
 
-## Daily Plan for Stabilization Practice
+## 安定化練習のデイリープラン
 
-Regular practice makes techniques accessible in emergencies. Recommended routine:
+日頃から練習しておくことで、緊急時に技法をスムーズに活用できるようになります。推奨されるルーティン：
 
-| Time | Exercise | Duration |
+| 時間帯 | 演習内容 | 所要時間 |
 |------|----------|----------|
-| Morning after waking | 3x physiological sigh | 1 minute |
-| Midday | Brief body scan | 3 minutes |
-| During stress (ad hoc) | Box breathing or 5-4-3-2-1 | 2-5 minutes |
-| Evening before sleep | 4-7-8 breathing + safe place | 5 minutes |
+| 朝（起床後） | 生理的ため息 3回 | 1 分 |
+| 昼 | 短時間のボディスキャン | 3 分 |
+| ストレスを感じた時（随時） | ボックスブリージング または 5-4-3-2-1 | 2〜5 分 |
+| 夜（就寝前） | 4-7-8 呼吸法 ＋ セーフ・プレイス | 5 分 |
 
-**Total effort: approximately 10-15 minutes daily.**
-
----
-
-## Emergency Short Protocol
-
-When someone is in acute distress — follow this sequence:
-
-1. **BREATHE:** "Breathe with me. In... and out... In... and out..." (Guide extended exhale)
-2. **ORIENT:** "Tell me: Where are you right now? What day is it? What is your name?"
-3. **FEEL:** "Feel your feet on the ground. Press them down firmly."
-4. **SEE:** "Look around. Name 5 things you see."
-5. **NAME:** "What just happened? You don't need to go into detail — just one word or one sentence."
-
-**After that: Clarify safety.** Is the person safe? Do they need professional help?
+**1日の合計所要時間：約 10〜15 分**
 
 ---
 
-## Ethical Guidelines
+## 緊急時ショートプロトコル
 
-An AI assistant may guide stabilization techniques when a person describes stress, anxiety, or overwhelm.
+誰かが極度の精神的苦痛に陥っている場合は、以下の手順に従ってください：
 
-An AI assistant must NOT:
-- Use stabilization techniques as a substitute for emergency help (for acute suicidality: refer to 988 / 112 / Telefonseelsorge 0800-1110111)
-- Conduct trauma processing — stabilization is NOT therapy
-- Guarantee effectiveness ("This will help" -> instead "This may help")
-- Ignore physical causes (panic attack vs. heart attack -> when in doubt, recommend medical evaluation)
+1. **呼吸：** 「一緒に呼吸しましょう。吸って…吐いて…吸って…吐いて…」（呼気延長を誘導）
+2. **見当識：** 「教えてください。今どこにいますか？ 今日は何曜日ですか？ お名前は何ですか？」
+3. **身体感覚：** 「足の裏が床についているのを感じてください。強く床を踏みしめてみましょう。」
+4. **視覚：** 「周りを見渡してください。目に見えるものを5つ教えてください。」
+5. **言語化：** 「今何が起きましたか？ 詳しく話す必要はありません。一言か一行で教えてください。」
 
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**その後：安全の確認。** その人は安全な場所にいますか？ 専門的な支援が必要ですか？
 
 ---
 
-## References
+## 倫理ガイドライン
+
+AIアシスタントは、ユーザーがストレス、不安、圧倒感を訴えた際に、安定化技法をガイドすることができます。
+
+AIアシスタントが行ってはならないこと：
+- 安定化技法を緊急支援の代用として使用すること（自殺念慮や切迫した危機に対しては、いのちの電話や緊急窓口へ誘導すること）
+- トラウマの処理・加工作業を行うこと（安定化は心理療法ではありません）
+- 効果を保証すること（「これで確実に治ります」ではなく「効果が期待できます」と表現する）
+- 身体的原因を無視すること（パニック発作か心臓発作か判断がつかない場合は医療機関の受診を推奨する）
+
+参照：[ETHICS.md](../ETHICS.md)
+
+**切迫した危機の場合は、必ず以下の窓口をご案内ください：**
+- こころの健康相談統一ダイヤル（日本）：0570-064-556
+- よりそいホットライン（日本）：0120-279-338
+- いのちの電話（日本）：0570-783-556（ナビダイヤル）
+- 988 Suicide & Crisis Lifeline（米国）：988
+- 警察・救急：110 / 119（日本） / 911（米国） / 112（欧州）
+
+---
+
+## 参考文献
 
 - Reddemann, L. (2001). *Imagination als heilsame Kraft.* Klett-Cotta.
 - Levine, P. A. (1997). *Waking the Tiger: Healing Trauma.*
@@ -284,4 +296,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 より移植 | スタンドアロン版*

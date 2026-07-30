@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [日本語] エージェントスキル: orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: 複雑なタスクの分解、独立した Worker への委任、およびエビデンスに基づく成果検証のためのプロバイダーに依存しないプロトコル。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,92 +18,75 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `orchestrator`.
+> **日本語** — `orchestrator` の公式日本語版。
 
 
+# Orchestrator (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概要と目的
 
+タスクが少なくとも2つの広範に独立した作業パッケージで構成され、委任が時間、コンテキスト、または品質の面で実質的な優位性をもたらす場合にこの Skill を使用します。小規模で密結合されたタスクの場合は、直接作業してください。
 
-> **English Translation** — Official English version of `orchestrator`.
+この Skill はプロトコルを記述しています。Worker の具体的な起動、中断、再開は、各 Runtime の機能を通じて行われます。
 
+## 権限の限界
 
-# Orchestrator (English)
+委任によって権限が拡大することはありません。各 Worker には、メインタスクに既に適用されているスコープおよび変更権限以上のものは与えられません。外部の、不可逆的な、あるいは別途承認が必要なアクションは、引き続き承認が必要です。
 
-## 概要と目的 & Purpose
+## 流れ
 
-Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
-Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
-Qualitätsvorteil bringt. Für kleine, eng gekoppelte Aufgaben arbeite direkt.
+### 1. 状況の確認
 
-Der Skill beschreibt ein Protokoll. Das konkrete Starten, Unterbrechen und
-Wiederaufnehmen von Workern erfolgt über die Fähigkeiten der jeweiligen Runtime.
+1. メインタスクの目標、成功基準、および除外事項を記録する。
+2. プロジェクトルール、ロック、進行中の変更、利用可能なバジェットを確認する。
+3. Dispatch の前に、影響を受ける領域の現在のロック、ステータス、および Diff 状態を Baseline として保存する。これにより、既存の外部変更と Worker による変更を後から確実に区別できるようになります。
+4. 十分に独立した作業パッケージのみを並列化する。
+5. 重複する書き込み領域を分離するか、シーケンシャルに処理する。
 
-## Autoritätsgrenze
+### 2. 依頼契約の作成
 
-Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Scope
-und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
-irreversible oder anderweitig freigabepflichtige Aktionen bleiben
-freigabepflichtig.
+各 Dispatch の前に、短く検証可能な契約を作成します。
 
-## Ablauf
-
-### 1. Lage prüfen
-
-1. Ziel, Erfolgskriterien und Ausschlüsse der Hauptaufgabe festhalten.
-2. Projektregeln, Sperren, laufende Änderungen und verfügbare Budgets prüfen.
-3. Vor dem Dispatch den aktuellen Lock-, Status- und Diff-Zustand der betroffenen
-   Bereiche als Baseline sichern. Nur so lassen sich vorhandene fremde Änderungen
-   später zuverlässig von Worker-Änderungen unterscheiden.
-4. Nur Arbeitspakete parallelisieren, die unabhängig genug sind.
-5. Überschneidende Schreibbereiche trennen oder sequentiell bearbeiten.
-
-### 2. Auftragsvertrag schreiben
-
-Vor jedem Dispatch einen kurzen, prüfbaren Vertrag erstellen:
-
-| Feld | Pflichtinhalt |
+| 項目 | 必須内容 |
 |---|---|
-| Kennung | stabile ID des Arbeitspakets |
-| Ziel | genau ein konkretes Ergebnis |
-| Eingaben | relevante Dateien, Daten oder Kontextquellen |
-| Positiver Scope | was gelesen oder geändert werden darf |
-| Negativer Scope | was ausdrücklich unberührt bleibt |
-| Erfolgskriterium | beobachtbare Bedingung für „fertig“ |
-| Evidenz | erwarteter Nachweis, etwa Test, Diff oder Fundstelle |
-| Rückgabeformat | kompakte, strukturierte Abschlussmeldung |
+| 識別子 | 作業パッケージの安定した ID |
+| 目標 | 正確に1つの具体的な成果 |
+| 入力 | 関連するファイル、データ、またはコンテキスト情報源 |
+| ポジティブスコープ | 読み取りまたは変更が許可されている範囲 |
+| ネガティブスコープ | 明示的に触れてはならない範囲 |
+| 成功基準 | 「完了」を判定するための観察可能な条件 |
+| エビデンス | テスト、Diff、参照先などの期待される証明 |
+| 応答形式 | コンパクトで構造化された完了メッセージ |
 
-Ein Worker bekommt nur den Kontext, den er für diesen Vertrag benötigt.
+Worker には、この契約に必要なコンテキストのみが与えられます。
 
-### 3. Ausführen und beobachten
+### 3. 実行と観察
 
-- Fan-out klein halten und nur bei unabhängigem Nutzen vergrößern.
-- Fortschritt über Runtime-Status oder einen projektüblichen Checkpoint verfolgen.
-- Bei Konflikten, Scope-Ausweitung oder fehlender Autorität stoppen und eskalieren.
-- Ein fehlgeschlagener Worker darf unabhängige Arbeitspakete nicht automatisch
-  blockieren.
+- Fan-out は小さく保ち、独立した利益がある場合にのみ拡大する。
+- Runtime のステータスまたはプロジェクト標準の Checkpoint を通じて進捗を追跡する。
+- 競合、スコープの拡大、または権限不足が発生した場合は、停止してエスカレーションする。
+- 失敗した Worker が独立した作業パッケージを自動的にブロックしてはならない。
 
-### 4. Ergebnisse abnehmen
+### 4. 成果の検証
 
-Eine Fertigmeldung ist zunächst eine Behauptung. Der Orchestrator prüft selbst:
+完了報告は最初、単なる主張に過ぎません。Orchestrator 自身が検証します：
 
-1. Existiert das behauptete Artefakt oder die genannte Änderung?
-2. Gehört es zum vereinbarten Scope?
-3. Besteht der vereinbarte Test oder Nachweis aktuell?
-4. Wurden fremde Änderungen, Sperren und negative Scopes respektiert?
-5. Widersprechen sich Ergebnisse verschiedener Worker?
+1. 主張された成果物または指定された変更が存在するか？
+2. 合意されたスコープに含まれているか？
+3. 合意されたテストまたは証明が現在合格しているか？
+4. 外部の変更、ロック、およびネガティブスコープが尊重されたか？
+5. 異なる Worker からの成果に矛盾がないか？
 
-Erst danach gilt ein Arbeitspaket als abgeschlossen.
+これらが確認されて初めて、作業パッケージは完了したとみなされます。
 
-### 5. Integrieren und sichern
+### 5. 統合と保存
 
-- Konflikte bewusst auflösen; Ergebnisse nicht blind aneinanderhängen.
-- Erforderliche Gesamttests nach der Integration erneut ausführen.
-- Offene, fehlgeschlagene und zurückgestellte Pakete klar ausweisen.
-- Bei längeren Läufen Ziel, Status, Evidenz und nächsten Schritt in einem
-  wiederauffindbaren Checkpoint sichern.
+- 競合を意識して解消し、成果を盲目的に結合しないこと。
+- 統合後、必要な全体テストを再実行する。
+- 未完了、失敗、および保留中のパッケージを明確に示す。
+- 長時間の実行では、目標、ステータス、エビデンス、および次のステップを復元可能な Checkpoint に保存する。
 
-## Minimaler Worker-Prompt
+## 最小 Worker プロンプト
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -115,27 +98,24 @@ Belege mit: <Test, Diff oder Fundstelle>
 Antworte als: <Rückgabeformat>
 ```
 
-## Stop-Bedingungen
+## 停止条件
 
-Stoppe nur das betroffene Arbeitspaket, wenn sein Scope, seine Autorität oder
-seine Evidenz unklar wird. Unabhängige, sichere Pakete dürfen weiterlaufen.
+スコープ、権限、またはエビデンスが不明確になった場合は、影響を受ける作業パッケージのみを停止します。独立した安全なパッケージは実行を継続できます。
 
-Stoppe die gesamte Delegation, wenn:
+以下の場合、委任全体を停止します：
 
-- die Teilaufgaben nicht mehr unabhängig sind,
-- ein gemeinsamer Schreibbereich nicht sicher getrennt werden kann,
-- Regeln, Sperren oder Autorität für den gesamten verbleibenden Scope unklar sind,
-- die erwarteten Kosten den erkennbaren Nutzen übersteigen,
-- die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
+- サブタスクが独立していなくなった場合
+- 共有書き込み領域を安全に分離できない場合
+- 残りのスコープ全体に対するルール、ロック、または権限が不明確な場合
+- 予想されるコストが認識可能な利益を上回る場合
+- 要求されたエビデンスを生成または検証できない場合
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-28)
-- Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.
-- Auftragsvertrag, Autoritätsgrenze, Evidenzabnahme und Checkpoints als
-  portable Kernmechanik herausgearbeitet.
-- Baseline für fremde Änderungen sowie paketlokale und globale Stopps
-  ausdrücklich getrennt.
+- ユーザー、パス、モデル、およびプロバイダーのバインディングを削除。
+- 依頼契約、権限の限界、エビデンスの検証、および Checkpoint をポータブルなコアメカニズムとして整備。
+- 外部変更の Baseline、ならびにパッケージローカルおよびグローバルな停止条件を明示的に分離。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- ローカル初期バージョン。

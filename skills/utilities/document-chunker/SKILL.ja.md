@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
+description: RAGパイプラインやLLMのコンテキストウィンドウ向けに、ドキュメントをオーバーラップするトークンチャンクに分割します。依存関係ゼロ。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,24 +16,19 @@ tags: [chunking, rag, tokens, nlp, text-processing, embedding]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `document-chunker`.
+> **日本語** — `document-chunker` の公式日本語版。
 
 
+# Document Chunker (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+ドキュメントをオーバーラップするトークンチャンクに分割します。RAGパイプラインおよびLLMコンテキストウィンドウ用に最適化されています。サードパーティ依存関係ゼロ — Python標準ライブラリ + `re` のみ。
 
+## 使い方
 
-# Document Chunker (English)
-
-Splits documents into overlapping token chunks. Optimized for RAG pipelines
-and LLM context windows. Zero dependencies — Python stdlib + re only.
-
-## Usage
-
-### As Library
+### ライブラリとして使用
 ```python
 from document_chunker import DocumentChunker
 
@@ -43,12 +39,12 @@ for chunk in chunks:
     print(f"Chunk {chunk['chunk_id']}: {chunk['tokens']} tokens")
 ```
 
-### Chunking a File
+### ファイルのチャンク化
 ```python
 chunks = chunker.chunk_document("document.md", source="My Project")
 ```
 
-### Chunking an Entire Directory
+### ディレクトリ全体のチャンク化
 ```python
 from document_chunker import chunk_corpus
 
@@ -61,18 +57,18 @@ python document_chunker.py document.md    # Single file
 python document_chunker.py ./docs/        # Entire directory
 ```
 
-## Parameters
+## パラメータ
 
-| Parameter | Default | Description |
+| パラメータ | デフォルト値 | 説明 |
 |-----------|---------|-------------|
-| chunk_size | 400 | Max tokens per chunk |
-| overlap | 80 | Overlapping tokens between chunks |
+| chunk_size | 400 | チャンクあたりの最大トークン数 |
+| overlap | 80 | チャンク間のオーバーラップトークン数 |
 
-## Supported File Types
+## サポートするファイル形式
 
 `.txt`, `.md`, `.py`, `.sh`
 
 ## 変更履歴
 
 ### 1.0.0 (2026-03-12)
-- Ported from BACH system/tools/document_chunker.py
+- BACH system/tools/document_chunker.py より移植

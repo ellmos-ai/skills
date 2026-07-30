@@ -1,131 +1,144 @@
 ---
+name: brainstorm
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Методы структурированного творчества для генерации идей: SCAMPER, Шесть шляп мышления, Интеллект-карты (Mind Mapping), Обратный брейншторминг, ТРИЗ и Быстрая генерация идей (Rapid Ideation).
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `brainstorm`.
+> **Русский** — Официальная русская версия `brainstorm`.
 
 
+# Brainstorm (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Brainstorm (English)
-
-> Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
-
----
-
-## When to Use?
-
-- New ideas needed
-- Stuck / creativity block
-- Innovation sought
-- Solve a problem creatively
-
-**Trigger words:** brainstorm, ideas, creative, innovative, ideation
+> Структурированное творчество для инноваций — SCAMPER, Шесть шляп, Интеллект-карты, Обратный брейншторминг, ТРИЗ, Быстрая генерация идей
 
 ---
 
-## Methods
+## Когда использовать?
+
+- Требуются новые идеи
+- Застой / творческий кризис
+- Поиск инноваций
+- Творческое решение проблемы
+
+**Ключевые слова:** brainstorm, ideas, creative, innovative, ideation, брейншторм, идеи, творчество
+
+---
+
+## Методы
 
 ### 1. SCAMPER
 
-**Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse**
+**Заменить, Комбинировать, Адаптировать, Модифицировать, Предложить другое применение, Устранить, Поменять местами**
 
-Systematically improve existing solutions:
-- **S**ubstitute: What can be replaced?
-- **C**ombine: What can be combined?
-- **A**dapt: What can be adapted?
-- **M**odify: What can be changed?
-- **P**ut to other use: What else could it be used for?
-- **E**liminate: What can be removed?
-- **R**everse: What can be reversed?
-
----
-
-### 2. Six Thinking Hats (Edward de Bono)
-
-Systematically think through 6 perspectives:
-
-- **White Hat — Facts:** What information do we have? What's missing?
-- **Red Hat — Emotion:** How does it feel? Intuition, gut feeling
-- **Black Hat — Critique:** What could go wrong? Risks, weaknesses
-- **Yellow Hat — Optimism:** What are the opportunities? Best case
-- **Green Hat — Creativity:** New ideas? Out-of-the-box?
-- **Blue Hat — Meta:** Process control, summary, next steps
-
-**Process:** Define problem (Blue) -> Facts (White) -> Emotions (Red) -> Critique (Black) -> Positives (Yellow) -> New ideas (Green) -> Summarize (Blue)
+Систематическое улучшение существующих решений:
+- **S**ubstitute (Заменить): Что можно заменить?
+- **C**ombine (Комбинировать): Что можно объединить?
+- **A**dapt (Адаптировать): Что можно адаптировать/заимствовать?
+- **M**odify (Модифицировать): Что можно изменить/увеличить?
+- **P**ut to other use (Другое применение): Для чего еще это можно использовать?
+- **E**liminate (Устранить): Что можно удалить/упростить?
+- **R**everse (Поменять местами/перевернуть): Что можно инвертировать?
 
 ---
 
-### 3. Mind Mapping
+### 2. Шесть шляп мышления (Эдвард де Боно)
 
-Visualize thoughts hierarchically:
-1. Central topic
-2. Main branches (3-7)
-3. Sub-branches for each category
-4. Add details and ideas
-5. Identify connections
+Систематический анализ с 6 точек зрения:
 
----
+- **Белая шляпа — Факты:** Какая информация у нас есть? Чего не хватает?
+- **Красная шляпа — Эмоции:** Каковы ощущения? Интуиция, предчувствия
+- **Черная шляпа — Критика:** Что может пойти не так? Риски, слабые места
+- **Желтая шляпа — Оптимизм:** Каковы возможности? Лучший сценарий
+- **Зеленая шляпа — Творчество:** Новые идеи? Нестандартное мышление
+- **Синяя шляпа — Мета-управление:** Управление процессом, подведение итогов, следующие шаги
 
-### 4. Reverse Brainstorming
-
-Invert the problem: "How do we make it WORSE?"
-
-1. Invert the problem
-2. Collect bad ideas
-3. Reverse = Good ideas
-
-Particularly effective when direct ideation is stalled.
+**Процесс:** Определение проблемы (Синяя) -> Факты (Белая) -> Эмоции (Красная) -> Критика (Черная) -> Плюсы (Желтая) -> Новые идеи (Зеленая) -> Итоги (Синяя)
 
 ---
 
-### 5. TRIZ (Theory of Inventive Problem Solving)
+### 3. Интеллект-карты (Mind Mapping)
 
-Top 10 Principles for Software:
-1. **Segmentation:** Split monolith into modules
-2. **Extraction:** Isolate disturbing property
-3. **Local Quality:** Different components, different properties
-4. **Merging:** Combine similar functions
-5. **Universality:** One element, multiple functions
-6. **Nesting:** Components within components
-7. **Preliminary Action:** Preparation in advance
-8. **Feedback:** Monitoring and adaptation
-9. **Self-Service:** System maintains itself
-10. **Asymmetry:** Non-symmetrical designs
+Иерархическая визуализация мыслей:
+1. Центральная тема
+2. Основные ветви (3-7)
+3. Подветви для каждой категории
+4. Добавление деталей и идей
+5. Выявление связей
 
 ---
 
-### 6. Rapid Ideation
+### 4. Обратный брейншторминг (Reverse Brainstorming)
 
-Quantity over quality — 50+ ideas in 20 min.
+Инверсия проблемы: «Как сделать ситуацию ЕЩЕ ХУЖЕ?»
 
-**Rules:**
-- NO criticism during ideation
-- WILD ideas welcome
-- Build on others' ideas
-- Quantity FIRST
+1. Перевернуть проблему
+2. Собрать самые плохие идеи
+3. Инвертировать = Хорошие идеи
 
-**Timer-based:**
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
+Особенно эффективно при застое прямой генерации идей.
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+### 5. ТРИЗ (Теория решения изобретательских задач)
+
+Топ-10 принципов для программного обеспечения:
+1. **Дробление (Segmentation):** Разделение монолита на модули
+2. **Вынесение (Extraction):** Изоляция мешающего/вредного свойства
+3. **Местное качество (Local Quality):** Разные компоненты — разные свойства
+4. **Объединение (Merging):** Совмещение похожих функций
+5. **Универсальность (Universality):** Один элемент выполняет несколько функций
+6. **«Матрешка» (Nesting):** Компоненты внутри компонентов
+7. **Предварительное действие (Preliminary Action):** Заблаговременная подготовка
+8. **Обратная связь (Feedback):** Мониторинг и адаптация
+9. **Самообслуживание (Self-Service):** Система обслуживает себя сама
+10. **Асимметрия (Asymmetry):** Несимметричные конструкции
+
+---
+
+### 6. Быстрая генерация идей (Rapid Ideation)
+
+Количество важнее качества — 50+ идей за 20 минут.
+
+**Правила:**
+- НИКАКОЙ критики во время генерации
+- Приветствуются САМЫЕ БЕЗУМНЫЕ идеи
+- Развивать идеи других участников
+- Количество НА ПЕРВОМ МЕСТЕ
+
+**По таймеру:**
+- Раунд 1 (5 мин): Открытый брейншторм
+- Раунд 2 (5 мин): Вариации
+- Раунд 3 (5 min): Комбинации
+- Раунд 4 (5 мин): Экстремальные идеи
+
+---
+
+## Рабочий процесс и порядок действий
 
 ```
-1. User request
-2. Understand goal
-3. Choose method(s)
-4. Generate ideas (no criticism!)
-5. Clustering
-6. Feasibility/Impact matrix
-7. Top 5-10 selection
-8. Output + recommendation
+1. Запрос пользователя
+2. Понимание цели
+3. Выбор метода(ов)
+4. Генерация идей (без критики!)
+5. Кластеризация
+6. Матрица осуществимости / ценности
+7. Выбор топ-5-10 решений
+8. Вывод + рекомендации
 ```
 
 ---
@@ -133,8 +146,8 @@ Quantity over quality — 50+ ideas in 20 min.
 ## Журнал изменений
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Перенесено из BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Перенесено из BACH v3.8.0 | Автономная версия*

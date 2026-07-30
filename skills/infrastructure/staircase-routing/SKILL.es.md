@@ -5,7 +5,11 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [Español] Documentación completa para la habilidad staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
+description: >
+  Estrategia aislada de navegación y enrutamiento que busca hacia arriba y hacia abajo
+  a través de las jerarquías de directorios documentos indicativos (CLAUDE.md, AGENTS.md,
+  README.md, RULES.md) y palabras clave configurables por el usuario (a través de staircase-config.json
+  o config.json). También conocida como Up-and-Down Routing o Walking Bass Routing.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,35 +18,38 @@ category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
 language: es
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `staircase-routing`.
+> **Español** — Versión oficial en español de `staircase-routing`.
 
+# Staircase-Routing (Enrutamiento Up-and-Down / Walking Bass)
 
+La habilidad **Staircase-Routing** (también conocida como *Up-and-Down Routing* o *Walking Bass Routing*) aísla la estrategia de inspección de documentos de directorio para agentes de IA.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
-
-The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
-
-When an agent enters a directory or works on a file, it uses this strategy to locate authoritative context, rules, and signpost documents before modifying code or taking action.
-
----
-
-## 1. Signpost Document Standards
-
-By default, Staircase-Routing looks for standard signpost documents:
-- **Global & Project Controls:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
-- **Project Overview & Tasks:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
-- **Custom User Buzzwords:** Configured via `staircase-config.json` or `config.json`.
+Cuando un agente entra a un directorio o trabaja en un archivo, utiliza esta estrategia para localizar el contexto autoritativo, las reglas y los documentos indicativos antes de modificar el código o realizar acciones.
 
 ---
 
-## 2. Traversal Algorithm
+## 1. Estándares de Documentos Indicativos
+
+Por defecto, Staircase-Routing busca documentos indicativos estándar:
+- **Controles Globales y del Proyecto:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
+- **Visión General e Inspección de Tareas del Proyecto:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
+- **Palabras Clave Personalizables por el Usuario:** Configuradas mediante `staircase-config.json` o `config.json`.
+
+---
+
+## 2. Algoritmo de Recorrido
 
 ```
                            [ Root / Workspace Level ]
@@ -60,24 +67,24 @@ By default, Staircase-Routing looks for standard signpost documents:
                            └────────────────────────┘
 ```
 
-### Step 1: Current Working Directory (CWD) Inspection
-- Inspect the directory of the target file or active working directory.
-- If signpost documents exist, read them immediately.
+### Paso 1: Inspección del Directorio de Trabajo Actual (CWD)
+- Inspeccionar el directorio del archivo objetivo o el directorio de trabajo activo.
+- Si existen documentos indicativos, leerlos inmediatamente.
 
-### Step 2: Upward Traversal (Staircase Up)
-- If **no** signpost document is found in CWD, move up to the parent directory (`..`).
-- Repeat step-by-step upward until a root signpost document (`CLAUDE.md` or `AGENTS.md`) or the workspace boundary is reached.
-- Read all discovered root signposts to establish global directives and project rules.
+### Paso 2: Recorrido Ascendente (Staircase Up)
+- Si **no** se encuentra ningún documento indicativo en el CWD, subir al directorio padre (`..`).
+- Repetir paso a paso hacia arriba hasta alcanzar un documento indicativo de la raíz (`CLAUDE.md` o `AGENTS.md`) o el límite del espacio de trabajo.
+- Leer todos los documentos indicativos de la raíz descubiertos para establecer las directivas globales y las reglas del proyecto.
 
-### Step 3: Downward Inspection (Staircase Down)
-- From the established root directory, step downward into child directories relevant to the task.
-- Discover specialized module-level signposts, domain rules, or component configs. Read them.
+### Paso 3: Inspección Descendente (Staircase Down)
+- Desde el directorio raíz establecido, descender a los directorios hijos relevantes para la tarea.
+- Descubrir documentos indicativos especializados a nivel de módulo, reglas de dominio o configuraciones de componentes. Leerlos.
 
 ---
 
-## 3. User-Configurable Buzzwords (`staircase-config.json`)
+## 3. Palabras Clave Configurables por el Usuario (`staircase-config.json`)
 
-Agents can read a local or global `staircase-config.json` to customize target signposts:
+Los agentes pueden leer un archivo `staircase-config.json` local o global para personalizar los documentos indicativos objetivo:
 
 ```json
 {
@@ -109,6 +116,6 @@ Agents can read a local or global `staircase-config.json` to customize target si
 
 ---
 
-## 4. Integration with `letter-hooker` & Scheduled Tasks
+## 4. Integración con `letter-hooker` y Tareas Programadas
 
-`staircase-routing` is embedded as a core preflight bootloader in the **`letter-hooker`** skill and the **`antigravity-kontext-and-workflow-loader-and-divider`** scheduled task, ensuring agents always locate and obey signpost documents before initiating edits.
+`staircase-routing` está integrado como un cargador de arranque (bootloader) de verificación previa fundamental en la habilidad **`letter-hooker`** y en la tarea programada **`antigravity-kontext-and-workflow-loader-and-divider`**, garantizando que los agentes siempre localicen y obedezcan los documentos indicativos antes de iniciar ediciones.

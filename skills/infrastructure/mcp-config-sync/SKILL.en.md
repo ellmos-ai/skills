@@ -19,7 +19,7 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `mcp-config-sync`.
 
 
 # MCP Config Sync (English)

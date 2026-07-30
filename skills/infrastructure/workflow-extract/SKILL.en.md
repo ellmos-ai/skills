@@ -2,175 +2,116 @@
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `workflow-extract`.
-
+> **English** — Official English version of `workflow-extract`.
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
+# Workflow-Extract — Building Automations from Chat Histories and External Automations
 
 ## Overview & Purpose
 
-Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
-**Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
-periodische Pflege-Läufe. Dieser Skill extrahiert solche Workflows aus zwei Quellenarten —
-Chatverläufen (ein Ablauf wurde interaktiv entwickelt und soll künftig unbeaufsichtigt laufen)
-und bestehenden Automations-Prompts anderer Systeme (z. B. Codex-Automations, Scheduled
-Tasks, n8n-Flows) — und macht daraus user-neutrale, robuste Automatisierungs-Prompts oder
--Skills.
+Some workflows do not belong in an on-demand skill loaded as needed, but rather in an **automation that runs on its own**: nightly checks, rotating project audits, periodic maintenance runs. This skill extracts such workflows from two types of sources — chat histories (where a workflow was interactively developed and should henceforth run unattended) and existing automation prompts from other systems (e.g., Codex-Automations, Scheduled Tasks, n8n flows) — and transforms them into user-neutral, robust automation prompts or skills.
 
-Der Unterschied zum interaktiven Ablauf: Eine Automatisierung hat **niemanden, der korrigiert**.
-Alles, was in der Session der User abgefangen hat, muss die Automatisierung selbst abfangen.
-Genau dafür gibt es die Bausteine in `automation-bausteine.md`.
+The key difference from an interactive workflow: An automation has **no user present to make corrections**. Everything that the user caught during an interactive session must be caught by the automation itself. This is precisely what the building blocks in `automation-bausteine.md` are designed for.
 
-## Ablauf
+## Workflow
 
-### 1. Quelle und Zielform klären
+### 1. Clarify Source and Target Form
 
-| Quelle | typischer Fall |
+| Source | Typical Case |
 | --- | --- |
-| Aktuelle Session / Transkript | Ablauf wurde interaktiv entwickelt, soll periodisch weiterlaufen |
-| Fremd-Automation (Prompt-Datei, Cron-Task, n8n-Flow) | Portierung/Abstraktion auf ein anderes System oder in die Bibliothek |
+| Current Session / Transcript | Workflow was interactively developed and should continue running periodically |
+| External Automation (Prompt file, Cron task, n8n flow) | Porting/abstraction to another system or into the library |
 
-Zielformen (eine oder mehrere):
+Target forms (one or more):
 
-- **Automations-Prompt:** eigenständiger, user-neutraler Prompt-Text, einsetzbar in jedem
-  Scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
-- **Workflow-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
-  Automations-Prompt nur noch aufgerufen/parametrisiert wird (bevorzugt, wenn derselbe
-  Ablauf für mehrere Pipelines/Systeme gelten soll — eine Quelle der Wahrheit).
-- **Command:** dünner Slash-Command für manuelle Auslösung desselben Ablaufs.
+- **Automation Prompt:** Self-contained, user-neutral prompt text usable in any scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
+- **Workflow Skill:** A library skill describing the workflow, which is then called/parameterized by the automation prompt (preferred when the same workflow applies to multiple pipelines/systems — single source of truth).
+- **Command:** A thin slash command for manual trigger of the same workflow.
 
-### 2. Workflow-Kern extrahieren
+### 2. Extract Workflow Core
 
-Aus der Quelle herausarbeiten:
+Extract from the source:
 
-- **Kernaufgabe:** Was wird geprüft/gepflegt/erzeugt? (ein Satz)
-- **Auswahllogik:** Worauf wird die Aufgabe angewandt — festes Ziel oder Rotation über eine
-  Menge (ein Projekt pro Lauf)?
-- **Vorbedingungen:** Was muss vor der Arbeit gelesen/geprüft werden (Root-Dokumente,
-  Registries, Locks)?
-- **Dokumentationspflichten:** Wohin werden Ergebnis, Log, Folgeaufgaben geschrieben?
-- **Abbruchpfade:** Wann endet der Lauf read-only („nichts zu tun" ist ein gültiges Ergebnis)?
+- **Core Task:** What is being checked/maintained/generated? (one sentence)
+- **Selection Logic:** What is the task applied to — a fixed target or rotation across a set (one project per run)?
+- **Preconditions:** What must be read/checked prior to work (root documents, registries, locks)?
+- **Documentation Duties:** Where are results, logs, and follow-up tasks written?
+- **Abort Paths:** When does the run end read-only ("nothing to do" is a valid result)?
 
-Bei Chatverläufen zusätzlich die Korrekturschleifen auswerten (siehe
-`../skill-extractor/transcript-quellen.md`): Jede User-Korrektur ist ein Kandidat für einen
-Guard, den die Automatisierung künftig selbst braucht.
+For chat histories, additionally evaluate correction loops (see `../skill-extractor/transcript-quellen.md`): Every user correction is a candidate for a guard that the automation will need on its own in the future.
 
-### 3. Neutralisieren
+### 3. Neutralize
 
-Nach den Regeln in `../skill-extractor/neutralisierung.md`: Mechanik von Konfiguration
-trennen, Pfade/Hosts/Projektnamen in einen Konfigurationsblock ziehen. Automations-Prompts
-brauchen den Konfigurationsblock besonders dringend, weil sie wörtlich in Scheduler kopiert
-werden — konkrete Werte gehören an EINE Stelle am Prompt-Anfang.
+Follow the rules in `../skill-extractor/neutralisierung.md`: Separate mechanics from configuration, move paths/hosts/project names into a configuration block. Automation prompts need a configuration block especially urgently because they are copied verbatim into schedulers — concrete values belong in ONE place at the start of the prompt.
 
-### 4. Automations-Bausteine ergänzen
+### 4. Add Automation Building Blocks
 
-Den extrahierten Kern gegen die Checkliste in `automation-bausteine.md` halten und fehlende
-Bausteine ergänzen — insbesondere Rotations-Auswahl mit Check-Registry, Idempotenz,
-Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Workflow ohne diese
-Bausteine funktioniert im Test und degeneriert im Dauerbetrieb (Doppelprüfungen, wachsende
-Logs, Kollisionen mit parallelen Agenten).
+Hold the extracted core against the checklist in `automation-bausteine.md` and add missing building blocks — especially rotation selection with check registry, idempotency, log hygiene, lock respect, read-only exit, and summary report. A workflow without these building blocks works in testing but degrades during continuous operation (duplicate checks, growing logs, collisions with parallel agents).
 
-### 5. Takt und Budget setzen
+### 5. Set Cadence and Budget
 
-- **Frequenz an Änderungsrate koppeln:** Ein Check muss nicht öfter laufen, als sich sein
-  Gegenstand ändert. Erfahrungswert aus gewachsenen Automations-Beständen: Viele anfangs
-  stündliche Checks wurden auf täglich/wöchentlich reduziert — mit Rotations-Auswahl deckt
-  auch ein seltener Takt die ganze Pipeline ab.
-- **Nachtfenster für Schweres**, kurze Read-only-Checks dürfen häufiger.
-- **Kostenbewusstsein:** Jeder Lauf kostet Tokens/Compute; ein Lauf, der meist read-only
-  endet, soll das früh feststellen (Registry lesen VOR teurer Analyse).
+- **Couple frequency to rate of change:** A check does not need to run more often than its target changes. Rule of thumb from mature automation fleets: Many initially hourly checks were reduced to daily/weekly — with rotation selection, even a low cadence covers the entire pipeline.
+- **Nightly window for heavy tasks**, short read-only checks may run more frequently.
+- **Cost awareness:** Every run costs tokens/compute; a run that mostly ends read-only should determine this early (read registry BEFORE expensive analysis).
 
-### 6. Testen und einsetzen
+### 6. Test and Deploy
 
-1. **Trockenlauf:** Den fertigen Prompt einmal interaktiv ausführen (als wäre man der
-   Scheduler) und prüfen: Endet er sauber? Schreibt er Registry/Log korrekt? Bleibt er
-   im Scope?
-2. **Grenzfall-Test:** Einen Lauf simulieren, bei dem nichts zu tun ist — er muss read-only
-   mit kurzem Logeintrag enden, nicht „Arbeit erfinden".
-3. **Einsetzen:** In den Ziel-Scheduler eintragen; bei Skill-Form zusätzlich in Bibliothek
-   ablegen und deployen.
-4. **Fehlerpfad beobachten:** Nach den ersten 2–3 echten Läufen Log/Registry kontrollieren —
-   Automatisierungen scheitern am häufigsten an Pfad-Drift (Ziel wurde verschoben) und an
-   wachsenden Logdateien.
+1. **Dry Run:** Execute the finished prompt once interactively (as if acting as the scheduler) and verify: Does it exit cleanly? Does it write registry/log correctly? Does it stay in scope?
+2. **Edge Case Test:** Simulate a run where there is nothing to do — it must end read-only with a short log entry, rather than "inventing work".
+3. **Deploy:** Enter into target scheduler; if in skill form, also place in library and deploy.
+4. **Monitor Error Paths:** Check log/registry after the first 2–3 actual runs — automations most frequently fail due to path drift (target was moved) and growing log files.
 
-## Fleet-Audit-Modus: eine laufende Automations-Flotte prüfen
+## Fleet Audit Mode: Auditing a Running Automation Fleet
 
-Für „prüfe meine Automatisierungen": nicht extrahieren, sondern den BESTAND betreiben
-helfen. Über die Automations-Quelle des Zielsystems (Prompt-/Config-Dateien, Schedules,
-Run-Logs/Memories) systematisch prüfen:
+For "audit my automations": do not extract, but help operate the EXISTING inventory. Systematically inspect via the target system's automation source (prompt/config files, schedules, run logs/memories):
 
-1. **Silent-Failure/No-op-Erkennung:** Läuft die Automation, tut aber nichts mehr?
-   (Run-Memories/Logs der letzten Läufe lesen: nur noch Leerläufe, Fehler, tote Pfade?)
-2. **Redundanz + Ertrag:** Überschneiden sich Automationen im Scope? Steht der Ertrag
-   (Output, behobene Befunde) noch im Verhältnis zum Verbrauch (Tokens, Läufe)?
-3. **Drift:** Passen Prompt-Pfade, Konventionen und Schedules noch zur Realität?
-   (Ziele verschoben, Policies geändert, Takt zu hoch für die Änderungsrate.)
-4. **Katalog-Abgleich:** Fehlt eine Automation, die es geben sollte (Lücken im
-   Muster-Raster)? Vorschläge nur freigabe-gegated (Baustein 12), nie selbst scharf schalten.
-5. **Befund-Bericht:** pro Automation eine Zeile (behalten | anpassen | pausieren |
-   zusammenlegen | löschen) + Begründung; Änderungen selbst nur nach Freigabe.
+1. **Silent-Failure / No-op Detection:** Is the automation running but no longer doing anything? (Read run memories/logs of recent runs: only idle runs, errors, dead paths?)
+2. **Redundancy + Return:** Do automations overlap in scope? Is the return (output, resolved findings) still proportional to consumption (tokens, runs)?
+3. **Drift:** Do prompt paths, conventions, and schedules still match reality? (Targets moved, policies changed, cadence too high for rate of change.)
+4. **Catalog Alignment:** Is an automation missing that should exist (gaps in pattern grid)? Suggestions must be approval-gated (Building Block 12), never armed automatically.
+5. **Findings Report:** One line per automation (keep | adapt | pause | merge | delete) + rationale; perform changes only after approval.
 
-## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
+## Bulk Mode: Reviewing Automation Fleets or Multiple Transcripts
 
-Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
-Automatisierungs-Kandidaten aus alten Chatverläufen":
+For "review all automations of System X for abstractable workflows" or "extract automation candidates from old chat histories":
 
-1. **Datenreduktion wie im skill-extractor** (Map-Reduce über Subagenten,
-   `swarm-operations`-Muster): Pro Bündel ein Subagent, der je Quelle meldet:
-   Kernaufgabe | Muster (z. B. Rotation-Check, Health-Check, Ideen-Mining) |
-   einzigartige Elemente | user-neutral abstrahierbar? | abgedeckt durch existierenden Skill?
-2. **Muster vor Einzelstücken:** Wenn viele Quellen dasselbe Gerüst teilen (z. B. 40
-   Rotations-Checks), wird das GERÜST ein Skill und die Einzelfälle werden Parametrisierungen —
-   nicht 40 Einzel-Skills.
-3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
-   Kandidatenliste an den User vor dem Massenbau.
+1. **Data reduction as in `skill-extractor`** (Map-Reduce via subagents, `swarm-operations` pattern): One subagent per bundle reporting per source: Core task | Pattern (e.g. rotation check, health check, idea mining) | Unique elements | User-neutral abstractable? | Covered by existing skill?
+2. **Patterns over one-offs:** When many sources share the same skeleton (e.g., 40 rotation checks), the SKELETON becomes a skill and individual cases become parameterizations — not 40 separate skills.
+3. **Deduplication against existing skill/command landscape**, then present numbered candidate list to user before mass creation.
 
-## Example & Usage
+## Example & Application
 
 ```text
-User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —
-das soll ab jetzt wöchentlich über alle Paper laufen."
+User: "We tested the citation check for a paper today — from now on this should run weekly across all papers."
 
-1. Zielform: Automations-Prompt für den Scheduler + Verweis auf rotation-check.
-2. Kern: Zitate eines Papers gegen Originalquellen prüfen (Web/Datenbank),
-   Korrekturen einpflegen, bei Änderungen Folgeaufgabe „Neu-Upload" in TODO.md.
-3. Neutralisieren: Pipeline-Root, Registry-/Log-Pfade → Konfigurationsblock.
-4. Bausteine ergänzen: Rotations-Auswahl (ein Paper pro Lauf), Registry lesen VOR
-   Auswahl, Read-only-Exit („alle Quellen ok"), Log-Hygiene, Abschlussbericht.
-5. Takt: wöchentlich reicht (Papers ändern sich langsam); Trockenlauf + Leerlauf-Test,
-   dann in den Scheduler.
+1. Target form: Automation prompt for the scheduler + reference to rotation-check.
+2. Core: Check citations of a paper against original sources (web/database), apply corrections, in case of changes record follow-up task "Re-upload" in TODO.md.
+3. Neutralize: Pipeline root, registry/log paths → configuration block.
+4. Add building blocks: Rotation selection (one paper per run), read registry BEFORE selection, read-only exit ("all sources ok"), log hygiene, summary report.
+5. Cadence: Weekly is sufficient (papers change slowly); dry run + idle test, then into the scheduler.
 ```
 
 ## Red Flags
 
-| Gedanke | Realität |
+| Thought | Reality |
 | --- | --- |
-| „Der Ablauf lief in der Session, also läuft er auch als Automation" | Ohne User fehlen alle Korrektive — Bausteine-Checkliste ist Pflicht. |
-| „Stündlich schadet nicht" | Doch: Tokens, Log-Wachstum, Kollisionsrisiko. Takt an Änderungsrate koppeln. |
-| „Ich baue für jede Variante eine eigene Automation" | Gemeinsames Gerüst als Skill, Varianten als Parameter. |
-| „Nichts gefunden — dann suche ich mir eben andere Arbeit" | Read-only-Exit mit Logeintrag ist das korrekte Ergebnis eines Leerlaufs. |
+| "The workflow ran in the session, so it will run as an automation" | Without a user, all correctives are missing — building blocks checklist is mandatory. |
+| "Hourly doesn't hurt" | Yes it does: tokens, log growth, collision risk. Couple cadence to rate of change. |
+| "I'll build a separate automation for each variant" | Shared skeleton as a skill, variants as parameters. |
+| "Nothing found — guess I'll look for other work" | Read-only exit with log entry is the correct result of an idle run. |
 
-## Verwandte Skills
+## Related Skills
 
-- `skill-extractor` — gleiche Extraktion, Ziel ist ein abrufbarer Skill; teilt
-  Neutralisierung und Transcript-Quellen (dort dokumentiert).
-- `rotation-check` — das Standard-Gerüst für rotierende Pipeline-Checks (häufigster
-  Automations-Typ); als Baustein referenzieren statt neu erfinden.
-- `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
+- `skill-extractor` — Same extraction, target is a callable skill; shares neutralization and transcript sources (documented there).
+- `rotation-check` — Standard skeleton for rotating pipeline checks (most common automation type); reference as a building block instead of reinventing.
+- `swarm-operations` — Swarm pattern for bulk reviewing.
 
 ## Changelog
 
 ### 1.1.0 (2026-07-03)
-- Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
-  Drift, Lücken) — integriert statt als eigener Skill (Dedup-Entscheid).
-- Drei neue Bausteine in automation-bausteine.md: Freigabe-Gate über Sentinel-Dateien (12),
-  Gestaffelte Eskalation mit Handoff-Artefakt (13), Melde-Disziplin für Monitore (14).
+- Fleet Audit Mode (auditing running automation fleet: silent failures, redundancy, drift, gaps) — integrated instead of separate skill (deduplication decision).
+- Three new building blocks in `automation-bausteine.md`: Approval gate via sentinel files (12), Staged escalation with handoff artifact (13), Reporting discipline for monitors (14).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus der Abstraktion des Codex-Automations-Bestands
-  (77 Automationen, dominantes Rotations-Check-Muster) in user-neutrale Bausteine.
+- Initial version. Derived from abstracting the Codex-Automations inventory (77 automations, dominant rotation check pattern) into user-neutral building blocks.

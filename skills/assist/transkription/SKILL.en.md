@@ -6,7 +6,6 @@ author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
 description: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,15 +18,12 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name':
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `transkription`.
 
 
 ## Overview & Purpose
 
-Convert audio/video files to text — locally, without mandatory cloud access. The skill
-automatically detects whether Whisper or Vosk is installed and selects the best
-available backend. Without a backend it runs in dry-run mode and returns a
-placeholder text, so the workflow always works.
+Convert audio/video files to text — locally, without mandatory cloud access. The skill automatically detects whether Whisper or Vosk is installed and selects the best available backend. Without a backend it runs in dry-run mode and returns a placeholder text, so the workflow always works.
 
 Transcripts are stored locally in `transkription/store.db` and can be queried.
 
@@ -45,7 +41,7 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Backend check**: Check whether `whisper` or `vosk` is importable.
 2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
@@ -58,28 +54,28 @@ Transcripts are stored locally in `transkription/store.db` and can be queried.
 ## CLI Entry Point
 
 ```bash
-# Transcribe file (English)
+# Transcribe file (Deutsch)
 python transkription_core.py transcribe audio.wav
 
-# With explicit language (English)
+# With explicit language (Deutsch)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-run (no backend required) (English)
+# Dry-run (no backend required) (Deutsch)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# List transcripts (English)
+# List transcripts (Deutsch)
 python transkription_core.py list [--limit 20]
 
-# Full-text search (English)
+# Full-text search (Deutsch)
 python transkription_core.py search "term"
 
-# Export (English)
+# Export (Deutsch)
 python transkription_core.py export <id> [--out file.txt]
 
-# Backend check (English)
+# Backend check (Deutsch)
 python transkription_core.py check
 
-# Alternative store path (e.g. for tests) (English)
+# Alternative store path (e.g. for tests) (Deutsch)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
@@ -139,7 +135,7 @@ CREATE TABLE IF NOT EXISTS transcripts (
 
 ---
 
-## Changelog
+## Change Log
 
 | Version | Date | Change |
 |---|---|---|

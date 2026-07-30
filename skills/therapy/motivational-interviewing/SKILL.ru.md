@@ -1,239 +1,252 @@
 ---
+name: motivational-interviewing
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Мотивационное интервью (МИ) по Миллеру и Роллнику: техники OARS, высказывания в пользу изменений, стимулирование готовности к переменам.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [motivational-interviewing, oars, change-talk, ambivalence, miller-rollnick]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `motivational-interviewing`.
+> **Русский** — Официальная русская версия `motivational-interviewing`.
 
 
+# Мотивационное интервью (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Техники OARS, стадии изменений и высказывания в пользу изменений: формирование внутренней мотивации к переменам без давления и манипуляций
 
-
-# Motivational Interviewing (English)
-
-> OARS techniques, stages of change, and change talk: Fostering intrinsic motivation for change without pressure or manipulation
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Motivational Interviewing (MI) was developed by William R. Miller and Stephen Rollnick. It is a client-centered, directive counseling approach for fostering intrinsic motivation for change. MI is used evidence-based in addiction treatment, health behavior, therapy adherence, and behavior change.
-
-Evidence: Over 200 RCTs support the effectiveness of MI, particularly for addictive behaviors (Lundahl et al. 2010, Cochrane Review), health behaviors, and treatment adherence.
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. MI Spirit and Principles
+## Контекст
 
-### The Four Principles
+Мотивационное интервью (МИ) было разработано Уильямом Р. Миллером (William R. Miller) и Стивеном Роллником (Stephen Rollnick). Это клиент-центрированный, но директивный подход к консультированию, направленный на развитие внутренней мотивации к изменениям. МИ применяется с доказанной эффективностью в терапии зависимостей, изменении поведения в отношении здоровья, повышении приверженности лечению и изменении образа жизни.
 
-1. **Partnership:** Collaboration on equal footing, not expert authority
-2. **Acceptance:** Respecting autonomy, acknowledging strengths, absolute worth of the person
-3. **Compassion:** The well-being of the person comes first
-4. **Evocation:** Motivation already resides within the person — it is elicited, not implanted
+Доказательная база: Более 200 РКИ подтверждают эффективность МИ, особенно при аддиктивном поведении (Lundahl et al. 2010, Cochrane Review), поведении, связанном со здоровьем, и приверженности терапии.
 
-### The Spirit of MI
-MI is not a collection of techniques, but an attitude. The techniques only work within the context of this foundational spirit. Without it, MI becomes manipulation.
+**Примечание:** Это инструмент поддержки, а не замена профессиональной психотерапии.
+**Категорически запрещено проводить:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. OARS Techniques
+## 1. Дух и принципы МИ
 
-OARS are the four core competencies of motivational interviewing.
+### Четыре принципа
 
-### O — Open Questions
+1. **Партнёрство (Partnership):** Сотрудничество на равных, а не экспертное давление
+2. **Принятие (Acceptance):** Уважение автономии, признание сильных сторон, безусловная ценность личности
+3. **Сострадание (Compassion):** Благополучие человека всегда на первом месте
+4. **Эвокация / Вызывание (Evocation):** Мотивация уже заложена внутри человека — её актуализируют, а не навязывают
 
-**Principle:** Ask questions that invite reflection and storytelling, that cannot be answered with yes/no.
-
-**Examples:**
-- "What would you like to see change?"
-- "How would your life look if you had made this change?"
-- "What brought you to think about this?"
-- "What is important to you about your health?"
-- "What would you gain if you made this change?"
-
-**Avoid:**
-- Closed questions: "Do you want to quit smoking?"
-- Leading questions: "You know that's harmful, right?"
-- Why-questions: "Why did you do that?" (sounds accusatory)
+### Дух МИ
+МИ — это не просто набор техник, а жизненная позиция и установка. Техники работают только в контексте этого основополагающего духа. Без него МИ превращается в манипуляцию.
 
 ---
 
-### A — Affirming
+## 2. Техники OARS
 
-**Principle:** Acknowledge strengths, efforts, and positive steps of the other person. Not praising ("You're great"), but specifically naming what was observed.
+OARS — это четыре ключевые компетенции мотивационного интервью.
 
-**Examples:**
-- "It takes courage to speak openly about this."
-- "You managed to hold on for three days — that shows you're serious."
-- "Despite the difficult situation, you came today — that shows commitment."
-- "You've clearly given this a lot of thought."
+### O — Открытые вопросы (Open Questions)
 
-**When to use:**
-- When the person describes steps toward change
-- When they persist despite setbacks
-- To strengthen self-efficacy
+**Принцип:** Задавать вопросы, которые побуждают к размышлениям и повествованию и на которые нельзя ответить просто «да» или «нет».
+
+**Примеры:**
+- «Что бы вы хотели изменить?»
+- «Как бы выглядела ваша жизнь, если бы вы совершили эти изменения?»
+- «Что натолкнуло вас на мысли об этом?»
+- «Что для вас самое важное в вашем здоровье?»
+- «Что вы выиграете, если пойдёте на эти изменения?»
+
+**Избегать:**
+- Закрытых вопросов: «Вы хотите бросить курить?»
+- Наводящих вопросов: «Вы же понимаете, что это вредно, верно?»
+- Вопросов «почему»: «Почему вы так поступили?» (звучит как обвинение)
 
 ---
 
-### R — Reflecting
+### A — Одобрение и поддержка (Affirming)
 
-**Principle:** Give back what was said in your own words — to show understanding and encourage further thinking.
+**Принцип:** Отмечать сильные стороны, усилия и позитивные шаги собеседника. Не просто хвалить общими словами («Вы молодец»), а конкретно называть то, что было замечено.
 
-**Types of reflections:**
+**Примеры:**
+- «Требуется смелость, чтобы откровенно говорить об этом.»
+- «Вам удалось продержаться три дня — это показывает ваше серьёзное отношение.»
+- «Несмотря на сложную ситуацию, вы пришли сегодня — это говорит о вашей приверженности.»
+- «Видно, что вы очень глубоко обдумали этот вопрос.»
 
-| Type | Description | Example |
+**Когда использовать:**
+- Когда человек описывает шаги к изменениям
+- Когда он проявляет упорство, несмотря на неудачи
+- Для укрепления самоэффективности
+
+---
+
+### R — Рефлексивное слушание / Отражение (Reflecting)
+
+**Принцип:** Возвращать сказанное своими словами — чтобы показать понимание и стимулировать дальнейшие размышления.
+
+**Виды отражений:**
+
+| Тип | Описание | Пример |
 |------|-------------|---------|
-| Simple | Repeat/paraphrase content | "You're saying it's hard for you." |
-| Deepening | Pick up on what's beneath the surface | "It sounds like you're torn." |
-| Double-sided | Mirror both sides of ambivalence | "On one hand you want to stop, on the other it gives you something." |
-| Amplified | Slightly overstate (carefully!) | "So there's absolutely no reason to change anything?" |
+| Простое | Повтор / парафраз содержания | «Вы говорите, что вам это даётся тяжело.» |
+| Углублённое | Улавливание того, что скрыто под поверхностью | «Похоже, вас разрывают противоречия.» |
+| Двустороннее | Отражение обеих сторон амбивалентности | «С одной стороны, вы хотите остановиться, с другой — это что-то вам даёт.» |
+| Усиленное | Легкое преувеличение (осторожно!) | «То есть нет абсолютно никаких причин что-либо менять?» |
 
-**Double-sided reflection (ambivalence):**
+**Двустороннее отражение (амбивалентность):**
 ```
-"On one hand, you say you'd like to drink less alcohol.
-On the other hand, the social aspect of after-work drinks is important to you.
-Both make sense."
-```
-
----
-
-### S — Summarizing
-
-**Principle:** Bundle the conversation — especially highlighting change talk.
-
-**Types:**
-- **Collecting:** Summarize multiple points
-- **Linking:** Connect earlier statements with current ones
-- **Transitional:** At the end of a conversation, leading to next steps
-
-**Example:**
-```
-"Let me summarize what I've heard so far:
-You've noticed that your sleep has gotten worse and it's
-affecting your work. You've tried reducing caffeine before,
-and that partly helped. Being fit and productive is important
-to you. At the same time, your morning coffee enjoyment matters.
-Does that sound right? What would you like to add?"
+«С одной стороны, вы говорите, что хотели бы пить меньше алкоголя.
+С другой стороны, социальный аспект встреч после работы очень важен для вас.
+И то, и другое вполне понятно.»
 ```
 
 ---
 
-## 3. Stages of Change (Transtheoretical Model)
+### S — Подведение итогов / Резюмирование (Summarizing)
 
-### The Stages (Prochaska & DiClemente)
+**Принцип:** Объединять сказанное в разговоре — с особым акцентом на высказываниях в пользу изменений.
 
-| Stage | Description | MI Strategy |
+**Типы:**
+- **Собирательное:** Обобщение нескольких пунктов
+- **Связывающее:** Соединение прошлых высказываний с текущими
+- **Переходное:** В конце этапа беседы, подведение к следующим шагам
+
+**Пример:**
+```
+«Позвольте мне подытожить то, что я услышал на данный момент:
+Вы заметили, что ваш сон ухудшился, и это начинает сказываться
+на работе. Раньше вы пробовали сократить кофеин, и это отчасти
+помогло. Для вас важно быть в форме и работать продуктивно.
+В то же время удовольствие от утреннего кофе тоже имеет значение.
+Всё верно? Что бы вы хотели добавить?»
+```
+
+---
+
+## 3. Стадии изменений (Транстеоретическая модель)
+
+### Стадии (Prochaska & DiClemente)
+
+| Стадия | Описание | Стратегия МИ |
 |-------|-------------|-------------|
-| Precontemplation | No problem awareness, no intention to change | Inform, spark curiosity, don't push |
-| Contemplation | Ambivalence: "Maybe I should..." | Explore ambivalence, foster change talk |
-| Preparation | Decision made, making plans | Support planning, strengthen confidence |
-| Action | Actively implementing change | Affirm, work through obstacles |
-| Maintenance | Stabilizing the change | Relapse prevention, acknowledge successes |
-| Relapse | Return to old behavior | Normalize, re-motivate, learn from experience |
+| Сопротивление / Предобдумывание (Precontemplation) | Нет осознания проблемы, нет намерения менять поведение | Информировать, вызывать любопытство, не подталкивать |
+| Обдумывание / Созерцание (Contemplation) | Амбивалентность: «Возможно, мне стоит...» | Исследовать амбивалентность, стимулировать высказывания в пользу изменений |
+| Подготовка (Preparation) | Решение принято, составляются планы | Поддерживать планирование, укреплять уверенность |
+| Действие (Action) | Активное внедрение изменений | Одобрять, помогать преодолевать препятствия |
+| Сохранение (Maintenance) | Стабилизация и закрепление изменений | Профилактика рецидивов, признание успехов |
+| Рецидив (Relapse) | Возврат к старому поведение | Нормализовать, повторно мотивировать, извлекать уроки |
 
-**Important:** Relapse is not failure, but part of the change process.
+**Важно:** Рецидив — это не провал, а естественная часть процесса изменений.
 
-### Recognizing the Stage
+### Определение стадии
 
-**Guide questions:**
-- "Have you thought about changing something?" (Precontemplation vs. Contemplation)
-- "What speaks for it, what against it?" (Exploring ambivalence)
-- "Do you have concrete ideas about how you'd approach it?" (Preparation)
-- "What have you already tried?" (Action experience)
-
----
-
-## 4. Recognizing and Strengthening Change Talk
-
-### What is Change Talk?
-
-Change talk consists of statements by the person that point toward change. MI aims to increase change talk and not reinforce sustain talk (maintaining the status quo).
-
-### DARN-CAT Framework
-
-**Preparatory Change Talk (DARN):**
-- **D**esire: "I would like to..."
-- **A**bility: "I could..."
-- **R**easons: "It would be better because..."
-- **N**eed: "I need to change something..."
-
-**Mobilizing Change Talk (CAT):**
-- **C**ommitment: "I will..."
-- **A**ctivation: "I'm ready to..."
-- **T**aking Steps: "I've already..."
-
-### Fostering Change Talk
-
-**Strategies:**
-1. **Ask open questions:**
-   - "What would you gain if something changed?"
-   - "What gives you confidence that you could do this?"
-
-2. **Importance and confidence scaling:**
-   - "How important is this change to you on a scale of 0 to 10?"
-   - "How confident are you that you could manage it?"
-   - "Why a 5 and not a 2?" (strengthens existing motivation)
-
-3. **Exploring extremes:**
-   - "What could happen in the worst case if nothing changes?"
-   - "What would be the best thing that could happen if you changed it?"
-
-4. **Looking back and looking forward:**
-   - "What was it like before this issue came up?"
-   - "Where do you see yourself in five years if everything stays the same?"
+**Наводящие вопросы:**
+- «Думали ли вы о том, чтобы что-то изменить?» (Предобдумывание vs. Обдумывание)
+- «Что говорит "за", а что "против"?» (Исследование амбивалентности)
+- «Есть ли у вас конкретные идеи, как вы к этому подступитесь?» (Подготовка)
+- «Что вы уже пробовали сделать?» (Опыт действий)
 
 ---
 
-## 5. Dealing with Resistance
+## 4. Распознавание и укрепление высказываний в пользу изменений
 
-### Resistance as a Signal
+### Что такое Change Talk (Высказывания в пользу изменений)?
 
-In MI, "resistance" is interpreted as a sign that the counselor is moving too fast or not adequately respecting the person's autonomy.
+Change talk состоит из утверждений человека, указывающих в сторону изменений. Цель МИ — увеличивать объём Change Talk и не усиливать Sustain Talk (высказывания в пользу сохранения статус-кво).
 
-### Strategies
+### Фреймворк DARN-CAT
 
-| Situation | Response |
+**Подготовительные высказывания в пользу изменений (DARN):**
+- **D**esire (Желание): «Я бы хотел...»
+- **A**bility (Способность): «Я мог бы...»
+- **R**easons (Причины): «Это было бы лучше, потому что...»
+- **N**eed (Потребность): «Мне нужно что-то изменить...»
+
+**Мобилизующие высказывания в пользу изменений (CAT):**
+- **C**ommitment (Обязательство): «Я буду...»
+- **A**ctivation (Готовность): «Я готов к...»
+- **T**aking Steps (Предпринятые шаги): «Я уже...»
+
+### Стимулирование Change Talk
+
+**Стратегии:**
+1. **Задавать открытые вопросы:**
+   - «Что вы выиграете, если что-то изменится?»
+   - «Что придаёт вам уверенности в том, что вы сможете это сделать?»
+
+2. **Шкала важности и уверенности:**
+   - «Насколько важно для вас это изменение по шкале от 0 до 10?»
+   - «Насколько вы уверены, что справитесь с этим?»
+   - «Почему 5, а не 2?» (укрепляет имеющуюся мотивацию)
+
+3. **Исследование крайностей:**
+   - «Что может произойти в худшем случае, если ничего не изменится?»
+   - «Что было бы самым лучшим из того, что может произойти, если вы измените это?»
+
+4. **Взгляд в прошлое и взгляд в будущее:**
+   - «Как всё было до того, как возникла эта проблема?»
+   - «Каким вы видите себя через пять лет, если всё останется как есть?»
+
+---
+
+## 5. Работа с сопротивлением
+
+### Сопротивление как сигнал
+
+В МИ «сопротивление» интерпретируется как сигнал о том, что консультант двигается слишком быстро или недостаточно уважает автономию человека.
+
+### Стратегии
+
+| Ситуация | Ответ |
 |-----------|----------|
-| "I don't have a problem" | Accept, don't argue, show curiosity |
-| "You don't understand me" | Reflect: "Being understood is important to you" |
-| "That won't work anyway" | Explore past successes, strengthen confidence |
-| Person becomes angry | Slow down, emphasize autonomy, reflect empathically |
+| «У меня нет никаких проблем» | Принять, не спорить, проявить любопытство |
+| «Вы меня не понимаете» | Отразить: «Для вас важно быть понятым» |
+| «Это всё равно не сработает» | Исследовать прошлые успехи, укрепить уверенность |
+| Человек проявляет гнев | Замедлить темп, подчеркнуть автономию, эмпатически отразить |
 
-**Golden rule:** Never argue against resistance. Roll with the resistance, don't push against it.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Use OARS techniques to foster reflection
-- Recognize and reflect back change talk
-- Provide information about change processes
-- Respectfully explore ambivalence
-
-**An AI assistant must NOT:**
-- Force or manipulate change
-- Make decisions for the person
-- Conduct addiction therapy or withdrawal support
-- Use threats or fear appeals
-- Undermine the person's autonomy
-
-**Core principle:** The person decides. An AI assistant supports the reflection process.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Золотое правило:** Никогда не спорить с сопротивлением. Двигайтесь вместе с сопротивлением (Roll with the resistance), не давите в ответ.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Not professional therapy*
+## Этика и границы
+
+**ИИ-ассистент МОЖЕТ:**
+- Использовать техники OARS для углубления рефлексии
+- Распознавать и отражать высказывания в пользу изменений
+- Предоставлять информацию о процессах изменений
+- С уважением исследовать амбивалентность
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Принуждать к изменениям или манипулировать
+- Принимать решения за человека
+- Проводить терапию зависимостей или поддерживать снятие абстиненции
+- Использовать угрозы или запугивание
+- Подрывать автономию человека
+
+**Основной принцип:** Решение принимает сам человек. ИИ-ассистент лишь поддерживает процесс рефлексии.
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- 988 Suicide & Crisis Lifeline (США): 988
+- Crisis Text Line (США): Отправьте HOME на номер 741741
+- Samaritans (Великобритания): 116 123
+- Telefonseelsorge (Германия): 0800 111 0 111 / 0800 111 0 222
+- Единый телефон доверия (РФ): 8-800-2000-122 / 112
+- Экстренные службы: 911 (США) / 112 (ЕС/РФ)
+
+---
+
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Не является профессиональной психотерапией*

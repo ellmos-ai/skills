@@ -5,7 +5,11 @@ type: skill
 author: ellmos contributors
 created: 2026-05-16
 updated: 2026-07-29
-description: [Русский] Навык агента для system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.
+description: >
+  Независимый от провайдера протокол онбординга для новой, восстановленной или замененной рабочей станции.
+  Он определяет предварительные требования к операционной системе, среды выполнения агентов, общие поверхности правил,
+  переносимые навыки, проверенную конфигурацию и подтверждения после установки без копирования учетных данных,
+  приватных промптов или специфичных для хоста конфигураций в репозиторий.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,82 +18,61 @@ category: infrastructure
 tags: [onboarding, setup, agent-runtimes, windows, macos, verification, sync]
 language: ru
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: "internal onboarding protocol (sanitized for portable publication)"
+  origin_version: "1.2.0"
+  last_sync_from_origin: "2026-07-29"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `system-onboarding`.
+> **Русский** — Официальная русская версия `system-onboarding`.
 
+# Онбординг системы
 
+Используйте этот протокол для настройки новой или восстановленной рабочей станции для локальной работы с агентами (local-first). Это руководство по последовательности действий и проверке, а не инсталлятор и не источник учетных данных. Перед внесением изменений в действующую систему ознакомьтесь с актуальной документацией каждого провайдера.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Активация
 
+Используется для новой рабочей станции, переустановленной операционной системы, замененного устройства или контролируемого восстановления одной среды выполнения агента. Сначала определите операционную систему, целевую среду выполнения, владельца, общую поверхность правил и является ли запрос полным восстановлением или точечным ремонтом компонентов. Не предполагайте, что конфигурация, скопированная с одного хоста, безопасна или поддерживается на другом.
 
-# System Onboarding (English)
+## Упорядоченный рабочий процесс
 
-Use this protocol to establish a new or rebuilt workstation for local-first agent
-work. It is a sequencing and verification guide, not an installer and not a source
-of credentials. Resolve product-specific instructions from each provider's current
-documentation before changing a live system.
+1. Установите обновления операционной системы, Git, аутентифицированный контроль версий, Python и текущую поддерживаемую версию Node.js LTS, где это необходимо.
+2. Устанавливайте только запрошенные среды выполнения агентов через их поддерживаемые инсталляторы и завершайте их нативные процедуры входа без размещения токенов в файлах проекта.
+3. Создайте локальные корневые каталоги конфигурации и загрузите явно выбранную каноническую поверхность правил. Объединяйте шаблоны; никогда слепо не перезаписывайте существующее локальное состояние.
+4. Устанавливайте переносимые навыки и конфигурации MCP или плагинов только с помощью указанных процедур развертывания. Относитесь к формату конфигурации каждого провайдера как к индивидуальному.
+5. Настраивайте общую синхронизацию только после того, как локальная среда выполнения заработает. Делитесь очищенными контрактами и отчетами, а не учетными данными, полными промптами или локальными путями машины.
+6. Воссоздавайте планировщик или автоматизацию только через его поддерживаемый нативный интерфейс. Сохраняйте прежнее состояние и оставляйте новые задачи отключенными до тех пор, пока их владелец не одобрит активацию.
+7. Выполните соответствующие проверки после установки и запишите локальный отчет, разграничивающий установку, конфигурацию, регистрацию планировщика и успешный результат.
 
-## Activation
+Читайте только то справочное руководство, которое соответствует целевой платформе:
 
-Use for a new workstation, a reinstalled operating system, a replacement device, or
-a controlled recovery of one agent runtime. First identify the operating system,
-target runtime, owner, shared rule surface, and whether the request is a full rebuild
-or a bounded component repair. Do not assume that a configuration copied from one
-host is safe or supported on another.
+- [Обзор](references/overview.md) — границы и размещение данных;
+- [Чек-лист для Windows](references/windows-checklist.md) — для Windows;
+- [Чек-лист для macOS](references/mac-checklist.md) — для macOS; и
+- [После установки](references/post-install.md) — проверка и восстановление.
 
-## Ordered workflow
+## Границы и ограничения
 
-1. Establish operating-system updates, Git, authenticated source control, Python and
-   the current supported Node.js LTS where needed.
-2. Install only the requested agent runtimes through their supported installers and
-   complete their native login flows without placing tokens in project files.
-3. Create local configuration roots and load an explicitly selected, canonical rule
-   surface. Merge templates; never overwrite existing local state blindly.
-4. Install portable skills and MCP or plugin configuration only through their stated
-   deployment procedures. Treat each provider's configuration format as distinct.
-5. Configure shared synchronization only after the local runtime works. Share
-   sanitized contracts and receipts, not credentials, full prompts, or machine-local
-   paths.
-6. Recreate a scheduler or automation only through its supported native surface.
-   Preserve prior state and leave new work disabled until its owner approves activation.
-7. Run the appropriate post-install checks and write a local receipt that distinguishes
-   installation, configuration, scheduler registration and successful outcome.
+- Никогда не публикуйте учетные данные, коды восстановления, приватные промпты, идентификаторы аккаунтов или необработанные логи в общем репозитории или папке синхронизации.
+- Храните виртуальные окружения, кэши зависимостей и крупные артефакты среды выполнения за пределами папок проектов, синхронизируемых с облаком.
+- Не делайте скопированную конфигурацию авторитетной. Целевой хост должен самостоятельно обнаружить и считать свое поддерживаемое состояние.
+- Не регистрируйте расписание только потому, что существует файл задачи. Нативная регистрация и подтверждение результата — это отдельные требования.
+- При ремонте существующего хоста проведите инвентаризацию его текущего состояния и блокировок перед изменением любой конфигурации.
 
-Read only the matching reference for the target platform:
+## Подтверждение завершения
 
-- [overview](references/overview.md) for boundaries and data placement;
-- [Windows checklist](references/windows-checklist.md) for Windows;
-- [macOS checklist](references/mac-checklist.md) for macOS; and
-- [post-install](references/post-install.md) for verification and recovery.
+Полный отчет об онбординге фиксирует целевую операционную систему, выбранные среды выполнения, их проверенные версии, загруженные канонические ссылки на правила, развернутые явные навыки или расширения, неподдерживаемые возможности и любые отложенные решения пользователя. Успешный завершающий код команды сам по себе не является доказательством того, что приложение загрузило свою новую конфигурацию или что запланированная задача достигла своего целевого результата.
 
-## Boundaries
-
-- Never publish credentials, recovery codes, private prompts, account identifiers, or
-  raw logs to a shared repository or synchronization folder.
-- Keep virtual environments, dependency caches and large runtime artifacts out of
-  cloud-synchronized project folders.
-- Do not make a copied configuration authoritative. The target host must discover and
-  read back its own supported state.
-- Do not register a schedule merely because a task file exists. Native registration
-  and outcome evidence are separate requirements.
-- When an existing host is being repaired, inventory its current state and locks before
-  changing any configuration.
-
-## Completion evidence
-
-A complete onboarding receipt records the target operating system, selected runtimes,
-their verified versions, the canonical rule references loaded, the explicit skills or
-extensions deployed, unsupported capabilities, and any deferred user decisions. A
-successful command exit alone is not evidence that an application loaded its new
-configuration or that a scheduled task achieved its intended outcome.
-
-## Журнал изменений
+## История изменений
 
 ### 1.2.0 (2026-07-29)
 
-- Ported the reusable onboarding sequence and platform references into the public
-  skills catalog after removing host-specific paths, account details and private
-  operational material.
+- Перенесены многоразовая последовательность онбординга и платформенные справочники в публичный каталог навыков после удаления специфичных для хоста путей, данных аккаунтов и приватных операционных материалов.

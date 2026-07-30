@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+description: Систематический 6-фазный протокол отладки. Структурированный подход к ошибкам с быстрыми проверками, изолированным тестированием, правилом 20 минут и шаблоном отчета об ошибках.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,103 +15,99 @@ tags: [debugging, bugfix, protocol, python, pyqt6, systematic]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `bugfix-protocol`.
+<img src="banner.png" width="100%" alt="bugfix-protocol banner">
+> **Русский** — Официальная русская версия `bugfix-protocol`.
 
+# Bugfix Protocol: Систематическая отладка в 6 фаз (Русский)
 
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Bugfix Protocol: Systematic 6-Phase Debugging (English)
-
-A structured approach to bugs — from symptom analysis to verification.
-Prevents aimless trial-and-error and ensures fixes are sustainable.
+Структурированный подход к обработке ошибок — от анализа симптомов до проверки.
+Предотвращает бесцельный поиск методом проб и ошибок и обеспечивает устойчивость исправлений.
 
 ---
 
-## Общий обзор и назначение & Purpose
+## Обзор и цель
 
-| Phase | Name | Goal | Max. Time |
-|-------|------|------|-----------|
-| 1 | Quick Checks | Rule out obvious causes | 2 min |
-| 2 | Diagnosis | Locate root cause | 10 min |
-| 3 | Isolated Test | Make bug reproducible | 5 min |
-| 4 | Fix | Minimal correction | 10 min |
-| 5 | Verification | Verify fix + check side effects | 5 min |
-| 6 | Documentation | Preserve knowledge | 2 min |
+| Фаза | Название | Цель | Макс. время |
+|------|----------|------|-------------|
+| 1 | Быстрые проверки | Исключить очевидные причины | 2 мин |
+| 2 | Диагностика | Локализовать первопричину | 10 мин |
+| 3 | Изолированный тест | Сделать ошибку воспроизводимой | 5 мин |
+| 4 | Исправление (Fix) | Минимальная коррекция | 10 мин |
+| 5 | Проверка | Проверить исправление и побочные эффекты | 5 мин |
+| 6 | Документирование | Сохранить знания | 2 мин |
 
-**20-Minute Rule:** If no progress after 20 minutes, change approach or seek help.
+**Правило 20 минут:** Если нет прогресса через 20 минут, измените подход или обратитесь за помощью.
 
 ---
 
-## Phase 1: Quick Checks (2 min)
+## Фаза 1: Быстрые проверки (2 мин)
 
-Before diving deep — check the most common causes:
+Прежде чем углубляться — проверьте самые распространенные причины:
 
-### Checklist
+### Чек-лист
 
-- [ ] **Syntax error?** Read error message carefully, check line
-- [ ] **Import error?** Module installed? Correct name? Circular import?
-- [ ] **Typo?** Variable/function names correct?
-- [ ] **Wrong data type?** String instead of int? None where object expected?
-- [ ] **Stale cache?** Delete `__pycache__`, restart
-- [ ] **Wrong environment?** Correct venv active? Correct Python version?
-- [ ] **Encoding?** UTF-8 vs. cp1252 (Windows classic)
+- [ ] **Синтаксическая ошибка?** Внимательно прочитайте сообщение об ошибке, проверьте строку
+- [ ] **Ошибка импорта?** Модуль установлен? Название верное? Циклический импорт?
+- [ ] **Опечатка?** Имена переменных/функций указаны верно?
+- [ ] **Неверный тип данных?** Строка вместо числа? None там, где ожидался объект?
+- [ ] **Устаревший кэш?** Удалите `__pycache__`, перезапустите
+- [ ] **Неверное окружение?** Активирован правильный venv? Нужная версия Python?
+- [ ] **Кодировка (Encoding)?** UTF-8 против cp1252 (классическая Windows)
 
-### Quick Actions
+### Быстрые действия
 
 ```bash
-# Clear cache (English)
+# Очистить кэш (Русский)
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports (English)
+# Проверить импорты (Русский)
 python -c "import modulename"
 
-# Check syntax (English)
+# Проверить синтаксис (Русский)
 python -m py_compile file.py
 ```
 
 ---
 
-## Phase 2: Diagnosis (10 min)
+## Фаза 2: Диагностика (10 мин)
 
-### Strategy: Outside-In
+### Стратегия: Снаружи внутрь (Outside-In)
 
-1. **Analyze error message** — Read traceback from bottom to top
-2. **Check recent changes** — `git diff`, `git log --oneline -10`
-3. **Use diagnostic tools** — Use project-specific diagnostic tools
+1. **Анализ сообщения об ошибке** — Читайте стек вызовов (traceback) снизу вверх
+2. **Проверка последних изменений** — `git diff`, `git log --oneline -10`
+3. **Использование диагностических утилит** — Используйте специфические для проекта инструменты
 
-### Diagnostic Tools (Examples)
+### Диагностические утилиты (Примеры)
 
-Depending on the project, specialized diagnostic scripts may be helpful:
+В зависимости от проекта могут быть полезны специализированные скрипты:
 
-| Tool | Purpose |
-|------|---------|
-| `import_diagnose.py` | Analyze import problems |
-| `method_analyzer.py` | Check method signatures |
-| `env_checker.py` | Validate environment variables/paths |
+| Утилита | Назначение |
+|---------|------------|
+| `import_diagnose.py` | Анализ проблем с импортом |
+| `method_analyzer.py` | Проверка сигнатур методов |
+| `env_checker.py` | Проверка переменных окружения и путей |
 
-> **Note:** Create project-specific diagnostic tools or use existing ones.
-> The systematic approach matters, not the specific tool.
+> **Примечание:** Создавайте специфичные для проекта утилиты диагностики или используйте существующие.
+> Важен систематический подход, а не конкретный инструмент.
 
-### Debugging Techniques
+### Методы отладки
 
 ```python
-# 1. Print debugging (quick but effective) (English)
+# 1. Print-отладка (быстро, но эффективно) (Русский)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive) (English)
+# 2. Точка останова (интерактивно) (Русский)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback (English)
+# 3. Расширенный стек вызовов (Русский)
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print (English)
+# 4. Логирование вместо print (Русский)
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -120,171 +116,171 @@ logger.debug(f"State: {state!r}")
 
 ---
 
-## Phase 3: Isolated Test (5 min)
+## Фаза 3: Изолированный тест (5 мин)
 
-### Minimal Reproducible Example (MRE)
+### Минимальный воспроизводимый пример (MRE)
 
-Goal: Reproduce the bug with minimal code.
+Цель: Воспроизвести ошибку с помощью минимального объема кода.
 
 ```python
-# test_bug.py — Minimal Reproduction Test (English)
+# test_bug.py — Минимальный тест воспроизведения (Русский)
 """
-Bug: [Short description]
-Expected: [What should happen]
-Actual: [What happens instead]
+Ошибка: [Краткое описание]
+Ожидалось: [Что должно произойти]
+Фактически: [Что происходит вместо этого]
 """
 
-# Minimal setup (English)
-# ... only the essentials (English)
+# Минимальная настройка (Русский)
+# ... только самое необходимое (Русский)
 
-# Bug trigger (English)
-# ... exact code that triggers the bug (English)
+# Триггер ошибки (Русский)
+# ... точный код, вызывающий ошибку (Русский)
 
-# Expected result (English)
-# assert result == expected, f"Got {result}" (English)
+# Ожидаемый результат (Русский)
+# assert result == expected, f"Got {result}" (Русский)
 ```
 
-### Isolation Strategies
+### Стратегии изоляции
 
-1. **New file:** Reproduce the bug in a separate file
-2. **Remove dependencies:** One by one, until the bug disappears
-3. **Binary search:** Halve the code block, check which half contains the bug
+1. **Новый файл:** Воспроизведите ошибку в отдельном файле
+2. **Удаление зависимостей:** Поочередно удаляйте зависимости, пока ошибка не исчезнет
+3. **Бинарный поиск:** Разделите блок кода пополам, проверьте, в какой половине ошибка
 4. **Git bisect:** `git bisect start`, `git bisect bad`, `git bisect good <commit>`
 
 ---
 
-## Phase 4: Fix (10 min)
+## Фаза 4: Исправление / Fix (10 мин)
 
-### Principles
+### Принципы
 
-1. **Minimal:** Change as little as possible
-2. **Understand:** Never fix blindly — understand WHY it's broken
-3. **One thing:** One fix per commit, don't fix multiple issues at once
-4. **Backward-compatible:** Don't break existing functionality
+1. **Минимальность:** Меняйте как можно меньше
+2. **Понимание:** Никогда не исправляйте вслепую — поймите, ПОЧЕМУ код сломался
+3. **Единственность:** Одно исправление на коммит, не исправляйте несколько проблем одновременно
+4. **Обратная совместимость:** Не ломайте существующую функциональность
 
-### Fix Patterns
+### Шаблоны исправлений
 
 ```python
-# BAD: Treating the symptom (English)
+# ПЛОХО: Устранение симптома (Русский)
 try:
     result = broken_function()
-except:  # Swallow everything
+except:  # Подавление всех ошибок
     result = default_value
 
-# GOOD: Fix the root cause (English)
+# ХОРОШО: Исправление первопричины (Русский)
 def broken_function():
-    if input_data is None:  # Actual cause: missing None check
+    if input_data is None:  # Реальная причина: отсутствует проверка None
         return default_value
     return process(input_data)
 ```
 
-### Common Fix Categories
+### Распространенные категории исправлений
 
-| Category | Typical Fix |
-|----------|------------|
-| None/Null | Guard clause: `if x is None: return default` |
-| Index error | Bounds check: `if i < len(lst)` |
-| Type error | Explicit conversion: `str(x)`, `int(x)` |
-| Import error | Fix path, install package |
-| Encoding | Specify UTF-8 explicitly: `encoding='utf-8'` |
-| Race condition | Lock/Mutex, or change order |
-| State bug | Check initialization, add reset |
+| Категория | Типичное исправление |
+|-----------|----------------------|
+| None/Null | Защитное условие: `if x is None: return default` |
+| Ошибка индекса | Проверка границ: `if i < len(lst)` |
+| Ошибка типа | Явное приведение: `str(x)`, `int(x)` |
+| Ошибка импорта | Исправление пути, установка пакета |
+| Кодировка | Явное указание UTF-8: `encoding='utf-8'` |
+| Состояние гонки | Блокировка/Mutex или изменение порядка |
+| Ошибка состояния | Проверка инициализации, добавление сброса |
 
 ---
 
-## Phase 5: Verification (5 min)
+## Фаза 5: Проверка (5 мин)
 
-### Checklist
+### Чек-лист
 
-- [ ] **Bug is fixed:** Original problem no longer occurs
-- [ ] **MRE passes:** Isolated test runs through
-- [ ] **No regression:** Existing tests still pass
-- [ ] **Edge cases:** Empty input, None, large data tested
-- [ ] **Project tools:** Check project tools directory for relevant test/validation tools
+- [ ] **Ошибка исправлена:** Исходная проблема больше не возникает
+- [ ] **MRE проходит:** Изолированный тест выполняется успешно
+- [ ] **Нет регрессий:** Существующие тесты по-прежнему проходят
+- [ ] **Краевые случаи:** Проверены пустые入входные данные, None, большие объемы данных
+- [ ] **Инструменты проекта:** Проверьте каталог инструментов проекта на наличие тестов/валидаторов
 
-### Test Commands
+### Команды тестирования
 
 ```bash
-# Unit tests (English)
+# Юнит-тесты (Русский)
 python -m pytest tests/ -v
 
-# Only affected tests (English)
+# Только затронутые тесты (Русский)
 python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type check (English)
+# Проверка типов (Русский)
 python -m mypy file.py
 
-# Lint (English)
+# Линтер (Русский)
 python -m flake8 file.py
 ```
 
 ---
 
-## Phase 6: Documentation (2 min)
+## Фаза 6: Документирование (2 мин)
 
-### Bug Report Template
+### Шаблон отчета об ошибке (Bug Report)
 
 ```markdown
-## Bug Report: [Short Title]
+## Отчет об ошибке: [Краткий заголовок]
 
-**Date:** YYYY-MM-DD
-**Severity:** critical / high / medium / low
-**Component:** [Module/File]
+**Дата:** YYYY-MM-DD
+**Критичность:** критическая / высокая / средняя / низкая
+**Компонент:** [Модуль/Файл]
 
-### Symptom
-[What the user sees / error message]
+### Симптом
+[Что видит пользователь / сообщение об ошибке]
 
-### Root Cause
-[Technical root cause]
+### Первопричина
+[Техническая первопричина]
 
-### Fix
-[What was changed + why]
+### Исправление (Fix)
+[Что было изменено и почему]
 
-### Affected Files
-- `file1.py` — [Change]
-- `file2.py` — [Change]
+### Затронутые файлы
+- `file1.py` — [Изменение]
+- `file2.py` — [Изменение]
 
-### Prevention
-[How can this type of bug be prevented in the future?]
+### Предотвращение
+[Как предотвратить подобный тип ошибок в будущем?]
 ```
 
-### Commit Message Format
+### Формат сообщения коммита
 
 ```
-fix: [Short description of the fix]
+fix: [Краткое описание исправления]
 
-Cause: [Root cause in one sentence]
-Fix: [What was changed]
-Test: [How verified]
+Cause: [Первопричина в одном предложении]
+Fix: [Что было изменено]
+Test: [Как проверено]
 ```
 
 ---
 
-## PyQt6 / GUI Debugging — Common Pitfalls
+## Отладка PyQt6 / GUI — Распространенные ловушки
 
-> This section is relevant for desktop GUI projects with PyQt6/PySide6.
+> Этот раздел актуален для проектов десктопного GUI на PyQt6/PySide6.
 
-### Top 5 PyQt6 Traps
+### Топ-5 ловушек PyQt6
 
-| Trap | Problem | Solution |
-|------|---------|---------|
-| **Signal-Slot Disconnect** | Signal connected but handler doesn't run | `print` in handler, check signature |
-| **Thread Safety** | GUI update from worker thread | `QMetaObject.invokeMethod` or use signal |
-| **Layout Cascade** | Widget invisible/misplaced | `widget.show()`, check layout hierarchy |
-| **Event Loop Block** | GUI freezes | Move long operations to QThread |
-| **Garbage Collection** | Widget suddenly disappears | Keep reference as `self.widget` |
+| Ловушка | Проблема | Решение |
+|---------|----------|---------|
+| **Разрыв Signal-Slot** | Сигнал подключен, но обработчик не запускается | `print` в обработчике, проверка сигнатуры |
+| **Потокобезопасность** | Обновление GUI из рабочего потока | `QMetaObject.invokeMethod` или сигналы |
+| **Каскад layout** | Виджет не виден или смещен | `widget.show()`, проверка иерархии layout |
+| **Блокировка Event Loop** | GUI зависает | Перенести долгие операции в QThread |
+| **Сборщик мусора** | Виджет внезапно исчезает | Сохранять ссылку в `self.widget` |
 
-### PyQt6 Debug Helpers
+### Вспомогательные функции отладки PyQt6
 
 ```python
-# Dump widget hierarchy (English)
+# Вывод иерархии виджетов (Русский)
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging (English)
+# Отладка сигналов (Русский)
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):
@@ -294,41 +290,41 @@ def debug_connect(self, *args, **kwargs):
 
 ---
 
-## Quick Reference
+## Краткая справка
 
 ```
-BUG FOUND?
+ОШИБКА НАЙДЕНА?
      |
      v
-[Phase 1: Quick Checks]  ──── Obvious? -> FIX
+[Фаза 1: Быстрые проверки] ──── Очевидно? -> ИСПРАВИТЬ
      |
      v
-[Phase 2: Diagnosis]  ────────── Cause clear? -> Phase 4
+[Фаза 2: Диагностика] ───────── Причина понятна? -> Фаза 4
      |
      v
-[Phase 3: Isolated Test]  ── Reproducible? -> Phase 4
-     |                              |
-     |                         Not reproducible?
-     |                              |
-     |                         Add logging,
-     |                         wait for recurrence
+[Фаза 3: Изолированный тест] ── Воспроизводится? -> Фаза 4
+     |                                 |
+     |                           Не воспроизводится?
+     |                                 |
+     |                           Добавить логирование,
+     |                           ждать повторения
      v
-[Phase 4: Fix]  ─────────────── Minimal + understood
+[Фаза 4: Исправление] ───────── Минимальное и понятное
      |
      v
-[Phase 5: Verification]  ────── Tests green? -> Phase 6
-     |                              |
-     |                         Tests red? -> Back to Phase 4
+[Фаза 5: Проверка] ──────────── Тесты зеленые? -> Фаза 6
+     |                                 |
+     |                           Тесты красные? -> Назад к Фазе 4
      v
-[Phase 6: Documentation]  ───── Bug report + commit
+[Фаза 6: Документирование] ──── Отчет об ошибке + коммит
 ```
 
-### 20-Minute Rule
+### Правило 20 минут
 
-If you're stuck after 20 minutes:
+Если вы застряли через 20 минут:
 
-1. **Change approach** — Try a different debugging technique
-2. **Rubber duck** — Explain the problem out loud (or write it down)
-3. **Take a break** — Step away for 5 minutes, return with fresh eyes
-4. **Get help** — Ask a colleague, Stack Overflow, documentation
-5. **Reset** — `git stash`, start completely fresh
+1. **Смените подход** — Попробуйте другой метод отладки
+2. **Метод уточки (Rubber duck)** — Объясните проблему вслух (или запишите ее)
+3. **Сделайте перерыв** — Отодвиньтесь от ПК на 5 минут, вернитесь со свежим взглядом
+4. **Обратитесь за помощью** — Спросите коллегу, Stack Overflow или документацию
+5. **Сброс** — `git stash`, начните полностью с нуля

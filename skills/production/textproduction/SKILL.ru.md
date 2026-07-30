@@ -2,57 +2,50 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `textproduction`.
+> **Русский** — Официальная русская версия `textproduction`.
 
 
+# Textproduction — Router (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Этот навык охватывает все формы создания текстов. Он перенаправляет на
+соответствующий поднавык — читайте подробные инструкции в подпапке.
 
+## Таблица маршрутизации
 
-> **English Translation** — Official English version of `textproduction`.
-
-
-# Textproduction — Router (English)
-
-Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
-passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
-
-## Routing-Tabelle
-
-| Teilskill | Trigger-Beispiele | Detail-Anleitung |
+| Поднавык | Примеры триггеров | Подробные инструкции |
 |---|---|---|
-| **text** | „Schreib einen Blogpost", „5 LinkedIn-Posts", „Newsletter", „Produktbeschreibung", „Formelle E-Mail", „Fasse X zusammen" | `text/WORKFLOW.md` |
-| **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
-| **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
+| **text** | «Напиши пост для блога», «5 постов для LinkedIn», «Новостная рассылка», «Описание товара», «Официальное письмо», «Сделай выжимку X» | `text/WORKFLOW.md` |
+| **storys** | «Напиши сценарий», «Короткий рассказ», «Создай RPG-приключение», «Карточка персонажа», «Создание мира» | `storys/WORKFLOW.md` |
+| **pr** | «Составить пресс-релиз», «Изложение позиции», «PR-пакет», «Сгенерировать PDF» | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
 ```
-1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.
-2. Detail-Anleitung im Unterordner lesen (WORKFLOW.md).
-3. Prompt-Muster auswaehlen, Platzhalter fuellen, Text generieren.
-4. Qualitaetspruefung (je Teilskill angegeben).
+1. Запрос пользователя → Таблица маршрутизации выше → определить подходящий поднавык.
+2. Прочитать подробные инструкции в подпапке (WORKFLOW.md).
+3. Выбрать шаблон промпта, заполнить плейсхолдеры, сгенерировать текст.
+4. Проверка качества (указана для каждого поднавыка).
 ```
 
-## Hinweise
+## Примечания
 
-- **Userneutral:** Keine persoenlichen Daten, API-Keys oder Kontodaten im Skill.
-  Konfiguration (Tonalitaet, Zeichenlimits, Kontaktdaten fuer PR) obliegt dem Nutzer.
-- **PR-Tool:** `pr/press_compiler.py` kompiliert Pressemitteilungen und Positionspapiere
-  zu PDF via LaTeX (pdflatex/xelatex). Setup einmalig: `pr/config.example.json`
-  nach `pr/config.json` kopieren und Kontaktdaten eintragen.
-- Optionale Stiloptimierung: DeepL Write (kostenlos bis 500.000 Zeichen/Monat).
+- **Нейтральность к пользователю:** В навыке отсутствуют персональные данные, API-ключи или учетные данные.
+  Настройка (тональность, ограничения по символам, контактные данные для PR) лежит на пользователе.
+- **PR-инструмент:** `pr/press_compiler.py` компилирует пресс-релизы и документы с изложением позиции
+  в PDF через LaTeX (pdflatex/xelatex). Однократная настройка: скопировать `pr/config.example.json`
+  в `pr/config.json` и указать контактные данные.
+- Дополнительная оптимизация стиля: DeepL Write (бесплатно до 500 000 символов в месяц).
 
 ## Журнал изменений
 
 ### 2.0.0 (2026-06-22)
-- Umstrukturierung auf Router-Muster: SKILL.md = Einstieg + Routing-Tabelle.
-- Drei Teilskills: text/ (6 Texttypen), storys/ (4 narrative Formate),
-  pr/ (Pressemitteilung + Positionspapier + LaTeX-PDF-Compiler).
-- press_compiler.py + LaTeX-Templates + config.example.json aus
-  ai-media-editor/production/pr/ hierher verschoben (SSOT).
-- Verwandte-Skills-Verweise auf interne Teilskill-Pfade aktualisiert.
+- Реструктуризация по шаблону маршрутизатора: SKILL.md = точка входа + таблица маршрутизации.
+- Три поднавыка: text/ (6 типов текстов), storys/ (4 нарративных формата),
+  pr/ (пресс-релиз + изложение позиции + LaTeX-компилятор PDF).
+- Файлы press_compiler.py + шаблоны LaTeX + config.example.json перемещены сюда из
+  ai-media-editor/production/pr/ (SSOT).
+- Ссылки на связанные навыки обновлены на внутренние пути поднавыков.
 
 ### 1.0.0 (2026-06-22)
-- Initiale Version. Herausgeloest aus ai-media-editor/production/text/WORKFLOW.md.
-- Provenance: BACH agents/_experts/textproduction/ (MIT).
+- Начальная версия. Выделена из ai-media-editor/production/text/WORKFLOW.md.
+- Происхождение (provenance): BACH agents/_experts/textproduction/ (MIT).

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-28
-description: [日本語] エージェントスキル: condition: Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie "erst wenn", "sobald", "nur falls", "nachdem", "warte bis", "danach" oder "vorher nicht". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.
+description: 目標、プロンプト、タスクのための柔軟な条件言語。条件、タイムスタンプ、順序の依存関係を検証可能な Gate に変換し、証明された承認が得られた後にのみサブステップを実行します。/condition、/if、/if-only、/when、/after、/and、/or の使用時や、「〜して初めて」、「〜したらすぐ」、「〜の場合に限り」、「〜の後に」、「〜まで待つ」、「その後」、「それまでは不可」といった表現で常に使用します。複数のサブ目標が相互に依存している場合や、Goal に後からの承認が含まれる場合にも使用します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,78 +18,62 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'condition/SKILL.md', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `condition`.
+> **日本語** — `condition` の公式日本語版。
 
 
+# condition — 目標とプロンプトのための条件言語
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基本概念
 
+散文形式の条件は見落とされがちです。そのため、関連するすべての条件を名前付きの検証可能な Gate に変換します：
 
-> **English Translation** — Official English version of `condition`.
+> 読み取りは寛容に、立証は厳格に。
 
+入力は自然言語で不完全なもので構いません。一方、内部変換では以下を明確に記録しなければなりません：
 
-# condition — Bedingungssprache für Ziele und Prompts (English)
+1. どの条件が満たされる必要があるか、
+2. どのサブステップがブロックされているか、
+3. どのツールクエリが証拠となるか、
+4. 条件不成立が遅延を意味するか禁止を意味するか。
 
-## Leitidee
+影響を受けるサブステップのみをロックします。独立した作業は継続します。
 
-Fließtext-Bedingungen leicht übersehen. Deshalb jede relevante Bedingung in ein benanntes,
-prüfbares Gate übersetzen:
+## 言語要素
 
-> Beim Lesen großzügig, beim Belegen unnachgiebig.
-
-Die Eingabe darf natürlichsprachlich und unvollständig sein. Die interne Übersetzung muss
-dagegen eindeutig festhalten:
-
-1. welche Bedingung erfüllt sein muss,
-2. welcher Teilschritt blockiert ist,
-3. welche Werkzeugabfrage als Beleg gilt,
-4. ob Nichterfüllung Verzögerung oder Verbot bedeutet.
-
-Nur den betroffenen Teilschritt sperren. Unabhängige Arbeit fortsetzen.
-
-## Sprachbausteine
-
-| Ausdruck | Semantik | Beispiel |
+| 表現 | 意味論 | 例 |
 | --- | --- | --- |
-| `/condition <Bedingung> -> <Schritt>` | Kanonisches Gate | `/condition Tests grün -> Release bauen` |
-| `/if <Bedingung> -> <Schritt>` | Synonym für `/condition` | `/if Review abgeschlossen -> mergen` |
-| `/when <Bedingung> -> <Schritt>` | Ausführen, sobald die Bedingung eintritt | `/when Export fertig -> Bericht prüfen` |
-| `/if-only <Bedingung> -> <Schritt>` | Nur bei Erfüllung; sonst gar nicht ausführen | `/if-only Backup belegt -> Altbestand löschen` |
-| `/after <Dauer> -> <Schritt>` | Zeitversatz ab dem Setzzeitpunkt | `/after 30 minutes -> Status prüfen` |
-| `/and` | Alle verknüpften Bedingungen müssen gelten | `/if Tests grün /and Review da -> mergen` |
-| `/or` | Mindestens eine Bedingung genügt | `/if Freigabe da /or Notfallregel aktiv -> starten` |
+| `/condition <条件> -> <ステップ>` | 標準的な Gate | `/condition Tests green -> Build release` |
+| `/if <条件> -> <ステップ>` | `/condition` の同義語 | `/if Review complete -> Merge` |
+| `/when <条件> -> <ステップ>` | 条件が発生し次第実行 | `/when Export finished -> Verify report` |
+| `/if-only <条件> -> <ステップ>` | 満たされた場合のみ実行（それ以外は一切実行しない） | `/if-only Backup proven -> Delete legacy data` |
+| `/after <期間> -> <ステップ>` | 設定時からの時間オフセット | `/after 30 minutes -> Check status` |
+| `/and` | リンクされたすべての条件が成立する必要がある | `/if Tests green /and Review present -> Merge` |
+| `/or` | 少なくとも1つの条件が成立すれば十分 | `/if Approval present /or Emergency rule active -> Start` |
 
-Nummerierte Bedingungen wie `/condition 1 ...` und `/condition 2 ...` verwenden, wenn ein
-Prompt mehrere Gates enthält. Bei gemischtem `/and` und `/or` keine stillschweigende
-Operatorrangfolge erfinden: Klammern oder nummerierte Teilbedingungen verwenden. Bei
-weiterhin mehrdeutiger Bedeutung nachfragen, bevor ein riskanter Schritt freigegeben wird.
+プロンプトに複数の Gate が含まれる場合は、`/condition 1 ...` や `/condition 2 ...` のように番号付き条件を使用します。`/and` と `/or` が混在する場合は、暗黙の演算子優先順位を創作せず、かっこや番号付きサブ条件を使用します。意味が曖昧なままの場合は、リスクのあるステップをリリースする前に確認してください。
 
-`/if-only` als Verbot behandeln. Kann die Bedingung nicht belegt werden, den Schritt nicht
-ausführen. Bei unklarer Formulierung und irreversiblen Folgen die strengere Lesart wählen.
+`/if-only` は禁止として扱います。条件が立証できない場合は、そのステップを実行しないでください。表現が曖昧で不可逆な結果を招く場合は、より厳格な解釈を選択してください。
 
-## Ablauf
+## 流程
 
-### 1. Bedingung normalisieren
+### 1. 条件の正規化
 
-Die Eingabe in einen prüfbaren Satz übersetzen. Relative Zeiten beim Setzen in einen absoluten
-Zeitpunkt mit Zeitzone umrechnen.
+入力を検証可能な文章に変換します。設定時の相対時間をタイムゾーン付きの絶対タイムスタンプに変換します。
 
-| Eingabe | Normalisierte Bedingung | Belegklasse |
+| 入力 | 正規化された条件 | 証拠クラス |
 | --- | --- | --- |
-| `time 06:00` | Systemzeit ist mindestens 06:00 in der vereinbarten Zeitzone | Uhr-/Zeitwerkzeug |
-| `after 2 hours` | Systemzeit ist mindestens Setzzeitpunkt plus zwei Stunden | Uhr-/Zeitwerkzeug |
-| `wenn Worker A fertig ist` | Abnahmeartefakt oder Taskstatus von A zeigt Abschluss | Task-/Dateiwerkzeug |
-| `wenn Tests grün sind` | Vorgeschriebener Testlauf endet erfolgreich | Prozess-/Testwerkzeug |
-| `nach dem Push` | Ziel-Remote enthält den vorgesehenen Commit | Versionskontrollwerkzeug |
-| `wenn der User zustimmt` | Explizite Zustimmung liegt in der Konversation vor | Nutzereingabe |
+| `time 06:00` | システム時刻が合意されたタイムゾーンで少なくとも 06:00 である | 時計/時間ツール |
+| `after 2 hours` | システム時刻が設定時刻プラス2時間以上である | 時計/時間ツール |
+| `wenn Worker A fertig ist` | A の受入成果物またはタスクステータスが完了を示している | タスク/ファイルツール |
+| `wenn Tests grün sind` | 所定のテスト実行が正常に終了する | プロセス/テストツール |
+| `nach dem Push` | ターゲットリモートに想定されるコミットが含まれている | バージョン管理ツール |
+| `wenn der User zustimmt` | 会話内に明示的な同意が存在する | ユーザー入力 |
 
-Ist kein objektiver Belegweg erkennbar, das offen benennen. Kein Gate so formulieren, dass es
-nur durch Vermutung geschlossen werden kann.
+客観的な立証ルートが認識できない場合は、それを明確に述べてください。推測によってしか閉じられないような Gate を構築してはなりません。
 
-### 2. Gate-Zustand festhalten
+### 2. Gate状態の記録
 
-Wenn ein persistenter Gate-, Task- oder Memory-Store verfügbar ist, dort mindestens diese
-Felder speichern:
+永続的な Gate、タスク、またはメモリストアが利用可能な場合は、少なくとも以下のフィールドを保存します：
 
 ```text
 id
@@ -102,66 +86,53 @@ created_at
 evidence
 ```
 
-Existiert kein persistenter Store, den Zustand sichtbar im aktuellen Goal, Taskplan oder
-Übergabedokument führen. Nur dann behaupten, dass ein Gate Sessions überlebt, wenn der
-verwendete Speicher tatsächlich dauerhaft ist.
+永続ストアが存在しない場合は、現在の Goal、タスク計画、または引き継ぎ文書内に状態を可視化して管理します。使用するストレージが実際に永続的である場合にのみ、Gate がセッションを越えて維持されると主張してください。
 
-Ein vorhandener Runtime-Adapter darf andere Befehlsnamen verwenden. Funktional braucht er:
-`open`, `list`, `meet` und `drop` oder gleichwertige Operationen.
+既存のランタイムアダプターは異なるコマンド名を使用しても構いません。機能的には `open`、`list`、`meet`、`drop` または同等の操作が必要です。
 
-### 3. Arbeit umsortieren
+### 3. 作業の並べ替え
 
-Ein offenes Gate blockiert nicht den gesamten Auftrag. Alle unabhängigen Schritte ausführen
-und vor dem nächsten abhängigen Schritt den Gate-Zustand erneut prüfen.
+オープン状態の Gate はタスク全体をブロックしません。すべての独立したステップを実行し、次の依存ステップに進む前に Gate 状態を再確認します。
 
-Nicht aktiv in kurzen Agentenschleifen pollen. Für längere Wartezeiten einen Scheduler,
-Hintergrundjob oder ein Ereignis verwenden, das bei Eintritt einmalig meldet. Nach dem
-Wecksignal die eigentliche Bedingung trotzdem erneut mit dem vorgesehenen Werkzeug belegen.
+短いエージェントループ内で能動的なポーリングを行わないでください。待機時間が長い場合は、スケジューラー、バックグラウンドジョブ、または発生時に一度だけ通知するイベントを使用します。ウェイクアップ信号の受信後も、指定されたツールで実際の条件を再度立証してください。
 
-### 4. Streng prüfen und schließen
+### 4. 厳密な検証とクローズ
 
-Erst die Werkzeugabfrage ausführen, dann das Gate mit konkreter Evidenz schließen. Geeignete
-Belege sind zum Beispiel:
+まずツールクエリを実行し、次に具体的なエビデンスをもって Gate を閉じます。適切な証拠の例：
 
-- Zeit: gemessener Zeitstempel mit Zeitzone,
-- Datei: Pfad, Metadaten oder Hash des erwarteten Artefakts,
-- Tests: ausgeführter Befehl, Exit-Code und relevante Zusammenfassung,
-- Repository: Branch, Commit-ID und Remote-Abgleich,
-- Prozess oder Task: stabile ID und gemessener Endstatus,
-- Zustimmung: eindeutige Nutzerantwort im aktuellen Kontext.
+- 時間：タイムゾーン付きの計測されたタイムスタンプ、
+- ファイル：期待される成果物のパス、メタデータ、またはハッシュ、
+- テスト：実行されたコマンド、終了コード、および関連概要、
+- リポジトリ：ブランチ、コミット ID、およびリモート比較、
+- プロセスまたはタスク：安定した ID と計測された最終ステータス、
+- 同意：現在の文脈における明確なユーザーの返答。
 
-Eine Schätzung, ein erwarteter Zustand oder die bloße Behauptung eines anderen Workers genügt
-nicht, wenn ein unabhängiger Beleg verfügbar sein sollte.
+独立した証拠が利用可能であるべき場合、見積もり、予測状態、または他の Worker の単なる主張だけでは不十分です。
 
-Ist ein Gate durch Auftragsänderung hinfällig, es mit Begründung als `dropped` markieren. Bei
-`/or` die nicht mehr benötigten Alternativen ebenfalls schließen oder verwerfen, damit keine
-Zombie-Gates verbleiben.
+タスクの変更により Gate が不要になった場合は、理由を添えて `dropped` とマークします。`/or` の場合、ゾンビ Gate が残らないように、不要になった代替案もクローズまたは破棄します。
 
-### 5. Eskalieren
+### 5. エスカレーション
 
-Wenn alle unabhängigen Schritte erledigt sind:
+すべての独立したステップが完了したら：
 
-1. prüfen, ob die blockierende Vorarbeit innerhalb des Auftrags aktiv erledigt werden kann,
-2. bei reiner Wartebedingung einen passenden Scheduler oder Hintergrundjob verwenden,
-3. bei Nutzerentscheidung oder externer Abhängigkeit mit offenem Gate und klarem Zwischenstand
-   übergeben.
+1. ブロックしている前処理がタスク内で能動的に完了できるか確認する、
+2. 純粋な待機条件の場合は、適切なスケジューラーやバックグラウンドジョブを使用する、
+3. ユーザーの決定や外部依存関係の場合は、オープンな Gate と明確な中間ステータスを添えて引き継ぐ。
 
-Keine zusätzliche Berechtigung aus einer Bedingung ableiten. Ein erfülltes Gate ändert nur die
-Reihenfolge; es erweitert nicht den autorisierten Umfang des Auftrags.
+条件から追加の権限を導き出さないでください。満たされた Gate は順序を変更するだけであり、タスクの承認されたスコープを拡大するものではありません。
 
-## 使用例と実行モデル & Usage
+## 例と使用方法
 
-### Goal mit Zeitbedingung
+### 時間条件付きの目標
 
 ```text
 Ziel: Daten prüfen und Bericht veröffentlichen.
 /condition time 16:00 Europe/Berlin -> Veröffentlichung starten
 ```
 
-Die Datenprüfung darf vorher stattfinden. Die Veröffentlichung bleibt gesperrt, bis eine
-aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
+データ検証は事前に行うことができます。公開処理は、最新の時間照会で少なくとも 16:00 であることが証明されるまでブロックされたままになります。
 
-### Prompt mit mehreren Bedingungen
+### 複数の条件を持つプロンプト
 
 ```text
 /condition 1 Tests erfolgreich
@@ -169,36 +140,36 @@ aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
 /if condition 1 /and condition 2 -> mergen
 ```
 
-Beide Gates getrennt belegen. Erst danach mergen.
+両方の Gate を個別に立証します。その後でのみマージを行います。
 
-### Verbot statt Verzögerung
+### 遅延ではなく禁止
 
 ```text
 /if-only verifiziertes Backup vorhanden -> alte Dateien löschen
 ```
 
-Ohne belegtes Backup nichts löschen und das offene Verbot im Abschlussbericht nennen.
+検証済みのバックアップがない場合は何も削除せず、オープンな禁止状態を最終レポートに記載します。
 
-## Fallstricke
+## 落とし穴
 
-- Bedingung nur im Fließtext wiederholen, statt sie als Zustand zu führen.
-- Ein gesamtes Goal pausieren, obwohl nur ein Teilschritt blockiert ist.
-- Relative Zeit ohne Setzzeitpunkt und Zeitzone speichern.
-- Werkzeugbeleg durch Annahme oder Selbstauskunft ersetzen.
-- `/if-only` wie ein bloßes Warten behandeln.
-- Nach `/or` nicht mehr benötigte Alternativ-Gates offen lassen.
-- Anbieter-, Modell-, Benutzer- oder Hostnamen in die allgemeine Mechanik einbauen.
-- Einen lokalen Runtime-Pfad als Voraussetzung für die Sprache selbst behandeln.
+- 条件を状態として管理せず、散文テキスト内でのみ繰り返す。
+- 1つのサブステップのみがブロックされているにもかかわらず、Goal 全体を停止する。
+- 設定時のタイムスタンプやタイムゾーンなしで相対時間を保存する。
+- ツールの証拠を推測や自己申告に置き換える。
+- `/if-only` を単なる待機として扱う。
+- `/or` の後、不要になった代替 Gate をオープンにしたままにする。
+- ベンダー名、モデル名、ユーザー名、ホスト名を共通のメカニズムにハードコードする。
+- ローカルのランタイムパスを言語自体の前提条件として扱う。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-28)
 
-- Anbieter-, benutzer- und systemneutral für gemeinsame Skill-Runtimes formuliert.
-- Nutzung in Goals und Prompts explizit gemacht.
-- Runtime als austauschbaren Adapter beschrieben; feste lokale Pfade und Modellnamen entfernt.
-- Mehrdeutige `/and`-/`/or`-Verknüpfungen, dauerhafte Zustände und Autorisierungsgrenzen geklärt.
+- 共有スキルランタイム向けに、ベンダー、ユーザー、システムに依存しない表現に改定。
+- Goal やプロンプトでの使用方法を明示化。
+- ランタイムを交換可能なアダプターとして記述し、固定されたローカルパスやモデル名を削除。
+- 曖昧な `/and`/`/or` の結合、永続的な状態、および認可境界を明確化。
 
 ### 1.0.0 (2026-07-25)
 
-- Erste Fassung mit `/condition`, `/if`, `/if-only`, `/when`, `/after`, `/and` und `/or`.
+- `/condition`、`/if`、`/if-only`、`/when`、`/after`、`/and`、`/or` を備えた初期バージョン。

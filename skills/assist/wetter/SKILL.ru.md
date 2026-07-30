@@ -5,7 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [Русский] Навык агента для wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
+description: Отвечает на вопросы о погоде для указанного места или координат через wttr.in (бесплатно, без API-ключа). Текущая погода + прогноз на 3 дня. Местоположение берется из запроса пользователя или настроек; опциональное краткосрочное кэширование.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,79 +15,74 @@ tags: [wetter, wttr, vorschau, assist]
 language: ru
 status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
-provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `wetter`.
+> **Русский** — Официальная русская версия `wetter`.
 
 
+# Погода (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Быстрая информация о погоде без API-ключей для повседневного использования.
 
+## Обзор и назначение
 
-# Weather (English)
+Отвечает на вопросы вида «Какая будет погода?» без API-ключа (источник данных: wttr.in).
+Предоставляет текущую погоду (температура, ощущаемая температура, ветер, влажность, УФ-индекс), а также
+компактный прогноз на 3 дня. **Нейтральность к пользователю:** в коде нет фиксированного местоположения — оно
+берется из запроса или из `assist/prefs.json` (`wetter_default_location`),
+который LLM заполняет интерактивно с пользователем.
 
-Fast, key-free weather information for everyday use.
+## Триггеры
 
-## Общий обзор и назначение & Purpose
-
-Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
-Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
-compact 3-day forecast. **User-neutral:** no fixed location in the code — the location
-comes from the request or from `assist/prefs.json` (`wetter_default_location`),
-which the LLM fills in interactively with the user.
-
-## Triggers
-
-| User input | Action |
+| Ввод пользователя | Действие |
 |---|---|
-| "Weather for Potsdam?" / "What will the weather be like in Hamburg?" | `wetter_core.py "<location>"` |
-| "Weather tomorrow?" (without location) | `wetter_core.py --default` (location from prefs) |
-| "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
-| Coordinates known | `wetter_core.py <lat> <lon>` |
+| «Погода в Потсдаме?» / «Какая погода будет в Гамбурге?» | `wetter_core.py "<location>"` |
+| «Погода на завтра?» (без указания местоположения) | `wetter_core.py --default` (местоположение из prefs) |
+| «Моё местоположение по умолчанию для погоды — Потсдам» | `wetter_core.py --set-default "Potsdam"` |
+| Известны координаты | `wetter_core.py <lat> <lon>` |
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
 ```
-1. Determine location: from request; else prefs.json (wetter_default_location);
-   else ask user interactively + optionally save as default.
-2. Query wetter_core.py (wttr.in, 2 attempts, 30-min cache).
-3. Present readable weather text + 3-day forecast.
+1. Определение местоположения: из запроса; иначе из prefs.json (wetter_default_location);
+   иначе интерактивный опрос пользователя + опциональное сохранение по умолчанию.
+2. Запрос к wetter_core.py (wttr.in, 2 попытки, 30-мин кэш).
+3. Вывод понятного текста о погоде + прогноз на 3 дня.
 ```
 
-## CLI Entry Point (wetter_core.py)
+## Точка входа CLI (wetter_core.py)
 
 ```bash
-python wetter_core.py "Potsdam"          # location
-python wetter_core.py 52.6789 13.5878   # coordinates
-python wetter_core.py --default         # location from prefs.json
+python wetter_core.py "Potsdam"          # местоположение
+python wetter_core.py 52.6789 13.5878   # координаты
+python wetter_core.py --default         # местоположение из prefs.json
 python wetter_core.py --set-default "Potsdam"
 ```
 
-## Store (optional)
+## Хранилище (опционально)
 
-- **No mandatory store.** Optional short cache `assist/wetter/.cache.json`
-  (TTL 30 min, best-effort) — avoids repeated network calls.
-- Location preference in `assist/prefs.json` (`wetter_default_location`).
+- **Обязательное хранилище отсутствует.** Опциональный короткий кэш `assist/wetter/.cache.json`
+  (TTL 30 мин, best-effort) — предотвращает повторные сетевые запросы.
+- Настройка местоположения в `assist/prefs.json` (`wetter_default_location`).
 
-## Attitude
+## Подход
 
-We use wttr.in as the key-free default source, but are open to other weather
-backends (e.g. DWD/OpenWeather) if the user prefers them.
+Мы используем wttr.in в качестве источника по умолчанию без ключей, но открыты для других бэкендов погоды (например, DWD/OpenWeather), если пользователь предпочитает их.
 
-## Privacy
+## Конфиденциальность
 
-- Only the location name/coordinates go to wttr.in (required for the query).
-- No telemetry, no account. Cache + preference stay local.
+- На wttr.in отправляются только название местоположения или координаты (необходимо для запроса).
+- Без телеметрии, без аккаунта. Кэш и настройки остаются локально.
 
-## Related Resources
+## Связанные ресурсы
 
-- `assist/AGENTS.md` — Umbrella router
-- `assist/reiseroute/` — uses weather for travel planning (planned)
+- `assist/AGENTS.md` — Главный роутер
+- `assist/reiseroute/` — использует погоду для планирования поездок (запланировано)
 
-## Журнал изменений
+## История изменений
 
 ### 0.1.0 (2026-06-22)
-- Initial version. Ported from BACH `hub/_services/weather/weather_service.py` (MIT).
-- Extended: location name support (not just coordinates), 3-day forecast,
-  optional cache, prefs-based default location. User-neutral.
+- Начальная версия. Перенесено из BACH `hub/_services/weather/weather_service.py` (MIT).
+- Расширено: поддержка названий мест (не только координат), прогноз на 3 дня,
+  опциональный кэш, местоположение по умолчанию на основе настроек. Нейтральность к пользователю.

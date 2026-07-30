@@ -1,150 +1,97 @@
 ---
 language: zh
+description: 挖掘创意，对照历史记录过滤，并深入探索其中一个直至完成。用于解决复杂问题的 5 阶段工作流（A-E）。
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `idea-mining`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
+> **中文** — `idea-mining` 官方中文版本。
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
+# Idea-Mining — 挖掘创意、过滤、执行到底
 
-## 概述与执行目标 & Purpose
+## 概述与目的
 
-Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
-Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
-Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
-(ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
-substanziell explorieren.
+面对复杂问题时，构思很少因缺乏想法而失败，而是由于三件事：想法没有被**记录**下來，没有对照**已尝试过的内容**进行核对（导致重复陷入相同的死胡同），以及没有一个被坚持不懈地**跟踪到底**。本工作流严格将这三个阶段分开：首先发散挖掘（不作评估），然后过滤（对照项目文档），最后实质性地深入探索一个想法。
 
-Herkunft: destilliert aus einem produktiven Forschungs-Automations-Lauf über offene
-mathematische Probleme; funktioniert genauso für Architektur-, Design- und Konzeptblockaden.
+来源：提炼自针对开放数学问题的产出性研究自动化运行；同样适用于架构、设计和概念瓶颈。
 
-## Phase A — Ideenspeicher füllen (divergent, ohne Bewertung)
+## 阶段 A — 填充想法库（发散，不作评估）
 
-Alle Fundstücke in eine Datei `IDEENSPEICHER.md` im Projektordner schreiben (Stichworte +
-2–3 Sätze, Quelle/Auslöser notieren). Die acht Techniken nacheinander durchgehen — sie
-zielen auf unterschiedliche Assoziationsräume, deshalb bei wirklich festgefahrenen
-Problemen keine überspringen (bei leichteren Blockaden oder knapper Zeit genügt eine
-begründete Teilmenge, mindestens aber eine weiche Technik aus 3–5 plus die Recherche):
+将所有发现写入项目文件夹中的 `IDEENSPEICHER.md` 文件（关键字 + 2-3 句话，记录来源/触发因素）。依次执行八种技术——它们针对不同的联想空间，因此对于真正卡住的问题，不要跳过任何一个（对于较轻的阻碍或紧迫的时间，合理的子集就足够了，但至少包含 3-5 中的一种软技术加上研究）：
 
-1. **Wiedererkennung:** Kommt mir das bekannt vor? Habe ich diese Struktur schon einmal
-   in anderem Kontext gesehen?
-2. **Fern-Disziplin:** Gibt es ein ähnliches Problem/eine ähnliche Formel in einer weit
-   entfernten Disziplin (Physik↔Ökonomie, Biologie↔Informatik, …)? Wo genau liegt die
-   Verbindung?
-3. **Alltags-Allegorie:** Das Problem in einer naturnahen Allegorie erzählen (Wellen,
-   Sand, Strömung, Wachstum …). Wirksam: die Allegorie von einem **unbelasteten
-   Subagenten** erfinden lassen und dann schauen, wohin sie führt — die eigene Sicht ist
-   vom Problem schon deformiert.
-4. **Störgefühl / Frosch→Prinz:** Was stört mich am aktuellen Stand, was finde ich
-   hässlich? Was müsste sich ändern, damit ich es plötzlich schön fände? Ästhetisches
-   Unbehagen zeigt oft auf die falsch gewählte Darstellung.
-5. **Märchen-Reframing:** Das Problem als Märchen erzählen: Wer ist der Held, wer die
-   Bösewichte, welche Gefahren lauern, was könnte dem Helden helfen? Die Rollenzuweisung
-   erzwingt eine Kausalstruktur, die im Formalismus unsichtbar bleibt.
-6. **Recherche:** Web, Fachdatenbanken, Preprint-Server, Foren (Reddit/ResearchGate/GitHub)
-   nach neuen Veröffentlichungen, Scripts, Ansätzen durchsuchen. Relevante Quellen in einen
-   Ordner `_sources/` laden und auf Innovationen lesen — bei Preprints kritisch bleiben.
-7. **Geschwisterprojekte:** Verwandte eigene Projekte auf rücktransferierbare Lösungsideen
-   prüfen (dort gelöste Teilprobleme, dort gebaute Werkzeuge).
-8. **Bestandsquerlauf:** Den gesamten eigenen Projektbestand (Pipeline) auf Ansätze
-   durchgehen, die auf DIESES Problem passen könnten.
+1. **识别：** 这看起来熟悉吗？我以前在其他语境中见过这种结构吗？
+2. **遥远学科：** 在遥远的学科（物理↔经济、生物↔计算机科学……）中是否存在类似的问题/公式？连接点究竟在哪里？
+3. **日常寓言：** 用贴近自然的寓言讲述问题（波浪、沙子、水流、生长……）。有效方法：让一个**无偏见的中立子智能体**构思寓言，然后看它引向何方——你自己的视角已经被问题所扭曲。
+4. **不适感 / 青蛙→王子：** 我对现状有什么不满，我觉得什么很丑陋？需要改变什么才能让我突然觉得它很美？审美上的不适往往指向选择不当的表示方法。
+5. **童话重构：** 把问题当成童话故事来讲：谁是英雄，谁是反派，潜伏着什么危险，什么能帮助英雄？角色分配强制建立了一种在形式主义中不可见的因果结构。
+6. **研究：** 在网络、专业数据库、预印本服务器、论坛（Reddit/ResearchGate/GitHub）中搜索新发表的文章、脚本和方法。将相关来源加载到 `_sources/` 文件夹中并阅读以获取创新点——对预印本保持批判态度。
+7. **兄弟项目：** 检查相关的个人/内部项目，寻找可反向迁移的解决方案想法（那里解决的子问题、那里构建的工具）。
+8. **库存横向扫描：** 审查整个个人项目库存（流水线），寻找可能适合“这个问题”的方法。
 
-## Phase B — Filter (gegen bereits Versuchtes)
+## 阶段 B — 过滤（对照已尝试的内容）
 
-Den Ideenspeicher gegen die Projektdokumentation abgleichen: Beweisnotizen, Proof-Notes,
-Entscheidungs-Logs, TODO/DONE, frühere Ideenspeicher. **Eliminiert wird, was dokumentiert
-bereits versucht und abgeschlossen ist** — nicht, was nur „unwahrscheinlich klingt"
-(Bewertung nach Attraktivität kommt erst in Phase C). Überlebende nach
-`IDEENSPEICHER_FILTERED.md`.
+将想法库与项目文档进行核对：证明笔记、决策日志、TODO/DONE、以前的想法库。**消除已记录为已尝试并完成的内容**——而不是仅仅“听起来不太可能”的内容（按吸引力评估仅在阶段 C 进行）。将幸存的想法保存到 `IDEENSPEICHER_FILTERED.md`。
 
-Voraussetzung ist eine gepflegte Versuchs-Dokumentation — existiert keine, ist der erste
-Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
+前提条件是维护良好的实验文档——如果没有，第一步就是创建它（否则未来的每次运行都会产生重复劳动）。
 
-## Phase C — Wählen und durchziehen
+## 阶段 C — 选择并执行
 
-1. Ein bis drei Ideen aus dem Filtrat kurz anexplorieren (je ein Absatz: was wäre der
-   erste konkrete Schritt, was das Erfolgssignal?).
-2. **Eine** wählen — die mit der stärksten Anziehung. Attraktion ist hier ein legitimes
-   Kriterium: Bei schweren Problemen trägt nur eine Idee, der man nachgehen *will*.
-3. Die Wahl bis zum Ende oder zumindest substanziell weiterführen — nicht nach dem ersten
-   Hindernis zur nächsten Idee springen (das wäre Phase-A-Verhalten in Phase C).
+1. 简要探索过滤结果中的一到三个想法（各一段：第一个具体步骤是什么，成功的信号是什么？）。
+2. 选择**一个**——吸引力最强的那一个。吸引力在这里是一个合理的标准：对于难题，只有你*想要*追寻的想法才能支撑你走下去。
+3. 将选择贯彻到底或至少在实质上推向前进——遇到第一个障碍时不要跳到下一个想法（那将是在阶段 C 中做出阶段 A 的行为）。
 
-## Phase D — Dokumentieren
+## 阶段 D — 记录
 
-- Erkenntnisse in die Projektdokumentation (Beweisnotiz, Entscheidungs-Log, ADR) —
-  **auch die Fehlschläge**, sie sind der Filter für den nächsten Lauf.
-- Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
-- Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
+- 将心得录入项目文档（证明笔记、决策日志、ADR）——**包括失败的尝试**，它们构成了下一次运行的过滤器。
+- 将未解决的后续想法放回 `IDEENSPEICHER.md` 或 TODO 中。
+- 简短报告：已挖掘（数量） | 已过滤（幸存） | 已探索 | 结果 | 下一步。
 
-## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+## 阶段 E — 播种（可选的向外迁移）
 
-Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
-Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
-kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+技术 7 从兄弟项目中引入想法——阶段 E 则反转方向：如果探索产生了可迁移的成果（方法、工具、解决方案模式），简要审查自己的项目库存：这会对谁有所帮助？
 
-- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
-  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
-  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
-- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
-  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+- **定向播种，不要散播：** 最多给 ~3 个接收项目直接提供具体的 TODO 条目（继承什么、位于何处、为何合适）；其他候选项目仅作为自己项目中的优先列表记录。
+- 限制的原因：广泛散播会在许多项目中产生无人接手的模糊任务——三个精确的种子胜过十个弥散的种子。
 
-## Als periodischer Lauf
+## 作为周期性运行
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
-Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
-verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
-Versuchs-Doku sind hier das Gedächtnis.
+该工作流非常适合作为固定项目的循环自动化（创新轮）。为此，与轮换框架（`rotation-check` 技能）结合：注册表防止相同的想法被多次“重新发现”——想法库和实验文档在此充当记忆。
 
-## 使用示例与实践 & Usage
+## 示例与应用
 
 ```text
-Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
+问题：收敛性证明已经在估计步骤上卡了数周。
 
-A) Schürfen → IDEENSPEICHER.md: u. a. (2) ähnliche Struktur in der Warteschlangen-
-   theorie?; (3) Subagent-Allegorie „Sand rieselt durch immer feinere Siebe" →
-   Idee: Abschätzung stufenweise statt global; (6) Preprint von 2026 mit neuem
-   Lemma, nach _sources/ geladen; (7) Nachbarprojekt hat ein numerisches
-   Prüfscript, das sich rücktransferieren lässt.
-B) Filter gegen BEWEISNOTIZ.md: „globale Abschätzung verschärfen" wurde 2× versucht
-   und dokumentiert verworfen → raus. 3 Ideen überleben → IDEENSPEICHER_FILTERED.md.
-C) Prime-Wahl: die Sieb-Idee (stärkste Anziehung) — bis zu einem Teilresultat
-   durchgezogen.
-D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
+A) 挖掘 → IDEENSPEICHER.md：例如 (2) 排队论中是否有类似结构？；
+   (3) 子智能体寓言“沙子流过越来越细的筛子” →
+   想法：分步估计而不是全局估计；(6) 2026 年带有新引理的预印本，下载到 _sources/；
+   (7) 邻近项目有一个可反向迁移的数值检查脚本。
+B) 对照 BEWEISNOTIZ.md 进行过滤：“收紧全局估计”已尝试 2 次并被记录丢弃 → 排除。
+   3 个想法幸存 → IDEENSPEICHER_FILTERED.md。
+C) 首选：筛子想法（吸引力最强） — 贯彻执行直至取得部分结果。
+D) 更新 BEWEISNOTIZ.md（包括想法 2 的失败），简短报告。
 ```
 
-## Red Flags
+## 警告信号（Red Flags）
 
-| Gedanke | Realität |
+| 想法 | 现实 |
 | --- | --- |
-| „Technik 3–5 sind Spielerei" | Die weichen Techniken liefern die Ideen, die Recherche nicht liefern kann — sie adressieren andere Assoziationsräume. |
-| „Ich bewerte schon beim Sammeln" | Bewertung in Phase A tötet die divergente Ausbeute. Erst speichern, dann filtern. |
-| „Der Filter dauert zu lange, ich erinnere mich schon" | Gedächtnis glättet Fehlversuche — nur die Doku zählt. |
-| „Idee klemmt, ich nehme die nächste" | In Phase C wird durchgezogen; Springen zurück nach A nur mit dokumentiertem Grund. |
+| “技术 3-5 只是在玩闹” | 软技术提供了研究无法提供的想法——它们针对不同的联想空间。 |
+| “我在收集时就在进行评估” | 在阶段 A 进行评估会破坏发散产出。先保存，后过滤。 |
+| “过滤花费太长时间，我凭记忆就行” | 记忆会抹平失败的尝试——只有文档才算数。 |
+| “想法卡住了，我换下一个” | 在阶段 C 中要坚持到底；只有在有记录理由的情况下才能跳回阶段 A。 |
 
-## Verwandte Skills
+## 相关技能
 
-- `brainstorm` — breite Kreativmethoden (SCAMPER, Six Hats) ohne Filter-/Explorations-Pipeline.
-- `think` / `decide` — Analyse und Auswahlentscheidung, nutzbar innerhalb Phase C.
-- `rotation-check` — Gerüst für den periodischen Einsatz.
-- `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
+- `brainstorm` — 广泛的创意方法（SCAMPER, Six Hats），没有过滤/探索流水线。
+- `think` / `decide` — 分析和选择决策，可在阶段 C 内使用。
+- `rotation-check` — 周期性部署的框架。
+- `swarm-operations` — 用于技术 3 和并行探索的无偏见子智能体。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.1.0 (2026-07-03)
-- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
-  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
-  cross-project-transfer-Skill (Dedup-Entscheid).
+- 阶段 E “播种”：将可迁移成果可选地向外迁移到兄弟项目（最多 ~3 个直接接收方）——集成进来而不是作为独立的 cross-project-transfer 技能（去重决策）。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
-  (Ideenspeicher → Filter → Prime-Wahl → Exploration) und user-neutral verallgemeinert.
+- 初始版本。从 Codex 自动化“ultra-deep-idea-search-single-project”（想法库 → 过滤 → 首选 → 探索）中抽象出来，并进行了用户中立化泛化。

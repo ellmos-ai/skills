@@ -6,7 +6,6 @@ author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
 description: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -20,17 +19,14 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `web-reading`.
 
 
-# Web Reading (Router) (English)
+# Web Reading (Router)
 
 ## Overview & Purpose
 
-Fetch and process web content — but don't pick a tool blindly. This skill
-routes: **purpose first, then the best available tool.** The actual
-implementation lives in the **`web-scraper` module**; this skill only shows
-what is currently present and how to use it.
+Fetch and process web content — but don't pick a tool blindly. This skill routes: **purpose first, then the best available tool.** The actual implementation lives in the **`web-scraper` module**; this skill only shows what is currently present and how to use it.
 
 ## Step 1 — What is needed?
 
@@ -44,8 +40,7 @@ Process a web page?
 
 ## Step 2 — Which tool? (Router)
 
-Use the **first available** tool in each list. "Available" means the
-tool/skill/module is actually present in this session.
+Use the **first available** tool in each list. "Available" means the tool/skill/module is actually present in this session.
 
 ### 2A — Content (main text, clean markdown)
 
@@ -60,8 +55,7 @@ tool/skill/module is actually present in this session.
 
 ### 2B — Structure (links, forms, headers)
 
-`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not
-raw structure). Use instead:
+`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not raw structure). Use instead:
 
 | Priority | Tool | Available when … | Usage |
 |---|---|---|---|
@@ -77,14 +71,13 @@ raw structure). Use instead:
 
 ## Step 3 — Fallback: nothing suitable found?
 
-If **no** tool is available for the purpose, recommend installing the
-**`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
+If **no** tool is available for the purpose, recommend installing the **`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (English)
+# from the local module folder (.MODULES/.TOOLS/web-scraper)
 pip install ".[http,extract]"          # + [screenshot] for screenshots
 
-# then: (English)
+# then:
 web-scraper extract <url>
 ```
 
@@ -114,13 +107,9 @@ def extract_content(url: str) -> str:
 ## Changelog
 
 ### 1.1.0 (2026-07-05)
-- Reworked from a plain protocol into a **router**: detects available web
-  capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module)
-  and routes by purpose (content/structure/screenshot); otherwise recommends the
-  `web-scraper` module.
+- Reworked from a plain protocol into a **router**: detects available web capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module) and routes by purpose (content/structure/screenshot); otherwise recommends the `web-scraper` module.
 - Unified name to `web-reading` (was `webseiten-lesen` in the DE version).
-- Removed BACH CLI examples from the body (standalone-compliant; origin stays
-  documented in the `bach_integration` frontmatter).
+- Removed BACH CLI examples from the body (standalone-compliant; origin stays documented in the `bach_integration` frontmatter).
 
 ### 1.0.0 (2026-03-12)
 - Export from BACH v3.8.0 workflow `webseiten-lesen.md`

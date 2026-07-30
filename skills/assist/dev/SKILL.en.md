@@ -6,7 +6,6 @@ author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
 description: Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store.
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,7 +18,7 @@ dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'pytho
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `dev`.
 
 
 # Dev — Developer Assistant (ATI) (English)
@@ -29,8 +28,7 @@ Gets an overview first, then hands off to the right tools.
 ## Overview & Purpose
 
 Successor to BACH's ATI/entwickler agent. Two tasks:
-1. **Project scan** (headless, stdlib): fast, token-efficient overview of
-   structure, languages and build markers of a project — before expensive analysis runs.
+1. **Project scan** (headless, stdlib): fast, token-efficient overview of structure, languages and build markers of a project — before expensive analysis runs.
 2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
 
 ## Triggers
@@ -44,11 +42,8 @@ Successor to BACH's ATI/entwickler agent. Two tasks:
 
 ## Tool Landscape (Routing Targets)
 
-- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
-  `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
-  pycutter context, Method-Analyzer).
+- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`, `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`, `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit, pycutter context, Method-Analyzer).
 - **FileCommander MCP**: File/directory operations over large trees.
 
 ## CLI Entry Point (dev_core.py)
@@ -58,8 +53,7 @@ python dev_core.py scan .              # current project
 python dev_core.py scan /path/project  # structure + languages + markers
 ```
 
-Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git repo.
+Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go, Java, Roblox (Rojo), Docker, Git repo.
 
 ## Store
 
@@ -67,8 +61,7 @@ No store. Pure scan + routing.
 
 ## Attitude
 
-We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
-to others (e.g. ruff/pylint/eslint) if the user prefers them.
+We recommend CodeCommander/ellmos-code-tools as coding tools, but are open to others (e.g. ruff/pylint/eslint) if the user prefers them.
 
 ## Privacy
 
@@ -83,5 +76,4 @@ to others (e.g. ruff/pylint/eslint) if the user prefers them.
 ## Changelog
 
 ### 0.1.0 (2026-06-22)
-- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
-  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.
+- Initial version. ATI/entwickler successor: headless project scan (stdlib) + routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.

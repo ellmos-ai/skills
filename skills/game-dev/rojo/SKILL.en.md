@@ -6,7 +6,6 @@ author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
 description: Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on "rojo connect not working", "scripts end up in the wrong place in Studio", "how do I map src/ to Studio", "port 34872 in use", "ModuleScript vs Script in Rojo".
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,10 +18,10 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rojo/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `rojo`.
 
 
-# Rojo — Filesystem → Roblox Studio Sync (English)
+# Rojo — Filesystem → Roblox Studio Sync
 
 ## Overview & Purpose
 
@@ -68,12 +67,12 @@ Rojo derives the instance type from the extension. This is the most common sourc
 ## CLI Commands
 
 ```bash
-rojo serve default.project.json     # Live-Sync-Server starten (Standard-Port 34872)
-rojo serve                          # nutzt default.project.json automatisch
-rojo build default.project.json -o game.rbxlx   # einmaliger Build → Place-Datei (XML)
-rojo build default.project.json -o game.rbxl    # Build → Place-Datei (binär)
-rojo plugin install                 # Rojo-Studio-Plugin installieren (einmalig)
-rojo --version                      # installierte Version prüfen
+rojo serve default.project.json     # Start Live Sync server (default port 34872)
+rojo serve                          # uses default.project.json automatically
+rojo build default.project.json -o game.rbxlx   # single build → place file (XML)
+rojo build default.project.json -o game.rbxl    # single build → place file (binary)
+rojo plugin install                 # install Rojo Studio plugin (one-time)
+rojo --version                      # check installed version
 ```
 
 After `rojo serve`: in Studio, open the Rojo plugin → **Connect** (localhost:34872).
@@ -144,8 +143,8 @@ complete Rojo skeleton (project.json, rokit.toml, wally.toml, `src/{shared,serve
 with starter files, KONZEPT stub):
 
 ```bash
-bash scripts/scaffold_roblox_project.sh MeinSpiel        # flaches Mapping (Default)
-bash scripts/scaffold_roblox_project.sh MeinSpiel --nested   # verschachteltes Mapping
+bash scripts/scaffold_roblox_project.sh MeinSpiel        # flat mapping (default)
+bash scripts/scaffold_roblox_project.sh MeinSpiel --nested   # nested mapping
 ```
 
 After that: `cd MeinSpiel && rokit install && rojo serve`.

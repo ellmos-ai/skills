@@ -1,52 +1,64 @@
 ---
+name: genogram-work
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: 家系图（Genogram）工作：识别与反思家庭关系模式。跨世代视角、家系图符号、模式识别以及家庭历史中的资源。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [genogram, systemic-therapy, family-therapy, multigenerational, relationship-patterns]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `genogram-work`.
+> **中文** — `genogram-work` 官方中文版本。
 
 
+# 家系图工作 (Genogram Work)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 识别与反思家庭关系模式：跨世代视角、家系图符号、模式识别与家庭历史中的资源
 
-
-# Genogram Work (English)
-
-> Recognizing and reflecting on family relationship patterns: Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-The genogram is a tool from systemic therapy and family therapy. It was significantly shaped by Murray Bowen (multigenerational approach) and Monica McGoldrick (genogram standardization). It graphically represents family relationships across multiple generations and makes patterns, roles, and dynamics visible.
-
-Evidence: Genogram work is a component of all systemic therapy training programs and is established in clinical practice as a diagnostic and reflective tool (McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012).
-
-**Note:** This is a reflection tool, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参见：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is a Genogram?
+## 背景 (Context)
 
-### Definition
-A genogram is an extended graphical representation of a family tree that captures not only biological descent but also relationship qualities, emotional patterns, conflicts, illnesses, and important life events — typically across three generations.
+家系图（Genogram）是系统心理治疗与家庭治疗中的核心工具。该工具由默里·鲍文（Murray Bowen，多世代家庭系统理论）和莫妮卡·麦高德里克（Monica McGoldrick，家系图标准化）等人发展完善。它以图示化方式展现跨越数代人的家庭关系，使家庭内部的模式、角色和动力机制清晰可见。
 
-### Difference from a Family Tree
+循证基础：家系图工作是所有系统心理治疗培训课程的组成部分，并作为临床实践中成熟的诊断与反思工具（McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012）。
 
-| Family Tree | Genogram |
-|-------------|----------|
-| Who is related to whom? | How do people relate to each other? |
-| Biological descent | Emotional relationship quality |
-| Static facts | Dynamic patterns |
-| Historically oriented | Pattern-oriented |
+**注意：** 本工具仅供反思使用，不能替代专业心理治疗。
+**切勿实施：** 眼动脱敏再加工（EMDR）、延长暴露疗法（PE）、叙事暴露疗法（NET）
 
 ---
 
-## 2. Genogram Symbols (Standard after McGoldrick)
+## 1. 什么是家系图？
 
-### Persons
+### 定义
+家系图是族谱（家谱）的扩展图形化表示，它不仅记录生物学上的血缘亲疏，还记录关系质量、情感模式、冲突、疾病以及重大生活事件——通常涵盖三代人。
+
+### 与族谱（家谱）的区别
+
+| 族谱 / 家谱 | 家系图 (Genogram) |
+|-------------|-------------------|
+| 谁与谁有亲属关系？ | 人与人之间如何相互联系与互动？ |
+| 生理血缘关系 | 情感关系质量 |
+| 静态事实 | 动态模式 |
+| 历史导向 | 模式导向 |
+
+---
+
+## 2. 家系图符号（McGoldrick 标准）
+
+### 人物符号
 
 ```
 Male:         [ ]     (Square)
@@ -56,7 +68,7 @@ Deceased:     [X]     (Symbol with X)
 Index person: [=]     (Double border)
 ```
 
-### Relationships
+### 关系符号
 
 ```
 Marriage/Partnership:   ———————      (solid line)
@@ -71,130 +83,130 @@ Cutoff:                ——||——      (line with double bar)
 
 ---
 
-## 3. How Do I Create a Genogram?
+## 3. 如何绘制家系图？
 
-### Step-by-Step Guide
+### 步骤指南
 
-**Step 1: Gather Data**
-For each person (at least 3 generations):
-- Name, birth year, death year if applicable
-- Occupation, place of residence
-- Special life events (migration, illness, losses)
-- Relationship status
+**步骤 1：收集数据**
+针对每个人（至少 3 代）：
+- 姓名、出生年份、去世年份（如适用）
+- 职业、居住地
+- 特殊生活事件（移民、疾病、丧亲/重大损失）
+- 婚姻 / 关系状况
 
-**Step 2: Draw Basic Structure**
-- Grandparents at top, children at bottom
-- Partners side by side
-- Children from left to right (oldest first)
+**步骤 2：绘制基本结构**
+- 祖父母/外祖父母置于顶部，子女置于底部
+- 伴侣并列放置
+- 子女按从左到右的顺序排列（长子/长女在前）
 
-**Step 3: Add Relationship Qualities**
-- Which relationships are close, which are distant?
-- Where are conflicts?
-- Where are enmeshments or cutoffs?
+**步骤 3：标注关系质量**
+- 哪些关系亲密，哪些关系疏远？
+- 哪里存在冲突？
+- 哪里存在缠绕（纠缠）或情感断绝？
 
-**Step 4: Mark Patterns**
-- Color-code recurring themes
-- E.g.: Addiction (red), mental illness (blue), separation (orange)
-
----
-
-## 4. Recognizing Patterns — Multigenerational Perspective
-
-### Typical Multigenerational Patterns
-
-**Repetition patterns:**
-- Divorces across multiple generations
-- Addictive behavior (alcohol, work, ...)
-- Early parenthood
-- Career choices / role distribution
-
-**Relationship patterns:**
-- Enmeshment (too-close relationship, no boundaries)
-- Cutoff (contact break, exclusion)
-- Triangulation (child drawn into parental conflict)
-- Parentification (child takes on parental role)
-
-**Roles and mandates:**
-- "The strong one" / "The caretaker"
-- "The black sheep"
-- "The peacemaker"
-- Unspoken family mandates ("You should have it better")
-
-### Reflection Questions on Patterns
-- "What themes appear in your family across generations?"
-- "What role have you taken on in your family?"
-- "Are there family rules that were never spoken aloud?"
-- "Who in the family do you resemble most — and in what way?"
-- "Which relationship patterns of your parents do you recognize in yourself?"
+**步骤 4：标记模式**
+- 用颜色代码标注重复出现的主题
+- 例如：成瘾问题（红色）、心理疾病（蓝色）、离异/分居（橙色）
 
 ---
 
-## 5. Resources in the Genogram
+## 4. 识别模式——跨世代视角
 
-### Not Just Problems — Also Strengths
+### 典型跨世代模式
 
-The genogram shows not only burdens but also resources:
-- Who has mastered difficult times?
-- What strengths exist in the family?
-- Who was a positive role model?
-- What values were passed on that are helpful?
+**重复模式：**
+- 跨越数代人的离婚 / 离异
+- 成瘾行为（酗酒、工作狂等）
+- 过早生育 / 早育
+- 职业选择 / 角色分配
 
-### Reflection Questions on Resources
-- "Who in your family admires you? For what?"
-- "From whom did you inherit or learn a strength?"
-- "Which family member handled a crisis particularly well?"
-- "Which positive family traditions would you like to continue?"
-- "What has held your family together?"
+**关系模式：**
+- 纠缠/缠绕关系（过度亲密关系，缺乏边界）
+- 情感断绝（中断联系，排斥）
+- 三角化（儿童被卷入父母冲突中）
+- 亲代化/父母化（儿童承担起父母的角色）
 
----
+**角色与指令：**
+- “坚强者” / “照顾者”
+- “害群之马 / 黑羊”
+- “调解者 / 和平使者”
+- 隐性家庭指令（“你应该过得比我们更好”）
 
-## 6. Exercises
-
-### Exercise 1: My Genogram
-Draw your own genogram (3 generations). Use the symbols from section 2. Note 2-3 keywords for each person.
-
-### Exercise 2: Relationship Qualities
-Add relationship qualities to your genogram:
-- Where are the closest relationships?
-- Where are conflicts?
-- Where is distance or cutoff?
-
-### Exercise 3: Pattern Search
-Look at your finished genogram and answer:
-1. What themes repeat?
-2. What roles do you recognize?
-3. Which patterns do you want to continue — and which not?
-
-### Exercise 4: Resource Genogram
-Mark all positive resources in your genogram: Strengths, talents, mastered crises, positive values.
+### 关于模式的反思提问
+- “在您的家庭中，有哪些主题跨越数代人反复出现？”
+- “您在家庭中扮演了什么角色？”
+- “是否存在从未被明确表达过的家庭隐性规则？”
+- “您最像家庭中的谁——在哪些方面最像？”
+- “您在自己身上识别出了父母的哪些关系模式？”
 
 ---
 
-## Ethics and Boundaries
+## 5. 家系图中的资源
 
-**An AI assistant may:**
-- Explain genogram concepts and symbols
-- Support creating a simple genogram
-- Ask reflection questions about family patterns
-- Point out resources in family history
+### 不仅是问题——更是优势资源
 
-**An AI assistant must NOT:**
-- Make family diagnoses
-- Process family secrets or traumas
-- Conduct family constellations
-- Promote blame toward family members
-- Perform family therapeutic interventions
+家系图不仅展示了负担与困境，还展示了资源：
+- 谁曾经克服过艰难时期？
+- 家族中存在哪些优势与力量？
+- 谁是积极的榜样？
+- 传承了下来哪些有益的价值观？
 
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### 关于资源的反思提问
+- “家庭中有谁欣赏您？因为什么而欣赏您？”
+- “您从谁那里继承或学到了某种优势/力量？”
+- “哪位家庭成员在应对危机时表现得特别出色？”
+- “您希望延续哪些积极的家庭传统？”
+- “是什么力量将您的家庭凝聚在一起？”
 
 ---
 
-## References
+## 6. 练习
+
+### 练习 1：我的家系图
+绘制您自己的家系图（3代人）。使用第 2 节中的符号。为每个人记录 2-3 个关键词。
+
+### 练习 2：关系质量
+在您的家系图中添加关系质量：
+- 哪里的关系最为亲密？
+- 哪里存在冲突？
+- 哪里存在疏远或情感断绝？
+
+### 练习 3：寻找模式
+观察您完成的家系图并回答：
+1. 重复出现的主题有哪些？
+2. 您识别出了哪些角色？
+3. 您希望延续哪些模式——又不希望延续哪些模式？
+
+### 练习 4：资源家系图
+在您的家系图中标记所有积极资源：优势、才干、成功应对的危机、积极价值观。
+
+---
+
+## 伦理与边界
+
+**AI 助手可以：**
+- 解释家系图的概念与符号
+- 支持绘制简单的家系图
+- 就家庭模式提出反思性问题
+- 指出家庭历史中的资源
+
+**AI 助手切勿：**
+- 进行家庭心理诊断
+- 处理家庭秘密或创伤
+- 开展家庭排列 / 家庭系统排列
+- 煽动对家庭成员的责备或怨恨
+- 实施家庭心理治疗干预
+
+**在发生急性危机时，务必转介至：**
+- 988 自杀与危机生命线 (US): 988
+- 危机文本服务 (US): 发送 HOME 至 741741
+- 撒玛利亚会 (UK): 116 123
+- 电话心理咨询 (DE): 0800 111 0 111 / 0800 111 0 222
+- 紧急求助电话: 911 (US) / 112 (EU) / 120 (CN)
+
+---
+
+## 参考文献
 
 - McGoldrick, M., Gerson, R. & Petry, S. (2020). *Genograms: Assessment and Treatment.* Norton.
 - Bowen, M. (1978). *Family Therapy in Clinical Practice.* Jason Aronson.
@@ -202,5 +214,5 @@ Mark all positive resources in your genogram: Strengths, talents, mastered crise
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — Not professional therapy*
+*移植自 BACH v3.8.0 | 独立版本*
+*参考来源: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — 本内容不可替代专业心理治疗*

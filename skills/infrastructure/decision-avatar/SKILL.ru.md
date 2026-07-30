@@ -2,61 +2,41 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `decision-avatar`.
+> **Русский** — Официальная русская версия `decision-avatar`.
 
+# Decision Avatar
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Этот навык не имитирует человека. Он предоставляет проверяемую процедуру для вывода вероятного предпочтения при повторяющихся типах решений на основе подлинных, авторизованных доказательств.
 
+Используйте его только в том случае, если существует локальный профиль решений и его использование разрешено для текущей задачи. Без профиля навык не предоставляет решения по доверенности.
 
-> **English Translation** — Official English version of `decision-avatar`.
+Использование считается авторизованным только тогда, когда задание, действующее правило агента или метаданные профиля явно разрешают текущую цель. Простая доступность файла профиля не является согласием.
 
+## Основные принципы
 
-# Decision Avatar (English)
+1. **Доказательства важнее предположений.** Прямые заявления и подтвержденные решения имеют больший вес, чем выведенные шаблоны.
+2. **Прогноз не является заявлением человека.** Выходные данные агента не должны возвращаться в профиль в качестве новых первичных доказательств.
+3. **Принятие решения — это не выполнение.** Рекомендация может быть определенной, даже если для ее реализации требуется дополнительное полномочие.
+4. **Молчаливое согласие не является обратной связью.** Отсутствие возражений не подтверждает прогноз.
+5. **Профили остаются локальными и приватными.** Не переносить персональные данные, секреты или конфиденциальный контент в общие файлы навыков.
 
-## Общий обзор и назначение & Purpose
+## Портативная модель профиля
 
-Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
-bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
-aus echten, autorisierten Belegen abzuleiten.
+Имена файлов можно свободно настраивать; требуются только следующие роли:
 
-Nutze ihn nur, wenn ein lokales Entscheidungsprofil vorhanden und dessen Nutzung
-für die aktuelle Aufgabe zulässig ist. Ohne Profil liefert der Skill keine
-stellvertretende Entscheidung.
-
-Die Nutzung gilt nur dann als autorisiert, wenn Auftrag, geltende Agentenregel
-oder Profilmetadaten den aktuellen Zweck ausdrücklich erlauben. Bloße
-Erreichbarkeit einer Profildatei ist keine Einwilligung.
-
-## Kernprinzipien
-
-1. **Beleg vor Vermutung.** Direkte Aussagen und bestätigte Entscheidungen wiegen
-   stärker als abgeleitete Muster.
-2. **Vorhersage ist keine Aussage der Person.** Agentenausgaben dürfen nicht als
-   neue Primärbelege in das Profil zurückfließen.
-3. **Entscheiden ist nicht Ausführen.** Eine Empfehlung kann bestimmt sein, obwohl
-   ihre Umsetzung zusätzliche Autorität braucht.
-4. **Stille Zustimmung ist kein Feedback.** Ausbleibender Widerspruch bestätigt
-   keine Vorhersage.
-5. **Profile bleiben lokal und privat.** Keine personenbezogenen Daten, Secrets
-   oder sensiblen Inhalte in geteilte Skill-Dateien übernehmen.
-
-## Portables Profilmodell
-
-Die Dateinamen sind frei konfigurierbar; benötigt werden nur diese Rollen:
-
-| Rolle | Inhalt |
+| Роль | Содержание |
 |---|---|
-| Methodik | Evidenzstufen, Datenschutz und Kalibrierungsregeln |
-| Belegte Präferenzen | direkte Aussagen und bestätigte Entscheidungen |
-| Hypothesen | abgeleitete Regeln mit Konfidenz und Quellen |
-| Aktionen | aufgrund einer Vorhersage getroffene Handlungen |
-| Feedback | Bestätigung, Korrektur oder Ablehnung durch die Person |
+| Методология | Уровни доказательств, конфиденциальность данных и правила калибровки |
+| Подтвержденные предпочтения | Прямые заявления и подтвержденные решения |
+| Гипотезы | Выведенные правила с уровнем уверенности и источниками |
+| Действия | Действия, предпринятые на основе прогноза |
+| Обратная связь | Подтверждение, исправление или отклонение человеком |
 
-Projektbezogene, aktuellere Entscheidungen haben Vorrang vor allgemeinen
-Präferenzen.
+Более свежие решения, относящиеся к проекту, имеют приоритет над общими предпочтениями.
 
-Jeder verwertete Beleg sollte mindestens enthalten:
+Каждое оцениваемое доказательство должно содержать как минимум:
 
 ```text
 Quellen-ID:
@@ -66,59 +46,49 @@ Status: bestätigt/korrigiert/widerrufen
 Gültig bis: <optional>
 ```
 
-Widerrufene, abgelaufene oder außerhalb ihres Gültigkeitsbereichs liegende Belege
-nicht verwenden. Bei widersprüchlichen bestätigten Belegen gewinnt zunächst der
-spezifischere und danach der aktuellere. Bleibt der Konflikt bestehen, Konfidenz
-auf „niedrig“ setzen und eskalieren.
+Не использовать отозванные, истекшие или выходящие за рамки их области применения доказательства. В случае противоречивых подтвержденных доказательств сначала побеждает более специфичное, а затем более свежее. Если конфликт сохраняется, установите уровень уверенности на «низкий» и эскалируйте вопрос.
 
-## Entscheidungsloop
+## Цикл принятия решений
 
-### 0. Lokale Vorrangregel prüfen
+### 0. Проверить локальное правило приоритета
 
-Gibt es für das aktuelle Projekt oder den konkreten Entscheidungstyp eine
-bestätigte Regel, nutze diese und dokumentiere ihre Quelle.
+Если для текущего проекта или конкретного типа решения существует подтвержденное правило, используйте его и задокументируйте его источник.
 
-### 1. Echte Evidenz suchen
+### 1. Поиск реальных доказательств
 
-Nur Belege verwenden, die nach der lokalen Methodik zulässig sind. Aufgabenlisten,
-Agentenprotokolle, frühere Avatar-Antworten und Argumente der aktuellen Sitzung
-sind keine Aussagen der Person.
+Использовать только доказательства, допустимые в соответствии с локальной методологией. Списки задач, журналы агентов, предыдущие ответы аватара и аргументы текущей сессии не являются заявлениями человека.
 
-### 2. Vorhersage bilden
+### 2. Формирование прогноза
 
-Ergebnis stets mit Begründung und einer von drei Stufen ausgeben:
+Всегда выводить результат с обоснованием и одним из трех уровней уверенности:
 
-- **hoch:** mehrere direkte, konsistente und einschlägige Belege,
-- **mittel:** plausibles Muster mit begrenzter oder indirekter Evidenz,
-- **niedrig:** neuartige Lage, widersprüchliche Belege oder kein belastbares
-  Muster.
+- **высокий:** несколько прямых, последовательных и релевантных доказательств,
+- **средний:** правдоподобный шаблон с ограниченными или косвенными доказательствами,
+- **низкий:** новая ситуация, противоречивые доказательства или отсутствие надежного шаблона.
 
-Folgenreiche Entscheidungen sind nicht automatisch „niedrig“. Konfidenz misst
-die Evidenz für die Präferenz, nicht die Reichweite der späteren Ausführung.
+Решения с серьезными последствиями не являются автоматически «низкими». Уверенность измеряет доказанность предпочтения, а не масштаб последующего выполнения.
 
-### 3. Modus trennen
+### 3. Разделение режимов
 
-| Modus | Ergebnis | Seiteneffekt |
+| Режим | Результат | Побочный эффект |
 |---|---|---|
-| Vorhersagen | wahrscheinliche Position + Belege + Konfidenz | keiner |
-| Entscheiden | konkrete Wahl + Begründung + Konfidenz | keiner |
-| Handeln | autorisierte, sichere Umsetzung + Aktionsprotokoll | möglich |
+| Прогнозирование | Вероятная позиция + доказательства + уверенность | Отсутствует |
+| Принятие решения | Конкретный выбор + обоснование + уверенность | Отсутствует |
+| Действие | Авторизованная, безопасная реализация + журнал действий | Возможен |
 
-Im Handlungsmodus gelten zusätzlich die Autoritäts- und Sicherheitsregeln der
-Runtime. Niedrige Konfidenz oder fehlende Ausführungsbefugnis führt zur
-Eskalation, nicht zur stillen Ausführung.
+В режиме действий дополнительно применяются правила полномочий и безопасности среды выполнения. Низкая уверенность или отсутствие полномочий на выполнение приводит к эскалации, а не к молчаливому выполнению.
 
-### 4. Feedback kalibrieren
+### 4. Калибровка обратной связи
 
-Nach echtem Feedback:
+После получения реальной обратной связи:
 
-1. Vorhersage als bestätigt, korrigiert oder abgelehnt markieren.
-2. Optional eine Bewertungsskala erfassen.
-3. Unterschied zwischen Richtungsfehler und Zuschnittfehler festhalten.
-4. Hypothese und Konfidenz anpassen.
-5. Nur echte Rückmeldung in die belegten Präferenzen übernehmen.
+1. Отметить прогноз как подтвержденный, исправленный или отклоненный.
+2. Опционально зафиксировать шкалу оценки.
+3. Зафиксировать разницу между ошибкой направления и ошибкой формулировки/рамки.
+4. Скорректировать гипотезу и уровень уверенности.
+5. Переносить в подтвержденные предпочтения только реальную обратную связь.
 
-## Ausgabeformat
+## Формат вывода
 
 ```text
 Entscheidungstyp:
@@ -131,23 +101,17 @@ Ausführung autorisiert: ja/nein
 Nächster Schritt:
 ```
 
-In Ausgaben nur redigierte Quellen-IDs und die für die Entscheidung notwendige
-Belegzusammenfassung nennen. Keine privaten Aussagen, absoluten Profilpfade oder
-sensiblen Rohdaten wiedergeben.
+В выводе указывать только отредактированные (скрытые) ID источников и резюме доказательств, необходимое для принятия решения. Не воспроизводить приватные заявления, абсолютные пути к профилям или конфиденциальные необработанные данные.
 
-## Grenzen
+## Ограничения
 
-- Keine Diagnostik oder Behauptung über innere Zustände einer Person.
-- Keine Nutzung eines Profils außerhalb seines erlaubten Zwecks.
-- Keine automatische Übernahme von Agentenannahmen als Personenwissen.
-- Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
-  erforderlich wäre.
+- Никакой диагностики и утверждений о внутренних состояниях человека.
+- Никакого использования профиля за пределами его разрешенной цели.
+- Никакого автоматического принятия предположений агента в качестве знаний человека.
+- Никакого выполнения только на основе прогноза, если для этого требуются новые полномочия.
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-07-28)
-- Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer
-  persönlichen Avatar-Konfiguration als eigenständiges, portables Protokoll
-  extrahiert.
-- Autorisierung, Beleglebenszyklus, Konfliktauflösung und redigierte Ausgabe
-  operationalisiert.
+- Извлечены прекогниция обратной связи, калибровка уверенности и разделение происхождения из личной конфигурации аватара в отдельный портативный протокол.
+- Операционализированы авторизация, жизненный цикл доказательств, разрешение конфликтов и отредактированный вывод.

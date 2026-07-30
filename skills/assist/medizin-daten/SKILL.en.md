@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `medizin-daten`.
 
 
 ## Overview & Purpose
@@ -47,7 +47,7 @@ statements — it is a structured notebook for personal health data.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Detect mode**: diagnosis / symptom / examination plan
 2. **Structure input**: date, name, notes, optional ICD-10 code
@@ -59,25 +59,25 @@ statements — it is a structured notebook for personal health data.
 ## CLI Entry Point
 
 ```bash
-# Create diagnosis (English)
+# Create diagnosis (Deutsch)
 python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "note"]
 
-# List diagnoses (English)
+# List diagnoses (Deutsch)
 python medizin_daten_core.py diagnoses
 
-# Record symptom (English)
+# Record symptom (Deutsch)
 python medizin_daten_core.py add-symptom "Headache" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptom history for a name (English)
+# Symptom history for a name (Deutsch)
 python medizin_daten_core.py symptom-history "Headache" [--limit 30]
 
-# Plan examination (English)
+# Plan examination (Deutsch)
 python medizin_daten_core.py add-exam "Blood count" [--date 2026-07-01] [--note "fasting"]
 
-# Upcoming examinations (English)
+# Upcoming examinations (Deutsch)
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 

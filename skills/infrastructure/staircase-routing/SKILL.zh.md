@@ -5,7 +5,10 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [中文] 智能体技能: staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
+description: >
+  独立的导航与路由策略，通过在目录层级结构中向上和向下搜索指示牌文档（CLAUDE.md、AGENTS.md、
+  README.md、RULES.md）以及用户可配置的关键词（通过 staircase-config.json 或 config.json）。
+  亦被称为 Up-and-Down Routing（上下路由）或 Walking Bass Routing（低音步进路由）。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,35 +17,38 @@ category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
 language: zh
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `staircase-routing`.
+> **中文** — `staircase-routing` 官方中文版本。
 
+# Staircase-Routing（上下路由 / Walking Bass 路由）
 
+**Staircase-Routing** 技能（亦称为 *Up-and-Down Routing* 或 *Walking Bass Routing*）为 AI 智能体抽离并独立了目录文档巡检策略。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
-
-The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
-
-When an agent enters a directory or works on a file, it uses this strategy to locate authoritative context, rules, and signpost documents before modifying code or taking action.
-
----
-
-## 1. Signpost Document Standards
-
-By default, Staircase-Routing looks for standard signpost documents:
-- **Global & Project Controls:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
-- **Project Overview & Tasks:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
-- **Custom User Buzzwords:** Configured via `staircase-config.json` or `config.json`.
+当智能体进入某个目录或处理某个文件时，会使用该策略定位权威上下文、规则及指示牌文档，然后再修改代码或采取具体行动。
 
 ---
 
-## 2. Traversal Algorithm
+## 1. 指示牌文档标准
+
+默认情况下，Staircase-Routing 会查找以下标准指示牌文档：
+- **全局与项目控制：** `CLAUDE.md`、`AGENTS.md`、`START.md`、`RULES.md`
+- **项目概述与任务：** `README.md`、`TODO.md`、`NOTIZ.md`、`BEWEISNOTIZ.md`
+- **用户自定义关键词：** 通过 `staircase-config.json` 或 `config.json` 进行配置。
+
+---
+
+## 2. 遍历算法
 
 ```
                            [ Root / Workspace Level ]
@@ -60,24 +66,24 @@ By default, Staircase-Routing looks for standard signpost documents:
                            └────────────────────────┘
 ```
 
-### Step 1: Current Working Directory (CWD) Inspection
-- Inspect the directory of the target file or active working directory.
-- If signpost documents exist, read them immediately.
+### 步骤 1：当前工作目录（CWD）巡检
+- 巡检目标文件所在的目录或当前活动的工作目录。
+- 如果存在指示牌文档，立即进行读取。
 
-### Step 2: Upward Traversal (Staircase Up)
-- If **no** signpost document is found in CWD, move up to the parent directory (`..`).
-- Repeat step-by-step upward until a root signpost document (`CLAUDE.md` or `AGENTS.md`) or the workspace boundary is reached.
-- Read all discovered root signposts to establish global directives and project rules.
+### 步骤 2：向上遍历（Staircase Up）
+- 如果在 CWD 中**未**找到任何指示牌文档，则向上移动至父目录（`..`）。
+- 逐步向上重复此过程，直到到达根指示牌文档（`CLAUDE.md` 或 `AGENTS.md`）或工作区边界。
+- 读取所有发现的根指示牌文档，以确立全局指令与项目规则。
 
-### Step 3: Downward Inspection (Staircase Down)
-- From the established root directory, step downward into child directories relevant to the task.
-- Discover specialized module-level signposts, domain rules, or component configs. Read them.
+### 步骤 3：向下巡检（Staircase Down）
+- 从已确立的根目录开始，向下步进至与当前任务相关的子目录。
+- 发现特定模块级的指示牌文档、领域规则或组件配置，并对其进行读取。
 
 ---
 
-## 3. User-Configurable Buzzwords (`staircase-config.json`)
+## 3. 用户可配置关键词（`staircase-config.json`）
 
-Agents can read a local or global `staircase-config.json` to customize target signposts:
+智能体可以读取本地或全局的 `staircase-config.json` 来自定义目标指示牌：
 
 ```json
 {
@@ -109,6 +115,6 @@ Agents can read a local or global `staircase-config.json` to customize target si
 
 ---
 
-## 4. Integration with `letter-hooker` & Scheduled Tasks
+## 4. 与 `letter-hooker` 及定时任务的集成
 
-`staircase-routing` is embedded as a core preflight bootloader in the **`letter-hooker`** skill and the **`antigravity-kontext-and-workflow-loader-and-divider`** scheduled task, ensuring agents always locate and obey signpost documents before initiating edits.
+`staircase-routing` 作为核心预检引导程序（bootloader）嵌入在 **`letter-hooker`** 技能和 **`antigravity-kontext-and-workflow-loader-and-divider`** 定时任务中，以确保智能体在发起任何修改之前始终能够定位并遵循指示牌文档。

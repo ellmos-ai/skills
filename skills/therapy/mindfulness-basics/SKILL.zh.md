@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: MBSR 正念减压基础、身体扫描与呼吸训练。基于 Jon Kabat-Zinn 的循证正念技术，适用于日常生活。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,197 +15,193 @@ tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `mindfulness-basics`.
+> **中文** — `mindfulness-basics` 官方中文版本。
 
 
+# 正念基础 (Mindfulness Basics)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> MBSR 正念减压基础、身体扫描与日常生活呼吸训练
 
-
-# Mindfulness Basics (English)
-
-> MBSR fundamentals, body scan, and breathing exercises for everyday life
-
-See: [ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景与概述
 
-Mindfulness is the intentional, non-judgmental attention to the present moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979) is the most well-known evidence-based mindfulness program.
+正念（Mindfulness）是指有意识地、不加评判地对当下保持觉察。正念减压疗法（MBSR, Jon Kabat-Zinn 1979）是国际上最为知名且富含循证医学支持的正念干预体系。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. Core Attitudes of Mindfulness (Kabat-Zinn)
-
-| Attitude | Description | Opposite to Avoid |
-|----------|-------------|-------------------|
-| Non-Judging | Observing without evaluating | "That is good/bad" |
-| Patience | Things unfold in their own time | Rushing, forcing |
-| Beginner's Mind | Being open, as if for the first time | Assumptions, expert stance |
-| Trust | In one's own experience and intuition | Relying solely on others |
-| Non-Striving | Simply being, without having to achieve | Performance orientation |
-| Acceptance | Seeing things as they are | Fighting against reality |
-| Letting Go | Allowing experiences to pass | Holding on, clinging |
+**注意：** 本技能仅提供辅助支持，不可替代专业心理治疗。
+**严禁实施：** 眼动脱敏再加工（EMDR）、延长暴露疗法（PE）、叙事暴露疗法（NET）。
 
 ---
 
-## 2. Breathing Exercises
+## 1. 正念的七大核心态度（Kabat-Zinn）
 
-### 2.1 Simple Breath Awareness (5 Minutes)
-
-**Goal:** Anchoring in the present moment, calming the nervous system.
-
-**Instructions:**
-1. Assume a comfortable sitting position (chair, floor, cushion)
-2. Close your eyes or softly lower your gaze
-3. Direct attention to the breath
-4. Notice: Where do I feel the breath? (tip of the nose, chest, abdomen)
-5. Thoughts arise? -> Kindly notice, return to the breath
-6. No goal other than: Being with the breath
-
-**Insight:** Thoughts come and go like clouds — you are the sky behind them.
+| 态度 | 说明 | 应避免的相反状态 |
+|------|------|------------------|
+| 非评判 (Non-Judging) | 纯粹观察而不作好坏评价 | “这是好的/坏的” |
+| 耐心 (Patience) | 尊重事物自身的发展节奏 | 急躁、强求 |
+| 初心 (Beginner's Mind) | 保持开放，如第一次接触般体验 | 预先假设、专家姿态 |
+| 信任 (Trust) | 信任自我体验与内在直觉 | 完全依赖他人 |
+| 无求 (Non-Striving) | 保持安住当下，无需刻意达成某种目标 | 绩优导向、过度追求 |
+| 接纳 (Acceptance) | 坦然面对并接受现实的本来面目 | 抗拒现实 |
+| 放下 (Letting Go) | 顺应经验的流逝，不强行羁留 | 执着、抓握不放 |
 
 ---
 
-### 2.2 4-7-8 Breathing Technique (Calming)
+## 2. 呼吸训练
 
-**Goal:** Activating the parasympathetic nervous system, stress reduction.
+### 2.1 简易呼吸觉察 (5分钟)
 
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 7 seconds
-3. Exhale: 8 seconds (longer than inhaling!)
-4. Repeat: 3-4 cycles
+**目标：** 锚定当下，平息神经系统兴奋。
 
-**When to use:** Before sleep, during acute stress, before difficult situations.
+**指导步骤：**
+1. 采取舒适的坐姿（椅坐、盘腿或垫坐）
+2. 微闭双眼或自然下垂视线
+3. 将注意力聚焦于呼吸
+4. 觉察：在哪个部位最明显感受到呼吸？（鼻尖、胸腔、腹部）
+5. 产生杂念？ -> 友善地觉察杂念，随后将注意力温和地带回呼吸
+6. 无需其他目标，唯有：与呼吸同在
 
----
-
-### 2.3 Box Breathing (Square Breathing)
-
-**Goal:** Balance, concentration (also used by Navy SEALs, elite athletes).
-
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 4 seconds
-3. Exhale: 4 seconds
-4. Hold: 4 seconds
-5. Repeat: 4 cycles
+**洞见：** 思想如云朵般聚散——而你，则是云朵背后的广袤天空。
 
 ---
 
-## 3. Body Scan
+### 2.2 4-7-8 呼吸放松法 (镇静)
 
-**Goal:** Developing body awareness, recognizing and releasing tension.
-**Duration:** 10-30 minutes (shorter version: 5 minutes possible)
+**目标：** 激活副交感神经系统，缓解压力与焦虑。
 
-**Instructions (Short Form):**
+**操作流程：**
+1. 吸气：持续 4 秒
+2. 屏息：持续 7 秒
+3. 呼气：持续 8 秒（呼气时间长于吸气！）
+4. 重复：进行 3-4 个循环
+
+**适用场景：** 睡前准备、急性应激状态、面对艰难情境之前。
+
+---
+
+### 2.3 盒式呼吸 / 正方形呼吸 (Box Breathing)
+
+**目标：** 恢复平衡，提升专注力（亦常用于海军陆战队与顶尖运动员训练）。
+
+**操作流程：**
+1. 吸气：4 秒
+2. 屏息：4 秒
+3. 呼气：4 秒
+4. 屏息：4 秒
+5. 重复：进行 4 个循环
+
+---
+
+## 3. 身体扫描 (Body Scan)
+
+**目标：** 建立身体觉察，识别并释放身体紧张。
+**时长：** 10-30 分钟（亦可使用 5 分钟精简版）
+
+**指导步骤（简易版）：**
 
 ```
-1. Lie on your back or sit comfortably
-2. Close eyes, take 3 deep breaths
-3. Bring attention to the soles of your feet
-   - Notice: Temperature, pressure, contact with the ground
-   - No changing, just observing
-4. Slowly move upward:
-   Feet -> Lower legs -> Knees -> Thighs
-   -> Pelvis -> Abdomen -> Chest -> Shoulders
-   -> Arms -> Hands -> Neck -> Face -> Head
-5. At tension: Breathe into the area, release on exhale
-6. At the end: Perceive the entire body as a whole
-7. Gently return to the room
+1. 采取仰卧位或舒适坐姿
+2. 闭上双眼，进行 3 次深呼吸
+3. 将注意力引导至双脚脚底
+   - 觉察：温度、压力、与地面接触的感觉
+   - 无需改变，仅作观察
+4. 缓慢向上移动觉察焦点：
+   双脚 -> 小腿 -> 膝盖 -> 大腿
+   -> 骨盆 -> 腹部 -> 胸腔 -> 肩部
+   -> 双臂 -> 双手 -> 颈部 -> 面部 -> 头部
+5. 遇到紧张感时：尝试向该区域吸气，在呼气时释放紧张
+6. 结束时：整体感知整个身体的存在
+7. 温和地将意识带回周围环境
 ```
 
-**Documentation afterward:**
-- What did I notice?
-- Where was there tension?
-- How do I feel now compared to before?
+**练习后记录与反馈：**
+- 我观察到了什么？
+- 身体哪些部位存在紧张？
+- 与练习前相比，我现在感受如何？
 
 ---
 
-## 4. STOP Technique (Mini-Mindfulness in Everyday Life)
+## 4. STOP 正念暂停法 (日常微正念)
 
-**S** — **Stop:** Pause whatever you are doing
-**T** — **Take a breath:** Take one deep breath
-**O** — **Observe:** Observe: thoughts, feelings, body sensations
-**P** — **Proceed:** Consciously continue (or decide what to do next)
+**S** — **Stop (暂停)：** 停下当前正在进行的事情
+**T** — **Take a breath (呼吸)：** 进行一次深呼吸
+**O** — **Observe (觉察)：** 观察当下：思想、情绪、身体感受
+**P** — **Proceed (前行)：** 有意识地继续（或决定下一步行动）
 
-**Use:** Brief pause at any time, especially during stress or decisions.
-
----
-
-## 5. Mindfulness in Daily Life (Informal Practice)
-
-No time for formal exercises? Make everyday activities mindful:
-
-| Activity | Mindfulness Focus |
-|----------|------------------|
-| Eating | Consciously notice taste, texture, smell |
-| Walking | Feel each step (ground contact, weight shift) |
-| Brushing teeth | Only do that, nothing else on the side |
-| Doing dishes | Temperature of the water, sounds, movements |
-| Driving | Fully present (no radio, no ruminating) |
-| Waiting | Instead of phone: observe surroundings, breathe |
+**使用时机：** 随时随地短暂暂停，尤其适用于感到压力或需做出决策时。
 
 ---
 
-## 6. MBSR Program Overview (8 Weeks)
+## 5. 日常生活中的正念 (非正式练习)
 
-The complete MBSR program as reference:
+没有时间进行正式练习？可将日常生活活动转化为正念体验：
 
-| Week | Focus |
-|------|-------|
-| 1 | Autopilot vs. mindfulness |
-| 2 | Dealing with obstacles |
-| 3 | Mindfulness in the body (yoga) |
-| 4 | Recognizing stress reactions |
-| 5 | Stressors and reacting vs. responding |
-| 6 | Mindful communication |
-| 7 | Self-care |
-| 8 | Mindfulness in everyday life |
+| 活动 | 正念关注焦点 |
+|------|-------------|
+| 进食 | 专注感知食物的味道、质感与香气 |
+| 行走 | 感受每一步（脚底触地、重心转移） |
+| 刷牙 | 全神贯注于刷牙本身，不心不在焉 |
+| 洗碗 | 感受水温、声音与手部动作 |
+| 驾驶 | 保持高度在场觉察（关闭广播、不反刍思考） |
+| 等待 | 替代看手机：观察周围环境，保持呼吸觉察 |
 
 ---
 
-## Ethics and Boundaries
+## 6. MBSR 8周课程大纲概览
 
-**An AI assistant may:**
-- Explain and guide mindfulness exercises
-- Convey MBSR content (psychoeducation)
-- Guide breathing exercises and body scan
-- Explain and encourage the STOP technique
+完整 MBSR 课程作为参考指引：
 
-**An AI assistant must NOT:**
-- Replace formal MBSR courses
-- Guide mindfulness for trauma patients without professional supervision
-- Therapeutically address dissociation or flashbacks
-- Make medication-related recommendations
+| 周次 | 焦点主题 |
+|------|---------|
+| 1 | 自动导航模式 vs. 正念觉察 |
+| 2 | 应对障碍与抗拒 |
+| 3 | 身体中的正念（正念瑜伽） |
+| 4 | 识别压力反应机制 |
+| 5 | 应激源与“自动反应”vs.“正念回应” |
+| 6 | 正念沟通与人际互动 |
+| 7 | 自我关怀与生活照顾 |
+| 8 | 将正念融入日常生活 |
 
-**Progress tracking:**
-- Mood before/after exercise (0-10 scale)
-- Track regularity (did I practice today?)
-- Observations: Where was attention hard to maintain?
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## 伦理与边界
+
+**AI 助手可以：**
+- 解释并指导正念练习
+- 讲解 MBSR 内容（心理教育）
+- 指导呼吸训练与身体扫描
+- 解释并鼓励使用 STOP 暂停法
+
+**AI 助手严禁：**
+- 替代正式的 MBSR 线下课程
+- 在无专业督导的情况下指导创伤患者练习正念
+- 治疗性地处理解离（dissociation）或闪回（flashbacks）
+- 提供任何涉及精神科药物的建议
+
+**进度追踪：**
+- 练习前后情绪状态评分（0-10 分度量表）
+- 记录练习规律性（今天是否进行了练习？）
+- 觉察观察：在何处注意力较难维持？
+
+**遇到急性危机时，必须始终转介至：**
+- 中国心理危机干预热线：010-82951332 / 400-161-9995
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 紧急救援电话：110/120 (CN) / 911 (US) / 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - Kabat-Zinn, J. (1990). *Full Catastrophe Living: Using the Wisdom of Your Body and Mind to Face Stress, Pain, and Illness.* Delacorte Press.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Kabat-Zinn (1990), MBSR Program — Not professional therapy*
+*移植自 BACH v3.8.0 | 独立版本*
+*参考来源：Kabat-Zinn (1990), MBSR 课程 — 本内容并非专业心理治疗*

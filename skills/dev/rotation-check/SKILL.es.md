@@ -2,132 +2,91 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `rotation-check`.
+> **Español** — Versión oficial en español de `rotation-check`.
 
 
+# Rotation-Check — un objetivo por ejecución, cobertura justa, memoria (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Visión general y propósito
 
+Quien desee revisar periódicamente un pipeline con muchos proyectos (fuentes, estilo, salud, seguridad, traducciones, …), se enfrenta a un problema de distribución: revisar todos los proyectos en cada ejecución es demasiado costoso; sin memoria, cada ejecución revisa lo mismo al azar. El patrón de rotación resuelve ambos problemas: **exactamente un objetivo por ejecución, selección basada en "el que lleva más tiempo sin revisar", registry como memoria.** De este modo, incluso un ritmo infrecuente (diario/semanal) cubre todo el pipeline a lo largo de las semanas, de forma comprobable y sin duplicar trabajo.
 
-> **English Translation** — Official English version of `rotation-check`.
+Demostrado como la columna vertebral de un conjunto consolidado de automatizaciones de producción a través de múltiples pipelines de proyectos.
 
+## Componentes
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
+### 1. Dos archivos por pipeline (crear una sola vez)
 
-## Descripción General y Propósito & Purpose
-
-Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
-Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
-prüfen ist zu teuer; ohne Gedächtnis prüft jeder Lauf zufällig dasselbe. Das Rotations-Muster
-löst beides: **genau ein Ziel pro Lauf, Auswahl nach „am längsten ungeprüft", Registry als
-Gedächtnis.** So deckt auch ein seltener Takt (täglich/wöchentlich) über Wochen die ganze
-Pipeline ab — nachweisbar und ohne Doppelarbeit.
-
-Bewährt als Rückgrat eines gewachsenen Bestands produktiver Automationen über mehrere
-Projekt-Pipelines hinweg.
-
-## Bausteine
-
-### 1. Zwei Dateien pro Pipeline (einmalig anlegen)
-
-| Datei | Inhalt | Charakter |
+| Archivo | Contenido | Carácter |
 | --- | --- | --- |
-| `CHECKED-REGISTRY.md` | eine Kompaktzeile pro Check: Ziel, Datum, Checktyp, Ergebnis, nächster Schritt | Zustandsübersicht — wird VOR jeder Zielauswahl gelesen |
-| `CHECKS-LOG.txt` | kurzer Verlaufseintrag pro Lauf mit Details/Evidenz | Journal — append-only |
+| `CHECKED-REGISTRY.md` | Una línea compacta por revisión: objetivo, fecha, tipo de check, resultado, siguiente paso | Resumen de estado — se lee ANTES de cada selección de objetivo |
+| `CHECKS-LOG.txt` | Entrada de historial corta por ejecución con detalles/evidencia | Diario — solo anexar (append-only) |
 
-Beide liegen im Pipeline-Root (nicht im Einzelprojekt), damit ein Lauf sie mit einem Read
-erfassen kann. Registry-Zeilenformat:
-
-```text
-| <ziel> | <YYYY-MM-DD> | <checktyp> | <ok|befund|übersprungen> | <nächster schritt> |
-```
-
-### 2. Auswahlregel
-
-1. Registry und Log lesen (Pflicht, VOR der Auswahl — sonst Doppelprüfung).
-2. Kandidaten: Ziele, die für DIESEN Checktyp noch nie oder am längsten nicht geprüft wurden.
-3. Ausweichen, wenn das Ziel kürzlich von einem **eng verwandten** Check angefasst wurde
-   (z. B. Zitations-Check direkt nach Quellencheck bringt nichts) oder gerade gesperrt/in
-   Bearbeitung ist (Locks respektieren).
-   **Geschwister-Cooldown:** Laufen mehrere verwandte Checks über dieselbe Zielmenge
-   (z. B. Entwicklung, Bugsuche und Review derselben Pipeline), eine Karenzzeit vereinbaren
-   (Erfahrungswert: ~24 h), in der ein von einem Geschwister-Check bearbeitetes Ziel nicht
-   erneut gewählt wird — verhindert Kollisionen und widersprüchliche Parallel-Änderungen.
-4. Vorziehen außer der Reihe nur mit gutem Grund (z. B. große Überarbeitung seit letztem
-   Check) — den Grund im Log nennen.
-
-### 3. Check durchführen — mit Read-only-Exit
-
-Den eigentlichen Check (frei definierbar: Quellencheck, Style-Check, Security-Audit, …)
-auf das EINE gewählte Ziel anwenden. Zwei gültige Ausgänge:
-
-- **Befund:** beheben was in den Scope passt; Größeres als Folgeaufgabe in die projektlokale
-  TODO/AUFGABEN-Datei eintragen (der Check muss nicht alles selbst lösen).
-- **Nichts zu tun:** kurz dokumentieren und enden. Ein Leerlauf ist ein Ergebnis, kein
-  Scheitern — keinesfalls den Scope ausweiten, um „etwas gefunden zu haben".
-
-### 4. Dokumentieren
-
-- Registry-Zeile ergänzen (kompakt), Log-Eintrag schreiben (Details/Evidenz).
-- **Log-Hygiene:** Werden Registry/Log unübersichtlich (Erfahrungswert: mehrere hundert
-  Zeilen), alten Stand nach `_archiv/` verschieben, frische Datei anlegen, im Kopf auf den
-  Vorgänger verweisen (Pfad + Datum).
-- **Pfad-Drift:** Zeigt ein erwarteter Pfad ins Leere (Ziel verschoben/umbenannt), NICHT neu
-  anlegen — über die maßgebliche Statusdatei/Registry der Pipeline korrigieren und den
-  Fehlpfad in einem Failure-Log festhalten.
-
-### 5. Takt
-
-Frequenz an die Änderungsrate des Geprüften koppeln: Rotations-Checks über stabile Bestände
-laufen gut wöchentlich (ein Ziel pro Lauf ≈ ganze Pipeline pro Quartal bei ~12 Zielen);
-schnelllebige Checks (z. B. auf aktive Arbeit) täglich. Praxiserfahrung: anfangs stündliche
-Checks wurden fast alle auf täglich/wöchentlich reduziert — die Abdeckung blieb, die Kosten
-fielen.
-
-## Prompt-Vorlage (für Scheduler/Automation)
+Ambos se ubican en la raíz del pipeline (no en el proyecto individual) para que una ejecución pueda capturarlos con una sola lectura. Formato de línea en la registry:
 
 ```text
-VORBEREITUNG: Lies <PIPELINE_ROOT>/<POLICY-DOKUMENTE> sowie <REGISTRY> und <LOG>.
-
-AUFGABE: Wähle genau ein Ziel aus <ZIELMENGE>. Bevorzuge Ziele, die für den Check
-"<CHECKTYP>" noch nie oder am längsten nicht geprüft wurden. Wurde ein Ziel kürzlich
-von diesem oder einem eng verwandten Check geprüft oder ist es gesperrt: ausweichen
-oder read-only mit Logeintrag enden.
-
-CHECK: <konkrete Prüf-/Pflegeaufgabe und was bei Befund zu tun ist; Folgearbeiten in
-die projektlokale TODO-Datei>.
-
-Wenn keine Arbeit anfällt: kurz dokumentieren, Lauf beenden.
-
-DOKUMENTATION: Registry-Zeile in <REGISTRY> (Ziel, Datum, Checktyp, Ergebnis, nächster
-Schritt) + Verlaufseintrag in <LOG>. Bei Überlänge: alten Stand nach _archiv/ und
-frische Datei mit Verweis.
-
-ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
+| <objetivo> | <YYYY-MM-DD> | <tipo_de_check> | <ok|hallazgo|omitido> | <siguiente_paso> |
 ```
 
-## Red Flags
+### 2. Regla de selección
 
-| Gedanke | Realität |
+1. Leer la registry y el log (obligatorio, ANTES de la selección — de lo contrario habrá revisión duplicada).
+2. Candidatos: Objetivos que NUNCA hayan sido revisados o lleven MÁS TIEMPO sin revisarse para ESTE tipo de check.
+3. Desviar si el objetivo fue abordado recientemente por un check **estrechamente relacionado** (ej. un check de citas inmediatamente después de un check de fuentes no aporta nada) o si está bloqueado/en edición actualmente (respetar los bloqueos/locks).
+   **Tiempo de reposo entre checks hermanos (Sibling Cooldown):** Si ejecutas múltiples checks relacionados sobre el mismo conjunto de objetivos (ej. desarrollo, búsqueda de errores y revisión del mismo pipeline), acuerda un tiempo de espera (valor empírico: ~24 h) durante el cual un objetivo procesado por un check hermano no vuelva a ser seleccionado — evita colisiones y cambios paralelos contradictorios.
+4. Adelantar fuera de turno solo con una buena razón (ej. gran revisión desde el último check) — indicar la razón en el log.
+
+### 3. Realizar el check — con salida de solo lectura (Read-only Exit)
+
+Aplicar el check en sí (definible libremente: check de fuentes, check de estilo, auditoría de seguridad, …) al ÚNICO objetivo seleccionado. Dos salidas válidas:
+
+- **Hallazgo:** corregir lo que quepa dentro del alcance; lo que sea mayor registrarlo como tarea posterior en el archivo TODO/TAREAS local del proyecto (el check no tiene que resolver todo por sí mismo).
+- **Nada que hacer:** documentar brevemente y finalizar. Una ejecución sin hallazgos es un resultado, no un fracaso — en ningún caso se debe ampliar el alcance solo para "haber encontrado algo".
+
+### 4. Documentar
+
+- Agregar la línea en la registry (compacta), escribir la entrada en el log (detalles/evidencia).
+- **Higiene del log:** Si la registry/log se vuelven confusos (valor empírico: varias cientos de líneas), mover el estado antiguo a `_archiv/`, crear un archivo nuevo y hacer referencia al anterior en el encabezado (ruta + fecha).
+- **Desviación de rutas (Path Drift):** Si una ruta esperada apunta al vacío (objetivo movido/renombrado), NO la crees de nuevo — corrígela mediante el archivo de estado/registry definitivo del pipeline y registra la ruta errónea en un log de fallos.
+
+### 5. Ritmo / Cadencia
+
+Vincular la frecuencia a la tasa de cambios de lo revisado: Los checks de rotación sobre conjuntos estables funcionan bien semanalmente (un objetivo por ejecución ≈ todo el pipeline por trimestre para ~12 objetivos); checks de ritmo rápido (ej. sobre trabajo activo) diariamente. Experiencia práctica: al principio casi todos los checks horarios se redujeron a diarios/semanales — la cobertura se mantuvo y los costos cayeron.
+
+## Plantilla de Prompt (para Programador/Automatización)
+
+```text
+PREPARACIÓN: Lee <PIPELINE_ROOT>/<POLÍTICAS> así como <REGISTRY> y <LOG>.
+
+TAREA: Selecciona exactamente un objetivo de <CONJUNTO_OBJETIVOS>. Prioriza los objetivos que NUNCA hayan sido revisados o lleven MÁS TIEMPO sin revisarse para el check "<TIPO_CHECK>". Si un objetivo fue revisado recientemente por este u otro check estrechamente relacionado o está bloqueado: desviar o finalizar en modo lectura (read-only) con una entrada en el log.
+
+CHECK: <tarea concreta de revisión/mantenimiento y qué hacer en caso de hallazgos; registrar tareas posteriores en el archivo TODO local del proyecto>.
+
+Si no hay trabajo pendiente: documentar brevemente y finalizar la ejecución.
+
+DOCUMENTACIÓN: Línea en la registry en <REGISTRY> (objetivo, fecha, tipo de check, resultado, siguiente paso) + entrada de historial en <LOG>. En caso de longitud excesiva: mover estado antiguo a _archiv/ y crear archivo nuevo con referencia.
+
+FINALIZACIÓN: Informe breve (Objetivo | realizado | resultado | tareas posteriores).
+```
+
+## Banderas Rojas (Red Flags)
+
+| Pensamiento | Realidad |
 | --- | --- |
-| „Ich wähle einfach ein interessantes Projekt" | Auswahl nur über die Registry — sonst Lieblingsprojekt-Bias und blinde Flecken. |
-| „Registry lese ich nach dem Check" | Vorher. Sie ist das Auswahlkriterium, nicht nur das Protokoll. |
-| „Mehrere Ziele pro Lauf schaffen mehr" | Ein Ziel hält Läufe kurz, idempotent und abbrechbar; Menge kommt über die Rotation. |
-| „Der Leerlauf war umsonst" | Ein dokumentierter Leerlauf aktualisiert das Gedächtnis — das ist der halbe Wert des Systems. |
+| "Simplemente elegiré un proyecto interesante" | La selección se realiza ÚNICAMENTE mediante la registry — de lo contrario habrá sesgo de proyecto favorito y puntos ciegos. |
+| "Leeré la registry después del check" | Léela ANTES. Es el criterio de selección, no solo el protocolo. |
+| "Múltiples objetivos por ejecución rinden más" | Un solo objetivo mantiene las ejecuciones cortas, idempotentes y cancelables; la cantidad se logra mediante la rotación. |
+| "La ejecución sin hallazgos fue en vano" | Una ejecución sin hallazgos documentada actualiza la memoria — ese es el 50% del valor del sistema. |
 
-## Verwandte Skills
+## Habilidades Relacionadas
 
-- `workflow-extract` — baut aus Sessions/Fremd-Automationen Automatisierungen; nutzt dieses
-  Gerüst als Standard-Baustein.
-- `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
-  Optimizer renoviert).
+- `workflow-extract` — construye automatizaciones a partir de sesiones/automatizaciones externas; utiliza esta estructura como componente estándar.
+- `pipeline-optimizer` — para la reestructuración de un pipeline (Rotation-Check mantiene, Optimizer renueva).
 
-## Registro de Cambios
+## Historial de Cambios
 
 ### 1.1.0 (2026-07-03)
-- Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten
-  Checks über dieselbe Zielmenge; Befund aus der Vollklassifikation des Automations-Bestands).
+- Se añadió el tiempo de reposo entre hermanos (Sibling Cooldown) como regla de selección (prevención de colisiones entre checks relacionados sobre el mismo conjunto de objetivos; hallazgo de la clasificación completa del inventario de automatización).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus dem Codex-Automations-Bestand (Rotations-Muster in
-  ~40 von 77 Automationen: Research-/Software-/Roblox-Checks mit CHECKED-REGISTRY/CHECKS-LOG).
+- Versión inicial. Abstraído del inventario de automatizaciones de Codex (patrón de rotación en ~40 de 77 automatizaciones: checks de investigación/software/Roblox con CHECKED-REGISTRY/CHECKS-LOG).

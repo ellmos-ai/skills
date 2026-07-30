@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Español] Documentación completa para la habilidad migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
+description: Renombrado evolutivo de archivos con archivos wrapper. Permite renombrar sin interrupciones drásticas: las referencias se actualizan orgánicamente con el uso.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,119 +15,115 @@ tags: [migration, renaming, wrapper, evolutionary, refactoring]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `migrate-rename`.
+> **Español** — Versión oficial en español de `migrate-rename`.
 
 
+# Renombrado de archivos con Wrappers (Migración Evolutiva) (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# File Renaming with Wrappers (Evolutionary Migration) (English)
-
-> Enables file renames WITHOUT hard breaks. References are organically updated through daily usage.
+> Permite renombrar archivos SIN interrupciones drásticas. Las referencias se actualizan orgánicamente mediante el uso diario.
 
 ---
 
-## Principle: Evolutionary Migration
+## Principio: Migración Evolutiva
 
 ```
-BEFORE:                          AFTER:
-old_file.md                      new_file.md (renamed)
+ANTES:                           DESPUÉS:
+old_file.md                      new_file.md (renombrado)
    |                                |
-   +-- Reference A                  +-- old_file.md (wrapper)
-   +-- Reference B                         |
-   +-- Reference C                         +-- Log table
-                                           +-- Instructions
-                                           +-- Link to new_file.md
+   +-- Referencia A                 +-- old_file.md (wrapper)
+   +-- Referencia B                        |
+   +-- Referencia C                        +-- Tabla de registro
+                                           +-- Instrucciones
+                                           +-- Enlace a new_file.md
 ```
 
-When someone accesses the old path:
-1. Lands at the wrapper file
-2. Adds an entry to the log
-3. Corrects the reference that brought them here
-4. Proceeds to the actual file
+Cuando alguien accede a la ruta antigua:
+1. Llega al archivo wrapper
+2. Añade una entrada al registro
+3. Corrige la referencia que le llevó allí
+4. Continúa hacia el archivo real
 
 ---
 
-## Step by Step
+## Paso a paso
 
-### 1. Rename the File
+### 1. Renombrar el archivo
 
 ```bash
 mv old_file.md new_file.md
 ```
 
-### 2. Create Wrapper File
+### 2. Crear archivo Wrapper
 
-Create `old_file.md` with the following content:
+Crea `old_file.md` con el siguiente contenido:
 
 ```markdown
-# OLD_FILE.md - REDIRECTED (English)
+# OLD_FILE.md - REDIRIGIDO (Español)
 
-**Status:** This file has been renamed to `new_file.md`
-
----
-
-## Migration Log
-
-| Date | Who | Origin | Reference corrected? |
-|------|-----|--------|---------------------|
-| YYYY-MM-DD | [Name] | Initial migration | n/a (wrapper created) |
+**Estado:** Este archivo ha sido renombrado a `new_file.md`
 
 ---
 
-## Instructions
+## Registro de migración
 
-1. **Leave a log entry** (in table above)
-2. **Check origin**: What sent you here?
-3. **Correct reference**: Change `old_file.md` -> `new_file.md`
-4. **Go to the actual file**: [new_file.md](new_file.md)
+| Fecha | Quién | Origen | ¿Referencia corregida? |
+|-------|-------|--------|-----------------------|
+| AAAA-MM-DD | [Nombre] | Migración inicial | n/a (wrapper creado) |
 
 ---
 
-**Target file:** [new_file.md](new_file.md)
+## Instrucciones
+
+1. **Deja una entrada en el registro** (en la tabla superior)
+2. **Comprueba el origen**: ¿Qué te envió aquí?
+3. **Corrige la referencia**: Cambia `old_file.md` -> `new_file.md`
+4. **Ve al archivo real**: [new_file.md](new_file.md)
+
+---
+
+**Archivo de destino:** [new_file.md](new_file.md)
 ```
 
-### 3. Immediately Correct Critical References
-- Help files (primary documentation)
-- System prompt references
-- CLI code that directly uses the path
+### 3. Corregir inmediatamente referencias críticas
+- Archivos de ayuda (documentación principal)
+- Referencias de prompts del sistema
+- Código CLI que usa directamente la ruta
 
-### 4. Migrate Remaining References Evolutionarily
-The rest is automatically corrected through usage.
-
----
-
-## When to Use the Wrapper Method?
-
-**YES - Wrapper useful:**
-- Many potential references
-- File is referenced by various partners/tools
-- Not a critical system file
-
-**NO - Change all directly:**
-- Few, known references
-- Critical system files (config, DB schema)
-- Performance-critical paths
+### 4. Migrar referencias restantes evolutivamente
+El resto se corrige automáticamente a través del uso.
 
 ---
 
-## Cleanup
+## ¿Cuándo usar el método Wrapper?
 
-After approximately 30 days or when the log shows no new entries:
-1. Move wrapper file to `_archive/deprecated/`
-2. Or delete completely (if no more entries)
+**SÍ - Wrapper útil:**
+- Muchas referencias potenciales
+- El archivo es referenciado por varios socios/herramientas
+- No es un archivo de sistema crítico
+
+**NO - Cambiar todo directamente:**
+- Pocas referencias conocidas
+- Archivos críticos del sistema (configuración, esquema BD)
+- Rutas críticas para el rendimiento
 
 ---
 
-## Registro de Cambios
+## Limpieza
+
+Después de aproximadamente 30 días o cuando el registro no muestre nuevas entradas:
+1. Mover el archivo wrapper a `_archive/deprecated/`
+2. O eliminarlo completamente (si no hay más entradas)
+
+---
+
+## Historial de Cambios
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Adaptado desde BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Adaptado desde BACH v3.8.0 | Versión independiente*

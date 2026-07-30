@@ -1,129 +1,141 @@
 ---
+name: positive-psychology
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Psicología Positiva según Seligman: modelo PERMA, fortalezas del carácter (VIA), ejercicios de gratitud, teoría del flujo (flow) y factores de resiliencia.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [positive-psychology, perma, flow, gratitude, resilience, seligman]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `positive-psychology`.
+> **Español** — Versión oficial en español de `positive-psychology`.
 
 
+# Psicología Positiva (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Enfoque en fortalezas, gratitud, flujo y PERMA según Seligman y Csikszentmihalyi
 
-
-# Positive Psychology (English)
-
-> Strengths focus, gratitude, flow, and PERMA according to Seligman and Csikszentmihalyi
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Positive Psychology is the scientific study of what makes life worth living (Seligman & Csikszentmihalyi, 2000). In contrast to clinical psychology (What causes illness?), it asks: What makes people healthy, happy, and resilient?
-
-Founders: Martin Seligman (APA President 1998) initiated the movement. Other pioneers: Mihaly Csikszentmihalyi (Flow), Christopher Peterson (Character Strengths), Barbara Fredrickson (Broaden-and-Build), Ed Diener (Subjective Well-Being).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. PERMA Model (Seligman, 2011)
+## Contexto
 
-Five pillars of well-being according to Seligman ("Flourish"):
+La Psicología Positiva es el estudio científico de lo que hace que la vida valga la pena ser vivida (Seligman & Csikszentmihalyi, 2000). A diferencia de la psicología clínica tradicional (¿Qué causa la enfermedad?), pregunta: ¿Qué hace que las personas estén sanas, felices y sean resilientes?
 
-### P — Positive Emotions
-- Joy, gratitude, serenity, interest, hope, pride, love
-- Fredrickson: At least a 3:1 ratio of positive to negative emotions
-- Exercise: "Three Good Things" (see below)
+Fundadores: Martin Seligman (presidente de la APA en 1998) inició el movimiento. Otros pioneros: Mihaly Csikszentmihalyi (Flujo / Flow), Christopher Peterson (Fortalezas del carácter), Barbara Fredrickson (Ampliación y Construcción / Broaden-and-Build), Ed Diener (Bienestar subjetivo).
 
-### E — Engagement
-- Being fully absorbed in an activity (flow state)
-- Using one's strengths in daily life
-- Challenge and skill in balance
-
-### R — Relationships (Positive Relationships)
-- Social connectedness as the strongest predictor of well-being
-- Active-constructive responding to others' good news
-- Small kindnesses (Random Acts of Kindness)
-
-### M — Meaning
-- Belonging to and serving something greater than oneself
-- Meaning through work, family, community, spirituality
-- Frankl: "He who has a why can bear almost any how"
-
-### A — Achievement
-- Experiencing mastery and competence
-- Setting and achieving realistic goals
-- Grit: Perseverance + passion for long-term goals (Duckworth, 2016)
+**Nota:** Esto es un apoyo psicoeducativo, no un sustituto de la terapia profesional.
+**Nunca implementar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET).
 
 ---
 
-## 2. Character Strengths (VIA Classification)
+## 1. Modelo PERMA (Seligman, 2011)
 
-Peterson and Seligman (2004) identified 24 universal character strengths in 6 virtue categories:
+Cinco pilares del bienestar según Seligman ("Flourish"):
 
-| Virtue | Strengths |
+### P — Emociones Positivas (Positive Emotions)
+- Alegría, gratitud, serenidad, interés, esperanza, orgullo, amor
+- Fredrickson: Proporción de al menos 3:1 de emociones positivas respecto a negativas
+- Ejercicio: "Tres cosas buenas" (ver abajo)
+
+### E — Compromiso (Engagement)
+- Absorción completa en una actividad (estado de flujo)
+- Uso de las propias fortalezas en la vida cotidiana
+- Equilibrio entre desafío y habilidad
+
+### R — Relaciones Positivas (Positive Relationships)
+- La conexión social como el predictor más fuerte del bienestar
+- Respuesta activo-constructiva ante las buenas noticias de los demás
+- Pequeños actos de amabilidad (Random Acts of Kindness)
+
+### M — Significado (Meaning)
+- Pertenecer y servir a algo más grande que uno mismo
+- Significado a través del trabajo, la familia, la comunidad, la espiritualidad
+- Frankl: "Quien tiene un porqué para vivir puede soportar casi cualquier cómo"
+
+### A — Logro (Achievement)
+- Experimentar maestría y competencia
+- Establecer y alcanzar metas realistas
+- Grit: Perseverancia + pasión por metas a largo plazo (Duckworth, 2016)
+
+---
+
+## 2. Fortalezas del Carácter (Clasificación VIA)
+
+Peterson y Seligman (2004) identificaron 24 fortalezas universales del carácter en 6 categorías de virtudes:
+
+| Virtud | Fortalezas |
 |--------|----------|
-| Wisdom | Creativity, Curiosity, Judgment, Love of Learning, Perspective |
-| Courage | Bravery, Perseverance, Honesty, Zest |
-| Humanity | Love, Kindness, Social Intelligence |
-| Justice | Teamwork, Fairness, Leadership |
-| Temperance | Forgiveness, Humility, Prudence, Self-Regulation |
-| Transcendence | Appreciation of Beauty, Gratitude, Hope, Humor, Spirituality |
+| Sabiduría | Creatividad, Curiosidad, Pensamiento crítico / Juicio, Amor por el aprendizaje, Perspectiva |
+| Coraje | Valentía, Perseverancia, Honestidad, Vitalidad / Entusiasmo |
+| Humanidad | Amor, Amabilidad, Inteligencia social |
+| Justicia | Trabajo en equipo, Equidad, Liderazgo |
+| Templanza | Perdón, Humildad, Prudencia, Autorregulación |
+| Trascendencia | Apreciación de la belleza, Gratitud, Esperanza, Humor, Espiritualidad |
 
-**Signature strengths:** The 3-5 strengths that feel most authentic. Those who use their signature strengths daily are demonstrably more satisfied and less depressed (Seligman et al. 2005).
+**Fortalezas distintivas (Signature strengths):** Las 3 a 5 fortalezas que se sienten más auténticas. Quienes utilizan sus fortalezas distintivas a diario están demostrablemente más satisfechos y menos deprimidos (Seligman et al., 2005).
 
-**VIA Survey:** Free at viacharacter.org (scientifically validated)
-
----
-
-## 3. Gratitude Exercises
-
-### 3.1 Three Good Things (Seligman et al. 2005)
-
-**Procedure:**
-1. Every evening, write down 3 good things from the day
-2. For each one note: Why did it happen?
-3. Duration: At least 1 week, ideally ongoing
-
-**Evidence:** Significantly increased well-being and reduced depressive symptoms over 6 months (Seligman et al. 2005)
-
-### 3.2 Gratitude Journal
-
-Extension of Three Good Things:
-- Morning: What am I grateful for today? (3 items)
-- Evening: What was good today? What did I contribute?
-- Shift perspective: People, experiences, abilities, everyday things
-
-### 3.3 Gratitude Letter (Gratitude Visit)
-
-**Procedure:**
-1. Identify a person you never properly thanked
-2. Write a specific letter (300 words, concrete)
-3. Visit the person and read the letter aloud
-
-**Evidence:** Strongest short-term effect of all positive psychology interventions (Seligman et al. 2005). Effect lasts approximately 1 month.
+**Evaluación VIA:** Gratuita en viacharacter.org (validada científicamente).
 
 ---
 
-## 4. Flow Theory (Csikszentmihalyi, 1990)
+## 3. Ejercicios de Gratitud
 
-### Definition
-Flow is a state of complete immersion in an activity, where action flows effortlessly and time and self-consciousness recede into the background.
+### 3.1 Tres Cosas Buenas (Seligman et al., 2005)
 
-### Conditions for Flow
+**Procedimiento:**
+1. Cada noche, anota 3 cosas buenas que hayan sucedido durante el día.
+2. Para cada una, anota: ¿Por qué sucedió?
+3. Duración: Al menos 1 semana, idealmente de forma continua.
 
-| Condition | Description |
+**Evidencia:** Incremento significativo del bienestar y reducción de síntomas depresivos durante 6 meses (Seligman et al., 2005).
+
+### 3.2 Diario de Gratitud
+
+Extensión de "Tres cosas buenas":
+- Mañana: ¿De qué estoy agradecido/a hoy? (3 elementos)
+- Noche: ¿Qué fue bueno hoy? ¿En qué contribuí?
+- Cambio de perspectiva: Personas, experiencias, capacidades, aspectos cotidianos.
+
+### 3.3 Carta de Gratitud (Visita de Gratitud)
+
+**Procedimiento:**
+1. Identifica a una persona a la que nunca le hayas agradecido adecuadamente.
+2. Escribe una carta específica (aproximadamente 300 palabras, concreta).
+3. Visita a la persona y léele la carta en voz alta.
+
+**Evidencia:** El efecto a corto plazo más potente de todas las intervenciones de psicología positiva (Seligman et al., 2005). El efecto dura aproximadamente 1 mes.
+
+---
+
+## 4. Teoría del Flujo / Flow (Csikszentmihalyi, 1990)
+
+### Definición
+El flujo (flow) es un estado de absorción completa en una actividad, en el que la acción fluye sin esfuerzo y el tiempo y la autoconciencia quedan en segundo plano.
+
+### Condiciones para el Flujo
+
+| Condición | Descripción |
 |-----------|-------------|
-| Balance | Challenge matches skill level |
-| Clear goals | You know exactly what to do |
-| Immediate feedback | Instant feedback on progress |
-| Concentration | Full attention on the task |
-| Control | Feeling of being able to master the situation |
-| Intrinsic motivation | The activity is rewarding in itself |
+| Equilibrio | El desafío coincide con el nivel de habilidad |
+| Metas claras | Se sabe exactamente qué hacer |
+| Retroalimentación inmediata | Retroalimentación instantánea sobre el progreso |
+| Concentración | Atención total en la tarea |
+| Control | Sensación de poder dominar la situación |
+| Motivación intrínseca | La actividad es gratificante en sí misma |
 
-### Flow Channel
+### Canal de Flujo
 
 ```
 Challenge
@@ -135,64 +147,64 @@ Challenge
                     Skill
 ```
 
-### Fostering Flow
-- Eliminate distractions (phone away, door closed)
-- Break tasks into manageable units
-- Adjust difficulty level (not too easy, not too hard)
-- Establish regular practice times
+### Fomentar el Flujo
+- Eliminar distracciones (teléfono alejado, puerta cerrada)
+- Dividir las tareas en unidades manejables
+- Ajustar el nivel de dificultad (ni demasiado fácil ni demasiado difícil)
+- Establecer horarios de práctica regulares
 
 ---
 
-## 5. Resilience Factors
+## 5. Factores de Resiliencia
 
-Resilience = psychological resistance to adversity.
+Resiliencia = resistencia psicológica a la adversidad.
 
-### The 7 Pillars of Resilience (after Reivich & Shatte, 2002)
+### Los 7 Pilares de la Resiliencia (según Reivich & Shatte, 2002)
 
-1. **Emotion regulation:** Perceiving and managing one's own feelings
-2. **Impulse control:** Consciously directing actions rather than reacting
-3. **Causal analysis:** Realistically assessing causes
-4. **Self-efficacy:** Confidence in one's own competence
-5. **Empathy:** Recognizing and understanding others' emotions
-6. **Optimism:** Realistic, positive expectations for the future
-7. **Goal orientation:** Setting and pursuing meaningful goals
+1. **Regulación emocional:** Percibir y gestionar las propias emociones
+2. **Control de impulsos:** Dirigir conscientemente las acciones en lugar de reaccionar
+3. **Análisis causal:** Evaluar de manera realista las causas
+4. **Autoeficacia:** Confianza en la propia competencia
+5. **Empatía:** Reconocer y comprender las emociones de los demás
+6. **Optimismo:** Expectativas positivas y realistas sobre el futuro
+7. **Orientación a metas:** Establecer y perseguir metas significativas
 
-### Building Resilience
-- Consciously use strengths (VIA strengths)
-- Maintain social network (relationships as the #1 protective factor)
-- Self-care: Sleep, exercise, nutrition, recovery
-- Cognitive flexibility: Seek alternative perspectives
-- Find meaning and significance (even in difficult situations)
+### Construcción de Resiliencia
+- Usar conscientemente las fortalezas (fortalezas VIA)
+- Mantener la red social (las relaciones como el factor protector nº 1)
+- Autocuidado: Sueño, ejercicio, nutrición, recuperación
+- Flexibilidad cognitiva: Buscar perspectivas alternativas
+- Encontrar sentido y significado (incluso en situaciones difíciles)
 
 ---
 
-## Ethics and Boundaries
+## Ética y Límites
 
-**An AI assistant may:**
-- Explain the PERMA model and character strengths (psychoeducation)
-- Guide and support gratitude exercises
-- Discuss flow conditions
-- Convey resilience factors
-- Support signature strengths reflection
+**Un asistente de IA puede:**
+- Explicar el modelo PERMA y las fortalezas del carácter (psicoeducación)
+- Guiar y apoyar ejercicios de gratitud
+- Discutir las condiciones del flujo
+- Transmitir factores de resiliencia
+- Apoyar la reflexión sobre las fortalezas distintivas
 
-**An AI assistant must NOT:**
-- Treat clinical depression solely with positive psychology
-- Clinically interpret VIA survey results
-- Recommend positive psychology as a substitute for therapy
-- Foster toxic positivity ("Just be grateful")
+**Un asistente de IA NO debe:**
+- Tratar la depresión clínica únicamente con psicología positiva
+- Interpretar clínicamente los resultados de la encuesta VIA
+- Recomendar la psicología positiva como sustituto de la terapia
+- Fomentar la positividad tóxica ("Simplemente sé agradecido")
 
-**Progress tracking:**
-- Well-being before/after exercise (0-10 scale)
-- Gratitude streak: How many consecutive days?
-- Flow log: When and during which activities do I experience flow?
-- Signature strengths: How often used this week?
+**Seguimiento del progreso:**
+- Bienestar antes/después del ejercicio (escala 0-10)
+- Racha de gratitud: ¿Cuántos días consecutivos?
+- Registro de flujo: ¿Cuándo y durante qué actividades experimento flujo?
+- Fortalezas distintivas: ¿Con qué frecuencia se usaron esta semana?
 
-**In case of acute crisis, ALWAYS refer to:**
+**En caso de crisis aguda, SIEMPRE derivar a:**
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Servicios de emergencia: 911 (US) / 112 (EU)
 
 ---
 

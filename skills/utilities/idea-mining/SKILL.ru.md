@@ -1,150 +1,101 @@
 ---
 language: ru
+description: Добыча идей, фильтрация по истории и углубленная разработка одной идеи до конца. 5-фазный рабочий процесс (A-E) для решения сложных задач.
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `idea-mining`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
+> **Русский** — Официальная русская версия `idea-mining`.
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
+# Idea-Mining — Добыча идей, фильтрация, реализация одной идеи
 
-## Общий обзор и назначение & Purpose
+## Обзор и цель
 
-Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
-Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
-Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
-(ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
-substanziell explorieren.
+При решении сложных проблем генерация идей редко упирается в нехватку задумок. Чаще всего причина кроется в трех вещах: идеи не **фиксируются**, они не проверяются на предмет **уже опробованного** (что приводит к хождению по одним и тем же тупикам), и ни одна из них не доводится **последовательно до конца**. Этот рабочий процесс строго разделяет три фазы: сначала дивергентная добыча (без оценки), затем фильтрация (по документации проекта) и, наконец, существенное исследование ОДНОЙ идеи.
 
-Herkunft: destilliert aus einem produktiven Forschungs-Automations-Lauf über offene
-mathematische Probleme; funktioniert genauso für Architektur-, Design- und Konzeptblockaden.
+Происхождение: дистиллировано из продуктивного автоматизированного исследовательского прогона по открытым математическим проблемам; одинаково хорошо работает для архитектурных, дизайнерских и концептуальных блокеров.
 
-## Phase A — Ideenspeicher füllen (divergent, ohne Bewertung)
+## Фаза A — Заполнение хранилища идей (дивергентно, без оценки)
 
-Alle Fundstücke in eine Datei `IDEENSPEICHER.md` im Projektordner schreiben (Stichworte +
-2–3 Sätze, Quelle/Auslöser notieren). Die acht Techniken nacheinander durchgehen — sie
-zielen auf unterschiedliche Assoziationsräume, deshalb bei wirklich festgefahrenen
-Problemen keine überspringen (bei leichteren Blockaden oder knapper Zeit genügt eine
-begründete Teilmenge, mindestens aber eine weiche Technik aus 3–5 plus die Recherche):
+Записывать все находки в файл `IDEENSPEICHER.md` в папке проекта (ключевые слова + 2–3 предложения, с указанием источника/триггера). Последовательно пройти восемь техник — они ориентированы на разные ассоциативные пространства, поэтому при действительно серьезных затыках не следует пропускать ни одну (при легких блоках или нехватке времени достаточно обоснованного подмножества, но как минимум одна «мягкая» техника из 3–5 плюс исследование):
 
-1. **Wiedererkennung:** Kommt mir das bekannt vor? Habe ich diese Struktur schon einmal
-   in anderem Kontext gesehen?
-2. **Fern-Disziplin:** Gibt es ein ähnliches Problem/eine ähnliche Formel in einer weit
-   entfernten Disziplin (Physik↔Ökonomie, Biologie↔Informatik, …)? Wo genau liegt die
-   Verbindung?
-3. **Alltags-Allegorie:** Das Problem in einer naturnahen Allegorie erzählen (Wellen,
-   Sand, Strömung, Wachstum …). Wirksam: die Allegorie von einem **unbelasteten
-   Subagenten** erfinden lassen und dann schauen, wohin sie führt — die eigene Sicht ist
-   vom Problem schon deformiert.
-4. **Störgefühl / Frosch→Prinz:** Was stört mich am aktuellen Stand, was finde ich
-   hässlich? Was müsste sich ändern, damit ich es plötzlich schön fände? Ästhetisches
-   Unbehagen zeigt oft auf die falsch gewählte Darstellung.
-5. **Märchen-Reframing:** Das Problem als Märchen erzählen: Wer ist der Held, wer die
-   Bösewichte, welche Gefahren lauern, was könnte dem Helden helfen? Die Rollenzuweisung
-   erzwingt eine Kausalstruktur, die im Formalismus unsichtbar bleibt.
-6. **Recherche:** Web, Fachdatenbanken, Preprint-Server, Foren (Reddit/ResearchGate/GitHub)
-   nach neuen Veröffentlichungen, Scripts, Ansätzen durchsuchen. Relevante Quellen in einen
-   Ordner `_sources/` laden und auf Innovationen lesen — bei Preprints kritisch bleiben.
-7. **Geschwisterprojekte:** Verwandte eigene Projekte auf rücktransferierbare Lösungsideen
-   prüfen (dort gelöste Teilprobleme, dort gebaute Werkzeuge).
-8. **Bestandsquerlauf:** Den gesamten eigenen Projektbestand (Pipeline) auf Ansätze
-   durchgehen, die auf DIESES Problem passen könnten.
+1. **Распознавание:** Кажется ли это знакомым? Видел ли я эту структуру ранее в другом контексте?
+2. **Далекая дисциплина:** Существует ли похожая проблема/формула в далекой дисциплине (Физика↔Экономика, Биология↔Информатика, …)? Где именно кроется связь?
+3. **Бытовая аллегория:** Рассказать о проблеме с помощью близкой к природе аллегории (волны, песок, течение, рост …). Эффективно: поручить изобретение аллегории **неангажированному субагенту**, а затем посмотреть, куда она приведет — собственный взгляд уже искажен проблемой.
+4. **Дискомфорт / Лягушка→Принц:** Что меня раздражает в текущем состоянии, что я считаю уродливым? Что должно измениться, чтобы это внезапно показалось мне прекрасным? Эстетический дискомфорт часто указывает на неверно выбранное представление.
+5. **Сказочный рефрейминг:** Рассказать о проблеме как о сказке: кто герой, кто злодеи, какие опасности подстерегают, что могло бы помочь герою? Распределение ролей задает причинно-следственную структуру, которая остается невидимой в формализме.
+6. **Исследование:** Искать в Сети, специализированных базах данных, серверах препринтов, форумах (Reddit/ResearchGate/GitHub) новые публикации, скрипты и подходы. Загружать релевантные источники в папку `_sources/` и читать в поисках инноваций — сохранять критичность к препринтам.
+7. **Родственные проекты:** Проверять связанные собственные/внутренние проекты на предмет обратимо переносимых идей решений (решенные там подзадачи, созданные там инструменты).
+8. **Сквозная инвентаризация:** Просмотреть весь собственный инвентарь проектов (пайплайн) на предмет подходов, которые могли бы подойти к ДАННОЙ проблеме.
 
-## Phase B — Filter (gegen bereits Versuchtes)
+## Фаза B — Фильтр (по уже опробованному)
 
-Den Ideenspeicher gegen die Projektdokumentation abgleichen: Beweisnotizen, Proof-Notes,
-Entscheidungs-Logs, TODO/DONE, frühere Ideenspeicher. **Eliminiert wird, was dokumentiert
-bereits versucht und abgeschlossen ist** — nicht, was nur „unwahrscheinlich klingt"
-(Bewertung nach Attraktivität kommt erst in Phase C). Überlebende nach
-`IDEENSPEICHER_FILTERED.md`.
+Сверить хранилище идей с документацией проекта: заметки о доказательствах, логи решений, TODO/DONE, прежние хранилища идей. **Удаляется то, что задокументировано как уже опробованное и завершенное** — а не то, что просто «кажется маловероятным» (оценка по привлекательности происходит только в фазе C). Сохранить уцелевшие идеи в `IDEENSPEICHER_FILTERED.md`.
 
-Voraussetzung ist eine gepflegte Versuchs-Dokumentation — existiert keine, ist der erste
-Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
+Предпосылкой является ведение качественной документации экспериментов — если ее нет, первым шагом будет ее создание (иначе каждый будущий прогон будет дублировать усилия).
 
-## Phase C — Wählen und durchziehen
+## Фаза C — Выбор и реализация
 
-1. Ein bis drei Ideen aus dem Filtrat kurz anexplorieren (je ein Absatz: was wäre der
-   erste konkrete Schritt, was das Erfolgssignal?).
-2. **Eine** wählen — die mit der stärksten Anziehung. Attraktion ist hier ein legitimes
-   Kriterium: Bei schweren Problemen trägt nur eine Idee, der man nachgehen *will*.
-3. Die Wahl bis zum Ende oder zumindest substanziell weiterführen — nicht nach dem ersten
-   Hindernis zur nächsten Idee springen (das wäre Phase-A-Verhalten in Phase C).
+1. Кратко протестировать от одной до трех идей из фильтрата (по одному абзацу на каждую: каков будет первый конкретный шаг, каков сигнал успеха?).
+2. Выбрать **одну** — с наибольшим притяжением. Притяжение здесь является легитимным критерием: при сложных проблемах продвинуть вперед может только та идея, которой вы *хотите* заниматься.
+3. Довести выбор до конца или, как минимум, существенно продвинуть вперед — не перескакивать на следующую идею при первом же препятствии (это было бы поведением фазы A во время фазы C).
 
-## Phase D — Dokumentieren
+## Фаза D — Документирование
 
-- Erkenntnisse in die Projektdokumentation (Beweisnotiz, Entscheidungs-Log, ADR) —
-  **auch die Fehlschläge**, sie sind der Filter für den nächsten Lauf.
-- Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
-- Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
+- Занести выводы в документацию проекта (заметка о доказательстве, лог решений, ADR) — **включая неудачи**, так как они формируют фильтр для следующего прогона.
+- Вернуть открытые последующие идеи обратно в `IDEENSPEICHER.md` или TODO.
+- Краткий отчет: добыто (количество) | отфильтровано (уцелело) | исследовано | результат | следующий шаг.
 
-## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+## Фаза E — Посев (опциональный внешний перенос)
 
-Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
-Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
-kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+Техника 7 привлекает идеи ИЗ родственных проектов — фаза E меняет направление: если исследование дало переносимый результат (метод, инструмент, шаблон решения), кратко просмотреть собственный инвентарь проектов: кому это может помочь?
 
-- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
-  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
-  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
-- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
-  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+- **Сеять точечно, а не рассеивать:** максимум ~3 проекта-получателя напрямую снабжаются конкретной записью TODO (что взять, где лежит, почему подходит); остальных кандидатов отмечать только как приоритезированный список в собственном проекте.
+- Причина ограничения: широкое рассеивание создает во многих проектах неясные задачи, за которые никто не берется — три точных семени лучше десяти размытых.
 
-## Als periodischer Lauf
+## Как периодический прогон
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
-Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
-verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
-Versuchs-Doku sind hier das Gedächtnis.
+Рабочий процесс отлично подходит в качестве регулярной автоматизации для фиксированного проекта (инновационный раунд). Для этого совместить с ротационным каркасом (скилл `rotation-check`): реестр предотвращает повторное «переоткрытие» одних и тех же идей — хранилище идей и документация экспериментов служат здесь памятью.
 
-## Пример и применение & Usage
+## Пример и применение
 
 ```text
-Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
+Проблема: Доказательство сходимости уже несколько недель стопорится на оценке.
 
-A) Schürfen → IDEENSPEICHER.md: u. a. (2) ähnliche Struktur in der Warteschlangen-
-   theorie?; (3) Subagent-Allegorie „Sand rieselt durch immer feinere Siebe" →
-   Idee: Abschätzung stufenweise statt global; (6) Preprint von 2026 mit neuem
-   Lemma, nach _sources/ geladen; (7) Nachbarprojekt hat ein numerisches
-   Prüfscript, das sich rücktransferieren lässt.
-B) Filter gegen BEWEISNOTIZ.md: „globale Abschätzung verschärfen" wurde 2× versucht
-   und dokumentiert verworfen → raus. 3 Ideen überleben → IDEENSPEICHER_FILTERED.md.
-C) Prime-Wahl: die Sieb-Idee (stärkste Anziehung) — bis zu einem Teilresultat
-   durchgezogen.
-D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
+A) Добыча → IDEENSPEICHER.md: напр., (2) похожая структура в теории массового
+   обслуживания?; (3) Аллегория субагента «песок просыпается через все более мелкие сита» →
+   идея: оценивать пошагово, а не глобально; (6) Препринт 2026 года с новой
+   леммой, загружен в _sources/; (7) Соседний проект имеет скрипт численной
+   проверки, который можно перенести обратно.
+B) Фильтр по BEWEISNOTIZ.md: «ужесточить глобальную оценку» пробовалось 2 раза
+   и было задокументировано как отклоненное → удалено. 3 идеи уцелели → IDEENSPEICHER_FILTERED.md.
+C) Главный выбор: идея с ситом (наибольшее притяжение) — доведена до частичного результата.
+D) BEWEISNOTIZ.md обновлен (включая неудачу идеи 2), краткий отчет.
 ```
 
-## Red Flags
+## Красные флаги (Red Flags)
 
-| Gedanke | Realität |
+| Мысль | Реальность |
 | --- | --- |
-| „Technik 3–5 sind Spielerei" | Die weichen Techniken liefern die Ideen, die Recherche nicht liefern kann — sie adressieren andere Assoziationsräume. |
-| „Ich bewerte schon beim Sammeln" | Bewertung in Phase A tötet die divergente Ausbeute. Erst speichern, dann filtern. |
-| „Der Filter dauert zu lange, ich erinnere mich schon" | Gedächtnis glättet Fehlversuche — nur die Doku zählt. |
-| „Idee klemmt, ich nehme die nächste" | In Phase C wird durchgezogen; Springen zurück nach A nur mit dokumentiertem Grund. |
+| «Техники 3–5 — это просто баловство» | Мягкие техники дают идеи, которые исследование дать не может — они задействуют иные ассоциативные пространства. |
+| «Я оцениваю прямо во время сбора» | Оценка в фазе A уничтожает дивергентный результат. Сначала сохраняем, потом фильтруем. |
+| «Фильтр занимает слишком много времени, я и так помню» | Память сглаживает неудачные попытки — учитывается только документация. |
+| «Идея застряла, возьму следующую» | В фазе C работа доводится до конца; перескок назад в A возможен только с задокументированной причиной. |
 
-## Verwandte Skills
+## Связанные скиллы
 
-- `brainstorm` — breite Kreativmethoden (SCAMPER, Six Hats) ohne Filter-/Explorations-Pipeline.
-- `think` / `decide` — Analyse und Auswahlentscheidung, nutzbar innerhalb Phase C.
-- `rotation-check` — Gerüst für den periodischen Einsatz.
-- `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
+- `brainstorm` — широкие креативные методы (SCAMPER, Six Hats) без пайплайна фильтрации/исследования.
+- `think` / `decide` — анализ и принятие решений о выборе, применимые внутри фазы C.
+- `rotation-check` — каркас для периодического развертывания.
+- `swarm-operations` — неангажированные субагенты для техники 3 и параллельного исследования.
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-03)
-- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
-  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
-  cross-project-transfer-Skill (Dedup-Entscheid).
+- Фаза E «Посев»: опциональный внешний перенос переносимых результатов в
+  родственные проекты (макс. ~3 прямых получателя) — интегрировано вместо отдельного
+  скилла cross-project-transfer (решение по дедупликации).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
-  (Ideenspeicher → Filter → Prime-Wahl → Exploration) und user-neutral verallgemeinert.
+- Первоначальная версия. Абстрагировано из автоматизации Codex «ultra-deep-idea-search-single-project»
+  (хранилище идей → фильтр → главный выбор → исследование) и обобщено до нейтрального по отношению к пользователю.

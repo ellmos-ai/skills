@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: [Español] Documentación completa para la habilidad model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+description: Orquestación multimodelo y estrategia de cambio de modelo. Selección de modelo basada en puntuación, delegación entre agentes (Gemini, Codex, Ollama), emparejamiento de asesores (advisor), disparadores de escalado, matriz de permisos y optimización de costes.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,258 +15,254 @@ tags: [model-switching, orchestration, multi-model, cost-optimization, routing, 
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `model-strategy`.
+> **Español** — Versión oficial en español de `model-strategy`.
 
 
+# Estrategia de cambio de modelo (Model-Switching Strategy) (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Model-Switching Strategy (English)
-
-> Multi-model orchestration: score-based model selection, cross-agent delegation, advisor pairing, escalation triggers, and cost-efficiency optimization
+> Orquestación multimodelo: selección basada en puntuación, delegación entre agentes, emparejamiento de asesores, disparadores de escalado y optimización de costes.
 
 ---
 
-## 1. Model catalog
+## 1. Catálogo de modelos
 
-### Claude (subagent-capable via the Agent tool)
-
-```
-Level 4 (Reviewer):   Opus 4.8  — advisor, math review     [user only: /model, /advisor]
-Level 3 (Strategist): Opus 4.6  — architecture, concepts   [subagent: model:"opus"]
-Level 3 (Creative):   Fable 5   — creative texts, stories  [subagent: model:"fable"]
-Level 2 (Workhorse):  Sonnet 4.6— implementation, debug    [subagent: model:"sonnet"]
-Level 1 (Fast):       Haiku 4.5 — boilerplate, formatting  [subagent: model:"haiku"]
-```
-
-### External agents (companion scripts / SSH)
+### Claude (capaz de subagentes mediante la herramienta Agent)
 
 ```
-Level 2-3: Gemini 3.5 pro  — research, scientific databases [agy-companion CLI]
-Level 2:   Gemini 3.5 flash— fast research                  [agy-companion CLI]
-Level 2-3: Codex 5.5 (GPT) — code review, code generation   [codex-companion CLI]
-Level 2:   Codex 4.5 (GPT) — simpler code tasks             [codex-companion CLI]
+Nivel 4 (Revisor):     Opus 4.8  — asesor, revisión matemática  [solo usuario: /model, /advisor]
+Nivel 3 (Estratega):   Opus 4.6  — arquitectura, conceptos      [subagente: model:"opus"]
+Nivel 3 (Creativo):    Fable 5   — textos creativos, historias  [subagente: model:"fable"]
+Nivel 2 (Trabajador):  Sonnet 4.6— implementación, depuración   [subagente: model:"sonnet"]
+Nivel 1 (Rápido):      Haiku 4.5 — código base, formato         [subagente: model:"haiku"]
 ```
 
-### Local models (token-free, 24/7)
+### Agentes externos (scripts complementarios / SSH)
 
 ```
-Level 1-2: Ollama (Qwen 3.5:35b-a3b) — Haiku-to-Sonnet level [<ollama-host>:11434]
-           Invocation: SSH + curl http://<ollama-host>:11434/v1/chat/completions
-           Or: delegation via an agent-system control API (if available)
+Nivel 2-3: Gemini 3.5 pro  — investigación, bases de datos científicas [CLI agy-companion]
+Nivel 2:   Gemini 3.5 flash— investigación rápida                      [CLI agy-companion]
+Nivel 2-3: Codex 5.5 (GPT) — revisión de código, generación de código [CLI codex-companion]
+Nivel 2:   Codex 4.5 (GPT) — tareas de código más simples              [CLI codex-companion]
 ```
 
-### Reachability matrix
+### Modelos locales (sin tokens, 24/7)
 
-| Model | LLM-startable | Invocation path | Constraints |
-|-------|---------------|-----------------|-------------|
-| Sonnet 4.6 | Yes | `Agent(model:"sonnet")` | — |
-| Opus 4.6 | Yes | `Agent(model:"opus")` | — |
-| Haiku 4.5 | Yes | `Agent(model:"haiku")` | — |
-| Fable 5 | Yes | `Agent(model:"fable")` | — |
-| Opus 4.8 | Advisor only | `advisor()` in session | user must set `/advisor` |
-| Gemini 3.5 | Yes (Bash) | `companion-for-agy "prompt"` | Windows-only, stdout workaround |
-| Codex 5.5/4.5 | Yes (Bash) | `node codex-companion.mjs task "prompt"` | auth required |
-| Ollama | Yes (SSH/curl) | SSH + curl to the Ollama host API | VPN/Tailscale must be active |
-| Opus 4.8 as main model | No | user: `/model opus 4.8` | user action only |
-| Fable 5 as main model | No | user: `/model fable` | user action only |
+```
+Nivel 1-2: Ollama (Qwen 3.5:35b-a3b) — nivel Haiku-a-Sonnet [<host-ollama>:11434]
+           Invocación: SSH + curl http://<host-ollama>:11434/v1/chat/completions
+           O: delegación a través de una API de control del sistema de agentes (si está disponible)
+```
+
+### Matriz de alcanzabilidad
+
+| Modelo | Iniciable por LLM | Ruta de invocación | Restricciones |
+|--------|-------------------|--------------------|---------------|
+| Sonnet 4.6 | Sí | `Agent(model:"sonnet")` | — |
+| Opus 4.6 | Sí | `Agent(model:"opus")` | — |
+| Haiku 4.5 | Sí | `Agent(model:"haiku")` | — |
+| Fable 5 | Sí | `Agent(model:"fable")` | — |
+| Opus 4.8 | Solo como asesor | `advisor()` en sesión | el usuario debe configurar `/advisor` |
+| Gemini 3.5 | Sí (Bash) | `companion-for-agy "prompt"` | solo Windows, solución alternativa stdout |
+| Codex 5.5/4.5 | Sí (Bash) | `node codex-companion.mjs task "prompt"` | requiere autenticación |
+| Ollama | Sí (SSH/curl) | SSH + curl a la API del host Ollama | VPN/Tailscale debe estar activo |
+| Opus 4.8 como modelo principal | No | usuario: `/model opus 4.8` | solo acción del usuario |
+| Fable 5 como modelo principal | No | usuario: `/model fable` | solo acción del usuario |
 
 ---
 
-## 2. Score computation
+## 2. Cálculo de puntuación (Score)
 
 ```
-Dimensions (0-10):
-  CLARITY     : How unambiguous is the task?
-  COMPLEXITY  : How many components?
-  CREATIVITY  : New solutions needed?
-  CONTEXT     : How much prior knowledge?
-  CRITICALITY : How important is perfection?
+Dimensiones (0-10):
+  CLARIDAD      : ¿Qué tan unívoca es la tarea?
+  COMPLEJIDAD   : ¿Cuántos componentes?
+  CREATIVIDAD   : ¿Se necesitan soluciones nuevas?
+  CONTEXTO      : ¿Cuánto conocimiento previo?
+  CRITICIDAD    : ¿Qué tan importante es la perfección?
 
-SCORE = (10 - CLARITY) + COMPLEXITY + CREATIVITY + CONTEXT + CRITICALITY
+PUNTUACIÓN = (10 - CLARIDAD) + COMPLEJIDAD + CREATIVIDAD + CONTEXTO + CRITICIDAD
 ```
 
-### Score thresholds
+### Umbrales de puntuación
 
-| Score | Model | Examples |
-|-------|-------|----------|
-| 0-8 | Ollama (local host) | prompt generation, summaries, simple texts |
-| 9-12 | Haiku | __init__.py, formatting, boilerplate |
-| 13-22 | Sonnet | implementation, bug fixes, standard code |
-| 13-22 | Gemini 3.5 | research, literature search, scientific databases |
-| 13-22 | Codex 5.5 | code generation (Luau, Node.js), compute scripts |
-| 23-28 | Sonnet + advisor review | complex code with quality check |
-| 23-35 | Fable 5 | creative texts, marketing, storytelling |
-| 29-40 | Opus 4.6 | architecture, strategy, paper writing |
-| 35-50 | Opus 4.6 + advisor | proofs, architecture decisions, statistics |
-| 40-50 | Opus 4.8 (user recommendation) | mathematical proof work, highest rigor |
+| Puntuación | Modelo | Ejemplos |
+|------------|--------|----------|
+| 0-8 | Ollama (host local) | generación de prompts, resúmenes, textos simples |
+| 9-12 | Haiku | __init__.py, formato, código base |
+| 13-22 | Sonnet | implementación, corrección de errores, código estándar |
+| 13-22 | Gemini 3.5 | investigación, búsqueda de literatura, bases de datos científicas |
+| 13-22 | Codex 5.5 | generación de código (Luau, Node.js), scripts de cálculo |
+| 23-28 | Sonnet + revisión de asesor | código complejo con control de calidad |
+| 23-35 | Fable 5 | textos creativos, marketing, narrativa |
+| 29-40 | Opus 4.6 | arquitectura, estrategia, redacción de artículos |
+| 35-50 | Opus 4.6 + asesor | demostraciones, decisiones de arquitectura, estadística |
+| 40-50 | Opus 4.8 (recomendación al usuario) | demostraciones matemáticas, máximo rigor |
 
 ---
 
-## 3. Cross-agent delegation
+## 3. Delegación entre agentes
 
-### Which external agent for what?
+### ¿Qué agente externo para qué tarea?
 
-| Task | Best agent | Reason |
-|------|-----------|--------|
-| Scientific literature search | Gemini 3.5 pro | native OpenAlex/arXiv/PubMed skills |
-| Code review (second opinion) | Codex 5.5 | independent perspective |
-| Simple text generation | Ollama (local host) | token-free, 24/7 |
-| Creative texts, marketing | Fable 5 | strongest creative output |
-| Mathematical proofs | Opus 4.8 (advisor) | highest analytical depth |
+| Tarea | Mejor agente | Razón |
+|-------|--------------|-------|
+| Búsqueda de literatura científica | Gemini 3.5 pro | skills nativos de OpenAlex/arXiv/PubMed |
+| Revisión de código (segunda opinión) | Codex 5.5 | perspectiva independiente |
+| Generación de texto simple | Ollama (host local) | sin tokens, 24/7 |
+| Textos creativos, marketing | Fable 5 | salida creativa más sólida |
+| Demostraciones matemáticas | Opus 4.8 (asesor) | máxima profundidad analítica |
 
-### Exclusions (documented weaknesses)
+### Exclusiones (debilidades documentadas)
 
-- **Gemini:** NOT for mathematical reviews/proof work (documented direction error in a proof review, 2026-06-07)
-- **Codex 4.5:** only when 5.5 is unavailable; otherwise always 5.5
+- **Gemini:** NO para revisiones matemáticas o trabajo de demostración (error de dirección documentado en una revisión de demostración, 2026-06-07)
+- **Codex 4.5:** solo cuando 5.5 no esté disponible; de lo contrario, siempre 5.5
 
-### Invocation paths
+### Rutas de invocación
 
-> Replace the placeholders `<host>`, `<ollama-host>`, `<tailscale-ip>`, `<user>`, and `~/.ssh/<key>` with your own infrastructure.
+> Reemplaza los marcadores `<host>`, `<host-ollama>`, `<ip-tailscale>`, `<usuario>` y `~/.ssh/<clave>` con tu propia infraestructura.
 
-**Gemini (via companion-for-agy):**
+**Gemini (vía companion-for-agy):**
 ```
-companion-for-agy --researcher --json --timeout 120000 "research prompt"
-```
-
-**Codex (via codex-companion):**
-```
-node "~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs" task --effort high "code prompt"
+companion-for-agy --researcher --json --timeout 120000 "prompt de investigación"
 ```
 
-**Ollama on a remote host (via SSH):**
+**Codex (vía codex-companion):**
 ```
-ssh -i ~/.ssh/<key> <user>@<tailscale-ip> "curl -s http://localhost:11434/v1/chat/completions -d '{\"model\":\"qwen3.5:35b-a3b\",\"messages\":[{\"role\":\"user\",\"content\":\"Prompt\"}]}'"
+node "~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs" task --effort high "prompt de código"
 ```
 
-**Delegation to an agent system with tools (example):**
+**Ollama en un host remoto (vía SSH):**
+```
+ssh -i ~/.ssh/<clave> <usuario>@<ip-tailscale> "curl -s http://localhost:11434/v1/chat/completions -d '{\"model\":\"qwen3.5:35b-a3b\",\"messages\":[{\"role\":\"user\",\"content\":\"Prompt\"}]}'"
+```
+
+**Delegación a un sistema de agentes con herramientas (ejemplo):**
 ```
 curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" -d '{"prompt": "...", "chat_id": "claude-delegate"}'
 ```
 
 ---
 
-## 4. Advisor pairing
+## 4. Emparejamiento de asesores (Advisor pairing)
 
-### Mechanics
+### Mecánica
 
-`advisor()` is a **session-level tool** — the advisor model is set by the user via `/advisor`, not programmatically. This yields these pairing patterns:
+`advisor()` es una **herramienta a nivel de sesión**: el usuario establece el modelo asesor mediante `/advisor`, no programáticamente. Esto genera los siguientes patrones de emparejamiento:
 
-| Pattern | How it works | When to use |
-|---------|--------------|-------------|
-| **Session advisor** | user sets `/advisor opus 4.8`, agent calls `advisor()` | standard for proofs/architecture |
-| **Orchestrator-as-reviewer** | Opus main model reviews Sonnet subagent output | orchestrator is stronger than the worker |
-| **Counter-agent** | agent A works, agent B checks adversarially | independent verification, 2 perspectives |
-| **User recommendation** | agent recommends: "do this task with opus 4.8 + advisor" | when the current session is too weak |
+| Patrón | Cómo funciona | Cuándo usar |
+|--------|---------------|-------------|
+| **Asesor de sesión** | el usuario configura `/advisor opus 4.8`, el agente llama a `advisor()` | estándar para demostraciones/arquitectura |
+| **Orquestador como revisor** | el modelo principal Opus revisa la salida del subagente Sonnet | el orquestador es más fuerte que el trabajador |
+| **Contra-agente** | el agente A trabaja, el agente B comprueba adversariamente | verificación independiente, 2 perspectivas |
+| **Recomendación al usuario** | el agente recomienda: "realiza esta tarea con opus 4.8 + asesor" | cuando la sesión actual es demasiado débil |
 
-### When to recommend an advisor?
+### ¿Cuándo recomendar un asesor?
 
-- Mathematical proof work (score ≥ 35)
-- Architecture decisions with long-term consequences
-- Statistical methodology / study design
-- Complex bugs after 2+ unsuccessful debug cycles
+- Demostraciones matemáticas (puntuación ≥ 35)
+- Decisiones de arquitectura con consecuencias a largo plazo
+- Metodología estadística / diseño de estudios
+- Errores complejos después de 2+ ciclos de depuración infructuosos
 
-### When NOT to use an advisor?
+### ¿Cuándo NO usar un asesor?
 
-- Routine code, content, formatting (score < 23)
-- Simple feature implementation
-- Well-defined, non-critical tasks
+- Código rutinario, contenido, formato (puntuación < 23)
+- Implementación de funcionalidades simples
+- Tareas bien definidas y no críticas
 
 ---
 
-## 5. Escalation triggers
+## 5. Disparadores de escalado
 
 ### Ollama -> Haiku
-- File access required
-- Code analysis needed
+- Requiere acceso a archivos
+- Necesita análisis de código
 
 ### Haiku -> Sonnet
-- More than 2 files affected
-- Decision between alternatives needed
-- Unexpected error occurred
-- Delete operation requested
+- Más de 2 archivos afectados
+- Necesita decisión entre alternativas
+- Ocurrió un error inesperado
+- Se solicita operación de eliminación
 
 ### Sonnet -> Opus
-- Architecture decision required
-- 3+ systems must be integrated
-- Requirements contradictory/unclear
-- Strategic planning needed
+- Requiere decisión de arquitectura
+- Se deben integrar 3+ sistemas
+- Requisitos contradictorios/pocos claros
+- Necesita planificación estratégica
 
 ### Sonnet -> Gemini (lateral)
-- Scientific research needed
-- Bibliography verification
+- Necesita investigación científica
+- Verificación bibliográfica
 
 ### Sonnet -> Codex (lateral)
-- Code review as a second opinion
-- Advisor overloaded (fallback reviewer)
+- Revisión de código como segunda opinión
+- Asesor sobrecargado (revisor de respaldo)
 
-### Opus -> Opus + advisor
-- Proof review needed
-- Critical architecture decision
-- Statistical methodology
+### Opus -> Opus + asesor
+- Necesita revisión de demostración
+- Decisión de arquitectura crítica
+- Metodología estadística
 
-### De-escalation
-- Concept defined -> Sonnet takes over implementation
-- Task trivial/repetitive -> Haiku takes over
-- Text only, no tool access -> Ollama takes over
+### Desescalado
+- Concepto definido -> Sonnet asume la implementación
+- Tarea trivial/repetitiva -> Haiku asume el control
+- Solo texto, sin acceso a herramientas -> Ollama asume el control
 
 ---
 
-## 6. Permission matrix
+## 6. Matriz de permisos
 
-| Operation | Ollama | Haiku | Sonnet | Opus | Gemini | Codex |
+| Operación | Ollama | Haiku | Sonnet | Opus | Gemini | Codex |
 |-----------|--------|-------|--------|------|--------|-------|
-| Read files | - | Yes | Yes | Yes | Yes* | Yes* |
-| Write files | - | Yes | Yes | Yes | Yes* | Yes* |
-| Delete files | - | - | Yes** | Yes | - | - |
-| System commands | - | - | Yes** | Yes | Yes* | Yes* |
-| Architecture decisions | - | - | - | Yes | - | - |
-| Web research | - | - | Yes | Yes | Yes | - |
-| Call advisor() | - | - | Yes | Yes | - | - |
+| Leer archivos | - | Sí | Sí | Sí | Sí* | Sí* |
+| Escribir archivos | - | Sí | Sí | Sí | Sí* | Sí* |
+| Eliminar archivos | - | - | Sí** | Sí | - | - |
+| Comandos del sistema | - | - | Sí** | Sí | Sí* | Sí* |
+| Decisiones de arquitectura | - | - | - | Sí | - | - |
+| Investigación web | - | - | Sí | Sí | Sí | - |
+| Llamar a advisor() | - | - | Sí | Sí | - | - |
 
-*via companion script in its own sandbox mode
-**with user confirmation
-
----
-
-## 7. Cost efficiency
-
-### Token savings through routing
-
-| Task type | Without routing | With routing | Savings |
-|-----------|-----------------|--------------|---------|
-| Trivial | Opus tokens | Ollama (free) | 100% |
-| Boilerplate | Opus tokens | Haiku tokens | ~80% |
-| Standard code | Opus tokens | Sonnet tokens | ~50% |
-| Research | Claude tokens | Gemini tokens | ~70% (different budget) |
-| Code review | advisor() tokens | Codex tokens | ~60% (different budget) |
+*vía script complementario en su propio modo sandbox
+**con confirmación del usuario
 
 ---
 
-## 8. Golden rule
+## 7. Eficiencia de costes
 
-> "Opus thinks, Sonnet builds, Haiku executes, Ollama saves. Gemini researches, Codex reviews, Fable narrates."
+### Ahorro de tokens mediante enrutamiento
+
+| Tipo de tarea | Sin enrutamiento | Con enrutamiento | Ahorro |
+|---------------|------------------|------------------|--------|
+| Trivial | Tokens Opus | Ollama (gratis) | 100% |
+| Código base | Tokens Opus | Tokens Haiku | ~80% |
+| Código estándar | Tokens Opus | Tokens Sonnet | ~50% |
+| Investigación | Tokens Claude | Tokens Gemini | ~70% (presupuesto distinto) |
+| Revisión de código | Tokens advisor() | Tokens Codex | ~60% (presupuesto distinto) |
 
 ---
 
-## Registro de Cambios
+## 8. Regla de oro
+
+> "Opus piensa, Sonnet construye, Haiku ejecuta, Ollama ahorra. Gemini investiga, Codex revisa, Fable narra."
+
+---
+
+## Historial de Cambios
 
 ### 2.0.0 (2026-06-12)
-- Cross-agent delegation: Gemini, Codex, Ollama (local host) as routing targets
-- Advisor pairing: 4 patterns (session advisor, orchestrator-as-reviewer, counter-agent, user recommendation)
-- Reachability matrix: LLM-startable vs. user-only documented
-- Ollama (Qwen 3.5:35b-a3b, Haiku-to-Sonnet level) added as level 1-2
-- Lateral escalation: Sonnet -> Gemini (research), Sonnet -> Codex (review)
-- Exclusions documented (Gemini not for math)
-- Score thresholds extended to all models
+- Delegación entre agentes: Gemini, Codex, Ollama (host local) como destinos de enrutamiento
+- Emparejamiento de asesores: 4 patrones (asesor de sesión, orquestador como revisor, contra-agente, recomendación al usuario)
+- Matriz de alcanzabilidad: documentada iniciable por LLM vs. solo usuario
+- Añadido Ollama (Qwen 3.5:35b-a3b, nivel Haiku-a-Sonnet) como nivel 1-2
+- Escalado lateral: Sonnet -> Gemini (investigación), Sonnet -> Codex (revisión)
+- Exclusiones documentadas (Gemini no para matemáticas)
+- Umbrales de puntuación extendidos a todos los modelos
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0 (ing-strategie v2.0.0)
+- Adaptado desde BACH v3.8.0 (ing-strategie v2.0.0)
 
 ---
 
-*Ported from BACH v3.8.0 | Extended with cross-agent + advisor v2.0.0*
+*Adaptado desde BACH v3.8.0 | Ampliado con cross-agent + asesor v2.0.0*

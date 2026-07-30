@@ -1,74 +1,79 @@
 ---
+name: dev
+version: 0.1.0
+type: expert
+author: ellmos
+created: 2026-06-22
+updated: 2026-06-22
+description: 开发者助手（ATI 的继任者）。通过无头扫描提供快速的项目概览，并路由到可用的编程工具：CodeCommander MCP（分析/重构/诊断）和 ellmos-code-tools 模块。纯工具路由 + 扫描，无自定义存储。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: assist
+tags: [dev, coding, projekt-scan, ati, codecommander]
 language: zh
+status: active
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `dev`.
+> **中文** — `dev` 官方中文版本。
 
 
+# Dev — 开发者助手 (ATI) (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+首先获取概览，然后交由合适的工具处理。
 
+## 概览与目的
 
-# Dev — Developer Assistant (ATI) (English)
+BACH 的 ATI/entwickler 代理的继任者。包含两大任务：
+1. **项目扫描**（无头模式，仅依赖 stdlib）：在进行高成本分析之前，快速且节省 Token 地获取项目的结构、语言和构建标记概览。
+2. **工具路由**：分发至现有的编程工具，避免重复建设。
 
-Gets an overview first, then hands off to the right tools.
+## 触发条件 (Triggers)
 
-## 概述与执行目标 & Purpose
-
-Successor to BACH's ATI/entwickler agent. Two tasks:
-1. **Project scan** (headless, stdlib): fast, token-efficient overview of
-   structure, languages and build markers of a project — before expensive analysis runs.
-2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
-
-## Triggers
-
-| User input | Action |
+| 用户输入 | 操作 |
 |---|---|
-| "Get an overview of project X" | `dev_core.py scan <path>` |
-| "What kind of project is this / which stack?" | `dev_core.py scan <path>` |
-| "Analyse this file / refactor" | → CodeCommander MCP |
-| "Generate/check Python code" | → CodeCommander MCP / ellmos-code-tools |
+| "获取项目 X 的概览" | `dev_core.py scan <path>` |
+| "这是什么类型的项目 / 使用什么技术栈？" | `dev_core.py scan <path>` |
+| "分析此文件 / 重构" | → CodeCommander MCP |
+| "生成/检查 Python 代码" | → CodeCommander MCP / ellmos-code-tools |
 
-## Tool Landscape (Routing Targets)
+## 工具生态（路由目标）
 
-- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
-  `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
-  pycutter context, Method-Analyzer).
-- **FileCommander MCP**: File/directory operations over large trees.
+- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`)：`cc_analyze_code`、`cc_analyze_methods`、`cc_extract_classes`、`cc_diagnose_imports`、`cc_runtime_import_diagnose`、`cc_generate_python_code`、`cc_check_indentation` 等。
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`)：CLI 开发者工具（Structural-Edit、pycutter context、Method-Analyzer）。
+- **FileCommander MCP**：跨大型文件树的文件/目录操作。
 
-## CLI Entry Point (dev_core.py)
+## CLI 入口点 (dev_core.py)
 
 ```bash
 python dev_core.py scan .              # current project
 python dev_core.py scan /path/project  # structure + languages + markers
 ```
 
-Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git repo.
+检测项示例：Python (pyproject/requirements/setup)、Node/TypeScript、Rust、Go、Java、Roblox (Rojo)、Docker、Git 仓库。
 
-## Store
+## 存储 (Store)
 
-No store. Pure scan + routing.
+无存储。纯扫描 + 路由。
 
-## Attitude
+## 态度
 
-We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
-to others (e.g. ruff/pylint/eslint) if the user prefers them.
+我们推荐 CodeCommander/ellmos-code-tools 作为编程工具，但如果用户更偏好其他工具（如 ruff/pylint/eslint），我们也保持开放态度。
 
-## Privacy
+## 隐私
 
-- `dev_core.py` only reads file/directory names (structure), no content, no upload.
-- Skipped: `.git`, `node_modules`, `.venv`, `__pycache__` etc.
+- `dev_core.py` 仅读取文件/目录名称（结构），不读取内容，不上传数据。
+- 跳过项：`.git`、`node_modules`、`.venv`、`__pycache__` 等。
 
-## Related Resources
+## 相关资源
 
-- `assist/AGENTS.md` — Umbrella router
+- `assist/AGENTS.md` — 统一路由器
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
-## 变更日志与历史
+## 更新日志
 
 ### 0.1.0 (2026-06-22)
-- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
-  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.
+- 初始版本。ATI/entwickler 的继任者：无头项目扫描 (stdlib) + 路由至 CodeCommander MCP / ellmos-code-tools。对用户中立，无存储。

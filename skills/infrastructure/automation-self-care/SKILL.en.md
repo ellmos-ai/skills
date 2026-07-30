@@ -1,12 +1,21 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
-description: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
-
+updated: 2026-07-30
+description: >
+  Builds and operates a provider-neutral self-care core set for scheduled LLM
+  tasks and desktop-app automations. Use when an agent should discover its
+  native scheduler, install recurring hygiene, prompt-quality, frequency,
+  load, resource, cross-system, permission and runtime checks, or continuously
+  improve an existing automation fleet with rollback, readback and deletion
+  protection. Triggers on automation self-care, scheduler task care, desktop
+  app automation maintenance, automation fleet audit, self-healing schedules,
+  requests to recreate the ANTIGRAVITY-style maintenance task family,
+  core-set-textautomations, basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers, or textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,20 +24,31 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: en
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `automation-self-care`.
 
-
-# Automation Self-Care (English)
+# Automation Self-Care
 
 Create a native, provider-specific maintenance fleet from one provider-neutral
 control loop. Preserve the original intent of the ANTIGRAVITY task family while
 requiring evidence, reversible changes and native readback.
 
-## Non-negotiable Boundaries & Rules
+## Non-negotiable boundaries
 
 - Treat discovery, planning, approval, mutation and readback as separate phases.
 - Use the target app's supported automation API, command or UI. Never assume that
@@ -45,7 +65,7 @@ requiring evidence, reversible changes and native readback.
 - Count success only after outcome evidence, not merely scheduler start or exit 0.
 - Never copy secrets, private prompts or personal data into a shared registry.
 
-## Workflow & Execution Steps
+## Workflow
 
 ### 1. Discover the native automation surface
 
@@ -125,22 +145,10 @@ single-writer mutations require a claim or an equivalent native lock.
 
 ### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
 
-For AI frameworks that lack native, event-driven JSON hook loaders (such as
-Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
-Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
-
-- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
-  evaluate logs and execution state.
-- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
-  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
-  directly into target `sidecar.json` prompt texts.
-- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
-  `gardener`, `workflowhooker`, and `.SKILLS`.
-
 Treat token or subscription limitation as capacity state, not a broken actor.
 Return delegated coverage after the original actor produces a successful receipt.
 
-## Required Outputs & Deliverables
+## Required outputs
 
 For each setup or care run report:
 
@@ -151,7 +159,7 @@ For each setup or care run report:
 - rollback location and return condition;
 - shared coverage update, if a coordination registry exists.
 
-## Example & Usage
+## Example
 
 User: "Set up self-maintaining schedules in this desktop app."
 
@@ -161,6 +169,10 @@ approved tasks through the native surface. A folder containing a task prompt
 without a live scheduler registration is not a completed setup.
 
 ## Changelog
+
+### 1.0.1 (2026-07-30)
+
+- Added provider-neutral text-automation and desktop-app automation aliases.
 
 ### 1.0.0 (2026-07-28)
 

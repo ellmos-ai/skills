@@ -2,103 +2,80 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `load-project`.
+> **Русский** — Официальная русская версия `load-project`.
 
+# Загрузка проекта (Русский)
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Используйте этот навык в начале конкретной задачи проекта или если рабочий контекст стал неясным. Целью является не полный аудит репозитория, а минимальный надежный контекст, позволяющий безопасно продолжить работу.
 
+## Конфигурация
 
-> **English Translation** — Official English version of `load-project`.
+Навыку не требуются фиксированные имена каталогов. Локальные установки могут опционально задать следующие значения в своих общих правилах агента или в локальной конфигурации проекта:
 
+- известные корневые каталоги рабочей области (workspace roots),
+- предпочитаемые инструменты работы с файлами,
+- имена дополнительных файлов загрузки или реестра,
+- средства проверки блокировок (locks),
+- специфичные для проекта роли и приоритеты.
 
-# Load Project (English)
+Если такая конфигурация отсутствует, навык работает исключительно с указанной целью и найденными там правилами проекта.
 
-## Общий обзор и назначение & Purpose
+## Порядок действий
 
-Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
-Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
-sondern der kleinste belastbare Kontext, mit dem sicher weitergearbeitet werden
-kann.
+### 1. Определение цели
 
-## Konfiguration
+1. Взять явный путь, имя проекта или текущий рабочий каталог в качестве отправной точки.
+2. Определить фактический корень проекта или репозитория.
+3. Уточнить неоднозначные совпадения на основе задачи, корневых документов и границ репозитория; не угадывать при существенных различиях между целями.
 
-Der Skill benötigt keine festen Verzeichnisnamen. Lokale Installationen können
-optional folgende Werte in ihren allgemeinen Agentenregeln oder einer
-projektlokalen Konfiguration festlegen:
+### 2. Загрузка иерархии правил
 
-- bekannte Workspace-Wurzeln,
-- bevorzugte Dateiwerkzeuge,
-- Namen zusätzlicher Boot- oder Registry-Dateien,
-- Lock-Prüfer,
-- projektspezifische Rollen und Prioritäten.
+Читать от общего контекста к специфическому:
 
-Fehlt eine solche Konfiguration, arbeitet der Skill ausschließlich mit dem
-angegebenen Ziel und den dort auffindbaren Projektregeln.
+1. глобальные правила агентов и безопасности,
+2. правила рабочей области или пайплайна,
+3. правила проекта и репозитория,
+4. инструкции, относящиеся к задаче.
 
-## Ablauf
+Более специфичные правила действуют в рамках своего контекста (scope); более высокие границы безопасности и авторизации сохраняют силу.
 
-### 1. Ziel auflösen
+### 3. Чтение корневых документов по ролям
 
-1. Expliziten Pfad, Projektnamen oder aktuelle Arbeitsmappe als Startpunkt nehmen.
-2. Den tatsächlichen Projekt- oder Repository-Root bestimmen.
-3. Mehrdeutige Treffer anhand von Aufgabe, Root-Dokumenten und Repository-Grenzen
-   eingrenzen; bei materiell unterschiedlichen Zielen nicht raten.
+Имена файлов — это подсказки, а не жесткий стандарт. Выполняйте целевой поиск документов со следующими ролями:
 
-### 2. Regelhierarchie laden
-
-Vom allgemeinen zum spezifischen Kontext lesen:
-
-1. globale Agenten- und Sicherheitsregeln,
-2. Workspace- oder Pipeline-Regeln,
-3. Projekt- und Repository-Regeln,
-4. aufgabenbezogene Anweisungen.
-
-Spezifischere Regeln gelten innerhalb ihres Scopes; höherrangige Sicherheits- und
-Autorisierungsgrenzen bleiben bestehen.
-
-### 3. Root-Dokumente nach Rollen lesen
-
-Dateinamen sind Hinweise, keine feste Norm. Suche gezielt nach Dokumenten mit
-diesen Rollen:
-
-| Rolle | Typischer Inhalt |
+| Роль | Типичное содержимое |
 |---|---|
-| Einstieg | Zweck, Navigation, Startanweisung |
-| Regeln | Arbeitsweise, Sprache, Sicherheit, Konventionen |
-| Architektur | Komponenten, Datenfluss, Grenzen |
-| Status | aktueller Stand, offene Probleme, letzte Prüfung |
-| Aufgaben | priorisierte nächste Arbeit |
-| Register | kanonische Projekte, Checks oder Veröffentlichungen |
-| Nachweis | Tests, Prüfprotokolle, Beweisnotizen |
-| Übergabe | laufende Arbeit, fremde Änderungen, nächster Schritt |
+| Вход | Назначение, навигация, инструкции по запуску |
+| Правила | Принципы работы, язык, безопасность, соглашения |
+| Архитектура | Компоненты, поток данных, границы |
+| Статус | Текущее состояние, открытые проблемы, последняя проверка |
+| Задачи | Приоритезированные ближайшие работы |
+| Реестр | Канонические проекты, проверки или публикации |
+| Подтверждение | Тесты, протоколы проверок, заметки с доказательствами |
+| Передача | Текущая работа, сторонние изменения, следующий шаг |
 
-Nur die für die konkrete Aufgabe relevanten Rollen laden.
+Загружать только те роли, которые релевантны для конкретной задачи.
 
-### 4. Verbindliche Referenzen verfolgen
+### 4. Переход по обязательным ссылкам
 
-Wenn eine gelesene Regel weitere Dateien ausdrücklich als Pflichtlektüre nennt,
-diese gezielt nachladen. Referenzketten beenden, sobald sie für die Aufgabe keinen
-zusätzlichen verbindlichen Kontext mehr liefern.
+Если прочитанное правило явно указывает другие файлы как обязательные к прочтению, подгрузить их целевым образом. Завершать цепочки ссылок, как только они перестают предоставлять дополнительный обязательный контекст для задачи.
 
-### 5. Zustand und Sperren prüfen
+### 5. Проверка состояния и блокировок
 
-- Locks anhand der lokalen Policy auf Owner, Scope, Zeitstempel und
-  Gültigkeitskriterium prüfen; ohne definierte Stale-Regel einen Lock nie
-  eigenmächtig für veraltet erklären,
-- Versionskontrollstatus und fremde Änderungen,
-- laufende Prozesse oder Checkpoints, sofern relevant,
-- Aktualität von Registern, Tests und Statusangaben.
+- Проверить блокировки на основе локальной политики на предмет владельца, области применения, метки времени и критерия действительности; без определенного правила устаревания никогда не объявлять блокировку устаревшей самовольно,
+- Состояние системы контроля версий и сторонние изменения,
+- Запущенные процессы или контрольные точки (если применимо),
+- Актуальность реестров, тестов и сведений о состоянии.
 
-Den Ausgangszustand der betroffenen Bereiche vor Änderungen als Status-/Diff-
-Baseline sichern. Lassen sich vorhandene Änderungen nicht sicher zuordnen, gelten
-sie vorsorglich als fremd und bleiben unberührt.
+Сохранить исходное состояние затронутых областей перед внесением изменений в качестве базовой линии состояния/diff. Если имеющиеся изменения нельзя достоверно атрибутировать, из предосторожности считать их сторонними и не затрагивать.
 
-Momentaufnahmen als solche behandeln und vor riskanten Aktionen erneut prüfen.
+Относиться к снимкам состояния (snapshots) как к временным и повторно проверять их перед рискованными действиями.
 
-### 6. Lagebericht erstellen
+### 6. Составление отчета о ситуации
 
-Vor der Umsetzung knapp festhalten:
+Кратко зафиксировать перед реализацией:
 
 ```text
 Ziel:
@@ -112,28 +89,24 @@ Erfolgskriterium:
 Nächster sicherer Schritt:
 ```
 
-Quellen nur so genau nennen, wie es zur Überprüfbarkeit nötig ist. Secrets,
-personenbezogene Daten und vertrauliche Inhalte redigieren und nicht in den
-Lagebericht kopieren.
+Указывать источники лишь с той точностью, которая необходима для проверки. Редактировать (скрывать) секреты, персональные данные и конфиденциальное содержимое; не копировать их в отчет о ситуации.
 
-Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
+Если благодаря этому задача становится однозначной и авторизованной, сразу приступать к выполнению.
 
-## Grenzen
+## Ограничения
 
-- Keine breite, unbeschränkte Dateisuche als Standard.
-- Keine fehlenden Regeln oder Register neu erfinden.
-- Keine alte Statusmeldung als aktuellen Nachweis behandeln.
-- Keine fremden Änderungen überschreiben.
-- Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
-  geladen werden soll.
+- Не производить широкий неограниченный поиск файлов по умолчанию.
+- Не выдумывать отсутствующие правила или реестры.
+- Не рассматривать старые сообщения о состоянии как актуальное доказательство.
+- Не перезаписывать сторонние изменения.
+- Не проводить онбординг по проекту, если требуется только загрузка контекста для конкретной задачи.
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-28)
-- Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.
-- Rollenbasierte Dokumenterkennung und optionale lokale Konfiguration eingeführt.
-- Lock-Gültigkeit, Dirty-Tree-Provenienz, Snapshot-Nachweise und redigierte
-  Lageberichte operationalisiert.
+- Удалены жесткие привязки к пользователю, рабочей области, инструментам и провайдерам.
+- Внедрены ролевое распознавание документов и опциональная локальная конфигурация.
+- Формализована проверка действительности блокировок, происхождение изменений рабочей области (dirty tree), доказательства на основе снимков состояния и отредактированные отчеты о ситуации.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Исходная локальная версия.

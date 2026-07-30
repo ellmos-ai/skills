@@ -1,150 +1,97 @@
 ---
 language: ja
+description: アイデアを発掘し、履歴と照合してフィルタリングし、1つのアイデアを完了まで追求します。複雑な問題解決のための5つのフェーズ（A-E）ワークフロー。
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `idea-mining`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
+> **日本語** — `idea-mining` の公式日本語版。
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
+# Idea-Mining — アイデアを発掘し、フィルタリングし、1つを完遂する
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
-Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
-Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
-(ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
-substanziell explorieren.
+複雑な問題に直面したとき、アイデア発想が失敗するのはアイデアの不足からではなく、次の3つの理由によります: アイデアが**記録**されないこと、**すでに試されたこと**と照合されないこと（同じ行き止まりを繰り返すこと）、探してどれも一貫して**最後まで追求されない**ことです。このワークフローは3つのフェーズを厳格に分離します: まず拡散発掘（評価なし）、次にフィルタリング（プロジェクトドキュメントと照合）、探して最後に1つのアイデアを実質的に探求します。
 
-Herkunft: destilliert aus einem produktiven Forschungs-Automations-Lauf über offene
-mathematische Probleme; funktioniert genauso für Architektur-, Design- und Konzeptblockaden.
+由来: オープンな数学的問題に関する生産的な研究自動化セッションから抽出。アーキテクチャ、デザイン、概念的なブロックに対しても同様に機能します。
 
-## Phase A — Ideenspeicher füllen (divergent, ohne Bewertung)
+## フェーズ A — アイデアストレージの補充（拡散、評価なし）
 
-Alle Fundstücke in eine Datei `IDEENSPEICHER.md` im Projektordner schreiben (Stichworte +
-2–3 Sätze, Quelle/Auslöser notieren). Die acht Techniken nacheinander durchgehen — sie
-zielen auf unterschiedliche Assoziationsräume, deshalb bei wirklich festgefahrenen
-Problemen keine überspringen (bei leichteren Blockaden oder knapper Zeit genügt eine
-begründete Teilmenge, mindestens aber eine weiche Technik aus 3–5 plus die Recherche):
+すべての発見をプロジェクトフォルダ内の `IDEENSPEICHER.md` ファイルに書き込みます（キーワード + 2〜3文、情報源/トリガーを記録）。8つの手法を順番に実行します — これらは異なる連想空間をターゲットとしているため、本当にブロックされている問題ではスキップしないでください（軽度のブロックや時間が限られている場合は正当なサブセットで十分ですが、3〜5のソフト手法のうち少なくとも1つと調査を組み合わせます）:
 
-1. **Wiedererkennung:** Kommt mir das bekannt vor? Habe ich diese Struktur schon einmal
-   in anderem Kontext gesehen?
-2. **Fern-Disziplin:** Gibt es ein ähnliches Problem/eine ähnliche Formel in einer weit
-   entfernten Disziplin (Physik↔Ökonomie, Biologie↔Informatik, …)? Wo genau liegt die
-   Verbindung?
-3. **Alltags-Allegorie:** Das Problem in einer naturnahen Allegorie erzählen (Wellen,
-   Sand, Strömung, Wachstum …). Wirksam: die Allegorie von einem **unbelasteten
-   Subagenten** erfinden lassen und dann schauen, wohin sie führt — die eigene Sicht ist
-   vom Problem schon deformiert.
-4. **Störgefühl / Frosch→Prinz:** Was stört mich am aktuellen Stand, was finde ich
-   hässlich? Was müsste sich ändern, damit ich es plötzlich schön fände? Ästhetisches
-   Unbehagen zeigt oft auf die falsch gewählte Darstellung.
-5. **Märchen-Reframing:** Das Problem als Märchen erzählen: Wer ist der Held, wer die
-   Bösewichte, welche Gefahren lauern, was könnte dem Helden helfen? Die Rollenzuweisung
-   erzwingt eine Kausalstruktur, die im Formalismus unsichtbar bleibt.
-6. **Recherche:** Web, Fachdatenbanken, Preprint-Server, Foren (Reddit/ResearchGate/GitHub)
-   nach neuen Veröffentlichungen, Scripts, Ansätzen durchsuchen. Relevante Quellen in einen
-   Ordner `_sources/` laden und auf Innovationen lesen — bei Preprints kritisch bleiben.
-7. **Geschwisterprojekte:** Verwandte eigene Projekte auf rücktransferierbare Lösungsideen
-   prüfen (dort gelöste Teilprobleme, dort gebaute Werkzeuge).
-8. **Bestandsquerlauf:** Den gesamten eigenen Projektbestand (Pipeline) auf Ansätze
-   durchgehen, die auf DIESES Problem passen könnten.
+1. **認識:** 見覚えはありますか？以前に別の文脈でこの構造を見たことがありますか？
+2. **遠隔分野:** 遠く離れた分野（物理学↔経済学、生物学↔情報科学…）に類似の問題/公式はありますか？接続点は具体的にどこにありますか？
+3. **日常の比喩:** 自然に着想を得た比喩で問題を語る（波、砂、流れ、成長…）。効果的: **偏見のないサブエージェント**に比喩を考案させ、それがどこにつながるかを確認する — 自分自身の視点はすでに問題によって歪んでいます。
+4. **違和感 / カエル→王子:** 現在の状態の何が気になりますか、何が醜いと感じますか？突然美しく感じるためには何が変わる必要がありますか？美的違和感は、選択された表現が適切でないことを指し示していることがよくあります。
+5. **童話のリフレーミング:** 問題を童話として語る: ヒーローは誰か、悪役は誰か、どんな危険が潜んでいるか、何がヒーローを助けることができるか？役割分担により、形式主義では見えない因果構造が強制されます。
+6. **調査:** Web、専門データベース、プレプリントサーバー、フォーラム（Reddit/ResearchGate/GitHub）で新しい出版物、スクリプト、アプローチを検索します。関連するソースを `_sources/` フォルダに読み込み、革新的な点について読み込みます — プレプリントに対しては批判的であり続けます。
+7. **兄弟プロジェクト:** 関連する個人/内部プロジェクトをチェックして、逆転送可能な解決策のアイデア（そこで解決されたサブ問題、そこで構築されたツール）を探します。
+8. **インベントリ横断調査:** 自身のプロジェクトインベントリ全体（パイプライン）をレビューして、「この」問題に適合する可能性のあるアプローチを探します。
 
-## Phase B — Filter (gegen bereits Versuchtes)
+## フェーズ B — フィルター（すでに試されたことに対する照合）
 
-Den Ideenspeicher gegen die Projektdokumentation abgleichen: Beweisnotizen, Proof-Notes,
-Entscheidungs-Logs, TODO/DONE, frühere Ideenspeicher. **Eliminiert wird, was dokumentiert
-bereits versucht und abgeschlossen ist** — nicht, was nur „unwahrscheinlich klingt"
-(Bewertung nach Attraktivität kommt erst in Phase C). Überlebende nach
-`IDEENSPEICHER_FILTERED.md`.
+アイデアストレージをプロジェクトドキュメント（証明ノート、決定ログ、TODO/DONE、過去のアイデアストレージ）と照合します。**すでに試されて完了したと記録されているものを排除します** — 単に「可能性が低そうに見える」だけのものは排除しません（魅力による評価はフェーズ C でのみ行われます）。生き残ったアイデアを `IDEENSPEICHER_FILTERED.md` に保存します。
 
-Voraussetzung ist eine gepflegte Versuchs-Dokumentation — existiert keine, ist der erste
-Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
+前提条件は適切に維持された実験ドキュメントです — 存在しない場合、最初のステップはそれを作成することです（そうしないと、将来のすべての実行で重複が発生します）。
 
-## Phase C — Wählen und durchziehen
+## フェーズ C — 選択と完遂
 
-1. Ein bis drei Ideen aus dem Filtrat kurz anexplorieren (je ein Absatz: was wäre der
-   erste konkrete Schritt, was das Erfolgssignal?).
-2. **Eine** wählen — die mit der stärksten Anziehung. Attraktion ist hier ein legitimes
-   Kriterium: Bei schweren Problemen trägt nur eine Idee, der man nachgehen *will*.
-3. Die Wahl bis zum Ende oder zumindest substanziell weiterführen — nicht nach dem ersten
-   Hindernis zur nächsten Idee springen (das wäre Phase-A-Verhalten in Phase C).
+1. フィルターを通過した成果から1〜3個のアイデアを簡単に予備探求します（各1段落: 最初の具体的なステップは何か、成功のサインは何か？）。
+2. **1つ**を選択します — 最も強い引きつける力を持つものです。ここでの引きつける力は正当な基準です: 難しい問題に対しては、追求したいと思えるアイデアだけがあなたを最後まで運んでくれます。
+3. 選択を最後まで、あるいは少なくとも実質的に前進させます — 最初の障害で次のアイデアに飛びつかないでください（それはフェーズ C におけるフェーズ A の行動になります）。
 
-## Phase D — Dokumentieren
+## フェーズ D — 記録
 
-- Erkenntnisse in die Projektdokumentation (Beweisnotiz, Entscheidungs-Log, ADR) —
-  **auch die Fehlschläge**, sie sind der Filter für den nächsten Lauf.
-- Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
-- Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
+- 成果をプロジェクトドキュメント（証明ノート、決定ログ、ADR）に入力します — **失敗も含めて**。これらが次の実行のためのフィルターとなります。
+- 未解決のフォローアップアイデアを `IDEENSPEICHER.md` または TODO に戻します。
+- 概要レポート: 発掘数 | フィルター通過数 | 探求数 | 結果 | 次のステップ。
 
-## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+## フェーズ E — 播種（オプションのアウトバウンド転送）
 
-Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
-Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
-kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+手法 7 は兄弟プロジェクトからアイデアを「持ち込み」ます — フェーズ E はその方向を反転させます: 探求によって転送可能な成果（メソッド、ツール、解決パターン）が得られた場合、自身のプロジェクトインベントリを簡単にレビューします: これは誰の役に立ちますか？
 
-- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
-  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
-  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
-- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
-  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+- **ピンポイントで播種し、拡散させない:** 最大で ~3 つの受信プロジェクトに対して直接具体的な TODO エントリを提供します（何を導入するか、どこにあるか、なぜ適合するか）; その他の候補は自プロジェクト内の優先度付きリストとしてのみ記録します。
+- 制限の理由: 広く拡散させると、誰も取り組まない曖昧なタスクが多くのプロジェクトで生成されます — 3つの正確な種は10個の拡散した種に勝ります。
 
-## Als periodischer Lauf
+## 周期的な実行として
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
-Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
-verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
-Versuchs-Doku sind hier das Gedächtnis.
+このワークフローは、固定プロジェクトの定期的な自動化（イノベーションラウンド）として非常に適しています。このため、ローテーションフレームワーク（`rotation-check` スキル）と組み合わせます: レジストリにより、同じアイデアが何度も「再発見」されるのを防ぎます — アイデアストレージと実験ドキュメントがここでの記憶として機能します。
 
-## 使用例と実行モデル & Usage
+## 例と応用
 
 ```text
-Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
+問題: 収束証明が何週間も評価ステップで止まっています。
 
-A) Schürfen → IDEENSPEICHER.md: u. a. (2) ähnliche Struktur in der Warteschlangen-
-   theorie?; (3) Subagent-Allegorie „Sand rieselt durch immer feinere Siebe" →
-   Idee: Abschätzung stufenweise statt global; (6) Preprint von 2026 mit neuem
-   Lemma, nach _sources/ geladen; (7) Nachbarprojekt hat ein numerisches
-   Prüfscript, das sich rücktransferieren lässt.
-B) Filter gegen BEWEISNOTIZ.md: „globale Abschätzung verschärfen" wurde 2× versucht
-   und dokumentiert verworfen → raus. 3 Ideen überleben → IDEENSPEICHER_FILTERED.md.
-C) Prime-Wahl: die Sieb-Idee (stärkste Anziehung) — bis zu einem Teilresultat
-   durchgezogen.
-D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
+A) 発掘 → IDEENSPEICHER.md: 例: (2) 待ち行列理論に類似構造があるか？；
+   (3) サブエージェントの比喩「砂がますます細かい篩を通って落ちる」 →
+   アイデア: 全体ではなく段階的に評価；(6) 2026年の新しい補題付きプレプリント、_sources/ にダウンロード；
+   (7) 隣接プロジェクトに逆転送可能な数値チェックスクリプトがある。
+B) BEWEISNOTIZ.md と照合してフィルタリング: 「全体的な評価を厳しくする」は2回試みられ、
+   破棄されたと記録されている → 排除。3つのアイデアが生き残る → IDEENSPEICHER_FILTERED.md。
+C) プライム選択: 篩のアイデア（最も引きつける力が強い） — 部分的な結果まで完遂。
+D) BEWEISNOTIZ.md を更新（アイデア2の失敗も含む）、概要レポート。
 ```
 
-## Red Flags
+## レッドフラグ（Red Flags）
 
-| Gedanke | Realität |
+| 考え | 現実 |
 | --- | --- |
-| „Technik 3–5 sind Spielerei" | Die weichen Techniken liefern die Ideen, die Recherche nicht liefern kann — sie adressieren andere Assoziationsräume. |
-| „Ich bewerte schon beim Sammeln" | Bewertung in Phase A tötet die divergente Ausbeute. Erst speichern, dann filtern. |
-| „Der Filter dauert zu lange, ich erinnere mich schon" | Gedächtnis glättet Fehlversuche — nur die Doku zählt. |
-| „Idee klemmt, ich nehme die nächste" | In Phase C wird durchgezogen; Springen zurück nach A nur mit dokumentiertem Grund. |
+| 「手法 3〜5 はただの遊びだ」 | ソフト手法は調査では提供できないアイデアを提供します — これらは異なる連想空間に働きかけます。 |
+| 「収集しながら評価している」 | フェーズ A での評価は拡散的な成果を壊します。最初に保存し、後でフィルタリングします。 |
+| 「フィルターに時間がかかりすぎる、もう覚えている」 | 記憶は失敗した試みを美化します — ドキュメントのみがカウントされます。 |
+| 「アイデアが詰まったので、次を取る」 | フェーズ C では完遂します。記録された理由がある場合のみフェーズ A に戻ります。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `brainstorm` — breite Kreativmethoden (SCAMPER, Six Hats) ohne Filter-/Explorations-Pipeline.
-- `think` / `decide` — Analyse und Auswahlentscheidung, nutzbar innerhalb Phase C.
-- `rotation-check` — Gerüst für den periodischen Einsatz.
-- `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
+- `brainstorm` — フィルター/探求パイプラインなしの幅広いクリエイティブ手法（SCAMPER, Six Hats）。
+- `think` / `decide` — フェーズ C 内で使用可能な分析および選択決定。
+- `rotation-check` — 定期的なデプロイのためのフレームワーク。
+- `swarm-operations` — 手法 3 および並行探求のための偏見のないサブエージェント。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-03)
-- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
-  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
-  cross-project-transfer-Skill (Dedup-Entscheid).
+- フェーズ E 「播種」: 転送可能な成果を兄弟プロジェクトにオプションでアウトバウンド転送（最大 ~3 つの直接受信者） — 独立した cross-project-transfer スキルではなく統合されました。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
-  (Ideenspeicher → Filter → Prime-Wahl → Exploration) und user-neutral verallgemeinert.
+- 初期バージョン。Codex 自動化「ultra-deep-idea-search-single-project」（アイデアストレージ → フィルター → プライム選択 → 探求）から抽象化され、ユーザーニュートラルに汎用化されました。

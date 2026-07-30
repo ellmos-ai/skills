@@ -1,47 +1,60 @@
 ---
+name: decision-briefing
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-06-13
+updated: 2026-06-13
+description: Используйте каждый раз, когда накоплено несколько нерешенных вопросов — в рамках темы, проекта, документа или в ходе сессии: проведите инвентаризацию, представьте пронумерованный брифинг с вариантами A/B/C/D и отмеченной рекомендацией, примите ответы буквами (включая пакетный ввод), зафиксируйте результаты и запишите их обратно в исходные документы.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [entscheidung, briefing, batch, decision-session, priorisierung, workflow]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `decision-briefing`.
+> **Русский** — Официальная русская версия `decision-briefing`.
 
 
+# Decision-Briefing — Проработка множества решений по одной теме (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decision-Briefing — Work Through Many Decisions on One Topic (English)
-
-> A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
-
----
-
-## When to use?
-
-**Always, as soon as several decisions are pending** -- regardless of topic. Typical situations:
-
-- Many open decisions have piled up in one area/topic
-- A document (plan, TODO list, concept) contains several undecided points
-- Several decision questions have accumulated during a conversation
-- The agent itself has several questions for the user -- bundle them as a briefing instead of asking one by one
-- The user wants to clear open items quickly and on a solid basis
-
-**Trigger words:** open decisions, decision session, briefing, work through, go through, let's decide all of this
-
-**Scope:** [decide](../decide/SKILL.en.md) provides frameworks for ONE question. `decision-briefing` coordinates working through MANY decisions on one topic — and applies `decide` to complex individual cases.
+> Массив нерешенных вопросов превращается в пронумерованный брифинг с рекомендациями, на которые пользователь может ответить с молниеносной скоростью отдельными буквами — по одному или пакетом.
 
 ---
 
-## Core UX
+## Когда использовать?
 
-The heart of this skill is the briefing format. Each decision is presented so that answering costs only a single letter:
+**Всегда, как только накопилось несколько нерешенных вопросов** — независимо от темы. Типичные ситуации:
 
-- **Numbering:** `[E01]`, `[E02]`, … — stable references throughout the session
-- **Short question** + 1–2 sentences of context
-- **Options as letters** A/B/C/D (2–4 options, more only if necessary)
-- **Marked recommendation** with a one-sentence rationale (e.g. `→ Recommendation: A — because …`)
-- Optional: consequence note (what follows from the choice)
+- Накопилось много открытых решений в одной области/теме
+- Документ (план, список TODO, концепция) содержит несколько нерешенных пунктов
+- В ходе разговора накопилось несколько вопросов для принятия решений
+- У самого агента есть несколько вопросов к пользователю — объедините их в брифинг вместо того, чтобы спрашивать по одному
+- Пользователь хочет быстро и на прочной основе закрыть открытые пункты
 
-**User answer formats:**
+**Ключевые слова (Trigger words):** open decisions, decision session, briefing, work through, go through, let's decide all of this
+
+**Область применения:** [decide](../decide/SKILL.en.md) предоставляет фреймворки для ОДНОГО вопроса. `decision-briefing` координирует работу над МНОЖЕСТВОМ решений по теме — и применяет `decide` к сложным индивидуальным случаям.
+
+---
+
+## Основной пользовательский опыт (Core UX)
+
+Сердцем этого навыка является формат брифинга. Каждое решение представляется так, что ответ требует ввода всего одной буквы:
+
+- **Нумерация:** `[E01]`, `[E02]`, … — стабильные ссылки на протяжении всей сессии
+- **Короткий вопрос** + 1–2 предложения контекста
+- **Варианты в виде букв** A/B/C/D (2–4 варианта, больше только при необходимости)
+- **Отмеченная рекомендация** с обоснованием в одно предложение (например, `→ Рекомендация: A — потому что …`)
+- Необязательно: примечание о последствиях (что следует из выбора)
+
+**Форматы ответов пользователя:**
 
 ```
 Single:    "E01: A"  or  "1A"
@@ -52,7 +65,7 @@ Defer:     "E03: later"
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
 ```
 Topic + decisions at hand
@@ -70,19 +83,19 @@ Phase 3: DECISION SESSION
 Phase 4: RECORD & WRITE BACK
 ```
 
-### Phase 1: Capture & Inventory
+### Фаза 1: Сбор и инвентаризация
 
-Sources: what the user names, a document at hand, or the conversation context. No system-wide scan — only what is already there.
+Источники: то, что называет пользователь, имеющийся документ или контекст разговора. Без сканирования всей системы — только то, что уже есть.
 
-1. List all open decisions (one line each: short title)
-2. Detect and merge **duplicates** (same question, phrased multiple times)
-3. Mark **dependencies** ("E04 depends on E01")
-4. Set the **order**: blockers first (decisions that others depend on), then by urgency
-5. Show the list to the user for confirmation ("Did I get them all? Anything missing?")
+1. Перечислить все открытые решения (по одной строке на каждое: краткое название)
+2. Обнаружить и объединить **дубликаты** (один и тот же вопрос, сформулированный несколько раз)
+3. Отметить **зависимости** («E04 зависит от E01»)
+4. Установить **порядок**: сначала блокеры (решения, от которых зависят другие), затем по срочности
+5. Показать список пользователю для подтверждения («Все ли я учел? Ничего не упущено?»)
 
-### Phase 2: Prepare the Briefing
+### Фаза 2: Подготовка брифинга
 
-Per decision:
+По каждому решению:
 
 ```
 [E01] <Short question>
@@ -94,24 +107,24 @@ Per decision:
   (optional) Consequence: <what follows from the choice / next action>
 ```
 
-Rules for good options:
+Правила для хороших вариантов:
 
-- Options must be mutually exclusive and cover the spectrum
-- If useful, include a "keep status quo" or "defer" option
-- The recommendation is transparently reasoned — never covertly suggestive
-- When facts are unclear: clarify first (or flag as an open question), do not guess
+- Варианты должны быть взаимоисключающими и охватывать весь спектр
+- Если полезно, включите вариант «сохранить статус-кво» или «отложить»
+- Рекомендация прозрачно обоснована — никогда не является скрытым внушением
+- Если факты неясны: сначала уточните (или отметьте как открытый вопрос), не угадывайте
 
-### Phase 3: Decision Session
+### Фаза 3: Сессия принятия решений
 
-1. Present the briefing — one decision per message or all at once as a batch; with >5 decisions, use blocks of 3–5
-2. Accept letter answers and acknowledge them
-3. On a "more info" answer: deepen the decision (method toolbox below)
-4. For complex individual cases (many criteria, high stakes): escalate to the [decide](../decide/SKILL.en.md) skill (weighted scoring, scenario analysis)
-5. Carry deferred decisions forward explicitly as open — never drop them silently
+1. Представить брифинг — по одному решению на сообщение или все сразу пакетом; при наличии >5 решений используйте блоки по 3–5
+2. Принять ответы буквами и подтвердить их
+3. При ответе «подробнее»: углубиться в решение (набор инструментов ниже)
+4. Для сложных индивидуальных случаев (много критериев, высокие ставки): эскалировать в навык [decide](../decide/SKILL.en.md) (взвешенная оценка, сценарный анализ)
+5. Явно переносить отложенные решения как открытые — никогда не удалять их молча
 
-### Phase 4: Record & Write Back
+### Фаза 4: Запись и обратная запись
 
-1. Create a **results table**:
+1. Создать **таблицу результатов**:
 
 ```
 | No.  | Decision            | Chosen | Status   |
@@ -121,7 +134,7 @@ Rules for good options:
 | E03  | <short title>       | —      | deferred |
 ```
 
-2. Write decided items back into the **source documents/TODO files** — at the location of the open question, e.g.:
+2. Записать принятые пункты обратно в **исходные документы / файлы TODO** — на месте открытого вопроса, например:
 
 ```
 DECISION: <question>
@@ -129,13 +142,13 @@ DECISION: <question>
   → Next action: <if the decision implies a follow-up action>
 ```
 
-3. Keep **deferred items explicitly open** (in the source document or the TODO list) so they reappear in the next briefing
+3. Сохранять **отложенные пункты явно открытыми** (в исходном документе или списке TODO), чтобы они снова появились в следующем брифинге
 
 ---
 
-## Пример и применение & Usage
+## Пример и применение
 
-Topic: relaunch of a club website — 3 open decisions from the project plan.
+Тема: перезапуск сайта клуба — 3 открытых решения из плана проекта.
 
 ```
 [E01] Which system for the new website?
@@ -160,52 +173,52 @@ Topic: relaunch of a club website — 3 open decisions from the project plan.
   → Recommendation: A — reversible and yields early feedback; final content follows.
 ```
 
-The user answers as a batch: **"1B 2C 3A"** → results table, then the three decisions are marked DECIDED in the project plan.
+Пользователь отвечает пакетом: **"1B 2C 3A"** → таблица результатов, затем три решения отмечаются как DECIDED в плане проекта.
 
 ---
 
-## Method Toolbox (for "more info" and deepening)
+## Набор инструментов (для «подробнее» и углубления)
 
-| Method | When | Summary |
+| Метод | Когда | Краткое описание |
 |--------|------|---------|
-| **Pro/con matrix** | 2–3 options, quick comparison | Evaluate all options side by side |
-| **Weighted scoring** | Multiple criteria | Weighted criteria, points per option (quantitative where possible) |
-| **Second-order thinking** | Unclear stakes | What are the consequences of the consequences? |
-| **Premortem** | Risky decision | "It failed — why?" Find weak spots in advance |
-| **10/10/10 method** | Emotional/temporal distortion | How does the decision look in 10 minutes / 10 months / 10 years? |
+| **Матрица «за/против»** | 2–3 варианта, быстрое сравнение | Оценка всех вариантов бок о бок |
+| **Взвешенная оценка** | Множество критериев | Взвешенные критерии, баллы по вариантам (по возможности количественные) |
+| **Мышление второго порядка** | Неясные ставки/последствия | Каковы последствия последствий? |
+| **Премортем (Premortem)** | Рискованное решение | «Проект провалился — почему?» Поиск слабых мест заранее |
+| **Метод 10/10/10** | Эмоциональное/временное искажение | Как решение будет выглядеть через 10 минут / 10 месяцев / 10 лет? |
 
 ---
 
-## Working Principles
+## Принципы работы
 
-- **Never push decisions:** provide information, justify the recommendation transparently — the user decides
-- **Bias detection:** name thinking errors when they become visible (confirmation bias, sunk cost)
-- **Mind reversibility:** decide reversible choices quickly, treat final ones more thoroughly
-- **Respect time pressure:** fast decisions need simpler methods — not every question deserves a weighted scoring analysis
+- **Никогда не навязывать решения:** предоставлять информацию, прозрачно обосновывать рекомендацию — решает пользователь
+- **Обнаружение искажений:** называть ошибки мышления, когда они становятся видимыми (предвзятость подтверждения, необратимые затраты)
+- **Учитывать обратимость:** быстро принимать обратимые решения, относиться к окончательным более тщательно
+- **Уважать дефицит времени:** быстрые решения требуют простых методов — не каждый вопрос заслуживает анализа со взвешенной оценкой
 
 ---
 
-## Scope and Synergies
+## Область применения и синергия
 
-| Function | `decide` | `decision-briefing` |
+| Функция | `decide` | `decision-briefing` |
 |---|---|---|
-| Structure a single decision with a framework | ✓ | — |
-| Inventory many decisions on one topic | — | ✓ |
-| Numbered briefing with A/B/C options | — | ✓ |
-| Batch answers ("1A 2C 3B") | — | ✓ |
-| Write back into source documents | — | ✓ |
+| Структурирование одного решения с помощью фреймворка | ✓ | — |
+| Инвентаризация множества решений по одной теме | — | ✓ |
+| Пронумерованный брифинг с вариантами A/B/C | — | ✓ |
+| Пакетные ответы ("1A 2C 3B") | — | ✓ |
+| Обратная запись в исходные документы | — | ✓ |
 
-**Synergy:** For complex individual cases within a session, `decision-briefing` applies the frameworks from `decide` (weighted scoring, scenario analysis). For the larger thinking process before that (analyze → ideate → decide), see [structured-thinking](../structured-thinking/SKILL.en.md).
+**Синергия:** Для сложных индивидуальных случаев внутри сессии `decision-briefing` применяет фреймворки из `decide` (взвешенная оценка, сценарный анализ). О более широком мыслительном процессе до этого (анализ → генерация идей → принятие решения) см. [structured-thinking](../structured-thinking/SKILL.en.md).
 
 ---
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-06-13)
-- Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand
+- Перенесено из эксперта BACH `decision-briefing` v1.0.0; компонент сканера (scanner.py, sources.json, сканирование маркеров) намеренно удален — сбор является облегченным и основан на имеющемся контексте
 
 ---
 
-*Ported from BACH | Standalone version without scanner*
+*Перенесено из BACH | Автономная версия без сканера*
 
-**See also:** [decide](../decide/SKILL.en.md) (frameworks for a single decision) | [structured-thinking](../structured-thinking/SKILL.en.md) (analyze → ideate → decide as a meta workflow)
+**См. также:** [decide](../decide/SKILL.en.md) (фреймворки для одного решения) | [structured-thinking](../structured-thinking/SKILL.en.md) (анализ → генерация идей → принятие решения как мета-воркфлоу)

@@ -5,7 +5,8 @@ type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
 updated: 2026-07-27
-description: [日本語] エージェントスキル: mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.
+description: ユーザーが選択したプロバイダーとアプリクラス間の MCP 設定を検出、計画、同期するためのプロバイダー中立のエントリーポイント。ユーザーが信頼できる情報源、ターゲット、スコープを選択し、暗黙のハブとなるプロバイダーは存在しません。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,30 +16,26 @@ tags: [mcp, config, sync, provider-neutral, discovery, multi-agent]
 language: ja
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `mcp-config-sync`.
+> **日本語** — `mcp-config-sync` の公式日本語版。
 
 
+# MCP Config Sync (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+これは `agent-config-sync` への MCP に特化したエントリーポイントです。特定の
+プロバイダー、アプリ、またはマスターファイルを前提としません。
 
+1. ユーザーが希望する具体的なエンドポイントまたは軸を確認します：単一プロバイダー内での
+   アプリクラス間、単一アプリクラス内でのプロバイダー間、明示的なリスト、
+   または検出されたすべてのプロバイダーとクラス。
+2. `agent-config-sync/scripts/sync.py --discover` を実行し、次に `--offer` を実行します。
+3. 検出されたエンドポイントを未検証の候補とは分けて提示します。
+4. ユーザーに信頼できる情報源（真実のソース）、ターゲット、方向、および競合ポリシーを選択させます。
+5. `registry.json` を具現化し、`--plan` を確認した上でのみ
+   `--apply --yes` を使用します。
 
-# MCP Config Sync (English)
-
-This is the MCP-focused entry point to `agent-config-sync`. It assumes no
-provider, app or master file.
-
-1. Ask which concrete endpoints or axes the user wants: within one provider
-   across app classes, within one app class across providers, an explicit list,
-   or every detected provider and class.
-2. Run `agent-config-sync/scripts/sync.py --discover`, then `--offer`.
-3. Present detected endpoints separately from unverified candidates.
-4. Let the user choose truth source, targets, direction and conflict policy.
-5. Materialize `registry.json`, review `--plan`, and only then use
-   `--apply --yes`.
-
-Discovery and offers are read-only. There is no implicit hub and no implicit
-“sync all”. The former Claude Code↔Claude Desktop scripts are a legacy profile,
-not the generic default.
+検出およびオファーは読み取り専用です。暗黙のハブや暗黙の
+「すべて同期」は存在しません。以前の Claude Code↔Claude Desktop スクリプトはレガシープロファイルであり、
+汎用的なデフォルトではありません。

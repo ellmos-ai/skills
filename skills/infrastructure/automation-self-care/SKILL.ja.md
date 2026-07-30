@@ -1,11 +1,18 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
-description: [日本語] エージェントスキル: automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+updated: 2026-07-30
+description: >
+  スケジューリングされた LLM タスクやデスクトップアプリ自動化向けに、プロバイダー中立なセルフケア・コアセットを構築・運用します。エージェントがネイティブスケジューラーを検出して定期的なクリーンアップ、プロンプト品質、頻度、負荷、リソース、クロスシステム、権限、実行時チェックを導入したい場合や、ロールバック・リードバック・削除保護を備えた既存自動化フリートの継続的改善を行いたい場合に指定します。automation
+  self-care, scheduler task care, desktop app automation maintenance,
+  automation fleet audit, self-healing schedules, ANTIGRAVITY
+  スタイルのメンテナンス・タスクファミリー再構築リクエスト,
+  core-set-textautomations, basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers, textbased-desktopapp-automations
+  などのトリガーに対応します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,97 +21,85 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `automation-self-care`.
+> **日本語** — `automation-self-care` の公式日本語版。
 
+# Automation Self-Care
 
+単一のプロバイダー中立な制御ループから、ネイティブでプロバイダー固有のメンテナンスフリートを作成します。エビデンス、可逆的な変更、ネイティブリードバックを要求しつつ、ANTIGRAVITY タスクファミリーの本来の意図を保持します。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 譲れない境界条件
 
+- 検出、計画、承認、変更、リードバックを相互に独立したフェーズとして扱います。
+- ターゲットアプリがサポートする自動化 API、コマンド、または UI を使用してください。ストレージファイルを編集するだけでライブアプリの状態が変更されると仮定してはなりません。
+- タスクを提案する前に、ローカルルール、ロック、削除/抑制ログ、既存のスケジュールを読み込んでください。
+- スケジューラーのサポートを創作してはなりません。作成/更新/リードバックが証明できない場合は、手動インストール計画を作成し、変更を行う前に停止してください。
+- 1 回のケア実行につき、独立してテスト可能なチューニング変更は最大 1 つまでとします。
+- ケアタスクが自身を無効化したり、設定されたリカバリーフロアを下回る頻度に低下させたりしないよう保護してください。
+- すべての変更をロールバックできるように、以前のプロンプト、スケジュール、モデル、権限、および有効化状態を保持してください。
+- 単にスケジューラーが起動したことや exit 0 だけで成功とみなさず、成果のエビデンスが得られて初めて成功とカウントしてください。
+- シークレット、プライベートプロンプト、または個人データを共有レジストリにコピーしないでください。
 
-# Automation Self-Care (English)
+## ワークフロー
 
-Create a native, provider-specific maintenance fleet from one provider-neutral
-control loop. Preserve the original intent of the ANTIGRAVITY task family while
-requiring evidence, reversible changes and native readback.
+### 1. ネイティブ自動化サーフェスの検出
 
-## Non-negotiable Boundaries & Rules
+現在の Actor、プロバイダー、アプリクラス、スケジューラーサーフェス、サポートされている操作、状態ファイル、実行履歴、使用状況テレメトリ、およびリードバック方法をインベントリ化します。[provider-adapter-contract.md](references/provider-adapter-contract.md) 内のプロファイル契約を使用して機能を記録してください。
 
-- Treat discovery, planning, approval, mutation and readback as separate phases.
-- Use the target app's supported automation API, command or UI. Never assume that
-  editing a storage file changes live app state.
-- Read local rules, locks, deletion/suppression logs and existing schedules before
-  proposing a task.
-- Do not invent scheduler support. If create/update/readback cannot be proven,
-  produce a manual installation plan and stop before mutation.
-- Make at most one independently testable tuning change per care run.
-- Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
-- Preserve the previous prompt, schedule, model, permissions and enabled state so
-  every mutation can be rolled back.
-- Count success only after outcome evidence, not merely scheduler start or exit 0.
-- Never copy secrets, private prompts or personal data into a shared registry.
+ネイティブなデスクトップアプリのスケジュール、CLI/ヘッドレス実行、OS スケジューラーまたはサービススターター、一般的なスケジューラーサービス、ワークフローエンジン、および未サポートまたは UI 専用の自動化を明確に区別してください。設定ファイルの存在をサポートされた変更パスと同等とみなしてはなりません。
 
-## ワークフローと実行手順 & Execution Steps
+### 2. フリートのインベントリ化
 
-### 1. Discover the native automation surface
+各タスクについて、安定したローカル識別子、目的、プロンプトのフィンガープリント、スケジュール、有効化状態、モデル、権限、ターゲットパス、最後のスケジューラーイベント、最後の成功成果、および現在の所有者を記録します。プロンプトの内容はローカルに保持してください。
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
-[provider-adapter-contract.md](references/provider-adapter-contract.md).
+アプリがメモリから状態を書き換える可能性がある場合は、変更前に信頼できるライブサーフェスを 2 回確認してください。
 
-Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
-service starter, general scheduler service, workflow engine, and unsupported or
-UI-only automation. Do not equate the existence of a config file with a supported
-mutation path.
+### 3. コアセットの設計
 
-### 2. Inventory the fleet
+[core-set.md](references/core-set.md) をお読みください。以下のいずれかを選択します：
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+- `compact`: 頻度と負荷分散を組み合わせた 5 つのケアタスク。または
+- `full`: 元のメンテナンスファミリーに対応する 9 つの焦点を絞ったタスク。
 
-Check the authoritative live surface twice before mutation when the app can rewrite
-state from memory.
-
-### 3. Design the core set
-
-Read [core-set.md](references/core-set.md). Select either:
-
-- `compact`: five care tasks combining frequency with load distribution; or
-- `full`: nine focused tasks corresponding to the original maintenance family.
-
-Generate a provider-neutral plan:
+プロバイダー中立な計画を生成します：
 
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
 ```
 
-The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+ジェネレーターがタスクを自動的にインストールすることはありません。`blocked` となっているすべての機能をレビューし、計画を適用する前に衝突のないローカル時間を選択してください。
 
-### 4. Stage installation
+### 4. インストールの段階的実施
 
-Install through the native provider adapter:
+ネイティブなプロバイダーアダプターを介してインストールします：
 
-1. Start with hygiene in read-only mode.
-2. Add resource protection.
-3. Add prompt-quality tuning with rollback.
-4. Add frequency and load tuning only after enough run evidence exists.
-5. Add cross-system coordination last.
+1. まずは読み取り専用モードでのクリーンアップから始めます。
+2. リソース保護を追加します。
+3. ロールバック機能を備えたプロンプト品質のチューニングを追加します。
+4. 十分な実行エビデンスが存在するようになってから、頻度と負荷のチューニングを追加します。
+5. 最後にクロスシステム調整を追加します。
 
-Create new or imported tasks disabled unless the user explicitly approved active
-installation. For an unattended pilot, require a deletion log, before-state
-snapshot, run receipt and rollback path first.
+ユーザーがアクティブなインストールを明示的に承認しない限り、新規作成またはインポートされたタスクは無効状態のまま作成してください。無人パイロットの場合は、最初に削除ログ、事前状態のスナップショット、実行レシート、およびロールバックパスを要求してください。
 
-### 5. Run the care loop
+### 5. ケアループの実行
 
-Every care task follows:
+各ケアタスクは以下の手順に従います：
 
 ```text
 follow-up previous change
@@ -116,56 +111,39 @@ follow-up previous change
   -> write receipt and next-check condition
 ```
 
-Use the hypothesis catalogue and evidence rules in
-[core-set.md](references/core-set.md). Unknown cause means observe, narrow
-permissions or pause safely; never guess a repair.
+[core-set.md](references/core-set.md) にある仮説カタログとエビデンスルールを使用してください。原因が不明な場合は、観察、権限の縮小、または安全な一時停止を意味します。勘で修理を行ってはなりません。
 
-### 6. Coordinate across actors
+### 6. Actor 間での調整
 
-Keep local app state authoritative. Share only task contracts, coverage, status,
-receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
-single-writer mutations require a claim or an equivalent native lock.
+ローカルアプリの状態を信頼できる唯一の情報源（Authoritative）として維持します。タスク契約、カバー率、ステータス、レシート、およびサニタイズされたフィンガープリントのみを共有してください。冗長な読み取り専用レビューは許可されます。単一ライターによる変更には、クレームまたは同等のネイティブロックが必要です。
 
-### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+### 7. ネイティブイベントフックのないシステム（Letter-Hooker 拡張）
 
-For AI frameworks that lack native, event-driven JSON hook loaders (such as
-Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
-Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
+トークンやサブスクリプションの制限は容量状態として扱い、壊れた Actor として扱わないでください。元の Actor が成功レシートを生成した後に、委任されたカバー率を返却します。
 
-- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
-  evaluate logs and execution state.
-- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
-  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
-  directly into target `sidecar.json` prompt texts.
-- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
-  `gardener`, `workflowhooker`, and `.SKILLS`.
+## 必須のアウトプット
 
-Treat token or subscription limitation as capacity state, not a broken actor.
-Return delegated coverage after the original actor produces a successful receipt.
+設定またはケア実行ごとに以下を報告してください：
 
-## Required Outputs & Deliverables
+- 検出されたネイティブサーフェスと未サポートの機能。
+- 選択されたトポロジーと、作成、提案、またはスキップされたタスク。
+- 正確な変更内容と変更前後のリードバック。
+- 成果のエビデンスまたは開いている観察ウィンドウ。
+- ロールバックの場所と復帰条件。
+- 調整レジストリが存在する場合の共有カバー率更新。
 
-For each setup or care run report:
+## 例
 
-- discovered native surface and unsupported capabilities;
-- selected topology and tasks created, proposed or skipped;
-- exact mutation and before/after readback;
-- evidence of outcome or open observation window;
-- rollback location and return condition;
-- shared coverage update, if a coordination registry exists.
+ユーザー：「このデスクトップアプリで自己メンテナンススケジュールを設定してください。」
 
-## 使用例と実行モデル & Usage
-
-User: "Set up self-maintaining schedules in this desktop app."
-
-Discover whether the app can list, create, update and verify scheduled tasks.
-Generate the compact plan, present unsupported capabilities, then install only the
-approved tasks through the native surface. A folder containing a task prompt
-without a live scheduler registration is not a completed setup.
+アプリがスケジュールされたタスクのリスト表示、作成、更新、検証を行えるかを検出します。Compact 計画を生成し、未サポートの情報を提示した上で、承認されたタスクのみをネイティブサーフェス経由でインストールします。ライブスケジューラーへの登録がないタスクプロンプトが含まれるフォルダーは、設定完了とはみなされません。
 
 ## 変更履歴
 
+### 1.0.1 (2026-07-30)
+
+- プロバイダー中立なテキスト自動化およびデスクトップアプリ自動化のエイリアスを追加しました。
+
 ### 1.0.0 (2026-07-28)
 
-- Consolidated the original ANTIGRAVITY maintenance family, the F1-F6 control
-  loop and later provider-specific adaptations into a neutral core-set skill.
+- 元の ANTIGRAVITY メンテナンスファミリー、F1-F6 制御ループ、およびその後のプロバイダー固有の適応策を中立なコアセット Skill に統合しました。

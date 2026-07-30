@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
+description: Git Bash で /dev/null を使用した際に作成される Windows 予約済み NUL ファイルを検索および削除します。ヘッドレスまたは GUI で動作します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,57 +15,49 @@ tags: [windows, nul, cleanup, git-bash, filesystem]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `nulcleaner`.
+> **日本語** — `nulcleaner` の公式日本語版。
 
+# nulcleaner - Windows NUL File Cleanup (日本語)
 
+## 問題点
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Windows 上の Git Bash で `/dev/null` をコマンドに使用した場合（例：`> /dev/null`）、出力が破棄されず、現在のディレクトリに **`nul` という名前の実際のファイル** が作成されます。Windows では "NUL" がデバイス名として予約されているため、これらのファイルは通常の方法では削除できません。
 
-
-# nulcleaner - Windows NUL File Cleanup (English)
-
-## The Problem
-
-When `/dev/null` is used in commands under Git Bash on Windows (e.g., `> /dev/null`),
-instead of redirecting to nowhere, an actual **file named `nul`** is created in the current
-directory. Windows reserves "NUL" as a device name, which means these files cannot be
-deleted normally.
-
-This tool finds and deletes such NUL files via the extended UNC path (`\\?\`).
+本ツールは拡張 UNC パス（`\\?\`）を利用して、このような NUL ファイルを検索および削除します。
 
 ---
 
-## Modes
+## モード
 
-| Mode | Description |
+| モード | 説明 |
 |------|-------------|
-| `scan` | Recursively scan directory for NUL files |
-| `delete` | Find and delete NUL files |
-| `gui` | Graphical interface with file selection |
+| `scan` | ディレクトリ内の NUL ファイルを再帰的にスキャン |
+| `delete` | NUL ファイルを検索して削除 |
+| `gui` | ファイル選択機能付きのグラフィカルインターフェース |
 
 ---
 
-## CLI Usage
+## CLI の使い方
 
 ```bash
-# Scan only (shows found NUL files) (English)
+# スキャンのみ（発見された NUL ファイルを表示） (日本語)
 python nulcleaner.py scan /path/to/directory
 
-# Scan and delete (English)
+# スキャンして削除 (日本語)
 python nulcleaner.py delete /path/to/directory
 
-# Start GUI mode (English)
+# GUI モードを起動 (日本語)
 python nulcleaner.py gui
 ```
 
 ---
 
-## Headless API (for Integration)
+## ヘッドレス API（統合用）
 
-The tool also provides a Python API for headless operation:
+本ツールはヘッドレス運用向けの Python API も提供しています：
 
 ```python
 from nulcleaner import clean_nul_files_headless
@@ -74,22 +66,22 @@ result = clean_nul_files_headless("/path/to/directory", verbose=True)
 print(f"Found: {result['found']}, Deleted: {result['deleted']}")
 ```
 
-**Return value:** `{'found': int, 'deleted': int, 'errors': list}`
+**返り値:** `{'found': int, 'deleted': int, 'errors': list}`
 
 ---
 
-## Technical Details
+## 技術的詳細
 
-- Uses the extended UNC path (`\\?\`) to delete Windows-reserved filenames
-- Recursive scan with `os.walk()`
-- GUI with tkinter (no external dependencies)
-- Only works on Windows (where the problem occurs)
+- 拡張 UNC パス（`\\?\`）を使用して Windows 予約済みファイル名を削除
+- `os.walk()` による再帰的スキャン
+- tkinter による GUI（外部依存関係なし）
+- Windows 上でのみ動作（問題が発生する環境）
 
 ---
 
-## Prevention
+## 予防策
 
-Best to avoid `/dev/null` in Git Bash altogether. Instead:
-- Simply omit the output
-- Use `2>&1` for stderr redirection
-- Pay attention to Windows compatibility in shell scripts
+Git Bash での `/dev/null` の使用は避けるのがベストです。代わりに以下を検討してください：
+- 単に出力を省略する
+- stderr のリダイレクトには `2>&1` を使用する
+- シェルスクリプトにおける Windows 互換性に注意する

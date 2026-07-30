@@ -1,85 +1,95 @@
 ---
+name: medizin-daten
+version: 0.1.0
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-06-22
+description: 本地私密记录医疗数据：诊断、症状历史和检查计划。无 BACH 来源 — 采用具有独立 SQLite 存储的自定义设计。严格局限于本地，无云端传输。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [medizin, diagnose, symptome, gesundheit, privat, lokal]
 language: zh
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `medizin-daten`.
+> **中文** — `medizin-daten` 官方中文版本。
 
 
+## 概述与目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+安全、本地化地记录个人医疗数据：诊断（ICD-10 代码可选）、带日期序列的症状历史和检查计划。所有数据完全保存在本地 `medizin-daten/store.db` 中。
 
-
-## 概述与执行目标 & Purpose
-
-Securely and locally capture personal medical data: diagnoses (ICD-10 code
-optional), symptom histories with date series and examination plans. All
-data stays exclusively local in `medizin-daten/store.db`.
-
-The skill does not replace medical consultation and makes no medical
-statements — it is a structured notebook for personal health data.
+本 Skill 不能替代医疗咨询，也不提供任何医疗诊断或陈述 — 它只是一个用于记录个人健康数据的结构化笔记本。
 
 ---
 
-## Triggers
+## 触发词 (Triggers)
 
-| Phrase | Action |
+| 短语 | 操作 |
 |---|---|
-| "Record a diagnosis" | Create new diagnosis |
-| "Add diagnosis [name]" | Create named diagnosis |
-| "Symptom history" | Record today's symptoms |
-| "Record symptom [name]" | Log a single symptom |
-| "Examination plan" | Show upcoming appointments/examinations |
-| "Add appointment" | Enter examination appointment |
-| "Show my diagnoses" | Output diagnosis list |
+| "Record a diagnosis" / "记录诊断" | 创建新诊断 |
+| "Add diagnosis [name]" / "添加诊断 [名称]" | 创建具名诊断 |
+| "Symptom history" / "症状历史" | 记录今天的症状 |
+| "Record symptom [name]" / "记录症状 [名称]" | 记录单个症状 |
+| "Examination plan" / "检查计划" | 显示即将进行的预约/检查 |
+| "Add appointment" / "添加预约" | 输入检查预约 |
+| "Show my diagnoses" / "显示我的诊断" | 输出诊断列表 |
 
 ---
 
-## 工作流程与执行步骤 & Execution Steps
+## 工作流程与步骤
 
-1. **Detect mode**: diagnosis / symptom / examination plan
-2. **Structure input**: date, name, notes, optional ICD-10 code
-3. **Save**: into `store.db` (local, no network access)
-4. **Output**: readable summary for LLM context
+1. **检测模式**：诊断 / 症状 / 检查计划
+2. **结构化输入**：日期、名称、备注、可选的 ICD-10 代码
+3. **保存**：存入 `store.db`（本地，无网络访问）
+4. **输出**：适用于 LLM 上下文的可读摘要
 
 ---
 
-## CLI Entry Point
+## CLI 入口点
 
 ```bash
-# Create diagnosis (English)
+# Create diagnosis (Deutsch)
 python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "note"]
 
-# List diagnoses (English)
+# List diagnoses (Deutsch)
 python medizin_daten_core.py diagnoses
 
-# Record symptom (English)
+# Record symptom (Deutsch)
 python medizin_daten_core.py add-symptom "Headache" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptom history for a name (English)
+# Symptom history for a name (Deutsch)
 python medizin_daten_core.py symptom-history "Headache" [--limit 30]
 
-# Plan examination (English)
+# Plan examination (Deutsch)
 python medizin_daten_core.py add-exam "Blood count" [--date 2026-07-01] [--note "fasting"]
 
-# Upcoming examinations (English)
+# Upcoming examinations (Deutsch)
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 
 ---
 
-## Store
+## 存储 (Store)
 
-| Property | Value |
+| 属性 | 值 |
 |---|---|
-| Type | SQLite |
-| Path (default) | `skills/assist/medizin-daten/store.db` |
-| Override | `--store <path>` or env `MEDIZIN_STORE` |
-| Tables | `diagnoses`, `symptoms`, `examination_plans` |
+| 类型 | SQLite |
+| 路径（默认） | `skills/assist/medizin-daten/store.db` |
+| 覆盖方式 | `--store <path>` 或环境变量 `MEDIZIN_STORE` |
+| 数据表 | `diagnoses`, `symptoms`, `examination_plans` |
 
-### Schema
+### 模式 (Schema)
 
 ```sql
 CREATE TABLE IF NOT EXISTS diagnoses (
@@ -115,38 +125,37 @@ CREATE TABLE IF NOT EXISTS examination_plans (
 
 ---
 
-## Attitude
+## 原则与原则态度
 
-- No medical recommendations, no diagnosis by the skill.
-- ICD-10 codes are stored as free text — no validation against an external database.
-- Severity scale 1–10 is user-subjective.
-- Missing values (date, severity) are always allowed — the notebook principle applies.
-
----
-
-## Privacy (Privacy Gate)
-
-> **WARNING: Medical data is particularly sensitive.**
-
-- `store.db` contains highly sensitive health data — **never commit to Git**.
-- **No network access** — all operations run entirely locally.
-- **No sharing** with external services, no sync with cloud backends.
-- Backup recommendation: encrypted local backup (e.g. `age`/`gpg`).
-- The skill checks at startup whether `store.db` is outside the local file system
-  and issues a warning if the path is in a sync folder (OneDrive etc.).
-- `~/.gitignore_global` or local `.gitignore` should exclude `store.db`.
+- 本 Skill 不提供医疗建议，也不进行诊断。
+- ICD-10 代码作为自由文本存储 — 不对外部数据库进行验证。
+- 1–10 级的严重程度评级由用户主观决定。
+- 始终允许缺失值（日期、严重程度） — 遵循笔记本原则。
 
 ---
 
-## Related Resources
+## 隐私（隐私门界）
 
-- Skill `assist/gesundheit` — general health assistance (not medical data)
-- MediPlaner (`tools/module-installer` → `mediplaner`) — medication management (separate programme)
+> **警告：医疗数据尤为敏感。**
+
+- `store.db` 包含高度敏感的健康数据 — **切勿提交到 Git**。
+- **无网络访问** — 所有操作完全在本地运行。
+- **不与外部服务共享**，不与云端后端同步。
+- 备份建议：加密的本地备份（例如 `age`/`gpg`）。
+- 启动时，Skill 会检查 `store.db` 是否处于本地文件系统之外，如果路径位于同步文件夹（OneDrive 等）中，则发出警告。
+- `~/.gitignore_global` 或本地 `.gitignore` 应排除 `store.db`。
 
 ---
 
-## 变更日志与历史
+## 相关资源
 
-| Version | Date | Change |
+- Skill `assist/gesundheit` — 一般健康助手（非医疗数据）
+- MediPlaner（`tools/module-installer` → `mediplaner`） — 药物管理（独立程序）
+
+---
+
+## 变更日志
+
+| 版本 | 日期 | 变更 |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Initial creation — custom design, privacy gate, 3-table schema |
+| 0.1.0 | 2026-06-22 | 初次创建 — 自定义设计，隐私门界，3 表架构 |

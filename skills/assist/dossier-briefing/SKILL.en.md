@@ -3,7 +3,6 @@ name: dossier-briefing
 version: 1.0.0
 category: assist
 description: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
-
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -17,7 +16,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `dossier-briefing`.
 
 
 # Dossier-Briefing (English)
@@ -45,7 +44,7 @@ subsequent research with `research-agent` or `web-reading`.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Name the subject:** Extract name/title of the briefing from the user input.
 2. **Detect type:** person, organization, topic, event (or unspecified).
@@ -59,22 +58,22 @@ subsequent research with `research-agent` or `web-reading`.
 ## CLI
 
 ```bash
-# Briefing to stdout (English)
+# Briefing to stdout (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# Write to file (English)
+# Write to file (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Topic briefing (English)
+# Topic briefing (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantum computing" --typ topic
 
-# Event (English)
+# Event (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Without type (generic) (English)
+# Without type (generic) (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "My topic"
 
-# Help (English)
+# Help (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 

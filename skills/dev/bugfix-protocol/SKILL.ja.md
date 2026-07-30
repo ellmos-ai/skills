@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+description: 体系的な6段階のデバッグプロトコル。クイックチェック、孤立テスト、20分ルール、バグレポートテンプレートを備えたバグへの構造化アプローチ。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,103 +15,99 @@ tags: [debugging, bugfix, protocol, python, pyqt6, systematic]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bugfix-protocol`.
+<img src="banner.png" width="100%" alt="bugfix-protocol banner">
+> **日本語** — `bugfix-protocol` の公式日本語版。
 
+# Bugfix Protocol: 体系的6段階デバッグプロトコル (日本語)
 
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Bugfix Protocol: Systematic 6-Phase Debugging (English)
-
-A structured approach to bugs — from symptom analysis to verification.
-Prevents aimless trial-and-error and ensures fixes are sustainable.
+症状分析から検証に至るバグへの構造的アプローチ。
+あてのない試行錯誤を防ぎ、持続可能な修正を実現します。
 
 ---
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-| Phase | Name | Goal | Max. Time |
-|-------|------|------|-----------|
-| 1 | Quick Checks | Rule out obvious causes | 2 min |
-| 2 | Diagnosis | Locate root cause | 10 min |
-| 3 | Isolated Test | Make bug reproducible | 5 min |
-| 4 | Fix | Minimal correction | 10 min |
-| 5 | Verification | Verify fix + check side effects | 5 min |
-| 6 | Documentation | Preserve knowledge | 2 min |
+| フェーズ | 名前 | 目標 | 最大時間 |
+|----------|------|------|----------|
+| 1 | クイックチェック | 明白な原因の排除 | 2分 |
+| 2 | 診断 | 根本原因の特定 | 10分 |
+| 3 | 孤立テスト | バグの再現性の確保 | 5分 |
+| 4 | 修正 (Fix) | 最小限の修正 | 10分 |
+| 5 | 検証 | 修正の検証と副作用のチェック | 5分 |
+| 6 | ドキュメント化 | ナレッジの保存 | 2分 |
 
-**20-Minute Rule:** If no progress after 20 minutes, change approach or seek help.
+**20分ルール:** 20分経っても進展がない場合は、アプローチを変更するか助けを求めてください。
 
 ---
 
-## Phase 1: Quick Checks (2 min)
+## フェーズ 1: クイックチェック (2分)
 
-Before diving deep — check the most common causes:
+深く調査する前に — 最も一般的な原因を確認します：
 
-### Checklist
+### チェックリスト
 
-- [ ] **Syntax error?** Read error message carefully, check line
-- [ ] **Import error?** Module installed? Correct name? Circular import?
-- [ ] **Typo?** Variable/function names correct?
-- [ ] **Wrong data type?** String instead of int? None where object expected?
-- [ ] **Stale cache?** Delete `__pycache__`, restart
-- [ ] **Wrong environment?** Correct venv active? Correct Python version?
-- [ ] **Encoding?** UTF-8 vs. cp1252 (Windows classic)
+- [ ] **文法エラー？** エラーメッセージを注意深く読み、該当行を確認
+- [ ] **インポートエラー？** モジュールはインストールされているか？正しい名前か？循環インポートか？
+- [ ] **タイポ（一字違い）？** 変数名/関数名は正しいか？
+- [ ] **型違い？** int のはずが string になっていないか？オブジェクト期待値に None が入っていないか？
+- [ ] **古いキャッシュ？** `__pycache__` を削除して再起動
+- [ ] **環境の違い？** 正しい venv が有効か？正しい Python バージョンか？
+- [ ] **文字コード (Encoding)？** UTF-8 vs. cp1252 (Windows の伝統的エンコーディング)
 
-### Quick Actions
+### クイックアクション
 
 ```bash
-# Clear cache (English)
+# キャッシュのクリア (日本語)
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports (English)
+# インポートの確認 (日本語)
 python -c "import modulename"
 
-# Check syntax (English)
+# 文法チェック (日本語)
 python -m py_compile file.py
 ```
 
 ---
 
-## Phase 2: Diagnosis (10 min)
+## フェーズ 2: 診断 (10分)
 
-### Strategy: Outside-In
+### 戦略：外側から内側へ (Outside-In)
 
-1. **Analyze error message** — Read traceback from bottom to top
-2. **Check recent changes** — `git diff`, `git log --oneline -10`
-3. **Use diagnostic tools** — Use project-specific diagnostic tools
+1. **エラーメッセージの分析** — トレースバックを一番下から上に向かって読む
+2. **最近の変更点の確認** — `git diff`, `git log --oneline -10`
+3. **診断ツールの活用** — プロジェクト固有の診断ツールを使用
 
-### Diagnostic Tools (Examples)
+### 診断ツール（例）
 
-Depending on the project, specialized diagnostic scripts may be helpful:
+プロジェクトによっては、専用の診断スクリプトが役立ちます：
 
-| Tool | Purpose |
-|------|---------|
-| `import_diagnose.py` | Analyze import problems |
-| `method_analyzer.py` | Check method signatures |
-| `env_checker.py` | Validate environment variables/paths |
+| ツール | 目的 |
+|--------|------|
+| `import_diagnose.py` | インポート問題の分析 |
+| `method_analyzer.py` | メソッドシグネチャの確認 |
+| `env_checker.py` | 環境変数/パスの検証 |
 
-> **Note:** Create project-specific diagnostic tools or use existing ones.
-> The systematic approach matters, not the specific tool.
+> **注:** プロジェクト固有の診断ツールを作成するか、既存のものを使用してください。
+> 重要なのは特定のツールではなく、体系的なアプローチです。
 
-### Debugging Techniques
+### デバッグ手法
 
 ```python
-# 1. Print debugging (quick but effective) (English)
+# 1. Print デバッグ（迅速かつ効果的） (日本語)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive) (English)
+# 2. ブレークポイント（対話型） (日本語)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback (English)
+# 3. 拡張トレースバック (日本語)
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print (English)
+# 4. print の代わりに Logging を使用 (日本語)
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -120,171 +116,171 @@ logger.debug(f"State: {state!r}")
 
 ---
 
-## Phase 3: Isolated Test (5 min)
+## フェーズ 3: 孤立テスト (5分)
 
-### Minimal Reproducible Example (MRE)
+### 最小再現例 (MRE)
 
-Goal: Reproduce the bug with minimal code.
+目標: 最小限のコードでバグを再現する。
 
 ```python
-# test_bug.py — Minimal Reproduction Test (English)
+# test_bug.py — 最小再現テスト (日本語)
 """
-Bug: [Short description]
-Expected: [What should happen]
-Actual: [What happens instead]
+Bug: [短い説明]
+Expected: [期待される挙動]
+Actual: [実際の挙動]
 """
 
-# Minimal setup (English)
-# ... only the essentials (English)
+# 最小限のセットアップ (日本語)
+# ... 必要最小限のみ (日本語)
 
-# Bug trigger (English)
-# ... exact code that triggers the bug (English)
+# バグトリガー (日本語)
+# ... バグを引き起こす正確なコード (日本語)
 
-# Expected result (English)
-# assert result == expected, f"Got {result}" (English)
+# 期待される結果 (日本語)
+# assert result == expected, f"Got {result}" (日本語)
 ```
 
-### Isolation Strategies
+### 孤立化戦略
 
-1. **New file:** Reproduce the bug in a separate file
-2. **Remove dependencies:** One by one, until the bug disappears
-3. **Binary search:** Halve the code block, check which half contains the bug
+1. **新しいファイル:** 別のファイルでバグを再現する
+2. **依存関係の削除:** バグが消えるまで1つずつ削除する
+3. **二分探索:** コードブロックを半分にし、どちらにバグが含まれているか確認する
 4. **Git bisect:** `git bisect start`, `git bisect bad`, `git bisect good <commit>`
 
 ---
 
-## Phase 4: Fix (10 min)
+## フェーズ 4: 修正 / Fix (10分)
 
-### Principles
+### 原則
 
-1. **Minimal:** Change as little as possible
-2. **Understand:** Never fix blindly — understand WHY it's broken
-3. **One thing:** One fix per commit, don't fix multiple issues at once
-4. **Backward-compatible:** Don't break existing functionality
+1. **最小限:** 変更は可能な限り少なく
+2. **理解:** 暗闇で修正しない — なぜ壊れているのかを理解する
+3. **単一の変更:** 1コミットにつき1つの修正。複数の問題を一度に修正しない
+4. **下位互換性:** 既存の機能を壊さない
 
-### Fix Patterns
+### 修正パターン
 
 ```python
-# BAD: Treating the symptom (English)
+# BAD: 症状だけを治療する (日本語)
 try:
     result = broken_function()
-except:  # Swallow everything
+except:  # すべてを握りつぶす
     result = default_value
 
-# GOOD: Fix the root cause (English)
+# GOOD: 根本原因を修正する (日本語)
 def broken_function():
-    if input_data is None:  # Actual cause: missing None check
+    if input_data is None:  # 実際の原因: None チェックの欠落
         return default_value
     return process(input_data)
 ```
 
-### Common Fix Categories
+### よくある修正カテゴリ
 
-| Category | Typical Fix |
-|----------|------------|
-| None/Null | Guard clause: `if x is None: return default` |
-| Index error | Bounds check: `if i < len(lst)` |
-| Type error | Explicit conversion: `str(x)`, `int(x)` |
-| Import error | Fix path, install package |
-| Encoding | Specify UTF-8 explicitly: `encoding='utf-8'` |
-| Race condition | Lock/Mutex, or change order |
-| State bug | Check initialization, add reset |
+| カテゴリ | 典型的な修正 |
+|----------|--------------|
+| None/Null | ガード句: `if x is None: return default` |
+| インデックスエラー | 境界チェック: `if i < len(lst)` |
+| 型エラー | 明示的変換: `str(x)`, `int(x)` |
+| インポートエラー | パスの修正、パッケージのインストール |
+| エンコーディング | UTF-8 を明示的に指定: `encoding='utf-8'` |
+| レースコンディション | ロック/ミューテックス、または順序の変更 |
+| ステートバグ | 初期化の確認、リセットの追加 |
 
 ---
 
-## Phase 5: Verification (5 min)
+## フェーズ 5: 検証 (5分)
 
-### Checklist
+### チェックリスト
 
-- [ ] **Bug is fixed:** Original problem no longer occurs
-- [ ] **MRE passes:** Isolated test runs through
-- [ ] **No regression:** Existing tests still pass
-- [ ] **Edge cases:** Empty input, None, large data tested
-- [ ] **Project tools:** Check project tools directory for relevant test/validation tools
+- [ ] **バグが修正された:** 元の問題が発生しなくなった
+- [ ] **MRE がパスする:** 孤立テストが最後まで実行される
+- [ ] **デグレード（回帰）がない:** 既存のテストが引き続きパスする
+- [ ] **境界値ケース:** 空の入力、None、大容量データがテストされている
+- [ ] **プロジェクトツール:** プロジェクトのツールディレクトリで関連するテスト/検証ツールを確認
 
-### Test Commands
+### テストコマンド
 
 ```bash
-# Unit tests (English)
+# ユニットテスト (日本語)
 python -m pytest tests/ -v
 
-# Only affected tests (English)
+# 影響を受けるテストのみ (日本語)
 python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type check (English)
+# 型チェック (日本語)
 python -m mypy file.py
 
-# Lint (English)
+# リント (日本語)
 python -m flake8 file.py
 ```
 
 ---
 
-## Phase 6: Documentation (2 min)
+## フェーズ 6: ドキュメント化 (2分)
 
-### Bug Report Template
+### バグレポートテンプレート
 
 ```markdown
-## Bug Report: [Short Title]
+## バグレポート: [短いタイトル]
 
-**Date:** YYYY-MM-DD
-**Severity:** critical / high / medium / low
-**Component:** [Module/File]
+**日付:** YYYY-MM-DD
+**重要度:** 緊急 / 高 / 中 / 低
+**コンポーネント:** [モジュール/ファイル]
 
-### Symptom
-[What the user sees / error message]
+### 症状
+[ユーザーに見える挙動 / エラーメッセージ]
 
-### Root Cause
-[Technical root cause]
+### 根本原因
+[技術的な根本原因]
 
-### Fix
-[What was changed + why]
+### 修正 (Fix)
+[変更内容 + 理由]
 
-### Affected Files
-- `file1.py` — [Change]
-- `file2.py` — [Change]
+### 影響を受けるファイル
+- `file1.py` — [変更点]
+- `file2.py` — [変更点]
 
-### Prevention
-[How can this type of bug be prevented in the future?]
+### 再発防止策
+[今後このタイプのバグをどう防ぐか？]
 ```
 
-### Commit Message Format
+### コミットメッセージフォーマット
 
 ```
-fix: [Short description of the fix]
+fix: [修正の短い説明]
 
-Cause: [Root cause in one sentence]
-Fix: [What was changed]
-Test: [How verified]
+Cause: [一言で言えば根本原因]
+Fix: [変更内容]
+Test: [検証方法]
 ```
 
 ---
 
-## PyQt6 / GUI Debugging — Common Pitfalls
+## PyQt6 / GUI デバッグ — よくある落とし穴
 
-> This section is relevant for desktop GUI projects with PyQt6/PySide6.
+> このセクションは PyQt6/PySide6 を使用したデスクトップ GUI プロジェクトに関連します。
 
-### Top 5 PyQt6 Traps
+### PyQt6 5大トラップ
 
-| Trap | Problem | Solution |
-|------|---------|---------|
-| **Signal-Slot Disconnect** | Signal connected but handler doesn't run | `print` in handler, check signature |
-| **Thread Safety** | GUI update from worker thread | `QMetaObject.invokeMethod` or use signal |
-| **Layout Cascade** | Widget invisible/misplaced | `widget.show()`, check layout hierarchy |
-| **Event Loop Block** | GUI freezes | Move long operations to QThread |
-| **Garbage Collection** | Widget suddenly disappears | Keep reference as `self.widget` |
+| トラップ | 問題 | 解決策 |
+|----------|------|--------|
+| **シグナル・スロットの切断** | シグナルは接続されているがハンドラが実行されない | ハンドラ内で `print`、シグネチャの確認 |
+| **スレッドセーフ** | ワーカースレッドからの GUI 更新 | `QMetaObject.invokeMethod` またはシグナルを使用 |
+| **レイアウトの崩れ** | ウィジェットが非表示/配置ミス | `widget.show()`、レイアウト階層の確認 |
+| **イベントループのフリーズ** | GUI がフリーズする | 重い処理を QThread に移動 |
+| **ガベージコレクション** | ウィジェットが突然消える | 参照を `self.widget` として保持 |
 
-### PyQt6 Debug Helpers
+### PyQt6 デバッグヘルパー
 
 ```python
-# Dump widget hierarchy (English)
+# ウィジェット階層のツリー表示 (日本語)
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging (English)
+# シグナルデバッグ (日本語)
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):
@@ -294,41 +290,41 @@ def debug_connect(self, *args, **kwargs):
 
 ---
 
-## Quick Reference
+## クイックリファレンス
 
 ```
-BUG FOUND?
+バグ発見？
      |
      v
-[Phase 1: Quick Checks]  ──── Obvious? -> FIX
+[フェーズ 1: クイックチェック] ───── 明白か？ -> 修正 (FIX)
      |
      v
-[Phase 2: Diagnosis]  ────────── Cause clear? -> Phase 4
+[フェーズ 2: 診断] ────────────────── 原因明確か？ -> フェーズ 4
      |
      v
-[Phase 3: Isolated Test]  ── Reproducible? -> Phase 4
-     |                              |
-     |                         Not reproducible?
-     |                              |
-     |                         Add logging,
-     |                         wait for recurrence
+[フェーズ 3: 孤立テスト] ──────────── 再現可能か？ -> フェーズ 4
+     |                                      |
+     |                                再現不可か？
+     |                                      |
+     |                                ログを追加し、
+     |                                再発を待つ
      v
-[Phase 4: Fix]  ─────────────── Minimal + understood
+[フェーズ 4: 修正] ────────────────── 最小限かつ理解済み
      |
      v
-[Phase 5: Verification]  ────── Tests green? -> Phase 6
-     |                              |
-     |                         Tests red? -> Back to Phase 4
+[フェーズ 5: 検証] ────────────────── テスト成功（グリーン）か？ -> フェーズ 6
+     |                                      |
+     |                                テスト失敗（レッド）か？ -> フェーズ 4 へ戻る
      v
-[Phase 6: Documentation]  ───── Bug report + commit
+[フェーズ 6: ドキュメント化] ──────── バグレポート + コミット
 ```
 
-### 20-Minute Rule
+### 20分ルール
 
-If you're stuck after 20 minutes:
+20分経っても行き詰まっている場合：
 
-1. **Change approach** — Try a different debugging technique
-2. **Rubber duck** — Explain the problem out loud (or write it down)
-3. **Take a break** — Step away for 5 minutes, return with fresh eyes
-4. **Get help** — Ask a colleague, Stack Overflow, documentation
-5. **Reset** — `git stash`, start completely fresh
+1. **アプローチを変える** — 別のデバッグ手法を試す
+2. **ラバーダック・デバッグ** — 声に出して問題を説明する（または書き出す）
+3. **休憩を取る** — 5分間離れ、新鮮な視点で戻る
+4. **助けを求める** — 同僚、Stack Overflow、ドキュメントに相談する
+5. **リセット** — `git stash` で完全に最初からやり直す

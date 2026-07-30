@@ -1,146 +1,101 @@
 ---
 language: en
+description: Mine ideas, filter against history, explore one to completion. A 5-phase workflow (A-E) for complex problem solving.
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
+> **English** — Official English version of `idea-mining`.
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-# Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
+# Idea-Mining — Mine ideas, filter, execute one
 
 ## Overview & Purpose
 
-Bei schweren Problemen scheitert Ideenfindung selten am Mangel an Einfällen, sondern an drei
-Dingen: Die Einfälle werden nicht **festgehalten**, sie werden nicht gegen **bereits
-Versuchtes** geprüft (man rennt in dieselben Sackgassen), und es wird keiner konsequent
-**zu Ende verfolgt**. Dieser Workflow trennt die drei Phasen hart: erst divergent schürfen
-(ohne Bewertung), dann filtern (gegen die Dokumentation des Projekts), dann EINE Idee
-substanziell explorieren.
+When facing complex problems, ideation rarely fails due to a lack of ideas, but rather due to three things: ideas are not **recorded**, they are not checked against **what has already been tried** (leading to repeating the same dead ends), and none is consistently **pursued to completion**. This workflow strictly separates the three phases: first, mine redundantly/divergently (without evaluation), then filter (against the project documentation), and finally explore ONE idea substantially.
 
-Herkunft: destilliert aus einem produktiven Forschungs-Automations-Lauf über offene
-mathematische Probleme; funktioniert genauso für Architektur-, Design- und Konzeptblockaden.
+Origin: distilled from a productive research-automation run on open mathematical problems; works equally well for architecture, design, and conceptual blockages.
 
-## Phase A — Ideenspeicher füllen (divergent, ohne Bewertung)
+## Phase A — Fill the Idea Storage (Divergent, Without Evaluation)
 
-Alle Fundstücke in eine Datei `IDEENSPEICHER.md` im Projektordner schreiben (Stichworte +
-2–3 Sätze, Quelle/Auslöser notieren). Die acht Techniken nacheinander durchgehen — sie
-zielen auf unterschiedliche Assoziationsräume, deshalb bei wirklich festgefahrenen
-Problemen keine überspringen (bei leichteren Blockaden oder knapper Zeit genügt eine
-begründete Teilmenge, mindestens aber eine weiche Technik aus 3–5 plus die Recherche):
+Write all findings into a file `IDEENSPEICHER.md` in the project folder (keywords + 2–3 sentences, note source/trigger). Go through the eight techniques sequentially — they target different association spaces, so for truly stuck problems, do not skip any (for minor blockages or tight time, a justified subset is sufficient, but at least one soft technique from 3–5 plus research):
 
-1. **Wiedererkennung:** Kommt mir das bekannt vor? Habe ich diese Struktur schon einmal
-   in anderem Kontext gesehen?
-2. **Fern-Disziplin:** Gibt es ein ähnliches Problem/eine ähnliche Formel in einer weit
-   entfernten Disziplin (Physik↔Ökonomie, Biologie↔Informatik, …)? Wo genau liegt die
-   Verbindung?
-3. **Alltags-Allegorie:** Das Problem in einer naturnahen Allegorie erzählen (Wellen,
-   Sand, Strömung, Wachstum …). Wirksam: die Allegorie von einem **unbelasteten
-   Subagenten** erfinden lassen und dann schauen, wohin sie führt — die eigene Sicht ist
-   vom Problem schon deformiert.
-4. **Störgefühl / Frosch→Prinz:** Was stört mich am aktuellen Stand, was finde ich
-   hässlich? Was müsste sich ändern, damit ich es plötzlich schön fände? Ästhetisches
-   Unbehagen zeigt oft auf die falsch gewählte Darstellung.
-5. **Märchen-Reframing:** Das Problem als Märchen erzählen: Wer ist der Held, wer die
-   Bösewichte, welche Gefahren lauern, was könnte dem Helden helfen? Die Rollenzuweisung
-   erzwingt eine Kausalstruktur, die im Formalismus unsichtbar bleibt.
-6. **Recherche:** Web, Fachdatenbanken, Preprint-Server, Foren (Reddit/ResearchGate/GitHub)
-   nach neuen Veröffentlichungen, Scripts, Ansätzen durchsuchen. Relevante Quellen in einen
-   Ordner `_sources/` laden und auf Innovationen lesen — bei Preprints kritisch bleiben.
-7. **Geschwisterprojekte:** Verwandte eigene Projekte auf rücktransferierbare Lösungsideen
-   prüfen (dort gelöste Teilprobleme, dort gebaute Werkzeuge).
-8. **Bestandsquerlauf:** Den gesamten eigenen Projektbestand (Pipeline) auf Ansätze
-   durchgehen, die auf DIESES Problem passen könnten.
+1. **Recognition:** Does this look familiar? Have I seen this structure before in a different context?
+2. **Distant Discipline:** Is there a similar problem/formula in a distant discipline (Physics↔Economics, Biology↔Computer Science, …)? Where exactly lies the connection?
+3. **Everyday Allegory:** Tell the problem in a nature-inspired allegory (waves, sand, current, growth …). Effective: have an **unbiased subagent** invent the allegory and then see where it leads — your own view is already deformed by the problem.
+4. **Discomfort / Frog→Prince:** What bothers me about the current state, what do I find ugly? What would need to change for me to suddenly find it beautiful? Aesthetic discomfort often points to a poorly chosen representation.
+5. **Fairy Tale Reframing:** Tell the problem as a fairy tale: Who is the hero, who are the villains, what dangers lurk, what could help the hero? Assigning roles forces a causal structure that remains invisible in formalism.
+6. **Research:** Search web, domain databases, preprint servers, forums (Reddit/ResearchGate/GitHub) for new publications, scripts, approaches. Load relevant sources into a `_sources/` folder and read for innovations — remain critical of preprints.
+7. **Sibling Projects:** Check related personal/internal projects for back-transferable solution ideas (sub-problems solved there, tools built there).
+8. **Inventory Cross-Run:** Review your entire project inventory (pipeline) for approaches that could fit THIS problem.
 
-## Phase B — Filter (gegen bereits Versuchtes)
+## Phase B — Filter (Against What Has Been Tried)
 
-Den Ideenspeicher gegen die Projektdokumentation abgleichen: Beweisnotizen, Proof-Notes,
-Entscheidungs-Logs, TODO/DONE, frühere Ideenspeicher. **Eliminiert wird, was dokumentiert
-bereits versucht und abgeschlossen ist** — nicht, was nur „unwahrscheinlich klingt"
-(Bewertung nach Attraktivität kommt erst in Phase C). Überlebende nach
-`IDEENSPEICHER_FILTERED.md`.
+Cross-check the idea storage against the project documentation: proof notes, decision logs, TODO/DONE, previous idea storages. **Eliminate what is documented as already tried and completed** — not what merely "sounds unlikely" (evaluation by attractiveness happens only in Phase C). Save surviving ideas to `IDEENSPEICHER_FILTERED.md`.
 
-Voraussetzung ist eine gepflegte Versuchs-Dokumentation — existiert keine, ist der erste
-Schritt, sie anzulegen (sonst produziert jeder künftige Lauf Wiederholungen).
+A prerequisite is well-maintained experiment documentation — if none exists, the first step is to create it (otherwise every future run will produce duplicate efforts).
 
-## Phase C — Wählen und durchziehen
+## Phase C — Choose and Execute
 
-1. Ein bis drei Ideen aus dem Filtrat kurz anexplorieren (je ein Absatz: was wäre der
-   erste konkrete Schritt, was das Erfolgssignal?).
-2. **Eine** wählen — die mit der stärksten Anziehung. Attraktion ist hier ein legitimes
-   Kriterium: Bei schweren Problemen trägt nur eine Idee, der man nachgehen *will*.
-3. Die Wahl bis zum Ende oder zumindest substanziell weiterführen — nicht nach dem ersten
-   Hindernis zur nächsten Idee springen (das wäre Phase-A-Verhalten in Phase C).
+1. Briefly explore one to three ideas from the filtrate (one paragraph each: what would be the first concrete step, what would be the sign of success?).
+2. Choose **one** — the one with the strongest attraction. Attraction is a legitimate criterion here: for hard problems, only an idea you *want* to pursue will carry you through.
+3. Carry the choice through to the end or at least substantially forward — do not jump to the next idea at the first obstacle (that would be Phase A behavior during Phase C).
 
-## Phase D — Dokumentieren
+## Phase D — Document
 
-- Erkenntnisse in die Projektdokumentation (Beweisnotiz, Entscheidungs-Log, ADR) —
-  **auch die Fehlschläge**, sie sind der Filter für den nächsten Lauf.
-- Offene Folgeideen zurück in `IDEENSPEICHER.md` bzw. TODO.
-- Kurzbericht: geschürft (Anzahl) | gefiltert (überlebend) | exploriert | Ergebnis | nächster Schritt.
+- Enter findings into project documentation (proof note, decision log, ADR) — **including failures**, as they form the filter for the next run.
+- Put open follow-up ideas back into `IDEENSPEICHER.md` or TODO.
+- Short report: mined (count) | filtered (surviving) | explored | result | next step.
 
-## Phase E — Aussaat (optionaler Rücktransfer nach außen)
+## Phase E — Seeding (Optional Outbound Transfer)
 
-Technik 7 holt Ideen aus Geschwisterprojekten HEREIN — Phase E dreht die Richtung um:
-Wenn die Exploration etwas Übertragbares ergeben hat (Methode, Werkzeug, Lösungsmuster),
-kurz den eigenen Projektbestand durchgehen: Wem würde das helfen?
+Technique 7 brings ideas IN from sibling projects — Phase E reverses the direction: If exploration yields something transferable (method, tool, solution pattern), briefly review your project inventory: Who would this help?
 
-- **Gezielt säen, nicht streuen:** höchstens ~3 Empfängerprojekte direkt mit einem
-  konkreten TODO-Eintrag versehen (was übernehmen, wo es liegt, warum es passt);
-  weitere Kandidaten nur als priorisierte Liste im eigenen Projekt notieren.
-- Grund für die Grenze: Breites Streuen erzeugt in vielen Projekten vage Aufgaben,
-  die niemand aufgreift — drei präzise Saatkörner schlagen zehn diffuse.
+- **Seed selectively, do not scatter:** At most ~3 recipient projects directly provided with a concrete TODO entry (what to adopt, where it is located, why it fits); note further candidates only as a prioritized list in your own project.
+- Reason for the limit: Broad scattering creates vague tasks in many projects that no one picks up — three precise seeds beat ten diffuse ones.
 
-## Als periodischer Lauf
+## As a Periodic Run
 
-Der Workflow eignet sich als wiederkehrende Automation über ein festes Projekt (Innovations-
-Runde). Dafür mit dem Rotations-Gerüst kombinieren (`rotation-check`-Skill): Registry
-verhindert, dass dieselben Ideen mehrfach „neu entdeckt" werden — der Ideenspeicher und die
-Versuchs-Doku sind hier das Gedächtnis.
+The workflow is well suited as a recurring automation for a fixed project (innovation round). For this, combine it with the rotation scaffolding (`rotation-check` skill): the registry prevents the same ideas from being "rediscovered" multiple times — the idea storage and experiment documentation act as the memory here.
 
-## Example & Usage
+## Example & Application
 
 ```text
-Problem: Ein Konvergenzbeweis steckt seit Wochen an einer Abschätzung fest.
+Problem: A convergence proof has been stuck on an estimate for weeks.
 
-A) Schürfen → IDEENSPEICHER.md: u. a. (2) ähnliche Struktur in der Warteschlangen-
-   theorie?; (3) Subagent-Allegorie „Sand rieselt durch immer feinere Siebe" →
-   Idee: Abschätzung stufenweise statt global; (6) Preprint von 2026 mit neuem
-   Lemma, nach _sources/ geladen; (7) Nachbarprojekt hat ein numerisches
-   Prüfscript, das sich rücktransferieren lässt.
-B) Filter gegen BEWEISNOTIZ.md: „globale Abschätzung verschärfen" wurde 2× versucht
-   und dokumentiert verworfen → raus. 3 Ideen überleben → IDEENSPEICHER_FILTERED.md.
-C) Prime-Wahl: die Sieb-Idee (stärkste Anziehung) — bis zu einem Teilresultat
-   durchgezogen.
-D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
+A) Mining → IDEENSPEICHER.md: e.g., (2) similar structure in queueing
+   theory?; (3) Subagent allegory "sand trickles through finer and finer sieves" →
+   idea: estimate step-by-step instead of globally; (6) 2026 preprint with new
+   lemma, downloaded to _sources/; (7) neighboring project has a numerical
+   check script that can be transferred back.
+B) Filter against BEWEISNOTIZ.md: "tighten global estimate" was tried twice
+   and documented as discarded → removed. 3 ideas survive → IDEENSPEICHER_FILTERED.md.
+C) Prime Choice: the sieve idea (strongest attraction) — carried through to a partial result.
+D) BEWEISNOTIZ.md updated (including failure of idea 2), short report.
 ```
 
 ## Red Flags
 
-| Gedanke | Realität |
+| Thought | Reality |
 | --- | --- |
-| „Technik 3–5 sind Spielerei" | Die weichen Techniken liefern die Ideen, die Recherche nicht liefern kann — sie adressieren andere Assoziationsräume. |
-| „Ich bewerte schon beim Sammeln" | Bewertung in Phase A tötet die divergente Ausbeute. Erst speichern, dann filtern. |
-| „Der Filter dauert zu lange, ich erinnere mich schon" | Gedächtnis glättet Fehlversuche — nur die Doku zählt. |
-| „Idee klemmt, ich nehme die nächste" | In Phase C wird durchgezogen; Springen zurück nach A nur mit dokumentiertem Grund. |
+| "Techniques 3–5 are just playfulness" | The soft techniques provide the ideas that research cannot deliver — they address different association spaces. |
+| "I evaluate while collecting" | Evaluation in Phase A kills divergent yield. Save first, filter later. |
+| "The filter takes too long, I already remember" | Memory smooths over failed attempts — only documentation counts. |
+| "The idea is stuck, I'll take the next one" | In Phase C you carry through; jumping back to Phase A only with a documented reason. |
 
-## Verwandte Skills
+## Related Skills
 
-- `brainstorm` — breite Kreativmethoden (SCAMPER, Six Hats) ohne Filter-/Explorations-Pipeline.
-- `think` / `decide` — Analyse und Auswahlentscheidung, nutzbar innerhalb Phase C.
-- `rotation-check` — Gerüst für den periodischen Einsatz.
-- `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
+- `brainstorm` — broad creative methods (SCAMPER, Six Hats) without filter/exploration pipeline.
+- `think` / `decide` — analysis and selection decision, usable within Phase C.
+- `rotation-check` — scaffolding for periodic deployment.
+- `swarm-operations` — unbiased subagents for technique 3 and parallel exploration.
 
 ## Changelog
 
 ### 1.1.0 (2026-07-03)
-- Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in
-  Geschwisterprojekte (max. ~3 direkte Empfänger) — integriert statt als eigener
-  cross-project-transfer-Skill (Dedup-Entscheid).
+- Phase E "Seeding": optional outbound transfer of transferable results to
+  sibling projects (max. ~3 direct recipients) — integrated instead of a separate
+  cross-project-transfer skill (deduplication decision).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation „ultra-deep-idea-search-single-project"
-  (Ideenspeicher → Filter → Prime-Wahl → Exploration) und user-neutral verallgemeinert.
+- Initial version. Abstracted from the Codex automation "ultra-deep-idea-search-single-project"
+  (idea storage → filter → prime choice → exploration) and generalized to be user-neutral.

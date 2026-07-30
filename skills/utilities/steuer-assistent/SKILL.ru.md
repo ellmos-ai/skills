@@ -1,74 +1,85 @@
 ---
+name: steuer-assistent
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-07-23
+updated: 2026-07-23
+description: Указывает на автономный модуль steuer-assistent: локальный автономный (offline-first) рабочий лист квитанций для расходов немецких работников, связанных с получением дохода (Werbungskosten) -- запись, суммирование до цента, приватный экспорт в ZIP. Используйте этот skill, когда квитанции Werbungskosten должны быть подготовлены структурированным образом -- с четким ограничением: не является налоговой консультацией, не проверяет возможность вычета, не создает и не отправляет налоговую декларацию (это происходит через ELSTER или одобренное программное обеспечение).
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/steuer-assistent', 'origin_path': 'SKILL.md, steuer_assistent/ (CLI module)', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+category: utilities
+tags: [tax, germany, receipts, finance, wrapper, pointer-skill]
 language: ru
+status: active
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `steuer-assistent`.
+> **Русский** — Официальная русская версия `steuer-assistent`.
 
 
+# steuer-assistent -- Pointer Skill (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# steuer-assistent -- Pointer Skill (English)
-
-This skill is a **thin pointer (wrapper)** to the standalone, public module
-repository
+Этот skill является **легким указателем (wrapper)** на репозиторий автономного публичного модуля
 [`ellmos-ai/steuer-assistent`](https://github.com/ellmos-ai/steuer-assistent)
-(MIT license, public). The actual skill lives there -- this repository only
-links to it and documents installation.
+(лицензия MIT, публичный). Сам skill находится там -- этот репозиторий лишь
+ссылается на него и документирует установку.
 
-Note: `steuer-assistent` is scoped to German tax law (employee
-income-related expenses, "Werbungskosten"); its CLI and documentation are
-German-language by design.
+Примечание: `steuer-assistent` ориентирован на налоговое законодательство Германии (расходы
+работников, связанные с получением дохода, "Werbungskosten"); его CLI и
+документация по дизайну выполнены на немецком языке.
 
-## What the module does
+## Что делает модуль
 
-`steuer-assistent` is a small, offline-first Python module for
-self-categorized receipts for German employee income-related expenses
+`steuer-assistent` -- это небольшой автономный (offline-first) модуль Python для
+самостоятельно категоризированных квитанций о расходах немецких работников, связанных с получением дохода
 (Werbungskosten):
 
-- Record receipts (category, amount, date, optional note).
-- Sum recorded expenses to the cent, per year.
-- Export a private, non-official ZIP worksheet (CSV + summary + a
-  non-official notice, without the receipt files themselves).
-- Local store (default `%USERPROFILE%\.steuer-assistent\steuer.db`), no
-  network access, no cloud upload, no access to other databases.
+- Запись квитанций (категория, сумма, дата, необязательное примечание).
+- Суммирование записанных расходов до цента за каждый год.
+- Экспорт приватного неофициального рабочего листа в формате ZIP (CSV + сводка +
+  неофициальное уведомление, без самих файлов квитанций).
+- Локальное хранилище (по умолчанию `%USERPROFILE%\.steuer-assistent\steuer.db`), без
+  доступа к сети, без загрузки в облако, без доступа к другим базам данных.
 
-## Boundaries (important)
+## Ограничения (важно)
 
-- **Not tax advice.** The module does not assess the deductibility of
-  individual items, and it does not create or submit a tax return.
-- Official electronic submission happens exclusively through ELSTER or
-  approved software -- not through this module.
-- Scope: a private worksheet for employee income-related expenses; no
-  business/self-employment expense tracking.
+- **Не является налоговой консультацией.** Модуль не оценивает возможность вычета
+  отдельных статей, а также не создает и не отправляет налоговую декларацию.
+- Официальная электронная подача происходит исключительно через ELSTER или
+  одобренное программное обеспечение -- но не через этот модуль.
+- Область применения: приватный рабочий лист для расходов работников, связанных с получением
+  дохода; отслеживание коммерческих расходов или расходов самозанятых не предусмотрено.
 
-## Installation (generic, no local paths)
+## Установка (общая, без локальных путей)
 
-1. Clone the module:
+1. Клонируйте модуль:
    ```bash
    git clone https://github.com/ellmos-ai/steuer-assistent.git <clone-path>
    ```
-2. Install and verify:
+2. Установите и проверьте:
    ```bash
    cd <clone-path>
    python -m pip install -e .
    python -B -m pytest tests -q -p no:cacheprovider
    ```
-3. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
-   `~/.claude/skills/steuer-assistent/`). Do NOT commit real local paths or
-   hostnames into a versioned skill environment.
-4. Adjust the store path if needed via `STEUER_ASSISTENT_DB=<path>` or
-   `--store <path>`; the default is the user's home directory.
-5. For CLI commands, privacy, and boundaries, see the module repo's README.
+3. Скопируйте `<clone-path>/SKILL.md` в ваше собственное окружение skills (например,
+   `~/.claude/skills/steuer-assistent/`). НЕ фиксируйте реальные локальные пути или
+   имена хостов в версионируемом окружении skills.
+4. Настройте путь к хранилищу при необходимости с помощью `STEUER_ASSISTENT_DB=<path>` или
+   `--store <path>`; по умолчанию используется домашний каталог пользователя.
+5. Для получения информации о командах CLI, конфиденциальности и ограничениях см. README репозитория модуля.
 
-## Origin of this pointer skill
+## Происхождение этого pointer skill
 
-This wrapper was added on 2026-07-23 as a showcase entry for the
-`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
-and versioning stay solely in the `ellmos-ai/steuer-assistent` module repo.
+Этот wrapper был добавлен 23.07.2026 в качестве демонстрационной записи для
+репозитория `ellmos-ai/skills`. **Дублирование кода отсутствует** -- обслуживание
+и версионирование остаются исключительно в репозитории модуля `ellmos-ai/steuer-assistent`.
 
-## Журнал изменений
+## История изменений
 
 ### 0.1.0 (2026-07-23)
-- Initial pointer skill for `ellmos-ai/steuer-assistent`.
+- Начальный pointer skill для `ellmos-ai/steuer-assistent`.

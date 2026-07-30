@@ -2,53 +2,50 @@
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `textproduction`.
+> **English** — Official English version of `textproduction`.
 
 
 # Textproduction — Router (English)
 
-Dieser Skill deckt alle textlichen Produktionsformen ab. Er leitet an den
-passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
+This skill covers all text production formats. It routes to the
+appropriate subskill — read the detailed instructions in the subfolder.
 
-## Routing-Tabelle
+## Routing Table
 
-| Teilskill | Trigger-Beispiele | Detail-Anleitung |
+| Subskill | Trigger Examples | Detailed Instructions |
 |---|---|---|
-| **text** | „Schreib einen Blogpost", „5 LinkedIn-Posts", „Newsletter", „Produktbeschreibung", „Formelle E-Mail", „Fasse X zusammen" | `text/WORKFLOW.md` |
-| **storys** | „Schreib ein Drehbuch", „Kurzgeschichte", „RPG-Abenteuer erstellen", „Character Sheet", „Weltenbau" | `storys/WORKFLOW.md` |
-| **pr** | „Pressemitteilung verfassen", „Positionspapier", „PR-Paket", „PDF generieren" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
+| **text** | "Write a blog post", "5 LinkedIn posts", "Newsletter", "Product description", "Formal email", "Summarize X" | `text/WORKFLOW.md` |
+| **storys** | "Write a screenplay", "Short story", "Create RPG adventure", "Character Sheet", "Worldbuilding" | `storys/WORKFLOW.md` |
+| **pr** | "Draft press release", "Position paper", "PR package", "Generate PDF" | `pr/WORKFLOW.md` (+ `pr/press_compiler.py`) |
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 ```
-1. Nutzerwunsch → Routing-Tabelle oben → passenden Teilskill bestimmen.
-2. Detail-Anleitung im Unterordner lesen (WORKFLOW.md).
-3. Prompt-Muster auswaehlen, Platzhalter fuellen, Text generieren.
-4. Qualitaetspruefung (je Teilskill angegeben).
+1. User request → Routing table above → determine matching subskill.
+2. Read detailed instructions in subfolder (WORKFLOW.md).
+3. Select prompt pattern, fill placeholders, generate text.
+4. Quality check (specified per subskill).
 ```
 
-## Hinweise
+## Notes
 
-- **Userneutral:** Keine persoenlichen Daten, API-Keys oder Kontodaten im Skill.
-  Konfiguration (Tonalitaet, Zeichenlimits, Kontaktdaten fuer PR) obliegt dem Nutzer.
-- **PR-Tool:** `pr/press_compiler.py` kompiliert Pressemitteilungen und Positionspapiere
-  zu PDF via LaTeX (pdflatex/xelatex). Setup einmalig: `pr/config.example.json`
-  nach `pr/config.json` kopieren und Kontaktdaten eintragen.
-- Optionale Stiloptimierung: DeepL Write (kostenlos bis 500.000 Zeichen/Monat).
+- **User-neutral:** No personal data, API keys, or account details in the skill.
+  Configuration (tonality, character limits, contact details for PR) is the user's responsibility.
+- **PR Tool:** `pr/press_compiler.py` compiles press releases and position papers
+  to PDF via LaTeX (pdflatex/xelatex). One-time setup: copy `pr/config.example.json`
+  to `pr/config.json` and enter contact details.
+- Optional style optimization: DeepL Write (free up to 500,000 characters/month).
 
 ## Changelog
 
 ### 2.0.0 (2026-06-22)
-- Umstrukturierung auf Router-Muster: SKILL.md = Einstieg + Routing-Tabelle.
-- Drei Teilskills: text/ (6 Texttypen), storys/ (4 narrative Formate),
-  pr/ (Pressemitteilung + Positionspapier + LaTeX-PDF-Compiler).
-- press_compiler.py + LaTeX-Templates + config.example.json aus
-  ai-media-editor/production/pr/ hierher verschoben (SSOT).
-- Verwandte-Skills-Verweise auf interne Teilskill-Pfade aktualisiert.
+- Restructuring to router pattern: SKILL.md = entry point + routing table.
+- Three subskills: text/ (6 text types), storys/ (4 narrative formats),
+  pr/ (press release + position paper + LaTeX PDF compiler).
+- press_compiler.py + LaTeX templates + config.example.json moved here from
+  ai-media-editor/production/pr/ (SSOT).
+- Updated related skills references to internal subskill paths.
 
 ### 1.0.0 (2026-06-22)
-- Initiale Version. Herausgeloest aus ai-media-editor/production/text/WORKFLOW.md.
+- Initial version. Extracted from ai-media-editor/production/text/WORKFLOW.md.
 - Provenance: BACH agents/_experts/textproduction/ (MIT).

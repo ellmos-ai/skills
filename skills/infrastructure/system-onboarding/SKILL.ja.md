@@ -5,7 +5,10 @@ type: skill
 author: ellmos contributors
 created: 2026-05-16
 updated: 2026-07-29
-description: [日本語] エージェントスキル: system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.
+description: >
+  新規、再構築、または交換用のワークステーション向けのプロバイダーに依存しないオンボーディングプロトコル。
+  認証情報、プライベートプロンプト、またはホスト固有の構成をリポジトリにコピーすることなく、OSの前提条件、
+  エージェント実行環境、共有ルール面、ポータブルスキル、検証済み構成、およびインストール後のエビデンスを確立します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,82 +17,61 @@ category: infrastructure
 tags: [onboarding, setup, agent-runtimes, windows, macos, verification, sync]
 language: ja
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: "internal onboarding protocol (sanitized for portable publication)"
+  origin_version: "1.2.0"
+  last_sync_from_origin: "2026-07-29"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `system-onboarding`.
+> **日本語** — `system-onboarding` の公式日本語版。
 
+# システムオンボーディング
 
+このプロトコルを使用して、ローカルファーストのエージェント作業用に新規または再構築されたワークステーションを立ち上げます。本ガイドは手順と検証のガイドであり、インストーラーや認証情報の提供元ではありません。稼働中のシステムを変更する前に、各プロバイダーの最新ドキュメントから製品固有の指示を確認してください。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## アクティベーション
 
+新規ワークステーション、OSの再インストール、代替デバイス、または単一のエージェント実行環境の管理された復旧に使用します。まず、OS、対象の実行環境、所有者、共有ルール面、およびリクエストが完全な再構築か限定的なコンポーネント修復かを特定します。あるホストからコピーした構成が別のホストで安全またはサポートされていると仮定しないでください。
 
-# System Onboarding (English)
+## 順序立てられたワークフロー
 
-Use this protocol to establish a new or rebuilt workstation for local-first agent
-work. It is a sequencing and verification guide, not an installer and not a source
-of credentials. Resolve product-specific instructions from each provider's current
-documentation before changing a live system.
+1. OSのアップデート、Git、認証済みソース管理、Python、および必要に応じて現在サポートされている Node.js LTS を確立します。
+2. サポートされているインストーラーを通じて要求されたエージェント実行環境のみをインストールし、プロジェクトファイルにトークンを配置することなくネイティブなログインフローを完了します。
+3. ローカル構成のルートを作成し、明示的に選択された標準ルール面をロードします。テンプレートをマージし、既存のローカル状態を盲目的に上書きしないでください。
+4. 指定されたデプロイ手順に従ってのみ、ポータブルスキルおよび MCP またはプラグイン構成をインストールします。各プロバイダーの構成フォーマットは異なるものとして扱います。
+5. ローカル実行環境が動作した後にのみ、共有同期を構成します。認証情報、完全なプロンプト、またはマシン固有のローカルパスではなく、サニタイズされた契約とレシートのみを共有します。
+6. サポートされているネイティブサーフェスを通じてのみ、スケジューラまたは自動化を再作成します。以前の状態を保持し、所有者が有効化を承認するまで新しい作業は無効にしたままにします。
+7. 適切なインストール後チェックを実行し、インストール、構成、スケジューラ登録、および成功結果を区別するローカルレシートを書き込みます。
 
-## Activation
+対象プラットフォームに該当するリファレンスのみを参照してください：
 
-Use for a new workstation, a reinstalled operating system, a replacement device, or
-a controlled recovery of one agent runtime. First identify the operating system,
-target runtime, owner, shared rule surface, and whether the request is a full rebuild
-or a bounded component repair. Do not assume that a configuration copied from one
-host is safe or supported on another.
+- 境界とデータ配置については [概要](references/overview.md)；
+- Windows については [Windows チェックリスト](references/windows-checklist.md)；
+- macOS については [macOS チェックリスト](references/mac-checklist.md)；および
+- 検証と復旧については [インストール後](references/post-install.md)。
 
-## Ordered workflow
+## 境界条件
 
-1. Establish operating-system updates, Git, authenticated source control, Python and
-   the current supported Node.js LTS where needed.
-2. Install only the requested agent runtimes through their supported installers and
-   complete their native login flows without placing tokens in project files.
-3. Create local configuration roots and load an explicitly selected, canonical rule
-   surface. Merge templates; never overwrite existing local state blindly.
-4. Install portable skills and MCP or plugin configuration only through their stated
-   deployment procedures. Treat each provider's configuration format as distinct.
-5. Configure shared synchronization only after the local runtime works. Share
-   sanitized contracts and receipts, not credentials, full prompts, or machine-local
-   paths.
-6. Recreate a scheduler or automation only through its supported native surface.
-   Preserve prior state and leave new work disabled until its owner approves activation.
-7. Run the appropriate post-install checks and write a local receipt that distinguishes
-   installation, configuration, scheduler registration and successful outcome.
+- 認証情報、リカバリコード、プライベートプロンプト、アカウント識別子、または生ログを共有リポジトリや同期フォルダに公開しないでください。
+- 仮想環境、依存関係キャッシュ、および大規模な実行環境アーティファクトは、クラウド同期されるプロジェクトフォルダ外に保持してください。
+- コピーされた構成を正規としないでください。ターゲットホストは自らサポート状態を検出して読み取る必要があります。
+- タスクファイルが存在するという理由だけでスケジュールを登録しないでください。ネイティブ登録と結果のエビデンスは別々の要件です。
+- 既存のホストを修復する場合は、構成を変更する前に現在の状態とロックのインベントリを取得してください。
 
-Read only the matching reference for the target platform:
+## 完了エビデンス
 
-- [overview](references/overview.md) for boundaries and data placement;
-- [Windows checklist](references/windows-checklist.md) for Windows;
-- [macOS checklist](references/mac-checklist.md) for macOS; and
-- [post-install](references/post-install.md) for verification and recovery.
-
-## Boundaries
-
-- Never publish credentials, recovery codes, private prompts, account identifiers, or
-  raw logs to a shared repository or synchronization folder.
-- Keep virtual environments, dependency caches and large runtime artifacts out of
-  cloud-synchronized project folders.
-- Do not make a copied configuration authoritative. The target host must discover and
-  read back its own supported state.
-- Do not register a schedule merely because a task file exists. Native registration
-  and outcome evidence are separate requirements.
-- When an existing host is being repaired, inventory its current state and locks before
-  changing any configuration.
-
-## Completion evidence
-
-A complete onboarding receipt records the target operating system, selected runtimes,
-their verified versions, the canonical rule references loaded, the explicit skills or
-extensions deployed, unsupported capabilities, and any deferred user decisions. A
-successful command exit alone is not evidence that an application loaded its new
-configuration or that a scheduled task achieved its intended outcome.
+完全なオンボーディングレシートには、ターゲットOS、選択された実行環境、それらの検証済みバージョン、ロードされた標準ルールリファレンス、デプロイされた明示的なスキルまたは拡張機能、サポートされていない機能、および保留されたユーザー決定事項が記録されます。コマンドが正常終了したことだけでは、アプリケーションが新しい構成をロードしたことや、スケジューリングされたタスクが意図した結果を達成したことのエビデンスにはなりません。
 
 ## 変更履歴
 
 ### 1.2.0 (2026-07-29)
 
-- Ported the reusable onboarding sequence and platform references into the public
-  skills catalog after removing host-specific paths, account details and private
-  operational material.
+- ホスト固有のパス、アカウント詳細、およびプライベートな運用資料を削除した後、再利用可能なオンボーディング手順とプラットフォームリファレンスをパブリックスキルカタログに移植しました。

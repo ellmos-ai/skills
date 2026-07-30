@@ -6,7 +6,6 @@ author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
 description: Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on "embed an asset from the Store", "Studio MCP not working", "studios: []", "generate material", "save scene", "is this Roblox asset safe", "scripts disappear after Play".
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,14 +18,11 @@ dependencies: {'tools': ['rojo'], 'services': ['roblox-studio-mcp'], 'protocols'
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `rbx-studio`.
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
-
-
-# Roblox Studio — Editor, Test, Assets, MCP (English)
+# Roblox Studio — Editor, Testing, Assets, MCP
 
 ## Overview & Purpose
 
@@ -76,7 +72,7 @@ replace Rojo — it complements it: Rojo for persistent code changes, MCP for in
 tests, asset insertion, and material generation.
 
 ```
-Editor + Rojo  ──(persistenter Code-Sync)──►  Studio (laufend)  ◄──(Inspektion/Test/Insert)──  MCP ◄── KI
+Editor + Rojo  ──(persistent code sync)──►  Studio (running)  ◄──(inspection/test/insert)──  MCP ◄── AI
 ```
 
 ### Available MCP tools (typical)
@@ -132,13 +128,13 @@ Example entry (`~/.claude/mcp.json`):
 Greybox first (gameplay), assets later (before release). The proven sequence:
 
 ```
-STORE DURCHSUCHEN   → z. B. "medieval" → mehrere Kandidaten laden
-AUSSORTIEREN        → stilfremde/hässliche raus, 5–8 passende behalten
-BEREINIGEN          → ALLE Scripts entfernen (Malware!), nur Geometrie/Meshes behalten
-KIT / SET BAUEN     → aus Basis-Assets Varianten ableiten (gleiche Materials/Proportionen)
-SZENE BAUEN (Studio)→ Assets zur Kulisse zusammensetzen (Dorf, Arena, Park)
-ALS .RBXL SPEICHERN → die Kulisse ist die "Bühne"
-ROJO BELEBT ES      → Scripts/Gameplay/HUD kommen per Rojo dazu; Workspace bleibt unangetastet
+SEARCH STORE       → e.g. "medieval" → load multiple candidates
+FILTER OUT         → remove non-matching style / ugly ones, keep 5–8 matching candidates
+CLEAN UP           → remove ALL scripts (malware!), keep only geometry/meshes
+BUILD KIT / SET    → derive variants from base assets (same materials/proportions)
+BUILD SCENE (Studio)→ assemble assets into scenery (village, arena, park)
+SAVE AS .RBXL      → the scenery is the "stage"
+ROJO BRINGS IT TO LIFE → scripts/gameplay/HUD are added via Rojo; Workspace remains untouched
 ```
 
 **Variant technique ("modular kit"):** Take a good base asset and derive a whole
@@ -186,7 +182,7 @@ The most common ones that bite in Studio — the full list is kept by the skill 
 - Reference pipeline (if present): `<your Roblox project pipeline>`
   (`ROBLOX_MCP_FAQ.md`, `ASSET_PIPELINE.md`, `_malware_reports/PATTERNS.md`).
 
-## Changelog
+## Change Log
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Distilled from the `.ROBLOX` pipeline (ROBLOX_MCP_FAQ, ASSET_PIPELINE,

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `research-agent`.
 
 
 # Research Agent (English)
@@ -47,15 +47,15 @@ from scripts.agent import ResearchAgent
 
 agent = ResearchAgent()
 
-# Quick search (English)
+# Quick search (Deutsch)
 result = agent.search("machine learning diagnostics", max_results=10)
 print(result)
 
-# Structured literature review (English)
+# Structured literature review (Deutsch)
 plan = agent.create_review_plan("transformer architectures", years=3)
 print(plan.total_articles, "articles found")
 
-# Save result (English)
+# Save result (Deutsch)
 agent.save_result(result, "research_ml.md", fmt="markdown")
 ```
 

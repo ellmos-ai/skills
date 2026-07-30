@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.
+description: 二重/三重エンコードされたUTF-8の文字化け（Mojibake）修復。Windows cp1252/Latin-1 の誤解釈を修正。依存関係ゼロ。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,37 +16,32 @@ tags: [encoding, utf-8, mojibake, windows, cp1252, text-repair]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `encoding-fix`.
+> **日本語** — `encoding-fix` の公式日本語版。
 
 
+# Encoding Fix (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Windows cp1252/Latin-1 の誤解釈によって発生する文字化け（二重/三重エンコードされたUTF-8）を修復します。サードパーティ依存関係ゼロ — Python標準ライブラリのみ。
 
-
-# Encoding Fix (English)
-
-Repairs mojibake (double/triple encoded UTF-8) caused by Windows cp1252/Latin-1
-misinterpretation. Zero dependencies — Python stdlib only.
-
-## Typical Problem
+## 典型的な問題
 
 ```
 "ue" (U+00FC) -> UTF-8 \xc3\xbc -> read as cp1252 -> "Ã¼"
 ```
 
-## Usage
+## 使い方
 
-### As Library
+### ライブラリとして使用
 ```python
 from encoding_fix import sanitize_outbound
 
 clean = sanitize_outbound("WÃ¼rge")  # -> "Wuerge"
 ```
 
-### Subprocess Output
+### サブプロセス出力の処理
 ```python
 from encoding_fix import sanitize_subprocess_output
 
@@ -58,14 +54,14 @@ python encoding_fix.py "WÃ¼rge"    # Check a single string
 python encoding_fix.py              # Self-test
 ```
 
-## Features
+## 機能
 
-- **Idempotent:** Correctly encoded text is not modified
-- **Up to 3 rounds:** Repairs even triple-encoded strings
-- **Subprocess decoder:** UTF-8/cp1252 fallback for process output
-- **Zero dependencies:** Python stdlib only
+- **アタッチ不能・等冪性 (Idempotent):** 正しくエンコードされたテキストは修正されません
+- **最大3ラウンド:** 三重にエンコードされた文字列であっても修復します
+- **サブプロセスデコーダー:** プロセス出力用の UTF-8/cp1252 フォールバック
+- **依存関係ゼロ:** Python標準ライブラリのみ
 
 ## 変更履歴
 
 ### 1.0.0 (2026-03-12)
-- Ported from BACH system/tools/encoding_fix.py
+- BACH system/tools/encoding_fix.py より移植

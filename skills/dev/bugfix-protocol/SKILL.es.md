@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa para la habilidad bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+description: Protocolo sistemático de depuración en 6 fases. Enfoque estructurado para errores con verificaciones rápidas, pruebas aisladas, regla de los 20 minutos y plantilla de informe de errores.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,103 +15,99 @@ tags: [debugging, bugfix, protocol, python, pyqt6, systematic]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-protokoll.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `bugfix-protocol`.
+<img src="banner.png" width="100%" alt="bugfix-protocol banner">
+> **Español** — Versión oficial en español de `bugfix-protocol`.
 
+# Bugfix Protocol: Depuración sistemática en 6 fases (Español)
 
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Bugfix Protocol: Systematic 6-Phase Debugging (English)
-
-A structured approach to bugs — from symptom analysis to verification.
-Prevents aimless trial-and-error and ensures fixes are sustainable.
+Un enfoque estructurado para abordar errores: desde el análisis del síntoma hasta la verificación.
+Evita el ensayo y error sin rumbo y garantiza que las correcciones sean sostenibles.
 
 ---
 
-## Descripción General y Propósito & Purpose
+## Resumen y propósito
 
-| Phase | Name | Goal | Max. Time |
-|-------|------|------|-----------|
-| 1 | Quick Checks | Rule out obvious causes | 2 min |
-| 2 | Diagnosis | Locate root cause | 10 min |
-| 3 | Isolated Test | Make bug reproducible | 5 min |
-| 4 | Fix | Minimal correction | 10 min |
-| 5 | Verification | Verify fix + check side effects | 5 min |
-| 6 | Documentation | Preserve knowledge | 2 min |
+| Fase | Nombre | Objetivo | Tiempo máx. |
+|------|--------|----------|-------------|
+| 1 | Verificaciones rápidas | Descartar causas obvias | 2 min |
+| 2 | Diagnóstico | Localizar la causa raíz | 10 min |
+| 3 | Prueba aislada | Hacer que el error sea reproducible | 5 min |
+| 4 | Corrección (Fix) | Corrección mínima | 10 min |
+| 5 | Verificación | Verificar la corrección y comprobar efectos secundarios | 5 min |
+| 6 | Documentación | Preservar el conocimiento | 2 min |
 
-**20-Minute Rule:** If no progress after 20 minutes, change approach or seek help.
+**Regla de los 20 minutos:** Si no hay avances tras 20 minutos, cambia de enfoque o busca ayuda.
 
 ---
 
-## Phase 1: Quick Checks (2 min)
+## Fase 1: Verificaciones rápidas (2 min)
 
-Before diving deep — check the most common causes:
+Antes de profundizar, comprueba las causas más comunes:
 
-### Checklist
+### Lista de verificación
 
-- [ ] **Syntax error?** Read error message carefully, check line
-- [ ] **Import error?** Module installed? Correct name? Circular import?
-- [ ] **Typo?** Variable/function names correct?
-- [ ] **Wrong data type?** String instead of int? None where object expected?
-- [ ] **Stale cache?** Delete `__pycache__`, restart
-- [ ] **Wrong environment?** Correct venv active? Correct Python version?
-- [ ] **Encoding?** UTF-8 vs. cp1252 (Windows classic)
+- [ ] **¿Error de sintaxis?** Lee atentamente el mensaje de error, comprueba la línea
+- [ ] **¿Error de importación?** ¿Módulo instalado? ¿Nombre correcto? ¿Importación circular?
+- [ ] **¿Error tipográfico?** ¿Nombres de variables/funciones correctos?
+- [ ] **¿Tipo de datos incorrecto?** ¿Cadena en lugar de entero? ¿None donde se esperaba un objeto?
+- [ ] **¿Caché obsoleta?** Elimina `__pycache__`, reinicia
+- [ ] **¿Entorno incorrecto?** ¿Entorno virtual activo correcto? ¿Versión correcta de Python?
+- [ ] **¿Codificación (Encoding)?** UTF-8 vs. cp1252 (clásico de Windows)
 
-### Quick Actions
+### Acciones rápidas
 
 ```bash
-# Clear cache (English)
+# Limpiar caché (Español)
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports (English)
+# Verificar importaciones (Español)
 python -c "import modulename"
 
-# Check syntax (English)
+# Verificar sintaxis (Español)
 python -m py_compile file.py
 ```
 
 ---
 
-## Phase 2: Diagnosis (10 min)
+## Fase 2: Diagnóstico (10 min)
 
-### Strategy: Outside-In
+### Estrategia: De fuera hacia dentro
 
-1. **Analyze error message** — Read traceback from bottom to top
-2. **Check recent changes** — `git diff`, `git log --oneline -10`
-3. **Use diagnostic tools** — Use project-specific diagnostic tools
+1. **Analizar el mensaje de error** — Leer el traceback de abajo hacia arriba
+2. **Revisar cambios recientes** — `git diff`, `git log --oneline -10`
+3. **Usar herramientas de diagnóstico** — Utilizar herramientas de diagnóstico específicas del proyecto
 
-### Diagnostic Tools (Examples)
+### Herramientas de diagnóstico (Ejemplos)
 
-Depending on the project, specialized diagnostic scripts may be helpful:
+Según el proyecto, las herramientas de diagnóstico especializadas pueden ser útiles:
 
-| Tool | Purpose |
-|------|---------|
-| `import_diagnose.py` | Analyze import problems |
-| `method_analyzer.py` | Check method signatures |
-| `env_checker.py` | Validate environment variables/paths |
+| Herramienta | Propósito |
+|-------------|-----------|
+| `import_diagnose.py` | Analizar problemas de importación |
+| `method_analyzer.py` | Verificar firmas de métodos |
+| `env_checker.py` | Validar variables de entorno y rutas |
 
-> **Note:** Create project-specific diagnostic tools or use existing ones.
-> The systematic approach matters, not the specific tool.
+> **Nota:** Crea herramientas de diagnóstico específicas para el proyecto o utiliza las existentes.
+> Lo que importa es el enfoque sistemático, no la herramienta específica.
 
-### Debugging Techniques
+### Técnicas de depuración
 
 ```python
-# 1. Print debugging (quick but effective) (English)
+# 1. Print debugging (rápido pero efectivo) (Español)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive) (English)
+# 2. Punto de interrupción (interactivo) (Español)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback (English)
+# 3. Traceback extendido (Español)
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print (English)
+# 4. Registro (Logging) en lugar de print (Español)
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -120,171 +116,171 @@ logger.debug(f"State: {state!r}")
 
 ---
 
-## Phase 3: Isolated Test (5 min)
+## Fase 3: Prueba aislada (5 min)
 
-### Minimal Reproducible Example (MRE)
+### Ejemplo mínimo reproducible (MRE)
 
-Goal: Reproduce the bug with minimal code.
+Objetivo: Reproducir el error con la menor cantidad de código posible.
 
 ```python
-# test_bug.py — Minimal Reproduction Test (English)
+# test_bug.py — Prueba de reproducción mínima (Español)
 """
-Bug: [Short description]
-Expected: [What should happen]
-Actual: [What happens instead]
+Bug: [Descripción corta]
+Esperado: [Qué debería suceder]
+Actual: [Qué sucede en su lugar]
 """
 
-# Minimal setup (English)
-# ... only the essentials (English)
+# Configuración mínima (Español)
+# ... solo lo esencial (Español)
 
-# Bug trigger (English)
-# ... exact code that triggers the bug (English)
+# Activador del error (Español)
+# ... código exacto que desencadena el error (Español)
 
-# Expected result (English)
-# assert result == expected, f"Got {result}" (English)
+# Resultado esperado (Español)
+# assert result == expected, f"Obtenido {result}" (Español)
 ```
 
-### Isolation Strategies
+### Estrategias de aislamiento
 
-1. **New file:** Reproduce the bug in a separate file
-2. **Remove dependencies:** One by one, until the bug disappears
-3. **Binary search:** Halve the code block, check which half contains the bug
+1. **Nuevo archivo:** Reproducir el error en un archivo separado
+2. **Eliminar dependencias:** Una por una, hasta que el error desaparezca
+3. **Búsqueda binaria:** Reducir a la mitad el bloque de código y comprobar qué mitad contiene el error
 4. **Git bisect:** `git bisect start`, `git bisect bad`, `git bisect good <commit>`
 
 ---
 
-## Phase 4: Fix (10 min)
+## Fase 4: Corrección / Fix (10 min)
 
-### Principles
+### Principios
 
-1. **Minimal:** Change as little as possible
-2. **Understand:** Never fix blindly — understand WHY it's broken
-3. **One thing:** One fix per commit, don't fix multiple issues at once
-4. **Backward-compatible:** Don't break existing functionality
+1. **Mínimo:** Cambiar lo menos posible
+2. **Comprender:** Nunca corregir a ciegas — comprender POR QUÉ está roto
+3. **Una sola cosa:** Una corrección por commit, no corregir múltiples problemas a la vez
+4. **Compatible hacia atrás:** No romper la funcionalidad existente
 
-### Fix Patterns
+### Patrones de corrección
 
 ```python
-# BAD: Treating the symptom (English)
+# MALO: Tratar el síntoma (Español)
 try:
     result = broken_function()
-except:  # Swallow everything
+except:  # Ocultar todo
     result = default_value
 
-# GOOD: Fix the root cause (English)
+# BUENO: Corregir la causa raíz (Español)
 def broken_function():
-    if input_data is None:  # Actual cause: missing None check
+    if input_data is None:  # Causa real: falta verificación de None
         return default_value
     return process(input_data)
 ```
 
-### Common Fix Categories
+### Categorías comunes de corrección
 
-| Category | Typical Fix |
-|----------|------------|
-| None/Null | Guard clause: `if x is None: return default` |
-| Index error | Bounds check: `if i < len(lst)` |
-| Type error | Explicit conversion: `str(x)`, `int(x)` |
-| Import error | Fix path, install package |
-| Encoding | Specify UTF-8 explicitly: `encoding='utf-8'` |
-| Race condition | Lock/Mutex, or change order |
-| State bug | Check initialization, add reset |
+| Categoría | Corrección típica |
+|-----------|-------------------|
+| None/Null | Cláusula de guardia: `if x is None: return default` |
+| Error de índice | Comprobación de límites: `if i < len(lst)` |
+| Error de tipo | Conversión explícita: `str(x)`, `int(x)` |
+| Error de importación | Corregir ruta, instalar paquete |
+| Codificación (Encoding) | Especificar UTF-8 explícitamente: `encoding='utf-8'` |
+| Condición de carrera | Bloqueo/Mutex o cambiar el orden |
+| Error de estado | Verificar inicialización, agregar reinicio |
 
 ---
 
-## Phase 5: Verification (5 min)
+## Fase 5: Verificación (5 min)
 
-### Checklist
+### Lista de verificación
 
-- [ ] **Bug is fixed:** Original problem no longer occurs
-- [ ] **MRE passes:** Isolated test runs through
-- [ ] **No regression:** Existing tests still pass
-- [ ] **Edge cases:** Empty input, None, large data tested
-- [ ] **Project tools:** Check project tools directory for relevant test/validation tools
+- [ ] **Error corregido:** El problema original ya no ocurre
+- [ ] **MRE pasa:** La prueba aislada se ejecuta correctamente
+- [ ] **Sin regresión:** Las pruebas existentes siguen pasando
+- [ ] **Casos límite:** Entrada vacía, None, datos grandes probados
+- [ ] **Herramientas del proyecto:** Consultar el directorio de herramientas del proyecto para pruebas/validaciones relevantes
 
-### Test Commands
+### Comandos de prueba
 
 ```bash
-# Unit tests (English)
+# Pruebas unitarias (Español)
 python -m pytest tests/ -v
 
-# Only affected tests (English)
+# Solo pruebas afectadas (Español)
 python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type check (English)
+# Verificación de tipos (Español)
 python -m mypy file.py
 
-# Lint (English)
+# Linteo (Español)
 python -m flake8 file.py
 ```
 
 ---
 
-## Phase 6: Documentation (2 min)
+## Fase 6: Documentación (2 min)
 
-### Bug Report Template
+### Plantilla de informe de errores (Bug Report)
 
 ```markdown
-## Bug Report: [Short Title]
+## Informe de error: [Título corto]
 
-**Date:** YYYY-MM-DD
-**Severity:** critical / high / medium / low
-**Component:** [Module/File]
+**Fecha:** AAAA-MM-DD
+**Gravedad:** crítica / alta / media / baja
+**Componente:** [Módulo/Archivo]
 
-### Symptom
-[What the user sees / error message]
+### Síntoma
+[Lo que ve el usuario / mensaje de error]
 
-### Root Cause
-[Technical root cause]
+### Causa raíz
+[Causa raíz técnica]
 
-### Fix
-[What was changed + why]
+### Corrección (Fix)
+[Qué se cambió y por qué]
 
-### Affected Files
-- `file1.py` — [Change]
-- `file2.py` — [Change]
+### Archivos afectados
+- `file1.py` — [Cambio]
+- `file2.py` — [Cambio]
 
-### Prevention
-[How can this type of bug be prevented in the future?]
+### Prevención
+[¿Cómo se puede prevenir este tipo de error en el futuro?]
 ```
 
-### Commit Message Format
+### Formato de mensaje de commit
 
 ```
-fix: [Short description of the fix]
+fix: [Descripción corta de la corrección]
 
-Cause: [Root cause in one sentence]
-Fix: [What was changed]
-Test: [How verified]
+Causa: [Causa raíz en una frase]
+Fix: [Qué se cambió]
+Test: [Cómo se verificó]
 ```
 
 ---
 
-## PyQt6 / GUI Debugging — Common Pitfalls
+## Depuración de PyQt6 / GUI — Trampas comunes
 
-> This section is relevant for desktop GUI projects with PyQt6/PySide6.
+> Esta sección es relevante para proyectos de GUI de escritorio con PyQt6/PySide6.
 
-### Top 5 PyQt6 Traps
+### Las 5 trampas principales de PyQt6
 
-| Trap | Problem | Solution |
-|------|---------|---------|
-| **Signal-Slot Disconnect** | Signal connected but handler doesn't run | `print` in handler, check signature |
-| **Thread Safety** | GUI update from worker thread | `QMetaObject.invokeMethod` or use signal |
-| **Layout Cascade** | Widget invisible/misplaced | `widget.show()`, check layout hierarchy |
-| **Event Loop Block** | GUI freezes | Move long operations to QThread |
-| **Garbage Collection** | Widget suddenly disappears | Keep reference as `self.widget` |
+| Trampa | Problema | Solución |
+|--------|----------|----------|
+| **Desconexión Signal-Slot** | La señal está conectada pero el manejador no se ejecuta | `print` en el manejador, comprobar la firma |
+| **Seguridad de hilos (Thread Safety)** | Actualización de la GUI desde un hilo secundario | `QMetaObject.invokeMethod` o usar señales |
+| **Cascada de Layout** | Widget invisible o mal ubicado | `widget.show()`, comprobar la jerarquía del layout |
+| **Bloqueo del Event Loop** | La GUI se congela | Mover operaciones largas a QThread |
+| **Recolección de basura** | El widget desaparece de repente | Mantener la referencia como `self.widget` |
 
-### PyQt6 Debug Helpers
+### Ayudantes de depuración para PyQt6
 
 ```python
-# Dump widget hierarchy (English)
+# Imprimir jerarquía de widgets (Español)
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging (English)
+# Depuración de señales (Español)
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):
@@ -294,41 +290,41 @@ def debug_connect(self, *args, **kwargs):
 
 ---
 
-## Quick Reference
+## Referencia rápida
 
 ```
-BUG FOUND?
+¿ERROR ENCONTRADO?
      |
      v
-[Phase 1: Quick Checks]  ──── Obvious? -> FIX
+[Fase 1: Verificaciones rápidas] ── ¿Obvio? -> CORREGIR
      |
      v
-[Phase 2: Diagnosis]  ────────── Cause clear? -> Phase 4
+[Fase 2: Diagnóstico] ───────────── ¿Causa clara? -> Fase 4
      |
      v
-[Phase 3: Isolated Test]  ── Reproducible? -> Phase 4
-     |                              |
-     |                         Not reproducible?
-     |                              |
-     |                         Add logging,
-     |                         wait for recurrence
+[Fase 3: Prueba aislada] ───────── ¿Reproducible? -> Fase 4
+     |                                    |
+     |                              ¿No reproducible?
+     |                                    |
+     |                              Agregar registros,
+     |                              esperar recurrencia
      v
-[Phase 4: Fix]  ─────────────── Minimal + understood
+[Fase 4: Corrección] ────────────── Mínima y comprendida
      |
      v
-[Phase 5: Verification]  ────── Tests green? -> Phase 6
-     |                              |
-     |                         Tests red? -> Back to Phase 4
+[Fase 5: Verificación] ─────────── ¿Pruebas en verde? -> Fase 6
+     |                                    |
+     |                              ¿Pruebas en rojo? -> Volver a Fase 4
      v
-[Phase 6: Documentation]  ───── Bug report + commit
+[Fase 6: Documentación] ────────── Informe + commit
 ```
 
-### 20-Minute Rule
+### Regla de los 20 minutos
 
-If you're stuck after 20 minutes:
+Si estás atascado después de 20 minutos:
 
-1. **Change approach** — Try a different debugging technique
-2. **Rubber duck** — Explain the problem out loud (or write it down)
-3. **Take a break** — Step away for 5 minutes, return with fresh eyes
-4. **Get help** — Ask a colleague, Stack Overflow, documentation
-5. **Reset** — `git stash`, start completely fresh
+1. **Cambia de enfoque** — Prueba una técnica de depuración diferente
+2. **Pato de goma (Rubber duck)** — Explica el problema en voz alta (o escríbelo)
+3. **Tómate un descanso** — Aléjate durante 5 minutos y vuelve con ojos frescos
+4. **Busca ayuda** — Pregunta a un compañero, Stack Overflow o documentación
+5. **Reinicia** — `git stash`, empieza completamente desde cero

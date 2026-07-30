@@ -2,179 +2,116 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `workflow-extract`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `workflow-extract`.
-
+> **日本語** — `workflow-extract` の公式日本語版。
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
+# Workflow-Extract — チャット履歴や外部自動化からの自動化構築
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
-**Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
-periodische Pflege-Läufe. Dieser Skill extrahiert solche Workflows aus zwei Quellenarten —
-Chatverläufen (ein Ablauf wurde interaktiv entwickelt und soll künftig unbeaufsichtigt laufen)
-und bestehenden Automations-Prompts anderer Systeme (z. B. Codex-Automations, Scheduled
-Tasks, n8n-Flows) — und macht daraus user-neutrale, robuste Automatisierungs-Prompts oder
--Skills.
+一部のワークフローは、必要に応じて呼び出すスキルではなく、**自動で実行される自動化処理**に適しています（夜間チェック、ローテーションによるプロジェクト監査、定期的なメンテナンス実行など）。本スキルは、2種類の情報源 — チャット履歴（対話的に開発されたプロセスで、今後は無人実行したいもの）および他システムの既存自動化プロンプト（例: Codex-Automations、Scheduled Tasks、n8nフローなど） — からこのようなワークフローを抽出し、ユーザーに依存しない堅牢な自動化プロンプトまたはスキルへと変換します。
 
-Der Unterschied zum interaktiven Ablauf: Eine Automatisierung hat **niemanden, der korrigiert**.
-Alles, was in der Session der User abgefangen hat, muss die Automatisierung selbst abfangen.
-Genau dafür gibt es die Bausteine in `automation-bausteine.md`.
+対話的プロセスとの最大の違いは、自動化処理には**エラーを修正するユーザーがその場にいない**点です。ユーザーが対話セッション中に補正していたすべての事象を、自動化処理自身がガードしなければなりません。そのために用意されているのが `automation-bausteine.md` の構成要素です。
 
-## Ablauf
+## 手順
 
-### 1. Quelle und Zielform klären
+### 1. 情報源と出力形式の明確化
 
-| Quelle | typischer Fall |
+| 情報源 | 典型的なケース |
 | --- | --- |
-| Aktuelle Session / Transkript | Ablauf wurde interaktiv entwickelt, soll periodisch weiterlaufen |
-| Fremd-Automation (Prompt-Datei, Cron-Task, n8n-Flow) | Portierung/Abstraktion auf ein anderes System oder in die Bibliothek |
+| 現在のセッション / トランスクリプト | プロセスが対話的に開発され、今後は定期実行したい場合 |
+| 外部自動化（プロンプトファイル、Cronタスク、n8nフロー） | 割当/抽象化を行い、他システムやライブラリへ移植する場合 |
 
-Zielformen (eine oder mehrere):
+出力形式（1つまたは複数）:
 
-- **Automations-Prompt:** eigenständiger, user-neutraler Prompt-Text, einsetzbar in jedem
-  Scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
-- **Workflow-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
-  Automations-Prompt nur noch aufgerufen/parametrisiert wird (bevorzugt, wenn derselbe
-  Ablauf für mehrere Pipelines/Systeme gelten soll — eine Quelle der Wahrheit).
-- **Command:** dünner Slash-Command für manuelle Auslösung desselben Ablaufs.
+- **自動化プロンプト（Automation Prompt）:** 独立したユーザー中立のプロンプトテキスト。任意のスケジューラー（Codex-Automations、Claude `/schedule`/Cron、Scheduled Task、n8n）で使用可能。
+- **ワークフロースキル（Workflow Skill）:** プロセスを記述したライブラリ内のスキル。自動化プロンプトからは呼び出し・パラメータ指定のみを行う（同一プロセスを複数のパイプライン/システムに適用する場合に推奨 — Single Source of Truth）。
+- **コマンド（Command）:** 同一プロセスを手動実行するための軽量なスラッシュコマンド。
 
-### 2. Workflow-Kern extrahieren
+### 2. ワークフロー核心部の抽出
 
-Aus der Quelle herausarbeiten:
+情報源から以下を抽出・整理します:
 
-- **Kernaufgabe:** Was wird geprüft/gepflegt/erzeugt? (ein Satz)
-- **Auswahllogik:** Worauf wird die Aufgabe angewandt — festes Ziel oder Rotation über eine
-  Menge (ein Projekt pro Lauf)?
-- **Vorbedingungen:** Was muss vor der Arbeit gelesen/geprüft werden (Root-Dokumente,
-  Registries, Locks)?
-- **Dokumentationspflichten:** Wohin werden Ergebnis, Log, Folgeaufgaben geschrieben?
-- **Abbruchpfade:** Wann endet der Lauf read-only („nichts zu tun" ist ein gültiges Ergebnis)?
+- **核心タスク:** 何をチェック/メンテナンス/生成するのか？（1文で記述）
+- **選択ロジック:** タスクの対象は何か — 固定ターゲットか、集合に対するローテーションか（1回の実行につき1プロジェクト）？
+- **前提条件:** 作業前に何を読み込み/確認すべきか（ルートドキュメント、レジストリ、ロック）？
+- **記録義務:** 結果、ログ、後続タスクをどこに書き込むか？
+- **中断パス:** どのような場合に読み取り専用（Read-only）で終了するか（「処理対象なし」も正常な結果）？
 
-Bei Chatverläufen zusätzlich die Korrekturschleifen auswerten (siehe
-`../skill-extractor/transcript-quellen.md`): Jede User-Korrektur ist ein Kandidat für einen
-Guard, den die Automatisierung künftig selbst braucht.
+チャット履歴の場合は、修正ループも評価します（`../skill-extractor/transcript-quellen.md` を参照）: ユーザーによる各修正は、自動化が将来自身で必要とするガードの候補となります。
 
-### 3. Neutralisieren
+### 3. 中立化（Neutralize）
 
-Nach den Regeln in `../skill-extractor/neutralisierung.md`: Mechanik von Konfiguration
-trennen, Pfade/Hosts/Projektnamen in einen Konfigurationsblock ziehen. Automations-Prompts
-brauchen den Konfigurationsblock besonders dringend, weil sie wörtlich in Scheduler kopiert
-werden — konkrete Werte gehören an EINE Stelle am Prompt-Anfang.
+`../skill-extractor/neutralisierung.md` のルールに従い、ロジックと設定を分離し、パス/ホスト/プロジェクト名を設定ブロックへ抽出します。自動化プロンプトはスケジューラーにそのままコピーされるため、設定ブロックが特に重要です — 具体的な値はプロンプト冒頭の1箇所にまとめます。
 
-### 4. Automations-Bausteine ergänzen
+### 4. 自動化構成要素の追加
 
-Den extrahierten Kern gegen die Checkliste in `automation-bausteine.md` halten und fehlende
-Bausteine ergänzen — insbesondere Rotations-Auswahl mit Check-Registry, Idempotenz,
-Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Workflow ohne diese
-Bausteine funktioniert im Test und degeneriert im Dauerbetrieb (Doppelprüfungen, wachsende
-Logs, Kollisionen mit parallelen Agenten).
+抽出した核心部を `automation-bausteine.md` のチェックリストと照合し、不足している構成要素を追加します — 特にチェックレジストリを伴うローテーション選択、べき等性、ログのクリーンアップ、ロックの尊重、Read-only終了、終了レポート。これらの構成要素を欠いたワークフローは、テスト時には機能しても長期運用で劣化します（重複チェック、ログの肥大化、並列エージェントとの衝突）。
 
-### 5. Takt und Budget setzen
+### 5. 頻度と予算の設定
 
-- **Frequenz an Änderungsrate koppeln:** Ein Check muss nicht öfter laufen, als sich sein
-  Gegenstand ändert. Erfahrungswert aus gewachsenen Automations-Beständen: Viele anfangs
-  stündliche Checks wurden auf täglich/wöchentlich reduziert — mit Rotations-Auswahl deckt
-  auch ein seltener Takt die ganze Pipeline ab.
-- **Nachtfenster für Schweres**, kurze Read-only-Checks dürfen häufiger.
-- **Kostenbewusstsein:** Jeder Lauf kostet Tokens/Compute; ein Lauf, der meist read-only
-  endet, soll das früh feststellen (Registry lesen VOR teurer Analyse).
+- **実行頻度を変更レートに連動させる:** チェック対象が変更される頻度を超えて実行する必要はありません。成熟した自動化資産からの経験則: 当初1時間ごとだったチェックの多くが日次/週次に削減されました — ローテーション選択を組み合わせることで、低い頻度でもパイプライン全体をカバーできます。
+- **重い処理は夜間ウィンドウに割り当て**、短時間のRead-onlyチェックはより高頻度で実行可能です。
+- **コスト意識:** 毎回の実行にはトークン/計算リソースが消費されます。大半がRead-onlyで終了する実行は、高コストな解析を行う前にそれを検知すべきです（高コスト解析の前にレジストリを読み込む）。
 
-### 6. Testen und einsetzen
+### 6. テストと導入
 
-1. **Trockenlauf:** Den fertigen Prompt einmal interaktiv ausführen (als wäre man der
-   Scheduler) und prüfen: Endet er sauber? Schreibt er Registry/Log korrekt? Bleibt er
-   im Scope?
-2. **Grenzfall-Test:** Einen Lauf simulieren, bei dem nichts zu tun ist — er muss read-only
-   mit kurzem Logeintrag enden, nicht „Arbeit erfinden".
-3. **Einsetzen:** In den Ziel-Scheduler eintragen; bei Skill-Form zusätzlich in Bibliothek
-   ablegen und deployen.
-4. **Fehlerpfad beobachten:** Nach den ersten 2–3 echten Läufen Log/Registry kontrollieren —
-   Automatisierungen scheitern am häufigsten an Pfad-Drift (Ziel wurde verschoben) und an
-   wachsenden Logdateien.
+1. **ドライラン:** 完成したプロンプトを対話形式で一度実行し（スケジューラーの動作を模倣）、確認します: 正常に終了するか？ レジストリ/ログが正しく書き込まれるか？ スコープ内に留まっているか？
+2. **限界値テスト:** 処理対象が存在しない実行をシミュレートします — 「仕事を創作する」のではなく、短文のログ記録とともにRead-onlyで終了しなければなりません。
+3. **導入:** ターゲットのスケジューラーに登録します。スキルの形式である場合は、ライブラリにも配置してデプロイします。
+4. **エラーパスの監視:** 最初の2〜3回の実際の実行後にログ/レジストリを確認します — 自動化の失敗原因として最も多いのはパスのズレ（ターゲットの移動）とログファイルの肥大化です。
 
-## Fleet-Audit-Modus: eine laufende Automations-Flotte prüfen
+## Fleet-Audit モード: 稼働中の自動化フリートの監査
 
-Für „prüfe meine Automatisierungen": nicht extrahieren, sondern den BESTAND betreiben
-helfen. Über die Automations-Quelle des Zielsystems (Prompt-/Config-Dateien, Schedules,
-Run-Logs/Memories) systematisch prüfen:
+「自分の自動化処理を監査したい」場合、抽出を行うのではなく、既存資産の運用を支援します。ターゲットシステムの自動化情報源（プロンプト/設定ファイル、スケジュール、実行ログ/メモリー）を通じて体系的に検査します:
 
-1. **Silent-Failure/No-op-Erkennung:** Läuft die Automation, tut aber nichts mehr?
-   (Run-Memories/Logs der letzten Läufe lesen: nur noch Leerläufe, Fehler, tote Pfade?)
-2. **Redundanz + Ertrag:** Überschneiden sich Automationen im Scope? Steht der Ertrag
-   (Output, behobene Befunde) noch im Verhältnis zum Verbrauch (Tokens, Läufe)?
-3. **Drift:** Passen Prompt-Pfade, Konventionen und Schedules noch zur Realität?
-   (Ziele verschoben, Policies geändert, Takt zu hoch für die Änderungsrate.)
-4. **Katalog-Abgleich:** Fehlt eine Automation, die es geben sollte (Lücken im
-   Muster-Raster)? Vorschläge nur freigabe-gegated (Baustein 12), nie selbst scharf schalten.
-5. **Befund-Bericht:** pro Automation eine Zeile (behalten | anpassen | pausieren |
-   zusammenlegen | löschen) + Begründung; Änderungen selbst nur nach Freigabe.
+1. **サイレントエラー / 空振り検知（Silent-Failure/No-op）:** 自動化が実行されているものの、実質機能していない状態になっていないか？（直近実行のメモリー/ログを確認: 空振り、エラー、無効なパスばかりになっていないか？）
+2. **冗余性 + 費用対効果:** スコープ内で自動化同士が重複していないか？ 成果（アウトプット、解決された指摘事項）が消費リソース（トークン、実行回数）に見合っているか？
+3. **乖離（Drift）:** プロンプトのパス、規約、スケジュールが現在の状況と一致しているか？（ターゲットの移動、ポリシーの変更、変更レートに対して高すぎる実行頻度など）
+4. **カタログ照合:** 存在するべき自動化が不足していないか（パターン格子内の空白）？ 提案は承認ゲート付き（構成要素12）とし、自動で有効化してはなりません。
+5. **監査レポート:** 自動化ごとに1行（保持 | 調整 | 一時停止 | 統合 | 削除）+ 理由を記載。変更作業は承認を得た後のみ実施します。
 
-## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
+## Bulk モード: 自動化資産や多数のトランスクリプトの査定
 
-Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
-Automatisierungs-Kandidaten aus alten Chatverläufen":
+「システムXの全自動化処理を検査して抽象化可能なワークフローを探す」または「過去のチャット履歴から自動化候補を抽出する」場合:
 
-1. **Datenreduktion wie im skill-extractor** (Map-Reduce über Subagenten,
-   `swarm-operations`-Muster): Pro Bündel ein Subagent, der je Quelle meldet:
-   Kernaufgabe | Muster (z. B. Rotation-Check, Health-Check, Ideen-Mining) |
-   einzigartige Elemente | user-neutral abstrahierbar? | abgedeckt durch existierenden Skill?
-2. **Muster vor Einzelstücken:** Wenn viele Quellen dasselbe Gerüst teilen (z. B. 40
-   Rotations-Checks), wird das GERÜST ein Skill und die Einzelfälle werden Parametrisierungen —
-   nicht 40 Einzel-Skills.
-3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
-   Kandidatenliste an den User vor dem Massenbau.
+1. **`skill-extractor` と同様のデータ削減**（サブエージェントによる Map-Reduce、`swarm-operations` パターン）: バンドルごとに1つのサブエージェントを割り当て、情報源ごとに報告: 核心タスク | パターン（例: ローテーションチェック、ヘルスチェック、アイデアマイニング） | 固有要素 | ユーザー中立に抽象化可能か？ | 既存スキルでカバーされているか？
+2. **個別の処理よりパターンを優先:** 多数の情報源が同一の骨組みを共有している場合（例: 40個のローテーションチェック）、その骨組みをスキル化し、個別のケースはパラメータ指定とします — 40個の個別スキルを作るのではありません。
+3. **既存のスキル/コマンド群との重複排除**を行った上で、一括作成の前にナンバリングされた候補リストをユーザーに提示します。
 
-## 使用例と実行モデル & Usage
+## 例と応用
 
 ```text
-User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —
-das soll ab jetzt wöchentlich über alle Paper laufen."
+User: "今日、論文の引用チェックのテストを行いました。今後はこれを毎週、全論文に対して自動実行したいです。"
 
-1. Zielform: Automations-Prompt für den Scheduler + Verweis auf rotation-check.
-2. Kern: Zitate eines Papers gegen Originalquellen prüfen (Web/Datenbank),
-   Korrekturen einpflegen, bei Änderungen Folgeaufgabe „Neu-Upload" in TODO.md.
-3. Neutralisieren: Pipeline-Root, Registry-/Log-Pfade → Konfigurationsblock.
-4. Bausteine ergänzen: Rotations-Auswahl (ein Paper pro Lauf), Registry lesen VOR
-   Auswahl, Read-only-Exit („alle Quellen ok"), Log-Hygiene, Abschlussbericht.
-5. Takt: wöchentlich reicht (Papers ändern sich langsam); Trockenlauf + Leerlauf-Test,
-   dann in den Scheduler.
+1. 出力形式: スケジューラー用自動化プロンプト + rotation-check への参照。
+2. 核心部: 論文の引用を元ソース（Web/データベース）と照合し、修正を適用。変更がある場合は TODO.md に後続タスク「再アップロード」を記録。
+3. 中立化: パイプラインのルート、レジストリ/ログのパス → 設定ブロックへ抽出し集約。
+4. 構成要素の追加: ローテーション選択（1回の実行につき1論文）、選択前のレジストリ読み込み、Read-only終了（「全ソース正常」）、ログのクリーンアップ、終了レポート。
+5. 頻度: 週1回で十分（論文の変更頻度は低い）。ドライラン＋空振りテストを実施後、スケジューラーに登録。
 ```
 
-## Red Flags
+## レッドフラグ（Red Flags）
 
-| Gedanke | Realität |
+| 考え | 現実 |
 | --- | --- |
-| „Der Ablauf lief in der Session, also läuft er auch als Automation" | Ohne User fehlen alle Korrektive — Bausteine-Checkliste ist Pflicht. |
-| „Stündlich schadet nicht" | Doch: Tokens, Log-Wachstum, Kollisionsrisiko. Takt an Änderungsrate koppeln. |
-| „Ich baue für jede Variante eine eigene Automation" | Gemeinsames Gerüst als Skill, Varianten als Parameter. |
-| „Nichts gefunden — dann suche ich mir eben andere Arbeit" | Read-only-Exit mit Logeintrag ist das korrekte Ergebnis eines Leerlaufs. |
+| 「セッション内で動いたから、自動化しても動くはずだ」 | ユーザーがいない環境ではすべての補正機構が失われます — 構成要素チェックリストの確認が必須です。 |
+| 「1時間ごとの実行でも害はない」 | 害があります: トークン消費、ログの肥大化、衝突リスク。頻度は変更レートに連動させてください。 |
+| 「バリエーションごとに個別の自動化を作成する」 | 共通の骨組みをスキルとし、バリエーションはパラメータとして渡します。 |
+| 「何も見つからなかった — 別の作業を探そう」 | ログを記録してRead-onlyで終了することが、空振り実行における正しい結果です。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `skill-extractor` — gleiche Extraktion, Ziel ist ein abrufbarer Skill; teilt
-  Neutralisierung und Transcript-Quellen (dort dokumentiert).
-- `rotation-check` — das Standard-Gerüst für rotierende Pipeline-Checks (häufigster
-  Automations-Typ); als Baustein referenzieren statt neu erfinden.
-- `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
+- `skill-extractor` — 同様の抽出作業。出力形式は呼び出し可能なスキル。中立化およびトランスクリプト情報源の仕様を共有（同スキルに記載）。
+- `rotation-check` — ローテーションによるパイプラインチェックの標準骨組み（最も頻出する自動化タイプ）。再発明せず構成要素として参照。
+- `swarm-operations` — 一括査定のためのスウォームパターン。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-03)
-- Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
-  Drift, Lücken) — integriert statt als eigener Skill (Dedup-Entscheid).
-- Drei neue Bausteine in automation-bausteine.md: Freigabe-Gate über Sentinel-Dateien (12),
-  Gestaffelte Eskalation mit Handoff-Artefakt (13), Melde-Disziplin für Monitore (14).
+- Fleet-Audit モード（稼働中の自動化フリートの監査: サイレントエラー、冗余性、乖離、不足箇所の検知）— 独立スキルとせず本スキルへ統合（重複排除の決定）。
+- `automation-bausteine.md` に3つの新構成要素を追加: センチネルファイルによる承認ゲート (12)、ハンドオフ成果物を伴う段階的エスカレーション (13)、モニターのための報告規律 (14)。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus der Abstraktion des Codex-Automations-Bestands
-  (77 Automationen, dominantes Rotations-Check-Muster) in user-neutrale Bausteine.
+- 初期バージョン。Codex-Automations 資産（77の自動化処理、ローテーションチェックが支配的パターン）をユーザー中立の構成要素へと抽象化して作成。

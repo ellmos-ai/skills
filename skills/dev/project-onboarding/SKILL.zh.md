@@ -1,223 +1,235 @@
 ---
+name: project-onboarding
+version: 1.0.0
+type: protocol
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 新软件项目接管与新成员入职的标准流程：功能分析、代码质量审查、入职检查清单以及任务创建。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [onboarding, project, intake, analysis, checklist, code-review]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `project-onboarding`.
+> **中文** — `project-onboarding` 官方中文版本。
 
 
+# 新软件项目标准接管/入职规程 (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Standard Onboarding Procedure for New Software Projects (English)
-
-**Version:** 1.0
-**Date:** 2026-03-12
+**版本：** 1.0
+**日期：** 2026-03-12
 
 ---
 
-## 概述与执行目标 & Purpose
+## 概述与目的
 
-This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
+本规程定义了在将新发现的软件文件夹添加到任务管理系统之前需要执行的步骤。
 
 ```
 +─────────────────────────────────────────────────────+
-|           STANDARD ONBOARDING PROCEDURE              |
+|               标准接管/入职规程                      |
 +─────────────────────────────────────────────────────+
-|  1. Create feature analysis                          |
-|  2. Code quality review (standard tests)             |
-|  3. Create TASKS.txt                                 |
-|  4. Add to task management                           |
+|  1. 创建功能分析                                     |
+|  2. 代码质量审查（标准测试）                           |
+|  3. 创建 TASKS.txt                                   |
+|  4. 添加至任务管理                                   |
 +─────────────────────────────────────────────────────+
 ```
 
 ---
 
-## Phase 1: Feature Analysis
+## 第一阶段：功能分析
 
-**Purpose:** Understand the tool, its functions, and development status.
+**目的：** 理解工具、其功能以及开发状态。
 
-**Create file:** `Feature_Analysis_<ToolName>.md`
+**创建文件：** `Feature_Analysis_<ToolName>.md`
 
-### Template
+### 模板
 
 ```markdown
-# Feature Analysis: <ToolName> (English)
+# 功能分析：<ToolName> (中文)
 
-## Brief Description
-A short sentence describing what the tool does.
+## 简短描述
+用一句话简要描述该工具的功能。
 
 ---
 
-## Highlights
+## 核心亮点
 
-| Feature | Description |
+| 特性 | 描述 |
 |---------|-------------|
-| **Feature 1** | Description |
-| **Feature 2** | Description |
+| **特性 1** | 描述 |
+| **特性 2** | 描述 |
 
 ---
 
-## Development Stage Assessment
+## 开发阶段评估
 
-### Current Status: **<Status> (<X>%)**
+### 当前状态：**<Status> (<X>%)**
 
-Possible statuses:
-- Prototype (0-30%)
-- Alpha (30-60%)
-- Beta (60-85%)
-- Production Ready (85-95%)
-- Release (95-100%)
+可能的状态：
+- Prototype (原型阶段 0-30%)
+- Alpha (Alpha 阶段 30-60%)
+- Beta (Beta 阶段 60-85%)
+- Production Ready (生产就绪 85-95%)
+- Release (正式发布 95-100%)
 
-| Category | Rating (1-5) | Details |
+| 类别 | 评分 (1-5) | 详细信息 |
 |----------|:------------:|---------|
-| **Functionality** | 3 | |
+| **功能性** | 3 | |
 | **UI/UX** | 3 | |
-| **Stability** | 3 | |
-| **Documentation** | 3 | |
+| **稳定性** | 3 | |
+| **文档** | 3 | |
 
 ---
 
-## Recommended Extensions
+## 推荐扩展
 
-### Priority: High
+### 优先级：高
 1. ...
 
-### Priority: Medium
+### 优先级：中
 2. ...
 
-### Priority: Low
+### 优先级：低
 3. ...
 
 ---
 
-## Technical Details
+## 技术细节
 
-Framework:      <Framework>
-File size:      <X> lines of Python
-Main file:      <main.py>
+框架：            <Framework>
+文件大小：        Python 代码共 <X> 行
+主文件：          <main.py>
 
 ---
-*Analysis created: <Date>*
+*分析创建于：<Date>*
 ```
 
 ---
 
-## Phase 2: Code Quality Review
+## 第二阶段：代码质量审查
 
-**Purpose:** Ensure technical quality, identify known issues.
+**目的：** 确保技术质量，识别已知问题。
 
-### Recommended Checks
+### 推荐检查项目
 
-| Test | Tool | Description |
+| 测试项 | 工具 | 描述 |
 |------|------|-------------|
-| **Encoding** | Encoding checker (e.g., `chardet`, `file`) | Ensure UTF-8 |
-| **Method Analysis** | Linter (e.g., `pylint`, `flake8`) | Find large methods |
-| **Indentation** | Formatter (e.g., `black`, `autopep8`) | Check consistency |
-| **Imports** | Import checker (e.g., `isort`, `pylint`) | Find unused imports |
+| **编码 (Encoding)** | 编码检查工具（如 `chardet`、`file`） | 确保为 UTF-8 |
+| **函数/方法分析** | Linter 代码检查（如 `pylint`、`flake8`） | 查找过长的函数/方法 |
+| **缩进 (Indentation)** | 格式化工具（如 `black`、`autopep8`） | 检查一致性 |
+| **导入 (Imports)** | 导入检查工具（如 `isort`、`pylint`） | 查找未使用的导入 |
 
-### Check Points
+### 检查清单
 
-- [ ] All .py files UTF-8 encoded?
-- [ ] No unusually large methods (>100 lines)?
-- [ ] Consistent indentation (spaces vs tabs)?
-- [ ] Unused imports removed?
-- [ ] Docstrings present?
+- [ ] 所有 .py 文件是否均为 UTF-8 编码？
+- [ ] 是否存在异常庞大的函数/方法（>100 行）？
+- [ ] 缩进是否一致（空格 vs 制表符）？
+- [ ] 是否已移除未使用的导入？
+- [ ] 是否包含 Docstrings 文档注释？
 
-### Document Results
+### 记录结果
 
-Record issues in TASKS.txt under "QUALITY REVIEW".
+在 `TASKS.txt` 中的 "QUALITY REVIEW" 标题下记录发现的问题。
 
 ---
 
-## Phase 3: Create TASKS.txt
+## 第三阶段：创建 TASKS.txt
 
-**Purpose:** Capture open tasks in a structured format.
+**目的：** 以结构化格式记录待办任务。
 
-**Create file:** `TASKS.txt` in the project folder
+**创建文件：** 项目文件夹中的 `TASKS.txt`
 
-### Template
+### 模板
 
 ```
 TASKS - <ToolName> V<Version>
 ==============================
-Status: <Status>
-Date: <Date>
+状态: <Status>
+日期: <Date>
 
-OPEN TASKS:
-[ ] <Task 1> - Effort: <LOW|MEDIUM|HIGH>
-[ ] <Task 2> - Effort: <LOW|MEDIUM|HIGH>
+待办任务 (OPEN TASKS):
+[ ] <任务 1> - 工作量: <LOW|MEDIUM|HIGH>
+[ ] <任务 2> - 工作量: <LOW|MEDIUM|HIGH>
 
 ---
-DONE (Archive):
-- <Completed task> (<Version>, <Date>)
+已完成 (DONE - Archive):
+- <已完成的任务> (<Version>, <Date>)
 ```
 
-### Status Values
+### 状态值说明
 
-| Status | Meaning |
+| 状态 | 含义 |
 |--------|---------|
-| NEWLY DISCOVERED | Not yet analyzed |
-| ANALYSIS NEEDED | Feature analysis in progress |
-| QUALITY REVIEW | Code tests running |
-| VALIDATED & READY | Ready for features |
-| MVP | Minimum Viable Product |
-| BUILD ONLY | Only compilation needed |
-| BLOCKED | Waiting for user test/decision |
+| NEWLY DISCOVERED | 新发现，尚未分析 |
+| ANALYSIS NEEDED | 功能分析正在进行中 |
+| QUALITY REVIEW | 代码测试/审查运行中 |
+| VALIDATED & READY | 验证通过，已准备好进行特性开发 |
+| MVP | 最小可行性产品 (Minimum Viable Product) |
+| BUILD ONLY | 仅需编译/构建 |
+| BLOCKED | 阻塞，等待用户测试或决策 |
 
 ---
 
-## Phase 4: Task Management Integration
+## 第四阶段：集成至任务管理
 
-After completing phases 1-3:
+完成第一至三阶段后：
 
-1. **Transfer tasks:** Create TASKS.txt entries as tasks/issues
-2. **Verify:** All tasks correctly categorized?
-3. **Categorize:** Assign project to appropriate category (single tool, suite, library, etc.)
+1. **迁移任务：** 将 TASKS.txt 中的条目作为 Task/Issue 创建
+2. **校验：** 所有任务分类是否准确？
+3. **分类归档：** 将项目分配至恰当的类别（独立工具、套件、库等）
 
-### Automatic Onboarding Tasks
+### 自动入职任务
 
-For new projects, create the following standard tasks:
+对于新项目，自动创建以下标准任务：
 
-| Task | Description | Effort |
+| 任务 ID | 描述 | 工作量 |
 |------|-------------|--------|
-| onb_1 | Create feature analysis | medium |
-| onb_2 | Code quality review | low |
-| onb_3 | Create TASKS.txt | low |
+| onb_1 | 创建功能分析文件 | medium |
+| onb_2 | 代码质量审查 | low |
+| onb_3 | 创建 TASKS.txt | low |
 
-Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
-
----
-
-## Quick Checklist
-
-```
-[ ] 1. Feature_Analysis_<Name>.md created
-[ ] 2. Code quality review completed (linter, encoding, imports)
-[ ] 3. TASKS.txt created with status
-[ ] 4. Tasks added to task management
-```
+任务存在依赖关系：onb_2 依赖于 onb_1，onb_3 依赖于 onb_2。
 
 ---
 
-## 使用示例与实践 & Usage
+## 快速检查清单
+
+```
+[ ] 1. 已创建 Feature_Analysis_<Name>.md
+[ ] 2. 已完成代码质量审查（Linter、编码、导入检查）
+[ ] 3. 已创建包含状态的 TASKS.txt
+[ ] 4. 任务已添加至任务管理系统
+```
+
+---
+
+## 示例与应用
 
 ```bash
-# 1. Feature analysis (English)
-# -> Create Feature_Analysis_MyTool.md (see template) (English)
+# 1. 功能分析
+# -> 创建 Feature_Analysis_MyTool.md（参见模板）
 
-# 2. Code quality (English)
+# 2. 代码质量检查
 pylint MyTool/main.py
 flake8 MyTool/main.py
-file -i MyTool/main.py  # Check encoding
+file -i MyTool/main.py  # 检查编码
 
-# 3. TASKS.txt (English)
-# -> Create in tool folder with status "QUALITY REVIEW" (English)
+# 3. 创建 TASKS.txt
+# -> 在工具文件夹中创建，状态设为 "QUALITY REVIEW"
 
-# 4. Create tasks (English)
-# -> Capture TASKS.txt entries as issues/tickets (English)
+# 4. 创建任务
+# -> 将 TASKS.txt 条目录入为 Issues/Tickets
 ```
 
 ---
 
-*Created: 2026-01-10 | Ported: 2026-03-12*
+*创建时间：2026-01-10 | 迁移时间：2026-03-12*

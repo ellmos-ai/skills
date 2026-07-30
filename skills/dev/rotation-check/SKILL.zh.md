@@ -2,132 +2,91 @@
 language: zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `rotation-check`.
+> **中文** — `rotation-check` 官方中文版本。
 
 
+# Rotation-Check — 单次运行单个目标、公平覆盖、记忆机制 (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概述与目的
 
+对于需要定期检查包含众多项目的流水线（如检查来源、代码风格、健康度、安全性、翻译等）的人来说，往往会面临一个分配难题：在单次运行中检查所有项目成本过高；而如果没有记忆机制，每次运行又会随机检查重复的内容。轮转模式（Rotation pattern）同时解决了这两个问题：**单次运行仅检查一个目标，优先选择“最长时间未被检查”的目标，并使用注册表（Registry）作为记忆。** 这样，即使是较低的检查频率（每日/每周），也能在数周内有据可查且无重复劳动地覆盖整个流水线。
 
-> **English Translation** — Official English version of `rotation-check`.
+该模式已在跨多个项目流水线的大规模生产自动化实践中得到充分验证。
 
+## 组成要素
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
+### 1. 每个流水线两个文件（仅需一次性创建）
 
-## 概述与执行目标 & Purpose
-
-Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
-Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
-prüfen ist zu teuer; ohne Gedächtnis prüft jeder Lauf zufällig dasselbe. Das Rotations-Muster
-löst beides: **genau ein Ziel pro Lauf, Auswahl nach „am längsten ungeprüft", Registry als
-Gedächtnis.** So deckt auch ein seltener Takt (täglich/wöchentlich) über Wochen die ganze
-Pipeline ab — nachweisbar und ohne Doppelarbeit.
-
-Bewährt als Rückgrat eines gewachsenen Bestands produktiver Automationen über mehrere
-Projekt-Pipelines hinweg.
-
-## Bausteine
-
-### 1. Zwei Dateien pro Pipeline (einmalig anlegen)
-
-| Datei | Inhalt | Charakter |
+| 文件 | 内容 | 性质 |
 | --- | --- | --- |
-| `CHECKED-REGISTRY.md` | eine Kompaktzeile pro Check: Ziel, Datum, Checktyp, Ergebnis, nächster Schritt | Zustandsübersicht — wird VOR jeder Zielauswahl gelesen |
-| `CHECKS-LOG.txt` | kurzer Verlaufseintrag pro Lauf mit Details/Evidenz | Journal — append-only |
+| `CHECKED-REGISTRY.md` | 每次检查一行紧凑记录：目标、日期、检查类型、结果、下一步 | 状态概述 — 在每次选择目标之前进行读取 |
+| `CHECKS-LOG.txt` | 每次运行的简短历史记录，包含细节/凭证 | 日志 — 仅追加（append-only） |
 
-Beide liegen im Pipeline-Root (nicht im Einzelprojekt), damit ein Lauf sie mit einem Read
-erfassen kann. Registry-Zeilenformat:
-
-```text
-| <ziel> | <YYYY-MM-DD> | <checktyp> | <ok|befund|übersprungen> | <nächster schritt> |
-```
-
-### 2. Auswahlregel
-
-1. Registry und Log lesen (Pflicht, VOR der Auswahl — sonst Doppelprüfung).
-2. Kandidaten: Ziele, die für DIESEN Checktyp noch nie oder am längsten nicht geprüft wurden.
-3. Ausweichen, wenn das Ziel kürzlich von einem **eng verwandten** Check angefasst wurde
-   (z. B. Zitations-Check direkt nach Quellencheck bringt nichts) oder gerade gesperrt/in
-   Bearbeitung ist (Locks respektieren).
-   **Geschwister-Cooldown:** Laufen mehrere verwandte Checks über dieselbe Zielmenge
-   (z. B. Entwicklung, Bugsuche und Review derselben Pipeline), eine Karenzzeit vereinbaren
-   (Erfahrungswert: ~24 h), in der ein von einem Geschwister-Check bearbeitetes Ziel nicht
-   erneut gewählt wird — verhindert Kollisionen und widersprüchliche Parallel-Änderungen.
-4. Vorziehen außer der Reihe nur mit gutem Grund (z. B. große Überarbeitung seit letztem
-   Check) — den Grund im Log nennen.
-
-### 3. Check durchführen — mit Read-only-Exit
-
-Den eigentlichen Check (frei definierbar: Quellencheck, Style-Check, Security-Audit, …)
-auf das EINE gewählte Ziel anwenden. Zwei gültige Ausgänge:
-
-- **Befund:** beheben was in den Scope passt; Größeres als Folgeaufgabe in die projektlokale
-  TODO/AUFGABEN-Datei eintragen (der Check muss nicht alles selbst lösen).
-- **Nichts zu tun:** kurz dokumentieren und enden. Ein Leerlauf ist ein Ergebnis, kein
-  Scheitern — keinesfalls den Scope ausweiten, um „etwas gefunden zu haben".
-
-### 4. Dokumentieren
-
-- Registry-Zeile ergänzen (kompakt), Log-Eintrag schreiben (Details/Evidenz).
-- **Log-Hygiene:** Werden Registry/Log unübersichtlich (Erfahrungswert: mehrere hundert
-  Zeilen), alten Stand nach `_archiv/` verschieben, frische Datei anlegen, im Kopf auf den
-  Vorgänger verweisen (Pfad + Datum).
-- **Pfad-Drift:** Zeigt ein erwarteter Pfad ins Leere (Ziel verschoben/umbenannt), NICHT neu
-  anlegen — über die maßgebliche Statusdatei/Registry der Pipeline korrigieren und den
-  Fehlpfad in einem Failure-Log festhalten.
-
-### 5. Takt
-
-Frequenz an die Änderungsrate des Geprüften koppeln: Rotations-Checks über stabile Bestände
-laufen gut wöchentlich (ein Ziel pro Lauf ≈ ganze Pipeline pro Quartal bei ~12 Zielen);
-schnelllebige Checks (z. B. auf aktive Arbeit) täglich. Praxiserfahrung: anfangs stündliche
-Checks wurden fast alle auf täglich/wöchentlich reduziert — die Abdeckung blieb, die Kosten
-fielen.
-
-## Prompt-Vorlage (für Scheduler/Automation)
+两者均位于流水线根目录下（而非独立项目内），以便单次运行只需一次读取即可获取。注册表行格式：
 
 ```text
-VORBEREITUNG: Lies <PIPELINE_ROOT>/<POLICY-DOKUMENTE> sowie <REGISTRY> und <LOG>.
-
-AUFGABE: Wähle genau ein Ziel aus <ZIELMENGE>. Bevorzuge Ziele, die für den Check
-"<CHECKTYP>" noch nie oder am längsten nicht geprüft wurden. Wurde ein Ziel kürzlich
-von diesem oder einem eng verwandten Check geprüft oder ist es gesperrt: ausweichen
-oder read-only mit Logeintrag enden.
-
-CHECK: <konkrete Prüf-/Pflegeaufgabe und was bei Befund zu tun ist; Folgearbeiten in
-die projektlokale TODO-Datei>.
-
-Wenn keine Arbeit anfällt: kurz dokumentieren, Lauf beenden.
-
-DOKUMENTATION: Registry-Zeile in <REGISTRY> (Ziel, Datum, Checktyp, Ergebnis, nächster
-Schritt) + Verlaufseintrag in <LOG>. Bei Überlänge: alten Stand nach _archiv/ und
-frische Datei mit Verweis.
-
-ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
+| <目标> | <YYYY-MM-DD> | <检查类型> | <ok|有发现|已跳过> | <下一步> |
 ```
 
-## Red Flags
+### 2. 选择规则
 
-| Gedanke | Realität |
+1. 读取注册表和日志（强制要求，在选择之前读取 — 否则会出现重复检查）。
+2. 候选目标：针对 **当前检查类型** 从未被检查过或最长时间未被检查的目标。
+3. 避让机制：若该目标最近刚被 **紧密相关** 的检查处理过（例如在源检查之后立即进行引用检查是没有意义的），或者该目标当前处于锁定/修改状态（尊重锁定状态），则进行避让。
+   **兄弟冷静期（Sibling Cooldown）：** 当多个相关检查运行在同一目标集合上时（例如对同一流水线进行开发、Bug 查找和审查），需约定一个冷却期（经验值：~24 小时），在此期间，被兄弟检查处理过的目标不会被再次选中 — 这可以防止冲突和相互矛盾的并行修改。
+4. 破例优先：仅在理由充分时方可破例（例如自上次检查以来进行了重大改动） — 并在日志中说明原因。
+
+### 3. 执行检查 — 具备只读退出机制（Read-only Exit）
+
+对选定的 **单个** 目标应用具体的检查（可自由定义：源码检查、风格检查、安全审计等）。共有两种有效输出：
+
+- **存在发现：** 修复属于当前范围内的问题；超出范围的较重任务记录在项目本地的 TODO/任务文件中（检查本身无需解决所有问题）。
+- **无事可做：** 简要记录并结束。空运行（无发现）也是一种正常结果而非失败 — 切勿为了“必须有所发现”而盲目扩大检查范围。
+
+### 4. 记录与文档
+
+- 补充注册表记录行（紧凑），编写日志条目（细节/凭证）。
+- **日志卫生管理：** 当注册表/日志过于冗长时（经验值：数百行），将旧状态移动至 `_archiv/`，创建新文件，并在文件头标明前身文件的路径与日期。
+- **路径漂移（Path Drift）：** 若预期路径指向空处（目标被移动/重命名），切勿重新创建 — 应通过流水线的主权威状态文件/注册表进行修正，并将错误路径记录在失败日志中。
+
+### 5. 节奏与频率
+
+将检查频率与被检查对象的变更速率挂钩：对于稳定资产的轮转检查，每周运行一次效果良好（每次运行一个目标 ≈ 约 12 个目标在每季度覆盖整个流水线）；而对于快速变更的检查（如针对活跃工作），则每日运行。实践经验表明：最初设定的每小时检查大多被调低至每日/每周 — 覆盖率保持不变，而成本大幅下降。
+
+## Prompt 模板（供调度器/自动化使用）
+
+```text
+准备阶段：读取 <PIPELINE_ROOT>/<策略文档> 以及 <REGISTRY> 和 <LOG>。
+
+任务：从 <目标集合> 中精准选择一个目标。优先选择针对检查类型 "<检查类型>" 从未检查过或最长时间未检查的目标。若某目标最近已被该检查或紧密相关的检查处理过，或处于锁定状态：进行避让或以只读模式记录日志后结束。
+
+检查：<具体的检查/维护任务以及发现问题时的处理方式；后续工作录入项目本地 TODO 文件>。
+
+若无工作产生：简要记录，结束本次运行。
+
+文档记录：在 <REGISTRY> 中追加一行注册表记录（目标、日期、检查类型、结果、下一步） + 在 <LOG> 中追加历史条目。若文件过长：将旧状态移至 _archiv/ 并创建带前身引用的新文件。
+
+完成汇报：简报（目标 | 已做事项 | 结果 | 后续任务）。
+```
+
+## 红线警示 (Red Flags)
+
+| 错误想法 | 现实情况 |
 | --- | --- |
-| „Ich wähle einfach ein interessantes Projekt" | Auswahl nur über die Registry — sonst Lieblingsprojekt-Bias und blinde Flecken. |
-| „Registry lese ich nach dem Check" | Vorher. Sie ist das Auswahlkriterium, nicht nur das Protokoll. |
-| „Mehrere Ziele pro Lauf schaffen mehr" | Ein Ziel hält Läufe kurz, idempotent und abbrechbar; Menge kommt über die Rotation. |
-| „Der Leerlauf war umsonst" | Ein dokumentierter Leerlauf aktualisiert das Gedächtnis — das ist der halbe Wert des Systems. |
+| “我随便挑个感兴趣的项目吧” | 必须严格仅通过注册表进行选择 — 否则会出现偏爱项目偏差和盲区。 |
+| “检查完之后我再去读注册表” | 必须在检查前读取。注册表是选择标准，而不只是记录日志。 |
+| “单次运行检查多个目标效率更高” | 单个目标能保持单次运行短小、等幂且可随时中断；覆盖量是通过轮转实现的。 |
+| “空运行白白浪费了” | 有记录的空运行更新了系统记忆 — 这占了整个系统价值的一半。 |
 
-## Verwandte Skills
+## 相关技能
 
-- `workflow-extract` — baut aus Sessions/Fremd-Automationen Automatisierungen; nutzt dieses
-  Gerüst als Standard-Baustein.
-- `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
-  Optimizer renoviert).
+- `workflow-extract` — 从会话/外部自动化中构建自动化；使用本框架作为标准构建块。
+- `pipeline-optimizer` — 用于流水线的结构化改造（Rotation-Check 负责维护，Optimizer 负责改造）。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.1.0 (2026-07-03)
-- Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten
-  Checks über dieselbe Zielmenge; Befund aus der Vollklassifikation des Automations-Bestands).
+- 增加了“兄弟冷静期”作为选择规则（防止同一目标集合上相关检查之间的冲突；该发现源于自动化资产的全量分类）。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus dem Codex-Automations-Bestand (Rotations-Muster in
-  ~40 von 77 Automationen: Research-/Software-/Roblox-Checks mit CHECKED-REGISTRY/CHECKS-LOG).
+- 初始版本。从 Codex 自动化资产中抽象提炼（在 77 个自动化中的约 40 个中使用了轮转模式：包含 CHECKED-REGISTRY/CHECKS-LOG 的研究/软件/Roblox 检查）。

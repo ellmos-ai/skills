@@ -1,47 +1,60 @@
 ---
+name: decision-briefing
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-06-13
+updated: 2026-06-13
+description: トピック、プロジェクト、ドキュメント、またはセッションを通じて複数の決定事項が保留中または蓄積している場合にいつでも使用：インベントリを作成し、A/B/C/Dの選択肢と推奨事項を明示した番号付きブリーフィングを提示し、文字回答（バッチ処理を含む）を受け付け、結果を記録して元のドキュメントに書き戻します。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [entscheidung, briefing, batch, decision-session, priorisierung, workflow]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `decision-briefing`.
+> **日本語** — `decision-briefing` の公式日本語版。
 
 
+# Decision-Briefing — 1つのトピックに関する多数の意思決定の処理 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decision-Briefing — Work Through Many Decisions on One Topic (English)
-
-> A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
-
----
-
-## When to use?
-
-**Always, as soon as several decisions are pending** -- regardless of topic. Typical situations:
-
-- Many open decisions have piled up in one area/topic
-- A document (plan, TODO list, concept) contains several undecided points
-- Several decision questions have accumulated during a conversation
-- The agent itself has several questions for the user -- bundle them as a briefing instead of asking one by one
-- The user wants to clear open items quickly and on a solid basis
-
-**Trigger words:** open decisions, decision session, briefing, work through, go through, let's decide all of this
-
-**Scope:** [decide](../decide/SKILL.en.md) provides frameworks for ONE question. `decision-briefing` coordinates working through MANY decisions on one topic — and applies `decide` to complex individual cases.
+> 蓄積した保留中の意思決定を推奨事項付きの番号付きブリーフィングに変換し、ユーザーが単一文字（個別またはバッチ）で超高速に回答できるようにします。
 
 ---
 
-## Core UX
+## 使用タイミング
 
-The heart of this skill is the briefing format. Each decision is presented so that answering costs only a single letter:
+**トピックに関わらず、複数の決定事項が保留中になり次第いつでも**使用します。典型的な状況：
 
-- **Numbering:** `[E01]`, `[E02]`, … — stable references throughout the session
-- **Short question** + 1–2 sentences of context
-- **Options as letters** A/B/C/D (2–4 options, more only if necessary)
-- **Marked recommendation** with a one-sentence rationale (e.g. `→ Recommendation: A — because …`)
-- Optional: consequence note (what follows from the choice)
+- 1つの領域/トピックに多数の未決定事項が蓄積している
+- ドキュメント（計画、TODOリスト、コンセプト）に複数の未決定項目が含まれている
+- 会話中に複数の決定に関する質問が蓄積した
+- Agent自身がユーザーに対して複数の質問を持っている — 1つずつ聞く代わりにブリーフィングとしてまとめる
+- ユーザーが未決定項目を迅速かつ確固たる根拠に基づいてクリアしたい
 
-**User answer formats:**
+**トリガーワード:** open decisions, decision session, briefing, work through, go through, let's decide all of this
+
+**適用範囲:** [decide](../decide/SKILL.en.md) は1つの質問に対するフレームワークを提供します。`decision-briefing` は1つのトピックに関する多数の意思決定の処理を調整し、複雑な個別ケースに `decide` を適用します。
+
+---
+
+## コアUX (Core UX)
+
+このスキルの核心はブリーフィングフォーマットです。各決定事項は、回答が文字1つで済むように提示されます：
+
+- **ナンバリング:** `[E01]`, `[E02]`, … — セッションを通じて安定した参照
+- **簡潔な質問** + 1〜2文の文脈
+- **文字による選択肢** A/B/C/D（2〜4個の選択肢、必要な場合のみそれ以上）
+- **明示された推奨事項** と1文の理由付け（例：`→ 推奨: A — なぜなら…`）
+- 任意：結果の注意事項（選択から生じること）
+
+**ユーザー回答フォーマット:**
 
 ```
 Single:    "E01: A"  or  "1A"
@@ -52,7 +65,7 @@ Defer:     "E03: later"
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
 ```
 Topic + decisions at hand
@@ -70,19 +83,19 @@ Phase 3: DECISION SESSION
 Phase 4: RECORD & WRITE BACK
 ```
 
-### Phase 1: Capture & Inventory
+### フェーズ 1: 収集とインベントリ作成
 
-Sources: what the user names, a document at hand, or the conversation context. No system-wide scan — only what is already there.
+ソース：ユーザーが指定したもの、手元にあるドキュメント、または会話コンテキスト。システム全体のスキャンは行わず、すでに存在するもののみを対象とします。
 
-1. List all open decisions (one line each: short title)
-2. Detect and merge **duplicates** (same question, phrased multiple times)
-3. Mark **dependencies** ("E04 depends on E01")
-4. Set the **order**: blockers first (decisions that others depend on), then by urgency
-5. Show the list to the user for confirmation ("Did I get them all? Anything missing?")
+1. 保留中のすべての決定事項をリスト化（1行に1つ：短縮タイトル）
+2. **重複**を検出して統合（同じ質問の複数表現）
+3. **依存関係**をマーク（「E04はE01に依存」）
+4. **順序**を設定：ブロッカーを最優先（他が依存する決定）、次に緊急度順
+5. リストをユーザーに示して確認（「すべて拾えていますか？漏れはありませんか？」）
 
-### Phase 2: Prepare the Briefing
+### フェーズ 2: ブリーフィングの準備
 
-Per decision:
+決定事項ごと：
 
 ```
 [E01] <Short question>
@@ -94,24 +107,24 @@ Per decision:
   (optional) Consequence: <what follows from the choice / next action>
 ```
 
-Rules for good options:
+優れた選択肢のルール：
 
-- Options must be mutually exclusive and cover the spectrum
-- If useful, include a "keep status quo" or "defer" option
-- The recommendation is transparently reasoned — never covertly suggestive
-- When facts are unclear: clarify first (or flag as an open question), do not guess
+- 選択肢は相互に排他的であり、全体をカバーしていること
+- 有用であれば「現状維持」または「保留」の選択肢を含める
+- 推奨事項は透明性を持って根拠付けられる — 密かに誘導しない
+- 事実が不明確な場合：まず明確化する（またはオープンクエスチョンとしてフラグを立てる）、推測しない
 
-### Phase 3: Decision Session
+### フェーズ 3: 意思決定セッション
 
-1. Present the briefing — one decision per message or all at once as a batch; with >5 decisions, use blocks of 3–5
-2. Accept letter answers and acknowledge them
-3. On a "more info" answer: deepen the decision (method toolbox below)
-4. For complex individual cases (many criteria, high stakes): escalate to the [decide](../decide/SKILL.en.md) skill (weighted scoring, scenario analysis)
-5. Carry deferred decisions forward explicitly as open — never drop them silently
+1. ブリーフィングを提示 — メッセージごとに1つの決定、またはバッチとして一度にすべて。5つを超える決定がある場合は3〜5個のブロックに分ける
+2. 文字による回答を受け付け、確認を返す
+3. 「詳細情報」の回答に対して：決定を深掘りする（以下のメソッドツールボックスを参照）
+4. 複雑な個別ケース（多数の基準、高い利害）：[decide](../decide/SKILL.en.md) スキルへエスカレーション（加重スコアリング、シナリオ分析）
+5. 保留された決定は明示的にオープンとして繰り越す — 黙ってドロップしない
 
-### Phase 4: Record & Write Back
+### フェーズ 4: 記録と書き戻し
 
-1. Create a **results table**:
+1. **結果テーブル**を作成：
 
 ```
 | No.  | Decision            | Chosen | Status   |
@@ -121,7 +134,7 @@ Rules for good options:
 | E03  | <short title>       | —      | deferred |
 ```
 
-2. Write decided items back into the **source documents/TODO files** — at the location of the open question, e.g.:
+2. 決定された項目を**元のドキュメント/TODOファイル**に書き戻す — オープンクエスチョンの場所、例：
 
 ```
 DECISION: <question>
@@ -129,13 +142,13 @@ DECISION: <question>
   → Next action: <if the decision implies a follow-up action>
 ```
 
-3. Keep **deferred items explicitly open** (in the source document or the TODO list) so they reappear in the next briefing
+3. **保留項目を明示的にオープンとして維持**（元ドキュメントまたはTODOリスト内）し、次のブリーフィングで再提示されるようにする
 
 ---
 
-## 使用例と実行モデル & Usage
+## 例と応用
 
-Topic: relaunch of a club website — 3 open decisions from the project plan.
+トピック：クラブWebサイトのリニューアル — プロジェクト計画からの3つの保留中の決定。
 
 ```
 [E01] Which system for the new website?
@@ -160,52 +173,52 @@ Topic: relaunch of a club website — 3 open decisions from the project plan.
   → Recommendation: A — reversible and yields early feedback; final content follows.
 ```
 
-The user answers as a batch: **"1B 2C 3A"** → results table, then the three decisions are marked DECIDED in the project plan.
+ユーザーがバッチで回答：**"1B 2C 3A"** → 結果テーブル、その後3つの決定事項がプロジェクト計画内で DECIDED とマークされます。
 
 ---
 
-## Method Toolbox (for "more info" and deepening)
+## メソッドツールボックス（「詳細情報」と深掘り用）
 
-| Method | When | Summary |
+| メソッド | タイミング | 概要 |
 |--------|------|---------|
-| **Pro/con matrix** | 2–3 options, quick comparison | Evaluate all options side by side |
-| **Weighted scoring** | Multiple criteria | Weighted criteria, points per option (quantitative where possible) |
-| **Second-order thinking** | Unclear stakes | What are the consequences of the consequences? |
-| **Premortem** | Risky decision | "It failed — why?" Find weak spots in advance |
-| **10/10/10 method** | Emotional/temporal distortion | How does the decision look in 10 minutes / 10 months / 10 years? |
+| **メリット・デメリット行列** | 2〜3個の選択肢、迅速な比較 | すべての選択肢を並べて評価 |
+| **加重スコアリング** | 複数の評価基準 | 基準の重み付け、選択肢ごとの点数（可能な限り定量化） |
+| **二次思考 (Second-order thinking)** | 不明確な利害 | 帰結の帰結は何か？ |
+| **プレモーテム (Premortem)** | リスクのある決定 | 「失敗した — なぜか？」 事前に弱点を特定 |
+| **10/10/10 メソッド** | 感情的/時間的歪み | 10分後 / 10ヶ月後 / 10年後に決定はどう見えるか？ |
 
 ---
 
-## Working Principles
+## 作業原則
 
-- **Never push decisions:** provide information, justify the recommendation transparently — the user decides
-- **Bias detection:** name thinking errors when they become visible (confirmation bias, sunk cost)
-- **Mind reversibility:** decide reversible choices quickly, treat final ones more thoroughly
-- **Respect time pressure:** fast decisions need simpler methods — not every question deserves a weighted scoring analysis
+- **決して決定を押し付けない:** 情報を提示し、推奨の根拠を透明に説明する — 決定するのはユーザー
+- **バイアス検出:** 思考のエラーが見えたら指摘する（確証バイアス、サンクコスト）
+- **可逆性に留意:** 可逆的な決定は迅速に下し、不可逆なものはより慎重に扱う
+- **時間的プレッシャーを尊重:** 迅速な決定にはよりシンプルな手法が必要 — すべての質問が加重スコアリング分析を必要とするわけではない
 
 ---
 
-## Scope and Synergies
+## 適用範囲とシナジー
 
-| Function | `decide` | `decision-briefing` |
+| 機能 | `decide` | `decision-briefing` |
 |---|---|---|
-| Structure a single decision with a framework | ✓ | — |
-| Inventory many decisions on one topic | — | ✓ |
-| Numbered briefing with A/B/C options | — | ✓ |
-| Batch answers ("1A 2C 3B") | — | ✓ |
-| Write back into source documents | — | ✓ |
+| フレームワークによる単一決定の構造化 | ✓ | — |
+| 1つのトピックに関する多数の決定のインベントリ作成 | — | ✓ |
+| A/B/C選択肢付き番号付きブリーフィング | — | ✓ |
+| バッチ回答 ("1A 2C 3B") | — | ✓ |
+| 元のドキュメントへの書き戻し | — | ✓ |
 
-**Synergy:** For complex individual cases within a session, `decision-briefing` applies the frameworks from `decide` (weighted scoring, scenario analysis). For the larger thinking process before that (analyze → ideate → decide), see [structured-thinking](../structured-thinking/SKILL.en.md).
+**シナジー:** セッション内の複雑な個別ケースに対して、`decision-briefing` は `decide` のフレームワーク（加重スコアリング、シナリオ分析）を適用します。その前のより広範な思考プロセス（分析 → アイデア出し → 決定）については、[structured-thinking](../structured-thinking/SKILL.en.md) を参照してください。
 
 ---
 
 ## 変更履歴
 
 ### 1.0.0 (2026-06-13)
-- Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand
+- BACH エキスパート `decision-briefing` v1.0.0 より移植。スキャナーコンポーネント (scanner.py, sources.json, マーカーのสキャン) は意図的に削除 — 収集は軽量で、手元のコンテキストに基づきます
 
 ---
 
-*Ported from BACH | Standalone version without scanner*
+*BACHより移植 | スキャナーなしのスタンドアロン版*
 
-**See also:** [decide](../decide/SKILL.en.md) (frameworks for a single decision) | [structured-thinking](../structured-thinking/SKILL.en.md) (analyze → ideate → decide as a meta workflow)
+**参照:** [decide](../decide/SKILL.en.md) (単一決定用のフレームワーク) | [structured-thinking](../structured-thinking/SKILL.en.md) (メタワークフローとしての 分析 → アイデア出し → 決定)

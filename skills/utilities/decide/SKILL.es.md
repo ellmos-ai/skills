@@ -1,36 +1,49 @@
 ---
+name: decide
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Toma de decisiones estructurada: matriz de pros/contras, puntuación ponderada, árbol de decisión, análisis de escenarios y matriz de Eisenhower.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [decision, evaluation, prioritization, framework]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `decide`.
+> **Español** — Versión oficial en español de `decide`.
 
 
+# Decide — Toma de Decisiones Estructurada (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decide — Structured Decision Making (English)
-
-> Rational decisions through structured frameworks and evaluation methods
-
----
-
-## When to Use?
-
-- Choosing between options
-- Need a pro/con list
-- Multi-criteria decision
-- Uncertain about important decisions
-
-**Trigger words:** decide, choose, compare, evaluate, weigh
+> Decisiones racionales mediante marcos de trabajo estructurados y métodos de evaluación
 
 ---
 
-## Frameworks
+## ¿Cuándo Usar?
 
-### 1. Pro/Con Matrix (Simple)
+- Elegir entre varias opciones
+- Necesidad de una lista de pros y contras
+- Decisión multicriterio
+- Incertidumbre sobre decisiones importantes
 
-Quick decisions between 2 options.
+**Palabras clave (Trigger words):** decide, choose, compare, evaluate, weigh
+
+---
+
+## Marcos de Trabajo (Frameworks)
+
+### 1. Matriz Pros/Contras (Simple)
+
+Decisiones rápidas entre 2 opciones.
 
 ```
 PRO A:                    CON A:
@@ -46,36 +59,36 @@ Recommendation: [A/B] because [reasoning]
 
 ---
 
-### 2. Weighted Scoring (Complex)
+### 2. Puntuación Ponderada (Compleja)
 
-Multi-criteria decisions with weighting.
+Decisiones multicriterio con ponderación.
 
-| Criterion | Weight | Option A | Score A | Option B | Score B |
+| Criterio | Peso | Opción A | Puntuación A | Opción B | Puntuación B |
 |-----------|--------|----------|---------|----------|---------|
-| Criterion 1 | 30% | 8 | 2.4 | 6 | 1.8 |
-| Criterion 2 | 25% | 7 | 1.75 | 9 | 2.25 |
+| Criterio 1 | 30% | 8 | 2.4 | 6 | 1.8 |
+| Criterio 2 | 25% | 7 | 1.75 | 9 | 2.25 |
 | TOTAL | 100% | - | X.XX | - | X.XX |
 
-**Process:**
-1. Collect criteria
-2. Assign weights (sum = 100%)
-3. Rate options (1-10 scale)
-4. Calculate scores (rating x weight)
-5. Compare and recommend
+**Proceso:**
+1. Recopilar criterios
+2. Asignar pesos (suma = 100%)
+3. Calificar opciones (escala 1-10)
+4. Calcular puntuaciones (calificación x peso)
+5. Comparar y recomendar
 
 ---
 
-### 3. Decision Tree (Sequential)
+### 3. Árbol de Decisión (Secuencial)
 
-Decisions with clear if-then paths:
-1. Define starting question
-2. First branch (most important criterion)
-3. Next level (second most important)
-4. Down to final option
+Decisiones con rutas claras si-entonces:
+1. Definir la pregunta inicial
+2. Primera ramificación (criterio más importante)
+3. Siguiente nivel (segundo más importante)
+4. Llegar a la opción final
 
 ---
 
-### 4. Scenario Analysis (Uncertainty)
+### 4. Análisis de Escenarios (Incertidumbre)
 
 ```
 Best Case (X% probability):
@@ -92,7 +105,7 @@ Total expected value: [Sum]
 
 ---
 
-### 5. Eisenhower Matrix (Prioritization)
+### 5. Matriz de Eisenhower (Priorización)
 
 ```
               URGENT          NOT URGENT
@@ -102,39 +115,39 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-## Quality Checklist
+## Lista de Verificación de Calidad
 
-Check before final recommendation:
-- [ ] All relevant criteria identified?
-- [ ] User values considered?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and evaluated?
-- [ ] Bias check performed?
-- [ ] Reversibility assessed?
-
----
-
-## Best Practices
-
-### Defining Criteria
-- Specific and measurable
-- Not too many (3-7 ideal)
-- Independent of each other
-
-### Weighting
-- Sum = 100%
-- Most important criterion >= 25%
-- No weights < 5%
-
-### Recommendation
-- Clear and reasoned
-- Mention alternatives
-- Name risks
-- Consider reversibility
+Verificar antes de la recomendación final:
+- [ ] ¿Se han identificado todos los criterios relevantes?
+- [ ] ¿Se han considerado los valores del usuario?
+- [ ] ¿Se han considerado los efectos a largo plazo?
+- [ ] ¿Se han identificado y evaluado los riesgos?
+- [ ] ¿Se ha realizado la verificación de sesgos?
+- [ ] ¿Se ha evaluado la reversibilidad?
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Mejores Prácticas
+
+### Definición de Criterios
+- Específicos y medibles
+- No demasiados (3-7 es lo ideal)
+- Independientes entre sí
+
+### Ponderación
+- Suma = 100%
+- Criterio más importante >= 25%
+- Ningún peso < 5%
+
+### Recomendación
+- Clara y fundamentada
+- Mencionar alternativas
+- Nombrar riesgos
+- Considerar la reversibilidad
+
+---
+
+## Flujo de Trabajo y Procedimiento
 
 ```
 1. User request
@@ -153,8 +166,8 @@ Check before final recommendation:
 ## Registro de Cambios
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Portado desde BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Portado desde BACH v3.8.0 | Versión independiente*

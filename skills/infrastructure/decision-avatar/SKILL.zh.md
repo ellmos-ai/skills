@@ -2,61 +2,41 @@
 language: zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `decision-avatar`.
+> **中文** — `decision-avatar` 官方中文版本。
 
+# Decision Avatar
 
+## 概述与目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+本技能并非用于模仿某个人。它提供了一种可验证的流程，以便在面对重复出现的决策类型时，根据真实且获得授权的依据推导出一个可能的偏好。
 
+仅当存在本地决策配置文件且当前任务允许使用该配置文件时才使用本技能。若没有配置文件，本技能不会提供任何替代性决策。
 
-> **English Translation** — Official English version of `decision-avatar`.
+只有当任务指令、适用代理规则或配置文件元数据明确允许当前目的时，使用才被视为已授权。仅能访问配置文件并不构成同意授权。
 
+## 核心原则
 
-# Decision Avatar (English)
+1. **依据高于推测。** 直接陈述和已被确认的决策比推断出的模式具有更高的权重。
+2. **预测不代表个人的表态。** 代理的输出不得作为新的原始依据流回配置文件中。
+3. **决策不等于执行。** 一项建议可以是明确的，即使其执行需要额外的授权。
+4. **沉默不代表反馈。** 未提出异议并不意味着对预测的确认。
+5. **配置文件保持本地与私密。** 切勿将个人数据、密钥或敏感内容带入共享的技能文件中。
 
-## 概述与执行目标 & Purpose
+## 便携式配置文件模型
 
-Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
-bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
-aus echten, autorisierten Belegen abzuleiten.
+文件名可自由配置；仅需定义以下角色：
 
-Nutze ihn nur, wenn ein lokales Entscheidungsprofil vorhanden und dessen Nutzung
-für die aktuelle Aufgabe zulässig ist. Ohne Profil liefert der Skill keine
-stellvertretende Entscheidung.
-
-Die Nutzung gilt nur dann als autorisiert, wenn Auftrag, geltende Agentenregel
-oder Profilmetadaten den aktuellen Zweck ausdrücklich erlauben. Bloße
-Erreichbarkeit einer Profildatei ist keine Einwilligung.
-
-## Kernprinzipien
-
-1. **Beleg vor Vermutung.** Direkte Aussagen und bestätigte Entscheidungen wiegen
-   stärker als abgeleitete Muster.
-2. **Vorhersage ist keine Aussage der Person.** Agentenausgaben dürfen nicht als
-   neue Primärbelege in das Profil zurückfließen.
-3. **Entscheiden ist nicht Ausführen.** Eine Empfehlung kann bestimmt sein, obwohl
-   ihre Umsetzung zusätzliche Autorität braucht.
-4. **Stille Zustimmung ist kein Feedback.** Ausbleibender Widerspruch bestätigt
-   keine Vorhersage.
-5. **Profile bleiben lokal und privat.** Keine personenbezogenen Daten, Secrets
-   oder sensiblen Inhalte in geteilte Skill-Dateien übernehmen.
-
-## Portables Profilmodell
-
-Die Dateinamen sind frei konfigurierbar; benötigt werden nur diese Rollen:
-
-| Rolle | Inhalt |
+| 角色 | 内容 |
 |---|---|
-| Methodik | Evidenzstufen, Datenschutz und Kalibrierungsregeln |
-| Belegte Präferenzen | direkte Aussagen und bestätigte Entscheidungen |
-| Hypothesen | abgeleitete Regeln mit Konfidenz und Quellen |
-| Aktionen | aufgrund einer Vorhersage getroffene Handlungen |
-| Feedback | Bestätigung, Korrektur oder Ablehnung durch die Person |
+| 方法论 | 证据等级、数据隐私与校准规则 |
+| 经证实的偏好 | 直接陈述与已确认的决策 |
+| 假设 | 附带置信度与来源的推导规则 |
+| 行动 | 基于预测所采取的行动 |
+| 反馈 | 个人给出的确认、纠正或拒绝 |
 
-Projektbezogene, aktuellere Entscheidungen haben Vorrang vor allgemeinen
-Präferenzen.
+与项目相关且更新的决策优先于通用偏好。
 
-Jeder verwertete Beleg sollte mindestens enthalten:
+每条被采纳的依据至少应包含：
 
 ```text
 Quellen-ID:
@@ -66,59 +46,49 @@ Status: bestätigt/korrigiert/widerrufen
 Gültig bis: <optional>
 ```
 
-Widerrufene, abgelaufene oder außerhalb ihres Gültigkeitsbereichs liegende Belege
-nicht verwenden. Bei widersprüchlichen bestätigten Belegen gewinnt zunächst der
-spezifischere und danach der aktuellere. Bleibt der Konflikt bestehen, Konfidenz
-auf „niedrig“ setzen und eskalieren.
+请勿使用已撤销、已过期或超出其适用范围的依据。当已确认的依据发生冲突时，首先以更具体的为准，其次以更新的为准。若冲突依然存在，请将置信度设置为“低”并升级处理。
 
-## Entscheidungsloop
+## 决策循环
 
-### 0. Lokale Vorrangregel prüfen
+### 0. 检查本地优先规则
 
-Gibt es für das aktuelle Projekt oder den konkreten Entscheidungstyp eine
-bestätigte Regel, nutze diese und dokumentiere ihre Quelle.
+如果针对当前项目或具体决策类型存在已确认的规则，请使用该规则并记录其来源。
 
-### 1. Echte Evidenz suchen
+### 1. 寻找真实证据
 
-Nur Belege verwenden, die nach der lokalen Methodik zulässig sind. Aufgabenlisten,
-Agentenprotokolle, frühere Avatar-Antworten und Argumente der aktuellen Sitzung
-sind keine Aussagen der Person.
+仅使用符合本地方法论许可的依据。任务列表、代理日志、之前的 Avatar 回复以及当前会话的辩论均不属于个人的表态。
 
-### 2. Vorhersage bilden
+### 2. 形成预测
 
-Ergebnis stets mit Begründung und einer von drei Stufen ausgeben:
+输出结果时必须始终包含理由以及以下三个置信度等级之一：
 
-- **hoch:** mehrere direkte, konsistente und einschlägige Belege,
-- **mittel:** plausibles Muster mit begrenzter oder indirekter Evidenz,
-- **niedrig:** neuartige Lage, widersprüchliche Belege oder kein belastbares
-  Muster.
+- **高：** 多条直接、一致且相关的依据，
+- **中：** 具有有限或间接证据的合理模式，
+- **低：** 新颖情况、存在冲突的依据或无可靠模式。
 
-Folgenreiche Entscheidungen sind nicht automatisch „niedrig“. Konfidenz misst
-die Evidenz für die Präferenz, nicht die Reichweite der späteren Ausführung.
+后果重大的决策并不自动属于“低”置信度。置信度度量的是偏好证据的充分性，而非后续执行的影响范围。
 
-### 3. Modus trennen
+### 3. 区分模式
 
-| Modus | Ergebnis | Seiteneffekt |
+| 模式 | 输出结果 | 副作用 |
 |---|---|---|
-| Vorhersagen | wahrscheinliche Position + Belege + Konfidenz | keiner |
-| Entscheiden | konkrete Wahl + Begründung + Konfidenz | keiner |
-| Handeln | autorisierte, sichere Umsetzung + Aktionsprotokoll | möglich |
+| 预测 | 可能的立场 + 依据 + 置信度 | 无 |
+| 决策 | 具体选择 + 理由 + 置信度 | 无 |
+| 执行 | 经授权且安全的实施 + 行动日志 | 可能有 |
 
-Im Handlungsmodus gelten zusätzlich die Autoritäts- und Sicherheitsregeln der
-Runtime. Niedrige Konfidenz oder fehlende Ausführungsbefugnis führt zur
-Eskalation, nicht zur stillen Ausführung.
+在执行模式下，还必须遵守运行时环境的授权与安全规则。置信度低或缺乏执行权限将导致升级处理，而非静默执行。
 
-### 4. Feedback kalibrieren
+### 4. 校准反馈
 
-Nach echtem Feedback:
+获得真实反馈后：
 
-1. Vorhersage als bestätigt, korrigiert oder abgelehnt markieren.
-2. Optional eine Bewertungsskala erfassen.
-3. Unterschied zwischen Richtungsfehler und Zuschnittfehler festhalten.
-4. Hypothese und Konfidenz anpassen.
-5. Nur echte Rückmeldung in die belegten Präferenzen übernehmen.
+1. 将预测标记为已确认、已纠正或已拒绝。
+2. （可选）记录评分量表。
+3. 记录方向性错误与切分错误之间的差异。
+4. 调整假设和置信度。
+5. 仅将真实反馈纳入经证实的偏好中。
 
-## Ausgabeformat
+## 输出格式
 
 ```text
 Entscheidungstyp:
@@ -131,23 +101,17 @@ Ausführung autorisiert: ja/nein
 Nächster Schritt:
 ```
 
-In Ausgaben nur redigierte Quellen-IDs und die für die Entscheidung notwendige
-Belegzusammenfassung nennen. Keine privaten Aussagen, absoluten Profilpfade oder
-sensiblen Rohdaten wiedergeben.
+在输出中，仅包含经脱敏处理的来源 ID 和决策所需的依据摘要。不得展示私密陈述、绝对配置文件路径或敏感的原始数据。
 
-## Grenzen
+## 局限性
 
-- Keine Diagnostik oder Behauptung über innere Zustände einer Person.
-- Keine Nutzung eines Profils außerhalb seines erlaubten Zwecks.
-- Keine automatische Übernahme von Agentenannahmen als Personenwissen.
-- Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
-  erforderlich wäre.
+- 不对个人的内部心理状态进行诊断或断言。
+- 不得在许可目的之外使用配置文件。
+- 不得自动将代理的假设吸收为个人的知识。
+- 在需要新授权的情况下，不得仅凭预测就直接执行。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.0.0 (2026-07-28)
-- Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer
-  persönlichen Avatar-Konfiguration als eigenständiges, portables Protokoll
-  extrahiert.
-- Autorisierung, Beleglebenszyklus, Konfliktauflösung und redigierte Ausgabe
-  operationalisiert.
+- 将反馈预知、置信度校准和来源分离从个人 Avatar 配置中提取为独立的便携式协议。
+- 实现授权、依据生命周期、冲突解决和脱敏输出的操作化。

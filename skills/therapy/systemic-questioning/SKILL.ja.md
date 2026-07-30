@@ -1,238 +1,250 @@
 ---
+name: systemic-questioning
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: システム論的質問法：循環質問、スケーリング質問、ミラクル・クエスチョン、例外質問による自己省察と視点拡大。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [systemic, questioning-techniques, circular, miracle-question, scaling, de-shazer]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `systemic-questioning`.
+> **日本語** — `systemic-questioning` の公式日本語版。
 
 
+# システム論的質問法（Systemic Questioning Techniques）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基礎概念
 
+システム論的質問法は、システム療法および家族療法・カウンセリングに由来する技法群です。**視点を拡大すること**、**関係性のパターンを可視化すること**、そして**新しい可能性を開くこと**を目的としています。問題そのものにとらわれず、解決およびリソース（強み・資源）に焦点を当てます。
 
-# Systemic Questioning Techniques (English)
-
-## Foundation
-
-Systemic questioning techniques originate from systemic therapy and counseling. They aim to **expand perspectives**, **make patterns visible**, and **open new possibilities**. They are solution- and resource-oriented — not problem-fixated.
-
-Central assumption: **Problems do not arise within individuals, but in relationships and patterns between individuals.**
-
----
-
-## Question Types
-
-### 1. Circular Questions
-
-**Purpose:** Encourage perspective shifts. The person is invited to take the position of others and recognize relationship patterns.
-
-#### Basic Structure
-"What do you think [Person X] sees/feels/thinks about this?"
-
-#### Variations
-
-**Relationship questions:**
-- "What do you think your partner thinks when you withdraw?"
-- "How would your best friend describe your relationship?"
-- "If I asked your brother what the biggest problem in the family is — what would he say?"
-
-**Difference questions:**
-- "Who in the family suffers most from the situation?"
-- "Who would notice the change first?"
-- "Who are you closer to — your mother or your father?"
-
-**Agreement questions:**
-- "Would your partner agree with that?"
-- "Who in your circle sees it similarly to you?"
-
-**Classification questions:**
-- "If you ranked your family members by who handles conflicts best — what would the order be?"
+中心的な前提：**問題は個人の中で生じるのではなく、人と人との関係性やパターンの間に生じる。**
 
 ---
 
-### 2. Scaling Questions
+## 質問のタイプ
 
-**Purpose:** Make abstract states measurable, make progress visible, concretize goals. Developed by **Steve de Shazer** and **Insoo Kim Berg**.
+### 1. 循環質問（Circular Questions）
 
-#### Basic Structure
-"On a scale of 0 to 10, where 0 is [Pole A] and 10 is [Pole B] — where are you right now?"
+**目的：** 視点の転換を促す。対象者に他者の立場に立ってもらい、関係性のパターンを認識させます。
 
-#### Variations
+#### 基本構造
+「[人物X] はこれについてどう見ている／感じている／考えていると思いますか？」
 
-**State scaling:**
-- "On a scale of 0 to 10 — how burdened do you feel right now?"
-- "Where on the scale were you last week?"
+#### バリエーション
 
-**Progress scaling:**
-- "Where were you on this scale a month ago?"
-- "What contributed to you moving from a 3 to a 5?"
+**関係性に関する質問：**
+- 「あなたが引きこもった時、パートナーはどう考えていると思いますか？」
+- 「あなたの親友なら、お二人の関係をどのように表現するでしょうか？」
+- 「もしあなたのお兄さんに『家族の一番の問題は何か』と尋ねたら、何と答えるでしょうか？」
 
-**Goal scaling:**
-- "Where on the scale would you need to be for it to be 'good enough'?"
-- "What would be different if you were one point higher?"
+**違いに関する質問：**
+- 「家族の中で、この状況で一番苦しんでいるのは誰ですか？」
+- 「変化に最初に気づくのは誰でしょうか？」
+- 「お父さんとお母さん、どちらにより親しみを感じていますか？」
 
-**Confidence scaling:**
-- "How confident are you on a scale of 0 to 10 that you can do this?"
-- "What would you need to be one point more confident?"
+**同意に関する質問：**
+- 「パートナーもそれに同意するでしょうか？」
+- 「あなたの周りで、あなたと同じように見ている人は誰ですか？」
 
-**Relationship scaling:**
-- "Where on the scale would your partner rate your relationship?"
-
-#### Follow-up Questions (essential!)
-
-- "What has kept you from being at 0?" (Resource activation)
-- "What would need to happen for you to be one point higher?" (Small-step solution orientation)
-- "How would you know you're at [target value]?" (Concretization)
+**順位付け・分類に関する質問：**
+- 「葛藤の解決が得意な順に家族を並べるとしたら、どのような順番になりますか？」
 
 ---
 
-### 3. The Miracle Question
+### 2. スケーリング質問（Scaling Questions）
 
-**Purpose:** Goal clarification and solution vision. Bypasses problem-thinking and activates solution imagination. Developed by **Steve de Shazer**.
+**目的：** 抽象的な状態を数値化して可視化し、進展を把握し、目標を具体化する。**Steve de Shazer** と **Insoo Kim Berg** によって開発されました。
 
-#### Original Formulation
+#### 基本構造
+「0から10のスケールで、0が [極A]、10が [極B] だとすると、今はどのあたりにいますか？」
 
-> "Imagine you go to bed tonight and fall asleep. And while you are sleeping, a miracle happens. The problem that brought you here is solved. But you don't know it, because you were asleep. What would you notice first thing tomorrow morning that tells you the miracle has happened?"
+#### バリエーション
 
-#### Deepening Questions
+**状態のスケーリング：**
+- 「0から10のスケールで、今どの程度負担を感じていますか？」
+- 「先週はスケールのどのあたりにいましたか？」
 
-- "What else would be different?"
-- "Who would notice it first?"
-- "What would [partner/colleague/friend] notice about you that's new?"
-- "What would you do differently?"
-- "Are there moments when the miracle is already happening a little bit?"
+**進展のスケーリング：**
+- 「1ヶ月前の時点ではどのあたりにいましたか？」
+- 「3から5へ上がった要因は何だったのでしょうか？」
 
-#### Shortened Variations
+**目標のスケーリング：**
+- 「『十分良い』と思えるためには、スケールのどこに達していればよいですか？」
+- 「今より1ポイント上がったら、何が変わりますか？」
 
-- "If the problem were gone tomorrow — what would be different?"
-- "What would your ideal daily routine look like?"
-- "If everything were the way you wish — what would you do?"
+**確信度のスケーリング：**
+- 「これが実行できるという確信は、0から10でどのくらいありますか？」
+- 「1ポイント確信を高めるためには、何が必要ですか？」
 
----
+**関係性のスケーリング：**
+- 「パートナーなら、お二人の関係をスケールのどこだと評価するでしょうか？」
 
-### 4. Exception Questions
+#### 追質問（必須！）
 
-**Purpose:** Identify times when the problem does NOT occur or occurs less. Shows that the person already has solution resources.
-
-#### Basic Structure
-"When is it different? When does the problem not occur?"
-
-#### Variations
-
-- "Have there been moments recently when it was better?"
-- "What was different about those moments?"
-- "What did YOU do differently in those moments?"
-- "Who was there? What was the environment like?"
-- "How did you manage to make it better in that moment?"
-- "What would need to happen for those exceptions to become more frequent?"
+- 「0にならずに済んでいる理由（引き止めている要因）は何ですか？」（リソースの活性化）
+- 「1ポイント上に進むためには、何が起きる必要がありますか？」（スモールステップによる解決志向）
+- 「[目標値] に達したことは、どうやってわかりますか？」（具体化）
 
 ---
 
-### 5. Hypothetical Questions
+### 3. ミラクル・クエスチョン（奇跡の質問 / The Miracle Question）
 
-**Purpose:** Open new thinking spaces, loosen rigid beliefs, mentally rehearse options.
+**目的：** 目標の明確化と解決ビジョンの構築。問題思考をバイパスし、解決された状態のイメージを活性化します。**Steve de Shazer** によって開発されました。
 
-#### Variations
+#### 原典通りの質問形式
 
-- "Suppose you just tried it — what could happen in the best case?"
-- "What would happen if you did the opposite of what you normally do?"
-- "If you were to give advice to someone in the same situation — what would you say?"
-- "If fear played no role — what would you do?"
-- "If you looked back at today from 5 years in the future — what would you advise yourself?"
+> 「今夜、あなたがベッドに入って眠りについたと想像してみてください。そして、あなたが眠っている間に奇跡が起こります。あなたを悩ませていた問題が解決してしまいました。しかし、あなたは眠っていたので奇跡が起きたことを知りません。明日朝起きた時、奇跡が起きたことを示す最初のサインとして、何に気づくでしょうか？」
 
----
+#### 深掘りの質問
 
-### 6. Deterioration Questions (Paradoxical Intervention)
+- 「他には何が変わっているでしょうか？」
+- 「それに最初に気づくのは誰ですか？」
+- 「[パートナー／同僚／友人] は、あなたの何が変わったことに気づくでしょうか？」
+- 「あなたはどんな違う行動をとっているでしょうか？」
+- 「現実の中で、その奇跡がすでに少しだけ起きている瞬間はありますか？」
 
-**Purpose:** Strengthen sense of control. If someone can describe how to make the problem worse, they clearly have influence over it — and can also improve it.
+#### 短縮バリエーション
 
-#### Variations
-
-- "What could you do to guarantee it gets worse?"
-- "How could you make sure the argument escalates?"
-- "What would need to happen for everything to go completely wrong?"
-
-**Important:** This technique is NOT suitable for acute crisis, suicidality, or severe depression.
+- 「もし明日問題が消えていたら、何が変わっているでしょうか？」
+- 「あなたの理想的な一日とはどのようなものでしょうか？」
+- 「すべてが望み通りになるとしたら、何をしていますか？」
 
 ---
 
-## Context-Sensitive Selection
+### 4. 例外の質問（Exception Questions）
 
-| Situation | Recommended Technique | Rationale |
+**目的：** 問題が「起きていない」または「軽減している」瞬間を特定する。対象者がすでに解決のリソースを持っていることを示します。
+
+#### 基本構造
+「どんな時に状況が違いますか？ 問題が起きないのはいつですか？」
+
+#### バリエーション
+
+- 「最近、少し状況が良かった瞬間はありましたか？」
+- 「その瞬間は何が違っていたのでしょうか？」
+- 「その時、あなた自身はどんな違う行動をしていましたか？」
+- 「誰がそこにいましたか？ 周りの環境はどうでしたか？」
+- 「その時、どうやって状況を良くすることができたのでしょうか？」
+- 「そうした例外的な瞬間を増やすためには、何が必要でしょうか？」
+
+---
+
+### 5. 仮定質問（Hypothetical Questions）
+
+**目的：** 新しい思考のスペースを開き、固執した信念を緩め、頭の中で行動の選択肢をリハーサルする。
+
+#### バリエーション
+
+- 「もし試しにやってみたとしたら、最高のケースで何が起きるでしょうか？」
+- 「いつもやっていることと正反対のことをしたら、どうなるでしょうか？」
+- 「同じ状況にいる誰かにアドバイスするとしたら、何と言いますか？」
+- 「もし不安が一切関係ないとしたら、何をしますか？」
+- 「5年後の未来から今日を振り返ったとしたら、自分にどんなアドバイスをしますか？」
+
+---
+
+### 6. 悪化質問 / 逆説的質問（Deterioration Questions / Paradoxical Intervention）
+
+**目的：** コントロール感を強める。問題をどのように悪化させられるかを説明できるなら、その人は問題に対して影響力を持っている（＝改善することもできる）ことを示します。
+
+#### バリエーション
+
+- 「状況を確実に悪化させるためには、何ができますか？」
+- 「口論を確実にエスカレートさせるには、どうすればいいでしょうか？」
+- 「すべてを完全に台無しにするには、何が起きればいいですか？」
+
+**重要：** この技法は、急性危機、自殺念慮、または重度の抑うつ状態にある場合には**絶対に使用してはなりません**。
+
+---
+
+## 状況に応じた選択
+
+| 状況 | 推奨される技法 | 根拠・理由 |
 |-----------|----------------------|-----------|
-| Person is stuck in the problem | Miracle question | Breaks out of the problem trance |
-| Progress not visible | Scaling questions | Makes small steps measurable |
-| Relationship conflicts | Circular questions | Enables perspective shift |
-| "It's ALWAYS like this" | Exception questions | Breaks through generalization |
-| Fear of change | Hypothetical questions | Enables risk-free trial thinking |
-| Helplessness / loss of control | Deterioration questions | Shows own influence |
-| Unclear goals | Miracle question + scaling | Clarifies direction and starting point |
+| 問題にとらわれている | ミラクル・クエスチョン | 問題トランス（固執）からの脱却 |
+| 進展が見えない | スケーリング質問 | 小さなステップを可視化・数値化 |
+| 関係性の葛藤 | 循環質問 | 視点の転換を可能にする |
+| 「いつもこうだ」という全般化 | 例外の質問 | 全般化を打破する |
+| 変化への恐れ | 仮定質問 | リスクのない思考リハーサル |
+| 無力感／コントロール喪失 | 悪化質問 | 自身の影響力を示す |
+| 目標が曖昧 | ミラクル質問 ＋ スケーリング | 方向性と出発点を明確化する |
 
 ---
 
-## Combinations
+## 質問の組み合わせパターン
 
-Systemic questions unfold their full effect in combination:
+システム論的質問法は、組み合わせて使用することで最大の効果を発揮します：
 
-### Pattern: Scaling + Exception + Small Step
+### パターン：スケーリング ＋ 例外 ＋ スモールステップ
 
-1. "On a scale of 0-10, where are you right now?" -> e.g., "4"
-2. "What has kept you from being at 0?" (Resources!)
-3. "Were there moments when you were at 5 or higher?" (Exceptions!)
-4. "What was different then?" (Recognize patterns!)
-5. "What would be the smallest step to go from 4 to 5?" (Action!)
+1. 「0〜10のスケールで、今はどこにいますか？」 → 例：「4」
+2. 「0にならずに済んでいる理由は何ですか？」（リソース活性化！）
+3. 「5やそれ以上だった瞬間はありましたか？」（例外の発見！）
+4. 「その時は何が違っていましたか？」（パターンの認識！）
+5. 「4から5へ上がるための最も小さな一歩は何ですか？」（行動！）
 
-### Pattern: Miracle Question + Circular + Scaling
+### パターン：ミラクル質問 ＋ 循環質問 ＋ スケーリング
 
-1. Ask the miracle question (generate target image)
-2. "Who would notice it first?" (Circular — relationship context)
-3. "How far along are you already on the way to the miracle?" (Scaling — progress)
+1. ミラクル・クエスチョンを行う（目標イメージの生成）
+2. 「それに最初に気づくのは誰ですか？」（循環質問 — 関係性文脈）
+3. 「奇跡に向かう道のりのうち、今はどこまで来ていますか？」（スケーリング — 進展）
 
-### Pattern: Circular + Hypothetical
+### パターン：循環質問 ＋ 仮定質問
 
-1. "What do you think your boss sees in this situation?"
-2. "Suppose they said exactly what you suspect — what could you do then?"
-
----
-
-## Dos and Don'ts
-
-### Dos
-- **Ask openly** — no leading questions
-- **Stay curious** — the answer is more valuable than the question
-- **Allow pauses** — good questions need time
-- **Build on answers** — follow-up is more important than the next technique
-- **Frame appreciatively** — "What did you accomplish?" rather than "What did you do wrong?"
-
-### Don'ts
-- **Don't interrogate** — max 2-3 questions in a row, then reflect
-- **Not during acute crisis** — first stabilize, then explore
-- **Not as manipulation** — questions must be authentically curious
-- **Deterioration questions never with suicidality** — never
+1. 「上司はこの状況をどう見ていると思いますか？」
+2. 「もし上司があなたの予想通りのことを言ったとしたら、あなたはどうできますか？」
 
 ---
 
-## Ethical Guidelines
+## Dos and Don'ts（推奨事項と禁止事項）
 
-An AI assistant may ask systemic questions to foster reflection and perspective expansion.
+### Dos（推奨事項）
+- **オープンに質問する** — 誘導尋問にしない
+- **好奇心を持ち続ける** — 質問そのものより回答に価値がある
+- **沈黙や間を許容する** — 良い質問には考える時間が必要
+- **回答をベースに深掘りする** — 次の技法に移るより追質問が重要
+- **承認・肯定的フレームを用いる** — 「何がうまくいきましたか？」と尋ねる
 
-An AI assistant must NOT:
-- Use systemic questions as a diagnostic instrument
-- Conduct relationship counseling that replaces professional therapy
-- Work exclusively with questions during acute crisis — stabilization first
-- Use deterioration questions with fragile states
-
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Don'ts（禁止事項）
+- **尋問のように矢継ぎ早に聞かない** — 連続での質問は最大2〜3個にとどめ、応答・反映を挟む
+- **急性危機時には使用しない** — まず安定化、探求はその後
+- **操作手段として使わない** — 質問は真摯な好奇心に基づく必要がある
+- **自殺念慮がある場合に悪化質問を使わない** — 絶対に不可
 
 ---
 
-## References
+## 倫理ガイドライン
+
+AIアシスタントは、自己省察と視点拡大を促すためにシステム論的質問を行うことができます。
+
+AIアシスタントが行ってはならないこと：
+- システム論的質問を診断ツールとして使用すること
+- 専門的な療法に代わる夫婦・家族カウンセリングを行うこと
+- 急性危機時に質問のみで対応すること（安定化が優先）
+- 精神的に脆弱な状態にある対象に悪化質問を使用すること
+
+参照：[ETHICS.md](../ETHICS.md)
+
+**切迫した危機の場合は、必ず以下の窓口をご案内ください：**
+- こころの健康相談統一ダイヤル（日本）：0570-064-556
+- よりそいホットライン（日本）：0120-279-338
+- いのちの電話（日本）：0570-783-556（ナビダイヤル）
+- 988 Suicide & Crisis Lifeline（米国）：988
+- 警察・救急：110 / 119（日本） / 911（米国） / 112（欧州）
+
+---
+
+## 参考文献
 
 - de Shazer, S. (1985). *Keys to Solution in Brief Therapy.*
 - Selvini Palazzoli, M. et al. (1981). *Hypothesizing — Circularity — Neutrality.*
@@ -241,4 +253,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 より移植 | スタンドアロン版*

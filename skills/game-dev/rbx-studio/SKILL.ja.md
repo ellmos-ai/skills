@@ -1,98 +1,107 @@
 ---
+name: rbx-studio
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-06-17
+description: ゲーム開発のための Roblox Studio 操作ガイド —— 3D シーンの構築、テスト、パブリッシュを行うビジュアルエディタ。このスキルは以下をカバーします：Studio の基本（Explorer、Workspace、プレイテスト、Place の .rbxl 保存）、Rojo との連携（Connect、シーンモード vs. コードモード）、Roblox-Studio-MCP による AI 制御（execute_luau、insert_from_creator_store、generate_material、screen_capture、Play/Stop、Console 読み取り）、完全なアセットパイプライン（Creator Store → クリーニング → キット化 → シーン構築 → .rbxl → Rojo による動力化）、そして何よりもマーケットプレイスアセットに対する必須のマルウェアスキャン。「Store からアセットを挿入」、「Studio MCP が動作しない」、「studios: []」、「マテリアル生成」、「シーン保存」、「この Roblox アセットは安全か」、「Play 後にスクリプトが消える」などのトリガーにも対応。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: game-dev
+tags: [roblox, studio, mcp, assets, creator-store, malware, luau, gamedev]
 language: ja
+status: active
+dependencies: {'tools': ['rojo'], 'services': ['roblox-studio-mcp'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `rbx-studio`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **日本語** — `rbx-studio` の公式日本語版。
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
+# Roblox Studio — エディタ、テスト、アセット、MCP
 
+## 概要と目的
 
-# Roblox Studio — Editor, Test, Assets, MCP (English)
+Roblox Studio は公式エディタです。3D シーンの構築、Play モードでのゲームのテスト、
+Creator Store からのアセット挿入、および Place のパブリッシュを行います。Rojo ワークフローにおいて、
+Studio は **シーン**（Workspace、Terrain、配置されたモデル）と **テスト** を担当し、
+**コード** はファイルシステムから Rojo を介して提供されます（スキル `/rojo` を参照）。
 
-## 概要と目的 & Purpose
+本スキルでは、Studio の基本、シーン作業とコード作業の明確な分離、
+Roblox-Studio-MCP による AI 制御、およびすべてのマーケットプレイスアセットに対する
+**必須のマルウェアスキャン**を含むアセットワークフローについて説明します。
 
-Roblox Studio is the official editor: build the 3D scene, test the game in play mode,
-insert assets from the Creator Store, and publish the place. In a Rojo workflow,
-Studio owns the **scene** (Workspace, Terrain, placed models) and the **testing** —
-the **code** comes via Rojo from the filesystem (see skill `/rojo`).
+## 基本操作
 
-This skill covers: Studio basics, the clean separation of scene and code work,
-AI control via the Roblox-Studio-MCP, and the asset workflow including the
-**mandatory malware scan** for every marketplace asset.
+- **Explorer** — すべてのインスタンスのツリー構造（Workspace、ServerScriptService、ReplicatedStorage など）。
+  Rojo がアクティブな場合、マッピングされた領域はファイルシステムからリアルタイムで反映されます。
+- **Play-Test（プレイテスト）** — 緑色の Play ボタン（または F5）でローカルサーバー+クライアントセッションを開始します。
+  開始するたびに、**Output コンソールでエラーを確認する** ことが最も重要なデバッグ習慣です。
+- **Place の保存** — File → Save As → `.rbxl`（バイナリ）または `.rbxlx`（XML、diff 可能）。
+  保存された Place には **シーン** が含まれます。コードは Place 内ではなくファイルシステムに存在します。
 
-## Basics
+## 重要なワークフロー：シーンモード vs コードモード
 
-- **Explorer** — tree of all instances (Workspace, ServerScriptService, ReplicatedStorage, …).
-  With Rojo active, the mapped areas are populated live from the filesystem.
-- **Play-Test** — the green Play button (or F5) starts a local server+client session.
-  After every start, **check the Output console for errors** — the most important debug reflex.
-- **Save place** — File → Save As → `.rbxl` (binary) or `.rbxlx` (XML, diffable).
-  The saved place contains the **scene**. Code lives in the filesystem, not in the place.
+Connect 実行時、Rojo はマッピングされたすべてのスクリプト領域をファイルシステムの内容で上書きします。
+`Workspace`（3D シーン）はマッピングされて**おらず**、そのまま維持されます。ここから日常の作業における
+最も重要なルールが導き出されます —— 2つのモードを絶対に混同しないでください。
 
-## The critical workflow: scene mode vs. code mode
+**モード A — シーンの編集（Rojo OFF）：**
+1. Rojo サーバーを停止します（`taskkill //F //IM rojo.exe` または Ctrl+C）。
+2. Studio で Place を開き、アセットを配置し、ワールドを構築・配置します。
+3. File → Save → `.rbxl` に新しいシーンが保存されます。
 
-On Connect, Rojo overwrites all mapped script areas with the filesystem content.
-The `Workspace` (3D scene) is **not** mapped and stays intact. From this follows the
-most important rule of daily work — never mix the two modes:
+**モード B — コードのテスト（Rojo ON）：**
+1. Studio で同じ Place を開きます。
+2. `rojo serve` を起動 → Studio の Rojo プラグインで Connect をクリック。
+3. Play を押してテストします。Rojo がスクリプトを同期し、Workspace は `.rbxl` から読み込まれます。
+4. Rojo の実行中は **保存しないでください**（Rojo の状態が `.rbxl` 内に固定化されてしまうため）。
 
-**Mode A — edit the scene (Rojo OFF):**
-1. Stop the Rojo server (`taskkill //F //IM rojo.exe` or Ctrl+C).
-2. Open the place in Studio, place assets, build the world, arrange.
-3. File → Save → the `.rbxl` now holds the new scene.
+これにより、シーン作業（Studio）とコード作業（エディタ + Rojo）を並行して衝突なく
+実行できます —— アーティストはシーンを構築し、デベロッパーはコードを書きます。
 
-**Mode B — test the code (Rojo ON):**
-1. Open the same place in Studio.
-2. Start `rojo serve` → in Studio's Rojo plugin → Connect.
-3. Press Play and test. Rojo syncs the scripts; the Workspace comes from the `.rbxl`.
-4. While Rojo is running, **do not** save (otherwise the Rojo state freezes into the `.rbxl`).
+## Roblox-Studio-MCP — AI による Studio 制御
 
-This way, scene work (Studio) and code work (editor + Rojo) can run in parallel and
-conflict-free — artists build scenes, developers write code.
-
-## Roblox-Studio-MCP — AI controls Studio
-
-The Roblox-Studio-MCP lets Claude/Gemini/Codex directly control a **running** Studio
-instance: execute code, inspect, Play/Stop, read the Console, insert assets. It does **not**
-replace Rojo — it complements it: Rojo for persistent code changes, MCP for inspection,
-tests, asset insertion, and material generation.
+Roblox-Studio-MCP を使用すると、Claude/Gemini/Codex が **実行中** の Studio インスタンスを
+直接制御できます（コード実行、プロパティ検査、Play/Stop、コンソール読み取り、アセット挿入）。
+Rojo を置き換えるものでは**なく**、補完するものです：永続的なコード変更には Rojo、
+検査、テスト、アセット挿入、マテリアル生成には MCP を使用します。
 
 ```
-Editor + Rojo  ──(persistenter Code-Sync)──►  Studio (laufend)  ◄──(Inspektion/Test/Insert)──  MCP ◄── KI
+エディタ + Rojo  ──(永続的なコード同期)──►  Studio (実行中)  ◄──(検査/テスト/挿入)──  MCP ◄── AI
 ```
 
-### Available MCP tools (typical)
+### 利用可能な MCP ツール（代表例）
 
-| Tool | Purpose |
+| ツール | 用途 |
 | --- | --- |
-| `list_roblox_studios` / `set_active_studio` | list open instances / select the active one |
-| `search_game_tree` / `inspect_instance` | search the hierarchy / read properties |
-| `execute_luau` | execute Luau code directly in Studio |
-| `script_read` / `script_grep` / `script_search` | analyze scripts |
-| `multi_edit` | change multiple instances/scripts in a batch |
-| `start_stop_play` | control Play/Stop |
-| `get_console_output` | read the Output log |
-| `screen_capture` | screenshot of the scene |
-| `insert_from_creator_store` | insert an asset from the Creator Store |
-| `generate_material` | generate an AI material/texture (MaterialVariant) |
-| `character_navigation` / `user_keyboard_input` / `user_mouse_input` | simulate input |
+| `list_roblox_studios` / `set_active_studio` | 開いているインスタンスのリスト表示 / アクティブなインスタンスを選択 |
+| `search_game_tree` / `inspect_instance` | 階層の検索 / プロパティの読み取り |
+| `execute_luau` | Studio 内で直接 Luau コードを実行 |
+| `script_read` / `script_grep` / `script_search` | スクリプトの解析 |
+| `multi_edit` | 複数のインスタンス/スクリプトをバッチ変更 |
+| `start_stop_play` | Play/Stop の制御 |
+| `get_console_output` | Output ログの読み取り |
+| `screen_capture` | シーンのスクリーンショット撮影 |
+| `insert_from_creator_store` | Creator Store からアセットを挿入 |
+| `generate_material` | AI マテリアル/テクスチャ (MaterialVariant) を生成 |
+| `character_navigation` / `user_keyboard_input` / `user_mouse_input` | 入力をシミュレート |
 
-### Setup (user-neutral)
+### セットアップ（ユーザー非依存）
 
-The MCP runs as a server shipped with Studio, often connected via a thin JSON-filter wrapper
-(it filters out non-JSON banners that some clients otherwise cannot parse):
+MCP は Studio に同梱されているサーバーとして動作し、多くの場合、軽量な JSON フィルタリングラッパーを介して接続されます
+（一部のクライアントが解析できない非 JSON バナーをフィルタリングします）。
 
-- MCP batch (Windows): `%LOCALAPPDATA%\Roblox\mcp.bat`
-- optional wrapper: `<your roblox-mcp wrapper>`
-  (if present on this system; shared by Claude/Codex/Gemini)
-- Client configs: `~/.claude/mcp.json` · `~/.codex/config.toml` · `~/.gemini/antigravity/mcp_config.json`
+- MCP バッチ (Windows): `%LOCALAPPDATA%\Roblox\mcp.bat`
+- オプションのラッパー: `<your roblox-mcp wrapper>`
+  （このシステムに存在する場合。Claude/Codex/Gemini で共有）
+- クライアント設定: `~/.claude/mcp.json` · `~/.codex/config.toml` · `~/.gemini/antigravity/mcp_config.json`
 
-Example entry (`~/.claude/mcp.json`):
+設定例 (`~/.claude/mcp.json`):
 ```json
 {
   "mcpServers": {
@@ -105,76 +114,75 @@ Example entry (`~/.claude/mcp.json`):
 }
 ```
 
-### Common MCP problems
+### よくある MCP の問題
 
-| Symptom | Meaning / fix |
+| 症状 | 意味 / 対策 |
 | --- | --- |
-| `studios: []` or `Not connected to WS host` | not immediately "broken": send `initialize` → wait 2–3 s → `list_roblox_studios`; otherwise restart Studio |
-| `Error: connection closed: initialized request` | Studio is not open at all — start Studio, load the place, try again |
-| scripts written via MCP gone after Play/Stop | MCP edits to code are not persistent — for lasting code changes use **Rojo** |
-| value via `require()` in the plugin VM is wrong | the plugin VM has its own require cache — to verify, read `.Source` directly or check the server log after Play |
+| `studios: []` または `Not connected to WS host` | すぐに「故障」したわけではありません：`initialize` を送信 → 2〜3 秒待機 → `list_roblox_studios`。解決しない場合は Studio を再起動 |
+| `Error: connection closed: initialized request` | Studio が開いていません — Studio を起動し、Place をロードして再試行してください |
+| MCP 経由で作成したスクリプトが Play/Stop 後に消える | MCP によるコード編集は永続的ではありません — 永続的なコード変更には **Rojo** を使用してください |
+| プラグイン VM 内で `require()` 経由の値が不正 | プラグイン VM は独自の require キャッシュを持っています — 確認するには `.Source` を直接読み取るか、Play 後のサーバーログを確認してください |
 
-## Asset pipeline (Creator Store → game)
+## アセットパイプライン（Creator Store → ゲーム）
 
-Greybox first (gameplay), assets later (before release). The proven sequence:
+まずグレイボックス（ゲームプレイ検証）、後からアセット（リリース前）。実績のある手順：
 
 ```
-STORE DURCHSUCHEN   → z. B. "medieval" → mehrere Kandidaten laden
-AUSSORTIEREN        → stilfremde/hässliche raus, 5–8 passende behalten
-BEREINIGEN          → ALLE Scripts entfernen (Malware!), nur Geometrie/Meshes behalten
-KIT / SET BAUEN     → aus Basis-Assets Varianten ableiten (gleiche Materials/Proportionen)
-SZENE BAUEN (Studio)→ Assets zur Kulisse zusammensetzen (Dorf, Arena, Park)
-ALS .RBXL SPEICHERN → die Kulisse ist die "Bühne"
-ROJO BELEBT ES      → Scripts/Gameplay/HUD kommen per Rojo dazu; Workspace bleibt unangetastet
+ストア検索       → 例: "medieval" → 複数の候補を読み込む
+選別             → スタイルが合わないものや粗悪なものを除外し、適した 5〜8 個を保持
+クリーンアップ   → すべてのスクリプトを削除（マルウェア対策！）、形状/メッシュのみ保持
+キット / セット作成 → ベースアセットからバリエーションを作成（同じマテリアル/比率を維持）
+シーン構築 (Studio) → アセットを組み合わせて背景・世界を作成（村、アリーナ、公園など）
+.RBXL として保存 → 作成した背景が「舞台」となる
+ROJO で動的化    → スクリプト / ゲームプレイ / HUD は Rojo 経由で追加。Workspace は変更しない
 ```
 
-**Variant technique ("modular kit"):** Take a good base asset and derive a whole
-set from it (house → tower, barn, smithy, ruin). They all share materials, colors, and
-proportions → a consistent look with minimal effort, the way pro studios do it.
+**バリエーション手法（「モジュール式キット」）：** 優れたベースアセットを1つ選び、
+そこからセット全体を作成します（家 → 塔、納屋、鍛冶屋、廃墟）。これらはすべてマテリアル、色、
+比率を共有しているため、プロの開発スタジオと同様に、最小限の労力で統一感のある外観を実現できます。
 
-**Asset sources (priority):** Creator Store (free, huge, **malware check mandatory**) →
-AI materials (`generate_material`) → your own meshes (Blender → .fbx) → purchased asset packs.
+**アセットの取得元（優先順位）：** Creator Store（無料、膨大、**マルウェアチェック必須**） →
+AI マテリアル（`generate_material`） → 自作メッシュ（Blender → .fbx） → 購入したアセットパック。
 
-## MANDATORY: malware scan for marketplace assets
+## 必須：マーケットプレイスアセットのマルウェアスキャン
 
-Creator Store assets can contain obfuscated malicious scripts (backdoors, remote code,
-bot-network hooks). Scan **every** imported asset before use and remove all scripts —
-keep only geometry/meshes.
+Creator Store のアセットには、難読化された悪意のあるスクリプト（バックドア、リモートコード、
+ボットネットワークのフック）が含まれている可能性があります。使用前にインポートした**すべて**のアセットを
+スキャンし、すべてのスクリプトを削除して、形状/メッシュのみを保持してください。
 
-- Pattern reference: [`references/malware-patterns.md`](references/malware-patterns.md) — the 8
-  known obfuscation patterns (reversed attribute payload, fake system script, remote
-  `require()`, `loadstring`, `string.char`, `getfenv/setfenv`, hidden Values, delayed execution).
-- Scanner: [`scripts/scan_asset_malware.luau`](scripts/scan_asset_malware.luau) — run it in Studio via
-  `execute_luau` (or the Command Bar); it checks an instance against all patterns and reports finds.
+- パターン参照：[`references/malware-patterns.md`](references/malware-patterns.md) — 既知の8つの
+  難読化パターン（反転属性ペイロード、偽のシステムスクリプト、リモート
+  `require()`、`loadstring`、`string.char`、`getfenv/setfenv`、非表示の Values、遅延実行）。
+- スキャナー：[`scripts/scan_asset_malware.luau`](scripts/scan_asset_malware.luau) — Studio 内で
+  `execute_luau`（または Command Bar）を実行して使用します。すべてのパターンに対してインスタンスをチェックし、検出結果を報告します。
 
-**Red flags immediately:** a large script in a pure decoration model · reversed strings in
-attributes · `require(<number>)` · `loadstring` · `HttpService` in an asset that needs no
-networking. When in doubt: delete the script. Document finds (e.g. `_malware_reports/YYYY-MM-DD_*.md`
-in the reference pipeline).
+**即座の警戒信号（レッドフラグ）：** 純粋な装飾モデル内の大きなスクリプト · 属性内の反転文字列 ·
+`require(<number>)` · `loadstring` · ネットワーク機能を必要としないアセット内の `HttpService`。
+疑わしい場合はスクリプトを削除してください。検出結果を記録します（例: リファレンスパイプライン内の `_malware_reports/YYYY-MM-DD_*.md`）。
 
-## Important Luau/Studio pitfalls (excerpt)
+## 重要な Luau/Studio の注意点（抜粋）
 
-The most common ones that bite in Studio — the full list is kept by the skill `/rbx-dev`:
+Studio で最も頻繁に発生する問題 —— 完全なリストはスキル `/rbx-dev` で管理されています：
 
-- `Model.Position` does not exist → `model:GetPivot().Position`.
-- `tick()` is deprecated → `os.clock()` / `workspace:GetServerTimeNow()`.
-- `SetPrimaryPartCFrame()` deprecated → `model:PivotTo(cf)`.
-- DataStore calls **always** in `pcall`.
-- Baseplate + procedural floor at the same height → Z-fighting (flicker): remove the baseplate
-  or raise the floor by +0.1 studs.
-- Keep an eye on the part budget (~50–80 parts per procedurally generated room).
+- `Model.Position` は存在しません → `model:GetPivot().Position` を使用。
+- `tick()` は非推奨です → `os.clock()` / `workspace:GetServerTimeNow()` を使用。
+- `SetPrimaryPartCFrame()` は非推奨です → `model:PivotTo(cf)` を使用。
+- DataStore の呼び出しは**必ず** `pcall` 内で行ってください。
+- Baseplate と手動/動的生成した床が同じ高さ → Z-fighting（ちらつき）：Baseplate を削除するか、
+  床を +0.1 studs 上げます。
+- パーツバジェットに注意してください（手動/動的生成される部屋1つあたり約50〜80パーツ）。
 
-## Further reading
+## 参考文献・関連情報
 
-- Sister skills: `/rojo` (sync, project setup), `/game-design` (roles, workflows, GDD),
-  meta skill `/rbx-dev` (architecture patterns + all Luau lessons).
-- Engine/Creator docs: Context7 MCP (`/websites/create_roblox_reference_engine`,
-  `/roblox/creator-docs`) or <https://create.roblox.com/docs>.
-- Reference pipeline (if present): `<your Roblox project pipeline>`
-  (`ROBLOX_MCP_FAQ.md`, `ASSET_PIPELINE.md`, `_malware_reports/PATTERNS.md`).
+- 関連スキル：`/rojo`（同期、プロジェクト設定）、`/game-design`（役割、ワークフロー、GDD）、
+  メタスキル `/rbx-dev`（アーキテクチャパターン + すべての Luau のレッスン）。
+- エンジン/クリエイタードキュメント：Context7 MCP（`/websites/create_roblox_reference_engine`、
+  `/roblox/creator-docs`）または <https://create.roblox.com/docs>。
+- リファレンスパイプライン（存在する場合）：`<your Roblox project pipeline>`
+  （`ROBLOX_MCP_FAQ.md`、`ASSET_PIPELINE.md`、`_malware_reports/PATTERNS.md`）。
 
 ## 変更履歴
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Distilled from the `.ROBLOX` pipeline (ROBLOX_MCP_FAQ, ASSET_PIPELINE,
-  PATTERNS, LESSONS_LEARNED), written user-neutral.
+- 初版。.ROBLOX パイプライン（ROBLOX_MCP_FAQ、ASSET_PIPELINE、
+  PATTERNS、LESSONS_LEARNED）から抽出され、ユーザー非依存の記述に整理。

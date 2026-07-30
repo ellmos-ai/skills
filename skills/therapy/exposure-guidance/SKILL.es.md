@@ -1,41 +1,53 @@
 ---
+name: exposure-guidance
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Exposición graduada para trastornos de ansiedad: Jerarquía de miedos, escala SUDs, planificación y orientación de la exposición. Solo psicoeducación, no implementación.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [exposure, anxiety, phobia, suds, graded, behavioral-therapy]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `exposure-guidance`.
+> **Español** — Versión oficial en español de `exposure-guidance`.
 
 
+# Orientación en Exposición (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Jerarquía de miedos, escala SUDs, exposición graduada y habituación: Planificación y orientación — implementación real únicamente con un terapeuta
 
-
-# Exposure Guidance (English)
-
-> Fear hierarchy, SUDs scale, graded exposure and habituation: Planning and guidance — actual exposure only with a therapist
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Exposure (confrontation therapy) is one of the most effective methods in behavioral therapy for anxiety disorders, phobias, OCD, and PTSD. It is based on the principles of habituation and extinction: When one repeatedly faces an anxiety-provoking situation, the anxiety response decreases over time.
-
-Evidence: Exposure therapy is the gold-standard treatment for specific phobias, social anxiety, panic disorder, and agoraphobia (NICE Guidelines, Bandelow et al. 2014, S3 Guideline Anxiety Disorders). Effect sizes are among the highest in psychotherapy research.
-
-**IMPORTANT:** This skill supports PLANNING of exposure exercises and conveys understanding of the mechanisms. The IMPLEMENTATION of exposure must be conducted under the guidance of a qualified therapist.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Understanding the Mechanisms
+## Contexto
 
-### Habituation
+La exposición (terapia de confrontación) es uno de los métodos más efectivos de la terapia conductual para los trastornos de ansiedad, fobias, TOC y TEPT. Se basa en los principios de habituación y extinción: cuando uno se enfrenta repetidamente a una situación que provoca ansiedad, la respuesta de ansiedad disminuye con el tiempo.
+
+Evidencia: La terapia de exposición es el tratamiento estándar de oro para fobias específicas, ansiedad social, trastorno de pánico y agorafobia (Guías NICE, Bandelow et al. 2014, Guía S3 de Trastornos de Ansiedad). Los tamaños del efecto se encuentran entre los más altos en la investigación psicoterapéutica.
+
+**IMPORTANTE:** Esta habilidad apoya la PLANIFICACIÓN de ejercicios de exposición y transmite la comprensión de los mecanismos. La IMPLEMENTACIÓN real de la exposición debe llevarse a cabo bajo la guía de un terapeuta cualificado.
+**Nunca aplicar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET)
+
+---
+
+## 1. Comprensión de los Mecanismos
+
+### Habituación
 
 ```
-HABITUATION: Adaptation through repeated confrontation
+HABITUACIÓN: Adaptación mediante la confrontación repetida
 
-Anxiety level
+Nivel de ansiedad
 100 |  *
     | * *
  80 |*   *
@@ -47,128 +59,128 @@ Anxiety level
  20 |          **  * *
     |                  * * * * * *
   0 |________________________________
-    Time (during exposure)
+    Tiempo (durante la exposición)
 
-Anxiety initially rises, reaches a peak,
-and then drops on its own WITHOUT flight or avoidance.
+La ansiedad aumenta inicialmente, alcanza un pico,
+y luego disminuye por sí sola SIN huida ni evitación.
 
-Key experience: "The anxiety passes, even when
-I stay in the situation."
+Experiencia clave: "La ansiedad pasa, incluso cuando
+permanezco en la situación."
 ```
 
-### Extinction (New Learning)
+### Extinción (Nuevo Aprendizaje)
 
 ```
-EXTINCTION: New experiences overwrite old fear associations
+EXTINCIÓN: Las nuevas experiencias sobrescriben las viejas asociaciones de miedo
 
-Old experience: Dog -> Danger -> Fear -> Flight
-New experience: Dog -> No danger -> Fear decreases -> I am safe
+Vieja experiencia: Perro -> Peligro -> Ansiedad -> Huida
+Nueva experiencia: Perro -> No hay peligro -> La ansiedad disminuye -> Estoy a salvo
 
-The old association is not erased but overlaid by new
-experiences. Therefore, fear can return in certain
-contexts (renewal, reinstatement) — which is NORMAL.
+La vieja asociación no se borra, sino que se superpone con nuevas
+experiencias. Por lo tanto, la ansiedad puede regresar en ciertos
+contextos (renovación, restablecimiento), lo cual es NORMAL.
 ```
 
-### Why Avoidance Maintains the Problem
+### Por qué la Evitación Mantiene el Problema
 
 ```
-THE AVOIDANCE CYCLE:
+EL CÍRCULO DE LA EVITACIÓN:
 
-Anxiety-provoking situation
+Situación que provoca ansiedad
         |
         v
-Anxiety rises (unpleasant)
+La ansiedad aumenta (desagradable)
         |
         v
-Avoidance/flight
+Evitación / huida
         |
         v
-Short-term relief (anxiety drops immediately)
+Alivio a corto plazo (la ansiedad disminuye de inmediato)
         |
         v
-Long-term reinforcement of anxiety
-("The situation IS dangerous, good that I fled")
+Refuerzo a largo plazo de la ansiedad
+("La situación SÍ ES peligrosa, qué bueno que hui")
         |
         v
-Next time: Even more anxiety, even more avoidance
+La próxima vez: Aún más ansiedad, aún más evitación
 ```
 
 ---
 
-## 2. The SUDs Scale
+## 2. La Escala SUDs
 
-### Subjective Units of Distress (0-100)
+### Unidades Subjetivas de Angustia / Malestar (0-100)
 
 ```
-SUDs SCALE (Subjective Units of Distress)
+ESCALA SUDs (Subjective Units of Distress)
 
-  0  Completely relaxed, no anxiety
- 10  Minimal tension, barely noticeable
- 20  Slight unease, easily tolerable
- 30  Noticeably unpleasant, but controllable
- 40  Noticeable anxiety, still able to function
- 50  Moderate anxiety, strenuous but manageable
- 60  Strong anxiety, clear urge to avoid
- 70  Very strong anxiety, hard to endure
- 80  Intense anxiety, at the edge of tolerance
- 90  Extreme anxiety, feeling of panic
-100  Maximum anxiety, worst imaginable distress
+  0  Completamente relajado, sin ansiedad
+ 10  Tensión mínima, apenas perceptible
+ 20  Malestar leve, fácilmente tolerable
+ 30  Notablemente desagradable, pero controlable
+ 40  Ansiedad perceptible, aún capaz de funcionar
+ 50  Ansiedad moderada, extenuante pero manejable
+ 60  Ansiedad fuerte, claro impulso de evitar
+ 70  Ansiedad muy fuerte, difícil de soportar
+ 80  Ansiedad intensa, al límite de la tolerancia
+ 90  Ansiedad extrema, sensación de pánico
+100  Ansiedad máxima, el peor malestar imaginable
 ```
 
-### Using the SUDs Scale
+### Uso de la Escala SUDs
 
-**Before exposure:**
-- Estimated anxiety in the planned situation (expected value)
+**Antes de la exposición:**
+- Ansiedad estimada en la situación planificada (valor esperado)
 
-**During exposure:**
-- Assess current SUDs value every 5 minutes
-- Document the progression (rising, falling, fluctuating)
+**Durante la exposición:**
+- Evaluar el valor SUDs actual cada 5 minutos
+- Documentar la progresión (en aumento, en descenso, fluctuante)
 
-**After exposure:**
-- Highest SUDs value? Final value? How quickly did anxiety decrease?
-- Was it as bad as expected?
+**Después de la exposición:**
+- ¿Valor SUDs más alto? ¿Valor final? ¿Qué tan rápido disminuyó la ansiedad?
+- ¿Fue tan malo como se esperaba?
 
 ---
 
-## 3. Creating a Fear Hierarchy
+## 3. Creación de una Jerarquía de Miedos
 
-### Principle
+### Principio
 
-A fear hierarchy ranks anxiety-provoking situations from lowest to highest anxiety level. Exposure begins with easy situations and increases step by step.
+Una jerarquía de miedos clasifica las situaciones que provocan ansiedad desde el nivel más bajo hasta el más alto. La exposición comienza con situaciones fáciles y aumenta paso a paso.
 
-### Example: Fear of Dogs
+### Ejemplo: Fobia a los Perros
 
 ```
-FEAR HIERARCHY: Dog Phobia
+JERARQUÍA DE MIEDOS: Fobia a los perros
 
-SUDs | Situation
+SUDs | Situación
 -----|--------------------------------------------------
- 10  | Look at a picture of a dog
- 15  | Watch a video of playing dogs
- 25  | Talk about own experiences with dogs
- 30  | Watch a small dog from 10 meters away
- 40  | Watch a small dog from 5 meters away
- 50  | Stand next to a leashed small dog (2 meters)
- 55  | Touch a small leashed dog (owner holding)
- 60  | Watch a medium dog from 5 meters
- 65  | Sit next to a leashed medium dog
- 70  | Pet a medium dog
- 75  | Walk past an unleashed dog (park)
- 80  | Be alone in a room with a calm dog
- 85  | Pet a large dog
- 90  | Be in a park with multiple unleashed dogs
- 95  | Feed a dog
-100  | Let an unfamiliar dog run toward you
+ 10  | Mirar una foto de un perro
+ 15  | Ver un video de perros jugando
+ 25  | Hablar sobre experiencias propias con perros
+ 30  | Observar a un perro pequeño desde 10 metros de distancia
+ 40  | Observar a un perro pequeño desde 5 metros de distancia
+ 50  | Estar al lado de un perro pequeño con correa (2 metros)
+ 55  | Tocar a un perro pequeño con correa (el dueño sujetándolo)
+ 60  | Observar a un perro mediano desde 5 metros
+ 65  | Sentarse al lado de un perro mediano con correa
+ 70  | Acariciar a un perro mediano
+ 75  | Caminar cerca de un perro sin correa (parque)
+ 80  | Estar a solas en una habitación con un perro tranquilo
+ 85  | Acariciar a un perro grande
+ 90  | Estar en un parque con varios perros sueltos
+ 95  | Darle de comer a un perro
+100  | Dejar que un perro desconocido corra hacia ti
 ```
 
-### Template for Completion
+### Plantilla para Completar
 
 ```
-MY FEAR HIERARCHY
+MI JERARQUÍA DE MIEDOS
 
-Anxiety topic: [...]
+Tema de ansiedad: [...]
 
-SUDs | Situation
+SUDs | Situación
 -----|--------------------------------------------------
      | [...]
      | [...]
@@ -179,154 +191,154 @@ SUDs | Situation
 
 ---
 
-## 4. Types of Exposure
+## 4. Tipos de Exposición
 
-### Graded Exposure (In Vivo)
+### Exposición Graduada (In Vivo)
 
-**Principle:** Step-by-step confrontation with real situations, starting at low SUDs values.
+**Principio:** Confrontación paso a paso con situaciones reales, comenzando con valores SUDs bajos.
 
-### Flooding
+### Inundación (Flooding)
 
-**Principle:** Direct confrontation with highly anxiety-provoking situations for extended periods. Only under therapeutic guidance. NOT to be guided by an AI assistant — only explained.
+**Principio:** Confrontación directa con situaciones altamente ansiógenas durante períodos prolongados. Únicamente bajo supervisión terapéutica. NO debe ser guiada por un asistente de IA, solo explicada.
 
-### Exposure in Sensu (Imaginal)
+### Exposición en Sensu (Imaginaria)
 
-**Principle:** Experiencing anxiety-provoking situations in imagination. Helpful as preparation for real exposure.
+**Principio:** Experimentar situaciones que provocan ansiedad en la imaginación. Útil como preparación para la exposición real.
 
-### Interoceptive Exposure
+### Exposición Interoceptiva
 
-**Principle:** Deliberately inducing physical anxiety symptoms (e.g., rapid heartbeat through exercise, dizziness through spinning). ONLY under therapeutic guidance.
-
----
-
-## 5. Guided Exposure Planning
-
-### Preparation Protocol
-
-```
-EXPOSURE PLANNING PROTOCOL
-
-Date: [...]
-Therapist informed: [ ] Yes  [ ] No (MANDATORY!)
-
-Anxiety topic: [...]
-Chosen situation: [...]
-Expected SUDs value: [...]
-Level in hierarchy: [...]
-
-What exactly will I do: [...]
-Where: [...]
-When: [...]
-How long: [...]
-Alone or accompanied: [...]
-
-My greatest fear: [...]
-What will realistically happen: [...]
-
-Emergency plan (if SUDs > 90 or dissociation):
-1. Grounding (5-4-3-2-1)
-2. Breathing exercise (box breathing)
-3. [Call trusted person]: Tel. [...]
-4. Leave situation in an orderly manner (no panicked fleeing)
-```
-
-### Post-Session Protocol
-
-```
-EXPOSURE DEBRIEFING
-
-Date: [...]
-Situation: [...]
-
-SUDs before (expectation): [...]
-SUDs highest value during: [...]
-SUDs at the end: [...]
-
-How long stayed in situation: [...]
-Habituation occurred: [ ] Yes  [ ] Partial  [ ] No
-
-What I learned: [...]
-Was it as bad as feared: [ ] Worse  [ ] As expected  [ ] Less bad
-
-What I want to do differently next time: [...]
-Next level: [...]
-```
+**Principio:** Inducir deliberadamente síntomas físicos de ansiedad (ej. aumento del ritmo cardíaco mediante ejercicio, mareo mediante giros). ÚNICAMENTE bajo guía terapéutica.
 
 ---
 
-## 6. Safety Notes and Abort Criteria
+## 5. Planificación Guiada de la Exposición
 
-### Prerequisites for Exposure
-
-```
-CHECKLIST BEFORE STARTING EXPOSURE:
-
-[ ] Qualified therapist is involved
-[ ] Sufficient stabilization is present
-[ ] Fear hierarchy is created and discussed
-[ ] Emergency plan is prepared
-[ ] Person understands the mechanism (habituation)
-[ ] No acute suicidality
-[ ] No uncontrolled psychotic symptoms
-[ ] No severe dissociative disorder (without therapeutic support)
-[ ] No acute substance intoxication
-[ ] Person has voluntarily consented (no forced exposure!)
-```
-
-### Abort Criteria
+### Protocolo de Preparación
 
 ```
-ABORT EXPOSURE IF:
+PROTOCOLO DE PLANIFICACIÓN DE LA EXPOSICIÓN
 
-- Dissociation occurs (person is "gone," unresponsive)
-- Panic attack with loss of control
-- Person explicitly wants to stop (respect autonomy!)
-- Physical symptoms: chest pain, shortness of breath, fainting
-- Suicidal thoughts during exposure
-- The situation becomes objectively unsafe
+Fecha: [...]
+Terapeuta informado: [ ] Sí  [ ] No (¡OBLIGATORIO!)
 
-ON ABORT:
-1. Grounding and stabilization (5-4-3-2-1, breathing exercise)
-2. Ensure person is oriented and stable
-3. Discuss experience (what happened, what was learned)
-4. No blame ("You should have stayed")
-5. Plan next step with therapist
+Tema de ansiedad: [...]
+Situación elegida: [...]
+Valor SUDs esperado: [...]
+Nivel en la jerarquía: [...]
+
+Qué haré exactamente: [...]
+Dónde: [...]
+Cuándo: [...]
+Cuánto tiempo: [...]
+Solo o acompañado: [...]
+
+Mi mayor temor: [...]
+Qué sucederá de manera realista: [...]
+
+Plan de emergencia (si SUDs > 90 o disociación):
+1. Anclaje / Заземление (5-4-3-2-1)
+2. Ejercicio de respiración (respiración en caja)
+3. [Llamar a persona de confianza]: Tel. [...]
+4. Abandonar la situación de forma ordenada (sin huida presa del pánico)
+```
+
+### Protocolo Posterior a la Sesión
+
+```
+EVALUACIÓN DE LA EXPOSICIÓN
+
+Fecha: [...]
+Situación: [...]
+
+SUDs antes (expectativa): [...]
+SUDs valor más alto durante: [...]
+SUDs al final: [...]
+
+Cuánto tiempo permaneció en la situación: [...]
+Ocurrió habituación: [ ] Sí  [ ] Parcial  [ ] No
+
+Lo que aprendí: [...]
+¿Fue tan malo como temía?: [ ] Peor  [ ] Como esperaba  [ ] Menos malo
+
+Lo que quiero hacer diferente la próxima vez: [...]
+Siguiente nivel: [...]
 ```
 
 ---
 
-## Ethics and Boundaries
+## 6. Notas de Seguridad y Criterios de Interrupción
 
-**An AI assistant may:**
-- Explain exposure principles (psychoeducation)
-- Create fear hierarchies together
-- Explain and use the SUDs scale
-- Support exposure planning (fill out protocols)
-- Document debriefing
-- Provide safety information
-- Motivate and normalize ("Anxiety during exposure is desired and normal")
+### Requisitos Previos para la Exposición
 
-**An AI assistant must NOT:**
-- Independently conduct or guide exposure
-- Guide flooding (ONLY therapist)
-- Guide interoceptive exposure (ONLY therapist)
-- Conduct prolonged exposure for PTSD
-- Accompany exposure in severe dissociation
-- Pressure toward exposure ("You must face this")
-- Guarantee results
-- Make diagnoses or create treatment plans
-- Make medication-related recommendations
+```
+LISTA DE COMPROBACIÓN ANTES DE COMENZAR LA EXPOSICIÓN:
 
-**PARTICULARLY STRICT BOUNDARY:** An AI assistant plans and explains. Actual exposure takes place under the guidance of a qualified therapist. For any request regarding implementation: refer to professional. Exposure without professional support can re-traumatize or intensify anxiety.
+[ ] Hay un terapeuta cualificado involucrado
+[ ] Existe una estabilización suficiente
+[ ] La jerarquía de miedos está creada y discutida
+[ ] El plan de emergencia está preparado
+[ ] La persona comprende el mecanismo (habituación)
+[ ] Sin suicidabilidad aguda
+[ ] Sin síntomas psicóticos no controlados
+[ ] Sin trastorno disociativo severo (sin apoyo terapéutico)
+[ ] Sin intoxicación aguda por sustancias
+[ ] La persona ha dado su consentimiento voluntario (¡sin exposición forzada!)
+```
 
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Criterios de Interrupción
+
+```
+INTERRUMPIR LA EXPOSICIÓN SI:
+
+- Ocurre disociación (la persona está "ausente", no responde)
+- Ataque de pánico con pérdida de control
+- La persona desea explícitamente parar (¡respetar la autonomía!)
+- Síntomas físicos: dolor en el pecho, falta de aire grave, desmayo
+- Pensamientos suicidas durante la exposición
+- La situación se vuelve objetivamente insegura
+
+AL INTERRUMPIR:
+1. Anclaje y estabilización (5-4-3-2-1, ejercicio de respiración)
+2. Asegurarse de que la persona esté orientada y estable
+3. Discutir la experiencia (qué sucedió, qué se aprendió)
+4. Sin culpabilizar ("Deberías haberte quedado")
+5. Planificar el siguiente paso con el terapeuta
+```
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3 Guideline Anxiety Disorders (2014) — Not professional therapy*
+## Ética y Límites
+
+**Un asistente de IA puede:**
+- Explicar los principios de exposición (psicoeducación)
+- Crear jerarquías de miedos conjuntamente
+- Explicar y utilizar la escala SUDs
+- Apoyar la planificación de la exposición (llenar protocolos)
+- Documentar las evaluaciones posteriores
+- Proporcionar información de seguridad
+- Motivar y normalizar ("La ansiedad durante la exposición es deseada y normal")
+
+**Un asistente de IA NO debe:**
+- Realizar o guiar de forma independiente la exposición
+- Guiar la inundación / flooding (SOLO el terapeuta)
+- Guiar la exposición interoceptiva (SOLO el terapeuta)
+- Realizar exposición prolongada para el TEPT
+- Acompañar la exposición en disociación severa
+- Presionar hacia la exposición ("Tienes que enfrentarte a esto")
+- Garantizar resultados
+- Realizar diagnósticos o crear planes de tratamiento
+- Hacer recomendaciones sobre medicación
+
+**LÍMITE ESPECIALMENTE ESTRICTO:** Un asistente de IA planifica y explica. La exposición real tiene lugar bajo la guía de un terapeuta cualificado. Para cualquier solicitud de implementación real: derivar al profesional. La exposición sin apoyo profesional puede revincular o intensificar la ansiedad.
+
+**En caso de crisis aguda, SIEMPRE derivar a:**
+- 988 Suicide & Crisis Lifeline (EE. UU.): 988
+- Crisis Text Line (EE. UU.): Envíe HOME al 741741
+- Samaritans (Reino Unido): 116 123
+- Telefonseelsorge (Alemania): 0800 111 0 111 / 0800 111 0 222
+- Servicios de emergencia: 911 (EE. UU.) / 112 (UE)
+
+---
+
+*Adaptado de BACH v3.8.0 | Versión independiente*
+*Fuentes: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), Guía S3 Trastornos de Ansiedad (2014) — No es terapia profesional*

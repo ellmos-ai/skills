@@ -1,11 +1,23 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
-description: [Русский] Навык агента для automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+updated: 2026-07-30
+description: >
+  Создает и управляет провайдеронезависимым базовым набором самообслуживания
+  (core set) для запланированных задач LLM и автоматизации настольных
+  приложений. Используется, когда агент должен обнаружить свой нативный
+  планировщик, настроить регулярную гигиену, проверку качества промптов,
+  частоты, нагрузки, ресурсов, межсистемного взаимодействия, прав доступа и
+  среды выполнения, или непрерывно улучшать существующую авто-флотилию с защитой
+  от удаления, обратным чтением (readback) и возможностью отката (rollback).
+  Срабатывает при запросах на automation self-care, scheduler task care, desktop
+  app automation maintenance, automation fleet audit, self-healing schedules,
+  воссоздание семейства задач обслуживания в стиле ANTIGRAVITY,
+  core-set-textautomations, basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers или textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,97 +26,85 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: ru
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `automation-self-care`.
+> **Русский** — Официальная русская версия `automation-self-care`.
 
+# Automation Self-Care
 
+Создавайте нативную, специфичную для провайдера флотилию обслуживания на основе одного провайдеронезависимого контура управления. Сохраняйте исходный замысел семейства задач ANTIGRAVITY, требуя подтверждающих доказательств, обратимых изменений и нативного обратного чтения (readback).
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Нерушимые границы
 
+- Относитесь к обнаружению, планированию, утверждению, изменению и обратному чтению как к отдельным фазам.
+- Используйте поддерживаемый API автоматизации, команды или UI целевого приложения. Никогда не предполагайте, что редактирование файла хранилища меняет состояние работающего приложения.
+- Читайте локальные правила, блокировки, журналы удаления/подавления и существующие расписания перед предложением задачи.
+- Не выдумывайте поддержку планировщика. Если создание, обновление или обратное чтение не могут быть доказаны, сформируйте план ручной установки и остановитесь до внесения изменений.
+- Выполняйте не более одного независимо тестируемого изменения настройки за один запуск обслуживания.
+- Защищайте задачи обслуживания от самоотключения или снижения собственной частоты ниже настроенного порога восстановления.
+- Сохраняйте предыдущий промпт, расписание, модель, разрешения и состояние активности, чтобы каждое изменение можно было откатить.
+- Считайте успех только после получения доказательств результата, а не просто при запуске планировщика или коде выхода 0.
+- Никогда не копируйте секреты, приватные промпты или персональные данные в общий реестр.
 
-# Automation Self-Care (English)
+## Рабочий процесс
 
-Create a native, provider-specific maintenance fleet from one provider-neutral
-control loop. Preserve the original intent of the ANTIGRAVITY task family while
-requiring evidence, reversible changes and native readback.
+### 1. Обнаружение нативной поверхности автоматизации
 
-## Non-negotiable Boundaries & Rules
+Проведите инвентаризацию текущего актора, провайдера, класса приложения, поверхности планировщика, поддерживаемых операций, файлов состояния, истории запусков, телеметрии использования и метода обратного чтения. Зафиксируйте возможности с помощью контракта профиля в [provider-adapter-contract.md](references/provider-adapter-contract.md).
 
-- Treat discovery, planning, approval, mutation and readback as separate phases.
-- Use the target app's supported automation API, command or UI. Never assume that
-  editing a storage file changes live app state.
-- Read local rules, locks, deletion/suppression logs and existing schedules before
-  proposing a task.
-- Do not invent scheduler support. If create/update/readback cannot be proven,
-  produce a manual installation plan and stop before mutation.
-- Make at most one independently testable tuning change per care run.
-- Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
-- Preserve the previous prompt, schedule, model, permissions and enabled state so
-  every mutation can be rolled back.
-- Count success only after outcome evidence, not merely scheduler start or exit 0.
-- Never copy secrets, private prompts or personal data into a shared registry.
+Различайте нативные расписания настольных приложений, выполнение в режиме CLI/headless, планировщик ОС или стартер служб, общую службу планировщика, движок рабочих процессов и неподдерживаемую автоматизацию или автоматизацию только через UI. Не приравнивайте наличие конфигурационного файла к поддерживаемому пути изменений.
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+### 2. Инвентаризация флотилии
 
-### 1. Discover the native automation surface
+Для каждой задачи зафиксируйте стабильный локальный идентификатор, назначение, отпечаток (fingerprint) промпта, расписание, состояние активности, модель, разрешения, целевые пути, последнее событие планировщика, последний успешный результат и текущего владельца. Содержимое промпта сохраняйте локально.
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
-[provider-adapter-contract.md](references/provider-adapter-contract.md).
+Проверяйте авторитетную активную поверхность дважды перед внесением изменений, если приложение может перезаписывать состояние из памяти.
 
-Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
-service starter, general scheduler service, workflow engine, and unsupported or
-UI-only automation. Do not equate the existence of a config file with a supported
-mutation path.
+### 3. Проектирование базового набора (core set)
 
-### 2. Inventory the fleet
+Ознакомьтесь с [core-set.md](references/core-set.md). Выберите один из вариантов:
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+- `compact`: пять задач обслуживания, объединяющих частоту с распределением нагрузки; или
+- `full`: девять специализированных задач, соответствующих исходному семейству обслуживания.
 
-Check the authoritative live surface twice before mutation when the app can rewrite
-state from memory.
-
-### 3. Design the core set
-
-Read [core-set.md](references/core-set.md). Select either:
-
-- `compact`: five care tasks combining frequency with load distribution; or
-- `full`: nine focused tasks corresponding to the original maintenance family.
-
-Generate a provider-neutral plan:
+Сформируйте провайдеронезависимый план:
 
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
 ```
 
-The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+Генератор никогда не устанавливает задачи самостоятельно. Проверьте каждую возможность со статусом `blocked` и выберите локальное время без конфликтов перед применением плана.
 
-### 4. Stage installation
+### 4. Этапность установки
 
-Install through the native provider adapter:
+Устанавливайте через нативный адаптер провайдера:
 
-1. Start with hygiene in read-only mode.
-2. Add resource protection.
-3. Add prompt-quality tuning with rollback.
-4. Add frequency and load tuning only after enough run evidence exists.
-5. Add cross-system coordination last.
+1. Начните с гигиены в режиме «только для чтения».
+2. Добавьте защиту ресурсов.
+3. Добавьте настройку качества промпта с возможностью отката.
+4. Добавляйте настройку частоты и нагрузки только после накопления достаточного количества доказательств запусков.
+5. В последнюю очередь добавьте межсистемную координацию.
 
-Create new or imported tasks disabled unless the user explicitly approved active
-installation. For an unattended pilot, require a deletion log, before-state
-snapshot, run receipt and rollback path first.
+Создавайте новые или импортированные задачи отключенными, если пользователь явно не утвердил активную установку. Для автономного пилотного запуска сначала потребуются журнал удалений, снимок состояния «до», квитанция о запуске и путь для отката.
 
-### 5. Run the care loop
+### 5. Запуск контура обслуживания
 
-Every care task follows:
+Каждая задача обслуживания следует схеме:
 
 ```text
 follow-up previous change
@@ -116,56 +116,39 @@ follow-up previous change
   -> write receipt and next-check condition
 ```
 
-Use the hypothesis catalogue and evidence rules in
-[core-set.md](references/core-set.md). Unknown cause means observe, narrow
-permissions or pause safely; never guess a repair.
+Используйте каталог гипотез и правила доказательств из [core-set.md](references/core-set.md). Неизвестная причина означает необходимость наблюдения, сужения разрешений или безопасной паузы; никогда не угадывайте способ исправления.
 
-### 6. Coordinate across actors
+### 6. Координация между акторами
 
-Keep local app state authoritative. Share only task contracts, coverage, status,
-receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
-single-writer mutations require a claim or an equivalent native lock.
+Сохраняйте состояние локального приложения авторитетным. Делитесь только контрактами задач, покрытием, статусом, квитанциями и очищенными отпечатками. Избыточные проверки в режиме «только чтение» разрешены; изменения с единственным писателем требуют заявки (claim) или эквивалентной нативной блокировки.
 
-### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+### 7. Системы без нативных хуков событий (расширение Letter-Hooker)
 
-For AI frameworks that lack native, event-driven JSON hook loaders (such as
-Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
-Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
+Относитесь к ограничениям токенов или подписки как к состоянию емкости, а не к сломанному актору. Возвращайте делегированное покрытие после того, как исходный актор сформирует успешную квитанцию.
 
-- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
-  evaluate logs and execution state.
-- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
-  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
-  directly into target `sidecar.json` prompt texts.
-- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
-  `gardener`, `workflowhooker`, and `.SKILLS`.
+## Обязательные результаты
 
-Treat token or subscription limitation as capacity state, not a broken actor.
-Return delegated coverage after the original actor produces a successful receipt.
+Для каждого запуска настройки или обслуживания предоставляйте отчет:
 
-## Required Outputs & Deliverables
+- обнаруженная нативная поверхность и неподдерживаемые возможности;
+- выбранная топология и созданные, предложенные или пропущенные задачи;
+- точное изменение и обратное чтение до/после;
+- доказательство результата или открытое окно наблюдения;
+- местоположение отката и условие возврата;
+- обновление общего покрытия, если существует реестр координации.
 
-For each setup or care run report:
+## Пример
 
-- discovered native surface and unsupported capabilities;
-- selected topology and tasks created, proposed or skipped;
-- exact mutation and before/after readback;
-- evidence of outcome or open observation window;
-- rollback location and return condition;
-- shared coverage update, if a coordination registry exists.
+Пользователь: «Настрой самообслуживаемые расписания в этом настольном приложении.»
 
-## Пример и применение & Usage
+Выясните, может ли приложение выводить список, создавать, обновлять и проверять запланированные задачи. Сформируйте план compact, представьте неподдерживаемые возможности, затем установите только утвержденные задачи через нативную поверхность. Папка, содержащая промпт задачи без регистрации в активном планировщике, не является завершенной настройкой.
 
-User: "Set up self-maintaining schedules in this desktop app."
+## История изменений
 
-Discover whether the app can list, create, update and verify scheduled tasks.
-Generate the compact plan, present unsupported capabilities, then install only the
-approved tasks through the native surface. A folder containing a task prompt
-without a live scheduler registration is not a completed setup.
+### 1.0.1 (2026-07-30)
 
-## Журнал изменений
+- Добавлены провайдеронезависимые псевдонимы для текстовой автоматизации и автоматизации настольных приложений.
 
 ### 1.0.0 (2026-07-28)
 
-- Consolidated the original ANTIGRAVITY maintenance family, the F1-F6 control
-  loop and later provider-specific adaptations into a neutral core-set skill.
+- Объединены исходное семейство обслуживания ANTIGRAVITY, контур управления F1-F6 и последующие адаптации под конкретных провайдеров в нейтральный skill базового набора.

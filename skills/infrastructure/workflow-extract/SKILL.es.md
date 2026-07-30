@@ -2,179 +2,116 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `workflow-extract`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `workflow-extract`.
-
+> **Español** — Versión oficial en español de `workflow-extract`.
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 
-# Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
+# Workflow-Extract — Crear automatizaciones a partir de historiales de chat y automatizaciones externas
 
-## Descripción General y Propósito & Purpose
+## Descripción general y propósito
 
-Manche Abläufe gehören nicht in einen Skill, den man bei Bedarf lädt, sondern in eine
-**Automatisierung, die von allein läuft**: nächtliche Checks, rotierende Projekt-Prüfungen,
-periodische Pflege-Läufe. Dieser Skill extrahiert solche Workflows aus zwei Quellenarten —
-Chatverläufen (ein Ablauf wurde interaktiv entwickelt und soll künftig unbeaufsichtigt laufen)
-und bestehenden Automations-Prompts anderer Systeme (z. B. Codex-Automations, Scheduled
-Tasks, n8n-Flows) — und macht daraus user-neutrale, robuste Automatisierungs-Prompts oder
--Skills.
+Algunos flujos de trabajo no corresponden a un skill que se carga a petición, sino a una **automatización que se ejecuta de forma autónoma**: comprobaciones nocturnas, auditorías de proyectos en rotación, ejecuciones periódicas de mantenimiento. Este skill extrae dichos flujos de trabajo de dos tipos de fuentes — historiales de chat (un proceso desarrollado de forma interactiva que en el futuro debe ejecutarse sin supervisión) y prompts de automatizaciones existentes en otros sistemas (p. ej., Codex-Automations, Scheduled Tasks, flujos de n8n) — y los convierte en prompts de automatización o skills neutros con respecto al usuario y de gran robustez.
 
-Der Unterschied zum interaktiven Ablauf: Eine Automatisierung hat **niemanden, der korrigiert**.
-Alles, was in der Session der User abgefangen hat, muss die Automatisierung selbst abfangen.
-Genau dafür gibt es die Bausteine in `automation-bausteine.md`.
+La diferencia fundamental con un proceso interactivo: una automatización **no tiene a nadie que corrija errores**. Todo aquello que el usuario haya detectado o corregido durante la sesión interactiva debe ser gestionado de forma autónoma por la propia automatización. Para esto sirven precisamente los componentes de `automation-bausteine.md`.
 
-## Ablauf
+## Flujo de trabajo
 
-### 1. Quelle und Zielform klären
+### 1. Aclarar origen y forma de destino
 
-| Quelle | typischer Fall |
+| Origen | Caso típico |
 | --- | --- |
-| Aktuelle Session / Transkript | Ablauf wurde interaktiv entwickelt, soll periodisch weiterlaufen |
-| Fremd-Automation (Prompt-Datei, Cron-Task, n8n-Flow) | Portierung/Abstraktion auf ein anderes System oder in die Bibliothek |
+| Sesión actual / Transcripción | El flujo se desarrolló de forma interactiva y debe continuar ejecutándose periódicamente |
+| Automatización externa (Archivo de prompt, tarea cron, flujo n8n) | Portabilidad/abstracción hacia otro sistema o hacia la biblioteca |
 
-Zielformen (eine oder mehrere):
+Formas de destino (una o varias):
 
-- **Automations-Prompt:** eigenständiger, user-neutraler Prompt-Text, einsetzbar in jedem
-  Scheduler (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
-- **Workflow-Skill:** Skill in der Bibliothek, der den Ablauf beschreibt und vom
-  Automations-Prompt nur noch aufgerufen/parametrisiert wird (bevorzugt, wenn derselbe
-  Ablauf für mehrere Pipelines/Systeme gelten soll — eine Quelle der Wahrheit).
-- **Command:** dünner Slash-Command für manuelle Auslösung desselben Ablaufs.
+- **Prompt de automatización:** Texto de prompt independiente y neutro con respecto al usuario, utilizable en cualquier planificador (Codex-Automations, Claude `/schedule`/Cron, Scheduled Task, n8n).
+- **Skill de flujo de trabajo (Workflow-Skill):** Skill en la biblioteca que describe el proceso y que el prompt de automatización solo invoca o parametriza (preferible si el mismo flujo debe aplicarse a múltiples pipelines/sistemas — fuente única de verdad).
+- **Comando (Command):** Slash-command ligero para la activación manual del mismo flujo.
 
-### 2. Workflow-Kern extrahieren
+### 2. Extraer el núcleo del flujo de trabajo
 
-Aus der Quelle herausarbeiten:
+Identificar y extraer del origen:
 
-- **Kernaufgabe:** Was wird geprüft/gepflegt/erzeugt? (ein Satz)
-- **Auswahllogik:** Worauf wird die Aufgabe angewandt — festes Ziel oder Rotation über eine
-  Menge (ein Projekt pro Lauf)?
-- **Vorbedingungen:** Was muss vor der Arbeit gelesen/geprüft werden (Root-Dokumente,
-  Registries, Locks)?
-- **Dokumentationspflichten:** Wohin werden Ergebnis, Log, Folgeaufgaben geschrieben?
-- **Abbruchpfade:** Wann endet der Lauf read-only („nichts zu tun" ist ein gültiges Ergebnis)?
+- **Tarea principal:** ¿Qué se comprueba, mantiene o genera? (una frase)
+- **Lógica de selección:** ¿A qué se aplica la tarea? ¿Objetivo fijo o rotación sobre un conjunto (un proyecto por ejecución)?
+- **Precondiciones:** ¿Qué debe leerse o comprobarse antes del trabajo (documentos raíz, registros, bloqueos/locks)?
+- **Obligaciones de documentación:** ¿Dónde se escriben los resultados, logs y tareas secundarias/de seguimiento?
+- **Rutas de cancelación:** ¿Cuándo finaliza la ejecución en modo solo lectura ("nada que hacer" es un resultado válido)?
 
-Bei Chatverläufen zusätzlich die Korrekturschleifen auswerten (siehe
-`../skill-extractor/transcript-quellen.md`): Jede User-Korrektur ist ein Kandidat für einen
-Guard, den die Automatisierung künftig selbst braucht.
+En historiales de chat, evaluar además los bucles de corrección (ver `../skill-extractor/transcript-quellen.md`): Cada corrección realizada por el usuario es candidata a convertirse en una protección (guard) que la automatización necesitará por sí misma en el futuro.
 
-### 3. Neutralisieren
+### 3. Neutralizar
 
-Nach den Regeln in `../skill-extractor/neutralisierung.md`: Mechanik von Konfiguration
-trennen, Pfade/Hosts/Projektnamen in einen Konfigurationsblock ziehen. Automations-Prompts
-brauchen den Konfigurationsblock besonders dringend, weil sie wörtlich in Scheduler kopiert
-werden — konkrete Werte gehören an EINE Stelle am Prompt-Anfang.
+Siguiendo las reglas de `../skill-extractor/neutralisierung.md`: Separar la mecánica de la configuración, extraer rutas, hosts y nombres de proyectos a un bloque de configuración. Los prompts de automatización necesitan este bloque de configuración con especial urgencia porque se copian literalmente en los planificadores; los valores concretos deben ubicarse en UN solo lugar al inicio del prompt.
 
-### 4. Automations-Bausteine ergänzen
+### 4. Añadir componentes de automatización
 
-Den extrahierten Kern gegen die Checkliste in `automation-bausteine.md` halten und fehlende
-Bausteine ergänzen — insbesondere Rotations-Auswahl mit Check-Registry, Idempotenz,
-Log-Hygiene, Lock-Respekt, Read-only-Exit und Abschlussbericht. Ein Workflow ohne diese
-Bausteine funktioniert im Test und degeneriert im Dauerbetrieb (Doppelprüfungen, wachsende
-Logs, Kollisionen mit parallelen Agenten).
+Contrastar el núcleo extraído con la lista de verificación de `automation-bausteine.md` y añadir los componentes faltantes — especialmente selección en rotación con registro de comprobación, idempotencia, higiene de logs, respeto a bloqueos (locks), salida en modo solo lectura e informe de cierre. Un flujo de trabajo sin estos componentes funciona en fase de pruebas pero se degrada en operación continua (verificaciones duplicadas, crecimiento desmedido de logs, colisiones con agentes paralelos).
 
-### 5. Takt und Budget setzen
+### 5. Establecer ritmo y presupuesto
 
-- **Frequenz an Änderungsrate koppeln:** Ein Check muss nicht öfter laufen, als sich sein
-  Gegenstand ändert. Erfahrungswert aus gewachsenen Automations-Beständen: Viele anfangs
-  stündliche Checks wurden auf täglich/wöchentlich reduziert — mit Rotations-Auswahl deckt
-  auch ein seltener Takt die ganze Pipeline ab.
-- **Nachtfenster für Schweres**, kurze Read-only-Checks dürfen häufiger.
-- **Kostenbewusstsein:** Jeder Lauf kostet Tokens/Compute; ein Lauf, der meist read-only
-  endet, soll das früh feststellen (Registry lesen VOR teurer Analyse).
+- **Vincular la frecuencia a la tasa de cambios:** Una comprobación no necesita ejecutarse con más frecuencia de la que cambia su objeto. Experiencia en flotas de automatización maduras: Muchas comprobaciones que inicialmente se ejecutaban cada hora se redujeron a frecuencia diaria/semanal; con selección en rotación, incluso un ritmo de baja frecuencia cubre toda la pipeline.
+- **Ventana nocturna para tareas pesadas**, las comprobaciones cortas de solo lectura pueden ser más frecuentes.
+- **Conciencia de costes:** Cada ejecución consume tokens/cómputo; una ejecución que por lo general termina en solo lectura debe determinarlo lo antes posible (leer el registro ANTES del análisis costoso).
 
-### 6. Testen und einsetzen
+### 6. Probar y desplegar
 
-1. **Trockenlauf:** Den fertigen Prompt einmal interaktiv ausführen (als wäre man der
-   Scheduler) und prüfen: Endet er sauber? Schreibt er Registry/Log korrekt? Bleibt er
-   im Scope?
-2. **Grenzfall-Test:** Einen Lauf simulieren, bei dem nichts zu tun ist — er muss read-only
-   mit kurzem Logeintrag enden, nicht „Arbeit erfinden".
-3. **Einsetzen:** In den Ziel-Scheduler eintragen; bei Skill-Form zusätzlich in Bibliothek
-   ablegen und deployen.
-4. **Fehlerpfad beobachten:** Nach den ersten 2–3 echten Läufen Log/Registry kontrollieren —
-   Automatisierungen scheitern am häufigsten an Pfad-Drift (Ziel wurde verschoben) und an
-   wachsenden Logdateien.
+1. **Ejecución en seco (Dry run):** Ejecutar el prompt finalizado una vez de forma interactiva (como si fuera el planificador) y verificar: ¿Finaliza correctamente? ¿Escribe adecuadamente el registro/log? ¿Se mantiene dentro del alcance?
+2. **Prueba de caso límite:** Simular una ejecución en la que no haya nada que hacer: debe finalizar en solo lectura con un registro breve en el log, sin "inventar trabajo".
+3. **Desplegar:** Registrar en el planificador de destino; si es en forma de skill, almacenar además en la biblioteca y desplegar.
+4. **Supervisar rutas de error:** Tras las primeras 2–3 ejecuciones reales, controlar el log/registro — las automatizaciones fallan con mayor frecuencia por desviación de rutas (el objetivo se movió) y por archivos de log desmesurados.
 
-## Fleet-Audit-Modus: eine laufende Automations-Flotte prüfen
+## Modo Fleet-Audit: auditar una flota de automatizaciones en ejecución
 
-Für „prüfe meine Automatisierungen": nicht extrahieren, sondern den BESTAND betreiben
-helfen. Über die Automations-Quelle des Zielsystems (Prompt-/Config-Dateien, Schedules,
-Run-Logs/Memories) systematisch prüfen:
+Para "auditar mis automatizaciones": no extraer, sino ayudar a operar el INVENTARIO EXISTENTE. A través de la fuente de automatizaciones del sistema de destino (archivos de prompt/configuración, programaciones, logs/memorias de ejecución), comprobar de forma sistemática:
 
-1. **Silent-Failure/No-op-Erkennung:** Läuft die Automation, tut aber nichts mehr?
-   (Run-Memories/Logs der letzten Läufe lesen: nur noch Leerläufe, Fehler, tote Pfade?)
-2. **Redundanz + Ertrag:** Überschneiden sich Automationen im Scope? Steht der Ertrag
-   (Output, behobene Befunde) noch im Verhältnis zum Verbrauch (Tokens, Läufe)?
-3. **Drift:** Passen Prompt-Pfade, Konventionen und Schedules noch zur Realität?
-   (Ziele verschoben, Policies geändert, Takt zu hoch für die Änderungsrate.)
-4. **Katalog-Abgleich:** Fehlt eine Automation, die es geben sollte (Lücken im
-   Muster-Raster)? Vorschläge nur freigabe-gegated (Baustein 12), nie selbst scharf schalten.
-5. **Befund-Bericht:** pro Automation eine Zeile (behalten | anpassen | pausieren |
-   zusammenlegen | löschen) + Begründung; Änderungen selbst nur nach Freigabe.
+1. **Detección de fallos silenciosos / No-op:** ¿La automatización se ejecuta pero ya no hace nada? (Leer memorias/logs de ejecuciones recientes: ¿solo ejecuciones en vacío, errores, rutas inactivas?)
+2. **Redundancia + Rendimiento:** ¿Se solapan las automatizaciones en alcance? ¿El rendimiento (output, hallazgos resueltos) sigue siendo proporcional al consumo (tokens, ejecuciones)?
+3. **Desviación (Drift):** ¿Las rutas de los prompts, convenciones y programaciones siguen ajustándose a la realidad? (Objetivos movidos, políticas modificadas, frecuencia demasiado alta para la tasa de cambios.)
+4. **Cotejo con catálogo:** ¿Falta alguna automatización que debería existir (huecos en la matriz de patrones)? Las sugerencias solo deben incluirse condicionadas a aprobación (Componente 12), nunca activarse de forma autónoma.
+5. **Informe de hallazgos:** Una línea por automatización (conservar | adaptar | pausar | consolidar | eliminar) + justificación; realizar cambios solo tras obtener aprobación.
 
-## Bulk-Modus: Automations-Bestände oder viele Transkripte sichten
+## Modo Bulk: revisar inventarios de automatizaciones o múltiples transcripciones
 
-Für „prüfe alle Automationen von System X auf abstrahierbare Workflows" oder „extrahiere
-Automatisierungs-Kandidaten aus alten Chatverläufen":
+Para "revisar todas las automatizaciones del Sistema X en busca de flujos de trabajo abstraibles" o "extraer candidatos de automatización a partir de historiales de chat antiguos":
 
-1. **Datenreduktion wie im skill-extractor** (Map-Reduce über Subagenten,
-   `swarm-operations`-Muster): Pro Bündel ein Subagent, der je Quelle meldet:
-   Kernaufgabe | Muster (z. B. Rotation-Check, Health-Check, Ideen-Mining) |
-   einzigartige Elemente | user-neutral abstrahierbar? | abgedeckt durch existierenden Skill?
-2. **Muster vor Einzelstücken:** Wenn viele Quellen dasselbe Gerüst teilen (z. B. 40
-   Rotations-Checks), wird das GERÜST ein Skill und die Einzelfälle werden Parametrisierungen —
-   nicht 40 Einzel-Skills.
-3. **Dedup gegen die bestehende Skill-/Command-Landschaft**, dann nummerierte
-   Kandidatenliste an den User vor dem Massenbau.
+1. **Reducción de datos como en `skill-extractor`** (Map-Reduce mediante subagentes, patrón `swarm-operations`): Un subagente por paquete que informa según la fuente: Tarea principal | Patrón (p. ej. comprobación en rotación, comprobación de salud, minería de ideas) | Elementos únicos | ¿Abstraible de forma neutra? | ¿Cubierto por un skill existente?
+2. **Patrones sobre casos individuales:** Cuando muchas fuentes comparten la misma estructura base (p. ej., 40 comprobaciones en rotación), la ESTRUCTURA se convierte en un skill y los casos individuales en parametrizaciones — no en 40 skills independientes.
+3. **Deduplicación frente al catálogo existente de skills/comandos**, y posteriormente presentar la lista numerada de candidatos al usuario antes de la creación masiva.
 
-## Ejemplo y Uso & Usage
+## Ejemplo y aplicación
 
 ```text
-User: „Wir haben heute die Zitationsprüfung für ein Paper durchgespielt —
-das soll ab jetzt wöchentlich über alle Paper laufen."
+User: "Hoy probamos la verificación de citas para un artículo — a partir de ahora esto debería ejecutarse semanalmente en todos los artículos."
 
-1. Zielform: Automations-Prompt für den Scheduler + Verweis auf rotation-check.
-2. Kern: Zitate eines Papers gegen Originalquellen prüfen (Web/Datenbank),
-   Korrekturen einpflegen, bei Änderungen Folgeaufgabe „Neu-Upload" in TODO.md.
-3. Neutralisieren: Pipeline-Root, Registry-/Log-Pfade → Konfigurationsblock.
-4. Bausteine ergänzen: Rotations-Auswahl (ein Paper pro Lauf), Registry lesen VOR
-   Auswahl, Read-only-Exit („alle Quellen ok"), Log-Hygiene, Abschlussbericht.
-5. Takt: wöchentlich reicht (Papers ändern sich langsam); Trockenlauf + Leerlauf-Test,
-   dann in den Scheduler.
+1. Forma de destino: Prompt de automatización para el planificador + referencia a rotation-check.
+2. Núcleo: Comprobar las citas de un artículo contra fuentes originales (web/base de datos), aplicar correcciones, en caso de cambios registrar tarea de seguimiento "Re-subir" en TODO.md.
+3. Neutralizar: Raíz del pipeline, rutas de registro/log → bloque de configuración.
+4. Añadir componentes: Selección en rotación (un artículo por ejecución), leer registro ANTES de la selección, salida en solo lectura ("todas las fuentes ok"), higiene de logs, informe de cierre.
+5. Ritmo: Semanal es suficiente (los artículos cambian lentamente); ejecución en seco + prueba de inactividad, luego al planificador.
 ```
 
-## Red Flags
+## Banderas rojas (Red Flags)
 
-| Gedanke | Realität |
+| Pensamiento | Realidad |
 | --- | --- |
-| „Der Ablauf lief in der Session, also läuft er auch als Automation" | Ohne User fehlen alle Korrektive — Bausteine-Checkliste ist Pflicht. |
-| „Stündlich schadet nicht" | Doch: Tokens, Log-Wachstum, Kollisionsrisiko. Takt an Änderungsrate koppeln. |
-| „Ich baue für jede Variante eine eigene Automation" | Gemeinsames Gerüst als Skill, Varianten als Parameter. |
-| „Nichts gefunden — dann suche ich mir eben andere Arbeit" | Read-only-Exit mit Logeintrag ist das korrekte Ergebnis eines Leerlaufs. |
+| "El flujo funcionó en la sesión, por lo que también funcionará como automatización" | Sin el usuario faltan todos los elementos correctivos — la lista de verificación de componentes es obligatoria. |
+| "Ejecutar cada hora no hace daño" | Sí hace daño: tokens, crecimiento de logs, riesgo de colisión. Vincular el ritmo a la tasa de cambios. |
+| "Crearé una automatización independiente para cada variante" | Estructura compartida como skill, variantes como parámetros. |
+| "No se encontró nada — buscaré otro trabajo que hacer" | La salida en modo solo lectura con un registro en el log es el resultado correcto de una ejecución en vacío. |
 
-## Verwandte Skills
+## Skills relacionados
 
-- `skill-extractor` — gleiche Extraktion, Ziel ist ein abrufbarer Skill; teilt
-  Neutralisierung und Transcript-Quellen (dort dokumentiert).
-- `rotation-check` — das Standard-Gerüst für rotierende Pipeline-Checks (häufigster
-  Automations-Typ); als Baustein referenzieren statt neu erfinden.
-- `swarm-operations` — Schwarm-Muster für Bulk-Sichtung.
+- `skill-extractor` — Misma extracción, el destino es un skill invocable; comparte neutralización y fuentes de transcripción (documentado allí).
+- `rotation-check` — Estructura estándar para comprobaciones en rotación de pipelines (el tipo de automatización más común); referenciar como componente en lugar de reinventar.
+- `swarm-operations` — Patrón de enjambre para revisiones masivas.
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 1.1.0 (2026-07-03)
-- Fleet-Audit-Modus (laufende Automations-Flotte prüfen: Silent-Failures, Redundanz,
-  Drift, Lücken) — integriert statt als eigener Skill (Dedup-Entscheid).
-- Drei neue Bausteine in automation-bausteine.md: Freigabe-Gate über Sentinel-Dateien (12),
-  Gestaffelte Eskalation mit Handoff-Artefakt (13), Melde-Disziplin für Monitore (14).
+- Modo Fleet-Audit (auditar flota de automatizaciones en ejecución: fallos silenciosos, redundancia, desviación, vacíos) — integrado en lugar de crear un skill independiente (decisión de deduplicación).
+- Tres nuevos componentes en `automation-bausteine.md`: Puerta de aprobación mediante archivos centinela (12), Escalación gradual con artefacto de traspaso (13), Disciplina de notificación para monitores (14).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus der Abstraktion des Codex-Automations-Bestands
-  (77 Automationen, dominantes Rotations-Check-Muster) in user-neutrale Bausteine.
+- Versión inicial. Creada a partir de la abstracción del inventario de Codex-Automations (77 automatizaciones, patrón dominante de comprobación en rotación) en componentes neutros con respecto al usuario.

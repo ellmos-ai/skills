@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [日本語] エージェントスキル: reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: OSRM（Open Source Routing Machine）を使用した A から B へのルート計画。車、自転車、徒歩に対応。API キー不要。
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -12,119 +12,115 @@ languages: [de, en]
 dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json']}
 runtime: python3
 entry_point: reiseroute_core.py
-provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\\n'}
+provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\n'}
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `reiseroute`.
+> **日本語** — `reiseroute` の公式日本語版。
 
 
+# Travel Route (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Travel Route (English)
-
-**Route planning via OSRM (Open Source Routing Machine)**
+**OSRM（Open Source Routing Machine）によるルート計画**
 
 ---
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Plans routes between two locations (names or coordinates) via the public
-OSRM service (`router.project-osrm.org`). Returns distance, travel time and
-mode of transport. No API key, no account required.
+パブリックな OSRM サービス（`router.project-osrm.org`）を利用して、2 つの場所
+（地名または座標）間のルートを計画します。距離、移動時間、移動手段を返します。
+API キーやアカウントは不要です。
 
 ---
 
-## Triggers
+## トリガー
 
-| Phrase | Action |
+| フレーズ | アクション |
 |---|---|
-| "Plan the route from Berlin to Hamburg" | Car route, geocode place names |
-| "How long does the drive from Munich to Vienna take by car?" | Car route + time |
-| "Cycle route from Potsdam to Berlin" | Bicycle mode |
-| "Walk from Kreuzberg to Mitte, Berlin" | Pedestrian mode |
-| "Route from 52.52,13.41 to 53.55,9.99" | Direct coordinates |
+| 「ベルリンからハンブルクへのルートを計画して」 | 車のルート、地名のジオコーディング |
+| 「ミュンヘンからウィーンまで車でどのくらいかかりますか？」 | 車のルート + 時間 |
+| 「ポツダムからベルリンへのサイクリングルート」 | 自転車モード |
+| 「ベルリンのクロイツベルクからミッテまで徒歩で行く」 | 徒歩モード |
+| 「52.52,13.41 から 53.55,9.99 へのルート」 | 直接座標 |
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
-1. **Extract start and destination** from the user input.
-2. **Detect mode:** car (default), bicycle, foot.
-3. **Geocode:** place names → coordinates via Nominatim.
-4. **Query OSRM:** returns distance (km) + duration (formatted).
-5. **Output result:** concise text summary.
+1. **出発地と目的地を抽出:** ユーザー入力から取得します。
+2. **モードの検出:** 車（デフォルト）、自転車、徒歩。
+3. **ジオコーディング:** Nominatim 経由で地名 → 座標に変換します。
+4. **OSRM への問い合わせ:** 距離（km）+ 所要時間（フォーマット済み）を返します。
+5. **結果の出力:** 簡潔なテキストサマリーを出力します。
 
 ---
 
 ## CLI
 
 ```bash
-# Car route between two places (English)
+# 2地点間の車のルート (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Bicycle (English)
+# 自転車 (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# On foot (English)
+# 徒歩 (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Coordinates directly (lat,lon) (English)
+# 座標を直接指定 (lat,lon) (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON output (English)
+# JSON 出力 (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Munich" "Vienna" --json
 
-# Help (English)
+# ヘルプ (日本語)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 
 ---
 
-## Modes
+## モード
 
-| Mode | Alias | OSRM profile |
+| モード | エイリアス | OSRM プロファイル |
 |---|---|---|
-| auto (default) | car, pkw, fahren | driving |
+| auto（デフォルト） | car, pkw, fahren | driving |
 | fahrrad | bike, rad, radfahren | cycling |
 | fuss | foot, laufen, gehen, zu fuss | foot |
 
 ---
 
-## Store
+## ストレージ
 
-No persistent store. Routes are not saved.
-
----
-
-## Attitude
-
-- Always name start and destination before calculating.
-- Clarify if a place is ambiguous (e.g. "Vienna" = Austria or a city of the same name?).
-- Note: OSRM provides the fastest route without real-time traffic.
-- Issue a note for very long pedestrian routes (> 20 km).
+永続的なストレージはありません。ルートは保存されません。
 
 ---
 
-## Privacy
+## 振る舞い
 
-Requests go to `nominatim.openstreetmap.org` (geocoding) and
-`router.project-osrm.org` (routing). No login, no API key,
-no persistent data storage.
+- 計算する前に、必ず出発地と目的地を明記してください。
+- 地名にあいまいさがある場合は確認してください（例：「ウィーン」＝オーストリアの首都か同名の他の都市か？）。
+- 注意: OSRM はリアルタイム交通情報を考慮しない最短ルートを提供します。
+- 非常に長い徒歩ルート（20 km 超）の場合は注意を促してください。
 
 ---
 
-## Related Resources
+## プライバシー
 
-- `location-suche` — POI search (also uses Nominatim)
-- `wetter` — weather at the destination
+リクエストは `nominatim.openstreetmap.org`（ジオコーディング）および
+`router.project-osrm.org`（ルーティング）に送信されます。ログイン不要、API キー不要、
+データの永続保存なし。
+
+---
+
+## 関連リソース
+
+- `location-suche` — POI 検索（Nominatim を使用）
+- `wetter` — 目的地の天気
 
 ---
 
 ## 変更履歴
 
-| Version | Date | Change |
+| バージョン | 日付 | 変更内容 |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH routing_service.py v1.0; geocoding integrated |
+| 1.0.0 | 2026-06-22 | BACH routing_service.py v1.0 から作成。ジオコーディングを統合 |

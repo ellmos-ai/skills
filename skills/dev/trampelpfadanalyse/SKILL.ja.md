@@ -1,208 +1,172 @@
 ---
+name: trampelpfadanalyse
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-06-21
+updated: 2026-06-21
+description: パイプラインおよび制御ファイルワークフローのエラー分析：規約や手順がLLMにとって実際に可視であり発見可能であるかを確認します。ナイーブなサブエージェント（隔離されたサンドボックスコピー、同一のテストケース、定量的成功測定）を使用した「実証的ベースライン → 介入 → 再テスト比較」。エージェントがルール/README/規約を繰り返し無視したり誤ってナビゲートしたりする場合に、ドキュメントの変更が実際に動作を変えるかを測定するために使用します。'is the convention even seen'、'why does no agent follow the rule'、'make a doc signpost measurably effective'、'trampelpfadanalyse' で起動します。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `trampelpfadanalyse`.
+> **日本語** — `trampelpfadanalyse` の公式日本語版。
 
 
+# 踏み分け道分析 (Desire-Path Analysis) — 規約をLLMにとって実証的に可視化する（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+壊れたコードによるものではなく、**規約がLLMにとって不可視であること**に起因するパイプラインおよび制御ファイルワークフローのエラーを発見する手法。READMEやルールが「十分に明確か」を推測する代わりに、実証的に測定します。事前知識のないナイーブなサブエージェントをワークフロー上に解き放ち、その行動を**ベースライン (Baseline)** とし、ドキュメントへの狙いを絞った変更（「案内標識」）を**介入 (Intervention)** とし、新しいナイーブなサブエージェントが**再テスト (Retest)** を提供します。ベースラインとの差分（Diff）が成功の測定値となります。
 
+名前は*踏み分け道*（ドイツ語: *Trampelpfad*、英語: *Desire path*）に由来します。舗装されたルートではなく人々が実際に歩く場所こそ、道があるべき場所です。同様に、ナイーブなLLMの経路は、私たちが想定する場所ではなく、どこにドキュメントやガードレールが実際に必要とされているかを示します。
 
-# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs (English)
+## このスキルを使用するタイミング
 
-A method for uncovering errors in pipeline and control-file workflows that do not come
-from broken code, but from a **convention being invisible to an LLM**. Instead of
-guessing whether a README or rule is "clear enough", you measure it empirically: naive
-subagents with no prior knowledge are turned loose on the workflow, their behavior
-becomes the **baseline**, a targeted documentation change (a "signpost") is the
-**intervention**, and fresh naive subagents provide the **retest**. The diff against the
-baseline is the success measurement.
+- ドキュメント化されているにもかかわらず、エージェントがルール/規約を繰り返し無視する場合。
+- ドキュメントをさらに書く前に、手順がLLMにとって**可視/発見可能**であるかを知りたい場合（「壁に向かって話している人はいないか？」）。
+- 再構築後（新しいディレクトリ、名前変更後）：エージェントは依然としてエントリーポイントを見つけられるか？
+- ドキュメントを変更し、単に期待するだけでなくそれが効果的であることを**証明**したい場合。
+- 新しいLLMパートナーをパイプラインに統合する前のオンボーディングテスト。
 
-The name comes from the *desire path* (German: *Trampelpfad*): where people actually walk
-instead of on the paved route is where a path belongs. By analogy, the paths of naive
-LLMs show where documentation/guardrails are actually needed — not where we assume them.
+適用外：純粋なコードバグ（→ システム的デバッグ）、または本番タスクのためのスワーム調整パターンの選択（→ `swarm-operations` を参照）。本スキルはナイーブエージェントのスワームを純粋に**測定機器**として使用します。
 
-## When to use this skill
+## 一言で言えばコアコンセプト
 
-- Agents repeatedly ignore a rule/convention even though it is documented.
-- You want to know whether a procedure is **visible/discoverable** to an LLM before
-  writing more docs ("is anyone here talking to a wall?").
-- After a restructuring (new directories, renames): can agents still find the entry points?
-- You made a documentation change and want to **prove** it works — not just hope so.
-- Onboarding test before integrating new LLM partners into a pipeline.
-
-Not for: pure code bugs (→ systematic debugging), or selecting swarm coordination patterns
-for a production task (→ see `swarm-operations`). This skill uses a swarm of naive agents
-exclusively as a **measuring instrument**.
-
-## Core idea in one sentence
-
-Treat documentation like UX: what counts is not what you wrote, but what an unbiased user
-(here: a naive agent) actually does with it — and you measure that, change it, and measure
-again.
+ドキュメントをUX（ユーザーエクスペリエンス）のように扱う：重要なのは何を書いたかではなく、バイアスのないユーザー（ここではナイーブエージェント）が実際にそれで何をするかであり、それを測定し、変更し、再度測定します。
 
 ---
 
-## The process: 5 steps
+## プロセス: 5つのステップ
 
 ```
-1. BASELINE       naive subagents → measure current behavior (quantitative)
-2. PATH ANALYSIS  where exactly does it fail? which doc location misleads?
-3. INTERVENTION   put up a "signpost" (README/convention made more prominent)
-4. RETEST         FRESH naive subagents, identical test case
-5. DIFF           retest vs. baseline → success measurement + honest assessment
+1. ベースライン (BASELINE)     ナイーブサブエージェント → 現在の動作を測定（定量化）
+2. 経路分析 (PATH ANALYSIS)   具体的にどこで失敗しているか？どのドキュメントの場所が誤解を招いているか？
+3. 介入 (INTERVENTION)         「案内標識」を設置（README/規約を目立たせる）
+4. 再テスト (RETEST)          新しいナイーブサブエージェント、同一のテストケース
+5. 差分 (DIFF)                再テスト vs ベースライン → 成功の測定 ＋ 誠実な評価
 ```
 
-### Step 1 — Baseline: measure current behavior naively
+### ステップ 1 — ベースライン: 現在の動作をナイーブに測定する
 
-First phrase the problem as a **testable question**, e.g. "Does an agent create a log at
-the convention-mandated location?" or "Does an agent find the pipeline's entry point?".
+まず問題を**検証可能な問い**として定式化します。例: 「エージェントは規約で定められた場所にログを作成しているか？」あるいは「エージェントはパイプラインのエントリーポイントを見つけられるか？」。
 
-Then turn naive subagents loose:
+次に、ナイーブサブエージェントを投入します：
 
-- **Naive means:** no project memory, no skills, no prior hints — the agent only knows the
-  entry path and the task. This measures **pure discoverability via the existing docs**,
-  not the agent's prior knowledge.
-- **Isolated sandbox copies:** each probe agent works on its own copy of the affected
-  folder/workflow, so probes do not influence each other and the real state stays untouched.
-- **Same test case, multiple repetitions:** variability is real. One probe is an anecdote;
-  n repetitions (e.g. 3, or more if needed) yield a rate.
-- **A cheap, "naive" model** is sufficient and realistic — it should not guess cleverly,
-  but show where the docs lead an average agent.
+- **ナイーブの意味:** プロジェクトの記憶なし、スキルなし、事前ヒントなし — エージェントはエントリーパスとタスクのみを知っています。これはエージェントの事前知識ではなく、**既存のドキュメントを通じた純粋な発見可能性**を測定します。
+- **孤立したサンドボックスコピー:** 各プローブエージェントは影響を受けるフォルダ/ワークフローの独自コピーで作業するため、プローブ同士が影響し合うことはなく、本番状態は手付かずのまま保たれます。
+- **同一のテストケース、複数回の反復:** 変動性はリアルに存在します。1回のプローブはエピソードに過ぎません。n回の反復（例: 3回、必要に応じてそれ以上）が割合をもたらします。
+- **安価で「ナイーブ」なモデル**で十分かつ現実的です — 賢く推測するのではなく、平均的なエージェントをドキュメントがどこへ導くかを示すべきだからです。
 
-Minimal probe prompt (adjust placeholders):
+最小限のプローブプロンプト（プレースホルダーを調整してください）：
 
 ```
-You are exploring <SYSTEM>. It is located at: <PATH>.
-TASK: <specific task>.
-RULES:
-1. You only know the path above, nothing else.
-2. Explore to complete the task. Max. <N> steps.
-3. Report at the end: VISITED_DIRECTORIES, READ_FILES,
-   TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE.
+あなたは <SYSTEM> を探索しています。場所は <PATH> です。
+タスク: <具体的なタスク>。
+ルール:
+1. あなたは上記のパスのみを知っており、他には何も知りません。
+2. タスクを完了するために探索してください。最大 <N> ステップ。
+3. 最後に報告してください: VISITED_DIRECTORIES, READ_FILES,
+   TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE。
 ```
 
-**Record as baseline metrics** (always quantitative, never "feels better"):
+**ベースラインメトリクスとして記録**（常に定量的に、「良くなった気がする」は不可）：
 
-| Metric | Meaning |
+| メトリクス | 意味 |
 |---|---|
-| Success rate | how often the task was completed per convention (e.g. 0/3) |
-| Wrong behavior | how often the wrong location/method (e.g. 3/3 collective log instead of per-entry) |
-| Paths to goal | how many steps/detours to reach the goal |
-| Blind spots | which relevant file/location nobody opens |
+| 成功率 | 規約に従ってタスクが完了した頻度（例: 0/3） |
+| 誤った行動 | 誤った場所/方法が使用された頻度（例: エントリごとの代わりに集合ログが 3/3） |
+| ゴールへの経路 | ゴールに達するまでのステップ数/遠回り数 |
+| ブラインドスポット | 誰も開かなかった関連ファイル/場所 |
 
-### Step 2 — Path analysis: where does it really fail?
+### ステップ 2 — 経路分析: どこで実際に失敗しているか？
 
-Evaluate the probe reports together (a "heatmap" of visited locations is enough):
+プローブレポートを共同で評価します（訪問した場所の「ヒートマップ」で十分です）：
 
-- Which file is read **often** (HOT)? If orientation is missing there, that is the most
-  effective place for a signpost.
-- Which relevant location is **never** opened (COLD / blind spot)? It is effectively
-  invisible — no matter how good its content is.
-- Where does an agent loop or bypass the convention (dead end, circumvention)? That marks
-  the concrete documentation gap.
+- どのファイルが**頻繁に**読まれているか (HOT)？そこに案内が欠けている場合、そこが案内標識を設置するのに最も効果的な場所です。
+- どの関連する場所が**全く**開かれないか (COLD / ブラインドスポット)？どれほど良い内容であっても、実質的に不可視です。
+- エージェントがどこでループに陥っているか、または規約を回避しているか（行き止まり、回避行動）？それが具体的なドキュメントの欠陥を示しています。
 
-Findings table:
+発見事項テーブル：
 
-| Finding | Meaning | Action (→ Step 3) |
+| 発見事項 | 意味 | アクション (→ ステップ 3) |
 |---|---|---|
-| HOT + no orientation | high traffic, no signpost | place the signpost right there |
-| WARM + errors | agents arrive, stumble | add example/clarification |
-| COLD | location is never found | link to it from a HOT file |
-| Circumvention | convention is bypassed | hint at the point of circumvention |
+| HOT + 案内なし | 高アクセス、案内標識なし | まさにそこに案内標識を設置する |
+| WARM + エラー | エージェントが到達するがつまずく | 例/説明を追加する |
+| COLD | 場所が全く見つけられない | HOTファイルからそこへリンクする |
+| 回避行動 | 規約が回避されている | 回避が発生する地点にヒントを追加する |
 
-Outcome of Step 2: **one concrete, localized hypothesis** — "Agents read X, but X does not
-mention the convention; that is why they end up at Y."
+ステップ2の成果: **具体的なローカライズされた仮説** — 「エージェントはXを読んでいるが、Xには規約が記載されていない。そのため彼らはYに到達してしまう。」
 
-### Step 3 — Intervention: put up a signpost
+### ステップ 3 — 介入: 案内標識を設置する
 
-Put up **exactly one** signpost (one variable per pass, otherwise the diff is not
-interpretable). Typical signposts:
+**正確に1つの**案内標識を設置します（1回のパスにつき1つの変数。そうでなければDiffを解釈できません）。典型的な案内標識：
 
-- Place the convention **prominently where the HOT path already passes** (e.g. a short,
-  explicit hint at the very top of the most-read README/control file).
-- A **quick-navigation table** at the start of the central architecture/overview file that
-  points to former blind spots.
-- A **signpost/cross-reference** from a HOT file to a COLD location.
-- Optionally a **guardrail** (e.g. a PreToolUse hint) for dangerous or convention-violating
-  actions.
+- HOTパスが**既に通過している目立つ場所**に規約を配置する（例: 最も読まれているREADME/制御ファイルの最上部に短い明示的なヒント）。
+- 以前のブラインドスポットを指し示す、中央アーキテクチャ/概要ファイルの冒頭の**クイックナビゲーション表**。
+- HOTファイルからCOLDな場所への**案内標識/相互参照**。
+- オプションで、危険なアクションや規約に違反するアクションに対する**ガードレール**（例: PreToolUseヒント）。
 
-Keep the signpost short and unmissable — agents skim, they rarely read at length.
+案内標識は短く見逃せないものにしてください — エージェントは流し読みをし、長文を精読することは滅多にありません。
 
-### Step 4 — Retest with FRESH naive subagents
+### ステップ 4 — 新しいナイーブサブエージェントによる再テスト
 
-Repeat Step 1 **identically** — same task, same number of repetitions, same model, same
-naive condition — but on sandbox copies **with** the new signpost. Important:
+ステップ1を**全く同じように**繰り返します — 同一のタスク、同一の反復回数、同一のモデル、同一のナイーブ条件 — ただし新しい案内標識を**含む**サンドボックスコピー上で実施します。重要：
 
-- **Fresh** agents with no memory of the baseline run (otherwise you measure learning, not
-  discoverability).
-- **Only the signpost** differs from the baseline setup.
+- ベースライン実行の記憶を持たない**新しい**エージェント（そうでなければ可視性ではなく学習を測定することになります）。
+- ベースライン設定との違いは**案内標識のみ**。
 
-### Step 5 — Diff against baseline + honest success measurement
+### ステップ 5 — ベースラインとの差分 ＋ 誠実な成功測定
 
-Put retest and baseline directly side by side:
+再テストとベースラインを直接横に並べます：
 
-| Metric | Baseline | After signpost | Δ |
+| メトリクス | ベースライン | 案内標識設置後 | Δ |
 |---|---|---|---|
-| Success rate | e.g. 0/3 | e.g. 3/3 | +3 |
-| Wrong behavior | e.g. 3/3 | e.g. 0/3 | −3 |
-| Blind spots | e.g. 1 | e.g. 0 | −1 |
+| 成功率 | 例: 0/3 | 例: 3/3 | +3 |
+| 誤った行動 | 例: 3/3 | 例: 0/3 | −3 |
+| ブラインドスポット | 例: 1 | 例: 0 | −1 |
 
-Assessment — and do not sugarcoat here:
+評価 — ここでは結果を美化しないでください：
 
-- **Works** (wrong behavior measurably drops): keep the signpost, document it.
-- **Does not work** (little Δ): the signpost was in the wrong place or too subtle → back to
-  Step 2/3, different signpost, measure again.
-- **State limits openly:** small n are indicators, not proofs; a naive agent models "average
-  uninformed", not every real user; explicitly check for false positives/negatives in the
-  success scoring (what exactly counted as "completed"?).
+- **効果あり**（誤った行動が測定可能なレベルで減少）：案内標識を保持し、ドキュメント化する。
+- **効果なし**（Δ がわずか）：案内標識の場所が間違っていたか、控えめすぎた → ステップ2/3に戻り、別の案内標識を試して再測定。
+- **限界を率直に開示する:** 小さいサンプル数 n は指標であり証明ではありません。ナイーブエージェントは「情報を得ていない平均的なユーザー」をモデル化しているのであり、すべての実ユーザーではありません。成功スコアリングにおける偽陽性/偽陰性を明示的にチェックしてください（何が正確に「完了」とカウントされたか？）。
 
 ---
 
-## Mini case study (real, with actual numbers)
+## ミニケーススタディ（実データ付きの現実の例）
 
-Problem: A ticket pipeline mandated that trivial completions each get **one** dedicated
-per-ticket log — but agents instead put everything into **one collective log**.
+問題: チケットパイプラインは、軽微な完了に対してもそれぞれ**1つ**の専用のチケットごとのログを義務付けていましたが、エージェントはすべてを**1つの集合ログ**にまとめてしまっていました。
 
-- **Step 1 (baseline):** 3 naive subagents, same task → **3/3 used the collective log**
-  (convention not followed).
-- **Step 2 (path analysis):** the most-read README did not mention the per-ticket rule at a
-  visible spot → the naive path led to the collective log.
-- **Step 3 (intervention):** a short, explicit "signpost" about the logging convention
-  placed prominently in the README.
-- **Step 4 (retest):** 3 fresh naive subagents, identical task.
-- **Step 5 (diff):** **3/3 wrong → 0/3 wrong**, all three created a correct per-ticket log.
-  (Documented in ticket T-20260621-44.)
+- **ステップ 1（ベースライン）:** 3つのナイーブサブエージェント、同一タスク → **3/3が集合ログを使用**（規約が守られず）。
+- **ステップ 2（経路分析）:** 最も読まれているREADMEの目立つ場所にチケットごとのルールが記載されていなかった → ナイーブな経路が集合ログへと導いていた。
+- **ステップ 3（介入）:** ログ規約に関する短く明示的な「案内標識」をREADMEの目立つ場所に設置。
+- **ステップ 4（再テスト）:** 3つの新しいナイーブサブエージェント、同一タスク。
+- **ステップ 5（差分）:** **3/3誤り → 0/3誤り**、3つすべてが正しくチケットごとのログを作成した。（チケット T-20260621-44 に記録。）
 
-Lesson: The convention was not "worded too weakly" — it was **invisible** on the path that
-was actually read. The signpost in the right place, empirically verified, solved the problem.
+教訓: 規約は「弱い表現で書かれていた」のではなく、実際に読まれていた経路において**不可視**でした。適切な場所への実証的に検証された案内標識が問題を解決しました。
 
 ---
 
-## Source and related methods
+## 出典と関連手法
 
-This method comes from Desire-Path Analysis v2.0 (swarm as an empirical measuring instrument
-for LLM behavior). The original reference results of a large run (100 naive probes) are
-documented as evidence from the source: the biggest blind spot was a help directory that
-**0/100** agents visited (despite many help files), and the task "create a new skill"
-succeeded **0%** because nobody found the templates directory — both classic visibility, not
-content, problems.
+この手法は Desire-Path Analysis v2.0（LLMの振る舞いに対する実証的測定機器としてのスワーム）から来ています。大規模実行（100回のナイーブプローブ）の元の参照結果は出典の証拠として記録されています。最大のブラインドスポットはヘルプディレクトリであり、多くのヘルプファイルが存在したにもかかわらず**0/100**のエージェントしか訪問しませんでした。また「新しいSkillを作成する」というタスクは誰もテンプレートディレクトリを見つけられなかったため成功率**0%**でした — どちらもコンテンツではなく可視性の典型的な問題です。
 
-## See also
+## 関連事項
 
-- `swarm-operations` (dev) — catalog of swarm **coordination patterns** for production
-  tasks; it carries desire-path analysis only as a conceptual section. This skill is the
-  applicable **process** variant with a baseline→retest loop.
-- `pipeline-optimizer` (dev) — 6-step pipeline renovation; its retest with fresh subagents
-  corresponds to Steps 4–5 here.
-- `bugfix-protocol` / systematic debugging — for real code bugs rather than visibility
-  problems.
+- `swarm-operations` (dev) — 本番タスク向けのスワーム**調整パターン**のカタログ。踏み分け道分析は概念的セクションとしてのみ含まれています。本スキルは ベースライン→再テスト ループを伴う適用可能な**プロセス**バリエーションです。
+- `pipeline-optimizer` (dev) — 6ステップのパイプライン刷新。新しいサブエージェントによる再テストはここのステップ4〜5に対応します。
+- `bugfix-protocol` / システム的デバッグ — 可視性の問題ではなく実際のコードバグを対象とします。
 
 ## 変更履歴
 
 ### 0.1.0 (2026-06-21)
-- Initial port from Desire-Path Analysis v2.0 (source: swarm-ai/BACH).
-- Focused on the applicable 5-step process (baseline → path analysis → intervention →
-  retest → diff); swarm coordination patterns deliberately omitted (they stay in
-  `swarm-operations`). User-neutral with placeholders; real mini case study.
+- Desire-Path Analysis v2.0 からの初期移植（出典: swarm-ai/BACH）。
+- 適用可能な5ステッププロセス（ベースライン → 経路分析 → 介入 → 再テスト → 差分）に焦点を当て、スワーム調整パターンは意図的に除外（それらは `swarm-operations` に残ります）。プレースホルダー付きのユーザー中立的な設計、実際のミニケーススタディ。

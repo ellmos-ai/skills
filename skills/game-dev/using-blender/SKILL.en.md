@@ -18,51 +18,47 @@ status: active
 provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `using-blender`.
 
+# Using Blender
 
-> **English Translation** — Official English version of `using-blender`.
+## Core Rule
 
+Work with Blender in three modes, appropriate to the task:
 
-# Using Blender (English)
+1. **GUI Mode:** Open Blender visibly when the user wants to view, inspect, or manually edit an asset.
+2. **Headless Mode:** Use `blender --background --python <script.py>` when export, re-import, batch processing, or deterministic validation is required.
+3. **MCP Mode:** Only use when a running Blender add-on is intentionally connected and live scene control is necessary. Check security and licensing status beforehand.
 
-## Kernregel
+## Standard Workflow
 
-Arbeite mit Blender in drei Modi, passend zur Aufgabe:
+1. Clarify goal: view, create, convert, optimize, render, or verify.
+2. Read existing files: Manifest, README, export formats, and existing validation results first.
+3. Determine Blender path: `blender` on PATH, project-specific configuration, or user path. Do not write local private paths into publishable documentation.
+4. For automation, use a small `bpy` script that makes inputs, outputs, and errors explicit.
+5. After every export, execute at least one re-import or loading check before considering the result usable.
+6. Document artifacts concisely: Source, export formats, tool version, verification status, and known limitations.
 
-1. **GUI-Modus:** Blender sichtbar öffnen, wenn der Nutzer ein Asset anschauen, beurteilen oder manuell weiterbearbeiten will.
-2. **Headless-Modus:** `blender --background --python <script.py>` nutzen, wenn Export, Reimport, Batch-Verarbeitung oder deterministische Prüfung gefragt ist.
-3. **MCP-Modus:** Nur verwenden, wenn ein laufendes Blender-Addon bewusst verbunden ist und Live-Szenensteuerung nötig ist. Vorher Sicherheits- und Lizenzlage prüfen.
+## Export and Validation Rules
 
-## Standardablauf
+- Prefer `.glb` for general web/preview use.
+- Offer `.fbx` or `.obj/.mtl` additionally for game engines and DCC exchange if the target workflow requires it.
+- Always check roundtrips: file exists, is non-empty, can be re-imported, and expected object/material names are present.
+- For large assets, gather metrics: mesh count, materials, bounding box, file size, and optionally triangle count.
+- For render checks, use a small preview resolution before starting expensive Cycles or Full HD renders.
 
-1. Ziel klären: ansehen, erzeugen, konvertieren, optimieren, rendern oder verifizieren.
-2. Bestehende Dateien lesen: Manifest, README, Exportformate und vorhandene Prüfergebnisse zuerst.
-3. Blender-Pfad ermitteln: `blender` auf PATH, projektspezifische Konfiguration oder Nutzerpfad. Keine lokalen Privatpfade in publizierbare Doku schreiben.
-4. Für Automatisierung ein kleines `bpy`-Script verwenden, das Eingaben, Ausgaben und Fehler explizit macht.
-5. Nach jedem Export mindestens einen Reimport- oder Ladecheck ausführen, bevor das Ergebnis als nutzbar gilt.
-6. Artefakte knapp dokumentieren: Quelle, Exportformate, Toolversion, Prüfstatus und bekannte Grenzen.
+## Security Rules
 
-## Export- und Prüfregeln
+- `bpy` code is local Python code with filesystem access. Only execute self-written or audited scripts.
+- Do not enable external Blender add-ons, asset downloaders, or telemetry servers without checking licenses and data privacy.
+- For MCP servers with an arbitrary `execute_python` tool, limit scope, network, working directory, and timeout beforehand.
+- For marketplace or external assets, verify the license separately. Technical loadability does not replace usage rights.
 
-- Für allgemeine Web-/Preview-Nutzung bevorzugt `.glb`.
-- Für Game-Engines und DCC-Austausch zusätzlich `.fbx` oder `.obj/.mtl` anbieten, wenn der Zielworkflow das braucht.
-- Für Roundtrips immer prüfen: Datei existiert, nicht leer, kann reimportiert werden, erwartete Objekt-/Materialnamen sind vorhanden.
-- Für große Assets Metriken erfassen: Mesh-Anzahl, Materialien, Bounding Box, Dateigröße und optional Triangle Count.
-- Für Renderprüfungen kleine Preview-Auflösung verwenden, bevor teure Cycles- oder Full-HD-Renders gestartet werden.
+## MCP Options
 
-## Sicherheitsregeln
-
-- `bpy`-Code ist lokaler Python-Code mit Dateisystemzugriff. Nur selbst geschriebene oder auditierte Scripts ausführen.
-- Keine fremden Blender-Addons, Asset-Downloader oder Telemetrie-Server aktivieren, ohne Lizenz- und Datenschutzcheck.
-- Bei MCP-Servern mit beliebigem `execute_python`-Tool vorher Scope, Netzwerk, Arbeitsverzeichnis und Timeout begrenzen.
-- Bei Marketplace- oder externen Assets die Lizenz separat prüfen. Die technische Ladefähigkeit ersetzt keine Nutzungsrechte.
-
-## MCP-Optionen
-
-Für Live-Steuerung lies [references/blender-mcp-review.md](references/blender-mcp-review.md), wenn ein Blender-MCP-Server ausgewählt, installiert oder bewertet werden soll.
+For live control, read [references/blender-mcp-review.md](references/blender-mcp-review.md) when a Blender MCP server needs to be selected, installed, or evaluated.
 
 ## Changelog
 
 ### 1.0.0 (2026-06-20)
-- Initialer nutzeragnostischer Blender-Skill mit GUI-, Headless- und MCP-Routing.
+- Initial user-agnostic Blender skill with GUI, headless, and MCP routing.

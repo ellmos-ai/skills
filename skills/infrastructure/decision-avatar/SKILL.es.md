@@ -2,61 +2,41 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `decision-avatar`.
+> **Español** — Versión oficial en español de `decision-avatar`.
 
+# Decision Avatar
 
+## Descripción general y propósito
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Esta habilidad no imita a una persona. Proporciona un procedimiento verificable para derivar una preferencia probable en tipos de decisión recurrentes a partir de evidencias reales y autorizadas.
 
+Utilízala solo si existe un perfil de decisión local y su uso está permitido para la tarea actual. Sin perfil, la habilidad no proporciona ninguna decisión por delegación.
 
-> **English Translation** — Official English version of `decision-avatar`.
+El uso solo se considera autorizado si el encargo, las reglas de agente vigentes o los metadatos del perfil permiten expresamente el propósito actual. La mera accesibilidad de un archivo de perfil no constituye consentimiento.
 
+## Principios fundamentales
 
-# Decision Avatar (English)
+1. **Evidencia sobre suposición.** Las declaraciones directas y las decisiones confirmadas tienen más peso que los patrones derivados.
+2. **La predicción no es una declaración de la persona.** Los resultados del agente no deben volver al perfil como nuevas evidencias primarias.
+3. **Decidir no es ejecutar.** Una recomendación puede ser firme aunque su implementación requiera autoridad adicional.
+4. **El consentimiento silencioso no es retroalimentación.** La falta de objeción no confirma una predicción.
+5. **Los perfiles permanecen locales y privados.** No transferir datos personales, secretos o contenido confidencial a archivos de habilidades compartidos.
 
-## Descripción General y Propósito & Purpose
+## Modelo de perfil portable
 
-Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
-bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
-aus echten, autorisierten Belegen abzuleiten.
+Los nombres de archivo son libremente configurables; solo se requieren estas funciones:
 
-Nutze ihn nur, wenn ein lokales Entscheidungsprofil vorhanden und dessen Nutzung
-für die aktuelle Aufgabe zulässig ist. Ohne Profil liefert der Skill keine
-stellvertretende Entscheidung.
-
-Die Nutzung gilt nur dann als autorisiert, wenn Auftrag, geltende Agentenregel
-oder Profilmetadaten den aktuellen Zweck ausdrücklich erlauben. Bloße
-Erreichbarkeit einer Profildatei ist keine Einwilligung.
-
-## Kernprinzipien
-
-1. **Beleg vor Vermutung.** Direkte Aussagen und bestätigte Entscheidungen wiegen
-   stärker als abgeleitete Muster.
-2. **Vorhersage ist keine Aussage der Person.** Agentenausgaben dürfen nicht als
-   neue Primärbelege in das Profil zurückfließen.
-3. **Entscheiden ist nicht Ausführen.** Eine Empfehlung kann bestimmt sein, obwohl
-   ihre Umsetzung zusätzliche Autorität braucht.
-4. **Stille Zustimmung ist kein Feedback.** Ausbleibender Widerspruch bestätigt
-   keine Vorhersage.
-5. **Profile bleiben lokal und privat.** Keine personenbezogenen Daten, Secrets
-   oder sensiblen Inhalte in geteilte Skill-Dateien übernehmen.
-
-## Portables Profilmodell
-
-Die Dateinamen sind frei konfigurierbar; benötigt werden nur diese Rollen:
-
-| Rolle | Inhalt |
+| Función | Contenido |
 |---|---|
-| Methodik | Evidenzstufen, Datenschutz und Kalibrierungsregeln |
-| Belegte Präferenzen | direkte Aussagen und bestätigte Entscheidungen |
-| Hypothesen | abgeleitete Regeln mit Konfidenz und Quellen |
-| Aktionen | aufgrund einer Vorhersage getroffene Handlungen |
-| Feedback | Bestätigung, Korrektur oder Ablehnung durch die Person |
+| Metodología | Niveles de evidencia, privacidad de datos y reglas de calibración |
+| Preferencias evidenciadas | Declaraciones directas y decisiones confirmadas |
+| Hipótesis | Reglas derivadas con confianza y fuentes |
+| Acciones | Acciones tomadas en función de una predicción |
+| Retroalimentación | Confirmación, corrección o rechazo por parte de la persona |
 
-Projektbezogene, aktuellere Entscheidungen haben Vorrang vor allgemeinen
-Präferenzen.
+Las decisiones más recientes relacionadas con el proyecto tienen prioridad sobre las preferencias generales.
 
-Jeder verwertete Beleg sollte mindestens enthalten:
+Cada evidencia evaluada debe contener como mínimo:
 
 ```text
 Quellen-ID:
@@ -66,59 +46,49 @@ Status: bestätigt/korrigiert/widerrufen
 Gültig bis: <optional>
 ```
 
-Widerrufene, abgelaufene oder außerhalb ihres Gültigkeitsbereichs liegende Belege
-nicht verwenden. Bei widersprüchlichen bestätigten Belegen gewinnt zunächst der
-spezifischere und danach der aktuellere. Bleibt der Konflikt bestehen, Konfidenz
-auf „niedrig“ setzen und eskalieren.
+No utilizar evidencias revocadas, expiradas o fuera de su ámbito de validez. En caso de evidencias confirmadas contradictorias, prevalece primero la más específica y luego la más reciente. Si el conflicto persiste, establecer la confianza en "baja" y escalar.
 
-## Entscheidungsloop
+## Bucle de decisión
 
-### 0. Lokale Vorrangregel prüfen
+### 0. Verificar la regla de prioridad local
 
-Gibt es für das aktuelle Projekt oder den konkreten Entscheidungstyp eine
-bestätigte Regel, nutze diese und dokumentiere ihre Quelle.
+Si existe una regla confirmada para el proyecto actual o el tipo de decisión concreto, utilízala y documenta su fuente.
 
-### 1. Echte Evidenz suchen
+### 1. Buscar evidencia real
 
-Nur Belege verwenden, die nach der lokalen Methodik zulässig sind. Aufgabenlisten,
-Agentenprotokolle, frühere Avatar-Antworten und Argumente der aktuellen Sitzung
-sind keine Aussagen der Person.
+Utilizar solo evidencias permitidas según la metodología local. Las listas de tareas, registros de agentes, respuestas anteriores del avatar y argumentos de la sesión actual no son declaraciones de la persona.
 
-### 2. Vorhersage bilden
+### 2. Formular la predicción
 
-Ergebnis stets mit Begründung und einer von drei Stufen ausgeben:
+Emitir siempre el resultado con una justificación y uno de los tres niveles de confianza:
 
-- **hoch:** mehrere direkte, konsistente und einschlägige Belege,
-- **mittel:** plausibles Muster mit begrenzter oder indirekter Evidenz,
-- **niedrig:** neuartige Lage, widersprüchliche Belege oder kein belastbares
-  Muster.
+- **alta:** múltiples evidencias directas, coherentes y relevantes,
+- **media:** patrón plausible con evidencia limitada o indirecta,
+- **baja:** situación novedosa, evidencias contradictorias o ausencia de un patrón sólido.
 
-Folgenreiche Entscheidungen sind nicht automatisch „niedrig“. Konfidenz misst
-die Evidenz für die Präferenz, nicht die Reichweite der späteren Ausführung.
+Las decisiones con grandes consecuencias no son automáticamente de confianza "baja". La confianza mide la evidencia a favor de la preferencia, no el alcance de la ejecución posterior.
 
-### 3. Modus trennen
+### 3. Separar modos
 
-| Modus | Ergebnis | Seiteneffekt |
+| Modo | Resultado | Efecto secundario |
 |---|---|---|
-| Vorhersagen | wahrscheinliche Position + Belege + Konfidenz | keiner |
-| Entscheiden | konkrete Wahl + Begründung + Konfidenz | keiner |
-| Handeln | autorisierte, sichere Umsetzung + Aktionsprotokoll | möglich |
+| Predecir | Posición probable + evidencias + confianza | Ninguno |
+| Decidir | Elección concreta + justificación + confianza | Ninguno |
+| Actuar | Implementación autorizada y segura + registro de acciones | Posible |
 
-Im Handlungsmodus gelten zusätzlich die Autoritäts- und Sicherheitsregeln der
-Runtime. Niedrige Konfidenz oder fehlende Ausführungsbefugnis führt zur
-Eskalation, nicht zur stillen Ausführung.
+En el modo de acción, se aplican además las reglas de autoridad y seguridad del entorno de ejecución (runtime). Una confianza baja o la falta de autorización de ejecución conduce a la escalación, no a la ejecución silenciosa.
 
-### 4. Feedback kalibrieren
+### 4. Calibrar la retroalimentación
 
-Nach echtem Feedback:
+Tras recibir retroalimentación real:
 
-1. Vorhersage als bestätigt, korrigiert oder abgelehnt markieren.
-2. Optional eine Bewertungsskala erfassen.
-3. Unterschied zwischen Richtungsfehler und Zuschnittfehler festhalten.
-4. Hypothese und Konfidenz anpassen.
-5. Nur echte Rückmeldung in die belegten Präferenzen übernehmen.
+1. Marcar la predicción como confirmada, corregida o rechazada.
+2. Opcionalmente, registrar una escala de valoración.
+3. Registrar la diferencia entre error de dirección y error de encuadre.
+4. Ajustar la hipótesis y la confianza.
+5. Transferir únicamente la retroalimentación real a las preferencias evidenciadas.
 
-## Ausgabeformat
+## Formato de salida
 
 ```text
 Entscheidungstyp:
@@ -131,23 +101,17 @@ Ausführung autorisiert: ja/nein
 Nächster Schritt:
 ```
 
-In Ausgaben nur redigierte Quellen-IDs und die für die Entscheidung notwendige
-Belegzusammenfassung nennen. Keine privaten Aussagen, absoluten Profilpfade oder
-sensiblen Rohdaten wiedergeben.
+En las salidas, incluir únicamente IDs de origen redactados y el resumen de evidencias necesario para la decisión. No reproducir declaraciones privadas, rutas absolutas de perfiles ni datos confidenciales sin procesar.
 
-## Grenzen
+## Limitaciones
 
-- Keine Diagnostik oder Behauptung über innere Zustände einer Person.
-- Keine Nutzung eines Profils außerhalb seines erlaubten Zwecks.
-- Keine automatische Übernahme von Agentenannahmen als Personenwissen.
-- Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
-  erforderlich wäre.
+- Sin diagnósticos ni afirmaciones sobre los estados internos de una persona.
+- Sin uso de un perfil fuera de su propósito permitido.
+- Sin adopción automática de las suposiciones del agente como conocimiento personal.
+- Sin ejecución basada únicamente en una predicción si para ello se requiriera nueva autoridad.
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 1.0.0 (2026-07-28)
-- Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer
-  persönlichen Avatar-Konfiguration als eigenständiges, portables Protokoll
-  extrahiert.
-- Autorisierung, Beleglebenszyklus, Konfliktauflösung und redigierte Ausgabe
-  operationalisiert.
+- Extracción de la precognición de retroalimentación, la calibración de confianza y la separación de procedencia desde una configuración de avatar personal como un protocolo independiente y portable.
+- Operacionalización de la autorización, el ciclo de vida de las evidencias, la resolución de conflictos y la salida redactada.

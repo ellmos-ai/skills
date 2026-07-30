@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-06-13
-description: [Русский] Навык агента для model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+description: Мультимодельная оркестрация и стратегия переключения моделей. Выбор модели на основе оценки (score), делегирование между агентами (Gemini, Codex, Ollama), связывание с советником (advisor), триггеры эскалации, матрица прав и оптимизация стоимости.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,258 +15,254 @@ tags: [model-switching, orchestration, multi-model, cost-optimization, routing, 
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `model-strategy`.
+> **Русский** — Официальная русская версия `model-strategy`.
 
 
+# Стратегия переключения моделей (Model-Switching Strategy) (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Model-Switching Strategy (English)
-
-> Multi-model orchestration: score-based model selection, cross-agent delegation, advisor pairing, escalation triggers, and cost-efficiency optimization
+> Мультимодельная оркестрация: выбор модели на основе оценки, делегирование между агентами, связывание с советником, триггеры эскалации и оптимизация стоимости.
 
 ---
 
-## 1. Model catalog
+## 1. Каталог моделей
 
-### Claude (subagent-capable via the Agent tool)
-
-```
-Level 4 (Reviewer):   Opus 4.8  — advisor, math review     [user only: /model, /advisor]
-Level 3 (Strategist): Opus 4.6  — architecture, concepts   [subagent: model:"opus"]
-Level 3 (Creative):   Fable 5   — creative texts, stories  [subagent: model:"fable"]
-Level 2 (Workhorse):  Sonnet 4.6— implementation, debug    [subagent: model:"sonnet"]
-Level 1 (Fast):       Haiku 4.5 — boilerplate, formatting  [subagent: model:"haiku"]
-```
-
-### External agents (companion scripts / SSH)
+### Claude (способны запускать субагентов через инструмент Agent)
 
 ```
-Level 2-3: Gemini 3.5 pro  — research, scientific databases [agy-companion CLI]
-Level 2:   Gemini 3.5 flash— fast research                  [agy-companion CLI]
-Level 2-3: Codex 5.5 (GPT) — code review, code generation   [codex-companion CLI]
-Level 2:   Codex 4.5 (GPT) — simpler code tasks             [codex-companion CLI]
+Уровень 4 (Рецензент): Opus 4.8  — советник, математический анализ [только пользователь: /model, /advisor]
+Уровень 3 (Стратег):   Opus 4.6  — архитектура, концепции        [субагент: model:"opus"]
+Уровень 3 (Творческий):Fable 5   — творческие тексты, истории   [субагент: model:"fable"]
+Уровень 2 (Рабочий):   Sonnet 4.6— реализация, отладка          [субагент: model:"sonnet"]
+Уровень 1 (Быстрый):   Haiku 4.5 — шаблонный код, форматирование [субагент: model:"haiku"]
 ```
 
-### Local models (token-free, 24/7)
+### Внешние агенты (скрипты-компаньоны / SSH)
 
 ```
-Level 1-2: Ollama (Qwen 3.5:35b-a3b) — Haiku-to-Sonnet level [<ollama-host>:11434]
-           Invocation: SSH + curl http://<ollama-host>:11434/v1/chat/completions
-           Or: delegation via an agent-system control API (if available)
+Уровень 2-3: Gemini 3.5 pro  — исследования, научные базы данных [CLI agy-companion]
+Уровень 2:   Gemini 3.5 flash— быстрые исследования              [CLI agy-companion]
+Уровень 2-3: Codex 5.5 (GPT) — ревью кода, генерация кода       [CLI codex-companion]
+Уровень 2:   Codex 4.5 (GPT) — более простые задачи по коду     [CLI codex-companion]
 ```
 
-### Reachability matrix
+### Локальные модели (без токенов, 24/7)
 
-| Model | LLM-startable | Invocation path | Constraints |
-|-------|---------------|-----------------|-------------|
-| Sonnet 4.6 | Yes | `Agent(model:"sonnet")` | — |
-| Opus 4.6 | Yes | `Agent(model:"opus")` | — |
-| Haiku 4.5 | Yes | `Agent(model:"haiku")` | — |
-| Fable 5 | Yes | `Agent(model:"fable")` | — |
-| Opus 4.8 | Advisor only | `advisor()` in session | user must set `/advisor` |
-| Gemini 3.5 | Yes (Bash) | `companion-for-agy "prompt"` | Windows-only, stdout workaround |
-| Codex 5.5/4.5 | Yes (Bash) | `node codex-companion.mjs task "prompt"` | auth required |
-| Ollama | Yes (SSH/curl) | SSH + curl to the Ollama host API | VPN/Tailscale must be active |
-| Opus 4.8 as main model | No | user: `/model opus 4.8` | user action only |
-| Fable 5 as main model | No | user: `/model fable` | user action only |
+```
+Уровень 1-2: Ollama (Qwen 3.5:35b-a3b) — уровень от Haiku до Sonnet [<ollama-host>:11434]
+             Вызов: SSH + curl http://<ollama-host>:11434/v1/chat/completions
+             Или: делегирование через API управления агентами (при наличии)
+```
+
+### Матрица доступности
+
+| Модель | Запускается LLM | Путь вызова | Ограничения |
+|--------|-----------------|-------------|-------------|
+| Sonnet 4.6 | Да | `Agent(model:"sonnet")` | — |
+| Opus 4.6 | Да | `Agent(model:"opus")` | — |
+| Haiku 4.5 | Да | `Agent(model:"haiku")` | — |
+| Fable 5 | Да | `Agent(model:"fable")` | — |
+| Opus 4.8 | Только как советник | `advisor()` в сессии | пользователь должен задать `/advisor` |
+| Gemini 3.5 | Да (Bash) | `companion-for-agy "prompt"` | только Windows, обходной путь через stdout |
+| Codex 5.5/4.5 | Да (Bash) | `node codex-companion.mjs task "prompt"` | требуется авторизация |
+| Ollama | Да (SSH/curl) | SSH + curl к API хоста Ollama | должен быть активен VPN/Tailscale |
+| Opus 4.8 как главная модель | Нет | пользователь: `/model opus 4.8` | только действие пользователя |
+| Fable 5 как главная модель | Нет | пользователь: `/model fable` | только действие пользователя |
 
 ---
 
-## 2. Score computation
+## 2. Расчет оценки (Score)
 
 ```
-Dimensions (0-10):
-  CLARITY     : How unambiguous is the task?
-  COMPLEXITY  : How many components?
-  CREATIVITY  : New solutions needed?
-  CONTEXT     : How much prior knowledge?
-  CRITICALITY : How important is perfection?
+Измерения (0-10):
+  CLARITY     : Насколько однозначна задача?
+  COMPLEXITY  : Сколько компонентов?
+  CREATIVITY  : Нужны ли новые решения?
+  CONTEXT     : Сколько требуется предварительных знаний?
+  CRITICALITY : Насколько важна идеальность результата?
 
 SCORE = (10 - CLARITY) + COMPLEXITY + CREATIVITY + CONTEXT + CRITICALITY
 ```
 
-### Score thresholds
+### Пороговые значения оценки
 
-| Score | Model | Examples |
-|-------|-------|----------|
-| 0-8 | Ollama (local host) | prompt generation, summaries, simple texts |
-| 9-12 | Haiku | __init__.py, formatting, boilerplate |
-| 13-22 | Sonnet | implementation, bug fixes, standard code |
-| 13-22 | Gemini 3.5 | research, literature search, scientific databases |
-| 13-22 | Codex 5.5 | code generation (Luau, Node.js), compute scripts |
-| 23-28 | Sonnet + advisor review | complex code with quality check |
-| 23-35 | Fable 5 | creative texts, marketing, storytelling |
-| 29-40 | Opus 4.6 | architecture, strategy, paper writing |
-| 35-50 | Opus 4.6 + advisor | proofs, architecture decisions, statistics |
-| 40-50 | Opus 4.8 (user recommendation) | mathematical proof work, highest rigor |
+| Оценка (Score) | Модель | Примеры |
+|----------------|--------|---------|
+| 0-8 | Ollama (локальный хост) | генерация промптов, саммари, простые тексты |
+| 9-12 | Haiku | __init__.py, форматирование, шаблонный код |
+| 13-22 | Sonnet | реализация, исправление багов, стандартный код |
+| 13-22 | Gemini 3.5 | исследования, поиск литературы, научные базы данных |
+| 13-22 | Codex 5.5 | генерация кода (Luau, Node.js), вычислительные скрипты |
+| 23-28 | Sonnet + ревью советника | сложный код с проверкой качества |
+| 23-35 | Fable 5 | творческие тексты, маркетинг, сторителлинг |
+| 29-40 | Opus 4.6 | архитектура, стратегия, написание статей |
+| 35-50 | Opus 4.6 + советник | доказательства, архитектурные решения, статистика |
+| 40-50 | Opus 4.8 (рекомендация пользователю) | математические доказательства, максимальная строгость |
 
 ---
 
-## 3. Cross-agent delegation
+## 3. Делегирование между агентами
 
-### Which external agent for what?
+### Какой внешний агент для чего подходит?
 
-| Task | Best agent | Reason |
-|------|-----------|--------|
-| Scientific literature search | Gemini 3.5 pro | native OpenAlex/arXiv/PubMed skills |
-| Code review (second opinion) | Codex 5.5 | independent perspective |
-| Simple text generation | Ollama (local host) | token-free, 24/7 |
-| Creative texts, marketing | Fable 5 | strongest creative output |
-| Mathematical proofs | Opus 4.8 (advisor) | highest analytical depth |
+| Задача | Лучший агент | Причина |
+|--------|--------------|---------|
+| Поиск научной литературы | Gemini 3.5 pro | нативные навыки работы с OpenAlex/arXiv/PubMed |
+| Ревью кода (второе мнение) | Codex 5.5 | независимая перспектива |
+| Генерация простого текста | Ollama (локальный хост) | без токенов, 24/7 |
+| Творческие тексты, маркетинг | Fable 5 | сильнейший креативный результат |
+| Математические доказательства | Opus 4.8 (советник) | максимальная аналитическая глубина |
 
-### Exclusions (documented weaknesses)
+### Исключения (задокументированные слабости)
 
-- **Gemini:** NOT for mathematical reviews/proof work (documented direction error in a proof review, 2026-06-07)
-- **Codex 4.5:** only when 5.5 is unavailable; otherwise always 5.5
+- **Gemini:** НЕ использовать для математических ревью/доказательств (зафиксирована ошибка направления в ревью доказательства, 07.06.2026)
+- **Codex 4.5:** только если 5.5 недоступен; в остальных случаях всегда 5.5
 
-### Invocation paths
+### Пути вызова
 
-> Replace the placeholders `<host>`, `<ollama-host>`, `<tailscale-ip>`, `<user>`, and `~/.ssh/<key>` with your own infrastructure.
+> Замените плейсхолдеры `<host>`, `<ollama-host>`, `<tailscale-ip>`, `<user>` и `~/.ssh/<key>` вашей собственной инфраструктурой.
 
-**Gemini (via companion-for-agy):**
+**Gemini (через companion-for-agy):**
 ```
 companion-for-agy --researcher --json --timeout 120000 "research prompt"
 ```
 
-**Codex (via codex-companion):**
+**Codex (через codex-companion):**
 ```
 node "~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs" task --effort high "code prompt"
 ```
 
-**Ollama on a remote host (via SSH):**
+**Ollama на удаленном хосте (через SSH):**
 ```
 ssh -i ~/.ssh/<key> <user>@<tailscale-ip> "curl -s http://localhost:11434/v1/chat/completions -d '{\"model\":\"qwen3.5:35b-a3b\",\"messages\":[{\"role\":\"user\",\"content\":\"Prompt\"}]}'"
 ```
 
-**Delegation to an agent system with tools (example):**
+**Делегирование в систему агентов с инструментами (пример):**
 ```
 curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" -d '{"prompt": "...", "chat_id": "claude-delegate"}'
 ```
 
 ---
 
-## 4. Advisor pairing
+## 4. Связывание с советником (Advisor pairing)
 
-### Mechanics
+### Механика
 
-`advisor()` is a **session-level tool** — the advisor model is set by the user via `/advisor`, not programmatically. This yields these pairing patterns:
+`advisor()` — это **инструмент уровня сессии**: модель-советник задается пользователем через `/advisor`, а не программно. Это дает следующие паттерны связывания:
 
-| Pattern | How it works | When to use |
-|---------|--------------|-------------|
-| **Session advisor** | user sets `/advisor opus 4.8`, agent calls `advisor()` | standard for proofs/architecture |
-| **Orchestrator-as-reviewer** | Opus main model reviews Sonnet subagent output | orchestrator is stronger than the worker |
-| **Counter-agent** | agent A works, agent B checks adversarially | independent verification, 2 perspectives |
-| **User recommendation** | agent recommends: "do this task with opus 4.8 + advisor" | when the current session is too weak |
+| Паттерн | Как работает | Когда использовать |
+|---------|--------------|-------------------|
+| **Советник сессии** | пользователь задает `/advisor opus 4.8`, агент вызывает `advisor()` | стандарт для доказательств/архитектуры |
+| **Оркестратор как рецензент** | главная модель Opus рецензирует вывод субагента Sonnet | оркестратор сильнее исполнителя |
+| **Оппонирующий агент** | агент A работает, агент B проверяет в качестве оппонента | независимая проверка, 2 перспективы |
+| **Рекомендация пользователю** | агент рекомендует: "выполните эту задачу с opus 4.8 + advisor" | когда текущая сессия слишком слаба |
 
-### When to recommend an advisor?
+### Когда рекомендовать советника?
 
-- Mathematical proof work (score ≥ 35)
-- Architecture decisions with long-term consequences
-- Statistical methodology / study design
-- Complex bugs after 2+ unsuccessful debug cycles
+- Работа с математическими доказательствами (оценка ≥ 35)
+- Архитектурные решения с долгосрочными последствиями
+- Статистическая методология / дизайн исследований
+- Сложные баги после 2+ неудачных циклов отладки
 
-### When NOT to use an advisor?
+### Когда НЕ использовать советника?
 
-- Routine code, content, formatting (score < 23)
-- Simple feature implementation
-- Well-defined, non-critical tasks
+- Рутинный код, сбор контента, форматирование (оценка < 23)
+- Простая реализация функций
+- Четко определенные, некритичные задачи
 
 ---
 
-## 5. Escalation triggers
+## 5. Триггеры эскалации
 
 ### Ollama -> Haiku
-- File access required
-- Code analysis needed
+- Требуется доступ к файлам
+- Необходим анализ кода
 
 ### Haiku -> Sonnet
-- More than 2 files affected
-- Decision between alternatives needed
-- Unexpected error occurred
-- Delete operation requested
+- Затронуто более 2 файлов
+- Требуется выбор между альтернативами
+- Произошла неожиданная ошибка
+- Запрошена операция удаления
 
 ### Sonnet -> Opus
-- Architecture decision required
-- 3+ systems must be integrated
-- Requirements contradictory/unclear
-- Strategic planning needed
+- Требуется архитектурное решение
+- Должно быть интегрировано 3+ системы
+- Требования противоречивы/неясны
+- Требуется стратегическое планирование
 
-### Sonnet -> Gemini (lateral)
-- Scientific research needed
-- Bibliography verification
+### Sonnet -> Gemini (боковая)
+- Необходимы научные исследования
+- Проверка библиографии
 
-### Sonnet -> Codex (lateral)
-- Code review as a second opinion
-- Advisor overloaded (fallback reviewer)
+### Sonnet -> Codex (боковая)
+- Ревью кода как второе мнение
+- Советник перегружен (резервный рецензент)
 
-### Opus -> Opus + advisor
-- Proof review needed
-- Critical architecture decision
-- Statistical methodology
+### Opus -> Opus + советник
+- Требуется ревью доказательства
+- Критическое архитектурное решение
+- Статистическая методология
 
-### De-escalation
-- Concept defined -> Sonnet takes over implementation
-- Task trivial/repetitive -> Haiku takes over
-- Text only, no tool access -> Ollama takes over
-
----
-
-## 6. Permission matrix
-
-| Operation | Ollama | Haiku | Sonnet | Opus | Gemini | Codex |
-|-----------|--------|-------|--------|------|--------|-------|
-| Read files | - | Yes | Yes | Yes | Yes* | Yes* |
-| Write files | - | Yes | Yes | Yes | Yes* | Yes* |
-| Delete files | - | - | Yes** | Yes | - | - |
-| System commands | - | - | Yes** | Yes | Yes* | Yes* |
-| Architecture decisions | - | - | - | Yes | - | - |
-| Web research | - | - | Yes | Yes | Yes | - |
-| Call advisor() | - | - | Yes | Yes | - | - |
-
-*via companion script in its own sandbox mode
-**with user confirmation
+### Деэскалация
+- Концепция определена -> Sonnet берет на себя реализацию
+- Задача тривиальна/тривиально-повторяема -> Haiku берет на себя выполнение
+- Только текст, без доступа к инструментам -> Ollama берет на себя выполнение
 
 ---
 
-## 7. Cost efficiency
+## 6. Матрица прав
 
-### Token savings through routing
+| Операция | Ollama | Haiku | Sonnet | Opus | Gemini | Codex |
+|----------|--------|-------|--------|------|--------|-------|
+| Чтение файлов | - | Да | Да | Да | Да* | Да* |
+| Запись файлов | - | Да | Да | Да | Да* | Да* |
+| Удаление файлов | - | - | Да** | Да | - | - |
+| Системные команды | - | - | Да** | Да | Да* | Да* |
+| Архитектурные решения | - | - | - | Да | - | - |
+| Веб-исследования | - | - | Да | Да | Да | - |
+| Вызов advisor() | - | - | Да | Да | - | - |
 
-| Task type | Without routing | With routing | Savings |
-|-----------|-----------------|--------------|---------|
-| Trivial | Opus tokens | Ollama (free) | 100% |
-| Boilerplate | Opus tokens | Haiku tokens | ~80% |
-| Standard code | Opus tokens | Sonnet tokens | ~50% |
-| Research | Claude tokens | Gemini tokens | ~70% (different budget) |
-| Code review | advisor() tokens | Codex tokens | ~60% (different budget) |
+*через скрипт-компаньон в собственном песочном режиме (sandbox)
+**с подтверждением пользователя
 
 ---
 
-## 8. Golden rule
+## 7. Оптимизация стоимости
 
-> "Opus thinks, Sonnet builds, Haiku executes, Ollama saves. Gemini researches, Codex reviews, Fable narrates."
+### Экономия токенов за счет маршрутизации
+
+| Тип задачи | Без маршрутизации | С маршрутизацией | Экономия |
+|------------|-------------------|------------------|----------|
+| Тривиальная | Токены Opus | Ollama (бесплатно) | 100% |
+| Шаблонный код | Токены Opus | Токены Haiku | ~80% |
+| Стандартный код | Токены Opus | Токены Sonnet | ~50% |
+| Исследования | Токены Claude | Токены Gemini | ~70% (другой бюджет) |
+| Ревью кода | Токены advisor() | Токены Codex | ~60% (другой бюджет) |
+
+---
+
+## 8. Золотое правило
+
+> "Opus думает, Sonnet строит, Haiku исполняет, Ollama экономит. Gemini исследует, Codex рецензирует, Fable рассказывает."
 
 ---
 
 ## Журнал изменений
 
 ### 2.0.0 (2026-06-12)
-- Cross-agent delegation: Gemini, Codex, Ollama (local host) as routing targets
-- Advisor pairing: 4 patterns (session advisor, orchestrator-as-reviewer, counter-agent, user recommendation)
-- Reachability matrix: LLM-startable vs. user-only documented
-- Ollama (Qwen 3.5:35b-a3b, Haiku-to-Sonnet level) added as level 1-2
-- Lateral escalation: Sonnet -> Gemini (research), Sonnet -> Codex (review)
-- Exclusions documented (Gemini not for math)
-- Score thresholds extended to all models
+- Делегирование между агентами: добавлены Gemini, Codex, Ollama (локальный хост) как цели маршрутизации
+- Связывание с советником: 4 паттерна (советник сессии, оркестратор как рецензент, оппонирующий агент, рекомендация пользователю)
+- Матрица доступности: четко задокументированы варианты запуска LLM и варианты только для пользователя
+- Добавлен Ollama (Qwen 3.5:35b-a3b, уровень от Haiku до Sonnet) как Уровень 1-2
+- Боковая эскалация: Sonnet -> Gemini (исследования), Sonnet -> Codex (ревью)
+- Задокументированы исключения (Gemini не подходит для математики)
+- Пороговые значения оценок расширены на все модели
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0 (ing-strategie v2.0.0)
+- Перенесено из BACH v3.8.0 (ing-strategie v2.0.0)
 
 ---
 
-*Ported from BACH v3.8.0 | Extended with cross-agent + advisor v2.0.0*
+*Перенесено из BACH v3.8.0 | Расширено с помощью cross-agent + advisor v2.0.0*

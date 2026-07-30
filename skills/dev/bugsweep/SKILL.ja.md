@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [日本語] エージェントスキル: bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
+description: コードベースの規模に応じた目標値、倍増エスカレーション、エリア追跡、最終検証を備えた体系的なバグスイープ。/bugsweep またはユーザーが体系的なバグ検出を要求した際に使用。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,38 +15,34 @@ tags: [bugs, debugging, sweep, quality-assurance, workflow, convergence]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bugsweep`.
+<img src="banner.png" width="100%" alt="bugsweep banner">
+> **日本語** — `bugsweep` の公式日本語版。
 
+# /bugsweep — 体系的バグスイープワークフロー (日本語)
 
+収束停止基準を備えた反復的バグハンティング。コードベースの規模に応じて伸縮し、検索が表面的に見える場合にエスカレーションし、エリア追跡により重複を防ぎます。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# /bugsweep — Systematic Bug-Sweep Workflow (English)
-
-Iterative bug hunting with a converging stop criterion. Scales with the codebase, escalates when the search looks superficial, and prevents repetition through area tracking.
-
-## 1. Compute the base rate
+## 1. ベースレートの計算
 
 ```
-LOC = productive source lines (src/, lib/ — excluding tests, configs, docs, generated)
+LOC = 生産的ソース行数 (src/, lib/ — テスト、設定、ドキュメント、生成物を除く)
 x = max(1, ceil(LOC / 1500))
 base_rate = x * 3
 ```
 
-| LOC | x | Base rate |
-|-----|---|-----------|
+| LOC | x | ベースレート |
+|-----|---|--------------|
 | ~1500 | 1 | 3 |
 | ~3000 | 2 | 6 |
 | ~4500 | 3 | 9 |
 | ~10000 | 7 | 21 |
 
-Report to the user: "Codebase: {LOC} LOC → base rate = {base_rate} clean search passes."
+ユーザーへの報告: "コードベース: {LOC} LOC → ベースレート = {base_rate} 回のクリーン検索パス。"
 
-## 2. Search loop
+## 2. 検索ループ (Search loop)
 
 ```
 counter = 0
@@ -55,127 +51,121 @@ any_bug_found = False
 checked = []  # (area_name, type: code|task)
 
 LOOP:
-  area = pick_new_area()  # see area rules
+  area = pick_new_area()  # エリアルールを参照
   checked.append(area)
 
-  Perform a thorough bug search
+  徹底的なバグ検索を実行
 
-  IF bug found:
+  IF バグ発見:
     any_bug_found = True
-    Fix following bugfix-protocol (phases 4+5)
-    Review: see model rule (newer model classes: no external review needed)
+    bugfix-protocol (フェーズ 4+5) に従い修正
+    レビュー: モデルルールを参照（新しいモデルクラス: 外部レビュー不要）
     Commit + push
-    counter = 0  # RESET
+    counter = 0  # リセット (RESET)
   ELSE:
     counter += 1
-    Report: "✓ Clean: {area} — {counter}/{target}"
+    報告: "✓ クリーン: {area} — {counter}/{target}"
 
   IF counter >= target:
     IF NOT any_bug_found:
-      # Doubling escalation: not a single bug → search too shallow?
+      # 倍増エスカレーション: バグが1つも見つからない → 検索が浅すぎる？
       target = base_rate * 2
-      any_bug_found = True  # escalate only ONCE
-      Report: "⚠ No bug in {base_rate} passes → target doubled to {target}."
+      any_bug_found = True  # エスカレーションは1回のみ
+      報告: "⚠ {base_rate} パスでバグなし → 目標値を {target} に倍増。"
       CONTINUE LOOP
     ELSE:
-      GOTO final verification
+      GOTO 最終検証 (final verification)
 ```
 
-### Practical notes on the search loop (learned from real sweeps)
+### 検索ループの実用的な注意事項（実際のスイープからの学び）
 
-- **Non-git repos:** Where there is no `git` (e.g. cloud-synced project folders), a **versioned backup** replaces "commit + push": create `file_<ts>.bak` before the first fix. **Caution — the pre-fix backup is NOT a backup of your work:** after the last fix, take a fresh `_FINAL_` backup, otherwise a sync hiccup can wipe the entire fix session.
-- **Many bugs known up front:** If N bugs are already known at the start (e.g. from a previous run), "per bug: fix → review → commit → reset" is impractical. Process the known bugs as ONE fix block (joint review at the end) and start counting the base rate / search loop from the first NEWLY found bug. The reset logic still applies to bugs newly found during the sweep.
-- **Same bug in multiple places:** A found defect (e.g. a wrong regex, a broken format assumption) is often copied elsewhere. After each fix, search for the same pattern in other locations — that is a worthwhile dedicated "area".
+- **非 Git リポジトリ:** `git` が存在しない場所（クラウド同期されたプロジェクトフォルダなど）では、"commit + push" の代わりに **バージョン管理されたバックアップ** を作成します。最初の修正の前に `file_<ts>.bak` を作成します。**注意 — 修正前のバックアップは作業のバックアップではありません:** 最後の修正後、新しい `_FINAL_` バックアップを取得してください。そうしないと同期の不具合により修正セッション全体が消失する可能性があります。
+- **事前に多数のバグが判明している場合:** 開始時に N 個のバグが判明している場合（前回の実行などから）、"バグごとに: 修正 → レビュー → コミット → リセット" は非実用的です。判明しているバグを **1つの** 修正ブロックとしてまとめて処理し（最後に共同レビュー）、**最初に新しく発見されたバグ** からベースレート/検索ループのカウントを開始します。リセットロジックはスイープ中に新しく発見されたバグに引き続き適用されます。
+- **複数箇所に存在する同じバグ:** 発見された欠陥（誤った正規表現、壊れたフォーマットの前提など）は、他の場所にコピーされていることがよくあります。各修正後、他の場所で同じパターンを検索してください — それは非常に価値のある専用の「エリア」です。
 
-## 3. Area rules (anti-gaming)
+## 3. エリアルール（不正防止）
 
-An "area" is either a **code focus** or a **task** (purpose of the code).
+「エリア」とは、**コードの焦点** または **タスク**（コードの目的）のいずれかです。
 
-### Code focus
-- May be **extended** (more files) or **shifted** (different part) between passes
-- Must NOT be exactly the same selection as in an earlier pass
-- OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py + orchestrator.py` (extended)
-- NOT OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py` (identical)
+### コードの焦点 (Code focus)
+- パス間で **拡張**（より多くのファイル）または **シフト**（別の部分）が可能
+- 以前のパスと完全に同じ選択であっては **ならない**
+- OK: パス 1 = `maintenance.py`, パス 5 = `maintenance.py + orchestrator.py` (拡張)
+- NG: パス 1 = `maintenance.py`, パス 5 = `maintenance.py` (同一)
 
-### Task (purpose)
-- May be made **more granular** (check a subfunction) or **broader** (related functions together)
-- Must NOT be exactly the same task
-- OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety across the whole tray" (broader)
-- OK: pass 1 = "process detection", pass 5 = "store-marker matching inside process detection" (more granular)
-- NOT OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety in the watchdog" (identical)
+### タスク（目的）
+- **より粒度を細かく**（サブ機能の確認）または **より広く**（関連機能をまとめる）することが可能
+- 完全に同じタスクであっては **ならない**
+- OK: パス 1 = "ウォッチドッグ内のスレッドセーフ", パス 5 = "トレイ全体のスレッドセーフ" (より広く)
+- OK: パス 1 = "プロセス検出", パス 5 = "プロセス検出内のストアマーカーマッチング" (より細かく)
+- NG: パス 1 = "ウォッチドッグ内のスレッドセーフ", パス 5 = "ウォッチドッグ内のスレッドセーフ" (同一)
 
-### Naming
-- The area MUST be named BEFORE the search (no retroactive assignment)
-- Format: `"{name}" ({type}: code|task)`
+### 命名
+- エリアは検索 **前** に命名されなければならない（事后割り当て不可）
+- フォーマット: `"{name}" ({type}: code|task)`
 
-## 4. Final verification
+## 4. 最終検証 (Final verification)
 
-Once counter >= target AND any_bug_found:
+counter >= target かつ any_bug_found が True になった場合：
 
-**Step A — bugfix-protocol phase 5:**
-- [ ] Full test suite green (`pytest`)
-- [ ] **Actually execute the changed execution path at least once** — not just tests. Green unit tests on code that never calls the changed location are false safety. Run the actually changed path (dry run, smoke run, CLI invocation) and check for tracebacks / signature / naming errors. `py_compile` or a plain import only checks syntax — not whether the path runs.
-- [ ] **Every fix has at least one test that touches it** — a fix without a test that actually triggers the changed branch counts as unverified (for orchestration/network paths, combine mock + dry run if needed).
-- [ ] Type check (if configured)
-- [ ] Lint (if configured)
-- [ ] Edge cases of the session's fixes checked
+**ステップ A — bugfix-protocol フェーズ 5:**
+- [ ] フルテストスイート成功（グリーン）(`pytest`)
+- [ ] **変更された実行パスを実際に少なくとも1回実行する** — 単にテストを実行するだけでなく。変更された場所を絶対に呼び出さないコードに対してグリーンの単体テストが通っても、それは偽りの安全です。実際に変更されたパス（ドライラン、スモークラン、CLI 呼び出し）を実行し、トレースバック / シグネチャ / 命名エラーがないか確認してください。`py_compile` や単なるインポートは構文をチェックするだけで、パスが正常に動作するかはチェックしません。
+- [ ] **すべての修正にそれを通過するテストが少なくとも1つ存在する** — 変更されたブランチを実際にトリガーするテストがない修正は未検証とみなされます（オーケストレーション/ネットワークパスの場合、必要に応じてモック + ドライランを組み合わせる）。
+- [ ] 型チェック（設定されている場合）
+- [ ] リント（設定されている場合）
+- [ ] このセッションの修正の境界値ケースの確認
 
-**Step B — review (model rule):**
-- **Newer model classes (e.g. Claude 5 / Fable class):** NO external advisor/second-model
-  review required. Step A (tests + a real smoke run) is the verification. Optionally, on
-  genuine uncertainty: a fresh review subagent — but verify its findings empirically
-  (test against the unchanged code) before counting them as bugs.
-  Background (sweep experience 2026-06-11): the second reviewer was unavailable, the
-  substitute subagent delivered 1 finding (confidence 85) that a test proved to be a
-  non-bug — an external review did not change the outcome.
-- **Older models:** closing discussion with the advisor (fallback: a second model as
-  reviewer); the advisor confirms or names gaps.
+**ステップ B — レビュー（モデルルール）:**
+- **新しいモデルクラス（例: Claude 5 / Fable クラス）:** 外部 Advisor またはセカンドモデルによるレビューは **不要**。ステップ A（テスト + 実際の冒烟実行）が検証となります。真の不確実性がある場合は、オプションで新しいレビューサブエージェントを使用できますが、バグとしてカウントする前にその発見事項を実証的に検証（未変更のコードに対してテスト）してください。
+  背景（2026-06-11 のスイープ経験）: 2番目のレビュアーが利用不能であり、代行サブエージェントが 1 件の指摘（確信度 85）を出したものの、テストによりバグではないことが証明されました — 外部レビューによって結果は変わりませんでした。
+- **古いモデル:** Advisor との締めくくりディスカッション（代替: レビュアーとしてのセカンドモデル）; Advisor が確認または漏れを指摘。
 
-**If a bug is found during verification:**
-→ Fix + test + commit
-→ RESET: counter = 0, target = base_rate (fresh, NO doubling)
-→ Back to the search loop (checked list persists, any_bug_found = True)
+**検証中にバグが発見された場合:**
+→ 修正 + テスト + コミット
+→ リセット: counter = 0, target = base_rate（新鮮なベースレート、倍増 **なし**）
+→ 検索ループへ戻る（確認済みリストは維持、any_bug_found = True）
 
-**If verification is clean:**
-→ DONE. Commit + push. Print the protocol.
+**検証がクリーンな場合:**
+→ 完了。Commit + push。プロトコルを出力。
 
-## 5. Protocol (at the end)
+## 5. プロトコル（最後に出力）
 
 ```markdown
-## Bug Sweep Result
+## Bug Sweep 結果
 
-- **Codebase:** {LOC} LOC
-- **Base rate:** {base_rate} (escalated: {target})
-- **Areas checked:** {len(checked)}
-- **Bugs found:** {count}
-- **Resets:** {reset_count}
-- **Doubling triggered:** yes/no
-- **Fixes:**
+- **コードベース:** {LOC} LOC
+- **ベースレート:** {base_rate} (エスカレーション後: {target})
+- **確認済みエリア数:** {len(checked)}
+- **発見されたバグ数:** {count}
+- **リセット回数:** {reset_count}
+- **倍増トリガー:** はい/いいえ
+- **修正一覧:**
   - {title} — {commit_hash}
   - ...
-- **Final test suite:** {passed}/{total} green
-- **Review verdict:** self-verification (newer model class) / advisor confirmed / gaps named
+- **最終テストスイート:** {passed}/{total} グリーン
+- **レビュー判定:** セルフ検証（新しいモデルクラス） / Advisor 確認済み / 漏れ指摘あり
 ```
 
-## When to use this workflow
+## いつこのワークフローを使用するか
 
-- After feature development (quality assurance)
-- Before a release (acceptance sweep)
-- Periodically as a hygiene check
-- When the user types `/bugsweep`
+- 機能開発後（品質保証）
+- リリース前（受入スイープ）
+- 定期的なコードクリーンアップチェック
+- ユーザーが `/bugsweep` と入力した際
 
-## Interaction with other skills
+## 他のスキルとの連携
 
-- **bugfix-protocol:** fix procedure (phases 4+5) for every found bug
-- **systematic-debugging:** for hard-to-reproduce bugs within the sweep
-- **code-review:** can be used as a task area
+- **bugfix-protocol:** 発見されたすべてのバグに対する修正手順（フェーズ 4+5）
+- **systematic-debugging:** スイープ内で再現が困難なバグの調査
+- **code-review:** タスクエリアとして使用可能
 
 ---
 
 ## 変更履歴
 
 ### 1.1.0 (2026-06-13)
-- Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly
+- ステップ B のモデルルールを移植（ローカルスキルインストール、2026-06-11 状態より）: 新しいモデルクラスはテスト + 実際の冒烟実行により自己検証を行い、外部レビューは不要。プロトコル項目「レビュー判定」をこれに合わせて拡張。
 
 ### 1.0.0 (2026-06-13)
-- First publication in the skill library (adopted from local skill installation, state 2026-06-01)
+- スキルライブラリに初公開（ローカルスキルインストール、2026-06-01 状態より採用）。

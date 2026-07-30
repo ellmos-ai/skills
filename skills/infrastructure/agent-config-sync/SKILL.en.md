@@ -20,7 +20,7 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `agent-config-sync`.
 
 
 # Agent Config Sync (English)

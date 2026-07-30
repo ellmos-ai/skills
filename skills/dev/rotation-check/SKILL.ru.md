@@ -2,132 +2,91 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `rotation-check`.
+> **Русский** — Официальная русская версия `rotation-check`.
 
 
+# Rotation-Check — одна цель за запуск, честное покрытие, память (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+Любой, кто хочет периодически проверять пайплайн с большим количеством проектов (источники, стиль, работоспособность, безопасность, переводы, …), сталкивается с проблемой распределения: проверять все проекты за один запуск слишком дорого; без памяти каждый запуск случайно проверяет одно и то же. Паттерн ротации решает обе проблемы: **ровно одна цель за запуск, выбор по принципу «дольше всех не проверялась», реестр в качестве памяти.** Таким образом, даже редкий такт (ежедневно/еженедельно) за несколько недель наглядно и без дублирования работы покрывает весь пайплайн.
 
-> **English Translation** — Official English version of `rotation-check`.
+Зарекомендовал себя как основа развитого комплекса автоматизаций во множестве пайплайнов проектов.
 
+## Компоненты
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
+### 1. Два файла на пайплайн (создаются один раз)
 
-## Общий обзор и назначение & Purpose
-
-Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
-Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
-prüfen ist zu teuer; ohne Gedächtnis prüft jeder Lauf zufällig dasselbe. Das Rotations-Muster
-löst beides: **genau ein Ziel pro Lauf, Auswahl nach „am längsten ungeprüft", Registry als
-Gedächtnis.** So deckt auch ein seltener Takt (täglich/wöchentlich) über Wochen die ganze
-Pipeline ab — nachweisbar und ohne Doppelarbeit.
-
-Bewährt als Rückgrat eines gewachsenen Bestands produktiver Automationen über mehrere
-Projekt-Pipelines hinweg.
-
-## Bausteine
-
-### 1. Zwei Dateien pro Pipeline (einmalig anlegen)
-
-| Datei | Inhalt | Charakter |
+| Файл | Содержимое | Характер |
 | --- | --- | --- |
-| `CHECKED-REGISTRY.md` | eine Kompaktzeile pro Check: Ziel, Datum, Checktyp, Ergebnis, nächster Schritt | Zustandsübersicht — wird VOR jeder Zielauswahl gelesen |
-| `CHECKS-LOG.txt` | kurzer Verlaufseintrag pro Lauf mit Details/Evidenz | Journal — append-only |
+| `CHECKED-REGISTRY.md` | Одна компактная строка на проверку: цель, дата, тип проверки, результат, следующий шаг | Обзор состояния — читается ДО каждого выбора цели |
+| `CHECKS-LOG.txt` | Короткая запись истории за запуск с деталями/доказательствами | Журнал — только добавление (append-only) |
 
-Beide liegen im Pipeline-Root (nicht im Einzelprojekt), damit ein Lauf sie mit einem Read
-erfassen kann. Registry-Zeilenformat:
-
-```text
-| <ziel> | <YYYY-MM-DD> | <checktyp> | <ok|befund|übersprungen> | <nächster schritt> |
-```
-
-### 2. Auswahlregel
-
-1. Registry und Log lesen (Pflicht, VOR der Auswahl — sonst Doppelprüfung).
-2. Kandidaten: Ziele, die für DIESEN Checktyp noch nie oder am längsten nicht geprüft wurden.
-3. Ausweichen, wenn das Ziel kürzlich von einem **eng verwandten** Check angefasst wurde
-   (z. B. Zitations-Check direkt nach Quellencheck bringt nichts) oder gerade gesperrt/in
-   Bearbeitung ist (Locks respektieren).
-   **Geschwister-Cooldown:** Laufen mehrere verwandte Checks über dieselbe Zielmenge
-   (z. B. Entwicklung, Bugsuche und Review derselben Pipeline), eine Karenzzeit vereinbaren
-   (Erfahrungswert: ~24 h), in der ein von einem Geschwister-Check bearbeitetes Ziel nicht
-   erneut gewählt wird — verhindert Kollisionen und widersprüchliche Parallel-Änderungen.
-4. Vorziehen außer der Reihe nur mit gutem Grund (z. B. große Überarbeitung seit letztem
-   Check) — den Grund im Log nennen.
-
-### 3. Check durchführen — mit Read-only-Exit
-
-Den eigentlichen Check (frei definierbar: Quellencheck, Style-Check, Security-Audit, …)
-auf das EINE gewählte Ziel anwenden. Zwei gültige Ausgänge:
-
-- **Befund:** beheben was in den Scope passt; Größeres als Folgeaufgabe in die projektlokale
-  TODO/AUFGABEN-Datei eintragen (der Check muss nicht alles selbst lösen).
-- **Nichts zu tun:** kurz dokumentieren und enden. Ein Leerlauf ist ein Ergebnis, kein
-  Scheitern — keinesfalls den Scope ausweiten, um „etwas gefunden zu haben".
-
-### 4. Dokumentieren
-
-- Registry-Zeile ergänzen (kompakt), Log-Eintrag schreiben (Details/Evidenz).
-- **Log-Hygiene:** Werden Registry/Log unübersichtlich (Erfahrungswert: mehrere hundert
-  Zeilen), alten Stand nach `_archiv/` verschieben, frische Datei anlegen, im Kopf auf den
-  Vorgänger verweisen (Pfad + Datum).
-- **Pfad-Drift:** Zeigt ein erwarteter Pfad ins Leere (Ziel verschoben/umbenannt), NICHT neu
-  anlegen — über die maßgebliche Statusdatei/Registry der Pipeline korrigieren und den
-  Fehlpfad in einem Failure-Log festhalten.
-
-### 5. Takt
-
-Frequenz an die Änderungsrate des Geprüften koppeln: Rotations-Checks über stabile Bestände
-laufen gut wöchentlich (ein Ziel pro Lauf ≈ ganze Pipeline pro Quartal bei ~12 Zielen);
-schnelllebige Checks (z. B. auf aktive Arbeit) täglich. Praxiserfahrung: anfangs stündliche
-Checks wurden fast alle auf täglich/wöchentlich reduziert — die Abdeckung blieb, die Kosten
-fielen.
-
-## Prompt-Vorlage (für Scheduler/Automation)
+Оба находятся в корне пайплайна (не в отдельном проекте), чтобы запуск мог считать их одним чтением. Формат строки реестра:
 
 ```text
-VORBEREITUNG: Lies <PIPELINE_ROOT>/<POLICY-DOKUMENTE> sowie <REGISTRY> und <LOG>.
-
-AUFGABE: Wähle genau ein Ziel aus <ZIELMENGE>. Bevorzuge Ziele, die für den Check
-"<CHECKTYP>" noch nie oder am längsten nicht geprüft wurden. Wurde ein Ziel kürzlich
-von diesem oder einem eng verwandten Check geprüft oder ist es gesperrt: ausweichen
-oder read-only mit Logeintrag enden.
-
-CHECK: <konkrete Prüf-/Pflegeaufgabe und was bei Befund zu tun ist; Folgearbeiten in
-die projektlokale TODO-Datei>.
-
-Wenn keine Arbeit anfällt: kurz dokumentieren, Lauf beenden.
-
-DOKUMENTATION: Registry-Zeile in <REGISTRY> (Ziel, Datum, Checktyp, Ergebnis, nächster
-Schritt) + Verlaufseintrag in <LOG>. Bei Überlänge: alten Stand nach _archiv/ und
-frische Datei mit Verweis.
-
-ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
+| <цель> | <YYYY-MM-DD> | <тип_проверки> | <ok|замечание|пропущено> | <следующий шаг> |
 ```
 
-## Red Flags
+### 2. Правило выбора
 
-| Gedanke | Realität |
+1. Прочитать реестр и журнал (обязательно, ДО выбора — иначе будет повторная проверка).
+2. Кандидаты: цели, которые для ДАННОГО типа проверки никогда не проверялись или не проверялись дольше всего.
+3. Обход (избегание): если цель недавно затрагивалась **тесно связанной** проверкой (напр., проверка цитирований сразу после проверки источников не имеет смысла) или заблокирована/находится в работе (соблюдать блокировки/locks).
+   **Период охлаждения между родственными проверками (Sibling Cooldown):** Если несколько связанных проверок работают по одному набору целей (напр., разработка, поиск багов и ревью одного пайплайна), согласуйте период ожидания (опытное значение: ~24 ч), в течение которого цель, обработанная родственной проверкой, не выбирается повторно — это предотвращает коллизии и противоречивые параллельные изменения.
+4. Продвижение вне очереди только по веской причине (напр., крупная переработка с момента последней проверки) — указать причину в журнале.
+
+### 3. Проведение проверки — с выходом без изменений (Read-only Exit)
+
+Применить саму проверку (свободно определяемую: проверка источников, проверка стиля, аудит безопасности, …) к ОДНОЙ выбранной цели. Два действительных исхода:
+
+- **Замечание (Befund):** исправить то, что входит в объем работ; более крупные задачи внести как последующие задачи в локальный файл TODO/ЗАДАЧИ проекта (проверка не должна решать все самостоятельно).
+- **Нечего делать:** кратко задокументировать и завершить. Холостой запуск — это результат, а не сбой — ни в коем случае не расширять объем работ только для того, чтобы «что-то найти».
+
+### 4. Документирование
+
+- Дополнить строку в реестре (компактно), записать запись в журнал (детали/доказательства).
+- **Гигиена журнала:** Если реестр/журнал становятся громоздкими (опытное значение: несколько сотен строк), переместить старое состояние в `_archiv/`, создать свежий файл и в заголовке сослаться на предшественника (путь + дата).
+- **Дрейф путей (Path Drift):** Если ожидаемый путь ведет в никуда (цель перемещена/переименована), НЕ создавать заново — скорректировать через авторитетный файл статуса/реестр пайплайна и зафиксировать ошибочный путь в журнале сбоев (failure log).
+
+### 5. Такт / Периодичность
+
+Привязать частоту к скорости изменений проверяемого объекта: проверки ротации по стабильным объектам хорошо работают еженедельно (одна цель за запуск ≈ весь пайплайн за квартал при ~12 целях); динамичные проверки (напр., активной работы) — ежедневно. Практический опыт: изначально часовые проверки почти все были сокращены до ежедневных/еженедельных — покрытие сохранилось, затраты снизились.
+
+## Шаблон промпта (для планировщика/автоматизации)
+
+```text
+ПОДГОТОВКА: Прочитай <PIPELINE_ROOT>/<ДОКУМЕНТЫ_ПОЛИТИКИ>, а также <REGISTRY> и <LOG>.
+
+ЗАДАЧА: Выбери ровно одну цель из <НАБОР_ЦЕЛЕЙ>. Отдавай преимущество целям, которые для проверки "<ТИП_ПРОВЕРКИ>" никогда не проверялись или не проверялись дольше всего. Если цель недавно проверялась этой или тесно связанной проверкой или заблокирована: обойти или завершить в режиме чтения (read-only) с записью в журнал.
+
+ПРОВЕРКА: <конкретная задача проверки/обслуживания и что делать при обнаружении замечаний; последующие работы занести в локальный файл TODO проекта>.
+
+Если работа не требуется: кратко задокументировать, завершить запуск.
+
+ДОКУМЕНТИРОВАНИЕ: Строка реестра в <REGISTRY> (цель, дата, тип проверки, результат, следующий шаг) + запись истории в <LOG>. При избыточной длине: старое состояние в _archiv/ и свежий файл со ссылкой.
+
+ЗАВЕРШЕНИЕ: Краткий отчет (Цель | сделано | результат | последующие задачи).
+```
+
+## Красные флаги (Red Flags)
+
+| Мысль | Реальность |
 | --- | --- |
-| „Ich wähle einfach ein interessantes Projekt" | Auswahl nur über die Registry — sonst Lieblingsprojekt-Bias und blinde Flecken. |
-| „Registry lese ich nach dem Check" | Vorher. Sie ist das Auswahlkriterium, nicht nur das Protokoll. |
-| „Mehrere Ziele pro Lauf schaffen mehr" | Ein Ziel hält Läufe kurz, idempotent und abbrechbar; Menge kommt über die Rotation. |
-| „Der Leerlauf war umsonst" | Ein dokumentierter Leerlauf aktualisiert das Gedächtnis — das ist der halbe Wert des Systems. |
+| «Я просто выберу интересный проект» | Выбор производится ТОЛЬКО через реестр — иначе возникнет предвзятость к любимым проектам и слепые зоны. |
+| «Я прочитаю реестр после проверки» | Сначала прочитай. Он является критерием выбора, а не только протоколом. |
+| «Несколько целей за запуск сделают больше» | Одна цель сохраняет запуски короткими, идемпотентными и отменяемыми; объем достигается за счет ротации. |
+| «Холостой запуск был напрасным» | Задокументированный холостой запуск обновляет память — это половина ценности системы. |
 
-## Verwandte Skills
+## Сопутствующие навыки
 
-- `workflow-extract` — baut aus Sessions/Fremd-Automationen Automatisierungen; nutzt dieses
-  Gerüst als Standard-Baustein.
-- `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
-  Optimizer renoviert).
+- `workflow-extract` — создает автоматизации из сессий/сторонних автоматизаций; использует эту структуру как стандартный блок.
+- `pipeline-optimizer` — для структурной перестройки пайплайна (Rotation-Check обслуживает, Optimizer обновляет).
 
-## Журнал изменений
+## История изменений
 
 ### 1.1.0 (2026-07-03)
-- Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten
-  Checks über dieselbe Zielmenge; Befund aus der Vollklassifikation des Automations-Bestands).
+- Добавлен период охлаждения между родственными проверками (Sibling Cooldown) в качестве правила выбора (предотвращение коллизий между связанными проверками по одному набору целей; вывод из полной классификации автоматизаций).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus dem Codex-Automations-Bestand (Rotations-Muster in
-  ~40 von 77 Automationen: Research-/Software-/Roblox-Checks mit CHECKED-REGISTRY/CHECKS-LOG).
+- Первоначальная версия. Абстрагировано из комплекса автоматизаций Codex (паттерн ротации в ~40 из 77 автоматизаций: проверки исследований/ПО/Roblox с CHECKED-REGISTRY/CHECKS-LOG).

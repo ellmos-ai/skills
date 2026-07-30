@@ -1,41 +1,53 @@
 ---
+name: exposure-guidance
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 不安症に対する段階的暴露療法：不安階層表、SUDs尺度、暴露の計画とガイド。心理教育のみ、実際の実施は不可。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [exposure, anxiety, phobia, suds, graded, behavioral-therapy]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `exposure-guidance`.
+> **日本語** — `exposure-guidance` の公式日本語版。
 
 
+# 暴露療法のガイド（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 不安階層表、SUDs尺度、段階的暴露および慣れ（習慣化）：計画と心理教育 — 実際の暴露実施は専門療法士の指導下でのみ実施可能
 
-
-# Exposure Guidance (English)
-
-> Fear hierarchy, SUDs scale, graded exposure and habituation: Planning and guidance — actual exposure only with a therapist
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Exposure (confrontation therapy) is one of the most effective methods in behavioral therapy for anxiety disorders, phobias, OCD, and PTSD. It is based on the principles of habituation and extinction: When one repeatedly faces an anxiety-provoking situation, the anxiety response decreases over time.
-
-Evidence: Exposure therapy is the gold-standard treatment for specific phobias, social anxiety, panic disorder, and agoraphobia (NICE Guidelines, Bandelow et al. 2014, S3 Guideline Anxiety Disorders). Effect sizes are among the highest in psychotherapy research.
-
-**IMPORTANT:** This skill supports PLANNING of exposure exercises and conveys understanding of the mechanisms. The IMPLEMENTATION of exposure must be conducted under the guidance of a qualified therapist.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Understanding the Mechanisms
+## 背景
 
-### Habituation
+暴露療法（エクスポージャー／直面化療法）は、不安症、恐怖症、強迫症（OCD）、PTSDに対する行動療法において最も効果的な技法の1つです。慣れ（習慣化: Habituation）と消去（Extinction）の原理に基づいています。不安を誘発する状況に繰り返し直面することで、時間とともに不安反応が自然と低減していきます。
+
+エビデンス：暴露療法は、限局性恐怖症、全般性不安症／社会不安症、パニック症、広場恐怖症に対するゴールド標準の治療法です（NICEガイドライン、Bandelow et al. 2014, S3不安症ガイドライン）。心理療法研究の中でも最高レベルのエフェクトサイズを示します。
+
+**重要：** 本スキルは、暴露エクササイズの**計画作成**および作用メカニズムの心理教育的理解を支援するものです。暴露療法の**実際の実施**は、必ず資格を持つ専門心理療法士の指導のもとで行われなければなりません。
+**絶対に実施してはならない技法：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）
+
+---
+
+## 1. 作用メカニズムの理解
+
+### 慣れ／習慣化（Habituation）
 
 ```
-HABITUATION: Adaptation through repeated confrontation
+慣れ（習慣化）：反復的な直面化による適応
 
-Anxiety level
+不安レベル
 100 |  *
     | * *
  80 |*   *
@@ -47,128 +59,128 @@ Anxiety level
  20 |          **  * *
     |                  * * * * * *
   0 |________________________________
-    Time (during exposure)
+    時間（暴露中）
 
-Anxiety initially rises, reaches a peak,
-and then drops on its own WITHOUT flight or avoidance.
+不安は最初上昇し、ピークに達した後、
+逃避や回避をしなくても自然と下降していきます。
 
-Key experience: "The anxiety passes, even when
-I stay in the situation."
+核心となる体験：「その場にとどまっていても、
+不安は時間とともに過ぎ去る。」
 ```
 
-### Extinction (New Learning)
+### 消去（Extinction／新たな学習）
 
 ```
-EXTINCTION: New experiences overwrite old fear associations
+消去：新たな体験が古い恐怖の連合を上書きする
 
-Old experience: Dog -> Danger -> Fear -> Flight
-New experience: Dog -> No danger -> Fear decreases -> I am safe
+古い体験：犬 -> 危険 -> 不安 -> 逃避
+新しい体験：犬 -> 危険なし -> 不安低下 -> 私は安全だ
 
-The old association is not erased but overlaid by new
-experiences. Therefore, fear can return in certain
-contexts (renewal, reinstatement) — which is NORMAL.
+古い連合は完全に消去されるのではなく、新たな体験によって
+上書き・覆い隠されます。そのため、特定の状況下で恐怖が
+再発すること（文脈的再発）がありますが、これは正常です。
 ```
 
-### Why Avoidance Maintains the Problem
+### なぜ回避が問題を維持させるのか
 
 ```
-THE AVOIDANCE CYCLE:
+回避の悪循環モデル：
 
-Anxiety-provoking situation
+不安を誘発する状況
         |
         v
-Anxiety rises (unpleasant)
+不安の上昇（不快感）
         |
         v
-Avoidance/flight
+回避／逃避
         |
         v
-Short-term relief (anxiety drops immediately)
+短期的な安堵（不安が即座に低下）
         |
         v
-Long-term reinforcement of anxiety
-("The situation IS dangerous, good that I fled")
+長期的な不安の強化
+（「やっぱりあの状況は危険だったんだ、逃げて正解だった」）
         |
         v
-Next time: Even more anxiety, even more avoidance
+次回：さらに強い不安、さらなる回避へ
 ```
 
 ---
 
-## 2. The SUDs Scale
+## 2. SUDs 尺度（Subjective Units of Distress Scale）
 
-### Subjective Units of Distress (0-100)
+### 主観的苦痛単位（0〜100）
 
 ```
-SUDs SCALE (Subjective Units of Distress)
+SUDs 尺度（主観的苦痛単位）
 
-  0  Completely relaxed, no anxiety
- 10  Minimal tension, barely noticeable
- 20  Slight unease, easily tolerable
- 30  Noticeably unpleasant, but controllable
- 40  Noticeable anxiety, still able to function
- 50  Moderate anxiety, strenuous but manageable
- 60  Strong anxiety, clear urge to avoid
- 70  Very strong anxiety, hard to endure
- 80  Intense anxiety, at the edge of tolerance
- 90  Extreme anxiety, feeling of panic
-100  Maximum anxiety, worst imaginable distress
+  0  完全なリラックス状態、不安なし
+ 10  ごく微かな緊張、ほとんど気にならない
+ 20  軽度の違和感、容易に耐えられる
+ 30  明らかに不快だが、コントロール可能
+ 40  明確な不安、まだ日常機能を維持できる
+ 50  中程度の不安、消耗するが対処可能
+ 60  強い不安、回避したい明確な欲求
+ 70  非常に強い不安、耐えるのが困難
+ 80  激しい不安、耐容限界の境界線
+ 90  極度の不安、パニック感
+100  最大の不安、想像し得る最悪の苦痛
 ```
 
-### Using the SUDs Scale
+### SUDs 尺度の使い方
 
-**Before exposure:**
-- Estimated anxiety in the planned situation (expected value)
+**暴露の前：**
+- 計画している状況での予測不安（期待値）
 
-**During exposure:**
-- Assess current SUDs value every 5 minutes
-- Document the progression (rising, falling, fluctuating)
+**暴露の最中：**
+- 5分ごとに現在のSUDs値を評定する
+- 経過（上昇、下降、変動）を記録する
 
-**After exposure:**
-- Highest SUDs value? Final value? How quickly did anxiety decrease?
-- Was it as bad as expected?
+**暴露の後：**
+- 最高SUDs値は？最終値は？どれくらい早く不安が低下したか？
+- 予想していたほど悪かったか？
 
 ---
 
-## 3. Creating a Fear Hierarchy
+## 3. 不安階層表の作成
 
-### Principle
+### 原理
 
-A fear hierarchy ranks anxiety-provoking situations from lowest to highest anxiety level. Exposure begins with easy situations and increases step by step.
+不安階層表は、不安を誘発する状況を低い不安レベルから高いレベルへと順にランキングしたものです。暴露は簡単な状況から始め、段階的にステップアップしていきます。
 
-### Example: Fear of Dogs
+### 具体例：犬恐怖症
 
 ```
-FEAR HIERARCHY: Dog Phobia
+不安階層表：犬恐怖症
 
-SUDs | Situation
+SUDs | 状況
 -----|--------------------------------------------------
- 10  | Look at a picture of a dog
- 15  | Watch a video of playing dogs
- 25  | Talk about own experiences with dogs
- 30  | Watch a small dog from 10 meters away
- 40  | Watch a small dog from 5 meters away
- 50  | Stand next to a leashed small dog (2 meters)
- 55  | Touch a small leashed dog (owner holding)
- 60  | Watch a medium dog from 5 meters
- 65  | Sit next to a leashed medium dog
- 70  | Pet a medium dog
- 75  | Walk past an unleashed dog (park)
- 80  | Be alone in a room with a calm dog
- 85  | Pet a large dog
- 90  | Be in a park with multiple unleashed dogs
- 95  | Feed a dog
-100  | Let an unfamiliar dog run toward you
+ 10  | 犬の写真を見る
+ 15  | 遊んでいる犬の動画を見る
+ 25  | 犬に関する自分の体験談を話す
+ 30  | 10m離れた場所から小さな犬を見る
+ 40  | 5m離れた場所から小さな犬を見る
+ 50  | リードでつながれた小型犬の横に立つ（2m）
+ 55  | リードでつながれた小型犬に触れる（飼い主が保持）
+ 60  | 5m離れた場所から中型犬を見る
+ 65  | リードでつながれた中型犬の横に座る
+ 70  | 中型犬をなでる
+ 75  | ノーリードの犬の近くを歩く（公園）
+ 80  | おとなしい犬と同じ部屋に二人きりでいる
+ 85  | 大型犬をなでる
+ 90  | ノーリードの犬が複数いる公園にいる
+ 95  | 犬にエサをあげる
+100  | 見知らぬ犬が自分に向かって走ってくるのを許可する
 ```
 
-### Template for Completion
+### 記入用テンプレート
 
 ```
-MY FEAR HIERARCHY
+私の不安階層表
 
-Anxiety topic: [...]
+不安のテーマ：[...]
 
-SUDs | Situation
+SUDs | 状況
 -----|--------------------------------------------------
      | [...]
      | [...]
@@ -179,154 +191,154 @@ SUDs | Situation
 
 ---
 
-## 4. Types of Exposure
+## 4. 暴露の種類
 
-### Graded Exposure (In Vivo)
+### 段階的暴露（In Vivo 暴露／実生活暴露）
 
-**Principle:** Step-by-step confrontation with real situations, starting at low SUDs values.
+**原理：** SUDs尺度の低い項目から始まり、現実の状況に段階的に直面していくこと。
 
-### Flooding
+### フラッディング（Flooding／急速法）
 
-**Principle:** Direct confrontation with highly anxiety-provoking situations for extended periods. Only under therapeutic guidance. NOT to be guided by an AI assistant — only explained.
+**原理：** 非常に高い不安を誘発する状況に長時間のあいだ直接直面させる技法。心理療法士の直接指導下でのみ実施。AIアシスタントは実施をガイドしてはならず、概念の説明にとどめること。
 
-### Exposure in Sensu (Imaginal)
+### イメージ暴露（In Sensu／イメージ内暴露）
 
-**Principle:** Experiencing anxiety-provoking situations in imagination. Helpful as preparation for real exposure.
+**原理：** 想像の中で不安を誘発する状況を体験すること。実際の暴露への準備として有用。
 
-### Interoceptive Exposure
+### 内部感覚暴露（Interoceptive Exposure）
 
-**Principle:** Deliberately inducing physical anxiety symptoms (e.g., rapid heartbeat through exercise, dizziness through spinning). ONLY under therapeutic guidance.
-
----
-
-## 5. Guided Exposure Planning
-
-### Preparation Protocol
-
-```
-EXPOSURE PLANNING PROTOCOL
-
-Date: [...]
-Therapist informed: [ ] Yes  [ ] No (MANDATORY!)
-
-Anxiety topic: [...]
-Chosen situation: [...]
-Expected SUDs value: [...]
-Level in hierarchy: [...]
-
-What exactly will I do: [...]
-Where: [...]
-When: [...]
-How long: [...]
-Alone or accompanied: [...]
-
-My greatest fear: [...]
-What will realistically happen: [...]
-
-Emergency plan (if SUDs > 90 or dissociation):
-1. Grounding (5-4-3-2-1)
-2. Breathing exercise (box breathing)
-3. [Call trusted person]: Tel. [...]
-4. Leave situation in an orderly manner (no panicked fleeing)
-```
-
-### Post-Session Protocol
-
-```
-EXPOSURE DEBRIEFING
-
-Date: [...]
-Situation: [...]
-
-SUDs before (expectation): [...]
-SUDs highest value during: [...]
-SUDs at the end: [...]
-
-How long stayed in situation: [...]
-Habituation occurred: [ ] Yes  [ ] Partial  [ ] No
-
-What I learned: [...]
-Was it as bad as feared: [ ] Worse  [ ] As expected  [ ] Less bad
-
-What I want to do differently next time: [...]
-Next level: [...]
-```
+**原理：** 身体的な不安症状（運動による動悸、回転によるめまい等）を意図的に誘導する技法。**専門療法士の指導下でのみ**実施可能。
 
 ---
 
-## 6. Safety Notes and Abort Criteria
+## 5. ガイド付き暴露計画プロトコル
 
-### Prerequisites for Exposure
-
-```
-CHECKLIST BEFORE STARTING EXPOSURE:
-
-[ ] Qualified therapist is involved
-[ ] Sufficient stabilization is present
-[ ] Fear hierarchy is created and discussed
-[ ] Emergency plan is prepared
-[ ] Person understands the mechanism (habituation)
-[ ] No acute suicidality
-[ ] No uncontrolled psychotic symptoms
-[ ] No severe dissociative disorder (without therapeutic support)
-[ ] No acute substance intoxication
-[ ] Person has voluntarily consented (no forced exposure!)
-```
-
-### Abort Criteria
+### 準備プロトコル
 
 ```
-ABORT EXPOSURE IF:
+暴露計画プロトコル
 
-- Dissociation occurs (person is "gone," unresponsive)
-- Panic attack with loss of control
-- Person explicitly wants to stop (respect autonomy!)
-- Physical symptoms: chest pain, shortness of breath, fainting
-- Suicidal thoughts during exposure
-- The situation becomes objectively unsafe
+日付：[...]
+主治医／担当療法士の了解：[ ] あり  [ ] なし（必須項目！）
 
-ON ABORT:
-1. Grounding and stabilization (5-4-3-2-1, breathing exercise)
-2. Ensure person is oriented and stable
-3. Discuss experience (what happened, what was learned)
-4. No blame ("You should have stayed")
-5. Plan next step with therapist
+不安のテーマ：[...]
+選択した状況：[...]
+予測SUDs値：[...]
+階層表でのレベル：[...]
+
+具体的に何を行うか：[...]
+場所：[...]
+日時：[...]
+時間（長さ）：[...]
+一人で／同行者あり：[...]
+
+最大の恐れ：[...]
+現実的に起こり得ること：[...]
+
+緊急時プラン（SUDs > 90 または解離発生時）：
+1. グカウンディング／グラウンディング（5-4-3-2-1法）
+2. 呼吸法（ボックスブリージング）
+3. [信頼できる人に連絡]：TEL [...]
+4. パニックにならず秩序立てて状況から離脱する
+```
+
+### 振り返りプロトコル
+
+```
+暴露振り返りシート
+
+日付：[...]
+実施した状況：[...]
+
+実施前のSUDs（予測）：[...]
+実施中の最高SUDs：[...]
+終了時のSUDs：[...]
+
+状況にとどまった時間：[...]
+慣れ（習慣化）は起きたか：[ ] はい  [ ] 部分的  [ ] いいえ
+
+学んだこと・気づき：[...]
+恐れていたほど悪かったか：[ ] より悪かった  [ ] 予想通り  [ ] 恐れていたほどではなかった
+
+次回変更したい点：[...]
+次のステップ：[...]
 ```
 
 ---
 
-## Ethics and Boundaries
+## 6. 安全上の注意と中止基準
 
-**An AI assistant may:**
-- Explain exposure principles (psychoeducation)
-- Create fear hierarchies together
-- Explain and use the SUDs scale
-- Support exposure planning (fill out protocols)
-- Document debriefing
-- Provide safety information
-- Motivate and normalize ("Anxiety during exposure is desired and normal")
+### 暴露実施の前提条件
 
-**An AI assistant must NOT:**
-- Independently conduct or guide exposure
-- Guide flooding (ONLY therapist)
-- Guide interoceptive exposure (ONLY therapist)
-- Conduct prolonged exposure for PTSD
-- Accompany exposure in severe dissociation
-- Pressure toward exposure ("You must face this")
-- Guarantee results
-- Make diagnoses or create treatment plans
-- Make medication-related recommendations
+```
+暴露開始前のチェックリスト：
 
-**PARTICULARLY STRICT BOUNDARY:** An AI assistant plans and explains. Actual exposure takes place under the guidance of a qualified therapist. For any request regarding implementation: refer to professional. Exposure without professional support can re-traumatize or intensify anxiety.
+[ ] 資格を持つ専門療法士が関与している
+[ ] 十分な安定化がなされている
+[ ] 不安階層表が作成され、協議されている
+[ ] 緊急時プランが準備されている
+[ ] クライエントがメカニズム（慣れ）を理解している
+[ ] 急性自傷・自殺念慮がない
+[ ] コントロールされていない精神病症状がない
+[ ] 深刻な解離性障害がない（治療的支援なしでは不可）
+[ ] 物質中毒状態でない
+[ ] クライエントが自理的に同意している（強制暴露は絶対に不可！）
+```
 
-**In case of acute crisis, ALWAYS refer to:**
+### 中止基準
+
+```
+以下の場合は直ちに暴露を中止すること：
+
+- 解離が発生した場合（意識が飛ぶ、反応しなくなる）
+- コントロールを失うほどのパニック発作
+- クライエントが明示的に中止を望んだ場合（自己決定権の尊重！）
+- 身体症状：胸痛、重度の呼吸困難、失神
+- 暴露中の自殺念慮
+- 状況が客観的に危険になった場合
+
+中止時の対応：
+1. グラウンディングと安定化（5-4-3-2-1法、呼吸法）
+2. クライエントの意識が現実に向き、安定したことを確認する
+3. 体験の振り返り（何が起きたか、何が学べたか）
+4. 責めないこと（「耐えるべきだった」等の発言は禁物）
+5. 専門療法士とともに次のステップを計画する
+```
+
+---
+
+## 伦理与限界 / 倫理と限界
+
+**AIアシスタントができること：**
+- 暴露の原理の解説（心理教育）
+- 不安階層表の共同作成
+- SUDs尺度の説明および活用
+- 暴露計画の作成支援（プロトコルの記入）
+- 実施後の振り返りの記録
+- 安全情報の提供
+- 動機づけと正規化（「暴露中の不安は意図されたものであり正常です」）
+
+**AIアシスタントが行ってはならないこと：**
+- 独立して暴露を指示・実施すること
+- フラッディングをガイドすること（療法士限定）
+- 内部感覚暴露をガイドすること（療法士限定）
+- PTSDに対する持続暴露（PE）の実施
+- 重度の解離状態における暴露の伴走
+- 暴露の強制・プレッシャー（「直面しなければなりません」）
+- 成果の保証
+- 診断や治療計画の作成
+- 薬物療法に関する推奨
+
+**特に厳格な境界線：** AIアシスタントは計画と解説のみを行います。実際の暴露は専門資格を持つ心理療法士の指導のもとで実施されます。実施に関するいかなる依頼についても、専門機関への受診を促してください。専門的な支援のない暴露は、再トラウマ化や不安の増幅を引き起こすリスクがあります。
+
+**緊急の危機状況では、必ず以下を案内してください：**
+- こころの健康相談統一ダイヤル (日本): 0570-064-556
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556 (ナビダイヤル)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 110 / 119 (日本), 911 (US), 112 (EU)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3 Guideline Anxiety Disorders (2014) — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3不安症ガイドライン (2014) — 専門的医療行為ではありません*

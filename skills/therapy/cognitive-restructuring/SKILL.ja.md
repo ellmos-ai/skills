@@ -1,202 +1,214 @@
 ---
+name: cognitive-restructuring
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 認知行動療法：ABCモデル、自動思考、認知の歪みの同定、およびコラム法（思考記録）のつけ方。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [cbt, cognitive-restructuring, cognitive-distortions, thought-record, abc-model]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `cognitive-restructuring`.
+> **日本語** — `cognitive-restructuring` の公式日本語版。
 
 
+# 認知の再構成（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> CBTの中心技法：ABCモデル、機能不全な思考の同定と修正
 
-
-# Cognitive Restructuring (English)
-
-> Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Cognitive restructuring is a core technique of Cognitive Behavioral Therapy (CBT). It helps identify automatic negative thoughts, challenge them, and replace them with more helpful alternatives.
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. ABC Model (Ellis)
+## 背景
 
-The ABC model explains how events, thoughts, and feelings are connected.
+認知の再構成（Cognitive Restructuring）は、認知行動療法（CBT）の核心的な技法です。自動的に浮かび上がるネガティブな思考（自動思考）を特定し、それに反証・吟味を加え、より適応的で現実的な代替思考に置き換える手助けをします。
+
+**注：** 本スキルは支援を目的とするものであり、専門的な心理療法の代わりとなるものではありません。
+**絶対に実施してはならない技法：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）
+
+---
+
+## 1. ABCモデル（エリス）
+
+ABCモデルは、出来事、思考、そして感情がどのように関連しているかを説明します。
 
 ```
-A (Activating Event)   ->  B (Beliefs / Thoughts)  ->  C (Consequences / Feelings/Behavior)
-Trigger                     Evaluation / Belief           Emotional consequence
+A（出来事 Activating Event）  ->  B（信念・思考 Beliefs / Thoughts）  ->  C（結果・感情 Consequences）
+きっかけとなった出来事             受け止め方・解釈                         感情や行動の結果
 ```
 
-**Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
+**重要な前提：** 感情（C）を生み出すのは出来事そのもの（A）ではなく、その出来事をどう受け止めたか（B）です！
 
-**Example:**
+**例：**
 ```
-A: Boss criticizes a report in a meeting
-B: "I am incompetent, everyone thinks so now"
-C: Shame, withdrawal, avoiding future contributions
+A: 上司が会議で報告書を批判した
+B: 「私は無能だ、みんなそう思っているに違いない」
+C: 恥、引きこもり、今後の発言の回避
 ```
 
-**Goal:** Change B to influence C.
+**目標：** B（思考・認知）に働きかけることで、C（感情・行動）を改善する。
 
 ---
 
-## 2. Identifying Automatic Negative Thoughts (ANTs)
+## 2. 自動思考（ANTs）の同定
 
-**What are ANTs?**
-- Quick, automatic evaluations in stressful situations
-- Often perceived as facts, although they are interpretations
-- Tend toward exaggeration, generalization, catastrophizing
+**自動思考（Automatic Negative Thoughts: ANTs）とは？**
+- ストレス状況において瞬時に自動的に湧き上がる認知
+- 解釈に過ぎないにもかかわらず、本人は「事実」として受け止めやすい
+- 誇張、過度の一般化、悲観化に陥りやすい
 
-**Typical recognition features:**
-- Absolute thinking: "always," "never," "everyone," "nobody"
-- Catastrophizing: "This will end terribly"
-- Mind reading: "They must think that..."
-- Overgeneralization: "This never works for me"
+**典型的な自動思考の特徴：**
+- 白黒思考／絶対的思考：「いつも」「絶対に」「誰もが」「誰も〜ない」
+- 破局化：「これで完全に終わりだ」
+- 心理読術（心読み）：「相手は〜と考えているに違いない」
+- 過度の一般化：「自分は何をやってもうまくいかない」
 
-**Recognition questions:**
-- "What went through your mind when that happened?"
-- "When you think about the situation, what words come up?"
-- "What do you fear might happen?"
-
----
-
-## 3. Cognitive Distortions (Thinking Errors)
-
-| Distortion | Description | Example |
-|------------|-------------|---------|
-| All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
-| Overgeneralization | One case = general pattern | "This always goes wrong for me" |
-| Mental filter | Only perceiving negatives | Focusing on the single criticism in feedback |
-| Mind reading | Believing to know what others think | "They surely hate me" |
-| Catastrophizing | Assuming the worst case | "This will be a catastrophe" |
-| Emotional reasoning | Feeling = reality | "I feel stupid, so I am stupid" |
-| Should/must thinking | Rigid rules | "I should be able to do this" |
-| Personalization | Relating everything to oneself | "The bad project was my fault" |
+**思考を特定するための問いかけ：**
+- 「その時、頭の中にどんな考えが浮かびましたか？」
+- 「その状況を思い返した時、どんな言葉が頭をよぎりますか？」
+- 「どのような恐ろしいことが起こると考えていますか？」
 
 ---
 
-## 4. Challenging Thoughts (Socratic Questioning)
+## 3. 認知の歪み（思考のクセ）
 
-**Goal:** Not directly refute thoughts, but encourage examination.
-
-**Question set:**
-
-1. **Examine evidence:**
-   - "What evidence is there for this?"
-   - "What evidence speaks against it?"
-
-2. **Alternative explanations:**
-   - "Are there other explanations for this?"
-   - "How would someone else view this situation?"
-
-3. **Assess consequences:**
-   - "What is the worst that could happen? How likely is that?"
-   - "What is the best that could happen?"
-   - "What is the most realistic outcome?"
-
-4. **Check usefulness:**
-   - "Does this thought help me achieve my goals?"
-   - "What would I say to a good friend who thinks this way?"
+| 認知の歪み | 説明 | 具体例 |
+|------------|------|--------|
+| 全か無か思考（白黒思考） | 二分法的な極端な考え方 | 「完璧にできないなら、自分は失敗者だ」 |
+| 過度の一般化 | 1つの事例を全体のパターンとみなす | 「いつも自分は失敗ばかりする」 |
+| 心のフィルター（選択的抽出） | ネガティブな側面だけに注目する | 多くの称賛の中で1つの批判だけに固执する |
+| 結論の飛躍（心読み） | 他人の考えを根拠なく決めつける | 「あの人は絶対に自分のことを嫌っている」 |
+| 破局化（誇大視） | 最悪のシナリオを想定する | 「これは致命的な大惨事になる」 |
+| 感情的決めつけ | 感情＝現実だとみなす | 「不安を感じる、だからこの状況は危険だ」 |
+| べき思考 | 柔軟性のない厳格なルール | 「自分は〜できなければならない」 |
+| 個人化（個人への関連づけ） | 他人の行動や出来事を自分の責任にする | 「プロジェクトが失敗したのは自分のせいだ」 |
 
 ---
 
-## 5. Cognitive Restructuring Step by Step
+## 4. 思考の吟味（ソクラテス式質問）
 
-### Record Format (Thought Record)
+**目標：** 思考を直接否定するのではなく、クライエント自身に吟味を促す。
+
+**質問リスト：**
+
+1. **根拠の吟味：**
+   - 「その考えを裏付ける根拠（事実）は何ですか？」
+   - 「その考えと矛盾する事実（反証）はありませんか？」
+
+2. **代替的な解釈の探求：**
+   - 「ほかの見方や説明は考えられませんか？」
+   - 「別の人なら、この状況をどう捉えるでしょうか？」
+
+3. **結果の評価：**
+   - 「最悪の場合、何が起こるでしょうか？その確率はどれくらいですか？」
+   - 「最も望ましい結果は何でしょうか？」
+   - 「最も現実的な結果は何でしょうか？」
+
+4. **有用性の検証：**
+   - 「その考えを持ち続けることは、あなたの目標達成に役立ちますか？」
+   - 「もし大切な友人が同じように考えていたら、何と声をかけますか？」
+
+---
+
+## 5. 認知の再構成のステップ（思考記録／コラム法）
+
+### 思考記録シートのフォーマット
 
 ```
-SITUATION
-What happened? (When? Where? Who was there?)
-[Free text]
+状況（SITUATION）
+何が起きましたか？（いつ？どこで？誰と？）
+[自由記述]
 
-THOUGHT
-What went through my mind?
-Automatic thought: [...]
-How much do I believe it? (0-100%): [...]%
+自動思考（THOUGHT）
+頭の中にどんな考えが浮かびましたか？
+自動思考：[...]
+その考えをどれくらい信じていますか？ (0-100%)：[...]%
 
-EMOTION
-What emotions did I have?
-Emotion: [...]    Intensity (0-100%): [...]%
+感情（EMOTION）
+どのような感情を感じましたか？
+感情：[...]    強さ (0-100%)：[...]%
 
-COGNITIVE DISTORTION
-Which cognitive distortions are involved?
-[List from table above]
+認知の歪み（COGNITIVE DISTORTION）
+どのような思考のクセが関係していますか？
+[上記の表から選択]
 
-EXAMINE
-Evidence for: [...]
-Evidence against: [...]
-Alternative perspective: [...]
+思考の吟味（EXAMINE）
+根拠（事実）：[...]
+反証（事実）：[...]
+別の視点：[...]
 
-ALTERNATIVE THOUGHT
-More balanced, realistic thought:
+代替思考（ALTERNATIVE THOUGHT）
+よりバランスの取れた現実的な考え：
 [...]
-How much do I believe it? (0-100%): [...]%
+代替思考をどれくらい信じていますか？ (0-100%)：[...]%
 
-RESULT
-Emotion afterward: [...]   Intensity: [...]%
-Takeaway: [...]
+結果（RESULT）
+再構成後の感情：[...]   強さ：[...]%
+気づき・まとめ：[...]
 ```
 
 ---
 
-## 6. Behavioral Activation
+## 6. 行動活性化
 
-**Supplement to cognitive work:** Changing behavior supports thought change.
+**認知作業の補完：** 行動を変えることで、思考の変容を裏付けます。
 
-**Principle:** Positive activities -> Better mood -> More helpful thoughts
+**原理：** ポジティブな活動 -> 気分の改善 -> より適応的な思考
 
-**Steps:**
-1. Create list of pleasant/meaningful activities
-2. Plan activities (specifically: when, how, where)
-3. Track implementation
-4. Rate mood before/after
+**ステップ：**
+1. 楽しい／意味のある活動のリストを作成
+2. 行動を計画する（具体的に：いつ、どのように、どこで）
+3. 実行結果を記録する
+4. 前後の気分を評定する
 
-**Example activities:**
-- Walk (nature, fresh air)
-- Contact with important people
-- Creative activities
-- Physical exercise
-- Things that used to bring joy
+**具体的な活動例：**
+- 散歩（自然、新鮮な空気）
+- 大切な人との連絡
+- 創造的な活動
+- 身体を動かすこと
+- 以前喜びを感じていたこと
 
 ---
 
-## Ethics and Boundaries
+## 倫理と限界
 
-**An AI assistant may:**
-- Explain cognitive distortions and the ABC model
-- Ask Socratic questions
-- Guide thought records
-- Provide psychoeducation about CBT techniques
+**AIアシスタントができること：**
+- 認知の歪みやABCモデルの解説
+- ソクラテス式質問の実施
+- 思考記録シート（コラム法）のガイド
+- CBT技法に関する心理教育の提供
 
-**An AI assistant must NOT:**
-- Replace professional cognitive behavioral therapy
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+**AIアシスタントが行ってはならないこと：**
+- 専門的な認知行動療法の代替となること
+- 診断や治療方針の決定
+- 危機介入
+- EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）の実施
 
-**In case of acute crisis, ALWAYS refer to:**
+**緊急の危機状況では、必ず以下を案内してください：**
+- こころの健康相談統一ダイヤル (日本): 0570-064-556
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556 (ナビダイヤル)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 110 / 119 (日本), 911 (US), 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Beck (1979), Ellis (1962) — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Beck (1979), Ellis (1962) — 専門的医療行為ではありません*

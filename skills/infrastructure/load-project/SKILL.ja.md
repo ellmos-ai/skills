@@ -2,103 +2,80 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `load-project`.
+> **日本語** — `load-project` の公式日本語版。
 
+# プロジェクトのロード (日本語)
 
+## 概要と目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+具体的なプロジェクトタスクの開始時や、作業コンテキストがあいまいになった際にこのスキルを使用してください。目的はリポジトリの完全な監査ではなく、安全に作業を継続するために必要な最小限の信頼できるコンテキストの取得です。
 
+## 設定
 
-> **English Translation** — Official English version of `load-project`.
+このスキルは固定のディレクトリ名を必要としません。ローカル環境の設定では、一般的なエージェントルールまたはプロジェクトローカルの設定で、以下の値を任意で指定できます：
 
+- 既知のワークスペースルート、
+- 優先するファイルツール、
+- 追加のブートファイルまたはレジストリファイルの名前、
+- ロックチェッカー、
+- プロジェクト固有の役割と優先度。
 
-# Load Project (English)
+そのような設定が存在しない場合、スキルは指定されたターゲットとそこで検出されたプロジェクトルールのみを使用して動作します。
 
-## 概要と目的 & Purpose
+## 手順
 
-Nutze diesen Skill zu Beginn einer konkreten Projektaufgabe oder wenn der
-Arbeitskontext unklar geworden ist. Ziel ist kein vollständiger Repository-Audit,
-sondern der kleinste belastbare Kontext, mit dem sicher weitergearbeitet werden
-kann.
+### 1. ターゲットの解決
 
-## Konfiguration
+1. 明示的なパス、プロジェクト名、または現在の作業ディレクトリを開始点として取得します。
+2. 実際のプロジェクトまたはリポジトリのルートを特定します。
+3. タスク、ルートドキュメント、リポジトリの境界に基づいてあいまいな候補を絞り込みます。実質的に異なるターゲットについて推測で判断しないでください。
 
-Der Skill benötigt keine festen Verzeichnisnamen. Lokale Installationen können
-optional folgende Werte in ihren allgemeinen Agentenregeln oder einer
-projektlokalen Konfiguration festlegen:
+### 2. ルール階層のロード
 
-- bekannte Workspace-Wurzeln,
-- bevorzugte Dateiwerkzeuge,
-- Namen zusätzlicher Boot- oder Registry-Dateien,
-- Lock-Prüfer,
-- projektspezifische Rollen und Prioritäten.
+汎用的なコンテキストから具体的なコンテキストへと読み進めます：
 
-Fehlt eine solche Konfiguration, arbeitet der Skill ausschließlich mit dem
-angegebenen Ziel und den dort auffindbaren Projektregeln.
+1. グローバルなエージェントおよびセキュリティルール、
+2. ワークスペースまたはパイプラインのルール、
+3. プロジェクトおよびリポジトリのルール、
+4. タスク関連の指示。
 
-## Ablauf
+より具体的なルールはそのスコープ内で適用され、上位のセキュリティおよび権限境界は維持されます。
 
-### 1. Ziel auflösen
+### 3. 役割に応じたルートドキュメントの読み込み
 
-1. Expliziten Pfad, Projektnamen oder aktuelle Arbeitsmappe als Startpunkt nehmen.
-2. Den tatsächlichen Projekt- oder Repository-Root bestimmen.
-3. Mehrdeutige Treffer anhand von Aufgabe, Root-Dokumenten und Repository-Grenzen
-   eingrenzen; bei materiell unterschiedlichen Zielen nicht raten.
+ファイル名はヒントであり、固定された規格ではありません。以下の役割を持つドキュメントを対象に検索してください：
 
-### 2. Regelhierarchie laden
-
-Vom allgemeinen zum spezifischen Kontext lesen:
-
-1. globale Agenten- und Sicherheitsregeln,
-2. Workspace- oder Pipeline-Regeln,
-3. Projekt- und Repository-Regeln,
-4. aufgabenbezogene Anweisungen.
-
-Spezifischere Regeln gelten innerhalb ihres Scopes; höherrangige Sicherheits- und
-Autorisierungsgrenzen bleiben bestehen.
-
-### 3. Root-Dokumente nach Rollen lesen
-
-Dateinamen sind Hinweise, keine feste Norm. Suche gezielt nach Dokumenten mit
-diesen Rollen:
-
-| Rolle | Typischer Inhalt |
+| 役割 | 典型的な内容 |
 |---|---|
-| Einstieg | Zweck, Navigation, Startanweisung |
-| Regeln | Arbeitsweise, Sprache, Sicherheit, Konventionen |
-| Architektur | Komponenten, Datenfluss, Grenzen |
-| Status | aktueller Stand, offene Probleme, letzte Prüfung |
-| Aufgaben | priorisierte nächste Arbeit |
-| Register | kanonische Projekte, Checks oder Veröffentlichungen |
-| Nachweis | Tests, Prüfprotokolle, Beweisnotizen |
-| Übergabe | laufende Arbeit, fremde Änderungen, nächster Schritt |
+| エントリ | 目的、ナビゲーション、開始指示 |
+| ルール | 作業手順、言語、セキュリティ、規約 |
+| アーキテクチャ | コンポーネント、データフロー、境界 |
+| ステータス | 現在の状態、未解決の問題、最終確認 |
+| タスク | 優先順位付けされた今後の作業 |
+| レジストリ | 正式なプロジェクト、チェック、またはリリース |
+| エビデンス | テスト、監査ログ、証明メモ |
+| 引き継ぎ | 進行中の作業、第三者による変更、次のステップ |
 
-Nur die für die konkrete Aufgabe relevanten Rollen laden.
+具体的なタスクに関連する役割のみをロードします。
 
-### 4. Verbindliche Referenzen verfolgen
+### 4. 拘束力のある参照の追跡
 
-Wenn eine gelesene Regel weitere Dateien ausdrücklich als Pflichtlektüre nennt,
-diese gezielt nachladen. Referenzketten beenden, sobald sie für die Aufgabe keinen
-zusätzlichen verbindlichen Kontext mehr liefern.
+読み込んだルールで追加のファイルが必須読了として明記されている場合、それらを個別に追加ロードします。タスクに対してこれ以上の拘束力あるコンテキストを提供しなくなった時点で参照チェーンを終了します。
 
-### 5. Zustand und Sperren prüfen
+### 5. 状態およびロックの確認
 
-- Locks anhand der lokalen Policy auf Owner, Scope, Zeitstempel und
-  Gültigkeitskriterium prüfen; ohne definierte Stale-Regel einen Lock nie
-  eigenmächtig für veraltet erklären,
-- Versionskontrollstatus und fremde Änderungen,
-- laufende Prozesse oder Checkpoints, sofern relevant,
-- Aktualität von Registern, Tests und Statusangaben.
+- ローカルポリシーに基づき、所有者、スコープ、タイムスタンプ、検証基準についてロックを確認します。明確な期限切れルールがない限り、自己判断でロックを無効と宣言しないでください、
+- バージョン管理状態および第三者による変更、
+- 実行中のプロセスまたはチェックポイント（該当する場合）、
+- レジストリ、テスト、およびステータス情報の最新性。
 
-Den Ausgangszustand der betroffenen Bereiche vor Änderungen als Status-/Diff-
-Baseline sichern. Lassen sich vorhandene Änderungen nicht sicher zuordnen, gelten
-sie vorsorglich als fremd und bleiben unberührt.
+変更を加える前に、影響を受ける領域の初期状態をステータス/Diffベースラインとして保存します。既存の変更の帰属が確定できない場合は、予防措置として第三者の変更とみなして手を加えないでください。
 
-Momentaufnahmen als solche behandeln und vor riskanten Aktionen erneut prüfen.
+スナップショットは一時的な状態として扱い、リスクを伴うアクションの前に再確認してください。
 
-### 6. Lagebericht erstellen
+### 6. 状況報告の作成
 
-Vor der Umsetzung knapp festhalten:
+実装の前に簡潔に記録します：
 
 ```text
 Ziel:
@@ -112,28 +89,24 @@ Erfolgskriterium:
 Nächster sicherer Schritt:
 ```
 
-Quellen nur so genau nennen, wie es zur Überprüfbarkeit nötig ist. Secrets,
-personenbezogene Daten und vertrauliche Inhalte redigieren und nicht in den
-Lagebericht kopieren.
+情報源は検証に必要な精度でのみ記載してください。シークレット、個人データ、機密内容は伏字化（マスキング）し、状況報告にコピーしないでください。
 
-Wenn die Aufgabe damit eindeutig und autorisiert ist, direkt weiterarbeiten.
+これによりタスクが明確かつ承認された状態になれば、直接実行に移ります。
 
-## Grenzen
+## 制限事項
 
-- Keine breite, unbeschränkte Dateisuche als Standard.
-- Keine fehlenden Regeln oder Register neu erfinden.
-- Keine alte Statusmeldung als aktuellen Nachweis behandeln.
-- Keine fremden Änderungen überschreiben.
-- Kein Projekt-Onboarding durchführen, wenn nur Kontext für eine konkrete Aufgabe
-  geladen werden soll.
+- デフォルトでの広範囲かつ無制限なファイル検索を行わないこと。
+- 不足しているルールやレジストリを創作しないこと。
+- 過去のステータス報告を現在のエビデンスとして扱わないこと。
+- 第三者による変更を上書きしないこと。
+- 具体的なタスクのコンテキストのみを読み込む場合に、プロジェクト全体へのオンボーディングを行わないこと。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-28)
-- Feste Nutzer-, Workspace-, Tool- und Providerbindungen entfernt.
-- Rollenbasierte Dokumenterkennung und optionale lokale Konfiguration eingeführt.
-- Lock-Gültigkeit, Dirty-Tree-Provenienz, Snapshot-Nachweise und redigierte
-  Lageberichte operationalisiert.
+- 特定のユーザー、ワークスペース、ツール、プロバイダーへの固定的な依存関係を削除。
+- 役割に基づくドキュメント識別およびオプションのローカル設定を導入。
+- ロック有効性、変更追跡（dirty tree provenance）、スナップショットエビデンス、およびマスキング済み状況報告の運用手順を規定。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- 初期ローカルバージョン。

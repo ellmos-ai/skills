@@ -2,75 +2,57 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `headless`.
+> **Español** — Versión oficial en español de `headless`.
 
 
+# Headless (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Descripción general y propósito
 
+Utilice esta habilidad cuando la persona solicitante desee explícitamente una ejecución autónoma prolongada sin consultas continuas. Este modo aumenta la perseverancia, no las autorizaciones.
 
-> **English Translation** — Official English version of `headless`.
+Un único elemento no ejecutable no debe detener innecesariamente el trabajo restante seguro e independiente.
 
+## Condiciones iniciales
 
-# Headless (English)
+Registrar antes de comenzar:
 
-## Descripción General y Propósito & Purpose
+- objetivo concreto y criterio de éxito,
+- alcance positivo y negativo (qué incluye y qué no),
+- presupuestos de tiempo o costes disponibles,
+- efectos secundarios permitidos,
+- reglas del proyecto, bloqueos y cambios externos,
+- ruta o mecanismo para puntos de control (checkpoints),
+- opcionalmente, un perfil de decisión local permitido.
 
-Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
-autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
-Ausdauer, nicht die Berechtigung.
+Si falta un perfil de decisión, solo se utilizarán reglas explícitas y suposiciones predeterminadas seguras. El tiempo de ejecución (runtime) no debe suplantar la identidad de ninguna persona.
 
-Ein einzelner nicht ausführbarer Punkt darf unabhängige, sichere Restarbeit nicht
-unnötig stoppen.
+## Niveles de decisión
 
-## Startbedingungen
-
-Vor Beginn festhalten:
-
-- konkretes Ziel und Erfolgskriterium,
-- positiver und negativer Scope,
-- verfügbare Zeit- oder Kostenbudgets,
-- erlaubte Seiteneffekte,
-- Projektregeln, Sperren und fremde Änderungen,
-- Pfad oder Mechanismus für Checkpoints,
-- optional ein zulässiges lokales Entscheidungsprofil.
-
-Fehlt ein Entscheidungsprofil, werden nur explizite Regeln und sichere
-Standardannahmen verwendet. Die Runtime darf keine Person imitieren.
-
-## Entscheidungsstufen
-
-| Stufe | Grundlage | Verhalten |
+| Nivel | Base | Comportamiento |
 |---|---|---|
-| hoch | explizite Regel oder mehrfach bestätigtes Muster | entscheiden; nur bei vorhandener Autorität ausführen |
-| mittel | plausible, reversible Standardentscheidung | entscheiden, Annahme markieren, sicher fortsetzen |
-| niedrig | neuartig, widersprüchlich oder ohne belastbaren Rahmen | nicht raten; zurückstellen oder eskalieren |
+| alto | regla explícita o patrón confirmado repetidamente | decidir; ejecutar solo si se cuenta con la autoridad adecuada |
+| medio | decisión predeterminada plausible y reversible | decidir, marcar la suposición y continuar de forma segura |
+| bajo | novedoso, contradictorio o sin un marco sólido | no adivinar; aplazar o escalar |
 
-Konfidenz in die Entscheidung und Autorität zur Ausführung sind getrennte Achsen.
+La confianza en la decisión y la autoridad para la ejecución son ejes independientes.
 
-## Laufprotokoll
+## Protocolo de ejecución
 
-1. **Kontext laden.** Regeln, Zustand, Locks und Ziel prüfen.
-2. **Arbeit zerlegen.** Unabhängige Pakete, Entscheidungspunkte und
-   Freigabepunkte markieren. Werden mindestens zwei unabhängige Worker eingesetzt,
-   das Auftrags- und Evidenzprotokoll des `orchestrator` anwenden, sofern es
-   verfügbar ist.
-3. **Sichere Arbeit ausführen.** Reversible, autorisierte Schritte fortsetzen.
-4. **Entscheidungen behandeln.**
-   - Mit zulässigem Profil: Verfahren des `decision-avatar` verwenden.
-   - Ohne Profil: nur aus expliziten Projekt- oder Auftragsregeln ableiten.
-5. **Nicht ausführbare Punkte parken.** Entscheidung oder Empfehlung festhalten,
-   Ausführung aber nicht vorwegnehmen.
-6. **Unabhängige Arbeit fortsetzen.** Ein geparkter Punkt blockiert nur seine
-   echten Abhängigkeiten.
-7. **Checkpoint schreiben.** Ziel, erledigte Schritte, Evidenz, Annahmen,
-   geparkte Punkte und nächsten Schritt sichern.
-8. **Abschluss prüfen.** Ergebnisse selbst verifizieren und offene Entscheidungen
-   in einer kompakten Liste bündeln.
+1. **Cargar contexto.** Verificar reglas, estado, bloqueos y objetivo.
+2. **Descomponer el trabajo.** Marcar paquetes independientes, puntos de decisión y puntos de aprobación. Si se emplean al menos dos trabajadores independientes, aplicar el protocolo de tareas y evidencias de `orchestrator`, si está disponible.
+3. **Ejecutar trabajo seguro.** Continuar con los pasos reversibles y autorizados.
+4. **Gestionar decisiones.**
+   - Con perfil permitido: utilizar el procedimiento de `decision-avatar`.
+   - Sin perfil: derivar únicamente a partir de reglas explícitas del proyecto o de la tarea.
+5. **Aparcar elementos no ejecutables.** Registrar la decisión o recomendación, pero sin anticipar la ejecución.
+6. **Continuar el trabajo independiente.** Un elemento aparcado solo bloquea sus dependencias reales.
+7. **Escribir punto de control (checkpoint).** Guardar el objetivo, los pasos completados, la evidencia, las suposiciones, los elementos aparcados y el siguiente paso.
+8. **Verificar la finalización.** Verificar los resultados de forma autónoma y agrupar las decisiones pendientes en una lista compacta.
 
-## Entscheidungsprotokoll
+## Registro de decisiones
 
-Für jede nicht triviale Annahme erfassen:
+Registrar para cada suposición no trivial:
 
 ```text
 ID:
@@ -82,29 +64,24 @@ Evidenz:
 Rücknahme oder Korrektur:
 ```
 
-Agentenentscheidungen dürfen später nicht als Aussagen der auftraggebenden Person
-behandelt werden.
+Las decisiones del agente no deben tratarse posteriormente como declaraciones de la persona solicitante.
 
-## Paketlokale Stopps
+## Paradas locales de paquete
 
-Ein einzelnes Paket stoppen und parken, wenn es neue Autorität, eine irreversible
-externe Aktion, unklare Regeln oder einen Konflikt benötigt. Danach prüfen, welche
-anderen Pakete davon wirklich abhängig sind.
+Detener y aparcar un paquete individual si requiere nueva autoridad, una acción externa irreversible, reglas poco claras o un conflicto. A continuación, verificar qué otros paquetes dependen realmente de él.
 
-## Stop-Bedingungen des Gesamtlaufs
+## Condiciones de parada de la ejecución global
 
-Der gesamte Lauf stoppt nur, wenn:
+La ejecución global solo se detiene si:
 
-- keine sichere, unabhängige Arbeit mehr möglich ist,
-- eine notwendige Entscheidung niedrige Konfidenz hat,
-- alle verbleibenden Arbeitspakete neue externe oder irreversible Autorität
-  erfordern,
-- eine Sperre, ein Konflikt oder ein Sicherheitsrisiko den gesamten verbleibenden
-  Scope betrifft,
-- das vereinbarte Budget erreicht ist,
-- der aktuelle Zustand nicht mehr zuverlässig gesichert werden kann.
+- ya no es posible realizar ningún trabajo seguro e independiente,
+- una decisión necesaria tiene baja confianza,
+- todos los paquetes de trabajo restantes requieren nueva autoridad externa o irreversible,
+- un bloqueo, conflicto o riesgo de seguridad afecta a todo el alcance restante,
+- se ha alcanzado el presupuesto acordado,
+- el estado actual ya no se puede guardar de manera fiable.
 
-## Abschlussformat
+## Formato de finalización
 
 ```text
 Erreicht:
@@ -115,13 +92,13 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.1.0 (2026-07-28)
-- Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.
-- Konfidenz und Ausführungsautorität getrennt.
-- Fortsetzung unabhängiger Arbeit und gebündelte Eskalation präzisiert.
-- Paketlokale Blocker ausdrücklich vom Stopp des Gesamtlaufs getrennt.
+- Se eliminaron las vinculaciones personales de avatar, rutas, comandos y proveedores.
+- Se separaron la confianza y la autoridad de ejecución.
+- Se aclaró la continuación del trabajo independiente y la escalación agrupada.
+- Se separaron explícitamente los bloqueos locales de paquete de la parada de la ejecución global.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Versión local inicial.

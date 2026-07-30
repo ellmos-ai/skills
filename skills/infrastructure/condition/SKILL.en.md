@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-28
-description: Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie "erst wenn", "sobald", "nur falls", "nachdem", "warte bis", "danach" oder "vorher nicht". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.
+description: Flexible condition language for goals, prompts, and tasks. Translates conditions, timestamps, and sequence dependencies into verifiable gates so that a sub-step is executed only after verified release. Always use for /condition, /if, /if-only, /when, /after, /and, or /or as well as phrases such as "only when", "as soon as", "only if", "after", "wait until", "afterwards", or "not before". Also use when multiple sub-goals depend on each other or a goal contains a later release.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,74 +18,62 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'condition/SKILL.md', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `condition`.
 
 
-> **English Translation** — Official English version of `condition`.
+# condition — Condition Language for Goals and Prompts
 
+## Core Idea
 
-# condition — Bedingungssprache für Ziele und Prompts (English)
+Prose conditions are easy to overlook. Therefore, translate every relevant condition into a named, verifiable gate:
 
-## Leitidee
+> Generous when reading, unyielding when proving.
 
-Fließtext-Bedingungen leicht übersehen. Deshalb jede relevante Bedingung in ein benanntes,
-prüfbares Gate übersetzen:
+The input may be natural language and incomplete. The internal translation, however, must explicitly record:
 
-> Beim Lesen großzügig, beim Belegen unnachgiebig.
+1. which condition must be met,
+2. which sub-step is blocked,
+3. which tool query serves as proof,
+4. whether non-fulfillment means delay or prohibition.
 
-Die Eingabe darf natürlichsprachlich und unvollständig sein. Die interne Übersetzung muss
-dagegen eindeutig festhalten:
+Block only the affected sub-step. Continue independent work.
 
-1. welche Bedingung erfüllt sein muss,
-2. welcher Teilschritt blockiert ist,
-3. welche Werkzeugabfrage als Beleg gilt,
-4. ob Nichterfüllung Verzögerung oder Verbot bedeutet.
+## Language Elements
 
-Nur den betroffenen Teilschritt sperren. Unabhängige Arbeit fortsetzen.
-
-## Sprachbausteine
-
-| Ausdruck | Semantik | Beispiel |
+| Expression | Semantics | Example |
 | --- | --- | --- |
-| `/condition <Bedingung> -> <Schritt>` | Kanonisches Gate | `/condition Tests grün -> Release bauen` |
-| `/if <Bedingung> -> <Schritt>` | Synonym für `/condition` | `/if Review abgeschlossen -> mergen` |
-| `/when <Bedingung> -> <Schritt>` | Ausführen, sobald die Bedingung eintritt | `/when Export fertig -> Bericht prüfen` |
-| `/if-only <Bedingung> -> <Schritt>` | Nur bei Erfüllung; sonst gar nicht ausführen | `/if-only Backup belegt -> Altbestand löschen` |
-| `/after <Dauer> -> <Schritt>` | Zeitversatz ab dem Setzzeitpunkt | `/after 30 minutes -> Status prüfen` |
-| `/and` | Alle verknüpften Bedingungen müssen gelten | `/if Tests grün /and Review da -> mergen` |
-| `/or` | Mindestens eine Bedingung genügt | `/if Freigabe da /or Notfallregel aktiv -> starten` |
+| `/condition <Condition> -> <Step>` | Canonical gate | `/condition Tests green -> Build release` |
+| `/if <Condition> -> <Step>` | Synonym for `/condition` | `/if Review complete -> Merge` |
+| `/when <Condition> -> <Step>` | Execute as soon as condition occurs | `/when Export finished -> Verify report` |
+| `/if-only <Condition> -> <Step>` | Only if fulfilled; otherwise do not execute at all | `/if-only Backup proven -> Delete legacy data` |
+| `/after <Duration> -> <Step>` | Time offset from creation timestamp | `/after 30 minutes -> Check status` |
+| `/and` | All linked conditions must hold | `/if Tests green /and Review present -> Merge` |
+| `/or` | At least one condition suffices | `/if Approval present /or Emergency rule active -> Start` |
 
-Nummerierte Bedingungen wie `/condition 1 ...` und `/condition 2 ...` verwenden, wenn ein
-Prompt mehrere Gates enthält. Bei gemischtem `/and` und `/or` keine stillschweigende
-Operatorrangfolge erfinden: Klammern oder nummerierte Teilbedingungen verwenden. Bei
-weiterhin mehrdeutiger Bedeutung nachfragen, bevor ein riskanter Schritt freigegeben wird.
+Use numbered conditions such as `/condition 1 ...` and `/condition 2 ...` when a prompt contains multiple gates. When mixing `/and` and `/or`, do not invent implicit operator precedence: use parentheses or numbered sub-conditions. If the meaning remains ambiguous, ask before releasing a risky step.
 
-`/if-only` als Verbot behandeln. Kann die Bedingung nicht belegt werden, den Schritt nicht
-ausführen. Bei unklarer Formulierung und irreversiblen Folgen die strengere Lesart wählen.
+Treat `/if-only` as a prohibition. If the condition cannot be proven, do not execute the step. In case of unclear phrasing and irreversible consequences, choose the stricter interpretation.
 
-## Ablauf
+## Workflow
 
-### 1. Bedingung normalisieren
+### 1. Normalize Condition
 
-Die Eingabe in einen prüfbaren Satz übersetzen. Relative Zeiten beim Setzen in einen absoluten
-Zeitpunkt mit Zeitzone umrechnen.
+Translate input into a verifiable sentence. Convert relative times upon creation into an absolute timestamp with timezone.
 
-| Eingabe | Normalisierte Bedingung | Belegklasse |
+| Input | Normalized Condition | Proof Class |
 | --- | --- | --- |
-| `time 06:00` | Systemzeit ist mindestens 06:00 in der vereinbarten Zeitzone | Uhr-/Zeitwerkzeug |
-| `after 2 hours` | Systemzeit ist mindestens Setzzeitpunkt plus zwei Stunden | Uhr-/Zeitwerkzeug |
-| `wenn Worker A fertig ist` | Abnahmeartefakt oder Taskstatus von A zeigt Abschluss | Task-/Dateiwerkzeug |
-| `wenn Tests grün sind` | Vorgeschriebener Testlauf endet erfolgreich | Prozess-/Testwerkzeug |
-| `nach dem Push` | Ziel-Remote enthält den vorgesehenen Commit | Versionskontrollwerkzeug |
-| `wenn der User zustimmt` | Explizite Zustimmung liegt in der Konversation vor | Nutzereingabe |
+| `time 06:00` | System time is at least 06:00 in the agreed timezone | Clock/Time tool |
+| `after 2 hours` | System time is at least creation time plus two hours | Clock/Time tool |
+| `wenn Worker A fertig ist` | Acceptance artifact or task status of A shows completion | Task/File tool |
+| `wenn Tests grün sind` | Prescribed test run completes successfully | Process/Test tool |
+| `nach dem Push` | Target remote contains the expected commit | Version control tool |
+| `wenn der User zustimmt` | Explicit approval exists in the conversation | User input |
 
-Ist kein objektiver Belegweg erkennbar, das offen benennen. Kein Gate so formulieren, dass es
-nur durch Vermutung geschlossen werden kann.
+If no objective proof path is recognizable, state this openly. Never formulate a gate such that it can only be closed through conjecture.
 
-### 2. Gate-Zustand festhalten
+### 2. Record Gate State
 
-Wenn ein persistenter Gate-, Task- oder Memory-Store verfügbar ist, dort mindestens diese
-Felder speichern:
+If a persistent gate, task, or memory store is available, store at least these fields there:
 
 ```text
 id
@@ -98,66 +86,53 @@ created_at
 evidence
 ```
 
-Existiert kein persistenter Store, den Zustand sichtbar im aktuellen Goal, Taskplan oder
-Übergabedokument führen. Nur dann behaupten, dass ein Gate Sessions überlebt, wenn der
-verwendete Speicher tatsächlich dauerhaft ist.
+If no persistent store exists, keep the state visibly in the current goal, task plan, or handover document. Only claim that a gate survives sessions if the storage used is actually persistent.
 
-Ein vorhandener Runtime-Adapter darf andere Befehlsnamen verwenden. Funktional braucht er:
-`open`, `list`, `meet` und `drop` oder gleichwertige Operationen.
+An existing runtime adapter may use different command names. Functionally, it requires: `open`, `list`, `meet`, and `drop` or equivalent operations.
 
-### 3. Arbeit umsortieren
+### 3. Reorder Work
 
-Ein offenes Gate blockiert nicht den gesamten Auftrag. Alle unabhängigen Schritte ausführen
-und vor dem nächsten abhängigen Schritt den Gate-Zustand erneut prüfen.
+An open gate does not block the entire task. Execute all independent steps and re-check the gate state before the next dependent step.
 
-Nicht aktiv in kurzen Agentenschleifen pollen. Für längere Wartezeiten einen Scheduler,
-Hintergrundjob oder ein Ereignis verwenden, das bei Eintritt einmalig meldet. Nach dem
-Wecksignal die eigentliche Bedingung trotzdem erneut mit dem vorgesehenen Werkzeug belegen.
+Do not actively poll in short agent loops. For longer waiting times, use a scheduler, background job, or event that reports once upon occurrence. After the wakeup signal, still verify the actual condition again using the designated tool.
 
-### 4. Streng prüfen und schließen
+### 4. Rigorously Verify and Close
 
-Erst die Werkzeugabfrage ausführen, dann das Gate mit konkreter Evidenz schließen. Geeignete
-Belege sind zum Beispiel:
+First execute the tool query, then close the gate with concrete evidence. Suitable proofs include, for example:
 
-- Zeit: gemessener Zeitstempel mit Zeitzone,
-- Datei: Pfad, Metadaten oder Hash des erwarteten Artefakts,
-- Tests: ausgeführter Befehl, Exit-Code und relevante Zusammenfassung,
-- Repository: Branch, Commit-ID und Remote-Abgleich,
-- Prozess oder Task: stabile ID und gemessener Endstatus,
-- Zustimmung: eindeutige Nutzerantwort im aktuellen Kontext.
+- Time: measured timestamp with timezone,
+- File: path, metadata, or hash of expected artifact,
+- Tests: executed command, exit code, and relevant summary,
+- Repository: branch, commit ID, and remote comparison,
+- Process or Task: stable ID and measured final status,
+- Approval: unambiguous user answer in current context.
 
-Eine Schätzung, ein erwarteter Zustand oder die bloße Behauptung eines anderen Workers genügt
-nicht, wenn ein unabhängiger Beleg verfügbar sein sollte.
+An estimate, an expected state, or the mere assertion of another worker is not sufficient when an independent proof should be available.
 
-Ist ein Gate durch Auftragsänderung hinfällig, es mit Begründung als `dropped` markieren. Bei
-`/or` die nicht mehr benötigten Alternativen ebenfalls schließen oder verwerfen, damit keine
-Zombie-Gates verbleiben.
+If a gate becomes obsolete due to a task change, mark it as `dropped` with justification. For `/or`, also close or drop the no longer needed alternatives so no zombie gates remain.
 
-### 5. Eskalieren
+### 5. Escalate
 
-Wenn alle unabhängigen Schritte erledigt sind:
+When all independent steps are completed:
 
-1. prüfen, ob die blockierende Vorarbeit innerhalb des Auftrags aktiv erledigt werden kann,
-2. bei reiner Wartebedingung einen passenden Scheduler oder Hintergrundjob verwenden,
-3. bei Nutzerentscheidung oder externer Abhängigkeit mit offenem Gate und klarem Zwischenstand
-   übergeben.
+1. check whether the blocking preliminary work can be actively completed within the task,
+2. for pure wait conditions, use a suitable scheduler or background job,
+3. for user decisions or external dependencies, hand over with an open gate and clear intermediate status.
 
-Keine zusätzliche Berechtigung aus einer Bedingung ableiten. Ein erfülltes Gate ändert nur die
-Reihenfolge; es erweitert nicht den autorisierten Umfang des Auftrags.
+Do not derive additional authorization from a condition. A fulfilled gate only changes the sequence; it does not expand the authorized scope of the task.
 
-## Example & Usage
+## Example & Application
 
-### Goal mit Zeitbedingung
+### Goal with Time Condition
 
 ```text
 Ziel: Daten prüfen und Bericht veröffentlichen.
 /condition time 16:00 Europe/Berlin -> Veröffentlichung starten
 ```
 
-Die Datenprüfung darf vorher stattfinden. Die Veröffentlichung bleibt gesperrt, bis eine
-aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
+Data verification may take place beforehand. Publishing remains blocked until a current time query proves at least 16:00.
 
-### Prompt mit mehreren Bedingungen
+### Prompt with Multiple Conditions
 
 ```text
 /condition 1 Tests erfolgreich
@@ -165,36 +140,36 @@ aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
 /if condition 1 /and condition 2 -> mergen
 ```
 
-Beide Gates getrennt belegen. Erst danach mergen.
+Verify both gates separately. Only merge afterwards.
 
-### Verbot statt Verzögerung
+### Prohibition Instead of Delay
 
 ```text
 /if-only verifiziertes Backup vorhanden -> alte Dateien löschen
 ```
 
-Ohne belegtes Backup nichts löschen und das offene Verbot im Abschlussbericht nennen.
+Without a proven backup, delete nothing and state the open prohibition in the final report.
 
-## Fallstricke
+## Pitfalls
 
-- Bedingung nur im Fließtext wiederholen, statt sie als Zustand zu führen.
-- Ein gesamtes Goal pausieren, obwohl nur ein Teilschritt blockiert ist.
-- Relative Zeit ohne Setzzeitpunkt und Zeitzone speichern.
-- Werkzeugbeleg durch Annahme oder Selbstauskunft ersetzen.
-- `/if-only` wie ein bloßes Warten behandeln.
-- Nach `/or` nicht mehr benötigte Alternativ-Gates offen lassen.
-- Anbieter-, Modell-, Benutzer- oder Hostnamen in die allgemeine Mechanik einbauen.
-- Einen lokalen Runtime-Pfad als Voraussetzung für die Sprache selbst behandeln.
+- Repeating the condition only in prose text instead of tracking it as a state.
+- Pausing an entire goal even though only a single sub-step is blocked.
+- Saving relative time without creation timestamp and timezone.
+- Replacing tool proof with assumption or self-reporting.
+- Treating `/if-only` like a mere wait condition.
+- Leaving unneeded alternative gates open after `/or`.
+- Hardcoding vendor, model, user, or host names into the general mechanics.
+- Treating a local runtime path as a requirement for the language itself.
 
 ## Changelog
 
 ### 1.1.0 (2026-07-28)
 
-- Anbieter-, benutzer- und systemneutral für gemeinsame Skill-Runtimes formuliert.
-- Nutzung in Goals und Prompts explizit gemacht.
-- Runtime als austauschbaren Adapter beschrieben; feste lokale Pfade und Modellnamen entfernt.
-- Mehrdeutige `/and`-/`/or`-Verknüpfungen, dauerhafte Zustände und Autorisierungsgrenzen geklärt.
+- Formulated vendor-, user-, and system-neutral for shared skill runtimes.
+- Made usage in goals and prompts explicit.
+- Described runtime as an interchangeable adapter; removed fixed local paths and model names.
+- Clarified ambiguous `/and`/`/or` links, persistent states, and authorization boundaries.
 
 ### 1.0.0 (2026-07-25)
 
-- Erste Fassung mit `/condition`, `/if`, `/if-only`, `/when`, `/after`, `/and` und `/or`.
+- Initial version with `/condition`, `/if`, `/if-only`, `/when`, `/after`, `/and`, and `/or`.

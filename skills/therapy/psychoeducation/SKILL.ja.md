@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
+description: うつ病、不安障害、PTSD、双極性障害、統合失調症、ADHD、境界性パーソナリティ障害に関する心理教育。診断を行わない知識の共有。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,182 +15,177 @@ tags: [psychoeducation, depression, anxiety, ptsd, adhd, borderline, knowledge]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `psychoeducation`.
+> **日本語** — `psychoeducation` の公式日本語版。
 
 
+# 心理教育 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 精神疾患、症状、および治療アプローチに関する専門知識の共有
 
-
-# Psychoeducation (English)
-
-> Knowledge sharing about mental disorders, symptoms, and treatment approaches
-
-See: [ETHICS.md](../ETHICS.md)
+参照: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景とコンテキスト
 
-Psychoeducation refers to the systematic sharing of knowledge about mental disorders with affected individuals and their families. The goal is to foster understanding of the disorder, strengthen self-management, and reduce stigmatization.
+心理教育（Psychoeducation）とは、精神疾患についての科学的知識を、当事者やそのご家族に対して体系的に共有・伝えるアプローチです。疾患についての理解を深め、セルフマネジメント力を強化し、社会的なスティグマ（偏見や差別）を軽減することを目的としています。
 
-Evidence: Psychoeducation is recommended as a component in all treatment guidelines (DGPPN, NICE, APA) and demonstrably reduces relapse rates (Xia et al. 2011, Cochrane Review).
+エビデンス：心理教育は、すべての主要な診療ガイドライン（DGPPN、NICE、APA）で標準治療の構成要素として推奨されており、再発率を統計的に有意に低下させることが示されています（Xia et al. 2011, Cochrane Review）。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. What is Psychoeducation?
-
-### Definition
-Structured communication of knowledge about mental disorders with the goal of making affected individuals "experts of their own condition."
-
-### Goals
-- Understanding the illness: What do I have? Why?
-- Recognizing early warning signs
-- Knowing treatment options
-- Fostering self-efficacy
-- Reducing stigma
-- Improving adherence (treatment compliance)
-
-### Evidence
-- Relapse prevention in schizophrenia: NNT = 9 (Xia et al. 2011)
-- Depression: Improvement of treatment adherence by 30-50% (Donker et al. 2009)
-- Anxiety disorders: Psychoeducation alone already mildly effective (Donker et al. 2009)
+**注意：** 本スキルは心理教育的サポートを提供するものであり、専門的な心理療法や医学的診断の代わりになるものではありません。
+**絶対に実施してはならない手法：** EMDR、受容・持続ばく露療法（PE）、ナラティブばく露療法（NET）。
 
 ---
 
-## 2. Mental Disorders Overview
+## 1. 心理教育とは何か？
 
-### 2.1 Depression (Major Depressive Disorder)
+### 定義
+精神疾患に関する専門的知識を構造化して伝え、当事者やご家族が「自分自身の状態に関するエキスパート（専門家）」となれるよう支援すること。
 
-**What is it?** Persistent low mood, loss of interest, and lack of drive for at least 2 weeks, going beyond normal sadness.
+### 主な目的
+- 疾患の理解：「自分に何が起きているのか？なぜなのか？」を把握する
+- 早期警戒サイン（前兆症状）の認識
+- 選択可能な治療法や支援策の把握
+- 自己効力感の向上
+- セルフ・スティグマおよび社会的スティグマの軽減
+- 治療への服薬・行動の継続（アドヒアランス）の向上
 
-**Core symptoms (ICD-11):**
-- Depressed mood (most of the day, nearly every day)
-- Loss of interest / inability to feel pleasure (anhedonia)
-- Reduced drive / increased fatigue
-
-**Additional symptoms:** Concentration difficulties, feelings of guilt, sleep problems, appetite changes, suicidal thoughts, psychomotor retardation/agitation
-
-**Treatment:** CBT, medication (SSRIs, SNRIs), exercise, light therapy (seasonal)
-**Self-help:** Daily structure, activity scheduling, social contacts, exercise, sleep hygiene
-
-### 2.2 Anxiety Disorders
-
-**What is it?** Excessive, uncontrollable anxiety or fear that impairs everyday life.
-
-**Types:**
-- Generalized Anxiety Disorder (GAD): Chronic worrying
-- Panic Disorder: Sudden anxiety attacks with physical symptoms
-- Social Anxiety Disorder: Fear of evaluation in social situations
-- Specific Phobias: Fear of specific objects/situations
-- Agoraphobia: Fear of places/situations without escape
-
-**Treatment:** CBT (exposure, cognitive restructuring), SSRIs, relaxation
-**Self-help:** Anxiety diary, breathing exercises, gradual confrontation
-
-### 2.3 Post-Traumatic Stress Disorder (PTSD)
-
-**What is it?** Persistent reaction to a traumatic experience (threat, violence, accident, disaster) with re-experiencing, avoidance, and hyperarousal.
-
-**Core symptoms:**
-- Intrusions (flashbacks, nightmares)
-- Avoidance behavior
-- Emotional numbing or hyperarousal
-- Negative changes in thoughts and mood
-
-**Treatment:** Trauma-focused CBT, EMDR, Narrative Exposure Therapy
-**Self-help:** Stabilization techniques, grounding, safe place — NO self-exposure
-
-### 2.4 Bipolar Disorder
-
-**What is it?** Alternation between depressive and (hypo)manic episodes. Chronic condition with high relapse risk.
-
-**Manic episode:** Elevated mood, decreased need for sleep, grandiose ideas, increased activity, risk-taking behavior, pressured speech
-
-**Treatment:** Mood stabilizers (lithium, valproate), atypical antipsychotics
-**Self-help:** Mood diary, regular sleep schedule, knowing early warning signs
-
-### 2.5 Schizophrenia
-
-**What is it?** Severe mental disorder with disturbances of thought, perception, and experience. Affects approximately 1% of the population.
-
-**Positive symptoms:** Hallucinations, delusions, disorganized thinking
-**Negative symptoms:** Lack of drive, social withdrawal, flat affect
-**Cognitive symptoms:** Attention, memory, executive functions
-
-**Treatment:** Antipsychotics, CBT for psychosis, social therapy, family interventions
-**Self-help:** Medication adherence, stress avoidance, early warning signs, daily structure
-
-### 2.6 ADHD (Attention Deficit Hyperactivity Disorder)
-
-**What is it?** Neurobiological developmental disorder with inattention, impulsivity, and/or hyperactivity. Begins in childhood, persists into adulthood in approximately 50% of cases.
-
-**Treatment:** Multimodal (medication, psychoeducation, coaching, CBT)
-**Self-help:** External structural aids, timers, lists, routines, exercise
-
-### 2.7 Borderline Personality Disorder (BPD)
-
-**What is it?** Pattern of instability in relationships, self-image, and affect with pronounced impulsivity. High emotional vulnerability.
-
-**Core symptoms:** Unstable relationships, identity disturbance, impulsivity, affective instability, self-harm, chronic emptiness, dissociation
-
-**Treatment:** DBT (Linehan), Schema Therapy, MBT, TFP
-**Self-help:** Skills kit, emergency plan, distress tolerance skills
+### 科学的エビデンス
+- 統合失調症の再発予防：NNT = 9（Xia et al. 2011）
+- うつ病：治療アドヒアランスの30〜50%向上（Donker et al. 2009）
+- 不安障害：心理教育単独でも軽度〜中程度の効果を実証（Donker et al. 2009）
 
 ---
 
-## 3. Stigma Reduction
+## 2. 精神疾患の概要
 
-### Common Myths and Facts
+### 2.1 うつ病（大うつ病性障害）
 
-| Myth | Fact |
+**どのような状態か？** 通常の悲しみを超え、少なくとも2週間以上にわたって持続的な気分低下、興味の喪失、意欲の減退が続く状態。
+
+**中核症状 (ICD-11)：**
+- 抑うつ気分（一日の大半、ほぼ毎日）
+- 興味の喪失 / 喜びを感じられない状態（アンヘドニア）
+- 意欲の低下 / 易疲労性（疲れやすさ）
+
+**その他の伴随症状：** 集中力の低下、過剰な罪悪感、睡眠障害、食欲の変動、自殺念慮、精神運動制止・焦燥。
+
+**一般的な治療法：** 認知行動療法（CBT）、薬物療法（SSRI、SNRI等）、運動療法、高照度光療法（季節性の場合）。
+**セルフヘルプ：** 日常の生活リズムの構造化、活動記録・計画、対人交流の維持、運動、睡眠衛生。
+
+### 2.2 不安障害（不安症）
+
+**どのような状態か？** 日常生活に重大な支障をきたす、過剰でコントロール不可能な不安や恐怖。
+
+**主なタイプ：**
+- 全般不安症 (GAD)：慢性的な全般性の取り越し苦労
+- パニック症 (Panic Disorder)：身体症状を伴う突発的なパニック発作
+- 社交不安症 (Social Anxiety Disorder)：社交場面での否定的な評価に対する恐怖
+- 限局性恐怖症 (Specific Phobias)：特定対象や状況に対する強烈な恐怖
+- 広場恐怖症 (Agoraphobia)：逃げ出すことが困難な場所や状況に対する恐怖
+
+**一般的な治療法：** CBT（ばく露療法、認知の再構成）、SSRI、リラクゼーション技法。
+**セルフヘルプ：** 不安日記、腹式呼吸法、段階的な挑戦・対峙。
+
+### 2.3 創傷後ストレス障害（PTSD）
+
+**どのような状態か？** 生命の危険、暴力、事故、災害などのトラウマ体験の後に生じる持続的な反応。再体験、回避、過覚醒が特徴です。
+
+**中核症状：**
+- 侵入症状（フラッシュバック、悪夢）
+- 回避行動（トラウマに関連する刺激や場面の回避）
+- 感情の麻痺または過覚醒（過度な驚愕反応、イライラ）
+- 認知や気分の持続的な否定的な変化
+
+**一般的な治療法：** トラウマ焦点セットのCBT、EMDR、ナラティブばく露療法。
+**セルフヘルプ：** 安定化技法、グラウンディング（地に足をつける）、安全な場所の想起 — 自我流のばく露は禁止。
+
+### 2.4 双極性障害
+
+**どのような状態か？** うつ病エピソードと（軽）躁病エピソードが交互に現れる状態。再発リスクの高い慢性的な経過を辿ります。
+
+**躁病エピソードの特徴：** 感情の高揚・易怒性、睡眠欲求の減少、誇大思考、活動の著しい増加、リスク行動、談話迫迫。
+
+**一般的な治療法：** 気分安定薬（リチウム、バルプロ酸等）、非定型抗精神病薬。
+**セルフヘルプ：** 気分記録（ムードチャート）、規則正しい睡眠リズム、早期警戒サインの把握。
+
+### 2.5 統合失調症
+
+**どのような状態か？** 思考、知覚、体験の著しい歪みを伴う重篤な精神障害。人口の約1%に影響を及ぼします。
+
+**陽性症状：** 幻覚、妄想、思考の混乱。
+**陰性症状：** 意欲の欠如、社会的引きこもり、感情の平板化。
+**認知機能障害：** 集中力、作業記憶、実行機能の低下。
+
+**一般的な治療法：** 抗精神病薬、精神症状に対するCBT、精神科リハビリテーション、家族への介入。
+**セルフヘルプ：** 確実な服薬の継続、過剰なストレスの回避、再発の兆候の把握、日常の生活構造の維持。
+
+### 2.6 注意欠如・多動症（ADHD）
+
+**どのような状態か？** 不注意、衝動性、および/または多動性を特徴とする神経発達症。小児期に始まり、約50%のケースで成人期まで持続します。
+
+**一般的な治療法：** 多角的なアプローチ（薬物療法、心理教育、コーチング、CBT）。
+**セルフヘルプ：** 外部の構造的ツール（タイマー、チェックリスト、定常ルーチン）、適度な運動。
+
+### 2.7 境界性パーソナリティ障害（BPD）
+
+**どのような状態か？** 対人関係、自己像、感情の著しい不安定さと、強い衝動性を特徴とするパターン。感情的な脆弱性が非常に高い状態です。
+
+**中核症状：** 不安定な対人関係、アイデンティティの混乱、衝動的行動、感情の激しい動揺、自傷行為、慢性的な空虚感、解離症状。
+
+**一般的な治療法：** 弁証法的行動療法（DBT）、スキーマ療法、メンタライゼーションに基づく治療（MBT）、移情焦点化心理療法（TFP）。
+**セルフヘルプ：** スキルキット、緊急時プラン、苦痛耐性スキル。
+
+---
+
+## 3. スティグマの軽減
+
+### よくある誤解と事実
+
+| 誤解 | 事実 |
 |------|------|
-| "Mentally ill people are dangerous" | Affected individuals are more often victims than perpetrators |
-| "Depression is weakness of will" | Depression is a neurobiological disorder |
-| "Therapy is just talking" | Evidence-based therapy demonstrably changes brain structures |
-| "It will pass on its own" | Many conditions become chronic without treatment |
-| "Medications cause addiction" | Antidepressants do not cause dependence |
+| 「精神疾患の人は危険だ」 | 当事者は加害者になるよりも被害者になる確率の方が実証的に高い |
+| 「うつ病は気の持ちよう・甘えだ」 | うつ病は神経生物学的および心理学的な実体のある疾患である |
+| 「心理療法は単なる雑談だ」 | エビデンスに基づく心理療法は脳構造や機能を変化させることが実証されている |
+| 「放置しておけば自然に治る」 | 多くの精神疾患は適切な治療を受けないと慢性化する |
+| 「精神科の薬は癖になって中毒になる」 | 抗抑うつ薬には身体的依存性や依存中毒性はない |
 
-### Language and Stigma
-- "Person with schizophrenia" instead of "schizophrenic"
-- "Person with depression" instead of "depressive person"
-- Person-first language demonstrably reduces stigma (Granello & Gibbs, 2016)
-
----
-
-## 4. Family Perspective
-
-- Mental disorders affect the entire social environment
-- Families need their own psychoeducation and relief
-- Expressed Emotion (EE): High criticism/overinvolvement increases relapse risk
-- Recommendation: Family support groups, family psychoeducation
+### 言語表現とスティグマ
+- 「統合失調症患者」ではなく「統合失调症のある人」
+- 「うつ病患者」ではなく「うつ病を経験している人」
+- 人間優先の言語表現（Person-first language）は、スティグマを明確に低下させることが証明されています（Granello & Gibbs, 2016）。
 
 ---
 
-## Ethics and Boundaries
+## 4. ご家族の視点
 
-**An AI assistant may:**
-- Provide factual information about mental disorders
-- Answer common questions
-- Refer to further resources
+- 精神疾患は、当事者だけでなく周囲の家族や社会環境全体に影響を及ぼします。
+- ご家族自身も、独自の心理教育や情緒的なサポート・負担軽減を必要としています。
+- 感情表出（Expressed Emotion, EE）：家族内の過剰な批判や過干渉（高EE）は、再発リスクを高めることが知られています。
+- 推奨事項：家族会、多家族心理教育グループへの参加。
 
-**An AI assistant must NOT:**
-- Make or confirm diagnoses
-- Give individual treatment recommendations
-- Replace professional psychoeducation in group format
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## 倫理と限界
+
+**AIアシスタントができること：**
+- 精神疾患に関する客観的事実や知識の提供
+- 一般的な疑問や心配事への回答
+- 専門機関や信頼できる情報源への案内
+
+**AIアシスタントが禁止されていること：**
+- 診断を行ったり、診断を確定させたりすること
+- 個別の医療・治療上の指示を与えること
+- 専門家によるグループ・個別の心理教育を代替すること
+
+**急性危機・自傷他害のおそれがある場合は必ず以下に繋いでください：**
+- こころの健康相談統一ダイヤル (JP): 0570-064-556
+- よりそいホットライン (JP): 0120-279-338
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 119 / 110 (JP), 911 (US), 112 (EU)
 
 ---
 

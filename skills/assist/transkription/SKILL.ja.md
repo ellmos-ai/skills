@@ -1,87 +1,96 @@
 ---
+name: transkription
+version: 0.1.0
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-06-22
+description: 音声/動画ファイルをテキストに文字起こしします。オプションのバックエンドとして Whisper (openai-whisper) または Vosk (オフライン) を使用し、存在確認によって検出されます。バックエンドがない場合：ダミー出力のプレースホルダーモード (dry-run)。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [transkription, audio, speech-to-text, whisper, vosk, offline]
 language: ja
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `transkription`.
+> **日本語** — `transkription` の公式日本語版。
 
 
+## 概要と目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+音声/動画ファイルをテキストに変換します — クラウドアクセスを必須とせず、ローカルで実行されます。このスキルは Whisper または Vosk がインストールされているかを自動的に検出し、利用可能な最適なバックエンドを選択します。バックエンドがない場合はドライラン（dry-run）モードで動作し、プレースホルダーテキストを返すため、ワークフローは常に機能します。
 
-
-## 概要と目的 & Purpose
-
-Convert audio/video files to text — locally, without mandatory cloud access. The skill
-automatically detects whether Whisper or Vosk is installed and selects the best
-available backend. Without a backend it runs in dry-run mode and returns a
-placeholder text, so the workflow always works.
-
-Transcripts are stored locally in `transkription/store.db` and can be queried.
+文字起こし結果はローカルの `transkription/store.db` に保存され、照会可能です。
 
 ---
 
-## Triggers
+## トリガー
 
-| Phrase | Action |
+| フレーズ | アクション |
 |---|---|
-| "Transcribe this audio" | Transcribe audio file |
-| "Transcribe [file]" | Transcribe named file |
-| "Show my transcripts" | List latest transcripts |
-| "Search transcript [term]" | Full-text search in transcripts |
-| "Export transcript [ID]" | Export transcript as TXT |
+| "Transcribe this audio" | 音声ファイルを文字起こし |
+| "Transcribe [file]" | 指定したファイルを文字起こし |
+| "Show my transcripts" | 最新の文字起こし一覧を表示 |
+| "Search transcript [term]" | 文字起こし結果の全文検索 |
+| "Export transcript [ID]" | 文字起こし結果を TXT としてエクスポート |
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
-1. **Backend check**: Check whether `whisper` or `vosk` is importable.
-2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
-3. **Transcription**: Call backend and obtain raw text.
-4. **Save**: Store result with metadata (file, duration, language, backend, timestamp) in `store.db`.
-5. **Output**: Return text; optionally export as `.txt`.
+1. **バックエンド確認**: `whisper` または `vosk` がインポート可能か確認。
+2. **ファイル確認**: 入力ファイルが存在すること（音声: wav, mp3, m4a, ogg, flac; 動画: mp4, mkv, webm — ffmpeg 経由で抽出）。
+3. **文字起こし**: バックエンドを呼び出して生テキストを取得。
+4. **保存**: メタデータ（ファイル、再生時間、言語、バックエンド、タイムスタンプ）とともに `store.db` に結果を保存。
+5. **出力**: テキストを返却。オプションで `.txt` としてエクスポート。
 
 ---
 
-## CLI Entry Point
+## CLI エントリーポイント
 
 ```bash
-# Transcribe file (English)
+# Transcribe file (Deutsch)
 python transkription_core.py transcribe audio.wav
 
-# With explicit language (English)
+# With explicit language (Deutsch)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-run (no backend required) (English)
+# Dry-run (no backend required) (Deutsch)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# List transcripts (English)
+# List transcripts (Deutsch)
 python transkription_core.py list [--limit 20]
 
-# Full-text search (English)
+# Full-text search (Deutsch)
 python transkription_core.py search "term"
 
-# Export (English)
+# Export (Deutsch)
 python transkription_core.py export <id> [--out file.txt]
 
-# Backend check (English)
+# Backend check (Deutsch)
 python transkription_core.py check
 
-# Alternative store path (e.g. for tests) (English)
+# Alternative store path (e.g. for tests) (Deutsch)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
 ---
 
-## Store
+## ストレージ
 
-| Property | Value |
+| 項目 | 値 |
 |---|---|
-| Type | SQLite |
-| Path (default) | `skills/assist/transkription/store.db` |
-| Override | `--store <path>` or env `TRANSKRIPTION_STORE` |
-| Tables | `transcripts` |
+| タイプ | SQLite |
+| パス (デフォルト) | `skills/assist/transkription/store.db` |
+| 上書き設定 | `--store <path>` または環境変数 `TRANSKRIPTION_STORE` |
+| テーブル | `transcripts` |
 
-### Schema `transcripts`
+### スキーマ `transcripts`
 
 ```sql
 CREATE TABLE IF NOT EXISTS transcripts (
@@ -99,35 +108,34 @@ CREATE TABLE IF NOT EXISTS transcripts (
 
 ---
 
-## Attitude
+## 動作・方針
 
-- Without an installed backend the skill works in dry-run mode (demo text).
-- Whisper is preferred over Vosk (better German quality).
-- The choice between Whisper and Vosk can be set via `assist/prefs.json` (`transkription_backend: "whisper"|"vosk"|"auto"`).
-- ffmpeg for video extraction is needed separately and is not included in the skill.
-
----
-
-## Privacy
-
-- **All transcripts stay local** — no cloud transfer without Whisper online mode.
-- Whisper can be used locally (tiny/base/medium model) or via OpenAI API.
-  By default the local model is used.
-- `store.db` may contain sensitive conversation content — **do not commit to Git**.
-- Recommendation: add `store.db` to `.gitignore`.
+- バックエンドがインストールされていない場合、スキルはドライランモード（デモテキスト）で動作します。
+- Vosk よりも Whisper が優先されます（ドイツ語の品質が向上するため）。
+- Whisper と Vosk の選択は `assist/prefs.json` で設定できます (`transkription_backend: "whisper"|"vosk"|"auto"`)。
+- 動画抽出用の ffmpeg は別途必要であり、本スキルには含まれていません。
 
 ---
 
-## Related Resources
+## プライバシー
 
-- BACH `hub/_services/voice/voice_stt.py` — backend pattern (inspiration, read-only)
-- Skill `utilities/yt-transcriber` — YouTube transcription (separate skill, not a duplicate: YT-specific)
-- `tools/module-installer/module_installer.py` — registry contains whisper + vosk
+- **すべての文字起こしデータはローカルに保持されます** — Whisper オンラインモードを使用しない限りクラウド転送はありません。
+- Whisper はローカル（tiny/base/medium モデル）または OpenAI API 経由で使用できます。デフォルトではローカルモデルが使用されます。
+- `store.db` には機密性の高い会話内容が含まれる可能性があります — **Git にコミットしないでください**。
+- 推奨事項: `store.db` を `.gitignore` に追加してください。
+
+---
+
+## 関連リソース
+
+- BACH `hub/_services/voice/voice_stt.py` — バックエンドパターン（インスピレーション、読み取り専用）
+- スキル `utilities/yt-transcriber` — YouTube 文字起こし（別スキル、重複ではありません: YT 専用）
+- `tools/module-installer/module_installer.py` — レジストリに whisper + vosk が含まれます
 
 ---
 
 ## 変更履歴
 
-| Version | Date | Change |
+| バージョン | 日付 | 変更内容 |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Initial creation — own SQLite store, Whisper/Vosk presence check |
+| 0.1.0 | 2026-06-22 | 初回作成 — 独自の SQLite ストレージ、Whisper/Vosk 存在確認 |

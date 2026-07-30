@@ -1,103 +1,115 @@
 ---
+name: docs-analysis
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: ドキュメント要件分析：docs/ フォルダ内のコンセプトおよび要件ドキュメントを分析し、要件を現在のコードと照合して、統合された差分レポートを作成します。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [docs-analysis, requirements, code-review, diff-report, quality-assurance]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `docs-analysis`.
+> **日本語** — `docs-analysis` の公式日本語版。
 
 
+# ドキュメント要件分析 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Document Requirements Analysis (English)
-
-> Analyzes all concept and requirements documents, checks their requirements against the current code, and creates a consolidated difference report.
-
----
-
-## 概要と目的 & Purpose
-
-Analyzes all concept and requirements documents in the ../docs/ folder, checks their requirements against the current code, and creates a consolidated difference report.
+> すべてのコンセプトおよび要件ドキュメントを分析し、要件を現在のコードと照合して、統合された差分レポートを作成します。
 
 ---
 
-## Naming Convention
+## 概要と目的
 
-### Prefix and Suffix
-All analyzed documents receive:
-- **Prefix:** `conN_` where N = analysis version (1, 2, 3, ...)
-- **Suffix:** `_XX` where XX = fulfillment percentage (rounded to nearest 10)
-
-### Archiving Threshold
-- **>= 75% fulfilled:** Document is moved to `../docs/_archive/`
-- **< 75% fulfilled:** Document stays in `../docs/` with prefix/suffix
-- **Threshold configurable** (default: 75)
+`../docs/` フォルダ内のすべてのコンセプトおよび要件ドキュメントを分析し、それらの要件を現在のコードと照合して、統合された差分レポートを作成します。
 
 ---
 
-## Process
+## 命名規則
 
-### Phase 1: Collect Documents
-- List all *.md and *.txt files in ../docs/ (root)
-- Filter out README.txt
+### プレフィックスとサフィックス
+すべての分析対象ドキュメントには以下が付与されます：
+- **プレフィックス：** `conN_` （N = 分析バージョン：1, 2, 3, ...）
+- **サフィックス：** `_XX` （XX = 達成率：10 の倍数に四捨五入）
 
-### Phase 2: Extract Requirements
-For each document:
-- Read content
-- Identify requirements (checklists, tables, MISSING/TODO markers)
-- Categorize: Structure, Code, API, DB Schema, CLI, Feature
-
-### Phase 3: Code Verification
-For each requirement:
-- Determine verification method (Glob, Grep, Read)
-- Execute verification
-- Mark as: FULFILLED, PARTIAL, MISSING
-
-### Phase 4: Assessment
-- Count fulfilled vs. open requirements
-- Calculate fulfillment percentage (%)
-- Decide: archive (>= 75%) or keep (< 75%)
-
-### Phase 5: Generate Output
-- Create REQUIREMENTS_ANALYSIS.md (summary)
-- Create consense_diff.md (only open requirements, by priority)
-
-### Phase 6: Versioning
-- Scan for highest conN_ prefix
-- New version = highest + 1
-
-### Phase 7: Rename and Move
-- Apply new prefix/suffix to documents
-- Archive or keep
+### アーカイブのしきい値
+- **>= 75% 達成：** ドキュメントは `../docs/_archive/` に移動
+- **< 75% 達成：** ドキュメントはプレフィックス/サフィックス付きで `../docs/` に保持
+- **しきい値は設定可能**（デフォルト：75）
 
 ---
 
-## Output
+## プロセス
 
-| File | Description |
-|------|-------------|
-| `conN_REQUIREMENTS_ANALYSIS.md` | Complete analysis (version N) |
-| `consense_diff_N.md` | Consolidated open requirements |
-| `_archive/conN_*_XX.*` | Archived (>=75%) documents |
+### フェーズ 1: ドキュメントの収集
+- `../docs/`（ルート）内のすべての `*.md` および `*.txt` ファイルを一覧表示
+- `README.txt` を除外
+
+### フェーズ 2: 要件の抽出
+各ドキュメントについて：
+- コンテンツを読み込む
+- 要件の特定（チェックリスト、表、MISSING/TODO マーカー）
+- 分類：構造、コード、API、DB スキーマ、CLI、機能
+
+### フェーズ 3: コード検証
+各要件について：
+- 検証方法の決定（Glob、Grep、Read）
+- 検証を実行
+- 状態を記録：FULFILLED, PARTIAL, MISSING
+
+### フェーズ 4: 評価
+- 達成済み要件と未達成要件をカウント
+- 達成率（%）を計算
+- 判定：アーカイブ（>= 75%）または保持（< 75%）
+
+### フェーズ 5: 出力の生成
+- `REQUIREMENTS_ANALYSIS.md` の作成（要約）
+- `consense_diff.md` の作成（未達成要件のみ、優先度順）
+
+### フェーズ 6: バージョニング
+- 最大の `conN_` プレフィックスをスキャン
+- 新しいバージョン = 最大 + 1
+
+### フェーズ 7: リネームと移動
+- ドキュメントに新しいプレフィックス/サフィックスを適用
+- アーカイブまたは保持
 
 ---
 
-## Priority Classification
+## 出力
 
-| Priority | Criteria |
-|:--------:|----------|
-| P1 | Core functionality missing, system unusable |
-| P2 | Important feature missing, workaround possible |
-| P3 | Nice-to-have, improves UX |
-| P4 | Cosmetic, documentation, code quality |
+| ファイル | 説明 |
+|----------|------|
+| `conN_REQUIREMENTS_ANALYSIS.md` | 完全な分析（バージョン N） |
+| `consense_diff_N.md` | 統合された未達成要件 |
+| `_archive/conN_*_XX.*` | アーカイブ済み（>=75%）ドキュメント |
+
+---
+
+## 優先度分類
+
+| 優先度 | 基準 |
+|:------:|------|
+| P1 | コア機能が欠落、システム利用不可 |
+| P2 | 重要な機能が欠落、回避策あり |
+| P3 | あると良い、UX の向上 |
+| P4 | 軽微、ドキュメント、コード品質 |
 
 ---
 
 ## 変更履歴
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- BACH v3.8.0 から移植
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 から移植 | スタンドアロン版*

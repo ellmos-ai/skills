@@ -1,265 +1,276 @@
 ---
+name: behavioral-activation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Поведенческая активация при депрессии: преодоление порочного круга, мониторинг активности, недельное планирование и ценностно-ориентированные действия.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [behavioral-activation, depression, activity, weekly-plan, values]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `behavioral-activation`.
+> **Русский** — Официальная русская версия `behavioral-activation`.
 
 
+# Поведенческая активация (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Планирование активности, дневник настроения и действий, и выбор действий на основе ценностей: противодействие порочному кругу бездействия и депрессивного состояния
 
-
-# Behavioral Activation (English)
-
-> Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Behavioral Activation (BA) is an evidence-based intervention from behavioral therapy for treating depression. It is based on the insight that depression leads to withdrawal and inactivity, which further worsens mood (vicious cycle). Through targeted building of positive activities, this cycle is broken.
-
-Evidence: Behavioral activation is effective as a standalone therapy and is equivalent to cognitive therapy (Dimidjian et al. 2006, Richards et al. 2016 COBRA study). Recommended as first-line intervention for mild to moderate depression (NICE Guidelines).
-
-**Note:** This is support, not a substitute for professional therapy.
-For severe depression or suicidal thoughts, ALWAYS recommend professional help.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The Behavioral Activation Model of Depression
+## Контекст
 
-### The Vicious Cycle
+Поведенческая активация (Behavioral Activation, BA) — это доказательная интервенция поведенческой терапии для лечения депрессии. Она основана на понимании того, что депрессия приводит к изоляции и бездействию, что в свою очередь еще сильнее ухудшает настроение (порочный круг). Через целенаправленное построение положительной активности этот круг разрывается.
 
-```
-Triggering situation (loss, stress, change)
-        |
-        v
-Low mood, lack of energy
-        |
-        v
-Withdrawal, avoidance, inactivity
-        |
-        v
-Fewer positive experiences, isolation
-        |
-        v
-Even deeper low mood
-        |
-        v
-Even more withdrawal ... (downward spiral)
-```
+Доказательная база: Поведенческая активация эффективна как самостоятельная терапия и эквивалентна когнитивной терапии (Dimidjian et al. 2006, исследование COBRA Richards et al. 2016). Рекомендуется в качестве интервенции первой линии при легкой и умеренной депрессии (рекомендации NICE).
 
-### The Counter-Principle
-
-```
-Targeted activity (even with low motivation)
-        |
-        v
-Positive experience / sense of accomplishment / connection
-        |
-        v
-Slight mood improvement
-        |
-        v
-Somewhat more energy and motivation
-        |
-        v
-Further activity ... (upward spiral)
-```
-
-**Core principle:** Don't wait for motivation to come — action creates motivation.
-"Act first, feel second." (Not: "Feel first, then act.")
+**Примечание:** Это поддержка, а не замена профессиональной терапии.
+При тяжелой депрессии или суицидальных мыслях ВСЕГДА рекомендуйте профессиональную помощь.
+**Никогда не применять:** EMDR (ДПДГ), длительную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. Mood-Activity Diary
+## 1. Модель поведенческой активации при депрессии
 
-### Goal
-Make connections between activities and mood visible. Recognize which activities improve mood and which worsen it.
-
-### Diary Format
+### Порочный круг
 
 ```
-MOOD-ACTIVITY DIARY
-
-Date: [...]
-
-| Time  | Activity | Mood (0-10) | Enjoyment (0-10) | Importance (0-10) |
-|-------|----------|-------------|-------------------|---------------------|
-| 07:00 | Got up, had breakfast | 3 | 2 | 5 |
-| 08:00 | Work: emails | 4 | 1 | 6 |
-| 10:00 | Walk | 6 | 5 | 4 |
-| 12:00 | Lunch with colleague | 7 | 6 | 7 |
-| 14:00 | Work: project | 5 | 3 | 7 |
-| 18:00 | Watching TV (alone) | 3 | 2 | 1 |
-| 20:00 | Phone call with friend | 6 | 5 | 8 |
-
-Daily mood average: [...]
-Best activity today: [...]
-Insight: [...]
+Триггерная ситуация (утрата, стресс, перемены)
+        |
+        v
+Сниженный фон настроения, упадок сил
+        |
+        v
+Изоляция, избегание, бездействие
+        |
+        v
+Сокращение положительного опыта, социальное отчуждение
+        |
+        v
+Еще более глубокое снижение настроения
+        |
+        v
+Еще большая изоляция ... (нисходящая спираль)
 ```
 
-### Weekly Review
+### Противоположный принцип
 
-**Guiding questions:**
-- Which activities regularly lift my mood?
-- Which activities lower my mood?
-- Are there times that are particularly difficult?
-- How much time do I spend on pleasant vs. unpleasant activities?
-- Which activities have I been avoiding?
+```
+Целенаправленное действие (даже при низкой мотивации)
+        |
+        v
+Положительный опыт / чувство достижения / связь с другими
+        |
+        v
+Небольшое улучшение настроения
+        |
+        v
+Немного больше энергии и мотивации
+        |
+        v
+Дальнейшая активность ... (восходящая спираль)
+```
+
+**Ключевой принцип:** Не ждите появления мотивации — действие создает мотивацию.
+«Сначала действуй, потом чувствуй». (А не: «Сначала почувствуй, потом действуй».)
 
 ---
 
-## 3. Activity Planning
+## 2. Дневник настроения и активности
 
-### Step 1: Create Activity List
+### Цель
+Сделать видимой связь между деятельностью и настроением. Понять, какие действия улучшают настроение, а какие ухудшают его.
 
-Collect three categories of activities:
-
-**A) Pleasant Activities (joy, enjoyment)**
-- Nature: Walk, park, forest
-- Social: Meet friends, phone calls, cook together
-- Creative: Music, painting, writing, crafting
-- Physical: Sports, yoga, dancing, swimming
-- Enjoyment: Cook favorite meal, read a book, listen to music
-- Relaxation: Take a bath, meditation, breathing exercise
-
-**B) Necessary Activities (structure, self-care)**
-- Household: Tidying up, cooking, shopping
-- Personal care: Showering, getting dressed, brushing teeth
-- Administration: Bills, appointments, paperwork
-- Health: Doctor's appointments, medication, nutrition
-
-**C) Values-Based Activities (meaning, significance)**
-- See section 4 below
-
-### Step 2: Create Weekly Plan
+### Формат дневника
 
 ```
-WEEKLY PLAN
+ДНЕВНИК НАСТРОЕНИЯ И АКТИВНОСТИ
 
-| Day | Morning | Midday | Afternoon | Evening |
-|-----|---------|--------|-----------|---------|
-| Mon | [...]   | [...]  | [...]     | [...]   |
-| Tue | [...]   | [...]  | [...]     | [...]   |
-| Wed | [...]   | [...]  | [...]     | [...]   |
-| Thu | [...]   | [...]  | [...]     | [...]   |
-| Fri | [...]   | [...]  | [...]     | [...]   |
-| Sat | [...]   | [...]  | [...]     | [...]   |
-| Sun | [...]   | [...]  | [...]     | [...]   |
+Дата: [...]
+
+| Время | Действие / Занятие | Настроение (0-10) | Удовольствие (0-10) | Важность (0-10) |
+|-------|--------------------|-------------------|---------------------|-----------------|
+| 07:00 | Подъем, завтрак    | 3                 | 2                   | 5               |
+| 08:00 | Работа: почта      | 4                 | 1                   | 6               |
+| 10:00 | Прогулка           | 6                 | 5                   | 4               |
+| 12:00 | Обед с коллегой    | 7                 | 6                   | 7               |
+| 14:00 | Работа: проект     | 5                 | 3                   | 7               |
+| 18:00 | Просмотр ТВ (один) | 3                 | 2                   | 1               |
+| 20:00 | Звонок другу       | 6                 | 5                   | 8               |
+
+Среднее настроение за день: [...]
+Лучшее занятие за сегодня: [...]
+Вывод / Осознание: [...]
 ```
 
-### Planning Rules
-1. **Start small:** Don't plan the whole day, but 1-2 activities per day
-2. **Mix:** Pleasant + necessary + values-based
-3. **Specific:** "Tuesday 3:00 PM walk in the park" instead of "Move more"
-4. **Realistic:** Achievable even with low energy
-5. **Flexible:** Plan is guidance, not obligation
-6. **Graduated:** For very low energy: mini-steps (5 minutes is enough)
+### Еженедельный обзор
 
-### Dealing with Obstacles
-
-| Obstacle | Strategy |
-|----------|----------|
-| "I have no energy" | Reduce activity to 5 minutes |
-| "I don't feel like it" | Reminder: motivation comes through action |
-| "It won't help anyway" | Experiment: try it and measure mood afterward |
-| "I can't do it alone" | Involve someone (appointment = commitment) |
-| "I don't have time" | Build in small activities (take stairs, 5 min break outside) |
+**Направляющие вопросы:**
+- Какие действия регулярно поднимают мне настроение?
+- Какие действия снижают мое настроение?
+- Есть ли временные промежутки, которые даются особенно тяжело?
+- Сколько времени я трачу на приятные действия по сравнению с неприятными?
+- Каких действий я избегаю в последнее время?
 
 ---
 
-## 4. Values-Based Activity Selection
+## 3. Планирование активности
 
-### Principle
-Activities that align with personal values create sustainable well-being — as opposed to mere pleasure, which fades quickly.
+### Шаг 1: Составление списка действий
 
-### Life Domains and Values
+Собрать действия по трем категориям:
+
+**А) Приятные действия (радость, удовольствие)**
+- Природа: прогулка, парк, лес
+- Социальные: встречи с друзьями, звонки, совместное приготовление еды
+- Творческие: музыка, рисование, письмо, рукоделие
+- Физические: спорт, йога, танцы, плавание
+- Удовольствия: приготовить любимое блюдо, почитать книгу, послушать музыку
+- Релаксация: принять ванну, медитация, дыхательные упражнения
+
+**Б) Необходимые действия (структура, забота о себе)**
+- Быт: уборка, готовка, покупки
+- Личная гигиена: душ, одевание, чистка зубов
+- Администрирование: счета, записи, документы
+- Здоровье: визиты к врачу, прием лекарств, питание
+
+**В) Действия, основанные на ценностях (смысл, значимость)**
+- См. раздел 4 ниже
+
+### Шаг 2: Составление недельного плана
 
 ```
-VALUES COMPASS
+НЕДЕЛЬНЫЙ ПЛАН
 
-Relationships:     What kind of partner/friend/family member do I want to be?
-Work/Education:    What is important to me about my work?
-Leisure:           How do I want to spend my free time?
-Health:            How do I want to treat my body?
-Community:         What contribution do I want to make?
-Personal:          What kind of person do I want to be?
+| День | Утро  | День  | Вечер | Ночь  |
+|------|-------|-------|-------|-------|
+| Пн   | [...] | [...] | [...] | [...] |
+| Вт   | [...] | [...] | [...] | [...] |
+| Ср   | [...] | [...] | [...] | [...] |
+| Чт   | [...] | [...] | [...] | [...] |
+| Пт   | [...] | [...] | [...] | [...] |
+| Сб   | [...] | [...] | [...] | [...] |
+| Вс   | [...] | [...] | [...] | [...] |
 ```
 
-### Values-Activity Mapping
+### Правила планирования
+1. **Начинайте с малого:** Не планируйте весь день, достаточно 1–2 действий в день
+2. **Комбинируйте:** Приятные + необходимые + основанные на ценностях
+3. **Конкретность:** «Вторник 15:00 прогулка в парке» вместо «Больше двигаться»
+4. **Реалистичность:** Достижимо даже при низком уровне энергии
+5. **Гибкость:** План — это ориентир, а не жесткое обязательство
+6. **Пошаговость:** При очень низкой энергии: микро-шаги (достаточно 5 минут)
 
-**Example:**
+### Преодоление препятствий
 
-| Value | Activity | Frequency |
-|-------|----------|-----------|
-| Connection | Call a friend | 2x per week |
-| Health | 20 min walk | Daily |
-| Creativity | Play guitar | 1x per week |
-| Helpfulness | Help neighbor with shopping | 1x per week |
-| Learning | 15 min reading non-fiction | 3x per week |
-
-### Values vs. Goals
-- **Value:** A direction you want to move toward (e.g., "being a loving partner")
-- **Goal:** An achievable endpoint (e.g., "plan anniversary celebration")
-- Values can never be "checked off" — they provide ongoing orientation
+| Препятствие | Стратегия |
+|-------------|-----------|
+| «У меня нет сил» | Сократить действие до 5 минут |
+| «Мне не хочется» | Напоминание: мотивация приходит в процессе действия |
+| «Это всё равно не поможет» | Эксперимент: попробовать и измерить настроение после |
+| «Я не могу сделать это одна/один» | Вовлечь кого-то (договоренность = обязательство) |
+| «У меня нет времени» | Встроить микро-активность (подняться по лестнице, 5 мин паузы на улице) |
 
 ---
 
-## 5. Measuring Progress
+## 4. Выбор действий на основе ценностей
 
-### Weekly Review
+### Принцип
+Действия, согласующиеся с личными ценностями, создают устойчивое благополучие — в отличие от мимолетного удовольствия, которое быстро угасает.
+
+### Сферы жизни и ценности
 
 ```
-WEEKLY REVIEW
+КОМПАС ЦЕННОСТЕЙ
 
-Week: [Date]
-Planned activities: [Number]
-Completed activities: [Number]
-Average mood: [0-10]
-
-What went well: [...]
-What was difficult: [...]
-Insight of the week: [...]
-Plan for next week: [...]
+Отношения:            Каким партнером/другом/членом семьи я хочу быть?
+Работа/Образование:   Что для меня важно в моей работе?
+Досуг:                Как я хочу проводить свое свободное время?
+Здоровье:             Как я хочу относиться к своему телу?
+Сообщество:           Какой вклад я хочу вносить?
+Личность:             Каким человеком я хочу быть?
 ```
 
-### Long-Term Tracking
-- Observe mood trends over weeks
-- Recognize the connection between activity level and mood
-- Make successes visible (even small ones)
+### Сопоставление ценностей и действий
+
+**Пример:**
+
+| Ценность | Действие | Частота |
+|----------|----------|---------|
+| Связь с близкими | Позвонить другу | 2 раза в неделю |
+| Здоровье | 20 мин прогулки | Ежедневно |
+| Творчество | Игра на гитаре | 1 раз в неделю |
+| Взаимопомощь | Помочь соседу с покупками | 1 раз в неделю |
+| Обучение | 15 мин чтения научно-популярной книги | 3 раза в неделю |
+
+### Ценности против Целей
+- **Ценность:** Направление, к которому вы хотите двигаться (например, «быть любящим партнером»)
+- **Цель:** Достижимый конечный пункт (например, «спланировать празднование годовщины»)
+- Ценности нельзя «выполнить и поставить галочку» — они обеспечивают постоянную ориентацию
 
 ---
 
-## Ethics and Boundaries
+## 5. Измерение прогресса
 
-**An AI assistant may:**
-- Guide through the diary and activity planning
-- Suggest activities (never prescribe)
-- Document mood data and reflect back patterns
-- Accompany values reflection
-- Acknowledge small progress
+### Еженедельный обзор
 
-**An AI assistant must NOT:**
-- Be the sole support for severe depression
-- Make medication-related recommendations
-- Assess suicidality
-- Make diagnoses
-- Guarantee that behavioral activation is sufficient
+```
+ЕЖЕНЕДЕЛЬНЫЙ ОБЗОР
 
-**Important:** For severe depression (persistent lack of drive, suicidal thoughts, inability to manage daily life), professional help is essential. Behavioral activation is a complement, not a substitute.
+Неделя: [Дата]
+Запланировано действий: [Количество]
+Выполнено действий: [Количество]
+Среднее настроение: [0-10]
 
-**In case of acute crisis, ALWAYS refer to:**
+Что прошло хорошо: [...]
+Что было трудно: [...]
+Главный вывод недели: [...]
+План на следующую неделю: [...]
+```
+
+### Долгосрочное отслеживание
+- Наблюдать динамику настроения на протяжении недель
+- Замечать связь между уровнем активности и состоянием
+- Делать успехи видимыми (даже самые маленькие)
+
+---
+
+## Этика и границы
+
+**ИИ-ассистент может:**
+- Сопровождать заполнение дневника и планирование активности
+- Предлагать варианты действий (никогда не навязывать)
+- Фиксировать данные о настроении и отражать закономерности
+- Сопровождать рефлексию ценностей
+- Поддерживать и отмечать малейший прогресс
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Выступать единственным источником помощи при тяжелой депрессии
+- Давать рекомендации по медикаментозному лечению
+- Оценивать суицидальный риск
+- Ставить диагнозы
+- Гарантировать, что поведенческой активации будет достаточно
+
+**Важно:** При тяжелой депрессии (стойкое отсутствие мотивации, суицидальные мысли, неспособность справляться с бытом) профессиональная помощь обязательна. Поведенческая активация — это дополнение, а не замена.
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи: +7 (495) 051 (Москва)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная служба: 112 (РФ / ЕС) / 911 (US)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Не является профессиональной терапией*

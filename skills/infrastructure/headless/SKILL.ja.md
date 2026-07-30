@@ -2,75 +2,57 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `headless`.
+> **日本語** — `headless` の公式日本語版。
 
 
+# Headless (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概要と目的
 
+依頼者が途中で継続的な確認を行わずに、長時間かつ自律的な実行を明確に希望する場合にこの Skill を使用します。このモードは実行の耐久性を高めるものであり、権限を拡大するものではありません。
 
-> **English Translation** — Official English version of `headless`.
+実行不可能な単一の項目によって、独立した安全な残余作業を不要に停止させてはなりません。
 
+## 開始条件
 
-# Headless (English)
+開始前に以下を記録してください：
 
-## 概要と目的 & Purpose
+- 具体的な目標と成功基準、
+- 対象範囲（ポジティブスコープ）および対象外範囲（ネガティブスコープ）、
+- 利用可能な時間またはコスト予算、
+- 許容される副作用、
+- プロジェクトルール、ロック、および外部による変更、
+- チェックポイントのパスまたはメカニズム、
+- （オプション）許容されるローカル決定プロファイル。
 
-Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
-autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
-Ausdauer, nicht die Berechtigung.
+決定プロファイルが存在しない場合は、明示的なルールと安全なデフォルトの前提のみを使用します。Runtime は人物のなりすましを行ってはなりません。
 
-Ein einzelner nicht ausführbarer Punkt darf unabhängige, sichere Restarbeit nicht
-unnötig stoppen.
+## 決定レベル
 
-## Startbedingungen
-
-Vor Beginn festhalten:
-
-- konkretes Ziel und Erfolgskriterium,
-- positiver und negativer Scope,
-- verfügbare Zeit- oder Kostenbudgets,
-- erlaubte Seiteneffekte,
-- Projektregeln, Sperren und fremde Änderungen,
-- Pfad oder Mechanismus für Checkpoints,
-- optional ein zulässiges lokales Entscheidungsprofil.
-
-Fehlt ein Entscheidungsprofil, werden nur explizite Regeln und sichere
-Standardannahmen verwendet. Die Runtime darf keine Person imitieren.
-
-## Entscheidungsstufen
-
-| Stufe | Grundlage | Verhalten |
+| レベル | 根拠 | 振る舞い |
 |---|---|---|
-| hoch | explizite Regel oder mehrfach bestätigtes Muster | entscheiden; nur bei vorhandener Autorität ausführen |
-| mittel | plausible, reversible Standardentscheidung | entscheiden, Annahme markieren, sicher fortsetzen |
-| niedrig | neuartig, widersprüchlich oder ohne belastbaren Rahmen | nicht raten; zurückstellen oder eskalieren |
+| 高 | 明示的なルールまたは複数回確認されたパターン | 決定する。必要な権限が存在する場合のみ実行する |
+| 中 | 妥当で不可逆でない（可逆的な）標準決定 | 決定し、前提条件をマークして、安全に継続する |
+| 低 | 新規、矛盾、または信頼できるフレームワークの欠如 | 推測しない。保留またはエスカレーションする |
 
-Konfidenz in die Entscheidung und Autorität zur Ausführung sind getrennte Achsen.
+決定への確信度（コンフィデンス）と実行権限は独立した軸です。
 
-## Laufprotokoll
+## 実行プロトコル
 
-1. **Kontext laden.** Regeln, Zustand, Locks und Ziel prüfen.
-2. **Arbeit zerlegen.** Unabhängige Pakete, Entscheidungspunkte und
-   Freigabepunkte markieren. Werden mindestens zwei unabhängige Worker eingesetzt,
-   das Auftrags- und Evidenzprotokoll des `orchestrator` anwenden, sofern es
-   verfügbar ist.
-3. **Sichere Arbeit ausführen.** Reversible, autorisierte Schritte fortsetzen.
-4. **Entscheidungen behandeln.**
-   - Mit zulässigem Profil: Verfahren des `decision-avatar` verwenden.
-   - Ohne Profil: nur aus expliziten Projekt- oder Auftragsregeln ableiten.
-5. **Nicht ausführbare Punkte parken.** Entscheidung oder Empfehlung festhalten,
-   Ausführung aber nicht vorwegnehmen.
-6. **Unabhängige Arbeit fortsetzen.** Ein geparkter Punkt blockiert nur seine
-   echten Abhängigkeiten.
-7. **Checkpoint schreiben.** Ziel, erledigte Schritte, Evidenz, Annahmen,
-   geparkte Punkte und nächsten Schritt sichern.
-8. **Abschluss prüfen.** Ergebnisse selbst verifizieren und offene Entscheidungen
-   in einer kompakten Liste bündeln.
+1. **コンテキストの読み込み。** ルール、状態、ロック、目標を確認する。
+2. **作業の分解。** 独立したパッケージ、決定ポイント、承認ポイントをマークする。2つ以上の独立した Worker を使用する場合は、利用可能であれば `orchestrator` のタスク・エビデンスプロトコルを適用する。
+3. **安全な作業の実行。** 可逆的で承認済みのステップを継続する。
+4. **決定の処理。**
+   - 許容プロファイルがある場合： `decision-avatar` の手順を使用する。
+   - プロファイルがない場合：明示的なプロジェクトルールまたはタスクルールからのみ導出する。
+5. **実行不可能な項目の保留（パーク）。** 決定または推奨事項を記録するが、実行を先取りしない。
+6. **独立作業の継続。** 保留された項目は、真の依存関係のみをブロックする。
+7. **チェックポイントの書き込み。** 目標、完了したステップ、エビデンス、前提条件、保留項目、および次のステップを保存する。
+8. **完了確認。** 結果を自主検証し、保留中の決定をコンパクトなリストにまとめる。
 
-## Entscheidungsprotokoll
+## 決定ログ
 
-Für jede nicht triviale Annahme erfassen:
+トリビアルでないすべての前提条件について記録してください：
 
 ```text
 ID:
@@ -82,29 +64,24 @@ Evidenz:
 Rücknahme oder Korrektur:
 ```
 
-Agentenentscheidungen dürfen später nicht als Aussagen der auftraggebenden Person
-behandelt werden.
+エージェントによる決定を、後から依頼者の発言として扱ってはなりません。
 
-## Paketlokale Stopps
+## パッケージローカルな停止
 
-Ein einzelnes Paket stoppen und parken, wenn es neue Autorität, eine irreversible
-externe Aktion, unklare Regeln oder einen Konflikt benötigt. Danach prüfen, welche
-anderen Pakete davon wirklich abhängig sind.
+個別のパッケージが新しい権限、不可逆な外部アクション、不明確なルール、またはコンフリクトを必要とする場合は、そのパッケージを停止して保留（パーク）します。その後、他のどのパッケージがそれに本当に依存しているかを確認します。
 
-## Stop-Bedingungen des Gesamtlaufs
+## 実行全体の停止条件
 
-Der gesamte Lauf stoppt nur, wenn:
+実行全体は以下の場合にのみ停止します：
 
-- keine sichere, unabhängige Arbeit mehr möglich ist,
-- eine notwendige Entscheidung niedrige Konfidenz hat,
-- alle verbleibenden Arbeitspakete neue externe oder irreversible Autorität
-  erfordern,
-- eine Sperre, ein Konflikt oder ein Sicherheitsrisiko den gesamten verbleibenden
-  Scope betrifft,
-- das vereinbarte Budget erreicht ist,
-- der aktuelle Zustand nicht mehr zuverlässig gesichert werden kann.
+- 安全で独立した作業がこれ以上不可能な場合、
+- 必要な決定の確信度が低い場合、
+- 残りのすべての作業パッケージに新しい外部または不可逆な権限が必要な場合、
+- ロック、コンフリクト、またはセキュリティリスクが残りのスコープ全体に及ぶ場合、
+- 合意された予算に達した場合、
+- 現在の状態を信頼性を維持して保存できなくなった場合。
 
-## Abschlussformat
+## 完了フォーマット
 
 ```text
 Erreicht:
@@ -118,10 +95,10 @@ Nächster sinnvoller Schritt:
 ## 変更履歴
 
 ### 1.1.0 (2026-07-28)
-- Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.
-- Konfidenz und Ausführungsautorität getrennt.
-- Fortsetzung unabhängiger Arbeit und gebündelte Eskalation präzisiert.
-- Paketlokale Blocker ausdrücklich vom Stopp des Gesamtlaufs getrennt.
+- 個人のアバター、パス、コマンド、およびプロバイダーのバインディングを削除。
+- 確信度と実行権限を分離。
+- 独立作業の継続と集約されたエスカレーションを明確化。
+- パッケージローカルなブロッカーを全体の実行停止から明確に分離。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- ローカル初期バージョン。

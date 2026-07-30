@@ -2,132 +2,91 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `rotation-check`.
+> **日本語** — `rotation-check` の公式日本語版。
 
 
+# Rotation-Check — 1回の実行で1つのターゲット、公平なカバー範囲、メモリ機構 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概要と目的
 
+多数のプロジェクトを含むパイプラインを定期的に検証（ソース、スタイル、健全性、セキュリティ、翻訳など）しようとすると、分配の問題に直面します。1回の実行ですべてのプロジェクトを検証するのはコストがかかりすぎ、メモリ機構がないと毎回の実行で同じプロジェクトがランダムに検証されてしまいます。ローテーションパターンはこの両方を解決します：**「1回の実行で正確に1つのターゲット」、「最も長く検証されていないものに基づく選択」、「メモリとしてのレジストリ」。** これにより、低い頻度（毎日／毎週）であっても、数週間かけてパイプライン全体を検証可能かつ重複なくカバーできます。
 
-> **English Translation** — Official English version of `rotation-check`.
+複数のプロジェクトパイプラインにわたる大規模なプロダクション自動化のバックボーンとして実績があります。
 
+## 構成要素
 
-# Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis (English)
+### 1. パイプラインごとに2つのファイル（初回のみ作成）
 
-## 概要と目的 & Purpose
-
-Wer eine Pipeline mit vielen Projekten periodisch prüfen will (Quellen, Stil, Gesundheit,
-Sicherheit, Übersetzungen, …), steht vor einem Verteilungsproblem: Alle Projekte pro Lauf zu
-prüfen ist zu teuer; ohne Gedächtnis prüft jeder Lauf zufällig dasselbe. Das Rotations-Muster
-löst beides: **genau ein Ziel pro Lauf, Auswahl nach „am längsten ungeprüft", Registry als
-Gedächtnis.** So deckt auch ein seltener Takt (täglich/wöchentlich) über Wochen die ganze
-Pipeline ab — nachweisbar und ohne Doppelarbeit.
-
-Bewährt als Rückgrat eines gewachsenen Bestands produktiver Automationen über mehrere
-Projekt-Pipelines hinweg.
-
-## Bausteine
-
-### 1. Zwei Dateien pro Pipeline (einmalig anlegen)
-
-| Datei | Inhalt | Charakter |
+| ファイル | 内容 | 性質 |
 | --- | --- | --- |
-| `CHECKED-REGISTRY.md` | eine Kompaktzeile pro Check: Ziel, Datum, Checktyp, Ergebnis, nächster Schritt | Zustandsübersicht — wird VOR jeder Zielauswahl gelesen |
-| `CHECKS-LOG.txt` | kurzer Verlaufseintrag pro Lauf mit Details/Evidenz | Journal — append-only |
+| `CHECKED-REGISTRY.md` | チェックごとに1行のコンパクトな記録：ターゲット、日付、チェックタイプ、結果、次のステップ | 状態の概要 — ターゲット選択の「前」に読み込む |
+| `CHECKS-LOG.txt` | 実行ごとの詳細／証拠を含む短い履歴エントリ | 追記専用ログ（append-only） |
 
-Beide liegen im Pipeline-Root (nicht im Einzelprojekt), damit ein Lauf sie mit einem Read
-erfassen kann. Registry-Zeilenformat:
-
-```text
-| <ziel> | <YYYY-MM-DD> | <checktyp> | <ok|befund|übersprungen> | <nächster schritt> |
-```
-
-### 2. Auswahlregel
-
-1. Registry und Log lesen (Pflicht, VOR der Auswahl — sonst Doppelprüfung).
-2. Kandidaten: Ziele, die für DIESEN Checktyp noch nie oder am längsten nicht geprüft wurden.
-3. Ausweichen, wenn das Ziel kürzlich von einem **eng verwandten** Check angefasst wurde
-   (z. B. Zitations-Check direkt nach Quellencheck bringt nichts) oder gerade gesperrt/in
-   Bearbeitung ist (Locks respektieren).
-   **Geschwister-Cooldown:** Laufen mehrere verwandte Checks über dieselbe Zielmenge
-   (z. B. Entwicklung, Bugsuche und Review derselben Pipeline), eine Karenzzeit vereinbaren
-   (Erfahrungswert: ~24 h), in der ein von einem Geschwister-Check bearbeitetes Ziel nicht
-   erneut gewählt wird — verhindert Kollisionen und widersprüchliche Parallel-Änderungen.
-4. Vorziehen außer der Reihe nur mit gutem Grund (z. B. große Überarbeitung seit letztem
-   Check) — den Grund im Log nennen.
-
-### 3. Check durchführen — mit Read-only-Exit
-
-Den eigentlichen Check (frei definierbar: Quellencheck, Style-Check, Security-Audit, …)
-auf das EINE gewählte Ziel anwenden. Zwei gültige Ausgänge:
-
-- **Befund:** beheben was in den Scope passt; Größeres als Folgeaufgabe in die projektlokale
-  TODO/AUFGABEN-Datei eintragen (der Check muss nicht alles selbst lösen).
-- **Nichts zu tun:** kurz dokumentieren und enden. Ein Leerlauf ist ein Ergebnis, kein
-  Scheitern — keinesfalls den Scope ausweiten, um „etwas gefunden zu haben".
-
-### 4. Dokumentieren
-
-- Registry-Zeile ergänzen (kompakt), Log-Eintrag schreiben (Details/Evidenz).
-- **Log-Hygiene:** Werden Registry/Log unübersichtlich (Erfahrungswert: mehrere hundert
-  Zeilen), alten Stand nach `_archiv/` verschieben, frische Datei anlegen, im Kopf auf den
-  Vorgänger verweisen (Pfad + Datum).
-- **Pfad-Drift:** Zeigt ein erwarteter Pfad ins Leere (Ziel verschoben/umbenannt), NICHT neu
-  anlegen — über die maßgebliche Statusdatei/Registry der Pipeline korrigieren und den
-  Fehlpfad in einem Failure-Log festhalten.
-
-### 5. Takt
-
-Frequenz an die Änderungsrate des Geprüften koppeln: Rotations-Checks über stabile Bestände
-laufen gut wöchentlich (ein Ziel pro Lauf ≈ ganze Pipeline pro Quartal bei ~12 Zielen);
-schnelllebige Checks (z. B. auf aktive Arbeit) täglich. Praxiserfahrung: anfangs stündliche
-Checks wurden fast alle auf täglich/wöchentlich reduziert — die Abdeckung blieb, die Kosten
-fielen.
-
-## Prompt-Vorlage (für Scheduler/Automation)
+両ファイルとも、単一の読み取りで把握できるよう、個別プロジェクト内ではなくパイプラインルートに配置します。レジストリの行フォーマット：
 
 ```text
-VORBEREITUNG: Lies <PIPELINE_ROOT>/<POLICY-DOKUMENTE> sowie <REGISTRY> und <LOG>.
-
-AUFGABE: Wähle genau ein Ziel aus <ZIELMENGE>. Bevorzuge Ziele, die für den Check
-"<CHECKTYP>" noch nie oder am längsten nicht geprüft wurden. Wurde ein Ziel kürzlich
-von diesem oder einem eng verwandten Check geprüft oder ist es gesperrt: ausweichen
-oder read-only mit Logeintrag enden.
-
-CHECK: <konkrete Prüf-/Pflegeaufgabe und was bei Befund zu tun ist; Folgearbeiten in
-die projektlokale TODO-Datei>.
-
-Wenn keine Arbeit anfällt: kurz dokumentieren, Lauf beenden.
-
-DOKUMENTATION: Registry-Zeile in <REGISTRY> (Ziel, Datum, Checktyp, Ergebnis, nächster
-Schritt) + Verlaufseintrag in <LOG>. Bei Überlänge: alten Stand nach _archiv/ und
-frische Datei mit Verweis.
-
-ABSCHLUSS: Kurzbericht (Ziel | getan | Ergebnis | Folgeaufgaben).
+| <ターゲット> | <YYYY-MM-DD> | <チェックタイプ> | <ok|検出事項あり|スキップ> | <次のステップ> |
 ```
 
-## Red Flags
+### 2. 選択ルール
 
-| Gedanke | Realität |
+1. レジストリとログを読み込む（必須。選択の「前」に実行 — そうでないと重複チェックが発生）。
+2. 候補：**このチェックタイプ** において、一度もチェックされていない、または最も長くチェックされていないターゲット。
+3. 回避：ターゲットが最近 **密接に関連する** チェックによって処理された場合（例：ソースチェックの直後に引用チェックを行っても意味がない）、または現在ロック／編集中の場合は回避する（ロックを尊重）。
+   **兄弟冷却期間（Sibling Cooldown）：** 複数の関連するチェックが同じターゲット集合に対して実行される場合（例：同じパイプラインの開発、バグ検索、レビューなど）、兄弟チェックによって処理されたターゲットが一定期間（経験値：約24時間）再選択されないようクールダウン期間を設けます — 衝突や矛盾する並行変更を防止します。
+4. 繰り上げ選択：正当な理由（例：前回のチェック以降の大幅な改訂）がある場合のみ繰り上げ可能 — 理由をログに記載する。
+
+### 3. チェックの実行 — Read-only エグジットを備える
+
+選択された **1つ** のターゲットに対して実際のチェック（ソースチェック、スタイルチェック、セキュリティ監査など自由に定義可能）を適用します。2つの有効な出力：
+
+- **検出事項あり（Findings）：** スコープに収まるものは修正し、規模が大きいものはプロジェクトローカルの TODO／タスクファイルに追インタスクとして記載する（チェック自体がすべてを解決する必要はない）。
+- **処置なし（Nothing to do）：** 簡潔に記録して終了する。空振り（検出事項なし）も一つの成果であり失敗ではない — 「何か見つけるため」だけにスコープを拡大することは厳禁。
+
+### 4. ドキュメント化
+
+- レジストリ行を追加（コンパクトに）、ログエントリを記述（詳細／証拠）。
+- **ログの衛生管理：** レジストリ／ログが見づらくなった場合（経験値：数百万行）、古い状態を `_archiv/` に移動し、新しいファイルを作成してヘッダーで前身ファイルを参照する（パス + 日付）。
+- **パス漂流（Path Drift）：** 期待されるパスが存在しない場合（ターゲットが移動／改名された）、新規作成せず、パイプラインの正規のステータスファイル／レジストリを介して修正し、エラーパスを失敗ログに記録する。
+
+### 5. サイクル／頻度
+
+検証対象の変更レートに頻度を連動させます：安定したアセットに対するローテーションチェックは週1回の実行が適しています（1回の実行で1ターゲット ≈ 約12ターゲットで四半期ごとにパイプライン全体をカバー）；アクティブな作業に対する迅速なチェックは日次で行います。実践上の経験：当初1時間ごとだったチェックのほとんどは日次／週次へ縮小されました — カバー範囲は維持され、コストが削減されました。
+
+## プロンプトテンプレート（スケジューラ／自動化用）
+
+```text
+事前準備: <PIPELINE_ROOT>/<ポリシー文書> ならびに <REGISTRY> および <LOG> を読み込む。
+
+タスク: <ターゲット集合> から正確に1つのターゲットを選択する。チェックタイプ "<チェックタイプ>" において、一度もチェックされていない、または最も長くチェックされていないターゲットを優先する。ターゲットが最近このチェックまたは密接に関連するチェックによって検証されたか、あるいはロックされている場合：回避するか、ログエントリを残して Read-only で終了する。
+
+チェック: <具体的な検証／保守タスクおよび検出時の対処法；追インタスクはプロジェクトローカルの TODO ファイルへ>。
+
+作業が発生しない場合: 簡潔にドキュメント化し、実行を終了する。
+
+ドキュメント化: <REGISTRY> にレジストリ行（ターゲット、日付、チェックタイプ、結果、次のステップ）を追加 + <LOG> に履歴エントリを追加。過長な場合：古い状態を _archiv/ に移動し、参照付きの新しいファイルを作成。
+
+完了報告: 簡潔なレポート（ターゲット | 実施内容 | 結果 | 追インタスク）。
+```
+
+## レッドフラグ（禁止事項）
+
+| 思考 | 現实 |
 | --- | --- |
-| „Ich wähle einfach ein interessantes Projekt" | Auswahl nur über die Registry — sonst Lieblingsprojekt-Bias und blinde Flecken. |
-| „Registry lese ich nach dem Check" | Vorher. Sie ist das Auswahlkriterium, nicht nur das Protokoll. |
-| „Mehrere Ziele pro Lauf schaffen mehr" | Ein Ziel hält Läufe kurz, idempotent und abbrechbar; Menge kommt über die Rotation. |
-| „Der Leerlauf war umsonst" | Ein dokumentierter Leerlauf aktualisiert das Gedächtnis — das ist der halbe Wert des Systems. |
+| 「面白そうなプロジェクトを適当に選ぼう」 | 選択はレジストリ「のみ」を通じて行うこと — さもないと偏りと死角が生じます。 |
+| 「チェックが終わった後にレジストリを読もう」 | チェック「前」に読み込むこと。レジストリは記録だけでなく選択基準です。 |
+| 「1回の実行で複数のターゲットを処理した方が効率的」 | 単一ターゲットにより実行を短時間、冪等、かつ中断可能に保ちます。量はローテーションによって確保されます。 |
+| 「空振り（検出なし）は無駄だった」 | 記録された空振りはシステムメモリを更新します — これがシステムの価値の半分を占めます。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `workflow-extract` — baut aus Sessions/Fremd-Automationen Automatisierungen; nutzt dieses
-  Gerüst als Standard-Baustein.
-- `pipeline-optimizer` — für den strukturellen Umbau einer Pipeline (Rotation-Check pflegt,
-  Optimizer renoviert).
+- `workflow-extract` — セッション／外部自動化から自動化を構築する。本フレームワークを標準構築ブロックとして使用。
+- `pipeline-optimizer` — パイプラインの構造的リノベーション用（Rotation-Check は保守、Optimizer はリノベーションを担当）。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-03)
-- Geschwister-Cooldown als Auswahlregel ergänzt (Anti-Kollision zwischen verwandten
-  Checks über dieselbe Zielmenge; Befund aus der Vollklassifikation des Automations-Bestands).
+- 選択ルールとして「兄弟冷却期間」を追加（同一ターゲット集合に対する関連チェック間の衝突防止。自動化アセット全体のフル分類から得られた知見）。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus dem Codex-Automations-Bestand (Rotations-Muster in
-  ~40 von 77 Automationen: Research-/Software-/Roblox-Checks mit CHECKED-REGISTRY/CHECKS-LOG).
+- 初版。Codex 自動化アセットから抽象化（77 個の自動化のうち約 40 個でローテーションパターンを採用：CHECKED-REGISTRY/CHECKS-LOG を備えた研究／ソフトウェア／Roblox チェック）。

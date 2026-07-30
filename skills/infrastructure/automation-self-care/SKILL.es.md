@@ -1,11 +1,24 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
-description: [Español] Documentación completa para la habilidad automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+updated: 2026-07-30
+description: >
+  Construye y opera un conjunto central de autocuidado neutral respecto al
+  proveedor para tareas de LLM programadas y automatizaciones de aplicaciones de
+  escritorio. Úsalo cuando un agente deba descubrir su programador nativo,
+  instalar verificaciones recurrentes de higiene, calidad de prompt, frecuencia,
+  carga, recursos, entre sistemas, permisos y tiempo de ejecución, o mejorar
+  continuamente una flota de automatización existente con protección contra
+  eliminación, lectura posterior y reversión. Se activa con autocuidado de
+  automatización, cuidado de tareas del programador, mantenimiento de
+  automatización de aplicaciones de escritorio, auditoría de flotas de
+  automatización, programaciones con autocuración, solicitudes para recrear la
+  familia de tareas de mantenimiento al estilo ANTIGRAVITY,
+  core-set-textautomations, basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers o textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,97 +27,85 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: es
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `automation-self-care`.
+> **Español** — Versión oficial en español de `automation-self-care`.
 
+# Automation Self-Care
 
+Crea una flota de mantenimiento nativa y específica del proveedor a partir de un bucle de control neutral respecto al proveedor. Preserva la intención original de la familia de tareas ANTIGRAVITY al tiempo que requiere evidencia, cambios reversibles y lectura posterior nativa.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Límites no negociables
 
+- Trata el descubrimiento, la planificación, la aprobación, la mutación y la lectura posterior como fases independientes.
+- Utiliza la API de automatización, comando o interfaz de usuario admitida por la aplicación de destino. Nunca asumas que editar un archivo de almacenamiento modifica el estado activo de la aplicación.
+- Lee las reglas locales, los bloqueos, los registros de eliminación/supresión y las programaciones existentes antes de proponer una tarea.
+- No inventes soporte para el programador. Si no se puede probar la creación, actualización o lectura posterior, elabora un plan de instalación manual y detente antes de la mutación.
+- Realiza como máximo un cambio de ajuste independientemente comprobable por ejecución de cuidado.
+- Protege las tareas de cuidado para que no se desactiven a sí mismas ni reduzcan su propia cadencia por debajo del límite de recuperación configurado.
+- Conserva el prompt, la programación, el modelo, los permisos y el estado habilitado anteriores para que cada mutación pueda revertirse.
+- Contabiliza el éxito únicamente tras obtener evidencia del resultado, no simplemente al iniciar el programador o recibir un código de salida 0.
+- Nunca copies secretos, prompts privados ni datos personales en un registro compartido.
 
-# Automation Self-Care (English)
+## Flujo de trabajo
 
-Create a native, provider-specific maintenance fleet from one provider-neutral
-control loop. Preserve the original intent of the ANTIGRAVITY task family while
-requiring evidence, reversible changes and native readback.
+### 1. Descubrir la superficie de automatización nativa
 
-## Non-negotiable Boundaries & Rules
+Inventaria el actor actual, el proveedor, la clase de aplicación, la superficie del programador, las operaciones admitidas, los archivos de estado, el historial de ejecución, la telemetría de uso y el método de lectura posterior. Registra las capacidades utilizando el contrato de perfil en [provider-adapter-contract.md](references/provider-adapter-contract.md).
 
-- Treat discovery, planning, approval, mutation and readback as separate phases.
-- Use the target app's supported automation API, command or UI. Never assume that
-  editing a storage file changes live app state.
-- Read local rules, locks, deletion/suppression logs and existing schedules before
-  proposing a task.
-- Do not invent scheduler support. If create/update/readback cannot be proven,
-  produce a manual installation plan and stop before mutation.
-- Make at most one independently testable tuning change per care run.
-- Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
-- Preserve the previous prompt, schedule, model, permissions and enabled state so
-  every mutation can be rolled back.
-- Count success only after outcome evidence, not merely scheduler start or exit 0.
-- Never copy secrets, private prompts or personal data into a shared registry.
+Distingue entre programaciones nativas de aplicaciones de escritorio, ejecución CLI/headless, programador de SO o iniciador de servicios, servicio de programador general, motor de flujo de trabajo y automatización no admitida o solo por UI. No equipares la existencia de un archivo de configuración con una ruta de mutación admitida.
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+### 2. Inventariar la flota
 
-### 1. Discover the native automation surface
+Para cada tarea, captura un identificador local estable, propósito, huella digital del prompt, programación, estado habilitado, modelo, permisos, rutas de destino, último evento del programador, último resultado exitoso y propietario actual. Mantén el contenido del prompt de forma local.
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
-[provider-adapter-contract.md](references/provider-adapter-contract.md).
+Verifica la superficie activa autoritativa dos veces antes de la mutación cuando la aplicación pueda reescribir el estado desde la memoria.
 
-Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
-service starter, general scheduler service, workflow engine, and unsupported or
-UI-only automation. Do not equate the existence of a config file with a supported
-mutation path.
+### 3. Diseñar el conjunto central (core set)
 
-### 2. Inventory the fleet
+Lee [core-set.md](references/core-set.md). Selecciona una de las siguientes opciones:
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+- `compact`: cinco tareas de cuidado que combinan la frecuencia con la distribución de carga; o
+- `full`: nueve tareas enfocadas correspondientes a la familia de mantenimiento original.
 
-Check the authoritative live surface twice before mutation when the app can rewrite
-state from memory.
-
-### 3. Design the core set
-
-Read [core-set.md](references/core-set.md). Select either:
-
-- `compact`: five care tasks combining frequency with load distribution; or
-- `full`: nine focused tasks corresponding to the original maintenance family.
-
-Generate a provider-neutral plan:
+Genera un plan neutral respecto al proveedor:
 
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
 ```
 
-The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+El generador nunca instala tareas. Revisa cada capacidad marcada como `blocked` y elige horarios locales sin colisiones antes de aplicar el plan.
 
-### 4. Stage installation
+### 4. Preparar la instalación
 
-Install through the native provider adapter:
+Instala a través del adaptador de proveedor nativo:
 
-1. Start with hygiene in read-only mode.
-2. Add resource protection.
-3. Add prompt-quality tuning with rollback.
-4. Add frequency and load tuning only after enough run evidence exists.
-5. Add cross-system coordination last.
+1. Comienza con la higiene en modo de solo lectura.
+2. Añade protección de recursos.
+3. Añade ajuste de calidad del prompt con opción de reversión.
+4. Añade ajuste de frecuencia y carga solo después de tener suficiente evidencia de ejecución.
+5. Añade la coordinación entre sistemas al final.
 
-Create new or imported tasks disabled unless the user explicitly approved active
-installation. For an unattended pilot, require a deletion log, before-state
-snapshot, run receipt and rollback path first.
+Crea tareas nuevas o importadas desactivadas a menos que el usuario haya aprobado explícitamente la instalación activa. Para una prueba piloto no supervisada, requiere primero un registro de eliminación, una instantánea del estado previo, un recibo de ejecución y una ruta de reversión.
 
-### 5. Run the care loop
+### 5. Ejecutar el bucle de cuidado
 
-Every care task follows:
+Cada tarea de cuidado sigue esta secuencia:
 
 ```text
 follow-up previous change
@@ -116,56 +117,39 @@ follow-up previous change
   -> write receipt and next-check condition
 ```
 
-Use the hypothesis catalogue and evidence rules in
-[core-set.md](references/core-set.md). Unknown cause means observe, narrow
-permissions or pause safely; never guess a repair.
+Utiliza el catálogo de hipótesis y las reglas de evidencia en [core-set.md](references/core-set.md). Una causa desconocida significa observar, restringir permisos o pausar de forma segura; nunca adivines una reparación.
 
-### 6. Coordinate across actors
+### 6. Coordinar entre actores
 
-Keep local app state authoritative. Share only task contracts, coverage, status,
-receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
-single-writer mutations require a claim or an equivalent native lock.
+Mantén el estado de la aplicación local como autoritativo. Comparte únicamente los contratos de tareas, la cobertura, el estado, los recibos y las huellas digitales sanitizadas. Se permiten revisiones redundantes de solo lectura; las mutaciones de un solo escritor requieren una reclamación o un bloqueo nativo equivalente.
 
-### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+### 7. Sistemas sin enlaces de eventos nativos (Extensión Letter-Hooker)
 
-For AI frameworks that lack native, event-driven JSON hook loaders (such as
-Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
-Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
+Trata la limitación de tokens o suscripciones como un estado de capacidad, no como un actor defectuoso. Devuelve la cobertura delegada después de que el actor original produzca un recibo exitoso.
 
-- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
-  evaluate logs and execution state.
-- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
-  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
-  directly into target `sidecar.json` prompt texts.
-- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
-  `gardener`, `workflowhooker`, and `.SKILLS`.
+## Resultados requeridos
 
-Treat token or subscription limitation as capacity state, not a broken actor.
-Return delegated coverage after the original actor produces a successful receipt.
+Para cada configuración o ejecución de cuidado, informa:
 
-## Required Outputs & Deliverables
+- superficie nativa descubierta y capacidades no admitidas;
+- topología seleccionada y tareas creadas, propuestas u omitidas;
+- mutación exacta y lectura posterior antes/después;
+- evidencia del resultado o ventana de observación abierta;
+- ubicación de reversión y condición de retorno;
+- actualización de cobertura compartida, si existe un registro de coordinación.
 
-For each setup or care run report:
+## Ejemplo
 
-- discovered native surface and unsupported capabilities;
-- selected topology and tasks created, proposed or skipped;
-- exact mutation and before/after readback;
-- evidence of outcome or open observation window;
-- rollback location and return condition;
-- shared coverage update, if a coordination registry exists.
+Usuario: "Configura programaciones automantenidas en esta aplicación de escritorio."
 
-## Ejemplo y Uso & Usage
+Descubre si la aplicación puede listar, crear, actualizar y verificar tareas programadas. Genera el plan compacto, presenta las capacidades no admitidas y luego instala únicamente las tareas aprobadas a través de la superficie nativa. Una carpeta que contenga un prompt de tarea sin un registro en el programador activo no constituye una configuración completada.
 
-User: "Set up self-maintaining schedules in this desktop app."
+## Registro de cambios
 
-Discover whether the app can list, create, update and verify scheduled tasks.
-Generate the compact plan, present unsupported capabilities, then install only the
-approved tasks through the native surface. A folder containing a task prompt
-without a live scheduler registration is not a completed setup.
+### 1.0.1 (2026-07-30)
 
-## Registro de Cambios
+- Se añadieron alias de automatización de texto neutrales respecto al proveedor y automatización de aplicaciones de escritorio.
 
 ### 1.0.0 (2026-07-28)
 
-- Consolidated the original ANTIGRAVITY maintenance family, the F1-F6 control
-  loop and later provider-specific adaptations into a neutral core-set skill.
+- Se consolidó la familia de mantenimiento original de ANTIGRAVITY, el bucle de control F1-F6 y adaptaciones posteriores específicas de proveedores en una habilidad de conjunto central neutral.

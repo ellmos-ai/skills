@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
 updated: 2026-07-03
-description: [Español] Documentación completa para la habilidad skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
+description: Extrae un skill reutilizable de un historial de chat (sesión actual o archivos de transcripción) — o mejora un skill existente muy similar en lugar de crear un duplicado. Utiliza este skill al solicitar "haz un skill de esto", "deberíamos registrar esto como un skill", "extrae skills de estos historiales de chat antiguos", "haz que esta forma de trabajar sea reutilizable", o al usar `/skill-extract`. También cubre ejecuciones masivas sobre muchas transcripciones antiguas (con reducción de datos mediante subagentes). Para AUTOMATIZACIONES recurrentes (Cron/Schedule/Loop), utiliza en su lugar el skill hermano workflow-extract.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,140 +18,93 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `skill-extractor`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `skill-extractor`.
+> **Español** — Versión oficial en español de `skill-extractor`.
 
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-# Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
+# Skill-Extractor — Obtención de skills a partir de historiales de chat (Español)
 
-## Descripción General y Propósito & Purpose
+## Descripción general y propósito
 
-Wertvolle Arbeitsweisen entstehen in Sessions: Ein Problem wurde mühsam gelöst, der User hat
-mehrfach korrigiert, am Ende steht ein funktionierender Ablauf — und beim nächsten Mal fängt
-der Agent wieder bei null an. Dieser Skill destilliert aus einem Chatverlauf das, was sich zu
-konservieren lohnt, und macht daraus einen Skill nach den Konventionen der lokalen
-Skill-Bibliothek. Kernprinzip: **Erweitern vor Neuanlegen** — existiert ein sehr ähnlicher
-Skill, wird der verbessert statt ein Duplikat erzeugt.
+Las formas de trabajar valiosas surgen en las sesiones: un problema se resolvió con esfuerzo, el usuario realizó varias correcciones y al final queda un procedimiento funcional — y la próxima vez el agente vuelve a empezar desde cero. Este skill destila lo que vale la pena conservar de un historial de chat y lo convierte en un skill según las convenciones de la biblioteca de skills local. Principio fundamental: **Ampliar antes de crear de nuevo** — si existe un skill muy similar, se mejora en lugar de crear un duplicado.
 
-Abgrenzung: Ergebnis ist hier ein **abrufbarer Skill** (Fähigkeit/Verfahren, das ein Agent bei
-Bedarf lädt). Soll aus dem Verlauf eine **selbstlaufende Automatisierung** werden (wiederkehrender
-Prompt, Cron, Schedule), den Schwester-Skill `workflow-extract` nutzen.
+Diferenciación: El resultado aquí es un **skill ejecutable** (capacidad/procedimiento que un agente carga según sea necesario). Si el historial debe convertirse en una **automatización autónoma** (prompt recurrente, cron, programación), se debe utilizar el skill hermano `workflow-extract`.
 
-## Ablauf
+## Procedimiento
 
-### 1. Quelle bestimmen
+### 1. Determinar la fuente
 
-Drei Eingabeformen:
+Tres formas de entrada:
 
-| Quelle | Zugang |
+| Fuente | Acceso |
 | --- | --- |
-| **Aktuelle Session** | Konversationskontext direkt nutzen — keine Dateien nötig |
-| **Einzelne Transkripte** | Dateien lesen; Fundorte und Parsing: `transcript-quellen.md` |
-| **Bulk (viele alte Verläufe)** | Erst Datenreduktion über Subagenten, dann Extraktion: Abschnitt „Bulk-Modus" |
+| **Sesión actual** | Usar el contexto de la conversación directamente — no se necesitan archivos |
+| **Transcripciones individuales** | Leer archivos; ubicaciones y análisis sintáctico: `transcript-quellen.md` |
+| **Masivo (muchos historiales antiguos)** | Primero reducción de datos mediante subagentes, luego extracción: sección "Modo masivo" |
 
-### 2. Extraktionswürdiges finden
+### 2. Identificar lo que vale la pena extraer
 
-Nicht jede Session enthält einen Skill. Suche nach diesen Signalen — sie zeigen, wo Wissen
-steckt, das teuer erworben wurde und wieder gebraucht wird:
+No todas las sesiones contienen un skill. Busca estas señales — indican dónde se encuentra el conocimiento adquirido con esfuerzo que se necesitará de nuevo:
 
-- **Wiederholung:** Derselbe Ablauf kam ≥2-mal vor (in dieser oder über mehrere Sessions).
-- **Korrekturschleifen:** Der User hat den Agenten mehrfach nachjustiert, bis es stimmte —
-  die Endfassung ist das Destillat, die Korrekturen sind die Begründungen („warum so").
-- **Explizite Marker:** „merk dir das", „so machen wir das immer", „beim nächsten Mal direkt so".
-- **Werkzeugketten:** Eine nicht-offensichtliche Abfolge von Tools/Befehlen, die funktioniert hat
-  (inklusive der Sackgassen, die vermieden werden sollen).
-- **Entscheidungsregeln:** Kriterien, nach denen zwischen Alternativen gewählt wurde.
+- **Repetición:** El mismo flujo ocurrió ≥2 veces (en esta sesión o a lo largo de varias sesiones).
+- **Bucles de corrección:** El usuario reajustó el agente varias veces hasta que fue correcto — la versión final es el destilado, las correcciones son las justificaciones ("por qué así").
+- **Marcadores explícitos:** "recuerda esto", "siempre lo hacemos así", "la próxima vez hazlo directamente así".
+- **Cadenas de herramientas:** Una secuencia no obvia de herramientas/comandos que funcionó (incluidas las vías sin salida que deben evitarse).
+- **Reglas de decisión:** Criterios mediante los cuales se eligió entre alternativas.
 
-Halte pro Kandidat fest: Auslöser (wann braucht man das), Ablauf (Schritte), Begründungen
-(warum so und nicht anders), Fallstricke (was schiefging), Ergebnisform.
+Registra para cada candidato: Desencadenador (cuándo se necesita), Procedimiento (pasos), Justificaciones (por qué así y no de otra forma), Dificultades (qué salió mal), Formato de resultado.
 
-### 3. Dedup-Gate: Erweitern vor Neuanlegen
+### 3. Filtro de duplicados (Dedup-Gate): Ampliar antes de crear de nuevo
 
-Bevor irgendetwas geschrieben wird, die bestehende Landschaft prüfen:
+Antes de escribir cualquier cosa, examina el entorno existente:
 
-1. Kandidaten-Stichwörter gegen die Skill-Verzeichnisse suchen (Deployment-Ordner des Agenten,
-   z. B. `~/.claude/skills/`, und — falls vorhanden — die kuratierte Skill-Bibliothek als Quelle
-   der Wahrheit; ebenso registrierte Plugin-Skills).
-2. Die 2–3 nächstliegenden Skills wirklich **lesen**, nicht nur Namen vergleichen.
-3. Entscheiden:
+1. Buscar palabras clave del candidato en los directorios de skills (carpeta de despliegue del agente, p. ej., `~/.claude/skills/`, y — si existe — la biblioteca de skills curada como fuente de verdad; así como skills de plugins registrados).
+2. **Leer** detenidamente los 2 o 3 skills más cercanos, no solo comparar nombres.
+3. Decidir:
 
-| Befund | Aktion |
+| Hallazgo | Acción |
 | --- | --- |
-| Kandidat ist im Kern schon abgedeckt | **Erweitern:** fehlende Elemente in den bestehenden Skill einarbeiten (neue Sektion, neue Technik, neuer Fallstrick), Version MINOR erhöhen, Changelog-Eintrag |
-| Teilüberlappung, aber anderer Kern | **Neuer Skill** mit Querverweis („Verwandte Skills") auf die Nachbarn — keine Inhalte duplizieren, sondern verweisen |
-| Nichts Vergleichbares | **Neuer Skill** |
+| El candidato ya está cubierto en lo esencial | **Ampliar:** incorporar los elementos faltantes en el skill existente (nueva sección, nueva técnica, nueva dificultad), incrementar la versión MINOR, añadir entrada en el registro de cambios |
+| Traslape parcial, pero núcleo diferente | **Nuevo skill** con referencia cruzada ("Skills relacionados") a los vecinos — no duplicar contenido, sino referenciarlo |
+| Nada comparable | **Nuevo skill** |
 
-Faustregel: Wenn mehr als die Hälfte des Kandidaten in einem bestehenden Skill steckt, wird
-erweitert. Ein Skill-Bestand voller Fast-Zwillinge ist schlechter als ein gepflegter Skill.
+Regla general: Si más de la mitad del candidato está incluida en un skill existente, se amplía. Un catálogo de skills lleno de gemelos casi idénticos es peor que un skill bien mantenido.
 
-### 4. Neutralisieren
+### 4. Neutralizar
 
-Der Rohstoff ist voller session-spezifischer Details. Vor dem Schreiben nach den Regeln in
-`neutralisierung.md` abstrahieren: Mechanik (allgemeingültig) von Konfiguration (user-/system-
-spezifisch) trennen, konkrete Pfade/Hosts/Namen durch Platzhalter oder einen klar markierten
-Konfigurationsblock ersetzen. Ziel: Der Skill funktioniert für andere User, andere Systeme,
-andere Projekte.
+El material bruto está lleno de detalles específicos de la sesión. Antes de escribir, abstraer según las reglas de `neutralisierung.md`: separar la mecánica (generalmente aplicable) de la configuración (específica del usuario/sistema), reemplazar rutas/hosts/nombres concretos por marcadores de posición o un bloque de configuración claramente marcado. Objetivo: El skill funciona para otros usuarios, otros sistemas u otros proyectos.
 
-### 5. Skill schreiben
+### 5. Escribir el skill
 
-- **Format:** Konventionen der Ziel-Bibliothek beachten (Frontmatter, Namensschema, Sprache,
-  Changelog). In dieser Bibliothek: `docs/CONVENTIONS.md` (vollständiger YAML-Header,
-  kebab-case-Name, Deutsch primär, Semantic Versioning).
-- **Description „pushy" formulieren:** Die description ist der Trigger-Mechanismus. Sowohl WAS
-  der Skill tut als auch WANN er greifen soll (typische User-Formulierungen) hineinschreiben —
-  Skills werden eher zu selten als zu oft ausgelöst.
-- **Warum vor Was:** Begründungen aus den Korrekturschleifen in den Skill übernehmen. Ein Skill,
-  der nur Schritte auflistet, wird beim ersten Sonderfall falsch angewandt; einer, der erklärt
-  warum, lässt sich übertragen.
-- **Fallstricke dokumentieren:** Die Sackgassen aus der Session sind Gold — als „Red Flags"- oder
-  „Fallstricke"-Abschnitt aufnehmen.
-- **Schlank halten:** Unter ~300 Zeilen; Detailmaterial in Referenzdateien auslagern, auf die die
-  SKILL.md verweist.
+- **Formato:** Respetar las convenciones de la biblioteca destino (frontmatter, esquema de nombres, idioma, registro de cambios). En esta biblioteca: `docs/CONVENTIONS.md` (encabezado YAML completo, nombre en kebab-case, alemán como idioma primario, versionado semántico).
+- **Formular la descripción de forma descriptiva y persuasiva:** La descripción es el mecanismo de activación. Escribe tanto QUÉ hace el skill como CUÁNDO debe activarse (formulaciones típicas de usuarios) — los skills suelen activarse con menor frecuencia de la deseada.
+- **El porqué antes del qué:** Incorporar al skill las justificaciones de los bucles de corrección. Un skill que solo enumera pasos se aplicará incorrectamente en el primer caso especial; uno que explica por qué se puede adaptar.
+- **Documentar dificultades:** Las vías sin salida de la sesión son muy valiosas — inclúyelas como una sección de "Banderas rojas" o "Dificultades".
+- **Mantenerlo ligero:** Menos de ~300 líneas; externalizar el material detallado en archivos de referencia a los que apunte `SKILL.md`.
 
-### 6. Command-Wrapper (optional)
+### 6. Wrapper de comando (opcional)
 
-Wenn der Skill regelmäßig direkt aufgerufen werden soll, einen Slash-Command anlegen (bei
-Claude Code: kurze Markdown-Datei in `~/.claude/commands/<name>.md`, die auf den Skill zeigt
-und Argumente durchreicht). Konvention: Command = dünner Einstieg, Inhalt lebt im Skill.
+Si el skill se va a invocar directamente de forma regular, crea un comando de barra inclinada (en Claude Code: un archivo Markdown corto en `~/.claude/commands/<name>.md` que apunte al skill y pase los argumentos). Convención: Comando = punto de entrada ligero, el contenido reside en el skill.
 
-### 7. Registrieren und testen
+### 7. Registrar y probar
 
-- In der Bibliothek ablegen (richtige Kategorie) und ins Deployment ausrollen (hier:
-  `python skill_sync.py deploy <name>` — Erstinstallation braucht den expliziten Namen).
-- Trigger-Test: 2–3 realistische Prompts formulieren, die den Skill auslösen sollten, und prüfen,
-  ob die description greift.
-- Für einen vollen Eval-Loop (Testfälle, Baseline-Vergleich, Beschreibungs-Optimierung) den
-  `skill-creator` nutzen, falls installiert — dieser Skill hier ist der Extraktor, nicht das Testlabor.
-- Index-/Routing-Pflege: Skill-Finder-/Index-Skills aktualisieren, falls vorhanden
-  (hier: `code-skill-index`, `skill-finder`-Routing-Tabelle).
+- Guardar en la biblioteca (categoría correcta) y desplegar en el entorno (aquí: `python skill_sync.py deploy <name>` — la instalación inicial requiere el nombre explícito).
+- Prueba de activación: Formular 2 o 3 prompts realistas que deberían activar el skill y verificar si la descripción surte efecto.
+- Para un bucle de evaluación completo (casos de prueba, comparación con línea base, optimización de descripción), usa `skill-creator` si está instalado — este skill es el extractor, no el laboratorio de pruebas.
+- Mantenimiento de índice/enrutamiento: Actualizar los skills de búsqueda/índice de skills si existen (aquí: `code-skill-index`, tabla de enrutamiento de `skill-finder`).
 
-## Bulk-Modus: viele alte Chatverläufe
+## Modo masivo: muchos historiales de chat antiguos
 
-Transkripte sind groß (oft >100k Tokens); niemals alle roh in einen Kontext laden.
-Map-Reduce über Subagenten (Muster: `swarm-operations`-Skill, Aufgabenschwarm):
+Las transcripciones son grandes (a menudo >100k tokens); nunca cargues todas en bruto en un solo contexto.
+Map-Reduce mediante subagentes (patrón: skill `swarm-operations`, enjambre de tareas):
 
-1. **Inventar:** Transkript-Dateien auflisten (Fundorte: `transcript-quellen.md`), nach Projekt/
-   Zeitraum bündeln. Bei sehr großen Beständen zuerst mit vorhandenen Kollektoren/Extraktoren
-   reduzieren (z. B. Prompt-Listener-/Studien-Datensätze, die nur User-Prompts enthalten) —
-   User-Prompts + Korrekturen tragen das meiste Signal.
-2. **Map:** Pro Bündel ein Subagent mit engem Auftrag: „Lies diese Transkripte, melde
-   Skill-Kandidaten als Kompaktliste (Auslöser, Ablauf, Begründungen, Fallstricke, Beleg-Session)"
-   — nur die Destillate zurückgeben, nie Rohtext.
-3. **Reduce:** Kandidatenlisten zusammenführen, clustern, Duplikate mergen. Häufigkeit zählt:
-   Ein Muster, das in 5 Sessions auftaucht, ist ein stärkerer Kandidat als ein einmaliger Trick.
-4. **Gate + Bau:** Für die Top-Kandidaten Schritte 3–7 des Normalablaufs durchlaufen.
-   Dem User vor dem Massenbau eine nummerierte Kandidatenliste zur Auswahl vorlegen —
-   Bulk-Extraktion erzeugt sonst Skill-Müll.
+1. **Inventario:** Listar archivos de transcripción (ubicaciones: `transcript-quellen.md`), agrupar por proyecto/período. Para colecciones muy grandes, reducir primero con colectores/extractores existentes (p. ej., conjuntos de datos de oyentes de prompts/estudios que solo contienen prompts de usuario) — los prompts de usuario + correcciones contienen la mayor parte de la señal.
+2. **Map:** Un subagent por paquete con una tarea delimitada: "Lee estas transcripciones, informa sobre candidatos a skill como una lista compacta (desencadenador, procedimiento, justificaciones, dificultades, sesión de origen)" — devolver solo los destilados, nunca texto bruto.
+3. **Reduce:** Fusionar listas de candidatos, agrupar, consolidar duplicados. La frecuencia cuenta: Un patrón que aparece en 5 sesiones es un candidato más fuerte que un truco puntual.
+4. **Filtro + Construcción:** Ejecutar los pasos 3–7 del flujo normal para los principales candidatos. Presentar al usuario una lista numerada de candidatos para su selección antes de la creación masiva — de lo contrario, la extracción masiva genera basura de skills.
 
-## Ejemplo y Uso & Usage
+## Ejemplo y aplicación
 
 ```text
 User: „Wir haben jetzt dreimal PDF-Rechnungen nach demselben Schema geparst —
@@ -167,24 +120,23 @@ mach daraus einen Skill."
    Changelog 1.0.0. Trigger-Test mit „lies diese Rechnung ein".
 ```
 
-## Red Flags
+## Banderas rojas
 
-| Gedanke | Realität |
+| Pensamiento | Realidad |
 | --- | --- |
-| „Ich lege schnell einen neuen Skill an" | Dedup-Gate zuerst — Erweitern vor Neuanlegen. |
-| „Die Pfade lasse ich drin, ist ja für dieses System" | Neutralisieren ist Pflicht; Konkretes gehört in einen Konfigurationsblock. |
-| „Der Verlauf ist lang, ich fasse aus dem Gedächtnis zusammen" | Signale (Korrekturen, Marker) gezielt heraussuchen — das Gedächtnis glättet genau die Stellen, die den Skill wertvoll machen. |
-| „Jede Session ergibt einen Skill" | Ohne Wiederholungs-/Korrektur-/Marker-Signal: kein Skill. |
+| "Crearé rápidamente un nuevo skill" | Primero el filtro de duplicados — ampliar antes de crear de nuevo. |
+| "Dejaré las rutas, ya que es para este sistema" | La neutralización es obligatoria; los detalles concretos pertenecen a un bloque de configuración. |
+| "El historial es largo, resumiré de memoria" | Buscar específicamente señales (correcciones, marcadores) — la memoria suaviza precisamente los puntos que hacen valioso al skill. |
+| "Cada sesión genera un skill" | Sin señales de repetición/corrección/marcador: no hay skill. |
 
-## Verwandte Skills
+## Skills relacionados
 
-- `workflow-extract` — gleiche Extraktion, aber Ziel ist eine selbstlaufende Automatisierung.
-- `skill-explorer` — Audit/Aufräumen der Skill-Landschaft (nutzt das Dedup-Gate in groß).
-- `skill-creator` (Plugin) — Eval-Loop und Beschreibungs-Optimierung für fertige Skills.
-- `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
+- `workflow-extract` — misma extracción, pero el objetivo es una automatización autónoma.
+- `skill-explorer` — auditoría/limpieza del entorno de skills (utiliza el filtro de duplicados a gran escala).
+- `skill-creator` (plugin) — bucle de evaluación y optimización de descripciones para skills terminados.
+- `swarm-operations` — patrón de enjambre para el modo masivo.
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus dem Auftrag, Codex-Automatisierungen und Chatverläufe
-  systematisch zu Skills zu abstrahieren.
+- Versión inicial. Creada a partir del encargo de abstraer sistemáticamente las automatizaciones de Codex e historiales de chat en skills.

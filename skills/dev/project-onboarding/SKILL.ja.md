@@ -1,223 +1,235 @@
 ---
+name: project-onboarding
+version: 1.0.0
+type: protocol
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 新しいソフトウェアプロジェクトのオンボーディングに関する標準手順：機能分析、コード品質レビュー、オンボーディングチェックリスト、およびタスク作成。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [onboarding, project, intake, analysis, checklist, code-review]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `project-onboarding`.
+> **日本語** — `project-onboarding` の公式日本語版。
 
 
+# 新しいソフトウェアプロジェクトの標準オンボーディング手順 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Standard Onboarding Procedure for New Software Projects (English)
-
-**Version:** 1.0
-**Date:** 2026-03-12
+**バージョン:** 1.0
+**日付:** 2026-03-12
 
 ---
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
+この手順は、新しく発見されたソフトウェアフォルダをタスク管理システムに追加する前に実行すべきステップを定義します。
 
 ```
 +─────────────────────────────────────────────────────+
-|           STANDARD ONBOARDING PROCEDURE              |
+|             標準オンボーディング手順                |
 +─────────────────────────────────────────────────────+
-|  1. Create feature analysis                          |
-|  2. Code quality review (standard tests)             |
-|  3. Create TASKS.txt                                 |
-|  4. Add to task management                           |
+|  1. 機能分析の作成                                  |
+|  2. コード品質レビュー（標準テスト）                |
+|  3. TASKS.txt の作成                                |
+|  4. タスク管理への追加                              |
 +─────────────────────────────────────────────────────+
 ```
 
 ---
 
-## Phase 1: Feature Analysis
+## フェーズ 1: 機能分析
 
-**Purpose:** Understand the tool, its functions, and development status.
+**目的:** ツール、その機能、および開発ステータスを理解する。
 
-**Create file:** `Feature_Analysis_<ToolName>.md`
+**作成するファイル:** `Feature_Analysis_<ToolName>.md`
 
-### Template
+### テンプレート
 
 ```markdown
-# Feature Analysis: <ToolName> (English)
+# 機能分析: <ToolName> (日本語)
 
-## Brief Description
-A short sentence describing what the tool does.
+## 概要
+ツールが何を行うかを説明する簡潔な一文。
 
 ---
 
-## Highlights
+## ハイライト
 
-| Feature | Description |
+| 機能 | 説明 |
 |---------|-------------|
-| **Feature 1** | Description |
-| **Feature 2** | Description |
+| **機能 1** | 説明 |
+| **機能 2** | 説明 |
 
 ---
 
-## Development Stage Assessment
+## 開発段階の評価
 
-### Current Status: **<Status> (<X>%)**
+### 現在のステータス: **<Status> (<X>%)**
 
-Possible statuses:
-- Prototype (0-30%)
-- Alpha (30-60%)
-- Beta (60-85%)
-- Production Ready (85-95%)
-- Release (95-100%)
+選択可能なステータス:
+- プロトタイプ / Prototype (0-30%)
+- アルファ / Alpha (30-60%)
+- ベータ / Beta (60-85%)
+- 本番準備完了 / Production Ready (85-95%)
+- リリース / Release (95-100%)
 
-| Category | Rating (1-5) | Details |
+| カテゴリ | 評価 (1-5) | 詳細 |
 |----------|:------------:|---------|
-| **Functionality** | 3 | |
+| **機能性** | 3 | |
 | **UI/UX** | 3 | |
-| **Stability** | 3 | |
-| **Documentation** | 3 | |
+| **安定性** | 3 | |
+| **ドキュメント** | 3 | |
 
 ---
 
-## Recommended Extensions
+## 推奨される拡張機能
 
-### Priority: High
+### 優先度: 高
 1. ...
 
-### Priority: Medium
+### 優先度: 中
 2. ...
 
-### Priority: Low
+### 優先度: 低
 3. ...
 
 ---
 
-## Technical Details
+## 技術的詳細
 
-Framework:      <Framework>
-File size:      <X> lines of Python
-Main file:      <main.py>
+フレームワーク:   <Framework>
+ファイルサイズ:   Pythonコード計 <X> 行
+メインファイル:   <main.py>
 
 ---
-*Analysis created: <Date>*
+*分析作成日: <Date>*
 ```
 
 ---
 
-## Phase 2: Code Quality Review
+## フェーズ 2: コード品質レビュー
 
-**Purpose:** Ensure technical quality, identify known issues.
+**目的:** 技術的品質を確保し、既知の問題を特定する。
 
-### Recommended Checks
+### 推奨されるチェック項目
 
-| Test | Tool | Description |
+| テスト | ツール | 説明 |
 |------|------|-------------|
-| **Encoding** | Encoding checker (e.g., `chardet`, `file`) | Ensure UTF-8 |
-| **Method Analysis** | Linter (e.g., `pylint`, `flake8`) | Find large methods |
-| **Indentation** | Formatter (e.g., `black`, `autopep8`) | Check consistency |
-| **Imports** | Import checker (e.g., `isort`, `pylint`) | Find unused imports |
+| **文字コード** | 文字コードチェッカー（例：`chardet`, `file`） | UTF-8であることを確認 |
+| **メソッド分析** | リンター（例：`pylint`, `flake8`） | 肥大化したメソッドを検索 |
+| **インデント** | フォーマッター（例：`black`, `autopep8`） | 一貫性をチェック |
+| **インポート** | インポートチェッカー（例：`isort`, `pylint`） | 未使用のインポートを検索 |
 
-### Check Points
+### チェックポイント
 
-- [ ] All .py files UTF-8 encoded?
-- [ ] No unusually large methods (>100 lines)?
-- [ ] Consistent indentation (spaces vs tabs)?
-- [ ] Unused imports removed?
-- [ ] Docstrings present?
+- [ ] すべての .py ファイルは UTF-8 でエンコードされているか？
+- [ ] 異常に大きいメソッド（100行超）はないか？
+- [ ] インデントが一貫しているか（スペース vs タブ）？
+- [ ] 未使用のインポートは削除されているか？
+- [ ] Docstring が存在するか？
 
-### Document Results
+### 結果のドキュメント化
 
-Record issues in TASKS.txt under "QUALITY REVIEW".
+`TASKS.txt` の "QUALITY REVIEW" セクションに問題を記録します。
 
 ---
 
-## Phase 3: Create TASKS.txt
+## フェーズ 3: TASKS.txt の作成
 
-**Purpose:** Capture open tasks in a structured format.
+**目的:** 未完了のタスクを構造化された形式で記録する。
 
-**Create file:** `TASKS.txt` in the project folder
+**作成するファイル:** プロジェクトフォルダ内の `TASKS.txt`
 
-### Template
+### テンプレート
 
 ```
 TASKS - <ToolName> V<Version>
 ==============================
-Status: <Status>
-Date: <Date>
+ステータス: <Status>
+日付: <Date>
 
-OPEN TASKS:
-[ ] <Task 1> - Effort: <LOW|MEDIUM|HIGH>
-[ ] <Task 2> - Effort: <LOW|MEDIUM|HIGH>
+未完了タスク (OPEN TASKS):
+[ ] <タスク 1> - 工数: <LOW|MEDIUM|HIGH>
+[ ] <タスク 2> - 工数: <LOW|MEDIUM|HIGH>
 
 ---
-DONE (Archive):
-- <Completed task> (<Version>, <Date>)
+完了済み (DONE - Archive):
+- <完了したタスク> (<Version>, <Date>)
 ```
 
-### Status Values
+### ステータス値
 
-| Status | Meaning |
+| ステータス | 意味 |
 |--------|---------|
-| NEWLY DISCOVERED | Not yet analyzed |
-| ANALYSIS NEEDED | Feature analysis in progress |
-| QUALITY REVIEW | Code tests running |
-| VALIDATED & READY | Ready for features |
-| MVP | Minimum Viable Product |
-| BUILD ONLY | Only compilation needed |
-| BLOCKED | Waiting for user test/decision |
+| NEWLY DISCOVERED | 未分析（新しく発見された） |
+| ANALYSIS NEEDED | 機能分析が進行中 |
+| QUALITY REVIEW | コードテスト／レビューを実行中 |
+| VALIDATED & READY | 検証完了、機能開発の準備完了 |
+| MVP | 实装最小限の製品 (Minimum Viable Product) |
+| BUILD ONLY | ビルド／コンパイルのみが必要 |
+| BLOCKED | ブロック中（ユーザーテスト／決定待ち） |
 
 ---
 
-## Phase 4: Task Management Integration
+## フェーズ 4: タスク管理の統合
 
-After completing phases 1-3:
+フェーズ 1〜3 の完了後：
 
-1. **Transfer tasks:** Create TASKS.txt entries as tasks/issues
-2. **Verify:** All tasks correctly categorized?
-3. **Categorize:** Assign project to appropriate category (single tool, suite, library, etc.)
+1. **タスクの移行:** TASKS.txt のエントリをタスク／チケットとして作成
+2. **検証:** すべてのタスクが正しく分類されているか？
+3. **分類:** プロジェクトを適切なカテゴリ（単一ツール、スイート、ライブラリなど）に割当
 
-### Automatic Onboarding Tasks
+### 自動オンボーディングタスク
 
-For new projects, create the following standard tasks:
+新規プロジェクトの場合、以下の標準タスクを作成します：
 
-| Task | Description | Effort |
+| タスク | 説明 | 工数 |
 |------|-------------|--------|
-| onb_1 | Create feature analysis | medium |
-| onb_2 | Code quality review | low |
-| onb_3 | Create TASKS.txt | low |
+| onb_1 | 機能分析の作成 | medium |
+| onb_2 | コード品質レビュー | low |
+| onb_3 | TASKS.txt の作成 | low |
 
-Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
-
----
-
-## Quick Checklist
-
-```
-[ ] 1. Feature_Analysis_<Name>.md created
-[ ] 2. Code quality review completed (linter, encoding, imports)
-[ ] 3. TASKS.txt created with status
-[ ] 4. Tasks added to task management
-```
+タスクには依存関係があります：onb_2 は onb_1 に依存、onb_3 は onb_2 に依存。
 
 ---
 
-## 使用例と実行モデル & Usage
+## クイックチェックリスト
+
+```
+[ ] 1. Feature_Analysis_<Name>.md を作成した
+[ ] 2. コード品質レビューを完了した（リンター、文字コード、インポート）
+[ ] 3. ステータス付きの TASKS.txt を作成した
+[ ] 4. タスクをタスク管理に追加した
+```
+
+---
+
+## 例と適用
 
 ```bash
-# 1. Feature analysis (English)
-# -> Create Feature_Analysis_MyTool.md (see template) (English)
+# 1. 機能分析
+# -> Feature_Analysis_MyTool.md を作成（テンプレート参照）
 
-# 2. Code quality (English)
+# 2. コード品質
 pylint MyTool/main.py
 flake8 MyTool/main.py
-file -i MyTool/main.py  # Check encoding
+file -i MyTool/main.py  # 文字コードのチェック
 
-# 3. TASKS.txt (English)
-# -> Create in tool folder with status "QUALITY REVIEW" (English)
+# 3. TASKS.txt
+# -> ツールフォルダ内にステータス "QUALITY REVIEW" で作成
 
-# 4. Create tasks (English)
-# -> Capture TASKS.txt entries as issues/tickets (English)
+# 4. タスクの作成
+# -> TASKS.txt のエントリをチケット/イシューとして登録
 ```
 
 ---
 
-*Created: 2026-01-10 | Ported: 2026-03-12*
+*作成日: 2026-01-10 | 移植日: 2026-03-12*

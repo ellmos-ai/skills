@@ -1,87 +1,96 @@
 ---
+name: transkription
+version: 0.1.0
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-06-22
+description: Транскрибирует аудио-/видеофайлы в текст. Использует Whisper (openai-whisper) или Vosk (офлайн) в качестве опционального бэкенда — оба определяются через проверку наличия. Без бэкенда: режим заглушки с фиктивным выводом (dry-run).
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [transkription, audio, speech-to-text, whisper, vosk, offline]
 language: ru
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `transkription`.
+> **Русский** — Официальная русская версия `transkription`.
 
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Преобразует аудио-/видеофайлы в текст — локально, без обязательного доступа к облаку. Скилл автоматически определяет, установлены ли Whisper или Vosk, и выбирает лучший доступный бэкенд. Без бэкенда он работает в тестовом режиме (dry-run) и возвращает текст-заглушку, поэтому рабочий процесс всегда функционирует.
 
-
-## Общий обзор и назначение & Purpose
-
-Convert audio/video files to text — locally, without mandatory cloud access. The skill
-automatically detects whether Whisper or Vosk is installed and selects the best
-available backend. Without a backend it runs in dry-run mode and returns a
-placeholder text, so the workflow always works.
-
-Transcripts are stored locally in `transkription/store.db` and can be queried.
+Транскрипции сохраняются локально в `transkription/store.db` и могут быть запрошены.
 
 ---
 
-## Triggers
+## Триггеры
 
-| Phrase | Action |
+| Фраза | Действие |
 |---|---|
-| "Transcribe this audio" | Transcribe audio file |
-| "Transcribe [file]" | Transcribe named file |
-| "Show my transcripts" | List latest transcripts |
-| "Search transcript [term]" | Full-text search in transcripts |
-| "Export transcript [ID]" | Export transcript as TXT |
+| "Transcribe this audio" | Транскрибировать аудиофайл |
+| "Transcribe [file]" | Транскрибировать указанный файл |
+| "Show my transcripts" | Показать список последних транскрипций |
+| "Search transcript [term]" | Полнотекстовый поиск по транскрипциям |
+| "Export transcript [ID]" | Экспортировать транскрипцию в TXT |
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
-1. **Backend check**: Check whether `whisper` or `vosk` is importable.
-2. **File check**: Input file must exist (audio: wav, mp3, m4a, ogg, flac; video: mp4, mkv, webm — extraction via ffmpeg).
-3. **Transcription**: Call backend and obtain raw text.
-4. **Save**: Store result with metadata (file, duration, language, backend, timestamp) in `store.db`.
-5. **Output**: Return text; optionally export as `.txt`.
+1. **Проверка бэкенда**: Проверить возможность импорта `whisper` или `vosk`.
+2. **Проверка файла**: Входной файл должен существовать (аудио: wav, mp3, m4a, ogg, flac; видео: mp4, mkv, webm — извлечение через ffmpeg).
+3. **Транскрипция**: Вызвать бэкенд и получить необработанный текст.
+4. **Сохранение**: Сохранить результат с метаданными (файл, длительность, язык, бэкенд, метка времени) в `store.db`.
+5. **Вывод**: Вернуть текст; опционально экспортировать как `.txt`.
 
 ---
 
-## CLI Entry Point
+## Точка входа CLI
 
 ```bash
-# Transcribe file (English)
+# Transcribe file (Deutsch)
 python transkription_core.py transcribe audio.wav
 
-# With explicit language (English)
+# With explicit language (Deutsch)
 python transkription_core.py transcribe audio.mp3 --lang de
 
-# Dry-run (no backend required) (English)
+# Dry-run (no backend required) (Deutsch)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# List transcripts (English)
+# List transcripts (Deutsch)
 python transkription_core.py list [--limit 20]
 
-# Full-text search (English)
+# Full-text search (Deutsch)
 python transkription_core.py search "term"
 
-# Export (English)
+# Export (Deutsch)
 python transkription_core.py export <id> [--out file.txt]
 
-# Backend check (English)
+# Backend check (Deutsch)
 python transkription_core.py check
 
-# Alternative store path (e.g. for tests) (English)
+# Alternative store path (e.g. for tests) (Deutsch)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
 ---
 
-## Store
+## Хранилище
 
-| Property | Value |
+| Свойство | Значение |
 |---|---|
-| Type | SQLite |
-| Path (default) | `skills/assist/transkription/store.db` |
-| Override | `--store <path>` or env `TRANSKRIPTION_STORE` |
-| Tables | `transcripts` |
+| Тип | SQLite |
+| Путь (по умолчанию) | `skills/assist/transkription/store.db` |
+| Переопределение | `--store <path>` или переменная окружения `TRANSKRIPTION_STORE` |
+| Таблицы | `transcripts` |
 
-### Schema `transcripts`
+### Схема `transcripts`
 
 ```sql
 CREATE TABLE IF NOT EXISTS transcripts (
@@ -99,35 +108,34 @@ CREATE TABLE IF NOT EXISTS transcripts (
 
 ---
 
-## Attitude
+## Поведение и принципы
 
-- Without an installed backend the skill works in dry-run mode (demo text).
-- Whisper is preferred over Vosk (better German quality).
-- The choice between Whisper and Vosk can be set via `assist/prefs.json` (`transkription_backend: "whisper"|"vosk"|"auto"`).
-- ffmpeg for video extraction is needed separately and is not included in the skill.
-
----
-
-## Privacy
-
-- **All transcripts stay local** — no cloud transfer without Whisper online mode.
-- Whisper can be used locally (tiny/base/medium model) or via OpenAI API.
-  By default the local model is used.
-- `store.db` may contain sensitive conversation content — **do not commit to Git**.
-- Recommendation: add `store.db` to `.gitignore`.
+- Без установленного бэкенда скилл работает в режиме dry-run (демонстрационный текст).
+- Whisper предпочтительнее Vosk (лучшее качество для немецкого языка).
+- Выбор между Whisper и Vosk можно настроить через `assist/prefs.json` (`transkription_backend: "whisper"|"vosk"|"auto"`).
+- ffmpeg для извлечения видео требуется отдельно и не входит в состав скилла.
 
 ---
 
-## Related Resources
+## Конфиденциальность
 
-- BACH `hub/_services/voice/voice_stt.py` — backend pattern (inspiration, read-only)
-- Skill `utilities/yt-transcriber` — YouTube transcription (separate skill, not a duplicate: YT-specific)
-- `tools/module-installer/module_installer.py` — registry contains whisper + vosk
+- **Все транскрипции остаются локально** — никакой передачи в облако без онлайн-режима Whisper.
+- Whisper можно использовать локально (модель tiny/base/medium) или через API OpenAI. По умолчанию используется локальная модель.
+- `store.db` может содержать конфиденциальное содержимое разговоров — **не коммитьте в Git**.
+- Рекомендация: добавьте `store.db` в `.gitignore`.
+
+---
+
+## Связанные ресурсы
+
+- BACH `hub/_services/voice/voice_stt.py` — шаблон бэкенда (вдохновение, только для чтения)
+- Скилл `utilities/yt-transcriber` — транскрипция YouTube (отдельный скилл, не дубликат: специфичен для YT)
+- `tools/module-installer/module_installer.py` — реестр содержит whisper + vosk
 
 ---
 
 ## Журнал изменений
 
-| Version | Date | Change |
+| Версия | Дата | Изменение |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Initial creation — own SQLite store, Whisper/Vosk presence check |
+| 0.1.0 | 2026-06-22 | Первоначальное создание — собственное хранилище SQLite, проверка наличия Whisper/Vosk |

@@ -1,163 +1,175 @@
 ---
+name: guideline-therapies-overview
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Сравнение четырех психотерапевтических методов, утвержденных директивами в Германии: когнитивно-поведенческая терапия, психодинамическая терапия, психоанализ, системная терапия — Ориентировочное руководство.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [guideline-therapies, cbt, psychodynamic, psychoanalysis, systemic-therapy, orientation]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `guideline-therapies-overview`.
+> **Русский** — Официальная русская версия `guideline-therapies-overview`.
 
 
+# Обзор психотерапевтических методов, утвержденных директивами (Guideline Therapies Overview)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Сравнение четырех утвержденных психотерапевтических методов в Германии: КПТ, психодинамическая терапия, психоанализ, системная терапия — Ориентировочное руководство
 
-
-# Guideline Therapies Overview (English)
-
-> Comparison of the four approved guideline psychotherapy approaches in Germany: CBT, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-In Germany, there are four recognized guideline psychotherapy approaches whose costs are covered by statutory health insurance. Many people don't know which approach might be suitable for them. This skill provides a psychoeducational overview for orientation.
-
-Legal basis: Guideline therapies are approved by the Federal Joint Committee (G-BA) based on scientific evidence.
-- Cognitive Behavioral Therapy (CBT): Guideline therapy since 1987
-- Psychodynamic Psychotherapy (PDT): since 1967
-- Psychoanalytic Psychotherapy (AP): since 1967
-- Systemic Therapy (ST): since 2019 (adults) / 2024 (children & adolescents)
-
-**Note:** This is an orientation guide, not a therapy recommendation.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The Four Guideline Therapies at a Glance
+## Контекст
 
-| Feature | CBT | PDT | AP | ST |
+В Германии существуют четыре официально признанных метода психотерапии, регулируемых директивами (Richtlinienverfahren), расходы на которые покрываются обязательным медицинским страхованием. Многие люди не знают, какой подход им подходит. Данный навык предоставляет психообразовательный обзор для ориентации.
+
+Юридическое основание: Методы психотерапии утверждаются Федеральным совместным комитетом (G-BA) на основе научных доказательств.
+- Когнитивно-поведенческая терапия (КПТ): Одобрена с 1987 года
+- Психодинамическая психотерапия (ПДТ): с 1967 года
+- Психоаналитическая психотерапия (Психоанализ, ПА): с 1967 года
+- Системная терапия (СТ): с 2019 года (взрослые) / 2024 года (дети и подростки)
+
+**Примечание:** Это ориентировочное руководство, а не рекомендация по лечению.
+**Никогда не применять:** EMDR, пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET)
+
+---
+
+## 1. Четыре утвержденных метода психотерапии: краткий обзор
+
+| Признак | КПТ | ПДТ | ПА | СТ |
 |---------|-----|-----|----|----|
-| **Core idea** | Change behavior and thought patterns | Understand unconscious conflicts | Deep personality change | Change relationships and systems |
-| **Time focus** | Present and future | Past and present | Past (childhood) | Present and relationships |
-| **Sessions** | 12-80 hrs | 12-100 hrs | 80-300 hrs | 12-48 hrs |
-| **Frequency** | 1x/week | 1x/week | 2-3x/week | 1x/week or less |
-| **Setting** | Mostly individual | Mostly individual | Individual (couch) | Individual, couple, family |
+| **Основная идея** | Изменение поведения и паттернов мышления | Понимание бессознательных конфликтов | Глубокое изменение личности | Изменение отношений и систем |
+| **Временной фокус** | Настоящее и будущее | Прошлое и настоящее | Прошлое (детство) | Настоящее и отношения |
+| **Количество сессий** | 12-80 ч | 12-100 ч | 80-300 ч | 12-48 ч |
+| **Частота** | 1 раз/неделю | 1 раз/неделю | 2-3 раза/неделю | 1 раз/неделю или реже |
+| **Сеттинг** | Преимущественно индивидуальный | Преимущественно индивидуальный | Индивидуальный (кушетка) | Индивидуальный, пары, семья |
 
 ---
 
-## 2. Cognitive Behavioral Therapy (CBT)
+## 2. Когнитивно-поведенческая терапия (КПТ)
 
-### Core Assumptions
-- Behavior is learned and can be unlearned
-- Thought patterns influence feelings and behavior (cognitive revolution, Beck)
-- Change happens through active practice and new experiences
+### Основные допущения
+- Поведение выучено и может быть отучено
+- Паттерны мышления влияют на чувства и поведение (когнитивная революция, Бек)
+- Изменения происходят через активную практику и новый опыт
 
-### When particularly suitable?
-- Anxiety disorders, phobias, panic attacks
-- Depression
-- OCD, PTSD, eating disorders
-
----
-
-## 3. Psychodynamic Psychotherapy (PDT)
-
-### Core Assumptions
-- Unconscious conflicts influence our experience and behavior
-- Earlier relationship experiences shape current patterns
-- Insight into unconscious connections promotes change
-
-### When particularly suitable?
-- Depression (especially chronic)
-- Relationship problems with recurring patterns
-- Personality disorders, psychosomatic complaints
+### Когда особенно подходит?
+- Тревожные расстройства, фобии, панические атаки
+- Депрессия
+- ОКР, ПТСР, расстройства приема пищи
 
 ---
 
-## 4. Psychoanalytic Psychotherapy (Psychoanalysis, AP)
+## 3. Психодинамическая психотерапия (ПДТ)
 
-### Core Assumptions
-- Deeply rooted unconscious conflicts from early childhood influence all experience
-- Comprehensive personality change is possible through deep understanding
+### Основные допущения
+- Бессознательные конфликты влияют на наше переживание и поведение
+- Ранний опыт отношений формирует текущие паттерны
+- Осознание (инсайт) бессознательных связей способствует изменениям
 
-### When particularly suitable?
-- Deep-seated personality problems
-- Chronic, recurring problems
-- When shorter approaches haven't been sufficient
-
----
-
-## 5. Systemic Therapy (ST)
-
-### Core Assumptions
-- Problems arise and persist in relationship systems
-- Change in one member changes the entire system
-- Every person has resources and solution competencies
-
-### When particularly suitable?
-- Family and couple conflicts
-- Child and adolescent problems (within the family system)
-- When shorter therapy is desired
+### Когда особенно подходит?
+- Депрессия (особенно хроническая)
+- Проблемы в отношениях с повторяющимися паттернами
+- Расстройства личности, психосоматические жалобы
 
 ---
 
-## 6. Practical Orientation
+## 4. Психоаналитическая психотерапия (Психоанализ, ПА)
 
-### Decision Aid (NOT a recommendation, only orientation)
+### Основные допущения
+- Глубоко укоренившиеся бессознательные конфликты из раннего детства влияют на весь опыт
+- Комплексное изменение личности возможно через глубокое понимание
 
-| I want to... | Potentially suitable approach |
-|--------------|------------------------------|
-| Get concrete tools against anxiety | CBT |
-| Understand why I keep falling into the same patterns | PDT |
-| Fundamentally get to know myself better | AP |
-| Understand relationship problems in their systemic context | ST |
-| Get quick practical help | CBT or ST |
-
-### Therapeutic Relationship
-
-Research consistently shows: The most important therapeutic factor is the therapeutic relationship (Wampold 2015). The "right" approach is less important than the "right" therapist.
+### Когда особенно подходит?
+- Глубоко укоренившиеся личностные проблемы
+- Хронические, повторяющиеся проблемы
+- Когда более краткосрочные подходы оказались недостаточными
 
 ---
 
-## 7. Practical Information
+## 5. Системная терапия (СТ)
 
-### Finding a Therapist
-- In the US: Psychology Today therapist finder, insurance provider directories
-- In the UK: NHS psychological therapies, BACP therapist directory
-- In Germany: Appointment service: 116 117, Association of Statutory Health Insurance Physicians
+### Основные допущения
+- Проблемы возникают и сохраняются в системах отношений
+- Изменение одного участника меняет всю систему
+- Каждый человек обладает ресурсами и компетенциями для решения проблем
 
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Present and compare the four guideline therapies objectively
-- Provide orientation (not recommendations)
-- Give practical information about finding a therapist
-- Ask reflection questions for self-clarification
-
-**An AI assistant must NOT:**
-- Recommend a specific approach
-- Advise against an approach
-- Make diagnoses or derive indications
-- Evaluate or recommend therapists
-- Comment on or question ongoing therapies
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Когда особенно подходит?
+- Семейные и супружеские конфликты
+- Проблемы детей и подростков (в контексте семейной системы)
+- При желании пройти более краткосрочную терапию
 
 ---
 
-## References
+## 6. Практическая ориентация
+
+### Вспомогательное руководство по принятию решений (НЕ рекомендация, только ориентация)
+
+| Я хочу... | Потенциально подходящий подход |
+|-----------|-------------------------------|
+| Получить конкретные инструменты против тревоги | КПТ |
+| Понять, почему я продолжаю попадать в одни и те же паттерны | ПДТ |
+| Фундаментально лучше узнать себя | ПА |
+| Понять проблемы в отношениях в их системном контексте | СТ |
+| Получить быструю практическую помощь | КПТ или СТ |
+
+### Терапевтические отношения
+
+Исследования стабильно показывают: самым важным терапевтическим фактором являются терапевтические отношения (Wampold 2015). «Правильный» терапевт важнее, чем «правильный» подход.
+
+---
+
+## 7. Практическая информация
+
+### Поиск терапевта
+- В США: сервис поиска терапевтов Psychology Today, каталоги страховых компаний
+- В Великобритании: службы психологической помощи NHS, каталог терапевтов BACP
+- В Германии: служба записи: 116 117, Ассоциация врачей обязательного медицинского страхования (Kassenärztliche Vereinigung)
+
+---
+
+## Этика и границы
+
+**ИИ-ассистент МОЖЕТ:**
+- Объективно представлять и сравнивать четыре утвержденных метода психотерапии
+- Предоставлять ориентацию (не рекомендации)
+- Давать практическую информацию о поиске терапевта
+- Задавать рефлексивные вопросы для самопрояснения
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Рекомендовать конкретный подход
+- Отговаривать от какого-либо подхода
+- Ставить диагнозы или формулировать показания к лечению
+- Оценивать или рекомендовать конкретных терапевтов
+- Комментировать или подвергать сомнению текущую терапию
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- 988 Линия помощи при кризисах и суициде (США): 988
+- Crisis Text Line (США): отправьте HOME на 741741
+- Samaritans (Великобритания): 116 123
+- Telefonseelsorge (Германия): 0800 111 0 111 / 0800 111 0 222
+- Экстренные службы: 911 (США) / 112 (ЕС)
+
+---
+
+## Литература
 
 - Wampold, B. E. (2015). *The Great Psychotherapy Debate.* Routledge.
 - Leichsenring, F. & Rabung, S. (2011). Long-term psychodynamic psychotherapy in complex mental disorders. *British Journal of Psychiatry*, 199(1), 15-22.
 - von Sydow, K. et al. (2010). *Die Wirksamkeit der Systemischen Therapie/Familientherapie.* Hogrefe.
-- G-BA Psychotherapy Guideline
+- Директива по психотерапии G-BA (G-BA Psychotherapie-Richtlinie)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: G-BA Guidelines, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Директивы G-BA, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Не является профессиональной терапией*

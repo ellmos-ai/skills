@@ -1,21 +1,34 @@
 ---
+name: structured-thinking
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-05-19
+updated: 2026-05-19
+description: Meta-skill: Pensamiento estructurado como un flujo de trabajo de 3 fases. Combina análisis (think), ideación (brainstorm) y toma de decisiones (decide) en un proceso continuo.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: utilities
+tags: [denken, analyse, kreativitaet, entscheidung, workflow, meta-skill]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `structured-thinking`.
+> **Español** — Versión oficial en español de `structured-thinking`.
 
 
+# Structured Thinking — Analizar, Idear, Decidir
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Structured Thinking — Analyze, Ideate, Decide (English)
-
-> Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
+> Metaflujo de trabajo para el pensamiento estructurado: desde el análisis del problema hasta soluciones creativas y una decisión bien fundamentada
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
 ```
 Problem/Question
@@ -38,102 +51,102 @@ Result + Rationale
 
 ---
 
-## Phase 1: Analyze
+## Fase 1: Analizar
 
-Goal: Understand the problem, identify causes, recognize structure.
+Objetivo: Comprender el problema, identificar las causas y reconocer la estructura.
 
-### Approaches
+### Enfoques
 
-| Method | When | Procedure |
-|--------|------|-----------|
-| **Divide & Conquer** | Complex problem | Problem → sub-problems → solve individually → combine |
-| **Root Cause (5x Why)** | Symptom visible, cause unclear | Symptom → Why? → Why? → ... → cause → solution |
-| **Constraint Relaxation** | Problem appears unsolvable | Relax constraints → solve → re-tighten constraints |
-| **Analogy Search** | Novel problem | Find a similar known problem → adapt its solution |
+| Método | Cuándo | Procedimiento |
+|--------|--------|---------------|
+| **Divide & Conquer** | Problema complejo | Problema → subproblemas → resolver individualmente → combinar |
+| **Root Cause (5x Why)** | Síntoma visible, causa no clara | Síntoma → ¿Por qué? → ¿Por qué? → ... → causa → solución |
+| **Constraint Relaxation** | El problema parece no tener solución | Flexibilizar restricciones → resolver → volver a aplicar restricciones |
+| **Analogy Search** | Problema nuevo | Buscar un problema conocido similar → adaptar su solución |
 
-### Analysis Frameworks
+### Marcos de análisis
 
-| Framework | Application |
-|-----------|-------------|
-| **SWOT** | Strengths / Weaknesses / Opportunities / Threats |
-| **Pareto** | 80/20 — What provides the biggest leverage? |
-| **Fishbone** | Systematic cause analysis (Ishikawa) |
+| Marco | Aplicación |
+|-------|------------|
+| **SWOT (FODA)** | Fortalezas / Oportunidades / Debilidades / Amenazas |
+| **Pareto** | 80/20 — ¿Qué genera el mayor impacto? |
+| **Fishbone** | Análisis sistemático de causas (Ishikawa) |
 
-### Heuristics under Uncertainty
+### Heurísticas bajo incertidumbre
 
-1. What is the worst-case scenario?
-2. Is it reversible?
-3. What is the cost of not acting?
+1. ¿Cuál es el peor escenario posible?
+2. ¿Es reversible?
+3. ¿Cuál es el costo de no actuar?
 
-### Heuristics under Complexity
+### Heurísticas bajo complejidad
 
-1. What is the simplest first step?
-2. What would an expert do?
-3. What would the 80% solution be?
-
----
-
-## Phase 2: Ideate
-
-Goal: Generate as many solution approaches as possible. Quantity over quality. NO criticism during this phase.
-
-### Methods
-
-**SCAMPER** — Systematically improve existing solutions:
-- **S**ubstitute: What to replace? | **C**ombine: What to combine? | **A**dapt: What to adapt?
-- **M**odify: What to change? | **P**ut to other use: What else could it serve? | **E**liminate: What to drop?
-- **R**everse: What to invert?
-
-**Six Thinking Hats** (de Bono) — 6 perspectives in sequence:
-1. Blue: Process control ("What is the question?")
-2. White: Facts ("What do we know?")
-3. Red: Emotion ("What feels right?")
-4. Black: Criticism ("What could go wrong?")
-5. Yellow: Optimism ("What are the opportunities?")
-6. Green: Creativity ("What new ideas are there?")
-
-**Reverse Brainstorming** — Invert the problem:
-1. "How do we make it WORSE?"
-2. Collect bad ideas
-3. Invert = good ideas
-
-**Rapid Ideation** — 50+ ideas in 20 minutes:
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
-
-### After Ideation
-
-1. Clustering: Group similar ideas
-2. Feasibility/Impact matrix: Rate feasibility vs. impact
-3. Select top 5-10 for Phase 3
+1. ¿Cuál es el primer paso más simple?
+2. ¿Qué haría un experto?
+3. ¿Cuál sería la solución al 80%?
 
 ---
 
-## Phase 3: Decide
+## Fase 2: Idear
 
-Goal: Select the best option with a transparent rationale.
+Objetivo: Generar tantas propuestas de solución como sea posible. Cantidad sobre calidad. SIN críticas durante esta fase.
 
-### Framework Selection
+### Métodos
 
-| Situation | Framework |
-|-----------|-----------|
-| 2 options, quick decision | **Pro/Con Matrix** |
-| 3+ options, multiple criteria | **Weighted Scoring** |
-| Sequential if-then decision | **Decision Tree** |
-| High uncertainty | **Scenario Analysis** |
-| Prioritizing tasks | **Eisenhower Matrix** |
+**SCAMPER** — Mejorar sistemáticamente las soluciones existentes:
+- **S**ustituir: ¿Qué sustituir? | **C**ombinar: ¿Qué combinar? | **A**daptar: ¿Qué adaptar?
+- **M**odificar: ¿Qué modificar? | **P**oner en otros usos: ¿Para qué más podría servir? | **E**liminar: ¿Qué descartar?
+- **R**eorganizar/Invertir: ¿Qué invertir?
 
-### Weighted Scoring (core method)
+**Seis Sombreros para Pensar** (de Bono) — 6 perspectivas en secuencia:
+1. Azul: Control del proceso ("¿Cuál es la pregunta?")
+2. Blanco: Hechos ("¿Qué sabemos?")
+3. Rojo: Emoción ("¿Qué nos dicta la intuición?")
+4. Negro: Crítica ("¿Qué podría salir mal?")
+5. Amarillo: Optimismo ("¿Cuáles son las oportunidades?")
+6. Verde: Creatividad ("¿Qué nuevas ideas existen?")
 
-1. Collect criteria (3-7, specific and measurable)
-2. Set weights (sum = 100%, most important >= 25%)
-3. Rate options (1-10 scale)
-4. Compute scores (rating x weight)
-5. Compare and recommend
+**Brainstorming Inverso** — Invertir el problema:
+1. "¿Cómo empeoramos el problema?"
+2. Recopilar malas ideas
+3. Invertir = buenas ideas
 
-### Scenario Analysis
+**Ideación Rápida** — Más de 50 ideas en 20 minutos:
+- Ronda 1 (5 min): Ideación abierta
+- Ronda 2 (5 min): Variaciones
+- Ronda 3 (5 min): Combinaciones
+- Ronda 4 (5 min): Ideas extremas
+
+### Después de la ideación
+
+1. Agrupación (Clustering): Agrupar ideas similares
+2. Matriz Viabilidad/Impacto: Evaluar viabilidad vs. impacto
+3. Seleccionar las 5-10 mejores para la Fase 3
+
+---
+
+## Fase 3: Decidir
+
+Objetivo: Seleccionar la mejor opción con una justificación transparente.
+
+### Selección del marco de trabajo
+
+| Situación | Marco de trabajo |
+|-----------|------------------|
+| 2 opciones, decisión rápida | **Matriz Pros/Contras** |
+| 3+ opciones, múltiples criterios | **Puntuación Ponderada** |
+| Decisión secuencial de tipo si-entonces | **Árbol de Decisión** |
+| Alta incertidumbre | **Análisis de Escenarios** |
+| Priorización de tareas | **Matriz de Eisenhower** |
+
+### Puntuación Ponderada (método principal)
+
+1. Recopilar criterios (3-7, específicos y medibles)
+2. Definir ponderaciones (suma = 100%, los más importantes >= 25%)
+3. Calificar opciones (escala 1-10)
+4. Calcular puntuaciones (calificación x ponderación)
+5. Comparar y recomendar
+
+### Análisis de Escenarios
 
 ```
 Best Case (X%):      Outcome → expected value
@@ -142,7 +155,7 @@ Worst Case (X%):     Outcome → expected value
 Total expected value: [sum]
 ```
 
-### Eisenhower Matrix
+### Matriz de Eisenhower
 
 ```
               URGENT          NOT URGENT
@@ -150,35 +163,35 @@ IMPORTANT     1. DO           2. PLAN
 NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ```
 
-### Quality Checklist before the Final Recommendation
+### Lista de verificación de calidad antes de la recomendación final
 
-- [ ] All relevant criteria identified?
-- [ ] User values taken into account?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and assessed?
-- [ ] Bias check performed?
-- [ ] Reversibility checked?
-
----
-
-## Context-Sensitive Selection
-
-| Situation | Recommended Phase(s) |
-|-----------|----------------------|
-| "I have a problem" | Phase 1 (analysis) → possibly Phase 2+3 |
-| "I need ideas" | Phase 2 (ideation) |
-| "I have to decide" | Phase 3 (decision) |
-| "I am stuck" | Phase 2 (reverse brainstorming) |
-| "What should I prioritize?" | Phase 3 (Eisenhower) |
-| "Understand a complex problem" | Phase 1 (Divide & Conquer + SWOT) |
+- [ ] ¿Se han identificado todos los criterios relevantes?
+- [ ] ¿Se han tenido en cuenta los valores del usuario?
+- [ ] ¿Se consideran los efectos a largo plazo?
+- [ ] ¿Se han identificado y evaluado los riesgos?
+- [ ] ¿Se ha realizado la verificación de sesgos?
+- [ ] ¿Se ha verificado la reversibilidad?
 
 ---
 
-## Registro de Cambios
+## Selección según el contexto
+
+| Situación | Fase(s) recomendada(s) |
+|-----------|------------------------|
+| "Tengo un problema" | Fase 1 (análisis) → posiblemente Fase 2+3 |
+| "Necesito ideas" | Fase 2 (ideación) |
+| "Tengo que decidir" | Fase 3 (decisión) |
+| "Estoy bloqueado" | Fase 2 (brainstorming inverso) |
+| "¿Qué debo priorizar?" | Fase 3 (Eisenhower) |
+| "Comprender un problema complejo" | Fase 1 (Divide & Conquer + SWOT) |
+
+---
+
+## Historial de cambios
 
 ### 1.0.0 (2026-05-19)
-- Created as a meta-skill from think, brainstorm, and decide
+- Creado como meta-skill a partir de think, brainstorm y decide
 
 ---
 
-*Meta-skill | Detailed reference: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | Referencia detallada: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*

@@ -19,34 +19,31 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `rbx-dev`.
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
-
-
 
 # Roblox-Dev — Meta-Skill for Roblox Game Development (English)
 
 ## Overview & Purpose
 
 The central entry point for Roblox game dev with a Rojo-based, version-controllable workflow.
-This skill bundles the overarching knowledge — project structure, architecture patterns and the
+This skill bundles overarching knowledge — project structure, architecture patterns, and the
 most important Luau pitfalls — and routes specialist questions to the three sub-skills:
 
-| Sub-skill | What for |
+| Sub-skill | Purpose |
 | --- | --- |
-| **`/rojo`** | Filesystem→Studio sync, `default.project.json`, rokit/Wally/Lune, project skeleton, sync problems |
+| **`/rojo`** | Filesystem→Studio sync, `default.project.json`, rokit/Wally/Lune, project skeleton, sync issues |
 | **`/rbx-studio`** | Studio operation, scene-vs-code mode, Studio MCP, asset pipeline, **malware scan** |
 | **`/game-design`** | Roles & subtasks, development chains, Game Design Document (KONZEPT.md), multi-agent |
 
 > Routing rule: If it's about **sync/build/setup** → `/rojo`. About **editor/assets/testing in Studio**
 > → `/rbx-studio`. About **concept/roles/process** → `/game-design`. About **code architecture,
-> Luau pitfalls or the overall flow** → stay here.
+> Luau pitfalls, or overall workflow** → stay here.
 
 ## Stack at a Glance
 
-- **Language:** Luau (`.luau`, not `.lua`). Code in English, comments/docs in German, UI texts in German.
+- **Language:** Luau (`.luau`, not `.lua`). Code in English, comments/docs in English, UI texts in target language.
 - **Sync:** Rojo via rokit (pinned tool versions). Filesystem = source of truth.
 - **Tools:** Rojo (sync/build), Lune (tests/scripts outside Studio), Wally (packages),
   optionally Knit (service/controller framework, new projects), Selene (linter).

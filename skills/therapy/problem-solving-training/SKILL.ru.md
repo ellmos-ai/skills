@@ -1,67 +1,79 @@
 ---
+name: problem-solving-training
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Структурированное решение проблем за 6 шагов: определение проблемы, цели, мозговой штурм, оценка, реализация и проверка.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [problem-solving, decision, structured, six-steps, coping]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `problem-solving-training`.
+> **Русский** — Официальная русская версия `problem-solving-training`.
 
 
+# Тренинг решения проблем (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Структурированное решение проблем за 6 шагов по Д'Зурилле и Голдфриду: Систематический подход к проблемам вместо хождения по кругу в руминациях
 
-
-# Problem-Solving Training (English)
-
-> Structured problem solving in 6 steps according to D'Zurilla and Goldfried: Approaching problems systematically instead of ruminating in circles
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Problem-Solving Training (Social Problem-Solving, SPS) is an evidence-based intervention from cognitive behavioral therapy. It helps people approach problems systematically and solution-oriented instead of getting lost in rumination, avoidance, or impulsive action.
-
-Evidence: Meta-analyses show significant effects for depression (d=0.83), anxiety disorders, and stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Problem-Solving Orientation
+## Контекст
 
-Before the actual steps begin, the inner attitude is decisive.
+Тренинг решения проблем (Social Problem-Solving, SPS) — это научно обоснованная интервенция когнитивно-поведенческой терапии (КПТ). Она помогает людям подходить к проблемам систематически и ориентированно на решение, вместо того чтобы погружаться в руминации, избегание или импульсивные действия.
 
-### Helpful Attitude
-- "Problems are part of life — they are solvable"
-- "I can proceed step by step"
-- "There is rarely only one right solution"
-- "Not acting is also a decision — usually not a good one"
+Доказательная база: Метаанализы показывают значимую эффективность при депрессии (d=0.83), тревожных расстройствах и стрессе (Malouff et al. 2007, Bell & D'Zurilla 2009).
 
-### Unhelpful Attitude
-- "None of this makes any sense"
-- "I can't do it anyway"
-- "There is no solution"
-- Impulsive action without thinking
-- Avoidance and procrastination
-
-**First step:** Reflect on your own problem-solving attitude.
+**Примечание:** Данный материал носит психообразовательный характер и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. The 6-Step Model
+## 1. Установка на решение проблем
 
-### Step 1: Define the Problem
+Прежде чем переходить к конкретным шагам, решающее значение имеет внутренняя позиция.
 
-**Goal:** Formulate the problem clearly, concretely, and manageably.
+### Конструктивная установка
+- «Проблемы — это часть жизни, и они разрешимы»
+- «Я могу двигаться шаг за шагом»
+- «Редко существует только одно единственное верное решение»
+- «Бездействие — это тоже решение, и обычно не самое лучшее»
 
-**Guide questions:**
-- What exactly is the problem? (Facts, not interpretations)
-- Who is involved?
-- When and where does it occur?
-- Why is it a problem for me?
+### Неконструктивная установка
+- «Все это не имеет никакого смысла»
+- «У меня все равно ничего не получится»
+- «Решения не существует»
+- Импульсивные действия без размышлений
+- Избегание и прокрастинация
 
-**Worksheet:**
+**Первый шаг:** Осмыслить собственную установку по отношению к решению проблем.
+
+---
+
+## 2. 6-шаговая модель
+
+### Шаг 1: Определение проблемы
+
+**Цель:** Сформулировать проблему четко, конкретно и в доступном для решения виде.
+
+**Направляющие вопросы:**
+- В чем именно заключается проблема? (Факты, а не интерпретации)
+- Кто в это вовлечен?
+- Когда и где она возникает?
+- Почему это является проблемой для меня?
+
+**Рабочий лист:**
 
 ```
 PROBLEM DEFINITION
@@ -75,25 +87,25 @@ Concrete problem statement:
 [...]
 ```
 
-**Common mistakes:**
-- Problem too vague ("Everything is bad")
-- Mixing multiple problems together
-- Including the solution in the problem statement
+**Распространенные ошибки:**
+- Слишком размытая формулировка («Все плохо»)
+- Смешивание нескольких проблем в одну
+- Включение решения в саму формулировку проблемы
 
 ---
 
-### Step 2: Set Goals
+### Шаг 2: Постановка целей
 
-**Goal:** What should be different after solving the problem?
+**Цель:** Что именно должно измениться после решения проблемы?
 
-**SMART Criteria:**
-- Specific: What exactly?
-- Measurable: How will I recognize success?
-- Attractive: Why do I want this?
-- Realistic: Is it achievable?
-- Time-bound: By when?
+**Критерии SMART:**
+- Конкретная (Specific): Что именно?
+- Измеримая (Measurable): Как я пойму, что цель достигнута?
+- Привлекательная / Достижимая (Attractive): Почему я этого хочу?
+- Реалистичная (Realistic): Осуществимо ли это?
+- Ограниченная во времени (Time-bound): К какому сроку?
 
-**Worksheet:**
+**Рабочий лист:**
 
 ```
 GOAL SETTING
@@ -107,17 +119,17 @@ Important to me (0-10)? [...]
 
 ---
 
-### Step 3: Generate Alternatives (Brainstorming)
+### Шаг 3: Генерация альтернатив (Мозговой штурм)
 
-**Goal:** Generate as many solution ideas as possible — without immediate evaluation.
+**Цель:** Сформулировать как можно больше идей решений — без их немедленной оценки.
 
-**Brainstorming rules:**
-1. Quantity over quality — the more ideas, the better
-2. No evaluation during collection
-3. Creative and unusual thinking is allowed
-4. Combine and vary existing ideas
+**Правила мозгового штурма:**
+1. Количество важнее качества — чем больше идей, тем лучше
+2. Никакой оценки на этапе сбора
+3. Приветствуются креативные и нестандартные мысли
+4. Комбинируйте и модифицируйте уже имеющиеся идеи
 
-**Worksheet:**
+**Рабочий лист:**
 
 ```
 BRAINSTORMING
@@ -133,27 +145,27 @@ Solution ideas (at least 5-8):
 8. [...]
 ```
 
-**Helper questions:**
-- "What would someone do who doesn't have this problem?"
-- "What have I done in similar situations before?"
-- "What would I advise a friend?"
-- "What would be the boldest solution?"
-- "What would be the simplest solution?"
+**Вспомогательные вопросы:**
+- «Как поступил бы человек, у которого нет этой проблемы?»
+- «Что я делал(а) в подобных ситуациях раньше?»
+- «Что я посоветовал(а) бы другу?»
+- «Какое решение было бы самым смелым?»
+- «Какое решение было бы самым простым?»
 
 ---
 
-### Step 4: Evaluate Alternatives
+### Шаг 4: Оценка альтернатив
 
-**Goal:** Systematically weigh pros and cons of each alternative.
+**Цель:** Систематически взвесить все «за» и «против» для каждой альтернативы.
 
-**Evaluation criteria:**
-- Effectiveness: Does it solve the problem?
-- Feasibility: Can I implement it?
-- Time required: How long will it take?
-- Consequences: For me? For others?
-- Risks: What could go wrong?
+**Критерии оценки:**
+- Эффективность: Решает ли это проблему?
+- Осуществимость: Могу ли я это реализовать?
+- Затраты времени: Сколько времени это займет?
+- Последствия: Для меня? Для окружающих?
+- Риски: Что может пойти не так?
 
-**Worksheet:**
+**Рабочий лист:**
 
 ```
 EVALUATION MATRIX
@@ -170,11 +182,11 @@ Reasoning: [...]
 
 ---
 
-### Step 5: Implement
+### Шаг 5: Реализация
 
-**Goal:** Concretely plan and carry out the chosen solution.
+**Цель:** Конкретно спланировать и осуществить выбранное решение.
 
-**Action plan:**
+**План действий:**
 
 ```
 ACTION PLAN
@@ -194,18 +206,18 @@ First step (today/tomorrow): [...]
 
 ---
 
-### Step 6: Evaluate
+### Шаг 6: Оценка результатов
 
-**Goal:** Review the outcome and adjust if needed.
+**Цель:** Оценить полученный результат и при необходимости внести коррективы.
 
-**Evaluation questions:**
-- Was the problem solved? (Fully / partially / not at all)
-- Am I satisfied with the result? (0-10)
-- What worked well?
-- What would I do differently next time?
-- Do I need a new attempt with a different alternative?
+**Вопросы для оценки:**
+- Была ли проблема решена? (Полностью / частично / не решена)
+- Доволен(на) ли я результатом? (Шкала 0–10)
+- Что прошло хорошо?
+- Что бы я сделал(а) иначе в следующий раз?
+- Нужна ли новая попытка с другой альтернативой?
 
-**Worksheet:**
+**Рабочий лист:**
 
 ```
 EVALUATION
@@ -219,39 +231,38 @@ Next step: [Conclude / New attempt / Different approach]
 
 ---
 
-## 3. Common Problems in Problem Solving
+## 3. Распространенные трудности при решении проблем
 
-| Problem | Remedy |
+| Проблема | Способ решения |
 |---------|--------|
-| "I don't know where to start" | Back to Step 1, formulate problem smaller |
-| "No solution is good enough" | Question perfectionism, accept "good enough" |
-| "I don't dare" | Identify the smallest possible step |
-| "It doesn't work" | Evaluation: What exactly doesn't work? New attempt |
-| Problem is too big | Break into sub-problems, one at a time |
-| Emotions block | First emotion regulation (breathing, PMR), then problem solving |
+| «Я не знаю, с чего начать» | Вернуться к Шагу 1, сформулировать проблему меньшего объема |
+| «Ни одно решение не кажется достаточно хорошим» | Поставить под сомнение перфекционизм, принять принцип «достаточно хорошо» |
+| «Я не решаюсь» | Определить самый маленький из возможных шагов |
+| «Это не работает» | Оценка: что именно не сработало? Новая попытка |
+| Проблема слишком велика | Разбить на подпроблемы, решать по одной за раз |
+| Эмоции блокируют мышление | Сначала регуляция эмоций (дыхание, ПМР), затем решение проблем |
 
 ---
 
-## Ethics and Boundaries
+## Этика и границы применения
 
-**An AI assistant may:**
-- Guide through the 6 steps and provide worksheet structure
-- Ask brainstorming questions
-- Support evaluation of alternatives
-- Document progress
+**ИИ-ассистент имеет право:**
+- Направлять по 6 шагам и предоставлять структуру рабочих листов
+- Задавать вопросы для мозгового штурма
+- Помогать в оценке альтернатив
+- Документировать прогресс
 
-**An AI assistant must NOT:**
-- Prescribe solutions or suggest "the right answer"
-- Conduct relationship or life counseling in the therapeutic sense
-- Be the sole support for severe psychological distress
-- Make diagnoses
+**ИИ-ассистент НЕ имеет права:**
+- Навязывать решения или предлагать «единственно верный ответ»
+- Проводить семейное или жизненное консультирование в терапевтическом смысле
+- Быть единственной опорой при тяжелых психологических состояниях
+- Ставить диагнозы
 
-**In case of acute crisis, ALWAYS refer to:**
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (RU): 8-800-2000-122
+- Горячая линия психологической помощи (RU): +7 (495) 051
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная помощь: 112 (RU/EU), 911 (US)
 
 ---
 

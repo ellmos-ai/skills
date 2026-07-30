@@ -1,54 +1,66 @@
 ---
+name: solution-focused-therapy
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: ド・シェザーとバーグによる解決志向ブリーフセラピー：ミラクル・クエスチョン、例外の探求、スケーリング、リソースの活性化。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [sfbt, solution-focused, miracle-question, scaling, brief-therapy, resources]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `solution-focused-therapy`.
+> **日本語** — `solution-focused-therapy` の公式日本語版。
 
 
+# 解決志向療法 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> スティーブ・ド・シェザーとインスー・キム・バーグに基づく解決志向ブリーフセラピーの基礎：ミラクル・クエスチョン、例外の探求、スケーリング、リソースの活性化
 
-
-# Solution-Focused Therapy (English)
-
-> Fundamentals of Solution-Focused Brief Therapy according to Steve de Shazer and Insoo Kim Berg: Miracle question, exception exploration, scaling, resource activation
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Solution-Focused Brief Therapy (SFBT) was developed by Steve de Shazer and Insoo Kim Berg at the Brief Family Therapy Center in Milwaukee. It is one of the most well-researched brief therapy approaches.
-
-Core idea: Instead of analyzing problems, work directly on solutions. "Problem talk creates problems, solution talk creates solutions" (de Shazer).
-
-Evidence: Meta-analyses support effectiveness for depression, anxiety, behavioral problems, substance abuse, and couple conflicts (Gingerich & Peterson 2013, Kim et al. 2019).
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Core Principles of SFBT
+## 背景とコンテキスト
 
-### The Three Basic Rules (de Shazer)
+解決志向ブリーフセラピー（SFBT）は、ミルウォーキーのブリーフファミリーセラピーセンター（BFTC）においてスティーブ・ド・シェザー（Steve de Shazer）とインスー・キム・バーグ（Insoo Kim Berg）によって開発されました。最も研究が進んでいる短期心理療法のひとつです。
 
-1. **"If it ain't broke, don't fix it"** — Don't change what works
-2. **"If it works, do more of it"** — Strengthen what works
-3. **"If it doesn't work, do something different"** — Change what doesn't help
+中核概念：問題の原因を分析するのではなく、直接「解決策」の構築に取り組みます。「問題についての対話は問題を生み出し、解決についての対話は解決を生み出す」（ド・シェザー）。
 
-### View of the Person
-- Every person has resources and competencies
-- The client is the expert on their own life
-- Small changes trigger larger ones (butterfly effect)
-- The solution doesn't have to be related to the problem
+エビデンス：メタアナリシスにより、うつ病、不安障害、行動上の問題、物質使用障害、夫婦・カップル葛藤に対する有効性が支持されています（Gingerich & Peterson 2013, Kim et al. 2019）。
+
+**注意：** 本スキルは心理教育的解説を提供するものであり、専門的な心理療法や治療の代わりになるものではありません。
+**絶対に実施してはならない手法：** EMDR、受容・持続ばく露療法（PE）、ナラティブばく露療法（NET）。
 
 ---
 
-## 2. The Miracle Question — In-Depth Application
+## 1. SFBTの基本原則
 
-### Basic Form
+### 3つの基本ルール (de Shazer)
+
+1. **「壊れていないなら、直すな」（"If it ain't broke, don't fix it"）** — うまくいっていることを変える必要はない
+2. **「うまくいっているなら、それを続けよ」（"If it works, do more of it"）** — 効果のある行動を強化・拡大する
+3. **「うまくいかないなら、違うことをせよ」（"If it doesn't work, do something different"）** — 助けにならないやり方を変更する
+
+### 人間観
+- すべての人はリソース（資源）と強み、能力を有している
+- クライエントこそが自分自身の人生におけるエキスパート（専門家）である
+- 小さな変化がより大きな変化を引き起こす（バタフライ効果）
+- 解決策は必ずしも問題そのものと直接因果関係がなくてもよい
+
+---
+
+## 2. ミラクル・クエスチョン（奇跡の質問）— 深い実践
+
+### 基本的な問いかけの型
 
 ```
 "Imagine that tonight, while you are sleeping, a miracle happens.
@@ -59,76 +71,76 @@ What would you notice first thing tomorrow morning that tells you
 the miracle has happened?"
 ```
 
-### Deepening Follow-Up Questions
+### 問いかけを深める追質問
 
-**Making it concrete on a sensory level:**
-- "What exactly would you do differently tomorrow morning?"
-- "How would you get up? What would you do first?"
-- "What would you feel when you open your eyes?"
+**五感レベルで具体化する：**
+- 「明日の朝、具体的にどのような行動の違いがありますか？」
+- 「どのように起きますか？最初に何をしますか？」
+- 「目を開けたとき、どのような感覚がありますか？」
 
-**Relationship level:**
-- "How would your partner notice the miracle?"
-- "What would they see differently about you?"
-- "Who in your circle would notice it first?"
+**関係性レベル：**
+- 「パートナーや身近な人は、奇跡が起きたことにどのように気づくでしょうか？」
+- 「その人の目には、あなたの何が違って映るでしょうか？」
+- 「身近な人のうち、誰が一番最初にその変化に気づくでしょうか？」
 
-**Finding fragments of the miracle:**
-- "Which part of this miracle is perhaps already happening a little bit?"
-- "On a scale of 0 to 10 — how far along are you already toward the miracle?"
+**奇跡の断片を現在の中に探す：**
+- 「この奇跡のどの部分が、もしかすると今日すでに少しだけ起きていますか？」
+- 「0から10のスケールで言うと、その奇跡に向かってすでにどこまで進んでいますか？」
 
 ---
 
-## 3. Exception Exploration
+## 3. 例外の探求 (Exception Exploration)
 
-### Principle
-Exceptions are moments when the problem does not occur or occurs less. They already contain functioning solution approaches.
+### 基本原理
+「例外」とは、問題が発生していない、あるいは問題が軽度にとどまっている瞬間を指します。そこにはすでに機能している解決への手がかりが含まれています。
 
-### Systematic Exception Search
+### 体系的な例外探求の手順
 
-**Phase 1: Finding exceptions**
-- "When was it a bit better recently — even just minimally?"
-- "Are there days when the problem is less severe?"
+**フェーズ 1：例外を見つける**
+- 「最近、ほんのわずかでも状況が良かったのはいつですか？」
+- 「問題がそれほど深刻ではなかった日はありますか？」
 
-**Phase 2: Describing exceptions in detail**
-- "Describe that moment as precisely as possible"
-- "What was different about that day?"
+**フェーズ 2：例外を詳細に描写する**
+- 「その瞬間をできるだけ正確に描写してください」
+- 「その日は何が違っていましたか？」
 
-**Phase 3: Recognizing one's own contribution**
-- "What did YOU contribute to it being better?"
-- "What decision did you make?"
+**フェーズ 3：自分自身の貢献を認識する**
+- 「状況が良くなるために、あなた自身はどのように貢献しましたか？」
+- 「どのような決断をしましたか？」
 
-**Phase 4: Strengthening exceptions**
-- "How could you deliberately repeat that?"
-- "What would be a first small step in that direction?"
+**フェーズ 4：例外を強化・定着させる**
+- 「それを意識的に繰り返すにはどうすればよいですか？」
+- 「その方向への最初の小さな一歩は何でしょうか？」
 
-### Types of Exceptions
+### 例外のタイプ
 
-| Type | Description | Follow-up |
+| タイプ | 説明 | 追質問・対応 |
 |------|-------------|-----------|
-| Deliberate exception | Client consciously did something different | "Do more of that!" |
-| Random exception | Something was different without conscious effort | "What was different about the circumstances?" |
-| External exception | Others did something | "What could you do to make that more likely?" |
+| 意図的な例外 | クライエントが意識的に普段と違う行動をとった | 「それをさらに続けましょう！」 |
+| 偶然の例外 | 意識的な努力なしに状況が違っていた | 「周囲の状況の何が違っていましたか？」 |
+| 外部要因による例外 | 他者が普段と違う行動をとった | 「それが再現されるために、あなたにできることは何ですか？」 |
 
 ---
 
-## 4. Scaling Techniques
+## 4. スケーリング・テクニック（数値化質問）
 
-### Basic Scaling
-"On a scale of 0 to 10, where 0 is the worst and 10 is the best possible..."
+### 基本的な数値化
+「0を最悪の状態、10を考えられる最高の状態とすると、現在の状態は0から10の何点くらいですか？」
 
-### Extended Scaling Forms
+### 発展的な数値化の形態
 
-**Coping scaling:**
-- "How well are you managing to cope with daily life despite the problem?"
+**コーピング・スケール（対処の数値化）：**
+- 「問題があるにもかかわらず、日常をどれくらい対処・管理できていますか？」
 
-**Confidence scaling:**
-- "How confident are you that you can make progress?"
+**確信度スケール：**
+- 「前進できるという確信はどのくらいありますか？」
 
-**Progress scaling:**
-- "Where were you a week / a month ago?"
-- "What contributed to the increase?"
+**進捗スケール：**
+- 「1週間前や1ヶ月前と比べて、今はどの位置にいますか？」
+- 「数値が上がった要因は何ですか？」
 
-### The "One Point Higher" Trick
-Always ask only about the next point — never about the final goal.
+### 「あと1点高くするには」のテクニック
+常に「次の1点」についてのみ質問し、最終目標をいきなり求めない。
 
 ```
 "What would be different at a 6 compared to the current 5?"
@@ -137,54 +149,53 @@ Always ask only about the next point — never about the final goal.
 
 ---
 
-## 5. Additional SFBT Techniques
+## 5. その他のSFBTテクニック
 
-### Coping Questions
-- "How do you manage to get up every day despite everything?"
-- "What keeps you going?"
+### コーピング・クエスチョン（対処質問）
+- 「これほどの困難にもかかわらず、毎日どのようにして起き上がり対処できていますか？」
+- 「何があなたの支えになっていますか？」
 
-### Relationship Questions
-- "If I asked your partner, what would they say?"
-- "Who in your circle would notice the change first?"
+### 関係性質問 (Relationship Questions)
+- 「もしあなたのパートナーに尋ねたら、何とおっしゃるでしょうか？」
+- 「あなたの変化に最初に気づくのは誰でしょうか？」
 
-### Compliments / Resource Comments
-- "I'm impressed that despite the difficulties, you're here."
-
----
-
-## 6. Reflection Questions for Self-Application
-
-- "What is working well in my life — and how am I doing that?"
-- "What is one small exception I could build on?"
-- "If the problem were gone tomorrow — what would I do first?"
-- "What have I accomplished before, even though it was hard?"
+### コンプリメント（ねぎらいとリソースの承認）
+- 「困難な状況であるにもかかわらず、こうして解決策を探そうとされていることに感銘を受けます。」
 
 ---
 
-## Ethics and Boundaries
+## 6. セルフワークのための振り返りの質問
 
-**An AI assistant may:**
-- Explain and contextualize SFBT concepts
-- Guide the miracle question, exception exploration, and scaling
-- Ask reflection questions
-- Point out resources and strengths
+- 「私の人生で何がうまくいっているか — そして自分はそれをどのように実現しているか？」
+- 「自分がさらに広げていけるような小さな『例外の瞬間』は何だろうか？」
+- 「もし明日問題が消失していたら — 最初に何をするだろうか？」
+- 「過去に困難だったにもかかわらず、自分はどのようにして乗り越えただろうか？」
 
-**An AI assistant must NOT:**
-- Conduct solution-focused therapy
-- Trivialize persistent problems ("Just think positive")
-- Bypass acute crises with solution orientation
-- Promise that SFBT techniques will solve problems
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## 伦理と限界
+
+**AIアシスタントができること：**
+- SFBTの概念や枠組みの解説と文脈化
+- ミラクル・クエスチョン、例外の探求、スケーリングのガイド
+- 振り返りの質問の提示
+- 強みやリソースの明確化
+
+**AIアシスタントが禁止されていること：**
+- 臨床的な解決志向心理療法を実施すること
+- 深刻な問題を軽視したり表面的に扱うこと（「ただ前向きに考えよう」等）
+- 急性危機状況において解決志向を盾に問題を回避すること
+- SFBTの技法が自動的に問題を解決すると約束すること
+
+**急性危機・自傷他害のおそれがある場合は必ず以下に繋いでください：**
+- こころの健康相談統一ダイヤル (JP): 0570-064-556
+- よりそいホットライン (JP): 0120-279-338
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 119 / 110 (JP), 911 (US), 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - de Shazer, S. (1988). *Clues: Investigating Solutions in Brief Therapy.* Norton.
 - Berg, I. K. & Miller, S. D. (1992). *Working with the Problem Drinker.* Norton.

@@ -1,163 +1,175 @@
 ---
+name: guideline-therapies-overview
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: ドイツにおける公的医療保険適用対象の4つのガイドライン療法（認知行動療法、精神力動的心理療法、精神分析、システム療法）の比較 — オリエンテーションガイド。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [guideline-therapies, cbt, psychodynamic, psychoanalysis, systemic-therapy, orientation]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `guideline-therapies-overview`.
+> **日本語** — `guideline-therapies-overview` の公式日本語版。
 
 
+# ガイドライン療法概要 (Guideline Therapies Overview)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> ドイツで公的医療保険の適用対象となっている4つの標準心理療法（認知行動療法、精神力動的心理療法、精神分析、システム療法）の比較 — オリエンテーションガイド
 
-
-# Guideline Therapies Overview (English)
-
-> Comparison of the four approved guideline psychotherapy approaches in Germany: CBT, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-In Germany, there are four recognized guideline psychotherapy approaches whose costs are covered by statutory health insurance. Many people don't know which approach might be suitable for them. This skill provides a psychoeducational overview for orientation.
-
-Legal basis: Guideline therapies are approved by the Federal Joint Committee (G-BA) based on scientific evidence.
-- Cognitive Behavioral Therapy (CBT): Guideline therapy since 1987
-- Psychodynamic Psychotherapy (PDT): since 1967
-- Psychoanalytic Psychotherapy (AP): since 1967
-- Systemic Therapy (ST): since 2019 (adults) / 2024 (children & adolescents)
-
-**Note:** This is an orientation guide, not a therapy recommendation.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The Four Guideline Therapies at a Glance
+## 背景
 
-| Feature | CBT | PDT | AP | ST |
-|---------|-----|-----|----|----|
-| **Core idea** | Change behavior and thought patterns | Understand unconscious conflicts | Deep personality change | Change relationships and systems |
-| **Time focus** | Present and future | Past and present | Past (childhood) | Present and relationships |
-| **Sessions** | 12-80 hrs | 12-100 hrs | 80-300 hrs | 12-48 hrs |
-| **Frequency** | 1x/week | 1x/week | 2-3x/week | 1x/week or less |
-| **Setting** | Mostly individual | Mostly individual | Individual (couch) | Individual, couple, family |
+ドイツには、公的医療保険で費用がカバーされる承認済みのガイドライン心理療法（Richtlinienverfahren）が4つ存在します。多くの人は自分にどの接近法（アプローチ）が適しているかを知りません。本スキルは、方向性を示すためのサイコエデュケーション（心理教育）的概要を提供するものです。
 
----
+法的根拠：ガイドライン療法は、科学的エビデンスに基づきドイツ連邦合同委員会（G-BA）によって承認されています。
+- 認知行動療法（CBT）：1987年よりガイドライン療法
+- 精神力動的心理療法（PDT）：1967年より
+- 精神分析的心理療法（精神分析、AP）：1967年より
+- システム療法（ST）：2019年より（成人）/ 2024年より（児童・思春期）
 
-## 2. Cognitive Behavioral Therapy (CBT)
-
-### Core Assumptions
-- Behavior is learned and can be unlearned
-- Thought patterns influence feelings and behavior (cognitive revolution, Beck)
-- Change happens through active practice and new experiences
-
-### When particularly suitable?
-- Anxiety disorders, phobias, panic attacks
-- Depression
-- OCD, PTSD, eating disorders
+**注意：** これは方向性を示すガイドであり、治療の推奨ではありません。
+**絶対に使用・実施しないこと：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）
 
 ---
 
-## 3. Psychodynamic Psychotherapy (PDT)
+## 1. 4つのガイドライン療法の一覧
 
-### Core Assumptions
-- Unconscious conflicts influence our experience and behavior
-- Earlier relationship experiences shape current patterns
-- Insight into unconscious connections promotes change
-
-### When particularly suitable?
-- Depression (especially chronic)
-- Relationship problems with recurring patterns
-- Personality disorders, psychosomatic complaints
+| 特徴 | CBT | PDT | AP | ST |
+|------|-----|-----|----|----|
+| **核心概念** | 行動と思考パターンの変容 | 無意識のコンフリクト（葛藤）の理解 | 人格の根本的変容 | 関係性とシステムの変容 |
+| **時間の焦点** | 現在と未来 | 過去と現在 | 過去（幼少期） | 現在と関係性 |
+| **セッション数** | 12〜80時間 | 12〜100時間 | 80〜300時間 | 12〜48時間 |
+| **頻度** | 週1回 | 週1回 | 週2〜3回 | 週1回以下 |
+| **セッティング** | 主に個人 | 主に個人 | 個人（寝椅子/カウチ） | 個人、カップル、家族 |
 
 ---
 
-## 4. Psychoanalytic Psychotherapy (Psychoanalysis, AP)
+## 2. 認知行動療法 (CBT)
 
-### Core Assumptions
-- Deeply rooted unconscious conflicts from early childhood influence all experience
-- Comprehensive personality change is possible through deep understanding
+### 基本前提
+- 行動は学習されたものであり、消去（脱学習）が可能である
+- 思考パターンが感情や行動に影響を与える（認知革命、ベック）
+- 積極的な練習と新しい体験を通して変容が生じる
 
-### When particularly suitable?
-- Deep-seated personality problems
-- Chronic, recurring problems
-- When shorter approaches haven't been sufficient
-
----
-
-## 5. Systemic Therapy (ST)
-
-### Core Assumptions
-- Problems arise and persist in relationship systems
-- Change in one member changes the entire system
-- Every person has resources and solution competencies
-
-### When particularly suitable?
-- Family and couple conflicts
-- Child and adolescent problems (within the family system)
-- When shorter therapy is desired
+### 特に適している場合
+- 不安症/不安障害、恐怖症、パニック発作
+- うつ病
+- 強迫症（OCD）、PTSD、摂食障害
 
 ---
 
-## 6. Practical Orientation
+## 3. 精神力動的心理療法 (PDT)
 
-### Decision Aid (NOT a recommendation, only orientation)
+### 基本前提
+- 無意識の葛藤が私たちの体験や行動に影響を与える
+- 初期の人関係体験が現在のパターンを形成する
+- 無意識の関連性に対する洞察（インサイト）が変容を促進する
 
-| I want to... | Potentially suitable approach |
-|--------------|------------------------------|
-| Get concrete tools against anxiety | CBT |
-| Understand why I keep falling into the same patterns | PDT |
-| Fundamentally get to know myself better | AP |
-| Understand relationship problems in their systemic context | ST |
-| Get quick practical help | CBT or ST |
-
-### Therapeutic Relationship
-
-Research consistently shows: The most important therapeutic factor is the therapeutic relationship (Wampold 2015). The "right" approach is less important than the "right" therapist.
+### 特に適している場合
+- うつ病（特に慢性的なもの）
+- 反復的なパターンを伴う対人関係の問題
+- パーソナリティ障害、心身症
 
 ---
 
-## 7. Practical Information
+## 4. 精神分析的心理療法 (精神分析, AP)
 
-### Finding a Therapist
-- In the US: Psychology Today therapist finder, insurance provider directories
-- In the UK: NHS psychological therapies, BACP therapist directory
-- In Germany: Appointment service: 116 117, Association of Statutory Health Insurance Physicians
+### 基本前提
+- 幼少期からの深く根ざした無意識の葛藤がすべての体験に影響を与える
+- 深い理解を通じた包括的な人格変容が可能である
 
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Present and compare the four guideline therapies objectively
-- Provide orientation (not recommendations)
-- Give practical information about finding a therapist
-- Ask reflection questions for self-clarification
-
-**An AI assistant must NOT:**
-- Recommend a specific approach
-- Advise against an approach
-- Make diagnoses or derive indications
-- Evaluate or recommend therapists
-- Comment on or question ongoing therapies
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### 特に適している場合
+- 深く根ざしたパーソナリティの問題
+- 慢性・反復性の問題
+- 短期的な接近法では十分な効果が得られなかった場合
 
 ---
 
-## References
+## 5. システム療法 (ST)
+
+### 基本前提
+- 問題は関係性システムの中で発生し、維持される
+- 1人の構成員の変容がシステム全体を変容させる
+- すべての人はリソースと解決能力（コンペテンシー）を持っている
+
+### 特に適している場合
+- 家族およびカップルの葛藤・問題
+- 児童・思春期の問題（家族システムの文脈内）
+- 短期間の療法を希望する場合
+
+---
+
+## 6. 実践的オリエンテーション
+
+### 意思決定の補助（推奨ではなく、オリエンテーションのみ）
+
+| 望んでいること... | 適合する可能性のある療法 |
+|-------------------|--------------------------|
+| 不安に対する具体的なツールを得たい | CBT |
+| なぜ同じパターンを繰り返すのか理解したい | PDT |
+| 自分自身を根本的に深く理解したい | AP |
+| 対人関係問題をシステム的文脈で理解したい | ST |
+| 迅速で実践的な援助を得たい | CBT または ST |
+
+### 治療関係
+
+研究が一貫して示していること：最も重要な治療的因子は治療関係（同盟）である（Wampold 2015）。「正しい」接近法よりも、「適切な」セラピストであることが重要です。
+
+---
+
+## 7. 実用情報
+
+### セラピストの探し方
+- 米国：Psychology Today セラピスト検索、保険会社ディレクトリ
+- 英国：NHS 心理療法サービス、BACP セラピストディレクトリ
+- ドイツ：予約案内サービス：116 117、公的保険医協会（KV）
+
+---
+
+## 倫理と限界
+
+**AIアシスタントができること：**
+- 4つのガイドライン療法を客観的に提示・比較すること
+- 方向性（オリエンテーション）を提供すること（推奨ではない）
+- セラピスト探しに関する実用情報を提供すること
+- 自己明確化のための内省的質問を投げかけること
+
+**AIアシスタントがしてはならないこと：**
+- 特定の接近法を推奨すること
+- 特定の接近法を勧めない（否定する）こと
+- 診断を下すこと、または適応（インジケーション）を導き出すこと
+- セラピストを評価または推奨すること
+- 進行中の療法に対して助言したり疑問を呈したりすること
+
+**急性危機の場合は、常に以下にリファー（転送）すること：**
+- 988 自殺＆危機ライフライン（米国）：988
+- Crisis Text Line（米国）：HOME とテキスト送信 741741
+- サマリア人会 Samaritans（英国）：116 123
+- Telefonseelsorge（ドイツ）：0800 111 0 111 / 0800 111 0 222
+- 緊急通報：911（米国）/ 112（EU）
+
+---
+
+## 参考文献
 
 - Wampold, B. E. (2015). *The Great Psychotherapy Debate.* Routledge.
 - Leichsenring, F. & Rabung, S. (2011). Long-term psychodynamic psychotherapy in complex mental disorders. *British Journal of Psychiatry*, 199(1), 15-22.
 - von Sydow, K. et al. (2010). *Die Wirksamkeit der Systemischen Therapie/Familientherapie.* Hogrefe.
-- G-BA Psychotherapy Guideline
+- G-BA 心理療法ガイドライン (G-BA Psychotherapie-Richtlinie)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: G-BA Guidelines, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Not professional therapy*
+*BACH v3.8.0 より移植 | 独立バージョン*
+*出典：G-BAガイドライン、Wampold (2015)、Leichsenring & Rabung (2011)、von Sydow et al. (2010) — 専門的な治療を代替するものではありません*

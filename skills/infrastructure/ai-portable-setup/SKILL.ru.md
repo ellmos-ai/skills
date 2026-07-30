@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
+description: Создает портативное рабочее пространство ИИ на USB-накопителе или любом другом диске. RAG-пайплайн с локальными моделями LLM (Ollama), векторной базой данных (ChromaDB) и предустановленными промптами.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,43 +16,39 @@ tags: [portable, rag, ollama, usb-drive, offline, local-llm]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `ai-portable-setup`.
+> **Русский** — Официальная русская версия `ai-portable-setup`.
 
 
+# AI Portable Setup (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Создает портативное рабочее пространство ИИ с локальным RAG-пайплайном.
+Разработано для USB-накопителей или внешних дисков — работает в автономном режиме (офлайн)
+с Ollama и локальными моделями эмбеддингов.
 
-
-# AI Portable Setup (English)
-
-Creates a portable AI workspace with a local RAG pipeline.
-Designed for USB drives or external drives — works offline
-with Ollama and local embedding models.
-
-## Quick Start
+## Быстрый старт
 
 ```bash
-# Create structure on USB drive (English)
+# Create structure on USB drive (Deutsch)
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system: (English)
+# Then on the target system: (Deutsch)
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents (English)
+# Index documents (Deutsch)
 python rag/ingest.py
 
-# Query (English)
+# Query (Deutsch)
 python rag/query.py "My question..."
 python rag/query.py --mode icf "Observations about the client"
 ```
 
-## Generated Directory Structure
+## Создаваемая структура каталогов
 
 ```
 AI-Portable/
@@ -77,7 +74,7 @@ AI-Portable/
   venv/                   Portable Python environment
 ```
 
-## RAG Pipeline
+## RAG-пайплайн
 
 ```
 Documents -> Chunking -> Embedding (nomic-embed-text)
@@ -94,25 +91,25 @@ Query -> Embedding -> Similarity Search -> Top-K Chunks
                                           Response
 ```
 
-## Query Modes
+## Режимы запросов
 
-| Mode | Prompt | Usage |
-|------|--------|-------|
-| `default` | General assistant | Standard queries |
-| `icf` | ICF structuring | Classify observations according to ICF |
-| `coding` | Coding assistant | Write and explain code |
-| `rpg` | Game master | Pen-and-paper role-playing |
+| Режим | Промпт | Использование |
+|-------|--------|---------------|
+| `default` | Общий ассистент | Стандартные запросы |
+| `icf` | Структурирование МКФ | Классификация наблюдений по МКФ |
+| `coding` | Ассистент по кодингу | Написание и объяснение кода |
+| `rpg` | Гейммастер | Настольные ролевые игры |
 
-## Requirements on Target System
+## Требования к целевой системе
 
 - Python 3.10+
-- Ollama (with `mistral:instruct` and `nomic-embed-text`)
-- ~8 GB RAM for Mistral
+- Ollama (с `mistral:instruct` и `nomic-embed-text`)
+- ~8 ГБ ОЗУ для Mistral
 
-## Журнал изменений
+## История изменений
 
 ### 1.0.0 (2026-03-12)
-- Consolidation from MODULAR_AGENTS/AI-Portable
-- Setup script as single-file skill
-- 4 preconfigured prompts (coding, icf, rpg, default)
-- RAG pipeline (ingest, query, pipeline)
+- Консолидация из MODULAR_AGENTS/AI-Portable
+- Скрипт настройки в виде однофайлового skill
+- 4 предустановленных промпта (coding, icf, rpg, default)
+- RAG-пайплайн (ingest, query, pipeline)

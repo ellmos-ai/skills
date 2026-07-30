@@ -1,142 +1,98 @@
 ---
 language: zh
+description: 从最终文本中清除 AI 痕迹、对话残留、占位符和 LLM 风格模式，并审核 AI 披露声明。
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `llm-text-hygiene`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `llm-text-hygiene`.
-
+> **中文** — `llm-text-hygiene` 官方中文版本。
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
+# LLM-Text-Hygiene — 从成品文本中清除 AI 残留
 
-## 概述与执行目标 & Purpose
+## 概述与目的
 
-KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
-erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
-Regieanweisungen, die aus der Argumentationsstruktur herausfallen, Danksagungen an das
-Sprachmodell, stehengebliebene Platzhalter, aufdringliche LLM-Stilmuster — und eine
-AI-Disclosure, die fehlt, falsch platziert oder nicht mehr wahr ist. Dieser Skill ist der
-systematische Reinigungs-Pass davor: prüfen, konservativ bereinigen, Disclosure richtig
-stellen. **Er verändert nie die Substanz** — er entfernt, was nicht Teil des Werks ist.
+在 AI 辅助生成的文本中，会累积一些在草稿中不可见、但在已发表文档中会令人尴尬的残留物：来自聊天会话的对话片段、偏离论证结构的旁白/指示、对语言模型的感谢、未清理的占位符、强加的 LLM 风格模式——以及缺失、错位或不再属实的 AI 披露声明（AI Disclosure）。本技能是发布前的系统性清理环节：检查、保守清理、更正披露声明。**它绝不改变文本的实质内容**——它只移除不属于作品本身的内容。
 
-## Prüfkatalog
+## 检查清单（审计）
 
-Fünf Befundklassen, von eindeutig (direkt fixen) nach heikel (nur markieren):
+五类发现，从明确（直接修复）到敏感（仅作标记）：
 
-### 1. Chat-Residue und Regieanweisungen (eindeutig → streichen/ausbessern)
+### 1. 聊天残留与旁白指示（明确 → 删除/修复）
 
-Sätze, die zur ENTSTEHUNG des Texts gehören, nicht zum Text: „Wie besprochen lassen wir
-diesen Teil im Paper, da …", „Hier ist der überarbeitete Abschnitt:", „Gerne ergänze
-ich …", übrig gebliebene Prompt-Fragmente, Meta-Kommentare an den Auftraggeber.
-**Erkennungsprinzip:** Der Satz fällt aus der Text- und Argumentationsstruktur heraus —
-er adressiert eine Gesprächssituation statt den Leser. Beim Streichen prüfen, ob ein
-inhaltlicher Rest gerettet werden muss (Begründung in Fußnote/Text überführen).
+属于文本生成“过程”而非文本“本身”的句子：“正如讨论的那样，我们在论文中保留这部分，因为……”、“这是修改后的章节：”、“我很乐意补充……”、残留的 Prompt 片段、给委托人/请求者的元注释。
+**识别原则：** 该句子脱理了文本和论证结构——它针对的是对话场景而非读者。删除时，检查是否需要保留实质性核心内容（将解释转入脚注/正文）。
 
-### 2. Platzhalter und Baustellen-Marker (eindeutig → auflösen)
+### 2. 占位符与施工标记（明确 → 解决）
 
-`[TODO: …]`, `[Referenz einfügen]`, `XXX`, `<hier Beispiel>`, leere Abschnitte mit
-Überschrift, „(Quelle?)". Auflösen oder — wenn nicht auflösbar — als echte offene
-Aufgabe in die Projekt-TODO überführen und aus dem Deliverable entfernen.
+`[TODO: …]`、`[插入引用]`、`XXX`、`<在此添加示例>`、带标题的空章节、“（来源？）”。予以解决，或者——如果无法解决——作为真正的开放任务移入项目 TODO 中，并从交付物中移除。
 
-### 3. LLM-Danksagungen und Anthropomorphes (eindeutig → entfernen)
+### 3. LLM 感谢语与拟人化表达（明确 → 移除）
 
-Danksagungen an ChatGPT/Claude/Gemini & Co. gehören nicht in die Danksagung — Werkzeuge
-werden nicht bedankt, ihr Einsatz wird in der AI-Disclosure deklariert. Ebenso entfernen:
-anthropomorphe Formulierungen über das Werkzeug („die KI schlug freundlicherweise vor").
+向 ChatGPT/Claude/Gemini 等致谢不属于致谢章节——工具不需要被感谢，它们的使用应在 AI 披露声明中予以声明。同样，移除关于工具的拟人化表述（如“AI 友情建议”）。
 
-### 4. AI-Disclosure (prüfen → korrigieren)
+### 4. AI 披露声明（AI Disclosure）（检查 → 更正）
 
-- **Vorhanden?** Wenn das Dokument KI-gestützt entstand und Venue/Projekt eine Disclosure
-  verlangt oder vorsieht: existiert der Abschnitt?
-- **Korrekt?** Beschreibt sie den tatsächlichen Einsatz (nicht unter-, nicht übertrieben)?
-  Nutzt sie das Disclosure-Schema des Projekts/der Venue, falls eines definiert ist
-  (z. B. abgestufte Level)?
-- **Richtig platziert?** An der venue-üblichen Stelle (Methoden/Acknowledgements-Umfeld/
-  eigener Abschnitt), identisch in allen Sprachfassungen.
+- **是否存在？** 如果文档是在 AI 辅助下生成的，且出版方/项目要求或预留了披露声明：该章节是否存在？
+- **是否准确？** 它是否描述了实际的使用情况（既不夸大也不缩小）？如果项目/出版方定义了披露模式（例如分级模式），它是否使用了该模式？
+- **位置是否正确？** 是否位于出版方习惯的位置（方法/致谢区域/专门章节），且在所有语言版本中保持一致。
 
-### 5. LLM-Stilmuster (heikel → nur klare Fälle fixen, Rest markieren)
+### 5. LLM 风格模式（敏感 → 仅修复明确情况，其余仅标记）
 
-Formelhafte Übergänge („Zusammenfassend lässt sich sagen", „Es ist wichtig zu betonen"),
-Aufzählungs-Inflation wo Fließtext hingehört, „nicht nur … sondern auch"-Ketten,
-Gedankenstrich-Dichte, Hedging-Floskeln, im Englischen die bekannten Marker (u. a.
-„delve", „tapestry", „it's worth noting"). **Vorsicht:** Stil ist Urheber-Territorium —
-nur eindeutige Formelhaftigkeit glätten, alles andere als Befundliste an den Autor geben
-statt den Text umzuschreiben. Ein menschlich klingender Text ist nicht das Ziel des
-Skills; das Ziel ist ein Text ohne Fremdkörper.
+公式化的过渡句（“总而言之”、“值得强调的是”）、本应使用顺畅正文却过度使用要点列表、“不仅……而且……”句式链、破折号密度过高、对冲词套话，以及英文中众所周知的标记（包括 "delve"、"tapestry"、"it's worth noting" 等）。**注意：** 文风属于作者的领地——仅平滑处理明确的公式化表达；将其他所有内容作为发现列表提交给作者，而不是直接重写文本。听起来像人类写的并不是本技能的目标；本技能的目标是一个没有异物的文本。
 
-## Ablauf
+## 工作流
 
-1. **Scope klären:** Welche Deliverables (Dateien), welche Sprachfassungen? Änderungen
-   IMMER synchron über alle Fassungen (Abgleich: `bilingual-doc-sync`).
-2. **Mechanischer Scan:** Volltextsuche nach den Signal-Mustern (Tabelle unten) —
-   billig, findet Klasse 2/3 und Teile von 1 zuverlässig.
-3. **Lese-Pass:** Das Dokument entlang der Argumentationsstruktur lesen — Klasse-1-Funde
-   erkennt man nur strukturell (Satz adressiert Gespräch statt Leser). Besonders prüfen:
-   Abschnittsanfänge/-enden, Danksagungen, Einleitung/Fazit (dort landet Residue zuerst).
-4. **Bereinigen:** Klassen 1–3 direkt fixen (konservativ, Substanz erhalten), Klasse 4
-   korrigieren, Klasse 5 als Befundliste ausgeben; nur eindeutige Fälle direkt glätten.
-5. **Dokumentieren:** Was gefunden/geändert/nur markiert wurde — bei Papern mit
-   Versionierungspflicht vermerken, ob eine neue Version/ein Re-Upload nötig wird.
-6. **Periodisch über einen Bestand:** mit `rotation-check` kombinieren (ein Dokument/
-   Projekt pro Lauf, Registry als Gedächtnis).
+1. **明确范围：** 涉及哪些交付物（文件），哪些语言版本？修改必须在所有版本中保持同步（对照：`bilingual-doc-sync`）。
+2. **机械扫描：** 按照信号模式（下表）进行全文搜索——成本低，能可靠地发现第 2/3 类和部分第 1 类。
+3. **阅读研判：** 沿着论述结构阅读文档——第 1 类发现只能从结构上识别（句子针对对话而非读者）。重点检查：章节开头/结尾、致谢、引言/结论（残留往往最先出现在这些地方）。
+4. **清理：** 直接修复第 1–3 类（保守地，保留实质内容），更正第 4 类，将第 5 类作为发现列表输出；仅直接平滑处理明确无误的情况。
+5. **记录：** 记录发现/修改/仅标记的内容——对于有版本控制要求的论文，注明是否需要新版本/重新上传。
+6. **对文库进行周期性检查：** 与 `rotation-check` 结合（每次运行一个文档/项目，注册表作为记忆）。
 
-## Signal-Muster für den mechanischen Scan
+## 机械扫描的信号模式
 
-| Klasse | Suchmuster (DE) | Suchmuster (EN) |
+| 类别 | 搜索模式 (DE) | 搜索模式 (EN) |
 | --- | --- | --- |
-| Chat-Residue | „wie besprochen", „wie gewünscht", „hier ist", „gerne", „im Chat", „wie du sagtest", „lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
-| Platzhalter | `TODO`, `XXX`, `[…einfügen]`, `<…>`, „Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
-| LLM-Dank | „Dank an ChatGPT/Claude/Gemini", „mithilfe von KI erstellt" (außerhalb Disclosure) | "thanks to ChatGPT/Claude", "grateful to the AI" |
-| Stilmarker | „zusammenfassend lässt sich", „es ist wichtig zu betonen", „nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
+| 聊天残留 | "wie besprochen", "wie gewünscht", "hier ist", "gerne", "im Chat", "wie du sagtest", "lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
+| 占位符 | `TODO`, `XXX`, `[…einfügen]`, `<…>`, "Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
+| LLM 致谢 | "Dank an ChatGPT/Claude/Gemini", "mithilfe von KI erstellt" (披露声明之外) | "thanks to ChatGPT/Claude", "grateful to the AI" |
+| 风格标记 | "zusammenfassend lässt sich", "es ist wichtig zu betonen", "nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
 
-Die Tabelle ist Startpunkt, kein Filter-Ersatz: Muster liefern Kandidaten, die Entscheidung
-fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-Scan,
-Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
-`encoding-fix`-Territorium, nicht dieses Skills.
+该表是起点，不能替代人工研判：模式提供候选对象，决策在上下文中做出（步骤 3–4）。对于纯机械的字符卫生（表情符号扫描、控制字符、损坏的变音符号），请使用现有工具——编码损坏属于 `encoding-fix` 的范畴，而非本技能。
 
-## 使用示例与实践 & Usage
+## 示例与应用
 
 ```text
-Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
+请求：“在上传前检查论文中是否有 AI 残留。”
 
-1. Scope: paper_de.tex + paper_en.tex.
-2. Scan: 1× "as discussed" (EN, Abschnitt 4), 1× "[TODO: Referenz Smith]" (beide),
-   Danksagung erwähnt "wertvolle Hilfe von Claude".
-3. Lese-Pass: In der Einleitung ein Satz, der den Reviewer direkt adressiert
-   („Diesen Einwand behandeln wir wie gewünscht in 3.2") → Regieanweisung.
-4. Fixes: Regieanweisung gestrichen (Inhalt steckte schon in 3.2), TODO als Aufgabe
-   in TODO.md überführt + Platzhalter entfernt, LLM-Dank gestrichen, stattdessen
-   AI-Disclosure-Abschnitt auf tatsächlichen Einsatz präzisiert — alles in DE und EN.
-5. Vermerk: inhaltliche Änderung → neue Paperversion nötig, in TODO.md eingetragen.
+1. 范围：paper_de.tex + paper_en.tex。
+2. 扫描：1× "as discussed" (EN，第 4 节)，1× "[TODO: 插入引用 Smith]" (两者)，
+   致谢中提到 "Claude 的宝贵帮助"。
+3. 阅读研判：在引言中有一句话直接针对审稿人
+   （“我们将按照要求在 3.2 中处理这一异议”）→ 旁白指示。
+4. 修复：删除旁白指示（内容已在 3.2 中），将 TODO 作为任务移入
+   TODO.md + 移除占位符，删除 LLM 致谢，改为
+   将 AI 披露章节针对实际使用情况予以明确 — 全部在 DE 和 EN 中同步。
+5. 记录：实质性修改 → 需要新的论文版本，已填入 TODO.md。
 ```
 
-## Red Flags
+## 警告信号（Red Flags）
 
-| Gedanke | Realität |
+| 想法 | 现实 |
 | --- | --- |
-| „Ich schreibe den Text gleich flüssiger" | Substanz und Stimme gehören dem Autor — der Skill entfernt Fremdkörper, er poliert nicht. |
-| „Stilmarker gefunden → löschen" | Klasse 5 wird markiert, nicht automatisch umgeschrieben; nur eindeutige Formelhaftigkeit glätten. |
-| „Die deutsche Fassung reicht" | Residue sitzt oft nur in EINER Fassung — immer alle Sprachfassungen prüfen und synchron halten. |
-| „Disclosure raus, dann ist es sauber" | Falsch herum: LLM-Dank raus, korrekte Disclosure REIN — Verschleiern ist keine Hygiene. |
+| “我顺便把文本改得更通顺” | 实质内容和文风属于作者——本技能移除异物，而不是润色文风。 |
+| “发现了风格标记 → 删除” | 第 5 类作标记，不自动重写；仅平滑处理明确无误的公式化表达。 |
+| “德语版本就够了” | 残留往往只存在于“某一个”版本中——务必检查所有语言版本并保持同步。 |
+| “把披露声明删掉就干净了” | 顺序颠倒了：删掉 LLM 致谢，把正确的 AI 披露声明填进去——隐瞒不是卫生。 |
 
-## Verwandte Skills
+## 相关技能
 
-- `encoding-fix` — Byte-/Encoding-Reparatur (Mojibake); dieser Skill hier arbeitet auf Inhaltsebene.
-- `bilingual-doc-sync` — Synchronhaltung der Sprachfassungen, in die Fixes eingepflegt werden.
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
+- `encoding-fix` — 字节/编码修复（乱码）；本技能在内容层面工作。
+- `bilingual-doc-sync` — 保持应用修复的各语言版本同步。
+- `rotation-check` — 跨文档文库周期性运行的框架。
+- `textproduction` — 文本生成（本技能是生成后的质量保证/QA）。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.0.0 (2026-07-04)
-- Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"
-  (Chat-Anteile in Papern, LLM-Danksagungen, AI-Disclosure) und auf beliebige
-  Deliverable-Texte verallgemeinert; Prüfkatalog um Platzhalter, Stilmuster und
-  Scan-Signaltabelle erweitert.
+- 初始版本。从 Codex 自动化“research-llm-muster-check”（论文中的聊天片段、LLM 致谢、AI 披露声明）中抽象出来，并泛化至任意交付文本；检查目录扩充了占位符、风格模式和扫描信号表。

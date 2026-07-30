@@ -1,115 +1,127 @@
 ---
+name: schema-therapy
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Terapia de Esquemas según Jeffrey Young: esquemas, modos, concepto del niño interior y estilos de afrontamiento, presentados de forma psicoeducativa.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [schema-therapy, modes, inner-child, coping-styles, personality]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `schema-therapy`.
+> **Español** — Versión oficial en español de `schema-therapy`.
 
 
+# Terapia de Esquemas (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Fundamentos de la Terapia de Esquemas según Jeffrey Young: Esquemas, modos, concepto del niño interior y estilos de afrontamiento — Presentación psicoeducativa
 
-
-# Schema Therapy (English)
-
-> Fundamentals of Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Schema Therapy was developed by Jeffrey E. Young from the 1990s onward as an extension of cognitive behavioral therapy. It integrates elements from CBT, attachment theory, Gestalt therapy, and psychodynamic approaches.
-
-Evidence: Schema Therapy is well supported empirically, particularly for personality disorders (Giesen-Bloo et al. 2006, Masley et al. 2012). In Germany, it is recognized as a method within behavioral therapy.
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Early Maladaptive Schemas
+## Contexto
 
-### Principle
-Schemas are deeply rooted emotional and cognitive patterns that develop in childhood through unmet core needs. They influence how we perceive the world, ourselves, and others.
+La Terapia de Esquemas fue desarrollada por Jeffrey E. Young a partir de la década de 1990 como una ampliación e integración de la terapia cognitivo-conductual. Integra elementos de la TCC, la teoría del apego, la terapia Gestalt y los enfoques psicodinámicos.
 
-### The Five Core Needs (according to Young)
+Evidencia: La Terapia de Esquemas cuenta con un sólido respaldo empírico, particularmente para trastornos de la personalidad (Giesen-Bloo et al., 2006; Masley et al., 2012). En Alemania y otros países está reconocida como un método avanzado dentro de la terapia de conducta.
 
-| Core Need | When Unmet, May Lead To |
+**Nota:** Esto es psicoeducación, no un sustituto de la terapia profesional.
+**Nunca implementar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET).
+
+---
+
+## 1. Esquemas Desadaptativos Tempranos
+
+### Principio
+Los esquemas son patrones emocionales y cognitivos profundamente arraigados que se desarrollan en la infancia a través de necesidades emocionales básicas no satisfechas. Influyen en cómo percibimos el mundo, a nosotros mismos y a los demás.
+
+### Las Cinco Necesidades Emocionales Básicas (según Young)
+
+| Necesidad Básica | Cuando no se satisface, puede conducir a |
 |-----------|------------------------|
-| Secure attachment | Abandonment, mistrust |
-| Autonomy & competence | Dependence, fear of failure |
-| Realistic limits | Entitlement, insufficient self-control |
-| Freedom to express needs | Subjugation, self-sacrifice |
-| Spontaneity & play | Unrelenting standards, punitiveness |
+| Apego seguro | Abandono, desconfianza |
+| Autonomía y competencia | Dependencia, miedo al fracaso |
+| Límites realistas | Grandiosidad / derecho, insuficiente autocontrol |
+| Libertad para expresar necesidades | Subyugación, autosacrificio |
+| Espontaneidad y juego | Normas inalcanzables, punitividad |
 
-### The 18 Schemas — Overview (5 Domains)
+### Los 18 Esquemas — Visión General (5 Dominios)
 
-**Domain 1: Disconnection and Rejection**
-- Abandonment / Instability
-- Mistrust / Abuse
-- Emotional Deprivation
-- Defectiveness / Shame
-- Social Isolation
+**Dominio 1: Desconexión y Rechazo**
+- Abandono / Inestabilidad
+- Desconfianza / Abuso
+- Deprivación emocional
+- Imperfección / Vergüenza
+- Aislamiento social / Alienación
 
-**Domain 2: Impaired Autonomy and Performance**
-- Dependence / Incompetence
-- Vulnerability to Harm
-- Enmeshment / Undeveloped Self
-- Failure
+**Dominio 2: Autonomía y Desempeño Deteriorados**
+- Dependencia / Incompetencia
+- Vulnerabilidad al daño o a la enfermedad
+- Entrelazamiento / Yo subdesarrollado
+- Fracaso
 
-**Domain 3: Impaired Limits**
-- Entitlement / Grandiosity
-- Insufficient Self-Control
+**Dominio 3: Límites Deteriorados**
+- Grandiosidad / Derecho
+- Insuficiente Autocontrol / Autodisciplina
 
-**Domain 4: Other-Directedness**
-- Subjugation
-- Self-Sacrifice
-- Approval-Seeking
+**Dominio 4: Orientación hacia los Demás**
+- Subyugación
+- Autosacrificio
+- Búsqueda de aprobación / Reconocimiento
 
-**Domain 5: Overvigilance and Inhibition**
-- Negativity / Pessimism
-- Emotional Inhibition
-- Unrelenting Standards
-- Punitiveness
+**Dominio 5: Hipervigilancia e Inhibición**
+- Negatividad / Pesimismo
+- Inhibición emocional
+- Normas inalcanzables / Hipercrítica
+- Punitividad
 
-### Reflection Questions for Schema Recognition
-- "What beliefs about yourself keep coming up again and again?"
-- "In which situations do you react particularly strongly emotionally?"
-- "Do you notice patterns that repeat across different relationships?"
-- "Which needs may have been insufficiently met in your childhood?"
+### Preguntas de Reflexión para Reconocer Esquemas
+- "¿Qué creencias sobre ti mismo/a reaparecen una y otra vez?"
+- "¿En qué situaciones reaccionas de manera especialmente intensa a nivel emocional?"
+- "¿Notas patrones que se repiten en tus diferentes relaciones?"
+- "¿Qué necesidades emocionales pudieron haber quedado insatisfechas en tu infancia?"
 
 ---
 
-## 2. The Mode Model
+## 2. El Modelo de Modos (Modos de Esquema)
 
-### Principle
-Modes are momentary emotional states activated by schemas. The mode model helps understand and categorize different "inner parts."
+### Principio
+Los modos son estados emocionales momentáneos activados por los esquemas. El modelo de modos ayuda a comprender y categorizar las diferentes "partes internas".
 
-### The Four Mode Categories
+### Las Cuatro Categorías de Modos
 
-**Child Modes:**
-- *Vulnerable Child:* Feels sad, lonely, anxious, overwhelmed
-- *Angry Child:* Angry about unmet needs
-- *Impulsive Child:* Acts without thinking, wants immediate gratification
-- *Happy Child:* Feels safe, loved, spontaneous
+**Modos Niño:**
+- *Niño Vulnerable:* Se siente triste, solo, ansioso, abrumado
+- *Niño Airado:* Inquieto o con rabia ante necesidades insatisfechas
+- *Niño Impulsivo:* Actúa sin pensar, busca gratificación inmediata
+- *Niño Feliz:* Se siente seguro, amado, espontáneo
 
-**Maladaptive Parent Modes:**
-- *Punitive Parent:* Inner voice that criticizes, punishes, devalues
-- *Demanding Parent:* Inner voice that demands perfection and achievement
+**Modos Padre/Madre Disfuncional:**
+- *Padre Punitivo:* Voz interna que critica, castiga y desvaloriza
+- *Padre Exigente:* Voz interna que exige perfección y rendimiento constante
 
-**Maladaptive Coping Modes:**
-- *Compliant Surrender:* Gives in, adapts excessively
-- *Detached Protector:* Numbs feelings, withdraws, distracts
-- *Overcompensation:* Dominates, controls, attacks
+**Modos de Afrontamiento Disfuncional:**
+- *Rendición / Sumiso:* Se rinde al esquema, se adapta excesivamente
+- *Protector Desconectado:* Adormece sentimientos, se retrae, busca distracciones
+- *Sobrecompensador:* Domina, controla, ataca o actúa con grandiosidad
 
-**Healthy Adult:**
-- Can perceive needs and meet them appropriately
-- Sets healthy boundaries
-- Comforts and soothes the vulnerable child
-- Limits excessive parent modes
+**Adulto Sano:**
+- Puede percibir las necesidades y satisfacerlas adecuadamente
+- Establece límites saludables
+- Consuela y calma al niño vulnerable
+- Pone límites a los modos padre/madre exigentes o punitivos
 
-### Exercise: Recognizing Modes in Daily Life
+### Ejercicio: Reconocer Modos en la Vida Cotidiana
 
 ```
 Situation: ______________
@@ -125,14 +137,14 @@ Which mode am I feeling right now?
 
 ---
 
-## 3. Inner Child Work (Psychoeducational)
+## 3. Trabajo con el Niño Interior (Psicoeducativo)
 
-### Principle
-Inner child work in Schema Therapy aims to develop a caring inner attitude toward one's own vulnerable parts.
+### Principio
+El trabajo con el niño interior en Terapia de Esquemas busca desarrollar una actitud interna afectuosa y de cuidado hacia las propias partes vulnerables.
 
-**CAUTION:** Deep inner child work belongs in professional therapeutic supervision.
+**PRECAUCIÓN:** El trabajo profundo con el niño interior pertenece al ámbito de la supervisión terapéutica profesional.
 
-### Reflection Exercise: Letter to the Inner Child
+### Ejercicio de Reflexión: Carta al Niño Interior
 
 ```
 Write a brief letter to your younger self:
@@ -141,55 +153,55 @@ Write a brief letter to your younger self:
 3. What comfort would you offer?
 ```
 
-### Reflection Questions
-- "When you think about that situation — how old do you feel inside?"
-- "What would a caring adult have said to you back then?"
-- "Which needs of the child within you are currently going unmet?"
+### Preguntas de Reflexión
+- "Cuando piensas en esa situación, ¿cuántos años sientes que tienes por dentro?"
+- "¿Qué te habría dicho un adulto afectuoso y comprensivo en aquel momento?"
+- "¿Qué necesidades de tu niño interior no están siendo atendidas en este momento?"
 
 ---
 
-## 4. Understanding Coping Styles
+## 4. Comprensión de los Estilos de Afrontamiento
 
-### The Three Basic Patterns
+### Los Tres Patrones Básicos
 
-| Coping Style | Strategy | Example |
+| Estilo de Afrontamiento | Estrategia | Ejemplo |
 |-------------|----------|---------|
-| Surrender | Accept the schema, submit | "That's just how I am, I can't change it" |
-| Avoidance | Not wanting to feel the schema | Distraction, substance use, overwork |
-| Overcompensation | Living the opposite of the schema | Perfectionism instead of feeling like a failure |
+| Rendición (Surrender) | Aceptar el esquema, someterse | "Así soy yo, no puedo cambiarlo" |
+| Evitación (Avoidance) | No querer sentir el esquema | Distracción, consumo de sustancias, exceso de trabajo |
+| Sobrecompensación (Overcompensation) | Actuar de forma opuesta al esquema | Perfeccionismo extremo para no sentirse fracasado |
 
-### Reflection Questions
-- "When you're under pressure — do you tend to submit, flee, or fight?"
-- "Which of your habits might be avoidance strategies?"
-- "Are there areas where you do the opposite of what you actually feel?"
+### Preguntas de Reflexión
+- "Cuando estás bajo presión, ¿tiendes a someterte, huir o luchar?"
+- "¿Cuáles de tus hábitos podrían ser estrategias de evitación?"
+- "¿Hay áreas en las que haces exactamente lo contrario de lo que realmente sientes?"
 
 ---
 
-## Ethics and Boundaries
+## Ética y Límites
 
-**An AI assistant may:**
-- Explain schemas and modes as concepts
-- Ask reflection questions for self-exploration
-- Present coping styles as psychoeducation
-- Guide simple, written inner child reflection exercises
+**Un asistente de IA puede:**
+- Explicar esquemas y modos como conceptos teóricos
+- Formular preguntas de reflexión para la autoexploración
+- Presentar los estilos de afrontamiento como psicoeducación
+- Guiar ejercicios sencillos y escritos de reflexión sobre el niño interior
 
-**An AI assistant must NOT:**
-- Diagnose or attribute schemas
-- Conduct chair work or experiential exercises
-- Offer reparenting (limited reparenting)
-- Process traumatic childhood experiences
-- Replace schema mode therapy
+**Un asistente de IA NO debe:**
+- Diagnosticar ni atribuir esquemas clínicamente
+- Realizar trabajo con sillas (chairwork) ni ejercicios vivenciales profundos
+- Ofrecer repaternaje (limited reparenting)
+- Procesar experiencias infantiles traumáticas
+- Sustituir la terapia de modo de esquema profesional
 
-**In case of acute crisis, ALWAYS refer to:**
+**En caso de crisis aguda, SIEMPRE derivar a:**
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Servicios de emergencia: 911 (US) / 112 (EU)
 
 ---
 
-## References
+## Referencias
 
 - Young, J. E., Klosko, J. S. & Weishaar, M. E. (2003). *Schema Therapy: A Practitioner's Guide.* Guilford Press.
 - Giesen-Bloo, J. et al. (2006). Outpatient Psychotherapy for Borderline Personality Disorder. *Archives of General Psychiatry*, 63(6), 649-658.

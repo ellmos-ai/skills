@@ -5,7 +5,8 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: [Русский] Навык агента для tageszeitung: Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).
+description: Создает персональную ежедневную газету из RSS-лент и веб-источников. Перенесено из новостной системы BACH (news.py + newspaper_generator.py). Собственное хранилище SQLite (без Origin-DB). feedparser опционален — XML-фоллбэк через stdlib. Экспорт в PDF через Edge Headless (msedge.exe).
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,83 +16,77 @@ tags: [zeitung, news, rss, feed, pdf, tageszeitung]
 language: ru
 status: stable
 dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HTML → PDF (Edge Headless); without Edge: HTML output only'}], 'services': [], 'protocols': [], 'python': [{'name': 'feedparser', 'optional': True, 'install': 'pip install feedparser', 'purpose': 'RSS parsing (main backend). Fallback: defusedxml → regex'}, {'name': 'defusedxml', 'optional': True, 'install': 'pip install defusedxml', 'purpose': 'XXE-safe XML parser as fallback when feedparser is missing. Without defusedxml a regex fallback is used (no ET.fromstring on network data).'}]}
-provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\\n'}
+provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `tageszeitung`.
+> **Русский** — Официальная русская версия `tageszeitung`.
 
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-## Общий обзор и назначение & Purpose
-
-Fetch articles from configured RSS feeds and web sources, sort them by category
-and render them as an HTML/PDF daily newspaper. Articles are stored locally in
-`tageszeitung/store.db` and marked as read.
+Загружает статьи из настроенных RSS-лент и веб-источников, сортирует их по категориям и отображает в виде daily newspaper в формате HTML/PDF. Статьи сохраняются локально в `tageszeitung/store.db` и отмечаются как прочитанные.
 
 ---
 
-## Triggers
+## Триггеры
 
-| Phrase | Action |
+| Фраза | Действие |
 |---|---|
-| "Create my daily newspaper" | Fetch articles + render PDF |
-| "Daily newspaper for today" | Render today's newspaper |
-| "Add feed [URL]" | Register RSS source |
-| "Show my sources" | Output source list |
-| "Fetch news" | Fetch all sources (no render) |
+| "Создать мою ежедневную газету" | Загрузить статьи + сгенерировать PDF |
+| "Ежедневная газета на сегодня" | Сгенерировать газету на сегодня |
+| "Добавить ленту [URL]" | Зарегистрировать RSS-источник |
+| "Показать мои источники" | Вывести список источников |
+| "Загрузить новости" | Загрузить все источники (без генерации) |
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
-1. **Check sources**: Read all active sources from `news_sources`.
-2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
-3. **Deduplication**: UNIQUE(source_id, url) prevents duplicates.
-4. **Render**: Group unread articles by category → HTML → PDF.
-5. **Deliver**: Place HTML/PDF in output folder (configurable path).
+1. **Проверка источников**: чтение всех активных источников из `news_sources`.
+2. **Загрузка**: RSS через feedparser (или фоллбэк xml.etree), веб через urllib.
+3. **Дедупликация**: UNIQUE(source_id, url) предотвращает дублирование.
+4. **Генерация (Render)**: группировка непрочитанных статей по категориям → HTML → PDF.
+5. **Доставка**: размещение HTML/PDF в папке назначения (настраиваемый путь).
 
 ---
 
-## CLI Entry Point
+## Точка входа CLI
 
 ```bash
-# Add source (English)
+# Add source (Deutsch)
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Fetch all sources (English)
+# Fetch all sources (Deutsch)
 python tageszeitung_core.py fetch
 
-# Render daily newspaper (HTML + PDF if Edge available) (English)
+# Render daily newspaper (HTML + PDF if Edge available) (Deutsch)
 python tageszeitung_core.py render [--date 2026-06-22] [--out /path/]
 
-# List sources (English)
+# List sources (Deutsch)
 python tageszeitung_core.py sources
 
-# Unread articles (English)
+# Unread articles (Deutsch)
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Mark article as read (English)
+# Mark article as read (Deutsch)
 python tageszeitung_core.py read <item_id>
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 
 ---
 
-## Store
+## Хранилище
 
-| Property | Value |
+| Свойство | Значение |
 |---|---|
-| Type | SQLite |
-| Path (default) | `skills/assist/tageszeitung/store.db` |
-| Override | `--store <path>` or env `TAGESZEITUNG_STORE` |
-| Tables | `news_sources`, `news_items` |
+| Тип | SQLite |
+| Путь (по умолчанию) | `skills/assist/tageszeitung/store.db` |
+| Переопределение | `--store <path>` или пер. окружения `TAGESZEITUNG_STORE` |
+| Таблицы | `news_sources`, `news_items` |
 
-### Schema (ported from BACH news.py)
+### Схема (перенесено из BACH news.py)
 
 ```sql
 CREATE TABLE IF NOT EXISTS news_sources (
@@ -127,30 +122,30 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
-## Attitude
+## Принципы работы
 
-- feedparser is preferred; without feedparser an xml.etree fallback handles simple RSS 2.0 feeds.
-- PDF generation requires `msedge.exe` in the system PATH or `MSEDGE_PATH` env. Without Edge only HTML is rendered.
-- Maximum articles per category: configurable via `assist/prefs.json` (`tageszeitung_max_per_category`, default: 5).
-
----
-
-## Privacy
-
-- Article contents stay local in `store.db`.
-- No external analysis services — only the configured RSS/web sources are called.
+- Предпочтительно использование feedparser; при отсутствии feedparser используется фоллбэк на xml.etree для обработки простых RSS 2.0 лент.
+- Для генерации PDF требуется `msedge.exe` в системном PATH или в переменной окружения `MSEDGE_PATH`. Без Edge создается только HTML.
+- Максимальное количество статей на категорию: настраивается через `assist/prefs.json` (`tageszeitung_max_per_category`, по умолчанию: 5).
 
 ---
 
-## Related Resources
+## Конфиденциальность
 
-- BACH `hub/news.py` — origin (read-only)
-- BACH `hub/_services/newspaper/newspaper_generator.py` — origin (read-only)
+- Содержимое статей остается локально в `store.db`.
+- Никаких внешних сервисов аналитики — обращение происходит только к настроенным RSS/веб-источникам.
 
 ---
 
-## Журнал изменений
+## Связанные ресурсы
 
-| Version | Date | Change |
+- BACH `hub/news.py` — оригинал (только для чтения)
+- BACH `hub/_services/newspaper/newspaper_generator.py` — оригинал (только для чтения)
+
+---
+
+## История изменений
+
+| Версия | Дата | Изменение |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Initial creation — BACH schema ported, own store, feedparser optional |
+| 0.1.0 | 2026-06-22 | Начальное создание — перенесена схема BACH, собственное хранилище, feedparser опционален |

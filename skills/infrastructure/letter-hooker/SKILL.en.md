@@ -5,8 +5,14 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.
-
+description: >
+  Extends automation-self-care with Letter Hooks, Preflight Bootloaders,
+  Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI
+  agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as
+  Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules,
+  search memory/gardener before work begins, enforce directory document reading
+  strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to
+  skills and security protocols.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,14 +21,21 @@ category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
 language: en
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kontext_and_workflow_loader.py']}
-provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: [agy_kontext_and_workflow_loader.py]
+provenance:
+  origin: "fork of automation-self-care"
+  origin_path: "skills/infrastructure/automation-self-care"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `letter-hooker`.
 
-
-# Letter-Hooker (Prompt-Level Preflight & Governance Engine) (English)
+# Letter-Hooker (Prompt-Level Preflight & Governance Engine)
 
 The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
 
@@ -30,7 +43,7 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Core Capabilities & Features
+## Core Capabilities
 
 1. **Preflight Bootloaders & Document Traversal Rules**:
    - **Upward & Downward Search**: Enforces strict instructions for agents to inspect `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md`, and `README.md` at the current working directory level. If missing, traverse upwards until found; then inspect downwards.
@@ -58,10 +71,10 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Workflow & Execution Steps
+## Workflow Integration
 
 ```bash
-# Execute the Letter-Hooker Maintenance Engine (English)
+# Execute the Letter-Hooker Maintenance Engine
 python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ```
 

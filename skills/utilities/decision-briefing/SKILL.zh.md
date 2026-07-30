@@ -1,47 +1,60 @@
 ---
+name: decision-briefing
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-06-13
+updated: 2026-06-13
+description: 每当在某个主题、项目、文档中或在一场会话过程中有多个决策待处理或积累时使用：清点决策、提供带有 A/B/C/D 选项及明确推荐的编号简报、接受字母回复（包括批量回复）、记录结果并将其写回源文档。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [entscheidung, briefing, batch, decision-session, priorisierung, workflow]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-briefing/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `decision-briefing`.
+> **中文** — `decision-briefing` 官方中文版本。
 
 
+# Decision-Briefing — 集中高效处理同一主题下的多个决策 (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decision-Briefing — Work Through Many Decisions on One Topic (English)
-
-> A pile of open decisions becomes a numbered briefing with recommendations that the user can answer at lightning speed with single letters — one by one or as a batch.
-
----
-
-## When to use?
-
-**Always, as soon as several decisions are pending** -- regardless of topic. Typical situations:
-
-- Many open decisions have piled up in one area/topic
-- A document (plan, TODO list, concept) contains several undecided points
-- Several decision questions have accumulated during a conversation
-- The agent itself has several questions for the user -- bundle them as a briefing instead of asking one by one
-- The user wants to clear open items quickly and on a solid basis
-
-**Trigger words:** open decisions, decision session, briefing, work through, go through, let's decide all of this
-
-**Scope:** [decide](../decide/SKILL.en.md) provides frameworks for ONE question. `decision-briefing` coordinates working through MANY decisions on one topic — and applies `decide` to complex individual cases.
+> 将一堆待处理决策梳理为带推荐建议的编号简报，用户只需通过单个字母（逐个或批量）即可极速完成决策。
 
 ---
 
-## Core UX
+## 适用场景
 
-The heart of this skill is the briefing format. Each decision is presented so that answering costs only a single letter:
+**只要有多个决策待处理**，无论涉及什么主题，均应使用。典型场景：
 
-- **Numbering:** `[E01]`, `[E02]`, … — stable references throughout the session
-- **Short question** + 1–2 sentences of context
-- **Options as letters** A/B/C/D (2–4 options, more only if necessary)
-- **Marked recommendation** with a one-sentence rationale (e.g. `→ Recommendation: A — because …`)
-- Optional: consequence note (what follows from the choice)
+- 某领域/主题下积压了大量未决决策
+- 某文档（计划、TODO 列表、方案）包含多个待定事项
+- 在对话过程中积累了多个决策问题
+- Agent 本身有多个问题需要询问用户——将其打包为简报，而非逐一发问
+- 用户希望在坚实的基础上快速清空待办事项
 
-**User answer formats:**
+**触发词 (Trigger words):** open decisions, decision session, briefing, work through, go through, let's decide all of me
+
+**适用范围:** [decide](../decide/SKILL.en.md) 为单个问题提供分析框架。`decision-briefing` 负责协调处理同一主题下的多个决策，并在面对复杂个案时调用 `decide`。
+
+---
+
+## 核心交互体验 (Core UX)
+
+本技能的核心在于简报格式。每个决策的呈现方式都经过优化，使用户只需回复单个字母即可回答：
+
+- **编号体系:** `[E01]`, `[E02]`, … — 在整个会话过程中保持稳定引用
+- **简短问题** + 1–2 句背景上下文
+- **字母选项** A/B/C/D（2–4 个选项，仅在必要时提供更多）
+- **明确推荐** 及一句话理由（例如：`→ 推荐: A — 因为 …`）
+- 可选：后果提示（做出选择后会带来什么影响）
+
+**用户回复格式:**
 
 ```
 Single:    "E01: A"  or  "1A"
@@ -52,7 +65,7 @@ Defer:     "E03: later"
 
 ---
 
-## 工作流程与执行步骤 & Execution Steps
+## 工作流与步骤
 
 ```
 Topic + decisions at hand
@@ -70,19 +83,19 @@ Phase 3: DECISION SESSION
 Phase 4: RECORD & WRITE BACK
 ```
 
-### Phase 1: Capture & Inventory
+### 阶段 1: 捕获与清点
 
-Sources: what the user names, a document at hand, or the conversation context. No system-wide scan — only what is already there.
+来源：用户提到的内容、现有文档或对话上下文。无需进行全系统扫描——仅针对现有的内容。
 
-1. List all open decisions (one line each: short title)
-2. Detect and merge **duplicates** (same question, phrased multiple times)
-3. Mark **dependencies** ("E04 depends on E01")
-4. Set the **order**: blockers first (decisions that others depend on), then by urgency
-5. Show the list to the user for confirmation ("Did I get them all? Anything missing?")
+1. 列出所有未决决策（每行一个：简短标题）
+2. 识别并合并**重复项**（表述不同但本质相同的问题）
+3. 标记**依赖关系**（“E04 依赖于 E01”）
+4. 设定**处理顺序**: 阻塞性决策优先（其他决策依赖的前提），其次按紧急程度排序
+5. 将列表展示给用户进行确认（“是否已全额收集？是否有遗漏？”）
 
-### Phase 2: Prepare the Briefing
+### 阶段 2: 准备简报
 
-Per decision:
+针对每个决策：
 
 ```
 [E01] <Short question>
@@ -94,24 +107,24 @@ Per decision:
   (optional) Consequence: <what follows from the choice / next action>
 ```
 
-Rules for good options:
+良好选项设置的规则：
 
-- Options must be mutually exclusive and cover the spectrum
-- If useful, include a "keep status quo" or "defer" option
-- The recommendation is transparently reasoned — never covertly suggestive
-- When facts are unclear: clarify first (or flag as an open question), do not guess
+- 选项之间必须互斥，且能够覆盖各种可能性
+- 如果适用，包含“保持现状”或“暂缓”选项
+- 推荐理由透明充分——绝不可隐晦引导
+- 当事实尚不明确时：先进行澄清（或标记为开放性问题），切勿盲目猜测
 
-### Phase 3: Decision Session
+### 阶段 3: 决策会话
 
-1. Present the briefing — one decision per message or all at once as a batch; with >5 decisions, use blocks of 3–5
-2. Accept letter answers and acknowledge them
-3. On a "more info" answer: deepen the decision (method toolbox below)
-4. For complex individual cases (many criteria, high stakes): escalate to the [decide](../decide/SKILL.en.md) skill (weighted scoring, scenario analysis)
-5. Carry deferred decisions forward explicitly as open — never drop them silently
+1. 呈现简报——每次消息提交一个决策，或作为批量一次性提交；当决策数量 >5 时，按 3–5 个一组分块呈现
+2. 接收字母回复并予以确认
+3. 当收到“需要更多信息”的回复时：深入分析该决策（参照下方方法工具箱）
+4. 对于复杂个案（维度多、风险高）：升格至 [decide](../decide/SKILL.en.md) 技能（加权评分、情景分析）
+5. 将推迟的决策显式保留为待处理状态——切勿默默丢弃
 
-### Phase 4: Record & Write Back
+### 阶段 4: 记录与写回
 
-1. Create a **results table**:
+1. 建立**结果表格**:
 
 ```
 | No.  | Decision            | Chosen | Status   |
@@ -121,7 +134,7 @@ Rules for good options:
 | E03  | <short title>       | —      | deferred |
 ```
 
-2. Write decided items back into the **source documents/TODO files** — at the location of the open question, e.g.:
+2. 将已决事项写回**源文档/TODO 文件**——在原开放性问题的位置，例如：
 
 ```
 DECISION: <question>
@@ -129,13 +142,13 @@ DECISION: <question>
   → Next action: <if the decision implies a follow-up action>
 ```
 
-3. Keep **deferred items explicitly open** (in the source document or the TODO list) so they reappear in the next briefing
+3. 将**推迟事项显式保留为开放状态**（在源文档或 TODO 列表中），以便在下一次简报中再次呈现
 
 ---
 
-## 使用示例与实践 & Usage
+## 示例与应用
 
-Topic: relaunch of a club website — 3 open decisions from the project plan.
+主题：某俱乐部网站重构——项目计划中的 3 个待定决策。
 
 ```
 [E01] Which system for the new website?
@@ -160,52 +173,52 @@ Topic: relaunch of a club website — 3 open decisions from the project plan.
   → Recommendation: A — reversible and yields early feedback; final content follows.
 ```
 
-The user answers as a batch: **"1B 2C 3A"** → results table, then the three decisions are marked DECIDED in the project plan.
+用户以批量方式回复：**"1B 2C 3A"** → 生成结果表格，随后在项目计划中将这三个决策标记为 DECIDED。
 
 ---
 
-## Method Toolbox (for "more info" and deepening)
+## 方法工具箱 (用于“更多信息”及深入分析)
 
-| Method | When | Summary |
+| 方法 | 适用场景 | 概要 |
 |--------|------|---------|
-| **Pro/con matrix** | 2–3 options, quick comparison | Evaluate all options side by side |
-| **Weighted scoring** | Multiple criteria | Weighted criteria, points per option (quantitative where possible) |
-| **Second-order thinking** | Unclear stakes | What are the consequences of the consequences? |
-| **Premortem** | Risky decision | "It failed — why?" Find weak spots in advance |
-| **10/10/10 method** | Emotional/temporal distortion | How does the decision look in 10 minutes / 10 months / 10 years? |
+| **优缺点矩阵** | 2–3 个选项，快速对比 | 并排评估所有选项 |
+| **加权评分** | 多项评估标准 | 加权标准，为各选项打分（尽可能定量） |
+| **二阶思维** | 后果/利害关系不明确 | 后果的后果是什么？ |
+| **事前剖析 (Premortem)** | 风险决策 | “项目失败了——为什么？” 提前找出薄弱环节 |
+| **10/10/10 法** | 情绪/时间维度偏差 | 10分钟/10个月/10年后，这个决策看起来会怎样？ |
 
 ---
 
-## Working Principles
+## 工作原则
 
-- **Never push decisions:** provide information, justify the recommendation transparently — the user decides
-- **Bias detection:** name thinking errors when they become visible (confirmation bias, sunk cost)
-- **Mind reversibility:** decide reversible choices quickly, treat final ones more thoroughly
-- **Respect time pressure:** fast decisions need simpler methods — not every question deserves a weighted scoring analysis
+- **切勿强推决策:** 提供充分信息，透明地解释推荐理由——最终决定权在用户
+- **偏见识别:** 当思维误区变得显现时明确指出（确认偏误、沉没成本等）
+- **注意可逆性:** 快速做出可逆决断，对不可逆的决定更加审慎地对待
+- **尊重时间压力:** 快速决策需要更简捷的方法——并非每个问题都需要做加权评分分析
 
 ---
 
-## Scope and Synergies
+## 适用范围与协同效应
 
-| Function | `decide` | `decision-briefing` |
+| 功能 | `decide` | `decision-briefing` |
 |---|---|---|
-| Structure a single decision with a framework | ✓ | — |
-| Inventory many decisions on one topic | — | ✓ |
-| Numbered briefing with A/B/C options | — | ✓ |
-| Batch answers ("1A 2C 3B") | — | ✓ |
-| Write back into source documents | — | ✓ |
+| 使用特定框架结构化单个决策 | ✓ | — |
+| 清点梳理某一主题下的多个决策 | — | ✓ |
+| 带有 A/B/C 选项的编号简报 | — | ✓ |
+| 批量回复处理 ("1A 2C 3B") | — | ✓ |
+| 将决策写回源文档 | — | ✓ |
 
-**Synergy:** For complex individual cases within a session, `decision-briefing` applies the frameworks from `decide` (weighted scoring, scenario analysis). For the larger thinking process before that (analyze → ideate → decide), see [structured-thinking](../structured-thinking/SKILL.en.md).
+**协同效应:** 对于会话中遇到的复杂个案，`decision-briefing` 可以应用来自 `decide` 的框架（如加权评分、情景分析）。对于此前更宏大的思考过程（分析 → 构思 → 决策），请参阅 [structured-thinking](../structured-thinking/SKILL.en.md)。
 
 ---
 
-## 变更日志与历史
+## 更新日志
 
 ### 1.0.0 (2026-06-13)
-- Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand
+- 从 BACH 专家 `decision-briefing` v1.0.0 移植；刻意移除了扫描器组件 (scanner.py, sources.json, marker scans) —— 捕获过程保持轻量，基于现有上下文进行
 
 ---
 
-*Ported from BACH | Standalone version without scanner*
+*从 BACH 移植 | 不带扫描器的独立版本*
 
-**See also:** [decide](../decide/SKILL.en.md) (frameworks for a single decision) | [structured-thinking](../structured-thinking/SKILL.en.md) (analyze → ideate → decide as a meta workflow)
+**参见:** [decide](../decide/SKILL.en.md) (单个决策的分析框架) | [structured-thinking](../structured-thinking/SKILL.en.md) (分析 → 构思 → 决策 元工作流)

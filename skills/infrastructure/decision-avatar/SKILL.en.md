@@ -2,57 +2,41 @@
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `decision-avatar`.
 
-
-> **English Translation** — Official English version of `decision-avatar`.
-
-
-# Decision Avatar (English)
+# Decision Avatar
 
 ## Overview & Purpose
 
-Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
-bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
-aus echten, autorisierten Belegen abzuleiten.
+This skill does not replicate a person. It provides a verifiable procedure to derive a likely preference for recurring decision types based on authentic, authorized evidence.
 
-Nutze ihn nur, wenn ein lokales Entscheidungsprofil vorhanden und dessen Nutzung
-für die aktuelle Aufgabe zulässig ist. Ohne Profil liefert der Skill keine
-stellvertretende Entscheidung.
+Use it only when a local decision profile exists and its use is permissible for the current task. Without a profile, the skill provides no proxy decision.
 
-Die Nutzung gilt nur dann als autorisiert, wenn Auftrag, geltende Agentenregel
-oder Profilmetadaten den aktuellen Zweck ausdrücklich erlauben. Bloße
-Erreichbarkeit einer Profildatei ist keine Einwilligung.
+Usage is considered authorized only if the task, applicable agent rule, or profile metadata explicitly allows the current purpose. Mere accessibility of a profile file does not constitute consent.
 
-## Kernprinzipien
+## Core Principles
 
-1. **Beleg vor Vermutung.** Direkte Aussagen und bestätigte Entscheidungen wiegen
-   stärker als abgeleitete Muster.
-2. **Vorhersage ist keine Aussage der Person.** Agentenausgaben dürfen nicht als
-   neue Primärbelege in das Profil zurückfließen.
-3. **Entscheiden ist nicht Ausführen.** Eine Empfehlung kann bestimmt sein, obwohl
-   ihre Umsetzung zusätzliche Autorität braucht.
-4. **Stille Zustimmung ist kein Feedback.** Ausbleibender Widerspruch bestätigt
-   keine Vorhersage.
-5. **Profile bleiben lokal und privat.** Keine personenbezogenen Daten, Secrets
-   oder sensiblen Inhalte in geteilte Skill-Dateien übernehmen.
+1. **Evidence over assumption.** Direct statements and confirmed decisions carry more weight than inferred patterns.
+2. **Prediction is not a statement by the person.** Agent outputs must not flow back into the profile as new primary evidence.
+3. **Deciding is not executing.** A recommendation can be firm even though its implementation requires additional authority.
+4. **Silent agreement is not feedback.** Absence of objection does not confirm a prediction.
+5. **Profiles remain local and private.** Do not transfer personal data, secrets, or sensitive content into shared skill files.
 
-## Portables Profilmodell
+## Portable Profile Model
 
-Die Dateinamen sind frei konfigurierbar; benötigt werden nur diese Rollen:
+Filenames are freely configurable; only these roles are required:
 
-| Rolle | Inhalt |
+| Role | Content |
 |---|---|
-| Methodik | Evidenzstufen, Datenschutz und Kalibrierungsregeln |
-| Belegte Präferenzen | direkte Aussagen und bestätigte Entscheidungen |
-| Hypothesen | abgeleitete Regeln mit Konfidenz und Quellen |
-| Aktionen | aufgrund einer Vorhersage getroffene Handlungen |
-| Feedback | Bestätigung, Korrektur oder Ablehnung durch die Person |
+| Methodology | Evidence tiers, data privacy, and calibration rules |
+| Evidenced Preferences | Direct statements and confirmed decisions |
+| Hypotheses | Derived rules with confidence and sources |
+| Actions | Actions taken based on a prediction |
+| Feedback | Confirmation, correction, or rejection by the person |
 
-Projektbezogene, aktuellere Entscheidungen haben Vorrang vor allgemeinen
-Präferenzen.
+Project-related, more recent decisions take precedence over general preferences.
 
-Jeder verwertete Beleg sollte mindestens enthalten:
+Every evaluated piece of evidence should contain at least:
 
 ```text
 Quellen-ID:
@@ -62,59 +46,49 @@ Status: bestätigt/korrigiert/widerrufen
 Gültig bis: <optional>
 ```
 
-Widerrufene, abgelaufene oder außerhalb ihres Gültigkeitsbereichs liegende Belege
-nicht verwenden. Bei widersprüchlichen bestätigten Belegen gewinnt zunächst der
-spezifischere und danach der aktuellere. Bleibt der Konflikt bestehen, Konfidenz
-auf „niedrig“ setzen und eskalieren.
+Do not use revoked, expired, or out-of-scope evidence. In case of conflicting confirmed evidence, the more specific one wins first, followed by the more recent one. If the conflict persists, set confidence to "low" and escalate.
 
-## Entscheidungsloop
+## Decision Loop
 
-### 0. Lokale Vorrangregel prüfen
+### 0. Check Local Precedence Rule
 
-Gibt es für das aktuelle Projekt oder den konkreten Entscheidungstyp eine
-bestätigte Regel, nutze diese und dokumentiere ihre Quelle.
+If a confirmed rule exists for the current project or specific decision type, use it and document its source.
 
-### 1. Echte Evidenz suchen
+### 1. Search for Real Evidence
 
-Nur Belege verwenden, die nach der lokalen Methodik zulässig sind. Aufgabenlisten,
-Agentenprotokolle, frühere Avatar-Antworten und Argumente der aktuellen Sitzung
-sind keine Aussagen der Person.
+Only use evidence permitted under the local methodology. Task lists, agent logs, previous avatar responses, and current session arguments are not statements by the person.
 
-### 2. Vorhersage bilden
+### 2. Form Prediction
 
-Ergebnis stets mit Begründung und einer von drei Stufen ausgeben:
+Always output the result with a rationale and one of three confidence levels:
 
-- **hoch:** mehrere direkte, konsistente und einschlägige Belege,
-- **mittel:** plausibles Muster mit begrenzter oder indirekter Evidenz,
-- **niedrig:** neuartige Lage, widersprüchliche Belege oder kein belastbares
-  Muster.
+- **high:** multiple direct, consistent, and relevant pieces of evidence,
+- **medium:** plausible pattern with limited or indirect evidence,
+- **low:** novel situation, conflicting evidence, or no reliable pattern.
 
-Folgenreiche Entscheidungen sind nicht automatisch „niedrig“. Konfidenz misst
-die Evidenz für die Präferenz, nicht die Reichweite der späteren Ausführung.
+High-consequence decisions are not automatically "low". Confidence measures the evidence for the preference, not the scope of subsequent execution.
 
-### 3. Modus trennen
+### 3. Separate Modes
 
-| Modus | Ergebnis | Seiteneffekt |
+| Mode | Output | Side Effect |
 |---|---|---|
-| Vorhersagen | wahrscheinliche Position + Belege + Konfidenz | keiner |
-| Entscheiden | konkrete Wahl + Begründung + Konfidenz | keiner |
-| Handeln | autorisierte, sichere Umsetzung + Aktionsprotokoll | möglich |
+| Predict | Likely position + evidence + confidence | None |
+| Decide | Concrete choice + rationale + confidence | None |
+| Act | Authorized, safe implementation + action log | Possible |
 
-Im Handlungsmodus gelten zusätzlich die Autoritäts- und Sicherheitsregeln der
-Runtime. Niedrige Konfidenz oder fehlende Ausführungsbefugnis führt zur
-Eskalation, nicht zur stillen Ausführung.
+In action mode, runtime authority and safety rules additionally apply. Low confidence or lack of execution authorization leads to escalation, not silent execution.
 
-### 4. Feedback kalibrieren
+### 4. Calibrate Feedback
 
-Nach echtem Feedback:
+Upon receiving real feedback:
 
-1. Vorhersage als bestätigt, korrigiert oder abgelehnt markieren.
-2. Optional eine Bewertungsskala erfassen.
-3. Unterschied zwischen Richtungsfehler und Zuschnittfehler festhalten.
-4. Hypothese und Konfidenz anpassen.
-5. Nur echte Rückmeldung in die belegten Präferenzen übernehmen.
+1. Mark prediction as confirmed, corrected, or rejected.
+2. Optionally record a rating scale.
+3. Note the difference between directional error and framing error.
+4. Adjust hypothesis and confidence.
+5. Transfer only real feedback into evidenced preferences.
 
-## Ausgabeformat
+## Output Format
 
 ```text
 Entscheidungstyp:
@@ -127,23 +101,17 @@ Ausführung autorisiert: ja/nein
 Nächster Schritt:
 ```
 
-In Ausgaben nur redigierte Quellen-IDs und die für die Entscheidung notwendige
-Belegzusammenfassung nennen. Keine privaten Aussagen, absoluten Profilpfade oder
-sensiblen Rohdaten wiedergeben.
+In outputs, include only redacted source IDs and the evidence summary necessary for the decision. Do not reproduce private statements, absolute profile paths, or sensitive raw data.
 
-## Grenzen
+## Limitations
 
-- Keine Diagnostik oder Behauptung über innere Zustände einer Person.
-- Keine Nutzung eines Profils außerhalb seines erlaubten Zwecks.
-- Keine automatische Übernahme von Agentenannahmen als Personenwissen.
-- Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
-  erforderlich wäre.
+- No diagnostics or assertions about a person's internal mental states.
+- No use of a profile outside its authorized purpose.
+- No automatic adoption of agent assumptions as personal knowledge.
+- No execution based solely on a prediction when new authority would be required.
 
 ## Changelog
 
 ### 1.0.0 (2026-07-28)
-- Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer
-  persönlichen Avatar-Konfiguration als eigenständiges, portables Protokoll
-  extrahiert.
-- Autorisierung, Beleglebenszyklus, Konfliktauflösung und redigierte Ausgabe
-  operationalisiert.
+- Extracted feedback precognition, confidence calibration, and provenance separation from a personal avatar configuration into a standalone, portable protocol.
+- Operationalized authorization, evidence lifecycle, conflict resolution, and redacted output.

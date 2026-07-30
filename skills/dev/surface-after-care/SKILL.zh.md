@@ -2,78 +2,70 @@
 language: zh
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `surface-after-care`.
+> **中文** — `surface-after-care` 官方中文版本。
 
+# Surface After Care — 已发布仓库的定期维护流程 (中文)
 
+## 适用场景
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+本 Skill 适用于**已经公开**且需要定期检查的仓库。它是最具性价比的维护层级：涵盖所有可以在仓库自身内部做出决策的操作，无需清点外部仓库或发起法律审查。
 
+与相关技能的界限划分：
 
-> **English Translation** — Official English version of `surface-after-care`.
-
-
-# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo (English)
-
-## Wann dieser Skill greift
-
-Nutze ihn für ein Repository, das **bereits öffentlich ist** und turnusmäßig durchgesehen werden soll. Er ist die günstige Stufe: alles, was sich am Repo selbst entscheiden lässt, ohne fremde Repos zu inventarisieren oder ein Rechtsgutachten anzustoßen.
-
-Abgrenzung zu den Nachbarskills:
-
-| Situation | Skill |
+| 场景 | 技能 |
 |---|---|
-| Repo wird zum ersten Mal veröffentlicht | `github-repo-care` |
-| Repo ist public, regelmäßige Pflegerunde | **dieser Skill** |
-| Zusätzlich Rechtscheck + Querverweise über alle Orgas + App-i18n | `full-after-care` (Alias `deep-after-care`) |
-| Reine Rechts-/Privacy-/Lizenzprüfung vor dem Public-Stellen | `repo-publish-check` |
-| Sprachfassungen inhaltlich synchron halten | `bilingual-doc-sync` |
-| Verteilung dieser Runde über viele Repos, fair rotierend | `rotation-check` |
+| 仓库首次发布 | `github-repo-care` |
+| 仓库已公开，定期维护检查 | **本 Skill** |
+| 额外法律检查 + 跨所有 Org 交叉引用 + 应用 i18n | `full-after-care` (别名 `deep-after-care`) |
+| 公开发布前纯粹的法律/隐私/许可证审查 | `repo-publish-check` |
+| 保持各语言版本内容同步 | `bilingual-doc-sync` |
+| 在多个仓库间公平轮换执行本轮检查 | `rotation-check` |
 
-## Kernidee
+## 核心理念
 
-Ein veröffentlichtes Repo driftet in zwei Richtungen auseinander: **Die Doku beschreibt eine ältere Software als die, die im Repo liegt**, und **es sammeln sich Dateien an, die nie für fremde Augen gedacht waren**. Beides ist selten dramatisch, aber beides kostet genau die Nutzer, die man gewinnen will — der eine springt ab, weil die Installationsanleitung nicht mehr passt, der andere, weil er im Wurzelverzeichnis auf `AUFGABEN.txt` und `Plan.txt` stößt und den Eindruck bekommt, hier arbeite jemand nur für sich selbst.
+一个已发布的仓库容易在两个方向上产生偏差：**文档描述的是比仓库内实际代码更旧的软件版本**，以及**积累了从未打算给外部人员查看的文件**。这两者通常都不会导致致命灾难，但都会失去你最想吸引的用户——前者因为安装指南失效而放弃，后者因为在根目录看到 `AUFGABEN.txt` 或 `Plan.txt` 而产生“这只是个人随意项目”的印象。
 
-Diese Runde räumt beides auf. Sie ist bewusst wiederholbar: lieber viermal im Jahr eine halbe Stunde als einmal ein Großputz.
+本维护流程旨在同时清理这两类问题。它是可重复执行的：一年进行四次半小时的维护，远胜过一年一次的大扫除。
 
-## Ablauf
+## 操作流程
 
-Die Reihenfolge ist nicht willkürlich. Schritt 0 steht am Anfang, weil er den Umfang aller folgenden Schritte bestimmt. Schritt 2 läuft vor allem, was Änderungen pusht — sonst schiebt man Verbesserungen über einen Stand, der erst noch bereinigt werden muss. Schritt 1 ist rein serverseitig und stört dabei nicht.
+执行顺序并非随意安排。步骤 0 放在最前面，因为它决定了后续所有步骤的范围。步骤 2 必须在推送任何更改前运行——否则你就是在尚未清理的基础代码上提交改进。步骤 1 纯粹是服务端配置，不会产生干扰。
 
-### 0. Distributionsflächen inventarisieren
+### 0. 盘点分发渠道
 
-**Bevor irgendetwas geändert wird: klären, wo dieses Projekt überall liegt.** Das GitHub-Repo ist selten die einzige Fläche. Eine korrigierte README nützt wenig, wenn die npm-Paketseite weiter die alte Fassung mit der falschen Installationsanweisung zeigt — und genau dort landen die meisten Nutzer, denn Paketregister ranken in Suchmaschinen oft besser als das Repo.
+**在修改任何内容前：明确该项目分布在哪些地方。** GitHub 仓库很少是唯一的展示面。如果 npm 包页面依然展示着带错误安装指令的旧版本 README，那么仅修改 GitHub 上的 README 作用有限——而大多数用户恰恰是从包注册表进入的，因为注册表在搜索引擎中的排名通常高于仓库本身。
 
 ```bash
-# Manifeste verraten die Kanäle (English)
+# 从清单文件中检索分发渠道
 cat package.json pyproject.toml setup.py Cargo.toml 2>/dev/null | rg -n "name|version|keywords|repository|homepage"
 rg -n "npmjs.com|pypi.org|marketplace|registry|crates.io|hub.docker|zenodo|doi" README* docs/ .github/ 2>/dev/null
 
-# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft) (English)
-npm view <paket> version description keywords 2>/dev/null
-pip index versions <paket> 2>/dev/null
+# 查询已发布渠道的状态（仅查询适用的项目）
+npm view <package> version description keywords 2>/dev/null
+pip index versions <package> 2>/dev/null
 gh release list --repo ORG/REPO --limit 5
 ```
 
-Typische Flächen: npm, PyPI, Crates, Docker Hub, MCP-Registry, Plugin-/Skill-Verzeichnisse, VS-Code- oder Browser-Marketplaces, App-Stores, Zenodo/DOI, Projektwebsite, Organisationsprofil, `llms.txt`, Spiegel-Repos auf anderen Hosts.
+典型渠道：npm、PyPI、Crates、Docker Hub、MCP Registry、插件/Skill 目录、VS Code 或浏览器 Marketplace、应用商店、Zenodo/DOI、项目网站、组织 Profile、`llms.txt`、其他主机上的镜像仓库。
 
-Notiere die gefundene Liste im Laufprotokoll. Sie ist ab jetzt die **Zielmenge**: Jede Änderung aus den folgenden Schritten wird am Ende gegen diese Liste gespiegelt (siehe „Parität über alle Flächen"). Findest du eine Fläche, die niemand mehr pflegt und die auf einen toten Stand zeigt, ist das ein eigener Befund — entweder aktualisieren oder bewusst zurückziehen, aber nicht stehen lassen.
+在运行日志中记录找到的渠道列表。从现在起，该列表即为**目标集合**：后续步骤中的每项更改最后都需要与该列表进行镜像同步（参见“所有渠道的一致性”）。如果你发现某个无人维护且指向废弃状态的渠道，这本身就是一个发现——要么更新它，要么明确撤回，切勿任其搁置。
 
-### 1. Topics setzen
+### 1. 设置主题标签 (Topics)
 
-Topics sind die wichtigste Suchfläche innerhalb von GitHub und kosten fast nichts.
+Topics 是 GitHub 内部最重要的搜索入口，且几乎没有任何成本。
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,description,repositoryTopics,homepageUrl,visibility
 gh repo edit ORG/REPO --add-topic <topic> --add-topic <topic>
 ```
 
-Ziel sind ungefähr 5–12 Topics aus drei Richtungen: **was es ist** (`cli`, `mcp-server`, `python-library`), **worum es geht** (`file-management`, `tax`, `note-taking`) und **wie es arbeitet** (`local-first`, `offline`, `privacy`). Orientiere dich an Topics, die bei vergleichbaren Projekten tatsächlich verwendet werden — erfundene Topics finden keine Nutzer. Description und Homepage gleich mitprüfen, sie stehen in derselben Ansicht.
+目标是从三个维度设置约 5–12 个 Topic：**是什么**（`cli`、`mcp-server`、`python-library`）、**关于什么**（`file-management`、`tax`、`note-taking`）以及**如何工作**（`local-first`、`offline`、`privacy`）。参考同类热门项目实际使用的 Topic——凭空捏造的 Topic 无法带来用户。顺便检查 Description 和 Homepage，它们在同一个视图中展示。
 
-Topics haben auf den anderen Flächen aus Schritt 0 ein Pendant: `keywords` in `package.json`, `keywords`/`classifiers` in `pyproject.toml`, Kategorien und Tags in Marketplaces und Stores. Halte sie inhaltlich gleich — sie sind dieselbe Entscheidung, nur an mehreren Orten.
+Topics 在步骤 0 的其他渠道中有对应的字段：`package.json` 中的 `keywords`，`pyproject.toml` 中的 `keywords`/`classifiers`，以及 Marketplace 和 Store 中的分类与标签。保持它们在内容上一致——它们代表在多个地方表达的同一个决策。
 
-### 2a. Privacy-Gate — läuft immer
+### 2a. 隐私审查 (Privacy Gate) — 必选步骤
 
-Dieser Schritt entfällt nie, auch nicht bei einer scheinbar harmlosen Runde. Gesucht wird im **getrackten** Set, nicht im sichtbaren Arbeitsbaum, denn genau das ist der Unterschied zwischen "sieht sauber aus" und "ist sauber".
+无论本轮维护看起来多么简单，此步骤绝不能省略。审查对象是 **Git 跟踪 (tracked)** 的文件集合，而非仅看当前工作区，因为这正是“看起来干净”与“实际干净”的区别所在。
 
 ```bash
 git ls-files
@@ -81,361 +73,344 @@ rg -n "C:\\\\Us[e]rs\\\\|/home/[a-z]|s[k]-[A-Za-z0-9]{16}|gh[p]_|gh[o]_|AKIA[0-9
 rg -n "\x{C3}\x{83}|\x{C2}\x{A0}|\x{FFFD}" $(git ls-files -- '*.md' '*.txt' '*.json')
 ```
 
-Ergänze das Muster um die **Namen deiner eigenen internen Ablagen** — Pipeline-Ordner, Themenverzeichnisse, private Arbeitsbereiche:
+在检索模式中补充**你个人/团队内部存储目录的名称**——流水线文件夹、主题目录、私有工作区：
 
 ```bash
-rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<weitere eigene Ordnernamen>" $(git ls-files)
+rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<其他内部文件夹名称>" $(git ls-files)
 ```
 
-Solche Verweise sind keine Secrets und lösen keinen Alarm aus, deshalb rutschen sie durch — aber sie sind für Leser **unauflösbar** („zurückübertragen aus der .SOFTWARE-Pipeline" sagt Fremden nichts) und geben die eigene Struktur preis. Sie werden ersetzt oder entfernt, nicht bloß toleriert. Eine Suche, die nur nach `C:\Users\…` und Token-Mustern fahndet, findet sie garantiert nicht.
+这类引用并非敏感密钥，不会触发安全报警，因此容易被忽视——但它们对外部读者来说是**无法解析的**（例如“从 .SOFTWARE 流水线中转”对外部人员毫无意义）且泄露了内部结构。应当替换或删除，而非姑息。仅搜索 `C:\Users\…` 和 Token 模式的检查绝对无法发现它们。
 
-Fündig geworden? Dann entscheidet die **Art** des Fundes über das Vorgehen — siehe Abschnitt „Force-Push-Regel". Ein Secret, das jemals committet wurde, ist verbrannt: Entfernen aus `HEAD` genügt nicht, es muss rotiert werden.
+如果发现了泄露内容？**发现的类型**决定了处理方式——参见“强制推送规则 (Force-Push Rule)”章节。任何曾经提交过的 Secret 均已失效：仅从 `HEAD` 中删除是不够的，必须进行轮换。
 
-### 2b. Veröffentlichungsabsicht der Dokumente prüfen
+### 2b. 检查文档的发布意图
 
-Der eigentliche Kern dieser Runde. Gehe die getrackten `.md`, `.txt` und `.json` durch und frage bei jeder Datei: **War die je für Fremde gedacht?**
+本轮维护的核心环节。逐一检查被跟踪的 `.md`、`.txt` 和 `.json` 文件，并询问：**该文件是否曾计划对外公开？**
 
 ```bash
 git ls-files -- '*.md' '*.txt' '*.json' | sort
 ```
 
-Nicht anhand des Dateinamens raten — kurz hineinsehen. Ein `PLAN.md` kann eine öffentliche Roadmap sein, ein harmlos klingendes `notes.md` die interne Preisstrategie. Drei Kategorien:
+不要仅凭文件名猜测——请打开文件快速浏览。一个 `PLAN.md` 可能是公开的 Roadmap，而看似不经意的 `notes.md` 可能是内部定价策略。归为三类：
 
-**Gehört ins Repo** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, API-Referenzen, Beispiel-Configs, echte Roadmaps, Manifeste (`package.json`, `pyproject.toml`), Lockfiles, CI-Konfiguration.
+**属于仓库** — README、LICENSE、CHANGELOG、SECURITY、CONTRIBUTING、`docs/`、API 参考、示例配置、真实的 Roadmap、清单文件（`package.json`、`pyproject.toml`）、Lockfile、CI 配置。
 
-**Gehört nicht ins Repo, ist aber unkritisch** — der Normalfall dieser Runde. Aufgaben- und Planungsdateien (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), Session-Notizen und Übergaben (`HANDOFF`, `BRIEFING`, `_handoff/`), Statusdateien der eigenen Pipeline, Entwicklungstagebücher, `_archive/`, Registry- und Index-JSONs mit lokalen Pfaden, Zwischenstände und generierte Artefakte, Agenten-Arbeitsdateien. Solche Dateien sind nicht gefährlich, aber sie erzeugen Unübersichtlichkeit und den Eindruck einer fremden Baustelle. Behandlung: `.gitignore` ergänzen, `git rm --cached <datei>` und **ganz normal pushen**.
+**不属于仓库，但无敏感风险** — 本轮维护的常见情况。任务与计划文件（`AUFGABEN.txt`、`Plan.txt`、`TODO-intern.md`）、Session 笔记与交接文档（`HANDOFF`、`BRIEFING`、`_handoff/`）、内部流水线状态文件、开发日志、`_archive/`、包含本地路径的注册表/索引 JSON、中间状态及生成的产物、Agent 工作临时文件。此类文件没有危险，但会导致界面杂乱并给人留下“未清理工地”的印象。处理方法：补充 `.gitignore`，运行 `git rm --cached <file>`，然后**正常提交推送**。
 
-**Gehört nicht ins Repo und ist heikel** — Credentials, personenbezogene Daten, Kundendaten, interne Kalkulationen, Preis- und Verhandlungsstrategien, unveröffentlichte Geschäftspläne, Vertragsentwürfe, alles mit Wettbewerbswert. Hier reicht ein normaler Commit nicht, siehe Force-Push-Regel.
+**不属于仓库且敏感** — 凭据、个人信息、客户数据、内部财务核算、价格与谈判策略、未公开的商业计划、合同草案、任何具备竞争价值的内容。此处仅靠普通 Commit 是不够的，参见强制推送规则。
 
-Bei `.json` lohnt ein zweiter Blick: Manifeste und Lockfiles bleiben, aber lokale Configs, Task-/Registry-Dateien, Export-Dumps und alles mit absoluten Pfaden oder Hostnamen sind typische blinde Passagiere.
+对于 `.json` 文件值得仔细核对：清单与 Lockfile 保留，但本地配置、Task/Registry 文件、导出 Dump 以及包含绝对路径或主机名的文件都是典型的“隐形乘客”。
 
-Wenn du eine Datei entfernst, die jemand suchen könnte (eine Roadmap etwa), erwähne im Commit oder im README kurz, wo die Information jetzt lebt — sonst wirkt es wie ein Rückschritt.
+如果你删除了一个别人可能会寻找的文件（例如路线图），请在 Commit 或 README 中简要说明该信息现在存放在何处——否则看起来像是功能退化。
 
-### 3. Banner
+### 3. 顶部 Banner
 
-Ein Banner entscheidet mit darüber, ob jemand überhaupt anfängt zu lesen. Prüfe, ob eines existiert und im README als erstes Element eingebunden ist.
+Banner 决定了访问者是否愿意停留阅读。检查 README 顶部是否已嵌入 Banner。
 
-Fehlt es, gibt es drei Wege — in dieser Reihenfolge sinnvoll:
+如果缺失，有三种创建途径——按推荐顺序如下：
 
-1. **Bildgenerator eines Agenten** (z. B. agy; das Wort „generiere" ist dort der Trigger für echte PNG-Erzeugung), wenn ein Bildmotiv besser passt als Typografie.
-2. **Codex**, wenn das Banner aus Code entstehen soll und ein Stilvorbild existiert, an dem es sich orientieren kann.
-3. **Selbst als SVG**, wenn das Banner primär Wortmarke plus Formsprache ist — das ist oft die schnellste und am besten kontrollierbare Variante, und SVG bleibt später änderbar.
+1. **Agent 图像生成器**（例如 agy；其中的“generate”词汇是触发真实 PNG 生成的标志），当视觉插图比纯排版更合适时使用。
+2. **Codex**，当 Banner 需由代码生成且存在可参考的样式规范时使用。
+3. **自行绘制 SVG**，当 Banner 主要由文字标志和设计语言组成时——这通常是最快且最可控的方式，且 SVG 易于后续修改。
 
-Halte die Familie ein, wenn das Projekt zu einer Gruppe gehört: gleiche Grundfarbe, gleiche Ästhetik, gleiche Wortmarken-Behandlung. Ein Banner, das aus der Reihe fällt, wirkt schlechter als keines. Übliche Größe 1200x300; als PNG ins Repo, das SVG als Quelle daneben.
+如果项目属于某个项目族，请保持族系风格一致：相同的基调颜色、相同的审美风格、相同的标志处理。风格脱节的 Banner 比没有 Banner 效果更差。推荐尺寸 1200x300；将 PNG 提交至仓库，SVG 源文件保存在旁边。
 
-### 4. Aussagen gegen den echten Stand abgleichen
+### 4. 核对文档陈述与实际代码状态
 
-Hier entsteht der meiste Wert. Das README behauptet Dinge — prüfe sie nach, statt sie zu glauben:
+这是产生最大价值的环节。README 中做出的陈述——请进行实际验证，而非盲目相信：
 
-- **Version** im README/Badge gegen `pyproject.toml`/`package.json`/`__version__` und gegen den letzten Release-Tag. Bei mehreren Versionsträgern alle prüfen, nicht nur einen.
-- **Installationsweg** wirklich durchspielen, zumindest lesend: Existiert das Paket unter dem genannten Namen? Stimmen Kommandos und Flags?
-- **Feature-Liste** gegen den Code: Ist alles Genannte da, und fehlt Neues in der Liste?
-- **Zahlen** (Anzahl Tools, unterstützte Formate, Testabdeckung) an der Quelle nachzählen statt fortzuschreiben. Zahlen im README veralten still.
-- **Screenshots** gegen die aktuelle Oberfläche.
-- **Requirements** (Python-/Node-Version, Abhängigkeiten) gegen die Manifeste.
-- **Links** auf Nachbarprojekte, Doku und Registries: laufen sie noch?
+- **版本号**：核对 README/Badge 与 `pyproject.toml`/`package.json`/`__version__` 以及最新的 Release Tag。存在多个版本标识时需全部核对。
+- **安装步骤**：实际按步骤演练（至少在逻辑上复核）：指定名称的包是否存在？命令和 Flag 是否正确？
+- **功能列表**：对比实际代码：提及的功能是否都存在？新功能是否遗漏在列表外？
+- **数据统计**（Tool 数量、支持的格式、测试覆盖率）：在源头重新计数，而非递增推算。README 中的数字很容易悄悄过时。
+- **截图**：对比当前实际 UI。
+- **依赖要求**（Python/Node 版本、依赖包）：对比清单文件。
+- **链接**：跳转到关联项目、文档和注册表：链接是否依然有效？
 
-**Eine Korrektur gilt für alle Flächen, nicht nur für die, auf der sie auffiel.** Wenn sich eine inhaltliche Aussage als falsch erweist — besonders wenn der Auftraggeber sie richtigstellt —, dann steht dieselbe Aussage mit hoher Wahrscheinlichkeit noch anderswo: im Organisationsprofil, in der `llms.txt`, in der zweiten Sprachfassung, im README eines Nachbarprojekts. Suche gezielt danach, bevor du den Punkt abhakst:
+**一项修改适用于所有渠道，而不仅仅是发现问题的那个渠道。** 如果某项内容陈述被证实有误——特别是当项目负责人予以更正时——相同的错误陈述极大概率也存在于其他地方：组织 Profile、`llms.txt`、第二语言版本、关联项目的 README。在标记完成前进行定向搜索：
 
 ```bash
-gh search code "<prägnante Formulierung>" --owner ORG
+gh search code "<特征性表述>" --owner ORG
 ```
 
-Sonst korrigierst du eine Stelle und lässt drei stehen — und der Widerspruch fällt erst auf, wenn das nächste Repo an die Reihe kommt. Das kostet nicht nur Zeit, es beschädigt auch das Vertrauen in die Doku: Wer zwei Beschreibungen derselben Sache findet, glaubt keiner mehr.
+否则你只修正了一处而留下了三处——矛盾只有在下一次维护其他仓库时才会被发现。这不仅浪费时间，还会损害文档的可信度：当用户找到同一件事的两套矛盾描述时，将不再相信任何一套。
 
-Anschließend die **Darstellung** verbessern, wo sie schwach ist: lange Aufzählungen von Optionen werden als Tabelle lesbarer; Codeblöcke brauchen Sprach-Tags; eine Struktur- oder Ablaufübersicht ist als Mermaid-Diagramm oder ASCII-Baum schneller erfasst als in Prosa; die erste Bildschirmhöhe sollte Zweck, Installation und ein Nutzungsbeispiel zeigen, nicht Badges und Vorgeschichte. Wenn das README über ~400 Zeilen geht, lagere Details nach `docs/` aus und verlinke.
+随后在**排版展示**薄弱的地方进行优化：长选项列表表格化；代码块添加语言标签；结构或流程概览使用 Mermaid 图表或 ASCII 树状图；首屏高度应展示项目用途、安装和使用示例，而非堆砌 Badge 和背景故事。如果 README 超过 ~400 行，将细节拆分转移至 `docs/` 并附上链接。
 
-**Sprachregel für READMEs:** Standard ist eine **englische `README.md`** plus **deutsche Zweitfassung**. Ausnahme: Der Gegenstandsbereich der Anwendung ist selbst deutsch (deutsches Recht, deutsches Steuer- oder Förderwesen, deutschsprachige Zielgruppe) oder es existiert bisher ausschließlich eine deutsche Fassung — dann bleibt Deutsch die Hauptsprache. Für jede weitere Sprache, die das Projekt bereits spricht, gehört eine eigene README-Fassung dazu. Halte dich an die im Repo schon verwendete Namenskonvention (`README_de.md`, `README.de.md`, `docs/README.de.md`) und erfinde keine zweite daneben. Verlinke die Fassungen gegenseitig in der Kopfzeile.
+**README 语言规范：** 标准配置为**英文 `README.md`** 加上**中文/德文第二语言版本**。例外情况：应用领域本身具有强地域性或目前仅存在单语言版本——此时该语言保留为主语言。对于项目已支持的其他语言，应提供对应的 README 版本。遵循仓库中已使用的命名约定（`README_zh.md`、`README.zh.md`、`docs/README.zh.md`），不要凭空引入第二种命名方式。在页眉处提供互相跳转的链接。
 
-### 6. Fehlende Standardsprachen anlegen
+### 6. 补全缺失的标准语言版本
 
-Ergänze die READMEs, die von den **Standardsprachen** fehlen: Deutsch, Englisch, Spanisch, vereinfachtes Chinesisch, Japanisch, Russisch. Der Zweck ist Reichweite, deshalb gilt das vor allem für nutzernahe Projekte — bei einer entwicklernahen Bibliothek mit rein englischem Publikum ist eine russische README kein Gewinn, sondern nur weitere Pflegelast. Entscheide bewusst und halte die Entscheidung im Laufprotokoll fest, damit die nächste Runde sie nicht neu diskutiert.
+为缺失的**标准语言**补充 README：德语、英语、西班牙语、简体中文、日语、俄语。其目的是扩展覆盖面，因此这主要适用于面向用户的项目——对于面向开发者且受众纯英文的库，提供俄语 README 并无实质收益，反而增加维护负担。请做出理性决策并将决定记录在运行日志中，避免下一轮维护重复讨论。
 
-Neue Fassungen werden **befüllt, nicht angelegt und leer gelassen** — ein Stub mit „TODO: translate" ist schlechter als gar keine Datei, weil er Vollständigkeit vortäuscht. Inhaltliche Parallelität und Rückangleichung regelt `bilingual-doc-sync`; bei mehr als zwei Fassungen lohnt es sich, diesen Skill für den Abgleich hinzuzuziehen.
+新语言版本必须**填入实际翻译内容，严禁仅创建空壳文件**——带有“TODO: translate”的存根文件比没有文件更糟，因为它伪造了完整性。内容一致性及反向同步由 `bilingual-doc-sync` 处理；当存在两个以上语言版本时，建议引入该 Skill 进行对齐。
 
-### 7. Sichtbarkeit und Werbung
+### 7. 提升可见度与宣传推广
 
-Ueberlege, welche Maßnahmen für **dieses** Projekt tatsächlich Nutzer bringen, und setze sie um:
+思考哪些措施能为**当前**项目真正带来用户，并予以实施：
 
-- **Registries**, in die das Projekt technisch gehört: Paketregister (npm, PyPI), MCP-Registry, Plugin-/Skill-Verzeichnisse, Marketplaces.
-- **Kuratierte Listen** (`awesome-*` und thematische Sammlungen), sofern die Aufnahmekriterien wirklich erfüllt sind. Ein PR an eine Liste, deren Kriterien das Projekt verfehlt, kostet Reputation.
-- **Eigene Flächen**: Organisationsprofil, `llms.txt`, Projektwebsite, README des Oekosystems, Verweise aus verwandten eigenen Repos.
-- **Release-Notes** als Anlass: Ein Release ohne erzählte Neuerung wird nicht wahrgenommen.
+- 技术上项目所属的**注册表**：包注册表（npm、PyPI）、MCP Registry、插件/Skill 目录、Marketplace。
+- **精选列表**（`awesome-*` 及主题收录集），前提是确实符合入选标准。向不符合标准的列表提交 PR 会损害项目声誉。
+- **自有渠道**：组织 Profile、`llms.txt`、项目网站、生态系统 README、关联自有仓库的引用。
+- 以 **Release Notes** 为契机：没有宣发新特性的 Release 不会被关注。
 
-**Freigabe-Gate:** Alles, was nach außen geht — PRs an fremde Repos, Einträge in fremde Listen, Posts, Einreichungen — wird **vorgeschlagen und erst nach ausdrücklicher Freigabe ausgeführt**, sofern keine Dauerfreigabe für diesen Kanal existiert. Änderungen an eigenen Flächen brauchen dieses Gate nicht. Der Grund ist schlicht: Ein zurückgezogener PR an ein fremdes Repo ist öffentlich sichtbar und fällt auf das Projekt zurück.
+**审批关卡 (Approval Gate)：** 所有面向外部的操作——向外部仓库提交 PR、在外部列表中添加条目、发帖、提交申请——必须先**提出建议并在获得明确批准后方可执行**，除非该渠道存在长期授权。对自有渠道的修改无需此关卡。原因很简单：撤回一个发往外部仓库的 PR 是公开可见的，会给项目带来负面影响。
 
-### 8. Eintrag auf den Organisationsseiten
+### 8. 更新组织页面条目
 
-Zuerst die eigene Organisation: Ist das Repo im Profil-README (`ORG/.github` → `profile/README.md`) überhaupt aufgeführt, in der richtigen Rubrik, mit aktueller Beschreibung?
+首先检查自己的组织：仓库是否已列在 Profile README（`ORG/.github` → `profile/README.md`）中？分类是否正确？描述是否是最新的？
 
 ```bash
 gh api user/orgs --jq '.[].login'
 ```
 
-Dann durch **alle** Organisationen gehen und je Organisation eine einzige Frage beantworten: Würde ein Besucher dieser Organisationsseite von diesem Repo profitieren? Meist lautet die Antwort nein — dann ist „nicht verlinken" das richtige Ergebnis und keine Lücke. Wo die Antwort ja lautet (thematische Nähe, gemeinsame Nutzer, ein Werkzeug, das die dortigen Projekte ergänzt), setze den Verweis mit einer Zeile, die den Nutzen erklärt, nicht nur den Namen nennt.
+然后遍历**所有**组织，回答同一个问题：访问该组织页面的访客能否从本仓库中获益？大多数情况下答案为否——此时“不添加链接”是正确的决定而非漏洞。如果答案为是（主题相关、共同用户群、补充当地项目的工具），则添加引用，并用一句话说明其价值，而非仅仅列出名称。
 
-Das Profil liegt in einem eigenen Repo (`ORG/.github`). Änderungen dort werden mitgepflegt und gepusht — nach der Dirty-Tree-Regel aus Schritt 11.
+Profile 位于单独的仓库中（`ORG/.github`）。按照步骤 11 中的 Dirty-Tree 规则同步维护并推送该仓库的修改。
 
-### 10. Issues und Pull Requests
+### 10. 处理 Issue 和 Pull Request
 
 ```bash
 gh issue list --repo ORG/REPO --state open --limit 50
 gh pr list --repo ORG/REPO --state open --limit 30
 ```
 
-Arbeite sie durch statt sie nur zu zählen:
+实际处理它们，而不是仅仅统计数量：
 
-- **Fixbare Bugs** direkt beheben — in dieser Runde ist der Kontext ohnehin geladen. Kleine, klar umrissene Fixes mit Test und Verweis auf die Issue-Nummer.
-- **Bereits erledigte Issues** schließen, mit einem Satz, was sie gelöst hat.
-- **Unklare Meldungen** brauchen eine gezielte Rückfrage (Version, Betriebssystem, Reproduktionsschritte).
-- **PRs**: Diff wirklich lesen, Tests laufen lassen, dann mergen oder begründet zurückmelden. Ein PR, der monatelang unbeantwortet liegt, kostet mehr Wohlwollen als eine höfliche Ablehnung.
-- **Stale-Fälle** auflösen statt weiterschleppen.
+- **可修复的 Bug** 直接修复——在此轮维护中上下文已加载。提供带有测试用例和 Issue 编号引用的精简修复。
+- **已解决的 Issue** 予以关闭，并附带一句话说明解决方式。
+- **表述不清的反馈** 需要进行针对性追问（版本、操作系统、复现步骤）。
+- **PR**：仔细阅读 Diff，运行测试，然后 Merge 或给出有理有据的反馈。一个搁置数月不回复的 PR 比礼貌拒绝更消耗善意。
+- **Stale 状态** 及时清理，避免拖延。
 
-**Freigabe-Gate:** Öffentliche Kommentare, Schließungen mit Begründung und Merges fremder Beiträge sind Kommunikation nach außen — vor der Ausführung vorlegen, sofern keine Dauerfreigabe besteht. Reine Code-Fixes im eigenen Repo sind davon nicht betroffen.
+**审批关卡：** 公开评论、带理由的关闭以及 Merge 外部贡献属于外部沟通——在执行前须提交审批，除非拥有长期授权。在自己仓库中纯粹的代码修复不受此限。
 
-### 11. Committen, pushen, verifizieren
+### 11. 提交 (Commit)、推送 (Push) 与验证
 
-Die Runde endet nicht mit den Änderungen, sondern damit, dass sie **draussen sind**. Ein Arbeitsbaum voller ungepushter Verbesserungen ist das schlechteste Ergebnis: Die nächste Session — möglicherweise ein anderer Agent oder ein anderes Gerät — muss sich erst in einen fremden, halbfertigen Stand einarbeiten, und auf den öffentlichen Flächen hat sich nichts verbessert.
+本轮维护并非终止于代码修改，而是终止于**成功发布外发**。一个堆满未推送改进的工作区是最糟糕的结果：下一次 Session（可能是另一个 Agent 或设备）必须重新熟悉半成品状态，而公共渠道上没有任何改善。
 
-Vor dem Push kurz absichern, was überprüfbar ist: Tests und Smokes laufen lassen, bei Doku-Änderungen die Links und die gerenderte Ansicht prüfen. Dann in **thematisch getrennten Commits** bündeln, statt alles in einen Sammel-Commit zu werfen — Aufräumen, Doku-Aktualisierung und Bugfixes sind drei verschiedene Dinge, und wer später einen davon zurückdrehen will, ist dankbar dafür:
+推送前简要验证可检验的事项：运行测试和 Smoke Check，在修改文档时检查链接和渲染视图。然后按**主题拆分为独立的 Commit**，而非堆在一个混合 Commit 中——清理工作、文档更新和 Bug 修复是三件不同的事，后续想要单独撤销其中一项的人会对此心存感激：
 
 ```bash
-git add .gitignore && git rm --cached <interne dateien>
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
-git commit -am "docs: README auf aktuellen Stand (Version, Toolzahl, Screenshots)"
-git commit -am "fix: <Issue-Nummer> ..."
+git add .gitignore && git rm --cached <internal files>
+git commit -m "chore: remove internal working files from repo"
+git commit -am "docs: update README to current state (version, tool count, screenshots)"
+git commit -am "fix: <issue number> ..."
 
-git pull --rebase        # bei divergiertem Branch, vor dem Push
+git pull --rebase        # 若分支发生冲突/偏离，在 push 前执行
 git push
 ```
 
-Danach verifizieren statt annehmen: Remote-README in der gerenderten Ansicht, CI-Lauf, Release- und Tag-Stand.
+随后进行验证而非凭空假设：检查远程 README 的渲染效果、CI 运行状态、Release 和 Tag 状态。
 
 ```bash
 gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
-**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der mit Abstand häufigste Fall — bei dieser Repo-Familie an einem einzigen Tag **dreimal** getroffen — ist ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Prüfe das **zuerst**, bevor du irgendetwas an deinem Commit vermutest.
+**如果仅仅修改了文档 CI 却变红**，原因几乎绝不在于你的修改。迄今为止最常见的情况——在本仓库族中一天内**遇到过三次**——是**未锁定版本且未显式指定规则集的 Linter**。在怀疑自己的 Commit 之前，请**首先**检查这一点。
 
-Der Mechanismus: Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine ungepinnte Dependency (`ruff>=0.12`, oder gar keine Version), und fehlt eine explizite Regel-Auswahl (`[tool.ruff.lint] select = [...]`, bei fehlendem `pyproject.toml` eine eigene `ruff.toml`), dann folgt der Lint dem Default der **jeweils frisch installierten** Version. Ein neues Linter-Release verschiebt diesen Default, und eine unveränderte Codebasis wird rot. Die Verräter:
+运行机制：若 Workflow 中运行的 `ruff check`（或 flake8、eslint ...）使用的是未锁定版本的依赖（`ruff>=0.12` 或完全未指定版本），且缺乏显式的规则选择（`[tool.ruff.lint] select = [...]`，缺失 `pyproject.toml` 时未提供单独的 `ruff.toml`），则 Linter 会遵循**新安装版本**的默认规则。新版 Linter 的发布会改变该默认值，导致未经修改的代码库报错。典型特征：
 
-- Regel-Codes, die das Projekt nie hatte (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), teils in dreistelliger Zahl.
-- Der Bruch fällt oft **plattform-gespalten** aus: Runner mit gecachter älterer Version bleiben grün, frische werden rot.
-- Manchmal beanstandet eine Regel etwas Unbehebbares (`N999` den Paketnamen selbst) — sicheres Zeichen, dass sie nie Standard war.
+- 出现项目从未配置过的规则代码（`UP045`、`UP006`、`BLE001`、`RUF100`、`DTZ005`、`N999` ...），有时多达数百个。
+- 报错经常呈现**跨平台差异**：带有较旧缓存版本的 Runner 保持绿色，全新的 Runner 则变红。
+- 有时规则会举报无法修复的内容（例如 `N999` 举报包名本身）——这是它从未成为标准规则的确定信号。
 
-Fix: den Regelsatz festschreiben, der vorher grün war — `select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults. Existiert kein `pyproject.toml`, lege eine `ruff.toml` an. Verifiziere gegen die **neue** Linter-Version selbst (installieren, ohne Config die Funde reproduzieren, mit Config „passed"). Die neuen Regeln kommen als **Aufgabe** ins Projekt — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter, wiederkehrender Befund: Ohne den Pin bricht die CI beim nächsten Linter-Release wieder, und zwar in **jedem** so konfigurierten Repo.
+修复方案：锁定此前通过测试的规则集——`select = ["E4","E7","E9","F"]` 是经典的 ruff 默认规则。若不存在 `pyproject.toml`，则创建一个 `ruff.toml`。针对**新版** Linter 本身进行验证（安装新版、无配置复现报错、有配置显示 "passed"）。新规则应作为** Task 项**引入项目——主动采纳是一项决策，而非工具更新的副作用。这是一个真实的重复性发现：如果不锁定版本，下一次 Linter 发布时 CI 将在**每一个**配置类似的仓库中再次中断。
 
-Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
+两种**不进行** Push 的例外情况：项目处于发布/提交冻结期，或者当前状态明确属于未完成状态。这两者都需要合理理由——正常情况一律是：Commit 并 Push。
 
-Bei einer Veröffentlichungssperre wird die Runde nicht abgebrochen, sondern **umgeleitet**: auf einem eigenen Branch (`judging-hold/…`, `freeze/…`) lokal committen, den Hauptbranch unangetastet auf dem eingereichten Stand lassen, den Sperrgrund im Laufprotokoll vermerken und nach Aufhebung nachziehen. Wichtig ist dabei, konsequent zu sein: Gesperrt ist nicht nur `git push`, sondern **jede remote sichtbare Änderung** — Topics, Beschreibung, Homepage, Releases, Issue- und PR-Aktionen verändern das veröffentlichte Projekt genauso.
+在发布冻结期内，维护流程不会被中断，而是**重定向**：在单独的分支（`judging-hold/…`、`freeze/…`）上进行本地 Commit，保持主分支处于已提交状态不变，在运行日志中注明冻结原因，解冻后再合并。关键在于保持一致性：冻结的不仅是 `git push`，还包括**所有远程可见的更改**——Topic、Description、Homepage、Release 以及 Issue/PR 操作都会改变已发布的项目状态。
 
-Existieren weitere Klone desselben Repos (zweites Gerät, Deploy-Kopie, Spiegel), ziehe sie unmittelbar nach dem Push nach. Ein Klon, der zehn Commits zurückliegt, produziert bei der nächsten Fehlersuche Diagnosen an einem Stand, den es nicht mehr gibt.
+如果存在该仓库的其他克隆（第二台设备、部署副本、镜像），请在 Push 后立即同步拉取。落后十个 Commit 的克隆会在下一次排错时基于已不存在的状态进行诊断。
 
-#### Änderungen an anderen Repos — Dirty-Tree-Ausnahme
+#### 修改其他仓库 — Dirty-Tree 例外规则
 
-Diese Runde erzeugt regelmäßig Änderungen **außerhalb** des gepflegten Repos: eine Zeile im Organisationsprofil (Schritt 8), später in der tiefen Runde ein Rückverweis in einem verwandten Repo. Solche Änderungen werden ebenfalls committet und gepusht — ein unveröffentlichter Rückverweis ist kein Rückverweis.
+本轮维护经常会在维护仓库**之外**产生修改：组织 Profile 中的一行（步骤 8），或者深度维护中关联仓库的反向引用。此类修改同样需要 Commit 并 Push——未发布的反向引用等于没有引用。
 
-Vor dem Anfassen eines fremden Repos kurz dessen Zustand prüfen:
-
-```bash
-git -C <pfad> status --porcelain
-```
-
-**Sauberer Arbeitsbaum** → Änderung vornehmen, in einem **eigenen, thematisch klaren Commit** (`docs: link <projekt>`) committen und pushen. Nicht mit den Commits des gepflegten Repos vermischen: Es ist ein anderes Repo mit eigener Historie und eigenen Lesern.
-
-**Dirty, aber die Fremdänderungen liegen in anderen Dateien** → die eigene Änderung ist trotzdem sauber machbar. Stage und committe **pfadgenau nur die eigene Datei**, damit fremde, ungeprüfte Arbeit nicht mitwandert:
+在动用外部仓库前，先检查其状态：
 
 ```bash
-git -C <pfad> add README.md
-git -C <pfad> commit -m "docs: link <projekt>"     # nur der gestagte Pfad
+git -C <path> status --porcelain
 ```
 
-Aber **nicht pushen**. Der Commit ist lokal harmlos; ein Push wäre es nicht unbedingt: Du weißt nicht, worauf der andere Arbeitsstand hinausläuft — vielleicht wird er gerade amendiert, rebased oder anders geschnitten, und dein Commit zwingt ihn dazu, sich damit auseinanderzusetzen. Der lokale Commit sichert die Arbeit, ohne jemandem etwas aufzuzwingen; der Lauf, der sich später jenem Repo zuwendet, findet ihn vor und nimmt ihn mit.
+**干净的工作区** → 进行修改，在**独立的、主题明确的 Commit**（`docs: link <project>`）中提交并推送。不要与被维护仓库的 Commit 混在一起：那是另一个具有独立历史和读者的仓库。
 
-**Dirty in genau der Datei, die du ändern müsstest** → nicht anfassen. Hier müsstest du auf einem fremden Zwischenstand aufsetzen und ihn mit-committen; den erst zu verstehen kostet mehr, als dieser eine Verweis wert ist.
+**Dirty 状态，但外部修改在其他文件中** → 你的修改依然可以干净地完成。使用**精准路径 Stage 并 Commit 你自己的文件**，避免将未经审查的其他工作一同带入：
 
-**Aktive Sperre (`LOCK*.txt`) im Ziel-Repo** → **zuerst den Lock lesen, statt ihn als pauschales Verbot zu behandeln.** Eine Sperre beschreibt ihren eigenen Umfang, und der ist oft enger als „gar nichts". Typische Fälle:
+```bash
+git -C <path> add README.md
+git -C <path> commit -m "docs: link <project>"     # 仅提交暂存的路径
+```
 
-- **Bearbeitungssperre** („hier arbeitet gerade jemand") → nichts anfassen, auch keine Nebendatei.
-- **Reine Veröffentlichungs-/Push-Sperre** (Einreichung, Judging, Freeze) → lokale Arbeit bleibt erlaubt, nur der Remote-Kontakt ist gesperrt. Dann auf einem eigenen Branch arbeiten und lokal committen; **remote-wirksame Schritte entfallen** — nicht nur der Push, sondern auch Topics, Beschreibung, Homepage, Releases und Issue-/PR-Aktionen, denn auch die verändern das veröffentlichte Projekt.
+但是**不要 Push**。本地 Commit 是安全的；Push 则不然：你不知道别人的工作处于什么阶段——也许正在进行 Amend、Rebase 或重构，而你的 Push 会强制对方处理冲突。本地 Commit 保存了你的成果而不强加给任何人；后续针对该仓库的维护会发现并包含它。
 
-Ein Lock, der nur den Push sperrt, als Komplettverbot zu lesen, kostet den gesamten lokalen Teil der Runde ohne Sicherheitsgewinn. Umgekehrt reicht es nicht, nur den Push zu unterlassen und trotzdem Metadaten zu ändern. Im Zweifel den Lock zitieren und nachfragen.
+**恰好在你需要修改的文件中 Dirty** → 不要碰它。此时你必须在别人的中间状态上继续修改并一同提交；理解那份工作所付出的成本远超过这一条引用的价值。
 
-#### Der Wunsch darf nicht verloren gehen
+**目标仓库存在活跃锁 (`LOCK*.txt`)** → **首先阅读锁文件内容，而不是将其一律视为全面禁止。** 锁文件会说明其约束范围，通常比“完全禁止”更窄。典型情况：
 
-Wird die Änderung aus einem dieser Gründe **nicht** ausgeführt, wandert sie in die Aufgabenliste des Ziel-Repos — `AUFGABEN.txt`, `TODO.md` oder `TODO.txt`, je nachdem, was dort existiert. Ein Eintrag mit Datum, gewünschter Änderung und Grund:
+- **编辑锁**（“有人正在此处工作”）→ 不要动任何内容，包括次要文件。
+- **纯发布/推送锁**（提交中、评审中、代码冻结）→ 本地工作依然允许，仅禁止远程交互。在单独分支上工作并在本地 Commit；**省略具有远程影响的步骤**——不仅是 Push，还包括 Topic、Description、Homepage、Release 和 Issue/PR 操作。
+
+将仅限制 Push 的锁误读为全面禁止，会在没有任何安全收益的情况下浪费整轮维护的本地工作。反之，仅不执行 Push 却依然修改元数据也是不够的。如有疑问，引用锁文件并进行追问。
+
+#### 意图绝不能丢失
+
+如果由于上述原因**未执行**修改，请将其转移至目标仓库的任务列表中——`AUFGABEN.txt`、`TODO.md` 或 `TODO.txt`（取决于当地存在什么）。添加一条包含日期、期望修改和原因的条目：
 
 ```markdown
-- [ ] [2026-07-24, after-care] Rückverweis auf <projekt> im README ergänzen
-      (übersprungen: README hatte uncommittete Fremdänderungen)
+- [ ] [2026-07-24, after-care] 在 README 中补充对 <project> 的反向引用
+      (已跳过：README 存在未提交的外部修改)
 ```
 
-Das ist der Unterschied zwischen „verschoben" und „vergessen": Die Aufgabenliste liegt dort, wo der nächste Bearbeiter dieses Repos ohnehin hineinsieht — verlässlicher als ein Vermerk im Protokoll eines fremden Laufs. Existiert keine Aufgabenliste, lege keine an; dann genügt der offene Punkt im eigenen Laufprotokoll.
+这就是“推迟”与“遗忘”的区别：任务列表是下一个维护者必然会查看的地方——比记录在其他运行日志中可靠得多。如果不存在任务列表，无需专门创建；在自己的运行日志中保留未完成项即可。
 
-Bei einer **aktiven Sperre gilt auch das nicht** — dann wird die Datei nicht angefasst und der Vermerk bleibt im eigenen Laufprotokoll. Notiere ihn in beiden Fällen auch dort, damit die Rotation den offenen Punkt kennt.
+在**活跃锁限制下此条同样不适用**——此时不要动该文件，记录仅保留在自己的运行日志中。在两种情况下都做好记录，以便轮换维护时能掌握未完成的事项。
 
-Zum Schluss die Flächen aus Schritt 0 bedienen — siehe nächster Abschnitt.
+最后更新步骤 0 中的分发渠道——参见下一章节。
 
-## Parität über alle Distributionsflächen
+## 所有分发渠道的一致性
 
-Zum Abschluss der Runde gegen die Liste aus Schritt 0 gehen: **Jede Änderung, die ein Nutzer sehen würde, muss auf jeder Fläche ankommen, auf der er sie sucht.** Ein Repo, dessen npm-Seite eine andere Geschichte erzählt, ist schlechter dran als eines mit nur einer Fläche.
+在维护结束时，对照步骤 0 的列表逐一检查：**用户能看到的每一项修改，必须同步更新到用户可能寻找它的每一个渠道上。** 一个 npm 页面描述与仓库源码不符的仓库，比只有一个渠道的仓库更加糟糕。
 
-Der entscheidende Mechanismus: **Paketregister zeigen die README des letzten Publish, nicht den aktuellen Repo-Stand.** Eine README-Korrektur wird auf npm oder PyPI erst mit einer neuen Version sichtbar. Wenn die Korrektur inhaltlich relevant ist (falsche Installation, falsche Version, veraltete Feature-Liste), gehört ein Patch-Release dazu — sonst bleibt der Fix wirkungslos.
+关键机制：**包注册表展示的是上一次 Publish 时的 README，而非当前仓库的真实状态。** README 的修正只有在发布新版本后才会显示在 npm 或 PyPI 上。如果修正涉及实质内容（错误的安装说明、错误的版本、过时的功能列表），则必须配合进行一次 Patch Release——否则修复将无法生效。
 
-| Fläche | Was dort gepflegt wird | Wie es ankommt |
+| 渠道 | 维护内容 | 如何生效 |
 |---|---|---|
-| npm | README, `description`, `keywords`, Repository-Link | Nur per `npm publish` (Patch-Version); Metadaten kommen aus `package.json` |
-| PyPI | README (`long_description`), Classifiers, Projekt-URLs | Nur per neuem Upload; Metadaten aus `pyproject.toml` |
-| MCP-Registry / Plugin-Verzeichnisse | Beschreibung, Version, Toolliste, Einstiegsdoku | Je nach Registry Manifest-Update oder erneute Einreichung |
-| Marketplace / Store | Beschreibung, Screenshots, Kategorien, Sprachfassungen | Über die jeweilige Verwaltungsoberfläche; Screenshots altern dort besonders schnell |
-| Docker Hub / Container-Registry | Beschreibung, Tags, Nutzungsbeispiel | Repository-Beschreibung plus neuer Tag |
-| Zenodo / DOI | Metadaten, Autoren, Version | In-Place-Edit für Metadaten, neue Version für Inhalte |
-| Website / Org-Profil / `llms.txt` | Kurzbeschreibung, Link, Positionierung | Direkt editierbar — die günstigsten Flächen, deshalb nie vergessen |
+| npm | README、`description`、`keywords`、仓库链接 | 仅通过 `npm publish`（Patch 版本）；元数据来自 `package.json` |
+| PyPI | README (`long_description`)、Classifiers、项目 URL | 仅通过重新 Upload；元数据来自 `pyproject.toml` |
+| MCP Registry / 插件目录 | 描述、版本、Tool 列表、入门文档 | 视 Registry 而定，更新 Manifest 或重新提交 |
+| Marketplace / Store | 描述、截图、分类、多语言文本 | 通过各自的管理后台更新；截图在后台尤其容易过时 |
+| Docker Hub / 容器注册表 | 描述、Tag、使用示例 | 仓库描述加新 Tag |
+| Zenodo / DOI | 元数据、作者、版本 | 元数据可直接编辑，内容更新需新版本 |
+| 网站 / 组织 Profile / `llms.txt` | 简短描述、链接、定位 | 可直接编辑——成本最低的渠道，切勿遗漏 |
 
-Wenn eine Version angehoben wird, müssen **alle Versionsträger** gleichzeitig mitwandern: Manifest, Code-Konstante, README-Badge, Changelog, Release-Tag, `llms.txt`. Ein halb angehobener Versionsstand ist schwerer zu diagnostizieren als ein durchgängig alter.
+在提升版本号时，**所有版本标识载体**必须同步更新：Manifest、代码中的版本常量、README Badge、Changelog、Release Tag、`llms.txt`。半更新状态的版本号比完全未更新的状态更难诊断。
 
-Ist eine Aktualisierung auf einer Fläche gerade nicht möglich oder nicht sinnvoll (z. B. ein Release nur wegen eines Tippfehlers), halte das im Laufprotokoll fest, damit die nächste Runde die Abweichung nicht für ein Versehen hält.
+如果当前在某个渠道上无法或不宜进行更新（例如仅为了修复一个错别字而发布 Release），请在运行日志中做好记录，以免下一轮维护将其误认为疏忽。
 
-## Force-Push-Regel
+## 强制推送规则 (Force-Push Rule)
 
-Der Standard ist **kein Force-Push**. Interne Planungsdateien nachträglich zu ignorieren rechtfertigt keine Historien-Umschreibung: Der Aufwand ist hoch, jeder Klon und jeder Fork bricht, offene PRs werden unbrauchbar — und der Gewinn ist gering, weil der Inhalt harmlos ist. Normaler Weg:
+标准原则是**严禁 Force-Push**。追溯性地忽略内部计划文件并不足以成为重写历史的理由：代价极高，会导致每个 Clone 和 Fork 断裂，使未决的 PR 失效——而收益微乎其微，因为文件内容本身是无害的。标准做法：
 
 ```bash
-git rm --cached <datei>            # aus dem Tracking, bleibt lokal erhalten
-# .gitignore ergänzen (English)
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
+git rm --cached <file>            # 从 Git 跟踪中移除，本地保留文件
+# 补充至 .gitignore
+git commit -m "chore: remove internal working files from repo"
 git push
 ```
 
-Die Historie umschreiben (und damit `--force-with-lease` pushen) ist nur bei **echten Leaks** gerechtfertigt: Credentials und Keys, personenbezogene oder Kundendaten, sowie Dokumente mit echtem Wettbewerbswert — interne Kalkulationen, Preisstrategien, unveröffentlichte Pläne, Vertragsinterna. In diesem Fall:
+只有在发生**真正的敏感信息泄露 (Leaks)** 时，重写历史（并使用 `--force-with-lease` 推送）才是合理的：凭据与 Key、个人或客户数据、以及具有实质商业竞争价值的文件（内部核算、价格策略、未公开计划、合同条款）。在这种情况下：
 
-1. Betroffene Secrets **zuerst rotieren** — die Historie ist zu diesem Zeitpunkt bereits kopiert, geforkt und in Caches. Rotation wirkt, Löschen nur kosmetisch.
-2. Historie bereinigen (`git filter-repo` oder BFG), `--force-with-lease` pushen.
-3. Forks und Caches prüfen; bei Bedarf GitHub-Support für verwaiste Objekte kontaktieren.
-4. Vorgang im Laufprotokoll festhalten: was, wann, welche Rotation.
+1. **首先轮换受影响的 Secret**——在此时间点历史已被复制、Fork 和缓存。轮换才是根本解决手段，删除仅具备外观意义。
+2. 清理历史（使用 `git filter-repo` 或 BFG），使用 `--force-with-lease` 推送。
+3. 检查 Fork 和缓存；必要时联系 GitHub 支持清理孤立对象。
+4. 在运行日志中记录过程：时间、内容、轮换操作。
 
-Im Zweifel zwischen „unkritisch" und „heikel": als heikel behandeln und vorlegen. Die Kosten sind asymmetrisch.
+在“无害”与“敏感”之间存疑时：按敏感处理并向上汇报。两者的风险成本是不对称的。
 
-## Befunde werden Aufgaben, nicht nur Protokollzeilen
+## 发现项应转化为 Task，而非仅仅是日志文字
 
-Eine Pflegerunde findet regelmäßig mehr, als sie in derselben Runde beheben kann oder soll: eine fehlende Sprachfassung, ein Modernisierungsrückstand, eine Veröffentlichung, die nie stattgefunden hat. **Solche Befunde werden im Moment der Entdeckung zu Aufgaben** — sonst hängen sie im Protokoll eines abgeschlossenen Laufs, wo der nächste Bearbeiter des Projekts nicht hinsieht.
+一次维护周期通常会发现超出当前 Session 能够或应当修复范围的内容：缺失的语言版本、待更新的技术债、从未执行过的发布。**此类发现必须在发现的瞬间转化为 Task**——否则它们会沉没在已完成运行的日志中，下一个维护者根本不会看到。
 
-Die Aufgabe gehört in das **ordnerlokale Aufgabensystem des Projekts** — dorthin, wo derjenige nachschaut, der als Nächstes an diesem Projekt arbeitet. Typischerweise ist das `AUFGABEN.txt` oder `TODO.md` im Projektordner, und der liegt oft **nicht im Git-Klon**, sondern in der Ablage, in der die Planung lebt. Der Klon enthält den Code, der Projektordner die Steuerung; ein Eintrag im Klon, der beim nächsten `git clean` verschwindet, ist keine Aufgabe.
+Task 应写入**项目本地的任务系统中**——即下一个在此项目工作的人会去查看的地方。通常是项目文件夹中的 `AUFGABEN.txt` 或 `TODO.md`，而该文件夹通常**不在 Git 克隆库内部**，而是在项目管理的存储目录中。克隆库包含代码，项目目录包含管理；克隆库中在下一次 `git clean` 时就会消失的条目不是合格的 Task。
 
-Drei Dinge dabei beachten:
+注意以下三点：
 
-1. **Interne Aufgabenliste von öffentlicher Roadmap trennen.** Ein `TODO.md` kann eine gepflegte öffentliche Roadmap sein — dann ist es kein Ablageplatz für interne Nacharbeit. Sieh hinein, bevor du anhängst: Findet sich dort eine Überschrift wie „Public roadmap", schreib in die interne Datei daneben (`AUFGABEN.txt`) und markiere sie als intern.
-2. **Bestehende Einträge prüfen, statt zu duplizieren.** Oft steht der Befund schon da. Dann wird er nicht neu angelegt, sondern **angereichert** — mit dem empirischen Beleg aus diesem Lauf („bestätigt: `--help` gibt vollständig deutsche Ausgaben aus"). Ein bekannter Punkt mit frischem Beweis ist wertvoller als ein zweiter Eintrag daneben.
-3. **Erledigtes mitschreiben.** Was die Runde behoben hat, gehört als abgehakter Punkt mit Commit-Hash dazu. Das erklärt der nächsten Runde, warum ein Befund verschwunden ist, und verhindert, dass sie ihn erneut „entdeckt".
+1. **区分内部 Task 列表与公开 Roadmap。** `TODO.md` 可能是一份精心维护的公开 Roadmap——此时它不是存放内部遗留工作的场所。追加前请先查看内容：如果包含“Public roadmap”等标题，请写在旁边的内部文件（`AUFGABEN.txt`）中并标记为内部。
+2. **检查现有条目，避免重复。** 很多时候发现的问题已经存在于列表中。此时不要新建条目，而是**补充实证**——附带本轮运行的实证证据（如“已证实：`--help` 输出全中文”）。带有最新实证的已知问题比旁边新建的重复条目更有价值。
+3. **记录已完成事项。** 本轮维护解决的问题，应作为带 Commit Hash 的已勾选条目保留。这向下一轮维护解释了为何某个问题消失了，并防止被再次“发现”。
 
-Formuliere die Aufgabe so, dass sie ohne den Kontext dieses Laufs verständlich ist: was gefunden wurde, warum es zählt, was der nächste Schritt wäre. „i18n unvollständig" ist keine Aufgabe; „Katalog enthält nur `status.title`, dort sind es/zh/ja/ru leer — erst CLI-Strings in den Katalog überführen, dann alle sechs Sprachen befüllen" ist eine.
+请清晰表达 Task，使其在没有本轮运行上下文的情况下依然易于理解：发现了什么、为什么重要、下一步应该做什么。“i18n 不完整”不是合格的 Task；“Catalog 仅包含 `status.title`，es/zh/ja/ru 为空——先将 CLI 字符串提取至 Catalog，然后填满所有六种语言”才是合格的 Task。
 
-## Laufprotokoll
+## 运行日志 (Run Log)
 
-Halte das Ergebnis in `_after-care/LOG.md` fest (der Ordner gehört in die `.gitignore` — er ist Pipeline-Material, kein Repo-Inhalt, genau nach der Regel aus Schritt 2b). Pro Lauf eine Zeile mit Datum, Stufe und den bewussten Entscheidungen:
+在 `_after-care/LOG.md` 中记录结果（该文件夹必须加入 `.gitignore`——它是流水线材料而非仓库内容，遵循步骤 2b 的规则）。每次运行记录一行，包含日期、维护层级和明确的决策：
 
 ```markdown
 ## 2026-07-24 — surface
-- Flächen: GitHub, npm (<paket>), MCP-Registry, Org-Profil, llms.txt
-- Topics: +local-first, +mcp-server; keywords in package.json angeglichen
-- Entfernt: AUFGABEN.txt, _handoff/ (gitignored, kein Force-Push nötig)
-- README: Version 0.9 -> 1.2 korrigiert, Toolzahl 23 -> 26 nachgezählt
-- Sprachen: EN + DE gepflegt; ES/ZH/JA/RU bewusst nicht (entwicklernahes Publikum)
-- Issues: #12 gefixt, #7 geschlossen (erledigt), #15 Rückfrage gestellt
-- Push: 3 Commits, CI grün; npm-Republish 1.2.1 wegen README-Korrektur
-- Offen: Store-Screenshots veraltet, brauchen neuen Build
+- 渠道：GitHub, npm (<package>), MCP Registry, Org Profile, llms.txt
+- Topics: +local-first, +mcp-server; 已对齐 package.json 中的 keywords
+- 移除：AUFGABEN.txt, _handoff/ (已 ignore，无需 Force-Push)
+- README：版本从 0.9 修正为 1.2，Tool 数量从 23 重新核对为 26
+- 语言：维护了 EN + ZH；明确暂不提供 ES/ZH/JA/RU（受众偏开发者）
+- Issues：修复了 #12，关闭了 #7 (已解决)，追问了 #15
+- Push：3 个 Commit，CI 绿色；因 README 修正重新 Publish 了 npm 1.2.1
+- 遗留：Store 截图已过时，需要重新 Build
 ```
 
-Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treffen, und ist die Grundlage für rotierende Pflegeläufe über viele Repos (`rotation-check`).
+该日志免去了下一轮维护重复讨论相同决策的成本，也是在多个仓库间轮换维护（`rotation-check`）的基础。
 
-## Häufige Fehler
+## 常见错误
 
-| Fehler | Korrektur |
+| 错误 | 纠正做法 |
 |---|---|
-| Nur den Arbeitsbaum betrachtet, nicht `git ls-files` | Immer das getrackte Set prüfen — dort liegt das Problem |
-| Privacy-Gate nur auf Pfade und Token gerichtet | Auch nach eigenen Pipeline-/Ordnernamen suchen — sie lösen keinen Alarm aus und rutschen durch |
-| Interne Datei entfernt und dabei Historie umgeschrieben | Bei unkritischen Dateien reicht `git rm --cached` + normaler Push |
-| Secret aus `HEAD` entfernt und Vorgang als erledigt betrachtet | Secret rotieren; alles andere ist Kosmetik |
-| Dateien nach Namen klassifiziert | Kurz hineinsehen — Namen tragen die Absicht nicht zuverlässig |
-| Zahlen im README fortgeschrieben statt nachgezählt | An der Quelle zählen (Tool-Liste, Testlauf, Manifest) |
-| Neue Sprachfassung als leerer Stub angelegt | Befüllen oder weglassen — ein Stub täuscht Vollständigkeit vor |
-| Zweite README-Namenskonvention neben der bestehenden eingeführt | Vorhandene Konvention übernehmen |
-| PR an eine fremde Liste ohne Freigabe gestellt | Außenkommunikation vorlegen; nur eigene Flächen sind frei |
-| Issues gezählt statt bearbeitet | Fixen, schließen oder gezielt nachfragen — jeder Fall bekommt einen Zustand |
-| Banner im Alleingang in fremdem Stil erzeugt | Design-Familie des Oekosystems einhalten |
-| README im Repo korrigiert, npm-/PyPI-Seite zeigt weiter die alte | Registry-Seiten stammen vom letzten Publish — Patch-Release nachziehen |
-| Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
-| Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
-| Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
-| CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
-| Falsche Aussage nur dort korrigiert, wo sie auffiel | Org-weit nach der Formulierung suchen — sie steht meist auch im Org-Profil, in `llms.txt` und in der zweiten Sprachfassung |
-| Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
-| Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
-| Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
-| Befund nur ins Laufprotokoll geschrieben | Er wird zur Aufgabe im ordnerlokalen Aufgabensystem — ins Protokoll sieht später niemand |
-| Interne Nacharbeit an eine öffentliche Roadmap gehängt | Erst hineinsehen; „Public roadmap" heißt: interne Datei daneben nutzen |
-| Bekannten Befund als neuen Eintrag dupliziert | Bestehenden Punkt mit dem empirischen Beleg aus diesem Lauf anreichern |
-| Bei einer Bearbeitungssperre eine TODO-Zeile ins gesperrte Repo geschrieben | Diese Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
-| Push-Sperre als Komplettverbot gelesen und das Repo ganz übersprungen | Lock lesen: sperrt er nur die Veröffentlichung, läuft die lokale Runde auf einem eigenen Branch weiter |
-| Unter Push-Sperre zwar nicht gepusht, aber Topics oder Beschreibung geändert | Auch Metadaten sind remote sichtbar — unter einer Veröffentlichungssperre entfallen sie mit |
+| 仅查看工作区，未检查 `git ls-files` | 始终检查被跟踪的文件集合——问题往往藏在那里 |
+| 隐私检查仅针对路径和 Token | 同时搜索内部文件夹/流水线名称——它们不会报警但会泄露结构 |
+| 通过重写历史来移除内部文件 | 对无敏感风险的文件，`git rm --cached` + 正常 Push 即可 |
+| 从 `HEAD` 中删除了 Secret 即认为已解决 | 必须轮换 Secret；其他做法只是表面功夫 |
+| 仅凭文件名分类文件 | 打开快速浏览内容——文件名无法可靠反映真实意图 |
+| 延续 README 中的数字而非重新计数 | 在源头重新计数（Tool 列表、测试运行、Manifest） |
+| 新语言版本新建为空壳存根文件 | 填入内容或暂不创建——空壳文件伪造了完整性 |
+| 在既有规范旁引入第二套 README 命名规范 | 继承仓库中已有的命名规范 |
+| 未获批准向外部列表提交 PR | 外部沟通需先提交审批；仅自有渠道可直接操作 |
+| 仅统计 Issue 数量而不实际处理 | 修复、关闭或定向追问——每个事项都必须有明确状态 |
+| 擅自生成风格脱节的 Banner | 保持与生态系统的设计语言族系一致 |
+| 修正了仓库中的 README，npm/PyPI 页面依然展示旧文档 | 注册表页面来自上一次 Publish——需跟进 Patch Release |
+| 仅在 Manifest 中提升了版本号 | 同时更新所有版本标识：Manifest、代码常量、Badge、Changelog、Tag、`llms.txt` |
+| 修改已完成，但未 Push 搁置在本地 | Commit 并 Push 是本轮维护的一部分；仅冻结期允许例外 |
+| 将所有修改堆在一个混合 Commit 中 | 拆分清理、文档和修复——否则后续无法单独撤销 |
+| 文档 Commit 后 CI 变红，怀疑是自己的修改 | 未锁定版本的 Linter 会跟随新版默认规则——显式锁定规则集 |
+| 仅在发现处修正了错误陈述 | 全 Org 检索该表述——它通常也存在于 Profile、`llms.txt` 和第二语言版本中 |
+| 在 Dirty 的外部仓库中使用 `commit -a` | 按路径精准 Stage 并 Commit，不要 Push——不触碰他人的修改 |
+| 在干净的 Org Profile 仓库中做了修改但未 Push | 干净的外部仓库需要独立的 Commit **和** 独立的 Push |
+| 跳过的修改仅记录在自己的日志中 | 同时记录在目标仓库的任务列表中（如果存在） |
+| 发现项仅写在运行日志中 | 在项目本地任务系统中转化为 Task——以后没人会看旧日志 |
+| 将内部遗留工作挂在公开 Roadmap 上 | 先查看内容；“Public roadmap”意味着应当使用旁边的内部文件 |
+| 将已知发现项作为新条目重复创建 | 用本轮运行的实证数据丰富现有的条目 |
+| 在编辑冻结期向受限仓库写入 TODO 行 | 冻结适用于整个项目——不要动那里的任何内容 |
+| 将 Push 冻结误读为全面禁止而完全跳过仓库 | 阅读锁文件：若仅禁止发布，可在本地分支继续本地维护 |
+| 在 Push 冻结下虽未 Push 但修改了元数据 | 元数据在远程同样可见——Push 冻结下元数据修改同样需要省略 |
 
-## Abschluss-Checkliste
+## 最终检查清单
 
-- [ ] Distributionsflächen ermittelt und im Laufprotokoll notiert.
-- [ ] Topics, Description und Homepage gesetzt und überprüft.
-- [ ] Privacy-Gate über das getrackte Set gelaufen, Funde behandelt.
-- [ ] `.md`/`.txt`/`.json` auf Veröffentlichungsabsicht geprüft, interne Dateien ignoriert.
-- [ ] Kein Force-Push ohne echten Leak; bei Leak Rotation durchgeführt.
-- [ ] Banner vorhanden und im README eingebunden.
-- [ ] Version, Features, Zahlen, Screenshots, Links gegen den echten Stand geprüft.
-- [ ] Darstellung verbessert (Tabellen, Diagramme, erste Bildschirmhöhe).
-- [ ] README-Sprachmatrix vollständig; Entscheidungen zu weiteren Sprachen dokumentiert.
-- [ ] Sichtbarkeitsmaßnahmen umgesetzt bzw. zur Freigabe vorgelegt.
-- [ ] Eintrag im eigenen Org-Profil geprüft, sinnvolle Fremd-Orga-Verweise gesetzt.
-- [ ] Änderungen an Fremd-Repos: sauber → committet und gepusht; dirty → lokal committet;
-      nicht ausgeführt → in der Aufgabenliste des Ziel-Repos eingetragen.
-- [ ] Issues und PRs in einen definierten Zustand gebracht.
-- [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
-- [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
-- [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
-- [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
+- [ ] 已明确分发渠道并记录在运行日志中。
+- [ ] 已设置并核对 Topics、Description 和 Homepage。
+- [ ] 已对被跟踪文件集合运行隐私检查，并处理了发现项。
+- [ ] 已审查 `.md`/`.txt`/`.json` 的发布意图，忽略了内部文件。
+- [ ] 无泄露情况下绝不 Force-Push；若泄露已执行 Secret 轮换。
+- [ ] 已提供 Banner 并嵌入 README。
+- [ ] 已对照真实代码核对版本、功能、数字、截图和链接。
+- [ ] 已优化排版展示（表格、图表、首屏内容）。
+- [ ] README 语言矩阵完整；对其他语言的决策已记录。
+- [ ] 可见性提升措施已实施或已提交审批。
+- [ ] 已检查自有 Org Profile 条目，合理设置了外部 Org 引用。
+- [ ] 外部仓库修改：干净 → 已 Commit 并 Push；Dirty → 已本地 Commit；未执行 → 已写入目标仓库 Task 列表。
+- [ ] Issue 和 PR 已转入明确状态。
+- [ ] 已创建拆分的 Commit，已 Push，已验证 CI 和远程渲染效果。
+- [ ] 所有分发渠道已同步至相同状态（必要时进行了 Patch Release）。
+- [ ] 未解决的发现项已在本地任务系统中录入为 Task。
+- [ ] 运行日志已写入 `_after-care/LOG.md`。
 
-## 变更日志与历史
+## 更新日志
 
 ### 1.6.0 (2026-07-24)
-- Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine
-  Nutzer-Klarstellung wurde in Durchlauf 1 im Hub korrigiert, stand aber unbemerkt noch fünfmal
-  im Organisationsprofil (EN, DE, `llms.txt`) und fiel erst neun Durchläufe später auf.
+- 补充规则：实质性修正适用于所有渠道。实证教训——用户指出的更正在第 1 轮中于 Hub 完成，但未被察觉地在 Org Profile 的 5 处地方（EN、DE、`llms.txt`）残留，直到 9 轮之后才被发现。
 
 ### 1.5.0 (2026-07-24)
-- Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
-  (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): „zuerst prüfen", die konkreten
-  Verräter-Regelcodes, der Plattform-Split, `ruff.toml` als Fix bei fehlendem `pyproject.toml`,
-  Verifikation gegen die neue Linter-Version.
+- 在一日内连续三次遇到该模式后强化了 Linter 诊断（n8n-workflow-manager ruff 0.15，clirec + swarm-ai ruff 0.16）：“首先检查”、具体的特征规则代码、平台差异、缺失 `pyproject.toml` 时的 `ruff.toml` 修复方案、针对新版 Linter 的验证。
 
 ### 1.4.0 (2026-07-24)
-- Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
-  Ursache ein ungepinnter Linter ohne festgeschriebenen Regelsatz — ein neues Tool-Release
-  verschiebt den Default und macht unveränderten Code rot. Fix: Regelsatz pinnen, neue Regeln
-  als Aufgabe. Zweimal in Folge aufgetreten (n8n-workflow-manager mit ruff 0.15, clirec mit 0.16).
+- 补充诊断：当纯文档 Commit 后 CI 变红，最常见的原因是未锁定版本的 Linter 且无显式规则集——新工具发布改变了默认规则导致未修改的代码变红。修复：锁定规则集，新规则记录为 Task。
 
 ### 1.3.0 (2026-07-24)
-- Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
-  der Entdeckung ein Eintrag im ordnerlokalen Aufgabensystem des Projekts — dort, wo der nächste
-  Bearbeiter hinsieht, nicht im Protokoll eines abgeschlossenen Laufs. Inklusive Trennung von
-  interner Liste und öffentlicher Roadmap, Anreichern statt Duplizieren, Erledigtes mit Commit.
+- 新增“发现项应转化为 Task”章节：本轮未亲自修复的内容，在发现瞬间即成为项目本地任务系统中的条目——即下一个开发者会查看的地方，而非已结束运行的日志。包含内部列表与公开 Roadmap 的分离、丰富现有条目而非重复创建、记录已完成事项及 Commit Hash。
 
 ### 1.2.0 (2026-07-24)
-- Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
-  Secrets, lösen daher keinen Alarm aus und überleben ein Gate, das nur auf Pfade und Token
-  zielt — bleiben für Leser aber unauflösbar und geben die eigene Struktur preis.
+- 隐私检查增加对内部存储目录名称的搜索。它们不是 Secret，因此不会报警，能绕过仅针对路径和 Token 的检查——但对读者来说无法解析且泄露了内部结构。
 
 ### 1.1.0 (2026-07-24)
-- Sperren werden gelesen statt pauschal als Verbot behandelt: eine reine Veröffentlichungs-/
-  Push-Sperre leitet die Runde auf einen lokalen Branch um, statt sie abzubrechen. Zugleich
-  klargestellt, dass unter einer solchen Sperre auch Metadaten, Releases und Issue-/PR-Aktionen
-  entfallen — sie sind ebenso remote sichtbar wie ein Push.
+- 锁文件改为阅读理解而非一律视为全面禁止：纯发布/推送锁会将维护重定向至本地分支而非直接取消。同时明确在以此类冻结下，元数据、Release 和 Issue/PR 操作同样需要省略——它们与 Push 一样在远程公开可见。
 
 ### 1.0.0 (2026-07-24)
-- Initiale Version. Stufe 1 der Repo-Nachpflege, abgeleitet aus `github-repo-care`.
+- 初始版本。仓库后续维护第 1 层级，衍生自 `github-repo-care`。

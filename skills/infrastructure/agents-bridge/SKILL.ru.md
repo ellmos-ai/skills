@@ -2,46 +2,40 @@
 name: agents-bridge
 version: 2.0.0
 type: skill
-description: [Русский] Навык агента для agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+description: Нейтральный к провайдерам и пользователям мост для правил загрузки агентов, CLI и IDE. Он обнаруживает известные поверхности бутстрапа, требует от пользователя выбора одного или нескольких упорядоченных источников истины и рендерит небольшие загрузчики без дублирования правил.
+
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: ru
 status: active
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `agents-bridge`.
+> **Русский** — Официальная русская версия `agents-bridge`.
 
 
+# AGENTS-BRIDGE (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Используйте этот навык для подключения агента или IDE к явно выбранным файлам правил.
+Ни один провайдер, имя файла, хост или облачный каталог не являются каноническими по умолчанию.
 
+## Рабочий процесс и порядок действий
 
-# AGENTS-BRIDGE (English)
-
-Use this skill to connect an agent or IDE to explicitly selected rule files.
-No provider, filename, host, or cloud directory is implicitly canonical.
-
-## Рабочий процесс и этапы выполнения & Execution Steps
-
-1. Read all local instructions that govern the source and target paths.
-2. Run `python scripts/bridge.py discover` and optionally pass `--project`.
-3. Ask the user to select the ordered truth sources and the target. An empty
-   selection authorizes no write.
-4. Prefer a redirect or ordered loader. Use a generated copy only when the
-   target cannot load references, and record provenance plus drift checks.
-5. Preview with:
+1. Прочитайте все локальные инструкции, регулирующие исходные и целевые пути.
+2. Запустите `python scripts/bridge.py discover` и опционально передайте `--project`.
+3. Попросите пользователя выбрать упорядоченные источники истины и цель. Пустой выбор не дает разрешения на запись.
+4. Отдавайте предпочтение перенаправлению или упорядоченному загрузчику. Используйте сгенерированную копию только тогда, когда цель не может загружать ссылки, и регистрируйте происхождение, а также проверки расхождений (drift checks).
+5. Предварительный просмотр с помощью:
 
    ```text
    python scripts/bridge.py render --truth <path> --target-kind generic
    ```
 
-6. Create or change the target only after reviewing the preview.
-7. Prove that the target agent actually read every selected source.
+6. Создавайте или изменяйте цель только после проверки предварительного просмотра.
+7. Докажите, что целевой агент действительно прочитал каждый выбранный источник.
 
-See `references/agent-conventions.md`,
-`references/truth-topologies.md`, and
+См. `references/agent-conventions.md`,
+`references/truth-topologies.md` и
 `references/inventory-contract.md`.
 
-`agent-config-sync` manages broader configuration topologies.
-`agents-bridge` is limited to boot and rule access. Runtime partner bridges and
-schedulers are separate components.
+`agent-config-sync` управляет более широкими топологиями конфигурации.
+`agents-bridge` ограничен доступом к загрузке и правилам. Мосты партнеров среды выполнения и планировщики являются отдельными компонентами.

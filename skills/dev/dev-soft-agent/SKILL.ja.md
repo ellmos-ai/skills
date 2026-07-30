@@ -5,7 +5,7 @@ type: agent
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [日本語] エージェントスキル: dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
+description: 自動ソフトウェア開発パイプライン。プロジェクトのスキャン、タスクの優先順位付け、コード分析、開発ループのオーケストレーションを行います。依存関係ゼロ（Python 標準ライブラリのみ）。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,41 +15,37 @@ tags: [development, code-analysis, task-management, automation, pipeline]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `dev-soft-agent`.
+<img src="banner.png" width="100%" alt="dev-soft-agent banner">
+> **日本語** — `dev-soft-agent` の公式日本語版。
 
+# Dev Soft Agent (日本語)
 
+自動ソフトウェア開発パイプライン。BACH の ATI エージェントから抽出され、
+Python の標準ライブラリのみで完全にスタンドアロン動作します。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Dev Soft Agent (English)
-
-Automated software development pipeline. Extracted from BACH's ATI agent,
-runs fully standalone with pure Python standard library.
-
-## Components
+## コンポーネント構成
 
 ```
 scripts/
-  config.py              Configuration (scan folders, naming prefixes, weights)
-  project_manager.py     Project scan + classification by naming convention
-  task_engine.py          TASKS.txt parser + code scanner (TODO/FIXME)
-  code_analyzer.py       Static analysis (LOC, imports, classes, functions)
-  dev_loop.py            Orchestrator (DevLoop)
+  config.py              設定（スキャンフォルダ、命名プレフィックス、重み）
+  project_manager.py     プロジェクトスキャン + 命名規則による分類
+  task_engine.py          TASKS.txt パーサー + コードスキャナー (TODO/FIXME)
+  code_analyzer.py       静的解析（LOC、インポート、クラス、関数）
+  dev_loop.py            オーケストレーター (DevLoop)
   policies/
-    naming.py            snake_case / PascalCase / SCREAMING_SNAKE validation
-    encoding.py          UTF-8 enforcement + BOM detection
-    paths.py             Hardcoded path detection
+    naming.py            snake_case / PascalCase / SCREAMING_SNAKE の検証
+    encoding.py          UTF-8 の強制 + BOM 検出
+    paths.py             ハードコードされたパスの検出
   prompt_templates/
-    task_prompt.txt      LLM prompt for task processing
-    review_prompt.txt    LLM prompt for code review
-    analysis_prompt.txt  LLM prompt for project analysis
+    task_prompt.txt      タスク処理用 LLM プロンプト
+    review_prompt.txt    コードレビュー用 LLM プロンプト
+    analysis_prompt.txt  プロジェクト分析用 LLM プロンプト
 ```
 
-## Usage as Python Library
+## Python ライブラリとしての使用方法
 
 ```python
 from scripts.dev_loop import DevLoop
@@ -58,27 +54,27 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects (English)
+# プロジェクトのスキャン (日本語)
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention) (English)
+# プロジェクトの選択（命名規則に基づく加重ランダム選択） (日本語)
 project = loop.select_project()
 
-# Analyze code (English)
+# コードの分析 (日本語)
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks (English)
+# タスクの読み込みと優先順位付け (日本語)
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session (English)
+# 開発セッションの完了 (日本語)
 result = loop.run_session()
 loop.save_session()
 ```
 
-## Usage as CLI
+## CLI としての使用方法
 
 ```bash
 cd scripts
@@ -90,50 +86,50 @@ python -m devSoftAgent session --project my-project
 python -m devSoftAgent status
 ```
 
-## Naming Convention (Project Classification)
+## 命名規則（プロジェクト分類）
 
-Projects are classified based on their folder name:
+プロジェクトはフォルダ名に基づいて分類されます：
 
-| Prefix | Label | Weight | Meaning |
-|--------|-------|--------|---------|
-| `RDY` | Ready | 1.0 | Highest priority |
-| `RDY_FAST` | Fast Ready | 0.5 | Quick to complete |
-| `FAST` | Fast | 0.33 | Small task |
-| `DEV` | Development | 0.17 | In development |
-| `REL` | Released | 0.0 | Done, no work needed |
-| `ARC` | Archived | 0.0 | Archived |
+| プレフィックス | ラベル | 重み | 意味 |
+|----------------|--------|------|------|
+| `RDY` | Ready（準備完了） | 1.0 | 最優先 |
+| `RDY_FAST` | Fast Ready | 0.5 | 迅速に完了可能 |
+| `FAST` | Fast | 0.33 | 小規模タスク |
+| `DEV` | Development | 0.17 | 開発中 |
+| `REL` | Released | 0.0 | 完了、作業不要 |
+| `ARC` | Archived | 0.0 | アーカイブ済み |
 
-Weight determines the probability in random selection.
+重みはランダム選択時の確率を決定します。
 
-## TASKS.txt Format
+## TASKS.txt フォーマット
 
 ```markdown
-# TASKS - ProjectName (English)
-# As of: 2026-03-12 (English)
+# TASKS - プロジェクト名 (日本語)
+# 日付: 2026-03-12 (日本語)
 
 ## OPEN
-- [ ] [BUG] Description of the bug
-- [ ] [FEATURE] New feature
+- [ ] [BUG] バグの説明
+- [ ] [FEATURE] 新機能
 
 ## IN PROGRESS
-- [-] [REFACTOR] Code restructuring
+- [-] [REFACTOR] コードのリファクタリング
 
 ## DONE
-- [x] [BUG] Fixed bug -- DONE 2026-03-01
+- [x] [BUG] 修正済みバグ -- DONE 2026-03-01
 ```
 
-## Policies
+## ポリシー (Policies)
 
-Quality policies that can be automatically checked against code:
+コードに対して自動チェックが可能な品質ポリシー：
 
-- **NamingPolicy:** snake_case for modules/functions, PascalCase for classes
-- **EncodingPolicy:** Enforce UTF-8, detect BOM, flag CRLF
-- **PathPolicy:** Detect and report hardcoded absolute paths
+- **NamingPolicy:** モジュール/関数には snake_case、クラスには PascalCase
+- **EncodingPolicy:** UTF-8 を強制、BOM を検出、CRLF に警告
+- **PathPolicy:** ハードコードされた絶対パスを検出および報告
 
 ## 変更履歴
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/devSoftAgent to skill library
-- Project scanner, task engine, code analyzer, DevLoop
-- 3 policies (naming, encoding, paths)
-- 3 prompt templates (task, review, analysis)
+- MODULAR_AGENTS/devSoftAgent からスキルライブラリへの移行
+- プロジェクトスキャナー、タスクエンジン、コードアナライザー、DevLoop
+- 3つのポリシー（命名、エンコーディング、パス）
+- 3つのプロンプトテンプレート（タスク、レビュー、分析）

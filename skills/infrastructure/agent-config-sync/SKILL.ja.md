@@ -5,7 +5,8 @@ type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
 updated: 2026-07-27
-description: [日本語] エージェントスキル: agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
+description: エージェントプロバイダーおよびアプリクラス間でのMCP設定、スキル、ルールファイルの同期を行うプロバイダー非依存のプランナー。検出されたローカルの選択肢を発見し、ユーザーが信頼できる情報源（Truth）、ターゲット、方向性、衝突解決を選択できるようにします。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,33 +17,23 @@ language: ja
 status: active
 aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `agent-config-sync`.
+> **日本語** — `agent-config-sync` の公式日本語版。
 
 
+# Agent Config Sync (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Agent Config Sync (English)
-
-The skill separates endpoint selection, resources and truth. Run:
+このスキルは、エンドポイントの選択、リソース、および信頼できる情報源（Truth）を分離します。実行方法：
 
 ```bash
 python scripts/sync.py --discover
 python scripts/sync.py --offer
 ```
 
-The user can select an explicit endpoint list, one provider across app classes,
-one app class across providers, or all detected endpoints. Detection is
-evidence, not authorization.
+ユーザーは、明示的なエンドポイントリスト、アプリクラスを跨ぐ単一のプロバイダー、プロバイダーを跨ぐ単一のアプリクラス、または検出されたすべてのエンドポイントを選択できます。検出は証拠（evidence）であり、権限付与（authorization）ではありません。
 
-Truth can be one endpoint, one file, an ordered set of files such as multiple
-`AGENTS.md` layers, or a skills directory. No filename or provider is the
-implicit hub. Without a selected truth source, plans stay blocked.
+信頼できる情報源（Truth）は、1つのエンドポイント、1つのファイル、複数の `AGENTS.md` レイヤーのような順序付けられたファイル群、またはスキルディレクトリ（skills directory）を指定できます。特定のファイル名やプロバイダーが暗黙的なハブになることはありません。選択された情報源がない場合、計画（plan）はブロックされたままになります。
 
-Review `--status` and `--plan`; only use `--apply --yes` after approval.
-MCP blocks and skill directories are implemented. Rule-file topologies remain
-fail-closed until the user selects a merge/redirect adapter.
+`--status` と `--plan` を確認し、承認後にのみ `--apply --yes` を使用してください。MCPブロックおよびスキルディレクトリが実装されています。ルールファイルのトポロジは、ユーザーがマージ/リダイレクトアダプターを選択するまでフェイルクローズ（fail-closed）状態を維持します。

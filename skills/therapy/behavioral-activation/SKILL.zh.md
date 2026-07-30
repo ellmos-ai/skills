@@ -1,265 +1,278 @@
 ---
+name: behavioral-activation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 针对抑郁症的行为激活：打破恶性循环、活动监测、周计划制定以及基于价值观的活动。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [behavioral-activation, depression, activity, weekly-plan, values]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `behavioral-activation`.
+> **中文** — `behavioral-activation` 官方中文版本。
 
 
+# 行为激活（中文）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 活动规划、情绪-活动日志以及基于价值观的活动选择：对抗无行动与情绪低落的恶性循环
 
-
-# Behavioral Activation (English)
-
-> Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Behavioral Activation (BA) is an evidence-based intervention from behavioral therapy for treating depression. It is based on the insight that depression leads to withdrawal and inactivity, which further worsens mood (vicious cycle). Through targeted building of positive activities, this cycle is broken.
-
-Evidence: Behavioral activation is effective as a standalone therapy and is equivalent to cognitive therapy (Dimidjian et al. 2006, Richards et al. 2016 COBRA study). Recommended as first-line intervention for mild to moderate depression (NICE Guidelines).
-
-**Note:** This is support, not a substitute for professional therapy.
-For severe depression or suicidal thoughts, ALWAYS recommend professional help.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参见：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The Behavioral Activation Model of Depression
+## 背景
 
-### The Vicious Cycle
+行为激活（Behavioral Activation, BA）是行为疗法中用于治疗抑郁症的循证干预方法。其核心前提是：抑郁会导致退缩和不活动，而这会进一步恶化情绪（恶性循环）。通过有针对性地安排积极活动，可以打破这一循环。
 
-```
-Triggering situation (loss, stress, change)
-        |
-        v
-Low mood, lack of energy
-        |
-        v
-Withdrawal, avoidance, inactivity
-        |
-        v
-Fewer positive experiences, isolation
-        |
-        v
-Even deeper low mood
-        |
-        v
-Even more withdrawal ... (downward spiral)
-```
+循证支持：行为激活作为独立疗法非常有效，其疗效与认知疗法相当（Dimidjian 等，2006；Richards 等，2016 COBRA 研究）。被 NICE 指南推荐为轻度至中度抑郁症的一线干预措施。
 
-### The Counter-Principle
-
-```
-Targeted activity (even with low motivation)
-        |
-        v
-Positive experience / sense of accomplishment / connection
-        |
-        v
-Slight mood improvement
-        |
-        v
-Somewhat more energy and motivation
-        |
-        v
-Further activity ... (upward spiral)
-```
-
-**Core principle:** Don't wait for motivation to come — action creates motivation.
-"Act first, feel second." (Not: "Feel first, then act.")
+**注意：** 本技能仅提供支持，不能替代专业心理治疗。
+对于重度抑郁或自杀念头，请务必推荐寻求专业帮助。
+**严禁实施：** EMDR（眼动脱敏再加工）、Prolonged Exposure（持续暴露疗法 PE）、Narrative Exposure Therapy（叙事暴露疗法 NET）
 
 ---
 
-## 2. Mood-Activity Diary
+## 1. 抑郁症的行为激活模型
 
-### Goal
-Make connections between activities and mood visible. Recognize which activities improve mood and which worsen it.
-
-### Diary Format
+### 恶性循环
 
 ```
-MOOD-ACTIVITY DIARY
-
-Date: [...]
-
-| Time  | Activity | Mood (0-10) | Enjoyment (0-10) | Importance (0-10) |
-|-------|----------|-------------|-------------------|---------------------|
-| 07:00 | Got up, had breakfast | 3 | 2 | 5 |
-| 08:00 | Work: emails | 4 | 1 | 6 |
-| 10:00 | Walk | 6 | 5 | 4 |
-| 12:00 | Lunch with colleague | 7 | 6 | 7 |
-| 14:00 | Work: project | 5 | 3 | 7 |
-| 18:00 | Watching TV (alone) | 3 | 2 | 1 |
-| 20:00 | Phone call with friend | 6 | 5 | 8 |
-
-Daily mood average: [...]
-Best activity today: [...]
-Insight: [...]
+触发事件（丧失、压力、生活改变）
+        |
+        v
+情绪低落、缺乏精力
+        |
+        v
+退缩、回避、不活动
+        |
+        v
+积极体验减少、社会隔离
+        |
+        v
+情绪进一步恶化
+        |
+        v
+更加退缩 ... （下行螺旋）
 ```
 
-### Weekly Review
+### 反向干预原理
 
-**Guiding questions:**
-- Which activities regularly lift my mood?
-- Which activities lower my mood?
-- Are there times that are particularly difficult?
-- How much time do I spend on pleasant vs. unpleasant activities?
-- Which activities have I been avoiding?
+```
+有针对性的活动（即使动机较低）
+        |
+        v
+积极体验 / 成就感 / 联结感
+        |
+        v
+情绪轻微改善
+        |
+        v
+精力与动机有所恢复
+        |
+        v
+进一步开展活动 ... （上行螺旋）
+```
+
+**核心原则：** 不要等待动机出现 — 行动创造动机。
+“先行动，后感受。”（而不是：“先有感受，再行动。”）
 
 ---
 
-## 3. Activity Planning
+## 2. 情绪-活动日志（Mood-Activity Diary）
 
-### Step 1: Create Activity List
+### 目标
+使活动与情绪之间的联系可视化。识别哪些活动能改善情绪，哪些活动会恶化情绪。
 
-Collect three categories of activities:
-
-**A) Pleasant Activities (joy, enjoyment)**
-- Nature: Walk, park, forest
-- Social: Meet friends, phone calls, cook together
-- Creative: Music, painting, writing, crafting
-- Physical: Sports, yoga, dancing, swimming
-- Enjoyment: Cook favorite meal, read a book, listen to music
-- Relaxation: Take a bath, meditation, breathing exercise
-
-**B) Necessary Activities (structure, self-care)**
-- Household: Tidying up, cooking, shopping
-- Personal care: Showering, getting dressed, brushing teeth
-- Administration: Bills, appointments, paperwork
-- Health: Doctor's appointments, medication, nutrition
-
-**C) Values-Based Activities (meaning, significance)**
-- See section 4 below
-
-### Step 2: Create Weekly Plan
+### 日志格式
 
 ```
-WEEKLY PLAN
+情绪-活动日志
 
-| Day | Morning | Midday | Afternoon | Evening |
-|-----|---------|--------|-----------|---------|
-| Mon | [...]   | [...]  | [...]     | [...]   |
-| Tue | [...]   | [...]  | [...]     | [...]   |
-| Wed | [...]   | [...]  | [...]     | [...]   |
-| Thu | [...]   | [...]  | [...]     | [...]   |
-| Fri | [...]   | [...]  | [...]     | [...]   |
-| Sat | [...]   | [...]  | [...]     | [...]   |
-| Sun | [...]   | [...]  | [...]     | [...]   |
+日期：[...]
+
+| 时间  | 活动内容 | 情绪评分 (0-10) | 愉悦感 (0-10) | 重要性 (0-10) |
+|-------|----------|------------------|----------------|----------------|
+| 07:00 | 起床、吃早餐 | 3 | 2 | 5 |
+| 08:00 | 工作：处理邮件 | 4 | 1 | 6 |
+| 10:00 | 散步 | 6 | 5 | 4 |
+| 12:00 | 与同事共进午餐 | 7 | 6 | 7 |
+| 14:00 | 工作：做项目 | 5 | 3 | 7 |
+| 18:00 | 看电视（独自） | 3 | 2 | 1 |
+| 20:00 | 与朋友通电话 | 6 | 5 | 8 |
+
+每日平均情绪评分：[...]
+今天最棒的活动：[...]
+心得感悟：[...]
 ```
 
-### Planning Rules
-1. **Start small:** Don't plan the whole day, but 1-2 activities per day
-2. **Mix:** Pleasant + necessary + values-based
-3. **Specific:** "Tuesday 3:00 PM walk in the park" instead of "Move more"
-4. **Realistic:** Achievable even with low energy
-5. **Flexible:** Plan is guidance, not obligation
-6. **Graduated:** For very low energy: mini-steps (5 minutes is enough)
+### 每周复盘
 
-### Dealing with Obstacles
-
-| Obstacle | Strategy |
-|----------|----------|
-| "I have no energy" | Reduce activity to 5 minutes |
-| "I don't feel like it" | Reminder: motivation comes through action |
-| "It won't help anyway" | Experiment: try it and measure mood afterward |
-| "I can't do it alone" | Involve someone (appointment = commitment) |
-| "I don't have time" | Build in small activities (take stairs, 5 min break outside) |
+**引导性问题：**
+- 哪些活动能定期提升我的情绪？
+- 哪些活动会降低我的情绪？
+- 是否有某些时间段特别困难？
+- 我在愉悦活动与不愉悦活动上分别花费了多少时间？
+- 我一直在回避哪些活动？
 
 ---
 
-## 4. Values-Based Activity Selection
+## 3. 活动规划
 
-### Principle
-Activities that align with personal values create sustainable well-being — as opposed to mere pleasure, which fades quickly.
+### 步骤 1：创建活动清单
 
-### Life Domains and Values
+收集三类活动：
+
+**A) 愉悦型活动（快乐、享受）**
+- 接触自然：散步、逛公园、走进森林
+- 社交互动：聚会、通电话、一起做饭
+- 创意活动：音乐、绘画、写作、手工
+- 体育锻炼：运动、瑜伽、舞蹈、游泳
+- 感官享受：做想吃的饭菜、读书、听音乐
+- 放松身心：泡澡、冥想、呼吸练习
+
+**B) 必要型活动（结构、自我照顾）**
+- 家务：整理、做饭、购物
+- 个人护理：洗澡、穿衣、刷牙
+- 行政事务：账单、预约、文件处理
+- 健康管理：就医预约、服药、营养保障
+
+**C) 价值导向型活动（意义、重要性）**
+- 参见下文第 4 节
+
+### 步骤 2：创建周计划
 
 ```
-VALUES COMPASS
+周计划表
 
-Relationships:     What kind of partner/friend/family member do I want to be?
-Work/Education:    What is important to me about my work?
-Leisure:           How do I want to spend my free time?
-Health:            How do I want to treat my body?
-Community:         What contribution do I want to make?
-Personal:          What kind of person do I want to be?
+| 星期 | 早晨 | 中午 | 下午 | 晚上 |
+|------|------|------|------|------|
+| 周一 | [...]| [...]| [...]| [...]|
+| 周二 | [...]| [...]| [...]| [...]|
+| 周三 | [...]| [...]| [...]| [...]|
+| 周四 | [...]| [...]| [...]| [...]|
+| 周五 | [...]| [...]| [...]| [...]|
+| 周六 | [...]| [...]| [...]| [...]|
+| 周日 | [...]| [...]| [...]| [...]|
 ```
 
-### Values-Activity Mapping
+### 规划原则
+1. **从小处着手：** 不要把整天填满，每天安排 1-2 项活动即可
+2. **组合搭配：** 愉悦型 + 必要型 + 价值导向型
+3. **具体明确：** “周二下午 3:00 在公园散步”，而不是“多运动”
+4. **切合实际：** 即使在精力低落时也能完成
+5. **保持灵活：** 计划是引导，而非强制负担
+6. **循序渐进：** 精力极低时：微小步骤（5分钟即可）
 
-**Example:**
+### 应对障碍
 
-| Value | Activity | Frequency |
-|-------|----------|-----------|
-| Connection | Call a friend | 2x per week |
-| Health | 20 min walk | Daily |
-| Creativity | Play guitar | 1x per week |
-| Helpfulness | Help neighbor with shopping | 1x per week |
-| Learning | 15 min reading non-fiction | 3x per week |
-
-### Values vs. Goals
-- **Value:** A direction you want to move toward (e.g., "being a loving partner")
-- **Goal:** An achievable endpoint (e.g., "plan anniversary celebration")
-- Values can never be "checked off" — they provide ongoing orientation
+| 障碍 | 应对策略 |
+|------|----------|
+| “我没有精力” | 将活动缩短/简化至 5 分钟 |
+| “我不想做” | 提醒自己：动机是通过行动产生的 |
+| “反正也没用” | 抱持实验心态：先试试看，事后测量情绪变化 |
+| “我一个人做不到” | 邀请他人参与（预约 = 承诺） |
+| “我没有时间” | 嵌入微小活动（走楼梯、户外休息 5 分钟） |
 
 ---
 
-## 5. Measuring Progress
+## 4. 基于价值观的活动选择
 
-### Weekly Review
+### 原理
+与个人价值观保持一致的活动能带来可持续的幸福感 — 这与迅速消退的纯粹享乐不同。
+
+### 生活领域与价值观
 
 ```
-WEEKLY REVIEW
+价值观罗盘
 
-Week: [Date]
-Planned activities: [Number]
-Completed activities: [Number]
-Average mood: [0-10]
-
-What went well: [...]
-What was difficult: [...]
-Insight of the week: [...]
-Plan for next week: [...]
+人际关系：        我想成为什么样的伴侣/朋友/家庭成员？
+工作/教育：       关于工作，对我来说重要的是什么？
+休闲娱乐：        我想如何度过我的业余时间？
+健康保养：        我想如何对待自己的身体？
+社区贡献：        我想做出什么贡献？
+个人成长：        我想成为什么样的人？
 ```
 
-### Long-Term Tracking
-- Observe mood trends over weeks
-- Recognize the connection between activity level and mood
-- Make successes visible (even small ones)
+### 价值观-活动映射
+
+**示例：**
+
+| 价值观 | 活动内容 | 频率 |
+|-------|----------|------|
+| 联结 | 给朋友打个电话 | 每周 2 次 |
+| 健康 | 散步 20 分钟 | 每天 |
+| 创造力 | 弹吉他 | 每周 1 次 |
+| 互助 | 帮邻居买菜 | 每周 1 次 |
+| 学习 | 读 15 分钟科普/社科书籍 | 每周 3 次 |
+
+### 价值观 vs 目标
+- **价值观：** 你想要前进的方向（例如“成为一个有爱心的伴侣”）
+- **目标：** 一个可以达成的终点（例如“筹划周年庆祝活动”）
+- 价值观永远无法被“打勾完成” — 它们提供持续的指引方向
 
 ---
 
-## Ethics and Boundaries
+## 5. 进度测量
 
-**An AI assistant may:**
-- Guide through the diary and activity planning
-- Suggest activities (never prescribe)
-- Document mood data and reflect back patterns
-- Accompany values reflection
-- Acknowledge small progress
+### 每周复盘
 
-**An AI assistant must NOT:**
-- Be the sole support for severe depression
-- Make medication-related recommendations
-- Assess suicidality
-- Make diagnoses
-- Guarantee that behavioral activation is sufficient
+```
+每周复盘表
 
-**Important:** For severe depression (persistent lack of drive, suicidal thoughts, inability to manage daily life), professional help is essential. Behavioral activation is a complement, not a substitute.
+周次：[日期]
+计划活动数：[数量]
+完成活动数：[数量]
+平均情绪评分：[0-10]
 
-**In case of acute crisis, ALWAYS refer to:**
+进展顺利的部分：[...]
+遇到困难的部分：[...]
+本周心得感悟：[...]
+下周计划：[...]
+```
+
+### 长期追踪
+- 观察数周内的情绪趋势变化
+- 识别活动水平与情绪之间的关联
+- 让进步（哪怕是微小的进步）显性化
+
+---
+
+## 伦理与边界
+
+**AI 助手可以：**
+- 引导填写日志和活动规划
+- 建议活动（绝不强加）
+- 记录情绪数据并反馈规律
+- 伴随进行价值观反思
+- 肯定微小的进步
+
+**AI 助手不得：**
+- 作为重度抑郁症的唯一支持手段
+- 给出药物相关建议
+- 评估自杀风险
+- 进行诊断
+- 保证行为激活必然足够
+
+**重要提示：** 对于重度抑郁症（持续缺乏动力、自杀念头、无法维持日常生活），专业帮助是不可或缺的。行为激活是补充手段，而非替代品。
+
+**在发生急性危机时，请务必联系：**
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
+- Crisis Text Line (US): 发送 HOME 至 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 中国心理危机干预热线: 010-82951332 / 400-161-9995
+- 紧急救援电话: 911 (US) / 112 (EU) / 110 (CN)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Not professional therapy*
+*移植自 BACH v3.8.0 | 独立版本*
+*参考文献：Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — 非专业替代医疗服务*

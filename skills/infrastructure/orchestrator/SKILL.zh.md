@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [中文] 智能体技能: orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: 用于分解复杂任务、委派独立 Worker 以及基于证据验收其结果的供应商中立协议。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,92 +18,75 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `orchestrator`.
+> **中文** — `orchestrator` 官方中文版本。
 
 
+# Orchestrator (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概述与目的
 
+当某一任务包含至少两个基本独立的工作包，且委派确实在时间、上下文或质量上能带来实际优势时，请使用本 Skill。对于小型且紧密耦合的任务，请直接处理。
 
-> **English Translation** — Official English version of `orchestrator`.
+本 Skill 描述了一套协议。Worker 的具体启动、暂停和恢复操作均通过对应 Runtime 的能力来实现。
 
+## 权限边界
 
-# Orchestrator (English)
+委派不会扩大授权。每个 Worker 最多获得主任务已具有的范围和修改权限。外部的、不可逆的或需要额外批准的操作仍须遵守审批流程。
 
-## 概述与执行目标 & Purpose
+## 流程
 
-Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
-Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
-Qualitätsvorteil bringt. Für kleine, eng gekoppelte Aufgaben arbeite direkt.
+### 1. 评估状况
 
-Der Skill beschreibt ein Protokoll. Das konkrete Starten, Unterbrechen und
-Wiederaufnehmen von Workern erfolgt über die Fähigkeiten der jeweiligen Runtime.
+1. 记录主任务的目标、成功标准和排除事项。
+2. 检查项目规则、锁、正在进行的变更以及可用预算。
+3. 在 Dispatch 之前，保存受影响区域当前的锁、状态和 Diff 状态作为 Baseline。只有这样，后续才能可靠地将既有的外部变更与 Worker 的变更区分开来。
+4. 只对足够独立的工作包进行并行化处理。
+5. 分离重叠的写入区域或采用顺序处理。
 
-## Autoritätsgrenze
+### 2. 编写任务契约
 
-Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Scope
-und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
-irreversible oder anderweitig freigabepflichtige Aktionen bleiben
-freigabepflichtig.
+在每次 Dispatch 之前，创建一个简短且可验证的契约：
 
-## Ablauf
-
-### 1. Lage prüfen
-
-1. Ziel, Erfolgskriterien und Ausschlüsse der Hauptaufgabe festhalten.
-2. Projektregeln, Sperren, laufende Änderungen und verfügbare Budgets prüfen.
-3. Vor dem Dispatch den aktuellen Lock-, Status- und Diff-Zustand der betroffenen
-   Bereiche als Baseline sichern. Nur so lassen sich vorhandene fremde Änderungen
-   später zuverlässig von Worker-Änderungen unterscheiden.
-4. Nur Arbeitspakete parallelisieren, die unabhängig genug sind.
-5. Überschneidende Schreibbereiche trennen oder sequentiell bearbeiten.
-
-### 2. Auftragsvertrag schreiben
-
-Vor jedem Dispatch einen kurzen, prüfbaren Vertrag erstellen:
-
-| Feld | Pflichtinhalt |
+| 字段 | 必填内容 |
 |---|---|
-| Kennung | stabile ID des Arbeitspakets |
-| Ziel | genau ein konkretes Ergebnis |
-| Eingaben | relevante Dateien, Daten oder Kontextquellen |
-| Positiver Scope | was gelesen oder geändert werden darf |
-| Negativer Scope | was ausdrücklich unberührt bleibt |
-| Erfolgskriterium | beobachtbare Bedingung für „fertig“ |
-| Evidenz | erwarteter Nachweis, etwa Test, Diff oder Fundstelle |
-| Rückgabeformat | kompakte, strukturierte Abschlussmeldung |
+| 标识符 | 工作包的稳定 ID |
+| 目标 | 恰好一个具体的结果 |
+| 输入 | 相关的文件、数据或上下文来源 |
+| 正向 Scope | 允许读取或修改的内容 |
+| 负向 Scope | 明确禁止触碰的内容 |
+| 成功标准 | 用于判定“完成”的可观察条件 |
+| 证据 | 预期的证明，例如测试、Diff 或出处 |
+| 返回格式 | 紧凑、结构化的完成消息 |
 
-Ein Worker bekommt nur den Kontext, den er für diesen Vertrag benötigt.
+Worker 仅接收其履行该契约所需的上下文。
 
-### 3. Ausführen und beobachten
+### 3. 执行与观察
 
-- Fan-out klein halten und nur bei unabhängigem Nutzen vergrößern.
-- Fortschritt über Runtime-Status oder einen projektüblichen Checkpoint verfolgen.
-- Bei Konflikten, Scope-Ausweitung oder fehlender Autorität stoppen und eskalieren.
-- Ein fehlgeschlagener Worker darf unabhängige Arbeitspakete nicht automatisch
-  blockieren.
+- 保持 Fan-out 规模较小，仅在带来独立收益时扩增。
+- 通过 Runtime 状态或标准的项目 Checkpoint 跟踪进度。
+- 发生冲突、Scope 扩大或缺乏权限时，立即停止并向上升级。
+- 失败的 Worker 不应自动阻塞其他独立的工作包。
 
-### 4. Ergebnisse abnehmen
+### 4. 验收结果
 
-Eine Fertigmeldung ist zunächst eine Behauptung. Der Orchestrator prüft selbst:
+完成通知首先只是一项声明。Orchestrator 需自行进行验证：
 
-1. Existiert das behauptete Artefakt oder die genannte Änderung?
-2. Gehört es zum vereinbarten Scope?
-3. Besteht der vereinbarte Test oder Nachweis aktuell?
-4. Wurden fremde Änderungen, Sperren und negative Scopes respektiert?
-5. Widersprechen sich Ergebnisse verschiedener Worker?
+1. 所声称的产物或变更是否存在？
+2. 它是否属于约定好的 Scope？
+3. 约定好的测试或证明当前是否通过？
+4. 是否遵守了外部变更、锁以及负向 Scope？
+5. 不同 Worker 的结果之间是否存在矛盾？
 
-Erst danach gilt ein Arbeitspaket als abgeschlossen.
+只有在上述条件均满足后，工作包才算正式完成。
 
-### 5. Integrieren und sichern
+### 5. 集成与保存
 
-- Konflikte bewusst auflösen; Ergebnisse nicht blind aneinanderhängen.
-- Erforderliche Gesamttests nach der Integration erneut ausführen.
-- Offene, fehlgeschlagene und zurückgestellte Pakete klar ausweisen.
-- Bei längeren Läufen Ziel, Status, Evidenz und nächsten Schritt in einem
-  wiederauffindbaren Checkpoint sichern.
+- 有意识地解决冲突；切勿盲目拼接结果。
+- 集成后重新执行必要的全局测试。
+- 明确标注未完成、失败和推迟的工作包。
+- 对于长时间运行的任务，将目标、状态、证据和下一步计划保存在可恢复的 Checkpoint 中。
 
-## Minimaler Worker-Prompt
+## 最小 Worker Prompt
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -115,27 +98,24 @@ Belege mit: <Test, Diff oder Fundstelle>
 Antworte als: <Rückgabeformat>
 ```
 
-## Stop-Bedingungen
+## 停止条件
 
-Stoppe nur das betroffene Arbeitspaket, wenn sein Scope, seine Autorität oder
-seine Evidenz unklar wird. Unabhängige, sichere Pakete dürfen weiterlaufen.
+如果某个工作包的 Scope、权限或证据变得不明确，仅停止受影响的工作包。独立且安全的工作包可继续运行。
 
-Stoppe die gesamte Delegation, wenn:
+出现以下情况时，停止整个委派：
 
-- die Teilaufgaben nicht mehr unabhängig sind,
-- ein gemeinsamer Schreibbereich nicht sicher getrennt werden kann,
-- Regeln, Sperren oder Autorität für den gesamten verbleibenden Scope unklar sind,
-- die erwarteten Kosten den erkennbaren Nutzen übersteigen,
-- die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
+- 子任务不再具有独立性，
+- 无法安全地分离共享的写入区域，
+- 整个剩余 Scope 的规则、锁或权限不明确，
+- 预期成本超出可识别的收益，
+- 无法生成或验证所需的证据。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.1.0 (2026-07-28)
-- Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.
-- Auftragsvertrag, Autoritätsgrenze, Evidenzabnahme und Checkpoints als
-  portable Kernmechanik herausgearbeitet.
-- Baseline für fremde Änderungen sowie paketlokale und globale Stopps
-  ausdrücklich getrennt.
+- 移除了用户、路径、模型和供应商绑定。
+- 将任务契约、权限边界、证据验收和 Checkpoint 提炼为可移植的核心机制。
+- 明确区分了外部变更 Baseline 以及包局部和全局停止机制。
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- 本地初始版本。

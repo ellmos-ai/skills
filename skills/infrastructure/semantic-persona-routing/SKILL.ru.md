@@ -5,7 +5,15 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: [Русский] Навык агента для semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
+description: >
+  Создает и использует нейтральный к провайдеру граф семантической маршрутизации на основе персонажей (personas),
+  координирующих ролей, экспертов и активных конечных точек навыков (skills). Используйте, когда LLM должна
+  маршрутизировать запрос через главную роль (boss-role) к эксперту и затем к навыку, извлечь переносимый
+  маршрутизатор персонажей из существующей системы агентов, объединить семантическую карту домена
+  с лексическим реестром навыков или выявить отсутствующие порты "роль-навык" вместо скрытого откатывания.
+  Срабатывает при запросах на семантическую маршрутизацию персонажей, зонтичный персонаж (persona umbrella),
+  маршрутизатор ролей, маршрутизацию "главный агент — эксперт — навык", экспорт ролей агента или при запросах
+  сделать персонажей многократно используемыми между провайдерами LLM.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,24 +22,28 @@ category: infrastructure
 tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: ru
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `semantic-persona-routing`.
+> **Русский** — Официальная русская версия `semantic-persona-routing`.
 
+# Семантическая маршрутизация персонажей (Semantic Persona Routing)
 
+Сначала маршрутизируйте по возможностям, а затем применяйте личность. Создайте переносимую карту, которая разделяет семантический выбор роли, детерминированный поиск конечных точек (endpoints) и загрузку, специфичную для провайдера.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Semantic Persona Routing (English)
-
-Route by capability first and apply personality second. Build a portable map that
-keeps semantic role choice, deterministic endpoint lookup and provider-specific
-loading separate.
-
-## Routing model
+## Модель маршрутизации
 
 ```text
 request
@@ -42,13 +54,11 @@ request
   -> provider adapter loads and executes
 ```
 
-A persona controls communication style, priorities and interaction patterns. It
-does not grant tools, permissions or subject-matter capability. A role coordinates;
-an expert narrows the domain; a skill is the executable endpoint.
+Персонаж (persona) управляет стилем общения, приоритетами и шаблонами взаимодействия. Он не предоставляет инструменты, разрешения или предметные компетенции. Роль координирует; эксперт сужает домен; навык (skill) является исполняемой конечной точкой.
 
-## Build the routing map
+## Построение карты маршрутизации
 
-Use explicit metadata as authority and lexical similarity only as a candidate:
+Используйте явные метаданные в качестве авторитета, а лексическое сходство — только в качестве кандидата:
 
 ```bash
 python scripts/build_routing_map.py \
@@ -58,63 +68,46 @@ python scripts/build_routing_map.py \
   --out routing-map.json
 ```
 
-The builder understands common `SKILL.md` fields such as `type`,
-`orchestrates.experts`, `parent_agents`, `skills`, descriptions and provenance.
-It produces a runtime map without requiring the source system to be installed.
-Read [routing-map-schema.md](references/routing-map-schema.md) before extending the
-format.
+Генератор понимает общие поля `SKILL.md`, такие как `type`, `orchestrates.experts`, `parent_agents`, `skills`, описания и происхождения (provenance). Он создает карту времени выполнения без необходимости установки исходной системы. Прочтите [routing-map-schema.md](references/routing-map-schema.md) перед расширением формата.
 
-Do not automatically promote `candidate_skills`. Confirm them against a live skill
-resolver or source metadata first.
+Не продвигайте `candidate_skills` автоматически. Сначала подтвердите их через активный резолвер навыков или исходные метаданные.
 
-## Route a request
+## Маршрутизация запроса
 
-### 1. Select the coordinator role semantically
+### 1. Семантический выбор координирующей роли
 
-Compare the request with role names, descriptions and use cases. Prefer the
-narrowest role that can coordinate the whole request. Keep multiple candidates
-visible when confidence is low; ask the user only when the choice materially
-changes the result.
+Сравните запрос с названиями ролей, описаниями и сценариями использования. Отдавайте предпочтение наиболее узкой роли, способной скоординировать весь запрос. Оставляйте видимыми несколько кандидатов при низкой уверенности; спрашивайте пользователя только тогда, когда выбор существенно меняет результат.
 
-### 2. Select an expert within the role
+### 2. Выбор эксперта в рамках роли
 
-Use only experts connected to the chosen coordinator unless the request clearly
-spans roles. A direct expert request may skip the coordinator for execution, but
-retain the coordinator link in the route explanation.
+Используйте только экспертов, связанных с выбранным координатором, если только запрос явно не охватывает несколько ролей. Прямой запрос к эксперту может пропустить координатора при исполнении, но сохраняйте связь с координатором в объяснении маршрута.
 
-### 3. Resolve executable endpoints
+### 3. Разрешение исполняемых конечных точек
 
-Resolve in this order:
+Разрешайте в следующем порядке:
 
-1. `endpoint_skills` from explicit source metadata or exact provenance;
-2. a current external skill resolver or local skill finder;
-3. verified `candidate_skills`;
-4. visible `GAP` when no endpoint exists.
+1. `endpoint_skills` из явных метаданных источника или точного происхождения (provenance);
+2. текущий внешний резолвер навыков или локальный поисковик навыков;
+3. проверенные `candidate_skills`;
+4. видимый `GAP`, если конечная точка отсутствует.
 
-Never route to an expert name as though it were an installed skill. A missing
-endpoint is a porting gap, not permission to fabricate one.
+Никогда не маршрутизируйте к имени эксперта, как если бы это был установленный навык. Отсутствующая конечная точка — это пробел переноса (porting gap), а не разрешение на сфабрикованную конечную точку.
 
-Read [endpoint-resolution.md](references/endpoint-resolution.md) when connecting a
-live registry, lexical finder or provider-specific skill loader.
+Прочтите [endpoint-resolution.md](references/endpoint-resolution.md) при подключении активного реестра, лексического поисковика или загрузчика навыков, специфичного для провайдера.
 
-### 4. Apply the persona overlay
+### 4. Применение наложения персонажа (persona overlay)
 
-Choose a persona attached to the selected role or expert. If several personas fit,
-prefer one whose declared limits and style match the task. Apply no persona when
-none is explicitly connected.
+Выберите персонаж, прикрепленный к выбранной роли или эксперту. Если подходят несколько персонажей, отдайте предпочтение тому, чьи заявленные ограничения и стиль соответствуют задаче. Не применяйте персонажа, если ни один из них не подключен явно.
 
-Persona instructions cannot override safety rules, locks, user decisions,
-professional boundaries or tool permissions.
+Инструкции персонажа не могут переопределять правила безопасности, блокировки, решения пользователя, профессиональные границы или разрешения на инструменты.
 
-### 5. Load and execute
+### 5. Загрузка и выполнение
 
-Use the provider's native skill/agent loading mechanism. Load the selected live
-skill instructions before execution. Keep the router lean; execution belongs to
-the worker or current agent with the resolved skills loaded.
+Используйте нативный механизм загрузки навыков/агентов провайдера. Загрузите выбранные инструкции активного навыка перед выполнением. Держите маршрутизатор легковесным; выполнение принадлежит воркеру или текущему агенту с загруженными разрешенными навыками.
 
-## Route receipt
+## Квитанция маршрута (Route receipt)
 
-Return or record:
+Верните или запишите:
 
 ```text
 ROLE: <coordinator or direct>
@@ -127,22 +120,16 @@ WHY: <one short reason>
 GAPS: <missing endpoints or stale-map warnings>
 ```
 
-Rebuild the map when source roles or skill inventory change. A live resolver may
-supersede a stale map for endpoint availability, but it must not silently rewrite
-the semantic role taxonomy.
+Перестраивайте карту при изменении исходных ролей или инвентаря навыков. Активный резолвер может заменять устаревшую карту по доступности конечных точек, но он не должен скрыто переписывать семантическую таксономию ролей.
 
-## Пример и применение & Usage
+## Пример
 
-Request: "Organize my receipts and prepare the tax-year overview."
+Запрос: "Организуй мои чеки и подготовь обзор за налоговый год."
 
-The router selects an office coordinator, then the tax expert, resolves the
-installed tax skill, and finally applies an explicitly linked meticulous tax
-persona. If the tax expert exists but no portable tax skill is installed, report
-`GAP` and continue only through an explicitly configured fallback.
+Маршрутизатор выбирает офисного координатора, затем налогового эксперта, разрешает установленный налоговый навык и, наконец, применяет явно связанного скрупулезного налогового персонажа. Если налоговый эксперт существует, но портативный налоговый навык не установлен, сообщите о `GAP` и продолжайте только через явно настроенный запасной вариант (fallback).
 
-## Журнал изменений
+## История изменений (Changelog)
 
 ### 1.0.0 (2026-07-28)
 
-- Extracted the provider-neutral role/expert/skill chain from a proven domain
-  router pattern and added portable map generation with visible endpoint gaps.
+- Извлечена нейтральная к провайдеру цепочка роль/эксперт/навык из проверенного шаблона доменного маршрутизатора и добавлена генерация переносимых карт с видимыми пробелами конечных точек.

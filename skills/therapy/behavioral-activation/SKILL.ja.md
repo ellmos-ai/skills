@@ -1,265 +1,277 @@
 ---
+name: behavioral-activation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: うつ病に対する行動活性化：悪循環の打破、活動モニタリング、週間計画、および価値に基づく活動。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [behavioral-activation, depression, activity, weekly-plan, values]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `behavioral-activation`.
+> **日本語** — `behavioral-activation` の公式日本語版。
 
 
+# 行動活性化（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 活動計画、気分・活動日誌、および価値に基づく活動の選択：非活性化と気分落ち込みの悪循環への対抗
 
-
-# Behavioral Activation (English)
-
-> Activity planning, mood-activity diary, and values-based activity selection: Counteracting the vicious cycle of inactivity and low mood
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Behavioral Activation (BA) is an evidence-based intervention from behavioral therapy for treating depression. It is based on the insight that depression leads to withdrawal and inactivity, which further worsens mood (vicious cycle). Through targeted building of positive activities, this cycle is broken.
-
-Evidence: Behavioral activation is effective as a standalone therapy and is equivalent to cognitive therapy (Dimidjian et al. 2006, Richards et al. 2016 COBRA study). Recommended as first-line intervention for mild to moderate depression (NICE Guidelines).
-
-**Note:** This is support, not a substitute for professional therapy.
-For severe depression or suicidal thoughts, ALWAYS recommend professional help.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. The Behavioral Activation Model of Depression
+## 背景
 
-### The Vicious Cycle
+行動活性化（Behavioral Activation, BA）は、うつ病治療における行動療法の優れたエビデンスに基づく介入法です。うつ病が引きこもりや非活性化を引き起こし、それがさらに気分を悪化させるという「悪循環」に着目しています。ポジティブな活動を意図的に構築することで、この悪循環を断ち切ります。
 
-```
-Triggering situation (loss, stress, change)
-        |
-        v
-Low mood, lack of energy
-        |
-        v
-Withdrawal, avoidance, inactivity
-        |
-        v
-Fewer positive experiences, isolation
-        |
-        v
-Even deeper low mood
-        |
-        v
-Even more withdrawal ... (downward spiral)
-```
+エビデンス：行動活性化は単独療法として非常に有効であり、認知療法と同等の効果を示します（Dimidjian et al. 2006, Richards et al. 2016 COBRA研究）。軽度から中等度のうつ病に対する第一選択の介入として推奨されています（NICEガイドライン）。
 
-### The Counter-Principle
-
-```
-Targeted activity (even with low motivation)
-        |
-        v
-Positive experience / sense of accomplishment / connection
-        |
-        v
-Slight mood improvement
-        |
-        v
-Somewhat more energy and motivation
-        |
-        v
-Further activity ... (upward spiral)
-```
-
-**Core principle:** Don't wait for motivation to come — action creates motivation.
-"Act first, feel second." (Not: "Feel first, then act.")
+**注：** 本スキルは支援を目的とするものであり、専門的な心理療法の代わりとなるものではありません。
+重度のうつ病や自傷・自殺念慮がある場合は、必ず専門機関を受診するよう促してください。
+**絶対に実施してはならない技法：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）
 
 ---
 
-## 2. Mood-Activity Diary
+## 1. うつ病の行動活性化モデル
 
-### Goal
-Make connections between activities and mood visible. Recognize which activities improve mood and which worsen it.
-
-### Diary Format
+### 悪循環モデル
 
 ```
-MOOD-ACTIVITY DIARY
-
-Date: [...]
-
-| Time  | Activity | Mood (0-10) | Enjoyment (0-10) | Importance (0-10) |
-|-------|----------|-------------|-------------------|---------------------|
-| 07:00 | Got up, had breakfast | 3 | 2 | 5 |
-| 08:00 | Work: emails | 4 | 1 | 6 |
-| 10:00 | Walk | 6 | 5 | 4 |
-| 12:00 | Lunch with colleague | 7 | 6 | 7 |
-| 14:00 | Work: project | 5 | 3 | 7 |
-| 18:00 | Watching TV (alone) | 3 | 2 | 1 |
-| 20:00 | Phone call with friend | 6 | 5 | 8 |
-
-Daily mood average: [...]
-Best activity today: [...]
-Insight: [...]
+きっかけとなる出来事（喪失、ストレス、変化）
+        |
+        v
+気分の落ち込み、エネルギー不足
+        |
+        v
+引きこもり、回避、活動低下
+        |
+        v
+肯定的な体験の減少、社会的孤立
+        |
+        v
+さらに深刻な気分の落ち込み
+        |
+        v
+さらなる引きこもり... （下降スパイラル）
 ```
 
-### Weekly Review
+### 反対の原理（介入モデル）
 
-**Guiding questions:**
-- Which activities regularly lift my mood?
-- Which activities lower my mood?
-- Are there times that are particularly difficult?
-- How much time do I spend on pleasant vs. unpleasant activities?
-- Which activities have I been avoiding?
+```
+意図的な活動（やる気が低くても実施）
+        |
+        v
+肯定的な体験／達成感／つながり感
+        |
+        v
+気分のわずかな改善
+        |
+        v
+エネルギーとモチベーションの回帰
+        |
+        v
+さらなる活動... （上昇スパイラル）
+```
+
+**核心となる原則：** やる気が湧くのを待たない — 行動がやる気を生み出す。
+「まず行動し、後から感情がついてくる」（×「気分が乗ったら行動する」）
 
 ---
 
-## 3. Activity Planning
+## 2. 気分・活動日誌（Mood-Activity Diary）
 
-### Step 1: Create Activity List
+### 目的
+活動と気分の関係を可視化する。どの活動が気分を改善させ、どの活動が気分を悪化させるかを把握する。
 
-Collect three categories of activities:
-
-**A) Pleasant Activities (joy, enjoyment)**
-- Nature: Walk, park, forest
-- Social: Meet friends, phone calls, cook together
-- Creative: Music, painting, writing, crafting
-- Physical: Sports, yoga, dancing, swimming
-- Enjoyment: Cook favorite meal, read a book, listen to music
-- Relaxation: Take a bath, meditation, breathing exercise
-
-**B) Necessary Activities (structure, self-care)**
-- Household: Tidying up, cooking, shopping
-- Personal care: Showering, getting dressed, brushing teeth
-- Administration: Bills, appointments, paperwork
-- Health: Doctor's appointments, medication, nutrition
-
-**C) Values-Based Activities (meaning, significance)**
-- See section 4 below
-
-### Step 2: Create Weekly Plan
+### 日誌のフォーマット
 
 ```
-WEEKLY PLAN
+気分・活動日誌
 
-| Day | Morning | Midday | Afternoon | Evening |
-|-----|---------|--------|-----------|---------|
-| Mon | [...]   | [...]  | [...]     | [...]   |
-| Tue | [...]   | [...]  | [...]     | [...]   |
-| Wed | [...]   | [...]  | [...]     | [...]   |
-| Thu | [...]   | [...]  | [...]     | [...]   |
-| Fri | [...]   | [...]  | [...]     | [...]   |
-| Sat | [...]   | [...]  | [...]     | [...]   |
-| Sun | [...]   | [...]  | [...]     | [...]   |
+日付：[...]
+
+| 時間  | 活動内容 | 気分 (0-10) | 楽しさ (0-10) | 重要さ (0-10) |
+|-------|----------|-------------|---------------|---------------|
+| 07:00 | 起床・朝食 | 3 | 2 | 5 |
+| 08:00 | 仕事：メール処理 | 4 | 1 | 6 |
+| 10:00 | 散歩 | 6 | 5 | 4 |
+| 12:00 | 同僚と昼食 | 7 | 6 | 7 |
+| 14:00 | 仕事：プロジェクト | 5 | 3 | 7 |
+| 18:00 | テレビ鑑賞（一人） | 3 | 2 | 1 |
+| 20:00 | 友人と電話 | 6 | 5 | 8 |
+
+1日の平均気分：[...]
+本日最も良かった活動：[...]
+気づき・振り返り：[...]
 ```
 
-### Planning Rules
-1. **Start small:** Don't plan the whole day, but 1-2 activities per day
-2. **Mix:** Pleasant + necessary + values-based
-3. **Specific:** "Tuesday 3:00 PM walk in the park" instead of "Move more"
-4. **Realistic:** Achievable even with low energy
-5. **Flexible:** Plan is guidance, not obligation
-6. **Graduated:** For very low energy: mini-steps (5 minutes is enough)
+### 週間振り返り
 
-### Dealing with Obstacles
-
-| Obstacle | Strategy |
-|----------|----------|
-| "I have no energy" | Reduce activity to 5 minutes |
-| "I don't feel like it" | Reminder: motivation comes through action |
-| "It won't help anyway" | Experiment: try it and measure mood afterward |
-| "I can't do it alone" | Involve someone (appointment = commitment) |
-| "I don't have time" | Build in small activities (take stairs, 5 min break outside) |
+**探求の問い：**
+- どの活動が定期的に気分を高めてくれるか？
+- どの活動が気分を下げてしまうか？
+- 特に困難を感じる時間帯はあるか？
+- 楽しい活動と不快な活動にそれぞれどれだけの時間を費やしているか？
+- 避けてしまっている活動は何か？
 
 ---
 
-## 4. Values-Based Activity Selection
+## 3. 活動計画
 
-### Principle
-Activities that align with personal values create sustainable well-being — as opposed to mere pleasure, which fades quickly.
+### ステップ 1：活動リストの作成
 
-### Life Domains and Values
+3つのカテゴリーの活動を収集します：
+
+**A) 楽しい活動（喜び、享受）**
+- 自然：散歩、公園、森林浴
+- 社交：友人と会う、電話、一緒に料理
+- クリエイティブ：音楽、絵画、執筆、クラフト
+- 身体活動：運動、ヨガ、ダンス、水泳
+- 味わい：好物を作る、読書、音楽鑑賞
+- リラクゼーション：入浴、マインドフルネス、呼吸法
+
+**B) 必要な活動（生活構造、セルフケア）**
+- 家事：片付け、料理、買い物
+- 身の回りのこと：シャワー、着替え、歯磨き
+- 事務作業：支払、予約、書類整理
+- 健康管理：通院、服薬、栄養補給
+
+**C) 価値に基づく活動（意味、重要性）**
+- 以下の第4節を参照
+
+### ステップ 2：週間計画の作成
 
 ```
-VALUES COMPASS
+週間計画表
 
-Relationships:     What kind of partner/friend/family member do I want to be?
-Work/Education:    What is important to me about my work?
-Leisure:           How do I want to spend my free time?
-Health:            How do I want to treat my body?
-Community:         What contribution do I want to make?
-Personal:          What kind of person do I want to be?
+| 曜日 | 午前 | 昼 | 午後 | 夜 |
+|------|------|----|------|----|
+| 月   | [...]| [...]| [...]| [...]|
+| 火   | [...]| [...]| [...]| [...]|
+| 水   | [...]| [...]| [...]| [...]|
+| 木   | [...]| [...]| [...]| [...]|
+| 金   | [...]| [...]| [...]| [...]|
+| 土   | [...]| [...]| [...]| [...]|
+| 日   | [...]| [...]| [...]| [...]|
 ```
 
-### Values-Activity Mapping
+### 計画のルール
+1. **スモールステップで始める：** 1日中を詰め込まず、1日1〜2個の活動から
+2. **組み合わせる：** 楽しい活動 ＋ 必要な活動 ＋ 価値に基づく活動
+3. **具体的に：** 「もっと動く」ではなく「火曜日 15:00 公園散歩」
+4. **現実的に：** エネルギーが低い状態でも達成可能なレベル
+5. **柔軟に：** 計画は目安であり、義務ではない
+6. **段階的に：** 極度にエネルギーが低い時：スモールステップ（5分で十分）
 
-**Example:**
+### 障害への対処
 
-| Value | Activity | Frequency |
-|-------|----------|-----------|
-| Connection | Call a friend | 2x per week |
-| Health | 20 min walk | Daily |
-| Creativity | Play guitar | 1x per week |
-| Helpfulness | Help neighbor with shopping | 1x per week |
-| Learning | 15 min reading non-fiction | 3x per week |
-
-### Values vs. Goals
-- **Value:** A direction you want to move toward (e.g., "being a loving partner")
-- **Goal:** An achievable endpoint (e.g., "plan anniversary celebration")
-- Values can never be "checked off" — they provide ongoing orientation
+| 障害 | 対策・戦略 |
+|------|------------|
+| 「エネルギーがない」 | 活動を5分に縮小・短縮する |
+| 「やる気が起きない」 | 思い出す：やる気は行動から生じる |
+| 「どうせ意味がない」 | 実験精神：試してみて事後に気分を測定する |
+| 「一人ではできない」 | 他者を巻き込む（約束＝コミットメント） |
+| 「時間がない」 | 小さな活動を組み込む（階段を使う、屋外で5分休憩） |
 
 ---
 
-## 5. Measuring Progress
+## 4. 価値に基づく活動の選択
 
-### Weekly Review
+### 原理
+個人の価値観に沿った活動は、急速に薄れる単なる快楽とは異なり、持続可能なウェルビーイングをもたらします。
+
+### 人生の領域と価値
 
 ```
-WEEKLY REVIEW
+価値のコンパス
 
-Week: [Date]
-Planned activities: [Number]
-Completed activities: [Number]
-Average mood: [0-10]
-
-What went well: [...]
-What was difficult: [...]
-Insight of the week: [...]
-Plan for next week: [...]
+人間関係：          どのようなパートナー／友人／家族でありたいか？
+仕事・教育：        仕事において自分にとって何が重要か？
+余暇・レジャー：    余暇をどのように過ごしたいか？
+健康：              自分の身体をどのように扱いたいか？
+地域社会：          どのような貢献をしたいか？
+個人：              どのような人間でありたいか？
 ```
 
-### Long-Term Tracking
-- Observe mood trends over weeks
-- Recognize the connection between activity level and mood
-- Make successes visible (even small ones)
+### 価値と活動のマッピング
+
+**例：**
+
+| 価値 | 具体的な活動 | 頻度 |
+|------|--------------|------|
+| つながり | 友人に電話する | 週2回 |
+| 健康 | 20分間の散歩 | 毎日 |
+| 創造性 | ギターを弾く | 週1回 |
+| 助け合い | 著者の買い物を手伝う | 週1回 |
+| 学び | 15分間の専門書読書 | 週3回 |
+
+### 価値 vs 目標
+- **価値：** 向かっていきたい方向性（例：「愛あるパートナーであること」）
+- **目標：** 達成可能な終着点（例：「記念日のお祝いを計画する」）
+- 価値は完了して「チェックを付ける」ことはできません — 継続的な指針となります
 
 ---
 
-## Ethics and Boundaries
+## 5. 進捗の測定
 
-**An AI assistant may:**
-- Guide through the diary and activity planning
-- Suggest activities (never prescribe)
-- Document mood data and reflect back patterns
-- Accompany values reflection
-- Acknowledge small progress
+### 週間振り返り
 
-**An AI assistant must NOT:**
-- Be the sole support for severe depression
-- Make medication-related recommendations
-- Assess suicidality
-- Make diagnoses
-- Guarantee that behavioral activation is sufficient
+```
+週間振り返りシート
 
-**Important:** For severe depression (persistent lack of drive, suicidal thoughts, inability to manage daily life), professional help is essential. Behavioral activation is a complement, not a substitute.
+週：[日付]
+計画した活動数：[数]
+完了した活動数：[数]
+平均気分：[0-10]
 
-**In case of acute crisis, ALWAYS refer to:**
+うまくいったこと：[...]
+難しかったこと：[...]
+今週の気づき：[...]
+来週の計画：[...]
+```
+
+### 長期的なトラッキング
+- 数週間にわたる気分の傾向を観察する
+- 活動レベルと気分の関係性を認識する
+- 成果（小さな成功も含む）を可視化する
+
+---
+
+## 倫理と限界
+
+**AIアシスタントができること：**
+- 日誌や活動計画の作成支援
+- 活動の提案（指示や強制はしない）
+- 気分データの記録とパターンのフィードバック
+- 価値の振り返りの伴走
+- 小さな進歩の承認
+
+**AIアシスタントが行ってはならないこと：**
+- 重とうつ病における唯一の支援者となること
+- 薬物療法に関する推奨
+- 自殺リスクの評価
+- 診断を下すこと
+- 行動活性化だけで十分であると保証すること
+
+**重要：** 重度のうつ病（持続的な意欲減退、自殺念慮、日常生活の維持困難）の場合、専門的な治療が不可欠です。行動活性化は補完的な手段であり、代替となるものではありません。
+
+**緊急の危機状況では、必ず以下を案内してください：**
+- こころの健康相談統一ダイヤル (日本): 0570-064-556
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556 (ナビダイヤル)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 110 / 119 (日本), 911 (US), 112 (EU)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — 専門的医療行為ではありません*

@@ -1,21 +1,34 @@
 ---
+name: structured-thinking
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-05-19
+updated: 2026-05-19
+description: Мета-skill: Структурированное мышление как 3-фазный рабочий процесс. Объединяет анализ (think), генерацию идей (brainstorm) и принятие решений (decide) в один непрерывный процесс.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: utilities
+tags: [denken, analyse, kreativitaet, entscheidung, workflow, meta-skill]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `structured-thinking`.
+> **Русский** — Официальная русская версия `structured-thinking`.
 
 
+# Structured Thinking — Анализировать, Генерировать идеи, Принимать решения
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Structured Thinking — Analyze, Ideate, Decide (English)
-
-> Meta-workflow for structured thinking: from problem analysis through creative solutions to a well-founded decision
+> Мета-рабочий процесс для структурированного мышления: от анализа проблемы через креативные решения к обоснованному решению
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
 ```
 Problem/Question
@@ -38,102 +51,102 @@ Result + Rationale
 
 ---
 
-## Phase 1: Analyze
+## Фаза 1: Анализировать (Analyze)
 
-Goal: Understand the problem, identify causes, recognize structure.
+Цель: Понять проблему, выявить причины, распознать структуру.
 
-### Approaches
+### Подходы
 
-| Method | When | Procedure |
-|--------|------|-----------|
-| **Divide & Conquer** | Complex problem | Problem → sub-problems → solve individually → combine |
-| **Root Cause (5x Why)** | Symptom visible, cause unclear | Symptom → Why? → Why? → ... → cause → solution |
-| **Constraint Relaxation** | Problem appears unsolvable | Relax constraints → solve → re-tighten constraints |
-| **Analogy Search** | Novel problem | Find a similar known problem → adapt its solution |
+| Метод | Когда | Порядок действий |
+|-------|-------|------------------|
+| **Divide & Conquer** | Сложная проблема | Проблема → подпроблемы → решить индивидуально → объединить |
+| **Root Cause (5x Why)** | Симптом очевиден, причина неясна | Симптом → Почему? → Почему? → ... → причина → решение |
+| **Constraint Relaxation** | Проблема кажется неразрешимой | Ослабить ограничения → решить → снова применить ограничения |
+| **Analogy Search** | Новая проблема | Найти аналогичную известную проблему → адаптировать ее решение |
 
-### Analysis Frameworks
+### Фреймворки анализа
 
-| Framework | Application |
-|-----------|-------------|
-| **SWOT** | Strengths / Weaknesses / Opportunities / Threats |
-| **Pareto** | 80/20 — What provides the biggest leverage? |
-| **Fishbone** | Systematic cause analysis (Ishikawa) |
+| Фреймворк | Применение |
+|-----------|------------|
+| **SWOT** | Сильные стороны / Слабые стороны / Возможности / Угрозы |
+| **Pareto** | 80/20 — Что дает наибольший эффект? |
+| **Fishbone** | Систематический анализ причин (Диаграмма Исикавы) |
 
-### Heuristics under Uncertainty
+### Эвристики в условиях неопределенности
 
-1. What is the worst-case scenario?
-2. Is it reversible?
-3. What is the cost of not acting?
+1. Каков худший сценарий?
+2. Обратимо ли это?
+3. Какова цена бездействия?
 
-### Heuristics under Complexity
+### Эвристики в условиях сложности
 
-1. What is the simplest first step?
-2. What would an expert do?
-3. What would the 80% solution be?
-
----
-
-## Phase 2: Ideate
-
-Goal: Generate as many solution approaches as possible. Quantity over quality. NO criticism during this phase.
-
-### Methods
-
-**SCAMPER** — Systematically improve existing solutions:
-- **S**ubstitute: What to replace? | **C**ombine: What to combine? | **A**dapt: What to adapt?
-- **M**odify: What to change? | **P**ut to other use: What else could it serve? | **E**liminate: What to drop?
-- **R**everse: What to invert?
-
-**Six Thinking Hats** (de Bono) — 6 perspectives in sequence:
-1. Blue: Process control ("What is the question?")
-2. White: Facts ("What do we know?")
-3. Red: Emotion ("What feels right?")
-4. Black: Criticism ("What could go wrong?")
-5. Yellow: Optimism ("What are the opportunities?")
-6. Green: Creativity ("What new ideas are there?")
-
-**Reverse Brainstorming** — Invert the problem:
-1. "How do we make it WORSE?"
-2. Collect bad ideas
-3. Invert = good ideas
-
-**Rapid Ideation** — 50+ ideas in 20 minutes:
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
-
-### After Ideation
-
-1. Clustering: Group similar ideas
-2. Feasibility/Impact matrix: Rate feasibility vs. impact
-3. Select top 5-10 for Phase 3
+1. Каков самый простой первый шаг?
+2. Что сделал бы эксперт?
+3. Каким было бы решение на 80%?
 
 ---
 
-## Phase 3: Decide
+## Фаза 2: Генерировать идеи (Ideate)
 
-Goal: Select the best option with a transparent rationale.
+Цель: Сгенерировать как можно больше подходов к решению. Количество важнее качества. НИКАКОЙ критики на этой фазе.
 
-### Framework Selection
+### Методы
 
-| Situation | Framework |
-|-----------|-----------|
-| 2 options, quick decision | **Pro/Con Matrix** |
-| 3+ options, multiple criteria | **Weighted Scoring** |
-| Sequential if-then decision | **Decision Tree** |
-| High uncertainty | **Scenario Analysis** |
-| Prioritizing tasks | **Eisenhower Matrix** |
+**SCAMPER** —— Систематически улучшать существующие решения:
+- **S**ubstitute (Заменить): Что заменить? | **C**ombine (Комбинировать): Что объединить? | **A**dapt (Адаптировать): Что адаптировать?
+- **M**odify (Модифицировать): Что изменить? | **P**ut to other use (Применить иначе): Для чего еще это может служить? | **E**liminate (Устранить): От чего отказаться?
+- **R**everse (Инвертировать): Что обратить?
 
-### Weighted Scoring (core method)
+**Шесть шляп мышления** (de Bono) —— 6 перспектив последовательно:
+1. Синяя: Управление процессом ("В чем заключается вопрос?")
+2. Белая: Факты ("Что нам известно?")
+3. Красная: Эмоции ("Что подсказывает интуиция?")
+4. Черная: Критика ("Что может пойти не так?")
+5. Желтая: Оптимизм ("Каковы возможности?")
+6. Зеленая: Креативность ("Какие есть новые идеи?")
 
-1. Collect criteria (3-7, specific and measurable)
-2. Set weights (sum = 100%, most important >= 25%)
-3. Rate options (1-10 scale)
-4. Compute scores (rating x weight)
-5. Compare and recommend
+**Обратный мозговой штурм** —— Инвертировать проблему:
+1. "Как нам сделать проблему ХУЖЕ?"
+2. Собрать плохие идеи
+3. Инвертировать = хорошие идеи
 
-### Scenario Analysis
+**Быстрая генерация идей** —— 50+ идей за 20 минут:
+- Раунд 1 (5 мин): Открытая генерация идей
+- Раунд 2 (5 мин): Вариации
+- Раунд 3 (5 мин): Комбинации
+- Раунд 4 (5 мин): Экстремальные идеи
+
+### После генерации идей
+
+1. Кластеризация: Сгруппировать похожие идеи
+2. Матрица Выполнимость/Влияние: Оценить выполнимость в сравнении с влиянием
+3. Выбрать 5-10 лучших для Фазы 3
+
+---
+
+## Фаза 3: Принимать решения (Decide)
+
+Цель: Выбрать наилучший вариант с прозрачным обоснованием.
+
+### Выбор фреймворка
+
+| Ситуация | Фреймворк |
+|----------|-----------|
+| 2 варианта, быстрое решение | **Матрица За/Против (Pro/Con Matrix)** |
+| 3+ вариантов, несколько критериев | **Взвешенная оценка (Weighted Scoring)** |
+| Последовательное решение "если-то" | **Дерево решений (Decision Tree)** |
+| Высокая неопределенность | **Анализ сценариев (Scenario Analysis)** |
+| Приоритезация задач | **Матрица Эйзенхауэра (Eisenhower Matrix)** |
+
+### Взвешенная оценка (основной метод)
+
+1. Собрать критерии (3-7, конкретные и измеримые)
+2. Задать веса (сумма = 100%, самые важные >= 25%)
+3. Оценить варианты (по шкале 1-10)
+4. Рассчитать баллы (оценка x вес)
+5. Сравнить и дать рекомендацию
+
+### Анализ сценариев
 
 ```
 Best Case (X%):      Outcome → expected value
@@ -142,7 +155,7 @@ Worst Case (X%):     Outcome → expected value
 Total expected value: [sum]
 ```
 
-### Eisenhower Matrix
+### Матрица Эйзенхауэра
 
 ```
               URGENT          NOT URGENT
@@ -150,35 +163,35 @@ IMPORTANT     1. DO           2. PLAN
 NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ```
 
-### Quality Checklist before the Final Recommendation
+### Чек-лист качества перед итоговой рекомендацией
 
-- [ ] All relevant criteria identified?
-- [ ] User values taken into account?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and assessed?
-- [ ] Bias check performed?
-- [ ] Reversibility checked?
-
----
-
-## Context-Sensitive Selection
-
-| Situation | Recommended Phase(s) |
-|-----------|----------------------|
-| "I have a problem" | Phase 1 (analysis) → possibly Phase 2+3 |
-| "I need ideas" | Phase 2 (ideation) |
-| "I have to decide" | Phase 3 (decision) |
-| "I am stuck" | Phase 2 (reverse brainstorming) |
-| "What should I prioritize?" | Phase 3 (Eisenhower) |
-| "Understand a complex problem" | Phase 1 (Divide & Conquer + SWOT) |
+- [ ] Все ли релевантные критерии выявлены?
+- [ ] Учтены ли ценности пользователя?
+- [ ] Рассмотрены ли долгосрочные последствия?
+- [ ] Выявлены и оценены ли риски?
+- [ ] Проведена ли проверка на предвзятость?
+- [ ] Проверена ли обратимость?
 
 ---
 
-## Журнал изменений
+## Выбор в зависимости от контекста
+
+| Ситуация | Рекомендуемая фаза(ы) |
+|----------|----------------------|
+| "У меня есть проблема" | Фаза 1 (анализ) → возможно Фазы 2+3 |
+| "Мне нужны идеи" | Фаза 2 (генерация идей) |
+| "Я должен принять решение" | Фаза 3 (принятие решения) |
+| "Я застрял" | Фаза 2 (обратный мозговой штурм) |
+| "Что мне следует приоритезировать?" | Фаза 3 (Эйзенхауэр) |
+| "Понять сложную проблему" | Фаза 1 (Divide & Conquer + SWOT) |
+
+---
+
+## История изменений
 
 ### 1.0.0 (2026-05-19)
-- Created as a meta-skill from think, brainstorm, and decide
+- Создано как мета-skill на основе think, brainstorm и decide
 
 ---
 
-*Meta-skill | Detailed reference: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | Подробная ссылка: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*

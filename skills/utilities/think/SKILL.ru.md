@@ -1,41 +1,54 @@
 ---
+name: think
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Решение проблем и анализ: Процессы структурированного мышления для сложных проблем. Разделяй и властвуй (Divide & Conquer), анализ корневых причин (Root Cause Analysis), SWOT, Парето и эвристики принятия решений.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [thinking, problem-solving, analysis, swot, root-cause, heuristics]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/think.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `think`.
+> **Русский** — Официальная русская версия `think`.
 
 
+# Think — Решение проблем и анализ
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Think — Problem Solving & Analysis (English)
-
-> Structured thinking processes for complex problems
+> Процессы структурированного мышления для сложных проблем
 
 ---
 
-## Problem-Solving Approaches
+## Подходы к решению проблем
 
-### 1. Divide & Conquer
+### 1. Divide & Conquer (Разделяй и властвуй)
 
 ```
 Problem -> Sub-problems -> Solve individually -> Combine
 ```
 
-### 2. Root Cause Analysis
+### 2. Root Cause Analysis (Анализ корневых причин)
 
 ```
 Symptom -> Why? -> Why? -> Why? -> Root cause -> Solution
 ```
 
-### 3. Constraint Relaxation
+### 3. Constraint Relaxation (Ослабление ограничений)
 
 ```
 Unsolvable problem -> Relax constraints -> Solve -> Re-apply constraints
 ```
 
-### 4. Analogy Search
+### 4. Analogy Search (Поиск аналогий)
 
 ```
 New problem -> Similar known problem -> Adapt solution
@@ -43,42 +56,42 @@ New problem -> Similar known problem -> Adapt solution
 
 ---
 
-## Analysis Methods
+## Методы анализа
 
-| Method | Application |
-|--------|-------------|
-| **SWOT** | Strengths/Weaknesses/Opportunities/Threats |
-| **Pro/Con** | Decision making |
-| **Pareto** | 80/20 prioritization |
-| **Fishbone** | Root cause analysis |
-
----
-
-## Decision Heuristics
-
-### Under Uncertainty
-
-```
-1. What is the worst-case scenario?
-2. Is it reversible?
-3. What is the cost of inaction?
-```
-
-### Under Complexity
-
-```
-1. What is the simplest first step?
-2. What would an expert do?
-3. What would the 80% solution be?
-```
+| Метод | Применение |
+|-------|------------|
+| **SWOT** | Сильные стороны / Слабые стороны / Возможности / Угрозы |
+| **За/Против (Pro/Con)** | Принятие решений |
+| **Pareto** | Приоритезация 80/20 |
+| **Fishbone** | Анализ корневых причин (Диаграмма Исикавы) |
 
 ---
 
-## Журнал изменений
+## Эвристики принятия решений
+
+### В условиях неопределенности
+
+```
+1. Каков худший сценарий?
+2. Обратимо ли это?
+3. Какова цена бездействия?
+```
+
+### В условиях сложности
+
+```
+1. Каков самый простой первый шаг?
+2. Что сделал бы эксперт?
+3. Каким было бы решение на 80%?
+```
+
+---
+
+## История изменений
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Перенесено из BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Перенесено из BACH v3.8.0 | Автономная версия*

@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: Пакетные операции с файлами (удаление, перемещение, копирование, список) с помощью шаблонов glob. CLI-инструмент для эффективных операций с файловой системой. Без зависимостей.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,77 +16,73 @@ tags: [batch, file-ops, glob, cli, filesystem, cleanup]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `batch-file-ops`.
+> **Русский** — Официальная русская версия `batch-file-ops`.
 
 
+# batch_file_ops - Пакетные операции с файлами (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# batch_file_ops - Batch File Operations (English)
-
-CLI tool for efficient batch operations on files using glob patterns.
-Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
+CLI-инструмент для эффективных пакетных операций над файлами с использованием шаблонов glob.
+Поддерживает: delete, move, copy, list. Без зависимостей (только стандартная библиотека Python).
 
 ---
 
-## Actions
+## Действия
 
-| Action | Description |
-|--------|-------------|
-| `delete` | Delete files matching a pattern |
-| `move` | Move files matching a pattern |
-| `copy` | Copy files matching a pattern |
-| `list` | List files matching a pattern |
+| Действие | Описание |
+|----------|----------|
+| `delete` | Удалить файлы, соответствующие шаблону |
+| `move` | Переместить файлы, соответствующие шаблону |
+| `copy` | Копировать файлы, соответствующие шаблону |
+| `list` | Вывести список файлов, соответствующих шаблону |
 
-## CLI Usage
+## Использование CLI
 
 ```bash
 python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-run] [--recursive]
 ```
 
-### Arguments
+### Аргументы
 
-| Argument | Description |
-|----------|-------------|
-| `action` | `delete`, `move`, `copy`, or `list` |
-| `source` | Source directory |
-| `target` | Target directory (only for `move` and `copy`) |
-| `--pattern`, `-p` | Glob pattern (e.g., `*.py`, `TOOLS_*.py`) - Default: `*` |
-| `--dry-run`, `-n` | Preview only, no changes |
-| `--recursive`, `-r` | Search recursively in subdirectories |
+| Аргумент | Описание |
+|----------|----------|
+| `action` | `delete`, `move`, `copy` или `list` |
+| `source` | Исходная директория |
+| `target` | Целевая директория (только для `move` и `copy`) |
+| `--pattern`, `-p` | Шаблон glob (например, `*.py`, `TOOLS_*.py`) - По умолчанию: `*` |
+| `--dry-run`, `-n` | Только предварительный просмотр, без изменений |
+| `--recursive`, `-r` | Рекурсивный поиск в поддиректориях |
 
 ---
 
-## Пример и применение & Usage
+## Примеры и использование
 
 ```bash
-# List all Python files in a directory (English)
+# Список всех файлов Python в директории (Русский)
 python batch_file_ops.py list /path/to/directory --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!) (English)
+# Удалить все файлы .tmp (сначала запустите с --dry-run!) (Русский)
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
 
-# Move files (English)
+# Переместить файлы (Русский)
 python batch_file_ops.py move /source /target --pattern "*.txt"
 
-# Copy files (recursive) (English)
+# Копировать файлы (рекурсивно) (Русский)
 python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
 
-# Pattern examples (English)
+# Примеры шаблонов (Русский)
 python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
 python batch_file_ops.py list /path --pattern "backup_202?-*"
 ```
 
 ---
 
-## Notes
+## Примечания
 
-- **Dry-run first:** Always use `--dry-run` first with `delete` and `move`
-- **Glob patterns:** Uses Python `pathlib.glob()` / `pathlib.rglob()`
-- **Windows-compatible:** Automatic UTF-8 output encoding
-- **Files only:** Directories are skipped (only files are processed)
+- **Сначала Dry-run:** Всегда сначала используйте `--dry-run` для `delete` и `move`
+- **Шаблоны Glob:** Используется Python `pathlib.glob()` / `pathlib.rglob()`
+- **Совместимость с Windows:** Автоматическая кодировка вывода UTF-8
+- **Только файлы:** Директории пропускаются (обрабатываются только файлы)

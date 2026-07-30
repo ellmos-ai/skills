@@ -2,61 +2,41 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `decision-avatar`.
+> **日本語** — `decision-avatar` の公式日本語版。
 
+# Decision Avatar
 
+## 概要と目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+このスキルは人物を模倣するものではありません。繰り返される決定タイプにおいて、正当に認証された実際の証拠から確からしい選好を導き出すための検証可能な手順を提供します。
 
+ローカルの決定プロファイルが存在し、現在のタスクに対して monetary 使用が許可されている場合にのみ使用してください。プロファイルが存在しない場合、このスキルは代理の決定を提供しません。
 
-> **English Translation** — Official English version of `decision-avatar`.
+タスク指令、適用されるエージェントルール、またはプロファイルのメタデータが現在の目的を明確に許可している場合にのみ、使用が認証されたとみなされます。単にプロファイルファイルにアクセスできるというだけでは同意とはみなされません。
 
+## 核心原則
 
-# Decision Avatar (English)
+1. **推測よりも証拠。** 直接的な発言や確認された決定は、導き出されたパターンよりも重みがあります。
+2. **予測は個人の発言ではない。** エージェントの出力が新しい一次証拠としてプロファイルに逆流してはなりません。
+3. **決定することは実行することではない。** 推奨事項は明確であっても、その実行には追加の権限が必要となる場合があります。
+4. **黙認はフィードバックではない。** 異議がないからといって予測が確認されたことにはなりません。
+5. **プロファイルはローカルかつプライベートに保つ。** 個人データ、シークレット、または機密コンテンツを共有スキルファイルに取り込まないでください。
 
-## 概要と目的 & Purpose
+## ポータブルなプロファイルモデル
 
-Dieser Skill bildet keine Person nach. Er stellt ein überprüfbares Verfahren
-bereit, um bei wiederkehrenden Entscheidungstypen eine wahrscheinliche Präferenz
-aus echten, autorisierten Belegen abzuleiten.
+ファイル名は自由に変更可能です。必要なロールは以下の通りです：
 
-Nutze ihn nur, wenn ein lokales Entscheidungsprofil vorhanden und dessen Nutzung
-für die aktuelle Aufgabe zulässig ist. Ohne Profil liefert der Skill keine
-stellvertretende Entscheidung.
-
-Die Nutzung gilt nur dann als autorisiert, wenn Auftrag, geltende Agentenregel
-oder Profilmetadaten den aktuellen Zweck ausdrücklich erlauben. Bloße
-Erreichbarkeit einer Profildatei ist keine Einwilligung.
-
-## Kernprinzipien
-
-1. **Beleg vor Vermutung.** Direkte Aussagen und bestätigte Entscheidungen wiegen
-   stärker als abgeleitete Muster.
-2. **Vorhersage ist keine Aussage der Person.** Agentenausgaben dürfen nicht als
-   neue Primärbelege in das Profil zurückfließen.
-3. **Entscheiden ist nicht Ausführen.** Eine Empfehlung kann bestimmt sein, obwohl
-   ihre Umsetzung zusätzliche Autorität braucht.
-4. **Stille Zustimmung ist kein Feedback.** Ausbleibender Widerspruch bestätigt
-   keine Vorhersage.
-5. **Profile bleiben lokal und privat.** Keine personenbezogenen Daten, Secrets
-   oder sensiblen Inhalte in geteilte Skill-Dateien übernehmen.
-
-## Portables Profilmodell
-
-Die Dateinamen sind frei konfigurierbar; benötigt werden nur diese Rollen:
-
-| Rolle | Inhalt |
+| ロール | 内容 |
 |---|---|
-| Methodik | Evidenzstufen, Datenschutz und Kalibrierungsregeln |
-| Belegte Präferenzen | direkte Aussagen und bestätigte Entscheidungen |
-| Hypothesen | abgeleitete Regeln mit Konfidenz und Quellen |
-| Aktionen | aufgrund einer Vorhersage getroffene Handlungen |
-| Feedback | Bestätigung, Korrektur oder Ablehnung durch die Person |
+| メソドロジー | エビデンス階層、データプライバシー、キャリブレーションルール |
+| 実証された選好 | 直接的な発言および確認された決定 |
+| 仮説 | 確信度と情報源を備えた派生ルール |
+| アクション | 予測に基づいて行われた行動 |
+| フィードバック | 個人による確認、修正、または拒否 |
 
-Projektbezogene, aktuellere Entscheidungen haben Vorrang vor allgemeinen
-Präferenzen.
+プロジェクトに関連する、より新しい決定は、一般的な選好よりも優先されます。
 
-Jeder verwertete Beleg sollte mindestens enthalten:
+評価されるすべての証拠には、少なくとも以下が含まれている必要があります：
 
 ```text
 Quellen-ID:
@@ -66,59 +46,49 @@ Status: bestätigt/korrigiert/widerrufen
 Gültig bis: <optional>
 ```
 
-Widerrufene, abgelaufene oder außerhalb ihres Gültigkeitsbereichs liegende Belege
-nicht verwenden. Bei widersprüchlichen bestätigten Belegen gewinnt zunächst der
-spezifischere und danach der aktuellere. Bleibt der Konflikt bestehen, Konfidenz
-auf „niedrig“ setzen und eskalieren.
+撤回された、期限切れの、または適用範囲外の証拠は使用しないでください。確認済みの証拠に矛盾がある場合は、まずより具体的なものが優先され、次により新しいものが優先されます。競合が解消されない場合は、確信度を「低」に設定し、エスカレーションしてください。
 
-## Entscheidungsloop
+## 決定ループ
 
-### 0. Lokale Vorrangregel prüfen
+### 0. ローカル優先ルールの確認
 
-Gibt es für das aktuelle Projekt oder den konkreten Entscheidungstyp eine
-bestätigte Regel, nutze diese und dokumentiere ihre Quelle.
+現在のプロジェクトまたは具体的な決定タイプに対して確認済みのルールが存在する場合は、それを使用し、その情報源をドキュメント化してください。
 
-### 1. Echte Evidenz suchen
+### 1. 実際の証拠の検索
 
-Nur Belege verwenden, die nach der lokalen Methodik zulässig sind. Aufgabenlisten,
-Agentenprotokolle, frühere Avatar-Antworten und Argumente der aktuellen Sitzung
-sind keine Aussagen der Person.
+ローカルのメソドロジーに従って許可された証拠のみを使用してください。タスクリスト、エージェントのログ、過去のアバターの応答、現在のセッションの議論は、個人の発言ではありません。
 
-### 2. Vorhersage bilden
+### 2. 予測の形成
 
-Ergebnis stets mit Begründung und einer von drei Stufen ausgeben:
+結果は常に根拠と以下の3つのレベルのいずれかを指定して出力してください：
 
-- **hoch:** mehrere direkte, konsistente und einschlägige Belege,
-- **mittel:** plausibles Muster mit begrenzter oder indirekter Evidenz,
-- **niedrig:** neuartige Lage, widersprüchliche Belege oder kein belastbares
-  Muster.
+- **高:** 複数かつ直接的で一貫した関連証拠が存在する、
+- **中:** 限定的または間接的な証拠を伴う妥当なパターン、
+- **低:** 新奇な状況、矛盾する証拠、または信頼できるパターンが存在しない。
 
-Folgenreiche Entscheidungen sind nicht automatisch „niedrig“. Konfidenz misst
-die Evidenz für die Präferenz, nicht die Reichweite der späteren Ausführung.
+重大な影響を伴う決定が自動的に「低」になるわけではありません。確信度は選好に対する証拠の十分性を測定するものであり、後の実行範囲を測定するものではありません。
 
-### 3. Modus trennen
+### 3. モードの分離
 
-| Modus | Ergebnis | Seiteneffekt |
+| モード | 出力結果 | 副作用 |
 |---|---|---|
-| Vorhersagen | wahrscheinliche Position + Belege + Konfidenz | keiner |
-| Entscheiden | konkrete Wahl + Begründung + Konfidenz | keiner |
-| Handeln | autorisierte, sichere Umsetzung + Aktionsprotokoll | möglich |
+| 予測 | 確からしい立場 + 証拠 + 確信度 | なし |
+| 決定 | 具体的な選択 + 根拠 + 確信度 | なし |
+| 実行 | 許可された安全な実装 + 行動ログ | あり得る |
 
-Im Handlungsmodus gelten zusätzlich die Autoritäts- und Sicherheitsregeln der
-Runtime. Niedrige Konfidenz oder fehlende Ausführungsbefugnis führt zur
-Eskalation, nicht zur stillen Ausführung.
+実行モードでは、ランタイムの権限および安全ルールが追加で適用されます。確信度が低い場合や実行権限がない場合は、サイレント実行ではなくエスカレーションが行われます。
 
-### 4. Feedback kalibrieren
+### 4. フィードバックのキャリブレーション
 
-Nach echtem Feedback:
+実際のフィードバックを受け取った後：
 
-1. Vorhersage als bestätigt, korrigiert oder abgelehnt markieren.
-2. Optional eine Bewertungsskala erfassen.
-3. Unterschied zwischen Richtungsfehler und Zuschnittfehler festhalten.
-4. Hypothese und Konfidenz anpassen.
-5. Nur echte Rückmeldung in die belegten Präferenzen übernehmen.
+1. 予測を確認済み、修正済み、または拒否済みとしてマークする。
+2. オプションで評価スケールを記録する。
+3. 方向性のエラーとフレーミングのエラーの違いを記録する。
+4. 仮説と確信度を調整する。
+5. 実際のフィードバックのみを実証された選好に取り込む。
 
-## Ausgabeformat
+## 出力フォーマット
 
 ```text
 Entscheidungstyp:
@@ -131,23 +101,17 @@ Ausführung autorisiert: ja/nein
 Nächster Schritt:
 ```
 
-In Ausgaben nur redigierte Quellen-IDs und die für die Entscheidung notwendige
-Belegzusammenfassung nennen. Keine privaten Aussagen, absoluten Profilpfade oder
-sensiblen Rohdaten wiedergeben.
+出力には、編集（レッドアクティング）済みのソースIDと、決定に必要な証拠の要約のみを含めてください。非公開の発言、絶対プロファイルパス、または機密性の高い生データを再現しないでください。
 
-## Grenzen
+## 制限事項
 
-- Keine Diagnostik oder Behauptung über innere Zustände einer Person.
-- Keine Nutzung eines Profils außerhalb seines erlaubten Zwecks.
-- Keine automatische Übernahme von Agentenannahmen als Personenwissen.
-- Keine Ausführung allein aufgrund einer Vorhersage, wenn dafür neue Autorität
-  erforderlich wäre.
+- 個人の内部状態に関する診断や主張は行わない。
+- 許可された目的以外でプロファイルを使用しない。
+- エージェントの仮定を個人の知識として自動採用しない。
+- 新しい権限が必要となる場合に、予測のみに基づいて実行を行わない。
 
 ## 変更履歴
 
 ### 1.0.0 (2026-07-28)
-- Feedback-Präkognition, Konfidenzkalibrierung und Provenienztrennung aus einer
-  persönlichen Avatar-Konfiguration als eigenständiges, portables Protokoll
-  extrahiert.
-- Autorisierung, Beleglebenszyklus, Konfliktauflösung und redigierte Ausgabe
-  operationalisiert.
+- フィードバックの予知、確信度のキャリブレーション、および由来の分離を、個人のアバター設定から独立したポータブルなプロトコルとして抽出。
+- 認証、証拠のライフサイクル、競合解消、および編集済み出力を運用化。

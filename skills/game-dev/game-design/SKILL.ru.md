@@ -1,128 +1,115 @@
 ---
+name: game-design
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-06-17
+description: Как устроена разработка игр как процесс — роли, подзадачи, рабочие процессы и описания ролей, особенно (но не только) для Roblox. Используйте этот skill, когда речь идет об ОРГАНИЗАЦИИ разработки игр, а не о конкретном коде: Какие роли существуют (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Кто какую подзадачу выполняет? Как выглядит цепочка разработки (концепт → бэкенд → фронтенд → полировка → тест)? Как написать Game Design Document / KONZEPT.md? Как несколько (AI) агентов разделяют игру? Также триггерится по запросам "запланировать новую игру", "создать Game Design Document", "какие роли мне нужны для моей игры", "рабочий процесс разработки игры", "кто тестирует игру", "структурировать идею игры", "жанр/монетизация Roblox".
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: game-dev
+tags: [game-design, roblox, rollen, workflow, gdd, konzept, monetarisierung, qa, gamedev]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `game-design`.
+> **Русский** — Официальная русская версия `game-design`.
 
 
+# Game Design — Роли, подзадачи и рабочие процессы
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+Разработка игр — это командная работа, состоящая из четко разделенных дисциплин, даже если один человек или один AI-агент берет на себя несколько из них. Этот skill предоставляет **организационную модель**: какие роли существуют, какие подзадачи к ним относятся, в каком порядке они взаимодействуют и как зафиксировать игру в виде концепта (GDD). О *технической* стороне читайте в `/rojo` (синхронизация), `/rbx-studio` (редактор/ассеты) и в мета-скилле `/rbx-dev` (архитектура).
 
-# Game Design — Roles, Subtasks & Workflows (English)
+Используйте этот skill при планировании новой игры, при разделении работы (в том числе между несколькими AI-агентами) и при написании/рецензировании Game Design Document.
 
-## Общий обзор и назначение & Purpose
+## Роли (5 для разработки + 2 для тестирования)
 
-Game development is teamwork made of clearly separated disciplines — even when a single person
-or one AI agent takes on several of them. This skill provides the **organizational model**:
-which roles exist, which subtasks belong to them, in what order they interact
-and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync),
-`/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
+Проверенное, компактное распределение ролей. Полные описания со всеми подзадачами: [`references/roles-and-workflows.md`](references/roles-and-workflows.md).
 
-Use this skill when planning a new game, when dividing up the work (also across
-several AI agents) and when writing/reviewing a Game Design Document.
-
-## The Roles (5 development + 2 test)
-
-A proven, compact role distribution. Full descriptions with all subtasks:
-[`references/roles-and-workflows.md`](references/roles-and-workflows.md).
-
-| Role | Focus | Core subtasks |
+| Роль | Фокус | Основные подзадачи |
 | --- | --- | --- |
-| **Creative Director** | WHAT & WHY & for WHOM | GDD/KONZEPT, design & balance mechanics, prioritization/sprints, story, UX flow |
-| **Engineer** | HOW (technical) | Server/client/shared code, game loop, networking/remotes, DevOps (Rojo, build), bugfixing |
-| **Artist** | how the world looks | World/level building, lighting & atmosphere, particles, asset sourcing (incl. malware check) |
-| **Polish / Audio** | how it feels & sounds | SFX/music/ambient, animations, UI/UX fine-tuning, "juice" (screen shake, hit-stop), feedback |
-| **Business** | outward-facing | Store page, icon/thumbnail, monetization (gamepass/products/pass), analytics, community |
-| **QA-Tester** | technically correct? | Bug scans in code, playtests + check console, reproducible reports, regression, performance |
-| **Game Critic** | is it fun? | First/long impression from the player's view, honest assessment (fun, clarity, fairness), suggestions |
+| **Creative Director** | ЧТО, ПОЧЕМУ и для КОГО | GDD/KONZEPT, дизайн и баланс механик, приоритизация/спринты, сюжет, UX-поток |
+| **Engineer** | КАК (технически) | Серверный/клиентский/общий код, игровой цикл, сети/remotes, DevOps (Rojo, сборка), исправление багов |
+| **Artist** | как выглядит мир | Создание мира/уровней, освещение и атмосфера, частицы, поиск ассетов (включая проверку на вредоносный код) |
+| **Polish / Audio** | как ощущается и звучит | SFX/музыка/эмбиент, анимации, точная настройка UI/UX, "juice" (тряска экрана, hit-stop), обратная связь |
+| **Business** | внешняя сторона | Страница в магазине, иконка/значок, монетизация (gamepass/продукты/пасс), аналитика, сообщество |
+| **QA-Tester** | технически правильно? | Сканирование кода на баги, плейтесты + проверка консоли, воспроизводимые отчеты, регрессия, производительность |
+| **Game Critic** | весело ли играть? | Первое и долгосрочное впечатление с точки зрения игрока, честная оценка (веселье, понятность, честность), предложения |
 
-**Basic rule:** Development and testing are **separate** roles — ideally separate people
-or agents. Whoever writes code does not test it objectively. The Game Critic may be tough.
+**Основное правило:** Разработка и тестирование — это **раздельные** роли, в идеале выполняемые разными людьми или агентами. Тот, кто пишет код, не тестирует его объективно. Game Critic может быть строгим.
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочие процессы и порядок действий
 
-Work flows as a chain from role to role. The most important patterns:
+Работа течет как цепочка от роли к роли. Наиболее важные шаблоны:
 
-**Standard feature chain:**
+**Стандартная цепочка разработки фичи:**
 ```
 Creative Director (plans feature) → Engineer (backend) → Artist (frontend/assets)
 → Polish/Audio (sound + fine-tuning) → QA-Tester (technical test)
 → Game Critic (player perspective) → Creative Director (feedback → next iteration)
 ```
 
-**Quick-fix chain:** QA-Tester (bug) → Engineer (fix) → QA-Tester (verifies).
+**Цепочка быстрого фикса:** QA-Tester (bug) → Engineer (fix) → QA-Tester (verifies).
 
-**Asset chain:** Artist (store search) → Artist (malware scan) → Artist (integrate) → QA (visual).
+**Цепочка ассетов:** Artist (store search) → Artist (malware scan) → Artist (integrate) → QA (visual).
 
-**Polish chain:** Game Critic (weakness) → Polish/Audio → Artist → Game Critic (re-check).
+**Цепочка полировки:** Game Critic (weakness) → Polish/Audio → Artist → Game Critic (re-check).
 
-**Human-in-the-loop:** [agent chain] → human tester → Creative Director (feedback) → [chain].
+**Участие человека (Human-in-the-loop):** [agent chain] → human tester → Creative Director (feedback) → [chain].
 
-Each iteration should leave a short changelog. Stop condition: time budget reached
-**or** quality goal met.
+Каждая итерация должна оставлять краткий список изменений. Условие остановки: исчерпан временной бюджет **или** достигнута цель по качеству.
 
-### Persona-based testing
+### Тестирование на основе персон (Persona-based testing)
 
-A game only survives if very different players can cope with it. Therefore test (also
-simulated by agents) from several **personas** instead of only from your own perspective — varied
-by age, experience, platform (PC/mobile/tablet/console), attention span, language and
-accessibility. Examples: a 9-year-old casual kid on a tablet who only wants to press buttons; a
-12-year-old core player on PC who looks for the meta; a 60+ beginner who needs big buttons.
-Persona tests should run **blind** (the tester does not know the design intent).
+Игра выживает только в том случае, если с ней могут справиться самые разные игроки. Поэтому тестируйте (в том числе с помощью симуляции агентами) от лица нескольких **персон**, а не только с собственной точки зрения — различающихся по возрасту, опыту, платформе (ПК/мобильные/планшет/консоль), длительности внимания, языку и доступности. Примеры: 9-летний казуальный ребенок на планшете, который просто хочет нажимать на кнопки; 12-летний хардкорный игрок на ПК, ищущий мету; новичок 60+, которому нужны крупные кнопки.
+Тесты персон должны проводиться **вслепую** (тестировщик не знает первоначального замысла).
 
 ## Game Design Document (KONZEPT.md)
 
-Capture every game in a concise GDD — template:
-[`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Minimum structure:
+Фиксируйте каждую игру в лаконичном GDD — шаблон: [`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Минимальная структура:
 
-- **Vision** — 1–2 sentences: What is the game?
-- **Genre / reference** — classification + reference titles.
-- **Core mechanics** — **max. 3–4** (focus forces quality).
-- **Gameplay loop** — the player's minute-by-minute loop.
-- **Game modes / time formats** — if relevant.
-- **Monetization** — gamepasses, developer products, battle pass, shop.
-- **Tech** — stack (Rojo/frameworks), rough architecture.
-- **Next steps** — implementation checklist.
-- **Known bugs / open issues**.
+- **Видение (Vision)** — 1–2 предложения: Что это за игра?
+- **Жанр / референс** — классификация + референсные тайтлы.
+- **Основные механики** — **макс. 3–4** (фокус обеспечивает качество).
+- **Игровой цикл (Gameplay loop)** — ежеминутный цикл игрока.
+- **Игровые режимы / временные форматы** — если применимо.
+- **Монетизация** — геймпасы, продукты разработчика, боевой пропуск, магазин.
+- **Технологии** — стек (Rojo/фреймворки), примерная архитектура.
+- **Следующие шаги** — чек-лист реализации.
+- **Известные баги / открытые вопросы**.
 
-## Multi-agent division of labor
+## Разделение труда между несколькими агентами
 
-Several AI agents (or human+AI) can divide up a game — two modes:
+Несколько AI-агентов (или человек+AI) могут разделить работу над игрой — два режима:
 
-- **Swarm** — same task, different areas (e.g. three agents each balance one system).
-- **Team** — different roles, coordinated with each other (Engineer + Artist + Polish in parallel on
-  one feature, coordinated by the Creative Director).
+- **Swarm (Рой)** — одна и та же задача, разные области (например, три агента балансируют по одной системе).
+- **Team (Команда)** — разные роли, скоординированные между собой (Engineer + Artist + Polish параллельно работают над одной фичей под координацией Creative Director).
 
-Proven in practice: **never** give development and testing to the same agent; fix role prompts per role
-(system prompt = role description); each chain iteration ends with a changelog +
-test report; the human remains the quality gate.
+Проверено на практике: **никогда** не поручайте разработку и тестирование одному и тому же агенту; фиксируйте промпты ролей (системный промпт = описание роли); каждая итерация цепочки завершается списком изменений + отчетом о тестировании; человек остается главным контролером качества (quality gate).
 
-## Roblox-specific market context (orientation)
+## Контекст рынка Roblox (ориентир)
 
-Platform knowledge that grounds the concept work for Roblox (no guarantee, just rules of thumb):
+Знание платформы, на котором базируется концептуальная работа для Roblox (без гарантий, просто практические правила):
 
-- **Profitable genres:** Simulator, RPG, Tycoon, Horror, Obby — very different scaling
-  and effort.
-- **Underserved niches (higher risk, less competition):** real strategy/RTS-lite,
-  high-quality sports games, cozy/life sim, co-op puzzle/escape, auto-battler.
-- **Golden monetization rules:** (1) LiveOps is mandatory (updates every 2–4 weeks),
-  (2) monetization should *support* gameplay, not block it, (3) social design (trading,
-  co-op) is infrastructure, (4) mobile-first (50%+ play on phones), (5) content-creator
-  suitability (YouTube/TikTok) is marketing.
+- **Прибыльные жанры:** Simulator, RPG, Tycoon, Horror, Obby — сильно различаются по масштабированию и трудозатратам.
+- **Малообслуженные ниши (выше риск, меньше конкуренция):** настоящая стратегия/RTS-lite, качественные спортивные игры, cozy/симулятор жизни, кооперативные пазлы/побег, автобаттлер.
+- **Золотые правила монетизации:** (1) LiveOps обязателен (обновления каждые 2–4 недели), (2) монетизация должна *поддерживать* геймплей, а не блокировать его, (3) социальный дизайн (торговля, кооператив) — это инфраструктура, (4) mobile-first (50%+ играют с телефонов), (5) пригодность для контент-мейкеров (YouTube/TikTok) — это маркетинг.
 
-> For current, reliable market figures, research instead of estimating — the points above are
-> stable heuristics, not live data.
+> Для получения актуальных и надежных рыночных данных проводите исследования, а не оценивайте "на глаз" — вышеуказанные пункты являются устойчивыми эвристиками, а не динамическими данными.
 
-## Further reading
+## Дополнительное чтение
 
-- Sister skills: `/rojo`, `/rbx-studio`; meta-skill `/rbx-dev` (architecture patterns,
-  project structure, Luau lessons).
-- Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
-  `IDEAS.md`, market analyses).
+- Смежные навыки: `/rojo`, `/rbx-studio`; мета-навык `/rbx-dev` (паттерны архитектуры, структура проекта, уроки Luau).
+- Референсный пайплайн (если доступен): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`, `IDEAS.md`, аналитика рынка).
 
-## Журнал изменений
+## История изменений
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Generic role/workflow framework, distilled from `.ROBLOX/AGENT_ROLES.md`
-  & `GUIDE.md`, user-neutral (without project-specific portfolio).
+- Начальная версия. Обобщенный фреймворк ролей и рабочих процессов, выделенный из `.ROBLOX/AGENT_ROLES.md` и `GUIDE.md`, нейтральный по отношению к пользователю (без портфолио конкретного проекта).

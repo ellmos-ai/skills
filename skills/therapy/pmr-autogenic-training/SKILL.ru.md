@@ -5,7 +5,8 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: Прогрессивная мышечная релаксация (ПМР) по Якобсону и аутогенная тренировка по Шульцу. Краткие и полные версии.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,184 +16,182 @@ tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `pmr-autogenic-training`.
+> **Русский** — Официальная русская версия `pmr-autogenic-training`.
 
 
+# Прогрессивная мышечная релаксация и аутогенная тренировка
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Телесно-ориентированные техники релаксации по Якобсону и Шульцу
 
-
-# Progressive Muscle Relaxation & Autogenic Training (English)
-
-> Body-based relaxation techniques according to Jacobson and Schultz
-
-See: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Контекст
 
-Progressive Muscle Relaxation (PMR, Jacobson 1929) and Autogenic Training (AT, Schultz 1932) are the two most extensively researched relaxation techniques. Both work through conscious influence on the autonomic nervous system and can be learned as self-help methods without therapeutic supervision.
+Прогрессивная мышечная релаксация (ПМР, Jacobson 1929) и аутогенная тренировка (АТ, Schultz 1932) являются двумя наиболее научно изученными методами релаксации. Обе техники работают за счет осознанного воздействия на вегетативную нервную систему и могут осваиваться как методы самопомощи без наблюдения терапевта.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Примечание:** Данный материал служит поддержкой и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET)
 
 ---
 
-## 1. Progressive Muscle Relaxation (PMR) according to Jacobson
+## 1. Прогрессивная мышечная релаксация (ПМР) по Якобсону
 
-### Basic Principle
+### Основной Принцип
 
-Systematic tensing and releasing of muscle groups. Through the contrast between tension and release, the body learns deeper relaxation than possible in its normal state.
+Систематическое напряжение и расслабление мышечных групп. За счет контраста между напряжением и расслаблением тело обучается более глубокой релаксации, чем это возможно в обычном состоянии.
 
-**Mechanism:** Muscle tension -> conscious release -> parasympathetic activation -> reduction of heart rate, blood pressure, muscle tone
+**Механизм:** Напряжение мышц -> осознанное сбрасывание напряжения -> активация парасимпатической нервной системы -> снижение частоты сердечных сокращений, артериального давления и мышечного тонуса
 
-### 1.1 Long Form: 16 Muscle Groups
+### 1.1 Полная Форма: 16 Мышечных Групп
 
-| No | Muscle Group | Tension |
+| № | Мышечная группа | Напряжение |
 |----|-------------|---------|
-| 1 | Right hand/forearm | Clench fist |
-| 2 | Right upper arm | Tense biceps |
-| 3 | Left hand/forearm | Clench fist |
-| 4 | Left upper arm | Tense biceps |
-| 5 | Forehead | Raise eyebrows |
-| 6 | Mid-face | Squeeze eyes shut, wrinkle nose |
-| 7 | Lower face | Clench teeth, pull corners of mouth wide |
-| 8 | Neck | Press chin toward chest (counter-pressure) |
-| 9 | Chest/shoulders | Raise shoulders, inhale deeply |
-| 10 | Abdomen | Tense abdominal muscles |
-| 11 | Lower back | Slight arch |
-| 12 | Right thigh | Slightly lift leg |
-| 13 | Right lower leg | Pull foot toward shin |
-| 14 | Right foot | Curl toes |
-| 15 | Left thigh | Slightly lift leg |
-| 16 | Left lower leg/foot | Pull foot up, curl toes |
+| 1 | Правая кисть/предплечье | Сжать кулак |
+| 2 | Правое плечо | Напрячь бицепс |
+| 3 | Левая кисть/предплечье | Сжать кулак |
+| 4 | Левое плечо | Напрячь бицепс |
+| 5 | Лоб | Поднять брови |
+| 6 | Средняя часть лица | Зажмурить глаза, наморщить нос |
+| 7 | Нижняя часть лица | Сжать зубы, широко растянуть уголки рта |
+| 8 | Шея | Прижать подбородок к груди (создавая сопротивление) |
+| 9 | Грудь/плечи | Поднять плечи, сделать глубокий вдох |
+| 10 | Живот | Напрячь мышцы живота |
+| 11 | Поясница | Слегка прогнуть спину |
+| 12 | Правое бедро | Слегка приподнять ногу |
+| 13 | Правая голень | Потянуть стопу на себя (к голени) |
+| 14 | Правая стопа | Поджать пальцы ног |
+| 15 | Левое бедро | Слегка приподнять ногу |
+| 16 | Левая голень/стопа | Потянуть стопу на себя, поджать пальцы |
 
-**Procedure per muscle group:**
-1. Direct attention to the muscle group
-2. Tense: 5-7 seconds (approximately 70% of maximum strength)
-3. Release: Let go abruptly
-4. Notice: 20-30 seconds, perceive the relaxation
-5. Next muscle group
+**Порядок действий для каждой мышечной группы:**
+1. Направить внимание на мышечную группу
+2. Напрячь: 5-7 секунд (примерно 70% от максимального усилия)
+3. Отпустить: Резко сбросить напряжение
+4. Наблюдать: 20-30 секунд ощущать расслабление
+5. Перейти к следующей мышечной группе
 
-### 1.2 Short Form: 7 Muscle Groups
+### 1.2 Краткая Форма: 7 Мышечных Групп
 
-For experienced practitioners or when time is limited:
+Для опытных практикующих или при ограничении по времени:
 
-| No | Combination | Tension |
+| № | Объединение групп | Напряжение |
 |----|------------|---------|
-| 1 | Both arms | Clench fists, bend arms |
-| 2 | Entire face | Grimace: furrow brow, close eyes, mouth wide |
-| 3 | Neck/shoulders | Pull shoulders up to ears |
-| 4 | Chest/abdomen | Inhale, tense abdomen |
-| 5 | Back | Shoulder blades together, slight arch |
-| 6 | Both thighs | Slightly lift legs |
-| 7 | Both lower legs/feet | Pull feet up |
+| 1 | Обе руки | Сжать кулаки, согнуть руки в локтях |
+| 2 | Все лицо | Гримаса: насупить брови, зажмурить глаза, широко открыть рот |
+| 3 | Шея/плечи | Подтянуть плечи к ушам |
+| 4 | Грудь/живот | Сделать вдох, напрячь живот |
+| 5 | Спина | Свести лопатки, слегка прогнуть спину |
+| 6 | Оба бедра | Слегка приподнять обе ноги |
+| 7 | Обе голени/стопы | Потянуть стопы на себя |
 
-### 1.3 Recall Technique (Advanced)
+### 1.3 Техника Мысленного Воспроизведения (Продвинутый уровень)
 
-After several weeks of practice: Relaxation of muscle groups ONLY through imagination (without actual tensing). The body has conditioned the relaxation response.
+После нескольких недель практики: Расслабление мышечных групп происходит ИСКЛЮЧИТЕЛЬНО через мысленное представление (без физического напряжения). Тело сформировало условный рефлекс релаксации.
 
 ---
 
-## 2. Autogenic Training (AT) according to Schultz
+## 2. Аутогенная Тренировка (АТ) по Шульцу
 
-### Basic Principle
+### Основной Принцип
 
-Concentrative self-relaxation through formulaic autosuggestion. The practitioner induces a state of deep relaxation through repeated guiding phrases (autonomic switching).
+Концентрированная саморелаксация с помощью формульного самовнушения (аутосуггестии). Практикующий вызывает состояние глубокого расслабления путем многократного повторения направляющих фраз (вегетативное переключение).
 
-**Mechanism:** Concentration on formulas -> ideomotor response -> actual physical changes (blood flow, warmth, calm)
+**Механизм:** Концентрация на формулах -> идеомоторная реакция -> реальные физиологические изменения (кровоток, тепло, спокойствие)
 
-### 2.1 The 6 Basic Exercises (Lower Level)
+### 2.1 6 Базовых Упражнений (Низшая ступень)
 
-| Exercise | Formula | Goal |
+| Упражнение | Формула | Цель |
 |----------|---------|------|
-| 1. Heaviness | "My right arm is very heavy" | Muscle relaxation |
-| 2. Warmth | "My right arm is very warm" | Vasodilation, blood flow |
-| 3. Heart | "My heart beats calmly and steadily" | Heart regulation |
-| 4. Breathing | "My breathing is calm and steady" | Breath regulation |
-| 5. Solar plexus | "My solar plexus is streaming warm" | Abdominal organ relaxation |
-| 6. Forehead | "My forehead is pleasantly cool" | Mental clarity |
+| 1. Тяжесть | «Моя правая рука очень тяжелая» | Мышечная релаксация |
+| 2. Тепло | «Моя правая рука очень теплая» | Вазодилатация, улучшение кровотока |
+| 3. Сердце | «Мое сердце бьется спокойно и ровно» | Регуляция сердечного ритма |
+| 4. Дыхание | «Мое дыхание спокойное и ровное» | Регуляция дыхания |
+| 5. Солнечное сплетение | «Мое солнечное сплетение излучает тепло» | Расслабление органов брюшной полости |
+| 6. Лоб | «Мой лоб приятно прохладен» | Ментальная ясность |
 
-**Progression:** Gradual over 6-8 weeks. Add one new exercise each week.
+**Освоение:** Постепенное в течение 6-8 недель. Каждую неделю добавляется одно новое упражнение.
 
-### 2.2 Session Procedure
+### 2.2 Порядок Проведения Сессии
 
 ```
-1. Basic posture: Coachman's posture, armchair position, or lying down
-2. Opening: Close eyes, "I am completely calm"
-3. Internally repeat formulas (6x each, slowly):
-   - "My right arm is very heavy" (6x)
-   - "My right arm is very warm" (6x)
-   - [additional formulas depending on practice level]
-4. Rest formula in between: "I am completely calm"
-5. Recall: Firmly tense arms, inhale deeply, open eyes
-   IMPORTANT: Never skip the recall (except before falling asleep)
+1. Базовая поза: Поза кучера, положение в кресле или лежа
+2. Вход: Закрыть глаза, «Я абсолютно спокоен / спокойна»
+3. Мысленно повторять формулы (каждую по 6 раз, медленно):
+   - «Моя правая рука очень тяжелая» (6x)
+   - «Моя правая рука очень теплая» (6x)
+   - [дополнительные формулы в зависимости от уровня практики]
+4. Промежуточная формула отдыха: «Я абсолютно спокоен / спокойна»
+5. Выход из состояния (Recall): Сильно согнуть и разогнуть руки, сделать глубокий вдох, открыть глаза
+   ВАЖНО: Никогда не пропускать выход из состояния (за исключением практики перед сном)
 ```
 
-### 2.3 Learning Plan
+### 2.3 План Обучения
 
-| Week | Exercise | Duration |
+| Неделя | Упражнение | Длительность |
 |------|----------|----------|
-| 1-2 | Heaviness exercise | 5 min |
-| 3-4 | Heaviness + Warmth | 8 min |
-| 5-6 | Heaviness + Warmth + Heart + Breathing | 12 min |
-| 7-8 | All 6 basic exercises | 15 min |
+| 1-2 | Упражнение на тяжесть | 5 мин |
+| 3-4 | Тяжесть + Тепло | 8 мин |
+| 5-6 | Тяжесть + Тепло + Сердце + Дыхание | 12 мин |
+| 7-8 | Все 6 базовых упражнений | 15 мин |
 
 ---
 
-## 3. PMR vs. AT: Decision Guide
+## 3. ПМР и АТ: Руководство по Выбору
 
-| Criterion | PMR | AT |
+| Критерий | ПМР | АТ |
 |-----------|-----|-----|
-| Learnability | Easy, immediately effective | Requires practice (4-8 weeks) |
-| Physical activity | Yes (tensing) | No (imagination only) |
-| For muscle tension | Very suitable | Moderately suitable |
-| For inner restlessness | Good | Very good |
-| For sleep problems | Good | Very good |
-| Usable anywhere | Limited (movement needed) | Yes (inconspicuous) |
-| For children | From approx. age 8 | From approx. age 10 |
+| Легкость освоения | Легко, мгновенный эффект | Требует практики (4-8 недель) |
+| Физическая активность | Да (напряжение) | Нет (только воображение) |
+| При мышечном напряжении | Очень подходит | Умерено подходит |
+| При внутреннем беспокойстве | Хорошо | Очень хорошо |
+| При нарушениях сна | Хорошо | Очень хорошо |
+| Применимость где угодно | Ограничено (нужны движения) | Да (незаметно для окружающих) |
+| Для детей | Примерно с 8 лет | Примерно с 10 лет |
 
 ---
 
-## 4. Contraindications
+## 4. Противопоказания
 
-**PMR:**
-- Acute muscle injuries or inflammation
-- Severe spasticity
-- Epilepsy (tensing may trigger seizures — rare)
+**ПМР:**
+- Острые травмы или воспаления мышц
+- Выраженная спастичность
+- Эпилепсия (напряжение мышц может спровоцировать приступ — редко)
 
-**AT:**
-- Acute psychosis
-- Severe depression (risk of excessive introspection)
-- Cardiac arrhythmia (omit heart exercise)
-- Dissociative disorders
-- Severe hypotension (circulatory problems possible)
+**АТ:**
+- Острый психоз
+- Тяжелая депрессия (риск чрезмерной интроспекции)
+- Аритмия / нарушения сердечного ритма (исключить упражнение на сердце)
+- Диссоциативные расстройства
+- Тяжелая артериальная гипотензия (возможны нарушения кровообращения)
 
-**Both methods:**
-- Stop immediately if trauma flashbacks occur
-- Not a substitute for medical/psychotherapeutic treatment
-
----
-
-## Progress Tracking
-
-- Tension level before/after exercise (0-10 scale)
-- Which muscle groups were particularly tense?
-- AT: Which formulas are already effective, which not yet?
-- Regularity: Goal 1x daily, at least 4x/week
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Оба метода:**
+- Немедленно прекратить практику при возникновении травматических флешбэков
+- Не заменяет медицинское или психотерапевтическое лечение
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Jacobson (1929), Schultz (1932) — Not professional therapy*
+## Отслеживание Прогресса
+
+- Уровень напряжения до/после упражнения (шкала 0-10)
+- Какие группы мышц были особенно напряжены?
+- АТ: Какие формулы уже эффективны, а какие еще нет?
+- Регулярность: Цель — 1 раз в день, не менее 4 раз в неделю
+
+**В случае острого кризиса ВСЕГДА обращайтесь:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи (РФ): +7 (495) 051
+- 988 Suicide & Crisis Lifeline (США): 988
+- Crisis Text Line (США): Отправьте HOME на 741741
+- Samaritans (Великобритания): 116 123
+- Telefonseelsorge (Германия): 0800 111 0 111 / 0800 111 0 222
+- Служба экстренной помощи: 112 / 103 (РФ/СНГ) / 911 (США)
+
+---
+
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Jacobson (1929), Schultz (1932) — Не является профессиональной психотерапией*

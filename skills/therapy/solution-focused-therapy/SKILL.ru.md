@@ -1,54 +1,66 @@
 ---
+name: solution-focused-therapy
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Ориентированная на решение краткосрочная терапия по де Шейзеру и Берг: вопрос о чуде, поиск исключений, шкалирование, активация ресурсов.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [sfbt, solution-focused, miracle-question, scaling, brief-therapy, resources]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `solution-focused-therapy`.
+> **Русский** — Официальная русская версия `solution-focused-therapy`.
 
 
+# Ориентированная на решение терапия (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Основы ориентированной на решение краткосрочной терапии по Стиву де Шейзеру и Инсу Ким Берг: Вопрос о чуде, исследование исключений, шкалирование, активация ресурсов
 
-
-# Solution-Focused Therapy (English)
-
-> Fundamentals of Solution-Focused Brief Therapy according to Steve de Shazer and Insoo Kim Berg: Miracle question, exception exploration, scaling, resource activation
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Solution-Focused Brief Therapy (SFBT) was developed by Steve de Shazer and Insoo Kim Berg at the Brief Family Therapy Center in Milwaukee. It is one of the most well-researched brief therapy approaches.
-
-Core idea: Instead of analyzing problems, work directly on solutions. "Problem talk creates problems, solution talk creates solutions" (de Shazer).
-
-Evidence: Meta-analyses support effectiveness for depression, anxiety, behavioral problems, substance abuse, and couple conflicts (Gingerich & Peterson 2013, Kim et al. 2019).
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Core Principles of SFBT
+## Контекст
 
-### The Three Basic Rules (de Shazer)
+Ориентированная на решение краткосрочная терапия (ОРКТ / SFBT) была разработана Стивом де Шейзером и Инсу Ким Берг в Центре краткосрочной семейной терапии в Милуоки. Это один из наиболее эмпирически исследованных подходов в краткосрочной психотерапии.
 
-1. **"If it ain't broke, don't fix it"** — Don't change what works
-2. **"If it works, do more of it"** — Strengthen what works
-3. **"If it doesn't work, do something different"** — Change what doesn't help
+Ключевая идея: Вместо подробного анализа проблем работать непосредственно над конструированием решений. «Разговоры о проблемах создают проблемы, разговоры о решениях создают решения» (де Шейзер).
 
-### View of the Person
-- Every person has resources and competencies
-- The client is the expert on their own life
-- Small changes trigger larger ones (butterfly effect)
-- The solution doesn't have to be related to the problem
+Доказательная база: Метаанализы подтверждают эффективность метода при депрессии, тревоге, поведенческих расстройствах, злоупотреблении психоактивными веществами и парных конфликтах (Gingerich & Peterson 2013, Kim et al. 2019).
+
+**Примечание:** Данный материал носит психообразовательный характер и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. The Miracle Question — In-Depth Application
+## 1. Основные принципы ОРКТ
 
-### Basic Form
+### Три базовых правила (де Шейзер)
+
+1. **«Если что-то не сломано, не чини это»** — Не меняйте то, что уже работает
+2. **«Если что-то работает, делай этого больше»** — Укрепляйте успешные действия
+3. **«Если что-то не работает, сделай что-то другое»** — Изменяйте то, что не приносит пользы
+
+### Представление о человеке
+- Каждый человек обладает ресурсами, сильными сторонами и компетенциями
+- Клиент является главным экспертом в своей собственной жизни
+- Маленькие изменения запускают цепочку более крупных (эффект бабочки)
+- Решение не обязательно должно быть логически связано с самой проблемой
+
+---
+
+## 2. Вопрос о чуде — Глубокое применение
+
+### Базовая формулировка
 
 ```
 "Imagine that tonight, while you are sleeping, a miracle happens.
@@ -59,76 +71,76 @@ What would you notice first thing tomorrow morning that tells you
 the miracle has happened?"
 ```
 
-### Deepening Follow-Up Questions
+### Углубляющие уточняющие вопросы
 
-**Making it concrete on a sensory level:**
-- "What exactly would you do differently tomorrow morning?"
-- "How would you get up? What would you do first?"
-- "What would you feel when you open your eyes?"
+**Конкретизация на сенсорном уровне:**
+- «Что именно вы сделаете иначе завтра утром?»
+- «Как вы встанете с постели? Что сделаете первым делом?»
+- «Что вы почувствуете, открыв глаза?»
 
-**Relationship level:**
-- "How would your partner notice the miracle?"
-- "What would they see differently about you?"
-- "Who in your circle would notice it first?"
+**Реляционный уровень (взгляд со стороны):**
+- «Как ваш(а) партнер(ша) или близкие заметят, что произошло чудо?»
+- «Что изменится в вашем поведении для окружающих?»
+- «Кто из вашего окружения заметит изменения первым?»
 
-**Finding fragments of the miracle:**
-- "Which part of this miracle is perhaps already happening a little bit?"
-- "On a scale of 0 to 10 — how far along are you already toward the miracle?"
+**Поиск фрагментов чуда в настоящем:**
+- «Какая часть этого чуда, возможно, уже немного происходит в вашей жизни?»
+- «По шкале от 0 до 10 — насколько далеко вы уже продвинулись к этому чуду?»
 
 ---
 
-## 3. Exception Exploration
+## 3. Исследование исключений (Exception Exploration)
 
-### Principle
-Exceptions are moments when the problem does not occur or occurs less. They already contain functioning solution approaches.
+### Принцип
+Исключения — это моменты, когда проблема не возникает или проявляется в меньшей степени. Они уже содержат в себе работающие элементы решений.
 
-### Systematic Exception Search
+### Систематический поиск исключений
 
-**Phase 1: Finding exceptions**
-- "When was it a bit better recently — even just minimally?"
-- "Are there days when the problem is less severe?"
+**Фаза 1: Поиск исключений**
+- «Когда в последнее время ситуация была хотя бы немного лучше — пусть даже минимально?»
+- «Бывают ли дни, когда проблема беспокоит меньше?»
 
-**Phase 2: Describing exceptions in detail**
-- "Describe that moment as precisely as possible"
-- "What was different about that day?"
+**Фаза 2: Подробное описание исключений**
+- «Опишите тот момент как можно точнее»
+- «Что именно было особенным в тот день?»
 
-**Phase 3: Recognizing one's own contribution**
-- "What did YOU contribute to it being better?"
-- "What decision did you make?"
+**Фаза 3: Осознание собственного вклада**
+- «Что именно ВЫ сделали для того, чтобы ситуация стала лучше?»
+- «Какое решение вы приняли?»
 
-**Phase 4: Strengthening exceptions**
-- "How could you deliberately repeat that?"
-- "What would be a first small step in that direction?"
+**Фаза 4: Укрепление исключений**
+- «Как вы могли бы осознанно повторить эти действия?»
+- «Каков мог бы быть первый маленький шаг в этом направлении?»
 
-### Types of Exceptions
+### Типы исключений
 
-| Type | Description | Follow-up |
+| Тип | Описание | Дальнейшие действия |
 |------|-------------|-----------|
-| Deliberate exception | Client consciously did something different | "Do more of that!" |
-| Random exception | Something was different without conscious effort | "What was different about the circumstances?" |
-| External exception | Others did something | "What could you do to make that more likely?" |
+| Осознанное исключение | Клиент осознанно сделал что-то иначе | «Делайте этого больше!» |
+| Случайное исключение | Ситуация изменилась без сознательных усилий | «Что было иным в обстоятельствах?» |
+| Внешнее исключение | Другие люди поступили иначе | «Что вы можете сделать, чтобы это происходило чаще?» |
 
 ---
 
-## 4. Scaling Techniques
+## 4. Техники шкалирования (Шкальные вопросы)
 
-### Basic Scaling
-"On a scale of 0 to 10, where 0 is the worst and 10 is the best possible..."
+### Базовое шкалирование
+«По шкале от 0 до 10, где 0 — наихудшее состояние, а 10 — наилучшее из возможных...»
 
-### Extended Scaling Forms
+### Расширенные формы шкалирования
 
-**Coping scaling:**
-- "How well are you managing to cope with daily life despite the problem?"
+**Шкала совладания (Coping scaling):**
+- «Насколько успешно вам удается справляться с повседневной жизнью, несмотря на проблему?»
 
-**Confidence scaling:**
-- "How confident are you that you can make progress?"
+**Шкала уверенности:**
+- «Насколько вы уверены в том, что сможете продвинуться вперед?»
 
-**Progress scaling:**
-- "Where were you a week / a month ago?"
-- "What contributed to the increase?"
+**Шкала прогресса:**
+- «Где вы находились неделю или месяц назад?»
+- «Что способствовало повышению балла?»
 
-### The "One Point Higher" Trick
-Always ask only about the next point — never about the final goal.
+### Прием «На один балл выше» (The One Point Higher Trick)
+Всегда спрашивайте только про один следующий шаг — никогда не требуйте немедленного достижения конечной цели.
 
 ```
 "What would be different at a 6 compared to the current 5?"
@@ -137,54 +149,53 @@ Always ask only about the next point — never about the final goal.
 
 ---
 
-## 5. Additional SFBT Techniques
+## 5. Дополнительные техники ОРКТ
 
-### Coping Questions
-- "How do you manage to get up every day despite everything?"
-- "What keeps you going?"
+### Вопросы о совладании (Coping Questions)
+- «Как вам удается каждый день вставать и продолжать жить, несмотря ни на что?»
+- «Что помогает вам держаться?»
 
-### Relationship Questions
-- "If I asked your partner, what would they say?"
-- "Who in your circle would notice the change first?"
+### Реляционные вопросы (Вопросы о взгляде других)
+- «Если бы я спросил(а) вашего партнера, что бы он(а) сказал(а)?»
+- «Кто в вашем окружении первым заметит изменения?»
 
-### Compliments / Resource Comments
-- "I'm impressed that despite the difficulties, you're here."
-
----
-
-## 6. Reflection Questions for Self-Application
-
-- "What is working well in my life — and how am I doing that?"
-- "What is one small exception I could build on?"
-- "If the problem were gone tomorrow — what would I do first?"
-- "What have I accomplished before, even though it was hard?"
+### Комплименты / Подчеркивание ресурсов
+- «Меня восхищает, что, несмотря на все трудности, вы здесь и ищете решения.»
 
 ---
 
-## Ethics and Boundaries
+## 6. Вопросы для рефлексии и самоприменения
 
-**An AI assistant may:**
-- Explain and contextualize SFBT concepts
-- Guide the miracle question, exception exploration, and scaling
-- Ask reflection questions
-- Point out resources and strengths
+- «Что хорошего есть в моей жизни прямо сейчас — и как я этого достигаю?»
+- «Какое маленькое 'исключение' я мог(ла) бы взять за основу?»
+- «Если бы проблема исчезла завтра — что бы я сделал(а) первым делом?»
+- «С чем я успешно справлялся(ась) раньше, даже когда было очень тяжело?»
 
-**An AI assistant must NOT:**
-- Conduct solution-focused therapy
-- Trivialize persistent problems ("Just think positive")
-- Bypass acute crises with solution orientation
-- Promise that SFBT techniques will solve problems
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## Этика и границы применения
+
+**ИИ-ассистент имеет право:**
+- Объяснять и контекстуализировать концепции ОРКТ
+- Направлять выполнение вопроса о чуде, поиска исключений и шкалирования
+- Задавать рефлексивные вопросы
+- Отмечать и активировать ресурсы и сильные стороны
+
+**ИИ-ассистент НЕ имеет права:**
+- Проводить клиническую терапию, ориентированную на решение
+- Обесценивать или обесценивающе обещать легкие решения («Просто думай позитивно»)
+- Обходить острые кризисные состояния с помощью ОРКТ-техник
+- Обещать, что техники ОРКТ автоматически решат жизненные проблемы
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (RU): 8-800-2000-122
+- Горячая линия психологической помощи (RU): +7 (495) 051
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная помощь: 112 (RU/EU), 911 (US)
 
 ---
 
-## References
+## Литература
 
 - de Shazer, S. (1988). *Clues: Investigating Solutions in Brief Therapy.* Norton.
 - Berg, I. K. & Miller, S. D. (1992). *Working with the Problem Drinker.* Norton.

@@ -1,280 +1,291 @@
 ---
+name: stabilization-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 稳定技术：接地/着陆技术、安全岛、封存/容器技术及呼吸练习。用于急性心理困扰和惊恐发作的即时干预技术。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [stabilization, grounding, safe-place, containment, breathing-exercises, crisis-management]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `stabilization-techniques`.
+> **中文** — `stabilization-techniques` 官方中文版本。
 
 
+# 稳定技术（Stabilization Techniques）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基础概念
 
+稳定技术是针对急性心理困扰或应激状况的**即时干预手段**。它们有助于将个体从压倒性的情绪、惊恐、解离或闪回中引回此时此刻。这些技术不能替代心理治疗，但可作为**心理急救**。
 
-# Stabilization Techniques (English)
-
-## Foundation
-
-Stabilization techniques are **immediate interventions** for acute distress situations. They help return from overwhelming emotions, panic, dissociation, or flashbacks to the here and now. They do not replace therapy but serve as **psychological first aid**.
-
-Core principle: **Back into the body, back into the moment, back into control.**
-
----
-
-## 1. Grounding Techniques
-
-Grounding brings attention back to the present moment and one's own body. Particularly effective for dissociation, flashbacks, and panic.
-
-### 1.1 Sensory Grounding: The 5-4-3-2-1 Technique
-
-The most well-known and accessible grounding technique. Systematically activates all five senses.
-
-#### Instructions
-
-> **5 things you SEE:**
-> Look around. Name five things you can see right now. Anything — the wall, your hand, a light switch. Describe details: color, shape, size.
->
-> **4 things you HEAR:**
-> Close your eyes briefly. What do you hear? The hum of the refrigerator, birds, your own breath, traffic.
->
-> **3 things you FEEL (touch):**
-> What is touching your body right now? The chair beneath you, fabric on your skin, the temperature of the air.
->
-> **2 things you SMELL:**
-> Consciously sniff. Room air, your shampoo, coffee, fresh air.
->
-> **1 thing you TASTE:**
-> What do you taste right now? The last coffee, toothpaste, simply your mouth.
-
-#### Variation: Intensive Grounding
-
-For stronger dissociation — work with physical stimuli:
-- Hold an ice cube in your hand
-- Run cold water over your wrists
-- Smell something strong (peppermint oil, smelling salts)
-- Hot candy or chili
-- Stomp feet firmly on the ground
+核心原则：**重返身体、重返当下、重返掌控。**
 
 ---
 
-### 1.2 Physical Grounding (Body Grounding)
+## 1. 接地/着陆技术（Grounding Techniques）
 
-Brings attention deliberately into the body.
+接地技术能将注意力重新拉回到当下时刻与自身身体上。对解离、闪回和惊恐发作尤为有效。
 
-#### Instructions: Body Scan (Short Version)
+### 1.1 感官接地：5-4-3-2-1 技术
 
-> Sit upright. Feet flat on the floor.
+最知名且最易操作的接地技术。系统性地激活全部五种感官。
+
+#### 操作指导
+
+> **5件你能“看到”的事物：**
+> 环顾四周。命名五件你此时此刻能看到的东西。任何东西都可以——墙壁、你的手、开关。描述细节：颜色、形状、大小。
 >
-> **Feet:** Feel the contact with the ground. Actively press your feet down. Feel the weight.
+> **4件你能“听到”的事物：**
+> 简短地闭上眼睛。你听到了什么？冰箱的嗡嗡声、鸟鸣声、你自己的呼吸声、交通噪音。
 >
-> **Legs:** Feel your thighs on the chair. The weight they carry.
+> **3件你能“触碰/感受到”的事物：**
+> 此时此刻有什么在接触你的身体？你身下的椅子、皮肤上的衣服材质、空气的温度。
 >
-> **Back:** Feel the backrest. Consciously lean against it.
+> **2件你能“闻到”的事物：**
+> 有意识地闻一闻。房间的空气、你的洗发水香味、咖啡香、新鲜空气。
 >
-> **Hands:** Place them on your thighs. Feel the warmth, the contact.
->
-> **Breath:** Feel how your belly rises and falls. Don't control it — just observe.
+> **1件你能“尝到”的事物：**
+> 你现在能尝到什么味道？刚才喝的咖啡、牙膏味，或者只是口腔里的感觉。
 
-#### Progressive Muscle Relaxation (Short Version)
+#### 变体：强化接地
 
-Tense each muscle area for 5 seconds, then relax for 10 seconds:
-
-1. **Hands:** Clench fists — release
-2. **Arms:** Tense biceps — release
-3. **Shoulders:** Pull up to ears — drop
-4. **Face:** Squeeze together — relax
-5. **Abdomen:** Tense — release
-6. **Legs:** Tense — release
-7. **Feet:** Curl toes — release
+适用于较深度的解离——通过强烈的物理刺激进行干预：
+- 手握冰块
+- 用冷水冲洗手腕
+- 闻强烈的气味（薄荷油、嗅盐）
+- 尝酸味强烈的糖果或辣椒
+- 双脚用力踏地
 
 ---
 
-### 1.3 Cognitive Grounding
+## 1.2 身体接地（Body Grounding）
 
-Uses mental activity to exit emotional flooding.
+有意识地将注意力带回身体感受中。
 
-#### Techniques
+#### 操作指导：身体扫描（简短版）
 
-- **Count backward:** From 100 in steps of 7 (100, 93, 86, 79...)
-- **List categories:** "5 car brands, 5 cities starting with B, 5 forest animals..."
-- **Orientation:** State the date, time, location, own name: "I am [name]. It is [day], [time]. I am in [place]. I am safe."
-- **Color game:** Find all red objects in the room. Then all blue. Then all green.
-- **Alphabet game:** For a category (e.g., animals), find a word for each letter
+> 坐直。双脚平放在地板上。
+>
+> **双脚：** 感受双脚与地板的接触。主动向下按压双脚。感受这份重量。
+>
+> **双腿：** 感受大腿贴在椅子上的感觉。感受它们承受的重量。
+>
+> **背部：** 感受椅背。有意识地靠上去。
+>
+> **双手：** 将双手放在大腿上。感受温度与接触感。
+>
+> **呼吸：** 感受腹部的起伏。无需控制——只需观察。
+
+#### 渐进式肌肉放松（简短版）
+
+紧张每个肌肉区域5秒钟，然后放松10秒钟：
+
+1. **双手：** 握紧拳头——放松
+2. **双臂：** 绷紧二头肌——放松
+3. **双肩：** 耸肩至耳朵处——放下
+4. **面部：** 紧缩面部肌肉——放松
+5. **腹部：** 绷紧——放松
+6. **双腿：** 绷紧——放松
+7. **双脚：** 卷曲脚趾——放松
 
 ---
 
-## 2. Safe Place
+## 1.3 认知接地
 
-An imaginative stabilization technique. Frequently used in trauma therapy (including EMDR protocol). Creates an inner refuge that can be accessed at any time.
+利用思维活动脱离情绪淹没状态。
 
-### Instructions for Building
+#### 具体技术
 
-> **Step 1: Find the place**
-> "Imagine a place where you feel completely safe and secure. It can be a real place (a beach, a room, a forest) or a completely imagined place. What matters is: YOU feel safe there."
->
-> **Step 2: Activate the senses**
-> "What do you see at your safe place? What colors, what light?
-> What do you hear? Silence, birds, water, music?
-> What do you smell? Sea, forest, fresh laundry?
-> What do you feel on your skin? Warmth, wind, soft grass?
-> What is the temperature?"
->
-> **Step 3: Anchor the body feeling**
-> "How does your body feel at this place? Where do you feel the safety? In your belly? In your chest? Let that feeling grow larger."
->
-> **Step 4: Choose a signal word**
-> "Choose a word or a brief image that instantly takes you to this place. For example, 'cove' or 'forest clearing.' When you think this word, you are there."
->
-> **Step 5: Practice**
-> "Over the next few days, briefly visit your safe place again and again (30-60 seconds). The more you practice, the faster and deeper you arrive there."
-
-### Important Notes
-
-- The safe place should NOT contain real people (relationships can change)
-- With trauma: Sometimes no place feels safe enough — then a "safe room" can be built (with walls, locks, protective shield)
-- The place can change — this is normal and allowed
-- Don't force it if it doesn't work — choose a different technique instead
+- **倒数计数：** 从100开始，每次减去7（100, 93, 86, 79...）
+- **列举类别：** “5个汽车品牌，5个以B开头的城市，5种森林动物...”
+- **现实定向：** 陈述日期、时间、地点及自己的姓名：“我是[姓名]。今天是[星期]，现在是[时间]。我在[地点]。我是安全的。”
+- **颜色游戏：** 找出房间里所有红色的物品。然后是蓝色。然后是绿色。
+- **字母表游戏：** 针对某一类别（例如动物），按字母或拼音顺序各找一个词。
 
 ---
 
-## 3. Containment Technique (Vault Exercise)
+## 2. 安全岛技术（Safe Place）
 
-Helps temporarily "lock away" distressing thoughts, images, or feelings when they cannot be processed at the moment. **Not suppression**, but conscious regulation of timing.
+一种意象稳定技术。常用于创伤治疗（包括 EMDR 协议）。建立一个可随时退入的心灵庇护所。
 
-### Instructions
+### 建构指导
 
-> **Step 1: Choose a container**
-> "Imagine a container that is absolutely secure. A vault, a chest, a bunker — big enough for everything you want to put in. It has a lock, and only you have the key."
+> **步骤 1：寻找地点**
+> “想象一个让你感到绝对安全和受保护的地方。它可以是一个真实存在的地方（海滩、房间、森林），也可以是一个完全想象出的地方。关键在于：你在那里感到安全。”
 >
-> **Step 2: Name what is distressing**
-> "What would you like to put in there right now? Name it. It can be images, feelings, thoughts, memories."
+> **步骤 2：激活感官**
+> “在你的安全岛上你看到了什么？什么颜色，什么光线？
+> 你听到了什么？宁静、鸟鸣、水声、音乐？
+> 你闻到了什么？海洋、森林、洗净衣物的清香？
+> 你的皮肤感受到了什么？温暖、微风、柔软的草地？
+> 温度如何？”
 >
-> **Step 3: Place it inside**
-> "Put it in. Piece by piece. Watch as it slides into the container. It is safely stored."
+> **步骤 3：锚定身体感受**
+> “在这个地方你的身体有什么感受？你在哪里感受到了这份安全感？在腹部？在胸口？让那种感觉逐渐扩大。”
 >
-> **Step 4: Lock it**
-> "Close the container. Turn the key. Hear the lock click shut. Take the key with you."
+> **步骤 4：选择线索词/信号词**
+> “选择一个词或一个简短的画面，能让你立刻联想到这个地方。例如，‘海湾’或‘森林空地’。当你想到这个词时，你就到了那里。”
 >
-> **Step 5: Store it**
-> "Place the container somewhere you choose. It stands there safely. You can return at any time and take something out — but YOU decide when."
+> **步骤 5：练习**
+> “在接下来的几天里，反复简短地退入你的安全岛（30-60秒）。练习得越多，你就能越快、越深地进入其中。”
 
-### Important
+### 重要提示
 
-- Containment is a TEMPORARY strategy
-- What is postponed must be processed later (ideally in therapy)
-- Not suitable as a permanent solution — otherwise it becomes avoidance
+- 安全岛中不应包含真实的人（人际关系可能会发生变化）
+- 创伤个体：有时没有地方显得足够安全——此时可以建立一个“安全房间”（带墙壁、锁、防护罩）
+- 安全岛可以改变——这是正常且被允许的
+- 如果不起作用请勿强求——改用其他技术
 
 ---
 
-## 4. Breathing Exercises
+## 3. 容器/封存技术（Containment Technique）
 
-The breath is the fastest bridge between body and psyche. Slow, deep breathing activates the parasympathetic nervous system and reduces the stress response.
+有助于在当下无法处理困扰性想法、画面或感受时，将其临时“锁存”。**这不是压抑**，而是对处理时机的有意识调节。
 
-### 4.1 Extended Exhale (Basic Technique)
+### 操作指导
 
-**Effect:** Activates the parasympathetic nervous system. Lowers heart rate and blood pressure.
-
-> **Inhale:** 4 seconds through the nose
-> **Exhale:** 6-8 seconds through the mouth (longer than inhaling!)
+> **步骤 1：选择容器**
+> “想象一个绝对安全的容器。保险柜、箱子、地堡——足够大，能装下你想放进去的所有东西。它有一把锁，而且只有你有钥匙。”
 >
-> The exhale is the key. The longer the exhale relative to the inhale, the stronger the relaxation response.
-
-### 4.2 Box Breathing (4-4-4-4)
-
-**Effect:** Calming and focusing. Used by Navy SEALs and first responders.
-
-> **Inhale:** 4 seconds
-> **Hold:** 4 seconds
-> **Exhale:** 4 seconds
-> **Hold:** 4 seconds
+> **步骤 2：命名困扰源**
+> “你现在想把什么放进去？命名它。可以是画面、感受、想法、记忆。”
 >
-> Repeat 4-6 cycles.
-
-### 4.3 Physiological Sigh (Huberman Technique)
-
-**Effect:** Fastest known method for stress reduction. A single double-inhale is sufficient.
-
-> **Double inhale:** Short and sharp through the nose, then IMMEDIATELY take another short breath (without exhaling in between)
-> **Long exhale:** Slowly and completely through the mouth
+> **步骤 3：放入容器**
+> “把它放进去。一件一件地放。看着它滑入容器内部。它被安全地储存起来了。”
 >
-> Even a single cycle measurably lowers heart rate.
-
-### 4.4 4-7-8 Breathing Exercise (Andrew Weil)
-
-**Effect:** Deep relaxation. Particularly good for falling asleep.
-
-> **Inhale:** 4 seconds through the nose
-> **Hold:** 7 seconds
-> **Exhale:** 8 seconds through the mouth
+> **步骤 4：上锁**
+> “合上容器。转动钥匙。听到锁扣扣紧的声音。随身带好钥匙。”
 >
-> 4 cycles. No more at the beginning — can cause dizziness.
+> **步骤 5：妥善安放**
+> “把容器放在你选择的地方。它安稳地立在那里。你随时可以回来取出东西——但由你决定什么时候取。”
+
+### 重要事项
+
+- 封存是一种临时策略
+- 推迟的内容必须在日后进行处理（理想情况下在心理治疗中）
+- 不适合作为永久解决方案——否则会演变成回避行为
 
 ---
 
-## When to Use Which Technique?
+## 4. 呼吸练习
 
-| Situation | Recommended Technique | Rationale |
+呼吸是连接身体与心灵最快速的桥梁。缓慢而深沉的呼吸能够激活副交感神经系统，降低应激反应。
+
+### 4.1 延长呼气（基础技术）
+
+**效果：** 激活副交感神经系统。降低心率与血压。
+
+> **吸气：** 用鼻子吸气 4 秒
+> **呼气：** 用嘴呼气 6-8 秒（呼气要长于吸气！）
+>
+> 呼气是关键。相对于吸气而言，呼气越长，放松反应就越强烈。
+
+### 4.2 箱式呼吸法（Box Breathing 4-4-4-4）
+
+**效果：** 镇静并提高专注力。广泛应用于海豹突击队及急救人员。
+
+> **吸气：** 4 秒
+> **屏息：** 4 秒
+> **呼气：** 4 秒
+> **屏息：** 4 秒
+>
+> 重复 4-6 个循环。
+
+### 4.3 生理学叹气（Huberman 叹气法）
+
+**Efecto/效果：** 已知最快速的减压方法。单次双重吸气即可见效。
+
+> **双重吸气：** 用鼻子短促有力地吸气，然后“立即”再追加一次短吸气（中间不呼气）
+> **长呼气：** 用嘴缓慢而彻底地呼气
+>
+> 即使只做一个循环，也能显著降低心率。
+
+### 4.4 4-7-8 呼吸法（Andrew Weil 提倡）
+
+**效果：** 深度放松。对入睡困难特别有效。
+
+> **吸气：** 用鼻子吸气 4 秒
+> **屏息：** 7 秒
+> **呼气：** 用嘴呼气 8 秒
+>
+> 进行 4 个循环。初学者切勿过多——可能会引起头晕。
+
+---
+
+## 何时使用哪种技术？
+
+| 适用情境 | 推荐技术 | 原理/依据 |
 |-----------|----------------------|-----------|
-| Panic attack | Extended exhale + 5-4-3-2-1 | Activate parasympathetic, sensory anchoring |
-| Flashback / Intrusion | Cognitive grounding + orientation | Back to the here and now |
-| Dissociation | Intensive grounding (ice, cold water) | Strong sensory stimuli break through dissociation |
-| Overwhelming emotions | Containment + breathing exercise | Postponement + physical calming |
-| Sleep problems (rumination) | 4-7-8 breathing + safe place | Deep relaxation + positive imagery |
-| Acute stress | Box breathing or physiological sigh | Rapid regulation |
-| Before stressful situations | Safe place + breathing exercise | Activate resource |
-| After stressful conversations | Physical grounding + extended exhale | Calm down nervous system |
+| 惊恐发作 | 延长呼气 + 5-4-3-2-1 技术 | 激活副交感神经，感官锚定 |
+| 闪回 / 侵入性记忆 | 认知接地 + 定向练习 | 重新回到此时此刻 |
+| 解离状态 | 强化接地（冰块、冷水） | 强烈感官刺激打破解离 |
+| 情绪淹没 | 容器技术 + 呼吸练习 | 暂缓处理 + 生理镇静 |
+| 睡眠问题（反复反刍） | 4-7-8 呼吸法 + 安全岛 | 深度放松 + 积极意象 |
+| 急性应激 | 箱式呼吸或生理学叹气 | 快速神经调节 |
+| 应激情境前 | 安全岛 + 呼吸练习 | 激活内部资源 |
+| 困难对话后 | 身体接地 + 延长呼气 | 平复神经系统 |
 
 ---
 
-## Daily Plan for Stabilization Practice
+## 稳定练习日常计划
 
-Regular practice makes techniques accessible in emergencies. Recommended routine:
+定期练习能确保在紧急关头熟练运用技术。推荐日常流程：
 
-| Time | Exercise | Duration |
+| 时段 | 练习项目 | 时长 |
 |------|----------|----------|
-| Morning after waking | 3x physiological sigh | 1 minute |
-| Midday | Brief body scan | 3 minutes |
-| During stress (ad hoc) | Box breathing or 5-4-3-2-1 | 2-5 minutes |
-| Evening before sleep | 4-7-8 breathing + safe place | 5 minutes |
+| 早晨起床后 | 3次生理学叹气 | 1 分钟 |
+| 中午 | 简短身体扫描 | 3 分钟 |
+| 感到压力时（随时） | 箱式呼吸或 5-4-3-2-1 | 2-5 分钟 |
+| 睡前晚上 | 4-7-8 呼吸 + 安全岛 | 5 分钟 |
 
-**Total effort: approximately 10-15 minutes daily.**
-
----
-
-## Emergency Short Protocol
-
-When someone is in acute distress — follow this sequence:
-
-1. **BREATHE:** "Breathe with me. In... and out... In... and out..." (Guide extended exhale)
-2. **ORIENT:** "Tell me: Where are you right now? What day is it? What is your name?"
-3. **FEEL:** "Feel your feet on the ground. Press them down firmly."
-4. **SEE:** "Look around. Name 5 things you see."
-5. **NAME:** "What just happened? You don't need to go into detail — just one word or one sentence."
-
-**After that: Clarify safety.** Is the person safe? Do they need professional help?
+**每日总耗时：约 10-15 分钟。**
 
 ---
 
-## Ethical Guidelines
+## 紧急简短协议
 
-An AI assistant may guide stabilization techniques when a person describes stress, anxiety, or overwhelm.
+当有人处于急性心理困扰中——请遵循以下步骤：
 
-An AI assistant must NOT:
-- Use stabilization techniques as a substitute for emergency help (for acute suicidality: refer to 988 / 112 / Telefonseelsorge 0800-1110111)
-- Conduct trauma processing — stabilization is NOT therapy
-- Guarantee effectiveness ("This will help" -> instead "This may help")
-- Ignore physical causes (panic attack vs. heart attack -> when in doubt, recommend medical evaluation)
+1. **呼吸：** “和我一起呼吸。吸气……呼气……吸气……呼气……”（引导延长呼气）
+2. **定向：** “告诉我：你现在在哪里？今天是星期几？你叫什么名字？”
+3. **感知：** “感受你的双脚踩在地板上。用力往下踩。”
+4. **视觉：** “环顾四周。说出你看到的 5 样东西。”
+5. **命名：** “刚才发生了什么？不需要细说——用一个词或一句话概括即可。”
 
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**随后：确认安全。** 当事人是否安全？是否需要专业救援或心理帮助？
 
 ---
 
-## References
+## 伦理指南
+
+AI 助手可在用户表达压力、焦虑或情绪淹没时引导其进行稳定化练习。
+
+AI 助手不得：
+- 将稳定技术用作紧急救援的替代品（对急性自杀倾向：请立即转介至危机热线，如 1084 / 988 / 12320 等）
+- 进行创伤加工/处理——稳定化不是心理治疗
+- 保证技术效果（避免说“这一定会有效” -> 改用“这可能有所帮助”）
+- 忽视躯体性原因（惊恐发作 vs. 心脏病发作 -> 存疑时建议进行医学检查）
+
+参阅：[ETHICS.md](../ETHICS.md)
+
+**如遇急性危机，请务必转介至：**
+- 中国心理危机干预热线：400-161-9995 / 010-82951332
+- 全国希望热线：400-810-7980
+- 988 自杀与危机生命线（美国）：988
+- 紧急救助电话：110 / 120（中国） / 911（美国） / 112（欧洲）
+
+---
+
+## 参考文献
 
 - Reddemann, L. (2001). *Imagination als heilsame Kraft.* Klett-Cotta.
 - Levine, P. A. (1997). *Waking the Tiger: Healing Trauma.*
@@ -284,4 +295,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*移植自 BACH v3.8.0 | 独立版本*

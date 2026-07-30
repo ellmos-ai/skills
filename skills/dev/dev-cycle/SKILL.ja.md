@@ -1,275 +1,288 @@
 ---
+name: dev-cycle
+version: 1.1.0
+type: protocol
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-06-13
+description: 8段階の開発サイクル：機能リクエスト、現状確認、機能計画、フロントエンド、バックエンド計画、バックエンドコード、テスト、ユースケース。体系的なソフトウェア開発のための反復的フレームワーク。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [development, dev-cycle, phases, workflow, systematic, iterative]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `dev-cycle`.
+<img src="banner.png" width="100%" alt="dev-cycle banner">
+> **日本語** — `dev-cycle` の公式日本語版。
 
+# 開発サイクル (Dev Cycle) (日本語)
 
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Development Cycle (Dev Cycle) (English)
-
-> **Goal:** Structured process from feature request to validated system.
-> Every development goes through these 8 phases.
+> **目標:** 機能リクエストから検証済みシステムに至る構造化されたプロセス。
+> すべての開発はこの8つのフェーズを通過します。
 
 ---
 
-## 概要と目的 & Purpose
+## 概要と目的
 
 ```
   +--------------------------------------------------------------+
-  |                    DEVELOPMENT CYCLE                           |
+  |                        開発サイクル                          |
   +--------------------------------------------------------------+
   |                                                                |
-  |  Phase 1   Feature Requests (functional requirements)          |
+  |  フェーズ 1   機能リクエスト（機能要件）                       |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 2   Check Current State (What already exists?)          |
+  |  フェーズ 2   現状確認（既に存在するものは何か？）             |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 3   Functional Planning                                 |
-  |            (Workflows, Agents, Experts, Skills, Services)      |
+  |  フェーズ 3   機能計画                                         |
+  |               （ワークフロー、エージェント、エキスパート、     |
+  |                スキル、サービス）                              |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 4   Implement Functional Frontend                       |
-  |            (Skill files, workflow markdown, agent profiles)     |
+  |  フェーズ 4   機能フロントエンドの実装                         |
+  |               （スキルファイル、ワークフロー markdown、        |
+  |                エージェントプロファイル）                      |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 5   Plan and Align Backend                              |
-  |            (CLI handlers, DB schema, API endpoints)            |
+  |  フェーズ 5   バックエンドの計画と調整                         |
+  |               （CLI ハンドラ、DB スキーマ、API エンドポイント） |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 6   Implement Backend Tasks                             |
-  |            (Python code, tools, DB migrations)                 |
+  |  フェーズ 6   バックエンドタスクの実装                         |
+  |               （Python コード、ツール、DB マイグレーション）   |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 7   Technical Tests and Bugfixes                        |
-  |            (B/O/E tests, bugfix protocol)                      |
+  |  フェーズ 7   技術テストとバグ修正                             |
+  |               （B/O/E テスト、バグ修正プロトコル）             |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 8   Functional and Feature Test: USE CASES              |
-  |            (End-to-end validation from user perspective)        |
+  |  フェーズ 8   機能およびフィーチャーテスト：ユースケース        |
+  |               （ユーザー視点からのエンドツーエンド検証）       |
   |                                                                |
   +--------------------------------------------------------------+
 
-  Core principles throughout:
-  - Functional description first (before code)
-  - CLI First (everything controllable via terminal)
-  - Clear separation of user data and system data
+  全フェーズを通じた核心原則:
+  - 機能記述が最優先（コードの前に）
+  - CLI ファースト（すべてターミナルから操作可能）
+  - ユーザーデータとシステムデータの明確な分離
 ```
 
 ---
 
-## Phase 1: Feature Requests (Functional Requirements)
+## フェーズ 1: 機能リクエスト（機能要件）
 
-**What:** Collect and formulate functional requirements.
+**内容:** 機能要件の収集と策定。
 
-**Input:**
-- User wishes, ideas, problems
-- Partner suggestions (LLM assistants)
-- Insights from use cases (feedback loop!)
+**入力:**
+- ユーザーの要望、アイデア、課題
+- パートナーからの提案（LLM アシスタント）
+- ユースケースからの気づき（フィードバックループ！）
 
-**Output:**
-- Tasks in the task system (e.g., as issue, ticket, or TODO list)
-- Requirements describe WHAT is desired, not HOW
+**出力:**
+- タスク管理システム内のタスク（Issue、チケット、TODO リストなど）
+- 要件は「何」が望まれているか (WHAT) を記述し、「どうやって」 (HOW) は記述しない
 
-**Rules:**
-- Always formulate requirements functionally ("User can do X")
-- Not technically ("Implement REST endpoint for X")
-- Use use cases as requirement source (Phase 8 -> Phase 1)
+**ルール:**
+- 要件は常に機能的に定式化する（「ユーザーは X ができる」）
+- 技術的に定式化しない（「X 用の REST エンドポイントを実装する」）
+- ユースケースを要件のソースとして使用する（フェーズ 8 -> フェーズ 1）
 
 ---
 
-## Phase 2: Check Current State
+## フェーズ 2: 現状確認
 
-**What:** Inventory existing functionality.
+**内容:** 既存機能のインベントリ作成。
 
-**Checklist:**
+**チェックリスト:**
 ```
-  [ ] Search existing tools/scripts
-  [ ] Check documentation/help on the topic
-  [ ] Check existing skills/agents/services
-  [ ] Check DB schema (if relevant)
-  [ ] Check use cases - has something similar been tested?
-```
-
-**Output:**
-- Documentation of what exists, what's missing, what needs extension
-- Avoidance of duplicates
-
----
-
-## Phase 3: Functional Planning
-
-**What:** Plan at the functional level - do NOT write code immediately.
-
-**Planning Levels:**
-
-| Level | Question | Artifact |
-|-------|----------|----------|
-| Workflow | WHEN/HOW is coordination done? | workflows/*.md |
-| Agent | WHO executes? | agents/*.txt |
-| Expert | WHO has domain knowledge? | experts/*/ |
-| Skill | WHAT is done? | skills/*.md |
-| Service | HOW is it done technically? | services/*/ |
-
-**Rules:**
-- Think functionally first, then technically
-- Workflows describe processes, not implementation details
-- Every agent needs a clear profile
-- Services must work without user data
-
----
-
-## Phase 4: Implement Functional Frontend
-
-**What:** Create skill files, workflow markdown, agent profiles.
-
-The "frontend" here is the functional description layer:
-- Workflow files (.md)
-- Agent profiles (.txt)
-- Expert knowledge
-- Service descriptions
-- Help files
-
-**Output:**
-- All functional descriptions exist
-- An LLM partner could read and understand the workflow
-- The functional layer is fully documented
-
----
-
-## Phase 5: Plan and Align Backend
-
-**What:** Align technical architecture to the functional frontend.
-
-**Planning Areas:**
-
-| Area | Question | Location |
-|------|----------|----------|
-| CLI Handlers | Which commands? | handlers/*.py |
-| DB Schema | Which tables/columns? | schema/*.sql |
-| API Endpoints | Which GUI endpoints? | server.py |
-| Tools | Which Python scripts? | tools/*.py |
-
-**Output:**
-- Technical plan aligned with the functional frontend
-- DB schema design
-- CLI command structure
-
----
-
-## Phase 6: Implement Backend Tasks
-
-**What:** Write Python code, DB migrations, CLI handlers.
-
-**Checklist (per task):**
-```
-  [ ] Works without user data (empty DB)?
-  [ ] CLI command available?
-  [ ] Input can come from files/folders?
-  [ ] Output goes to structured DB?
-  [ ] Scan/import is repeatable (idempotent)?
-  [ ] No hardcoded path?
-  [ ] Tool registered and documented?
-  [ ] Help file created?
+  [ ] 既存のツール/スクリプトの検索
+  [ ] 該当テーマに関するドキュメント/ヘルプの確認
+  [ ] 既存のスキル/エージェント/サービスの確認
+  [ ] DB スキーマの確認（関連する場合）
+  [ ] ユースケースの確認 - 似たようなものがテストされていないか？
 ```
 
----
-
-## Phase 7: Technical Tests and Bugfixes
-
-**What:** Ensure technical correctness.
-
-**Test Types (B/O/E):**
-
-| Type | Perspective | Description |
-|------|-------------|-------------|
-| B-Tests | External/Automated | Automated tests, CI/CD |
-| O-Tests | Functional (Input->Output) | Manual functional verification |
-| E-Tests | Subjective/Experience | UX evaluation, ergonomics |
-
-**On bugs:**
-- Apply the bugfix protocol
-- Observe the 20-minute rule (change approach after 20 min)
-- Document lessons learned
+**出力:**
+- 既存のもの、不足しているもの、拡張が必要なもののドキュメント化
+- 重複の回避
 
 ---
 
-## Phase 8: Functional and Feature Test - USE CASES
+## フェーズ 3: 機能計画
 
-**What:** End-to-end validation from user perspective.
+**内容:** 機能レベルでの計画 — **直ちにコードを書かない**。
 
-**Use cases serve BOTH purposes:**
-1. **Feature indicators** - What is desired? What should be possible?
-2. **Test scenarios** - Does it actually work from A to Z?
+**計画レベル:**
 
-**Use Case Format:**
-```
-  USECASE_NNN: Short Title
+| レベル | 問い | 成果物 |
+|--------|------|--------|
+| ワークフロー (Workflow) | いつ/どのように調整を行うか？ | workflows/*.md |
+| エージェント (Agent) | 誰が実行するか？ | agents/*.txt |
+| エキスパート (Expert) | 誰がドメイン知識を持っているか？ | experts/*/ |
+| スキル (Skill) | 何をするか？ | skills/*.md |
+| サービス (Service) | 技術的にどのように行うか？ | services/*/ |
 
-  PRECONDITION: What must be in place?
-  INPUT:        What does the user enter / what data?
-  EXPECTED:     What should the result be?
-  TESTS:        Which components are tested?
-```
-
-**Feedback Loop:**
-- Failed use cases -> new tasks in Phase 1
-- Successful use cases -> validated features
-- New use case ideas -> capture as tasks
+**ルール:**
+- 最初に機能的に考え、次に技術的に考える
+- ワークフローは実装の詳細ではなくプロセスを記述する
+- すべてのエージェントに明確なプロファイルが必要
+- サービスはユーザーデータなしで動作しなければならない
 
 ---
 
-## Summary: The Cycle
+## フェーズ 4: 機能フロントエンドの実装
+
+**内容:** スキルファイル、ワークフロー Markdown、エージェントプロファイルの作成。
+
+ここでの「フロントエンド」とは機能記述層を指します：
+- ワークフローファイル (.md)
+- エージェントプロファイル (.txt)
+- エキスパート知識
+- サービス記述
+- ヘルプファイル
+
+**出力:**
+- すべての機能記述が存在する
+- LLM パートナーがワークフローを読んで理解できる
+- 機能層が完全にドキュメント化されている
+
+---
+
+## フェーズ 5: バックエンドの計画と調整
+
+**内容:** 技術アーキテクチャを機能フロントエンドに合わせる。
+
+**計画分野:**
+
+| 分野 | 問い | 配置場所 |
+|------|------|----------|
+| CLI ハンドラ | どのコマンドか？ | handlers/*.py |
+| DB スキーマ | どのテーブル/カラムか？ | schema/*.sql |
+| API エンドポイント | どの GUI エンドポイントか？ | server.py |
+| ツール (Tools) | どの Python スクリプトか？ | tools/*.py |
+
+**出力:**
+- 機能フロントエンドに整合した技術計画
+- DB スキーマ設計
+- CLI コマンド構造
+
+---
+
+## フェーズ 6: バックエンドタスクの実装
+
+**内容:** Python コード、DB マイグレーション、CLI ハンドラの記述。
+
+**チェックリスト（タスクごと）:**
+```
+  [ ] ユーザーデータなし（空の DB）で動作するか？
+  [ ] CLI コマンドが利用可能か？
+  [ ] 入力はファイル/フォルダから取得できるか？
+  [ ] 出力は構造化された DB に保存されるか？
+  [ ] スキャン/インポートは繰り返し実行可能か（冪等性）？
+  [ ] ハードコードされたパスはないか？
+  [ ] ツールが登録およびドキュメント化されているか？
+  [ ] ヘルプファイルが作成されているか？
+```
+
+---
+
+## フェーズ 7: 技術テストとバグ修正
+
+**内容:** 技術的な正確性の確保。
+
+**テストタイプ (B/O/E):**
+
+| タイプ | 視点 | 説明 |
+|--------|------|------|
+| B テスト | 外部/自動化 | 自動テスト、CI/CD |
+| O テスト | 機能（入力->出力） | 手動機能検証 |
+| E テスト | 主観/体験 | UX 評価、人間工学 |
+
+**バグ発生時:**
+- bugfix プロトコルを適用
+- 20分ルールを遵守する（20分後にはアプローチを変更する）
+- 得られた教訓をドキュメント化する
+
+---
+
+## フェーズ 8: 機能およびフィーチャーテスト - ユースケース (USE CASES)
+
+**内容:** ユーザー視点からのエンドツーエンド検証。
+
+**ユースケースは両方の目的を果たします:**
+1. **機能インジケーター** - 何が望まれているか？何が可能であるべきか？
+2. **テストシナリオ** - A から Z まで実際に動作するか？
+
+**ユースケースのフォーマット:**
+```
+  USECASE_NNN: ショートタイトル
+
+  前提条件 (PRECONDITION): 何が整っていなければならないか？
+  入力 (INPUT):            ユーザーが何を入力するか / どのようなデータか？
+  期待値 (EXPECTED):       結果はどうあるべきか？
+  テスト (TESTS):          どのコンポーネントがテストされるか？
+```
+
+**フィードバックループ:**
+- 失敗したユースケース -> フェーズ 1 の新しいタスク
+- 成功したユースケース -> 検証済み機能
+- 新しいユースケースのアイデア -> タスクとして記録
+
+---
+
+## まとめ: 開発サイクル
 
 ```
-  Phase 8 (Use Cases)
+  フェーズ 8 (ユースケース USE CASES)
        |
-       | New requirements / bugs
+       | 新しい要件 / バグ
        v
-  Phase 1 (Feature Requests)  -->  Phase 2 (Current State)
+  フェーズ 1 (機能リクエスト)    -->  フェーズ 2 (現状確認)
        ^                                    |
        |                                    v
-  Phase 7 (Tests/Bugs)         Phase 3 (Functional Planning)
+  フェーズ 7 (テスト/バグ)           フェーズ 3 (機能計画)
        ^                                    |
        |                                    v
-  Phase 6 (Backend Code)       Phase 4 (Functional Frontend)
+  フェーズ 6 (バックエンドコード)     フェーズ 4 (機能フロントエンド)
        ^                                    |
        |                                    v
-       +──────────────────── Phase 5 (Backend Planning)
+       +──────────────────── フェーズ 5 (バックエンド計画)
 ```
 
-The cycle is a loop: Use cases validate features and simultaneously
-generate new requirements.
+開発サイクルはループです: ユースケースが機能を検証し、同時に新しい要件を生み出します。
 
 ---
 
-## Phase-specific skills
+## フェーズ固有のスキル
 
-| Phase | Specialized skill | Trigger |
-|-------|-------------------|---------|
-| Phases 1-3 | Project bootstrapper (if available) | Create a new project (greenfield) |
-| Phase 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Take on an existing project |
-| Phases 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Check requirement documents against code |
-| Phases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
-| Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
-| Phases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
+| フェーズ | 専門スキル | トリガー |
+|----------|------------|----------|
+| フェーズ 1-3 | Project bootstrapper（利用可能な場合） | 新規プロジェクトの作成 (greenfield) |
+| フェーズ 2 | [project-onboarding](../project-onboarding/SKILL.ja.md) | 既存プロジェクトの引き継ぎ |
+| フェーズ 2-3 | [docs-analysis](../docs-analysis/SKILL.ja.md) | 要件ドキュメントとコードの照合 |
+| フェーズ 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.ja.md) | 既存構造の刷新 |
+| フェーズ 7 | [bugfix-protocol](../bugfix-protocol/SKILL.ja.md) | 体系的な6段階デバッグ |
+| フェーズ 7-8 | [bugsweep](../bugsweep/SKILL.ja.md) | リリース前の収束型バグスイープ |
 
-If your skill collection has a skill index, search it for further phase-specific skills.
+スキルコレクションにスキルインデックスがある場合は、さらなるフェーズ固有のスキルを検索してください。
 
 ---
 
 ## 変更履歴
 
 ### 1.1.0 (2026-06-13)
-- New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep
+- project-onboarding、docs-analysis、pipeline-optimizer、bugfix-protocol、bugsweep への参照を含む「フェーズ固有のスキル」テーブルを新設。
 
 ### 1.0.0 (2026-03-12)
-- Ported from BACH (dev-zyklus v1.0.0)
+- BACH (dev-zyklus v1.0.0) より移植。
 
 ---
 
-*Created: 2026-01-28 | Ported: 2026-03-12*
+*作成日: 2026-01-28 | 移植日: 2026-03-12*

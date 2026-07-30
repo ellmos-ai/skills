@@ -1,115 +1,127 @@
 ---
+name: schema-therapy
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Схема-терапия по Джеффри Янгу: схемы, режимы, концепция внутреннего ребенка и стили копинга — в психообразовательном формате.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [schema-therapy, modes, inner-child, coping-styles, personality]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `schema-therapy`.
+> **Русский** — Официальная русская версия `schema-therapy`.
 
 
+# Схема-терапия (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Основы схема-терапии по Джеффри Янгу: Схемы, режимы, концепция внутреннего ребенка и стили копинга — Психообразовательный формат
 
-
-# Schema Therapy (English)
-
-> Fundamentals of Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Schema Therapy was developed by Jeffrey E. Young from the 1990s onward as an extension of cognitive behavioral therapy. It integrates elements from CBT, attachment theory, Gestalt therapy, and psychodynamic approaches.
-
-Evidence: Schema Therapy is well supported empirically, particularly for personality disorders (Giesen-Bloo et al. 2006, Masley et al. 2012). In Germany, it is recognized as a method within behavioral therapy.
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Early Maladaptive Schemas
+## Контекст
 
-### Principle
-Schemas are deeply rooted emotional and cognitive patterns that develop in childhood through unmet core needs. They influence how we perceive the world, ourselves, and others.
+Схема-терапия была разработана Джеффри Е. Янгом в 1990-х годах как развитие и интегративное расширение когнитивно-поведенческой терапии. Она объединяет элементы КПТ, теории привязанности, гештальт-терапии и психодинамического подхода.
 
-### The Five Core Needs (according to Young)
+Доказательная база: Схема-терапия имеет прочную эмпирическую доказательную базу, особенно при лечении расстройств личности (Giesen-Bloo et al. 2006, Masley et al. 2012). Во многих странах она официально признана научно обоснованным методом в рамках поведенческой терапии.
 
-| Core Need | When Unmet, May Lead To |
+**Примечание:** Данный материал носит психообразовательный характер и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
+
+---
+
+## 1. Ранние дезадаптивные схемы
+
+### Принцип
+Схемы — это глубоко укоренившиеся эмоциональные и когнитивные паттерны, которые формируются в детстве из-за неудовлетворенных базовых эмоциональных потребностей. Они влияют на то, как мы воспринимаем мир, себя и окружающих.
+
+### Пять базовых эмоциональных потребностей (по Янгу)
+
+| Базовая потребность | При неудовлетворении может вести к |
 |-----------|------------------------|
-| Secure attachment | Abandonment, mistrust |
-| Autonomy & competence | Dependence, fear of failure |
-| Realistic limits | Entitlement, insufficient self-control |
-| Freedom to express needs | Subjugation, self-sacrifice |
-| Spontaneity & play | Unrelenting standards, punitiveness |
+| Безопасная привязанность | Покинутость, недоверие |
+| Автономия и компетентность | Зависимость, страх неудачи |
+| Реалистичные границы | Грандиозность, недостаток самоконтроля |
+| Свобода выражения потребностей | Подчинение, самопожертвование |
+| Спонтанность и игра | Жесткие стандарты, карательность |
 
-### The 18 Schemas — Overview (5 Domains)
+### 18 ранних дезадаптивных схем — Обзор (5 доменов)
 
-**Domain 1: Disconnection and Rejection**
-- Abandonment / Instability
-- Mistrust / Abuse
-- Emotional Deprivation
-- Defectiveness / Shame
-- Social Isolation
+**Домен 1: Покинутость и отвержение (Disconnection and Rejection)**
+- Покинутость / Нестабильность (Abandonment / Instability)
+- Недоверие / Жестокое обращение (Mistrust / Abuse)
+- Эмоциональная депривация (Emotional Deprivation)
+- Дефективность / Стыд (Defectiveness / Shame)
+- Социальная изоляция / Отчуждение (Social Isolation)
 
-**Domain 2: Impaired Autonomy and Performance**
-- Dependence / Incompetence
-- Vulnerability to Harm
-- Enmeshment / Undeveloped Self
-- Failure
+**Домен 2: Нарушение автономии и успешности (Impaired Autonomy and Performance)**
+- Зависимость / Некомпетентность (Dependence / Incompetence)
+- Уязвимость перед вредом или болезнями (Vulnerability to Harm)
+- Слияние / Неразвитое Эго (Enmeshment / Undeveloped Self)
+- Помеха успеху / Неуспех (Failure)
 
-**Domain 3: Impaired Limits**
-- Entitlement / Grandiosity
-- Insufficient Self-Control
+**Домен 3: Нарушенные границы (Impaired Limits)**
+- Привилегированность / Грандиозность (Entitlement / Grandiosity)
+- Недостаточность самоконтроля / Дисциплины (Insufficient Self-Control)
 
-**Domain 4: Other-Directedness**
-- Subjugation
-- Self-Sacrifice
-- Approval-Seeking
+**Домен 4: Направленность на других (Other-Directedness)**
+- Подчинение (Subjugation)
+- Самопожертвование (Self-Sacrifice)
+- Поиск одобрения / Признания (Approval-Seeking)
 
-**Domain 5: Overvigilance and Inhibition**
-- Negativity / Pessimism
-- Emotional Inhibition
-- Unrelenting Standards
-- Punitiveness
+**Домен 5: Сверхбдительность и подавление (Overvigilance and Inhibition)**
+- Негативизм / Пессимизм (Negativity / Pessimism)
+- Эмоциональное подавление (Emotional Inhibition)
+- Жесткие стандарты / Перфекционизм (Unrelenting Standards)
+- Наказуемость / Карательность (Punitiveness)
 
-### Reflection Questions for Schema Recognition
-- "What beliefs about yourself keep coming up again and again?"
-- "In which situations do you react particularly strongly emotionally?"
-- "Do you notice patterns that repeat across different relationships?"
-- "Which needs may have been insufficiently met in your childhood?"
+### Вопросы для рефлексии и распознавания схем
+- «Какие убеждения о себе снова и снова возникают в вашей жизни?»
+- «В каких ситуациях вы реагируете эмоционально особенно остро?»
+- «Замечаете ли вы повторяющиеся паттерны в различных отношениях?»
+- «Какие эмоциональные потребности могли остаться неудовлетворенными в вашем детстве?»
 
 ---
 
-## 2. The Mode Model
+## 2. Модель режимов (схемных режимов)
 
-### Principle
-Modes are momentary emotional states activated by schemas. The mode model helps understand and categorize different "inner parts."
+### Принцип
+Режимы (Modes) — это сиюминутные эмоциональные и поведенческие состояния, активируемые схемами. Модель режимов помогает понять и структурировать различные «внутренние части».
 
-### The Four Mode Categories
+### Четыре категории режимов
 
-**Child Modes:**
-- *Vulnerable Child:* Feels sad, lonely, anxious, overwhelmed
-- *Angry Child:* Angry about unmet needs
-- *Impulsive Child:* Acts without thinking, wants immediate gratification
-- *Happy Child:* Feels safe, loved, spontaneous
+**Режимы Ребенка (Child Modes):**
+- *Уязвимый ребенок:* Чувствует грусть, одиночество, тревогу, беспомощность
+- *Сердитый ребенок:* Испытывает гнев из-за неудовлетворенных потребностей
+- *Импульсивный ребенок:* Действует необдуманно, ищет немедленного удовольствия
+- *Счастливый ребенок:* Чувствует себя в безопасности, любимым и спонтанным
 
-**Maladaptive Parent Modes:**
-- *Punitive Parent:* Inner voice that criticizes, punishes, devalues
-- *Demanding Parent:* Inner voice that demands perfection and achievement
+**Дезадаптивные родительские режимы (Maladaptive Parent Modes):**
+- *Карающий родитель:* Внутренний голос, который критикует, наказывает и обесценивает
+- *Требовательный родитель:* Внутренний голос, требующий перфекционизма и постоянных достижений
 
-**Maladaptive Coping Modes:**
-- *Compliant Surrender:* Gives in, adapts excessively
-- *Detached Protector:* Numbs feelings, withdraws, distracts
-- *Overcompensation:* Dominates, controls, attacks
+**Дезадаптивные копинговые режимы (Maladaptive Coping Modes):**
+- *Капитуляция / Подчинение:* Сдается схеме, чрезмерно подстраивается
+- *Отстраненный защитник:* Замораживает чувства, отстраняется, ищет отвлечения
+- *Гиперкомпенсатор:* Доминирует, контролирует, проявляет агрессию или грандиозность
 
-**Healthy Adult:**
-- Can perceive needs and meet them appropriately
-- Sets healthy boundaries
-- Comforts and soothes the vulnerable child
-- Limits excessive parent modes
+**Здоровый взрослый (Healthy Adult):**
+- Способен осознавать потребности и удовлетворять их адекватно
+- Устанавливает здоровые границы
+- Утешает и успокаивает уязвимого ребенка
+- Ограничивает и останавливает требовательные и карательные родительские режимы
 
-### Exercise: Recognizing Modes in Daily Life
+### Упражнение: Распознавание режимов в повседневной жизни
 
 ```
 Situation: ______________
@@ -125,14 +137,14 @@ Which mode am I feeling right now?
 
 ---
 
-## 3. Inner Child Work (Psychoeducational)
+## 3. Работа с внутренним ребенком (Психообразовательный формат)
 
-### Principle
-Inner child work in Schema Therapy aims to develop a caring inner attitude toward one's own vulnerable parts.
+### Принцип
+Работа с внутренним ребенком в схема-терапии направлена на формирование заботливой, сострадательной внутренней позиции по отношению к собственным уязвимым частям.
 
-**CAUTION:** Deep inner child work belongs in professional therapeutic supervision.
+**ВНИМАНИЕ:** Глубокая проживательная работа с внутренним ребенком должна проводиться под руководством квалифицированного психотерапевта.
 
-### Reflection Exercise: Letter to the Inner Child
+### Упражнение для рефлексии: Письмо внутреннему ребенку
 
 ```
 Write a brief letter to your younger self:
@@ -141,55 +153,54 @@ Write a brief letter to your younger self:
 3. What comfort would you offer?
 ```
 
-### Reflection Questions
-- "When you think about that situation — how old do you feel inside?"
-- "What would a caring adult have said to you back then?"
-- "Which needs of the child within you are currently going unmet?"
+### Вопросы для рефлексии
+- «Когда вы думаете об этой ситуации — на сколько лет вы чувствуете себя внутри?»
+- «Что сказал бы вам тогда заботливый и любящий взрослый?»
+- «Какие потребности вашего внутреннего ребенка остаются неудовлетворенными прямо сейчас?»
 
 ---
 
-## 4. Understanding Coping Styles
+## 4. Понимание стилей копинга (совладания)
 
-### The Three Basic Patterns
+### Три базовых паттерна
 
-| Coping Style | Strategy | Example |
+| Стиль копинга | Стратегия | Пример |
 |-------------|----------|---------|
-| Surrender | Accept the schema, submit | "That's just how I am, I can't change it" |
-| Avoidance | Not wanting to feel the schema | Distraction, substance use, overwork |
-| Overcompensation | Living the opposite of the schema | Perfectionism instead of feeling like a failure |
+| Капитуляция (Surrender) | Принять схему, подчиниться ей | «Я просто такой человек, я ничего не могу изменить» |
+| Избегание (Avoidance) | Не хотеть чувствовать боль от схемы | Отвлечение, употребление веществ, трудоголизм |
+| Гиперкомпенсация (Overcompensation) | Действовать противоположно схеме | Эктремальный перфекционизм, чтобы не чувствовать себя неудачником |
 
-### Reflection Questions
-- "When you're under pressure — do you tend to submit, flee, or fight?"
-- "Which of your habits might be avoidance strategies?"
-- "Are there areas where you do the opposite of what you actually feel?"
+### Вопросы для рефлексии
+- «Когда вы находитесь под давлением — вы склонны подчиняться, убегать или нападать?»
+- «Какие из ваших привычек могут быть стратегиями избегания?»
+- «Есть ли сферы, где вы поступаете прямо противоположным образом тому, что чувствуете на самом деле?»
 
 ---
 
-## Ethics and Boundaries
+## Этика и границы применения
 
-**An AI assistant may:**
-- Explain schemas and modes as concepts
-- Ask reflection questions for self-exploration
-- Present coping styles as psychoeducation
-- Guide simple, written inner child reflection exercises
+**ИИ-ассистент имеет право:**
+- Объяснять схемы и режимы как концепции
+- Задавать рефлексивные вопросы для самоисследования
+- Предоставлять информацию о стилях копинга в психообразовательном формате
+- Направлять простые письменные упражнения для рефлексии внутреннего ребенка
 
-**An AI assistant must NOT:**
-- Diagnose or attribute schemas
-- Conduct chair work or experiential exercises
-- Offer reparenting (limited reparenting)
-- Process traumatic childhood experiences
-- Replace schema mode therapy
+**ИИ-ассистент НЕ имеет права:**
+- Ставить диагнозы и клинически приписывать схемы
+- Проводить работу со стульями (chairwork) и глубокие проживательные практики
+- Осуществлять ограниченное повторное родительство (limited reparenting)
+- Прорабатывать травматический детский опыт
+- Заменять профессиональную схема-терапию
 
-**In case of acute crisis, ALWAYS refer to:**
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (RU): 8-800-2000-122
+- Горячая линия психологической помощи (RU): +7 (495) 051
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная помощь: 112 (RU/EU), 911 (US)
 
 ---
 
-## References
+## Литература
 
 - Young, J. E., Klosko, J. S. & Weishaar, M. E. (2003). *Schema Therapy: A Practitioner's Guide.* Guilford Press.
 - Giesen-Bloo, J. et al. (2006). Outpatient Psychotherapy for Borderline Personality Disorder. *Archives of General Psychiatry*, 63(6), 649-658.

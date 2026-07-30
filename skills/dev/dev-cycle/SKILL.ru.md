@@ -1,275 +1,286 @@
 ---
+name: dev-cycle
+version: 1.1.0
+type: protocol
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-06-13
+description: 8-фазный цикл разработки: Запросы функций, текущее состояние, функциональное планирование, фронтенд, планирование бэкенда, код бэкенда, тесты, сценарии использования. Итеративная фреймворк-система для систематической разработки ПО.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [development, dev-cycle, phases, workflow, systematic, iterative]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `dev-cycle`.
+<img src="banner.png" width="100%" alt="dev-cycle banner">
+> **Русский** — Официальная русская версия `dev-cycle`.
 
+# Цикл разработки (Dev Cycle) (Русский)
 
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Development Cycle (Dev Cycle) (English)
-
-> **Goal:** Structured process from feature request to validated system.
-> Every development goes through these 8 phases.
+> **Цель:** Структурированный процесс от запроса функции до валидированной системы.
+> Каждая разработка проходит через эти 8 фаз.
 
 ---
 
-## Общий обзор и назначение & Purpose
+## Обзор и цель
 
 ```
   +--------------------------------------------------------------+
-  |                    DEVELOPMENT CYCLE                           |
+  |                      ЦИКЛ РАЗРАБОТКИ                         |
   +--------------------------------------------------------------+
   |                                                                |
-  |  Phase 1   Feature Requests (functional requirements)          |
+  |  Фаза 1   Запросы функций (Функциональные требования)          |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 2   Check Current State (What already exists?)          |
+  |  Фаза 2   Проверка текущего состояния (Что уже существует?)    |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 3   Functional Planning                                 |
-  |            (Workflows, Agents, Experts, Skills, Services)      |
+  |  Фаза 3   Функциональное планирование                          |
+  |            (Workflows, Агенты, Эксперты, Навыки, Сервисы)      |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 4   Implement Functional Frontend                       |
-  |            (Skill files, workflow markdown, agent profiles)     |
+  |  Фаза 4   Реализация функционального фронтенда                 |
+  |            (Файлы навыков, markdown workflows, профили агентов)|
   |     |                                                          |
   |     v                                                          |
-  |  Phase 5   Plan and Align Backend                              |
-  |            (CLI handlers, DB schema, API endpoints)            |
+  |  Фаза 5   Планирование и согласование бэкенда                  |
+  |            (Обработчики CLI, схема БД, эндпоинты API)          |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 6   Implement Backend Tasks                             |
-  |            (Python code, tools, DB migrations)                 |
+  |  Фаза 6   Реализация задач бэкенда                             |
+  |            (Код Python, утилиты, миграции БД)                  |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 7   Technical Tests and Bugfixes                        |
-  |            (B/O/E tests, bugfix protocol)                      |
+  |  Фаза 7   Технические тесты и исправления ошибок               |
+  |            (B/O/E тесты, протокол bugfix)                      |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 8   Functional and Feature Test: USE CASES              |
-  |            (End-to-end validation from user perspective)        |
+  |  Фаза 8   Функциональный тест и тест функций: USE CASES        |
+  |            (Сквозная валидация с точки зрения пользователя)    |
   |                                                                |
   +--------------------------------------------------------------+
 
-  Core principles throughout:
-  - Functional description first (before code)
-  - CLI First (everything controllable via terminal)
-  - Clear separation of user data and system data
+  Основные принципы на протяжении всего цикла:
+  - Сначала функциональное описание (до написания кода)
+  - CLI First (все управляется через терминал)
+  - Четкое разделение пользовательских данных и системных данных
 ```
 
 ---
 
-## Phase 1: Feature Requests (Functional Requirements)
+## Фаза 1: Запросы функций (Функциональные требования)
 
-**What:** Collect and formulate functional requirements.
+**Что:** Сбор и формулирование функциональных требований.
 
-**Input:**
-- User wishes, ideas, problems
-- Partner suggestions (LLM assistants)
-- Insights from use cases (feedback loop!)
+**Входные данные:**
+- Пожелания, идеи, проблемы пользователей
+- Предложения партнеров (LLM-ассистентов)
+- Выводы из сценариев использования (петля обратной связи!)
 
-**Output:**
-- Tasks in the task system (e.g., as issue, ticket, or TODO list)
-- Requirements describe WHAT is desired, not HOW
+**Выходные данные:**
+- Задачи в трекере (например, в виде issue, тикета или списка TODO)
+- Требования описывают, ЧТО нужно, а не КАК
 
-**Rules:**
-- Always formulate requirements functionally ("User can do X")
-- Not technically ("Implement REST endpoint for X")
-- Use use cases as requirement source (Phase 8 -> Phase 1)
+**Правила:**
+- Всегда формулировать требования функционально ("Пользователь может делать X")
+- Не технически ("Реализовать эндпоинт REST для X")
+- Использовать сценарии использования в качестве источника требований (Фаза 8 -> Фаза 1)
 
 ---
 
-## Phase 2: Check Current State
+## Фаза 2: Проверка текущего состояния
 
-**What:** Inventory existing functionality.
+**Что:** Инвентаризация существующей функциональности.
 
-**Checklist:**
+**Чек-лист:**
 ```
-  [ ] Search existing tools/scripts
-  [ ] Check documentation/help on the topic
-  [ ] Check existing skills/agents/services
-  [ ] Check DB schema (if relevant)
-  [ ] Check use cases - has something similar been tested?
-```
-
-**Output:**
-- Documentation of what exists, what's missing, what needs extension
-- Avoidance of duplicates
-
----
-
-## Phase 3: Functional Planning
-
-**What:** Plan at the functional level - do NOT write code immediately.
-
-**Planning Levels:**
-
-| Level | Question | Artifact |
-|-------|----------|----------|
-| Workflow | WHEN/HOW is coordination done? | workflows/*.md |
-| Agent | WHO executes? | agents/*.txt |
-| Expert | WHO has domain knowledge? | experts/*/ |
-| Skill | WHAT is done? | skills/*.md |
-| Service | HOW is it done technically? | services/*/ |
-
-**Rules:**
-- Think functionally first, then technically
-- Workflows describe processes, not implementation details
-- Every agent needs a clear profile
-- Services must work without user data
-
----
-
-## Phase 4: Implement Functional Frontend
-
-**What:** Create skill files, workflow markdown, agent profiles.
-
-The "frontend" here is the functional description layer:
-- Workflow files (.md)
-- Agent profiles (.txt)
-- Expert knowledge
-- Service descriptions
-- Help files
-
-**Output:**
-- All functional descriptions exist
-- An LLM partner could read and understand the workflow
-- The functional layer is fully documented
-
----
-
-## Phase 5: Plan and Align Backend
-
-**What:** Align technical architecture to the functional frontend.
-
-**Planning Areas:**
-
-| Area | Question | Location |
-|------|----------|----------|
-| CLI Handlers | Which commands? | handlers/*.py |
-| DB Schema | Which tables/columns? | schema/*.sql |
-| API Endpoints | Which GUI endpoints? | server.py |
-| Tools | Which Python scripts? | tools/*.py |
-
-**Output:**
-- Technical plan aligned with the functional frontend
-- DB schema design
-- CLI command structure
-
----
-
-## Phase 6: Implement Backend Tasks
-
-**What:** Write Python code, DB migrations, CLI handlers.
-
-**Checklist (per task):**
-```
-  [ ] Works without user data (empty DB)?
-  [ ] CLI command available?
-  [ ] Input can come from files/folders?
-  [ ] Output goes to structured DB?
-  [ ] Scan/import is repeatable (idempotent)?
-  [ ] No hardcoded path?
-  [ ] Tool registered and documented?
-  [ ] Help file created?
+  [ ] Поиск существующих утилит/скриптов
+  [ ] Проверка документации/справки по теме
+  [ ] Проверка существующих навыков/агентов/сервисов
+  [ ] Проверка схемы БД (если актуально)
+  [ ] Проверка сценариев использования — тестировалось ли нечто подобное?
 ```
 
----
-
-## Phase 7: Technical Tests and Bugfixes
-
-**What:** Ensure technical correctness.
-
-**Test Types (B/O/E):**
-
-| Type | Perspective | Description |
-|------|-------------|-------------|
-| B-Tests | External/Automated | Automated tests, CI/CD |
-| O-Tests | Functional (Input->Output) | Manual functional verification |
-| E-Tests | Subjective/Experience | UX evaluation, ergonomics |
-
-**On bugs:**
-- Apply the bugfix protocol
-- Observe the 20-minute rule (change approach after 20 min)
-- Document lessons learned
+**Выходные данные:**
+- Документирование того, что есть, чего не хватает, что требует расширения
+- Предотвращение дублирования
 
 ---
 
-## Phase 8: Functional and Feature Test - USE CASES
+## Фаза 3: Функциональное планирование
 
-**What:** End-to-end validation from user perspective.
+**Что:** Планирование на функциональном уровне — НЕ писать код сразу.
 
-**Use cases serve BOTH purposes:**
-1. **Feature indicators** - What is desired? What should be possible?
-2. **Test scenarios** - Does it actually work from A to Z?
+**Уровни планирования:**
 
-**Use Case Format:**
-```
-  USECASE_NNN: Short Title
+| Уровень | Вопрос | Артефакт |
+|---------|--------|----------|
+| Workflow | КОГДА/КАК выполняется координация? | workflows/*.md |
+| Агент | КТО выполняет? | agents/*.txt |
+| Эксперт | КТО обладает предметными знаниями? | experts/*/ |
+| Навык (Skill) | ЧТО делается? | skills/*.md |
+| Сервис | КАК это делается технически? | services/*/ |
 
-  PRECONDITION: What must be in place?
-  INPUT:        What does the user enter / what data?
-  EXPECTED:     What should the result be?
-  TESTS:        Which components are tested?
-```
-
-**Feedback Loop:**
-- Failed use cases -> new tasks in Phase 1
-- Successful use cases -> validated features
-- New use case ideas -> capture as tasks
+**Правила:**
+- Сначала думать функционально, затем технически
+- Workflows описывают процессы, а не детали реализации
+- Каждому агенту нужен четкий профиль
+- Сервисы должны работать без пользовательских данных
 
 ---
 
-## Summary: The Cycle
+## Фаза 4: Реализация функционального фронтенда
+
+**Что:** Создание файлов навыков, markdown workflows, профилей агентов.
+
+"Фронтенд" здесь — это слой функционального описания:
+- Файлы процессов/workflows (.md)
+- Профили агентов (.txt)
+- Знания экспертов
+- Описания сервисов
+- Файлы справки
+
+**Выходные данные:**
+- Все функциональные описания созданы
+- LLM-партнер может прочитать и понять workflow
+- Функциональный слой полностью задокументирован
+
+---
+
+## Фаза 5: Планирование и согласование бэкенда
+
+**Что:** Согласование технической архитектуры с функциональным фронтендом.
+
+**Области планирования:**
+
+| Область | Вопрос | Расположение |
+|---------|--------|--------------|
+| Обработчики CLI | Какие команды? | handlers/*.py |
+| Схема БД | Какие таблицы/колонки? | schema/*.sql |
+| Эндпоинты API | Какие GUI-эндпоинты? | server.py |
+| Утилиты (Tools) | Какие Python-скрипты? | tools/*.py |
+
+**Выходные данные:**
+- Технический план, согласованный с функциональным фронтендом
+- Проект схемы БД
+- Структура CLI-команд
+
+---
+
+## Фаза 6: Реализация задач бэкенда
+
+**Что:** Написание кода Python, миграций БД, обработчиков CLI.
+
+**Чек-лист (для каждой задачи):**
+```
+  [ ] Работает без пользовательских данных (пустая БД)?
+  [ ] Команда CLI доступна?
+  [ ] Входные данные могут поступать из файлов/папок?
+  [ ] Выходные данные сохраняются в структурированную БД?
+  [ ] Сканирование/импорт повторяемы (идемпотентны)?
+  [ ] Нет жестко зашитых путей (hardcoded paths)?
+  [ ] Инструмент зарегистрирован и задокументирован?
+  [ ] Файл справки создан?
+```
+
+---
+
+## Фаза 7: Технические тесты и исправления ошибок
+
+**Что:** Обеспечение технической корректности.
+
+**Типы тестов (B/O/E):**
+
+| Тип | Перспектива | Описание |
+|-----|-------------|----------|
+| B-тесты | Внешняя/Автоматизированная | Автоматические тесты, CI/CD |
+| O-тесты | Функциональная (Вход->Выход) | Ручная функциональная проверка |
+| E-тесты | Субъективная/Опыт | Оценка UX, эргономика |
+
+**При ошибках:**
+- Применять протокол bugfix
+- Соблюдать правило 20 минут (сменить подход через 20 мин)
+- Документировать извлеченные уроки
+
+---
+
+## Фаза 8: Функциональный тест и тест функций - USE CASES
+
+**Что:** Сквозная валидация с точки зрения пользователя.
+
+**Сценарии использования служат ДВУМ целям:**
+1. **Индикаторы функций** - Что требуется? Что должно быть возможно?
+2. **Тестовые сценарии** - Работает ли это на самом деле от A до Я?
+
+**Формат сценария использования (Use Case):**
+```
+  USECASE_NNN: Краткий заголовок
+
+  ПРЕДУСЛОВИЕ (PRECONDITION): Что должно быть готово?
+  ВХОДНЫЕ ДАННЫЕ (INPUT):    Что вводит пользователь / какие данные?
+  ОЖИДАЕТСЯ (EXPECTED):       Каким должен быть результат?
+  ТЕСТЫ (TESTS):              Какие компоненты тестируются?
+```
+
+**Петля обратной связи:**
+- Непрошедшие use cases -> новые задачи в Фазе 1
+- Успешные use cases -> валидированные функции
+- Новые идеи use cases -> фиксировать как задачи
+
+---
+
+## Итог: Цикл
 
 ```
-  Phase 8 (Use Cases)
+  Фаза 8 (Сценарии использования / Use Cases)
        |
-       | New requirements / bugs
+       | Новые требования / ошибки
        v
-  Phase 1 (Feature Requests)  -->  Phase 2 (Current State)
+  Фаза 1 (Запросы функций)       -->  Фаза 2 (Текущее состояние)
        ^                                    |
        |                                    v
-  Phase 7 (Tests/Bugs)         Phase 3 (Functional Planning)
+  Фаза 7 (Тесты/Ошибки)               Фаза 3 (Функциональное планирование)
        ^                                    |
        |                                    v
-  Phase 6 (Backend Code)       Phase 4 (Functional Frontend)
+  Фаза 6 (Код бэкенда)                Фаза 4 (Функциональный фронтенд)
        ^                                    |
        |                                    v
-       +──────────────────── Phase 5 (Backend Planning)
+       +──────────────────── Фаза 5 (Планирование бэкенда)
 ```
 
-The cycle is a loop: Use cases validate features and simultaneously
-generate new requirements.
+Цикл представляет собой замкнутую петлю: сценарии использования валидируют функции и одновременно порождают новые требования.
 
 ---
 
-## Phase-specific skills
+## Навыки, специфичные для фаз
 
-| Phase | Specialized skill | Trigger |
-|-------|-------------------|---------|
-| Phases 1-3 | Project bootstrapper (if available) | Create a new project (greenfield) |
-| Phase 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Take on an existing project |
-| Phases 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Check requirement documents against code |
-| Phases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
-| Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
-| Phases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
+| Фаза | Специализированный навык | Триггер |
+|------|--------------------------|---------|
+| Фазы 1-3 | Project bootstrapper (если доступен) | Создание нового проекта (greenfield) |
+| Фаза 2 | [project-onboarding](../project-onboarding/SKILL.ru.md) | Принятие существующего проекта |
+| Фазы 2-3 | [docs-analysis](../docs-analysis/SKILL.ru.md) | Проверка документов требований относительно кода |
+| Фазы 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.ru.md) | Обновление существующих структур |
+| Фаза 7 | [bugfix-protocol](../bugfix-protocol/SKILL.ru.md) | Систематическая 6-фазная отладка |
+| Фазы 7-8 | [bugsweep](../bugsweep/SKILL.ru.md) | Сходящаяся проверка ошибок перед релизом |
 
-If your skill collection has a skill index, search it for further phase-specific skills.
+Если в вашей коллекции навыков есть индекс навыков, поищите в нем дополнительные навыки, специфичные для фаз.
 
 ---
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-06-13)
-- New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep
+- Новая таблица "Навыки, специфичные для фаз" со ссылками на project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol и bugsweep.
 
 ### 1.0.0 (2026-03-12)
-- Ported from BACH (dev-zyklus v1.0.0)
+- Перенесено из BACH (dev-zyklus v1.0.0).
 
 ---
 
-*Created: 2026-01-28 | Ported: 2026-03-12*
+*Создано: 2026-01-28 | Перенесено: 2026-03-12*

@@ -2,78 +2,70 @@
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `surface-after-care`.
+> **Español** — Versión oficial en español de `surface-after-care`.
 
+# Surface After Care — La ronda de mantenimiento regular para un repositorio publicado (Español)
 
+## Cuándo se aplica esta habilidad
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Utilízala para un repositorio que **ya es público** y debe revisarse de forma periódica. Es el nivel económico y eficiente: todo lo que se puede decidir dentro del propio repositorio, sin necesidad de inventariar repositorios de terceros ni iniciar un dictamen jurídico.
 
+Diferenciación con habilidades afines:
 
-> **English Translation** — Official English version of `surface-after-care`.
-
-
-# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo (English)
-
-## Wann dieser Skill greift
-
-Nutze ihn für ein Repository, das **bereits öffentlich ist** und turnusmäßig durchgesehen werden soll. Er ist die günstige Stufe: alles, was sich am Repo selbst entscheiden lässt, ohne fremde Repos zu inventarisieren oder ein Rechtsgutachten anzustoßen.
-
-Abgrenzung zu den Nachbarskills:
-
-| Situation | Skill |
+| Situación | Habilidad |
 |---|---|
-| Repo wird zum ersten Mal veröffentlicht | `github-repo-care` |
-| Repo ist public, regelmäßige Pflegerunde | **dieser Skill** |
-| Zusätzlich Rechtscheck + Querverweise über alle Orgas + App-i18n | `full-after-care` (Alias `deep-after-care`) |
-| Reine Rechts-/Privacy-/Lizenzprüfung vor dem Public-Stellen | `repo-publish-check` |
-| Sprachfassungen inhaltlich synchron halten | `bilingual-doc-sync` |
-| Verteilung dieser Runde über viele Repos, fair rotierend | `rotation-check` |
+| El repositorio se publica por primera vez | `github-repo-care` |
+| El repositorio es público, ronda de mantenimiento regular | **esta habilidad** |
+| Verificación legal adicional + referencias cruzadas en todas las organizaciones + i18n de la aplicación | `full-after-care` (Alias `deep-after-care`) |
+| Auditoría pura de derecho/privacidad/licencia antes de hacer público | `repo-publish-check` |
+| Mantener sincronizadas las versiones lingüísticas en cuanto a contenido | `bilingual-doc-sync` |
+| Distribución de esta ronda en muchos repositorios, rotación justa | `rotation-check` |
 
-## Kernidee
+## Idea central
 
-Ein veröffentlichtes Repo driftet in zwei Richtungen auseinander: **Die Doku beschreibt eine ältere Software als die, die im Repo liegt**, und **es sammeln sich Dateien an, die nie für fremde Augen gedacht waren**. Beides ist selten dramatisch, aber beides kostet genau die Nutzer, die man gewinnen will — der eine springt ab, weil die Installationsanleitung nicht mehr passt, der andere, weil er im Wurzelverzeichnis auf `AUFGABEN.txt` und `Plan.txt` stößt und den Eindruck bekommt, hier arbeite jemand nur für sich selbst.
+Un repositorio publicado tiende a desviarse en dos direcciones: **la documentación describe un software más antiguo que el contenido real del repo**, y **se acumulan archivos que nunca estuvieron destinados a ojos ajenos**. Ninguna de las dos cosas suele ser dramática, pero ambas ahuyentan a los usuarios que se desea atraer: uno abandona porque la guía de instalación ya no funciona, el otro tropieza en el directorio raíz con `AUFGABEN.txt` o `Plan.txt` y se lleva la impresión de que alguien trabaja únicamente para sí mismo.
 
-Diese Runde räumt beides auf. Sie ist bewusst wiederholbar: lieber viermal im Jahr eine halbe Stunde als einmal ein Großputz.
+Esta ronda limpia ambos problemas. Está concebida deliberadamente para ser repetible: es preferible dedicar media hora cuatro veces al año que realizar una gran limpieza una vez al año.
 
-## Ablauf
+## Flujo de trabajo
 
-Die Reihenfolge ist nicht willkürlich. Schritt 0 steht am Anfang, weil er den Umfang aller folgenden Schritte bestimmt. Schritt 2 läuft vor allem, was Änderungen pusht — sonst schiebt man Verbesserungen über einen Stand, der erst noch bereinigt werden muss. Schritt 1 ist rein serverseitig und stört dabei nicht.
+El orden no es arbitrario. El Paso 0 está al principio porque determina el alcance de todos los pasos siguientes. El Paso 2 se ejecuta antes de cualquier acción que envíe cambios (push); de lo contrario, se suben mejoras sobre una base que aún debe sanearse. El Paso 1 es puramente del lado del servidor y no interfiere.
 
-### 0. Distributionsflächen inventarisieren
+### 0. Inventariar las plataformas de distribución
 
-**Bevor irgendetwas geändert wird: klären, wo dieses Projekt überall liegt.** Das GitHub-Repo ist selten die einzige Fläche. Eine korrigierte README nützt wenig, wenn die npm-Paketseite weiter die alte Fassung mit der falschen Installationsanweisung zeigt — und genau dort landen die meisten Nutzer, denn Paketregister ranken in Suchmaschinen oft besser als das Repo.
+**Antes de modificar cualquier cosa: aclarar dónde está ubicado este proyecto.** El repositorio de GitHub raras veces es la única superficie. Una README corregida sirve de poco si la página del paquete en npm sigue mostrando la versión antigua con instrucciones de instalación erróneas; y ahí es precisamente donde terminan la mayoría de los usuarios, ya que los registros de paquetes suelen posicionarse mejor en los buscadores que el propio repositorio.
 
 ```bash
-# Manifeste verraten die Kanäle (English)
+# Los manifiestos revelan los canales de distribución
 cat package.json pyproject.toml setup.py Cargo.toml 2>/dev/null | rg -n "name|version|keywords|repository|homepage"
 rg -n "npmjs.com|pypi.org|marketplace|registry|crates.io|hub.docker|zenodo|doi" README* docs/ .github/ 2>/dev/null
 
-# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft) (English)
-npm view <paket> version description keywords 2>/dev/null
-pip index versions <paket> 2>/dev/null
+# Consultar el estado publicado de los canales (solo lo que aplique)
+npm view <paquete> version description keywords 2>/dev/null
+pip index versions <paquete> 2>/dev/null
 gh release list --repo ORG/REPO --limit 5
 ```
 
-Typische Flächen: npm, PyPI, Crates, Docker Hub, MCP-Registry, Plugin-/Skill-Verzeichnisse, VS-Code- oder Browser-Marketplaces, App-Stores, Zenodo/DOI, Projektwebsite, Organisationsprofil, `llms.txt`, Spiegel-Repos auf anderen Hosts.
+Plataformas habituales: npm, PyPI, Crates, Docker Hub, registro MCP, directorios de plugins/habilidades, marketplaces de VS Code o navegadores, tiendas de aplicaciones, Zenodo/DOI, sitio web del proyecto, perfil de la organización, `llms.txt`, repositorios espejo en otros hosts.
 
-Notiere die gefundene Liste im Laufprotokoll. Sie ist ab jetzt die **Zielmenge**: Jede Änderung aus den folgenden Schritten wird am Ende gegen diese Liste gespiegelt (siehe „Parität über alle Flächen"). Findest du eine Fläche, die niemand mehr pflegt und die auf einen toten Stand zeigt, ist das ein eigener Befund — entweder aktualisieren oder bewusst zurückziehen, aber nicht stehen lassen.
+Anota la lista encontrada en el registro de ejecución. A partir de este momento es el **conjunto objetivo**: cada cambio de los pasos siguientes se reflejará al final contra esta lista (véase "Paridad en todas las plataformas"). Si encuentras una plataforma que nadie mantiene y que apunta a un estado abandonado, constituye un hallazgo propio: actualízala o retírala deliberadamente, pero no la dejes obsoleta.
 
-### 1. Topics setzen
+### 1. Establecer temas (Topics)
 
-Topics sind die wichtigste Suchfläche innerhalb von GitHub und kosten fast nichts.
+Los temas son la superficie de búsqueda más importante dentro de GitHub y casi no cuestan nada.
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,description,repositoryTopics,homepageUrl,visibility
 gh repo edit ORG/REPO --add-topic <topic> --add-topic <topic>
 ```
 
-Ziel sind ungefähr 5–12 Topics aus drei Richtungen: **was es ist** (`cli`, `mcp-server`, `python-library`), **worum es geht** (`file-management`, `tax`, `note-taking`) und **wie es arbeitet** (`local-first`, `offline`, `privacy`). Orientiere dich an Topics, die bei vergleichbaren Projekten tatsächlich verwendet werden — erfundene Topics finden keine Nutzer. Description und Homepage gleich mitprüfen, sie stehen in derselben Ansicht.
+El objetivo es tener entre 5 y 12 temas desde tres perspectivas: **qué es** (`cli`, `mcp-server`, `python-library`), **de qué trata** (`file-management`, `tax`, `note-taking`) y **cómo funciona** (`local-first`, `offline`, `privacy`). Orientación basada en temas que realmente se utilicen en proyectos comparables; los temas inventados no atraen usuarios. Revisa la descripción y la página de inicio al mismo tiempo, ya que aparecen en la misma vista.
 
-Topics haben auf den anderen Flächen aus Schritt 0 ein Pendant: `keywords` in `package.json`, `keywords`/`classifiers` in `pyproject.toml`, Kategorien und Tags in Marketplaces und Stores. Halte sie inhaltlich gleich — sie sind dieselbe Entscheidung, nur an mehreren Orten.
+Los temas tienen su equivalente en las demás plataformas del Paso 0: `keywords` en `package.json`, `keywords`/`classifiers` en `pyproject.toml`, categorías y etiquetas en marketplaces y tiendas. Mantén la coherencia en su contenido: son la misma decisión expresada en múltiples lugares.
 
-### 2a. Privacy-Gate — läuft immer
+### 2a. Control de Privacidad (Privacy Gate) — Se ejecuta siempre
 
-Dieser Schritt entfällt nie, auch nicht bei einer scheinbar harmlosen Runde. Gesucht wird im **getrackten** Set, nicht im sichtbaren Arbeitsbaum, denn genau das ist der Unterschied zwischen "sieht sauber aus" und "ist sauber".
+Este paso nunca se omite, ni siquiera en una ronda aparentemente inofensiva. Se busca en el conjunto **rastreado (tracked)** por Git, no en el árbol de trabajo visible, porque esa es la diferencia entre "parece limpio" y "está limpio".
 
 ```bash
 git ls-files
@@ -81,361 +73,344 @@ rg -n "C:\\\\Us[e]rs\\\\|/home/[a-z]|s[k]-[A-Za-z0-9]{16}|gh[p]_|gh[o]_|AKIA[0-9
 rg -n "\x{C3}\x{83}|\x{C2}\x{A0}|\x{FFFD}" $(git ls-files -- '*.md' '*.txt' '*.json')
 ```
 
-Ergänze das Muster um die **Namen deiner eigenen internen Ablagen** — Pipeline-Ordner, Themenverzeichnisse, private Arbeitsbereiche:
+Complementa el patrón con los **nombres de tus propias carpetas internas** — carpetas de pipelines, directorios temáticos, áreas de trabajo privadas:
 
 ```bash
-rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<weitere eigene Ordnernamen>" $(git ls-files)
+rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<otros nombres de carpetas internas>" $(git ls-files)
 ```
 
-Solche Verweise sind keine Secrets und lösen keinen Alarm aus, deshalb rutschen sie durch — aber sie sind für Leser **unauflösbar** („zurückübertragen aus der .SOFTWARE-Pipeline" sagt Fremden nichts) und geben die eigene Struktur preis. Sie werden ersetzt oder entfernt, nicht bloß toleriert. Eine Suche, die nur nach `C:\Users\…` und Token-Mustern fahndet, findet sie garantiert nicht.
+Dichas referencias no son secretos y no activan alarmas, por lo que pasan desapercibidas; sin embargo, son **indescifrables** para lectores externos ("transferido de nuevo desde la pipeline .SOFTWARE" no dice nada a un extraño) y revelan la estructura interna propia. Se reemplazan o eliminan, no se toleran. Una búsqueda que solo rastree `C:\Users\…` y patrones de tokens garantizadamente no las encontrará.
 
-Fündig geworden? Dann entscheidet die **Art** des Fundes über das Vorgehen — siehe Abschnitt „Force-Push-Regel". Ein Secret, das jemals committet wurde, ist verbrannt: Entfernen aus `HEAD` genügt nicht, es muss rotiert werden.
+¿Se encontró algo? El **tipo** de hallazgo determina el procedimiento: consulta la sección "Regla de Force Push". Un secreto que haya sido confirmado (commit) alguna vez está comprometido: eliminarlo de `HEAD` no basta, debe ser rotado.
 
-### 2b. Veröffentlichungsabsicht der Dokumente prüfen
+### 2b. Comprobar la intención de publicación de los documentos
 
-Der eigentliche Kern dieser Runde. Gehe die getrackten `.md`, `.txt` und `.json` durch und frage bei jeder Datei: **War die je für Fremde gedacht?**
+El verdadero núcleo de esta ronda. Revisa los archivos `.md`, `.txt` y `.json` rastreados y pregúntate en cada uno: **¿Estuvo esto pensado alguna vez para usuarios externos?**
 
 ```bash
 git ls-files -- '*.md' '*.txt' '*.json' | sort
 ```
 
-Nicht anhand des Dateinamens raten — kurz hineinsehen. Ein `PLAN.md` kann eine öffentliche Roadmap sein, ein harmlos klingendes `notes.md` die interne Preisstrategie. Drei Kategorien:
+No adivines por el nombre del archivo: examina brevemente su contenido. Un `PLAN.md` puede ser una hoja de ruta pública, mientras que un inofensivo `notes.md` podría ser la estrategia interna de precios. Tres categorías:
 
-**Gehört ins Repo** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, API-Referenzen, Beispiel-Configs, echte Roadmaps, Manifeste (`package.json`, `pyproject.toml`), Lockfiles, CI-Konfiguration.
+**Pertenece al repo** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, referencias de API, configuraciones de ejemplo, hojas de ruta reales, manifiestos (`package.json`, `pyproject.toml`), archivos de bloqueo (lockfiles), configuración de CI.
 
-**Gehört nicht ins Repo, ist aber unkritisch** — der Normalfall dieser Runde. Aufgaben- und Planungsdateien (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), Session-Notizen und Übergaben (`HANDOFF`, `BRIEFING`, `_handoff/`), Statusdateien der eigenen Pipeline, Entwicklungstagebücher, `_archive/`, Registry- und Index-JSONs mit lokalen Pfaden, Zwischenstände und generierte Artefakte, Agenten-Arbeitsdateien. Solche Dateien sind nicht gefährlich, aber sie erzeugen Unübersichtlichkeit und den Eindruck einer fremden Baustelle. Behandlung: `.gitignore` ergänzen, `git rm --cached <datei>` und **ganz normal pushen**.
+**No pertenece al repo, pero no es crítico** — el caso habitual en esta ronda. Archivos de tareas y planificación (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), notas de sesión y traspasos (`HANDOFF`, `BRIEFING`, `_handoff/`), archivos de estado de pipelines internas, diarios de desarrollo, `_archive/`, archivos JSON de registros o índices con rutas locales, estados intermedios y artefactos generados, archivos de trabajo de agentes. Estos archivos no son peligrosos, pero generan desorden y la sensación de una obra sin recoger. Tratamiento: añadir a `.gitignore`, ejecutar `git rm --cached <archivo>` y **hacer push normalmente**.
 
-**Gehört nicht ins Repo und ist heikel** — Credentials, personenbezogene Daten, Kundendaten, interne Kalkulationen, Preis- und Verhandlungsstrategien, unveröffentlichte Geschäftspläne, Vertragsentwürfe, alles mit Wettbewerbswert. Hier reicht ein normaler Commit nicht, siehe Force-Push-Regel.
+**No pertenece al repo y es confidencial/sensible** — credenciales, datos personales, datos de clientes, cálculos internos, estrategias de precio y negociación, planes de negocio no publicados, borradores de contratos, todo lo que posea valor competitivo. En este caso no basta con un commit normal; consulta la Regla de Force Push.
 
-Bei `.json` lohnt ein zweiter Blick: Manifeste und Lockfiles bleiben, aber lokale Configs, Task-/Registry-Dateien, Export-Dumps und alles mit absoluten Pfaden oder Hostnamen sind typische blinde Passagiere.
+En los archivos `.json` conviene hacer una segunda revisión: los manifiestos y lockfiles se mantienen, pero las configuraciones locales, archivos de tareas/registros, volcados de exportación y cualquier elemento con rutas absolutas o nombres de host son polisones típicos.
 
-Wenn du eine Datei entfernst, die jemand suchen könnte (eine Roadmap etwa), erwähne im Commit oder im README kurz, wo die Information jetzt lebt — sonst wirkt es wie ein Rückschritt.
+Si eliminas un archivo que alguien pudiera estar buscando (como una hoja de ruta), menciona brevemente en el commit o en el README dónde reside ahora esa información; de lo contrario, parecerá un retroceso.
 
-### 3. Banner
+### 3. Banners (Encabezados visuales)
 
-Ein Banner entscheidet mit darüber, ob jemand überhaupt anfängt zu lesen. Prüfe, ob eines existiert und im README als erstes Element eingebunden ist.
+Un banner ayuda a determinar si un visitante comienza a leer. Comprueba si existe uno y si está incluido como primer elemento en el README.
 
-Fehlt es, gibt es drei Wege — in dieser Reihenfolge sinnvoll:
+Si falta, hay tres vías posibles, recomendadas en este orden:
 
-1. **Bildgenerator eines Agenten** (z. B. agy; das Wort „generiere" ist dort der Trigger für echte PNG-Erzeugung), wenn ein Bildmotiv besser passt als Typografie.
-2. **Codex**, wenn das Banner aus Code entstehen soll und ein Stilvorbild existiert, an dem es sich orientieren kann.
-3. **Selbst als SVG**, wenn das Banner primär Wortmarke plus Formsprache ist — das ist oft die schnellste und am besten kontrollierbare Variante, und SVG bleibt später änderbar.
+1. **Generador de imágenes de un agente** (por ejemplo, agy; la palabra "generar" activa allí la creación real de PNG), cuando una imagen se adapte mejor que la tipografía.
+2. **Codex**, cuando el banner deba crearse mediante código y exista un modelo de estilo de referencia.
+3. **SVG propio**, cuando el banner sea principalmente marca denominativa y lenguaje visual: suele ser la opción más rápida y controlable, y el SVG permanece editable posteriormente.
 
-Halte die Familie ein, wenn das Projekt zu einer Gruppe gehört: gleiche Grundfarbe, gleiche Ästhetik, gleiche Wortmarken-Behandlung. Ein Banner, das aus der Reihe fällt, wirkt schlechter als keines. Übliche Größe 1200x300; als PNG ins Repo, das SVG als Quelle daneben.
+Mantén la coherencia visual si el proyecto pertenece a una familia: mismo color base, misma estética, mismo tratamiento de marca. Un banner fuera de sintonía se ve peor que no tener ninguno. Tamaño habitual 1200x300; incluye el PNG en el repositorio y el SVG fuente junto a él.
 
-### 4. Aussagen gegen den echten Stand abgleichen
+### 4. Contrastar afirmaciones con el estado real
 
-Hier entsteht der meiste Wert. Das README behauptet Dinge — prüfe sie nach, statt sie zu glauben:
+Aquí es donde se aporta el mayor valor. El README afirma cosas: verifícalas en lugar de darles crédito a ciegas:
 
-- **Version** im README/Badge gegen `pyproject.toml`/`package.json`/`__version__` und gegen den letzten Release-Tag. Bei mehreren Versionsträgern alle prüfen, nicht nur einen.
-- **Installationsweg** wirklich durchspielen, zumindest lesend: Existiert das Paket unter dem genannten Namen? Stimmen Kommandos und Flags?
-- **Feature-Liste** gegen den Code: Ist alles Genannte da, und fehlt Neues in der Liste?
-- **Zahlen** (Anzahl Tools, unterstützte Formate, Testabdeckung) an der Quelle nachzählen statt fortzuschreiben. Zahlen im README veralten still.
-- **Screenshots** gegen die aktuelle Oberfläche.
-- **Requirements** (Python-/Node-Version, Abhängigkeiten) gegen die Manifeste.
-- **Links** auf Nachbarprojekte, Doku und Registries: laufen sie noch?
+- **Versión** en README/Badge frente a `pyproject.toml`/`package.json`/`__version__` y frente a la última etiqueta de versión (release tag). Si hay múltiples indicadores de versión, compruébalos todos.
+- **Ruta de instalación**: ejecútala realmente (al menos leyendo): ¿Existe el paquete con el nombre indicado? ¿Son correctos los comandos y parámetros?
+- **Lista de funcionalidades** frente al código: ¿Está presente todo lo mencionado? ¿Faltan novedades en la lista?
+- **Cifras** (número de herramientas, formatos compatibles, cobertura de pruebas): recuéntalas en la fuente en lugar de arrastrar números antiguos. Las cifras en el README caducan en silencio.
+- **Capturas de pantalla** frente a la interfaz actual.
+- **Requisitos** (versión de Python/Node, dependencias) frente a los manifiestos.
+- **Enlaces** a proyectos vecinos, documentación y registros: ¿siguen funcionando?
 
-**Eine Korrektur gilt für alle Flächen, nicht nur für die, auf der sie auffiel.** Wenn sich eine inhaltliche Aussage als falsch erweist — besonders wenn der Auftraggeber sie richtigstellt —, dann steht dieselbe Aussage mit hoher Wahrscheinlichkeit noch anderswo: im Organisationsprofil, in der `llms.txt`, in der zweiten Sprachfassung, im README eines Nachbarprojekts. Suche gezielt danach, bevor du den Punkt abhakst:
+**Una corrección se aplica a todas las plataformas, no solo a la que llamó la atención.** Si una afirmación resulta ser falsa —especialmente si el responsable del proyecto la aclara—, es muy probable que esa misma afirmación figure en otros lugares: en el perfil de la organización, en `llms.txt`, en la segunda versión idiomática o en el README de un proyecto vecino. Busca específicamente antes de dar el punto por concluido:
 
 ```bash
-gh search code "<prägnante Formulierung>" --owner ORG
+gh search code "<formulación distintiva>" --owner ORG
 ```
 
-Sonst korrigierst du eine Stelle und lässt drei stehen — und der Widerspruch fällt erst auf, wenn das nächste Repo an die Reihe kommt. Das kostet nicht nur Zeit, es beschädigt auch das Vertrauen in die Doku: Wer zwei Beschreibungen derselben Sache findet, glaubt keiner mehr.
+De lo contrario, corregirás un punto y dejarás tres intactos, y la contradicción solo saltará a la vista cuando le toque el turno al siguiente repositorio. Eso no solo cuesta tiempo, sino que destruye la confianza en la documentación: quien encuentra dos descripciones contradictorias de lo mismo, no cree en ninguna.
 
-Anschließend die **Darstellung** verbessern, wo sie schwach ist: lange Aufzählungen von Optionen werden als Tabelle lesbarer; Codeblöcke brauchen Sprach-Tags; eine Struktur- oder Ablaufübersicht ist als Mermaid-Diagramm oder ASCII-Baum schneller erfasst als in Prosa; die erste Bildschirmhöhe sollte Zweck, Installation und ein Nutzungsbeispiel zeigen, nicht Badges und Vorgeschichte. Wenn das README über ~400 Zeilen geht, lagere Details nach `docs/` aus und verlinke.
+A continuación, mejora la **presentación** donde sea débil: las listas largas de opciones resultan más legibles en formato tabla; los bloques de código requieren etiquetas de lenguaje; un diagrama Mermaid o árbol ASCII transmite una estructura o flujo más rápido que la prosa; la primera pantalla debe mostrar el propósito, la instalación y un ejemplo de uso, no insignias e historial. Si el README supera las ~400 líneas, traslada los detalles a `docs/` y enlaza a ellos.
 
-**Sprachregel für READMEs:** Standard ist eine **englische `README.md`** plus **deutsche Zweitfassung**. Ausnahme: Der Gegenstandsbereich der Anwendung ist selbst deutsch (deutsches Recht, deutsches Steuer- oder Förderwesen, deutschsprachige Zielgruppe) oder es existiert bisher ausschließlich eine deutsche Fassung — dann bleibt Deutsch die Hauptsprache. Für jede weitere Sprache, die das Projekt bereits spricht, gehört eine eigene README-Fassung dazu. Halte dich an die im Repo schon verwendete Namenskonvention (`README_de.md`, `README.de.md`, `docs/README.de.md`) und erfinde keine zweite daneben. Verlinke die Fassungen gegenseitig in der Kopfzeile.
+**Regla de idioma para los README:** El estándar es un **`README.md` en inglés** más una **segunda versión en español/alemán según corresponda**. Excepción: si el ámbito de aplicación es intrínsecamente local o ya existe únicamente en un idioma, ese se mantiene como idioma principal. Para cada idioma adicional que el proyecto ya soporte, debe incluirse una versión propia de README. Respeta la convención de nombres ya utilizada en el repositorio (`README_es.md`, `README.es.md`, `docs/README.es.md`) y no crees una segunda paralela. Enlaza las versiones entre sí en el encabezado.
 
-### 6. Fehlende Standardsprachen anlegen
+### 6. Crear idiomas estándar faltantes
 
-Ergänze die READMEs, die von den **Standardsprachen** fehlen: Deutsch, Englisch, Spanisch, vereinfachtes Chinesisch, Japanisch, Russisch. Der Zweck ist Reichweite, deshalb gilt das vor allem für nutzernahe Projekte — bei einer entwicklernahen Bibliothek mit rein englischem Publikum ist eine russische README kein Gewinn, sondern nur weitere Pflegelast. Entscheide bewusst und halte die Entscheidung im Laufprotokoll fest, damit die nächste Runde sie nicht neu diskutiert.
+Añade los README correspondientes a los **idiomas estándar** que falten: alemán, inglés, español, chino simplificado, japonés y ruso. El objetivo es el alcance, por lo que esto aplica principalmente a proyectos orientados al usuario; en una librería para desarrolladores con audiencia exclusivamente en inglés, un README en ruso no aporta valor, sino carga de mantenimiento. Decide conscientemente y registra la decisión en el historial de ejecución para que la siguiente ronda no vuelva a debatirlo.
 
-Neue Fassungen werden **befüllt, nicht angelegt und leer gelassen** — ein Stub mit „TODO: translate" ist schlechter als gar keine Datei, weil er Vollständigkeit vortäuscht. Inhaltliche Parallelität und Rückangleichung regelt `bilingual-doc-sync`; bei mehr als zwei Fassungen lohnt es sich, diesen Skill für den Abgleich hinzuzuziehen.
+Las nuevas versiones deben **completarse, no solo crearse y dejarse vacías**: un esbozo con "TODO: translate" es peor que la ausencia del archivo porque simula una exhaustividad falsa. La paridad de contenido y la alineación posterior las gestiona `bilingual-doc-sync`; si existen más de dos versiones, merece la pena recurrir a dicha habilidad.
 
-### 7. Sichtbarkeit und Werbung
+### 7. Visibilidad y difusión
 
-Ueberlege, welche Maßnahmen für **dieses** Projekt tatsächlich Nutzer bringen, und setze sie um:
+Considera qué acciones aportarán realmente usuarios para **este** proyecto específico y ejecútalas:
 
-- **Registries**, in die das Projekt technisch gehört: Paketregister (npm, PyPI), MCP-Registry, Plugin-/Skill-Verzeichnisse, Marketplaces.
-- **Kuratierte Listen** (`awesome-*` und thematische Sammlungen), sofern die Aufnahmekriterien wirklich erfüllt sind. Ein PR an eine Liste, deren Kriterien das Projekt verfehlt, kostet Reputation.
-- **Eigene Flächen**: Organisationsprofil, `llms.txt`, Projektwebsite, README des Oekosystems, Verweise aus verwandten eigenen Repos.
-- **Release-Notes** als Anlass: Ein Release ohne erzählte Neuerung wird nicht wahrgenommen.
+- **Registros** a los que el proyecto pertenece técnicamente: registros de paquetes (npm, PyPI), registro MCP, directorios de plugins/habilidades, marketplaces.
+- **Listas seleccionadas** (`awesome-*` y colecciones temáticas), siempre que se cumplan estrictamente los criterios de inclusión. Enviar una PR a una lista cuyos criterios el proyecto no cumple cuesta reputación.
+- **Superficies propias**: perfil de la organización, `llms.txt`, sitio web del proyecto, README del ecosistema, referencias desde repositorios propios relacionados.
+- **Notas de lanzamiento** como oportunidad: un lanzamiento sin explicación de las novedades pasa desapercibido.
 
-**Freigabe-Gate:** Alles, was nach außen geht — PRs an fremde Repos, Einträge in fremde Listen, Posts, Einreichungen — wird **vorgeschlagen und erst nach ausdrücklicher Freigabe ausgeführt**, sofern keine Dauerfreigabe für diesen Kanal existiert. Änderungen an eigenen Flächen brauchen dieses Gate nicht. Der Grund ist schlicht: Ein zurückgezogener PR an ein fremdes Repo ist öffentlich sichtbar und fällt auf das Projekt zurück.
+**Puerta de Aprobación (Approval Gate):** Todo lo que salga al exterior —PRs a repositorios ajenos, entradas en listas externas, publicaciones, envíos— se **propone y ejecuta solo tras aprobación explícita**, a menos que exista una autorización permanente para ese canal. Los cambios en superficies propias no requieren esta puerta. La razón es sencilla: una PR retirada en un repositorio ajeno es públicamente visible y perjudica la imagen del proyecto.
 
-### 8. Eintrag auf den Organisationsseiten
+### 8. Entrada en las páginas de la organización
 
-Zuerst die eigene Organisation: Ist das Repo im Profil-README (`ORG/.github` → `profile/README.md`) überhaupt aufgeführt, in der richtigen Rubrik, mit aktueller Beschreibung?
+Primero la organización propia: ¿está el repositorio incluido en el README del perfil (`ORG/.github` → `profile/README.md`), en la sección correcta y con una descripción actualizada?
 
 ```bash
 gh api user/orgs --jq '.[].login'
 ```
 
-Dann durch **alle** Organisationen gehen und je Organisation eine einzige Frage beantworten: Würde ein Besucher dieser Organisationsseite von diesem Repo profitieren? Meist lautet die Antwort nein — dann ist „nicht verlinken" das richtige Ergebnis und keine Lücke. Wo die Antwort ja lautet (thematische Nähe, gemeinsame Nutzer, ein Werkzeug, das die dortigen Projekte ergänzt), setze den Verweis mit einer Zeile, die den Nutzen erklärt, nicht nur den Namen nennt.
+A continuación, recorre **todas** las organizaciones y responde una sola pregunta por organización: ¿se beneficiaría un visitante de esta página de organización al conocer este repositorio? Por lo general, la respuesta es no; en tal caso, "no enlazar" es el resultado correcto y no una laguna. Cuando la respuesta sea sí (proximidad temática, usuarios compartidos, una herramienta que complementa los proyectos de allí), añade la referencia con una línea que explique su utilidad, no solo el nombre.
 
-Das Profil liegt in einem eigenen Repo (`ORG/.github`). Änderungen dort werden mitgepflegt und gepusht — nach der Dirty-Tree-Regel aus Schritt 11.
+El perfil reside en un repositorio propio (`ORG/.github`). Los cambios allí se mantienen y se envían mediante push siguiendo la regla de árbol sucio del Paso 11.
 
-### 10. Issues und Pull Requests
+### 10. Incidencias (Issues) y Solicitudes de Extracción (Pull Requests)
 
 ```bash
 gh issue list --repo ORG/REPO --state open --limit 50
 gh pr list --repo ORG/REPO --state open --limit 30
 ```
 
-Arbeite sie durch statt sie nur zu zählen:
+Trabaja en ellas en lugar de limitarte a contarlas:
 
-- **Fixbare Bugs** direkt beheben — in dieser Runde ist der Kontext ohnehin geladen. Kleine, klar umrissene Fixes mit Test und Verweis auf die Issue-Nummer.
-- **Bereits erledigte Issues** schließen, mit einem Satz, was sie gelöst hat.
-- **Unklare Meldungen** brauchen eine gezielte Rückfrage (Version, Betriebssystem, Reproduktionsschritte).
-- **PRs**: Diff wirklich lesen, Tests laufen lassen, dann mergen oder begründet zurückmelden. Ein PR, der monatelang unbeantwortet liegt, kostet mehr Wohlwollen als eine höfliche Ablehnung.
-- **Stale-Fälle** auflösen statt weiterschleppen.
+- **Bugs corregibles**: solucionarlos directamente; en esta ronda el contexto ya está cargado. Correcciones pequeñas y bien delimitadas con pruebas y referencia al número de incidencia.
+- **Incidencias ya resueltas**: cerrarlas indicando en una frase qué las resolvió.
+- **Notificaciones poco claras**: requieren una pregunta de aclaración específica (versión, sistema operativo, pasos de reproducción).
+- **PRs**: leer el diff real, ejecutar pruebas y luego fusionar o responder de forma fundamentada. Una PR sin respuesta durante meses cuesta más buena voluntad que un rechazo educado.
+- **Casos inactivos (stale)**: resolverlos en lugar de arrastrarlos.
 
-**Freigabe-Gate:** Öffentliche Kommentare, Schließungen mit Begründung und Merges fremder Beiträge sind Kommunikation nach außen — vor der Ausführung vorlegen, sofern keine Dauerfreigabe besteht. Reine Code-Fixes im eigenen Repo sind davon nicht betroffen.
+**Puerta de Aprobación:** Los comentarios públicos, cierres con justificación y fusiones de contribuciones ajenas constituyen comunicación exterior: presentarlos antes de la ejecución a menos que exista autorización permanente. Las correcciones puras de código en el repositorio propio están exentas.
 
-### 11. Committen, pushen, verifizieren
+### 11. Commit, Push y Verificación
 
-Die Runde endet nicht mit den Änderungen, sondern damit, dass sie **draussen sind**. Ein Arbeitsbaum voller ungepushter Verbesserungen ist das schlechteste Ergebnis: Die nächste Session — möglicherweise ein anderer Agent oder ein anderes Gerät — muss sich erst in einen fremden, halbfertigen Stand einarbeiten, und auf den öffentlichen Flächen hat sich nichts verbessert.
+La ronda no concluye con las modificaciones, sino cuando están **publicadas**. Un árbol de trabajo lleno de mejoras sin push es el peor resultado: la siguiente sesión —posiblemente con otro agente o dispositivo— tendrá que adaptarse a un estado a medio hacer, mientras que en las plataformas públicas no habrá mejorado nada.
 
-Vor dem Push kurz absichern, was überprüfbar ist: Tests und Smokes laufen lassen, bei Doku-Änderungen die Links und die gerenderte Ansicht prüfen. Dann in **thematisch getrennten Commits** bündeln, statt alles in einen Sammel-Commit zu werfen — Aufräumen, Doku-Aktualisierung und Bugfixes sind drei verschiedene Dinge, und wer später einen davon zurückdrehen will, ist dankbar dafür:
+Antes del push, verifica lo que sea comprobable: ejecuta pruebas y comprobaciones de humo (smoke tests); en cambios de documentación, revisa los enlaces y la vista renderizada. Agrupa en **commits separados por tema** en lugar de incluir todo en un commit global: la limpieza, la actualización de documentación y la corrección de errores son tres cosas distintas, y quien necesite revertir una de ellas más adelante lo agradecerá:
 
 ```bash
-git add .gitignore && git rm --cached <interne dateien>
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
-git commit -am "docs: README auf aktuellen Stand (Version, Toolzahl, Screenshots)"
-git commit -am "fix: <Issue-Nummer> ..."
+git add .gitignore && git rm --cached <archivos internos>
+git commit -m "chore: retirar archivos de trabajo internos del repositorio"
+git commit -am "docs: actualizar README al estado actual (versión, herramientas, capturas)"
+git commit -am "fix: <número de incidencia> ..."
 
-git pull --rebase        # bei divergiertem Branch, vor dem Push
+git pull --rebase        # en caso de rama divergente, antes del push
 git push
 ```
 
-Danach verifizieren statt annehmen: Remote-README in der gerenderten Ansicht, CI-Lauf, Release- und Tag-Stand.
+Posteriormente, verifica en lugar de asumir: README remoto en la vista renderizada, ejecución de CI, estado de versiones y etiquetas.
 
 ```bash
 gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
-**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der mit Abstand häufigste Fall — bei dieser Repo-Familie an einem einzigen Tag **dreimal** getroffen — ist ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Prüfe das **zuerst**, bevor du irgendetwas an deinem Commit vermutest.
+**Si la CI marca error (rojo) tras un commit que solo modificó documentación**, la causa casi nunca estará en tu cambio. El caso más frecuente con diferencia es un **linter sin versión fija y sin regla explicitada**. Comprueba esto **en primer lugar** antes de sospechar de tu commit.
 
-Der Mechanismus: Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine ungepinnte Dependency (`ruff>=0.12`, oder gar keine Version), und fehlt eine explizite Regel-Auswahl (`[tool.ruff.lint] select = [...]`, bei fehlendem `pyproject.toml` eine eigene `ruff.toml`), dann folgt der Lint dem Default der **jeweils frisch installierten** Version. Ein neues Linter-Release verschiebt diesen Default, und eine unveränderte Codebasis wird rot. Die Verräter:
+Mecanismo: si el flujo de trabajo ejecuta `ruff check` (o flake8, eslint…) contra una dependencia no fijada (`ruff>=0.12` o sin versión), y falta una selección explícita de reglas (`[tool.ruff.lint] select = [...]`, o un `ruff.toml` si no hay `pyproject.toml`), el linter aplicará la configuración por defecto de la versión recién instalada. Una nueva versión del linter altera este comportamiento por defecto y hace que un código intacto falle. Señales delatadoras:
 
-- Regel-Codes, die das Projekt nie hatte (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), teils in dreistelliger Zahl.
-- Der Bruch fällt oft **plattform-gespalten** aus: Runner mit gecachter älterer Version bleiben grün, frische werden rot.
-- Manchmal beanstandet eine Regel etwas Unbehebbares (`N999` den Paketnamen selbst) — sicheres Zeichen, dass sie nie Standard war.
+- Códigos de regla que el proyecto nunca tuvo (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999`…), a veces por cientos.
+- El fallo suele ser **desigual según la plataforma**: los ejecutores con versiones anteriores en caché se mantienen en verde, los nuevos fallan.
+- A veces una regla cuestiona algo inamovible (`N999` sobre el propio nombre del paquete): señal clara de que nunca fue estándar.
 
-Fix: den Regelsatz festschreiben, der vorher grün war — `select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults. Existiert kein `pyproject.toml`, lege eine `ruff.toml` an. Verifiziere gegen die **neue** Linter-Version selbst (installieren, ohne Config die Funde reproduzieren, mit Config „passed"). Die neuen Regeln kommen als **Aufgabe** ins Projekt — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter, wiederkehrender Befund: Ohne den Pin bricht die CI beim nächsten Linter-Release wieder, und zwar in **jedem** so konfigurierten Repo.
+Solución: fijar el conjunto de reglas que anteriormente daba verde (`select = ["E4","E7","E9","F"]` son los valores por defecto clásicos de ruff). Si no existe `pyproject.toml`, crea un `ruff.toml`. Verifica contra la **nueva** versión del linter (instalar, reproducir hallazgos sin configuración y confirmar "passed" con la configuración). Las nuevas reglas entran como **tarea** en el proyecto: su adopción es una decisión, no un efecto secundario de actualizar una herramienta.
 
-Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
+Dos casos en los que **no** se hace push: si rige una prohibición de publicación o entrega en el proyecto, o si el estado se declara deliberadamente inacabado. Ambos son excepciones justificadas; el caso habitual es: commit y push.
 
-Bei einer Veröffentlichungssperre wird die Runde nicht abgebrochen, sondern **umgeleitet**: auf einem eigenen Branch (`judging-hold/…`, `freeze/…`) lokal committen, den Hauptbranch unangetastet auf dem eingereichten Stand lassen, den Sperrgrund im Laufprotokoll vermerken und nach Aufhebung nachziehen. Wichtig ist dabei, konsequent zu sein: Gesperrt ist nicht nur `git push`, sondern **jede remote sichtbare Änderung** — Topics, Beschreibung, Homepage, Releases, Issue- und PR-Aktionen verändern das veröffentlichte Projekt genauso.
+En caso de prohibición de publicación, la ronda no se cancela, sino que se **desvía**: realizar commits locales en una rama propia (`judging-hold/…`, `freeze/…`), dejar la rama principal intacta en el estado entregado, anotar la razón del bloqueo en el registro de ejecución y actualizar tras la liberación. Es fundamental mantener la coherencia: el bloqueo no solo aplica a `git push`, sino a **cualquier cambio visible de forma remota** (temas, descripción, página de inicio, lanzamientos, acciones de incidencias y PRs).
 
-Existieren weitere Klone desselben Repos (zweites Gerät, Deploy-Kopie, Spiegel), ziehe sie unmittelbar nach dem Push nach. Ein Klon, der zehn Commits zurückliegt, produziert bei der nächsten Fehlersuche Diagnosen an einem Stand, den es nicht mehr gibt.
+Si existen otros clones del mismo repositorio (segundo dispositivo, copia de despliegue, espejo), actualízalos inmediatamente después del push. Un clon con diez commits de retraso generará diagnósticos erróneos sobre un estado extinto.
 
-#### Änderungen an anderen Repos — Dirty-Tree-Ausnahme
+#### Modificaciones en otros repositorios — Excepción de árbol sucio (Dirty Tree)
 
-Diese Runde erzeugt regelmäßig Änderungen **außerhalb** des gepflegten Repos: eine Zeile im Organisationsprofil (Schritt 8), später in der tiefen Runde ein Rückverweis in einem verwandten Repo. Solche Änderungen werden ebenfalls committet und gepusht — ein unveröffentlichter Rückverweis ist kein Rückverweis.
+Esta ronda genera con frecuencia cambios **fuera** del repositorio intervenido: una línea en el perfil de la organización (Paso 8) o una referencia inversa en un repositorio afín. Dichos cambios también se confirman y envían: una referencia no publicada no existe.
 
-Vor dem Anfassen eines fremden Repos kurz dessen Zustand prüfen:
-
-```bash
-git -C <pfad> status --porcelain
-```
-
-**Sauberer Arbeitsbaum** → Änderung vornehmen, in einem **eigenen, thematisch klaren Commit** (`docs: link <projekt>`) committen und pushen. Nicht mit den Commits des gepflegten Repos vermischen: Es ist ein anderes Repo mit eigener Historie und eigenen Lesern.
-
-**Dirty, aber die Fremdänderungen liegen in anderen Dateien** → die eigene Änderung ist trotzdem sauber machbar. Stage und committe **pfadgenau nur die eigene Datei**, damit fremde, ungeprüfte Arbeit nicht mitwandert:
+Antes de tocar un repositorio ajeno, comprueba su estado:
 
 ```bash
-git -C <pfad> add README.md
-git -C <pfad> commit -m "docs: link <projekt>"     # nur der gestagte Pfad
+git -C <ruta> status --porcelain
 ```
 
-Aber **nicht pushen**. Der Commit ist lokal harmlos; ein Push wäre es nicht unbedingt: Du weißt nicht, worauf der andere Arbeitsstand hinausläuft — vielleicht wird er gerade amendiert, rebased oder anders geschnitten, und dein Commit zwingt ihn dazu, sich damit auseinanderzusetzen. Der lokale Commit sichert die Arbeit, ohne jemandem etwas aufzuzwingen; der Lauf, der sich später jenem Repo zuwendet, findet ihn vor und nimmt ihn mit.
+**Árbol de trabajo limpio** → realizar el cambio, añadir en un **commit propio y temáticamente claro** (`docs: link <proyecto>`), y hacer push. No mezclar con los commits del repositorio principal: es un repositorio distinto con su propia historia y lectores.
 
-**Dirty in genau der Datei, die du ändern müsstest** → nicht anfassen. Hier müsstest du auf einem fremden Zwischenstand aufsetzen und ihn mit-committen; den erst zu verstehen kostet mehr, als dieser eine Verweis wert ist.
+**Sucio, pero los cambios ajenos están en otros archivos** → tu cambio se puede realizar de forma limpia. Prepara (stage) y confirma **únicamente tu archivo de forma precisa** para evitar incluir trabajo ajeno no verificado:
 
-**Aktive Sperre (`LOCK*.txt`) im Ziel-Repo** → **zuerst den Lock lesen, statt ihn als pauschales Verbot zu behandeln.** Eine Sperre beschreibt ihren eigenen Umfang, und der ist oft enger als „gar nichts". Typische Fälle:
+```bash
+git -C <ruta> add README.md
+git -C <ruta> commit -m "docs: link <proyecto>"     # solo la ruta preparada
+```
 
-- **Bearbeitungssperre** („hier arbeitet gerade jemand") → nichts anfassen, auch keine Nebendatei.
-- **Reine Veröffentlichungs-/Push-Sperre** (Einreichung, Judging, Freeze) → lokale Arbeit bleibt erlaubt, nur der Remote-Kontakt ist gesperrt. Dann auf einem eigenen Branch arbeiten und lokal committen; **remote-wirksame Schritte entfallen** — nicht nur der Push, sondern auch Topics, Beschreibung, Homepage, Releases und Issue-/PR-Aktionen, denn auch die verändern das veröffentlichte Projekt.
+Pero **no hagas push**. El commit local es inofensivo; un push podría no serlo: desconoces hacia dónde se dirige el otro estado de trabajo (podría estar en rebase o reestructuración) y tu push obligaría a una integración no deseada. El commit local asegura tu trabajo sin imponer nada a nadie; el proceso que revise ese repositorio más adelante lo encontrará y lo incorporará.
 
-Ein Lock, der nur den Push sperrt, als Komplettverbot zu lesen, kostet den gesamten lokalen Teil der Runde ohne Sicherheitsgewinn. Umgekehrt reicht es nicht, nur den Push zu unterlassen und trotzdem Metadaten zu ändern. Im Zweifel den Lock zitieren und nachfragen.
+**Sucio precisamente en el archivo que debes modificar** → no tocar. En este caso tendrías que basarte en un estado intermedio ajeno y confirmarlo junto con el tuyo; comprender ese trabajo cuesta más de lo que vale la referencia.
 
-#### Der Wunsch darf nicht verloren gehen
+**Bloqueo activo (`LOCK*.txt`) en el repositorio destino** → **leer primero el candado en lugar de tratarlo como una prohibición total.** Un bloqueo describe su propio alcance, que a menudo es más estrecho que "nada en absoluto". Casos típicos:
 
-Wird die Änderung aus einem dieser Gründe **nicht** ausgeführt, wandert sie in die Aufgabenliste des Ziel-Repos — `AUFGABEN.txt`, `TODO.md` oder `TODO.txt`, je nachdem, was dort existiert. Ein Eintrag mit Datum, gewünschter Änderung und Grund:
+- **Bloqueo de edición** ("alguien está trabajando aquí") → no tocar nada, ni siquiera archivos secundarios.
+- **Bloqueo puro de publicación/push** (entrega, evaluación, congelación) → el trabajo local sigue permitido, solo está bloqueado el contacto remoto. Trabaja en una rama propia y haz commit local; **se omiten los pasos con impacto remoto** (push, temas, descripción, página de inicio, lanzamientos y acciones en incidencias/PRs).
+
+Interpretar un bloqueo de push como prohibición total desperdicia la parte local de la ronda sin ganar seguridad. Por contra, omitir solo el push mientras se alteran metadatos es insuficiente. En caso de duda, cita el bloqueo y consulta.
+
+#### La intención no debe perderse
+
+Si el cambio **no** se ejecuta por alguna de estas razones, trasládalo a la lista de tareas del repositorio destino (`AUFGABEN.txt`, `TODO.md` o `TODO.txt`, según lo que exista allí). Una entrada con fecha, cambio deseado y motivo:
 
 ```markdown
-- [ ] [2026-07-24, after-care] Rückverweis auf <projekt> im README ergänzen
-      (übersprungen: README hatte uncommittete Fremdänderungen)
+- [ ] [2026-07-24, after-care] Añadir referencia cruzada hacia <proyecto> en el README
+      (omitido: el README tenía cambios ajenos sin commit)
 ```
 
-Das ist der Unterschied zwischen „verschoben" und „vergessen": Die Aufgabenliste liegt dort, wo der nächste Bearbeiter dieses Repos ohnehin hineinsieht — verlässlicher als ein Vermerk im Protokoll eines fremden Laufs. Existiert keine Aufgabenliste, lege keine an; dann genügt der offene Punkt im eigenen Laufprotokoll.
+Esa es la diferencia entre "pospuesto" y "olvidado": la lista de tareas es donde consultará el siguiente desarrollador, siendo más fiable que una nota en el registro de un proceso ajeno. Si no existe lista de tareas, no la crees; bastará con mantener el punto abierto en tu propio registro de ejecución.
 
-Bei einer **aktiven Sperre gilt auch das nicht** — dann wird die Datei nicht angefasst und der Vermerk bleibt im eigenen Laufprotokoll. Notiere ihn in beiden Fällen auch dort, damit die Rotation den offenen Punkt kennt.
+Con un **bloqueo activo esto tampoco aplica**: no se modifica el archivo y la nota se mantiene únicamente en el registro propio. Anótalo en ambos casos para que la rotación conozca el pendiente.
 
-Zum Schluss die Flächen aus Schritt 0 bedienen — siehe nächster Abschnitt.
+Por último, atiende las plataformas del Paso 0 (véase la siguiente sección).
 
-## Parität über alle Distributionsflächen
+## Paridad en todas las plataformas de distribución
 
-Zum Abschluss der Runde gegen die Liste aus Schritt 0 gehen: **Jede Änderung, die ein Nutzer sehen würde, muss auf jeder Fläche ankommen, auf der er sie sucht.** Ein Repo, dessen npm-Seite eine andere Geschichte erzählt, ist schlechter dran als eines mit nur einer Fläche.
+Para concluir la ronda, revisa la lista del Paso 0: **Todo cambio que un usuario pudiera ver debe llegar a cada plataforma donde pudiera buscarlo.** Un repositorio cuya página en npm cuenta una historia distinta a su código está en peor situación que uno con una sola plataforma.
 
-Der entscheidende Mechanismus: **Paketregister zeigen die README des letzten Publish, nicht den aktuellen Repo-Stand.** Eine README-Korrektur wird auf npm oder PyPI erst mit einer neuen Version sichtbar. Wenn die Korrektur inhaltlich relevant ist (falsche Installation, falsche Version, veraltete Feature-Liste), gehört ein Patch-Release dazu — sonst bleibt der Fix wirkungslos.
+Mecanismo clave: **los registros de paquetes muestran el README de la última publicación, no el estado actual del repositorio.** Una corrección en el README solo se hace visible en npm o PyPI al publicar una nueva versión. Si la corrección es relevante en contenido (instalación errónea, versión equivocada, lista de funciones obsoleta), requiere una versión parche; de lo contrario, la corrección carecerá de efecto.
 
-| Fläche | Was dort gepflegt wird | Wie es ankommt |
+| Plataforma | Qué se gestiona allí | Cómo se aplica |
 |---|---|---|
-| npm | README, `description`, `keywords`, Repository-Link | Nur per `npm publish` (Patch-Version); Metadaten kommen aus `package.json` |
-| PyPI | README (`long_description`), Classifiers, Projekt-URLs | Nur per neuem Upload; Metadaten aus `pyproject.toml` |
-| MCP-Registry / Plugin-Verzeichnisse | Beschreibung, Version, Toolliste, Einstiegsdoku | Je nach Registry Manifest-Update oder erneute Einreichung |
-| Marketplace / Store | Beschreibung, Screenshots, Kategorien, Sprachfassungen | Über die jeweilige Verwaltungsoberfläche; Screenshots altern dort besonders schnell |
-| Docker Hub / Container-Registry | Beschreibung, Tags, Nutzungsbeispiel | Repository-Beschreibung plus neuer Tag |
-| Zenodo / DOI | Metadaten, Autoren, Version | In-Place-Edit für Metadaten, neue Version für Inhalte |
-| Website / Org-Profil / `llms.txt` | Kurzbeschreibung, Link, Positionierung | Direkt editierbar — die günstigsten Flächen, deshalb nie vergessen |
+| npm | README, `description`, `keywords`, enlace al repositorio | Solo mediante `npm publish` (versión parche); los metadatos provienen de `package.json` |
+| PyPI | README (`long_description`), clasificadores, URLs del proyecto | Solo mediante una nueva subida; metadatos de `pyproject.toml` |
+| Registro MCP / Directorios de plugins | Descripción, versión, lista de herramientas, doc de inicio | Según el registro, actualización de manifiesto o nuevo envío |
+| Marketplace / Tienda | Descripción, capturas de pantalla, categorías, traducciones | Mediante la interfaz de administración correspondiente; las capturas envejecen rápido |
+| Docker Hub / Registry de contenedores | Descripción, etiquetas, ejemplo de uso | Descripción del repositorio más nueva etiqueta |
+| Zenodo / DOI | Metadatos, autores, versión | Edición directa para metadatos, nueva versión para contenidos |
+| Sitio web / Perfil org / `llms.txt` | Descripción corta, enlace, posicionamiento | Directamente editable: las plataformas más económicas, nunca las olvides |
 
-Wenn eine Version angehoben wird, müssen **alle Versionsträger** gleichzeitig mitwandern: Manifest, Code-Konstante, README-Badge, Changelog, Release-Tag, `llms.txt`. Ein halb angehobener Versionsstand ist schwerer zu diagnostizieren als ein durchgängig alter.
+Si se incrementa una versión, **todos los indicadores de versión** deben actualizarse simultáneamente: manifiesto, constantes de código, insignias del README, registro de cambios, etiqueta de versión, `llms.txt`. Un estado de versión a medio actualizar es más difícil de diagnosticar que uno consistentemente antiguo.
 
-Ist eine Aktualisierung auf einer Fläche gerade nicht möglich oder nicht sinnvoll (z. B. ein Release nur wegen eines Tippfehlers), halte das im Laufprotokoll fest, damit die nächste Runde die Abweichung nicht für ein Versehen hält.
+Si una actualización no es posible o conveniente en una plataforma (por ejemplo, un lanzamiento solo por una errata), regístralo en el informe de ejecución para que la siguiente ronda no interprete la discrepancia como un descuido.
 
-## Force-Push-Regel
+## Regla de Force Push
 
-Der Standard ist **kein Force-Push**. Interne Planungsdateien nachträglich zu ignorieren rechtfertigt keine Historien-Umschreibung: Der Aufwand ist hoch, jeder Klon und jeder Fork bricht, offene PRs werden unbrauchbar — und der Gewinn ist gering, weil der Inhalt harmlos ist. Normaler Weg:
+El estándar es **no realizar force push**. Ignorar retrospectivamente archivos de planificación interna no justifica reescribir el historial: el esfuerzo es elevado, cada clon y fork se rompe, las PR abiertas quedan inservibles y el beneficio es mínimo porque el contenido es inofensivo. Vía normal:
 
 ```bash
-git rm --cached <datei>            # aus dem Tracking, bleibt lokal erhalten
-# .gitignore ergänzen (English)
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
+git rm --cached <archivo>            # fuera del seguimiento, se conserva localmente
+# añadir a .gitignore
+git commit -m "chore: retirar archivos de trabajo internos del repositorio"
 git push
 ```
 
-Die Historie umschreiben (und damit `--force-with-lease` pushen) ist nur bei **echten Leaks** gerechtfertigt: Credentials und Keys, personenbezogene oder Kundendaten, sowie Dokumente mit echtem Wettbewerbswert — interne Kalkulationen, Preisstrategien, unveröffentlichte Pläne, Vertragsinterna. In diesem Fall:
+Reescribir el historial (y por tanto hacer push con `--force-with-lease`) solo se justifica ante **filtraciones reales (leaks)**: credenciales y claves, datos personales o de clientes, así como documentos con valor competitivo real (cálculos internos, estrategias de precios, planes no publicados, detalles de contratos). En ese caso:
 
-1. Betroffene Secrets **zuerst rotieren** — die Historie ist zu diesem Zeitpunkt bereits kopiert, geforkt und in Caches. Rotation wirkt, Löschen nur kosmetisch.
-2. Historie bereinigen (`git filter-repo` oder BFG), `--force-with-lease` pushen.
-3. Forks und Caches prüfen; bei Bedarf GitHub-Support für verwaiste Objekte kontaktieren.
-4. Vorgang im Laufprotokoll festhalten: was, wann, welche Rotation.
+1. **Rotar primero los secretos afectados**: el historial ya ha sido copiado, bifurcado y almacenado en caché. La rotación resuelve el riesgo; el borrado es cosmético.
+2. Limpiar historial (`git filter-repo` o BFG), hacer push con `--force-with-lease`.
+3. Revisar forks y cachés; contactar con el soporte de GitHub para objetos huérfanos si es preciso.
+4. Registrar el incidente en el informe de ejecución: qué, cuándo y qué rotación se ejecutó.
 
-Im Zweifel zwischen „unkritisch" und „heikel": als heikel behandeln und vorlegen. Die Kosten sind asymmetrisch.
+Ante la duda entre "no crítico" y "confidencial": tratar como confidencial y consultar. Los costes son asimétricos.
 
-## Befunde werden Aufgaben, nicht nur Protokollzeilen
+## Los hallazgos se convierten en tareas, no en meras líneas de registro
 
-Eine Pflegerunde findet regelmäßig mehr, als sie in derselben Runde beheben kann oder soll: eine fehlende Sprachfassung, ein Modernisierungsrückstand, eine Veröffentlichung, die nie stattgefunden hat. **Solche Befunde werden im Moment der Entdeckung zu Aufgaben** — sonst hängen sie im Protokoll eines abgeschlossenen Laufs, wo der nächste Bearbeiter des Projekts nicht hinsieht.
+Una ronda de mantenimiento encuentra regularmente más aspectos de los que puede o debe solucionar en la misma sesión: una versión lingüística faltante, un retraso de modernización, una publicación que nunca se realizó. **Dichos hallazgos se convierten en tareas en el momento de su descubrimiento**; de lo contrario, quedarán sepultados en el registro de una ejecución finalizada donde nadie volverá a mirar.
 
-Die Aufgabe gehört in das **ordnerlokale Aufgabensystem des Projekts** — dorthin, wo derjenige nachschaut, der als Nächstes an diesem Projekt arbeitet. Typischerweise ist das `AUFGABEN.txt` oder `TODO.md` im Projektordner, und der liegt oft **nicht im Git-Klon**, sondern in der Ablage, in der die Planung lebt. Der Klon enthält den Code, der Projektordner die Steuerung; ein Eintrag im Klon, der beim nächsten `git clean` verschwindet, ist keine Aufgabe.
+La tarea pertenece al **sistema local de tareas del proyecto** —allí donde consultará la persona que trabaje a continuación en el proyecto. Típicamente es `AUFGABEN.txt` o `TODO.md` en la carpeta del proyecto, que a menudo **no está en el clon de Git**, sino en la ubicación donde reside la gestión del proyecto. El clon contiene el código; la carpeta del proyecto contiene la gestión. Una entrada en el clon que desaparezca con el siguiente `git clean` no es una tarea.
 
-Drei Dinge dabei beachten:
+Tres aspectos a considerar:
 
-1. **Interne Aufgabenliste von öffentlicher Roadmap trennen.** Ein `TODO.md` kann eine gepflegte öffentliche Roadmap sein — dann ist es kein Ablageplatz für interne Nacharbeit. Sieh hinein, bevor du anhängst: Findet sich dort eine Überschrift wie „Public roadmap", schreib in die interne Datei daneben (`AUFGABEN.txt`) und markiere sie als intern.
-2. **Bestehende Einträge prüfen, statt zu duplizieren.** Oft steht der Befund schon da. Dann wird er nicht neu angelegt, sondern **angereichert** — mit dem empirischen Beleg aus diesem Lauf („bestätigt: `--help` gibt vollständig deutsche Ausgaben aus"). Ein bekannter Punkt mit frischem Beweis ist wertvoller als ein zweiter Eintrag daneben.
-3. **Erledigtes mitschreiben.** Was die Runde behoben hat, gehört als abgehakter Punkt mit Commit-Hash dazu. Das erklärt der nächsten Runde, warum ein Befund verschwunden ist, und verhindert, dass sie ihn erneut „entdeckt".
+1. **Separar la lista de tareas interna de la hoja de ruta pública.** Un `TODO.md` puede ser una hoja de ruta pública cuidada; en ese caso, no es lugar para notas internas. Examínalo antes de añadir contenido: si contiene un encabezado como "Public roadmap", escribe en el archivo interno contiguo (`AUFGABEN.txt`) y márcalo como interno.
+2. **Revisar entradas existentes antes de duplicar.** A menudo el hallazgo ya figura allí. En tal caso no se crea una entrada nueva, sino que se **enriquece** con la evidencia empírica de esta ejecución ("confirmado: `--help` muestra salidas completamente en español"). Un punto conocido con prueba fresca es más valioso que una segunda entrada duplicada.
+3. **Anotar lo resuelto.** Lo que la ronda haya solucionado debe incluirse como punto marcado con su hash de commit. Esto explica a la siguiente ronda por qué desapareció un hallazgo y evita que vuelva a "descubrirse".
 
-Formuliere die Aufgabe so, dass sie ohne den Kontext dieses Laufs verständlich ist: was gefunden wurde, warum es zählt, was der nächste Schritt wäre. „i18n unvollständig" ist keine Aufgabe; „Katalog enthält nur `status.title`, dort sind es/zh/ja/ru leer — erst CLI-Strings in den Katalog überführen, dann alle sechs Sprachen befüllen" ist eine.
+Formula la tarea de modo que resulte comprensible sin el contexto de esta ejecución: qué se encontró, por qué importa y cuál sería el siguiente paso. "i18n incompleta" no es una tarea; "El catálogo solo contiene `status.title`, es/zh/ja/ru están vacíos: trasladar primero las cadenas de CLI al catálogo, luego completar los seis idiomas" sí lo es.
 
-## Laufprotokoll
+## Registro de ejecución (Run Log)
 
-Halte das Ergebnis in `_after-care/LOG.md` fest (der Ordner gehört in die `.gitignore` — er ist Pipeline-Material, kein Repo-Inhalt, genau nach der Regel aus Schritt 2b). Pro Lauf eine Zeile mit Datum, Stufe und den bewussten Entscheidungen:
+Registra el resultado en `_after-care/LOG.md` (la carpeta debe incluirse en `.gitignore`: es material de pipeline, no contenido del repo, según el Paso 2b). Una línea por ejecución con fecha, nivel y decisiones conscientes:
 
 ```markdown
 ## 2026-07-24 — surface
-- Flächen: GitHub, npm (<paket>), MCP-Registry, Org-Profil, llms.txt
-- Topics: +local-first, +mcp-server; keywords in package.json angeglichen
-- Entfernt: AUFGABEN.txt, _handoff/ (gitignored, kein Force-Push nötig)
-- README: Version 0.9 -> 1.2 korrigiert, Toolzahl 23 -> 26 nachgezählt
-- Sprachen: EN + DE gepflegt; ES/ZH/JA/RU bewusst nicht (entwicklernahes Publikum)
-- Issues: #12 gefixt, #7 geschlossen (erledigt), #15 Rückfrage gestellt
-- Push: 3 Commits, CI grün; npm-Republish 1.2.1 wegen README-Korrektur
-- Offen: Store-Screenshots veraltet, brauchen neuen Build
+- Plataformas: GitHub, npm (<paquete>), registro MCP, perfil org, llms.txt
+- Temas: +local-first, +mcp-server; keywords en package.json alineados
+- Eliminados: AUFGABEN.txt, _handoff/ (en gitignore, sin necesidad de force push)
+- README: Versión corregida 0.9 -> 1.2, recuento de herramientas 23 -> 26
+- Idiomas: EN + ES mantenidos; ZH/JA/RU omitidos deliberadamente (audiencia técnica)
+- Incidencias: #12 corregida, #7 cerrada (resuelta), #15 consulta enviada
+- Push: 3 commits, CI en verde; republicación en npm 1.2.1 por corrección de README
+- Pendiente: Capturas de la tienda obsoletas, requieren nuevo build
 ```
 
-Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treffen, und ist die Grundlage für rotierende Pflegeläufe über viele Repos (`rotation-check`).
+El registro evita que la siguiente ronda vuelva a debatir las mismas decisiones y constituye la base para las rondas de mantenimiento rotativas en múltiples repositorios (`rotation-check`).
 
-## Häufige Fehler
+## Errores frecuentes
 
-| Fehler | Korrektur |
+| Error | Corrección |
 |---|---|
-| Nur den Arbeitsbaum betrachtet, nicht `git ls-files` | Immer das getrackte Set prüfen — dort liegt das Problem |
-| Privacy-Gate nur auf Pfade und Token gerichtet | Auch nach eigenen Pipeline-/Ordnernamen suchen — sie lösen keinen Alarm aus und rutschen durch |
-| Interne Datei entfernt und dabei Historie umgeschrieben | Bei unkritischen Dateien reicht `git rm --cached` + normaler Push |
-| Secret aus `HEAD` entfernt und Vorgang als erledigt betrachtet | Secret rotieren; alles andere ist Kosmetik |
-| Dateien nach Namen klassifiziert | Kurz hineinsehen — Namen tragen die Absicht nicht zuverlässig |
-| Zahlen im README fortgeschrieben statt nachgezählt | An der Quelle zählen (Tool-Liste, Testlauf, Manifest) |
-| Neue Sprachfassung als leerer Stub angelegt | Befüllen oder weglassen — ein Stub täuscht Vollständigkeit vor |
-| Zweite README-Namenskonvention neben der bestehenden eingeführt | Vorhandene Konvention übernehmen |
-| PR an eine fremde Liste ohne Freigabe gestellt | Außenkommunikation vorlegen; nur eigene Flächen sind frei |
-| Issues gezählt statt bearbeitet | Fixen, schließen oder gezielt nachfragen — jeder Fall bekommt einen Zustand |
-| Banner im Alleingang in fremdem Stil erzeugt | Design-Familie des Oekosystems einhalten |
-| README im Repo korrigiert, npm-/PyPI-Seite zeigt weiter die alte | Registry-Seiten stammen vom letzten Publish — Patch-Release nachziehen |
-| Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
-| Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
-| Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
-| CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
-| Falsche Aussage nur dort korrigiert, wo sie auffiel | Org-weit nach der Formulierung suchen — sie steht meist auch im Org-Profil, in `llms.txt` und in der zweiten Sprachfassung |
-| Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
-| Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
-| Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
-| Befund nur ins Laufprotokoll geschrieben | Er wird zur Aufgabe im ordnerlokalen Aufgabensystem — ins Protokoll sieht später niemand |
-| Interne Nacharbeit an eine öffentliche Roadmap gehängt | Erst hineinsehen; „Public roadmap" heißt: interne Datei daneben nutzen |
-| Bekannten Befund als neuen Eintrag dupliziert | Bestehenden Punkt mit dem empirischen Beleg aus diesem Lauf anreichern |
-| Bei einer Bearbeitungssperre eine TODO-Zeile ins gesperrte Repo geschrieben | Diese Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
-| Push-Sperre als Komplettverbot gelesen und das Repo ganz übersprungen | Lock lesen: sperrt er nur die Veröffentlichung, läuft die lokale Runde auf einem eigenen Branch weiter |
-| Unter Push-Sperre zwar nicht gepusht, aber Topics oder Beschreibung geändert | Auch Metadaten sind remote sichtbar — unter einer Veröffentlichungssperre entfallen sie mit |
+| Observar solo el árbol de trabajo y no `git ls-files` | Revisar siempre el conjunto rastreado: ahí residen los problemas |
+| Control de privacidad limitado solo a rutas y tokens | Buscar también nombres de carpetas/pipelines internas: no activan alarmas pero exponen la estructura |
+| Eliminar archivo interno reescribiendo el historial | En archivos no críticos basta con `git rm --cached` + push normal |
+| Eliminar secreto de `HEAD` y dar el asunto por resuelto | Rotar el secreto; lo demás es cosmética |
+| Clasificar archivos solo por su nombre | Examinar brevemente el contenido: los nombres no reflejan la intención de forma fiable |
+| Arrastrar cifras en el README sin recontar | Contar en la fuente (lista de herramientas, ejecución de pruebas, manifiesto) |
+| Crear nueva versión de idioma como plantilla vacía | Completar o no crear: un borrador simula una integridad falsa |
+| Introducir una segunda convención de nombres para el README | Adoptar la convención existente en el repositorio |
+| Enviar PR a una lista ajena sin autorización | Presentar la comunicación exterior; solo las superficies propias están preaprobadas |
+| Contar incidencias en lugar de gestionarlas | Corregir, cerrar o consultar específicamente: cada caso recibe un estado definido |
+| Crear un banner de forma independiente con un estilo ajeno | Respetar la familia de diseño del ecosistema |
+| Corregir README en repo pero la página de npm/PyPI sigue desactualizada | Las páginas de registros provienen del último publish: realizar un patch release |
+| Incrementar versión únicamente en el manifiesto | Actualizar todos los indicadores a la vez: manifiesto, código, badge, changelog, tag, `llms.txt` |
+| Cambios listos pero dejados sin hacer push | Hacer commit y push forma parte de la ronda; solo las prohibiciones justifican la excepción |
+| Agrupar todo en un único commit masivo | Separar limpieza, documentación y soluciones: de lo contrario, nada se puede revertir individualmente |
+| CI en rojo tras commit de documentación y culparse a uno mismo | Linter sin versión fija y sin `select` sigue la nueva versión: fijar el conjunto de reglas |
+| Corregir una afirmación falsa solo donde se detectó | Buscar la formulación en toda la org: suele figurar en el perfil, `llms.txt` y en el segundo idioma |
+| Trabajar con `commit -a` en un repo ajeno sucio | Preparar por rutas exactas y hacer commit sin hacer push: el trabajo ajeno no se toca |
+| Realizar cambio en repo limpio de perfil de org pero no hacer push | Los repos ajenos limpios reciben su propio commit **y** su propio push |
+| Anotar cambio omitido únicamente en el registro propio | Registrar también en la lista de tareas del repositorio destino si existe |
+| Escribir hallazgo únicamente en el registro de ejecución | Convertirlo en tarea en el sistema local de tareas: nadie consulta registros antiguos |
+| Vincular trabajo interno a una hoja de ruta pública | Examinar primero; "Public roadmap" significa usar el archivo interno contiguo |
+| Duplicar un hallazgo conocido como entrada nueva | Enriquecer el punto existente con la prueba empírica de esta ejecución |
+| Escribir línea TODO en repo bloqueado durante prohibición de edición | El bloqueo aplica a todo el proyecto: no tocar nada allí |
+| Leer bloqueo de push como prohibición total y omitir el repo | Leer el bloqueo: si solo prohíbe publicar, continuar la ronda en una rama local |
+| Omitir push por bloqueo pero modificar metadatos | Los metadatos son visibles remotamente: bajo bloqueo de push también se omiten |
 
-## Abschluss-Checkliste
+## Lista de comprobación final
 
-- [ ] Distributionsflächen ermittelt und im Laufprotokoll notiert.
-- [ ] Topics, Description und Homepage gesetzt und überprüft.
-- [ ] Privacy-Gate über das getrackte Set gelaufen, Funde behandelt.
-- [ ] `.md`/`.txt`/`.json` auf Veröffentlichungsabsicht geprüft, interne Dateien ignoriert.
-- [ ] Kein Force-Push ohne echten Leak; bei Leak Rotation durchgeführt.
-- [ ] Banner vorhanden und im README eingebunden.
-- [ ] Version, Features, Zahlen, Screenshots, Links gegen den echten Stand geprüft.
-- [ ] Darstellung verbessert (Tabellen, Diagramme, erste Bildschirmhöhe).
-- [ ] README-Sprachmatrix vollständig; Entscheidungen zu weiteren Sprachen dokumentiert.
-- [ ] Sichtbarkeitsmaßnahmen umgesetzt bzw. zur Freigabe vorgelegt.
-- [ ] Eintrag im eigenen Org-Profil geprüft, sinnvolle Fremd-Orga-Verweise gesetzt.
-- [ ] Änderungen an Fremd-Repos: sauber → committet und gepusht; dirty → lokal committet;
-      nicht ausgeführt → in der Aufgabenliste des Ziel-Repos eingetragen.
-- [ ] Issues und PRs in einen definierten Zustand gebracht.
-- [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
-- [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
-- [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
-- [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
+- [ ] Plataformas de distribución identificadas y anotadas en el informe de ejecución.
+- [ ] Temas, descripción y página de inicio configurados y verificados.
+- [ ] Control de privacidad ejecutado sobre el conjunto rastreado y hallazgos gestionados.
+- [ ] Archivos `.md`/`.txt`/`.json` revisados según intención de publicación; archivos internos ignorados.
+- [ ] Sin force push salvo filtración real; en tal caso, rotación ejecutada.
+- [ ] Banner presente e incluido en el README.
+- [ ] Versión, funciones, cifras, capturas de pantalla y enlaces verificados con el estado real.
+- [ ] Presentación mejorada (tablas, diagramas, contenido principal visible sin scroll).
+- [ ] Matriz de idiomas del README completa; decisiones sobre otros idiomas documentadas.
+- [ ] Acciones de visibilidad ejecutadas o presentadas para aprobación.
+- [ ] Entrada en el perfil de org propia verificada; referencias a orgs externas añadidas con criterio.
+- [ ] Cambios en repos ajenos: limpio → commit y push; sucio → commit local; no ejecutado → anotado en lista de tareas del repo destino.
+- [ ] Incidencias y PRs llevados a un estado definido.
+- [ ] Commits separados creados, enviadas las modificaciones, CI y vista remota verificadas.
+- [ ] Todas las plataformas de distribución actualizadas al mismo estado (publicación parche si procede).
+- [ ] Hallazgos no resueltos registrados como tareas en el sistema local de tareas del proyecto.
+- [ ] Registro de ejecución guardado en `_after-care/LOG.md`.
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.6.0 (2026-07-24)
-- Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine
-  Nutzer-Klarstellung wurde in Durchlauf 1 im Hub korrigiert, stand aber unbemerkt noch fünfmal
-  im Organisationsprofil (EN, DE, `llms.txt`) und fiel erst neun Durchläufe später auf.
+- Regla añadida: Una corrección de contenido aplica a todas las plataformas. Aprendido empíricamente: una aclaración de usuario se corrigió en el Hub en la ejecución 1, pero permaneció inadvertida en cinco lugares del perfil de la organización (EN, DE, `llms.txt`) y solo se detectó nueve ejecuciones después.
 
 ### 1.5.0 (2026-07-24)
-- Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
-  (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): „zuerst prüfen", die konkreten
-  Verräter-Regelcodes, der Plattform-Split, `ruff.toml` als Fix bei fehlendem `pyproject.toml`,
-  Verifikation gegen die neue Linter-Version.
+- Diagnóstico del linter precisado tras ocurrir el patrón tres veces en un día (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): "comprobar primero", códigos de regla delatadores concretos, división por plataformas, solución `ruff.toml` si falta `pyproject.toml`, verificación contra la nueva versión del linter.
 
 ### 1.4.0 (2026-07-24)
-- Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
-  Ursache ein ungepinnter Linter ohne festgeschriebenen Regelsatz — ein neues Tool-Release
-  verschiebt den Default und macht unveränderten Code rot. Fix: Regelsatz pinnen, neue Regeln
-  als Aufgabe. Zweimal in Folge aufgetreten (n8n-workflow-manager mit ruff 0.15, clirec mit 0.16).
+- Diagnóstico añadido: Si la CI marca rojo tras un commit exclusivo de documentación, la causa más habitual es un linter no fijado y sin selección explícita de reglas: una nueva versión de la herramienta cambia la configuración por defecto y marca errores en código no modificado. Solución: fijar reglas y registrar nuevas reglas como tarea.
 
 ### 1.3.0 (2026-07-24)
-- Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
-  der Entdeckung ein Eintrag im ordnerlokalen Aufgabensystem des Projekts — dort, wo der nächste
-  Bearbeiter hinsieht, nicht im Protokoll eines abgeschlossenen Laufs. Inklusive Trennung von
-  interner Liste und öffentlicher Roadmap, Anreichern statt Duplizieren, Erledigtes mit Commit.
+- Nueva sección "Los hallazgos se convierten en tareas": Lo que la ronda no resuelve por sí misma se convierte en una entrada en el sistema local de tareas del proyecto en el momento de descubrirse (donde mirará el siguiente desarrollador, no en el registro de una ronda finalizada). Incluye separación de lista interna y roadmap público, enriquecer en lugar de duplicar y registrar lo completado con hash de commit.
 
 ### 1.2.0 (2026-07-24)
-- Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
-  Secrets, lösen daher keinen Alarm aus und überleben ein Gate, das nur auf Pfade und Token
-  zielt — bleiben für Leser aber unauflösbar und geben die eigene Struktur preis.
+- El control de privacidad busca adicionalmente los nombres de las carpetas internas propias. No son secretos, por lo que no activan alarmas y superan un filtro enfocado solo en rutas y tokens, pero resultan indescifrables para los lectores y exponen la estructura interna.
 
 ### 1.1.0 (2026-07-24)
-- Sperren werden gelesen statt pauschal als Verbot behandelt: eine reine Veröffentlichungs-/
-  Push-Sperre leitet die Runde auf einen lokalen Branch um, statt sie abzubrechen. Zugleich
-  klargestellt, dass unter einer solchen Sperre auch Metadaten, Releases und Issue-/PR-Aktionen
-  entfallen — sie sind ebenso remote sichtbar wie ein Push.
+- Los bloqueos se leen en lugar de tratarse como prohibiciones generales: un bloqueo de publicación/push desvía la ronda a una rama local en lugar de cancelarla. Se aclara que bajo dicho bloqueo también se omiten metadatos, versiones y acciones en incidencias/PRs, ya que son tan visibles remotamente como un push.
 
 ### 1.0.0 (2026-07-24)
-- Initiale Version. Stufe 1 der Repo-Nachpflege, abgeleitet aus `github-repo-care`.
+- Versión inicial. Nivel 1 del mantenimiento posterior de repositorios, derivado de `github-repo-care`.

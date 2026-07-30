@@ -5,7 +5,7 @@ type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
 updated: 2026-06-22
-description: [日本語] エージェントスキル: bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
+description: 応募プロセス全体のためのスペシャリスト。求人情報を分析し、プロフィール（LinkedIn/CV）を最適化し、カスタマイズされたカバーレターを生成します。SQLite データベースとフォルダ構造から ASCII 形式の履歴書を生成します。cv_generator.py はスタンドアロン移植版です -- BACH ランタイムは不要です。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,67 +18,60 @@ dependencies: {'tools': ['cv_generator.py'], 'services': [], 'protocols': [], 'p
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bewerbungsexperte`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bewerbungsexperte`.
+> **日本語** — `bewerbungsexperte` の公式日本語版。
 
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
-# BEWERBUNGSEXPERTE v1.1 (English)
+# BEWERBUNGSEXPERTE v1.1 (日本語)
 
-> Dein strategischer Partner fuer den naechsten Karriereschritt.
+> 次のキャリアステップのための戦略的パートナー。
 
-## AKTIVIERUNG
+## アクティベーション
 
 ```bash
-# Beispiel-CV ohne Datenbankzugriff (English)
+# データベースアクセスなしのサンプル CV (日本語)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --dry-run
 
-# CV aus SQLite-Datenbank generieren (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad/zu/daten.db>
+# SQLite データベースから CV を生成 (日本語)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <path/to/data.db>
 
-# CV in Datei speichern (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --output lebenslauf.txt
+# CV をファイルに保存 (日本語)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <path> --output lebenslauf.txt
 
-# Mit Ordner-Scan (English)
-PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --career-path <ordner>
+# フォルダスキャン付き (日本語)
+PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <path> --career-path <folder>
 ```
 
-## LEISTUNGSKATALOG
+## サービスカタログ
 
-### 1. CV-Generierung (`cv_generator.py`)
-- **Persoenliche Daten:** Aus `assistant_user_profile`-Tabelle lesen (key/value)
-- **Berufserfahrung:** Arbeitgeber-Ordner scannen (Zeugnisse, Vertraege)
-- **Ausbildung:** Abschluesse-Ordner scannen
-- **Fortbildungen:** Zertifikate-Ordner scannen
-- **Referenzen:** Aus `contacts`-Tabelle (category='beruflich')
-- **Dry-Run:** Ohne Datenbank -- Beispieldaten fuer Tests
+### 1. CV 生成 (`cv_generator.py`)
+- **個人データ:** `assistant_user_profile` テーブルから読み込み（キー/値）
+- **職務経歴:** 雇用主フォルダをスキャン（証明書、契約書）
+- **学歴:** 学位フォルダをスキャン
+- **研修・資格:** 認定証フォルダをスキャン
+- **照会先:** `contacts` テーブルから（category='beruflich'）
+- **Dry-Run:** データベースなし -- テスト用サンプルデータ
 
-### 2. Stellendiagnose
-- **Keyword-Matching:** Abgleich von CV mit Job-Requirements (ATS-Safe)
-- **Unternehmens-Check:** Recherche zu Firmenkultur und Benefits
+### 2. 求人診断
+- **キーワードマッチング:** CV と求人要件の照合（ATS 対応）
+- **会社チェック:** 企業文化や福利厚生の調査
 
-### 3. Unterlagen-Service
-- **CV-Tuning:** Strukturierung und Pointierung von Erfahrungen
-- **Anschreiben:** Erstellung von individuellen, ueberzeugenden Briefen
-- **Portfolio:** Beratung zu Arbeitsproben und Referenzen
+### 3. 応募書類サービス
+- **CV チューニング:** 経験の構造化とアピールポイントの明確化
+- **カバーレター:** 個別化された説得力のある手紙の作成
+- **ポートフォリオ:** 成果物や参照資料の相談
 
-## DATENBANK-TABELLEN (optional)
+## データベーステーブル（オプション）
 
-`cv_generator.py` liest aus diesen Tabellen, wenn vorhanden:
+`cv_generator.py` は、存在する場合以下のテーブルから読み込みます:
 
-- `assistant_user_profile` (key TEXT, value TEXT) — Persoenliche Daten
-  - Felder: name, full_name, email, phone, address, birthday, nationality, marital_status
-- `contacts` (name, organization, position, phone, email, is_active, category) — Referenzen
+- `assistant_user_profile` (key TEXT, value TEXT) — 個人データ
+  - フィールド: name, full_name, email, phone, address, birthday, nationality, marital_status
+- `contacts` (name, organization, position, phone, email, is_active, category) — 照会先
 
-Fehlende Tabellen werden ignoriert (leere Sektionen im CV).
+欠落しているテーブルは無視されます（CV 内の空のセクション）。
 
-## ORDNERSTRUKTUR (fuer --career-path etc.)
+## フォルダ構造（--career-path 用など）
 
 ```
 _Arbeitgeber/
@@ -94,51 +87,51 @@ _Fortbildungen/
   Zertifikat_Cloud_AWS_2024.pdf
 ```
 
-## CLI-OPTIONEN
+## CLI オプション
 
 ```
---db <pfad>           Pfad zur SQLite-Datenbank (Pflicht ohne --dry-run)
---output, -o          Ausgabedatei (ansonsten stdout)
---career-path         Pfad zum Arbeitgeber-Ordner
---education-path      Pfad zum Abschluesse-Ordner
---certs-path          Pfad zum Fortbildungen-Ordner
---dry-run             Beispiel-CV ohne Datenbankzugriff
+--db <パス>           SQLite データベースへのパス（--dry-run なしの場合は必須）
+--output, -o          出力ファイル（指定なしの場合は stdout）
+--career-path         雇用主フォルダへのパス
+--education-path      学位フォルダへのパス
+--certs-path          認定証フォルダへのパス
+--dry-run             データベースアクセスなしのサンプル CV
 ```
 
-## WORKFLOW: CV-GENERIERUNG
+## ワークフロー: CV 生成
 
-1. **Vorbereitung**
-   - SQLite-DB bereitstellen (BACH-DB oder eigene)
-   - Ordnerstruktur mit Dokumenten anlegen (optional)
+1. **準備**
+   - SQLite DB を用意（BACH DB または独自の DB）
+   - ドキュメントを含むフォルダ構造を作成（オプション）
 
-2. **Test ohne DB**
-   - `python cv_generator.py --dry-run` -- prueft ob Tool funktioniert
+2. **DB なしのテスト**
+   - `python cv_generator.py --dry-run` -- ツールが動作するか確認
 
-3. **Generierung**
-   - `python cv_generator.py --db <pfad> --career-path <arbeitgeber>`
-   - Ausgabe pruefen und ggf. anpassen
+3. **生成**
+   - `python cv_generator.py --db <パス> --career-path <雇用主>`
+   - 出力を確認し必要に応じて調整
 
-4. **Export**
-   - `python cv_generator.py --db <pfad> --output lebenslauf.txt`
+4. **エクスポート**
+   - `python cv_generator.py --db <パス> --output lebenslauf.txt`
 
-## ABHÄNGIGKEITEN
+## 依存関係
 
-Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
-Kein pip-Install noetig, kein BACH-Runtime-Import.
+Python 標準ライブラリのみ: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`。
+pip インストール不要、BACH ランタイムのインポート不要。
 
-## ÄNDERUNGSLOG
+## 変更履歴
 
 ### 1.1.0 (2026-06-22)
-- Standalone portiert aus BACH v1.0.0
-- `--db <pfad>` statt hardcodiertem Origin-DB-Pfad
-- `--dry-run`-Modus hinzugefuegt
-- `--scan-folders` entfernt (erforderte BACH user_data_folders-Tabelle)
-- Footer-Text neutralisiert
-- BACH-Runtime-Unabhaengigkeit verifiziert
+- BACH v1.0.0 からスタンドアロン移植
+- ハードコードされた元の DB パスの代わりに `--db <パス>` を使用
+- `--dry-run` モードを追加
+- `--scan-folders` を削除（BACH の user_data_folders テーブルが必要だったため）
+- フッターテキストを中立化
+- BACH ランタイムからの独立性を検証
 
-### 1.0.0 (2026-01-25, BACH-intern)
-- Initiale Version in BACH system/agents/_experts/bewerbungsexperte/
+### 1.0.0 (2026-01-25, BACH 内部)
+- BACH system/agents/_experts/bewerbungsexperte/ での初期バージョン
 
 ---
-Status: AKTIV
-Domain: Karriereberatung
+ステータス: アクティブ
+ドメイン: キャリアコンサルティング

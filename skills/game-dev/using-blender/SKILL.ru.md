@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-06-20
 updated: 2026-06-20
-description: [Русский] Навык агента для using-blender: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
+description: Общий навык рабочего процесса Blender для ИИ-агентов, работающих с файлами .blend, .fbx, .obj, .glb, glTF, материалами, инспекцией сцен, автоматизацией bpy, пакетными запусками Blender в headless-режиме, проверкой экспорта/реимпорта, предпросмотрами и опциональным управлением через Blender MCP. Используйте, когда задача требует открыть, проверить, создать, автоматизировать, конвертировать, оптимизировать, отрендерить или верифицировать файлы Blender или 3D-ресурсы независимо от пользователя.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,55 +18,47 @@ status: active
 provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `using-blender`.
+> **Русский** — Официальная русская версия `using-blender`.
 
+# Использование Blender
 
+## Основное правило
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Работайте с Blender в трех режимах в зависимости от задачи:
 
+1. **Режим GUI:** Открывайте Blender видимым образом, если пользователь хочет просмотреть, оценить или вручную отредактировать ресурс.
+2. **Headless-режим:** Используйте `blender --background --python <script.py>`, если требуется экспорт, повторный импорт, пакетная обработка или детерминированная проверка.
+3. **Режим MCP:** Используйте только в том случае, если работающее дополнение Blender намеренно подключено и требуется управление сценой в реальном времени. Предварительно проверьте безопасность и лицензионный статус.
 
-> **English Translation** — Official English version of `using-blender`.
+## Стандартный рабочий процесс
 
+1. Уточнить цель: просмотреть, создать, конвертировать, оптимизировать, отрендерить или проверить.
+2. Сначала прочитать существующие файлы: Манифест, README, форматы экспорта и имеющиеся результаты проверок.
+3. Определить путь к Blender: `blender` в PATH, конфигурация проекта или пользовательский путь. Не записывайте локальные приватные пути в публикуемую документацию.
+4. Для автоматизации используйте небольшой скрипт `bpy`, явно задающий входные данные, выходные данные и ошибки.
+5. После каждого экспорта выполняйте как минимум одну проверку повторного импорта или загрузки, прежде чем считать результат пригодным к использованию.
+6. Кратко документировать артефакты: источник, форматы экспорта, версия инструмента, статус проверки и известные ограничения.
 
-# Using Blender (English)
+## Правила экспорта и проверки
 
-## Kernregel
+- Для общего использования в Веб / предпросмотре отдавайте предпочтение `.glb`.
+- Для игровых движков и обмена с DCC дополнительно предлагайте `.fbx` или `.obj/.mtl`, если этого требует целевой рабочий процесс.
+- При сквозной проверке (roundtrip) всегда проверяйте: файл существует, не пуст, может быть импортирован повторно, ожидаемые имена объектов/материалов присутствуют.
+- Для крупных ресурсов собирайте метрики: количество мешей, материалы, ограничивающий параллелепипед (bounding box), размер файла и опционально количество треугольников.
+- Для проверки рендеринга используйте небольшое разрешение предпросмотра перед запуском ресурсоемких рендеров в Cycles или Full HD.
 
-Arbeite mit Blender in drei Modi, passend zur Aufgabe:
+## Правила безопасности
 
-1. **GUI-Modus:** Blender sichtbar öffnen, wenn der Nutzer ein Asset anschauen, beurteilen oder manuell weiterbearbeiten will.
-2. **Headless-Modus:** `blender --background --python <script.py>` nutzen, wenn Export, Reimport, Batch-Verarbeitung oder deterministische Prüfung gefragt ist.
-3. **MCP-Modus:** Nur verwenden, wenn ein laufendes Blender-Addon bewusst verbunden ist und Live-Szenensteuerung nötig ist. Vorher Sicherheits- und Lizenzlage prüfen.
+- Код `bpy` — это локальный код Python с доступом к файловой системе. Выполняйте только собственный или проверенный код.
+- Не активируйте сторонние дополнения Blender, загрузчики ресурсов или телеметрические серверы без проверки лицензии и конфиденциальности данных.
+- Для MCP-серверов с произвольным инструментом `execute_python` предварительно ограничивайте область действия, сеть, рабочий каталог и таймаут.
+- Для ресурсов из маркетплейсов или внешних источников проверяйте лицензию отдельно. Техническая возможность загрузки не заменяет права на использование.
 
-## Standardablauf
+## Параметры MCP
 
-1. Ziel klären: ansehen, erzeugen, konvertieren, optimieren, rendern oder verifizieren.
-2. Bestehende Dateien lesen: Manifest, README, Exportformate und vorhandene Prüfergebnisse zuerst.
-3. Blender-Pfad ermitteln: `blender` auf PATH, projektspezifische Konfiguration oder Nutzerpfad. Keine lokalen Privatpfade in publizierbare Doku schreiben.
-4. Für Automatisierung ein kleines `bpy`-Script verwenden, das Eingaben, Ausgaben und Fehler explizit macht.
-5. Nach jedem Export mindestens einen Reimport- oder Ladecheck ausführen, bevor das Ergebnis als nutzbar gilt.
-6. Artefakte knapp dokumentieren: Quelle, Exportformate, Toolversion, Prüfstatus und bekannte Grenzen.
-
-## Export- und Prüfregeln
-
-- Für allgemeine Web-/Preview-Nutzung bevorzugt `.glb`.
-- Für Game-Engines und DCC-Austausch zusätzlich `.fbx` oder `.obj/.mtl` anbieten, wenn der Zielworkflow das braucht.
-- Für Roundtrips immer prüfen: Datei existiert, nicht leer, kann reimportiert werden, erwartete Objekt-/Materialnamen sind vorhanden.
-- Für große Assets Metriken erfassen: Mesh-Anzahl, Materialien, Bounding Box, Dateigröße und optional Triangle Count.
-- Für Renderprüfungen kleine Preview-Auflösung verwenden, bevor teure Cycles- oder Full-HD-Renders gestartet werden.
-
-## Sicherheitsregeln
-
-- `bpy`-Code ist lokaler Python-Code mit Dateisystemzugriff. Nur selbst geschriebene oder auditierte Scripts ausführen.
-- Keine fremden Blender-Addons, Asset-Downloader oder Telemetrie-Server aktivieren, ohne Lizenz- und Datenschutzcheck.
-- Bei MCP-Servern mit beliebigem `execute_python`-Tool vorher Scope, Netzwerk, Arbeitsverzeichnis und Timeout begrenzen.
-- Bei Marketplace- oder externen Assets die Lizenz separat prüfen. Die technische Ladefähigkeit ersetzt keine Nutzungsrechte.
-
-## MCP-Optionen
-
-Für Live-Steuerung lies [references/blender-mcp-review.md](references/blender-mcp-review.md), wenn ein Blender-MCP-Server ausgewählt, installiert oder bewertet werden soll.
+Для управления в реальном времени ознакомьтесь с [references/blender-mcp-review.md](references/blender-mcp-review.md), если необходимо выбрать, установить или оценить MCP-сервер Blender.
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-06-20)
-- Initialer nutzeragnostischer Blender-Skill mit GUI-, Headless- und MCP-Routing.
+- Первоначальный навык Blender, независимый от пользователя, с маршрутизацией GUI, headless и MCP.

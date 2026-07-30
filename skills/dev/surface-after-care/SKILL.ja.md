@@ -2,78 +2,70 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `surface-after-care`.
+> **日本語** — `surface-after-care` の公式日本語版。
 
+# Surface After Care — 公開済みリポジトリの定期メンテナンス（日本語）
 
+## このスキルを適用するタイミング
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+本スキルは**すでに公開されており**、定期的に点検を行うべきリポジトリに使用します。外部リポジトリのインベントリ作成や法的判定の依頼を伴わず、リポジトリ自身の中で判断可能な最小限かつ効率的な段階を担当します。
 
+関連スキルとの住み分け：
 
-> **English Translation** — Official English version of `surface-after-care`.
-
-
-# Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo (English)
-
-## Wann dieser Skill greift
-
-Nutze ihn für ein Repository, das **bereits öffentlich ist** und turnusmäßig durchgesehen werden soll. Er ist die günstige Stufe: alles, was sich am Repo selbst entscheiden lässt, ohne fremde Repos zu inventarisieren oder ein Rechtsgutachten anzustoßen.
-
-Abgrenzung zu den Nachbarskills:
-
-| Situation | Skill |
+| 状況 | スキル |
 |---|---|
-| Repo wird zum ersten Mal veröffentlicht | `github-repo-care` |
-| Repo ist public, regelmäßige Pflegerunde | **dieser Skill** |
-| Zusätzlich Rechtscheck + Querverweise über alle Orgas + App-i18n | `full-after-care` (Alias `deep-after-care`) |
-| Reine Rechts-/Privacy-/Lizenzprüfung vor dem Public-Stellen | `repo-publish-check` |
-| Sprachfassungen inhaltlich synchron halten | `bilingual-doc-sync` |
-| Verteilung dieser Runde über viele Repos, fair rotierend | `rotation-check` |
+| リポジトリを初めて公開する | `github-repo-care` |
+| リポジトリが公開済みで、定期メンテナンスを行う | **本スキル** |
+| 追加の法的チェック + 全 Org 横断参照 + アプリ i18n | `full-after-care`（エイリアス `deep-after-care`） |
+| パブリック化前の純粋な法務/プライバシー/ライセンス監査 | `repo-publish-check` |
+| 各言語版ドキュメントの内容同期を維持する | `bilingual-doc-sync` |
+| 多数のリポジトリに対して本巡回を公平にローテーション配分する | `rotation-check` |
 
-## Kernidee
+## コアコンセプト
 
-Ein veröffentlichtes Repo driftet in zwei Richtungen auseinander: **Die Doku beschreibt eine ältere Software als die, die im Repo liegt**, und **es sammeln sich Dateien an, die nie für fremde Augen gedacht waren**. Beides ist selten dramatisch, aber beides kostet genau die Nutzer, die man gewinnen will — der eine springt ab, weil die Installationsanleitung nicht mehr passt, der andere, weil er im Wurzelverzeichnis auf `AUFGABEN.txt` und `Plan.txt` stößt und den Eindruck bekommt, hier arbeite jemand nur für sich selbst.
+公開されたリポジトリは、主に2つの方向に乖離していきます。1つは**ドキュメントがリポジトリ内の実コードより古いソフトウェアを説明していること**、もう1つは**外部の目に触れることを想定していないファイルが溜まっていくこと**です。どちらも致命的ではないものの、獲得したいユーザーを確実に失う原因となります。インストール手順が動かず離脱したり、ルートディレクトリで `AUFGABEN.txt` や `Plan.txt` を見かけて「個人作業のやりっぱなし」という印象を持たれたりするためです。
 
-Diese Runde räumt beides auf. Sie ist bewusst wiederholbar: lieber viermal im Jahr eine halbe Stunde als einmal ein Großputz.
+本巡回プロセスはこの双方をクリーンアップします。年に1回の大掃除よりも、年4回・各30分のメンテを行う再現可能な設計となっています。
 
-## Ablauf
+## 実行手順
 
-Die Reihenfolge ist nicht willkürlich. Schritt 0 steht am Anfang, weil er den Umfang aller folgenden Schritte bestimmt. Schritt 2 läuft vor allem, was Änderungen pusht — sonst schiebt man Verbesserungen über einen Stand, der erst noch bereinigt werden muss. Schritt 1 ist rein serverseitig und stört dabei nicht.
+手順の順序は意図的です。ステップ0が最初に来るのは、後続すべてのステップの対象範囲を決定するためです。ステップ2は変更をプッシュするあらゆる操作の前に実行します。未整理のコード上に改善を重ねるのを防ぐためです。ステップ1は完全なサーバー側操作であり干渉しません。
 
-### 0. Distributionsflächen inventarisieren
+### 0. 配信チャネルのインベントリ作成
 
-**Bevor irgendetwas geändert wird: klären, wo dieses Projekt überall liegt.** Das GitHub-Repo ist selten die einzige Fläche. Eine korrigierte README nützt wenig, wenn die npm-Paketseite weiter die alte Fassung mit der falschen Installationsanweisung zeigt — und genau dort landen die meisten Nutzer, denn Paketregister ranken in Suchmaschinen oft besser als das Repo.
+**何かを変更する前に：このプロジェクトがどこに配置されているかを明確にします。** GitHubリポジトリが唯一の配置場所であることは稀です。npmパッケージページが誤ったインストール手順の古いREADMEを表示し続けている場合、GitHubのREADMEだけを直しても効果は限定的です。パッケージレジストリは検索エンジンでリポジトリより上位にランクされることが多いためです。
 
 ```bash
-# Manifeste verraten die Kanäle (English)
+# マニフェストファイルからチャネル情報を抽出
 cat package.json pyproject.toml setup.py Cargo.toml 2>/dev/null | rg -n "name|version|keywords|repository|homepage"
 rg -n "npmjs.com|pypi.org|marketplace|registry|crates.io|hub.docker|zenodo|doi" README* docs/ .github/ 2>/dev/null
 
-# Veröffentlichten Stand der Kanäle abfragen (nur was zutrifft) (English)
-npm view <paket> version description keywords 2>/dev/null
-pip index versions <paket> 2>/dev/null
+# 配信チャネルの公開状態を確認（該当する項目のみ）
+npm view <package> version description keywords 2>/dev/null
+pip index versions <package> 2>/dev/null
 gh release list --repo ORG/REPO --limit 5
 ```
 
-Typische Flächen: npm, PyPI, Crates, Docker Hub, MCP-Registry, Plugin-/Skill-Verzeichnisse, VS-Code- oder Browser-Marketplaces, App-Stores, Zenodo/DOI, Projektwebsite, Organisationsprofil, `llms.txt`, Spiegel-Repos auf anderen Hosts.
+典型的な配信面：npm、PyPI、Crates、Docker Hub、MCP Registry、プラグイン/スキルディレクトリ、VS Code/ブラウザのマーケットプレイス、アプリストア、Zenodo/DOI、プロジェクトウェブサイト、組織プロファイル、`llms.txt`、他ホストのミラーリポジトリ。
 
-Notiere die gefundene Liste im Laufprotokoll. Sie ist ab jetzt die **Zielmenge**: Jede Änderung aus den folgenden Schritten wird am Ende gegen diese Liste gespiegelt (siehe „Parität über alle Flächen"). Findest du eine Fläche, die niemand mehr pflegt und die auf einen toten Stand zeigt, ist das ein eigener Befund — entweder aktualisieren oder bewusst zurückziehen, aber nicht stehen lassen.
+検出したリストを実行ログに記録します。これが以降の**ターゲット集合**となります。後続ステップでの変更は最終的にこのリストと同期されます（「全配信チャネルでの同等性」を参照）。誰もメンテナンスしておらず放置された状態を指すチャネルが見つかった場合、それは独自の検出事項です。更新するか明示的に取り下げるかを選択し、放置しないでください。
 
-### 1. Topics setzen
+### 1. トピック（Topics）の設定
 
-Topics sind die wichtigste Suchfläche innerhalb von GitHub und kosten fast nichts.
+TopicsはGitHub内部で最も重要な検索インターフェースであり、コストはほぼゼロです。
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,description,repositoryTopics,homepageUrl,visibility
 gh repo edit ORG/REPO --add-topic <topic> --add-topic <topic>
 ```
 
-Ziel sind ungefähr 5–12 Topics aus drei Richtungen: **was es ist** (`cli`, `mcp-server`, `python-library`), **worum es geht** (`file-management`, `tax`, `note-taking`) und **wie es arbeitet** (`local-first`, `offline`, `privacy`). Orientiere dich an Topics, die bei vergleichbaren Projekten tatsächlich verwendet werden — erfundene Topics finden keine Nutzer. Description und Homepage gleich mitprüfen, sie stehen in derselben Ansicht.
+3つの観点から約5〜12個のTopicを設定します。**何であるか**（`cli`, `mcp-server`, `python-library`）、**何に関するものか**（`file-management`, `tax`, `note-taking`）、**どのように動作するか**（`local-first`, `offline`, `privacy`）。同種プロジェクトで実際に使用されているTopicを参考にしてください。独自で作った無名Topicはユーザーを引き付けません。DescriptionおよびHomepageも同画面に表示されるため併せて確認します。
 
-Topics haben auf den anderen Flächen aus Schritt 0 ein Pendant: `keywords` in `package.json`, `keywords`/`classifiers` in `pyproject.toml`, Kategorien und Tags in Marketplaces und Stores. Halte sie inhaltlich gleich — sie sind dieselbe Entscheidung, nur an mehreren Orten.
+Topicsはステップ0の各プラットフォームの項目と対になっています（`package.json` の `keywords`、`pyproject.toml` の `keywords`/`classifiers`、マーケットプレイスのカテゴリーやタグなど）。これらは同じ決定を複数の場所で表現しているため、内容を整合させてください。
 
-### 2a. Privacy-Gate — läuft immer
+### 2a. プライバシーゲート（Privacy Gate） — 必須実行
 
-Dieser Schritt entfällt nie, auch nicht bei einer scheinbar harmlosen Runde. Gesucht wird im **getrackten** Set, nicht im sichtbaren Arbeitsbaum, denn genau das ist der Unterschied zwischen "sieht sauber aus" und "ist sauber".
+このステップは一見害のなさそうな巡回であっても省略しません。作業ディレクトリの見かけではなく、**Git追跡対象（tracked）**のファイル集合を検査します。「綺麗に見える」と「実際に綺麗である」の違いはここにあります。
 
 ```bash
 git ls-files
@@ -81,361 +73,344 @@ rg -n "C:\\\\Us[e]rs\\\\|/home/[a-z]|s[k]-[A-Za-z0-9]{16}|gh[p]_|gh[o]_|AKIA[0-9
 rg -n "\x{C3}\x{83}|\x{C2}\x{A0}|\x{FFFD}" $(git ls-files -- '*.md' '*.txt' '*.json')
 ```
 
-Ergänze das Muster um die **Namen deiner eigenen internen Ablagen** — Pipeline-Ordner, Themenverzeichnisse, private Arbeitsbereiche:
+検索パターンに**自身の内部保管場所の名称**（パイプラインフォルダ、テーマディレクトリ、プライベート作業領域など）を追加します：
 
 ```bash
-rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<weitere eigene Ordnernamen>" $(git ls-files)
+rg -n "\.SOFTWARE|\.RESEARCH|_control-center|<その他の内部フォルダ名>" $(git ls-files)
 ```
 
-Solche Verweise sind keine Secrets und lösen keinen Alarm aus, deshalb rutschen sie durch — aber sie sind für Leser **unauflösbar** („zurückübertragen aus der .SOFTWARE-Pipeline" sagt Fremden nichts) und geben die eigene Struktur preis. Sie werden ersetzt oder entfernt, nicht bloß toleriert. Eine Suche, die nur nach `C:\Users\…` und Token-Mustern fahndet, findet sie garantiert nicht.
+これらの記述はシークレットではないためセキュリティアラートを発生させず、すり抜けてしまいます。しかし外部読者にとっては**解読不可能**であり（「.SOFTWAREパイプラインから書き戻し」などは第三者には理解不能）、内部構造を露呈してしまいます。放置せず置換または削除します。`C:\Users\…` やトークンパターンのみを対象とする検索では検出できません。
 
-Fündig geworden? Dann entscheidet die **Art** des Fundes über das Vorgehen — siehe Abschnitt „Force-Push-Regel". Ein Secret, das jemals committet wurde, ist verbrannt: Entfernen aus `HEAD` genügt nicht, es muss rotiert werden.
+検出された場合、**検出内容の種類**によって対処法が決まります（「フォース・プッシュルール」のセクションを参照）。過去にコミットされたシークレットはすでに漏洩したものとみなします。`HEAD` からの削除だけでは不十分であり、必ずローテーションを実施してください。
 
-### 2b. Veröffentlichungsabsicht der Dokumente prüfen
+### 2b. ドキュメントの公開意図の確認
 
-Der eigentliche Kern dieser Runde. Gehe die getrackten `.md`, `.txt` und `.json` durch und frage bei jeder Datei: **War die je für Fremde gedacht?**
+本巡回の核心となる部分です。追跡対象の `.md`、`.txt`、`.json` ファイルを確認し、各ファイルについて問います：**「このファイルは本来、外部に公開する意図があったか？」**
 
 ```bash
 git ls-files -- '*.md' '*.txt' '*.json' | sort
 ```
 
-Nicht anhand des Dateinamens raten — kurz hineinsehen. Ein `PLAN.md` kann eine öffentliche Roadmap sein, ein harmlos klingendes `notes.md` die interne Preisstrategie. Drei Kategorien:
+ファイル名だけで推測せず、中身を直接確認します。`PLAN.md` が公開ロードマップであることもあれば、一見無害な `notes.md` が内部の価格戦略であることもあります。3つのカテゴリーに分類します：
 
-**Gehört ins Repo** — README, LICENSE, CHANGELOG, SECURITY, CONTRIBUTING, `docs/`, API-Referenzen, Beispiel-Configs, echte Roadmaps, Manifeste (`package.json`, `pyproject.toml`), Lockfiles, CI-Konfiguration.
+**リポジトリに含めるべき** — README、LICENSE、CHANGELOG、SECURITY、CONTRIBUTING、`docs/`、APIリファレンス、サンプル設定、本物のロードマップ、マニフェスト（`package.json`, `pyproject.toml`）、Lockfile、CI設定。
 
-**Gehört nicht ins Repo, ist aber unkritisch** — der Normalfall dieser Runde. Aufgaben- und Planungsdateien (`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`), Session-Notizen und Übergaben (`HANDOFF`, `BRIEFING`, `_handoff/`), Statusdateien der eigenen Pipeline, Entwicklungstagebücher, `_archive/`, Registry- und Index-JSONs mit lokalen Pfaden, Zwischenstände und generierte Artefakte, Agenten-Arbeitsdateien. Solche Dateien sind nicht gefährlich, aber sie erzeugen Unübersichtlichkeit und den Eindruck einer fremden Baustelle. Behandlung: `.gitignore` ergänzen, `git rm --cached <datei>` und **ganz normal pushen**.
+**リポジトリに含めるべきではないが、機密性はない** — 本巡回の標準的なケースです。タスク・計画ファイル（`AUFGABEN.txt`, `Plan.txt`, `TODO-intern.md`）、セッションメモ・引き継ぎ文書（`HANDOFF`, `BRIEFING`, `_handoff/`）、内部パイプラインのステータスファイル、開発日記、`_archive/`、ローカルパスを含むレジストリ/インデックスJSON、中間生成物や生成されたアーティファクト、エージェント作業ファイル。これらは危険ではありませんが、雑然とした印象を与えます。対処法：`.gitignore` に追加し、`git rm --cached <file>` を実行した上で**通常通りプッシュ**します。
 
-**Gehört nicht ins Repo und ist heikel** — Credentials, personenbezogene Daten, Kundendaten, interne Kalkulationen, Preis- und Verhandlungsstrategien, unveröffentlichte Geschäftspläne, Vertragsentwürfe, alles mit Wettbewerbswert. Hier reicht ein normaler Commit nicht, siehe Force-Push-Regel.
+**リポジトリに含めるべきではなく、機密性が高い** — 資格情報、個人情報、顧客データ、内部試算、価格・交渉戦略、未公開の事業計画、契約案など、競争上の価値があるすべての情報。この場合、通常のコミットでは不十分です（フォース・プッシュルールを参照）。
 
-Bei `.json` lohnt ein zweiter Blick: Manifeste und Lockfiles bleiben, aber lokale Configs, Task-/Registry-Dateien, Export-Dumps und alles mit absoluten Pfaden oder Hostnamen sind typische blinde Passagiere.
+`.json` ファイルは再確認する価値があります。マニフェストやLockfileは保持しますが、ローカル設定、タスク/レジストリファイル、エクスポートダンプ、絶対パスやホスト名を含むものは典型的な混入物です。
 
-Wenn du eine Datei entfernst, die jemand suchen könnte (eine Roadmap etwa), erwähne im Commit oder im README kurz, wo die Information jetzt lebt — sonst wirkt es wie ein Rückschritt.
+誰かが検索する可能性のあるファイル（ロードマップなど）を削除する場合は、情報がどこに移動したかをコミットメッセージやREADMEに簡潔に記載してください。
 
-### 3. Banner
+### 3. バナー画像
 
-Ein Banner entscheidet mit darüber, ob jemand überhaupt anfängt zu lesen. Prüfe, ob eines existiert und im README als erstes Element eingebunden ist.
+バナー画像は閲覧者が読み始めるかどうかを左右します。READMEの先頭要素として組み込まれているか確認します。
 
-Fehlt es, gibt es drei Wege — in dieser Reihenfolge sinnvoll:
+欠落している場合、次の3つのアプローチから選択します（この優先順序が推奨されます）：
 
-1. **Bildgenerator eines Agenten** (z. B. agy; das Wort „generiere" ist dort der Trigger für echte PNG-Erzeugung), wenn ein Bildmotiv besser passt als Typografie.
-2. **Codex**, wenn das Banner aus Code entstehen soll und ein Stilvorbild existiert, an dem es sich orientieren kann.
-3. **Selbst als SVG**, wenn das Banner primär Wortmarke plus Formsprache ist — das ist oft die schnellste und am besten kontrollierbare Variante, und SVG bleibt später änderbar.
+1. **エージェントの画像生成機能**（例: agy。そこでは「生成」という単語が実際のPNG作成のトリガーとなります）：タイポグラフィより視覚的イラストが適している場合。
+2. **Codex**：バナーをコードから作成し、参照可能なスタイルモデルが存在する場合。
+3. **自身で作成するSVG**：バナーが主にロゴマーク＋デザイン言語で構成されている場合。最も迅速で制御しやすく、SVGなら後から編集も可能です。
 
-Halte die Familie ein, wenn das Projekt zu einer Gruppe gehört: gleiche Grundfarbe, gleiche Ästhetik, gleiche Wortmarken-Behandlung. Ein Banner, das aus der Reihe fällt, wirkt schlechter als keines. Übliche Größe 1200x300; als PNG ins Repo, das SVG als Quelle daneben.
+プロジェクトがファミリーに属している場合はブランドの一貫性を保持します：同じベースカラー、同じ美学、同じロゴ表現。統一感を欠くバナーは、バナーが無い状態よりも悪影響を与えます。標準サイズは1200x300。PNGをリポジトリにコミットし、ソースSVGを隣に配置します。
 
-### 4. Aussagen gegen den echten Stand abgleichen
+### 4. 記述内容と実際の状態の照合
 
-Hier entsteht der meiste Wert. Das README behauptet Dinge — prüfe sie nach, statt sie zu glauben:
+ここで最大の価値が生まれます。READMEに記載されている主張を、鵜呑みにせず実際のコードと照合します：
 
-- **Version** im README/Badge gegen `pyproject.toml`/`package.json`/`__version__` und gegen den letzten Release-Tag. Bei mehreren Versionsträgern alle prüfen, nicht nur einen.
-- **Installationsweg** wirklich durchspielen, zumindest lesend: Existiert das Paket unter dem genannten Namen? Stimmen Kommandos und Flags?
-- **Feature-Liste** gegen den Code: Ist alles Genannte da, und fehlt Neues in der Liste?
-- **Zahlen** (Anzahl Tools, unterstützte Formate, Testabdeckung) an der Quelle nachzählen statt fortzuschreiben. Zahlen im README veralten still.
-- **Screenshots** gegen die aktuelle Oberfläche.
-- **Requirements** (Python-/Node-Version, Abhängigkeiten) gegen die Manifeste.
-- **Links** auf Nachbarprojekte, Doku und Registries: laufen sie noch?
+- **バージョン**：README/バッジと `pyproject.toml`/`package.json`/`__version__` および最新のリリースキー（Release Tag）を照合。複数のバージョン表記がある場合は全確認。
+- **インストール手順**：実際に手順を追って検証（少なくとも読み込んで確認）：指定された名前でパッケージが存在するか？コマンドやフラグは正確か？
+- **機能リスト**：コードと照合。記載されている機能が揃っているか、新機能が漏れていないか？
+- **数値**（ツール数、サポートフォーマット、テストカバー率）：過去の数値を引き継がずソースから直接再カウント。READMEの数値は静かに風化します。
+- **スクリーンショット**：現在のUIと照合。
+- **要件**（Python/Nodeのバージョン、依存関係）：マニフェストと照合。
+- **リンク**：関連プロジェクト、ドキュメント、レジストリへのリンクが有効か確認。
 
-**Eine Korrektur gilt für alle Flächen, nicht nur für die, auf der sie auffiel.** Wenn sich eine inhaltliche Aussage als falsch erweist — besonders wenn der Auftraggeber sie richtigstellt —, dann steht dieselbe Aussage mit hoher Wahrscheinlichkeit noch anderswo: im Organisationsprofil, in der `llms.txt`, in der zweiten Sprachfassung, im README eines Nachbarprojekts. Suche gezielt danach, bevor du den Punkt abhakst:
+**1箇所の修正は、発見された面だけでなく全配信チャネルに適用されます。** 事実と異なる記述が見つかった場合（特にプロジェクト所有者から訂正があった場合）、同じ記述が他の場所（組織プロファイル、`llms.txt`、第2言語版、関連プロジェクトのREADME）にも存在する可能性が極めて高いです。タスクを完了とする前に検索を行ってください：
 
 ```bash
-gh search code "<prägnante Formulierung>" --owner ORG
+gh search code "<特徴的な表現>" --owner ORG
 ```
 
-Sonst korrigierst du eine Stelle und lässt drei stehen — und der Widerspruch fällt erst auf, wenn das nächste Repo an die Reihe kommt. Das kostet nicht nur Zeit, es beschädigt auch das Vertrauen in die Doku: Wer zwei Beschreibungen derselben Sache findet, glaubt keiner mehr.
+これを怠ると、1箇所だけ直して3箇所放置することになり、次のリポジトリ巡回時に矛盾が発覚します。時間の浪費になるだけでなくドキュメントへの信頼を損ないます。
 
-Anschließend die **Darstellung** verbessern, wo sie schwach ist: lange Aufzählungen von Optionen werden als Tabelle lesbarer; Codeblöcke brauchen Sprach-Tags; eine Struktur- oder Ablaufübersicht ist als Mermaid-Diagramm oder ASCII-Baum schneller erfasst als in Prosa; die erste Bildschirmhöhe sollte Zweck, Installation und ein Nutzungsbeispiel zeigen, nicht Badges und Vorgeschichte. Wenn das README über ~400 Zeilen geht, lagere Details nach `docs/` aus und verlinke.
+続いて、**表現形式**が弱い部分を改善します。選択肢の長いリストは表形式に整え、コードブロックには言語タグを付与し、構造やフローの概要はテキストの長文よりもMermaid図やASCIIツリーで表現し、ファーストビュー（首位表示領域）にはバッジや背景ストーリーではなく目的・インストール・使用例を配置します。READMEが400行を超える場合は詳細を `docs/` に切り出してリンクします。
 
-**Sprachregel für READMEs:** Standard ist eine **englische `README.md`** plus **deutsche Zweitfassung**. Ausnahme: Der Gegenstandsbereich der Anwendung ist selbst deutsch (deutsches Recht, deutsches Steuer- oder Förderwesen, deutschsprachige Zielgruppe) oder es existiert bisher ausschließlich eine deutsche Fassung — dann bleibt Deutsch die Hauptsprache. Für jede weitere Sprache, die das Projekt bereits spricht, gehört eine eigene README-Fassung dazu. Halte dich an die im Repo schon verwendete Namenskonvention (`README_de.md`, `README.de.md`, `docs/README.de.md`) und erfinde keine zweite daneben. Verlinke die Fassungen gegenseitig in der Kopfzeile.
+**READMEの言語ルール：** 標準設定は**英語の `README.md`** ＋ **第2言語版（日本語/ドイツ語等）**です。例外：アプリケーションの対象領域自体がローカルに特化している場合、または現在1つの言語版しか存在しない場合は、その言語を主言語として維持します。プロジェクトがサポートしている追加言語ごとに、専用のREADMEバージョンを用意します。リポジトリで既に採用されている命名規則（`README_ja.md`, `README.ja.md`, `docs/README.ja.md`）に従い、別の規則を勝手に持ち込まないでください。ヘッダー部分でお互いの言語版へ相互リンクを設定します。
 
-### 6. Fehlende Standardsprachen anlegen
+### 6. 不足している標準言語版の作成
 
-Ergänze die READMEs, die von den **Standardsprachen** fehlen: Deutsch, Englisch, Spanisch, vereinfachtes Chinesisch, Japanisch, Russisch. Der Zweck ist Reichweite, deshalb gilt das vor allem für nutzernahe Projekte — bei einer entwicklernahen Bibliothek mit rein englischem Publikum ist eine russische README kein Gewinn, sondern nur weitere Pflegelast. Entscheide bewusst und halte die Entscheidung im Laufprotokoll fest, damit die nächste Runde sie nicht neu diskutiert.
+不足している**標準言語**（ドイツ語、英語、スペイン語、簡体字中国語、日本語、ロシア語）のREADMEを追加します。目的は到達範囲の拡大であるため、主にユーザー向けプロジェクトに適用されます。純粋に英語圏の開発者向けライブラリにおいてロシア語READMEを作成することは、メリットがなくメンテナンス負荷を増やすだけです。意図的に判断し、判断結果を実行ログに記録して次回の巡回で再議論にならないようにします。
 
-Neue Fassungen werden **befüllt, nicht angelegt und leer gelassen** — ein Stub mit „TODO: translate" ist schlechter als gar keine Datei, weil er Vollständigkeit vortäuscht. Inhaltliche Parallelität und Rückangleichung regelt `bilingual-doc-sync`; bei mehr als zwei Fassungen lohnt es sich, diesen Skill für den Abgleich hinzuzuziehen.
+新しい言語版は**内容を正しく入力して作成し、空のまま放置しないでください**。「TODO: translate」とだけ書かれたスタブファイルは、完成度を偽装するためファイルが存在しない状態よりも悪質です。内容の同期や逆引き調整は `bilingual-doc-sync` が担当します。3言語以上存在する場合は、そのスキルを活用して同期を図ることを推奨します。
 
-### 7. Sichtbarkeit und Werbung
+### 7. 可視性と認知度の向上
 
-Ueberlege, welche Maßnahmen für **dieses** Projekt tatsächlich Nutzer bringen, und setze sie um:
+**本**プロジェクトにおいて実際にユーザーをもたらす施策を検討し、実施します：
 
-- **Registries**, in die das Projekt technisch gehört: Paketregister (npm, PyPI), MCP-Registry, Plugin-/Skill-Verzeichnisse, Marketplaces.
-- **Kuratierte Listen** (`awesome-*` und thematische Sammlungen), sofern die Aufnahmekriterien wirklich erfüllt sind. Ein PR an eine Liste, deren Kriterien das Projekt verfehlt, kostet Reputation.
-- **Eigene Flächen**: Organisationsprofil, `llms.txt`, Projektwebsite, README des Oekosystems, Verweise aus verwandten eigenen Repos.
-- **Release-Notes** als Anlass: Ein Release ohne erzählte Neuerung wird nicht wahrgenommen.
+- 技術的に属する**レジストリ**：パッケージレジストリ（npm, PyPI）、MCP Registry、プラグイン/スキルディレクトリ、マーケットプレイス。
+- **キュレーションリスト**（`awesome-*` やテーマ別コレクション）：掲載基準を実際に満たしている場合のみ。基準を満たさないリストへのPR提出は信用を落とします。
+- **自社・自組織のチャネル**：組織プロファイル、`llms.txt`、プロジェクトウェブサイト、エコシステムREADME、関連する自社リポジトリからの参照。
+- **リリースノート**の活用：新機能のストーリーがないリリースは気づかれません。
 
-**Freigabe-Gate:** Alles, was nach außen geht — PRs an fremde Repos, Einträge in fremde Listen, Posts, Einreichungen — wird **vorgeschlagen und erst nach ausdrücklicher Freigabe ausgeführt**, sofern keine Dauerfreigabe für diesen Kanal existiert. Änderungen an eigenen Flächen brauchen dieses Gate nicht. Der Grund ist schlicht: Ein zurückgezogener PR an ein fremdes Repo ist öffentlich sichtbar und fällt auf das Projekt zurück.
+**承認ゲート（Approval Gate）：** 外部に向けたすべての操作（外部リポジトリへのPR提出、外部リストへの登録、投稿、申請など）は、当該チャネルに恒久的な事前承認がない限り、**提案を行って明示的な承認を得てから実行**します。自社・自組織チャネルの変更にはこのゲートは不要です。理由は明確です。外部リポジトリで取り下げられたPRはパブリックに視認可能であり、プロジェクトに悪影響を与えるためです。
 
-### 8. Eintrag auf den Organisationsseiten
+### 8. 組織ページへの掲載
 
-Zuerst die eigene Organisation: Ist das Repo im Profil-README (`ORG/.github` → `profile/README.md`) überhaupt aufgeführt, in der richtigen Rubrik, mit aktueller Beschreibung?
+まず自身の組織：プロファイルREADME（`ORG/.github` → `profile/README.md`）にリポジトリが掲載されているか、正しいカテゴリにあるか、最新の説明が載っているか確認します。
 
 ```bash
 gh api user/orgs --jq '.[].login'
 ```
 
-Dann durch **alle** Organisationen gehen und je Organisation eine einzige Frage beantworten: Würde ein Besucher dieser Organisationsseite von diesem Repo profitieren? Meist lautet die Antwort nein — dann ist „nicht verlinken" das richtige Ergebnis und keine Lücke. Wo die Antwort ja lautet (thematische Nähe, gemeinsame Nutzer, ein Werkzeug, das die dortigen Projekte ergänzt), setze den Verweis mit einer Zeile, die den Nutzen erklärt, nicht nur den Namen nennt.
+次に**すべての**組織を確認し、組織ごとに1つの質問に答えます：「この組織ページの訪問者は、このリポジトリから恩恵を受けるか？」通常、回答は「いいえ」であり、「リンクしない」ことが正しい結果であって漏れではありません。回答が「はい」の場合（テーマの類似性、共通のユーザー層、現地のプロジェクトを補完するツールなど）、単に名前を並べるだけでなく有用性を説明する1行を添えて参照を設定します。
 
-Das Profil liegt in einem eigenen Repo (`ORG/.github`). Änderungen dort werden mitgepflegt und gepusht — nach der Dirty-Tree-Regel aus Schritt 11.
+プロファイルは専用のリポジトリ（`ORG/.github`）にあります。そこでの変更はステップ11のダーティ・ツリー・ルールに従って維持・プッシュされます。
 
-### 10. Issues und Pull Requests
+### 10. IssueとPull Requestの処理
 
 ```bash
 gh issue list --repo ORG/REPO --state open --limit 50
 gh pr list --repo ORG/REPO --state open --limit 30
 ```
 
-Arbeite sie durch statt sie nur zu zählen:
+単に数を数えるのではなく、実際に処理を進めます：
 
-- **Fixbare Bugs** direkt beheben — in dieser Runde ist der Kontext ohnehin geladen. Kleine, klar umrissene Fixes mit Test und Verweis auf die Issue-Nummer.
-- **Bereits erledigte Issues** schließen, mit einem Satz, was sie gelöst hat.
-- **Unklare Meldungen** brauchen eine gezielte Rückfrage (Version, Betriebssystem, Reproduktionsschritte).
-- **PRs**: Diff wirklich lesen, Tests laufen lassen, dann mergen oder begründet zurückmelden. Ein PR, der monatelang unbeantwortet liegt, kostet mehr Wohlwollen als eine höfliche Ablehnung.
-- **Stale-Fälle** auflösen statt weiterschleppen.
+- **修正可能なバグ**：直接修正します。本巡回中にすでに文脈が読み込まれているためです。テストとIssue番号の参照を付けた小さく明確な修正。
+- **解決済みのIssue**：何によって解決されたかを1文添えてクローズします。
+- **不明確な報告**：具体的な追加質問（バージョン、OS、再現手順）を行います。
+- **PR**：実際のDiffを読み、テストを実行し、マージするか理由を添えてフィードバックします。数ヶ月放置されたPRは、丁寧な辞退よりも大きな悪印象を与えます。
+- **Stale（停滞）ケース**：引きずらず解消します。
 
-**Freigabe-Gate:** Öffentliche Kommentare, Schließungen mit Begründung und Merges fremder Beiträge sind Kommunikation nach außen — vor der Ausführung vorlegen, sofern keine Dauerfreigabe besteht. Reine Code-Fixes im eigenen Repo sind davon nicht betroffen.
+**承認ゲート：** パブリックなコメント、理由を添えたクローズ、外部からの貢献のマージは外部コミュニケーションに該当するため、恒久的承認がない限り実行前に提示します。自リポジトリ内の純粋なコード修正は対象外です。
 
-### 11. Committen, pushen, verifizieren
+### 11. コミット、プッシュ、検証
 
-Die Runde endet nicht mit den Änderungen, sondern damit, dass sie **draussen sind**. Ein Arbeitsbaum voller ungepushter Verbesserungen ist das schlechteste Ergebnis: Die nächste Session — möglicherweise ein anderer Agent oder ein anderes Gerät — muss sich erst in einen fremden, halbfertigen Stand einarbeiten, und auf den öffentlichen Flächen hat sich nichts verbessert.
+本巡回は変更作業で終わるのではなく、変更が**外部にリリースされた**時点で終了します。未プッシュの改善で溢れた作業ディレクトリは最悪の結果です。次のセクション（別のエージェントや端末の可能性あり）で半端な状態を読み解く必要が生じ、パブリック面は何ら改善されないためです。
 
-Vor dem Push kurz absichern, was überprüfbar ist: Tests und Smokes laufen lassen, bei Doku-Änderungen die Links und die gerenderte Ansicht prüfen. Dann in **thematisch getrennten Commits** bündeln, statt alles in einen Sammel-Commit zu werfen — Aufräumen, Doku-Aktualisierung und Bugfixes sind drei verschiedene Dinge, und wer später einen davon zurückdrehen will, ist dankbar dafür:
+プッシュ前に検証可能な項目を確認します。テストやスモークチェックを実行し、ドキュメント変更時はリンクとレンダリング表示を確認します。その後、すべてを1つのコミットにまとめるのではなく、**テーマごとに分離されたコミット**に分割します。清掃、ドキュメント更新、バグ修正は異なる作業であり、後から一部を取り消したい場合に役立ちます：
 
 ```bash
-git add .gitignore && git rm --cached <interne dateien>
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
-git commit -am "docs: README auf aktuellen Stand (Version, Toolzahl, Screenshots)"
-git commit -am "fix: <Issue-Nummer> ..."
+git add .gitignore && git rm --cached <内部ファイル>
+git commit -m "chore: remove internal working files from repo"
+git commit -am "docs: update README to current state (version, tool count, screenshots)"
+git commit -am "fix: <issue number> ..."
 
-git pull --rebase        # bei divergiertem Branch, vor dem Push
+git pull --rebase        # 分岐している場合、pushの前に実行
 git push
 ```
 
-Danach verifizieren statt annehmen: Remote-README in der gerenderten Ansicht, CI-Lauf, Release- und Tag-Stand.
+その後、推測ではなく実際に検証します。リモートREADMEのレンダリング表示、CI実行状況、リリースおよびタグの状態を確認します。
 
 ```bash
 gh run list --repo ORG/REPO --limit 3
 gh repo view ORG/REPO --json description,repositoryTopics,url
 ```
 
-**Wenn die CI rot ist, obwohl dein Commit nur Doku anfasste**, liegt die Ursache fast nie an dir. Der mit Abstand häufigste Fall — bei dieser Repo-Familie an einem einzigen Tag **dreimal** getroffen — ist ein **ungepinnter Linter ohne festgeschriebenen Regelsatz**. Prüfe das **zuerst**, bevor du irgendetwas an deinem Commit vermutest.
+**ドキュメントのみを修正したコミットの後にCIが失敗（赤）した場合**、原因があなたのコミットにあることはほぼありません。圧倒的に多いケース（本リポジトリファミリーで同日に**3回**発生）は、**ルールセットが固定されていないバージョンスペックなしのリンター**です。自身のコミットを疑う前に、**まずここをチェック**してください。
 
-Der Mechanismus: Läuft im Workflow `ruff check` (oder flake8, eslint …) gegen eine ungepinnte Dependency (`ruff>=0.12`, oder gar keine Version), und fehlt eine explizite Regel-Auswahl (`[tool.ruff.lint] select = [...]`, bei fehlendem `pyproject.toml` eine eigene `ruff.toml`), dann folgt der Lint dem Default der **jeweils frisch installierten** Version. Ein neues Linter-Release verschiebt diesen Default, und eine unveränderte Codebasis wird rot. Die Verräter:
+メカニズム：ワークフロー内で `ruff check`（または flake8, eslint 等）が未固定の依存関係（`ruff>=0.12` やバージョン指定なし）で実行されており、かつ明示的なルール選択（`[tool.ruff.lint] select = [...]` や、`pyproject.toml` がない場合の `ruff.toml`）が欠落している場合、リンターは**新しくインストールされたバージョン**のデフォルトに従います。リンターの新規リリースによってこのデフォルトが変更されると、変更されていないコードベースがエラーになります。特徴：
 
-- Regel-Codes, die das Projekt nie hatte (`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` …), teils in dreistelliger Zahl.
-- Der Bruch fällt oft **plattform-gespalten** aus: Runner mit gecachter älterer Version bleiben grün, frische werden rot.
-- Manchmal beanstandet eine Regel etwas Unbehebbares (`N999` den Paketnamen selbst) — sicheres Zeichen, dass sie nie Standard war.
+- プロジェクトが設定したことのないルールコード（`UP045`, `UP006`, `BLE001`, `RUF100`, `DTZ005`, `N999` など）が数十〜数百件検出される。
+- 失敗が**プラットフォーム間で分裂**する：キャッシュされた旧バージョンを持つランナーは成功（緑）し、新規ランナーは失敗（赤）する。
+- 修正不可能な内容（パッケージ名自体に対する `N999` など）を拒否する：過去に標準でなかった明確な証拠。
 
-Fix: den Regelsatz festschreiben, der vorher grün war — `select = ["E4","E7","E9","F"]` sind die klassischen ruff-Defaults. Existiert kein `pyproject.toml`, lege eine `ruff.toml` an. Verifiziere gegen die **neue** Linter-Version selbst (installieren, ohne Config die Funde reproduzieren, mit Config „passed"). Die neuen Regeln kommen als **Aufgabe** ins Projekt — bewusst übernehmen ist eine Entscheidung, kein Nebeneffekt eines Tool-Updates. Das ist ein echter, wiederkehrender Befund: Ohne den Pin bricht die CI beim nächsten Linter-Release wieder, und zwar in **jedem** so konfigurierten Repo.
+修正：以前成功していたルールセットを明示的に固定します。`select = ["E4","E7","E9","F"]` は ruff の古典的なデフォルトです。`pyproject.toml` が存在しない場合は `ruff.toml` を作成します。**新しい**リンターバージョン自体に対して検証します（インストールし、設定なしで再現させ、設定ありで "passed" を確認）。新しいルールは**タスク**としてプロジェクトに取り込みます。ルール採用は意図的な決定であり、ツール更新の副作用であってはなりません。
 
-Zwei Fälle, in denen **nicht** gepusht wird: wenn für das Projekt eine Veröffentlichungs- oder Einreichungssperre gilt, oder wenn der Stand erklärtermaßen unfertig ist. Beides sind Ausnahmen, die man begründet — der Normalfall ist: committen und pushen.
+**プッシュを行わない**2つの例外ケース：プロジェクトに公開・提出の凍結（Hold）が適用されている場合、または作業状態が明示的に未完成である場合。これらは理由を伴う例外であり、通常ケースは「コミットしてプッシュする」です。
 
-Bei einer Veröffentlichungssperre wird die Runde nicht abgebrochen, sondern **umgeleitet**: auf einem eigenen Branch (`judging-hold/…`, `freeze/…`) lokal committen, den Hauptbranch unangetastet auf dem eingereichten Stand lassen, den Sperrgrund im Laufprotokoll vermerken und nach Aufhebung nachziehen. Wichtig ist dabei, konsequent zu sein: Gesperrt ist nicht nur `git push`, sondern **jede remote sichtbare Änderung** — Topics, Beschreibung, Homepage, Releases, Issue- und PR-Aktionen verändern das veröffentlichte Projekt genauso.
+公開凍結期間中、本巡回は中断されるのではなく**リダイレクト**されます。専用ブランチ（`judging-hold/…`, `freeze/…`）でローカルコミットを行い、メインブランチは提出された状態のまま変更せず、理由を実行ログに記録して凍結解除後に追いつかせます。一貫性が重要です。凍結されるのは `git push` だけでなく、**リモートで視認可能なすべての変更**（Topic、Description、Homepage、Release、Issue/PRの操作）も同様です。
 
-Existieren weitere Klone desselben Repos (zweites Gerät, Deploy-Kopie, Spiegel), ziehe sie unmittelbar nach dem Push nach. Ein Klon, der zehn Commits zurückliegt, produziert bei der nächsten Fehlersuche Diagnosen an einem Stand, den es nicht mehr gibt.
+同一リポジトリの他のクローン（サブ端末、デプロイコピー、ミラー）が存在する場合、プッシュ直後にそれらを引き込んで更新してください。10コミット遅れたクローンは、将来の障害追跡時に存在しない状態に基づいた診断を行ってしまいます。
 
-#### Änderungen an anderen Repos — Dirty-Tree-Ausnahme
+#### 他のリポジトリへの変更 — ダーティ・ツリー（Dirty Tree）の例外
 
-Diese Runde erzeugt regelmäßig Änderungen **außerhalb** des gepflegten Repos: eine Zeile im Organisationsprofil (Schritt 8), später in der tiefen Runde ein Rückverweis in einem verwandten Repo. Solche Änderungen werden ebenfalls committet und gepusht — ein unveröffentlichter Rückverweis ist kein Rückverweis.
+本巡回では、対象リポジトリの**外部**に変更が発生することがよくあります。組織プロファイルの1行（ステップ8）や関連リポジトリの逆参照などです。これらの変更も同様にコミットしてプッシュします。未公開の逆参照は存在しないのと同じです。
 
-Vor dem Anfassen eines fremden Repos kurz dessen Zustand prüfen:
-
-```bash
-git -C <pfad> status --porcelain
-```
-
-**Sauberer Arbeitsbaum** → Änderung vornehmen, in einem **eigenen, thematisch klaren Commit** (`docs: link <projekt>`) committen und pushen. Nicht mit den Commits des gepflegten Repos vermischen: Es ist ein anderes Repo mit eigener Historie und eigenen Lesern.
-
-**Dirty, aber die Fremdänderungen liegen in anderen Dateien** → die eigene Änderung ist trotzdem sauber machbar. Stage und committe **pfadgenau nur die eigene Datei**, damit fremde, ungeprüfte Arbeit nicht mitwandert:
+外部リポジトリを操作する前に状態を確認します：
 
 ```bash
-git -C <pfad> add README.md
-git -C <pfad> commit -m "docs: link <projekt>"     # nur der gestagte Pfad
+git -C <path> status --porcelain
 ```
 
-Aber **nicht pushen**. Der Commit ist lokal harmlos; ein Push wäre es nicht unbedingt: Du weißt nicht, worauf der andere Arbeitsstand hinausläuft — vielleicht wird er gerade amendiert, rebased oder anders geschnitten, und dein Commit zwingt ihn dazu, sich damit auseinanderzusetzen. Der lokale Commit sichert die Arbeit, ohne jemandem etwas aufzuzwingen; der Lauf, der sich später jenem Repo zuwendet, findet ihn vor und nimmt ihn mit.
+**クリーンな作業ツリー** → 変更を加え、**独立した明確なコミット**（`docs: link <project>`）としてコミット＆プッシュします。対象リポジトリのコミットと混ぜないでください。独自履歴と読者を持つ別のリポジトリです。
 
-**Dirty in genau der Datei, die du ändern müsstest** → nicht anfassen. Hier müsstest du auf einem fremden Zwischenstand aufsetzen und ihn mit-committen; den erst zu verstehen kostet mehr, als dieser eine Verweis wert ist.
+**ダーティだが外部の変更が他のファイルにある** → 自身の変更はクリーンに実施可能です。未検証の他人の作業が混入しないよう、**自身のファイルのみを正確にステージングしてコミット**します：
 
-**Aktive Sperre (`LOCK*.txt`) im Ziel-Repo** → **zuerst den Lock lesen, statt ihn als pauschales Verbot zu behandeln.** Eine Sperre beschreibt ihren eigenen Umfang, und der ist oft enger als „gar nichts". Typische Fälle:
+```bash
+git -C <path> add README.md
+git -C <path> commit -m "docs: link <project>"     # ステージされたパスのみ
+```
 
-- **Bearbeitungssperre** („hier arbeitet gerade jemand") → nichts anfassen, auch keine Nebendatei.
-- **Reine Veröffentlichungs-/Push-Sperre** (Einreichung, Judging, Freeze) → lokale Arbeit bleibt erlaubt, nur der Remote-Kontakt ist gesperrt. Dann auf einem eigenen Branch arbeiten und lokal committen; **remote-wirksame Schritte entfallen** — nicht nur der Push, sondern auch Topics, Beschreibung, Homepage, Releases und Issue-/PR-Aktionen, denn auch die verändern das veröffentlichte Projekt.
+ただし**プッシュはしないでください**。ローカルコミットは無害ですが、プッシュはそうとは限りません。相手の作業がどのような状態か（Amend中、Rebase中、再構成中など）不明であり、プッシュによって不要な競合解消を強制してしまうためです。ローカルコミットは誰にも強制せずに自身の作業を保護します。将来そのリポジトリを対象とする巡回がそれを見つけて取り込みます。
 
-Ein Lock, der nur den Push sperrt, als Komplettverbot zu lesen, kostet den gesamten lokalen Teil der Runde ohne Sicherheitsgewinn. Umgekehrt reicht es nicht, nur den Push zu unterlassen und trotzdem Metadaten zu ändern. Im Zweifel den Lock zitieren und nachfragen.
+**変更が必要なファイル自体がダーティである** → 触れないでください。他人の作業状態の上に変更を重ねて一緒にコミットすることになり、その作業を理解するコストは参照1つの価値を上回ります。
 
-#### Der Wunsch darf nicht verloren gehen
+**ターゲットリポジトリにアクティブなロック（`LOCK*.txt`）が存在する** → **一律禁止として扱う前に、まずロック内容を読みます。** ロックは自身の適用範囲を説明しており、「完全禁止」より限定的であることが多いです。典型的なケース：
 
-Wird die Änderung aus einem dieser Gründe **nicht** ausgeführt, wandert sie in die Aufgabenliste des Ziel-Repos — `AUFGABEN.txt`, `TODO.md` oder `TODO.txt`, je nachdem, was dort existiert. Ein Eintrag mit Datum, gewünschter Änderung und Grund:
+- **編集ロック**（「現在作業中」）→ 副次ファイルであっても何も触れない。
+- **純粋な公開/プッシュロック**（提出中、審査中、フリーズ）→ ローカル作業は許可され、リモート接続のみが禁止されます。専用ブランチで作業してローカルコミットを行います。**リモートに影響を与えるステップは省略**します（プッシュだけでなくTopic、Description、Homepage、Release、Issue/PR操作も含む）。
+
+プッシュ専用のロックを完全禁止として解釈することは、安全上のメリットなくローカル作業全体を無駄にします。逆にプッシュを控えつつメタデータを変更することも不十分です。疑問がある場合はロック内容を引用して確認してください。
+
+#### 意図を失ってはならない
+
+上記の理由により変更が**実行されなかった**場合、ターゲットリポジトリのタスクリスト（`AUFGABEN.txt`, `TODO.md`, `TODO.txt` のうち存在する項目）へ移行させます。日付、希望する変更、理由を記載したエントリを作成します：
 
 ```markdown
-- [ ] [2026-07-24, after-care] Rückverweis auf <projekt> im README ergänzen
-      (übersprungen: README hatte uncommittete Fremdänderungen)
+- [ ] [2026-07-24, after-care] READMEに <project> への逆参照を追加
+      （スキップ：READMEに未コミットの外部変更が存在したため）
 ```
 
-Das ist der Unterschied zwischen „verschoben" und „vergessen": Die Aufgabenliste liegt dort, wo der nächste Bearbeiter dieses Repos ohnehin hineinsieht — verlässlicher als ein Vermerk im Protokoll eines fremden Laufs. Existiert keine Aufgabenliste, lege keine an; dann genügt der offene Punkt im eigenen Laufprotokoll.
+これが「延期」と「忘却」の違いです。タスクリストは次の担当者が必ず確認する場所であり、他プロジェクトの実行ログ内のメモより遥かに信頼性があります。タスクリストが存在しない場合は新設せず、自身の実行ログに未完了項目として保持することで十分です。
 
-Bei einer **aktiven Sperre gilt auch das nicht** — dann wird die Datei nicht angefasst und der Vermerk bleibt im eigenen Laufprotokoll. Notiere ihn in beiden Fällen auch dort, damit die Rotation den offenen Punkt kennt.
+**アクティブなロック下ではこれも適用されません**。ファイルには触れず、記録は自身の実行ログのみに保持します。どちらの場合も記録を残し、ローテーション時に未解消項目を把握できるようにします。
 
-Zum Schluss die Flächen aus Schritt 0 bedienen — siehe nächster Abschnitt.
+最後にステップ0の配信チャネルを更新します（次のセクションを参照）。
 
-## Parität über alle Distributionsflächen
+## 全配信チャネルでの同等性
 
-Zum Abschluss der Runde gegen die Liste aus Schritt 0 gehen: **Jede Änderung, die ein Nutzer sehen würde, muss auf jeder Fläche ankommen, auf der er sie sucht.** Ein Repo, dessen npm-Seite eine andere Geschichte erzählt, ist schlechter dran als eines mit nur einer Fläche.
+巡回の締めくくりとしてステップ0のリストと照合します：**ユーザーの目に触れるあらゆる変更は、ユーザーがそれを検索するすべてのチャネルに反映されなければなりません。** npmページが異なる内容を掲載しているリポジトリは、配信チャネルが1つしかないリポジトリよりも悪い状態です。
 
-Der entscheidende Mechanismus: **Paketregister zeigen die README des letzten Publish, nicht den aktuellen Repo-Stand.** Eine README-Korrektur wird auf npm oder PyPI erst mit einer neuen Version sichtbar. Wenn die Korrektur inhaltlich relevant ist (falsche Installation, falsche Version, veraltete Feature-Liste), gehört ein Patch-Release dazu — sonst bleibt der Fix wirkungslos.
+決定的なメカニズム：**パッケージレジストリは現在のリポジトリ状態ではなく、前回のPublish時のREADMEを表示します。** READMEの修正は、新しいバージョンをリリースして初めてnpmやPyPI上で視認可能になります。修正内容が重要な場合（誤ったインストール方法、誤ったバージョン、古くなった機能リスト）、パッチリリースを伴う必要があります。そうしなければ修正の効果が得られません。
 
-| Fläche | Was dort gepflegt wird | Wie es ankommt |
+| チャネル | 管理内容 | 反映方法 |
 |---|---|---|
-| npm | README, `description`, `keywords`, Repository-Link | Nur per `npm publish` (Patch-Version); Metadaten kommen aus `package.json` |
-| PyPI | README (`long_description`), Classifiers, Projekt-URLs | Nur per neuem Upload; Metadaten aus `pyproject.toml` |
-| MCP-Registry / Plugin-Verzeichnisse | Beschreibung, Version, Toolliste, Einstiegsdoku | Je nach Registry Manifest-Update oder erneute Einreichung |
-| Marketplace / Store | Beschreibung, Screenshots, Kategorien, Sprachfassungen | Über die jeweilige Verwaltungsoberfläche; Screenshots altern dort besonders schnell |
-| Docker Hub / Container-Registry | Beschreibung, Tags, Nutzungsbeispiel | Repository-Beschreibung plus neuer Tag |
-| Zenodo / DOI | Metadaten, Autoren, Version | In-Place-Edit für Metadaten, neue Version für Inhalte |
-| Website / Org-Profil / `llms.txt` | Kurzbeschreibung, Link, Positionierung | Direkt editierbar — die günstigsten Flächen, deshalb nie vergessen |
+| npm | README、`description`、`keywords`、リポジトリリンク | `npm publish`（パッチバージョン）でのみ反映。メタデータは `package.json` 由来 |
+| PyPI | README（`long_description`）、Classifiers、プロジェクトURL | 新規Uploadでのみ反映。メタデータは `pyproject.toml` 由来 |
+| MCP Registry / プラグインディレクトリ | 説明、バージョン、ツールリスト、入門ドキュメント | レジストリに応じてマニフェスト更新または再提出 |
+| Marketplace / アプリストア | 説明、スクリーンショット、カテゴリ、多言語テキスト | 各管理画面経由。スクリーンショットは特に風化しやすい |
+| Docker Hub / コンテナレジストリ | 説明、タグ、使用例 | リポジトリ説明＋新規タグ |
+| Zenodo / DOI | メタデータ、著者、バージョン | メタデータは直接編集可能、コンテンツ更新は新バージョン |
+| ウェブサイト / 組織プロファイル / `llms.txt` | 概要、リンク、ポジショニング | 直接編集可能。最も低コストなチャネルのため絶対忘れないこと |
 
-Wenn eine Version angehoben wird, müssen **alle Versionsträger** gleichzeitig mitwandern: Manifest, Code-Konstante, README-Badge, Changelog, Release-Tag, `llms.txt`. Ein halb angehobener Versionsstand ist schwerer zu diagnostizieren als ein durchgängig alter.
+バージョンを繰り上げる際は、**すべてのバージョン表記**（マニフェスト、コード内の定数、READMEバッジ、Changelog、Release Tag、`llms.txt`）を同時に更新します。中途半端に更新されたバージョン状態は、一貫して古い状態よりも診断が困難になります。
 
-Ist eine Aktualisierung auf einer Fläche gerade nicht möglich oder nicht sinnvoll (z. B. ein Release nur wegen eines Tippfehlers), halte das im Laufprotokoll fest, damit die nächste Runde die Abweichung nicht für ein Versehen hält.
+特定のチャネルでの更新が現在不可能な場合、または合理的でない場合（単なる誤字脱字の修正でリリースを行わない場合など）、将来の巡回で誤解されないよう実行ログに記録を残します。
 
-## Force-Push-Regel
+## フォース・プッシュルール
 
-Der Standard ist **kein Force-Push**. Interne Planungsdateien nachträglich zu ignorieren rechtfertigt keine Historien-Umschreibung: Der Aufwand ist hoch, jeder Klon und jeder Fork bricht, offene PRs werden unbrauchbar — und der Gewinn ist gering, weil der Inhalt harmlos ist. Normaler Weg:
+標準原則は**フォース・プッシュ禁止**です。内部の計画ファイルを後から無視することは、履歴書き換えの理由になりません。コストが高く、すべてのクローンやフォークが破損し、未解決のPRが無効化される一方で、内容が安全であるため利点が少ないためです。通常の手段：
 
 ```bash
-git rm --cached <datei>            # aus dem Tracking, bleibt lokal erhalten
-# .gitignore ergänzen (English)
-git commit -m "chore: interne Arbeitsdateien aus dem Repo nehmen"
+git rm --cached <ファイル>            # 追跡から外し、ローカルには保持
+# .gitignore に追加
+git commit -m "chore: remove internal working files from repo"
 git push
 ```
 
-Die Historie umschreiben (und damit `--force-with-lease` pushen) ist nur bei **echten Leaks** gerechtfertigt: Credentials und Keys, personenbezogene oder Kundendaten, sowie Dokumente mit echtem Wettbewerbswert — interne Kalkulationen, Preisstrategien, unveröffentlichte Pläne, Vertragsinterna. In diesem Fall:
+履歴の書き換え（および `--force-with-lease` でのプッシュ）が正当化されるのは、**真正の漏洩（Leaks）**が発生した場合のみです。資格情報やキー、個人情報や顧客データ、真の競合価値を持つ文書（内部試算、価格戦略、未公開計画、契約詳細など）。この場合：
 
-1. Betroffene Secrets **zuerst rotieren** — die Historie ist zu diesem Zeitpunkt bereits kopiert, geforkt und in Caches. Rotation wirkt, Löschen nur kosmetisch.
-2. Historie bereinigen (`git filter-repo` oder BFG), `--force-with-lease` pushen.
-3. Forks und Caches prüfen; bei Bedarf GitHub-Support für verwaiste Objekte kontaktieren.
-4. Vorgang im Laufprotokoll festhalten: was, wann, welche Rotation.
+1. **影響を受けるシークレットをまずローテーション**します。この時点で履歴はコピー、フォーク、キャッシュされています。ローテーションが本質的な解決であり、削除は表面的な処置です。
+2. 履歴をクリーンアップし（`git filter-repo` または BFG）、`--force-with-lease` でプッシュします。
+3. フォークとキャッシュを確認し、必要に応じてGitHubサポートに孤立オブジェクトの削除を連絡します。
+4. 実行ログに行為を記録します（何を、いつ、どのようなローテーションを行ったか）。
 
-Im Zweifel zwischen „unkritisch" und „heikel": als heikel behandeln und vorlegen. Die Kosten sind asymmetrisch.
+「非機密」か「機密」か判断に迷う場合：機密として扱い、確認を行ってください。リスクコストは非対称です。
 
-## Befunde werden Aufgaben, nicht nur Protokollzeilen
+## 検出事項は単なるログではなく「タスク」となる
 
-Eine Pflegerunde findet regelmäßig mehr, als sie in derselben Runde beheben kann oder soll: eine fehlende Sprachfassung, ein Modernisierungsrückstand, eine Veröffentlichung, die nie stattgefunden hat. **Solche Befunde werden im Moment der Entdeckung zu Aufgaben** — sonst hängen sie im Protokoll eines abgeschlossenen Laufs, wo der nächste Bearbeiter des Projekts nicht hinsieht.
+メンテナンス巡回では、1回のセクションで解決できる以上の問題（不足している言語版、技術的負債、未実施のリリースなど）が定期的に発見されます。**このような検出事項は、発見した瞬間にタスクへ変換されます。** さもなければ終了した実行ログの中に埋もれ、次の担当者の目に触れなくなるためです。
 
-Die Aufgabe gehört in das **ordnerlokale Aufgabensystem des Projekts** — dorthin, wo derjenige nachschaut, der als Nächstes an diesem Projekt arbeitet. Typischerweise ist das `AUFGABEN.txt` oder `TODO.md` im Projektordner, und der liegt oft **nicht im Git-Klon**, sondern in der Ablage, in der die Planung lebt. Der Klon enthält den Code, der Projektordner die Steuerung; ein Eintrag im Klon, der beim nächsten `git clean` verschwindet, ist keine Aufgabe.
+タスクは**プロジェクトローカルのタスクシステム**（次にこのプロジェクトで作業する人が確認する場所）へ書き込みます。通常はプロジェクトフォルダ内の `AUFGABEN.txt` や `TODO.md` であり、これは**Gitクローン内部ではなく**プロジェクト管理が置かれているディレクトリに存在することが多いです。クローンにはコードがあり、プロジェクトフォルダには管理情報があります。次の `git clean` で消えてしまうクローン内のエントリは適切なタスクとは言えません。
 
-Drei Dinge dabei beachten:
+3つの注意点：
 
-1. **Interne Aufgabenliste von öffentlicher Roadmap trennen.** Ein `TODO.md` kann eine gepflegte öffentliche Roadmap sein — dann ist es kein Ablageplatz für interne Nacharbeit. Sieh hinein, bevor du anhängst: Findet sich dort eine Überschrift wie „Public roadmap", schreib in die interne Datei daneben (`AUFGABEN.txt`) und markiere sie als intern.
-2. **Bestehende Einträge prüfen, statt zu duplizieren.** Oft steht der Befund schon da. Dann wird er nicht neu angelegt, sondern **angereichert** — mit dem empirischen Beleg aus diesem Lauf („bestätigt: `--help` gibt vollständig deutsche Ausgaben aus"). Ein bekannter Punkt mit frischem Beweis ist wertvoller als ein zweiter Eintrag daneben.
-3. **Erledigtes mitschreiben.** Was die Runde behoben hat, gehört als abgehakter Punkt mit Commit-Hash dazu. Das erklärt der nächsten Runde, warum ein Befund verschwunden ist, und verhindert, dass sie ihn erneut „entdeckt".
+1. **内部タスクリストと公開ロードマップを分離する。** `TODO.md` は整備された公開ロードマップである場合があり、内部作業の置き場ではありません。追記前に内容を確認し、「Public roadmap」などの見出しがある場合は隣の内部ファイル（`AUFGABEN.txt`）に書き込み、内部用と明記します。
+2. **既存エントリを確認し、重複を避ける。** 検出事項が既にリストに存在することがよくあります。その場合は新規作成せず、本実行のデータで**情報を強化**します（例: 「確認済み: `--help` は完全に日本語出力を返した」）。最新の証明を伴う既知の項目は、隣に作られた重複エントリより価値があります。
+3. **完了した項目を記録する。** 本巡回で解消された内容は、コミットハッシュを添えてチェック済み項目として残します。これにより次の巡回に対して問題が解消された理由を説明でき、再度の「発見」を防ぎます。
 
-Formuliere die Aufgabe so, dass sie ohne den Kontext dieses Laufs verständlich ist: was gefunden wurde, warum es zählt, was der nächste Schritt wäre. „i18n unvollständig" ist keine Aufgabe; „Katalog enthält nur `status.title`, dort sind es/zh/ja/ru leer — erst CLI-Strings in den Katalog überführen, dann alle sechs Sprachen befüllen" ist eine.
+本実行の文脈がなくても理解できるようにタスクを記述します（何が発見され、なぜ重要で、次のステップは何か）。「i18nが不完全」はタスクではありません。「Catalogに `status.title` しかなく、es/zh/ja/ruが空である — 先にCLI文字列をCatalogへ移行し、その後6言語全てを入力する」が適切なタスクです。
 
-## Laufprotokoll
+## 実行ログ（Run Log）
 
-Halte das Ergebnis in `_after-care/LOG.md` fest (der Ordner gehört in die `.gitignore` — er ist Pipeline-Material, kein Repo-Inhalt, genau nach der Regel aus Schritt 2b). Pro Lauf eine Zeile mit Datum, Stufe und den bewussten Entscheidungen:
+結果を `_after-care/LOG.md` に記録します（フォルダは `.gitignore` に追加します。ステップ2bの規則に従い、リポジトリコンテンツではなくパイプライン素材であるためです）。実行ごとに1行、日付、レベル、意図的な決定事項を記述します：
 
 ```markdown
 ## 2026-07-24 — surface
-- Flächen: GitHub, npm (<paket>), MCP-Registry, Org-Profil, llms.txt
-- Topics: +local-first, +mcp-server; keywords in package.json angeglichen
-- Entfernt: AUFGABEN.txt, _handoff/ (gitignored, kein Force-Push nötig)
-- README: Version 0.9 -> 1.2 korrigiert, Toolzahl 23 -> 26 nachgezählt
-- Sprachen: EN + DE gepflegt; ES/ZH/JA/RU bewusst nicht (entwicklernahes Publikum)
-- Issues: #12 gefixt, #7 geschlossen (erledigt), #15 Rückfrage gestellt
-- Push: 3 Commits, CI grün; npm-Republish 1.2.1 wegen README-Korrektur
-- Offen: Store-Screenshots veraltet, brauchen neuen Build
+- 配信チャネル: GitHub, npm (<package>), MCP Registry, Org Profile, llms.txt
+- Topics: +local-first, +mcp-server; package.json の keywords を適合
+- 削除: AUFGABEN.txt, _handoff/ (gitignore済み、フォース・プッシュ不要)
+- README: バージョン 0.9 -> 1.2 に修正、ツール数 23 -> 26 に再カウント
+- 言語: EN + JA を維持。ES/ZH/RU は意図的に見送り（開発者向け受衆のため）
+- Issues: #12 を修正、#7 をクローズ（解決済み）、#15 に追加質問を送信
+- Push: 3コミット、CI成功。README修正のため npm republish 1.2.1 を実施
+- 残課題: Storeのスクリーンショットが古いため新規Buildが必要
 ```
 
-Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treffen, und ist die Grundlage für rotierende Pflegeläufe über viele Repos (`rotation-check`).
+ログは次の巡回で同じ決定を再議論する手間を省き、多数のリポジトリにわたるローテーション巡回（`rotation-check`）の基盤となります。
 
-## Häufige Fehler
+## よくあるエラー
 
-| Fehler | Korrektur |
+| エラー | 修正方法 |
 |---|---|
-| Nur den Arbeitsbaum betrachtet, nicht `git ls-files` | Immer das getrackte Set prüfen — dort liegt das Problem |
-| Privacy-Gate nur auf Pfade und Token gerichtet | Auch nach eigenen Pipeline-/Ordnernamen suchen — sie lösen keinen Alarm aus und rutschen durch |
-| Interne Datei entfernt und dabei Historie umgeschrieben | Bei unkritischen Dateien reicht `git rm --cached` + normaler Push |
-| Secret aus `HEAD` entfernt und Vorgang als erledigt betrachtet | Secret rotieren; alles andere ist Kosmetik |
-| Dateien nach Namen klassifiziert | Kurz hineinsehen — Namen tragen die Absicht nicht zuverlässig |
-| Zahlen im README fortgeschrieben statt nachgezählt | An der Quelle zählen (Tool-Liste, Testlauf, Manifest) |
-| Neue Sprachfassung als leerer Stub angelegt | Befüllen oder weglassen — ein Stub täuscht Vollständigkeit vor |
-| Zweite README-Namenskonvention neben der bestehenden eingeführt | Vorhandene Konvention übernehmen |
-| PR an eine fremde Liste ohne Freigabe gestellt | Außenkommunikation vorlegen; nur eigene Flächen sind frei |
-| Issues gezählt statt bearbeitet | Fixen, schließen oder gezielt nachfragen — jeder Fall bekommt einen Zustand |
-| Banner im Alleingang in fremdem Stil erzeugt | Design-Familie des Oekosystems einhalten |
-| README im Repo korrigiert, npm-/PyPI-Seite zeigt weiter die alte | Registry-Seiten stammen vom letzten Publish — Patch-Release nachziehen |
-| Version nur im Manifest angehoben | Alle Versionsträger gleichzeitig: Manifest, Code, Badge, Changelog, Tag, `llms.txt` |
-| Änderungen fertig, aber ungepusht liegen gelassen | Committen und pushen gehört zur Runde; nur Sperren rechtfertigen eine Ausnahme |
-| Alles in einem Sammel-Commit | Aufräumen, Doku und Fixes trennen — sonst ist nichts einzeln zurückdrehbar |
-| CI nach Doku-Commit rot, sich selbst verdächtigt | Ungepinnter Linter ohne `select` folgt dem Default der neuen Version — Regelsatz festschreiben |
-| Falsche Aussage nur dort korrigiert, wo sie auffiel | Org-weit nach der Formulierung suchen — sie steht meist auch im Org-Profil, in `llms.txt` und in der zweiten Sprachfassung |
-| Im dirty Fremd-Repo mit `commit -a` gearbeitet | Pfadgenau stagen und committen, nicht pushen — fremde Arbeit bleibt unberührt |
-| Änderung im sauberen Org-Profil-Repo gemacht, aber nicht gepusht | Saubere Fremd-Repos bekommen einen eigenen Commit **und** einen eigenen Push |
-| Übersprungene Änderung nur im eigenen Protokoll vermerkt | Zusätzlich in die Aufgabenliste des Ziel-Repos eintragen, sofern eine existiert |
-| Befund nur ins Laufprotokoll geschrieben | Er wird zur Aufgabe im ordnerlokalen Aufgabensystem — ins Protokoll sieht später niemand |
-| Interne Nacharbeit an eine öffentliche Roadmap gehängt | Erst hineinsehen; „Public roadmap" heißt: interne Datei daneben nutzen |
-| Bekannten Befund als neuen Eintrag dupliziert | Bestehenden Punkt mit dem empirischen Beleg aus diesem Lauf anreichern |
-| Bei einer Bearbeitungssperre eine TODO-Zeile ins gesperrte Repo geschrieben | Diese Sperre gilt für das ganze Projekt — dort gar nichts anfassen |
-| Push-Sperre als Komplettverbot gelesen und das Repo ganz übersprungen | Lock lesen: sperrt er nur die Veröffentlichung, läuft die lokale Runde auf einem eigenen Branch weiter |
-| Unter Push-Sperre zwar nicht gepusht, aber Topics oder Beschreibung geändert | Auch Metadaten sind remote sichtbar — unter einer Veröffentlichungssperre entfallen sie mit |
+| 作業ツリーのみを確認し、`git ls-files` を無視した | 常に追跡対象セットを確認する。問題はそこに潜んでいる |
+| プライバシーゲートがパスとトークンのみを対象とした | 内部フォルダ/パイプライン名も検索する。アラートは鳴らないが構造を露呈する |
+| 内部ファイルを削除する際に歴史を書き換えた | 機密性のないファイルは `git rm --cached` ＋ 通常プッシュで十分 |
+| `HEAD` からシークレットを削除して完了とみなした | シークレットをローテーションする。それ以外は表面的な処置に過ぎない |
+| ファイル名だけでファイルを分類した | 中身を速読する。ファイル名は意図を正確に反映しない |
+| README内の数値を再カウントせず引き継いだ | ソース（ツール一覧、テスト実行、マニフェスト）で直接カウントする |
+| 新しい言語版を空のスタブとして作成した | 内容を入力するか作成を見送る。スタブは偽の完全性を装う |
+| 既存の命名規則の隣に第2のREADME命名規則を持ち込んだ | リポジトリ内に存在する既存の命名規則を継承する |
+| 承認なしで外部リストにPRを提出した | 外部コミュニケーションは承認を得る。自社チャネルのみ直接変更可能 |
+| Issueを処理せず数を数えただけにした | 修正、クローズ、または具体的に質問する。各ケースに定義された状態を与える |
+| 独自スタイルで統一感のないバナーを作成した | エコシステムの設計言語ファミリーを遵守する |
+| リポジトリのREADMEを修正したが、npm/PyPIページは古いまま | レジストリページは前回のPublish由来。パッチリリースを実施する |
+| マニフェストのみでバージョンを繰り上げた | すべての表記（マニフェスト、コード、バッジ、Changelog、Tag、`llms.txt`）を同時に更新する |
+| 変更が完了しているのに未プッシュで放置した | コミットとプッシュは巡回の一部。凍結期間のみが例外を正当化する |
+| すべてを1つの巨大なコミットにまとめた | 清掃、ドキュメント、修正を分離する。さもなければ個別にロールバックできない |
+| ドキュメントコミット後にCIが赤になり自分を疑った | バージョン未固定のリンターが新規デフォルトに従っている。ルールセットを明示的に固定する |
+| 誤った記述を発見場所でのみ修正した | 全Orgでその表現を検索する。プロファイル、`llms.txt`、第2言語版にも存在する |
+| ダーティな外部リポジトリで `commit -a` を使用した | パスを正確に指定してステージ＆コミットし、プッシュはしない。他人の作業には触れない |
+| クリーンなOrgプロファイルリポジトリで変更を行ったがプッシュしなかった | クリーンな外部リポジトリには独自のコミット**および**独自のプッシュを行う |
+| スキップした変更を自身のログにのみ記録した | ターゲットリポジトリのタスクリスト（存在する場合）にも記載する |
+| 検出事項を実行ログにしか書かなかった | ローカルのタスクシステムでタスク化する。後から過去のログを見る人はいない |
+| 内部作業を公開ロードマップに追記した | 先に確認する。「Public roadmap」の場合は隣の内部ファイルを使用する |
+| 既知の検出事項を新エエントリとして重複作成した | 既存の項目に本実行の検証データを補強する |
+| 編集フリーズ中のリポジトリにTODO行を書き込んだ | フリーズはプロジェクト全体に適用される。そこでは何も触れない |
+| プッシュフリーズを完全禁止と解釈してリポジトリ全体をスキップした | ロックを読む。公開のみを禁止している場合はローカルブランチで作業を継続する |
+| プッシュフリーズ下でプッシュは控えたがメタデータを変更した | メタデータもリモートで視認可能。プッシュフリーズ下ではメタデータ変更も控える |
 
-## Abschluss-Checkliste
+## 完了チェックリスト
 
-- [ ] Distributionsflächen ermittelt und im Laufprotokoll notiert.
-- [ ] Topics, Description und Homepage gesetzt und überprüft.
-- [ ] Privacy-Gate über das getrackte Set gelaufen, Funde behandelt.
-- [ ] `.md`/`.txt`/`.json` auf Veröffentlichungsabsicht geprüft, interne Dateien ignoriert.
-- [ ] Kein Force-Push ohne echten Leak; bei Leak Rotation durchgeführt.
-- [ ] Banner vorhanden und im README eingebunden.
-- [ ] Version, Features, Zahlen, Screenshots, Links gegen den echten Stand geprüft.
-- [ ] Darstellung verbessert (Tabellen, Diagramme, erste Bildschirmhöhe).
-- [ ] README-Sprachmatrix vollständig; Entscheidungen zu weiteren Sprachen dokumentiert.
-- [ ] Sichtbarkeitsmaßnahmen umgesetzt bzw. zur Freigabe vorgelegt.
-- [ ] Eintrag im eigenen Org-Profil geprüft, sinnvolle Fremd-Orga-Verweise gesetzt.
-- [ ] Änderungen an Fremd-Repos: sauber → committet und gepusht; dirty → lokal committet;
-      nicht ausgeführt → in der Aufgabenliste des Ziel-Repos eingetragen.
-- [ ] Issues und PRs in einen definierten Zustand gebracht.
-- [ ] Getrennte Commits erstellt, gepusht, CI und Remote-Ansicht verifiziert.
-- [ ] Alle Distributionsflächen auf denselben Stand gebracht (ggf. Patch-Release).
-- [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
-- [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
+- [ ] 配信チャネルを特定し、実行ログに記録した。
+- [ ] Topics、Description、Homepage を設定および検証した。
+- [ ] 追跡対象セットに対してプライバシーゲートを実行し、検出事項を処理した。
+- [ ] `.md`/`.txt`/`.json` の公開意図を確認し、内部ファイルを無視/除外した。
+- [ ] 漏洩がない限りフォース・プッシュを行わず、漏洩時はローテーションを実施した。
+- [ ] バナーが存在し、READMEに組み込まれていることを確認した。
+- [ ] バージョン、機能、数値、スクリーンショット、リンクを実コードと照合した。
+- [ ] 表現形式を改善した（表、図、ファーストビューの配置）。
+- [ ] READMEの言語マトリクスが完全であり、他言語に関する決定が記録されている。
+- [ ] 可視性向上策を実施、または承認のために提出した。
+- [ ] 自組織のプロファイル項目を確認し、適切な外部組織参照を設定した。
+- [ ] 外部リポジトリの変更：クリーン→コミット＆プッシュ、ダーティ→ローカルコミット、未実行→ターゲットのタスクリストへ記載。
+- [ ] IssueとPRを定義された状態に移行させた。
+- [ ] 分割されたコミットを作成し、プッシュし、CIおよびリモート表示を検証した。
+- [ ] すべての配信チャネルを同一状態に更新した（必要に応じてパッチリリース）。
+- [ ] 未解消の検出事項をローカルのタスクシステムにタスクとして登録した。
+- [ ] 実行ログを `_after-care/LOG.md` に書き込んだ。
 
 ## 変更履歴
 
 ### 1.6.0 (2026-07-24)
-- Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine
-  Nutzer-Klarstellung wurde in Durchlauf 1 im Hub korrigiert, stand aber unbemerkt noch fünfmal
-  im Organisationsprofil (EN, DE, `llms.txt`) und fiel erst neun Durchläufe später auf.
+- ルール追加：1箇所の内容修正は全チャネルに適用される。経験的教訓 — ユーザーからの明確化が第1ラウンドでHubにて修正されたが、組織プロファイルの5箇所（EN, DE, `llms.txt`）に気づかれず残り、9ラウンド後にようやく発見されたため。
 
 ### 1.5.0 (2026-07-24)
-- Die Linter-Diagnose verschärft, nachdem das Muster an einem Tag dreimal auftrat
-  (n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16): „zuerst prüfen", die konkreten
-  Verräter-Regelcodes, der Plattform-Split, `ruff.toml` als Fix bei fehlendem `pyproject.toml`,
-  Verifikation gegen die neue Linter-Version.
+- 1日に3回パターンが発生したことを受け、リンターの診断を強化（n8n-workflow-manager ruff 0.15, clirec + swarm-ai ruff 0.16）：「まず確認」、具体的な特徴的ルールコード、プラットフォーム分割、`pyproject.toml` 欠落時の `ruff.toml` 修正、新リンターバージョンに対する検証。
 
 ### 1.4.0 (2026-07-24)
-- Diagnose ergänzt: Wenn die CI nach einem reinen Doku-Commit rot wird, ist die häufigste
-  Ursache ein ungepinnter Linter ohne festgeschriebenen Regelsatz — ein neues Tool-Release
-  verschiebt den Default und macht unveränderten Code rot. Fix: Regelsatz pinnen, neue Regeln
-  als Aufgabe. Zweimal in Folge aufgetreten (n8n-workflow-manager mit ruff 0.15, clirec mit 0.16).
+- 診断追加：純粋なドキュメントコミット後にCIが赤になった場合、最も頻繁な原因はルールセットが未固定のリンターである。新規ツールのリリースがデフォルトを変更し未修正コードをエラーにする。対策：ルールセットの固定、新規ルールのタスク化。
 
 ### 1.3.0 (2026-07-24)
-- Neuer Abschnitt „Befunde werden Aufgaben": Was die Runde nicht selbst behebt, wird im Moment
-  der Entdeckung ein Eintrag im ordnerlokalen Aufgabensystem des Projekts — dort, wo der nächste
-  Bearbeiter hinsieht, nicht im Protokoll eines abgeschlossenen Laufs. Inklusive Trennung von
-  interner Liste und öffentlicher Roadmap, Anreichern statt Duplizieren, Erledigtes mit Commit.
+- 新セクション「検出事項は単なるログではなくタスクとなる」：本巡回で直接修正しない内容は、発見した瞬間にプロジェクトローカルのタスクシステム（次の担当者が確認する場所）へ登録する。内部リストと公開ロードマップの分離、重複作成ではなく情報の補強、コミットハッシュを伴う完了記録を含む。
 
 ### 1.2.0 (2026-07-24)
-- Privacy-Gate sucht zusätzlich nach den Namen der eigenen internen Ablagen. Sie sind keine
-  Secrets, lösen daher keinen Alarm aus und überleben ein Gate, das nur auf Pfade und Token
-  zielt — bleiben für Leser aber unauflösbar und geben die eigene Struktur preis.
+- プライバシーゲートが内部保管場所の名称も検索対象に追加。これらはシークレットではないためアラートを発生させず、パスとトークンのみを対象とするゲートを通過してしまうが、読者には解読不能であり内部構造を暴露してしまうため。
 
 ### 1.1.0 (2026-07-24)
-- Sperren werden gelesen statt pauschal als Verbot behandelt: eine reine Veröffentlichungs-/
-  Push-Sperre leitet die Runde auf einen lokalen Branch um, statt sie abzubrechen. Zugleich
-  klargestellt, dass unter einer solchen Sperre auch Metadaten, Releases und Issue-/PR-Aktionen
-  entfallen — sie sind ebenso remote sichtbar wie ein Push.
+- ロックを一律の禁止として扱うのではなく内容を読み解くよう変更：純粋な公開/プッシュロックは巡回を打ち切るのではなくローカルブランチへリダイレクトする。同時に、そのようなフリーズ下ではメタデータ、リリース、Issue/PRの操作も省略されることを明確化（プッシュと同様にリモートで視認可能であるため）。
 
 ### 1.0.0 (2026-07-24)
-- Initiale Version. Stufe 1 der Repo-Nachpflege, abgeleitet aus `github-repo-care`.
+- 初版作成。`github-repo-care` から派生したリポジトリ事後メンテナンスのレベル1。

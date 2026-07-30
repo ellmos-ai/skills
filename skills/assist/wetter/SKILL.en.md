@@ -6,7 +6,6 @@ author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
 description: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,7 +18,7 @@ dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'py
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `wetter`.
 
 
 # Weather (English)
@@ -43,7 +42,7 @@ which the LLM fills in interactively with the user.
 | "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
 | Coordinates known | `wetter_core.py <lat> <lon>` |
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 ```
 1. Determine location: from request; else prefs.json (wetter_default_location);

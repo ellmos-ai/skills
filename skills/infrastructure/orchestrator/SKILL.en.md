@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: Provider-neutral protocol for breaking down complex tasks, commissioning independent workers, and evidence-based verification of their results.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,88 +18,75 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `orchestrator`.
+> **English** — Official English version of `orchestrator`.
 
 
 # Orchestrator (English)
 
 ## Overview & Purpose
 
-Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
-Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
-Qualitätsvorteil bringt. Für kleine, eng gekoppelte Aufgaben arbeite direkt.
+Use this skill when a task consists of at least two largely independent work packages and delegation provides a real time, context, or quality advantage. For small, tightly coupled tasks, work directly.
 
-Der Skill beschreibt ein Protokoll. Das konkrete Starten, Unterbrechen und
-Wiederaufnehmen von Workern erfolgt über die Fähigkeiten der jeweiligen Runtime.
+The skill describes a protocol. The actual starting, pausing, and resuming of workers occurs via the capabilities of the respective runtime.
 
-## Autoritätsgrenze
+## Authority Limit
 
-Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Scope
-und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
-irreversible oder anderweitig freigabepflichtige Aktionen bleiben
-freigabepflichtig.
+Delegation does not expand authorization. Every worker receives at most the scope and modification rights that already apply to the main task. External, irreversible, or otherwise approval-requiring actions remain subject to approval.
 
-## Ablauf
+## Process
 
-### 1. Lage prüfen
+### 1. Assess the Situation
 
-1. Ziel, Erfolgskriterien und Ausschlüsse der Hauptaufgabe festhalten.
-2. Projektregeln, Sperren, laufende Änderungen und verfügbare Budgets prüfen.
-3. Vor dem Dispatch den aktuellen Lock-, Status- und Diff-Zustand der betroffenen
-   Bereiche als Baseline sichern. Nur so lassen sich vorhandene fremde Änderungen
-   später zuverlässig von Worker-Änderungen unterscheiden.
-4. Nur Arbeitspakete parallelisieren, die unabhängig genug sind.
-5. Überschneidende Schreibbereiche trennen oder sequentiell bearbeiten.
+1. Record the objective, success criteria, and exclusions of the main task.
+2. Check project rules, locks, ongoing changes, and available budgets.
+3. Before dispatch, secure the current lock, status, and diff state of the affected areas as a baseline. Only in this way can existing external changes be reliably distinguished from worker changes later.
+4. Only parallelize work packages that are sufficiently independent.
+5. Separate overlapping write areas or process them sequentially.
 
-### 2. Auftragsvertrag schreiben
+### 2. Write Contract
 
-Vor jedem Dispatch einen kurzen, prüfbaren Vertrag erstellen:
+Before each dispatch, create a brief, verifiable contract:
 
-| Feld | Pflichtinhalt |
+| Field | Required Content |
 |---|---|
-| Kennung | stabile ID des Arbeitspakets |
-| Ziel | genau ein konkretes Ergebnis |
-| Eingaben | relevante Dateien, Daten oder Kontextquellen |
-| Positiver Scope | was gelesen oder geändert werden darf |
-| Negativer Scope | was ausdrücklich unberührt bleibt |
-| Erfolgskriterium | beobachtbare Bedingung für „fertig“ |
-| Evidenz | erwarteter Nachweis, etwa Test, Diff oder Fundstelle |
-| Rückgabeformat | kompakte, strukturierte Abschlussmeldung |
+| ID | stable ID of the work package |
+| Objective | exactly one concrete result |
+| Inputs | relevant files, data, or context sources |
+| Positive scope | what may be read or modified |
+| Negative scope | what remains explicitly untouched |
+| Success criterion | observable condition for "done" |
+| Evidence | expected proof, such as a test, diff, or reference |
+| Return format | compact, structured completion message |
 
-Ein Worker bekommt nur den Kontext, den er für diesen Vertrag benötigt.
+A worker receives only the context needed for this contract.
 
-### 3. Ausführen und beobachten
+### 3. Execute and Observe
 
-- Fan-out klein halten und nur bei unabhängigem Nutzen vergrößern.
-- Fortschritt über Runtime-Status oder einen projektüblichen Checkpoint verfolgen.
-- Bei Konflikten, Scope-Ausweitung oder fehlender Autorität stoppen und eskalieren.
-- Ein fehlgeschlagener Worker darf unabhängige Arbeitspakete nicht automatisch
-  blockieren.
+- Keep fan-out small and only increase it when there is independent benefit.
+- Track progress via runtime status or a standard project checkpoint.
+- In case of conflicts, scope expansion, or lack of authority, stop and escalate.
+- A failed worker must not automatically block independent work packages.
 
-### 4. Ergebnisse abnehmen
+### 4. Verify Results
 
-Eine Fertigmeldung ist zunächst eine Behauptung. Der Orchestrator prüft selbst:
+A completion message is initially a claim. The orchestrator verifies itself:
 
-1. Existiert das behauptete Artefakt oder die genannte Änderung?
-2. Gehört es zum vereinbarten Scope?
-3. Besteht der vereinbarte Test oder Nachweis aktuell?
-4. Wurden fremde Änderungen, Sperren und negative Scopes respektiert?
-5. Widersprechen sich Ergebnisse verschiedener Worker?
+1. Does the claimed artifact or named change exist?
+2. Does it belong to the agreed scope?
+3. Does the agreed test or proof currently pass?
+4. Were external changes, locks, and negative scopes respected?
+5. Do results from different workers contradict each other?
 
-Erst danach gilt ein Arbeitspaket als abgeschlossen.
+Only then is a work package considered complete.
 
-### 5. Integrieren und sichern
+### 5. Integrate and Secure
 
-- Konflikte bewusst auflösen; Ergebnisse nicht blind aneinanderhängen.
-- Erforderliche Gesamttests nach der Integration erneut ausführen.
-- Offene, fehlgeschlagene und zurückgestellte Pakete klar ausweisen.
-- Bei längeren Läufen Ziel, Status, Evidenz und nächsten Schritt in einem
-  wiederauffindbaren Checkpoint sichern.
+- Resolve conflicts consciously; do not blindly append results.
+- Re-run necessary overall tests after integration.
+- Clearly designate open, failed, and deferred packages.
+- For longer runs, save objective, status, evidence, and next step in a recoverable checkpoint.
 
-## Minimaler Worker-Prompt
+## Minimal Worker Prompt
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -111,27 +98,24 @@ Belege mit: <Test, Diff oder Fundstelle>
 Antworte als: <Rückgabeformat>
 ```
 
-## Stop-Bedingungen
+## Stop Conditions
 
-Stoppe nur das betroffene Arbeitspaket, wenn sein Scope, seine Autorität oder
-seine Evidenz unklar wird. Unabhängige, sichere Pakete dürfen weiterlaufen.
+Stop only the affected work package if its scope, authority, or evidence becomes unclear. Independent, safe packages may continue running.
 
-Stoppe die gesamte Delegation, wenn:
+Stop the entire delegation if:
 
-- die Teilaufgaben nicht mehr unabhängig sind,
-- ein gemeinsamer Schreibbereich nicht sicher getrennt werden kann,
-- Regeln, Sperren oder Autorität für den gesamten verbleibenden Scope unklar sind,
-- die erwarteten Kosten den erkennbaren Nutzen übersteigen,
-- die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
+- the subtasks are no longer independent,
+- a shared write area cannot be safely separated,
+- rules, locks, or authority for the entire remaining scope are unclear,
+- the expected costs exceed the discernible benefit,
+- the required evidence cannot be generated or verified.
 
 ## Changelog
 
 ### 1.1.0 (2026-07-28)
-- Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.
-- Auftragsvertrag, Autoritätsgrenze, Evidenzabnahme und Checkpoints als
-  portable Kernmechanik herausgearbeitet.
-- Baseline für fremde Änderungen sowie paketlokale und globale Stopps
-  ausdrücklich getrennt.
+- Removed user, path, model, and provider bindings.
+- Elaborated contract, authority limit, evidence verification, and checkpoints as portable core mechanics.
+- Explicitly separated baseline for external changes as well as package-local and global stops.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Initial local version.

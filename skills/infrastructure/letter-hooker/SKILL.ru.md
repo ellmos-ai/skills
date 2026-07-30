@@ -5,7 +5,14 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [Русский] Навык агента для letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.
+description: >
+  Расширяет automation-self-care с помощью Letter Hooks, предполётных бутлоадеров
+  (Preflight Bootloaders), правил обхода документов и самовосстанавливающегося
+  обогащения контекста промптов для AI-агентов и CLI, у которых отсутствуют встроенные
+  событийно-ориентированные JSON-хуки жизненного цикла (таких как Antigravity / Gemini CLI).
+  Используйте, когда агенту требуется внедрить предполётные правила, выполнить поиск в
+  memory/gardener перед началом работы, применить стратегии чтения документов каталога (CLAUDE.md / AGENTS.md)
+  или динамически маршрутизировать задачи sidecar в навыки и протоколы безопасности.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,41 +21,44 @@ category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
 language: ru
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kontext_and_workflow_loader.py']}
-provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: [agy_kontext_and_workflow_loader.py]
+provenance:
+  origin: "fork of automation-self-care"
+  origin_path: "skills/infrastructure/automation-self-care"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `letter-hooker`.
+> **Русский** — Официальная русская версия `letter-hooker`.
 
+# Letter-Hooker (Движок предполётной проверки и управления на уровне промпта)
 
+Навык **Letter-Hooker** расширяет `automation-self-care` для фреймворков AI-агентов (таких как **Antigravity / Gemini CLI**), не имеющих встроенных событийно-ориентированных загрузчиков JSON-хуков жизненного цикла (например, `~/.claude/settings.json` или `~/.codex/hooks.json`).
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Letter-Hooker (Prompt-Level Preflight & Governance Engine) (English)
-
-The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
-
-Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an **active, prompt-level preflight bootloader and letter-hook injection loop** via scheduled tasks and maintainer scripts (`agy_kontext_and_workflow_loader.py`).
+Вместо использования пассивных хуков, срабатывающих при каждом нажатии клавиши, `letter-hooker` запускает **активный цикл предполётной загрузки и внедрения letter-хуков на уровне промпта** с помощью запланированных задач и скриптов обслуживания (`agy_kontext_and_workflow_loader.py`).
 
 ---
 
-## Ключевые возможности и функции & Features
+## Основные возможности
 
-1. **Preflight Bootloaders & Document Traversal Rules**:
-   - **Upward & Downward Search**: Enforces strict instructions for agents to inspect `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md`, and `README.md` at the current working directory level. If missing, traverse upwards until found; then inspect downwards.
-   - **Memory & Gardener Preflight**: Mandatory preflight query to `gardener` and `memoryhooker` before executing destructive or complex modifications.
+1. **Предполётные бутлоадеры и правила обхода документов**:
+   - **Поиск вверх и вниз**: Принудительно исполняет строгие инструкции для агентов по проверке `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md` и `README.md` на уровне текущего рабочего каталога. Если файлы отсутствуют, выполняется обход вверх до их обнаружения, затем проверка вниз.
+   - **Предполётная проверка Memory и Gardener**: Обязательный предварительный запрос к `gardener` и `memoryhooker` перед выполнением деструктивных или сложных изменений.
 
-2. **Letter Hooks Catalog & Reference Links**:
-   - Modular `.md` instruction files stored under `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
-   - Injects explicit `file://` links directly into `sidecar.json` prompt text so agents read exact security and workflow protocols upon invocation.
+2. **Каталог Letter Hooks и справочные ссылки**:
+   - Модульные инструкции в формате `.md`, хранящиеся в `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
+   - Внедряет явные ссылки `file://` непосредственно в текст промпта `sidecar.json`, чтобы агенты считывали точные протоколы безопасности и рабочих процессов при вызове.
 
-3. **Daily Keyword List & Self-Healing Prompt Enrichment**:
-   - Maintains a daily `STICHWORTLISTE.json` from active/standby tasks.
-   - Analyzes execution logs (`AUTOMATIONS-MEMORY.md`) for failure patterns (missing context, missing workflow guidance, invalid paths) and dynamically patches task prompts.
+3. **Ежедневный список ключевых слов и самовосстанавливающееся обогащение промптов**:
+   - Поддерживает ежедневный файл `STICHWORTLISTE.json` на основе активных и резервных задач.
+   - Анализирует журналы выполнения (`AUTOMATIONS-MEMORY.md`) на предмет шаблонов сбоев (отсутствие контекста, отсутствие руководства по рабочему процессу, недействительные пути) и динамически обновляет промпты задач.
 
-4. **Skill & Persona Routing**:
-   - Inspects task keywords and maps them to appropriate `.SKILLS` (e.g. `infrastructure/condition`, `semantic-persona-routing`, `orchestrator`, `think`, `decide`).
+4. **Маршрутизация навыков и персон**:
+   - Проверяет ключевые слова задач и сопоставляет их с соответствующими `.SKILLS` (например, `infrastructure/condition`, `semantic-persona-routing`, `orchestrator`, `think`, `decide`).
 
 ---
 
@@ -61,14 +71,14 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Интеграция в рабочий процесс
 
 ```bash
-# Execute the Letter-Hooker Maintenance Engine (English)
+# Execute the Letter-Hooker Maintenance Engine
 python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ```
 
-1. **Scan Sidecars**: Read all `sidecar.json` prompt texts in `~/.gemini/config/sidecars/`.
-2. **Update Keyword List**: Extract domain terms and save to `.SYNC/STICHWORTLISTE.json`.
-3. **Inject Letter Hooks**: Append bootloader rules and `file://` reference links to prompts.
-4. **Log Results**: Record updates in `ANTIGRAVITY-LOG.txt` and `ANTIGRAVITY-REGISTRY.md`.
+1. **Сканирование Sidecar**: Чтение всех текстов промптов `sidecar.json` в `~/.gemini/config/sidecars/`.
+2. **Обновление списка ключевых слов**: Извлечение доменных терминов и сохранение в `.SYNC/STICHWORTLISTE.json`.
+3. **Внедрение Letter Hooks**: Добавление правил бутлоадера и справочных ссылок `file://` в промпты.
+4. **Журналирование результатов**: Запись обновлений в `ANTIGRAVITY-LOG.txt` и `ANTIGRAVITY-REGISTRY.md`.

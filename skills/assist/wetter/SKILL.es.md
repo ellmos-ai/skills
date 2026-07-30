@@ -5,7 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [Español] Documentación completa para la habilidad wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
+description: Responde a preguntas sobre el tiempo para una ubicación o coordenadas a través de wttr.in (gratuito, sin clave API). Tiempo actual + pronóstico de 3 días. La ubicación proviene de la solicitud del usuario o preferencias; caché corto opcional.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,79 +15,75 @@ tags: [wetter, wttr, vorschau, assist]
 language: es
 status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
-provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `wetter`.
+> **Español** — Versión oficial en español de `wetter`.
 
 
+# Tiempo (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Información meteorológica rápida y sin necesidad de clave API para el uso diario.
 
+## Descripción general y propósito
 
-# Weather (English)
+Responde a preguntas como "¿Qué tiempo hará?" sin necesidad de una clave API (fuente de datos: wttr.in).
+Proporciona el tiempo actual (temperatura, sensación térmica, viento, humedad, UV) más un
+pronóstico compacto de 3 días. **Neutro respecto al usuario:** sin ubicación fija en el código; la ubicación
+proviene de la solicitud o de `assist/prefs.json` (`wetter_default_location`),
+que el LLM completa de forma interactiva con el usuario.
 
-Fast, key-free weather information for everyday use.
+## Activadores
 
-## Descripción General y Propósito & Purpose
-
-Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
-Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
-compact 3-day forecast. **User-neutral:** no fixed location in the code — the location
-comes from the request or from `assist/prefs.json` (`wetter_default_location`),
-which the LLM fills in interactively with the user.
-
-## Triggers
-
-| User input | Action |
+| Entrada del usuario | Acción |
 |---|---|
-| "Weather for Potsdam?" / "What will the weather be like in Hamburg?" | `wetter_core.py "<location>"` |
-| "Weather tomorrow?" (without location) | `wetter_core.py --default` (location from prefs) |
-| "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
-| Coordinates known | `wetter_core.py <lat> <lon>` |
+| "¿Tiempo en Potsdam?" / "¿Qué tiempo hará en Hamburgo?" | `wetter_core.py "<location>"` |
+| "¿Tiempo mañana?" (sin ubicación) | `wetter_core.py --default` (ubicación desde prefs) |
+| "Mi ubicación predeterminada para el tiempo es Potsdam" | `wetter_core.py --set-default "Potsdam"` |
+| Coordenadas conocidas | `wetter_core.py <lat> <lon>` |
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
 ```
-1. Determine location: from request; else prefs.json (wetter_default_location);
-   else ask user interactively + optionally save as default.
-2. Query wetter_core.py (wttr.in, 2 attempts, 30-min cache).
-3. Present readable weather text + 3-day forecast.
+1. Determinar ubicación: a partir de la solicitud; si no, prefs.json (wetter_default_location);
+   si no, preguntar al usuario de forma interactiva + opcionalmente guardar como predeterminada.
+2. Consultar wetter_core.py (wttr.in, 2 intentos, caché de 30 min).
+3. Presentar texto de tiempo legible + pronóstico de 3 días.
 ```
 
-## CLI Entry Point (wetter_core.py)
+## Punto de entrada CLI (wetter_core.py)
 
 ```bash
-python wetter_core.py "Potsdam"          # location
-python wetter_core.py 52.6789 13.5878   # coordinates
-python wetter_core.py --default         # location from prefs.json
+python wetter_core.py "Potsdam"          # ubicación
+python wetter_core.py 52.6789 13.5878   # coordenadas
+python wetter_core.py --default         # ubicación desde prefs.json
 python wetter_core.py --set-default "Potsdam"
 ```
 
-## Store (optional)
+## Almacenamiento (opcional)
 
-- **No mandatory store.** Optional short cache `assist/wetter/.cache.json`
-  (TTL 30 min, best-effort) — avoids repeated network calls.
-- Location preference in `assist/prefs.json` (`wetter_default_location`).
+- **Sin almacenamiento obligatorio.** Caché corto opcional `assist/wetter/.cache.json`
+  (TTL 30 min, best-effort) — evita llamadas repetidas a la red.
+- Preferencia de ubicación en `assist/prefs.json` (`wetter_default_location`).
 
-## Attitude
+## Actitud
 
-We use wttr.in as the key-free default source, but are open to other weather
-backends (e.g. DWD/OpenWeather) if the user prefers them.
+Usamos wttr.in como fuente predeterminada sin clave API, pero estamos abiertos a otros backends
+de tiempo (p. ej., DWD/OpenWeather) si el usuario los prefiere.
 
-## Privacy
+## Privacidad
 
-- Only the location name/coordinates go to wttr.in (required for the query).
-- No telemetry, no account. Cache + preference stay local.
+- Solo el nombre/coordenadas de la ubicación se envían a wttr.in (necesario para la consulta).
+- Sin telemetría, sin cuenta. El caché y las preferencias permanecen locales.
 
-## Related Resources
+## Recursos relacionados
 
-- `assist/AGENTS.md` — Umbrella router
-- `assist/reiseroute/` — uses weather for travel planning (planned)
+- `assist/AGENTS.md` — Enrutador principal
+- `assist/reiseroute/` — utiliza el tiempo para la planificación de viajes (planificado)
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 0.1.0 (2026-06-22)
-- Initial version. Ported from BACH `hub/_services/weather/weather_service.py` (MIT).
-- Extended: location name support (not just coordinates), 3-day forecast,
-  optional cache, prefs-based default location. User-neutral.
+- Versión inicial. Portada desde BACH `hub/_services/weather/weather_service.py` (MIT).
+- Ampliado: soporte para nombres de ubicación (no solo coordenadas), pronóstico de 3 días,
+  caché opcional, ubicación predeterminada basada en preferencias. Neutro respecto al usuario.

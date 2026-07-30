@@ -3,7 +3,6 @@ name: reiseroute
 version: 1.0.0
 category: assist
 description: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
-
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -17,7 +16,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `reiseroute`.
 
 
 # Travel Route (English)
@@ -46,7 +45,7 @@ mode of transport. No API key, no account required.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Approach
 
 1. **Extract start and destination** from the user input.
 2. **Detect mode:** car (default), bicycle, foot.

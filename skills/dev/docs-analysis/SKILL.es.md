@@ -1,103 +1,115 @@
 ---
+name: docs-analysis
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Análisis de requisitos de documentos: analiza los documentos de concepto y requisitos en la carpeta docs/, verifica los requisitos con el código actual y crea un informe de diferencias consolidado.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [docs-analysis, requirements, code-review, diff-report, quality-assurance]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `docs-analysis`.
+> **Español** — Versión oficial en español de `docs-analysis`.
 
 
+# Análisis de Requisitos de Documentos (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Document Requirements Analysis (English)
-
-> Analyzes all concept and requirements documents, checks their requirements against the current code, and creates a consolidated difference report.
-
----
-
-## Descripción General y Propósito & Purpose
-
-Analyzes all concept and requirements documents in the ../docs/ folder, checks their requirements against the current code, and creates a consolidated difference report.
+> Analiza todos los documentos de concepto y requisitos, verifica sus requisitos con el código actual y crea un informe de diferencias consolidado.
 
 ---
 
-## Naming Convention
+## Resumen y Propósito
 
-### Prefix and Suffix
-All analyzed documents receive:
-- **Prefix:** `conN_` where N = analysis version (1, 2, 3, ...)
-- **Suffix:** `_XX` where XX = fulfillment percentage (rounded to nearest 10)
-
-### Archiving Threshold
-- **>= 75% fulfilled:** Document is moved to `../docs/_archive/`
-- **< 75% fulfilled:** Document stays in `../docs/` with prefix/suffix
-- **Threshold configurable** (default: 75)
+Analiza todos los documentos de concepto y requisitos en la carpeta `../docs/`, verifica sus requisitos con el código actual y crea un informe de diferencias consolidado.
 
 ---
 
-## Process
+## Convención de Nombres
 
-### Phase 1: Collect Documents
-- List all *.md and *.txt files in ../docs/ (root)
-- Filter out README.txt
+### Prefijo y Sufijo
+Todos los documentos analizados reciben:
+- **Prefijo:** `conN_` donde N = versión de análisis (1, 2, 3, ...)
+- **Sufijo:** `_XX` donde XX = porcentaje de cumplimiento (redondeado al 10 más cercano)
 
-### Phase 2: Extract Requirements
-For each document:
-- Read content
-- Identify requirements (checklists, tables, MISSING/TODO markers)
-- Categorize: Structure, Code, API, DB Schema, CLI, Feature
-
-### Phase 3: Code Verification
-For each requirement:
-- Determine verification method (Glob, Grep, Read)
-- Execute verification
-- Mark as: FULFILLED, PARTIAL, MISSING
-
-### Phase 4: Assessment
-- Count fulfilled vs. open requirements
-- Calculate fulfillment percentage (%)
-- Decide: archive (>= 75%) or keep (< 75%)
-
-### Phase 5: Generate Output
-- Create REQUIREMENTS_ANALYSIS.md (summary)
-- Create consense_diff.md (only open requirements, by priority)
-
-### Phase 6: Versioning
-- Scan for highest conN_ prefix
-- New version = highest + 1
-
-### Phase 7: Rename and Move
-- Apply new prefix/suffix to documents
-- Archive or keep
+### Umbral de Archivado
+- **>= 75% cumplido:** El documento se mueve a `../docs/_archive/`
+- **< 75% cumplido:** El documento permanece en `../docs/` con prefijo/sufijo
+- **Umbral configurable** (por defecto: 75)
 
 ---
 
-## Output
+## Proceso
 
-| File | Description |
-|------|-------------|
-| `conN_REQUIREMENTS_ANALYSIS.md` | Complete analysis (version N) |
-| `consense_diff_N.md` | Consolidated open requirements |
-| `_archive/conN_*_XX.*` | Archived (>=75%) documents |
+### Fase 1: Recopilar documentos
+- Listar todos los archivos `*.md` y `*.txt` en `../docs/` (raíz)
+- Filtrar `README.txt`
+
+### Fase 2: Extraer requisitos
+Para cada documento:
+- Leer contenido
+- Identificar requisitos (listas de verificación, tablas, marcadores MISSING/TODO)
+- Categorizar: Estructura, Código, API, Esquema BD, CLI, Funcionalidad
+
+### Fase 3: Verificación de código
+Para cada requisito:
+- Determinar método de verificación (Glob, Grep, Read)
+- Ejecutar verificación
+- Marcar como: FULFILLED, PARTIAL, MISSING
+
+### Fase 4: Evaluación
+- Contar requisitos cumplidos vs. pendientes
+- Calcular porcentaje de cumplimiento (%)
+- Decidir: archivar (>= 75%) o conservar (< 75%)
+
+### Fase 5: Generar salida
+- Crear `REQUIREMENTS_ANALYSIS.md` (resumen)
+- Crear `consense_diff.md` (solo requisitos pendientes, por prioridad)
+
+### Fase 6: Versionado
+- Escanear prefijo `conN_` más alto
+- Nueva versión = más alto + 1
+
+### Fase 7: Renombrar y mover
+- Aplicar nuevo prefijo/sufijo a los documentos
+- Archivar o conservar
 
 ---
 
-## Priority Classification
+## Salida
 
-| Priority | Criteria |
-|:--------:|----------|
-| P1 | Core functionality missing, system unusable |
-| P2 | Important feature missing, workaround possible |
-| P3 | Nice-to-have, improves UX |
-| P4 | Cosmetic, documentation, code quality |
+| Archivo | Descripción |
+|---------|-------------|
+| `conN_REQUIREMENTS_ANALYSIS.md` | Análisis completo (versión N) |
+| `consense_diff_N.md` | Requisitos abiertos consolidados |
+| `_archive/conN_*_XX.*` | Documentos archivados (>=75%) |
 
 ---
 
-## Registro de Cambios
+## Clasificación de Prioridad
+
+| Prioridad | Criterio |
+|:---------:|----------|
+| P1 | Funcionalidad principal faltante, sistema no utilizable |
+| P2 | Funcionalidad importante faltante, solución alternativa posible |
+| P3 | Deseable, mejora la UX |
+| P4 | Cosmético, documentación, calidad de código |
+
+---
+
+## Historial de Cambios
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Adaptado desde BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Adaptado desde BACH v3.8.0 | Versión independiente*

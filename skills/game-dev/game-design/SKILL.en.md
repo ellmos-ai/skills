@@ -6,7 +6,6 @@ author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
 description: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,26 +18,20 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `game-design`.
 
 
-# Game Design — Roles, Subtasks & Workflows (English)
+# Game Design — Roles, Subtasks & Workflows
 
 ## Overview & Purpose
 
-Game development is teamwork made of clearly separated disciplines — even when a single person
-or one AI agent takes on several of them. This skill provides the **organizational model**:
-which roles exist, which subtasks belong to them, in what order they interact
-and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync),
-`/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
+Game development is teamwork made of clearly separated disciplines — even when a single person or one AI agent takes on several of them. This skill provides the **organizational model**: which roles exist, which subtasks belong to them, in what order they interact and how to capture a game as a concept (GDD). For the *technical* how, see `/rojo` (sync), `/rbx-studio` (editor/assets) and the meta-skill `/rbx-dev` (architecture).
 
-Use this skill when planning a new game, when dividing up the work (also across
-several AI agents) and when writing/reviewing a Game Design Document.
+Use this skill when planning a new game, when dividing up the work (also across several AI agents) and when writing/reviewing a Game Design Document.
 
 ## The Roles (5 development + 2 test)
 
-A proven, compact role distribution. Full descriptions with all subtasks:
-[`references/roles-and-workflows.md`](references/roles-and-workflows.md).
+A proven, compact role distribution. Full descriptions with all subtasks: [`references/roles-and-workflows.md`](references/roles-and-workflows.md).
 
 | Role | Focus | Core subtasks |
 | --- | --- | --- |
@@ -50,10 +43,9 @@ A proven, compact role distribution. Full descriptions with all subtasks:
 | **QA-Tester** | technically correct? | Bug scans in code, playtests + check console, reproducible reports, regression, performance |
 | **Game Critic** | is it fun? | First/long impression from the player's view, honest assessment (fun, clarity, fairness), suggestions |
 
-**Basic rule:** Development and testing are **separate** roles — ideally separate people
-or agents. Whoever writes code does not test it objectively. The Game Critic may be tough.
+**Basic rule:** Development and testing are **separate** roles — ideally separate people or agents. Whoever writes code does not test it objectively. The Game Critic may be tough.
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 Work flows as a chain from role to role. The most important patterns:
 
@@ -72,22 +64,16 @@ Creative Director (plans feature) → Engineer (backend) → Artist (frontend/as
 
 **Human-in-the-loop:** [agent chain] → human tester → Creative Director (feedback) → [chain].
 
-Each iteration should leave a short changelog. Stop condition: time budget reached
-**or** quality goal met.
+Each iteration should leave a short changelog. Stop condition: time budget reached **or** quality goal met.
 
 ### Persona-based testing
 
-A game only survives if very different players can cope with it. Therefore test (also
-simulated by agents) from several **personas** instead of only from your own perspective — varied
-by age, experience, platform (PC/mobile/tablet/console), attention span, language and
-accessibility. Examples: a 9-year-old casual kid on a tablet who only wants to press buttons; a
-12-year-old core player on PC who looks for the meta; a 60+ beginner who needs big buttons.
+A game only survives if very different players can cope with it. Therefore test (also simulated by agents) from several **personas** instead of only from your own perspective — varied by age, experience, platform (PC/mobile/tablet/console), attention span, language and accessibility. Examples: a 9-year-old casual kid on a tablet who only wants to press buttons; a 12-year-old core player on PC who looks for the meta; a 60+ beginner who needs big buttons.
 Persona tests should run **blind** (the tester does not know the design intent).
 
 ## Game Design Document (KONZEPT.md)
 
-Capture every game in a concise GDD — template:
-[`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Minimum structure:
+Capture every game in a concise GDD — template: [`assets/KONZEPT_template.md`](assets/KONZEPT_template.md). Minimum structure:
 
 - **Vision** — 1–2 sentences: What is the game?
 - **Genre / reference** — classification + reference titles.
@@ -104,38 +90,26 @@ Capture every game in a concise GDD — template:
 Several AI agents (or human+AI) can divide up a game — two modes:
 
 - **Swarm** — same task, different areas (e.g. three agents each balance one system).
-- **Team** — different roles, coordinated with each other (Engineer + Artist + Polish in parallel on
-  one feature, coordinated by the Creative Director).
+- **Team** — different roles, coordinated with each other (Engineer + Artist + Polish in parallel on one feature, coordinated by the Creative Director).
 
-Proven in practice: **never** give development and testing to the same agent; fix role prompts per role
-(system prompt = role description); each chain iteration ends with a changelog +
-test report; the human remains the quality gate.
+Proven in practice: **never** give development and testing to the same agent; fix role prompts per role (system prompt = role description); each chain iteration ends with a changelog + test report; the human remains the quality gate.
 
 ## Roblox-specific market context (orientation)
 
 Platform knowledge that grounds the concept work for Roblox (no guarantee, just rules of thumb):
 
-- **Profitable genres:** Simulator, RPG, Tycoon, Horror, Obby — very different scaling
-  and effort.
-- **Underserved niches (higher risk, less competition):** real strategy/RTS-lite,
-  high-quality sports games, cozy/life sim, co-op puzzle/escape, auto-battler.
-- **Golden monetization rules:** (1) LiveOps is mandatory (updates every 2–4 weeks),
-  (2) monetization should *support* gameplay, not block it, (3) social design (trading,
-  co-op) is infrastructure, (4) mobile-first (50%+ play on phones), (5) content-creator
-  suitability (YouTube/TikTok) is marketing.
+- **Profitable genres:** Simulator, RPG, Tycoon, Horror, Obby — very different scaling and effort.
+- **Underserved niches (higher risk, less competition):** real strategy/RTS-lite, high-quality sports games, cozy/life sim, co-op puzzle/escape, auto-battler.
+- **Golden monetization rules:** (1) LiveOps is mandatory (updates every 2–4 weeks), (2) monetization should *support* gameplay, not block it, (3) social design (trading, co-op) is infrastructure, (4) mobile-first (50%+ play on phones), (5) content-creator suitability (YouTube/TikTok) is marketing.
 
-> For current, reliable market figures, research instead of estimating — the points above are
-> stable heuristics, not live data.
+> For current, reliable market figures, research instead of estimating — the points above are stable heuristics, not live data.
 
 ## Further reading
 
-- Sister skills: `/rojo`, `/rbx-studio`; meta-skill `/rbx-dev` (architecture patterns,
-  project structure, Luau lessons).
-- Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`,
-  `IDEAS.md`, market analyses).
+- Sister skills: `/rojo`, `/rbx-studio`; meta-skill `/rbx-dev` (architecture patterns, project structure, Luau lessons).
+- Reference pipeline (if available): `<your Roblox project pipeline>` (`AGENT_ROLES.md`, `GUIDE.md`, `IDEAS.md`, market analyses).
 
 ## Changelog
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Generic role/workflow framework, distilled from `.ROBLOX/AGENT_ROLES.md`
-  & `GUIDE.md`, user-neutral (without project-specific portfolio).
+- Initial version. Generic role/workflow framework, distilled from `.ROBLOX/AGENT_ROLES.md` & `GUIDE.md`, user-neutral (without project-specific portfolio).

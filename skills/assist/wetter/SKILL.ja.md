@@ -5,7 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [日本語] エージェントスキル: wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
+description: wttr.in（無料、APIキー不要）を介して、指定された場所や座標の天気に関する質問に回答します。現在の天気 + 3日間の予報。位置情報はリクエストまたは設定から取得し、オプションの短期キャッシュも利用可能です。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,79 +15,71 @@ tags: [wetter, wttr, vorschau, assist]
 language: ja
 status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
-provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `wetter`.
+> **日本語** — `wetter` の公式日本語版。
 
 
+# 天気 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+日常利用に最適な、キー不要で高速な天気情報。
 
+## 概要と目的
 
-# Weather (English)
+APIキーなしで「天気はどうなる？」という質問に回答します（データソース: wttr.in）。
+現在の天気（気温、体感温度、風速、湿度、UV）とコンパクトな3日間の予報を提供します。
+**ユーザー中立:** コード内に固定された位置情報はありません。位置情報はリクエストまたは `assist/prefs.json` (`wetter_default_location`) から取得し、LLMがユーザーと対話的に入力します。
 
-Fast, key-free weather information for everyday use.
+## トリガー
 
-## 概要と目的 & Purpose
-
-Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
-Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
-compact 3-day forecast. **User-neutral:** no fixed location in the code — the location
-comes from the request or from `assist/prefs.json` (`wetter_default_location`),
-which the LLM fills in interactively with the user.
-
-## Triggers
-
-| User input | Action |
+| ユーザー入力 | アクション |
 |---|---|
-| "Weather for Potsdam?" / "What will the weather be like in Hamburg?" | `wetter_core.py "<location>"` |
-| "Weather tomorrow?" (without location) | `wetter_core.py --default` (location from prefs) |
-| "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
-| Coordinates known | `wetter_core.py <lat> <lon>` |
+| 「ポツダムの天気は？」/「ハンブルクの天気はどうなる？」 | `wetter_core.py "<location>"` |
+| 「明日の天気は？」（位置指定なし） | `wetter_core.py --default`（prefsからの位置情報） |
+| 「デフォルトの天気の場所はポツダムです」 | `wetter_core.py --set-default "Potsdam"` |
+| 座標が判明している場合 | `wetter_core.py <lat> <lon>` |
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
 ```
-1. Determine location: from request; else prefs.json (wetter_default_location);
-   else ask user interactively + optionally save as default.
-2. Query wetter_core.py (wttr.in, 2 attempts, 30-min cache).
-3. Present readable weather text + 3-day forecast.
+1. 位置の決定：リクエストから取得。なければ prefs.json (wetter_default_location) から取得。
+   それもなければユーザーに対話形式で確認し、必要に応じてデフォルトとして保存。
+2. wetter_core.py の呼び出し (wttr.in, リトライ2回, 30分キャッシュ)。
+3. 読みやすい形式で天気情報と3日間の予報を表示。
 ```
 
-## CLI Entry Point (wetter_core.py)
+## CLI エントリポイント (wetter_core.py)
 
 ```bash
-python wetter_core.py "Potsdam"          # location
-python wetter_core.py 52.6789 13.5878   # coordinates
-python wetter_core.py --default         # location from prefs.json
+python wetter_core.py "Potsdam"          # 位置
+python wetter_core.py 52.6789 13.5878   # 座標
+python wetter_core.py --default         # prefs.json からの位置情報
 python wetter_core.py --set-default "Potsdam"
 ```
 
-## Store (optional)
+## ストレージ (オプション)
 
-- **No mandatory store.** Optional short cache `assist/wetter/.cache.json`
-  (TTL 30 min, best-effort) — avoids repeated network calls.
-- Location preference in `assist/prefs.json` (`wetter_default_location`).
+- **必須ストレージなし。** オプションの短期キャッシュ `assist/wetter/.cache.json`
+  (TTL 30分, ベストエフォート) — 繰り返しのネットワーク呼び出しを防止。
+- `assist/prefs.json` (`wetter_default_location`) に位置情報の設定を保存。
 
-## Attitude
+## 方針
 
-We use wttr.in as the key-free default source, but are open to other weather
-backends (e.g. DWD/OpenWeather) if the user prefers them.
+APIキー不要のデフォルトソースとして wttr.in を使用しますが、ユーザーの好みに応じて他の天気バックエンド（DWD/OpenWeatherなど）にも対応可能です。
 
-## Privacy
+## プライバシー
 
-- Only the location name/coordinates go to wttr.in (required for the query).
-- No telemetry, no account. Cache + preference stay local.
+- 位置名/座標のみが wttr.in に送信されます（クエリに必須）。
+- テレメトリなし、アカウント不要。キャッシュと設定はローカルに保存されます。
 
-## Related Resources
+## 関連リソース
 
-- `assist/AGENTS.md` — Umbrella router
-- `assist/reiseroute/` — uses weather for travel planning (planned)
+- `assist/AGENTS.md` — 統括ルーター
+- `assist/reiseroute/` — 旅行計画での天気利用（計画中）
 
 ## 変更履歴
 
 ### 0.1.0 (2026-06-22)
-- Initial version. Ported from BACH `hub/_services/weather/weather_service.py` (MIT).
-- Extended: location name support (not just coordinates), 3-day forecast,
-  optional cache, prefs-based default location. User-neutral.
+- 初版。BACH `hub/_services/weather/weather_service.py` (MIT) から移植。
+- 拡張機能: 位置名サポート（座標のみでない）、3日間の予報、オプションのキャッシュ、設定に基づくデフォルト位置情報。ユーザー中立。

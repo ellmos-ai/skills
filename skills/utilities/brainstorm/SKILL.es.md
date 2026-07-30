@@ -1,140 +1,153 @@
 ---
+name: brainstorm
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Métodos de creatividad estructurada para la generación de ideas: SCAMPER, Seis Sombreros para Pensar, Mapa Mental, Lluvia de Ideas Inversa, TRIZ e Ideación Rápida.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `brainstorm`.
+> **Español** — Versión oficial en español de `brainstorm`.
 
 
+# Brainstorm (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Brainstorm (English)
-
-> Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
-
----
-
-## When to Use?
-
-- New ideas needed
-- Stuck / creativity block
-- Innovation sought
-- Solve a problem creatively
-
-**Trigger words:** brainstorm, ideas, creative, innovative, ideation
+> Creatividad estructurada para la innovación — SCAMPER, Seis Sombreros, Mapas Mentales, Lluvia de Ideas Inversa, TRIZ, Ideación Rápida
 
 ---
 
-## Methods
+## ¿Cuándo usarlo?
+
+- Se necesitan nuevas ideas
+- Bloqueo creativo / estancamiento
+- Se busca innovación
+- Resolver un problema de forma creativa
+
+**Palabras clave desencadenantes:** brainstorm, ideas, creativo, innovador, ideación
+
+---
+
+## Métodos
 
 ### 1. SCAMPER
 
-**Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse**
+**Sustituir, Combinar, Adaptar, Modificar, Dar otro uso, Eliminar, Invertir**
 
-Systematically improve existing solutions:
-- **S**ubstitute: What can be replaced?
-- **C**ombine: What can be combined?
-- **A**dapt: What can be adapted?
-- **M**odify: What can be changed?
-- **P**ut to other use: What else could it be used for?
-- **E**liminate: What can be removed?
-- **R**everse: What can be reversed?
-
----
-
-### 2. Six Thinking Hats (Edward de Bono)
-
-Systematically think through 6 perspectives:
-
-- **White Hat — Facts:** What information do we have? What's missing?
-- **Red Hat — Emotion:** How does it feel? Intuition, gut feeling
-- **Black Hat — Critique:** What could go wrong? Risks, weaknesses
-- **Yellow Hat — Optimism:** What are the opportunities? Best case
-- **Green Hat — Creativity:** New ideas? Out-of-the-box?
-- **Blue Hat — Meta:** Process control, summary, next steps
-
-**Process:** Define problem (Blue) -> Facts (White) -> Emotions (Red) -> Critique (Black) -> Positives (Yellow) -> New ideas (Green) -> Summarize (Blue)
+Mejorar sistemáticamente las soluciones existentes:
+- **S**ustituir: ¿Qué se puede reemplazar?
+- **C**ombinar: ¿Qué se puede combinar?
+- **A**daptar: ¿Qué se puede adaptar?
+- **M**odificar: ¿Qué se puede cambiar?
+- **P**oner en otro uso: ¿Para qué más se podría utilizar?
+- **E**liminar: ¿Qué se puede quitar?
+- **R**evertir/Invertir: ¿Qué se puede invertir?
 
 ---
 
-### 3. Mind Mapping
+### 2. Seis Sombreros para Pensar (Edward de Bono)
 
-Visualize thoughts hierarchically:
-1. Central topic
-2. Main branches (3-7)
-3. Sub-branches for each category
-4. Add details and ideas
-5. Identify connections
+Pensar sistemáticamente a través de 6 perspectivas:
 
----
+- **Sombrero Blanco — Hechos:** ¿Qué información tenemos? ¿Qué falta?
+- **Sombrero Rojo — Emoción:** ¿Cómo se siente? Intuición, corazonada
+- **Sombrero Negro — Crítica:** ¿Qué podría salir mal? Riesgos, puntos débiles
+- **Sombrero Amarillo — Optimismo:** ¿Cuáles son las oportunidades? Mejor escenario
+- **Sombrero Verde — Creatividad:** ¿Nuevas ideas? ¿Pensamiento fuera de la caja?
+- **Sombrero Azul — Meta:** Control del proceso, resumen, siguientes pasos
 
-### 4. Reverse Brainstorming
-
-Invert the problem: "How do we make it WORSE?"
-
-1. Invert the problem
-2. Collect bad ideas
-3. Reverse = Good ideas
-
-Particularly effective when direct ideation is stalled.
+**Proceso:** Definir problema (Azul) -> Hechos (Blanco) -> Emociones (Rojo) -> Crítica (Negro) -> Positivos (Amarillo) -> Nuevas ideas (Verde) -> Resumir (Azul)
 
 ---
 
-### 5. TRIZ (Theory of Inventive Problem Solving)
+### 3. Mapa Mental (Mind Mapping)
 
-Top 10 Principles for Software:
-1. **Segmentation:** Split monolith into modules
-2. **Extraction:** Isolate disturbing property
-3. **Local Quality:** Different components, different properties
-4. **Merging:** Combine similar functions
-5. **Universality:** One element, multiple functions
-6. **Nesting:** Components within components
-7. **Preliminary Action:** Preparation in advance
-8. **Feedback:** Monitoring and adaptation
-9. **Self-Service:** System maintains itself
-10. **Asymmetry:** Non-symmetrical designs
+Visualizar pensamientos de forma jerárquica:
+1. Tema central
+2. Ramas principales (3-7)
+3. Subramas para cada categoría
+4. Añadir detalles e ideas
+5. Identificar conexiones
 
 ---
 
-### 6. Rapid Ideation
+### 4. Lluvia de Ideas Inversa (Reverse Brainstorming)
 
-Quantity over quality — 50+ ideas in 20 min.
+Invertir el problema: "¿Cómo hacemos para empeorarlo?"
 
-**Rules:**
-- NO criticism during ideation
-- WILD ideas welcome
-- Build on others' ideas
-- Quantity FIRST
+1. Invertir el problema
+2. Recopilar malas ideas
+3. Invertir = Buenas ideas
 
-**Timer-based:**
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
+Especialmente eficaz cuando la ideación directa está estancada.
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+### 5. TRIZ (Teoría para la Resolución de Problemas Inventivos)
+
+Los 10 principios principales para software:
+1. **Segmentación:** Dividir un monolito en módulos
+2. **Extracción:** Aislar la propiedad perturbadora
+3. **Calidad local:** Diferentes componentes, diferentes propiedades
+4. **Fusión:** Combinar funciones similares
+5. **Universalidad:** Un elemento, múltiples funciones
+6. **Anidamiento:** Componentes dentro de componentes
+7. **Acción preliminar:** Preparación por adelantado
+8. **Retroalimentación:** Monitoreo y adaptación
+9. **Auto-servicio:** El sistema se mantiene a sí mismo
+10. **Asimetría:** Diseños no simétricos
+
+---
+
+### 6. Ideación Rápida (Rapid Ideation)
+
+Cantidad sobre calidad — más de 50 ideas en 20 minutos.
+
+**Reglas:**
+- SIN críticas durante la ideación
+- Ideas CURIOSAS/SALVAJES bienvenidas
+- Construir sobre las ideas de otros
+- Cantidad PRIMERO
+
+**Basado en temporizador:**
+- Ronda 1 (5 min): Ideación abierta
+- Ronda 2 (5 min): Variaciones
+- Ronda 3 (5 min): Combinaciones
+- Ronda 4 (5 min): Ideas extremas
+
+---
+
+## Flujo de trabajo y procedimiento
 
 ```
-1. User request
-2. Understand goal
-3. Choose method(s)
-4. Generate ideas (no criticism!)
-5. Clustering
-6. Feasibility/Impact matrix
-7. Top 5-10 selection
-8. Output + recommendation
+1. Solicitud del usuario
+2. Comprender el objetivo
+3. Elegir método(s)
+4. Generar ideas (¡sin críticas!)
+5. Agrupación (Clustering)
+6. Matriz de factibilidad/impacto
+7. Selección de las mejores 5-10
+8. Salida + recomendación
 ```
 
 ---
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Adaptado desde BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Adaptado desde BACH v3.8.0 | Versión independiente*

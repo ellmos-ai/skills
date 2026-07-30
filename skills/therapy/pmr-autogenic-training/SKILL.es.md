@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa para la habilidad pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: Relajación Muscular Progresiva (PMR) según Jacobson y Entrenamiento Autógeno según Schultz. Formas cortas y versiones completas.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,184 +15,180 @@ tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `pmr-autogenic-training`.
+> **Español** — Versión oficial en español de `pmr-autogenic-training`.
 
 
+# Relajación Muscular Progresiva y Entrenamiento Autógeno
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Técnicas de relajación de base corporal según Jacobson y Schultz
 
-
-# Progressive Muscle Relaxation & Autogenic Training (English)
-
-> Body-based relaxation techniques according to Jacobson and Schultz
-
-See: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Contexto
 
-Progressive Muscle Relaxation (PMR, Jacobson 1929) and Autogenic Training (AT, Schultz 1932) are the two most extensively researched relaxation techniques. Both work through conscious influence on the autonomic nervous system and can be learned as self-help methods without therapeutic supervision.
+La Relajación Muscular Progresiva (PMR, Jacobson 1929) y el Entrenamiento Autógeno (AT, Schultz 1932) son las dos técnicas de relajación más investigadas científicamente. Ambas actúan mediante la influencia consciente en el sistema nervioso autónomo y pueden aprenderse como métodos de autoayuda sin supervisión terapéutica.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Nota:** Esto es un soporte y no sustituye a la terapia profesional.
+**Nunca implementar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET)
 
 ---
 
-## 1. Progressive Muscle Relaxation (PMR) according to Jacobson
+## 1. Relajación Muscular Progresiva (PMR) según Jacobson
 
-### Basic Principle
+### Principio Básico
 
-Systematic tensing and releasing of muscle groups. Through the contrast between tension and release, the body learns deeper relaxation than possible in its normal state.
+Tensión y liberación sistemáticas de grupos musculares. A través del contraste entre la tensión y la relajación, el cuerpo aprende una relajación más profunda que la posible en su estado habitual.
 
-**Mechanism:** Muscle tension -> conscious release -> parasympathetic activation -> reduction of heart rate, blood pressure, muscle tone
+**Mecanismo:** Tensión muscular -> liberación consciente -> activación parasimpática -> reducción de la frecuencia cardíaca, presión arterial y tono muscular
 
-### 1.1 Long Form: 16 Muscle Groups
+### 1.1 Forma Larga: 16 Grupos Musculares
 
-| No | Muscle Group | Tension |
+| N.º | Grupo Muscular | Tensión |
 |----|-------------|---------|
-| 1 | Right hand/forearm | Clench fist |
-| 2 | Right upper arm | Tense biceps |
-| 3 | Left hand/forearm | Clench fist |
-| 4 | Left upper arm | Tense biceps |
-| 5 | Forehead | Raise eyebrows |
-| 6 | Mid-face | Squeeze eyes shut, wrinkle nose |
-| 7 | Lower face | Clench teeth, pull corners of mouth wide |
-| 8 | Neck | Press chin toward chest (counter-pressure) |
-| 9 | Chest/shoulders | Raise shoulders, inhale deeply |
-| 10 | Abdomen | Tense abdominal muscles |
-| 11 | Lower back | Slight arch |
-| 12 | Right thigh | Slightly lift leg |
-| 13 | Right lower leg | Pull foot toward shin |
-| 14 | Right foot | Curl toes |
-| 15 | Left thigh | Slightly lift leg |
-| 16 | Left lower leg/foot | Pull foot up, curl toes |
+| 1 | Mano/antebrazo derecho | Apretar el puño |
+| 2 | Brazo derecho | Tensar el bíceps |
+| 3 | Mano/antebrazo izquierdo | Apretar el puño |
+| 4 | Brazo izquierdo | Tensar el bíceps |
+| 5 | Frente | Levantar las cejas |
+| 6 | Zona media del rostro | Cerrar los ojos con fuerza, arrugar la nariz |
+| 7 | Zona inferior del rostro | Apretar los dientes, estirar las comisuras de los labios |
+| 8 | Cuello | Presionar la barbilla contra el pecho (contrapresión) |
+| 9 | Pecho/hombros | Elevar los hombros, inspirar profundamente |
+| 10 | Abdomen | Tensar la musculatura abdominal |
+| 11 | Zona lumbar | Arquear ligeramente la espalda |
+| 12 | Muslo derecho | Levantar ligeramente la pierna |
+| 13 | Pantorrilla derecha | Tirar del pie hacia la espinilla |
+| 14 | Pie derecho | Doblar los dedos del pie hacia abajo |
+| 15 | Muslo izquierdo | Levantar ligeramente la pierna |
+| 16 | Pantorrilla/pie izquierdo | Tirar del pie hacia arriba, doblar los dedos |
 
-**Procedure per muscle group:**
-1. Direct attention to the muscle group
-2. Tense: 5-7 seconds (approximately 70% of maximum strength)
-3. Release: Let go abruptly
-4. Notice: 20-30 seconds, perceive the relaxation
-5. Next muscle group
+**Procedimiento por grupo muscular:**
+1. Dirigir la atención al grupo muscular
+2. Tensar: 5-7 segundos (aproximadamente el 70% de la fuerza máxima)
+3. Soltar: Relajar de forma abrupta
+4. Observar: 20-30 segundos, percibir la relajación
+5. Siguiente grupo muscular
 
-### 1.2 Short Form: 7 Muscle Groups
+### 1.2 Forma Corta: 7 Grupos Musculares
 
-For experienced practitioners or when time is limited:
+Para practicantes experimentados o cuando el tiempo es limitado:
 
-| No | Combination | Tension |
+| N.º | Combinación | Tensión |
 |----|------------|---------|
-| 1 | Both arms | Clench fists, bend arms |
-| 2 | Entire face | Grimace: furrow brow, close eyes, mouth wide |
-| 3 | Neck/shoulders | Pull shoulders up to ears |
-| 4 | Chest/abdomen | Inhale, tense abdomen |
-| 5 | Back | Shoulder blades together, slight arch |
-| 6 | Both thighs | Slightly lift legs |
-| 7 | Both lower legs/feet | Pull feet up |
+| 1 | Ambos brazos | Apretar puños, doblar brazos |
+| 2 | Rostro completo | Mueca: fruncir el ceño, cerrar ojos, abrir bien la boca |
+| 3 | Cuello/hombros | Subir hombros hacia las orejas |
+| 4 | Pecho/abdomen | Inhalar, tensar el abdomen |
+| 5 | Espalda | Juntar escápulas, arco ligero |
+| 6 | Ambos muslos | Levantar ligeramente las piernas |
+| 7 | Ambas pantorrillas/pies | Tirar de los pies hacia arriba |
 
-### 1.3 Recall Technique (Advanced)
+### 1.3 Técnica de Evocación / Recuerdo (Avanzado)
 
-After several weeks of practice: Relaxation of muscle groups ONLY through imagination (without actual tensing). The body has conditioned the relaxation response.
+Tras varias semanas de práctica: Relajación de los grupos musculares ÚNICAMENTE mediante la imaginación (sin tensión física real). El cuerpo ha acondicionado la respuesta de relajación.
 
 ---
 
-## 2. Autogenic Training (AT) according to Schultz
+## 2. Entrenamiento Autógeno (AT) según Schultz
 
-### Basic Principle
+### Principio Básico
 
-Concentrative self-relaxation through formulaic autosuggestion. The practitioner induces a state of deep relaxation through repeated guiding phrases (autonomic switching).
+Autorrelajación concentrativa mediante autosugestión formularia. El practicante induce un estado de relajación profunda a través de frases guía repetidas (conmutación autonómica).
 
-**Mechanism:** Concentration on formulas -> ideomotor response -> actual physical changes (blood flow, warmth, calm)
+**Mecanismo:** Concentración en fórmulas -> respuesta ideomotora -> cambios físicos reales (flujo sanguíneo, calor, calma)
 
-### 2.1 The 6 Basic Exercises (Lower Level)
+### 2.1 Los 6 Ejercicios Básicos (Grado Inferior)
 
-| Exercise | Formula | Goal |
+| Ejercicio | Fórmula | Objetivo |
 |----------|---------|------|
-| 1. Heaviness | "My right arm is very heavy" | Muscle relaxation |
-| 2. Warmth | "My right arm is very warm" | Vasodilation, blood flow |
-| 3. Heart | "My heart beats calmly and steadily" | Heart regulation |
-| 4. Breathing | "My breathing is calm and steady" | Breath regulation |
-| 5. Solar plexus | "My solar plexus is streaming warm" | Abdominal organ relaxation |
-| 6. Forehead | "My forehead is pleasantly cool" | Mental clarity |
+| 1. Pesadez | "Mi brazo derecho es muy pesado" | Relajación muscular |
+| 2. Calor | "Mi brazo derecho está muy caliente" | Vasodilatación, flujo sanguíneo |
+| 3. Corazón | "Mi corazón late de forma tranquila y constante" | Regulación cardíaca |
+| 4. Respiración | "Mi respiración es tranquila y constante" | Regulación respiratoria |
+| 5. Plexo solar | "Mi plexo solar irradia calor" | Relajación de órganos abdominales |
+| 6. Frente | "Mi frente está agradablemente fresca" | Claridad mental |
 
-**Progression:** Gradual over 6-8 weeks. Add one new exercise each week.
+**Progresión:** Gradual a lo largo de 6-8 semanas. Añadir un nuevo ejercicio cada semana.
 
-### 2.2 Session Procedure
+### 2.2 Procedimiento de la Sesión
 
 ```
-1. Basic posture: Coachman's posture, armchair position, or lying down
-2. Opening: Close eyes, "I am completely calm"
-3. Internally repeat formulas (6x each, slowly):
-   - "My right arm is very heavy" (6x)
-   - "My right arm is very warm" (6x)
-   - [additional formulas depending on practice level]
-4. Rest formula in between: "I am completely calm"
-5. Recall: Firmly tense arms, inhale deeply, open eyes
-   IMPORTANT: Never skip the recall (except before falling asleep)
+1. Postura básica: Postura del cochero, posición en sillón o acostado
+2. Apertura: Cerrar los ojos, "Estoy completamente tranquilo/a"
+3. Repetir mentalmente las fórmulas (6 veces cada una, lentamente):
+   - "Mi brazo derecho es muy pesado" (6x)
+   - "Mi brazo derecho está muy caliente" (6x)
+   - [fórmulas adicionales según el nivel de práctica]
+4. Fórmula de descanso intermedia: "Estoy completamente tranquilo/a"
+5. Retorno / Cancelación (Recall): Tensar fuertemente los brazos, respirar hondo, abrir los ojos
+   IMPORTANTE: Nunca omitir el retorno (excepto antes de dormirse)
 ```
 
-### 2.3 Learning Plan
+### 2.3 Plan de Aprendizaje
 
-| Week | Exercise | Duration |
+| Semana | Ejercicio | Duración |
 |------|----------|----------|
-| 1-2 | Heaviness exercise | 5 min |
-| 3-4 | Heaviness + Warmth | 8 min |
-| 5-6 | Heaviness + Warmth + Heart + Breathing | 12 min |
-| 7-8 | All 6 basic exercises | 15 min |
+| 1-2 | Ejercicio de pesadez | 5 min |
+| 3-4 | Pesadez + Calor | 8 min |
+| 5-6 | Pesadez + Calor + Corazón + Respiración | 12 min |
+| 7-8 | Los 6 ejercicios básicos | 15 min |
 
 ---
 
-## 3. PMR vs. AT: Decision Guide
+## 3. PMR vs. AT: Guía de Decisión
 
-| Criterion | PMR | AT |
+| Criterio | PMR | AT |
 |-----------|-----|-----|
-| Learnability | Easy, immediately effective | Requires practice (4-8 weeks) |
-| Physical activity | Yes (tensing) | No (imagination only) |
-| For muscle tension | Very suitable | Moderately suitable |
-| For inner restlessness | Good | Very good |
-| For sleep problems | Good | Very good |
-| Usable anywhere | Limited (movement needed) | Yes (inconspicuous) |
-| For children | From approx. age 8 | From approx. age 10 |
+| Aprendizaje | Fácil, de eficacia inmediata | Requiere práctica (4-8 semanas) |
+| Actividad física | Sí (tensión) | No (solo imaginación) |
+| Para tensión muscular | Muy adecuado | Moderadamente adecuado |
+| Para inquietud interior | Bueno | Muy bueno |
+| Para problemas de sueño | Bueno | Muy bueno |
+| Utilizable en cualquier lugar | Limitado (requiere movimiento) | Sí (discreto) |
+| Para niños | Desde aprox. los 8 años | Desde aprox. los 10 años |
 
 ---
 
-## 4. Contraindications
+## 4. Contraindicaciones
 
 **PMR:**
-- Acute muscle injuries or inflammation
-- Severe spasticity
-- Epilepsy (tensing may trigger seizures — rare)
+- Lesiones musculares agudas o inflamación
+- Espasticidad grave
+- Epilepsia (la tensión puede desencadenar crisis, poco frecuente)
 
 **AT:**
-- Acute psychosis
-- Severe depression (risk of excessive introspection)
-- Cardiac arrhythmia (omit heart exercise)
-- Dissociative disorders
-- Severe hypotension (circulatory problems possible)
+- Psicosis aguda
+- Depresión grave (riesgo de introspección excesiva)
+- Arritmia cardíaca (omitir el ejercicio del corazón)
+- Trastornos disociativos
+- Hipotensión grave (posibles problemas circulatorios)
 
-**Both methods:**
-- Stop immediately if trauma flashbacks occur
-- Not a substitute for medical/psychotherapeutic treatment
-
----
-
-## Progress Tracking
-
-- Tension level before/after exercise (0-10 scale)
-- Which muscle groups were particularly tense?
-- AT: Which formulas are already effective, which not yet?
-- Regularity: Goal 1x daily, at least 4x/week
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Ambos métodos:**
+- Interrumpir inmediatamente si se producen flashbacks traumáticos
+- No sustituye al tratamiento médico o psicoterapéutico
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Jacobson (1929), Schultz (1932) — Not professional therapy*
+## Seguimiento del Progreso
+
+- Nivel de tensión antes/después del ejercicio (escala 0-10)
+- ¿Qué grupos musculares estaban especialmente tensos?
+- AT: ¿Qué fórmulas son ya efectivas y cuáles aún no?
+- Regularidad: Objetivo 1 vez al día, al menos 4 veces por semana
+
+**En caso de crisis aguda, acudir SIEMPRE a:**
+- 988 Línea de Crisis y Suicidio (EE. UU.): 988
+- Crisis Text Line (EE. UU.): Enviar HOME al 741741
+- Samaritans (Reino Unido): 116 123
+- Telefonseelsorge (Alemania): 0800 111 0 111 / 0800 111 0 222
+- Servicios de emergencia: 911 (EE. UU.) / 112 (UE / España)
+
+---
+
+*Portado de BACH v3.8.0 | Versión Independiente*
+*Fuentes: Jacobson (1929), Schultz (1932) — No es terapia profesional*

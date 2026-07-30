@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [日本語] エージェントスキル: web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: Webコンテンツの読み取りと抽出のためのルーターおよびプロトコル。最初に何が必要か（メインテキスト vs 構造 vs スクリーンショット）を決定し、次にシステム上で利用可能などのツールがそれを処理するかを決定します。適切なものが存在しない場合は、web-scraper モジュールのインストールを推奨します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,27 +15,20 @@ tags: [web-scraping, content-extraction, research, router]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['requests', 'beautifulsoup4']}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `web-reading`.
+> **日本語** — `web-reading` の公式日本語版。
 
 
+# Web Reading (ルーター)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概要と目的
 
+Webコンテンツを取得・処理しますが、盲目的にツールを選択しないでください。このスキルは**まず目的を決め、次に利用可能な最適なツールを選択する**ルーティングを行います。実際の機能実装は **`web-scraper` モジュール** に存在し、このスキルは現在何が存在し、それをどのように使用するかのみを示します。
 
-# Web Reading (Router) (English)
-
-## 概要と目的 & Purpose
-
-Fetch and process web content — but don't pick a tool blindly. This skill
-routes: **purpose first, then the best available tool.** The actual
-implementation lives in the **`web-scraper` module**; this skill only shows
-what is currently present and how to use it.
-
-## Step 1 — What is needed?
+## ステップ 1 — 何が必要か？
 
 ```
 Process a web page?
@@ -45,60 +38,57 @@ Process a web page?
   +-- Rendered image of the page    → "Screenshot"  → Step 2C
 ```
 
-## Step 2 — Which tool? (Router)
+## ステップ 2 — どのツールか？(ルーター)
 
-Use the **first available** tool in each list. "Available" means the
-tool/skill/module is actually present in this session.
+各リストで**最初に利用可能な**ツールを使用してください。「利用可能」とは、そのツール/スキル/モジュールが現在のセッションに実際に存在することを意味します。
 
-### 2A — Content (main text, clean markdown)
+### 2A — コンテンツ（メインテキスト、クリーンな Markdown）
 
-| Priority | Tool | Available when … | Usage |
+| 優先度 | ツール | 利用可能条件… | 使い方 |
 |---|---|---|---|
-| 1 | **`defuddle`** skill | skill `defuddle` listed | clean markdown from normal web pages |
-| 2 | Built-in **`WebFetch`** | agent has the WebFetch tool | quick read/summary of a URL |
-| 3 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "extract"` |
-| 4 | **`web-scraper`** module | module installed/importable | `web-scraper extract <url>` / `extract(url)` |
+| 1 | **`defuddle`** スキル | スキル `defuddle` が一覧にある | 通常のWebページからクリーンな Markdown を取得 |
+| 2 | 組み込み **`WebFetch`** | エージェントが WebFetch ツールを所有 | URL の迅速な読み取り/要約 |
+| 3 | **`fc_web_fetch`** (MCP) | FileCommander MCP が読み込まれている | `mode: "extract"` |
+| 4 | **`web-scraper`** モジュール | モジュールがインストール/インポート可能 | `web-scraper extract <url>` / `extract(url)` |
 
-> Note: `.md` URLs are already markdown → use `WebFetch` directly, no extractor.
+> 注: `.md` URL は既に Markdown です → エクストラクターなしで `WebFetch` を直接使用してください。
 
-### 2B — Structure (links, forms, headers)
+### 2B — 構造（リンク、フォーム、ヘッダー）
 
-`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not
-raw structure). Use instead:
+`WebFetch`/`defuddle` はここでは**適していません**（生構造ではなく処理済みテキストを返すため）。代わりに以下を使用してください：
 
-| Priority | Tool | Available when … | Usage |
+| 優先度 | ツール | 利用可能条件… | 使い方 |
 |---|---|---|---|
-| 1 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "links" \| "forms" \| "headers"` |
-| 2 | **`web-scraper`** module | module installed/importable | `web-scraper links\|forms\|headers <url>` |
+| 1 | **`fc_web_fetch`** (MCP) | FileCommander MCP が読み込まれている | `mode: "links" \| "forms" \| "headers"` |
+| 2 | **`web-scraper`** モジュール | モジュールがインストール/インポート可能 | `web-scraper links\|forms\|headers <url>` |
 
-### 2C — Screenshot
+### 2C — スクリーンショット
 
-| Priority | Tool | Available when … | Usage |
+| 優先度 | ツール | 利用可能条件… | 使い方 |
 |---|---|---|---|
-| 1 | **`web-scraper`** module | module with `[screenshot]` extra | `web-scraper screenshot <url> --out img.png` |
-| 2 | Browser automation tool | e.g. Playwright/Computer-Use present | page-dependent |
+| 1 | **`web-scraper`** モジュール | `[screenshot]` エクストラ付きモジュール | `web-scraper screenshot <url> --out img.png` |
+| 2 | ブラウザ自動化ツール | Playwright/Computer-Use などが存在する | ページ依存 |
 
-## Step 3 — Fallback: nothing suitable found?
+## ステップ 3 — フォールバック：適切なものが見つからない場合
 
-If **no** tool is available for the purpose, recommend installing the
-**`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
+目的に適したツールが**存在しない**場合は、**`web-scraper` モジュール**のインストールを推奨します（全機能: get/links/forms/headers/extract/screenshot）：
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (English)
-pip install ".[http,extract]"          # + [screenshot] for screenshots
+# ローカルモジュールフォルダ (.MODULES/.TOOLS/web-scraper) から
+pip install ".[http,extract]"          # + スクリーンショット用 [screenshot]
 
-# then: (English)
+# その後:
 web-scraper extract <url>
 ```
 
-As a library:
+ライブラリとして使用：
 
 ```python
 from web_scraper import WebScraper, extract
 print(extract("https://example.com")["content"])
 ```
 
-## Last resort — standalone snippet (no dependencies beyond requests/bs4)
+## 最終手段 — スタンドアロンスニペット（requests/bs4 以外の依存関係なし）
 
 ```python
 import requests
@@ -117,13 +107,9 @@ def extract_content(url: str) -> str:
 ## 変更履歴
 
 ### 1.1.0 (2026-07-05)
-- Reworked from a plain protocol into a **router**: detects available web
-  capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module)
-  and routes by purpose (content/structure/screenshot); otherwise recommends the
-  `web-scraper` module.
-- Unified name to `web-reading` (was `webseiten-lesen` in the DE version).
-- Removed BACH CLI examples from the body (standalone-compliant; origin stays
-  documented in the `bach_integration` frontmatter).
+- 単純なプロトコルから**ルーター**へと再構築：利用可能な Web 機能（`defuddle`、`WebFetch`、`fc_web_fetch`、`web-scraper` モジュール）を検出し、目的（コンテンツ/構造/スクリーンショット）に応じてルーティング。それ以外の場合は `web-scraper` モジュールを推奨。
+- 名前を `web-reading` に統一（DE版では `webseiten-lesen` でした）。
+- 本文から BACH CLI の例を削除（スタンドアロン準拠。元データは `bach_integration` フロントマターに記録されています）。
 
 ### 1.0.0 (2026-03-12)
-- Export from BACH v3.8.0 workflow `webseiten-lesen.md`
+- BACH v3.8.0 ワークフロー `webseiten-lesen.md` からのエクスポート

@@ -1,67 +1,79 @@
 ---
+name: problem-solving-training
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Resolución estructurada de problemas en 6 pasos: definición del problema, objetivos, lluvia de ideas, evaluación, implementación y revisión.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [problem-solving, decision, structured, six-steps, coping]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `problem-solving-training`.
+> **Español** — Versión oficial en español de `problem-solving-training`.
 
 
+# Entrenamiento en Solución de Problemas (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Resolución estructurada de problemas en 6 pasos según D'Zurilla y Goldfried: Abordar los problemas de forma sistemática en lugar de rumiar en círculos
 
-
-# Problem-Solving Training (English)
-
-> Structured problem solving in 6 steps according to D'Zurilla and Goldfried: Approaching problems systematically instead of ruminating in circles
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Problem-Solving Training (Social Problem-Solving, SPS) is an evidence-based intervention from cognitive behavioral therapy. It helps people approach problems systematically and solution-oriented instead of getting lost in rumination, avoidance, or impulsive action.
-
-Evidence: Meta-analyses show significant effects for depression (d=0.83), anxiety disorders, and stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Problem-Solving Orientation
+## Contexto
 
-Before the actual steps begin, the inner attitude is decisive.
+El Entrenamiento en Solución de Problemas (Social Problem-Solving, SPS) es una intervención basada en la evidencia perteneciente a la terapia cognitivo-conductual. Ayuda a las personas a abordar los problemas de manera sistemática y orientada a la solución, en lugar de perderse en la rumiación, la evitación o la acción impulsiva.
 
-### Helpful Attitude
-- "Problems are part of life — they are solvable"
-- "I can proceed step by step"
-- "There is rarely only one right solution"
-- "Not acting is also a decision — usually not a good one"
+Evidencia: Los metaanálisis muestran efectos significativos para la depresión (d=0.83), los trastornos de ansiedad y el estrés (Malouff et al., 2007; Bell & D'Zurilla, 2009).
 
-### Unhelpful Attitude
-- "None of this makes any sense"
-- "I can't do it anyway"
-- "There is no solution"
-- Impulsive action without thinking
-- Avoidance and procrastination
-
-**First step:** Reflect on your own problem-solving attitude.
+**Nota:** Esto es un apoyo psicoeducativo, no un sustituto de la terapia profesional.
+**Nunca implementar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET).
 
 ---
 
-## 2. The 6-Step Model
+## 1. Orientación hacia el Problema
 
-### Step 1: Define the Problem
+Antes de comenzar los pasos concretos, la actitud interna es decisiva.
 
-**Goal:** Formulate the problem clearly, concretely, and manageably.
+### Actitud Facilitadora
+- "Los problemas son parte de la vida; son solucionables"
+- "Puedo proceder paso a paso"
+- "Rara vez existe una única solución correcta"
+- "No actuar también es una decisión, y por lo general no es una buena decisión"
 
-**Guide questions:**
-- What exactly is the problem? (Facts, not interpretations)
-- Who is involved?
-- When and where does it occur?
-- Why is it a problem for me?
+### Actitud No Facilitadora
+- "Nada de esto tiene sentido"
+- "De todos modos no puedo hacerlo"
+- "No hay solución posible"
+- Acción impulsiva sin pensar
+- Evitación y procrastinación
 
-**Worksheet:**
+**Primer paso:** Reflexionar sobre la propia actitud hacia la solución de problemas.
+
+---
+
+## 2. El Modelo de los 6 Pasos
+
+### Paso 1: Definir el Problema
+
+**Objetivo:** Formular el problema de manera clara, concreta y manejable.
+
+**Preguntas guía:**
+- ¿Cuál es exactamente el problema? (Hechos, no interpretaciones)
+- ¿Quién está involucrado?
+- ¿Cuándo y dónde ocurre?
+- ¿Por qué es un problema para mí?
+
+**Hoja de trabajo:**
 
 ```
 PROBLEM DEFINITION
@@ -75,25 +87,25 @@ Concrete problem statement:
 [...]
 ```
 
-**Common mistakes:**
-- Problem too vague ("Everything is bad")
-- Mixing multiple problems together
-- Including the solution in the problem statement
+**Errores comunes:**
+- Problema demasiado vago ("Todo está mal")
+- Mezclar múltiples problemas al mismo tiempo
+- Incluir la solución dentro de la formulación del problema
 
 ---
 
-### Step 2: Set Goals
+### Paso 2: Establecer Objetivos
 
-**Goal:** What should be different after solving the problem?
+**Objetivo:** ¿Qué debería ser diferente después de resolver el problema?
 
-**SMART Criteria:**
-- Specific: What exactly?
-- Measurable: How will I recognize success?
-- Attractive: Why do I want this?
-- Realistic: Is it achievable?
-- Time-bound: By when?
+**Criterios SMART:**
+- Específico (Specific): ¿Qué exactamente?
+- Medible (Measurable): ¿Cómo reconoceré el éxito?
+- Atractivo / Alcanzable (Attractive): ¿Por qué quiero esto?
+- Realista (Realistic): ¿Es factible?
+- Limitado en el tiempo (Time-bound): ¿Para cuándo?
 
-**Worksheet:**
+**Hoja de trabajo:**
 
 ```
 GOAL SETTING
@@ -107,17 +119,17 @@ Important to me (0-10)? [...]
 
 ---
 
-### Step 3: Generate Alternatives (Brainstorming)
+### Paso 3: Generar Alternativas (Lluvia de Ideas / Brainstorming)
 
-**Goal:** Generate as many solution ideas as possible — without immediate evaluation.
+**Objetivo:** Generar tantas ideas de solución como sea posible, sin evaluación inmediata.
 
-**Brainstorming rules:**
-1. Quantity over quality — the more ideas, the better
-2. No evaluation during collection
-3. Creative and unusual thinking is allowed
-4. Combine and vary existing ideas
+**Reglas del brainstorming:**
+1. Cantidad sobre calidad: cuantas más ideas, mejor
+2. Sin evaluación durante la recolección
+3. Se permite el pensamiento creativo e inusual
+4. Combinar y variar ideas existentes
 
-**Worksheet:**
+**Hoja de trabajo:**
 
 ```
 BRAINSTORMING
@@ -133,27 +145,27 @@ Solution ideas (at least 5-8):
 8. [...]
 ```
 
-**Helper questions:**
-- "What would someone do who doesn't have this problem?"
-- "What have I done in similar situations before?"
-- "What would I advise a friend?"
-- "What would be the boldest solution?"
-- "What would be the simplest solution?"
+**Preguntas de ayuda:**
+- "¿Qué haría alguien que no tiene este problema?"
+- "¿Qué he hecho antes en situaciones similares?"
+- "¿Qué le aconsejaría a un amigo?"
+- "¿Cuál sería la solución más audaz?"
+- "¿Cuál sería la solución más simple?"
 
 ---
 
-### Step 4: Evaluate Alternatives
+### Paso 4: Evaluar Alternativas
 
-**Goal:** Systematically weigh pros and cons of each alternative.
+**Objetivo:** Sopesar sistemáticamente los pros y los contras de cada alternativa.
 
-**Evaluation criteria:**
-- Effectiveness: Does it solve the problem?
-- Feasibility: Can I implement it?
-- Time required: How long will it take?
-- Consequences: For me? For others?
-- Risks: What could go wrong?
+**Criterios de evaluación:**
+- Efectividad: ¿Resuelve el problema?
+- Factibilidad: ¿Puedo implementarla?
+- Tiempo requerido: ¿Cuánto tiempo llevará?
+- Consecuencias: ¿Para mí? ¿Para otros?
+- Riesgos: ¿Qué podría salir mal?
 
-**Worksheet:**
+**Hoja de trabajo:**
 
 ```
 EVALUATION MATRIX
@@ -161,7 +173,7 @@ EVALUATION MATRIX
 | Alternative | Effectiveness (0-10) | Feasibility (0-10) | Effort (0-10) | Risk (0-10) | Total |
 |-------------|---------------------|--------------------|--------------|--------------||-------|
 | 1. [...]    |                     |                    |              |              |       |
-| 2. [...]    |                     |                    |              |              |       |
+| 2. [...]    |                     |                    |              |--------------|       |
 | 3. [...]    |                     |                    |              |              |       |
 
 Preferred solution: [...]
@@ -170,11 +182,11 @@ Reasoning: [...]
 
 ---
 
-### Step 5: Implement
+### Paso 5: Implementar
 
-**Goal:** Concretely plan and carry out the chosen solution.
+**Objetivo:** Planificar concretamente y llevar a cabo la solución elegida.
 
-**Action plan:**
+**Plan de acción:**
 
 ```
 ACTION PLAN
@@ -194,18 +206,18 @@ First step (today/tomorrow): [...]
 
 ---
 
-### Step 6: Evaluate
+### Paso 6: Evaluar el Resultado
 
-**Goal:** Review the outcome and adjust if needed.
+**Objetivo:** Revisar el resultado y ajustar si es necesario.
 
-**Evaluation questions:**
-- Was the problem solved? (Fully / partially / not at all)
-- Am I satisfied with the result? (0-10)
-- What worked well?
-- What would I do differently next time?
-- Do I need a new attempt with a different alternative?
+**Preguntas de evaluación:**
+- ¿Se resolvió el problema? (Totalmente / parcialmente / en absoluto)
+- ¿Estoy satisfecho/a con el resultado? (0-10)
+- ¿Qué funcionó bien?
+- ¿Qué haría de manera diferente la próxima vez?
+- ¿Necesito un nuevo intento con una alternativa diferente?
 
-**Worksheet:**
+**Hoja de trabajo:**
 
 ```
 EVALUATION
@@ -219,39 +231,39 @@ Next step: [Conclude / New attempt / Different approach]
 
 ---
 
-## 3. Common Problems in Problem Solving
+## 3. Dificultades Comunes en la Solución de Problemas
 
-| Problem | Remedy |
+| Problema | Solución / Remedio |
 |---------|--------|
-| "I don't know where to start" | Back to Step 1, formulate problem smaller |
-| "No solution is good enough" | Question perfectionism, accept "good enough" |
-| "I don't dare" | Identify the smallest possible step |
-| "It doesn't work" | Evaluation: What exactly doesn't work? New attempt |
-| Problem is too big | Break into sub-problems, one at a time |
-| Emotions block | First emotion regulation (breathing, PMR), then problem solving |
+| "No sé por dónde empezar" | Volver al Paso 1, formular un problema más pequeño |
+| "Ninguna solución es lo suficientemente buena" | Cuestionar el perfeccionismo, aceptar lo "suficientemente bueno" |
+| "No me atrevo" | Identificar el paso más pequeño posible |
+| "No funciona" | Evaluación: ¿Qué es exactamente lo que no funciona? Nuevo intento |
+| El problema es demasiado grande | Dividir en subproblemas, abordar uno a la vez |
+| Las emociones bloquean | Primero regulación emocional (respiración, RMP), luego solución de problemas |
 
 ---
 
-## Ethics and Boundaries
+## Ética y Límites
 
-**An AI assistant may:**
-- Guide through the 6 steps and provide worksheet structure
-- Ask brainstorming questions
-- Support evaluation of alternatives
-- Document progress
+**Un asistente de IA puede:**
+- Guiar a través de los 6 pasos y proporcionar la estructura de las hojas de trabajo
+- Formular preguntas de lluvia de ideas
+- Apoyar en la evaluación de alternativas
+- Documentar el progreso
 
-**An AI assistant must NOT:**
-- Prescribe solutions or suggest "the right answer"
-- Conduct relationship or life counseling in the therapeutic sense
-- Be the sole support for severe psychological distress
-- Make diagnoses
+**Un asistente de IA NO debe:**
+- Prescribir soluciones ni sugerir "la respuesta correcta"
+- Llevar a cabo asesoramiento de pareja o de vida en sentido terapéutico
+- Ser el único apoyo ante un malestar psicológico grave
+- Realizar diagnósticos
 
-**In case of acute crisis, ALWAYS refer to:**
+**En caso de crisis aguda, SIEMPRE derivar a:**
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Servicios de emergencia: 911 (US) / 112 (EU)
 
 ---
 

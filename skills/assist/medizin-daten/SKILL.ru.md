@@ -1,85 +1,95 @@
 ---
+name: medizin-daten
+version: 0.1.0
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-06-22
+description: Локальная, конфиденциальная фиксация медицинских данных: диагнозы, история симптомов и планы обследования. Без происхождения от BACH — индивидуальный проект со собственным хранилищем SQLite. Строго локально, без передачи в облако.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [medizin, diagnose, symptome, gesundheit, privat, lokal]
 language: ru
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `medizin-daten`.
+> **Русский** — Официальная русская версия `medizin-daten`.
 
 
+## Обзор и назначение
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Безопасная и локальная фиксация личных медицинских данных: диагнозы (код МКБ-10 опционально), история симптомов со временными рядами и планы обследований. Все данные хранятся исключительно локально в `medizin-daten/store.db`.
 
-
-## Общий обзор и назначение & Purpose
-
-Securely and locally capture personal medical data: diagnoses (ICD-10 code
-optional), symptom histories with date series and examination plans. All
-data stays exclusively local in `medizin-daten/store.db`.
-
-The skill does not replace medical consultation and makes no medical
-statements — it is a structured notebook for personal health data.
+Скилл не заменяет медицинскую консультацию и не делает медицинских заключений — это структурированный блокнот для личных данных о здоровье.
 
 ---
 
-## Triggers
+## Триггеры (Triggers)
 
-| Phrase | Action |
+| Фраза | Действие |
 |---|---|
-| "Record a diagnosis" | Create new diagnosis |
-| "Add diagnosis [name]" | Create named diagnosis |
-| "Symptom history" | Record today's symptoms |
-| "Record symptom [name]" | Log a single symptom |
-| "Examination plan" | Show upcoming appointments/examinations |
-| "Add appointment" | Enter examination appointment |
-| "Show my diagnoses" | Output diagnosis list |
+| "Record a diagnosis" / "Записать диагноз" | Создать новый диагноз |
+| "Add diagnosis [name]" / "Добавить диагноз [название]" | Создать поименованный диагноз |
+| "Symptom history" / "История симптомов" | Зафиксировать сегодняшние симптомы |
+| "Record symptom [name]" / "Записать симптом [название]" | Зафиксировать один симптом |
+| "Examination plan" / "План обследования" | Показать предстоящие приемы/обследования |
+| "Add appointment" / "Добавить запись" | Внести запись на обследование |
+| "Show my diagnoses" / "Показать мои диагнозы" | Вывести список диагнозов |
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
-1. **Detect mode**: diagnosis / symptom / examination plan
-2. **Structure input**: date, name, notes, optional ICD-10 code
-3. **Save**: into `store.db` (local, no network access)
-4. **Output**: readable summary for LLM context
+1. **Определение режима**: диагноз / симптом / план обследования
+2. **Структурирование ввода**: дата, название, примечания, опциональный код МКБ-10
+3. **Сохранение**: в `store.db` (локально, без доступа к сети)
+4. **Вывод**: понятная сводка для контекста LLM
 
 ---
 
-## CLI Entry Point
+## Точка входа CLI
 
 ```bash
-# Create diagnosis (English)
+# Create diagnosis (Deutsch)
 python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "note"]
 
-# List diagnoses (English)
+# List diagnoses (Deutsch)
 python medizin_daten_core.py diagnoses
 
-# Record symptom (English)
+# Record symptom (Deutsch)
 python medizin_daten_core.py add-symptom "Headache" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptom history for a name (English)
+# Symptom history for a name (Deutsch)
 python medizin_daten_core.py symptom-history "Headache" [--limit 30]
 
-# Plan examination (English)
+# Plan examination (Deutsch)
 python medizin_daten_core.py add-exam "Blood count" [--date 2026-07-01] [--note "fasting"]
 
-# Upcoming examinations (English)
+# Upcoming examinations (Deutsch)
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 
 ---
 
-## Store
+## Хранилище (Store)
 
-| Property | Value |
+| Свойство | Значение |
 |---|---|
-| Type | SQLite |
-| Path (default) | `skills/assist/medizin-daten/store.db` |
-| Override | `--store <path>` or env `MEDIZIN_STORE` |
-| Tables | `diagnoses`, `symptoms`, `examination_plans` |
+| Тип | SQLite |
+| Путь (по умолчанию) | `skills/assist/medizin-daten/store.db` |
+| Переопределение | `--store <path>` или пер. окружения `MEDIZIN_STORE` |
+| Таблицы | `diagnoses`, `symptoms`, `examination_plans` |
 
-### Schema
+### Схема (Schema)
 
 ```sql
 CREATE TABLE IF NOT EXISTS diagnoses (
@@ -115,38 +125,37 @@ CREATE TABLE IF NOT EXISTS examination_plans (
 
 ---
 
-## Attitude
+## Подход и принципы
 
-- No medical recommendations, no diagnosis by the skill.
-- ICD-10 codes are stored as free text — no validation against an external database.
-- Severity scale 1–10 is user-subjective.
-- Missing values (date, severity) are always allowed — the notebook principle applies.
-
----
-
-## Privacy (Privacy Gate)
-
-> **WARNING: Medical data is particularly sensitive.**
-
-- `store.db` contains highly sensitive health data — **never commit to Git**.
-- **No network access** — all operations run entirely locally.
-- **No sharing** with external services, no sync with cloud backends.
-- Backup recommendation: encrypted local backup (e.g. `age`/`gpg`).
-- The skill checks at startup whether `store.db` is outside the local file system
-  and issues a warning if the path is in a sync folder (OneDrive etc.).
-- `~/.gitignore_global` or local `.gitignore` should exclude `store.db`.
+- Никаких медицинских рекомендаций и постановки диагнозов со стороны скилла.
+- Коды МКБ-10 сохраняются как свободный текст — без проверки по внешней базе данных.
+- Шкала тяжести от 1 до 10 является субъективной оценкой пользователя.
+- Отсутствующие значения (дата, тяжесть) всегда допускаются — применяется принцип блокнота.
 
 ---
 
-## Related Resources
+## Конфиденциальность (Privacy Gate)
 
-- Skill `assist/gesundheit` — general health assistance (not medical data)
-- MediPlaner (`tools/module-installer` → `mediplaner`) — medication management (separate programme)
+> **ПРЕДУПРЕЖДЕНИЕ: Медицинские данные особенно чувствительны.**
+
+- `store.db` содержит конфиденциальные данные о здоровье — **никогда не коммитьте в Git**.
+- **Без доступа к сети** — все операции выполняются исключительно локально.
+- **Без передачи** внешним сервисам, без синхронизации с облачными бэкендами.
+- Рекомендация по резервному копированию: зашифрованная локальная копия (например, `age`/`gpg`).
+- При запуске скилл проверяет, находится ли `store.db` за пределами локальной файловой системы, и выводит предупреждение, если путь находится в папке синхронизации (OneDrive и т.д.).
+- `~/.gitignore_global` или локальный `.gitignore` должны исключать `store.db`.
 
 ---
 
-## Журнал изменений
+## Связанные ресурсы
 
-| Version | Date | Change |
+- Скилл `assist/gesundheit` — общая помощь по здоровью (не медицинские данные)
+- MediPlaner (`tools/module-installer` → `mediplaner`) — управление медикаментами (отдельная программа)
+
+---
+
+## История изменений
+
+| Версия | Дата | Изменение |
 |---|---|---|
-| 0.1.0 | 2026-06-22 | Initial creation — custom design, privacy gate, 3-table schema |
+| 0.1.0 | 2026-06-22 | Первоначальное создание — индивидуальный проект, фильтр конфиденциальности, схема из 3 таблиц |

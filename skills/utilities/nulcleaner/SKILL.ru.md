@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
+description: Находит и удаляет зарезервированные файлы NUL в Windows, созданные при использовании /dev/null в Git Bash. В автономном режиме (headless) или с GUI.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,57 +15,49 @@ tags: [windows, nul, cleanup, git-bash, filesystem]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `nulcleaner`.
+> **Русский** — Официальная русская версия `nulcleaner`.
 
+# nulcleaner - Windows NUL File Cleanup (Русский)
 
+## Проблема
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+При использовании `/dev/null` в командах Git Bash в Windows (например, `> /dev/null`) вместо перенаправления в никуда в текущем каталоге создается **реальный файл с именем `nul`**. Windows резервирует "NUL" в качестве имени устройства, поэтому такие файлы нельзя удалить обычным способом.
 
-
-# nulcleaner - Windows NUL File Cleanup (English)
-
-## The Problem
-
-When `/dev/null` is used in commands under Git Bash on Windows (e.g., `> /dev/null`),
-instead of redirecting to nowhere, an actual **file named `nul`** is created in the current
-directory. Windows reserves "NUL" as a device name, which means these files cannot be
-deleted normally.
-
-This tool finds and deletes such NUL files via the extended UNC path (`\\?\`).
+Этот инструмент находит и удаляет такие файлы NUL с использованием расширенного пути UNC (`\\?\`).
 
 ---
 
-## Modes
+## Режимы
 
-| Mode | Description |
+| Режим | Описание |
 |------|-------------|
-| `scan` | Recursively scan directory for NUL files |
-| `delete` | Find and delete NUL files |
-| `gui` | Graphical interface with file selection |
+| `scan` | Рекурсивное сканирование каталога на наличие файлов NUL |
+| `delete` | Поиск и удаление файлов NUL |
+| `gui` | Графический интерфейс с выбором файлов |
 
 ---
 
-## CLI Usage
+## Использование CLI
 
 ```bash
-# Scan only (shows found NUL files) (English)
+# Только сканирование (показывает найденные файлы NUL) (Русский)
 python nulcleaner.py scan /path/to/directory
 
-# Scan and delete (English)
+# Сканирование и удаление (Русский)
 python nulcleaner.py delete /path/to/directory
 
-# Start GUI mode (English)
+# Запуск режима GUI (Русский)
 python nulcleaner.py gui
 ```
 
 ---
 
-## Headless API (for Integration)
+## Автономный API (для интеграции)
 
-The tool also provides a Python API for headless operation:
+Инструмент также предоставляет Python API для автономной работы (headless):
 
 ```python
 from nulcleaner import clean_nul_files_headless
@@ -74,22 +66,22 @@ result = clean_nul_files_headless("/path/to/directory", verbose=True)
 print(f"Found: {result['found']}, Deleted: {result['deleted']}")
 ```
 
-**Return value:** `{'found': int, 'deleted': int, 'errors': list}`
+**Возвращаемое значение:** `{'found': int, 'deleted': int, 'errors': list}`
 
 ---
 
-## Technical Details
+## Технические детали
 
-- Uses the extended UNC path (`\\?\`) to delete Windows-reserved filenames
-- Recursive scan with `os.walk()`
-- GUI with tkinter (no external dependencies)
-- Only works on Windows (where the problem occurs)
+- Использует расширенный путь UNC (`\\?\`) для удаления зарезервированных имен файлов Windows
+- Рекурсивное сканирование с помощью `os.walk()`
+- Графический интерфейс на tkinter (без внешних зависимостей)
+- Работает только в Windows (где возникает проблема)
 
 ---
 
-## Prevention
+## Предотвращение
 
-Best to avoid `/dev/null` in Git Bash altogether. Instead:
-- Simply omit the output
-- Use `2>&1` for stderr redirection
-- Pay attention to Windows compatibility in shell scripts
+Лучше полностью избегать использования `/dev/null` в Git Bash. Вместо этого:
+- Просто опускайте вывод
+- Используйте `2>&1` для перенаправления stderr
+- Обращайте внимание на совместимость с Windows в шелл-скриптах

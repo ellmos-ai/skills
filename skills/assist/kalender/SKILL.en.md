@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'option
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `kalender`.
 
 
 ## Overview & Purpose
@@ -30,7 +30,7 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 
 **Flag 3 — Backend selection:**
 
-| `kalender_backend` in prefs.json | Behaviour |
+| `kalender_backend` in prefs.json | Behavior |
 |---|---|
 | `local` (default) | SQLite store in this skill folder |
 | `google` | Google Calendar MCP (LLM path only, not in core.py) |
@@ -58,7 +58,7 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Check backend**: read `assist/prefs.json` → `kalender_backend`.
 2. **Without preference**: LLM asks user: local calendar, Google Calendar or other?
@@ -71,31 +71,31 @@ The LLM selects an alternative backend from `assist/prefs.json` if needed.
 ## CLI Entry Point
 
 ```bash
-# Create appointment (English)
+# Create appointment (Deutsch)
 python kalender_core.py add "Dentist" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Dr. X practice"]
 
-# Today's appointments (English)
+# Today's appointments (Deutsch)
 python kalender_core.py today
 
-# Weekly overview (English)
+# Weekly overview (Deutsch)
 python kalender_core.py week [--from 2026-06-22]
 
-# Monthly overview (English)
+# Monthly overview (Deutsch)
 python kalender_core.py month [--month 2026-07]
 
-# All appointments (optionally with search term) (English)
+# All appointments (optionally with search term) (Deutsch)
 python kalender_core.py list [--search "Dentist"] [--limit 50]
 
-# Delete appointment (English)
+# Delete appointment (Deutsch)
 python kalender_core.py delete <id>
 
-# ICS export (English)
+# ICS export (Deutsch)
 python kalender_core.py export [--id <id>] [--out calendar.ics]
 
-# Backend check (English)
+# Backend check (Deutsch)
 python kalender_core.py check-backend
 
-# Alternative store (e.g. for tests) (English)
+# Alternative store (e.g. for tests) (Deutsch)
 python kalender_core.py --store /tmp/kal_test.db today --dry-run
 ```
 

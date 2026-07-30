@@ -1,166 +1,179 @@
 ---
+name: counseling-basics
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 治疗性沟通基础：倾听、共情回应、释义重述、开放式提问以及情绪确认与接纳。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [counseling, active-listening, communication, therapy]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `counseling-basics`.
+> **中文** — `counseling-basics` 官方中文版本。
 
 
+# 心理咨询沟通基础（中文）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 治疗性沟通基础：积极倾听、情感镜像/映照、释义重述
 
-
-# Counseling Basics (English)
-
-> Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-This template describes basic therapeutic communication techniques. It serves as a context template for therapeutic support.
-
-**Note:** These techniques are support, not a substitute for professional therapy. In acute crises, always refer to professional help.
-
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参见：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Active Listening
+## 背景
 
-**Goal:** Signal complete understanding, truly absorb what is said.
+本模块描述了基本的治疗性沟通技术。它作为治疗性支持与对话引导的上下文模板。
 
-**Techniques:**
+**注意：** 这些技术仅提供支持，不能替代专业心理治疗。在急性危机中，请务必转介寻求专业帮助。
 
-- **Verbal acknowledgment:** "I understand," "Mm-hmm," "That sounds difficult"
-- **Inquiry:** "Can you describe that in more detail?" / "What do you mean by that?"
-- **Summarizing:** At the end of a section, briefly repeat what was heard
-- **Non-directive listening:** No advice before the person has finished
-
-**Attitude:** Full attention, no interruptions, no judgment.
-
-**Conversation formula:**
-> "What I heard is [summary]. Is that correct?"
+**严禁实施：** EMDR（眼动脱敏再加工）、Prolonged Exposure（持续暴露疗法 PE）、Narrative Exposure Therapy（叙事暴露疗法 NET）
 
 ---
 
-## 2. Mirroring
+## 1. 积极倾听（Active Listening）
 
-**Goal:** Reflect perceived emotions, make feelings visible.
+**目标：** 传递完全的理解与关注，真正吸收对方所说的内容。
 
-**Techniques:**
+**技术细节：**
 
-- **Simple mirroring:** Repeat the last word or sentence slightly rephrased
-- **Emotional mirroring:** Address named or implied emotions
-  > "It sounds like you are very exhausted right now."
-- **Body language mirroring:** (in person) Adjust posture
+- **言语回应/确认：** “我明白了”、“嗯”、“这听起来确实很不容易”
+- **进一步探问：** “你能再具体描述一下吗？” / “你所说的……是指什么？”
+- **阶段总结：** 在某一阶段结束时，简要复述听到的核心内容
+- **非指导性倾听：** 在对方完全表达结束之前，不急于给出建议
 
-**Caution:**
-- Don't overdo it — too much mirroring feels artificial
-- Don't over-elaborate interpretations
+**态度态度：** 全神贯注、不打断、不评判。
 
-**Examples:**
-> Person: "I don't know what to do anymore."
-> Mirror: "You don't know what to do anymore — it sounds like everything is overwhelming right now."
+**对话句式：**
+> “我听到的核心意思是 [总结内容]。请问我的理解准确吗？”
 
 ---
 
-## 3. Paraphrasing
+## 2. 情感镜像与映照（Mirroring）
 
-**Goal:** Restate the core content in your own words, check understanding.
+**目标：** 反射感知到的情绪，使隐藏或显现的感受显性化。
 
-**Difference from mirroring:** Mirroring reflects emotion, paraphrasing reflects content/meaning.
+**技术细节：**
 
-**Structure:**
-1. Briefly summarize content
-2. Highlight the key message
-3. Ask for confirmation
+- **简单映照：** 微调措辞，重复对方最后说出的词语或句子
+- **情感映照：** 点明对方明确表达或隐喻表达出的情绪
+  > “听起来你现在感到非常疲惫和无助。”
+- **肢体语言映照：** （面对面时）适度调整体态与表达姿势
 
-**Formula:**
-> "If I understand you correctly, you're saying [paraphrase]. Is that right?"
+**注意事项：**
+- 切勿过度 — 过频繁的映照会显得机械和不自然
+- 切勿进行过度推演或强行解释
 
-**Examples:**
-> Person: "My mother nags me every day with the same accusations and I can't take it anymore."
-> Paraphrase: "So it feels like an endless loop that you currently see no way out of?"
-
----
-
-## 4. Open Questions
-
-**Goal:** Encourage exploration without prescribing answers.
-
-**Characteristics of open questions:**
-- Start with: How, What, In what way, Describe, Explain
-- Leave room for personal answers
-- Cannot be answered with yes/no
-
-**Examples:**
-- "How did that feel?"
-- "What happens inside you when that occurs?"
-- "How do you usually deal with this?"
-
-**Avoid closed questions:**
-- "Did that hurt?" -> better: "How did that feel?"
-- "Are you sad?" -> better: "What's going through your mind right now?"
+**示例：**
+> 案主：“我真的不知道该怎么办了。”
+> 映照：“你不知道该怎么办了 — 听起来此刻这一切让你感到排山倒海般的压抑。”
 
 ---
 
-## 5. Validation
+## 3. 释义重述（Paraphrasing）
 
-**Goal:** Confirm feelings and reactions as understandable and legitimate.
+**目标：** 用你自己的语言重述对方表达的核心内容，核对理解是否准确。
 
-**Important:** Validation does not mean agreement, but understanding.
+**与映照的区别：** 映照反射的是情绪；释义重述反馈的是认知内容与逻辑含义。
 
-**Formula:**
-> "It makes complete sense that you feel this way, given [situation]."
+**结构步骤：**
+1. 简要概括事实内容
+2. 突显核心信息
+3. 请求对方核对确认
 
-**Levels of validation (after Linehan):**
-1. Attentive listening (showing presence)
-2. Accurately reflecting (what was said?)
-3. Recognizing the unspoken
-4. Understanding the cause in context
-5. Acknowledging the reaction as understandable
-6. Radical genuineness (honest, equal-level response)
+**句式公式：**
+> “如果我的理解没有错的话，你的意思是 [释义重述内容]。对吗？”
 
----
-
-## 6. Conversation Phases
-
-| Phase | Goal | Techniques |
-|-------|------|------------|
-| Opening | Settling in, creating safety | Greeting, open questions, signaling non-judgment |
-| Exploration | Exploring the topic | Active listening, inquiry, paraphrasing |
-| Deepening | Reaching deeper levels | Mirroring, validation, emotional resonance |
-| Integration | Bringing together, next steps | Summarizing, testing hypotheses, outlook |
-| Closing | Wrapping up, transition | Review, homework, farewell |
+**示例：**
+> 案主：“我母亲每天都用同样的指责来唠叨我，我真的快受不了了。”
+> 释义：“所以对你来说，这就像是一个无限循环的死结，你目前看不到解脱的出口，对吗？”
 
 ---
 
-## Ethics and Boundaries
+## 4. 开放式提问（Open Questions）
 
-**An AI assistant may:**
-- Explain and demonstrate conversation techniques
-- Guide active listening, mirroring, paraphrasing
-- Ask open questions and offer validation
-- Provide psychoeducation about counseling skills
+**目标：** 鼓励自我探索与表达，而不预设答案框架。
 
-**An AI assistant must NOT:**
-- Replace professional therapeutic conversations
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+**开放式提问的特征：**
+- 以以下词汇开头：怎样、什么、在哪些方面、描述、解释
+- 给个人化和深度的回答留出充分空间
+- 无法简单地用“是/否”来回答
 
-**In case of acute crisis, ALWAYS refer to:**
+**提问示例：**
+- “那是怎样的一种感觉？”
+- “当那种情况发生时，你内心有什么反应？”
+- “你通常是如何应对这种情况的？”
+
+**避免封闭式提问：**
+- “那很伤人吗？” -> 改进为：“那给你带来了怎样的感受？”
+- “你感到难过吗？” -> 改进为：“此刻你脑海里正在想些什么？”
+
+---
+
+## 5. 情绪确认与接纳（Validation）
+
+**目标：** 确认对方的情绪和反应是合理、可被理解且合乎情理的。
+
+**重要说明：** 情绪确认不等于赞同其具体行为，而是理解其情绪体验发生的必然性。
+
+**句式公式：**
+> “考虑到 [具体情境]，你产生这种感受是完全合情合理的。”
+
+**确认/接纳的六个层级（依据 Linehan 辩证行为疗法）：**
+1. 专注倾听（展现临在与专注）
+2. 准确反射（清晰回应对方所说的内容）
+3. 读出未明言之意（体会并说出隐含的情绪）
+4. 结合背景予以理解（根据过往经历/现实背景理解原因）
+5. 确认反应在当下情境中的合理性
+6. 极其真诚的对等回应（真诚、平等的互动）
+
+---
+
+## 6. 对话阶段划分
+
+| 阶段 | 目标 | 核心技术 |
+|------|------|----------|
+| 开场阶段 | 建立关系、营造安全感 | 问候、开放式提问、传递非评判态度 |
+| 探索阶段 | 深入了解议题 | 积极倾听、探问、释义重述 |
+| 深化阶段 | 触及深层体验 | 情感映照、情绪确认、情感共鸣 |
+| 整合阶段 | 梳理思路、探索后续步骤 | 阶段总结、假设检验、未来展望 |
+| 结束阶段 | 总结收尾、平稳过渡 | 回顾、布置作业/约定、道别 |
+
+---
+
+## 伦理与边界
+
+**AI 助手可以：**
+- 讲解并示范沟通技术
+- 引导进行积极倾听、映照和释义重述
+- 运用开放式提问并给予情绪确认
+- 提供关于咨询沟通技巧的心理教育
+
+**AI 助手不得：**
+- 替代专业心理咨询与治疗对话
+- 提供诊断或治疗建议
+- 进行危机干预
+- 实施 EMDR、Prolonged Exposure（PE）或 Narrative Exposure Therapy（NET）
+
+**在发生急性危机时，请务必联系：**
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
+- Crisis Text Line (US): 发送 HOME 至 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 中国心理危机干预热线: 010-82951332 / 400-161-9995
+- 紧急救援电话: 911 (US) / 112 (EU) / 110 (CN)
 
 ---
 
-## References
+## 参考文献
 
 - Rogers, C. R. (1951). *Client-Centered Therapy.* Houghton Mifflin.
 - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
@@ -168,5 +181,5 @@ This template describes basic therapeutic communication techniques. It serves as
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Rogers (1951, 1961), Linehan (1993) — Not professional therapy*
+*移植自 BACH v3.8.0 | 独立版本*
+*参考文献：Rogers (1951, 1961), Linehan (1993) — 非专业替代医疗服务*

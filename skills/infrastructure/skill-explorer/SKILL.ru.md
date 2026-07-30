@@ -1,106 +1,86 @@
 ---
+name: skill-explorer
+version: 1.1.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-06-17
+description: Управляет собственным ландшафтом навыков: анализирует и сравнивает существующие навыки (режим Аудита), ищет в Сети новые навыки/плагины (режим Исследования) и одновременно является установщиком, генерирующим легкие поднавыки (Skill-Finder, семейный зонтик, навыки обслуживания) вместо загрузки монолита. Используйте этот навык для "сравнения/аудита навыков", "выявления дублирующихся навыков", "формирования семейств навыков", "очистки/консолидации навыков", "ведения реестра навыков", "поиска навыков/плагинов по теме X", "установки новых навыков", "просмотра маркетплейса навыков" или для `/skill-explorer`. Предоставляет подотчет по каждому семейству и сквозной пронумерованный список решений; выполняет установку/удаление только после проверки безопасности и явного одобрения.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: infrastructure
+tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: ru
+status: active
+dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `skill-explorer`.
+> **Русский** — Официальная русская версия `skill-explorer`.
 
 
+# Skill-Explorer — Управление ландшафтом навыков (Аудит · Исследование · Установщик) (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+По мере роста инвентаря навыков возникают дубликаты, неиспользуемые ресурсы и неопределенные ситуации "какой навык использовать вместо какого" — при этом постоянно появляются новые навыки/плагины. `skill-explorer` объединяет три роли в одном инструменте:
 
-# Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)
-
-## Общий обзор и назначение & Purpose
-
-As the skill inventory grows, duplicates, unused resources, and unclear "which skill instead of which"
-situations arise — and there are constantly new skills/plugins out there. `skill-explorer`
-bundles three roles into one tool:
-
-| Role | What it does | Detail |
+| Роль | Что делает | Детали |
 | --- | --- | --- |
-| **Audit mode** (inward) | survey all skills, cluster them into families, gather capabilities/dependencies/resources, produce a sub-report + numbered recommendations per family | `references/audit-mode.md` |
-| **Explore mode** (outward) | research the web (web/GitHub/Reddit, bilingual) for new skills/plugins on a topic, compare, install gated | `references/explore-mode.md` |
-| **Installer** | *generate* lean subskills instead of a monolith — Skill-Finder, family umbrella, maintenance skills | below + `references/family-care.md` |
+| **Режим Аудита** (внутрь) | провести обзор всех навыков, сгруппировать их по семействам, собрать возможности/зависимости/ресурсы, создать подотчет + пронумерованные рекомендации для каждого семейства | `references/audit-mode.md` |
+| **Режим Исследования** (наружу) | искать в Сети (веб/GitHub/Reddit, двуязычный поиск) новые навыки/плагины по теме, сравнивать и устанавливать со шлюзом безопасности | `references/explore-mode.md` |
+| **Установщик** | *генерировать* легкие поднавыки вместо монолита — Skill-Finder, семейный зонтик, навыки обслуживания | ниже + `references/family-care.md` |
 
-Invocation: `/skill-explorer` (Audit as default) or "… find for topic X" (Explore). Both modes share
-a taxonomy (`references/clustering.md`), a report format (`references/report-format.md`), and the
-numbering scheme, so the user can respond with a single numbered list.
+Вызов: `/skill-explorer` (Аудит по умолчанию) или "… найти по теме X" (Исследование). Оба режима используют общую таксономию (`references/clustering.md`), формат отчета (`references/report-format.md`) и схему нумерации, поэтому пользователь может ответить единым пронумерованным списком.
 
-## Installer Principle & Persistence
+## Принцип работы установщика и персистентность
 
-Instead of growing monolithically itself, `skill-explorer` *generates* lean, individually
-loadable subskills on demand — so an overlong single skill never has to be loaded:
+Вместо того чтобы расти как монолит, `skill-explorer` по запросу *генерирует* легкие, отдельно загружаемые поднавыки — поэтому никогда не приходится загружать один избыточно длинный навык:
 
-- **Skill-Finder** ([F]) — an active finder/router analogous to a "using-superpowers" doorman that reads
-  the register before every task and routes to the matching family (`references/skill-finder.md`,
-  template `assets/skill-finder-template.md`).
-- **Family umbrella** (c1) — a meta-skill that knows an entire family (`assets/family-umbrella-template.md`).
-- **Maintenance skills** ([P1] families, [P2] register) — keep families/register up to date (`references/family-care.md`).
+- **Skill-Finder** ([F]) — активный поисковик/маршрутизатор, аналогичный швейцару "using-superpowers", который перед каждой задачей читает реестр и направляет к соответствующему семейству (`references/skill-finder.md`, шаблон `assets/skill-finder-template.md`).
+- **Семейный зонтик** (c1) — метанавык, владеющий информацией обо всем семействе (`assets/family-umbrella-template.md`).
+- **Навыки обслуживания** ([P1] семейства, [P2] реестр) — поддерживают семейства/реестр в актуальном состоянии (`references/family-care.md`).
 
-Decisions are persisted in `~/.claude/skills/skill-explorer/config.json`
-(`references/config.md`, template `assets/config.example.json`): read at startup (known
-families/routers/generated subskills), update after execution — so a re-run never creates anything twice.
+Решения сохраняются в `~/.claude/skills/skill-explorer/config.json` (`references/config.md`, шаблон `assets/config.example.json`): считываются при запуске (известные семейства/маршрутизаторы/сгенерированные поднавыки) и обновляются после выполнения — поэтому повторный запуск никогда ничего не создаст дважды.
 
-## Branch Mechanism (Customizing Third-Party Skills)
+## Механизм веток (Настройка сторонних навыков)
 
-A read-only skill (plugin, imported third-party) can be customized without modifying the original:
-the original directory is copied in full (**branch**); only the copy is then edited. The branch
-carries four mandatory fields: a reference to the original, the branch date, the author, and the
-reason. Once the branch supersedes the original, the original is deregistered from the runtime
-(`SKILL.md` → `CONTENT.md`) or the family router is pointed to the branch, so two nearly identical
-skills do not collide. Third-party branches stay **private** — they do not go into the public
-`.AI/.SKILLS` library. Details: `references/skill-branching.md`.
+Навык только для чтения (плагин, импортированный сторонний навык) можно настроить без изменения оригинала: исходный каталог копируется полностью (**ветка**); затем редактируется только копия. Ветка содержит четыре обязательных поля: ссылку на оригинал, дату создания ветки, автора и причину. Как только ветка заменяет оригинал, исходный навык снимается с регистрации в среде выполнения (`SKILL.md` → `CONTENT.md`) или семейный маршрутизатор перенаправляется на ветку, чтобы два почти одинаковых навыка не конфликтовали. Сторонние ветки остаются **приватными** — они не попадают в публичную библиотеку `.AI/.SKILLS`. Подробности: `references/skill-branching.md`.
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Рабочий процесс и порядок действий
 
-1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
-   Explore mode. (Explore can build on a previous audit/`config.json`.)
-2. **Audit mode** (`references/audit-mode.md`): inventory (script) → family clusters → sub-reports →
-   **one globally numbered decision list** (a/b/c1/c2/c3, plus R/F/P1/P2).
-3. **Explore mode** (`references/explore-mode.md`): bilingual multi-source research → 3 categories
-   per candidate → impact simulation → numbered install/remove recommendations.
-4. **Execute** only after the user's numeric confirmation; register skill creation/changes and
-   update `config.json`.
+1. **Выбор режима:** обзор/очистка инвентаря → Режим Аудита. Поиск/установка снаружи → Режим Исследования. (Исследование может опираться на предыдущий аудит/`config.json`.)
+2. **Режим Аудита** (`references/audit-mode.md`): инвентаризация (скрипт) → кластеры семейств → подотчеты → **единый сквозной пронумерованный список решений** (a/b/c1/c2/c3, плюс R/F/P1/P2).
+3. **Режим Исследования** (`references/explore-mode.md`): двуязычный поиск из нескольких источников → 3 категории на кандидата → моделирование влияния → пронумерованные рекомендации по установке/удалению.
+4. **Выполнение** только после числового подтверждения от пользователя; регистрация создания/изменения навыков и обновление `config.json`.
 
-## Iron Rules
+## Железные правила
 
-- **Survey ≠ mutation:** cluster everything, but only edit **user-owned** skills; plugin/third-party
-  skills are read-only (never modify the header/delete). To customize a third-party skill, create a
-  **branch** (fork copy) instead — the original remains untouched, all changes are made exclusively
-  on the copy (→ `references/skill-branching.md`).
-- **Extend the register, do not duplicate:** if a skill register exists (index + family map +
-  index skill), extend it instead of creating a fourth one.
-- **Security primarily manual:** before every installation, the model reads the skill itself and judges;
-  `scripts/scan_skill_security.py` is only supporting triage with known limits. Never auto-install.
-- **Registration by origin:** user-authored → Library; third-party → external path, **not** Library.
+- **Обзор ≠ изменение:** группируйте всё, но редактируйте только навыки, **принадлежащие пользователю**; плагины/сторонние навыки доступны только для чтения (никогда не изменяйте заголовок и не удаляйте). Чтобы настроить сторонний навык, создайте **ветку** (копию-форк) — оригинал остается нетронутым, все изменения вносятся исключительно в копию (→ `references/skill-branching.md`).
+- **Расширяйте реестр, а не дублируйте:** если реестр навыков существует (индекс + карта семейств + индексный навык), расширяйте его вместо создания четвертого.
+- **Безопасность главным образом вручную:** перед каждой установкой модель самостоятельно читает навык и делает выводы; `scripts/scan_skill_security.py` является лишь вспомогательной сортировкой с известными ограничениями. Никогда не устанавливайте автоматически.
+- **Регистрация по происхождению:** созданные пользователем → Библиотека; сторонние → внешний путь, **не** Библиотека.
 
-## Orchestration (model-neutral)
+## Оркестрация (независимая от модели)
 
-Family sub-reports or sources/languages are independent work paths. If the platform offers
-cheaper subagents than the orchestrator itself, assign one subagent per family/source
-and, as orchestrator, only consolidate/verify (specialist swarm). Otherwise sequentially yourself.
+Подотчеты семейств или источники/языки представляют собой независимые рабочие пути. Если платформа предлагает более дешевые подагенты, чем сам оркестратор, назначьте по одному подагенту на семейство/источник и в качестве оркестратора только консолидируйте/проверяйте (рой специалистов). В противном случае выполняйте последовательно самостоятельно.
 
-## Resources
+## Ресурсы
 
-- **Modes:** `references/audit-mode.md`, `references/explore-mode.md`
-- **Shared:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
-- **Audit:** `references/family-care.md`, `references/skill-finder.md`
-- **Explore:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
-- **Branch:** `references/skill-branching.md`
-- **Scripts:** `scripts/inventory_skills.py` (inventory), `scripts/inject_family_header.py` (header router),
-  `scripts/scan_skill_security.py` (security triage)
-- **Templates:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`,
-  `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
+- **Режимы:** `references/audit-mode.md`, `references/explore-mode.md`
+- **Общие:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
+- **Аудит:** `references/family-care.md`, `references/skill-finder.md`
+- **Исследование:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
+- **Ветка:** `references/skill-branching.md`
+- **Скрипты:** `scripts/inventory_skills.py` (инвентаризация), `scripts/inject_family_header.py` (маршрутизатор заголовка), `scripts/scan_skill_security.py` (сортировка безопасности)
+- **Шаблоны:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-06-17)
-- Added branch mechanism: third-party/read-only skills can be customized via a fork copy (branch)
-  — with a reference to the original, date, author, and reason; the original remains untouched.
-  Iron rule "Survey ≠ mutation" extended with branch escape hatch. New section
-  `## Branch Mechanism`. New files: `references/skill-branching.md`, `assets/branch-header.example.md`.
+- Добавлен механизм веток: сторонние навыки/навыки только для чтения можно настраивать через копию-форк (ветку) — со ссылкой на оригинал, датой, автором и причиной; оригинал остается нетронутым. Железное правило "Обзор ≠ изменение" расширено с помощью пути обхода через ветки. Новый раздел `## Механизм веток`. Новые файлы: `references/skill-branching.md`, `assets/branch-header.example.md`.
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Unites inventory audit (family clustering, numbered decisions) and
-  web research (gated install with security triage) in one installer that generates lean subskills.
+- Начальная версия. Объединяет аудит инвентаря (кластеризация по семействам, пронумерованные решения) и веб-поиск (контролируемая установка с сортировкой безопасности) в едином установщике, генерирующем легкие поднавыки.

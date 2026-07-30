@@ -1,36 +1,49 @@
 ---
+name: decide
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: Структурированное принятие решений: матрица «за/против», взвешенная оценка, дерево решений, сценарный анализ и матрица Эйзенхауэра.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [decision, evaluation, prioritization, framework]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `decide`.
+> **Русский** — Официальная русская версия `decide`.
 
 
+# Decide — Структурированное принятие решений (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decide — Structured Decision Making (English)
-
-> Rational decisions through structured frameworks and evaluation methods
-
----
-
-## When to Use?
-
-- Choosing between options
-- Need a pro/con list
-- Multi-criteria decision
-- Uncertain about important decisions
-
-**Trigger words:** decide, choose, compare, evaluate, weigh
+> Рациональные решения с использованием структурированных фреймворков и методов оценки
 
 ---
 
-## Frameworks
+## Когда использовать?
 
-### 1. Pro/Con Matrix (Simple)
+- Выбор между несколькими вариантами
+- Необходимость составления списка «за» и «против»
+- Многокритериальное решение
+- Неопределенность при принятии важных решений
 
-Quick decisions between 2 options.
+**Ключевые слова (Trigger words):** decide, choose, compare, evaluate, weigh
+
+---
+
+## Фреймворки
+
+### 1. Матрица «За/Против» (Простая)
+
+Быстрые решения при выборе из 2 вариантов.
 
 ```
 PRO A:                    CON A:
@@ -46,36 +59,36 @@ Recommendation: [A/B] because [reasoning]
 
 ---
 
-### 2. Weighted Scoring (Complex)
+### 2. Взвешенная оценка (Сложная)
 
-Multi-criteria decisions with weighting.
+Многокритериальные решения с весовыми коэффициентами.
 
-| Criterion | Weight | Option A | Score A | Option B | Score B |
+| Критерий | Вес | Вариант A | Балл A | Вариант B | Балл B |
 |-----------|--------|----------|---------|----------|---------|
-| Criterion 1 | 30% | 8 | 2.4 | 6 | 1.8 |
-| Criterion 2 | 25% | 7 | 1.75 | 9 | 2.25 |
-| TOTAL | 100% | - | X.XX | - | X.XX |
+| Критерий 1 | 30% | 8 | 2.4 | 6 | 1.8 |
+| Критерий 2 | 25% | 7 | 1.75 | 9 | 2.25 |
+| ИТОГО | 100% | - | X.XX | - | X.XX |
 
-**Process:**
-1. Collect criteria
-2. Assign weights (sum = 100%)
-3. Rate options (1-10 scale)
-4. Calculate scores (rating x weight)
-5. Compare and recommend
-
----
-
-### 3. Decision Tree (Sequential)
-
-Decisions with clear if-then paths:
-1. Define starting question
-2. First branch (most important criterion)
-3. Next level (second most important)
-4. Down to final option
+**Процесс:**
+1. Собрать критерии
+2. Назначить веса (сумма = 100%)
+3. Оценить варианты (по шкале от 1 до 10)
+4. Рассчитать баллы (оценка x вес)
+5. Сравнить и дать рекомендацию
 
 ---
 
-### 4. Scenario Analysis (Uncertainty)
+### 3. Дерево решений (Последовательное)
+
+Решения с четкими путями «если-то»:
+1. Определить исходный вопрос
+2. Первая ветвь (самый важный критерий)
+3. Следующий уровень (второй по важности)
+4. Переход к итоговому варианту
+
+---
+
+### 4. Сценарный анализ (Неопределенность)
 
 ```
 Best Case (X% probability):
@@ -92,7 +105,7 @@ Total expected value: [Sum]
 
 ---
 
-### 5. Eisenhower Matrix (Prioritization)
+### 5. Матрица Эйзенхауэра (Приоритезация)
 
 ```
               URGENT          NOT URGENT
@@ -102,39 +115,39 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-## Quality Checklist
+## Чек-лист качества
 
-Check before final recommendation:
-- [ ] All relevant criteria identified?
-- [ ] User values considered?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and evaluated?
-- [ ] Bias check performed?
-- [ ] Reversibility assessed?
-
----
-
-## Best Practices
-
-### Defining Criteria
-- Specific and measurable
-- Not too many (3-7 ideal)
-- Independent of each other
-
-### Weighting
-- Sum = 100%
-- Most important criterion >= 25%
-- No weights < 5%
-
-### Recommendation
-- Clear and reasoned
-- Mention alternatives
-- Name risks
-- Consider reversibility
+Проверить перед выдачей финальной рекомендации:
+- [ ] Идентифицированы ли все релевантные критерии?
+- [ ] Учтены ли ценности пользователя?
+- [ ] Учтены ли долгосрочные последствия?
+- [ ] Выявлены и оценены ли риски?
+- [ ] Проведена ли проверка на когнитивные искажения?
+- [ ] Оценена ли обратимость решения?
 
 ---
 
-## Рабочий процесс и этапы выполнения & Execution Steps
+## Лучшие практики
+
+### Определение критериев
+- Конкретные и измеримые
+- Не слишком много (идеально 3-7)
+- Независимые друг от друга
+
+### Взвешивание
+- Сумма = 100%
+- Самый важный критерий >= 25%
+- Отсутствие весов < 5%
+
+### Рекомендация
+- Четкая и обоснованная
+- Упоминание альтернатив
+- Описание рисков
+- Учет обратимости решения
+
+---
+
+## Рабочий процесс и порядок действий
 
 ```
 1. User request
@@ -153,8 +166,8 @@ Check before final recommendation:
 ## Журнал изменений
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Перенесено из BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Перенесено из BACH v3.8.0 | Автономная версия*

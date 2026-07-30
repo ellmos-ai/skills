@@ -1,106 +1,86 @@
 ---
+name: skill-explorer
+version: 1.1.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-06-17
+description: 自らのスキル景観を管理：既存スキルの調査と比較（監査モード）、新しいスキル/プラグインのWeb調査（探索モード）を行い、同時にモノリスを読み込む代わりに軽量なサブスキル（Skill-Finder、ファミリーアンブレラ、メンテナンススキル）を生成するインストーラーでもあります。「スキルの比較/監査」、「どのスキルが重複しているか」、「スキルファミリーの形成」、「スキルのクリーンアップ/集約」、「スキルレジストリの維持」、「トピックXのスキル/プラグインの検索」、「新しいスキルのインストール」、「スキルマーケットプレイスの閲覧」、または `/skill-explorer` に使用します。ファミリーごとのサブレポートと全域で番号付けされた決定リストを提供し、セキュリティチェックと明示的な承認の後にのみインストール/アンインストールを行います。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: infrastructure
+tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: ja
+status: active
+dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `skill-explorer`.
+> **日本語** — `skill-explorer` の公式日本語版。
 
 
+# Skill-Explorer — スキル景観の管理（監査・探索・インストーラー） (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 概要と目的
 
+スキルインベントリが大きくなるにつれて、重複や未利用のリソース、「どのスキルの代わりにどのスキルを使うか」という曖昧な状況が生じます。また、新しいスキル/プラグインも常に登場しています。`skill-explorer` は3つの役割を1つのツールに統合します：
 
-# Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)
-
-## 概要と目的 & Purpose
-
-As the skill inventory grows, duplicates, unused resources, and unclear "which skill instead of which"
-situations arise — and there are constantly new skills/plugins out there. `skill-explorer`
-bundles three roles into one tool:
-
-| Role | What it does | Detail |
+| 役割 | 実行内容 | 詳細 |
 | --- | --- | --- |
-| **Audit mode** (inward) | survey all skills, cluster them into families, gather capabilities/dependencies/resources, produce a sub-report + numbered recommendations per family | `references/audit-mode.md` |
-| **Explore mode** (outward) | research the web (web/GitHub/Reddit, bilingual) for new skills/plugins on a topic, compare, install gated | `references/explore-mode.md` |
-| **Installer** | *generate* lean subskills instead of a monolith — Skill-Finder, family umbrella, maintenance skills | below + `references/family-care.md` |
+| **監査モード**（内部向け） | すべてのスキルを調査し、ファミリーにクラスタリングし、機能/依存関係/リソースを収集して、ファミリーごとのサブレポートと番号付きの推奨事項を作成 | `references/audit-mode.md` |
+| **探索モード**（外部向け） | トピックに関する新しいスキル/プラグインをWeb（Web/GitHub/Reddit、バイリンガル）で調査し、比較し、ゲート付きでインストール | `references/explore-mode.md` |
+| **インストーラー** | モノリスの代わりに軽量なサブスキルを*生成* — Skill-Finder、ファミリーアンブレラ、メンテナンススキル | 以下 + `references/family-care.md` |
 
-Invocation: `/skill-explorer` (Audit as default) or "… find for topic X" (Explore). Both modes share
-a taxonomy (`references/clustering.md`), a report format (`references/report-format.md`), and the
-numbering scheme, so the user can respond with a single numbered list.
+呼び出し：`/skill-explorer`（デフォルトは監査）または「… トピックXについて検索」（探索）。両モードは分類法（`references/clustering.md`）、レポート形式（`references/report-format.md`）、および番号体系を共有しているため、ユーザーは単一の番号付きリストで返答できます。
 
-## Installer Principle & Persistence
+## インストーラーの原則と永続化
 
-Instead of growing monolithically itself, `skill-explorer` *generates* lean, individually
-loadable subskills on demand — so an overlong single skill never has to be loaded:
+`skill-explorer` 自体がモノリスとして肥大化するのではなく、オンデマンドで軽量かつ個別に読み込み可能なサブスキルを*生成*します。これにより、長すぎる単一スキルを読み込む必要がなくなります：
 
-- **Skill-Finder** ([F]) — an active finder/router analogous to a "using-superpowers" doorman that reads
-  the register before every task and routes to the matching family (`references/skill-finder.md`,
-  template `assets/skill-finder-template.md`).
-- **Family umbrella** (c1) — a meta-skill that knows an entire family (`assets/family-umbrella-template.md`).
-- **Maintenance skills** ([P1] families, [P2] register) — keep families/register up to date (`references/family-care.md`).
+- **Skill-Finder** ([F]) — すべてのタスクの前にレジストリを読み取り、対応するファミリーにルーティングする、「using-superpowers」のドアマンに類似したアクティブなファインダー/ルーター（`references/skill-finder.md`、テンプレート `assets/skill-finder-template.md`）。
+- **ファミリーアンブレラ** (c1) — ファミリー全体を把握しているメタスキル（`assets/family-umbrella-template.md`）。
+- **メンテナンススキル**（[P1] ファミリー、[P2] レジストリ） — ファミリー/レジストリを最新に保つ（`references/family-care.md`）。
 
-Decisions are persisted in `~/.claude/skills/skill-explorer/config.json`
-(`references/config.md`, template `assets/config.example.json`): read at startup (known
-families/routers/generated subskills), update after execution — so a re-run never creates anything twice.
+決定は `~/.claude/skills/skill-explorer/config.json` に永続化されます（`references/config.md`、テンプレート `assets/config.example.json`）。起動時に読み込まれ（既知のファミリー/ルーター/生成されたサブスキル）、実行後に更新されるため、再実行時に重複して作成されることはありません。
 
-## Branch Mechanism (Customizing Third-Party Skills)
+## ブランチメカニズム（サードパーティスキルのカスタマイズ）
 
-A read-only skill (plugin, imported third-party) can be customized without modifying the original:
-the original directory is copied in full (**branch**); only the copy is then edited. The branch
-carries four mandatory fields: a reference to the original, the branch date, the author, and the
-reason. Once the branch supersedes the original, the original is deregistered from the runtime
-(`SKILL.md` → `CONTENT.md`) or the family router is pointed to the branch, so two nearly identical
-skills do not collide. Third-party branches stay **private** — they do not go into the public
-`.AI/.SKILLS` library. Details: `references/skill-branching.md`.
+読み取り専用のスキル（プラグイン、インポートされたサードパーティ）は、オリジナルを変更せずにカスタマイズできます。元のディレクトリが完全にコピーされ（**ブランチ**）、そのコピーのみが編集されます。ブランチには、元のスキルへの参照、ブランチ作成日、作成者、理由の4つの必須フィールドが含まれます。ブランチがオリジナルに取って代わると、オリジナルはランタイムから登録解除されるか（`SKILL.md` → `CONTENT.md`）、ファミリールーターがブランチを指すように変更され、ほぼ同一の2つのスキルが衝突するのを防ぎます。サードパーティのブランチは**プライベート**のまま保持され、公開の `.AI/.SKILLS` ライブラリには入りません。詳細：`references/skill-branching.md`。
 
-## ワークフローと実行手順 & Execution Steps
+## ワークフローと手順
 
-1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
-   Explore mode. (Explore can build on a previous audit/`config.json`.)
-2. **Audit mode** (`references/audit-mode.md`): inventory (script) → family clusters → sub-reports →
-   **one globally numbered decision list** (a/b/c1/c2/c3, plus R/F/P1/P2).
-3. **Explore mode** (`references/explore-mode.md`): bilingual multi-source research → 3 categories
-   per candidate → impact simulation → numbered install/remove recommendations.
-4. **Execute** only after the user's numeric confirmation; register skill creation/changes and
-   update `config.json`.
+1. **モードの選択：** インベントリの調査/クリーンアップ → 監査モード。外部からの検索/インストール → 探索モード。（探索は以前の監査/`config.json` に基づいて構築可能。）
+2. **監査モード**（`references/audit-mode.md`）：インベントリ（スクリプト）→ ファミリークラスタ → サブレポート → **1つの全域で番号付けされた決定リスト**（a/b/c1/c2/c3、および R/F/P1/P2）。
+3. **探索モード**（`references/explore-mode.md`）：バイリンガル・多角的な検索 → 候補ごとに3つのカテゴリ → 影響シミュレーション → 番号付きインストール/削除推奨事項。
+4. ユーザーの数字による確認の後にのみ**実行**し、スキルの作成/変更を登録して `config.json` を更新します。
 
-## Iron Rules
+## 鉄の掟
 
-- **Survey ≠ mutation:** cluster everything, but only edit **user-owned** skills; plugin/third-party
-  skills are read-only (never modify the header/delete). To customize a third-party skill, create a
-  **branch** (fork copy) instead — the original remains untouched, all changes are made exclusively
-  on the copy (→ `references/skill-branching.md`).
-- **Extend the register, do not duplicate:** if a skill register exists (index + family map +
-  index skill), extend it instead of creating a fourth one.
-- **Security primarily manual:** before every installation, the model reads the skill itself and judges;
-  `scripts/scan_skill_security.py` is only supporting triage with known limits. Never auto-install.
-- **Registration by origin:** user-authored → Library; third-party → external path, **not** Library.
+- **調査 ≠ 変更：** すべてをクラスタリングしますが、編集するのは**ユーザー所有**のスキルのみです。プラグイン/サードパーティのスキルは読み取り専用です（ヘッダーの変更や削除は不可）。サードパーティスキルをカスタマイズするには、代わりに**ブランチ**（フォークコピー）を作成します。オリジナルは手つかずのまま、すべての変更はコピーに対してのみ行われます（→ `references/skill-branching.md`）。
+- **レジストリを拡張し、重複させない：** スキルレジストリ（インデックス + ファミリーマップ + インデックススキル）が存在する場合は、4つ目を作成するのではなく拡張します。
+- **セキュリティは主に手動：** すべてのインストールの前に、モデル自身がスキルを読み込んで判断します。`scripts/scan_skill_security.py` は既知の限界を持つサポート用のトリアージにすぎません。絶対に自動インストールしないでください。
+- **元データによる登録：** ユーザー作成 → ライブラリ、サードパーティ → 外部パス（ライブラリ**ではない**）。
 
-## Orchestration (model-neutral)
+## オーケストレーション（モデル中立）
 
-Family sub-reports or sources/languages are independent work paths. If the platform offers
-cheaper subagents than the orchestrator itself, assign one subagent per family/source
-and, as orchestrator, only consolidate/verify (specialist swarm). Otherwise sequentially yourself.
+ファミリーのサブレポートやソース/言語は独立した作業パスです。プラットフォームがオーケストレーター自体よりも低コストなサブエージェントを提供している場合は、ファミリー/ソースごとに1つのサブエージェントを割り当て、オーケストレーターとしては統合/検証のみを行います（専門家スウォーム）。そうでない場合は、ご自身で逐次実行します。
 
-## Resources
+## リソース
 
-- **Modes:** `references/audit-mode.md`, `references/explore-mode.md`
-- **Shared:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
-- **Audit:** `references/family-care.md`, `references/skill-finder.md`
-- **Explore:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
-- **Branch:** `references/skill-branching.md`
-- **Scripts:** `scripts/inventory_skills.py` (inventory), `scripts/inject_family_header.py` (header router),
-  `scripts/scan_skill_security.py` (security triage)
-- **Templates:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`,
-  `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
+- **モード：** `references/audit-mode.md`, `references/explore-mode.md`
+- **共有：** `references/clustering.md`, `references/report-format.md`, `references/config.md`
+- **監査：** `references/family-care.md`, `references/skill-finder.md`
+- **探索：** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
+- **ブランチ：** `references/skill-branching.md`
+- **スクリプト：** `scripts/inventory_skills.py`（インベントリ）, `scripts/inject_family_header.py`（ヘッダールーター）, `scripts/scan_skill_security.py`（セキュリティトリアージ）
+- **テンプレート：** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## 変更履歴
 
 ### 1.1.0 (2026-06-17)
-- Added branch mechanism: third-party/read-only skills can be customized via a fork copy (branch)
-  — with a reference to the original, date, author, and reason; the original remains untouched.
-  Iron rule "Survey ≠ mutation" extended with branch escape hatch. New section
-  `## Branch Mechanism`. New files: `references/skill-branching.md`, `assets/branch-header.example.md`.
+- ブランチメカニズムの追加：サードパーティ/読み取り専用スキルをフォークコピー（ブランチ）経由でカスタマイズ可能に — 元スキルへの参照、日付、作成者、理由を付与し、オリジナルは手つかずのまま保持。鉄の掟「調査 ≠ 変更」にブランチという救済措置を拡張。新セクション `## ブランチメカニズム`。新ファイル：`references/skill-branching.md`、`assets/branch-header.example.md`。
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Unites inventory audit (family clustering, numbered decisions) and
-  web research (gated install with security triage) in one installer that generates lean subskills.
+- 初版。インベントリ監査（ファミリークラスタリング、番号付き決定）とWeb調査（セキュリティトリアージ付きゲートインストール）を、軽量サブスキルを生成する1つのインストーラーに統合。

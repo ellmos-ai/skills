@@ -5,7 +5,7 @@ type: agent
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Русский] Навык агента для dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
+description: Автоматизированный пайплайн разработки программного обеспечения. Сканирует проекты, расставляет приоритеты задач, анализирует код и оркестрирует циклы разработки. Ноль зависимостей (только стандартная библиотека Python).
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,41 +15,37 @@ tags: [development, code-analysis, task-management, automation, pipeline]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `dev-soft-agent`.
+<img src="banner.png" width="100%" alt="dev-soft-agent banner">
+> **Русский** — Официальная русская версия `dev-soft-agent`.
 
+# Dev Soft Agent (Русский)
 
+Автоматизированный пайплайн разработки программного обеспечения. Извлечен из агента ATI платформы BACH,
+работает полностью автономно, используя исключительно стандартную библиотеку Python.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Dev Soft Agent (English)
-
-Automated software development pipeline. Extracted from BACH's ATI agent,
-runs fully standalone with pure Python standard library.
-
-## Components
+## Компоненты
 
 ```
 scripts/
-  config.py              Configuration (scan folders, naming prefixes, weights)
-  project_manager.py     Project scan + classification by naming convention
-  task_engine.py          TASKS.txt parser + code scanner (TODO/FIXME)
-  code_analyzer.py       Static analysis (LOC, imports, classes, functions)
-  dev_loop.py            Orchestrator (DevLoop)
+  config.py              Конфигурация (папки сканирования, префиксы наименований, веса)
+  project_manager.py     Сканирование проектов + классификация по соглашению о именовании
+  task_engine.py          Парсер TASKS.txt + сканер кода (TODO/FIXME)
+  code_analyzer.py       Статический анализ (LOC, импорты, классы, функции)
+  dev_loop.py            Оркестратор (DevLoop)
   policies/
-    naming.py            snake_case / PascalCase / SCREAMING_SNAKE validation
-    encoding.py          UTF-8 enforcement + BOM detection
-    paths.py             Hardcoded path detection
+    naming.py            Валидация snake_case / PascalCase / SCREAMING_SNAKE
+    encoding.py          Обеспечение UTF-8 + обнаружение BOM
+    paths.py             Обнаружение жестко зашитых путей (hardcoded paths)
   prompt_templates/
-    task_prompt.txt      LLM prompt for task processing
-    review_prompt.txt    LLM prompt for code review
-    analysis_prompt.txt  LLM prompt for project analysis
+    task_prompt.txt      Промпт LLM для обработки задач
+    review_prompt.txt    Промпт LLM для ревью кода
+    analysis_prompt.txt  Промпт LLM для анализа проекта
 ```
 
-## Usage as Python Library
+## Использование в качестве библиотеки Python
 
 ```python
 from scripts.dev_loop import DevLoop
@@ -58,27 +54,27 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects (English)
+# Сканирование проектов (Русский)
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention) (English)
+# Выбор проекта (взвешенный случайный выбор по соглашению об именовании) (Русский)
 project = loop.select_project()
 
-# Analyze code (English)
+# Анализ кода (Русский)
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks (English)
+# Загрузка и приоритезация задач (Русский)
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session (English)
+# Завершение сессии разработки (Русский)
 result = loop.run_session()
 loop.save_session()
 ```
 
-## Usage as CLI
+## Использование через CLI
 
 ```bash
 cd scripts
@@ -90,50 +86,50 @@ python -m devSoftAgent session --project my-project
 python -m devSoftAgent status
 ```
 
-## Naming Convention (Project Classification)
+## Соглашение об именовании (Классификация проектов)
 
-Projects are classified based on their folder name:
+Проекты классифицируются на основе имени их папки:
 
-| Prefix | Label | Weight | Meaning |
-|--------|-------|--------|---------|
-| `RDY` | Ready | 1.0 | Highest priority |
-| `RDY_FAST` | Fast Ready | 0.5 | Quick to complete |
-| `FAST` | Fast | 0.33 | Small task |
-| `DEV` | Development | 0.17 | In development |
-| `REL` | Released | 0.0 | Done, no work needed |
-| `ARC` | Archived | 0.0 | Archived |
+| Префикс | Метка | Вес | Значение |
+|---------|-------|-----|----------|
+| `RDY` | Ready (Готов) | 1.0 | Наивысший приоритет |
+| `RDY_FAST` | Fast Ready | 0.5 | Быстрое завершение |
+| `FAST` | Fast | 0.33 | Небольшая задача |
+| `DEV` | Development | 0.17 | В разработке |
+| `REL` | Released | 0.0 | Выпущен, работа не требуется |
+| `ARC` | Archived | 0.0 | Заархивирован |
 
-Weight determines the probability in random selection.
+Вес определяет вероятность при случайном выборе.
 
-## TASKS.txt Format
+## Формат TASKS.txt
 
 ```markdown
-# TASKS - ProjectName (English)
-# As of: 2026-03-12 (English)
+# TASKS - ИмяПроекта (Русский)
+# По состоянию на: 2026-03-12 (Русский)
 
 ## OPEN
-- [ ] [BUG] Description of the bug
-- [ ] [FEATURE] New feature
+- [ ] [BUG] Описание ошибки
+- [ ] [FEATURE] Новая функция
 
 ## IN PROGRESS
-- [-] [REFACTOR] Code restructuring
+- [-] [REFACTOR] Реструктуризация кода
 
 ## DONE
-- [x] [BUG] Fixed bug -- DONE 2026-03-01
+- [x] [BUG] Исправленная ошибка -- DONE 2026-03-01
 ```
 
-## Policies
+## Политики (Policies)
 
-Quality policies that can be automatically checked against code:
+Политики качества, которые можно автоматически проверять в коде:
 
-- **NamingPolicy:** snake_case for modules/functions, PascalCase for classes
-- **EncodingPolicy:** Enforce UTF-8, detect BOM, flag CRLF
-- **PathPolicy:** Detect and report hardcoded absolute paths
+- **NamingPolicy:** snake_case для модулей/функций, PascalCase для классов
+- **EncodingPolicy:** Принудительный UTF-8, обнаружение BOM, флаг CRLF
+- **PathPolicy:** Обнаружение и отчет о жестко зашитых абсолютных путях
 
 ## Журнал изменений
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/devSoftAgent to skill library
-- Project scanner, task engine, code analyzer, DevLoop
-- 3 policies (naming, encoding, paths)
-- 3 prompt templates (task, review, analysis)
+- Миграция из MODULAR_AGENTS/devSoftAgent в библиотеку навыков
+- Сканер проектов, движок задач, анализатор кода, DevLoop
+- 3 политики (именование, кодировка, пути)
+- 3 шаблона промптов (задача, ревью, анализ)

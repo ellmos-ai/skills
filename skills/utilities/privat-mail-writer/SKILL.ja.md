@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
 updated: 2026-06-19
-description: [日本語] エージェントスキル: privat-mail-writer: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+description: ユーザーがプライベートまたは半公式の電子メールの作成、返信、お断り、フォローアップ、要約、言い換え、または自身のスタイルでの下書き作成を望む場合にこのスキルを使用します。特に日程調整、公式なお断り、親切な短文返信、相手に応じたトーンに最適です。具体的なメール作成依頼があった場合にのみプロファイル分析を開始します。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,93 +18,85 @@ dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path'
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `privat-mail-writer`.
+> **日本語** — `privat-mail-writer` の公式日本語版。
 
+# Privat-Mail-Writer (日本語)
 
+## 概要と目的
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Privat-Mail-Writer は、短く親切で、相手との関係に適したメールの下書きを作成します。このスキルはユーザーに対して中立に設計されており、実際の連絡先、実際の署名、実際のメール内容は含まれていません。
 
+核となる原則は「遅延評価（lazy）」と「実証的」であることです。ユーザーが特定の連絡先への具体的なメール作成を希望した場合にのみ、その連絡先のプロファイルを作成または更新します。事前にプロファイルを生成することはありません。利用可能なメール履歴がない場合は、書き方のスタイルを捏造せず、中立かつ短く書くか、具体的に例を尋ねてください。
 
-> **English Translation** — Official English version of `privat-mail-writer`.
+## リソース
 
+- `CONFIG.md` - 中央設定、If-Then ルール、権限ゲート（permission-gates）、ブラックリストのスイッチ。
+- `BLACKLIST.md` - ニュースレター、システム送信者、プロファイルのない連絡先の除外ルール。
+- `USECASES.md` - ユースケースレジストリと新しいユースケースのルール。
+- `SIGNATURES.md` - 中立的な署名および結びの言葉のルール。
+- `MUSTER-BLOCKS.md` - 再利用可能な短いテキストブロック。
+- `kontaktprofile.json` - 空のユーザー中立な連絡先プロファイル Schema。実際のプロファイルはローカルのみでデータ最小限で管理します。
 
-# Privat-Mail-Writer (English)
+## ワークフロー
 
-## 概要と目的 & Purpose
+1. **設定の読み込み:** `CONFIG.md` を確認。ブラックリストが有効な場合は `BLACKLIST.md` もチェック。
+2. **トリガーの確認:** 「弟の Simon にメールを書いて」など、特定の連絡先に対する具体的な作成依頼がある場合にのみプロファイリングを実行。プロファイル作成のみを目的としたインボックスの走査は行わない。
+3. **ブラックリストの確認:** ニュースレター、No-Reply、システム送信者、除外対象のドメイン/連絡先にはプロファイルを作成しない。これらには中立に返信するか、返信しない。
+4. **メールタスクの特定:** 目的、受信者、理由、希望する長さ、言語、トーン、必要な事実を決定。
+5. **ユースケースの決定:** `USECASES.md` を確認し、最適なユースケースを選択。適合するものがない場合は再利用可能な新しいユースケースを作成するか、必須項目が不足している場合は簡潔に確認。
+6. **連絡先プロファイルの確認:** 除外されていない受信者ごとに `kontaktprofile.json` またはローカルのプライベートプロファイルコピーから既存のプロファイルを検索。
+7. **プロファイルの作成または更新:** 信頼できるプロファイルが存在しない場合、利用可能なメールバックエンドから該当連絡先との直近最大 10 通の関連メールを読み込む。文スタイルの決定において、送信メールは受信メールよりも重く評価する。
+8. **実証データの保存:** プロファイルには、スタイル、関係性、カテゴリに関する要約可能で検証可能なシグナルのみを保存。生のメール、長い引用、不要な個人情報は保存しない。
+9. **権限ゲートの適用:** 送信前、デリケートな内容、必須項目の欠落時には `CONFIG.md` に定義されたゲートを遵守。
+10. **下書きの作成:** ユースケースの形式、連絡先プロファイル、現在のタスクを統合。親密さの偽装、虚伪の約束、根拠のない理由を捏造せずにスタイルを模倣。
+11. **出力の提示:** デフォルトで件名とメール本文を出力。ユーザーが明示的に送信を許可し、適切なメールツールが利用可能な場合にのみ送信を実行。
 
-Privat-Mail-Writer erstellt kurze, freundliche und kontaktabhängig passende Mailentwürfe. Der Skill ist nutzerneutral angelegt: Er enthält keine echten Kontakte, keine echten Signaturen und keine echten Mailinhalte.
+## 連絡先プロファイル
 
-Der Kern ist lazy und empirisch: Erst wenn der User eine konkrete Mail an einen Kontakt schreiben will, das Profil für genau diesen Kontakt anlegen oder aktualisieren. Keine Profile auf Vorrat erzeugen. Wenn keine Mailhistorie verfügbar ist, keine Stilbehauptungen erfinden, sondern neutral kurz schreiben oder gezielt nach Beispielen fragen.
+連絡先プロファイルは人物そのものを記述するのではなく、観察されたコミュニケーション関係およびアカウント保持者のその人物に対する執筆スタイルを記述します。
 
-## Ressourcen
+プロファイルのフィールドは簡潔に保ちます：
 
-- `CONFIG.md` - zentrale Präferenzen, Wenn-dann-Regeln, Permission-Gates und Blacklist-Schalter.
-- `BLACKLIST.md` - Ausschlüsse für Newsletter, Systemsender und Kontakte ohne Profil.
-- `USECASES.md` - Usecase-Registry und Regeln für neue Usecases.
-- `SIGNATURES.md` - neutrale Signatur- und Grußformel-Regeln.
-- `MUSTER-BLOCKS.md` - kurze wiederverwendbare Textbausteine.
-- `kontaktprofile.json` - leeres, nutzerneutrales Schema für Kontaktprofile. Echte Profile nur lokal und datensparsam führen.
+- 最終連絡日時
+- 評価対象となったメールの通数と期間
+- 挨拶と結びの言葉
+- 敬语/親称/フォーマル度
+- 文の長さと典型的な簡潔さ
+- 温かみ、直白さ、確実性の度合い
+- 信頼度付きの関係性評価
+- 連絡先カテゴリ（例: `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`）
+- カテゴリのソース：ユーザーの申告、メール本文、アドレス帳、署名、または推論
+- カテゴリのエビデンスレベル：`user-confirmed`, `strong`, `medium`, `weak`
+- 「送信メールの多くが『よろしくお願いします』で終わる」「返信が 5 文以内である」などの要約された短文証拠
 
-## Arbeitsablauf
+毎月、有効期限チェックが必要か確認します。現在の日付の月が保存されている `last_age_check` と異なる場合、`last_contact_at` が 1 年以上前のプロファイルを削除し、`last_age_check` を現在の日付に更新します。中立 JSON の初期値は `2026-06-18` です。
 
-1. **Konfig laden:** `CONFIG.md` lesen. Wenn Blacklist aktiv ist, zusätzlich `BLACKLIST.md` prüfen.
-2. **Trigger prüfen:** Nur bei einem konkreten Schreibauftrag für einen bestimmten Kontakt profilieren, z. B. "schreib eine Mail an Bruder Simon". Keine Inbox-Sweeps nur zur Profilanlage.
-3. **Blacklist prüfen:** Newsletter, No-Reply, Systemsender und ausgeschlossene Domains/Kontakte bekommen kein Kontaktprofil. Für solche Fälle neutral antworten oder nicht antworten.
-4. **Mailaufgabe erkennen:** Ziel, Empfänger, Anlass, gewünschte Kürze, Sprache, Ton und notwendige Fakten bestimmen.
-5. **Usecase bestimmen:** `USECASES.md` lesen und den passendsten Usecase auswählen. Wenn kein Usecase passt, einen neuen wiederverwendbaren Usecase anlegen oder bei fehlenden Pflichtangaben kurz nachfragen.
-6. **Kontaktprofil prüfen:** Für jeden nicht ausgeschlossenen Empfänger ein vorhandenes Profil in `kontaktprofile.json` oder in einer privaten lokalen Profilkopie suchen.
-7. **Profil erstellen oder aktualisieren:** Wenn kein belastbares Profil vorhanden ist, bis zu die letzten zehn relevanten Mails mit genau diesem Kontakt aus dem verfügbaren Mail-Backend lesen. Gesendete Mails sind für Schreibstil stärker zu gewichten als empfangene Mails.
-8. **Empirie speichern:** Im Kontaktprofil nur zusammenfassende, belegbare Stil-, Verhältnis- und Kategorie-Signale speichern. Keine Rohmails, keine langen Zitate und keine unnötigen personenbezogenen Details ablegen.
-9. **Permission-Gate anwenden:** Vor Senden, heiklen Inhalten oder fehlenden Pflichtangaben die Gates aus `CONFIG.md` beachten.
-10. **Entwurf schreiben:** Usecase-Form, Kontaktprofil und aktuelle Aufgabe zusammenführen. Den Stil nachahmen, ohne falsche Nähe, falsche Zusagen oder unbelegte Gründe zu erfinden.
-11. **Ausgabe liefern:** Standardmäßig Betreff und Mailtext ausgeben. Nur senden, wenn der User ausdrücklich das Senden freigegeben hat und ein passendes Mail-Tool verfügbar ist.
+## スタイルルール
 
-## Kontaktprofile
+- 簡潔に書く。プライベートメールで長い前置きはめったに必要ありません。
+- 親切さを保ちつつ、説明しすぎない。
+- ユーザーが指定した場合、または文脈から確実な場合のみ理由を述べる。
+- 公式なお断りの場合：礼儀正しく、明確に、言い訳を並べずに。
+- 事実関係に不確実性がある場合：下書きを完成させる前に簡潔に質問する。
+- ドイツ語のテキストを書く場合は、正しいウムラウト（ä, ö, ü, Ä, Ö, Ü, ß）を使用する。
 
-Ein Kontaktprofil beschreibt nicht die Person an sich, sondern das beobachtete Kommunikationsverhältnis und den Schreibstil des Kontoinhabers gegenüber dieser Person.
+## 新しいユースケース
 
-Profilfelder sollen knapp bleiben:
+メールタスクに再利用性があり、`USECASES.md` でまだカバーされていない場合は、ユースケースを追加します：
 
-- letzte Kontaktzeit
-- Anzahl und Zeitraum der ausgewerteten Mails
-- Anrede und Grußformel
-- Du/Sie/Formalität
-- Satzlänge und typische Kürze
-- Wärmegrad, Direktheit, Verbindlichkeit
-- Verhältnis-Einschätzung mit Konfidenz
-- Kontaktkategorie, z. B. `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`
-- Quelle der Kategorie: User-Aussage, Mailtext, Adressbuch, Signatur oder Inferenz
-- Evidenzgrad der Kategorie: `user-confirmed`, `strong`, `medium`, `weak`
-- kurze paraphrasierte Belege wie "mehrere gesendete Mails enden mit 'Viele Grüße'" oder "Antworten bleiben unter fünf Sätzen"
+- 安定した ID（例: `UC-002`）
+- 名称と典型的なトリガー
+- メールの目的
+- 必須項目と任意項目
+- 標準的な長さとトーン
+- 短いテンプレートまたはブロックのシーケンス
+- 必須項目が欠けている場合の質問内容
 
-Monatlich prüfen, ob ein Alters-Check fällig ist. Wenn der Monat des aktuellen Datums vom gespeicherten `last_age_check` abweicht, Profile löschen, deren `last_contact_at` mehr als ein Jahr zurückliegt, und `last_age_check` auf das aktuelle Datum setzen. Der Startwert im neutralen JSON ist `2026-06-18`.
+一回限りの特殊なケースをユースケースとして拡張しないでください。その場合は現在の multiplicative 下書きのみを提供します。
 
-## Stilregeln
+## 出力フォーマット
 
-- Kurz schreiben. Privatmails brauchen selten lange Vorreden.
-- Freundlich bleiben, aber nicht übererklären.
-- Echte Gründe nur nennen, wenn sie vom User genannt oder aus dem Kontext sicher sind.
-- Bei offiziellen Absagen: höflich, klar, ohne Rechtfertigungsroman.
-- Bei Unsicherheit über Fakten: eine knappe Rückfrage stellen, bevor der Entwurf finalisiert wird.
-- Deutsche Texte mit echten Umlauten schreiben: ä, ö, ü, Ä, Ö, Ü, ß.
-
-## Neue Usecases
-
-Wenn eine Mailaufgabe wiederverwendbar wirkt und in `USECASES.md` noch nicht abgedeckt ist, den Usecase ergänzen:
-
-- stabile ID, z. B. `UC-002`
-- Name und typische Trigger
-- Ziel der Mail
-- Pflichtangaben und optionale Angaben
-- Standardlänge und Ton
-- kurze Vorlage oder Bausteinfolge
-- offene Rückfragen, falls Pflichtangaben fehlen
-
-Ein einmaliger Sonderfall wird nicht als Usecase aufgebläht. In diesem Fall nur den aktuellen Entwurf liefern.
-
-## Ausgabeformat
-
-Für normale Entwürfe:
+標準的な下書き：
 
 ```text
 Betreff: ...
@@ -117,18 +109,18 @@ Mit freundlichen Grüßen
 [Signatur]
 ```
 
-Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere Varianten sinnvoll sind, höchstens zwei Varianten anbieten: "sehr kurz" und "etwas wärmer".
+ユーザーが件名なしのテキストのみを希望する場合は、メール本文のみを提供します。複数のバリエーションが有益な場合は、最大 2 つのバリエーション（「極めて簡潔」と「少し温かみのある表現」）を提示します。
 
-## Grenzen
+## 制限事項
 
-Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
+連絡先プロファイルを捏造しないでください。メールから機密詳細を不要に返信にコピーしないでください。明示的な許可なしにメールを送信しないでください。ユーザーから明確な指示がない限り、法的、医療的、または財務的な約束を記載しないでください。
 
 ## 変更履歴
 
 ### 0.2.0 (2026-06-19)
-- `CONFIG.md` und `BLACKLIST.md` ergänzt.
-- Profilanlage auf konkrete Mail-Schreibaufträge begrenzt.
-- Kontaktkategorien mit Quelle und Evidenzgrad in das Profilschema aufgenommen.
+- `CONFIG.md` および `BLACKLIST.md` を追加。
+- プロファイル作成を具体的なメール作成依頼のみに制限。
+- ソースおよびエビデンスレベルを含む連絡先カテゴリをプロファイル Schema に追加。
 
 ### 0.1.0 (2026-06-19)
-- Initiale Version mit Usecase-Registry, Signaturregeln, Musterblöcken und leerem Kontaktprofil-JSON.
+- ユースケースレジストリ、署名ルール、サンプルブロック、空の連絡先プロファイル JSON を含む初期バージョン。

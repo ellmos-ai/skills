@@ -2,126 +2,87 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `bilingual-doc-sync`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bilingual-doc-sync`.
+> **Русский** — Официальная русская версия `bilingual-doc-sync`.
 
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
+# Bilingual-Doc-Sync — Поддержание синхронизации параллельных языковых версий (Русский)
 
-## Общий обзор и назначение & Purpose
+## Обзор и цель
 
-Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
-wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
-Skill macht die Synchronprüfung zu einem definierten Ablauf mit einer entscheidenden
-Vorab-Festlegung: **Welche Fassung führt?** Ohne Leitsprache-Regel wird jede Divergenz
-zur Einzelfallentscheidung und der Abgleich unwiederholbar.
+Двуязычные документы со временем разлаживаются: активно редактируемая версия растет, а другая устаревает — пока «перевод» не останется таковым лишь по названию. Этот навык превращает проверку синхронизации в чёткий процесс с ключевым предварительным решением: **Какая версия является ведущей?** Без правила ведущего языка каждое расхождение превращается в разовое решение, а сопоставление становится невоспроизводимым.
 
-## Ablauf
+## Процесс
 
-### 1. Bestand feststellen
+### 1. Определение состава
 
-- Liegen beide (alle) Sprachfassungen vor? Fehlt eine ganz → **nachziehen** (vollständige
-  Übersetzung der führenden Fassung, nicht Neudichtung).
-- Namenskonvention prüfen (z. B. `DOKUMENT.md` + `DOKUMENT.en.md` oder `_de`/`_en`-Suffixe)
-  und Abweichler angleichen — Auffindbarkeit ist die halbe Synchronität.
+- Присутствуют ли обе (все) языковые версии? Если одна полностью отсутствует → **догнать/перевести** (полный перевод ведущей версии, а не написание заново).
+- Проверить соглашение об именовании (например, `ДОКУМЕНТ.md` + `ДОКУМЕНТ.en.md` или суффиксы `_de`/`_en`) и унифицировать отклонения — находимость документов составляет половину синхронности.
 
-### 2. Leitsprache klären (vor jedem Abgleich)
+### 2. Определение ведущего языка (перед каждой синхронизацией)
 
-- Die Leitsprache ist die Fassung, in der inhaltlich gearbeitet wird (bei Papers oft EN,
-  bei lokaler Doku oft die Muttersprache). Sie gewinnt bei Widerspruch.
-- **Rücktransfer-Ausnahme:** Löst die Nebenfassung etwas nachweislich besser (klarere
-  Formulierung, korrigierter Fehler), wird es in die Leitfassung ÜBERNOMMEN — erst
-  rücktransferieren, dann normal synchronisieren. Fachliche Korrektheit prüfen, bevor
-  eine „schönere" Formulierung übernommen wird.
+- Ведущий язык (Leitsprache) — это версия, в которой ведётся основная работа над содержанием (для научных статей часто EN, для локальной документации — родной язык). В случае противоречий он имеет приоритет.
+- **Исключение для обратного переноса:** Если ведомая версия решает что-то доказуемо лучше (более чёткая формулировка, исправленная ошибка), это ПРИНИМАЕТСЯ в ведущую версию — сначала выполнить обратный перенос, затем синхронизировать в обычном режиме. Проверьте техническую корректность перед тем, как принять «более красивую» формулировку.
 
-### 3. Parallelität prüfen
+### 3. Проверка параллельности
 
-Struktur zuerst, dann Inhalt:
+Сначала структура, затем содержание:
 
-1. **Gliederungsvergleich:** Abschnitte/Überschriften beider Fassungen nebeneinander —
-   fehlende, zusätzliche, umsortierte Abschnitte sind die groben Divergenzen.
-2. **Abschnittsweise Stichprobe** der übereinstimmenden Gliederung: Aussagen, Zahlen,
-   Verweise, Beispiele identisch? Besonders divergenzanfällig: Changelogs, Tabellen,
-   Zahlenwerte, Literatur-/Linkverzeichnisse, zuletzt bearbeitete Abschnitte.
-3. **Nicht übersetzbare Invarianten** prüfen: Code-Blöcke, Identifier, Formeln, Pfade
-   müssen in beiden Fassungen IDENTISCH sein (Code wird nie übersetzt).
+1. **Сравнение структуры:** Разделы и заголовки обеих версий бок о бок — отсутствующие, добавленные или переставленные разделы представляют собой крупные расхождения.
+2. **Пораздельная выборка** совпадающей структуры: совпадают ли утверждения, цифры, ссылки, примеры? Особенно подвержены расхождениям: журналы изменений (changelog), таблицы, числовые значения, списки литературы/ссылок, недавно отредактированные разделы.
+3. **Проверка непереводимых инвариантов:** Блоки кода, идентификаторы, формулы, пути должны быть ИДЕНТИЧНЫ в обеих версиях (код никогда не переводится).
 
-### 4. Beheben
+### 4. Устранение расхождений
 
-- Divergenzen in Richtung Leitsprache auflösen (bzw. nach Rücktransfer).
-- Sprachtypografie der Zielsprache respektieren (im Deutschen echte Umlaute ä ö ü ß,
-  keine ae/oe/ue-Ersatzschreibung; Anführungszeichen-Konventionen).
-- Metadaten nachziehen: Versionsnummern, Datumsfelder, Changelog-Einträge in BEIDEN
-  Fassungen (der Changelog selbst ist der häufigste Divergenzpunkt).
+- Устранить расхождения в направлении ведущего языка (или после обратного переноса).
+- Соблюдать типографику целевого языка (правила пунктуации, кавычки, языковые нормы).
+- Обновить метаданные: номера версий, поля дат, записи журнала изменений в ОБЕИХ версиях (сам журнал изменений — самая частая точка расхождения).
 
-### 5. Dokumentieren
+### 5. Документирование
 
-Ergebnis festhalten (was war divergent, was wurde übernommen, was rücktransferiert).
-Als periodischer Lauf über einen Bestand: mit dem Rotations-Gerüst kombinieren
-(`rotation-check`) — ein Dokument(-Paar) pro Lauf, Registry als Gedächtnis.
+Зафиксировать результат (что было расхождением, что было принято, а что перенесено обратно).
+В качестве периодической проверки фонда документов: объединить с фреймворком ротации (`rotation-check`) — один документ (или пара) за прогон, с использованием реестра в качестве памяти.
 
-## Erweiterung: Expansions-Audit (sollten MEHR Sprachen existieren?)
+## Расширение: Аудит расширения (нужно ли БОЛЬШЕ языков?)
 
-Neben dem Synchronhalten bestehender Fassungen gehört zur Sprachpflege die Frage, ob ein
-Dokument/Projekt WEITERE Sprachen verdient:
+Помимо поддержания синхронизации существующих версий, языковой уход включает вопрос о том, заслуживает ли документ/проект ДОПОЛНИТЕЛЬНЫХ языков:
 
-1. **Eignung bewerten** statt blind übersetzen: Zielgruppe, internationale Nutzbarkeit,
-   Store-/Web-Präsenz, Mobilität des Inhalts. Nicht jedes interne Dokument braucht Englisch;
-   nicht jede App braucht fünf Sprachen.
-2. **Technische Vorbereitung prüfen:** Ist das Ziel überhaupt auf Sprachdateien/Parallel-
-   Fassungen vorbereitet (i18n-Struktur, Namenskonvention)? Wenn nein, ist DAS die erste
-   Aufgabe, nicht die Übersetzung.
-3. **Befund dokumentieren, nicht sofort massenübersetzen:** Konkrete Übersetzungsaufgaben
-   in die projektlokale TODO-Datei; „keine weitere Sprache sinnvoll" ist ein gültiges,
-   festzuhaltendes Ergebnis.
-4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
-   gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
+1. **Оценивать целесообразность**, а не переводить вслепую: целевая аудитория, международная применимость, присутствие в магазинах/вебе, мобильность контента. Не каждому внутреннему документу нужен английский язык; не каждому приложению нужны пять языков.
+2. **Проверить техническую подготовку:** Подготовлен ли проект к языковым файлам/параллельным версиям (структура i18n, соглашение о именовании)? Если нет, то ЭТО первоочередная задача, а не перевод.
+3. **Зафиксировать диагноз, а не переводить массово немедленно:** Конкретные задачи по переводу занести в локальный TODO-файл проекта; вывод «никакой другой язык не имеет смысла» является действительным результатом, подлежащим фиксации.
+4. **Контроль качества догнанных версий:** Выборочно проверять автоматически сгенерированные переводы по ведущей версии (Раздел 3), прежде чем считать их «существующими».
 
-## Пример и применение & Usage
+## Пример и использование
 
 ```text
-Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
+Задача: «Проверь, синхронизирована ли статья в DE и EN».
 
-1. Bestand: paper_en.tex (führend) + paper_de.tex vorhanden.
-2. Gliederung: DE fehlt der neue Abschnitt 4.2 (letzte EN-Revision); DE hat einen
-   besseren Beweis-Absatz in 3.1.
-3. Rücktransfer: 3.1-Formulierung fachlich geprüft → in EN übernommen.
-4. Nachziehen: 4.2 nach DE übersetzt; Zahlen in Tabelle 2 abgeglichen (DE hatte
-   veraltete Werte); Literaturverzeichnis identisch gemacht.
-5. Registry-Eintrag: „paper-X | 2026-07-03 | de-en-sync | 3 Divergenzen behoben,
-   1 Rücktransfer | nächster Check nach nächster EN-Revision".
+1. Состав: paper_en.tex (ведущий) + paper_de.tex присутствуют.
+2. Структура: В DE отсутствует новый раздел 4.2 (последняя редакция EN); в DE есть более удачный абзац с доказательством в 3.1.
+3. Обратный перенос: Формулировка 3.1 проверена технически → перенесена в EN.
+4. Доработка: 4.2 переведён на DE; цифры в Таблице 2 сопоставлены (в DE были устаревшие значения); список литературы унифицирован.
+5. Запись в реестре: «paper-X | 2026-07-03 | de-en-sync | устранены 3 расхождения, 1 обратный перенос | следующая проверка после следующей редакции EN».
 ```
 
-## Red Flags
+## Критические ошибки (Red Flags)
 
-| Gedanke | Realität |
+| Мысль | Реальность |
 | --- | --- |
-| „Ich übersetze die Unterschiede einfach frisch" | Erst Leitsprache + Rücktransfer-Frage klären — sonst wird die bessere Lösung überschrieben. |
-| „Die Gliederung passt, also ist es synchron" | Zahlen, Changelogs und Verweise divergieren zuerst — Stichprobe in die Tiefe ist Pflicht. |
-| „Code-Kommentare übersetze ich mit" | Code-Blöcke und Identifier bleiben in beiden Fassungen identisch (englisch). |
-| „Ich synchronisiere alle Dokumente in einem Rutsch" | Ein Paar pro Lauf (Rotations-Gerüst) hält den Abgleich prüfbar. |
+| «Я просто заново переведу различия» | Сначала уточните ведущий язык и вопрос обратного переноса — иначе более удачное решение будет перезаписано. |
+| «Структура совпадает, значит все синхронизировано» | Цифры, чейнджлоги и ссылки расходятся первыми — глубокая выборочная проверка обязательна. |
+| «Комментарии к коду я тоже переведу» | Блоки кода и идентификаторы остаются идентичными в обеих версиях (на английском). |
+| «Я синхронизирую все документы за один раз» | Одна пара за прогон (через фреймворк ротации) сохраняет проверку контролируемой. |
 
-## Verwandte Skills
+## Связанные навыки
 
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
+- `rotation-check` — Фреймворк для периодической проверки фонда документов.
+- `workflow-extract` — Если эту проверку требуется настроить как постоянную автоматизацию.
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-03)
-- Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für
-  nachgezogene Fassungen) — integriert statt als eigener i18n-coverage-audit-Skill
-  (Dedup-Entscheid).
+- Добавлен аудит расширения (оценка целесообразности i18n, техническая подготовка, QA для догнанных версий) — интегрирован вместо отдельного навыка i18n-coverage-audit (решение по дедупликации).
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation
-  „research-paper-de-en-synchronisationscheck", verallgemeinert auf beliebige parallel
-  geführte Sprachfassungen (Papers, READMEs, Skills, Website-Texte).
+- Начальная версия. Абстрагировано из автоматизации Codex «research-paper-de-en-synchronisationscheck», обобщено для любых параллельно ведомых языковых версий (статьи, README, навыки, тексты сайтов).

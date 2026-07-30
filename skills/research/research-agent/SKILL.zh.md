@@ -5,7 +5,8 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [中文] 智能体技能: research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+description: 针对 PubMed 和 arXiv 的研究流水线。使用纯 Python 标准库实现快速检索与结构化文献综述。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,22 +16,18 @@ tags: [pubmed, arxiv, literature-review, research, science]
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `research-agent`.
+> **中文** — `research-agent` 官方中文版本。
 
 
+# Research Agent (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+用于科学文献检索的模块化研究流水线。
+完全仅使用 Python 标准库（urllib、xml、json）。
 
-
-# Research Agent (English)
-
-Modular research pipeline for scientific literature search.
-Uses exclusively Python standard library (urllib, xml, json).
-
-## Architecture
+## 架构
 
 ```
 ResearchAgent (Orchestrator)
@@ -43,26 +40,26 @@ ResearchAgent (Orchestrator)
     literature_review.py  4-phase literature review
 ```
 
-## Usage as Python Library
+## 作为 Python 库使用
 
 ```python
 from scripts.agent import ResearchAgent
 
 agent = ResearchAgent()
 
-# Quick search (English)
+# Quick search (Deutsch)
 result = agent.search("machine learning diagnostics", max_results=10)
 print(result)
 
-# Structured literature review (English)
+# Structured literature review (Deutsch)
 plan = agent.create_review_plan("transformer architectures", years=3)
 print(plan.total_articles, "articles found")
 
-# Save result (English)
+# Save result (Deutsch)
 agent.save_result(result, "research_ml.md", fmt="markdown")
 ```
 
-## Usage as CLI
+## 作为 CLI 使用
 
 ```bash
 cd scripts
@@ -70,16 +67,16 @@ python -m ResearchAgent search "quantum computing" --max 20
 python -m ResearchAgent review "CRISPR gene editing" --years 5
 ```
 
-## Data Sources
+## 数据源
 
-| Source | API | Rate Limit | Access |
-|--------|-----|------------|--------|
-| PubMed | NCBI E-utilities | 3/s (without key), 10/s (with key) | Free |
-| arXiv | Atom REST API | None documented | Free |
+| 数据源 | API | 速率限制 | 访问权限 |
+|--------|-----|----------|----------|
+| PubMed | NCBI E-utilities | 3/s（无 API Key），10/s（有 API Key） | 免费 |
+| arXiv | Atom REST API | 未记录 | 免费 |
 
-Extensible: New sources implement the `Source` ABC from `sources/base.py`.
+可扩展：新数据源只需继承 `sources/base.py` 中的 `Source` 抽象基类（ABC）。
 
-## Extension
+## 扩展
 
 ```python
 from scripts.sources.base import Source, SearchResult
@@ -100,18 +97,18 @@ class MySource(Source):
         return True
 ```
 
-## BACH Notes
+## BACH 说明
 
-> Only relevant when used within BACH.
+> 仅在 BACH 内部使用时相关。
 
 ```python
 from scripts.agent import ResearchAgent
 agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
-## 变更日志与历史
+## 变更日志
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/ResearchAgent to skill library
-- PubMed + arXiv sources
-- QuickSearch + LiteratureReview workflows
+- 从 MODULAR_AGENTS/ResearchAgent 迁移至技能库
+- PubMed + arXiv 数据源
+- QuickSearch + LiteratureReview 工作流

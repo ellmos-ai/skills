@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [Español] Documentación completa para la habilidad orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: Protocolo neutral en cuanto a proveedores para descomponer tareas complejas, encargar workers independientes y verificar de forma basada en evidencia sus resultados.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,92 +18,75 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `orchestrator`.
+> **Español** — Versión oficial en español de `orchestrator`.
 
 
+# Orchestrator (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Descripción general y propósito
 
+Utiliza este skill cuando una tarea conste de al menos dos paquetes de trabajo ampliamente independientes y la delegación aporte una ventaja real de tiempo, contexto o calidad. Para tareas pequeñas y estrechamente acopladas, trabaja directamente.
 
-> **English Translation** — Official English version of `orchestrator`.
+El skill describe un protocolo. El inicio, la interrupción y la reanudación concretos de los workers se realizan a través de las capacidades del runtime correspondiente.
 
+## Límite de autoridad
 
-# Orchestrator (English)
+La delegación no amplía los permisos. Cada worker recibe como máximo el alcance y los derechos de modificación que ya se aplican a la tarea principal. Las acciones externas, irreversibles o que requieran aprobación de otro modo permanecen sujetas a aprobación.
 
-## Descripción General y Propósito & Purpose
+## Procedimiento
 
-Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
-Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
-Qualitätsvorteil bringt. Für kleine, eng gekoppelte Aufgaben arbeite direkt.
+### 1. Evaluar la situación
 
-Der Skill beschreibt ein Protokoll. Das konkrete Starten, Unterbrechen und
-Wiederaufnehmen von Workern erfolgt über die Fähigkeiten der jeweiligen Runtime.
+1. Registrar el objetivo, los criterios de éxito y las exclusiones de la tarea principal.
+2. Comprobar las reglas del proyecto, bloqueos, cambios en curso y presupuestos disponibles.
+3. Antes del dispatch, guardar el estado actual de bloqueos, estado y diff de las áreas afectadas como baseline. Solo así se pueden distinguir posteriormente con fiabilidad los cambios externos existentes de los cambios del worker.
+4. Paralelizar solo aquellos paquetes de trabajo que sean lo suficientemente independientes.
+5. Separar las áreas de escritura superpuestas o procesarlas secuencialmente.
 
-## Autoritätsgrenze
+### 2. Escribir el contrato de encargo
 
-Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Scope
-und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
-irreversible oder anderweitig freigabepflichtige Aktionen bleiben
-freigabepflichtig.
+Antes de cada dispatch, crear un contrato breve y verificable:
 
-## Ablauf
-
-### 1. Lage prüfen
-
-1. Ziel, Erfolgskriterien und Ausschlüsse der Hauptaufgabe festhalten.
-2. Projektregeln, Sperren, laufende Änderungen und verfügbare Budgets prüfen.
-3. Vor dem Dispatch den aktuellen Lock-, Status- und Diff-Zustand der betroffenen
-   Bereiche als Baseline sichern. Nur so lassen sich vorhandene fremde Änderungen
-   später zuverlässig von Worker-Änderungen unterscheiden.
-4. Nur Arbeitspakete parallelisieren, die unabhängig genug sind.
-5. Überschneidende Schreibbereiche trennen oder sequentiell bearbeiten.
-
-### 2. Auftragsvertrag schreiben
-
-Vor jedem Dispatch einen kurzen, prüfbaren Vertrag erstellen:
-
-| Feld | Pflichtinhalt |
+| Campo | Contenido obligatorio |
 |---|---|
-| Kennung | stabile ID des Arbeitspakets |
-| Ziel | genau ein konkretes Ergebnis |
-| Eingaben | relevante Dateien, Daten oder Kontextquellen |
-| Positiver Scope | was gelesen oder geändert werden darf |
-| Negativer Scope | was ausdrücklich unberührt bleibt |
-| Erfolgskriterium | beobachtbare Bedingung für „fertig“ |
-| Evidenz | erwarteter Nachweis, etwa Test, Diff oder Fundstelle |
-| Rückgabeformat | kompakte, strukturierte Abschlussmeldung |
+| Identificador | ID estable del paquete de trabajo |
+| Objetivo | exactamente un resultado concreto |
+| Entradas | archivos, datos o fuentes de contexto relevantes |
+| Alcance positivo | lo que se permite leer o modificar |
+| Alcance negativo | lo que permanece expresamente sin tocar |
+| Criterio de éxito | condición observable para "hecho" |
+| Evidencia | prueba esperada, como test, diff o referencia |
+| Formato de respuesta | mensaje de finalización compacto y estructurado |
 
-Ein Worker bekommt nur den Kontext, den er für diesen Vertrag benötigt.
+Un worker recibe únicamente el contexto necesario para este contrato.
 
-### 3. Ausführen und beobachten
+### 3. Ejecutar y observar
 
-- Fan-out klein halten und nur bei unabhängigem Nutzen vergrößern.
-- Fortschritt über Runtime-Status oder einen projektüblichen Checkpoint verfolgen.
-- Bei Konflikten, Scope-Ausweitung oder fehlender Autorität stoppen und eskalieren.
-- Ein fehlgeschlagener Worker darf unabhängige Arbeitspakete nicht automatisch
-  blockieren.
+- Mantener un fan-out pequeño y aumentarlo solo si existe un beneficio independiente.
+- Seguir el progreso a través del estado del runtime o un checkpoint habitual del proyecto.
+- En caso de conflictos, ampliación del alcance o falta de autoridad, detenerse y escalar.
+- Un worker fallido no debe bloquear automáticamente paquetes de trabajo independientes.
 
-### 4. Ergebnisse abnehmen
+### 4. Verificar resultados
 
-Eine Fertigmeldung ist zunächst eine Behauptung. Der Orchestrator prüft selbst:
+Una notificación de finalización es inicialmente una afirmación. El orchestrator lo verifica por sí mismo:
 
-1. Existiert das behauptete Artefakt oder die genannte Änderung?
-2. Gehört es zum vereinbarten Scope?
-3. Besteht der vereinbarte Test oder Nachweis aktuell?
-4. Wurden fremde Änderungen, Sperren und negative Scopes respektiert?
-5. Widersprechen sich Ergebnisse verschiedener Worker?
+1. ¿Existe el artefacto afirmado o el cambio mencionado?
+2. ¿Pertenece al alcance acordado?
+3. ¿Pasa actualmente el test o la prueba acordada?
+4. ¿Se respetaron los cambios externos, bloqueos y alcances negativos?
+5. ¿Se contradicen los resultados de diferentes workers?
 
-Erst danach gilt ein Arbeitspaket als abgeschlossen.
+Solo entonces se considera completado un paquete de trabajo.
 
-### 5. Integrieren und sichern
+### 5. Integrar y asegurar
 
-- Konflikte bewusst auflösen; Ergebnisse nicht blind aneinanderhängen.
-- Erforderliche Gesamttests nach der Integration erneut ausführen.
-- Offene, fehlgeschlagene und zurückgestellte Pakete klar ausweisen.
-- Bei längeren Läufen Ziel, Status, Evidenz und nächsten Schritt in einem
-  wiederauffindbaren Checkpoint sichern.
+- Resolver los conflictos de forma consciente; no concatenar resultados a ciegas.
+- Volver a ejecutar los tests globales necesarios tras la integración.
+- Identificar claramente los paquetes pendientes, fallidos y pospuestos.
+- En ejecuciones prolongadas, guardar el objetivo, estado, evidencia y siguiente paso en un checkpoint recuperable.
 
-## Minimaler Worker-Prompt
+## Prompt mínimo del Worker
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -115,27 +98,24 @@ Belege mit: <Test, Diff oder Fundstelle>
 Antworte als: <Rückgabeformat>
 ```
 
-## Stop-Bedingungen
+## Condiciones de parada
 
-Stoppe nur das betroffene Arbeitspaket, wenn sein Scope, seine Autorität oder
-seine Evidenz unklar wird. Unabhängige, sichere Pakete dürfen weiterlaufen.
+Detener solo el paquete de trabajo afectado si su alcance, autoridad o evidencia no están claros. Los paquetes independientes y seguros pueden continuar ejecutándose.
 
-Stoppe die gesamte Delegation, wenn:
+Detener toda la delegación si:
 
-- die Teilaufgaben nicht mehr unabhängig sind,
-- ein gemeinsamer Schreibbereich nicht sicher getrennt werden kann,
-- Regeln, Sperren oder Autorität für den gesamten verbleibenden Scope unklar sind,
-- die erwarteten Kosten den erkennbaren Nutzen übersteigen,
-- die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
+- las subtareas ya no son independientes,
+- no se puede separar con seguridad un área de escritura compartida,
+- las reglas, bloqueos o autoridad para todo el alcance restante no están claros,
+- los costes previstos superan el beneficio reconocible,
+- no se puede generar o verificar la evidencia requerida.
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.1.0 (2026-07-28)
-- Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.
-- Auftragsvertrag, Autoritätsgrenze, Evidenzabnahme und Checkpoints als
-  portable Kernmechanik herausgearbeitet.
-- Baseline für fremde Änderungen sowie paketlokale und globale Stopps
-  ausdrücklich getrennt.
+- Se eliminaron las vinculaciones de usuario, ruta, modelo y proveedor.
+- Se detallaron el contrato de encargo, el límite de autoridad, la verificación de evidencias y los checkpoints como mecánica central portable.
+- Se separó explícitamente la baseline para cambios externos, así como las paradas locales de paquete y globales.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Versión inicial local.

@@ -1,129 +1,141 @@
 ---
+name: positive-psychology
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: セリグマンのポジティブ心理学：PERMAモデル、強み（VIA）、感謝のワーク、フロー理論、レジリエンス要因。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [positive-psychology, perma, flow, gratitude, resilience, seligman]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `positive-psychology`.
+> **日本語** — `positive-psychology` の公式日本語版。
 
 
+# ポジティブ心理学 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> セリグマンとチクセントミハイに基づく強みへの焦点化、感謝、フロー、PERMAモデル
 
-
-# Positive Psychology (English)
-
-> Strengths focus, gratitude, flow, and PERMA according to Seligman and Csikszentmihalyi
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Positive Psychology is the scientific study of what makes life worth living (Seligman & Csikszentmihalyi, 2000). In contrast to clinical psychology (What causes illness?), it asks: What makes people healthy, happy, and resilient?
-
-Founders: Martin Seligman (APA President 1998) initiated the movement. Other pioneers: Mihaly Csikszentmihalyi (Flow), Christopher Peterson (Character Strengths), Barbara Fredrickson (Broaden-and-Build), Ed Diener (Subjective Well-Being).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. PERMA Model (Seligman, 2011)
+## 背景とコンテキスト
 
-Five pillars of well-being according to Seligman ("Flourish"):
+ポジティブ心理学とは、「人生を生きるに値するものにするものは何か」を研究する科学的学問です（Seligman & Csikszentmihalyi, 2000）。従来の臨床心理学（何が病気を引き起こすのか？）とは対照的に、「何が人を健康にし、幸福にし、レジリエント（しなやか）にするのか？」を問います。
 
-### P — Positive Emotions
-- Joy, gratitude, serenity, interest, hope, pride, love
-- Fredrickson: At least a 3:1 ratio of positive to negative emotions
-- Exercise: "Three Good Things" (see below)
+創始者：マーティン・セリグマン（Martin Seligman, 1998年APA会長）がこの運動を提唱しました。その他のパイオニア：ミハイ・チクセントミハイ（Mihaly Csikszentmihalyi, フロー理論）、クリストファー・ピーターソン（Christopher Peterson, 強みの分類）、バーバラ・フレドリクソン（Barbara Fredrickson, 拡張-形成理論）、エド・ディーナー（Ed Diener, 主観的ウェルビーイング）。
 
-### E — Engagement
-- Being fully absorbed in an activity (flow state)
-- Using one's strengths in daily life
-- Challenge and skill in balance
-
-### R — Relationships (Positive Relationships)
-- Social connectedness as the strongest predictor of well-being
-- Active-constructive responding to others' good news
-- Small kindnesses (Random Acts of Kindness)
-
-### M — Meaning
-- Belonging to and serving something greater than oneself
-- Meaning through work, family, community, spirituality
-- Frankl: "He who has a why can bear almost any how"
-
-### A — Achievement
-- Experiencing mastery and competence
-- Setting and achieving realistic goals
-- Grit: Perseverance + passion for long-term goals (Duckworth, 2016)
+**注意：** 本スキルは心理教育的サポートを提供するものであり、専門的な心理療法や治療の代わりになるものではありません。
+**絶対に実施してはならない手法：** EMDR、受容・持続ばく露療法（PE）、ナラティブばく露療法（NET）。
 
 ---
 
-## 2. Character Strengths (VIA Classification)
+## 1. PERMAモデル (Seligman, 2011)
 
-Peterson and Seligman (2004) identified 24 universal character strengths in 6 virtue categories:
+セリグマンが提唱するウェルビーイングの5つの柱（『持続する幸福の力』）：
 
-| Virtue | Strengths |
+### P — 肯定的感情 (Positive Emotions)
+- 喜び、感謝、安らぎ、好奇心、希望、誇り、愛
+- フレドリクソン：肯定的感情と否定的感情の比率は少なくとも 3:1 以上が望ましい
+- エクササイズ：「3つのよいこと（Three Good Things）」（下記参照）
+
+### E — エンゲージメント / 没頭 (Engagement)
+- 活動への完全な没頭（フロー状態）
+- 日常生活の中で自分の強みを活用すること
+- 挑戦（課題）と技能のバランス
+
+### R — 肯定的関係性 (Positive Relationships)
+- 社会的つながりはウェルビーイングの最も強力な予測因子
+- 他者の良い知らせに対して積極的・建設的に応答すること（Active-Constructive Responding）
+- 小さな親切心（Random Acts of Kindness）
+
+### M — 意味・一貫性 (Meaning)
+- 自分自身を超えたより大きな存在への所属と貢献
+- 仕事、家庭、地域社会、スピリチュアルな活動を通じた意味の追求
+- フランクル：「生きる『なぜ』を知っている者は、ほぼあらゆる『いかに』に耐えられる」
+
+### A — 達成感・成就 (Achievement)
+- 熟達感や能力感の体験
+- 現実的な目標の設定と達成
+- グリット（Grit）：长期的な目標に対する情熱と粘り強さ（Duckworth, 2016）
+
+---
+
+## 2. 強みの分類 (VIA分類法)
+
+ピーターソンとセリグマン（Peterson & Seligman, 2004）は、6つの美徳カテゴリーにおいて24の普遍的な性格的強みを特定しました。
+
+| 美徳 | 性格的強み |
 |--------|----------|
-| Wisdom | Creativity, Curiosity, Judgment, Love of Learning, Perspective |
-| Courage | Bravery, Perseverance, Honesty, Zest |
-| Humanity | Love, Kindness, Social Intelligence |
-| Justice | Teamwork, Fairness, Leadership |
-| Temperance | Forgiveness, Humility, Prudence, Self-Regulation |
-| Transcendence | Appreciation of Beauty, Gratitude, Hope, Humor, Spirituality |
+| 智慧 (Wisdom) | 創造性、好奇心、知的柔軟性・批判的思考、学習欲、大局観・洞察 |
+| 勇気 (Courage) | 勇敢さ、根気・粘り強さ、誠実さ、熱意・活力 |
+| 人間性 (Humanity) | 愛する力・愛される力、親切心、社会的知性 |
+| 正義 (Justice) | チームワーク、公平さ、リーダーシップ |
+| 節制 (Temperance) | 寛容さ・慈悲、謙虚さ、思慮深さ、自己コントロール |
+| 超越性 (Transcendence) | 美と卓越性への感謝、感謝の心、希望、ユーモア、精神性 |
 
-**Signature strengths:** The 3-5 strengths that feel most authentic. Those who use their signature strengths daily are demonstrably more satisfied and less depressed (Seligman et al. 2005).
+**特徴的な強み（シグネチャー・ストレングス）：** 最も自分らしく感じられる 3〜5 つの強み。自分のシグネチャー・ストレングスを日々活用している人は、満足度が実証的に高く、抑うつ傾向が低いことが示されています（Seligman et al. 2005）。
 
-**VIA Survey:** Free at viacharacter.org (scientifically validated)
-
----
-
-## 3. Gratitude Exercises
-
-### 3.1 Three Good Things (Seligman et al. 2005)
-
-**Procedure:**
-1. Every evening, write down 3 good things from the day
-2. For each one note: Why did it happen?
-3. Duration: At least 1 week, ideally ongoing
-
-**Evidence:** Significantly increased well-being and reduced depressive symptoms over 6 months (Seligman et al. 2005)
-
-### 3.2 Gratitude Journal
-
-Extension of Three Good Things:
-- Morning: What am I grateful for today? (3 items)
-- Evening: What was good today? What did I contribute?
-- Shift perspective: People, experiences, abilities, everyday things
-
-### 3.3 Gratitude Letter (Gratitude Visit)
-
-**Procedure:**
-1. Identify a person you never properly thanked
-2. Write a specific letter (300 words, concrete)
-3. Visit the person and read the letter aloud
-
-**Evidence:** Strongest short-term effect of all positive psychology interventions (Seligman et al. 2005). Effect lasts approximately 1 month.
+**VIAテスト：** viacharacter.org にて無料で受検可能（科学的に妥当性が検証済み）。
 
 ---
 
-## 4. Flow Theory (Csikszentmihalyi, 1990)
+## 3. 感謝のエクササイズ
 
-### Definition
-Flow is a state of complete immersion in an activity, where action flows effortlessly and time and self-consciousness recede into the background.
+### 3.1 3つのよいこと (Seligman et al. 2005)
 
-### Conditions for Flow
+**手順：**
+1. 毎晩、その日に起こった「よかったこと」を3つ書き出す。
+2. それぞれについて「なぜそれが起こったのか？」をメモする。
+3. 期間：最低1週間、理想的には継続的に行う。
 
-| Condition | Description |
+**エビデンス：** 6ヶ月間にわたりウェルビーイングを有意に向上させ、抑うつ症状を軽減することが示されています（Seligman et al. 2005）。
+
+### 3.2 感謝日記
+
+「3つのよいこと」の発展形：
+- 朝：今日感謝していることは何か？（3項目）
+- 夜：今日よかったことは何か？自分はどのように貢献したか？
+- 視点の切り替え：人物、体験、能力、日常の細やかな出来事。
+
+### 3.3 感謝の手紙と感謝の訪問 (Gratitude Visit)
+
+**手順：**
+1. これまで十分なお礼を伝えられていない人物を1人思い浮かべる。
+2. 具体的な感謝の手紙を書く（約300語程度、具体的に）。
+3. その人を実際に訪問し、手紙を声に出して読み上げる。
+
+**エビデンス：** ポジティブ心理学のあらゆる介入の中で最も強力な短期効果を持ちます（Seligman et al. 2005）。効果は約1ヶ月持続します。
+
+---
+
+## 4. フロー理論 (Csikszentmihalyi, 1990)
+
+### 定義
+フローとは、ある活動に完全に没頭している状態であり、行動が無理なくスムーズに流れ、時間感覚や自我意識が背景に退く状態を指します。
+
+### フロー発生の条件
+
+| 条件 | 説明 |
 |-----------|-------------|
-| Balance | Challenge matches skill level |
-| Clear goals | You know exactly what to do |
-| Immediate feedback | Instant feedback on progress |
-| Concentration | Full attention on the task |
-| Control | Feeling of being able to master the situation |
-| Intrinsic motivation | The activity is rewarding in itself |
+| バランス | 課題の難易度と自身の技能レベルが吊り合っている |
+| 明確な目標 | 何をすべきかが正確に分かっている |
+| 即時フィードバック | 進捗状況についての即座のフィードバックがある |
+| 集中 | 課題に全注意が向けられている |
+| 統制感 | 状況をコントロールできているという感覚 |
+| 内発的動機づけ | 活動自体が報酬となっている |
 
-### Flow Channel
+### フロー・チャンネル
 
 ```
 Challenge
@@ -135,64 +147,63 @@ Challenge
                     Skill
 ```
 
-### Fostering Flow
-- Eliminate distractions (phone away, door closed)
-- Break tasks into manageable units
-- Adjust difficulty level (not too easy, not too hard)
-- Establish regular practice times
+### フローを促進する方法
+- 妨げとなる要素を排除する（スマホを遠ざける、部屋のドアを閉める）
+- タスクを扱いやすい最小単位に分解する
+- 難易度を調整する（易しすぎず、難しすぎない）
+- 定期的な没頭時間をスケジュール化する
 
 ---
 
-## 5. Resilience Factors
+## 5. レジリエンス要因
 
-Resilience = psychological resistance to adversity.
+レジリエンス ＝ 逆境に対する心理的適応力・回復力。
 
-### The 7 Pillars of Resilience (after Reivich & Shatte, 2002)
+### レジリエンスの7つの柱 (Reivich & Shatte, 2002)
 
-1. **Emotion regulation:** Perceiving and managing one's own feelings
-2. **Impulse control:** Consciously directing actions rather than reacting
-3. **Causal analysis:** Realistically assessing causes
-4. **Self-efficacy:** Confidence in one's own competence
-5. **Empathy:** Recognizing and understanding others' emotions
-6. **Optimism:** Realistic, positive expectations for the future
-7. **Goal orientation:** Setting and pursuing meaningful goals
+1. **感情調節：** 自らの感情を認識し、コントロールすること
+2. **衝動制御：** 反射的に反応するのではなく、行動を意識的に導くこと
+3. **原因分析：** 原因を現実的に評価すること
+4. **自己効力感：** 自分の能力に対する確信
+5. **共感性：** 他者の感情を認識し理解すること
+6. **楽観主義：** 将来に対する現実的で肯定的な期待
+7. **目標設定：** 意味のある目標を設定し追及すること
 
-### Building Resilience
-- Consciously use strengths (VIA strengths)
-- Maintain social network (relationships as the #1 protective factor)
-- Self-care: Sleep, exercise, nutrition, recovery
-- Cognitive flexibility: Seek alternative perspectives
-- Find meaning and significance (even in difficult situations)
+### レジリエンスを高めるアプローチ
+- 強みを意識的に活用する（VIA強み）
+- ソーシャルネットワークを維持する（対人関係は最大の保護要因）
+- セルフケア：睡眠、運動、栄養、休息・回復
+- 認知の柔軟性：代替的な視点を探求する
+- 意味と意義を見出す（困難な状況においても）
 
 ---
 
-## Ethics and Boundaries
+## 倫理と限界
 
-**An AI assistant may:**
-- Explain the PERMA model and character strengths (psychoeducation)
-- Guide and support gratitude exercises
-- Discuss flow conditions
-- Convey resilience factors
-- Support signature strengths reflection
+**AIアシスタントができること：**
+- PERMAモデルや強みの概念についての説明（心理教育）
+- 感謝のエクササイズのガイドとサポート
+- フロー発生条件についての話し合い
+- レジリエンス要因の解説
+- シグネチャー・ストレングスの振り返りの支援
 
-**An AI assistant must NOT:**
-- Treat clinical depression solely with positive psychology
-- Clinically interpret VIA survey results
-- Recommend positive psychology as a substitute for therapy
-- Foster toxic positivity ("Just be grateful")
+**AIアシスタントが禁止されていること：**
+- ポジティブ心理学のみで臨床的うつ病を治療しようとすること
+- VIAテストの結果を臨床的に診断・解釈すること
+- 専門的な心理療法の代替としてポジティブ心理学を推奨すること
+- 有害なポジティビティ（Toxic Positivity「ただ感謝すればいい」等）を助長すること
 
-**Progress tracking:**
-- Well-being before/after exercise (0-10 scale)
-- Gratitude streak: How many consecutive days?
-- Flow log: When and during which activities do I experience flow?
-- Signature strengths: How often used this week?
+**進捗のモニタリング：**
+- エクササイズ前後のウェルビーイング評価（0〜10のスケール）
+- 感謝ワークの連続日数（何日継続できたか）
+- フローログ：いつ、どのような活動中にフローを体験したか
+- シグネチャー・ストレングス：今週何回活用できたか
 
-**In case of acute crisis, ALWAYS refer to:**
+**急性危機・自傷他害のおそれがある場合は必ず以下に繋いでください：**
+- こころの健康相談統一ダイヤル (JP): 0570-064-556
+- よりそいホットライン (JP): 0120-279-338
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 119 / 110 (JP), 911 (US), 112 (EU)
 
 ---
 

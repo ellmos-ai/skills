@@ -5,7 +5,8 @@ type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
 updated: 2026-07-27
-description: [Русский] Навык агента для agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
+description: Независимый от провайдера планировщик для синхронизации конфигураций MCP, навыков и файлов правил между провайдерами агентов и классами приложений. Он обнаруживает подтвержденные локальные параметры и позволяет пользователю выбирать источник истины, цели, направление и разрешение конфликтов.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -16,33 +17,23 @@ language: ru
 status: active
 aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `agent-config-sync`.
+> **Русский** — Официальная русская версия `agent-config-sync`.
 
 
+# Agent Config Sync (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Agent Config Sync (English)
-
-The skill separates endpoint selection, resources and truth. Run:
+Данный навык разделяет выбор конечных точек (endpoints), ресурсы и источник истины (truth). Запуск:
 
 ```bash
 python scripts/sync.py --discover
 python scripts/sync.py --offer
 ```
 
-The user can select an explicit endpoint list, one provider across app classes,
-one app class across providers, or all detected endpoints. Detection is
-evidence, not authorization.
+Пользователь может выбрать явный список конечных точек, одного провайдера для всех классов приложений, один класс приложений для всех провайдеров или все обнаруженные конечные точки. Обнаружение является подтверждением наличия (evidence), а не авторизацией.
 
-Truth can be one endpoint, one file, an ordered set of files such as multiple
-`AGENTS.md` layers, or a skills directory. No filename or provider is the
-implicit hub. Without a selected truth source, plans stay blocked.
+Источником истины (truth) может быть одна конечная точка, один файл, упорядоченный набор файлов (например, несколько уровней `AGENTS.md`) или каталог навыков. Ни одно имя файла или провайдер не является неявным хабом. Без выбранного источника истины планирование остается заблокированным.
 
-Review `--status` and `--plan`; only use `--apply --yes` after approval.
-MCP blocks and skill directories are implemented. Rule-file topologies remain
-fail-closed until the user selects a merge/redirect adapter.
+Проверьте `--status` и `--plan`; используйте `--apply --yes` только после одобрения. Реализована поддержка блоков MCP и каталогов навыков. Топологии файлов правил остаются закрытыми при сбое (fail-closed), пока пользователь не выберет адаптер слияния/перенаправления.

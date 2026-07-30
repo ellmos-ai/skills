@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [Español] Documentación completa para la habilidad location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: Búsqueda de ubicaciones, restaurantes y hoteles a través de OpenStreetMap (Nominatim + Overpass API). Devuelve Puntos de Interés (POI) cerca de una ubicación o realiza búsquedas por texto libre.
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -12,79 +12,75 @@ languages: [de, en]
 dependencies: {'python': ['urllib.request', 'urllib.parse', 'urllib.error', 'json', 'time']}
 runtime: python3
 entry_point: location_suche_core.py
-provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\\n'}
+provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\n'}
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `location-suche`.
+> **Español** — Versión oficial en español de `location-suche`.
 
 
+# Búsqueda de Ubicaciones (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Location Search (English)
-
-**Location, restaurant and hotel search via OpenStreetMap**
+**Búsqueda de ubicaciones, restaurantes y hoteles a través de OpenStreetMap**
 
 ---
 
-## Descripción General y Propósito & Purpose
+## Visión general y propósito
 
-Searches for restaurants, hotels, cafes and other places using the
-OpenStreetMap services Nominatim (geocoding) and Overpass (POI search).
-No API key required. No persistent store.
+Busca restaurantes, hoteles, cafeterías y otros lugares utilizando los
+servicios de OpenStreetMap: Nominatim (geocodificación) y Overpass (búsqueda de POI).
+No se requiere clave de API. Sin almacenamiento persistente.
 
 ---
 
-## Triggers
+## Activadores
 
-| Phrase | Action |
+| Frase | Acción |
 |---|---|
-| "Find a restaurant in Munich" | POI search: category=restaurant, near=Munich |
-| "Hotels near Vienna" | POI search: category=hotel, near=Vienna |
-| "Where is the Eiffel Tower?" | Nominatim free-text search |
-| "Find cafes in Berlin" | POI search: category=cafe, near=Berlin |
-| "Search for pharmacy near Potsdam" | POI search: category=pharmacy, near=Potsdam |
+| "Encuentra un restaurante en Múnich" | Búsqueda de POI: category=restaurant, near=Munich |
+| "Hoteles cerca de Viena" | Búsqueda de POI: category=hotel, near=Vienna |
+| "¿Dónde está la Torre Eiffel?" | Búsqueda por texto libre en Nominatim |
+| "Encuentra cafeterías en Berlín" | Búsqueda de POI: category=cafe, near=Berlin |
+| "Buscar farmacia cerca de Potsdam" | Búsqueda de POI: category=pharmacy, near=Potsdam |
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
-1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
-   and a location → step 2. Otherwise free text → step 4.
-2. **Geocode location:** Nominatim provides coordinates for the named location.
-3. **Search POIs:** Overpass API searches for venues of the category within radius.
-4. **Display result:** List with name, address, distance (m).
-5. **Free-text search (fallback):** Nominatim free-text provides direct hits.
+1. **Detectar activador:** ¿Contiene la solicitud una categoría (restaurante, hotel, etc.)
+   y una ubicación? → paso 2. De lo contrario, texto libre → paso 4.
+2. **Geocodificar ubicación:** Nominatim proporciona las coordenadas para la ubicación indicada.
+3. **Buscar POI:** La API de Overpass busca lugares de la categoría dentro del radio especificado.
+4. **Mostrar resultado:** Lista con nombre, dirección y distancia (m).
+5. **Búsqueda por texto libre (alternativa):** La búsqueda directa por texto libre en Nominatim proporciona coincidencias directas.
 
 ---
 
 ## CLI
 
 ```bash
-# POI search (category + location) (English)
+# POI search (category + location) (Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Geocode location (English)
+# Geocode location (Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburg Gate Berlin"
 
-# Adjust radius (default: 1000 m) (English)
+# Adjust radius (default: 1000 m) (Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Help (English)
+# Help (Español)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 
 ---
 
-## Store
+## Almacenamiento
 
-No persistent store. Results are only displayed, not saved.
+Sin almacenamiento persistente. Los resultados solo se muestran, no se guardan.
 
 ---
 
-## Supported Categories
+## Categorías compatibles
 
 restaurant, cafe, bar, pub, fast_food, hotel, hostel, guest_house, supermarket,
 pharmacy, hospital, bank, atm, fuel, parking, bus_stop, train_station, museum,
@@ -92,33 +88,33 @@ cinema, theatre, library, school, university, church
 
 ---
 
-## Attitude
+## Actitud y comportamiento
 
-- Always ask the user for a location if none was given.
-- With more than 10 results only show the 5 nearest, rest on request.
-- State distance in metres, from 1 km in km (1 decimal place).
-- Privacy: no location data is stored or transmitted except to the
-  public Nominatim/Overpass API (openstreetmap.org).
-
----
-
-## Privacy
-
-Search requests go to `nominatim.openstreetmap.org` and `overpass-api.de`.
-No login, no API key, no persistent data storage.
-User-Agent is set according to Nominatim policy.
+- Solicite siempre una ubicación al usuario si no se ha proporcionado ninguna.
+- Con más de 10 resultados, muestre únicamente los 5 más cercanos y el resto solo a petición.
+- Indique la distancia en metros y, a partir de 1 km, en kilómetros (con 1 decimal).
+- Privacidad: no se almacenan ni transmiten datos de ubicación, excepto a las
+  API públicas de Nominatim/Overpass (openstreetmap.org).
 
 ---
 
-## Related Resources
+## Privacidad
 
-- `reiseroute` — route planning from A to B (also uses Nominatim for geocoding)
-- `wetter` — weather at current location
+Las solicitudes de búsqueda se envían a `nominatim.openstreetmap.org` y `overpass-api.de`.
+Sin inicio de sesión, sin clave de API, sin almacenamiento persistente de datos.
+El User-Agent está configurado según la política de Nominatim.
 
 ---
 
-## Registro de Cambios
+## Recursos relacionados
 
-| Version | Date | Change |
+- `reiseroute` — planificación de rutas de A a B (también utiliza Nominatim para geocodificación)
+- `wetter` — tiempo meteorológico en la ubicación actual
+
+---
+
+## Registro de cambios
+
+| Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH location_search.py v1.1.0; store removed |
+| 1.0.0 | 2026-06-22 | Creado a partir de BACH location_search.py v1.1.0; almacenamiento eliminado |

@@ -188,23 +188,43 @@ Jede SKILL.md sollte am Ende einen Changelog-Abschnitt haben:
 
 ---
 
-## Mehrsprachigkeit
+## Mehrsprachigkeit [G 2026-07-30]
 
-Skills können in mehreren Sprachen vorliegen. Unterstützte Sprachen:
+Skills können in mehreren Sprachen vorliegen. Die Sprachen sind in drei
+aufeinander aufbauende Sets organisiert:
 
-| Code | Sprache | Ausbaustufe | Datei-Suffix |
-|------|---------|-------------|--------------|
-| `de` | Deutsch | 1 (Primär) | `SKILL.md` (kein Suffix) |
-| `en` | Englisch | 1 | `SKILL.en.md` |
-| `es` | Spanisch | 2 | `SKILL.es.md` |
-| `zh` | Chinesisch | 2 | `SKILL.zh.md` |
-| `ja` | Japanisch | 2 | `SKILL.ja.md` |
-| `ru` | Russisch | 2 | `SKILL.ru.md` |
+### Sprachsets
+
+| Set | Sprachen | Abdeckung (Weltbevölkerung) | Status |
+|-----|----------|----------------------------|--------|
+| **Core Set** | DE, EN | ~20% | ✅ Pflicht für jeden Skill |
+| **Full Set** | Core + ES, ZH, JA, RU | ~40–45% | ✅ Aktueller Standard |
+| **World Set** | Full + FR, HI, AR, BN, PT | ~55–60% | 🔮 Reserviert für späteren Ausbau |
+
+### Sprachkatalog
+
+| Code | Sprache | Set | Datei-Suffix | Sprecher (gesamt) |
+|------|---------|-----|--------------|-------------------|
+| `de` | Deutsch | Core | `SKILL.md` (kein Suffix) | ~95 Mio. |
+| `en` | Englisch | Core | `SKILL.en.md` | ~1.500 Mio. |
+| `es` | Spanisch | Full | `SKILL.es.md` | ~555 Mio. |
+| `zh` | Chinesisch | Full | `SKILL.zh.md` | ~1.150 Mio. |
+| `ja` | Japanisch | Full | `SKILL.ja.md` | ~125 Mio. |
+| `ru` | Russisch | Full | `SKILL.ru.md` | ~250 Mio. |
+| `fr` | Französisch | World | `SKILL.fr.md` | ~310 Mio. |
+| `hi` | Hindi | World | `SKILL.hi.md` | ~600 Mio. |
+| `ar` | Arabisch | World | `SKILL.ar.md` | ~400 Mio. |
+| `bn` | Bengali | World | `SKILL.bn.md` | ~270 Mio. |
+| `pt` | Portugiesisch | World | `SKILL.pt.md` | ~260 Mio. |
+
+**Aktueller Zielumfang:** Alle Skills werden auf **Full Set** gepflegt.
+World-Set-Sprachen existieren teilweise als Stubs (insb. `fr`) und werden
+erst bei explizitem Ausbaubeschluss vollständig übersetzt.
 
 ### Sprach-Feld
 
 ```yaml
-language: de            # de, en, es, zh, ja, ru, multi
+language: de            # de, en, es, zh, ja, ru, fr, hi, ar, bn, pt, multi
 ```
 
 ### Umsetzungsmodelle
@@ -219,12 +239,13 @@ language: de            # de, en, es, zh, ja, ru, multi
 
 ```
 skills/<kategorie>/<skill-name>/
-  SKILL.md          # Primär-Version (Deutsch)
-  SKILL.en.md       # Englische Version
-  SKILL.es.md       # Spanische Version (optional, Ausbaustufe 2)
-  SKILL.zh.md       # Chinesische Version (optional, Ausbaustufe 2)
-  SKILL.ja.md       # Japanische Version (optional, Ausbaustufe 2)
-  SKILL.ru.md       # Russische Version (optional, Ausbaustufe 2)
+  SKILL.md          # Primär-Version (Deutsch, Core)
+  SKILL.en.md       # Englische Version (Core)
+  SKILL.es.md       # Spanische Version (Full)
+  SKILL.zh.md       # Chinesische Version (Full)
+  SKILL.ja.md       # Japanische Version (Full)
+  SKILL.ru.md       # Russische Version (Full)
+  SKILL.fr.md       # Französische Version (World, nur bei Ausbau)
   scripts/          # Scripts bleiben sprachneutral (Code ist englisch)
 ```
 
@@ -234,7 +255,8 @@ skills/<kategorie>/<skill-name>/
 - Scripts/Code werden NICHT dupliziert -- Code ist sprachneutral (englisch)
 - Docstrings in Scripts bleiben auf Englisch
 - Die `SKILL.md` (ohne Suffix) ist immer die Primärsprache (Deutsch)
-- Ausbaustufe 2 Dateien werden nur bei Bedarf erstellt (kein Vorab-Stub)
+- Core- und Full-Set-Dateien werden aktiv gepflegt
+- World-Set-Dateien werden nur bei explizitem Ausbaubeschluss erstellt (Stubs erlaubt)
 
 ### BACH-DB als Quelle
 
@@ -251,6 +273,8 @@ python skill_export.py --skill <name> --format anthropic --language en
 
 `catalog.py list` zeigt die Sprache jedes Skills an.
 `catalog.py list --language en` filtert nach Sprache.
+
+---
 
 ## Banner (visuelle Identitaet)
 

@@ -1,71 +1,84 @@
 ---
+name: video-transcriber
+version: 1.1.0
+type: tool
+author: Lukas Geiger
+created: 2026-04-04
+updated: 2026-06-20
+description: Obtiene transcripciones (subtítulos) y metadatos de fuentes de video en línea y los emite en Markdown, JSON o texto plano. Actualmente compatible: YouTube. Prefiere subtítulos creados manualmente y recurre a los generados automáticamente.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+bach_origin: true
+category: utilities
+tags: [video, transcript, subtitles, metadata, research, youtube]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube-transcript-api', 'yt-dlp']}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `video-transcriber`.
+> **Español** — Versión oficial en español de `video-transcriber`.
 
 
+# Video Transcriber (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Obtiene transcripciones (subtítulos) y metadatos (título, canal, fecha, reproducciones,
+descripción) de videos en línea. Prefiere subtítulos creados manualmente y recurre
+a los generados automáticamente como alternativa. Salida en Markdown, JSON o texto plano.
 
+Fuente actualmente compatible: **YouTube** (youtube.com, youtu.be, youtube-nocookie.com).
 
-# Video Transcriber (English)
+Para videos, utilice esta herramienta en lugar de resumir el contenido manualmente:
+la transcripción es la fuente confiable.
 
-Fetches transcripts (subtitles) and metadata (title, channel, date, views,
-description) of online videos. Prefers manually created subtitles, falls back
-to auto-generated ones. Output as Markdown, JSON, or plain text.
+> **Aviso:** Esta herramienta no está afiliada, respaldada ni patrocinada por
+> YouTube o Google. El uso es bajo la propia responsabilidad del usuario. Los usuarios son únicamente
+> responsables de cumplir con los términos de servicio de la plataforma respectiva
+> y la ley de derechos de autor aplicable. Sin elusión de DRM, paywalls o restricciones
+> de acceso. Sin raspado masivo. Sin redistribución de transcripciones protegidas por derechos
+> de autor sin el consentimiento del titular de los derechos.
 
-Currently supported source: **YouTube** (youtube.com, youtu.be, youtube-nocookie.com).
-
-For videos, use this tool instead of summarizing content manually —
-the transcript is the reliable source.
-
-> **Notice:** This tool is not affiliated with, endorsed by, or sponsored by
-> YouTube or Google. Use is at the user's own responsibility. Users are solely
-> responsible for complying with the terms of service of the respective platform
-> and applicable copyright law. No circumvention of DRM, paywalls, or access
-> restrictions. No mass scraping. No redistribution of copyrighted transcripts
-> without the rights holder's consent.
-
-## Dependencies and licenses
+## Dependencias y licencias
 
 ```bash
-pip install youtube-transcript-api   # transcripts (required) — MIT license
-pip install yt-dlp                   # metadata (optional, fallback: noembed) — Unlicense (Public Domain)
+pip install youtube-transcript-api   # transcripciones (requerido) — licencia MIT
+pip install yt-dlp                   # metadatos (opcional, fallback: noembed) — Unlicense (Dominio Público)
 ```
 
-## Usage
+## Uso
 
-> **Windows note:** Always set `PYTHONIOENCODING=utf-8`, otherwise umlauts and
-> special characters break in the output (cp1252 encoding).
+> **Nota sobre Windows:** Establezca siempre `PYTHONIOENCODING=utf-8`, de lo contrario, las diéresis y los
+> caracteres especiales se romperán en la salida (codificación cp1252).
 
 ```bash
-# Default: Markdown with timestamps (English)
+# Predeterminado: Markdown con marcas de tiempo
 PYTHONIOENCODING=utf-8 python video_transcriber.py "https://www.youtube.com/watch?v=VIDEO_ID"
 
-# Choose output format (English)
+# Elegir formato de salida
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --format markdown|json|plain
 
-# Save to file (English)
+# Guardar en archivo
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL -o transcript.md
 
-# Prefer languages (default: de en) (English)
+# Idiomas preferidos (predeterminado: de en)
 PYTHONIOENCODING=utf-8 python video_transcriber.py URL --lang de en fr
 ```
 
-### Options
+### Opciones
 
-| Option | Effect |
+| Opción | Efecto |
 |--------|--------|
-| `--format markdown\|json\|plain` | Output format (default: markdown) |
-| `--output, -o <file>` | Write to file instead of stdout |
-| `--lang <codes...>` | Preferred subtitle languages (default: de en) |
-| `--meta-only` | Metadata only, no transcript |
-| `--transcript-only` | Transcript only, no metadata |
-| `--no-timestamps` | Transcript without timestamps |
-| `--no-meta` | Faster: skip yt-dlp metadata |
+| `--format markdown\|json\|plain` | Formato de salida (predeterminado: markdown) |
+| `--output, -o <file>` | Escribir en archivo en lugar de stdout |
+| `--lang <codes...>` | Idiomas de subtítulos preferidos (predeterminado: de en) |
+| `--meta-only` | Solo metadatos, sin transcripción |
+| `--transcript-only` | Solo transcripción, sin metadatos |
+| `--no-timestamps` | Transcripción sin marcas de tiempo |
+| `--no-meta` | Más rápido: omitir metadatos de yt-dlp |
 
-### As a Python library
+### Como librería de Python
 
 ```python
 from video_transcriber import extract_video_id, fetch_metadata, fetch_transcript, format_markdown
@@ -76,28 +89,28 @@ transcript = fetch_transcript(video_id, languages=["de", "en"])
 output = format_markdown(meta, transcript)
 ```
 
-## Typical use cases
+## Casos de uso típicos
 
-- Research: make video content citable as text
-- Source analysis: examine argumentation/metaphors in talks
-- Summaries: transcript as a reliable basis instead of hallucination
+- Investigación: hacer que el contenido de video sea citable como texto
+- Análisis de fuentes: examinar la argumentación/metáforas en presentaciones
+- Resúmenes: transcripción como una base confiable en lugar de alucinación
 
-## Limits
+## Límites
 
-- Only works if the video has subtitles (manual or automatic)
-- Automatic subtitles can contain recognition errors
-- No audio download, no built-in speech recognition
+- Solo funciona si el video tiene subtítulos (manuales o automáticos)
+- Los subtítulos automáticos pueden contener errores de reconocimiento
+- Sin descarga de audio, sin reconocimiento de voz integrado
 
-## Registro de Cambios
+## Historial de cambios
 
 ### 1.1.0 (2026-06-20)
-- Renamed from `yt-transcriber` → `video-transcriber` (YouTube branding policy:
-  "yt" is an explicitly forbidden abbreviation; see RECHTSCHECK_2026-06-20.md)
+- Renombrado de `yt-transcriber` → `video-transcriber` (Política de marca de YouTube:
+  "yt" es una abreviatura explícitamente prohibida; consulte RECHTSCHECK_2026-06-20.md)
 - Script: `yt_transcriber.py` → `video_transcriber.py`
-- Disclaimer and dependency licenses added (user responsibility, ToS, no endorsement)
-- YouTube mentioned descriptively as a source only, not as a name/brand component
-- Backward-compat wrapper `yt_transcriber.py` retained at the old path
+- Exención de responsabilidad y licencias de dependencias añadidas (responsabilidad del usuario, ToS, sin respaldo)
+- YouTube se menciona descriptivamente solo como una fuente, no como un componente de nombre/marca
+- Wrapper de compatibilidad hacia atrás `yt_transcriber.py` retenido en la ruta anterior
 
 ### 1.0.0 (2026-06-12)
-- SKILL.md added (the tool already existed as a script + README)
-- Script v1.0.0: transcript + metadata, 3 output formats, language preferences
+- SKILL.md añadido (la herramienta ya existía como script + README)
+- Script v1.0.0: transcripción + metadatos, 3 formatos de salida, preferencias de idioma

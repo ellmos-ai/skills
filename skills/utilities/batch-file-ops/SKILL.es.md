@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa para la habilidad batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: Operaciones de archivos en lote (eliminar, mover, copiar, listar) con patrones glob. Herramienta de CLI para operaciones eficientes del sistema de archivos. Sin dependencias.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,77 +16,73 @@ tags: [batch, file-ops, glob, cli, filesystem, cleanup]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `batch-file-ops`.
+> **Español** — Versión oficial en español de `batch-file-ops`.
 
 
+# batch_file_ops - Operaciones de archivos en lote (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# batch_file_ops - Batch File Operations (English)
-
-CLI tool for efficient batch operations on files using glob patterns.
-Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
+Herramienta CLI para operaciones eficientes en lote sobre archivos usando patrones glob.
+Soporta: delete, move, copy, list. Sin dependencias (solo la biblioteca estándar de Python).
 
 ---
 
-## Actions
+## Acciones
 
-| Action | Description |
+| Acción | Descripción |
 |--------|-------------|
-| `delete` | Delete files matching a pattern |
-| `move` | Move files matching a pattern |
-| `copy` | Copy files matching a pattern |
-| `list` | List files matching a pattern |
+| `delete` | Eliminar archivos que coincidan con un patrón |
+| `move` | Mover archivos que coincidan con un patrón |
+| `copy` | Copiar archivos que coincidan con un patrón |
+| `list` | Listar archivos que coincidan con un patrón |
 
-## CLI Usage
+## Uso de CLI
 
 ```bash
 python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-run] [--recursive]
 ```
 
-### Arguments
+### Argumentos
 
-| Argument | Description |
-|----------|-------------|
-| `action` | `delete`, `move`, `copy`, or `list` |
-| `source` | Source directory |
-| `target` | Target directory (only for `move` and `copy`) |
-| `--pattern`, `-p` | Glob pattern (e.g., `*.py`, `TOOLS_*.py`) - Default: `*` |
-| `--dry-run`, `-n` | Preview only, no changes |
-| `--recursive`, `-r` | Search recursively in subdirectories |
+| Argumento | Descripción |
+|-----------|-------------|
+| `action` | `delete`, `move`, `copy` o `list` |
+| `source` | Directorio de origen |
+| `target` | Directorio de destino (solo para `move` y `copy`) |
+| `--pattern`, `-p` | Patrón glob (p. ej., `*.py`, `TOOLS_*.py`) - Por defecto: `*` |
+| `--dry-run`, `-n` | Solo vista previa, sin cambios |
+| `--recursive`, `-r` | Buscar de forma recursiva en subdirectorios |
 
 ---
 
-## Ejemplo y Uso & Usage
+## Ejemplo y aplicación
 
 ```bash
-# List all Python files in a directory (English)
+# Listar todos los archivos Python en un directorio (Español)
 python batch_file_ops.py list /path/to/directory --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!) (English)
+# Eliminar todos los archivos .tmp (¡primero ejecutar con dry-run!) (Español)
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
 python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
 
-# Move files (English)
+# Mover archivos (Español)
 python batch_file_ops.py move /source /target --pattern "*.txt"
 
-# Copy files (recursive) (English)
+# Copiar archivos (recursivo) (Español)
 python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
 
-# Pattern examples (English)
+# Ejemplos de patrones (Español)
 python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
 python batch_file_ops.py list /path --pattern "backup_202?-*"
 ```
 
 ---
 
-## Notes
+## Notas
 
-- **Dry-run first:** Always use `--dry-run` first with `delete` and `move`
-- **Glob patterns:** Uses Python `pathlib.glob()` / `pathlib.rglob()`
-- **Windows-compatible:** Automatic UTF-8 output encoding
-- **Files only:** Directories are skipped (only files are processed)
+- **Dry-run primero:** Use siempre `--dry-run` primero con `delete` y `move`
+- **Patrones glob:** Utiliza `pathlib.glob()` / `pathlib.rglob()` de Python
+- **Compatible con Windows:** Codificación de salida UTF-8 automática
+- **Solo archivos:** Se omiten los directorios (solo se procesan archivos)

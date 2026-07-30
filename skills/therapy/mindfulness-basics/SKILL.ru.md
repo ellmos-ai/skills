@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: Основы MBSR, сканирование тела (боди-скан) и дыхательные упражнения. Доказательные техники осознанности по Джону Кабат-Зинну для повседневной жизни.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,197 +15,192 @@ tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `mindfulness-basics`.
+> **Русский** — Официальная русская версия `mindfulness-basics`.
 
 
+# Основы Осознанности (Mindfulness Basics)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Основы MBSR, сканирование тела и дыхательные упражнения для повседневной жизни
 
-
-# Mindfulness Basics (English)
-
-> MBSR fundamentals, body scan, and breathing exercises for everyday life
-
-See: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Контекст
 
-Mindfulness is the intentional, non-judgmental attention to the present moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979) is the most well-known evidence-based mindfulness program.
+Осознанность (mindfulness) — это намеренное, безоценочное внимание к текущему моменту. MBSR (Снижение стресса на основе осознанности, Kabat-Zinn 1979) — наиболее известная научно обоснованная программа практики осознанности.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. Core Attitudes of Mindfulness (Kabat-Zinn)
-
-| Attitude | Description | Opposite to Avoid |
-|----------|-------------|-------------------|
-| Non-Judging | Observing without evaluating | "That is good/bad" |
-| Patience | Things unfold in their own time | Rushing, forcing |
-| Beginner's Mind | Being open, as if for the first time | Assumptions, expert stance |
-| Trust | In one's own experience and intuition | Relying solely on others |
-| Non-Striving | Simply being, without having to achieve | Performance orientation |
-| Acceptance | Seeing things as they are | Fighting against reality |
-| Letting Go | Allowing experiences to pass | Holding on, clinging |
+**Примечание:** Данный материал служит поддержкой и не заменяет профессиональную психотерапию.
+**Категорически запрещено применять:** EMDR (ДПДГ), пролонгированную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. Breathing Exercises
+## 1. Основные Установки Осознанности (Кабат-Зинн)
 
-### 2.1 Simple Breath Awareness (5 Minutes)
-
-**Goal:** Anchoring in the present moment, calming the nervous system.
-
-**Instructions:**
-1. Assume a comfortable sitting position (chair, floor, cushion)
-2. Close your eyes or softly lower your gaze
-3. Direct attention to the breath
-4. Notice: Where do I feel the breath? (tip of the nose, chest, abdomen)
-5. Thoughts arise? -> Kindly notice, return to the breath
-6. No goal other than: Being with the breath
-
-**Insight:** Thoughts come and go like clouds — you are the sky behind them.
+| Установка | Описание | Противоположность, которой следует избегать |
+|-----------|----------|---------------------------------------------|
+| Безоценочность (Non-Judging) | Наблюдение без оценивания | «Это хорошо/плохо» |
+| Терпение (Patience) | Вещи развиваются в своем собственном темпе | Спешка, принуждение |
+| Ум новичка (Beginner's Mind) | Открытость восприятия, словно в первый раз | Допущения, позиция эксперта |
+| Доверие (Trust) | Доверие к собственному опыту и интуиции | Опора исключительно на других |
+| Нестремление (Non-Striving) | Простое присутствие без цели достижения | Ориентация на результат |
+| Принятие (Acceptance) | Видение вещей такими, какие они есть | Борьба с реальностью |
+| Отпускание (Letting Go) | Разрешение опыту проходить мимо | Удержание, цепляние |
 
 ---
 
-### 2.2 4-7-8 Breathing Technique (Calming)
+## 2. Дыхательные Упражнения
 
-**Goal:** Activating the parasympathetic nervous system, stress reduction.
+### 2.1 Простое Осознание Дыхания (5 Минут)
 
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 7 seconds
-3. Exhale: 8 seconds (longer than inhaling!)
-4. Repeat: 3-4 cycles
+**Цель:** Заземление в текущем моменте, успокоение нервной системы.
 
-**When to use:** Before sleep, during acute stress, before difficult situations.
+**Инструкция:**
+1. Займите удобное положение сидя (на стуле, полу или подушке)
+2. Закройте глаза или мягко опустите взгляд
+3. Направьте внимание на дыхание
+4. Отметьте: Где дыхание ощущается отчетливее всего? (кончик носа, грудная клетка, живот)
+5. Возникают мысли? -> Доброжелательно отметьте их и вернитесь к дыханию
+6. Нет иной цели, кроме как: Быть вместе с дыханием
 
----
-
-### 2.3 Box Breathing (Square Breathing)
-
-**Goal:** Balance, concentration (also used by Navy SEALs, elite athletes).
-
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 4 seconds
-3. Exhale: 4 seconds
-4. Hold: 4 seconds
-5. Repeat: 4 cycles
+**Инсайт:** Мысли приходят и уходят, как облака — вы являетесь небом за ними.
 
 ---
 
-## 3. Body Scan
+### 2.2 Дыхательная Техника 4-7-8 (Успокаивающая)
 
-**Goal:** Developing body awareness, recognizing and releasing tension.
-**Duration:** 10-30 minutes (shorter version: 5 minutes possible)
+**Цель:** Активация парасимпатической нервной системы, снижение стресса.
 
-**Instructions (Short Form):**
+**Порядок выполнения:**
+1. Вдох: 4 секунды
+2. Задержка дыхания: 7 секунд
+3. Выдох: 8 секунд (дольше, чем вдох!)
+4. Повторите: 3–4 цикла
+
+**Когда применять:** Перед сном, при остром стрессе, перед сложными ситуациями.
+
+---
+
+### 2.3 Квадратное Дыхание (Box Breathing)
+
+**Цель:** Баланс, концентрация (используется также «морскими котиками» США и элитными спортсменами).
+
+**Порядок выполнения:**
+1. Вдох: 4 секунды
+2. Задержка: 4 секунды
+3. Выдох: 4 секунды
+4. Задержка: 4 секунды
+5. Повторите: 4 цикла
+
+---
+
+## 3. Сканирование Тела (Body Scan)
+
+**Цель:** Развитие телесной осознанности, распознавание и снятие напряжения.
+**Длительность:** 10–30 минут (короткий вариант: возможен за 5 минут)
+
+**Инструкция (Краткая форма):**
 
 ```
-1. Lie on your back or sit comfortably
-2. Close eyes, take 3 deep breaths
-3. Bring attention to the soles of your feet
-   - Notice: Temperature, pressure, contact with the ground
-   - No changing, just observing
-4. Slowly move upward:
-   Feet -> Lower legs -> Knees -> Thighs
-   -> Pelvis -> Abdomen -> Chest -> Shoulders
-   -> Arms -> Hands -> Neck -> Face -> Head
-5. At tension: Breathe into the area, release on exhale
-6. At the end: Perceive the entire body as a whole
-7. Gently return to the room
+1. Лягте на спину или сядьте удобно
+2. Закройте глаза, сделайте 3 глубоких вдоха и выдоха
+3. Переместите внимание на подошвы стоп
+   - Отметьте: Температуру, давление, контакт с поверхностью
+   - Ничего не меняя, просто наблюдая
+4. Медленно поднимайтесь вверх:
+   Стопы -> Голени -> Колени -> Бедра
+   -> Таз -> Живот -> Грудная клетка -> Плечи
+   -> Руки -> Кисти рук -> Шея -> Лицо -> Голова
+5. При наличии напряжения: Вдыхайте в эту область, отпускайте с выдохом
+6. В завершение: Ощутите все тело как единое целое
+7. Мягко вернитесь в пространство комнаты
 ```
 
-**Documentation afterward:**
-- What did I notice?
-- Where was there tension?
-- How do I feel now compared to before?
+**Рефлексивная запись после практики:**
+- Что я заметил(а)?
+- Где было напряжение?
+- Как я чувствую себя сейчас по сравнению с состоянием до практики?
 
 ---
 
-## 4. STOP Technique (Mini-Mindfulness in Everyday Life)
+## 4. Техника STOP (Мини-Осознанность в Повседневной Жизни)
 
-**S** — **Stop:** Pause whatever you are doing
-**T** — **Take a breath:** Take one deep breath
-**O** — **Observe:** Observe: thoughts, feelings, body sensations
-**P** — **Proceed:** Consciously continue (or decide what to do next)
+**S** — **Stop (Остановитесь):** Сделайте паузу в том, что вы делаете
+**T** — **Take a breath (Сделайте вдох):** Сделайте один глубокий вдох
+**O** — **Observe (Наблюдайте):** Наблюдайте: мысли, чувства, телесные ощущения
+**P** — **Proceed (Продолжайте):** Осознанно продолжайте (или решите, что делать дальше)
 
-**Use:** Brief pause at any time, especially during stress or decisions.
-
----
-
-## 5. Mindfulness in Daily Life (Informal Practice)
-
-No time for formal exercises? Make everyday activities mindful:
-
-| Activity | Mindfulness Focus |
-|----------|------------------|
-| Eating | Consciously notice taste, texture, smell |
-| Walking | Feel each step (ground contact, weight shift) |
-| Brushing teeth | Only do that, nothing else on the side |
-| Doing dishes | Temperature of the water, sounds, movements |
-| Driving | Fully present (no radio, no ruminating) |
-| Waiting | Instead of phone: observe surroundings, breathe |
+**Применение:** Краткая пауза в любое время, особенно во время стресса или принятия решений.
 
 ---
 
-## 6. MBSR Program Overview (8 Weeks)
+## 5. Осознанность в Повседневной Жизни (Неформальная Практика)
 
-The complete MBSR program as reference:
+Нет времени на формальные упражнения? Сделайте повседневные дела осознанными:
 
-| Week | Focus |
-|------|-------|
-| 1 | Autopilot vs. mindfulness |
-| 2 | Dealing with obstacles |
-| 3 | Mindfulness in the body (yoga) |
-| 4 | Recognizing stress reactions |
-| 5 | Stressors and reacting vs. responding |
-| 6 | Mindful communication |
-| 7 | Self-care |
-| 8 | Mindfulness in everyday life |
+| Деятельность | Фокус осознанности |
+|--------------|-------------------|
+| Прием пищи | Осознанное восприятие вкуса, текстуры, запаха |
+| Ходьба | Ощущение каждого шага (контакт с землей, смещение веса) |
+| Чистка зубов | Сосредоточение только на этом процессе |
+| Мытье посуды | Температура воды, звуки, движения |
+| Вождение | Полное присутствие (без радио, без руминации) |
+| Ожидание | Вместо телефона: наблюдение за окружением, дыхание |
 
 ---
 
-## Ethics and Boundaries
+## 6. Обзор Программы MBSR (8 Недель)
 
-**An AI assistant may:**
-- Explain and guide mindfulness exercises
-- Convey MBSR content (psychoeducation)
-- Guide breathing exercises and body scan
-- Explain and encourage the STOP technique
+Полная программа MBSR для ознакомления:
 
-**An AI assistant must NOT:**
-- Replace formal MBSR courses
-- Guide mindfulness for trauma patients without professional supervision
-- Therapeutically address dissociation or flashbacks
-- Make medication-related recommendations
+| Неделя | Фокус |
+|--------|-------|
+| 1 | Автопилот vs. осознанность |
+| 2 | Работа с препятствиями |
+| 3 | Осознанность в теле (йога) |
+| 4 | Распознавание реакций на стресс |
+| 5 | Стрессоры и «автоматическая реакция» vs. «осознанный отклик» |
+| 6 | Осознанное общение |
+| 7 | Забота о себе |
+| 8 | Осознанность в повседневной жизни |
 
-**Progress tracking:**
-- Mood before/after exercise (0-10 scale)
-- Track regularity (did I practice today?)
-- Observations: Where was attention hard to maintain?
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## Этика и Границы
+
+**ИИ-ассистент МОЖЕТ:**
+- Объяснять и направлять упражнения на осознанность
+- Передавать содержание MBSR (психообразование)
+- Вести дыхательные упражнения и сканирование тела
+- Объяснять и поддерживать использование техники STOP
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Заменять официальные курсы MBSR
+- Проводить практики осознанности для пациентов с травмой без профессионального наблюдения
+- Терапевтически работать с диссоциацией или флэшбеками
+- Давать рекомендации по медикаментозному лечению
+
+**Отслеживание прогресса:**
+- Настроение до/после упражнения (шкала от 0 до 10)
+- Отслеживание регулярности (практиковал(а) ли я сегодня?)
+- Наблюдения: Где было трудно удерживать внимание?
+
+**В случае острого кризиса ВСЕГДА направлять на:**
+- Единый телефон доверия (RU): 8-800-2000-122
+- Горячая линия психологической помощи (RU): +7 (495) 051
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Экстренные службы: 112 / 103 (RU) / 911 (US) / 112 (EU)
 
 ---
 
-## References
+## Литература
 
 - Kabat-Zinn, J. (1990). *Full Catastrophe Living: Using the Wisdom of Your Body and Mind to Face Stress, Pain, and Illness.* Delacorte Press.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Kabat-Zinn (1990), MBSR Program — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Kabat-Zinn (1990), Программа MBSR — Не является профессиональной психотерапией*

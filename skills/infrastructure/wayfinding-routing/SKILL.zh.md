@@ -1,77 +1,100 @@
 ---
+name: wayfinding-routing
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Gemini (Antigravity)
+created: 2026-07-29
+updated: 2026-07-29
+description: >
+  通用 LLM 导航、定向与紧急恢复能力 Skill。
+  在 Agent 面临上下文漂移、工具失效、循环死锁或到达死胡同（死局）时，
+  提供主动路径规划、自我定向与恢复启发式规则。包含同义词策略：
+  survival-routing、dead-reckoning、pathfinder-routing 以及 celestial-routing。
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+bach_origin: false
+category: infrastructure
+tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
 language: zh
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `wayfinding-routing`.
+> **中文** — `wayfinding-routing` 官方中文版本。
 
+# Wayfinding-Routing（自我定向与紧急回退引擎）
 
+The **Wayfinding-Routing** skill（也称为 **`survival-routing`**、**`dead-reckoning`**、**`pathfinder-routing`** 和 **`celestial-routing`**）是 LLM Agent 的权威导航与紧急恢复框架。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (English)
-
-The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
-
-It equips agents with proactive wayfinding heuristics during normal execution and emergency protocols when encountering context drift, recurring execution errors, failing APIs, or dead ends.
+它为 Agent 提供正常执行期间的主动路径查找（Wayfinding）启发式规则，以及在遭遇上下文漂移、重复执行错误、API 故障或死胡同时的紧急处理协议。
 
 ---
 
 ## 同义词与策略概述
 
-| 同义策略 | 比喻与核心原则 | 应用场景 |
+| 同义词策略 | 隐喻与核心原则 | 应用场景 |
 | :--- | :--- | :--- |
-| **`wayfinding-routing`** (Primary) | **Wayfinding / Spatial Orientation:** Navigating without external GPS by reading signposts and environmental cues. | Sidecars 的主导航循环, `workflowhooker`, and `automation-self-care`. |
-| **`survival-routing`** | **Emergency Fallback & Self-Preservation:** Circuit-breaking and graceful degradation when tools fail or loops form. | 命令超时时的应急恢复, fail repeatedly, or hit permission walls. |
-| **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | 在临时文件中跟踪执行步骤 or `TODO.md` to enable precise backtracking. |
-| **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | 目录树的事前扫描检查, locks, and task dependencies. |
-| **`celestial-routing`** | **Astronavigation:** Aligning with immutable North-Star anchor documents when local context is noisy. | Fallback to `CLAUDE.md`, `AGENTS.md`, `START.md` when prompt instructions conflict. |
+| **`wayfinding-routing`**（主要） | **路径查找 / 空间定向：** 无需外部 GPS，通过阅读路标和环境线索进行导航。 | sidecar、`workflowhooker` 和 `automation-self-care` 的主要导航循环。 |
+| **`survival-routing`** | **紧急降级与自我保护：** 当工具故障或形成死循环时进行熔断与优雅降级。 | 当命令超时、连续失败或触发权限限制时的紧急恢复。 |
+| **`dead-reckoning`** | **航海推算导航 (Koppelnavigation)：** 在没有外部状态的情况下，从逐步面包屑（痕迹）重建精确状态。 | 在临时文件或 `TODO.md` 中记录执行步骤，以便实现精确的回溯。 |
+| **`pathfinder-routing`** | **侦察 / 探路开拓：** 为多 Agent 团队进行预检扫描与铺平道路。 | 对目录树、锁和任务依赖项进行预检扫描。 |
+| **`celestial-routing`** | **天文导航：** 当局部上下文充满噪音时，对齐不可变的北极星锚点文档。 | 当 Prompt 指令发生冲突时，回退至 `CLAUDE.md`、`AGENTS.md`、`START.md`。 |
 
 ---
 
-## 5大核心应急与方向重置协议 & Orientation Protocols
+## 5 大核心紧急与定向协议
 
-### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
-- ****触发条件 (Trigger):**** 上下文漂移、用户指令冲突, or loss of orientation in long multi-turn sessions.
-- ****启发式规则:**** 停止自由文本生成。清除临时假设. Re-read root anchor documents (`CLAUDE.md`, `AGENTS.md`, `START.md`). Reset goal state to the authoritative root directive before taking further action.
+### 1. `PROTOCOL-ANCHOR-RESET`（北极星回退 / 天文导航）
+- **触发条件：** 上下文漂移、用户指令冲突，或在长多轮会话中失去定向。
+- **启发式规则：** 停止自由文本生成。清除临时假设。重新阅读根锚点文档（`CLAUDE.md`、`AGENTS.md`、`START.md`）。在采取进一步行动之前，将目标状态重置为具有权威性的根指令。
 
-### 2. `PROTOCOL-STOP-EXPLAIN` (Rubber-Duck Reflection Loop)
-- ****触发条件 (Trigger):**** 终端命令或文件编辑连续两次失败 with an identical error.
-- ****启发式规则:**** **Lock command execution.** The agent MUST output a formal self-reflection before trying a 3rd attempt:
-  1. *What exact error occurred in attempt 1 & 2?*
-  2. *Why did the previous diagnostic hypothesis fail?*
-  3. *What is the new alternative approach?*
-  Execution is unlocked ONLY after writing this explicit justification.
+### 2. `PROTOCOL-STOP-EXPLAIN`（小黄鸭反思循环）
+- **触发条件：** 终端命令、文件编辑或 API 请求连续两次出现相同的错误失败。
+- **启发式规则：** **锁定命令执行。** Agent 在尝试第 3 次之前，必须输出正式的自我反思：
+  1. *第 1 次和第 2 次尝试中究竟发生了什么错误？*
+  2. *为什么之前的诊断假设失败了？*
+  3. *新的替代方案是什么？*
+  仅在写出此明确的理由说明后，方可解除执行锁定。
 
-### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Multi-Tiered Fallback Cascade)
-- ****触发条件 (Trigger):**** 主工具或外部 API 不可用 or returns errors.
-- ****启发式规则:**** 绝不突然崩溃或盲目进入死循环. Step down through degradation tiers:
-  - ****第 1 层 (最佳):**** Full Native API / MCP Tool
-  - ****第 2 层 (备用工具):**** Local Python CLI / Script
-  - ****第 3 层 (只读状态):**** Direct file parsing (`view_file` / raw text)
-  - ****第 4 层 (移交):**** Present structured status report and open options to the user.
+### 3. `PROTOCOL-GRACEFUL-DEGRADATION`（多级降级级联）
+- **触发条件：** 主要工具、MCP 服务器或外部 API 不可用或返回错误。
+- **启发式规则：** 切勿突然失败或盲目死循环。按降级层级逐级下探：
+  - **Tier 1（最佳）：** 完整原生 API / MCP 工具
+  - **Tier 2（备用工具）：** 本地 Python CLI / 脚本
+  - **Tier 3（只读状态）：** 直接文件解析（`view_file` / 原始文本）
+  - **Tier 4（交接）：** 向用户展示结构化的状态报告并提供可选方案。
 
-### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Sackgassen-Erkennung)
-- ****触发条件 (Trigger):**** 复杂的多步骤重构遇到无法解决的阻碍 an unresolvable block at step N.
-- ****启发式规则:**** 在执行破坏性修改前记录面包屑痕迹. If a path fails:
-  1. Revert uncommitted changes (`git checkout` / restore state).
-  2. Jump back to the last clean breadcrumb checkpoint.
-  3. Mark the failed route as blocked in `TODO.md`.
-  4. Attempt alternative path B.
+### 4. `PROTOCOL-BREADCRUMB-BACKTRACK`（推算导航与死胡同识别）
+- **触发条件：** 复杂的重构或工作流路径在第 N 步遇到了无法解决的阻碍。
+- **启发式规则：** 在进行破坏性更改之前记录面包屑痕迹。如果某条路径失败：
+  1. 还原未提交的更改（`git checkout` / 恢复状态）。
+  2. 跳回上一个干净的面包屑检查点。
+  3. 在 `TODO.md` 中将失败的路线标记为已阻塞。
+  4. 尝试替代路线 B。
 
-### 5. `PROTOCOL-CIRCUIT-BREAKER` (Notaus & Safe Exit)
-- ****触发条件 (Trigger):**** 达到执行极限或检测到无限循环, or critical system lock error.
-- ****启发式规则:**** 执行紧急关机序列:
-  1. Release all acquired file and git locks (`python -m workflowhooker check`).
-  2. Save current partial state to `.SYNC/SURVIVAL_STATE.json` or `AUTOMATIONS-MEMORY.md`.
-  3. Log incident in `ANTIGRAVITY-LOG.txt`.
-  4. Exit cleanly with actionable summary for the user or orchestrator.
+### 5. `PROTOCOL-CIRCUIT-BREAKER`（紧急停止与安全退出）
+- **触发条件：** 达到执行限制、检测到无限循环，或发生严重系统锁错误。
+- **启发式规则：** 执行紧急关机序列：
+  1. 释放所有已获取的文件锁和 Git 锁（`python -m workflowhooker check`）。
+  2. 将当前的阶段性状态保存至 `.SYNC/SURVIVAL_STATE.json` 或 `AUTOMATIONS-MEMORY.md`。
+  3. 将事件记录在 `ANTIGRAVITY-LOG.txt` 中。
+  4. 为用户或协调器（orchestrator）提供包含可操作摘要的干净退出。
 
 ---
 
-## Integration with `automation-self-care` & `workflowhooker`
+## 与 `automation-self-care` 及 `workflowhooker` 的集成
 
-`wayfinding-routing` provides the underlying navigation logic for:
-- **`automation-self-care`**: Evaluates sidecar prompts against the 5 protocols to ensure self-healing capabilities.
-- **`workflowhooker`**: Provides standard heuristics for step-by-step lock checking and breadcrumb recording.
-- **`staircase-routing`**: Leverages `PROTOCOL-ANCHOR-RESET` for vertical directory navigation.
+`wayfinding-routing` 为以下模块提供底层导航逻辑：
+- **`automation-self-care`**：对照 5 大协议评估 sidecar prompts，确保具备自愈能力。
+- **`workflowhooker`**：为逐步检查锁状态和记录面包屑痕迹提供标准启发式规则。
+- **`staircase-routing`**：利用 `PROTOCOL-ANCHOR-RESET` 进行垂直目录导航。

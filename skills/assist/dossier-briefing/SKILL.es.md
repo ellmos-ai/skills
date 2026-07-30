@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: [Español] Documentación completa para la habilidad dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: Genera un informe estructurado de investigación para un tema o persona como una plantilla Markdown (stdout o archivo). Sin almacenamiento persistente.
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -12,119 +12,115 @@ languages: [de, en]
 dependencies: {'python': ['datetime', 'pathlib', 'textwrap']}
 runtime: python3
 entry_point: dossier_briefing_core.py
-provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\\n'}
+provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\n'}
 language: es
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `dossier-briefing`.
+> **Español** — Versión oficial en español de `dossier-briefing`.
 
 
+# Dossier-Briefing (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Dossier-Briefing (English)
-
-**Structured research briefing for a topic or person**
+**Informe estructurado de investigación para un tema o persona**
 
 ---
 
-## Descripción General y Propósito & Purpose
+## Visión general y propósito
 
-Generates an empty, structured Markdown briefing for any subject
-(person, company, event, concept). The scaffold serves as a starting point for
-subsequent research with `research-agent` or `web-reading`.
+Genera un informe Markdown vacío y estructurado para cualquier sujeto
+(persona, empresa, evento, concepto). La plantilla sirve como punto de partida para
+investigaciones posteriores con `research-agent` o `web-reading`.
 
 ---
 
-## Triggers
+## Disparadores
 
-| Phrase | Action |
+| Frase | Acción |
 |---|---|
-| "Create a briefing on Marie Curie" | Scaffold: person, type=person |
-| "Dossier on OpenAI" | Scaffold: company, type=organization |
-| "Briefing on quantum computing" | Scaffold: topic, type=topic |
-| "Prepare a research briefing on COP30" | Scaffold: event, type=event |
+| "Crear un informe sobre Marie Curie" | Plantilla: persona, type=person |
+| "Dossier sobre OpenAI" | Plantilla: empresa, type=organization |
+| "Informe sobre computación cuántica" | Plantilla: tema, type=topic |
+| "Preparar un informe de investigación sobre la COP30" | Plantilla: evento, type=event |
 
 ---
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
-1. **Name the subject:** Extract name/title of the briefing from the user input.
-2. **Detect type:** person, organization, topic, event (or unspecified).
-3. **Generate scaffold:** Create Markdown with all relevant sections.
-4. **Output:** stdout or optionally write to a file (`-o file.md`).
-5. **Start research:** Hand scaffold to `research-agent` or `web-reading`
-   to fill in missing sections.
+1. **Identificar el sujeto:** Extraer el nombre/título del informe a partir de la entrada del usuario.
+2. **Detectar el tipo:** person, organization, topic, event (o unspecified).
+3. **Generar la plantilla:** Crear el Markdown con todas las secciones relevantes.
+4. **Salida:** stdout o opcionalmente escribir en un archivo (`-o file.md`).
+5. **Iniciar investigación:** Entregar la plantilla a `research-agent` o `web-reading`
+   para completar las secciones faltantes.
 
 ---
 
 ## CLI
 
 ```bash
-# Briefing to stdout (English)
+# Briefing to stdout (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# Write to file (English)
+# Write to file (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Topic briefing (English)
+# Topic briefing (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantum computing" --typ topic
 
-# Event (English)
+# Event (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Without type (generic) (English)
+# Without type (generic) (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "My topic"
 
-# Help (English)
+# Help (Deutsch)
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 
 ---
 
-## Briefing Types and Sections
+## Tipos de informe y secciones
 
-| Type | Sections |
+| Tipo | Secciones |
 |---|---|
-| `person` | Basic data, biography/background, work & contributions, sources, notes |
-| `organization` | Profile, history, products/services, key people, sources, notes |
-| `topic` | Overview, background/context, current developments, key sources, open questions, notes |
-| `event` | Key facts, participants, background/timeline, significance, sources, notes |
-| `unspecified` | Overview, background, details, sources, notes |
+| `person` | Datos básicos, biografía/antecedentes, trabajo y contribuciones, fuentes, notas |
+| `organization` | Perfil, historia, productos/servicios, personas clave, fuentes, notas |
+| `topic` | Visión general, antecedentes/contexto, desarrollos actuales, fuentes clave, preguntas abiertas, notas |
+| `event` | Datos clave, participantes, antecedentes/cronología, importancia, fuentes, notas |
+| `unspecified` | Visión general, antecedentes, detalles, fuentes, notas |
 
 ---
 
-## Store
+## Almacenamiento
 
-No persistent store. The scaffold is only output (stdout or file),
-not stored in a database.
-
----
-
-## Attitude
-
-- Always emphasise that the scaffold is empty and must be filled through research.
-- Never invent content or hallucinate — only provide structure.
-- Ask if the type is unclear or use `unspecified`.
+Sin almacenamiento persistente. La plantilla solo se emite como salida (stdout o archivo),
+no se guarda en una base de datos.
 
 ---
 
-## Privacy
+## Actitud y directrices
 
-No network access. No store. Purely local processing.
-
----
-
-## Related Resources
-
-- `research-agent` — fills the briefing scaffold with research results
-- `web-reading` — reads web pages and extracts content for the briefing
+- Enfatizar siempre que la plantilla está vacía y debe completarse mediante investigación.
+- Nunca inventar contenido ni alucinar: solo proporcionar la estructura.
+- Preguntar si el tipo no está claro o usar `unspecified`.
 
 ---
 
-## Registro de Cambios
+## Privacidad
 
-| Version | Date | Change |
+Sin acceso a la red. Sin almacenamiento. Procesamiento puramente local.
+
+---
+
+## Recursos relacionados
+
+- `research-agent`: completa la plantilla del informe con los resultados de la investigación
+- `web-reading`: lee páginas web y extrae contenido para el informe
+
+---
+
+## Historial de cambios
+
+| Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH dossier_generator.py v1.0.0; store removed, generalised |
+| 1.0.0 | 2026-06-22 | Creado a partir de dossier_generator.py de BACH v1.0.0; almacenamiento eliminado, generalizado |

@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [Русский] Навык агента для orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: Провайдеронезависимый протокол для разбора сложных задач, поручения независимым Worker и приемки их результатов на основе доказательств.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,92 +18,75 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `orchestrator`.
+> **Русский** — Официальная русская версия `orchestrator`.
 
 
+# Orchestrator (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+Используйте этот навык, если задача состоит как минимум из двух в значительной степени независимых рабочих пакетов, а делегирование дает реальное преимущество по времени, контексту или качеству. Для небольших, тесно связанных задач работайте напрямую.
 
-> **English Translation** — Official English version of `orchestrator`.
+Навык описывает протокол. Конкретный запуск, приостановка и возобновление работы Worker осуществляются с помощью возможностей соответствующей Runtime.
 
+## Граница полномочий
 
-# Orchestrator (English)
+Делегирование не расширяет права доступа. Каждый Worker получает максимум тот Scope и права на изменение, которые уже действуют для основной задачи. Внешние, необратимые или иным образом требующие одобрения действия остаются подлежащими одобрению.
 
-## Общий обзор и назначение & Purpose
+## Порядок действий
 
-Nutze diesen Skill, wenn eine Aufgabe aus mindestens zwei weitgehend unabhängigen
-Arbeitspaketen besteht und Delegation einen echten Zeit-, Kontext- oder
-Qualitätsvorteil bringt. Für kleine, eng gekoppelte Aufgaben arbeite direkt.
+### 1. Оценка обстановки
 
-Der Skill beschreibt ein Protokoll. Das konkrete Starten, Unterbrechen und
-Wiederaufnehmen von Workern erfolgt über die Fähigkeiten der jeweiligen Runtime.
+1. Зафиксировать цель, критерии успеха и исключения основной задачи.
+2. Проверить правила проекта, блокировки, текущие изменения и доступные бюджеты.
+3. Перед Dispatch сохранить текущее состояние блокировок, статуса и Diff затрагиваемых областей в качестве Baseline. Только так можно будет позже надежно отличить существующие внешние изменения от изменений Worker.
+4. Параллелить только те рабочие пакеты, которые достаточно независимы.
+5. Разделить пересекающиеся области записи или обрабатывать их последовательно.
 
-## Autoritätsgrenze
+### 2. Составление контракта поручения
 
-Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Scope
-und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
-irreversible oder anderweitig freigabepflichtige Aktionen bleiben
-freigabepflichtig.
+Перед каждым Dispatch создавать короткий, проверяемый контракт:
 
-## Ablauf
-
-### 1. Lage prüfen
-
-1. Ziel, Erfolgskriterien und Ausschlüsse der Hauptaufgabe festhalten.
-2. Projektregeln, Sperren, laufende Änderungen und verfügbare Budgets prüfen.
-3. Vor dem Dispatch den aktuellen Lock-, Status- und Diff-Zustand der betroffenen
-   Bereiche als Baseline sichern. Nur so lassen sich vorhandene fremde Änderungen
-   später zuverlässig von Worker-Änderungen unterscheiden.
-4. Nur Arbeitspakete parallelisieren, die unabhängig genug sind.
-5. Überschneidende Schreibbereiche trennen oder sequentiell bearbeiten.
-
-### 2. Auftragsvertrag schreiben
-
-Vor jedem Dispatch einen kurzen, prüfbaren Vertrag erstellen:
-
-| Feld | Pflichtinhalt |
+| Поле | Обязательное содержание |
 |---|---|
-| Kennung | stabile ID des Arbeitspakets |
-| Ziel | genau ein konkretes Ergebnis |
-| Eingaben | relevante Dateien, Daten oder Kontextquellen |
-| Positiver Scope | was gelesen oder geändert werden darf |
-| Negativer Scope | was ausdrücklich unberührt bleibt |
-| Erfolgskriterium | beobachtbare Bedingung für „fertig“ |
-| Evidenz | erwarteter Nachweis, etwa Test, Diff oder Fundstelle |
-| Rückgabeformat | kompakte, strukturierte Abschlussmeldung |
+| Идентификатор | стабильный ID рабочего пакета |
+| Цель | ровно один конкретный результат |
+| Входные данные | релевантные файлы, данные или источники контекста |
+| Положительный Scope | что разрешено читать или изменять |
+| Отрицательный Scope | что явно остается нетронутым |
+| Критерий успеха | наблюдаемое условие для статуса «готово» |
+| Доказательство | ожидаемое подтверждение, например тест, Diff или ссылка |
+| Формат ответа | компактное, структурированное сообщение о завершении |
 
-Ein Worker bekommt nur den Kontext, den er für diesen Vertrag benötigt.
+Worker получает только тот контекст, который необходим ему для этого контракта.
 
-### 3. Ausführen und beobachten
+### 3. Выполнение и наблюдение
 
-- Fan-out klein halten und nur bei unabhängigem Nutzen vergrößern.
-- Fortschritt über Runtime-Status oder einen projektüblichen Checkpoint verfolgen.
-- Bei Konflikten, Scope-Ausweitung oder fehlender Autorität stoppen und eskalieren.
-- Ein fehlgeschlagener Worker darf unabhängige Arbeitspakete nicht automatisch
-  blockieren.
+- Держать Fan-out небольшим и увеличивать его только при наличии независимой пользы.
+- Отслеживать прогресс через статус Runtime или стандартный Checkpoint проекта.
+- При возникновении конфликтов, расширении Scope или нехватке полномочий остановить работу и эскалировать проблему.
+- Сбойный Worker не должен автоматически блокировать независимые рабочие пакеты.
 
-### 4. Ergebnisse abnehmen
+### 4. Приемка результатов
 
-Eine Fertigmeldung ist zunächst eine Behauptung. Der Orchestrator prüft selbst:
+Сообщение о завершении изначально является лишь утверждением. Orchestrator проверяет его самостоятельно:
 
-1. Existiert das behauptete Artefakt oder die genannte Änderung?
-2. Gehört es zum vereinbarten Scope?
-3. Besteht der vereinbarte Test oder Nachweis aktuell?
-4. Wurden fremde Änderungen, Sperren und negative Scopes respektiert?
-5. Widersprechen sich Ergebnisse verschiedener Worker?
+1. Существует ли заявленный артефакт или указанное изменение?
+2. Относится ли оно к согласованному Scope?
+3. Проходит ли согласованный тест или подтверждение в данный момент?
+4. Были ли соблюдены внешние изменения, блокировки и отрицательные Scope?
+5. Противоречат ли друг другу результаты разных Worker?
 
-Erst danach gilt ein Arbeitspaket als abgeschlossen.
+Только после этого рабочий пакет считается завершенным.
 
-### 5. Integrieren und sichern
+### 5. Интеграция и сохранение
 
-- Konflikte bewusst auflösen; Ergebnisse nicht blind aneinanderhängen.
-- Erforderliche Gesamttests nach der Integration erneut ausführen.
-- Offene, fehlgeschlagene und zurückgestellte Pakete klar ausweisen.
-- Bei längeren Läufen Ziel, Status, Evidenz und nächsten Schritt in einem
-  wiederauffindbaren Checkpoint sichern.
+- Осознанно разрешать конфликты; не объединять результаты слепо.
+- Повторно выполнить необходимые общие тесты после интеграции.
+- Четко обозначить открытые, сбойные и отложенные пакеты.
+- При длительных запусках сохранять цель, статус, доказательство и следующий шаг в восстанавливаемом Checkpoint.
 
-## Minimaler Worker-Prompt
+## Минимальный промпт для Worker
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -115,27 +98,24 @@ Belege mit: <Test, Diff oder Fundstelle>
 Antworte als: <Rückgabeformat>
 ```
 
-## Stop-Bedingungen
+## Условия остановки
 
-Stoppe nur das betroffene Arbeitspaket, wenn sein Scope, seine Autorität oder
-seine Evidenz unklar wird. Unabhängige, sichere Pakete dürfen weiterlaufen.
+Останавливайте только затрагиваемый рабочий пакет, если его Scope, полномочия или доказательства становятся неясными. Независимые, безопасные пакеты могут продолжать работу.
 
-Stoppe die gesamte Delegation, wenn:
+Остановите все делегирование, если:
 
-- die Teilaufgaben nicht mehr unabhängig sind,
-- ein gemeinsamer Schreibbereich nicht sicher getrennt werden kann,
-- Regeln, Sperren oder Autorität für den gesamten verbleibenden Scope unklar sind,
-- die erwarteten Kosten den erkennbaren Nutzen übersteigen,
-- die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
+- подзадачи больше не являются независимыми,
+- общую область записи невозможно безопасно разделить,
+- правила, блокировки или полномочия для всего оставшегося Scope неясны,
+- ожидаемые затраты превышают ощутимую пользу,
+- требуемое доказательство не может быть создано или проверено.
 
-## Журнал изменений
+## История изменений
 
 ### 1.1.0 (2026-07-28)
-- Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.
-- Auftragsvertrag, Autoritätsgrenze, Evidenzabnahme und Checkpoints als
-  portable Kernmechanik herausgearbeitet.
-- Baseline für fremde Änderungen sowie paketlokale und globale Stopps
-  ausdrücklich getrennt.
+- Удалены привязки к пользователю, путям, моделям и провайдерам.
+- Контракт поручения, граница полномочий, приемка доказательств и Checkpoint выделены в качестве переносимой ключевой механики.
+- Явно разделены Baseline для внешних изменений, а также локальные для пакетов и глобальные остановки.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Локальная исходная версия.

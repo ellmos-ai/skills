@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
+description: 关于抑郁症、焦虑障碍、PTSD、双相情感障碍、精神分裂症、ADHD及边缘型人格障碍的心理教育。科普心理健康知识，不作诊断。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,182 +15,178 @@ tags: [psychoeducation, depression, anxiety, ptsd, adhd, borderline, knowledge]
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `psychoeducation`.
+> **中文** — `psychoeducation` 官方中文版本。
 
 
+# 心理教育 (中文)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 关于精神与心理障碍、相关症状及治疗方法的知识科普与传播
 
-
-# Psychoeducation (English)
-
-> Knowledge sharing about mental disorders, symptoms, and treatment approaches
-
-See: [ETHICS.md](../ETHICS.md)
+参见: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景与语境
 
-Psychoeducation refers to the systematic sharing of knowledge about mental disorders with affected individuals and their families. The goal is to foster understanding of the disorder, strengthen self-management, and reduce stigmatization.
+心理教育（Psychoeducation）是指向患者及其家属系统性地科普精神与心理障碍相关知识的干预过程。其核心目标在于增进对疾病的科学理解、提高自我管理能力，并降低社会污名化。
 
-Evidence: Psychoeducation is recommended as a component in all treatment guidelines (DGPPN, NICE, APA) and demonstrably reduces relapse rates (Xia et al. 2011, Cochrane Review).
+循证支持：心理教育已被所有主流诊疗指南（如 DGPPN、NICE、APA）推荐为标准治疗的必备环节，并被证明能显著降低疾病复发率（Xia et al. 2011, Cochrane Review）。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. What is Psychoeducation?
-
-### Definition
-Structured communication of knowledge about mental disorders with the goal of making affected individuals "experts of their own condition."
-
-### Goals
-- Understanding the illness: What do I have? Why?
-- Recognizing early warning signs
-- Knowing treatment options
-- Fostering self-efficacy
-- Reducing stigma
-- Improving adherence (treatment compliance)
-
-### Evidence
-- Relapse prevention in schizophrenia: NNT = 9 (Xia et al. 2011)
-- Depression: Improvement of treatment adherence by 30-50% (Donker et al. 2009)
-- Anxiety disorders: Psychoeducation alone already mildly effective (Donker et al. 2009)
+**注意：** 本技能仅提供心理教育与知识科普，不能替代专业心理咨询或医疗诊断。
+**严禁实施：** EMDR（眼动脱敏与再加工）、延长暴露疗法（PE）、叙事暴露疗法（NET）。
 
 ---
 
-## 2. Mental Disorders Overview
+## 1. 什么是心理教育？
 
-### 2.1 Depression (Major Depressive Disorder)
+### 定义
+以结构化的方式沟通传播关于心理障碍的科学知识，旨在帮助患者及其家属成为“自身健康状况的专家”。
 
-**What is it?** Persistent low mood, loss of interest, and lack of drive for at least 2 weeks, going beyond normal sadness.
+### 主要目标
+- 理解疾病：我究竟怎么了？为什么会这样？
+- 识别早期预警信号（先兆症状）
+- 了解现有的科学治疗选项
+- 提升自我效能感
+- 减少社会与自我污名化
+- 提高治疗依从性（Treatment Adherence）
 
-**Core symptoms (ICD-11):**
-- Depressed mood (most of the day, nearly every day)
-- Loss of interest / inability to feel pleasure (anhedonia)
-- Reduced drive / increased fatigue
-
-**Additional symptoms:** Concentration difficulties, feelings of guilt, sleep problems, appetite changes, suicidal thoughts, psychomotor retardation/agitation
-
-**Treatment:** CBT, medication (SSRIs, SNRIs), exercise, light therapy (seasonal)
-**Self-help:** Daily structure, activity scheduling, social contacts, exercise, sleep hygiene
-
-### 2.2 Anxiety Disorders
-
-**What is it?** Excessive, uncontrollable anxiety or fear that impairs everyday life.
-
-**Types:**
-- Generalized Anxiety Disorder (GAD): Chronic worrying
-- Panic Disorder: Sudden anxiety attacks with physical symptoms
-- Social Anxiety Disorder: Fear of evaluation in social situations
-- Specific Phobias: Fear of specific objects/situations
-- Agoraphobia: Fear of places/situations without escape
-
-**Treatment:** CBT (exposure, cognitive restructuring), SSRIs, relaxation
-**Self-help:** Anxiety diary, breathing exercises, gradual confrontation
-
-### 2.3 Post-Traumatic Stress Disorder (PTSD)
-
-**What is it?** Persistent reaction to a traumatic experience (threat, violence, accident, disaster) with re-experiencing, avoidance, and hyperarousal.
-
-**Core symptoms:**
-- Intrusions (flashbacks, nightmares)
-- Avoidance behavior
-- Emotional numbing or hyperarousal
-- Negative changes in thoughts and mood
-
-**Treatment:** Trauma-focused CBT, EMDR, Narrative Exposure Therapy
-**Self-help:** Stabilization techniques, grounding, safe place — NO self-exposure
-
-### 2.4 Bipolar Disorder
-
-**What is it?** Alternation between depressive and (hypo)manic episodes. Chronic condition with high relapse risk.
-
-**Manic episode:** Elevated mood, decreased need for sleep, grandiose ideas, increased activity, risk-taking behavior, pressured speech
-
-**Treatment:** Mood stabilizers (lithium, valproate), atypical antipsychotics
-**Self-help:** Mood diary, regular sleep schedule, knowing early warning signs
-
-### 2.5 Schizophrenia
-
-**What is it?** Severe mental disorder with disturbances of thought, perception, and experience. Affects approximately 1% of the population.
-
-**Positive symptoms:** Hallucinations, delusions, disorganized thinking
-**Negative symptoms:** Lack of drive, social withdrawal, flat affect
-**Cognitive symptoms:** Attention, memory, executive functions
-
-**Treatment:** Antipsychotics, CBT for psychosis, social therapy, family interventions
-**Self-help:** Medication adherence, stress avoidance, early warning signs, daily structure
-
-### 2.6 ADHD (Attention Deficit Hyperactivity Disorder)
-
-**What is it?** Neurobiological developmental disorder with inattention, impulsivity, and/or hyperactivity. Begins in childhood, persists into adulthood in approximately 50% of cases.
-
-**Treatment:** Multimodal (medication, psychoeducation, coaching, CBT)
-**Self-help:** External structural aids, timers, lists, routines, exercise
-
-### 2.7 Borderline Personality Disorder (BPD)
-
-**What is it?** Pattern of instability in relationships, self-image, and affect with pronounced impulsivity. High emotional vulnerability.
-
-**Core symptoms:** Unstable relationships, identity disturbance, impulsivity, affective instability, self-harm, chronic emptiness, dissociation
-
-**Treatment:** DBT (Linehan), Schema Therapy, MBT, TFP
-**Self-help:** Skills kit, emergency plan, distress tolerance skills
+### 循证效果
+- 精神分裂症的复发预防：NNT = 9（Xia et al. 2011）
+- 抑郁症：提高治疗依从性 30-50%（Donker et al. 2009）
+- 焦虑障碍：单用心理教育即展现出轻度至中度的效果（Donker et al. 2009）
 
 ---
 
-## 3. Stigma Reduction
+## 2. 常见心理障碍概述
 
-### Common Myths and Facts
+### 2.1 抑郁症（重性抑郁障碍 Major Depressive Disorder）
 
-| Myth | Fact |
+**什么是抑郁症？** 持续至少2周的心情低落、兴趣丧失和精力缺乏，其程度远超正常的悲伤情绪。
+
+**核心症状 (ICD-11)：**
+- 情绪低落（一天中的大部分时间，几乎每天如此）
+- 兴趣丧失 / 快感缺失（Anhedonia）
+- 精力减退 / 易疲劳感
+
+**其他伴随症状：** 注意力集中困难、过度罪恶感、睡眠障碍、食欲改变、自杀意念、精神运动性迟滞或激越。
+
+**治疗方法：** 认知行为疗法（CBT）、药物治疗（SSRI、SNRI类抗抑郁药）、规律运动、光照疗法（季节性）。
+**自我调节：** 建立日常作息、安排愉悦活动、保持社交接触、适度运动、睡眠卫生。
+
+### 2.2 焦虑障碍（Anxiety Disorders）
+
+**什么是焦虑障碍？** 过度且难以控制的焦虑或恐惧，显著损害日常工作与生活。
+
+**主要类型：**
+- 广泛性焦虑障碍 (GAD)：长期且泛化的慢性担忧
+- 惊恐障碍 (Panic Disorder)：突发的剧烈惊恐发作伴随明显躯体症状
+- 社交焦虑障碍 (Social Anxiety Disorder)：在社交情境中害怕受到负面评价
+- 特定恐惧症 (Specific Phobias)：对特定物体或情境的强烈恐惧
+- 广场恐惧症 (Agoraphobia)：害怕处于难以逃离的场所或情境
+
+**治疗方法：** CBT（暴露疗法、认知重构）、SSRI类药物、放松训练。
+**自我调节：** 焦虑日记、腹式呼吸训练、循序渐进的面对与暴露。
+
+### 2.3 创伤后应激障碍（PTSD）
+
+**什么是PTSD？** 在经历或目睹创伤性事件（如严重威胁、暴力、事故、灾难）后产生的持续性心理应激反应，表现为再体验、回避和高警觉。
+
+**核心症状：**
+- 侵入性症状（创伤闪回 Flashbacks、噩梦）
+- 回避行为（回避与创伤相关的刺激）
+- 情感麻木或高唤醒/高警觉（过度惊跳反应、易怒）
+- 认知与情绪的持续负面改变
+
+**治疗方法：** 创伤聚焦的CBT、EMDR、叙事暴露疗法。
+**自我调节：** 稳定化技术、着陆/接地技术（Grounding）、安全岛技术 — 严禁自行暴露。
+
+### 2.4 双相情感障碍（Bipolar Disorder）
+
+**什么是双相情感障碍？** 抑郁发作与（轻）躁狂发作交替出现的慢性心理障碍，复发风险较高。
+
+**躁狂发作特点：** 情感高涨或易怒、睡眠需求减少、夸大观念、活动量显著增加、高风险冲动行为、言语迫促。
+
+**治疗方法：** 心境稳定剂（锂盐、丙戊酸钠）、非典型抗精神病药。
+**自我调节：** 情绪日记、规律睡眠作息、识别早期发作预警信号。
+
+### 2.5 精神分裂症（Schizophrenia）
+
+**什么是精神分裂症？** 一种严重的精神障碍，涉及感知觉、思维和情感体验的深刻紊乱。约占人口的 1%。
+
+**阳性症状：** 幻觉、妄想、思维混乱。
+**阴性症状：** 意志减退/缺乏动力、社交退缩、情感淡漠。
+**认知症状：** 注意力、工作记忆和执行功能受损。
+
+**治疗方法：** 抗精神病药物、针对精神症状的CBT、社区心理社会康复、家庭干预。
+**自我调节：** 严格遵医嘱服药、避免过度压力、识别复发先兆、建立规律生活结构。
+
+### 2.6 注意缺陷多动障碍（ADHD）
+
+**什么是ADHD？** 一种神经发育障碍，表现为注意力不集中、冲动和/或多动。始于童年期，约 50% 的患者症状会持续至成年期。
+
+**治疗方法：** 多模态干预（药物治疗、心理教育、执行功能教练、CBT）。
+**自我调节：** 借助外部结构化工具、计时器、清单、固定例程、适度运动。
+
+### 2.7 边缘型人格障碍（BPD）
+
+**什么是BPD？** 一种在人际关系、自我形象和情绪情感方面表现出普遍不稳定性的模式，伴随高度的冲动性和情绪易感性。
+
+**核心症状：** 不稳定的人际关系、身份认同混乱、冲动行为、情绪高度不稳定、自伤行为、慢性空虚感、解离症状。
+
+**治疗方法：** 辩证行为疗法（DBT）、模式疗法（Schema Therapy）、基于心智化的疗法（MBT）、移情焦点疗法（TFP）。
+**自我调节：** 技能包（Skills Kit）、紧急危机预案、痛苦承受技能。
+
+---
+
+## 3. 减少污名化 (Stigma Reduction)
+
+### 常见误区与事实真相
+
+| 常见误区 | 事实真相 |
 |------|------|
-| "Mentally ill people are dangerous" | Affected individuals are more often victims than perpetrators |
-| "Depression is weakness of will" | Depression is a neurobiological disorder |
-| "Therapy is just talking" | Evidence-based therapy demonstrably changes brain structures |
-| "It will pass on its own" | Many conditions become chronic without treatment |
-| "Medications cause addiction" | Antidepressants do not cause dependence |
+| “精神障碍患者都很危险” | 患者更有可能是暴力犯罪的受害者而非加害者 |
+| “抑郁症就是意志力薄弱” | 抑郁症是一种真实的神经生物学与心理障碍 |
+| “心理咨询/治疗只是在聊天” | 基于循证医学的心理治疗能显著改变大脑结构与神经功能 |
+| “时间久了自然就会好” | 许多心理障碍如果不及时干预可能会转为慢性 |
+| “精神科药物都会让人上瘾” | 抗抑郁药不会产生生理依赖性或成瘾性 |
 
-### Language and Stigma
-- "Person with schizophrenia" instead of "schizophrenic"
-- "Person with depression" instead of "depressive person"
-- Person-first language demonstrably reduces stigma (Granello & Gibbs, 2016)
-
----
-
-## 4. Family Perspective
-
-- Mental disorders affect the entire social environment
-- Families need their own psychoeducation and relief
-- Expressed Emotion (EE): High criticism/overinvolvement increases relapse risk
-- Recommendation: Family support groups, family psychoeducation
+### 语言表达与污名化
+- 使用“患有精神分裂症的人”而非“精神病患者/精神分裂症患者”
+- 使用“患有抑郁症的人”而非“抑郁症患者”
+- 以人为本的表达（Person-first language）已被研究证实能显著降低污名化程度（Granello & Gibbs, 2016）。
 
 ---
 
-## Ethics and Boundaries
+## 4. 家庭视角
 
-**An AI assistant may:**
-- Provide factual information about mental disorders
-- Answer common questions
-- Refer to further resources
+- 心理障碍会深刻影响患者的整个社会与家庭环境。
+- 患者家属同样需要专属的心理教育与心理支持。
+- 高表达情绪（Expressed Emotion, EE）：家庭成员中过度的批评或过度卷入会显著增加患者的复发风险。
+- 建议：参加患者家属互助会、多家庭心理教育小组。
 
-**An AI assistant must NOT:**
-- Make or confirm diagnoses
-- Give individual treatment recommendations
-- Replace professional psychoeducation in group format
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## 伦理与边界
+
+**AI助手可以：**
+- 提供关于心理障碍的客观科学知识
+- 解答常见心理健康疑问
+- 提供进一步科普资源与导引
+
+**AI助手严禁：**
+- 做出或确认任何临床诊断
+- 提供个别化的具体医疗处方建议
+- 替代专业人员开展的小组或个体心理教育
+
+**如遇急性危机，务必立即转介至：**
 - 988 Suicide & Crisis Lifeline (US): 988
 - Crisis Text Line (US): Text HOME to 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 紧急救援电话: 911 (US) / 112 (EU) / 120, 110 (CN)
 
 ---
 

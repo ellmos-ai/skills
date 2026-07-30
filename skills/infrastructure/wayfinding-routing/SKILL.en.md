@@ -5,8 +5,12 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.
-
+description: >
+  Universal LLM navigation, orientation, and emergency resilience skill.
+  Provides active wayfinding, self-orientation, and recovery heuristics when
+  agents face context drift, failing tools, loops, or dead ends. Includes
+  synonym strategies: survival-routing, dead-reckoning, pathfinder-routing,
+  and celestial-routing.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,14 +19,21 @@ category: infrastructure
 tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
 language: en
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills'}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `wayfinding-routing`.
 
-
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (English)
+# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)
 
 The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
 
@@ -64,7 +75,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
   - **Tier 3 (Read-Only State):** Direct file parsing (`view_file` / raw text)
   - **Tier 4 (Handoff):** Present structured status report and open options to the user.
 
-### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Sackgassen-Erkennung)
+### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Dead-End Detection)
 - **Trigger:** A complex multi-step refactoring or workflow path hits an unresolvable block at step N.
 - **Heuristic Rule:** Record breadcrumbs before making destructive changes. If a path fails:
   1. Revert uncommitted changes (`git checkout` / restore state).
@@ -72,7 +83,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
   3. Mark the failed route as blocked in `TODO.md`.
   4. Attempt alternative path B.
 
-### 5. `PROTOCOL-CIRCUIT-BREAKER` (Notaus & Safe Exit)
+### 5. `PROTOCOL-CIRCUIT-BREAKER` (Emergency Stop & Safe Exit)
 - **Trigger:** Execution limits reached, infinite loop detected, or critical system lock error.
 - **Heuristic Rule:** Execute emergency shutdown sequence:
   1. Release all acquired file and git locks (`python -m workflowhooker check`).

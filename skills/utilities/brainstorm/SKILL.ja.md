@@ -1,131 +1,144 @@
 ---
+name: brainstorm
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: アイデア出しのための構造化されたクリエイティビティ手法: SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーション。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `brainstorm`.
+> **日本語** — `brainstorm` の公式日本語版。
 
 
+# Brainstorm (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Brainstorm (English)
-
-> Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
-
----
-
-## When to Use?
-
-- New ideas needed
-- Stuck / creativity block
-- Innovation sought
-- Solve a problem creatively
-
-**Trigger words:** brainstorm, ideas, creative, innovative, ideation
+> イノベーションのための構造化クリエイティビティ — SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーション
 
 ---
 
-## Methods
+## 使用するタイミング
+
+- 新しいアイデアが必要なとき
+- 行き詰まり / 創造性のブロックが生じたとき
+- イノベーションを追求するとき
+- 課題を創造的に解決したいとき
+
+**トリガーワード:** brainstorm、ideas、creative、innovative、ideation、ブレインストーミング、アイデア、発想
+
+---
+
+## 手法
 
 ### 1. SCAMPER
 
-**Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse**
+**置換、結合、適応、修正、別の用途、削減、逆転**
 
-Systematically improve existing solutions:
-- **S**ubstitute: What can be replaced?
-- **C**ombine: What can be combined?
-- **A**dapt: What can be adapted?
-- **M**odify: What can be changed?
-- **P**ut to other use: What else could it be used for?
-- **E**liminate: What can be removed?
-- **R**everse: What can be reversed?
-
----
-
-### 2. Six Thinking Hats (Edward de Bono)
-
-Systematically think through 6 perspectives:
-
-- **White Hat — Facts:** What information do we have? What's missing?
-- **Red Hat — Emotion:** How does it feel? Intuition, gut feeling
-- **Black Hat — Critique:** What could go wrong? Risks, weaknesses
-- **Yellow Hat — Optimism:** What are the opportunities? Best case
-- **Green Hat — Creativity:** New ideas? Out-of-the-box?
-- **Blue Hat — Meta:** Process control, summary, next steps
-
-**Process:** Define problem (Blue) -> Facts (White) -> Emotions (Red) -> Critique (Black) -> Positives (Yellow) -> New ideas (Green) -> Summarize (Blue)
+既存の解決策を体系的に改善する:
+- **S**ubstitute（代用・置換）: 何を置き換えられるか？
+- **C**ombine（結合・組み合わせ）: 何を組み合わせられるか？
+- **A**dapt（適応・応用）: 何を応用・取り入れられるか？
+- **M**odify（修正・変更）: 何を変更・拡大できるか？
+- **P**ut to other use（転用・別の用途）: ほかにどんな用途があるか？
+- **E**liminate（削減・削除）: 何を排除・削減できるか？
+- **R**everse（逆転・再配置）: 何を逆転・入れ替えられるか？
 
 ---
 
-### 3. Mind Mapping
+### 2. 6つの思考帽子 (エドワード・デ・ボノ)
 
-Visualize thoughts hierarchically:
-1. Central topic
-2. Main branches (3-7)
-3. Sub-branches for each category
-4. Add details and ideas
-5. Identify connections
+6つの視点から体系的に考える:
 
----
+- **白の帽子 — 事実:** どんな情報があるか？何が不足しているか？
+- **赤の帽子 — 感情:** どう感じるか？直感、虫の知らせ
+- **黒の帽子 — 批判・リスク:** 何が失敗し得るか？リスク、弱点
+- **黄の帽子 — 楽観・メリット:** どんな機会があるか？最善のケース
+- **緑の帽子 — 創造性:** 新しいアイデアは？枠にとらわれない発想
+- **青の帽子 — 俯瞰・メタ:** プロセス管理、要約、次のステップ
 
-### 4. Reverse Brainstorming
-
-Invert the problem: "How do we make it WORSE?"
-
-1. Invert the problem
-2. Collect bad ideas
-3. Reverse = Good ideas
-
-Particularly effective when direct ideation is stalled.
+**プロセス:** 課題の定義（青） -> 事実の確認（白） -> 感情の共有（赤） -> リスク批判（黒） -> 楽観的評価（黄） -> 新アイデア創出（緑） -> まとめ（青）
 
 ---
 
-### 5. TRIZ (Theory of Inventive Problem Solving)
+### 3. マインドマッピング (Mind Mapping)
 
-Top 10 Principles for Software:
-1. **Segmentation:** Split monolith into modules
-2. **Extraction:** Isolate disturbing property
-3. **Local Quality:** Different components, different properties
-4. **Merging:** Combine similar functions
-5. **Universality:** One element, multiple functions
-6. **Nesting:** Components within components
-7. **Preliminary Action:** Preparation in advance
-8. **Feedback:** Monitoring and adaptation
-9. **Self-Service:** System maintains itself
-10. **Asymmetry:** Non-symmetrical designs
+思考を階層的に視覚化する:
+1. 中心テーマ
+2. メインブランチ（3〜7個）
+3. 各カテゴリのサブブランチ
+4. 詳細とアイデアの追加
+5. 関連性の特定
 
 ---
 
-### 6. Rapid Ideation
+### 4. 逆ブレインストーミング (Reverse Brainstorming)
 
-Quantity over quality — 50+ ideas in 20 min.
+問題を逆転させる: 「どうすれば状況を最悪にできるか？」
 
-**Rules:**
-- NO criticism during ideation
-- WILD ideas welcome
-- Build on others' ideas
-- Quantity FIRST
+1. 問題を逆転させる
+2. 悪いアイデアを集める
+3. 逆転させる = 良いアイデア
 
-**Timer-based:**
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
+直接的なアイデア出しが行き詰まったときに特に効果的。
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+### 5. TRIZ (発明的な問題解決の理論)
+
+ソフトウェアのためのトップ10の原理:
+1. **分断・局所化 (Segmentation):** モノリスをモジュールに分割
+2. **分離・抽出 (Extraction):** 害のある/邪魔な特性を隔離
+3. **局所的質 (Local Quality):** 異なるコンポーネントに異なる特性
+4. **結合・併合 (Merging):** 類似機能を結合
+5. **汎用性 (Universality):** 1つの要素に複数の機能
+6. **入れ子構造 (Nesting):** コンポーネントの中にコンポーネント
+7. **事前作用 (Preliminary Action):** 事前準備
+8. **フィードバック (Feedback):** 監視と適応
+9. **セルフサービス (Self-Service):** システムが自らを維持
+10. **非対称性 (Asymmetry):** 非対称なデザイン
+
+---
+
+### 6. ラピッドアイデエーション (Rapid Ideation)
+
+質より量 — 20分で50以上のアイデア。
+
+**ルール:**
+- アイデア出しの最中は批判禁止
+- 奇抜・突飛なアイデア歓迎
+- 他人のアイデアに乗っかる
+- まずは「量」を最優先
+
+**タイマーベース:**
+- ラウンド1 (5分): オープンなアイデア出し
+- ラウンド2 (5分): バリエーション展開
+- ラウンド3 (5分): 組み合わせ
+- ラウンド4 (5分): 極端・過激なアイデア
+
+---
+
+## ワークフローと手順
 
 ```
-1. User request
-2. Understand goal
-3. Choose method(s)
-4. Generate ideas (no criticism!)
-5. Clustering
-6. Feasibility/Impact matrix
-7. Top 5-10 selection
-8. Output + recommendation
+1. ユーザーからの要求
+2. ゴールの理解
+3. 手法の選択
+4. アイデア生成（批判禁止！）
+5. グループ化（クラスタリング）
+6. 実现可能性/インパクトマトリクス
+7. トップ 5〜10 の選定
+8. 成果物出力 + 提案
 ```
 
 ---
@@ -133,8 +146,8 @@ Quantity over quality — 50+ ideas in 20 min.
 ## 変更履歴
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- BACH v3.8.0 から移植
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 から移植 | スタンドアロン版*

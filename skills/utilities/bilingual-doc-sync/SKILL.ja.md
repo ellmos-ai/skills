@@ -2,126 +2,87 @@
 language: ja
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `bilingual-doc-sync`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bilingual-doc-sync`.
+> **日本語** — `bilingual-doc-sync` の公式日本語版。
 
 
 <img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
-# Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
+# Bilingual-Doc-Sync — 並行する言語バージョンの同期維持 (日本語)
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Zweisprachig geführte Dokumente divergieren schleichend: Die aktiv bearbeitete Fassung
-wächst, die andere veraltet — bis „Übersetzung" nur noch dem Namen nach stimmt. Dieser
-Skill macht die Synchronprüfung zu einem definierten Ablauf mit einer entscheidenden
-Vorab-Festlegung: **Welche Fassung führt?** Ohne Leitsprache-Regel wird jede Divergenz
-zur Einzelfallentscheidung und der Abgleich unwiederholbar.
+2言語で管理されるドキュメントは徐々に乖離していきます。アクティブに編集されているバージョンが成長する一方で、もう一方は古くなり、最終的に「翻訳」が名ばかりになってしまいます。このスキルは、同期チェックを明確な手順に落とし込み、**「どのバージョンが主導（リード）するか？」** という重要な事前決定を行います。主言語言語ルールがなければ、乖離のたびに個別判断が必要となり、同期作業の再現性が失われます。
 
-## Ablauf
+## 手順
 
-### 1. Bestand feststellen
+### 1. 現状の確認
 
-- Liegen beide (alle) Sprachfassungen vor? Fehlt eine ganz → **nachziehen** (vollständige
-  Übersetzung der führenden Fassung, nicht Neudichtung).
-- Namenskonvention prüfen (z. B. `DOKUMENT.md` + `DOKUMENT.en.md` oder `_de`/`_en`-Suffixe)
-  und Abweichler angleichen — Auffindbarkeit ist die halbe Synchronität.
+- 両方（またはすべて）の言語バージョンが存在するか？欠落している場合 → **追及・補全**（新執筆ではなく、主導バージョンの完全な翻訳）。
+- 命名規約（例: `DOCUMENT.md` + `DOCUMENT.en.md` または `_de`/`_en` サフィックス）を確認し、表記揺れを統一する — 検索性の高さは同期の成否を分か値ます。
 
-### 2. Leitsprache klären (vor jedem Abgleich)
+### 2. 主言語言語の明確化（照合を行う前に）
 
-- Die Leitsprache ist die Fassung, in der inhaltlich gearbeitet wird (bei Papers oft EN,
-  bei lokaler Doku oft die Muttersprache). Sie gewinnt bei Widerspruch.
-- **Rücktransfer-Ausnahme:** Löst die Nebenfassung etwas nachweislich besser (klarere
-  Formulierung, korrigierter Fehler), wird es in die Leitfassung ÜBERNOMMEN — erst
-  rücktransferieren, dann normal synchronisieren. Fachliche Korrektheit prüfen, bevor
-  eine „schönere" Formulierung übernommen wird.
+- 主言語言語（リード言語）とは、内容の編集が主に行われるバージョンです（論文では EN、ローカルドキュメントでは母国語など）。矛盾が生じた場合はこちらが優先されます。
+- **逆転吸収の例外:** サブバージョン側の表現が明らかに優れている場合（より明確な表現、修正されたエラーなど）、それを主導バージョンへ**取り込み（逆転吸収）** ます — まず逆転吸収を行ってから、通常同期を進めます。「より綺麗な」表現を採用する前に、専門的な正確性を確認してください。
 
-### 3. Parallelität prüfen
+### 3. 並行性の確認
 
-Struktur zuerst, dann Inhalt:
+まず構造を確認し、次に内容を確認します:
 
-1. **Gliederungsvergleich:** Abschnitte/Überschriften beider Fassungen nebeneinander —
-   fehlende, zusätzliche, umsortierte Abschnitte sind die groben Divergenzen.
-2. **Abschnittsweise Stichprobe** der übereinstimmenden Gliederung: Aussagen, Zahlen,
-   Verweise, Beispiele identisch? Besonders divergenzanfällig: Changelogs, Tabellen,
-   Zahlenwerte, Literatur-/Linkverzeichnisse, zuletzt bearbeitete Abschnitte.
-3. **Nicht übersetzbare Invarianten** prüfen: Code-Blöcke, Identifier, Formeln, Pfade
-   müssen in beiden Fassungen IDENTISCH sein (Code wird nie übersetzt).
+1. **構成の比較:** 両バージョンのセクション/見出しを並べて比較 — 欠落、追加、順序変更されたセクションは大きな乖離点です。
+2. **一致する構成のセクション別サンプリング:** 主張、数値、参照、例が一致しているか？特に乖離しやすい点: 変更履歴（Changelog）、テーブル、数値、文献・リンク一覧、最近編集されたセクション。
+3. **非翻訳インバリアント（不変要素）の確認:** コードブロック、識別子、数式、パスは両バージョンで**完全に一致**している必要があります（コードは翻訳しません）。
 
-### 4. Beheben
+### 4. 修正
 
-- Divergenzen in Richtung Leitsprache auflösen (bzw. nach Rücktransfer).
-- Sprachtypografie der Zielsprache respektieren (im Deutschen echte Umlaute ä ö ü ß,
-  keine ae/oe/ue-Ersatzschreibung; Anführungszeichen-Konventionen).
-- Metadaten nachziehen: Versionsnummern, Datumsfelder, Changelog-Einträge in BEIDEN
-  Fassungen (der Changelog selbst ist der häufigste Divergenzpunkt).
+- 乖離を主導言語の方向に解消します（逆転吸収後を含む）。
+- ターゲット言語のタイポグラフィを尊重します（適切な句読点、記号規約など）。
+- メタデータの追及: バージョン番号、日付フィールド、変更履歴エントリを**両方**のバージョンで更新します（変更履歴自体が最も頻繁な乖離発生点です）。
 
-### 5. Dokumentieren
+### 5. 記録
 
-Ergebnis festhalten (was war divergent, was wurde übernommen, was rücktransferiert).
-Als periodischer Lauf über einen Bestand: mit dem Rotations-Gerüst kombinieren
-(`rotation-check`) — ein Dokument(-Paar) pro Lauf, Registry als Gedächtnis.
+結果を記録します（何が乖離していたか、何を採用したか、何を逆転吸収したか）。
+ドキュメント資産に対する定期実行として: ローテーション検証フレームワーク（`rotation-check`）と組み合わせます — 1回の実行につき1つのドキュメント（またはペア）を処理し、レジストリを記憶として活用します。
 
-## Erweiterung: Expansions-Audit (sollten MEHR Sprachen existieren?)
+## 拡張: 拡張監査（さらに言語を追加すべきか？）
 
-Neben dem Synchronhalten bestehender Fassungen gehört zur Sprachpflege die Frage, ob ein
-Dokument/Projekt WEITERE Sprachen verdient:
+既存バージョンの同期維持に加え、言語管理にはドキュメント/プロジェクトが**追加の**言語をサポートすべきかを評価することが含まれます:
 
-1. **Eignung bewerten** statt blind übersetzen: Zielgruppe, internationale Nutzbarkeit,
-   Store-/Web-Präsenz, Mobilität des Inhalts. Nicht jedes interne Dokument braucht Englisch;
-   nicht jede App braucht fünf Sprachen.
-2. **Technische Vorbereitung prüfen:** Ist das Ziel überhaupt auf Sprachdateien/Parallel-
-   Fassungen vorbereitet (i18n-Struktur, Namenskonvention)? Wenn nein, ist DAS die erste
-   Aufgabe, nicht die Übersetzung.
-3. **Befund dokumentieren, nicht sofort massenübersetzen:** Konkrete Übersetzungsaufgaben
-   in die projektlokale TODO-Datei; „keine weitere Sprache sinnvoll" ist ein gültiges,
-   festzuhaltendes Ergebnis.
-4. **QA bei nachgezogenen Fassungen:** Auto-generierte Übersetzungen stichprobenartig
-   gegen die Leitfassung prüfen (Abschnitt 3), bevor sie als „vorhanden" gelten.
+1. **盲目的な翻訳ではなく適合性を評価:** ターゲット層、国際的な利用可能性、ストア/Webでの露出度、コンテンツの流動性。すべての内部ドキュメントに英語が必要なわけではなく、すべてのアプリに5言語が必要なわけではありません。
+2. **技術的準備の確認:** 対象が言語ファイルや並行バージョン（i18n 構造、命名規約）に対応しているか？対応していない場合、**それ**が最初のタスクであり、翻訳ではありません。
+3. **診断結果を記録し、直ちに大量翻訳しない:** 具体的な翻訳タスクをプロジェクトローカルの TODO ファイルに記述します。「これ以上の言語追加は不要」も記録すべき有効な結果です。
+4. **追加バージョンの QA:** 自動生成された翻訳が「存在する」とみなされる前に、主導バージョンに対してランダムチェック（セクション 3）を実施します。
 
-## 使用例と実行モデル & Usage
+## 例と使用方法
 
 ```text
-Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
+依頼: 「論文の DE 版と EN 版が同期しているか確認してほしい。」
 
-1. Bestand: paper_en.tex (führend) + paper_de.tex vorhanden.
-2. Gliederung: DE fehlt der neue Abschnitt 4.2 (letzte EN-Revision); DE hat einen
-   besseren Beweis-Absatz in 3.1.
-3. Rücktransfer: 3.1-Formulierung fachlich geprüft → in EN übernommen.
-4. Nachziehen: 4.2 nach DE übersetzt; Zahlen in Tabelle 2 abgeglichen (DE hatte
-   veraltete Werte); Literaturverzeichnis identisch gemacht.
-5. Registry-Eintrag: „paper-X | 2026-07-03 | de-en-sync | 3 Divergenzen behoben,
-   1 Rücktransfer | nächster Check nach nächster EN-Revision".
+1. 現状: paper_en.tex（主導）+ paper_de.tex が存在。
+2. 構成: DE に新しいセクション 4.2（EN の最新改訂）が欠落。DE には 3.1 に優れた証明段落がある。
+3. 逆転吸収: 3.1 の表現を専門的に検証 → EN に取り込み。
+4. 追及・同期: 4.2 を DE に翻訳。表 2 の数値を照合（DE の値が古かった）。文献リストを一致させた。
+5. レジストリ記録: 「paper-X | 2026-07-03 | de-en-sync | 3 件の乖離を修正、1 件の逆転吸収 | 次回チェックは EN の次回改訂後」。
 ```
 
-## Red Flags
+## レッドフラグ（注意すべき考え）
 
-| Gedanke | Realität |
+| 考え方 | 現実 |
 | --- | --- |
-| „Ich übersetze die Unterschiede einfach frisch" | Erst Leitsprache + Rücktransfer-Frage klären — sonst wird die bessere Lösung überschrieben. |
-| „Die Gliederung passt, also ist es synchron" | Zahlen, Changelogs und Verweise divergieren zuerst — Stichprobe in die Tiefe ist Pflicht. |
-| „Code-Kommentare übersetze ich mit" | Code-Blöcke und Identifier bleiben in beiden Fassungen identisch (englisch). |
-| „Ich synchronisiere alle Dokumente in einem Rutsch" | Ein Paar pro Lauf (Rotations-Gerüst) hält den Abgleich prüfbar. |
+| 「差分を新しく翻訳し直せばいい」 | まず主導言語と逆転吸収の有無を確認する — そうしないと、より良い解決策が上書きされてしまいます。 |
+| 「見出しが一致しているから同期されている」 | 数値、変更履歴、参照リンクが最初に乖離します — 深いサンプリングチェックが必須です。 |
+| 「コードのコメントも一緒に翻訳する」 | コードブロックと識別子は両バージョンで完全一致（英語）のままにします。 |
+| 「すべてのドキュメントを一気に同期する」 | 1回の実行で1ペアのみ（ローテーション構造）処理することで、検証可能性を維持します。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
+- `rotation-check` — ドキュメント資産に対する定期実行のためのフレームワーク。
+- `workflow-extract` — このチェックを常設の自動化プロセスとして設定する場合。
 
 ## 変更履歴
 
 ### 1.1.0 (2026-07-03)
-- Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für
-  nachgezogene Fassungen) — integriert statt als eigener i18n-coverage-audit-Skill
-  (Dedup-Entscheid).
+- 拡張監査の追加（i18n 適合性評価、技術的準備、追加バージョンの QA）— 独立した i18n-coverage-audit スキルを作るのではなく統合（重複排除の決定）。
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Abstrahiert aus der Codex-Automation
-  „research-paper-de-en-synchronisationscheck", verallgemeinert auf beliebige parallel
-  geführte Sprachfassungen (Papers, READMEs, Skills, Website-Texte).
+- 初期バージョン。Codex 自動化「research-paper-de-en-synchronisationscheck」から抽象化し、並行管理される任意の言語バージョン（論文、README、スキル、Web テキスト）に汎用化。

@@ -1,202 +1,214 @@
 ---
+name: cognitive-restructuring
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Terapia Cognitivo-Conductual: Modelo ABC, pensamientos automáticos, identificación de distorsiones cognitivas y registros de pensamientos.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [cbt, cognitive-restructuring, cognitive-distortions, thought-record, abc-model]
 language: es
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `cognitive-restructuring`.
+> **Español** — Versión oficial en español de `cognitive-restructuring`.
 
 
+# Reestructuración Cognitiva (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Técnica central de la TCC: Esquema ABC, identificación y modificación de pensamientos disfuncionales
 
-
-# Cognitive Restructuring (English)
-
-> Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Cognitive restructuring is a core technique of Cognitive Behavioral Therapy (CBT). It helps identify automatic negative thoughts, challenge them, and replace them with more helpful alternatives.
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. ABC Model (Ellis)
+## Contexto
 
-The ABC model explains how events, thoughts, and feelings are connected.
+La reestructuración cognitiva es una técnica fundamental de la Terapia Cognitivo-Conductual (TCC). Ayuda a identificar pensamientos automáticos negativos, cuestionarlos y reemplazarlos por alternativas más adaptativas y útiles.
+
+**Nota:** Esto es un apoyo, no un sustituto de la terapia profesional.
+**Nunca aplicar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET)
+
+---
+
+## 1. El Modelo ABC (Ellis)
+
+El modelo ABC explica cómo se relacionan los acontecimientos, los pensamientos y los sentimientos.
 
 ```
-A (Activating Event)   ->  B (Beliefs / Thoughts)  ->  C (Consequences / Feelings/Behavior)
-Trigger                     Evaluation / Belief           Emotional consequence
+A (Acontecimiento Activador) -> B (Creencias / Pensamientos) -> C (Consecuencias / Sentimientos/Conducta)
+Desencadenante                   Evaluación / Creencia            Consecuencia emocional
 ```
 
-**Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
+**Importante:** ¡No es el acontecimiento (A) el que crea la emoción (C), sino la evaluación o interpretación (B)!
 
-**Example:**
+**Ejemplo:**
 ```
-A: Boss criticizes a report in a meeting
-B: "I am incompetent, everyone thinks so now"
-C: Shame, withdrawal, avoiding future contributions
+A: El jefe critica un informe en una reunión
+B: "Soy incompetente, ahora todos lo piensan"
+C: Vergüenza, aislamiento, evitar futuras contribuciones
 ```
 
-**Goal:** Change B to influence C.
+**Objetivo:** Modificar B para influir positivamente en C.
 
 ---
 
-## 2. Identifying Automatic Negative Thoughts (ANTs)
+## 2. Identificación de Pensamientos Automáticos Negativos (PANs)
 
-**What are ANTs?**
-- Quick, automatic evaluations in stressful situations
-- Often perceived as facts, although they are interpretations
-- Tend toward exaggeration, generalization, catastrophizing
+**¿Qué son los PANs?**
+- Evaluaciones rápidas y automáticas en situaciones de estrés
+- A menudo se perciben como hechos reales, aunque son interpretaciones
+- Tienden a la exageración, la generalización y la catastrofización
 
-**Typical recognition features:**
-- Absolute thinking: "always," "never," "everyone," "nobody"
-- Catastrophizing: "This will end terribly"
-- Mind reading: "They must think that..."
-- Overgeneralization: "This never works for me"
+**Características típicas de reconocimiento:**
+- Pensamiento absoluto: "siempre", "nunca", "todos", "nadie"
+- Catastrofización: "Esto terminará terriblemente"
+- Lectura de mente: "Seguro están pensando que..."
+- Sobregeneralización: "Esto nunca me sale bien"
 
-**Recognition questions:**
-- "What went through your mind when that happened?"
-- "When you think about the situation, what words come up?"
-- "What do you fear might happen?"
+**Preguntas para identificarlos:**
+- "¿Qué pasó por tu mente cuando ocurrió eso?"
+- "Cuando piensas en la situación, ¿qué palabras surgen?"
+- "¿Qué temes que pueda pasar?"
 
 ---
 
-## 3. Cognitive Distortions (Thinking Errors)
+## 3. Distorsiones Cognitivas (Sesgos Cognitivos)
 
-| Distortion | Description | Example |
+| Distorsión | Descripción | Ejemplo |
 |------------|-------------|---------|
-| All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
-| Overgeneralization | One case = general pattern | "This always goes wrong for me" |
-| Mental filter | Only perceiving negatives | Focusing on the single criticism in feedback |
-| Mind reading | Believing to know what others think | "They surely hate me" |
-| Catastrophizing | Assuming the worst case | "This will be a catastrophe" |
-| Emotional reasoning | Feeling = reality | "I feel stupid, so I am stupid" |
-| Should/must thinking | Rigid rules | "I should be able to do this" |
-| Personalization | Relating everything to oneself | "The bad project was my fault" |
+| Todo o nada | Pensamiento en blanco y negro | "Si no soy perfecto, soy un fracaso" |
+| Sobregeneralización | Un solo caso = patrón general | "Esto siempre me sale mal" |
+| Filtro mental | Percibir únicamente lo negativo | Centrarse en la única crítica dentro de un elogio |
+| Lectura de mente | Creer saber lo que otros piensan | "De seguro me odian" |
+| Catastrofización | Asumir el peor escenario posible | "Esto va a ser una catástrofe" |
+| Razonamiento emocional | Sentimiento = realidad | "Me siento estúpido, por lo tanto lo soy" |
+| Pensamiento de "debería/tengo que" | Reglas rígidas e inflexibles | "Debería ser capaz de hacer esto" |
+| Personalización | Relacionarlo todo consigo mismo | "El fracaso del proyecto fue mi culpa" |
 
 ---
 
-## 4. Challenging Thoughts (Socratic Questioning)
+## 4. Cuestionamiento de Pensamientos (Debate Socrático)
 
-**Goal:** Not directly refute thoughts, but encourage examination.
+**Objetivo:** No refutar los pensamientos directamente, sino fomentar el examen crítico.
 
-**Question set:**
+**Conjunto de preguntas:**
 
-1. **Examine evidence:**
-   - "What evidence is there for this?"
-   - "What evidence speaks against it?"
+1. **Examinar la evidencia:**
+   - "¿Qué evidencia hay a favor de este pensamiento?"
+   - "¿Qué evidencia hay en contra?"
 
-2. **Alternative explanations:**
-   - "Are there other explanations for this?"
-   - "How would someone else view this situation?"
+2. **Explicaciones alternativas:**
+   - "¿Existen otras explicaciones para esto?"
+   - "¿Cómo vería esta situación otra persona?"
 
-3. **Assess consequences:**
-   - "What is the worst that could happen? How likely is that?"
-   - "What is the best that could happen?"
-   - "What is the most realistic outcome?"
+3. **Evaluar consecuencias:**
+   - "¿Qué es lo peor que podría pasar? ¿Qué tan probable es?"
+   - "¿Qué es lo mejor que podría pasar?"
+   - "¿Cuál es el resultado más realista?"
 
-4. **Check usefulness:**
-   - "Does this thought help me achieve my goals?"
-   - "What would I say to a good friend who thinks this way?"
+4. **Comprobar la utilidad:**
+   - "¿Me ayuda este pensamiento a alcanzar mis objetivos?"
+   - "¿Qué le diría a un buen amigo que pensara de esta manera?"
 
 ---
 
-## 5. Cognitive Restructuring Step by Step
+## 5. Reestructuración Cognitiva Paso a Paso
 
-### Record Format (Thought Record)
+### Formato de Registro (Registro de Pensamientos)
 
 ```
-SITUATION
-What happened? (When? Where? Who was there?)
-[Free text]
+SITUACIÓN
+¿Qué sucedió? (¿Cuándo? ¿Dónde? ¿Quién estaba allí?)
+[Texto libre]
 
-THOUGHT
-What went through my mind?
-Automatic thought: [...]
-How much do I believe it? (0-100%): [...]%
+PENSAMIENTO
+¿Qué pasó por mi mente?
+Pensamiento automático: [...]
+¿Cuánto lo creo? (0-100%): [...]%
 
-EMOTION
-What emotions did I have?
-Emotion: [...]    Intensity (0-100%): [...]%
+EMOCIÓN
+¿Qué emociones sentí?
+Emoción: [...]    Intensidad (0-100%): [...]%
 
-COGNITIVE DISTORTION
-Which cognitive distortions are involved?
-[List from table above]
+DISTORSIÓN COGNITIVA
+¿Qué distorsiones cognitivas están presentes?
+[Lista de la tabla anterior]
 
-EXAMINE
-Evidence for: [...]
-Evidence against: [...]
-Alternative perspective: [...]
+EXAMINAR
+Evidencia a favor: [...]
+Evidencia en contra: [...]
+Perspectiva alternativa: [...]
 
-ALTERNATIVE THOUGHT
-More balanced, realistic thought:
+PENSAMIENTO ALTERNATIVO
+Pensamiento más equilibrado y realista:
 [...]
-How much do I believe it? (0-100%): [...]%
+¿Cuánto lo creo? (0-100%): [...]%
 
-RESULT
-Emotion afterward: [...]   Intensity: [...]%
-Takeaway: [...]
+RESULTADO
+Emoción posterior: [...]   Intensidad: [...]%
+Aprendizaje/Conclusión: [...]
 ```
 
 ---
 
-## 6. Behavioral Activation
+## 6. Activación Conductual
 
-**Supplement to cognitive work:** Changing behavior supports thought change.
+**Complemento al trabajo cognitivo:** Modificar la conducta apoya el cambio de pensamiento.
 
-**Principle:** Positive activities -> Better mood -> More helpful thoughts
+**Principio:** Actividades positivas -> Mejor estado de ánimo -> Pensamientos más útiles
 
-**Steps:**
-1. Create list of pleasant/meaningful activities
-2. Plan activities (specifically: when, how, where)
-3. Track implementation
-4. Rate mood before/after
+**Pasos:**
+1. Crear una lista de actividades agradables/significativas
+2. Planificar actividades (específicamente: cuándo, cómo, dónde)
+3. Registrar la realización
+4. Calificar el estado de ánimo antes y después
 
-**Example activities:**
-- Walk (nature, fresh air)
-- Contact with important people
-- Creative activities
-- Physical exercise
-- Things that used to bring joy
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Explain cognitive distortions and the ABC model
-- Ask Socratic questions
-- Guide thought records
-- Provide psychoeducation about CBT techniques
-
-**An AI assistant must NOT:**
-- Replace professional cognitive behavioral therapy
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Ejemplos de actividades:**
+- Paseo (naturaleza, aire fresco)
+- Contacto con personas importantes
+- Actividades creativas
+- Ejercicio físico
+- Cosas que solían brindar alegría
 
 ---
 
-## References
+## Ética y Límites
+
+**Un asistente de IA puede:**
+- Explicar las distorsiones cognitivas y el modelo ABC
+- Formular preguntas socráticas
+- Guiar registros de pensamientos
+- Proporcionar psicoeducación sobre técnicas de TCC
+
+**Un asistente de IA NO debe:**
+- Reemplazar la terapia cognitivo-conductual profesional
+- Realizar diagnósticos o recomendaciones de tratamiento
+- Llevar a cabo intervención en crisis
+- Aplicar EMDR, Exposición Prolongada (PE) o Terapia de Exposición Narrativa (NET)
+
+**En caso de crisis aguda, SIEMPRE derivar a:**
+- 988 Suicide & Crisis Lifeline (EE. UU.): 988
+- Crisis Text Line (EE. UU.): Envíe HOME al 741741
+- Samaritans (Reino Unido): 116 123
+- Telefonseelsorge (Alemania): 0800 111 0 111 / 0800 111 0 222
+- Servicios de emergencia: 911 (EE. UU.) / 112 (UE)
+
+---
+
+## Referencias
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Beck (1979), Ellis (1962) — Not professional therapy*
+*Adaptado de BACH v3.8.0 | Versión independiente*
+*Fuentes: Beck (1979), Ellis (1962) — No es terapia profesional*

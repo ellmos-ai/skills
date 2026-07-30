@@ -1,208 +1,172 @@
 ---
+name: trampelpfadanalyse
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-06-21
+updated: 2026-06-21
+description: Анализ ошибок для рабочих процессов конвейеров и контрольных файлов - проверка того, действительно ли конвенция или процедура видима и обнаруживаема для LLM. Эмпирический базовый уровень → вмешательство → повторное сравнительное тестирование с использованием наивных субагентов (изолированные копии в песочнице, идентичный тест-кейс, количественное измерение успеха). Используйте этот навык, когда агенты неоднократно игнорируют правило/README/конвенцию или ошибаются в навигации, и вы хотите измерить, действительно ли изменение документации меняет поведение. Вызывается по 'is the convention even seen', 'why does no agent follow the rule', 'make a doc signpost measurably effective', 'desire-path analysis', 'trampelpfadanalyse'.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `trampelpfadanalyse`.
+> **Русский** — Официальная русская версия `trampelpfadanalyse`.
 
 
+# Анализ протоптанных троп (Desire-Path Analysis) — эмпирическая визуализация конвенций для LLM (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Метод выявления ошибок в рабочих процессах конвейеров и контрольных файлов, вызванных не сломанным кодом, а тем, что **конвенция невидима для LLM**. Вместо того чтобы гадать, является ли README или правило «достаточно понятным», вы измеряете это эмпирически: наивные субагенты без предварительных знаний запускаются в рабочий процесс, их поведение становится **базовым уровнем (baseline)**; точечное изменение документации («указатель») является **вмешательством (intervention)**, а новые наивные субагенты обеспечивают **повторное тестирование (retest)**. Разница (diff) по сравнению с базовым уровнем служит измерением успеха.
 
+Название происходит от понятия *желаемая тропа / протоптанная тропа* (нем. *Trampelpfad*, англ. *desire path*): дорога должна проходить там, где люди реально ходят вместо мощёного маршрута. По аналогии, пути наивных LLM показывают, где документация или ограждения действительно необходимы — а не там, где мы это предполагаем.
 
-# Desire-Path Analysis — Making Conventions Empirically Visible to LLMs (English)
+## Когда использовать этот навык
 
-A method for uncovering errors in pipeline and control-file workflows that do not come
-from broken code, but from a **convention being invisible to an LLM**. Instead of
-guessing whether a README or rule is "clear enough", you measure it empirically: naive
-subagents with no prior knowledge are turned loose on the workflow, their behavior
-becomes the **baseline**, a targeted documentation change (a "signpost") is the
-**intervention**, and fresh naive subagents provide the **retest**. The diff against the
-baseline is the success measurement.
+- Агенты неоднократно игнорируют правило/конвенцию, хотя она задокументирована.
+- Вы хотите узнать, является ли процедура **видимой/обнаруживаемой** для LLM перед написанием дополнительной документации («говорит ли кто-нибудь здесь со стеной?»).
+- После реструктуризации (новые директории, переименования): могут ли агенты по-прежнему находить точки входа?
+- Вы внесли изменение в документацию и хотите **доказать**, что оно работает — а не просто надеяться на это.
+- Тест перед интеграцией новых LLM-партнёров в конвейер.
 
-The name comes from the *desire path* (German: *Trampelpfad*): where people actually walk
-instead of on the paved route is where a path belongs. By analogy, the paths of naive
-LLMs show where documentation/guardrails are actually needed — not where we assume them.
+Не подходит для: чистых ошибок в коде (→ систематическая отладка) или выбора паттернов координации роя для продакшен-задач (→ см. `swarm-operations`). Этот навык использует рой наивных агентов исключительно как **измерительный инструмент**.
 
-## When to use this skill
+## Основная идея в одном предложении
 
-- Agents repeatedly ignore a rule/convention even though it is documented.
-- You want to know whether a procedure is **visible/discoverable** to an LLM before
-  writing more docs ("is anyone here talking to a wall?").
-- After a restructuring (new directories, renames): can agents still find the entry points?
-- You made a documentation change and want to **prove** it works — not just hope so.
-- Onboarding test before integrating new LLM partners into a pipeline.
-
-Not for: pure code bugs (→ systematic debugging), or selecting swarm coordination patterns
-for a production task (→ see `swarm-operations`). This skill uses a swarm of naive agents
-exclusively as a **measuring instrument**.
-
-## Core idea in one sentence
-
-Treat documentation like UX: what counts is not what you wrote, but what an unbiased user
-(here: a naive agent) actually does with it — and you measure that, change it, and measure
-again.
+Относитесь к документации как к UX: важно не то, что вы написали, а то, что непредвзятый пользователь (здесь: наивный агент) реально с этим делает — и вы измеряете это, меняете и измеряете снова.
 
 ---
 
-## The process: 5 steps
+## Процесс: 5 шагов
 
 ```
-1. BASELINE       naive subagents → measure current behavior (quantitative)
-2. PATH ANALYSIS  where exactly does it fail? which doc location misleads?
-3. INTERVENTION   put up a "signpost" (README/convention made more prominent)
-4. RETEST         FRESH naive subagents, identical test case
-5. DIFF           retest vs. baseline → success measurement + honest assessment
+1. БАЗОВЫЙ УРОВЕНЬ  Наивные субагенты → измерить текущее поведение (количественно)
+2. АНАЛИЗ ПУТИ      Где именно сбой? Какое место в документации вводит в заблуждение?
+3. ВМЕШАТЕЛЬСТВО    Установить «указатель» (сделать README/конвенцию заметнее)
+4. ПОВТОРНЫЙ ТЕСТ   СВЕЖИЕ наивные субагенты, идентичный тест-кейс
+5. РАЗНИЦА (DIFF)   Повторный тест vs Базовый уровень → измерение успеха + честная оценка
 ```
 
-### Step 1 — Baseline: measure current behavior naively
+### Шаг 1 — Базовый уровень: наивное измерение текущего поведения
 
-First phrase the problem as a **testable question**, e.g. "Does an agent create a log at
-the convention-mandated location?" or "Does an agent find the pipeline's entry point?".
+Сначала сформулируйте проблему как **проверяемый вопрос**, например: «Создаёт ли агент лог в месте, предусмотренном конвенцией?» или «Находит ли агент точку входа в конвейер?».
 
-Then turn naive subagents loose:
+Затем запустите наивных субагентов:
 
-- **Naive means:** no project memory, no skills, no prior hints — the agent only knows the
-  entry path and the task. This measures **pure discoverability via the existing docs**,
-  not the agent's prior knowledge.
-- **Isolated sandbox copies:** each probe agent works on its own copy of the affected
-  folder/workflow, so probes do not influence each other and the real state stays untouched.
-- **Same test case, multiple repetitions:** variability is real. One probe is an anecdote;
-  n repetitions (e.g. 3, or more if needed) yield a rate.
-- **A cheap, "naive" model** is sufficient and realistic — it should not guess cleverly,
-  but show where the docs lead an average agent.
+- **Наивный означает:** без памяти о проекте, без навыков, без предварительных подсказок — агент знает только путь входа и задачу. Это измеряет **чистую обнаруживаемость через существующую документацию**, а не предварительные знания агента.
+- **Изолированные копии в песочнице:** каждый агент-проба работает со своей собственной копией затронутой папки/воркфлоу, поэтому пробы не влияют друг на друга, а реальное состояние остается нетронутым.
+- **Один и тот же тест-кейс, несколько повторений:** вариативность реальна. Одна проба — это анекдот; n повторений (например, 3 или более при необходимости) дают показатель.
+- **Дешёвая «наивная» модель** достаточна и реалистична — она не должна хитро угадывать, а должна показать, куда документация ведёт среднего агента.
 
-Minimal probe prompt (adjust placeholders):
+Минимальный промпт для пробы (настройте плейсхолдеры):
 
 ```
-You are exploring <SYSTEM>. It is located at: <PATH>.
-TASK: <specific task>.
-RULES:
-1. You only know the path above, nothing else.
-2. Explore to complete the task. Max. <N> steps.
-3. Report at the end: VISITED_DIRECTORIES, READ_FILES,
+Ты исследуешь <СИСТЕМА>. Она находится по адресу: <ПУТЬ>.
+ЗАДАЧА: <конкретная задача>.
+ПРАВИЛА:
+1. Ты знаешь только указанный выше путь, больше ничего.
+2. Исследуй, чтобы выполнить задачу. Макс. <N> шагов.
+3. В конце отчитайся: VISITED_DIRECTORIES, READ_FILES,
    TASK_COMPLETED (yes/no), MOST_HELPFUL_FILE.
 ```
 
-**Record as baseline metrics** (always quantitative, never "feels better"):
+**Зафиксируйте как метрики базового уровня** (всегда количественные, никогда «выглядит лучше»):
 
-| Metric | Meaning |
+| Метрика | Значение |
 |---|---|
-| Success rate | how often the task was completed per convention (e.g. 0/3) |
-| Wrong behavior | how often the wrong location/method (e.g. 3/3 collective log instead of per-entry) |
-| Paths to goal | how many steps/detours to reach the goal |
-| Blind spots | which relevant file/location nobody opens |
+| Уровень успеха | как часто задача выполнялась по конвенции (например, 0/3) |
+| Ошибочное поведение | как часто использовалось неверное место/метод (например, 3/3 коллективный лог вместо поштучного) |
+| Путь к цели | сколько шагов/обходов потребовалось для достижения цели |
+| Слепые зоны | какой релевантный файл/место никто не открывает |
 
-### Step 2 — Path analysis: where does it really fail?
+### Шаг 2 — Анализ пути: где на самом деле происходит сбой?
 
-Evaluate the probe reports together (a "heatmap" of visited locations is enough):
+Оцените отчёты проб совместно (достаточно «тепловой карты» посещённых мест):
 
-- Which file is read **often** (HOT)? If orientation is missing there, that is the most
-  effective place for a signpost.
-- Which relevant location is **never** opened (COLD / blind spot)? It is effectively
-  invisible — no matter how good its content is.
-- Where does an agent loop or bypass the convention (dead end, circumvention)? That marks
-  the concrete documentation gap.
+- Какой файл читается **часто** (HOT)? Если там не хватает ориентира, это самое эффективное место для установки указателя.
+- Какое релевантное место **никогда** не открывается (COLD / слепая зона)? Оно фактически невидимо — независимо от того, насколько хорош его контент.
+- Где агент циклится или обходит конвенцию (тупик, обходной путь)? Это указывает на конкретную брешь в документации.
 
-Findings table:
+Таблица находок:
 
-| Finding | Meaning | Action (→ Step 3) |
+| Находка | Значение | Действие (→ Шаг 3) |
 |---|---|---|
-| HOT + no orientation | high traffic, no signpost | place the signpost right there |
-| WARM + errors | agents arrive, stumble | add example/clarification |
-| COLD | location is never found | link to it from a HOT file |
-| Circumvention | convention is bypassed | hint at the point of circumvention |
+| HOT + нет ориентира | высокий трафик, нет указателя | установить указатель прямо там |
+| WARM + ошибки | агенты доходят, но спотыкаются | добавить пример/уточнение |
+| COLD | место никогда не находится | поставить ссылку из файла HOT |
+| Обходной путь | конвенция обходится | добавить подсказку в точке обхода |
 
-Outcome of Step 2: **one concrete, localized hypothesis** — "Agents read X, but X does not
-mention the convention; that is why they end up at Y."
+Результат Шага 2: **конкретная локализованная гипотеза** — «Агенты читают X, но в X не упоминается конвенция; поэтому они оказываются в Y.»
 
-### Step 3 — Intervention: put up a signpost
+### Шаг 3 — Вмешательство: установка указателя
 
-Put up **exactly one** signpost (one variable per pass, otherwise the diff is not
-interpretable). Typical signposts:
+Установите **ровно один** указатель (одна переменная за прогон, иначе diff невозможно интерпретировать). Типичные указатели:
 
-- Place the convention **prominently where the HOT path already passes** (e.g. a short,
-  explicit hint at the very top of the most-read README/control file).
-- A **quick-navigation table** at the start of the central architecture/overview file that
-  points to former blind spots.
-- A **signpost/cross-reference** from a HOT file to a COLD location.
-- Optionally a **guardrail** (e.g. a PreToolUse hint) for dangerous or convention-violating
-  actions.
+- Разместить конвенцию **заметно там, где путь HOT уже проходит** (например, короткая явная подсказка в самом верху наиболее читаемого README/контрольного файла).
+- **Таблица быстрой навигации** в начале центрального файла архитектуры/обзора, указывающая на бывшие слепые зоны.
+- **Перекрёстная ссылка/указатель** из файла HOT в место COLD.
+- Опционально **ограждение (guardrail)** (например, подсказка PreToolUse) для опасных или нарушающих конвенцию действий.
 
-Keep the signpost short and unmissable — agents skim, they rarely read at length.
+Держите указатель коротким и заметным — агенты сканируют текст, они редко читают длинные описания.
 
-### Step 4 — Retest with FRESH naive subagents
+### Шаг 4 — Повторный тест со СВЕЖИМИ наивными субагентами
 
-Repeat Step 1 **identically** — same task, same number of repetitions, same model, same
-naive condition — but on sandbox copies **with** the new signpost. Important:
+Повторите Шаг 1 **идентично** — та же задача, то же количество повторений, та же модель, те же наивные условия — но на копиях в песочнице **с** новым указателем. Важно:
 
-- **Fresh** agents with no memory of the baseline run (otherwise you measure learning, not
-  discoverability).
-- **Only the signpost** differs from the baseline setup.
+- **Свежие** агенты без памяти о базовом прогоне (иначе вы измеряете обучение, а не обнаруживаемость).
+- **Только указатель** отличается от настройки базового уровня.
 
-### Step 5 — Diff against baseline + honest success measurement
+### Шаг 5 — Diff по сравнению с базовым уровнем + честное измерение успеха
 
-Put retest and baseline directly side by side:
+Поставьте повторный тест и базовый уровень рядом:
 
-| Metric | Baseline | After signpost | Δ |
+| Метрика | Базовый уровень | После указателя | Δ |
 |---|---|---|---|
-| Success rate | e.g. 0/3 | e.g. 3/3 | +3 |
-| Wrong behavior | e.g. 3/3 | e.g. 0/3 | −3 |
-| Blind spots | e.g. 1 | e.g. 0 | −1 |
+| Уровень успеха | например, 0/3 | например, 3/3 | +3 |
+| Ошибочное поведение | например, 3/3 | например, 0/3 | −3 |
+| Слепые зоны | например, 1 | например, 0 | −1 |
 
-Assessment — and do not sugarcoat here:
+Оценка — без приукрашивания результатов:
 
-- **Works** (wrong behavior measurably drops): keep the signpost, document it.
-- **Does not work** (little Δ): the signpost was in the wrong place or too subtle → back to
-  Step 2/3, different signpost, measure again.
-- **State limits openly:** small n are indicators, not proofs; a naive agent models "average
-  uninformed", not every real user; explicitly check for false positives/negatives in the
-  success scoring (what exactly counted as "completed"?).
+- **Работает** (ошибочное поведение измеримо снижается): сохранить указатель, задокументировать его.
+- **Не работает** (малая Δ): указатель был не в том месте или слишком незаметен → вернуться к Шагу 2/3, попробовать другой указатель и измерить снова.
+- **Открыто заявляйте об ограничениях:** малые выборки n — это индикаторы, а не доказательства; наивный агент моделирует «среднего неосведомлённого пользователя», а не каждого реального пользователя; явно проверяйте ложноположительные/ложноотрицательные результаты при подсчете успеха (что именно считалось «выполненным»?).
 
 ---
 
-## Mini case study (real, with actual numbers)
+## Мини-кейс (реальный, с фактическими цифрами)
 
-Problem: A ticket pipeline mandated that trivial completions each get **one** dedicated
-per-ticket log — but agents instead put everything into **one collective log**.
+Проблема: Конвейер тикетов требовал, чтобы для каждого тривиального завершения создавался **один** отдельный лог на тикет — но агенты вместо этого складывали всё в **один общий лог**.
 
-- **Step 1 (baseline):** 3 naive subagents, same task → **3/3 used the collective log**
-  (convention not followed).
-- **Step 2 (path analysis):** the most-read README did not mention the per-ticket rule at a
-  visible spot → the naive path led to the collective log.
-- **Step 3 (intervention):** a short, explicit "signpost" about the logging convention
-  placed prominently in the README.
-- **Step 4 (retest):** 3 fresh naive subagents, identical task.
-- **Step 5 (diff):** **3/3 wrong → 0/3 wrong**, all three created a correct per-ticket log.
-  (Documented in ticket T-20260621-44.)
+- **Шаг 1 (базовый уровень):** 3 наивных субагента, та же задача → **3/3 использовали общий лог** (конвенция не соблюдалась).
+- **Шаг 2 (анализ пути):** наиболее читаемый README не упоминал правило отдельного лога на заметном месте → наивный путь вёл к общему логу.
+- **Шаг 3 (вмешательство):** короткий явный «указатель» на правило логов размещен на заметном месте в README.
+- **Шаг 4 (повторный тест):** 3 свежих наивных субагента, идентичная задача.
+- **Шаг 5 (diff):** **3/3 неверно → 0/3 неверно**, все трое создали правильный лог на тикет. (Задокументировано в тикете T-20260621-44.)
 
-Lesson: The convention was not "worded too weakly" — it was **invisible** on the path that
-was actually read. The signpost in the right place, empirically verified, solved the problem.
+Урок: Конвенция не была «сформулирована слишком слабо» — она была **невидимой** на реально читаемом пути. Указатель в нужном месте, эмпирически проверенный, решил проблему.
 
 ---
 
-## Source and related methods
+## Источник и связанные методы
 
-This method comes from Desire-Path Analysis v2.0 (swarm as an empirical measuring instrument
-for LLM behavior). The original reference results of a large run (100 naive probes) are
-documented as evidence from the source: the biggest blind spot was a help directory that
-**0/100** agents visited (despite many help files), and the task "create a new skill"
-succeeded **0%** because nobody found the templates directory — both classic visibility, not
-content, problems.
+Этот метод происходить из Desire-Path Analysis v2.0 (рой как эмпирический измерительный инструмент поведения LLM). Исходные эталонные результаты крупного прогона (100 наивных проб) задокументированы как доказательства: самой большой слепой зоной была директория справки, которую посетили **0/100** агентов (несмотря на множество файлов справки), а задача «создать новый Skill» увенчалась успехом в **0%** случаев, потому что никто не нашёл директорию шаблонов — и то, и другое являлось классической проблемой видимости, а не содержимого.
 
-## See also
+## См. также
 
-- `swarm-operations` (dev) — catalog of swarm **coordination patterns** for production
-  tasks; it carries desire-path analysis only as a conceptual section. This skill is the
-  applicable **process** variant with a baseline→retest loop.
-- `pipeline-optimizer` (dev) — 6-step pipeline renovation; its retest with fresh subagents
-  corresponds to Steps 4–5 here.
-- `bugfix-protocol` / systematic debugging — for real code bugs rather than visibility
-  problems.
+- `swarm-operations` (dev) — каталог **паттернов координации** роя для продакшен-задач; содержит анализ протоптанных троп только как концептуальный раздел. Этот навык — применимый **процессный** вариант с циклом базовый уровень→повторный тест.
+- `pipeline-optimizer` (dev) — 6-шаговая реновация конвейеров; её повторный тест со свежими субагентами соответствует Шагам 4–5 здесь.
+- `bugfix-protocol` / систематическая отладка — для реальных ошибок в коде, а не проблем видимости.
 
-## Журнал изменений
+## История изменений
 
 ### 0.1.0 (2026-06-21)
-- Initial port from Desire-Path Analysis v2.0 (source: swarm-ai/BACH).
-- Focused on the applicable 5-step process (baseline → path analysis → intervention →
-  retest → diff); swarm coordination patterns deliberately omitted (they stay in
-  `swarm-operations`). User-neutral with placeholders; real mini case study.
+- Первоначальный перенос из Desire-Path Analysis v2.0 (источник: swarm-ai/BACH).
+- Фокус на применимом 5-шаговом процессе (базовый уровень → анализ пути → вмешательство → повторный тест → diff); паттерны координации роя намеренно опущены (они остаются в `swarm-operations`). Пользовательски-нейтральный формат с плейсхолдерами; реальный мини-кейс.

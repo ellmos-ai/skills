@@ -1,77 +1,101 @@
 ---
+name: wayfinding-routing
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Gemini (Antigravity)
+created: 2026-07-29
+updated: 2026-07-29
+description: >
+  Универсальный навык навигации, ориентации и аварийного восстановления для LLM.
+  Предоставляет активные эвристики ориентирования (wayfinding), автоориентации и
+  восстановления, когда агенты сталкиваются с дрейфом контекста, сбоями инструментов,
+  зацикливанием или тупиками. Включает синонимичные стратегии: survival-routing,
+  dead-reckoning, pathfinder-routing и celestial-routing.
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+bach_origin: false
+category: infrastructure
+tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
 language: ru
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `wayfinding-routing`.
+> **Русский** — Официальная русская версия `wayfinding-routing`.
 
+# Wayfinding-Routing (Движок самоориентации и аварийного восстановления)
 
+Навык **Wayfinding-Routing** (также известный как **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`** и **`celestial-routing`**) служит основным фреймворком навигации и аварийного восстановления для LLM-агентов.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine) (English)
-
-The **Wayfinding-Routing** skill (also known as **`survival-routing`**, **`dead-reckoning`**, **`pathfinder-routing`**, and **`celestial-routing`**) serves as the definitive navigation and emergency recovery framework for LLM agents.
-
-It equips agents with proactive wayfinding heuristics during normal execution and emergency protocols when encountering context drift, recurring execution errors, failing APIs, or dead ends.
+Он оснащает агентов проактивными эвристиками навигации во время штатного выполнения и аварийными протоколами при столкновении с дрейфом контекста, повторяющимися ошибками выполнения, сбоями API или тупиками.
 
 ---
 
-## Обзор Синонимов и Стратегий
+## Обзор синонимов и стратегий
 
-| Стратегия Синонима | Метафора и Основной Принцип | Применимый Сценарий |
+| Стратегия-синоним | Метафора и ключевой принцип | Сценарий применения |
 | :--- | :--- | :--- |
-| **`wayfinding-routing`** (Primary) | **Wayfinding / Spatial Orientation:** Navigating without external GPS by reading signposts and environmental cues. | Основной цикл навигации для sidecars, `workflowhooker`, and `automation-self-care`. |
-| **`survival-routing`** | **Emergency Fallback & Self-Preservation:** Circuit-breaking and graceful degradation when tools fail or loops form. | Аварийное восстановление при таймаутах команд, fail repeatedly, or hit permission walls. |
-| **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | Отслеживание шагов выполнения в рабочих файлах or `TODO.md` to enable precise backtracking. |
-| **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | Предварительное сканирование деревьев каталогов, locks, and task dependencies. |
-| **`celestial-routing`** | **Astronavigation:** Aligning with immutable North-Star anchor documents when local context is noisy. | Fallback to `CLAUDE.md`, `AGENTS.md`, `START.md` when prompt instructions conflict. |
+| **`wayfinding-routing`** (Основная) | **Ориентирование / Пространственная ориентация:** Навигация без внешнего GPS путем считывания указателей и ориентиров окружения. | Основной навигационный цикл для сайдкаров, `workflowhooker` и `automation-self-care`. |
+| **`survival-routing`** | **Аварийный фоллбэк и самосохранение:** Аварийное размыкание (circuit-breaking) и плавное снижение функциональности (graceful degradation) при сбое инструментов или зацикливании. | Аварийное восстановление при таймаутах команд, повторных сбоях или ограничениях прав доступа. |
+| **`dead-reckoning`** | **Морское счисление пути (Koppelnavigation):** Восстановление точного состояния по пошаговым «хлебным крошкам» без внешнего статуса. | Отслеживание шагов выполнения в черновиках или `TODO.md` для точного возврата (backtracking). |
+| **`pathfinder-routing`** | **Разведка / Прокладывание пути:** Предварительное сканирование и подготовка маршрутов для мультиагентных команд. | Предварительное сканирование деревьев каталогов, блокировок и зависимостей задач. |
+| **`celestial-routing`** | **Астронавигация:** Выравнивание по неизменяемым документам-ориентирам («Полярная звезда»), когда локальный контекст зашумлен. | Фоллбэк к `CLAUDE.md`, `AGENTS.md`, `START.md` при конфликте инструкций в промпте. |
 
 ---
 
-## 5 основных протоколов аварийной ориентации & Orientation Protocols
+## 5 основных протоколов аварийной ситуации и ориентации
 
-### 1. `PROTOCOL-ANCHOR-RESET` (North-Star Fallback / Celestial Routing)
-- ****Триггер (Trigger):**** Дрейф контекста, противоречивые указания, or loss of orientation in long multi-turn sessions.
-- ****Эвристическое Правило:**** Прекратить генерацию текста. Очистить гипотезы. Re-read root anchor documents (`CLAUDE.md`, `AGENTS.md`, `START.md`). Reset goal state to the authoritative root directive before taking further action.
+### 1. `PROTOCOL-ANCHOR-RESET` (Сброс к Полярной звезде / Астронавигация)
+- **Триггер:** Дрейф контекста, конфликт инструкций пользователя или потеря ориентации в длительных многошаговых сессиях.
+- **Эвристическое правило:** Прекратить генерацию свободного текста. Очистить временные предположения. Перечитать корневые документы-якоря (`CLAUDE.md`, `AGENTS.md`, `START.md`). Сбросить целевое состояние до авторитетной корневой директивы перед выполнением дальнейших действий.
 
-### 2. `PROTOCOL-STOP-EXPLAIN` (Rubber-Duck Reflection Loop)
-- ****Триггер (Trigger):**** Команда или редактирование повторно сбоит with an identical error.
-- ****Эвристическое Правило:**** **Lock command execution.** The agent MUST output a formal self-reflection before trying a 3rd attempt:
-  1. *What exact error occurred in attempt 1 & 2?*
-  2. *Why did the previous diagnostic hypothesis fail?*
-  3. *What is the new alternative approach?*
-  Execution is unlocked ONLY after writing this explicit justification.
+### 2. `PROTOCOL-STOP-EXPLAIN` (Цикл рефлексии «Метод утёнка»)
+- **Триггер:** Команда терминала, редактирование файла или запрос API завершаются ошибкой дважды с идентичным сообщением.
+- **Эвристическое правило:** **Заблокировать выполнение команд.** Агент ОБЯЗАН вывести формальную саморефлексию перед попыткой 3-го запуска:
+  1. *Какая именно ошибка произошла в попытках 1 и 2?*
+  2. *Почему предыдущая диагностическая гипотеза не оправдалась?*
+  3. *В чем заключается новый альтернативный подход?*
+  Выполнение разблокируется ТОЛЬКО после написания этого явного обоснования.
 
-### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Multi-Tiered Fallback Cascade)
-- ****Триггер (Trigger):**** Основной инструмент или API недоступен or returns errors.
-- ****Эвристическое Правило:**** Никогда не завершать работу аварийно и не циклиться. Step down through degradation tiers:
-  - ****Уровень 1 (Оптимальный):**** Full Native API / MCP Tool
-  - ****Уровень 2 (Резервный):**** Local Python CLI / Script
-  - ****Уровень 3 (Только чтение):**** Direct file parsing (`view_file` / raw text)
-  - ****Уровень 4 (Передача контроля):**** Present structured status report and open options to the user.
+### 3. `PROTOCOL-GRACEFUL-DEGRADATION` (Многоуровневый каскад фоллбэка)
+- **Триггер:** Основной инструмент, MCP-сервер или внешний API недоступен или возвращает ошибки.
+- **Эвристическое правило:** Никогда не завершаться аварийно и не зацикливаться вслепую. Переходить на более низкие уровни:
+  - **Уровень 1 (Оптимальный):** Полноценный нативный API / MCP-инструмент
+  - **Уровень 2 (Резервный инструмент):** Локальный Python CLI / скрипт
+  - **Уровень 3 (Состояние только для чтения):** Прямой разбор файлов (`view_file` / необработанный текст)
+  - **Уровень 4 (Передача):** Представить структурированный отчет о состоянии и открытые варианты действий пользователю.
 
-### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Dead-Reckoning & Sackgassen-Erkennung)
-- ****Триггер (Trigger):**** Сложный процесс упирается в препятствие an unresolvable block at step N.
-- ****Эвристическое Правило:**** Фиксировать хлебные крошки перед изменениями. If a path fails:
-  1. Revert uncommitted changes (`git checkout` / restore state).
-  2. Jump back to the last clean breadcrumb checkpoint.
-  3. Mark the failed route as blocked in `TODO.md`.
-  4. Attempt alternative path B.
+### 4. `PROTOCOL-BREADCRUMB-BACKTRACK` (Счисление пути и обнаружение тупиков)
+- **Триггер:** Сложный многошаговый рефакторинг или маршрут рабочего процесса сталкивается с неразрешимой блокировкой на шаге N.
+- **Эвристическое правило:** Записывать «хлебные крошки» перед внесением разрушительных изменений. Если маршрут не удался:
+  1. Откатить некоммиченные изменения (`git checkout` / восстановить состояние).
+  2. Вернуться к последней чистой контрольной точке («хлебной крошке»).
+  3. Пометить неуспешный маршрут как заблокированный в `TODO.md`.
+  4. Попробовать альтернативный маршрут B.
 
-### 5. `PROTOCOL-CIRCUIT-BREAKER` (Notaus & Safe Exit)
-- ****Триггер (Trigger):**** Достижение лимитов выполнения или бесконечный цикл, or critical system lock error.
-- ****Эвристическое Правило:**** Выполнить последовательность аварийного останова:
-  1. Release all acquired file and git locks (`python -m workflowhooker check`).
-  2. Save current partial state to `.SYNC/SURVIVAL_STATE.json` or `AUTOMATIONS-MEMORY.md`.
-  3. Log incident in `ANTIGRAVITY-LOG.txt`.
-  4. Exit cleanly with actionable summary for the user or orchestrator.
+### 5. `PROTOCOL-CIRCUIT-BREAKER` (Аварийный останов и безопасный выход)
+- **Триггер:** Достигнуты лимиты выполнения, обнаружен бесконечный цикл или критическая ошибка блокировки системы.
+- **Эвристическое правило:** Выполнить последовательность аварийного завершения:
+  1. Освободить все захваченные блокировки файлов и git (`python -m workflowhooker check`).
+  2. Сохранить текущее частичное состояние в `.SYNC/SURVIVAL_STATE.json` или `AUTOMATIONS-MEMORY.md`.
+  3. Записать инцидент в `ANTIGRAVITY-LOG.txt`.
+  4. Завершить работу с понятным и практичным отчетом для пользователя или оркестратора.
 
 ---
 
-## Integration with `automation-self-care` & `workflowhooker`
+## Интеграция с `automation-self-care` и `workflowhooker`
 
-`wayfinding-routing` provides the underlying navigation logic for:
-- **`automation-self-care`**: Evaluates sidecar prompts against the 5 protocols to ensure self-healing capabilities.
-- **`workflowhooker`**: Provides standard heuristics for step-by-step lock checking and breadcrumb recording.
-- **`staircase-routing`**: Leverages `PROTOCOL-ANCHOR-RESET` for vertical directory navigation.
+`wayfinding-routing` обеспечивает базовую навигационную логику для:
+- **`automation-self-care`**: Оценивает сайдкар-промпты на соответствие 5 протоколам для обеспечения возможностей самовосстановления.
+- **`workflowhooker`**: Предоставляет стандартные эвристики для пошаговой проверки блокировок и записи «хлебных крошек».
+- **`staircase-routing`**: Использует `PROTOCOL-ANCHOR-RESET` для вертикальной навигации по каталогам.

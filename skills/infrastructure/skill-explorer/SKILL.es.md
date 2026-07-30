@@ -1,106 +1,86 @@
 ---
+name: skill-explorer
+version: 1.1.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-06-17
+description: Gestiona tu propio entorno de habilidades: analiza y compara las habilidades existentes (modo Auditoría), investiga en la web nuevas habilidades/plugins (modo Explorar), y al mismo tiempo es el instalador que genera subhabilidades ligeras (Skill-Finder, paraguas familiar, habilidades de mantenimiento) en lugar de cargar un monolito. Utiliza esta habilidad para "comparar/auditar habilidades", "qué habilidades están duplicadas", "crear familias de habilidades", "limpiar/consolidar habilidades", "mantener el registro de habilidades", "buscar habilidades/plugins sobre el tema X", "instalar nuevas habilidades", "explorar el mercado de habilidades" o para `/skill-explorer`. Entrega un subinforme por familia y una lista de decisiones numerada globalmente; instala/desinstala únicamente tras una comprobación de seguridad y aprobación explícita.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: infrastructure
+tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: es
+status: active
+dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `skill-explorer`.
+> **Español** — Versión oficial en español de `skill-explorer`.
 
 
+# Skill-Explorer — Gestionar el entorno de habilidades (Auditoría · Explorar · Instalador) (Español)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Visión general y propósito
 
+A medida que crece el inventario de habilidades, surgen duplicados, recursos sin usar y situaciones confusas de "qué habilidad usar en lugar de cuál", además de que constantemente aparecen nuevas habilidades/plugins. `skill-explorer` combina tres funciones en una sola herramienta:
 
-# Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)
-
-## Descripción General y Propósito & Purpose
-
-As the skill inventory grows, duplicates, unused resources, and unclear "which skill instead of which"
-situations arise — and there are constantly new skills/plugins out there. `skill-explorer`
-bundles three roles into one tool:
-
-| Role | What it does | Detail |
+| Rol | Qué hace | Detalle |
 | --- | --- | --- |
-| **Audit mode** (inward) | survey all skills, cluster them into families, gather capabilities/dependencies/resources, produce a sub-report + numbered recommendations per family | `references/audit-mode.md` |
-| **Explore mode** (outward) | research the web (web/GitHub/Reddit, bilingual) for new skills/plugins on a topic, compare, install gated | `references/explore-mode.md` |
-| **Installer** | *generate* lean subskills instead of a monolith — Skill-Finder, family umbrella, maintenance skills | below + `references/family-care.md` |
+| **Modo Auditoría** (hacia dentro) | analizar todas las habilidades, agruparlas en familias, recopilar capacidades/dependencias/recursos, generar un subinforme + recomendaciones numeradas por familia | `references/audit-mode.md` |
+| **Modo Explorar** (hacia fuera) | investigar en la web (web/GitHub/Reddit, bilingüe) sobre nuevas habilidades/plugins de un tema, comparar e instalar de forma controlada | `references/explore-mode.md` |
+| **Instalador** | *generar* subhabilidades ligeras en lugar de un monolito — Skill-Finder, paraguas familiar, habilidades de mantenimiento | a continuación + `references/family-care.md` |
 
-Invocation: `/skill-explorer` (Audit as default) or "… find for topic X" (Explore). Both modes share
-a taxonomy (`references/clustering.md`), a report format (`references/report-format.md`), and the
-numbering scheme, so the user can respond with a single numbered list.
+Invocación: `/skill-explorer` (Auditoría por defecto) o "… buscar sobre el tema X" (Explorar). Ambos modos comparten una taxonomía (`references/clustering.md`), un formato de informe (`references/report-format.md`) y el esquema de numeración, de modo que el usuario puede responder con una sola lista numerada.
 
-## Installer Principle & Persistence
+## Principio del instalador y persistencia
 
-Instead of growing monolithically itself, `skill-explorer` *generates* lean, individually
-loadable subskills on demand — so an overlong single skill never has to be loaded:
+En lugar de crecer de forma monolítica, `skill-explorer` *genera* subhabilidades ligeras y cargables individualmente bajo demanda, de modo que nunca haya que cargar una sola habilidad excesivamente larga:
 
-- **Skill-Finder** ([F]) — an active finder/router analogous to a "using-superpowers" doorman that reads
-  the register before every task and routes to the matching family (`references/skill-finder.md`,
-  template `assets/skill-finder-template.md`).
-- **Family umbrella** (c1) — a meta-skill that knows an entire family (`assets/family-umbrella-template.md`).
-- **Maintenance skills** ([P1] families, [P2] register) — keep families/register up to date (`references/family-care.md`).
+- **Skill-Finder** ([F]) — un buscador/enrutador activo análogo a un conserje tipo "using-superpowers" que lee el registro antes de cada tarea y enruta hacia la familia correspondiente (`references/skill-finder.md`, plantilla `assets/skill-finder-template.md`).
+- **Paraguas familiar** (c1) — una metahabilidad que conoce a toda una familia (`assets/family-umbrella-template.md`).
+- **Habilidades de mantenimiento** ([P1] familias, [P2] registro) — mantienen actualizados las familias/registro (`references/family-care.md`).
 
-Decisions are persisted in `~/.claude/skills/skill-explorer/config.json`
-(`references/config.md`, template `assets/config.example.json`): read at startup (known
-families/routers/generated subskills), update after execution — so a re-run never creates anything twice.
+Las decisiones se persisten en `~/.claude/skills/skill-explorer/config.json` (`references/config.md`, plantilla `assets/config.example.json`): se leen al iniciar (familias/enrutadores/subhabilidades generadas conocidas) y se actualizan tras la ejecución, de modo que una reejecución nunca cree nada por duplicado.
 
-## Branch Mechanism (Customizing Third-Party Skills)
+## Mecanismo de rama (Personalización de habilidades de terceros)
 
-A read-only skill (plugin, imported third-party) can be customized without modifying the original:
-the original directory is copied in full (**branch**); only the copy is then edited. The branch
-carries four mandatory fields: a reference to the original, the branch date, the author, and the
-reason. Once the branch supersedes the original, the original is deregistered from the runtime
-(`SKILL.md` → `CONTENT.md`) or the family router is pointed to the branch, so two nearly identical
-skills do not collide. Third-party branches stay **private** — they do not go into the public
-`.AI/.SKILLS` library. Details: `references/skill-branching.md`.
+Una habilidad de solo lectura (plugin, de terceros importada) se puede personalizar sin modificar la original: el directorio original se copia por completo (**rama**); después solo se edita la copia. La rama contiene cuatro campos obligatorios: una referencia a la original, la fecha de la rama, el autor y la razón. Una vez que la rama reemplaza a la original, esta última se elimina del registro en tiempo de ejecución (`SKILL.md` → `CONTENT.md`) o el enrutador familiar se apunta a la rama, evitando así que dos habilidades casi idénticas colisionen. Las ramas de terceros se mantienen **privadas** — no van a la biblioteca pública `.AI/.SKILLS`. Detalles: `references/skill-branching.md`.
 
-## Flujo de Trabajo y Pasos de Ejecución & Execution Steps
+## Flujo de trabajo y procedimiento
 
-1. **Choose mode:** survey/clean up the inventory → Audit mode. Search/install from outside →
-   Explore mode. (Explore can build on a previous audit/`config.json`.)
-2. **Audit mode** (`references/audit-mode.md`): inventory (script) → family clusters → sub-reports →
-   **one globally numbered decision list** (a/b/c1/c2/c3, plus R/F/P1/P2).
-3. **Explore mode** (`references/explore-mode.md`): bilingual multi-source research → 3 categories
-   per candidate → impact simulation → numbered install/remove recommendations.
-4. **Execute** only after the user's numeric confirmation; register skill creation/changes and
-   update `config.json`.
+1. **Elegir modo:** analizar/limpiar el inventario → Modo Auditoría. Buscar/instalar desde fuera → Modo Explorar. (Explorar puede apoyarse en una auditoría previa/`config.json`.)
+2. **Modo Auditoría** (`references/audit-mode.md`): inventario (script) → clústeres familiares → subinformes → **una lista de decisiones numerada globalmente** (a/b/c1/c2/c3, más R/F/P1/P2).
+3. **Modo Explorar** (`references/explore-mode.md`): investigación bilingüe multifuente → 3 categorías por candidato → simulación de impacto → recomendaciones numeradas de instalación/eliminación.
+4. **Ejecutar** solo tras la confirmación numérica del usuario; registrar la creación/cambios de habilidades y actualizar `config.json`.
 
-## Iron Rules
+## Reglas Inquebrantables
 
-- **Survey ≠ mutation:** cluster everything, but only edit **user-owned** skills; plugin/third-party
-  skills are read-only (never modify the header/delete). To customize a third-party skill, create a
-  **branch** (fork copy) instead — the original remains untouched, all changes are made exclusively
-  on the copy (→ `references/skill-branching.md`).
-- **Extend the register, do not duplicate:** if a skill register exists (index + family map +
-  index skill), extend it instead of creating a fourth one.
-- **Security primarily manual:** before every installation, the model reads the skill itself and judges;
-  `scripts/scan_skill_security.py` is only supporting triage with known limits. Never auto-install.
-- **Registration by origin:** user-authored → Library; third-party → external path, **not** Library.
+- **Inspección ≠ mutación:** agrupar todo, pero editar únicamente las habilidades **propiedad del usuario**; las habilidades de plugins/terceros son de solo lectura (nunca modificar el encabezado ni eliminar). Para personalizar una habilidad de terceros, cree una **rama** (copia fork) en su lugar — la original permanece intacta y todos los cambios se realizan exclusivamente en la copia (→ `references/skill-branching.md`).
+- **Ampliar el registro, no duplicar:** si ya existe un registro de habilidades (índice + mapa de familias + habilidad índice), amplíelo en lugar de crear un cuarto elemento.
+- **Seguridad principalmente manual:** antes de cada instalación, el modelo lee la propia habilidad y juzga; `scripts/scan_skill_security.py` es solo un triaje de apoyo con límites conocidos. Nunca instalar de forma automática.
+- **Registro por origen:** creadas por el usuario → Biblioteca; de terceros → ruta externa, **no** Biblioteca.
 
-## Orchestration (model-neutral)
+## Orquestación (neutral respecto al modelo)
 
-Family sub-reports or sources/languages are independent work paths. If the platform offers
-cheaper subagents than the orchestrator itself, assign one subagent per family/source
-and, as orchestrator, only consolidate/verify (specialist swarm). Otherwise sequentially yourself.
+Los subinformes de familia o las fuentes/idiomas son rutas de trabajo independientes. Si la plataforma ofrece subagentes más económicos que el propio orquestador, asigne un subagente por familia/fuente y, como orquestador, solo consolide/verifique (enjambre especialista). De lo contrario, hágalo usted mismo secuencialmente.
 
-## Resources
+## Recursos
 
-- **Modes:** `references/audit-mode.md`, `references/explore-mode.md`
-- **Shared:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
-- **Audit:** `references/family-care.md`, `references/skill-finder.md`
-- **Explore:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
-- **Branch:** `references/skill-branching.md`
-- **Scripts:** `scripts/inventory_skills.py` (inventory), `scripts/inject_family_header.py` (header router),
-  `scripts/scan_skill_security.py` (security triage)
-- **Templates:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`,
-  `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
+- **Modos:** `references/audit-mode.md`, `references/explore-mode.md`
+- **Compartidos:** `references/clustering.md`, `references/report-format.md`, `references/config.md`
+- **Auditoría:** `references/family-care.md`, `references/skill-finder.md`
+- **Explorar:** `references/research-method.md`, `references/integration-sim.md`, `references/install-uninstall.md`
+- **Rama:** `references/skill-branching.md`
+- **Scripts:** `scripts/inventory_skills.py` (inventario), `scripts/inject_family_header.py` (enrutador de encabezado), `scripts/scan_skill_security.py` (triaje de seguridad)
+- **Plantillas:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
-## Registro de Cambios
+## Registro de cambios
 
 ### 1.1.0 (2026-06-17)
-- Added branch mechanism: third-party/read-only skills can be customized via a fork copy (branch)
-  — with a reference to the original, date, author, and reason; the original remains untouched.
-  Iron rule "Survey ≠ mutation" extended with branch escape hatch. New section
-  `## Branch Mechanism`. New files: `references/skill-branching.md`, `assets/branch-header.example.md`.
+- Se añadió el mecanismo de rama: las habilidades de terceros/solo lectura se pueden personalizar a través de una copia fork (rama) — con una referencia al original, fecha, autor y razón; el original permanece intacto. La regla inquebrantable "Inspección ≠ mutación" se amplió con la alternativa de rama. Nueva sección `## Mecanismo de rama`. Nuevos archivos: `references/skill-branching.md`, `assets/branch-header.example.md`.
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Unites inventory audit (family clustering, numbered decisions) and
-  web research (gated install with security triage) in one installer that generates lean subskills.
+- Versión inicial. Une la auditoría de inventario (agrupación por familias, decisiones numeradas) y la investigación web (instalación controlada con triaje de seguridad) en un solo instalador que genera subhabilidades ligeras.

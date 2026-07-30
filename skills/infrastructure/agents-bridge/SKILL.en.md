@@ -10,7 +10,7 @@ language: en
 status: active
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `agents-bridge`.
 
 
 # AGENTS-BRIDGE (English)
@@ -18,7 +18,7 @@ status: active
 Use this skill to connect an agent or IDE to explicitly selected rule files.
 No provider, filename, host, or cloud directory is implicitly canonical.
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. Read all local instructions that govern the source and target paths.
 2. Run `python scripts/bridge.py discover` and optionally pass `--project`.

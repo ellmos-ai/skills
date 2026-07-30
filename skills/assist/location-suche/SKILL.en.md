@@ -3,7 +3,6 @@ name: location-suche
 version: 1.0.0
 category: assist
 description: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
-
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -17,7 +16,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: en
 ---
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `location-suche`.
 
 
 # Location Search (English)
@@ -46,7 +45,7 @@ No API key required. No persistent store.
 
 ---
 
-## Workflow & Execution Steps
+## Workflow & Procedure
 
 1. **Detect trigger:** Does the request contain a category (restaurant, hotel etc.)
    and a location → step 2. Otherwise free text → step 4.

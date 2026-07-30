@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
 updated: 2026-07-03
-description: [日本語] エージェントスキル: skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
+description: チャット履歴（現在のセッションまたはトランスクリプトファイル）から再利用可能なスキルを抽出する — または、重複を作成する代わりに、非常によく似た既存のスキルを改善します。「これからスキルを作成して」、「これをスキルとして記録すべき」、「この/過去のチャット履歴からスキルを抽出して」、「この作業方法を再利用可能にして」といった要望や、`/skill-extract` で使用します。（サブエージェントによるデータ削減を伴う）多数の過去のトランスクリプトのバルク実行もカバーします。定期的な自動化（Cron/Schedule/Loop）については、代わりに姉妹スキル workflow-extract を使用してください。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,140 +18,93 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `skill-extractor`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `skill-extractor`.
+> **日本語** — `skill-extractor` の公式日本語版。
 
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-# Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
+# Skill-Extractor — チャット履歴からのスキル抽出（日本語）
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-Wertvolle Arbeitsweisen entstehen in Sessions: Ein Problem wurde mühsam gelöst, der User hat
-mehrfach korrigiert, am Ende steht ein funktionierender Ablauf — und beim nächsten Mal fängt
-der Agent wieder bei null an. Dieser Skill destilliert aus einem Chatverlauf das, was sich zu
-konservieren lohnt, und macht daraus einen Skill nach den Konventionen der lokalen
-Skill-Bibliothek. Kernprinzip: **Erweitern vor Neuanlegen** — existiert ein sehr ähnlicher
-Skill, wird der verbessert statt ein Duplikat erzeugt.
+価値ある作業手順はセッションの中で生まれます。問題が苦労して解決され、ユーザーが何度も修正を加え、最終的に機能する手順が完成したにもかかわらず、次回エージェントは再びゼロから作業を始めてしまいます。このスキルは、チャット履歴から保存する価値のあるものを抽出し、ローカルのスキルライブラリの規約に従ってスキル化します。核心原則：**新規作成よりも拡張優先** — 非常によく似たスキルが存在する場合、重複を作成するのではなく、それを改善します。
 
-Abgrenzung: Ergebnis ist hier ein **abrufbarer Skill** (Fähigkeit/Verfahren, das ein Agent bei
-Bedarf lädt). Soll aus dem Verlauf eine **selbstlaufende Automatisierung** werden (wiederkehrender
-Prompt, Cron, Schedule), den Schwester-Skill `workflow-extract` nutzen.
+使い分け：ここでの出力は**呼び出し可能なスキル**（エージェントが必要に応じて読み込む能力/手順）です。チャット履歴を**自律実行型の自動化**（定期的なプロンプト、Cron、Schedule）に変換したい場合は、姉妹スキル `workflow-extract` を使用してください。
 
-## Ablauf
+## 順序・手順
 
-### 1. Quelle bestimmen
+### 1. ソースの特定
 
-Drei Eingabeformen:
+3つの入力形式：
 
-| Quelle | Zugang |
+| ソース | アクセス方法 |
 | --- | --- |
-| **Aktuelle Session** | Konversationskontext direkt nutzen — keine Dateien nötig |
-| **Einzelne Transkripte** | Dateien lesen; Fundorte und Parsing: `transcript-quellen.md` |
-| **Bulk (viele alte Verläufe)** | Erst Datenreduktion über Subagenten, dann Extraktion: Abschnitt „Bulk-Modus" |
+| **現在のセッション** | 会話コンテキストを直接使用 — ファイル不要 |
+| **個別トランスクリプト** | ファイルの読み込み。保存場所と解析：`transcript-quellen.md` |
+| **バルク（多数の過去の履歴）** | まずサブエージェントによるデータ削減を行い、その後に抽出：「バルクモード」セクションを参照 |
 
-### 2. Extraktionswürdiges finden
+### 2. 抽出価値のある要素の特定
 
-Nicht jede Session enthält einen Skill. Suche nach diesen Signalen — sie zeigen, wo Wissen
-steckt, das teuer erworben wurde und wieder gebraucht wird:
+すべてのセッションにスキルが含まれているわけではありません。苦労して獲得され、再び必要となる知識がどこにあるかを示す以下のシグナルを探します：
 
-- **Wiederholung:** Derselbe Ablauf kam ≥2-mal vor (in dieser oder über mehrere Sessions).
-- **Korrekturschleifen:** Der User hat den Agenten mehrfach nachjustiert, bis es stimmte —
-  die Endfassung ist das Destillat, die Korrekturen sind die Begründungen („warum so").
-- **Explizite Marker:** „merk dir das", „so machen wir das immer", „beim nächsten Mal direkt so".
-- **Werkzeugketten:** Eine nicht-offensichtliche Abfolge von Tools/Befehlen, die funktioniert hat
-  (inklusive der Sackgassen, die vermieden werden sollen).
-- **Entscheidungsregeln:** Kriterien, nach denen zwischen Alternativen gewählt wurde.
+- **反復：** 同じ手順が2回以上発生した（本セッション内、または複数のセッションにまたがる）。
+- **修正ループ：** ユーザーが正しくなるまでエージェントを何度も微調整した — 最終版が抽出物であり、修正内容はその理由（「なぜそうするのか」）を示します。
+- **明示的なマーカー：** 「これを覚えておいて」、「いつもこうしている」、「次回からは直接こうして」。
+- **ツールチェーン：** 成功した非自明なツール/コマンドのシーケンス（回避すべき行き止まりを含む）。
+- **判断ルール：** 代替案の中から選択する際に使用された基準。
 
-Halte pro Kandidat fest: Auslöser (wann braucht man das), Ablauf (Schritte), Begründungen
-(warum so und nicht anders), Fallstricke (was schiefging), Ergebnisform.
+候補ごとに以下を記録します：トリガー（いつ必要か）、手順（ステップ）、理由（なぜこの方法で、他ではないのか）、落とし穴（何が失敗したか）、成果物の形式。
 
-### 3. Dedup-Gate: Erweitern vor Neuanlegen
+### 3. 重複チェック（Dedup-Gate）：新規作成よりも拡張優先
 
-Bevor irgendetwas geschrieben wird, die bestehende Landschaft prüfen:
+何かを書き始める前に、既存の状況を確認します：
 
-1. Kandidaten-Stichwörter gegen die Skill-Verzeichnisse suchen (Deployment-Ordner des Agenten,
-   z. B. `~/.claude/skills/`, und — falls vorhanden — die kuratierte Skill-Bibliothek als Quelle
-   der Wahrheit; ebenso registrierte Plugin-Skills).
-2. Die 2–3 nächstliegenden Skills wirklich **lesen**, nicht nur Namen vergleichen.
-3. Entscheiden:
+1. 候補のキーワードをスキルディレクトリ（エージェントのデプロイフォルダ、例：`~/.claude/skills/`、および存在する場合は信頼できる唯一の情報源としての精選されたスキルライブラリ。登録済みプラグインスキルも含む）と照合・検索します。
+2. 名前の比較だけでなく、最も近い2〜3個のスキルを実際に**読み**ます。
+3. 判断：
 
-| Befund | Aktion |
+| 状況 | アクション |
 | --- | --- |
-| Kandidat ist im Kern schon abgedeckt | **Erweitern:** fehlende Elemente in den bestehenden Skill einarbeiten (neue Sektion, neue Technik, neuer Fallstrick), Version MINOR erhöhen, Changelog-Eintrag |
-| Teilüberlappung, aber anderer Kern | **Neuer Skill** mit Querverweis („Verwandte Skills") auf die Nachbarn — keine Inhalte duplizieren, sondern verweisen |
-| Nichts Vergleichbares | **Neuer Skill** |
+| 候補が実質的に既にカバーされている | **拡張：** 不足している要素を既存のスキルに組み込む（新しいセクション、新しいテクニック、新しい落とし穴）、MINORバージョンを上げる、変更履歴エントリを追加する |
+| 部分的な重複はあるが核心が異なる | **新規スキル：** 隣接するスキルへの相互参照（「関連スキル」）を追加 — 内容を重複させず、参照を行う |
+| 類似するものが存在しない | **新規スキル** |
 
-Faustregel: Wenn mehr als die Hälfte des Kandidaten in einem bestehenden Skill steckt, wird
-erweitert. Ein Skill-Bestand voller Fast-Zwillinge ist schlechter als ein gepflegter Skill.
+経験則：候補の半分以上が既存のスキルに含まれている場合は拡張します。似たような双子のようなスキルで溢れたライブラリは、適切に維持管理されたスキルよりも劣ります。
 
-### 4. Neutralisieren
+### 4. 抽象化・中立化（Neutralize）
 
-Der Rohstoff ist voller session-spezifischer Details. Vor dem Schreiben nach den Regeln in
-`neutralisierung.md` abstrahieren: Mechanik (allgemeingültig) von Konfiguration (user-/system-
-spezifisch) trennen, konkrete Pfade/Hosts/Namen durch Platzhalter oder einen klar markierten
-Konfigurationsblock ersetzen. Ziel: Der Skill funktioniert für andere User, andere Systeme,
-andere Projekte.
+原料にはセッション固有の詳細が溢れています。執筆前に `neutralisierung.md` のルールに従って抽象化します：メカニクス（汎用的）と設定（ユーザー/システム固有）を分離し、具体的なパス/ホスト/名前をプレースホルダーまたは明確にマークされた設定ブロックに置き換えます。目的：他のユーザー、他のシステム、他のプロジェクトでもスキルが機能するようにすること。
 
-### 5. Skill schreiben
+### 5. スキルの執筆
 
-- **Format:** Konventionen der Ziel-Bibliothek beachten (Frontmatter, Namensschema, Sprache,
-  Changelog). In dieser Bibliothek: `docs/CONVENTIONS.md` (vollständiger YAML-Header,
-  kebab-case-Name, Deutsch primär, Semantic Versioning).
-- **Description „pushy" formulieren:** Die description ist der Trigger-Mechanismus. Sowohl WAS
-  der Skill tut als auch WANN er greifen soll (typische User-Formulierungen) hineinschreiben —
-  Skills werden eher zu selten als zu oft ausgelöst.
-- **Warum vor Was:** Begründungen aus den Korrekturschleifen in den Skill übernehmen. Ein Skill,
-  der nur Schritte auflistet, wird beim ersten Sonderfall falsch angewandt; einer, der erklärt
-  warum, lässt sich übertragen.
-- **Fallstricke dokumentieren:** Die Sackgassen aus der Session sind Gold — als „Red Flags"- oder
-  „Fallstricke"-Abschnitt aufnehmen.
-- **Schlank halten:** Unter ~300 Zeilen; Detailmaterial in Referenzdateien auslagern, auf die die
-  SKILL.md verweist.
+- **フォーマット：** ターゲットライブラリの規約に従います（Frontmatter、命名規則、言語、変更履歴）。このライブラリでは：`docs/CONVENTIONS.md`（完全なYAMLヘッダー、kebab-case名、一次言語はドイツ語、セマンティックバージョニング）。
+- **Descriptionを「積極的（pushy）」に記述する：** descriptionはトリガーメカニズムです。スキルが「何をするか」だけでなく、「いつ発動すべきか」（典型的なユーザーの言い回し）を記述します — スキルは発動頻度が高すぎるより、低すぎる傾向があります。
+- **「What（何を）」より「Why（なぜ）」：** 修正ループからの理由をスキルに取り入れます。ステップのみを箇条書きしたスキルは、最初の例外事例で誤って適用されます。理由を説明したスキルは応用が効きます。
+- **落とし穴をドキュメント化する：** セッションでの行き止まりは宝の山です — 「Red Flags（レッドフラグ）」または「落とし穴」セクションとして追加します。
+- **スリムに保つ：** 約300行未満。詳細な資料は `SKILL.md` が参照する参照ファイルに切り出します。
 
-### 6. Command-Wrapper (optional)
+### 6. コマンドラッパー（任意）
 
-Wenn der Skill regelmäßig direkt aufgerufen werden soll, einen Slash-Command anlegen (bei
-Claude Code: kurze Markdown-Datei in `~/.claude/commands/<name>.md`, die auf den Skill zeigt
-und Argumente durchreicht). Konvention: Command = dünner Einstieg, Inhalt lebt im Skill.
+スキルを定期的に直接呼び出す場合は、スラッシュコマンドを作成します（Claude Codeの場合：`~/.claude/commands/<name>.md` にスキルを指し示し引数を渡す短いMarkdownファイルを作成）。規約：コマンド = 薄いエントリーポイント、コンテンツはスキル内に保持。
 
-### 7. Registrieren und testen
+### 7. 登録とテスト
 
-- In der Bibliothek ablegen (richtige Kategorie) und ins Deployment ausrollen (hier:
-  `python skill_sync.py deploy <name>` — Erstinstallation braucht den expliziten Namen).
-- Trigger-Test: 2–3 realistische Prompts formulieren, die den Skill auslösen sollten, und prüfen,
-  ob die description greift.
-- Für einen vollen Eval-Loop (Testfälle, Baseline-Vergleich, Beschreibungs-Optimierung) den
-  `skill-creator` nutzen, falls installiert — dieser Skill hier ist der Extraktor, nicht das Testlabor.
-- Index-/Routing-Pflege: Skill-Finder-/Index-Skills aktualisieren, falls vorhanden
-  (hier: `code-skill-index`, `skill-finder`-Routing-Tabelle).
+- ライブラリに配置し（正しいカテゴリ）、デプロイ環境に展開します（ここでは：`python skill_sync.py deploy <name>` — 初回インストールには明示的な名前が必要）。
+- トリガーテスト：スキルを発動させるべき2〜3個の現実的なプロンプトを作成し、descriptionが機能するか確認します。
+- 完全な評価ループ（テストケース、ベースライン比較、説明の最適化）を行う場合は、インストールされていれば `skill-creator` を使用します — ここでのスキルは抽出器であり、テストラボではありません。
+- インデックス/ルーティングのメンテナンス：スキルファインダー/インデックススキルが存在する場合は更新します（ここでは：`code-skill-index`、`skill-finder` ルーティングテーブル）。
 
-## Bulk-Modus: viele alte Chatverläufe
+## バルクモード：多数の過去のチャット履歴
 
-Transkripte sind groß (oft >100k Tokens); niemals alle roh in einen Kontext laden.
-Map-Reduce über Subagenten (Muster: `swarm-operations`-Skill, Aufgabenschwarm):
+トランスクリプトは巨大です（しばしば >100k トークン）。決してすべてを生テキストで単一のコンテキストに読み込まないでください。
+サブエージェントによる Map-Reduce（パターン：`swarm-operations` スキル、タスクスウォーム）：
 
-1. **Inventar:** Transkript-Dateien auflisten (Fundorte: `transcript-quellen.md`), nach Projekt/
-   Zeitraum bündeln. Bei sehr großen Beständen zuerst mit vorhandenen Kollektoren/Extraktoren
-   reduzieren (z. B. Prompt-Listener-/Studien-Datensätze, die nur User-Prompts enthalten) —
-   User-Prompts + Korrekturen tragen das meiste Signal.
-2. **Map:** Pro Bündel ein Subagent mit engem Auftrag: „Lies diese Transkripte, melde
-   Skill-Kandidaten als Kompaktliste (Auslöser, Ablauf, Begründungen, Fallstricke, Beleg-Session)"
-   — nur die Destillate zurückgeben, nie Rohtext.
-3. **Reduce:** Kandidatenlisten zusammenführen, clustern, Duplikate mergen. Häufigkeit zählt:
-   Ein Muster, das in 5 Sessions auftaucht, ist ein stärkerer Kandidat als ein einmaliger Trick.
-4. **Gate + Bau:** Für die Top-Kandidaten Schritte 3–7 des Normalablaufs durchlaufen.
-   Dem User vor dem Massenbau eine nummerierte Kandidatenliste zur Auswahl vorlegen —
-   Bulk-Extraktion erzeugt sonst Skill-Müll.
+1. **インベントリ：** トランスクリプトファイルを一覧化し（保存場所：`transcript-quellen.md`）、プロジェクト/期間ごとにグループ化します。非常に大きなデータセットの場合は、まず既存のコレクター/エクストラクター（ユーザープロンプトのみを含むプロンプトリスナー/研究データセットなど）で削減します — ユーザープロンプト + 修正が最も多くのシグナルを含んでいます。
+2. **Map：** バンドルごとに明確なタスクを持つサブエージェントを1つ配置します：「これらのトランスクリプトを読み、スキル候補をコンパクトなリスト（トリガー、手順、理由、落とし穴、ソースセッション）として報告せよ」 — 生テキストではなく、抽出物のみを返します。
+3. **Reduce：** 候補リストを統合、クラスタリングし、重複をマージします。頻度が重要です：5つのセッションに登場するパターンは、1回限りのテクニックよりも強力な候補です。
+4. **ゲート + 構築：** 上位候補に対して通常手順のステップ3〜7を実行します。大量構築の前にユーザーに番号付きの候補リストを提示して選択してもらいます — そうしないと、バルク抽出によってスキルのゴミが生成されてしまいます。
 
-## 使用例と実行モデル & Usage
+## 例と適用
 
 ```text
 User: „Wir haben jetzt dreimal PDF-Rechnungen nach demselben Schema geparst —
@@ -167,24 +120,23 @@ mach daraus einen Skill."
    Changelog 1.0.0. Trigger-Test mit „lies diese Rechnung ein".
 ```
 
-## Red Flags
+## レッドフラグ
 
-| Gedanke | Realität |
+| visual style / 考え | 現実 |
 | --- | --- |
-| „Ich lege schnell einen neuen Skill an" | Dedup-Gate zuerst — Erweitern vor Neuanlegen. |
-| „Die Pfade lasse ich drin, ist ja für dieses System" | Neutralisieren ist Pflicht; Konkretes gehört in einen Konfigurationsblock. |
-| „Der Verlauf ist lang, ich fasse aus dem Gedächtnis zusammen" | Signale (Korrekturen, Marker) gezielt heraussuchen — das Gedächtnis glättet genau die Stellen, die den Skill wertvoll machen. |
-| „Jede Session ergibt einen Skill" | Ohne Wiederholungs-/Korrektur-/Marker-Signal: kein Skill. |
+| 「すぐに新しいスキルを作成しよう」 | まず重複チェック — 新規作成よりも拡張優先。 |
+| 「このシステム用だからパスはそのままにしておこう」 | 抽象化・中立化は必須です。具体的な内容は設定ブロックに含めるべきです。 |
+| 「履歴が長いから記憶を頼りに要約しよう」 | シグナル（修正、マーカー）をピンポイントで検索します — 記憶はスキルを価値あるものにしている正確な部分を平坦化してしまいます。 |
+| 「すべてのセッションからスキルが生まれる」 | 反復/修正/マーカーのシグナルがなければ、スキルではありません。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `workflow-extract` — gleiche Extraktion, aber Ziel ist eine selbstlaufende Automatisierung.
-- `skill-explorer` — Audit/Aufräumen der Skill-Landschaft (nutzt das Dedup-Gate in groß).
-- `skill-creator` (Plugin) — Eval-Loop und Beschreibungs-Optimierung für fertige Skills.
-- `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
+- `workflow-extract` — 同じ抽出ですが、目標は自律実行型の自動化です。
+- `skill-explorer` — スキル環境の監査/クリーンアップ（大規模に重複チェックを使用）。
+- `skill-creator`（プラグイン） — 完成したスキルの評価ループと説明の最適化。
+- `swarm-operations` — バルクモード用のスウォームパターン。
 
 ## 変更履歴
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus dem Auftrag, Codex-Automatisierungen und Chatverläufe
-  systematisch zu Skills zu abstrahieren.
+- 初期バージョン。Codexの自動化とチャット履歴を体系的にスキルへ抽象化するタスクから作成。

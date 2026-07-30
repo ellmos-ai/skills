@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-28
-description: [Русский] Навык агента для condition: Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie "erst wenn", "sobald", "nur falls", "nachdem", "warte bis", "danach" oder "vorher nicht". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.
+description: Гибкий язык условий для целей, промптов и задач. Переводит условия, временные метки и последовательные зависимости в проверяемые гейты (gates), чтобы подшаг выполнялся только после подтверждённого одобрения. Всегда используйте при /condition, /if, /if-only, /when, /after, /and или /or, а также при таких формулировках, как "только если", "как только", "только в случае", "после того как", "подождать до", "затем" или "не раньше". Также используйте, когда несколько подцелей зависят друг от друга или цель содержит последующее одобрение.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,78 +18,62 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'condition/SKILL.md', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `condition`.
+> **Русский** — Официальная русская версия `condition`.
 
 
+# condition — Язык условий для целей и промптов
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Основная идея
 
+Условия в свободном тексте легко упустить. Поэтому переводите каждое релевантное условие в именованный, проверяемый гейт (Gate):
 
-> **English Translation** — Official English version of `condition`.
+> Великодушен при чтении, непреклонен при подтверждении.
 
+Входные данные могут быть сформулированы на естественном языке и быть неполными. Однако внутренний перевод должен четко фиксировать:
 
-# condition — Bedingungssprache für Ziele und Prompts (English)
+1. какое условие должно быть выполнено,
+2. какой подшаг заблокирован,
+3. какой запрос инструмента служит доказательством,
+4. означает ли невыполнение задержку или запрет.
 
-## Leitidee
+Блокируйте только затронутый подшаг. Продолжайте независимую работу.
 
-Fließtext-Bedingungen leicht übersehen. Deshalb jede relevante Bedingung in ein benanntes,
-prüfbares Gate übersetzen:
+## Языковые элементы
 
-> Beim Lesen großzügig, beim Belegen unnachgiebig.
-
-Die Eingabe darf natürlichsprachlich und unvollständig sein. Die interne Übersetzung muss
-dagegen eindeutig festhalten:
-
-1. welche Bedingung erfüllt sein muss,
-2. welcher Teilschritt blockiert ist,
-3. welche Werkzeugabfrage als Beleg gilt,
-4. ob Nichterfüllung Verzögerung oder Verbot bedeutet.
-
-Nur den betroffenen Teilschritt sperren. Unabhängige Arbeit fortsetzen.
-
-## Sprachbausteine
-
-| Ausdruck | Semantik | Beispiel |
+| Выражение | Семантика | Пример |
 | --- | --- | --- |
-| `/condition <Bedingung> -> <Schritt>` | Kanonisches Gate | `/condition Tests grün -> Release bauen` |
-| `/if <Bedingung> -> <Schritt>` | Synonym für `/condition` | `/if Review abgeschlossen -> mergen` |
-| `/when <Bedingung> -> <Schritt>` | Ausführen, sobald die Bedingung eintritt | `/when Export fertig -> Bericht prüfen` |
-| `/if-only <Bedingung> -> <Schritt>` | Nur bei Erfüllung; sonst gar nicht ausführen | `/if-only Backup belegt -> Altbestand löschen` |
-| `/after <Dauer> -> <Schritt>` | Zeitversatz ab dem Setzzeitpunkt | `/after 30 minutes -> Status prüfen` |
-| `/and` | Alle verknüpften Bedingungen müssen gelten | `/if Tests grün /and Review da -> mergen` |
-| `/or` | Mindestens eine Bedingung genügt | `/if Freigabe da /or Notfallregel aktiv -> starten` |
+| `/condition <Условие> -> <Шаг>` | Канонический гейт | `/condition Tests green -> Build release` |
+| `/if <Условие> -> <Шаг>` | Синоним для `/condition` | `/if Review complete -> Merge` |
+| `/when <Условие> -> <Шаг>` | Выполнить, как только условие наступит | `/when Export finished -> Verify report` |
+| `/if-only <Условие> -> <Шаг>` | Только при выполнении; иначе не выполнять вовсе | `/if-only Backup proven -> Delete legacy data` |
+| `/after <Длительность> -> <Шаг>` | Смещение во времени от момента задания | `/after 30 minutes -> Check status` |
+| `/and` | Все связанные условия должны быть выполнены | `/if Tests green /and Review present -> Merge` |
+| `/or` | Достаточно выполнения хотя бы одного условия | `/if Approval present /or Emergency rule active -> Start` |
 
-Nummerierte Bedingungen wie `/condition 1 ...` und `/condition 2 ...` verwenden, wenn ein
-Prompt mehrere Gates enthält. Bei gemischtem `/and` und `/or` keine stillschweigende
-Operatorrangfolge erfinden: Klammern oder nummerierte Teilbedingungen verwenden. Bei
-weiterhin mehrdeutiger Bedeutung nachfragen, bevor ein riskanter Schritt freigegeben wird.
+Используйте нумерованные условия, такие как `/condition 1 ...` и `/condition 2 ...`, если промпт содержит несколько гейтов. При смешивании `/and` и `/or` не придумывайте неявный приоритет операторов: используйте скобки или нумерованные подусловия. Если значение остается неоднозначным, уточните детали перед запуском рискованного шага.
 
-`/if-only` als Verbot behandeln. Kann die Bedingung nicht belegt werden, den Schritt nicht
-ausführen. Bei unklarer Formulierung und irreversiblen Folgen die strengere Lesart wählen.
+Относитесь к `/if-only` как к запрету. Если условие невозможно подтвердить, не выполняйте шаг. В случае нечеткой формулировки и необратимых последствий выбирайте более строгую трактовку.
 
-## Ablauf
+## Процесс
 
-### 1. Bedingung normalisieren
+### 1. Нормализация условия
 
-Die Eingabe in einen prüfbaren Satz übersetzen. Relative Zeiten beim Setzen in einen absoluten
-Zeitpunkt mit Zeitzone umrechnen.
+Переведите входные данные в проверяемое утверждение. Относительное время при задании переведите в абсолютную временную метку с часовым поясом.
 
-| Eingabe | Normalisierte Bedingung | Belegklasse |
+| Входные данные | Нормализованное условие | Класс доказательства |
 | --- | --- | --- |
-| `time 06:00` | Systemzeit ist mindestens 06:00 in der vereinbarten Zeitzone | Uhr-/Zeitwerkzeug |
-| `after 2 hours` | Systemzeit ist mindestens Setzzeitpunkt plus zwei Stunden | Uhr-/Zeitwerkzeug |
-| `wenn Worker A fertig ist` | Abnahmeartefakt oder Taskstatus von A zeigt Abschluss | Task-/Dateiwerkzeug |
-| `wenn Tests grün sind` | Vorgeschriebener Testlauf endet erfolgreich | Prozess-/Testwerkzeug |
-| `nach dem Push` | Ziel-Remote enthält den vorgesehenen Commit | Versionskontrollwerkzeug |
-| `wenn der User zustimmt` | Explizite Zustimmung liegt in der Konversation vor | Nutzereingabe |
+| `time 06:00` | Системное время составляет не менее 06:00 в согласованном часовом поясе | Инструмент часов/времени |
+| `after 2 hours` | Системное время составляет не менее времени задания плюс два часа | Инструмент часов/времени |
+| `wenn Worker A fertig ist` | Артефакт приемки или статус задачи A указывает на завершение | Инструмент задач/файлов |
+| `wenn Tests grün sind` | Предписанный прогон тестов завершается успешно | Инструмент процессов/тестов |
+| `nach dem Push` | Целевой удаленный репозиторий содержит ожидаемый коммит | Инструмент контроля версий |
+| `wenn der User zustimmt` | Явное согласие присутствует в разговоре | Ввод пользователя |
 
-Ist kein objektiver Belegweg erkennbar, das offen benennen. Kein Gate so formulieren, dass es
-nur durch Vermutung geschlossen werden kann.
+Если объективный путь подтверждения не просматривается, зафиксируйте это открыто. Никогда не формулируйте гейт так, чтобы его можно было закрыть только на основе догадок.
 
-### 2. Gate-Zustand festhalten
+### 2. Фиксация состояния Gate
 
-Wenn ein persistenter Gate-, Task- oder Memory-Store verfügbar ist, dort mindestens diese
-Felder speichern:
+Если доступно персистентное хранилище гейтов, задач или памяти, сохраните там как минимум следующие поля:
 
 ```text
 id
@@ -102,66 +86,53 @@ created_at
 evidence
 ```
 
-Existiert kein persistenter Store, den Zustand sichtbar im aktuellen Goal, Taskplan oder
-Übergabedokument führen. Nur dann behaupten, dass ein Gate Sessions überlebt, wenn der
-verwendete Speicher tatsächlich dauerhaft ist.
+Если персистентное хранилище отсутствует, ведите состояние наглядно в текущей цели (Goal), плане задач или документе передачи. Утверждайте, что гейт сохраняется между сессиями, только если используемое хранилище действительно является долговременным.
 
-Ein vorhandener Runtime-Adapter darf andere Befehlsnamen verwenden. Funktional braucht er:
-`open`, `list`, `meet` und `drop` oder gleichwertige Operationen.
+Существующий адаптер среды выполнения может использовать другие имена команд. Функционально ему требуются: `open`, `list`, `meet` и `drop` или эквивалентные операции.
 
-### 3. Arbeit umsortieren
+### 3. Переупорядочивание работы
 
-Ein offenes Gate blockiert nicht den gesamten Auftrag. Alle unabhängigen Schritte ausführen
-und vor dem nächsten abhängigen Schritt den Gate-Zustand erneut prüfen.
+Открытый гейт не блокирует всю задачу. Выполните все независимые шаги и повторно проверьте состояние гейта перед следующим зависимым шагом.
 
-Nicht aktiv in kurzen Agentenschleifen pollen. Für längere Wartezeiten einen Scheduler,
-Hintergrundjob oder ein Ereignis verwenden, das bei Eintritt einmalig meldet. Nach dem
-Wecksignal die eigentliche Bedingung trotzdem erneut mit dem vorgesehenen Werkzeug belegen.
+Не проводите активный опрос (polling) в коротких циклах агента. Для длительных периодов ожидания используйте планировщик (scheduler), фоновую задачу или событие, однократно сообщающее при наступлении. После сигнала пробуждения всё равно повторно подтвердите фактическое условие с помощью предназначенного инструмента.
 
-### 4. Streng prüfen und schließen
+### 4. Строгая проверка и закрытие
 
-Erst die Werkzeugabfrage ausführen, dann das Gate mit konkreter Evidenz schließen. Geeignete
-Belege sind zum Beispiel:
+Сначала выполните запрос инструмента, затем закройте гейт с конкретным доказательством. Подходящие доказательства включают, например:
 
-- Zeit: gemessener Zeitstempel mit Zeitzone,
-- Datei: Pfad, Metadaten oder Hash des erwarteten Artefakts,
-- Tests: ausgeführter Befehl, Exit-Code und relevante Zusammenfassung,
-- Repository: Branch, Commit-ID und Remote-Abgleich,
-- Prozess oder Task: stabile ID und gemessener Endstatus,
-- Zustimmung: eindeutige Nutzerantwort im aktuellen Kontext.
+- Время: измеренная временная метка с часовым поясом,
+- Файл: путь, метаданные или хэш ожидаемого артефакта,
+- Тесты: выполненная команда, код завершения и релевантная сводка,
+- Репозиторий: ветка, ID коммита и сопоставление с удаленным репозиторием,
+- Процесс или задача: стабильный ID и измеренный конечный статус,
+- Согласие: однозначный ответ пользователя в текущем контексте.
 
-Eine Schätzung, ein erwarteter Zustand oder die bloße Behauptung eines anderen Workers genügt
-nicht, wenn ein unabhängiger Beleg verfügbar sein sollte.
+Оценка, ожидаемое состояние или простое заявление другого воркера не являются достаточными, если должно быть доступно независимое доказательство.
 
-Ist ein Gate durch Auftragsänderung hinfällig, es mit Begründung als `dropped` markieren. Bei
-`/or` die nicht mehr benötigten Alternativen ebenfalls schließen oder verwerfen, damit keine
-Zombie-Gates verbleiben.
+Если гейт утратил актуальность из-за изменения задачи, отметьте его как `dropped` с указанием причины. Для `/or` также закройте или отклоните более не требующиеся альтернативы, чтобы не оставалось гейтов-зомби.
 
-### 5. Eskalieren
+### 5. Эскалация
 
-Wenn alle unabhängigen Schritte erledigt sind:
+Когда все независимые шаги выполнены:
 
-1. prüfen, ob die blockierende Vorarbeit innerhalb des Auftrags aktiv erledigt werden kann,
-2. bei reiner Wartebedingung einen passenden Scheduler oder Hintergrundjob verwenden,
-3. bei Nutzerentscheidung oder externer Abhängigkeit mit offenem Gate und klarem Zwischenstand
-   übergeben.
+1. проверьте, можно ли активно выполнить блокирующую предварительную работу в рамках задачи,
+2. при чистом условии ожидания используйте подходящий планировщик или фоновую задачу,
+3. при решении пользователя или внешней зависимости передайте работу с открытым гейтом и четким промежуточным статусом.
 
-Keine zusätzliche Berechtigung aus einer Bedingung ableiten. Ein erfülltes Gate ändert nur die
-Reihenfolge; es erweitert nicht den autorisierten Umfang des Auftrags.
+Не выводите дополнительные полномочия из условия. Выполненный гейт меняет только порядок; он не расширяет авторизованный объем задачи.
 
-## Пример и применение & Usage
+## Примеры и применение
 
-### Goal mit Zeitbedingung
+### Цель с условием времени
 
 ```text
 Ziel: Daten prüfen und Bericht veröffentlichen.
 /condition time 16:00 Europe/Berlin -> Veröffentlichung starten
 ```
 
-Die Datenprüfung darf vorher stattfinden. Die Veröffentlichung bleibt gesperrt, bis eine
-aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
+Проверка данных может происходить заранее. Публикация остается заблокированной до тех пор, пока текущий запрос времени не подтвердит минимум 16:00.
 
-### Prompt mit mehreren Bedingungen
+### Промпт с несколькими условиями
 
 ```text
 /condition 1 Tests erfolgreich
@@ -169,36 +140,36 @@ aktuelle Zeitabfrage mindestens 16:00 Uhr belegt.
 /if condition 1 /and condition 2 -> mergen
 ```
 
-Beide Gates getrennt belegen. Erst danach mergen.
+Подтвердите оба гейта отдельно. Выполните слияние (merge) только после этого.
 
-### Verbot statt Verzögerung
+### Запрет вместо задержки
 
 ```text
 /if-only verifiziertes Backup vorhanden -> alte Dateien löschen
 ```
 
-Ohne belegtes Backup nichts löschen und das offene Verbot im Abschlussbericht nennen.
+Без подтвержденного бэкапа ничего не удаляйте и укажите открытый запрет в итоговом отчете.
 
-## Fallstricke
+## Подводные камни
 
-- Bedingung nur im Fließtext wiederholen, statt sie als Zustand zu führen.
-- Ein gesamtes Goal pausieren, obwohl nur ein Teilschritt blockiert ist.
-- Relative Zeit ohne Setzzeitpunkt und Zeitzone speichern.
-- Werkzeugbeleg durch Annahme oder Selbstauskunft ersetzen.
-- `/if-only` wie ein bloßes Warten behandeln.
-- Nach `/or` nicht mehr benötigte Alternativ-Gates offen lassen.
-- Anbieter-, Modell-, Benutzer- oder Hostnamen in die allgemeine Mechanik einbauen.
-- Einen lokalen Runtime-Pfad als Voraussetzung für die Sprache selbst behandeln.
+- Повторение условия только в свободном тексте вместо его ведения в качестве состояния.
+- Приостановка всей цели, даже если заблокирован только один подшаг.
+- Сохранение относительного времени без временной метки задания и часового пояса.
+- Замена доказательства инструмента предположением или самоотчетом.
+- Отношение к `/if-only` как к простому ожиданию.
+- Оставление открытыми ненужных альтернативных гейтов после `/or`.
+- Встраивание имен поставщиков, моделей, пользователей или хостов в общую механику.
+- Рассмотрение локального пути среды выполнения как обязательного условия для самого языка.
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-28)
 
-- Anbieter-, benutzer- und systemneutral für gemeinsame Skill-Runtimes formuliert.
-- Nutzung in Goals und Prompts explizit gemacht.
-- Runtime als austauschbaren Adapter beschrieben; feste lokale Pfade und Modellnamen entfernt.
-- Mehrdeutige `/and`-/`/or`-Verknüpfungen, dauerhafte Zustände und Autorisierungsgrenzen geklärt.
+- Сформулировано нейтрально по отношению к поставщикам, пользователям и системам для общих сред выполнения навыков.
+- Сделай явным использование в целях и промптах.
+- Среда выполнения описана как заменяемый адаптер; удалены фиксированные локальные пути и имена моделей.
+- Разъяснены неоднозначные связи `/and`/`/or`, персистентные состояния и границы авторизации.
 
 ### 1.0.0 (2026-07-25)
 
-- Erste Fassung mit `/condition`, `/if`, `/if-only`, `/when`, `/after`, `/and` und `/or`.
+- Первоначальная версия с `/condition`, `/if`, `/if-only`, `/when`, `/after`, `/and` и `/or`.

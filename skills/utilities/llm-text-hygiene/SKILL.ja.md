@@ -1,142 +1,98 @@
 ---
 language: ja
+description: 完成したテキストから AI の痕跡、チャットの残骸、プレースホルダー、LLM のスタイルパターンを削除し、AI 開示声明を監査します。
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `llm-text-hygiene`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `llm-text-hygiene`.
-
+> **日本語** — `llm-text-hygiene` の公式日本語版。
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-# LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
+# LLM-Text-Hygiene — 完成したテキストから AI の残骸を除去する
 
-## 概要と目的 & Purpose
+## 概要と目的
 
-KI-gestützt entstandene Texte sammeln Rückstände, die im Entwurf unsichtbar bleiben und
-erst im publizierten Dokument peinlich werden: Gesprächsfetzen aus der Chat-Session,
-Regieanweisungen, die aus der Argumentationsstruktur herausfallen, Danksagungen an das
-Sprachmodell, stehengebliebene Platzhalter, aufdringliche LLM-Stilmuster — und eine
-AI-Disclosure, die fehlt, falsch platziert oder nicht mehr wahr ist. Dieser Skill ist der
-systematische Reinigungs-Pass davor: prüfen, konservativ bereinigen, Disclosure richtig
-stellen. **Er verändert nie die Substanz** — er entfernt, was nicht Teil des Werks ist.
+AI 支援によって作成されたテキストには、下書きの段階では目立たず、公開された文書になって初めて問題となる残骸が蓄積します: チャットセッションからの会話の断片、議論の構造から外れたト書き/ト指示、言語モデルへの感謝の言葉、残されたプレースホルダー、押しつけがましい LLM のスタイルパターン — そして、欠落、誤配置、または真実ではなくなった AI 開示声明（AI Disclosure）。このスキルは、公開前の体系的なクリーニングパスです: 検査し、保守的にクリーンアップし、開示声明を正します。**決してコンテンツの実質を変更しません** — 作品の一部ではないものを除去します。
 
-## Prüfkatalog
+## チェックリスト（監査）
 
-Fünf Befundklassen, von eindeutig (direkt fixen) nach heikel (nur markieren):
+明解（直接修正）から繊細（マーキングのみ）までの5つの検出クラス:
 
-### 1. Chat-Residue und Regieanweisungen (eindeutig → streichen/ausbessern)
+### 1. チャットの残骸とト指示（明解 → 削除/修正）
 
-Sätze, die zur ENTSTEHUNG des Texts gehören, nicht zum Text: „Wie besprochen lassen wir
-diesen Teil im Paper, da …", „Hier ist der überarbeitete Abschnitt:", „Gerne ergänze
-ich …", übrig gebliebene Prompt-Fragmente, Meta-Kommentare an den Auftraggeber.
-**Erkennungsprinzip:** Der Satz fällt aus der Text- und Argumentationsstruktur heraus —
-er adressiert eine Gesprächssituation statt den Leser. Beim Streichen prüfen, ob ein
-inhaltlicher Rest gerettet werden muss (Begründung in Fußnote/Text überführen).
+テキストの「作成」に属し、テキスト「自体」には属さない文: 「話し合った通り、論文のこの部分は残します、なぜなら…」、「改訂されたセクションはこちらです:」、「喜んで追加します…」、残されたプロンプトの断片、クライアント/依頼者へのメタコメント。
+**検出原則:** その文はテキストおよび議論の構造から脱落しています — 読者ではなく会話の状況に語りかけています。削除する際は、実質的な核心を救出する必要があるか確認します（説明を脚注/本文に転送）。
 
-### 2. Platzhalter und Baustellen-Marker (eindeutig → auflösen)
+### 2. プレースホルダーと作業中マーカー（明解 → 解決）
 
-`[TODO: …]`, `[Referenz einfügen]`, `XXX`, `<hier Beispiel>`, leere Abschnitte mit
-Überschrift, „(Quelle?)". Auflösen oder — wenn nicht auflösbar — als echte offene
-Aufgabe in die Projekt-TODO überführen und aus dem Deliverable entfernen.
+`[TODO: …]`、`[参照を挿入]`、`XXX`、`<ここに例>`、見出しのみの空セクション、「（情報源?）」。これらを解決するか — 解決できない場合は — プロジェクトの TODO に実際の未解決タスクとして転送し、成果物から削除します。
 
-### 3. LLM-Danksagungen und Anthropomorphes (eindeutig → entfernen)
+### 3. LLM への謝辞と擬人化表現（明解 → 除去）
 
-Danksagungen an ChatGPT/Claude/Gemini & Co. gehören nicht in die Danksagung — Werkzeuge
-werden nicht bedankt, ihr Einsatz wird in der AI-Disclosure deklariert. Ebenso entfernen:
-anthropomorphe Formulierungen über das Werkzeug („die KI schlug freundlicherweise vor").
+ChatGPT/Claude/Gemini 等への感謝は謝辞セクションに属しません — ツールは感謝されるものではなく、その使用は AI 開示声明で宣言されます。同様に、ツールに関する擬人化された表現（「AI が親切に提案してくれた」など）を除去します。
 
-### 4. AI-Disclosure (prüfen → korrigieren)
+### 4. AI 開示声明（AI Disclosure）（確認 → 修正）
 
-- **Vorhanden?** Wenn das Dokument KI-gestützt entstand und Venue/Projekt eine Disclosure
-  verlangt oder vorsieht: existiert der Abschnitt?
-- **Korrekt?** Beschreibt sie den tatsächlichen Einsatz (nicht unter-, nicht übertrieben)?
-  Nutzt sie das Disclosure-Schema des Projekts/der Venue, falls eines definiert ist
-  (z. B. abgestufte Level)?
-- **Richtig platziert?** An der venue-üblichen Stelle (Methoden/Acknowledgements-Umfeld/
-  eigener Abschnitt), identisch in allen Sprachfassungen.
+- **存在するか？** ドキュメントが AI 支援で作成され、投稿先/プロジェクトが開示声明を要求または想定している場合: セクションは存在しますか？
+- **正確か？** 実際の使用状況を記述していますか（過小評価も誇張もしない）？プロジェクト/投稿先の開示スキーマが定義されている場合（段階的レベルなど）、それを使用していますか？
+- **適切に配置されているか？** 投稿先の標準的な場所（方法/謝辞領域/専用セクション）に配置され、すべての言語バージョンで同一ですか？
 
-### 5. LLM-Stilmuster (heikel → nur klare Fälle fixen, Rest markieren)
+### 5. LLM スタイルパターン（繊細 → 明確なケースのみ修正、残りはマーク）
 
-Formelhafte Übergänge („Zusammenfassend lässt sich sagen", „Es ist wichtig zu betonen"),
-Aufzählungs-Inflation wo Fließtext hingehört, „nicht nur … sondern auch"-Ketten,
-Gedankenstrich-Dichte, Hedging-Floskeln, im Englischen die bekannten Marker (u. a.
-„delve", „tapestry", „it's worth noting"). **Vorsicht:** Stil ist Urheber-Territorium —
-nur eindeutige Formelhaftigkeit glätten, alles andere als Befundliste an den Autor geben
-statt den Text umzuschreiben. Ein menschlich klingender Text ist nicht das Ziel des
-Skills; das Ziel ist ein Text ohne Fremdkörper.
+公式化されたつなぎ表現（「要約すると、次のように言えます」、「強調することが重要です」）、文章が属する場所での箇条書きのインフレ、「〜だけでなく…も」の連鎖、ダッシュの密度、ヘッジ表現（曖昧回避フレーズ）、英語での周知のマーカー（"delve"、"tapestry"、"it's worth noting" など）。**注意:** スタイルは著者の領域です — 明確な公式化表現のみを平滑化し、その他はテキストを書き換えるのではなく発見リストとして著者に提示します。人間らしく聞こえるテキストはこのスキルの目的ではありません。目的は異物のないテキストです。
 
-## Ablauf
+## ワークフロー
 
-1. **Scope klären:** Welche Deliverables (Dateien), welche Sprachfassungen? Änderungen
-   IMMER synchron über alle Fassungen (Abgleich: `bilingual-doc-sync`).
-2. **Mechanischer Scan:** Volltextsuche nach den Signal-Mustern (Tabelle unten) —
-   billig, findet Klasse 2/3 und Teile von 1 zuverlässig.
-3. **Lese-Pass:** Das Dokument entlang der Argumentationsstruktur lesen — Klasse-1-Funde
-   erkennt man nur strukturell (Satz adressiert Gespräch statt Leser). Besonders prüfen:
-   Abschnittsanfänge/-enden, Danksagungen, Einleitung/Fazit (dort landet Residue zuerst).
-4. **Bereinigen:** Klassen 1–3 direkt fixen (konservativ, Substanz erhalten), Klasse 4
-   korrigieren, Klasse 5 als Befundliste ausgeben; nur eindeutige Fälle direkt glätten.
-5. **Dokumentieren:** Was gefunden/geändert/nur markiert wurde — bei Papern mit
-   Versionierungspflicht vermerken, ob eine neue Version/ein Re-Upload nötig wird.
-6. **Periodisch über einen Bestand:** mit `rotation-check` kombinieren (ein Dokument/
-   Projekt pro Lauf, Registry als Gedächtnis).
+1. **スコープの明確化:** どの成果物（ファイル）、どの言語バージョンか？ 変更は常にすべてのバージョンで同期して適用します（照合: `bilingual-doc-sync`）。
+2. **メカニカルスキャン:** シグナルパターン（下表）に従って全文検索を実行します — 低コストで、クラス 2/3 およびクラス 1 の一部を確実に発見します。
+3. **読解パス:** 議論の構造に沿ってドキュメントを読みます — クラス 1 の発見は構造的にのみ認識されます（文が読者ではなく会話に語りかけている）。特にチェック: セクションの開始/終了、謝辞、導入/結論（残骸は最初にそこに残ります）。
+4. **クリーンアップ:** クラス 1〜3 を直接修正し（保守的に、実質を保持）、クラス 4 を修正し、クラス 5 を発見リストとして出力します。明確なケースのみ直接平滑化します。
+5. **記録:** 発見/変更/マークした内容を記録します — バージョン管理義務のある論文の場合、新しいバージョン/再アップロードが必要かどうかをメモします。
+6. **リポジトリに対する定期的なパス:** `rotation-check` と組み合わせます（1回の実行につき1つのドキュメント/プロジェクト、記憶としてのレジストリ）。
 
-## Signal-Muster für den mechanischen Scan
+## メカニカルスキャン用のシグナルパターン
 
-| Klasse | Suchmuster (DE) | Suchmuster (EN) |
+| クラス | 検索パターン (DE) | 検索パターン (EN) |
 | --- | --- | --- |
-| Chat-Residue | „wie besprochen", „wie gewünscht", „hier ist", „gerne", „im Chat", „wie du sagtest", „lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
-| Platzhalter | `TODO`, `XXX`, `[…einfügen]`, `<…>`, „Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
-| LLM-Dank | „Dank an ChatGPT/Claude/Gemini", „mithilfe von KI erstellt" (außerhalb Disclosure) | "thanks to ChatGPT/Claude", "grateful to the AI" |
-| Stilmarker | „zusammenfassend lässt sich", „es ist wichtig zu betonen", „nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
+| チャットの残骸 | "wie besprochen", "wie gewünscht", "hier ist", "gerne", "im Chat", "wie du sagtest", "lassen wir" | "as discussed", "as requested", "here is the", "I have added", "per your" |
+| プレースホルダー | `TODO`, `XXX`, `[…einfügen]`, `<…>`, "Quelle?" | `TBD`, `[insert`, `placeholder`, `citation needed` |
+| LLM への謝辞 | "Dank an ChatGPT/Claude/Gemini", "mithilfe von KI erstellt" (開示声明の外) | "thanks to ChatGPT/Claude", "grateful to the AI" |
+| スタイルマーカー | "zusammenfassend lässt sich", "es ist wichtig zu betonen", "nicht nur … sondern auch" | "delve", "tapestry", "it's worth noting", "in conclusion" |
 
-Die Tabelle ist Startpunkt, kein Filter-Ersatz: Muster liefern Kandidaten, die Entscheidung
-fällt im Kontext (Schritt 3–4). Für rein mechanische Zeichen-Hygiene (Emoji-Scan,
-Steuerzeichen, kaputte Umlaute) vorhandene Werkzeuge nutzen — Encoding-Schäden sind
-`encoding-fix`-Territorium, nicht dieses Skills.
+この表は出発点であり、フィルターの代用ではありません: パターンは候補を提供し、決定は文脈の中で行われます（ステップ 3〜4）。純粋にメカニカルな文字衛生（絵文字スキャン、制御文字、破損したウムラウト）については、既存のツールを使用してください — エンコーディングの破損は `encoding-fix` の領域であり、このスキルではありません。
 
-## 使用例と実行モデル & Usage
+## 例と応用
 
 ```text
-Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
+依頼: 「アップロード前に論文の AI 残骸をチェックしてください。」
 
-1. Scope: paper_de.tex + paper_en.tex.
-2. Scan: 1× "as discussed" (EN, Abschnitt 4), 1× "[TODO: Referenz Smith]" (beide),
-   Danksagung erwähnt "wertvolle Hilfe von Claude".
-3. Lese-Pass: In der Einleitung ein Satz, der den Reviewer direkt adressiert
-   („Diesen Einwand behandeln wir wie gewünscht in 3.2") → Regieanweisung.
-4. Fixes: Regieanweisung gestrichen (Inhalt steckte schon in 3.2), TODO als Aufgabe
-   in TODO.md überführt + Platzhalter entfernt, LLM-Dank gestrichen, stattdessen
-   AI-Disclosure-Abschnitt auf tatsächlichen Einsatz präzisiert — alles in DE und EN.
-5. Vermerk: inhaltliche Änderung → neue Paperversion nötig, in TODO.md eingetragen.
+1. スコープ: paper_de.tex + paper_en.tex。
+2. スキャン: 1× "as discussed" (EN、セクション 4)、1× "[TODO: insert reference Smith]" (両方)、
+   謝辞に "Claude からの貴重な助け" の言及。
+3. 読解パス: 導入部に査読者に直接語りかける文
+   (「3.2 で求められた通り、この異議に対処します」) → ト指示。
+4. 修正: ト指示を削除（内容はすでに 3.2 に存在）、TODO をタスクとして
+   TODO.md に転送 + プレースホルダーを削除、LLM への謝辞を削除、代わりに
+   AI 開示声明セクションを実際の使用状況に合わせて明確化 — すべて DE と EN で同期。
+5. メモ: 実質的な変更 → 新しい論文バージョンが必要、TODO.md に記入。
 ```
 
-## Red Flags
+## レッドフラグ（Red Flags）
 
-| Gedanke | Realität |
+| 考え | 現実 |
 | --- | --- |
-| „Ich schreibe den Text gleich flüssiger" | Substanz und Stimme gehören dem Autor — der Skill entfernt Fremdkörper, er poliert nicht. |
-| „Stilmarker gefunden → löschen" | Klasse 5 wird markiert, nicht automatisch umgeschrieben; nur eindeutige Formelhaftigkeit glätten. |
-| „Die deutsche Fassung reicht" | Residue sitzt oft nur in EINER Fassung — immer alle Sprachfassungen prüfen und synchron halten. |
-| „Disclosure raus, dann ist es sauber" | Falsch herum: LLM-Dank raus, korrekte Disclosure REIN — Verschleiern ist keine Hygiene. |
+| 「ついでにテキストをよりスムーズに書き換える」 | 実質と声は著者に属します — スキルは異物を除去するものであり、スタイルを磨くものではありません。 |
+| 「スタイルマーカーを発見 → 削除」 | クラス 5 はマークされ、自動的に書き換えられません。明確な公式化表現のみを平滑化します。 |
+| 「ドイツ語版だけで十分だ」 | 残骸は1つのバージョンにのみ存在することがよくあります — 常にすべての言語バージョンをチェックし、同期を保ちます。 |
+| 「開示声明を削除すればきれいになる」 | 逆です: LLM への謝辞を削除し、正しい AI 開示声明を入れます — 隠蔽は衛生ではありません。 |
 
-## Verwandte Skills
+## 関連スキル
 
-- `encoding-fix` — Byte-/Encoding-Reparatur (Mojibake); dieser Skill hier arbeitet auf Inhaltsebene.
-- `bilingual-doc-sync` — Synchronhaltung der Sprachfassungen, in die Fixes eingepflegt werden.
-- `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
-- `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
+- `encoding-fix` — バイト/エンコーディングの修復（文字化け）。このスキルはコンテンツレベルで機能します。
+- `bilingual-doc-sync` — 修正が適用される言語バージョン間の同期維持。
+- `rotation-check` — ドキュメントリポジトリ全体で定期的に実行するためのフレームワーク。
+- `textproduction` — テキスト生成（このスキルはその後の QA です）。
 
 ## 変更履歴
 
 ### 1.0.0 (2026-07-04)
-- Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"
-  (Chat-Anteile in Papern, LLM-Danksagungen, AI-Disclosure) und auf beliebige
-  Deliverable-Texte verallgemeinert; Prüfkatalog um Platzhalter, Stilmuster und
-  Scan-Signaltabelle erweitert.
+- 初期バージョン。Codex 自動化「research-llm-muster-check」（論文内のチャット断片、LLM への謝辞、AI 開示声明）から抽象化され、任意の成果物テキストに汎用化されました。監査カタログがプレースホルダー、スタイルパターン、およびスキャンシグナル表で拡張されました。

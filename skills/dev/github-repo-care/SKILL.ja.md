@@ -1,47 +1,60 @@
 ---
+name: github-repo-care
+version: 1.0.0
+type: protocol
+author: Lukas Geiger + Codex
+created: 2026-06-18
+updated: 2026-06-18
+aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
+description: GitHub リポジトリを安全に作成、公開、リリース、監査、および保守するためのプロトコル：ローカルルールとロックの確認、最初の git add の前の .gitignore 作成、プライバシーチェックの実行、README/i18n/バナー/メタデータの準備、リリースタグと GitHub リリースの検証、組織プロファイル・llms.txt ファイル・レジストリリンクの更新。
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+bach_origin: false
+category: dev
+tags: [github, repo, release, privacy, i18n, marketing, ci, documentation]
 language: ja
+status: active
+dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `github-repo-care`.
+> **日本語** — `github-repo-care` の公式日本語版。
 
 
+# GitHub Repo Care — リポジトリをクリーンに公開・保守する (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 使用タイミング
 
+GitHub リポジトリを作成、公開、リリース、監査、または保守する必要がある場合にこの Skill を使用します。最初のパブリックプッシュの前、リリースタグ、リポジトリのメタデータ、組織プロファイル、およびプライバシーチェックにおいて特に重要です。
 
-# GitHub Repo Care — Publish and Maintain Repositories Cleanly (English)
+GitHub への公開ステップを伴わない純粋な実装作業には使用しないでください。関連する開発またはデバッグワークフローを先に完了してから、公開のためにこの Skill を有効化してください。
 
-## When To Use
+## コアルール
 
-Use this skill when a GitHub repository needs to be created, published, released, audited, or maintained. It is especially important before the first public push, for release tags, repository metadata, organization profiles, and privacy checks.
+最初のパブリックプッシュの前にリポジトリを準備します。正しい `.gitignore`、プライバシーゲート、ライセンス、README、メタデータ、およびリリースストーリーは、パブリックな履歴が存在する前に準備する方がはるかに低コストです。
 
-Do not use it for pure implementation work without a GitHub publication step. Finish the relevant development or debugging workflow first, then activate this skill for publication.
+## ワークフローと手順
 
-## Core Rule
+1. **ローカルルールを読む。** `AGENTS.md`、`CLAUDE.md`、`START.md`、リリース指針、命名指針、およびロック指針が存在する場合は確認します。
+2. **ロックを確認する。** `LOCK.txt` または一致する `LOCK.*.txt` がアクティブな場合は、そのスコープを編集しないでください。
+3. **リポジトリのアイデンティティを決定する。** 名前、組織、可視性、ライセンス、および 1 文での目的を確認します。
+4. **`git add` の前に `.gitignore` を作成する。** シークレット、ローカルデータ、データベース、ビルド出力、仮想環境、キャッシュ、IDE ファイル、およびプライベートメモを除外します。
+5. **パブリックな基本ファイルを加える。** 典型的なファイル：`README.md`、`LICENSE`、`CHANGELOG.md`、`SECURITY.md`、`CONTRIBUTING.md`、`CODE_OF_CONDUCT.md`、`llms.txt`、および CI。
+6. **発見しやすさを意識して README を書く。** ファーストビュー：目的、インストール、使い方、プライバシーモデル、プロジェクト構造、ライセンス、および標準リポジトリ名。
+7. **視覚的シグナルを追加する。** プロジェクトの理解が容易になる場合は、バナー、ロゴ、またはスクリーンショットを追加します。実際の製品画像や明確な概念図が可能な場合は、汎用的な装飾を避けてください。
+8. **i18n を計画的に設計する。** 最小限：英語＋プロジェクト言語。ユーザー向けモジュールの推奨標準セット：ドイツ語、英語、スペイン語、簡体字中国語、日本語、ロシア語。
+9. **テストとスモークテストを実行する。** 成功を宣言したりリリースを作成したりする前にローカルで検証します。
+10. **プライバシーゲートを実行する。** ステージング/追跡対象セットをチェックし、シークレット、ローカルパス、個人可同同定情報 (PII)、`.env`、データベース、プライベートドキュメント、生成された成果物、および文字化け (mojibake) を探します。
+11. **コミットしてプッシュする。** ゲートを通過した後にのみコミットします。その後、GitHub リポジトリを作成または接続し、プッシュしてリモート状態を検証します。
+12. **メタデータを設定する。** 説明 (description)、トピック (topics)、ホームページ (homepage)、可視性 (visibility)、およびデフォルトブランチをチェックします。
+13. **リリースを作成する。** タグと GitHub リリースを作成し、ブランチとタグの両方の CI を検証します。
+14. **発見用サーフェスを更新する。** 組織プロファイル、`llms.txt`、中央レジストリ、ローカルモジュールインデックス、およびエコシステム README からリンクします。
+15. **最終検証。** リモート README、リリース面、トピック、CI、およびリンクをチェックします。
 
-Prepare the repository before the first public push. A correct `.gitignore`, privacy gate, license, README, metadata, and release story are much cheaper before public history exists.
+## プライバシーゲート (Privacy Gate)
 
-## ワークフローと実行手順 & Execution Steps
-
-1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
-2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.
-3. **Fix the repository identity.** Confirm name, organization, visibility, license, and one-sentence purpose.
-4. **Create `.gitignore` before `git add`.** Exclude secrets, local data, databases, build output, virtual environments, caches, IDE files, and private notes.
-5. **Add public basics.** Typical files: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt`, and CI.
-6. **Write the README for discovery.** First viewport: purpose, installation, usage, privacy model, project layout, license, and canonical repository name.
-7. **Add visual signals.** Add a banner, logo, or screenshot when it makes the project easier to understand. Avoid generic decoration when a real product image or clear concept image is possible.
-8. **Plan i18n deliberately.** Minimum: English plus the project language. Preferred standard set for user-facing modules: German, English, Spanish, Simplified Chinese, Japanese, and Russian.
-9. **Run tests and smokes.** Verify locally before claiming success or creating a release.
-10. **Run the privacy gate.** Check the staged/tracked set for secrets, local paths, PII, `.env`, databases, private documents, generated artifacts, and mojibake.
-11. **Commit and push.** Commit only after the gate passes. Then create or connect the GitHub repository, push, and verify remote status.
-12. **Set metadata.** Check description, topics, homepage, visibility, and default branch.
-13. **Create the release.** Create the tag and GitHub release; verify CI for both branch and tag.
-14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs.
-15. **Final verification.** Check the remote README, release page, topics, CI, and links.
-
-## Privacy Gate
-
-Search the staged or tracked set, not only the visible working tree.
+表示されている作業ツリーだけでなく、ステージングされた (staged) または追跡された (tracked) セットを検索します。
 
 ```bash
 git diff --cached --check
@@ -49,21 +62,21 @@ git ls-files
 rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|API[_-]?KEY|TO[K]EN|PASS[W]ORD|SEC[R]ET|\\x{C3}|\\x{C2}|\\x{FFFD}" .
 ```
 
-For public modules, also document a `RELEASE_GATE.md` or equivalent gate: date, checked commands, result, remaining warnings, and intentional exceptions. If a secret was ever committed, deleting it from `HEAD` is not enough; rotate the secret.
+パブリックモジュールについては、`RELEASE_GATE.md` または同等のゲート記録も作成します：日付、実行したコマンド、結果、残りの警告、および意図的な例外。シークレットが一度コミットされた場合、`HEAD` から削除するだけでは不十分です。シークレットをローテーションしてください。
 
-## GitHub Metadata
+## GitHub メタデータ
 
-After the push, set metadata and release data explicitly.
+プッシュ後、メタデータとリリースデータを明示的に設定します。
 
 ```bash
-gh repo edit ORG/REPO --description "Short concrete description" \
+gh repo edit ORG/REPO --description "具体的で短い説明" \
   --add-topic local-first --add-topic python --add-topic llm
 git tag -a v1.0.0 -m "v1.0.0"
 git push origin v1.0.0
 gh release create v1.0.0 --repo ORG/REPO --title "v1.0.0" --notes "..."
 ```
 
-Then verify:
+続いて検証します：
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,visibility,description,repositoryTopics,url
@@ -71,34 +84,34 @@ gh release view v1.0.0 --repo ORG/REPO --json tagName,url,isDraft,isPrerelease
 gh run list --repo ORG/REPO --limit 5
 ```
 
-If CI is red after a release, the repository is not cleanly published yet. For a just-created initial release, immediately and intentionally moving the fresh tag to the corrected commit is acceptable.
+リリース後に CI が赤（失敗）になっている場合、リポジトリはまだクリーンに公開されていません。作成したばかりの初期リリースの場合は、新しいタグを修正されたコミットに即座に意図的に移動することが許容されます。
 
-## Common Mistakes
+## よくあるエラー
 
-| Mistake | Fix |
+| エラー | 修正 |
 |---|---|
-| `.gitignore` is added after `git add` | Unstage first, fix ignore rules, then add again |
-| README is monolingual although the UI or skill is multilingual | Add language links or localized READMEs |
-| No banner, topics, or description | Add discovery assets before announcement |
-| Release tag exists, but CI is red | Fix CI and verify the new run |
-| Organization README is updated, but `llms.txt` is missed | Update both human and machine-readable surfaces |
-| Local path appears in public docs | Replace it with relative paths or generic examples |
-| Public repo contains a test database or notebook inbox | Remove it from tracking, add ignore rules, rerun the gate |
+| `git add` の後に `.gitignore` が追加された | まずステージングを解除し、ignore ルールを修正してから再度追加する |
+| UI や Skill が多言語対応であるのに README が単一言語である | 言語リンクまたはローカライズされた README を追加する |
+| バナー、トピック、説明がない | 告知前に発見用アセットを追加する |
+| リリスタグは存在するが CI が赤になっている | CI を修正し、新しい実行を確認する |
+| 組織の README は更新されたが `llms.txt` が漏れている | 人間向けおよびマシン向けのサーフェスの両方を更新する |
+| 公開ドキュメントにローカルパスが表示されている | 相対パスまたは汎用的な例に置き換える |
+| パブリックリポジトリにテスト用データベースや Notebook 受信トレイが含まれている | 追跡から削除し、ignore ルールを追加してプライバシーゲートを再実行する |
 
-## Final Checklist
+## 最終チェックリスト
 
-- [ ] Local rules and locks checked.
-- [ ] `.gitignore` existed before the first add.
-- [ ] Public docs, license, security, contributing, changelog, and `llms.txt` present.
-- [ ] README includes repo name, purpose, installation, usage, privacy, and license.
-- [ ] i18n expectation met.
-- [ ] Banner, logo, or screenshot present when useful.
-- [ ] Tests and smokes pass.
-- [ ] Privacy, path, secret, database, and mojibake scans clean.
-- [ ] GitHub description, topics, tag, release, and CI verified.
-- [ ] Organization profile, registry, and ecosystem links updated.
+- [ ] ローカルルールとロックを確認した。
+- [ ] 最初の add の前に `.gitignore` が存在した。
+- [ ] パブリックドキュメント、ライセンス、セキュリティ、貢献ガイド、変更履歴、`llms.txt` が存在する。
+- [ ] README にリポジトリ名、目的、インストール、使い方、プライバシー、ライセンスが含まれている。
+- [ ] i18n の期待を満たしている。
+- [ ] 役立つ場合にバナー、ロゴ、またはスクリーンショットが存在する。
+- [ ] テストとスモークテストを通過した。
+- [ ] プライバシー、パス、シークレット、データベース、文字化けのスキャンがクリーンである。
+- [ ] GitHub の説明、トピック、タグ、リリース、CI を検証した。
+- [ ] 組織プロファイル、レジストリ、エコシステムのリンクを更新した。
 
 ## 変更履歴
 
 ### 1.0.0 (2026-06-18)
-- Created initial repository care and publication protocol.
+- 初回のリポジトリ保守および公開プロトコルを作成。

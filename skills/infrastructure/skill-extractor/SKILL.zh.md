@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
 updated: 2026-07-03
-description: [中文] 智能体技能: skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
+description: 从对话历史（当前会话或转录文件）中提取可复用的技能 — 或者改进非常相似的现有技能，而不是创建重复项。在出现“将其做成技能”、“我们应该将其记录为技能”、“从这些/旧对话历史中提取技能”、“使这种工作方式可复用”或使用 `/skill-extract` 时使用此技能。还涵盖针对许多旧转录的大批量运行（通过子 Agent 进行数据缩减）。对于重复发生的自动化任务（Cron/Schedule/Loop），请改用姐妹技能 workflow-extract。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,140 +18,93 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `skill-extractor`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `skill-extractor`.
+> **中文** — `skill-extractor` 官方中文版本。
 
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-# Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
+# Skill-Extractor — 从对话历史中提取 Skill（中文）
 
-## 概述与执行目标 & Purpose
+## 概述与目的
 
-Wertvolle Arbeitsweisen entstehen in Sessions: Ein Problem wurde mühsam gelöst, der User hat
-mehrfach korrigiert, am Ende steht ein funktionierender Ablauf — und beim nächsten Mal fängt
-der Agent wieder bei null an. Dieser Skill destilliert aus einem Chatverlauf das, was sich zu
-konservieren lohnt, und macht daraus einen Skill nach den Konventionen der lokalen
-Skill-Bibliothek. Kernprinzip: **Erweitern vor Neuanlegen** — existiert ein sehr ähnlicher
-Skill, wird der verbessert statt ein Duplikat erzeugt.
+宝贵的工作方式往往诞生于会话中：一个问题经过艰苦努力得以解决，用户进行了多次纠正，最终形成了一套有效的流程 — 但下一次 Agent 又得从零开始。本 Skill 旨在从对话历史中提炼出值得保存的内容，并根据本地 Skill 库的规范将其制作成 Skill。核心原则：**先扩展后新建** — 如果存在非常相似的 Skill，则对其进行改进，而不是创建重复项。
 
-Abgrenzung: Ergebnis ist hier ein **abrufbarer Skill** (Fähigkeit/Verfahren, das ein Agent bei
-Bedarf lädt). Soll aus dem Verlauf eine **selbstlaufende Automatisierung** werden (wiederkehrender
-Prompt, Cron, Schedule), den Schwester-Skill `workflow-extract` nutzen.
+界定：此处的输出是一个**可调用的 Skill**（Agent 根据需要加载的技能/流程）。如果希望将对话历史转化为**自主运行的自动化**（循环 Prompt、Cron、Schedule），请使用姐妹 Skill `workflow-extract`。
 
-## Ablauf
+## 流程
 
-### 1. Quelle bestimmen
+### 1. 确定来源
 
-Drei Eingabeformen:
+三种输入形式：
 
-| Quelle | Zugang |
+| 来源 | 获取方式 |
 | --- | --- |
-| **Aktuelle Session** | Konversationskontext direkt nutzen — keine Dateien nötig |
-| **Einzelne Transkripte** | Dateien lesen; Fundorte und Parsing: `transcript-quellen.md` |
-| **Bulk (viele alte Verläufe)** | Erst Datenreduktion über Subagenten, dann Extraktion: Abschnitt „Bulk-Modus" |
+| **当前会话** | 直接使用对话上下文 — 无需文件 |
+| **单个转录文件** | 读取文件；位置与解析参见 `transcript-quellen.md` |
+| **批量（多个旧对话）** | 先通过子 Agent 进行数据缩减，再进行提取：参见“批量模式”章节 |
 
-### 2. Extraktionswürdiges finden
+### 2. 寻找值得提取的内容
 
-Nicht jede Session enthält einen Skill. Suche nach diesen Signalen — sie zeigen, wo Wissen
-steckt, das teuer erworben wurde und wieder gebraucht wird:
+并非每个会话都包含 Skill。寻找以下信号 — 它们表明其中蕴含着付出高昂代价才获取且会再次需要的知识：
 
-- **Wiederholung:** Derselbe Ablauf kam ≥2-mal vor (in dieser oder über mehrere Sessions).
-- **Korrekturschleifen:** Der User hat den Agenten mehrfach nachjustiert, bis es stimmte —
-  die Endfassung ist das Destillat, die Korrekturen sind die Begründungen („warum so").
-- **Explizite Marker:** „merk dir das", „so machen wir das immer", „beim nächsten Mal direkt so".
-- **Werkzeugketten:** Eine nicht-offensichtliche Abfolge von Tools/Befehlen, die funktioniert hat
-  (inklusive der Sackgassen, die vermieden werden sollen).
-- **Entscheidungsregeln:** Kriterien, nach denen zwischen Alternativen gewählt wurde.
+- **重复性：** 同一流程出现了 ≥2 次（在本次会话或跨多个会话中）。
+- **纠正循环：** 用户对 Agent 进行了多次微调，直到结果正确 — 最终版本是提炼出的精华，而纠正是理由依据（“为什么要这样做”）。
+- **显式标记：** “记住这一点”、“我们总是这样做”、“下次直接这样做”。
+- **工具链：** 一套行之有效的非显而易见的工具/命令序列（包括需要避免的死胡同）。
+- **决策规则：** 在不同备选项之间做出选择的标准。
 
-Halte pro Kandidat fest: Auslöser (wann braucht man das), Ablauf (Schritte), Begründungen
-(warum so und nicht anders), Fallstricke (was schiefging), Ergebnisform.
+记录每个候选对象：触发条件（何时需要）、流程（步骤）、理由依据（为何这样处理而非其他方式）、陷阱（出了什么问题）、输出形式。
 
-### 3. Dedup-Gate: Erweitern vor Neuanlegen
+### 3. 去重关卡（Dedup Gate）：先扩展后新建
 
-Bevor irgendetwas geschrieben wird, die bestehende Landschaft prüfen:
+在编写任何内容之前，先检查现有环境：
 
-1. Kandidaten-Stichwörter gegen die Skill-Verzeichnisse suchen (Deployment-Ordner des Agenten,
-   z. B. `~/.claude/skills/`, und — falls vorhanden — die kuratierte Skill-Bibliothek als Quelle
-   der Wahrheit; ebenso registrierte Plugin-Skills).
-2. Die 2–3 nächstliegenden Skills wirklich **lesen**, nicht nur Namen vergleichen.
-3. Entscheiden:
+1. 将候选关键字与 Skill 目录（Agent 的部署文件夹，例如 `~/.claude/skills/`，以及 — 如果存在 — 作为单一事实来源的精选 Skill 库；包含已注册的插件 Skill）进行检索匹配。
+2. 真正**阅读** 2–3 个最接近的 Skill，而不仅仅是比较名称。
+3. 做出决定：
 
-| Befund | Aktion |
+| 检查结果 | 操作 |
 | --- | --- |
-| Kandidat ist im Kern schon abgedeckt | **Erweitern:** fehlende Elemente in den bestehenden Skill einarbeiten (neue Sektion, neue Technik, neuer Fallstrick), Version MINOR erhöhen, Changelog-Eintrag |
-| Teilüberlappung, aber anderer Kern | **Neuer Skill** mit Querverweis („Verwandte Skills") auf die Nachbarn — keine Inhalte duplizieren, sondern verweisen |
-| Nichts Vergleichbares | **Neuer Skill** |
+| 候选内容核心已被覆盖 | **扩展：** 将缺失的元素融入现有 Skill（新章节、新技术、新陷阱），提升 MINOR 版本号，添加变更日志条目 |
+| 部分重叠，但核心不同 | **新 Skill：** 添加互相引用（“相关 Skill”）指向相邻 Skill — 切勿重复内容，而是进行引用 |
+| 无类似内容 | **新 Skill** |
 
-Faustregel: Wenn mehr als die Hälfte des Kandidaten in einem bestehenden Skill steckt, wird
-erweitert. Ein Skill-Bestand voller Fast-Zwillinge ist schlechter als ein gepflegter Skill.
+经验法则：如果候选对象超过一半的内容已存在于某个 Skill 中，则进行扩展。满是近似双胞胎的 Skill 库不如一个精心维护的 Skill。
 
-### 4. Neutralisieren
+### 4. 抽象中立化（Neutralize）
 
-Der Rohstoff ist voller session-spezifischer Details. Vor dem Schreiben nach den Regeln in
-`neutralisierung.md` abstrahieren: Mechanik (allgemeingültig) von Konfiguration (user-/system-
-spezifisch) trennen, konkrete Pfade/Hosts/Namen durch Platzhalter oder einen klar markierten
-Konfigurationsblock ersetzen. Ziel: Der Skill funktioniert für andere User, andere Systeme,
-andere Projekte.
+原始材料充满了会话特定的细节。在编写之前，按照 `neutralisierung.md` 中的规则进行抽象：将机制（通用）与配置（用户/系统特定）分离，用占位符或明确标记的配置块替换具体的路径/主机/名称。目标：使 Skill 适用于其他用户、其他系统和其他项目。
 
-### 5. Skill schreiben
+### 5. 编写 Skill
 
-- **Format:** Konventionen der Ziel-Bibliothek beachten (Frontmatter, Namensschema, Sprache,
-  Changelog). In dieser Bibliothek: `docs/CONVENTIONS.md` (vollständiger YAML-Header,
-  kebab-case-Name, Deutsch primär, Semantic Versioning).
-- **Description „pushy" formulieren:** Die description ist der Trigger-Mechanismus. Sowohl WAS
-  der Skill tut als auch WANN er greifen soll (typische User-Formulierungen) hineinschreiben —
-  Skills werden eher zu selten als zu oft ausgelöst.
-- **Warum vor Was:** Begründungen aus den Korrekturschleifen in den Skill übernehmen. Ein Skill,
-  der nur Schritte auflistet, wird beim ersten Sonderfall falsch angewandt; einer, der erklärt
-  warum, lässt sich übertragen.
-- **Fallstricke dokumentieren:** Die Sackgassen aus der Session sind Gold — als „Red Flags"- oder
-  „Fallstricke"-Abschnitt aufnehmen.
-- **Schlank halten:** Unter ~300 Zeilen; Detailmaterial in Referenzdateien auslagern, auf die die
-  SKILL.md verweist.
+- **格式：** 遵循目标库的规范（Frontmatter、命名方案、语言、变更日志）。在本库中：`docs/CONVENTIONS.md`（完整的 YAML 头部、kebab-case 命名、德语优先、语义化版本控制）。
+- **写出具有强触发力的 Description：** description 是触发机制。既要写明 Skill 做了什么，也要写明何时触发（典型的用户表述） — Skill 往往更容易触发太少而非太多。
+- **原因重于步骤：** 将纠正循环中的理由依据融入 Skill 中。仅列出步骤的 Skill 在遇到第一个特例时会被误用；而解释了原因的 Skill 则具备迁移适用性。
+- **记录陷阱：** 会话中的死胡同极为宝贵 — 应将其作为“红旗（Red Flags）”或“陷阱”章节纳入。
+- **保持精简：** 控制在约 300 行以内；将详细材料拆分至 `SKILL.md` 所引用的参考文件中。
 
-### 6. Command-Wrapper (optional)
+### 6. 命令封装器（可选）
 
-Wenn der Skill regelmäßig direkt aufgerufen werden soll, einen Slash-Command anlegen (bei
-Claude Code: kurze Markdown-Datei in `~/.claude/commands/<name>.md`, die auf den Skill zeigt
-und Argumente durchreicht). Konvention: Command = dünner Einstieg, Inhalt lebt im Skill.
+如果 Skill 需要定期被直接调用，请创建一个斜杠命令（对于 Claude Code：在 `~/.claude/commands/<name>.md` 中创建一个简短的 Markdown 文件，指向该 Skill 并传递参数）。规范：Command = 轻量级入口，具体内容存放在 Skill 中。
 
-### 7. Registrieren und testen
+### 7. 注册与测试
 
-- In der Bibliothek ablegen (richtige Kategorie) und ins Deployment ausrollen (hier:
-  `python skill_sync.py deploy <name>` — Erstinstallation braucht den expliziten Namen).
-- Trigger-Test: 2–3 realistische Prompts formulieren, die den Skill auslösen sollten, und prüfen,
-  ob die description greift.
-- Für einen vollen Eval-Loop (Testfälle, Baseline-Vergleich, Beschreibungs-Optimierung) den
-  `skill-creator` nutzen, falls installiert — dieser Skill hier ist der Extraktor, nicht das Testlabor.
-- Index-/Routing-Pflege: Skill-Finder-/Index-Skills aktualisieren, falls vorhanden
-  (hier: `code-skill-index`, `skill-finder`-Routing-Tabelle).
+- 保存至库中（正确的分类）并部署至运行环境（此处：`python skill_sync.py deploy <name>` — 首次安装需要明确指定名称）。
+- 触发测试：构思 2–3 个应触发该 Skill 的真实 Prompt，检查 description 是否生效。
+- 对于完整的评估循环（测试用例、基线对比、描述优化），如果已安装则使用 `skill-creator` — 本 Skill 是提取器，而非测试实验室。
+- 索引/路由维护：更新 Skill 查找器/索引 Skill（如果存在，此处为：`code-skill-index`、`skill-finder` 路由表）。
 
-## Bulk-Modus: viele alte Chatverläufe
+## 批量模式：许多旧对话历史
 
-Transkripte sind groß (oft >100k Tokens); niemals alle roh in einen Kontext laden.
-Map-Reduce über Subagenten (Muster: `swarm-operations`-Skill, Aufgabenschwarm):
+转录文本通常很大（往往 >100k Token）；切勿将其全部原始文本直接加载到单个上下文中。
+通过子 Agent 进行 Map-Reduce（模式：`swarm-operations` Skill，任务蜂群）：
 
-1. **Inventar:** Transkript-Dateien auflisten (Fundorte: `transcript-quellen.md`), nach Projekt/
-   Zeitraum bündeln. Bei sehr großen Beständen zuerst mit vorhandenen Kollektoren/Extraktoren
-   reduzieren (z. B. Prompt-Listener-/Studien-Datensätze, die nur User-Prompts enthalten) —
-   User-Prompts + Korrekturen tragen das meiste Signal.
-2. **Map:** Pro Bündel ein Subagent mit engem Auftrag: „Lies diese Transkripte, melde
-   Skill-Kandidaten als Kompaktliste (Auslöser, Ablauf, Begründungen, Fallstricke, Beleg-Session)"
-   — nur die Destillate zurückgeben, nie Rohtext.
-3. **Reduce:** Kandidatenlisten zusammenführen, clustern, Duplikate mergen. Häufigkeit zählt:
-   Ein Muster, das in 5 Sessions auftaucht, ist ein stärkerer Kandidat als ein einmaliger Trick.
-4. **Gate + Bau:** Für die Top-Kandidaten Schritte 3–7 des Normalablaufs durchlaufen.
-   Dem User vor dem Massenbau eine nummerierte Kandidatenliste zur Auswahl vorlegen —
-   Bulk-Extraktion erzeugt sonst Skill-Müll.
+1. **盘点：** 列出转录文件（位置参见 `transcript-quellen.md`），按项目/时间段打包。对于非常庞大的数据集，首先使用现有的收集器/提取器进行缩减（例如仅包含用户 Prompt 的 Prompt 监听器/研究数据集） — 用户 Prompt + 纠正包含最多的信号。
+2. **Map：** 每个包分配一个任务明确的子 Agent：“阅读这些转录，将 Skill 候选对象以紧凑列表形式汇报（触发条件、流程、理由依据、陷阱、出处会话）” — 仅返回提炼出的内容，切勿返回原始文本。
+3. **Reduce：** 合并候选列表，进行聚类，合并重复项。频次很重要：在 5 个会话中出现的模式比一次性的技巧更具候选价值。
+4. **关卡 + 构建：** 对顶级候选对象执行正常流程的步骤 3–7。在批量构建之前，向用户提供一份带编号的候选列表供选择 — 否则批量提取会产生 Skill 垃圾。
 
-## 使用示例与实践 & Usage
+## 示例与应用
 
 ```text
 User: „Wir haben jetzt dreimal PDF-Rechnungen nach demselben Schema geparst —
@@ -167,24 +120,23 @@ mach daraus einen Skill."
    Changelog 1.0.0. Trigger-Test mit „lies diese Rechnung ein".
 ```
 
-## Red Flags
+## 红旗
 
-| Gedanke | Realität |
+| 想法 | 现实 |
 | --- | --- |
-| „Ich lege schnell einen neuen Skill an" | Dedup-Gate zuerst — Erweitern vor Neuanlegen. |
-| „Die Pfade lasse ich drin, ist ja für dieses System" | Neutralisieren ist Pflicht; Konkretes gehört in einen Konfigurationsblock. |
-| „Der Verlauf ist lang, ich fasse aus dem Gedächtnis zusammen" | Signale (Korrekturen, Marker) gezielt heraussuchen — das Gedächtnis glättet genau die Stellen, die den Skill wertvoll machen. |
-| „Jede Session ergibt einen Skill" | Ohne Wiederholungs-/Korrektur-/Marker-Signal: kein Skill. |
+| “我来快速新建一个 Skill” | 先通过去重关卡 — 先扩展后新建。 |
+| “我保留这些路径，反正就是给这个系统用的” | 必须进行中立化抽象；具体细节属于配置块。 |
+| “历史记录太长了，我凭记忆总结一下” | 专门查找信号（纠正、标记） — 记忆往往会抹平那些使 Skill 产生价值的关键细节。 |
+| “每个会话都能产生一个 Skill” | 没有重复/纠正/标记信号：就不能生成 Skill。 |
 
-## Verwandte Skills
+## 相关 Skill
 
-- `workflow-extract` — gleiche Extraktion, aber Ziel ist eine selbstlaufende Automatisierung.
-- `skill-explorer` — Audit/Aufräumen der Skill-Landschaft (nutzt das Dedup-Gate in groß).
-- `skill-creator` (Plugin) — Eval-Loop und Beschreibungs-Optimierung für fertige Skills.
-- `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
+- `workflow-extract` — 同样的提取过程，但目标是自主运行的自动化。
+- `skill-explorer` — 针对 Skill 环境的审计/清理（在大范围内使用去重关卡）。
+- `skill-creator`（插件） — 针对已完成 Skill 的评估循环和描述优化。
+- `swarm-operations` — 用于批量模式的蜂群模式。
 
-## 变更日志与历史
+## 变更日志
 
 ### 1.0.0 (2026-07-03)
-- Initiale Version. Entstanden aus dem Auftrag, Codex-Automatisierungen und Chatverläufe
-  systematisch zu Skills zu abstrahieren.
+- 初始版本。源于将 Codex 自动化和对话历史系统地抽象为 Skill 的任务。

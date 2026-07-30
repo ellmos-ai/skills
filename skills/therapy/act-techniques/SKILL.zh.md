@@ -1,27 +1,39 @@
 ---
+name: act-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 斯蒂芬·海斯（Steven Hayes）的接纳承诺疗法（ACT）：包含心理灵活性六大核心过程的 Hexaflex 模型。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [act, acceptance, defusion, values, psychological-flexibility, hayes]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `act-techniques`.
+> **中文** — `act-techniques` 官方中文版本。
 
 
+# ACT 技术 — 接纳承诺疗法（中文）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基础概念
 
+接纳承诺疗法（ACT，发音为单词 "act"）由 **Steven C. Hayes** 开发，属于认知行为疗法的第三浪潮。ACT 的目标不是消除症状，而是促进**心理灵活性** — 即在当下时刻以开放和觉知的方式行动，并以个人价值观为导向的能力。
 
-# ACT Techniques — Acceptance & Commitment Therapy (English)
-
-## Foundation
-
-Acceptance & Commitment Therapy (ACT, pronounced as the word "act") was developed by **Steven C. Hayes** and belongs to the third wave of behavioral therapy. ACT does not aim at symptom reduction, but at **psychological flexibility** — the ability to act openly and consciously in the present moment, guided by personal values.
-
-Core message: **The pain is not the problem — the struggle against the pain is.**
+核心理念：**痛苦本身不是问题 — 对痛苦的抗拒才是问题所在。**
 
 ---
 
-## The Hexaflex Model
+## 六边形模型（Hexaflex Model）
 
-The Hexaflex is the central model of ACT. Six core processes together form psychological flexibility. Each process is the counterpart to a pathological process (psychological inflexibility).
+Hexaflex 是 ACT 的核心模型。六个核心过程共同构成了心理灵活性。每个过程都是某种病理性过程（心理僵化）的反面。
 
 ```
                     Present Moment
@@ -38,180 +50,181 @@ The Hexaflex is the central model of ACT. Six core processes together form psych
                     Committed Action
 ```
 
-### Flexibility vs. Inflexibility
+### 灵活性 vs. 僵化性
 
-| Core Process (flexible) | Counterpart (inflexible) |
+| 核心过程（灵活性） | 对立面（僵化性） |
 |---|---|
-| Acceptance | Experiential avoidance |
-| Cognitive Defusion | Cognitive fusion |
-| Present Moment Awareness | Past/future focus |
-| Self-as-Context | Conceptualized self |
-| Values | Lack of values clarity |
-| Committed Action | Inaction/impulsivity |
+| 接纳（Acceptance） | 体验性回避（Experiential avoidance） |
+| 认知解离（Cognitive Defusion） | 认知融合（Cognitive fusion） |
+| 当下觉知（Present Moment Awareness） | 关注过去/未来（Past/future focus） |
+| 以己为背景（Self-as-Context） | 概念化自我（Conceptualized self） |
+| 价值观（Values） | 价值观不清晰（Lack of values clarity） |
+| 承诺行动（Committed Action） | 不行动/冲动（Inaction/impulsivity） |
 
 ---
 
-## The Six Core Processes
+## 六大核心过程
 
-### 1. Acceptance
+### 1. 接纳（Acceptance）
 
-**Definition:** Willingness to allow inner experiences (feelings, thoughts, bodily sensations) without trying to change, avoid, or control them.
+**定义：** 愿意接纳内在体验（感受、想法、身体感觉），而不试图改变、回避或控制它们。
 
-**Important:** Acceptance is NOT resignation. It is an active, conscious decision to make room for experience.
+**重要说明：** 接纳绝非妥协或认命。它是一种主动、有意识地为体验容纳空间的选择。
 
-#### Techniques
+#### 技术
 
-- **Willingness Scale (0-10):** "How willing are you right now to just let this feeling be there?"
-- **Expansion:** Locate the feeling in the body, give it shape/color/texture, let it "breathe"
-- **Struggle Switch Metaphor:** There's a switch inside us — not for pain, but for the struggle against pain. Acceptance means flipping the struggle switch.
+- **意愿量表（0-10）：** “你现在有多大意愿去仅仅允许这种感受的存在？”
+- **扩展练习（Expansion）：** 在身体中定位感受，赋予其形状/颜色/质感，让它“呼吸”
+- **挣扎开关隐喻：** 我们内心有一个开关 — 不是针对痛苦的，而是针对对痛苦的抗拒。接纳意味着关掉挣扎开关。
 
-#### Metaphor: Quicksand
+#### 隐喻：流沙
 
-> If you've fallen into quicksand, the natural instinct is to fight, resist, thrash. But that's exactly what pulls you deeper. The only helpful thing: Lie flat, increase the surface area, accept contact with the quicksand. Not because quicksand is great — but because the struggle against it is the real problem.
-
----
-
-### 2. Cognitive Defusion
-
-**Definition:** Detaching from thoughts — seeing them for what they are: mental events, not reality itself. Instead of "I am worthless" -> "I am having the thought that I am worthless."
-
-#### Techniques
-
-- **"I am having the thought that..."** — Linguistically distance thoughts
-- **"Thank you, mind!"** — Acknowledge the mind as an overactive advisor without obeying it
-- **Singing thoughts:** Sing the distressing thought to the melody of "Happy Birthday" (reduces its credibility)
-- **Leaves on a stream:** Imagine a stream. Place each thought on a leaf and let it float by
-- **Passenger naming:** Give the inner critic a name ("Ah, there's Perfectionist Pete again")
-- **Repetition exercise:** Rapidly repeat a distressing word for 30 seconds — it loses its emotional charge
-
-#### Metaphor: The Uninvited Guest
-
-> Imagine you're throwing a party and an uninvited guest shows up. You have three options: (1) You throw them out — but they keep coming back and making noise. (2) You let them in and spend the whole evening monitoring them — then you miss your own party. (3) You let them in, acknowledge they're there, and continue enjoying your party. Option 3 is defusion.
+> 如果你掉进了流沙中，本能反应是挣扎、抗拒、乱动。但那恰恰会让你沉得更快。唯一有帮助的做法是：平躺下来，增大接触面积，接纳与流沙的接触。这不是因为流沙有多好，而是因为对它的挣扎才是真正的问题所在。
 
 ---
 
-### 3. Present Moment Awareness (Contact with the Present Moment)
+### 2. 认知解离（Cognitive Defusion）
 
-**Definition:** Intentional, non-judgmental attention to the here and now. Neither ruminating about the past nor worrying about the future.
+**定义：** 脱离想法的束缚 — 将想法视为它们原本的样子：即心理事件，而非现实本身。例如将“我是毫无价值的”转化为“我产生了‘我是毫无价值的’这个想法”。
 
-#### Techniques
+#### 技术
 
-- **5-4-3-2-1 Exercise:** 5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste
-- **Breath awareness:** 3 conscious breaths — just observe, don't control
-- **Sensory anchoring:** Explore an object with full attention (texture, weight, temperature)
-- **Check-in questions:** "What is happening in my body right now? What thoughts are here? What feelings?"
+- **“我产生了一个想法，即……”** — 从语言上拉开与想法的距离
+- **“谢谢你，头脑！”** — 将头脑视为一个过度活跃的顾问并致谢，但不盲目服从
+- **唱出想法：** 用《祝你生日快乐》的旋律唱出困扰你的想法（降低其可信度）
+- **溪流上的树叶：** 想象一条溪流。将每个想法放在一片树叶上，让它随水流走
+- **为乘客命名：** 给内心的批评者起个名字（“看，‘完美主义者皮特’又来了”）
+- **重复练习：** 快速重复一个令人困扰的词语 30 秒 — 它会失去情绪负荷
 
----
+#### 隐喻：不速之客
 
-### 4. Self-as-Context (Observing Self)
-
-**Definition:** Distinguishing between the self as content ("I AM anxious") and the self as context ("I NOTICE anxiety"). The observing self is the space in which all experiences occur — but it is not those experiences.
-
-#### Techniques
-
-- **Sky Metaphor:** "You are the sky, not the weather. Clouds, storms, sunshine — everything passes through. But the sky is always there."
-- **Chessboard Metaphor:** "You are not the white or black pieces. You are the board on which the game takes place."
-- **Observer Exercise:** Close your eyes. Observe thoughts. Observe feelings. Observe bodily sensations. Then: "Who is it that observes all of this?"
-- **Perspective Exercises:** "If your 80-year-old self were to look back at this situation — what would they say?"
+> 想象你正在举办一场派对，一位不速之客到了。你有三种选择：(1) 把他赶出去 — 但他会不断回来并大闹；(2) 让他进来，但整晚盯着他 — 这样你就错过了自己的派对；(3) 让他进来，承认他在那里，然后继续享受你的派对。选项 3 就是认知解离。
 
 ---
 
-### 5. Values
+### 3. 当下觉知（Contact with the Present Moment）
 
-**Definition:** Freely chosen life directions. Values are not goals (which can be achieved) but compass directions (which are followed). You never "complete" the value of "being a loving partner" — you live it, moment by moment.
+**定义：** 对此时此刻保持有意识、非评判的注意。既反刍过去，也不担忧未来。
 
-#### Values Clarification — Life Domains
+#### 技术
 
-| Life Domain | Guiding Question |
+- **5-4-3-2-1 练习：** 看到 5 种事物，听到 4 种声音，感受 3 种触觉，闻到 2 种气味，尝到 1 种味道
+- **呼吸觉知：** 3 次有意识的呼吸 — 只观察，不控制
+- **感官锚定：** 全神贯注地探索一个物体（质感、重量、温度）
+- **检视提问：** “此刻我的身体里正在发生什么？这里有什么想法？有什么感受？”
+
+---
+
+### 4. 以己为背景（Self-as-Context / 观察态自我）
+
+**定义：** 区分“作为内容的自我”（“我很焦虑”）与“作为背景的自我”（“我注意到焦虑”）。观察态自我是一切体验发生的空间 — 但它本身并不是那些体验。
+
+#### 技术
+
+- **天空隐喻：** “你是天空，而不是天气。云彩、暴风雨、阳光 — 一切都会过去。但天空永远在那里。”
+- **棋盘隐喻：** “你既不是白棋也不是黑棋。你是游戏在其上进行的棋盘。”
+- **观察者练习：** 闭上眼睛。观察想法。观察感受。观察身体感觉。然后思考：“是谁在观察这一切？”
+- **视角转换练习：** “如果你 80 岁时的自己回顾现在的困境 — 他/她会说什么？”
+
+---
+
+### 5. 价值观（Values）
+
+**定义：** 自由选择的人生方向。价值观不是目标（目标是可以完成的），而是指南针的方向（方向是持续遵循的）。你永远不会“完成”‘做一个有爱心的伴侣’这一价值观 — 你在每一刻都在践行它。
+
+#### 价值观澄清 — 生活领域
+
+| 生活领域 | 引导性问题 |
 |---|---|
-| Relationships | What kind of partner/friend/family member do I want to be? |
-| Work/Career | What makes work meaningful to me? |
-| Personal Growth | In what direction do I want to develop? |
-| Health | How do I want to treat my body? |
-| Leisure/Recreation | What truly nourishes me? |
-| Spirituality | What gives my life deeper meaning? |
-| Community | What do I want to contribute to the world? |
+| 人际关系 | 我想成为什么样的伴侣/朋友/家庭成员？ |
+| 工作/职业 | 是什么让工作对我充满意义？ |
+| 个人成长 | 我希望朝什么方向发展自己？ |
+| 健康 | 我想如何对待自己的身体？ |
+| 休闲/娱乐 | 什么能真正滋养我？ |
+| 精神/灵性 | 是什么赋予了我生活更深层的意义？ |
+| 社区/社会 | 我想为世界做出什么贡献？ |
 
-#### Techniques
+#### 技术
 
-- **Tombstone Exercise:** "What should be written on your tombstone? Not what you achieved, but what you stood for."
-- **Compass Exercise:** Determine a direction for each life domain and rate on a scale of 1-10: "How important is this to me?" and "How much am I living this right now?"
-- **Sweet Spot of Pain:** "Behind every pain lies a value. Those who don't love can't be hurt. That it hurts shows that something matters to you."
+- **墓碑练习：** “你的墓碑上应该写些什么？不是你取得了什么成就，而是你代表了什么信念。”
+- **指南针练习：** 确定每个生活领域的方向，并在 1-10 的量表上评分：“这对我有多重要？”以及“我目前在多大程度上践行着它？”
+- **痛苦的甘甜之处：** “每种痛苦背后都隐藏着某种价值观。不爱的人不会受伤。会感到痛恰恰说明某种事物对你很重要。”
 
 ---
 
-### 6. Committed Action
+### 6. 承诺行动（Committed Action）
 
-**Definition:** Concrete actions that align with one's own values. Not perfect, not "when I'm ready," but NOW, with all difficulties.
+**Definition:** 与个人价值观保持一致的具体行动。不是追求完美，不是“等我准备好”，而是此时此刻，带着所有困难去行动。
 
-#### Techniques
+#### 技术
 
-- **SMART Value-Goals:** Specific, Measurable, Attractive, Realistic, Time-bound — but always linked to a value
-- **Smallest possible step:** "What is the smallest step you could take TODAY toward this value?"
-- **Willingness check:** "Are you willing to bring [unpleasant feeling] along if it shows up while you take this step?"
-- **Plan for obstacles:** "What inner barriers might arise? How do you want to handle them?" (not: "How will you eliminate them?")
+- **SMART 价值目标：** 具体（Specific）、可衡量（Measurable）、有吸引力（Attractive）、现实（Realistic）、有时间限制（Time-bound） — 但始终与价值观挂钩
+- **最小可行步骤：** “为了这个价值观，你今天能采取的最小一步是什么？”
+- **意愿检视：** “如果在这个步骤中出现了[不愉快的感受]，你是否愿意带着它一起前行？”
+- **障碍预案：** “可能会出现哪些内在障碍？你打算如何应对它们？”（而不是：“你将如何消除它们？”）
 
-#### Metaphor: Passengers on the Bus
+#### 隐喻：公交车上的乘客
 
-> You are the bus driver of your life. On the bus sit passengers — your thoughts, feelings, memories, bodily sensations. Some are loud, threatening, ugly. They shout: "Turn right! Turn left! Stop!" You have three options:
+> 你是你人生公交车的司机。公交车上坐着乘客 — 你的想法、感受、记忆、身体感觉。有些乘客大吵大闹、凶狠丑陋。他们大喊：“向右转！向左转！停车！”你有三种选择：
 >
-> 1. **Stop and fight:** You stop driving and try to throw the passengers out. But you don't move forward.
-> 2. **Negotiate:** You drive where the passengers want. But it's not YOUR direction.
-> 3. **Keep driving:** You let the passengers shout, take them along — and still drive in YOUR direction. The passengers are allowed to be there. But THEY don't determine the route.
+> 1. **停车抗争：** 你停止驾驶，试图把乘客扔下车。但你无法前进了。
+> 2. **妥协妥协：** 你按照乘客的要求开。但那不是你的方向。
+> 3. **继续驾驶：** 你让乘客大喊大叫，带着他们一起 — 依然开往你的方向。乘客被允许留在车上，但他们不能决定路线。
 >
-> Committed action means: Driving the bus toward your values, no matter which passengers are on board.
+> 承诺行动意味着：无论车上有哪些乘客，都朝着你的价值观开动公交车。
 
 ---
 
-## Areas of Application
+## 应用领域
 
-ACT is evidence-based and effective for:
+ACT 拥有循证支持，对以下领域有效：
 
-- **Depression and anxiety disorders**
-- **Chronic pain**
-- **Substance use disorders**
-- **Eating disorders**
-- **Burnout and workplace stress**
-- **Trauma and PTSD** (complementary)
-- **Psychotic disorders** (complementary)
+- **抑郁症与焦虑障碍**
+- **慢性疼痛**
+- **物质使用障碍**
+- **进食障碍**
+- **职业倦怠与工作压力**
+- **创伤与 PTSD**（辅助治疗）
+- **精神病性障碍**（辅助治疗）
 
 ---
 
-## When to Address Which Process?
+## 何时针对哪个过程？
 
-| User's Situation | Primary ACT Process |
+| 用户的困境 | 主要 ACT 过程 |
 |---|---|
-| Avoids certain feelings/situations | Acceptance |
-| Trapped in rumination/worry | Defusion |
-| Living on autopilot, dissociated | Present Moment Awareness |
-| Defines self through problems ("I AM...") | Self-as-Context |
-| Feels directionless, meaningless | Values |
-| Knows what matters but doesn't act | Committed Action |
+| 回避某些感受/情境 | 接纳 |
+| 陷入反刍/担忧中 | 认知解离 |
+| 处于自动驾驶状态、解离 | 当下觉知 |
+| 用问题定义自我（“我就是……”） | 以己为背景 |
+| 感到迷茫、无意义 | 价值观 |
+| 知道重要却无法行动 | 承诺行动 |
 
 ---
 
-## Ethical Guidelines
+## 伦理指南
 
-An AI assistant may explain ACT techniques psychoeducationally and guide exercises.
+AI 助手可以从心理教育角度解释 ACT 技术并引导练习。
 
-An AI assistant must NOT:
-- Make diagnoses
-- Simulate a therapeutic relationship
-- Act alone in cases of acute suicidality — refer to professional help
-- Present ACT as a substitute for psychotherapy
+AI 助手不得：
+- 进行诊断
+- 模拟治疗性关系
+- 在急性自杀危机中单独应对 — 应立即转介专业寻求帮助
+- 将 ACT 宣传为心理治疗的替代品
 
-See: [ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../ETHICS.md)
 
-**In case of acute crisis, ALWAYS refer to:**
+**在发生急性危机时，请务必联系：**
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
+- Crisis Text Line (US): 发送 HOME 至 741741
 - Samaritans (UK): 116 123
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 中国心理危机干预热线: 010-82951332 / 400-161-9995
+- 紧急救援电话: 911 (US) / 112 (EU) / 110 (CN)
 
 ---
 
-## References
+## 参考文献
 
 - Hayes, S. C., Strosahl, K. D., & Wilson, K. G. (2012). *Acceptance and Commitment Therapy: The Process and Practice of Mindful Change.* 2nd Edition.
 - Harris, R. (2009). *ACT Made Simple.*
@@ -219,4 +232,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*移植自 BACH v3.8.0 | 独立版本*

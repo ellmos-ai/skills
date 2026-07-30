@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [日本語] エージェントスキル: mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: MBSRの基本、ボディスキャン、および呼吸法。日常に活かすジョン・カバット・ジンによるエビデンスに基づくマインドフルネス技法。
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,197 +15,192 @@ tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
 language: ja
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `mindfulness-basics`.
+> **日本語** — `mindfulness-basics` の公式日本語版。
 
 
+# マインドフルネスの基本 (Mindfulness Basics)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 日常生活のためのMBSRの基本、ボディスキャン、呼吸法
 
-
-# Mindfulness Basics (English)
-
-> MBSR fundamentals, body scan, and breathing exercises for everyday life
-
-See: [ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景と概要
 
-Mindfulness is the intentional, non-judgmental attention to the present moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979) is the most well-known evidence-based mindfulness program.
+マインドフルネスとは、「今、この瞬間」に意識を向け、評価や判断を加えずに観察することです。MBSR（マインドフルネスストレス低減法、Kabat-Zinn 1979）は、世界的に最もよく知られたエビデンスに基づくマインドフルネス・プログラムです。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. Core Attitudes of Mindfulness (Kabat-Zinn)
-
-| Attitude | Description | Opposite to Avoid |
-|----------|-------------|-------------------|
-| Non-Judging | Observing without evaluating | "That is good/bad" |
-| Patience | Things unfold in their own time | Rushing, forcing |
-| Beginner's Mind | Being open, as if for the first time | Assumptions, expert stance |
-| Trust | In one's own experience and intuition | Relying solely on others |
-| Non-Striving | Simply being, without having to achieve | Performance orientation |
-| Acceptance | Seeing things as they are | Fighting against reality |
-| Letting Go | Allowing experiences to pass | Holding on, clinging |
+**注意：** 本スキルは支援を目的とするものであり、専門的な心理療法や治療の代わりとなるものではありません。
+**絶対に実施してはならない技法：** EMDR（眼球運動による脱感作と再処理療法）、持続暴露療法（PE）、ナラティブ暴露療法（NET）。
 
 ---
 
-## 2. Breathing Exercises
+## 1. マインドフルネスの基本態度（Kabat-Zinn）
 
-### 2.1 Simple Breath Awareness (5 Minutes)
-
-**Goal:** Anchoring in the present moment, calming the nervous system.
-
-**Instructions:**
-1. Assume a comfortable sitting position (chair, floor, cushion)
-2. Close your eyes or softly lower your gaze
-3. Direct attention to the breath
-4. Notice: Where do I feel the breath? (tip of the nose, chest, abdomen)
-5. Thoughts arise? -> Kindly notice, return to the breath
-6. No goal other than: Being with the breath
-
-**Insight:** Thoughts come and go like clouds — you are the sky behind them.
+| 態度 | 説明 | 避けるべき反対の姿勢 |
+|------|------|----------------------|
+| 評価・判断しない (Non-Judging) | 評価せずにありのままを観察する | 「良い/悪い」という判定 |
+| 忍耐 (Patience) | 物事が独自のペースで展開するのを待つ | 焦り、強制 |
+| 初心 (Beginner's Mind) | 初めて体験するかのようにオープンである | 偏見、専門家気取り |
+| 信頼 (Trust) | 自身の経験と直感を信頼する | 他者のみに依存すること |
+| 努力しない / とらわれない (Non-Striving) | 何かを達成しようとせず、ただ存在する | 成果主義・実績志向 |
+| 受容 (Acceptance) | 物事をありのままに受け入れる | 現実に対する抵抗 |
+| 手放す (Letting Go) | 体験が過ぎ去るのを許可する | 執着、固執 |
 
 ---
 
-### 2.2 4-7-8 Breathing Technique (Calming)
+## 2. 呼吸法
 
-**Goal:** Activating the parasympathetic nervous system, stress reduction.
+### 2.1 単純な呼吸への気づき（5分間）
 
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 7 seconds
-3. Exhale: 8 seconds (longer than inhaling!)
-4. Repeat: 3-4 cycles
+**目的：** 今この瞬間に意識を繋ぎ止め、神経系を静める。
 
-**When to use:** Before sleep, during acute stress, before difficult situations.
+**手順：**
+1. 快適な座り姿勢をとる（椅子、床、クッション）
+2. 目を閉じるか、視線を優しく下に向ける
+3. 意識を呼吸に向ける
+4. 観察する：呼吸をどこで一番強く感じるか？（鼻先、胸、お腹）
+5. 思考が浮かんだら？ -> 優しく気づき、意識を再び呼吸に戻す
+6. 「呼吸とともに存在する」こと以外の目的を持たない
 
----
-
-### 2.3 Box Breathing (Square Breathing)
-
-**Goal:** Balance, concentration (also used by Navy SEALs, elite athletes).
-
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 4 seconds
-3. Exhale: 4 seconds
-4. Hold: 4 seconds
-5. Repeat: 4 cycles
+**洞察（インサイト）：** 思考は雲のように現れては消えていきます — あなたはその背景にある空です。
 
 ---
 
-## 3. Body Scan
+### 2.2 4-7-8 呼吸法（鎮静）
 
-**Goal:** Developing body awareness, recognizing and releasing tension.
-**Duration:** 10-30 minutes (shorter version: 5 minutes possible)
+**目的：** 副交感神経系を活性化し、ストレスを軽減する。
 
-**Instructions (Short Form):**
+**手順：**
+1. 息を吸う：4秒間
+2. 息を止める：7秒間
+3. 息を吐く：8秒間（吸う息よりも長く！）
+4. 繰り返す：3〜4サイクル
+
+**使用タイミング：** 就寝前、急性ストレスを感じた時、困難な状況に直面する前。
+
+---
+
+### 2.3 ボックス呼吸法（四角形呼吸 / Box Breathing）
+
+**目的：** バランスの回復、集中力の向上（米海軍特殊部隊 Navy SEALs やトップアスリートも活用）。
+
+**手順：**
+1. 息を吸う：4秒間
+2. 息を止める：4秒間
+3. 息を吐く：4秒間
+4. 息を止める：4秒間
+5. 繰り返す：4サイクル
+
+---
+
+## 3. ボディスキャン（Body Scan）
+
+**目的：** 身体感覚への気づきを高め、緊張を察知して解放する。
+**所要時間：** 10〜30分間（短縮版：5分間も可能）
+
+**指導手順（短縮版）：**
 
 ```
-1. Lie on your back or sit comfortably
-2. Close eyes, take 3 deep breaths
-3. Bring attention to the soles of your feet
-   - Notice: Temperature, pressure, contact with the ground
-   - No changing, just observing
-4. Slowly move upward:
-   Feet -> Lower legs -> Knees -> Thighs
-   -> Pelvis -> Abdomen -> Chest -> Shoulders
-   -> Arms -> Hands -> Neck -> Face -> Head
-5. At tension: Breathe into the area, release on exhale
-6. At the end: Perceive the entire body as a whole
-7. Gently return to the room
+1. 仰向けに横たわるか、快適に座る
+2. 目を閉じ、深呼吸を3回行う
+3. 足の裏に意識を向ける
+   - 観察する：温度、圧力、床との接触感
+   - 変えようとせず、ただ観察する
+4. ゆっくりと上へと意識を移動させる：
+   足 -> ふくらはぎ -> 膝 -> 太もも
+   -> 骨盤 -> お腹 -> 胸 -> 肩
+   -> 腕 -> 手 -> 首 -> 顔 -> 頭部
+5. 緊張を感じたら：その部位へ呼吸を送り込むように吸い、吐く息とともに解放する
+6. 最後に：全身をひとつのまとまりとして感じ取る
+7. ゆっくりと周囲の空間へ意識を戻す
 ```
 
-**Documentation afterward:**
-- What did I notice?
-- Where was there tension?
-- How do I feel now compared to before?
+**実施後の振返り記録：**
+- 何に気づきましたか？
+- どこに緊張がありましたか？
+- 実施前と比べて、現在どのように感じていますか？
 
 ---
 
-## 4. STOP Technique (Mini-Mindfulness in Everyday Life)
+## 4. STOPテクニック（日常のミニ・マインドフルネス）
 
-**S** — **Stop:** Pause whatever you are doing
-**T** — **Take a breath:** Take one deep breath
-**O** — **Observe:** Observe: thoughts, feelings, body sensations
-**P** — **Proceed:** Consciously continue (or decide what to do next)
+**S** — **Stop（立ち止まる）：** 行っている作業を一時中断する
+**T** — **Take a breath（呼吸する）：** 深呼吸を1回行う
+**O** — **Observe（観察する）：** 気づく：思考、感情、身体感覚
+**P** — **Proceed（再開する）：** 意識的に行動を再開する（または次のアクションを決める）
 
-**Use:** Brief pause at any time, especially during stress or decisions.
-
----
-
-## 5. Mindfulness in Daily Life (Informal Practice)
-
-No time for formal exercises? Make everyday activities mindful:
-
-| Activity | Mindfulness Focus |
-|----------|------------------|
-| Eating | Consciously notice taste, texture, smell |
-| Walking | Feel each step (ground contact, weight shift) |
-| Brushing teeth | Only do that, nothing else on the side |
-| Doing dishes | Temperature of the water, sounds, movements |
-| Driving | Fully present (no radio, no ruminating) |
-| Waiting | Instead of phone: observe surroundings, breathe |
+**活用場面：** いつでも短時間の休息として、特にストレス時や意思決定時に活用。
 
 ---
 
-## 6. MBSR Program Overview (8 Weeks)
+## 5. 日常生活におけるマインドフルネス（非公式な実践）
 
-The complete MBSR program as reference:
+正式な演習の時間が取れない場合も、日常の活動をマインドフルに行うことができます：
 
-| Week | Focus |
-|------|-------|
-| 1 | Autopilot vs. mindfulness |
-| 2 | Dealing with obstacles |
-| 3 | Mindfulness in the body (yoga) |
-| 4 | Recognizing stress reactions |
-| 5 | Stressors and reacting vs. responding |
-| 6 | Mindful communication |
-| 7 | Self-care |
-| 8 | Mindfulness in everyday life |
+| 活動 | マインドフルネスの焦点 |
+|------|------------------------|
+| 食事 | 味、食感、香りを意識的に味わう |
+| 歩行 | 一歩一歩を感じる（足裏の着地、体重移動） |
+| 歯磨き | 他のことは考えず、歯磨きだけに集中する |
+| 食器洗い | 水の温度、音、手の動きを感じる |
+| 運転 | 今ここに完全に集中する（ラジオを消す、反芻思考をやめる） |
+| 待ち時間 | スマホを見る代わりに周囲を観察し、呼吸を感じる |
 
 ---
 
-## Ethics and Boundaries
+## 6. MBSRプログラム概要（8週間）
 
-**An AI assistant may:**
-- Explain and guide mindfulness exercises
-- Convey MBSR content (psychoeducation)
-- Guide breathing exercises and body scan
-- Explain and encourage the STOP technique
+参考としてのMBSRフルプログラムの全体像：
 
-**An AI assistant must NOT:**
-- Replace formal MBSR courses
-- Guide mindfulness for trauma patients without professional supervision
-- Therapeutically address dissociation or flashbacks
-- Make medication-related recommendations
+| 週 | 焦点 |
+|----|------|
+| 1 | 自動パイロット状態 vs. マインドフルネス |
+| 2 | 障害と抗拒への対処 |
+| 3 | 身体におけるマインドフルネス（ヨガ） |
+| 4 | ストレス反応の認知 |
+| 5 | ストレッサーと「反応」vs.「応答」 |
+| 6 | マインドフルなコミュニケーション |
+| 7 | セルフケア（自己への配慮） |
+| 8 | 日常生活におけるマインドフルネスの定着 |
 
-**Progress tracking:**
-- Mood before/after exercise (0-10 scale)
-- Track regularity (did I practice today?)
-- Observations: Where was attention hard to maintain?
+---
 
-**In case of acute crisis, ALWAYS refer to:**
+## 倫理と限界
+
+**AI アシスタントができること：**
+- マインドフルネス演習の説明と誘導
+- MBSRコンテンツの伝達（心理教育）
+- 呼吸法およびボディスキャンのガイド
+- STOPテクニックの説明と実践の推進
+
+**AI アシスタントがしてはならないこと：**
+- 正式なMBSRコースの代用となること
+- 専門家のスーパービジョンなしにトラウマ患者へマインドフルネスを誘導すること
+- 解離（dissociation）やフラッシュバックに対して治療的介入を行うこと
+- 精神科薬物に関する助言や推奨を行うこと
+
+**進捗の記録：**
+- 演習前後での気分状態（0〜10のスケール）
+- 継続性の記録（本日実践したか？）
+- 観察事項：どの場面で注意を維持するのが困難であったか？
+
+**精神的危機・緊急時には必ず以下に転介すること：**
+- こころの健康相談統一ダイヤル (JP): 0570-064-556
+- よりそいホットライン (JP): 0120-279-338
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Emergency services: 119/110 (JP) / 911 (US) / 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - Kabat-Zinn, J. (1990). *Full Catastrophe Living: Using the Wisdom of Your Body and Mind to Face Stress, Pain, and Illness.* Delacorte Press.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Kabat-Zinn (1990), MBSR Program — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典: Kabat-Zinn (1990), MBSR プログラム — 専門的な心理療法ではありません*

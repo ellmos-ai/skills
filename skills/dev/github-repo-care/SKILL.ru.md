@@ -1,47 +1,60 @@
 ---
+name: github-repo-care
+version: 1.0.0
+type: protocol
+author: Lukas Geiger + Codex
+created: 2026-06-18
+updated: 2026-06-18
+aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
+description: Протокол для безопасного создания, публикации, релиза, аудита и обслуживания репозиториев GitHub: проверка локальных правил и блокировок, создание .gitignore перед первым add, проведение проверок конфиденциальности, подготовка README/i18n/баннера/метаданных, проверка тегов релизов и релизов GitHub, а также обновление профилей организаций, файлов llms.txt и ссылок в реестрах.
+standalone: true
+anthropic_compatible: true
+bach_compatible: true
+bach_origin: false
+category: dev
+tags: [github, repo, release, privacy, i18n, marketing, ci, documentation]
 language: ru
+status: active
+dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `github-repo-care`.
+> **Русский** — Официальная русская версия `github-repo-care`.
 
 
+# GitHub Repo Care — Аккуратная публикация и обслуживание репозиториев (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Когда использовать
 
+Используйте этот skill, когда необходимо создать, опубликовать, выпустить релиз, провести аудит или обслуживать репозиторий GitHub. Это особенно важно перед первым публичным пушем, для тегов релизов, метаданных репозитория, профилей организаций и проверок конфиденциальности.
 
-# GitHub Repo Care — Publish and Maintain Repositories Cleanly (English)
+Не используйте его для чистой разработки и реализации без шага публикации на GitHub. Сначала завершите соответствующий рабочий процесс разработки или отладки, а затем активируйте этот skill для публикации.
 
-## When To Use
+## Основное правило
 
-Use this skill when a GitHub repository needs to be created, published, released, audited, or maintained. It is especially important before the first public push, for release tags, repository metadata, organization profiles, and privacy checks.
+Подготовьте репозиторий до первого публичного пуша. Корректный `.gitignore`, шлюз конфиденциальности, лицензия, README, метаданные и история релизов обходятся намного дешевле до того, как появится публичная история коммитов.
 
-Do not use it for pure implementation work without a GitHub publication step. Finish the relevant development or debugging workflow first, then activate this skill for publication.
+## Рабочий процесс и порядок действий
 
-## Core Rule
+1. **Прочитать локальные правила.** Проверьте `AGENTS.md`, `CLAUDE.md`, `START.md`, политику релизов, политику именования и политику блокировок при их наличии.
+2. **Проверить блокировки.** Если `LOCK.txt` или соответствующий `LOCK.*.txt` активен, не редактируйте эту область.
+3. **Определить идентичность репозитория.** Подтвердите имя, организацию, видимость, лицензию и назначение проекта в одном предложении.
+4. **Создать `.gitignore` перед `git add`.** Исключите секреты, локальные данные, базы данных, результаты сборки, виртуальные окружения, кэши, файлы IDE и личные заметки.
+5. **Добавить базовые публичные файлы.** Типичные файлы: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt` и CI.
+6. **Написать README для легкого обнаружения.** Первый экран: назначение, установка, использование, модель конфиденциальности, структура проекта, лицензия и каноническое имя репозитория.
+7. **Добавить визуальные сигналы.** Добавьте баннер, логотип или скриншот, если это облегчает понимание проекта. Избегайте шаблонов и абстрактного оформления, если есть возможность показать реальный интерфейс продукта или понятную концептуальную схему.
+8. **Осознанно спланировать i18n.** Минимум: английский плюс основной язык проекта. Предпочтительный стандартный набор для пользовательских модулей: немецкий, английский, испанский, упрощенный китайский, японский и русский.
+9. **Запустить тесты и дымовые проверки (smokes).** Проверьте все локально, прежде чем заявлять об успехе или создавать релиз.
+10. **Пройти шлюз конфиденциальности (Privacy Gate).** Проверьте подготовленный (staged) и отслеживаемый (tracked) набор файлов на наличие секретов, локальных путей, PII (персональных данных), `.env`, баз данных, приватных документов, сгенерированных артефактов и битых символов (mojibake).
+11. **Сделать коммит и пуш.** Делайте коммит только после успешного прохождения шлюза. Затем создайте или подключите репозиторий GitHub, сделайте пуш и проверьте удаленный статус.
+12. **Установить метаданные.** Проверьте описание (description), темы (topics), домашнюю страницу (homepage), видимость и ветку по умолчанию.
+13. **Создать релиз.** Создайте тег и GitHub Release; проверьте статус CI как для ветки, так и для тега.
+14. **Обновить страницы обнаружения.** Разместите ссылки в профиле организации, `llms.txt`, центральных реестрах, локальных индексах модулей и README экосистемы.
+15. **Финальная проверка.** Проверьте удаленный README, страницу релиза, темы, CI и ссылки.
 
-Prepare the repository before the first public push. A correct `.gitignore`, privacy gate, license, README, metadata, and release story are much cheaper before public history exists.
+## Шлюз конфиденциальности (Privacy Gate)
 
-## Рабочий процесс и этапы выполнения & Execution Steps
-
-1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
-2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.
-3. **Fix the repository identity.** Confirm name, organization, visibility, license, and one-sentence purpose.
-4. **Create `.gitignore` before `git add`.** Exclude secrets, local data, databases, build output, virtual environments, caches, IDE files, and private notes.
-5. **Add public basics.** Typical files: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt`, and CI.
-6. **Write the README for discovery.** First viewport: purpose, installation, usage, privacy model, project layout, license, and canonical repository name.
-7. **Add visual signals.** Add a banner, logo, or screenshot when it makes the project easier to understand. Avoid generic decoration when a real product image or clear concept image is possible.
-8. **Plan i18n deliberately.** Minimum: English plus the project language. Preferred standard set for user-facing modules: German, English, Spanish, Simplified Chinese, Japanese, and Russian.
-9. **Run tests and smokes.** Verify locally before claiming success or creating a release.
-10. **Run the privacy gate.** Check the staged/tracked set for secrets, local paths, PII, `.env`, databases, private documents, generated artifacts, and mojibake.
-11. **Commit and push.** Commit only after the gate passes. Then create or connect the GitHub repository, push, and verify remote status.
-12. **Set metadata.** Check description, topics, homepage, visibility, and default branch.
-13. **Create the release.** Create the tag and GitHub release; verify CI for both branch and tag.
-14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs.
-15. **Final verification.** Check the remote README, release page, topics, CI, and links.
-
-## Privacy Gate
-
-Search the staged or tracked set, not only the visible working tree.
+Выполняйте поиск в индексированном (staged) или отслеживаемом (tracked) наборе файлов, а не только в видимом рабочем дереве.
 
 ```bash
 git diff --cached --check
@@ -49,21 +62,21 @@ git ls-files
 rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|API[_-]?KEY|TO[K]EN|PASS[W]ORD|SEC[R]ET|\\x{C3}|\\x{C2}|\\x{FFFD}" .
 ```
 
-For public modules, also document a `RELEASE_GATE.md` or equivalent gate: date, checked commands, result, remaining warnings, and intentional exceptions. If a secret was ever committed, deleting it from `HEAD` is not enough; rotate the secret.
+Для публичных модулей также задокументируйте `RELEASE_GATE.md` или аналогичный отчет: дата, проверенные команды, результат, оставшиеся предупреждения и намеренные исключения. Если секрет когда-либо попадал в коммит, простого удаления из `HEAD` недостаточно; выполните ротацию секрета.
 
-## GitHub Metadata
+## Метаданные GitHub
 
-After the push, set metadata and release data explicitly.
+После пуша явно укажите метаданные и данные релиза.
 
 ```bash
-gh repo edit ORG/REPO --description "Short concrete description" \
+gh repo edit ORG/REPO --description "Короткое конкретное описание" \
   --add-topic local-first --add-topic python --add-topic llm
 git tag -a v1.0.0 -m "v1.0.0"
 git push origin v1.0.0
 gh release create v1.0.0 --repo ORG/REPO --title "v1.0.0" --notes "..."
 ```
 
-Then verify:
+Затем проверьте:
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,visibility,description,repositoryTopics,url
@@ -71,34 +84,34 @@ gh release view v1.0.0 --repo ORG/REPO --json tagName,url,isDraft,isPrerelease
 gh run list --repo ORG/REPO --limit 5
 ```
 
-If CI is red after a release, the repository is not cleanly published yet. For a just-created initial release, immediately and intentionally moving the fresh tag to the corrected commit is acceptable.
+Если CI горит красным после релиза, репозиторий еще не опубликован корректно. Для только что созданного первичного релиза немедленный намеренный перенос свежего тега на исправленный коммит является допустимым.
 
-## Common Mistakes
+## Частые ошибки
 
-| Mistake | Fix |
+| Ошибка | Исправление |
 |---|---|
-| `.gitignore` is added after `git add` | Unstage first, fix ignore rules, then add again |
-| README is monolingual although the UI or skill is multilingual | Add language links or localized READMEs |
-| No banner, topics, or description | Add discovery assets before announcement |
-| Release tag exists, but CI is red | Fix CI and verify the new run |
-| Organization README is updated, but `llms.txt` is missed | Update both human and machine-readable surfaces |
-| Local path appears in public docs | Replace it with relative paths or generic examples |
-| Public repo contains a test database or notebook inbox | Remove it from tracking, add ignore rules, rerun the gate |
+| `.gitignore` добавлен после `git add` | Сначала убрать из индекса, исправить правила и добавить снова |
+| README одноязычный, хотя UI или skill мультиязычный | Добавить ссылки на языковые версии или локализованные README |
+| Отсутствуют баннер, темы или описание | Добавить элементы оформления до анонса |
+| Тег релиза существует, но CI горит красным | Исправить CI и проверить новый запуск |
+| README организации обновлен, но `llms.txt` пропущен | Обновить страницы как для людей, так и для машин |
+| Локальный путь отображается в публичной документации | Заменить относительно пути или обобщенными примерами |
+| Публичный репозиторий содержит тестовую базу данных или папку черновиков notebooks | Удалить из отслеживания, добавить правила в ignore, повторно пройти шлюз |
 
-## Final Checklist
+## Финальный чек-лист
 
-- [ ] Local rules and locks checked.
-- [ ] `.gitignore` existed before the first add.
-- [ ] Public docs, license, security, contributing, changelog, and `llms.txt` present.
-- [ ] README includes repo name, purpose, installation, usage, privacy, and license.
-- [ ] i18n expectation met.
-- [ ] Banner, logo, or screenshot present when useful.
-- [ ] Tests and smokes pass.
-- [ ] Privacy, path, secret, database, and mojibake scans clean.
-- [ ] GitHub description, topics, tag, release, and CI verified.
-- [ ] Organization profile, registry, and ecosystem links updated.
+- [ ] Локальные правила и блокировки проверены.
+- [ ] `.gitignore` существовал до первого add.
+- [ ] Публичная документация, лицензия, безопасность, правила участия, чейнджлог и `llms.txt` на месте.
+- [ ] README содержит имя репозитория, назначение, установку, использование, конфиденциальность и лицензию.
+- [ ] Требования к i18n выполнены.
+- [ ] Баннер, логотип или скриншот добавлены при необходимости.
+- [ ] Тесты и дымовые проверки пройдены.
+- [ ] Проверки конфиденциальности, путей, секретов, баз данных и битых символов чисты.
+- [ ] Описание GitHub, темы, тег, релиз и CI проверены.
+- [ ] Профиль организации, реестр и ссылки экосистемы обновлены.
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-06-18)
-- Created initial repository care and publication protocol.
+- Создан начальный протокол обслуживания и публикации репозиториев.

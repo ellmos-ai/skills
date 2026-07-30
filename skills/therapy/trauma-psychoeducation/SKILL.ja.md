@@ -1,330 +1,339 @@
 ---
+name: trauma-psychoeducation
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: トラウマ心理教育：トラウマの定義、正常な反応、耐性の窓（Window of Tolerance）、トリガーの管理、セルフケア。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [trauma, psychoeducation, window-of-tolerance, trigger, self-care, ptsd]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `trauma-psychoeducation`.
+> **日本語** — `trauma-psychoeducation` の公式日本語版。
 
 
+# トラウマ心理教育（Trauma Psychoeducation）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> トラウマ、トラウマ後遺症状、および「耐性の窓（ウインドウ・オブ・トレランス）」に関する知識：異常な出来事に対する正常な反応を理解する — 純粋な心理教育であり、トラウマ処理・再加工ではありません
 
-
-# Trauma Psychoeducation (English)
-
-> Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Psychoeducation about trauma helps affected individuals understand and contextualize their reactions. The knowledge that symptoms like flashbacks, hyperarousal, or avoidance are NORMAL reactions to ABNORMAL events is already relieving and reduces shame and self-blame.
-
-Evidence: Psychoeducation is a recognized component of trauma therapy (Flatten et al. 2011, S3 Guideline PTSD). As a standalone intervention, it is insufficient, but it can increase therapy motivation and alleviate symptoms.
-
-**IMPORTANT:** This skill exclusively conveys KNOWLEDGE about trauma. It does NOT conduct trauma processing, does NOT explore distressing memories, and does NOT ask for trauma details.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. What Is Trauma?
+## 背景と文脈
 
-### Definition
+トラウマに関する心理教育（サイコエデュケーション）は、当事者が自身の反応を理解し、整理・文脈化するのに役立ちます。フラッシュバック、過覚醒、回避といった症状が「異常な出来事に対する正常な反応」であるという知識を得るだけでも心理的安堵をもたらし、自責の念や恥の感情を軽減します。
 
-A trauma is an event that exceeds a person's coping capacity and is accompanied by the experience of helplessness, loss of control, and/or fear of death. It is not the event alone that defines the trauma, but the subjective experience.
+エビデンス：心理教育はトラウマ療法の公認された構成要素です（Flatten et al. 2011, S3ガイドラインPTSD）。単独の介入としては不十分ですが、治療へのモチベーションを高め、症状を和らげる効果があります。
 
-### Trauma Types
+**重要：** 本スキルはトラウマに関する「知識」を伝えることに特化しています。トラウマの処理・再加工を行ったり、辛い記憶を掘り下げたり、トラウマの詳細を尋ねたりすることは「一切行いません」。
+**実施厳禁：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）。
 
-| Type | Description | Examples |
+---
+
+## 1. トラウマとは何か？
+
+### 定義
+
+トラウマとは、個人の対処能力を超えた出来事であり、無力感、コントロールの喪失、および／または死の恐怖の体験を伴うものです。トラウマを定義づけるのは出来事そのものだけでなく、個人の「主观的体験」です。
+
+### トラウマのタイプ
+
+| タイプ | 説明 | 具体例 |
 |------|-------------|----------|
-| Type I (Single trauma) | Single, unexpected event | Accident, assault, natural disaster |
-| Type II (Complex trauma) | Repeated, prolonged traumatization | Abuse, neglect, war |
-| Accidental trauma | Random events | Traffic accident, house fire, workplace accident |
-| Interpersonal trauma | Caused by humans | Violence, abuse, torture |
-| Secondary trauma | Through co-experiencing/witnessing | Helping professions, family members |
+| Ⅰ型（単発性トラウマ） | 単発の予期せぬ出来事 | 交通事故、暴行被害、自然災害 |
+| Ⅱ型（慢性・複雑性トラウマ） | 繰り返される長期的なトラウマ体験 | 虐待、ネグレクト、戦争体験 |
+| 事故性トラウマ | 偶発的な突発イベント | 交通障害、火災、労災事故 |
+| 対人的トラウマ | 人為的に引き起こされたもの | 暴力、虐待、拷問 |
+| 二次トラウマ | 他者の体験の目撃・共有によるもの | 支援職（医療・心理）、家族 |
 
-### What Is NOT Trauma (Differentiation)
+### トラウマではないもの（臨床的鑑別）
 
-Not every distressing event is a trauma in the clinical sense:
-- Breakup, job loss, arguments — distressing, but usually not trauma
-- Bullying — can be traumatizing (especially for children), but is not automatically trauma
-- The individual appraisal determines, not the type of event
-
----
-
-## 2. Normal Reactions to Abnormal Events
-
-### The Three Response Patterns
-
-```
-HYPERAROUSAL
-- Constant vigilance and tension
-- Startle response
-- Sleep problems
-- Irritability, anger outbursts
-- Concentration difficulties
-
-RE-EXPERIENCING (Intrusion)
-- Flashbacks (memories that feel real)
-- Nightmares
-- Distressing memories that arise suddenly
-- Physical reactions upon remembering (racing heart, sweating)
-
-AVOIDANCE AND NUMBING (Constriction)
-- Avoidance of places, people, situations
-- Emotional numbness
-- Withdrawal from other people
-- Feeling of alienation
-- Loss of interest and pleasure
-```
-
-### Important Message for Affected Individuals
-
-```
-"These reactions are NORMAL reactions to ABNORMAL events.
-
-Your body and mind are trying to protect you.
-The vigilance protects you from renewed danger.
-The memories are trying to process what happened.
-The avoidance protects you from being overwhelmed.
-
-You are not 'crazy.' You are not 'weak.'
-Your nervous system is responding the way it is programmed
-to respond to extreme threat."
-```
-
-### Timeline
-
-```
-COURSE AFTER TRAUMATIC EVENT
-
-0-4 weeks:  Acute Stress Reaction (NORMAL)
-            - Shock, numbness, restlessness
-            - Sleep problems, startle response
-            - Flashbacks, nightmares
-            - For most people: Spontaneous recovery
-
-4+ weeks:   If symptoms persist: Possible PTSD
-            - Professional assessment recommended
-            - Early intervention improves prognosis
-
-Months-Years: Chronification possible
-            - Therapy is effective even after a long time
-            - "It is never too late to seek help"
-```
+苦痛やストレスを伴うすべての出来事が臨床的意味でのトラウマであるとは限りません：
+- 失恋、失業、口論 — 苦痛ではありますが、通常はトラウマではありません
+- いじめ（Bullying） — トラウマ的になり得ますが（特に小児期）、自動的にトラウマとなるわけではありません
+- 出来事の種類だけでなく、個人の評価と体験のあり方が決定要因となります
 
 ---
 
-## 3. The Window of Tolerance (Dan Siegel)
+## 2. 異常な出来事に対する正常な反応
 
-### The Model
+### 3つの主な反応パターン
+
+```
+過覚醒（Hyperarousal）
+- 絶え間ない警戒と緊張状態
+- 誇張された驚愕反応
+- 睡眠障害・不眠
+- イライラ、怒りの爆発
+- 集中困難
+
+再体験 / 侵入症状（Intrusion）
+- フラッシュバック（現実に起きているかのような侵入的記憶）
+- 悪夢
+- 突然湧き上がる辛い記憶
+- 思い出した際の身体反応（動悸、発汗）
+
+回避と麻痺（Constriction / Avoidance）
+- 特定の場所、人物、状況の回避
+- 感情の麻痺・感覚の喪失
+- 他者からの引きこもり・孤立
+- 疎外感・よそよそしさ
+- 興味や喜びの喪失（アンヘドニア）
+```
+
+### 当事者への重要なメッセージ
+
+```
+「これらの反応は、異常な出来事に対する『正常な反応』です。
+
+あなたの身体と心は、あなたを守ろうとしています。
+警戒心は、新たな危険からあなたを守っています。
+記憶が湧き上がるのは、起きたことを消化・処理しようとしているからです。
+回避は、圧倒されることからあなたを守っています。
+
+あなたは『おかしく』なっていませんし、『弱く』もありません。
+あなたの神経システムは、極限の脅威に対してプログラミングされた通りに
+反応しているだけなのです。」
+```
+
+### 経過のタイムライン
+
+```
+トラウマ的出来事後の経過
+
+0〜4週間：    急性ストレス反応（正常な経過）
+              - ショック、麻痺、不安・落ち着かなさ
+              - 睡眠問題、驚愕反応
+              - フラッシュバック、悪夢
+              - 多くの人において：自然回復していく
+
+4週間以降：   症状が持続する場合：PTSDの可能性
+              - 専門家による評価を推奨
+              - 早期の介入が予後を改善する
+
+数ヶ月〜数年：慢性化の可能性
+              - 長年経過した後でも心理療法は有効
+              - 「助けを求めるのに遅すぎるということはない」
+```
+
+---
+
+## 3. 耐性の窓モデル（Dan Siegel 耐性の窓）
+
+### モデルの図解
 
 ```
             ________________________________________________
            |                                                |
-           |   ABOVE THE WINDOW: Hyperarousal               |
-           |   Panic, rage, overactivation, flashbacks      |
-           |   Racing heart, sweating, trembling            |
-           |   "Fight or flight"                            |
+           |   窓の上方：過覚醒（Hyperarousal）              |
+           |   パニック、激怒、過剰興奮、フラッシュバック    |
+           |   動悸、発汗、震え                             |
+           |   「戦うか逃げるか」反応（Fight or Flight）     |
            |________________________________________________|
            |                                                |
-           |   WINDOW OF TOLERANCE                          |
+           |   耐性の窓（WINDOW OF TOLERANCE）              |
            |                                                |
-           |   Here we can:                                 |
-           |   - Think and feel at the same time            |
-           |   - Process information                        |
-           |   - Maintain relationships                     |
-           |   - Solve problems                             |
-           |   - Learn and grow                             |
+           |   この状態では：                               |
+           |   - 思考と感情を同時に保持できる               |
+           |   - 情報を処理できる                           |
+           |   - 人間関係を維持できる                       |
+           |   - 課題を解決できる                           |
+           |   - 学び、成長できる                           |
            |________________________________________________|
            |                                                |
-           |   BELOW THE WINDOW: Hypoarousal                |
-           |   Freeze, numbness, dissociation               |
-           |   Lack of energy, emptiness, shutdown           |
-           |   "Playing dead reflex"                         |
+           |   窓の下方：低覚醒（Hypoarousal）              |
+           |   凍りつき（Freeze）、麻痺、解離                |
+           |   気力の欠如、空虚感、シャットダウン           |
+           |   「死んだふり反射」（Shutdown）               |
            |________________________________________________|
 ```
 
-### What Does This Mean?
+### これは何を意味するか？
 
-- **In the window:** We can regulate stress and function
-- **Above the window:** Too much activation — body in alarm mode
-- **Below the window:** Too little activation — body shuts down
+- **窓の中にある時：** ストレスを調節し、日常生活を機能させることができる
+- **窓の上に外れた時：** 覚醒が高すぎる — 身体がアラームモードに入っている
+- **窓の下に外れた时：** 覚醒が低すぎる — 身体がシャットダウンしている
 
-### Trauma and the Window
+### トラウマと耐性の窓
 
 ```
-BEFORE trauma:            AFTER trauma (untreated):
+トラウマ前：               トラウマ後（未治療）：
 
 |_______________|         |_____|
-|               |         |     |  <- Window has NARROWED
-|    WINDOW     |         | W.  |
-|   (wide)      |         |     |
+|               |         |     |  <- 耐性の窓が「狭く」なっている
+|    耐性の窓   |         | 窓. |
+|    （広い）   |         |     |
 |_______________|         |_____|
 
-Even small stimuli can cause falling out of the window
-after trauma (triggers).
+トラウマを経験した後は、小さな刺激（トリガー）でも
+窓の外に押し出されやすくなります。
 
-GOAL of therapy: WIDEN the window again.
+療法のゴール：耐性の窓を再び「広げる」こと。
 ```
 
-### Understanding Triggers
+### トリガー（引き金）の理解
 
 ```
-TRIGGERS are stimuli that remind of the trauma and put
-the nervous system into alarm mode — often unconsciously.
+トリガーとは、トラウマを想起させ、無意識のうちに
+神経システムをアラームモードに落とし込む刺激のことです。
 
-Triggers can be:
-- Sounds (bang, screaming, certain music)
-- Smells (smoke, perfume, alcohol)
-- Images (news, movies, places)
-- Body sensations (tightness, touch, pain)
-- Calendar dates (anniversaries)
-- Relationship situations (arguments, loss of control)
+トリガーとなり得るもの：
+- 音（爆音、悲鳴、特定の音楽）
+- におい（煙、香水、アルコール）
+- 視覚（ニュース、映画、特定の場所）
+- 身体感覚（胸の苦しさ、接触、痛み）
+- カレンダーの日付（記念日・命日など）
+- 人間関係の状況（口論、コントロールの喪失）
 
-Triggers are NOT weakness. They are stored warning signals
-of the nervous system. In therapy, one learns to recognize
-triggers and regulate the nervous system.
-```
-
----
-
-## 4. Self-Care Strategies
-
-### Ensuring Basic Needs
-
-```
-BASIC NEEDS CHECKLIST
-
-[ ] Sleep: Regular bedtimes, at least 7 hours
-[ ] Nutrition: Regular meals, sufficient water
-[ ] Exercise: At least 20 minutes daily (a walk is enough)
-[ ] Social contacts: At least one trusted person
-[ ] Safety: Feeling safe in one's own environment
-[ ] Structure: Daily routine with fixed anchor points
-```
-
-### Self-Care Strategies in Daily Life
-
-**Physical:**
-- Regular exercise (lowers stress hormones)
-- Breathing exercises
-- Sufficient sleep (observe sleep hygiene)
-- Reduce caffeine and alcohol (amplify hyperarousal/numbing)
-
-**Social:**
-- Have a trusted person (doesn't have to talk about trauma)
-- Avoid isolation — even small contacts help
-- Learn to set boundaries (being allowed to say "no")
-- Accept support
-
-**Emotional:**
-- Name feelings (don't judge them)
-- Use stabilization techniques (5-4-3-2-1, safe place)
-- Keep a journal (optional, don't force it)
-- Find creative expression (painting, music, writing)
-
-**Cognitive:**
-- Inform yourself (psychoeducation — this skill)
-- Challenge self-blame ("It was not my fault")
-- Reality-check catastrophizing
-- Be patient with yourself (healing takes time)
-
----
-
-## 5. Finding Professional Help
-
-### When to Seek Professional Help?
-
-```
-PROFESSIONAL HELP IS INDICATED WHEN:
-
-- Symptoms persist for more than 4 weeks
-- Symptoms worsen instead of improving
-- Daily life is no longer manageable (work, relationships)
-- Flashbacks or nightmares occur very frequently
-- Avoidance behavior severely restricts life
-- Substance use as a coping strategy
-- Suicidal thoughts or self-harm
-- The feeling: "I can't do this alone"
-```
-
-### Resources
-
-```
-IMMEDIATE HELP:
-- 988 Suicide & Crisis Lifeline (US): 988 (24/7, free)
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222 (24/7, free)
-- Emergency services: 911 (US) / 112 (EU)
-
-TRAUMA-SPECIFIC:
-- Trauma outpatient clinics (at many hospitals, no referral needed)
-- Victim support organizations (e.g., RAINN in US: 1-800-656-4673)
-- Domestic violence hotline (US): 1-800-799-7233
-- National Sexual Assault Hotline (US): 1-800-656-4673
-
-FINDING A THERAPIST:
-- Psychology Today therapist directory: psychologytoday.com/us/therapists
-- SAMHSA helpline (US): 1-800-662-4357
-- Important: Look for therapists specializing in "trauma therapy"
+トリガーは「弱さ」ではありません。神経システムが記憶している
+警告信号です。療法の中では、トリガーに気づき、
+神経システムを落ち着かせる方法を学んでいきます。
 ```
 
 ---
 
-## 6. Frequently Asked Questions (FAQ)
+## 4. セルフケア戦略
 
-### "Am I traumatized now?"
+### 基本的ニーズの確保
 
-Not everyone who experiences a distressing event develops a trauma-related disorder. The majority of people recover spontaneously within weeks. Whether PTSD is present can only be determined by a professional.
+```
+基本的ニーズのチェックリスト
 
-### "Do I have to talk about it?"
+[ ] 睡眠：規則正しい就寝時間、少なくとも7時間
+[ ] 栄養：規則正しい食事、十分な水分補給
+[ ] 運動：毎日少なくとも20分（散歩で十分）
+[ ] 社会的接触：信頼できる人が少なくとも1人いる
+[ ] 安全：自分の環境で安全だと感じられる
+[ ] 構造：固定されたアンカーポイントのある日課
+```
 
-No. Forcing yourself to talk can be harmful. Some people benefit from talking about it, others don't. There is no "must." In therapy, the right timing is determined together.
+### 日常生活におけるセルフケア戦略
 
-### "Why do I react this way even though it was long ago?"
+**身体的ケア：**
+- 適度な運動（ストレスホルモンを低減させる）
+- 呼吸法
+- 十分な睡眠（睡眠衛生の遵守）
+- カフェインやアルコールの削減（過覚醒や麻痺を増幅させるため）
 
-Traumatic memories are stored differently than normal memories. They can be reactivated by triggers and feel as though the event is happening NOW. The brain does not distinguish between "then" and "now." Therapy helps "re-sort" these memories.
+**社会的ケア：**
+- 信頼できる人を持つ（トラウマについて話す必要はない）
+- 孤立を避ける — 小さな交流でも効果がある
+- 境界線を引くことを学ぶ（「いいえ」と言ってよい）
+- 支援を受け入れる
 
-### "Am I weak because I can't handle this alone?"
+**感情的ケア：**
+- 感情に名前をつける（裁いたり否定したりしない）
+- 安定化技法を活用する（5-4-3-2-1法、セーフ・プレイス）
+- 日記をつける（任意。無理強いはしない）
+- 創造的な表現方法を見つける（絵画、音楽、執筆）
 
-No. Seeking help is a sign of strength. Trauma therapy is effective — most people can improve significantly with professional help.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Convey knowledge about trauma and trauma sequelae (psychoeducation)
-- Normalize normal reactions and provide relief
-- Explain the window of tolerance
-- Suggest self-care strategies
-- Refer to professional help
-- Offer stabilization techniques
-
-**An AI assistant must NOT:**
-- Conduct trauma processing (EMDR, exposure, NET, IRRT)
-- Ask for or explore trauma details
-- Process flashback content (only stabilize)
-- Diagnose PTSD or other trauma-related disorders
-- Assess suicidality
-- Make medication-related recommendations
-- Make statements about blame or responsibility
-- "Work through" or "process" memories
-- Ask suggestive questions ("Could it be that...")
-
-**PARTICULARLY STRICT BOUNDARY:** Trauma processing belongs in the hands of trained trauma therapists. This skill offers exclusively psychoeducation and stabilization. For any form of trauma exploration: STOP and refer to a professional.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**認知的ケア：**
+- 知識を得る（心理教育 — 本スキル）
+- 自責の念に挑む（「私のせいではなかった」）
+- 破局的思考を現実検証する
+- 自分に優しく焦らない（回復には時間がかかる）
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — Not professional therapy*
+## 5. 専門的な支援を求める
+
+### いつ専門家に相談すべきか？
+
+```
+以下の場合は専門的な支援が推奨されます：
+
+- 症状が4週間以上続いている
+- 症状が改善せず悪化している
+- 日常生活（仕事、人間関係）に深刻な支障が出ている
+- フラッシュバックや悪夢が頻繁に起きる
+- 回避行動によって生活が著しく制限されている
+- 対処法として物質（アルコール・薬物）に頼っている
+- 自殺念慮や自傷行為がある
+- 「一人では抱えきれない」と感じている
+```
+
+### 相談窓口・リソース
+
+```
+緊急支援（日本）：
+- こころの健康相談統一ダイヤル：0570-064-556
+- よりそいホットライン：0120-279-338
+- いのちの電話：0570-783-556（ナビダイヤル）
+- 警察・救急：110 / 119
+
+トラウマ専門相談：
+- 性犯罪・性暴力被害者のためのワンストップ支援センター：#8891
+- 配偶者暴力相談支援センター（DV相談+）：0120-279-388
+- 精神保健福祉センター（各都道府県）
+
+精神科医・心理療法士を探す：
+- 医療機関（精神科・心療内科）の受診
+- 「トラウマ療法」「PTSD治療」「EMDR」を専門とする臨床心理士・公認心理師を探す
+```
+
+---
+
+## 6. よくある質問（FAQ）
+
+### 「私は今、トラウマを負っているのでしょうか？」
+
+辛い出来事を経験したすべての人がトラウマ関連障害を発症するわけではありません。大部分の人は数週間以内に自然回復します。PTSDに該当するかどうかは、専門家によるアセスメントが必要です。
+
+### 「出来事について話さなければいけませんか？」
+
+いいえ。無理に話すことは有害になる場合があります。話すことで助かる人もいれば、そうでない人もいます。「話さなければならない」ということはありません。セラピーでは、適切なタイミングを一緒に相談しながら決定します。
+
+### 「昔のことなのに、なぜ今になって反応するのですか？」
+
+トラウマ的な記憶は、通常の記憶とは異なる方法で保存されます。トリガーによって再活性化され、まるで「今」起きているかのように感じられることがあります。脳は「当時」と「今」を区別できません。セラピーはこれらの記憶を「再整理」する手助けをします。
+
+### 「一人で対処できない私は弱いのでしょうか？」
+
+いいえ。助けを求めることは強さの証です。トラウマ療法は非常に効果的であり、ほとんどの人が専門的な支援によって大幅に改善します。
+
+---
+
+## 倫理と限界
+
+**AIアシスタントができること：**
+- トラウマおよびトラウマ後遺症状に関する知識の提供（心理教育）
+- 正常な反応であることを伝えて安心感を与えること
+- 耐性の窓モデルの解説
+- セルフケア戦略の提案
+- 専門的な支援窓口への案内
+- 安定化技法の提示
+
+**AIアシスタントが絶対にできないこと・行ってはならないこと：**
+- トラウマ処理・再加工作業（EMDR、暴露療法、NET、IRRTなど）を実施すること
+- トラウマの詳細を尋ねたり掘り下げたりすること
+- フラッシュバックの内容自体を処理・深掘りすること（安定化のみ行う）
+- PTSDやその他のトラウマ障害を診断すること
+- 自殺リスクのアセスメントを行うこと
+- 薬物・処方に関する推奨を行うこと
+- 責任や罪の所在について判断を下すこと
+- 記憶を「加工・処理」しようとすること
+- 誘導的な質問をすること（「〜だったのではないでしょうか？」など）
+
+**極めて厳格な限界：** トラウマの処理・加工作業は、専門のトレーニングを受けたトラウマセラピストの領域です。本スキルは「心理教育と安定化」のみを提供します。いかなる形式のトラウマ探求に対しても「直ちに停止」し、専門家へリファーしてください。
+
+**切迫した危機の場合は、必ず以下の窓口をご案内ください：**
+- こころの健康相談統一ダイヤル（日本）：0570-064-556
+- よりそいホットライン（日本）：0120-279-338
+- いのちの電話（日本）：0570-783-556（ナビダイヤル）
+- 988 Suicide & Crisis Lifeline（米国）：988
+- 警察・救急：110 / 119（日本） / 911（米国） / 112（欧州）
+
+---
+
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — 専門的心理療法ではありません*

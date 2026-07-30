@@ -1,166 +1,177 @@
 ---
+name: counseling-basics
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Основы терапевтической коммуникации: активное слушание, отклики-отражения, парафразирование, открытые вопросы и валидация.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [counseling, active-listening, communication, therapy]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `counseling-basics`.
+> **Русский** — Официальная русская версия `counseling-basics`.
 
 
+# Основы психологического консультирования и ведения беседы (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Основы терапевтической коммуникации: активное слушание, отклики-отражения, парафразирование
 
-
-# Counseling Basics (English)
-
-> Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-This template describes basic therapeutic communication techniques. It serves as a context template for therapeutic support.
-
-**Note:** These techniques are support, not a substitute for professional therapy. In acute crises, always refer to professional help.
-
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Active Listening
+## Контекст
 
-**Goal:** Signal complete understanding, truly absorb what is said.
+Данный модуль описывает базовые техники терапевтической коммуникации. Он служит контекстным шаблоном для психологической поддержки и ведения беседы.
 
-**Techniques:**
+**Примечание:** Эти техники являются поддержкой, а не заменой профессиональной психотерапии. В случае острых кризисов всегда перенаправляйте к специалистам.
 
-- **Verbal acknowledgment:** "I understand," "Mm-hmm," "That sounds difficult"
-- **Inquiry:** "Can you describe that in more detail?" / "What do you mean by that?"
-- **Summarizing:** At the end of a section, briefly repeat what was heard
-- **Non-directive listening:** No advice before the person has finished
-
-**Attitude:** Full attention, no interruptions, no judgment.
-
-**Conversation formula:**
-> "What I heard is [summary]. Is that correct?"
+**Никогда не применять:** EMDR (ДПДГ), длительную экспозицию (PE), нарративную экспозиционную терапию (NET).
 
 ---
 
-## 2. Mirroring
+## 1. Активное слушание
 
-**Goal:** Reflect perceived emotions, make feelings visible.
+**Цель:** Продемонстрировать полное понимание, глубоко воспринять сказанное собеседником.
 
-**Techniques:**
+**Техники:**
 
-- **Simple mirroring:** Repeat the last word or sentence slightly rephrased
-- **Emotional mirroring:** Address named or implied emotions
-  > "It sounds like you are very exhausted right now."
-- **Body language mirroring:** (in person) Adjust posture
+- **Вербальное подтверждение:** «Я понимаю», «Угу», «Это звучит непросто»
+- **Уточняющие вопросы:** «Можете рассказать об этом подробнее?» / «Что именно вы под этим имеете в виду?»
+- **Резюмирование:** В конце смыслового блока кратко повторить главное из услышанного
+- **Недирективное слушание:** Не давать советов, пока человек не закончил свою мысль
 
-**Caution:**
-- Don't overdo it — too much mirroring feels artificial
-- Don't over-elaborate interpretations
+**Установка:** Полное внимание, отсутствие перебиваний, безоценочность.
 
-**Examples:**
-> Person: "I don't know what to do anymore."
-> Mirror: "You don't know what to do anymore — it sounds like everything is overwhelming right now."
+**Формула беседы:**
+> «Правильно ли я вас понял(а): [резюме]?»
 
 ---
 
-## 3. Paraphrasing
+## 2. Отражение (Mirroring)
 
-**Goal:** Restate the core content in your own words, check understanding.
+**Цель:** Отразить воспринимаемые эмоции, сделать чувства видимыми для клиента.
 
-**Difference from mirroring:** Mirroring reflects emotion, paraphrasing reflects content/meaning.
+**Техники:**
 
-**Structure:**
-1. Briefly summarize content
-2. Highlight the key message
-3. Ask for confirmation
+- **Простое отражение:** Повторить последнее слово или фразу, слегка изменив формулировку
+- **Эмоциональное отражение:** Назвать прямо или косвенно выраженные эмоции
+  > «Похоже, вы чувствуете себя очень истощенным(ой) прямо сейчас.»
+- **Отражение языка тела:** (при очном контакте) Подстройка позы и невербальных сигналов
 
-**Formula:**
-> "If I understand you correctly, you're saying [paraphrase]. Is that right?"
+**Осторожность:**
+- Не перебарщивать — чрезмерное отражение выглядит искусственным и наигранным
+- Избегать умозрительных интерпретаций
 
-**Examples:**
-> Person: "My mother nags me every day with the same accusations and I can't take it anymore."
-> Paraphrase: "So it feels like an endless loop that you currently see no way out of?"
-
----
-
-## 4. Open Questions
-
-**Goal:** Encourage exploration without prescribing answers.
-
-**Characteristics of open questions:**
-- Start with: How, What, In what way, Describe, Explain
-- Leave room for personal answers
-- Cannot be answered with yes/no
-
-**Examples:**
-- "How did that feel?"
-- "What happens inside you when that occurs?"
-- "How do you usually deal with this?"
-
-**Avoid closed questions:**
-- "Did that hurt?" -> better: "How did that feel?"
-- "Are you sad?" -> better: "What's going through your mind right now?"
+**Примеры:**
+> Клиент: «Я больше не знаю, что делать.»
+> Отражение: «Вы чувствуете тупик — похоже, всё происходящее сейчас ощущается подавляющим.»
 
 ---
 
-## 5. Validation
+## 3. Парафразирование
 
-**Goal:** Confirm feelings and reactions as understandable and legitimate.
+**Цель:** Пересказать ключевое содержание своими словами, проверить точность понимания.
 
-**Important:** Validation does not mean agreement, but understanding.
+**Отличие от отражения:** Отражение возвращает эмоцию; парафразирование возвращает когнитивное содержание и смысловой контекст.
 
-**Formula:**
-> "It makes complete sense that you feel this way, given [situation]."
+**Структура:**
+1. Кратко изложить суть содержания
+2. Выделить ключевое послание
+3. Запросить подтверждение
 
-**Levels of validation (after Linehan):**
-1. Attentive listening (showing presence)
-2. Accurately reflecting (what was said?)
-3. Recognizing the unspoken
-4. Understanding the cause in context
-5. Acknowledging the reaction as understandable
-6. Radical genuineness (honest, equal-level response)
+**Формула:**
+> «Если я правильно вас понимаю, вы говорите, что [парафраз]. Это так?»
 
----
-
-## 6. Conversation Phases
-
-| Phase | Goal | Techniques |
-|-------|------|------------|
-| Opening | Settling in, creating safety | Greeting, open questions, signaling non-judgment |
-| Exploration | Exploring the topic | Active listening, inquiry, paraphrasing |
-| Deepening | Reaching deeper levels | Mirroring, validation, emotional resonance |
-| Integration | Bringing together, next steps | Summarizing, testing hypotheses, outlook |
-| Closing | Wrapping up, transition | Review, homework, farewell |
+**Примеры:**
+> Клиент: «Мать каждый день изводит меня одними и теми же обвинениями, я больше не могу это терпеть.»
+> Парафраз: «То есть для вас это ощущается как замкнутый круг, из которого вы пока не видите выхода?»
 
 ---
 
-## Ethics and Boundaries
+## 4. Открытые вопросы
 
-**An AI assistant may:**
-- Explain and demonstrate conversation techniques
-- Guide active listening, mirroring, paraphrasing
-- Ask open questions and offer validation
-- Provide psychoeducation about counseling skills
+**Цель:** Стимулировать исследование и самораскрытие без навязывания готовых ответов.
 
-**An AI assistant must NOT:**
-- Replace professional therapeutic conversations
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+**Характеристики открытых вопросов:**
+- Начинаются со слов: Как, Что, Каким образом, Опишите, Поясните
+- Оставляют пространство для развернутого личного ответа
+- На них нельзя ответить простым «да» или «нет»
 
-**In case of acute crisis, ALWAYS refer to:**
+**Примеры:**
+- «Каково это было для вас?»
+- «Что происходит внутри вас, когда это случается?»
+- «Как вы обычно справляетесь с подобными ситуациями?»
+
+**Избегать закрытых вопросов:**
+- «Вам было больно?» -> Лучше: «Какие чувства это у вас вызвало?»
+- «Вам грустно?» -> Лучше: «Что сейчас у вас на душе?»
+
+---
+
+## 5. Валидация (Подтверждение чувств)
+
+**Цель:** Подтвердить, что чувства и реакции клиента понятны, естественны и имеют право на существование.
+
+**Важно:** Валидация означает не одобрение любого поведения, а признание понятности эмоционального переживания.
+
+**Формула:**
+> «Совершенно логично, что вы чувствуете себя именно так, учитывая [ситуацию].»
+
+**Уровни валидации (по Марше Линехан):**
+1. Внимательное слушание (демонстрация присутствия)
+2. Точное отражение (пересказ сказанного)
+3. Озвучивание невысказанного (распознавание скрытых эмоций)
+4. Понимание причин в контексте истории / опыта
+5. Признание реакции нормальной в текущих обстоятельствах
+6. Радикальная подлинность (искренний контакт «на равных»)
+
+---
+
+## 6. Фазы беседы
+
+| Фаза | Цель | Техники |
+|------|------|---------|
+| Открытие | Установление контакта, создание безопасности | Приветствие, открытые вопросы, безоценочный настрой |
+| Исследование | Раскрытие темы | Активное слушание, уточнения, парафразирование |
+| Углубление | Выход на более глубокие смыслы | Отражение, валидация, эмоциональный резонанс |
+| Интеграция | Обобщение, определение шагов | Резюмирование, проверка гипотез, перспектива |
+| Завершение | Подведение итогов, переход | Обзор встречи, договоренности, прощание |
+
+---
+
+## Этика и границы
+
+**ИИ-ассистент может:**
+- Объяснять и демонстрировать техники ведения беседы
+- Применять активное слушание, отражение и парафразирование
+- Задавать открытые вопросы и давать валидацию
+- Предоставлять психообразование по навыкам консультирования
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Заменять профессиональные психологические консультации
+- Ставить диагнозы или давать лечебные назначения
+- Проводить кризисную интервенцию
+- Применять EMDR (ДПДГ), длительную экспозицию (PE) или нарративную экспозиционную терапию (NET)
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи: +7 (495) 051 (Москва)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная служба: 112 (РФ / ЕС) / 911 (US)
 
 ---
 
-## References
+## Литература
 
 - Rogers, C. R. (1951). *Client-Centered Therapy.* Houghton Mifflin.
 - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
@@ -168,5 +179,5 @@ This template describes basic therapeutic communication techniques. It serves as
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Rogers (1951, 1961), Linehan (1993) — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Rogers (1951, 1961), Linehan (1993) — Не является профессиональной терапией*

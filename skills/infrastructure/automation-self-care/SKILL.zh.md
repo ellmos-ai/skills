@@ -1,11 +1,17 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
-description: [中文] 智能体技能: automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+updated: 2026-07-30
+description: >
+  构建并运行独立于提供商的自愈核心集，用于定时 LLM 任务和桌面应用自动化。适用于
+  Agent 需要探索其原生调度器、安装定期卫生检查、提示词质量检查、频率与负载检查、资源检查、跨系统协调、权限及运行时检查，或通过回滚、回读和删除保护持续改进现有自动化舰队的场景。可由
+  automation self-care、scheduler task care、desktop app automation
+  maintenance、automation fleet audit、self-healing schedules、要求重新创建
+  ANTIGRAVITY 风格维护任务族的请求、core-set-textautomations、basic-text-automations、textbased-automation-core、textbased-automation-drivers
+  或 textbased-desktopapp-automations 触发。
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,97 +20,85 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: zh
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `automation-self-care`.
+> **中文** — `automation-self-care` 官方中文版本。
 
+# Automation Self-Care
 
+基于单个独立于提供商的控制回路，创建原生的、针对特定提供商的维护 Fleet。在保留 ANTIGRAVITY 任务族原始意图的同时，要求提供证据、可逆变更以及原生回读。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 不可逾越的边界
 
+- 将探索、规划、审批、变更和回读视为相互独立的阶段。
+- 使用目标应用所支持的自动化 API、命令行或 UI。绝不可假设编辑存储文件就能改变运行中的应用状态。
+- 在提出任务方案前，先读取本地规则、锁、删除/抑制日志以及已有调度计划。
+- 切勿虚构调度器支持。若无法证明创建、更新或回读可行，需生成手动安装方案并在变更前停止。
+- 每次自愈运行最多仅允许进行一项可独立测试的调优变更。
+- 保护自愈任务，防止其自我禁用或将其运行频率降低至配置的恢复下限以下。
+- 保存先前的提示词、调度计划、模型、权限和启用状态，以便能够回滚每次变更。
+- 只有在获得结果证据后才算成功，不能仅凭调度器启动或退出代码为 0。
+- 切勿将密钥、私密提示词或个人数据复制到共享注册表中。
 
-# Automation Self-Care (English)
+## 工作流
 
-Create a native, provider-specific maintenance fleet from one provider-neutral
-control loop. Preserve the original intent of the ANTIGRAVITY task family while
-requiring evidence, reversible changes and native readback.
+### 1. 探索原生自动化界面
 
-## Non-negotiable Boundaries & Rules
+盘点当前的 Actor、提供商、应用类型、调度器界面、支持的操作、状态文件、运行历史、使用情况遥测及回读方法。在 [provider-adapter-contract.md](references/provider-adapter-contract.md) 中使用 Profile 契约记录相关能力。
 
-- Treat discovery, planning, approval, mutation and readback as separate phases.
-- Use the target app's supported automation API, command or UI. Never assume that
-  editing a storage file changes live app state.
-- Read local rules, locks, deletion/suppression logs and existing schedules before
-  proposing a task.
-- Do not invent scheduler support. If create/update/readback cannot be proven,
-  produce a manual installation plan and stop before mutation.
-- Make at most one independently testable tuning change per care run.
-- Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
-- Preserve the previous prompt, schedule, model, permissions and enabled state so
-  every mutation can be rolled back.
-- Count success only after outcome evidence, not merely scheduler start or exit 0.
-- Never copy secrets, private prompts or personal data into a shared registry.
+明确区分原生桌面应用调度、CLI/无头（headless）执行、操作系统调度器或服务启动器、通用调度器服务、工作流引擎以及不支持或仅支持 UI 的自动化。切勿将配置文件的存在等同于支持的变更路径。
 
-## 工作流程与执行步骤 & Execution Steps
+### 2. 盘点 Fleet
 
-### 1. Discover the native automation surface
+为每个任务捕获稳定的本地标识符、用途、提示词指纹、调度计划、启用状态、模型、权限、目标路径、上次调度器事件、上次成功结果及当前所有者。提示词内容保持本地化。
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
-[provider-adapter-contract.md](references/provider-adapter-contract.md).
+当应用可以从内存重写状态时，在变更前对权威的实时界面进行两次检查。
 
-Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
-service starter, general scheduler service, workflow engine, and unsupported or
-UI-only automation. Do not equate the existence of a config file with a supported
-mutation path.
+### 3. 设计核心集 (Core Set)
 
-### 2. Inventory the fleet
+阅读 [core-set.md](references/core-set.md)。选择以下任一方案：
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+- `compact`：结合频率与负载分发的五个自愈任务；或
+- `full`：对应原始维护任务族的九个专项任务。
 
-Check the authoritative live surface twice before mutation when the app can rewrite
-state from memory.
-
-### 3. Design the core set
-
-Read [core-set.md](references/core-set.md). Select either:
-
-- `compact`: five care tasks combining frequency with load distribution; or
-- `full`: nine focused tasks corresponding to the original maintenance family.
-
-Generate a provider-neutral plan:
+生成独立于提供商的方案：
 
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
 ```
 
-The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+生成器绝不会自行安装任务。在应用方案前，请审查每一个处于 `blocked` 状态的能力，并选择无冲突的本地时间。
 
-### 4. Stage installation
+### 4. 阶段化安装
 
-Install through the native provider adapter:
+通过原生提供商适配器进行安装：
 
-1. Start with hygiene in read-only mode.
-2. Add resource protection.
-3. Add prompt-quality tuning with rollback.
-4. Add frequency and load tuning only after enough run evidence exists.
-5. Add cross-system coordination last.
+1. 首先以只读模式运行卫生检查。
+2. 添加资源保护。
+3. 添加带有回滚机制的提示词质量调优。
+4. 仅在拥有足够运行证据后，再添加频率与负载调优。
+5. 最后添加跨系统协调。
 
-Create new or imported tasks disabled unless the user explicitly approved active
-installation. For an unattended pilot, require a deletion log, before-state
-snapshot, run receipt and rollback path first.
+创建的新任务或导入的任务应默认处于禁用状态，除非用户明确批准激活安装。对于无人值守的试点运行，首先需要准备删除日志、变更前状态快照、运行回执及回滚路径。
 
-### 5. Run the care loop
+### 5. 运行自愈回路
 
-Every care task follows:
+每个自愈任务均遵循以下流程：
 
 ```text
 follow-up previous change
@@ -116,56 +110,39 @@ follow-up previous change
   -> write receipt and next-check condition
 ```
 
-Use the hypothesis catalogue and evidence rules in
-[core-set.md](references/core-set.md). Unknown cause means observe, narrow
-permissions or pause safely; never guess a repair.
+使用 [core-set.md](references/core-set.md) 中的假设目录和证据规则。原因未知意味着进行观察、缩小权限或安全暂停；切勿凭空猜测修复方案。
 
-### 6. Coordinate across actors
+### 6. 跨 Actor 协调
 
-Keep local app state authoritative. Share only task contracts, coverage, status,
-receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
-single-writer mutations require a claim or an equivalent native lock.
+保持本地应用状态的权威性。仅共享任务契约、覆盖范围、状态、回执和已脱敏的指纹。允许冗余的只读审查；单写者的变更需要申请 Claim 或等效的原生锁。
 
-### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+### 7. 无原生事件钩子的系统（Letter-Hooker 扩展）
 
-For AI frameworks that lack native, event-driven JSON hook loaders (such as
-Antigravity / Gemini CLI), do not attempt to force unavailable OS/CLI event hooks.
-Instead, adopt the **Letter-Hooker** pattern (see [`letter-hooker`](../letter-hooker/SKILL.md)):
+将 Token 或订阅限制视为容量状态，而非故障 Actor。在原始 Actor 生成成功回执后，归还委托的覆盖范围。
 
-- Use active, scheduled maintainer tasks (`agy_kontext_and_workflow_loader.py`) to
-  evaluate logs and execution state.
-- Dynamically inject **Preflight Bootloaders** (e.g. document-traversal rules for
-  `CLAUDE.md` / `AGENTS.md`) and **Letter Hooks** (`file://` protocol references)
-  directly into target `sidecar.json` prompt texts.
-- Maintain a daily domain `STICHWORTLISTE.json` for context queries into memory,
-  `gardener`, `workflowhooker`, and `.SKILLS`.
+## 必需输出
 
-Treat token or subscription limitation as capacity state, not a broken actor.
-Return delegated coverage after the original actor produces a successful receipt.
+针对每次配置或自愈运行报告以下内容：
 
-## Required Outputs & Deliverables
+- 已探索的原生界面及不支持的能力；
+- 选定的拓扑以及已创建、已建议或已跳过的任务；
+- 确切的变更及变更前后的回读结果；
+- 结果证据或开启的观察窗口；
+- 回滚位置及返回条件；
+- 共享覆盖范围更新（若存在协调注册表）。
 
-For each setup or care run report:
+## 示例
 
-- discovered native surface and unsupported capabilities;
-- selected topology and tasks created, proposed or skipped;
-- exact mutation and before/after readback;
-- evidence of outcome or open observation window;
-- rollback location and return condition;
-- shared coverage update, if a coordination registry exists.
+用户：“在此桌面应用中设置自我维护的调度计划。”
 
-## 使用示例与实践 & Usage
+探索应用是否能够列出、创建、更新和验证定时任务。生成 Compact 方案，展示不支持的能力，然后仅通过原生界面安装经批准的任务。仅包含任务提示词而没有实时调度器注册信息的文件夹不能算作已完成的配置。
 
-User: "Set up self-maintaining schedules in this desktop app."
+## 更新日志
 
-Discover whether the app can list, create, update and verify scheduled tasks.
-Generate the compact plan, present unsupported capabilities, then install only the
-approved tasks through the native surface. A folder containing a task prompt
-without a live scheduler registration is not a completed setup.
+### 1.0.1 (2026-07-30)
 
-## 变更日志与历史
+- 添加了独立于提供商的文本自动化和桌面应用自动化别名。
 
 ### 1.0.0 (2026-07-28)
 
-- Consolidated the original ANTIGRAVITY maintenance family, the F1-F6 control
-  loop and later provider-specific adaptations into a neutral core-set skill.
+- 将原始 ANTIGRAVITY 维护任务族、F1-F6 控制回路以及后续特定提供商的适配整合为一个中立的核心集 Skill。

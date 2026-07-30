@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-07-05
-description: [Русский] Навык агента для web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
+description: Маршрутизатор и протокол для чтения и извлечения веб-контента. Сначала определяет, ЧТО требуется (основной текст, структура или скриншот), а затем — КАКОЙ доступный в системе инструмент это обеспечивает. Если ничего подходящего нет, рекомендует установить модуль web-scraper.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,27 +15,20 @@ tags: [web-scraping, content-extraction, research, router]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['requests', 'beautifulsoup4']}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `web-reading`.
+> **Русский** — Официальная русская версия `web-reading`.
 
 
+# Веб-чтение (Router)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+Получайте и обрабатывайте веб-контент — но не выбирайте инструмент вслепую. Навык выполняет маршрутизацию: **сначала цель, затем лучший из доступных инструментов.** Фактическая реализация находится в **модуле `web-scraper`**; этот навык показывает только то, что доступно в текущий момент и как этим пользоваться.
 
-# Web Reading (Router) (English)
-
-## Общий обзор и назначение & Purpose
-
-Fetch and process web content — but don't pick a tool blindly. This skill
-routes: **purpose first, then the best available tool.** The actual
-implementation lives in the **`web-scraper` module**; this skill only shows
-what is currently present and how to use it.
-
-## Step 1 — What is needed?
+## Шаг 1 — Что требуется?
 
 ```
 Process a web page?
@@ -45,60 +38,57 @@ Process a web page?
   +-- Rendered image of the page    → "Screenshot"  → Step 2C
 ```
 
-## Step 2 — Which tool? (Router)
+## Шаг 2 — Какой инструмент? (Router)
 
-Use the **first available** tool in each list. "Available" means the
-tool/skill/module is actually present in this session.
+Используйте **первый доступный** инструмент в каждом списке. «Доступный» означает, что инструмент/навык/модуль действительно присутствует в этой сессии.
 
-### 2A — Content (main text, clean markdown)
+### 2A — Контент (основной текст, чистый markdown)
 
-| Priority | Tool | Available when … | Usage |
+| Приоритет | Инструмент | Доступен, когда… | Использование |
 |---|---|---|---|
-| 1 | **`defuddle`** skill | skill `defuddle` listed | clean markdown from normal web pages |
-| 2 | Built-in **`WebFetch`** | agent has the WebFetch tool | quick read/summary of a URL |
-| 3 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "extract"` |
-| 4 | **`web-scraper`** module | module installed/importable | `web-scraper extract <url>` / `extract(url)` |
+| 1 | Навык **`defuddle`** | навык `defuddle` в списке | чистый markdown из обычных веб-страниц |
+| 2 | Встроенный **`WebFetch`** | у агента есть инструмент WebFetch | быстрое чтение/краткое изложение URL |
+| 3 | **`fc_web_fetch`** (MCP) | загружен FileCommander MCP | `mode: "extract"` |
+| 4 | Модуль **`web-scraper`** | модуль установлен/доступен для импорта | `web-scraper extract <url>` / `extract(url)` |
 
-> Note: `.md` URLs are already markdown → use `WebFetch` directly, no extractor.
+> Примечание: URL с расширением `.md` уже в формате markdown → используйте `WebFetch` напрямую, без экстрактора.
 
-### 2B — Structure (links, forms, headers)
+### 2B — Структура (ссылки, формы, заголовки)
 
-`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not
-raw structure). Use instead:
+`WebFetch`/`defuddle` **не подходят** для этих целей (они возвращают обработанный текст, а не исходную структуру). Используйте вместо них:
 
-| Priority | Tool | Available when … | Usage |
+| Приоритет | Инструмент | Доступен, когда… | Использование |
 |---|---|---|---|
-| 1 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "links" \| "forms" \| "headers"` |
-| 2 | **`web-scraper`** module | module installed/importable | `web-scraper links\|forms\|headers <url>` |
+| 1 | **`fc_web_fetch`** (MCP) | загружен FileCommander MCP | `mode: "links" \| "forms" \| "headers"` |
+| 2 | Модуль **`web-scraper`** | модуль установлен/доступен для импорта | `web-scraper links\|forms\|headers <url>` |
 
-### 2C — Screenshot
+### 2C — Скриншот
 
-| Priority | Tool | Available when … | Usage |
+| Приоритет | Инструмент | Доступен, когда… | Использование |
 |---|---|---|---|
-| 1 | **`web-scraper`** module | module with `[screenshot]` extra | `web-scraper screenshot <url> --out img.png` |
-| 2 | Browser automation tool | e.g. Playwright/Computer-Use present | page-dependent |
+| 1 | Модуль **`web-scraper`** | модуль с опцией `[screenshot]` | `web-scraper screenshot <url> --out img.png` |
+| 2 | Инструмент автоматизации браузера | например, доступен Playwright/Computer-Use | зависит от страницы |
 
-## Step 3 — Fallback: nothing suitable found?
+## Шаг 3 — Резервный вариант: ничего подходящего не найдено?
 
-If **no** tool is available for the purpose, recommend installing the
-**`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
+Если для этой цели **нет** доступных инструментов, рекомендуем установить **модуль `web-scraper`** (полный функционал: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (English)
-pip install ".[http,extract]"          # + [screenshot] for screenshots
+# из локальной папки модуля (.MODULES/.TOOLS/web-scraper)
+pip install ".[http,extract]"          # + [screenshot] для скриншотов
 
-# then: (English)
+# затем:
 web-scraper extract <url>
 ```
 
-As a library:
+Как библиотека Python:
 
 ```python
 from web_scraper import WebScraper, extract
 print(extract("https://example.com")["content"])
 ```
 
-## Last resort — standalone snippet (no dependencies beyond requests/bs4)
+## Крайний случай — автономный фрагмент (без зависимостей, кроме requests/bs4)
 
 ```python
 import requests
@@ -117,13 +107,9 @@ def extract_content(url: str) -> str:
 ## Журнал изменений
 
 ### 1.1.0 (2026-07-05)
-- Reworked from a plain protocol into a **router**: detects available web
-  capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module)
-  and routes by purpose (content/structure/screenshot); otherwise recommends the
-  `web-scraper` module.
-- Unified name to `web-reading` (was `webseiten-lesen` in the DE version).
-- Removed BACH CLI examples from the body (standalone-compliant; origin stays
-  documented in the `bach_integration` frontmatter).
+- Переработан из обычного протокола в **маршрутизатор (Router)**: определяет доступные веб-возможности (`defuddle`, `WebFetch`, `fc_web_fetch`, модуль `web-scraper`) и маршрутизирует по назначению (контент/структура/скриншот); в противном случае рекомендует модуль `web-scraper`.
+- Унифицировано имя в `web-reading` (ранее `webseiten-lesen` в DE-версии).
+- Удалены примеры BACH CLI из основного текста (соответствие автономному стандарту; происхождение задокументировано в метаданных `bach_integration`).
 
 ### 1.0.0 (2026-03-12)
-- Export from BACH v3.8.0 workflow `webseiten-lesen.md`
+- Экспорт из рабочего процесса BACH v3.8.0 `webseiten-lesen.md`

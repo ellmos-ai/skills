@@ -1,36 +1,49 @@
 ---
+name: decide
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-03-15
+description: 構造化意思決定：メリット・デメリット行列、加重スコアリング、意思決定ツリー、シナリオ分析、アイゼンハワーマトリクス。
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [decision, evaluation, prioritization, framework]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `decide`.
+> **日本語** — `decide` の公式日本語版。
 
 
+# Decide — 構造化意思決定 (日本語)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# Decide — Structured Decision Making (English)
-
-> Rational decisions through structured frameworks and evaluation methods
-
----
-
-## When to Use?
-
-- Choosing between options
-- Need a pro/con list
-- Multi-criteria decision
-- Uncertain about important decisions
-
-**Trigger words:** decide, choose, compare, evaluate, weigh
+> 構造化されたフレームワークと評価手法による合理的意思決定
 
 ---
 
-## Frameworks
+## 使用タイミング
 
-### 1. Pro/Con Matrix (Simple)
+- 複数の選択肢から選択する場合
+- メリット・デメリット一覧が必要な場合
+- 多基準評価による意思決定
+- 重要な決定に不確実性がある場合
 
-Quick decisions between 2 options.
+**トリガーワード:** decide, choose, compare, evaluate, weigh
+
+---
+
+## フレームワーク
+
+### 1. メリット・デメリット行列（シンプル）
+
+2つの選択肢間の迅速な決定。
 
 ```
 PRO A:                    CON A:
@@ -46,36 +59,36 @@ Recommendation: [A/B] because [reasoning]
 
 ---
 
-### 2. Weighted Scoring (Complex)
+### 2. 加重スコアリング（複雑）
 
-Multi-criteria decisions with weighting.
+重み付けを伴う多基準評価。
 
-| Criterion | Weight | Option A | Score A | Option B | Score B |
+| 評価基準 | 重み | 選択肢 A | スコア A | 選択肢 B | スコア B |
 |-----------|--------|----------|---------|----------|---------|
-| Criterion 1 | 30% | 8 | 2.4 | 6 | 1.8 |
-| Criterion 2 | 25% | 7 | 1.75 | 9 | 2.25 |
-| TOTAL | 100% | - | X.XX | - | X.XX |
+| 基準 1 | 30% | 8 | 2.4 | 6 | 1.8 |
+| 基準 2 | 25% | 7 | 1.75 | 9 | 2.25 |
+| 合計 | 100% | - | X.XX | - | X.XX |
 
-**Process:**
-1. Collect criteria
-2. Assign weights (sum = 100%)
-3. Rate options (1-10 scale)
-4. Calculate scores (rating x weight)
-5. Compare and recommend
-
----
-
-### 3. Decision Tree (Sequential)
-
-Decisions with clear if-then paths:
-1. Define starting question
-2. First branch (most important criterion)
-3. Next level (second most important)
-4. Down to final option
+**プロセス:**
+1. 評価基準を収集
+2. 重みを割り当て（合計 = 100%）
+3. 選択肢を評価（1〜10点スケール）
+4. スコアを計算（評価 × 重み）
+5. 比較して推奨事項を提示
 
 ---
 
-### 4. Scenario Analysis (Uncertainty)
+### 3. 意思決定ツリー（シーケンシャル）
+
+明確な if-then パスを持つ意思決定：
+1. 出発点となる質問を定義
+2. 第1分岐（最も重要な基準）
+3. 次のレベル（2番目に重要な基準）
+4. 最終選択肢に到達
+
+---
+
+### 4. シナリオ分析（不確実性）
 
 ```
 Best Case (X% probability):
@@ -92,7 +105,7 @@ Total expected value: [Sum]
 
 ---
 
-### 5. Eisenhower Matrix (Prioritization)
+### 5. アイゼンハワーマトリクス（優先順位付け）
 
 ```
               URGENT          NOT URGENT
@@ -102,39 +115,39 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-## Quality Checklist
+## 品質チェックリスト
 
-Check before final recommendation:
-- [ ] All relevant criteria identified?
-- [ ] User values considered?
-- [ ] Long-term effects considered?
-- [ ] Risks identified and evaluated?
-- [ ] Bias check performed?
-- [ ] Reversibility assessed?
-
----
-
-## Best Practices
-
-### Defining Criteria
-- Specific and measurable
-- Not too many (3-7 ideal)
-- Independent of each other
-
-### Weighting
-- Sum = 100%
-- Most important criterion >= 25%
-- No weights < 5%
-
-### Recommendation
-- Clear and reasoned
-- Mention alternatives
-- Name risks
-- Consider reversibility
+最終推奨事項の提示前にチェック：
+- [ ] 関連するすべての基準が特定されているか？
+- [ ] ユーザーの価値観が考慮されているか？
+- [ ] 長期的な影響が考慮されているか？
+- [ ] リスクが特定され評価されているか？
+- [ ] バイアスチェックが実施されているか？
+- [ ] 可逆性が評価されているか？
 
 ---
 
-## ワークフローと実行手順 & Execution Steps
+## ベストプラクティス
+
+### 評価基準の定義
+- 具体的に測定可能
+- 多すぎない（3〜7個が理想）
+- 互いに独立していること
+
+### 重み付け
+- 合計 = 100%
+- 最も重要な基準 >= 25%
+- 5%未満の重みは設定しない
+
+### 推奨事項
+- 明確で根拠がある
+- 代替案に言及
+- リスクを明示
+- 可逆性を考慮
+
+---
+
+## ワークフローと手順
 
 ```
 1. User request
@@ -153,8 +166,8 @@ Check before final recommendation:
 ## 変更履歴
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- BACH v3.8.0 より移植
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 より移植 | スタンドアロン版*

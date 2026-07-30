@@ -5,7 +5,8 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [中文] 智能体技能: pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: 雅各布森渐进性肌肉放松法（PMR）与舒尔茨自律训练法（AT）。包含简短版与完整版。
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,184 +16,181 @@ tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation
 language: zh
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `pmr-autogenic-training`.
+> **中文** — `pmr-autogenic-training` 官方中文版本。
 
 
+# 渐进性肌肉放松法与自律训练法
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 基于 Jacobson 和 Schultz 的躯体放松技术
 
-
-# Progressive Muscle Relaxation & Autogenic Training (English)
-
-> Body-based relaxation techniques according to Jacobson and Schultz
-
-See: [ETHICS.md](../ETHICS.md)
+参见: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## 背景与概述
 
-Progressive Muscle Relaxation (PMR, Jacobson 1929) and Autogenic Training (AT, Schultz 1932) are the two most extensively researched relaxation techniques. Both work through conscious influence on the autonomic nervous system and can be learned as self-help methods without therapeutic supervision.
+渐进性肌肉放松法（PMR，Jacobson 1929）和自律训练法（AT，Schultz 1932）是研究最为广泛的两项躯体放松技术。二者均通过有意识地调节自主神经系统发挥作用，且均可作为无需专业心理治疗师督导的自助方法进行学习。
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**注意：** 本方法仅作为辅助支持，不可替代专业心理治疗或医学诊断。
+**切勿实施：** 眼动脱敏再加工（EMDR）、延长暴露疗法（PE）、叙事暴露疗法（NET）
 
 ---
 
-## 1. Progressive Muscle Relaxation (PMR) according to Jacobson
+## 1. 雅各布森渐进性肌肉放松法（PMR）
 
-### Basic Principle
+### 基本原理
 
-Systematic tensing and releasing of muscle groups. Through the contrast between tension and release, the body learns deeper relaxation than possible in its normal state.
+系统性地收缩与放松各肌肉群。通过肌肉紧张与释放之间的鲜明对比，使身体学会比日常状态下更深层的放松。
 
-**Mechanism:** Muscle tension -> conscious release -> parasympathetic activation -> reduction of heart rate, blood pressure, muscle tone
+**作用机制：** 肌肉紧张 -> 有意识地释放放松 -> 副交感神经激活 -> 心率、血压及肌张力降低
 
-### 1.1 Long Form: 16 Muscle Groups
+### 1.1 完整版：16 个肌肉群
 
-| No | Muscle Group | Tension |
+| 序号 | 肌肉群 | 紧张动作 |
 |----|-------------|---------|
-| 1 | Right hand/forearm | Clench fist |
-| 2 | Right upper arm | Tense biceps |
-| 3 | Left hand/forearm | Clench fist |
-| 4 | Left upper arm | Tense biceps |
-| 5 | Forehead | Raise eyebrows |
-| 6 | Mid-face | Squeeze eyes shut, wrinkle nose |
-| 7 | Lower face | Clench teeth, pull corners of mouth wide |
-| 8 | Neck | Press chin toward chest (counter-pressure) |
-| 9 | Chest/shoulders | Raise shoulders, inhale deeply |
-| 10 | Abdomen | Tense abdominal muscles |
-| 11 | Lower back | Slight arch |
-| 12 | Right thigh | Slightly lift leg |
-| 13 | Right lower leg | Pull foot toward shin |
-| 14 | Right foot | Curl toes |
-| 15 | Left thigh | Slightly lift leg |
-| 16 | Left lower leg/foot | Pull foot up, curl toes |
+| 1 | 右手/前臂 | 握紧拳头 |
+| 2 | 右上臂 | 收缩肱二头肌 |
+| 3 | 左手/前臂 | 握紧拳头 |
+| 4 | 左上臂 | 收缩肱二头肌 |
+| 5 | 额头 | 向上抬眉毛 |
+| 6 | 面部中部 | 紧闭双眼，皱起鼻子 |
+| 7 | 面部下部 | 咬紧牙关，向两侧拉开嘴角 |
+| 8 | 颈部 | 下巴向下压向胸部（形成对抗压力） |
+| 9 | 胸部/双肩 | 向上耸肩，深吸气 |
+| 10 | 腹部 | 收紧腹部肌肉 |
+| 11 | 下背部 | 背部轻微拱起 |
+| 12 | 右大腿 | 轻微抬起右腿 |
+| 13 | 右小腿 | 将脚尖向胫骨方向勾起 |
+| 14 | 右脚 | 脚趾向下蜷曲 |
+| 15 | 左大腿 | 轻微抬起左腿 |
+| 16 | 左小腿/左脚 | 向上勾起脚尖，蜷曲脚趾 |
 
-**Procedure per muscle group:**
-1. Direct attention to the muscle group
-2. Tense: 5-7 seconds (approximately 70% of maximum strength)
-3. Release: Let go abruptly
-4. Notice: 20-30 seconds, perceive the relaxation
-5. Next muscle group
+**每个肌肉群的操作步骤：**
+1. 将注意力集中到目标肌肉群
+2. 紧张：持续 5-7 秒（保持约 70% 的最大力量）
+3. 放松：瞬间完全松开
+4. 体会：持续 20-30 秒，细致感受放松状态
+5. 切换至下一个肌肉群
 
-### 1.2 Short Form: 7 Muscle Groups
+### 1.2 简短版：7 个肌肉群
 
-For experienced practitioners or when time is limited:
+适用于有经验的练习者或时间有限的情况：
 
-| No | Combination | Tension |
+| 序号 | 组合部位 | 紧张动作 |
 |----|------------|---------|
-| 1 | Both arms | Clench fists, bend arms |
-| 2 | Entire face | Grimace: furrow brow, close eyes, mouth wide |
-| 3 | Neck/shoulders | Pull shoulders up to ears |
-| 4 | Chest/abdomen | Inhale, tense abdomen |
-| 5 | Back | Shoulder blades together, slight arch |
-| 6 | Both thighs | Slightly lift legs |
-| 7 | Both lower legs/feet | Pull feet up |
+| 1 | 双臂 | 握紧双手拳头，屈臂发力 |
+| 2 | 整个面部 | 做夸张表情：皱眉、闭眼、张大嘴 |
+| 3 | 颈部/双肩 | 双肩向上耸至耳朵处 |
+| 4 | 胸部/腹部 | 深吸气，收紧腹部 |
+| 5 | 背部 | 双侧肩胛骨向中间靠拢，背部微拱 |
+| 6 | 双大腿 | 轻微抬起双腿 |
+| 7 | 双小腿/双脚 | 向上勾起双脚 |
 
-### 1.3 Recall Technique (Advanced)
+### 1.3 意念回想放松技术（进阶）
 
-After several weeks of practice: Relaxation of muscle groups ONLY through imagination (without actual tensing). The body has conditioned the relaxation response.
+经过数周练习后：仅凭想象（无需实际肌肉收缩）即可诱发肌肉群放松。身体已建立起放松反射条件化。
 
 ---
 
-## 2. Autogenic Training (AT) according to Schultz
+## 2. 舒尔茨自律训练法（AT）
 
-### Basic Principle
+### 基本原理
 
-Concentrative self-relaxation through formulaic autosuggestion. The practitioner induces a state of deep relaxation through repeated guiding phrases (autonomic switching).
+通过公式化的自我暗示进行专注型自我放松。练习者通过重复引导性指导语诱发深度放松状态（自主神经切换）。
 
-**Mechanism:** Concentration on formulas -> ideomotor response -> actual physical changes (blood flow, warmth, calm)
+**作用机制：** 专注于暗示公式 -> 意念运动反应 -> 产生真实的生理改变（血流量增加、温热感、平静）
 
-### 2.1 The 6 Basic Exercises (Lower Level)
+### 2.1 6 项基础练习（初级阶段）
 
-| Exercise | Formula | Goal |
+| 练习项目 | 指导语公式 | 训练目标 |
 |----------|---------|------|
-| 1. Heaviness | "My right arm is very heavy" | Muscle relaxation |
-| 2. Warmth | "My right arm is very warm" | Vasodilation, blood flow |
-| 3. Heart | "My heart beats calmly and steadily" | Heart regulation |
-| 4. Breathing | "My breathing is calm and steady" | Breath regulation |
-| 5. Solar plexus | "My solar plexus is streaming warm" | Abdominal organ relaxation |
-| 6. Forehead | "My forehead is pleasantly cool" | Mental clarity |
+| 1. 重感练习 | “我的右臂非常沉重” | 肌肉放松 |
+| 2. 温感练习 | “我的右臂非常温暖” | 血管扩张、血液循环改善 |
+| 3. 心脏练习 | “我的心跳平静而规律” | 心率调节 |
+| 4. 呼吸练习 | “我的呼吸平静而规律” | 呼吸调节 |
+| 5. 太阳神经丛 | “我的太阳神经丛源源散发温热” | 腹腔器官放松 |
+| 6. 额头凉感 | “我的额头凉爽舒适” | 保持头脑清醒 |
 
-**Progression:** Gradual over 6-8 weeks. Add one new exercise each week.
+**进阶顺序：** 在 6-8 周内循序渐进。每周增加一项新练习。
 
-### 2.2 Session Procedure
+### 2.2 练习流程
 
 ```
-1. Basic posture: Coachman's posture, armchair position, or lying down
-2. Opening: Close eyes, "I am completely calm"
-3. Internally repeat formulas (6x each, slowly):
-   - "My right arm is very heavy" (6x)
-   - "My right arm is very warm" (6x)
-   - [additional formulas depending on practice level]
-4. Rest formula in between: "I am completely calm"
-5. Recall: Firmly tense arms, inhale deeply, open eyes
-   IMPORTANT: Never skip the recall (except before falling asleep)
+1. 基本姿势：马车夫坐姿、安乐椅坐姿或平躺姿势
+2. 开始：闭上双眼，默念“我内心非常平静”
+3. 心中缓慢重复公式（每条重复 6 次）：
+   - “我的右臂非常沉重”（6次）
+   - “我的右臂非常温暖”（6次）
+   - [根据练习阶段添加后续公式]
+4. 间歇过渡公式：“我内心非常平静”
+5. 解除/唤醒动作（Recall）：用力收缩屈伸双臂，深吸气，睁开眼睛
+   重要提示：切勿跳过解除动作（在睡前练习除外）
 ```
 
-### 2.3 Learning Plan
+### 2.3 学习计划表
 
-| Week | Exercise | Duration |
+| 周次 | 练习内容 | 练习时长 |
 |------|----------|----------|
-| 1-2 | Heaviness exercise | 5 min |
-| 3-4 | Heaviness + Warmth | 8 min |
-| 5-6 | Heaviness + Warmth + Heart + Breathing | 12 min |
-| 7-8 | All 6 basic exercises | 15 min |
+| 1-2 | 重感练习 | 5 分钟 |
+| 3-4 | 重感 + 温感 | 8 分钟 |
+| 5-6 | 重感 + 温感 + 心脏 + 呼吸 | 12 分钟 |
+| 7-8 | 全部 6 项基础练习 | 15 分钟 |
 
 ---
 
-## 3. PMR vs. AT: Decision Guide
+## 3. PMR 与 AT 选型指南
 
-| Criterion | PMR | AT |
+| 评估指标 | PMR（渐进性肌肉放松） | AT（自律训练法） |
 |-----------|-----|-----|
-| Learnability | Easy, immediately effective | Requires practice (4-8 weeks) |
-| Physical activity | Yes (tensing) | No (imagination only) |
-| For muscle tension | Very suitable | Moderately suitable |
-| For inner restlessness | Good | Very good |
-| For sleep problems | Good | Very good |
-| Usable anywhere | Limited (movement needed) | Yes (inconspicuous) |
-| For children | From approx. age 8 | From approx. age 10 |
+| 易学性 | 简单易学，立竿见影 | 需要系统练习（4-8 周） |
+| 躯体活动 | 是（肌肉收缩） | 否（仅凭想象与暗示） |
+| 缓解肌肉紧张 | 非常适用 | 中度适用 |
+| 缓解内心躁动 | 效果良好 | 效果极佳 |
+| 改善睡眠问题 | 效果良好 | 效果极佳 |
+| 场所通用性 | 受限（需要身体动作） | 良好（隐蔽不引人注意） |
+| 适用年龄（儿童）| 约 8 岁起 | 约 10 岁起 |
 
 ---
 
-## 4. Contraindications
+## 4. 禁忌症与注意事项
 
-**PMR:**
-- Acute muscle injuries or inflammation
-- Severe spasticity
-- Epilepsy (tensing may trigger seizures — rare)
+**PMR 禁忌症：**
+- 急性肌肉损伤或炎症
+- 重度痉挛状态
+- 癫痫（肌肉收缩可能诱发发作 — 较为罕见）
 
-**AT:**
-- Acute psychosis
-- Severe depression (risk of excessive introspection)
-- Cardiac arrhythmia (omit heart exercise)
-- Dissociative disorders
-- Severe hypotension (circulatory problems possible)
+**AT 禁忌症：**
+- 急性精神病状态
+- 重度抑郁症（存在过度内省风险）
+- 心律失常（需跳过心脏练习）
+- 解离性障碍
+- 重度低血压（可能引发循环系统不适）
 
-**Both methods:**
-- Stop immediately if trauma flashbacks occur
-- Not a substitute for medical/psychotherapeutic treatment
-
----
-
-## Progress Tracking
-
-- Tension level before/after exercise (0-10 scale)
-- Which muscle groups were particularly tense?
-- AT: Which formulas are already effective, which not yet?
-- Regularity: Goal 1x daily, at least 4x/week
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**两种方法通用注意事项：**
+- 若出现创伤闪回，须立即停止练习
+- 不可替代正规医学及心理治疗
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Jacobson (1929), Schultz (1932) — Not professional therapy*
+## 进度追踪与评估
+
+- 练习前/后紧张程度评分（0-10 分主观量表）
+- 记录哪些肌肉群尤为紧张
+- AT 自律训练：评估哪些公式已产生效果，哪些仍需练习
+- 练习频率：目标每日 1 次，每周不少于 4 次
+
+**如遇急性心理危机，请务必联系：**
+- 988 自杀与危机生命热线（美国）：988
+- 危机文本热线（美国）：发送 HOME 至 741741
+- 撒玛利亚会热线（英国）：116 123
+- 心理援助热线（德国）：0800 111 0 111 / 0800 111 0 222
+- 全国心理援助热线（中国）：12355 / 96885
+- 紧急救援电话：911（美国） / 112（欧洲） / 110/120（中国）
+
+---
+
+*移植自 BACH v3.8.0 | 独立版本*
+*参考来源：Jacobson (1929), Schultz (1932) — 本文档不构成专业诊疗建议*

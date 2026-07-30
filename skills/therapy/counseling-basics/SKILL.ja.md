@@ -1,166 +1,178 @@
 ---
+name: counseling-basics
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 治療的コミュニケーションの基礎：アクティブ・リスニング（傾聴）、ミラーリング、言い換え（パラフレージング）、開かれた質問、およびバリデーション（感情の承認）。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [counseling, active-listening, communication, therapy]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `counseling-basics`.
+> **日本語** — `counseling-basics` の公式日本語版。
 
 
+# カウンセリングの基礎・面接技法（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> 治療的コミュニケーションの基礎：アクティブ・リスニング（傾聴）、ミラーリング、パラフレージング（言い換え）
 
-
-# Counseling Basics (English)
-
-> Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-This template describes basic therapeutic communication techniques. It serves as a context template for therapeutic support.
-
-**Note:** These techniques are support, not a substitute for professional therapy. In acute crises, always refer to professional help.
-
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+参照：[ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Active Listening
+## 背景
 
-**Goal:** Signal complete understanding, truly absorb what is said.
+本テンプレートは、基本的な治療的コミュニケーション技法を記述したものです。カウンセリング的支援のためのコンテキストテンプレートとして機能します。
 
-**Techniques:**
+**注：** これらの技法は支援を目的とするものであり、専門的な心理療法の代わりとなるものではありません。緊急の危機状況では、常に専門機関へと繋いでください。
 
-- **Verbal acknowledgment:** "I understand," "Mm-hmm," "That sounds difficult"
-- **Inquiry:** "Can you describe that in more detail?" / "What do you mean by that?"
-- **Summarizing:** At the end of a section, briefly repeat what was heard
-- **Non-directive listening:** No advice before the person has finished
-
-**Attitude:** Full attention, no interruptions, no judgment.
-
-**Conversation formula:**
-> "What I heard is [summary]. Is that correct?"
+**絶対に実施してはならない技法：** EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）
 
 ---
 
-## 2. Mirroring
+## 1. アクティブ・リスニング（積極的傾聴）
 
-**Goal:** Reflect perceived emotions, make feelings visible.
+**目標：** 完全な理解を示し、相手が語った内容を真摯に受け止める。
 
-**Techniques:**
+**具体技法：**
 
-- **Simple mirroring:** Repeat the last word or sentence slightly rephrased
-- **Emotional mirroring:** Address named or implied emotions
-  > "It sounds like you are very exhausted right now."
-- **Body language mirroring:** (in person) Adjust posture
+- **言語的あいづち・応答：** 「理解できます」「なるほど」「それは辛いですね」
+- **質問・探求：** 「もう少し詳しく教えていただけますか？」「具体的にはどのような意味でしょうか？」
+- **要約：** 話の節目で、聴き取った内容を簡潔にまとめる
+- **非指示的傾聴：** 相手が話し終わるまで、助言やアドバイスを挟まない
 
-**Caution:**
-- Don't overdo it — too much mirroring feels artificial
-- Don't over-elaborate interpretations
+**基本姿勢：** 全神経を集中させ、途中で遮らず、評価や批判を交えずに聴く。
 
-**Examples:**
-> Person: "I don't know what to do anymore."
-> Mirror: "You don't know what to do anymore — it sounds like everything is overwhelming right now."
+**会話の基本公式：**
+> 「私が理解した内容をまとめると[要約]ですが、これで合っていますでしょうか？」
 
 ---
 
-## 3. Paraphrasing
+## 2. ミラーリング（感情の反射）
 
-**Goal:** Restate the core content in your own words, check understanding.
+**目標：** 感知した情緒や感情を反射し、クライエントの感情を可視化する。
 
-**Difference from mirroring:** Mirroring reflects emotion, paraphrasing reflects content/meaning.
+**具体技法：**
 
-**Structure:**
-1. Briefly summarize content
-2. Highlight the key message
-3. Ask for confirmation
+- **単純ミラーリング：** 語られた最後の言葉や文を少し言葉を変えて繰り返す
+- **感情ミラーリング：** 言語化された、あるいは言外に含まれる感情を指摘・言及する
+  > 「今、とても疲れ果てていらっしゃるように聞こえます。」
+- **身体言語ミラーリング：** （対面時）姿勢や表情を自然に合わせる
 
-**Formula:**
-> "If I understand you correctly, you're saying [paraphrase]. Is that right?"
+**注意点：**
+- やり過ぎない — 過度なミラーリングは人工的で不自然な印象を与えます
+- 勝手な解釈を付け加えない
 
-**Examples:**
-> Person: "My mother nags me every day with the same accusations and I can't take it anymore."
-> Paraphrase: "So it feels like an endless loop that you currently see no way out of?"
-
----
-
-## 4. Open Questions
-
-**Goal:** Encourage exploration without prescribing answers.
-
-**Characteristics of open questions:**
-- Start with: How, What, In what way, Describe, Explain
-- Leave room for personal answers
-- Cannot be answered with yes/no
-
-**Examples:**
-- "How did that feel?"
-- "What happens inside you when that occurs?"
-- "How do you usually deal with this?"
-
-**Avoid closed questions:**
-- "Did that hurt?" -> better: "How did that feel?"
-- "Are you sad?" -> better: "What's going through your mind right now?"
+**具体例：**
+> クライエント：「もうどうすればいいのか分からないんです。」
+> ミラーリング：「どうすればいいか分からないのですね — 全てが手一杯で圧倒されているように聞こえます。」
 
 ---
 
-## 5. Validation
+## 3. パラフレージング（言い換え）
 
-**Goal:** Confirm feelings and reactions as understandable and legitimate.
+**目標：** 内容の核心を自分の言葉で言い換え、理解の正確さを確認する。
 
-**Important:** Validation does not mean agreement, but understanding.
+**ミラーリングとの違い：** ミラーリングは「感情」を返し、パラフレージングは「認知的内容・意味」を返します。
 
-**Formula:**
-> "It makes complete sense that you feel this way, given [situation]."
+**構成ステップ：**
+1. 内容を簡潔に要約する
+2. 核心となるメッセージを明確にする
+3. クライエントに確認を求める
 
-**Levels of validation (after Linehan):**
-1. Attentive listening (showing presence)
-2. Accurately reflecting (what was said?)
-3. Recognizing the unspoken
-4. Understanding the cause in context
-5. Acknowledging the reaction as understandable
-6. Radical genuineness (honest, equal-level response)
+**基本公式：**
+> 「私の理解が正しければ、[言い換え内容]ということでしょうか？」
 
----
-
-## 6. Conversation Phases
-
-| Phase | Goal | Techniques |
-|-------|------|------------|
-| Opening | Settling in, creating safety | Greeting, open questions, signaling non-judgment |
-| Exploration | Exploring the topic | Active listening, inquiry, paraphrasing |
-| Deepening | Reaching deeper levels | Mirroring, validation, emotional resonance |
-| Integration | Bringing together, next steps | Summarizing, testing hypotheses, outlook |
-| Closing | Wrapping up, transition | Review, homework, farewell |
+**具体例：**
+> クライエント：「母が毎日同じ責め立てをしてきて、もう耐えられません。」
+> パラフレージング：「現在、出口が見えない無間ループの中にいるように感じられているのですね？」
 
 ---
 
-## Ethics and Boundaries
+## 4. オープン・クエスチョン（開かれた質問）
 
-**An AI assistant may:**
-- Explain and demonstrate conversation techniques
-- Guide active listening, mirroring, paraphrasing
-- Ask open questions and offer validation
-- Provide psychoeducation about counseling skills
+**目標：** 答えを誘導することなく、クライエントの探求と自己表現を促す。
 
-**An AI assistant must NOT:**
-- Replace professional therapeutic conversations
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
+**開かれた質問の特徴：**
+- 「どのように」「何が」「どのような点で」「描写してください」「説明してください」で始める
+- 個人的で深みのある回答のためのスペースを残す
+- 「はい／いいえ」だけで答えることができない
 
-**In case of acute crisis, ALWAYS refer to:**
+**具体例：**
+- 「それはどのような感じでしたか？」
+- 「それが起きた時、心の中で何が起きていましたか？」
+- 「普段はどのようにそれに対処されていますか？」
+
+**クローズド・クエスチョン（閉じた質問）を避ける：**
+- 「傷つきましたか？」 -> 改善：「それはどのような感情をもたらしましたか？」
+- 「悲しいですか？」 -> 改善：「今、どのようなことが頭に浮かんでいますか？」
+
+---
+
+## 5. バリデーション（感情の承認・正当化）
+
+**目標：** クライエントの感情や反応が理解可能であり、正当なものであると承認する。
+
+**重要：** バリデーションは「行動への同意」を意味するのではなく、「感情体験の理解」を意味します。
+
+**基本公式：**
+> 「[状況]を考慮すれば、あなたがそのように感じられるのは完全にごもっともです。」
+
+**バリデーションの6段階（LinehanのDBTより）：**
+1. 積極的な傾聴（存在感と関心を示す）
+2. 正確な反映（語られたことを正確に返す）
+3. 言外の感情の読み取り（明言されていない感情を言葉にする）
+4. 文脈の中での原因の理解（過去の経緯や状況から理解する）
+5. 現在の状況における反応の妥当性の承認
+6. 根源的な誠実さ（対等な人間としての誠実な応答）
+
+---
+
+## 6. 会話のフェーズ構成
+
+| フェーズ | 目標 | 主な技法 |
+|----------|------|----------|
+| オープニング | 関係構築、安心感の創出 | 挨拶、開かれた質問、非判断的態度の明示 |
+| 探索 | テーマの深掘り | アクティブ・リスニング、問いかけ、パラフレージング |
+| 深化 | より深いレベルへの到達 | ミラーリング、バリデーション、感情的共鸣 |
+| 統合 | 考えの整理、次のステップ | 要約、仮説検証、見通し |
+| クロージング | 面接の締めくくり、移行 | 振り返り、ホームワーク／約束、別れの挨拶 |
+
+---
+
+## 倫理と限界
+
+**AIアシスタントができること：**
+- コミュニケーション技法の解説およびデモンストレーション
+- アクティブ・リスニング、ミラーリング、パラフレージングの実施
+- 開かれた質問の投げかけおよびバリデーションの提供
+- カウンセリングスキルに関する心理教育の提供
+
+**AIアシスタントが行ってはならないこと：**
+- 専門的な治療的カウンセリングの代替となること
+- 診断や治療方針の決定
+- 危機介入
+- EMDR、持続暴露療法（PE）、ナラティブ暴露療法（NET）の実施
+
+**緊急の危機状況では、必ず以下を案内してください：**
+- こころの健康相談統一ダイヤル (日本): 0570-064-556
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556 (ナビダイヤル)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 110 / 119 (日本), 911 (US), 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - Rogers, C. R. (1951). *Client-Centered Therapy.* Houghton Mifflin.
 - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
@@ -168,5 +180,5 @@ This template describes basic therapeutic communication techniques. It serves as
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Rogers (1951, 1961), Linehan (1993) — Not professional therapy*
+*BACH v3.8.0 より移植 | スタンドアロン版*
+*出典：Rogers (1951, 1961), Linehan (1993) — 専門的医療行為ではありません*

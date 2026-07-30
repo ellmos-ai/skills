@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [Русский] Навык агента для bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
+description: Систематический поиск ошибок с целевым значением, масштабируемым по размеру кодовой базы, удвоением эскалации, отслеживанием областей и финальной проверкой. Используется при /bugsweep или по запросу пользователя.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,38 +15,34 @@ tags: [bugs, debugging, sweep, quality-assurance, workflow, convergence]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `bugsweep`.
+<img src="banner.png" width="100%" alt="bugsweep banner">
+> **Русский** — Официальная русская версия `bugsweep`.
 
+# /bugsweep — Протокол систематического поиска ошибок (Русский)
 
+Итеративный поиск ошибок со сходящимся критерием остановки. Масштабируется вместе с кодовой базой, эскалирует, если поиск выглядит поверхностным, и предотвращает повторения благодаря отслеживанию областей.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-# /bugsweep — Systematic Bug-Sweep Workflow (English)
-
-Iterative bug hunting with a converging stop criterion. Scales with the codebase, escalates when the search looks superficial, and prevents repetition through area tracking.
-
-## 1. Compute the base rate
+## 1. Расчет базовой нормы (Base rate)
 
 ```
-LOC = productive source lines (src/, lib/ — excluding tests, configs, docs, generated)
+LOC = строки продуктивного исходного кода (src/, lib/ — исключая тесты, конфиги, документацию, сгенерированный код)
 x = max(1, ceil(LOC / 1500))
 base_rate = x * 3
 ```
 
-| LOC | x | Base rate |
-|-----|---|-----------|
+| LOC | x | Базовая норма (Base rate) |
+|-----|---|---------------------------|
 | ~1500 | 1 | 3 |
 | ~3000 | 2 | 6 |
 | ~4500 | 3 | 9 |
 | ~10000 | 7 | 21 |
 
-Report to the user: "Codebase: {LOC} LOC → base rate = {base_rate} clean search passes."
+Отчет пользователю: "Кодовая база: {LOC} LOC → базовая норма = {base_rate} чистых проходов поиска."
 
-## 2. Search loop
+## 2. Цикл поиска (Search loop)
 
 ```
 counter = 0
@@ -54,128 +50,122 @@ target = base_rate
 any_bug_found = False
 checked = []  # (area_name, type: code|task)
 
-LOOP:
-  area = pick_new_area()  # see area rules
+ЦИКЛ:
+  area = pick_new_area()  # см. правила областей
   checked.append(area)
 
-  Perform a thorough bug search
+  Выполнить тщательный поиск ошибок
 
-  IF bug found:
+  ЕСЛИ ошибка найдена:
     any_bug_found = True
-    Fix following bugfix-protocol (phases 4+5)
-    Review: see model rule (newer model classes: no external review needed)
+    Исправить по bugfix-protocol (фазы 4+5)
+    Ревью: см. правило моделей (более новые классы моделей: внешнее ревью не требуется)
     Commit + push
-    counter = 0  # RESET
-  ELSE:
+    counter = 0  # СБРОС (RESET)
+  ИНАЧЕ:
     counter += 1
-    Report: "✓ Clean: {area} — {counter}/{target}"
+    Отчет: "✓ Чисто: {area} — {counter}/{target}"
 
-  IF counter >= target:
-    IF NOT any_bug_found:
-      # Doubling escalation: not a single bug → search too shallow?
+  ЕСЛИ counter >= target:
+    ЕСЛИ НЕ any_bug_found:
+      # Удвоение эскалации: ни одной ошибки не найдено → поиск слишком поверхностный?
       target = base_rate * 2
-      any_bug_found = True  # escalate only ONCE
-      Report: "⚠ No bug in {base_rate} passes → target doubled to {target}."
-      CONTINUE LOOP
-    ELSE:
-      GOTO final verification
+      any_bug_found = True  # эскалировать только ОДИН РАЗ
+      Отчет: "⚠ Ни одной ошибки за {base_rate} проходов → цель удвоена до {target}."
+      ПРОДОЛЖИТЬ ЦИКЛ
+    ИНАЧЕ:
+      ПЕРЕЙТИ К финальной проверке
 ```
 
-### Practical notes on the search loop (learned from real sweeps)
+### Практические заметки по циклу поиска (на основе реальных проверок)
 
-- **Non-git repos:** Where there is no `git` (e.g. cloud-synced project folders), a **versioned backup** replaces "commit + push": create `file_<ts>.bak` before the first fix. **Caution — the pre-fix backup is NOT a backup of your work:** after the last fix, take a fresh `_FINAL_` backup, otherwise a sync hiccup can wipe the entire fix session.
-- **Many bugs known up front:** If N bugs are already known at the start (e.g. from a previous run), "per bug: fix → review → commit → reset" is impractical. Process the known bugs as ONE fix block (joint review at the end) and start counting the base rate / search loop from the first NEWLY found bug. The reset logic still applies to bugs newly found during the sweep.
-- **Same bug in multiple places:** A found defect (e.g. a wrong regex, a broken format assumption) is often copied elsewhere. After each fix, search for the same pattern in other locations — that is a worthwhile dedicated "area".
+- **Репозитории без Git:** Там, где нет `git` (например, папки проектов с облачной синхронизацией), **версионированный бэкап** заменяет "commit + push": создайте `file_<ts>.bak` перед первым исправлением. **Внимание — бэкап до исправления НЕ является бэкапом вашей работы:** после последнего исправления сделайте свежий бэкап `_FINAL_`, иначе сбой синхронизации может уничтожить всю сессию исправлений.
+- **Много ошибок известно заранее:** Если в начале уже известно N ошибок (например, из предыдущего запуска), подход "для каждой ошибки: исправить → ревью → коммит → сброс" непрактичен. Обработайте известные ошибки как ЕДИНЫЙ блок исправлений (совместное ревью в конце) и начните отсчет базовой нормы / цикла поиска с первой НОВОЙ найденной ошибки. Логика сброса по-прежнему применяется к ошибкам, вновь найденным во время проверки.
+- **Одна и та же ошибка в нескольких местах:** Найденный дефект (например, неверный regex, нарушенное предположение о формате) часто копируется в других местах. После каждого исправления ищите такой же шаблон в других местах — это весьма ценная отдельная "область".
 
-## 3. Area rules (anti-gaming)
+## 3. Правила областей (защита от жульничества)
 
-An "area" is either a **code focus** or a **task** (purpose of the code).
+"Область" (Area) — это либо **фокус кода**, либо **задача** (назначение кода).
 
-### Code focus
-- May be **extended** (more files) or **shifted** (different part) between passes
-- Must NOT be exactly the same selection as in an earlier pass
-- OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py + orchestrator.py` (extended)
-- NOT OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py` (identical)
+### Фокус кода (Code focus)
+- Может быть **расширен** (больше файлов) или **смещен** (другая часть) между проходами
+- НЕ ДОЛЖЕН быть точно таким же выбором, как на предыдущем проходе
+- ОК: проход 1 = `maintenance.py`, проход 5 = `maintenance.py + orchestrator.py` (расширено)
+- НЕ ОК: проход 1 = `maintenance.py`, проход 5 = `maintenance.py` (идентично)
 
-### Task (purpose)
-- May be made **more granular** (check a subfunction) or **broader** (related functions together)
-- Must NOT be exactly the same task
-- OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety across the whole tray" (broader)
-- OK: pass 1 = "process detection", pass 5 = "store-marker matching inside process detection" (more granular)
-- NOT OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety in the watchdog" (identical)
+### Задача (назначение)
+- Может быть сделана **более детализированной** (проверить подфункцию) или **более широкой** (связанные функции вместе)
+- НЕ ДОЛЖНА быть точно той же задачей
+- ОК: проход 1 = "потокобезопасность в watchdog", проход 5 = "потокобезопасность во всем трее" (шире)
+- ОК: проход 1 = "обнаружение процессов", проход 5 = "сопоставление маркеров магазина внутри обнаружения процессов" (детализированнее)
+- НЕ ОК: проход 1 = "потокобезопасность в watchdog", проход 5 = "потокобезопасность в watchdog" (идентично)
 
-### Naming
-- The area MUST be named BEFORE the search (no retroactive assignment)
-- Format: `"{name}" ({type}: code|task)`
+### Именование
+- Область ДОЛЖНА быть названа ДО начала поиска (без назначения задним числом)
+- Формат: `"{name}" ({type}: code|task)`
 
-## 4. Final verification
+## 4. Финальная проверка (Final verification)
 
-Once counter >= target AND any_bug_found:
+Как только counter >= target И any_bug_found = True:
 
-**Step A — bugfix-protocol phase 5:**
-- [ ] Full test suite green (`pytest`)
-- [ ] **Actually execute the changed execution path at least once** — not just tests. Green unit tests on code that never calls the changed location are false safety. Run the actually changed path (dry run, smoke run, CLI invocation) and check for tracebacks / signature / naming errors. `py_compile` or a plain import only checks syntax — not whether the path runs.
-- [ ] **Every fix has at least one test that touches it** — a fix without a test that actually triggers the changed branch counts as unverified (for orchestration/network paths, combine mock + dry run if needed).
-- [ ] Type check (if configured)
-- [ ] Lint (if configured)
-- [ ] Edge cases of the session's fixes checked
+**Шаг A — bugfix-protocol фаза 5:**
+- [ ] Полный набор тестов зеленый (`pytest`)
+- [ ] **Фактически выполнить измененный путь исполнения хотя бы один раз** — а не только тесты. Зеленые юнит-тесты для кода, который никогда не вызывает измененное место, — это ложная безопасность. Запустите реально измененный путь (dry run, дымовой прогон, вызов CLI) и проверьте отсутствие tracebacks / ошибок сигнатуры / именования. `py_compile` или простой импорт проверяют только синтаксис — но не то, работает ли путь.
+- [ ] **Каждое исправление имеет хотя бы один тест, затрагивающий его** — исправление без теста, который реально активирует измененную ветку, считается непроверенным (для путей оркестрации/сети при необходимости комбинируйте mock + dry run).
+- [ ] Проверка типов (если настроена)
+- [ ] Линтер (если настроен)
+- [ ] Краевые случаи исправлений сессии проверены
 
-**Step B — review (model rule):**
-- **Newer model classes (e.g. Claude 5 / Fable class):** NO external advisor/second-model
-  review required. Step A (tests + a real smoke run) is the verification. Optionally, on
-  genuine uncertainty: a fresh review subagent — but verify its findings empirically
-  (test against the unchanged code) before counting them as bugs.
-  Background (sweep experience 2026-06-11): the second reviewer was unavailable, the
-  substitute subagent delivered 1 finding (confidence 85) that a test proved to be a
-  non-bug — an external review did not change the outcome.
-- **Older models:** closing discussion with the advisor (fallback: a second model as
-  reviewer); the advisor confirms or names gaps.
+**Шаг B — ревью (правило моделей):**
+- **Более новые классы моделей (напр. Claude 5 / класс Fable):** Внешнее ревью консультантом (Advisor) или второй моделью **НЕ требуется**. Шаг A (тесты + реальный дымовой прогон) является проверкой. Опционально при подлинной неуверенности: свежий субагент ревью — но проверьте его выводы эмпирически (протестируйте на неизмененном коде), прежде чем считать их ошибками.
+  Предыстория (опыт проверок 2026-06-11): второй рецензент был недоступен, заменяющий субагент предоставил 1 замечание (уверенность 85), которое тест опроверг как не-ошибку — внешнее ревью не изменило результат.
+- **Более старые модели:** заключительное обсуждение с Advisor (запасной вариант: вторая модель в качестве рецензента); Advisor подтверждает или указывает на пробелы.
 
-**If a bug is found during verification:**
-→ Fix + test + commit
-→ RESET: counter = 0, target = base_rate (fresh, NO doubling)
-→ Back to the search loop (checked list persists, any_bug_found = True)
+**Если во время проверки найдена ошибка:**
+→ Исправление + тест + коммит
+→ СБРОС: counter = 0, target = base_rate (свежий, БЕЗ удвоения)
+→ Возврат в цикл поиска (список проверенных сохраняется, any_bug_found = True)
 
-**If verification is clean:**
-→ DONE. Commit + push. Print the protocol.
+**Если проверка прошла чисто:**
+→ ГОТОВО. Commit + push. Вывести протокол.
 
-## 5. Protocol (at the end)
+## 5. Протокол (в конце)
 
 ```markdown
-## Bug Sweep Result
+## Результат Bug Sweep
 
-- **Codebase:** {LOC} LOC
-- **Base rate:** {base_rate} (escalated: {target})
-- **Areas checked:** {len(checked)}
-- **Bugs found:** {count}
-- **Resets:** {reset_count}
-- **Doubling triggered:** yes/no
-- **Fixes:**
+- **Кодовая база:** {LOC} LOC
+- **Базовая норма:** {base_rate} (эскалировано: {target})
+- **Проверено областей:** {len(checked)}
+- **Найдено ошибок:** {count}
+- **Сбросов:** {reset_count}
+- **Сработало ли удвоение:** да/нет
+- **Исправления:**
   - {title} — {commit_hash}
   - ...
-- **Final test suite:** {passed}/{total} green
-- **Review verdict:** self-verification (newer model class) / advisor confirmed / gaps named
+- **Финальный набор тестов:** {passed}/{total} зеленых
+- **Вердикт ревью:** самопроверка (более новый класс моделей) / Advisor подтвердил / указаны пробелы
 ```
 
-## When to use this workflow
+## Когда использовать этот workflow
 
-- After feature development (quality assurance)
-- Before a release (acceptance sweep)
-- Periodically as a hygiene check
-- When the user types `/bugsweep`
+- После разработки функций (гарантия качества)
+- Перед релизом (приемочная проверка)
+- Периодически в качестве гигиенической проверки
+- Когда пользователь вводит `/bugsweep`
 
-## Interaction with other skills
+## Взаимодействие с другими навыками
 
-- **bugfix-protocol:** fix procedure (phases 4+5) for every found bug
-- **systematic-debugging:** for hard-to-reproduce bugs within the sweep
-- **code-review:** can be used as a task area
+- **bugfix-protocol:** процедура исправления (фазы 4+5) для каждой найденной ошибки
+- **systematic-debugging:** для трудновоспроизводимых ошибок во время проверки
+- **code-review:** может использоваться как область задач
 
 ---
 
 ## Журнал изменений
 
 ### 1.1.0 (2026-06-13)
-- Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly
+- Перенесено правило моделей для шага B (из локальной установки навыка, состояние на 2026-06-11): более новые классы моделей самопроверяются с помощью тестов + реального дымового прогона, внешнее ревью не требуется; поле протокола "Вердикт ревью" соответственно расширено.
 
 ### 1.0.0 (2026-06-13)
-- First publication in the skill library (adopted from local skill installation, state 2026-06-01)
+- Первая публикация в библиотеке навыков (адаптировано из локальной установки навыка, состояние на 2026-06-01).

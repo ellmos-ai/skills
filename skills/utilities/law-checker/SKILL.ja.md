@@ -1,73 +1,59 @@
 ---
+name: law-checker
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-07-23
+updated: 2026-07-23
+description: スタンドアロンモジュール law-checker（「法務部門」）を指します: 法令レジストリと法令体現エージェントを備えた、ドイツ法向けの根拠に基づく AI 初動法律評価。状況、契約、公式通知、またはドイツ法下の法的質問を正確な引用（条文、項、文）で確認する場合に使用します。明確な境界線付き: AI 支援の初動オリエンテーションであり、弁護士の代わりにはなりません。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/law-checker', 'origin_path': 'SKILL.md, config.json, agents/gesetzbuch.md, references/', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+category: utilities
+tags: [legal, law, germany, wrapper, pointer-skill]
 language: ja
+status: active
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `law-checker`.
+> **日本語** — `law-checker` の公式日本語版。
 
+# law-checker (法務部門) -- Pointer Skill
 
+このスキルは、独立した公開モジュールリポジトリ [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)（MITライセンス、公開）への**軽量ポインター（ラッパー）**です。実際のスキルはそこに存在します。このリポジトリは、中央スキルカタログを通じてモジュールを発見できるように、リンクとインストール方法のみをドキュメント化しています。
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## モジュールの機能
 
+`law-checker` はドイツ法に関する根拠に基づいた AI 初動法律評価を生成します:
 
-# law-checker (Legal Department) -- Pointer Skill (English)
+- **法令レジストリ (`config.json`):** 切り替え可能な法令。すべての法律上の主張は、ローカルで取得した公式法律テキスト（必要に応じて条文、項、文、短い引用、ソース、取得日）によって裏付けられる必要があります。
+- **法令体現エージェント (`agents/gesetzbuch.md`):** 登録された任意の法律に対して「法令の内側から」回答する汎用エージェント — レジストリに追加された任意の法令に拡張可能です。
+- **独立した判例法レイヤー:** 裁判所の判決は、Webでの検証（裁判所、日付、事件番号、利用可能な場合はECLI）の後にのみ引用されます。
+- **リスクとエスカレーションのワークフロー:** リスクレベルスケール、期限遵守、および弁護士の専門分野ルーティングマトリックスを備えたレポート形式。
 
-This skill is a **thin pointer (wrapper)** to the standalone, public module
-repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)
-(MIT license, public). The actual skill lives there -- this repository only
-links to it and documents installation, so the module is discoverable through
-the central skill catalog.
+## 境界線（重要）
 
-## What the module does
+- **AI支援による初動オリエンテーションのみを目的としており、個別のアドバイスの代わりにはならず、ライセンスを持つ弁護士によって提供されるものでもありません。**
+- 法律事務所ではなく、ホストされた法的サービスでもなく、期限カレンダーでもありません。
+- 実際の法的郵便物（警告状、公式通知、訴訟、期限）が関与している場合: 原本を確保し、期限をメモし、資格のある弁護士に相談してください — 自動化処理を行わないでください。
 
-`law-checker` produces source-grounded AI first-look legal assessments for
-German law:
+## インストール（汎用、ローカルパスなし）
 
-- **Statute registry** (`config.json`): togglable statutes; every statute
-  claim must be backed by locally fetched official law texts (article or
-  section, paragraph, sentence where needed, short quote, source, retrieval
-  date).
-- **Statute-embodiment agent** (`agents/gesetzbuch.md`): a generic agent that
-  answers "from inside the statute" for any registered law -- scales to
-  arbitrary statutes added to the registry.
-- **Separate case-law layer:** court decisions are cited only after web
-  verification (court, date, docket number, ECLI where available).
-- **Risk and escalation workflow:** report format with a risk-level scale,
-  deadline discipline, and a lawyer-specialty routing matrix.
-
-## Boundaries (important)
-
-- **AI-assisted first orientation only, not a substitute for individual legal
-  advice, and not performed by a licensed lawyer.**
-- Not a law firm, not a hosted legal service, not a deadline calendar.
-- If real legal mail is involved (warning letter, official notice, lawsuit,
-  deadline): secure the original document, note the deadline, and consult a
-  qualified lawyer -- do not automate the matter.
-
-## Installation (generic, no local paths)
-
-1. Clone the module:
+1. モジュールをクローンします:
    ```bash
    git clone https://github.com/ellmos-ai/law-checker.git <clone-path>
    ```
-2. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
-   `~/.claude/skills/law-checker/` or the equivalent for your agent runtime).
-3. Set the module path in the adopted `SKILL.md` and its references to
-   `<clone-path>` -- do NOT commit real local paths or hostnames into a
-   versioned skill environment.
-4. Load the statute registry: `python <clone-path>/_tools/gesetze_fetch.py`
-   (fetches the configured official statute texts; the texts themselves are
-   deliberately not in the repo, to avoid redistributing stale portal
-   snapshots).
-5. For structure, license, and liability details, see the module repo's
-   README.
+2. `<clone-path>/SKILL.md` を自身のスキル環境（例: `~/.claude/skills/law-checker/` またはエージェントランタイムの同等物）に導入します。
+3. 導入した `SKILL.md` とその参照内のモジュールパスを `<clone-path>` に設定します — 実際のローカルパスやホスト名をバージョン管理されたスキル環境にコミットしないでください。
+4. 法令レジストリをロードします: `python <clone-path>/_tools/gesetze_fetch.py`（設定された公式法令テキストを取得します。古いポータル快照の再配布を避けるため、テキスト自体は意図的にリポジトリに含まれていません）。
+5. 構造、ライセンス、および責任の詳細については、モジュールリポジトリの README を参照してください。
 
-## Origin of this pointer skill
+## このポインタースキルの由来
 
-This wrapper was added on 2026-07-23 as a showcase entry for the
-`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
-and versioning stay solely in the `ellmos-ai/law-checker` module repo.
+このラッパーは、`ellmos-ai/skills` リポジトリのショーケースエントリーとして2026-07-23に追加されました。**コードの重複はありません** — メンテナンスとバージョン管理は `ellmos-ai/law-checker` モジュールリポジトリにのみ残ります。
 
 ## 変更履歴
 
 ### 0.1.0 (2026-07-23)
-- Initial pointer skill for `ellmos-ai/law-checker`.
+- `ellmos-ai/law-checker` の初期ポインタースキル。

@@ -1,41 +1,53 @@
 ---
+name: exposure-guidance
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: Градуированная экспозиция при тревожных расстройствах: иерархия страхов, шкала SUDs, планирование и сопровождение экспозиции. Только психообразование, не реализация.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [exposure, anxiety, phobia, suds, graded, behavioral-therapy]
 language: ru
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `exposure-guidance`.
+> **Русский** — Официальная русская версия `exposure-guidance`.
 
 
+# Сопровождение экспозиционной терапии (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Иерархия страхов, шкала SUDs, градуированная экспозиция и габитуация: Планирование и сопровождение — реальная экспозиция проводятся только с психотерапевтом
 
-
-# Exposure Guidance (English)
-
-> Fear hierarchy, SUDs scale, graded exposure and habituation: Planning and guidance — actual exposure only with a therapist
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Exposure (confrontation therapy) is one of the most effective methods in behavioral therapy for anxiety disorders, phobias, OCD, and PTSD. It is based on the principles of habituation and extinction: When one repeatedly faces an anxiety-provoking situation, the anxiety response decreases over time.
-
-Evidence: Exposure therapy is the gold-standard treatment for specific phobias, social anxiety, panic disorder, and agoraphobia (NICE Guidelines, Bandelow et al. 2014, S3 Guideline Anxiety Disorders). Effect sizes are among the highest in psychotherapy research.
-
-**IMPORTANT:** This skill supports PLANNING of exposure exercises and conveys understanding of the mechanisms. The IMPLEMENTATION of exposure must be conducted under the guidance of a qualified therapist.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+См.: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Understanding the Mechanisms
+## Контекст
 
-### Habituation
+Экспозиция (терапия столкновения с пугающим стимулом) — один из самых эффективных методов поведенческой терапии при тревожных расстройствах, фобиях, ОКР и ПТСР. Она основана на принципах габитуации (привыкания) и угашения (extinction): при многократном столкновении со стрессовой ситуацией реакция тревоги со временем снижается сама по себе.
+
+Доказательная база: Экспозиционная терапия — «золотой стандарт» лечения специфических фобий, социального тревожного расстройства, панического расстройства и агорафобии (рекомендации NICE, Bandelow et al. 2014, клинические рекомендации S3 по тревожным расстройствам). Размер эффекта — один из самых высоких в исследованиях психотерапии.
+
+**ВАЖНО:** Этот навык поддерживает ПЛАНИРОВАНИЕ экспозиционных упражнений и разъясняет механизмы работы. РЕАЛИЗАЦИЯ экспозиции должна проводиться строго под руководством квалифицированного психотерапевта.
+**Никогда не применять:** EMDR (ДПДГ), длительную экспозицию (PE), нарративную экспозиционную терапию (NET).
+
+---
+
+## 1. Понимание механизмов
+
+### Габитуация (Привыкание)
 
 ```
-HABITUATION: Adaptation through repeated confrontation
+ГАБИТУАЦИЯ: Адаптация через многократное столкновение
 
-Anxiety level
+Уровень тревоги
 100 |  *
     | * *
  80 |*   *
@@ -47,128 +59,128 @@ Anxiety level
  20 |          **  * *
     |                  * * * * * *
   0 |________________________________
-    Time (during exposure)
+    Время (в ходе экспозиции)
 
-Anxiety initially rises, reaches a peak,
-and then drops on its own WITHOUT flight or avoidance.
+Тревога сначала растет, достигает пика,
+а затем снижается сама по себе БЕЗ бегства или избегания.
 
-Key experience: "The anxiety passes, even when
-I stay in the situation."
+Ключевой опыт: «Тревога проходит, даже если
+я остаюсь в ситуации».
 ```
 
-### Extinction (New Learning)
+### Угашение (Новое обучение)
 
 ```
-EXTINCTION: New experiences overwrite old fear associations
+УГАШЕНИЕ: Новый опыт переписывает старые ассоциации страха
 
-Old experience: Dog -> Danger -> Fear -> Flight
-New experience: Dog -> No danger -> Fear decreases -> I am safe
+Старый опыт: Собака -> Опасность -> Тревога -> Бегство
+Новый опыт: Собака -> Нет опасности -> Тревога снижается -> Я в безопасности
 
-The old association is not erased but overlaid by new
-experiences. Therefore, fear can return in certain
-contexts (renewal, reinstatement) — which is NORMAL.
+Старая ассоциация не стирается полностью, а перекрывается новым
+опытом. Поэтому тревога может возвращаться в определенных
+контекстах (возобновление) — и это НОРМАЛЬНО.
 ```
 
-### Why Avoidance Maintains the Problem
+### Почему избегание поддерживает проблему
 
 ```
-THE AVOIDANCE CYCLE:
+ПОРОЧНЫЙ КРУГ ИЗБЕГАНИЯ:
 
-Anxiety-provoking situation
+Пугающая ситуация
         |
         v
-Anxiety rises (unpleasant)
+Тревога растет (неприятно)
         |
         v
-Avoidance/flight
+Избегание / Бегство
         |
         v
-Short-term relief (anxiety drops immediately)
+Краткосрочное облегчение (тревога мгновенно падает)
         |
         v
-Long-term reinforcement of anxiety
-("The situation IS dangerous, good that I fled")
+Долгосрочное подкрепление страха
+(«Ситуация Действительно опасна, хорошо, что я убежал(а)»)
         |
         v
-Next time: Even more anxiety, even more avoidance
+В следующий раз: Еще больше тревоги, еще больше избегания
 ```
 
 ---
 
-## 2. The SUDs Scale
+## 2. Шкала SUDs
 
-### Subjective Units of Distress (0-100)
+### Субъективные единицы дистресса (0-100)
 
 ```
-SUDs SCALE (Subjective Units of Distress)
+ШКАЛА SUDs (Subjective Units of Distress)
 
-  0  Completely relaxed, no anxiety
- 10  Minimal tension, barely noticeable
- 20  Slight unease, easily tolerable
- 30  Noticeably unpleasant, but controllable
- 40  Noticeable anxiety, still able to function
- 50  Moderate anxiety, strenuous but manageable
- 60  Strong anxiety, clear urge to avoid
- 70  Very strong anxiety, hard to endure
- 80  Intense anxiety, at the edge of tolerance
- 90  Extreme anxiety, feeling of panic
-100  Maximum anxiety, worst imaginable distress
+  0  Полностью расслаблен(а), тревога отсутствует
+ 10  Минимальное напряжение, едва заметное
+ 20  Легкий дискомфорт, легко переносим
+ 30  Ощутимо неприятно, но под контролем
+ 40  Заметная тревога, способность функционировать сохранена
+ 50  Умеренная тревога, тяжело, но справиться можно
+ 60  Сильная тревога, четкий позыв избежать ситуации
+ 70  Очень сильная тревога, трудно выдерживать
+ 80  Интенсивный страх, на грани предела переносимости
+ 90  Экстремальная тревога, чувство паники
+100  Максимальная тревога, наихудший из вообразимых дистрессов
 ```
 
-### Using the SUDs Scale
+### Использование шкалы SUDs
 
-**Before exposure:**
-- Estimated anxiety in the planned situation (expected value)
+**До экспозиции:**
+- Оценка ожидаемой тревоги в запланированной ситуации (ожидаемый балл)
 
-**During exposure:**
-- Assess current SUDs value every 5 minutes
-- Document the progression (rising, falling, fluctuating)
+**Во время экспозиции:**
+- Оценивать текущий балл SUDs каждые 5 минут
+- Фиксировать динамику (растет, снижается, колеблется)
 
-**After exposure:**
-- Highest SUDs value? Final value? How quickly did anxiety decrease?
-- Was it as bad as expected?
+**После экспозиции:**
+- Наивысший балл SUDs? Финальный балл? Как быстро снизилась тревога?
+- Было ли это так ужасно, как ожидалось?
 
 ---
 
-## 3. Creating a Fear Hierarchy
+## 3. Составление иерархии страхов
 
-### Principle
+### Принцип
 
-A fear hierarchy ranks anxiety-provoking situations from lowest to highest anxiety level. Exposure begins with easy situations and increases step by step.
+Иерархия страхов ранжирует пугающие ситуации от наименьшего к наибольшему уровню тревоги. Экспозиция начинается с легких ситуаций и усложняется шаг за шагом.
 
-### Example: Fear of Dogs
+### Пример: Фобия собак
 
 ```
-FEAR HIERARCHY: Dog Phobia
+ИЕРАРХИЯ СТРАХОВ: Боязнь собак
 
-SUDs | Situation
+SUDs | Ситуация
 -----|--------------------------------------------------
- 10  | Look at a picture of a dog
- 15  | Watch a video of playing dogs
- 25  | Talk about own experiences with dogs
- 30  | Watch a small dog from 10 meters away
- 40  | Watch a small dog from 5 meters away
- 50  | Stand next to a leashed small dog (2 meters)
- 55  | Touch a small leashed dog (owner holding)
- 60  | Watch a medium dog from 5 meters
- 65  | Sit next to a leashed medium dog
- 70  | Pet a medium dog
- 75  | Walk past an unleashed dog (park)
- 80  | Be alone in a room with a calm dog
- 85  | Pet a large dog
- 90  | Be in a park with multiple unleashed dogs
- 95  | Feed a dog
-100  | Let an unfamiliar dog run toward you
+ 10  | Посмотреть на фотографию собаки
+ 15  | Посмотреть видео с играющими собаками
+ 25  | Поговорить о своем опыте общения с собаками
+ 30  | Наблюдать за маленькой собакой с расстояния 10 метров
+ 40  | Наблюдать за маленькой собакой с расстояния 5 метров
+ 50  | Стоять рядом с маленькой собакой на поводке (2 метра)
+ 55  | Потрогать маленькую собаку на поводке (хозяин держит)
+ 60  | Наблюдать за средней собакой с 5 метров
+ 65  | Сидеть рядом со средней собакой на поводке
+ 70  | Погладить среднюю собаку
+ 75  | Пройти мимо собаки без поводка (в парке)
+ 80  | Находиться в одной комнате со спокойной собакой
+ 85  | Погладить большую собаку
+ 90  | Находиться в парке, где бегает несколько собак без поводков
+ 95  | Покормить собаку с руки
+100  | Позволить незнакомой собаке подбежать к себе
 ```
 
-### Template for Completion
+### Шаблон для заполнения
 
 ```
-MY FEAR HIERARCHY
+МОЯ ИЕРАРХИЯ СТРАХОВ
 
-Anxiety topic: [...]
+Тема тревоги: [...]
 
-SUDs | Situation
+SUDs | Ситуация
 -----|--------------------------------------------------
      | [...]
      | [...]
@@ -179,154 +191,153 @@ SUDs | Situation
 
 ---
 
-## 4. Types of Exposure
+## 4. Виды экспозиции
 
-### Graded Exposure (In Vivo)
+### Градуированная экспозиция in vivo (в реальности)
 
-**Principle:** Step-by-step confrontation with real situations, starting at low SUDs values.
+**Принцип:** Пошаговое столкновение с реальными ситуациями, начиная с низких баллов SUDs.
 
-### Flooding
+### Флодинг (Затопление / Метод погружения)
 
-**Principle:** Direct confrontation with highly anxiety-provoking situations for extended periods. Only under therapeutic guidance. NOT to be guided by an AI assistant — only explained.
+**Принцип:** Прямое длительное погружение в ситуации, вызывающие сильную тревогу. Проводится СТРОГО под наблюдением психотерапевта. ИИ-ассистенту ЗАПРЕЩЕНО проводить флодинг, разрешено только разъяснять суть метода.
 
-### Exposure in Sensu (Imaginal)
+### Экспозиция in sensu (в воображении)
 
-**Principle:** Experiencing anxiety-provoking situations in imagination. Helpful as preparation for real exposure.
+**Принцип:** Проживание пугающих ситуаций в воображении. Полезно как подготовка к реальной экспозиции.
 
-### Interoceptive Exposure
+### Интероцептивная экспозиция
 
-**Principle:** Deliberately inducing physical anxiety symptoms (e.g., rapid heartbeat through exercise, dizziness through spinning). ONLY under therapeutic guidance.
-
----
-
-## 5. Guided Exposure Planning
-
-### Preparation Protocol
-
-```
-EXPOSURE PLANNING PROTOCOL
-
-Date: [...]
-Therapist informed: [ ] Yes  [ ] No (MANDATORY!)
-
-Anxiety topic: [...]
-Chosen situation: [...]
-Expected SUDs value: [...]
-Level in hierarchy: [...]
-
-What exactly will I do: [...]
-Where: [...]
-When: [...]
-How long: [...]
-Alone or accompanied: [...]
-
-My greatest fear: [...]
-What will realistically happen: [...]
-
-Emergency plan (if SUDs > 90 or dissociation):
-1. Grounding (5-4-3-2-1)
-2. Breathing exercise (box breathing)
-3. [Call trusted person]: Tel. [...]
-4. Leave situation in an orderly manner (no panicked fleeing)
-```
-
-### Post-Session Protocol
-
-```
-EXPOSURE DEBRIEFING
-
-Date: [...]
-Situation: [...]
-
-SUDs before (expectation): [...]
-SUDs highest value during: [...]
-SUDs at the end: [...]
-
-How long stayed in situation: [...]
-Habituation occurred: [ ] Yes  [ ] Partial  [ ] No
-
-What I learned: [...]
-Was it as bad as feared: [ ] Worse  [ ] As expected  [ ] Less bad
-
-What I want to do differently next time: [...]
-Next level: [...]
-```
+**Принцип:** Намеренное провоцирование телесных симптомов тревоги (например, учащенного сердцебиения через физическую нагрузку, головокружения через вращение). СТРОГО под руководством психотерапевта.
 
 ---
 
-## 6. Safety Notes and Abort Criteria
+## 5. Планирование экспозиции под руководством
 
-### Prerequisites for Exposure
-
-```
-CHECKLIST BEFORE STARTING EXPOSURE:
-
-[ ] Qualified therapist is involved
-[ ] Sufficient stabilization is present
-[ ] Fear hierarchy is created and discussed
-[ ] Emergency plan is prepared
-[ ] Person understands the mechanism (habituation)
-[ ] No acute suicidality
-[ ] No uncontrolled psychotic symptoms
-[ ] No severe dissociative disorder (without therapeutic support)
-[ ] No acute substance intoxication
-[ ] Person has voluntarily consented (no forced exposure!)
-```
-
-### Abort Criteria
+### Протокол подготовки
 
 ```
-ABORT EXPOSURE IF:
+ПРОТОКОЛ ПЛАНИРОВАНИЯ ЭКСПОЗИЦИИ
 
-- Dissociation occurs (person is "gone," unresponsive)
-- Panic attack with loss of control
-- Person explicitly wants to stop (respect autonomy!)
-- Physical symptoms: chest pain, shortness of breath, fainting
-- Suicidal thoughts during exposure
-- The situation becomes objectively unsafe
+Дата: [...]
+Психотерапевт информирован: [ ] Да  [ ] Нет (ОБЯЗАТЕЛЬНО!)
 
-ON ABORT:
-1. Grounding and stabilization (5-4-3-2-1, breathing exercise)
-2. Ensure person is oriented and stable
-3. Discuss experience (what happened, what was learned)
-4. No blame ("You should have stayed")
-5. Plan next step with therapist
+Тема тревоги: [...]
+Выбранная ситуация: [...]
+Ожидаемый балл SUDs: [...]
+Уровень в иерархии: [...]
+
+Что конкретно я буду делать: [...]
+Где: [...]
+Когда: [...]
+Как долго: [...]
+В одиночку или с сопровождением: [...]
+
+Мой самый большой страх: [...]
+Что произойдет на самом деле (реалистично): [...]
+
+План на случай экстренной ситуации (если SUDs > 90 или возникла диссоциация):
+1. Заземление (упражнение 5-4-3-2-1)
+2. Дыхательное упражнение (дыхание по квадрату)
+3. [Связаться с доверенным лицом]: Тел. [...]
+4. Организованно покинуть ситуацию (без панического бегства)
+```
+
+### Протокол дебрифинга (анализа после экспозиции)
+
+```
+АНАЛИЗ ЭКСПОЗИЦИИ (ДЕБРИФИНГ)
+
+Дата: [...]
+Ситуация: [...]
+
+SUDs до (ожидание): [...]
+Наивысший балл SUDs в процессе: [...]
+SUDs в конце: [...]
+
+Сколько времени оставался(лась) в ситуации: [...]
+Произошла ли габитуация: [ ] Да  [ ] Частично  [ ] Нет
+
+Чему я научился(лась): [...]
+Было ли это так ужасно, как я боялся(лась): [ ] Хуже  [ ] Как и ожидалось  [ ] Менее страшно
+
+Что я хочу сделать иначе в следующий раз: [...]
+Следующая ступень: [...]
 ```
 
 ---
 
-## Ethics and Boundaries
+## 6. Меры безопасности и критерии отмены
 
-**An AI assistant may:**
-- Explain exposure principles (psychoeducation)
-- Create fear hierarchies together
-- Explain and use the SUDs scale
-- Support exposure planning (fill out protocols)
-- Document debriefing
-- Provide safety information
-- Motivate and normalize ("Anxiety during exposure is desired and normal")
+### Предварительные условия для проведения экспозиции
 
-**An AI assistant must NOT:**
-- Independently conduct or guide exposure
-- Guide flooding (ONLY therapist)
-- Guide interoceptive exposure (ONLY therapist)
-- Conduct prolonged exposure for PTSD
-- Accompany exposure in severe dissociation
-- Pressure toward exposure ("You must face this")
-- Guarantee results
-- Make diagnoses or create treatment plans
-- Make medication-related recommendations
+```
+ЧЕК-ЛИСТ ПЕРЕД НАЧАЛОМ ЭКСПОЗИЦИИ:
 
-**PARTICULARLY STRICT BOUNDARY:** An AI assistant plans and explains. Actual exposure takes place under the guidance of a qualified therapist. For any request regarding implementation: refer to professional. Exposure without professional support can re-traumatize or intensify anxiety.
+[ ] Квалифицированный психотерапевт вовлечен в процесс
+[ ] Присутствует достаточный уровень стабилизации
+[ ] Иерархия страхов составлена и обсуждена
+[ ] План на экстренный случай подготовлен
+[ ] Клиент понимает механизм (габитуацию)
+[ ] Отсутствует острый суицидальный риск
+[ ] Отсутствуют неконтролируемые психотические симптомы
+[ ] Отсутствует тяжелое диссоциативное расстройство (без очной поддержки)
+[ ] Отсутствует острое интоксикационное состояние
+[ ] Клиент дал добровольное согласие (никакой принудительной экспозиции!)
+```
 
-**In case of acute crisis, ALWAYS refer to:**
+### Критерии отмены (прекращения)
+
+```
+НЕМЕДЛЕННО ПРЕКРАТИТЬ ЭКСПОЗИЦИЮ, ЕСЛИ:
+
+- Возникает диссоциация (клиент «выпал», не реагирует)
+- Паническая атака с полной потерей контроля
+- Клиент явно выражает желание остановиться (уважение автономии!)
+- Физические симптомы: боль в груди, тяжелая одышка, обморок
+- Суицидальные мысли во время упражнения
+- Ситуация становится объективно небезопасной
+
+ПРИ ОТМЕНЕ:
+1. Заземление и стабилизация (5-4-3-2-1, дыхание)
+2. Убедиться, что человек ориентирован в пространстве и стабилен
+3. Обсудить опыт (что произошло, какой вывод сделан)
+4. Никаких обвинений («Надо было потерпеть»)
+5. Запланировать следующий шаг с психотерапевтом
+```
+
+---
+
+## Этика и границы
+
+**ИИ-ассистент может:**
+- Объяснять принципы экспозиции (психообразование)
+- Совместно составлять иерархию страхов
+- Разъяснять и применять шкалу SUDs
+- Сопровождать планирование экспозиции (заполнение протоколов)
+- Документировать дебрифинг
+- Предоставлять информацию по безопасности
+- Мотивировать и нормализовать («Тревога во время экспозиции ожидаема и нормальна»)
+
+**ИИ-ассистент НЕ ДОЛЖЕН:**
+- Самостоятельно проводить или вести процесс экспозиции
+- Руководить флодингом (ТОЛЬКО психотерапевт)
+- Руководить интероцептивной экспозицией (ТОЛЬКО психотерапевт)
+- Проводить длительную экспозицию при ПТСР
+- Сопровождать экспозицию при тяжелой диссоциации
+- Осуществлять давление («Вы должны встретиться со своим страхом»)
+- Гарантировать результат
+- Ставить диагнозы или составлять лечебные планы
+- Давать рекомендации по приемам лекарств
+
+**ОСОБО ЖЕСТКАЯ ГРАНИЦА:** ИИ-ассистент только планирует и разъясняет. Реальная экспозиция проходит под наблюдением квалифицированного специалиста. При любом запросе на непосредственное проведение — перенаправлять к врачу/психотерапевту. Экспозиция без профессиональной поддержки может привести к ретравматизации или усилению фобии.
+
+**В случае острого кризиса ВСЕГДА перенаправлять на:**
+- Единый телефон доверия (РФ): 8-800-2000-122
+- Горячая линия психологической помощи: +7 (495) 051 (Москва)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Неотложная служба: 112 (РФ / ЕС) / 911 (US)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3 Guideline Anxiety Disorders (2014) — Not professional therapy*
+*Перенесено из BACH v3.8.0 | Автономная версия*
+*Источники: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), Клинические рекомендации S3 по тревожным расстройствам (2014) — Не является профессиональной терапией*

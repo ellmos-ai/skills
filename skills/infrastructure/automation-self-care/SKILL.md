@@ -1,10 +1,10 @@
 ---
 name: automation-self-care
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-07-30
 description: >
   Builds and operates a provider-neutral self-care core set for scheduled LLM
   tasks and desktop-app automations. Use when an agent should discover its
@@ -13,7 +13,9 @@ description: >
   improve an existing automation fleet with rollback, readback and deletion
   protection. Triggers on automation self-care, scheduler task care, desktop
   app automation maintenance, automation fleet audit, self-healing schedules,
-  or requests to recreate the ANTIGRAVITY-style maintenance task family.
+  requests to recreate the ANTIGRAVITY-style maintenance task family,
+  core-set-textautomations, basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers, or textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -22,6 +24,7 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: en
 status: active
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
 dependencies:
   tools: []
   services: []
@@ -165,6 +168,10 @@ approved tasks through the native surface. A folder containing a task prompt
 without a live scheduler registration is not a completed setup.
 
 ## Changelog
+
+### 1.0.1 (2026-07-30)
+
+- Added provider-neutral text-automation and desktop-app automation aliases.
 
 ### 1.0.0 (2026-07-28)
 

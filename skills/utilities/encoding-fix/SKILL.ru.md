@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Русский] Навык агента для encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.
+description: Восстановление кракозябр (mojibake) при двойном/тройном кодировании UTF-8. Исправляет ошибки интерпретации Windows cp1252/Latin-1. Нулевые зависимости.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,57 +16,52 @@ tags: [encoding, utf-8, mojibake, windows, cp1252, text-repair]
 language: ru
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `encoding-fix`.
+> **Русский** — Официальная русская версия `encoding-fix`.
 
 
+# Encoding Fix (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+Исправляет кракозябры (mojibake, двойное/тройное кодирование UTF-8), вызванные неправильной интерпретацией Windows cp1252/Latin-1. Нулевые внешние зависимости — только стандартная библиотека Python.
 
-
-# Encoding Fix (English)
-
-Repairs mojibake (double/triple encoded UTF-8) caused by Windows cp1252/Latin-1
-misinterpretation. Zero dependencies — Python stdlib only.
-
-## Typical Problem
+## Типичная проблема
 
 ```
 "ue" (U+00FC) -> UTF-8 \xc3\xbc -> read as cp1252 -> "Ã¼"
 ```
 
-## Usage
+## Использование
 
-### As Library
+### Как библиотека
 ```python
 from encoding_fix import sanitize_outbound
 
 clean = sanitize_outbound("WÃ¼rge")  # -> "Wuerge"
 ```
 
-### Subprocess Output
+### Вывод подпроцесса
 ```python
 from encoding_fix import sanitize_subprocess_output
 
 text = sanitize_subprocess_output(process.stdout)
 ```
 
-### CLI
+### Интерфейс командной строки (CLI)
 ```bash
 python encoding_fix.py "WÃ¼rge"    # Check a single string
 python encoding_fix.py              # Self-test
 ```
 
-## Features
+## Особенности
 
-- **Idempotent:** Correctly encoded text is not modified
-- **Up to 3 rounds:** Repairs even triple-encoded strings
-- **Subprocess decoder:** UTF-8/cp1252 fallback for process output
-- **Zero dependencies:** Python stdlib only
+- **Идемпотентность:** Корректно закодированный текст не изменяется
+- **До 3 проходов:** Восстанавливает даже трижды закодированные строки
+- **Декодер подпроцессов:** Резервный механизм UTF-8/cp1252 для вывода процессов
+- **Нулевые зависимости:** Только стандартная библиотека Python
 
 ## Журнал изменений
 
 ### 1.0.0 (2026-03-12)
-- Ported from BACH system/tools/encoding_fix.py
+- Перенесено из BACH system/tools/encoding_fix.py

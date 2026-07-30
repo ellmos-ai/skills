@@ -1,27 +1,39 @@
 ---
+name: act-techniques
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: スティーブン・ヘイズ（Steven Hayes）によるアクセプタンス＆コミットメント・セラピー（ACT）：心理的柔軟性の6つの核心プロセスを持つヘキサフレックス・モデル。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [act, acceptance, defusion, values, psychological-flexibility, hayes]
 language: ja
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **日本語** — スキルに関する完全な公式日本語ドキュメント: `act-techniques`.
+> **日本語** — `act-techniques` の公式日本語版。
 
 
+# ACT 技法 — アクセプタンス＆コミットメント・セラピー（日本語）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基礎概念
 
+アクセプタンス＆コミットメント・セラピー（ACT、「アクト」と発音）は、**Steven C. Hayes（スティーブン・C・ヘイズ）** らによって開発された認知行動療法（CBT）の「第3の波」に属する療法です。ACTは症状の軽減を直接の目的にするのではなく、個人が自らの価値に基づいて、「今、この瞬間」に開放的かつ自覚的に行動する能力である **心理的柔軟性（Psychological Flexibility）** を高めることを目指します。
 
-# ACT Techniques — Acceptance & Commitment Therapy (English)
-
-## Foundation
-
-Acceptance & Commitment Therapy (ACT, pronounced as the word "act") was developed by **Steven C. Hayes** and belongs to the third wave of behavioral therapy. ACT does not aim at symptom reduction, but at **psychological flexibility** — the ability to act openly and consciously in the present moment, guided by personal values.
-
-Core message: **The pain is not the problem — the struggle against the pain is.**
+核心となるメッセージ：**「痛みが問題なのではない — 痛みとの戦いこそが問題なのだ。」**
 
 ---
 
-## The Hexaflex Model
+## ヘキサフレックス・モデル（Hexaflex Model）
 
-The Hexaflex is the central model of ACT. Six core processes together form psychological flexibility. Each process is the counterpart to a pathological process (psychological inflexibility).
+ヘキサフレックスはACTの核となるモデルです。6つの核心プロセスが相互に作用して心理的柔軟性を形成します。各プロセスは、病理学的なプロセス（心理的不柔軟性）と対をなしています。
 
 ```
                     Present Moment
@@ -38,180 +50,180 @@ The Hexaflex is the central model of ACT. Six core processes together form psych
                     Committed Action
 ```
 
-### Flexibility vs. Inflexibility
+### 柔軟性 vs 不柔軟性
 
-| Core Process (flexible) | Counterpart (inflexible) |
+| 核心プロセス（柔軟性） | 反対概念（不柔軟性） |
 |---|---|
-| Acceptance | Experiential avoidance |
-| Cognitive Defusion | Cognitive fusion |
-| Present Moment Awareness | Past/future focus |
-| Self-as-Context | Conceptualized self |
-| Values | Lack of values clarity |
-| Committed Action | Inaction/impulsivity |
+| 受容／アクセプタンス（Acceptance） | 体験回避（Experiential avoidance） |
+| 認知脱フュージョン（Cognitive Defusion） | 認知フュージョン（Cognitive fusion） |
+| 今この瞬間への意識（Present Moment Awareness） | 過去・未来への囚われ（Past/future focus） |
+| 文脈としての自我（Self-as-Context） | 概念化された自我（Conceptualized self） |
+| 価値（Values） | 価値の不明確さ（Lack of values clarity） |
+| コミットされた行為（Committed Action） | 不行動・衝動性（Inaction/impulsivity） |
 
 ---
 
-## The Six Core Processes
+## 6つの核心プロセス
 
-### 1. Acceptance
+### 1. 受容／アクセプタンス（Acceptance）
 
-**Definition:** Willingness to allow inner experiences (feelings, thoughts, bodily sensations) without trying to change, avoid, or control them.
+**定義：** 内面的な体験（感情、思考、身体感覚）を変えようとしたり、避けたり、コントロールしようとせずに、あるがままに受け入れる態度。
 
-**Important:** Acceptance is NOT resignation. It is an active, conscious decision to make room for experience.
+**重要：** アクセプタンスは諦めや諦念ではありません。体験のためのスペースを作るための、積極的で意識的な選択です。
 
-#### Techniques
+#### 技法
 
-- **Willingness Scale (0-10):** "How willing are you right now to just let this feeling be there?"
-- **Expansion:** Locate the feeling in the body, give it shape/color/texture, let it "breathe"
-- **Struggle Switch Metaphor:** There's a switch inside us — not for pain, but for the struggle against pain. Acceptance means flipping the struggle switch.
+- **受容意欲スケール（0-10）：** 「今、この感情をそのまま存在させることにどれくらい意欲的ですか？」
+- **拡張（Expansion）：** 感情の身体的な位置を特定し、形・色・質感を与え、それに「息を吹き込む」
+- **闘争スイッチのメタファー：** 私たちの内側にはスイッチがあります。痛み自体のスイッチではなく、痛みと戦うためのスイッチです。受容とは、闘争スイッチをオフにすることを意味します。
 
-#### Metaphor: Quicksand
+#### メタファー：底なし沼（流砂）
 
-> If you've fallen into quicksand, the natural instinct is to fight, resist, thrash. But that's exactly what pulls you deeper. The only helpful thing: Lie flat, increase the surface area, accept contact with the quicksand. Not because quicksand is great — but because the struggle against it is the real problem.
-
----
-
-### 2. Cognitive Defusion
-
-**Definition:** Detaching from thoughts — seeing them for what they are: mental events, not reality itself. Instead of "I am worthless" -> "I am having the thought that I am worthless."
-
-#### Techniques
-
-- **"I am having the thought that..."** — Linguistically distance thoughts
-- **"Thank you, mind!"** — Acknowledge the mind as an overactive advisor without obeying it
-- **Singing thoughts:** Sing the distressing thought to the melody of "Happy Birthday" (reduces its credibility)
-- **Leaves on a stream:** Imagine a stream. Place each thought on a leaf and let it float by
-- **Passenger naming:** Give the inner critic a name ("Ah, there's Perfectionist Pete again")
-- **Repetition exercise:** Rapidly repeat a distressing word for 30 seconds — it loses its emotional charge
-
-#### Metaphor: The Uninvited Guest
-
-> Imagine you're throwing a party and an uninvited guest shows up. You have three options: (1) You throw them out — but they keep coming back and making noise. (2) You let them in and spend the whole evening monitoring them — then you miss your own party. (3) You let them in, acknowledge they're there, and continue enjoying your party. Option 3 is defusion.
+> 底なし沼に落ちてしまったとき、本能的な反応は暴れ、抵抗し、もがくことです。しかしそれこそが、あなたをより深く沈めさせます。唯一役立つ方法：仰向けに横たわり、接地面を広げ、沼との接触を受け入れること。底なし沼が素晴らしいからではなく、それとの戦いこそが本当の問題だからです。
 
 ---
 
-### 3. Present Moment Awareness (Contact with the Present Moment)
+### 2. 認知脱フュージョン（Cognitive Defusion）
 
-**Definition:** Intentional, non-judgmental attention to the here and now. Neither ruminating about the past nor worrying about the future.
+**定義：** 思考から距離を置くこと — 思考を現実そのものではなく、単なる頭の中の出来事として見ること。「私は無価値だ」ではなく、「『私は無価値だ』という思考を持っている」と捉え直します。
 
-#### Techniques
+#### 技法
 
-- **5-4-3-2-1 Exercise:** 5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste
-- **Breath awareness:** 3 conscious breaths — just observe, don't control
-- **Sensory anchoring:** Explore an object with full attention (texture, weight, temperature)
-- **Check-in questions:** "What is happening in my body right now? What thoughts are here? What feelings?"
+- **「〜という思考を持っている」** — 言語的に思考と距離を置く
+- **「思考（頭）にお礼を言う」** — 過剰にアドバイスしてくる頭を過度に従うことなく「思考さん、ありがとう」と受け止める
+- **歌に乗せる：** 苦痛な思考を「ハッピーバースデー」のメロディに乗せて歌う（信憑性を低下させる）
+- **川に浮かぶ葉っぱ：** 穏やかな川をイメージする。各思考を葉っぱの上に載せ、流れていくのを眺める
+- **乗客に名前をつける：** 内なる批判者に名前をつける（「ああ、また『完璧主義のピーター』が来たな」）
+- **単語の反復：** 苦痛な言葉を30秒間高速で繰り返す — 感情的な重みが減衰する
 
----
+#### メタファー：招かれざる客
 
-### 4. Self-as-Context (Observing Self)
-
-**Definition:** Distinguishing between the self as content ("I AM anxious") and the self as context ("I NOTICE anxiety"). The observing self is the space in which all experiences occur — but it is not those experiences.
-
-#### Techniques
-
-- **Sky Metaphor:** "You are the sky, not the weather. Clouds, storms, sunshine — everything passes through. But the sky is always there."
-- **Chessboard Metaphor:** "You are not the white or black pieces. You are the board on which the game takes place."
-- **Observer Exercise:** Close your eyes. Observe thoughts. Observe feelings. Observe bodily sensations. Then: "Who is it that observes all of this?"
-- **Perspective Exercises:** "If your 80-year-old self were to look back at this situation — what would they say?"
+> パーティを開いているときに、招かれざる客がやってきたとします。選択肢は3つあります。(1) 追い出そうとする — しかし客は何度も戻ってきて大騒ぎする。(2) 家に入れ、一晩中見張り続ける — あなたは自分のパーティを楽しめない。(3) 家に入れ、そこにいることを認め、自分はパーティを楽しみ続ける。選択肢3が脱フュージョンです。
 
 ---
 
-### 5. Values
+### 3. 今この瞬間への意識（「今、この瞬間」との接触）
 
-**Definition:** Freely chosen life directions. Values are not goals (which can be achieved) but compass directions (which are followed). You never "complete" the value of "being a loving partner" — you live it, moment by moment.
+**定義：** 「今、ここ」に対して意図的かつ評価・判断を交えずに注意を向けること。過去を反芻することもなく、未来を思い悩むこともありません。
 
-#### Values Clarification — Life Domains
+#### 技法
 
-| Life Domain | Guiding Question |
+- **5-4-3-2-1 エクササイズ：** 見えるもの5つ、聞こえるもの4つ、感じるもの3つ、匂うもの2つ、味わうもの1つ
+- **呼吸への意識：** 3回の意識的な深呼吸 — コントロールせず、ただ観察する
+- **五感のアンカー：** 物体をフルに観察する（質感、重さ、温度）
+- **チェックインの問い：** 「今、私の身体の中で何が起きているか？どんな思考があるか？どんな感情があるか？」
+
+---
+
+### 4. 文脈としての自我（観察する自我）
+
+**定義：** 「内容としての自我」（「私は不安だ」）と「文脈としての自我」（「私は不安を観察している」）を区別すること。観察する自我はすべての体験が起こるスペースですが、体験そのものではありません。
+
+#### 技法
+
+- **空のメタファー：** 「あなたは空であり、天気ではありません。雲、嵐、太陽 — すべては通り過ぎます。しかし空は常にそこにあります。」
+- **チェス盤のメタファー：** 「あなたは白や黒の駒ではありません。ゲームが行われているチェス盤そのものです。」
+- **観察者のエクササイズ：** 目を閉じ、思考を観察し、感情を観察し、身体感覚を観察します。そして問いかけます：「これら全てを観察しているのは誰か？」
+- **視点取得の練習：** 「もし80歳になった自分がこの状況を振り返ったら、何と言うでしょうか？」
+
+---
+
+### 5. 価値（Values）
+
+**定義：** 自ら自由に選択した人生の方向性。価値はゴール（達成できる目標）ではなく、羅針盤の方角（進み続ける方向）です。「愛あるパートナーであること」という価値は完結することなく、毎瞬間生きるものです。
+
+#### 価値の明確化 — 人生の領域
+
+| 人生の領域 | 探求の問い |
 |---|---|
-| Relationships | What kind of partner/friend/family member do I want to be? |
-| Work/Career | What makes work meaningful to me? |
-| Personal Growth | In what direction do I want to develop? |
-| Health | How do I want to treat my body? |
-| Leisure/Recreation | What truly nourishes me? |
-| Spirituality | What gives my life deeper meaning? |
-| Community | What do I want to contribute to the world? |
+| 人間関係 | どのようなパートナー／友人／家族でありたいか？ |
+| 仕事・キャリア | 自分にとって仕事に意味をもたらすものは何か？ |
+| 个人の成長 | どのような方向に自分を発展させたいか？ |
+| 健康 | 自分の身体をどのように扱いたいか？ |
+| 余暇・レクリエーション | 何が本当の意味で自分を力づけるか？ |
+| 精神性・スピリチュアル | 何が人生に深い意味を与えるか？ |
+| 地域社会 | 世界に何を提供したいか？ |
 
-#### Techniques
+#### 技法
 
-- **Tombstone Exercise:** "What should be written on your tombstone? Not what you achieved, but what you stood for."
-- **Compass Exercise:** Determine a direction for each life domain and rate on a scale of 1-10: "How important is this to me?" and "How much am I living this right now?"
-- **Sweet Spot of Pain:** "Behind every pain lies a value. Those who don't love can't be hurt. That it hurts shows that something matters to you."
+- **墓碑銘のエクササイズ：** 「自分の墓碑に何と刻まれたいですか？達成したことではなく、あなたが何を大切に生きたかです。」
+- **コンパスのエクササイズ：** 各人生領域の方向を決め、1-10の尺度で評定：「これは自分にとってどれくらい重要か？」「現在どれくらいそれを生きているか？」
+- **痛みのスイートスポット：** 「あらゆる痛みの裏には価値が存在します。愛さない者は傷つくこともありません。痛むということは、それがあなたにとって大切である証拠です。」
 
 ---
 
-### 6. Committed Action
+### 6. コミットされた行為（Committed Action）
 
-**Definition:** Concrete actions that align with one's own values. Not perfect, not "when I'm ready," but NOW, with all difficulties.
+**定義：** 自らの価値に沿った具体的な行動。完璧である必要もなく、「準備ができたら」でもなく、困難を伴いながら「今」行動すること。
 
-#### Techniques
+#### 技法
 
-- **SMART Value-Goals:** Specific, Measurable, Attractive, Realistic, Time-bound — but always linked to a value
-- **Smallest possible step:** "What is the smallest step you could take TODAY toward this value?"
-- **Willingness check:** "Are you willing to bring [unpleasant feeling] along if it shows up while you take this step?"
-- **Plan for obstacles:** "What inner barriers might arise? How do you want to handle them?" (not: "How will you eliminate them?")
+- **SMART価値目標：** 具体性（Specific）、計測可能（Measurable）、魅力的（Attractive）、現実的（Realistic）、期限（Time-bound） — ただし常に価値と結びつける
+- **最小のステップ：** 「この価値に向けて、今日踏み出せる最小のステップは何ですか？」
+- **意欲のチェック：** 「この一歩を踏み出す際に[不快な感情]が現れたとしても、それを連れて行く意欲はありますか？」
+- **障害の計画：** 「どのような内的な障害が生じる可能性がありますか？それにどう対処したいですか？」（「どう排除するか」ではない）
 
-#### Metaphor: Passengers on the Bus
+#### メタファー：バスの乗客
 
-> You are the bus driver of your life. On the bus sit passengers — your thoughts, feelings, memories, bodily sensations. Some are loud, threatening, ugly. They shout: "Turn right! Turn left! Stop!" You have three options:
+> あなたは自分の人生というバスの運転手です。バスには乗客 — あなたの思考、感情、記憶、身体感覚 — が乗っています。中にはうるさく、脅迫的で、みにくい乗客もいます。彼らは叫びます：「右へ曲がれ！左へ曲がれ！止まれ！」あなたには3つの選択肢があります：
 >
-> 1. **Stop and fight:** You stop driving and try to throw the passengers out. But you don't move forward.
-> 2. **Negotiate:** You drive where the passengers want. But it's not YOUR direction.
-> 3. **Keep driving:** You let the passengers shout, take them along — and still drive in YOUR direction. The passengers are allowed to be there. But THEY don't determine the route.
+> 1. **車を止めて戦う：** 運転をやめ、乗客を追い出そうとする。しかし前には進めない。
+> 2. **妥協する：** 乗客の言う通りの方向に運転する。しかしそれはあなたの目的地ではない。
+> 3. **運転を続ける：** 乗客に叫ばせたまま、彼らを乗せて、あなたの目的地へと運転を続ける。乗客がそこにいることは許されますが、彼らがルートを決めるわけではありません。
 >
-> Committed action means: Driving the bus toward your values, no matter which passengers are on board.
+> コミットされた行為とは：どんな乗客が乗っていても、自分の価値に向かってバスを走らせ続けることです。
 
 ---
 
-## Areas of Application
+## 適用分野
 
-ACT is evidence-based and effective for:
+ACTはエビデンスに基づき、以下に対して有効性が示されています：
 
-- **Depression and anxiety disorders**
-- **Chronic pain**
-- **Substance use disorders**
-- **Eating disorders**
-- **Burnout and workplace stress**
-- **Trauma and PTSD** (complementary)
-- **Psychotic disorders** (complementary)
+- **うつ病および不安症**
+- **慢性疼痛**
+- **物質使用障害**
+- **摂食障害**
+- **バーンアウトおよび職場のストレス**
+- **トラウマおよびPTSD**（補助的）
+- **精神病性障害**（補助的）
 
 ---
 
-## When to Address Which Process?
+## どのプロセスにいつ働きかけるか？
 
-| User's Situation | Primary ACT Process |
+| クライエント／ユーザーの状況 | 優先的なACT核心プロセス |
 |---|---|
-| Avoids certain feelings/situations | Acceptance |
-| Trapped in rumination/worry | Defusion |
-| Living on autopilot, dissociated | Present Moment Awareness |
-| Defines self through problems ("I AM...") | Self-as-Context |
-| Feels directionless, meaningless | Values |
-| Knows what matters but doesn't act | Committed Action |
+| 特定の感情や状況を避けている | 受容／アクセプタンス |
+| 反芻や心配にとらわれている | 認知脱フュージョン |
+| 心不在脳、解離状態、自動パイロット | 今この瞬間への意識 |
+| 問題で自分を定義している（「私は〜だ」） | 文脈としての自我 |
+| 方向性や意味を見失っている | 価値 |
+| 大切なことは分かっているが行動できない | コミットされた行為 |
 
 ---
 
-## Ethical Guidelines
+## 倫理ガイドライン
 
-An AI assistant may explain ACT techniques psychoeducationally and guide exercises.
+AIアシスタントは、ACTの技法を心理教育的に説明し、エクササイズをガイドすることができます。
 
-An AI assistant must NOT:
-- Make diagnoses
-- Simulate a therapeutic relationship
-- Act alone in cases of acute suicidality — refer to professional help
-- Present ACT as a substitute for psychotherapy
+AIアシスタントが行ってはならないこと：
+- 診断を下すこと
+- 治療関係を模倣・シミュレートすること
+- 急性の自殺念慮／自傷リスクにおいて単独で対応すること — 専門機関へ繋ぐこと
+- ACTを心理療法の代替として提示すること
 
-See: [ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../ETHICS.md)
 
-**In case of acute crisis, ALWAYS refer to:**
+**緊急の危機状況では、必ず以下を案内してください：**
+- こころの健康相談統一ダイヤル (日本): 0570-064-556
+- よりそいホットライン (日本): 0120-279-338
+- いのちの電話 (日本): 0570-783-556 (ナビダイヤル)
 - 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- 緊急通報: 110 / 119 (日本), 911 (US), 112 (EU)
 
 ---
 
-## References
+## 参考文献
 
 - Hayes, S. C., Strosahl, K. D., & Wilson, K. G. (2012). *Acceptance and Commitment Therapy: The Process and Practice of Mindful Change.* 2nd Edition.
 - Harris, R. (2009). *ACT Made Simple.*
@@ -219,4 +231,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*BACH v3.8.0 より移植 | スタンドアロン版*

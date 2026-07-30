@@ -1,73 +1,59 @@
 ---
+name: law-checker
+version: 0.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-07-23
+updated: 2026-07-23
+description: Ссылается на автономный модуль law-checker ("Юридический отдел"): первичные юридические оценки ИИ на основе первоисточников для немецкого права с реестром законов и агентом воплощения законов. Используйте этот скилл, когда ситуация, договор, официальное уведомление или юридический вопрос по немецкому праву должны быть проверены с точными цитатами (статья/параграф, абзац, предложение) -- со строгим ограничением: первичная ориентация с помощью ИИ, а не замена адвоката.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+provenance: {'origin': 'external', 'origin_repo': 'https://github.com/ellmos-ai/law-checker', 'origin_path': 'SKILL.md, config.json, agents/gesetzbuch.md, references/', 'origin_version': None, 'last_sync_from_origin': '2026-07-23', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+category: utilities
+tags: [legal, law, germany, wrapper, pointer-skill]
 language: ru
+status: active
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `law-checker`.
+> **Русский** — Официальная русская версия `law-checker`.
 
+# law-checker (Юридический отдел) -- Pointer Skill
 
+Этот скилл является **легковесным указателем (оберткой/wrapper)** на репозиторий автономного публичного модуля [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker) (лицензия MIT, публичный). Сам скилл находится там — этот репозиторий лишь ссылается на него и документирует установку, чтобы модуль можно было найти через центральный каталог скиллов.
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Что делает модуль
 
+`law-checker` формирует первичные юридические оценки ИИ на основе первоисточников для немецкого права:
 
-# law-checker (Legal Department) -- Pointer Skill (English)
+- **Реестр законов (`config.json`):** подключаемые законы; каждое юридическое утверждение должно быть подтверждено локально загруженными официальными текстами законов (статья или параграф, абзац, предложение при необходимости, краткая цитата, источник, дата получения).
+- **Агент воплощения законов (`agents/gesetzbuch.md`):** универсальный агент, отвечающий «изнутри закона» для любого зарегистрированного закона — масштабируется на любые законы, добавленные в реестр.
+- **Отдельный уровень судебной практики:** судебные решения цитируются только после проверки в Интернете (суд, дата, номер дела, ECLI при наличии).
+- **Рабочий процесс рисков и эскалации:** формат отчета со шкалой уровня риска, соблюдением сроков и матрицей маршрутизации по специализации адвокатов.
 
-This skill is a **thin pointer (wrapper)** to the standalone, public module
-repository [`ellmos-ai/law-checker`](https://github.com/ellmos-ai/law-checker)
-(MIT license, public). The actual skill lives there -- this repository only
-links to it and documents installation, so the module is discoverable through
-the central skill catalog.
+## Ограничения (важно)
 
-## What the module does
+- **Только первичная ориентация с помощью ИИ, не заменяет индивидуальную юридическую консультацию и не выполняется лицензированным адвокатом.**
+- Не является юридической фирмой, хостинговым юридическим сервисом или календарем сроков.
+- Если речь идет об официальной юридической почте (предупредительное письмо, официальное уведомление, иск, процессуальный срок): сохраните оригинальный документ, зафиксируйте срок и обратитесь к квалифицированному адвокату — не автоматизируйте этот вопрос.
 
-`law-checker` produces source-grounded AI first-look legal assessments for
-German law:
+## Установка (общая, без локальных путей)
 
-- **Statute registry** (`config.json`): togglable statutes; every statute
-  claim must be backed by locally fetched official law texts (article or
-  section, paragraph, sentence where needed, short quote, source, retrieval
-  date).
-- **Statute-embodiment agent** (`agents/gesetzbuch.md`): a generic agent that
-  answers "from inside the statute" for any registered law -- scales to
-  arbitrary statutes added to the registry.
-- **Separate case-law layer:** court decisions are cited only after web
-  verification (court, date, docket number, ECLI where available).
-- **Risk and escalation workflow:** report format with a risk-level scale,
-  deadline discipline, and a lawyer-specialty routing matrix.
-
-## Boundaries (important)
-
-- **AI-assisted first orientation only, not a substitute for individual legal
-  advice, and not performed by a licensed lawyer.**
-- Not a law firm, not a hosted legal service, not a deadline calendar.
-- If real legal mail is involved (warning letter, official notice, lawsuit,
-  deadline): secure the original document, note the deadline, and consult a
-  qualified lawyer -- do not automate the matter.
-
-## Installation (generic, no local paths)
-
-1. Clone the module:
+1. Клонировать модуль:
    ```bash
    git clone https://github.com/ellmos-ai/law-checker.git <clone-path>
    ```
-2. Adopt `<clone-path>/SKILL.md` into your own skill environment (e.g.
-   `~/.claude/skills/law-checker/` or the equivalent for your agent runtime).
-3. Set the module path in the adopted `SKILL.md` and its references to
-   `<clone-path>` -- do NOT commit real local paths or hostnames into a
-   versioned skill environment.
-4. Load the statute registry: `python <clone-path>/_tools/gesetze_fetch.py`
-   (fetches the configured official statute texts; the texts themselves are
-   deliberately not in the repo, to avoid redistributing stale portal
-   snapshots).
-5. For structure, license, and liability details, see the module repo's
-   README.
+2. Перенести `<clone-path>/SKILL.md` в ваше собственное окружение скиллов (например, `~/.claude/skills/law-checker/` или аналогичное место для среды выполнения вашего агента).
+3. Установить путь к модулю в перенесенном `SKILL.md` и его ссылках на `<clone-path>` — НЕ коммитьте реальные локальные пути или имена хостов в версионируемое окружение скиллов.
+4. Загрузить реестр законов: `python <clone-path>/_tools/gesetze_fetch.py` (загружает настроенные официальные тексты законов; сами тексты намеренно отсутствуют в репозитории во избежание распространения устаревших снимков порталов).
+5. Сведения о структуре, лицензии и ответственности см. в README репозитория модуля.
 
-## Origin of this pointer skill
+## Происхождение этого скилла-указателя
 
-This wrapper was added on 2026-07-23 as a showcase entry for the
-`ellmos-ai/skills` repository. There is **no code duplication** -- maintenance
-and versioning stay solely in the `ellmos-ai/law-checker` module repo.
+Эта обертка была добавлена 23.07.2026 в качестве демонстрационной записи для репозитория `ellmos-ai/skills`. **Дублирование кода отсутствует** — обслуживание и версионирование остаются исключительно в репозитории модуля `ellmos-ai/law-checker`.
 
 ## Журнал изменений
 
 ### 0.1.0 (2026-07-23)
-- Initial pointer skill for `ellmos-ai/law-checker`.
+- Первоначальный скилл-указатель для `ellmos-ai/law-checker`.

@@ -1,238 +1,249 @@
 ---
+name: systemic-questioning
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-03-12
+description: 系统性提问技术：循环提问、刻度提问、奇迹提问和例外提问，用于自我反思与视角拓展。
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [systemic, questioning-techniques, circular, miracle-question, scaling, de-shazer]
 language: zh
+status: active
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **中文** — 针对该技能的官方完整中文文档: `systemic-questioning`.
+> **中文** — `systemic-questioning` 官方中文版本。
 
 
+# 系统性提问技术（Systemic Questioning Techniques）
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## 基础概念
 
+系统性提问技术源于系统心理治疗与心理咨询。其目的在于**拓宽视角**、**使互动模式显性化**以及**开启新的可能性**。这些技术以解决方案和资源为导向，而非纠结于问题本身。
 
-# Systemic Questioning Techniques (English)
-
-## Foundation
-
-Systemic questioning techniques originate from systemic therapy and counseling. They aim to **expand perspectives**, **make patterns visible**, and **open new possibilities**. They are solution- and resource-oriented — not problem-fixated.
-
-Central assumption: **Problems do not arise within individuals, but in relationships and patterns between individuals.**
-
----
-
-## Question Types
-
-### 1. Circular Questions
-
-**Purpose:** Encourage perspective shifts. The person is invited to take the position of others and recognize relationship patterns.
-
-#### Basic Structure
-"What do you think [Person X] sees/feels/thinks about this?"
-
-#### Variations
-
-**Relationship questions:**
-- "What do you think your partner thinks when you withdraw?"
-- "How would your best friend describe your relationship?"
-- "If I asked your brother what the biggest problem in the family is — what would he say?"
-
-**Difference questions:**
-- "Who in the family suffers most from the situation?"
-- "Who would notice the change first?"
-- "Who are you closer to — your mother or your father?"
-
-**Agreement questions:**
-- "Would your partner agree with that?"
-- "Who in your circle sees it similarly to you?"
-
-**Classification questions:**
-- "If you ranked your family members by who handles conflicts best — what would the order be?"
+核心假设：**问题并非产生于个人内部，而是产生于人与人之间的关系和互动模式中。**
 
 ---
 
-### 2. Scaling Questions
+## 提问类型
 
-**Purpose:** Make abstract states measurable, make progress visible, concretize goals. Developed by **Steve de Shazer** and **Insoo Kim Berg**.
+### 1. 循环提问（Circular Questions）
 
-#### Basic Structure
-"On a scale of 0 to 10, where 0 is [Pole A] and 10 is [Pole B] — where are you right now?"
+**目的：** 促进视角转换。引导当事人站在他人的角度思考，识别关系中的互动模式。
 
-#### Variations
+#### 基本结构
+“你认为 [人员 X] 对此有什么看法/感受/想法？”
 
-**State scaling:**
-- "On a scale of 0 to 10 — how burdened do you feel right now?"
-- "Where on the scale were you last week?"
+#### 常见变体
 
-**Progress scaling:**
-- "Where were you on this scale a month ago?"
-- "What contributed to you moving from a 3 to a 5?"
+**关系相关提问：**
+- “当你退缩时，你认为你的伴侣会怎么想？”
+- “你最好的朋友会如何描述你们的关系？”
+- “如果我问你的兄弟家庭中最大的问题是什么——他会怎么回答？”
 
-**Goal scaling:**
-- "Where on the scale would you need to be for it to be 'good enough'?"
-- "What would be different if you were one point higher?"
+**差异相关提问：**
+- “在家庭中，谁受当前状况的影响最深？”
+- “谁会最先注意到改变？”
+- “你和谁更亲近——母亲还是父亲？”
 
-**Confidence scaling:**
-- "How confident are you on a scale of 0 to 10 that you can do this?"
-- "What would you need to be one point more confident?"
+**认同度提问：**
+- “你的伴侣会同意这个观点吗？”
+- “在你的社交圈里，谁的看法和你相似？”
 
-**Relationship scaling:**
-- "Where on the scale would your partner rate your relationship?"
-
-#### Follow-up Questions (essential!)
-
-- "What has kept you from being at 0?" (Resource activation)
-- "What would need to happen for you to be one point higher?" (Small-step solution orientation)
-- "How would you know you're at [target value]?" (Concretization)
+**排序/分级提问：**
+- “如果按照处理冲突的能力给家庭成员排序，你会怎么排？”
 
 ---
 
-### 3. The Miracle Question
+### 2. 刻度/评分提问（Scaling Questions）
 
-**Purpose:** Goal clarification and solution vision. Bypasses problem-thinking and activates solution imagination. Developed by **Steve de Shazer**.
+**目的：** 使抽象状态具象化、使进步显形、具体化目标。由 **Steve de Shazer** 与 **Insoo Kim Berg** 研发。
 
-#### Original Formulation
+#### 基本结构
+“如果以 0 到 10 分来打分，0 代表 [极点 A]，10 代表 [极点 B]——你现在处于几分？”
 
-> "Imagine you go to bed tonight and fall asleep. And while you are sleeping, a miracle happens. The problem that brought you here is solved. But you don't know it, because you were asleep. What would you notice first thing tomorrow morning that tells you the miracle has happened?"
+#### 常见变体
 
-#### Deepening Questions
+**状态刻度：**
+- “在 0 到 10 的刻度上——你现在感到负担有多重？”
+- “上周你在刻度上的什么位置？”
 
-- "What else would be different?"
-- "Who would notice it first?"
-- "What would [partner/colleague/friend] notice about you that's new?"
-- "What would you do differently?"
-- "Are there moments when the miracle is already happening a little bit?"
+**进步刻度：**
+- “一个月前你在刻度的什么位置？”
+- “是什么促使你从 3 分提升到了 5 分？”
 
-#### Shortened Variations
+**目标刻度：**
+- “为了达到‘足够好’的状态，你需要处于刻度的几分？”
+- “如果你提高了一分，会有什么不同？”
 
-- "If the problem were gone tomorrow — what would be different?"
-- "What would your ideal daily routine look like?"
-- "If everything were the way you wish — what would you do?"
+**信心刻度：**
+- “在 0 到 10 的刻度上，你对自己能做到这点有多大信心？”
+- “需要发生什么才能让你增加一分的信心？”
 
----
+**关系刻度：**
+- “你的伴侣会给你们的关系打几分？”
 
-### 4. Exception Questions
+#### 追问技巧（至关重要！）
 
-**Purpose:** Identify times when the problem does NOT occur or occurs less. Shows that the person already has solution resources.
-
-#### Basic Structure
-"When is it different? When does the problem not occur?"
-
-#### Variations
-
-- "Have there been moments recently when it was better?"
-- "What was different about those moments?"
-- "What did YOU do differently in those moments?"
-- "Who was there? What was the environment like?"
-- "How did you manage to make it better in that moment?"
-- "What would need to happen for those exceptions to become more frequent?"
+- “是什么让你没有掉到 0 分？”（资源激活）
+- “需要发生什么才能让你向上提升一分？”（小步递进的解决方案导向）
+- “你如何才能知道自己已经达到了 [目标分值]？”（具体化）
 
 ---
 
-### 5. Hypothetical Questions
+### 3. 奇迹提问（The Miracle Question）
 
-**Purpose:** Open new thinking spaces, loosen rigid beliefs, mentally rehearse options.
+**目的：** 明确目标与构建解决方案愿景。绕过问题思维，激活对解决状态的想象力。由 **Steve de Shazer** 开发。
 
-#### Variations
+#### 原始提问方式
 
-- "Suppose you just tried it — what could happen in the best case?"
-- "What would happen if you did the opposite of what you normally do?"
-- "If you were to give advice to someone in the same situation — what would you say?"
-- "If fear played no role — what would you do?"
-- "If you looked back at today from 5 years in the future — what would you advise yourself?"
+> “想象一下，今晚你上床睡觉并睡着了。在你睡觉的时候，奇迹发生了。带给你困扰的问题得到了解决。但因为你当时正在睡觉，所以你并不知道奇迹发生了。那么明天早晨醒来时，你注意到的第一件表明奇迹已经发生的事会是什么？”
 
----
+#### 深入追问
 
-### 6. Deterioration Questions (Paradoxical Intervention)
+- “还有什么会变得不一样？”
+- “谁会最先注意到这一点？”
+- “ [伴侣/同事/朋友] 会注意到你身上有什么新的变化？”
+- “你会做些什么不一样的事情？”
+- “在现实中，是否有某些时刻这个奇迹其实已经在微小地发生了？”
 
-**Purpose:** Strengthen sense of control. If someone can describe how to make the problem worse, they clearly have influence over it — and can also improve it.
+#### 简化变体
 
-#### Variations
-
-- "What could you do to guarantee it gets worse?"
-- "How could you make sure the argument escalates?"
-- "What would need to happen for everything to go completely wrong?"
-
-**Important:** This technique is NOT suitable for acute crisis, suicidality, or severe depression.
+- “如果问题明天就消失了——会有什么不同？”
+- “你理想的日常生活会是什么样子？”
+- “如果一切都如你所愿——你会做什么？”
 
 ---
 
-## Context-Sensitive Selection
+### 4. 例外提问（Exception Questions）
 
-| Situation | Recommended Technique | Rationale |
+**目的：** 识别问题“没有发生”或“发生得较轻”的时刻。表明当事人其实已经拥有解决问题的资源。
+
+#### 基本结构
+“什么时候情况会有所不同？什么时候问题不会出现？”
+
+#### 常见变体
+
+- “最近有没有某些时刻情况稍微好一些？”
+- “在那些时刻有什么不一样？”
+- “在那些时刻，你自己做了什么不一样的事情？”
+- “当时有谁在场？环境是什么样的？”
+- “当时你是如何做到让情况变好的？”
+- “需要发生什么才能让这些例外情况更频繁地出现？”
+
+---
+
+### 5. 假设性提问（Hypothetical Questions）
+
+**目的：** 打开新的思考空间，松动固化信念，在脑海中演练应对方案。
+
+#### 常见变体
+
+- “假设你尝试了一下——最好的情况下会发生什么？”
+- “如果你做了与平时完全相反的事情，会发生什么？”
+- “如果你要给处于同样境地的人提建议——你会说什么？”
+- “如果恐惧不再起任何作用——你会怎么做？”
+- “如果从 5 年后的未来回顾今天——你会对自己提出什么建议？”
+
+---
+
+### 6. 恶化提问/逆向提问（Deterioration Questions / Paradoxical Intervention）
+
+**目的：** 增强掌控感。如果一个人能描述如何让问题恶化，说明他显然对问题拥有影响力——因而也能够去改善它。
+
+#### 常见变体
+
+- “你可以做什么来保证情况变得更糟糕？”
+- “你怎么做才能确保争吵进一步升级？”
+- “需要发生什么才能让事情彻底搞砸？”
+
+**重要提示：** 此技术**绝对不适用于**急性危机、自杀倾向或重度抑郁状态。
+
+---
+
+## 依情境选择提问
+
+| 适用情境 | 推荐技术 | 原理/依据 |
 |-----------|----------------------|-----------|
-| Person is stuck in the problem | Miracle question | Breaks out of the problem trance |
-| Progress not visible | Scaling questions | Makes small steps measurable |
-| Relationship conflicts | Circular questions | Enables perspective shift |
-| "It's ALWAYS like this" | Exception questions | Breaks through generalization |
-| Fear of change | Hypothetical questions | Enables risk-free trial thinking |
-| Helplessness / loss of control | Deterioration questions | Shows own influence |
-| Unclear goals | Miracle question + scaling | Clarifies direction and starting point |
+| 当事人困在问题中 | 奇迹提问 | 打破“问题出神”状态 |
+| 无法看到进步 | 刻度提问 | 使微小进步可被度量 |
+| 关系冲突 | 循环提问 | 实现视角转换 |
+| 认为“总是这样” | 例外提问 | 打破过度概括 |
+| 害怕改变 | 假设性提问 | 实现无风险的思维演练 |
+| 无助感 / 失去掌控 | 恶化提问 | 展示自身影响力 |
+| 目标模糊 | 奇迹提问 + 刻度提问 | 明确方向与起点 |
 
 ---
 
-## Combinations
+## 提问组合模式
 
-Systemic questions unfold their full effect in combination:
+系统性提问在组合使用时能发挥最大功效：
 
-### Pattern: Scaling + Exception + Small Step
+### 模式：刻度 + 例外 + 小步行动
 
-1. "On a scale of 0-10, where are you right now?" -> e.g., "4"
-2. "What has kept you from being at 0?" (Resources!)
-3. "Were there moments when you were at 5 or higher?" (Exceptions!)
-4. "What was different then?" (Recognize patterns!)
-5. "What would be the smallest step to go from 4 to 5?" (Action!)
+1. “在 0 到 10 分的刻度上，你现在处于几分？” -> 例如：“4分”
+2. “是什么让你没有掉到 0 分？”（激活资源！）
+3. “是否有过处于 5 分或更高分数的时刻？”（寻找例外！）
+4. “当时有什么不同？”（识别模式！）
+5. “从 4 分升到 5 分，最小的一步行动会是什么？”（具体行动！）
 
-### Pattern: Miracle Question + Circular + Scaling
+### 模式：奇迹提问 + 循环 + 刻度
 
-1. Ask the miracle question (generate target image)
-2. "Who would notice it first?" (Circular — relationship context)
-3. "How far along are you already on the way to the miracle?" (Scaling — progress)
+1. 提出奇迹提问（构建目标画面）
+2. “谁会最先注意到这一点？”（循环提问——关系上下文）
+3. “在通往奇迹的道路上，你现在已经走了多远？”（刻度提问——评估进度）
 
-### Pattern: Circular + Hypothetical
+### 模式：循环 + 假设
 
-1. "What do you think your boss sees in this situation?"
-2. "Suppose they said exactly what you suspect — what could you do then?"
-
----
-
-## Dos and Don'ts
-
-### Dos
-- **Ask openly** — no leading questions
-- **Stay curious** — the answer is more valuable than the question
-- **Allow pauses** — good questions need time
-- **Build on answers** — follow-up is more important than the next technique
-- **Frame appreciatively** — "What did you accomplish?" rather than "What did you do wrong?"
-
-### Don'ts
-- **Don't interrogate** — max 2-3 questions in a row, then reflect
-- **Not during acute crisis** — first stabilize, then explore
-- **Not as manipulation** — questions must be authentically curious
-- **Deterioration questions never with suicidality** — never
+1. “你认为你的上司在这种情况下看到了什么？”
+2. “假设他真的说了你所猜想的话——那时你可以做什么？”
 
 ---
 
-## Ethical Guidelines
+## 实施原则（Dos and Don'ts）
 
-An AI assistant may ask systemic questions to foster reflection and perspective expansion.
+### 宜（Dos）
+- **开放式提问** — 切勿使用诱导性提问
+- **保持好奇** — 回答比问题本身更有价值
+- **给与停顿** — 好的提问需要思考时间
+- **基于回答深入** — 顺势追问比机械换用下一项技术更重要
+- **积极赋能的措辞** — 使用“你成功做到了什么？”而非“你做错了什么？”
 
-An AI assistant must NOT:
-- Use systemic questions as a diagnostic instrument
-- Conduct relationship counseling that replaces professional therapy
-- Work exclusively with questions during acute crisis — stabilization first
-- Use deterioration questions with fragile states
-
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### 忌（Don'ts）
+- **切勿审讯式提问** — 连续提问最多 2-3 个，随后应给予回应与反映
+- **不在急性危机中使用** — 先稳定情绪，后探索问题
+- **切勿作为操纵手段** — 提问必须出自真诚的好奇心
+- **存在自杀倾向时绝不使用恶化提问** — 绝对禁止
 
 ---
 
-## References
+## 伦理指南
+
+AI 助手可提出系统性问题以促进用户的自我反思与视角拓展。
+
+AI 助手不得：
+- 将系统性提问用作诊断工具
+- 进行替代专业心理咨询/治疗的伴侣或家庭咨询
+- 在急性危机中仅使用提问——必须优先进行稳定化干预
+- 在脆弱状态下使用恶化提问
+
+参阅：[ETHICS.md](../ETHICS.md)
+
+**如遇急性危机，请务必转介至：**
+- 中国心理危机干预热线：400-161-9995 / 010-82951332
+- 全国希望热线：400-810-7980
+- 988 自杀与危机生命线（美国）：988
+- 紧急救助电话：110 / 120（中国） / 911（美国） / 112（欧洲）
+
+---
+
+## 参考文献
 
 - de Shazer, S. (1985). *Keys to Solution in Brief Therapy.*
 - Selvini Palazzoli, M. et al. (1981). *Hypothesizing — Circularity — Neutrality.*
@@ -241,4 +252,4 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*移植自 BACH v3.8.0 | 独立版本*

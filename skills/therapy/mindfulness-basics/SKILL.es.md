@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Español] Documentación completa para la habilidad mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: Fundamentos de MBSR, escaneo corporal (body scan) y ejercicios de respiración. Técnicas de atención plena basadas en la evidencia según Jon Kabat-Zinn para la vida cotidiana.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -15,197 +15,193 @@ tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
 language: es
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-> **Español** — Documentación oficial completa traducida al español para la habilidad `mindfulness-basics`.
+> **Español** — Versión oficial en español de `mindfulness-basics`.
 
 
+# Conceptos Básicos de Atención Plena (Mindfulness Basics)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> Fundamentos de MBSR, escaneo corporal y ejercicios de respiración para la vida cotidiana
 
-
-# Mindfulness Basics (English)
-
-> MBSR fundamentals, body scan, and breathing exercises for everyday life
-
-See: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Contexto
 
-Mindfulness is the intentional, non-judgmental attention to the present moment. MBSR (Mindfulness-Based Stress Reduction, Kabat-Zinn 1979) is the most well-known evidence-based mindfulness program.
+La atención plena (mindfulness) es la atención intencional y no juzgadora prestada al momento presente. El programa MBSR (Reducción del Estrés Basada en la Atención Plena, Kabat-Zinn 1979) es el programa de atención plena basado en la evidencia más reconocido mundialmente.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. Core Attitudes of Mindfulness (Kabat-Zinn)
-
-| Attitude | Description | Opposite to Avoid |
-|----------|-------------|-------------------|
-| Non-Judging | Observing without evaluating | "That is good/bad" |
-| Patience | Things unfold in their own time | Rushing, forcing |
-| Beginner's Mind | Being open, as if for the first time | Assumptions, expert stance |
-| Trust | In one's own experience and intuition | Relying solely on others |
-| Non-Striving | Simply being, without having to achieve | Performance orientation |
-| Acceptance | Seeing things as they are | Fighting against reality |
-| Letting Go | Allowing experiences to pass | Holding on, clinging |
+**Nota:** Este material constituye un apoyo y no sustituye la terapia profesional.
+**Nunca aplicar:** EMDR, Exposición Prolongada (PE), Terapia de Exposición Narrativa (NET).
 
 ---
 
-## 2. Breathing Exercises
+## 1. Actitudes Fundamentales de la Atención Plena (Kabat-Zinn)
 
-### 2.1 Simple Breath Awareness (5 Minutes)
-
-**Goal:** Anchoring in the present moment, calming the nervous system.
-
-**Instructions:**
-1. Assume a comfortable sitting position (chair, floor, cushion)
-2. Close your eyes or softly lower your gaze
-3. Direct attention to the breath
-4. Notice: Where do I feel the breath? (tip of the nose, chest, abdomen)
-5. Thoughts arise? -> Kindly notice, return to the breath
-6. No goal other than: Being with the breath
-
-**Insight:** Thoughts come and go like clouds — you are the sky behind them.
+| Actitud | Descripción | Lo opuesto a evitar |
+|---------|-------------|---------------------|
+| No juzgar | Observar sin evaluar | "Esto es bueno/malo" |
+| Paciencia | Las cosas se desenvuelven a su propio ritmo | Apresurarse, forzar |
+| Mente de principiante | Mantener la apertura, como si fuera la primera vez | Suposiciones, postura de experto |
+| Confianza | En la propia experiencia e intuición | Depender únicamente de los demás |
+| No esforzarse | Simplemente ser, sin la necesidad de lograr algo | Orientación al rendimiento |
+| Aceptación | Ver las cosas tal como son | Luchar contra la realidad |
+| Dejar ir (Soltar) | Permitir que las experiencias pasen | Aferrarse, apegarse |
 
 ---
 
-### 2.2 4-7-8 Breathing Technique (Calming)
+## 2. Ejercicios de Respiración
 
-**Goal:** Activating the parasympathetic nervous system, stress reduction.
+### 2.1 Conciencia Respiratoria Simple (5 Minutos)
 
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 7 seconds
-3. Exhale: 8 seconds (longer than inhaling!)
-4. Repeat: 3-4 cycles
+**Objetivo:** Anclarse en el momento presente, calmar el sistema nervioso.
 
-**When to use:** Before sleep, during acute stress, before difficult situations.
+**Instrucciones:**
+1. Adopte una posición sentada cómoda (silla, suelo, cojín)
+2. Cierre los ojos o baje suavemente la mirada
+3. Dirija la atención hacia la respiración
+4. Observe: ¿Dónde siento la respiración? (punta de la nariz, pecho, abdomen)
+5. ¿Surgen pensamientos? -> Note amablemente su presencia y regrese a la respiración
+6. Sin más objetivo que: Estar presente con la respiración
 
----
-
-### 2.3 Box Breathing (Square Breathing)
-
-**Goal:** Balance, concentration (also used by Navy SEALs, elite athletes).
-
-**Procedure:**
-1. Inhale: 4 seconds
-2. Hold: 4 seconds
-3. Exhale: 4 seconds
-4. Hold: 4 seconds
-5. Repeat: 4 cycles
+**Reflexión (Insight):** Los pensamientos van y vienen como nubes — usted es el cielo detrás de ellas.
 
 ---
 
-## 3. Body Scan
+### 2.2 Técnica de Respiración 4-7-8 (Calmante)
 
-**Goal:** Developing body awareness, recognizing and releasing tension.
-**Duration:** 10-30 minutes (shorter version: 5 minutes possible)
+**Objetivo:** Activación del sistema nervioso parasimpático, reducción del estrés.
 
-**Instructions (Short Form):**
+**Procedimiento:**
+1. Inhalar: 4 segundos
+2. Mantener la respiración: 7 segundos
+3. Exhalar: 8 segundos (¡más prolongado que la inhalación!)
+4. Repetir: 3-4 ciclos
+
+**Cuándo utilizar:** Antes de dormir, durante situaciones de estrés agudo, ante eventos difíciles.
+
+---
+
+### 2.3 Respiración en Caja (Respiración Cuadrada / Box Breathing)
+
+**Objetivo:** Equilibrio, concentración (utilizada también por Navy SEALs y atletas de alto rendimiento).
+
+**Procedimiento:**
+1. Inhalar: 4 segundos
+2. Mantener: 4 segundos
+3. Exhalar: 4 segundos
+4. Mantener: 4 segundos
+5. Repetir: 4 ciclos
+
+---
+
+## 3. Escaneo Corporal (Body Scan)
+
+**Objetivo:** Desarrollar la conciencia corporal, reconocer y liberar tensiones.
+**Duración:** 10-30 minutos (versión corta: 5 minutos posible)
+
+**Instrucciones (Forma Corta):**
 
 ```
-1. Lie on your back or sit comfortably
-2. Close eyes, take 3 deep breaths
-3. Bring attention to the soles of your feet
-   - Notice: Temperature, pressure, contact with the ground
-   - No changing, just observing
-4. Slowly move upward:
-   Feet -> Lower legs -> Knees -> Thighs
-   -> Pelvis -> Abdomen -> Chest -> Shoulders
-   -> Arms -> Hands -> Neck -> Face -> Head
-5. At tension: Breathe into the area, release on exhale
-6. At the end: Perceive the entire body as a whole
-7. Gently return to the room
+1. Acuéstese boca arriba o siéntese cómodamente
+2. Cierre los ojos, tome 3 respiraciones profundas
+3. Lleve la atención a las plantas de los pies
+   - Observe: Temperatura, presión, contacto con el suelo
+   - Sin modificar nada, solo observando
+4. Ascienda lentamente:
+   Pies -> Pantorrillas -> Rodillas -> Muslos
+   -> Pelvis -> Abdomen -> Pecho -> Hombros
+   -> Brazos -> Manos -> Cuello -> Rostro -> Cabeza
+5. Ante la tensión: Respire hacia esa zona, libere al exhalar
+6. Al finalizar: Perciba todo el cuerpo como una unidad
+7. Regrese suavemente a la habitación
 ```
 
-**Documentation afterward:**
-- What did I notice?
-- Where was there tension?
-- How do I feel now compared to before?
+**Registro posterior:**
+- ¿Qué observó?
+- ¿Dónde había tensión?
+- ¿Cómo se siente ahora en comparación con el inicio?
 
 ---
 
-## 4. STOP Technique (Mini-Mindfulness in Everyday Life)
+## 4. Técnica STOP (Mini-Mindfulness en la Vida Cotidiana)
 
-**S** — **Stop:** Pause whatever you are doing
-**T** — **Take a breath:** Take one deep breath
-**O** — **Observe:** Observe: thoughts, feelings, body sensations
-**P** — **Proceed:** Consciously continue (or decide what to do next)
+**S** — **Stop (Parar):** Interrumpa lo que esté haciendo
+**T** — **Take a breath (Tomar un respiro):** Tome una respiración profunda
+**O** — **Observe (Observar):** Observe: pensamientos, emociones, sensaciones corporales
+**P** — **Proceed (Proceder):** Continúe conscientemente (o decida el siguiente paso)
 
-**Use:** Brief pause at any time, especially during stress or decisions.
-
----
-
-## 5. Mindfulness in Daily Life (Informal Practice)
-
-No time for formal exercises? Make everyday activities mindful:
-
-| Activity | Mindfulness Focus |
-|----------|------------------|
-| Eating | Consciously notice taste, texture, smell |
-| Walking | Feel each step (ground contact, weight shift) |
-| Brushing teeth | Only do that, nothing else on the side |
-| Doing dishes | Temperature of the water, sounds, movements |
-| Driving | Fully present (no radio, no ruminating) |
-| Waiting | Instead of phone: observe surroundings, breathe |
+**Uso:** Pausa breve en cualquier momento, especialmente durante situaciones de estrés o toma de decisiones.
 
 ---
 
-## 6. MBSR Program Overview (8 Weeks)
+## 5. Atención Plena en la Vida Diaria (Práctica Informal)
 
-The complete MBSR program as reference:
+¿Sin tiempo para ejercicios formales? Convierta las actividades cotidianas en práctica consciente:
 
-| Week | Focus |
-|------|-------|
-| 1 | Autopilot vs. mindfulness |
-| 2 | Dealing with obstacles |
-| 3 | Mindfulness in the body (yoga) |
-| 4 | Recognizing stress reactions |
-| 5 | Stressors and reacting vs. responding |
-| 6 | Mindful communication |
-| 7 | Self-care |
-| 8 | Mindfulness in everyday life |
+| Actividad | Enfoque de Atención Plena |
+|-----------|--------------------------|
+| Comer | Percibir conscientemente el sabor, la textura y el aroma |
+| Caminar | Sentir cada paso (contacto con el suelo, cambio de peso) |
+| Cepillarse los dientes | Enfocarse únicamente en ello, sin distracciones secundarias |
+| Lavar los platos | Temperatura del agua, sonidos, movimientos |
+| Conducir | Estar totalmente presente (sin radio, sin rumiación) |
+| Esperar | En lugar de mirar el teléfono: observar el entorno, respirar |
 
 ---
 
-## Ethics and Boundaries
+## 6. Visión General del Programa MBSR (8 Semanas)
 
-**An AI assistant may:**
-- Explain and guide mindfulness exercises
-- Convey MBSR content (psychoeducation)
-- Guide breathing exercises and body scan
-- Explain and encourage the STOP technique
+Resumen de referencia del programa MBSR completo:
 
-**An AI assistant must NOT:**
-- Replace formal MBSR courses
-- Guide mindfulness for trauma patients without professional supervision
-- Therapeutically address dissociation or flashbacks
-- Make medication-related recommendations
+| Semana | Enfoque |
+|--------|---------|
+| 1 | Piloto automático vs. atención plena |
+| 2 | Manejo de obstáculos |
+| 3 | Atención plena en el cuerpo (yoga) |
+| 4 | Reconocimiento de respuestas al estrés |
+| 5 | Estresores y reaccionar vs. responder |
+| 6 | Comunicación consciente |
+| 7 | Autocuidado |
+| 8 | Atención plena en la vida cotidiana |
 
-**Progress tracking:**
-- Mood before/after exercise (0-10 scale)
-- Track regularity (did I practice today?)
-- Observations: Where was attention hard to maintain?
+---
 
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
+## Ética y Límites
+
+**Un asistente de IA PUEDE:**
+- Explicar y guiar ejercicios de atención plena
+- Transmitir contenidos de MBSR (psicoeducación)
+- Guiar ejercicios de respiración y escaneo corporal
+- Explicar y fomentar la técnica STOP
+
+**Un asistente de IA NO DEBE:**
+- Sustituir cursos formales de MBSR
+- Guiar prácticas de atención plena en pacientes con trauma sin supervisión profesional
+- Abordar terapéuticamente la disociación o los flashbacks
+- Emitir recomendaciones sobre medicación
+
+**Seguimiento del progreso:**
+- Estado de ánimo antes/después del ejercicio (escala de 0 a 10)
+- Registrar la regularidad (¿se practicó hoy?)
+- Observaciones: ¿En qué momentos fue difícil mantener la atención?
+
+**En caso de crisis aguda, remitir SIEMPRE a:**
+- 988 Línea de Crisis y Suicidio (EE. UU.): 988
+- Línea de Texto de Crisis (EE. UU.): Envíe HOME al 741741
+- Teléfono de la Esperanza / Líneas de ayuda locales (ES/LATAM)
 - Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+- Servicios de emergencia: 911 (EE. UU. / LATAM) / 112 (UE)
 
 ---
 
-## References
+## Referencias
 
 - Kabat-Zinn, J. (1990). *Full Catastrophe Living: Using the Wisdom of Your Body and Mind to Face Stress, Pain, and Illness.* Delacorte Press.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Kabat-Zinn (1990), MBSR Program — Not professional therapy*
+*Portado de BACH v3.8.0 | Versión Independiente*
+*Fuentes: Kabat-Zinn (1990), Programa MBSR — No es terapia profesional*

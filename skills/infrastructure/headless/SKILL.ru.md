@@ -2,75 +2,57 @@
 language: ru
 ---
 
-> **Русский** — Официальная полная документация на русском языке для навыка `headless`.
+> **Русский** — Официальная русская версия `headless`.
 
 
+# Headless (Русский)
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+## Обзор и назначение
 
+Используйте этот навык, когда заказчик явно хочет длительного автономного выполнения без постоянных уточняющих вопросов. Этот режим увеличивает выносливость, а не полномочия.
 
-> **English Translation** — Official English version of `headless`.
+Один неисполняемый пункт не должен без необходимости останавливать остальную независимую и безопасную работу.
 
+## Начальные условия
 
-# Headless (English)
+Перед началом зафиксировать:
 
-## Общий обзор и назначение & Purpose
+- конкретную цель и критерий успеха,
+- положительный и отрицательный объем работ (Scope),
+- доступный бюджет времени или расходов,
+- допустимые побочные эффекты,
+- правила проекта, блокировки и внешние изменения,
+- путь или механизм для контрольных точек (Checkpoints),
+- опционально: допустимый локальный профиль принятия решений.
 
-Nutze diesen Skill, wenn die auftraggebende Person ausdrücklich einen längeren,
-autonomen Lauf ohne laufende Rückfragen wünscht. Der Modus erhöht die
-Ausdauer, nicht die Berechtigung.
+При отсутствии профиля принятия решений используются только явные правила и безопасные предположения по умолчанию. Среда выполнения (Runtime) не должна имитировать чью-либо личность.
 
-Ein einzelner nicht ausführbarer Punkt darf unabhängige, sichere Restarbeit nicht
-unnötig stoppen.
+## Уровни решений
 
-## Startbedingungen
-
-Vor Beginn festhalten:
-
-- konkretes Ziel und Erfolgskriterium,
-- positiver und negativer Scope,
-- verfügbare Zeit- oder Kostenbudgets,
-- erlaubte Seiteneffekte,
-- Projektregeln, Sperren und fremde Änderungen,
-- Pfad oder Mechanismus für Checkpoints,
-- optional ein zulässiges lokales Entscheidungsprofil.
-
-Fehlt ein Entscheidungsprofil, werden nur explizite Regeln und sichere
-Standardannahmen verwendet. Die Runtime darf keine Person imitieren.
-
-## Entscheidungsstufen
-
-| Stufe | Grundlage | Verhalten |
+| Уровень | Основание | Поведение |
 |---|---|---|
-| hoch | explizite Regel oder mehrfach bestätigtes Muster | entscheiden; nur bei vorhandener Autorität ausführen |
-| mittel | plausible, reversible Standardentscheidung | entscheiden, Annahme markieren, sicher fortsetzen |
-| niedrig | neuartig, widersprüchlich oder ohne belastbaren Rahmen | nicht raten; zurückstellen oder eskalieren |
+| высокий | явное правило или неоднократно подтвержденный паттерн | принимать решение; выполнять только при наличии полномочий |
+| средний | правдоподобное, обратимое стандартное решение | принимать решение, отмечать предположение, безопасно продолжать |
+| низкий | новый, противоречивый случай или отсутствие надежной базы | не угадывать; откладывать или эскалировать |
 
-Konfidenz in die Entscheidung und Autorität zur Ausführung sind getrennte Achsen.
+Уверенность в решении и полномочия на выполнение являются независимыми осями.
 
-## Laufprotokoll
+## Протокол выполнения
 
-1. **Kontext laden.** Regeln, Zustand, Locks und Ziel prüfen.
-2. **Arbeit zerlegen.** Unabhängige Pakete, Entscheidungspunkte und
-   Freigabepunkte markieren. Werden mindestens zwei unabhängige Worker eingesetzt,
-   das Auftrags- und Evidenzprotokoll des `orchestrator` anwenden, sofern es
-   verfügbar ist.
-3. **Sichere Arbeit ausführen.** Reversible, autorisierte Schritte fortsetzen.
-4. **Entscheidungen behandeln.**
-   - Mit zulässigem Profil: Verfahren des `decision-avatar` verwenden.
-   - Ohne Profil: nur aus expliziten Projekt- oder Auftragsregeln ableiten.
-5. **Nicht ausführbare Punkte parken.** Entscheidung oder Empfehlung festhalten,
-   Ausführung aber nicht vorwegnehmen.
-6. **Unabhängige Arbeit fortsetzen.** Ein geparkter Punkt blockiert nur seine
-   echten Abhängigkeiten.
-7. **Checkpoint schreiben.** Ziel, erledigte Schritte, Evidenz, Annahmen,
-   geparkte Punkte und nächsten Schritt sichern.
-8. **Abschluss prüfen.** Ergebnisse selbst verifizieren und offene Entscheidungen
-   in einer kompakten Liste bündeln.
+1. **Загрузить контекст.** Проверить правила, состояние, блокировки и цель.
+2. **Разбить работу.** Разметить независимые пакеты, точки принятия решений и точки согласования. Если используются как минимум два независимых воркера, применять протокол задач и доказательств `orchestrator`, если он доступен.
+3. **Выполнить безопасную работу.** Продолжить обратимые, авторизованные шаги.
+4. **Обработать решения.**
+   - С допустимым профилем: использовать процедуру `decision-avatar`.
+   - Без профиля: выводить решения исключительно из явных правил проекта или задачи.
+5. **Приостановить (парковать) неисполняемые пункты.** Зафиксировать решение или рекомендацию, но не предвосхищать выполнение.
+6. **Продолжить независимую работу.** Приостановленный пункт блокирует только свои реальные зависимости.
+7. **Записать контрольную точку (Checkpoint).** Сохранить цель, выполненные шаги, доказательства, предположения, приостановленные пункты и следующий шаг.
+8. **Проверить завершение.** Самостоятельно верифицировать результаты и объединить открытые решения в компактный список.
 
-## Entscheidungsprotokoll
+## Протокол решений
 
-Für jede nicht triviale Annahme erfassen:
+Фиксировать для каждого нетривиального предположения:
 
 ```text
 ID:
@@ -82,29 +64,24 @@ Evidenz:
 Rücknahme oder Korrektur:
 ```
 
-Agentenentscheidungen dürfen später nicht als Aussagen der auftraggebenden Person
-behandelt werden.
+Решения агента не должны впоследствии рассматриваться как заявления заказчика.
 
-## Paketlokale Stopps
+## Локальные остановки пакетов
 
-Ein einzelnes Paket stoppen und parken, wenn es neue Autorität, eine irreversible
-externe Aktion, unklare Regeln oder einen Konflikt benötigt. Danach prüfen, welche
-anderen Pakete davon wirklich abhängig sind.
+Остановить и приостановить отдельный пакет, если для него требуются новые полномочия, необратимое внешнее действие, неясные правила или существует конфликт. Затем проверить, какие другие пакеты действительно от него зависят.
 
-## Stop-Bedingungen des Gesamtlaufs
+## Условия остановки всего прогона
 
-Der gesamte Lauf stoppt nur, wenn:
+Весь прогон останавливается только в следующих случаях:
 
-- keine sichere, unabhängige Arbeit mehr möglich ist,
-- eine notwendige Entscheidung niedrige Konfidenz hat,
-- alle verbleibenden Arbeitspakete neue externe oder irreversible Autorität
-  erfordern,
-- eine Sperre, ein Konflikt oder ein Sicherheitsrisiko den gesamten verbleibenden
-  Scope betrifft,
-- das vereinbarte Budget erreicht ist,
-- der aktuelle Zustand nicht mehr zuverlässig gesichert werden kann.
+- больше невозможна никакая безопасная, независимая работа,
+- необходимое решение имеет низкую уверенность,
+- все оставшиеся пакеты работ требуют новых внешних или необратимых полномочий,
+- блокировка, конфликт или риск безопасности затрагивают весь оставшийся объем работ (Scope),
+- достигнут согласованный бюджет,
+- текущее состояние больше невозможно надежно сохранить.
 
-## Abschlussformat
+## Формат отчета о завершении
 
 ```text
 Erreicht:
@@ -115,13 +92,13 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## Журнал изменений
+## История изменений
 
 ### 1.1.0 (2026-07-28)
-- Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.
-- Konfidenz und Ausführungsautorität getrennt.
-- Fortsetzung unabhängiger Arbeit und gebündelte Eskalation präzisiert.
-- Paketlokale Blocker ausdrücklich vom Stopp des Gesamtlaufs getrennt.
+- Удалены личные привязки к аватарам, путям, командам и провайдерам.
+- Разделены уверенность в решении и полномочия на выполнение.
+- Уточнены продолжение независимой работы и сгруппированная эскалация.
+- Пакетно-локальные блокировки явно отделены от остановки всего прогона.
 
 ### 1.0.0 (2026-06-17)
-- Lokale Ausgangsfassung.
+- Исходная локальная версия.
