@@ -39,13 +39,26 @@ def git_changed_files(base: str | None, head: str | None) -> list[str]:
             "checking changed skill paths in the two newest commits."
         )
         completed = subprocess.run(
-            ["git", "log", "-2", "--format=", "--name-only", head, "--", "skills"],
+            ["git", "rev-list", "--max-count=2", head],
             check=True,
             capture_output=True,
             text=True,
             encoding="utf-8",
         )
-        return completed.stdout.splitlines()
+        changed = []
+        for commit in completed.stdout.splitlines():
+            commit_files = subprocess.run(
+                [
+                    "git", "diff-tree", "--root", "--no-commit-id",
+                    "--name-only", "-r", commit, "--", "skills",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            changed.extend(commit_files.stdout.splitlines())
+        return changed
 
     completed = subprocess.run(
         ["git", "diff", "--cached", "--name-only", "--", "skills"],
