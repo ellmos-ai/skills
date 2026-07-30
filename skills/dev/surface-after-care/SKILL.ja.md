@@ -2,6 +2,8 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="surface-after-care banner">
+
 > **日本語** — `surface-after-care` の公式日本語版。
 
 # Surface After Care — 公開済みリポジトリの定期メンテナンス（日本語）

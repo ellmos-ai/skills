@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `bilingual-doc-sync`.
 
 
@@ -12,7 +14,6 @@ language: fr
 > **English Translation** — Official English version of `bilingual-doc-sync`.
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 

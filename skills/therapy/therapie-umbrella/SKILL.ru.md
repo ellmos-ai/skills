@@ -34,6 +34,8 @@ provenance:
   origin_version: "0.1.0"
 ---
 
+<img src="banner.png" width="100%" alt="therapie-umbrella banner">
+
 # Терапия / Консультирование — Зонтичный навык (Umbrella)
 
 ## Назначение

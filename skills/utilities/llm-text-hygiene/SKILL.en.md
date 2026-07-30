@@ -3,9 +3,10 @@ language: en
 description: Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures.
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **English** — Official English version of `llm-text-hygiene`.
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Remove AI residue from finished texts
 

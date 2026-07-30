@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **中文** — `load-project` 官方中文版本。
 
 # 加载项目 (中文)

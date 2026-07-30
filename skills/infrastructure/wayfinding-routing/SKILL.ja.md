@@ -31,6 +31,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **日本語** — `wayfinding-routing` の公式日本語版。
 
 # Wayfinding-Routing (自己定位 & 緊急フォールバックエンジン)

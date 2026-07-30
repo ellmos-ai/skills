@@ -3,9 +3,10 @@ language: es
 description: Eliminar artefactos de IA, residuos de chat, marcadores de posición y patrones de estilo LLM de textos finales, y auditar divulgaciones de IA.
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **Español** — Versión oficial en español de `llm-text-hygiene`.
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Eliminar residuos de IA de textos terminados
 

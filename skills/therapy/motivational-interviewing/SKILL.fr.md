@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="motivational-interviewing banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `motivational-interviewing`.
 
 

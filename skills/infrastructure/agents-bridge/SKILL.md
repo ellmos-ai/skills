@@ -10,6 +10,8 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="agents-bridge banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

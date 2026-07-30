@@ -2,6 +2,8 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="headless banner">
+
 > **日本語** — `headless` の公式日本語版。
 
 

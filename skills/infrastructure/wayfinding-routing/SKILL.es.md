@@ -15,6 +15,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **Español** — Documentación oficial completa traducida al español para la habilidad `wayfinding-routing`.
 
 # Navegación y Orientación (Wayfinding-Routing)

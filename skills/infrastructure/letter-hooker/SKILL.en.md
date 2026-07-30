@@ -33,6 +33,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **English** — Official English version of `letter-hooker`.
 
 # Letter-Hooker (Prompt-Level Preflight & Governance Engine)

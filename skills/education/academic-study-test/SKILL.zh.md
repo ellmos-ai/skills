@@ -16,6 +16,8 @@ language: zh
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-test banner">
+
 # 考试备考与模拟测试指南 (中文版)
 
 本技能支持设计模拟试题、限时自我测试及错题深度诊断分析。

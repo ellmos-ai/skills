@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `guideline-therapies-overview`.
 
 

@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="surface-after-care banner">
+
 > **中文** — `surface-after-care` 官方中文版本。
 
 # Surface After Care — 已发布仓库的定期维护流程 (中文)

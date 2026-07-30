@@ -2,6 +2,8 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="headless banner">
+
 > **Русский** — Официальная русская версия `headless`.
 
 

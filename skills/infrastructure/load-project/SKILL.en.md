@@ -2,6 +2,8 @@
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **English** — Official English version of `load-project`.
 
 # Load Project (English)

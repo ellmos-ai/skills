@@ -33,6 +33,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **Русский** — Официальная русская версия `letter-hooker`.
 
 # Letter-Hooker (Движок предполётной проверки и управления на уровне промпта)

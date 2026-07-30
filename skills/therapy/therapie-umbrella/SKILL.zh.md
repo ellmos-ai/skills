@@ -33,6 +33,8 @@ provenance:
   origin_version: "0.1.0"
 ---
 
+<img src="banner.png" width="100%" alt="therapie-umbrella banner">
+
 # 心理治疗 / 咨询 — 框架 Skill (Umbrella)
 
 ## 目的

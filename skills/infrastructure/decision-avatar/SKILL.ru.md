@@ -2,6 +2,8 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="decision-avatar banner">
+
 > **Русский** — Официальная русская версия `decision-avatar`.
 
 # Decision Avatar

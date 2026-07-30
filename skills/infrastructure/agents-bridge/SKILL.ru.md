@@ -10,6 +10,8 @@ language: ru
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="agents-bridge banner">
+
 > **Русский** — Официальная русская версия `agents-bridge`.
 
 

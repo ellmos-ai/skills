@@ -2,10 +2,11 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **Русский** — Официальная русская версия `bilingual-doc-sync`.
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — Поддержание синхронизации параллельных языковых версий (Русский)
 

@@ -16,6 +16,8 @@ language: en
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-test banner">
+
 # Exam Preparation and Self-Testing (English)
 
 This skill provides frameworks for generating mock exams, timed practice tests, and error analysis.

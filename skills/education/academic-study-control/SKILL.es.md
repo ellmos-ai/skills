@@ -17,6 +17,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
+
 # Gestión Académica de Estudios y Plazos (Español)
 
 Esta habilidad proporciona un marco sistemático para la organización de estudios universitarios, seguimiento de plazos y planificación de exámenes.

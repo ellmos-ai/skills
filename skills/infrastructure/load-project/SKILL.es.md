@@ -2,6 +2,8 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **Español** — Versión oficial en español de `load-project`.
 
 # Cargar Proyecto (Español)

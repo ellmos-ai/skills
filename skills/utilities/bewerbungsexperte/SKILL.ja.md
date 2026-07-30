@@ -18,10 +18,11 @@ dependencies: {'tools': ['cv_generator.py'], 'services': [], 'protocols': [], 'p
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungsexperte/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
+<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
+
 > **日本語** — `bewerbungsexperte` の公式日本語版。
 
 
-<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1 (日本語)
 
 > 次のキャリアステップのための戦略的パートナー。

@@ -2,13 +2,14 @@
 language: de
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
 > **English Translation** — Official English version of `llm-text-hygiene`.
 
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Deutsch)
 

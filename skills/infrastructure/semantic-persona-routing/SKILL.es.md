@@ -37,6 +37,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
+
 > **Español** — Versión oficial en español de `semantic-persona-routing`.
 
 # Enrutamiento Semántico de Personas (Semantic Persona Routing)

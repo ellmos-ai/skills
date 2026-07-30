@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="video-transcriber banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `video-transcriber`.
 
 

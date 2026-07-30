@@ -16,6 +16,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
+
 # アクティブラーニングと知識構造化 (日本語版)
 
 本スキルは、能動的回想、ファインマン・テクニック、および概念マップを用いた深化修得手法を提供します。

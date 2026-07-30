@@ -3,9 +3,10 @@ language: ja
 description: 完成したテキストから AI の痕跡、チャットの残骸、プレースホルダー、LLM のスタイルパターンを削除し、AI 開示声明を監査します。
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **日本語** — `llm-text-hygiene` の公式日本語版。
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — 完成したテキストから AI の残骸を除去する
 

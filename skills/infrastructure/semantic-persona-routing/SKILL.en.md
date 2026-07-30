@@ -37,6 +37,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
+
 > **English** — Official English version of `semantic-persona-routing`.
 
 # Semantic Persona Routing

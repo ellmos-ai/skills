@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="reiseroute banner">
+
 > **日本語** — `reiseroute` の公式日本語版。
 
 

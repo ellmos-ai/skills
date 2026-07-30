@@ -30,6 +30,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 # Staircase-Routing (Up-and-Down / Walking Bass Routing)
 
 The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.

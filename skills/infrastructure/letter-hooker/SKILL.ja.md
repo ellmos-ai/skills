@@ -28,6 +28,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **日本語** — `letter-hooker` の公式日本語版。
 
 # Letter-Hooker（プロンプトレベルのプリフライト & ガバナンスエンジン）

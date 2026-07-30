@@ -16,6 +16,8 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 # Arbeitsblatt- und Übungsmaterial-Generator (Deutsch)
 
 Dieser Skill ermöglicht die automatische Erstellung differenzierter Arbeitsblätter und Lernmaterialien.

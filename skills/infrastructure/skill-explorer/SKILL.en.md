@@ -18,6 +18,8 @@ dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'py
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="skill-explorer banner">
+
 > **English** — Official English version of `skill-explorer`.
 
 

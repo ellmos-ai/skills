@@ -2,6 +2,8 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="surface-after-care banner">
+
 > **Español** — Versión oficial en español de `surface-after-care`.
 
 # Surface After Care — La ronda de mantenimiento regular para un repositorio publicado (Español)

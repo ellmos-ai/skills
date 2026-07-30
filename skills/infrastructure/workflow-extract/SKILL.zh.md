@@ -2,9 +2,10 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **中文** — `workflow-extract` 官方中文版本。
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — 从对话记录与外部自动化构建自动化流程
 

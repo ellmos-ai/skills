@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="location-suche banner">
+
 > **日本語** — `location-suche` の公式日本語版。
 
 

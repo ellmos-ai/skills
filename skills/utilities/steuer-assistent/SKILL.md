@@ -18,6 +18,8 @@ language: de
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="steuer-assistent banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

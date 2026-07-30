@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="skill-explorer banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `skill-explorer`.
 
 

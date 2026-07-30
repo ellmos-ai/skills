@@ -3,9 +3,10 @@ language: zh
 description: 挖掘创意，对照历史记录过滤，并深入探索其中一个直至完成。用于解决复杂问题的 5 阶段工作流（A-E）。
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **中文** — `idea-mining` 官方中文版本。
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — 挖掘创意、过滤、执行到底
 

@@ -3,9 +3,10 @@ language: en
 description: Mine ideas, filter against history, explore one to completion. A 5-phase workflow (A-E) for complex problem solving.
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **English** — Official English version of `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Mine ideas, filter, execute one
 

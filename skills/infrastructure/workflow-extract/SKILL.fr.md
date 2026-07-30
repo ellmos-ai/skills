@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `workflow-extract`.
 
 
@@ -12,7 +14,6 @@ language: fr
 > **English Translation** — Official English version of `workflow-extract`.
 
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (English)
 

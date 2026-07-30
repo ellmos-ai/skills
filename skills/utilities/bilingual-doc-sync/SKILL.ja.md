@@ -2,10 +2,11 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **日本語** — `bilingual-doc-sync` の公式日本語版。
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — 並行する言語バージョンの同期維持 (日本語)
 

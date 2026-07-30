@@ -29,6 +29,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **中文** — `letter-hooker` 官方中文版本。
 
 # Letter-Hooker（Prompt 级预检与治理引擎）

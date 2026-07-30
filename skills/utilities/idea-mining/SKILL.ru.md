@@ -3,9 +3,10 @@ language: ru
 description: Добыча идей, фильтрация по истории и углубленная разработка одной идеи до конца. 5-фазный рабочий процесс (A-E) для решения сложных задач.
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **Русский** — Официальная русская версия `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Добыча идей, фильтрация, реализация одной идеи
 

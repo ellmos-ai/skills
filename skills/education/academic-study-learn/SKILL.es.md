@@ -16,6 +16,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
+
 # Aprendizaje Activo e Integración de Conocimientos (Español)
 
 Esta habilidad proporciona métodos de estudio activo, elaboración de resúmenes estructurados y síntesis conceptual profunda.

@@ -2,6 +2,8 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="rotation-check banner">
+
 > **Español** — Versión oficial en español de `rotation-check`.
 
 

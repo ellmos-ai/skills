@@ -34,6 +34,8 @@ provenance:
   origin_version: "0.1.0"
 ---
 
+<img src="banner.png" width="100%" alt="therapie-umbrella banner">
+
 # 療法／カウンセリング — アンブレラ
 
 ## 目的

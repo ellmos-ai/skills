@@ -2,6 +2,8 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="rotation-check banner">
+
 > **Русский** — Официальная русская версия `rotation-check`.
 
 

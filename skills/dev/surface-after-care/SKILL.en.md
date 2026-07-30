@@ -2,6 +2,8 @@
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="surface-after-care banner">
+
 > **English** — Official English version of `surface-after-care`.
 
 # Surface After Care — Regular Maintenance Routine for Published Repositories (English)

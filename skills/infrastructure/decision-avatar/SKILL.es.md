@@ -2,6 +2,8 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="decision-avatar banner">
+
 > **Español** — Versión oficial en español de `decision-avatar`.
 
 # Decision Avatar

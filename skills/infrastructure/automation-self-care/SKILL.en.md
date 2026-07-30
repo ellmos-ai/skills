@@ -40,6 +40,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="automation-self-care banner">
+
 > **English** — Official English version of `automation-self-care`.
 
 # Automation Self-Care

@@ -19,6 +19,8 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="rbx-dev banner">
+
 > **Русский** — Официальная русская версия `rbx-dev`.
 
 > **Примечание:** Не имеет отношения к Roblox Corporation; «Roblox» является товарным знаком владельцев. «rbx» — общепринятое сокращение в сообществе.

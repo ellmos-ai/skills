@@ -281,26 +281,32 @@ python skill_export.py --skill <name> --format anthropic --language de
 python skill_export.py --skill <name> --format anthropic --language en
 ```
 
-### catalog.py Unterstuetzung
+### Öffentlicher Katalog
 
-`catalog.py list` zeigt die Sprache jedes Skills an.
-`catalog.py list --language en` filtert nach Sprache.
+`python build_public_registry.py` erzeugt den reduzierten öffentlichen
+Discovery-Index `registry/components.json`. Er enthält ausschließlich die für
+Installation und Auffindbarkeit notwendigen Felder. Interne Bewertungen,
+Ownership-, Privacy-, Branch- und Wartungsdaten gehören in die vollständige
+Registry des getrennten No-Push-Repositories.
+
+`python build_skills_map.py` erzeugt daraus die öffentliche `SKILLS-MAP.md`.
 
 ---
 
 ## Banner (visuelle Identitaet)
 
-Jeder Skill erhaelt schrittweise ein eigenes Banner (Rollout seit 2026-07-23,
+Jeder Skill erhält schrittweise ein eigenes Banner (Rollout seit 2026-07-23,
 beginnend mit den Featured-Skills aus dem README):
 
-- **Datei:** `banner.png` flat im Skill-Ordner (Ausnahme Kollektionen: ein Banner
+- **Datei:** `banner.png` direkt im Skill-Ordner (Ausnahme Kollektionen: ein Banner
   pro Kategorie-Ordner, z. B. `skills/therapy/banner.png`).
-- **Format:** 1200x300 px, PNG, moeglichst < 400 KB.
+- **Format:** 1200x300 px, PNG, möglichst < 400 KB.
 - **Design-Familie:** angelehnt an das Repo-Banner (`assets/banner_v2.svg`) --
-  heller Off-White-Grund, Paint-Splatter-Akzente, kraeftiger Farbverlauf im
+  heller Off-White-Grund, Paint-Splatter-Akzente, kräftiger Farbverlauf im
   Skill-Namen, dezentes thematisches Motiv pro Skill.
-- **Einbettung:** erste Zeile nach dem YAML-Frontmatter in `SKILL.md`:
+- **Einbettung:** erste Zeile nach dem YAML-Frontmatter in allen direkt im
+  Skill-Ordner liegenden `SKILL*.md`-Sprachfassungen:
   `<img src="banner.png" width="100%" alt="<skill-name> banner">`
-  (in `SKILL.en.md` optional identisch).
+  Wenn kein `banner.png` existiert, wird keine leere Referenz eingefügt.
 - Banner sind rein dekorativ: keine inhaltstragenden Informationen, damit
   Runtimes, die nur Text lesen, nichts verlieren.

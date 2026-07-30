@@ -17,6 +17,8 @@ language: fr
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
+
 # Gestion Académique des Études et des Délais (Français)
 
 Cette compétence offre une méthodologie pour l'organisation des études supérieures, le suivi des échéances et la préparation aux examens.

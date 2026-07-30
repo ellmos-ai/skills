@@ -3,9 +3,10 @@ language: es
 description: Extraer ideas, filtrar contra el historial y explorar una hasta completarla. Un flujo de trabajo de 5 fases (A-E) para la resolución de problemas complejos.
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **Español** — Versión oficial en español de `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Extraer ideas, filtrar, ejecutar una
 

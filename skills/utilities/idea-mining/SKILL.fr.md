@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `idea-mining`.
 
 
@@ -12,7 +14,6 @@ language: fr
 > **English Translation** — Official English version of `idea-mining`.
 
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 

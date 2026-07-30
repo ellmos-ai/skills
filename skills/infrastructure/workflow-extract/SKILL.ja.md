@@ -2,9 +2,10 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **日本語** — `workflow-extract` の公式日本語版。
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — チャット履歴や外部自動化からの自動化構築
 

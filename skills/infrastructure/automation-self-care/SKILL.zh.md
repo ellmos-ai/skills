@@ -36,6 +36,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="automation-self-care banner">
+
 > **中文** — `automation-self-care` 官方中文版本。
 
 # Automation Self-Care

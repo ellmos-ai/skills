@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="location-suche banner">
+
 > **中文** — `location-suche` 官方中文版本。
 
 

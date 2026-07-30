@@ -16,6 +16,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
+
 # 学術的学習および締切管理 (日本語版)
 
 本スキルは、大学での学習組織化、提出締切の管理、および試験計画を系統的に支援します。

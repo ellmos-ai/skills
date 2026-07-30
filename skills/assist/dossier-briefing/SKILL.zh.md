@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="dossier-briefing banner">
+
 > **中文** — `dossier-briefing` 官方中文版本。
 
 

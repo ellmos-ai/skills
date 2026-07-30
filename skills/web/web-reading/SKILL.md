@@ -20,6 +20,8 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
+<img src="banner.png" width="100%" alt="web-reading banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

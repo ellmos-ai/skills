@@ -20,6 +20,8 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="agent-config-sync banner">
+
 > **English** — Official English version of `agent-config-sync`.
 
 

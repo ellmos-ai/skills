@@ -33,6 +33,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **Español** — Versión oficial en español de `letter-hooker`.
 
 # Letter-Hooker (Motor de Preflight y Gobernanza a Nivel de Prompt)

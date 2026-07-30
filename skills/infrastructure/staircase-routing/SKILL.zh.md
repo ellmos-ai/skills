@@ -29,6 +29,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 > **中文** — `staircase-routing` 官方中文版本。
 
 # Staircase-Routing（上下路由 / Walking Bass 路由）

@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
-ALLOWED_TRACKED_IGNORED = {"registry/components.json"}
+ALLOWED_TRACKED_IGNORED: set[str] = set()
 CONTENT_SCAN_EXCLUSIONS = {
     "testing/privacy_gate.py",
     "testing/skill_tester.py",
@@ -33,6 +33,34 @@ CONTENT_PATTERNS = {
     "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+    "private skill name": re.compile(
+        r"(?i)\b(?:build-your-users-mind|private-workflow|law-checker)\b"
+    ),
+}
+FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
+    "skills/dev/figma",
+    "skills/dev/hyperframes",
+    "skills/dev/hyperframes-animation",
+    "skills/dev/hyperframes-cli",
+    "skills/dev/hyperframes-core",
+    "skills/dev/hyperframes-creative",
+    "skills/dev/hyperframes-keyframes",
+    "skills/dev/hyperframes-registry",
+    "skills/dev/remotion-to-hyperframes",
+    "skills/dev/private-workflow",
+    "skills/utilities/embedded-captions",
+    "skills/utilities/faceless-explainer",
+    "skills/utilities/general-video",
+    "skills/utilities/media-use",
+    "skills/utilities/motion-graphics",
+    "skills/utilities/music-to-video",
+    "skills/utilities/pr-to-video",
+    "skills/utilities/product-launch-video",
+    "skills/utilities/law-checker",
+    "skills/utilities/slideshow",
+    "skills/utilities/private-workflow",
+    "skills/utilities/talking-head-recut",
+    "skills/utilities/build-your-users-mind",
 }
 WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
 POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")
@@ -95,9 +123,14 @@ def content_findings(path: Path) -> list[str]:
 
 def run_gate() -> list[str]:
     errors = []
+    tracked = git_lines("ls-files")
     for path in tracked_ignored_files():
         errors.append(f"tracked although ignored: {path}")
-    for relative in git_lines("ls-files"):
+    for relative in tracked:
+        for forbidden in FORBIDDEN_PUBLIC_SKILL_DIRECTORIES:
+            if relative == forbidden or relative.startswith(f"{forbidden}/"):
+                errors.append(f"{relative}: private or third-party skill directory")
+                break
         pattern = CONTENT_PATTERNS["host-scoped device name"]
         if pattern.search(relative):
             errors.append(f"{relative}: host-scoped device name in tracked path")

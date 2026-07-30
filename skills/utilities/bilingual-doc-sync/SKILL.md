@@ -2,13 +2,14 @@
 language: de
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (Deutsch)
 

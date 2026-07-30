@@ -2,6 +2,8 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **日本語** — `load-project` の公式日本語版。
 
 # プロジェクトのロード (日本語)

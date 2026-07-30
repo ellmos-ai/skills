@@ -17,6 +17,8 @@ language: fr
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 > **French** — Document Officiel en Français.
 
 # Générateur de Fiches d'Exercices (Français)

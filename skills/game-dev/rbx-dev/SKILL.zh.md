@@ -19,6 +19,8 @@ dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'pyt
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="rbx-dev banner">
+
 > **中文** — `rbx-dev` 官方中文版本。
 
 > **注意：** 与 Roblox Corporation 无关；“Roblox”是其所有者的商标。“rbx”是通用的社区简称。

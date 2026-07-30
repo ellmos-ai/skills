@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="reiseroute banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `reiseroute`.
 
 

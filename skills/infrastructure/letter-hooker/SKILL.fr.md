@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kon
 provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
+<img src="banner.png" width="100%" alt="letter-hooker banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `letter-hooker`.
 
 

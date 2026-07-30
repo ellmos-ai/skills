@@ -33,6 +33,9 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
+<img src="banner.png" width="100%" alt="condition banner">
+
 # condition — 目標とプロンプトのための条件言語
 
 ## 基本コンセプト

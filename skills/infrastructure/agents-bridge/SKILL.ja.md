@@ -10,6 +10,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="agents-bridge banner">
+
 > **日本語** — `agents-bridge` の公式日本語版。
 
 

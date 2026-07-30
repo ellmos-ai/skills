@@ -32,6 +32,9 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
+<img src="banner.png" width="100%" alt="condition banner">
+
 # condition — 目标与提示词的条件语言
 
 ## 核心理念

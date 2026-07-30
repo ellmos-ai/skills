@@ -3,9 +3,10 @@ language: ja
 description: アイデアを発掘し、履歴と照合してフィルタリングし、1つのアイデアを完了まで追求します。複雑な問題解決のための5つのフェーズ（A-E）ワークフロー。
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **日本語** — `idea-mining` の公式日本語版。
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — アイデアを発掘し、フィルタリングし、1つを完遂する
 

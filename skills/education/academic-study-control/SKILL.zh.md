@@ -16,6 +16,8 @@ language: zh
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
+
 # 学术学习与截止日期管理指南 (中文版)
 
 本技能为高等教育阶段的学习规划、截止日期追踪及考试备考提供系统化支持。

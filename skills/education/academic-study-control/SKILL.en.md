@@ -17,6 +17,8 @@ language: en
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-control banner">
+
 # Academic Study and Deadline Management (English)
 
 This skill provides systematic support for academic study organisation, deadline tracking, and exam planning.

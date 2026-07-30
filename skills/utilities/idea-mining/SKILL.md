@@ -2,13 +2,14 @@
 language: de
 ---
 
+<img src="banner.png" width="100%" alt="idea-mining banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
 > **English Translation** — Official English version of `idea-mining`.
 
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Ideen schürfen, filtern, eine durchziehen (Deutsch)
 

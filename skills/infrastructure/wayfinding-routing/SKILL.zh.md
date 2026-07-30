@@ -30,6 +30,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **中文** — `wayfinding-routing` 官方中文版本。
 
 # Wayfinding-Routing（自我定向与紧急回退引擎）

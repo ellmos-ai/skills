@@ -16,6 +16,8 @@ language: zh
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 > **Chinese** — 官方中文文档。
 
 # 练习工作单与教学材料生成指南 (中文版)

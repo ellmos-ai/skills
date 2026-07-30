@@ -30,6 +30,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 > **Español** — Versión oficial en español de `staircase-routing`.
 
 # Staircase-Routing (Enrutamiento Up-and-Down / Walking Bass)

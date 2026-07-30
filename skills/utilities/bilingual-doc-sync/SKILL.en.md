@@ -2,13 +2,14 @@
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 > **English Translation** — Official English version of `bilingual-doc-sync`.
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten (English)
 

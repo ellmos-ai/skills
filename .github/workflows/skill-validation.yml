@@ -10,6 +10,12 @@ on:
       - "testing/test_privacy_gate.py"
       - "testing/test_public_private_boundary.py"
       - "testing/changed_skill_gate.py"
+      - "testing/test_changed_skill_gate.py"
+      - "testing/test_public_registry.py"
+      - "build_public_registry.py"
+      - "build_skills_map.py"
+      - "registry/components.json"
+      - "SKILLS-MAP.md"
       - ".gitignore"
       - ".github/workflows/skill-validation.yml"
   push:
@@ -21,6 +27,12 @@ on:
       - "testing/test_privacy_gate.py"
       - "testing/test_public_private_boundary.py"
       - "testing/changed_skill_gate.py"
+      - "testing/test_changed_skill_gate.py"
+      - "testing/test_public_registry.py"
+      - "build_public_registry.py"
+      - "build_skills_map.py"
+      - "registry/components.json"
+      - "SKILLS-MAP.md"
       - ".gitignore"
       - ".github/workflows/skill-validation.yml"
   workflow_dispatch:
@@ -43,7 +55,12 @@ jobs:
           python-version: "3.12"
 
       - name: Test the static gate
-        run: python -m unittest testing/test_skill_tester.py
+        run: python -m unittest testing/test_skill_tester.py testing/test_changed_skill_gate.py testing/test_public_registry.py
+
+      - name: Check public catalog outputs
+        run: |
+          python build_public_registry.py --check
+          python build_skills_map.py --check
 
       - name: Test the privacy gate
         run: python -m unittest testing/test_privacy_gate.py testing/test_public_private_boundary.py

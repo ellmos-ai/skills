@@ -2,9 +2,10 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **Español** — Versión oficial en español de `workflow-extract`.
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — Crear automatizaciones a partir de historiales de chat y automatizaciones externas
 

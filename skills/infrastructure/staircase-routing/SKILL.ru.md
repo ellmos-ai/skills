@@ -30,6 +30,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 > **Русский** — Официальная русская версия `staircase-routing`.
 
 # Staircase-Routing (Up-and-Down / Walking Bass Маршрутизация)

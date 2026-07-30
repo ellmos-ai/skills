@@ -16,6 +16,8 @@ language: zh
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
+
 # 主动学习与知识结构化指南 (中文版)
 
 本技能提供主动回忆、费曼技巧及结构化笔记方法，以促进深度理解与长期记忆。

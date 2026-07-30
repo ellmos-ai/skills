@@ -15,6 +15,8 @@ language: fr
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `wayfinding-routing`.
 
 # Navigation et Orientation (Wayfinding-Routing)

@@ -2,6 +2,8 @@
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="rotation-check banner">
+
 > **English** — Offizielle English-Version / Documento Oficial en English.
 
 

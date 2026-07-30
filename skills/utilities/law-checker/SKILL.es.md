@@ -17,6 +17,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="law-checker banner">
+
 > **Español** — Versión oficial en español de `law-checker`.
 
 # law-checker (Departamento Legal) -- Pointer Skill

@@ -16,6 +16,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 > **Japanese** — 公式日本語ドキュメント。
 
 # ワークシート・教材生成スキル (日本語版)

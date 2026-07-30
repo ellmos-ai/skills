@@ -18,10 +18,11 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="skill-extractor banner">
+
 > **中文** — `skill-extractor` 官方中文版本。
 
 
-<img src="banner.png" width="100%" alt="skill-extractor banner">
 
 # Skill-Extractor — 从对话历史中提取 Skill（中文）
 

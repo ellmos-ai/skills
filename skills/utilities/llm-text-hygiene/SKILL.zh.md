@@ -3,9 +3,10 @@ language: zh
 description: 从最终文本中清除 AI 痕迹、对话残留、占位符和 LLM 风格模式，并审核 AI 披露声明。
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **中文** — `llm-text-hygiene` 官方中文版本。
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — 从成品文本中清除 AI 残留
 

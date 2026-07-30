@@ -18,6 +18,8 @@ dependencies: {'tools': ['rojo'], 'services': ['roblox-studio-mcp'], 'protocols'
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="rbx-studio banner">
+
 > **中文** — `rbx-studio` 官方中文版本。
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.

@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="textproduction banner">
+
 > **中文** — `textproduction` 官方中文版本。
 
 

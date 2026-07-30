@@ -3,9 +3,10 @@ language: ru
 description: Удаление следов ИИ, обрывков чата, заполнителей и стилистических паттернов LLM из готовых текстов, а также аудит раскрытия информации об ИИ.
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **Русский** — Официальная русская версия `llm-text-hygiene`.
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Удаление артефактов ИИ из готовых текстов
 

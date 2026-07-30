@@ -30,6 +30,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
+
 > **日本語** — `semantic-persona-routing` の公式日本語版。
 
 # セマンティックペルソナルーティング (Semantic Persona Routing)

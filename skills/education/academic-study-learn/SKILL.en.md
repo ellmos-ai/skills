@@ -16,6 +16,8 @@ language: en
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
+
 # Active Learning and Knowledge Synthesis (English)
 
 This skill provides methods for active study, conceptual synthesis, and structured knowledge consolidation.

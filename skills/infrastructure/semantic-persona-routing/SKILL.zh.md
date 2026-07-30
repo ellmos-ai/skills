@@ -30,6 +30,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
+
 > **中文** — `semantic-persona-routing` 官方中文版本。
 
 # 语义 Persona 路由 (Semantic Persona Routing)

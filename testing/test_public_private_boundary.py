@@ -72,6 +72,11 @@ class PublicPrivateBoundaryTests(unittest.TestCase):
                     count=1,
                     flags=re.DOTALL,
                 )
+                body = re.sub(
+                    r'(?m)^\s*<img src="banner\.png"[^>]*>\s*$',
+                    "",
+                    body,
+                )
                 with self.subTest(path=path):
                     self.assertIsNone(PRIVATE_BINDINGS.search(body))
 

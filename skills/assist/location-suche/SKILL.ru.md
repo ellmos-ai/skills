@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="location-suche banner">
+
 > **Русский** — Официальная русская версия `location-suche`.
 
 

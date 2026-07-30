@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="headless banner">
+
 > **中文** — `headless` 官方中文版本。
 
 

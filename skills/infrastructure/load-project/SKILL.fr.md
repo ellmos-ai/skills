@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `load-project`.
 
 

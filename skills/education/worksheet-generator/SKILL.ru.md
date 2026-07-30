@@ -16,6 +16,8 @@ language: ru
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 > **Russian** — Официальный документ на русском языке.
 
 # Генератор Рабочих Листов и Упражнений (Русский)

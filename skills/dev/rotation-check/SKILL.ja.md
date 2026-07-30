@@ -2,6 +2,8 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="rotation-check banner">
+
 > **日本語** — `rotation-check` の公式日本語版。
 
 

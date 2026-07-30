@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'p
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="bugsweep banner">
+
 > **English** — Offizielle English-Version / Documento Oficial en English.
 
 

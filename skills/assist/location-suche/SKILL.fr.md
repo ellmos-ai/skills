@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="location-suche banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `location-suche`.
 
 

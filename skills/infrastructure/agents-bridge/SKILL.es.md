@@ -10,6 +10,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="agents-bridge banner">
+
 > **Español** — Versión oficial en español de `agents-bridge`.
 
 

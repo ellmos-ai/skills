@@ -31,6 +31,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **Русский** — Официальная русская версия `wayfinding-routing`.
 
 # Wayfinding-Routing (Движок самоориентации и аварийного восстановления)

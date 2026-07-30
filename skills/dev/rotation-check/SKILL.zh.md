@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="rotation-check banner">
+
 > **中文** — `rotation-check` 官方中文版本。
 
 

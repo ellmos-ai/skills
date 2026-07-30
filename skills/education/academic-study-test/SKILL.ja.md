@@ -16,6 +16,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-test banner">
+
 # 試験対策および模擬評価スキル (日本語版)
 
 本スキルは、模擬試験の作成、タイムトリガー演習、および弱点分析手法を提供します。

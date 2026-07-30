@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="system-onboarding banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `system-onboarding`.
 
 

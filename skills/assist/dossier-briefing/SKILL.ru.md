@@ -16,6 +16,8 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="dossier-briefing banner">
+
 > **Русский** — Официальная русская версия `dossier-briefing`.
 
 

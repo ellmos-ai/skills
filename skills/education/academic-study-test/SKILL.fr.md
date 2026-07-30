@@ -16,6 +16,8 @@ language: fr
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-test banner">
+
 # Préparation aux Examens et Auto-Évaluation (Français)
 
 Cette compétence permet de concevoir des examens blancs et d'analyser les erreurs pour optimiser la révision.

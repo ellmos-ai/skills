@@ -2,6 +2,8 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="decision-avatar banner">
+
 > **中文** — `decision-avatar` 官方中文版本。
 
 # Decision Avatar

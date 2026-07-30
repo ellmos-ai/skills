@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="skill-extractor banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `skill-extractor`.
 
 
@@ -28,7 +30,6 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 > **English Translation** — Official English version of `skill-extractor`.
 
 
-<img src="banner.png" width="100%" alt="skill-extractor banner">
 
 # Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
 

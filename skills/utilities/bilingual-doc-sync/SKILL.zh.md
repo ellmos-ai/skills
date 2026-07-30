@@ -2,10 +2,11 @@
 language: zh
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **中文** — `bilingual-doc-sync` 官方中文版本。
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — 保持并行语言版本同步 (中文)
 

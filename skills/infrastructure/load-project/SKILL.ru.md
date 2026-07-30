@@ -2,6 +2,8 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="load-project banner">
+
 > **Русский** — Официальная русская версия `load-project`.
 
 # Загрузка проекта (Русский)

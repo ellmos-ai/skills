@@ -31,6 +31,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="wayfinding-routing banner">
+
 > **English** — Official English version of `wayfinding-routing`.
 
 # Wayfinding-Routing (Self-Orientation & Emergency Fallback Engine)

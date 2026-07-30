@@ -2,9 +2,10 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **Русский** — Официальная русская версия `workflow-extract`.
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — Создание автоматизаций из историй чатов и сторонних автоматизаций
 

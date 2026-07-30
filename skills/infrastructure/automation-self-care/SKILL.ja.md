@@ -37,6 +37,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="automation-self-care banner">
+
 > **日本語** — `automation-self-care` の公式日本語版。
 
 # Automation Self-Care

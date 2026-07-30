@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `llm-text-hygiene`.
 
 
@@ -12,7 +14,6 @@ language: fr
 > **English Translation** — Official English version of `llm-text-hygiene`.
 
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (English)
 

@@ -16,6 +16,8 @@ language: en
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 # Worksheet and Educational Material Generator (English)
 
 This skill generates differentiated worksheets and practice exercises for educational and therapeutic support.

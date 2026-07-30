@@ -16,6 +16,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-test banner">
+
 # Preparación de Exámenes y Evaluaciones (Español)
 
 Esta habilidad proporciona herramientas para crear simulacros de examen, pruebas de autoevaluación y análisis de errores.

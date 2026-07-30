@@ -16,6 +16,8 @@ language: fr
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="academic-study-learn banner">
+
 # Apprentissage Actif et Structuration des Connaissances (Français)
 
 Cette compétence met en œuvre des méthodes d'apprentissage actif et de synthèse conceptuelle approfondie.

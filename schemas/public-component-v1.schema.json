@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ellmos-ai/skills/schemas/public-component-v1.schema.json",
+  "title": "Ellmos public skill catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "components"],
+  "properties": {
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generated_by", "schema_version", "component_count", "categories"],
+      "properties": {
+        "generated_by": {"const": "build_public_registry.py"},
+        "schema_version": {"const": "public-catalog-v1"},
+        "component_count": {"type": "integer", "minimum": 0},
+        "categories": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "type",
+          "category",
+          "path",
+          "version",
+          "status",
+          "description",
+          "languages"
+        ],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "category": {"type": "string"},
+          "path": {"type": "string", "pattern": "^skills/[^/]+/[^/]+/SKILL\\.md$"},
+          "version": {"type": "string"},
+          "status": {"type": "string"},
+          "description": {"type": "string"},
+          "languages": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"enum": ["de", "en", "es", "ja", "ru", "zh"]}
+          }
+        }
+      }
+    }
+  }
+}

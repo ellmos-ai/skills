@@ -17,6 +17,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="worksheet-generator banner">
+
 > **Spanish** — Documento Oficial en Español.
 
 # Generador de Hojas de Trabajo (Español)

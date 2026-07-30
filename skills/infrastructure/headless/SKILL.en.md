@@ -2,6 +2,8 @@
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="headless banner">
+
 > **English** — Official English version of `headless`.
 
 

@@ -18,6 +18,8 @@ dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'pytho
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
+<img src="banner.png" width="100%" alt="dev banner">
+
 > **日本語** — `dev` の公式日本語版。
 
 

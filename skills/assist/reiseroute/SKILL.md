@@ -17,6 +17,8 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: de
 ---
 
+<img src="banner.png" width="100%" alt="reiseroute banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 

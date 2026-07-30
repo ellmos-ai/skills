@@ -2,10 +2,11 @@
 language: es
 ---
 
+<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
+
 > **Español** — Versión oficial en español de `bilingual-doc-sync`.
 
 
-<img src="banner.png" width="100%" alt="bilingual-doc-sync banner">
 
 # Bilingual-Doc-Sync — Mantener sincronizadas las versiones lingüísticas paralelas (Español)
 

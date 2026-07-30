@@ -2,6 +2,8 @@
 language: ja
 ---
 
+<img src="banner.png" width="100%" alt="textproduction banner">
+
 > **日本語** — `textproduction` の公式日本語版。
 
 

@@ -2,6 +2,8 @@
 language: ru
 ---
 
+<img src="banner.png" width="100%" alt="surface-after-care banner">
+
 > **Русский** — Официальная русская версия `surface-after-care`.
 
 # Surface After Care — регулярное обслуживание опубликованного репозитория (Русский)

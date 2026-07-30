@@ -2,13 +2,14 @@
 language: de
 ---
 
+<img src="banner.png" width="100%" alt="workflow-extract banner">
+
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
 > **English Translation** — Official English version of `workflow-extract`.
 
 
-<img src="banner.png" width="100%" alt="workflow-extract banner">
 
 # Workflow-Extract — aus Chatverläufen und Fremd-Automationen Automatisierungen bauen (Deutsch)
 

@@ -5,8 +5,18 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
-
+description: >
+  Erstellt und verwendet einen anbieterneutralen semantischen Routing-Graphen
+  aus Personas, koordinierenden Rollen, Experten und aktiven Skill-Endpunkten.
+  Verwenden, wenn ein LLM eine Anfrage von einer Leitrolle über einen Experten
+  zu einem Skill routen, aus einem vorhandenen Agentensystem einen portablen
+  Persona-Router extrahieren, eine semantische Domänenkarte mit einer
+  lexikalischen Skill-Registry kombinieren oder fehlende Verbindungen zwischen
+  Rolle und Skill sichtbar machen soll, statt still auf einen Ersatz
+  zurückzufallen. Auslöser sind unter anderem semantisches Persona-Routing,
+  Persona-Umbrella, Rollen-Router, Boss-Agent-Experten-Skill-Routing,
+  Agentenrollen-Export oder die Wiederverwendung von Personas über mehrere
+  LLM-Anbieter hinweg.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,37 +25,49 @@ category: infrastructure
 tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: de
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': None, 'origin_version': None, 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
 
+# Semantisches Persona-Routing
 
-# Semantic Persona Routing (Deutsch)
+Route zuerst nach Fähigkeit und wende Persönlichkeit danach an. Erstelle eine
+portable Karte, die semantische Rollenwahl, deterministische Endpunktsuche und
+anbieterspezifisches Laden voneinander trennt.
 
-Route by capability first and apply personality second. Build a portable map that
-keeps semantic role choice, deterministic endpoint lookup and provider-specific
-loading separate.
-
-## Routing model
+## Routing-Modell
 
 ```text
-request
-  -> semantic domain/coordinator role
-  -> expert capability
-  -> explicit or live-resolved skill endpoint
-  -> optional persona overlay
-  -> provider adapter loads and executes
+Anfrage
+  -> semantische Domäne oder koordinierende Rolle
+  -> Expertenfähigkeit
+  -> ausdrücklich angegebener oder live aufgelöster Skill-Endpunkt
+  -> optionales Persona-Overlay
+  -> Anbieteradapter lädt und führt aus
 ```
 
-A persona controls communication style, priorities and interaction patterns. It
-does not grant tools, permissions or subject-matter capability. A role coordinates;
-an expert narrows the domain; a skill is the executable endpoint.
+Eine Persona steuert Kommunikationsstil, Prioritäten und Interaktionsmuster. Sie
+verleiht keine Werkzeuge, Berechtigungen oder fachlichen Fähigkeiten. Eine Rolle
+koordiniert, ein Experte grenzt die Domäne ein, und ein Skill ist der
+ausführbare Endpunkt.
 
-## Build the routing map
+## Routing-Karte erstellen
 
-Use explicit metadata as authority and lexical similarity only as a candidate:
+Nutze ausdrückliche Metadaten als maßgebliche Quelle und lexikalische Ähnlichkeit
+nur zur Kandidatensuche:
 
 ```bash
 python scripts/build_routing_map.py \
@@ -55,91 +77,99 @@ python scripts/build_routing_map.py \
   --out routing-map.json
 ```
 
-The builder understands common `SKILL.md` fields such as `type`,
-`orchestrates.experts`, `parent_agents`, `skills`, descriptions and provenance.
-It produces a runtime map without requiring the source system to be installed.
-Read [routing-map-schema.md](references/routing-map-schema.md) before extending the
-format.
+Der Builder versteht verbreitete `SKILL.md`-Felder wie `type`,
+`orchestrates.experts`, `parent_agents`, `skills`, Beschreibungen und Herkunft.
+Er erzeugt eine Laufzeitkarte, ohne dass das Quellsystem installiert sein muss.
+Lies [routing-map-schema.md](references/routing-map-schema.md), bevor du das
+Format erweiterst.
 
-Do not automatically promote `candidate_skills`. Confirm them against a live skill
-resolver or source metadata first.
+Stufe `candidate_skills` nicht automatisch hoch. Bestätige sie zuerst über
+einen aktiven Skill-Resolver oder Quellmetadaten.
 
-## Route a request
+## Eine Anfrage routen
 
-### 1. Select the coordinator role semantically
+### 1. Koordinierende Rolle semantisch wählen
 
-Compare the request with role names, descriptions and use cases. Prefer the
-narrowest role that can coordinate the whole request. Keep multiple candidates
-visible when confidence is low; ask the user only when the choice materially
-changes the result.
+Vergleiche die Anfrage mit Rollennamen, Beschreibungen und Anwendungsfällen.
+Bevorzuge die engste Rolle, die die gesamte Anfrage koordinieren kann. Halte bei
+geringer Sicherheit mehrere Kandidaten sichtbar; frage den Nutzer nur, wenn die
+Wahl das Ergebnis wesentlich verändert.
 
-### 2. Select an expert within the role
+### 2. Experten innerhalb der Rolle wählen
 
-Use only experts connected to the chosen coordinator unless the request clearly
-spans roles. A direct expert request may skip the coordinator for execution, but
-retain the coordinator link in the route explanation.
+Nutze nur Experten, die mit der gewählten koordinierenden Rolle verbunden sind,
+sofern die Anfrage nicht eindeutig mehrere Rollen umfasst. Eine direkte
+Expertenanfrage darf die koordinierende Rolle bei der Ausführung überspringen,
+behält deren Verbindung aber in der Routenerklärung bei.
 
-### 3. Resolve executable endpoints
+### 3. Ausführbare Endpunkte auflösen
 
-Resolve in this order:
+Löse in dieser Reihenfolge auf:
 
-1. `endpoint_skills` from explicit source metadata or exact provenance;
-2. a current external skill resolver or local skill finder;
-3. verified `candidate_skills`;
-4. visible `GAP` when no endpoint exists.
+1. `endpoint_skills` aus ausdrücklichen Quellmetadaten oder exakter Herkunft;
+2. einen aktuellen externen Skill-Resolver oder lokalen Skill-Finder;
+3. verifizierte `candidate_skills`;
+4. eine sichtbare `GAP`, wenn kein Endpunkt existiert.
 
-Never route to an expert name as though it were an installed skill. A missing
-endpoint is a porting gap, not permission to fabricate one.
+Route niemals zu einem Expertennamen, als wäre er ein installierter Skill. Ein
+fehlender Endpunkt ist eine Portierungslücke und keine Erlaubnis, einen Endpunkt
+zu erfinden.
 
-Read [endpoint-resolution.md](references/endpoint-resolution.md) when connecting a
-live registry, lexical finder or provider-specific skill loader.
+Lies [endpoint-resolution.md](references/endpoint-resolution.md), wenn du eine
+aktive Registry, einen lexikalischen Finder oder einen anbieterspezifischen
+Skill-Loader anschließt.
 
-### 4. Apply the persona overlay
+### 4. Persona-Overlay anwenden
 
-Choose a persona attached to the selected role or expert. If several personas fit,
-prefer one whose declared limits and style match the task. Apply no persona when
-none is explicitly connected.
+Wähle eine Persona, die der ausgewählten Rolle oder dem Experten zugeordnet ist.
+Wenn mehrere Personas passen, bevorzuge eine, deren erklärte Grenzen und Stil
+zur Aufgabe passen. Wende keine Persona an, wenn keine ausdrücklich verbunden
+ist.
 
-Persona instructions cannot override safety rules, locks, user decisions,
-professional boundaries or tool permissions.
+Persona-Anweisungen dürfen Sicherheitsregeln, Sperren, Nutzerentscheidungen,
+berufliche Grenzen oder Werkzeugberechtigungen nicht überschreiben.
 
-### 5. Load and execute
+### 5. Laden und ausführen
 
-Use the provider's native skill/agent loading mechanism. Load the selected live
-skill instructions before execution. Keep the router lean; execution belongs to
-the worker or current agent with the resolved skills loaded.
+Nutze den nativen Skill- oder Agentenlademechanismus des Anbieters. Lade vor der
+Ausführung die ausgewählten aktiven Skill-Anweisungen. Halte den Router schlank;
+die Ausführung gehört zum Worker oder zum aktuellen Agenten mit den geladenen
+Skills.
 
-## Route receipt
+## Routing-Beleg
 
-Return or record:
+Gib Folgendes zurück oder zeichne es auf:
 
 ```text
-ROLE: <coordinator or direct>
-EXPERT: <expert or n/a>
-SKILLS: <verified live endpoints>
-PERSONA: <overlay or none>
+ROLE: <koordinierende Rolle oder direct>
+EXPERT: <Experte oder n/a>
+SKILLS: <verifizierte aktive Endpunkte>
+PERSONA: <Overlay oder none>
 RESOLUTION: explicit | provenance | live-resolver | verified-candidate | GAP
 CONFIDENCE: high | medium | low
-WHY: <one short reason>
-GAPS: <missing endpoints or stale-map warnings>
+WHY: <ein kurzer Grund>
+GAPS: <fehlende Endpunkte oder Warnungen vor veralteten Karten>
 ```
 
-Rebuild the map when source roles or skill inventory change. A live resolver may
-supersede a stale map for endpoint availability, but it must not silently rewrite
-the semantic role taxonomy.
+Erstelle die Karte neu, wenn sich Quellrollen oder Skill-Bestand ändern. Ein
+aktiver Resolver darf eine veraltete Karte hinsichtlich der
+Endpunktverfügbarkeit überstimmen, aber die semantische Rollentaxonomie nicht
+stillschweigend umschreiben.
 
-## Beispiel & Anwendung
+## Beispiel
 
-Request: "Organize my receipts and prepare the tax-year overview."
+Anfrage: „Ordne meine Belege und bereite die Übersicht für das Steuerjahr vor.“
 
-The router selects an office coordinator, then the tax expert, resolves the
-installed tax skill, and finally applies an explicitly linked meticulous tax
-persona. If the tax expert exists but no portable tax skill is installed, report
-`GAP` and continue only through an explicitly configured fallback.
+Der Router wählt eine Büro-Koordination, danach den Steuerexperten, löst den
+installierten Steuer-Skill auf und wendet schließlich eine ausdrücklich
+verknüpfte, sorgfältige Steuer-Persona an. Existiert der Steuerexperte, aber
+kein portabler Steuer-Skill, meldet er `GAP` und fährt nur über einen
+ausdrücklich konfigurierten Ersatzweg fort.
 
 ## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-28)
 
-- Extracted the provider-neutral role/expert/skill chain from a proven domain
-  router pattern and added portable map generation with visible endpoint gaps.
+- Die anbieterneutrale Rollen-, Experten- und Skill-Kette aus einem bewährten
+  Domänen-Router extrahiert und portable Kartenerstellung mit sichtbaren
+  Endpunktlücken ergänzt.

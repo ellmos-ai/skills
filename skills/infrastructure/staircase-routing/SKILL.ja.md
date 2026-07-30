@@ -29,6 +29,8 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 > **日本語** — `staircase-routing` の公式日本語版。
 
 # Staircase-Routing (Up-and-Down / Walking Bass ルーティング)

@@ -2,6 +2,8 @@
 language: fr
 ---
 
+<img src="banner.png" width="100%" alt="structured-thinking banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `structured-thinking`.
 
 

@@ -37,6 +37,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="semantic-persona-routing banner">
+
 > **Русский** — Официальная русская версия `semantic-persona-routing`.
 
 # Семантическая маршрутизация персонажей (Semantic Persona Routing)

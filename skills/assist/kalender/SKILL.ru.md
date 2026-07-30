@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'option
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
 
+<img src="banner.png" width="100%" alt="kalender banner">
+
 > **Русский** — Официальная русская версия `kalender`.
 
 

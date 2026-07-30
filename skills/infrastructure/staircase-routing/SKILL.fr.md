@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
+<img src="banner.png" width="100%" alt="staircase-routing banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `staircase-routing`.
 
 

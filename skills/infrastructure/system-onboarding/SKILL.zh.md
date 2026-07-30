@@ -31,6 +31,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="system-onboarding banner">
+
 > **中文** — `system-onboarding` 官方中文版本。
 
 # 系统入职集成

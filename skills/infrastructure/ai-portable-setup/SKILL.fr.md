@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': [
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="ai-portable-setup banner">
+
 > **Français** — Documentation officielle complète traduite en français pour la compétence `ai-portable-setup`.
 
 
