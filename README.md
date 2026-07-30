@@ -1,4 +1,4 @@
-<img src="assets/banner_v2.svg" width="100%" alt="ellmos skills Banner">
+<img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb" alt="English"></a>
