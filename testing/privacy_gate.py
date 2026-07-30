@@ -28,8 +28,7 @@ ALLOWED_HOME_SEGMENTS = {
 CONTENT_PATTERNS = {
     "host-scoped device name": re.compile(
         r"\b(?:ASUS|WORKSTATION|DESKTOP|LAPTOP|MACSTUDIO)-"
-        r"[A-Z0-9][A-Z0-9-]*\b",
-        re.IGNORECASE,
+        r"[A-Z0-9][A-Z0-9-]*\b"
     ),
     "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
@@ -98,6 +97,10 @@ def run_gate() -> list[str]:
     errors = []
     for path in tracked_ignored_files():
         errors.append(f"tracked although ignored: {path}")
+    for relative in git_lines("ls-files"):
+        pattern = CONTENT_PATTERNS["host-scoped device name"]
+        if pattern.search(relative):
+            errors.append(f"{relative}: host-scoped device name in tracked path")
     for path in tracked_text_files():
         relative = path.relative_to(REPOSITORY_ROOT).as_posix()
         for finding in content_findings(path):

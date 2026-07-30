@@ -43,6 +43,8 @@ class PrivacyGateTests(unittest.TestCase):
         pattern = privacy_gate.CONTENT_PATTERNS["host-scoped device name"]
         self.assertIsNotNone(pattern.search("WORKSTATION-ABC"))
         self.assertIsNotNone(pattern.search("LAPTOP-123"))
+        self.assertIsNone(pattern.search("desktop-app"))
+        self.assertIsNone(pattern.search("Desktop-Registry-Sync"))
 
 
 if __name__ == "__main__":
