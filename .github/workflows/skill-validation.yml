@@ -1,17 +1,27 @@
-name: Skill frontmatter validation
+name: Skill and privacy validation
 
 on:
   pull_request:
     paths:
-      - "skills/**/SKILL.md"
+      - "skills/**"
       - "testing/skill_tester.py"
       - "testing/test_skill_tester.py"
+      - "testing/privacy_gate.py"
+      - "testing/test_privacy_gate.py"
+      - "testing/test_public_private_boundary.py"
+      - "testing/changed_skill_gate.py"
+      - ".gitignore"
       - ".github/workflows/skill-validation.yml"
   push:
     paths:
-      - "skills/**/SKILL.md"
+      - "skills/**"
       - "testing/skill_tester.py"
       - "testing/test_skill_tester.py"
+      - "testing/privacy_gate.py"
+      - "testing/test_privacy_gate.py"
+      - "testing/test_public_private_boundary.py"
+      - "testing/changed_skill_gate.py"
+      - ".gitignore"
       - ".github/workflows/skill-validation.yml"
   workflow_dispatch:
 
@@ -33,5 +43,14 @@ jobs:
       - name: Test the static gate
         run: python -m unittest testing/test_skill_tester.py
 
+      - name: Test the privacy gate
+        run: python -m unittest testing/test_privacy_gate.py testing/test_public_private_boundary.py
+
+      - name: Validate the public/private boundary
+        run: python testing/privacy_gate.py
+
       - name: Validate tracked skills
-        run: python testing/skill_tester.py batch --type static --ci
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: python testing/changed_skill_gate.py

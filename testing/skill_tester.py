@@ -28,7 +28,7 @@ import re
 import json
 import ast
 import subprocess
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from datetime import datetime
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -373,7 +373,11 @@ def s005_standalone_check(skill_path):
         'BACH API': r'from\s+bach_api\s+import|import\s+bach_api',
         'BACH internal': r'from\s+(tools|core|hub)\.\w+\s+import',
         'BACH DB': r'bach\.db',
-        'User path': r'C:\\Users\\lukas|<USER_HOME>|<USER_HOME>',
+        'User path': (
+            r'C:\\Users\\(?!user(?:name)?\\|<|%|\$)[^\\\s]+'
+            r'|/c/Users/(?!user(?:name)?/|<|\$)[^/\s]+'
+            r'|/home/(?!user(?:name)?/|<|\$)[^/\s]+'
+        ),
         'parent_agent': r'^parent_agent:',
         'expert field': r'^expert:\s+\w',
     }
@@ -709,6 +713,9 @@ def find_tracked_skills():
     )
     skills = []
     for relative_file in completed.stdout.splitlines():
+        parts = PurePosixPath(relative_file).parts
+        if len(parts) != 4:
+            continue
         skill_dir = (repo_root / relative_file).resolve().parent
         if (skill_dir / 'SKILL.md').is_file():
             skills.append(skill_dir)

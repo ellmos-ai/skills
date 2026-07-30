@@ -60,19 +60,31 @@ es sei denn sie sind als optional markiert (Fallback-Logik).
 
 ---
 
-## Typ `assist` -- persoenliche Assistenz-Skills
+## Typ `assist` -- Assistenz-Skills
 
-`type: assist` kennzeichnet persoenliche Assistenz-Skills (Kalender, Medizin-Daten,
-Tageszeitung, Transkription, Voice, ...), die typischerweise lokal-first arbeiten,
-optional mehrere Backends via Presence-Check und/oder `assist/prefs.json` waehlen
-und haeufig personenbezogene Daten beruehren. Eigenes Schema: `schemas/assist-v1.schema.json`
-(analog `agent-v1`/`workflow-v1`/`prompt-v1`, `type: "assist"` const).
+`type: assist` kennzeichnet methodische Assistenz-Skills, etwa für Kalender,
+Notizen, Bestandsübersichten oder Sprachworkflows. Ein öffentlicher Assist-Skill
+muss ohne ein bestimmtes Benutzerkonto, lokales Programm, persönliches Profil
+oder private Datenbank nutzbar sein.
 
-**Privacy-Sonderfall:** Die konkreten `assist`-Skills sind ueber `skills/assist/`
-in `.gitignore` als privat/untracked markiert und werden von `registry-generate`
-NICHT erfasst (Registry bleibt git-tracked-only, Privacy-Gate unveraendert).
-Zur lokalen Qualitaetspruefung kann `versionctl validate --include-untracked`
-auch diese Skills mitpruefen, ohne sie in die Registry aufzunehmen.
+### Verbindliche Public/Private-Trennung
+
+| Ebene | Ablage | Darf öffentlich sein? |
+|---|---|---|
+| Nutzerneutraler Kern | `skills/<kategorie>/<name>/SKILL*.md` und neutrale Assets | Ja |
+| Generischer optionaler Adapter | Öffentlich nur bei dokumentierter, frei verfügbarer Schnittstelle | Nach Prüfung |
+| App-/Host-spezifischer Adapter | Getrenntes privates Repository | Nein |
+| Persönliches Profil oder Vorlage | Getrenntes privates Repository | Nein |
+| Konten, lokale Pfade, Datenbanken und Echtdaten | Außerhalb dieses Repositories | Nein |
+
+Öffentliche Kerne dürfen private Erweiterungen als Konzept erwähnen, aber keine
+Namen persönlicher Profile, absoluten Benutzerpfade, Hostnamen, Kontodaten oder
+private App-Verträge enthalten. Ohne privates Profil müssen sie ausschließlich
+mit den im aktuellen Auftrag bereitgestellten Daten funktionieren.
+
+Für `foerderplaner` gilt dieselbe Trennung: Der öffentliche Skill plant Unterricht
+und Förderung. Allgemeine Berichtserstellung ist ein eigener öffentlicher Kern
+(`report-forge`). Persönliche Förderbericht-Vorlagen und Profile bleiben privat.
 
 ---
 
