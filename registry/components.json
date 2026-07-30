@@ -1,0 +1,2181 @@
+{
+  "summary": {
+    "generated_by": "build_public_registry.py",
+    "schema_version": "public-catalog-v1",
+    "component_count": 120,
+    "categories": {
+      "assist": 20,
+      "dev": 19,
+      "education": 5,
+      "game-dev": 5,
+      "infrastructure": 25,
+      "production": 1,
+      "research": 1,
+      "therapy": 20,
+      "utilities": 23,
+      "web": 1
+    }
+  },
+  "components": [
+    {
+      "id": "assist:assist:buero",
+      "name": "buero",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/buero/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Ordnet Büroaufgaben, Korrespondenz und Fristen ohne Bindung an eine bestimmte Office-App.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "expert:assist:dev",
+      "name": "dev",
+      "type": "expert",
+      "category": "assist",
+      "path": "skills/assist/dev/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:assist:dossier-briefing",
+      "name": "dossier-briefing",
+      "type": "skill",
+      "category": "assist",
+      "path": "skills/assist/dossier-briefing/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:finanz-versicherung",
+      "name": "finanz-versicherung",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/finanz-versicherung/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Strukturiert bereitgestellte Finanz- und Versicherungsunterlagen als neutrale Übersicht und Checkliste.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:formbuilder-reader",
+      "name": "formbuilder-reader",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/formbuilder-reader/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Prüft bereitgestellte Formularbeschreibungen auf Struktur, Validierung, Verständlichkeit und Barrierefreiheit.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:gesundheit",
+      "name": "gesundheit",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/gesundheit/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Ordnet freiwillig bereitgestellte Gesundheitsinformationen und bereitet Fragen für Fachpersonen vor.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:haushalt-manager",
+      "name": "haushalt-manager",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/haushalt-manager/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Plant Haushaltsaufgaben, Routinen und Zuständigkeiten ohne Bindung an eine bestimmte App.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:hauslagerist-reader",
+      "name": "hauslagerist-reader",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/hauslagerist-reader/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Analysiert bereitgestellte Bestandslisten oder Exporte ohne Bindung an ein bestimmtes Lagerprogramm.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:kalender",
+      "name": "kalender",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/kalender/SKILL.md",
+      "version": "0.1.0",
+      "status": "stable",
+      "description": "Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:kontaktbuch",
+      "name": "kontaktbuch",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/kontaktbuch/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Ordnet freiwillig bereitgestellte Kontaktdaten datensparsam und erkennt mögliche Dubletten.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:assist:location-suche",
+      "name": "location-suche",
+      "type": "skill",
+      "category": "assist",
+      "path": "skills/assist/location-suche/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:mediabrain-reader",
+      "name": "mediabrain-reader",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/mediabrain-reader/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Analysiert bereitgestellte Medienlisten und Metadaten unabhängig von einer bestimmten Medien-App.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:medizin-daten",
+      "name": "medizin-daten",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/medizin-daten/SKILL.md",
+      "version": "0.1.0",
+      "status": "stable",
+      "description": "Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:notizblock",
+      "name": "notizblock",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/notizblock/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Erfasst, ordnet und verdichtet bereitgestellte Notizen ohne Bindung an einen Speicherort oder eine Notiz-App.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:assist:reiseroute",
+      "name": "reiseroute",
+      "type": "skill",
+      "category": "assist",
+      "path": "skills/assist/reiseroute/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:rpg",
+      "name": "rpg",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/rpg/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Unterstützt systemneutral bei Abenteuern, Szenen, Figuren und Kampagnenorganisation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:tageszeitung",
+      "name": "tageszeitung",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/tageszeitung/SKILL.md",
+      "version": "0.1.0",
+      "status": "stable",
+      "description": "Creates a personalised daily newspaper from RSS feeds and web sources. Ported from the BACH news system (news.py + newspaper_generator.py). Own SQLite store (no Origin-DB). feedparser optional — XML fallback via stdlib. PDF export via Edge Headless (msedge.exe).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:transkription",
+      "name": "transkription",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/transkription/SKILL.md",
+      "version": "0.1.0",
+      "status": "stable",
+      "description": "Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "assist:assist:voice",
+      "name": "voice",
+      "type": "assist",
+      "category": "assist",
+      "path": "skills/assist/voice/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Plant Sprachaufnahme, Transkription und Sprachausgabe mit optionalen, austauschbaren Werkzeugen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "expert:assist:wetter",
+      "name": "wetter",
+      "type": "expert",
+      "category": "assist",
+      "path": "skills/assist/wetter/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:bilingual-doc-sync",
+      "name": "bilingual-doc-sync",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/bilingual-doc-sync/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:bugfix-protocol",
+      "name": "bugfix-protocol",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/bugfix-protocol/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:bugsweep",
+      "name": "bugsweep",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/bugsweep/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:dev-cycle",
+      "name": "dev-cycle",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/dev-cycle/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "agent:dev:dev-soft-agent",
+      "name": "dev-soft-agent",
+      "type": "agent",
+      "category": "dev",
+      "path": "skills/dev/dev-soft-agent/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:docs-analysis",
+      "name": "docs-analysis",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/docs-analysis/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:full-after-care",
+      "name": "full-after-care",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/full-after-care/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Tiefe, nutzerneutrale Nachpflege veröffentlichter Repositories mit Rechts-Wiedervorlage, projektübergreifenden Verweisen und vollständiger Produktlokalisierung.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:github-repo-care",
+      "name": "github-repo-care",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/github-repo-care/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:load-project",
+      "name": "load-project",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/load-project/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Zu Beginn einer konkreten Projektaufgabe oder bei unklarem Kontext: Ziel auflösen, geltende Regelhierarchie laden, verbindliche Referenzen verfolgen und vor der eigentlichen Arbeit einen evidenzbasierten Lagebericht erstellen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:migrate-rename",
+      "name": "migrate-rename",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/migrate-rename/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:model-strategy",
+      "name": "model-strategy",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/model-strategy/SKILL.md",
+      "version": "2.0.0",
+      "status": "active",
+      "description": "Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:pipeline-optimizer",
+      "name": "pipeline-optimizer",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/pipeline-optimizer/SKILL.md",
+      "version": "1.2.0",
+      "status": "active",
+      "description": "Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as \"pipeline optimizer\" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or \"project-folder optimizer\" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like \"improve pipeline X\", \"optimize the stack\", \"rebuild Y\", \"renovation\", \"pipeline refactoring\", \"clean up project folder\", \"improve folder structure\", \"unify conventions\", \"documentation consolidation\", \"integrate into existing system\", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:dev:plugin-system",
+      "name": "plugin-system",
+      "type": "tool",
+      "category": "dev",
+      "path": "skills/dev/plugin-system/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:dev:project-onboarding",
+      "name": "project-onboarding",
+      "type": "protocol",
+      "category": "dev",
+      "path": "skills/dev/project-onboarding/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:projekt-pipeline-umbrella",
+      "name": "projekt-pipeline-umbrella",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/projekt-pipeline-umbrella/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Meta-/Umbrella-Skill für die Familie „Projekt-/Pipeline-Aufbau & -Umbau\". Kennt alle Skills für Anlegen, Aufnehmen, Umbauen und Analysieren von Projekten und Pipelines und leitet zum passenden weiter. Nutze diesen Skill, wenn unklar ist, ob etwas neu angelegt (Greenfield) oder umgebaut (Bestand) werden soll bzw. ob es um ein einzelnes Projekt oder eine ganze Pipeline geht. Auch auslösen bei „neues Projekt/Pipeline anlegen\", „bestehendes umbauen\", „Projekt aufnehmen\", „Ordnerstruktur renovieren\", „welcher Bootstrapper passt\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:repo-publish-check",
+      "name": "repo-publish-check",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/repo-publish-check/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Nutzerneutrale Prüfung von Repositories vor einer Veröffentlichung oder bei einer erneuten öffentlichen Prüfung. Kontrolliert Privacy, Geheimnisse, Lizenzen, Drittinhalte, Dokumentation und Freigabestatus, ohne die Veröffentlichung selbst vorzunehmen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:rotation-check",
+      "name": "rotation-check",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/rotation-check/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:surface-after-care",
+      "name": "surface-after-care",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/surface-after-care/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:trampelpfadanalyse",
+      "name": "trampelpfadanalyse",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/trampelpfadanalyse/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on \"is the convention even seen\", \"why does no agent follow the rule\", \"make a doc signpost measurably effective\", \"desire-path analysis\", \"trampelpfadanalyse\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:education:academic-study-control",
+      "name": "academic-study-control",
+      "type": "skill",
+      "category": "education",
+      "path": "skills/education/academic-study-control/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Akademisches Studien- und Fristenmanagement mit Quellenprüfung, Datenschutz und realistischer Handlungsplanung.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:education:academic-study-learn",
+      "name": "academic-study-learn",
+      "type": "skill",
+      "category": "education",
+      "path": "skills/education/academic-study-learn/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Aktives Lernen, Erarbeitung von Fachinhalten und strukturierte Erstellung von Synthesen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:education:academic-study-test",
+      "name": "academic-study-test",
+      "type": "skill",
+      "category": "education",
+      "path": "skills/education/academic-study-test/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Prüfungsvorbereitung, Selbsttests, Probeklausuren und systematische Fehleranalyse.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:education:foerderplaner",
+      "name": "foerderplaner",
+      "type": "skill",
+      "category": "education",
+      "path": "skills/education/foerderplaner/SKILL.md",
+      "version": "2.0.0",
+      "status": "stable",
+      "description": "Plant Unterricht, Lernangebote und individuelle Förderung ohne Berichtsgenerator oder persönliche Vorlagen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:education:worksheet-generator",
+      "name": "worksheet-generator",
+      "type": "skill",
+      "category": "education",
+      "path": "skills/education/worksheet-generator/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Erstellung von Arbeitsblättern und Übungsmaterialien für Unterricht und Förderung.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:game-dev:game-design",
+      "name": "game-design",
+      "type": "skill",
+      "category": "game-dev",
+      "path": "skills/game-dev/game-design/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on \"plan a new game\", \"create Game Design Document\", \"which roles do I need for my game\", \"development workflow for a game\", \"who tests the game\", \"structure a game idea\", \"Roblox genre/monetization\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:game-dev:rbx-dev",
+      "name": "rbx-dev",
+      "type": "skill",
+      "category": "game-dev",
+      "path": "skills/game-dev/rbx-dev/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:game-dev:rbx-studio",
+      "name": "rbx-studio",
+      "type": "skill",
+      "category": "game-dev",
+      "path": "skills/game-dev/rbx-studio/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on \"embed an asset from the Store\", \"Studio MCP not working\", \"studios: []\", \"generate material\", \"save scene\", \"is this Roblox asset safe\", \"scripts disappear after Play\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:game-dev:rojo",
+      "name": "rojo",
+      "type": "skill",
+      "category": "game-dev",
+      "path": "skills/game-dev/rojo/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on \"rojo connect not working\", \"scripts end up in the wrong place in Studio\", \"how do I map src/ to Studio\", \"port 34872 in use\", \"ModuleScript vs Script in Rojo\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:game-dev:using-blender",
+      "name": "using-blender",
+      "type": "skill",
+      "category": "game-dev",
+      "path": "skills/game-dev/using-blender/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:agent-config-sync",
+      "name": "agent-config-sync",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/agent-config-sync/SKILL.md",
+      "version": "0.3.0",
+      "status": "active",
+      "description": "Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:agents-bridge",
+      "name": "agents-bridge",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/agents-bridge/SKILL.md",
+      "version": "2.0.0",
+      "status": "active",
+      "description": "Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:infrastructure:ai-portable-setup",
+      "name": "ai-portable-setup",
+      "type": "tool",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/ai-portable-setup/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:automation-self-care",
+      "name": "automation-self-care",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/automation-self-care/SKILL.md",
+      "version": "1.0.1",
+      "status": "active",
+      "description": "Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, requests to recreate the ANTIGRAVITY-style maintenance task family, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, or textbased-desktopapp-automations.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:condition",
+      "name": "condition",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/condition/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie \"erst wenn\", \"sobald\", \"nur falls\", \"nachdem\", \"warte bis\", \"danach\" oder \"vorher nicht\". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:decision-avatar",
+      "name": "decision-avatar",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/decision-avatar/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:full-after-care",
+      "name": "full-after-care",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/full-after-care/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:headless",
+      "name": "headless",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/headless/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:letter-hooker",
+      "name": "letter-hooker",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/letter-hooker/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:load-project",
+      "name": "load-project",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/load-project/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:mcp-config-sync",
+      "name": "mcp-config-sync",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/mcp-config-sync/SKILL.md",
+      "version": "2.0.0",
+      "status": "active",
+      "description": "Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:metacognitive-injectors",
+      "name": "metacognitive-injectors",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/metacognitive-injectors/SKILL.md",
+      "version": "1.4.0",
+      "status": "active",
+      "description": "Metakognitive Injektoren und Selbstgesprächs-Strategien (Self-Talk, Metacognitive Auditing, Evaluator Hooks, Pre-Flight Checklists, State Persistence & Personas). Integriert Aktive Informationssuche (Systemgedächtnis Gardener & USMC), Rehearsal (Aktives Abrufen & Wiedergeben), Baddeleys Arbeitsgedächtnis (State + Hooks), Miyake Exekutivfunktionen sowie CBT/ACT therapeutische Strategien.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:orchestrator",
+      "name": "orchestrator",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/orchestrator/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:rotation-check",
+      "name": "rotation-check",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/rotation-check/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:semantic-persona-routing",
+      "name": "semantic-persona-routing",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/semantic-persona-routing/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:skill-explorer",
+      "name": "skill-explorer",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/skill-explorer/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:skill-extractor",
+      "name": "skill-extractor",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/skill-extractor/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill\", „das sollten wir als Skill festhalten\", „extrahiere Skills aus diesem/alten Chatverläufen\", „diese Arbeitsweise wiederverwendbar machen\", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:skill-family-care",
+      "name": "skill-family-care",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/skill-family-care/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Pflege-Skill, der die Skill-Familien aktuell hält, ohne den vollen skill-explorer-Audit zu fahren. Nutze diesen Skill, wenn ein neuer Skill der richtigen Familie zugeordnet, ein Familien-Header-Router nach einer Familienänderung nachgezogen oder ein verwaister Router entfernt werden soll. Auch auslösen bei „Familien pflegen\", „neuen Skill einer Familie zuordnen\", „Router aktualisieren\", „Familien-Header setzen/entfernen\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:skill-finder",
+      "name": "skill-finder",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/skill-finder/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill zu routen. Aktiviert sich bei „welcher Skill passt\", „gibt es dafür einen Skill\", „skill finden\", oder generell vor Aufgaben, die ein lokaler Skill besser löst als ad-hoc-Arbeit.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:skill-register-care",
+      "name": "skill-register-care",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/skill-register-care/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Pflege-Skill, der das dreiteilige Skill-Register konsistent hält (code-skill-index-Kataloge, Skill-Index, SKILL-MAP Family-/Routing-Map). Nutze diesen Skill für einen Drift-Check zwischen dem realen Skill-Inventar und dem dokumentierten Register: fehlende oder zu viele Einträge melden, Counts korrigieren, Stand-Datum setzen. Auch auslösen bei „Skill-Register pflegen\", „Index aktualisieren\", „Register-Drift prüfen\", „welche Skills fehlen in der Map\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:staircase-routing",
+      "name": "staircase-routing",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/staircase-routing/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:surface-after-care",
+      "name": "surface-after-care",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/surface-after-care/SKILL.md",
+      "version": "1.6.0",
+      "status": "active",
+      "description": "Regelmäßiger Pflegedurchlauf für ein bereits veröffentlichtes GitHub-Repository (Stufe 1, günstig und oft wiederholbar): zuerst alle Distributionsflächen des Projekts ermitteln (npm, PyPI, Registries, Marketplaces, Stores, Website) und Änderungen später dorthin spiegeln, dann Topics setzen, Privacy-Gate, Dokumente auf Veröffentlichungsabsicht prüfen und interne Planungsdateien nachträglich ignorieren, Banner ergänzen, Aussagen im README gegen den echten Code-Stand abgleichen, Darstellung verbessern, Sprachfassungen der README vervollständigen, Sichtbarkeitsmaßnahmen umsetzen, Eintrag auf der Organisationsseite prüfen sowie offene Issues und Pull Requests abarbeiten. Nutze diesen Skill, wenn ein bestehendes Repo gepflegt, aufgeräumt, aktualisiert, aufgehübscht oder \"mal wieder durchgesehen\" werden soll, wenn ein Repo veraltet oder unaufgeräumt wirkt, bei Formulierungen wie \"Repo-Pflege\", \"after care\", \"Nachpflege\", \"Repo auf Stand bringen\", \"aufräumen und pushen\" oder bei rotierenden Qualitätsrunden über mehrere Repos. Für die tiefe Runde inkl. Rechtscheck und orga-übergreifenden Querverweisen stattdessen full-after-care nutzen; für die Erstveröffentlichung github-repo-care.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:system-onboarding",
+      "name": "system-onboarding",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/system-onboarding/SKILL.md",
+      "version": "1.2.0",
+      "status": "active",
+      "description": "Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:wayfinding-routing",
+      "name": "wayfinding-routing",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/wayfinding-routing/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:workflow-extract",
+      "name": "workflow-extract",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/workflow-extract/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:production:textproduction",
+      "name": "textproduction",
+      "type": "skill",
+      "category": "production",
+      "path": "skills/production/textproduction/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:research:research-agent",
+      "name": "research-agent",
+      "type": "tool",
+      "category": "research",
+      "path": "skills/research/research-agent/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:act-techniques",
+      "name": "act-techniques",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/act-techniques/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:behavioral-activation",
+      "name": "behavioral-activation",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/behavioral-activation/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:cognitive-restructuring",
+      "name": "cognitive-restructuring",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/cognitive-restructuring/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:counseling-basics",
+      "name": "counseling-basics",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/counseling-basics/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:exposure-guidance",
+      "name": "exposure-guidance",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/exposure-guidance/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Graded exposure for anxiety disorders: Fear hierarchy, SUDs scale, exposure planning and guidance. Psychoeducation only, not implementation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:genogram-work",
+      "name": "genogram-work",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/genogram-work/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Genogram work: Recognizing and reflecting on family relationship patterns. Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:guideline-therapies-overview",
+      "name": "guideline-therapies-overview",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/guideline-therapies-overview/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:mindfulness-basics",
+      "name": "mindfulness-basics",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/mindfulness-basics/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:motivational-interviewing",
+      "name": "motivational-interviewing",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/motivational-interviewing/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:pmr-autogenic-training",
+      "name": "pmr-autogenic-training",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/pmr-autogenic-training/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:positive-psychology",
+      "name": "positive-psychology",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/positive-psychology/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:problem-solving-training",
+      "name": "problem-solving-training",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/problem-solving-training/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:psychoeducation",
+      "name": "psychoeducation",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/psychoeducation/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:schema-therapy",
+      "name": "schema-therapy",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/schema-therapy/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:solution-focused-therapy",
+      "name": "solution-focused-therapy",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/solution-focused-therapy/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:stabilization-techniques",
+      "name": "stabilization-techniques",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/stabilization-techniques/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:systemic-questioning",
+      "name": "systemic-questioning",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/systemic-questioning/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:systemisch-loesungsfokussiert",
+      "name": "systemisch-loesungsfokussiert",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/systemisch-loesungsfokussiert/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:therapie-umbrella",
+      "name": "therapie-umbrella",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/therapie-umbrella/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Meta-/Umbrella-Skill für die Familie „Therapie / Beratung\". Kennt alle therapeutischen Skills (Stabilisierung, Methoden-Überblick, Gesprächsführung + deregistrierte Spezialverfahren) und leitet zum passenden weiter. Nutze diesen Skill, wenn unklar ist, welcher Therapie-/Beratungs-Skill passt, ein Überblick über die verfügbaren Verfahren gebraucht wird, oder eine Beratungs-/Krisensituation zuerst eingeordnet werden muss. Auch auslösen bei „welche Therapiemethode passt\", „Beratung strukturieren\", „Krise — was tun\", „therapeutisches Vorgehen wählen\".",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:therapy:trauma-psychoeducation",
+      "name": "trauma-psychoeducation",
+      "type": "skill",
+      "category": "therapy",
+      "path": "skills/therapy/trauma-psychoeducation/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:batch-file-ops",
+      "name": "batch-file-ops",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/batch-file-ops/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "expert:utilities:bewerbungsexperte",
+      "name": "bewerbungsexperte",
+      "type": "expert",
+      "category": "utilities",
+      "path": "skills/utilities/bewerbungsexperte/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:bilingual-doc-sync",
+      "name": "bilingual-doc-sync",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:brainstorm",
+      "name": "brainstorm",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/brainstorm/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:build-your-users-mind",
+      "name": "build-your-users-mind",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/build-your-users-mind/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Points to the public, provider-neutral build-your-users-mind module: a privacy-aware recipe for building an empirical Theory-of-Mind preference model of an authorized user from that user's own interaction logs. Use when an operator wants to build, validate, bind, or maintain a decision-avatar profile without publishing the personal profile or its evidence.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:condition",
+      "name": "condition",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/condition/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie \"erst wenn\", \"sobald\", \"nur falls\", \"nachdem\", \"warte bis\", \"danach\" oder \"vorher nicht\". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:decide",
+      "name": "decide",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/decide/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:utilities:decision-avatar",
+      "name": "decision-avatar",
+      "type": "protocol",
+      "category": "utilities",
+      "path": "skills/utilities/decision-avatar/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Bei vorhandenem und ausdrücklich autorisiertem lokalem Entscheidungsprofil: wiederkehrende Entscheidungen aus belegtem Feedback vorhersagen, Konfidenz kalibrieren und Vorhersage, Entscheidung und Ausführung strikt trennen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:decision-briefing",
+      "name": "decision-briefing",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/decision-briefing/SKILL.md",
+      "version": "1.0.1",
+      "status": "active",
+      "description": "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:document-chunker",
+      "name": "document-chunker",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/document-chunker/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:encoding-fix",
+      "name": "encoding-fix",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/encoding-fix/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:folder-flattening",
+      "name": "folder-flattening",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/folder-flattening/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:idea-mining",
+      "name": "idea-mining",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/idea-mining/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:law-checker",
+      "name": "law-checker",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/law-checker/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Points to the standalone module law-checker (\"Legal Department\"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:lebende-verfassung",
+      "name": "lebende-verfassung",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/lebende-verfassung/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Neutrale moralisch-rechtliche Prüfinstanz für Politik und Entscheidungen — der lauffähige Prototyp des Forschungsprojekts \"Die Position der Ungeborenen\" (Schattenmodus Stufe 1). Nutze diesen Skill, wann immer eine politische Entscheidung, ein Gesetz(entwurf), eine Reform, ein Haushaltsbeschluss oder eine gesellschaftliche Streitfrage analysiert, geprüft oder begutachtet werden soll — auch bei Formulierungen wie \"prüfe aus Sicht künftiger Generationen\", \"Gesetzespass\", \"was sagt das Grundgesetz dazu\", \"Superposition-Prüfung\", \"Gesetzesgeschichte/Containeranalyse\", \"Folgenabschätzung\", \"analysiere diese Reform\", \"lebende Verfassung\" oder wenn der User eine Politik-Fragestellung mit Bitte um neutrale, mehrstufige Bewertung einbringt. Orchestriert die 5-CORE-Architektur (config.json): moralische Superposition-Instanz, Gesetzbuch-Verkörperungen, zweistufige Folgenabschätzung (retrospektiv/prospektiv mit Evidenzhierarchie), Wissens-Handler mit lokalem Speicher, einstellbarer Workflow.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:llm-text-hygiene",
+      "name": "llm-text-hygiene",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/llm-text-hygiene/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:nulcleaner",
+      "name": "nulcleaner",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/nulcleaner/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:privat-mail-writer",
+      "name": "privat-mail-writer",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/privat-mail-writer/SKILL.md",
+      "version": "0.2.0",
+      "status": "active",
+      "description": "Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:steuer-assistent",
+      "name": "steuer-assistent",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/steuer-assistent/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:structured-thinking",
+      "name": "structured-thinking",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/structured-thinking/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:think",
+      "name": "think",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/think/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "tool:utilities:video-transcriber",
+      "name": "video-transcriber",
+      "type": "tool",
+      "category": "utilities",
+      "path": "skills/utilities/video-transcriber/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:workflow-extract",
+      "name": "workflow-extract",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/workflow-extract/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Baut aus einem Chatverlauf oder aus bestehenden Automatisierungs-Prompts (z. B. eines anderen Agenten-Systems) eine selbstlaufende, user-neutrale Workflow-Automatisierung: einen wiederkehrenden Prompt bzw. Automations-Skill für Cron/Schedule/Loop. Alias: automations-extractor. Nutze diesen Skill bei „mach daraus eine Automatisierung\", „das soll regelmäßig/nächtlich laufen\", „extrahiere Workflows aus diesen Chatverläufen/Automationen\", „Automation aus dieser Session bauen\", oder bei `/workflow-extract`. Ergänzt fehlende Automations-Bausteine (Rotations-Auswahl, Check-Registry, Idempotenz, Log-Hygiene, Freigabe-Gate, Eskalations-Handoff, Monitor-Meldedisziplin) systematisch. Enthält auch den Fleet-Audit-Modus: bestehende Automations-Flotten auf Silent-Failures, Redundanz, Drift und Lücken prüfen („prüfe meine Automatisierungen/Scheduled Tasks/Cron-Jobs\"). Soll stattdessen ein abrufbarer Skill (Fähigkeit auf Zuruf) entstehen, den Schwester-Skill skill-extractor nutzen.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    },
+    {
+      "id": "protocol:web:web-reading",
+      "name": "web-reading",
+      "type": "protocol",
+      "category": "web",
+      "path": "skills/web/web-reading/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.",
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "zh"
+      ]
+    }
+  ]
+}

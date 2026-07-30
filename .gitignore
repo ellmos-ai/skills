@@ -1,0 +1,121 @@
+# ============================================================
+# .SKILLS .gitignore  (Privacy-Gate aktualisiert 2026-07-30)
+# Quelle der Wahrheit für Publikation ist dieses Repo (ellmos-ai/skills, PUBLIC).
+# Öffentliche Skill-Ordner enthalten ausschließlich nutzerneutrale Kerne.
+# Private Adapter, Profile, Daten und persönliche Vorgaben leben in einem
+# getrennten No-Push-Repository und dürfen hier nicht gespiegelt werden.
+# ============================================================
+
+# ---- Python / Build / OS ----
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.DS_Store
+Thumbs.db
+desktop.ini
+.claude/
+.vscode/
+*.db
+*.sqlite3
+
+# ---- Laufzeit-/Versionierungs-Cache ----
+.cache.json
+*.cache.json
+CACHEDIR.TAG
+v/
+
+# ---- Interne Arbeits-/Steuerdateien (nicht veroeffentlichen) ----
+LOCK*.txt
+TODO.md
+DONE.md
+AUFGABEN.txt
+Plan.txt
+catalog_analysis.txt
+_archive/
+_reports/
+CLAUDE.md
+AGENTS.md
+
+# ---- Internes Wartungs-/Versionierungs-Tooling (nicht veroeffentlichen) ----
+skill_sync.py
+versionctl.py
+catalog.py
+# Der statische CI-Gate ist öffentlich; lokale Profile, Ergebnisse und weitere
+# interne Tests bleiben ignoriert.
+testing/*
+!testing/skill_tester.py
+!testing/test_skill_tester.py
+!testing/privacy_gate.py
+!testing/test_privacy_gate.py
+!testing/test_public_private_boundary.py
+!testing/changed_skill_gate.py
+!testing/test_changed_skill_gate.py
+!testing/test_public_registry.py
+tools/
+# Die öffentliche Registry ist ein minimales Discovery-Format. Vollständige
+# Maintainer-Registries mit Bewertungen und Privacy-Klassifizierungen bleiben
+# im getrennten No-Push-Repository.
+registry/*
+!registry/components.json
+docs/PORTING_CHECKLIST.md
+docs/BRANCH-SYNC.md
+
+# ---- Interne Planungs-/Versionierungs-/Konzept-Dokumente (nicht veroeffentlichen) ----
+UMSETZUNGSPLAN.md
+*VERSIONIERUNG*.md
+WEITERE-VERSIONIERUNGS-RESSOURCEN.md
+
+# ---- Host-spezifische Dateien (nicht veröffentlichen) ----
+*-LOCAL-HOST.md
+*-MACSTUDIO.md
+*-WORKSTATION-*.md
+*-DESKTOP-*.md
+*-LAPTOP-*.md
+
+# ---- Persönliche Präferenzen / Nutzerdaten ----
+skills/assist/prefs.json
+skills/utilities/privat-mail-writer/kontaktprofile.local.json
+skills/utilities/privat-mail-writer/*.private.json
+skills/infrastructure/agent-config-sync/registry.json
+skills/infrastructure/agent-config-sync/cache.json
+skills/**/profiles/private/
+skills/**/private-overlays/
+skills/**/*.private.*
+skills/**/*.local.*
+
+# ============================================================
+# Private / personalisierte Skills
+# Nur vollständig private Skills bleiben hier ausgeschlossen. Die neutralen
+# öffentlichen Kerne von assist/* und education/foerderplaner sind seit
+# 2026-07-30 ausdrücklich freigegeben; ihre privaten Forks bleiben getrennt.
+# ============================================================
+# -- bekannter Privatblock (Audit 2026-06-12/13) --
+skills/dev/swarm-operations/
+skills/dev/pipeline-bootstrapper/
+skills/dev/project-bootstrapper/
+skills/dev/update-cli-docs/
+skills/dev/code-skill-index/
+skills/game-dev/build-assets-with-blender/
+skills/infrastructure/sync-procedure/
+# agents-bridge 2.0.0 is provider-neutral and public. Personal truth profiles
+# stay outside the repository.
+skills/utilities/selbstmanagement/
+# -- Private Steuer- und Konzeptdateien im Assist-Bereich --
+skills/assist/AGENT-LOOP.md
+skills/assist/FLUIDE-SKILLS.md
+skills/dev/bugfix-library-transfer/
+skills/dev/ticket-master/
+skills/utilities/mail-clean-grab/
+skills/utilities/yt-transcriber/
+skills/utilities/video-transcriber/_reports/
+
+# ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
+SKILLS-MAP-PRIVATE.md
