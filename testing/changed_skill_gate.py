@@ -27,6 +27,19 @@ def git_changed_files(base: str | None, head: str | None) -> list[str]:
     if base and head and base != ZERO_SHA:
         completed = subprocess.run(
             ["git", "diff", "--name-only", f"{base}..{head}", "--", "skills"],
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        if completed.returncode == 0:
+            return completed.stdout.splitlines()
+        print(
+            "Base commit is unavailable after a history rewrite; "
+            "checking changed skill paths in the two newest commits."
+        )
+        completed = subprocess.run(
+            ["git", "log", "-2", "--format=", "--name-only", head, "--", "skills"],
             check=True,
             capture_output=True,
             text=True,
