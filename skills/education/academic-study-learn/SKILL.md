@@ -18,7 +18,7 @@ status: active
 
 # Aktives Lernen und Wissensaufbereitung (Deutsch)
 
-Diese Habilidad bietet Methoden zur aktiven Erarbeitung komplexer wissenschaftlicher Inhalte.
+Dieser Skill bietet Methoden zur aktiven Erarbeitung komplexer wissenschaftlicher Inhalte.
 
 ## 1. Übersicht und Ziele
 

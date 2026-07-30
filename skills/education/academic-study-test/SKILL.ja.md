@@ -3,132 +3,37 @@ name: academic-study-test
 version: 1.0.0
 type: skill
 author: Lukas Geiger
-created: 2026-06-20
-updated: 2026-06-20
-description: Use when exam preparation, self-tests, mock exams or simulations, written
-  coursework, or error diagnosis are needed. Provides five modes and a rubric-based
-  assessment system with a strict boundary around live exams.
+created: 2026-03-12
+updated: 2026-07-30
+description: >
+  試験対策、自己評価テスト、模擬試験の作成と分析手法を提供します。
 standalone: true
 anthropic_compatible: true
-bach_compatible: true
-bach_origin: false
 category: education
-tags:
-- exams
-- mock-exam
-- self-test
-- simulation
-- rubric
-- assessment
-- feedback
-- studies
+tags: [academic, test-preparation, mock-exams, self-testing]
+aliases: [academic-study-test, academic-study-test-ja]
 language: ja
 status: active
-dependencies:
-  tools: []
-  services: []
-  protocols: []
-  python: []
-provenance:
-  origin: custom
-  origin_path: None
-  origin_version: None
-  origin_repo: None
-  last_sync_from_origin: None
-  last_sync_to_origin: None
-  local_changes_since_sync: false
-aliases:
-- academic-study-test
-- academic-study-test-ja
 ---
 
-> **Japanese** — 公式日本語ドキュメント.
+# 試験対策および模擬評価スキル (日本語版)
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+本スキルは、模擬試験の作成、タイムトリガー演習、および弱点分析手法を提供します。
 
+## 1. 概要と目的
 
-# Academic Study Test (Deutsch)
+- **模擬問題の作成:** 記述式および選択式問題による総合テスト演習。
+- **誤答傾向分析:** 理解不足やケアレスミスの分類と補正。
+- **時間配分トレーニング:** 制限時間内での解答能力向上。
 
-## 1. 概要と目的 & Zweck
+## 2. 実行ワークフローと手順
 
-Support exam preparation with structured self-tests, realistic simulations,
-and diagnostic feedback. The skill is subject- and institution-neutral and
-can be used with any study materials.
+1. **問題セット作成:** 講義範囲に基づく設問の作成。
+2. **本番形式での解答:** 参考資料なしで制限時間内に解答。
+3. **客観的採点:** 基準に従った正確な自己採点。
+4. **弱点補強:** 誤答分野の優先的再復習。
 
-## Configuration
+## 3. 厳守すべき境界条件とルール
 
-| Placeholder | Meaning |
-|---|---|
-| `<MODULE_PREFIX>` | Abbreviation used in module codes (e.g. MM, MF, MO) |
-| `<ASSIGNMENT_TYPE>` | Type of submission (e.g. essay, portfolio, seminar paper) |
-| `<LMS>` | Learning management system (e.g. ILIAS, Canvas, Stud.IP) |
-
-## Modes
-
-### Mode 1 — Quick Test (5–10 minutes)
-
-- 5 targeted questions on the chosen topic or module.
-- Immediate feedback after each answer.
-- Recommended for daily revision and progress tracking.
-
-### Mode 2 — Exam Block (60–90 minutes)
-
-- Full exam simulation following the time frame and format of the target exam.
-- All questions are answered first, then evaluated together.
-- Assessment using the rubric below, total score, and strengths/gaps profile.
-
-### Mode 3 — Oral Examination
-
-- Simulated examination conversation: open questions, follow-up questions, objections.
-- Feedback on content, argumentation, and communication style.
-- Suitable for Bachelor's/Master's examinations, presentations, and colloquia.
-
-### Mode 4 — `<ASSIGNMENT_TYPE>` Training
-
-- Work through practice tasks in the format of the assignment to be submitted.
-- Quality check on content, structure, source references, and formal requirements.
-- Feedback with concrete suggestions for improvement.
-
-### Mode 5 — Error Diagnosis
-
-- Analysis of errors from previous tests, corrections, or submissions.
-- Identify patterns: conceptual gaps, careless mistakes, misunderstandings.
-- Prioritised revision recommendation.
-
-## Assessment Rubric
-
-| Criterion | 0 points | 1 point | 2 points |
-|---|---|---|---|
-| Factual correctness | Incorrect | Partially correct | Fully correct |
-| Completeness | Essential parts missing | Gaps present | Complete |
-| Justification | No justification | Hinted at | Clearly justified |
-| Technical language | Not used | Partial | Consistently correct |
-| Structure | Unclear | Recognisable | Clear and coherent |
-
-Maximum score: 10 points. Scale: 9–10 = excellent, 7–8 = good,
-5–6 = satisfactory, 3–4 = pass, 0–2 = fail.
-
-## Material Access
-
-- Use local module folders following the pattern `<MODULE_PREFIX><Number>`.
-- For online materials use `<LMS>` or the institutional website.
-- Optional: search institutional emails for assignment briefs or corrections
-  if a mail connector is available.
-
-## Ethics and Limits
-
-This skill is used exclusively for preparation and practice.
-
-**Absolute prohibitions:**
-- No support during live examinations, tests, or `<ASSIGNMENT_TYPE>` submissions
-  that are currently in progress.
-- No formulating of answers that would be submitted without attribution as the
-  student's own work.
-- No circumvention of examination regulations or institutional guidelines.
-
-When in doubt: mark the task as "to be clarified" until clarification is obtained.
-
-## Notes
-
-- For source-based learning and consolidation, use the skill `academic-study-learn`.
-- For semester planning and deadlines, use the skill `academic-study-control`.
+- **厳格な採点基準:** 曖昧な解答に安易な点を与えない。
+- **分析の重視:** 単なる得点確認にとどまらず原因を分析する。

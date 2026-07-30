@@ -35,7 +35,7 @@ Esta habilidad proporciona un marco sistemático para la organización de estudi
 4. **Planificación Inversa:** Calcular bloques de trabajo desde la fecha de entrega incorporando margen de seguridad.
 5. **Resumen de Resultados:** Presentar un cuadro síntesis con tareas y plazos.
 
-## 3. Reglas y Limites Inviolables
+## 3. Reglas y Límites Inviolables
 
 - **Prioridad Normativa:** Prevalece siempre el reglamento oficial de exámenes.
 - **Sin Almacenamiento de Claves:** No guardar credenciales de acceso institucional.

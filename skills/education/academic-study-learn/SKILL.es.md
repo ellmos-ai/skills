@@ -1,82 +1,39 @@
 ---
+name: academic-study-learn
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-07-30
+description: >
+  Técnicas de estudio activo, síntesis de conceptos y estructuración del conocimiento.
+standalone: true
+anthropic_compatible: true
+category: education
+tags: [academic, active-learning, study-techniques, note-taking]
+aliases: [academic-study-learn, academic-study-learn-es]
 language: es
-aliases:
-- ''
-- -es
+status: active
 ---
 
-> **Spanish** — Documento Oficial en Español.
+# Aprendizaje Activo e Integración de Conocimientos (Español)
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+Esta habilidad proporciona métodos de estudio activo, elaboración de resúmenes estructurados y síntesis conceptual profunda.
 
+## 1. Descripción General y Objetivos
 
-# Academic Study Learn (Deutsch)
+- **Repetición Espaciada y Recuerdo Activo:** Estrategias para consolidar la memoria a largo plazo.
+- **Técnica Feynman:** Explicación simplificada de conceptos complejos para identificar vacíos de comprensión.
+- **Toma de Notas Estructurada:** Métodos tipo Cornell, mapas conceptuales y síntesis analíticas.
 
-## 1. Descripción General y Objetivos & Zweck
+## 2. Flujo de Trabajo y Pasos
 
-Support source-based learning with a five-phase learning cycle. The skill is
-institution- and subject-neutral: it works with any study material available
-as a file, text input, or via web access.
+1. **Lectura Analítica:** Extraer las ideas clave y conceptos fundamentales del texto fuente.
+2. **Auto-Explicación:** Formular el contenido con palabras propias sin consultar el material.
+3. **Identificación de Vacíos:** Revisar las áreas donde la explicación fue imprecisa.
+4. **Consolidación:** Crear fichas de estudio o esquemas sintéticos.
 
-## Configuration
+## 3. Límites No Negociables y Reglas
 
-| Placeholder | Meaning |
-|---|---|
-| `<MODULE_PREFIX>` | Abbreviation used in module codes (e.g. MM, MF, MO) |
-| `<LMS>` | Learning management system (e.g. ILIAS, Canvas, Stud.IP) |
-| `<INDEX_FILE>` | Local index file of the study folder (e.g. LLM_INDEX.md) |
-
-## Learning Cycle (5 Phases)
-
-### 1. Clarify the Learning Objective
-
-- What should be possible, understood, or applied after this unit?
-- State the objective in one sentence and review it at the end of the unit.
-
-### 2. Extract Key Ideas (3–7)
-
-- Identify the most important concepts, theories, or procedures from the material.
-- Explain each key idea in 2–4 sentences.
-- Name the connections between the key ideas.
-
-### 3. Build a Glossary
-
-- List technical terms with a brief definition and — where available — a source reference.
-- Only include terms that are relevant to the learning objective.
-
-### 4. Transfer and Application
-
-- Formulate at least one example or application from your own context.
-- Work out the differences between similar concepts.
-- Explicitly name open questions and uncertainties.
-
-### 5. Retrieval Practice (5–10 questions)
-
-- Answer questions without looking at the material.
-- Compare answers with the source material.
-- Note gaps and errors as the basis for the next revision session.
-
-## Sources and Material Access
-
-- Check local module folders following the pattern `<MODULE_PREFIX><Number>`
-  (e.g. `<MODULE_PREFIX>1`, `<MODULE_PREFIX>2`).
-- For online materials (scripts, assignments, reading lists) use `<LMS>` or the
-  official institutional website when a connector or browser access is available.
-- Use `<INDEX_FILE>` as the entry point when a local study folder exists.
-- Optional: search institutional emails for hints about required reading or
-  assignments if a mail connector is available.
-
-## Quality Criteria
-
-- Key ideas are formulated in your own words, not copied verbatim.
-- Retrieval questions cover different cognitive levels: recognition,
-  understanding, application.
-- Open questions and uncertainties are explicitly marked, not omitted.
-- Source references are complete (document, chapter, or page number).
-
-## Notes
-
-- The skill is suitable for any subject and any material type (text, table,
-  code, diagram).
-- For exam preparation and self-tests, use the skill `academic-study-test`.
-- For semester planning and deadlines, use the skill `academic-study-control`.
+- **Comprensión sobre Memorización:** Priorizar la comprensión lógica frente a la memorización mecánica.
+- **Verificación de Fuentes:** Utilizar bibliografía académica validada.

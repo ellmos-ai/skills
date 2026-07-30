@@ -1,82 +1,39 @@
 ---
+name: academic-study-learn
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-07-30
+description: >
+  能動的学習法、概念合成、知識構造化テクニックを提供します。
+standalone: true
+anthropic_compatible: true
+category: education
+tags: [academic, active-learning, study-techniques, note-taking]
+aliases: [academic-study-learn, academic-study-learn-ja]
 language: ja
-aliases:
-- ''
-- -ja
+status: active
 ---
 
-> **Japanese** — 公式日本語ドキュメント.
+# アクティブラーニングと知識構造化 (日本語版)
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+本スキルは、能動的回想、ファインマン・テクニック、および概念マップを用いた深化修得手法を提供します。
 
+## 1. 概要と目的
 
-# Academic Study Learn (Deutsch)
+- **アクティブリコールと間隔反復:** 長期記憶への定着を促す効果的学習法。
+- **ファインマン・テクニック:** 難解概念を平易な言葉で説明し理解の穴を特定。
+- **構造化ノート記述:** コーネル式ノート法および概念構造マップの活用。
 
-## 1. 概要と目的 & Zweck
+## 2. 実行ワークフローと手順
 
-Support source-based learning with a five-phase learning cycle. The skill is
-institution- and subject-neutral: it works with any study material available
-as a file, text input, or via web access.
+1. **分析的読解:** 原典から核心的概念および論点を抽出。
+2. **自主的説明:** 資料を見ずに自分の言葉で内容を再構成・説明。
+3. **知識の欠損補正:** 説明が曖昧な部分を再度テキストで確認。
+4. **要約の作成:** 構造化された復習シートに要点を集約。
 
-## Configuration
+## 3. 厳守すべき境界条件とルール
 
-| Placeholder | Meaning |
-|---|---|
-| `<MODULE_PREFIX>` | Abbreviation used in module codes (e.g. MM, MF, MO) |
-| `<LMS>` | Learning management system (e.g. ILIAS, Canvas, Stud.IP) |
-| `<INDEX_FILE>` | Local index file of the study folder (e.g. LLM_INDEX.md) |
-
-## Learning Cycle (5 Phases)
-
-### 1. Clarify the Learning Objective
-
-- What should be possible, understood, or applied after this unit?
-- State the objective in one sentence and review it at the end of the unit.
-
-### 2. Extract Key Ideas (3–7)
-
-- Identify the most important concepts, theories, or procedures from the material.
-- Explain each key idea in 2–4 sentences.
-- Name the connections between the key ideas.
-
-### 3. Build a Glossary
-
-- List technical terms with a brief definition and — where available — a source reference.
-- Only include terms that are relevant to the learning objective.
-
-### 4. Transfer and Application
-
-- Formulate at least one example or application from your own context.
-- Work out the differences between similar concepts.
-- Explicitly name open questions and uncertainties.
-
-### 5. Retrieval Practice (5–10 questions)
-
-- Answer questions without looking at the material.
-- Compare answers with the source material.
-- Note gaps and errors as the basis for the next revision session.
-
-## Sources and Material Access
-
-- Check local module folders following the pattern `<MODULE_PREFIX><Number>`
-  (e.g. `<MODULE_PREFIX>1`, `<MODULE_PREFIX>2`).
-- For online materials (scripts, assignments, reading lists) use `<LMS>` or the
-  official institutional website when a connector or browser access is available.
-- Use `<INDEX_FILE>` as the entry point when a local study folder exists.
-- Optional: search institutional emails for hints about required reading or
-  assignments if a mail connector is available.
-
-## Quality Criteria
-
-- Key ideas are formulated in your own words, not copied verbatim.
-- Retrieval questions cover different cognitive levels: recognition,
-  understanding, application.
-- Open questions and uncertainties are explicitly marked, not omitted.
-- Source references are complete (document, chapter, or page number).
-
-## Notes
-
-- The skill is suitable for any subject and any material type (text, table,
-  code, diagram).
-- For exam preparation and self-tests, use the skill `academic-study-test`.
-- For semester planning and deadlines, use the skill `academic-study-control`.
+- **丸暗記の回避:** 概念の論理的理解を暗記より優先する。
+- **信頼できる情報源:** 検証された学術文献に基づき作成する。

@@ -19,7 +19,7 @@ status: active
 
 # Akademisches Studien- und Fristenmanagement (Deutsch)
 
-Diese Habilidad bietet eine systematische Unterstützung für die Studienorganisation, Fristenüberwachung und Prüfungsplanung.
+Dieser Skill bietet eine systematische Unterstützung für die Studienorganisation, Fristenüberwachung und Prüfungsplanung.
 
 ## 1. Übersicht und Ziele
 

@@ -18,7 +18,7 @@ status: active
 
 # Prüfungsvorbereitung und Selbsttests (Deutsch)
 
-Diese Habilidad ermöglicht die Erstellung realistischer Übungsaufgaben und die Durchführung objektiver Leistungskontrollen.
+Dieser Skill ermöglicht die Erstellung realistischer Übungsaufgaben und die Durchführung objektiver Leistungskontrollen.
 
 ## 1. Übersicht und Ziele
 

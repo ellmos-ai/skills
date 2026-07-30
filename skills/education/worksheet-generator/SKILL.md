@@ -18,7 +18,7 @@ status: active
 
 # Arbeitsblatt- und Übungsmaterial-Generator (Deutsch)
 
-Diese Habilidad ermöglicht die automatische Erstellung differenzierter Arbeitsblätter und Lernmaterialien.
+Dieser Skill ermöglicht die automatische Erstellung differenzierter Arbeitsblätter und Lernmaterialien.
 
 ## 1. Übersicht und Ziele
 
