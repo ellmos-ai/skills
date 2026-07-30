@@ -34,7 +34,7 @@ CONTENT_PATTERNS = {
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
     "private skill name": re.compile(
-        r"(?i)\b(?:build-your-users-mind|private-workflow|law-checker)\b"
+        r"(?i)\b(?:tom-lm|store-welle-usertest|rechtsabteilung)\b"
     ),
 }
 FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
@@ -47,7 +47,7 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/dev/hyperframes-keyframes",
     "skills/dev/hyperframes-registry",
     "skills/dev/remotion-to-hyperframes",
-    "skills/dev/private-workflow",
+    "skills/dev/store-welle-usertest",
     "skills/utilities/embedded-captions",
     "skills/utilities/faceless-explainer",
     "skills/utilities/general-video",
@@ -56,11 +56,11 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/utilities/music-to-video",
     "skills/utilities/pr-to-video",
     "skills/utilities/product-launch-video",
-    "skills/utilities/law-checker",
+    "skills/utilities/rechtsabteilung",
     "skills/utilities/slideshow",
-    "skills/utilities/private-workflow",
+    "skills/utilities/store-welle-usertest",
     "skills/utilities/talking-head-recut",
-    "skills/utilities/build-your-users-mind",
+    "skills/utilities/tom-lm",
 }
 WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
 POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")

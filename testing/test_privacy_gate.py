@@ -48,13 +48,13 @@ class PrivacyGateTests(unittest.TestCase):
 
     def test_rejects_private_skill_names(self) -> None:
         pattern = privacy_gate.CONTENT_PATTERNS["private skill name"]
-        self.assertIsNotNone(pattern.search("load build-your-users-mind"))
-        self.assertIsNotNone(pattern.search("use /law-checker"))
+        self.assertIsNotNone(pattern.search("load tom-lm"))
+        self.assertIsNotNone(pattern.search("use /rechtsabteilung"))
         self.assertIsNone(pattern.search("use law-checker"))
 
     def test_forbids_private_and_vendor_skill_directories(self) -> None:
         forbidden = privacy_gate.FORBIDDEN_PUBLIC_SKILL_DIRECTORIES
-        self.assertIn("skills/utilities/private-workflow", forbidden)
+        self.assertIn("skills/utilities/store-welle-usertest", forbidden)
         self.assertIn("skills/dev/hyperframes", forbidden)
         self.assertNotIn("skills/utilities/video-transcriber", forbidden)
 
