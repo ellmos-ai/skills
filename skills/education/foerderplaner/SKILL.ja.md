@@ -26,6 +26,8 @@ provenance:
   notes: Public core only; adapters and private profiles are excluded.
 ---
 
+<img src="banner.png" width="100%" alt="foerderplaner banner">
+
 # 授業・学習支援プランナー
 
 ## 目的

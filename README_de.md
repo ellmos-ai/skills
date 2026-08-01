@@ -68,7 +68,7 @@ flowchart TD
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 120 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 385 getrackte Laufzeit-Skills:
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|

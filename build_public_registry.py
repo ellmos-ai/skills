@@ -21,7 +21,7 @@ DEFAULT_OUTPUT = REPOSITORY_ROOT / "registry" / "components.json"
 LANGUAGE_CODES = ("de", "en", "es", "ja", "ru", "zh")
 
 
-SCALAR_FIELDS = ("name", "type", "version", "status", "language")
+SCALAR_FIELDS = ("name", "type", "version", "status", "language", "visibility")
 
 
 def unquote(value: str) -> str:
@@ -96,6 +96,11 @@ def build_registry() -> dict:
 
     for path in sorted(SKILLS_ROOT.glob("*/*/SKILL.md")):
         metadata = read_frontmatter(path)
+        visibility = str(metadata.get("visibility") or "public").strip().lower()
+        if visibility in {"private", "private-only", "private profile", "no-push"}:
+            # Host- oder personengebundene Skills gehoeren nicht in den oeffentlichen
+            # Katalog (siehe SKILLS-MAP-PRIVATE.md).
+            continue
         category = path.parent.parent.name
         name = path.parent.name
         component_type = str(metadata.get("type") or "skill")

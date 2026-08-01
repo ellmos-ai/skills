@@ -68,7 +68,7 @@ flowchart TD
 
 ## Catalog Snapshot
 
-The current public catalog contains 120 tracked runtime skills:
+The current public catalog contains 385 tracked runtime skills:
 
 | Category | Count | Focus |
 |---|---:|---|
