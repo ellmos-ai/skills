@@ -224,6 +224,86 @@ Moment und ist danach weg.
 schlechte Prompts. Wer ihn als *Skill-Erzeugung* behandelt — mit Zweck, Regeln, Grenzen,
 Ausnahmen und Rückgabewerten —, baut gute.
 
+### Warten ist kein Nichtstun, sondern Nichtwissen
+
+Nach dem Absenden hat der Mensch die Kontrolle abgegeben. Was er jetzt braucht, ist nicht
+Geduld, sondern **Information**: *Was passiert gerade? Wo stehen wir?*
+
+Der Agent bekommt das ohnehin — er fragt den Fortschritt ab. **Der Mensch sieht davon
+nichts, solange es niemand übersetzt.** Genau dafür gibt es Fortschrittsbalken,
+mitlaufende Protokolle und Statuszeilen: Sie sind keine Verzierung, sondern die
+Übersetzung eines Datenstroms in etwas, das ein Wartender aushält.
+
+### Die Rückmeldung ist ein Rück-Prompt
+
+Die Erfolgsmeldung ist kein Abschluss, sondern eine **Übergabe zurück**:
+
+> *„Das ist das Ergebnis deines Auftrags."*
+
+Erst damit kann der Mensch bewerten und weiterhandeln. Und genau deshalb muss sie
+vollständig sein: *„Bestellt — aber drei Pizzen statt einer. Gut, dass die Rückrufnummer
+dasteht, ich rufe selbst an."*
+
+**Ohne brauchbare Rückgabe kann niemand weiterverarbeiten.** Eine Meldung, die nur „hat
+geklappt" sagt, hat den Kreis nicht geschlossen.
+
+### Fragen- und Feldanalyse
+
+Für **jedes** Element eines Blueprints — Feld, Knopf, Auswahl, Anzeige — dieselben Fragen:
+
+| | |
+|---|---|
+| **Was ist gewollt, und wozu?** | die Absicht hinter dem Element |
+| **Was passiert beim Absenden?** | sofort verarbeitet, oder erst gespeichert? |
+| **Wo und wann wird der Wert wieder gebraucht?** | die Stelle, an der er wirkt |
+| **Wie lange muss er vorgehalten werden?** | über den Klick hinaus? über den Lauf hinaus? |
+| **Was muss damit geschehen?** | prüfen, mitgeben, anzeigen, verwerfen |
+
+Der Höchstbetrag zum Beispiel wird **nicht sofort** gebraucht. Er wird gespeichert,
+mitgeschleppt und wirkt erst im Gespräch — also braucht es einen Ort, an dem er liegt,
+und eine Stelle, an der er in den Prompt wandert.
+
+### Weichen bestimmen den Frage-Algorithmus
+
+Eine Auswahl ist selten nur ein Wert. Oft ist sie eine **Weiche**, die den ganzen weiteren
+Ablauf umstellt:
+
+| Modus | Erste Frage im Gespräch | Was entfällt | Was hinzukommt |
+|---|---|---|---|
+| **Lieferung** | *„Liefern Sie hierhin?"* — Nein beendet den Anruf sofort | — | Lieferadresse |
+| **Abholung** | entfällt | die Lieferfrage | Abholzeit |
+| **Tisch** | *„Haben Sie offen, und ist um X ein Tisch frei?"* | die ganze Preisprüfung | Personenzahl, Kinder, Sitzwunsch, Zeitraum |
+
+**Die Reihenfolge im Gespräch folgt der Ausschlusskraft, nicht der Neugier.** Wer nicht
+liefert, muss nicht nach dem Essen gefragt werden — die härteste Bedingung kommt zuerst,
+weil sie am schnellsten zum nächsten Kandidaten führt.
+
+Und: **Vieles bleibt über die Weichen hinweg gleich.** Der Höchstbetrag gilt bei Lieferung
+wie Abholung, die Kandidatenliste ebenso. Nur der Fragealgorithmus wechselt.
+
+### Der Kreis
+
+```
+Problem  →  Use Case  →  Wille        „Ich bin auf dem Land und habe Hunger"
+   ↓
+was ich will, wird zu Bedingungen     5 Personen · 19 Uhr · Italiener · nicht der eine
+   ↓
+Bedingungen brauchen Daten            → daraus ergeben sich die FELDER
+   ↓
+Felder + Entscheidungen               → daraus wird der PROMPT (der erzeugte Skill)
+   ↓
+                [ Ausführung jenseits der Kontrollgrenze ]
+   ↓
+Rückgabe empfangen und speichern      → nur, was vorher mitgegeben wurde, kommt zurück
+   ↓
+übersetzen in Sicht- und Hörbares     → MELDUNG an den Menschen
+   ↓
+er bewertet und entscheidet neu       → zurück nach oben
+```
+
+**Der Use Case begründet die Daten, die Daten begründen die Felder.** Wer bei den Feldern
+anfängt, erfindet Formulare. Wer beim Willen anfängt, bekommt sie geschenkt.
+
 ### Zwischen zwei Blueprints steht die Kausalität
 
 Ein Blueprint ist eine **statische Anordnung**. Mehrere hintereinander ergeben noch keinen
