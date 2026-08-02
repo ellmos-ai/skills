@@ -125,6 +125,61 @@ Agent zusätzlich wissen muss — Fachwissen, Grenzen, Fallstricke.
 **Drei Stufen also:** Beschreibung → **Blueprint** → Skill *(und von dort ebenso gut in
 eine gebaute Oberfläche)*.
 
+### Ein leeres Feld ist eine Frage — und die Frage hat einen Zweck
+
+`[ 35 ] €` sieht aus wie eine Zahl. Es ist aber eine **Datenabfrage an einen Menschen**,
+und sie hat einen Grund, der meist ungesagt bleibt:
+
+> **Wir brauchen diesen Höchstbetrag, weil er die Bedingung ist, unter der überhaupt
+> bestellt wird.**
+
+Das Feld trägt also drei Dinge auf einmal: **was** hineingehört, **warum** es gebraucht
+wird, und **wo es später wirkt**. In einer Oberfläche steckt das im Layout und im
+Hilfetext. Im Text muss es hingeschrieben werden — sonst geht es verloren.
+
+**Deshalb gehört unter jedes Blueprint eine Feldlegende:**
+
+| | |
+|---|---|
+| **Frage** | wie ein Mensch danach gefragt würde |
+| **Typ** | Zahl, Text, Auswahl, Liste, geordnete Liste, Datum … |
+| **Zweck** | wofür der Wert später gebraucht wird — *„Abbruchkriterium in der Kaskade"* |
+| **Vorbedingung** | was dasein muss, damit das Feld überhaupt sinnvoll ist |
+| **Nachbedingung** | was gilt, nachdem es gefüllt ist |
+| **Wenn leer** | still akzeptieren · Vorgabe setzen · nachfragen · blockieren |
+| **Wenn falsch** | Meldung, Rückfrage, Korrekturvorschlag |
+
+**Die letzten beiden Zeilen sind die, die man am ehesten vergisst** — und die im Betrieb
+den meisten Ärger machen. *„Preis egal"* ist eine gültige Antwort und muss als solche
+vorgesehen sein, nicht als Fehler.
+
+### Zwischen zwei Blueprints steht die Kausalität
+
+Ein Blueprint ist eine **statische Anordnung**. Mehrere hintereinander ergeben noch keinen
+Ablauf — dazwischen passiert etwas, und **dieses Dazwischen ist die eigentliche Logik**:
+Was geschieht, wenn hier geklickt wird? Welche Prüfung läuft? Was wird gespeichert?
+Was wird ausgelöst?
+
+Drei Wege, diese Zeitebene sichtbar zu machen:
+
+1. **Beschriftung im Bild** — Pfeile und kurze Notizen zwischen den Blueprints
+2. **Vorher/Nachher-Paare** — derselbe Ausschnitt in zwei Zuständen, „vor dem Klick" und
+   „nach dem Klick"
+3. **Verschriftlichung** — Vor- und Nachbedingungen als Text unter dem Bild
+
+Der dritte Weg trägt am weitesten, weil er ausführbar ist. Die ersten beiden helfen dem
+Menschen beim Verstehen.
+
+### Aus den Feldern ergibt sich das Datenmodell
+
+Wer ein Feld „Kontakt hinzufügen" beschreibt, hat damit schon entschieden, dass es
+Adressaten gibt, dass sie gespeichert werden und welche Angaben dazugehören. **Die
+Datentabelle richtet sich nach den Feldern, nicht umgekehrt.**
+
+Deshalb lohnt es sich, die Feldlegende vollständig zu machen, bevor irgendein Schema
+entworfen wird: Jedes Feld mit Typ und Zweck ist eine Spalte, jede wiederholbare Gruppe
+eine Tabelle, jede Beziehung zwischen Feldern ein Verweis.
+
 ## Richtung 1: Aus Worten eine Oberfläche
 
 **Wenn zuerst der Ablauf beschrieben wurde.**
