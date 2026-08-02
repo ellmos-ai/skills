@@ -153,6 +153,77 @@ Hilfetext. Im Text muss es hingeschrieben werden — sonst geht es verloren.
 den meisten Ärger machen. *„Preis egal"* ist eine gültige Antwort und muss als solche
 vorgesehen sein, nicht als Fehler.
 
+### Das Feld ist offen — die Frage schränkt ein
+
+Ein leeres Feld ist **alles und nichts**, wie ein leeres Kontextfenster: eine Einladung,
+irgendetwas hineinzuschreiben. Aber was?
+
+**Eingeschränkt wird nicht durch das Feld, sondern durch das, was darum herum steht** —
+meist durch den verbundenen Text davor, darüber oder daneben:
+
+> *„Wie viel soll es höchstens kosten?"*
+
+Diese Frage schränkt **semantisch und pragmatisch** ein. Das Feld selbst lässt weiterhin
+alles zu — und wenn jemand diese Freiheit nutzt, **verliert es seinen Zweck**. Deshalb
+springen die Feldbedingungen ein: *nur Zahlen*. Nicht, weil „fünfunddreißig" unverständlich
+wäre, sondern weil es schwerer zu verarbeiten und länger zu schreiben ist.
+
+**Daraus folgt die Arbeitsrichtung: Aus der Frage leiten sich die Feldregeln ab, nicht
+umgekehrt.** Wer zuerst den Datentyp festlegt, hat die Frage schon vergessen.
+
+Und die Frage trägt meist auch den **Zweck** — deshalb steht bei Menschen oft ein
+Info-Zeichen daneben:
+
+> *„Wir nehmen kein Angebot an, das über diesem Preis liegt."*
+
+Das ist keine Höflichkeit, sondern die eigentliche Bedeutung des Feldes: **eine Präferenz
+des Nutzers, die später als hartes Gate wirkt.**
+
+### Die Kontrollgrenze — und warum alles mitgegeben werden muss
+
+Aus einem Feld folgt eine Kette:
+
+```
+Feld „Höchstbetrag"
+   → der Wert wird später gebraucht        (Zweck)
+   → für eine Prüfung                       (Gate)
+   → also muss der Gegenwert erhoben werden (neue Frage, an anderer Stelle)
+   → diese Frage stellt niemand von uns     (sie steht im Prompt)
+```
+
+**Und hier verläuft die entscheidende Linie: Mit dem Prompt verlässt es unsere
+Kontrollebene.** Danach gibt es keinen Zugriff mehr — kein Nachfassen, kein Eingreifen,
+keine zweite Chance.
+
+Deshalb muss **alles** mitgegeben werden, was drüben gebraucht wird:
+
+- **der Wert selbst** — 35 €
+- **die Anweisung, den Gegenwert zu erheben** — nach dem Preis fragen
+- **was gilt, wenn er höher ist** — ablehnen, bedanken, freundlich beenden
+- **was gilt, wenn keiner genannt wird** — nicht schätzen, ablehnen
+- **was gilt, wenn das Gegenüber nicht mit einer Maschine sprechen will** — um einen
+  persönlichen Rückruf bitten und die Nummer als Wert zurückgeben
+
+Der letzte Punkt zeigt die Richtung, in die man beim Entwerfen am seltensten denkt:
+**Auch der Ausnahmefall muss einen Wert zurückliefern**, sonst kommt beim Menschen nichts
+an außer „hat nicht geklappt".
+
+### Der Prompt ist ein erzeugter Skill
+
+Damit ist klar, was ein Prompt eigentlich ist:
+
+> **Ein Prompt ist ein Skill, den die Oberfläche gerade erst zusammengebaut hat** — aus
+> den Entscheidungen, Klicks und Werten dieses einen Laufs. Personalisiert, auf den Zweck
+> zugeschnitten, und gezwungen, alles Gewollte **in Sprache** auszudrücken.
+
+Ein fest geschriebener Skill sagt, wie man es *immer* macht. Ein Prompt sagt, wie es
+*diesmal* laufen soll. Beide sind dieselbe Form — der eine bleibt, der andere entsteht im
+Moment und ist danach weg.
+
+**Praktisch heißt das:** Wer den Prompt-Aufbau als Textbaustein-Bastelei behandelt, baut
+schlechte Prompts. Wer ihn als *Skill-Erzeugung* behandelt — mit Zweck, Regeln, Grenzen,
+Ausnahmen und Rückgabewerten —, baut gute.
+
 ### Zwischen zwei Blueprints steht die Kausalität
 
 Ein Blueprint ist eine **statische Anordnung**. Mehrere hintereinander ergeben noch keinen
