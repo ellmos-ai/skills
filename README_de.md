@@ -16,6 +16,9 @@
 > Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Pytest: 86 passed](https://img.shields.io/badge/Pytest-86%20bestanden-success.svg)](testing/)
+[![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
+[![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Skills: 120 getrackt](https://img.shields.io/badge/Skills-120%20getrackt-brightgreen.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 

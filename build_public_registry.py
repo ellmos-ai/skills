@@ -95,6 +95,8 @@ def build_registry() -> dict:
     category_counts: Counter[str] = Counter()
 
     for path in sorted(SKILLS_ROOT.glob("*/*/SKILL.md")):
+        if path.parent.parent.name.startswith("_"):
+            continue
         metadata = read_frontmatter(path)
         visibility = str(metadata.get("visibility") or "public").strip().lower()
         if visibility in {"private", "private-only", "private profile", "no-push"}:

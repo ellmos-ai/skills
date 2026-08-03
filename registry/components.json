@@ -2,17 +2,17 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 135,
+    "component_count": 115,
     "categories": {
       "assist": 20,
-      "dev": 26,
+      "dev": 16,
       "education": 5,
-      "game-dev": 6,
-      "infrastructure": 28,
+      "game-dev": 5,
+      "infrastructure": 23,
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "utilities": 27,
+      "utilities": 23,
       "web": 1
     }
   },
@@ -396,24 +396,6 @@
       ]
     },
     {
-      "id": "skill:dev:bugfix-library-transfer",
-      "name": "bugfix-library-transfer",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/bugfix-library-transfer/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Wissenstransfer von Bugs und Fixes zwischen Softwareprojekten über eine kuratierte Bug-Bibliothek. Sammelt Erkenntnisse aus /bugsweep-Läufen in einer BUG-LIBRARY.md, abstrahiert die Fix-Patterns und wendet sie systematisch auf andere Projekte an — anstatt jeden Bug-Typ in jedem Projekt einzeln neu zu entdecken.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "protocol:dev:bugfix-protocol",
       "name": "bugfix-protocol",
       "type": "protocol",
@@ -440,24 +422,6 @@
       "version": "1.1.0",
       "status": "active",
       "description": "Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:dev:code-skill-index",
-      "name": "code-skill-index",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/code-skill-index/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Index aller lokalen User-Skills in ~/.claude/skills/. Aktiviert sich bei \"welche Skills habe ich\", \"Skill-Liste\", \"Skill-Übersicht\", oder wenn kein registrierter Skill direkt passt. Enthält Kataloge nach Kategorie (Therapie, Dev, Utilities, BACH) mit Routing-Hinweisen zu deregistrierten Spezial-Skills.",
       "languages": [
         "de",
         "en",
@@ -512,24 +476,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:dev:full-after-care",
-      "name": "full-after-care",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/full-after-care/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Tiefe, nutzerneutrale Nachpflege veröffentlichter Repositories mit Rechts-Wiedervorlage, projektübergreifenden Verweisen und vollständiger Produktlokalisierung.",
       "languages": [
         "de",
         "en",
@@ -612,24 +558,6 @@
       ]
     },
     {
-      "id": "skill:dev:pipeline-bootstrapper",
-      "name": "pipeline-bootstrapper",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/pipeline-bootstrapper/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "<img src=\"banner.png\" width=\"100%\" alt=\"pipeline-bootstrapper banner\">",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "protocol:dev:pipeline-optimizer",
       "name": "pipeline-optimizer",
       "type": "protocol",
@@ -656,24 +584,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "protocol:dev:project-bootstrapper",
-      "name": "project-bootstrapper",
-      "type": "protocol",
-      "category": "dev",
-      "path": "skills/dev/project-bootstrapper/SKILL.md",
-      "version": "1.0.1",
-      "status": "active",
-      "description": "Strukturiertes Verfahren zum Anlegen eines NEUEN Projektes innerhalb einer bestehenden Pipeline (.SOFTWARE, .RESEARCH, .ROBLOX, .UMBRUCH, .GESIM). Aktiviert sich bei \"Richte mir ein neues Projekt zum Thema X ein\", \"Lege ein neues Software-Projekt an\", \"Neues Paper-Projekt scaffolden\", \"Neues Roblox-Game anlegen\", \"Projekt für Y erstellen\", \"scaffold project\", \"bootstrap project\", \"neues Tool/Spiel/Paper einrichten\". Findet die richtige Pipeline, nutzt das passende Template (Cookiecutter für Software, _template/ für Roblox, _templates/ für Research), wendet Anthropic-Standard (.claude/settings.json, CLAUDE.md) an, ergänzt User-Template (_templates/project-docs/), trägt in Registry ein (releases.json/STATUS_UEBERSICHT.md), führt Smoke-Test durch. Greenfield-Neuanlage, KEIN Renovieren (dafür siehe pipeline-optimizer).",
       "languages": [
         "de",
         "en",
@@ -738,78 +648,6 @@
       ]
     },
     {
-      "id": "skill:dev:rotation-check",
-      "name": "rotation-check",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/rotation-check/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:dev:surface-after-care",
-      "name": "surface-after-care",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/surface-after-care/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:dev:swarm-operations",
-      "name": "swarm-operations",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/swarm-operations/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "<img src=\"banner.png\" width=\"100%\" alt=\"swarm-operations banner\">",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "pointer:dev:ticket-master",
-      "name": "ticket-master",
-      "type": "pointer",
-      "category": "dev",
-      "path": "skills/dev/ticket-master/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Use when the user wants to keep an open triage console for a software project - capturing bugs/change-requests as structured tickets, scoring them, and routing them to the right AI provider/sub-agent for an immediate fix or into the project's task management. Triggers on /ticket-master or 'open the triage console / ticket master'.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:dev:trampelpfadanalyse",
       "name": "trampelpfadanalyse",
       "type": "skill",
@@ -818,24 +656,6 @@
       "version": "0.1.0",
       "status": "active",
       "description": "Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on \"is the convention even seen\", \"why does no agent follow the rule\", \"make a doc signpost measurably effective\", \"desire-path analysis\", \"trampelpfadanalyse\".",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "protocol:dev:update-cli-docs",
-      "name": "update-cli-docs",
-      "type": "protocol",
-      "category": "dev",
-      "path": "skills/dev/update-cli-docs/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Aktualisiert die CLI-Dokumentation (Claude Code, Codex, Antigravity) durch Abgleich mit offiziellen Quellen, Diff-Analyse, LaTeX-Regenerierung und Deployment auf um-bruch.org. Nutze diesen Skill bei \"/update-cli-docs\" oder wenn CLI-Referenzdokumente aktualisiert werden sollen.",
       "languages": [
         "de",
         "en",
@@ -926,24 +746,6 @@
       "version": "0.1.0",
       "status": "active",
       "description": "Erstellung von Arbeitsblättern und Übungsmaterialien für Unterricht und Förderung.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:game-dev:build-assets-with-blender",
-      "name": "build-assets-with-blender",
-      "type": "skill",
-      "category": "game-dev",
-      "path": "skills/game-dev/build-assets-with-blender/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Private Blender asset-builder workflow for the local Roblox and game-asset pipeline. Use when fulfilling ASSET-ORDER files, creating proactive reusable asset-library kits, generating script-free Blender assets, exporting .blend, .fbx, .obj, .mtl, .glb bundles, writing manifests/TODO pickup notes, checking malware/licensing boundaries, or validating assets by Blender FBX/GLB reimport.",
       "languages": [
         "de",
         "en",
@@ -1127,24 +929,6 @@
       "languages": []
     },
     {
-      "id": "skill:infrastructure:condition",
-      "name": "condition",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/condition/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie \"erst wenn\", \"sobald\", \"nur falls\", \"nachdem\", \"warte bis\", \"danach\" oder \"vorher nicht\". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:infrastructure:cron-tuner",
       "name": "cron-tuner",
       "type": "skill",
@@ -1154,24 +938,6 @@
       "status": "active",
       "description": "Self-tuning cadence control loop for recurring agent scans. Use when a scheduled scan should sharpen its interval on activity and cool down on silence, without operator intervention.",
       "languages": []
-    },
-    {
-      "id": "skill:infrastructure:decision-avatar",
-      "name": "decision-avatar",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/decision-avatar/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
     },
     {
       "id": "protocol:infrastructure:full-after-care",
@@ -1218,24 +984,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:infrastructure:load-project",
-      "name": "load-project",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/load-project/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
       "languages": [
         "de",
         "en",
@@ -1462,24 +1210,6 @@
       ]
     },
     {
-      "id": "skill:infrastructure:sync-procedure",
-      "name": "sync-procedure",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/sync-procedure/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Führt das zentrale .SYNC-Verfahren für Antigravity/Gemini (agy@WORKSTATION-LG) aus. Beinhaltet Push (Spezifikationen/Nachweise eintragen), Pull (Regeln, Skills & Einstellungen anderer Agenten übernehmen), Akteurs-Liveness & Vertretungsprüfung.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:infrastructure:system-onboarding",
       "name": "system-onboarding",
       "type": "skill",
@@ -1506,24 +1236,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:infrastructure:workflow-extract",
-      "name": "workflow-extract",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/workflow-extract/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
       "languages": [
         "de",
         "en",
@@ -1966,24 +1678,6 @@
       ]
     },
     {
-      "id": "skill:utilities:bilingual-doc-sync",
-      "name": "bilingual-doc-sync",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:utilities:brainstorm",
       "name": "brainstorm",
       "type": "skill",
@@ -2218,24 +1912,6 @@
       ]
     },
     {
-      "id": "skill:utilities:mail-clean-grab",
-      "name": "mail-clean-grab",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/mail-clean-grab/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "<img src=\"banner.png\" width=\"100%\" alt=\"mail-clean-grab banner\">",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "tool:utilities:music-composer",
       "name": "music-composer",
       "type": "tool",
@@ -2275,24 +1951,6 @@
       "version": "0.2.0",
       "status": "active",
       "description": "Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:utilities:selbstmanagement",
-      "name": "selbstmanagement",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/selbstmanagement/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "<img src=\"banner.png\" width=\"100%\" alt=\"selbstmanagement banner\">",
       "languages": [
         "de",
         "en",
@@ -2383,24 +2041,6 @@
       "version": "1.1.0",
       "status": "active",
       "description": "Baut aus einem Chatverlauf oder aus bestehenden Automatisierungs-Prompts (z. B. eines anderen Agenten-Systems) eine selbstlaufende, user-neutrale Workflow-Automatisierung: einen wiederkehrenden Prompt bzw. Automations-Skill für Cron/Schedule/Loop. Alias: automations-extractor. Nutze diesen Skill bei „mach daraus eine Automatisierung\", „das soll regelmäßig/nächtlich laufen\", „extrahiere Workflows aus diesen Chatverläufen/Automationen\", „Automation aus dieser Session bauen\", oder bei `/workflow-extract`. Ergänzt fehlende Automations-Bausteine (Rotations-Auswahl, Check-Registry, Idempotenz, Log-Hygiene, Freigabe-Gate, Eskalations-Handoff, Monitor-Meldedisziplin) systematisch. Enthält auch den Fleet-Audit-Modus: bestehende Automations-Flotten auf Silent-Failures, Redundanz, Drift und Lücken prüfen („prüfe meine Automatisierungen/Scheduled Tasks/Cron-Jobs\"). Soll stattdessen ein abrufbarer Skill (Fähigkeit auf Zuruf) entstehen, den Schwester-Skill skill-extractor nutzen.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:utilities:yt-transcriber",
-      "name": "yt-transcriber",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/yt-transcriber/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "YouTube transcription tool for extracting and formatting subtitles and transcripts.",
       "languages": [
         "de",
         "en",

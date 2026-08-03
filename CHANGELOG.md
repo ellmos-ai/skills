@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-03
+
+- **Technical Hygiene & Maintenance Check (Pfad A)**: Synchronized `llms.txt` timestamp to 2026-08-03 and test assertion count (86 passed).
+- **Public Registry & Test Suite Refinement**: Updated `build_public_registry.py` and `testing/test_public_registry.py` to filter out archived directories (`_archive`) and non-public visibility skills (`private-only`). Rebuilt `registry/components.json` and `SKILLS-MAP.md`. Verified test suite 100% green (86/86 passed).
+- **Documentation Badges**: Added `Pytest: 86 passed`, `ellmos-ai` ecosystem, and `open-bricks` umbrella Shields.io badges to `README.md` and `README_de.md`.
+
 ## 2026-07-30
 
 - Restored the public/private boundary after an early publication: neutral

@@ -30,16 +30,25 @@ PRIVATE_FIELDS = {
 }
 
 
+from build_public_registry import read_frontmatter
+
+
 class PublicRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
 
     def test_registry_matches_public_skill_tree(self) -> None:
-        public_paths = {
-            path.relative_to(REPOSITORY_ROOT).as_posix()
-            for path in (REPOSITORY_ROOT / "skills").glob("*/*/SKILL.md")
-        }
+        public_paths = set()
+        for path in (REPOSITORY_ROOT / "skills").glob("*/*/SKILL.md"):
+            if path.parent.parent.name.startswith("_"):
+                continue
+            metadata = read_frontmatter(path)
+            visibility = str(metadata.get("visibility") or "public").strip().lower()
+            if visibility in {"private", "private-only", "private profile", "no-push"}:
+                continue
+            public_paths.add(path.relative_to(REPOSITORY_ROOT).as_posix())
+
         registry_paths = {item["path"] for item in self.registry["components"]}
         self.assertEqual(public_paths, registry_paths)
         self.assertEqual(len(public_paths), self.registry["summary"]["component_count"])
