@@ -62,7 +62,30 @@
 ```
 
 Persona `skills` describe intended compatibility. They do not prove that a skill
-is installed.
+is installed. They contain only known canonical skill IDs: malformed or unknown
+source references are omitted fail-closed and reported in `issues`.
+
+## Issue records
+
+The builder reports source ambiguity and non-canonical references rather than
+silently selecting an arbitrary runtime target.
+
+```json
+{
+  "kind": "duplicate-skill-id",
+  "skill": "employee-tax",
+  "canonical_source_ref": "employee-tax/SKILL.md",
+  "duplicate_source_refs": ["translations/SKILL.md"]
+}
+```
+
+For a reference such as `employee-tax # legacy source path`, the map preserves
+the safe resolved ID `employee-tax` and additionally emits a
+`normalized-skill-reference` issue. `unknown-skill-reference` and
+`invalid-skill-reference` entries have `owner_kind`, `owner`, and `reference`
+fields; unknown and invalid references never become executable endpoints.
+Invalid source declarations such as `name: ###` are skipped entirely and emit
+`invalid-skill-id` with the relative `source_ref` and declared `reference`.
 
 ## Portability rules
 
@@ -70,5 +93,7 @@ is installed.
 - Keep source paths relative and informational.
 - Keep prompts, private data, credentials and runtime secrets outside the map.
 - Preserve unresolved references in `issues`.
+- Emit each skill ID at most once; report duplicate source declarations in
+  `issues` with a deterministic canonical source.
 - Preserve experts without endpoints in `gaps`.
 - Increment the schema version only for incompatible field changes.

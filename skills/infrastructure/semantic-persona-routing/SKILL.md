@@ -78,6 +78,14 @@ It produces a runtime map without requiring the source system to be installed.
 Read [routing-map-schema.md](references/routing-map-schema.md) before extending the
 format.
 
+Each exported skill ID is unique. When multiple source files declare the same
+stable ID, the builder selects the lexicographically first relative source path
+deterministically and records a `duplicate-skill-id` issue; it never emits two
+skill entries with the same ID. Declared expert and persona skill references are
+normalized to a clean ID only when that ID exists in the exported registry.
+Malformed, unknown, and normalized references stay visible in `issues`; unknown
+or invalid references never become endpoints or persona compatibility links.
+
 Do not automatically promote `candidate_skills`. Confirm them against a live skill
 resolver or source metadata first.
 

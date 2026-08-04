@@ -10,6 +10,7 @@ from pathlib import Path
 
 
 SCHEMA = "semantic-persona-routing.map.v1"
+STABLE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 GENERIC_TOKENS = {
     "agent",
     "assistant",
@@ -168,11 +169,11 @@ def classify_roles(records: list[dict]) -> tuple[list[dict], list[dict]]:
     return coordinators, experts
 
 
-def skill_record(record: dict) -> dict:
+def skill_record(record: dict, identifier: str) -> dict:
     """Convert a source record to a portable skill entry."""
     metadata = record["metadata"]
     return {
-        "id": slug(str(metadata["name"])),
+        "id": identifier,
         "name": str(metadata["name"]),
         "description": str(metadata.get("description") or ""),
         "category": metadata.get("category"),
@@ -182,6 +183,135 @@ def skill_record(record: dict) -> dict:
         if isinstance(metadata.get("provenance"), dict)
         else {},
     }
+
+
+def canonical_skill_id(value: object) -> str | None:
+    """Accept only an already stable source-skill ID."""
+    identifier = str(value).strip()
+    return identifier if STABLE_ID_RE.fullmatch(identifier) else None
+
+
+def normalize_skill_reference(value: object) -> tuple[str | None, bool]:
+    """Normalize a skill reference without accepting an empty reference.
+
+    A trailing ``#`` comment is a common source-format annotation, not part of
+    the portable ID.  The caller must still verify that the normalized ID is a
+    known skill before treating it as a usable endpoint.
+    """
+    raw = str(value)
+    without_comment = raw.split("#", 1)[0].strip()
+    identifier = slug(without_comment)
+    if not STABLE_ID_RE.fullmatch(identifier):
+        identifier = None
+    if not identifier:
+        return None, raw.strip() != ""
+    return identifier, raw.strip() != identifier
+
+
+def deduplicate_skills(skill_records: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Choose one deterministic source per stable skill ID and report duplicates."""
+    grouped: dict[str, list[dict]] = {}
+    issues = []
+    for record in skill_records:
+        identifier = canonical_skill_id(record["metadata"]["name"])
+        if identifier is None:
+            issues.append(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": record["source_ref"],
+                    "reference": str(record["metadata"]["name"]),
+                }
+            )
+            continue
+        skill = skill_record(record, identifier)
+        grouped.setdefault(skill["id"], []).append(skill)
+
+    skills = []
+    for identifier in sorted(grouped):
+        sources = sorted(grouped[identifier], key=lambda item: item["source_ref"])
+        skills.append(sources[0])
+        if len(sources) > 1:
+            issues.append(
+                {
+                    "kind": "duplicate-skill-id",
+                    "skill": identifier,
+                    "canonical_source_ref": sources[0]["source_ref"],
+                    "duplicate_source_refs": [
+                        source["source_ref"] for source in sources[1:]
+                    ],
+                }
+            )
+    return skills, issues
+
+
+def append_skill_reference_issue(
+    issues: list[dict],
+    *,
+    kind: str,
+    owner_kind: str,
+    owner: str,
+    reference: object,
+    normalized: str | None = None,
+) -> None:
+    """Record a non-authoritative skill reference without silently accepting it."""
+    issue = {
+        "kind": kind,
+        "owner_kind": owner_kind,
+        "owner": owner,
+        "reference": str(reference),
+    }
+    if normalized is not None:
+        issue["normalized"] = normalized
+    issues.append(issue)
+
+
+def normalized_known_skill_references(
+    references: object,
+    known_skill_ids: set[str],
+    issues: list[dict],
+    *,
+    owner_kind: str,
+    owner: str,
+) -> list[str]:
+    """Resolve declared references only to known canonical IDs, fail-closed."""
+    if not isinstance(references, list):
+        return []
+    resolved = []
+    seen = set()
+    for reference in references:
+        identifier, changed = normalize_skill_reference(reference)
+        if identifier is None:
+            append_skill_reference_issue(
+                issues,
+                kind="invalid-skill-reference",
+                owner_kind=owner_kind,
+                owner=owner,
+                reference=reference,
+            )
+            continue
+        if changed:
+            append_skill_reference_issue(
+                issues,
+                kind="normalized-skill-reference",
+                owner_kind=owner_kind,
+                owner=owner,
+                reference=reference,
+                normalized=identifier,
+            )
+        if identifier not in known_skill_ids:
+            append_skill_reference_issue(
+                issues,
+                kind="unknown-skill-reference",
+                owner_kind=owner_kind,
+                owner=owner,
+                reference=reference,
+                normalized=identifier,
+            )
+            continue
+        if identifier not in seen:
+            resolved.append(identifier)
+            seen.add(identifier)
+    return resolved
 
 
 def lexical_candidates(expert: dict, skills: list[dict], limit: int) -> list[dict]:
@@ -232,16 +362,24 @@ def lexical_candidates(expert: dict, skills: list[dict], limit: int) -> list[dic
     )[:limit]
 
 
-def explicit_endpoints(expert: dict, skills: list[dict]) -> list[dict]:
+def explicit_endpoints(
+    expert: dict, skills: list[dict], issues: list[dict]
+) -> list[dict]:
     """Resolve explicit skill lists and exact provenance references."""
     metadata = expert["metadata"]
     by_id = {skill["id"]: skill for skill in skills}
     endpoints = []
     seen = set()
-    explicit = metadata.get("skills") if isinstance(metadata.get("skills"), list) else []
-    for name in explicit:
-        identifier = slug(str(name))
-        if identifier in by_id and identifier not in seen:
+    expert_id = slug(str(metadata["name"]))
+    explicit = normalized_known_skill_references(
+        metadata.get("skills"),
+        set(by_id),
+        issues,
+        owner_kind="expert",
+        owner=expert_id,
+    )
+    for identifier in explicit:
+        if identifier not in seen:
             endpoints.append({"skill": identifier, "resolution": "explicit"})
             seen.add(identifier)
 
@@ -269,13 +407,13 @@ def build_map(
 ) -> dict:
     """Build the portable graph and preserve unresolved relationships."""
     coordinators_raw, experts_raw = classify_roles(role_records)
-    skills = [skill_record(record) for record in skill_records]
+    skills, skill_issues = deduplicate_skills(skill_records)
     expert_lookup = {}
     for record in experts_raw:
         for variant in variants(str(record["metadata"]["name"])):
             expert_lookup.setdefault(variant, record)
 
-    issues = []
+    issues = skill_issues
     coordinators = []
     expert_parents: dict[str, set[str]] = {}
     for record in coordinators_raw:
@@ -331,7 +469,7 @@ def build_map(
         )
         parents = expert_parents.setdefault(expert_id, set())
         parents.update(slug(str(parent)) for parent in declared_parents)
-        endpoints = explicit_endpoints(record, skills)
+        endpoints = explicit_endpoints(record, skills, issues)
         candidates = lexical_candidates(record, skills, candidate_limit)
         candidates = [
             item
@@ -388,9 +526,13 @@ def build_map(
                 "display_name": str(display_name),
                 "description": str(metadata.get("description") or ""),
                 "roles": sorted(set(persona_roles)),
-                "skills": metadata.get("skills")
-                if isinstance(metadata.get("skills"), list)
-                else [],
+                "skills": normalized_known_skill_references(
+                    metadata.get("skills"),
+                    {skill["id"] for skill in skills},
+                    issues,
+                    owner_kind="persona",
+                    owner=persona_id,
+                ),
                 "source_ref": record["source_ref"],
             }
         )
@@ -416,7 +558,16 @@ def build_map(
         "personas": sorted(personas, key=lambda item: item["id"]),
         "skills": sorted(skills, key=lambda item: item["id"]),
         "gaps": sorted(gaps, key=lambda item: item["expert"]),
-        "issues": issues,
+        "issues": sorted(
+            issues,
+            key=lambda item: (
+                item["kind"],
+                item.get("skill", ""),
+                item.get("owner_kind", ""),
+                item.get("owner", ""),
+                item.get("reference", ""),
+            ),
+        ),
     }
 
 

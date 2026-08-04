@@ -128,6 +128,147 @@ description: Organizes employee tax records and receipts.
         ]
         self.assertEqual([], module.lexical_candidates(expert, skills, 3))
 
+    def test_duplicate_skill_ids_choose_a_deterministic_source_and_issue(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            roles, personas, skills = self.fixture(Path(tmp))
+            self.write(
+                skills / "translations" / "SKILL.md",
+                """---
+name: employee-tax
+description: Localized duplicate that must not create a second ID.
+---
+""",
+            )
+            result = module.build_map(
+                module.scan_markdown(roles, "SKILL.md"),
+                module.scan_markdown(personas),
+                list(reversed(module.scan_markdown(skills, "SKILL.md"))),
+                3,
+            )
+            self.assertEqual(["employee-tax"], [skill["id"] for skill in result["skills"]])
+            self.assertEqual(
+                [
+                    {
+                        "kind": "duplicate-skill-id",
+                        "skill": "employee-tax",
+                        "canonical_source_ref": "employee-tax/SKILL.md",
+                        "duplicate_source_refs": ["translations/SKILL.md"],
+                    }
+                ],
+                [issue for issue in result["issues"] if issue["kind"] == "duplicate-skill-id"],
+            )
+
+    def test_invalid_source_skill_id_is_skipped_with_safe_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            roles, personas, skills = self.fixture(Path(tmp))
+            self.write(
+                skills / "invalid" / "SKILL.md",
+                """---
+name: ###
+description: Must never become an empty stable ID.
+---
+""",
+            )
+            self.write(
+                skills / "not-stable" / "SKILL.md",
+                """---
+name: Employee Tax
+description: Whitespace is not a stable exported ID.
+---
+""",
+            )
+            result = module.build_map(
+                module.scan_markdown(roles, "SKILL.md"),
+                module.scan_markdown(personas),
+                module.scan_markdown(skills, "SKILL.md"),
+                3,
+            )
+            self.assertEqual(["employee-tax"], [skill["id"] for skill in result["skills"]])
+            self.assertTrue(all(skill["id"] for skill in result["skills"]))
+            self.assertIn(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": "invalid/SKILL.md",
+                    "reference": "###",
+                },
+                result["issues"],
+            )
+            self.assertIn(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": "not-stable/SKILL.md",
+                    "reference": "Employee Tax",
+                },
+                result["issues"],
+            )
+
+    def test_persona_reference_is_normalized_only_when_the_skill_is_known(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            roles, personas, skills = self.fixture(Path(tmp))
+            persona_file = personas / "theodor.md"
+            persona_file.write_text(
+                persona_file.read_text(encoding="utf-8").replace(
+                    "skills: [employee-tax]",
+                    "skills: ['employee-tax    # system/skills/employee-tax/SKILL.md']",
+                ),
+                encoding="utf-8",
+            )
+            result = module.build_map(
+                module.scan_markdown(roles, "SKILL.md"),
+                module.scan_markdown(personas),
+                module.scan_markdown(skills, "SKILL.md"),
+                3,
+            )
+            self.assertEqual(["employee-tax"], result["personas"][0]["skills"])
+            self.assertIn(
+                {
+                    "kind": "normalized-skill-reference",
+                    "owner_kind": "persona",
+                    "owner": "theodor",
+                    "reference": "employee-tax    # system/skills/employee-tax/SKILL.md",
+                    "normalized": "employee-tax",
+                },
+                result["issues"],
+            )
+
+    def test_unknown_or_empty_persona_references_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            roles, personas, skills = self.fixture(Path(tmp))
+            persona_file = personas / "theodor.md"
+            persona_file.write_text(
+                persona_file.read_text(encoding="utf-8").replace(
+                    "skills: [employee-tax]",
+                    "skills: ['unknown-skill', '  # annotation only']",
+                ),
+                encoding="utf-8",
+            )
+            result = module.build_map(
+                module.scan_markdown(roles, "SKILL.md"),
+                module.scan_markdown(personas),
+                module.scan_markdown(skills, "SKILL.md"),
+                3,
+            )
+            self.assertEqual([], result["personas"][0]["skills"])
+            self.assertIn(
+                {
+                    "kind": "unknown-skill-reference",
+                    "owner_kind": "persona",
+                    "owner": "theodor",
+                    "reference": "unknown-skill",
+                    "normalized": "unknown-skill",
+                },
+                result["issues"],
+            )
+            self.assertIn(
+                {
+                    "kind": "invalid-skill-reference",
+                    "owner_kind": "persona",
+                    "owner": "theodor",
+                    "reference": "  # annotation only",
+                },
+                result["issues"],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
