@@ -158,6 +158,50 @@ description: Localized duplicate that must not create a second ID.
                 [issue for issue in result["issues"] if issue["kind"] == "duplicate-skill-id"],
             )
 
+    def test_invalid_source_skill_id_is_skipped_with_safe_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            roles, personas, skills = self.fixture(Path(tmp))
+            self.write(
+                skills / "invalid" / "SKILL.md",
+                """---
+name: ###
+description: Must never become an empty stable ID.
+---
+""",
+            )
+            self.write(
+                skills / "not-stable" / "SKILL.md",
+                """---
+name: Employee Tax
+description: Whitespace is not a stable exported ID.
+---
+""",
+            )
+            result = module.build_map(
+                module.scan_markdown(roles, "SKILL.md"),
+                module.scan_markdown(personas),
+                module.scan_markdown(skills, "SKILL.md"),
+                3,
+            )
+            self.assertEqual(["employee-tax"], [skill["id"] for skill in result["skills"]])
+            self.assertTrue(all(skill["id"] for skill in result["skills"]))
+            self.assertIn(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": "invalid/SKILL.md",
+                    "reference": "###",
+                },
+                result["issues"],
+            )
+            self.assertIn(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": "not-stable/SKILL.md",
+                    "reference": "Employee Tax",
+                },
+                result["issues"],
+            )
+
     def test_persona_reference_is_normalized_only_when_the_skill_is_known(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             roles, personas, skills = self.fixture(Path(tmp))

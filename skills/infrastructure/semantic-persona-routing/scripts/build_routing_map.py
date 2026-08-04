@@ -10,6 +10,7 @@ from pathlib import Path
 
 
 SCHEMA = "semantic-persona-routing.map.v1"
+STABLE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 GENERIC_TOKENS = {
     "agent",
     "assistant",
@@ -168,11 +169,11 @@ def classify_roles(records: list[dict]) -> tuple[list[dict], list[dict]]:
     return coordinators, experts
 
 
-def skill_record(record: dict) -> dict:
+def skill_record(record: dict, identifier: str) -> dict:
     """Convert a source record to a portable skill entry."""
     metadata = record["metadata"]
     return {
-        "id": canonical_skill_id(metadata["name"]),
+        "id": identifier,
         "name": str(metadata["name"]),
         "description": str(metadata.get("description") or ""),
         "category": metadata.get("category"),
@@ -184,9 +185,10 @@ def skill_record(record: dict) -> dict:
     }
 
 
-def canonical_skill_id(value: object) -> str:
-    """Return the portable logical ID for a declared skill reference."""
-    return slug(str(value).strip())
+def canonical_skill_id(value: object) -> str | None:
+    """Accept only an already stable source-skill ID."""
+    identifier = str(value).strip()
+    return identifier if STABLE_ID_RE.fullmatch(identifier) else None
 
 
 def normalize_skill_reference(value: object) -> tuple[str | None, bool]:
@@ -198,7 +200,9 @@ def normalize_skill_reference(value: object) -> tuple[str | None, bool]:
     """
     raw = str(value)
     without_comment = raw.split("#", 1)[0].strip()
-    identifier = canonical_skill_id(without_comment)
+    identifier = slug(without_comment)
+    if not STABLE_ID_RE.fullmatch(identifier):
+        identifier = None
     if not identifier:
         return None, raw.strip() != ""
     return identifier, raw.strip() != identifier
@@ -207,12 +211,22 @@ def normalize_skill_reference(value: object) -> tuple[str | None, bool]:
 def deduplicate_skills(skill_records: list[dict]) -> tuple[list[dict], list[dict]]:
     """Choose one deterministic source per stable skill ID and report duplicates."""
     grouped: dict[str, list[dict]] = {}
+    issues = []
     for record in skill_records:
-        skill = skill_record(record)
+        identifier = canonical_skill_id(record["metadata"]["name"])
+        if identifier is None:
+            issues.append(
+                {
+                    "kind": "invalid-skill-id",
+                    "source_ref": record["source_ref"],
+                    "reference": str(record["metadata"]["name"]),
+                }
+            )
+            continue
+        skill = skill_record(record, identifier)
         grouped.setdefault(skill["id"], []).append(skill)
 
     skills = []
-    issues = []
     for identifier in sorted(grouped):
         sources = sorted(grouped[identifier], key=lambda item: item["source_ref"])
         skills.append(sources[0])

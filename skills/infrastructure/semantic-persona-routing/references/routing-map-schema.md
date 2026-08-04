@@ -84,6 +84,8 @@ the safe resolved ID `employee-tax` and additionally emits a
 `normalized-skill-reference` issue. `unknown-skill-reference` and
 `invalid-skill-reference` entries have `owner_kind`, `owner`, and `reference`
 fields; unknown and invalid references never become executable endpoints.
+Invalid source declarations such as `name: ###` are skipped entirely and emit
+`invalid-skill-id` with the relative `source_ref` and declared `reference`.
 
 ## Portability rules
 
