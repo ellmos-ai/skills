@@ -108,7 +108,7 @@ skills/
 │   ├── systemisch-loesungsfokussiert — Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.
 │   ├── therapie-umbrella — Meta-/Umbrella-Skill für die Familie „Therapie / Beratung". Kennt alle therapeutischen Skills (Stabilisierung, Methoden-Überblick, Gesprächsführung + deregistrierte Spezialverfahren) und leitet zum passenden weiter. Nutze diesen Skill, wenn unklar ist, welcher Therapie-/Beratungs-Skill passt, ein Überblick über die verfügbaren Verfahren gebraucht wird, oder eine Beratungs-/Krisensituation zuerst eingeordnet werden muss. Auch auslösen bei „welche Therapiemethode passt", „Beratung strukturieren", „Krise — was tun", „therapeutisches Vorgehen wählen".
 │   └── trauma-psychoeducation — Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
-├── utilities/ (23)
+├── utilities/ (24)
 │   ├── batch-file-ops — Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
 │   ├── bewerbungsexperte — Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
 │   ├── brainstorm — Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.
@@ -127,6 +127,7 @@ skills/
 │   ├── music-composer — Compose video-synced background scores from a storyline JSON using local waveform synthesis (numpy + ffmpeg). Styles: chiptune, ambient, electronic. Deterministic, offline, no cloud service.
 │   ├── nulcleaner — Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
 │   ├── privat-mail-writer — Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+│   ├── speicherbereinigung — Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.
 │   ├── steuer-assistent — Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software).
 │   ├── structured-thinking — Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.
 │   ├── think — Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics.
@@ -136,7 +137,7 @@ skills/
     └── web-reading — Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 ```
 
-**Gesamt: 115 öffentliche Skills in 10 Kategorien.**
+**Gesamt: 116 öffentliche Skills in 10 Kategorien.**
 
 ## Veröffentlichungsgrenze
 
