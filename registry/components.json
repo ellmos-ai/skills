@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 115,
+    "component_count": 116,
     "categories": {
       "assist": 20,
       "dev": 16,
@@ -12,7 +12,7 @@
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "utilities": 23,
+      "utilities": 24,
       "web": 1
     }
   },
@@ -1958,6 +1958,19 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:speicherbereinigung",
+      "name": "speicherbereinigung",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/speicherbereinigung/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
+      "languages": [
+        "de"
       ]
     },
     {
