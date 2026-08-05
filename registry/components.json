@@ -2,10 +2,10 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 115,
+    "component_count": 116,
     "categories": {
       "assist": 20,
-      "dev": 16,
+      "dev": 17,
       "education": 5,
       "game-dev": 5,
       "infrastructure": 23,
@@ -556,6 +556,17 @@
         "ru",
         "zh"
       ]
+    },
+    {
+      "id": "skill:dev:piggyback-hosting",
+      "name": "piggyback-hosting",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/piggyback-hosting/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to \"make this hostable without a login\", \"avoid building user accounts\", \"shrink the privacy policy for a hosted tool\", \"who is the data controller if we store nothing\", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references.",
+      "languages": []
     },
     {
       "id": "protocol:dev:pipeline-optimizer",

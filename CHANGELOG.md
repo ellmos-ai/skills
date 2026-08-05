@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-06
+
+- **New skill: `piggyback-hosting`** (`skills/dev/piggyback-hosting/`): migrated from the standalone `lukisch/huckepack` repository. Hosting pattern for making a locally-built application safely hostable without building user management (host stores nothing, visitor's browser stores everything). Ships `references/DATA-FLOW-TEMPLATE.md`, `references/PRIVACY-TEMPLATE.md` and `references/RECHT.md` (German first-look legal assessment, GDPR/TDDDG/UWG). Rebuilt `registry/components.json` and `SKILLS-MAP.md` (116 components).
+
 ## 2026-08-03
 
 - **Technical Hygiene & Maintenance Check (Pfad A)**: Synchronized `llms.txt` timestamp to 2026-08-03 and test assertion count (86 passed).

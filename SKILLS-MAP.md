@@ -30,7 +30,7 @@ skills/
 │   ├── transkription — Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
 │   ├── voice — Plant Sprachaufnahme, Transkription und Sprachausgabe mit optionalen, austauschbaren Werkzeugen.
 │   └── wetter — Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
-├── dev/ (16)
+├── dev/ (17)
 │   ├── bilingual-doc-sync — Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?", „zieh die englische/deutsche Version nach", „Übersetzung ist veraltet", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).
 │   ├── bugfix-protocol — Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
 │   ├── bugsweep — Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
@@ -41,6 +41,7 @@ skills/
 │   ├── load-project — Zu Beginn einer konkreten Projektaufgabe oder bei unklarem Kontext: Ziel auflösen, geltende Regelhierarchie laden, verbindliche Referenzen verfolgen und vor der eigentlichen Arbeit einen evidenzbasierten Lagebericht erstellen.
 │   ├── migrate-rename — Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
 │   ├── model-strategy — Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+│   ├── piggyback-hosting — Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to "make this hostable without a login", "avoid building user accounts", "shrink the privacy policy for a hosted tool", "who is the data controller if we store nothing", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references.
 │   ├── pipeline-optimizer — Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
 │   ├── plugin-system — Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
 │   ├── project-onboarding — Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
@@ -136,7 +137,7 @@ skills/
     └── web-reading — Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 ```
 
-**Gesamt: 115 öffentliche Skills in 10 Kategorien.**
+**Gesamt: 116 öffentliche Skills in 10 Kategorien.**
 
 ## Veröffentlichungsgrenze
 
