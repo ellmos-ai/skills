@@ -3,7 +3,7 @@
 > *This document is in German because it examines German and EU statutes; quoting
 > them in translation would be less accurate, not more accessible.*
 
-Prüfer: Claude Opus 5 | Skill `rechtsabteilung` v1.1, law-checker config v6
+Prüfer: Claude Opus 5 | internes Rechtsprüfungs-Modul v1.1, law-checker config v6
 Typ: Inhaltsprüfung (Architekturmuster vor Inbetriebnahme)
 Auftrag: Prüfung des Huckepack-Hostingmusters im Zuge seiner Umsetzung in
 HungryCall, Ringedingeding und ResearchCall (2026-08-02). Geprüfte Dokumente:

@@ -1,6 +1,34 @@
 ---
 name: piggyback-hosting
+version: 1.0.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-08-02
+updated: 2026-08-07
 description: Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to "make this hostable without a login", "avoid building user accounts", "shrink the privacy policy for a hosted tool", "who is the data controller if we store nothing", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references.
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+
+category: dev
+tags: [hosting, privacy, gdpr, dsgvo, byok, client-side-storage, deployment, no-login]
+language: en
+status: active
+
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
 ---
 
 # piggyback-hosting
