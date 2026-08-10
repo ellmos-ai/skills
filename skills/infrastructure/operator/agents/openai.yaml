@@ -1,0 +1,7 @@
+interface:
+  display_name: "Operator"
+  short_description: "Steuert Pläne, Teams und Abnahmen"
+  default_prompt: "Nutze $operator, um dieses komplexe Vorhaben vom nächsten Planschritt bis zur evidenzbasierten Abnahme zu steuern."
+
+policy:
+  allow_implicit_invocation: true
