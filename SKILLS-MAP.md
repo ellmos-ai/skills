@@ -30,7 +30,7 @@ skills/
 │   ├── transkription — Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
 │   ├── voice — Plant Sprachaufnahme, Transkription und Sprachausgabe mit optionalen, austauschbaren Werkzeugen.
 │   └── wetter — Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
-├── dev/ (17)
+├── dev/ (18)
 │   ├── bilingual-doc-sync — Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?", „zieh die englische/deutsche Version nach", „Übersetzung ist veraltet", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).
 │   ├── bugfix-protocol — Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
 │   ├── bugsweep — Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
@@ -47,6 +47,7 @@ skills/
 │   ├── project-onboarding — Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
 │   ├── projekt-pipeline-umbrella — Meta-/Umbrella-Skill für die Familie „Projekt-/Pipeline-Aufbau & -Umbau". Kennt alle Skills für Anlegen, Aufnehmen, Umbauen und Analysieren von Projekten und Pipelines und leitet zum passenden weiter. Nutze diesen Skill, wenn unklar ist, ob etwas neu angelegt (Greenfield) oder umgebaut (Bestand) werden soll bzw. ob es um ein einzelnes Projekt oder eine ganze Pipeline geht. Auch auslösen bei „neues Projekt/Pipeline anlegen", „bestehendes umbauen", „Projekt aufnehmen", „Ordnerstruktur renovieren", „welcher Bootstrapper passt".
 │   ├── repo-publish-check — Nutzerneutrale Prüfung von Repositories vor einer Veröffentlichung oder bei einer erneuten öffentlichen Prüfung. Kontrolliert Privacy, Geheimnisse, Lizenzen, Drittinhalte, Dokumentation und Freigabestatus, ohne die Veröffentlichung selbst vorzunehmen.
+│   ├── software-in-worten — Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen, wenn eine Anwendung entworfen wird und der Ablauf noch unklar ist, wenn ein bestehendes Werkzeug als Skill verfügbar gemacht werden soll, wenn Oberfläche und Agentenzugang auseinanderdriften, oder wenn ein Skill zu lang wird und niemand weiß warum.
 │   └── trampelpfadanalyse — Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
 ├── education/ (5)
 │   ├── academic-study-control — Akademisches Studien- und Fristenmanagement mit Quellenprüfung, Datenschutz und realistischer Handlungsplanung.
@@ -137,7 +138,7 @@ skills/
     └── web-reading — Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 ```
 
-**Gesamt: 116 öffentliche Skills in 10 Kategorien.**
+**Gesamt: 117 öffentliche Skills in 10 Kategorien.**
 
 ## Veröffentlichungsgrenze
 
