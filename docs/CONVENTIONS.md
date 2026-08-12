@@ -211,7 +211,7 @@ aufeinander aufbauende Sets organisiert:
 |-----|----------|----------------------------|--------|
 | **Core Set** | DE, EN | ~20% | ✅ Pflicht für jeden Skill |
 | **Full Set** | Core + ES, ZH, JA, RU | ~40–45% | ✅ Aktueller Standard |
-| **World Set** | Full + FR, HI, AR, BN, PT | ~55–60% | 🔮 Reserviert für späteren Ausbau |
+| **World Set** | Full + FR, HI, AR, BN, PT | ~55–60% | 🟢 Ausbau beschlossen [U 2026-08-12] — Zielbild, schrittweise |
 
 ### Sprachkatalog
 
@@ -230,8 +230,11 @@ aufeinander aufbauende Sets organisiert:
 | `pt` | Portugiesisch | World | `SKILL.pt.md` | ~260 Mio. |
 
 **Aktueller Zielumfang:** Alle Skills werden auf **Full Set** gepflegt.
-World-Set-Sprachen existieren teilweise als Stubs (insb. `fr`) und werden
-erst bei explizitem Ausbaubeschluss vollständig übersetzt.
+Der World-Ausbaubeschluss ist erteilt [U 2026-08-12]: World-Set-Sprachen werden
+**nach und nach** vollständig übersetzt — bevorzugt als Leerlauf-Sprachzug
+(ein Objekt × eine Sprache je Leerlauf). Die Sets gelten über Skills hinaus
+als Sprachstufen für Repos, Module, Bundles und Stacks in `.AI` und
+`.SOFTWARE` (systemweite Regel: P-006 „Sprachstufen" im Policy-Register).
 
 ### Sprach-Feld
 
