@@ -2,10 +2,10 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 116,
+    "component_count": 117,
     "categories": {
       "assist": 20,
-      "dev": 17,
+      "dev": 18,
       "education": 5,
       "game-dev": 5,
       "infrastructure": 23,
@@ -658,6 +658,19 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "method:dev:software-in-worten",
+      "name": "software-in-worten",
+      "type": "method",
+      "category": "dev",
+      "path": "skills/dev/software-in-worten/SKILL.md",
+      "version": "1.0.0",
+      "status": "stable",
+      "description": "Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen, wenn eine Anwendung entworfen wird und der Ablauf noch unklar ist, wenn ein bestehendes Werkzeug als Skill verfügbar gemacht werden soll, wenn Oberfläche und Agentenzugang auseinanderdriften, oder wenn ein Skill zu lang wird und niemand weiß warum.",
+      "languages": [
+        "de"
       ]
     },
     {
