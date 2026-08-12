@@ -11,7 +11,7 @@
 
 # ellmos skills
 
-**Dokumentation in sechs Sprachen** · [Maschinenlesbarer Kontext](llms.txt)
+**Dokumentation in sechs Sprachen** · [Maschinenlesbarer Kontext](llms.txt) · **🗺️ [Skill-Bibliothek online durchstöbern](https://ellmos-ai.github.io/skills.html)** — jeden öffentlichen Skill im Browser lesen und kopieren
 
 > Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.
 
