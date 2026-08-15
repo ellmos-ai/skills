@@ -1,6 +1,6 @@
 ---
 name: work-autonomous
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
@@ -85,9 +85,13 @@ genügt nicht. Jetzt läuft **pflichtgemäß** die folgende Kette, um neue Aufga
 1. **`/think` + `/decide`** auf die Frage anwenden: „Gibt es wirklich keine autonom ausführbare
    Arbeit mehr, oder übersehe ich etwas?" — strukturierte Analyse statt Bauchgefühl.
 2. **Das zentrale Entscheidungsregister des Systems auswerten** — dort, wo offene und getroffene
-   Nutzerentscheidungen geführt werden (auf diesem System: `_control-center/_DECISIONS/`,
-   `TO-DECIDE-USER*.txt`-Kette, host-eigene `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`;
-   auf anderen Systemen entsprechend die dort geführte Entscheidungsablage): Sind kürzlich Entscheidungen
+   Nutzerentscheidungen geführt werden. Den Ort dafür **über die Rolle `decisions.ledger` auflösen**,
+   nicht hart verdrahten: `source_resolver.resolve("decisions.ledger")` (Modul `source-resolver`,
+   `.MODULES/.CONTROL/source-resolver`), falls installiert. Ist `source-resolver` nicht installiert
+   oder liefert `not_found`, gilt ersatzweise der bekannte Fallback-Pfad (auf diesem System:
+   `_control-center/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene `TO-DECIDE-USER-<HOST>.txt`,
+   `DECIDED-AND-DONE.md`; auf anderen Systemen entsprechend die dort geführte Entscheidungsablage) —
+   der Skill funktioniert also identisch, mit oder ohne Resolver. Sind kürzlich Entscheidungen
    gefallen, die vorher blockierte oder auf Freigabe wartende Arbeit jetzt entsperren? Ein frisch
    entschiedener Punkt ist fast immer eine neue autonome Aufgabe (die Entscheidung umsetzen).
 3. **Gardener und USMC auswerten** (`find()`/`recall()` bzw. `usmc facts|lessons|working|context`):
@@ -238,6 +242,12 @@ Tick 4 (2 Minuten später, z. B. durch erneuten Loop-Trigger):
 ```
 
 ## Changelog
+
+### 1.1.0 (2026-08-15)
+- Referenz-Retrofit aus Ticket T-20260815-385400870: Schritt 2 (Entscheidungsregister) löst
+  seinen Ort jetzt über die Rolle `decisions.ledger` auf (`source_resolver.resolve(...)`, Modul
+  `source-resolver`), statt ihn hart zu verdrahten — mit dokumentiertem Fallback auf den bisherigen
+  Pfad, falls der Resolver nicht installiert ist. Funktionsverhalten unverändert.
 
 ### 1.0.0 (2026-08-15)
 - Erstversion aus Ticket T-20260815-522639345: Zwei-Ebenen-Betriebsmodell, Vier-Schritt-Prüfkette,

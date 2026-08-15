@@ -1,6 +1,6 @@
 ---
 name: work-autonomous
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
@@ -86,11 +86,16 @@ not enough. The following chain now runs **mandatorily** to **win** new tasks:
 1. Apply **`/think` + `/decide`** to the question: "Is there really no autonomously executable
    work left, or am I overlooking something?" — structured analysis, not a gut feeling.
 2. **Evaluate the system's central decision register** — wherever open and resolved user decisions
-   are tracked (on this system: `_control-center/_DECISIONS/`, the `TO-DECIDE-USER*.txt` chain,
-   the host's own `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`; on other systems, the
-   equivalent decision register kept there): have decisions been made recently that
-   now unblock work that was previously blocked or waiting for approval? A freshly decided item is
-   almost always a new autonomous task (implementing the decision).
+   are tracked. **Resolve that location via the role `decisions.ledger`** rather than hard-wiring
+   it: `source_resolver.resolve("decisions.ledger")` (module `source-resolver`,
+   `.MODULES/.CONTROL/source-resolver`), if installed. If `source-resolver` isn't installed or
+   returns `not_found`, fall back to the known default path (on this system:
+   `_control-center/_DECISIONS/`, the `TO-DECIDE-USER*.txt` chain, the host's own
+   `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`; on other systems, the equivalent decision
+   register kept there) — the skill behaves identically with or without the resolver present. Have
+   decisions been made recently that now unblock work that was previously blocked or waiting for
+   approval? A freshly decided item is almost always a new autonomous task (implementing the
+   decision).
 3. **Evaluate Gardener and USMC** (`find()`/`recall()` resp. `usmc facts|lessons|working|context`):
    is there open working-memory content, a lesson with an unfinished follow-up task, or facts
    pointing at overlooked but executable work? This is exactly where earlier sessions leave
@@ -236,6 +241,12 @@ Tick 4 (2 minutes later, e.g. triggered by another loop re-invocation):
 ```
 
 ## Changelog
+
+### 1.1.0 (2026-08-15)
+- Reference retrofit from ticket T-20260815-385400870: step 2 (decision register) now resolves
+  its location via the `decisions.ledger` role (`source_resolver.resolve(...)`, module
+  `source-resolver`) instead of hard-wiring it — with a documented fallback to the previous path
+  if the resolver isn't installed. Functional behavior unchanged.
 
 ### 1.0.0 (2026-08-15)
 - First version from ticket T-20260815-522639345: two-tier operating model, four-step

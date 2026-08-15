@@ -1437,7 +1437,7 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/work-autonomous/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
       "languages": [
