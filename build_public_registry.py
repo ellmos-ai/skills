@@ -91,6 +91,42 @@ def available_languages(skill_dir: Path, canonical: dict) -> list[str]:
     return [code for code in LANGUAGE_CODES if code in languages]
 
 
+def canonical_core_language_errors(skill_files: list[Path] | None = None) -> list[str]:
+    """Return P-006 violations for public canonical skill roots.
+
+    The public registry intentionally recognises historical language layouts for
+    discovery.  P-006 is stricter: every catalogued skill needs a German
+    ``SKILL.md`` and an English ``SKILL.en.md`` at the skill root.  Keeping this
+    check separate preserves backwards-compatible discovery while making the
+    canonical contract directly auditable.
+    """
+    errors: list[str] = []
+    paths = list_public_skill_files() if skill_files is None else skill_files
+
+    for path in paths:
+        if path.parent.parent.name.startswith("_"):
+            continue
+        metadata = read_frontmatter(path)
+        visibility = str(metadata.get("visibility") or "public").strip().lower()
+        if visibility in {"private", "private-only", "private profile", "no-push"}:
+            continue
+
+        relative_path = path.relative_to(REPOSITORY_ROOT).as_posix()
+        if metadata.get("language") != "de":
+            errors.append(f"{relative_path}: canonical SKILL.md must declare language: de")
+
+        english_path = path.parent / "SKILL.en.md"
+        if not english_path.is_file():
+            errors.append(f"{relative_path}: missing canonical sibling SKILL.en.md")
+            continue
+        english_metadata = read_frontmatter(english_path)
+        if english_metadata.get("language") != "en":
+            english_relative = english_path.relative_to(REPOSITORY_ROOT).as_posix()
+            errors.append(f"{english_relative}: must declare language: en")
+
+    return errors
+
+
 def list_public_skill_files() -> list[Path]:
     """List ``skills/<category>/<name>/SKILL.md`` files git actually tracks.
 
@@ -175,8 +211,23 @@ def serialized_registry() -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--check-core",
+        action="store_true",
+        help="read-only P-006 audit for canonical SKILL.md + SKILL.en.md pairs",
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
+
+    if args.check_core:
+        errors = canonical_core_language_errors()
+        if errors:
+            print(f"P-006 core-language audit failed: {len(errors)} issue(s)")
+            for error in errors:
+                print(f"- {error}")
+            return 1
+        print("P-006 core-language audit passed: every public skill has canonical DE+EN files")
+        return 0
 
     expected = serialized_registry()
     output = args.output.resolve()

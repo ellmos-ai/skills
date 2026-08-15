@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -30,7 +31,11 @@ PRIVATE_FIELDS = {
 }
 
 
-from build_public_registry import list_public_skill_files, read_frontmatter
+from build_public_registry import (
+    canonical_core_language_errors,
+    list_public_skill_files,
+    read_frontmatter,
+)
 
 
 class PublicRegistryTests(unittest.TestCase):
@@ -57,6 +62,46 @@ class PublicRegistryTests(unittest.TestCase):
         for component in self.registry["components"]:
             self.assertEqual(PUBLIC_FIELDS, set(component))
             self.assertTrue(PRIVATE_FIELDS.isdisjoint(component))
+
+    def test_core_language_audit_requires_flat_de_en_pair(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            skill_dir = root / "skills" / "dev" / "example"
+            skill_dir.mkdir(parents=True)
+            canonical = skill_dir / "SKILL.md"
+            canonical.write_text(
+                "---\nname: example\nlanguage: en\nvisibility: public\n---\n",
+                encoding="utf-8",
+            )
+            legacy = skill_dir / "EN"
+            legacy.mkdir()
+            (legacy / "SKILL.md").write_text(
+                "---\nname: example\nlanguage: en\n---\n",
+                encoding="utf-8",
+            )
+
+            errors = canonical_core_language_errors([canonical])
+
+            self.assertEqual(2, len(errors))
+            self.assertTrue(any("language: de" in error for error in errors))
+            self.assertTrue(any("missing canonical sibling SKILL.en.md" in error for error in errors))
+
+    def test_core_language_audit_accepts_flat_de_en_pair(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            skill_dir = root / "skills" / "dev" / "example"
+            skill_dir.mkdir(parents=True)
+            canonical = skill_dir / "SKILL.md"
+            canonical.write_text(
+                "---\nname: example\nlanguage: de\nvisibility: public\n---\n",
+                encoding="utf-8",
+            )
+            (skill_dir / "SKILL.en.md").write_text(
+                "---\nname: example\nlanguage: en\n---\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual([], canonical_core_language_errors([canonical]))
 
 
 if __name__ == "__main__":
