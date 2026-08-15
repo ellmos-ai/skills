@@ -1,6 +1,6 @@
 ---
 name: work-autonomous
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
@@ -11,11 +11,14 @@ description: >
   autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck "nichts mehr
   zu tun" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide,
   _DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben
-  GEWINNEN muss, bevor der Loop enden darf. Nutze diesen Skill bei
-  /work-autonomous, /waafap, "arbeite autonom weiter bis nichts mehr zu tun
-  ist", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden
-  soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine
-  Session beendet wird.
+  GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet
+  found/empty/unavailable statt eines binären Ergebnisses — "exhausted" gilt
+  nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine
+  Quelle unavailable, meldet der Skill "blind" statt "exhausted" und behauptet
+  nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap,
+  "arbeite autonom weiter bis nichts mehr zu tun ist", als Goal-Bedingung
+  innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine
+  autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.
 
 standalone: true
 anthropic_compatible: true
@@ -80,35 +83,75 @@ NICHT betreten — keine der vier teuren Prüfschritte ist nötig, solange sicht
 ### Ebene 2 — Exhaustion-Check (nur bei Verdacht „nichts mehr zu tun")
 
 Erst wenn Ebene 1 **nichts** Autonomes mehr findet, entsteht der Verdacht. Dieser Verdacht allein
-genügt nicht. Jetzt läuft **pflichtgemäß** die folgende Kette, um neue Aufgaben zu **gewinnen**:
+genügt nicht. Jetzt läuft **pflichtgemäß** die folgende Kette, um neue Aufgaben zu **gewinnen**.
+
+#### Selbstkenntnis (vor der Kette, nicht danach)
+
+Bevor irgendetwas befragt wird: Der Skill deklariert, WELCHE Quellen er für sein Urteil braucht.
+Vier Bedarfe (`grounding_seed.self_knowledge.Need`, falls `grounding-seed` installiert ist — sonst
+gilt dieselbe Liste als reine Deklaration ohne Bibliotheksanbindung):
+
+| Rolle | Kettenschritt | Was dahintersteht |
+|---|---|---|
+| `decisions.ledger` | 2 | zentrales Entscheidungsregister |
+| `memory.organic` | 3 | Gardener (`find()`/`put()`) |
+| `memory.curated` | 3 | USMC (`facts`/`lessons`/`working`/`context`) |
+| `user.model` | 4 | decision-avatar / BYUM |
+
+**`/think` + `/decide` (Schritt 1) ist bewusst KEINE deklarierte Quelle.** Es ist der eigene
+Analyseschritt des Modells, kein externes System, das erreichbar oder nicht erreichbar sein könnte
+— es ist immer „verfügbar" im Sinne dieser Unterscheidung. Nur Schritte 2–4 können `unavailable`
+werden.
+
+Optionales, testbares Werkzeug für die reine Verortungsfrage (found/unavailable, noch OHNE
+Inhaltsprüfung): `scripts/exhaustion_check.py` in diesem Skill-Ordner. Es nutzt
+`grounding_seed.resolve()` + `status_from_resolution()` für `decisions.ledger`/`user.model` (dort
+existiert ein echter `source-resolver`-Provider), prüft `memory.organic`/`memory.curated` dagegen
+**immer** direkt über CLI-Erreichbarkeit (`gardener`/`usmc` auf PATH) — für diese zwei Rollen gibt
+es (Stand 2026-08-15) noch **keinen** registrierten `source-resolver`-Provider; sie über den
+Resolver zu befragen würde nur `unavailable` melden, unabhängig davon, ob Gardener/USMC echt
+installiert sind. Läuft identisch mit und ohne installiertes `grounding-seed`.
+
+#### Die vier Kettenschritte — jeder meldet found | empty | unavailable
+
+Jeder Schritt läuft zweistufig: erst **Verortung** (kenne ich überhaupt eine erreichbare Stelle?),
+dann — nur wenn verortet — **Inhaltsprüfung** (das Modell liest tatsächlich nach, ob dort etwas
+Neues liegt, mit seinen eigenen Werkzeugen). Eine Quelle, die nicht verortet werden konnte, wird
+NIE inhaltlich geprüft — sie zählt `unavailable`, nicht `empty`.
 
 1. **`/think` + `/decide`** auf die Frage anwenden: „Gibt es wirklich keine autonom ausführbare
-   Arbeit mehr, oder übersehe ich etwas?" — strukturierte Analyse statt Bauchgefühl.
-2. **Das zentrale Entscheidungsregister des Systems auswerten** — dort, wo offene und getroffene
-   Nutzerentscheidungen geführt werden. Den Ort dafür **über die Rolle `decisions.ledger` auflösen**,
-   nicht hart verdrahten: `source_resolver.resolve("decisions.ledger")` (Modul `source-resolver`,
-   `.MODULES/.CONTROL/source-resolver`), falls installiert. Ist `source-resolver` nicht installiert
-   oder liefert `not_found`, gilt ersatzweise der bekannte Fallback-Pfad (auf diesem System:
-   `_control-center/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene `TO-DECIDE-USER-<HOST>.txt`,
-   `DECIDED-AND-DONE.md`; auf anderen Systemen entsprechend die dort geführte Entscheidungsablage) —
-   der Skill funktioniert also identisch, mit oder ohne Resolver. Sind kürzlich Entscheidungen
-   gefallen, die vorher blockierte oder auf Freigabe wartende Arbeit jetzt entsperren? Ein frisch
-   entschiedener Punkt ist fast immer eine neue autonome Aufgabe (die Entscheidung umsetzen).
-3. **Gardener und USMC auswerten** (`find()`/`recall()` bzw. `usmc facts|lessons|working|context`):
-   Stehen dort offene Working-Memory-Punkte, Lessons mit unerledigter Folgeaufgabe, oder Fakten,
-   die auf übersehene, aber ausführbare Arbeit hindeuten? Das ist genau der Ort, an dem frühere
-   Sessions unfertige Punkte (`RESUME:`-Feld, offene `note`-Einträge) hinterlassen.
-4. **`decision-avatar` anwenden** (auf Systemen mit lokalem Profil: `tom-lm` +
-   `build-your-users-mind`/BYUM): Gibt es ein belegtes Muster, nach dem der Nutzer an dieser
-   Stelle eine bestimmte Handlung autonom erledigt sehen wollte? Nur bei ausreichender Konfidenz
-   (🟢/🟡) als neue Aufgabe zählen — 🔴 zählt nicht als gewonnene Aufgabe, sondern als offener
-   Punkt für Schritt „Nur-User-Rest" unten.
+   Arbeit mehr, oder übersehe ich etwas?" — strukturierte Analyse statt Bauchgefühl. Kein
+   found/empty/unavailable-Status (siehe oben, keine Quelle).
+2. **`decisions.ledger`** — Verortung über `source_resolver.resolve("decisions.ledger")` /
+   `grounding_seed.resolve(...)`, falls installiert; sonst der bekannte Fallback-Pfad
+   (`_control-center/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene
+   `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`). Verortet → Inhalt lesen: sind kürzlich
+   Entscheidungen gefallen, die vorher blockierte oder auf Freigabe wartende Arbeit jetzt
+   entsperren? Treffer → `found`. Gelesen, nichts Neues → `empty`. Nicht verortbar (Resolver fehlt
+   UND Fallback-Pfad existiert nicht) → `unavailable`.
+3. **`memory.organic` (Gardener) + `memory.curated` (USMC)** — zwei getrennte Quellen, ein
+   Kettenschritt. Verortung: CLI auf PATH (`gardener`/`usmc`), siehe Selbstkenntnis oben. Erreichbar
+   → Inhalt lesen (`find()`/`recall()` bzw. `usmc facts|lessons|working|context`): offene
+   Working-Memory-Punkte, Lessons mit unerledigter Folgeaufgabe, Fakten, die auf übersehene, aber
+   ausführbare Arbeit hindeuten (das ist genau der Ort, an dem frühere Sessions unfertige Punkte —
+   `RESUME:`-Feld, offene `note`-Einträge — hinterlassen). Treffer → `found`. Gelesen, nichts Neues
+   → `empty`. CLI nicht auf PATH → `unavailable`.
+4. **`user.model` (decision-avatar/BYUM)** — Verortung wie bei `decisions.ledger` (Resolver oder
+   Fallback-Pfad `_control-center/_TOM-lm/`). Verortet → Inhalt prüfen: Gibt es ein belegtes
+   Muster, nach dem der Nutzer an dieser Stelle eine bestimmte Handlung autonom erledigt sehen
+   wollte? Nur bei ausreichender Konfidenz (🟢/🟡) als `found` zählen — 🔴 zählt als `empty`, nicht
+   als gewonnene Aufgabe, sondern als offener Punkt für Schritt „Nur-User-Rest" unten. Nicht
+   verortbar → `unavailable`.
 
-**Nur wenn alle vier Schritte ergebnislos bleiben**, gilt „keine autonomen Aufgaben mehr" als
-**belegt**. Erst dann ist der Loop wirklich zu Ende.
+**„Exhausted" darf nur gemeldet werden, wenn ALLE VIER Quellen (Schritte 2–4, drei Schritte, vier
+Rollen) tatsächlich befragt werden KONNTEN — also `found` oder `empty`, keine einzige
+`unavailable`.** Das entspricht `grounding_seed.self_knowledge.GroundingReport.all_answerable()`.
+Ist mindestens eine Rolle `unavailable`, gilt NICHT „exhausted", sondern das eigene Signal „blind"
+(siehe Abbruchsignal unten) — der Loop endet trotzdem (er kann ja ohnehin nichts befragen), aber er
+behauptet nicht mehr, geprüft zu haben, was er nicht prüfen konnte.
 
 Findet irgendein Schritt neue Arbeit → zurück zu Ebene 1, Arbeit erledigen, Guard-Zustand (siehe
-unten) auf „found" setzen statt „exhausted".
+unten) auf „found" setzen statt „exhausted"/„blind".
 
 ### Sonderfall: nur User-gebundene Reste
 
@@ -155,37 +198,60 @@ Markdown-Dateien):
 usmc --agent <agent> working --limit 20
 
 # Zustand nach einem Kettendurchlauf schreiben
-usmc --agent <agent> note "work-autonomous-guard: result=<exhausted|found> fingerprint=<FP> at=<ISO-Zeit>" \
+usmc --agent <agent> note "work-autonomous-guard: result=<exhausted|blind|found> fingerprint=<FP> at=<ISO-Zeit>" \
   --type context --priority 3 --tags "work-autonomous-guard,<projekt-slug>"
 ```
 
-**Fingerprint** = eine grobe, aber prüfbare Kennzahl aus: Anzahl/IDs offener `ACTIONABLE`-Tickets,
-mtime der `_DECISIONS`-Kette (`TO-DECIDE-USER*.txt`, `DECIDED-AND-DONE.md`), Zahl neuer
-USMC-`working`-Einträge seit dem letzten Kettendurchlauf. Ändert sich einer dieser Werte, hat sich
-die Lage geändert — der Guard darf dann nicht mehr blind auf „exhausted" verharren.
+**Fingerprint besteht aus ZWEI Bausteinen — der Lage UND der Erreichbarkeit:**
+
+1. **Lage-Baustein** (wie bisher): Anzahl/IDs offener `ACTIONABLE`-Tickets, mtime der
+   `_DECISIONS`-Kette (`TO-DECIDE-USER*.txt`, `DECIDED-AND-DONE.md`), Zahl neuer
+   USMC-`working`-Einträge seit dem letzten Kettendurchlauf.
+2. **Verfügbarkeits-Baustein (neu, Pflicht seit 1.2.0):** das sortierte Tupel der gerade
+   `unavailable` gemeldeten Rollen aus der Selbstkenntnis-Prüfung
+   (`exhaustion_check.availability_fingerprint_component()`), z. B. `("memory.organic",)` oder `()`.
+
+**Warum der zweite Baustein Pflicht ist — „der Guard erbt sonst die Lücke":** Ohne ihn stützt sich
+der Fingerprint (Baustein 1) u. a. auf die mtime der `_DECISIONS`-Kette. Fehlt diese Kette auf einem
+System komplett, ist dieser Anteil des Fingerprints für immer konstant — ein einmal fälschlich
+gesetztes `exhausted`/`blind` würde dann NIE neu geprüft, selbst wenn später `source-resolver`
+installiert oder `_control-center/_DECISIONS/` angelegt wird. Der Verfügbarkeits-Baustein behebt
+das gezielt: Ändert sich, WELCHE Rollen unavailable sind (eine Quelle kommt hinzu oder fällt weg),
+ändert sich der Fingerprint automatisch — der Guard erkennt es beim nächsten Aufruf und fährt die
+Kette neu. Das ist „Verpflanzung" im Sinne der Grounding-Metapher (T-20260815-371628859): ein
+Umgebungswechsel löst eine neue Suche aus, ohne dass irgendjemand den Guard manuell zurücksetzen
+müsste.
 
 **Ablauf vor jedem Kettendurchlauf:**
 
 ```
 guard = letzten "work-autonomous-guard"-Eintrag aus USMC lesen
 wenn guard existiert
-   und guard.result == "exhausted"
+   und guard.result in ("exhausted", "blind")
    und (jetzt - guard.timestamp) < GUARD_INTERVAL   (Default: 15 Minuten)
-   und fingerprint(jetzt) == guard.fingerprint:
+   und fingerprint(jetzt) == guard.fingerprint:      # Lage- UND Verfügbarkeits-Baustein
        → Kette NICHT erneut fahren.
-       → Melden: "Weiterhin keine autonome Arbeit — unverändert seit {guard.timestamp}.
-                  Kein neuer Trigger. STOP (Guard aktiv)."
+       → guard.result == "exhausted":
+           Melden: "Weiterhin keine autonome Arbeit — unverändert seit {guard.timestamp}.
+                    Kein neuer Trigger. STOP (Guard aktiv, exhausted unchanged since …)."
+       → guard.result == "blind":
+           Melden: "Weiterhin blind (Quellen nicht verfügbar) — unverändert seit {guard.timestamp}.
+                    STOP (Guard aktiv, blind unchanged since …)."
 sonst:
-       → Kette vollständig fahren (alle vier Schritte).
+       → Kette vollständig fahren (Selbstkenntnis-Prüfung + alle vier Kettenschritte).
        → Neuen Guard-Zustand schreiben (timestamp=jetzt, fingerprint=fingerprint(jetzt),
-         result=exhausted|found).
-       → exhausted → STOP (belegt). found → zurück zu Ebene 1, Arbeit erledigen.
+         result=exhausted|blind|found).
+       → alle vier Quellen befragbar UND alle empty → exhausted → STOP (belegt).
+       → mindestens eine Quelle unavailable → blind → STOP (nicht belegt, nur unerreichbar).
+       → mindestens eine Quelle liefert einen Treffer → found → zurück zu Ebene 1, Arbeit erledigen.
 ```
 
-Ein einziger vollständig ergebnisloser Kettendurchlauf reicht als Beleg für „keine autonomen
-Aufgaben mehr" (Ticket-Vorgabe: „erst wenn ALLE Schritte eines Durchlaufs ergebnislos bleiben").
-Der Guard verhindert nicht das Feststellen selbst, sondern nur das **wiederholte, unveränderte
-Neu-Feststellen** bei dichten Folgeaufrufen.
+Ein einziger vollständig ausgeführter Kettendurchlauf, bei dem ALLE VIER Quellen befragbar waren und
+KEINE davon einen Treffer lieferte, reicht als Beleg für „keine autonomen Aufgaben mehr" (Ticket-
+Vorgabe: „erst wenn ALLE Schritte eines Durchlaufs ergebnislos bleiben" — ergebnislos heißt hier
+ausdrücklich `empty`, nicht `unavailable`). Der Guard verhindert nicht das Feststellen selbst,
+sondern nur das **wiederholte, unveränderte Neu-Feststellen** bei dichten Folgeaufrufen — und zwar
+für `exhausted` UND für `blind` getrennt, nie miteinander verwechselt.
 
 `GUARD_INTERVAL` ist konfigurierbar (Default 15 Minuten) — bei sehr träger Umgebung (seltene neue
 Tickets/Entscheidungen) darf länger gewählt werden, bei sehr aktiver Umgebung kürzer.
@@ -196,15 +262,24 @@ Jeder Durchlauf endet mit **einer** eindeutigen, grep-baren Zeile, damit ein umg
 oder ein künftiges `/goal`-Konstrukt daraus lesen kann, ob weitergemacht werden soll:
 
 ```
-WORK-AUTONOMOUS: CONTINUE                        — Ebene 1 hat Arbeit erledigt, Loop läuft weiter.
-WORK-AUTONOMOUS: STOP (exhausted)                — Kette 1–4 vollständig ergebnislos, belegt keine Arbeit mehr.
-WORK-AUTONOMOUS: STOP (guard, unchanged since …) — Guard aktiv, kein neuer Trigger seit Zeitstempel.
-WORK-AUTONOMOUS: STOP (user-only)                — nur USER/*-Reste offen, gebündelt vorgelegt.
+WORK-AUTONOMOUS: CONTINUE                                          — Ebene 1 hat Arbeit erledigt, Loop läuft weiter.
+WORK-AUTONOMOUS: STOP (exhausted)                                  — alle vier Quellen befragt, alle empty. Belegt: keine Arbeit mehr.
+WORK-AUTONOMOUS: STOP (blind, N/4 Quellen nicht verfuegbar: <rollen>) — mind. eine Quelle unavailable. NICHT belegt — nur nicht prüfbar.
+WORK-AUTONOMOUS: STOP (guard, exhausted unchanged since …)         — Guard aktiv, weiterhin exhausted, kein neuer Trigger.
+WORK-AUTONOMOUS: STOP (guard, blind unchanged since …)             — Guard aktiv, weiterhin blind, keine Quelle neu verfügbar geworden.
+WORK-AUTONOMOUS: STOP (user-only)                                  — nur USER/*-Reste offen, gebündelt vorgelegt.
 ```
 
 `CONTINUE` ist das einzige Signal, bei dem eine übergeordnete Schleife einen weiteren Tick
-anstoßen soll. Alle `STOP`-Varianten sind der belegte Abbruch — inklusive Begründung, welcher der
-drei STOP-Fälle vorliegt.
+anstoßen soll. Alle `STOP`-Varianten sind der belegte Abbruch — inklusive Begründung, welcher Fall
+vorliegt.
+
+**Der Unterschied zwischen `exhausted` und `blind` ist für den Nutzer wesentlich, nicht kosmetisch:**
+`exhausted` heißt „ich habe alles geprüft, was zu prüfen war — die Arbeit ist fertig". `blind` heißt
+„mir fehlt Infrastruktur, um überhaupt zu prüfen — das ist kein Arbeitsstand, sondern eine Lücke".
+Ein `/loop`/`/goal`-Konstrukt, das beide gleich behandelt (Loop endet so oder so), darf sie dem
+Nutzer nicht gleich MELDEN — sonst verschwindet genau die Information, die T-20260815-205101335
+eingefordert hat.
 
 ## Verhältnis zu anderen Skills
 
@@ -227,21 +302,66 @@ drei STOP-Fälle vorliegt.
 ```
 Tick 1: ACTIONABLE-Ticket T-... gefunden → erledigt. WORK-AUTONOMOUS: CONTINUE
 Tick 2: Kein ACTIONABLE-Ticket mehr, kein offener TODO-Punkt.
-        → Ebene 2: Kette 1–4 läuft.
-        → Schritt 2 (_DECISIONS): DECIDED-AND-DONE.md hat einen neuen Eintrag seit 10 Min.
-          → daraus resultiert eine neue autonome Aufgabe.
+        → Ebene 2: Selbstkenntnis + Kette 1–4 läuft.
+        → Schritt 2 (decisions.ledger): verortet, DECIDED-AND-DONE.md hat einen neuen Eintrag
+          seit 10 Min. → found, daraus resultiert eine neue autonome Aufgabe.
         → Guard: result=found geschrieben. Aufgabe erledigt. WORK-AUTONOMOUS: CONTINUE
-Tick 3: Wieder nichts sichtbar.
-        → Ebene 2: Kette 1–4 läuft, alle vier Schritte ergebnislos.
-        → Guard: result=exhausted, fingerprint=FP1, timestamp=T1 geschrieben.
+Tick 3: Wieder nichts sichtbar. Voll ausgestattetes System (Gardener, USMC, _DECISIONS, BYUM alle da).
+        → Ebene 2: alle vier Quellen verortet UND befragt, alle vier empty.
+        → Guard: result=exhausted, fingerprint=FP1 (Lage + Verfügbarkeit ()), timestamp=T1.
         → WORK-AUTONOMOUS: STOP (exhausted)
 Tick 4 (2 Minuten später, z. B. durch erneuten Loop-Trigger):
         → Guard: result=exhausted, fingerprint(jetzt)==FP1, (jetzt-T1) < 15 Min.
         → Kette NICHT erneut gefahren.
-        → WORK-AUTONOMOUS: STOP (guard, unchanged since T1)
+        → WORK-AUTONOMOUS: STOP (guard, exhausted unchanged since T1)
+
+Gegenbeispiel — System OHNE Gardener/USMC (der Kernfall aus T-20260815-205101335):
+Tick 1: Nichts sichtbar. Selbstkenntnis-Prüfung: decisions.ledger verortet (leer, empty),
+        memory.organic/memory.curated NICHT verortet (CLI fehlt) → unavailable,
+        user.model verortet (empty).
+        → nicht alle vier Quellen befragbar → KEIN exhausted.
+        → Guard: result=blind, fingerprint=FP2 (Verfügbarkeit ("memory.curated","memory.organic")).
+        → WORK-AUTONOMOUS: STOP (blind, 2/4 Quellen nicht verfuegbar: memory.organic, memory.curated)
+Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
+        → Selbstkenntnis-Prüfung: memory.curated jetzt verortet (CLI auf PATH) → Verfügbarkeits-
+          Baustein ändert sich zu ("memory.organic",) → fingerprint(jetzt) != FP2.
+        → Guard erkennt Änderung, Kette läuft neu (Verpflanzung) — ohne dass jemand den Guard
+          manuell zurückgesetzt hätte.
 ```
 
 ## Changelog
+
+### 1.2.0 (2026-08-15)
+- Retrofit aus Ticket T-20260815-205101335 (Prüfauftrag: „prüfe ob die Lösung dort in Verbindung
+  mit der Grounding-Metapher trägt", Befund am ausgelieferten Skill: sie trug in drei Punkten, aber
+  NICHT in der Unterscheidung „befragt und leer" vs. „konnte gar nicht befragt werden" — Kette
+  meldete `STOP (exhausted)` auch auf Systemen ohne Gardener/USMC/`_DECISIONS`, ohne das je geprüft
+  zu haben. Erster echter Anwendungsfall von `grounding-seed`, Ticket T-20260815-371628859).
+- **Selbstkenntnis ergänzt:** vier deklarierte Bedarfe (`decisions.ledger`, `memory.organic`,
+  `memory.curated`, `user.model`) vor der Kette, statt an vier fest benannten Orten blind zu suchen.
+- **Jeder Kettenschritt (2–4) meldet found | empty | unavailable** statt eines binären Ergebnisses
+  — zweistufig: Verortung zuerst (`grounding-seed`/`source-resolver` für `decisions.ledger`/
+  `user.model`, direkter CLI-Check für `memory.organic`/`memory.curated`, die noch keinen
+  `source-resolver`-Provider haben), Inhaltsprüfung nur bei erfolgreicher Verortung.
+- **`exhausted` gilt nur noch, wenn alle vier Quellen tatsächlich befragbar waren** (alle
+  found/empty, keine unavailable). Neues, unterscheidbares Signal `STOP (blind, N/4 Quellen nicht
+  verfuegbar: …)` für den Fall, dass mindestens eine Quelle nicht erreichbar war — der Loop endet
+  trotzdem, behauptet aber kein geprüftes Ergebnis mehr.
+- **Guard-Fingerprint um einen Verfügbarkeits-Baustein erweitert** (sortiertes Tupel der gerade
+  unavailable-Rollen). Behebt den Folgebefund „der Guard erbt die Lücke": ohne diesen Baustein
+  bleibt ein einmal fälschlich gesetztes `exhausted`/`blind` für immer gültig, wenn die
+  `_DECISIONS`-Kette komplett fehlt (der bisherige Fingerprint-Anteil ist dann konstant). Mit dem
+  Baustein löst eine neu verfügbar gewordene Quelle automatisch einen erneuten Kettendurchlauf aus
+  (Verpflanzung im Sinne der Grounding-Metapher).
+- Neues, getestetes Hilfsskript `scripts/exhaustion_check.py` (+ `tests/test_exhaustion_check.py`,
+  11 Tests, beide Betriebsarten geprüft: mit und ohne installiertes `grounding-seed`) — liefert die
+  Selbstkenntnis-/Verortungsprüfung deterministisch, damit der Skill sie nicht bei jedem Lauf neu
+  erraten muss. Bleibt optional: Der Skill ist weiterhin primär ein Protokoll, das ein Modell mit
+  seinen eigenen Werkzeugen befolgt.
+- Abhängigkeit: `grounding_seed.self_knowledge.assess()`/`status_from_resolution()` seit
+  `grounding-seed` 0.2.0 — ältere `grounding-seed`-Stände (0.1.0) hatten einen Kategorienfehler
+  (`not_found` wurde fälschlich zu `empty`), der genau die hier behobene Unterscheidung wieder
+  verwischt hätte. Ohne installiertes `grounding-seed` läuft der dokumentierte Fallback identisch.
 
 ### 1.1.0 (2026-08-15)
 - Referenz-Retrofit aus Ticket T-20260815-385400870: Schritt 2 (Entscheidungsregister) löst
