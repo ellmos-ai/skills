@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 120 tracked runtime skills organized by 10 categories.
+- 131 tracked runtime skills organized by 10 categories.
 - The public registry is a minimal discovery index. Internal ownership,
   privacy, review, and maintainer fields are kept in a separate No-Push
   repository.
@@ -32,14 +32,14 @@ Author: Lukas Geiger
 ## Public skill categories
 
 - `assist`: 20 user-neutral assistance methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription.
-- `dev`: 29 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
+- `dev`: 23 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
 - `education`: 5 skills for academic study, worksheets, and user-neutral teaching and support planning.
 - `game-dev`: Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
-- `infrastructure`: 25 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
+- `infrastructure`: 30 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
 - `production`: text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
 - `research`: research-agent workflow support.
 - `therapy`: 20 German-language psychoeducation and counseling method playbooks.
-- `utilities`: 35 batch, document, reasoning, media, and first-look utility workflows.
+- `utilities`: 25 batch, document, reasoning, media, and first-look utility workflows.
 - `web`: web-reading protocol support.
 
 ## Audience
