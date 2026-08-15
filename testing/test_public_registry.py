@@ -30,7 +30,7 @@ PRIVATE_FIELDS = {
 }
 
 
-from build_public_registry import read_frontmatter
+from build_public_registry import list_public_skill_files, read_frontmatter
 
 
 class PublicRegistryTests(unittest.TestCase):
@@ -40,7 +40,7 @@ class PublicRegistryTests(unittest.TestCase):
 
     def test_registry_matches_public_skill_tree(self) -> None:
         public_paths = set()
-        for path in (REPOSITORY_ROOT / "skills").glob("*/*/SKILL.md"):
+        for path in list_public_skill_files():
             if path.parent.parent.name.startswith("_"):
                 continue
             metadata = read_frontmatter(path)

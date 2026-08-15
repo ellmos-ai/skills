@@ -31,6 +31,8 @@ provenance:
   last_sync_from_origin: null
 ---
 
+<img src="banner.png" width="100%" alt="piggyback-hosting banner">
+
 # piggyback-hosting
 
 **A hosting pattern for applications that never accept other people's data in

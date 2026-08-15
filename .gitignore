@@ -117,5 +117,36 @@ skills/utilities/mail-clean-grab/
 skills/utilities/yt-transcriber/
 skills/utilities/video-transcriber/_reports/
 
+# -- bekannter Privatblock 2 (Incident 2026-08-15, Commit 9d3654c) --
+# Ein automatischer Banner-Generierungslauf hat diese privaten/Drittanbieter-
+# Skill-Verzeichnisse versehentlich getrackt (git add -A über "alle Skills"
+# statt respektiert .gitignore-Ausschlüsse, die vorher nur physisch lokal
+# fehlten statt explizit ausgeschlossen zu sein). testing/privacy_gate.py
+# führt dieselbe Liste als FORBIDDEN_PUBLIC_SKILL_DIRECTORIES -- beide Listen
+# synchron halten.
+skills/dev/figma/
+skills/dev/hyperframes/
+skills/dev/hyperframes-animation/
+skills/dev/hyperframes-cli/
+skills/dev/hyperframes-core/
+skills/dev/hyperframes-creative/
+skills/dev/hyperframes-keyframes/
+skills/dev/hyperframes-registry/
+skills/dev/remotion-to-hyperframes/
+skills/dev/store-welle-usertest/
+skills/utilities/embedded-captions/
+skills/utilities/faceless-explainer/
+skills/utilities/general-video/
+skills/utilities/media-use/
+skills/utilities/motion-graphics/
+skills/utilities/music-to-video/
+skills/utilities/pr-to-video/
+skills/utilities/product-launch-video/
+skills/utilities/rechtsabteilung/
+skills/utilities/slideshow/
+skills/utilities/store-welle-usertest/
+skills/utilities/talking-head-recut/
+skills/utilities/tom-lm/
+
 # ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
 SKILLS-MAP-PRIVATE.md

@@ -17,6 +17,8 @@ status: stable
 standalone: true
 ---
 
+<img src="banner.png" width="100%" alt="software-in-worten banner">
+
 # Software in Worten
 
 ## Der Gedanke

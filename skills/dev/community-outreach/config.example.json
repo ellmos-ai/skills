@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "instance_name": "Universal Community Outreach",
+  "workspace_path": "./community_outreach_data",
+  "schedule": {
+    "frequency": "daily",
+    "cron": "0 10 * * *",
+    "backend": "antigravity"
+  },
+  "platforms": {
+    "rotation": [
+      "Reddit",
+      "YouTube",
+      "Dev.to / Foren"
+    ],
+    "reddit": {
+      "enabled": true,
+      "subreddits": ["programming", "opensource", "webdev", "python"]
+    },
+    "youtube": {
+      "enabled": true,
+      "query_topics": ["open source tutorial", "developer tools"]
+    },
+    "forums": {
+      "enabled": true,
+      "domains": ["dev.to", "news.ycombinator.com"]
+    }
+  },
+  "compliance": {
+    "human_in_the_loop": true,
+    "require_approval_checkbox": true,
+    "max_posts_per_cycle": 1
+  }
+}

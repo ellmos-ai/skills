@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -90,11 +91,41 @@ def available_languages(skill_dir: Path, canonical: dict) -> list[str]:
     return [code for code in LANGUAGE_CODES if code in languages]
 
 
+def list_public_skill_files() -> list[Path]:
+    """List ``skills/<category>/<name>/SKILL.md`` files git actually tracks.
+
+    A raw filesystem glob over ``skills/`` also picks up gitignored, private
+    skill directories that happen to exist on whichever machine runs this
+    script (see the "bekannter Privatblock" entries in .gitignore) -- this
+    repository's published state is defined by what git tracks, not by what
+    is physically present locally. Falls back to the plain glob when git is
+    unavailable (e.g. an extracted archive, not a checkout).
+    """
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", "skills"],
+            cwd=REPOSITORY_ROOT,
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return sorted(SKILLS_ROOT.glob("*/*/SKILL.md"))
+    names = [chunk.decode("utf-8") for chunk in result.stdout.split(b"\0") if chunk]
+    paths = []
+    for name in names:
+        parts = Path(name).parts
+        # skills/<category>/<name>/SKILL.md -- matches the historical glob
+        # pattern "*/*/SKILL.md" rooted at SKILLS_ROOT.
+        if len(parts) == 4 and parts[-1] == "SKILL.md":
+            paths.append(REPOSITORY_ROOT / name)
+    return sorted(paths)
+
+
 def build_registry() -> dict:
     components = []
     category_counts: Counter[str] = Counter()
 
-    for path in sorted(SKILLS_ROOT.glob("*/*/SKILL.md")):
+    for path in list_public_skill_files():
         if path.parent.parent.name.startswith("_"):
             continue
         metadata = read_frontmatter(path)

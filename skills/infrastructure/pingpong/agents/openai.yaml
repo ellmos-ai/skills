@@ -1,0 +1,4 @@
+interface:
+  display_name: "PingPong"
+  short_description: "ListenSync and WriteSync over a shared folder"
+  default_prompt: "Use $pingpong to run a FileCommander-backed ListenSync session."

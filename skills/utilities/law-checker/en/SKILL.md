@@ -17,6 +17,8 @@ language: en
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="law-checker banner">
+
 > **English** — Official English version of `law-checker`.
 
 

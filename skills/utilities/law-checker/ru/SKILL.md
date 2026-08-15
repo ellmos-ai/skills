@@ -17,6 +17,8 @@ language: ru
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="law-checker banner">
+
 > **Русский** — Официальная русская версия `law-checker`.
 
 # law-checker (Юридический отдел) -- Pointer Skill
