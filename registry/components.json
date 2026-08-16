@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 130,
+    "component_count": 132,
     "categories": {
       "assist": 20,
-      "dev": 23,
+      "dev": 24,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 29,
+      "infrastructure": 30,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -440,6 +440,20 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Systemneutrale Automatisierung für lösungsorientierten Community Outreach und Repo-Recommender in Foren, Reddit und Plattformen nach dem Human-in-the-Loop-Prinzip (EU AI Act konform).",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
+      "id": "pointer:dev:compare-race",
+      "name": "compare-race",
+      "type": "pointer",
+      "category": "dev",
+      "path": "skills/dev/compare-race/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Use when the user wants to send the same prompt to several LLMs and compare the answers - sequentially (stopwatch, clean per-lane timing) or in parallel (true race), with optional repetitions per model, judged by the starting model across quality, correctness, completeness, instruction fidelity and latency (time is only one dimension). Triggers on /compare-race, 'model race', 'vergleiche modelle', 'gleicher prompt an mehrere modelle'.",
       "languages": [
         "de",
         "en"
@@ -1436,6 +1450,20 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:work-autonomous",
+      "name": "work-autonomous",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/work-autonomous/SKILL.md",
+      "version": "1.2.0",
+      "status": "active",
+      "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {

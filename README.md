@@ -20,7 +20,7 @@
 [![Python: >=3.10](https://img.shields.io/badge/Python->=3.10-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Public Skills: 130 Catalog](https://img.shields.io/badge/Public%20Skills-130%20Catalog-brightgreen.svg)](registry/components.json)
+[![Public Skills: 132 Catalog](https://img.shields.io/badge/Public%20Skills-132%20Catalog-brightgreen.svg)](registry/components.json)
 [![Tracked: 376 Skills](https://img.shields.io/badge/Tracked-376%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
@@ -41,14 +41,14 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Registry["Public Skill Registry (130 Catalog / 376 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    Registry["Public Skill Registry (132 Catalog / 376 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
     
     subgraph Catalog ["10 Public Domains"]
         Assist["assist (20)"]
-        Dev["dev (23)"]
+        Dev["dev (24)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (29)"]
+        Infra["infrastructure (30)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
@@ -94,15 +94,15 @@ flowchart TD
 
 ## Catalog Snapshot
 
-The current public catalog contains 130 public runtime skills (376 tracked across local suites):
+The current public catalog contains 132 public runtime skills (376 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 23 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 29 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 30 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
