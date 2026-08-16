@@ -8,7 +8,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
 ALLOWED_TRACKED_IGNORED: set[str] = set()
 CONTENT_SCAN_EXCLUSIONS = {

@@ -683,7 +683,10 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Reißverschluss-Verfahren (englisch: zipper merge) für sehr konfliktreiche Merges: Wenn zwei divergente Branches oder ein PR und sein Zielbranch BEIDE wertvolle, unvereinbar erscheinende Änderungen tragen, wird nicht pauschal eine Seite gewählt, sondern Abschnitt für Abschnitt verglichen, per Entscheidungstabelle (Nimm/Warum) die jeweils bessere Version übernommen, abschnittsweise committet und erst am Ende gepusht. Letzte Eskalationsstufe: Rebuild statt Merge — nur die Absicht/Funktionalität des Branches übernehmen und auf dem aktuellen Stand neu bauen. Nutzen bei: \"Merge-Konflikt\", \"divergente Branches\", \"main vs. master\", \"konfliktreicher PR\", \"zipper merge\", \"Reißverschluss\", \"beide Seiten haben Recht\", \"PR ist zu alt zum Mergen\".",
-      "languages": []
+      "languages": [
+        "de",
+        "en"
+      ]
     },
     {
       "id": "skill:dev:repo-publish-check",
@@ -1031,7 +1034,9 @@
       "version": "0.0.0",
       "status": "active",
       "description": "Umbrella skill for cloud-bridged communication protocols between agents on different machines (Ping-Pong, agent-beam, listeners and future protocols). Use when coordinating work across machines via a shared sync folder or message yard.",
-      "languages": []
+      "languages": [
+        "en"
+      ]
     },
     {
       "id": "skill:infrastructure:condition",
@@ -1060,7 +1065,9 @@
       "version": "0.0.0",
       "status": "active",
       "description": "Self-tuning cadence control loop for recurring agent scans. Use when a scheduled scan should sharpen its interval on activity and cool down on silence, without operator intervention.",
-      "languages": []
+      "languages": [
+        "en"
+      ]
     },
     {
       "id": "protocol:infrastructure:decision-avatar",

@@ -15,7 +15,6 @@ import subprocess
 from collections import Counter
 from pathlib import Path
 
-
 REPOSITORY_ROOT = Path(__file__).resolve().parent
 SKILLS_ROOT = REPOSITORY_ROOT / "skills"
 DEFAULT_OUTPUT = REPOSITORY_ROOT / "registry" / "components.json"

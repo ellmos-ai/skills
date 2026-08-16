@@ -13,13 +13,15 @@
 
 **Six-language documentation** · [Machine-readable context](llms.txt) · **🗺️ [Browse the skill library online](https://ellmos-ai.github.io/skills.html)** — read and copy every public skill in the browser
 
-> Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, and other local-first LLM agent runtimes.
+> Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 86 passed](https://img.shields.io/badge/Pytest-86%20passed-success.svg)](testing/)
+[![Pytest: 100 passed](https://img.shields.io/badge/Pytest-100%20passed-success.svg)](testing/)
+[![Python: >=3.10](https://img.shields.io/badge/Python->=3.10-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Skills: 120 Tracked](https://img.shields.io/badge/Skills-120%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Public Skills: 130 Catalog](https://img.shields.io/badge/Public%20Skills-130%20Catalog-brightgreen.svg)](registry/components.json)
+[![Tracked: 376 Skills](https://img.shields.io/badge/Tracked-376%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -39,21 +41,42 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Catalog["Public Registry (120 Tracked Skills)"] --> Categories
-    subgraph Categories ["10 Public Categories"]
+    Registry["Public Skill Registry (130 Catalog / 376 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    
+    subgraph Catalog ["10 Public Domains"]
         Assist["assist (20)"]
-        Dev["dev (19)"]
+        Dev["dev (23)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (25)"]
+        Infra["infrastructure (29)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        Utils["utilities (23)"]
+        Utils["utilities (25)"]
         Web["web (1)"]
     end
-    Categories --> Specs["SKILL.md (YAML Frontmatter + Playbooks)"]
-    Specs --> Runtimes["LLM Runtimes (Claude Code / Codex / AGY / BACH)"]
+    
+    Engine --> Catalog
+    Catalog --> Artifacts["SKILL.md Specifications\n(YAML Frontmatter + Playbooks + Scripts)"]
+    
+    subgraph MultiAgentRuntimes ["Multi-Agent Execution Fabric"]
+        ClaudeCode["Claude Code (~/.claude/skills)"]
+        Codex["Codex (~/.codex/skills)"]
+        AGY["Antigravity / Gemini"]
+        BACH["BACH Text-OS"]
+        LocalOllama["Ollama / Local LLM"]
+    end
+    
+    Artifacts --> MultiAgentRuntimes
+    
+    subgraph QualityGates ["Quality & Integrity Gates"]
+        STests["S-Tests (Static Validation)"]
+        LTests["L-Tests (LLM Self-Experience)"]
+        UTests["U-Tests (User Experience)"]
+        PytestSuite["Pytest Suite (100 Passed / 180 Subtests)"]
+    end
+    
+    Artifacts -.-> QualityGates
 ```
 
 ## Start Here
@@ -71,19 +94,19 @@ flowchart TD
 
 ## Catalog Snapshot
 
-The current public catalog contains 385 tracked runtime skills:
+The current public catalog contains 130 public runtime skills (376 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 19 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 23 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 25 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 29 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 23 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 25 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
@@ -227,15 +250,18 @@ Use this repository when searching for:
 
 The name is intentionally generic, so use the canonical repository string `ellmos-ai/skills` when linking or indexing this project. It is a reusable skill catalog, not an MCP server, hosted SaaS marketplace, prompt pack, or private skill installer.
 
-## Related ellmos Projects
+## Ecosystem & Sibling Projects
 
-| Project | Role |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | Full text-based LLM operating system |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Lightweight local-first LLM agent infrastructure |
-| [USMC](https://github.com/ellmos-ai/usmc) | Shared memory primitive for agent systems |
-| [Gardener](https://github.com/ellmos-ai/gardener) | Database-based operating-system counterpart |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | LLM chain-execution framework |
+| Project | Organization | Role |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Full text-based LLM operating system |
+| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Core runtime primitives and execution fabric |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Unified tool and profile gateway MCP server |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Agent fleet composition and system exploration |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Transactional workflow hook dispatcher |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Offline-first transit sync and snapshot retention |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop developer workstation suite |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Multi-language code editor and sandbox environment |
 
 ## License
 

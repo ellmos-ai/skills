@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-16
+
+- **Discoverability, README-Design, Badges & Metadata Parity Check (Pfad B)**:
+  - Standardized project packaging with PEP 621 compliant `pyproject.toml` (`[project]`, `[tool.pytest.ini_options]`, `[tool.ruff]`).
+  - Added automated metadata, manifest, and component parity test suite (`testing/test_metadata.py`) verifying schema v1 integrity, component existence, `llms.txt` synchronization, and multilingual README consistency.
+  - Synchronized Shields.io badges in `README.md` and `README_de.md` (Pytest: 100 passed, Python >=3.10, `ellmos-ai` ecosystem, `open-bricks` umbrella, 130 public catalog components / 376 tracked skills, `llms.txt`).
+  - Integrated interactive bilingual Mermaid System Architecture and execution fabric diagrams in both English and German READMEs.
+  - Linked sibling tools and ecosystem matrix (`BACH`, `ellmos-core`, `ellmos-controlcenter-mcp`, `system-explorer`, `workflowhooker`, `sqlite-transit-sync`, `DevCenter`, `CodeBox`).
+  - Updated `llms.txt` with latest 2026-08-16 timestamp, 100 passing tests, and updated category breakdown.
+  - Rebuilt public catalog index `registry/components.json` with 130 public skills.
+  - Verified full test suite 100% green (100 passed, 180 subtests passed in pytest; ruff check 100% clean).
+
 ## 2026-08-06
 
 - **New skill: `piggyback-hosting`** (`skills/dev/piggyback-hosting/`): migrated from the standalone `lukisch/huckepack` repository. Hosting pattern for making a locally-built application safely hostable without building user management (host stores nothing, visitor's browser stores everything). Ships `references/DATA-FLOW-TEMPLATE.md`, `references/PRIVACY-TEMPLATE.md` and `references/RECHT.md` (German first-look legal assessment, GDPR/TDDDG/UWG). Rebuilt `registry/components.json` and `SKILLS-MAP.md` (116 components).

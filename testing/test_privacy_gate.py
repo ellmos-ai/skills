@@ -6,7 +6,6 @@ import importlib.util
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).with_name("privacy_gate.py")
 SPEC = importlib.util.spec_from_file_location("privacy_gate", MODULE_PATH)
 privacy_gate = importlib.util.module_from_spec(SPEC)

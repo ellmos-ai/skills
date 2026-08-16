@@ -8,7 +8,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).with_name("skill_tester.py")
 SPEC = importlib.util.spec_from_file_location("skill_tester", MODULE_PATH)
 skill_tester = importlib.util.module_from_spec(SPEC)

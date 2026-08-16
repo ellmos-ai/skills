@@ -1,5 +1,6 @@
 ---
 name: cloud-communication-protocols
+language: en
 description: Umbrella skill for cloud-bridged communication protocols between agents on different machines (Ping-Pong, agent-beam, listeners and future protocols). Use when coordinating work across machines via a shared sync folder or message yard.
 ---
 

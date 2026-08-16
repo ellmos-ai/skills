@@ -13,13 +13,15 @@
 
 **Dokumentation in sechs Sprachen** · [Maschinenlesbarer Kontext](llms.txt) · **🗺️ [Skill-Bibliothek online durchstöbern](https://ellmos-ai.github.io/skills.html)** — jeden öffentlichen Skill im Browser lesen und kopieren
 
-> Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.
+> Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH, AGY/Gemini und andere lokal-first LLM-Agentenlaufzeiten.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 86 passed](https://img.shields.io/badge/Pytest-86%20bestanden-success.svg)](testing/)
+[![Pytest: 100 bestanden](https://img.shields.io/badge/Pytest-100%20bestanden-success.svg)](testing/)
+[![Python: >=3.10](https://img.shields.io/badge/Python->=3.10-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Skills: 120 getrackt](https://img.shields.io/badge/Skills-120%20getrackt-brightgreen.svg)](SKILLS-MAP.md)
+[![Öffentliche Skills: 130 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-130%20Katalog-brightgreen.svg)](registry/components.json)
+[![Getrackt: 376 Skills](https://img.shields.io/badge/Getrackt-376%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -39,21 +41,42 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ```mermaid
 flowchart TD
-    Catalog["Öffentliche Registry (120 getrackte Skills)"] --> Categories
-    subgraph Categories ["10 Öffentliche Kategorien"]
+    Registry["Öffentliche Skill-Registry (130 Katalog / 376 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
+    
+    subgraph Catalog ["10 Öffentliche Domänen"]
         Assist["assist (20)"]
-        Dev["dev (19)"]
+        Dev["dev (23)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (25)"]
+        Infra["infrastructure (29)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        Utils["utilities (23)"]
+        Utils["utilities (25)"]
         Web["web (1)"]
     end
-    Categories --> Specs["SKILL.md (YAML-Frontmatter + Playbooks)"]
-    Specs --> Runtimes["LLM-Laufzeiten (Claude Code / Codex / AGY / BACH)"]
+    
+    Engine --> Catalog
+    Catalog --> Artifacts["SKILL.md Spezifikationen\n(YAML-Frontmatter + Playbooks + Skripte)"]
+    
+    subgraph MultiAgentRuntimes ["Multi-Agenten-Ausführungsarchitektur"]
+        ClaudeCode["Claude Code (~/.claude/skills)"]
+        Codex["Codex (~/.codex/skills)"]
+        AGY["Antigravity / Gemini"]
+        BACH["BACH Text-OS"]
+        LocalOllama["Ollama / Lokales LLM"]
+    end
+    
+    Artifacts --> MultiAgentRuntimes
+    
+    subgraph QualityGates ["Qualitäts- & Integritäts-Gates"]
+        STests["S-Tests (Statische Validierung)"]
+        LTests["L-Tests (LLM-Selbsterfahrung)"]
+        UTests["U-Tests (Nutzererfahrung)"]
+        PytestSuite["Pytest Testsuite (100 Bestanden / 180 Subtests)"]
+    end
+    
+    Artifacts -.-> QualityGates
 ```
 
 ## Einstieg
@@ -71,19 +94,19 @@ flowchart TD
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 385 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 130 öffentliche Laufzeit-Skills (376 getrackt über lokale Testsuiten):
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | Nutzerneutrale Methoden für Büroarbeit, Notizen, Haushalt, Kontakte, Gesundheitsinformationen, Medien- und Bestandslisten, Sprachworkflows, Reisen, Wetter, Kalender und Transkription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 19 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 23 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung, Arbeitsblätter sowie nutzerneutrale Unterrichts- und Förderplanung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 25 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 29 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 23 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 25 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
@@ -231,15 +254,18 @@ Dieses Repository ist relevant für Suchbegriffe wie:
 
 Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden. Es handelt sich um einen wiederverwendbaren Skill-Katalog, nicht um einen MCP-Server, einen gehosteten SaaS-Marktplatz, ein Prompt-Pack oder einen privaten Skill-Installer.
 
-## Verwandte ellmos-Projekte
+## Ökosystem & Geschwister-Projekte
 
-| Projekt | Rolle |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | Vollständiges textbasiertes LLM-Betriebssystem |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Leichte lokal-first LLM-Agenteninfrastruktur |
-| [USMC](https://github.com/ellmos-ai/usmc) | Gemeinsamer Speicherbaustein für Agentensysteme |
-| [Gardener](https://github.com/ellmos-ai/gardener) | Datenbankbasierter Betriebssystem-Gegenpart |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | Framework zur Ausführung von LLM-Ketten |
+| Projekt | Organisation | Rolle |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Vollständiges textbasiertes LLM-Betriebssystem |
+| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Kern-Laufzeitprimitive und Ausführungsplattform |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Zentrales Werkzeug- und Profil-Gateway MCP-Server |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Agentenflotten-Komposition und Systemexploration |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Transaktionaler Workflow-Hook-Dispatcher |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Offline-First Transitsynchronisation & Snapshot-Retention |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop-Entwickler-Workstation-Suite |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Mehrsprachiger Code-Editor & Sandbox-Umgebung |
 
 ## Lizenz
 

@@ -7,8 +7,7 @@ import os
 import re
 import subprocess
 import sys
-from pathlib import Path
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 
 try:
     import skill_tester

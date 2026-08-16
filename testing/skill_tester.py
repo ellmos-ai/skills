@@ -22,14 +22,14 @@ Usage:
 Version: 1.0.0
 """
 
-import sys
+import ast
+import json
 import os
 import re
-import json
-import ast
 import subprocess
-from pathlib import Path, PurePosixPath
+import sys
 from datetime import datetime
+from pathlib import Path, PurePosixPath
 
 sys.stdout.reconfigure(encoding="utf-8")
 

@@ -1,8 +1,8 @@
-## Last-checked: 2026-08-03
+## Last-checked: 2026-08-16
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
-> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, and other local-first LLM agent runtimes. Tested with 86 passing pytest tests (100% green).
+> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes. Tested with 100 passing pytest tests (100% green).
 
 Canonical repository: https://github.com/ellmos-ai/skills
 Default branch: master
@@ -11,13 +11,13 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 120 tracked runtime skills organized by 10 categories.
+- 130 public runtime skills organized into 10 categories (376 tracked skills total).
 - The public registry is a minimal discovery index. Internal ownership,
   privacy, review, and maintainer fields are kept in a separate No-Push
   repository.
 - A `SKILL.md` schema with YAML frontmatter for provenance, compatibility, dependencies, and usage.
-- A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, and provenance.
-- German and English documentation for humans plus this compact file for crawlers and LLM agents.
+- A machine-readable catalog index (`registry/components.json`) listing every skill with category, version, description, and supported languages.
+- Multilingual documentation across 6 languages (DE, EN, ES, JA, RU, ZH) for humans plus this compact file for crawlers and LLM agents.
 
 ## Key files
 
@@ -32,19 +32,19 @@ Author: Lukas Geiger
 ## Public skill categories
 
 - `assist`: 20 user-neutral assistance methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription.
-- `dev`: 29 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
+- `dev`: 23 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
 - `education`: 5 skills for academic study, worksheets, and user-neutral teaching and support planning.
-- `game-dev`: Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
-- `infrastructure`: 25 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
-- `production`: text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
-- `research`: research-agent workflow support.
+- `game-dev`: 5 skills for Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
+- `infrastructure`: 29 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
+- `production`: 1 text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
+- `research`: 1 research-agent workflow support.
 - `therapy`: 20 German-language psychoeducation and counseling method playbooks.
-- `utilities`: 35 batch, document, reasoning, media, and first-look utility workflows.
-- `web`: web-reading protocol support.
+- `utilities`: 25 batch, document, reasoning, media, and first-look utility workflows.
+- `web`: 1 web-reading protocol support.
 
 ## Audience
 
-- Developers building reusable `SKILL.md` workflows for Claude Code-style or Codex-compatible agents.
+- Developers building reusable `SKILL.md` workflows for Claude Code-style, Codex-compatible, or AGY agents.
 - Local-first AI operators who want portable skills without a hosted marketplace or central registry.
 - BACH and ellmos users who need skill provenance, category metadata, and sync-state conventions.
 - Researchers and document workers looking for reusable process, research, and utility playbooks.
@@ -78,10 +78,14 @@ data, and personal defaults belong in separate private profiles or forks.
 generation lives in the separate public `ellmos-ai/report-forge` project, while
 personal support-report templates remain private.
 
-## Related ellmos repositories
+## Related Ecosystem & Sibling Projects
 
-- https://github.com/ellmos-ai/bach - full text-based LLM operating system.
-- https://github.com/ellmos-ai/rinnsal - lightweight local-first LLM agent infrastructure.
-- https://github.com/ellmos-ai/usmc - shared memory primitive for agent systems.
-- https://github.com/ellmos-ai/gardener - database-based OS counterpart.
-- https://github.com/ellmos-ai/MarbleRun - LLM chain-execution framework.
+- [BACH](https://github.com/ellmos-ai/bach) - Full text-based LLM operating system
+- [ellmos-core](https://github.com/ellmos-ai/ellmos-core) - Core runtime primitives and execution fabric
+- [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) - Unified tool and profile gateway MCP server
+- [system-explorer](https://github.com/ellmos-ai/system-explorer) - Agent fleet composition and system exploration
+- [workflowhooker](https://github.com/ellmos-ai/workflowhooker) - Transactional workflow hook dispatcher
+- [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) - Offline-first transit sync and snapshot retention
+- [DevCenter](https://github.com/dev-bricks/DevCenter) - Desktop developer workstation suite
+- [CodeBox](https://github.com/dev-bricks/CodeBox) - Multi-language code editor and sandbox environment
+- [open-bricks](https://github.com/open-bricks) - Umbrella open-source software project organization
