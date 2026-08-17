@@ -47,6 +47,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="work-autonomous banner">
+
 # work-autonomous — Only end the loop once it is proven no autonomous tasks remain
 
 ## Purpose

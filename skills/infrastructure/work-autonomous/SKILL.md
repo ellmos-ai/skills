@@ -47,6 +47,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="work-autonomous banner">
+
 # work-autonomous — Loop erst beenden, wenn belegt keine autonomen Aufgaben mehr vorliegen
 
 ## Zweck

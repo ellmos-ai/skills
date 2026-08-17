@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['system-
 provenance: {'origin': 'module', 'origin_path': '<HOME>/OneDrive/.TOPICS/.AI/.MODULES/.ORCHESTRATION/compare-race/prompts/RACE-STARTER.en.md', 'origin_version': '0.1.0', 'last_sync_from_origin': '2026-08-16', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 
+<img src="banner.png" width="100%" alt="compare-race banner">
+
 # compare-race — pointer skill (English)
 
 > **This skill is a pure pointer. The module is the source of truth.**
