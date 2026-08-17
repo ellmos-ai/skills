@@ -1228,7 +1228,7 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/orchestrator/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
       "description": "Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.",
       "languages": [

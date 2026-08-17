@@ -1,0 +1,23 @@
+{
+  "_comment": "Ressourcenprofile fuer den orchestrator-Skill (optionale Anpassungsschicht, siehe SKILL.md Abschnitt 'Ressourcenprofil'). Ohne diese Datei gilt exakt das dokumentierte Sparprofil.",
+  "profiles": {
+    "solo": {
+      "max_parallel_workers": 1,
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "external_agents_count_as_slot": false
+    },
+    "spar": {
+      "max_parallel_workers": 2,
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "external_agents_count_as_slot": false
+    },
+    "burst": {
+      "max_parallel_workers": 4,
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "external_agents_count_as_slot": false
+    }
+  }
+}

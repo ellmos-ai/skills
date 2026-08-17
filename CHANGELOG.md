@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-17
+
+- **orchestrator skill 1.2.0** (`skills/infrastructure/orchestrator/`):
+  - Added optional resource-profile layer: `profiles.json` (named profiles `solo`/`spar`/`burst`) and `config.json` (active profile, overrides, session override) alongside `SKILL.md`.
+  - Added optional token-credit-driven auto profile switching (`config.json.token_tracker`) that recycles an existing tracker instead of building a new one — read-only, no process spawn, two-threshold hysteresis, fail-closed on unreadable state.
+  - Neutrality preserved: without both files the skill behaves exactly as before (documented spar-profile default); the canonical `config.json` ships with the tracker disabled and no host paths — real paths belong only in each user's local copy.
+  - `registry/components.json` version bumped to `1.2.0`.
+
 ## 2026-08-16
 
 - **Discoverability, README-Design, Badges & Metadata Parity Check (Pfad B)**:
