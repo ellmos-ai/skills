@@ -99,14 +99,14 @@ Der aktuelle öffentliche Katalog enthält 132 öffentliche Laufzeit-Skills (376
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | Nutzerneutrale Methoden für Büroarbeit, Notizen, Haushalt, Kontakte, Gesundheitsinformationen, Medien- und Bestandslisten, Sprachworkflows, Reisen, Wetter, Kalender und Transkription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 22 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung, Arbeitsblätter sowie nutzerneutrale Unterrichts- und Förderplanung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 30 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 27 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 25 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 22 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills

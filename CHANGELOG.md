@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-18
+
+- **New skill: `file-collect-sort-action`** (`skills/utilities/file-collect-sort-action/`, 1.0.0):
+  routes trigger phrases like "collect all X from folder Y into Z" / "sort this folder
+  automatically" to the `file-collect-sort-action` (fcsa) module — a config-driven scan →
+  categorize → act agent with mandatory dry-run-first safety gating. Quality score 5.0/5.
+- **`skill-finder` 0.3.0** (`skills/infrastructure/skill-finder/`): routing row added for
+  `file-collect-sort-action`; also restored a `reissverschluss-merge` routing row and a
+  `version:` field that only existed in the deployed copy (`~/.claude/skills/`) but not in
+  this repo's source — closing the same source-vs-deployment drift pattern found and fixed
+  elsewhere in T-20260818-730952791.
+
 ## 2026-08-17
 
 - **orchestrator skill 1.2.0** (`skills/infrastructure/orchestrator/`):

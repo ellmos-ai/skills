@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.1.0
+version: 0.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-18
 description: >
   Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
   einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
@@ -68,8 +68,10 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | wiederkehrender Check über viele Projekte | Coding & Debugging | `rotation-check` (Registry/Log-Gerüst) |
 | festgefahrenes Problem, Ideen schürfen | Denkwerkzeuge | `idea-mining` (vs `/brainstorm` = frei/breit) |
 | DE/EN-Dokumentfassungen synchron halten | Utilities | `bilingual-doc-sync` |
+| sehr konfliktreicher Merge / divergente Branches (main vs. master) / alter PR | Coding & Debugging | `reissverschluss-merge` (`/reissverschluss-merge` · `/zipper-merge`; Eskalation: Rebuild statt Merge) |
 | KI-Spuren/Chat-Reste aus Texten, AI-Disclosure | Utilities | `llm-text-hygiene` |
 | Bedingung/Zeitpunkt/Reihenfolge im Auftrag („erst wenn", „ab 6 Uhr", „sobald X fertig") | Prozess | `condition` (`/if` · `/when` · `/if-only` · `/after` · `/and` · `/or`) |
+| Dateien aus einem Ordner regelbasiert einsammeln/sortieren ("hole aus X immer Y und sammle sie in Z", "sortiere Ordner automatisch") | Utilities | `file-collect-sort-action` |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -88,6 +90,15 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.3.0 (2026-08-18)
+- Routing-Zeile für neuen Skill file-collect-sort-action ("Dateien regelbasiert einsammeln/
+  sortieren", Erkennung der geparkten f-csa-Trigger-Sätze aus T-20260818-916568570).
+- Nachgezogen: Routing-Zeile für reissverschluss-merge fehlte in der Quelle des Skills-Repos
+  (nur im Deployment `~/.claude/skills/` vorhanden) — Drift beim Bearbeiten aufgefallen und
+  hier wiederhergestellt, damit ein künftiger Deploy sie nicht überschreibt.
+- `version:`-Feld an den zuletzt schon erreichten Changelog-Stand (0.2.0) angeglichen und
+  auf 0.3.0 weitergezählt — war zuvor bei 0.1.0 stehengeblieben.
 
 ### 0.2.0 (2026-07-03)
 - Routing-Zeilen für neue Skills: skill-extractor, workflow-extract, rotation-check,

@@ -1278,7 +1278,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-finder/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "status": "active",
       "description": "Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill zu routen. Aktiviert sich bei „welcher Skill passt\", „gibt es dafür einen Skill\", „skill finden\", oder generell vor Aufgaben, die ein lokaler Skill besser löst als ad-hoc-Arbeit.",
       "languages": [
