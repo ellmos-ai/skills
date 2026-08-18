@@ -1161,7 +1161,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/open-compute-bridge/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
       "description": "Bindet das model-agnostische Computer-Use-Modul open-compute (Screenshot-Wahrnehmung, Windows-UIA-Elementklicks, sicherheitsgegatete Aktionen) fuer ALLE Agenten des Systems ein -- Claude Code, Codex und agy/Antigravity. Nutzen, wenn ein Dienst eine interaktive GUI- oder Browser-Aktion braucht, die kein reiner Text-/API-Weg loesen kann (Paradebeispiel: Tailscale-Reauth im Browser, sonstige Login-/Consent-Dialoge, Dialogfenster-Klicks). Standard ab 2026-08-02: open-compute statt Aufgeben oder Abwarten nutzen.",
       "languages": [
