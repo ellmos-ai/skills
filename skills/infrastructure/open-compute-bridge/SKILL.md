@@ -1,10 +1,10 @@
 ---
 name: open-compute-bridge
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-02
-updated: 2026-08-02
+updated: 2026-08-18
 description: >
   Bindet das model-agnostische Computer-Use-Modul open-compute (Screenshot-Wahrnehmung,
   Windows-UIA-Elementklicks, sicherheitsgegatete Aktionen) fuer ALLE Agenten des Systems
@@ -32,7 +32,7 @@ dependencies:
 provenance:
   origin: custom
   origin_path: "skills/infrastructure/open-compute-bridge/"
-  origin_version: "1.1.0"
+  origin_version: "1.2.0"
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
@@ -81,6 +81,65 @@ zum virtuellen Desktop.
 - Zustandsaendernde Aktionen sind **schwer umkehrbar** (echte Klicks im echten Windows).
   Bei Unsicherheit ueber ein Ziel: erst `list_windows`/`tree`/`get_screen_size` (read-only)
   nutzen, dann erst handeln.
+
+## Prozessregel: Uebernahme ankuendigen UND auf Go warten [U 2026-08-18]
+
+**Anlass:** Waehrend eines Hackathon-Operator-Laufs uebernahm Claude Code per open-compute
+den Desktop fuer Cloud-Console-Screenshots, waehrend der User parallel in einem
+DATENGESCHUETZTEN Bereich arbeitete (Outlook, berufliches Postfach). Ein
+`activate_window`-Fuzzy-Match ("Messwerte") traf zudem das falsche Fenster (Outlook statt
+Edge-Cloud-Console) -- ein Screenshot erfasste kurz private Mailinhalte (nicht gespeichert,
+nicht weiterverwendet). Ticket T-20260818-895473048.
+
+Ab sofort gilt -- **unabhaengig vom technischen Not-Aus weiter unten, als Verhaltensregel
+fuer den Agenten selbst:**
+
+1. **Uebernahme nicht nur ankuendigen, sondern auf explizites User-Go warten**, wenn der
+   User potenziell aktiv am Rechner ist (Chat-Historie zeigt laufende Interaktion, keine
+   laengere Funkstille). Bei erkennbarer Inaktivitaet des Users darf direkt begonnen werden
+   (Autonomie bleibt ausdruecklich erwuenscht) -- der 20-Sekunden-Karenzzeit-Countdown des
+   Servers (siehe unten) ist dafuer das technische Netz, kein Ersatz fuer diese Ruecksicht.
+2. **`activate_window`-Ziele vor der ersten Eingabe per Screenshot verifizieren.** Ein
+   Fuzzy-Namens-Treffer kann das falsche Fenster aktivieren (z. B. ein Suchbegriff, der auch
+   im Betreff einer offenen Mail vorkommt). Erst `capture(window=<Titel>)` oder ein
+   Voll-Screenshot ansehen, DANN tippen/klicken -- nie blind nach `activate_window`.
+3. **Das Signal-Overlay selbst verfaelscht Screenshots** (Rahmen/Cursor-Ring/Label liegen
+   im Bild). Fuer eine Aufnahme, die der User spaeter sieht oder die dokumentiert wird: kurz
+   `signal_hide()`, Aufnahme machen, im Chat ankuendigen ("Overlay kurz ausgeblendet fuer
+   einen sauberen Screenshot"), danach `signal_show(...)` erneut aufrufen.
+
+## Not-Aus / Abbruch-Button (technische Absicherung) [U 2026-08-18]
+
+Der MCP-Server hat seit diesem Ticket einen echten Kill-Switch, unabhaengig von der
+Prozessregel oben -- fuer den Fall, dass der Agent sie doch einmal uebersieht:
+
+- **Immer sichtbarer Abbruch-Button im Overlay** (rotes "✖ ABBRUCH"-Feld, oben rechts,
+  einzige NICHT click-through-Flaeche des Overlays) + **Panik-Hotkey**
+  (`signal.abort_hotkey` in der Config bzw. `abort_hotkey`-Parameter von `signal_show`).
+  Beides fuehrt zum selben harten Stopp: laufende **und** gequeuete Aktionen (`do`-Batches,
+  `rec_replay`-Schritte) werden SOFORT gestoppt, jeder weitere `do`/`click_name`/`invoke`/
+  `rec_replay`/`capture`-Aufruf wird abgelehnt -- **auch unter `OC_SAFETY_MODE=allow_all`**
+  -- bis eine neue, explizite `signal_show(...)`-Uebernahme den Schalter zuruecksetzt.
+- **Abbruch mit Grund:** Freitext ODER 1-Klick aus einer konfigurierbaren Liste
+  (`signal.abort_reasons` in der Signal-Config, z. B. "Ich arbeite gerade selbst",
+  "Datengeschuetzter Bereich sichtbar", "Falsches Fenster"). Der Grund kommt als
+  `abort_reason`-Feld direkt in der Antwort des naechsten (oder noch laufenden) Tool-Aufrufs
+  zurueck -- kein separates Nachfragen noetig, `signal_status()` bleibt zusaetzlich als
+  Abfrageweg bestehen (Feld `aborted`/`abort_reason`, nicht konsumierend).
+- **Vorlauf-Countdown:** Ein expliziter `signal_show(...)`-Aufruf startet eine Karenzzeit
+  (`signal.pre_action_grace_seconds`, Default 20s) -- die erste zustandsaendernde Aktion
+  **und** der erste Screenshot danach blockieren serverseitig, bis die Zeit um ist oder
+  abgebrochen wird; das Overlay-Label zeigt "Uebernahme in Ns" waehrenddessen an. Reine
+  Sichtbarkeits-Anzeige (`OC_SIGNAL_AUTO`, das Overlay erst NACH einer bereits gelaufenen
+  Aktion zeigt) loest diesen Countdown bewusst NICHT aus -- er gehoert zur bewussten
+  Uebernahme, nicht zur nachtraeglichen Sichtbarkeitsanzeige. `OC_SIGNAL_GRACE_SECONDS`
+  ueberschreibt den Wert ohne Config-Datei.
+- **User-Aktivitaets-Wache (opt-in, `OC_HUMAN_ACTIVITY_WATCH=on`):** erkennt echte, nicht
+  vom Agenten selbst ausgeloeste Maus-/Tastatur-Eingaben kurz vor einer Aktion und pausiert
+  automatisch (derselbe Not-Aus-Zustand, erneute Freigabe per `signal_show` noetig).
+  Standardmaessig AUS, weil `GetLastInputInfo` auf einem aktiv mitgenutzten Rechner leicht
+  Fehlalarme ausloest (z. B. wenn der Aufruf selbst aus einem Terminal getippt wird) --
+  gedacht fuer Workstations, auf denen der User haeufig parallel arbeitet.
 
 ## Kernablauf (fuer alle Agenten gleich)
 
