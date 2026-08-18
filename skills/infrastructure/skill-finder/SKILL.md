@@ -1,6 +1,6 @@
 ---
 name: skill-finder
-version: 0.3.0
+version: 0.4.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
@@ -72,6 +72,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | KI-Spuren/Chat-Reste aus Texten, AI-Disclosure | Utilities | `llm-text-hygiene` |
 | Bedingung/Zeitpunkt/Reihenfolge im Auftrag („erst wenn", „ab 6 Uhr", „sobald X fertig") | Prozess | `condition` (`/if` · `/when` · `/if-only` · `/after` · `/and` · `/or`) |
 | Dateien aus einem Ordner regelbasiert einsammeln/sortieren ("hole aus X immer Y und sammle sie in Z", "sortiere Ordner automatisch") | Utilities | `file-collect-sort-action` |
+| App-/GUI-Serie gemeinsam mit dem User durchtesten (live testen, Feedback sofort auswerten + Reparatur delegieren) | Coding & Debugging | `human-loop-audit` |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -90,6 +91,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.4.0 (2026-08-18)
+- Routing-Zeile für neuen Skill human-loop-audit ("App-/GUI-Serie gemeinsam mit dem User
+  durchtesten", Reißverschluss-Audit mit paralleler Reparatur-Delegation; abgegrenzt vom
+  gleichnamig klingenden, aber inhaltlich fremden reissverschluss-merge).
 
 ### 0.3.0 (2026-08-18)
 - Routing-Zeile für neuen Skill file-collect-sort-action ("Dateien regelbasiert einsammeln/

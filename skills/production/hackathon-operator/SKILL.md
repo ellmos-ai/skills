@@ -4,12 +4,17 @@ version: 1.0.0
 type: workflow
 author: ellmos (erstellt von Kimi K3 aus der Roshambo-Prozessanalyse)
 created: 2026-07-31
+updated: 2026-08-18
 description: >
   Führt einen Hackathon end-to-end als Operator: von der Ausschreibung über Analyse,
   Ideenfindung, Bau, Beweisführung, Medienproduktion bis zur Einreichung — mit
   Zwischenstandsspeicher (STATE.md), aus dem jede Phase wieder aufgenommen werden
   kann. Der Nutzer ist human-in-the-loop: Richtungsvorgaben, Abnahmen und alle
   unumkehrbaren Aktionen (Public, Upload, Submit) bleiben beim Menschen.
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
 category: production
 tags: [hackathon, workflow, operator, devpost, automation, state-machine]
 language: de
@@ -125,8 +130,8 @@ Bildsprache, ob der Beweis „steht". Sie sind rückholbar und wirken nur nach i
 ein Storyboard lässt sich verwerfen, ein Entwurf neu schneiden. Hier **entscheidet der
 Operator selbst**, statt zu warten:
 
-- `tom-lm` (`/decide-like-me`) — der Loop: Projekt-DECISIONS.md → belegte frühere
-  Aussagen → Vorhersage mit Konfidenz. **Nur bei roter Konfidenz eskalieren.**
+- Eigener Decision-Avatar (`/decide-like-me`) — der Loop: Projekt-DECISIONS.md → belegte
+  frühere Aussagen → Vorhersage mit Konfidenz. **Nur bei roter Konfidenz eskalieren.**
 - `/decide` für die strukturierte Abwägung, `/brainstorm` wenn die Optionen fehlen.
 - Jede so getroffene Entscheidung wird **nachvollziehbar hinterlegt** — Begründung im
   Commit und im Bericht, damit der Avatar aus dem Feedback lernt.

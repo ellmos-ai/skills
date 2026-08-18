@@ -152,7 +152,7 @@ rechts wie aufgelistet, eine doppelt aufgeführte Aktions-ID läuft **doppelt**;
 
 ## Herkunft
 
-Modul gebaut in Ticket T-20260818-916568570 (Durchgang 1, fcsa-worker@ASUS-GEI), auf Wunsch
+Modul gebaut in Ticket T-20260818-916568570 (Durchgang 1, fcsa-worker), auf Wunsch
 des Nutzers bewusst passiv geparkt (PARKED/until-trigger) bis genau der oben beschriebene
 Trigger auftritt. Dieser Skill setzt exakt diesen Park-Vermerk um.
 

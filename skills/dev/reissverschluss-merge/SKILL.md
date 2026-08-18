@@ -159,6 +159,8 @@ schließen. Urheberschaft der Idee im Commit/PR-Text nennen.
 
 - `bugfix-protocol` — wenn der Merge einen echten Defekt aufdeckt, dort weiter.
 - `skill-extractor` — Herkunft dieses Skills (Live-Session-Destillat).
+- `human-loop-audit` — teilt sich nur das Reißverschluss-Bild, hat aber mit Git-Merges
+  nichts zu tun (interaktives App-/GUI-Testverfahren mit dem Nutzer).
 
 ## Changelog
 

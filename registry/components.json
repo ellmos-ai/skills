@@ -2,17 +2,17 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 124,
+    "component_count": 126,
     "categories": {
       "assist": 20,
-      "dev": 22,
+      "dev": 23,
       "education": 5,
       "game-dev": 5,
       "infrastructure": 27,
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "utilities": 22,
+      "utilities": 23,
       "web": 1
     }
   },
@@ -529,6 +529,19 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "skill:dev:human-loop-audit",
+      "name": "human-loop-audit",
+      "type": "skill",
+      "category": "dev",
+      "path": "skills/dev/human-loop-audit/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
+      "languages": [
+        "de"
       ]
     },
     {
@@ -1278,7 +1291,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-finder/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "status": "active",
       "description": "Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill zu routen. Aktiviert sich bei „welcher Skill passt\", „gibt es dafür einen Skill\", „skill finden\", oder generell vor Aufgaben, die ein lokaler Skill besser löst als ad-hoc-Arbeit.",
       "languages": [
@@ -1950,6 +1963,19 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:file-collect-sort-action",
+      "name": "file-collect-sort-action",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/file-collect-sort-action/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
+      "languages": [
+        "de"
       ]
     },
     {
