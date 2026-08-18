@@ -2,17 +2,17 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 132,
+    "component_count": 124,
     "categories": {
       "assist": 20,
-      "dev": 24,
+      "dev": 22,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 30,
+      "infrastructure": 27,
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "utilities": 25,
+      "utilities": 22,
       "web": 1
     }
   },
@@ -378,24 +378,6 @@
       ]
     },
     {
-      "id": "skill:dev:bilingual-doc-sync",
-      "name": "bilingual-doc-sync",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/bilingual-doc-sync/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "protocol:dev:bugfix-protocol",
       "name": "bugfix-protocol",
       "type": "protocol",
@@ -540,24 +522,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "protocol:dev:load-project",
-      "name": "load-project",
-      "type": "protocol",
-      "category": "dev",
-      "path": "skills/dev/load-project/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Zu Beginn einer konkreten Projektaufgabe oder bei unklarem Kontext: Ziel auflösen, geltende Regelhierarchie laden, verbindliche Referenzen verfolgen und vor der eigentlichen Arbeit einen evidenzbasierten Lagebericht erstellen.",
       "languages": [
         "de",
         "en",
@@ -1102,24 +1066,6 @@
       ]
     },
     {
-      "id": "protocol:infrastructure:full-after-care",
-      "name": "full-after-care",
-      "type": "protocol",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/full-after-care/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:infrastructure:headless",
       "name": "headless",
       "type": "skill",
@@ -1255,24 +1201,6 @@
       ]
     },
     {
-      "id": "skill:infrastructure:rotation-check",
-      "name": "rotation-check",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/rotation-check/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:infrastructure:semantic-persona-routing",
       "name": "semantic-persona-routing",
       "type": "skill",
@@ -1389,24 +1317,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "protocol:infrastructure:surface-after-care",
-      "name": "surface-after-care",
-      "type": "protocol",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/surface-after-care/SKILL.md",
-      "version": "1.6.0",
-      "status": "active",
-      "description": "Regelmäßiger Pflegedurchlauf für ein bereits veröffentlichtes GitHub-Repository (Stufe 1, günstig und oft wiederholbar): zuerst alle Distributionsflächen des Projekts ermitteln (npm, PyPI, Registries, Marketplaces, Stores, Website) und Änderungen später dorthin spiegeln, dann Topics setzen, Privacy-Gate, Dokumente auf Veröffentlichungsabsicht prüfen und interne Planungsdateien nachträglich ignorieren, Banner ergänzen, Aussagen im README gegen den echten Code-Stand abgleichen, Darstellung verbessern, Sprachfassungen der README vervollständigen, Sichtbarkeitsmaßnahmen umsetzen, Eintrag auf der Organisationsseite prüfen sowie offene Issues und Pull Requests abarbeiten. Nutze diesen Skill, wenn ein bestehendes Repo gepflegt, aufgeräumt, aktualisiert, aufgehübscht oder \"mal wieder durchgesehen\" werden soll, wenn ein Repo veraltet oder unaufgeräumt wirkt, bei Formulierungen wie \"Repo-Pflege\", \"after care\", \"Nachpflege\", \"Repo auf Stand bringen\", \"aufräumen und pushen\" oder bei rotierenden Qualitätsrunden über mehrere Repos. Für die tiefe Runde inkl. Rechtscheck und orga-übergreifenden Querverweisen stattdessen full-after-care nutzen; für die Erstveröffentlichung github-repo-care.",
       "languages": [
         "de",
         "en",
@@ -1971,24 +1881,6 @@
       ]
     },
     {
-      "id": "skill:utilities:condition",
-      "name": "condition",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/condition/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Flexible Bedingungssprache für Ziele, Prompts und Aufträge. Übersetzt Bedingungen, Zeitpunkte und Reihenfolge-Abhängigkeiten in prüfbare Gates, damit ein Teilschritt erst nach belegter Freigabe ausgeführt wird. Immer verwenden bei /condition, /if, /if-only, /when, /after, /and oder /or sowie bei Formulierungen wie \"erst wenn\", \"sobald\", \"nur falls\", \"nachdem\", \"warte bis\", \"danach\" oder \"vorher nicht\". Auch verwenden, wenn mehrere Teilziele voneinander abhängen oder ein Goal eine spätere Freigabe enthält.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
       "id": "skill:utilities:decide",
       "name": "decide",
       "type": "skill",
@@ -1997,24 +1889,6 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "protocol:utilities:decision-avatar",
-      "name": "decision-avatar",
-      "type": "protocol",
-      "category": "utilities",
-      "path": "skills/utilities/decision-avatar/SKILL.md",
-      "version": "1.0.0",
-      "status": "active",
-      "description": "Bei vorhandenem und ausdrücklich autorisiertem lokalem Entscheidungsprofil: wiederkehrende Entscheidungen aus belegtem Feedback vorhersagen, Konfidenz kalibrieren und Vorhersage, Entscheidung und Ausführung strikt trennen.",
       "languages": [
         "de",
         "en",
@@ -2293,24 +2167,6 @@
       "version": "1.1.0",
       "status": "active",
       "description": "Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "ja",
-        "ru",
-        "zh"
-      ]
-    },
-    {
-      "id": "skill:utilities:workflow-extract",
-      "name": "workflow-extract",
-      "type": "skill",
-      "category": "utilities",
-      "path": "skills/utilities/workflow-extract/SKILL.md",
-      "version": "1.1.0",
-      "status": "active",
-      "description": "Baut aus einem Chatverlauf oder aus bestehenden Automatisierungs-Prompts (z. B. eines anderen Agenten-Systems) eine selbstlaufende, user-neutrale Workflow-Automatisierung: einen wiederkehrenden Prompt bzw. Automations-Skill für Cron/Schedule/Loop. Alias: automations-extractor. Nutze diesen Skill bei „mach daraus eine Automatisierung\", „das soll regelmäßig/nächtlich laufen\", „extrahiere Workflows aus diesen Chatverläufen/Automationen\", „Automation aus dieser Session bauen\", oder bei `/workflow-extract`. Ergänzt fehlende Automations-Bausteine (Rotations-Auswahl, Check-Registry, Idempotenz, Log-Hygiene, Freigabe-Gate, Eskalations-Handoff, Monitor-Meldedisziplin) systematisch. Enthält auch den Fleet-Audit-Modus: bestehende Automations-Flotten auf Silent-Failures, Redundanz, Drift und Lücken prüfen („prüfe meine Automatisierungen/Scheduled Tasks/Cron-Jobs\"). Soll stattdessen ein abrufbarer Skill (Fähigkeit auf Zuruf) entstehen, den Schwester-Skill skill-extractor nutzen.",
       "languages": [
         "de",
         "en",

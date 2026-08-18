@@ -141,6 +141,77 @@ class StaticGateTests(unittest.TestCase):
 
             self.assertEqual(0, exit_code)
 
+    def test_category_matching_folder_has_no_gate_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            skill_dir = self.make_skill(Path(tmp))
+
+            self.assertEqual([], skill_tester.frontmatter_gate_errors(skill_dir))
+
+    def test_category_contradicting_folder_is_a_gate_error(self) -> None:
+        # T-20260818-730952791: reproduces the four 2026-08-17 misplacements
+        # (e.g. compare-race copied into utilities/ while declaring category: dev).
+        with tempfile.TemporaryDirectory() as tmp:
+            text = VALID_SKILL.replace("category: utilities\n", "category: dev\n")
+            skill_dir = self.make_skill(Path(tmp), text)
+
+            errors = skill_tester.frontmatter_gate_errors(skill_dir)
+
+            self.assertIn(
+                "category 'dev' widerspricht dem Ordner 'utilities/' "
+                "(Konvention: category muss dem Ordnernamen entsprechen, siehe "
+                "docs/CONVENTIONS.md)",
+                errors,
+            )
+
+    def test_missing_category_is_not_a_folder_contradiction(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            text = VALID_SKILL.replace("category: utilities\n", "")
+            skill_dir = self.make_skill(Path(tmp), text)
+
+            errors = skill_tester.frontmatter_gate_errors(skill_dir)
+
+            self.assertFalse(any("widerspricht dem Ordner" in e for e in errors))
+
+    def test_archive_folder_is_exempt_from_category_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            skill_dir = Path(tmp) / "skills" / "_archive" / "example-skill__legacy"
+            skill_dir.mkdir(parents=True)
+            text = VALID_SKILL.replace("category: utilities\n", "category: dev\n")
+            (skill_dir / "SKILL.md").write_text(text, encoding="utf-8")
+
+            errors = skill_tester.frontmatter_gate_errors(skill_dir)
+
+            self.assertFalse(any("widerspricht dem Ordner" in e for e in errors))
+
+    def test_all_four_historical_misplacements_would_have_been_caught(self) -> None:
+        # Regression fixture for the ticket's exact findings, independent of
+        # whether the affected skills have since been archived on disk.
+        cases = [
+            ("compare-race", "dev", "utilities"),
+            ("hackathon-operator", "production", "utilities"),
+            ("work-autonomous", "infrastructure", "utilities"),
+            ("music-composer", "utilities", "production"),
+        ]
+        for name, declared_category, actual_folder in cases:
+            with self.subTest(skill=name):
+                with tempfile.TemporaryDirectory() as tmp:
+                    text = VALID_SKILL.replace(
+                        "name: example-skill\n", f"name: {name}\n"
+                    ).replace(
+                        "category: utilities\n", f"category: {declared_category}\n"
+                    )
+                    skill_dir = Path(tmp) / "skills" / actual_folder / name
+                    skill_dir.mkdir(parents=True)
+                    (skill_dir / "SKILL.md").write_text(text, encoding="utf-8")
+
+                    errors = skill_tester.frontmatter_gate_errors(skill_dir)
+
+                    self.assertTrue(
+                        any("widerspricht dem Ordner" in e for e in errors),
+                        f"{name} in {actual_folder}/ mit category: {declared_category} "
+                        "wurde nicht erkannt",
+                    )
+
     def test_system_onboarding_is_publicly_registered(self) -> None:
         repository_root = MODULE_PATH.parent.parent
         skill_dir = repository_root / "skills" / "infrastructure" / "system-onboarding"

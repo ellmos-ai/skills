@@ -147,6 +147,24 @@ def frontmatter_gate_errors(skill_path):
     if 'standalone' in fm and not isinstance(fm['standalone'], bool):
         errors.append("standalone muss true oder false sein")
 
+    # T-20260818-730952791: Vier Skills wurden am 2026-08-17 in einen Kategorie-
+    # Ordner kopiert, der ihrem eigenen `category:`-Feld widersprach (z.B.
+    # category: dev, physisch aber unter utilities/). Genau dieser Widerspruch
+    # war in allen vier Faellen das eindeutige, billig pruefbare Erkennungsmerkmal
+    # -- category ist laut docs/CONVENTIONS.md "Themen-Kategorie (Ordnername)",
+    # also per Konvention identisch zum Elternordner. `_`-Ordner (_archive,
+    # _templates, _examples) sind bewusst ausgenommen: dort gilt die Konvention
+    # nicht (Archiv-/Vorlagen-Inhalte behalten ihr urspruengliches category-Feld).
+    category = fm.get('category')
+    if category:
+        category_folder = Path(skill_path).resolve().parent.name
+        if not category_folder.startswith('_') and str(category).strip() != category_folder:
+            errors.append(
+                f"category '{category}' widerspricht dem Ordner '{category_folder}/' "
+                "(Konvention: category muss dem Ordnernamen entsprechen, siehe "
+                "docs/CONVENTIONS.md)"
+            )
+
     return errors
 
 
