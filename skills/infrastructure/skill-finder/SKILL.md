@@ -1,6 +1,6 @@
 ---
 name: skill-finder
-version: 0.5.0
+version: 0.6.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
@@ -74,6 +74,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Dateien aus einem Ordner regelbasiert einsammeln/sortieren ("hole aus X immer Y und sammle sie in Z", "sortiere Ordner automatisch") | Utilities | `file-collect-sort-action` |
 | App-/GUI-Serie gemeinsam mit dem User durchtesten (live testen, Feedback sofort auswerten + Reparatur delegieren) | Coding & Debugging | `human-loop-audit` |
 | Projekt nach Sitzungsende aufräumen (Register lösen/einsortieren, Doku auf Ist-Stand bringen, Strays wegräumen) | Coding & Debugging | `tidy-up` (`/tidy-up`; zählt als `work-autonomous`-Ebene-1-Quelle) |
+| Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu verändern ("CLAUDE.md ist zu lang", "wird abgeschnitten") | Utilities | `paveman` (deterministisch, kein Modellaufruf; vs. `knappform` = LLM-Sprechstil) |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -92,6 +93,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.6.0 (2026-08-19)
+- Routing-Zeile für neuen Skill paveman ("Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu
+  verändern"): dünner Wrapper um das bereits installierte, deterministische Kürzungs-Modul
+  `paveman` (T-20260819-213392123); Abgrenzung zu `knappform` (LLM-Sprechstil statt Datei-Edit).
 
 ### 0.5.0 (2026-08-19)
 - Routing-Zeile für neuen Skill tidy-up ("Projekt nach Sitzungsende aufräumen": einmaliger
