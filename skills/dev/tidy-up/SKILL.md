@@ -1,6 +1,6 @@
 ---
 name: tidy-up
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-19
@@ -30,7 +30,7 @@ status: active
 dependencies:
   tools: []
   services: []
-  protocols: [work-autonomous]
+  protocols: [work-autonomous, bilingual-doc-sync]
   python: []
 
 # Provenance (Herkunfts-Tracking)
@@ -118,6 +118,22 @@ Ziel: Dokumentation zeigt den **gemessenen**, nicht den erinnerten oder erhoffte
    Status, Dateinamen, Versionen) werden korrigiert. Bei Unsicherheit, ob ein Abschnitt kuratiert
    ist: lieber einen Vermerk ergaenzen als eine bestehende Formulierung ueberschreiben.
 4. Kein Neuschreiben von Grund auf, wenn ein Update reicht.
+5. **Uebersetzungs-Nachzug** (Ergaenzung 2026-08-19, User-Auftrag live): Fehlt fuer das Projekt
+   eine Sprachfassung, die laut **Policy P-006** (`.SYNC/_policies/library/P-006_sprachstufen.md`)
+   fuer seine Stufe Pflicht ist, oder ist eine vorhandene Fassung erkennbar veraltet — das zieht
+   der WRITER-Schritt nach. P-006 in Kurzform: **Core-Set (DE+EN) ist Pflicht** fuer jedes
+   veroeffentlichte Repo/katalogisierte Objekt (Repo: `README.md` EN + `README_de.md`; Skill:
+   `SKILL.md` DE + `SKILL.en.md`); Full-/World-Set (ES/ZH/JA/RU bzw. +FR/HI/AR/BN/PT) sind das
+   Zielbild, werden aber **nach und nach** nachgezogen, nicht in einer Kampagne durch `tidy-up`.
+   **Werkzeug: der bestehende Skill `bilingual-doc-sync` wird orchestriert (aufgerufen), seine
+   Logik wird NICHT dupliziert** — er deckt genau "fehlende Fassung nachziehen" +
+   Abschnitts-Paritaetspruefung + Divergenzbehebung bereits ab. `tidy-up` liefert ihm nur den
+   Anstoss (welches Objekt, welche laut P-006 fehlende Pflichtsprache) fuer den aktiven
+   Projektordner; Uebersetzungsqualitaet, Struktur-Paritaet und Leitsprachen-Regel bleiben
+   `bilingual-doc-sync`s Verantwortung. **Grenzen wie bei P-006:** nur bis zum gemessenen Ist-Stand
+   uebersetzen, keine Inhalte erfinden, echte Diakritika/Umlaute, Repo-Cooldown (<24h seit letztem
+   Commit) und aktive Locks respektieren — dann diesen Punkt unuebersetzt lassen und als offenen
+   Punkt ablegen (Rolle 3) statt zu erzwingen.
 
 ## Rolle 3 — MAINTAINER
 
@@ -196,6 +212,9 @@ Changelog-Eintrag.
 
 - **`work-autonomous`** — siehe oben; `tidy-up` ist eine der Quellen, die `work-autonomous`s
   Ebene 1 abarbeitet, kein Ersatz fuer dessen Erschoepfungspruefung.
+- **`bilingual-doc-sync`** — wird von Rolle 2 (WRITER) fuer den Uebersetzungs-Nachzug
+  orchestriert (siehe dort), nicht dupliziert. `tidy-up` entscheidet nur WAS laut P-006 fehlt,
+  `bilingual-doc-sync` entscheidet WIE uebersetzt/synchronisiert wird.
 - **`bugsweep`** — systematische Bug-Suche mit Verdopplungs-Eskalation. Anderer Zweck (Fehler
   finden, nicht Register/Doku/Hygiene pflegen) — bei Ueberschneidung (Bugsweep-Fund landet im
   Register) uebernimmt `tidy-up` nur die Registerpflege, nicht die Bugsuche selbst.
@@ -235,6 +254,14 @@ Kombiniert mit /goal + /work-autonomous:
 ```
 
 ## Changelog
+
+### 1.1.0 (2026-08-19)
+- Ergaenzung aus einem live nachgereichten Zusatz zu T-20260819-461890468 (User, woertlich: "bis
+  zu einer uebersetzung nachzuziehen die noch nicht existiert soll auch zum skill gehoeren"):
+  Rolle 2 (WRITER) bekommt einen fuenften Punkt, Uebersetzungs-Nachzug nach **Policy P-006**
+  (Sprachstufen: Core-Set DE+EN Pflicht, Full/World nach und nach). Werkzeug ist der bereits
+  bestehende Skill `bilingual-doc-sync` — wird orchestriert, nicht dupliziert. Frontmatter-
+  Dependency + "Verwandte Skills"-Eintrag ergaenzt.
 
 ### 1.0.0 (2026-08-19)
 - Erstversion aus Ticket T-20260819-461890468. Drei Rollen (Tasksolver/Writer/Maintainer) als
