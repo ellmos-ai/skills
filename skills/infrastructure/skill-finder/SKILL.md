@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.4.0
+version: 0.5.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-08-18
+updated: 2026-08-19
 description: >
   Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
   einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
@@ -73,6 +73,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Bedingung/Zeitpunkt/Reihenfolge im Auftrag („erst wenn", „ab 6 Uhr", „sobald X fertig") | Prozess | `condition` (`/if` · `/when` · `/if-only` · `/after` · `/and` · `/or`) |
 | Dateien aus einem Ordner regelbasiert einsammeln/sortieren ("hole aus X immer Y und sammle sie in Z", "sortiere Ordner automatisch") | Utilities | `file-collect-sort-action` |
 | App-/GUI-Serie gemeinsam mit dem User durchtesten (live testen, Feedback sofort auswerten + Reparatur delegieren) | Coding & Debugging | `human-loop-audit` |
+| Projekt nach Sitzungsende aufräumen (Register lösen/einsortieren, Doku auf Ist-Stand bringen, Strays wegräumen) | Coding & Debugging | `tidy-up` (`/tidy-up`; zählt als `work-autonomous`-Ebene-1-Quelle) |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -91,6 +92,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.5.0 (2026-08-19)
+- Routing-Zeile für neuen Skill tidy-up ("Projekt nach Sitzungsende aufräumen": einmaliger
+  Tasksolver+Writer+Maintainer-Durchlauf für den aktiven Projektordner; zählt als
+  `work-autonomous`-Ebene-1-Quelle für `/goal`-Konstruktionen).
 
 ### 0.4.0 (2026-08-18)
 - Routing-Zeile für neuen Skill human-loop-audit ("App-/GUI-Serie gemeinsam mit dem User

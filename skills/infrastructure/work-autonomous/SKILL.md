@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.2.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-19
 description: >
   Abbruchbedingung für autonome Loops: So weit wie möglich selbständig
   weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
@@ -77,7 +77,10 @@ Bei jedem Aufruf zuerst ganz normal nach autonom ausführbarer Arbeit suchen (si
 unten) und sie erledigen: offene `ACTIONABLE`-Tickets, entblockte `BLOCKED`-Tickets, fällige
 `WAITING`-Tickets, offene `TODO.md`/`AUFGABEN.txt`-Punkte in Projekten ohne User-Abhängigkeit,
 fällige Routine-/Hygiene-Checks nach lokaler Policy, angefangene, aber nicht abgeschlossene Arbeit
-aus der letzten Session (USMC `working`).
+aus der letzten Session (USMC `working`), **fällige `tidy-up`-Läufe des aktiven Projekts**
+(Ergänzung 1.3.0, 2026-08-19 — siehe Skill `tidy-up`: Tasksolver+Writer+Maintainer-Durchlauf für
+den Projektordner, in dem die Session gerade gearbeitet hat; Fälligkeit prüft `tidy-up` selbst
+über sein eigenes, schlankes USMC-Log, siehe dortiger Abschnitt „Verhältnis zu work-autonomous").
 
 → **Gefunden & erledigt:** Ergebnis kurz melden, Tick endet, Loop läuft normal weiter. Ebene 2 wird
 NICHT betreten — keine der vier teuren Prüfschritte ist nötig, solange sichtbare Arbeit vorliegt.
@@ -298,6 +301,10 @@ eingefordert hat.
 - **Ticket-Kategorien (`ticket-master`)** — liefern das Vokabular für „autonom ausführbar" (siehe
   Abgrenzungstabelle) und die Vorlage für den Autonomie-Loop (BLOCKED-Re-Check, USER-Bündelung,
   WAITING-Termin-Ziehen, PARKED-Stillstand).
+- **`tidy-up`** (seit 1.3.0) — liefert eine zusätzliche Ebene-1-Quelle: den einmaligen
+  Tasksolver+Writer+Maintainer-Durchlauf für den gerade bearbeiteten Projektordner. Prüft seine
+  eigene Fälligkeit selbst (schlankes USMC-Log, kein Vier-Schritt-Guard wie hier) — `work-autonomous`
+  ruft ihn nur als eine von mehreren Ebene-1-Quellen auf, ohne dessen Logik zu duplizieren.
 
 ## Beispielablauf
 
@@ -332,6 +339,17 @@ Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
 ```
 
 ## Changelog
+
+### 1.3.0 (2026-08-19)
+- Minimal-invasive Ergänzung aus Ticket T-20260819-461890468 (neuer Skill `tidy-up`): Ebene 1
+  bekommt eine zusätzliche, eigenständige Quelle — „fällige `tidy-up`-Läufe des aktiven Projekts"
+  (Tasksolver+Writer+Maintainer-Durchlauf, siehe Skill `tidy-up`). Kein neuer Kettenschritt, keine
+  Änderung an Ebene 2/Guard/Abbruchsignal — `tidy-up` prüft seine eigene Fälligkeit selbst über ein
+  schlankes USMC-Log und wird hier nur als weitere Ebene-1-Quelle referenziert, analog zu den
+  bereits bestehenden Quellen (Tickets, TODO/AUFGABEN, Routine-Checks, USMC `working`). Damit
+  zählen `tidy-up`-Punkte als autonom auszuführende Aufgabe im Sinne eines `/goal`-Konstrukts, das
+  `/work-autonomous` + `/tidy-up` kombiniert (Kern-Usecase des Tickets). Kein Eingriff in die
+  Vier-Schritt-Erschöpfungskette oder den Guard — Ebene 2 bleibt unverändert.
 
 ### 1.2.0 (2026-08-15)
 - Retrofit aus Ticket T-20260815-205101335 (Prüfauftrag: „prüfe ob die Lösung dort in Verbindung
