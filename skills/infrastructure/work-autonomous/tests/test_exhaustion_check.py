@@ -7,6 +7,7 @@ muss sich identisch verhalten, ob grounding_seed installiert ist oder nicht.
 Run:
     PYTHONIOENCODING=utf-8 python -m pytest skills/infrastructure/work-autonomous/tests/ -v
 """
+
 from __future__ import annotations
 
 import sys
@@ -21,8 +22,11 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 import exhaustion_check as ec  # noqa: E402
 
+SKILL_DIR = Path(__file__).resolve().parent.parent
+
 
 # --- Hilfsmittel: ein Fake-grounding_seed-Modul fuer den "installiert"-Pfad ---
+
 
 class _FakeResolutionResult:
     def __init__(self, status):
@@ -61,6 +65,7 @@ def _clear_grounding_seed_cache(monkeypatch):
 
 
 # --- Fall A: grounding_seed NICHT importierbar (haeufigster isolierter Fall) ---
+
 
 def test_all_unavailable_on_isolated_system_without_any_infrastructure(isolated_home, monkeypatch):
     """Kernszenario des Tickets: System ohne Gardener/USMC/_DECISIONS/BYUM.
@@ -114,6 +119,7 @@ def test_memory_roles_found_when_cli_on_path(isolated_home, monkeypatch):
 
 # --- Fall B: grounding_seed IST importierbar ---
 
+
 def test_resolver_backed_roles_prefer_grounding_seed_when_available(isolated_home, monkeypatch):
     fake_gs = _make_fake_grounding_seed({"decisions.ledger": "resolved", "user.model": "not_found"})
     monkeypatch.setitem(sys.modules, "grounding_seed", fake_gs)
@@ -161,6 +167,7 @@ def test_resolver_exception_falls_back_to_direct_path_check(isolated_home, monke
 
 # --- format_blind_signal() / all_locatable() / Fingerprint-Baustein ---
 
+
 def test_format_blind_signal_matches_ticket_example_shape(isolated_home, monkeypatch):
     monkeypatch.setattr(ec.shutil, "which", lambda name: None)
     checks = ec.assess_locations(home=isolated_home)
@@ -191,3 +198,20 @@ def test_all_locatable_true_when_everything_present(isolated_home, monkeypatch):
     checks = ec.assess_locations(home=isolated_home)
     assert ec.all_locatable(checks) is True
     assert ec.unavailable_roles(checks) == []
+
+
+def test_german_and_english_skill_contracts_stay_in_sync():
+    de = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    en = (SKILL_DIR / "SKILL.en.md").read_text(encoding="utf-8")
+
+    def frontmatter_value(text: str, key: str) -> str:
+        frontmatter = text.split("---", 2)[1]
+        prefix = f"{key}:"
+        return next(line.removeprefix(prefix).strip() for line in frontmatter.splitlines() if line.startswith(prefix))
+
+    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.3.0"
+    assert frontmatter_value(de, "updated") == frontmatter_value(en, "updated")
+    assert de.count("\n### ") == en.count("\n### ")
+    assert de.count("\n```") == en.count("\n```")
+    assert "`tidy-up`" in de
+    assert "`tidy-up`" in en

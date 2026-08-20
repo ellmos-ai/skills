@@ -2,6 +2,10 @@
 
 ## 2026-08-20
 
+- **`work-autonomous` bilingual contract repair**: synchronized the English skill with the
+  already released German 1.3.0 `tidy-up` integration and added a regression test for shared
+  version/date, heading/fence counts, and the cross-skill reference. Runtime deployment drift is
+  handled separately from the public source.
 - **New skill: `choose-your-orchestrator`** (`skills/infrastructure/choose-your-orchestrator/`, 1.0.0):
   adds a short recommendation dialogue and a compact session contract for selecting
   existing orchestration, swarm, model-routing, optional preference-model, budget,

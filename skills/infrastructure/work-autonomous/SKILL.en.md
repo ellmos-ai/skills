@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.2.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-19
 description: >
   Termination condition for autonomous loops: keep working independently as
   far as possible AND only end a loop once it is PROVEN that no autonomously
@@ -77,7 +77,10 @@ On every invocation, first look for autonomously executable work the normal way 
 boundary section below) and do it: open `ACTIONABLE` tickets, unblocked `BLOCKED` tickets, due
 `WAITING` tickets, open `TODO.md`/`AUFGABEN.txt` items in projects with no user dependency, due
 routine/hygiene checks per local policy, work started but not finished in the previous session
-(USMC `working`).
+(USMC `working`), and **due `tidy-up` runs for the active project** (added in 1.3.0,
+2026-08-19 — see the `tidy-up` skill: its Tasksolver+Writer+Maintainer pass covers the project
+folder in which the session has just worked; `tidy-up` checks its own due state through its own
+small USMC log, as described in its "Relationship to work-autonomous" section).
 
 → **Found & done:** report the outcome briefly, tick ends, the loop keeps running normally. Tier
 2 is NOT entered — none of the four expensive verification steps are needed while visible work
@@ -294,6 +297,10 @@ disappears again.
 - **Ticket categories (`ticket-master`)** — supply the vocabulary for "autonomously executable"
   (see boundary table) and the template for the autonomy loop (BLOCKED re-check, USER bundling,
   WAITING date pulling, PARKED standstill).
+- **`tidy-up`** (since 1.3.0) — supplies another Tier-1 source: the one-time
+  Tasksolver+Writer+Maintainer pass for the project folder just worked in. It checks its own due
+  state through a small USMC log; `work-autonomous` only treats it as one of several Tier-1 sources
+  and does not duplicate its logic.
 
 ## Example run
 
@@ -328,6 +335,15 @@ Tick 2 (user installs grounding-seed + usmc on this system):
 ```
 
 ## Changelog
+
+### 1.3.0 (2026-08-19)
+- Minimal integration from ticket T-20260819-461890468 (new `tidy-up` skill): Tier 1 gains an
+  additional independent source — due `tidy-up` runs for the active project
+  (Tasksolver+Writer+Maintainer pass; see that skill). This adds no new chain step and does not
+  change Tier 2, the guard, or the termination signals. `tidy-up` checks its own due state through
+  its own small USMC log and is referenced here like the existing ticket, TODO, routine-check, and
+  USMC `working` sources. This makes a due `tidy-up` pass autonomously executable work for a
+  `/goal` construction combining `/work-autonomous` and `/tidy-up`.
 
 ### 1.2.0 (2026-08-15)
 - Retrofit from ticket T-20260815-205101335 (audit request: "check whether the solution there
