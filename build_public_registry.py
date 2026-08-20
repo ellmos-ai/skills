@@ -18,7 +18,7 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parent
 SKILLS_ROOT = REPOSITORY_ROOT / "skills"
 DEFAULT_OUTPUT = REPOSITORY_ROOT / "registry" / "components.json"
-LANGUAGE_CODES = ("de", "en", "es", "ja", "ru", "zh")
+LANGUAGE_CODES = ("de", "en", "es", "zh", "ja", "ru", "fr", "hi", "ar", "bn", "pt")
 
 
 SCALAR_FIELDS = ("name", "type", "version", "status", "language", "visibility")
@@ -88,6 +88,48 @@ def available_languages(skill_dir: Path, canonical: dict) -> list[str]:
             languages.add(code)
 
     return [code for code in LANGUAGE_CODES if code in languages]
+
+
+def unknown_language_variant_errors(skill_dir: Path) -> list[str]:
+    """Report language-like variants outside the canonical P-006 catalog."""
+    errors: list[str] = []
+
+    for path in sorted(skill_dir.glob("SKILL.*.md")):
+        code = path.name.removeprefix("SKILL.").removesuffix(".md").lower()
+        if code not in LANGUAGE_CODES:
+            errors.append(f"{path.as_posix()}: unknown language suffix '{code}'")
+
+    for directory in sorted(path for path in skill_dir.iterdir() if path.is_dir()):
+        # Historical translations used two-letter language directories in
+        # lower- or uppercase form. Other subdirectories (scripts, tests,
+        # references) are not language variants and must remain untouched.
+        if not re.fullmatch(r"[A-Za-z]{2}", directory.name):
+            continue
+        legacy_skill = directory / "SKILL.md"
+        code = directory.name.lower()
+        if legacy_skill.is_file() and code not in LANGUAGE_CODES:
+            errors.append(
+                f"{legacy_skill.as_posix()}: unknown legacy language directory '{directory.name}'"
+            )
+
+    return errors
+
+
+def registry_language_errors(skill_files: list[Path] | None = None) -> list[str]:
+    """Return unsupported translation variants in public canonical skill roots."""
+    errors: list[str] = []
+    paths = list_public_skill_files() if skill_files is None else skill_files
+
+    for path in paths:
+        if path.parent.parent.name.startswith("_"):
+            continue
+        metadata = read_frontmatter(path)
+        visibility = str(metadata.get("visibility") or "public").strip().lower()
+        if visibility in {"private", "private-only", "private profile", "no-push"}:
+            continue
+        errors.extend(unknown_language_variant_errors(path.parent))
+
+    return errors
 
 
 def canonical_core_language_errors(skill_files: list[Path] | None = None) -> list[str]:
@@ -227,6 +269,13 @@ def main() -> int:
             return 1
         print("P-006 core-language audit passed: every public skill has canonical DE+EN files")
         return 0
+
+    language_errors = registry_language_errors()
+    if language_errors:
+        print(f"Public registry language audit failed: {len(language_errors)} issue(s)")
+        for error in language_errors:
+            print(f"- {error}")
+        return 1
 
     expected = serialized_registry()
     output = args.output.resolve()

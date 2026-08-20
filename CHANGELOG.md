@@ -2,6 +2,12 @@
 
 ## 2026-08-20
 
+- **P-006 public-registry language discovery**: extended the deterministic catalog from
+  the six Full-Set codes to the complete canonical order DE, EN, ES, ZH, JA, RU, FR,
+  HI, AR, BN, PT. Existing flat and legacy World variants are now discoverable,
+  unsupported language suffixes fail closed, and the regenerated public registry
+  exposes all 96 tracked French skill variants without changing component paths,
+  counts, descriptions, or privacy fields.
 - **`work-autonomous` bilingual contract repair**: synchronized the English skill with the
   already released German 1.3.0 `tidy-up` integration and added a regression test for shared
   version/date, heading/fence counts, and the cross-skill reference. Runtime deployment drift is
