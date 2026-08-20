@@ -2,6 +2,11 @@
 
 ## 2026-08-20
 
+- **Gitless public-source contract**: added a Git-generated, versioned
+  `registry/public-skill-files.json` authority for public skill and language
+  artifacts. Registry checks now fail closed on stale, unsafe, or missing
+  manifested files while enriched Plan-D projections ignore unmanifested
+  internal extras without deleting them.
 - **Public skill host-neutrality gate**: removed machine names, concrete local checkout paths,
   installation snapshots and private ticket references from the Paveman wrapper; added a
   privacy regression for host-scoped development roots and neutralized the three same-class

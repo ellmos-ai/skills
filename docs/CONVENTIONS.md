@@ -292,6 +292,15 @@ Installation und Auffindbarkeit notwendigen Felder. Interne Bewertungen,
 Ownership-, Privacy-, Branch- und Wartungsdaten gehören in die vollständige
 Registry des getrennten No-Push-Repositories.
 
+Die nicht-zirkuläre Quellenautorität dafür ist
+`registry/public-skill-files.json`: In einem Git-Checkout wird sie aus den
+getrackten öffentlichen Skill- und Sprachdateien erzeugt und mit `--check`
+gegen Git geprüft. In gitlosen Archiven und angereicherten Plan-D-Projektionen
+ist ausschließlich diese versionierte Dateiliste maßgeblich. Physisch daneben
+liegende interne Zusatzskills werden weder veröffentlicht noch gelöscht;
+fehlende, unsichere oder veraltete Manifest-Einträge führen zu einem
+fail-closed Fehler.
+
 `python build_skills_map.py` erzeugt daraus die öffentliche `SKILLS-MAP.md`.
 
 ---

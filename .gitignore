@@ -66,6 +66,7 @@ tools/
 # im getrennten No-Push-Repository.
 registry/*
 !registry/components.json
+!registry/public-skill-files.json
 docs/PORTING_CHECKLIST.md
 docs/BRANCH-SYNC.md
 

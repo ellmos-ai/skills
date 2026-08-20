@@ -168,7 +168,11 @@ The public catalog contains only Ellmos-authored skills. Third-party skills are
 not republished under an Ellmos author name. The public
 [`registry/components.json`](registry/components.json) is therefore a minimal
 discovery index; internal ownership assessments, privacy classifications and
-the full maintainer registry remain in a separate No-Push repository.
+the full maintainer registry remain in a separate No-Push repository. Its
+non-circular source authority is the versioned
+[`registry/public-skill-files.json`](registry/public-skill-files.json): Git
+generates and verifies it in checkouts, while gitless archives and enriched
+Plan-D projections use only its listed files and ignore local private extras.
 
 ## Education Skills
 
@@ -197,6 +201,7 @@ skills/
 docs/
   CONVENTIONS.md            # Frontmatter specification
 registry/components.json    # Minimal public catalog index
+registry/public-skill-files.json # Public source authority for gitless copies
 llms.txt                    # Compact project map for LLM crawlers
 ```
 

@@ -13,15 +13,21 @@ import json
 import re
 import subprocess
 from collections import Counter
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent
 SKILLS_ROOT = REPOSITORY_ROOT / "skills"
 DEFAULT_OUTPUT = REPOSITORY_ROOT / "registry" / "components.json"
+DEFAULT_SOURCE_MANIFEST = REPOSITORY_ROOT / "registry" / "public-skill-files.json"
+SOURCE_MANIFEST_SCHEMA = "public-skill-files-v1"
 LANGUAGE_CODES = ("de", "en", "es", "zh", "ja", "ru", "fr", "hi", "ar", "bn", "pt")
 
 
 SCALAR_FIELDS = ("name", "type", "version", "status", "language", "visibility")
+
+
+class SourceManifestError(ValueError):
+    """The explicit public-source manifest is missing, unsafe, or stale."""
 
 
 def unquote(value: str) -> str:
@@ -73,41 +79,270 @@ def read_frontmatter(path: Path) -> dict:
     return data
 
 
-def available_languages(skill_dir: Path, canonical: dict) -> list[str]:
+def is_registry_skill_artifact(relative: str) -> bool:
+    """Return whether a tracked path can affect public registry discovery."""
+    path = PurePosixPath(relative)
+    parts = path.parts
+    if path.is_absolute() or not parts or parts[0] != "skills":
+        return False
+    if any(part in {"", ".", ".."} for part in parts):
+        return False
+    if len(parts) < 2 or parts[1].startswith("_"):
+        return False
+    if len(parts) == 4:
+        filename = parts[-1]
+        return filename == "SKILL.md" or bool(re.fullmatch(r"SKILL\.[^.]+\.md", filename))
+    return bool(
+        len(parts) == 5
+        and re.fullmatch(r"[A-Za-z]{2}", parts[-2])
+        and parts[-1] == "SKILL.md"
+    )
+
+
+def _canonical_skill_artifact(relative: str) -> bool:
+    parts = PurePosixPath(relative).parts
+    return len(parts) == 4 and parts[-1] == "SKILL.md"
+
+
+def _private_visibility(metadata: dict) -> bool:
+    visibility = str(metadata.get("visibility") or "public").strip().lower()
+    return visibility in {"private", "private-only", "private profile", "no-push"}
+
+
+def git_skill_artifacts(repository_root: Path | None = None) -> list[str] | None:
+    """Return public registry inputs from Git, or ``None`` outside a worktree."""
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    try:
+        probe = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            cwd=root,
+            capture_output=True,
+            check=False,
+            text=True,
+        )
+    except OSError:
+        return None
+    if probe.returncode != 0 or not probe.stdout.strip():
+        return None
+    try:
+        git_root = Path(probe.stdout.strip()).resolve(strict=True)
+    except OSError:
+        return None
+    if git_root != root:
+        # An extracted archive nested below some unrelated checkout is still
+        # a gitless snapshot and must use its own versioned manifest.
+        return None
+
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", "skills"],
+            cwd=root,
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise SourceManifestError("cannot read public source authority from Git") from error
+
+    tracked = sorted(
+        chunk.decode("utf-8")
+        for chunk in result.stdout.split(b"\0")
+        if chunk and is_registry_skill_artifact(chunk.decode("utf-8"))
+    )
+    public_roots: set[tuple[str, str, str]] = set()
+    for relative in tracked:
+        if not _canonical_skill_artifact(relative):
+            continue
+        metadata = read_frontmatter(root / PurePosixPath(relative))
+        if not _private_visibility(metadata):
+            public_roots.add(PurePosixPath(relative).parts[:3])
+
+    public_files: list[str] = []
+    for relative in tracked:
+        path = PurePosixPath(relative)
+        if path.parts[:3] not in public_roots:
+            continue
+        if not _canonical_skill_artifact(relative):
+            try:
+                metadata = read_frontmatter(root / path)
+            except ValueError:
+                # Keep malformed or unknown variants visible to the language
+                # audit instead of silently dropping a tracked public input.
+                pass
+            else:
+                if _private_visibility(metadata):
+                    continue
+        public_files.append(relative)
+    return sorted(public_files)
+
+
+def source_manifest_payload(files: list[str]) -> dict:
+    normalized = sorted(set(files))
+    for relative in normalized:
+        if not isinstance(relative, str) or not is_registry_skill_artifact(relative):
+            raise SourceManifestError(f"unsafe or irrelevant manifested path: {relative!r}")
+    return {
+        "schema_version": SOURCE_MANIFEST_SCHEMA,
+        "generated_by": "build_public_registry.py",
+        "file_count": len(normalized),
+        "files": normalized,
+    }
+
+
+def serialized_source_manifest(files: list[str]) -> str:
+    return json.dumps(source_manifest_payload(files), ensure_ascii=False, indent=2) + "\n"
+
+
+def validate_source_manifest(
+    manifest_path: Path | None = None,
+    *,
+    repository_root: Path | None = None,
+    expected_files: list[str] | None = None,
+) -> list[str]:
+    """Load and validate the non-circular public-source authority."""
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    manifest = root / "registry" / "public-skill-files.json" if manifest_path is None else manifest_path
+    if not manifest.is_file():
+        raise SourceManifestError(f"missing public source manifest: {manifest}")
+    try:
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise SourceManifestError(f"unreadable public source manifest: {manifest}") from error
+
+    expected_keys = {"schema_version", "generated_by", "file_count", "files"}
+    if not isinstance(payload, dict) or set(payload) != expected_keys:
+        raise SourceManifestError("public source manifest has unexpected fields")
+    if payload["schema_version"] != SOURCE_MANIFEST_SCHEMA:
+        raise SourceManifestError("public source manifest has unsupported schema")
+    if payload["generated_by"] != "build_public_registry.py":
+        raise SourceManifestError("public source manifest has unexpected generator")
+    files = payload["files"]
+    if not isinstance(files, list) or not all(isinstance(item, str) for item in files):
+        raise SourceManifestError("public source manifest files must be a string list")
+    if files != sorted(set(files)) or payload["file_count"] != len(files):
+        raise SourceManifestError("public source manifest files/count are not canonical")
+
+    root_resolved = root.resolve(strict=True)
+    for relative in files:
+        if not is_registry_skill_artifact(relative):
+            raise SourceManifestError(f"unsafe or irrelevant manifested path: {relative}")
+        candidate = root / PurePosixPath(relative)
+        if not candidate.is_file():
+            raise SourceManifestError(f"missing manifested file: {relative}")
+        try:
+            candidate.resolve(strict=True).relative_to(root_resolved)
+        except (OSError, ValueError) as error:
+            raise SourceManifestError(f"manifested file escapes repository root: {relative}") from error
+
+    if expected_files is not None and files != sorted(set(expected_files)):
+        raise SourceManifestError("public source manifest does not match git authority")
+    return files
+
+
+def resolve_source_files(
+    *,
+    repository_root: Path | None = None,
+    manifest_path: Path | None = None,
+) -> tuple[list[str], str]:
+    """Resolve Git or the versioned manifest as the public-source authority."""
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    tracked = git_skill_artifacts(root)
+    if tracked is not None:
+        return tracked, "git"
+    return (
+        validate_source_manifest(manifest_path, repository_root=root),
+        "manifest",
+    )
+
+
+def _source_relative(path: Path, repository_root: Path) -> str:
+    return path.resolve().relative_to(repository_root.resolve()).as_posix()
+
+
+def available_languages(
+    skill_dir: Path,
+    canonical: dict,
+    *,
+    source_files: set[str] | None = None,
+    repository_root: Path | None = None,
+) -> list[str]:
     languages = set()
     canonical_language = canonical.get("language")
     if isinstance(canonical_language, str) and canonical_language in LANGUAGE_CODES:
         languages.add(canonical_language)
 
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+
+    def is_public_source(candidate: Path) -> bool:
+        if source_files is None:
+            return candidate.is_file()
+        try:
+            relative = _source_relative(candidate, root)
+        except ValueError:
+            return False
+        return relative in source_files and candidate.is_file()
+
     for code in LANGUAGE_CODES:
-        if (skill_dir / f"SKILL.{code}.md").is_file():
+        if is_public_source(skill_dir / f"SKILL.{code}.md"):
             languages.add(code)
-        if (skill_dir / code / "SKILL.md").is_file():
+        if is_public_source(skill_dir / code / "SKILL.md"):
             languages.add(code)
-        if (skill_dir / code.upper() / "SKILL.md").is_file():
+        if is_public_source(skill_dir / code.upper() / "SKILL.md"):
             languages.add(code)
 
     return [code for code in LANGUAGE_CODES if code in languages]
 
 
-def unknown_language_variant_errors(skill_dir: Path) -> list[str]:
+def unknown_language_variant_errors(
+    skill_dir: Path,
+    *,
+    source_files: set[str] | None = None,
+    repository_root: Path | None = None,
+) -> list[str]:
     """Report language-like variants outside the canonical P-006 catalog."""
     errors: list[str] = []
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
 
-    for path in sorted(skill_dir.glob("SKILL.*.md")):
+    if source_files is None:
+        flat_variants = sorted(skill_dir.glob("SKILL.*.md"))
+        legacy_variants = sorted(
+            directory / "SKILL.md"
+            for directory in skill_dir.iterdir()
+            if directory.is_dir()
+            and re.fullmatch(r"[A-Za-z]{2}", directory.name)
+            and (directory / "SKILL.md").is_file()
+        )
+    else:
+        try:
+            prefix = _source_relative(skill_dir, root).rstrip("/") + "/"
+        except ValueError:
+            return []
+        candidates = [
+            root / PurePosixPath(relative)
+            for relative in source_files
+            if relative.startswith(prefix)
+        ]
+        flat_variants = sorted(
+            path
+            for path in candidates
+            if path.parent == skill_dir and re.fullmatch(r"SKILL\.[^.]+\.md", path.name)
+        )
+        legacy_variants = sorted(
+            path
+            for path in candidates
+            if path.parent.parent == skill_dir
+            and re.fullmatch(r"[A-Za-z]{2}", path.parent.name)
+            and path.name == "SKILL.md"
+        )
+
+    for path in flat_variants:
         code = path.name.removeprefix("SKILL.").removesuffix(".md").lower()
         if code not in LANGUAGE_CODES:
             errors.append(f"{path.as_posix()}: unknown language suffix '{code}'")
 
-    for directory in sorted(path for path in skill_dir.iterdir() if path.is_dir()):
-        # Historical translations used two-letter language directories in
-        # lower- or uppercase form. Other subdirectories (scripts, tests,
-        # references) are not language variants and must remain untouched.
-        if not re.fullmatch(r"[A-Za-z]{2}", directory.name):
-            continue
-        legacy_skill = directory / "SKILL.md"
+    for legacy_skill in legacy_variants:
+        directory = legacy_skill.parent
         code = directory.name.lower()
-        if legacy_skill.is_file() and code not in LANGUAGE_CODES:
+        if code not in LANGUAGE_CODES:
             errors.append(
                 f"{legacy_skill.as_posix()}: unknown legacy language directory '{directory.name}'"
             )
@@ -115,10 +350,21 @@ def unknown_language_variant_errors(skill_dir: Path) -> list[str]:
     return errors
 
 
-def registry_language_errors(skill_files: list[Path] | None = None) -> list[str]:
+def registry_language_errors(
+    skill_files: list[Path] | None = None,
+    *,
+    source_files: list[str] | None = None,
+    repository_root: Path | None = None,
+) -> list[str]:
     """Return unsupported translation variants in public canonical skill roots."""
     errors: list[str] = []
-    paths = list_public_skill_files() if skill_files is None else skill_files
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    paths = (
+        list_public_skill_files(source_files, repository_root=root)
+        if skill_files is None
+        else skill_files
+    )
+    source_set = None if source_files is None else set(source_files)
 
     for path in paths:
         if path.parent.parent.name.startswith("_"):
@@ -127,12 +373,23 @@ def registry_language_errors(skill_files: list[Path] | None = None) -> list[str]
         visibility = str(metadata.get("visibility") or "public").strip().lower()
         if visibility in {"private", "private-only", "private profile", "no-push"}:
             continue
-        errors.extend(unknown_language_variant_errors(path.parent))
+        errors.extend(
+            unknown_language_variant_errors(
+                path.parent,
+                source_files=source_set,
+                repository_root=root,
+            )
+        )
 
     return errors
 
 
-def canonical_core_language_errors(skill_files: list[Path] | None = None) -> list[str]:
+def canonical_core_language_errors(
+    skill_files: list[Path] | None = None,
+    *,
+    source_files: list[str] | None = None,
+    repository_root: Path | None = None,
+) -> list[str]:
     """Return P-006 violations for public canonical skill roots.
 
     The public registry intentionally recognises historical language layouts for
@@ -142,7 +399,13 @@ def canonical_core_language_errors(skill_files: list[Path] | None = None) -> lis
     canonical contract directly auditable.
     """
     errors: list[str] = []
-    paths = list_public_skill_files() if skill_files is None else skill_files
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    paths = (
+        list_public_skill_files(source_files, repository_root=root)
+        if skill_files is None
+        else skill_files
+    )
+    source_set = None if source_files is None else set(source_files)
 
     for path in paths:
         if path.parent.parent.name.startswith("_"):
@@ -152,57 +415,57 @@ def canonical_core_language_errors(skill_files: list[Path] | None = None) -> lis
         if visibility in {"private", "private-only", "private profile", "no-push"}:
             continue
 
-        relative_path = path.relative_to(REPOSITORY_ROOT).as_posix()
+        relative_path = path.relative_to(root).as_posix()
         if metadata.get("language") != "de":
             errors.append(f"{relative_path}: canonical SKILL.md must declare language: de")
 
         english_path = path.parent / "SKILL.en.md"
-        if not english_path.is_file():
+        english_relative = english_path.relative_to(root).as_posix()
+        if not english_path.is_file() or (
+            source_set is not None and english_relative not in source_set
+        ):
             errors.append(f"{relative_path}: missing canonical sibling SKILL.en.md")
             continue
         english_metadata = read_frontmatter(english_path)
         if english_metadata.get("language") != "en":
-            english_relative = english_path.relative_to(REPOSITORY_ROOT).as_posix()
             errors.append(f"{english_relative}: must declare language: en")
 
     return errors
 
 
-def list_public_skill_files() -> list[Path]:
-    """List ``skills/<category>/<name>/SKILL.md`` files git actually tracks.
-
-    A raw filesystem glob over ``skills/`` also picks up gitignored, private
-    skill directories that happen to exist on whichever machine runs this
-    script (see the "bekannter Privatblock" entries in .gitignore) -- this
-    repository's published state is defined by what git tracks, not by what
-    is physically present locally. Falls back to the plain glob when git is
-    unavailable (e.g. an extracted archive, not a checkout).
-    """
-    try:
-        result = subprocess.run(
-            ["git", "ls-files", "-z", "--", "skills"],
-            cwd=REPOSITORY_ROOT,
-            capture_output=True,
-            check=True,
+def list_public_skill_files(
+    source_files: list[str] | None = None,
+    *,
+    repository_root: Path | None = None,
+    manifest_path: Path | None = None,
+) -> list[Path]:
+    """List canonical public skills from Git or the explicit source manifest."""
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    if source_files is None:
+        source_files, _ = resolve_source_files(
+            repository_root=root,
+            manifest_path=manifest_path,
         )
-    except (OSError, subprocess.CalledProcessError):
-        return sorted(SKILLS_ROOT.glob("*/*/SKILL.md"))
-    names = [chunk.decode("utf-8") for chunk in result.stdout.split(b"\0") if chunk]
-    paths = []
-    for name in names:
-        parts = Path(name).parts
-        # skills/<category>/<name>/SKILL.md -- matches the historical glob
-        # pattern "*/*/SKILL.md" rooted at SKILLS_ROOT.
-        if len(parts) == 4 and parts[-1] == "SKILL.md":
-            paths.append(REPOSITORY_ROOT / name)
-    return sorted(paths)
+    return sorted(
+        root / PurePosixPath(relative)
+        for relative in source_files
+        if _canonical_skill_artifact(relative)
+    )
 
 
-def build_registry() -> dict:
+def build_registry(
+    source_files: list[str] | None = None,
+    *,
+    repository_root: Path | None = None,
+) -> dict:
     components = []
     category_counts: Counter[str] = Counter()
+    root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
+    if source_files is None:
+        source_files, _ = resolve_source_files(repository_root=root)
+    source_set = set(source_files)
 
-    for path in list_public_skill_files():
+    for path in list_public_skill_files(source_files, repository_root=root):
         if path.parent.parent.name.startswith("_"):
             continue
         metadata = read_frontmatter(path)
@@ -218,7 +481,7 @@ def build_registry() -> dict:
         if not isinstance(description, str):
             description = ""
 
-        relative_path = path.relative_to(REPOSITORY_ROOT).as_posix()
+        relative_path = path.relative_to(root).as_posix()
         components.append(
             {
                 "id": f"{component_type}:{category}:{name}",
@@ -229,7 +492,12 @@ def build_registry() -> dict:
                 "version": str(metadata.get("version") or "0.0.0"),
                 "status": str(metadata.get("status") or "active"),
                 "description": " ".join(description.split()),
-                "languages": available_languages(path.parent, metadata),
+                "languages": available_languages(
+                    path.parent,
+                    metadata,
+                    source_files=source_set,
+                    repository_root=root,
+                ),
             }
         )
         category_counts[category] += 1
@@ -245,8 +513,19 @@ def build_registry() -> dict:
     }
 
 
-def serialized_registry() -> str:
-    return json.dumps(build_registry(), ensure_ascii=False, indent=2) + "\n"
+def serialized_registry(
+    source_files: list[str] | None = None,
+    *,
+    repository_root: Path | None = None,
+) -> str:
+    return (
+        json.dumps(
+            build_registry(source_files, repository_root=repository_root),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n"
+    )
 
 
 def main() -> int:
@@ -258,10 +537,43 @@ def main() -> int:
         help="read-only P-006 audit for canonical SKILL.md + SKILL.en.md pairs",
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--source-manifest",
+        type=Path,
+        default=None,
+        help=(
+            "versioned public-source manifest; defaults to "
+            "registry/public-skill-files.json below the repository root"
+        ),
+    )
     args = parser.parse_args()
 
+    root = REPOSITORY_ROOT.resolve()
+    manifest = (
+        root / "registry" / "public-skill-files.json"
+        if args.source_manifest is None
+        else args.source_manifest.resolve()
+    )
+    try:
+        source_files, authority = resolve_source_files(
+            repository_root=root,
+            manifest_path=manifest,
+        )
+        if authority == "git" and args.check:
+            validate_source_manifest(
+                manifest,
+                repository_root=root,
+                expected_files=source_files,
+            )
+    except SourceManifestError as error:
+        print(f"Public source manifest check failed: {error}")
+        return 1
+
     if args.check_core:
-        errors = canonical_core_language_errors()
+        errors = canonical_core_language_errors(
+            source_files=source_files,
+            repository_root=root,
+        )
         if errors:
             print(f"P-006 core-language audit failed: {len(errors)} issue(s)")
             for error in errors:
@@ -270,22 +582,34 @@ def main() -> int:
         print("P-006 core-language audit passed: every public skill has canonical DE+EN files")
         return 0
 
-    language_errors = registry_language_errors()
+    language_errors = registry_language_errors(
+        source_files=source_files,
+        repository_root=root,
+    )
     if language_errors:
         print(f"Public registry language audit failed: {len(language_errors)} issue(s)")
         for error in language_errors:
             print(f"- {error}")
         return 1
 
-    expected = serialized_registry()
+    expected = serialized_registry(source_files, repository_root=root)
     output = args.output.resolve()
     if args.check:
         if not output.is_file() or output.read_text(encoding="utf-8") != expected:
             print(f"Public registry is stale: {output}")
             return 1
+        print(f"Public source manifest is current: {manifest} ({authority})")
         print(f"Public registry is current: {output}")
         return 0
 
+    if authority == "git":
+        manifest.parent.mkdir(parents=True, exist_ok=True)
+        manifest.write_text(
+            serialized_source_manifest(source_files),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"Wrote {manifest}")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(expected, encoding="utf-8", newline="\n")
     print(f"Wrote {output}")

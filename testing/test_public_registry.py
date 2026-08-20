@@ -34,13 +34,20 @@ PRIVATE_FIELDS = {
 
 import build_public_registry as registry_builder
 from build_public_registry import (
+    DEFAULT_SOURCE_MANIFEST,
     LANGUAGE_CODES,
+    SourceManifestError,
     available_languages,
+    build_registry,
     canonical_core_language_errors,
+    git_skill_artifacts,
     list_public_skill_files,
     read_frontmatter,
+    resolve_source_files,
     serialized_registry,
+    serialized_source_manifest,
     unknown_language_variant_errors,
+    validate_source_manifest,
 )
 
 
@@ -68,6 +75,102 @@ class PublicRegistryTests(unittest.TestCase):
         for component in self.registry["components"]:
             self.assertEqual(PUBLIC_FIELDS, set(component))
             self.assertTrue(PRIVATE_FIELDS.isdisjoint(component))
+
+    def test_versioned_source_manifest_matches_git_authority(self) -> None:
+        tracked = git_skill_artifacts()
+        self.assertIsNotNone(tracked)
+        self.assertEqual(
+            serialized_source_manifest(tracked),
+            DEFAULT_SOURCE_MANIFEST.read_text(encoding="utf-8"),
+        )
+
+    def test_gitless_public_archive_uses_versioned_source_manifest(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            canonical = self._write_example_skill(root, "example")
+            english = canonical.parent / "SKILL.en.md"
+            english.write_text("---\nname: example\nlanguage: en\n---\n", encoding="utf-8")
+            files = [
+                "skills/dev/example/SKILL.en.md",
+                "skills/dev/example/SKILL.md",
+            ]
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir()
+            manifest.write_text(serialized_source_manifest(files), encoding="utf-8")
+
+            with self._gitless_root(root):
+                resolved, authority = resolve_source_files()
+                registry = build_registry(resolved)
+
+            self.assertEqual("manifest", authority)
+            self.assertEqual(files, resolved)
+            self.assertEqual(1, registry["summary"]["component_count"])
+            self.assertEqual(["de", "en"], registry["components"][0]["languages"])
+
+    def test_gitless_enriched_projection_ignores_unmanifested_extras(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            self._write_example_skill(root, "public-example")
+            self._write_example_skill(root, "projection-only")
+            files = ["skills/dev/public-example/SKILL.md"]
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir()
+            manifest.write_text(serialized_source_manifest(files), encoding="utf-8")
+
+            with self._gitless_root(root):
+                resolved, authority = resolve_source_files()
+                registry = build_registry(resolved)
+
+            self.assertEqual("manifest", authority)
+            self.assertEqual(["public-example"], [item["name"] for item in registry["components"]])
+
+    def test_source_manifest_rejects_missing_manifested_file(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            files = ["skills/dev/missing/SKILL.md"]
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir(parents=True)
+            manifest.write_text(serialized_source_manifest(files), encoding="utf-8")
+
+            with self.assertRaisesRegex(SourceManifestError, "missing manifested file"):
+                validate_source_manifest(manifest, repository_root=root)
+
+    def test_source_manifest_rejects_unsafe_path(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir(parents=True)
+            manifest.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "public-skill-files-v1",
+                        "generated_by": "build_public_registry.py",
+                        "file_count": 1,
+                        "files": ["skills/dev/../../private/SKILL.md"],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(SourceManifestError, "unsafe or irrelevant"):
+                validate_source_manifest(manifest, repository_root=root)
+
+    def test_source_manifest_detects_git_authority_drift(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            canonical = self._write_example_skill(root, "example")
+            files = ["skills/dev/example/SKILL.md"]
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir()
+            manifest.write_text(serialized_source_manifest(files), encoding="utf-8")
+            self.assertTrue(canonical.is_file())
+
+            with self.assertRaisesRegex(SourceManifestError, "does not match git authority"):
+                validate_source_manifest(
+                    manifest,
+                    repository_root=root,
+                    expected_files=files + ["skills/dev/new-public/SKILL.md"],
+                )
 
     def test_core_language_audit_requires_flat_de_en_pair(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
@@ -148,7 +251,7 @@ class PublicRegistryTests(unittest.TestCase):
             self.assertTrue(any("SKILL.it.md" in error for error in errors))
             self.assertTrue(any("IT/SKILL.md" in error for error in errors))
 
-    def test_check_becomes_stale_after_world_language_file_is_added(self) -> None:
+    def test_check_fails_when_git_authority_adds_public_language_file(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
             root = Path(temporary)
             skill_dir = root / "skills" / "dev" / "example"
@@ -158,37 +261,91 @@ class PublicRegistryTests(unittest.TestCase):
                 "---\nname: example\ntype: skill\nlanguage: de\nvisibility: public\n---\n",
                 encoding="utf-8",
             )
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir()
+            initial_files = ["skills/dev/example/SKILL.md"]
+            manifest.write_text(
+                serialized_source_manifest(initial_files),
+                encoding="utf-8",
+            )
             output = root / "components.json"
-            with (
-                mock.patch.object(registry_builder, "REPOSITORY_ROOT", root),
-                mock.patch.object(
-                    registry_builder,
-                    "list_public_skill_files",
-                    return_value=[canonical],
-                ),
-            ):
-                output.write_text(serialized_registry(), encoding="utf-8")
-                (skill_dir / "SKILL.fr.md").write_text("", encoding="utf-8")
-                changed_registry = serialized_registry()
+            output.write_text(
+                serialized_registry(initial_files, repository_root=root),
+                encoding="utf-8",
+            )
+            french = skill_dir / "SKILL.fr.md"
+            french.write_text("---\nname: example\nlanguage: fr\n---\n", encoding="utf-8")
+            changed_files = initial_files + ["skills/dev/example/SKILL.fr.md"]
 
             with (
                 mock.patch.object(
                     registry_builder,
-                    "serialized_registry",
-                    return_value=changed_registry,
+                    "REPOSITORY_ROOT",
+                    root,
                 ),
                 mock.patch.object(
                     registry_builder,
-                    "registry_language_errors",
-                    return_value=[],
+                    "SKILLS_ROOT",
+                    root / "skills",
+                ),
+                mock.patch.object(
+                    registry_builder,
+                    "git_skill_artifacts",
+                    return_value=changed_files,
                 ),
                 mock.patch.object(
                     sys,
                     "argv",
-                    ["build_public_registry.py", "--check", "--output", str(output)],
+                    [
+                        "build_public_registry.py",
+                        "--check",
+                        "--output",
+                        str(output),
+                        "--source-manifest",
+                        str(manifest),
+                    ],
                 ),
             ):
                 self.assertEqual(1, registry_builder.main())
+
+    @staticmethod
+    def _write_example_skill(root: Path, name: str) -> Path:
+        canonical = root / "skills" / "dev" / name / "SKILL.md"
+        canonical.parent.mkdir(parents=True)
+        canonical.write_text(
+            "---\n"
+            f"name: {name}\n"
+            "type: skill\n"
+            "version: 1.0.0\n"
+            "language: de\n"
+            "visibility: public\n"
+            "description: Example\n"
+            "---\n",
+            encoding="utf-8",
+        )
+        return canonical
+
+    @staticmethod
+    def _gitless_root(root: Path):
+        return _GitlessRoot(root)
+
+
+class _GitlessRoot:
+    def __init__(self, root: Path) -> None:
+        self._patches = [
+            mock.patch.object(registry_builder, "REPOSITORY_ROOT", root),
+            mock.patch.object(registry_builder, "SKILLS_ROOT", root / "skills"),
+            mock.patch.object(registry_builder, "git_skill_artifacts", return_value=None),
+        ]
+
+    def __enter__(self):
+        for patcher in self._patches:
+            patcher.start()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        for patcher in reversed(self._patches):
+            patcher.stop()
 
 
 if __name__ == "__main__":
