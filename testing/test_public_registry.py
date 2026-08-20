@@ -76,13 +76,19 @@ class PublicRegistryTests(unittest.TestCase):
             self.assertEqual(PUBLIC_FIELDS, set(component))
             self.assertTrue(PRIVATE_FIELDS.isdisjoint(component))
 
-    def test_versioned_source_manifest_matches_git_authority(self) -> None:
-        tracked = git_skill_artifacts()
-        self.assertIsNotNone(tracked)
+    def test_versioned_source_manifest_matches_active_authority(self) -> None:
+        resolved, authority = resolve_source_files()
         self.assertEqual(
-            serialized_source_manifest(tracked),
+            serialized_source_manifest(resolved),
             DEFAULT_SOURCE_MANIFEST.read_text(encoding="utf-8"),
         )
+        if authority == "git":
+            self.assertEqual(git_skill_artifacts(), resolved)
+        else:
+            self.assertEqual(
+                validate_source_manifest(DEFAULT_SOURCE_MANIFEST),
+                resolved,
+            )
 
     def test_gitless_public_archive_uses_versioned_source_manifest(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
