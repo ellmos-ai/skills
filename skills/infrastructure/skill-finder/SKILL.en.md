@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.1.0
+version: 0.7.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-07-30
+updated: 2026-08-20
 description: >
   Active finder/router for own local skills (analogue to using-superpowers). ALWAYS use at the start
   of a non-trivial task to check whether a user skill fits, and route to the correct skill. Activates on
@@ -56,7 +56,8 @@ Before starting any non-trivial task, first check if a local skill handles it be
 | Roblox game | Game Dev | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
 | Therapy / counseling / crisis | Therapy | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Presentation / slides | Office | `/academic-pptx` (content) + `/pptx` (file) |
-| Multi-agent coordination | Multi-Agent | `/swarm-operations`, `/model-strategy` |
+| Bound orchestration together before complex multi-agent work | Multi-Agent | `choose-your-orchestrator` (`/choose-your-orchestrator`) |
+| Execute confirmed multi-agent coordination | Multi-Agent | `orchestrator`, `/swarm-operations`, `/model-strategy` |
 | Application / self-management | Personal | `/bewerbungsexperte`, `/selbstmanagement` |
 | Compare/clean up/find skills | System/Meta | `skill-explorer` (audit/explore), `code-skill-index` (list) |
 | Set up system / sync MCP / connect agents | System/Meta | `/system-onboarding`, `/mcp-config-sync`, `/agents-bridge` |
@@ -85,6 +86,11 @@ Full list: Skill `code-skill-index`.
 Update routing table when families change (sub-skill `skill-family-care` or new `inventory_skills.py` run from `skill-explorer`).
 
 ## Changelog
+
+### 0.7.0 (2026-08-20)
+- Added `choose-your-orchestrator` as the recommendation and contract dialogue before
+  complex multi-agent work; separated it from execution routing to `orchestrator`,
+  `swarm-operations`, and `model-strategy`.
 
 ### 0.2.0 (2026-07-03)
 - Added routing lines for new skills: skill-extractor, workflow-extract, rotation-check, idea-mining, bilingual-doc-sync (Codex automations extraction).

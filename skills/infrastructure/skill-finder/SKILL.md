@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.6.0
+version: 0.7.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-08-19
+updated: 2026-08-20
 description: >
   Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
   einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
@@ -58,7 +58,8 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Roblox-Spiel | Game-Dev | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
 | Therapie / Beratung / Krise | Therapie | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Präsentation / Slides | Office | `/academic-pptx` (Inhalt) + `/pptx` (Datei) |
-| Multi-Agent-Koordination | Multi-Agent | `/swarm-operations`, `/model-strategy` |
+| Orchestrierung vor komplexer Multi-Agent-Arbeit gemeinsam begrenzen | Multi-Agent | `choose-your-orchestrator` (`/choose-your-orchestrator`) |
+| Bestätigte Multi-Agent-Koordination ausführen | Multi-Agent | `orchestrator`, `/swarm-operations`, `/model-strategy` |
 | Bewerbung / Selbstmanagement | Persönlich | `/bewerbungsexperte`, `/selbstmanagement` |
 | Skills vergleichen/aufräumen/finden | System/Meta | `skill-explorer` (Audit/Explore), `code-skill-index` (Liste) |
 | System aufsetzen / MCP syncen / Agenten anbinden | System/Meta | `/system-onboarding`, `/mcp-config-sync`, `/agents-bridge` |
@@ -93,6 +94,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.7.0 (2026-08-20)
+- `choose-your-orchestrator` als vorgeschalteten Empfehlungs- und Vertragsdialog für
+  komplexe Multi-Agent-Arbeit ergänzt; Ausführungsrouting zu `orchestrator`,
+  `swarm-operations` und `model-strategy` davon getrennt.
 
 ### 0.6.0 (2026-08-19)
 - Routing-Zeile für neuen Skill paveman ("Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu

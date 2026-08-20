@@ -2,17 +2,17 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 127,
+    "component_count": 129,
     "categories": {
       "assist": 20,
       "dev": 24,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 27,
+      "infrastructure": 28,
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "utilities": 23,
+      "utilities": 24,
       "web": 1
     }
   },
@@ -1030,6 +1030,20 @@
       ]
     },
     {
+      "id": "skill:infrastructure:choose-your-orchestrator",
+      "name": "choose-your-orchestrator",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/choose-your-orchestrator/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Wählt vor komplexer Multi-Agent-Arbeit gemeinsam mit dem Nutzer eine passende, begrenzte Orchestrierung und erzeugt einen kompakten Session-Vertrag. Nutze den Skill bei /choose-your-orchestrator, bei unsicherer Kombination aus Orchestrator, Schwarm, Modellrouting oder Nutzerpräferenzmodell sowie vor Agentenprogrammen, die Modellslots, Parallelität, Spawn-Tiefe, Schreibgrenzen, Abnahme und Eskalation ausdrücklich festlegen müssen.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
       "id": "skill:infrastructure:cloud-communication-protocols",
       "name": "cloud-communication-protocols",
       "type": "skill",
@@ -1304,7 +1318,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-finder/SKILL.md",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "status": "active",
       "description": "Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill zu routen. Aktiviert sich bei „welcher Skill passt\", „gibt es dafür einen Skill\", „skill finden\", oder generell vor Aufgaben, die ein lokaler Skill besser löst als ad-hoc-Arbeit.",
       "languages": [
@@ -2110,6 +2124,19 @@
         "ja",
         "ru",
         "zh"
+      ]
+    },
+    {
+      "id": "skill:utilities:paveman",
+      "name": "paveman",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/paveman/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Erkennt Auftraege, eine Regel- oder Gedaechtnisdatei zu kuerzen (\"kuerze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird ueber die Zeichengrenze abgeschnitten\") und richtet dafuer das Modul paveman ein — ein deterministisches, modellfreies CLI-Tool zum Kuerzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Default, Rollback und striktem Schutz-Validator fuer Pfade/Ueberschriften/ Code. Nutze diesen Skill bei Saetzen wie \"kuerze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu veraendern\", oder wenn eine Regel-/Gedaechtnisdatei erkennbar an eine Zeichen-/Zeilengrenze stoesst.",
+      "languages": [
+        "de"
       ]
     },
     {

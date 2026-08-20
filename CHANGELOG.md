@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-20
+
+- **New skill: `choose-your-orchestrator`** (`skills/infrastructure/choose-your-orchestrator/`, 1.0.0):
+  adds a short recommendation dialogue and a compact session contract for selecting
+  existing orchestration, swarm, model-routing, optional preference-model, budget,
+  spawn-depth, write-boundary, evidence, escalation, and authority constraints before
+  complex multi-agent work. German and English core versions are structurally aligned;
+  static quality score: 5.0/5.
+- **`skill-finder` 0.7.0**: routes uncertain or not-yet-bounded multi-agent work through
+  `choose-your-orchestrator` before execution with `orchestrator`, `swarm-operations`,
+  or `model-strategy`.
+
 ## 2026-08-18
 
 - **New skill: `file-collect-sort-action`** (`skills/utilities/file-collect-sort-action/`, 1.0.0):
