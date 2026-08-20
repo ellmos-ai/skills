@@ -112,10 +112,10 @@ rechts wie aufgelistet, eine doppelt aufgeführte Aktions-ID läuft **doppelt**;
 1. **Auftrag strukturieren.** Aus dem Nutzersatz Quelle, Erkennungsmerkmal(e) und Ziel(e)
    herausziehen. Bei Unklarheit gezielt nachfragen (Dateiart? Unterordner mit einbeziehen?
    Was bei Namenskollision im Ziel — skip/overwrite/rename/quarantine?).
-2. **Modul lokalisieren.** Klon: `C:\_Local_DEV\repos\file-collect-sort-action` (Repo
-   `ellmos-ai/file-collect-sort-action`, privat). CLI: `fcsa` (`pip install -e .` im Klon, falls
-   noch nicht installiert). OneDrive-Spiegel (Plan D, git-los):
-   `.AI/.MODULES/.TOOLS/file-collect-sort-action/`.
+2. **Modul lokalisieren.** Zuerst mit `fcsa --help` prüfen, ob das CLI verfügbar ist. Fehlt es,
+   den für das aktuelle System autorisierten Modul- oder Paketweg ermitteln; keinen lokalen Pfad,
+   Paketnamen oder parallelen Checkout erfinden. Nach einer Installation `fcsa --help` erneut
+   ausführen, bevor Konfigurationen angelegt werden.
 3. **Config-Ordner anlegen.** `fcsa init <config-dir>` — schreibt `scan_paths` zunächst auf
    einen frischen `inbox/`-Ordner **innerhalb** des Config-Ordners selbst, niemals automatisch
    auf einen echten Nutzerordner. Beispiel-Templates dafür: `fcsa/_examples/*.example.json`

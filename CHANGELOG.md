@@ -2,6 +2,11 @@
 
 ## 2026-08-20
 
+- **Public skill host-neutrality gate**: removed machine names, concrete local checkout paths,
+  installation snapshots and private ticket references from the Paveman wrapper; added a
+  privacy regression for host-scoped development roots and neutralized the three same-class
+  path examples it exposed in `tidy-up`, `hackathon-operator`, and
+  `file-collect-sort-action`.
 - **P-006 public-registry language discovery**: extended the deterministic catalog from
   the six Full-Set codes to the complete canonical order DE, EN, ES, ZH, JA, RU, FR,
   HI, AR, BN, PT. Existing flat and legacy World variants are now discoverable,

@@ -57,8 +57,9 @@ wiederholbare Form davon.
 └── _media/             ← Video, Thumbnails, Audio, Boards
 ```
 
-Baubereich lokal (nicht OneDrive): `C:\_Local_DEV\repos\<name>` bzw.
-`C:\_Local_DEV\_<name>-assets\`. OneDrive = Konzepte/State, lokal = Bau/Render.
+Baubereich: ein vom aktuellen System autorisierter lokaler Projekt- und Asset-Checkout.
+Synchronisierte Planungsflächen enthalten Konzepte und State, der lokale Checkout Bau und Render;
+konkrete Pfade werden aus der jeweiligen Systemkonfiguration ermittelt, nicht im Skill festgelegt.
 
 ## STATE.md — Format (Herzstück)
 

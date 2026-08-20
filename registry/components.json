@@ -2222,9 +2222,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/paveman/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "status": "active",
-      "description": "Erkennt Auftraege, eine Regel- oder Gedaechtnisdatei zu kuerzen (\"kuerze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird ueber die Zeichengrenze abgeschnitten\") und richtet dafuer das Modul paveman ein — ein deterministisches, modellfreies CLI-Tool zum Kuerzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Default, Rollback und striktem Schutz-Validator fuer Pfade/Ueberschriften/ Code. Nutze diesen Skill bei Saetzen wie \"kuerze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu veraendern\", oder wenn eine Regel-/Gedaechtnisdatei erkennbar an eine Zeichen-/Zeilengrenze stoesst.",
+      "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.",
       "languages": [
         "de"
       ]

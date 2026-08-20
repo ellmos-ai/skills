@@ -1,21 +1,21 @@
 ---
 name: paveman
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-20
 description: >
-  Erkennt Auftraege, eine Regel- oder Gedaechtnisdatei zu kuerzen ("kuerze meine CLAUDE.md",
+  Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen ("kürze meine CLAUDE.md",
   "MEMORY.md ist zu lang", "komprimiere die Doku, ohne Technik anzutasten", "diese Regeldatei
-  wird ueber die Zeichengrenze abgeschnitten") und richtet dafuer das Modul paveman ein — ein
-  deterministisches, modellfreies CLI-Tool zum Kuerzen von Prosa in Markdown-/Textdateien mit
-  Trockenlauf als Default, Rollback und striktem Schutz-Validator fuer Pfade/Ueberschriften/
-  Code. Nutze diesen Skill bei Saetzen wie "kuerze <Datei>", "diese Datei ist zu lang/wird
-  abgeschnitten", "shrink this rule file", "komprimiere ohne Inhalt zu veraendern", oder wenn
-  eine Regel-/Gedaechtnisdatei erkennbar an eine Zeichen-/Zeilengrenze stoesst.
+  wird über die Zeichengrenze abgeschnitten") und nutzt dafür das Modul paveman — ein
+  deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit
+  Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und
+  Code. Nutze diesen Skill bei Sätzen wie "kürze <Datei>", "diese Datei ist zu lang/wird
+  abgeschnitten", "shrink this rule file", "komprimiere ohne Inhalt zu verändern" oder wenn eine
+  Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.
 
-# Kompatibilitaet
+# Kompatibilität
 standalone: false
 anthropic_compatible: true
 bach_compatible: false
@@ -23,11 +23,11 @@ bach_origin: false
 
 # Kategorisierung
 category: utilities
-tags: [kuerzen, kompression, regeldatei, gedaechtnis, deterministisch, dry-run, rollback, dokumentation]
+tags: [kürzen, kompression, regeldatei, gedächtnis, deterministisch, dry-run, rollback, dokumentation]
 language: de
 status: active
 
-# Abhaengigkeiten
+# Abhängigkeiten
 dependencies:
   tools: [paveman]
   services: []
@@ -46,105 +46,110 @@ provenance:
   local_changes_since_sync: false
 ---
 
-# Paveman — Regel-/Gedaechtnisdateien deterministisch kuerzen
+# Paveman — Regel- und Gedächtnisdateien deterministisch kürzen
 
-> Dünner Skill-Wrapper um das bereits installierte Modul `paveman`
-> (`C:\_Local_DEV\repos\paveman`, pip-installiert am 2026-08-19, Ticket T-20260819-213392123).
-> Dieser Skill ist die Erkennung, die dem Modul bisher fehlte — das gleiche Muster wie
-> `file-collect-sort-action` fuer `fcsa`: das Werkzeug konnte schon alles, aber kein Skill
-> wusste, WANN es zu greifen hatte.
+> Dünner, nutzerneutraler Skill-Wrapper um das separat bereitgestellte Modul `paveman`.
+> Der Skill erkennt, wann das Werkzeug passt, und beschreibt dessen sicheren Ablauf. Er setzt
+> weder einen bestimmten Rechner noch einen festen Installationspfad oder ein persönliches Profil
+> voraus.
 
 ## Wann dieser Skill greift
 
-Trigger sind Nutzersaetze, die eine **bestehende Regel-, Konventions- oder Gedaechtnisdatei**
-kuerzen wollen, OHNE ihren fachlichen Inhalt zu veraendern:
+Trigger sind Nutzersätze, die eine **bestehende Regel-, Konventions- oder Gedächtnisdatei**
+kürzen wollen, ohne ihren fachlichen Inhalt zu verändern:
 
-- "Kuerze `<Datei>`" / "diese Datei ist zu lang" / "wird bei X Zeichen/Zeilen abgeschnitten"
-- "Komprimiere die Doku, ohne Technik/Code anzutasten"
-- "MEMORY.md/CLAUDE.md ist zu voll geworden"
-- "Mach diese Regeldatei knapper, aber lass die Bedeutung unveraendert"
-- Jede Variante, die **Kuerzen einer bestehenden Datei** meint, nicht **neues Schreiben** und
-  nicht **Uebersetzen** (siehe Abgrenzung unten)
+- „Kürze `<Datei>`“ / „diese Datei ist zu lang“ / „wird bei X Zeichen oder Zeilen abgeschnitten“
+- „Komprimiere die Doku, ohne Technik oder Code anzutasten“
+- „MEMORY.md oder CLAUDE.md ist zu voll geworden“
+- „Mach diese Regeldatei knapper, aber lass die Bedeutung unverändert“
+- Jede Variante, die das **Kürzen einer bestehenden Datei** meint, nicht **neues Schreiben** und
+  nicht **Übersetzen** (siehe Abgrenzung unten)
 
 **Nicht** dieser Skill:
-- **`knappform`** — aendert, WIE das Modell selbst in der laufenden Konversation SPRICHT
-  (LLM-Kommunikationsstil, modellbasiert, kein Dateizugriff). `paveman` aendert stattdessen den
-  INHALT einer bestehenden DATEI (deterministisch, ohne Modellaufruf). Beide koennen
-  nebeneinander bestehen — verwechselt werden sie leicht wegen der aehnlichen Namensherkunft
-  (beide von `caveman` abgeleitet), sind aber technisch und funktional getrennt.
-- **`bilingual-doc-sync`** — zieht FEHLENDE SPRACHFASSUNGEN nach (Uebersetzung). `paveman`
-  kuerzt EINE Fassung, uebersetzt nichts.
-- **`llm-text-hygiene`** — entfernt KI-Spuren/Chat-Reste aus Texten. Anderer Zweck als Kuerzen.
-- Neuen Inhalt schreiben/erfinden — `paveman` kuerzt nur, was schon da ist.
 
-## Was das Modul kann (Kurzfassung)
+- **`knappform`** — ändert, wie das Modell selbst in der laufenden Konversation spricht
+  (LLM-Kommunikationsstil, modellbasiert, kein Dateizugriff). `paveman` ändert stattdessen den
+  Inhalt einer bestehenden Datei deterministisch und ohne Modellaufruf. Beide können
+  nebeneinander bestehen; sie sind technisch und funktional getrennt.
+- **`bilingual-doc-sync`** — zieht fehlende Sprachfassungen nach. `paveman` kürzt eine Fassung
+  und übersetzt nichts.
+- **`llm-text-hygiene`** — entfernt KI-Spuren oder Chat-Reste aus Texten. Das ist ein anderer
+  Zweck als Kürzen.
+- Neuen Inhalt schreiben oder erfinden — `paveman` kürzt nur, was schon da ist.
 
-`paveman` (CLI-Befehl `paveman`, Python-Paket, pip-installiert, MIT, Clean-Room-Eigenbau ohne
-BSL-Code) ist ein **regelbasierter, deterministischer** Prosa-Kuerzer fuer Markdown-/Textdateien
-— kein Modellaufruf, keine Tokens, nichts verlaesst die Maschine.
+## Was das Modul kann
+
+`paveman` ist ein regelbasierter, deterministischer Prosa-Kürzer für Markdown- und Textdateien:
+kein Modellaufruf, keine Tokens und kein Netzwerkversand. Die Bereitstellung kann je System
+unterschiedlich sein; maßgeblich ist der dort autorisierte Modul- oder Paketstand.
 
 | Flag | Wirkung |
 |---|---|
-| *(kein Flag)* | **Trockenlauf (Default).** Zeigt Diff + Zeichenersparnis, schreibt nichts. |
-| `--apply` | Schreibt wirklich (Backup wird vorher automatisch angelegt). |
+| *(kein Flag)* | **Trockenlauf (Standard).** Zeigt Diff und Zeichenersparnis, schreibt nichts. |
+| `--apply` | Schreibt wirklich; vorher wird automatisch eine Sicherung angelegt. |
 | `--rollback` | Stellt die letzte Sicherung wieder her. |
-| `--locker` | Pfade/Ueberschriftentext nur als Warnung statt als Fehler (weicher Modus). |
-| `--kontext N` | Diff-Kontextzeilen. |
+| `--locker` | Meldet Pfad- oder Überschriftenabweichungen nur als Warnung statt als Fehler. |
+| `--kontext N` | Legt die Anzahl der Diff-Kontextzeilen fest. |
 
-**Schutz-Validator laeuft bei jedem Aufruf:** Code-Bloecke, Pfade und Ueberschriften werden
-NIE veraendert — Standard-Modus behandelt eine Abweichung als **Fehler und verweigert das
-Schreiben**, nicht nur als Warnung (staerker als die Referenz, gegen die `paveman` gebaut wurde).
+Der **Schutz-Validator läuft bei jedem Aufruf**. Codeblöcke, Pfade und Überschriften dürfen nicht
+verändert werden. Im Standardmodus verhindert eine Abweichung das Schreiben, statt sie nur zu
+melden.
 
-## Ablauf — IMMER in dieser Reihenfolge
+## Ablauf — immer in dieser Reihenfolge
 
-1. **Erst Trockenlauf, ohne Ausnahme.** `paveman <Datei>` (kein `--apply`) — Ergebnis dem Nutzer
-   zeigen: Zeichenersparnis, Diff, Validator-Status ("OK" oder die konkrete Fehlermeldung).
-2. **Erst nach ausdruecklichem Nutzer-Go schreiben.** `paveman <Datei> --apply` — niemals von
-   selbst aus dem Trockenlauf heraus anwenden, auch wenn das Ergebnis harmlos aussieht.
-3. **`--rollback` aktiv erwaehnen**, bevor `--apply` laeuft — der Nutzer soll wissen, dass ein
-   Fehlgriff sofort rueckholbar ist (`paveman <Datei> --rollback`), nicht erst danach suchen.
-4. **Validator-Fehler ernst nehmen.** Meldet der Schutz-Validator eine Abweichung (Pfad/
-   Ueberschrift veraendert), NICHT mit `--locker` umgehen, um den Fehler verschwinden zu lassen —
-   erst pruefen, ob die Abweichung echt unschaedlich ist. `--locker` ist eine bewusste
-   Nutzerentscheidung, kein Standardweg um eine Fehlermeldung loszuwerden.
-5. **Kuratierte Inhalte respektieren.** `paveman` ist regelbasiert und kann nicht wissen, ob ein
-   Abschnitt bewusst so formuliert ist — bei Unsicherheit den Trockenlauf-Diff genau pruefen,
-   bevor `--apply` empfohlen wird.
+1. **Zuerst Trockenlauf.** `paveman <Datei>` ohne `--apply` ausführen. Zeichenersparnis, Diff und
+   Validatorstatus („OK“ oder konkrete Fehlermeldung) dem Nutzer zeigen.
+2. **Nur nach ausdrücklicher Freigabe schreiben.** Erst dann `paveman <Datei> --apply` ausführen;
+   niemals automatisch vom Trockenlauf in den Schreibmodus wechseln.
+3. **`--rollback` vor dem Schreiben erwähnen.** Der Nutzer soll vorher wissen, wie sich ein
+   unerwünschtes Ergebnis zurücknehmen lässt.
+4. **Validatorfehler ernst nehmen.** `--locker` nicht verwenden, nur um einen Fehler zu umgehen.
+   Zuerst prüfen, ob die Abweichung tatsächlich unschädlich ist; der weichere Modus erfordert eine
+   bewusste Nutzerentscheidung.
+5. **Kuratierte Inhalte respektieren.** Ein regelbasiertes Werkzeug erkennt nicht zuverlässig, ob
+   eine Formulierung absichtlich ausführlich ist. Bei Unsicherheit den Trockenlauf-Diff sorgfältig
+   prüfen.
 
-## Voraussetzung — Modul-Installationsstatus pruefen
+## Voraussetzung — Modulverfügbarkeit prüfen
 
-`paveman` muss auf dem jeweiligen Host als CLI verfuegbar sein (`which paveman` bzw.
-`paveman --help`). Auf **ASUS-GEI ist es installiert** (editable pip-install aus
-`C:\_Local_DEV\repos\paveman`, 26/26 Tests gruen, Stand 2026-08-19). Auf einem Host, wo der
-Befehl fehlt: aus dem bestehenden Repo installieren (`pip install -e .` im Repo-Root) — **kein
-neues Repo/Modul anlegen**, das bestehende Modul nachziehen. Fehlt das Repo auf diesem Host
-ganz, das als eigenen Punkt melden statt den Skill blind auszufuehren.
+1. Mit `paveman --help` prüfen, ob das CLI in der aktuellen Umgebung verfügbar ist.
+2. Fehlt der Befehl, den für dieses System autorisierten Modul- oder Paketweg ermitteln. Keine
+   lokale Pfadstruktur, keinen Paketnamen und kein Repository erfinden.
+3. Ist keine autorisierte Quelle auflösbar, die fehlende Voraussetzung als eigenen Setup-Punkt
+   melden, statt den Skill blind auszuführen oder ein paralleles Modul anzulegen.
+4. Nach einer Installation zunächst erneut `paveman --help` und anschließend einen harmlosen
+   Trockenlauf ausführen; ein echter Schreibtest bleibt freigabepflichtig.
 
 ## Beispiele
 
-```
-User: "Kuerze meine ~/CLAUDE.md, sie wird beim Sessionstart abgeschnitten."
+```text
+User: „Kürze meine CLAUDE.md, sie wird beim Sessionstart abgeschnitten.“
 
-→ `paveman C:\Users\User\CLAUDE.md` (Trockenlauf)
-→ Ergebnis: "12.400 -> 9.800 Zeichen (-21 %), Validator: OK — alles Geschuetzte unveraendert."
-  Diff dem Nutzer zeigen.
-→ Nutzer bestaetigt.
-→ `paveman C:\Users\User\CLAUDE.md --apply` (Backup automatisch angelegt)
-→ Kurz erwaehnt: "Bei Bedarf --rollback stellt den vorherigen Stand wieder her."
+→ `paveman CLAUDE.md` (Trockenlauf)
+→ Ergebnis: „12.400 → 9.800 Zeichen (-21 %), Validator: OK.“
+→ Diff zeigen und auf `--rollback` hinweisen.
+→ Nutzer bestätigt.
+→ `paveman CLAUDE.md --apply`
 ```
 
-```
-User: "MEMORY.md ist zu voll, kuerz die mal."
+```text
+User: „MEMORY.md ist zu voll, kürze sie bitte.“
 
-→ Trockenlauf zuerst: "893 -> 893 Zeichen, keine Regel griff — Text ist bereits knapp."
-→ Kein Mehrwert durch --apply — das dem Nutzer ehrlich melden statt trotzdem zu schreiben.
+→ Trockenlauf: „893 → 893 Zeichen, keine Regel griff — der Text ist bereits knapp.“
+→ Kein `--apply` empfehlen; den fehlenden Mehrwert ehrlich melden.
 ```
 
 ## Changelog
 
+### 1.0.1 (2026-08-20)
+
+- Öffentlichen Wrapper vollständig von Rechnernamen, lokalen Checkoutpfaden, Installationsdaten,
+  privaten Ticketreferenzen und lokalen Testergebnissen entkoppelt.
+- Nutzerneutralen Verfügbarkeits- und Installationsvertrag ergänzt und echte deutsche Umlaute
+  hergestellt.
+
 ### 1.0.0 (2026-08-19)
-- Erstversion als Mini-Anhang zu T-20260819-213392123 (paveman-Modul war bereits installiert
-  und funktionsgeprueft, hatte aber noch keinen Skill, der WANN/WIE erkennt — gleiches Muster
-  wie `file-collect-sort-action` fuer `fcsa`). Abgrenzung zu `knappform` (LLM-Kommunikationsstil
-  vs. deterministisches Datei-Kuerzen), `bilingual-doc-sync` (Uebersetzung statt Kuerzen) und
-  `llm-text-hygiene` (KI-Spuren statt Laenge).
+
+- Öffentliche Erstversion des Wrappers mit Trockenlauf, Freigabeschritt, Rollback und
+  Validatorgrenzen.
+- Abgrenzung zu `knappform`, `bilingual-doc-sync` und `llm-text-hygiene`.

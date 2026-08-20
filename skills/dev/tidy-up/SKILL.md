@@ -155,9 +155,9 @@ Ziel: Hygiene, ohne dass etwas verloren geht.
 4. **Locks respektieren:** Vor jeder Aenderung pruefen, ob eine aktive `LOCK.txt`/`LOCK.<scope>.txt`/
    `LOCK.user.*` im Projektordner liegt. Ein `LOCK.user.*` stoppt `tidy-up` fuer den betroffenen
    Bereich vollstaendig — kein Umgehen, kein Teil-Tidy-Up am gesperrten Bereich.
-5. **Commit+Push nur nach der Repo-Konvention des jeweiligen Projekts** — bei Projekten, die dem
-   Plan-D-Muster folgen (Planung in OneDrive, Entwicklung im lokalen Klon unter
-   `C:\_Local_DEV\repos\<Projekt>`), Aenderungen im richtigen Ort vornehmen, nicht am falschen.
+5. **Commit+Push nur nach der Repo-Konvention des jeweiligen Projekts** — bei getrennten
+   Planungs- und Entwicklungsflächen Änderungen im autorisierten lokalen Projektklon vornehmen,
+   nicht in einer Planungs- oder Projektionskopie.
    Eigene Aenderungen werden nach der globalen Konvention "sofort selbst committen + pushen"
    behandelt, wenn das Projekt das vorsieht.
 
@@ -227,7 +227,7 @@ Changelog-Eintrag.
 
 ```
 User: "/tidy-up"
-(Session hat gerade an C:\_Local_DEV\repos\beispiel-projekt gearbeitet)
+(Session hat gerade am autorisierten lokalen Checkout von `beispiel-projekt` gearbeitet)
 
 → TASKSOLVER: TODO.md gelesen — 2 Punkte bereits durch die Sitzung erledigt (nach DONE.md
   verschoben), 1 trivialer Punkt ("README-Tippfehler in Zeile 12") autonom geloest, 1 Punkt

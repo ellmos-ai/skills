@@ -29,6 +29,9 @@ CONTENT_PATTERNS = {
         r"\b(?:ASUS|WORKSTATION|DESKTOP|LAPTOP|MACSTUDIO)-"
         r"[A-Z0-9][A-Z0-9-]*\b"
     ),
+    "host-scoped local development path": re.compile(
+        r"(?i)(?:file:///)?[A-Z]:[\\/]+_Local_DEV(?:[\\/]|$)"
+    ),
     "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),

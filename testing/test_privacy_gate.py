@@ -45,6 +45,18 @@ class PrivacyGateTests(unittest.TestCase):
         self.assertIsNone(pattern.search("desktop-app"))
         self.assertIsNone(pattern.search("Desktop-Registry-Sync"))
 
+    def test_rejects_host_scoped_local_development_roots(self) -> None:
+        pattern = privacy_gate.CONTENT_PATTERNS["host-scoped local development path"]
+        self.assertIsNotNone(pattern.search(r"C:\_Local_DEV\repos\example"))
+        self.assertIsNone(pattern.search("<local-checkout>/example"))
+
+    def test_public_paveman_skill_is_host_neutral(self) -> None:
+        path = MODULE_PATH.parent.parent / "skills" / "utilities" / "paveman" / "SKILL.md"
+        self.assertEqual([], privacy_gate.content_findings(path))
+        text = path.read_text(encoding="utf-8")
+        self.assertNotIn("pip-installiert am", text)
+        self.assertNotRegex(text, r"T-\d{8}-\d+")
+
     def test_rejects_private_skill_names(self) -> None:
         pattern = privacy_gate.CONTENT_PATTERNS["private skill name"]
         self.assertIsNotNone(pattern.search("load tom-lm"))
