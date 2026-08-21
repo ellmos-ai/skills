@@ -15,9 +15,12 @@
 
 > Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH, AGY/Gemini und andere lokal-first LLM-Agentenlaufzeiten.
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 100 bestanden](https://img.shields.io/badge/Pytest-100%20bestanden-success.svg)](testing/)
-[![Python: >=3.10](https://img.shields.io/badge/Python->=3.10-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Pytest: 131 bestanden](https://img.shields.io/badge/Pytest-131%20bestanden%20(184%20Subtests)-success.svg)](testing/)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
+[![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Öffentliche Skills: 132 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-132%20Katalog-brightgreen.svg)](registry/components.json)
@@ -33,7 +36,7 @@
 > Forks und Spiegel werden **nicht** automatisch aktualisiert und können viele Commits
 > zurückliegen — prüfe dort, bevor du dich auf Inhalte hier verlässt.
 
-**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Sicherheitsrichtlinie](SECURITY.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
@@ -73,10 +76,31 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (100 Bestanden / 180 Subtests)"]
+        PytestSuite["Pytest Testsuite (131 Bestanden / 184 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
+```
+
+## Multi-Agenten Skill-Discovery & Ausführungslebenszyklus
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Operator as Agent / Entwickler
+    participant Dispatcher as ellmos Skill Engine
+    participant Registry as Öffentlicher Katalog (components.json)
+    participant Gate as Privacy- & Integritäts-Gate
+    participant Runtime as Ziel-Agent (Claude / Codex / AGY / BACH)
+
+    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (z.B. dev/pipeline-optimizer)
+    Dispatcher->>Registry: Metadaten, Schema-Version & Abhängigkeiten auflösen
+    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation & Dateipfad zurückgeben
+    Dispatcher->>Gate: Privacy- & Non-Elevation-Grenzprüfung ausführen
+    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress & User-Mode sauber)
+    Dispatcher->>Runtime: SKILL.md & Kontext-Playbooks im Agenten-Workspace bereitstellen
+    Runtime->>Runtime: Strukturierte Workflow-Schritte deterministisch ausführen
+    Runtime-->>Operator: Artefakt, Verifikationslog & Statusquittung übergeben
 ```
 
 ## Einstieg
@@ -87,6 +111,7 @@ flowchart TD
 | Baumkarte aller getrackten Skills ansehen | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
 | Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
+| Sicherheitsrichtlinie & Boundary-Garantien | [`SECURITY.md`](SECURITY.md) |
 | Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
 | Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
 | Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |

@@ -28,13 +28,26 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Software Development :: Libraries"
 ]
+
+[project.urls]
+Homepage = "https://github.com/ellmos-ai/skills"
+Documentation = "https://github.com/ellmos-ai/skills/blob/master/README.md"
+Repository = "https://github.com/ellmos-ai/skills.git"
+"Bug Tracker" = "https://github.com/ellmos-ai/skills/issues"
+Changelog = "https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md"
+Security = "https://github.com/ellmos-ai/skills/blob/master/SECURITY.md"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

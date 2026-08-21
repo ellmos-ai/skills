@@ -15,9 +15,12 @@
 
 > Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes.
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 100 passed](https://img.shields.io/badge/Pytest-100%20passed-success.svg)](testing/)
-[![Python: >=3.10](https://img.shields.io/badge/Python->=3.10-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Pytest: 131 passed](https://img.shields.io/badge/Pytest-131%20passed%20(184%20subtests)-success.svg)](testing/)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Privacy: Zero-Egress](https://img.shields.io/badge/Privacy-Zero--Egress-10b981.svg)](SECURITY.md)
+[![Security: Local-First](https://img.shields.io/badge/Security-Local--First-blue.svg)](SECURITY.md)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Public Skills: 132 Catalog](https://img.shields.io/badge/Public%20Skills-132%20Catalog-brightgreen.svg)](registry/components.json)
@@ -33,7 +36,7 @@
 > Forks and mirrors are **not** updated automatically and may be many commits behind —
 > check the source before relying on anything you read here.
 
-**Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Skills Map](SKILLS-MAP.md) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Skills Map](SKILLS-MAP.md) · [Security](SECURITY.md) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
@@ -73,10 +76,31 @@ flowchart TD
         STests["S-Tests (Static Validation)"]
         LTests["L-Tests (LLM Self-Experience)"]
         UTests["U-Tests (User Experience)"]
-        PytestSuite["Pytest Suite (100 Passed / 180 Subtests)"]
+        PytestSuite["Pytest Suite (131 Passed / 184 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
+```
+
+## Multi-Agent Skill Discovery & Execution Lifecycle
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Operator as Agent / Developer
+    participant Dispatcher as ellmos Skill Engine
+    participant Registry as Public Catalog (components.json)
+    participant Gate as Privacy & Integrity Gate
+    participant Runtime as Target Agent (Claude / Codex / AGY / BACH)
+
+    Operator->>Dispatcher: Query skill by domain or task ID (e.g. dev/pipeline-optimizer)
+    Dispatcher->>Registry: Lookup metadata, schema version & dependencies
+    Registry-->>Dispatcher: Return category, frontmatter spec & file path
+    Dispatcher->>Gate: Execute privacy & non-elevation boundary check
+    Gate-->>Dispatcher: Boundary verified (Zero-Egress & User-Mode clean)
+    Dispatcher->>Runtime: Mount SKILL.md & contextual playbooks into agent workspace
+    Runtime->>Runtime: Execute structured workflow steps deterministically
+    Runtime-->>Operator: Deliver artifact, verification log & status receipt
 ```
 
 ## Start Here
@@ -87,6 +111,7 @@ flowchart TD
 | See a tree map of every tracked skill | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
 | Understand the `SKILL.md` schema | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Machine-readable catalog index | [`registry/components.json`](registry/components.json) |
+| Security policy & boundary guarantees | [`SECURITY.md`](SECURITY.md) |
 | Browse by category | [`skills/`](skills/) (one subfolder per category) |
 | Use a skill | Copy `skills/<category>/<name>/` into your agent's skills directory (e.g. `~/.claude/skills/`) |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |

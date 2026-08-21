@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-21
+
+- **Technical Hygiene, CI Matrix Hardening & Security Parity Check (Pfad A)**:
+  - Added bilingual `SECURITY.md` (English & German) with explicit Zero-Egress, Local-First, Non-Elevation (User-Mode execution), and Privacy Gate boundary guarantees alongside responsible disclosure channels (`security@ellmos.ai` / `support@lukasgeiger.com`) and GitHub Security Advisories.
+  - Implemented multi-OS matrix (`ubuntu-latest`, `windows-latest`, `macos-latest`) and Python matrix `["3.10", "3.11", "3.12", "3.13"]` GitHub Actions CI workflow in `.github/workflows/tests.yml` with pip caching, ruff linting, pytest test suite, and privacy gate validation.
+  - Hardened `pyproject.toml` with PEP 621 classifiers for Python 3.13, OS Independent, Microsoft Windows, POSIX Linux, MacOS, and comprehensive `[project.urls]` entries (Homepage, Documentation, Repository, Bug Tracker, Changelog, Security).
+  - Extended automated contract test suite in `testing/test_metadata.py` with 7 dedicated test cases verifying security policy integrity, multi-OS CI matrix contracts, PEP 621 metadata, `llms.txt` synchronization, and bilingual README parity.
+  - Integrated interactive bilingual Mermaid sequence diagrams for Multi-Agent Skill Discovery, Boundary Verification & Dynamic Ingestion Lifecycle in both `README.md` and `README_de.md`.
+  - Synchronized Shields.io badges across READMEs (CI Tests badge, Pytest 131 passed / 184 subtests, Python >=3.10 | 3.13, Zero-Egress Privacy, Local-First Security).
+  - Synchronized `llms.txt` Last-checked timestamp to `2026-08-21` and linked `SECURITY.md`.
+  - Verified full test suite 100% green (131 passed, 184 subtests passed in pytest; ruff check 100% clean; privacy gate clean).
+
 ## 2026-08-20
 
 - **Gitless public-source contract**: added a Git-generated, versioned
