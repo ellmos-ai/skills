@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1043,
+  "file_count": 1044,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -308,6 +308,7 @@
     "skills/dev/rotation-check/SKILL.ru.md",
     "skills/dev/rotation-check/SKILL.zh.md",
     "skills/dev/software-in-worten/SKILL.md",
+    "skills/dev/software-testing/SKILL.md",
     "skills/dev/surface-after-care/SKILL.en.md",
     "skills/dev/surface-after-care/SKILL.es.md",
     "skills/dev/surface-after-care/SKILL.ja.md",
