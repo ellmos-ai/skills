@@ -17,7 +17,7 @@
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 156 bestanden](https://img.shields.io/badge/Pytest-156%20bestanden-success.svg)](testing/)
+[![Pytest: 145 bestanden](https://img.shields.io/badge/Pytest-145%20bestanden%20(186%20Subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
@@ -76,7 +76,7 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (156 bestanden)"]
+        PytestSuite["Pytest Testsuite (145 bestanden / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates

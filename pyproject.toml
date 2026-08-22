@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ellmos-skills"
-version = "1.4.0"
+version = "1.4.1"
 description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
 readme = "README.md"
 license = { text = "MIT" }

@@ -2,6 +2,9 @@
 
 ## 2026-08-22
 
+- **`agents-bridge` 3.0.1 Windows portability fix**: normalized both sides of
+  bounded path comparisons so temporary-directory short-name aliases remain
+  portable across the Windows CI matrix.
 - **`agents-bridge` 3.0.0 portable instance contract**: added explicit
   single-primary authority, provider/truth pointer graphs, privacy-gated capture,
   previewed and reversible restore, projection drift detection, separate memory

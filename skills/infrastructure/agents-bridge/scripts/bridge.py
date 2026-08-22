@@ -582,7 +582,7 @@ def _capture_candidates(profile: dict[str, Any], source_root: Path) -> tuple[set
         elif path.is_dir():
             directories.add(relative)
             for child in sorted(path.rglob("*")):
-                child_relative = child.relative_to(source_root.resolve()).as_posix()
+                child_relative = child.resolve().relative_to(source_root.resolve()).as_posix()
                 if _is_excluded(child_relative, excludes):
                     continue
                 if child.is_dir():
@@ -719,7 +719,11 @@ def load_package(package: Path) -> dict[str, Any]:
             raise BridgeError(f"bridge package contains private material: {relative}")
     files_root = package / "files"
     actual_paths = (
-        {path.relative_to(files_root.resolve()).as_posix() for path in files_root.rglob("*") if path.is_file()}
+        {
+            path.resolve().relative_to(files_root.resolve()).as_posix()
+            for path in files_root.rglob("*")
+            if path.is_file()
+        }
         if files_root.is_dir()
         else set()
     )
@@ -1168,7 +1172,7 @@ def _json_print(value: Any) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", action="version", version="agents-bridge 3.0.0")
+    parser.add_argument("--version", action="version", version="agents-bridge 3.0.1")
     sub = parser.add_subparsers(dest="command", required=True)
 
     discover = sub.add_parser("discover", help="inventory surfaces and explicit authority claims")

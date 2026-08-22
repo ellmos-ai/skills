@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1 — 2026-08-22
+
+- Normalized both sides of bounded relative-path checks so Windows short-name
+  aliases cannot break package verification or recursive capture.
+
 ## 3.0.0 — 2026-08-22
 
 - Added an explicit single-primary v3 profile with provider surfaces, ordered

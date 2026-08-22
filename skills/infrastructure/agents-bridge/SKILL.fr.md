@@ -1,6 +1,6 @@
 ---
 name: agents-bridge
-version: 3.0.0
+version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
