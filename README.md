@@ -17,7 +17,7 @@
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 131 passed](https://img.shields.io/badge/Pytest-131%20passed%20(184%20subtests)-success.svg)](testing/)
+[![Pytest: 156 passed](https://img.shields.io/badge/Pytest-156%20passed-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Privacy: Zero-Egress](https://img.shields.io/badge/Privacy-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First-blue.svg)](SECURITY.md)
@@ -76,7 +76,7 @@ flowchart TD
         STests["S-Tests (Static Validation)"]
         LTests["L-Tests (LLM Self-Experience)"]
         UTests["U-Tests (User Experience)"]
-        PytestSuite["Pytest Suite (131 Passed / 184 Subtests)"]
+        PytestSuite["Pytest Suite (156 Passed)"]
     end
     
     Artifacts -.-> QualityGates
@@ -157,7 +157,7 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Pointer skill to the standalone `ellmos-ai/worksheet-generator` module: generates individualized worksheets from a support goal, level, and age for educational/therapeutic professionals, with bring-your-own ICF references -- a material generator, not a therapy program. |
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | Self-contained scientific literature workflow around PubMed and arXiv (pure Python stdlib) -- turns ad hoc paper hunting into a repeatable, source-backed research pass, fully portable without the ellmos ecosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Discovers provider/app-class surfaces and plans user-selected MCP, skill and rule-file truth topologies. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Provider-neutral agent boot bridge: discovers rule surfaces and renders loaders from user-selected single or ordered multi-file truth. |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Portable provider-neutral file bridge: captures explicit boot/truth graphs, separate memory silos, messaging, presence and locks, then previews, restores, verifies or rolls back a privacy-gated instance package. |
 | [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Builds a provider-neutral maintenance core set for scheduled LLM tasks and desktop-app automations with native readback, rollback and cross-system coverage. |
 | [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routes requests through coordinator roles, experts and verified live skill endpoints while keeping persona overlays separate from capabilities and permissions. |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Public, user-neutral pointer for building an authorized empirical preference model; personal profiles and evidence remain private. |

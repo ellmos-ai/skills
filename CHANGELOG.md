@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-22
+
+- **`agents-bridge` 3.0.0 portable instance contract**: added explicit
+  single-primary authority, provider/truth pointer graphs, privacy-gated capture,
+  previewed and reversible restore, projection drift detection, separate memory
+  silos, file messaging with ACK/receipts, presence, and cooperative lease locks.
+  Added bilingual contracts and migration guides, JSON Schema, synthetic
+  cross-provider fixtures, privacy negatives, and idempotence/rollback tests.
+
 ## 2026-08-21
 
 - **Technical Hygiene, CI Matrix Hardening & Security Parity Check (Pfad A)**:

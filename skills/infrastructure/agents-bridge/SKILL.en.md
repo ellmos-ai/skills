@@ -1,13 +1,19 @@
 ---
 name: agents-bridge
-version: 2.0.0
+version: 3.0.0
 type: skill
-description: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+author: Lukas Geiger + Codex
+created: 2026-07-04
+updated: 2026-08-22
+description: Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
 
+standalone: true
+anthropic_compatible: true
 category: infrastructure
-tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
+tags: [multi-agent, bootstrap, recovery, messaging, memory, provider-neutral]
 language: en
 status: active
+dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
@@ -17,30 +23,53 @@ status: active
 
 # AGENTS-BRIDGE (English)
 
-Use this skill to connect an agent or IDE to explicitly selected rule files.
-No provider, filename, host, or cloud directory is implicitly canonical.
+Use this skill to capture, verify, transfer, or restore a small file-based
+multi-provider system. Each instance has exactly one explicitly selected
+primary provider surface. No provider, filename, host, or cloud directory is
+implicitly canonical.
 
 ## Workflow & Procedure
 
-1. Read all local instructions that govern the source and target paths.
-2. Run `python scripts/bridge.py discover` and optionally pass `--project`.
-3. Ask the user to select the ordered truth sources and the target. An empty
-   selection authorizes no write.
-4. Prefer a redirect or ordered loader. Use a generated copy only when the
-   target cannot load references, and record provenance plus drift checks.
-5. Preview with:
+1. Read all local instructions, locks, and privacy rules governing source and
+   target. Preserve foreign changes.
+2. Run `python scripts/bridge.py discover --root <instance>`. Discovery may
+   adopt only one unambiguous `agents-bridge-primary: true` marker. Zero or
+   multiple claims require a decision; filenames never decide authority.
+3. Create a profile conforming to `references/profile-v3.schema.json`. It
+   declares the primary surface, provider surfaces, truth sources, pointer
+   graph, recovery, memory silos, messenger, presence, locks, and privacy scope.
+4. Validate and capture without mutating the source:
 
    ```text
-   python scripts/bridge.py render --truth <path> --target-kind generic
+   python scripts/bridge.py profile-validate --profile <profile.json>
+   python scripts/bridge.py capture --profile <profile.json> --root <source> --output <new-package>
    ```
 
-6. Create or change the target only after reviewing the preview.
-7. Prove that the target agent actually read every selected source.
+5. Inspect the package with `doctor`, then preview with `plan` or `restore`
+   without `--apply`. Existing files are never overwritten blindly.
+6. Apply only after review with `--apply --yes --backup-dir <backup> --receipt
+   <receipt.json>`. Run `verify`, then prove the native Claude, Codex/GPT,
+   Gemini, or neutral provider actually loaded the contract.
+7. Resolve drift or revert the exact receipt with `rollback --yes`. A second
+   restore must report `idempotent`.
+8. Use `message send|ack|status`, `memory`, `presence`, and
+   `lock claim|release|status` as small file contracts only. Messaging is not a
+   ticket master or scheduler, and memory silos never merge automatically.
 
-See `references/agent-conventions.md`,
-`references/truth-topologies.md`, and
-`references/inventory-contract.md`.
+## Safety boundaries
 
-`agent-config-sync` manages broader configuration topologies.
-`agents-bridge` is limited to boot and rule access. Runtime partner bridges and
-schedulers are separate components.
+- Prefer loaders or redirects. Use a projection only when native references do
+  not work; projections carry source hashes, provenance, `generated_at`, and
+  drift detection. Controlled regeneration writes only to a new package through
+  `capture --regenerate-projections`.
+- All profile paths are UTF-8, relative, and portable. Exports are manifested
+  and bounded by includes and excludes.
+- Secrets, credentials, and personal absolute paths fail closed, or are
+  recorded and replaced only in explicit `redact` mode.
+- When a controlroom exists, it remains the coordination authority. The bridge
+  is only a bootstrap, recovery, and file adapter; it does not duplicate a
+  central runtime.
+
+See `references/contracts.en.md`, `references/truth-topologies.md`,
+`references/inventory-contract.md`, and
+`references/migration-2-to-3.en.md`.

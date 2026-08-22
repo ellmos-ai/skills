@@ -17,7 +17,7 @@
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 131 bestanden](https://img.shields.io/badge/Pytest-131%20bestanden%20(184%20Subtests)-success.svg)](testing/)
+[![Pytest: 156 bestanden](https://img.shields.io/badge/Pytest-156%20bestanden-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
@@ -76,7 +76,7 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (131 Bestanden / 184 Subtests)"]
+        PytestSuite["Pytest Testsuite (156 bestanden)"]
     end
     
     Artifacts -.-> QualityGates
@@ -157,7 +157,7 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/worksheet-generator`: erzeugt individualisierte Arbeitsblätter aus Förderziel, Niveau und Alter für pädagogische/therapeutische Fachkräfte, ICF-Referenz bring-your-own — Material-Generator, kein Therapieprogramm. |
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | In sich geschlossener Workflow für wissenschaftliche Literatur rund um PubMed und arXiv (reine Python-Stdlib) — macht aus wilder Paper-Suche einen wiederholbaren, quellengestützten Recherche-Durchlauf, voll portabel ohne das ellmos-Ökosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Entdeckt Anbieter- und App-Klassen-Flächen und plant nutzergewählte Wahrheits-Topologien für MCPs, Skills und Regeldateien. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Anbieterneutrale Boot-Brücke: entdeckt Regel-Flächen und erzeugt Loader aus einer vom Nutzer gewählten einzelnen oder geordneten mehrteiligen Wahrheit. |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Portable anbieterneutrale Dateibrücke: erfasst explizite Boot-/Wahrheitsgraphen, getrennte Memory-Silos, Messenger, Presence und Locks und kann ein datenschutzgeprüftes Instanzpaket planen, wiederherstellen, prüfen oder zurückrollen. |
 | [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
 | [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Öffentlicher, nutzerneutraler Verweis zum Aufbau eines autorisierten empirischen Präferenzmodells; persönliche Profile und Belege bleiben privat. |

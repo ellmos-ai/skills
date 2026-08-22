@@ -1,12 +1,18 @@
 ---
 name: agents-bridge
-version: 2.0.0
+version: 3.0.0
 type: skill
+author: Lukas Geiger + Codex
+created: 2026-07-04
+updated: 2026-08-22
 description: [Français] Compétence d'agent pour agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+standalone: true
+anthropic_compatible: true
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: fr
 status: active
+dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">

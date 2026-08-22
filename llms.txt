@@ -1,8 +1,8 @@
-## Last-checked: 2026-08-21
+## Last-checked: 2026-08-22
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
-> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes. Tested with 131 passing pytest tests (184 subtests, 100% green).
+> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes. Tested with 156 passing pytest tests (100% green).
 
 Canonical repository: https://github.com/ellmos-ai/skills
 Default branch: master
@@ -27,6 +27,7 @@ Author: Lukas Geiger
 - [docs/CONVENTIONS.md](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): `SKILL.md` frontmatter specification.
 - [registry/components.json](https://github.com/ellmos-ai/skills/blob/master/registry/components.json): Machine-readable catalog index (category, version, provenance per skill).
 - [skills/](https://github.com/ellmos-ai/skills/tree/master/skills): Public skill catalog.
+- [agents-bridge](https://github.com/ellmos-ai/skills/tree/master/skills/infrastructure/agents-bridge): Portable v3 file contract for provider boot surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, privacy-gated capture, verified restore, and rollback.
 - [.github/workflows/tests.yml](https://github.com/ellmos-ai/skills/blob/master/.github/workflows/tests.yml): Multi-OS and Python matrix CI workflow.
 - [CHANGELOG.md](https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md): Public project history and discovery metadata changes.
 - [LICENSE](https://github.com/ellmos-ai/skills/blob/master/LICENSE): MIT license.

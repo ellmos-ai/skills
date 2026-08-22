@@ -1,13 +1,19 @@
 ---
 name: agents-bridge
-version: 2.0.0
+version: 3.0.0
 type: skill
+author: Lukas Geiger + Codex
+created: 2026-07-04
+updated: 2026-08-22
 description: 独立于供应商和用户的 Agent、CLI 与 IDE 启动规则桥接工具。用于探索已知引导界面，要求用户选择一个或多个有序的单一事实来源，并在不重复规则的情况下渲染小型加载器。
 
+standalone: true
+anthropic_compatible: true
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: zh
 status: active
+dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">

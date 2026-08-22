@@ -1037,9 +1037,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/agents-bridge/SKILL.md",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "status": "active",
-      "description": "Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.",
+      "description": "Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.",
       "languages": [
         "de",
         "en",

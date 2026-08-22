@@ -1,0 +1,32 @@
+{
+  "schema": "agents-bridge.profile.v3",
+  "profile_id": "synthetic-agents-primary",
+  "platform": {"path_style": "portable-relative", "encoding": "utf-8", "variables": {"instance_root": "."}},
+  "primary_surface": {"provider": "neutral", "path": "AGENTS.md"},
+  "provider_surfaces": [
+    {"id": "surface-agents", "provider": "neutral", "path": "AGENTS.md", "strategy": "primary"},
+    {"id": "surface-gpt", "provider": "codex", "path": "GPT.md", "strategy": "loader"},
+    {"id": "surface-claude", "provider": "claude", "path": "CLAUDE.md", "strategy": "loader"},
+    {"id": "surface-gemini", "provider": "gemini", "path": "GEMINI.md", "strategy": "loader"}
+  ],
+  "truth_sources": [
+    {"id": "truth-primary", "path": "AGENTS.md", "order": 10, "owner": "operator", "scope": "instance"}
+  ],
+  "pointer_graph": [
+    {"from": "surface-agents", "to": "truth-primary", "kind": "primary"},
+    {"from": "surface-gpt", "to": "surface-agents", "kind": "loader"},
+    {"from": "surface-claude", "to": "surface-agents", "kind": "loader"},
+    {"from": "surface-gemini", "to": "surface-agents", "kind": "loader"}
+  ],
+  "recovery_pointers": ["RECOVERY.md"],
+  "memory": {
+    "index": {"path": "memory/MEMORY.md", "owner": "shared"},
+    "silos": [
+      {"id": "neutral-memory", "path": "memory/neutral", "owner": "neutral", "writers": ["neutral"], "readers": ["neutral", "claude", "codex", "gemini"], "scope": "provider", "refresh_rule": "owner-writes", "merge_rule": "manual-only"}
+    ]
+  },
+  "messenger": {"root": "bridge/messenger", "actors": ["neutral", "claude", "codex", "gemini"], "transport": "files", "provenance": "append-only"},
+  "presence": {"root": "bridge/presence", "ttl_seconds": 300},
+  "locks": {"root": "bridge/locks", "ttl_seconds": 900, "conflict_policy": "fail-closed"},
+  "privacy": {"mode": "reject", "include": [], "exclude": ["**/.git/**", "**/*.key", "**/*.pem"]}
+}

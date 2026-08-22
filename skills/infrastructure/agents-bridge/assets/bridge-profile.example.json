@@ -1,25 +1,55 @@
 {
-  "profile_id": "example-local-profile",
+  "schema": "agents-bridge.profile.v3",
+  "profile_id": "portable-example",
+  "platform": {
+    "path_style": "portable-relative",
+    "encoding": "utf-8",
+    "variables": {"instance_root": "."}
+  },
+  "primary_surface": {"provider": "neutral", "path": "AGENTS.md"},
+  "provider_surfaces": [
+    {"id": "surface-agents", "provider": "neutral", "path": "AGENTS.md", "strategy": "primary"},
+    {"id": "surface-gpt", "provider": "codex", "path": "GPT.md", "strategy": "loader"},
+    {"id": "surface-claude", "provider": "claude", "path": "CLAUDE.md", "strategy": "loader"},
+    {"id": "surface-gemini", "provider": "gemini", "path": "GEMINI.md", "strategy": "projection"}
+  ],
   "truth_sources": [
-    {
-      "path": "<absolute-or-project-relative-path>",
-      "order": 10,
-      "scope": "global"
-    },
-    {
-      "path": "<second-explicitly-selected-path>",
-      "order": 20,
-      "scope": "project"
-    }
+    {"id": "truth-primary", "path": "AGENTS.md", "order": 10, "owner": "operator", "scope": "instance"},
+    {"id": "truth-shared", "path": "rules/SHARED.md", "order": 20, "owner": "operator", "scope": "shared"}
   ],
-  "targets": [
-    {
-      "actor_id": "<provider-or-agent>@<system>",
-      "boot_surface": "<target-path-or-channel>",
-      "target_kind": "generic"
-    }
+  "pointer_graph": [
+    {"from": "surface-agents", "to": "truth-primary", "kind": "primary"},
+    {"from": "surface-gpt", "to": "surface-agents", "kind": "loader"},
+    {"from": "surface-claude", "to": "surface-agents", "kind": "loader"},
+    {"from": "surface-gemini", "to": "truth-primary", "kind": "projection"}
   ],
-  "strategy": "ordered-loader",
-  "conflict_policy": "later-overrides-only-when-explicit",
-  "inventory": null
+  "recovery_pointers": ["RECOVERY.md"],
+  "memory": {
+    "index": {"path": "memory/MEMORY.md", "owner": "shared"},
+    "silos": [
+      {
+        "id": "neutral-memory",
+        "path": "memory/neutral",
+        "owner": "neutral",
+        "writers": ["neutral"],
+        "readers": ["neutral", "claude", "codex", "gemini"],
+        "scope": "provider",
+        "refresh_rule": "owner-writes",
+        "merge_rule": "manual-only"
+      }
+    ]
+  },
+  "messenger": {
+    "root": "bridge/messenger",
+    "actors": ["neutral", "claude", "codex", "gemini"],
+    "transport": "files",
+    "provenance": "append-only"
+  },
+  "presence": {"root": "bridge/presence", "ttl_seconds": 300},
+  "locks": {"root": "bridge/locks", "ttl_seconds": 900, "conflict_policy": "fail-closed"},
+  "privacy": {
+    "mode": "reject",
+    "include": [],
+    "exclude": ["**/.git/**", "**/*.key", "**/*.pem"]
+  }
 }

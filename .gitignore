@@ -43,6 +43,8 @@ _archive/
 _reports/
 CLAUDE.md
 AGENTS.md
+!skills/infrastructure/agents-bridge/tests/fixtures/**/CLAUDE.md
+!skills/infrastructure/agents-bridge/tests/fixtures/**/AGENTS.md
 
 # ---- Internes Wartungs-/Versionierungs-Tooling (nicht veroeffentlichen) ----
 skill_sync.py

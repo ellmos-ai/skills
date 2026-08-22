@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/agents-bridge/profile-v3.schema.json",
+  "title": "agents-bridge portable profile v3",
+  "type": "object",
+  "required": [
+    "schema",
+    "profile_id",
+    "platform",
+    "primary_surface",
+    "provider_surfaces",
+    "truth_sources",
+    "pointer_graph",
+    "memory",
+    "messenger",
+    "presence",
+    "locks",
+    "privacy"
+  ],
+  "properties": {
+    "schema": {"const": "agents-bridge.profile.v3"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "platform": {
+      "type": "object",
+      "required": ["path_style", "encoding", "variables"],
+      "properties": {
+        "path_style": {"const": "portable-relative"},
+        "encoding": {"const": "utf-8"},
+        "variables": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "primary_surface": {"$ref": "#/$defs/primarySurface"},
+    "provider_surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/providerSurface"}
+    },
+    "truth_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/truthSource"}
+    },
+    "pointer_graph": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "kind"],
+        "properties": {
+          "from": {"type": "string", "minLength": 1},
+          "to": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "recovery_pointers": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/portablePath"}
+    },
+    "memory": {
+      "type": "object",
+      "required": ["index", "silos"],
+      "properties": {
+        "index": {
+          "type": "object",
+          "required": ["path", "owner"],
+          "properties": {
+            "path": {"$ref": "#/$defs/portablePath"},
+            "owner": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        },
+        "silos": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/memorySilo"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "messenger": {
+      "type": "object",
+      "required": ["root", "actors", "transport", "provenance"],
+      "properties": {
+        "root": {"$ref": "#/$defs/portablePath"},
+        "actors": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "transport": {"const": "files"},
+        "provenance": {"const": "append-only"}
+      },
+      "additionalProperties": false
+    },
+    "presence": {
+      "type": "object",
+      "required": ["root", "ttl_seconds"],
+      "properties": {
+        "root": {"$ref": "#/$defs/portablePath"},
+        "ttl_seconds": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "locks": {
+      "type": "object",
+      "required": ["root", "ttl_seconds", "conflict_policy"],
+      "properties": {
+        "root": {"$ref": "#/$defs/portablePath"},
+        "ttl_seconds": {"type": "integer", "minimum": 1},
+        "conflict_policy": {"const": "fail-closed"}
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["mode", "include", "exclude"],
+      "properties": {
+        "mode": {"enum": ["reject", "redact"]},
+        "include": {"type": "array", "items": {"$ref": "#/$defs/portablePath"}},
+        "exclude": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "portablePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$)).+$"
+    },
+    "primarySurface": {
+      "type": "object",
+      "required": ["provider", "path"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "path": {"$ref": "#/$defs/portablePath"}
+      },
+      "additionalProperties": false
+    },
+    "providerSurface": {
+      "type": "object",
+      "required": ["id", "provider", "path", "strategy"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "provider": {"type": "string", "minLength": 1},
+        "path": {"$ref": "#/$defs/portablePath"},
+        "strategy": {"enum": ["primary", "loader", "redirect", "projection"]}
+      },
+      "additionalProperties": false
+    },
+    "truthSource": {
+      "type": "object",
+      "required": ["id", "path", "order", "owner", "scope"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "path": {"$ref": "#/$defs/portablePath"},
+        "order": {"type": "integer"},
+        "owner": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "memorySilo": {
+      "type": "object",
+      "required": ["id", "path", "owner", "writers", "readers", "scope", "refresh_rule", "merge_rule"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "path": {"$ref": "#/$defs/portablePath"},
+        "owner": {"type": "string", "minLength": 1},
+        "writers": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "readers": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "scope": {"type": "string", "minLength": 1},
+        "refresh_rule": {"type": "string", "minLength": 1},
+        "merge_rule": {"type": "string", "not": {"const": "automatic"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

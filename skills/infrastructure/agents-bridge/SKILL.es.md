@@ -1,13 +1,19 @@
 ---
 name: agents-bridge
-version: 2.0.0
+version: 3.0.0
 type: skill
+author: Lukas Geiger + Codex
+created: 2026-07-04
+updated: 2026-08-22
 description: Puente neutral de proveedor y usuario para reglas de inicio de agentes, CLI e IDE. Descubre superficies de bootstrap conocidas, requiere que el usuario seleccione una o más fuentes de verdad ordenadas y genera cargadores pequeños sin duplicar reglas.
 
+standalone: true
+anthropic_compatible: true
 category: infrastructure
 tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
 language: es
 status: active
+dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
