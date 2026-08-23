@@ -31,6 +31,11 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 BASELINE = REPO / "testing" / "language_baseline.json"
+# Ergaenzung fuer Skills, die es NUR lokal gibt (private und gitignorete wie die
+# AWS-Sammlung). Sie gehoeren nicht in die oeffentliche Baseline -- dort waeren
+# es Ausnahmen fuer Skills, die im Repo gar nicht existieren. Datei ist optional
+# und gitignored.
+LOKAL = REPO / "testing" / "language_baseline.local.json"
 
 DE = re.compile(r"\b(und|oder|nicht|werden|wird|einen|eine|der|die|das|für|mit|auch|"
                 r"beim|nach|vor|dann|wenn|sind|kann|muss|soll)\b", re.I)
@@ -79,9 +84,10 @@ def sprache(text: str) -> "tuple[str, int, int]":
 
 def main() -> int:
     baseline = {}
-    if BASELINE.is_file():
-        roh = json.loads(BASELINE.read_text(encoding="utf-8"))
-        baseline = {e["skill"]: e for e in roh.get("ausnahmen", [])}
+    for datei in (BASELINE, LOKAL):
+        if datei.is_file():
+            roh = json.loads(datei.read_text(encoding="utf-8"))
+            baseline.update({e["skill"]: e for e in roh.get("ausnahmen", [])})
 
     befunde, geprueft, ausgenommen = [], 0, 0
     for md in sorted((REPO / "skills").rglob("SKILL.md")):
