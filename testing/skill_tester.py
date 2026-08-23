@@ -126,6 +126,28 @@ FRONTMATTER_REQUIRED_FIELDS = (
 )
 
 
+#: Minimal contract for the third-party areal. The nine house fields
+#: (standalone, bach_compatible, provenance, visibility ...) are *our* convention,
+#: not an external standard -- no foreign skill carries them. Demanding them would
+#: force us to edit foreign frontmatter, which inflates every diff against
+#: upstream, breaks resync, and turns "vendored unmodified" into a fiction. So the
+#: areal has its own, smaller contract; sitting in it implies public visibility.
+AREAL_REQUIRED_FIELDS = ('name', 'description', 'third_party', 'license', 'upstream')
+
+#: SPDX identifiers accepted for the ``license`` field. Not a permission check --
+#: that lives in testing/privacy_gate.py -- but a *form* check. Without one, the
+#: field drifts into "MIT", "mit", "MIT License", "Apache 2.0" and "siehe LICENSE"
+#: within months. The precedent is provenance.origin, which reached seven spellings
+#: including free text because nobody ever checked its shape.
+SPDX_PATTERN = re.compile(r'^[A-Za-z0-9.+-]+(?:\s+(?:AND|OR|WITH)\s+[A-Za-z0-9.+-]+)*$')
+
+
+def in_third_party_areal(skill_path):
+    """True when the skill lives in the areal for redistributed foreign material."""
+    parts = Path(skill_path).resolve().parts
+    return len(parts) >= 2 and parts[-2] == 'third-party'
+
+
 def inherits_visibility(skill_path):
     """True fuer Sprachvarianten -- sie erben die Sichtbarkeit des Elternskills.
 
@@ -155,11 +177,20 @@ def frontmatter_gate_errors(skill_path):
 
     errors = []
     inherits = inherits_visibility(skill_path)
-    for field in FRONTMATTER_REQUIRED_FIELDS:
+    areal = in_third_party_areal(skill_path)
+    required = AREAL_REQUIRED_FIELDS if areal else FRONTMATTER_REQUIRED_FIELDS
+    for field in required:
         if field == 'visibility' and inherits:
             continue
         if field not in fm or fm[field] in (None, ''):
             errors.append(f"Pflichtfeld fehlt: {field}")
+
+    licence = fm.get('license')
+    if licence not in (None, '') and not SPDX_PATTERN.fullmatch(str(licence).strip()):
+        errors.append(
+            f"license '{licence}' ist keine SPDX-Kennung (z. B. MIT, Apache-2.0, "
+            "GPL-3.0-or-later); siehe docs/CONVENTIONS.md"
+        )
 
     name = str(fm.get('name', ''))
     if name and not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name):
@@ -181,7 +212,11 @@ def frontmatter_gate_errors(skill_path):
     # _templates, _examples) sind bewusst ausgenommen: dort gilt die Konvention
     # nicht (Archiv-/Vorlagen-Inhalte behalten ihr urspruengliches category-Feld).
     category = fm.get('category')
-    if category:
+    if category and not areal:
+        # Im third-party-Areal gilt die Konvention bewusst nicht: Der Ordner sagt
+        # dort, WOHER der Skill kommt, nicht WORUM es geht. Ein fremder Videoskill
+        # bleibt inhaltlich 'utilities', auch wenn er unter third-party/ liegt --
+        # die Kategorie zu ueberschreiben wuerde Information vernichten.
         category_folder = Path(skill_path).resolve().parent.name
         if not category_folder.startswith('_') and str(category).strip() != category_folder:
             errors.append(
@@ -206,8 +241,10 @@ def s001_frontmatter(skill_path):
     text = skill_md.read_text(encoding='utf-8', errors='replace')
     fm = parse_frontmatter(text)
 
+    base_fields = (AREAL_REQUIRED_FIELDS if in_third_party_areal(skill_path)
+                   else FRONTMATTER_REQUIRED_FIELDS)
     required = [
-        field for field in FRONTMATTER_REQUIRED_FIELDS
+        field for field in base_fields
         if not (field == 'visibility' and inherits_visibility(skill_path))
     ]
     recommended = ['anthropic_compatible', 'category', 'tags',

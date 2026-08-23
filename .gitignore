@@ -160,5 +160,15 @@ skills/utilities/store-welle-usertest/
 skills/utilities/talking-head-recut/
 skills/utilities/tom-lm/
 
+# ---- Fremdskills, die wir nur nutzen und gut finden (Nutzerentscheid 2026-08-23) ----
+# Kein Redistributionsfall: Diese Skills gehoeren anderen, wir haben keine
+# Erlaubnis, sie weiterzugeben, und wollen es auch nicht. Sie leben in der
+# OneDrive-Bibliothek; hier steht der Eintrag nur defensiv, damit sie auch dann
+# nicht ins Repo geraten, wenn jemand sie versehentlich herkopiert.
+# Der fuehrende Unterstrich haelt Registry, Kategorie-Test und Privacy-Gate
+# ohnehin fern -- gleiche Konvention wie _archive/.
+# Was weiterverteilt werden DARF, liegt stattdessen in skills/third-party/.
+skills/_reference/
+
 # ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
 SKILLS-MAP-PRIVATE.md

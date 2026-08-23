@@ -50,6 +50,42 @@ Widersprechen sich beide, luegt eine Seite -- `privacy_gate.py` blockiert dann d
 Statusbegriffe und die Paar-Tabelle "oeffentlicher Kern <-> privater Rest" fuehrt
 `SKILLS-MAP-PRIVATE.md` (nicht im oeffentlichen Repo).
 
+### `third_party` und `license` -- fremdes Material
+
+Beide Felder sind **freiwillig** und wirken nur, wenn sie gesetzt sind. Wer sie
+weglaesst, hat einen eigenen Skill unter der Repo-Lizenz (MIT) -- das ist der
+Normalfall und braucht keine Erklaerung.
+
+```yaml
+third_party: true                   # nur bei fremdem Material
+license: MIT                        # SPDX-Kennung; bei third_party Pflicht
+upstream: https://github.com/…      # Quelle; bei third_party Pflicht
+```
+
+**`license` darf jeder Skill fuehren**, auch ein eigener -- etwa wenn er
+bewusst unter einer anderen Lizenz stehen soll als das Repo. Ohne Feld gilt die
+Repo-Lizenz. Wenn gesetzt, wird die **Form** geprueft (SPDX-Kennung), nicht die
+Erlaubnis: `MIT`, `Apache-2.0`, `GPL-3.0-or-later`, auch `MIT OR Apache-2.0`.
+Diese Formpruefung existiert, weil `provenance.origin` ohne sie auf sieben
+Schreibweisen inklusive Freitext angewachsen ist.
+
+**`third_party: true` hat dagegen Konsequenzen.** Der Skill muss dann in
+`skills/third-party/` liegen, eine Lizenz aus der Allow-Liste fuehren, die
+Upstream-`LICENSE`-Datei danebenlegen und auf seine Quelle zeigen.
+`testing/privacy_gate.py` prueft das und blockiert Abweichungen -- in beide
+Richtungen, denn Ordner und Flag muessen uebereinstimmen.
+
+Im Areal gilt ein **eigener, kleinerer Pflichtfeld-Satz** (`name`,
+`description`, `third_party`, `license`, `upstream`): Die neun Hausfelder sind
+unsere Konvention, kein externer Standard -- kein fremder Skill fuehrt sie.
+Details, Lizenz-Allow-Liste und der Umgang mit Treffern des Content-Scans:
+`skills/third-party/README.md`.
+
+Fremdmaterial, das wir nur **nutzen und gut finden**, gehoert nicht hierher,
+sondern nach `skills/_reference/` (gitignored, lebt in der OneDrive-Bibliothek).
+Etwas zu benutzen und etwas weiterzugeben sind verschiedene Fragen; nur die
+zweite braucht eine Erlaubnis.
+
 ## Kompatibilitaets-Felder
 
 Diese Felder definieren, ob ein Skill eigenstaendig funktioniert und mit welchen

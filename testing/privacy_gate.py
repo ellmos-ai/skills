@@ -15,11 +15,24 @@ REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
 # to catch.
 sys.path.insert(0, str(REPOSITORY_ROOT))
 from build_public_registry import (  # noqa: E402
-    DEFAULT_VISIBILITY,
+    COPYLEFT_LICENSES,
     PRIVATE_VISIBILITY_VALUES,
+    REDISTRIBUTABLE_LICENSES,
+    THIRD_PARTY_AREAL,
+    effective_visibility,
 )
 
 ALLOWED_TRACKED_IGNORED: set[str] = set()
+
+#: Foreign files whose *upstream text* legitimately trips the content scan --
+#: example API keys in documentation, concrete paths in someone else's tutorial.
+#: Each entry is a deliberate, reviewed decision and belongs here with a reason.
+#:
+#: Never fix such a hit by editing the upstream text: that would contradict
+#: "vendored unmodified", inflate every diff against the source, and -- under
+#: Apache-2.0 -- trigger the obligation to document modifications. An exception
+#: is honest; a silent edit is not.
+THIRD_PARTY_SCAN_EXCEPTIONS: set[str] = set()
 CONTENT_SCAN_EXCLUSIONS = {
     "testing/privacy_gate.py",
     "testing/skill_tester.py",
@@ -144,24 +157,30 @@ def content_findings(path: Path) -> list[str]:
     return findings
 
 
-def declared_visibility(path: Path) -> str:
-    """Return the ``visibility`` a skill declares in its frontmatter.
+def declared_visibility(path: Path, relative: str | None = None) -> str:
+    """Return the visibility that applies to a skill.
 
     Fail closed: a missing field counts as private. Silence is an unanswered
-    question, and an unanswered question must never publish anything.
+    question, and an unanswered question must never publish anything -- except
+    inside the third-party areal, which runs on a smaller contract without the
+    field. There, the location is the declaration (see effective_visibility).
     """
     try:
         text = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
-        return DEFAULT_VISIBILITY
-    if not text.startswith("---"):
-        return DEFAULT_VISIBILITY
-    end = text.find("\n---", 3)
-    frontmatter = text[:end] if end != -1 else text
-    match = re.search(r"^visibility:\s*(.+)$", frontmatter, re.M)
-    if not match:
-        return DEFAULT_VISIBILITY
-    return match.group(1).strip().strip("\"'").lower()
+        text = ""
+    metadata: dict = {}
+    if text.startswith("---"):
+        end = text.find("\n---", 3)
+        match = re.search(r"^visibility:\s*(.+)$", text[:end] if end != -1 else text, re.M)
+        if match:
+            metadata["visibility"] = match.group(1).strip().strip("\"'")
+    if relative is None:
+        try:
+            relative = path.resolve().relative_to(REPOSITORY_ROOT).as_posix()
+        except ValueError:
+            relative = None
+    return effective_visibility(metadata, relative)
 
 
 def visibility_consistency_errors(tracked: set[str]) -> list[str]:
@@ -180,7 +199,7 @@ def visibility_consistency_errors(tracked: set[str]) -> list[str]:
         relative = path.relative_to(REPOSITORY_ROOT).as_posix()
         if "/_" in relative:  # _archive and other underscore folders are not skills
             continue
-        visibility = declared_visibility(path)
+        visibility = declared_visibility(path, relative)
         is_private = visibility in PRIVATE_VISIBILITY_VALUES
         is_tracked = relative in tracked
         if is_private and is_tracked:
@@ -193,6 +212,85 @@ def visibility_consistency_errors(tracked: set[str]) -> list[str]:
             errors.append(
                 f"{relative}: declares '{visibility}' but is excluded from Git -- "
                 "either declare a private visibility or stop excluding it"
+            )
+    return errors
+
+
+def _frontmatter_field(path: Path, field: str) -> str | None:
+    """Read one top-level frontmatter value as raw text, or None if absent."""
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    if not text.startswith("---"):
+        return None
+    end = text.find("\n---", 3)
+    match = re.search(rf"^{field}:\s*(.+)$", text[:end] if end != -1 else text, re.M)
+    return match.group(1).strip().strip("\"'") if match else None
+
+
+def third_party_errors(tracked: set[str]) -> list[str]:
+    """Folder and flag must agree, and foreign material needs a usable licence.
+
+    Two switches say the same thing here -- the areal a skill sits in and the
+    ``third_party`` flag it carries. That is deliberate redundancy, but only
+    because this function compares them. Two switches that nobody compares are
+    exactly what let a private skill sit readable on GitHub (2026-08-23).
+
+    The licence check is fail-closed without the asymmetry argument that applies
+    to ``visibility``: redistributing without permission is a legal wrong,
+    failing to redistribute is an inconvenience.
+    """
+    errors = []
+    areal = f"{THIRD_PARTY_AREAL}/"
+
+    for path in sorted(REPOSITORY_ROOT.glob("skills/*/*/SKILL.md")):
+        relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+        if "/_" in relative or relative not in tracked:
+            continue
+        in_areal = relative.startswith(areal)
+        flag = (_frontmatter_field(path, "third_party") or "").lower() in {"true", "yes", "1"}
+
+        if in_areal and not flag:
+            errors.append(
+                f"{relative}: lies in {THIRD_PARTY_AREAL}/ but does not declare "
+                "'third_party: true' -- folder and flag must agree"
+            )
+        elif flag and not in_areal:
+            errors.append(
+                f"{relative}: declares 'third_party: true' but sits outside "
+                f"{THIRD_PARTY_AREAL}/ -- move it there or drop the flag"
+            )
+
+        if not (in_areal or flag):
+            continue
+
+        licence = _frontmatter_field(path, "license")
+        if not licence:
+            errors.append(
+                f"{relative}: foreign skill without 'license' -- no declared licence "
+                "means all rights reserved, so it must not be redistributed here"
+            )
+        elif licence not in REDISTRIBUTABLE_LICENSES:
+            errors.append(
+                f"{relative}: licence '{licence}' is not on the redistributable "
+                "allow-list (see REDISTRIBUTABLE_LICENSES in build_public_registry.py)"
+            )
+        elif licence in COPYLEFT_LICENSES and not (path.parent / "LICENSE").is_file():
+            errors.append(
+                f"{relative}: copyleft licence '{licence}' requires the upstream "
+                "LICENSE file next to the skill"
+            )
+
+        if not (path.parent / "LICENSE").is_file():
+            errors.append(
+                f"{relative}: foreign skill without an upstream LICENSE file -- "
+                "the licence text is the legally graspable unit, not a frontmatter field"
+            )
+        if not _frontmatter_field(path, "upstream"):
+            errors.append(
+                f"{relative}: foreign skill without 'upstream' -- provenance must stay "
+                "traceable to its source"
             )
     return errors
 
@@ -212,9 +310,12 @@ def run_gate() -> list[str]:
             errors.append(f"{relative}: host-scoped device name in tracked path")
     for path in tracked_text_files():
         relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+        if relative in THIRD_PARTY_SCAN_EXCEPTIONS:
+            continue
         for finding in content_findings(path):
             errors.append(f"{relative}: {finding}")
     errors.extend(visibility_consistency_errors(set(tracked)))
+    errors.extend(third_party_errors(set(tracked)))
     return errors
 
 

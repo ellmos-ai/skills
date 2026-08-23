@@ -116,15 +116,83 @@ PRIVATE_VISIBILITY_VALUES = {"private", "private-only", "private profile", "no-p
 DEFAULT_VISIBILITY = "private-only"
 
 
-def _private_visibility(metadata: dict) -> bool:
-    """Fail closed: no declaration means private.
+def effective_visibility(metadata: dict, relative: str | None = None) -> str:
+    """The visibility that actually applies -- declaration first, then location.
+
+    The fail-closed default (missing field ⇒ private) is right for our own
+    skills, where ``visibility`` is mandatory. It is wrong inside the third-party
+    areal, which runs on a deliberately smaller contract without that field: a
+    foreign skill would silently count as private, get dropped from the registry,
+    and simultaneously trip the "declared private but tracked" check. Sitting in
+    the areal *is* the declaration -- redistributable material is public by the
+    very fact that we redistribute it.
+
+    An explicit field always wins, in both directions.
+    """
+    declared = metadata.get("visibility")
+    if declared not in (None, ""):
+        return str(declared).strip().lower()
+    if relative is not None and PurePosixPath(relative).as_posix().startswith(
+        f"{THIRD_PARTY_AREAL}/"
+    ):
+        return "public"
+    return DEFAULT_VISIBILITY
+
+
+def _private_visibility(metadata: dict, relative: str | None = None) -> bool:
+    """Fail closed: no declaration means private -- outside the areal.
 
     Only for *canonical* SKILL.md, where the field is mandatory (see
     FRONTMATTER_REQUIRED_FIELDS in testing/skill_tester.py). Silence there is an
     unanswered question, and an unanswered question must not publish anything.
     """
-    visibility = str(metadata.get("visibility") or DEFAULT_VISIBILITY).strip().lower()
-    return visibility in PRIVATE_VISIBILITY_VALUES
+    return effective_visibility(metadata, relative) in PRIVATE_VISIBILITY_VALUES
+
+
+#: Areal for foreign skills we redistribute -- vendored as-is or improved forks.
+#: Tracked, listed, but under a *minimal* frontmatter contract (see
+#: AREAL_REQUIRED_FIELDS in testing/skill_tester.py): the nine house fields are
+#: our own convention, not an external standard, and no third-party skill carries
+#: them. Demanding them would mean editing foreign frontmatter -- which inflates
+#: every diff against upstream, breaks resync, and makes "unmodified" a fiction.
+THIRD_PARTY_AREAL = "skills/third-party"
+
+#: Foreign material we only *use and recommend* -- never redistributed. Lives in
+#: the OneDrive library and is gitignored here; the leading underscore keeps the
+#: registry, the privacy gate and the category check out of it by existing
+#: convention (same as _archive/).
+REFERENCE_AREAL = "skills/_reference"
+
+#: Licences under which we may redistribute foreign material. Permissive ones
+#: carry no obligation beyond keeping the notice; copyleft ones additionally bind
+#: derivative works to the same terms, which is why they are listed separately
+#: even though both are allowed. Anything absent here -- proprietary, unlicensed,
+#: or non-commercial (NC) -- must not be tracked: "non-commercial" is not cleanly
+#: separable in this setup, so it is excluded rather than guessed at.
+PERMISSIVE_LICENSES = {
+    "MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC",
+    "0BSD", "Unlicense", "CC0-1.0", "CC-BY-4.0", "CC-BY-3.0",
+}
+COPYLEFT_LICENSES = {
+    "GPL-2.0-only", "GPL-2.0-or-later", "GPL-3.0-only", "GPL-3.0-or-later",
+    "LGPL-3.0-only", "LGPL-3.0-or-later", "AGPL-3.0-only", "AGPL-3.0-or-later",
+    "MPL-2.0", "CC-BY-SA-4.0",
+}
+REDISTRIBUTABLE_LICENSES = PERMISSIVE_LICENSES | COPYLEFT_LICENSES
+
+
+def _is_third_party(metadata: dict) -> bool:
+    """True only when a skill *declares* itself foreign.
+
+    Deliberately opt-in: a missing flag means "our own". Unlike ``visibility``,
+    a fail-closed default here would buy nothing -- it would mark 375 existing
+    skills as foreign to catch a dozen real ones. The folder is the primary
+    switch; this flag is the second one, and the gate compares them.
+    """
+    value = metadata.get("third_party")
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"true", "yes", "1"}
 
 
 def _declares_private(metadata: dict) -> bool:
@@ -186,7 +254,7 @@ def git_skill_artifacts(repository_root: Path | None = None) -> list[str] | None
         if not _canonical_skill_artifact(relative):
             continue
         metadata = read_frontmatter(root / PurePosixPath(relative))
-        if not _private_visibility(metadata):
+        if not _private_visibility(metadata, relative):
             public_roots.add(PurePosixPath(relative).parts[:3])
 
     public_files: list[str] = []
@@ -500,10 +568,11 @@ def build_registry(
         if path.parent.parent.name.startswith("_"):
             continue
         metadata = read_frontmatter(path)
-        visibility = str(metadata.get("visibility") or "public").strip().lower()
-        if visibility in {"private", "private-only", "private profile", "no-push"}:
-            # Host- oder personengebundene Skills gehoeren nicht in den oeffentlichen
-            # Katalog (siehe SKILLS-MAP-PRIVATE.md).
+        # Host- oder personengebundene Skills gehoeren nicht in den oeffentlichen
+        # Katalog (siehe SKILLS-MAP-PRIVATE.md). Bewusst ueber die gemeinsame
+        # Funktion statt einer eigenen Liste: drei Kopien derselben Werte waren
+        # der Naehrboden des hackathon-operator-Vorfalls.
+        if _private_visibility(metadata, path.relative_to(root).as_posix()):
             continue
         category = path.parent.parent.name
         name = path.parent.name
@@ -513,6 +582,19 @@ def build_registry(
             description = ""
 
         relative_path = path.relative_to(root).as_posix()
+        # Fremdmaterial im eigenen Katalog kenntlich machen. Es unmarkiert neben
+        # eigenen Skills zu listen waere zwar legal, aber Fehlattribution im
+        # eigenen Schaufenster: Der Leser haelte fremde Arbeit fuer unsere.
+        entry_extra: dict = {}
+        if _is_third_party(metadata):
+            entry_extra["third_party"] = True
+            upstream = metadata.get("upstream")
+            if isinstance(upstream, str) and upstream.strip():
+                entry_extra["upstream"] = upstream.strip()
+            license_id = metadata.get("license")
+            if isinstance(license_id, str) and license_id.strip():
+                entry_extra["license"] = license_id.strip()
+
         components.append(
             {
                 "id": f"{component_type}:{category}:{name}",
@@ -520,6 +602,7 @@ def build_registry(
                 "type": component_type,
                 "category": category,
                 "path": relative_path,
+                **entry_extra,
                 "version": str(metadata.get("version") or "0.0.0"),
                 "status": str(metadata.get("status") or "active"),
                 "description": " ".join(description.split()),
