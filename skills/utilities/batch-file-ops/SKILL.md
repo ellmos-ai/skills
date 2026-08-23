@@ -19,73 +19,69 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
-
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# batch_file_ops - Batch-Dateioperationen
 
-
-# batch_file_ops - Batch File Operations (Deutsch)
-
-CLI tool for efficient batch operations on files using glob patterns.
-Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
+CLI-Tool fuer effiziente Batch-Operationen auf Dateien mit Glob-Patterns.
+Unterstuetzt: delete, move, copy, list. Zero Dependencies (nur Python stdlib).
 
 ---
 
-## Actions
+## Aktionen
 
-| Action | Description |
+| Aktion | Beschreibung |
 |--------|-------------|
-| `delete` | Delete files matching a pattern |
-| `move` | Move files matching a pattern |
-| `copy` | Copy files matching a pattern |
-| `list` | List files matching a pattern |
+| `delete` | Dateien nach Pattern loeschen |
+| `move` | Dateien nach Pattern verschieben |
+| `copy` | Dateien nach Pattern kopieren |
+| `list` | Dateien nach Pattern auflisten |
 
 ## CLI Usage
 
 ```bash
-python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-run] [--recursive]
+python batch_file_ops.py <aktion> <quelle> [<ziel>] --pattern "<glob>" [--dry-run] [--recursive]
 ```
 
-### Arguments
+### Argumente
 
-| Argument | Description |
+| Argument | Beschreibung |
 |----------|-------------|
-| `action` | `delete`, `move`, `copy`, or `list` |
-| `source` | Source directory |
-| `target` | Target directory (only for `move` and `copy`) |
-| `--pattern`, `-p` | Glob pattern (e.g., `*.py`, `TOOLS_*.py`) - Default: `*` |
-| `--dry-run`, `-n` | Preview only, no changes |
-| `--recursive`, `-r` | Search recursively in subdirectories |
+| `aktion` | `delete`, `move`, `copy` oder `list` |
+| `quelle` | Quellordner |
+| `ziel` | Zielordner (nur fuer `move` und `copy`) |
+| `--pattern`, `-p` | Glob-Pattern (z.B. `*.py`, `TOOLS_*.py`) - Standard: `*` |
+| `--dry-run`, `-n` | Nur anzeigen, nichts aendern |
+| `--recursive`, `-r` | Rekursiv in Unterordnern suchen |
 
 ---
 
-## Beispiel & Anwendung
+## Beispiele
 
 ```bash
-# List all Python files in a directory (Deutsch)
-python batch_file_ops.py list /path/to/directory --pattern "*.py"
+# Alle Python-Dateien in einem Ordner auflisten
+python batch_file_ops.py list /pfad/zum/ordner --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!) (Deutsch)
-python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
-python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
+# Alle .tmp Dateien loeschen (erst Dry-Run!)
+python batch_file_ops.py delete /pfad/zum/ordner --pattern "*.tmp" --dry-run
+python batch_file_ops.py delete /pfad/zum/ordner --pattern "*.tmp"
 
-# Move files (Deutsch)
-python batch_file_ops.py move /source /target --pattern "*.txt"
+# Dateien verschieben
+python batch_file_ops.py move /quelle /ziel --pattern "*.txt"
 
-# Copy files (recursive) (Deutsch)
-python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
+# Dateien kopieren (rekursiv)
+python batch_file_ops.py copy /quelle /ziel --pattern "*.md" --recursive
 
-# Pattern examples (Deutsch)
-python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
-python batch_file_ops.py list /path --pattern "backup_202?-*"
+# Pattern-Beispiele
+python batch_file_ops.py delete /pfad --pattern "TOOLS_*.py"
+python batch_file_ops.py list /pfad --pattern "backup_202?-*"
 ```
 
 ---
 
-## Notes
+## Hinweise
 
-- **Dry-run first:** Always use `--dry-run` first with `delete` and `move`
-- **Glob patterns:** Uses Python `pathlib.glob()` / `pathlib.rglob()`
-- **Windows-compatible:** Automatic UTF-8 output encoding
-- **Files only:** Directories are skipped (only files are processed)
+- **Dry-Run zuerst:** Bei `delete` und `move` immer erst `--dry-run` verwenden
+- **Glob-Patterns:** Nutzt Python `pathlib.glob()` / `pathlib.rglob()`
+- **Windows-kompatibel:** Automatisches UTF-8 Output-Encoding
+- **Nur Dateien:** Ordner werden uebersprungen (nur Dateien werden bearbeitet)

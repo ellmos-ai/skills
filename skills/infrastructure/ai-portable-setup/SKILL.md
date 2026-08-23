@@ -22,97 +22,94 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'ori
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# AI Portable Setup
 
+Erstellt eine portable KI-Arbeitsumgebung mit lokaler RAG-Pipeline.
+Gedacht fuer USB-Sticks oder externe Laufwerke -- funktioniert offline
+mit Ollama und lokalen Embedding-Modellen.
 
-# AI Portable Setup (Deutsch)
-
-Creates a portable AI workspace with a local RAG pipeline.
-Designed for USB drives or external drives — works offline
-with Ollama and local embedding models.
-
-## Quick Start
+## Schnellstart
 
 ```bash
-# Create structure on USB drive (Deutsch)
+# Struktur auf USB-Stick erstellen
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system: (Deutsch)
+# Danach auf dem Zielsystem:
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents (Deutsch)
+# Dokumente indexieren
 python rag/ingest.py
 
-# Query (Deutsch)
-python rag/query.py "My question..."
-python rag/query.py --mode icf "Observations about the client"
+# Abfragen
+python rag/query.py "Meine Frage..."
+python rag/query.py --mode icf "Beobachtungen zum Klienten"
 ```
 
-## Generated Directory Structure
+## Erzeugte Verzeichnisstruktur
 
 ```
 AI-Portable/
   models/
-    llm/                  Local LLM models (Mistral, Llama, etc.)
-    embeddings/           Embedding models (nomic-embed-text, bge-small)
+    llm/                  Lokale LLM-Modelle (Mistral, Llama, etc.)
+    embeddings/           Embedding-Modelle (nomic-embed-text, bge-small)
     tts/                  Optional: Text-to-Speech (Piper, Coqui)
   db/
-    chroma/               ChromaDB vector database
-    sqlite/               Metadata DB
+    chroma/               ChromaDB Vektordatenbank
+    sqlite/               Metadaten-DB
   documents/
-    code/                 Code snippets, projects
-    general/              General documents
+    code/                 Code-Snippets, Projekte
+    general/              Allgemeine Dokumente
   rag/
-    ingest.py             Ingest and index files
-    query.py              RAG queries with mode selection
-    pipeline.py           Main RAG pipeline (embed + query + LLM)
+    ingest.py             Dateien einlesen und indexieren
+    query.py              RAG-Abfragen mit Modus-Auswahl
+    pipeline.py           Haupt-RAG-Pipeline (Embed + Query + LLM)
   prompts/
-    coding.txt            Coding assistant prompt
-    icf.txt               ICF structuring prompt
-    rpg.txt               Pen-and-paper game master prompt
-  templates/              Word/PDF templates
-  venv/                   Portable Python environment
+    coding.txt            Coding-Assistent Prompt
+    icf.txt               ICF-Strukturierung Prompt
+    rpg.txt               Pen-and-Paper Spielleiter Prompt
+  templates/              Word/PDF-Vorlagen
+  venv/                   Portable Python-Umgebung
 ```
 
-## RAG Pipeline
+## RAG-Pipeline
 
 ```
-Documents -> Chunking -> Embedding (nomic-embed-text)
+Dokumente -> Chunking -> Embedding (nomic-embed-text)
                               |
                               v
-                         ChromaDB (local)
+                         ChromaDB (lokal)
                               |
-Query -> Embedding -> Similarity Search -> Top-K Chunks
+Frage -> Embedding -> Similarity Search -> Top-K Chunks
                                               |
                                               v
-                                    Context + Prompt -> Ollama (Mistral)
+                                    Kontext + Prompt -> Ollama (Mistral)
                                               |
                                               v
-                                          Response
+                                          Antwort
 ```
 
-## Query Modes
+## Abfrage-Modi
 
-| Mode | Prompt | Usage |
-|------|--------|-------|
-| `default` | General assistant | Standard queries |
-| `icf` | ICF structuring | Classify observations according to ICF |
-| `coding` | Coding assistant | Write and explain code |
-| `rpg` | Game master | Pen-and-paper role-playing |
+| Modus | Prompt | Verwendung |
+|-------|--------|------------|
+| `default` | Allgemeiner Assistent | Standardabfragen |
+| `icf` | ICF-Strukturierung | Beobachtungen nach ICF klassifizieren |
+| `coding` | Coding-Assistent | Code schreiben und erklaeren |
+| `rpg` | Spielleiter | Pen-and-Paper Rollenspiel |
 
-## Requirements on Target System
+## Voraussetzungen auf dem Zielsystem
 
 - Python 3.10+
-- Ollama (with `mistral:instruct` and `nomic-embed-text`)
-- ~8 GB RAM for Mistral
+- Ollama (mit `mistral:instruct` und `nomic-embed-text`)
+- ~8 GB RAM fuer Mistral
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.0.0 (2026-03-12)
-- Consolidation from MODULAR_AGENTS/AI-Portable
-- Setup script as single-file skill
-- 4 preconfigured prompts (coding, icf, rpg, default)
-- RAG pipeline (ingest, query, pipeline)
+- Konsolidierung aus MODULAR_AGENTS/AI-Portable
+- Setup-Script als Einzeldatei-Skill
+- 4 vorkonfigurierte Prompts (coding, icf, rpg, default)
+- RAG-Pipeline (ingest, query, pipeline)

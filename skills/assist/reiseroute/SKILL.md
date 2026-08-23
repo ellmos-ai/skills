@@ -17,77 +17,73 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: de
 visibility: public
 ---
-
 <img src="banner.png" width="100%" alt="reiseroute banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Reiseroute
 
-
-# Travel Route (Deutsch)
-
-**Route planning via OSRM (Open Source Routing Machine)**
+**Routenplanung via OSRM (Open Source Routing Machine)**
 
 ---
 
-## Übersicht & Zweck
+## Überblick
 
-Plans routes between two locations (names or coordinates) via the public
-OSRM service (`router.project-osrm.org`). Returns distance, travel time and
-mode of transport. No API key, no account required.
+Plant Routen zwischen zwei Orten (Namen oder Koordinaten) über den öffentlichen
+OSRM-Dienst (`router.project-osrm.org`). Gibt Distanz, Fahrzeit und Verkehrsmittel
+aus. Kein API-Key, kein Konto erforderlich.
 
 ---
 
-## Triggers
+## Trigger
 
-| Phrase | Action |
+| Phrase | Aktion |
 |---|---|
-| "Plan the route from Berlin to Hamburg" | Car route, geocode place names |
-| "How long does the drive from Munich to Vienna take by car?" | Car route + time |
-| "Cycle route from Potsdam to Berlin" | Bicycle mode |
-| "Walk from Kreuzberg to Mitte, Berlin" | Pedestrian mode |
-| "Route from 52.52,13.41 to 53.55,9.99" | Direct coordinates |
+| „Plan die Route von Berlin nach Hamburg" | Auto-Route, Ortsnamen geocodieren |
+| „Wie lange dauert die Fahrt von München nach Wien mit dem Auto?" | Auto-Route + Zeitangabe |
+| „Route mit dem Fahrrad von Potsdam nach Berlin" | Fahrrad-Modus |
+| „Zu Fuß von Kreuzberg nach Mitte Berlin" | Fußgänger-Modus |
+| „Strecke von 52.52,13.41 nach 53.55,9.99" | Direkt-Koordinaten |
 
 ---
 
-## Workflow & Vorgehen
+## Workflow
 
-1. **Extract start and destination** from the user input.
-2. **Detect mode:** car (default), bicycle, foot.
-3. **Geocode:** place names → coordinates via Nominatim.
-4. **Query OSRM:** returns distance (km) + duration (formatted).
-5. **Output result:** concise text summary.
+1. **Start- und Zielort extrahieren** aus der Nutzereingabe.
+2. **Modus erkennen:** Auto (Standard), Fahrrad, Fuß.
+3. **Geocodieren:** Ortsnamen → Koordinaten via Nominatim.
+4. **OSRM anfragen:** Gibt Distanz (km) + Dauer (formatiert) zurück.
+5. **Ergebnis ausgeben:** Übersichtliche Textzusammenfassung.
 
 ---
 
 ## CLI
 
 ```bash
-# Car route between two places (Deutsch)
+# Auto-Route zwischen zwei Orten
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Bicycle (Deutsch)
+# Fahrrad
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# On foot (Deutsch)
+# Zu Fuß
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Coordinates directly (lat,lon) (Deutsch)
+# Koordinaten direkt (lat,lon)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON output (Deutsch)
-PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Munich" "Vienna" --json
+# JSON-Ausgabe
+PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "München" "Wien" --json
 
-# Help (Deutsch)
+# Hilfe
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 
 ---
 
-## Modes
+## Modi
 
-| Mode | Alias | OSRM profile |
+| Modus | Alias | OSRM-Profil |
 |---|---|---|
-| auto (default) | car, pkw, fahren | driving |
+| auto (Standard) | car, pkw, fahren | driving |
 | fahrrad | bike, rad, radfahren | cycling |
 | fuss | foot, laufen, gehen, zu fuss | foot |
 
@@ -95,36 +91,36 @@ PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 
 ## Store
 
-No persistent store. Routes are not saved.
+Kein persistenter Store. Routen werden nicht gespeichert.
 
 ---
 
-## Attitude
+## Haltung
 
-- Always name start and destination before calculating.
-- Clarify if a place is ambiguous (e.g. "Vienna" = Austria or a city of the same name?).
-- Note: OSRM provides the fastest route without real-time traffic.
-- Issue a note for very long pedestrian routes (> 20 km).
-
----
-
-## Privacy
-
-Requests go to `nominatim.openstreetmap.org` (geocoding) and
-`router.project-osrm.org` (routing). No login, no API key,
-no persistent data storage.
+- Immer Start und Ziel vor der Berechnung benennen.
+- Klarstellen wenn ein Ort mehrdeutig ist (z.B. „Wien" = Österreich oder gleichnamige Stadt?).
+- Hinweis: OSRM liefert die schnellste Route ohne Echtzeit-Verkehr.
+- Bei sehr langen Fußgänger-Routen (> 20 km) einen Hinweis ausgeben.
 
 ---
 
-## Related Resources
+## Datenschutz
 
-- `location-suche` — POI search (also uses Nominatim)
-- `wetter` — weather at the destination
+Anfragen gehen an `nominatim.openstreetmap.org` (Geocoding) und
+`router.project-osrm.org` (Routing). Keine Anmeldung, kein API-Key,
+keine persistente Datenspeicherung.
 
 ---
 
-## Änderungsprotokoll
+## Verwandte Ressourcen
 
-| Version | Date | Change |
+- `location-suche` — POI-Suche (nutzt ebenfalls Nominatim)
+- `wetter` — Wetter am Reiseziel
+
+---
+
+## Changelog
+
+| Version | Datum | Änderung |
 |---|---|---|
-| 1.0.0 | 2026-06-22 | Created from BACH routing_service.py v1.0; geocoding integrated |
+| 1.0.0 | 2026-06-22 | Erstellt aus BACH routing_service.py v1.0; Geocoding integriert |

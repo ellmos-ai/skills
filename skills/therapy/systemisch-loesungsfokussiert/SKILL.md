@@ -19,311 +19,310 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
-
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Systemische & Loesungsfokussierte Methoden
 
+> Wunderfrage, Skalierung, Ausnahmen, zirkulaere Fragen, hypothetische Fragen — ein integrierter Skill
 
-# Systemic & Solution-Focused Methods (Deutsch)
-
-> Miracle question, scaling, exceptions, circular questions, hypothetical questions — one integrated skill
-
-See: [ETHICS.md](../ETHICS.md)
+Siehe: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Foundations
+## Grundlage
 
-### Solution-Focused Brief Therapy (SFBT)
+### Loesungsfokussierte Kurztherapie (SFBT)
 
-Developed by Steve de Shazer and Insoo Kim Berg at the Brief Family Therapy Center (Milwaukee).
-Core idea: instead of analyzing problems, work directly on solutions.
+Entwickelt von Steve de Shazer und Insoo Kim Berg am Brief Family Therapy Center (Milwaukee).
+Kernidee: Statt Probleme zu analysieren, direkt an Loesungen arbeiten.
 "Problem talk creates problems, solution talk creates solutions" (de Shazer).
 
-**The three basic rules:**
-1. **"If it ain't broke, don't fix it"** — do not change what works
-2. **"If it works, do more of it"** — reinforce what succeeds
-3. **"If it doesn't work, do something different"** — change what does not help
+**Die drei Grundregeln:**
+1. **"If it ain't broke, don't fix it"** — Was funktioniert, nicht veraendern
+2. **"If it works, do more of it"** — Was klappt, verstaerken
+3. **"If it doesn't work, do something different"** — Was nicht hilft, aendern
 
-### Systemic perspective
+### Systemische Perspektive
 
-Problems do not arise within persons but in relationships and patterns between persons.
-Questions aim to broaden perspectives, make patterns visible, and open up new possibilities.
+Probleme entstehen nicht in Personen, sondern in Beziehungen und Mustern zwischen Personen.
+Fragen zielen darauf ab, Perspektiven zu erweitern, Muster sichtbar zu machen und neue Moeglichkeiten zu eroeffnen.
 
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Hinweis:** Dies ist Psychoedukation, kein Ersatz fuer professionelle Therapie.
+**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. The miracle question
+## 1. Die Wunderfrage
 
-### Basic form
+### Grundform
 
 ```
-"Imagine that tonight, while you are asleep, a miracle happens.
-The problem that has been troubling you is solved.
-But you don't know it, because you were asleep.
+"Stell dir vor, heute Nacht passiert ein Wunder, waehrend du schlaefst.
+Das Problem, das dich beschaeftigt, ist geloest.
+Du weisst es aber nicht, weil du geschlafen hast.
 
-What would be the first thing tomorrow morning that tells you the miracle has happened?"
+Woran wuerdest du morgen frueh als Erstes merken, dass das Wunder passiert ist?"
 ```
 
-### Deepening follow-ups
+### Vertiefende Nachfragen
 
-**Sensory level:**
-- "What exactly would you do differently tomorrow morning?"
-- "How would you get up? What would you do first?"
-- "What would you feel when you open your eyes?"
+**Sinnesebene:**
+- "Was genau wuerdest du morgen frueh anders machen?"
+- "Wie wuerdest du aufstehen? Was wuerdest du als Erstes tun?"
+- "Was wuerdest du fuehlen, wenn du die Augen oeffnest?"
 
-**Relationship level:**
-- "How would your partner notice the miracle?"
-- "What would he/she see differently about you?"
-- "Who in your environment would notice it first?"
+**Beziehungsebene:**
+- "Woran wuerde dein Partner / deine Partnerin das Wunder bemerken?"
+- "Was wuerde er/sie anders an dir sehen?"
+- "Wer in deinem Umfeld wuerde es als Erstes bemerken?"
 
-**Fractions of the miracle:**
-- "Which part of this miracle is perhaps already happening a little bit?"
-- "On a scale from 0 to 10 — how far are you already toward the miracle?"
+**Bruchteile des Wunders:**
+- "Welcher Teil dieses Wunders passiert vielleicht schon ein kleines bisschen?"
+- "Auf einer Skala von 0 bis 10 — wie weit bist du schon in Richtung Wunder?"
 
-### Shortened variants
+### Verkuerzte Varianten
 
-- "If the problem were gone tomorrow — what would be different?"
-- "What would your ideal everyday life look like?"
-- "If everything were the way you wish — what would you be doing?"
+- "Wenn das Problem morgen weg waere — was waere anders?"
+- "Wie saehe dein idealer Alltag aus?"
+- "Wenn alles so waere, wie du es dir wuenschst — was wuerdest du tun?"
 
 ---
 
-## 2. Scaling techniques
+## 2. Skalierungstechniken
 
-### Basic structure
+### Grundstruktur
 
-"On a scale from 0 to 10, where 0 is [pole A] and 10 is [pole B] — where are you right now?"
+"Auf einer Skala von 0 bis 10, wobei 0 [Pol A] und 10 [Pol B] ist — wo stehst du gerade?"
 
-### Variants
+### Varianten
 
-| Type | Example question |
-|------|------------------|
-| **State scaling** | "How burdened do you feel right now?" |
-| **Coping scaling** | "How well do you manage your everyday life despite the problem?" |
-| **Confidence scaling** | "How confident are you that you can make progress?" |
-| **Progress scaling** | "Where were you a week / a month ago?" |
-| **Relationship scaling** | "Where on the scale would your partner rate your relationship?" |
+| Typ | Beispielfrage |
+|-----|---------------|
+| **Zustandsskalierung** | "Wie belastet fuehlst du dich gerade?" |
+| **Bewaeltigungsskalierung** | "Wie gut schaffst du es, trotz des Problems deinen Alltag zu bewaeltigen?" |
+| **Zuversichtsskalierung** | "Wie zuversichtlich bist du, dass du Fortschritte machen kannst?" |
+| **Fortschrittsskalierung** | "Wo standest du vor einer Woche / einem Monat?" |
+| **Beziehungsskalierung** | "Wo auf der Skala wuerde dein Partner eure Beziehung einschaetzen?" |
 
-### The "one point higher" trick
+### Der "Ein-Punkt-hoeher"-Trick
 
-Always ask only about the next point — never about the end goal.
+Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
 
 ```
-"What would be different at a 6 compared to the current 5?"
-"What could you do TOMORROW that moves you toward a 6?"
+"Was waere bei einer 6 anders als bei der jetzigen 5?"
+"Was koenntest du MORGEN tun, das in Richtung 6 geht?"
 ```
 
-### Follow-up questions (essential!)
+### Follow-up-Fragen (essentiell!)
 
-- "What has kept you from being at 0?" (resource activation)
-- "What would have to happen for you to move one point higher?" (small-step solution orientation)
-- "How would you notice that you are at [target value]?" (concretization)
-
----
-
-## 3. Exception exploration
-
-### Principle
-
-Exceptions are moments in which the problem does not occur or occurs less.
-They already contain working solution elements.
-
-### Systematic search
-
-**Phase 1 — Find:**
-- "When was it recently a bit better — even minimally?"
-- "Are there days when the problem is less intense?"
-
-**Phase 2 — Describe in detail:**
-- "Describe that moment as precisely as possible"
-- "What was different about that day?"
-
-**Phase 3 — Recognize one's own contribution:**
-- "What did YOU contribute to it being better?"
-- "What decision did you make?"
-
-**Phase 4 — Reinforce:**
-- "How could you deliberately repeat that?"
-- "What would be a first small step in that direction?"
-
-### Types of exceptions
-
-| Type | Description | Follow-up |
-|------|-------------|-----------|
-| Deliberate | The client consciously did something differently | "Do more of it!" |
-| Random | Something was different without conscious action | "What was different about the circumstances?" |
-| External | Others did something | "What could you do to make that more likely?" |
+- "Was hat dazu gefuehrt, dass du nicht bei 0 bist?" (Ressourcenaktivierung)
+- "Was muesste passieren, damit du einen Punkt hoeher kommst?" (Kleinschrittige Loesungsorientierung)
+- "Woran wuerdest du merken, dass du bei [Zielwert] bist?" (Konkretisierung)
 
 ---
 
-## 4. Circular questions
+## 3. Ausnahmen-Exploration
 
-### Principle
+### Prinzip
 
-Encourage perspective shifts — the person is invited to put themselves in others' positions and to recognize relationship patterns.
+Ausnahmen sind Momente, in denen das Problem nicht oder weniger auftritt.
+Sie enthalten bereits funktionierende Loesungsansaetze.
 
-### Basic structure
+### Systematische Suche
 
-"What do you think — how does [person X] see/feel/judge this?"
+**Phase 1 — Finden:**
+- "Wann war es in letzter Zeit einmal etwas besser — auch nur minimal?"
+- "Gibt es Tage, an denen das Problem weniger stark auftritt?"
 
-### Variants
+**Phase 2 — Detailliert beschreiben:**
+- "Beschreibe diesen Moment so genau wie moeglich"
+- "Was war an diesem Tag anders?"
 
-**Relationship questions:**
-- "What do you think your partner thinks when you withdraw?"
-- "How would your best friend describe your relationship?"
-- "If I asked your brother what the biggest problem in the family is — what would he say?"
+**Phase 3 — Eigenen Beitrag erkennen:**
+- "Was hast DU dazu beigetragen, dass es besser war?"
+- "Welche Entscheidung hast du getroffen?"
 
-**Difference questions:**
-- "Who in the family suffers most from the situation?"
-- "Who notices the change first?"
+**Phase 4 — Verstaerken:**
+- "Wie koenntest du das bewusst wiederholen?"
+- "Was waere ein erster kleiner Schritt in diese Richtung?"
 
-**Agreement questions:**
-- "Would your partner agree with that?"
-- "Who in your environment sees it similarly to you?"
+### Typen von Ausnahmen
 
-**Classification questions:**
-- "If you ranked your family members by who handles conflict best — what would the order be?"
-
----
-
-## 5. Hypothetical questions
-
-Open new thinking spaces, loosen rigid convictions, rehearse options for action.
-
-- "Suppose you just tried it — what could happen in the best case?"
-- "What would happen if you did the opposite of what you normally do?"
-- "If you were to give advice to someone in the same situation — what would you say?"
-- "If fear played no role — what would you do?"
-- "If you looked back at today from 5 years in the future — what would you advise yourself?"
+| Typ | Beschreibung | Nachfrage |
+|-----|-------------|-----------|
+| Absichtlich | Klient hat bewusst etwas anders gemacht | "Mach mehr davon!" |
+| Zufaellig | Etwas war anders, ohne bewusstes Zutun | "Was war anders an den Umstaenden?" |
+| Extern | Andere haben etwas getan | "Was koenntest du tun, um das wahrscheinlicher zu machen?" |
 
 ---
 
-## 6. Worsening questions (paradoxical intervention)
+## 4. Zirkulaere Fragen
 
-Strengthen the sense of control: whoever can describe how to make the problem worse has influence — and can therefore also improve it.
+### Prinzip
 
-- "What could you do to make it guaranteed worse?"
-- "How could you make sure the argument escalates?"
-- "What would have to happen for everything to go completely wrong?"
+Perspektivwechsel anregen — die Person wird eingeladen, sich in die Position anderer zu versetzen und Beziehungsmuster zu erkennen.
 
-**Important:** NOT suitable in acute crisis, suicidality, or severe depression.
+### Grundstruktur
+
+"Was glaubst du, wie [Person X] das sieht/empfindet/beurteilt?"
+
+### Varianten
+
+**Beziehungsfragen:**
+- "Was glaubst du, was dein Partner denkt, wenn du dich zurueckziehst?"
+- "Wie wuerde deine beste Freundin eure Beziehung beschreiben?"
+- "Wenn ich deinen Bruder fragen wuerde, was das groesste Problem in der Familie ist — was wuerde er sagen?"
+
+**Unterschiedsfragen:**
+- "Wer in der Familie leidet am meisten unter der Situation?"
+- "Wer bemerkt die Veraenderung zuerst?"
+
+**Uebereinstimmungsfragen:**
+- "Wuerde dein Partner dem zustimmen?"
+- "Wer in deinem Umfeld sieht das aehnlich wie du?"
+
+**Klassifikationsfragen:**
+- "Wenn du deine Familienmitglieder danach ordnen wuerdest, wer am besten mit Konflikten umgeht — wie saehe die Reihenfolge aus?"
 
 ---
 
-## 7. Coping questions & resource comments
+## 5. Hypothetische Fragen
 
-- "How do you still manage to get up every day?"
-- "What keeps you going?"
-- "I am impressed that you are here despite the difficulties."
+Neue Denkraeume eroeffnen, starre Ueberzeugungen aufloeckern, Handlungsoptionen durchspielen.
+
+- "Angenommen, du wuerdest es einfach mal ausprobieren — was koennte im besten Fall passieren?"
+- "Was wuerde passieren, wenn du das Gegenteil von dem taetst, was du normalerweise tust?"
+- "Wenn du einen Ratschlag an jemanden geben wuerdest, der in der gleichen Situation ist — was wuerdest du sagen?"
+- "Wenn Angst keine Rolle spielen wuerde — was wuerdest du tun?"
+- "Wenn du in 5 Jahren auf heute zurueckblickst — was wuerdest du dir raten?"
 
 ---
 
-## Context-sensitive selection
+## 6. Verschlimmerungsfragen (Paradoxe Intervention)
 
-| Situation | Recommended technique | Rationale |
+Kontrollueberzeugung staerken: Wer beschreiben kann, wie er das Problem verschlimmern koennte, hat Einfluss — und kann es auch verbessern.
+
+- "Was koenntest du tun, damit es garantiert schlimmer wird?"
+- "Wie koenntest du dafuer sorgen, dass der Streit eskaliert?"
+- "Was muesste passieren, damit alles komplett schiefgeht?"
+
+**Wichtig:** NICHT geeignet bei akuter Krise, Suizidalitaet oder schwerer Depression.
+
+---
+
+## 7. Coping-Fragen & Ressourcen-Kommentare
+
+- "Wie schaffst du es trotzdem, jeden Tag aufzustehen?"
+- "Was haelt dich aufrecht?"
+- "Es beeindruckt mich, dass du trotz der Schwierigkeiten hier bist."
+
+---
+
+## Kontextsensitive Auswahl
+
+| Situation | Empfohlene Technik | Begruendung |
 |---|---|---|
-| Person is stuck in the problem | Miracle question | Releases from the problem trance |
-| Progress not visible | Scaling questions | Makes small steps measurable |
-| Relationship conflicts | Circular questions | Enables perspective shifts |
-| "It is ALWAYS like this" | Exception questions | Breaks generalization |
-| Fear of change | Hypothetical questions | Risk-free trial thinking |
-| Helplessness / loss of control | Worsening questions | Shows one's own influence |
-| Unclear goals | Miracle question + scaling | Clarifies direction and starting point |
+| Person steckt im Problem fest | Wunderfrage | Loest aus der Problemtrance |
+| Fortschritt nicht sichtbar | Skalierungsfragen | Macht kleine Schritte messbar |
+| Beziehungskonflikte | Zirkulaere Fragen | Ermoeglicht Perspektivwechsel |
+| "Es ist IMMER so" | Ausnahme-Fragen | Durchbricht Generalisierung |
+| Angst vor Veraenderung | Hypothetische Fragen | Risikofreies Probedenken |
+| Hilflosigkeit / Kontrollverlust | Verschlimmerungsfragen | Zeigt eigenen Einfluss |
+| Unklare Ziele | Wunderfrage + Skalierung | Klaert Richtung und Ausgangspunkt |
 
 ---
 
-## Combination patterns
+## Kombinationsmuster
 
-### Scaling + exception + small step
+### Skalierung + Ausnahme + Kleiner Schritt
 
-1. "On a scale of 0-10, where are you right now?" → e.g. "4"
-2. "What has kept you from being at 0?" (resources!)
-3. "Were there moments when you were at 5 or higher?" (exceptions!)
-4. "What was different then?" (recognize patterns!)
-5. "What would be the smallest step to get from 4 to 5?" (action!)
+1. "Auf einer Skala von 0-10, wo stehst du gerade?" → z.B. "4"
+2. "Was hat dazu gefuehrt, dass du nicht bei 0 bist?" (Ressourcen!)
+3. "Gab es Momente, wo du bei 5 oder hoeher warst?" (Ausnahmen!)
+4. "Was war da anders?" (Muster erkennen!)
+5. "Was waere der kleinste Schritt, um von 4 auf 5 zu kommen?" (Handlung!)
 
-### Miracle question + circular + scaling
+### Wunderfrage + Zirkulaer + Skalierung
 
-1. Ask the miracle question (create a target image)
-2. "Who would notice it first?" (circular — relationship context)
-3. "How far along are you already on the way to the miracle?" (scaling — progress)
+1. Wunderfrage stellen (Zielbild erzeugen)
+2. "Wer wuerde es zuerst merken?" (Zirkulaer — Beziehungskontext)
+3. "Wie weit bist du schon auf dem Weg zum Wunder?" (Skalierung — Fortschritt)
 
-### Circular + hypothetical
+### Zirkulaer + Hypothetisch
 
-1. "What do you think — how does your boss see the situation?"
-2. "Suppose he said exactly that — what could you do then?"
+1. "Was glaubst du, wie dein Chef die Situation sieht?"
+2. "Angenommen, er wuerde genau das sagen — was koenntest du dann tun?"
 
 ---
 
-## Reflection questions for self-application
+## Reflexionsfragen zur Selbstanwendung
 
-- "What works well in my life — and how do I do that?"
-- "What is a small exception I could build on?"
-- "If the problem were gone tomorrow — what would I do first?"
-- "What have I managed before, even though it was hard?"
+- "Was funktioniert in meinem Leben gut — und wie mache ich das?"
+- "Was ist eine kleine Ausnahme, auf die ich aufbauen koennte?"
+- "Wenn das Problem morgen weg waere — was wuerde ich als Erstes tun?"
+- "Was habe ich frueher schon einmal geschafft, obwohl es schwer war?"
 
 ---
 
 ## Dos and Don'ts
 
 ### Dos
-- **Ask openly** — no leading questions
-- **Stay curious** — the answer is more valuable than the question
-- **Allow pauses** — good questions need time
-- **Build on answers** — follow-up matters more than the next technique
-- **Phrase appreciatively** — "What did you succeed at?" instead of "What did you do wrong?"
+- **Offen fragen** — keine Suggestivfragen
+- **Neugierig bleiben** — die Antwort ist wertvoller als die Frage
+- **Pausen lassen** — gute Fragen brauchen Zeit
+- **An Antworten anknuepfen** — Follow-up ist wichtiger als die naechste Technik
+- **Wertschaetzend formulieren** — "Was ist dir gelungen?" statt "Was hast du falsch gemacht?"
 
 ### Don'ts
-- **Do not interrogate** — max. 2-3 questions in a row, then reflect
-- **Not in acute crisis** — stabilize first, then explore
-- **Not as manipulation** — questions must be authentically curious
-- **Never use worsening questions with suicidality** — never
+- **Nicht verhoerartig fragen** — max. 2-3 Fragen am Stueck, dann reflektieren
+- **Nicht bei akuter Krise** — erst stabilisieren, dann explorieren
+- **Nicht als Manipulation** — Fragen muessen authentisch neugierig sein
+- **Verschlimmerungsfragen nicht bei Suizidalitaet** — niemals
 
 ---
 
-## Ethics and limits
+## Ethik und Grenzen
 
-**An AI assistant may:**
-- Explain and contextualize SFBT and systemic concepts
-- Guide the miracle question, exception exploration, and scaling
-- Ask circular and hypothetical questions
-- Ask reflection questions and point out resources
+**Ein KI-Assistent darf:**
+- SFBT- und systemische Konzepte erklaeren und einordnen
+- Wunderfrage, Ausnahmen-Exploration und Skalierung anleiten
+- Zirkulaere und hypothetische Fragen stellen
+- Reflexionsfragen stellen und auf Ressourcen hinweisen
 
-**An AI assistant may NOT:**
-- Conduct or replace therapy
-- Trivialize persistent problems ("just think positive")
-- Brush over acute crises with solution orientation
-- Give relationship counseling that replaces professional therapy
-- Use worsening questions in fragile states
+**Ein KI-Assistent darf NICHT:**
+- Therapie durchfuehren oder ersetzen
+- Persistierende Probleme verharmlosen ("Denk einfach positiv")
+- Akute Krisen mit Loesungsorientierung uebergehen
+- Beziehungsberatung geben, die professionelle Therapie ersetzt
+- Verschlimmerungsfragen bei fragilen Zustaenden einsetzen
 
-**At signs of an acute crisis, ALWAYS refer to local emergency services and crisis hotlines** (in Germany e.g.: Telefonseelsorge 0800 111 0 111 / 0800 111 0 222, psychiatric emergency service 112, krisenchat.de).
+**Bei Anzeichen akuter Krise IMMER verweisen auf:**
+- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
+- Psychiatrischer Notdienst: 112
+- Krisenchat: krisenchat.de
 
 ---
 
-## References
+## Quellenangaben
 
 - de Shazer, S. (1985). *Keys to Solution in Brief Therapy.* Norton.
 - de Shazer, S. (1988). *Clues: Investigating Solutions in Brief Therapy.* Norton.
 - Berg, I. K. & Miller, S. D. (1992). *Working with the Problem Drinker.* Norton.
 - Berg, I. K. & Dolan, Y. (2001). *Tales of Solutions.* Norton.
-- Selvini Palazzoli, M. et al. (1981). *Hypothesizing — Circularity — Neutrality.*
+- Selvini Palazzoli, M. et al. (1981). *Hypothetisieren — Zirkularitaet — Neutralitaet.*
 - Schlippe, A. von & Schweitzer, J. (2012). *Lehrbuch der systemischen Therapie und Beratung.*
 - Gingerich, W. J. & Peterson, L. T. (2013). Effectiveness of Solution-Focused Brief Therapy. *Research on Social Work Practice*, 23(3), 266-283.
 - Kim, J. S. et al. (2019). Solution-Focused Brief Therapy: A Meta-Analysis. *Journal of Marital and Family Therapy*, 45(2), 271-286.
 
 ---
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.0.0 (2026-05-19)
-- Merged from `solution-focused-therapy` (v1.0.0) and `systemic-questioning` (v1.0.0)
-- All unique content of both sources integrated
+- Zusammengefuehrt aus `solution-focused-therapy` (v1.0.0) und `systemic-questioning` (v1.0.0)
+- Alle einzigartigen Inhalte beider Quellen integriert
 
 ---
 
-*Merged from BACH v3.8.0 exports | Standalone version*
-*Not professional therapy — psychoeducation and reflection*
+*Merged aus BACH v3.8.0 Exports | Standalone-Version*
+*Keine professionelle Therapie — Psychoedukation und Reflexion*

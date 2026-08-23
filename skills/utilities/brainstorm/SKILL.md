@@ -19,138 +19,136 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="brainstorm banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Brainstorm
 
-
-# Brainstorm (Deutsch)
-
-> Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
+> Strukturierte Kreativitaet fuer Innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
 
 ---
 
-## When to Use?
+## Wann nutzen?
 
-- New ideas needed
-- Stuck / creativity block
-- Innovation sought
-- Solve a problem creatively
+- Neue Ideen gebraucht
+- Festgefahren / Kreativitaetsblockade
+- Innovation gesucht
+- Problem kreativ loesen
 
-**Trigger words:** brainstorm, ideas, creative, innovative, ideation
+**Trigger-Woerter:** brainstorm, ideen, kreativ, innovativ, ideenfindung
 
 ---
 
-## Methods
+## Methoden
 
 ### 1. SCAMPER
 
 **Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse**
 
-Systematically improve existing solutions:
-- **S**ubstitute: What can be replaced?
-- **C**ombine: What can be combined?
-- **A**dapt: What can be adapted?
-- **M**odify: What can be changed?
-- **P**ut to other use: What else could it be used for?
-- **E**liminate: What can be removed?
-- **R**everse: What can be reversed?
+Bestehende Loesungen systematisch verbessern:
+- **S**ubstitute: Was kann ersetzt werden?
+- **C**ombine: Was kann kombiniert werden?
+- **A**dapt: Was kann angepasst werden?
+- **M**odify: Was kann veraendert werden?
+- **P**ut to other use: Wofuer sonst nutzen?
+- **E**liminate: Was kann weggelassen werden?
+- **R**everse: Was kann umgekehrt werden?
 
 ---
 
 ### 2. Six Thinking Hats (Edward de Bono)
 
-Systematically think through 6 perspectives:
+6 Perspektiven systematisch durchdenken:
 
-- **White Hat — Facts:** What information do we have? What's missing?
-- **Red Hat — Emotion:** How does it feel? Intuition, gut feeling
-- **Black Hat — Critique:** What could go wrong? Risks, weaknesses
-- **Yellow Hat — Optimism:** What are the opportunities? Best case
-- **Green Hat — Creativity:** New ideas? Out-of-the-box?
-- **Blue Hat — Meta:** Process control, summary, next steps
+- **White Hat — Fakten:** Welche Informationen haben wir? Was fehlt?
+- **Red Hat — Emotion:** Wie fuehlt sich das an? Intuition, Bauchgefuehl
+- **Black Hat — Kritik:** Was koennte schiefgehen? Risiken, Schwaechen
+- **Yellow Hat — Optimismus:** Was sind die Chancen? Best Case
+- **Green Hat — Kreativitaet:** Neue Ideen? Out-of-the-box?
+- **Blue Hat — Meta:** Prozess-Kontrolle, Zusammenfassung, naechste Schritte
 
-**Process:** Define problem (Blue) -> Facts (White) -> Emotions (Red) -> Critique (Black) -> Positives (Yellow) -> New ideas (Green) -> Summarize (Blue)
+**Prozess:** Problem definieren (Blue) -> Fakten (White) -> Emotionen (Red) -> Kritik (Black) -> Positives (Yellow) -> Neue Ideen (Green) -> Zusammenfassen (Blue)
 
 ---
 
 ### 3. Mind Mapping
 
-Visualize thoughts hierarchically:
-1. Central topic
-2. Main branches (3-7)
-3. Sub-branches for each category
-4. Add details and ideas
-5. Identify connections
+Gedanken hierarchisch visualisieren:
+1. Zentrales Thema
+2. Haupt-Aeste (3-7)
+3. Sub-Aeste fuer jede Kategorie
+4. Details und Ideen hinzufuegen
+5. Verbindungen erkennen
 
 ---
 
 ### 4. Reverse Brainstorming
 
-Invert the problem: "How do we make it WORSE?"
+Problem umkehren: "Wie machen wir es SCHLIMMER?"
 
-1. Invert the problem
-2. Collect bad ideas
-3. Reverse = Good ideas
+1. Problem umkehren
+2. Schlechte Ideen sammeln
+3. Umkehren = Gute Ideen
 
-Particularly effective when direct ideation is stalled.
+Besonders gut wenn direkte Ideenfindung stockt.
 
 ---
 
 ### 5. TRIZ (Theory of Inventive Problem Solving)
 
-Top 10 Principles for Software:
-1. **Segmentation:** Split monolith into modules
-2. **Extraction:** Isolate disturbing property
-3. **Local Quality:** Different components, different properties
-4. **Merging:** Combine similar functions
-5. **Universality:** One element, multiple functions
-6. **Nesting:** Components within components
-7. **Preliminary Action:** Preparation in advance
-8. **Feedback:** Monitoring and adaptation
-9. **Self-Service:** System maintains itself
-10. **Asymmetry:** Non-symmetrical designs
+Top 10 Principles fuer Software:
+1. **Segmentation:** Teile Monolith in Module
+2. **Extraction:** Isoliere stoerende Eigenschaft
+3. **Local Quality:** Verschiedene Komponenten, verschiedene Eigenschaften
+4. **Merging:** Kombiniere aehnliche Funktionen
+5. **Universality:** Ein Element, mehrere Funktionen
+6. **Nesting:** Komponenten ineinander
+7. **Preliminary Action:** Vorbereitung im Voraus
+8. **Feedback:** Monitoring und Anpassung
+9. **Self-Service:** System wartet sich selbst
+10. **Asymmetry:** Nicht-symmetrische Designs
 
 ---
 
 ### 6. Rapid Ideation
 
-Quantity over quality — 50+ ideas in 20 min.
+Quantitaet vor Qualitaet — 50+ Ideen in 20 Min.
 
-**Rules:**
-- NO criticism during ideation
-- WILD ideas welcome
-- Build on others' ideas
-- Quantity FIRST
+**Regeln:**
+- KEINE Kritik waehrend Ideation
+- WILDE Ideen willkommen
+- Auf Ideen anderer aufbauen
+- Quantitaet FIRST
 
-**Timer-based:**
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
+**Timer-basiert:**
+- Runde 1 (5 Min): Offene Ideation
+- Runde 2 (5 Min): Variationen
+- Runde 3 (5 Min): Kombinationen
+- Runde 4 (5 Min): Extreme Ideen
 
 ---
 
-## Workflow & Vorgehen
+## Workflow
 
 ```
-1. User request
-2. Understand goal
-3. Choose method(s)
-4. Generate ideas (no criticism!)
+1. User Request
+2. Ziel verstehen
+3. Methode(n) waehlen
+4. Ideen generieren (keine Kritik!)
 5. Clustering
-6. Feasibility/Impact matrix
-7. Top 5-10 selection
-8. Output + recommendation
+6. Feasibility/Impact Matrix
+7. Top 5-10 Auswahl
+8. Output + Empfehlung
 ```
 
 ---
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Portiert aus BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+
+**Siehe auch:** [think](../think/SKILL.md) (Analyse, Root Cause, SWOT) | [decide](../decide/SKILL.md) (Entscheidungs-Frameworks)

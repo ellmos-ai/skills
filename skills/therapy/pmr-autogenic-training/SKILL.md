@@ -19,180 +19,179 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Progressive Muskelrelaxation & Autogenes Training
 
+> Koerperbasierte Entspannungsverfahren nach Jacobson und Schultz
 
-# Progressive Muscle Relaxation & Autogenic Training (Deutsch)
-
-> Body-based relaxation techniques according to Jacobson and Schultz
-
-See: [ETHICS.md](../ETHICS.md)
+Siehe: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Kontext
 
-Progressive Muscle Relaxation (PMR, Jacobson 1929) and Autogenic Training (AT, Schultz 1932) are the two most extensively researched relaxation techniques. Both work through conscious influence on the autonomic nervous system and can be learned as self-help methods without therapeutic supervision.
+Progressive Muskelrelaxation (PMR, Jacobson 1929) und Autogenes Training (AT, Schultz 1932)
+sind die beiden am besten erforschten Entspannungsverfahren. Beide wirken ueber die
+bewusste Beeinflussung des vegetativen Nervensystems und sind als Selbsthilfemethoden
+ohne therapeutische Begleitung erlernbar.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
-
----
-
-## 1. Progressive Muscle Relaxation (PMR) according to Jacobson
-
-### Basic Principle
-
-Systematic tensing and releasing of muscle groups. Through the contrast between tension and release, the body learns deeper relaxation than possible in its normal state.
-
-**Mechanism:** Muscle tension -> conscious release -> parasympathetic activation -> reduction of heart rate, blood pressure, muscle tone
-
-### 1.1 Long Form: 16 Muscle Groups
-
-| No | Muscle Group | Tension |
-|----|-------------|---------|
-| 1 | Right hand/forearm | Clench fist |
-| 2 | Right upper arm | Tense biceps |
-| 3 | Left hand/forearm | Clench fist |
-| 4 | Left upper arm | Tense biceps |
-| 5 | Forehead | Raise eyebrows |
-| 6 | Mid-face | Squeeze eyes shut, wrinkle nose |
-| 7 | Lower face | Clench teeth, pull corners of mouth wide |
-| 8 | Neck | Press chin toward chest (counter-pressure) |
-| 9 | Chest/shoulders | Raise shoulders, inhale deeply |
-| 10 | Abdomen | Tense abdominal muscles |
-| 11 | Lower back | Slight arch |
-| 12 | Right thigh | Slightly lift leg |
-| 13 | Right lower leg | Pull foot toward shin |
-| 14 | Right foot | Curl toes |
-| 15 | Left thigh | Slightly lift leg |
-| 16 | Left lower leg/foot | Pull foot up, curl toes |
-
-**Procedure per muscle group:**
-1. Direct attention to the muscle group
-2. Tense: 5-7 seconds (approximately 70% of maximum strength)
-3. Release: Let go abruptly
-4. Notice: 20-30 seconds, perceive the relaxation
-5. Next muscle group
-
-### 1.2 Short Form: 7 Muscle Groups
-
-For experienced practitioners or when time is limited:
-
-| No | Combination | Tension |
-|----|------------|---------|
-| 1 | Both arms | Clench fists, bend arms |
-| 2 | Entire face | Grimace: furrow brow, close eyes, mouth wide |
-| 3 | Neck/shoulders | Pull shoulders up to ears |
-| 4 | Chest/abdomen | Inhale, tense abdomen |
-| 5 | Back | Shoulder blades together, slight arch |
-| 6 | Both thighs | Slightly lift legs |
-| 7 | Both lower legs/feet | Pull feet up |
-
-### 1.3 Recall Technique (Advanced)
-
-After several weeks of practice: Relaxation of muscle groups ONLY through imagination (without actual tensing). The body has conditioned the relaxation response.
+**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
+**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 2. Autogenic Training (AT) according to Schultz
+## 1. Progressive Muskelrelaxation (PMR) nach Jacobson
 
-### Basic Principle
+### Grundprinzip
 
-Concentrative self-relaxation through formulaic autosuggestion. The practitioner induces a state of deep relaxation through repeated guiding phrases (autonomic switching).
+Systematisches Anspannen und Entspannen von Muskelgruppen. Durch den Kontrast
+zwischen Anspannung und Loslassen lernt der Koerper tiefere Entspannung als im
+Normalzustand moeglich.
 
-**Mechanism:** Concentration on formulas -> ideomotor response -> actual physical changes (blood flow, warmth, calm)
+**Wirkweg:** Muskelanspannung -> bewusstes Loslassen -> parasympathische Aktivierung
+-> Senkung von Herzfrequenz, Blutdruck, Muskeltonus
 
-### 2.1 The 6 Basic Exercises (Lower Level)
+### 1.1 Langform: 16 Muskelgruppen
 
-| Exercise | Formula | Goal |
-|----------|---------|------|
-| 1. Heaviness | "My right arm is very heavy" | Muscle relaxation |
-| 2. Warmth | "My right arm is very warm" | Vasodilation, blood flow |
-| 3. Heart | "My heart beats calmly and steadily" | Heart regulation |
-| 4. Breathing | "My breathing is calm and steady" | Breath regulation |
-| 5. Solar plexus | "My solar plexus is streaming warm" | Abdominal organ relaxation |
-| 6. Forehead | "My forehead is pleasantly cool" | Mental clarity |
+| Nr | Muskelgruppe | Anspannung |
+|----|-------------|------------|
+| 1 | Rechte Hand/Unterarm | Faust ballen |
+| 2 | Rechter Oberarm | Bizeps anspannen |
+| 3 | Linke Hand/Unterarm | Faust ballen |
+| 4 | Linker Oberarm | Bizeps anspannen |
+| 5 | Stirn | Augenbrauen hochziehen |
+| 6 | Mittleres Gesicht | Augen zusammenkneifen, Nase ruempfen |
+| 7 | Unteres Gesicht | Zaehne zusammenbeissen, Mundwinkel breit |
+| 8 | Nacken | Kinn Richtung Brust druecken (Gegendruck) |
+| 9 | Brust/Schultern | Schultern hochziehen, tief einatmen |
+| 10 | Bauch | Bauchdecke anspannen |
+| 11 | Unterer Ruecken | Leichtes Hohlkreuz |
+| 12 | Rechter Oberschenkel | Bein leicht anheben |
+| 13 | Rechter Unterschenkel | Fuss Richtung Schienbein ziehen |
+| 14 | Rechter Fuss | Zehen einrollen |
+| 15 | Linker Oberschenkel | Bein leicht anheben |
+| 16 | Linker Unterschenkel/Fuss | Fuss anziehen, Zehen einrollen |
 
-**Progression:** Gradual over 6-8 weeks. Add one new exercise each week.
+**Ablauf pro Muskelgruppe:**
+1. Aufmerksamkeit auf die Muskelgruppe richten
+2. Anspannen: 5-7 Sekunden (ca. 70% der Maximalkraft)
+3. Loslassen: Schlagartig entspannen
+4. Nachspueren: 20-30 Sekunden die Entspannung wahrnehmen
+5. Naechste Muskelgruppe
 
-### 2.2 Session Procedure
+### 1.2 Kurzform: 7 Muskelgruppen
+
+Fuer Geuebte oder bei wenig Zeit:
+
+| Nr | Kombination | Anspannung |
+|----|------------|------------|
+| 1 | Beide Arme | Faeuste ballen, Arme anwinkeln |
+| 2 | Gesicht komplett | Grimasse: Stirn runzeln, Augen zu, Mund breit |
+| 3 | Nacken/Schultern | Schultern zu den Ohren ziehen |
+| 4 | Brust/Bauch | Einatmen, Bauch anspannen |
+| 5 | Ruecken | Schulterblaetter zusammen, leichtes Hohlkreuz |
+| 6 | Beide Oberschenkel | Beine leicht anheben |
+| 7 | Beide Unterschenkel/Fuesse | Fuesse anziehen |
+
+### 1.3 Vergegenwaerti­gungs-Technik (Fortgeschritten)
+
+Nach mehreren Wochen Praxis: Entspannung der Muskelgruppen NUR durch Vorstellung
+(ohne tatsaechliche Anspannung). Der Koerper hat die Entspannungsreaktion konditioniert.
+
+---
+
+## 2. Autogenes Training (AT) nach Schultz
+
+### Grundprinzip
+
+Konzentrative Selbstentspannung durch formelhafte Autosuggestionen. Der Uebende
+versetzt sich durch wiederholte Leitsaetze in einen Zustand tiefer Entspannung
+(vegetative Umschaltung).
+
+**Wirkweg:** Konzentration auf Formeln -> ideomotorische Reaktion -> tatsaechliche
+koerperliche Veraenderung (Durchblutung, Waerme, Ruhe)
+
+### 2.1 Die 6 Grunduebungen (Unterstufe)
+
+| Uebung | Formel | Ziel |
+|--------|--------|------|
+| 1. Schwere | "Mein rechter Arm ist ganz schwer" | Muskelentspannung |
+| 2. Waerme | "Mein rechter Arm ist ganz warm" | Gefaesserweiterung, Durchblutung |
+| 3. Herz | "Mein Herz schlaegt ruhig und gleichmaessig" | Herzregulation |
+| 4. Atem | "Mein Atem geht ruhig und gleichmaessig" | Atemregulierung |
+| 5. Sonnengeflecht | "Mein Sonnengeflecht ist stroemend warm" | Bauchorganentspannung |
+| 6. Stirn | "Meine Stirn ist angenehm kuehl" | Kopfklarheit |
+
+**Aufbau:** Schrittweise ueber 6-8 Wochen. Jede Woche eine neue Uebung hinzufuegen.
+
+### 2.2 Ablauf einer Sitzung
 
 ```
-1. Basic posture: Coachman's posture, armchair position, or lying down
-2. Opening: Close eyes, "I am completely calm"
-3. Internally repeat formulas (6x each, slowly):
-   - "My right arm is very heavy" (6x)
-   - "My right arm is very warm" (6x)
-   - [additional formulas depending on practice level]
-4. Rest formula in between: "I am completely calm"
-5. Recall: Firmly tense arms, inhale deeply, open eyes
-   IMPORTANT: Never skip the recall (except before falling asleep)
+1. Grundhaltung: Kutschersitz, Lehnstuhlhaltung oder Liegen
+2. Einstimmung: Augen schliessen, "Ich bin ganz ruhig"
+3. Formeln innerlich sprechen (je 6x langsam wiederholen):
+   - "Mein rechter Arm ist ganz schwer" (6x)
+   - "Mein rechter Arm ist ganz warm" (6x)
+   - [weitere Formeln je nach Uebungsstand]
+4. Ruheformel dazwischen: "Ich bin ganz ruhig"
+5. Ruecknahme: Arme fest anspannen, tief einatmen, Augen oeffnen
+   WICHTIG: Ruecknahme nie weglassen (ausser vor dem Einschlafen)
 ```
 
-### 2.3 Learning Plan
+### 2.3 Lernplan
 
-| Week | Exercise | Duration |
-|------|----------|----------|
-| 1-2 | Heaviness exercise | 5 min |
-| 3-4 | Heaviness + Warmth | 8 min |
-| 5-6 | Heaviness + Warmth + Heart + Breathing | 12 min |
-| 7-8 | All 6 basic exercises | 15 min |
+| Woche | Uebung | Dauer |
+|-------|--------|-------|
+| 1-2 | Schwere-Uebung | 5 Min |
+| 3-4 | Schwere + Waerme | 8 Min |
+| 5-6 | Schwere + Waerme + Herz + Atem | 12 Min |
+| 7-8 | Alle 6 Grunduebungen | 15 Min |
 
 ---
 
-## 3. PMR vs. AT: Decision Guide
+## 3. PMR vs. AT: Entscheidungshilfe
 
-| Criterion | PMR | AT |
+| Kriterium | PMR | AT |
 |-----------|-----|-----|
-| Learnability | Easy, immediately effective | Requires practice (4-8 weeks) |
-| Physical activity | Yes (tensing) | No (imagination only) |
-| For muscle tension | Very suitable | Moderately suitable |
-| For inner restlessness | Good | Very good |
-| For sleep problems | Good | Very good |
-| Usable anywhere | Limited (movement needed) | Yes (inconspicuous) |
-| For children | From approx. age 8 | From approx. age 10 |
+| Lernbarkeit | Leicht, sofort wirksam | Braucht Uebung (4-8 Wochen) |
+| Koerperliche Aktivitaet | Ja (Anspannen) | Nein (nur Vorstellung) |
+| Bei Muskelverspannung | Sehr geeignet | Maessig geeignet |
+| Bei innerer Unruhe | Gut | Sehr gut |
+| Bei Einschlafproblemen | Gut | Sehr gut |
+| Ueberall anwendbar | Eingeschraenkt (Bewegung noetig) | Ja (unauffaellig) |
+| Fuer Kinder | Ab ca. 8 Jahren | Ab ca. 10 Jahren |
 
 ---
 
-## 4. Contraindications
+## 4. Kontraindikationen
 
 **PMR:**
-- Acute muscle injuries or inflammation
-- Severe spasticity
-- Epilepsy (tensing may trigger seizures — rare)
+- Akute Muskelverletzungen oder Entzuendungen
+- Starke Spastik
+- Epilepsie (Anspannung kann Anfaelle triggern — selten)
 
 **AT:**
-- Acute psychosis
-- Severe depression (risk of excessive introspection)
-- Cardiac arrhythmia (omit heart exercise)
-- Dissociative disorders
-- Severe hypotension (circulatory problems possible)
+- Akute Psychosen
+- Schwere Depressionen (Introspektionsgefahr)
+- Herzrhythmusstoerungen (Herzuebung weglassen)
+- Dissoziative Stoerungen
+- Schwere Hypotonie (Kreislaufprobleme moeglich)
 
-**Both methods:**
-- Stop immediately if trauma flashbacks occur
-- Not a substitute for medical/psychotherapeutic treatment
-
----
-
-## Progress Tracking
-
-- Tension level before/after exercise (0-10 scale)
-- Which muscle groups were particularly tense?
-- AT: Which formulas are already effective, which not yet?
-- Regularity: Goal 1x daily, at least 4x/week
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Beide Verfahren:**
+- Bei Trauma-Flashbacks sofort abbrechen
+- Nicht als Ersatz fuer medizinische/psychotherapeutische Behandlung
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Jacobson (1929), Schultz (1932) — Not professional therapy*
+## Verlaufsmessung
+
+- Anspannungslevel vor/nach Uebung (0-10 Skala)
+- Welche Muskelgruppen waren besonders angespannt?
+- AT: Welche Formeln wirken bereits, welche noch nicht?
+- Regelmaessigkeit: Ziel 1x taeglich, mindestens 4x/Woche
+
+---
+
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+*Quellen: Jacobson (1929), Schultz (1932) — Keine professionelle Therapie*

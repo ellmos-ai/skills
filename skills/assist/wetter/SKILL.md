@@ -19,75 +19,71 @@ visibility: public
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="wetter banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Wetter
 
+Schnelle, schluesselfreie Wetterauskunft fuer den Alltag.
 
-# Weather (Deutsch)
+## Zweck
 
-Fast, key-free weather information for everyday use.
+Beantwortet „Wie wird das Wetter?"-Fragen ohne API-Key (Datenquelle: wttr.in).
+Liefert aktuelles Wetter (Temperatur, gefuehlt, Wind, Luftfeuchte, UV) plus eine
+kompakte 3-Tage-Vorschau. **Userneutral:** kein fester Standort im Code — der Ort
+kommt aus der Anfrage oder aus `assist/prefs.json` (`wetter_default_location`),
+die das LLM interaktiv mit dem Nutzer fuellt.
 
-## Übersicht & Zweck
+## Trigger
 
-Answers "What will the weather be like?" questions without an API key (data source: wttr.in).
-Delivers current weather (temperature, feels-like, wind, humidity, UV) plus a
-compact 3-day forecast. **User-neutral:** no fixed location in the code — the location
-comes from the request or from `assist/prefs.json` (`wetter_default_location`),
-which the LLM fills in interactively with the user.
-
-## Triggers
-
-| User input | Action |
+| Nutzereingabe | Aktion |
 |---|---|
-| "Weather for Potsdam?" / "What will the weather be like in Hamburg?" | `wetter_core.py "<location>"` |
-| "Weather tomorrow?" (without location) | `wetter_core.py --default` (location from prefs) |
-| "My default weather location is Potsdam" | `wetter_core.py --set-default "Potsdam"` |
-| Coordinates known | `wetter_core.py <lat> <lon>` |
+| „Wetter fuer Potsdam?" / „Wie wird das Wetter in Hamburg?" | `wetter_core.py "<Ort>"` |
+| „Wetter morgen?" (ohne Ort) | `wetter_core.py --default` (Ort aus prefs) |
+| „Mein Standard-Wetterort ist Potsdam" | `wetter_core.py --set-default "Potsdam"` |
+| Koordinaten bekannt | `wetter_core.py <lat> <lon>` |
 
-## Workflow & Vorgehen
+## Workflow
 
 ```
-1. Determine location: from request; else prefs.json (wetter_default_location);
-   else ask user interactively + optionally save as default.
-2. Query wetter_core.py (wttr.in, 2 attempts, 30-min cache).
-3. Present readable weather text + 3-day forecast.
+1. Ort bestimmen: aus Anfrage; sonst prefs.json (wetter_default_location);
+   sonst Nutzer interaktiv fragen + optional als Default speichern.
+2. wetter_core.py abfragen (wttr.in, 2 Versuche, 30-min-Cache).
+3. Lesbaren Wetter-Text + 3-Tage-Vorschau praesentieren.
 ```
 
-## CLI Entry Point (wetter_core.py)
+## CLI-Einstieg (wetter_core.py)
 
 ```bash
-python wetter_core.py "Potsdam"          # location
-python wetter_core.py 52.6789 13.5878   # coordinates
-python wetter_core.py --default         # location from prefs.json
+python wetter_core.py "Potsdam"          # Ort
+python wetter_core.py 52.6789 13.5878   # Koordinaten
+python wetter_core.py --default         # Ort aus prefs.json
 python wetter_core.py --set-default "Potsdam"
 ```
 
 ## Store (optional)
 
-- **No mandatory store.** Optional short cache `assist/wetter/.cache.json`
-  (TTL 30 min, best-effort) — avoids repeated network calls.
-- Location preference in `assist/prefs.json` (`wetter_default_location`).
+- **Kein Pflicht-Store.** Optionaler Kurz-Cache `assist/wetter/.cache.json`
+  (TTL 30 min, best-effort) — vermeidet wiederholte Netzabrufe.
+- Standortpraeferenz in `assist/prefs.json` (`wetter_default_location`).
 
-## Attitude
+## Haltung
 
-We use wttr.in as the key-free default source, but are open to other weather
-backends (e.g. DWD/OpenWeather) if the user prefers them.
+Wir nutzen wttr.in als schluesselfreie Default-Quelle, sind aber offen fuer
+andere Wetter-Backends (z.B. DWD/OpenWeather), falls der Nutzer das wuenscht.
 
-## Privacy
+## Datenschutz
 
-- Only the location name/coordinates go to wttr.in (required for the query).
-- No telemetry, no account. Cache + preference stay local.
+- Nur der Ortsname/die Koordinaten gehen an wttr.in (noetig fuer die Abfrage).
+- Keine Telemetrie, kein Konto. Cache + Praeferenz bleiben lokal.
 
-## Related Resources
+## Verwandte Ressourcen
 
-- `assist/AGENTS.md` — Umbrella router
-- `assist/reiseroute/` — uses weather for travel planning (planned)
+- `assist/AGENTS.md` — Umbrella-Router
+- `assist/reiseroute/` — nutzt Wetter ggf. fuer Reiseplanung (geplant)
 
-## Änderungsprotokoll
+## Changelog
 
 ### 0.1.0 (2026-06-22)
-- Initial version. Ported from BACH `hub/_services/weather/weather_service.py` (MIT).
-- Extended: location name support (not just coordinates), 3-day forecast,
-  optional cache, prefs-based default location. User-neutral.
+- Initiale Version. Portiert aus BACH `hub/_services/weather/weather_service.py` (MIT).
+- Erweitert: Ortsname-Support (nicht nur Koordinaten), 3-Tage-Vorschau,
+  optionaler Cache, prefs-basierter Standard-Ort. Userneutral.

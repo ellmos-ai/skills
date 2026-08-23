@@ -23,277 +23,274 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optim
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Pipeline-Optimizer / Projekt-Ordner-Optimizer
 
+**6-Schritte-Renovierung ohne Inkompatibilitäten** — anwendbar auf zwei Größenordnungen:
 
-# Pipeline Optimizer / Project-Folder Optimizer (Deutsch)
-
-**6-step renovation without incompatibilities** — applicable at two scales:
-
-| Trigger name | Scope | Example |
+| Trigger-Name | Anwendungsbereich | Beispiel |
 |---|---|---|
-| **Pipeline optimizer** | Whole pipelines, stacks, documentation structures | Your topic pipelines, e.g. `software/`, `research/`, `games/`, an agent system |
-| **Project-folder optimizer** | Individual project folders within a pipeline | A software tool, a paper project, a game project |
+| **Pipeline-Optimizer** | Ganze Pipelines, Stacks, Doku-Strukturen | Deine Themen-Pipelines, z.B. `software/`, `research/`, `games/`, ein Agenten-System |
+| **Projekt-Ordner-Optimizer** | Einzelne Projektordner innerhalb einer Pipeline | Ein Software-Tool, ein Paper-Projekt, ein Game-Projekt |
 
-A **pipeline** here means a topic-oriented top-level structure in which multiple projects live under shared conventions (e.g. a software pipeline with release rules, a research pipeline with a publication procedure).
+Eine **Pipeline** meint hier eine themenbezogene Top-Level-Struktur, in der mehrere Projekte nach gemeinsamen Konventionen leben (z.B. eine Software-Pipeline mit Release-Regeln, eine Forschungs-Pipeline mit Publikationsverfahren).
 
-Both use the same 6-step workflow — the only difference is the **scope** (pipeline-wide vs. single project) and, accordingly, the depth of the building-stock survey in step A.
+Beide nutzen denselben 6-Schritte-Workflow — der Unterschied liegt nur im **Scope** (Pipeline-weit vs. Einzelprojekt) und entsprechend in der Tiefe der Bausubstanz-Erfassung in Schritt A.
 
-## When this skill applies
+## Wann dieser Skill greift
 
-The skill applies as soon as you are asked to improve, rebuild, or extend an **existing** structure — not for greenfield construction. Concrete triggers:
+Der Skill greift, sobald du eine **bestehende** Struktur verbessern, umbauen oder erweitern sollst — nicht beim Greenfield-Bau. Konkrete Trigger:
 
-**Pipeline level** (scope: whole pipeline):
-- "Make pipeline X better"
-- "Optimize the stack"
-- "Renovate the software pipeline"
-- "Documentation consolidation in the research pipeline"
-- Substantial intervention in a topic pipeline, central `_tools/`, or system components
+**Pipeline-Ebene** (Scope: ganze Pipeline):
+- „Pipeline X besser machen"
+- „Stack optimieren"
+- „Renovierung der Software-Pipeline"
+- „Doku-Konsolidierung in der Forschungs-Pipeline"
+- Substantieller Eingriff in eine Themen-Pipeline, zentrale `_tools/` oder System-Komponenten
 
-**Project-folder level** (scope: single project folder):
-- "Clean up / optimize project folder X"
-- "Improve the folder structure in Y"
-- "Refactor a single tool"
-- "Unify a paper-project setup"
-- "Align a game project folder with the pipeline standard"
+**Projektordner-Ebene** (Scope: einzelner Projektordner):
+- „Projektordner X aufräumen/optimieren"
+- „Ordnerstruktur in Y verbessern"
+- „Einzelnes Tool refactorieren"
+- „Paper-Projekt-Setup vereinheitlichen"
+- „Game-Projektordner an Pipeline-Standard anpassen"
 
-**Cross-cutting:**
-- "Rebuild X / integrate it into existing Y"
-- "Refactoring", "consolidation"
-- "Unify conventions"
-- "Integrate into an existing system"
+**Übergreifend:**
+- „X umbauen/integrieren in bestehendes Y"
+- „Refactoring", „Konsolidierung"
+- „Konventionen vereinheitlichen"
+- „in bestehendes System integrieren"
 
-## The building-stock metaphor
+## Die Bausubstanz-Metapher
 
-Renovating a house first requires knowing **what it is made of** (stone, wood, plastic), **what it is for** (mountain hut, software forge), and **where it already fulfills functions**. The same discipline applies to pipelines.
+Ein Haus zu renovieren erfordert zuerst zu wissen, **aus was es besteht** (Steine, Holz, Plastik), **wofür es da ist** (Berghütte, Softwareschmiede), und **wo es jetzt schon Funktionen erfüllt**. Dieselbe Disziplin gilt für Pipelines.
 
 ---
 
-## Procedure — 6 steps (do NOT skip, do NOT reorder)
+## Verfahren — 6 Schritte (NICHT überspringen, NICHT umsortieren)
 
-### Step A — Survey the building stock
+### Schritt A — Bausubstanz erfassen
 
-**Question:** What is the house made of?
+**Frage:** Aus was besteht das Haus?
 
-**Pipeline scope** (all root docs + tools + templates):
-- [ ] **Read all root documents completely** (not just snippets/insertion points)
-- [ ] Go through template folders (`_templates/`, `_TEMPLATES/`) and tool folders (`_tools/`)
-- [ ] Policy files: e.g. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, publication procedures, …
-- [ ] Status snapshots: e.g. PROJECT_STATUS.md, status overviews, releases.json, registry files
-- [ ] Checklists: e.g. release checklists, build/PDF checklists
+**Pipeline-Scope** (alle Root-Dokus + Tools + Templates):
+- [ ] **Alle Root-Dokumente vollständig lesen** (nicht nur Snippets/Insertion-Points)
+- [ ] Template-Ordner (`_templates/`, `_TEMPLATES/`) und Tool-Ordner (`_tools/`) durchgehen
+- [ ] Policy-Dateien: z.B. GITHUB-POLICY.md, RELEASE-MANAGEMENT.md, QUALITY_RULES.md, NAMING-SYSTEM.md, Publikationsverfahren, …
+- [ ] Status-Snapshots: z.B. PROJECT_STATUS.md, Status-Übersichten, releases.json, Registry-Dateien
+- [ ] Checklisten: z.B. Release-Checklisten, Build-/PDF-Checklisten
 - [ ] Workflows: AGENTS.md, GUIDE.md, SKILL.md
-- [ ] Lessons-learned files: LESSONS_LEARNED.md, MEMORY.md, loop-state files
+- [ ] Lessons-Learned-Dateien: LESSONS_LEARNED.md, MEMORY.md, Loop-State-Dateien
 
-**Project-folder scope** (single-project substance + relevant pipeline conventions):
-- [ ] **Read all markdown and control files in the project folder** (README, CHANGELOG, TASKS/TODO, DONE, CONCEPT, action plan, proof notes, …)
-- [ ] **Survey the code structure:** src/, tests/, build configuration (pyproject.toml, requirements.txt, project manifests, toolchain files, …)
-- [ ] **Take the parent pipeline's conventions into account** (e.g. for a software project: GitHub policy, naming system, release management, templates)
-- [ ] **Scan existing tools/scripts in the project** (`_tools/`, `_scripts/`, build_*.bat, START scripts)
-- [ ] **Configuration files:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
+**Projektordner-Scope** (Einzelprojekt-Substanz + relevante Pipeline-Konventionen):
+- [ ] **Alle Markdown- und Steuer-Dateien im Projektordner lesen** (README, CHANGELOG, AUFGABEN/TODO, DONE, KONZEPT, AKTIONSPLAN, Beweisnotizen, …)
+- [ ] **Code-Struktur erfassen:** src/, tests/, Build-Konfiguration (pyproject.toml, requirements.txt, Projekt-Manifeste, Toolchain-Dateien, …)
+- [ ] **Pipeline-Konventionen aus übergeordneter Pipeline berücksichtigen** (z.B. für ein Software-Projekt: GitHub-Policy, Naming-System, Release-Management, Templates)
+- [ ] **Bestehende Tools/Scripts im Projekt** scannen (`_tools/`, `_scripts/`, build_*.bat, START-Skripte)
+- [ ] **Konfigurationsdateien:** `.gitignore`, LICENSE, NOTICE, SECURITY.md, CODE_OF_CONDUCT.md
 
-**Anti-pattern:** Using `grep -l "<keyword>"` to find insertion points and inserting there without knowing the file's context.
+**Anti-Pattern:** Mit `grep -l "<keyword>"` Insertion-Points finden und dort einfügen, ohne den Kontext der Datei zu kennen.
 
-**Output:** Inventory note with all relevant conventions, tools, and templates at the chosen scope.
+**Output:** Inventar-Notiz mit allen relevanten Konventionen, Tools, Templates auf gewähltem Scope.
 
-### Step B — Identify the purpose
+### Schritt B — Zweck identifizieren
 
-**Question:** What does the house exist for?
+**Frage:** Wofür existiert das Haus?
 
-State the purpose explicitly in 1-2 sentences.
+Zweck explizit formulieren in 1-2 Sätzen.
 
-**Pipeline examples:**
+**Pipeline-Beispiele:**
 
-| Pipeline | Purpose |
+| Pipeline | Zweck |
 |---|---|
-| Software pipeline | Develop, test, and release desktop apps + browser tools to stores/GitHub |
-| Research pipeline | Write scientific papers, peer-review them, publish to repositories/preprint servers |
-| Game pipeline | Develop games and publish them on the target platform |
-| Agent system | LLM system for multi-agent orchestration |
+| Software-Pipeline | Desktop-Anwendungen + Browser-Tools entwickeln, testen, in Stores/auf GitHub releasen |
+| Forschungs-Pipeline | Wissenschaftliche Papers schreiben, peer-reviewen, auf Repositorien/Preprint-Servern publizieren |
+| Game-Pipeline | Games entwickeln und auf der Zielplattform publishen |
+| Agenten-System | LLM-System zur Multi-Agent-Orchestrierung |
 
-**Project-folder examples:**
+**Projektordner-Beispiele:**
 
-| Project folder | Purpose |
+| Projektordner | Zweck |
 |---|---|
-| `software/PlannerApp` | Planning desktop app, commercial, private repo |
-| `research/CosmologyModel` | Model paper series + numerical computations |
-| `games/SortingChaos` | Sorting game, alpha stage, level progression |
+| `software/PlannerApp` | Planungs-Desktop-App, kommerziell, privates Repo |
+| `research/CosmologyModel` | Modell-Paper-Serie + numerische Berechnungen |
+| `games/SortingChaos` | Sortier-Game, Alpha-Stadium, Level-Progression |
 
-The purpose **steers every intervention** — measures that do not serve the purpose are dropped.
+Der Zweck **lenkt jeden Eingriff** — Maßnahmen, die nicht dem Zweck dienen, fallen raus.
 
-### Step C — Sketch the ideal picture
+### Schritt C — Ideales Bild entwerfen
 
-**Question:** What would a perfect house for this purpose look like?
+**Frage:** Wie sähe ein perfektes Haus für diesen Zweck aus?
 
-- Sketch it from your own perspective (short, max. 10 points)
-- Bring in a best-practice comparison (e.g. Vercel stack for SaaS, scientific-python stack for research)
-- Do not descend into detail optimization — a top-level sketch is enough
+- Aus eigener Sicht skizzieren (kurz, max. 10 Punkte)
+- Best-Practice-Vergleich heranziehen (z.B. Vercel-Stack für SaaS, scientific-python-stack für Forschung)
+- Nicht in Detail-Optimierung gehen — Top-Level-Skizze reicht
 
-**Output:** 5-10 points "ideal state per pipeline"
+**Output:** 5-10 Punkte „Idealzustand pro Pipeline"
 
-### Step D — Gap analysis + plan
+### Schritt D — Lücken-Analyse + Plan
 
-**Four questions per pipeline:**
+**Vier Fragen pro Pipeline:**
 
-1. **What does the house already have?** — Even if solved differently from the ideal but **functionally equivalent**.
-   *Example:* The ideal says "pip-licenses for third-party licenses". Reality: a custom generator script wraps it → functionally equivalent, no intervention needed.
+1. **Was hat das Haus schon?** — Auch wenn anders gelöst als im Ideal, aber **funktional gleichwertig**.
+   *Beispiel:* Ideal sagt „pip-licenses für Dritt-Lizenzen". Real: ein eigenes Generator-Script ist Wrapper drumherum → funktional gleichwertig, kein Eingriff nötig.
 
-2. **What impedes the function?** — Existing structures that cause breaks or extra effort today.
+2. **Was behindert die Funktion?** — Bestehende Strukturen, die heute Brüche oder Mehraufwand verursachen.
 
-3. **What is non-functional?** — Dead code, outdated conventions, unused tools.
+3. **Was ist nicht funktional?** — Toter Code, veraltete Konventionen, ungenutzte Tools.
 
-4. **What would measurably improve functions?** — Concrete interventions with expected benefit.
+4. **Was würde Funktionen messbar verbessern?** — Konkrete Eingriffe mit erwartetem Nutzen.
 
-→ From this, a **concrete plan**:
-- What gets **newly built**?
-- What gets **extended**?
-- What gets **demolished**?
-- What stays **unchanged** (important to name!)
+→ Daraus **konkreter Plan**:
+- Was wird **neu gebaut**?
+- Was wird **erweitert**?
+- Was wird **abgerissen**?
+- Was bleibt **unverändert** (wichtig zu benennen!)
 
-**Output:** Plan table with columns *Intervention* / *Existing* / *Measure* / *Rationale*
+**Output:** Plan-Tabelle mit Spalten *Eingriff* / *Bestehendes* / *Maßnahme* / *Begründung*
 
-### Step E — Work empirically
+### Schritt E — Empirisch arbeiten
 
-Do not only plan top-down — collect pain points:
+Nicht nur top-down planen — Schmerzpunkte sammeln:
 
-- [ ] **Known bugs**: issue tracker, TASKS/TODO/DONE files
-- [ ] **Error history**: lessons-learned files, bugfix logs, check registries
-- [ ] **Automation breaks**: "What do I always have to do manually?"
-- [ ] **User interview**: ask specifically — pain points, wishes, workarounds
-- [ ] **Self-test**: walk through the pipeline (create a new project, run a build, simulate a release) — where does it break?
+- [ ] **Bekannte Bugs**: Issue-Tracker, AUFGABEN/TODO/DONE-Dateien
+- [ ] **Fehler-Historie**: Lessons-Learned-Dateien, Bugfix-Logs, Prüf-Registries
+- [ ] **Automatisierungs-Brüche**: „Was muss ich immer manuell machen?"
+- [ ] **User-Interview**: Gezielt fragen — Schmerzpunkte, Wünsche, Workarounds
+- [ ] **Selbsttest**: Pipeline durchspielen (neues Projekt anlegen, Build durchlaufen, Release simulieren) — wo bricht es?
 
-The empirically found pain points **prioritize the plan** from step D.
+Die empirisch gefundenen Schmerzpunkte **priorisieren den Plan** aus Schritt D.
 
-### Step F — Retests after implementation
+### Schritt F — Retests nach Umsetzung
 
-- [ ] Commission **fresh subagents** (unburdened by the renovation context) to walk through the changed workflow
-- [ ] **Measurable before/after values**: setup time, error rate, number of manual steps, build time
-- [ ] **Anti-regression check**: do existing workflows still work after the change?
-- [ ] If there is **no measurable improvement** or a regression: **roll back** the renovation or readjust
+- [ ] **Frische Subagenten** beauftragen (unbelastet vom Renovierungs-Kontext), den geänderten Workflow durchzuspielen
+- [ ] **Messbare Vergleichswerte** vorher/nachher: Setup-Zeit, Fehlerquote, Anzahl manueller Schritte, Build-Zeit
+- [ ] **Anti-Regression-Check**: Funktionierten bestehende Workflows nach der Änderung weiterhin?
+- [ ] Falls **keine messbare Verbesserung** oder Regression: Renovierung **zurückrollen** oder nachjustieren
 
-## Anti-patterns (forbidden)
+## Anti-Patterns (verboten)
 
-| Anti-pattern | Damage | Antidote |
+| Anti-Pattern | Schaden | Gegenmittel |
 |---|---|---|
-| Searching insertion points instead of reading docs | Parallel standards | Step A in full |
-| Transferring "best practice from X" 1:1 | Incompatibility | Step D compares functionally |
-| Creating a new file without checking conventions | Duplication (e.g. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Step A + step D |
-| Planning top-down without empirics | Solution misses the pain point | Step E before finalizing the plan |
-| Not testing your own change | Undetected regression | Step F with a fresh agent |
-| "Clarify later" with unclear status | User discovers the conflict afterwards | When unsure, walk step D through with the user again |
+| Insertion-Points suchen statt Doku lesen | Parallele Standards | Schritt A vollständig |
+| „Best Practice von X" 1:1 übertragen | Inkompatibilität | Schritt D vergleicht funktional |
+| Neue Datei anlegen ohne Konvention zu prüfen | Duplikation (z.B. NOTICE.md ↔ THIRD_PARTY_LICENSES.txt) | Schritt A + Schritt D |
+| Top-down planen ohne Empirie | Lösung passt nicht zum Schmerzpunkt | Schritt E vor Plan-Abschluss |
+| Eigene Änderung nicht testen | Regression unentdeckt | Schritt F mit frischem Agenten |
+| „Klärung später" mit unklarem Status | User entdeckt Konflikt nachträglich | Bei Unsicherheit lieber Schritt D nochmal mit User durchgehen |
 
-## Case study — the NOTICE.md incident
+## Lehrbeispiel — NOTICE.md-Vorfall
 
-**Assignment:** Implement pipeline improvements across several topic pipelines (software, research, games).
+**Auftrag:** Pipeline-Verbesserungen in mehreren Themen-Pipelines (Software, Forschung, Games) umsetzen.
 
-**Mistake:** Step A skipped — only insertion points searched instead of reading the full policy files.
+**Fehler:** Schritt A übersprungen — nur Insertion-Points gesucht statt vollständige Policy-Dateien gelesen.
 
-**Consequence:** `NOTICE.md` introduced as a "new license file" in 7 files, although `THIRD_PARTY_LICENSES.txt` + a custom license generator (wrapper around `pip-licenses`) were already established — documented in the pipeline's GitHub policy (mandatory files + license checklist). All software projects already had THIRD_PARTY files.
+**Folge:** `NOTICE.md` als „neue Lizenz-Datei" in 7 Dateien eingeführt, obwohl `THIRD_PARTY_LICENSES.txt` + ein eigener Lizenz-Generator (Wrapper um `pip-licenses`) bereits etabliert waren — dokumentiert in der GitHub-Policy der Pipeline (Pflichtdateien + Lizenz-Checkliste). Alle Software-Projekte hatten bereits THIRD_PARTY-Dateien.
 
-**Detection:** Only after the user asked ("I'm fairly sure we already had rights management").
+**Erkennung:** Erst nach Nachfrage des Users („ich bin recht sicher, dass wir schon ein Rechtemanagement hatten").
 
-**Correction:** NOTICE.md removed from the project template, 6 further files adjusted, the existing license generator referenced instead of `pip-licenses`.
+**Korrektur:** NOTICE.md aus dem Projekt-Template gelöscht, 6 weitere Dateien angepasst, der bestehende Lizenz-Generator statt `pip-licenses` referenziert.
 
-**Lesson:** Had step A been executed in full, the conflict would have been detected before writing.
+**Lehre:** Wäre Schritt A vollständig ausgeführt worden, wäre der Konflikt vor dem Schreiben erkannt worden.
 
-## Rules of thumb
+## Faustregeln
 
-1. **For "improve the pipeline", first read as long as you write.**
-2. **No new standard without proof that no existing one exists.**
-3. **Use existing tools/wrappers instead of new parallel ones.**
-4. **"More of the same" is usually worse than "extend what exists".**
-5. **Rolling back on conflict** is always better than running two parallel standards.
+1. **Bei „Pipeline verbessern" zuerst genauso lange lesen wie schreiben.**
+2. **Kein neuer Standard ohne Beweis, dass kein bestehender existiert.**
+3. **Bestehende Tools/Wrapper nutzen statt neue parallele.**
+4. **„Mehr von demselben" ist meist schlechter als „Bestehendes erweitern".**
+5. **Bei Konflikt zurückrollen** ist immer besser als zwei parallele Standards laufen lassen.
 
-## Completion checklist
+## Checkliste zum Abschluss
 
-Before reporting a pipeline renovation as "done":
+Bevor du eine Pipeline-Renovierung als „erledigt" meldest:
 
-- [ ] Step A: all relevant root docs read?
-- [ ] Step B: pipeline purpose stated in 1-2 sentences?
-- [ ] Step C: ideal picture sketched (5-10 points)?
-- [ ] Step D: gap analysis with table (what stays / what is extended / what is new / what goes)?
-- [ ] Step E: empirics checked (bugs, lessons, self-test, user interview)?
-- [ ] Plan agreed with the user?
-- [ ] Step F: tested with a fresh subagent — improvement measurable?
-- [ ] No parallel standards introduced?
-- [ ] On conflicts: rolled back or honestly accounted for?
+- [ ] Schritt A: Alle relevanten Root-Dokus gelesen?
+- [ ] Schritt B: Zweck der Pipeline in 1-2 Sätzen formuliert?
+- [ ] Schritt C: Idealbild skizziert (5-10 Punkte)?
+- [ ] Schritt D: Lücken-Analyse mit Tabelle (was bleibt / was erweitert / was neu / was weg)?
+- [ ] Schritt E: Empirie geprüft (Bugs, Lessons, Selbsttest, User-Interview)?
+- [ ] Plan mit User abgestimmt?
+- [ ] Schritt F: Mit frischem Subagenten getestet — Verbesserung messbar?
+- [ ] Keine parallelen Standards eingeführt?
+- [ ] Bei Konflikten zurückgerollt oder ehrlich Rechenschaft abgelegt?
 
-## Optimal project-folder structure (for the project-folder optimizer)
+## Optimale Projektordner-Struktur (für Projekt-Ordner-Optimizer)
 
-When the skill is applied to **a single project folder**, the following combined recommendation helps as an ideal reference (step C):
+Wenn der Skill auf **einen einzelnen Projektordner** angewendet wird, hilft als Ideal-Referenz (Schritt C) folgende kombinierte Empfehlung:
 
-### Anthropic standard (Claude Code)
+### Anthropic-Standard (Claude Code)
 
-| File/folder | Function |
+| Datei/Ordner | Funktion |
 |---|---|
-| `CLAUDE.md` (root) | Auto-loaded by Claude Code, project-specific instructions |
-| `.claude/settings.json` | Permissions, env vars, model selection (committed) |
-| `.claude/settings.local.json` | Local overrides (do NOT commit, add to `.gitignore`) |
-| `.claude/commands/*.md` | Custom slash commands |
-| `.claude/agents/*.md` | Custom subagents |
-| `.claude/skills/<name>/SKILL.md` | Project skills |
+| `CLAUDE.md` (Root) | Auto-loaded von Claude Code, projektspezifische Anweisungen |
+| `.claude/settings.json` | Permissions, Env-Vars, Model-Auswahl (committed) |
+| `.claude/settings.local.json` | Lokale Overrides (NICHT committen, in `.gitignore`) |
+| `.claude/commands/*.md` | Custom Slash-Commands |
+| `.claude/agents/*.md` | Custom Subagents |
+| `.claude/skills/<name>/SKILL.md` | Projekt-Skills |
 
-### Your own project-docs template (recommended)
+### Eigenes Projekt-Doku-Template (empfohlen)
 
-If you maintain your own project documentation template (e.g. under `<your-workspace>/_templates/project-docs/`), **three build-out profiles** pay off. Example split: **MINIMAL** provides the session core set with 7 root files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** adds `CHANGELOG.md`, `DECISIONS.md`, and `PATTERNS.md`. **FULL** expands to 14 root files and additionally adds `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` as well as `workflows/` and `.github/`.
+Falls du ein eigenes Projekt-Doku-Template pflegst (z.B. unter `<dein-workspace>/_templates/project-docs/`), lohnen sich **drei Ausbauprofile**. Beispiel-Aufteilung: **MINIMAL** liefert das Session-Kernset mit 7 Root-Files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `START.md`, `STATE.md`, `TODO.md`, `DONE.md`) plus `_tools/`. **STANDARD** ergänzt `CHANGELOG.md`, `DECISIONS.md` und `PATTERNS.md`. **FULL** baut auf 14 Root-Files aus und ergänzt zusätzlich `ARCHITECTURE.md`, `WORKFLOWS.md`, `TOOLS.md`, `GLOSSARY.md` sowie `workflows/` und `.github/`.
 
-→ **Use such a template as the base for new projects** (copy instead of creating manually).
+→ **Bei neuen Projekten ein solches Template als Basis nutzen** (kopieren statt manuell anlegen).
 
-### Pipeline-specific additions (examples)
+### Pipeline-spezifische Ergänzungen (Beispiele)
 
-Depending on the pipeline, further mandatory files come on top — typical patterns:
+Je nach Pipeline kommen weitere Pflichtdateien hinzu — typische Muster:
 
-- **Software project:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (generated), pyproject.toml/requirements.txt, entry in the pipeline's central release registry. → If available: use the pipeline's cookiecutter template.
-- **Research project:** concept document, action plan, publication plan, archive/source/result/data folders (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` for LaTeX. For proof projects: a proof-note file with the proof chain and status.
-- **Game project:** project manifest and toolchain files of the engine (e.g. for Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), game design document, `src/{server,client,shared}/` per engine convention.
+- **Software-Projekt:** LICENSE, CODE_OF_CONDUCT.md, SECURITY.md, CONTRIBUTING.md, THIRD_PARTY_LICENSES.txt (generiert), pyproject.toml/requirements.txt, Eintrag in der zentralen Release-Registry der Pipeline. → Falls vorhanden: Cookiecutter-Template der Pipeline nutzen.
+- **Forschungs-Projekt:** Konzept-Dokument, Aktionsplan, Publikationsplan, Archiv-/Quellen-/Ergebnis-/Daten-Ordner (`_archive/`, `_sources/`, `_results/`, `_data/`), `paper/` für LaTeX. Bei Beweisprojekten: eine Beweisnotiz-Datei mit Beweiskette und Status.
+- **Game-Projekt:** Projekt-Manifest und Toolchain-Dateien der Engine (z.B. bei Roblox/Rojo: default.project.json, rokit.toml, wally.toml, selene.toml), Game-Design-Dokument, `src/{server,client,shared}/` nach Engine-Konvention.
 
-### Full detail reference
+### Vollständige Detail-Referenz
 
-→ See **`references/optimal-project-structure.md`** in this skill folder (German). Contains:
-- Example `settings.json` (Anthropic schema)
-- Mandatory `.gitignore` entries
-- Anti-patterns (what does NOT belong in project folders)
-- Recommended workflows per pipeline type (software/research/game)
-- YAML header convention for documentation files
-- Auto-check sketch
+→ Siehe **`references/optimal-project-structure.md`** in diesem Skill-Ordner. Enthält:
+- Beispiel-`settings.json` (Anthropic-Schema)
+- `.gitignore`-Pflichteinträge
+- Anti-Patterns (was NICHT in Projektordner)
+- Empfohlene Workflows pro Pipeline-Typ (Software/Forschung/Game)
+- YAML-Header-Konvention für Doku-Dateien
+- Auto-Check-Skizze
 
-## Related skills (when to use instead of this one?)
+## Verwandte Skills (Wann statt diesem Skill?)
 
-| Skill | When to use |
+| Skill | Wann nutzen |
 |---|---|
-| **`project-onboarding`** | Take an EXTERNAL existing repo into your own system |
-| Project bootstrapper (if available) | Create a NEW project in an existing pipeline (greenfield, no rebuild) |
-| Pipeline bootstrapper (if available) | Create a COMPLETELY NEW pipeline (rare case) |
-| System onboarding (if available) | Set up a new machine |
+| **`project-onboarding`** | EXTERNES bestehendes Repo ins eigene System aufnehmen |
+| Projekt-Bootstrapper (falls vorhanden) | NEUES Projekt in bestehender Pipeline anlegen (Greenfield, kein Umbau) |
+| Pipeline-Bootstrapper (falls vorhanden) | KOMPLETT NEUE Pipeline anlegen (seltener Fall) |
+| System-Onboarding (falls vorhanden) | Neuen Rechner einrichten |
 
-The **pipeline optimizer** is responsible for **renovation**, not new construction or adoption. If your skill collection has a skill index, search it for matching bootstrapping skills.
+Der **Pipeline-Optimizer** ist für **Renovierung** zuständig, nicht Neubau oder Übernahme. Falls deine Skill-Sammlung einen Skill-Index hat, dort nach passenden Bootstrapping-Skills suchen.
 
-## Cross-references
+## Querverweise
 
-- Detail reference: `references/optimal-project-structure.md` (in this skill folder)
-- Anthropic Claude Code docs: `https://docs.claude.com/en/docs/claude-code`
-- If available: global user rules (e.g. a "renovations" section in your `~/CLAUDE.md`) and pipeline-specific stack descriptions
+- Detail-Referenz: `references/optimal-project-structure.md` (in diesem Skill-Ordner)
+- Anthropic Claude Code Docs: `https://docs.claude.com/en/docs/claude-code`
+- Falls vorhanden: globale User-Regeln (z.B. ein Abschnitt „Umbauten/Renovierungen" in deiner `~/CLAUDE.md`) und pipeline-spezifische Stack-Beschreibungen
 
-## Scope choice: pipeline vs. project folder
+## Scope-Wahl: Pipeline vs. Projektordner
 
-If it is unclear which scope is meant, **clarify before step A**:
+Wenn nicht klar ist, welcher Scope gemeint ist, **vor Schritt A klären**:
 
-| Clue | Scope |
+| Indiz | Scope |
 |---|---|
-| "Improve the whole software pipeline" | Pipeline |
-| "Clean up the folder of tool X" | Project folder |
-| "Synchronize the central release registry" | Pipeline (central asset) |
-| "Refactor the AssetBuilder in game Y" | Project folder |
-| "Introduce a check convention pipeline-wide" | Pipeline |
-| "Create a check file in project Z" | Project folder |
+| „Die ganze Software-Pipeline verbessern" | Pipeline |
+| „Den Ordner von Tool X aufräumen" | Projektordner |
+| „Die zentrale Release-Registry synchronisieren" | Pipeline (zentrales Asset) |
+| „Den AssetBuilder im Game Y refactorieren" | Projektordner |
+| „Eine Prüf-Konvention pipeline-weit einführen" | Pipeline |
+| „Im Projekt Z eine Prüf-Datei anlegen" | Projektordner |
 
-At **project-folder scope**, additionally always briefly check the parent pipeline's conventions (step A extended) so the intervention stays compatible with the pipeline.
+Bei **Projektordner-Scope** zusätzlich immer kurz die übergeordneten Pipeline-Konventionen prüfen (Schritt A erweitert), damit der Eingriff zur Pipeline kompatibel bleibt.
 
 ---
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.2.0 (2026-06-13)
-- First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged
+- Erstveröffentlichung in der Skill-Bibliothek: persönliche Pfade, konkrete Pipeline-/Projektnamen und Verweise auf private Skills durch generische Beispiele ersetzt; Verfahren (6 Schritte, Anti-Patterns, Lehrbeispiel, Checklisten) unverändert
 
-### 1.1.1 (2026-06-01) and earlier
-- Internal versions (private skill directory, before publication)
+### 1.1.1 (2026-06-01) und früher
+- Interne Fassungen (privates Skill-Verzeichnis, vor Veröffentlichung)

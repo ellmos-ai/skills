@@ -19,328 +19,344 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Trauma-Psychoedukation
 
+> Wissen ueber Trauma, Traumafolgen und das Fenster der Belastbarkeit: Normale Reaktionen auf unnormale Ereignisse verstehen — reine Psychoedukation, KEINE Traumabearbeitung
 
-# Trauma Psychoeducation (Deutsch)
+Siehe: [ETHICS.md](../ETHICS.md)
 
-> Knowledge about trauma, trauma sequelae, and the window of tolerance: Understanding normal reactions to abnormal events — pure psychoeducation, NO trauma processing
-
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Psychoeducation about trauma helps affected individuals understand and contextualize their reactions. The knowledge that symptoms like flashbacks, hyperarousal, or avoidance are NORMAL reactions to ABNORMAL events is already relieving and reduces shame and self-blame.
-
-Evidence: Psychoeducation is a recognized component of trauma therapy (Flatten et al. 2011, S3 Guideline PTSD). As a standalone intervention, it is insufficient, but it can increase therapy motivation and alleviate symptoms.
-
-**IMPORTANT:** This skill exclusively conveys KNOWLEDGE about trauma. It does NOT conduct trauma processing, does NOT explore distressing memories, and does NOT ask for trauma details.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Siehe auch:** [stabilization-techniques](../stabilization-techniques/SKILL.md) (Grounding, Sicherer Ort, Containment — Soforttechniken) | [psychoeducation](../psychoeducation/SKILL.md) (PTBS im Kontext anderer Stoerungsbilder)
 
 ---
 
-## 1. What Is Trauma?
+## Kontext
+
+Psychoedukation ueber Trauma hilft Betroffenen, ihre Reaktionen zu verstehen und
+einzuordnen. Das Wissen, dass Symptome wie Flashbacks, Ueberregung oder Vermeidung
+NORMALE Reaktionen auf UNNORMALE Ereignisse sind, wirkt bereits entlastend und
+reduziert Scham und Selbstvorwuerfe.
+
+Evidenz: Psychoedukation ist ein anerkannter Bestandteil der Traumatherapie
+(Flatten et al. 2011, S3-Leitlinie PTBS). Als alleinige Intervention reicht sie
+nicht aus, kann aber die Therapiemotivation erhoehen und Symptome mildern.
+
+**WICHTIG:** Dieser Skill vermittelt ausschliesslich WISSEN ueber Trauma.
+Er fuehrt KEINE Traumabearbeitung durch, exploriert KEINE belastenden Erinnerungen
+und fragt NICHT nach Trauma-Details.
+**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+
+---
+
+## 1. Was ist ein Trauma?
 
 ### Definition
 
-A trauma is an event that exceeds a person's coping capacity and is accompanied by the experience of helplessness, loss of control, and/or fear of death. It is not the event alone that defines the trauma, but the subjective experience.
+Ein Trauma ist ein Ereignis, das die Bewältigungsfaehigkeiten einer Person uebersteigt
+und mit dem Erleben von Hilflosigkeit, Kontrollverlust und/oder Todesangst einhergeht.
+Nicht das Ereignis allein definiert das Trauma, sondern das subjektive Erleben.
 
-### Trauma Types
+### Trauma-Typen
 
-| Type | Description | Examples |
-|------|-------------|----------|
-| Type I (Single trauma) | Single, unexpected event | Accident, assault, natural disaster |
-| Type II (Complex trauma) | Repeated, prolonged traumatization | Abuse, neglect, war |
-| Accidental trauma | Random events | Traffic accident, house fire, workplace accident |
-| Interpersonal trauma | Caused by humans | Violence, abuse, torture |
-| Secondary trauma | Through co-experiencing/witnessing | Helping professions, family members |
+| Typ | Beschreibung | Beispiele |
+|-----|-------------|----------|
+| Typ I (Einzeltrauma) | Einmaliges, unerwartetes Ereignis | Unfall, Ueberfall, Naturkatastrophe |
+| Typ II (Komplextrauma) | Wiederholte, langandauernde Traumatisierung | Misshandlung, Vernachlaessigung, Krieg |
+| Akzidentelles Trauma | Zufaellige Ereignisse | Verkehrsunfall, Hausbrand, Arbeitsunfall |
+| Interpersonelles Trauma | Durch Menschen verursacht | Gewalt, Missbrauch, Folter |
+| Sekundaeres Trauma | Durch Miterfahren/Bezeugen | Helfende Berufe, Angehoerige |
 
-### What Is NOT Trauma (Differentiation)
+### Was KEIN Trauma ist (Abgrenzung)
 
-Not every distressing event is a trauma in the clinical sense:
-- Breakup, job loss, arguments — distressing, but usually not trauma
-- Bullying — can be traumatizing (especially for children), but is not automatically trauma
-- The individual appraisal determines, not the type of event
-
----
-
-## 2. Normal Reactions to Abnormal Events
-
-### The Three Response Patterns
-
-```
-HYPERAROUSAL
-- Constant vigilance and tension
-- Startle response
-- Sleep problems
-- Irritability, anger outbursts
-- Concentration difficulties
-
-RE-EXPERIENCING (Intrusion)
-- Flashbacks (memories that feel real)
-- Nightmares
-- Distressing memories that arise suddenly
-- Physical reactions upon remembering (racing heart, sweating)
-
-AVOIDANCE AND NUMBING (Constriction)
-- Avoidance of places, people, situations
-- Emotional numbness
-- Withdrawal from other people
-- Feeling of alienation
-- Loss of interest and pleasure
-```
-
-### Important Message for Affected Individuals
-
-```
-"These reactions are NORMAL reactions to ABNORMAL events.
-
-Your body and mind are trying to protect you.
-The vigilance protects you from renewed danger.
-The memories are trying to process what happened.
-The avoidance protects you from being overwhelmed.
-
-You are not 'crazy.' You are not 'weak.'
-Your nervous system is responding the way it is programmed
-to respond to extreme threat."
-```
-
-### Timeline
-
-```
-COURSE AFTER TRAUMATIC EVENT
-
-0-4 weeks:  Acute Stress Reaction (NORMAL)
-            - Shock, numbness, restlessness
-            - Sleep problems, startle response
-            - Flashbacks, nightmares
-            - For most people: Spontaneous recovery
-
-4+ weeks:   If symptoms persist: Possible PTSD
-            - Professional assessment recommended
-            - Early intervention improves prognosis
-
-Months-Years: Chronification possible
-            - Therapy is effective even after a long time
-            - "It is never too late to seek help"
-```
+Nicht jedes belastende Ereignis ist ein Trauma im klinischen Sinne:
+- Trennung, Kuendigung, Streit — belastend, aber in der Regel kein Trauma
+- Mobbing — kann traumatisierend wirken (besonders bei Kindern), ist aber nicht automatisch Trauma
+- Die individuelle Bewertung entscheidet, nicht die Art des Ereignisses
 
 ---
 
-## 3. The Window of Tolerance (Dan Siegel)
+## 2. Normale Reaktionen auf unnormale Ereignisse
 
-### The Model
+### Die drei Reaktionsmuster
+
+```
+UEBERREGUNG (Hyperarousal)
+- Staendige Wachsamkeit und Anspannung
+- Schreckhaftigkeit
+- Schlafprobleme
+- Reizbarkeit, Wutausbrueche
+- Konzentrationsschwierigkeiten
+
+WIEDERERLEBEN (Intrusion)
+- Flashbacks (Erinnerungen, die sich real anfuehlen)
+- Alptraeume
+- Belastende Erinnerungen, die ploetzlich auftauchen
+- Koerperliche Reaktionen bei Erinnerung (Herzrasen, Schwitzen)
+
+VERMEIDUNG UND BETAEUBUNG (Constriction)
+- Vermeidung von Orten, Personen, Situationen
+- Emotionale Taubheit
+- Rueckzug von anderen Menschen
+- Gefuehl der Entfremdung
+- Verlust von Interesse und Freude
+```
+
+### Wichtige Botschaft fuer Betroffene
+
+```
+"Diese Reaktionen sind NORMALE Reaktionen auf UNNORMALE Ereignisse.
+
+Dein Koerper und dein Verstand versuchen, dich zu schuetzen.
+Die Wachsamkeit schuetzt dich vor erneuter Gefahr.
+Die Erinnerungen versuchen, das Erlebte zu verarbeiten.
+Die Vermeidung schuetzt dich vor Ueberwaltigung.
+
+Du bist nicht 'verrueckt'. Du bist nicht 'schwach'.
+Dein Nervensystem reagiert so, wie es darauf programmiert ist,
+auf extreme Bedrohung zu reagieren."
+```
+
+### Zeitlicher Verlauf
+
+```
+VERLAUF NACH TRAUMATISCHEM EREIGNIS
+
+0-4 Wochen:  Akute Belastungsreaktion (NORMAL)
+             - Schock, Betaeubung, Unruhe
+             - Schlafprobleme, Schreckhaftigkeit
+             - Flashbacks, Alptraeume
+             - Bei den meisten Menschen: Spontane Erholung
+
+4+ Wochen:   Wenn Symptome nicht nachlassen: Moegliche PTBS
+             - Professionelle Diagnostik empfohlen
+             - Fruehe Intervention verbessert Prognose
+
+Monate-Jahre: Chronifizierung moeglich
+             - Therapie ist auch nach langer Zeit wirksam
+             - "Es ist nie zu spaet, sich Hilfe zu holen"
+```
+
+---
+
+## 3. Das Fenster der Belastbarkeit (Window of Tolerance)
+
+### Das Modell (nach Dan Siegel)
 
 ```
             ________________________________________________
            |                                                |
-           |   ABOVE THE WINDOW: Hyperarousal               |
-           |   Panic, rage, overactivation, flashbacks      |
-           |   Racing heart, sweating, trembling            |
-           |   "Fight or flight"                            |
+           |   UEBER DEM FENSTER: Hyperarousal              |
+           |   Panik, Wut, Ueberregung, Flashbacks          |
+           |   Herzrasen, Schwitzen, Zittern                 |
+           |   "Kampf oder Flucht"                           |
            |________________________________________________|
            |                                                |
-           |   WINDOW OF TOLERANCE                          |
+           |   FENSTER DER BELASTBARKEIT                     |
+           |   (Window of Tolerance)                         |
            |                                                |
-           |   Here we can:                                 |
-           |   - Think and feel at the same time            |
-           |   - Process information                        |
-           |   - Maintain relationships                     |
-           |   - Solve problems                             |
-           |   - Learn and grow                             |
+           |   Hier koennen wir:                             |
+           |   - Denken und fuehlen gleichzeitig             |
+           |   - Informationen verarbeiten                   |
+           |   - Beziehungen gestalten                       |
+           |   - Probleme loesen                             |
+           |   - Lernen und wachsen                          |
            |________________________________________________|
            |                                                |
-           |   BELOW THE WINDOW: Hypoarousal                |
-           |   Freeze, numbness, dissociation               |
-           |   Lack of energy, emptiness, shutdown           |
-           |   "Playing dead reflex"                         |
+           |   UNTER DEM FENSTER: Hypoarousal                |
+           |   Erstarrung, Taubheit, Dissoziation            |
+           |   Energielosigkeit, Leere, Abschaltung          |
+           |   "Totstell-Reflex"                             |
            |________________________________________________|
 ```
 
-### What Does This Mean?
+### Was bedeutet das?
 
-- **In the window:** We can regulate stress and function
-- **Above the window:** Too much activation — body in alarm mode
-- **Below the window:** Too little activation — body shuts down
+- **Im Fenster:** Wir koennen Stress regulieren und funktionieren
+- **Ueber dem Fenster:** Zu viel Erregung — Koerper im Alarmmodus
+- **Unter dem Fenster:** Zu wenig Erregung — Koerper schaltet ab
 
-### Trauma and the Window
+### Trauma und das Fenster
 
 ```
-BEFORE trauma:            AFTER trauma (untreated):
+VOR dem Trauma:           NACH dem Trauma (unbehandelt):
 
 |_______________|         |_____|
-|               |         |     |  <- Window has NARROWED
-|    WINDOW     |         | W.  |
-|   (wide)      |         |     |
+|               |         |     |  <- Fenster ist ENGER geworden
+|    FENSTER    |         | F.  |
+|   (breit)     |         |     |
 |_______________|         |_____|
 
-Even small stimuli can cause falling out of the window
-after trauma (triggers).
+Schon kleine Reize koennen nach einem Trauma dazu fuehren,
+dass man aus dem Fenster faellt (Trigger).
 
-GOAL of therapy: WIDEN the window again.
+ZIEL der Therapie: Das Fenster wieder WEITEN.
 ```
 
-### Understanding Triggers
+### Trigger verstehen
 
 ```
-TRIGGERS are stimuli that remind of the trauma and put
-the nervous system into alarm mode — often unconsciously.
+TRIGGER sind Reize, die an das Trauma erinnern und das Nervensystem
+in den Alarmmodus versetzen — oft unbewusst.
 
-Triggers can be:
-- Sounds (bang, screaming, certain music)
-- Smells (smoke, perfume, alcohol)
-- Images (news, movies, places)
-- Body sensations (tightness, touch, pain)
-- Calendar dates (anniversaries)
-- Relationship situations (arguments, loss of control)
+Trigger koennen sein:
+- Geraeusche (Knall, Schreien, bestimmte Musik)
+- Gerueche (Rauch, Parfuem, Alkohol)
+- Bilder (Nachrichten, Filme, Orte)
+- Koerperempfindungen (Enge, Beruehrung, Schmerz)
+- Kalenderdaten (Jahrestage)
+- Beziehungssituationen (Streit, Kontrollverlust)
 
-Triggers are NOT weakness. They are stored warning signals
-of the nervous system. In therapy, one learns to recognize
-triggers and regulate the nervous system.
+Trigger sind KEINE Schwaeche. Sie sind gespeicherte Warnsignale
+des Nervensystems. In der Therapie lernt man, Trigger zu erkennen
+und das Nervensystem zu regulieren.
 ```
 
 ---
 
-## 4. Self-Care Strategies
+## 4. Selbstfuersorge-Strategien
 
-### Ensuring Basic Needs
+### Grundbeduerfnisse sicherstellen
 
 ```
-BASIC NEEDS CHECKLIST
+CHECKLISTE GRUNDBEDUERFNISSE
 
-[ ] Sleep: Regular bedtimes, at least 7 hours
-[ ] Nutrition: Regular meals, sufficient water
-[ ] Exercise: At least 20 minutes daily (a walk is enough)
-[ ] Social contacts: At least one trusted person
-[ ] Safety: Feeling safe in one's own environment
-[ ] Structure: Daily routine with fixed anchor points
+[ ] Schlaf: Regelmaessige Schlafenszeiten, mindestens 7 Stunden
+[ ] Ernaehrung: Regelmaessige Mahlzeiten, ausreichend Wasser
+[ ] Bewegung: Taeglich mindestens 20 Minuten (Spaziergang reicht)
+[ ] Soziale Kontakte: Mindestens eine vertrauensvolle Person
+[ ] Sicherheit: Sich im eigenen Umfeld sicher fuehlen
+[ ] Struktur: Tagesablauf mit festen Ankerpunkten
 ```
 
-### Self-Care Strategies in Daily Life
+### Selbstfuersorge-Strategien im Alltag
 
-**Physical:**
-- Regular exercise (lowers stress hormones)
-- Breathing exercises
-- Sufficient sleep (observe sleep hygiene)
-- Reduce caffeine and alcohol (amplify hyperarousal/numbing)
+**Koerperlich:**
+- Regelmaessige Bewegung (senkt Stresshormone)
+- Atemuebungen
+- Genuegend Schlaf (Schlafhygiene beachten)
+- Koffein und Alkohol reduzieren (verstaerken Ueberregung/Betaeubung)
 
-**Social:**
-- Have a trusted person (doesn't have to talk about trauma)
-- Avoid isolation — even small contacts help
-- Learn to set boundaries (being allowed to say "no")
-- Accept support
+**Sozial:**
+- Vertrauensperson haben (muss nicht ueber Trauma sprechen)
+- Isolation vermeiden — auch kleine Kontakte helfen
+- Grenzen setzen lernen ("Nein" sagen duerfen)
+- Unterstuetzung annehmen
 
 **Emotional:**
-- Name feelings (don't judge them)
-- Use stabilization techniques (5-4-3-2-1, safe place)
-- Keep a journal (optional, don't force it)
-- Find creative expression (painting, music, writing)
+- Gefuehle benennen (nicht bewerten)
+- Stabilisierungstechniken nutzen (5-4-3-2-1, Sicherer Ort)
+- Tagebuch fuehren (optional, nicht erzwingen)
+- Kreative Ausdruecke finden (Malen, Musik, Schreiben)
 
-**Cognitive:**
-- Inform yourself (psychoeducation — this skill)
-- Challenge self-blame ("It was not my fault")
-- Reality-check catastrophizing
-- Be patient with yourself (healing takes time)
-
----
-
-## 5. Finding Professional Help
-
-### When to Seek Professional Help?
-
-```
-PROFESSIONAL HELP IS INDICATED WHEN:
-
-- Symptoms persist for more than 4 weeks
-- Symptoms worsen instead of improving
-- Daily life is no longer manageable (work, relationships)
-- Flashbacks or nightmares occur very frequently
-- Avoidance behavior severely restricts life
-- Substance use as a coping strategy
-- Suicidal thoughts or self-harm
-- The feeling: "I can't do this alone"
-```
-
-### Resources
-
-```
-IMMEDIATE HELP:
-- 988 Suicide & Crisis Lifeline (US): 988 (24/7, free)
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222 (24/7, free)
-- Emergency services: 911 (US) / 112 (EU)
-
-TRAUMA-SPECIFIC:
-- Trauma outpatient clinics (at many hospitals, no referral needed)
-- Victim support organizations (e.g., RAINN in US: 1-800-656-4673)
-- Domestic violence hotline (US): 1-800-799-7233
-- National Sexual Assault Hotline (US): 1-800-656-4673
-
-FINDING A THERAPIST:
-- Psychology Today therapist directory: psychologytoday.com/us/therapists
-- SAMHSA helpline (US): 1-800-662-4357
-- Important: Look for therapists specializing in "trauma therapy"
-```
+**Kognitiv:**
+- Sich informieren (Psychoedukation — dieser Skill)
+- Selbstvorwuerfe hinterfragen ("Es war nicht meine Schuld")
+- Realitaetscheck bei Katastrophisieren
+- Geduldmit sich selbst haben (Heilung braucht Zeit)
 
 ---
 
-## 6. Frequently Asked Questions (FAQ)
+## 5. Professionelle Hilfe finden
 
-### "Am I traumatized now?"
+### Wann professionelle Hilfe suchen?
 
-Not everyone who experiences a distressing event develops a trauma-related disorder. The majority of people recover spontaneously within weeks. Whether PTSD is present can only be determined by a professional.
+```
+PROFESSIONELLE HILFE IST ANGEZEIGT, WENN:
 
-### "Do I have to talk about it?"
+- Symptome laenger als 4 Wochen anhalten
+- Symptome sich verschlimmern statt bessern
+- Der Alltag nicht mehr bewaeltigbar ist (Arbeit, Beziehungen)
+- Flashbacks oder Alptraeume sehr haeufig auftreten
+- Vermeidungsverhalten das Leben stark einschraenkt
+- Substanzmissbrauch als Bewaeltigungsstrategie
+- Suizidgedanken oder Selbstverletzung
+- Das Gefuehl: "Ich schaffe das nicht alleine"
+```
 
-No. Forcing yourself to talk can be harmful. Some people benefit from talking about it, others don't. There is no "must." In therapy, the right timing is determined together.
+### Anlaufstellen (Deutschland)
 
-### "Why do I react this way even though it was long ago?"
+```
+SOFORTHILFE:
+- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222 (24/7, kostenlos)
+- Krisenchat: krisenchat.de (per Chat, fuer junge Menschen)
+- Psychiatrischer Notdienst: 112
 
-Traumatic memories are stored differently than normal memories. They can be reactivated by triggers and feel as though the event is happening NOW. The brain does not distinguish between "then" and "now." Therapy helps "re-sort" these memories.
+TRAUMASPEZIFISCH:
+- Traumaambulanzen (an vielen Kliniken, keine Ueberweisung noetig)
+- Opferhilfe: Weisser Ring (116 006)
+- Gewaltschutzambulanz (bei koerperlicher Gewalt)
+- Frauenhaus-Hotline: 08000 116 016
+- Hilfetelefon sexueller Missbrauch: 0800 22 55 530
 
-### "Am I weak because I can't handle this alone?"
-
-No. Seeking help is a sign of strength. Trauma therapy is effective — most people can improve significantly with professional help.
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Convey knowledge about trauma and trauma sequelae (psychoeducation)
-- Normalize normal reactions and provide relief
-- Explain the window of tolerance
-- Suggest self-care strategies
-- Refer to professional help
-- Offer stabilization techniques
-
-**An AI assistant must NOT:**
-- Conduct trauma processing (EMDR, exposure, NET, IRRT)
-- Ask for or explore trauma details
-- Process flashback content (only stabilize)
-- Diagnose PTSD or other trauma-related disorders
-- Assess suicidality
-- Make medication-related recommendations
-- Make statements about blame or responsibility
-- "Work through" or "process" memories
-- Ask suggestive questions ("Could it be that...")
-
-**PARTICULARLY STRICT BOUNDARY:** Trauma processing belongs in the hands of trained trauma therapists. This skill offers exclusively psychoeducation and stabilization. For any form of trauma exploration: STOP and refer to a professional.
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+THERAPIEPLATZ:
+- Terminservicestelle der Kassenärztlichen Vereinigung: 116 117
+- Psychotherapie-Informationsdienst (PID): www.psychotherapiesuche.de
+- Wichtig: Auf "Traumatherapie" spezialisierte Therapeuten suchen
+```
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3 Guideline PTSD (2019) — Not professional therapy*
+## 6. Haeufige Fragen (FAQ)
+
+### "Bin ich jetzt traumatisiert?"
+
+Nicht jeder, der ein belastendes Ereignis erlebt, entwickelt eine Traumafolgestoerung.
+Die Mehrheit der Menschen erholt sich spontan innerhalb von Wochen. Ob eine PTBS
+vorliegt, kann nur eine Fachperson diagnostizieren.
+
+### "Muss ich darueber reden?"
+
+Nein. Sich zum Reden zu zwingen kann schaedlich sein. Manche Menschen profitieren
+vom Darueber-Sprechen, andere nicht. Es gibt kein "muss". In der Therapie wird
+der richtige Zeitpunkt gemeinsam bestimmt.
+
+### "Warum reagiere ich so, obwohl es lange her ist?"
+
+Traumatische Erinnerungen werden anders gespeichert als normale Erinnerungen.
+Sie koennen durch Trigger reaktiviert werden und fuehlen sich an, als wuerde
+das Ereignis JETZT passieren. Das Gehirn unterscheidet nicht zwischen "damals" und "jetzt".
+Therapie hilft, diese Erinnerungen "umzusortieren".
+
+### "Bin ich schwach, weil ich das nicht alleine schaffe?"
+
+Nein. Hilfe zu suchen ist ein Zeichen von Staerke. Traumatherapie ist wirksam —
+die meisten Menschen koennen mit professioneller Hilfe deutlich besser werden.
+
+---
+
+## Ethik und Grenzen
+
+**Ein KI-Assistent darf:**
+- Wissen ueber Trauma und Traumafolgen vermitteln (Psychoedukation)
+- Normale Reaktionen normalisieren und entlasten
+- Das Fenster der Belastbarkeit erklaeren
+- Selbstfuersorge-Strategien vorschlagen
+- An professionelle Hilfe verweisen
+- Stabilisierungstechniken anbieten
+
+**Ein KI-Assistent darf NICHT:**
+- Traumabearbeitung durchfuehren (EMDR, Exposition, NET, IRRT)
+- Nach Trauma-Details fragen oder diese explorieren
+- Flashbacks inhaltlich bearbeiten (nur stabilisieren)
+- PTBS oder andere Traumafolgestoerungen diagnostizieren
+- Suizidalitaet einschaetzen
+- Medikamentenbezogene Empfehlungen geben
+- Aussagen ueber Schuld oder Verantwortung machen
+- Erinnerungen "aufarbeiten" oder "durcharbeiten"
+- Suggestive Fragen stellen ("Koennte es sein, dass...")
+
+**BESONDERS STRENGE GRENZE:** Traumabearbeitung gehoert in die Haende
+ausgebildeter Traumatherapeuten. Dieser Skill bietet ausschliesslich Psychoedukation
+und Stabilisierung. Bei jeder Form von Traumaexploration: STOPP und Verweis
+an Fachperson.
+
+**Bei Anzeichen akuter Krise IMMER verweisen auf:**
+- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
+- Psychiatrischer Notdienst: 112
+- Krisenchat: krisenchat.de
+
+---
+
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+*Quellen: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3-Leitlinie PTBS (2019) — Keine professionelle Therapie*

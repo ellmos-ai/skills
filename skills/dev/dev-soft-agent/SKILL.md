@@ -22,34 +22,31 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'or
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Dev Soft Agent
 
+Automatisierte Software-Entwicklungspipeline. Extrahiert aus BACHs ATI-Agent,
+laeuft vollstaendig standalone mit reiner Python-Standardbibliothek.
 
-# Dev Soft Agent (Deutsch)
-
-Automated software development pipeline. Extracted from BACH's ATI agent,
-runs fully standalone with pure Python standard library.
-
-## Components
+## Komponenten
 
 ```
 scripts/
-  config.py              Configuration (scan folders, naming prefixes, weights)
-  project_manager.py     Project scan + classification by naming convention
-  task_engine.py          TASKS.txt parser + code scanner (TODO/FIXME)
-  code_analyzer.py       Static analysis (LOC, imports, classes, functions)
+  config.py              Konfiguration (Scan-Ordner, Naming-Prefixes, Gewichte)
+  project_manager.py     Projekt-Scan + Klassifizierung nach Naming-Konvention
+  task_engine.py          AUFGABEN.txt Parser + Code-Scanner (TODO/FIXME)
+  code_analyzer.py       Statische Analyse (LOC, Imports, Klassen, Funktionen)
   dev_loop.py            Orchestrator (DevLoop)
   policies/
-    naming.py            snake_case / PascalCase / SCREAMING_SNAKE validation
-    encoding.py          UTF-8 enforcement + BOM detection
-    paths.py             Hardcoded path detection
+    naming.py            snake_case / PascalCase / SCREAMING_SNAKE Pruefung
+    encoding.py          UTF-8 Enforcement + BOM Detection
+    paths.py             Hardcoded-Path-Erkennung
   prompt_templates/
-    task_prompt.txt      LLM prompt for task processing
-    review_prompt.txt    LLM prompt for code review
-    analysis_prompt.txt  LLM prompt for project analysis
+    task_prompt.txt      LLM-Prompt fuer Task-Bearbeitung
+    review_prompt.txt    LLM-Prompt fuer Code-Review
+    analysis_prompt.txt  LLM-Prompt fuer Projekt-Analyse
 ```
 
-## Usage as Python Library
+## Nutzung als Python-Library
 
 ```python
 from scripts.dev_loop import DevLoop
@@ -58,82 +55,82 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects (Deutsch)
+# Projekte scannen
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention) (Deutsch)
+# Projekt auswaehlen (gewichtete Zufallsauswahl nach Naming-Konvention)
 project = loop.select_project()
 
-# Analyze code (Deutsch)
+# Code analysieren
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks (Deutsch)
+# Tasks laden und priorisieren
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session (Deutsch)
+# Komplette Dev-Session
 result = loop.run_session()
 loop.save_session()
 ```
 
-## Usage as CLI
+## Nutzung als CLI
 
 ```bash
 cd scripts
 python -m devSoftAgent scan ~/projects
 python -m devSoftAgent select
-python -m devSoftAgent analyze /path/to/project
-python -m devSoftAgent tasks /path/to/project
-python -m devSoftAgent session --project my-project
+python -m devSoftAgent analyze /pfad/zum/projekt
+python -m devSoftAgent tasks /pfad/zum/projekt
+python -m devSoftAgent session --project mein-projekt
 python -m devSoftAgent status
 ```
 
-## Naming Convention (Project Classification)
+## Naming-Konvention (Projekt-Klassifizierung)
 
-Projects are classified based on their folder name:
+Projekte werden anhand ihres Ordnernamens klassifiziert:
 
-| Prefix | Label | Weight | Meaning |
-|--------|-------|--------|---------|
-| `RDY` | Ready | 1.0 | Highest priority |
-| `RDY_FAST` | Fast Ready | 0.5 | Quick to complete |
-| `FAST` | Fast | 0.33 | Small task |
-| `DEV` | Development | 0.17 | In development |
-| `REL` | Released | 0.0 | Done, no work needed |
-| `ARC` | Archived | 0.0 | Archived |
+| Prefix | Label | Gewicht | Bedeutung |
+|--------|-------|---------|-----------|
+| `RDY` | Ready | 1.0 | Hoechste Prioritaet |
+| `RDY_FAST` | Fast Ready | 0.5 | Schnell erledigbar |
+| `FAST` | Fast | 0.33 | Kleine Aufgabe |
+| `DEV` | Development | 0.17 | In Entwicklung |
+| `REL` | Released | 0.0 | Fertig, keine Arbeit |
+| `ARC` | Archived | 0.0 | Archiviert |
 
-Weight determines the probability in random selection.
+Gewicht bestimmt die Wahrscheinlichkeit bei zufaelliger Auswahl.
 
-## TASKS.txt Format
+## AUFGABEN.txt Format
 
 ```markdown
-# TASKS - ProjectName (Deutsch)
-# As of: 2026-03-12 (Deutsch)
+# AUFGABEN - Projektname
+# Stand: 2026-03-12
 
-## OPEN
-- [ ] [BUG] Description of the bug
-- [ ] [FEATURE] New feature
+## OFFEN
+- [ ] [BUG] Beschreibung des Fehlers
+- [ ] [FEATURE] Neues Feature
 
-## IN PROGRESS
-- [-] [REFACTOR] Code restructuring
+## IN ARBEIT
+- [-] [REFACTOR] Code-Umbau
 
-## DONE
-- [x] [BUG] Fixed bug -- DONE 2026-03-01
+## ERLEDIGT
+- [x] [BUG] Behobener Fehler -- DONE 2026-03-01
 ```
 
 ## Policies
 
-Quality policies that can be automatically checked against code:
+Qualitaets-Policies die automatisch gegen Code geprueft werden koennen:
 
-- **NamingPolicy:** snake_case for modules/functions, PascalCase for classes
-- **EncodingPolicy:** Enforce UTF-8, detect BOM, flag CRLF
-- **PathPolicy:** Detect and report hardcoded absolute paths
+- **NamingPolicy:** snake_case fuer Module/Funktionen, PascalCase fuer Klassen
+- **EncodingPolicy:** UTF-8 erzwingen, BOM erkennen, CRLF markieren
+- **PathPolicy:** Hardcoded absolute Pfade erkennen und melden
 
-## Änderungsprotokoll
+## Changelog
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/devSoftAgent to skill library
-- Project scanner, task engine, code analyzer, DevLoop
-- 3 policies (naming, encoding, paths)
-- 3 prompt templates (task, review, analysis)
+- Migration aus MODULAR_AGENTS/devSoftAgent in Skillbibliothek
+- Projekt-Scanner, Task-Engine, Code-Analyzer, DevLoop
+- 3 Policies (Naming, Encoding, Paths)
+- 3 Prompt-Templates (Task, Review, Analysis)

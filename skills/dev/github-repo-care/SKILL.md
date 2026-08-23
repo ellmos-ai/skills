@@ -23,42 +23,39 @@ provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-car
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# GitHub Repo Care — Repository sauber veröffentlichen und pflegen
 
+## Wann dieser Skill greift
 
-# GitHub Repo Care — Publish and Maintain Repositories Cleanly (Deutsch)
+Nutze diesen Skill, wenn ein GitHub-Repository neu erstellt, veröffentlicht, gereleaset, auditiert oder nachträglich gepflegt werden soll. Er ist besonders wichtig vor dem ersten öffentlichen Push, bei Release-Tags, bei Änderungen an Repository-Metadaten, bei Organisationsprofilen und bei Privacy-Checks.
 
-## When To Use
+Greift nicht für reine Code-Implementierung ohne GitHub-Veröffentlichung. In diesem Fall erst den passenden Entwicklungs- oder Debugging-Skill verwenden und diesen Skill erst beim Publikationsschritt aktivieren.
 
-Use this skill when a GitHub repository needs to be created, published, released, audited, or maintained. It is especially important before the first public push, for release tags, repository metadata, organization profiles, and privacy checks.
+## Kernregel
 
-Do not use it for pure implementation work without a GitHub publication step. Finish the relevant development or debugging workflow first, then activate this skill for publication.
+Bereite das Repository vor dem ersten öffentlichen Push vor. Eine korrekte `.gitignore`, ein sauberer Privacy-Gate, Lizenz, README, Metadaten und Release-Story sind vor öffentlicher Historie deutlich einfacher als danach.
 
-## Core Rule
+## Ablauf
 
-Prepare the repository before the first public push. A correct `.gitignore`, privacy gate, license, README, metadata, and release story are much cheaper before public history exists.
+1. **Lokale Regeln lesen.** Prüfe `AGENTS.md`, `CLAUDE.md`, `START.md`, Release-Policy, Naming-Policy und Lock-Policy, sofern vorhanden.
+2. **Sperren prüfen.** Wenn `LOCK.txt` oder eine passende `LOCK.*.txt` aktiv ist, diesen Scope nicht ändern.
+3. **Repository-Namen festlegen.** Namen, Organisation, Sichtbarkeit, Lizenz und Zweck in einem Satz festhalten.
+4. **`.gitignore` vor `git add` anlegen.** Secrets, lokale Daten, Datenbanken, Build-Ausgaben, virtuelle Umgebungen, Caches, IDE-Dateien und private Notizen ausschließen.
+5. **Public-Basics ergänzen.** Typisch: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt` und CI.
+6. **README für Entdeckung schreiben.** Erste Bildschirmhöhe: Zweck, Installation, Nutzung, Privacy-Modell, Projektstruktur, Lizenz und kanonischer Repo-Name.
+7. **Visuelle Signale setzen.** Banner, Logo oder Screenshot ergänzen, wenn sie den Nutzen erkennbarer machen. Keine generische Dekoration, wenn ein echtes Produktbild oder klares Konzeptbild möglich ist.
+8. **Mehrsprachigkeit bewusst planen.** Minimum: Englisch plus Projektsprache. Für nutzernahe Module bevorzugt: Deutsch, Englisch, Spanisch, vereinfachtes Chinesisch, Japanisch und Russisch.
+9. **Tests und Smokes ausführen.** Lokal verifizieren, bevor Erfolg behauptet oder ein Release erstellt wird.
+10. **Privacy-Gate ausführen.** Staged/tracked Set prüfen: Secrets, lokale Pfade, PII, `.env`, Datenbanken, private Dokumente, generierte Artefakte und Mojibake.
+11. **Committen und pushen.** Nur nach bestandenem Gate committen. Danach GitHub-Repo anlegen oder verbinden, pushen und Remote-Status prüfen.
+12. **Metadaten setzen.** Beschreibung, Topics, Homepage, Sichtbarkeit und Branch-Default prüfen.
+13. **Release erstellen.** Tag und GitHub-Release anlegen; CI für Branch und Tag prüfen.
+14. **Discovery-Flächen aktualisieren.** Organisationsprofil, `llms.txt`, zentrale Registries, lokale Modulindizes und Ökosystem-READMEs verlinken.
+15. **Abschluss prüfen.** Remote README, Release-Seite, Topics, CI und Links kontrollieren.
 
-## Workflow & Vorgehen
+## Privacy-Gate
 
-1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
-2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.
-3. **Fix the repository identity.** Confirm name, organization, visibility, license, and one-sentence purpose.
-4. **Create `.gitignore` before `git add`.** Exclude secrets, local data, databases, build output, virtual environments, caches, IDE files, and private notes.
-5. **Add public basics.** Typical files: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt`, and CI.
-6. **Write the README for discovery.** First viewport: purpose, installation, usage, privacy model, project layout, license, and canonical repository name.
-7. **Add visual signals.** Add a banner, logo, or screenshot when it makes the project easier to understand. Avoid generic decoration when a real product image or clear concept image is possible.
-8. **Plan i18n deliberately.** Minimum: English plus the project language. Preferred standard set for user-facing modules: German, English, Spanish, Simplified Chinese, Japanese, and Russian.
-9. **Run tests and smokes.** Verify locally before claiming success or creating a release.
-10. **Run the privacy gate.** Check the staged/tracked set for secrets, local paths, PII, `.env`, databases, private documents, generated artifacts, and mojibake.
-11. **Commit and push.** Commit only after the gate passes. Then create or connect the GitHub repository, push, and verify remote status.
-12. **Set metadata.** Check description, topics, homepage, visibility, and default branch.
-13. **Create the release.** Create the tag and GitHub release; verify CI for both branch and tag.
-14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs.
-15. **Final verification.** Check the remote README, release page, topics, CI, and links.
-
-## Privacy Gate
-
-Search the staged or tracked set, not only the visible working tree.
+Suche im gestagten oder getrackten Set, nicht nur im sichtbaren Arbeitsbaum.
 
 ```bash
 git diff --cached --check
@@ -66,21 +63,21 @@ git ls-files
 rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|API[_-]?KEY|TO[K]EN|PASS[W]ORD|SEC[R]ET|\\x{C3}|\\x{C2}|\\x{FFFD}" .
 ```
 
-For public modules, also document a `RELEASE_GATE.md` or equivalent gate: date, checked commands, result, remaining warnings, and intentional exceptions. If a secret was ever committed, deleting it from `HEAD` is not enough; rotate the secret.
+Bei öffentlichen Modulen zusätzlich ein `RELEASE_GATE.md` oder äquivalentes Gate dokumentieren: Datum, geprüfte Befehle, Ergebnis, Restwarnungen und bewusste Ausnahmen. Wenn ein Secret jemals committed wurde, reicht Löschen aus `HEAD` nicht; das Secret muss rotiert werden.
 
-## GitHub Metadata
+## GitHub-Metadaten
 
-After the push, set metadata and release data explicitly.
+Nach dem Push Metadaten und Release explizit setzen.
 
 ```bash
-gh repo edit ORG/REPO --description "Short concrete description" \
+gh repo edit ORG/REPO --description "Kurze konkrete Beschreibung" \
   --add-topic local-first --add-topic python --add-topic llm
 git tag -a v1.0.0 -m "v1.0.0"
 git push origin v1.0.0
 gh release create v1.0.0 --repo ORG/REPO --title "v1.0.0" --notes "..."
 ```
 
-Then verify:
+Danach verifizieren:
 
 ```bash
 gh repo view ORG/REPO --json nameWithOwner,visibility,description,repositoryTopics,url
@@ -88,34 +85,34 @@ gh release view v1.0.0 --repo ORG/REPO --json tagName,url,isDraft,isPrerelease
 gh run list --repo ORG/REPO --limit 5
 ```
 
-If CI is red after a release, the repository is not cleanly published yet. For a just-created initial release, immediately and intentionally moving the fresh tag to the corrected commit is acceptable.
+Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber veröffentlicht. Bei einem gerade erstellten Initialrelease ist es akzeptabel, den frischen Tag sofort und bewusst auf den korrigierten Commit zu verschieben.
 
-## Common Mistakes
+## Häufige Fehler
 
-| Mistake | Fix |
+| Fehler | Korrektur |
 |---|---|
-| `.gitignore` is added after `git add` | Unstage first, fix ignore rules, then add again |
-| README is monolingual although the UI or skill is multilingual | Add language links or localized READMEs |
-| No banner, topics, or description | Add discovery assets before announcement |
-| Release tag exists, but CI is red | Fix CI and verify the new run |
-| Organization README is updated, but `llms.txt` is missed | Update both human and machine-readable surfaces |
-| Local path appears in public docs | Replace it with relative paths or generic examples |
-| Public repo contains a test database or notebook inbox | Remove it from tracking, add ignore rules, rerun the gate |
+| `.gitignore` wird erst nach `git add` erstellt | Erst unstage, Ignore-Regeln korrigieren, dann erneut adden |
+| README ist einsprachig, obwohl UI oder Skill mehrsprachig ist | Sprachlinks oder lokalisierte READMEs ergänzen |
+| Kein Banner, keine Topics, keine Beschreibung | Discovery-Assets vor Ankündigung ergänzen |
+| Release-Tag existiert, aber CI ist rot | CI fixen und neuen Run prüfen |
+| Organisations-README aktualisiert, aber `llms.txt` vergessen | Beide menschlichen und maschinenlesbaren Flächen aktualisieren |
+| Lokaler Pfad steht in öffentlicher Doku | Durch relative Pfade oder generische Beispiele ersetzen |
+| Public Repo enthält Testdatenbank oder Notebook-Inbox | Datei aus Tracking entfernen, Ignore-Regel ergänzen, Gate erneut laufen lassen |
 
-## Final Checklist
+## Abschluss-Checkliste
 
-- [ ] Local rules and locks checked.
-- [ ] `.gitignore` existed before the first add.
-- [ ] Public docs, license, security, contributing, changelog, and `llms.txt` present.
-- [ ] README includes repo name, purpose, installation, usage, privacy, and license.
-- [ ] i18n expectation met.
-- [ ] Banner, logo, or screenshot present when useful.
-- [ ] Tests and smokes pass.
-- [ ] Privacy, path, secret, database, and mojibake scans clean.
-- [ ] GitHub description, topics, tag, release, and CI verified.
-- [ ] Organization profile, registry, and ecosystem links updated.
+- [ ] Lokale Regeln und Sperren geprüft.
+- [ ] `.gitignore` existierte vor dem ersten Add.
+- [ ] Public-Dokumente, Lizenz, Security, Contributing, Changelog und `llms.txt` vorhanden.
+- [ ] README enthält Repo-Name, Zweck, Installation, Nutzung, Privacy und Lizenz.
+- [ ] i18n-Erwartung erfüllt.
+- [ ] Banner, Logo oder Screenshot vorhanden, sofern sinnvoll.
+- [ ] Tests und Smokes bestanden.
+- [ ] Privacy-, Pfad-, Secret-, Datenbank- und Mojibake-Scans sauber.
+- [ ] GitHub-Beschreibung, Topics, Tag, Release und CI verifiziert.
+- [ ] Organisationsprofil, Registry und Ökosystem-Links aktualisiert.
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.0.0 (2026-06-18)
-- Created initial repository care and publication protocol.
+- Initiale Version als Repository-Pflege- und Veröffentlichungsprotokoll erstellt.

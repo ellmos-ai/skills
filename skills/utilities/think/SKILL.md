@@ -19,82 +19,80 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/think.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="think banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Think — Problemloesung & Analyse
 
-
-# Think — Problem Solving & Analysis (Deutsch)
-
-> Structured thinking processes for complex problems
+> Strukturierte Denkprozesse fuer komplexe Probleme
 
 ---
 
-## Problem-Solving Approaches
+## Problemloesungs-Ansaetze
 
 ### 1. Divide & Conquer
 
 ```
-Problem -> Sub-problems -> Solve individually -> Combine
+Problem -> Teilprobleme -> Loese einzeln -> Kombiniere
 ```
 
 ### 2. Root Cause Analysis
 
 ```
-Symptom -> Why? -> Why? -> Why? -> Root cause -> Solution
+Symptom -> Warum? -> Warum? -> Warum? -> Ursache -> Loesung
 ```
 
 ### 3. Constraint Relaxation
 
 ```
-Unsolvable problem -> Relax constraints -> Solve -> Re-apply constraints
+Unloesbares Problem -> Constraints lockern -> Loesen -> Constraints wieder anziehen
 ```
 
-### 4. Analogy Search
+### 4. Analogie-Suche
 
 ```
-New problem -> Similar known problem -> Adapt solution
-```
-
----
-
-## Analysis Methods
-
-| Method | Application |
-|--------|-------------|
-| **SWOT** | Strengths/Weaknesses/Opportunities/Threats |
-| **Pro/Con** | Decision making |
-| **Pareto** | 80/20 prioritization |
-| **Fishbone** | Root cause analysis |
-
----
-
-## Decision Heuristics
-
-### Under Uncertainty
-
-```
-1. What is the worst-case scenario?
-2. Is it reversible?
-3. What is the cost of inaction?
-```
-
-### Under Complexity
-
-```
-1. What is the simplest first step?
-2. What would an expert do?
-3. What would the 80% solution be?
+Neues Problem -> Aehnliches bekanntes Problem -> Loesung adaptieren
 ```
 
 ---
 
-## Änderungsprotokoll
+## Analyse-Methoden
+
+| Methode | Anwendung |
+|---------|-----------|
+| **SWOT** | Staerken/Schwaechen/Chancen/Risiken |
+| **Pro/Contra** | Entscheidungsfindung |
+| **Pareto** | 80/20 Priorisierung |
+| **Fishbone** | Ursachenanalyse |
+
+---
+
+## Entscheidungs-Heuristiken
+
+### Bei Unsicherheit
+
+```
+1. Was ist das Worst-Case-Szenario?
+2. Ist es reversibel?
+3. Was kostet Nicht-Handeln?
+```
+
+### Bei Komplexitaet
+
+```
+1. Was ist der einfachste erste Schritt?
+2. Was wuerde ein Experte tun?
+3. Was waere die 80%-Loesung?
+```
+
+---
+
+## Changelog
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Portiert aus BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+
+**Siehe auch:** [brainstorm](../brainstorm/SKILL.md) (Kreativmethoden, Ideenfindung) | [decide](../decide/SKILL.md) (Entscheidungs-Frameworks)

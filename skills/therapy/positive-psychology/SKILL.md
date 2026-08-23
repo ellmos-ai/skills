@@ -19,198 +19,197 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Positive Psychologie
 
+> Staerken-Fokus, Dankbarkeit, Flow und PERMA nach Seligman und Csikszentmihalyi
 
-# Positive Psychology (Deutsch)
-
-> Strengths focus, gratitude, flow, and PERMA according to Seligman and Csikszentmihalyi
-
-See: [ETHICS.md](../ETHICS.md)
+Siehe: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Kontext
 
-Positive Psychology is the scientific study of what makes life worth living (Seligman & Csikszentmihalyi, 2000). In contrast to clinical psychology (What causes illness?), it asks: What makes people healthy, happy, and resilient?
+Positive Psychologie ist die wissenschaftliche Erforschung dessen, was das Leben
+lebenswert macht (Seligman & Csikszentmihalyi, 2000). Im Gegensatz zur klinischen
+Psychologie (Was macht krank?) fragt sie: Was macht gesund, gluecklich, resilient?
 
-Founders: Martin Seligman (APA President 1998) initiated the movement. Other pioneers: Mihaly Csikszentmihalyi (Flow), Christopher Peterson (Character Strengths), Barbara Fredrickson (Broaden-and-Build), Ed Diener (Subjective Well-Being).
+Gruender: Martin Seligman (APA-Praesident 1998) initiierte die Bewegung.
+Weitere Pioniere: Mihaly Csikszentmihalyi (Flow), Christopher Peterson (Charakterstaerken),
+Barbara Fredrickson (Broaden-and-Build), Ed Diener (Subjektives Wohlbefinden).
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Hinweis:** Dies ist Unterstuetzung, kein Ersatz fuer professionelle Therapie.
+**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. PERMA Model (Seligman, 2011)
+## 1. PERMA-Modell (Seligman, 2011)
 
-Five pillars of well-being according to Seligman ("Flourish"):
+Fuenf Saeulen des Wohlbefindens nach Seligman ("Flourish"):
 
-### P — Positive Emotions
-- Joy, gratitude, serenity, interest, hope, pride, love
-- Fredrickson: At least a 3:1 ratio of positive to negative emotions
-- Exercise: "Three Good Things" (see below)
+### P — Positive Emotions (Positive Emotionen)
+- Freude, Dankbarkeit, Gelassenheit, Interesse, Hoffnung, Stolz, Liebe
+- Fredrickson: Mindestens 3:1 Ratio positiver zu negativer Emotionen
+- Uebung: "Three Good Things" (s.u.)
 
 ### E — Engagement
-- Being fully absorbed in an activity (flow state)
-- Using one's strengths in daily life
-- Challenge and skill in balance
+- Voellig aufgehen in einer Taetigkeit (Flow-Zustand)
+- Eigene Staerken im Alltag einsetzen
+- Herausforderung und Faehigkeit im Gleichgewicht
 
-### R — Relationships (Positive Relationships)
-- Social connectedness as the strongest predictor of well-being
-- Active-constructive responding to others' good news
-- Small kindnesses (Random Acts of Kindness)
+### R — Relationships (Positive Beziehungen)
+- Soziale Verbundenheit als staerkster Praediktor fuer Wohlbefinden
+- Aktiv-konstruktives Reagieren auf gute Nachrichten anderer
+- Kleine Freundlichkeiten (Random Acts of Kindness)
 
-### M — Meaning
-- Belonging to and serving something greater than oneself
-- Meaning through work, family, community, spirituality
-- Frankl: "He who has a why can bear almost any how"
+### M — Meaning (Sinn)
+- Zugehoerigkeit zu und Dienen an etwas Groesserem als man selbst
+- Sinn durch Arbeit, Familie, Gemeinschaft, Spiritualitaet
+- Frankl: "Wer ein Warum hat, ertraegt fast jedes Wie"
 
-### A — Achievement
-- Experiencing mastery and competence
-- Setting and achieving realistic goals
-- Grit: Perseverance + passion for long-term goals (Duckworth, 2016)
-
----
-
-## 2. Character Strengths (VIA Classification)
-
-Peterson and Seligman (2004) identified 24 universal character strengths in 6 virtue categories:
-
-| Virtue | Strengths |
-|--------|----------|
-| Wisdom | Creativity, Curiosity, Judgment, Love of Learning, Perspective |
-| Courage | Bravery, Perseverance, Honesty, Zest |
-| Humanity | Love, Kindness, Social Intelligence |
-| Justice | Teamwork, Fairness, Leadership |
-| Temperance | Forgiveness, Humility, Prudence, Self-Regulation |
-| Transcendence | Appreciation of Beauty, Gratitude, Hope, Humor, Spirituality |
-
-**Signature strengths:** The 3-5 strengths that feel most authentic. Those who use their signature strengths daily are demonstrably more satisfied and less depressed (Seligman et al. 2005).
-
-**VIA Survey:** Free at viacharacter.org (scientifically validated)
+### A — Achievement (Zielerreichung)
+- Meisterschaft und Kompetenz erleben
+- Realistische Ziele setzen und erreichen
+- Grit: Ausdauer + Leidenschaft fuer langfristige Ziele (Duckworth, 2016)
 
 ---
 
-## 3. Gratitude Exercises
+## 2. Charakterstaerken (VIA Classification)
+
+Peterson und Seligman (2004) identifizierten 24 universelle Charakterstaerken
+in 6 Tugendkategorien:
+
+| Tugend | Staerken |
+|--------|---------|
+| Weisheit | Kreativitaet, Neugier, Urteilsvermoegen, Liebe zum Lernen, Weitsicht |
+| Mut | Tapferkeit, Ausdauer, Ehrlichkeit, Enthusiasmus |
+| Menschlichkeit | Liebe, Freundlichkeit, Soziale Intelligenz |
+| Gerechtigkeit | Teamwork, Fairness, Fuehrungsvermoegen |
+| Maessigung | Vergebung, Bescheidenheit, Besonnenheit, Selbstregulation |
+| Transzendenz | Schoenheitssinn, Dankbarkeit, Hoffnung, Humor, Spiritualitaet |
+
+**Signaturstaerken:** Die 3-5 Staerken, die sich am authentischsten anfuehlen.
+Wer seine Signaturstaerken taeglich einsetzt, ist nachweislich zufriedener und
+weniger depressiv (Seligman et al. 2005).
+
+**VIA-Test:** Kostenlos unter viacharacter.org (wissenschaftlich validiert)
+
+---
+
+## 3. Dankbarkeits-Uebungen
 
 ### 3.1 Three Good Things (Seligman et al. 2005)
 
-**Procedure:**
-1. Every evening, write down 3 good things from the day
-2. For each one note: Why did it happen?
-3. Duration: At least 1 week, ideally ongoing
+**Ablauf:**
+1. Jeden Abend 3 gute Dinge des Tages aufschreiben
+2. Fuer jedes notieren: Warum ist es passiert?
+3. Dauer: Mindestens 1 Woche, idealerweise dauerhaft
 
-**Evidence:** Significantly increased well-being and reduced depressive symptoms over 6 months (Seligman et al. 2005)
+**Evidenz:** Signifikant erhoehtes Wohlbefinden und reduzierte depressive
+Symptome ueber 6 Monate (Seligman et al. 2005)
 
-### 3.2 Gratitude Journal
+### 3.2 Dankbarkeitstagebuch
 
-Extension of Three Good Things:
-- Morning: What am I grateful for today? (3 items)
-- Evening: What was good today? What did I contribute?
-- Shift perspective: People, experiences, abilities, everyday things
+Erweiterung von Three Good Things:
+- Morgens: Wofuer bin ich heute dankbar? (3 Punkte)
+- Abends: Was war heute gut? Was habe ich beigetragen?
+- Wechsel der Perspektive: Menschen, Erlebnisse, Faehigkeiten, Alltaegliches
 
-### 3.3 Gratitude Letter (Gratitude Visit)
+### 3.3 Dankbarkeitsbrief (Gratitude Visit)
 
-**Procedure:**
-1. Identify a person you never properly thanked
-2. Write a specific letter (300 words, concrete)
-3. Visit the person and read the letter aloud
+**Ablauf:**
+1. Eine Person identifizieren, der man nie richtig gedankt hat
+2. Einen konkreten Brief schreiben (300 Worte, spezifisch)
+3. Die Person besuchen und den Brief vorlesen
 
-**Evidence:** Strongest short-term effect of all positive psychology interventions (Seligman et al. 2005). Effect lasts approximately 1 month.
+**Evidenz:** Staerkster kurzfristiger Effekt aller Positiv-Psychologie-Interventionen
+(Seligman et al. 2005). Effekt haelt ca. 1 Monat an.
 
 ---
 
-## 4. Flow Theory (Csikszentmihalyi, 1990)
+## 4. Flow-Theorie (Csikszentmihalyi, 1990)
 
 ### Definition
-Flow is a state of complete immersion in an activity, where action flows effortlessly and time and self-consciousness recede into the background.
+Flow ist ein Zustand voelliger Vertiefung in eine Taetigkeit, bei dem die
+Handlung muehelos fliesst und Zeit und Selbstbewusstsein in den Hintergrund treten.
 
-### Conditions for Flow
+### Bedingungen fuer Flow
 
-| Condition | Description |
+| Bedingung | Beschreibung |
 |-----------|-------------|
-| Balance | Challenge matches skill level |
-| Clear goals | You know exactly what to do |
-| Immediate feedback | Instant feedback on progress |
-| Concentration | Full attention on the task |
-| Control | Feeling of being able to master the situation |
-| Intrinsic motivation | The activity is rewarding in itself |
+| Balance | Herausforderung entspricht den Faehigkeiten |
+| Klare Ziele | Man weiss genau, was zu tun ist |
+| Direktes Feedback | Sofortige Rueckmeldung ueber Fortschritt |
+| Konzentration | Volle Aufmerksamkeit auf die Aufgabe |
+| Kontrolle | Gefuehl, die Situation meistern zu koennen |
+| Intrinsische Motivation | Die Taetigkeit ist in sich lohnend |
 
-### Flow Channel
+### Flow-Kanal
 
 ```
-Challenge
-     high   |  Anxiety    |  FLOW
-            |             |
-     low    |  Apathy     |  Boredom
-            +-------------|----------
-              low              high
-                    Skill
+Herausforderung
+     hoch   |  Angst    |  FLOW
+            |           |
+     niedrig|  Apathie  |  Langeweile
+            +-----------|----------
+              niedrig      hoch
+                    Faehigkeit
 ```
 
-### Fostering Flow
-- Eliminate distractions (phone away, door closed)
-- Break tasks into manageable units
-- Adjust difficulty level (not too easy, not too hard)
-- Establish regular practice times
+### Flow foerdern
+- Ablenkungen eliminieren (Handy weg, Tuer zu)
+- Aufgaben in bewaetigbare Einheiten teilen
+- Schwierigkeitsgrad anpassen (nicht zu leicht, nicht zu schwer)
+- Regelmaessige Uebungszeiten einrichten
 
 ---
 
-## 5. Resilience Factors
+## 5. Resilienz-Faktoren
 
-Resilience = psychological resistance to adversity.
+Resilienz = psychische Widerstandskraft gegenueber Belastungen.
 
-### The 7 Pillars of Resilience (after Reivich & Shatte, 2002)
+### Die 7 Saeulen der Resilienz (nach Reivich & Shatte, 2002)
 
-1. **Emotion regulation:** Perceiving and managing one's own feelings
-2. **Impulse control:** Consciously directing actions rather than reacting
-3. **Causal analysis:** Realistically assessing causes
-4. **Self-efficacy:** Confidence in one's own competence
-5. **Empathy:** Recognizing and understanding others' emotions
-6. **Optimism:** Realistic, positive expectations for the future
-7. **Goal orientation:** Setting and pursuing meaningful goals
+1. **Emotionsregulation:** Eigene Gefuehle wahrnehmen und steuern
+2. **Impulskontrolle:** Handlungen bewusst steuern statt reagieren
+3. **Kausalanalyse:** Ursachen realistisch einschaetzen
+4. **Selbstwirksamkeit:** Vertrauen in die eigene Kompetenz
+5. **Empathie:** Emotionen anderer erkennen und verstehen
+6. **Optimismus:** Realistische, positive Zukunftserwartung
+7. **Zielorientierung:** Sinnvolle Ziele setzen und verfolgen
 
-### Building Resilience
-- Consciously use strengths (VIA strengths)
-- Maintain social network (relationships as the #1 protective factor)
-- Self-care: Sleep, exercise, nutrition, recovery
-- Cognitive flexibility: Seek alternative perspectives
-- Find meaning and significance (even in difficult situations)
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Explain the PERMA model and character strengths (psychoeducation)
-- Guide and support gratitude exercises
-- Discuss flow conditions
-- Convey resilience factors
-- Support signature strengths reflection
-
-**An AI assistant must NOT:**
-- Treat clinical depression solely with positive psychology
-- Clinically interpret VIA survey results
-- Recommend positive psychology as a substitute for therapy
-- Foster toxic positivity ("Just be grateful")
-
-**Progress tracking:**
-- Well-being before/after exercise (0-10 scale)
-- Gratitude streak: How many consecutive days?
-- Flow log: When and during which activities do I experience flow?
-- Signature strengths: How often used this week?
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Resilienz trainieren
+- Staerken bewusst einsetzen (VIA-Staerken)
+- Soziales Netz pflegen (Beziehungen als Schutzfaktor Nr. 1)
+- Selbstfuersorge: Schlaf, Bewegung, Ernaehrung, Erholung
+- Kognitive Flexibilitaet: Alternative Sichtweisen suchen
+- Sinn und Bedeutung finden (auch in schwierigen Situationen)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Seligman (2011), Csikszentmihalyi (1990), Peterson & Seligman (2004) — Not professional therapy*
+## Ethik und Grenzen
+
+**Ein KI-Assistent darf:**
+- PERMA-Modell und Charakterstaerken erklaeren (Psychoedukation)
+- Dankbarkeitsuebungen anleiten und begleiten
+- Flow-Bedingungen besprechen
+- Resilienzfaktoren vermitteln
+- Signaturstaerken-Reflexion unterstuetzen
+
+**Ein KI-Assistent darf NICHT:**
+- Klinische Depression allein mit Positiver Psychologie behandeln
+- VIA-Test-Ergebnisse klinisch interpretieren
+- Positive Psychologie als Ersatz fuer Therapie empfehlen
+- Toxische Positivitaet foerdern ("Sei einfach dankbar")
+
+**Verlaufsmessung:**
+- Wohlbefinden vor/nach Uebung (0-10 Skala)
+- Dankbarkeits-Streak: Wie viele Tage in Folge?
+- Flow-Protokoll: Wann und wobei erlebe ich Flow?
+- Signaturstaerken: Wie oft eingesetzt diese Woche?
+
+---
+
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+*Quellen: Seligman (2011), Csikszentmihalyi (1990), Peterson & Seligman (2004) — Keine professionelle Therapie*

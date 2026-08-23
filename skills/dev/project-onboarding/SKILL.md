@@ -19,221 +19,217 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-# Standard Onboarding Procedure for New Software Projects (Deutsch)
+# Standardaufnahmeverfahren fuer neue Software-Projekte
 
 **Version:** 1.0
-**Date:** 2026-03-12
+**Stand:** 2026-03-12
 
 ---
 
-## Übersicht & Zweck
+## Uebersicht
 
-This procedure defines which steps to perform on newly discovered software folders before they are added to a task management system.
+Dieses Verfahren definiert, welche Schritte bei neu entdeckten Software-Ordnern durchzufuehren sind, bevor sie in ein Task-Management-System aufgenommen werden.
 
 ```
-+─────────────────────────────────────────────────────+
-|           STANDARD ONBOARDING PROCEDURE              |
-+─────────────────────────────────────────────────────+
-|  1. Create feature analysis                          |
-|  2. Code quality review (standard tests)             |
-|  3. Create TASKS.txt                                 |
-|  4. Add to task management                           |
-+─────────────────────────────────────────────────────+
+┌─────────────────────────────────────────────────────────┐
+│           STANDARDAUFNAHMEVERFAHREN                     │
+├─────────────────────────────────────────────────────────┤
+│  1. Feature-Analyse erstellen                           │
+│  2. Code-Qualitaetspruefung (Standard-Tests)            │
+│  3. AUFGABEN.txt erstellen                              │
+│  4. In Task-Management uebernehmen                      │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Phase 1: Feature Analysis
+## Phase 1: Feature-Analyse
 
-**Purpose:** Understand the tool, its functions, and development status.
+**Zweck:** Verstaendnis des Tools, seiner Funktionen und des Entwicklungsstandes.
 
-**Create file:** `Feature_Analysis_<ToolName>.md`
+**Datei erstellen:** `Feature_Analyse_<ToolName>.md`
 
 ### Template
 
 ```markdown
-# Feature Analysis: <ToolName> (Deutsch)
+# Feature-Analyse: <ToolName>
 
-## Brief Description
-A short sentence describing what the tool does.
+## Kurzbeschreibung
+Ein kurzer Satz der beschreibt was das Tool macht.
 
 ---
 
 ## Highlights
 
-| Feature | Description |
+| Feature | Beschreibung |
 |---------|-------------|
-| **Feature 1** | Description |
-| **Feature 2** | Description |
+| **Feature 1** | Beschreibung |
+| **Feature 2** | Beschreibung |
 
 ---
 
-## Development Stage Assessment
+## Bewertung der Ausbaustufe
 
-### Current Status: **<Status> (<X>%)**
+### Aktueller Stand: **<Status> (<X>%)**
 
-Possible statuses:
+Moegliche Status:
 - Prototype (0-30%)
 - Alpha (30-60%)
 - Beta (60-85%)
 - Production Ready (85-95%)
 - Release (95-100%)
 
-| Category | Rating (1-5) | Details |
-|----------|:------------:|---------|
-| **Functionality** | 3 | |
+| Kategorie | Bewertung (1-5) | Details |
+|-----------|:---------------:|---------|
+| **Funktionsumfang** | 3 | |
 | **UI/UX** | 3 | |
-| **Stability** | 3 | |
-| **Documentation** | 3 | |
+| **Stabilitaet** | 3 | |
+| **Dokumentation** | 3 | |
 
 ---
 
-## Recommended Extensions
+## Empfohlene Erweiterungen
 
-### Priority: High
+### Prioritaet: Hoch
 1. ...
 
-### Priority: Medium
+### Prioritaet: Mittel
 2. ...
 
-### Priority: Low
+### Prioritaet: Niedrig
 3. ...
 
 ---
 
-## Technical Details
+## Technische Details
 
 Framework:      <Framework>
-File size:      <X> lines of Python
-Main file:      <main.py>
+Dateigroesse:   <X> Zeilen Python
+Hauptdatei:     <main.py>
 
 ---
-*Analysis created: <Date>*
+*Analyse erstellt: <Datum>*
 ```
 
 ---
 
-## Phase 2: Code Quality Review
+## Phase 2: Code-Qualitaetspruefung
 
-**Purpose:** Ensure technical quality, identify known issues.
+**Zweck:** Technische Qualitaet sicherstellen, bekannte Probleme identifizieren.
 
-### Recommended Checks
+### Empfohlene Pruefungen
 
-| Test | Tool | Description |
-|------|------|-------------|
-| **Encoding** | Encoding checker (e.g., `chardet`, `file`) | Ensure UTF-8 |
-| **Method Analysis** | Linter (e.g., `pylint`, `flake8`) | Find large methods |
-| **Indentation** | Formatter (e.g., `black`, `autopep8`) | Check consistency |
-| **Imports** | Import checker (e.g., `isort`, `pylint`) | Find unused imports |
+| Test | Werkzeug | Beschreibung |
+|------|----------|--------------|
+| **Encoding** | Encoding-Checker (z.B. `chardet`, `file`) | UTF-8 sicherstellen |
+| **Methoden-Analyse** | Linter (z.B. `pylint`, `flake8`) | Grosse Methoden finden |
+| **Einrueckung** | Formatter (z.B. `black`, `autopep8`) | Konsistenz pruefen |
+| **Imports** | Import-Checker (z.B. `isort`, `pylint`) | Unused Imports finden |
 
-### Check Points
+### Pruefpunkte
 
-- [ ] All .py files UTF-8 encoded?
-- [ ] No unusually large methods (>100 lines)?
-- [ ] Consistent indentation (spaces vs tabs)?
-- [ ] Unused imports removed?
-- [ ] Docstrings present?
+- [ ] Alle .py Dateien UTF-8 kodiert?
+- [ ] Keine ungewoehnlich grosse Methoden (>100 Zeilen)?
+- [ ] Konsistente Einrueckung (Spaces vs Tabs)?
+- [ ] Unused Imports entfernt?
+- [ ] Docstrings vorhanden?
 
-### Document Results
+### Ergebnis dokumentieren
 
-Record issues in TASKS.txt under "QUALITY REVIEW".
+Probleme in AUFGABEN.txt unter "QUALITAETSPRUEFUNG" eintragen.
 
 ---
 
-## Phase 3: Create TASKS.txt
+## Phase 3: AUFGABEN.txt erstellen
 
-**Purpose:** Capture open tasks in a structured format.
+**Zweck:** Offene Aufgaben strukturiert erfassen.
 
-**Create file:** `TASKS.txt` in the project folder
+**Datei erstellen:** `AUFGABEN.txt` im Projektordner
 
 ### Template
 
 ```
-TASKS - <ToolName> V<Version>
+AUFGABEN - <ToolName> V<Version>
 ==============================
 Status: <Status>
-Date: <Date>
+Stand: <Datum>
 
-OPEN TASKS:
-[ ] <Task 1> - Effort: <LOW|MEDIUM|HIGH>
-[ ] <Task 2> - Effort: <LOW|MEDIUM|HIGH>
+OFFENE AUFGABEN:
+[ ] <Aufgabe 1> - Aufwand: <NIEDRIG|MITTEL|HOCH>
+[ ] <Aufgabe 2> - Aufwand: <NIEDRIG|MITTEL|HOCH>
 
 ---
-DONE (Archive):
-- <Completed task> (<Version>, <Date>)
+ERLEDIGT (Archiv):
+- <Erledigte Aufgabe> (<Version>, <Datum>)
 ```
 
-### Status Values
+### Status-Werte
 
-| Status | Meaning |
-|--------|---------|
-| NEWLY DISCOVERED | Not yet analyzed |
-| ANALYSIS NEEDED | Feature analysis in progress |
-| QUALITY REVIEW | Code tests running |
-| VALIDATED & READY | Ready for features |
+| Status | Bedeutung |
+|--------|-----------|
+| NEU ENTDECKT | Noch nicht analysiert |
+| ANALYSE NOETIG | Feature-Analyse laeuft |
+| QUALITAETSPRUEFUNG | Code-Tests laufen |
+| VALIDIERT & BEREIT | Bereit fuer Features |
 | MVP | Minimum Viable Product |
-| BUILD ONLY | Only compilation needed |
-| BLOCKED | Waiting for user test/decision |
+| NUR KOMPILIEREN | Nur noch Kompilierung noetig |
+| GESPERRT | Wartet auf User-Test/Entscheidung |
 
 ---
 
-## Phase 4: Task Management Integration
+## Phase 4: Task-Management-Integration
 
-After completing phases 1-3:
+Nach Abschluss der Phasen 1-3:
 
-1. **Transfer tasks:** Create TASKS.txt entries as tasks/issues
-2. **Verify:** All tasks correctly categorized?
-3. **Categorize:** Assign project to appropriate category (single tool, suite, library, etc.)
+1. **Aufgaben uebertragen:** AUFGABEN.txt-Eintraege als Tasks/Issues anlegen
+2. **Pruefen:** Alle Aufgaben korrekt kategorisiert?
+3. **Kategorisierung:** Projekt in passende Kategorie einordnen (Single-Tool, Suite, Library etc.)
 
-### Automatic Onboarding Tasks
+### Automatische Onboarding-Tasks
 
-For new projects, create the following standard tasks:
+Bei neuen Projekten folgende Standard-Tasks anlegen:
 
-| Task | Description | Effort |
-|------|-------------|--------|
-| onb_1 | Create feature analysis | medium |
-| onb_2 | Code quality review | low |
-| onb_3 | Create TASKS.txt | low |
+| Task | Aufgabe | Aufwand |
+|------|---------|---------|
+| onb_1 | Feature-Analyse erstellen | mittel |
+| onb_2 | Code-Qualitaetspruefung | niedrig |
+| onb_3 | AUFGABEN.txt erstellen | niedrig |
 
-Tasks have dependencies: onb_2 depends on onb_1, onb_3 depends on onb_2.
+Tasks haben Abhaengigkeiten: onb_2 haengt von onb_1 ab, onb_3 haengt von onb_2 ab.
 
 ---
 
-## Quick Checklist
+## Schnell-Checkliste
 
 ```
-[ ] 1. Feature_Analysis_<Name>.md created
-[ ] 2. Code quality review completed (linter, encoding, imports)
-[ ] 3. TASKS.txt created with status
-[ ] 4. Tasks added to task management
+[ ] 1. Feature_Analyse_<Name>.md erstellt
+[ ] 2. Code-Qualitaetspruefung durchgefuehrt (Linter, Encoding, Imports)
+[ ] 3. AUFGABEN.txt erstellt mit Status
+[ ] 4. Tasks in Task-Management uebernommen
 ```
 
 ---
 
-## Beispiel & Anwendung
+## Beispiel: Neues Tool "MyTool"
 
 ```bash
-# 1. Feature analysis (Deutsch)
-# -> Create Feature_Analysis_MyTool.md (see template) (Deutsch)
+# 1. Feature-Analyse
+# -> Feature_Analyse_MyTool.md erstellen (siehe Template)
 
-# 2. Code quality (Deutsch)
+# 2. Code-Qualitaet
 pylint MyTool/main.py
 flake8 MyTool/main.py
-file -i MyTool/main.py  # Check encoding
+file -i MyTool/main.py  # Encoding pruefen
 
-# 3. TASKS.txt (Deutsch)
-# -> Create in tool folder with status "QUALITY REVIEW" (Deutsch)
+# 3. AUFGABEN.txt
+# -> Im Tool-Ordner erstellen mit Status "QUALITAETSPRUEFUNG"
 
-# 4. Create tasks (Deutsch)
-# -> Capture TASKS.txt entries as issues/tickets (Deutsch)
+# 4. Tasks anlegen
+# -> Eintraege aus AUFGABEN.txt als Issues/Tickets erfassen
 ```
 
 ---
 
-*Created: 2026-01-10 | Ported: 2026-03-12*
+*Erstellt: 2026-01-10 | Portiert: 2026-03-12*

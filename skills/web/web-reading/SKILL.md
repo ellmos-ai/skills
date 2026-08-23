@@ -20,92 +20,90 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['request
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
-
 <img src="banner.png" width="100%" alt="web-reading banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Webseiten lesen (Router)
 
+## Zweck
 
-# Web Reading (Router) (Deutsch)
+Webinhalte abrufen und verarbeiten — aber nicht blind ein Werkzeug wählen.
+Dieser Skill routet: **erst der Zweck, dann das beste verfügbare Werkzeug.**
+Die eigentliche Implementierung lebt im **`web-scraper`-Modul**; dieser Skill
+zeigt nur, was gerade da ist und wie man es nutzt.
 
-## Übersicht & Zweck
-
-Fetch and process web content — but don't pick a tool blindly. This skill
-routes: **purpose first, then the best available tool.** The actual
-implementation lives in the **`web-scraper` module**; this skill only shows
-what is currently present and how to use it.
-
-## Step 1 — What is needed?
+## Schritt 1 — Was wird gebraucht?
 
 ```
-Process a web page?
+Webseite verarbeiten?
   |
-  +-- Main text (article / prose)   → "Content"     → Step 2A
-  +-- Links / forms / headers       → "Structure"   → Step 2B
-  +-- Rendered image of the page    → "Screenshot"  → Step 2C
+  +-- Haupttext (Artikel/Fließtext) → "Content"      → Schritt 2A
+  +-- Links / Formulare / Headers   → "Struktur"     → Schritt 2B
+  +-- Gerendertes Bild der Seite    → "Screenshot"   → Schritt 2C
 ```
 
-## Step 2 — Which tool? (Router)
+## Schritt 2 — Welches Werkzeug? (Router)
 
-Use the **first available** tool in each list. "Available" means the
-tool/skill/module is actually present in this session.
+Nimm das **erste verfügbare** Werkzeug in der jeweiligen Liste. „Verfügbar"
+heißt: das Tool/der Skill/das Modul ist in dieser Session tatsächlich vorhanden.
 
-### 2A — Content (main text, clean markdown)
+### 2A — Content (Haupttext, sauberes Markdown)
 
-| Priority | Tool | Available when … | Usage |
+| Priorität | Werkzeug | Verfügbar, wenn … | Nutzung |
 |---|---|---|---|
-| 1 | **`defuddle`** skill | skill `defuddle` listed | clean markdown from normal web pages |
-| 2 | Built-in **`WebFetch`** | agent has the WebFetch tool | quick read/summary of a URL |
-| 3 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "extract"` |
-| 4 | **`web-scraper`** module | module installed/importable | `web-scraper extract <url>` / `extract(url)` |
+| 1 | **`defuddle`**-Skill | Skill `defuddle` gelistet | sauberes Markdown aus normalen Webseiten |
+| 2 | Built-in **`WebFetch`** | Agent hat das WebFetch-Tool | schnelles Lesen/Zusammenfassen einer URL |
+| 3 | **`fc_web_fetch`** (MCP) | FileCommander-MCP geladen | `mode: "extract"` |
+| 4 | **`web-scraper`**-Modul | Modul installiert/importierbar | `web-scraper extract <url>` bzw. `extract(url)` |
 
-> Note: `.md` URLs are already markdown → use `WebFetch` directly, no extractor.
+> Hinweis: `.md`-URLs sind bereits Markdown → direkt `WebFetch`, kein Extractor.
 
-### 2B — Structure (links, forms, headers)
+### 2B — Struktur (Links, Formulare, Headers)
 
-`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not
-raw structure). Use instead:
+Hier taugen `WebFetch`/`defuddle` **nicht** (sie liefern aufbereiteten Text,
+keine rohe Struktur). Nimm daher:
 
-| Priority | Tool | Available when … | Usage |
+| Priorität | Werkzeug | Verfügbar, wenn … | Nutzung |
 |---|---|---|---|
-| 1 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "links" \| "forms" \| "headers"` |
-| 2 | **`web-scraper`** module | module installed/importable | `web-scraper links\|forms\|headers <url>` |
+| 1 | **`fc_web_fetch`** (MCP) | FileCommander-MCP geladen | `mode: "links" \| "forms" \| "headers"` |
+| 2 | **`web-scraper`**-Modul | Modul installiert/importierbar | `web-scraper links\|forms\|headers <url>` |
 
 ### 2C — Screenshot
 
-| Priority | Tool | Available when … | Usage |
+| Priorität | Werkzeug | Verfügbar, wenn … | Nutzung |
 |---|---|---|---|
-| 1 | **`web-scraper`** module | module with `[screenshot]` extra | `web-scraper screenshot <url> --out img.png` |
-| 2 | Browser automation tool | e.g. Playwright/Computer-Use present | page-dependent |
+| 1 | **`web-scraper`**-Modul | Modul mit `[screenshot]`-Extra | `web-scraper screenshot <url> --out bild.png` |
+| 2 | Browser-Automations-Tool | z. B. Playwright/Computer-Use vorhanden | seiten-abhängig |
 
-## Step 3 — Fallback: nothing suitable found?
+## Schritt 3 — Fallback: nichts Passendes gefunden?
 
-If **no** tool is available for the purpose, recommend installing the
-**`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
+Wenn für den Zweck **kein** Werkzeug verfügbar ist, empfiehl die Installation
+des **`web-scraper`-Moduls** (vollwertig: get/links/forms/headers/extract/screenshot):
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (Deutsch)
-pip install ".[http,extract]"          # + [screenshot] for screenshots
+# aus dem lokalen Modulordner (.MODULES/.TOOLS/web-scraper)
+pip install ".[http,extract]"          # + [screenshot] für Screenshots
 
-# then: (Deutsch)
+# danach:
 web-scraper extract <url>
 ```
 
-As a library:
+Als Bibliothek:
 
 ```python
 from web_scraper import WebScraper, extract
 print(extract("https://example.com")["content"])
 ```
 
-## Last resort — standalone snippet (no dependencies beyond requests/bs4)
+## Notnagel — Standalone-Snippet (ohne alles)
+
+Wenn wirklich nur die Standardbibliothek + `requests`/`bs4` da sind:
 
 ```python
 import requests
 from bs4 import BeautifulSoup
 
 def extract_content(url: str) -> str:
-    """Simple content extraction."""
+    """Einfache Content-Extraktion."""
     response = requests.get(url, timeout=30)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
@@ -114,16 +112,15 @@ def extract_content(url: str) -> str:
     return soup.get_text(separator="\n", strip=True)
 ```
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.1.0 (2026-07-05)
-- Reworked from a plain protocol into a **router**: detects available web
-  capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module)
-  and routes by purpose (content/structure/screenshot); otherwise recommends the
-  `web-scraper` module.
-- Unified name to `web-reading` (was `webseiten-lesen` in the DE version).
-- Removed BACH CLI examples from the body (standalone-compliant; origin stays
-  documented in the `bach_integration` frontmatter).
+- Umbau von reinem Protokoll zu **Router**: erkennt vorhandene Web-Fähigkeiten
+  (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper`-Modul) und routet nach
+  Zweck (Content/Struktur/Screenshot); empfiehlt sonst das `web-scraper`-Modul.
+- Name auf `web-reading` vereinheitlicht (vorher DE `webseiten-lesen`).
+- BACH-CLI-Beispiele aus dem Body entfernt (standalone-konform; Herkunft bleibt
+  im `bach_integration`-Frontmatter dokumentiert).
 
 ### 1.0.0 (2026-03-12)
-- Export from BACH v3.8.0 workflow `webseiten-lesen.md`
+- Export aus BACH v3.8.0 Workflow `webseiten-lesen.md`

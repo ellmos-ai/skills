@@ -22,70 +22,67 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+# Plugin System
 
+Fehlertolerantes Plugin-System fuer Python-CLI-Anwendungen.
+Ein fehlerhaftes Plugin stoppt niemals den Rest der Anwendung.
 
-# Plugin System (Deutsch)
+## Kernfeatures
 
-Fault-tolerant plugin system for Python CLI applications.
-A faulty plugin never stops the rest of the application.
+- **Auto-Discovery:** Findet Plugins automatisch in einem Verzeichnis
+- **Validierung:** Prueft `name`, `version`, `execute()` auf jeder Plugin-Klasse
+- **Fehlertoleranz:** Defekte Plugins werden geloggt aber nicht geladen
+- **Zero Dependencies:** Nur Python-Standardbibliothek
 
-## Core Features
-
-- **Auto-Discovery:** Automatically finds plugins in a directory
-- **Validation:** Checks `name`, `version`, `execute()` on each plugin class
-- **Fault Tolerance:** Defective plugins are logged but not loaded
-- **Zero Dependencies:** Python standard library only
-
-## Files
+## Dateien
 
 ```
 scripts/
-  plugin_system.py       Core: PluginBase (ABC) + PluginManager
-  cli_demo.py            Demo CLI with argparse
-  test_plugin_system.py  16+ unit tests
+  plugin_system.py       Kern: PluginBase (ABC) + PluginManager
+  cli_demo.py            Demo-CLI mit argparse
+  test_plugin_system.py  16+ Unit-Tests
 examples/
-  hello.py               Hello World plugin
-  calculator.py          Calculator plugin
-  systeminfo.py          System Info plugin
+  hello.py               Hello-World Plugin
+  calculator.py          Rechner-Plugin
+  systeminfo.py          System-Info Plugin
 ```
 
-## Quick Start
+## Schnellstart
 
-### 1. Create a Plugin
+### 1. Plugin erstellen
 
 ```python
 from plugin_system import PluginBase
 
-class MyPlugin(PluginBase):
-    name = "MyPlugin"
+class MeinPlugin(PluginBase):
+    name = "MeinPlugin"
     version = "1.0.0"
 
     def execute(self, *args, **kwargs):
-        return {"status": "ok", "message": "Hello!"}
+        return {"status": "ok", "message": "Hallo!"}
 ```
 
-### 2. Use PluginManager
+### 2. PluginManager nutzen
 
 ```python
 from plugin_system import PluginManager
 
-manager = PluginManager(plugins_dir="./my_plugins")
+manager = PluginManager(plugins_dir="./meine_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins (Deutsch)
+# Alle Plugins auflisten
 manager.list_plugins()
 
-# Execute a plugin (Deutsch)
-success, result = manager.execute_plugin("MyPlugin", param="value")
+# Plugin ausfuehren
+success, result = manager.execute_plugin("MeinPlugin", param="wert")
 if success:
     print(result)
 ```
 
-### 3. Integrate into Your App
+### 3. In eigene App integrieren
 
 ```python
-class MyApp:
+class MeineApp:
     def __init__(self):
         self.plugins = PluginManager("./plugins")
         self.plugins.discover_plugins()
@@ -95,31 +92,31 @@ class MyApp:
         return result if success else None
 ```
 
-## Plugin Interface
+## Plugin-Interface
 
-Every plugin must:
+Jedes Plugin muss:
 
-| Requirement | Details |
+| Anforderung | Details |
 |-------------|---------|
-| Inherit `PluginBase` | `from plugin_system import PluginBase` |
-| Set `name` | Class attribute, non-empty |
-| Set `version` | Class attribute, semantic versioning |
-| Implement `execute()` | Arbitrary `*args, **kwargs` |
+| `PluginBase` erben | `from plugin_system import PluginBase` |
+| `name` setzen | Klassenattribut, nicht leer |
+| `version` setzen | Klassenattribut, Semantic Versioning |
+| `execute()` implementieren | Beliebige `*args, **kwargs` |
 
-## Fault Tolerance
+## Fehlertoleranz
 
-| Error Type | Behavior |
-|-----------|----------|
-| SyntaxError in plugin | Plugin is skipped, rest loads |
-| Missing attributes | Plugin is marked as `is_valid=False` |
-| Exception in `execute()` | Returns `(False, error_message)` |
-| No plugin in directory | Empty list, no crash |
+| Fehlertyp | Verhalten |
+|-----------|-----------|
+| SyntaxError im Plugin | Plugin wird uebersprungen, Rest laedt |
+| Fehlende Attribute | Plugin wird als `is_valid=False` markiert |
+| Exception in `execute()` | Gibt `(False, error_message)` zurueck |
+| Kein Plugin im Verzeichnis | Leere Liste, kein Crash |
 
-## Änderungsprotokoll
+## Changelog
 
 ### 1.0.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/plugins to skill library
+- Migration aus MODULAR_AGENTS/plugins in Skillbibliothek
 - PluginBase ABC + PluginManager
-- 3 example plugins (Hello, Calculator, SystemInfo)
-- 16+ unit tests
-- CLI demo with argparse
+- 3 Beispiel-Plugins (Hello, Calculator, SystemInfo)
+- 16+ Unit-Tests
+- CLI-Demo mit argparse
