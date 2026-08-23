@@ -1,10 +1,10 @@
 ---
 name: dev-cycle
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-06-13
+updated: 2026-08-22
 description: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
 
 standalone: true
@@ -29,6 +29,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 > **Goal:** Structured process from feature request to validated system.
 > Every development goes through these 8 phases.
+
+> 📐 **Beilage:** [SCHALTPLAN-SOFTWAREENTWICKLUNG.html](SCHALTPLAN-SOFTWAREENTWICKLUNG.html) —
+> menschlich lesbarer „Schaltplan der Softwareentwicklung" (HTML, im Browser öffnen):
+> recherchierte Gesamtkarte aus Phasen, Regelkreisen, Rollen, Prozessketten und Test-Gates
+> (Webrecherche 08/2026), in die sich dieser 8-Phasen-Zyklus einordnet.
 
 ---
 
@@ -61,8 +66,8 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
   |            (Python code, tools, DB migrations)                 |
   |     |                                                          |
   |     v                                                          |
-  |  Phase 7   Technical Tests and Bugfixes                        |
-  |            (B/O/E tests, bugfix protocol)                      |
+  |  Phase 7   Test Execution, Review Gate and Bugfixes           |
+  |            (B/O/E tests, bugfix protocol, code review)          |
   |     |                                                          |
   |     v                                                          |
   |  Phase 8   Functional and Feature Test: USE CASES              |
@@ -74,6 +79,8 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
   - Functional description first (before code)
   - CLI First (everything controllable via terminal)
   - Clear separation of user data and system data
+  - Shift-Left: tests are DESIGNED early (phases 1/3/5) and WRITTEN
+    with the code (phase 6) - phase 7 only EXECUTES them
 ```
 
 ---
@@ -90,6 +97,8 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 **Output:**
 - Tasks in the task system (e.g., as issue, ticket, or TODO list)
 - Requirements describe WHAT is desired, not HOW
+- Each requirement carries testable acceptance criteria (Shift-Left: they become
+  the use cases of Phase 8 and the acceptance checklist)
 
 **Rules:**
 - Always formulate requirements functionally ("User can do X")
@@ -133,6 +142,9 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 **Rules:**
 - Think functionally first, then technically
+- Shift-Left: for every planning level, plan its CHECK as well — requirement →
+  acceptance criterion, service/interface → integration test, unit → unit test
+  (test-level and technique selection: [software-testing](../software-testing/SKILL.md))
 - Workflows describe processes, not implementation details
 - Every agent needs a clear profile
 - Services must work without user data
@@ -183,6 +195,7 @@ The "frontend" here is the functional description layer:
 
 **Checklist (per task):**
 ```
+  [ ] Unit tests written (TDD: test before code) and green locally?
   [ ] Works without user data (empty DB)?
   [ ] CLI command available?
   [ ] Input can come from files/folders?
@@ -195,9 +208,12 @@ The "frontend" here is the functional description layer:
 
 ---
 
-## Phase 7: Technical Tests and Bugfixes
+## Phase 7: Test Execution, Review Gate and Bugfixes
 
-**What:** Ensure technical correctness.
+**What:** Ensure technical correctness. Tests were DESIGNED in phases 1/3/5 and
+WRITTEN in phase 6 (Shift-Left) — phase 7 EXECUTES them in staged, blocking gates:
+fast tests on every commit, expensive tests (full regression, E2E, load) nightly
+or pre-release. Gate mapping and test selection: [software-testing](../software-testing/SKILL.md).
 
 **Test Types (B/O/E):**
 
@@ -206,6 +222,11 @@ The "frontend" here is the functional description layer:
 | B-Tests | External/Automated | Automated tests, CI/CD |
 | O-Tests | Functional (Input->Output) | Manual functional verification |
 | E-Tests | Subjective/Experience | UX evaluation, ergonomics |
+
+**Review Gate (before Phase 8):**
+- Code review by a second pair of eyes (peer, reviewer agent, or advisor)
+- Nothing enters use-case validation unreviewed
+- Review findings loop back to Phase 6 as change requests
 
 **On bugs:**
 - Apply the bugfix protocol
@@ -263,6 +284,27 @@ generate new requirements.
 
 ---
 
+## Control Loops (Regelkreise)
+
+The 8-phase cycle is the OUTER control loop. Inside it, faster loops run
+concurrently — the further in a loop sits, the faster its takt and the cheaper
+the fix:
+
+| Loop | Takt | Where in the cycle |
+|------|------|--------------------|
+| TDD (Red–Green–Refactor) | seconds–minutes | inside Phase 6 |
+| Test execution / CI gates | < 10 min per commit | Phase 7 → Phase 6 on red |
+| Review gate (4 eyes) | hours | between Phase 7 and Phase 8 |
+| Bugfix loop | hours | Phase 7 → Phase 6 (bugfix protocol) |
+| Use-case loop | per cycle | Phase 8 → Phase 1 |
+| Operations feedback | continuous | monitoring/incidents → Phase 1 |
+
+Rule of thumb: keep commit-to-feedback under 10 minutes — a slow loop gets
+bypassed. Visual map of all loops with timings: enclosed
+[SCHALTPLAN-SOFTWAREENTWICKLUNG.html](SCHALTPLAN-SOFTWAREENTWICKLUNG.html), sheet BL-2.
+
+---
+
 ## Phase-specific skills
 
 | Phase | Specialized skill | Trigger |
@@ -273,12 +315,30 @@ generate new requirements.
 | Phases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
 | Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
 | Phases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
+| Phases 1, 3, 7 | [software-testing](../software-testing/SKILL.md) | Choose test levels, types and design techniques; CI/CD gate mapping |
+| After Phase 8 | [github-repo-care](../github-repo-care/SKILL.en.md) | Release: publish and maintain the repository |
 
 If your skill collection has a skill index, search it for further phase-specific skills.
 
 ---
 
 ## Änderungsprotokoll
+
+### 1.2.0 (2026-08-22)
+- Shift-Left verankert (Rechercheabgleich mit Beilage-Schaltplan): Abnahmekriterien als
+  Phase-1-Output, Testentwurf je Planungsebene in Phase 3, Unit-Tests (TDD) als erster
+  Punkt der Phase-6-Checkliste; Phase 7 umbenannt in „Test Execution, Review Gate and
+  Bugfixes" — Tests werden dort ausgeführt, nicht erst geschrieben
+- Review-Gate (4-Augen-Prinzip) als expliziter Schritt vor Phase 8
+- Neuer Abschnitt „Control Loops (Regelkreise)" mit Taktzeiten (TDD, CI, Review,
+  Bugfix, Use-Case, Betrieb)
+- Phasen-Skill-Tabelle erweitert: software-testing (Phasen 1/3/7), github-repo-care
+  (nach Phase 8); Verweise auf software-testing in Phase 3 und Phase 7
+
+### 1.1.1 (2026-08-22)
+- Beilage `SCHALTPLAN-SOFTWAREENTWICKLUNG.html` (menschlich lesbare Gesamtkarte: Phasen,
+  Regelkreise, Rollen, Prozessketten, Test-Gates — Synthese einer Webrecherche 08/2026)
+  plus Verweis im Kopf der Datei
 
 ### 1.1.0 (2026-06-13)
 - New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep

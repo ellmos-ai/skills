@@ -54,9 +54,9 @@ per `do`/`click_name`/`invoke`/`tree` -- alle Koordinaten normalisiert `0..1` re
 zum virtuellen Desktop.
 
 - **Quelle (Python-Engine):** `github.com/ellmos-ai/open-compute`, lokaler Klon
-  `C:\Users\User\OneDrive\.TOPICS\.AI\.MODULES\.TOOLS\open-compute\`
+  `%USERPROFILE%\OneDrive\.TOPICS\.AI\.MODULES\.TOOLS\open-compute\`
 - **MCP-Launcher (npm-Wrapper):** `github.com/ellmos-ai/open-compute-mcp`, lokaler Klon
-  `C:\Users\User\OneDrive\.TOPICS\.AI\.MCP\open-compute-mcp\` (README/README_de/llms.txt
+  `%USERPROFILE%\OneDrive\.TOPICS\.AI\.MCP\open-compute-mcp\` (README/README_de/llms.txt
   dort sind die kanonische Doku -- dieser Skill fasst nur den Bridging-Teil zusammen).
 - **CLI-Fallback ohne MCP:** Der `oc`-Befehl (`open_compute.cli:main`) ist ein
   eigenstaendiger Konsolen-Einstiegspunkt -- funktioniert auch dort, wo (noch) kein
@@ -171,7 +171,7 @@ Prozessregel oben -- fuer den Fall, dass der Agent sie doch einmal uebersieht:
 Bereits als MCP-Server **registriert** (User-Scope, `~/.claude.json`):
 
 ```
-command: C:/Users/User/.venvs/open-compute-mcp/Scripts/python.exe
+command: %USERPROFILE%/.venvs/open-compute-mcp/Scripts/python.exe
 args:    -m open_compute.mcp_server
 env:     OC_SAFETY_MODE=allow_all
 ```
@@ -188,7 +188,7 @@ enthaelt ihn Stand 2026-08-02 **nicht**, nur die User-Scope-Registrierung in `~/
 greift automatisch): nachtragen mit
 
 ```
-claude mcp add --scope user open-compute -- "C:/Users/User/.venvs/open-compute-mcp/Scripts/python.exe" -m open_compute.mcp_server
+claude mcp add --scope user open-compute -- "%USERPROFILE%/.venvs/open-compute-mcp/Scripts/python.exe" -m open_compute.mcp_server
 ```
 
 (venv einmalig anlegen falls noetig: `python -m venv ~/.venvs/open-compute-mcp` dann
@@ -210,7 +210,7 @@ ist eine geteilte Konfigurationsdatei):** in `~/.codex/config.toml` ergaenzen:
 
 ```toml
 [mcp_servers.open-compute]
-command = "C:/Users/User/.venvs/open-compute-mcp/Scripts/python.exe"
+command = "%USERPROFILE%/.venvs/open-compute-mcp/Scripts/python.exe"
 args = ["-m", "open_compute.mcp_server"]
 
 [mcp_servers.open-compute.env]
@@ -223,8 +223,8 @@ OC_SAFETY_MODE = "allow_all"
 Bash/Shell aufrufen, sofern die venv existiert:
 
 ```
-& "C:\Users\User\.venvs\open-compute-mcp\Scripts\oc.exe" capture
-& "C:\Users\User\.venvs\open-compute-mcp\Scripts\oc.exe" do --help
+& "%USERPROFILE%\.venvs\open-compute-mcp\Scripts\oc.exe" capture
+& "%USERPROFILE%\.venvs\open-compute-mcp\Scripts\oc.exe" do --help
 ```
 
 Das ist kein MCP-Tool-Call-Loop (kein strukturiertes Bild-Rueckgabeformat), aber sofort
@@ -232,7 +232,7 @@ nutzbar, ohne die geteilte `config.toml` anzufassen.
 
 ### agy / Antigravity
 
-**Nicht registriert** in der kanonischen agy-MCP-Config `C:\Users\User\.gemini\config\mcp_config.json`
+**Nicht registriert** in der kanonischen agy-MCP-Config `%USERPROFILE%\.gemini\config\mcp_config.json`
 (Stand 2026-08-02, geprueft: kein `open-compute`-Eintrag; die Datei listet u. a.
 `ellmos-codecommander`, `ellmos-filecommander`, `n8n-manager-mcp`, `ellmos-controlcenter-mcp`,
 `ellmos-homebase-mcp`, `ellmos-servercommander-mcp`).
@@ -243,7 +243,7 @@ node-basierten Muster der Datei ergaenzen, analog zu den anderen `ellmos-*`-Serv
 
 ```json
 "open-compute": {
-  "command": "C:\\Users\\User\\.venvs\\open-compute-mcp\\Scripts\\python.exe",
+  "command": "%USERPROFILE%\\.venvs\\open-compute-mcp\\Scripts\\python.exe",
   "args": ["-m", "open_compute.mcp_server"],
   "env": { "OC_SAFETY_MODE": "allow_all" }
 }

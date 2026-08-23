@@ -1,6 +1,6 @@
 ---
 name: software-testing
-version: 1.0.0
+version: 1.0.1
 type: knowledge-protocol
 author: Lukas Geiger
 created: 2026-08-22
@@ -91,6 +91,19 @@ justieren). Umgedrehte Pyramide (viele UI-Tests) = langsam + flaky → vermeiden
 | Release-Kandidat | Smoke auf Staging, UAT, Abnahme |
 | Produktion (Shift-Right) | Monitoring/Observability, Canary/Blue-Green, Feature Flags, ggf. Chaos-Experimente |
 
+**Zeitbudgets & Blockier-Regeln (Faustwerte aus der Praxis):**
+
+- **Commit-zu-Feedback < 10 Minuten** für den schnellen Pfad (Lint + Unit + kritische
+  Integrationstests); Gesamtpipeline bis Staging **< 30–45 Minuten**; volle Regression
+  nightly oder vor Release. Ein Regelkreis, der langsamer taktet, wird umgangen.
+- **Blockierend vs. meldend:** Unit-, Integrations- und Smoke-Gates blockieren IMMER
+  (bei Rot kein Merge/Deploy). Nightly-Stufen (Regression, Last, DAST) melden per
+  Ticket/Fix, blockieren aber nicht jeden Commit. Nach dem Prod-Deploy: Smoke +
+  Monitoring — bei Rot Rollback + Incident.
+- **Übergabepunkt:** Der Commit (git push) trennt Inner Loop (lokal: TDD, Unit,
+  schnelle Iteration) vom Outer Loop (geteilte Pipeline mit Gates). Was sich in den
+  Inner Loop verlagern lässt, wird dort am billigsten gefangen (Shift-Left).
+
 ### Klassisch (V-Modell): Tests beim Spezifizieren entwerfen
 
 Anforderungen↔Abnahmetest · Systemdesign↔Systemtest · Architektur↔Integrationstest ·
@@ -168,11 +181,31 @@ was Skripte übersehen.
   beim Schreiben von Code.
 - **`bugfix-protocol`** — 6-Phasen-Diagnose eines konkreten Bugs.
 - **`bugsweep`** — systematischer Bug-Suchlauf über eine Codebasis.
-- **`dev-cycle`** — 8-Phasen-Gesamtzyklus (Tests sind dort Phase 7; dieser Skill füllt
-  aus, WELCHE Tests dort laufen sollen).
+- **`dev-cycle`** — 8-Phasen-Gesamtzyklus (ab dessen v1.2.0: Tests werden in den
+  Phasen 1/3/5 entworfen, in Phase 6 geschrieben und in Phase 7 ausgeführt; dieser
+  Skill füllt aus, WELCHE Tests wo laufen sollen).
 
 ## Referenz
 
 Vollständiger Katalog (alle Teststufen, Testarten inkl. nicht-funktionaler Detailtabelle,
 alle Entwurfsverfahren, Agile Quadrants, statisch/dynamisch, V-Modell, Quellen):
 → `testarten-katalog.md` (im selben Ordner)
+
+Visuelle Gesamtkarte — Phasen, Regelkreise, Rollen und Test-Gates als „Schaltplan
+der Softwareentwicklung" (Blatt BL-5 = Test-Einhängung, BL-2 = Regelkreis-Takte):
+→ `../dev-cycle/SCHALTPLAN-SOFTWAREENTWICKLUNG.html` (im Browser öffnen)
+
+---
+
+## Änderungsprotokoll
+
+### 1.0.1 (2026-08-22)
+- Zeitbudgets & Blockier-Regeln für CI/CD-Gates ergänzt (< 10 min Fast Path,
+  < 30–45 min Pipeline; blockierend vs. meldend; Rollback nach Prod-Rot) sowie
+  der Commit als Übergabepunkt Inner/Outer Loop
+- Verweis auf die Schaltplan-Beilage im dev-cycle-Skill; dev-cycle-Abgrenzung an
+  dessen v1.2.0 (Shift-Left: entwerfen 1/3/5, schreiben 6, ausführen 7) angepasst
+
+### 1.0.0 (2026-08-22)
+- Erstversion aus Online-Recherche (ISTQB-Systematik, Testpyramide, Agile Testing
+  Quadrants, CI/CD-Gates, moderne Verfahren)

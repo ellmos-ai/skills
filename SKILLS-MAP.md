@@ -100,7 +100,7 @@ skills/
 ├── production/ (1)
 │   └── textproduction — Details stehen in der SKILL.md.
 ├── research/ (1)
-│   └── research-agent — Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+│   └── research-agent — Project-first Research pipeline with live gates, source/PDF evidence, claim boundaries, compute and publication controls; includes an optional PubMed/arXiv standard-library helper.
 ├── therapy/ (20)
 │   ├── act-techniques — Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
 │   ├── behavioral-activation — Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.

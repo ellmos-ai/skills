@@ -32,7 +32,7 @@ Dokumentiere das Ergebnis kurz im Session-Log.
 **Standard-Frequenz:** 1x täglich
 
 ```text
-Lies C:\Users\User\CLAUDE.md und öffne das Community Outreach Workspace unter <workspace_path>.
+Lies ~/CLAUDE.md und öffne das Community Outreach Workspace unter <workspace_path>.
 
 Führe den 4-Phasen-Zyklus aus:
 1. Prüfe POST-AUSGANG.md auf Inbound-Diskussionen.

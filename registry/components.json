@@ -469,7 +469,7 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/dev-cycle/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
       "description": "8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.",
       "languages": [
@@ -765,7 +765,7 @@
       "type": "knowledge-protocol",
       "category": "dev",
       "path": "skills/dev/software-testing/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "status": "active",
       "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
       "languages": [
@@ -1529,9 +1529,9 @@
       "type": "tool",
       "category": "research",
       "path": "skills/research/research-agent/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "status": "active",
-      "description": "Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.",
+      "description": "Project-first Research pipeline with live gates, source/PDF evidence, claim boundaries, compute and publication controls; includes an optional PubMed/arXiv standard-library helper.",
       "languages": [
         "de",
         "en",

@@ -34,6 +34,13 @@ ALLOWED_HOME_SEGMENTS = {
     "$home", "$userprofile", "...", "…", "public", "runner", "test",
     "user", "username", "|",
 }
+# On Windows, "user" is not a placeholder we may trust: this host's real account
+# name IS "User", so C:\Users\User\... is a concrete path that merely looks
+# generic. Treating it as a placeholder made the check systematically blind here
+# -- it waved through eight real paths across three skills (found 2026-08-23).
+# Under POSIX, /home/user stays allowed: it is an established documentation
+# convention, and the detector that matches it lives in the repository itself.
+ALLOWED_WINDOWS_HOME_SEGMENTS = ALLOWED_HOME_SEGMENTS - {"user", "username"}
 CONTENT_PATTERNS = {
     "host-scoped device name": re.compile(
         r"\b(?:ASUS|WORKSTATION|DESKTOP|LAPTOP|MACSTUDIO)-"
@@ -114,10 +121,13 @@ def tracked_text_files() -> list[Path]:
 
 def concrete_home_matches(text: str) -> list[str]:
     findings = []
-    for pattern in (WINDOWS_HOME, POSIX_HOME):
+    for pattern, allowed in (
+        (WINDOWS_HOME, ALLOWED_WINDOWS_HOME_SEGMENTS),
+        (POSIX_HOME, ALLOWED_HOME_SEGMENTS),
+    ):
         for match in pattern.finditer(text):
             segment = match.group(1).lower()
-            if segment not in ALLOWED_HOME_SEGMENTS and not segment.startswith(("<", "{", "$", "%")):
+            if segment not in allowed and not segment.startswith(("<", "{", "$", "%")):
                 findings.append(match.group(0).strip())
     return findings
 
