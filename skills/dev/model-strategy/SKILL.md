@@ -1,10 +1,10 @@
 ---
 name: model-strategy
-version: 2.0.0
+version: 2.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
+updated: 2026-07-02
 description: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 
 standalone: true
@@ -25,6 +25,20 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 # Model-Switching Strategie
 
 > Multi-Modell Orchestrierung: Score-basierte Modellauswahl, Cross-Agent-Delegation, Advisor-Pairing, Eskalations-Trigger und Kosten-Effizienz-Optimierung
+
+---
+
+## ⚠️ PRÄZEDENZ-REGEL (User-Entscheid 2026-07-02): Fable 5 ersetzt Opus 4.8
+
+Der Katalog unten (v2.0.0) wurde **vor** dem Erscheinen von Fable 5 als Spitzenmodell
+geschrieben. Seit 2026-07-02 gilt: **Überall, wo unten Opus 4.8 empfohlen wird
+(Level-4-Reviewer, Score 40–50, mathematische Beweisführung, höchste Rigorosität,
+Advisor), ist Fable 5 das Modell der Wahl.** Opus 4.8 ist nur noch Fallback, wenn
+Fable 5 nicht verfügbar ist. Lukas setzt Fable 5 **absichtlich** für diese Aufgaben ein —
+ein automatischer/stiller Wechsel auf Opus 4.8 entspricht NICHT seiner Strategie und
+ist dem User sofort zu melden (vgl. Memory `feedback_model_switch_transparency`:
+stiller Fable→Opus-Switch 2026-07-02, Modell-Attribution forensisch via
+Transkript-JSONL `message.model` prüfbar).
 
 ---
 
@@ -251,6 +265,10 @@ curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" 
 ---
 
 ## Changelog
+
+### 2.1.0 (2026-07-02)
+- PRÄZEDENZ-REGEL: Fable 5 ersetzt Opus 4.8 in allen Level-4-/Reviewer-/Beweis-Empfehlungen (User-Entscheid; Katalog v2.0.0 entstand vor Fable 5)
+- Stiller-Modellwechsel-Warnung ergänzt (Vorfall 2026-07-02, Forensik via Transkript `message.model`)
 
 ### 2.0.0 (2026-06-12)
 - Cross-Agent-Delegation: Gemini, Codex, Ollama (lokaler Host) als Routing-Ziele
