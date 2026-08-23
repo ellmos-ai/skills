@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-08-23
+
+- **`visibility` is now a declared, enforced field (breaking)**: every canonical
+  `SKILL.md` must carry `visibility`. A missing field is read as private
+  (`private-only`), not as public — the same fail-closed default already used
+  elsewhere. Translation variants keep inheriting from their canonical sibling,
+  so only an *explicit* private declaration demotes them.
+- **Listing and `.gitignore` must now agree**: a new consistency gate compares
+  the declared visibility of every skill against what git actually tracks.
+  Public-but-untracked and tracked-but-private both fail the gate, so the two
+  switches can no longer disagree silently.
+- **`skills/third-party/` areal for foreign skills**: foreign material lives in
+  its own areal under a reduced five-field contract (`name`, `description`,
+  `third_party`, `license`, `upstream`) instead of the full nine, with SPDX
+  form-checking and an allow-list of redistributable licences. A foreign skill
+  without a resolvable licence cannot enter the areal. `skills/_reference/` is
+  gitignored and holds material we only use, never redistribute.
+- **Two new optional frontmatter fields**: `third_party` and `license` may be
+  set on any skill; they carry no parser consequence unless the skill sits in
+  the third-party areal, where both become mandatory.
+- **Windows placeholder gap closed in the privacy gate**: `user` and `username`
+  were treated as generic home-directory placeholders, which made the scanner
+  blind to real paths on a Windows account literally named `User`. Windows and
+  POSIX allow-lists are now separate; the sharper gate immediately surfaced two
+  further concrete paths, one of them JSON-escaped.
+- **Tests**: eleven negative tests for the third-party gate (including two for
+  the collision between the visibility gate and the areal's reduced contract,
+  where a foreign skill would otherwise have been tracked *and* private).
+
 ## 2026-08-22
 
 - **`agents-bridge` 3.0.1 Windows portability fix**: normalized both sides of
