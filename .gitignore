@@ -60,6 +60,8 @@ testing/*
 !testing/test_public_private_boundary.py
 !testing/changed_skill_gate.py
 !testing/test_changed_skill_gate.py
+!testing/language_gate.py
+!testing/language_baseline.json
 !testing/test_public_registry.py
 !testing/test_metadata.py
 tools/

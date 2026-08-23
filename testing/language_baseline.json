@@ -1,0 +1,195 @@
+{
+  "zweck": "Bekannte und begruendete Abweichungen vom Sprachstandard (SKILL.md deutsch, SKILL.en.md englisch).",
+  "regel": "Eine Ausnahme ohne Grund ist ein Fehler, kein Zustand. Eintraege mit temporaer=true sind offene Reparaturen, keine Dauerloesung. Klasse 'offen-en' ist die Gegenrichtung: dort wurde die englische Fassung mit der deutschen ueberschrieben -- vom Sprach-Gate am 2026-08-23 entdeckt, nicht vom urspruenglichen Befund.",
+  "quelle": "Sprachbruch durch i18n-Lauf 6a2d333 (2026-07-30), Ticket T-20260823-180248572",
+  "stand": "2026-08-23",
+  "ausnahmen": [
+    {
+      "skill": "automation-self-care",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (8 Commits geprueft), nie deutsche Fassung"
+    },
+    {
+      "skill": "build-your-users-mind",
+      "klasse": "bewusst-englisch",
+      "grund": "Publizierbarer, nutzerneutraler Kern (Gegenstueck zu tom-lm) -- englisch ist hier Absicht, siehe .AI/CLAUDE.md"
+    },
+    {
+      "skill": "document-chunker",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (6 Commits geprueft)"
+    },
+    {
+      "skill": "letter-hooker",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+    },
+    {
+      "skill": "semantic-persona-routing",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (6 Commits geprueft)"
+    },
+    {
+      "skill": "staircase-routing",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+    },
+    {
+      "skill": "system-onboarding",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+    },
+    {
+      "skill": "wayfinding-routing",
+      "klasse": "bewusst-englisch",
+      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+    },
+    {
+      "skill": "act-techniques",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 26 -> heute 25) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 248 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "behavioral-activation",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 22 -> heute 23) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 290 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "cloud-communication-protocols",
+      "klasse": "offen",
+      "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
+      "temporaer": true
+    },
+    {
+      "skill": "cognitive-restructuring",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 12 -> heute 11) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 222 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "counseling-basics",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 11 -> heute 10) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 204 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "cron-tuner",
+      "klasse": "offen",
+      "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
+      "temporaer": true
+    },
+    {
+      "skill": "dev-cycle",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 15 -> heute 18) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "c830ef9 (2026-06-13, 302 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "guideline-therapies-overview",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 23 -> heute 22) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 202 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "mindfulness-basics",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 12 -> heute 13) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 198 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "motivational-interviewing",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 22 -> heute 21) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "61d8f5c (2026-06-12, 282 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "music-composer",
+      "klasse": "offen",
+      "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
+      "temporaer": true
+    },
+    {
+      "skill": "piggyback-hosting",
+      "klasse": "offen",
+      "grund": "SKILL.md englisch, keine SKILL.en.md -- Herkunft klaeren (fremd? dann third_party-Flag), sonst deutsche Fassung anlegen",
+      "temporaer": true
+    },
+    {
+      "skill": "rbx-studio",
+      "klasse": "offen",
+      "grund": "Ueberschriften-Struktur weicht ab (alt 15 -> heute 14) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
+      "deutscher_stand": "17481b4 (2026-07-23, 248 Z.)",
+      "temporaer": true
+    },
+    {
+      "skill": "lebende-verfassung",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "mail-clean-grab",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "pipeline-bootstrapper",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "privat-mail-writer",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "project-bootstrapper",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "update-cli-docs",
+      "klasse": "offen-en",
+      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
+      "temporaer": true
+    },
+    {
+      "skill": "agent-config-sync",
+      "klasse": "redesign",
+      "grund": "Provider-neutraler Umbau (148 -> 48 Z.) -- gewollt, Rueckholung waere Rueckschritt",
+      "deutscher_stand": "fd59d02 (2026-07-27, 148 Z.)"
+    },
+    {
+      "skill": "exposure-guidance",
+      "klasse": "redesign",
+      "grund": "Umfang um 37% reduziert -- vor Rueckholung pruefen, ob gewollt",
+      "deutscher_stand": "61d8f5c (2026-06-12, 476 Z.)"
+    },
+    {
+      "skill": "mcp-config-sync",
+      "klasse": "redesign",
+      "grund": "Provider-neutraler Umbau v2.0.0 (87 -> 44 Z.) -- gewollt; offene Frage im Deployment siehe .SKILLS/TODO.md",
+      "deutscher_stand": "fd59d02 (2026-07-27, 87 Z.)"
+    },
+    {
+      "skill": "yt-transcriber",
+      "klasse": "redesign",
+      "grund": "Bewusst auf einen Compat-Wrapper eingedampft (113 -> 27 Z.), leitet auf video-transcriber weiter",
+      "deutscher_stand": "c79f630 (2026-06-12, 113 Z.)"
+    }
+  ]
+}
