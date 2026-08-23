@@ -121,6 +121,14 @@ skills/utilities/mail-clean-grab/
 skills/utilities/yt-transcriber/
 skills/utilities/video-transcriber/_reports/
 
+# -- Privatblock 3 (Nutzerentscheid 2026-08-23) --
+# hackathon-operator war getrackt und oeffentlich abrufbar. Der Inhalt war
+# unkritisch (privacy_gate lief gruen, die Fassung war am 2026-08-20 bewusst
+# user-/systemneutral umformuliert), aber das Frontmatter trug durchgehend
+# visibility: private-only und "nicht pushen" -- der Eintrag war also kein
+# Rueckstand, sondern galt. Nutzerentscheid: bleibt zunaechst privat.
+skills/production/hackathon-operator/
+
 # -- bekannter Privatblock 2 (Incident 2026-08-15, Commit 9d3654c) --
 # Ein automatischer Banner-Generierungslauf hat diese privaten/Drittanbieter-
 # Skill-Verzeichnisse versehentlich getrackt (git add -A über "alle Skills"

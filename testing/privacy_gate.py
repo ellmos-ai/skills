@@ -50,6 +50,7 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/dev/hyperframes-registry",
     "skills/dev/remotion-to-hyperframes",
     "skills/dev/store-welle-usertest",
+    "skills/production/hackathon-operator",
     "skills/utilities/embedded-captions",
     "skills/utilities/faceless-explainer",
     "skills/utilities/general-video",
