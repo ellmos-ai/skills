@@ -12,7 +12,7 @@
     {
       "skill": "build-your-users-mind",
       "klasse": "bewusst-englisch",
-      "grund": "Publizierbarer, nutzerneutraler Kern (Gegenstueck zu tom-lm) -- englisch ist hier Absicht, siehe .AI/CLAUDE.md"
+      "grund": "Publizierbarer, nutzerneutraler Kern eines privaten Skills -- englisch ist hier Absicht (Paar-Tabelle in SKILLS-MAP-PRIVATE.md)"
     },
     {
       "skill": "document-chunker",
