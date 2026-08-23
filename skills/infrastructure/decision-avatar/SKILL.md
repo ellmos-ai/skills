@@ -19,6 +19,7 @@ category: infrastructure
 tags: [entscheidung, avatar, theory-of-mind, feedback, konfidenz, provenance]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

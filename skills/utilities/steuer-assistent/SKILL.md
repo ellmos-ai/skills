@@ -16,6 +16,7 @@ category: utilities
 tags: [tax, germany, receipts, finance, wrapper, pointer-skill]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="steuer-assistent banner">

@@ -15,6 +15,7 @@ category: assist
 tags: [forms, schema, validation, accessibility]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

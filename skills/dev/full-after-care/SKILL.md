@@ -27,6 +27,7 @@ category: dev
 tags: [github, repo, maintenance, legal, i18n, cross-linking, organization, documentation]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: [git, gh, rg]

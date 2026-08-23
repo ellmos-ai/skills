@@ -16,6 +16,7 @@ category: utilities
 tags: [legal, law, germany, wrapper, pointer-skill]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="law-checker banner">

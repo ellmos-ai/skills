@@ -19,8 +19,36 @@ created: 2026-03-12                 # Erstelldatum (ISO 8601)
 updated: 2026-03-12                 # Letzte Aenderung (ISO 8601)
 description: >
   Kurze Beschreibung der Faehigkeit.
+visibility: public                  # public | public potential | private profile | private-only
 ---
 ```
+
+### `visibility` -- wie weit darf der Skill nach aussen?
+
+**Fail-closed:** Fehlt das Feld, gilt der Skill als **privat** (`DEFAULT_VISIBILITY` in
+`build_public_registry.py`). Ein vergessenes Feld veroeffentlicht also nichts -- es haelt
+zurueck. Deshalb ist das Feld Pflicht: Jeder Skill beantwortet die Frage selbst, statt sie
+offenzulassen.
+
+| Wert | Bedeutung | Im oeffentlichen Repo? |
+|---|---|---|
+| `public` | Nutzerneutral und freigegeben | ja, getrackt |
+| `public potential` | Koennte spaeter veroeffentlicht werden, noch nicht entschieden | nein |
+| `private profile` | Persoenliche Daten, Vorlagen, Vorgaben -- nie | nein |
+| `private-only` | Zweck/Implementierung host- oder systemgebunden -- nie als solcher | nein |
+
+**Die Deklaration muss zum Git-Zustand passen.** `visibility` steuert die Listung (Registry,
+`SKILLS-MAP.md`, Pages); die `.gitignore` plus `FORBIDDEN_PUBLIC_SKILL_DIRECTORIES` in
+`testing/privacy_gate.py` steuern, ob die Datei ueberhaupt im oeffentlichen Repo liegt.
+Widersprechen sich beide, luegt eine Seite -- `privacy_gate.py` blockiert dann den Push:
+
+* *privat deklariert, aber getrackt* -- oeffentlich lesbar, obwohl nirgends gelistet
+  (die gefaehrliche Richtung: eine Veroeffentlichung, die keine Liste je zeigen wuerde)
+* *`public`/undeklariert, aber ausgeschlossen* -- der Katalog verspricht etwas, das im
+  oeffentlichen Repo nicht liegt
+
+Statusbegriffe und die Paar-Tabelle "oeffentlicher Kern <-> privater Rest" fuehrt
+`SKILLS-MAP-PRIVATE.md` (nicht im oeffentlichen Repo).
 
 ## Kompatibilitaets-Felder
 

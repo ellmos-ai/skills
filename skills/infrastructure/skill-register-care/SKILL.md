@@ -21,6 +21,7 @@ category: infrastructure
 tags: [skills, register, index, drift, pflege, meta]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

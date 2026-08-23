@@ -24,6 +24,7 @@ category: dev
 tags: [automation, check, rotation, registry, pipeline, log, audit, wartung]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

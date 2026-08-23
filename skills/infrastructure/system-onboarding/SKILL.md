@@ -18,6 +18,7 @@ category: infrastructure
 tags: [onboarding, setup, agent-runtimes, windows, macos, verification, sync]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

@@ -18,6 +18,7 @@ category: utilities
 tags: [windows, storage, cleanup, forensics, onedrive, pagefile, logs]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: [powershell]
   services: []

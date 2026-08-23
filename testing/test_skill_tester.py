@@ -33,6 +33,7 @@ category: utilities
 tags: [example, test]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

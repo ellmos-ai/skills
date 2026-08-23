@@ -15,6 +15,7 @@ category: assist
 tags: [contacts, organization, deduplication, privacy]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

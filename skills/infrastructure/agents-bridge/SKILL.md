@@ -13,6 +13,7 @@ category: infrastructure
 tags: [multi-agent, bootstrap, recovery, messaging, memory, provider-neutral]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 

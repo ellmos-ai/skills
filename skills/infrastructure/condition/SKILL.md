@@ -20,6 +20,7 @@ category: infrastructure
 tags: [condition, gate, prompt-language, goal, trigger, blocker, timing, dependency, workflow]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

@@ -15,6 +15,7 @@ category: assist
 tags: [notes, capture, summarize, organize]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

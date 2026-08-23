@@ -15,6 +15,7 @@ category: infrastructure
 tags: [portable, rag, ollama, usb-drive, offline, local-llm]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

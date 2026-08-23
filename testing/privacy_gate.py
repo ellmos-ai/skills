@@ -9,6 +9,16 @@ import sys
 from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+
+# Single source for the visibility contract -- deliberately imported instead of
+# copied, because two lists that drift apart are the very failure this gate exists
+# to catch.
+sys.path.insert(0, str(REPOSITORY_ROOT))
+from build_public_registry import (  # noqa: E402
+    DEFAULT_VISIBILITY,
+    PRIVATE_VISIBILITY_VALUES,
+)
+
 ALLOWED_TRACKED_IGNORED: set[str] = set()
 CONTENT_SCAN_EXCLUSIONS = {
     "testing/privacy_gate.py",
@@ -124,6 +134,59 @@ def content_findings(path: Path) -> list[str]:
     return findings
 
 
+def declared_visibility(path: Path) -> str:
+    """Return the ``visibility`` a skill declares in its frontmatter.
+
+    Fail closed: a missing field counts as private. Silence is an unanswered
+    question, and an unanswered question must never publish anything.
+    """
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return DEFAULT_VISIBILITY
+    if not text.startswith("---"):
+        return DEFAULT_VISIBILITY
+    end = text.find("\n---", 3)
+    frontmatter = text[:end] if end != -1 else text
+    match = re.search(r"^visibility:\s*(.+)$", frontmatter, re.M)
+    if not match:
+        return DEFAULT_VISIBILITY
+    return match.group(1).strip().strip("\"'").lower()
+
+
+def visibility_consistency_errors(tracked: set[str]) -> list[str]:
+    """Declared visibility and Git tracking must agree -- otherwise one of them lies.
+
+    Both directions are reported, because both are wrong; only the damage differs:
+
+    * ``declared private but tracked`` -- the file is readable on GitHub while no
+      catalogue lists it. This is the dangerous direction: an unsupervised
+      publication that no listing would ever reveal.
+    * ``public (or undeclared) but excluded from Git`` -- the catalogue would
+      promise something the public repository does not contain.
+    """
+    errors = []
+    for path in sorted(REPOSITORY_ROOT.glob("skills/*/*/SKILL.md")):
+        relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+        if "/_" in relative:  # _archive and other underscore folders are not skills
+            continue
+        visibility = declared_visibility(path)
+        is_private = visibility in PRIVATE_VISIBILITY_VALUES
+        is_tracked = relative in tracked
+        if is_private and is_tracked:
+            errors.append(
+                f"{relative}: declares '{visibility}' but is tracked -- publicly "
+                "readable while listed nowhere; add the directory to .gitignore "
+                "and FORBIDDEN_PUBLIC_SKILL_DIRECTORIES, then 'git rm -r --cached'"
+            )
+        elif not is_private and not is_tracked:
+            errors.append(
+                f"{relative}: declares '{visibility}' but is excluded from Git -- "
+                "either declare a private visibility or stop excluding it"
+            )
+    return errors
+
+
 def run_gate() -> list[str]:
     errors = []
     tracked = git_lines("ls-files")
@@ -141,6 +204,7 @@ def run_gate() -> list[str]:
         relative = path.relative_to(REPOSITORY_ROOT).as_posix()
         for finding in content_findings(path):
             errors.append(f"{relative}: {finding}")
+    errors.extend(visibility_consistency_errors(set(tracked)))
     return errors
 
 

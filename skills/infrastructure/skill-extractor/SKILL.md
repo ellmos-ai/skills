@@ -14,6 +14,7 @@ category: infrastructure
 tags: [skills, extraction, transcript, chatverlauf, meta, dedup, neutralisierung, workflow]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---

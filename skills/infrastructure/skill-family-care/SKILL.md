@@ -21,6 +21,7 @@ category: infrastructure
 tags: [skills, familien, pflege, routing, meta]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

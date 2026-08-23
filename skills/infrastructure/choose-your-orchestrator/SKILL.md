@@ -23,6 +23,7 @@ tags: [orchestrierung, multi-agent, delegation, routing, budget, matruschka, ses
 aliases: [choose-your-orchestrator]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

@@ -15,6 +15,7 @@ tags: [academic, study-management, deadlines, organization, university]
 aliases: [academic-study-control, academic-study-control-de]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">

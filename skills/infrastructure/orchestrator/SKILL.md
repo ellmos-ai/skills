@@ -14,6 +14,7 @@ category: infrastructure
 tags: [orchestrierung, multi-agent, delegation, evidenz, checkpoint, workflow]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---

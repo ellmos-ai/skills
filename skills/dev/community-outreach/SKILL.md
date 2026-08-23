@@ -24,6 +24,7 @@ dependencies:
   tools: []
   python: [pytest]
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="community-outreach banner">

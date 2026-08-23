@@ -17,6 +17,7 @@ category: utilities
 tags: [music, audio, score, composition, chiptune, ambient, electronic, video-sync, waveform-synthesis]
 language: en
 status: stable
+visibility: public
 dependencies:
   tools: [ffmpeg]
   services: []

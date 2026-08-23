@@ -20,6 +20,7 @@ category: infrastructure
 tags: [skills, finder, routing, discovery, meta]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

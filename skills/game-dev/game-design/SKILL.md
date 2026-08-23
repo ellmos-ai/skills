@@ -15,6 +15,7 @@ category: game-dev
 tags: [game-design, roblox, rollen, workflow, gdd, konzept, monetarisierung, qa, gamedev]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/game-design/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

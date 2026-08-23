@@ -19,6 +19,7 @@ category: infrastructure
 tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

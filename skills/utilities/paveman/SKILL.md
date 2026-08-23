@@ -26,6 +26,7 @@ category: utilities
 tags: [kürzen, kompression, regeldatei, gedächtnis, deterministisch, dry-run, rollback, dokumentation]
 language: de
 status: active
+visibility: public
 
 # Abhängigkeiten
 dependencies:

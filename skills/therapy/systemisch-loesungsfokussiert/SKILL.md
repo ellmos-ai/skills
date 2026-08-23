@@ -15,6 +15,7 @@ category: therapy
 tags: [sfbt, systemic, solution-focused, miracle-question, scaling, circular, questioning-techniques, de-shazer]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

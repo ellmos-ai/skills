@@ -15,6 +15,7 @@ category: dev
 tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---

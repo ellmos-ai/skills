@@ -15,6 +15,7 @@ category: infrastructure
 tags: [skills, audit, cluster, recherche, install, security, installer, meta, workflow, branch, fork]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': ['git'], 'services': ['websearch'], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer/', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

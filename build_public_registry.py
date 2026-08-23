@@ -104,9 +104,42 @@ def _canonical_skill_artifact(relative: str) -> bool:
     return len(parts) == 4 and parts[-1] == "SKILL.md"
 
 
+#: Values that mark a skill as private. Kept in one place so the default below
+#: cannot drift apart from the checks that consume it.
+PRIVATE_VISIBILITY_VALUES = {"private", "private-only", "private profile", "no-push"}
+
+#: Fail closed: a skill without an explicit ``visibility`` is treated as PRIVATE.
+#: A missing field is an unanswered question, and an unanswered question must not
+#: publish anything. This forces every skill to declare itself; the consistency
+#: check in ``testing/privacy_gate.py`` enforces that the declaration and the
+#: .gitignore exclusion agree.
+DEFAULT_VISIBILITY = "private-only"
+
+
 def _private_visibility(metadata: dict) -> bool:
-    visibility = str(metadata.get("visibility") or "public").strip().lower()
-    return visibility in {"private", "private-only", "private profile", "no-push"}
+    """Fail closed: no declaration means private.
+
+    Only for *canonical* SKILL.md, where the field is mandatory (see
+    FRONTMATTER_REQUIRED_FIELDS in testing/skill_tester.py). Silence there is an
+    unanswered question, and an unanswered question must not publish anything.
+    """
+    visibility = str(metadata.get("visibility") or DEFAULT_VISIBILITY).strip().lower()
+    return visibility in PRIVATE_VISIBILITY_VALUES
+
+
+def _declares_private(metadata: dict) -> bool:
+    """Only an *explicit* private declaration counts -- for inheriting files.
+
+    A skill is a folder, not a file: the canonical SKILL.md decides for the whole
+    root, translations under EN/, ES/, JA/, RU/, ZH/ inherit that decision. So a
+    missing field here is not silence but agreement, and applying the fail-closed
+    default would drop every translation of every public skill. A variant may
+    still contradict explicitly -- then the stricter statement wins.
+    """
+    visibility = metadata.get("visibility")
+    if visibility is None:
+        return False
+    return str(visibility).strip().lower() in PRIVATE_VISIBILITY_VALUES
 
 
 def git_skill_artifacts(repository_root: Path | None = None) -> list[str] | None:
@@ -169,7 +202,7 @@ def git_skill_artifacts(repository_root: Path | None = None) -> list[str] | None
                 # audit instead of silently dropping a tracked public input.
                 pass
             else:
-                if _private_visibility(metadata):
+                if _declares_private(metadata):
                     continue
         public_files.append(relative)
     return sorted(public_files)
@@ -370,8 +403,7 @@ def registry_language_errors(
         if path.parent.parent.name.startswith("_"):
             continue
         metadata = read_frontmatter(path)
-        visibility = str(metadata.get("visibility") or "public").strip().lower()
-        if visibility in {"private", "private-only", "private profile", "no-push"}:
+        if _private_visibility(metadata):
             continue
         errors.extend(
             unknown_language_variant_errors(
@@ -411,8 +443,7 @@ def canonical_core_language_errors(
         if path.parent.parent.name.startswith("_"):
             continue
         metadata = read_frontmatter(path)
-        visibility = str(metadata.get("visibility") or "public").strip().lower()
-        if visibility in {"private", "private-only", "private profile", "no-push"}:
+        if _private_visibility(metadata):
             continue
 
         relative_path = path.relative_to(root).as_posix()

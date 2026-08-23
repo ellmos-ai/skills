@@ -15,6 +15,7 @@ category: dev
 tags: [bugs, debugging, sweep, quality-assurance, workflow, convergence]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

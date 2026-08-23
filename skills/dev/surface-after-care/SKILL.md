@@ -31,6 +31,7 @@ category: dev
 tags: [github, repo, maintenance, privacy, i18n, documentation, visibility, issues]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: [git, gh, rg]

@@ -25,6 +25,7 @@ category: dev
 tags: [hygiene, maintenance, cleanup, documentation, tasksolver, writer, maintainer, autonomy, goal, work-autonomous, ticket-master]
 language: de
 status: active
+visibility: public
 
 # Abhaengigkeiten
 dependencies:

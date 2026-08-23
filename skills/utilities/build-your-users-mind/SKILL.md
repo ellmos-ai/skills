@@ -19,6 +19,7 @@ category: utilities
 tags: [theory-of-mind, user-model, decision-avatar, feedback, privacy, pointer-skill]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

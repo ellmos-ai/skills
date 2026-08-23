@@ -23,6 +23,7 @@ category: infrastructure
 tags: [pingpong, sync, listener, goal, loop, cadence, filecommander]
 language: de
 status: active
+visibility: public
 
 # Abhängigkeiten
 dependencies:

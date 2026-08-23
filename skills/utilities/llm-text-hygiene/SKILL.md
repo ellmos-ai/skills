@@ -1,5 +1,6 @@
 ---
 language: de
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">

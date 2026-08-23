@@ -22,6 +22,7 @@ category: infrastructure
 tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

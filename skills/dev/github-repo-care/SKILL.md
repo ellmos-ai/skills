@@ -16,6 +16,7 @@ category: dev
 tags: [github, repo, release, privacy, i18n, marketing, ci, documentation]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

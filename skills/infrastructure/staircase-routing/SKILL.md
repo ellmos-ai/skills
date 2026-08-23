@@ -18,6 +18,7 @@ category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

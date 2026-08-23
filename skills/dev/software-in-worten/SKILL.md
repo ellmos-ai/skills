@@ -14,6 +14,7 @@ category: dev
 tags: [design, ui, skills, methodik, uebersetzung, entwurf]
 language: de
 status: stable
+visibility: public
 standalone: true
 ---
 

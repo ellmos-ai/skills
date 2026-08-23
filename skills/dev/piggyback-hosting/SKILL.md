@@ -16,6 +16,7 @@ category: dev
 tags: [hosting, privacy, gdpr, dsgvo, byok, client-side-storage, deployment, no-login]
 language: en
 status: active
+visibility: public
 
 dependencies:
   tools: []

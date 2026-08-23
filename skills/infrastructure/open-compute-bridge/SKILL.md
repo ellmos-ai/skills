@@ -22,6 +22,7 @@ category: infrastructure
 tags: [open-compute, computer-use, gui-automation, mcp, windows-uia, browser, tailscale, multi-agent, screenshot]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

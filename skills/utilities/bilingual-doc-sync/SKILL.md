@@ -25,6 +25,7 @@ category: utilities
 tags: [übersetzung, zweisprachig, synchronisation, paper, readme, i18n, dokumentation]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

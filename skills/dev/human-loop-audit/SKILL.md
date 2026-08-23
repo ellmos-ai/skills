@@ -27,6 +27,7 @@ category: dev
 tags: [audit, usertest, human-in-the-loop, gui-test, reissverschluss, delegation, feedback]
 language: de
 status: active
+visibility: public
 
 # Abhaengigkeiten
 dependencies:

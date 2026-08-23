@@ -15,6 +15,7 @@ category: assist
 tags: [voice, speech, stt, tts, provider-neutral]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

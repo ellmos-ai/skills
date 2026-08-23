@@ -21,6 +21,7 @@ category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

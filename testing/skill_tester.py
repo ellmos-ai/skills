@@ -117,7 +117,29 @@ def parse_frontmatter(text):
 FRONTMATTER_REQUIRED_FIELDS = (
     'name', 'version', 'type', 'author', 'created', 'updated', 'description',
     'standalone',
+    # Pflicht seit 2026-08-23: Jeder Skill deklariert selbst, ob er nach aussen
+    # darf. Ohne Feld gilt er als PRIVAT (fail-closed, siehe DEFAULT_VISIBILITY
+    # in build_public_registry.py) -- ein vergessenes Feld verschweigt also nichts,
+    # es haelt zurueck. Die Deklaration muss zum .gitignore-Zustand passen;
+    # testing/privacy_gate.py blockiert Abweichungen in beide Richtungen.
+    'visibility',
 )
+
+
+def inherits_visibility(skill_path):
+    """True fuer Sprachvarianten -- sie erben die Sichtbarkeit des Elternskills.
+
+    Ein Skill ist ein *Ordner*, keine Datei: `skills/dev/bugsweep/` enthaelt die
+    kanonische SKILL.md und daneben EN/, ES/, JA/, RU/, ZH/ mit Uebersetzungen.
+    Sichtbarkeit gilt fuer den ganzen Ordner -- .gitignore und die Registry
+    arbeiten ohnehin auf Ordnerebene. Das Feld in jeder Uebersetzung zu
+    wiederholen, waere nicht nur Redundanz, sondern eine zweite Wahrheit, die
+    von der ersten abweichen kann: eine deutsche Fassung auf `private-only` zu
+    setzen und die englische auf `public` zu vergessen, waere genau der stille
+    Widerspruch, den dieses Feld verhindern soll.
+    """
+    parent = Path(skill_path).resolve().parent
+    return (parent / "SKILL.md").is_file()
 
 
 def frontmatter_gate_errors(skill_path):
@@ -132,7 +154,10 @@ def frontmatter_gate_errors(skill_path):
         return ["YAML-Frontmatter fehlt oder ist nicht lesbar"]
 
     errors = []
+    inherits = inherits_visibility(skill_path)
     for field in FRONTMATTER_REQUIRED_FIELDS:
+        if field == 'visibility' and inherits:
+            continue
         if field not in fm or fm[field] in (None, ''):
             errors.append(f"Pflichtfeld fehlt: {field}")
 
@@ -181,7 +206,10 @@ def s001_frontmatter(skill_path):
     text = skill_md.read_text(encoding='utf-8', errors='replace')
     fm = parse_frontmatter(text)
 
-    required = list(FRONTMATTER_REQUIRED_FIELDS)
+    required = [
+        field for field in FRONTMATTER_REQUIRED_FIELDS
+        if not (field == 'visibility' and inherits_visibility(skill_path))
+    ]
     recommended = ['anthropic_compatible', 'category', 'tags',
                    'language', 'status', 'dependencies']
 

@@ -24,6 +24,7 @@ category: infrastructure
 tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
 language: en
 status: active
+visibility: public
 aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
 dependencies:
   tools: []

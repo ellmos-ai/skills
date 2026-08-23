@@ -19,6 +19,7 @@ category: infrastructure
 tags: [projekt, boot, kontext, regeln, locks, orientierung, onboarding]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

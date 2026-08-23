@@ -15,6 +15,7 @@ category: game-dev
 tags: [roblox, luau, rojo, studio, game-design, architektur, meta, gamedev]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

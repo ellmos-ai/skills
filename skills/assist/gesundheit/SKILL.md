@@ -15,6 +15,7 @@ category: assist
 tags: [health, organization, questions, safety]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

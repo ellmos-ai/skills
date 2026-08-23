@@ -19,6 +19,12 @@ category: {{kategorie}}
 tags: []
 language: de
 status: active
+# Wie weit darf der Skill nach aussen? public | public potential | private profile | private-only
+# Bewusst auf 'private-only' vorbelegt: Eine Vorlage veroeffentlicht nichts von allein.
+# Erst wenn der Skill nutzerneutral ist und geprueft wurde, auf 'public' stellen --
+# und dann muss er auch im oeffentlichen Repo getrackt sein (testing/privacy_gate.py
+# blockiert Abweichungen). Siehe docs/CONVENTIONS.md.
+visibility: private-only
 
 # Abhaengigkeiten (nur standalone-faehige!)
 dependencies:

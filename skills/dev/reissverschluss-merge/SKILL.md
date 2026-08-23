@@ -3,6 +3,7 @@ name: reissverschluss-merge
 version: 1.0.0
 type: skill
 language: de
+visibility: public
 author: Claude (extrahiert aus einer Live-Merge-Session, Multi-Repo-PR-Abarbeitung)
 created: 2026-08-07
 provenance:

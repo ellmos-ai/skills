@@ -27,6 +27,7 @@ category: utilities
 tags: [dateien, sortierung, automatisierung, config-driven, ordner-ueberwachung, duplikate, ocr]
 language: de
 status: active
+visibility: public
 
 # Abhaengigkeiten
 dependencies:

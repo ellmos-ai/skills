@@ -29,6 +29,7 @@ category: infrastructure
 tags: [autonomy, loop, goal, workflow, decision, exhaustion-check, guard, ticket-master]
 language: de
 status: active
+visibility: public
 aliases: [waafap, work-autonomous-as-far-as-possible]
 
 dependencies:

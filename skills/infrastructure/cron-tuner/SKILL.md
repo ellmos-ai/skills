@@ -1,6 +1,7 @@
 ---
 name: cron-tuner
 language: en
+visibility: public
 description: Self-tuning cadence control loop for recurring agent scans. Use when a scheduled scan should sharpen its interval on activity and cool down on silence, without operator intervention.
 ---
 

@@ -28,6 +28,7 @@ category: infrastructure
 tags: [automation, workflow, extraction, cron, schedule, loop, transcript, meta, rotation]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []
