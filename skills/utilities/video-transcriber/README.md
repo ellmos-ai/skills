@@ -12,8 +12,11 @@ Video-Transkript + Metadaten Extraktor (unterstützt YouTube-Quellen).
 - Transkript (Untertitel) von Videos abrufen — derzeit unterstützt: YouTube
 - Metadaten (Titel, Kanal, Datum, Views, Beschreibung)
 - Bevorzugt manuell erstellte Untertitel, Fallback auf automatisch generierte
+- Zweiter Abrufweg über yt-dlp, wenn der Primärweg nichts liefert — liest nur
+  die Untertitelspur, **kein Video-/Audio-Download**
 - Ausgabe als Markdown, JSON oder Plaintext
 - Zeitstempel optional
+- Aussagekräftige Exit-Codes: leeres Transkript endet mit `3`, nicht mit `0`
 
 ## Abhängigkeiten und Lizenzen
 
@@ -45,7 +48,23 @@ python video_transcriber.py URL --no-timestamps
 
 # Schneller (ohne yt-dlp Metadaten)
 python video_transcriber.py URL --no-meta
+
+# Leeres Transkript bewusst als Erfolg werten (Exit 0 statt 3)
+python video_transcriber.py URL --allow-empty-transcript
 ```
+
+## Exit-Codes
+
+| Code | Bedeutung |
+|------|-----------|
+| `0` | Erfolg — Transkript vorhanden, oder `--meta-only`, oder `--allow-empty-transcript` |
+| `1` | Keine gültige Video-URL/-ID |
+| `2` | Aufruffehler (argparse) |
+| `3` | Kein Transkript erhalten — beide Abrufwege leer |
+
+Ein leeres Transkript ist kein Erfolg: vor v1.2.0 wurde die Ausgabedatei mit
+leerem Segment-Array geschrieben und der Lauf endete mit `0` — aufrufende
+Skripte hielten das für gelungen.
 
 ## Python-API
 
@@ -56,7 +75,13 @@ video_id = extract_video_id("https://www.youtube.com/watch?v=VNq-PfnzVUM")
 meta = fetch_metadata(video_id)
 transcript = fetch_transcript(video_id, languages=["de", "en"])
 output = format_markdown(meta, transcript)
+
+if not transcript["segments"]:
+    raise RuntimeError(transcript["error"])
+print(transcript["source"])  # "youtube_transcript_api" oder "yt-dlp"
 ```
+
+Einzelne Wege: `fetch_transcript_primary()` und `fetch_transcript_ytdlp()`.
 
 ## Integration
 
