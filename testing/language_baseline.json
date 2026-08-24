@@ -1,6 +1,6 @@
 {
   "zweck": "Bekannte und begruendete Abweichungen vom Sprachstandard (SKILL.md deutsch, SKILL.en.md englisch).",
-  "regel": "Eine Ausnahme ohne Grund ist ein Fehler, kein Zustand. Eintraege mit temporaer=true sind offene Reparaturen, keine Dauerloesung. Klasse 'offen-en' ist die Gegenrichtung: dort wurde die englische Fassung mit der deutschen ueberschrieben -- vom Sprach-Gate am 2026-08-23 entdeckt, nicht vom urspruenglichen Befund. Feld 'aspekte' begrenzt eine Ausnahme auf body, en-datei oder description; fehlt es, gilt sie wie bisher fuer alles. Klasse 'offen-description' ist die dritte Richtung: SKILL.md deutsch, description englisch -- am 2026-08-24 beim Deployment-Lauf entdeckt.",
+  "regel": "Eine Ausnahme ohne Grund ist ein Fehler, kein Zustand. Eintraege mit temporaer=true sind offene Reparaturen, keine Dauerloesung. Klasse 'offen-en' ist die Gegenrichtung: dort wurde die englische Fassung mit der deutschen ueberschrieben -- vom Sprach-Gate am 2026-08-23 entdeckt, nicht vom urspruenglichen Befund. Feld 'aspekte' begrenzt eine Ausnahme auf body, en-datei oder description; fehlt es, gilt sie wie bisher fuer alles. Klasse 'offen-description' ist die dritte Richtung: SKILL.md deutsch, description englisch -- am 2026-08-24 beim Deployment-Lauf entdeckt. Skills, die es nur lokal gibt (privat/gitignoret), gehoeren ausschliesslich in language_baseline.local.json -- eine Ausnahme hier waere ein Eintrag fuer einen Skill, den dieses Repo gar nicht enthaelt, und wuerde seine Existenz oeffentlich beschreiben. Blinder Fleck des Gates: SKILL.de.md wird nicht geprueft (nur SKILL.md und SKILL.en.md).",
   "quelle": "Sprachbruch durch i18n-Lauf 6a2d333 (2026-07-30), Ticket T-20260823-180248572",
   "stand": "2026-08-24",
   "ausnahmen": [
@@ -405,45 +405,9 @@
       ]
     },
     {
-      "skill": "mail-clean-grab",
-      "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie, die eine Ueberschreibung belegen oder widerlegen koennte. Fuer einen privaten Skill hat eine englische Fassung ohnehin keinen Publikationszweck; vor einer Uebersetzung klaeren, ob die Datei nicht schlicht entfallen sollte.",
-      "temporaer": true,
-      "aspekte": [
-        "en-datei"
-      ]
-    },
-    {
-      "skill": "pipeline-bootstrapper",
-      "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
-      "temporaer": true,
-      "aspekte": [
-        "en-datei"
-      ]
-    },
-    {
       "skill": "privat-mail-writer",
       "klasse": "offen-en",
       "grund": "SKILL.en.md ist deutsch. KORREKTUR 2026-08-24: nicht ueberschrieben -- git log zeigt 3 Commits, in keinem war die Datei englisch. Es fehlt eine Uebersetzung, es gibt nichts zurueckzuholen.",
-      "temporaer": true,
-      "aspekte": [
-        "en-datei"
-      ]
-    },
-    {
-      "skill": "project-bootstrapper",
-      "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
-      "temporaer": true,
-      "aspekte": [
-        "en-datei"
-      ]
-    },
-    {
-      "skill": "update-cli-docs",
-      "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
       "temporaer": true,
       "aspekte": [
         "en-datei"
