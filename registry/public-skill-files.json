@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1045,
+  "file_count": 1047,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -809,6 +809,8 @@
     "skills/therapy/trauma-psychoeducation/ja/SKILL.md",
     "skills/therapy/trauma-psychoeducation/ru/SKILL.md",
     "skills/therapy/trauma-psychoeducation/zh/SKILL.md",
+    "skills/third-party/grill-me/SKILL.md",
+    "skills/third-party/grilling/SKILL.md",
     "skills/utilities/batch-file-ops/SKILL.en.md",
     "skills/utilities/batch-file-ops/SKILL.es.md",
     "skills/utilities/batch-file-ops/SKILL.fr.md",

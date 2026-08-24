@@ -2,6 +2,24 @@
 
 ## 2026-08-24
 
+- **`skills/third-party/grill-me` + `skills/third-party/grilling`**: first
+  occupants of the third-party areal. Vendored from `mattpocock/skills`
+  (MIT, upstream `https://github.com/mattpocock/skills`) per Ticket
+  T-20260824-594031458 — a user asked whether a "grill me" skill (adversarial
+  interrogation of a still-open plan/idea, distinct from this library's
+  artifact-review skills such as `code-review`/`3agenten-review`/
+  `7phasen-review`/`caveman-review`) already existed; none did, and this
+  upstream implementation (design-tree / frontier / rounds interrogation
+  method) is the well-known MIT-licensed original the term refers to, so it
+  was adopted rather than re-implemented. `grill-me` is the thin,
+  explicit-only entry point (`disable-model-invocation: true`); `grilling`
+  carries the actual mechanism and can also be reached directly. Both carry
+  the mandatory upstream `LICENSE` file next to `SKILL.md`. Modification vs.
+  upstream (documented inline in each file): `description` extended with
+  German trigger phrases ("grill mich"); `category`/`language` recommended
+  fields added for local registry integration. Also deployed to
+  `~/.claude/skills/grill-me/` and `~/.claude/skills/grilling/`.
+
 - **`orchestrator` 1.2.0 -> 1.3.0**: adds `operating_mode`/`mode_label` per
   profile (explicit names for the three user-specified operating modes —
   "work alone" / "small delegations" / "pure orchestrator") and
