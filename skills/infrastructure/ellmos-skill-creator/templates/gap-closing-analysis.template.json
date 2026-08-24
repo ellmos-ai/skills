@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Vorlage fuer gap-closing-analysis.json. Verbesserungswege je Luecke aus usecase-gaps.json -- ellmos-Modul, ellmos-Bundle, Fremdmodul, Neubau oder Skripterweiterung. Kein Ersatz fuer skill-creator's grading.json.eval_feedback (das erklaert einzelne fehlgeschlagene Assertions; hier geht es um strukturelle Schliessungswege). Schema: schemas/gap-closing-analysis-v1.schema.json im .SKILLS-Repo.",
+  "schema": "ellmos.gap-closing-analysis.v1",
+  "skill_name": "{{skill-name}}",
+  "analysiert_am": null,
+  "vorschlaege": []
+}

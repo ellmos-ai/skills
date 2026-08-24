@@ -1,8 +1,15 @@
 {
-  "_hinweis": "Vorlage fuer die config.json eines produzierten Skills. Enthaelt NUR skill-eigene Verhaltens-Einstellungen, keine aufgeloesten externen Andockstellen (die gehoeren nach connections.json). Diese Datei ist optional -- ein Skill ohne Bedarf an eigenen Einstellungen braucht sie nicht.",
+  "_hinweis": "Vorlage fuer die config.json eines produzierten Skills. Enthaelt NUR skill-eigene Verhaltens-Einstellungen, keine aufgeloesten externen Andockstellen (die gehoeren nach connections.json). Diese Datei ist optional -- ein Skill ohne Bedarf an eigenen Einstellungen braucht sie nicht. Das Feld 'lernvertrag' traegt den Verhaltenscodex (Best-Option-Wahl, User als Koenig) -- als Einstellung, nicht als eigene Datei, siehe references/LEARNING-CONTRACT-AND-COVERAGE.md.",
   "schema": "ellmos.skill-config.v1",
   "skill": "{{skill-name}}",
   "version": "0.1.0",
   "einstellungen": {},
+  "lernvertrag": {
+    "user_ist_koenig": true,
+    "waehle_beste_option": true,
+    "installiert_nie_selbststaendig": true,
+    "letzter_update_check": null,
+    "update_intervall_tage": 60
+  },
   "letzter_check": null
 }

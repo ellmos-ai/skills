@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/usecase-gaps-v1.schema.json",
+  "title": ".SKILLS usecase-gaps v1",
+  "description": "Abgeleitete Datei: gleicht user-usecases.json gegen evals/evals.json und den zuletzt bekannten grading.json-Stand ab. Enthaelt selbst keine Inhalte doppelt, sondern verweist per id -- referenziert statt kopiert (P10-Muster: eine Wahrheit, kein zweiter Ort zum Luegen).",
+  "type": "object",
+  "required": [
+    "schema",
+    "skill_name",
+    "geprueft_am",
+    "gaps"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "const": "ellmos.usecase-gaps.v1"
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geprueft_am": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "abdeckungsgrad": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Anteil der user_usecase_id, die per evals.json/grading.json als bestanden gelten -- kein neuer Wert, sondern aus grading.json.summary.pass_rate abgeleitet."
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gap_id",
+          "user_usecase_id",
+          "status"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "gap_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "user_usecase_id": {
+            "type": "integer",
+            "description": "Verweist auf usecases[].id in user-usecases.json."
+          },
+          "eval_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Verweist auf evals[].id in evals/evals.json, falls dafuer bereits ein formaler Eval existiert."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ungetestet",
+              "besteht_nicht",
+              "teilweise",
+              "kein_eval_vorhanden"
+            ]
+          },
+          "beschreibung": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

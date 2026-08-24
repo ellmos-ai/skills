@@ -9,7 +9,13 @@
     "sichtbarkeits_policy": "../../../../VISIBILITY-POLICY.md",
     "delegiert_an_plugin": "skill-creator:skill-creator",
     "grounding_seed_repo": "https://github.com/ellmos-ai/grounding-seed",
-    "source_resolver_repo": "https://github.com/ellmos-ai/source-resolver"
+    "source_resolver_repo": "https://github.com/ellmos-ai/source-resolver",
+    "lern_und_abdeckungs_schemas": [
+      "../../../schemas/user-usecases-v1.schema.json",
+      "../../../schemas/usecase-gaps-v1.schema.json",
+      "../../../schemas/known-providers-v1.schema.json",
+      "../../../schemas/gap-closing-analysis-v1.schema.json"
+    ]
   },
   "einstellungen": {
     "visibility_default_fuer_neue_skills": "private-only",

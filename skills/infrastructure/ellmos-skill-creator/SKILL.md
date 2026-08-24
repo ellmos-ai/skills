@@ -1,6 +1,6 @@
 ---
 name: ellmos-skill-creator
-version: 0.1.0
+version: 0.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
@@ -9,12 +9,15 @@ description: >
   Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife
   an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die
   das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale
-  aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json + connections.json, Anbieter-/Vendor-Bewusstsein
-  (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen) und einen Selbstaktualisierungs-Abschnitt.
-  IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet
-  werden soll — auch bei "erstelle einen Skill", "bau mir einen Skill für X", "skill-creator nutzen", "neuen Skill anlegen",
-  "diesen Skill ellmos-konform machen". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder, für Landschafts-Audit
-  skill-explorer.
+  aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json,
+  Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen
+  Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json,
+  usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und
+  A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder
+  ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei "erstelle einen Skill", "bau mir einen Skill
+  für X", "skill-creator nutzen", "neuen Skill anlegen", "diesen Skill ellmos-konform machen", "Lernvertrag/Verhaltenscodex
+  für einen Skill anlegen", "Usecase-Abdeckung eines Skills prüfen". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder,
+  für Landschafts-Audit skill-explorer.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -24,7 +27,7 @@ category: infrastructure
 tags: [skill-authoring, meta, grounding-seed, provenance, vendor-awareness]
 language: de
 status: active
-visibility: private-only
+visibility: public
 
 dependencies:
   tools: []
@@ -69,9 +72,9 @@ provenance:
 
 - "erstelle einen Skill für X", "neuen Skill bauen", "skill-creator nutzen"
 - "mach diesen Skill ellmos-konform", "Skill auf Haus-Standard nachrüsten"
-- Immer wenn der **Zielort** ein Skill in `.AI/.SKILLS/skills/…` (oder das öffentliche
-  Pendant im Klon `C:\_Local_DEV\repos\skills`) ist — nicht bei allgemeinen,
-  ökosystemfremden Anfragen ("erstelle mir irgendeinen Claude-Skill ohne Bezug hierher").
+- Immer wenn der **Zielort** ein Skill in `.AI/.SKILLS/skills/…` (bzw. dessen kanonischer
+  Plan-D-Klon) ist — nicht bei allgemeinen, ökosystemfremden Anfragen ("erstelle mir
+  irgendeinen Claude-Skill ohne Bezug hierher").
 
 ## Vorgehen
 
@@ -106,9 +109,9 @@ produzierte Skills konsequent auf `grounding_seed.detect_ecosystem()`.
 
 ### Schritt 4 — config.json + connections.json mitliefern
 
-`grounding-seed` ist bereits als Python-Paket importierbar (verifiziert
-2026-08-24: `import grounding_seed` löst nach `C:\_Local_DEV\repos\grounding-seed\src\grounding_seed\`
-auf) — es ist die **kanonische Andockstelle**, keine neue Datei erfinden. Für jeden
+`grounding-seed` ist bereits als Python-Paket importierbar (verifiziert 2026-08-24:
+`import grounding_seed` löst erfolgreich auf den lokal geklonten `grounding-seed`-Quellbaum
+auf, Plan-D-Klon) — es ist die **kanonische Andockstelle**, keine neue Datei erfinden. Für jeden
 produzierten Skill mit externem Bedarf (Programme, Dienste, Anbieter):
 
 - **`config.json`** — Skill-eigene Einstellungen (Vorlage: `templates/skill-config.template.json`).
@@ -145,6 +148,34 @@ Alternativen benennt, die besser passen könnten, (c) eine kleine Lern-JSON mitf
 vorhandener ellmos-Memory-Komponente (USMC/Gardener) ausgelagert werden kann statt lokal
 zu wachsen — auch hier: erkennen statt fest verdrahten (`grounding_seed.detect_ecosystem()`).
 
+### Schritt 6b — Lernvertrag + Usecase-Abdeckung anlegen (wiederverwendbares Muster)
+
+Volltext: `references/LEARNING-CONTRACT-AND-COVERAGE.md`. Kurzfassung: nicht nur dieser
+Skill selbst, sondern **jeder von ihm produzierte Skill** bekommt einen kleinen,
+wiederverwendbaren Lern-/Abdeckungs-Dateisatz — geprüft gegen etablierte Standards, kein
+Parallelstandard:
+
+- `evals/evals.json` — **wiederverwenden**, nicht duplizieren: das ist bereits der
+  skill-creator-Standard für vom Autor entworfene Testfälle.
+- `user-usecases.json` — vom Nutzer tatsächlich vorgebrachte Anwendungsfälle, formgleich
+  zu `evals.json` (Vorlage: `templates/user-usecases.template.json`).
+- `usecase-gaps.json` — Abgleich: welche Nutzer-Usecases sind ungetestet/ungedeckt
+  (Vorlage: `templates/usecase-gaps.template.json`).
+- `known-providers-and-abilities.json` — Kandidatenraum bekannter Anbieter je Rolle,
+  Felder an A2A/`AgentSkill` (id/name/description/tags) angelehnt, nicht erfunden
+  (Vorlage: `templates/known-providers-and-abilities.template.json`).
+- `gap-closing-analysis.json` — strukturelle Schließungswege je Lücke (ellmos-Modul,
+  ellmos-Bundle, Fremdmodul, Neubau) — kein Duplikat von `grading.json.eval_feedback`
+  (Vorlage: `templates/gap-closing-analysis.template.json`).
+- `config.json` Feld `lernvertrag` — Verhaltenscodex (beste Option wählen, **User als
+  König**, nie selbständig installieren, Update-Intervall) — bewusst als Erweiterung von
+  `config.json`, keine siebte Datei.
+
+Schemas: `.SKILLS/schemas/{user-usecases,usecase-gaps,known-providers,
+gap-closing-analysis}-v1.schema.json` — dieselbe Haus-Konvention wie `skill-v1.schema.json`.
+`grounding-seed` wurde für diesen Dateisatz geprüft und bewusst **nicht** erweitert
+(Begründung in `LEARNING-CONTRACT-AND-COVERAGE.md`) — nur `connections.json` bleibt sein Teil.
+
 ### Schritt 7 — Registrieren, testen, committen
 
 - Kategorie-Ordner nach `.SKILLS/CLAUDE.md`/`SKILLS-MAP.md` wählen; bei Zweifel `skill-finder`
@@ -178,6 +209,17 @@ ein Skill ohne sie funktioniert unverändert.
   Andock-/Selbstversorgungs-Logik, hier nur referenziert, nicht dupliziert.
 
 ## Changelog
+
+### 0.2.0 (2026-08-24)
+- Nachtrag (Ticket T-20260824-218233618, Scope-Ergänzung): wiederverwendbares
+  Lern-/Abdeckungs-Muster je produziertem Skill ergänzt — `user-usecases.json`,
+  `usecase-gaps.json`, `known-providers-and-abilities.json`,
+  `gap-closing-analysis.json` (neue Haus-Schemas in `.SKILLS/schemas/`) plus
+  Lernvertrag-Feld in `config.json`. `evals/evals.json` (skill-creator) bewusst
+  wiederverwendet statt dupliziert. `grounding-seed` geprüft — keine Erweiterung
+  nötig (Begründung in `references/LEARNING-CONTRACT-AND-COVERAGE.md`), daher
+  kein Folgeticket. Feldnamen für Anbieterkataloge an A2A-Protokoll (`AgentSkill`)
+  angelehnt statt eigenes Vokabular.
 
 ### 0.1.0 (2026-08-24)
 - Erstfassung. Entscheidung Eigenbau statt Fork getroffen und begründet (Ticket
