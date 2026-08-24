@@ -124,10 +124,10 @@ The current public catalog contains 132 public runtime skills (376 tracked acros
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 25 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 28 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 29 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |

@@ -73,6 +73,7 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/dev/figma",
     "skills/dev/hyperframes",
     "skills/dev/hyperframes-animation",
+    "skills/dev/hyperframes-audio",
     "skills/dev/hyperframes-cli",
     "skills/dev/hyperframes-core",
     "skills/dev/hyperframes-creative",

@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 130,
+    "component_count": 131,
     "categories": {
       "assist": 20,
       "dev": 25,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 28,
+      "infrastructure": 29,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1086,6 +1086,19 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:backup",
+      "name": "backup",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/backup/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Plan, mirror, verify, restore or explicitly archive files through the fail-closed mac-backup core. Use for the user's own cross-host backup jobs; do not use for generic cloud sync or casual file copying.",
+      "languages": [
+        "en"
       ]
     },
     {
