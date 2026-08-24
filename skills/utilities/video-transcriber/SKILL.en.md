@@ -6,7 +6,6 @@ author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-08-24
 description: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
-
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -21,7 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py
 
 <img src="banner.png" width="100%" alt="video-transcriber banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
+> **English** — Official English version of `video-transcriber`.
 
 
 # Video Transcriber (English)
@@ -29,6 +28,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py
 Fetches transcripts (subtitles) and metadata (title, channel, date, views,
 description) of online videos. Prefers manually created subtitles, falls back
 to auto-generated ones. Output as Markdown, JSON, or plain text.
+
+For every requested language, the fallback tries manual exact and base-language
+tracks before automatic exact and base-language tracks; arbitrary tracks follow
+only afterwards. An unreadable JSON3 track does not stop the fallback while
+another candidate remains available.
 
 Currently supported source: **YouTube** (youtube.com, youtu.be, youtube-nocookie.com).
 
@@ -136,10 +140,11 @@ output = format_markdown(meta, transcript)
   reads the subtitle URL only -- no video, no audio, no circumvention of access
   restrictions.
 - **Hardened language selection:** `de-orig`/`de-DE` are now found for
-  `--lang de` (base-language match). Manual subtitles still preferred over
-  auto-generated ones.
+  `--lang de` (base-language match). Per requested language, manual exact/base
+  tracks precede automatic exact/base tracks, and unreadable candidates do not
+  stop later fallback attempts.
 - **`source` field** in the result: `youtube_transcript_api` or `yt-dlp`.
-- Regression tests: 27 tests with mocked responses (UTF-8, all three output
+- Regression tests: 29 tests with mocked responses (UTF-8, all three output
   formats, exit codes, language selection, JSON3 parsing).
 
 ### 1.1.0 (2026-06-20)

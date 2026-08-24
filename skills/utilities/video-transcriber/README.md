@@ -14,6 +14,9 @@ Video-Transkript + Metadaten Extraktor (unterstützt YouTube-Quellen).
 - Bevorzugt manuell erstellte Untertitel, Fallback auf automatisch generierte
 - Zweiter Abrufweg über yt-dlp, wenn der Primärweg nichts liefert — liest nur
   die Untertitelspur, **kein Video-/Audio-Download**
+- Die Untertitelspur wird je Wunschsprache gewählt: manuell exakt/Basissprache,
+  dann automatisch exakt/Basissprache, erst danach beliebige Spuren. Ist eine
+  Spur nicht lesbar, versucht der Fallback die nächste verfügbare Kandidatin.
 - Ausgabe als Markdown, JSON oder Plaintext
 - Zeitstempel optional
 - Aussagekräftige Exit-Codes: leeres Transkript endet mit `3`, nicht mit `0`

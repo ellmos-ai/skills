@@ -269,47 +269,56 @@ def _base_lang(code: str) -> str:
     return code.split("-")[0].lower()
 
 
-def _pick_caption_track(tracks: dict, languages: list):
+def _iter_caption_tracks(manual_tracks: dict, automatic_tracks: dict, languages: list):
     """
-    Waehlt aus einer yt-dlp-Untertitelkarte die beste Spur.
+    Liefert yt-dlp-Untertitelspuren in der gewünschten Priorität.
 
-    Erwartet die Form {sprachcode: [{"ext": ..., "url": ...}, ...]}.
-    Rangfolge: exakter Sprachcode vor Basissprache, innerhalb dessen die
-    Reihenfolge der Wunschsprachen. Verlangt wird JSON3, weil nur dort
+    Für jede Wunschsprache: manuell exakt/Basis, dann automatisch exakt/Basis.
+    Erst danach folgen beliebige Spuren. JSON3 ist erforderlich, weil nur dort
     Zeitmarken und Text strukturiert vorliegen.
 
-    Returns (sprachcode, spur) oder None.
+    Liefert Tupel aus Sprachcode, Spur und is_generated.
     """
-    if not tracks:
-        return None
-
     def json3(eintraege):
         for e in eintraege or []:
             if e.get("ext") == "json3" and e.get("url"):
                 return e
         return None
 
-    # Stufe 1: exakter Treffer
-    for wunsch in languages:
-        spur = json3(tracks.get(wunsch))
-        if spur:
-            return wunsch, spur
+    seen = set()
 
-    # Stufe 2: gleiche Basissprache -- hier wird `de-orig` fuer `de` gefunden.
-    # Genau diese Stufe fehlte, weshalb der Primaerweg leer ausging.
+    def emit(code, spur, generiert):
+        if not spur:
+            return None
+        key = (code, spur["url"], generiert)
+        if key in seen:
+            return None
+        seen.add(key)
+        return code, spur, generiert
+
     for wunsch in languages:
         basis = _base_lang(wunsch)
-        for code in sorted(tracks):
-            if _base_lang(code) == basis:
-                spur = json3(tracks.get(code))
-                if spur:
-                    return code, spur
+        for tracks, generiert in ((manual_tracks, False), (automatic_tracks, True)):
+            kandidat = emit(wunsch, json3(tracks.get(wunsch)), generiert)
+            if kandidat:
+                yield kandidat
+            for code in sorted(tracks):
+                if code != wunsch and _base_lang(code) == basis:
+                    kandidat = emit(code, json3(tracks.get(code)), generiert)
+                    if kandidat:
+                        yield kandidat
 
-    # Stufe 3: irgendeine Spur mit JSON3
-    for code in sorted(tracks):
-        spur = json3(tracks.get(code))
-        if spur:
-            return code, spur
+    for tracks, generiert in ((manual_tracks, False), (automatic_tracks, True)):
+        for code in sorted(tracks):
+            kandidat = emit(code, json3(tracks.get(code)), generiert)
+            if kandidat:
+                yield kandidat
+
+
+def _pick_caption_track(tracks: dict, languages: list):
+    """Waehlt die beste JSON3-Spur aus einer einzelnen Untertitelkarte."""
+    for code, spur, _ in _iter_caption_tracks(tracks or {}, {}, languages):
+        return code, spur
 
     return None
 
@@ -377,20 +386,16 @@ def fetch_transcript_ytdlp(video_id: str, languages: list = None) -> dict:
                 "error": f"yt-dlp Fehler: {e}", "source": None}
 
     info = info or {}
-    # Manuelle Untertitel vor automatischen -- dieselbe Praeferenz wie im Primaerweg.
-    for karte, generiert in ((info.get("subtitles"), False),
-                             (info.get("automatic_captions"), True)):
-        gewaehlt = _pick_caption_track(karte or {}, languages)
-        if not gewaehlt:
-            continue
-        code, spur = gewaehlt
+    fehlschlaege = []
+    for code, spur, generiert in _iter_caption_tracks(
+            info.get("subtitles") or {}, info.get("automatic_captions") or {}, languages):
         try:
             segmente = _parse_json3(_http_get_text(spur["url"]))
         except Exception as e:
-            return {"segments": [], "language": code, "is_generated": generiert,
-                    "full_text": "", "error": f"Untertitelspur nicht lesbar: {e}",
-                    "source": None}
+            fehlschlaege.append(f"{code}: {e}")
+            continue
         if not segmente:
+            fehlschlaege.append(f"{code}: keine Segmente")
             continue
         return {
             "segments": segmente,
@@ -400,8 +405,11 @@ def fetch_transcript_ytdlp(video_id: str, languages: list = None) -> dict:
             "source": SOURCE_YTDLP,
         }
 
+    fehler = "Keine verwertbare Untertitelspur (JSON3) gefunden"
+    if fehlschlaege:
+        fehler += f": {'; '.join(fehlschlaege)}"
     return {"segments": [], "language": "", "is_generated": False, "full_text": "",
-            "error": "Keine verwertbare Untertitelspur (JSON3) gefunden", "source": None}
+            "error": fehler, "source": None}
 
 
 def fetch_transcript(video_id: str, languages: list = None) -> dict:

@@ -34,6 +34,11 @@ Untertitelspur, die die Plattform ohnehin zur Wiedergabe ausliefert — **kein
 Video- oder Audio-Download**. Welcher Weg gegriffen hat, steht im Feld `source`
 der JSON-Ausgabe und auf stderr.
 
+Für jede gewünschte Sprache priorisiert der Fallback manuelle exakte und
+Basis-Spuren vor automatischen exakten und Basis-Spuren; beliebige Spuren folgen
+erst danach. Eine nicht lesbare JSON3-Spur beendet den Abruf nicht, solange noch
+eine weitere Kandidatin verfügbar ist.
+
 Derzeit unterstützte Quelle: **YouTube** (youtube.com, youtu.be, youtube-nocookie.com).
 
 Bei Videos dieses Tool nutzen statt Inhalte manuell zusammenzufassen —
@@ -162,7 +167,7 @@ Beide Wege sind einzeln aufrufbar: `fetch_transcript_primary()` (nur
 - **Sprachwahl gehärtet:** `de-orig`/`de-DE` werden für `--lang de` gefunden
   (Basissprachen-Abgleich). Manuelle Untertitel weiterhin vor automatischen.
 - **Feld `source`** im Ergebnis: `youtube_transcript_api` oder `yt-dlp`.
-- Regressionstests: 27 Tests mit gemockten Antworten (UTF-8, alle drei
+- Regressionstests: 29 Tests mit gemockten Antworten (UTF-8, alle drei
   Ausgabeformate, Exit-Codes, Sprachwahl, JSON3-Parsing).
 
 ### 1.1.0 (2026-06-20)

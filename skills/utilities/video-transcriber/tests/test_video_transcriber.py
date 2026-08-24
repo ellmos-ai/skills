@@ -67,7 +67,7 @@ def test_sprachwahl_verlangt_json3():
     assert vt._pick_caption_track(tracks, ["de"]) is None
 
 
-def test_ytdlp_fallback_bevorzugt_manuell_vor_auto():
+def test_ytdlp_fallback_bevorzugt_manuell_vor_auto(monkeypatch):
     """Auch im Fallback gilt: manuelle Untertitel vor automatischen."""
     info = {
         "subtitles": {"de": [{"ext": "json3", "url": "MANUELL"}]},
@@ -80,11 +80,55 @@ def test_ytdlp_fallback_bevorzugt_manuell_vor_auto():
         return json.dumps({"events": [{"tStartMs": 0, "dDurationMs": 1000,
                                        "segs": [{"utf8": "Hallo"}]}]})
 
-    _patch_ytdlp(info)
-    vt._http_get_text = fake_get
+    _patch_ytdlp(monkeypatch, info)
+    monkeypatch.setattr(vt, "_http_get_text", fake_get)
     ergebnis = vt.fetch_transcript_ytdlp("vid00000001", ["de"])
     assert geholt["url"] == "MANUELL"
     assert ergebnis["is_generated"] is False
+
+
+def test_ytdlp_bevorzugt_passende_automatische_spur_vor_beliebiger_manueller(monkeypatch):
+    """Eine beliebige manuelle Sprache darf die gewünschte Auto-Spur nicht verdrängen."""
+    info = {
+        "subtitles": {"fr": [{"ext": "json3", "url": "MANUELL-FR"}]},
+        "automatic_captions": {"de-orig": [{"ext": "json3", "url": "AUTO-DE"}]},
+    }
+    _patch_ytdlp(monkeypatch, info)
+    monkeypatch.setattr(
+        vt,
+        "_http_get_text",
+        lambda url: json.dumps({"events": [{"tStartMs": 0, "dDurationMs": 1000,
+                                             "segs": [{"utf8": url}]}]}),
+    )
+
+    ergebnis = vt.fetch_transcript_ytdlp("vid00000001", ["de"])
+
+    assert ergebnis["language"] == "de-orig"
+    assert ergebnis["is_generated"] is True
+    assert ergebnis["full_text"] == "AUTO-DE"
+
+
+def test_ytdlp_versucht_auto_spur_nach_defekter_manueller_json3(monkeypatch):
+    """Eine defekte bevorzugte Spur darf andere verfügbare Spuren nicht überspringen."""
+    info = {
+        "subtitles": {"de": [{"ext": "json3", "url": "MANUELL-DEFEKT"}]},
+        "automatic_captions": {"de": [{"ext": "json3", "url": "AUTO-DE"}]},
+    }
+    _patch_ytdlp(monkeypatch, info)
+
+    def fake_get(url):
+        if url == "MANUELL-DEFEKT":
+            raise OSError("abgerissen")
+        return json.dumps({"events": [{"tStartMs": 0, "dDurationMs": 1000,
+                                        "segs": [{"utf8": "Automatisch"}]}]})
+
+    monkeypatch.setattr(vt, "_http_get_text", fake_get)
+
+    ergebnis = vt.fetch_transcript_ytdlp("vid00000001", ["de"])
+
+    assert ergebnis["language"] == "de"
+    assert ergebnis["is_generated"] is True
+    assert ergebnis["full_text"] == "Automatisch"
 
 
 # --------------------------------------------------------------------------
@@ -128,7 +172,7 @@ def test_json3_parser_haelt_utf8_unversehrt():
 # Fallback-Verkettung  (Ticketpunkt 1)
 # --------------------------------------------------------------------------
 
-def _patch_ytdlp(info):
+def _patch_ytdlp(monkeypatch, info):
     """Ersetzt yt_dlp.YoutubeDL durch einen Stub, der `info` liefert."""
     class FakeYDL:
         def __init__(self, opts=None):
@@ -146,7 +190,7 @@ def _patch_ytdlp(info):
 
     fake_modul = type(sys)("yt_dlp")
     fake_modul.YoutubeDL = FakeYDL
-    sys.modules["yt_dlp"] = fake_modul
+    monkeypatch.setitem(sys.modules, "yt_dlp", fake_modul)
     return FakeYDL
 
 
@@ -155,7 +199,7 @@ def test_fallback_springt_ein_wenn_primaerweg_leer_bleibt(monkeypatch):
     monkeypatch.setattr(vt, "fetch_transcript_primary",
                         lambda vid, langs: {"segments": [], "language": "", "is_generated": False,
                                             "full_text": "", "error": "no element found: line 1, column 0"})
-    _patch_ytdlp({"automatic_captions": {"de-orig": [{"ext": "json3", "url": "U"}]}})
+    _patch_ytdlp(monkeypatch, {"automatic_captions": {"de-orig": [{"ext": "json3", "url": "U"}]}})
     monkeypatch.setattr(vt, "_http_get_text",
                         lambda url: json.dumps({"events": [{"tStartMs": 0, "dDurationMs": 1000,
                                                             "segs": [{"utf8": "Inhalt"}]}]}))
@@ -182,7 +226,7 @@ def test_primaerweg_gewinnt_wenn_er_liefert(monkeypatch):
 
 def test_fallback_laedt_kein_video(monkeypatch):
     """Ticketauflage: kein Video-/Audio-Download."""
-    fake = _patch_ytdlp({"automatic_captions": {"de": [{"ext": "json3", "url": "U"}]}})
+    fake = _patch_ytdlp(monkeypatch, {"automatic_captions": {"de": [{"ext": "json3", "url": "U"}]}})
     monkeypatch.setattr(vt, "_http_get_text",
                         lambda url: json.dumps({"events": [{"tStartMs": 0, "dDurationMs": 1,
                                                             "segs": [{"utf8": "x"}]}]}))
@@ -198,7 +242,7 @@ def test_beide_wege_leer_meldet_fehler(monkeypatch):
     monkeypatch.setattr(vt, "fetch_transcript_primary",
                         lambda vid, langs: {"segments": [], "language": "", "is_generated": False,
                                             "full_text": "", "error": "no element found"})
-    _patch_ytdlp({"automatic_captions": {}, "subtitles": {}})
+    _patch_ytdlp(monkeypatch, {"automatic_captions": {}, "subtitles": {}})
     ergebnis = vt.fetch_transcript("vid00000001", ["de"])
     assert ergebnis["segments"] == []
     assert ergebnis.get("error")
