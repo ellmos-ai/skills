@@ -40,7 +40,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 **Trigger-Wörter:** offene Entscheidungen, Entscheidungs-Session, Briefing, abarbeiten, durchgehen, entscheiden wir das mal alles
 
-**Abgrenzung:** [decide](../decide/SKILL.md) liefert Frameworks für EINE Frage. `decision-briefing` koordiniert die Abarbeitung VIELER Entscheidungen eines Themas — und setzt `decide` bei komplexen Einzelfällen ein.
+**Abgrenzung:** [decide](../decide/SKILL.md) liefert Frameworks für EINE Frage. `decision-briefing` koordiniert die Abarbeitung VIELER Entscheidungen eines Themas — und setzt `decide` bei komplexen Einzelfällen ein. Ist eine Entscheidung bereits getroffen/analysiert und soll nur noch als executive Kurzform (Pro/Contra, Talking Points, Empfehlung, Link zur Vollanalyse) weitergegeben werden, übernimmt [decision-shot](../decision-shot/SKILL.md) die Darstellung — kein Konkurrenzskill, sondern das Ausgabeformat danach.
 
 ---
 
@@ -207,6 +207,7 @@ User antwortet im Batch: **"1B 2C 3A"** → Ergebnis-Tabelle, dann werden die dr
 | Nummeriertes Briefing mit A/B/C-Optionen | — | ✓ |
 | Batch-Antworten ("1A 2C 3B") | — | ✓ |
 | Rückschreiben in Quelldokumente | — | ✓ |
+| Fertige Analyse zu einer einzelnen Frage als Kurzform weitergeben | — | — (siehe [decision-shot](../decision-shot/SKILL.md)) |
 
 **Synergie:** Bei komplexen Einzelfällen innerhalb einer Session wendet `decision-briefing` die Frameworks aus `decide` an (Weighted Scoring, Scenario Analysis). Für den größeren Denkprozess davor (Analyse → Ideen → Entscheidung) siehe [structured-thinking](../structured-thinking/SKILL.md).
 
@@ -221,4 +222,4 @@ User antwortet im Batch: **"1B 2C 3A"** → Ergebnis-Tabelle, dann werden die dr
 
 *Portiert aus BACH | Standalone-Version ohne Scanner*
 
-**Siehe auch:** [decide](../decide/SKILL.md) (Frameworks für eine einzelne Entscheidung) | [structured-thinking](../structured-thinking/SKILL.md) (Analyse → Ideen → Entscheidung als Meta-Workflow)
+**Siehe auch:** [decide](../decide/SKILL.md) (Frameworks für eine einzelne Entscheidung) | [structured-thinking](../structured-thinking/SKILL.md) (Analyse → Ideen → Entscheidung als Meta-Workflow) | [decision-shot](../decision-shot/SKILL.md) (fertige Analyse als executive Kurzform mit Link zur Vollversion präsentieren)
