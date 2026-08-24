@@ -95,7 +95,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-08-22", content)
+        self.assertIn("## Last-checked: 2026-08-24", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)

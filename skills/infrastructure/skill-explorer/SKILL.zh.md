@@ -1,10 +1,10 @@
 ---
 name: skill-explorer
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-24
 description: 管理你自己的 Skill 全景：调查并对比现有 Skill（审计模式），在网络上检索新的 Skill/插件（探索模式），同时作为安装程序生成轻量级的子 Skill（Skill-Finder、家族伞、维护 Skill），避免加载单体文件。适用于“对比/审计 Skill”、“哪些 Skill 重复了”、“构建 Skill 家族”、“清理/巩固 Skill”、“维护 Skill 注册表”、“查找主题 X 的 Skill/插件”、“安装新 Skill”、“浏览 Skill 市场”或使用 `/skill-explorer`。按家族提供子报告和全局编号的决策列表；仅在安全检查和明确批准后进行安装/卸载。
 standalone: true
 anthropic_compatible: true
@@ -80,6 +80,10 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer
 - **模板：** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## 变更日志
+
+### 1.1.1 (2026-08-24)
+- 清单工具现在可以读取旧版单行序列化的 `dependencies` 映射，并在值损坏时安全降级，
+  不再中断整个审计；完成消息也兼容 Windows 控制台。
 
 ### 1.1.0 (2026-06-17)
 - 新增分支机制：第三方/只读 Skill 可以通过 fork 副本（分支）进行自定义 — 包含指向原件的引用、日期、作者和原因；原件保持不变。铁律“调查 ≠ 变更”补充了分支这一替代方案。新章节 `## 分支机制`。新文件：`references/skill-branching.md`, `assets/branch-header.example.md`。

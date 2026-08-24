@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 133,
+    "component_count": 135,
     "categories": {
       "assist": 20,
       "dev": 25,
@@ -13,7 +13,7 @@
       "research": 1,
       "therapy": 20,
       "third-party": 2,
-      "utilities": 24,
+      "utilities": 26,
       "web": 1
     }
   },
@@ -1343,7 +1343,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-explorer/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "status": "active",
       "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
       "languages": [
@@ -2093,6 +2093,19 @@
       ]
     },
     {
+      "id": "skill:utilities:decision-shot",
+      "name": "decision-shot",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/decision-shot/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze diesen Skill bei \"gib mir das kurz mit Pro Contra und Empfehlung\", \"executive summary zur Entscheidung\", \"kurzkontext zu <Thema>\", \"fass die Entscheidung X in einer Kurzform zusammen\", /decision-shot, oder wenn ein Ergebnis an jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen, um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.",
+      "languages": [
+        "de"
+      ]
+    },
+    {
       "id": "tool:utilities:document-chunker",
       "name": "document-chunker",
       "type": "tool",
@@ -2160,6 +2173,20 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "protocol:utilities:folder-organization",
+      "name": "folder-organization",
+      "type": "protocol",
+      "category": "utilities",
+      "path": "skills/utilities/folder-organization/SKILL.md",
+      "version": "1.1.0",
+      "status": "active",
+      "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen. Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen. Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation, für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {

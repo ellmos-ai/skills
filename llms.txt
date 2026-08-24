@@ -1,4 +1,4 @@
-## Last-checked: 2026-08-22
+## Last-checked: 2026-08-24
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 132 public runtime skills organized into 10 categories (376 tracked skills total).
+- 135 public runtime skills organized into 11 categories (380 tracked skills total).
 - The public registry is a minimal discovery index. Internal ownership,
   privacy, review, and maintainer fields are kept in a separate No-Push
   repository.
@@ -35,14 +35,15 @@ Author: Lukas Geiger
 ## Public skill categories
 
 - `assist`: 20 user-neutral assistance methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription.
-- `dev`: 24 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
+- `dev`: 25 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
 - `education`: 5 skills for academic study, worksheets, and user-neutral teaching and support planning.
 - `game-dev`: 5 skills for Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
-- `infrastructure`: 30 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
+- `infrastructure`: 29 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
 - `production`: 1 text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
 - `research`: 1 research-agent workflow support.
 - `therapy`: 20 German-language psychoeducation and counseling method playbooks.
-- `utilities`: 25 batch, document, reasoning, media, and first-look utility workflows.
+- `third-party`: 2 curated externally authored skills redistributed under verified licenses.
+- `utilities`: 26 batch, document, reasoning, media, and first-look utility workflows.
 - `web`: 1 web-reading protocol support.
 
 ## Audience

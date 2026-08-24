@@ -23,8 +23,8 @@
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First-blue.svg)](SECURITY.md)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Public Skills: 132 Catalog](https://img.shields.io/badge/Public%20Skills-132%20Catalog-brightgreen.svg)](registry/components.json)
-[![Tracked: 376 Skills](https://img.shields.io/badge/Tracked-376%20Skills-4f46e5.svg)](SKILLS-MAP.md)
+[![Public Skills: 135 Catalog](https://img.shields.io/badge/Public%20Skills-135%20Catalog-brightgreen.svg)](registry/components.json)
+[![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -44,18 +44,19 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Registry["Public Skill Registry (132 Catalog / 376 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    Registry["Public Skill Registry (135 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
     
-    subgraph Catalog ["10 Public Domains"]
+    subgraph Catalog ["11 Public Domains"]
         Assist["assist (20)"]
-        Dev["dev (24)"]
+        Dev["dev (25)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (30)"]
+        Infra["infrastructure (29)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        Utils["utilities (25)"]
+        ThirdParty["third-party (2)"]
+        Utils["utilities (26)"]
         Web["web (1)"]
     end
     
@@ -119,7 +120,7 @@ sequenceDiagram
 
 ## Catalog Snapshot
 
-The current public catalog contains 132 public runtime skills (376 tracked across local suites):
+The current public catalog contains 135 public runtime skills (380 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
@@ -131,7 +132,8 @@ The current public catalog contains 132 public runtime skills (376 tracked acros
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 24 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
+| `third-party` | 2 | Curated externally authored skills redistributed under verified licenses |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 26 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills

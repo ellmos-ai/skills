@@ -19,6 +19,7 @@ Plugin-Cache-Skills (read-only) erfasst, damit sie im Cluster-Survey auftauchen.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import os
 import re
@@ -156,6 +157,46 @@ def classify_source(skill_name: str, root: Path) -> str:
     return "user"
 
 
+def normalize_dependencies(raw: object) -> dict[str, list[str]]:
+    """Normalize current and legacy dependency frontmatter without crashing.
+
+    Older skills may contain a Python-repr or JSON object on one line instead of
+    a YAML mapping. Inventory is a read-only survey, so malformed legacy values
+    degrade to an empty dependency set rather than aborting the whole scan.
+    """
+    parsed: object = raw
+    if isinstance(raw, str):
+        text = raw.strip()
+        parsed = {}
+        if text:
+            for loader in (json.loads, ast.literal_eval):
+                try:
+                    candidate = loader(text)
+                except (ValueError, SyntaxError, json.JSONDecodeError):
+                    continue
+                if isinstance(candidate, dict):
+                    parsed = candidate
+                    break
+    elif isinstance(raw, list):
+        parsed = {"_list": raw}
+
+    if not isinstance(parsed, dict):
+        parsed = {}
+
+    normalized: dict[str, list[str]] = {}
+    for key in ("tools", "services", "protocols", "python"):
+        value = parsed.get(key, [])
+        if value is None:
+            normalized[key] = []
+        elif isinstance(value, list):
+            normalized[key] = [str(item) for item in value]
+        elif isinstance(value, (tuple, set)):
+            normalized[key] = [str(item) for item in value]
+        else:
+            normalized[key] = [str(value)]
+    return normalized
+
+
 def inventory_root(root: Path) -> list[dict]:
     out = []
     if not root.is_dir():
@@ -172,9 +213,7 @@ def inventory_root(root: Path) -> list[dict]:
         fm = parse_frontmatter(fm_raw)
         name = fm.get("name") or skill_dir.name
         source = classify_source(skill_dir.name, root)
-        deps = fm.get("dependencies") or {}
-        if isinstance(deps, list):
-            deps = {"_list": deps}
+        deps = normalize_dependencies(fm.get("dependencies") or {})
         res = list_resources(skill_dir)
         out.append({
             "dir": skill_dir.name,
@@ -187,12 +226,7 @@ def inventory_root(root: Path) -> list[dict]:
             "category": fm.get("category"),
             "tags": fm.get("tags") or [],
             "description": fm.get("description") or "",
-            "dependencies": {
-                "tools": deps.get("tools", []),
-                "services": deps.get("services", []),
-                "protocols": deps.get("protocols", []),
-                "python": deps.get("python", []),
-            },
+            "dependencies": deps,
             "resources": res,
             "has_scripts": bool(res["scripts"]),
             "has_references": bool(res["references"]),
@@ -247,7 +281,7 @@ def main() -> int:
     payload = json.dumps(result, ensure_ascii=False, indent=2 if args.pretty else None)
     if args.out:
         Path(args.out).write_text(payload, encoding="utf-8")
-        print(f"[inventory] {len(skills)} Skills → {args.out}")
+        print(f"[inventory] {len(skills)} Skills -> {args.out}")
     else:
         sys.stdout.write(payload + "\n")
     return 0

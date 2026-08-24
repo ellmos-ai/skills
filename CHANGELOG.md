@@ -2,6 +2,24 @@
 
 ## 2026-08-24
 
+- **`folder-organization` 1.1.0**: adds a standalone, provider- and user-neutral
+  protocol for explainable semantic folder organization, version and log
+  review, reversible trash proposals, and Cut-and-Clue consolidation with a
+  byte-identical evidence copy. The bundled standard-library inventory helper
+  is source-read-only, never overwrites output, treats log/version matches only
+  as low-confidence review leads, and uses integrations such as FolderHome,
+  FileCommander, doc-services, Gardeners, or recurring-rule automation only as
+  optional capability seeds. A portable exporter normalizes the library
+  frontmatter to the common `name`/`description` baseline. A configurable
+  secrets policy keeps protected names such as `.env` out of semantic reads,
+  redacts incidental signal matches, and plans approved cloud localization to
+  a restrictive local root with opaque mapping and non-secret pointers.
+
+- **`skill-explorer` 1.1.1**: accepts legacy JSON or Python-repr dependency
+  metadata, normalizes scalar entries, degrades malformed optional metadata to
+  an empty dependency set, and uses an ASCII console arrow for Windows codepage
+  compatibility. Focused regression tests cover all three dependency cases.
+
 - **`skills/third-party/grill-me` + `skills/third-party/grilling`**: first
   occupants of the third-party areal. Vendored from `mattpocock/skills`
   (MIT, upstream `https://github.com/mattpocock/skills`) per Ticket

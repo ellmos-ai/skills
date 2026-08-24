@@ -1,10 +1,10 @@
 ---
 name: skill-explorer
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-24
 description: Gestiona tu propio entorno de habilidades: analiza y compara las habilidades existentes (modo Auditoría), investiga en la web nuevas habilidades/plugins (modo Explorar), y al mismo tiempo es el instalador que genera subhabilidades ligeras (Skill-Finder, paraguas familiar, habilidades de mantenimiento) en lugar de cargar un monolito. Utiliza esta habilidad para "comparar/auditar habilidades", "qué habilidades están duplicadas", "crear familias de habilidades", "limpiar/consolidar habilidades", "mantener el registro de habilidades", "buscar habilidades/plugins sobre el tema X", "instalar nuevas habilidades", "explorar el mercado de habilidades" o para `/skill-explorer`. Entrega un subinforme por familia y una lista de decisiones numerada globalmente; instala/desinstala únicamente tras una comprobación de seguridad y aprobación explícita.
 standalone: true
 anthropic_compatible: true
@@ -80,6 +80,11 @@ Los subinformes de familia o las fuentes/idiomas son rutas de trabajo independie
 - **Plantillas:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Registro de cambios
+
+### 1.1.1 (2026-08-24)
+- El inventario ahora acepta mapeos `dependencies` antiguos serializados en una sola línea y
+  trata los valores dañados sin interrumpir toda la auditoría. El mensaje final también es
+  compatible con las consolas de Windows.
 
 ### 1.1.0 (2026-06-17)
 - Se añadió el mecanismo de rama: las habilidades de terceros/solo lectura se pueden personalizar a través de una copia fork (rama) — con una referencia al original, fecha, autor y razón; el original permanece intacto. La regla inquebrantable "Inspección ≠ mutación" se amplió con la alternativa de rama. Nueva sección `## Mecanismo de rama`. Nuevos archivos: `references/skill-branching.md`, `assets/branch-header.example.md`.

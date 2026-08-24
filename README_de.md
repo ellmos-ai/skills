@@ -23,8 +23,8 @@
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Öffentliche Skills: 132 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-132%20Katalog-brightgreen.svg)](registry/components.json)
-[![Getrackt: 376 Skills](https://img.shields.io/badge/Getrackt-376%20Skills-4f46e5.svg)](SKILLS-MAP.md)
+[![Öffentliche Skills: 135 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-135%20Katalog-brightgreen.svg)](registry/components.json)
+[![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -44,18 +44,19 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ```mermaid
 flowchart TD
-    Registry["Öffentliche Skill-Registry (132 Katalog / 376 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
+    Registry["Öffentliche Skill-Registry (135 Katalog / 380 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
     
-    subgraph Catalog ["10 Öffentliche Domänen"]
+    subgraph Catalog ["11 Öffentliche Domänen"]
         Assist["assist (20)"]
-        Dev["dev (24)"]
+        Dev["dev (25)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (30)"]
+        Infra["infrastructure (29)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        Utils["utilities (25)"]
+        ThirdParty["third-party (2)"]
+        Utils["utilities (26)"]
         Web["web (1)"]
     end
     
@@ -119,7 +120,7 @@ sequenceDiagram
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 132 öffentliche Laufzeit-Skills (376 getrackt über lokale Testsuiten):
+Der aktuelle öffentliche Katalog enthält 135 öffentliche Laufzeit-Skills (380 getrackt über lokale Testsuiten):
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
@@ -131,7 +132,8 @@ Der aktuelle öffentliche Katalog enthält 132 öffentliche Laufzeit-Skills (376
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 24 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| `third-party` | 2 | Kuratierte externe Skills, die unter geprüften Lizenzen weitergegeben werden |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 26 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
