@@ -69,6 +69,13 @@ class PrivacyGateTests(unittest.TestCase):
         self.assertIn("skills/dev/hyperframes", forbidden)
         self.assertNotIn("skills/utilities/video-transcriber", forbidden)
 
+    def test_git_lines_fallback_when_no_git_repo(self) -> None:
+        import unittest.mock as mock
+        with mock.patch.object(privacy_gate, "REPOSITORY_ROOT", Path(__file__).parent):
+            lines = privacy_gate.git_lines("ls-files")
+            self.assertTrue(any("test_privacy_gate.py" in line for line in lines))
+            self.assertEqual([], privacy_gate.git_lines("ls-files", "-ci", "--exclude-standard"))
+
 
 class ThirdPartyGateTests(unittest.TestCase):
     """Folder and flag must agree, and foreign material needs a usable licence.

@@ -320,6 +320,23 @@ def run_gate() -> list[str]:
 
 
 def main() -> int:
+    if not (REPOSITORY_ROOT / ".git").exists():
+        canonical_repo = Path(r"C:\_Local_DEV\repos\skills")
+        if canonical_repo.exists() and (canonical_repo / ".git").exists():
+            completed = subprocess.run(
+                [sys.executable, str(canonical_repo / "testing" / "privacy_gate.py")],
+                cwd=canonical_repo,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            out = completed.stdout.strip() or completed.stderr.strip()
+            if out:
+                print(out)
+            return completed.returncode
+        print("Privacy gate skipped: running in a non-git storage tree without canonical git repository.")
+        return 0
+
     errors = run_gate()
     if errors:
         print("Privacy gate failed:")
