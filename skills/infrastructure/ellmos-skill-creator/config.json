@@ -1,0 +1,18 @@
+{
+  "schema": "ellmos.skill-config.v1",
+  "skill": "ellmos-skill-creator",
+  "version": "0.1.0",
+  "verweise": {
+    "haus_frontmatter_vorlagen": "../../../templates/",
+    "konventionen": "../../../docs/CONVENTIONS.md",
+    "standardisierungs_konzept": "../../../STANDARDISIERUNGS-VERSIONIERUNGS-KONZEPT.md",
+    "sichtbarkeits_policy": "../../../../VISIBILITY-POLICY.md",
+    "delegiert_an_plugin": "skill-creator:skill-creator",
+    "grounding_seed_repo": "https://github.com/ellmos-ai/grounding-seed",
+    "source_resolver_repo": "https://github.com/ellmos-ai/source-resolver"
+  },
+  "einstellungen": {
+    "visibility_default_fuer_neue_skills": "private-only",
+    "sprachsets_pflicht": ["de", "en"]
+  }
+}

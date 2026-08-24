@@ -1,0 +1,8 @@
+{
+  "_hinweis": "Vorlage fuer die config.json eines produzierten Skills. Enthaelt NUR skill-eigene Verhaltens-Einstellungen, keine aufgeloesten externen Andockstellen (die gehoeren nach connections.json). Diese Datei ist optional -- ein Skill ohne Bedarf an eigenen Einstellungen braucht sie nicht.",
+  "schema": "ellmos.skill-config.v1",
+  "skill": "{{skill-name}}",
+  "version": "0.1.0",
+  "einstellungen": {},
+  "letzter_check": null
+}

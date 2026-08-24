@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Vorlage fuer die connections.json eines produzierten Skills. Schema identisch zu source-resolver/grounding-seed (ellmos.source-resolver.user-config.v1), damit eine spaetere Migration in den echten source-resolver verlustfrei ist (siehe grounding_seed.migration). Erzeugen/lesen bevorzugt ueber grounding_seed.store.LocalStore(root, filename='connections.json'), nicht per Hand parsen.",
+  "schema": "ellmos.source-resolver.user-config.v1",
+  "version": 1,
+  "rollen": {},
+  "gelernt": []
+}
