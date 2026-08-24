@@ -36,7 +36,9 @@ def setup_antigravity(gemini_dir: Path, workspace_dir: Path, schedule_cron: str 
         runner_script = Path(__file__).parent / "outreach_engine.py"
 
     sidecar_data = {
-        "id": TASK_ID,
+        "builtin": "schedule",
+        "restartPolicy": "always",
+        "displayName": "COMMUNITY OUTREACH",
         "projectId": "25935ede-6ae5-452d-9b29-c70c286a98b4",
         "model": "gemini-2.5-flash",
         "args": [
