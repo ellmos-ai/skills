@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.2.0
+version: 1.3.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-08-17
+updated: 2026-08-24
 description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
@@ -127,9 +127,57 @@ gehören ausschließlich in die lokale `config.json`, nie in diesen Text.
 | `default_worker_model` | Modellhinweis für einfache Aufträge, `null` = keine Vorgabe |
 | `escalate_model_on` | Auftragsmerkmale, bei denen trotz Sparprofil ein stärkeres Modell gewählt wird |
 | `external_agents_count_as_slot` | ob nicht-native Worker (z. B. Codex, agy) gegen `max_parallel_workers` zählen |
+| `operating_mode` | einer von `alleine` / `delegation` / `orchestrator`, siehe Betriebsmodus unten |
+| `mode_label` | menschenlesbare Bezeichnung des Betriebsmodus (Nutzerwortlaut) |
+| `teammate_model_whitelist` | Liste erlaubter Modell-Kennungen für Teammates in diesem Profil; `[]` = unbeschränkt |
 
 Mitgelieferte Profile: `solo` (1 Worker), `spar` (2 Worker, Default), `burst`
 (4 Worker). Der Nutzer kann eigene Profile ergänzen oder bestehende anpassen.
+
+### Betriebsmodus (drei explizite Modi) und Teammate-Modell-Whitelist
+
+Ergänzung zu Ticket T-20260824-552689035: der Ressourcenprofil-Achse
+(Worker-Anzahl) liegt eine zweite, vom Nutzer benannte Achse zugrunde — WIE
+stark der Hauptmodell selbst noch direkt umsetzt statt nur zu koordinieren.
+Beide Achsen sind in den mitgelieferten Profilen bereits gekoppelt, damit kein
+zusätzlicher Konfigurationspfad nötig wird:
+
+| Profil | `operating_mode` | `mode_label` | Bedeutung |
+|---|---|---|---|
+| `solo` | `alleine` | Alleine bewältigen | Hauptmodell arbeitet direkt, keine Delegation außer bei echtem Blocker |
+| `spar` | `delegation` | Kleinere Delegationen | Hauptmodell arbeitet primär selbst, delegiert klar abgegrenzte, unabhängige Teilpakete |
+| `burst` | `orchestrator` | Reiner Orchestrator-Modus | Hauptmodell übernimmt vorrangig Zerlegung, Vertrag, Beobachtung und Abnahme (Ablauf 1–5); die Umsetzung selbst liegt bei den Workern |
+
+Eigene Profile können `operating_mode`/`mode_label` frei setzen — die drei
+genannten Werte sind die vom Nutzer vorgegebenen Kategorien, keine
+technische Beschränkung.
+
+**Teammate-Modell-Whitelist:** `teammate_model_whitelist` schränkt ein, welche
+Modell-Kennungen für in diesem Profil gestartete Teammates zulässig sind.
+Leer (`[]`, Default in allen mitgelieferten Profilen) heißt unbeschränkt —
+jedes für den Aufrufer verfügbare Modell ist erlaubt. Eine Eskalation über
+`escalate_model_on` darf eine gesetzte Whitelist nicht verlassen; passt kein
+gelistetes Modell zur Eskalation, gilt die nächstbeste gelistete Alternative
+oder — falls keine passt — eine bewusste Rückfrage statt eines stillen
+Whitelist-Bruchs. Kein neuer Konfigurationspfad nötig: die Whitelist ist wie
+jedes andere Profilfeld über `config.json.overrides` punktuell überschreibbar.
+
+**Tokeneffizienz als Auswahlkriterium:** Ist `default_worker_model` `null`,
+wählt der Aufrufer je Auftrag das güns­tigste Modell aus einer gesetzten
+Whitelist (bzw. aus allen verfügbaren Modellen ohne Whitelist), das die
+Aufgabe nach eigener Einschätzung sicher trägt — Tokeneffizienz geht vor
+Rohleistung. Details zur Modellwahl: Skill `model-strategy`. Eskalation nur
+bei tatsächlichen Treffern in `escalate_model_on`, nicht vorsorglich.
+
+**Phasen-/aufgabenflexibler Moduswechsel:** `active_profile` (und damit
+`operating_mode`) darf und soll innerhalb EINER Session wechseln, wenn sich
+die Art der Arbeit ändert — z. B. Recherche-/Planungsphase im Profil `solo`,
+anschließende Umsetzungsphase mit mehreren unabhängigen Paketen im Profil
+`spar` oder `burst`, danach wieder `solo` für Integration und Abnahme. Der
+Wechsel erfolgt über `session_override` (siehe unten) und wird kurz begründet
+im Spawn-Vertrag bzw. Checkpoint vermerkt — kein stiller Wechsel ohne
+nachvollziehbaren Grund, aber auch kein Verharren im falschen Modus nur weil
+er zu Sessionbeginn galt.
 
 ### config.json — aktives Profil und Automatik
 
@@ -173,6 +221,15 @@ Vorlage mit deaktivierter Automatik (`token_tracker.enabled: false`,
 Pfade `null`) — echte Pfade trägt jeder Nutzer selbst in seine lokale Kopie
 ein.
 
+Zusätzliche Quelle (Ticket T-20260824-552689035): `report_path` kann auch auf
+die Statusline-Bridge `~/.claude/state/token_budget.json` zeigen (geschrieben
+vom Hook `token_budget_statusline.py`, Feld
+`five_hour.used_percentage`) — Format ist dort JSON statt Report-Prosa, beim
+Lesen entsprechend behandeln. Für den GARANTIERTEN, hiervon unabhängigen
+manuellen Weg (Hook kann still bleiben) siehe die Skills `sparmodus` (Stufe
+2, ab ca. 80 % verbraucht) und `notaus` (Stufe 3, ab ca. 90 % verbraucht) —
+beide setzen unter anderem `session_override` dieses Skills.
+
 ## Minimaler Worker-Prompt
 
 ```text
@@ -199,6 +256,28 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Änderungsprotokoll
+
+### 1.3.0 (2026-08-24)
+- Delta zu Ticket T-20260824-552689035 (Ist-Stand 1.2.0 hatte bereits
+  Ressourcenprofile inkl. Token-Automatik — hier nur das Delta gebaut, siehe
+  Vorab-Befund im Ticket):
+  - `profiles.json`: `operating_mode` + `mode_label` je Profil ergänzt — macht
+    die drei vom Nutzer benannten Betriebsmodi ("alleine bewältigen" /
+    "kleinere Delegationen" / "reiner Orchestrator-Modus") explizit benennbar,
+    ohne die bestehenden Profile `solo`/`spar`/`burst` zu ersetzen.
+  - `profiles.json`: `teammate_model_whitelist` je Profil ergänzt (leer =
+    unbeschränkt); nutzt den bereits vorhandenen `overrides`-Mechanismus in
+    `config.json`, kein neuer Konfigurationspfad nötig.
+  - SKILL.md: Abschnitt zum phasen-/aufgabenflexiblen Moduswechsel (Wechsel
+    von `active_profile`/`session_override` innerhalb EINER Session je nach
+    Arbeitsphase, mit Begründung im Checkpoint) und zur Tokeneffizienz als
+    primärem Auswahlkriterium für `default_worker_model` (statt Rohleistung),
+    Verweis auf Skill `model-strategy`.
+  - Querverweis auf die neuen Skills `sparmodus`/`notaus` und die
+    Statusline-Bridge `~/.claude/state/token_budget.json` als zusätzliche
+    `report_path`-Quelle ergänzt.
+  - Keine Änderung an Ablauf 1–5, Autoritätsgrenze, Stop-Bedingungen oder dem
+    dokumentierten Default ohne Config-Dateien.
 
 ### 1.2.0 (2026-08-17)
 - Ressourcenprofile ergänzt: optionale `profiles.json` (benannte Profile

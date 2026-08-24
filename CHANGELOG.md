@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-24
+
+- **`orchestrator` 1.2.0 -> 1.3.0**: adds `operating_mode`/`mode_label` per
+  profile (explicit names for the three user-specified operating modes —
+  "work alone" / "small delegations" / "pure orchestrator") and
+  `teammate_model_whitelist` per profile (empty = unrestricted; reuses the
+  existing `config.json.overrides` mechanism, no new config surface).
+  Documents phase-/task-flexible mid-session profile switching and token
+  efficiency as the primary criterion when `default_worker_model` is unset.
+  Cross-references the new `sparmodus`/`notaus` skills and the
+  `token_budget.json` statusline bridge as an additional `report_path`
+  source. No change to the documented zero-config default. Delta build for
+  ticket T-20260824-552689035 (a prior ticket, T-20260816-884283125, already
+  shipped the base resource-profile mechanism in 1.2.0).
+
 ## 2026-08-23
 
 - **`visibility` is now a declared, enforced field (breaking)**: every canonical

@@ -1,23 +1,32 @@
 {
-  "_comment": "Ressourcenprofile fuer den orchestrator-Skill (optionale Anpassungsschicht, siehe SKILL.md Abschnitt 'Ressourcenprofil'). Ohne diese Datei gilt exakt das dokumentierte Sparprofil.",
+  "_comment": "Ressourcenprofile fuer den orchestrator-Skill (optionale Anpassungsschicht, siehe SKILL.md Abschnitt 'Ressourcenprofil'). Ohne diese Datei gilt exakt das dokumentierte Sparprofil. Seit 1.3.0 (T-20260824-552689035): operating_mode/mode_label benennen die drei vom Nutzer vorgegebenen Betriebsmodi explizit; teammate_model_whitelist schraenkt bei Bedarf ein, welche Modelle als Teammates erlaubt sind (leer = unbeschraenkt).",
   "profiles": {
     "solo": {
       "max_parallel_workers": 1,
       "default_worker_model": null,
       "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
-      "external_agents_count_as_slot": false
+      "external_agents_count_as_slot": false,
+      "operating_mode": "alleine",
+      "mode_label": "Alleine bewältigen",
+      "teammate_model_whitelist": []
     },
     "spar": {
       "max_parallel_workers": 2,
       "default_worker_model": null,
       "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
-      "external_agents_count_as_slot": false
+      "external_agents_count_as_slot": false,
+      "operating_mode": "delegation",
+      "mode_label": "Kleinere Delegationen",
+      "teammate_model_whitelist": []
     },
     "burst": {
       "max_parallel_workers": 4,
       "default_worker_model": null,
       "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
-      "external_agents_count_as_slot": false
+      "external_agents_count_as_slot": false,
+      "operating_mode": "orchestrator",
+      "mode_label": "Reiner Orchestrator-Modus",
+      "teammate_model_whitelist": []
     }
   }
 }
