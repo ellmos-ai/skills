@@ -1,195 +1,493 @@
 {
   "zweck": "Bekannte und begruendete Abweichungen vom Sprachstandard (SKILL.md deutsch, SKILL.en.md englisch).",
-  "regel": "Eine Ausnahme ohne Grund ist ein Fehler, kein Zustand. Eintraege mit temporaer=true sind offene Reparaturen, keine Dauerloesung. Klasse 'offen-en' ist die Gegenrichtung: dort wurde die englische Fassung mit der deutschen ueberschrieben -- vom Sprach-Gate am 2026-08-23 entdeckt, nicht vom urspruenglichen Befund.",
+  "regel": "Eine Ausnahme ohne Grund ist ein Fehler, kein Zustand. Eintraege mit temporaer=true sind offene Reparaturen, keine Dauerloesung. Klasse 'offen-en' ist die Gegenrichtung: dort wurde die englische Fassung mit der deutschen ueberschrieben -- vom Sprach-Gate am 2026-08-23 entdeckt, nicht vom urspruenglichen Befund. Feld 'aspekte' begrenzt eine Ausnahme auf body, en-datei oder description; fehlt es, gilt sie wie bisher fuer alles. Klasse 'offen-description' ist die dritte Richtung: SKILL.md deutsch, description englisch -- am 2026-08-24 beim Deployment-Lauf entdeckt.",
   "quelle": "Sprachbruch durch i18n-Lauf 6a2d333 (2026-07-30), Ticket T-20260823-180248572",
-  "stand": "2026-08-23",
+  "stand": "2026-08-24",
   "ausnahmen": [
     {
       "skill": "automation-self-care",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (8 Commits geprueft), nie deutsche Fassung"
+      "grund": "Seit Anlage englisch (8 Commits geprueft), nie deutsche Fassung",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "build-your-users-mind",
       "klasse": "bewusst-englisch",
-      "grund": "Publizierbarer, nutzerneutraler Kern eines privaten Skills -- englisch ist hier Absicht (Paar-Tabelle in SKILLS-MAP-PRIVATE.md)"
+      "grund": "Publizierbarer, nutzerneutraler Kern eines privaten Skills -- englisch ist hier Absicht (Paar-Tabelle in SKILLS-MAP-PRIVATE.md)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "document-chunker",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (6 Commits geprueft)"
+      "grund": "Seit Anlage englisch (6 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "letter-hooker",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+      "grund": "Seit Anlage englisch (5 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "semantic-persona-routing",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (6 Commits geprueft)"
+      "grund": "Seit Anlage englisch (6 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "staircase-routing",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+      "grund": "Seit Anlage englisch (5 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "system-onboarding",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+      "grund": "Seit Anlage englisch (5 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "wayfinding-routing",
       "klasse": "bewusst-englisch",
-      "grund": "Seit Anlage englisch (5 Commits geprueft)"
+      "grund": "Seit Anlage englisch (5 Commits geprueft)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "act-techniques",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 26 -> heute 25) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 248 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "behavioral-activation",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 22 -> heute 23) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 290 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "cloud-communication-protocols",
       "klasse": "offen",
       "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "cognitive-restructuring",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 12 -> heute 11) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 222 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "counseling-basics",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 11 -> heute 10) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 204 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "cron-tuner",
       "klasse": "offen",
       "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "dev-cycle",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 15 -> heute 18) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "c830ef9 (2026-06-13, 302 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "guideline-therapies-overview",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 23 -> heute 22) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 202 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "mindfulness-basics",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 12 -> heute 13) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 198 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "motivational-interviewing",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 22 -> heute 21) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "61d8f5c (2026-06-12, 282 Z.)",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "music-composer",
       "klasse": "offen",
       "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "piggyback-hosting",
       "klasse": "offen",
       "grund": "SKILL.md englisch, keine SKILL.en.md -- Herkunft klaeren (fremd? dann third_party-Flag), sonst deutsche Fassung anlegen",
-      "temporaer": true
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "rbx-studio",
       "klasse": "offen",
       "grund": "Ueberschriften-Struktur weicht ab (alt 15 -> heute 14) -- uebersetzt UND umgebaut, Zusammenfuehrung noetig",
       "deutscher_stand": "17481b4 (2026-07-23, 248 Z.)",
+      "temporaer": true,
+      "aspekte": [
+        "body",
+        "description"
+      ]
+    },
+    {
+      "skill": "bugsweep",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "compare-race",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "decision-briefing",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "dev",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "docs-analysis",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "game-design",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "github-repo-care",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "kalender",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "law-checker",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "pipeline-optimizer",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "rbx-dev",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "rojo",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "skill-explorer",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "stabilization-techniques",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "steuer-assistent",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "systemic-questioning",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "think",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "trampelpfadanalyse",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "using-blender",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
+      "temporaer": true
+    },
+    {
+      "skill": "web-reading",
+      "klasse": "offen-description",
+      "grund": "Body ist deutsch, das Frontmatter-Feld description aber englisch -- Rest des i18n-Laufs 6a2d333. Reparatur 6875515 und Sprach-Gate betrachteten beide nur den Body. Keine reine Rueckholung moeglich: die englische Beschreibung ist bei mehreren Skills inhaltlich neuer als die alte deutsche, noetig ist eine Zusammenfuehrung.",
+      "aspekte": [
+        "description"
+      ],
       "temporaer": true
     },
     {
       "skill": "lebende-verfassung",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. KORREKTUR 2026-08-24: nicht ueberschrieben -- git log zeigt genau 1 Commit fuer die Datei, eine englische Fassung hat nie existiert. Es fehlt eine Uebersetzung, es gibt nichts zurueckzuholen.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "mail-clean-grab",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie, die eine Ueberschreibung belegen oder widerlegen koennte. Fuer einen privaten Skill hat eine englische Fassung ohnehin keinen Publikationszweck; vor einer Uebersetzung klaeren, ob die Datei nicht schlicht entfallen sollte.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "pipeline-bootstrapper",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "privat-mail-writer",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. KORREKTUR 2026-08-24: nicht ueberschrieben -- git log zeigt 3 Commits, in keinem war die Datei englisch. Es fehlt eine Uebersetzung, es gibt nichts zurueckzuholen.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "project-bootstrapper",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "update-cli-docs",
       "klasse": "offen-en",
-      "grund": "SKILL.en.md ist deutsch -- englische Fassung wurde ueberschrieben",
-      "temporaer": true
+      "grund": "SKILL.en.md ist deutsch. HINWEIS 2026-08-24: privater, gitignoreter Skill -- keine Historie vorhanden. Vor einer Uebersetzung klaeren, ob die Datei entfallen sollte.",
+      "temporaer": true,
+      "aspekte": [
+        "en-datei"
+      ]
     },
     {
       "skill": "agent-config-sync",
       "klasse": "redesign",
       "grund": "Provider-neutraler Umbau (148 -> 48 Z.) -- gewollt, Rueckholung waere Rueckschritt",
-      "deutscher_stand": "fd59d02 (2026-07-27, 148 Z.)"
+      "deutscher_stand": "fd59d02 (2026-07-27, 148 Z.)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "exposure-guidance",
       "klasse": "redesign",
       "grund": "Umfang um 37% reduziert -- vor Rueckholung pruefen, ob gewollt",
-      "deutscher_stand": "61d8f5c (2026-06-12, 476 Z.)"
+      "deutscher_stand": "61d8f5c (2026-06-12, 476 Z.)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "mcp-config-sync",
       "klasse": "redesign",
       "grund": "Provider-neutraler Umbau v2.0.0 (87 -> 44 Z.) -- gewollt; offene Frage im Deployment siehe .SKILLS/TODO.md",
-      "deutscher_stand": "fd59d02 (2026-07-27, 87 Z.)"
+      "deutscher_stand": "fd59d02 (2026-07-27, 87 Z.)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     },
     {
       "skill": "yt-transcriber",
       "klasse": "redesign",
       "grund": "Bewusst auf einen Compat-Wrapper eingedampft (113 -> 27 Z.), leitet auf video-transcriber weiter",
-      "deutscher_stand": "c79f630 (2026-06-12, 113 Z.)"
+      "deutscher_stand": "c79f630 (2026-06-12, 113 Z.)",
+      "aspekte": [
+        "body",
+        "description"
+      ]
     }
   ]
 }

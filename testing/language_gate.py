@@ -46,6 +46,11 @@ EN = re.compile(r"\b(and|the|with|for|will|shall|requirements|description|purpos
 # (sehr kurze Skills, reine Verweisdateien).
 MINDEST_TREFFER = 15
 
+# Die description im Frontmatter ist ein bis drei Saetze lang und erreicht
+# MINDEST_TREFFER nie. Sie braucht eine eigene, niedrigere Schwelle -- und sie
+# zaehlt, weil die Agenten-Runtime GENAU dieses Feld anzeigt und danach routet.
+MINDEST_TREFFER_BESCHREIBUNG = 3
+
 # Sprachunterordner: dort ist SKILL.md die Fassung DIESER Sprache, nicht die
 # deutsche Primaerfassung -- `EN/SKILL.md` SOLL englisch sein.
 SPRACHORDNER = {"en", "es", "fr", "ja", "ru", "zh", "hi", "ar", "bn", "pt", "de"}
@@ -82,6 +87,42 @@ def sprache(text: str) -> "tuple[str, int, int]":
     return "gemischt", de, en
 
 
+def beschreibung(text: str) -> str:
+    """Wert des Frontmatter-Feldes `description` als eine Zeile, sonst leer."""
+    kopf, _ = split_frontmatter(text)
+    if not kopf:
+        return ""
+    treffer = re.search(r"^description:[ 	]*(.*?)(?=^[A-Za-z_][A-Za-z0-9_]*:|\Z)",
+                        kopf, re.S | re.M)
+    if not treffer:
+        return ""
+    roh = treffer.group(1).replace(">", " ").replace("|", " ")
+    return " ".join(roh.split())
+
+
+def sprache_kurz(text: str) -> "tuple[str, int, int]":
+    """Wie sprache(), aber fuer kurze Felder wie die description."""
+    de, en = len(DE.findall(text)), len(EN.findall(text))
+    if de + en < MINDEST_TREFFER_BESCHREIBUNG:
+        return "zu-kurz", de, en
+    if de > en:
+        return "de", de, en
+    if en > de:
+        return "en", de, en
+    return "gemischt", de, en
+
+
+def gilt_ausnahme(baseline: dict, name: str, aspekt: str) -> bool:
+    """Baseline-Eintrag ohne `aspekte` gilt fuer alles (Altbestand), mit `aspekte`
+    nur fuer die dort genannten. So schweigt ein description-Eintrag nicht
+    versehentlich auch die Body-Pruefung."""
+    eintrag = baseline.get(name)
+    if eintrag is None:
+        return False
+    aspekte = eintrag.get("aspekte")
+    return aspekt in aspekte if aspekte else True
+
+
 def main() -> int:
     baseline = {}
     for datei in (BASELINE, LOKAL):
@@ -96,23 +137,34 @@ def main() -> int:
         name = md.parent.name
         text = md.read_text(encoding="utf-8", errors="replace")
         spr, de, en = sprache(text)
+
+        # Die description wird UNABHAENGIG von der Bodylaenge geprueft: sie ist das
+        # Feld, das die Runtime anzeigt und wonach sie routet. Ein kurzer Body macht
+        # eine englische Beschreibung nicht weniger falsch.
+        besch = beschreibung(text)
+        if besch:
+            spr_b, de_b, en_b = sprache_kurz(besch)
+            if spr_b == "en" and not gilt_ausnahme(baseline, name, "description"):
+                befunde.append((name, "description", spr_b, de_b, en_b,
+                                str(md.relative_to(REPO)).replace("\\", "/")))
+
         if spr == "zu-kurz":
             continue
         geprueft += 1
 
         if spr != "de":
-            if name in baseline:
+            if gilt_ausnahme(baseline, name, "body"):
                 ausgenommen += 1
-                continue
-            befunde.append((name, "SKILL.md", spr, de, en,
-                            str(md.relative_to(REPO)).replace("\\", "/")))
+            else:
+                befunde.append((name, "SKILL.md", spr, de, en,
+                                str(md.relative_to(REPO)).replace("\\", "/")))
 
         en_datei = md.parent / "SKILL.en.md"
         if en_datei.is_file():
             spr_en, de_en, en_en = sprache(en_datei.read_text(encoding="utf-8", errors="replace"))
             # Baseline gilt fuer BEIDE Richtungen -- ein Skill kann in der einen
             # Datei begruendet abweichen und in der anderen nicht.
-            if spr_en == "de" and name not in baseline:
+            if spr_en == "de" and not gilt_ausnahme(baseline, name, "en-datei"):
                 befunde.append((name, "SKILL.en.md", spr_en, de_en, en_en,
                                 str(en_datei.relative_to(REPO)).replace("\\", "/")))
 
@@ -120,12 +172,12 @@ def main() -> int:
           f"{ausgenommen} laut Baseline ausgenommen.")
 
     if not befunde:
-        print("Language gate passed: SKILL.md ist deutsch, SKILL.en.md ist englisch.")
+        print("Language gate passed: SKILL.md und description deutsch, SKILL.en.md englisch.")
         return 0
 
     print(f"\nFEHLER: {len(befunde)} unerklaerte Abweichung(en)\n")
     for name, datei, spr, de, en, pfad in befunde:
-        soll = "deutsch" if datei == "SKILL.md" else "englisch"
+        soll = "englisch" if datei == "SKILL.en.md" else "deutsch"
         print(f"  {name:32s} {datei:14s} wirkt {spr:9s} "
               f"(de={de:3d} en={en:3d}), soll {soll} sein")
         print(f"  {'':32s} {pfad}")
