@@ -264,6 +264,13 @@ With [pre-commit](https://pre-commit.com/) installed, enable the repository hook
 once with `pre-commit install`. It applies the same gate only to changed
 `SKILL.md` files before a commit.
 
+### External Evaluations
+
+Independent, third-party A/B evaluations of individual skills, referenced here
+as they become available (not run or commissioned by this project):
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), tested 2026-08-08 on Gemini-3.6-flash, 22 cases: pass rate 22.7% -> 95.5% (+73pp), -14% tokens, security 15/15 checks (3/3).
+
 ## Search Context
 
 Use this repository when searching for:

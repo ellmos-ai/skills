@@ -33,10 +33,32 @@ Core rules: write only in your own slot, receipts for every action,
 idempotency, no secrets in the yard (public keys/fingerprints/paths only),
 cooperative error deltas, readback-over-log verification.
 
-Cadence control is **not** part of the base protocol; it is provided by the
-companion skill **`cron-tuner`** (self-tuning loop) and by peer-instructed
-cadence signals (`CADENCE: match 15m` / `CADENCE: pause …`). A mutual `WAKE:`
-channel allows out-of-cycle scans as a hint, never as authority.
+**Cadence: adaptive polling frequency.** Cadence control is not part of the
+base protocol's payload rules, but every implementation needs it — a fixed
+polling interval either floods an idle yard or misses fresh work. Two
+mechanisms apply and must both be handled, not left implicit:
+
+- **A — Self-tuning (default, no operator input; the `cooldown`/backoff
+  pattern).** New assignment found → jump straight to the fastest interval
+  (e.g. 15 min). Empty run → cool down on a ladder: 4 consecutive empty runs
+  → 30 min, 2 more → 1 h, then double each further empty streak (2 h, 4 h,
+  8 h) up to a hard cap (24 h, never higher). Persist the empty-run counter
+  and current interval in a small state file at the worker (not in
+  conversation memory), so it survives restarts; a cadence change means
+  deleting the old scheduled job and creating a new one at the new interval,
+  counter carried over. Full reference scheme, state-file schema and further
+  loop types (burst, wake-assist): companion skill **`cron-tuner`**.
+- **B — Peer-instructed override.** Either side may set the other side's
+  cadence explicitly in the assignment text — `CADENCE: match 15m` to sync
+  to a tighter window, or `CADENCE: pause 1h → 2h after 3 empty` to slow a
+  side doing predictable heads-down work. Whoever changes a peer's cadence
+  confirms the new interval in the next delta (readback applies to clocks
+  too).
+
+Both mechanisms only change reaction time, never the base-protocol rules
+(slot discipline, receipts, no secrets). A mutual `WAKE: <reason>` channel
+allows out-of-cycle scans as a hint, never as authority; delete after
+reading.
 
 Full specification and reference evidence:
 `dev-bricks/system-gap-master` → `docs/communications-protocols-skill.md`.
