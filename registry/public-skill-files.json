@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1050,
+  "file_count": 1052,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -444,6 +444,7 @@
     "skills/infrastructure/decision-avatar/SKILL.md",
     "skills/infrastructure/decision-avatar/SKILL.ru.md",
     "skills/infrastructure/decision-avatar/SKILL.zh.md",
+    "skills/infrastructure/ellmos-skill-creator/SKILL.md",
     "skills/infrastructure/headless/SKILL.en.md",
     "skills/infrastructure/headless/SKILL.es.md",
     "skills/infrastructure/headless/SKILL.fr.md",
@@ -811,6 +812,7 @@
     "skills/therapy/trauma-psychoeducation/zh/SKILL.md",
     "skills/third-party/grill-me/SKILL.md",
     "skills/third-party/grilling/SKILL.md",
+    "skills/third-party/taste-skill/SKILL.md",
     "skills/utilities/batch-file-ops/SKILL.en.md",
     "skills/utilities/batch-file-ops/SKILL.es.md",
     "skills/utilities/batch-file-ops/SKILL.fr.md",

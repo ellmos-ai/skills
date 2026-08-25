@@ -2,17 +2,17 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 135,
+    "component_count": 137,
     "categories": {
       "assist": 20,
       "dev": 25,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 29,
+      "infrastructure": 30,
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "third-party": 2,
+      "third-party": 3,
       "utilities": 26,
       "web": 1
     }
@@ -1179,6 +1179,19 @@
       ]
     },
     {
+      "id": "skill:infrastructure:ellmos-skill-creator",
+      "name": "ellmos-skill-creator",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/ellmos-skill-creator/SKILL.md",
+      "version": "0.2.0",
+      "status": "active",
+      "description": "Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json, Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json, usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei \"erstelle einen Skill\", \"bau mir einen Skill für X\", \"skill-creator nutzen\", \"neuen Skill anlegen\", \"diesen Skill ellmos-konform machen\", \"Lernvertrag/Verhaltenscodex für einen Skill anlegen\", \"Usecase-Abdeckung eines Skills prüfen\". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder, für Landschafts-Audit skill-explorer.",
+      "languages": [
+        "de"
+      ]
+    },
+    {
       "id": "skill:infrastructure:headless",
       "name": "headless",
       "type": "skill",
@@ -1957,6 +1970,19 @@
       "version": "0.0.0",
       "status": "active",
       "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Entry point for the /grill-me command; can also be invoked directly.",
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "id": "skill:third-party:taste-skill",
+      "name": "taste-skill",
+      "type": "skill",
+      "category": "third-party",
+      "path": "skills/third-party/taste-skill/SKILL.md",
+      "version": "0.0.0",
+      "status": "active",
+      "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
       "languages": [
         "en"
       ]
