@@ -113,10 +113,18 @@ Optionales, testbares Werkzeug für die reine Verortungsfrage (found/unavailable
 Inhaltsprüfung): `scripts/exhaustion_check.py` in diesem Skill-Ordner. Es nutzt
 `grounding_seed.resolve()` + `status_from_resolution()` für `decisions.ledger`/`user.model` (dort
 existiert ein echter `source-resolver`-Provider), prüft `memory.organic`/`memory.curated` dagegen
-**immer** direkt über CLI-Erreichbarkeit (`gardener`/`usmc` auf PATH) — für diese zwei Rollen gibt
-es (Stand 2026-08-15) noch **keinen** registrierten `source-resolver`-Provider; sie über den
-Resolver zu befragen würde nur `unavailable` melden, unabhängig davon, ob Gardener/USMC echt
-installiert sind. Läuft identisch mit und ohne installiertes `grounding-seed`.
+**immer** direkt über CLI-Erreichbarkeit (`gardener`/`usmc` auf PATH) — für diese zwei Rollen gab
+es bis 2026-08-15 noch keinen registrierten `source-resolver`-Provider; sie über den Resolver zu
+befragen hätte nur `unavailable` gemeldet, unabhängig davon, ob Gardener/USMC echt installiert
+sind. Läuft identisch mit und ohne installiertes `grounding-seed`.
+
+**Update 2026-08-25 (K3=C, `T-20260825-342866657`):** Die Lücke ist geschlossen — `source-resolver`
+registriert `memory.organic` (Gardener) und `memory.curated` (USMC) jetzt beide als Stufe-1-Rolle
+mit demselben CLI-Präsenzcheck (`shutil.which("gardener")`/`shutil.which("usmc")`), den dieses
+Skript bisher selbst hardcodiert. `exhaustion_check.py` ist deshalb NICHT sofort umgebaut worden
+(kein Funktionsverlust, der bestehende Check bleibt korrekt) — beim nächsten Skill-Care-Lauf kann
+Schritt 3 auf `source_resolver.resolve("memory.organic"/"memory.curated")` umgestellt werden,
+analog zu Schritt 2 (`decisions.ledger`), statt den CLI-Check zweifach zu pflegen.
 
 #### Die vier Kettenschritte — jeder meldet found | empty | unavailable
 
