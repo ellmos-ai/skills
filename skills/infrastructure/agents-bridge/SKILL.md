@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
 updated: 2026-08-22
-description: Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
+description: agents-bridge — the Lifeboat. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
 
 standalone: true
 anthropic_compatible: true
@@ -22,7 +22,14 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
 
 
-# AGENTS-BRIDGE (Deutsch)
+# AGENTS-BRIDGE — the Lifeboat (Deutsch)
+
+> **Beiname „Lifeboat" (dt. Rettungsboot):** agents-bridge IST das
+> Wiederherstellungs-Set der Agenten-Regeldateien (CLAUDE.md/GEMINI.md/
+> GPT.md/AGENTS.md) — trug diese Funktion bisher nur ohne erkennbaren Namen.
+> Passt in die nautische Namensfamilie um die Bridge-Metapher (Wheelhouse,
+> Deep-Diver, Lower Decks). Kein Rename: der technische Name bleibt
+> `agents-bridge`, „Lifeboat" ist ein sprechendes Synonym.
 
 Nutze diesen Skill, um ein kleines dateibasiertes Multi-Provider-System zu
 erfassen, zu prüfen, zu übertragen oder wiederherzustellen. Pro Instanz gibt es
