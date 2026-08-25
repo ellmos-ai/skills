@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -22,6 +21,25 @@ from build_public_registry import (  # noqa: E402
     effective_visibility,
 )
 
+# The repo-agnostic scan engine (host/account names, local-dev paths, home
+# directories, secret-token shapes) lives in repo_privacy_gate.py so any
+# repository can run it via `--repo <path>` -- not just this one. This file
+# imports it rather than duplicating it, then layers the checks that are
+# specific to *this* repository (SKILL.md visibility, third-party licensing,
+# forbidden skill directories). Extracted 2026-08-25, T-20260825-907516036.
+from repo_privacy_gate import (  # noqa: E402
+    ALLOWED_HOME_SEGMENTS,
+    ALLOWED_WINDOWS_HOME_SEGMENTS,
+    CONTENT_PATTERNS as _GENERIC_CONTENT_PATTERNS,
+    POSIX_HOME,
+    TEXT_SUFFIXES,
+    WINDOWS_HOME,
+    concrete_home_matches,
+    git_lines as _generic_git_lines,
+    tracked_ignored_files as _generic_tracked_ignored_files,
+    tracked_text_files as _generic_tracked_text_files,
+)
+
 ALLOWED_TRACKED_IGNORED: set[str] = set()
 
 #: Foreign files whose *upstream text* legitimately trips the content scan --
@@ -35,36 +53,17 @@ ALLOWED_TRACKED_IGNORED: set[str] = set()
 THIRD_PARTY_SCAN_EXCEPTIONS: set[str] = set()
 CONTENT_SCAN_EXCLUSIONS = {
     "testing/privacy_gate.py",
+    "testing/repo_privacy_gate.py",
     "testing/skill_tester.py",
     "testing/test_privacy_gate.py",
+    "testing/test_repo_privacy_gate.py",
 }
-TEXT_SUFFIXES = {
-    ".css", ".csv", ".html", ".ini", ".js", ".json", ".md", ".mjs",
-    ".py", ".sh", ".svg", ".toml", ".ts", ".txt", ".yaml", ".yml",
-}
-ALLOWED_HOME_SEGMENTS = {
-    "<user>", "<username>", "<user_home>", "%userprofile%", "${home}",
-    "$home", "$userprofile", "...", "…", "public", "runner", "test",
-    "user", "username", "|",
-}
-# On Windows, "user" is not a placeholder we may trust: this host's real account
-# name IS "User", so C:\Users\User\... is a concrete path that merely looks
-# generic. Treating it as a placeholder made the check systematically blind here
-# -- it waved through eight real paths across three skills (found 2026-08-23).
-# Under POSIX, /home/user stays allowed: it is an established documentation
-# convention, and the detector that matches it lives in the repository itself.
-ALLOWED_WINDOWS_HOME_SEGMENTS = ALLOWED_HOME_SEGMENTS - {"user", "username"}
+
+# This repository's content scan is the generic set plus one skill-specific
+# addition (a fixed list of skill names that must never surface in tracked
+# text, regardless of visibility declaration).
 CONTENT_PATTERNS = {
-    "host-scoped device name": re.compile(
-        r"\b(?:ASUS|WORKSTATION|DESKTOP|LAPTOP|MACSTUDIO)-"
-        r"[A-Z0-9][A-Z0-9-]*\b"
-    ),
-    "host-scoped local development path": re.compile(
-        r"(?i)(?:file:///)?[A-Z]:[\\/]+_Local_DEV(?:[\\/]|$)"
-    ),
-    "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
-    "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
-    "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+    **_GENERIC_CONTENT_PATTERNS,
     "private skill name": re.compile(
         r"(?i)\b(?:tom-lm|store-welle-usertest|rechtsabteilung)\b"
     ),
@@ -96,57 +95,23 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/utilities/talking-head-recut",
     "skills/utilities/tom-lm",
 }
-WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
-POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")
 
 
 def git_lines(*arguments: str) -> list[str]:
-    completed = subprocess.run(
-        ["git", *arguments],
-        cwd=REPOSITORY_ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    return [line for line in completed.stdout.splitlines() if line]
+    return _generic_git_lines(REPOSITORY_ROOT, *arguments)
 
 
 def tracked_ignored_files() -> list[str]:
-    return [
-        path
-        for path in git_lines("ls-files", "-ci", "--exclude-standard")
-        if path not in ALLOWED_TRACKED_IGNORED
-    ]
+    return _generic_tracked_ignored_files(REPOSITORY_ROOT, frozenset(ALLOWED_TRACKED_IGNORED))
 
 
 def tracked_text_files() -> list[Path]:
-    result = []
-    for relative in git_lines("ls-files"):
-        path = REPOSITORY_ROOT / relative
-        if (
-            relative not in CONTENT_SCAN_EXCLUSIONS
-            and path.is_file()
-            and path.suffix.lower() in TEXT_SUFFIXES
-        ):
-            result.append(path)
-    return result
-
-
-def concrete_home_matches(text: str) -> list[str]:
-    findings = []
-    for pattern, allowed in (
-        (WINDOWS_HOME, ALLOWED_WINDOWS_HOME_SEGMENTS),
-        (POSIX_HOME, ALLOWED_HOME_SEGMENTS),
-    ):
-        for match in pattern.finditer(text):
-            segment = match.group(1).lower()
-            if segment not in allowed and not segment.startswith(("<", "{", "$", "%")):
-                findings.append(match.group(0).strip())
-    return findings
+    return _generic_tracked_text_files(REPOSITORY_ROOT, frozenset(CONTENT_SCAN_EXCLUSIONS))
 
 
 def content_findings(path: Path) -> list[str]:
+    """Same as the generic scan, plus this repository's own patterns (e.g.
+    'private skill name'), which CONTENT_PATTERNS already includes above."""
     text = path.read_text(encoding="utf-8", errors="replace")
     findings = []
     homes = concrete_home_matches(text)
@@ -313,6 +278,8 @@ def run_gate() -> list[str]:
         relative = path.relative_to(REPOSITORY_ROOT).as_posix()
         if relative in THIRD_PARTY_SCAN_EXCEPTIONS:
             continue
+        # content_findings() here uses this repo's CONTENT_PATTERNS (generic
+        # set + "private skill name"), not run_generic_gate()'s narrower one.
         for finding in content_findings(path):
             errors.append(f"{relative}: {finding}")
     errors.extend(visibility_consistency_errors(set(tracked)))
@@ -324,6 +291,7 @@ def main() -> int:
     if not (REPOSITORY_ROOT / ".git").exists():
         canonical_repo = Path(r"C:\_Local_DEV\repos\skills")
         if canonical_repo.exists() and (canonical_repo / ".git").exists():
+            import subprocess
             completed = subprocess.run(
                 [sys.executable, str(canonical_repo / "testing" / "privacy_gate.py")],
                 cwd=canonical_repo,

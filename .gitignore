@@ -64,6 +64,8 @@ testing/*
 !testing/language_baseline.json
 !testing/test_public_registry.py
 !testing/test_metadata.py
+!testing/repo_privacy_gate.py
+!testing/test_repo_privacy_gate.py
 tools/
 # Die öffentliche Registry ist ein minimales Discovery-Format. Vollständige
 # Maintainer-Registries mit Bewertungen und Privacy-Klassifizierungen bleiben
