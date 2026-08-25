@@ -1053,7 +1053,7 @@
       "path": "skills/infrastructure/agents-bridge/SKILL.md",
       "version": "3.0.1",
       "status": "active",
-      "description": "agents-bridge — the Lifeboat. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.",
+      "description": "agents-bridge — the Lifeboat, auch: Time Capsule. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.",
       "languages": [
         "de",
         "en",

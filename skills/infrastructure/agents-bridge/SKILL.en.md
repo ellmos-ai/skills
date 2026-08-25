@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
 updated: 2026-08-22
-description: agents-bridge — the Lifeboat. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
+description: agents-bridge — the Lifeboat, aka Time Capsule. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
 
 standalone: true
 anthropic_compatible: true
@@ -21,14 +21,17 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 > **English** — Official English version of `agents-bridge`.
 
 
-# AGENTS-BRIDGE — the Lifeboat (English)
+# AGENTS-BRIDGE — the Lifeboat, aka Time Capsule (English)
 
-> **Nickname "Lifeboat":** agents-bridge IS the recovery/restore set for the
-> agent rule files (CLAUDE.md/GEMINI.md/GPT.md/AGENTS.md) — it just carried
-> that function without a recognizable name until now. Fits the nautical
-> naming family around the bridge metaphor (Wheelhouse, Deep-Diver, Lower
-> Decks). Not a rename: the technical name stays `agents-bridge`, "Lifeboat"
-> is a descriptive synonym.
+> **Nicknames "Lifeboat" and "Time Capsule":** agents-bridge IS the
+> recovery/restore set for the agent rule files (CLAUDE.md/GEMINI.md/
+> GPT.md/AGENTS.md) — it just carried that function without a recognizable
+> name until now. "Lifeboat" fits the nautical naming family around the
+> bridge metaphor (Wheelhouse, Deep-Diver, Lower Decks); "Time Capsule"
+> highlights the other side of the same function — a sealed,
+> hash-verified state that can later be restored intact. Not a rename: the
+> technical name stays `agents-bridge`, both nicknames are descriptive
+> synonyms.
 
 Use this skill to capture, verify, transfer, or restore a small file-based
 multi-provider system. Each instance has exactly one explicitly selected
