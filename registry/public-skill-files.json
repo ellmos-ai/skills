@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1052,
+  "file_count": 1054,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -405,6 +405,8 @@
     "skills/infrastructure/agent-config-sync/SKILL.md",
     "skills/infrastructure/agent-config-sync/SKILL.ru.md",
     "skills/infrastructure/agent-config-sync/SKILL.zh.md",
+    "skills/infrastructure/agent-role-scaffolder/SKILL.en.md",
+    "skills/infrastructure/agent-role-scaffolder/SKILL.md",
     "skills/infrastructure/agents-bridge/SKILL.en.md",
     "skills/infrastructure/agents-bridge/SKILL.es.md",
     "skills/infrastructure/agents-bridge/SKILL.fr.md",

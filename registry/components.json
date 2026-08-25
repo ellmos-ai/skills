@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 137,
+    "component_count": 138,
     "categories": {
       "assist": 20,
       "dev": 25,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 30,
+      "infrastructure": 31,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1030,6 +1030,19 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:agent-role-scaffolder",
+      "name": "agent-role-scaffolder",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/agent-role-scaffolder/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\").",
+      "languages": [
+        "en"
       ]
     },
     {
