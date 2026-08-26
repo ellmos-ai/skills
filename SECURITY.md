@@ -26,6 +26,19 @@ We actively support the latest release of `ellmos-ai/skills` on the default bran
 3. **Non-Elevation (User-Mode Execution)**: All skills and utility scripts operate entirely within unprivileged user space. Administrator or root privileges are never required or requested.
 4. **Deterministic Frontmatter & Schema Validation**: Skill definitions are validated against strict YAML frontmatter schemas (`docs/CONVENTIONS.md`), preventing malicious instruction injection or untracked state manipulation.
 
+### Gitless Projections
+
+The repository privacy gate derives its file authority from Git. A gitless
+archive or enriched projection must therefore delegate explicitly to a trusted
+canonical checkout instead of guessing from the files physically present:
+
+```bash
+python testing/privacy_gate.py --canonical-repo <path-to-canonical-checkout>
+```
+
+Without that explicit checkout, the gate fails closed with a non-zero exit
+code. The canonical path is never embedded in the public script.
+
 ---
 
 ### Reporting a Vulnerability
@@ -66,6 +79,21 @@ Wir unterstützen aktiv die neueste Version von `ellmos-ai/skills` auf dem Stand
 2. **Fail-Closed Privacy-Boundary**: Automatisierte Privacy-Gates (`testing/privacy_gate.py` und `testing/test_public_private_boundary.py`) stellen in der CI sicher, dass keine personenbezogenen Daten, gerätespezifischen Hostnamen, privaten Tokens (API-Keys) oder internen Verzeichnisse in öffentliche Repositories gelangen.
 3. **Non-Elevation (User-Mode-Betrieb)**: Alle Skills und Utility-Skripte laufen vollständig im unprivilegierten Benutzerbereich. Administrator- oder Root-Rechte werden zu keinem Zeitpunkt benötigt oder angefordert.
 4. **Deterministische Frontmatter- & Schema-Validierung**: Skill-Definitionen werden gegen strikte YAML-Frontmatter-Schemas validiert (`docs/CONVENTIONS.md`), um fehlerhafte oder unsichere Instruktionsstrukturen auszuschließen.
+
+### Gitlose Projektionen
+
+Das Privacy-Gate leitet seine Dateiautorität aus Git ab. Ein gitloses Archiv
+oder eine angereicherte Projektion muss deshalb ausdrücklich an einen
+vertrauenswürdigen kanonischen Checkout delegieren, statt aus den physisch
+vorhandenen Dateien zu raten:
+
+```bash
+python testing/privacy_gate.py --canonical-repo <pfad-zum-kanonischen-checkout>
+```
+
+Ohne diesen expliziten Checkout bricht das Gate fail-closed mit einem
+Exitcode ungleich null ab. Der kanonische Pfad ist nicht im öffentlichen
+Skript fest verdrahtet.
 
 ---
 
