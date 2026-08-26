@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -69,12 +73,112 @@ class PrivacyGateTests(unittest.TestCase):
         self.assertIn("skills/dev/hyperframes", forbidden)
         self.assertNotIn("skills/utilities/video-transcriber", forbidden)
 
-    def test_git_lines_fallback_when_no_git_repo(self) -> None:
+    def test_gitless_cli_fails_closed_without_explicit_canonical_repo(self) -> None:
         import unittest.mock as mock
-        with mock.patch.object(privacy_gate, "REPOSITORY_ROOT", Path(__file__).parent):
-            lines = privacy_gate.git_lines("ls-files")
-            self.assertTrue(any("test_privacy_gate.py" in line for line in lines))
-            self.assertEqual([], privacy_gate.git_lines("ls-files", "-ci", "--exclude-standard"))
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output = io.StringIO()
+            with (
+                mock.patch.object(privacy_gate, "REPOSITORY_ROOT", root),
+                contextlib.redirect_stdout(output),
+            ):
+                exit_code = privacy_gate.main([])
+
+        self.assertEqual(2, exit_code)
+        self.assertIn("failed closed", output.getvalue())
+        self.assertIn("--canonical-repo", output.getvalue())
+
+    def test_gitless_cli_delegates_to_explicit_canonical_repo(self) -> None:
+        import unittest.mock as mock
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            projection = root / "projection"
+            canonical = root / "canonical"
+            projection.mkdir()
+            (canonical / "testing").mkdir(parents=True)
+            subprocess.run(
+                ["git", "init", "-q"],
+                cwd=canonical,
+                check=True,
+                capture_output=True,
+            )
+            (canonical / "testing" / "privacy_gate.py").write_text(
+                "print('canonical privacy gate ran')\n",
+                encoding="utf-8",
+            )
+
+            output = io.StringIO()
+            with (
+                mock.patch.object(privacy_gate, "REPOSITORY_ROOT", projection),
+                contextlib.redirect_stdout(output),
+            ):
+                exit_code = privacy_gate.main(
+                    ["--canonical-repo", str(canonical)]
+                )
+
+        self.assertEqual(0, exit_code)
+        self.assertIn("canonical privacy gate ran", output.getvalue())
+
+    def test_gitless_cli_rejects_non_git_canonical_repo(self) -> None:
+        import unittest.mock as mock
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            projection = root / "projection"
+            candidate = root / "not-a-repository"
+            projection.mkdir()
+            candidate.mkdir()
+            output = io.StringIO()
+            with (
+                mock.patch.object(privacy_gate, "REPOSITORY_ROOT", projection),
+                contextlib.redirect_stdout(output),
+            ):
+                exit_code = privacy_gate.main(
+                    ["--canonical-repo", str(candidate)]
+                )
+
+        self.assertEqual(2, exit_code)
+        self.assertIn("not an exact Git worktree root", output.getvalue())
+
+    def test_gitless_cli_preserves_canonical_failure_and_stderr(self) -> None:
+        import unittest.mock as mock
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            projection = root / "projection"
+            canonical = root / "canonical"
+            projection.mkdir()
+            (canonical / "testing").mkdir(parents=True)
+            subprocess.run(
+                ["git", "init", "-q"],
+                cwd=canonical,
+                check=True,
+                capture_output=True,
+            )
+            (canonical / "testing" / "privacy_gate.py").write_text(
+                "import sys\n"
+                "print('canonical privacy gate blocked', file=sys.stderr)\n"
+                "raise SystemExit(7)\n",
+                encoding="utf-8",
+            )
+
+            errors = io.StringIO()
+            with (
+                mock.patch.object(privacy_gate, "REPOSITORY_ROOT", projection),
+                contextlib.redirect_stderr(errors),
+            ):
+                exit_code = privacy_gate.main(
+                    ["--canonical-repo", str(canonical)]
+                )
+
+        self.assertEqual(7, exit_code)
+        self.assertIn("canonical privacy gate blocked", errors.getvalue())
+
+    def test_gate_has_no_host_specific_canonical_repo_default(self) -> None:
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        self.assertNotIn(r"C:\_Local_DEV\repos\skills", source)
 
 
 class ThirdPartyGateTests(unittest.TestCase):

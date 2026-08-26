@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-26
+
+- **Gitless privacy-gate delegation**: removed the host-specific canonical
+  checkout default from `testing/privacy_gate.py`. Gitless archives and
+  enriched projections now fail closed unless the operator supplies an exact
+  Git worktree root with `--canonical-repo`; delegation runs that checkout's
+  current gate and preserves its exit status and output. Regression tests cover
+  missing, invalid, and valid explicit checkout paths.
+
 ## 2026-08-24
 
 - **`folder-organization` 1.1.0**: adds a standalone, provider- and user-neutral

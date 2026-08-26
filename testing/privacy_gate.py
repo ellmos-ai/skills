@@ -1,17 +1,26 @@
 #!/usr/bin/env python3
-"""Fail closed when tracked files cross the public repository privacy boundary."""
+"""Fail closed when tracked files cross the public repository privacy boundary.
+
+Gitless projections cannot prove which physical files are public. Run their
+copy of this gate with ``--canonical-repo <path>`` so the current gate from an
+explicit Git checkout performs the authoritative scan.
+"""
 
 from __future__ import annotations
 
+import argparse
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
 
-# Single source for the visibility contract -- deliberately imported instead of
-# copied, because two lists that drift apart are the very failure this gate exists
-# to catch.
+# Shared contracts are deliberately imported instead of copied, because two
+# lists that drift apart are the very failure this gate exists to catch. The
+# repo-agnostic scan engine carries host/account names, local-dev paths, home
+# directories, and secret-token shapes; this file layers the checks specific to
+# this repository on top.
 sys.path.insert(0, str(REPOSITORY_ROOT))
 from build_public_registry import (  # noqa: E402
     COPYLEFT_LICENSES,
@@ -20,25 +29,9 @@ from build_public_registry import (  # noqa: E402
     THIRD_PARTY_AREAL,
     effective_visibility,
 )
+from testing import repo_privacy_gate as generic_privacy  # noqa: E402
 
-# The repo-agnostic scan engine (host/account names, local-dev paths, home
-# directories, secret-token shapes) lives in repo_privacy_gate.py so any
-# repository can run it via `--repo <path>` -- not just this one. This file
-# imports it rather than duplicating it, then layers the checks that are
-# specific to *this* repository (SKILL.md visibility, third-party licensing,
-# forbidden skill directories). Extracted 2026-08-25, T-20260825-907516036.
-from repo_privacy_gate import (  # noqa: E402
-    ALLOWED_HOME_SEGMENTS,
-    ALLOWED_WINDOWS_HOME_SEGMENTS,
-    CONTENT_PATTERNS as _GENERIC_CONTENT_PATTERNS,
-    POSIX_HOME,
-    TEXT_SUFFIXES,
-    WINDOWS_HOME,
-    concrete_home_matches,
-    git_lines as _generic_git_lines,
-    tracked_ignored_files as _generic_tracked_ignored_files,
-    tracked_text_files as _generic_tracked_text_files,
-)
+concrete_home_matches = generic_privacy.concrete_home_matches
 
 ALLOWED_TRACKED_IGNORED: set[str] = set()
 
@@ -63,7 +56,7 @@ CONTENT_SCAN_EXCLUSIONS = {
 # addition (a fixed list of skill names that must never surface in tracked
 # text, regardless of visibility declaration).
 CONTENT_PATTERNS = {
-    **_GENERIC_CONTENT_PATTERNS,
+    **generic_privacy.CONTENT_PATTERNS,
     "private skill name": re.compile(
         r"(?i)\b(?:tom-lm|store-welle-usertest|rechtsabteilung)\b"
     ),
@@ -98,15 +91,19 @@ FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
 
 
 def git_lines(*arguments: str) -> list[str]:
-    return _generic_git_lines(REPOSITORY_ROOT, *arguments)
+    return generic_privacy.git_lines(REPOSITORY_ROOT, *arguments)
 
 
 def tracked_ignored_files() -> list[str]:
-    return _generic_tracked_ignored_files(REPOSITORY_ROOT, frozenset(ALLOWED_TRACKED_IGNORED))
+    return generic_privacy.tracked_ignored_files(
+        REPOSITORY_ROOT, frozenset(ALLOWED_TRACKED_IGNORED)
+    )
 
 
 def tracked_text_files() -> list[Path]:
-    return _generic_tracked_text_files(REPOSITORY_ROOT, frozenset(CONTENT_SCAN_EXCLUSIONS))
+    return generic_privacy.tracked_text_files(
+        REPOSITORY_ROOT, frozenset(CONTENT_SCAN_EXCLUSIONS)
+    )
 
 
 def content_findings(path: Path) -> list[str]:
@@ -287,24 +284,83 @@ def run_gate() -> list[str]:
     return errors
 
 
-def main() -> int:
-    if not (REPOSITORY_ROOT / ".git").exists():
-        canonical_repo = Path(r"C:\_Local_DEV\repos\skills")
-        if canonical_repo.exists() and (canonical_repo / ".git").exists():
-            import subprocess
-            completed = subprocess.run(
-                [sys.executable, str(canonical_repo / "testing" / "privacy_gate.py")],
-                cwd=canonical_repo,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-            )
-            out = completed.stdout.strip() or completed.stderr.strip()
-            if out:
-                print(out)
-            return completed.returncode
-        print("Privacy gate skipped: running in a non-git storage tree without canonical git repository.")
-        return 0
+def _is_exact_git_worktree_root(path: Path) -> bool:
+    """Return whether *path* is the exact top level of a Git worktree."""
+    try:
+        candidate = path.resolve(strict=True)
+        completed = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            cwd=candidate,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        if completed.returncode != 0 or not completed.stdout.strip():
+            return False
+        return Path(completed.stdout.strip()).resolve(strict=True) == candidate
+    except OSError:
+        return False
+
+
+def _delegate_to_canonical_repo(canonical_repo: Path) -> int:
+    """Run the canonical checkout's own gate after validating its Git root."""
+    canonical_repo = canonical_repo.resolve()
+    if not _is_exact_git_worktree_root(canonical_repo):
+        print(
+            "Privacy gate failed closed: --canonical-repo is not an exact "
+            f"Git worktree root: {canonical_repo}"
+        )
+        return 2
+
+    canonical_gate = canonical_repo / "testing" / "privacy_gate.py"
+    if not canonical_gate.is_file():
+        print(
+            "Privacy gate failed closed: canonical checkout has no "
+            f"testing/privacy_gate.py: {canonical_repo}"
+        )
+        return 2
+
+    try:
+        completed = subprocess.run(
+            [sys.executable, str(canonical_gate)],
+            cwd=canonical_repo,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except OSError as error:
+        print(f"Privacy gate failed closed: cannot run canonical gate: {error}")
+        return 2
+
+    if completed.stdout:
+        print(completed.stdout, end="")
+    if completed.stderr:
+        print(completed.stderr, end="", file=sys.stderr)
+    return completed.returncode
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--canonical-repo",
+        type=Path,
+        help=(
+            "explicit canonical Git checkout whose current privacy gate must "
+            "run; required when this script lives in a gitless projection"
+        ),
+    )
+    args = parser.parse_args(argv)
+
+    if args.canonical_repo is not None:
+        return _delegate_to_canonical_repo(args.canonical_repo)
+
+    if not _is_exact_git_worktree_root(REPOSITORY_ROOT):
+        print(
+            "Privacy gate failed closed: this is not a Git worktree root. "
+            "In a gitless projection, pass --canonical-repo <path>."
+        )
+        return 2
 
     errors = run_gate()
     if errors:
