@@ -48,7 +48,7 @@
           "languages": {
             "type": "array",
             "uniqueItems": true,
-            "items": {"enum": ["de", "en", "es", "ja", "ru", "zh"]}
+            "items": {"enum": ["de", "en", "es", "zh", "ja", "ru", "fr", "hi", "ar", "bn", "pt"]}
           }
         }
       }

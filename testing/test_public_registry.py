@@ -56,6 +56,17 @@ class PublicRegistryTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
 
+    def test_public_schema_language_enum_matches_generator_contract(self) -> None:
+        schema = json.loads(
+            (REPOSITORY_ROOT / "schemas" / "public-component-v1.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        allowed = schema["properties"]["components"]["items"]["properties"]["languages"][
+            "items"
+        ]["enum"]
+        self.assertEqual(list(LANGUAGE_CODES), allowed)
+
     def test_registry_matches_public_skill_tree(self) -> None:
         public_paths = set()
         for path in list_public_skill_files():
