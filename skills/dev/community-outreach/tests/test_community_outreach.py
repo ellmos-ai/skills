@@ -698,6 +698,52 @@ def test_runtime_deployer_is_path_agnostic_and_preserves_data(tmp_path: Path) ->
     assert json.loads(checked.stdout)["status"] == "current"
 
 
+def test_deployed_runner_dry_run_does_not_create_workspace_bytecode(tmp_path: Path) -> None:
+    target = tmp_path / "deployed-runtime"
+    target.mkdir()
+    (target / "usecases.json").write_text(
+        json.dumps(
+            {
+                "repositories": [
+                    {
+                        "id": "org/tool",
+                        "name": "tool",
+                        "url": "https://github.com/org/tool",
+                        "problems_solved": ["Ein Problem"],
+                        "last_promoted_at": None,
+                    }
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    deploy_runtime.deploy(target)
+    before = snapshot_tree(target)
+    before_dirs = sorted(path.relative_to(target).as_posix() for path in target.rglob("*") if path.is_dir())
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(target / "outreach_runner.py"),
+            "--workspace",
+            str(target),
+            "--full-run",
+            "--dry-run",
+            "--json",
+        ],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        check=False,
+    )
+
+    after_dirs = sorted(path.relative_to(target).as_posix() for path in target.rglob("*") if path.is_dir())
+    assert completed.returncode == 0, completed.stderr
+    assert snapshot_tree(target) == before
+    assert after_dirs == before_dirs
+
+
 def test_runtime_deployer_rolls_back_all_files_on_failure(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     target = tmp_path / "rollback-runtime"
     old = b"old-runtime-content\n"
