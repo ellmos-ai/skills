@@ -8,18 +8,18 @@ across various environments:
   - Antigravity Sidecar / Scheduled Task
   - Windows Task Scheduler (schtasks)
   - Unix Crontab (cron)
-  - ellmos-scheduler (daemon loop)
   - Generic CLI execution
 
 License: MIT
 Author: ellmos-ai / Antigravity Team
 """
 
-import os
-import sys
-import json
-import subprocess
 import argparse
+import json
+import os
+import shlex
+import subprocess
+import sys
 from pathlib import Path
 
 TASK_ID = "community-outreach"
@@ -29,7 +29,7 @@ def setup_antigravity(gemini_dir: Path, workspace_dir: Path, schedule_cron: str 
     """Configures Antigravity sidecar task."""
     sidecar_dir = gemini_dir / "config" / "sidecars" / TASK_ID
     sidecar_dir.mkdir(parents=True, exist_ok=True)
-    
+
     runner_script = workspace_dir / "outreach_runner.py"
     if not runner_script.exists():
         # Fallback to skill script
@@ -106,7 +106,10 @@ def setup_unix_cron(workspace_dir: Path, schedule_cron: str = "0 9 * * *") -> bo
     if not script_path.exists():
         script_path = Path(__file__).parent / "outreach_engine.py"
 
-    cron_line = f"{schedule_cron} {python_exe} {script_path} --workspace {workspace_dir} --full-run > /dev/null 2>&1"
+    cron_line = (
+        f"{schedule_cron} {shlex.quote(str(python_exe))} {shlex.quote(str(script_path))} "
+        f"--workspace {shlex.quote(str(workspace_dir))} --full-run > /dev/null 2>&1"
+    )
     print("\n=== Unix Crontab Entry ===")
     print(f"Add the following line to your crontab (`crontab -e`):")
     print(f"\n{cron_line}\n")

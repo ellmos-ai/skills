@@ -9,25 +9,25 @@ Initializes a clean, provider-agnostic workspace for Community Outreach:
   - Creates POST-AUSGANG.md (live tracking)
   - Creates POSTVERZEICHNIS.md (global duplicate prevention)
   - Creates ACCOUNTVERZEICHNIS.md (account and SSO guidelines)
-  - Copies or links outreach_runner.py
 
 License: MIT
 Author: ellmos-ai / Antigravity Team
 """
 
+import argparse
+import json
 import os
 import sys
-import json
-import argparse
-from pathlib import Path
 from datetime import datetime, timezone
+from pathlib import Path
+
 
 def bootstrap_workspace(target_dir: Path, repo_list: list[dict] = None):
     target_dir.mkdir(parents=True, exist_ok=True)
     archive_dir = target_dir / "_archive"
     archive_dir.mkdir(parents=True, exist_ok=True)
 
-    if not repo_list:
+    if repo_list is None:
         repo_list = [
             {
                 "name": "example-tool",

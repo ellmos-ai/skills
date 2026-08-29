@@ -1,10 +1,10 @@
 ---
 name: community-outreach
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas / Antigravity
 created: 2026-08-13
-updated: 2026-08-13
+updated: 2026-08-29
 description: >
   System-agnostic automation for solution-oriented community outreach and repository recommendation
   across forums, Reddit, and social platforms following Human-in-the-Loop principles (EU AI Act compliant).
@@ -36,9 +36,10 @@ A provider-, LLM-, and OS-neutral skill for automated, solution-driven recommend
 
 ## 🌟 Core Principles & Safety Guarantees
 
-1. **Human-in-the-Loop & EU AI Act Compliance:**
+1. **Human-in-the-Loop and fail-closed publishing:**
    * No automated post goes live without explicit human review.
-   * Drafts are staged in `POST-EINGANG.md`. Only when the checkbox `- [x] Genehmigt` (Approved) is set will the post be published.
+   * Drafts are staged in `POST-EINGANG.md`. The checkbox `- [x] Genehmigt` only authorizes a publication attempt.
+   * History, rotation, outbox, and duplicate registry advance only after a complete `PublishReceipt` bound to the platform and target URL. Without an injected publisher, the queue remains unchanged.
 2. **Anti-Spam & 100% Relevance ("Better no post than an irrelevant one"):**
    * Every post directly solves an actual technical problem raised in the target thread.
    * Strict adherence to all board and community guidelines with transparent attribution.
@@ -55,10 +56,15 @@ A provider-, LLM-, and OS-neutral skill for automated, solution-driven recommend
 
 ## 🔄 4-Phase Execution Cycle
 
-1. **Phase 1 (Inbound Feedback Check):** Scans active threads in `POST-AUSGANG.md` for replies or feedback.
-2. **Phase 2 (Outbound Execution):** Identifies approved entries (`- [x] Genehmigt`) in `POST-EINGANG.md`, posts them via browser session, transfers them to `POST-AUSGANG.md`, and indexes URLs in `POSTVERZEICHNIS.md`.
-3. **Phase 3 (Research & Staging):** Selects the next repository via Fair Round-Robin, finds a matching online query, drafts a high-quality response, and stages it for approval in `POST-EINGANG.md`.
-4. **Phase 4 (Self-Archiving):** Cleans up logs exceeding capacity into `_archive/`.
+1. **Phase 1 (Monitoring Inventory):** Counts published history records as threads requiring review. The core does not retrieve platform replies; that requires a separate authorized inbound adapter.
+2. **Phase 2 (Outbound Execution):** Validates approved entries, exact URL duplicates, and an injected publisher. Only a verified `PublishReceipt` causes local state changes. The bundled CLI adapter does not publish by itself.
+3. **Phase 3 (Research Task):** Selects the next repository via Fair Round-Robin and returns `needs-action`. A separate research step must persist a reviewed draft with a real, current, unused target URL; the core creates no placeholder target.
+4. **Phase 4 (Self-Archiving):** Moves the oldest complete entries into `_archive/`, keeps the newest entries live, and is idempotent.
+
+`--dry-run` is a pure planning mode: it does not invoke a publisher, change a file, or create a directory.
+
+The verified German runtime guide is available at [`references/runtime-readme.md`](references/runtime-readme.md).
+Deploy the relative, host-agnostic runtime files with `python scripts/deploy_runtime.py --target <workspace> --json`; add `--check` for a read-only byte comparison.
 
 ---
 
@@ -67,11 +73,15 @@ A provider-, LLM-, and OS-neutral skill for automated, solution-driven recommend
 - **Antigravity Sidecar:** Registered as native background task running when the IDE is active.
 - **Codex & Claude Code:** Run via cron, CLI scripts, or workflow loops.
 - **Windows Task Scheduler & Unix Crontab:** Native OS-level scheduling options.
-- **ellmos-scheduler:** Central daemon for multi-agent environments.
 
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-08-29)
+- Added one canonical core with a thin runtime adapter and compatible readers for both earlier data schemas.
+- Added fail-closed `PublishReceipt` validation, exact duplicate protection, byte-preserving queue updates, and restart-safe local projection.
+- Made dry runs write-free, archiving entry-based and idempotent, and Phase 3 truthfully return `needs-action`.
 
 ### 1.0.0 (2026-08-13)
 - Initial release: Universal Community Outreach & Solution Recommender Skill.

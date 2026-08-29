@@ -13,13 +13,13 @@ Dieses Dokument enthält die standardisierten Prompt-Vorlagen für die verschied
 ```text
 Führe den 4-Phasen-Laufzyklus für Community Outreach & Repo Solution Recommender aus:
 
-1. Inbound Check auf Community-Feedback in POST-AUSGANG.md
-2. Outbound Execution für freigegebene [x] Posts in POST-EINGANG.md
-3. Research & Staging für das am weitesten zurückliegende Repo in USECASES.md / usecases.json
+1. Lokales Monitoring-Inventar veröffentlichter History-Einträge; Plattformantworten nur mit getrenntem autorisiertem Inbound-Adapter abrufen
+2. Lokale Vorprüfung freigegebener [x] Posts; ohne angebundenen Publisher bleibt der Status needs-action
+3. Research-Auftrag für das am weitesten zurückliegende Repo in USECASES.md / usecases.json
 4. Cut & Clue Selbstarchivierung
 
 Führe dazu aus:
-python <workspace_path>/scripts/outreach_engine.py --workspace <workspace_path> --full-run
+python <workspace_path>/outreach_runner.py --workspace <workspace_path> --full-run --json
 
 Dokumentiere das Ergebnis kurz im Session-Log.
 ```
@@ -35,8 +35,8 @@ Dokumentiere das Ergebnis kurz im Session-Log.
 Lies ~/CLAUDE.md und öffne das Community Outreach Workspace unter <workspace_path>.
 
 Führe den 4-Phasen-Zyklus aus:
-1. Prüfe POST-AUSGANG.md auf Inbound-Diskussionen.
-2. Prüfe POST-EINGANG.md auf freigegebene Einträge (- [x] Genehmigt). Wenn vorhanden, setze diese über den autorisierten Browser ab, verschiebe sie nach POST-AUSGANG.md und trage die Ziel-URL in POSTVERZEICHNIS.md ein.
+1. Ermittle das lokale Monitoring-Inventar. Behaupte keine Prüfung externer Antworten, solange kein autorisierter Inbound-Adapter tatsächlich angebunden ist.
+2. Prüfe POST-EINGANG.md auf freigegebene Einträge (- [x] Genehmigt). Eine Freigabe ist noch kein Veröffentlichungsbeleg. Übergib den Eintrag nur an einen ausdrücklich angebundenen Publisher und ändere lokale Zustände ausschließlich nach einem vollständigen, zielgebundenen PublishReceipt.
 3. Wähle das nächste fällige Repository aus usecases.json (Fair Round-Robin) und recherchiere auf der nächsten Plattform (Reddit / YouTube / Fachforen) nach einer echten Problemanfrage, die das Tool löst.
 4. Formuliere einen hochwertigen, lösungsorientierten Antwortvorschlag und hänge ihn als "- [ ] Genehmigt" an POST-EINGANG.md an.
 5. Führe bei Bedarf Cut-and-Clue Archivierung durch.
@@ -51,7 +51,8 @@ Führe den 4-Phasen-Zyklus aus:
 
 ```text
 Execute Community Outreach cycle in workspace <workspace_path>:
-Run `python scripts/outreach_engine.py --workspace <workspace_path> --full-run`
+Run `python <workspace_path>/outreach_runner.py --workspace <workspace_path> --full-run --json`.
+Treat `needs-action` as an expected hand-off state, never as publication success.
 Verify integrity of USECASES.md, POST-EINGANG.md, and POSTVERZEICHNIS.md.
 Report execution summary to .SYNC/automation-logging/.
 ```
@@ -63,3 +64,5 @@ Report execution summary to .SYNC/automation-logging/.
 - **Keine eigenmächtige Veröffentlichung:** Nur Posts mit explizitem Häkchen `- [x] Genehmigt` dürfen online abgesetzt werden.
 - **Kein Spamming:** Maximal 1 Entwurf pro Lauf einstellen.
 - **Duplikatschutz:** Jede URL vor dem Entwurf gegen `POSTVERZEICHNIS.md` abgleichen.
+- **Belegpflicht:** Ohne vollständigen `PublishReceipt` bleiben Queue, History, Rotation, Ausgang und Register unverändert.
+- **Dry-Run:** `--dry-run` darf keinen Publisher aufrufen und weder Dateien noch Verzeichnisse verändern.
