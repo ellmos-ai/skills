@@ -6,17 +6,19 @@ author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
 description: >
-  Isolated navigation and routing strategy that searches upward and downward
-  through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md,
-  README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json
-  or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
+  Eigenständige Navigations- und Routing-Strategie, die
+  Verzeichnishierarchien nach oben und unten nach Wegweiser-Dokumenten wie
+  CLAUDE.md, AGENTS.md, README.md und RULES.md sowie nach
+  nutzerkonfigurierbaren Stichwörtern durchsucht. Die Konfiguration erfolgt
+  über staircase-config.json oder config.json. Auch als Up-and-Down Routing
+  oder Walking Bass Routing bekannt.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
-language: en
+language: de
 status: active
 visibility: public
 dependencies:
@@ -35,57 +37,74 @@ provenance:
 
 # Staircase-Routing (Up-and-Down / Walking Bass Routing)
 
-The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
+Der Skill **Staircase-Routing**, auch *Up-and-Down Routing* oder *Walking Bass
+Routing* genannt, kapselt die Strategie zur Prüfung von
+Verzeichnisdokumenten für KI-Agenten.
 
-When an agent enters a directory or works on a file, it uses this strategy to locate authoritative context, rules, and signpost documents before modifying code or taking action.
-
----
-
-## 1. Signpost Document Standards
-
-By default, Staircase-Routing looks for standard signpost documents:
-- **Global & Project Controls:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
-- **Project Overview & Tasks:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
-- **Custom User Buzzwords:** Configured via `staircase-config.json` or `config.json`.
+Wenn ein Agent ein Verzeichnis betritt oder an einer Datei arbeitet, nutzt er
+diese Strategie, um maßgeblichen Kontext, Regeln und Wegweiser-Dokumente zu
+finden, bevor er Code ändert oder eine Aktion ausführt.
 
 ---
 
-## 2. Traversal Algorithm
+## 1. Standards für Wegweiser-Dokumente
 
-```
-                           [ Root / Workspace Level ]
+Staircase-Routing sucht standardmäßig nach diesen Wegweiser-Dokumenten:
+
+- **Globale und projektbezogene Steuerung:** `CLAUDE.md`, `AGENTS.md`,
+  `START.md`, `RULES.md`
+- **Projektübersicht und Aufgaben:** `README.md`, `TODO.md`, `NOTIZ.md`,
+  `BEWEISNOTIZ.md`
+- **Benutzerdefinierte Stichwörter:** Konfiguriert über
+  `staircase-config.json` oder `config.json`.
+
+---
+
+## 2. Traversal-Algorithmus
+
+```text
+                           [ Root- / Workspace-Ebene ]
                            ┌────────────────────────┐
-                           │   CLAUDE.md / RULES.md │ ◄── (Step 2: Read Root Signpost)
+                           │   CLAUDE.md / RULES.md │ ◄── (Schritt 2: Root-Wegweiser lesen)
                            └───────────▲────────────┘
-                                       │ (Staircase Up)
+                                       │ (Treppe aufwärts)
                            ┌───────────┴────────────┐
-                           │ Subfolder / Target Dir │ ◄── (Step 1: Start at CWD)
+                           │ Unterordner / Ziel     │ ◄── (Schritt 1: Im CWD beginnen)
                            └───────────┬────────────┘
-                                       │ (Staircase Down)
+                                       │ (Treppe abwärts)
                            ┌───────────▼────────────┐
-                           │ Child / Module Dir     │ ◄── (Step 3: Discover Sub-Signposts)
+                           │ Kind- / Modulordner    │ ◄── (Schritt 3: Untergeordnete Wegweiser finden)
                            │   module-rules.md      │
                            └────────────────────────┘
 ```
 
-### Step 1: Current Working Directory (CWD) Inspection
-- Inspect the directory of the target file or active working directory.
-- If signpost documents exist, read them immediately.
+### Schritt 1: Aktuelles Arbeitsverzeichnis (CWD) prüfen
 
-### Step 2: Upward Traversal (Staircase Up)
-- If **no** signpost document is found in CWD, move up to the parent directory (`..`).
-- Repeat step-by-step upward until a root signpost document (`CLAUDE.md` or `AGENTS.md`) or the workspace boundary is reached.
-- Read all discovered root signposts to establish global directives and project rules.
+- Prüfe das Verzeichnis der Zieldatei oder das aktive Arbeitsverzeichnis.
+- Sind Wegweiser-Dokumente vorhanden, lies sie sofort.
 
-### Step 3: Downward Inspection (Staircase Down)
-- From the established root directory, step downward into child directories relevant to the task.
-- Discover specialized module-level signposts, domain rules, or component configs. Read them.
+### Schritt 2: Nach oben traversieren
+
+- Wird im CWD **kein** Wegweiser-Dokument gefunden, gehe in das
+  Elternverzeichnis (`..`).
+- Wiederhole dies schrittweise nach oben, bis ein Root-Wegweiser-Dokument
+  (`CLAUDE.md` oder `AGENTS.md`) oder die Workspace-Grenze erreicht ist.
+- Lies alle gefundenen Root-Wegweiser, um globale Vorgaben und Projektregeln
+  festzustellen.
+
+### Schritt 3: Nach unten prüfen
+
+- Gehe vom festgestellten Root-Verzeichnis nach unten in die für die Aufgabe
+  relevanten Unterverzeichnisse.
+- Finde spezialisierte Wegweiser auf Modulebene, Domänenregeln oder
+  Komponentenkonfigurationen und lies sie.
 
 ---
 
-## 3. User-Configurable Buzzwords (`staircase-config.json`)
+## 3. Nutzerkonfigurierbare Stichwörter (`staircase-config.json`)
 
-Agents can read a local or global `staircase-config.json` to customize target signposts:
+Agenten können eine lokale oder globale `staircase-config.json` lesen, um die
+gesuchten Wegweiser anzupassen:
 
 ```json
 {
@@ -117,6 +136,9 @@ Agents can read a local or global `staircase-config.json` to customize target si
 
 ---
 
-## 4. Integration with `letter-hooker` & Scheduled Tasks
+## 4. Integration mit `letter-hooker` und geplanten Aufgaben
 
-`staircase-routing` is embedded as a core preflight bootloader in the **`letter-hooker`** skill and the **`antigravity-kontext-and-workflow-loader-and-divider`** scheduled task, ensuring agents always locate and obey signpost documents before initiating edits.
+`staircase-routing` ist als zentraler Preflight-Bootloader in den Skill
+**`letter-hooker`** und die geplante Aufgabe
+**`antigravity-kontext-and-workflow-loader-and-divider`** eingebettet. Dadurch
+finden und befolgen Agenten Wegweiser-Dokumente, bevor sie Änderungen beginnen.

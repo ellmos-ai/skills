@@ -21,6 +21,7 @@ category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
 language: en
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []
@@ -34,8 +35,6 @@ provenance:
 ---
 
 <img src="banner.png" width="100%" alt="letter-hooker banner">
-
-> **English** — Official English version of `letter-hooker`.
 
 # Letter-Hooker (Prompt-Level Preflight & Governance Engine)
 

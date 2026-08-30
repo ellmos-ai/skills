@@ -6,18 +6,20 @@ author: ellmos contributors
 created: 2026-07-30
 updated: 2026-07-30
 description: >
-  Points to the public, provider-neutral build-your-users-mind module: a
-  privacy-aware recipe for building an empirical Theory-of-Mind preference
-  model of an authorized user from that user's own interaction logs. Use when
-  an operator wants to build, validate, bind, or maintain a decision-avatar
-  profile without publishing the personal profile or its evidence.
+  Verweist auf das öffentliche, anbieterneutrale Modul
+  build-your-users-mind: ein datenschutzbewusstes Verfahren zum Aufbau eines
+  empirischen Theory-of-Mind-Präferenzmodells eines autorisierten Nutzers aus
+  dessen eigenen Interaktionsprotokollen. Verwenden, wenn eine zuständige
+  Person ein Entscheidungsavatar-Profil erstellen, validieren, anbinden oder
+  pflegen möchte, ohne das persönliche Profil oder seine Belege zu
+  veröffentlichen.
 standalone: false
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: utilities
 tags: [theory-of-mind, user-model, decision-avatar, feedback, privacy, pointer-skill]
-language: en
+language: de
 status: active
 visibility: public
 dependencies:
@@ -37,37 +39,46 @@ provenance:
 
 <img src="banner.png" width="100%" alt="build-your-users-mind banner">
 
-# build-your-users-mind — Public, provider-neutral pointer
+# build-your-users-mind — öffentlicher, anbieterneutraler Verweis
 
-This skill is a thin pointer to the public module
+Dieser Skill ist ein schlanker Verweis auf das öffentliche Modul
 [`ellmos-ai/build-your-users-mind`](https://github.com/ellmos-ai/build-your-users-mind).
-The module contains the complete recipe, templates, schemas, scripts, tests and
-source-adapter documentation. This catalog does not duplicate that code.
+Das Modul enthält das vollständige Verfahren, Vorlagen, Schemas, Skripte, Tests
+und die Dokumentation der Quelladapter. Dieser Katalog dupliziert den Code
+nicht.
 
-## What the module does
+## Was das Modul leistet
 
-With the operator's explicit authorization, the module helps an agent:
+Mit ausdrücklicher Freigabe der zuständigen Person unterstützt das Modul einen
+Agenten dabei:
 
-1. extract genuine user-authored turns from the operator's own interaction logs;
-2. redact sensitive material before persistent storage;
-3. reduce and classify evidence about recurring preferences and decisions;
-4. create a local preference model with confidence levels and provenance;
-5. bind a short pointer into the selected agent runtime; and
-6. calibrate predictions against real later feedback.
+1. echte, vom Nutzer verfasste Beiträge aus dessen eigenen
+   Interaktionsprotokollen zu extrahieren;
+2. sensible Inhalte vor dauerhafter Speicherung zu redigieren;
+3. Belege über wiederkehrende Präferenzen und Entscheidungen zu reduzieren und
+   zu klassifizieren;
+4. ein lokales Präferenzmodell mit Konfidenzstufen und Herkunftsnachweisen
+   aufzubauen;
+5. einen kurzen Verweis in die gewählte Agentenlaufzeit einzubinden; und
+6. Vorhersagen anhand späterer echter Rückmeldungen zu kalibrieren.
 
-The public module is a recipe for any user and any supported agent runtime. It
-does not contain a model of a specific person.
+Das öffentliche Modul ist ein Verfahren für beliebige Nutzer und unterstützte
+Agentenlaufzeiten. Es enthält kein Modell einer bestimmten Person.
 
-## Safety and privacy boundary
+## Sicherheits- und Datenschutzgrenze
 
-- Operator authorization is required before reading interaction logs.
-- Personal profiles, raw logs, evidence corpora and local paths remain private.
-- Predictions are uncertain hypotheses, not mind-reading, diagnosis or statements
-  made by the user.
-- A preference prediction never expands the agent's authority.
-- External, irreversible, safety-critical, legal, medical, employment,
-  financial or similarly high-impact actions require explicit confirmation.
-- Agent-generated predictions must never become primary evidence about the user.
+- Vor dem Lesen von Interaktionsprotokollen ist die Freigabe der zuständigen
+  Person erforderlich.
+- Persönliche Profile, Rohprotokolle, Belegkorpora und lokale Pfade bleiben
+  privat.
+- Vorhersagen sind unsichere Hypothesen, kein Gedankenlesen, keine Diagnose und
+  keine Aussagen des Nutzers.
+- Eine Präferenzvorhersage erweitert niemals die Befugnisse des Agenten.
+- Externe, irreversible, sicherheitskritische, rechtliche, medizinische,
+  berufliche, finanzielle oder ähnlich folgenreiche Handlungen benötigen eine
+  ausdrückliche Bestätigung.
+- Vom Agenten erzeugte Vorhersagen dürfen niemals zu Primärbelegen über den
+  Nutzer werden.
 
 ## Installation
 
@@ -75,22 +86,23 @@ does not contain a model of a specific person.
 git clone https://github.com/ellmos-ai/build-your-users-mind.git <clone-path>
 ```
 
-Follow the module's current `README.md`, `SKILL.md`, `SOURCE-ADAPTERS.md` and
-privacy instructions. Keep the generated user profile outside public
-repositories. The module repository is authoritative for implementation and
-versioning.
+Befolge die aktuellen Dateien `README.md`, `SKILL.md`,
+`SOURCE-ADAPTERS.md` und die Datenschutzanweisungen des Moduls. Bewahre das
+erzeugte Nutzerprofil außerhalb öffentlicher Repositories auf. Für
+Implementierung und Versionierung ist das Modul-Repository maßgeblich.
 
-## Public core and private profiles
+## Öffentlicher Kern und private Profile
 
-`build-your-users-mind` is the public, user-neutral module name.
-`decision-avatar` is the public runtime protocol in this catalog. A named
-person's avatar, evidence files, local commands and profile-specific defaults
-are private overlays and must not be published under a personal skill name.
+`build-your-users-mind` ist der öffentliche, nutzerneutrale Modulname.
+`decision-avatar` ist das öffentliche Laufzeitprotokoll dieses Katalogs. Der
+Avatar einer benannten Person, Belegdateien, lokale Befehle und
+profilspezifische Vorgaben sind private Erweiterungen und dürfen nicht unter
+einem persönlichen Skill-Namen veröffentlicht werden.
 
-## Changelog
+## Änderungsprotokoll
 
 ### 1.0.0 (2026-07-30)
 
-- Added the neutral pointer to the standalone public module.
-- Replaced the previously published personal avatar profile with a strict
-  public-core/private-profile boundary.
+- Neutralen Verweis auf das eigenständige öffentliche Modul ergänzt.
+- Das zuvor veröffentlichte persönliche Avatar-Profil durch eine strikte
+  Grenze zwischen öffentlichem Kern und privatem Profil ersetzt.

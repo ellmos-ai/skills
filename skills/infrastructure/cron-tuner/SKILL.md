@@ -1,50 +1,71 @@
 ---
 name: cron-tuner
-language: en
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-08-01
+updated: 2026-08-23
+language: de
 visibility: public
-description: Self-tuning cadence control loop for recurring agent scans. Use when a scheduled scan should sharpen its interval on activity and cool down on silence, without operator intervention.
+standalone: true
+anthropic_compatible: true
+category: infrastructure
+tags: [cadence, scheduler, cooldown, backoff, self-tuning, cron]
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+description: Selbstjustierende Takt-Regelschleife für wiederkehrende Agenten-Scans. Nutzen, wenn ein geplanter Scan sein Intervall bei Aktivität schärfen und bei Stille abkühlen soll, ohne Operator-Eingriff.
 ---
 
 <img src="banner.png" width="100%" alt="cron-tuner banner">
 
-# cron-tuner — self-tuning cadence control loop
+# cron-tuner — selbstjustierende Takt-Regelschleife
 
-A **self-tuning** control loop for recurring, schedule-driven work (cron jobs,
-scheduled tasks, timers). Instead of a fixed interval, the job adapts its own
-cadence: it sharpens when there is work and cools down when there is none.
-Host- and platform-neutral; the pattern works with any scheduler.
+Eine **selbstjustierende** Regelschleife für wiederkehrende, zeitplangetriebene
+Arbeit (Cron-Jobs, geplante Aufgaben, Timer). Statt eines festen Intervalls
+passt der Job seinen eigenen Takt an: er schärft bei Arbeit und kühlt bei
+Stille ab. Host- und plattformneutral; das Muster funktioniert mit jedem
+Scheduler.
 
-## When to use
+## Wann nutzen
 
-- A recurring scan (mailbox watch, sync-yard scan, queue poll) should react
-  quickly during an active "match" and stay cheap during idle phases.
-- You want the adaptation to be **auditable** (a state file) instead of
-  implicit in a conversation or a person's head.
+- Ein wiederkehrender Scan (Mailbox-Watch, Sync-Yard-Scan, Queue-Poll) soll
+  während eines aktiven "Match" schnell reagieren und in Leerlaufphasen
+  günstig bleiben.
+- Die Anpassung soll **auditierbar** sein (eine State-Datei) statt implizit
+  in einer Konversation oder im Kopf einer Person.
 
-## Concepts
+## Konzepte
 
-- **Control loop**: measure → decide → act → persist. Every run ends by
-  writing its state; every run starts by reading it.
-- **Activation**: new work found → jump straight to the fastest interval.
-- **Cooldown ladder**: empty runs advance down a ladder; each step only
-  applies when the interval actually changes.
-- **Cap**: never relax beyond a defined maximum interval.
+- **Regelschleife**: messen → entscheiden → handeln → persistieren. Jeder
+  Lauf endet mit dem Schreiben seines States; jeder Lauf beginnt mit dessen
+  Lesen.
+- **Aktivierung**: neue Arbeit gefunden → direkt auf das schnellste
+  Intervall springen.
+- **Cooldown-Leiter**: leere Läufe rücken eine Leiter herab; jede Stufe
+  gilt nur, wenn sich das Intervall tatsächlich ändert.
+- **Deckel**: niemals über ein definiertes Maximalintervall hinaus
+  entspannen.
 
-## Reference scheme
+## Referenzschema
 
-| Condition | New interval |
+| Bedingung | Neues Intervall |
 |---|---|
-| new work found | fastest (e.g. 15 min) |
-| 4 consecutive empty runs | 30 min |
-| 6 consecutive empty runs | 1 h |
-| each further empty run | double (2 h, 4 h, 8 h) |
-| cap | 24 h (never higher) |
+| neue Arbeit gefunden | schnellstes (z. B. 15 min) |
+| 4 aufeinanderfolgende leere Läufe | 30 min |
+| 6 aufeinanderfolgende leere Läufe | 1 h |
+| jeder weitere leere Lauf | verdoppeln (2 h, 4 h, 8 h) |
+| Deckel | 24 h (niemals höher) |
 
-Tune the thresholds to the workload; keep the doubling simple and the cap explicit.
+Die Schwellen auf die Arbeitslast abstimmen; die Verdopplung einfach und den
+Deckel explizit halten.
 
-## State file (required)
+## State-Datei (Pflicht)
 
-One small JSON file per worker, e.g. `cron-tuner-state.json`:
+Eine kleine JSON-Datei je Worker, z. B. `cron-tuner-state.json`:
 
 ```json
 {
@@ -54,35 +75,41 @@ One small JSON file per worker, e.g. `cron-tuner-state.json`:
 }
 ```
 
-Rules:
+Regeln:
 
-1. **File, not memory.** The counter must survive context compaction,
-   session restarts and operator changes, and must be inspectable by humans
-   and other agents. Do not track cadence in conversation history.
-2. **Rewrite only on change.** Persist the state every run, but only
-   replace the scheduled job when the interval actually changes.
-3. **New job = new schedule, same state.** Changing cadence means deleting
-   the old job and creating a new one with the new interval; the counter
-   continues.
+1. **Datei, nicht Gedächtnis.** Der Zähler muss Kontext-Kompaktierung,
+   Session-Neustarts und Operator-Wechsel überleben und für Menschen und
+   andere Agenten einsehbar sein. Den Takt nicht in der Konversationshistorie
+   verfolgen.
+2. **Nur bei Änderung neu schreiben.** Den State bei jedem Lauf persistieren,
+   aber den geplanten Job nur ersetzen, wenn sich das Intervall tatsächlich
+   ändert.
+3. **Neuer Job = neuer Zeitplan, gleicher State.** Ein Taktwechsel bedeutet,
+   den alten Job zu löschen und einen neuen mit dem neuen Intervall
+   anzulegen; der Zähler läuft weiter.
 
-## Operating rules
+## Betriebsregeln
 
-- **Work decides, not mood.** Only observed arrivals change the cadence —
-  never expectations or approximations.
-- **Anti-herd offsets.** Avoid full-hour and half-hour marks for the fastest
-  interval (e.g. minutes 7/22/37/52) so fleets do not fire in lockstep.
-- **Fail-safe:** if a peer system goes silent, the normal vacancy/absence
-  policy applies — the tuner never escalates into polling floods.
-- **Receipts:** every cadence change is logged with reason, old interval and
-  new interval.
+- **Arbeit entscheidet, nicht Stimmung.** Nur beobachtete Ankünfte ändern
+  den Takt — niemals Erwartungen oder Näherungen.
+- **Anti-Herden-Offsets.** Volle-Stunde- und Halbe-Stunde-Marken für das
+  schnellste Intervall meiden (z. B. Minuten 7/22/37/52), damit Flotten
+  nicht im Gleichschritt feuern.
+- **Fail-Safe:** Verstummt ein Partnersystem, gilt die normale
+  Vakanz-/Abwesenheitsregel — der Tuner eskaliert nie in Poll-Fluten.
+- **Belege:** Jeder Taktwechsel wird mit Grund, altem und neuem Intervall
+  protokolliert.
 
-## Extensibility (registry of loop types)
+## Erweiterbarkeit (Registry der Loop-Typen)
 
-The skill is the home for additional self-tuning loop types over time:
+Der Skill ist die Heimat für weitere selbstjustierende Loop-Typen über die
+Zeit:
 
-- **cooldown** (this scheme: silence → slower)
-- **backoff** (failures → slower, success → faster)
-- **burst** (spike of arrivals → temporary fast mode with an explicit end)
-- **wake-assist** (external wake message → immediate out-of-cycle run)
+- **cooldown** (dieses Schema: Stille → langsamer)
+- **backoff** (Fehler → langsamer, Erfolg → schneller)
+- **burst** (Ankunfts-Spitze → temporärer Schnellmodus mit explizitem Ende)
+- **wake-assist** (externe Wake-Nachricht → sofortiger Lauf außerhalb des
+  Zyklus)
 
-New loop types get a subchapter here plus their own state-file schema.
+Neue Loop-Typen bekommen hier ein Unterkapitel plus ihr eigenes
+State-Datei-Schema.

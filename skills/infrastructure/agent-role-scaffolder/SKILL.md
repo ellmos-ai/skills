@@ -16,6 +16,7 @@ description: >
   "Companion-Worker starten") oder eine bestehende gegen die Haus-Konventionen
   geprüft werden soll ("ist dieser Agent richtig aufgesetzt?").
 visibility: public
+language: de
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

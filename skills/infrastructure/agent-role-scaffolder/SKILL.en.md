@@ -16,6 +16,7 @@ description: >
   worker") or an existing one needs to be checked against house conventions
   ("is this agent set up correctly?").
 visibility: public
+language: en
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

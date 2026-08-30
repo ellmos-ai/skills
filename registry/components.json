@@ -568,7 +568,8 @@
       "status": "active",
       "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -617,8 +618,9 @@
       "path": "skills/dev/piggyback-hosting/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to \"make this hostable without a login\", \"avoid building user accounts\", \"shrink the privacy policy for a hosted tool\", \"who is the data controller if we store nothing\", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references.",
+      "description": "Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -757,7 +759,8 @@
       "status": "stable",
       "description": "Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen, wenn eine Anwendung entworfen wird und der Ablauf noch unklar ist, wenn ein bestehendes Werkzeug als Skill verfügbar gemacht werden soll, wenn Oberfläche und Agentenzugang auseinanderdriften, oder wenn ein Skill zu lang wird und niemand weiß warum.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -770,7 +773,8 @@
       "status": "active",
       "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -801,7 +805,8 @@
       "status": "active",
       "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -1042,6 +1047,7 @@
       "status": "active",
       "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\").",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -1089,9 +1095,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/automation-self-care/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, requests to recreate the ANTIGRAVITY-style maintenance task family, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, or textbased-desktopapp-automations.",
+      "description": "Baut und betreibt ein anbieterneutrales Self-Care-Kernset für geplante LLM-Aufgaben und Desktop-App-Automationen. Nutzen, wenn ein Agent seinen nativen Scheduler entdecken, wiederkehrende Hygiene-, Prompt-Qualitäts-, Frequenz-, Last-, Ressourcen-, Cross-System-, Berechtigungs- und Laufzeit-Checks installieren oder eine bestehende Automations-Flotte mit Rollback, Readback und Löschschutz kontinuierlich verbessern soll. Löst aus bei automation self-care, Scheduler-Task-Pflege, Desktop-App- Automations-Wartung, Automations-Flotten-Audit, selbstheilende Zeitpläne, Anfragen zur Wiederherstellung der ANTIGRAVITY-artigen Wartungs-Task-Familie, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers oder textbased-desktopapp-automations.",
       "languages": [
         "de",
         "en",
@@ -1110,8 +1116,9 @@
       "path": "skills/infrastructure/backup/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Plan, mirror, verify, restore or explicitly archive files through the fail-closed mac-backup core. Use for the user's own cross-host backup jobs; do not use for generic cloud sync or casual file copying.",
+      "description": "Plant, spiegelt, verifiziert, stellt wieder her oder archiviert Dateien explizit über den fail-closed mac-backup-Kern. Für die eigenen hostübergreifenden Backup-Jobs des Nutzers verwenden; nicht für allgemeine Cloud-Synchronisation oder beiläufiges Dateikopieren.",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -1135,10 +1142,11 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/cloud-communication-protocols/SKILL.md",
-      "version": "0.0.0",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Umbrella skill for cloud-bridged communication protocols between agents on different machines (Ping-Pong, agent-beam, listeners and future protocols). Use when coordinating work across machines via a shared sync folder or message yard.",
+      "description": "Dach-Skill für Cloud-gestützte Kommunikationsprotokolle zwischen Agenten auf unterschiedlichen Maschinen (Ping-Pong, agent-beam, Listener und künftige Protokolle). Nutzen, wenn Arbeit über Maschinen hinweg per gemeinsamem Sync-Ordner oder Message-Yard koordiniert wird.",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -1166,10 +1174,11 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/cron-tuner/SKILL.md",
-      "version": "0.0.0",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Self-tuning cadence control loop for recurring agent scans. Use when a scheduled scan should sharpen its interval on activity and cool down on silence, without operator intervention.",
+      "description": "Selbstjustierende Takt-Regelschleife für wiederkehrende Agenten-Scans. Nutzen, wenn ein geplanter Scan sein Intervall bei Aktivität schärfen und bei Stille abkühlen soll, ohne Operator-Eingriff.",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -1201,7 +1210,8 @@
       "status": "active",
       "description": "Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json, Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json, usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei \"erstelle einen Skill\", \"bau mir einen Skill für X\", \"skill-creator nutzen\", \"neuen Skill anlegen\", \"diesen Skill ellmos-konform machen\", \"Lernvertrag/Verhaltenscodex für einen Skill anlegen\", \"Usecase-Abdeckung eines Skills prüfen\". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder, für Landschafts-Audit skill-explorer.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -1231,7 +1241,7 @@
       "path": "skills/infrastructure/letter-hooker/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.",
+      "description": "Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI). Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll.",
       "languages": [
         "de",
         "en",
@@ -1308,7 +1318,8 @@
       "status": "active",
       "description": "Bindet das model-agnostische Computer-Use-Modul open-compute (Screenshot-Wahrnehmung, Windows-UIA-Elementklicks, sicherheitsgegatete Aktionen) fuer ALLE Agenten des Systems ein -- Claude Code, Codex und agy/Antigravity. Nutzen, wenn ein Dienst eine interaktive GUI- oder Browser-Aktion braucht, die kein reiner Text-/API-Weg loesen kann (Paradebeispiel: Tailscale-Reauth im Browser, sonstige Login-/Consent-Dialoge, Dialogfenster-Klicks). Standard ab 2026-08-02: open-compute statt Aufgeben oder Abwarten nutzen.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -1352,7 +1363,7 @@
       "path": "skills/infrastructure/semantic-persona-routing/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.",
+      "description": "Erstellt und verwendet einen anbieterneutralen semantischen Routing-Graphen aus Personas, koordinierenden Rollen, Experten und aktiven Skill-Endpunkten. Verwenden, wenn ein LLM eine Anfrage von einer Leitrolle über einen Experten zu einem Skill routen, aus einem vorhandenen Agentensystem einen portablen Persona-Router extrahieren, eine semantische Domänenkarte mit einer lexikalischen Skill-Registry kombinieren oder fehlende Verbindungen zwischen Rolle und Skill sichtbar machen soll, statt still auf einen Ersatz zurückzufallen. Auslöser sind unter anderem semantisches Persona-Routing, Persona-Umbrella, Rollen-Router, Boss-Agent-Experten-Skill-Routing, Agentenrollen-Export oder die Wiederverwendung von Personas über mehrere LLM-Anbieter hinweg.",
       "languages": [
         "de",
         "en",
@@ -1463,7 +1474,7 @@
       "path": "skills/infrastructure/staircase-routing/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.",
+      "description": "Eigenständige Navigations- und Routing-Strategie, die Verzeichnishierarchien nach oben und unten nach Wegweiser-Dokumenten wie CLAUDE.md, AGENTS.md, README.md und RULES.md sowie nach nutzerkonfigurierbaren Stichwörtern durchsucht. Die Konfiguration erfolgt über staircase-config.json oder config.json. Auch als Up-and-Down Routing oder Walking Bass Routing bekannt.",
       "languages": [
         "de",
         "en",
@@ -1482,7 +1493,7 @@
       "path": "skills/infrastructure/system-onboarding/SKILL.md",
       "version": "1.2.0",
       "status": "active",
-      "description": "Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.",
+      "description": "Anbieterneutrales Onboarding-Protokoll für einen neuen, neu aufgesetzten oder ausgetauschten Arbeitsplatzrechner. Es richtet Betriebssystemvoraussetzungen, Agentenlaufzeiten, gemeinsame Regelflächen, portable Skills, verifizierte Konfiguration und Nachweise nach der Installation ein, ohne Zugangsdaten, private Prompts oder host-spezifische Konfiguration in ein Repository zu kopieren.",
       "languages": [
         "de",
         "en",
@@ -1501,7 +1512,7 @@
       "path": "skills/infrastructure/wayfinding-routing/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Universal LLM navigation, orientation, and emergency resilience skill. Provides active wayfinding, self-orientation, and recovery heuristics when agents face context drift, failing tools, loops, or dead ends. Includes synonym strategies: survival-routing, dead-reckoning, pathfinder-routing, and celestial-routing.",
+      "description": "Universeller Skill für LLM-Navigation, Orientierung und Ausfallsicherheit. Stellt aktives Wayfinding, Selbstorientierung und Wiederherstellungsheuristiken bereit, wenn Agenten mit Kontextdrift, fehlschlagenden Werkzeugen, Schleifen oder Sackgassen konfrontiert sind. Enthält die synonymen Strategien survival-routing, dead-reckoning, pathfinder-routing und celestial-routing.",
       "languages": [
         "de",
         "en",
@@ -2083,7 +2094,7 @@
       "path": "skills/utilities/build-your-users-mind/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Points to the public, provider-neutral build-your-users-mind module: a privacy-aware recipe for building an empirical Theory-of-Mind preference model of an authorized user from that user's own interaction logs. Use when an operator wants to build, validate, bind, or maintain a decision-avatar profile without publishing the personal profile or its evidence.",
+      "description": "Verweist auf das öffentliche, anbieterneutrale Modul build-your-users-mind: ein datenschutzbewusstes Verfahren zum Aufbau eines empirischen Theory-of-Mind-Präferenzmodells eines autorisierten Nutzers aus dessen eigenen Interaktionsprotokollen. Verwenden, wenn eine zuständige Person ein Entscheidungsavatar-Profil erstellen, validieren, anbinden oder pflegen möchte, ohne das persönliche Profil oder seine Belege zu veröffentlichen.",
       "languages": [
         "de",
         "en",
@@ -2141,7 +2152,8 @@
       "status": "active",
       "description": "Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze diesen Skill bei \"gib mir das kurz mit Pro Contra und Empfehlung\", \"executive summary zur Entscheidung\", \"kurzkontext zu <Thema>\", \"fass die Entscheidung X in einer Kurzform zusammen\", /decision-shot, oder wenn ein Ergebnis an jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen, um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -2192,7 +2204,8 @@
       "status": "active",
       "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -2311,8 +2324,9 @@
       "path": "skills/utilities/music-composer/SKILL.md",
       "version": "1.0.0",
       "status": "stable",
-      "description": "Compose video-synced background scores from a storyline JSON using local waveform synthesis (numpy + ffmpeg). Styles: chiptune, ambient, electronic. Deterministic, offline, no cloud service.",
+      "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst.",
       "languages": [
+        "de",
         "en"
       ]
     },
@@ -2345,7 +2359,8 @@
       "status": "active",
       "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {
@@ -2377,7 +2392,8 @@
       "status": "active",
       "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
       "languages": [
-        "de"
+        "de",
+        "en"
       ]
     },
     {

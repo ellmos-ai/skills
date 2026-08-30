@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-02
 updated: 2026-08-07
-description: Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to "make this hostable without a login", "avoid building user accounts", "shrink the privacy policy for a hosted tool", "who is the data controller if we store nothing", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references.
+description: Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei "mach das ohne Login hostbar", "keine Nutzerkonten bauen", "Datenschutzerklärung für ein gehostetes Tool verkleinern", "wer ist verantwortlich, wenn wir nichts speichern" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.
 
 standalone: true
 anthropic_compatible: true
@@ -14,7 +14,7 @@ bach_origin: false
 
 category: dev
 tags: [hosting, privacy, gdpr, dsgvo, byok, client-side-storage, deployment, no-login]
-language: en
+language: de
 status: active
 visibility: public
 
@@ -36,158 +36,168 @@ provenance:
 
 # piggyback-hosting
 
-**A hosting pattern for applications that never accept other people's data in
-the first place.**
+**Ein Hosting-Muster für Anwendungen, die von vornherein niemals fremde
+Daten annehmen.**
 
-> Blueprint born on 2026-08-02 while building three call agents. Reusable for
-> any application that was designed for a single local user but should also
-> be hostable for others.
+> Blaupause entstanden am 2026-08-02 beim Bau dreier Call-Agenten.
+> Wiederverwendbar für jede Anwendung, die für einen einzelnen lokalen
+> Nutzer entworfen wurde, aber auch für andere hostbar sein soll.
 
-## On the name
+## Zum Namen
 
-In English this pattern is called **piggyback** — riding on infrastructure
-you don't own is already the term of art for it. English prose in this skill
-therefore says *piggyback*; **"huckepack" is the German working title** the
-pattern was built under, and it is also the name of the repository this skill
-was migrated from. **The literal mode values stay `huckepack-gift` and
-`huckepack-only-host`** — they are what ships in code and configuration, spelled
-exactly that way, regardless of the language the surrounding prose is in.
+Im Englischen heißt dieses Muster **piggyback** — auf fremder
+Infrastruktur mitreiten ist dort bereits der Fachbegriff dafür. Englischer
+Fließtext in diesem Skill sagt daher *piggyback*; **"huckepack" ist der
+deutsche Arbeitstitel**, unter dem das Muster gebaut wurde, und zugleich
+der Name des Repositories, aus dem dieser Skill migriert wurde. **Die
+wörtlichen Modus-Werte bleiben `huckepack-gift` und `huckepack-only-host`**
+— sie sind das, was in Code und Konfiguration verschifft wird, genau so
+geschrieben, unabhängig davon, in welcher Sprache der umgebende Fließtext
+steht.
 
-## The problem
+## Das Problem
 
-An application gets built locally: a database, an API key, state living in
-the process. On your own machine that is simply correct. The moment someone
-hosts it for others, each of those three assumptions turns into a bug — every
-visitor shares the same state, the same database, the same key. Whoever opens
-the page sees everyone else's data.
+Eine Anwendung wird lokal gebaut: eine Datenbank, ein API-Key, State, der
+im Prozess lebt. Auf der eigenen Maschine ist das schlicht korrekt. Sobald
+jemand sie für andere hostet, wird jede dieser drei Annahmen zu einem Bug —
+jeder Besucher teilt sich denselben State, dieselbe Datenbank, denselben
+Key. Wer die Seite öffnet, sieht die Daten aller anderen.
 
-The usual fix is user management: accounts, login, access checks, deletion
-deadlines, a privacy notice, a data-processing agreement. Often a bigger
-undertaking than the application itself.
+Die übliche Lösung ist Nutzerverwaltung: Accounts, Login, Zugriffsprüfungen,
+Löschfristen, eine Datenschutzerklärung, ein Auftragsverarbeitungsvertrag.
+Oft ein größeres Unterfangen als die Anwendung selbst.
 
-## The idea
+## Die Idee
 
-**The visitor keeps everything on their own device. The host keeps nothing.**
+**Der Besucher behält alles auf dem eigenen Gerät. Der Host behält nichts.**
 
-This doesn't solve user management — it makes it **moot**. Where no one
-else's data sits on the server, there is nothing to wall off between
-visitors, nothing to delete on a schedule, and the privacy notice shrinks to
-what the service actually does.
+Das löst die Nutzerverwaltung nicht — es macht sie **gegenstandslos**. Wo
+keine fremden Daten auf dem Server liegen, gibt es nichts zwischen
+Besuchern abzuschotten, nichts nach Zeitplan zu löschen, und die
+Datenschutzerklärung schrumpft auf das, was der Dienst tatsächlich tut.
 
-## The three modes
+## Die drei Modi
 
-| Mode | API key | Data | User management |
+| Modus | API-Key | Daten | Nutzerverwaltung |
 |---|---|---|---|
-| **`huckepack-gift`** | from the host | on the visitor's device | none |
-| **`huckepack-only-host`** | from the visitor | on the visitor's device | none |
-| **`pay-membership`** | host's, billed | server | required |
+| **`huckepack-gift`** | vom Host | auf dem Gerät des Besuchers | keine |
+| **`huckepack-only-host`** | vom Besucher | auf dem Gerät des Besuchers | keine |
+| **`pay-membership`** | des Hosts, abgerechnet | Server | erforderlich |
 
-- **`huckepack-gift`** — the host supplies their own key and gives the
-  execution away for free. An invitation to try the tool with no friction.
-- **`huckepack-only-host`** — the visitor brings their own key. The host pays
-  nothing and stores nothing.
-- **`pay-membership`** — deliberately kept as a stub. This is where everything
-  the other two avoid — accounts, billing, server-side storage — becomes
-  necessary again. It's a separate undertaking, not a flag to flip.
+- **`huckepack-gift`** — der Host liefert seinen eigenen Key und verschenkt
+  die Ausführung. Eine reibungslose Einladung, das Tool auszuprobieren.
+- **`huckepack-only-host`** — der Besucher bringt seinen eigenen Key mit.
+  Der Host zahlt nichts und speichert nichts.
+- **`pay-membership`** — bewusst als Stub belassen. Hier wird alles wieder
+  nötig, was die anderen beiden vermeiden — Accounts, Abrechnung,
+  serverseitige Speicherung. Ein eigenes Unterfangen, kein Schalter zum
+  Umlegen.
 
-There is always a **`local`** default: whoever configures nothing gets the
-application exactly as it ran before, on their own machine.
+Es gibt immer einen **`local`**-Standard: wer nichts konfiguriert, bekommt
+die Anwendung genau so, wie sie vorher lief, auf der eigenen Maschine.
 
-## The building blocks
+## Die Bausteine
 
-| Block | Purpose |
+| Baustein | Zweck |
 |---|---|
-| Mode as an install-time setting | a property of the deployment, not of the session |
-| Swappable storage layer | same database, different location |
-| SQLite in the browser (WASM + OPFS) | same schema, same queries, different execution site |
-| Key field, masked | only in `only-host` mode, never logged |
-| Export and import | **not optional** — browser data is volatile |
-| Receipt as a downloadable file, target folder selectable | no server involved in delivering it |
+| Modus als Install-Time-Einstellung | eine Eigenschaft des Deployments, nicht der Session |
+| Austauschbare Speicherschicht | dieselbe Datenbank, anderer Ort |
+| SQLite im Browser (WASM + OPFS) | dasselbe Schema, dieselben Queries, anderer Ausführungsort |
+| Key-Feld, maskiert | nur im `only-host`-Modus, nie geloggt |
+| Export und Import | **nicht optional** — Browser-Daten sind flüchtig |
+| Beleg als herunterladbare Datei, Zielordner wählbar | kein Server an der Auslieferung beteiligt |
 
-The real engineering effort sits in making the storage layer swappable: the
-application writes to SQLite either way, but a layer in between decides
-whether that write lands on the server or in the visitor's browser
-(`sql.js` / the official SQLite-WASM build, persisted via the Origin Private
-File System). Rank the browser-storage options by weight if WASM is too
-heavy: SQLite-WASM + OPFS (a real database, most capacity) > IndexedDB
-(structured, its own query model) > `localStorage` (fine only for small
-things like language and theme).
+Der eigentliche Engineering-Aufwand liegt darin, die Speicherschicht
+austauschbar zu machen: die Anwendung schreibt so oder so nach SQLite,
+aber eine Zwischenschicht entscheidet, ob dieses Schreiben auf dem Server
+oder im Browser des Besuchers landet (`sql.js` / der offizielle
+SQLite-WASM-Build, persistiert über das Origin Private File System). Die
+Browser-Speicher-Optionen nach Gewicht ordnen, falls WASM zu schwer ist:
+SQLite-WASM + OPFS (eine echte Datenbank, größte Kapazität) > IndexedDB
+(strukturiert, eigenes Query-Modell) > `localStorage` (nur für Kleinigkeiten
+wie Sprache und Theme geeignet).
 
-## What this pattern does not solve — said plainly
+## Was dieses Muster nicht löst — offen gesagt
 
-- **Browser data deleted means everything is gone.** There is no server-side
-  copy. This is why export is a condition, not a nice-to-have feature.
-- **No device switch** without an export and an import.
-- **The key living in the browser** (`only-host`) is less protected than one
-  on a server. It does belong to the visitor, though, and the alternative
-  would be handing it to the host — not obviously the safer choice.
-- **Execution still runs through the host.** For services that reach a third
-  party — a phone call, for instance — the host processes that third party's
-  data regardless of where the visitor's own records live. A privacy notice
-  does not become unnecessary, only short.
+- **Gelöschte Browser-Daten heißt, alles ist weg.** Es gibt keine
+  serverseitige Kopie. Deshalb ist Export eine Bedingung, kein Nice-to-have.
+- **Kein Gerätewechsel** ohne Export und Import.
+- **Der im Browser lebende Key** (`only-host`) ist weniger geschützt als
+  einer auf einem Server. Er gehört aber dem Besucher, und die Alternative
+  wäre, ihn dem Host zu übergeben — nicht offensichtlich die sicherere Wahl.
+- **Die Ausführung läuft weiterhin über den Host.** Bei Diensten, die einen
+  Dritten erreichen — etwa einen Telefonanruf — verarbeitet der Host die
+  Daten dieses Dritten unabhängig davon, wo die eigenen Aufzeichnungen des
+  Besuchers liegen. Eine Datenschutzerklärung wird dadurch nicht
+  überflüssig, nur kurz.
 
-## What the legal check found
+## Was die Rechtsprüfung ergab
 
-A first-look legal review (`references/RECHT.md`, in German — it examines
-German and EU statutes, so quoting them in translation would be less
-accurate, not more accessible) checked the pattern against GDPR, TDDDG and
-UWG. **Ersteinschätzung mit Fundstellen, keine Rechtsberatung** — a first
-assessment with citations, not legal advice. Three findings in one line each:
+Eine rechtliche Ersteinschätzung (`references/RECHT.md`, deutsch — sie
+prüft deutsche und EU-Vorschriften, weshalb ein Zitieren in Übersetzung
+weniger genau, nicht zugänglicher wäre) prüfte das Muster gegen DSGVO,
+TDDDG und UWG. **Ersteinschätzung mit Fundstellen, keine Rechtsberatung.**
+Drei Befunde in je einer Zeile:
 
-- **The host stays the data controller even while storing nothing.**
-  GDPR Art. 4(7) attaches controllership to deciding purposes and means, not
-  to storage; the CJEU has said so explicitly (C-683/21). What becomes moot
-  is **user management**, not responsibility.
-- **Nothing shrinks for the person who gets contacted.** Information duties
-  under Art. 14, a documented legal-basis balancing test, a data-processing
-  agreement with whatever service performs the contact — these are usually
-  the longest sections of a privacy notice, and the pattern doesn't touch
-  them.
-- **The household exemption helps the visitor, not the host.** It covers
-  purely personal use by a natural person; a service offered to others is not
-  a purely personal activity. That is exactly where piggyback hosting begins.
+- **Der Host bleibt Verantwortlicher, auch wenn er nichts speichert.**
+  Art. 4(7) DSGVO knüpft die Verantwortlichkeit an das Entscheiden über
+  Zwecke und Mittel, nicht an die Speicherung; der EuGH hat das ausdrücklich
+  so gesagt (C-683/21). Gegenstandslos wird die **Nutzerverwaltung**, nicht
+  die Verantwortung.
+- **Für die kontaktierte Person schrumpft nichts.** Informationspflichten
+  nach Art. 14, eine dokumentierte Abwägung der Rechtsgrundlage, ein
+  Auftragsverarbeitungsvertrag mit dem Dienst, der den Kontakt ausführt —
+  das sind meist die längsten Abschnitte einer Datenschutzerklärung, und
+  das Muster rührt sie nicht an.
+- **Die Haushaltsausnahme hilft dem Besucher, nicht dem Host.** Sie deckt
+  rein persönliche Nutzung durch eine natürliche Person; ein Dienst, der
+  anderen angeboten wird, ist keine rein persönliche Tätigkeit. Genau dort
+  beginnt Piggyback-Hosting.
 
-The gain is in the **volume of obligations and the size of the exposure**,
-not in their kind — which is also the more honest claim to make about the
-pattern.
+Der Gewinn liegt im **Umfang der Pflichten und der Größe der Angriffsfläche**,
+nicht in ihrer Art — was zugleich die ehrlichere Aussage über das Muster ist.
 
-## How to apply this pattern
+## Wie dieses Muster angewendet wird
 
-1. Read `references/DATA-FLOW-TEMPLATE.md` and fill it in for the actual
-   application, evidence-first (every row needs a `file:line`, or "not
-   found"). This surfaces exactly which local assumptions break under
-   multi-visitor hosting before any code changes.
-2. Decide which modes the application actually needs — `local` is always the
-   default; `huckepack-gift` and `huckepack-only-host` are the two that avoid
-   user management; `pay-membership` stays a stub unless there is a concrete
-   reason to build real accounts.
-3. Make the storage layer swappable (the core engineering step above), add
-   the masked key field for `only-host`, and wire up export/import before
-   anything ships — it is the safety net for volatile browser storage.
-4. Fill in `references/PRIVACY-TEMPLATE.md` for the concrete deployment;
-   delete the blocks that don't apply, verify every provider fact from
-   current contracts, and get a case-specific legal review before real data
-   is processed. The template is a starting point, not a finished notice.
-5. For any installation touching real third parties (phone calls, messages
-   to people who did not sign up themselves) or research participants, treat
-   `references/RECHT.md`'s recommendations as a checklist, not as clearance —
-   involve a lawyer before the first public run.
+1. `references/DATA-FLOW-TEMPLATE.md` lesen und für die tatsächliche
+   Anwendung ausfüllen, belegorientiert (jede Zeile braucht ein `file:line`
+   oder "nicht gefunden"). Das legt genau offen, welche lokalen Annahmen
+   unter Multi-Besucher-Hosting brechen, bevor Code geändert wird.
+2. Entscheiden, welche Modi die Anwendung tatsächlich braucht — `local`
+   ist immer der Standard; `huckepack-gift` und `huckepack-only-host` sind
+   die beiden, die Nutzerverwaltung vermeiden; `pay-membership` bleibt ein
+   Stub, solange kein konkreter Grund für echte Accounts besteht.
+3. Die Speicherschicht austauschbar machen (der oben genannte Kern-Schritt),
+   das maskierte Key-Feld für `only-host` ergänzen und Export/Import
+   verdrahten, bevor irgendetwas ausgeliefert wird — es ist das
+   Sicherheitsnetz für flüchtigen Browser-Speicher.
+4. `references/PRIVACY-TEMPLATE.md` für das konkrete Deployment ausfüllen;
+   nicht zutreffende Blöcke löschen, jede Anbieter-Angabe gegen aktuelle
+   Verträge prüfen und eine fallbezogene Rechtsprüfung einholen, bevor
+   echte Daten verarbeitet werden. Die Vorlage ist ein Ausgangspunkt,
+   keine fertige Erklärung.
+5. Bei jeder Installation, die echte Dritte betrifft (Telefonanrufe,
+   Nachrichten an Personen, die sich nicht selbst angemeldet haben) oder
+   Forschungsteilnehmende, die Empfehlungen aus `references/RECHT.md` als
+   Checkliste behandeln, nicht als Freigabe — vor dem ersten öffentlichen
+   Lauf einen Anwalt einbeziehen.
 
-## References
+## Referenzen
 
-- `references/DATA-FLOW-TEMPLATE.md` — template and method for a data-flow
-  plan: every row needs a file:line, or it's a belief, not a finding.
-- `references/PRIVACY-TEMPLATE.md` — sample privacy notice with marked
-  placeholders for a piggyback installation.
-- `references/RECHT.md` — first-look legal assessment (German) with GDPR,
-  TDDDG and UWG citations.
+- `references/DATA-FLOW-TEMPLATE.md` — Vorlage und Verfahren für einen
+  Data-Flow-Plan: jede Zeile braucht ein file:line, sonst ist es eine
+  Vermutung, kein Befund.
+- `references/PRIVACY-TEMPLATE.md` — Muster-Datenschutzerklärung mit
+  markierten Platzhaltern für eine Piggyback-Installation.
+- `references/RECHT.md` — rechtliche Ersteinschätzung (deutsch) mit
+  DSGVO-, TDDDG- und UWG-Fundstellen.
 
-Both templates are **samples, not legal advice**. Whoever hosts an
-application adapts them and is responsible for the result.
+Beide Vorlagen sind **Muster, keine Rechtsberatung**. Wer eine Anwendung
+hostet, passt sie an und ist für das Ergebnis verantwortlich.
 
-## Origin
+## Herkunft
 
-Emerged while building HungryCall, Ringedingeding and ResearchCall — three
-call agents where a data-flow audit showed that hosting them unmodified would
-have been a privacy incident with a name attached to it. Migrated from the
-standalone `huckepack` repository into this skill library.
+Entstanden beim Bau von HungryCall, Ringedingeding und ResearchCall — drei
+Call-Agenten, bei denen ein Data-Flow-Audit zeigte, dass ein unverändertes
+Hosting ein Datenschutzvorfall mit angehängtem Namen gewesen wäre. Migriert
+aus dem eigenständigen `huckepack`-Repository in diese Skill-Bibliothek.

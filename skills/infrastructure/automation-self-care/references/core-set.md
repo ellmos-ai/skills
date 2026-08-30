@@ -8,7 +8,7 @@
 4. 3-Line Prompt Header Standard
 5. Hypothesis Catalogue
 6. Five Safeguards
-7. Rollout Order
+7. Visible Naming and Stable Identity
 
 ---
 
@@ -94,8 +94,30 @@ Classify a failure before changing anything:
 
 ## 5. Five safeguards
 
-1. **Self-protection & Immunity**: Care tasks with `ANTIGRAVITY` in their name cannot disable themselves or each other.
+1. **Self-protection & Immunity**: Care tasks with `ANTIGRAVITY` in their name cannot disable themselves or each other, and cannot reduce their own cadence below `recovery_floor.minimum_core_runs_per_day`. A controlled pause remains possible only after an explicit user decision, a security gate or an evidenced emergency.
 2. **Deletion protection**: Deleted tasks remain suppressed until the user reverses the decision.
 3. **Effect check and rollback**: Every change has a before-state and follow-up.
 4. **One change per run**: Preserve causal attribution.
 5. **Fail-Closed on Locks**: Active user locks (e.g. `LOCK.user.buildweek-no-push.txt`) override all autonomous write operations.
+
+---
+
+## 7. Visible naming and stable identity
+
+Each adapter profile supplies a non-sensitive `app_display_name`. The generated
+visible title is always:
+
+```text
+<APP_DISPLAY_NAME> — <CARE_TITLE>
+```
+
+A Codex adapter therefore emits `CODEX — ...`; other providers use their own app
+label. The stable IDs (`automation-care.*` in the generator, `antigravity-*` in
+the native full topology above) do not change. Adapters reconcile by stable ID
+and semantic role before considering legacy unprefixed titles, update one
+matched task in place and block ambiguous matches. They never create a
+replacement merely because the visible title differs.
+
+The prefix helps humans recognize protected core tasks but does not confer
+permissions and does not replace the recovery floor, deletion/suppression log,
+rollback or native readback.

@@ -1,99 +1,124 @@
 ---
 name: cloud-communication-protocols
-language: en
+version: 1.0.0
+type: skill
+author: Lukas Geiger
+created: 2026-08-01
+updated: 2026-08-25
+language: de
 visibility: public
-description: Umbrella skill for cloud-bridged communication protocols between agents on different machines (Ping-Pong, agent-beam, listeners and future protocols). Use when coordinating work across machines via a shared sync folder or message yard.
+standalone: true
+anthropic_compatible: true
+category: infrastructure
+tags: [ping-pong, agent-beam, listeners, cross-machine, sync-yard, coordination]
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+description: Dach-Skill für Cloud-gestützte Kommunikationsprotokolle zwischen Agenten auf unterschiedlichen Maschinen (Ping-Pong, agent-beam, Listener und künftige Protokolle). Nutzen, wenn Arbeit über Maschinen hinweg per gemeinsamem Sync-Ordner oder Message-Yard koordiniert wird.
 ---
 
 <img src="banner.png" width="100%" alt="cloud-communication-protocols banner">
 
 # cloud-communication-protocols
 
-Family of protocols that let two or more agents on different machines
-coordinate through a shared, cloud-synchronized folder (the "yard") instead of
-a direct channel. This skill is the **umbrella**: it collects the protocols,
-names which one is proven, and gates the ones still in concept.
+Familie von Protokollen, die zwei oder mehr Agenten auf unterschiedlichen
+Maschinen über einen gemeinsamen, cloud-synchronisierten Ordner (den "Yard")
+statt über einen direkten Kanal koordinieren lässt. Dieser Skill ist das
+**Dach**: er sammelt die Protokolle, benennt, welches bewiesen ist, und
+sperrt die, die noch Konzept sind.
 
-## When to use
+## Wann nutzen
 
-- Work spans two or more machines (verification, mirrored setups, pilots)
-  and there is no direct agent-to-agent channel.
-- You need a common vocabulary for assignments, answers, cadence and
-  escalation across those machines.
+- Arbeit erstreckt sich über zwei oder mehr Maschinen (Verifikation,
+  gespiegelte Setups, Piloten) und es gibt keinen direkten
+  Agent-zu-Agent-Kanal.
+- Ein gemeinsames Vokabular für Aufträge, Antworten, Takt und Eskalation
+  über diese Maschinen hinweg wird gebraucht.
 
-## Protocols in this family
+## Protokolle dieser Familie
 
-### 1. Ping-Pong (proven, base protocol)
+### 1. Ping-Pong (bewiesen, Basisprotokoll)
 
-Two or more workers with offset scheduled scans bridge the cloud-sync
-latency: each side scans the yard for assignments addressed to itself,
-executes, leaves the answer, and may issue follow-ups for the other side.
+Zwei oder mehr Worker mit versetzten geplanten Scans überbrücken die
+Cloud-Sync-Latenz: jede Seite scannt den Yard nach an sie adressierten
+Aufträgen, führt aus, hinterlässt die Antwort und kann Folgeaufträge für
+die andere Seite ausstellen.
 
-Core rules: write only in your own slot, receipts for every action,
-idempotency, no secrets in the yard (public keys/fingerprints/paths only),
-cooperative error deltas, readback-over-log verification.
+Kernregeln: nur im eigenen Slot schreiben, Belege für jede Aktion,
+Idempotenz, keine Geheimnisse im Yard (nur öffentliche Schlüssel/
+Fingerprints/Pfade), kooperative Fehler-Deltas, Readback-über-Log-Verifikation.
 
-**Cadence: adaptive polling frequency.** Cadence control is not part of the
-base protocol's payload rules, but every implementation needs it — a fixed
-polling interval either floods an idle yard or misses fresh work. Two
-mechanisms apply and must both be handled, not left implicit:
+**Takt: adaptive Poll-Frequenz.** Die Taktsteuerung ist nicht Teil der
+Payload-Regeln des Basisprotokolls, aber jede Implementierung braucht sie —
+ein fester Poll-Intervall flutet entweder einen leeren Yard oder verpasst
+frische Arbeit. Zwei Mechanismen gelten und müssen beide behandelt werden,
+nicht implizit bleiben:
 
-- **A — Self-tuning (default, no operator input; the `cooldown`/backoff
-  pattern).** New assignment found → jump straight to the fastest interval
-  (e.g. 15 min). Empty run → cool down on a ladder: 4 consecutive empty runs
-  → 30 min, 2 more → 1 h, then double each further empty streak (2 h, 4 h,
-  8 h) up to a hard cap (24 h, never higher). Persist the empty-run counter
-  and current interval in a small state file at the worker (not in
-  conversation memory), so it survives restarts; a cadence change means
-  deleting the old scheduled job and creating a new one at the new interval,
-  counter carried over. Full reference scheme, state-file schema and further
-  loop types (burst, wake-assist): companion skill **`cron-tuner`**.
-- **B — Peer-instructed override.** Either side may set the other side's
-  cadence explicitly in the assignment text — `CADENCE: match 15m` to sync
-  to a tighter window, or `CADENCE: pause 1h → 2h after 3 empty` to slow a
-  side doing predictable heads-down work. Whoever changes a peer's cadence
-  confirms the new interval in the next delta (readback applies to clocks
-  too).
+- **A — Selbstjustierend (Standard, keine Operator-Eingabe; das
+  `cooldown`/Backoff-Muster).** Neuer Auftrag gefunden → direkt auf das
+  schnellste Intervall springen (z. B. 15 min). Leerer Lauf → auf einer
+  Leiter abkühlen: 4 aufeinanderfolgende leere Läufe → 30 min, 2 weitere →
+  1 h, danach jede weitere leere Serie verdoppeln (2 h, 4 h, 8 h) bis zu
+  einem harten Deckel (24 h, niemals höher). Den Leerlauf-Zähler und das
+  aktuelle Intervall in einer kleinen State-Datei beim Worker persistieren
+  (nicht im Konversationsgedächtnis), damit sie Neustarts überlebt; ein
+  Taktwechsel bedeutet, den alten geplanten Job zu löschen und einen neuen
+  im neuen Intervall anzulegen, Zähler übernommen. Vollständiges
+  Referenzschema, State-Datei-Schema und weitere Loop-Typen (Burst,
+  Wake-Assist): Begleit-Skill **`cron-tuner`**.
+- **B — Peer-instruiertes Override.** Jede Seite darf den Takt der anderen
+  Seite explizit im Auftragstext setzen — `CADENCE: match 15m`, um auf ein
+  engeres Fenster zu synchronisieren, oder `CADENCE: pause 1h → 2h after 3
+  empty`, um eine Seite mit planbarer Kopf-runter-Arbeit zu verlangsamen.
+  Wer den Takt eines Peers ändert, bestätigt das neue Intervall im nächsten
+  Delta (Readback gilt auch für Uhren).
 
-Both mechanisms only change reaction time, never the base-protocol rules
-(slot discipline, receipts, no secrets). A mutual `WAKE: <reason>` channel
-allows out-of-cycle scans as a hint, never as authority; delete after
-reading.
+Beide Mechanismen ändern nur die Reaktionszeit, niemals die
+Basisprotokoll-Regeln (Slot-Disziplin, Belege, keine Geheimnisse). Ein
+gegenseitiger `WAKE: <Grund>`-Kanal erlaubt Scans außerhalb des Zyklus als
+Hinweis, niemals als Autorität; nach dem Lesen löschen.
 
-Full specification and reference evidence:
+Vollständige Spezifikation und Referenzbelege:
 `dev-bricks/system-gap-master` → `docs/communications-protocols-skill.md`.
 
-### 2. agent-beam (concept, gated)
+### 2. agent-beam (Konzept, gesperrt)
 
-For urgent work: a package of prompt + starter script is placed in the
-target slot, and a watcher on the target machine starts a local agent run
-on it — the agent "lands" with assignment and starter and begins immediately.
+Für dringende Arbeit: ein Paket aus Prompt + Starter-Skript wird im
+Ziel-Slot abgelegt, und ein Watcher auf der Zielmaschine startet damit
+einen lokalen Agentenlauf — der Agent "landet" mit Auftrag und Starter und
+beginnt sofort.
 
-Gated: requires a signed-starter trust contract, quarantine/review step and
-explicit operator approval before any activation.
+Gesperrt: benötigt einen signierten Starter-Vertrauensvertrag, einen
+Quarantäne-/Review-Schritt und ausdrückliche Operator-Freigabe vor jeder
+Aktivierung.
 
-### 3. listeners / ear-to-ear-listening (concept, gated)
+### 3. Listener / Ear-to-Ear-Listening (Konzept, gesperrt)
 
-Watchers observe triggers in the yard (file arrivals, flag files, registry
-changes) and start agents on the other machine. "Ear-to-ear": one host's
-listener watches the other host's inbox.
+Watcher beobachten Trigger im Yard (Datei-Ankünfte, Flag-Dateien,
+Registry-Änderungen) und starten Agenten auf der anderen Maschine.
+"Ear-to-Ear": der Listener des einen Hosts beobachtet den Posteingang des
+anderen Hosts.
 
-Gated: debouncing rules, trigger whitelists per slot and a security contract
-are required first.
+Gesperrt: Debouncing-Regeln, Trigger-Whitelists je Slot und ein
+Sicherheitsvertrag werden zuerst benötigt.
 
-## Shared invariants (all protocols)
+## Gemeinsame Invarianten (alle Protokolle)
 
-- The yard is transport, never a workspace and never a secret store.
-- Every action leaves a verifiable receipt; "done" without an artifact is
-  not done.
-- Failure handling is cooperative: error deltas with hypothesis and
-  counter-test, second opinions welcome.
-- Absence of a partner is handled by the platform's vacancy rule
-  (e.g. 48 h), not by escalation.
+- Der Yard ist Transport, niemals Arbeitsbereich und niemals
+  Geheimnis-Speicher.
+- Jede Aktion hinterlässt einen verifizierbaren Beleg; "erledigt" ohne
+  Artefakt ist nicht erledigt.
+- Fehlerbehandlung ist kooperativ: Fehler-Deltas mit Hypothese und
+  Gegentest, Zweitmeinungen willkommen.
+- Abwesenheit eines Partners wird über die Vakanz-Regel der Plattform
+  behandelt (z. B. 48 h), nicht über Eskalation.
 
-## Adding new protocols
+## Neue Protokolle hinzufügen
 
-New protocols join this family as a subchapter in
-`communications-protocols-skill.md` (concept first, with its own security
-contract and evidence before "proven"). List them here with one line each:
-name, state (concept/pilot/proven), purpose.
+Neue Protokolle treten dieser Familie als Unterkapitel in
+`communications-protocols-skill.md` bei (zuerst Konzept, mit eigenem
+Sicherheitsvertrag und Belegen vor "bewiesen"). Hier mit je einer Zeile
+listen: Name, Zustand (Konzept/Pilot/bewiesen), Zweck.

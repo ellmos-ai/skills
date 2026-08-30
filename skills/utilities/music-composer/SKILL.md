@@ -6,16 +6,16 @@ author: ellmos contributors
 created: 2026-07-31
 updated: 2026-07-31
 description: >
-  Compose video-synced background scores from a storyline JSON using local
-  waveform synthesis (numpy + ffmpeg). Styles: chiptune, ambient, electronic.
-  Deterministic, offline, no cloud service.
+  Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON
+  per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient,
+  Electronic. Deterministisch, offline, kein Cloud-Dienst.
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: utilities
 tags: [music, audio, score, composition, chiptune, ambient, electronic, video-sync, waveform-synthesis]
-language: en
+language: de
 status: stable
 visibility: public
 dependencies:
@@ -27,88 +27,94 @@ provenance:
   origin: local-reconstruction
   origin_license: MIT
   notes: >
-    Method reconstructed from a video-synced score composed for a 179.5 s
-    explainer video (5 music sections mapped from 7 story acts). Canonical
-    engine: ai-media-editor repo, tools/compose_music.py (github.com/ellmos-ai/ai-media-editor).
-    A standalone copy is bundled here for offline use.
+    Verfahren rekonstruiert aus einem video-synchronisierten Score, komponiert
+    für ein 179,5-s-Erklärvideo (5 Musikabschnitte aus 7 Story-Akten
+    gemappt). Kanonische Engine: ai-media-editor-Repo, tools/compose_music.py
+    (github.com/ellmos-ai/ai-media-editor). Eine eigenständige Kopie liegt
+    hier für Offline-Nutzung bei.
 ---
 
 <img src="banner.png" width="100%" alt="music-composer banner">
 
 # music-composer — Storyline → Score
 
-Compose a background score that follows a video's dramatic arc, fully local:
-numpy waveform synthesis (oscillators, ADSR, layering, delay reverb) + ffmpeg
-for MP3 encoding. No samples, no MIDI hardware, no cloud API.
+Komponiert einen Hintergrund-Score, der dem dramaturgischen Bogen eines
+Videos folgt, vollständig lokal: numpy-Waveform-Synthese (Oszillatoren,
+ADSR, Layering, Delay-Reverb) + ffmpeg für die MP3-Kodierung. Keine Samples,
+keine MIDI-Hardware, keine Cloud-API.
 
-## When to use
+## Wann nutzen
 
-- A video/podcast needs background music that hits story beats at exact
-  timestamps (opening, tension dip, drive section, climax, outro).
-- You want a deterministic, re-renderable score (same seed → same audio).
-- Chiptune, ambient, or electronic styles are acceptable.
+- Ein Video/Podcast braucht Hintergrundmusik, die Story-Beats exakt auf
+  Zeitstempeln trifft (Opening, Spannungstal, Drive-Abschnitt, Klimax,
+  Outro).
+- Ein deterministischer, neu-renderbarer Score wird gebraucht (gleicher
+  Seed → gleiches Audio).
+- Chiptune-, Ambient- oder Electronic-Stile sind akzeptabel.
 
-## When NOT to use (honest genre limits)
+## Wann NICHT nutzen (ehrliche Genre-Grenzen)
 
-Waveform synthesis can deliver **chiptune, ambient, and electronic** background
-beds. It cannot deliver **pop, rock, classical, or orchestral film music** with
-its built-in synth — but the arrangement is backend-neutral: see "Beyond
-waveform synthesis" below for rendering the same composition through
-SoundFonts, orchestral libraries, or external generation.
+Waveform-Synthese kann **Chiptune-, Ambient- und Electronic**-Hintergrundbetten
+liefern. Sie kann mit ihrem eingebauten Synth **kein Pop, Rock, Klassik oder
+Orchester-Filmmusik** liefern — aber das Arrangement ist Backend-neutral:
+siehe "Jenseits der Waveform-Synthese" unten, um dieselbe Komposition über
+SoundFonts, Orchester-Bibliotheken oder externe Generierung zu rendern.
 
-## The method: Storyline → Score
+## Das Verfahren: Storyline → Score
 
-Reconstructed as-is from the reference score (179.5 s, C minor):
+So rekonstruiert wie im Referenz-Score (179,5 s, c-Moll):
 
-1. **Map story acts to music sections.** Acts that share one emotional state
-   merge into one section (reference: 7 acts → 5 sections; acts 1–3 formed a
-   single 62 s calm opening). Each section gets exact `start`/`end` in seconds.
-2. **Assign emotion + intensity per section.**
-   - *Emotion* selects the chord progression (scale degrees, minor example):
+1. **Story-Akte auf Musikabschnitte mappen.** Akte, die einen emotionalen
+   Zustand teilen, verschmelzen zu einem Abschnitt (Referenz: 7 Akte →
+   5 Abschnitte; Akte 1–3 bildeten ein einziges 62-s-ruhiges Opening). Jeder
+   Abschnitt bekommt exaktes `start`/`end` in Sekunden.
+2. **Emotion + Intensität je Abschnitt zuweisen.**
+   - *Emotion* wählt die Akkordfolge (Skalenstufen, Moll-Beispiel):
      `calm` i–VI–III–VII · `tense` iv–i–V–i · `alive` VI–VII–i–III ·
-     `driving` i–VII–VI–V · `epic` iv–V–VI–i (V is harmonic-minor major).
-   - *Intensity* (0–1) drives tempo feel (BPM), layer count and volume ramp.
-     Layers join at thresholds: pads always → sparse bells (<0.3) → arp (≥0.25)
-     → bass (≥0.4) → lead (≥0.45) → drums (≥0.5) → drive extras (≥0.65) →
-     pad octave doubling (≥0.85).
-3. **Place special events on the timeline.**
-   - `damp`: Gaussian volume duck — `1 - depth · exp(-((t-T)²)/(2σ²))`.
-     Reference: depth 0.5, σ 1 s at T=84 s, on the spoken beat
+     `driving` i–VII–VI–V · `epic` iv–V–VI–i (V ist harmonisch-Moll-Dur).
+   - *Intensität* (0–1) treibt Tempo-Gefühl (BPM), Layer-Anzahl und
+     Lautstärke-Rampe. Layer treten bei Schwellen bei: Pads immer → spärliche
+     Glocken (<0,3) → Arp (≥0,25) → Bass (≥0,4) → Lead (≥0,45) →
+     Drums (≥0,5) → Drive-Extras (≥0,65) → Pad-Oktavverdopplung (≥0,85).
+3. **Spezielle Events auf der Zeitachse platzieren.**
+   - `damp`: Gauß'sche Lautstärke-Duck — `1 - depth · exp(-((t-T)²)/(2σ²))`.
+     Referenz: depth 0,5, σ 1 s bei T=84 s, auf dem gesprochenen Beat
      "Two databases. Same cluster." (~1:24).
-   - `climax`: time window forcing full layering, peak volume, octave-doubled
-     pads (reference: 154–170 s = 2:34–2:50, on the 2D→3D morph).
-   - `outro`: from its start, drums/bass/lead drop out and bells fade to 20 %
-     (reference: 170–179.5 s, closing card).
-4. **Glue.** Raised-cosine smoothing at section boundaries (~2.5 s), global
-   fade-in/out, feedback-delay reverb (100 ms, decay 0.25), tanh drive +
-   peak normalization to a background level (reference master measured:
-   mean ≈ −22 dB, max ≈ −1.6 dB).
-5. **Stay behind the voiceover.** Sections marked "background" cap their
-   volume ramp; the score is a bed, not a lead.
+   - `climax`: Zeitfenster, das volle Layering, Spitzenlautstärke,
+     oktavverdoppelte Pads erzwingt (Referenz: 154–170 s = 2:34–2:50, beim
+     2D→3D-Morph).
+   - `outro`: ab seinem Start fallen Drums/Bass/Lead weg und Glocken faden
+     auf 20 % (Referenz: 170–179,5 s, Abspannkarte).
+4. **Verkleben.** Raised-Cosine-Glättung an Abschnittsgrenzen (~2,5 s),
+   globaler Fade-in/-out, Feedback-Delay-Reverb (100 ms, Decay 0,25),
+   Tanh-Drive + Peak-Normalisierung auf ein Hintergrundniveau (gemessener
+   Referenz-Master: Mittel ≈ −22 dB, Max ≈ −1,6 dB).
+5. **Hinter dem Voiceover bleiben.** Als "background" markierte Abschnitte
+   deckeln ihre Lautstärke-Rampe; der Score ist ein Bett, kein Lead.
 
-## Usage
+## Nutzung
 
 ```bash
-# Bundled standalone copy (this skill folder):
+# Mitgelieferte eigenständige Kopie (dieser Skill-Ordner):
 python compose_music.py storyline.json -o out/score
-python compose_music.py --init       # print a storyline template
-python compose_music.py --selftest   # 3 s render + verification
+python compose_music.py --init       # gibt eine Storyline-Vorlage aus
+python compose_music.py --selftest   # 3-s-Render + Verifikation
 
-# Canonical engine (preferred when the repo is available):
+# Kanonische Engine (bevorzugt, wenn das Repo verfügbar ist):
 python <ai-media-editor>/tools/compose_music.py storyline.json -o out/score
 ```
 
-Output: `score.wav` (stereo 16-bit 44.1 kHz), `score.mp3` (192k, needs ffmpeg
-on PATH; skipped with a warning otherwise), `score.notes.json` (the
-arrangement/note log: every placed note with time, layer, MIDI pitch,
-duration, velocity), and `score.mid` — a real **Standard MIDI File** (type 1:
-tempo track with one tempo event per section, note track with GM program
-hints per style, drums on GM channel 10). Written dependency-free; no
-pretty_midi/mido needed.
+Ausgabe: `score.wav` (Stereo 16-bit 44,1 kHz), `score.mp3` (192k, braucht
+ffmpeg im PATH; sonst mit Warnung übersprungen), `score.notes.json` (das
+Arrangement-/Noten-Log: jede platzierte Note mit Zeit, Layer, MIDI-Pitch,
+Dauer, Velocity) und `score.mid` — eine echte **Standard-MIDI-Datei** (Typ 1:
+Tempo-Spur mit einem Tempo-Event je Abschnitt, Noten-Spur mit
+GM-Programm-Hinweisen je Stil, Drums auf GM-Kanal 10). Abhängigkeitsfrei
+geschrieben; kein pretty_midi/mido nötig.
 
-Determinism: same storyline + same `seed` → byte-identical WAV.
+Determinismus: gleiche Storyline + gleicher `seed` → byte-identisches WAV.
 
-## Storyline JSON reference
+## Storyline-JSON-Referenz
 
 ```json
 {
@@ -138,61 +144,67 @@ Determinism: same storyline + same `seed` → byte-identical WAV.
 }
 ```
 
-- `duration` (required, seconds), `sections` (required, ≥1, sorted,
-  non-overlapping, within duration).
-- Section fields: `start`, `end` (required); `emotion` ∈ calm | tense | alive |
-  driving | epic | outro; `intensity` 0–1 (default per emotion); `bpm`
-  (default: global `bpm`); `melody` (optional MIDI list, cycled; otherwise a
-  seeded random walk over scale tones is generated).
-- `key`: note name (C, C#, Db, …), `mode`: minor | major.
-- `style`: chiptune | ambient | electronic (see below).
-- Event `damp`: `time` (s), `depth` 0–1, `width` = σ in seconds.
-- Defaults for fades/crossfade/peak/drive/reverb shown above; all optional.
+- `duration` (Pflicht, Sekunden), `sections` (Pflicht, ≥1, sortiert,
+  überlappungsfrei, innerhalb der Dauer).
+- Abschnitts-Felder: `start`, `end` (Pflicht); `emotion` ∈ calm | tense |
+  alive | driving | epic | outro; `intensity` 0–1 (Standard je Emotion);
+  `bpm` (Standard: globales `bpm`); `melody` (optionale MIDI-Liste, zyklisch;
+  sonst wird ein geseedeter Random Walk über Skalentöne erzeugt).
+- `key`: Notenname (C, C#, Db, …), `mode`: minor | major.
+- `style`: chiptune | ambient | electronic (siehe unten).
+- Event `damp`: `time` (s), `depth` 0–1, `width` = σ in Sekunden.
+- Standardwerte für Fades/Crossfade/Peak/Drive/Reverb wie oben gezeigt;
+  alle optional.
 
-Full worked example (the reference video's reconstruction):
-[`example-storyline.json`](example-storyline.json) — renders a 179.5 s score
-matching the original's master level (mean ≈ −22 dB, max ≈ −1.6 dB).
+Vollständiges durchgerechnetes Beispiel (die Rekonstruktion des
+Referenzvideos): [`example-storyline.json`](example-storyline.json) —
+rendert einen 179,5-s-Score, der dem Master-Level des Originals entspricht
+(Mittel ≈ −22 dB, Max ≈ −1,6 dB).
 
-## Style presets
+## Stil-Presets
 
-| Style | Lead | Bass/Arp | Drums | Character |
+| Stil | Lead | Bass/Arp | Drums | Charakter |
 |---|---|---|---|---|
-| `chiptune` | square + detune + triangle | triangle bass, fast square arps | noise-based kick/hat/snare | retro console, arpeggio-driven (the reference style) |
-| `ambient` | soft triangle/sine | slow arps, long-attack pads | only from intensity ≥ 0.75 | sparse, bell-focused, wide reverb feel |
-| `electronic` | sawtooth + detune + sub | punchy bass, saw arps | full kit | driving EDM-adjacent bed |
+| `chiptune` | square + detune + triangle | triangle bass, schnelle square arps | Noise-basierter Kick/Hat/Snare | Retro-Konsole, arpeggio-getrieben (der Referenzstil) |
+| `ambient` | weiches triangle/sine | langsame Arps, Long-Attack-Pads | erst ab Intensität ≥ 0,75 | spärlich, glocken-fokussiert, breites Reverb-Gefühl |
+| `electronic` | sawtooth + detune + sub | druckvoller Bass, saw Arps | volles Kit | treibendes EDM-nahes Bett |
 
-## Beyond waveform synthesis: better sound backends
+## Jenseits der Waveform-Synthese: bessere Sound-Backends
 
-The genre ceiling above is the **sound backend, not the composition**. The
-Storyline→Score method produces a backend-neutral arrangement; the bundled
-numpy synth is just the free, offline default renderer. Every run also writes
-a Standard MIDI File (`<out>.mid`) — render it through better instruments:
+Die genannte Genre-Decke ist das **Sound-Backend, nicht die Komposition**.
+Das Storyline→Score-Verfahren erzeugt ein Backend-neutrales Arrangement;
+der mitgelieferte numpy-Synth ist nur der kostenlose Offline-Standard-Renderer.
+Jeder Lauf schreibt zusätzlich eine Standard-MIDI-Datei (`<out>.mid`) —
+über bessere Instrumente rendern:
 
-- **Path A — SoundFont (recommended: local, free, no cloud).**
-  Install FluidSynth (fluidsynth.org, Windows: `winget install FluidSynth`)
-  plus a free GM SoundFont (GeneralUser GS by S. Christian Collins, or
-  MuseScore_General.sf2). Then:
-  `fluidsynth -ni soundfont.sf2 score.mid -F score_sf.wav -r 44100` → MP3 via
-  ffmpeg. This unlocks pop/rock band sounds, piano, basic strings.
-- **Path B — orchestral / film.** Free orchestral libraries: VSCO 2 Community
-  Edition, Soni Musicae, Salamander Grand Piano. Better strings/brass, more
-  epic. Honest note: articulation and humanization (velocity variation,
-  legato, dynamics curves) matter more than the sample set — and true
-  film-score epicness additionally needs arrangement maturity; a backend
-  alone is not enough.
-- **Path C — external AI generation (Suno etc.).** Possible, but raises
-  privacy/rights questions — only after explicit user approval, never the
-  default.
+- **Pfad A — SoundFont (empfohlen: lokal, kostenlos, keine Cloud).**
+  FluidSynth installieren (fluidsynth.org, Windows: `winget install FluidSynth`)
+  plus ein kostenloses GM-SoundFont (GeneralUser GS von S. Christian Collins,
+  oder MuseScore_General.sf2). Dann:
+  `fluidsynth -ni soundfont.sf2 score.mid -F score_sf.wav -r 44100` → MP3
+  über ffmpeg. Das schaltet Pop-/Rock-Band-Sounds, Klavier, einfache
+  Streicher frei.
+- **Pfad B — Orchester/Film.** Kostenlose Orchester-Bibliotheken: VSCO 2
+  Community Edition, Soni Musicae, Salamander Grand Piano. Bessere
+  Streicher/Blechbläser, epischer. Ehrlicher Hinweis: Artikulation und
+  Humanisierung (Velocity-Variation, Legato, Dynamik-Kurven) zählen mehr
+  als der Sample-Satz — und echte Filmscore-Epik braucht zusätzlich
+  Arrangement-Reife; ein Backend allein reicht nicht.
+- **Pfad C — externe KI-Generierung (Suno u. a.).** Möglich, wirft aber
+  Datenschutz-/Rechtefragen auf — nur nach ausdrücklicher Nutzerfreigabe,
+  niemals als Standard.
 
-Planned but **not yet implemented**: a `humanize` option in the engine
-(per-note velocity/timing jitter) so sample-based rendering does not sound
-mechanical (marked as TODO in the engine docstring).
+Geplant, aber **noch nicht implementiert**: eine `humanize`-Option in der
+Engine (Velocity-/Timing-Jitter je Note), damit sample-basiertes Rendern
+nicht mechanisch klingt (als TODO im Engine-Docstring markiert).
 
-## Boundaries
+## Grenzen
 
-- English and German storyline comments are fine; keys/values are fixed English.
-- Very short durations (< ~10 s) work but compress the dramaturgy (fades and
-  crossfades are auto-capped at 20 % of duration / 50 % of the shortest section).
-- The note log (`*.notes.json`) is the analysis-friendly record; the `*.mid`
-  file is the interchange format for DAWs/SoundFont renderers (GM program
-  numbers are rough per-style hints — remap them to taste).
+- Englische und deutsche Storyline-Kommentare sind unproblematisch;
+  Keys/Values sind fest englisch.
+- Sehr kurze Dauern (< ~10 s) funktionieren, stauchen aber die Dramaturgie
+  (Fades und Crossfades werden automatisch auf 20 % der Dauer / 50 % des
+  kürzesten Abschnitts gedeckelt).
+- Das Noten-Log (`*.notes.json`) ist der analysefreundliche Datensatz; die
+  `*.mid`-Datei ist das Austauschformat für DAWs/SoundFont-Renderer
+  (GM-Programmnummern sind grobe Stil-Hinweise — nach Geschmack remappen).

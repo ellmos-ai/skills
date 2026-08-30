@@ -6,20 +6,21 @@ author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
 description: >
-  Extends automation-self-care with Letter Hooks, Preflight Bootloaders,
-  Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI
-  agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as
-  Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules,
-  search memory/gardener before work begins, enforce directory document reading
-  strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to
-  skills and security protocols.
+  Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader,
+  Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext-
+  Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene
+  JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI). Nutzen, wenn ein
+  Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener
+  durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen
+  (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und
+  Sicherheitsprotokolle routen soll.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
-language: en
+language: de
 status: active
 visibility: public
 dependencies:
@@ -38,32 +39,32 @@ provenance:
 
 # Letter-Hooker (Prompt-Level Preflight & Governance Engine)
 
-The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
+Der **Letter-Hooker**-Skill erweitert `automation-self-care` für KI-Agenten-Frameworks (wie **Antigravity / Gemini CLI**), die keine nativen, ereignisgetriebenen JSON-Lifecycle-Hook-Loader besitzen (z. B. `~/.claude/settings.json` oder `~/.codex/hooks.json`).
 
-Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an **active, prompt-level preflight bootloader and letter-hook injection loop** via scheduled tasks and maintainer scripts (`agy_kontext_and_workflow_loader.py`).
-
----
-
-## Core Capabilities
-
-1. **Preflight Bootloaders & Document Traversal Rules**:
-   - **Upward & Downward Search**: Enforces strict instructions for agents to inspect `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md`, and `README.md` at the current working directory level. If missing, traverse upwards until found; then inspect downwards.
-   - **Memory & Gardener Preflight**: Mandatory preflight query to `gardener` and `memoryhooker` before executing destructive or complex modifications.
-
-2. **Letter Hooks Catalog & Reference Links**:
-   - Modular `.md` instruction files stored under `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
-   - Injects explicit `file://` links directly into `sidecar.json` prompt text so agents read exact security and workflow protocols upon invocation.
-
-3. **Daily Keyword List & Self-Healing Prompt Enrichment**:
-   - Maintains a daily `STICHWORTLISTE.json` from active/standby tasks.
-   - Analyzes execution logs (`AUTOMATIONS-MEMORY.md`) for failure patterns (missing context, missing workflow guidance, invalid paths) and dynamically patches task prompts.
-
-4. **Skill & Persona Routing**:
-   - Inspects task keywords and maps them to appropriate `.SKILLS` (e.g. `infrastructure/condition`, `semantic-persona-routing`, `orchestrator`, `think`, `decide`).
+Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker` einen **aktiven Prompt-Level-Preflight-Bootloader und Letter-Hook-Injection-Loop** über geplante Tasks und Maintainer-Skripte (`agy_kontext_and_workflow_loader.py`).
 
 ---
 
-## Key Letter Hooks
+## Kernfähigkeiten
+
+1. **Preflight-Bootloader & Dokument-Traversierungsregeln**:
+   - **Aufwärts- & Abwärtssuche**: Erzwingt strikte Anweisungen für Agenten, `AGENTS.md`, `CLAUDE.md`, `START.md`, `RULES.md` und `README.md` auf der aktuellen Arbeitsverzeichnis-Ebene zu prüfen. Fehlen sie, aufwärts traversieren, bis gefunden; dann abwärts prüfen.
+   - **Memory- & Gardener-Preflight**: Pflicht-Preflight-Abfrage an `gardener` und `memoryhooker`, bevor destruktive oder komplexe Änderungen ausgeführt werden.
+
+2. **Letter-Hooks-Katalog & Referenz-Links**:
+   - Modulare `.md`-Instruktionsdateien unter `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
+   - Injiziert explizite `file://`-Links direkt in den `sidecar.json`-Prompt-Text, damit Agenten bei Aufruf exakte Sicherheits- und Workflow-Protokolle lesen.
+
+3. **Tägliche Stichwortliste & selbstheilende Prompt-Anreicherung**:
+   - Pflegt eine tägliche `STICHWORTLISTE.json` aus aktiven/Standby-Tasks.
+   - Analysiert Ausführungslogs (`AUTOMATIONS-MEMORY.md`) auf Fehlermuster (fehlender Kontext, fehlende Workflow-Anleitung, ungültige Pfade) und patcht Task-Prompts dynamisch.
+
+4. **Skill- & Persona-Routing**:
+   - Prüft Task-Schlüsselwörter und mappt sie auf passende `.SKILLS` (z. B. `infrastructure/condition`, `semantic-persona-routing`, `orchestrator`, `think`, `decide`).
+
+---
+
+## Wichtige Letter Hooks
 
 - **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
 - **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
@@ -72,14 +73,14 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ---
 
-## Workflow Integration
+## Workflow-Integration
 
 ```bash
-# Execute the Letter-Hooker Maintenance Engine
+# Letter-Hooker-Wartungs-Engine ausführen
 python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ```
 
-1. **Scan Sidecars**: Read all `sidecar.json` prompt texts in `~/.gemini/config/sidecars/`.
-2. **Update Keyword List**: Extract domain terms and save to `.SYNC/STICHWORTLISTE.json`.
-3. **Inject Letter Hooks**: Append bootloader rules and `file://` reference links to prompts.
-4. **Log Results**: Record updates in `ANTIGRAVITY-LOG.txt` and `ANTIGRAVITY-REGISTRY.md`.
+1. **Sidecars scannen**: Alle `sidecar.json`-Prompt-Texte in `~/.gemini/config/sidecars/` lesen.
+2. **Stichwortliste aktualisieren**: Fachbegriffe extrahieren und nach `.SYNC/STICHWORTLISTE.json` speichern.
+3. **Letter Hooks injizieren**: Bootloader-Regeln und `file://`-Referenz-Links an Prompts anhängen.
+4. **Ergebnisse loggen**: Updates in `ANTIGRAVITY-LOG.txt` und `ANTIGRAVITY-REGISTRY.md` festhalten.
