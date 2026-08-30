@@ -84,6 +84,15 @@ Er erzeugt eine Laufzeitkarte, ohne dass das Quellsystem installiert sein muss.
 Lies [routing-map-schema.md](references/routing-map-schema.md), bevor du das
 Format erweiterst.
 
+Jede exportierte Skill-ID ist eindeutig. Deklarieren mehrere Quelldateien dieselbe
+stabile ID, wählt der Builder deterministisch den lexikografisch ersten relativen
+Quellpfad und vermerkt ein `duplicate-skill-id`-Issue; er gibt nie zwei
+Skill-Einträge mit derselben ID aus. Deklarierte Experten- und Persona-Skill-Verweise
+werden nur dann auf eine bereinigte ID normalisiert, wenn diese ID in der
+exportierten Registry existiert. Fehlerhafte, unbekannte und normalisierte Verweise
+bleiben in `issues` sichtbar; unbekannte oder ungültige Verweise werden nie zu
+Endpunkten oder Persona-Kompatibilitätslinks.
+
 Stufe `candidate_skills` nicht automatisch hoch. Bestätige sie zuerst über
 einen aktiven Skill-Resolver oder Quellmetadaten.
 
