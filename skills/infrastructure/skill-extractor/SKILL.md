@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-08-31
 description: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
@@ -54,6 +54,10 @@ Drei Eingabeformen:
 | **Aktuelle Session** | Konversationskontext direkt nutzen — keine Dateien nötig |
 | **Einzelne Transkripte** | Dateien lesen; Fundorte und Parsing: `transcript-quellen.md` |
 | **Bulk (viele alte Verläufe)** | Erst Datenreduktion über Subagenten, dann Extraktion: Abschnitt „Bulk-Modus" |
+
+Bei Claude-Code-JSONL zuerst `scripts/segment_stations.py` nutzen. Das Skript bildet
+deterministische Stationen zwischen Berichtspunkten, ohne Chattext oder Toolparameter in die
+Ausgabe zu kopieren. Marker, Optionen und Ausgabeformat stehen in `transcript-quellen.md`.
 
 ### 2. Extraktionswürdiges finden
 
@@ -182,6 +186,9 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Änderungsprotokoll
+
+### 1.1.0 (2026-08-31)
+- Deterministischen, datensparsamen Stationssegmentierer für Claude-Code-JSONL ergänzt.
 
 ### 1.0.0 (2026-07-03)
 - Initiale Version. Entstanden aus dem Auftrag, Codex-Automatisierungen und Chatverläufe
