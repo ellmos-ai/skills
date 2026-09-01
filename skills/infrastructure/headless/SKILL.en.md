@@ -1,5 +1,23 @@
 ---
+name: headless
+version: 1.1.1
+type: skill
+author: Lukas Geiger
+created: 2026-06-17
+updated: 2026-09-01
 language: en
+visibility: public
+standalone: true
+anthropic_compatible: true
+category: infrastructure
+tags: [headless, autonomy, long-run, unattended, checkpoints, stop-rules]
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+description: Autonomous long-run mode without ongoing check-ins — start conditions (goal, scope, budgets, checkpoints), decision tiers and stop rules for unattended runs; raises endurance, not authority. Use when an extended autonomous run is explicitly requested.
 ---
 
 <img src="banner.png" width="100%" alt="headless banner">
@@ -95,6 +113,9 @@ Nächster sinnvoller Schritt:
 ```
 
 ## Changelog
+
+### 1.1.1 (2026-09-01)
+- Frontmatter completed per house convention (T-20260830-412369231); content unchanged.
 
 ### 1.1.0 (2026-07-28)
 - Removed personal avatar, path, command, and provider bindings.

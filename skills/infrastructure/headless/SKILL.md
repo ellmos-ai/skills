@@ -1,14 +1,28 @@
 ---
+name: headless
+version: 1.1.1
+type: skill
+author: Lukas Geiger
+created: 2026-06-17
+updated: 2026-09-01
 language: de
 visibility: public
+standalone: true
+anthropic_compatible: true
+category: infrastructure
+tags: [headless, autonomie, langlauf, unattended, checkpoints, abbruchregeln]
+status: active
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+description: Autonomer Langlauf-Modus ohne laufende Rückfragen — Startbedingungen (Ziel, Scope, Budgets, Checkpoints), Entscheidungsstufen und Abbruchregeln für unbeaufsichtigte Läufe; erhöht die Ausdauer, nicht die Berechtigung. Nutzen, wenn ausdrücklich ein längerer autonomer Lauf gewünscht ist.
 ---
 
 <img src="banner.png" width="100%" alt="headless banner">
 
 > **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `headless`.
 
 
 # Headless (Deutsch)
@@ -114,7 +128,10 @@ Nicht ausgeführte Seiteneffekte:
 Nächster sinnvoller Schritt:
 ```
 
-## Änderungsprotokoll
+## Changelog
+
+### 1.1.1 (2026-09-01)
+- Frontmatter nach Hauskonvention vervollständigt (T-20260830-412369231); Inhalt unverändert.
 
 ### 1.1.0 (2026-07-28)
 - Persönliche Avatar-, Pfad-, Kommando- und Providerbindungen entfernt.

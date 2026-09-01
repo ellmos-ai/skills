@@ -178,6 +178,44 @@ BACH (Quelle)  ──export──>  .SKILLS (Bibliothek)  ──publish──>  
 
 ---
 
+## Private Forks und Branch-Metadaten (ohne History-Rewrite)
+
+> Modell aus T-20260830-577766355 (Nachfolger von T-20260730-02, Nutzerentscheid B:
+> kein History-Rewrite/Force-Push). Private Varianten oeffentlicher Skills leben NIE
+> in diesem Repository, sondern im lokalen No-Push-Maintainer-Stand
+> (`skills-maintainer-private`, Remote `no_push://private-content`).
+
+**Drei Variant-Arten** (kontrollierte Werte fuer `variant_kind`):
+
+| `variant_kind` | Bedeutung | Sync-Richtung |
+|---|---|---|
+| `private-profile` | persoenliche Daten/Vorlagen ueber einem oeffentlichen Kern; Quellen in `derived_from[]` | `upstream-to-variant-only` |
+| `private-only` | host-/systemgebundener Zweck ohne oeffentlichen Kern | `none` |
+| `vendor-mirror` | unveraenderter Drittanbieterbestand mit echter Upstream-Provenienz | `vendor-pull-only` |
+
+**Wo die Metadaten liegen** (keine Doppelpflege):
+
+1. **Frontmatter der Variante** traegt das bestehende `provenance:`-Schema (oben)
+   plus `visibility: private-only`.
+2. **Registry des Maintainer-Stands** (`registry/private-variants.json`, daraus
+   generiert `forks.json` `forks-v1` / `branches.json` `branches-v1` via
+   `versionctl registry-generate`) traegt je Variante:
+   `id`, `path`, `variant_kind`, `derived_from[]` sowie — seit diesem Modell —
+   `divergence_reason` (Abweichungsgrund in einem Satz, Pflicht fuer
+   `private-profile`/`private-only`) und `origin_commit` (Commit des
+   oeffentlichen Kerns zum Forkzeitpunkt; `null` erlaubt mit Bedeutung
+   "vor Registry-Einfuehrung geforkt, historisch nicht rekonstruierbar" —
+   nie nachtraeglich erfinden).
+3. Sync-Policy und Privacy-Level kommen aus den `variant_policies` der
+   Variant-Art, nicht aus Einzelpflege.
+
+**Regeln:** Rueckfluss privat -> oeffentlicher Kern ist fuer alle drei Arten
+verboten. Ein Fork-Eintrag ohne `derived_from[]` ist bei `private-profile` ein
+Fehler. Divergenz wird dokumentiert (`divergence_reason`), nie durch
+History-Rewrite "bereinigt".
+
+---
+
 ## Optionale Felder
 
 ```yaml

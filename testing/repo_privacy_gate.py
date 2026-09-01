@@ -31,6 +31,17 @@ Plan-D pattern) will legitimately trip the "host-scoped local development
 path" check in their own architecture docs -- that is an expected true
 positive for this pattern, not a bug, and such repos should either treat it
 as accepted noise or phrase the convention without the literal path.
+
+Self-scan note (T-20260830-412369231): running THIS generic scan directly on
+the skills repository itself flags files under ``testing/`` -- the gate's own
+detection patterns (this module, ``skill_tester.py``) and the deliberately
+"private-looking" positive fixtures in ``test_privacy_gate.py``/
+``test_repo_privacy_gate.py`` (e.g. ``C:\\Users\\Alice``). These are expected
+true positives of the pattern set, not leaks. The authoritative self-scan for
+this repository is ``privacy_gate.py``, whose reviewed, per-file
+``CONTENT_SCAN_EXCLUSIONS`` allowlist covers exactly those files with reasons;
+this generic module intentionally stays strict (fail-closed) for arbitrary
+repositories and takes no default exclusions.
 """
 
 from __future__ import annotations
