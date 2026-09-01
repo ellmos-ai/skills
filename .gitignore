@@ -107,6 +107,7 @@ skills/**/*.local.*
 # ============================================================
 # -- bekannter Privatblock (Audit 2026-06-12/13) --
 skills/dev/swarm-operations/
+skills/dev/trampelpfadanalyse/
 skills/dev/pipeline-bootstrapper/
 skills/dev/project-bootstrapper/
 skills/dev/update-cli-docs/

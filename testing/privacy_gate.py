@@ -63,6 +63,7 @@ CONTENT_PATTERNS = {
 }
 FORBIDDEN_PUBLIC_SKILL_DIRECTORIES = {
     "skills/dev/figma",
+    "skills/dev/trampelpfadanalyse",
     "skills/dev/hyperframes",
     "skills/dev/hyperframes-animation",
     "skills/dev/hyperframes-audio",

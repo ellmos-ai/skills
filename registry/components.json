@@ -2,10 +2,10 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 138,
+    "component_count": 137,
     "categories": {
       "assist": 20,
-      "dev": 25,
+      "dev": 24,
       "education": 5,
       "game-dev": 5,
       "infrastructure": 31,
@@ -810,25 +810,6 @@
       ]
     },
     {
-      "id": "skill:dev:trampelpfadanalyse",
-      "name": "trampelpfadanalyse",
-      "type": "skill",
-      "category": "dev",
-      "path": "skills/dev/trampelpfadanalyse/SKILL.md",
-      "version": "0.1.0",
-      "status": "active",
-      "description": "Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on \"is the convention even seen\", \"why does no agent follow the rule\", \"make a doc signpost measurably effective\", \"desire-path analysis\", \"trampelpfadanalyse\".",
-      "languages": [
-        "de",
-        "en",
-        "es",
-        "zh",
-        "ja",
-        "ru",
-        "fr"
-      ]
-    },
-    {
       "id": "skill:education:academic-study-control",
       "name": "academic-study-control",
       "type": "skill",
@@ -1220,9 +1201,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/headless/SKILL.md",
-      "version": "0.0.0",
+      "version": "1.1.1",
       "status": "active",
-      "description": "",
+      "description": "Autonomer Langlauf-Modus ohne laufende Rückfragen — Startbedingungen (Ziel, Scope, Budgets, Checkpoints), Entscheidungsstufen und Abbruchregeln für unbeaufsichtigte Läufe; erhöht die Ausdauer, nicht die Berechtigung. Nutzen, wenn ausdrücklich ein längerer autonomer Lauf gewünscht ist.",
       "languages": [
         "de",
         "en",
