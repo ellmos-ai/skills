@@ -1,26 +1,45 @@
 ---
 name: trampelpfadanalyse
-version: 0.1.0
+version: 0.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-21
-updated: 2026-06-21
-description: Error analysis for pipeline and control-file workflows: check whether a convention or procedure is actually visible and discoverable to an LLM. Empirical baseline → intervention → retest comparison using naive subagents (isolated sandbox copies, identical test case, quantitative success measurement). Use this skill when agents repeatedly ignore a rule/README/convention or navigate incorrectly, and you want to measure whether a documentation change actually changes the behavior. Triggers on "is the convention even seen", "why does no agent follow the rule", "make a doc signpost measurably effective", "desire-path analysis", "trampelpfadanalyse".
+updated: 2026-08-31
+description: >
+  Fehleranalyse in Pipeline- und Steuerdatei-Abläufen: prüfen, ob eine Konvention
+  oder ein Verfahren für ein LLM überhaupt sichtbar und auffindbar ist. Empirischer
+  Baseline → Intervention → Retest-Vergleich mit naiven Subagenten (eigene isolierte
+  Sandbox-Kopien, gleicher Testfall, quantitative Erfolgsmessung). Nutze diesen Skill,
+  wenn Agenten eine Regel/README/Konvention wiederholt ignorieren oder falsch
+  navigieren und du messen willst, ob eine Doku-Änderung das Verhalten tatsächlich
+  ändert. Triggert bei "wird die Konvention überhaupt gesehen", "warum hält sich
+  kein Agent an die Regel", "Doku-Schild messbar wirksam machen", "Trampelpfadanalyse".
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
+
 category: dev
-tags: [workflow, error-analysis, llm-ux, doc-audit, baseline-retest, naive-subagent, empirical, pipeline, control-file]
+tags: [workflow, fehleranalyse, llm-ux, doku-audit, baseline-retest, naive-subagent, empirisch, pipeline, steuerdatei]
 language: de
 status: active
-visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/system/trampelpfadanalyse.md', 'origin_version': '2.0', 'origin_repo': 'github.com/ellmos-ai/swarm-ai', 'last_sync_from_origin': '2026-06-21', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
----
 
-<img src="banner.png" width="100%" alt="trampelpfadanalyse banner">
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/workflows/system/trampelpfadanalyse.md"
+  origin_version: "2.0"
+  origin_repo: "github.com/ellmos-ai/swarm-ai"
+  last_sync_from_origin: "2026-06-21"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
+---
 
 # Trampelpfadanalyse — LLM-sichtbare Konventionen empirisch herstellen
 
@@ -179,6 +198,59 @@ Einordnung — und hier nicht schönen:
 
 ---
 
+## Betriebsparameter (aus dem Großversuch übernommen)
+
+Diese Zahlen stammen aus dem Referenzlauf von 2026-02-15 und lagen bis 2026-08-31 im
+Schwarm-Katalog `swarm-operations`. Sie gehören hierher: es sind die Stellschrauben
+**dieses** Verfahrens, nicht der Schwarmorganisation.
+
+**Probenplan.** Auftragsvielfalt schlägt Wiederholungszahl. Der Großversuch fuhr
+20 verschiedene Aufträge x 5 Wiederholungen = 100 Proben; für eine gezielte Frage
+an einer einzelnen Doku-Stelle genügen 3 Wiederholungen je Runde. Ein Auftrag mit
+30 Wiederholungen misst die Varianz eines Auftrags, nicht die Auffindbarkeit des Systems.
+
+**Naiv-Bedingung, konkret herstellen** — sonst misst man Vorwissen statt Doku:
+
+| Stellschraube | Einstellung | Warum |
+|---|---|---|
+| Modell | günstig/naiv (Haiku-Klasse) | soll nicht klug raten, sondern dem Pfad folgen |
+| Projekt-Memory | leer | ein erinnerter Pfad ist kein gefundener Pfad |
+| Skills | deaktiviert | ein Skill ist selbst eine Beschilderung |
+| Werkzeuge | Bash, Glob, Grep, Read | Erkundung ja, Nebenwirkungen nein |
+| Startwissen | nur der Einstiegspfad | alles Weitere muss die Doku liefern |
+
+**Lauf.** Maximal 5 Proben gleichzeitig (darüber wird die Auswertung unübersichtlich und
+die Sandbox-Kopien konkurrieren um Dateihandles), Timeout 120 s je Probe. Läuft eine Probe
+in den Timeout, zählt sie als Fehlversuch **mit Befund** — sie hat den Weg nicht gefunden.
+
+**Heatmap-Schwellen** für Schritt 2, bezogen auf 100 Proben (bei kleineren Läufen
+anteilig lesen, nicht die absoluten Zahlen übernehmen):
+
+| Klasse | Besuche | Bedeutung |
+|---|---|---|
+| HOT | 30+ | wirksamster Ort für ein Schild |
+| WARM | 10–29 | Agenten kommen an, straucheln aber |
+| COOL | 1–9 | am Rand des Pfades |
+| COLD | 0 | Blind Spot — faktisch unsichtbar, egal wie gut der Inhalt ist |
+
+**Kostenanker.** Der 100-Proben-Großversuch kostete **$3,54**. Eine übliche Runde von
+3 Proben liegt damit im niedrigen Centbereich, ein kompletter dreirundiger Lauf (9 Proben)
+bei etwa 30 Cent. **Erst überschlagen, dann warnen** — die Bestätigungspflicht in `~/CLAUDE.md` gilt seit
+der Präzisierung vom 2026-08-31 für *größere, schwer kalkulierbare* Fan-outs, und die
+Agentenzahl allein ist dort ausdrücklich **kein** Kostenmaß (Ankerwert dort: ein `deep-research`-Lauf ~6,5 Mio Tokens / 114 Agenten, also
+Größenordnungen darüber). Anlass der Präzisierung war genau dieser Skill: ein
+9-Proben-Lauf wurde als "teuer, nur auf Anlass" eingeordnet und beinahe unterlassen.
+Falsche Vorsicht kostet auch.
+
+**Launcher.** Eine lauffähige Referenzimplementierung des Grossversuchs liegt unter
+`~/OneDrive/.TOPICS/.AI/.MODULES/.ORCHESTRATION/swarm_ai/experiments/pilot_2026-02/elephant_path_launcher.py`
+(historischer Name des Verfahrens; Pfad verifiziert 2026-09-01, T-20260831-349049307 —
+der frühere nackte Verweis `data/elephant_path_launcher.py` "im BACH-System" war unauffindbar).
+Für einen normalen Lauf genügt der Probe-Prompt oben; der Launcher lohnt erst ab
+Probenzahlen, die man nicht mehr von Hand auswertet.
+
+---
+
 ## Mini-Fallbeispiel (real, mit echten Zahlen)
 
 Problemlage: Eine Ticket-Pipeline schrieb vor, dass triviale Erledigungen je **ein**
@@ -204,13 +276,20 @@ Lehre: Die Konvention war nicht "zu schwach formuliert" — sie war am gelesenen
 
 Diese Methode stammt aus der Trampelpfadanalyse v2.0 (Schwarm als empirisches
 Messinstrument für LLM-Verhalten). Die ursprünglichen Referenzergebnisse eines
-Großversuchs (100 naive Proben) sind als Beleg der Quelle dokumentiert: größter Blind
+Großversuchs (100 naive Proben, 2026-02-15, $3,54) sind als Beleg der Quelle
+dokumentiert: größter Blind
 Spot war ein Hilfe-Verzeichnis, das **0/100** Agenten besuchten (trotz vieler
 Hilfe-Dateien), und die Aufgabe "neuen Skill erstellen" gelang **0%**, weil niemand das
 Templates-Verzeichnis fand — beides klassische Sichtbarkeits-, keine Inhaltsprobleme.
 
 ## Siehe auch
 
+- `llm-diagnostics` (dev) — **Umbrella dieser Familie**: ordnet eine Beobachtung ein,
+  wenn noch nicht feststeht, ob Auffindbarkeit (hier) oder Steuerungsprozess
+  (`promptarchaeologie`) gemessen werden soll.
+- `promptarchaeologie` (dev) — Schwesterfach: wertet vorliegende Prompts/Transkripte aus.
+  Gut gekoppelt: die Proben eines Trampelpfadlaufs sind selbst ein Korpus — wenn die
+  Quote nicht erklärt, *warum* Agenten abbiegen, liefert die Klassifikation den Grund.
 - `swarm-operations` (dev) — Katalog der Schwarm-**Koordinationsmuster** für
   Produktivaufgaben; führt die Trampelpfadanalyse dort nur als Konzept-Abschnitt.
   Dieser Skill ist die anwendbare **Prozess**-Variante mit Baseline→Retest-Loop.
@@ -220,6 +299,16 @@ Templates-Verzeichnis fand — beides klassische Sichtbarkeits-, keine Inhaltspr
   Sichtbarkeitsprobleme.
 
 ## Changelog
+
+### 0.2.0 (2026-08-31)
+- **Betriebsparameter aus `swarm-operations` übernommen** (Ticket T-20260831-397248381):
+  Probenplan, Naiv-Bedingung als Tabelle, Parallelitätsgrenze (5) und Timeout (120 s),
+  HOT/WARM/COOL/COLD-Schwellen, Kostenanker ($3,54 für 100 Proben) und der Launcher-Fundort.
+  Sie standen dort im Schwarm-Katalog, gehören aber zum Verfahren — im Katalog waren sie
+  für den, der die Methode anwendet, nicht auffindbar.
+- Kostenanker mit ausdrücklicher Abgrenzung zur `deep-research`-Token-Warnung: die zielt auf
+  eine andere Größenordnung und hat hier schon eine billige Messung verhindert.
+- Familie eingeordnet: Umbrella `llm-diagnostics`, Schwesterfach `promptarchaeologie`.
 
 ### 0.1.0 (2026-06-21)
 - Initiale Portierung aus der Trampelpfadanalyse v2.0 (Quelle: swarm-ai/BACH).
