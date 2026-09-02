@@ -200,6 +200,13 @@ reduzierter Discovery-Index. Interne Herkunftsbewertungen,
 Privacy-Klassifizierungen und die vollständige Maintainer-Registry bleiben in
 einem getrennten No-Push-Repository.
 
+Sowohl [`registry/components.json`](registry/components.json) als auch
+[`SKILLS-MAP.md`](SKILLS-MAP.md) sind **generiert**. Nach jeder Änderung unter
+`skills/` beide Generatoren ausführen (`python build_public_registry.py`,
+`python build_skills_map.py`), den Diff prüfen und committen. Nichts wird still
+neu erzeugt: Der CI-Schritt `Check public catalog outputs` und die pre-commit-Hooks
+`public-registry-current` / `skills-map-current` schlagen bei veraltetem Katalog laut fehl.
+
 ## Education-Skills
 
 Fünf institutions- und nutzerneutrale Education-Skills. Der öffentliche

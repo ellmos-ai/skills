@@ -7,3 +7,18 @@ repos:
         language: system
         files: ^skills/.+/SKILL\.md$
         types: [text]
+      # Fail-loud catalog guard (T-20260903-333546285): the generated public catalog
+      # must be current whenever skill sources or the generators change. It never
+      # regenerates by itself - run the two build_*.py scripts, review, commit.
+      - id: public-registry-current
+        name: Public registry (registry/components.json) is current
+        entry: python build_public_registry.py --check
+        language: system
+        pass_filenames: false
+        files: ^(skills/.+/SKILL\.md|build_public_registry\.py|registry/.+\.json)$
+      - id: skills-map-current
+        name: Skills map (SKILLS-MAP.md) is current
+        entry: python build_skills_map.py --check
+        language: system
+        pass_filenames: false
+        files: ^(skills/.+/SKILL\.md|build_skills_map\.py|registry/components\.json|SKILLS-MAP\.md)$

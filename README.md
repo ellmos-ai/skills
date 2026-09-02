@@ -201,6 +201,13 @@ non-circular source authority is the versioned
 generates and verifies it in checkouts, while gitless archives and enriched
 Plan-D projections use only its listed files and ignore local private extras.
 
+Both [`registry/components.json`](registry/components.json) and
+[`SKILLS-MAP.md`](SKILLS-MAP.md) are **generated**. After any change below
+`skills/`, run `python build_public_registry.py` and `python build_skills_map.py`,
+review the diff and commit it. Nothing regenerates silently: the CI step
+`Check public catalog outputs` and the pre-commit hooks `public-registry-current` /
+`skills-map-current` fail loudly on a stale catalog.
+
 ## Education Skills
 
 Five institution- and user-neutral education skills. The public
