@@ -1,11 +1,11 @@
 ---
 name: model-strategy
-version: 2.1.0
+version: 2.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-07-02
-description: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+updated: 2026-09-02
+description: Multi-model orchestration and model-switching strategy. Score-based model selection, reasoning-effort routing, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
 
 standalone: true
 anthropic_compatible: true
@@ -39,6 +39,30 @@ ein automatischer/stiller Wechsel auf Opus 4.8 entspricht NICHT seiner Strategie
 ist dem User sofort zu melden (vgl. Memory `feedback_model_switch_transparency`:
 stiller Fable→Opus-Switch 2026-07-02, Modell-Attribution forensisch via
 Transkript-JSONL `message.model` prüfbar).
+
+---
+
+## Reasoning-Effort-Dimension (lokale Nutzerkonvention)
+
+Die Reasoning-Effort-Stufe ist eine **orthogonale Achse** zur Modellwahl: Zuerst
+ein live verfügbares, fachlich geeignetes Modell wählen, dann seine Denktiefe
+staffeln. Die folgende Staffelung ist Lukas' lokale Arbeitskonvention, kein
+universelles Gesetz über Provider oder Modelle.
+
+| Route | Konvention |
+|-------|------------|
+| `xhigh` | Session-Default für Lukas, sofern die Runtime diese Stufe anbietet. |
+| `max` | Nur als transparent benannter, gezielter Delegate für den härtesten Einzelschritt. Kurz begründen, warum `xhigh` dafür nicht genügt; keine stille Hochstufung des ganzen Laufs. |
+| `ultracode` | Breite beziehungsweise Fan-out statt zusätzlicher Tiefe: parallele, klar getrennte Teilaufgaben. Nur einsetzen, wenn die Runtime diese Route anbietet und die bereits geltende Bestätigungs-/Kostenregel für größere oder schwer kalkulierbare Fan-outs erfüllt ist. |
+
+Erwartet ein einzelner Schritt grob mehr als 10–15 Minuten Compute oder summiert
+sich eine Reihe solcher Schritte entsprechend, wird er auf den konfigurierten
+Compute-Host (in Lukas' System in der Regel der Mac Studio) verlagert.
+
+Keine Effort-Stufe erweitert Schreib-, Kosten-, Freigabe- oder Publikationsrechte.
+Delegationen bleiben innerhalb der bestehenden Autorität. Ist eine Route in der
+aktuellen Runtime nicht verfügbar, wird das transparent benannt und nur auf eine
+belegt verfügbare Route ausgewichen; User-only-Grenzen bleiben bestehen.
 
 ---
 
@@ -265,6 +289,10 @@ curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" 
 ---
 
 ## Changelog
+
+### 2.2.0 (2026-09-02)
+- Reasoning-Effort als orthogonale Achse zur Modellwahl ergänzt (`xhigh`, gezieltes `max`, breitenorientiertes `ultracode`)
+- Lokale Compute-Schwelle sowie Runtime-, Kosten- und Autoritätsgrenzen klargestellt
 
 ### 2.1.0 (2026-07-02)
 - PRÄZEDENZ-REGEL: Fable 5 ersetzt Opus 4.8 in allen Level-4-/Reviewer-/Beweis-Empfehlungen (User-Entscheid; Katalog v2.0.0 entstand vor Fable 5)
