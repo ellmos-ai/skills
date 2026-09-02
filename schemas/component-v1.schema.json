@@ -31,7 +31,7 @@
     },
     "type": {
       "type": "string",
-      "enum": ["skill", "prompt", "workflow", "agent", "role", "tool", "protocol", "expert", "service", "pointer"]
+      "enum": ["skill", "prompt", "workflow", "agent", "assist", "role", "tool", "protocol", "expert", "service", "pointer"]
     },
     "path": {
       "type": "string",

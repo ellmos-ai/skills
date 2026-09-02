@@ -14,6 +14,7 @@ CHANGELOG_PATH = REPOSITORY_ROOT / "CHANGELOG.md"
 SECURITY_PATH = REPOSITORY_ROOT / "SECURITY.md"
 CI_WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "tests.yml"
 SKILL_VAL_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "skill-validation.yml"
+ASSIST_SCHEMA_PATH = REPOSITORY_ROOT / "schemas" / "assist-v1.schema.json"
 
 
 class MetadataAndManifestParityTests(unittest.TestCase):
@@ -43,6 +44,16 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             skill_path = REPOSITORY_ROOT / comp["path"]
             self.assertTrue(skill_path.is_file(), f"Skill file {skill_path} does not exist on disk")
             self.assertTrue(comp["languages"], f"Component {comp.get('id')} has empty language list")
+
+    def test_assist_type_is_allowed_by_referenced_component_schema(self) -> None:
+        assist_schema = json.loads(ASSIST_SCHEMA_PATH.read_text(encoding="utf-8"))
+        component_ref = assist_schema["allOf"][0]["$ref"]
+        assist_type = assist_schema["allOf"][1]["properties"]["type"]["const"]
+        component_schema = json.loads(
+            (ASSIST_SCHEMA_PATH.parent / component_ref).read_text(encoding="utf-8")
+        )
+
+        self.assertIn(assist_type, component_schema["properties"]["type"]["enum"])
 
     def test_security_policy_integrity(self) -> None:
         self.assertTrue(SECURITY_PATH.is_file(), "SECURITY.md missing")
