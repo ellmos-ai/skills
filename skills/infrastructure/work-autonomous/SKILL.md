@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.3.0
+version: 1.4.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-08-19
+updated: 2026-09-03
 description: >
   Abbruchbedingung für autonome Loops: So weit wie möglich selbständig
   weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
@@ -74,7 +74,26 @@ lesen kann (siehe „Abbruchsignal" unten).
 
 ### Ebene 1 — Normalarbeit (jeder Tick)
 
-Bei jedem Aufruf zuerst ganz normal nach autonom ausführbarer Arbeit suchen (siehe Abgrenzung
+#### TICKET-MASTER-Intake-Gate (Vorrang vor allem anderen in dieser Ebene)
+
+**Nur relevant, wenn überhaupt ein Ticketsystem (`_TICKETS/`) Teil des Kontexts ist** — Sitzungen
+ohne Ticketsystem überspringen dieses Gate ersatzlos, der Skill bleibt ohne jedes Ticketsystem
+eigenständig nutzbar (siehe „Zweck" oben). Gilt es, zuerst prüfen, ob `INBOX/` — einschließlich
+formloser, noch nicht ins Ticket-Format gebrachter Einträge — vollständig formalisiert und
+triagiert ist. Ist das nicht der Fall, zählt genau das als gefundene autonome Arbeit
+(Formalisieren/Triagieren ist Klerikalarbeit ohne Nutzerentscheidung, siehe Abgrenzung unten) —
+erledigen, Tick endet, Ebene 2 wird nicht betreten, wie bei jeder anderen Ebene-1-Quelle.
+
+**Solange INBOX offen ist, dürfen `NO_WORK`, ein Erschöpfungssignal (`exhausted`/`blind`), ein
+Guard-STOP oder irgendein anderes Abbruchsignal NICHT entstehen.** Erst wenn Intake vollständig
+triagiert ist, dürfen `ACTIONABLE`, entblockte `BLOCKED` und fällige `WAITING` (unten) — und danach
+ggf. Ebene 2 — überhaupt geprüft werden.
+
+*Belegfall:* Ein Loop begann nach dem Abarbeiten von `ACTIONABLE` die Erschöpfungsprüfung, während
+laufend neue `INBOX`-Tickets eintrafen, darunter zwei mit Priorität P1. Ohne dieses Gate hätte der
+Loop `exhausted`/`blind` gemeldet, obwohl Eingang offen war — genau das verhindert das Gate.
+
+Danach ganz normal nach weiterer autonom ausführbarer Arbeit suchen (siehe Abgrenzung
 unten) und sie erledigen: offene `ACTIONABLE`-Tickets, entblockte `BLOCKED`-Tickets, fällige
 `WAITING`-Tickets, offene `TODO.md`/`AUFGABEN.txt`-Punkte in Projekten ohne User-Abhängigkeit,
 fällige Routine-/Hygiene-Checks nach lokaler Policy, angefangene, aber nicht abgeschlossene Arbeit
@@ -181,6 +200,7 @@ Referenz: `ticket-master` Kategorien (`.AI/.MODULES/.CONTROL/ticket-master/docs/
 
 | Fall | Autonom? | Begründung |
 |---|---|---|
+| `INBOX/` inkl. formlose Einträge, unter TICKET-MASTER (vor Triage) | **Ja, mit Vorrang** | Formalisieren/Triage ist Klerikalarbeit ohne Nutzerentscheidung — geht vor `ACTIONABLE`/`BLOCKED`/`WAITING` und blockiert bis dahin jedes Abbruchsignal (siehe Intake-Gate oben). |
 | `ACTIONABLE`-Ticket | **Ja** | Kein Blocker, keine User-Abhängigkeit — per Definition. |
 | `BLOCKED/*` (host-receipt, foreign-state, lock, quota, dependency) | Nein, solange Blocker nicht **empirisch** entfallen ist | Periodischer Re-Check ist erlaubt (Autonomie-Loop), „vorhanden" reicht als Nachweis nicht — Beleg nötig. |
 | `WAITING/*` (scheduled, review-due, marker) vor Termin/Marker | Nein | Zeitgebunden. |
@@ -348,6 +368,19 @@ Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
 ```
 
 ## Changelog
+
+### 1.4.0 (2026-09-03)
+- Minimal-invasive Ergänzung aus Ticket T-20260902-729068782: neues
+  **TICKET-MASTER-Intake-Gate** in Ebene 1 (Vorrang vor `ACTIONABLE`/`BLOCKED`/`WAITING`) — nur
+  relevant, wenn ein Ticketsystem Teil des Kontexts ist. Solange `INBOX/` (inklusive formloser
+  Einträge) nicht vollständig triagiert ist, darf kein `NO_WORK`/Erschöpfungssignal/Guard-STOP
+  entstehen. Belegfall: ein Loop begann die Erschöpfungsprüfung, während `INBOX` noch offene
+  Einträge (darunter zwei P1-Tickets) hielt. Bestehende Vier-Schritt-Erschöpfungskette, Guard und
+  Nicht-TICKET-MASTER-Nutzbarkeit unverändert erhalten — das Gate wirkt ausschließlich in Ebene 1
+  und nur unter TICKET-MASTER.
+- Neue, getestete Hilfsfunktion `scripts/exhaustion_check.py::intake_gate_blocks_stop()` +
+  Regressionstests in `tests/test_exhaustion_check.py` (verhaltensbezogen: Gate blockiert bei
+  offener INBOX, gibt frei bei leerer INBOX).
 
 ### 1.3.0 (2026-08-19)
 - Minimal-invasive Ergänzung aus Ticket T-20260819-461890468 (neuer Skill `tidy-up`): Ebene 1

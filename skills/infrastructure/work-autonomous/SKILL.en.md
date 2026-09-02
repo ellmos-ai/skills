@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.3.0
+version: 1.4.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-08-19
+updated: 2026-09-03
 description: >
   Termination condition for autonomous loops: keep working independently as
   far as possible AND only end a loop once it is PROVEN that no autonomously
@@ -73,7 +73,26 @@ below).
 
 ### Tier 1 — Normal work (every tick)
 
-On every invocation, first look for autonomously executable work the normal way (see the
+#### TICKET-MASTER intake gate (priority over everything else at this tier)
+
+**Only relevant when a ticket system (`_TICKETS/`) is part of the context at all** — sessions
+without a ticket system skip this gate outright; the skill stays usable on its own without any
+ticket system (see "Purpose" above). Where it applies, first check whether `INBOX/` — including
+informal entries not yet cast into ticket form — is fully formalized and triaged. If it is not,
+that itself counts as found autonomous work (formalizing/triaging is clerical work requiring no
+user decision, see the boundary section below) — do it, the tick ends, Tier 2 is not entered,
+exactly like any other Tier 1 source.
+
+**While INBOX is open, `NO_WORK`, an exhaustion signal (`exhausted`/`blind`), a guard STOP, or any
+other termination signal MUST NOT arise.** Only once intake is fully triaged may `ACTIONABLE`,
+unblocked `BLOCKED`, and due `WAITING` (below) — and afterwards possibly Tier 2 — be checked at
+all.
+
+*Evidence case:* a loop began the exhaustion check after clearing `ACTIONABLE`, while new `INBOX`
+tickets kept arriving, including two at priority P1. Without this gate the loop would have reported
+`exhausted`/`blind` even though intake was still open — that is exactly what this gate prevents.
+
+Afterwards, look for further autonomously executable work the normal way (see the
 boundary section below) and do it: open `ACTIONABLE` tickets, unblocked `BLOCKED` tickets, due
 `WAITING` tickets, open `TODO.md`/`AUFGABEN.txt` items in projects with no user dependency, due
 routine/hygiene checks per local policy, work started but not finished in the previous session
@@ -171,6 +190,7 @@ Reference: `ticket-master` categories (`.AI/.MODULES/.CONTROL/ticket-master/docs
 
 | Case | Autonomous? | Reasoning |
 |---|---|---|
+| `INBOX/` incl. informal entries, under TICKET-MASTER (before triage) | **Yes, with priority** | Formalizing/triaging is clerical work requiring no user decision — comes before `ACTIONABLE`/`BLOCKED`/`WAITING` and blocks every termination signal until then (see the intake gate above). |
 | `ACTIONABLE` ticket | **Yes** | No blocker, no user dependency — by definition. |
 | `BLOCKED/*` (host-receipt, foreign-state, lock, quota, dependency) | No, unless the blocker has **empirically** lapsed | A periodic re-check is allowed (autonomy loop); "present" alone is not sufficient proof — evidence is required. |
 | `WAITING/*` (scheduled, review-due, marker) before its date/marker | No | Time-bound. |
@@ -335,6 +355,18 @@ Tick 2 (user installs grounding-seed + usmc on this system):
 ```
 
 ## Changelog
+
+### 1.4.0 (2026-09-03)
+- Minimally invasive addition from ticket T-20260902-729068782: new
+  **TICKET-MASTER intake gate** at Tier 1 (priority over `ACTIONABLE`/`BLOCKED`/`WAITING`) — only
+  relevant when a ticket system is part of the context. While `INBOX/` (including informal
+  entries) is not fully triaged, no `NO_WORK`/exhaustion signal/guard STOP may arise. Evidence
+  case: a loop began the exhaustion check while `INBOX` still held open entries, including two
+  P1 tickets. The existing four-step exhaustion chain, the guard, and non-TICKET-MASTER usability
+  remain unchanged — the gate acts only at Tier 1 and only under TICKET-MASTER.
+- New, tested helper `scripts/exhaustion_check.py::intake_gate_blocks_stop()` plus regression
+  tests in `tests/test_exhaustion_check.py` (behavioral: the gate blocks while INBOX is open,
+  releases once INBOX is empty).
 
 ### 1.3.0 (2026-08-19)
 - Minimal integration from ticket T-20260819-461890468 (new `tidy-up` skill): Tier 1 gains an

@@ -147,6 +147,21 @@ def format_blind_signal(checks: list[LocationCheck]) -> str:
     )
 
 
+def intake_gate_blocks_stop(inbox_open_count: int) -> bool:
+    """TICKET-MASTER-Intake-Gate (SKILL.md, Ebene 1, Ticket T-20260902-729068782).
+
+    Nur relevant, wenn ueberhaupt ein Ticketsystem (`_TICKETS/`) Teil des
+    Kontexts ist -- Sitzungen ohne Ticketsystem rufen diese Funktion nicht
+    auf. Solange `INBOX/` (inklusive formloser, noch nicht triagierter
+    Eintraege) nicht auf 0 steht, darf KEIN Abbruchsignal entstehen
+    (`NO_WORK`/`exhausted`/`blind`/Guard-STOP) -- Ebene 2 wird gar nicht
+    erst betreten. Das Zaehlen selbst (wie viele Eintraege liegen in
+    `INBOX/`?) macht das aufrufende Modell mit seinen eigenen Werkzeugen,
+    genau wie bei den vier Kettenschritten oben.
+    """
+    return inbox_open_count > 0
+
+
 def availability_fingerprint_component(checks: list[LocationCheck]) -> tuple[str, ...]:
     """Fuer den Guard-Fingerprint (siehe SKILL.md): sortiertes Tupel der
     UNAVAILABLE-Rollen. Aendert sich dieser Anteil (weil eine Quelle

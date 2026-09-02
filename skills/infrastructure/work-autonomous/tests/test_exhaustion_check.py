@@ -200,6 +200,21 @@ def test_all_locatable_true_when_everything_present(isolated_home, monkeypatch):
     assert ec.unavailable_roles(checks) == []
 
 
+# --- TICKET-MASTER-Intake-Gate (T-20260902-729068782) ---
+
+
+def test_intake_gate_blocks_stop_while_inbox_open():
+    """Belegfall: ein Loop begann die Erschoepfungspruefung, waehrend INBOX
+    noch offene (auch formlose) Eintraege hielt -- inklusive zweier P1-
+    Tickets. Das Gate muss das verhindern, bis INBOX leer ist."""
+    assert ec.intake_gate_blocks_stop(1) is True
+    assert ec.intake_gate_blocks_stop(2) is True
+
+
+def test_intake_gate_permits_stop_once_inbox_empty():
+    assert ec.intake_gate_blocks_stop(0) is False
+
+
 def test_german_and_english_skill_contracts_stay_in_sync():
     de = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
     en = (SKILL_DIR / "SKILL.en.md").read_text(encoding="utf-8")
@@ -209,7 +224,7 @@ def test_german_and_english_skill_contracts_stay_in_sync():
         prefix = f"{key}:"
         return next(line.removeprefix(prefix).strip() for line in frontmatter.splitlines() if line.startswith(prefix))
 
-    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.3.0"
+    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.4.0"
     assert frontmatter_value(de, "updated") == frontmatter_value(en, "updated")
     assert de.count("\n### ") == en.count("\n### ")
     assert de.count("\n```") == en.count("\n```")
