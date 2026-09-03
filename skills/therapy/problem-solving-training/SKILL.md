@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.
+description: >
+  Strukturiertes Problemlösen in 6 Schritten nach D'Zurilla und Goldfried: Problemdefinition, Ziele, Brainstorming, Bewertung, Umsetzung und Rückblick.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [problem-solving, decision, structured, six-steps, coping]
+tags: [problemlösung, entscheidung, strukturiert, sechs-schritte, coping]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/problemloese_training.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
+description: >
+  Psychoedukation zu Depression, Angststörungen, PTBS, bipolarer Störung, Schizophrenie, ADHS und Borderline. Wissensvermittlung ohne Diagnose.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [psychoeducation, depression, anxiety, ptsd, adhd, borderline, knowledge]
+tags: [psychoedukation, depression, angst, ptbs, adhs, borderline, wissensvermittlung]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/psychoedukation.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

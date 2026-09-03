@@ -5,24 +5,36 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: >
+  MBSR-Grundlagen, Bodyscan und Atemübungen. Evidenzbasierte Achtsamkeitstechniken nach Jon Kabat-Zinn für den Alltag.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [mbsr, mindfulness, meditation, breathing-exercises, bodyscan]
+tags: [mbsr, achtsamkeit, meditation, atemübungen, bodyscan]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/achtsamkeit_basis.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+> MBSR-Grundlagen, Bodyscan und Atemübungen nach Jon Kabat-Zinn
 
 
 # Mindfulness Basics (Deutsch)

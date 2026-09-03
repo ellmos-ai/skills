@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.
+description: >
+  Grundlagen der Schematherapie nach Jeffrey Young: Schemata, Modi, Inneres-Kind-Konzept und Bewältigungsstile — psychoedukativ vermittelt.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [schema-therapy, modes, inner-child, coping-styles, personality]
+tags: [schematherapie, modi, inneres-kind, bewältigungsstile, persönlichkeit]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/schematherapie.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-15"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

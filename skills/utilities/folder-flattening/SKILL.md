@@ -5,19 +5,31 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
+description: >
+  Verschachtelte Ordnerhierarchien in flache, maschinenlesbare Strukturen umbauen. Bash-basiert mit intelligenter Merge-Logik.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: utilities
-tags: [folder, flattening, filesystem, bash, reorganization, cleanup]
+tags: [ordner, flattening, filesystem, bash, reorganisation, cleanup]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/workflows/ordner-flattening.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

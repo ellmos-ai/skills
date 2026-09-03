@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
+description: >
+  Trauma-Psychoedukation: Traumadefinition, normale Reaktionen, Fenster der Belastbarkeit, Triggermanagement und Selbstfürsorge.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [trauma, psychoeducation, window-of-tolerance, trigger, self-care, ptsd]
+tags: [trauma, psychoedukation, window-of-tolerance, trigger, selbstfürsorge, ptbs]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/trauma_psychoedukation.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
 

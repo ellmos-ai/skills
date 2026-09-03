@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors.
+description: >
+  Positive Psychologie nach Seligman: PERMA-Modell, Charakterstärken (VIA), Dankbarkeitsübungen, Flow-Theorie und Resilienzfaktoren.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [positive-psychology, perma, flow, gratitude, resilience, seligman]
+tags: [positive-psychologie, perma, flow, dankbarkeit, resilienz, seligman]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/positive_psychologie.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

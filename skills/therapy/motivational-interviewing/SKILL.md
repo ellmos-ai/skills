@@ -5,24 +5,36 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
+description: >
+  Motivational Interviewing (MI) nach Miller und Rollnick: OARS-Techniken, Change Talk, Veränderungsbereitschaft fördern.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [motivational-interviewing, oars, change-talk, ambivalence, miller-rollnick]
+tags: [motivational-interviewing, oars, change-talk, ambivalenz, miller-rollnick]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/motivational_interviewing.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+> Motivational Interviewing (MI) nach Miller und Rollnick: OARS-Techniken und Change Talk
 
 
 # Motivational Interviewing (Deutsch)

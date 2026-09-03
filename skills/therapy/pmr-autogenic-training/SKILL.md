@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: >
+  Progressive Muskelentspannung (PMR) nach Jacobson und Autogenes Training nach Schultz. Kurz- und Langformen.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [pmr, autogenic-training, relaxation, jacobson, schultz, muscle-relaxation]
+tags: [pmr, autogenes-training, entspannung, jacobson, schultz, muskelrelaxation]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/pmr_autogenes_training.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

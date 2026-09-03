@@ -5,19 +5,31 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Genogram work: Recognizing and reflecting on family relationship patterns. Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history.
+description: >
+  Genogramm-Arbeit: Familien-Beziehungsmuster erkennen und reflektieren. Mehrgenerationen-Perspektive, Genogramm-Symbole, Muster-Erkennung und Ressourcen in der Familiengeschichte.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [genogram, systemic-therapy, family-therapy, multigenerational, relationship-patterns]
+tags: [genogramm, systemische-therapie, familientherapie, mehrgenerationen, beziehungsmuster]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/genogramm_arbeit.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-15"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 <img src="banner.png" width="100%" alt="genogram-work banner">
 

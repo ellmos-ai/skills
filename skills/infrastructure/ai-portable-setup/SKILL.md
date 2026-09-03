@@ -5,19 +5,31 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.
+description: >
+  Erstellt einen portablen KI-Arbeitsbereich auf einem USB-Stick oder beliebigen Laufwerk. RAG-Pipeline mit lokalen LLM-Modellen (Ollama), Vektordatenbank (ChromaDB) und vorkonfigurierten Prompts.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: infrastructure
-tags: [portable, rag, ollama, usb-drive, offline, local-llm]
+tags: [portable, rag, ollama, usb-stick, offline, local-llm]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: ['ollama']
+  protocols: []
+  python: ['chromadb', 'ollama']
+provenance:
+  origin: "bach"
+  origin_path: "MODULAR_AGENTS/AI-Portable"
+  origin_version: "0.1.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">

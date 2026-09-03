@@ -5,24 +5,36 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.
+description: >
+  Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken, kognitive Verzerrungen erkennen und Gedankenprotokolle führen.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [cbt, cognitive-restructuring, cognitive-distortions, thought-record, abc-model]
+tags: [kvt, kognitive-umstrukturierung, denkfehler, gedankenprotokoll, abc-modell]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/kognitive_umstrukturierung.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+> Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken und Gedankenprotokolle
 
 
 # Cognitive Restructuring (Deutsch)

@@ -1059,7 +1059,7 @@
       "path": "skills/infrastructure/ai-portable-setup/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts.",
+      "description": "Erstellt einen portablen KI-Arbeitsbereich auf einem USB-Stick oder beliebigen Laufwerk. RAG-Pipeline mit lokalen LLM-Modellen (Ollama), Vektordatenbank (ChromaDB) und vorkonfigurierten Prompts.",
       "languages": [
         "de",
         "en",
@@ -1582,7 +1582,7 @@
       "path": "skills/therapy/act-techniques/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.",
+      "description": "Acceptance & Commitment Therapy (ACT) nach Steven Hayes: Hexaflex-Modell mit den sechs Kernprozessen psychischer Flexibilität.",
       "languages": [
         "de",
         "en",
@@ -1601,7 +1601,7 @@
       "path": "skills/therapy/behavioral-activation/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.",
+      "description": "Verhaltensaktivierung bei Depression: Den Teufelskreis durchbrechen, Aktivitätsprotokoll, Wochenplanung und wertebasierte Aktivitäten.",
       "languages": [
         "de",
         "en",
@@ -1620,7 +1620,7 @@
       "path": "skills/therapy/cognitive-restructuring/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.",
+      "description": "Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken, kognitive Verzerrungen erkennen und Gedankenprotokolle führen.",
       "languages": [
         "de",
         "en",
@@ -1658,7 +1658,7 @@
       "path": "skills/therapy/exposure-guidance/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Graded exposure for anxiety disorders: Fear hierarchy, SUDs scale, exposure planning and guidance. Psychoeducation only, not implementation.",
+      "description": "Graduierte Exposition bei Angststörungen: Angsthierarchie, SUDs-Skala, Expositionsplanung und -begleitung. Nur Psychoedukation, keine Durchführung.",
       "languages": [
         "de",
         "en",
@@ -1677,7 +1677,7 @@
       "path": "skills/therapy/genogram-work/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Genogram work: Recognizing and reflecting on family relationship patterns. Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history.",
+      "description": "Genogramm-Arbeit: Familien-Beziehungsmuster erkennen und reflektieren. Mehrgenerationen-Perspektive, Genogramm-Symbole, Muster-Erkennung und Ressourcen in der Familiengeschichte.",
       "languages": [
         "de",
         "en",
@@ -1715,7 +1715,7 @@
       "path": "skills/therapy/mindfulness-basics/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.",
+      "description": "MBSR-Grundlagen, Bodyscan und Atemübungen. Evidenzbasierte Achtsamkeitstechniken nach Jon Kabat-Zinn für den Alltag.",
       "languages": [
         "de",
         "en",
@@ -1734,7 +1734,7 @@
       "path": "skills/therapy/motivational-interviewing/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.",
+      "description": "Motivational Interviewing (MI) nach Miller und Rollnick: OARS-Techniken, Change Talk, Veränderungsbereitschaft fördern.",
       "languages": [
         "de",
         "en",
@@ -1753,7 +1753,7 @@
       "path": "skills/therapy/pmr-autogenic-training/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.",
+      "description": "Progressive Muskelentspannung (PMR) nach Jacobson und Autogenes Training nach Schultz. Kurz- und Langformen.",
       "languages": [
         "de",
         "en",
@@ -1772,7 +1772,7 @@
       "path": "skills/therapy/positive-psychology/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors.",
+      "description": "Positive Psychologie nach Seligman: PERMA-Modell, Charakterstärken (VIA), Dankbarkeitsübungen, Flow-Theorie und Resilienzfaktoren.",
       "languages": [
         "de",
         "en",
@@ -1791,7 +1791,7 @@
       "path": "skills/therapy/problem-solving-training/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.",
+      "description": "Strukturiertes Problemlösen in 6 Schritten nach D'Zurilla und Goldfried: Problemdefinition, Ziele, Brainstorming, Bewertung, Umsetzung und Rückblick.",
       "languages": [
         "de",
         "en",
@@ -1810,7 +1810,7 @@
       "path": "skills/therapy/psychoeducation/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.",
+      "description": "Psychoedukation zu Depression, Angststörungen, PTBS, bipolarer Störung, Schizophrenie, ADHS und Borderline. Wissensvermittlung ohne Diagnose.",
       "languages": [
         "de",
         "en",
@@ -1829,7 +1829,7 @@
       "path": "skills/therapy/schema-therapy/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.",
+      "description": "Grundlagen der Schematherapie nach Jeffrey Young: Schemata, Modi, Inneres-Kind-Konzept und Bewältigungsstile — psychoedukativ vermittelt.",
       "languages": [
         "de",
         "en",
@@ -1848,7 +1848,7 @@
       "path": "skills/therapy/solution-focused-therapy/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation.",
+      "description": "Grundlagen der lösungsfokussierten Kurztherapie nach Steve de Shazer und Insoo Kim Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung.",
       "languages": [
         "de",
         "en",
@@ -1886,7 +1886,7 @@
       "path": "skills/therapy/systemic-questioning/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.",
+      "description": "Systemische Fragetechniken: Zirkuläre Fragen, Skalierungsfragen, Wunderfrage und Ausnahmefragen zur Reflexion und Perspektiverweiterung.",
       "languages": [
         "de",
         "en",
@@ -1942,7 +1942,7 @@
       "path": "skills/therapy/trauma-psychoeducation/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.",
+      "description": "Trauma-Psychoedukation: Traumadefinition, normale Reaktionen, Fenster der Belastbarkeit, Triggermanagement und Selbstfürsorge.",
       "languages": [
         "de",
         "en",
@@ -2000,7 +2000,7 @@
       "path": "skills/utilities/batch-file-ops/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.",
+      "description": "Batch-Dateioperationen (Löschen, Verschieben, Kopieren, Auflisten) mit Glob-Mustern. CLI-Werkzeug für effiziente Dateisystem-Operationen. Ohne Abhängigkeiten.",
       "languages": [
         "de",
         "en",
@@ -2164,7 +2164,7 @@
       "path": "skills/utilities/encoding-fix/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.",
+      "description": "Mojibake-Reparatur für doppelt/dreifach kodiertes UTF-8. Behebt Windows-cp1252/Latin-1-Fehlinterpretationen. Ohne Abhängigkeiten.",
       "languages": [
         "de",
         "en",
@@ -2197,7 +2197,7 @@
       "path": "skills/utilities/folder-flattening/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.",
+      "description": "Verschachtelte Ordnerhierarchien in flache, maschinenlesbare Strukturen umbauen. Bash-basiert mit intelligenter Merge-Logik.",
       "languages": [
         "de",
         "en",
@@ -2319,7 +2319,7 @@
       "path": "skills/utilities/nulcleaner/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.",
+      "description": "Findet und löscht Windows-reservierte NUL-Dateien, die durch die Nutzung von /dev/null in Git Bash entstehen. Headless oder mit GUI.",
       "languages": [
         "de",
         "en",

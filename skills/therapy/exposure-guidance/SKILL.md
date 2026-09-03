@@ -5,24 +5,36 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Graded exposure for anxiety disorders: Fear hierarchy, SUDs scale, exposure planning and guidance. Psychoeducation only, not implementation.
+description: >
+  Graduierte Exposition bei Angststörungen: Angsthierarchie, SUDs-Skala, Expositionsplanung und -begleitung. Nur Psychoedukation, keine Durchführung.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [exposure, anxiety, phobia, suds, graded, behavioral-therapy]
+tags: [exposition, angst, phobie, suds, graduiert, verhaltenstherapie]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/exposition_begleitung.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+> Graduierte Exposition bei Angststörungen: Angsthierarchie, SUDs-Skala und Expositionsplanung (Psychoedukation, keine Durchführung)
 
 
 # Exposure Guidance (Deutsch)

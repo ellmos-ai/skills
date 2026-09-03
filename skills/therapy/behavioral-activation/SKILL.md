@@ -5,24 +5,36 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
+description: >
+  Verhaltensaktivierung bei Depression: Den Teufelskreis durchbrechen, Aktivitätsprotokoll, Wochenplanung und wertebasierte Aktivitäten.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: therapy
-tags: [behavioral-activation, depression, activity, weekly-plan, values]
+tags: [verhaltensaktivierung, depression, aktivität, wochenplan, werte]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/verhaltensaktivierung.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
+> Verhaltensaktivierung bei Depression: Aktivitätsprotokoll, Wochenplanung und wertebasierte Aktivitäten
 
 
 # Behavioral Activation (Deutsch)

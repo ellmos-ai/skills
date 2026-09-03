@@ -5,7 +5,8 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
+description: >
+  Findet und löscht Windows-reservierte NUL-Dateien, die durch die Nutzung von /dev/null in Git Bash entstehen. Headless oder mit GUI.
 
 standalone: true
 anthropic_compatible: true
@@ -16,8 +17,19 @@ tags: [windows, nul, cleanup, git-bash, filesystem]
 language: de
 status: active
 visibility: public
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/tools/nulcleaner.py"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 <img src="banner.png" width="100%" alt="nulcleaner banner">
 
