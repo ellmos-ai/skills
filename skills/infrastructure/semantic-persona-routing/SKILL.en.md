@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   Builds and uses a provider-neutral semantic routing graph from personas,
   coordinating roles, experts and live skill endpoints. Use when an LLM should
@@ -19,7 +19,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: en
 status: active
 dependencies:
@@ -91,7 +91,60 @@ or invalid references never become endpoints or persona compatibility links.
 Do not automatically promote `candidate_skills`. Confirm them against a live skill
 resolver or source metadata first.
 
+## Create and store personas
+
+The core builds maps; it never invents personas. To use your own, keep them
+**next to the skill** and rebuild the map:
+
+```text
+semantic-persona-routing/
+  personas/<persona-id>.md          # one file per persona
+  roles/<role>/SKILL.md             # coordinating roles and experts
+  routing-map.json                  # generated map
+  config.json                       # host-local, never published
+```
+
+The builder reads roles only from `SKILL.md` files and personas from any Markdown
+file with frontmatter. Copy
+[templates/persona.template.md](templates/persona.template.md) to
+`personas/<persona-id>.md` and fill in the contract:
+
+| Field | Meaning |
+|---|---|
+| `name`, `type: persona` | stable persona id and type |
+| `persona.display_name`, `short_name`, `gender`, `role`, `default_prompt` | display name, short name, form of address, one-sentence role, the provider's invocation sentence |
+| `parent_agents` | coordinating roles the persona belongs to |
+| `skills` | **skill names, never paths** — only these resolve to endpoints |
+| `optional_skills` | host-bound skills; when missing they stay a visible `GAP` |
+
+A persona never grants tools or permissions and never overrides safety rules,
+locks or user decisions; it is an overlay on top of role and skills.
+
+**Paths:** the skill names no host paths. `config.example.json` shows the
+pattern (`ellmos.skill-config.v1`, `einstellungen.paths` with placeholders such as
+`<HOME>/<ONEDRIVE>/<TOPICS>`); the host-local copy is `config.json`, preserved on
+deploy and never committed.
+
+**Clean catalog:** a skill library with archives or reference copies produces
+many `duplicate-skill-id` issues. `--skills-layout catalog` accepts only
+`<category>/<name>/SKILL.md` and skips underscore-prefixed directories
+(`_archive`, `_reference`, `_templates`):
+
+```bash
+python scripts/build_routing_map.py \
+  --roles-dir roles --personas-dir personas \
+  --skills-dir path/to/skills --skills-layout catalog \
+  --out routing-map.json
+```
+
 ## Route a request
+
+### 0. Offer the personas that exist
+
+When personas live next to the skill (`personas/`), list them on invocation
+with display name, role and skills and route to the matching one; if the
+request names no persona, pick it in step 4. The route receipt format stays
+unchanged.
 
 ### 1. Select the coordinator role semantically
 
@@ -165,6 +218,14 @@ persona. If the tax expert exists but no portable tax skill is installed, report
 `GAP` and continue only through an explicitly configured fallback.
 
 ## Changelog
+
+### 1.1.0 (2026-09-03)
+
+- Create and store personas: storage convention next to the skill, frontmatter
+  contract, neutral `templates/persona.template.md`, path convention with
+  `config.example.json`, invocation behaviour (offer existing personas) and
+  `--skills-layout catalog` against duplicate skill ids from archive and
+  reference copies.
 
 ### 1.0.0 (2026-07-28)
 

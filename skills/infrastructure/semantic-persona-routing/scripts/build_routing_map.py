@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 
 SCHEMA = "semantic-persona-routing.map.v1"
@@ -132,14 +132,41 @@ def tokens(value: str) -> set[str]:
     return words - GENERIC_TOKENS
 
 
-def scan_markdown(root: Path | None, filename: str | None = None) -> list[dict]:
-    """Read frontmatter records below a root."""
+LAYOUTS = ("recursive", "catalog")
+
+
+def is_catalog_path(relative: PurePosixPath) -> bool:
+    """True for ``<category>/<name>/SKILL.md`` below a skill catalog root.
+
+    A catalog layout keeps exactly one canonical file per skill and ignores any
+    directory whose name starts with an underscore (``_archive``, ``_reference``,
+    ``_templates`` ...) as well as nested copies inside a skill folder. This is what
+    keeps a library with archived or referenced duplicates from flooding the map
+    with ``duplicate-skill-id`` issues.
+    """
+    parts = relative.parts
+    return len(parts) == 3 and not any(part.startswith("_") for part in parts)
+
+
+def scan_markdown(
+    root: Path | None, filename: str | None = None, layout: str = "recursive"
+) -> list[dict]:
+    """Read frontmatter records below a root.
+
+    ``layout="recursive"`` takes every matching file (default, unchanged behaviour);
+    ``layout="catalog"`` only accepts ``<category>/<name>/<filename>`` and skips
+    underscore-prefixed directories, see :func:`is_catalog_path`.
+    """
+    if layout not in LAYOUTS:
+        raise ValueError(f"unknown layout {layout!r}; expected one of {LAYOUTS}")
     if root is None or not root.exists():
         return []
     pattern = filename or "*.md"
     records = []
     for path in sorted(root.rglob(pattern)):
         if not path.is_file():
+            continue
+        if layout == "catalog" and not is_catalog_path(PurePosixPath(path.relative_to(root).as_posix())):
             continue
         metadata = parse_frontmatter(path.read_text(encoding="utf-8", errors="replace"))
         if not metadata.get("name"):
@@ -578,6 +605,16 @@ def main() -> int:
     parser.add_argument("--personas-dir", type=Path)
     parser.add_argument("--skills-dir", type=Path, required=True)
     parser.add_argument("--candidate-limit", type=int, default=3)
+    parser.add_argument(
+        "--skills-layout",
+        choices=LAYOUTS,
+        default="recursive",
+        help=(
+            "recursive: every SKILL.md below --skills-dir (default); catalog: only "
+            "<category>/<name>/SKILL.md, no underscore-prefixed directories such as "
+            "_archive, _reference or _templates"
+        ),
+    )
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.candidate_limit < 0:
@@ -586,7 +623,7 @@ def main() -> int:
     routing_map = build_map(
         scan_markdown(args.roles_dir, "SKILL.md"),
         scan_markdown(args.personas_dir),
-        scan_markdown(args.skills_dir, "SKILL.md"),
+        scan_markdown(args.skills_dir, "SKILL.md", layout=args.skills_layout),
         args.candidate_limit,
     )
     args.out.write_text(

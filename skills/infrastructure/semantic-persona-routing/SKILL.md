@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   Erstellt und verwendet einen anbieterneutralen semantischen Routing-Graphen
   aus Personas, koordinierenden Rollen, Experten und aktiven Skill-Endpunkten.
@@ -22,7 +22,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: de
 status: active
 visibility: public
@@ -96,7 +96,61 @@ Endpunkten oder Persona-Kompatibilitätslinks.
 Stufe `candidate_skills` nicht automatisch hoch. Bestätige sie zuerst über
 einen aktiven Skill-Resolver oder Quellmetadaten.
 
+## Personas anlegen und ablegen
+
+Der Kern erzeugt Karten, er erfindet keine Personas. Wer eigene Personas nutzen
+will, legt sie **neben dem Skill** ab und baut die Karte neu:
+
+```text
+semantic-persona-routing/
+  personas/<persona-id>.md          # eine Datei je Persona
+  roles/<rolle>/SKILL.md            # koordinierende Rollen und Experten
+  routing-map.json                  # erzeugte Karte
+  config.json                       # host-lokal, nie veröffentlicht
+```
+
+Rollen liest der Builder ausschließlich aus `SKILL.md`-Dateien; Personas aus
+jeder Markdown-Datei mit Frontmatter. Kopiere
+[templates/persona.template.md](templates/persona.template.md) nach
+`personas/<persona-id>.md` und fülle den Vertrag aus:
+
+| Feld | Bedeutung |
+|---|---|
+| `name`, `type: persona` | stabile Persona-ID und Typ |
+| `persona.display_name`, `short_name`, `gender`, `role`, `default_prompt` | Anzeige, Kurzname, Anrede, Rolle in einem Satz, Aufrufsatz des Anbieters |
+| `parent_agents` | koordinierende Rollen, denen die Persona zugeordnet ist |
+| `skills` | **Skill-Namen, nie Pfade** — nur diese werden zu Endpunkten aufgelöst |
+| `optional_skills` | host-gebundene Skills; fehlen sie, bleiben sie eine sichtbare `GAP` |
+
+Eine Persona darf Werkzeuge, Berechtigungen und Sicherheits-, Sperr- oder
+Nutzerentscheidungen weder verleihen noch überschreiben; sie ist ein Overlay
+über Rolle und Skills.
+
+**Pfade:** Der Skill nennt keine Hostpfade. `config.example.json` zeigt das
+Muster (`ellmos.skill-config.v1`, `einstellungen.paths` mit Platzhaltern wie
+`<HOME>/<ONEDRIVE>/<TOPICS>`); die host-lokale Kopie heißt `config.json`,
+wird beim Deploy bewahrt und nie ins Repository übernommen.
+
+**Katalog bereinigen:** Eine Skill-Bibliothek mit Archiven oder Referenzkopien
+erzeugt viele `duplicate-skill-id`-Issues. `--skills-layout catalog` nimmt nur
+`<kategorie>/<name>/SKILL.md` und überspringt Ordner mit `_`-Präfix
+(`_archive`, `_reference`, `_templates`):
+
+```bash
+python scripts/build_routing_map.py \
+  --roles-dir roles --personas-dir personas \
+  --skills-dir path/to/skills --skills-layout catalog \
+  --out routing-map.json
+```
+
 ## Eine Anfrage routen
+
+### 0. Vorhandene Personas anbieten
+
+Liegen Personas neben dem Skill (`personas/`), liste sie beim Aufruf mit
+Anzeigename, Rolle und Skills auf und route zur passenden; nennt die Anfrage
+keine Persona, wähle sie erst in Schritt 4. Das Format des Routing-Belegs bleibt
+unverändert.
 
 ### 1. Koordinierende Rolle semantisch wählen
 
@@ -177,6 +231,13 @@ kein portabler Steuer-Skill, meldet er `GAP` und fährt nur über einen
 ausdrücklich konfigurierten Ersatzweg fort.
 
 ## Änderungsprotokoll
+
+### 1.1.0 (2026-09-03)
+
+- Personas anlegen und ablegen: Ablagekonvention neben dem Skill, Frontmatter-
+  Vertrag, neutrale Vorlage `templates/persona.template.md`, Pfad-Konvention mit
+  `config.example.json`, Aufruf-Verhalten (vorhandene Personas anbieten) und
+  `--skills-layout catalog` gegen doppelte Skill-IDs aus Archiv- und Referenzkopien.
 
 ### 1.0.0 (2026-07-28)
 

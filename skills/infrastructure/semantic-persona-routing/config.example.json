@@ -1,0 +1,20 @@
+{
+  "schema": "ellmos.skill-config.v1",
+  "skill": "semantic-persona-routing",
+  "version": "1.1.0",
+  "verweise": {
+    "persona_vorlage": "templates/persona.template.md",
+    "karten_schema": "references/routing-map-schema.md",
+    "endpunkt_aufloesung": "references/endpoint-resolution.md"
+  },
+  "einstellungen": {
+    "paths": {
+      "roles_dir": "<HOME>/<ONEDRIVE>/<TOPICS>/.AI/.SKILLS/skills/infrastructure/semantic-persona-routing/roles",
+      "personas_dir": "<HOME>/<ONEDRIVE>/<TOPICS>/.AI/.SKILLS/skills/infrastructure/semantic-persona-routing/personas",
+      "skills_dir": "<HOME>/<ONEDRIVE>/<TOPICS>/.AI/.SKILLS/skills",
+      "out": "<HOME>/<ONEDRIVE>/<TOPICS>/.AI/.SKILLS/skills/infrastructure/semantic-persona-routing/routing-map.json"
+    },
+    "skills_layout": "catalog",
+    "candidate_limit": 3
+  }
+}
