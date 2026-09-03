@@ -199,7 +199,9 @@ BACH (Quelle)  ──export──>  .SKILLS (Bibliothek)  ──publish──>  
    plus `visibility: private-only`.
 2. **Registry des Maintainer-Stands** (`registry/private-variants.json`, daraus
    generiert `forks.json` `forks-v1` / `branches.json` `branches-v1` via
-   `versionctl registry-generate`) traegt je Variante:
+   `versionctl registry-generate --view private`, ausgefuehrt im privaten
+   No-Push-Maintainer-Stand -- dieses Repository enthaelt weder die Registry
+   noch das Tool) traegt je Variante:
    `id`, `path`, `variant_kind`, `derived_from[]` sowie — seit diesem Modell —
    `divergence_reason` (Abweichungsgrund in einem Satz, Pflicht fuer
    `private-profile`/`private-only`) und `origin_commit` (Commit des
