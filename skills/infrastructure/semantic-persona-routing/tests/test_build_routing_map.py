@@ -269,6 +269,44 @@ description: Whitespace is not a stable exported ID.
                 result["issues"],
             )
 
+class CatalogLayoutTests(unittest.TestCase):
+    def write(self, path: Path, text: str) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def skill(self, name: str) -> str:
+        return f"---\nname: {name}\ntype: skill\ndescription: Example skill {name}.\n---\n"
+
+    def test_catalog_layout_keeps_one_canonical_file_per_skill(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            self.write(root / "dev" / "employee-tax" / "SKILL.md", self.skill("employee-tax"))
+            self.write(root / "_archive" / "dev" / "employee-tax" / "SKILL.md", self.skill("employee-tax"))
+            self.write(root / "_reference" / "vendor-tool" / "SKILL.md", self.skill("vendor-tool"))
+            self.write(root / "dev" / "employee-tax" / "_templates" / "SKILL.md", self.skill("employee-tax"))
+            self.write(root / "dev" / "employee-tax" / "nested" / "SKILL.md", self.skill("employee-tax"))
+            recursive = module.scan_markdown(root, "SKILL.md")
+            catalog = module.scan_markdown(root, "SKILL.md", layout="catalog")
+        self.assertEqual(5, len(recursive))
+        self.assertEqual(["dev/employee-tax/SKILL.md"], [r["source_ref"] for r in catalog])
+        self.assertTrue(module.is_catalog_path(module.PurePosixPath("dev/employee-tax/SKILL.md")))
+        self.assertFalse(module.is_catalog_path(module.PurePosixPath("_archive/dev/employee-tax/SKILL.md")))
+        self.assertFalse(module.is_catalog_path(module.PurePosixPath("dev/SKILL.md")))
+
+    def test_catalog_layout_removes_duplicate_id_issues_from_the_map(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            self.write(root / "dev" / "employee-tax" / "SKILL.md", self.skill("employee-tax"))
+            self.write(root / "_archive" / "old" / "employee-tax" / "SKILL.md", self.skill("employee-tax"))
+            noisy = module.build_map([], [], module.scan_markdown(root, "SKILL.md"), 3)
+            clean = module.build_map([], [], module.scan_markdown(root, "SKILL.md", layout="catalog"), 3)
+        self.assertTrue(any(issue["kind"] == "duplicate-skill-id" for issue in noisy["issues"]))
+        self.assertEqual([], [issue for issue in clean["issues"] if issue["kind"] == "duplicate-skill-id"])
+
+    def test_unknown_layout_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            module.scan_markdown(Path("."), "SKILL.md", layout="flat")
+
 
 if __name__ == "__main__":
     unittest.main()

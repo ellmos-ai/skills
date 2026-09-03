@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   ペルソナ、コーディネート役のロール、エキスパート、およびライブなスキルエンドポイントから、プロバイダーに依存しないセマンティックルーティンググラフを構築および使用します。LLMがボスロールからエキスパート、スキルへとリクエストをルーティングする場合、既存のエージェントシステムからポータブルなペルソナルーターを抽出する場合、セマンティックドメインマップと辞書的スキルレジストリを組み合わせる場合、またはサイレントフォールバックの代わりに欠落しているロールからスキルへのポートを露出させる場合に使用します。セマンティックペルソナルーティング、ペルソナアンブレラ、ロールルーター、ボスエージェント・エキスパート・スキルルーティング、エージェントロールエクスポート、またはペルソナをLLMプロバイダー間で再利用可能にするリクエストでトリガーされます。
 standalone: true
@@ -12,7 +12,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: ja
 status: active
 dependencies:
@@ -67,7 +67,36 @@ python scripts/build_routing_map.py \
 
 `candidate_skills` を自動的に昇格させないでください。最初にライブのスキルリゾルバーまたはソースメタデータに対して確認してください。
 
+## ペルソナの作成と配置 (Create and store personas)
+
+コアはマップを構築するだけで、ペルソナを創作しません。独自のペルソナは
+**スキルの隣**に置き、マップを再構築します：`personas/<persona-id>.md`
+（ペルソナごとに 1 ファイル）、`roles/<role>/SKILL.md`（調整役と専門家）、
+`routing-map.json`（生成されたマップ）、`config.json`（ホストローカル、公開しない）。
+ビルダーはロールを `SKILL.md` からのみ、ペルソナは frontmatter 付きの任意の
+Markdown から読み込みます。[templates/persona.template.md](templates/persona.template.md)
+をコピーして契約を記入します：`name` と `type: persona`；`persona.display_name`、
+`short_name`、`gender`、`role`、`default_prompt`；`parent_agents`（所属する調整役）；
+`skills`（**スキル名のみ、パスは不可**。これだけがエンドポイントに解決されます）；
+`optional_skills`（ホスト依存のスキル。無ければ可視の `GAP` のまま）。ペルソナは
+ツールや権限を与えず、安全規則・ロック・ユーザー決定を上書きしません。
+
+**パス：** スキルにはホストパスを書きません。`config.example.json` がパターン
+（`ellmos.skill-config.v1`、`<HOME>/<ONEDRIVE>/<TOPICS>` などのプレースホルダーを持つ
+`einstellungen.paths`）を示します。ホストローカルの複製は `config.json` で、
+デプロイ時に保持され、コミットされません。
+
+**カタログの整理：** `--skills-layout catalog` は `<category>/<name>/SKILL.md` のみを
+受け入れ、`_` で始まるディレクトリ（`_archive`、`_reference`、`_templates`）を
+スキップして、アーカイブや参照コピーによる `duplicate-skill-id` 問題を防ぎます。
+
 ## リクエストのルーティング (Route a request)
+
+### 0. 既存ペルソナの提示 (Offer existing personas)
+
+スキルの隣（`personas/`）にペルソナがあれば、呼び出し時に表示名・ロール・スキルを
+列挙し、適合するものへルーティングします。リクエストがペルソナを指定しない場合は
+手順 4 で選びます。ルート受領書の形式は変わりません。
 
 ### 1. コーディネーターロールをセマンティックに選択する
 
@@ -124,6 +153,12 @@ GAPS: <missing endpoints or stale-map warnings>
 ルーターはオフィスコーディネーター、次に税務エキスパートを選択し、インストールされている税務スキルを解決し、最後に明示的にリンクされた綿密な税務ペルソナを適用します。税務エキスパートは存在するがポータブルな税務スキルがインストールされていない場合は、`GAP` を報告し、明示的に設定されたフォールバックを通じてのみ継続します。
 
 ## 変更履歴 (Changelog)
+
+### 1.1.0 (2026-09-03)
+
+- ペルソナの作成と配置：スキル隣の配置規約、frontmatter 契約、中立テンプレート
+  `templates/persona.template.md`、`config.example.json` によるパス規約、呼び出し時の
+  振る舞い、重複スキル ID に対する `--skills-layout catalog`。
 
 ### 1.0.0 (2026-07-28)
 
