@@ -1,11 +1,11 @@
 ---
 name: migrate-rename
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
+updated: 2026-09-06
+description: Evolutionary file renaming with wrapper files, plus the terse MOVED-stub standard for whole folder/file moves. Enables renames without hard breaks — references are organically updated through usage.
 
 standalone: true
 anthropic_compatible: true
@@ -111,6 +111,53 @@ Der Rest wird automatisch korrigiert bei Nutzung.
 
 ---
 
+## Ordner-/Datei-Umzug mit MOVED-Stub
+
+> Formalisiert 2026-09-06 (Ticket T-20260906-688261413). Präzedenz spontan entstanden bei
+> `.ELLMOS.MIGRATED.md` (2026-08-11) und den `_control-center/_CONTROL`-Stubs (2026-09-06).
+
+Andere Situation als der Wrapper oben: Hier zieht ein **ganzer Ordner** oder eine **Datei ohne
+viele aktive Referenzen** komplett an einen neuen Ort um (Konsolidierung, Umbenennung,
+Pipeline-Reorganisation). Es gibt keinen Migrations-Log, kein "Verweis korrigieren" — nur einen
+terse Pointer, der sagt: hier ist es jetzt.
+
+**Unterschied zum Wrapper-Verfahren oben:**
+
+| | Wrapper (Schritt 1-4 oben) | MOVED-Stub |
+|---|---|---|
+| Einsatz | Einzeldatei, viele aktive Verweise, sollen organisch nachziehen | Ordner oder Datei, kompletter Umzug |
+| Inhalt | Migrations-Log-Tabelle, wächst mit Nutzung | Statische Metadaten, 1-3 Zeilen Klartext |
+| Lebensdauer | Bis Log zeigt: keine neuen Einträge mehr | Bis `remove_when` erfüllt ist |
+
+### Name, Ort, Pflichtfelder
+
+Vollständiges Schema, Beispiel und Feld-Semantik stehen im ellmos-Template `MOVED-STUB.md`
+(`.TOPICS/.AI/_templates/project-docs/MOVED-STUB.md`, kein Teil dieses standalone-Repos —
+Kurzfassung genügt hier):
+
+- **Name/Ort:** `<alter-Name>.MOVED.md` liegt dort, wo der Ordner/die Datei **vorher** lag.
+- **Pflichtfelder** (`key: value`, in dieser Reihenfolge): `moved_to`, `moved_on`, `ticket`,
+  `reason`, `moved_by`, `remove_when` (Default: `90 Tage UND 0 lebende Referenzen`).
+- **Danach** 1-3 Zeilen Klartext für Menschen. Kein Log, keine Tabelle, keine Historie — die
+  steht im referenzierten Ticket.
+- **Rückbau:** Stub wird **gelöscht**, nie archiviert.
+
+### Policy
+
+Verbindlich als `.SYNC/_policies/library/P-017_umzugs-stub.md`.
+
+### Prüfskript
+
+`scripts/moved_stub_check.py` (in diesem Skill-Ordner) listet alle `*.MOVED.md`/`*.MIGRATED.md`-
+Stubs unter einem Wurzelverzeichnis, meldet fehlende Pflichtfelder und markiert rückbau-fällige
+Stubs (älter als `remove_when`-Tage). Aufruf:
+
+```bash
+python scripts/moved_stub_check.py <wurzelverzeichnis>
+```
+
+---
+
 ## Cleanup
 
 Nach ca. 30 Tagen oder wenn Log zeigt dass keine neuen Eintraege:
@@ -120,6 +167,12 @@ Nach ca. 30 Tagen oder wenn Log zeigt dass keine neuen Eintraege:
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-09-06)
+- Abschnitt "Ordner-/Datei-Umzug mit MOVED-Stub" ergänzt (Ticket T-20260906-688261413):
+  formalisiert den terse Umzugs-Pointer für ganze Ordner/Dateien (Standard `<alter-Name>.MOVED.md`,
+  Pflichtfelder moved_to/moved_on/ticket/reason/moved_by/remove_when), abgegrenzt vom
+  Wrapper-Verfahren oben. Prüfskript `scripts/moved_stub_check.py` ergänzt.
 
 ### 1.0.0 (2026-03-15)
 - Portiert aus BACH v3.8.0

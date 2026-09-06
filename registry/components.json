@@ -578,9 +578,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/migrate-rename/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.",
+      "description": "Evolutionary file renaming with wrapper files, plus the terse MOVED-stub standard for whole folder/file moves. Enables renames without hard breaks — references are organically updated through usage.",
       "languages": [
         "de",
         "en",
