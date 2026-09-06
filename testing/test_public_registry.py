@@ -141,6 +141,37 @@ class PublicRegistryTests(unittest.TestCase):
             self.assertEqual("manifest", authority)
             self.assertEqual(["public-example"], [item["name"] for item in registry["components"]])
 
+    def test_gitless_write_is_refused(self) -> None:
+        """Ohne Git-Autorität darf kein Katalog geschrieben werden.
+
+        Sonst regeneriert ein Lauf in einer veralteten Arbeitskopie still einen
+        falschen Katalog -- ein dort zurückgebliebenes SKILL.md ohne
+        ``visibility`` wirft einen öffentlichen Skill fail-closed heraus.
+        """
+        with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
+            root = Path(temporary)
+            self._write_example_skill(root, "example")
+            files = ["skills/dev/example/SKILL.md"]
+            manifest = root / "registry" / "public-skill-files.json"
+            manifest.parent.mkdir()
+            manifest.write_text(serialized_source_manifest(files), encoding="utf-8")
+            output = root / "registry" / "components.json"
+
+            with self._gitless_root(root), mock.patch.object(
+                sys,
+                "argv",
+                [
+                    "build_public_registry.py",
+                    "--output",
+                    str(output),
+                    "--source-manifest",
+                    str(manifest),
+                ],
+            ):
+                self.assertEqual(1, registry_builder.main())
+
+            self.assertFalse(output.exists())
+
     def test_source_manifest_rejects_missing_manifested_file(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPOSITORY_ROOT) as temporary:
             root = Path(temporary)
