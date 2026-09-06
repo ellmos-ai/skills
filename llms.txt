@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 135 public runtime skills organized into 11 categories (380 tracked skills total).
+- 138 public runtime skills organized into 11 categories (380 tracked skills total).
 - The public registry is a minimal discovery index. Internal ownership,
   privacy, review, and maintainer fields are kept in a separate No-Push
   repository.

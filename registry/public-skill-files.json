@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1052,
+  "file_count": 1053,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -935,6 +935,7 @@
     "skills/utilities/idea-mining/ja/SKILL.md",
     "skills/utilities/idea-mining/ru/SKILL.md",
     "skills/utilities/idea-mining/zh/SKILL.md",
+    "skills/utilities/iterative-bundle-selection/SKILL.md",
     "skills/utilities/law-checker/SKILL.en.md",
     "skills/utilities/law-checker/SKILL.es.md",
     "skills/utilities/law-checker/SKILL.fr.md",

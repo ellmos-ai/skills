@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 137,
+    "component_count": 138,
     "categories": {
       "assist": 20,
       "dev": 24,
@@ -13,7 +13,7 @@
       "research": 1,
       "therapy": 20,
       "third-party": 3,
-      "utilities": 26,
+      "utilities": 27,
       "web": 1
     }
   },
@@ -2239,6 +2239,19 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "skill:utilities:iterative-bundle-selection",
+      "name": "iterative-bundle-selection",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/iterative-bundle-selection/SKILL.md",
+      "version": "1.2.0",
+      "status": "active",
+      "description": "Große Kandidatenlisten durch optionale Themen-Pfützen, Filterstufen und wiederholt neu gemischte Bündel schrittweise reduzieren. Nutzen, wenn der User Skills, Aufgaben, Ideen, Dateien oder andere Einträge gruppenweise auswählen, nach Merkmalen filtern oder nur innerhalb gemeinsamer Themenbereiche mischen will, ohne übrige Einträge endgültig zu verwerfen.",
+      "languages": [
+        "de"
       ]
     },
     {

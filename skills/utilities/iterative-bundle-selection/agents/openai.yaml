@@ -1,0 +1,4 @@
+interface:
+  display_name: "Iterative Bündelauswahl"
+  short_description: "Große Auswahlmengen schrittweise verkleinern"
+  default_prompt: "Nutze $iterative-bundle-selection, um diese Kandidaten in wiederholt neu gemischten Fünferbündeln auszuwählen."

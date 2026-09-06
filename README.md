@@ -44,19 +44,19 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Registry["Public Skill Registry (135 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    Registry["Public Skill Registry (138 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
     
     subgraph Catalog ["11 Public Domains"]
         Assist["assist (20)"]
-        Dev["dev (25)"]
+        Dev["dev (24)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (29)"]
+        Infra["infrastructure (31)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        ThirdParty["third-party (2)"]
-        Utils["utilities (26)"]
+        ThirdParty["third-party (3)"]
+        Utils["utilities (27)"]
         Web["web (1)"]
     end
     
@@ -120,12 +120,12 @@ sequenceDiagram
 
 ## Catalog Snapshot
 
-The current public catalog contains 135 public runtime skills (380 tracked across local suites):
+The current public catalog contains 138 public runtime skills (380 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 25 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
 | <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 31 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
@@ -133,7 +133,7 @@ The current public catalog contains 135 public runtime skills (380 tracked acros
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
 | `third-party` | 3 | Curated externally authored skills redistributed under verified licenses |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 26 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 27 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Web-reading protocol support |
 
 ## Featured Skills
