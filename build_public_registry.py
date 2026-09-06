@@ -716,14 +716,29 @@ def main() -> int:
         print(f"Public registry is current: {output}")
         return 0
 
-    if authority == "git":
-        manifest.parent.mkdir(parents=True, exist_ok=True)
-        manifest.write_text(
-            serialized_source_manifest(source_files),
-            encoding="utf-8",
-            newline="\n",
+    # Ohne Git gibt es keine Autorität darüber, ob dieser Baum aktuell ist -- das
+    # Manifest belegt nur, dass die gelisteten Dateien da sind, nicht dass ihr
+    # Inhalt der Wahrheit entspricht. Ein Schreiblauf in einer veralteten Kopie
+    # erzeugt deshalb still einen falschen Katalog: ein zurückgebliebenes
+    # SKILL.md ohne `visibility` lässt einen öffentlichen Skill fail-closed aus
+    # dem Katalog fallen, driftende Versionen wandern mit. Genau so wäre in der
+    # OneDrive-Bibliothek `software-testing` verschwunden (T-20260906-405324134).
+    # Prüfen darf man hier weiterhin -- "stale" ist dort das richtige Signal.
+    if authority != "git":
+        print(
+            f"Refusing to write the catalog without git authority: {root} is no git "
+            "clone, so nothing confirms this tree is current. Generate in the git "
+            "clone and mirror the result, or use --check here."
         )
-        print(f"Wrote {manifest}")
+        return 1
+
+    manifest.parent.mkdir(parents=True, exist_ok=True)
+    manifest.write_text(
+        serialized_source_manifest(source_files),
+        encoding="utf-8",
+        newline="\n",
+    )
+    print(f"Wrote {manifest}")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(expected, encoding="utf-8", newline="\n")
     print(f"Wrote {output}")

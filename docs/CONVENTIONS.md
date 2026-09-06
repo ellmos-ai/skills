@@ -405,6 +405,15 @@ liegende interne Zusatzskills werden weder veröffentlicht noch gelöscht;
 fehlende, unsichere oder veraltete Manifest-Einträge führen zu einem
 fail-closed Fehler.
 
+**Erzeugt wird der Katalog nur im Git-Checkout.** Ohne Git belegt das Manifest
+nur, dass die gelisteten Dateien existieren — nicht, dass ihr Inhalt aktuell
+ist. Ein Schreiblauf in einer zurückgebliebenen Arbeitskopie erzeugt deshalb
+still einen falschen Katalog: Ein dort veraltetes `SKILL.md` ohne `visibility`
+lässt einen öffentlichen Skill fail-closed herausfallen. Der Generator
+verweigert das Schreiben darum außerhalb eines Git-Checkouts; `--check` bleibt
+dort erlaubt und meldet den Rückstand als „stale". Gespiegelte Kopien (etwa die
+OneDrive-Bibliothek) bekommen den Katalog aus dem Klon, sie bauen ihn nicht neu.
+
 `python build_skills_map.py` erzeugt daraus die öffentliche `SKILLS-MAP.md`.
 
 ---
