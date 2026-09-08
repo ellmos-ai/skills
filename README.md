@@ -61,7 +61,7 @@ flowchart TD
     end
     
     Engine --> Catalog
-    Catalog --> Artifacts["SKILL.md Specifications\n(YAML Frontmatter + Playbooks + Scripts)"]
+    Catalog --> Artifacts["SKILL.md Specifications<br/>(YAML Frontmatter + Playbooks + Scripts)"]
     
     subgraph MultiAgentRuntimes ["Multi-Agent Execution Fabric"]
         ClaudeCode["Claude Code (~/.claude/skills)"]
@@ -77,7 +77,7 @@ flowchart TD
         STests["S-Tests (Static Validation)"]
         LTests["L-Tests (LLM Self-Experience)"]
         UTests["U-Tests (User Experience)"]
-        PytestSuite["Pytest Suite (145 Passed / 186 Subtests)"]
+        PytestSuite["Pytest Suite (272 Passed / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
@@ -88,20 +88,20 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Operator as Agent / Developer
-    participant Dispatcher as ellmos Skill Engine
-    participant Registry as Public Catalog (components.json)
-    participant Gate as Privacy & Integrity Gate
-    participant Runtime as Target Agent (Claude / Codex / AGY / BACH)
+    actor Operator as "Agent / Developer"
+    participant Dispatcher as "ellmos Skill Engine"
+    participant Registry as "Public Catalog"
+    participant Gate as "Privacy and Integrity Gate"
+    participant Runtime as "Target Agent (Claude, Codex, AGY, BACH)"
 
-    Operator->>Dispatcher: Query skill by domain or task ID (e.g. dev/pipeline-optimizer)
-    Dispatcher->>Registry: Lookup metadata, schema version & dependencies
-    Registry-->>Dispatcher: Return category, frontmatter spec & file path
-    Dispatcher->>Gate: Execute privacy & non-elevation boundary check
-    Gate-->>Dispatcher: Boundary verified (Zero-Egress & User-Mode clean)
-    Dispatcher->>Runtime: Mount SKILL.md & contextual playbooks into agent workspace
+    Operator->>Dispatcher: Query skill by domain or task ID (dev/pipeline-optimizer)
+    Dispatcher->>Registry: Lookup metadata, schema version and dependencies
+    Registry-->>Dispatcher: Return category, frontmatter spec and file path
+    Dispatcher->>Gate: Execute privacy and non-elevation boundary check
+    Gate-->>Dispatcher: Boundary verified (Zero-Egress and User-Mode clean)
+    Dispatcher->>Runtime: Mount SKILL.md and contextual playbooks into agent workspace
     Runtime->>Runtime: Execute structured workflow steps deterministically
-    Runtime-->>Operator: Deliver artifact, verification log & status receipt
+    Runtime-->>Operator: Deliver artifact, verification log and status receipt
 ```
 
 ## Start Here

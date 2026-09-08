@@ -61,7 +61,7 @@ flowchart TD
     end
     
     Engine --> Catalog
-    Catalog --> Artifacts["SKILL.md Spezifikationen\n(YAML-Frontmatter + Playbooks + Skripte)"]
+    Catalog --> Artifacts["SKILL.md Spezifikationen<br/>(YAML-Frontmatter + Playbooks + Skripte)"]
     
     subgraph MultiAgentRuntimes ["Multi-Agenten-Ausführungsarchitektur"]
         ClaudeCode["Claude Code (~/.claude/skills)"]
@@ -77,7 +77,7 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (145 bestanden / 186 Subtests)"]
+        PytestSuite["Pytest Testsuite (272 bestanden / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
@@ -88,20 +88,20 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Operator as Agent / Entwickler
-    participant Dispatcher as ellmos Skill Engine
-    participant Registry as Öffentlicher Katalog (components.json)
-    participant Gate as Privacy- & Integritäts-Gate
-    participant Runtime as Ziel-Agent (Claude / Codex / AGY / BACH)
+    actor Operator as "Agent / Entwickler"
+    participant Dispatcher as "ellmos Skill Engine"
+    participant Registry as "Öffentlicher Katalog"
+    participant Gate as "Privacy- und Integritäts-Gate"
+    participant Runtime as "Ziel-Agent (Claude, Codex, AGY, BACH)"
 
-    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (z.B. dev/pipeline-optimizer)
-    Dispatcher->>Registry: Metadaten, Schema-Version & Abhängigkeiten auflösen
-    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation & Dateipfad zurückgeben
-    Dispatcher->>Gate: Privacy- & Non-Elevation-Grenzprüfung ausführen
-    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress & User-Mode sauber)
-    Dispatcher->>Runtime: SKILL.md & Kontext-Playbooks im Agenten-Workspace bereitstellen
+    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (dev/pipeline-optimizer)
+    Dispatcher->>Registry: Metadaten, Schema-Version und Abhängigkeiten auflösen
+    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation und Dateipfad zurückgeben
+    Dispatcher->>Gate: Privacy- und Non-Elevation-Grenzprüfung ausführen
+    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress und User-Mode sauber)
+    Dispatcher->>Runtime: SKILL.md und Kontext-Playbooks im Agenten-Workspace bereitstellen
     Runtime->>Runtime: Strukturierte Workflow-Schritte deterministisch ausführen
-    Runtime-->>Operator: Artefakt, Verifikationslog & Statusquittung übergeben
+    Runtime-->>Operator: Artefakt, Verifikationslog und Statusquittung übergeben
 ```
 
 ## Einstieg
