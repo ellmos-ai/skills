@@ -1,6 +1,6 @@
 ---
 name: work-autonomous
-version: 1.5.0
+version: 1.5.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
@@ -10,7 +10,7 @@ description: >
   weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
   autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck "nichts mehr
   zu tun" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide,
-  _DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben
+  _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben
   GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet
   found/empty/unavailable statt eines binären Ergebnisses — "exhausted" gilt
   nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine
@@ -157,7 +157,7 @@ NIE inhaltlich geprüft — sie zählt `unavailable`, nicht `empty`.
    found/empty/unavailable-Status (siehe oben, keine Quelle).
 2. **`decisions.ledger`** — Verortung über `source_resolver.resolve("decisions.ledger")` /
    `grounding_seed.resolve(...)`, falls installiert; sonst der bekannte Fallback-Pfad
-   (`_control-center/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene
+   (`_control-center/_CONTROL/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene
    `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`). Verortet → Inhalt lesen: sind kürzlich
    Entscheidungen gefallen, die vorher blockierte oder auf Freigabe wartende Arbeit jetzt
    entsperren? Treffer → `found`. Gelesen, nichts Neues → `empty`. Nicht verortbar (Resolver fehlt
@@ -170,7 +170,7 @@ NIE inhaltlich geprüft — sie zählt `unavailable`, nicht `empty`.
    `RESUME:`-Feld, offene `note`-Einträge — hinterlassen). Treffer → `found`. Gelesen, nichts Neues
    → `empty`. CLI nicht auf PATH → `unavailable`.
 4. **`user.model` (decision-avatar/BYUM)** — Verortung wie bei `decisions.ledger` (Resolver oder
-   Fallback-Pfad `_control-center/_TOM-lm/`). Verortet → Inhalt prüfen: Gibt es ein belegtes
+   Fallback-Pfad `_control-center/_CONTROL/_USER-MIND/`). Verortet → Inhalt prüfen: Gibt es ein belegtes
    Muster, nach dem der Nutzer an dieser Stelle eine bestimmte Handlung autonom erledigt sehen
    wollte? Nur bei ausreichender Konfidenz (🟢/🟡) als `found` zählen — 🔴 zählt als `empty`, nicht
    als gewonnene Aufgabe, sondern als offener Punkt für Schritt „Nur-User-Rest" unten. Nicht
@@ -249,7 +249,7 @@ usmc --agent <agent> note "work-autonomous-guard: result=<exhausted|blind|found>
 der Fingerprint (Baustein 1) u. a. auf die mtime der `_DECISIONS`-Kette. Fehlt diese Kette auf einem
 System komplett, ist dieser Anteil des Fingerprints für immer konstant — ein einmal fälschlich
 gesetztes `exhausted`/`blind` würde dann NIE neu geprüft, selbst wenn später `source-resolver`
-installiert oder `_control-center/_DECISIONS/` angelegt wird. Der Verfügbarkeits-Baustein behebt
+installiert oder `_control-center/_CONTROL/_DECISIONS/` angelegt wird. Der Verfügbarkeits-Baustein behebt
 das gezielt: Ändert sich, WELCHE Rollen unavailable sind (eine Quelle kommt hinzu oder fällt weg),
 ändert sich der Fingerprint automatisch — der Guard erkennt es beim nächsten Aufruf und fährt die
 Kette neu. Das ist „Verpflanzung" im Sinne der Grounding-Metapher (T-20260815-371628859): ein
@@ -368,6 +368,9 @@ Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
 ```
 
 ## Changelog
+
+### 1.5.1 (2026-09-09)
+- T-20260909-282509082: Der dokumentierte Fallback für `decisions.ledger` und `user.model` folgt dem belegten Control-Center-Umzug nach `_CONTROL/_DECISIONS` und `_CONTROL/_USER-MIND`. Resolver-Vorrang und das fail-closed Verhalten bleiben unverändert.
 
 ### 1.5.0 (2026-09-09)
 - P-018: Wichtige neu erzeugte und dauerhaft gespeicherte Arbeitsberichte, Handoffs und Receipts
