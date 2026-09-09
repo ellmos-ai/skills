@@ -52,8 +52,11 @@ _RESOLVER_BACKED_ROLES = {"decisions.ledger", "user.model"}
 # Direkter Fallback-Pfad je Rolle, falls grounding_seed nicht importierbar ist
 # (dieselbe Stelle, die grounding_seed/source_resolver ohnehin pruefen wuerden).
 _FALLBACK_PATHS: dict[str, tuple[str, ...]] = {
-    "decisions.ledger": ("_control-center/_DECISIONS",),
-    "user.model": ("_control-center/_TOM-lm/avatar/START.md", "_control-center/_TOM-lm"),
+    "decisions.ledger": ("_control-center/_CONTROL/_DECISIONS",),
+    "user.model": (
+        "_control-center/_CONTROL/_USER-MIND/avatar/START.md",
+        "_control-center/_CONTROL/_USER-MIND",
+    ),
 }
 
 # Domaenenspezifischer CLI-Check fuer die zwei Rollen ohne source-resolver-Provider.

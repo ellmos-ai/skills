@@ -1,6 +1,6 @@
 ---
 name: work-autonomous
-version: 1.5.0
+version: 1.5.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
@@ -10,7 +10,7 @@ description: >
   far as possible AND only end a loop once it is PROVEN that no autonomously
   executable task remains. The mere impression "nothing left to do" is NOT
   enough — it triggers a four-step verification chain (think/decide,
-  _DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN
+  _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN
   new tasks before the loop is allowed to end. Each chain step now reports
   found/empty/unavailable instead of a binary result — "exhausted" only
   applies when EVERY source was actually queryable; if at least one source is
@@ -148,7 +148,7 @@ counts as `unavailable`, not `empty`.
    found/empty/unavailable status (see above, not a source).
 2. **`decisions.ledger`** — location via `source_resolver.resolve("decisions.ledger")` /
    `grounding_seed.resolve(...)`, if installed; otherwise the known fallback path
-   (`_control-center/_DECISIONS/`, the `TO-DECIDE-USER*.txt` chain, the host's own
+   (`_control-center/_CONTROL/_DECISIONS/`, the `TO-DECIDE-USER*.txt` chain, the host's own
    `TO-DECIDE-USER-<HOST>.txt`, `DECIDED-AND-DONE.md`). Located → read content: have decisions
    been made recently that now unblock work that was previously blocked or waiting for approval?
    Hit → `found`. Read, nothing new → `empty`. Not locatable (resolver missing AND fallback path
@@ -161,7 +161,7 @@ counts as `unavailable`, not `empty`.
    field, open `note` entries). Hit → `found`. Read, nothing new → `empty`. CLI not on PATH →
    `unavailable`.
 4. **`user.model` (decision-avatar/BYUM)** — location as for `decisions.ledger` (resolver or
-   fallback path `_control-center/_TOM-lm/`). Located → check content: is there a documented
+   fallback path `_control-center/_CONTROL/_USER-MIND/`). Located → check content: is there a documented
    pattern showing that the user would want a specific action carried out autonomously here? Only
    count this as `found` at sufficient confidence (🟢/🟡) — 🔴 counts as `empty`, not as a won
    task, but as an item for the "user-only remainder" case below. Not locatable → `unavailable`.
@@ -238,7 +238,7 @@ usmc --agent <agent> note "work-autonomous-guard: result=<exhausted|blind|found>
 (part 1) partly relies on the mtime of the `_DECISIONS` chain. If that chain is entirely absent on
 a system, that part of the fingerprint stays constant forever — a once-falsely-set
 `exhausted`/`blind` would then NEVER be re-checked, even after `source-resolver` is later
-installed or `_control-center/_DECISIONS/` is later created. The reachability part fixes this
+installed or `_control-center/_CONTROL/_DECISIONS/` is later created. The reachability part fixes this
 directly: whenever WHICH roles are unavailable changes (a source appears or disappears), the
 fingerprint changes automatically — the guard notices on the next call and re-runs the chain. This
 is "transplanting" in the sense of the grounding metaphor (T-20260815-371628859): a change in
@@ -355,6 +355,9 @@ Tick 2 (user installs grounding-seed + usmc on this system):
 ```
 
 ## Changelog
+
+### 1.5.1 (2026-09-09)
+- T-20260909-282509082: The documented fallback for `decisions.ledger` and `user.model` now follows the verified Control-Center move to `_CONTROL/_DECISIONS` and `_CONTROL/_USER-MIND`. Resolver priority and fail-closed behavior remain unchanged.
 
 ### 1.5.0 (2026-09-09)
 - P-018: Important newly generated, persistently stored work reports, handoffs, and receipts end

@@ -80,7 +80,7 @@ def test_all_unavailable_on_isolated_system_without_any_infrastructure(isolated_
 
 
 def test_decisions_ledger_found_via_fallback_path_when_present(isolated_home):
-    (isolated_home / "_control-center" / "_DECISIONS").mkdir(parents=True)
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
     checks = ec.assess_locations(home=isolated_home)
     by_role = {c.rolle: c for c in checks}
     assert by_role["decisions.ledger"].status == ec.FOUND
@@ -88,12 +88,48 @@ def test_decisions_ledger_found_via_fallback_path_when_present(isolated_home):
 
 
 def test_user_model_found_via_fallback_path_when_present(isolated_home):
-    profile = isolated_home / "_control-center" / "_TOM-lm" / "avatar"
+    profile = isolated_home / "_control-center" / "_CONTROL" / "_USER-MIND" / "avatar"
     profile.mkdir(parents=True)
     (profile / "START.md").write_text("x", encoding="utf-8")
     checks = ec.assess_locations(home=isolated_home)
     by_role = {c.rolle: c for c in checks}
     assert by_role["user.model"].status == ec.FOUND
+
+
+def test_current_control_fallbacks_find_both_roles_without_resolver(isolated_home, monkeypatch):
+    """The current Control layout must locate both resolver-backed roles."""
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
+    avatar = isolated_home / "_control-center" / "_CONTROL" / "_USER-MIND" / "avatar"
+    avatar.mkdir(parents=True)
+    (avatar / "START.md").write_text("fixture", encoding="utf-8")
+    monkeypatch.setattr(ec.shutil, "which", lambda name: f"/usr/bin/{name}")
+
+    by_role = {check.rolle: check for check in ec.assess_locations(home=isolated_home)}
+    assert by_role["decisions.ledger"].status == ec.FOUND
+    assert by_role["decisions.ledger"].weg == "fallback-pfad"
+    assert by_role["user.model"].status == ec.FOUND
+    assert by_role["user.model"].weg == "fallback-pfad"
+    assert ec.all_locatable(list(by_role.values())) is True
+
+
+def test_user_model_accepts_current_user_mind_directory_fallback(isolated_home):
+    (isolated_home / "_control-center" / "_CONTROL" / "_USER-MIND").mkdir(parents=True)
+    by_role = {check.rolle: check for check in ec.assess_locations(home=isolated_home)}
+    assert by_role["user.model"].status == ec.FOUND
+    assert by_role["user.model"].weg == "fallback-pfad"
+
+
+def test_legacy_fallback_paths_do_not_mask_missing_current_control_paths(isolated_home, monkeypatch):
+    (isolated_home / "_control-center" / "_DECISIONS").mkdir(parents=True)
+    legacy_avatar = isolated_home / "_control-center" / "_TOM-lm" / "avatar"
+    legacy_avatar.mkdir(parents=True)
+    (legacy_avatar / "START.md").write_text("legacy", encoding="utf-8")
+    monkeypatch.setattr(ec.shutil, "which", lambda name: f"/usr/bin/{name}")
+
+    by_role = {check.rolle: check for check in ec.assess_locations(home=isolated_home)}
+    assert by_role["decisions.ledger"].status == ec.UNAVAILABLE
+    assert by_role["user.model"].status == ec.UNAVAILABLE
+    assert ec.all_locatable(list(by_role.values())) is False
 
 
 def test_memory_roles_use_cli_check_never_fallback_path(isolated_home, monkeypatch):
@@ -123,14 +159,18 @@ def test_memory_roles_found_when_cli_on_path(isolated_home, monkeypatch):
 def test_resolver_backed_roles_prefer_grounding_seed_when_available(isolated_home, monkeypatch):
     fake_gs = _make_fake_grounding_seed({"decisions.ledger": "resolved", "user.model": "not_found"})
     monkeypatch.setitem(sys.modules, "grounding_seed", fake_gs)
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
+    avatar = isolated_home / "_control-center" / "_CONTROL" / "_USER-MIND" / "avatar"
+    avatar.mkdir(parents=True)
+    (avatar / "START.md").write_text("fixture", encoding="utf-8")
 
     checks = ec.assess_locations(home=isolated_home)
     by_role = {c.rolle: c for c in checks}
     assert by_role["decisions.ledger"].status == ec.FOUND
     assert by_role["decisions.ledger"].weg == "resolver"
-    # user.model: resolver sagt not_found -> unavailable, OBWOHL kein
-    # Fallback-Pfad geprueft wird (Resolver hat Vorrang und liefert ein
-    # gueltiges Ergebnis -- kein Fallback-Fallthrough noetig).
+    # user.model: resolver says not_found -> unavailable although the current
+    # fallback path exists. A valid resolver result has priority; no fallback
+    # fall-through may turn the role into a false success.
     assert by_role["user.model"].status == ec.UNAVAILABLE
     assert by_role["user.model"].weg == "resolver"
 
@@ -157,7 +197,7 @@ def test_resolver_exception_falls_back_to_direct_path_check(isolated_home, monke
 
     fake_gs = types.SimpleNamespace(resolve=_boom, status_from_resolution=lambda r: "found")
     monkeypatch.setitem(sys.modules, "grounding_seed", fake_gs)
-    (isolated_home / "_control-center" / "_DECISIONS").mkdir(parents=True)
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
 
     checks = ec.assess_locations(home=isolated_home)
     by_role = {c.rolle: c for c in checks}
@@ -181,7 +221,7 @@ def test_availability_fingerprint_component_changes_when_a_source_appears(isolat
     """Der Kern der 'Verpflanzung': kommt eine Quelle hinzu, aendert sich
     dieser Fingerprint-Baustein -- der Guard erkennt es beim naechsten Lauf."""
     before = ec.availability_fingerprint_component(ec.assess_locations(home=isolated_home))
-    (isolated_home / "_control-center" / "_DECISIONS").mkdir(parents=True)
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
     after = ec.availability_fingerprint_component(ec.assess_locations(home=isolated_home))
     assert before != after
     assert "decisions.ledger" in before
@@ -189,8 +229,8 @@ def test_availability_fingerprint_component_changes_when_a_source_appears(isolat
 
 
 def test_all_locatable_true_when_everything_present(isolated_home, monkeypatch):
-    (isolated_home / "_control-center" / "_DECISIONS").mkdir(parents=True)
-    profile = isolated_home / "_control-center" / "_TOM-lm" / "avatar"
+    (isolated_home / "_control-center" / "_CONTROL" / "_DECISIONS").mkdir(parents=True)
+    profile = isolated_home / "_control-center" / "_CONTROL" / "_USER-MIND" / "avatar"
     profile.mkdir(parents=True)
     (profile / "START.md").write_text("x", encoding="utf-8")
     monkeypatch.setattr(ec.shutil, "which", lambda name: f"/usr/bin/{name}")
@@ -224,7 +264,7 @@ def test_german_and_english_skill_contracts_stay_in_sync():
         prefix = f"{key}:"
         return next(line.removeprefix(prefix).strip() for line in frontmatter.splitlines() if line.startswith(prefix))
 
-    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.5.0"
+    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.5.1"
     assert frontmatter_value(de, "updated") == frontmatter_value(en, "updated")
     assert de.count("\n### ") == en.count("\n### ")
     assert de.count("\n```") == en.count("\n```")
