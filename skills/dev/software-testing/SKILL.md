@@ -20,6 +20,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'claude-code-recherche', 'origin_version': '1.0.0', 'created_from': 'Online-Recherche 2026-08-22 (ISTQB-Systematik, Testpyramide, Agile Testing Quadrants, moderne Verfahren); Quellen siehe testarten-katalog.md'}
 ---
 
+<img src="banner.png" width="100%" alt="software-testing banner">
+
 # Software-Testing: Teststrategie & Testauswahl
 
 Dieser Skill beantwortet die Frage **„Welche Tests brauche ich hier, jetzt, wofür?"** —

@@ -20,6 +20,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="backup banner">
+
 # Backup
 
 Die installierte `mac-backup`-CLI als einzige Transfer-Implementierung verwenden. Den Ablauf nicht

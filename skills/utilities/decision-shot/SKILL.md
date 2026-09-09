@@ -41,6 +41,8 @@ provenance:
   decision_ref: "T-20260824-673115956 (Ticket-Master, User-Auftrag 2026-08-24)"
 ---
 
+<img src="banner.png" width="100%" alt="decision-shot banner">
+
 # decision-shot
 
 > Die Analyse ist gemacht. Was jetzt gebraucht wird, ist keine zweite

@@ -41,6 +41,8 @@ provenance:
   decision_ref: "T-20260824-673115956 (Ticket-Master, User order 2026-08-24)"
 ---
 
+<img src="banner.png" width="100%" alt="decision-shot banner">
+
 # decision-shot
 
 > The analysis is done. What's needed now is not a second derivation, but

@@ -49,6 +49,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="paveman banner">
+
 # Paveman — deterministically shorten rule and memory files
 
 > Thin, user-neutral skill wrapper around the separately provided module
