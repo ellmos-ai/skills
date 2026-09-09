@@ -31,11 +31,12 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 
 # Schematherapie
 
-> Grundlagen der Schematherapie nach Jeffrey Young: Schemata, Modi, Inneres-Kind-Konzept und Bewaeltigungsstile — psychoedukativ vermittelt
+> Grundlagen der Schematherapie nach Jeffrey Young: Schemata, Modi, Inneres-Kind-Konzept und Bewältigungsstile — psychoedukativ vermittelt
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
@@ -45,112 +46,112 @@ Siehe: [ETHICS.md](../ETHICS.md)
 
 Die Schematherapie wurde von Jeffrey E. Young ab den 1990er-Jahren als Erweiterung
 der kognitiven Verhaltenstherapie entwickelt. Sie integriert Elemente aus KVT,
-Bindungstheorie, Gestalttherapie und psychodynamischen Ansaetzen.
+Bindungstheorie, Gestalttherapie und psychodynamischen Ansätzen.
 
-Evidenz: Die Schematherapie ist empirisch gut belegt, insbesondere fuer
-Persoenlichkeitsstoerungen (Giesen-Bloo et al. 2006, Masley et al. 2012).
+Evidenz: Die Schematherapie ist empirisch gut belegt, insbesondere für
+Persönlichkeitsstörungen (Giesen-Bloo et al. 2006, Masley et al. 2012).
 In Deutschland ist sie als Methode innerhalb der Verhaltenstherapie anerkannt.
 
-**Hinweis:** Dies ist Psychoedukation, kein Ersatz fuer professionelle Therapie.
+**Hinweis:** Dies ist Psychoedukation, kein Ersatz für professionelle Therapie.
 **Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. Fruehe maladaptive Schemata
+## 1. Frühe maladaptive Schemata
 
 ### Prinzip
 Schemata sind tief verwurzelte emotionale und kognitive Muster, die in der Kindheit
-durch unerfuellte Grundbeduerfnisse entstehen. Sie beeinflussen, wie wir die Welt,
+durch unerfüllte Grundbedürfnisse entstehen. Sie beeinflussen, wie wir die Welt,
 uns selbst und andere wahrnehmen.
 
-### Die fuenf Grundbeduerfnisse (nach Young)
+### Die fünf Grundbedürfnisse (nach Young)
 
-| Grundbeduerfnis | Wenn unerfuellt, entstehen z.B. |
+| Grundbedürfnis | Wenn unerfüllt, entstehen z.B. |
 |----------------|-------------------------------|
 | Sichere Bindung | Verlassenheit, Misstrauen |
-| Autonomie & Kompetenz | Abhaengigkeit, Versagensangst |
+| Autonomie & Kompetenz | Abhängigkeit, Versagensangst |
 | Realistische Grenzen | Anspruchshaltung, mangelnde Selbstkontrolle |
-| Freier Ausdruck von Beduerfnissen | Unterwerfung, Aufopferung |
-| Spontanitaet & Spiel | Uebertriebene Standards, Bestrafungsneigung |
+| Freier Ausdruck von Bedürfnissen | Unterwerfung, Aufopferung |
+| Spontanität & Spiel | Übertriebene Standards, Bestrafungsneigung |
 
-### Die 18 Schemata — Ueberblick (5 Domaenen)
+### Die 18 Schemata — Überblick (5 Domänen)
 
-**Domaene 1: Abgetrenntheit und Ablehnung**
-- Verlassenheit / Instabilitaet
+**Domäne 1: Abgetrenntheit und Ablehnung**
+- Verlassenheit / Instabilität
 - Misstrauen / Missbrauch
 - Emotionale Entbehrung
-- Unzulaenglichkeit / Scham
+- Unzulänglichkeit / Scham
 - Soziale Isolation
 
-**Domaene 2: Beeintraechtigte Autonomie**
-- Abhaengigkeit / Inkompetenz
+**Domäne 2: Beeinträchtigte Autonomie**
+- Abhängigkeit / Inkompetenz
 - Verletzbarkeit
 - Verstrickung / Unentwickeltes Selbst
 - Versagen
 
-**Domaene 3: Beeintraechtigte Grenzen**
-- Anspruchshaltung / Grandiosiaet
+**Domäne 3: Beeinträchtigte Grenzen**
+- Anspruchshaltung / Grandiosität
 - Unzureichende Selbstkontrolle
 
-**Domaene 4: Fremdbestimmtheit**
+**Domäne 4: Fremdbestimmtheit**
 - Unterwerfung
 - Aufopferung
 - Streben nach Anerkennung
 
-**Domaene 5: Uebermaessige Wachsamkeit**
-- Negativitaet / Pessimismus
+**Domäne 5: Übermäßige Wachsamkeit**
+- Negativität / Pessimismus
 - Emotionale Gehemmtheit
-- Uebertriebene Standards
+- Übertriebene Standards
 - Bestrafungsneigung
 
 ### Reflexionsfragen zur Schema-Erkennung
-- "Welche Ueberzeugungen ueber dich selbst tauchen immer wieder auf?"
+- "Welche Überzeugungen über dich selbst tauchen immer wieder auf?"
 - "In welchen Situationen reagierst du besonders stark emotional?"
 - "Erkennst du Muster, die sich in verschiedenen Beziehungen wiederholen?"
-- "Welche Beduerfnisse kamen in deiner Kindheit moeglicherweise zu kurz?"
+- "Welche Bedürfnisse kamen in deiner Kindheit möglicherweise zu kurz?"
 
 ---
 
 ## 2. Das Modi-Modell
 
 ### Prinzip
-Modi sind momentane emotionale Zustaende, die durch Schemata aktiviert werden.
+Modi sind momentane emotionale Zustände, die durch Schemata aktiviert werden.
 Das Modi-Modell hilft, verschiedene "innere Anteile" zu verstehen und einzuordnen.
 
 ### Die vier Modi-Kategorien
 
 **Kind-Modi:**
-- *Verletztes Kind:* Fuehlt sich traurig, einsam, aengstlich, ueberwaeltigt
-- *Aergerliches Kind:* Wuetend ueber unerfuellte Beduerfnisse
-- *Impulsives Kind:* Handelt unueberlegt, will sofortige Befriedigung
-- *Glueckliches Kind:* Fuehlt sich sicher, geliebt, spontan
+- *Verletztes Kind:* Fühlt sich traurig, einsam, ängstlich, überwältigt
+- *Ärgerliches Kind:* Wütend über unerfüllte Bedürfnisse
+- *Impulsives Kind:* Handelt unüberlegt, will sofortige Befriedigung
+- *Glückliches Kind:* Fühlt sich sicher, geliebt, spontan
 
 **Maladaptive Eltern-Modi:**
 - *Strafender Elternmodus:* Innere Stimme, die kritisiert, bestraft, abwertet
 - *Fordernder Elternmodus:* Innere Stimme, die Perfektion und Leistung verlangt
 
-**Maladaptive Bewaeltigungsmodi:**
-- *Unterwerfung / Erduldung:* Gibt nach, passt sich uebertrieben an
-- *Vermeidung:* Betaeubt Gefuehle, zieht sich zurueck, lenkt ab
-- *Ueberkompensation:* Dominiert, kontrolliert, greift an
+**Maladaptive Bewältigungsmodi:**
+- *Unterwerfung / Erduldung:* Gibt nach, passt sich übertrieben an
+- *Vermeidung:* Betäubt Gefühle, zieht sich zurück, lenkt ab
+- *Überkompensation:* Dominiert, kontrolliert, greift an
 
 **Gesunder Erwachsener:**
-- Kann Beduerfnisse wahrnehmen und angemessen erfuellen
+- Kann Bedürfnisse wahrnehmen und angemessen erfüllen
 - Setzt gesunde Grenzen
-- Troestet und beruhigt das verletzte Kind
-- Begrenzt uebertriebene Eltern-Modi
+- Tröstet und beruhigt das verletzte Kind
+- Begrenzt übertriebene Eltern-Modi
 
-### Uebung: Modi im Alltag erkennen
+### Übung: Modi im Alltag erkennen
 
 ```
 Situation: ______________
-Welchen Modus spuere ich gerade?
-  [ ] Verletztes Kind — "Ich fuehle mich klein und hilflos"
-  [ ] Aergerliches Kind — "Das ist unfair!"
+Welchen Modus spüre ich gerade?
+  [ ] Verletztes Kind — "Ich fühle mich klein und hilflos"
+  [ ] Ärgerliches Kind — "Das ist unfair!"
   [ ] Strafender Elternmodus — "Du bist nicht gut genug"
   [ ] Fordernder Elternmodus — "Du musst mehr leisten"
-  [ ] Vermeidung — "Ich will nicht darueber nachdenken"
-  [ ] Ueberkompensation — "Ich zeig's denen"
+  [ ] Vermeidung — "Ich will nicht darüber nachdenken"
+  [ ] Überkompensation — "Ich zeig's denen"
   [ ] Gesunder Erwachsener — "Was brauche ich jetzt wirklich?"
 ```
 
@@ -159,55 +160,55 @@ Welchen Modus spuere ich gerade?
 ## 3. Inneres-Kind-Arbeit (psychoedukativ)
 
 ### Prinzip
-Die Innere-Kind-Arbeit in der Schematherapie zielt darauf ab, eine fuersorgliche
-innere Haltung gegenueber den eigenen verletzten Anteilen zu entwickeln.
+Die Innere-Kind-Arbeit in der Schematherapie zielt darauf ab, eine fürsorgliche
+innere Haltung gegenüber den eigenen verletzten Anteilen zu entwickeln.
 
-**ACHTUNG:** Tiefgehende Innere-Kind-Arbeit gehoert in professionelle therapeutische Begleitung.
+**ACHTUNG:** Tiefgehende Innere-Kind-Arbeit gehört in professionelle therapeutische Begleitung.
 
-### Reflexionsuebung: Brief an das innere Kind
+### Reflexionsübung: Brief an das innere Kind
 
 ```
-Schreibe einen kurzen Brief an dein juengeres Ich:
-1. Was haettest du damals gebraucht?
-2. Was wuerdest du dem Kind heute sagen?
-3. Welchen Trost wuerdest du anbieten?
+Schreibe einen kurzen Brief an dein jüngeres Ich:
+1. Was hättest du damals gebraucht?
+2. Was würdest du dem Kind heute sagen?
+3. Welchen Trost würdest du anbieten?
 ```
 
 ### Reflexionsfragen
-- "Wenn du an die Situation denkst — wie alt fuehlst du dich innerlich?"
-- "Was haette ein fuersorglicher Erwachsener damals zu dir gesagt?"
-- "Welche Beduerfnisse des Kindes in dir kommen gerade zu kurz?"
+- "Wenn du an die Situation denkst — wie alt fühlst du dich innerlich?"
+- "Was hätte ein fürsorglicher Erwachsener damals zu dir gesagt?"
+- "Welche Bedürfnisse des Kindes in dir kommen gerade zu kurz?"
 
 ---
 
-## 4. Bewaeltigungsstile verstehen
+## 4. Bewältigungsstile verstehen
 
 ### Die drei Grundmuster
 
-| Bewaeltigungsstil | Strategie | Beispiel |
+| Bewältigungsstil | Strategie | Beispiel |
 |-------------------|-----------|----------|
-| Erduldung | Schema akzeptieren, sich fuegen | "So bin ich eben, ich kann nichts aendern" |
-| Vermeidung | Schema nicht fuehlen wollen | Ablenkung, Substanzkonsum, Ueberarbeitung |
-| Ueberkompensation | Gegenteil des Schemas leben | Perfektionismus statt Versagensgefuehl |
+| Erduldung | Schema akzeptieren, sich fügen | "So bin ich eben, ich kann nichts ändern" |
+| Vermeidung | Schema nicht fühlen wollen | Ablenkung, Substanzkonsum, Überarbeitung |
+| Überkompensation | Gegenteil des Schemas leben | Perfektionismus statt Versagensgefühl |
 
 ### Reflexionsfragen
-- "Wenn du unter Druck geraetst — neigst du eher dazu, dich zu fuegen, zu fliehen oder zu kaempfen?"
-- "Welche deiner Gewohnheiten koennten Vermeidungsstrategien sein?"
-- "Gibt es Bereiche, in denen du das Gegenteil von dem machst, was du eigentlich fuehlst?"
+- "Wenn du unter Druck gerätst — neigst du eher dazu, dich zu fügen, zu fliehen oder zu kämpfen?"
+- "Welche deiner Gewohnheiten könnten Vermeidungsstrategien sein?"
+- "Gibt es Bereiche, in denen du das Gegenteil von dem machst, was du eigentlich fühlst?"
 
 ---
 
 ## Ethik und Grenzen
 
 **Ein KI-Assistent darf:**
-- Schemata und Modi als Konzepte erklaeren
+- Schemata und Modi als Konzepte erklären
 - Reflexionsfragen stellen zur Selbsterkundung
-- Bewaeltigungsstile als Psychoedukation vorstellen
-- Innere-Kind-Reflexionsuebungen anleiten (einfache, schriftliche)
+- Bewältigungsstile als Psychoedukation vorstellen
+- Innere-Kind-Reflexionsübungen anleiten (einfache, schriftliche)
 
 **Ein KI-Assistent darf NICHT:**
 - Schemata diagnostizieren oder zuschreiben
-- Stuhlarbeit oder erlebnisaktivierende Uebungen durchfuehren
+- Stuhlarbeit oder erlebnisaktivierende Übungen durchführen
 - Reparenting (Nachbeelterung) anbieten
 - Traumatische Kindheitserfahrungen bearbeiten
 - Schema-Modi-Therapie ersetzen

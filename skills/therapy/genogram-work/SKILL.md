@@ -31,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="genogram-work banner">
 
 # Genogramm-Arbeit
@@ -39,22 +40,20 @@ provenance:
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
-**Siehe auch:** [systemisch-loesungsfokussiert](../systemisch-loesungsfokussiert/SKILL.md) (Zirkulaere Fragen, systemische Interventionen)
-
 ---
 
 ## Kontext
 
 Das Genogramm ist ein Werkzeug aus der systemischen Therapie und Familientherapie.
-Es wurde massgeblich von Murray Bowen (Mehrgenerationen-Ansatz) und Monica McGoldrick
-(Genogramm-Standardisierung) gepraegt. Es stellt Familienbeziehungen ueber mehrere
+Es wurde maßgeblich von Murray Bowen (Mehrgenerationen-Ansatz) und Monica McGoldrick
+(Genogramm-Standardisierung) geprägt. Es stellt Familienbeziehungen über mehrere
 Generationen grafisch dar und macht Muster, Rollen und Dynamiken sichtbar.
 
 Evidenz: Genogrammarbeit ist Bestandteil aller systemischen Therapieausbildungen und
 in der klinischen Praxis als diagnostisches und reflexives Werkzeug etabliert
 (McGoldrick, Gerson & Petry 2020, von Schlippe & Schweitzer 2012).
 
-**Hinweis:** Dies ist ein Reflexionswerkzeug, kein Ersatz fuer professionelle Therapie.
+**Hinweis:** Dies ist ein Reflexionswerkzeug, kein Ersatz für professionelle Therapie.
 **Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
@@ -63,15 +62,15 @@ in der klinischen Praxis als diagnostisches und reflexives Werkzeug etabliert
 
 ### Definition
 Ein Genogramm ist eine erweiterte grafische Darstellung des Stammbaums, die neben
-der biologischen Abstammung auch Beziehungsqualitaeten, emotionale Muster, Konflikte,
-Krankheiten und wichtige Lebensereignisse erfasst — typischerweise ueber drei Generationen.
+der biologischen Abstammung auch Beziehungsqualitäten, emotionale Muster, Konflikte,
+Krankheiten und wichtige Lebensereignisse erfasst — typischerweise über drei Generationen.
 
 ### Unterschied zum Stammbaum
 
 | Stammbaum | Genogramm |
 |-----------|-----------|
 | Wer ist mit wem verwandt? | Wie stehen die Personen zueinander? |
-| Biologische Abstammung | Emotionale Beziehungsqualitaet |
+| Biologische Abstammung | Emotionale Beziehungsqualität |
 | Statische Fakten | Dynamische Muster |
 | Historisch orientiert | Muster-orientiert |
 
@@ -82,7 +81,7 @@ Krankheiten und wichtige Lebensereignisse erfasst — typischerweise ueber drei 
 ### Personen
 
 ```
-Maennlich:    [ ]     (Quadrat)
+Männlich:    [ ]     (Quadrat)
 Weiblich:     ( )     (Kreis)
 Divers:       < >     (Raute)
 Verstorben:   [X]     (Symbol mit X)
@@ -106,24 +105,24 @@ Abbruch:               ——||——      (Linie mit Doppelstrich)
 
 ## 3. Wie erstelle ich ein Genogramm?
 
-### Schritt-fuer-Schritt-Anleitung
+### Schritt-für-Schritt-Anleitung
 
 **Schritt 1: Daten sammeln**
-Fuer jede Person (mindestens 3 Generationen):
+Für jede Person (mindestens 3 Generationen):
 - Name, Geburtsjahr, ggf. Sterbejahr
 - Beruf, Wohnort
 - Besondere Lebensereignisse (Migration, Krankheit, Verluste)
 - Beziehungsstatus
 
 **Schritt 2: Grundstruktur zeichnen**
-- Grosseltern oben, Kinder unten
+- Großeltern oben, Kinder unten
 - Partner nebeneinander
-- Kinder von links nach rechts (aelteste zuerst)
+- Kinder von links nach rechts (älteste zuerst)
 
-**Schritt 3: Beziehungsqualitaeten eintragen**
+**Schritt 3: Beziehungsqualitäten eintragen**
 - Welche Beziehungen sind eng, welche distanziert?
 - Wo gibt es Konflikte?
-- Wo gibt es Verstrickungen oder Abbrueche?
+- Wo gibt es Verstrickungen oder Abbrüche?
 
 **Schritt 4: Muster markieren**
 - Wiederkehrende Themen farblich markieren
@@ -136,89 +135,89 @@ Fuer jede Person (mindestens 3 Generationen):
 ### Typische Mehrgenerationen-Muster
 
 **Wiederholungsmuster:**
-- Scheidungen ueber mehrere Generationen
+- Scheidungen über mehrere Generationen
 - Suchtverhalten (Alkohol, Arbeit, ...)
-- Fruehe Elternschaft
+- Frühe Elternschaft
 - Berufswahl / Rollenverteilung
 
 **Beziehungsmuster:**
 - Verstrickung (zu enge Beziehung, keine Grenzen)
 - Cut-off (Kontaktabbruch, Ausschluss)
 - Triangulierung (Kind wird in Elternkonflikt hineingezogen)
-- Parentifizierung (Kind uebernimmt Elternrolle)
+- Parentifizierung (Kind übernimmt Elternrolle)
 
-**Rollen und Auftraege:**
-- "Der Starke" / "Die Kuemmerin"
+**Rollen und Aufträge:**
+- "Der Starke" / "Die Kümmerin"
 - "Das schwarze Schaf"
 - "Der Friedensstifter"
-- Unausgesprochene Familienauftraege ("Du sollst es besser haben")
+- Unausgesprochene Familienaufträge ("Du sollst es besser haben")
 
 ### Reflexionsfragen zu Mustern
-- "Welche Themen tauchen in deiner Familie ueber Generationen auf?"
-- "Welche Rolle hast du in deiner Familie uebernommen?"
+- "Welche Themen tauchen in deiner Familie über Generationen auf?"
+- "Welche Rolle hast du in deiner Familie übernommen?"
 - "Gibt es Familienregeln, die nie ausgesprochen wurden?"
-- "Wem in der Familie aehnelst du am meisten — und in welcher Hinsicht?"
+- "Wem in der Familie ähnelst du am meisten — und in welcher Hinsicht?"
 - "Welche Beziehungsmuster deiner Eltern erkennst du bei dir wieder?"
 
 ---
 
 ## 5. Ressourcen im Genogramm
 
-### Nicht nur Probleme — auch Staerken
+### Nicht nur Probleme — auch Stärken
 
 Das Genogramm zeigt nicht nur Belastungen, sondern auch Ressourcen:
 - Wer hat schwierige Zeiten gemeistert?
-- Welche Staerken gibt es in der Familie?
+- Welche Stärken gibt es in der Familie?
 - Wer war ein positives Vorbild?
 - Welche Werte wurden weitergegeben, die hilfreich sind?
 
 ### Reflexionsfragen zu Ressourcen
-- "Wer in deiner Familie bewundert dich? Wofuer?"
-- "Von wem hast du eine Staerke geerbt oder gelernt?"
+- "Wer in deiner Familie bewundert dich? Wofür?"
+- "Von wem hast du eine Stärke geerbt oder gelernt?"
 - "Welches Familienmitglied hat eine Krise besonders gut gemeistert?"
-- "Welche positiven Familientraditionen moechtest du weiterfuehren?"
+- "Welche positiven Familientraditionen möchtest du weiterführen?"
 - "Was hat deine Familie zusammengehalten?"
 
 ---
 
-## 6. Uebungen
+## 6. Übungen
 
-### Uebung 1: Mein Genogramm
+### Übung 1: Mein Genogramm
 Zeichne dein eigenes Genogramm (3 Generationen).
 Verwende die Symbole aus Abschnitt 2.
 Notiere zu jeder Person 2-3 Stichworte.
 
-### Uebung 2: Beziehungsqualitaeten
-Trage in dein Genogramm die Beziehungsqualitaeten ein:
+### Übung 2: Beziehungsqualitäten
+Trage in dein Genogramm die Beziehungsqualitäten ein:
 - Wo sind die engsten Beziehungen?
 - Wo gibt es Konflikte?
 - Wo gibt es Distanz oder Kontaktabbruch?
 
-### Uebung 3: Muster-Suche
+### Übung 3: Muster-Suche
 Schau dir dein fertiges Genogramm an und beantworte:
 1. Welche Themen wiederholen sich?
 2. Welche Rollen erkennst du?
-3. Welche Muster moechtest du weiterfuehren — und welche nicht?
+3. Welche Muster möchtest du weiterführen — und welche nicht?
 
-### Uebung 4: Ressourcen-Genogramm
+### Übung 4: Ressourcen-Genogramm
 Markiere in deinem Genogramm alle positiven Ressourcen:
-Staerken, Talente, gemeisterte Krisen, positive Werte.
+Stärken, Talente, gemeisterte Krisen, positive Werte.
 
 ---
 
 ## Ethik und Grenzen
 
 **Ein KI-Assistent darf:**
-- Genogramm-Konzepte und Symbole erklaeren
-- Bei der Erstellung eines einfachen Genogramms unterstuetzen
+- Genogramm-Konzepte und Symbole erklären
+- Bei der Erstellung eines einfachen Genogramms unterstützen
 - Reflexionsfragen zu Familienmustern stellen
 - Auf Ressourcen in der Familiengeschichte hinweisen
 
 **Ein KI-Assistent darf NICHT:**
 - Familiendiagnosen stellen
 - Familiengeheimnisse oder Traumata bearbeiten
-- Familienaufstellungen durchfuehren
-- Schuldzuweisungen an Familienmitglieder foerdern
+- Familienaufstellungen durchführen
+- Schuldzuweisungen an Familienmitglieder fördern
 - Familientherapeutische Interventionen vornehmen
 
 **Bei Anzeichen akuter Krise IMMER verweisen auf:**

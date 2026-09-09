@@ -34,197 +34,194 @@ provenance:
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 
-> Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken und Gedankenprotokolle
+# Kognitive Umstrukturierung
 
+> Verhaltenstherapeutische Kerntechnik: ABC-Schema, dysfunktionale Gedanken erkennen und verändern
 
-# Cognitive Restructuring (Deutsch)
-
-> Core CBT technique: ABC schema, identifying and modifying dysfunctional thoughts
-
-See: [ETHICS.md](../ETHICS.md)
+Siehe: [ETHICS.md](../ETHICS.md)
 
 ---
 
-## Context
+## Kontext
 
-Cognitive restructuring is a core technique of Cognitive Behavioral Therapy (CBT). It helps identify automatic negative thoughts, challenge them, and replace them with more helpful alternatives.
+Kognitive Umstrukturierung ist eine Kerntechnik der kognitiven Verhaltenstherapie (KVT).
+Sie hilft dabei, automatische negative Gedanken zu erkennen, zu hinterfragen und durch
+hilfreichere Alternativen zu ersetzen.
 
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Hinweis:** Dies ist Unterstützung, kein Ersatz für professionelle Therapie.
+**Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
 
-## 1. ABC Model (Ellis)
+## 1. ABC-Modell (Ellis)
 
-The ABC model explains how events, thoughts, and feelings are connected.
+Das ABC-Modell erklärt wie Ereignisse, Gedanken und Gefühle zusammenhängen.
 
 ```
-A (Activating Event)   ->  B (Beliefs / Thoughts)  ->  C (Consequences / Feelings/Behavior)
-Trigger                     Evaluation / Belief           Emotional consequence
+A (Activating Event)   ->  B (Beliefs / Gedanken)  ->  C (Consequences / Gefühle/Verhalten)
+Ausloser                   Bewertung / Überzeugung     Emotionale Folge
 ```
 
-**Important:** It is not the event (A) that creates the emotion (C), but the evaluation (B)!
+**Wichtig:** Nicht das Ereignis (A) erzeugt die Emotion (C), sondern die Bewertung (B)!
 
-**Example:**
+**Beispiel:**
 ```
-A: Boss criticizes a report in a meeting
-B: "I am incompetent, everyone thinks so now"
-C: Shame, withdrawal, avoiding future contributions
+A: Chef kritisiert einen Bericht im Meeting
+B: "Ich bin inkompetent, alle denken das jetzt"
+C: Scham, Rückzug, Vermeidung zukünftiger Beiträge
 ```
 
-**Goal:** Change B to influence C.
+**Ziel:** B verändern, um C zu beeinflussen.
 
 ---
 
-## 2. Identifying Automatic Negative Thoughts (ANTs)
+## 2. Automatische Negative Gedanken (ANGs) erkennen
 
-**What are ANTs?**
-- Quick, automatic evaluations in stressful situations
-- Often perceived as facts, although they are interpretations
-- Tend toward exaggeration, generalization, catastrophizing
+**Was sind ANGs?**
+- Schnelle, automatische Bewertungen in stressigen Situationen
+- Oft als Fakten wahrgenommen, obwohl sie Interpretationen sind
+- Tendieren zu Übertreibung, Verallgemeinerung, Katastrophisierung
 
-**Typical recognition features:**
-- Absolute thinking: "always," "never," "everyone," "nobody"
-- Catastrophizing: "This will end terribly"
-- Mind reading: "They must think that..."
-- Overgeneralization: "This never works for me"
+**Typische Erkennungsmerkmale:**
+- Absolutes Denken: "immer", "nie", "alle", "niemand"
+- Katastrophisierung: "Das wird furchtbar enden"
+- Gedankenlesen: "Er denkt bestimmt, dass..."
+- Übergeneralisierung: "Das klappt bei mir nie"
 
-**Recognition questions:**
-- "What went through your mind when that happened?"
-- "When you think about the situation, what words come up?"
-- "What do you fear might happen?"
-
----
-
-## 3. Cognitive Distortions (Thinking Errors)
-
-| Distortion | Description | Example |
-|------------|-------------|---------|
-| All-or-nothing | Black-and-white thinking | "If I'm not perfect, I'm a failure" |
-| Overgeneralization | One case = general pattern | "This always goes wrong for me" |
-| Mental filter | Only perceiving negatives | Focusing on the single criticism in feedback |
-| Mind reading | Believing to know what others think | "They surely hate me" |
-| Catastrophizing | Assuming the worst case | "This will be a catastrophe" |
-| Emotional reasoning | Feeling = reality | "I feel stupid, so I am stupid" |
-| Should/must thinking | Rigid rules | "I should be able to do this" |
-| Personalization | Relating everything to oneself | "The bad project was my fault" |
+**Erkennungs-Fragen:**
+- "Was ist dir durch den Kopf gegangen, als das passiert ist?"
+- "Wenn du an die Situation denkst, welche Worte kommen?"
+- "Was befürchtest du könnte passieren?"
 
 ---
 
-## 4. Challenging Thoughts (Socratic Questioning)
+## 3. Kognitive Verzerrungen (Denkfehler)
 
-**Goal:** Not directly refute thoughts, but encourage examination.
-
-**Question set:**
-
-1. **Examine evidence:**
-   - "What evidence is there for this?"
-   - "What evidence speaks against it?"
-
-2. **Alternative explanations:**
-   - "Are there other explanations for this?"
-   - "How would someone else view this situation?"
-
-3. **Assess consequences:**
-   - "What is the worst that could happen? How likely is that?"
-   - "What is the best that could happen?"
-   - "What is the most realistic outcome?"
-
-4. **Check usefulness:**
-   - "Does this thought help me achieve my goals?"
-   - "What would I say to a good friend who thinks this way?"
+| Denkfehler | Beschreibung | Beispiel |
+|------------|--------------|---------|
+| Alles-oder-nichts | Schwarz-Weiß-Denken | "Wenn ich nicht perfekt bin, bin ich ein Versager" |
+| Übergeneralisierung | Ein Fall = Allgemeines Muster | "Das geht bei mir immer schief" |
+| Gedankenfilter | Nur Negatives wahrnehmen | Fokussieren auf einzigen Kritikpunkt im Feedback |
+| Gedankenlesen | Andere wissen was andere denken | "Er hasst mich sicher" |
+| Katastrophisieren | Schlimmsten Fall annehmen | "Das wird eine Katastrophe werden" |
+| Emotionale Begründung | Gefühl = Realität | "Ich fühle mich dumm, also bin ich dumm" |
+| Sollte/Muss-Denken | Starre Regeln | "Ich müsste das können" |
+| Personalisierung | Alles auf sich beziehen | "Der schlechte Auftrag war meine Schuld" |
 
 ---
 
-## 5. Cognitive Restructuring Step by Step
+## 4. Gedanken hinterfragen (Sokratisches Fragen)
 
-### Record Format (Thought Record)
+**Ziel:** Gedanken nicht direkt widerlegen, sondern Prüfung anregen.
+
+**Fragen-Set:**
+
+1. **Beweise prüfen:**
+   - "Welche Beweise gibt es dafür?"
+   - "Welche Beweise sprechen dagegen?"
+
+2. **Alternative Erklärungen:**
+   - "Gibt es andere Erklärungen dafür?"
+   - "Wie würde jemand anderes diese Situation sehen?"
+
+3. **Konsequenzen einschätzen:**
+   - "Was ist das Schlimmste, was passieren könnte? Wie wahrscheinlich ist das?"
+   - "Was ist das Beste, was passieren könnte?"
+   - "Was ist das Realistischste?"
+
+4. **Nützlichkeit prüfen:**
+   - "Hilft mir dieser Gedanke dabei, meine Ziele zu erreichen?"
+   - "Was würde ich einem guten Freund sagen, der so denkt?"
+
+---
+
+## 5. Kognitive Umstrukturierung Schritt-für-Schritt
+
+### Protokoll-Format (Gedankenprotokoll)
 
 ```
 SITUATION
-What happened? (When? Where? Who was there?)
-[Free text]
+Was ist passiert? (Wann? Wo? Wer war dabei?)
+[Freitext]
 
-THOUGHT
-What went through my mind?
-Automatic thought: [...]
-How much do I believe it? (0-100%): [...]%
+GEDANKE
+Was bin ich dadurch durch den Kopf gegangen?
+Automatischer Gedanke: [...]
+Glaube ich daran? (0-100%): [...]%
 
 EMOTION
-What emotions did I have?
-Emotion: [...]    Intensity (0-100%): [...]%
+Welche Emotionen hatte ich?
+Emotion: [...]    Intensität (0-100%): [...]%
 
-COGNITIVE DISTORTION
-Which cognitive distortions are involved?
-[List from table above]
+DENKFEHLER
+Welche kognitiven Verzerrungen stecken darin?
+[Liste aus Tabelle oben]
 
-EXAMINE
-Evidence for: [...]
-Evidence against: [...]
-Alternative perspective: [...]
+PRÜFEN
+Beweise dafür: [...]
+Beweise dagegen: [...]
+Alternative Sichtweise: [...]
 
-ALTERNATIVE THOUGHT
-More balanced, realistic thought:
+ALTERNATIVER GEDANKE
+Ausgewogener, realistischerer Gedanke:
 [...]
-How much do I believe it? (0-100%): [...]%
+Glaube ich daran? (0-100%): [...]%
 
-RESULT
-Emotion afterward: [...]   Intensity: [...]%
-Takeaway: [...]
+ERGEBNIS
+Emotion danach: [...]   Intensität: [...]%
+Was nehme ich mit: [...]
 ```
 
 ---
 
-## 6. Behavioral Activation
+## 6. Verhaltensaktivierung
 
-**Supplement to cognitive work:** Changing behavior supports thought change.
+**Zusatz zu kognitiver Arbeit:** Verhalten verändern unterstützt Gedanken-Veränderung.
 
-**Principle:** Positive activities -> Better mood -> More helpful thoughts
+**Prinzip:** Positive Aktivitäten -> Bessere Stimmung -> Hilfreichere Gedanken
 
-**Steps:**
-1. Create list of pleasant/meaningful activities
-2. Plan activities (specifically: when, how, where)
-3. Track implementation
-4. Rate mood before/after
+**Schritte:**
+1. Liste angenehmer/bedeutungsvoller Aktivitäten erstellen
+2. Aktivitäten planen (konkret: wann, wie, wo)
+3. Umsetzung tracken
+4. Stimmung vor/nach bewerten
 
-**Example activities:**
-- Walk (nature, fresh air)
-- Contact with important people
-- Creative activities
-- Physical exercise
-- Things that used to bring joy
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Explain cognitive distortions and the ABC model
-- Ask Socratic questions
-- Guide thought records
-- Provide psychoeducation about CBT techniques
-
-**An AI assistant must NOT:**
-- Replace professional cognitive behavioral therapy
-- Make diagnoses or treatment recommendations
-- Conduct crisis intervention
-- Apply EMDR, Prolonged Exposure (PE), or Narrative Exposure Therapy (NET)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Beispiel-Aktivitäten:**
+- Spaziergang (Natur, frische Luft)
+- Kontakt zu wichtigen Menschen
+- Kreative Tätigkeiten
+- Körperliche Bewegung
+- Dinge, die früher Freude gemacht haben
 
 ---
 
-## References
+## Ethik und Grenzen
+
+**Ein KI-Assistent darf:**
+- Kognitive Verzerrungen und das ABC-Modell erklären
+- Sokratische Fragen stellen
+- Gedankenprotokolle anleiten
+- Psychoedukativ über KVT-Techniken informieren
+
+**Ein KI-Assistent darf NICHT:**
+- Professionelle kognitive Verhaltenstherapie ersetzen
+- Diagnosen stellen oder Behandlungsempfehlungen geben
+- Krisenintervention durchführen
+- EMDR, Prolonged Exposure (PE) oder Narrative Exposure Therapy (NET) anwenden
+
+**Bei Anzeichen akuter Krise IMMER verweisen auf:**
+- Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
+- Psychiatrischer Notdienst: 112
+- Krisenchat: krisenchat.de
+
+---
+
+## Quellenangaben
 
 - Beck, A. T. (1979). *Cognitive Therapy and the Emotional Disorders.* Penguin Books.
 - Ellis, A. (1962). *Reason and Emotion in Psychotherapy.* Lyle Stuart.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Beck (1979), Ellis (1962) — Not professional therapy*
+*Portiert aus BACH v3.8.0 | Standalone-Version*
+*Quellen: Beck (1979), Ellis (1962) — Keine professionelle Therapie*
