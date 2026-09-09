@@ -1328,7 +1328,7 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/pingpong/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "status": "active",
       "description": "Betreibt eine zeitlich begrenzte, sitzungsgebundene Funkstelle über einen gemeinsam synchronisierten Ordner. ListenSync scannt systematisch nach Aufträgen und Neuigkeiten; WriteSync versendet Deltas und Receipts. Verwenden bei PingPong, Dosentelefon, ListenSync, WriteSync, Sync-Listener, Auftragswache, News-Scan oder Goal-/Loop-Überwachung.",
       "languages": [
