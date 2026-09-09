@@ -1,33 +1,33 @@
 ---
 name: automation-self-care
-version: 1.1.0
+version: 1.3.1
 type: skill
-author: Lukas Geiger + OpenAI
+author: Lukas Geiger + OpenAI + Google Gemini
 created: 2026-07-28
-updated: 2026-08-30
+updated: 2026-09-09
 description: >
   Baut und betreibt ein anbieterneutrales Self-Care-Kernset für geplante
-  LLM-Aufgaben und Desktop-App-Automationen. Nutzen, wenn ein Agent seinen
-  nativen Scheduler entdecken, wiederkehrende Hygiene-, Prompt-Qualitäts-,
-  Frequenz-, Last-, Ressourcen-, Cross-System-, Berechtigungs- und
-  Laufzeit-Checks installieren oder eine bestehende Automations-Flotte mit
-  Rollback, Readback und Löschschutz kontinuierlich verbessern soll. Löst
-  aus bei automation self-care, Scheduler-Task-Pflege, Desktop-App-
-  Automations-Wartung, Automations-Flotten-Audit, selbstheilende
-  Zeitpläne, Anfragen zur Wiederherstellung der ANTIGRAVITY-artigen
-  Wartungs-Task-Familie, core-set-textautomations, basic-text-automations,
-  textbased-automation-core, textbased-automation-drivers oder
-  textbased-desktopapp-automations.
+  LLM-Aufgaben und Desktop-App-Automationen. Ergänzt deterministisches
+  Policy-Linting, Lock- und Modell-Governance, semantische Prompt-Prüfung,
+  konsistente Mehrflächen-Updates, Mini-Checks und Regeldatei-Hygiene.
+  Nutzen, wenn ein Agent seinen nativen Scheduler entdecken oder eine
+  bestehende Automations-Flotte mit Rollback, Readback und Löschschutz
+  kontinuierlich verbessern soll. Löst aus bei automation self-care,
+  Scheduler-Task-Pflege, Desktop-App-Automations-Wartung,
+  Automations-Flotten-Audit, selbstheilende Zeitpläne,
+  core-set-textautomations, basic-text-automations,
+  textbased-automation-core, textbased-automation-drivers,
+  textbased-governance-automations oder textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
+tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system, governance, token-governance, mini-check, policy-linter]
 language: de
 status: active
 visibility: public
-aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+aliases: [textbased-governance-automations-seed, tgas, textbasierte-governance-automationen-seed, textbased-governance-automations, textbasierte-governance-automationen, textbased-governance-automatisations-seed, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
 dependencies:
   tools: []
   services: []
@@ -79,6 +79,31 @@ und native Readbacks.
   oder Exit 0.
 - Niemals Geheimnisse, private Prompts oder personenbezogene Daten in eine
   geteilte Registry kopieren.
+- Vor jeder Mutation einen deterministischen, im Anbieterprofil benannten
+  Policy-Linter ausführen. Projektpfade, Prüfskripte und Policies über
+  Adapterfelder oder neutrale Platzhalter auflösen; keine Host-, Konto- oder
+  privaten Verzeichnispfade in den öffentlichen Skill übernehmen.
+- Den maßgeblichen Lock-Mechanismus des Zielsystems vor Datei-, Scheduler-,
+  Commit- oder Push-Aktionen prüfen. Ist die Lock-Autorität unbekannt,
+  unerreichbar oder widersprüchlich, gilt Fail-Closed und Read-only.
+- Modelle weder aufgrund fest codierter Produktversionen noch aufgrund
+  unbelegter Qualitätsannahmen ändern. Zulässige Modelle und Mindeststandards
+  aus der aktuellen Anbieteroberfläche und der gültigen lokalen Policy
+  auflösen. Downgrades und Upgrades brauchen die dort festgelegte Autorität;
+  bei Unklarheit bleibt das Modell unverändert.
+- Prompt-Tuning nicht allein aus Laufprotokollen ableiten. Den Vorschlag vor
+  der Mutation semantisch gegen die für das Zielprojekt geltenden Policies
+  prüfen und Sicherheits-, Forschungs- oder Freigabegrenzen bewahren.
+- Mehrere maßgebliche Zustandsflächen als eine Transaktion behandeln:
+  Vorzustände sichern, alle deklarierten Ziele aktualisieren, jedes Ziel
+  zurücklesen und bei Teilerfolg vollständig zurückrollen. Eine feste Zahl
+  oder lokale Verzeichnisstruktur niemals als universell voraussetzen.
+- Laufberichte ausschließlich in den dafür vorgesehenen lokalen Beleg- und
+  Statusspeichern ablegen, niemals in Agenten-Regeldateien. Namen und Orte
+  dieser Speicher kommen aus dem Anbieterprofil.
+- Schwere Wartung darf durch eng begrenzte Mini-Checks ergänzt werden.
+  Laufzeitgrenze, Prüfumfang, Muttertask und Eskalationsweg müssen im
+  Anbieterprofil stehen; ein Mini-Check darf keine Tiefenreparatur ausführen.
 
 ## Ablauf
 
@@ -216,6 +241,31 @@ Oberfläche installieren. Ein Ordner mit einem Task-Prompt ohne
 Live-Scheduler-Registrierung ist kein abgeschlossenes Setup.
 
 ## Changelog
+
+### 1.3.1 (2026-09-09)
+
+- Die ausdrücklich beauftragten Self-Care-Härtungen aus den Versionen 1.2
+  und 1.3 anbieterneutral konsolidiert.
+- Host-, Konto- und private Projektpfade aus der öffentlichen Anleitung
+  entfernt und durch Adapterfelder beziehungsweise neutrale Platzhalter
+  ersetzt.
+- Modellwechsel an aktuelle Anbieterfähigkeit, lokale Policy und belegte
+  Autorität gebunden; feste Versionsrangfolgen und unbelegte
+  Qualitätsbehauptungen entfernt.
+- Policy-Linting, semantische Prompt-Prüfung, Lock-Gate,
+  transaktionale Mehrflächen-Updates, Regeldatei-Hygiene und Mini-Checks als
+  portable Verträge beschrieben.
+
+### 1.3.0 (2026-09-09)
+
+- Deterministisches Policy-Linting und semantische Policy-Prüfung ergänzt.
+- Mehrflächen-Parität und die Bereinigung widersprüchlicher Zustände
+  abgesichert.
+
+### 1.2.0 (2026-09-06)
+
+- Lock-Governance, Modell-Anti-Regression, Regeldatei-Hygiene und
+  Mini-Check-Architektur ergänzt.
 
 ### 1.1.0 (2026-08-30)
 
