@@ -48,6 +48,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="file-collect-sort-action banner">
+
 # File Collect Sort Action
 
 > Der Nutzer hat dieses Modul bewusst passiv geparkt, bis ein konkreter Auftrag es braucht

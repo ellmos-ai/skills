@@ -45,6 +45,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="tidy-up banner">
+
 # Tidy Up — Tasksolver+Writer+Maintainer-Durchlauf fuer den aktiven Projektordner
 
 ## Zweck

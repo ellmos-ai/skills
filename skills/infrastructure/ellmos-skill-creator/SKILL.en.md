@@ -53,6 +53,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="ellmos-skill-creator banner">
+
 # ellmos-skill-creator
 
 ## Origin and decision (fork vs. building it ourselves)

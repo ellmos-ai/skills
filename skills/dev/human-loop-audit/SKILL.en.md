@@ -48,6 +48,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="human-loop-audit banner">
+
 # Human-Loop-Audit
 
 > **Not to be confused with `reissverschluss-merge`:** the name shares the

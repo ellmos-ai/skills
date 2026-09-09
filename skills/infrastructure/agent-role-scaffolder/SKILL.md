@@ -23,6 +23,8 @@ bach_compatible: false
 bach_origin: false
 ---
 
+<img src="banner.png" width="100%" alt="agent-role-scaffolder banner">
+
 # agent-role-scaffolder
 
 <!-- FAMILY-ROUTER:Agenten-Orchestrierung START -->

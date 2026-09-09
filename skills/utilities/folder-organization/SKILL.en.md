@@ -43,6 +43,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="folder-organization banner">
+
 # Folder Organization
 
 ## Outcome and boundary

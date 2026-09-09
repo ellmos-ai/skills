@@ -20,6 +20,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'local_changes_since_sync': True}
 ---
 
+<img src="banner.png" width="100%" alt="iterative-bundle-selection banner">
+
 # Iterative Bündelauswahl
 
 Große Auswahlmengen mit wenigen groben Entscheidungen verkleinern, ohne nicht gewählte Kandidaten vorschnell auszusondern.
