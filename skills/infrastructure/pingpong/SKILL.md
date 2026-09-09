@@ -1,10 +1,10 @@
 ---
 name: pingpong
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger, OpenAI Codex
 created: 2026-08-03
-updated: 2026-08-04
+updated: 2026-09-09
 description: >
   Betreibt eine zeitlich begrenzte, sitzungsgebundene Funkstelle über einen
   gemeinsam synchronisierten Ordner. ListenSync scannt systematisch nach
@@ -31,6 +31,14 @@ dependencies:
   services: []
   protocols: [shared-folder-sync]
   python: []
+
+roles:
+  - id: pingpong
+    label: PingPong
+    prompt: skills/infrastructure/pingpong/SKILL.en.md
+    request: Read and follow the PingPong protocol for the requested mode and duration.
+    modes: [ListenSync, WriteSync]
+    providers: [codex, claude]
 
 # Provenance
 provenance:
@@ -88,6 +96,10 @@ Erfinde bei Leerlauf keine Arbeit. Melde knapp: Scanzeit, gelesene Freshness-Dat
 Schreibe nur in den eigenen Systemslot oder einen ausdrücklich globalen Kanal. Nenne Absender, Empfänger, Zeit, Bezug, Handlung, Ergebnis, offene Punkte und gewünschte Kadenz. Merge statt Überschreiben; keine Credentials; Locks respektieren. Lies die kanonische Datei nach dem Schreiben mit FileCommander zurück.
 
 ## Changelog
+
+### 1.0.1 (2026-09-09)
+
+- Deklarative Rollenmetadaten nach dem optionalen Modul-v2-Rollenvertrag ergänzt; kein neutraler Starter deklariert. Bestehende Protokollidentität und Discovery-Pfad bleiben erhalten.
 
 ### 1.0.0 (2026-08-04)
 

@@ -1,10 +1,10 @@
 ---
 name: pingpong
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger, OpenAI Codex
 created: 2026-08-03
-updated: 2026-08-04
+updated: 2026-09-09
 description: >
   Runs a time-bounded, session-scoped radio link over a shared synchronized
   folder. ListenSync systematically scans for assignments and news; WriteSync
@@ -30,6 +30,14 @@ dependencies:
   services: []
   protocols: [shared-folder-sync]
   python: []
+
+roles:
+  - id: pingpong
+    label: PingPong
+    prompt: skills/infrastructure/pingpong/SKILL.en.md
+    request: Read and follow the PingPong protocol for the requested mode and duration.
+    modes: [ListenSync, WriteSync]
+    providers: [codex, claude]
 
 # Provenance
 provenance:
@@ -87,6 +95,10 @@ Invent no work during idle cycles. Report briefly: scan time, freshness files re
 Write only to the actor's own system slot or an explicitly global channel. State sender, recipient, time, reference, action, result, open points, and requested cadence. Merge rather than overwrite; include no credentials; respect locks. Read the canonical file back through FileCommander after writing.
 
 ## Changelog
+
+### 1.0.1 (2026-09-09)
+
+- Added declarative role metadata using the optional module-v2 roles contract; no neutral starter is declared. The existing protocol identity and discovery path are unchanged.
 
 ### 1.0.0 (2026-08-04)
 
