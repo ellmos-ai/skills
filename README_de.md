@@ -61,7 +61,7 @@ flowchart TD
     end
     
     Engine --> Catalog
-    Catalog --> Artifacts["SKILL.md Spezifikationen\n(YAML-Frontmatter + Playbooks + Skripte)"]
+    Catalog --> Artifacts["SKILL.md Spezifikationen<br/>(YAML-Frontmatter + Playbooks + Skripte)"]
     
     subgraph MultiAgentRuntimes ["Multi-Agenten-Ausführungsarchitektur"]
         ClaudeCode["Claude Code (~/.claude/skills)"]
@@ -77,7 +77,7 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (145 bestanden / 186 Subtests)"]
+        PytestSuite["Pytest Testsuite (272 bestanden / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
@@ -88,20 +88,20 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Operator as Agent / Entwickler
-    participant Dispatcher as ellmos Skill Engine
-    participant Registry as Öffentlicher Katalog (components.json)
-    participant Gate as Privacy- & Integritäts-Gate
-    participant Runtime as Ziel-Agent (Claude / Codex / AGY / BACH)
+    actor Operator as "Agent / Entwickler"
+    participant Dispatcher as "ellmos Skill Engine"
+    participant Registry as "Öffentlicher Katalog"
+    participant Gate as "Privacy- und Integritäts-Gate"
+    participant Runtime as "Ziel-Agent (Claude, Codex, AGY, BACH)"
 
-    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (z.B. dev/pipeline-optimizer)
-    Dispatcher->>Registry: Metadaten, Schema-Version & Abhängigkeiten auflösen
-    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation & Dateipfad zurückgeben
-    Dispatcher->>Gate: Privacy- & Non-Elevation-Grenzprüfung ausführen
-    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress & User-Mode sauber)
-    Dispatcher->>Runtime: SKILL.md & Kontext-Playbooks im Agenten-Workspace bereitstellen
+    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (dev/pipeline-optimizer)
+    Dispatcher->>Registry: Metadaten, Schema-Version und Abhängigkeiten auflösen
+    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation und Dateipfad zurückgeben
+    Dispatcher->>Gate: Privacy- und Non-Elevation-Grenzprüfung ausführen
+    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress und User-Mode sauber)
+    Dispatcher->>Runtime: SKILL.md und Kontext-Playbooks im Agenten-Workspace bereitstellen
     Runtime->>Runtime: Strukturierte Workflow-Schritte deterministisch ausführen
-    Runtime-->>Operator: Artefakt, Verifikationslog & Statusquittung übergeben
+    Runtime-->>Operator: Artefakt, Verifikationslog und Statusquittung übergeben
 ```
 
 ## Einstieg
@@ -159,10 +159,10 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/worksheet-generator`: erzeugt individualisierte Arbeitsblätter aus Förderziel, Niveau und Alter für pädagogische/therapeutische Fachkräfte, ICF-Referenz bring-your-own — Material-Generator, kein Therapieprogramm. |
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | In sich geschlossener Workflow für wissenschaftliche Literatur rund um PubMed und arXiv (reine Python-Stdlib) — macht aus wilder Paper-Suche einen wiederholbaren, quellengestützten Recherche-Durchlauf, voll portabel ohne das ellmos-Ökosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Entdeckt Anbieter- und App-Klassen-Flächen und plant nutzergewählte Wahrheits-Topologien für MCPs, Skills und Regeldateien. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Portable anbieterneutrale Dateibrücke: erfasst explizite Boot-/Wahrheitsgraphen, getrennte Memory-Silos, Messenger, Presence und Locks und kann ein datenschutzgeprüftes Instanzpaket planen, wiederherstellen, prüfen oder zurückrollen. |
-| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
-| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
-| [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Öffentlicher, nutzerneutraler Verweis zum Aufbau eines autorisierten empirischen Präferenzmodells; persönliche Profile und Belege bleiben privat. |
+| <img src="assets/icons/agents-bridge.svg" width="20" height="20" alt=""> [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Portable anbieterneutrale Dateibrücke: erfasst explizite Boot-/Wahrheitsgraphen, getrennte Memory-Silos, Messenger, Presence und Locks und kann ein datenschutzgeprüftes Instanzpaket planen, wiederherstellen, prüfen oder zurückrollen. |
+| <img src="assets/icons/automation-self-care.svg" width="20" height="20" alt=""> [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
+| <img src="assets/icons/semantic-persona-routing.svg" width="20" height="20" alt=""> [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
+| <img src="assets/icons/build-your-users-mind.svg" width="20" height="20" alt=""> [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Öffentlicher, nutzerneutraler Verweis zum Aufbau eines autorisierten empirischen Präferenzmodells; persönliche Profile und Belege bleiben privat. |
 | <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Eigenständige Entwicklungs-Automatisierungs-Pipeline (Code-Analyse, Task-Engine, Policies, Prompt-Templates) in Zero-Dependency-Python — ein vollständiger Dev-Agent-Workflow ohne externe Dienste. |
 | <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Entfernt KI-Spuren und Chat-Reste aus fertigen Texten und behandelt KI-Disclosure-Stufen — hält publizierte Dokumente frei von LLM-Artefakten. |
 | <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Eigenständige Mehrtechniken-Methodik, um Ideen aus festgefahrenen Problemen zu schürfen — die strukturierte Alternative zum freien Brainstorming, wenn ein Projekt feststeckt. |
@@ -171,6 +171,23 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/ai-portable-setup.svg" width="20" height="20" alt=""> [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | Erstellt eine portable Offline-KI-Arbeitsumgebung auf USB-Stick oder beliebigem Laufwerk: lokale LLM-Modelle und RAG-Pipeline, ganz ohne Cloud. |
 | <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | Bewerbungsunterstützung von A bis Z: Stellenanzeigen-Analyse, CV-/LinkedIn-Optimierung, Anschreiben, plus DB-/Ordner-gespeister ASCII-Lebenslauf-Generator. |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`-Kollektion](skills/therapy/) | Die 19-teilige Therapie-Familie (Flaggschiffe: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.md)) — evidenzzitierte, zweisprachige, ethik-gegatete Psychoedukations- und Gesprächsführungs-Playbooks; der tiefste zusammenhängende Block der Bibliothek. |
+| <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.md) | Operationalisierte Verfassungs-Superposition ('Position der Ungeborenen'): räumt künftigen und ungeborenen Generationen über einen algorithmischen Rawls-Schleier und eine 5-CORE-Prüfarchitektur mit Gegenfaktual-Pflicht ein formales Veto-Recht gegen kurzfristige Gegenwartsoptimierungen ein. |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | Beweisbasierte Nicht-Abbruch-Prüfkette (WAAFAP) gegen Agentic Laziness: invertiert die Abbruchbedingung autonomer Schleifen – Beenden erfordert den formalen, falsifizierbaren Nachweis der Aufgabenabwesenheit ('Quit requires Proof of Inactivity'). |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | Zero-State Privacy-Hosting-Muster (Huckepack-Hosting): betreibt relationale SQLite-Datenbanken via SQLite-WASM/OPFS direkt im Browser des Besuchers mit clientseitigem BYOK – eliminiert Server-Datenbanken, Benutzerkonten und DSGVO-Haftung konstruktiv. |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | Bidirektionale UI-Text/Prompt-Synthese ('Der Klick ist der Prompt'): typisiertes ASCII-Blueprint mit 4D-Feldlegende, das Benutzeroberflächen und Agenten-Instruktionen buildfrei und dauerhaft synchron hält. |
+| <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.md) | Neuropsychologische exekutive Kontrollfunktionen (Miyake-Inhibition, Arbeitsgedächtnis-Puffer, Mental Rehearsal) als Preflight-Checks vor Mutationen zur Unterdrückung von Sycophancy und vorzeitigem Beenden. |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | Deterministische, modellfreie Regelkompression: kürzt große Markdown-Regel- und Gedächtnisdateien um bis zu 40 % Token-Volumen ohne LLM-Inferenz, Halluzinationen oder semantischen Drift. |
+| <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.md) | Universelle nautische Navigationsmetriken (Nordstern-Peilung, Koppelnavigation) für desorientierte Agenten: Heuristiken zur Selbstorientierung und Zustandswiederherstellung bei Kontextdrift oder Schleifen. |
+| <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.md) | Deklarative Condition-Gate-Sprache für Prompts: übersetzt Vorbedingungen, Meilensteine und Reihenfolgen in prüfbare Fail-Closed-Gates direkt in Standard-Markdown. |
+| <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.md) | Preflight-Bootloader für hooklose CLI-Agenten: injiziert Governance-Regeln, Gedächtnis-Traversierung und selbstheilende Kontextanreicherung vor dem ersten Turn ohne native JSON-Lifecycle-Hooks. |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | Sitzungsgebundene Funkstelle über gemeinsam synchronisierte Ordner: trennt asymmetrische Rollen (`ListenSync`-Hörer vs. `WriteSync`-Sender) für brokerlose Multi-Agenten-Koordination ohne Server. |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | Session-Vertragsverhandlung vor Multi-Agenten-Programmen: legt Orchestrierungs-Topologie, Parallelität, Modellslots und Eskalationsschwellen vor Arbeitsbeginn verbindlich fest. |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | Reißverschluss-Merge-Verfahren für hochgradig divergente Branches: abschnittsweiser Abgleich per Entscheidungstabelle mit Absichtsrekonstruktion ('Rebuild statt Merge') als letzter Eskalationsstufe. |
+| <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.md) | Evolutionäre Datei- und Modulumbenennung mit temporären Wrappern und MOVED-Stubs: verhindert Migrationsbrüche in Agentenflotten, während sich Verweise organisch durch reale Nutzung aktualisieren. |
+| <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.md) | Taxonomischer 2x2-Pipeline-Kompass (Greenfield vs. Brownfield x Projekt vs. Pipeline): verhindert den Scaffolding-Bias von Sprachmodellen und leitet zielsicher zum passenden Bootstrapper oder Renovierer. |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | Deterministischer 3-Rollen-Sessionabschluss (Tasksolver, Writer, Maintainer): löst offene Registerpunkte ohne neue Agenden, zieht Doku auf den gemessenen Ist-Stand nach und archiviert Strays reversibel nach dem Papierkorb-Prinzip. |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Asynchrones Reißverschluss-Pipelining im Human-in-the-Loop: während der Nutzer Objekt N testet, startet der Agent bereits Objekt N+1 und delegiert Reparaturen für N-1, statt blockierend zu warten. |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantische Dateisystembereinigung nach dem Cut-and-Clue-Prinzip: trennt aktive von historischen Inhalten mit maschinenlesbaren Zeigern am Ursprungsort unter Erhalt aller Taxonomien und Prüf-Logs. |
 
 ## Grenze zwischen öffentlichem Kern und privaten Profilen
 

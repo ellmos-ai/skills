@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-08-31
 description: チャット履歴（現在のセッションまたはトランスクリプトファイル）から再利用可能なスキルを抽出する — または、重複を作成する代わりに、非常によく似た既存のスキルを改善します。「これからスキルを作成して」、「これをスキルとして記録すべき」、「この/過去のチャット履歴からスキルを抽出して」、「この作業方法を再利用可能にして」といった要望や、`/skill-extract` で使用します。（サブエージェントによるデータ削減を伴う）多数の過去のトランスクリプトのバルク実行もカバーします。定期的な自動化（Cron/Schedule/Loop）については、代わりに姉妹スキル workflow-extract を使用してください。
 standalone: true
 anthropic_compatible: true
@@ -138,6 +138,9 @@ mach daraus einen Skill."
 - `swarm-operations` — バルクモード用のスウォームパターン。
 
 ## 変更履歴
+
+### 1.1.0 (2026-08-31)
+- Claude Code JSONL 用の決定論的でデータ最小化されたステーション分割スクリプトを追加。
 
 ### 1.0.0 (2026-07-03)
 - 初期バージョン。Codexの自動化とチャット履歴を体系的にスキルへ抽象化するタスクから作成。

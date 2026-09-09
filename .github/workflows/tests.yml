@@ -44,10 +44,11 @@ jobs:
         run: |
           python -m pytest
 
-      - name: Check public catalog outputs
-        run: |
-          python build_public_registry.py --check
-          python build_skills_map.py --check
+      - name: Check public registry
+        run: python build_public_registry.py --check
+
+      - name: Check skills map
+        run: python build_skills_map.py --check
 
       - name: Validate the privacy gate
         run: |

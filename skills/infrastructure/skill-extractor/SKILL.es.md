@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-08-31
 description: Extrae un skill reutilizable de un historial de chat (sesión actual o archivos de transcripción) — o mejora un skill existente muy similar en lugar de crear un duplicado. Utiliza este skill al solicitar "haz un skill de esto", "deberíamos registrar esto como un skill", "extrae skills de estos historiales de chat antiguos", "haz que esta forma de trabajar sea reutilizable", o al usar `/skill-extract`. También cubre ejecuciones masivas sobre muchas transcripciones antiguas (con reducción de datos mediante subagentes). Para AUTOMATIZACIONES recurrentes (Cron/Schedule/Loop), utiliza en su lugar el skill hermano workflow-extract.
 standalone: true
 anthropic_compatible: true
@@ -138,6 +138,9 @@ mach daraus einen Skill."
 - `swarm-operations` — patrón de enjambre para el modo masivo.
 
 ## Registro de cambios
+
+### 1.1.0 (2026-08-31)
+- Añadido un segmentador determinista y económico en datos para JSONL de Claude Code.
 
 ### 1.0.0 (2026-07-03)
 - Versión inicial. Creada a partir del encargo de abstraer sistemáticamente las automatizaciones de Codex e historiales de chat en skills.

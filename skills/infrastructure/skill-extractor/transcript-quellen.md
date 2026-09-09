@@ -32,6 +32,25 @@ Trennzeichen (z. B. `C--Users-name-projekt`).
 - **Zeitliche Ordnung wahren:** Sessions chronologisch verarbeiten; spätere Sessions
   enthalten oft die korrigierte Endfassung eines Ablaufs aus früheren.
 
+## Deterministische Stationen (Claude Code)
+
+Vor einer inhaltlichen Bewertung kann `scripts/segment_stations.py` ein Claude-Code-JSONL
+in Stationen zwischen harten Berichtspunkten zerlegen:
+
+```bash
+python scripts/segment_stations.py <transkript.jsonl> --output <stationen.json>
+```
+
+Harte Grenzen sind `stop_hook_summary`, `compact_boundary`, ein Wechsel zwischen zwei
+nichtleeren Session-IDs und das Dateiende. Mit `--gap-seconds <sekunden>` können zusätzlich
+Zeitlücken als Grenze dienen. Datensätze ohne Session-ID lösen bewusst keinen Wechsel aus,
+weil Claude Code solche Metadatensätze innerhalb einer laufenden Session einstreut.
+
+Die Ausgabe enthält nur Zeilenbereiche, Zeitpunkte, Record-Typen, Session-/Turn-IDs und den
+Grenztyp. Chattext, Toolparameter und absolute Quellpfade werden nicht kopiert. Damit ist S1
+deterministisch und datensparsam; Aufgabe, Werkzeugkette, Endzustand und Anschlussklassifikation
+gehören in die nachgelagerte Stationsbewertung.
+
 ## Datenreduktion vor Bulk-Extraktion
 
 Reihenfolge der Reduktionsstufen (jede Stufe verkleinert um eine Größenordnung):
@@ -39,7 +58,8 @@ Reihenfolge der Reduktionsstufen (jede Stufe verkleinert um eine Größenordnung
 1. **Vorhandene Kollektoren nutzen:** Existiert bereits ein Prompt-Kollektor/-Listener oder
    ein Studien-Datensatz (nur User-Prompts, bereits extrahiert), damit starten statt roh zu
    parsen.
-2. **Feld-Filter:** Nur User-Turns + Tool-Call-Namen extrahieren (Script, kein LLM).
+2. **Stationen + Feld-Filter:** Erst mit `segment_stations.py` harte Abschnitte bilden, dann
+   nur User-Turns + Tool-Call-Namen extrahieren (Script, kein LLM).
 3. **Subagenten-Map:** Pro Session-Bündel ein Subagent, der Kandidaten-Destillate liefert
    (Auslöser, Ablauf, Begründung, Fallstricke, Beleg) — Rohtext bleibt beim Subagenten.
 4. **Reduce:** Destillate clustern und mergen; Häufigkeit über Sessions zählen.
