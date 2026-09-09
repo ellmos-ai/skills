@@ -224,9 +224,12 @@ def test_german_and_english_skill_contracts_stay_in_sync():
         prefix = f"{key}:"
         return next(line.removeprefix(prefix).strip() for line in frontmatter.splitlines() if line.startswith(prefix))
 
-    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.4.0"
+    assert frontmatter_value(de, "version") == frontmatter_value(en, "version") == "1.5.0"
     assert frontmatter_value(de, "updated") == frontmatter_value(en, "updated")
     assert de.count("\n### ") == en.count("\n### ")
     assert de.count("\n```") == en.count("\n```")
     assert "`tidy-up`" in de
     assert "`tidy-up`" in en
+    stamp = "session: <session-id> | <agent>@<host> | YYYY-MM-DD"
+    assert stamp in de
+    assert stamp in en

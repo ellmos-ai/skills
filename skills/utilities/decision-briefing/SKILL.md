@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-06-13
+updated: 2026-09-09
 description: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
@@ -196,6 +196,20 @@ User antwortet im Batch: **"1B 2C 3A"** → Ergebnis-Tabelle, dann werden die dr
 - **Reversibilität beachten:** Umkehrbare Entscheidungen schnell entscheiden, finale gründlicher behandeln
 - **Zeitdruck berücksichtigen:** Schnelle Entscheidungen brauchen einfachere Methoden — nicht jede Frage verdient eine Nutzwertanalyse
 
+### Session-Provenienz bei erzeugten Artefakten
+
+Erstellt dieser Skill ein wichtiges neues, dauerhaft gespeichertes Briefing, einen Bericht,
+ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
+
+`session: <session-id> | <agent>@<host> | YYYY-MM-DD`
+
+- Quellenpriorität: explizite Laufzeit-/CLI-Angabe, dann autoritative Provider-Umgebung oder
+  Hook, sonst `unbekannt`. Werte nie erraten.
+- Ein Subagent verwendet die Session-ID seiner Elternsession.
+- Routine-Chat, konsultierte Quelldokumente, Policies, `CLAUDE.md`, READMEs und bloß
+  rückgeschriebene Entscheidungen erhalten keinen pauschalen Stempel. Altdateien werden nicht
+  blind nachgestempelt.
+
 ---
 
 ## Abgrenzung und Synergien
@@ -214,6 +228,10 @@ User antwortet im Batch: **"1B 2C 3A"** → Ergebnis-Tabelle, dann werden die dr
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-09-09)
+- P-018 ergänzt Session-Provenienz für wichtige neu erzeugte Briefings, Berichte, Handoffs und
+  Receipts; Quellenpriorität, Elternsession bei Subagenten und enge Ausschlüsse sind festgelegt.
 
 ### 1.0.0 (2026-06-13)
 - Portiert aus dem BACH-Experten `decision-briefing` v1.0.0; Scanner-Komponente (scanner.py, sources.json, Marker-Scans) bewusst entfernt — Erfassung erfolgt leichtgewichtig aus dem vorliegenden Kontext

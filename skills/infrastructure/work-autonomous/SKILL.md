@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.4.0
+version: 1.5.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-09-03
+updated: 2026-09-09
 description: >
   Abbruchbedingung für autonome Loops: So weit wie möglich selbständig
   weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
@@ -368,6 +368,13 @@ Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
 ```
 
 ## Changelog
+
+### 1.5.0 (2026-09-09)
+- P-018: Wichtige neu erzeugte und dauerhaft gespeicherte Arbeitsberichte, Handoffs und Receipts
+  enden mit `session: <session-id> | <agent>@<host> | YYYY-MM-DD`. Quellenpriorität ist explizite
+  Laufzeit-/CLI-Angabe vor autoritativer Provider-Umgebung/Hook vor `unbekannt`; Werte werden nie
+  erraten, Subagenten verwenden die Elternsession. Routine-Chat, Quellen, Policies, `CLAUDE.md`,
+  READMEs und Altdateien bleiben von pauschalem oder rückwirkendem Stempeln ausgenommen.
 
 ### 1.4.0 (2026-09-03)
 - Minimal-invasive Ergänzung aus Ticket T-20260902-729068782: neues
