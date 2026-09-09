@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.4.0
+version: 1.5.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-09-03
+updated: 2026-09-09
 description: >
   Termination condition for autonomous loops: keep working independently as
   far as possible AND only end a loop once it is PROVEN that no autonomously
@@ -355,6 +355,13 @@ Tick 2 (user installs grounding-seed + usmc on this system):
 ```
 
 ## Changelog
+
+### 1.5.0 (2026-09-09)
+- P-018: Important newly generated, persistently stored work reports, handoffs, and receipts end
+  with `session: <session-id> | <agent>@<host> | YYYY-MM-DD`. Source priority is explicit
+  runtime/CLI value before authoritative provider environment/hook before `unbekannt`; values are
+  never guessed, and subagents use the parent session. Routine chat, sources, policies,
+  `CLAUDE.md`, READMEs, and old files remain excluded from blanket or retroactive stamping.
 
 ### 1.4.0 (2026-09-03)
 - Minimally invasive addition from ticket T-20260902-729068782: new

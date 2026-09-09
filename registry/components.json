@@ -1510,7 +1510,7 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/work-autonomous/SKILL.md",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "status": "active",
       "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
       "languages": [
@@ -2110,7 +2110,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/decision-briefing/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "status": "active",
       "description": "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.",
       "languages": [
@@ -2129,7 +2129,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/decision-shot/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "description": "Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze diesen Skill bei \"gib mir das kurz mit Pro Contra und Empfehlung\", \"executive summary zur Entscheidung\", \"kurzkontext zu <Thema>\", \"fass die Entscheidung X in einer Kurzform zusammen\", /decision-shot, oder wenn ein Ergebnis an jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen, um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.",
       "languages": [

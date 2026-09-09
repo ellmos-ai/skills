@@ -1,10 +1,10 @@
 ---
 name: decision-shot
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-09-09
 description: >
   Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder
   Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im
@@ -134,6 +134,17 @@ wird hier aber konsequent auf ein festes fuenfteiliges Format angewendet.
   getrennt, gemeinsamer Kontext nur einmal am Anfang wenn er wirklich fuer
   alle gilt.
 
+### Session-Provenienz bei gespeicherten Decision-Shots
+
+Wird der Decision-Shot als wichtiges neues, dauerhaftes Artefakt gespeichert, endet die Datei mit:
+
+`session: <session-id> | <agent>@<host> | YYYY-MM-DD`
+
+Die Session-ID kommt zuerst aus einer expliziten Laufzeit-/CLI-Angabe, danach aus einer
+autoritativen Provider-Umgebung oder einem Hook; fehlt beides, steht `unbekannt`. Werte nie
+erraten. Subagenten verwenden die Elternsession. Routine-Chat, Quellen, Policies, `CLAUDE.md`,
+READMEs und Altdateien werden nicht pauschal gestempelt oder nachgestempelt.
+
 ## Beispiel
 
 ```
@@ -161,3 +172,12 @@ Ausfall, und die Abhaengigkeit (Tailscale) ist bereits im Betrieb bewaehrt.
 
 **Vollanalyse:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, Abschnitt "Backup-Jobs"
 ```
+
+## Changelog
+
+### 1.1.0 (2026-09-09)
+- P-018 ergänzt den Session-Stempel für wichtige neu gespeicherte Decision-Shots mit enger
+  Quellenpriorität und Ausschlüssen.
+
+### 1.0.0 (2026-08-24)
+- Erstversion.

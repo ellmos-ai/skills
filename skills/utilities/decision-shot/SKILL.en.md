@@ -1,10 +1,10 @@
 ---
 name: decision-shot
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-09-09
 description: >
   Extremely short, substantial output FORMAT for ONE decision or group of
   decisions, when the analysis behind it already exists (produced in chat,
@@ -134,6 +134,17 @@ applied consistently to a fixed five-part format.
   topic): one block per decision, separated by `---`, shared context only
   once at the start if it really applies to all of them.
 
+### Session provenance for persisted decision shots
+
+When a decision shot is saved as an important new, persistent artifact, the file ends with:
+
+`session: <session-id> | <agent>@<host> | YYYY-MM-DD`
+
+The session ID comes first from an explicit runtime/CLI value, then from an authoritative provider
+environment or hook; if neither exists, use `unbekannt`. Never guess values. Subagents use the
+parent session. Routine chat, sources, policies, `CLAUDE.md`, READMEs, and old files do not receive
+blanket or retroactive stamps.
+
 ## Example
 
 ```
@@ -162,3 +173,12 @@ production.
 
 **Full analysis:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, section "Backup jobs"
 ```
+
+## Changelog
+
+### 1.1.0 (2026-09-09)
+- P-018 adds the session stamp for important newly persisted decision shots, with narrow source
+  priority and exclusions.
+
+### 1.0.0 (2026-08-24)
+- Initial version.
