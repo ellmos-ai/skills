@@ -9,6 +9,8 @@ category: utilities
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="grill-me banner">
+
 Call the Skill tool with "grilling".
 
 <!--

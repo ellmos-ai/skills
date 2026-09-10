@@ -8,6 +8,8 @@ category: dev
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="taste-skill banner">
+
 # tasteskill: Anti-Slop Frontend Skill
 
 > Landing pages, portfolios, and redesigns. Not dashboards, not data tables, not multi-step product UI.
