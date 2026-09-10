@@ -31,11 +31,12 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 
-# Loesungsfokussierte Therapie
+# Lösungsfokussierte Therapie
 
-> Grundlagen der loesungsfokussierten Kurztherapie nach Steve de Shazer und Insoo Kim Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung
+> Grundlagen der lösungsfokussierten Kurztherapie nach Steve de Shazer und Insoo Kim Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung
 
 Siehe: [ETHICS.md](../ETHICS.md)
 
@@ -43,17 +44,17 @@ Siehe: [ETHICS.md](../ETHICS.md)
 
 ## Kontext
 
-Die loesungsfokussierte Kurztherapie (Solution-Focused Brief Therapy, SFBT) wurde
+Die lösungsfokussierte Kurztherapie (Solution-Focused Brief Therapy, SFBT) wurde
 von Steve de Shazer und Insoo Kim Berg am Brief Family Therapy Center in Milwaukee
-entwickelt. Sie gehoert zu den am besten erforschten Kurztherapieverfahren.
+entwickelt. Sie gehört zu den am besten erforschten Kurztherapieverfahren.
 
-Kernidee: Statt Probleme zu analysieren, wird direkt an Loesungen gearbeitet.
+Kernidee: Statt Probleme zu analysieren, wird direkt an Lösungen gearbeitet.
 "Problem talk creates problems, solution talk creates solutions" (de Shazer).
 
 Evidenz: Meta-Analysen belegen Wirksamkeit bei Depression, Angst, Verhaltensproblemen,
 Substanzmissbrauch und Paarkonflikten (Gingerich & Peterson 2013, Kim et al. 2019).
 
-**Hinweis:** Dies ist Psychoedukation, kein Ersatz fuer professionelle Therapie.
+**Hinweis:** Dies ist Psychoedukation, kein Ersatz für professionelle Therapie.
 **Niemals implementieren:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
 
 ---
@@ -62,15 +63,15 @@ Substanzmissbrauch und Paarkonflikten (Gingerich & Peterson 2013, Kim et al. 201
 
 ### Die drei Grundregeln (de Shazer)
 
-1. **"If it ain't broke, don't fix it"** — Was funktioniert, nicht veraendern
-2. **"If it works, do more of it"** — Was klappt, verstaerken
-3. **"If it doesn't work, do something different"** — Was nicht hilft, aendern
+1. **"If it ain't broke, don't fix it"** — Was funktioniert, nicht verändern
+2. **"If it works, do more of it"** — Was klappt, verstärken
+3. **"If it doesn't work, do something different"** — Was nicht hilft, ändern
 
 ### Menschenbild
 - Jeder Mensch hat Ressourcen und Kompetenzen
-- Der Klient ist Experte fuer sein eigenes Leben
-- Kleine Veraenderungen loesen groessere aus (Schmetterlingseffekt)
-- Die Loesung muss nichts mit dem Problem zu tun haben
+- Der Klient ist Experte für sein eigenes Leben
+- Kleine Veränderungen lösen größere aus (Schmetterlingseffekt)
+- Die Lösung muss nichts mit dem Problem zu tun haben
 
 ---
 
@@ -79,24 +80,24 @@ Substanzmissbrauch und Paarkonflikten (Gingerich & Peterson 2013, Kim et al. 201
 ### Grundform
 
 ```
-"Stell dir vor, heute Nacht passiert ein Wunder, waehrend du schlaefst.
-Das Problem, das dich beschaeftigt, ist geloest.
-Du weisst es aber nicht, weil du geschlafen hast.
+"Stell dir vor, heute Nacht passiert ein Wunder, während du schläfst.
+Das Problem, das dich beschäftigt, ist gelöst.
+Du weißt es aber nicht, weil du geschlafen hast.
 
-Woran wuerdest du morgen frueh als Erstes merken, dass das Wunder passiert ist?"
+Woran würdest du morgen früh als Erstes merken, dass das Wunder passiert ist?"
 ```
 
 ### Vertiefende Nachfragen
 
 **Sinnesebene konkretisieren:**
-- "Was genau wuerdest du morgen frueh anders machen?"
-- "Wie wuerdest du aufstehen? Was wuerdest du als Erstes tun?"
-- "Was wuerdest du fuehlen, wenn du die Augen oeffnest?"
+- "Was genau würdest du morgen früh anders machen?"
+- "Wie würdest du aufstehen? Was würdest du als Erstes tun?"
+- "Was würdest du fühlen, wenn du die Augen öffnest?"
 
 **Beziehungsebene:**
-- "Woran wuerde dein Partner / deine Partnerin das Wunder bemerken?"
-- "Was wuerde er/sie anders an dir sehen?"
-- "Wer in deinem Umfeld wuerde es als Erstes bemerken?"
+- "Woran würde dein Partner / deine Partnerin das Wunder bemerken?"
+- "Was würde er/sie anders an dir sehen?"
+- "Wer in deinem Umfeld würde es als Erstes bemerken?"
 
 **Bruchteile des Wunders finden:**
 - "Welcher Teil dieses Wunders passiert vielleicht schon ein kleines bisschen?"
@@ -108,7 +109,7 @@ Woran wuerdest du morgen frueh als Erstes merken, dass das Wunder passiert ist?"
 
 ### Prinzip
 Ausnahmen sind Momente, in denen das Problem nicht oder weniger auftritt.
-Sie enthalten bereits funktionierende Loesungsansaetze.
+Sie enthalten bereits funktionierende Lösungsansätze.
 
 ### Systematische Ausnahmen-Suche
 
@@ -117,36 +118,36 @@ Sie enthalten bereits funktionierende Loesungsansaetze.
 - "Gibt es Tage, an denen das Problem weniger stark auftritt?"
 
 **Phase 2: Ausnahmen detailliert beschreiben**
-- "Beschreibe diesen Moment so genau wie moeglich"
+- "Beschreibe diesen Moment so genau wie möglich"
 - "Was war an diesem Tag anders?"
 
 **Phase 3: Eigenen Beitrag erkennen**
 - "Was hast DU dazu beigetragen, dass es besser war?"
 - "Welche Entscheidung hast du getroffen?"
 
-**Phase 4: Ausnahmen verstaerken**
-- "Wie koenntest du das bewusst wiederholen?"
-- "Was waere ein erster kleiner Schritt in diese Richtung?"
+**Phase 4: Ausnahmen verstärken**
+- "Wie könntest du das bewusst wiederholen?"
+- "Was wäre ein erster kleiner Schritt in diese Richtung?"
 
 ### Typen von Ausnahmen
 
 | Typ | Beschreibung | Nachfrage |
 |-----|-------------|-----------|
 | Absichtliche Ausnahme | Klient hat bewusst etwas anders gemacht | "Mach mehr davon!" |
-| Zufaellige Ausnahme | Etwas war anders, ohne bewusstes Zutun | "Was war anders an den Umstaenden?" |
-| Externe Ausnahme | Andere haben etwas getan | "Was koenntest du tun, um das wahrscheinlicher zu machen?" |
+| Zufällige Ausnahme | Etwas war anders, ohne bewusstes Zutun | "Was war anders an den Umständen?" |
+| Externe Ausnahme | Andere haben etwas getan | "Was könntest du tun, um das wahrscheinlicher zu machen?" |
 
 ---
 
 ## 4. Skalierungstechniken
 
 ### Basis-Skalierung
-"Auf einer Skala von 0 bis 10, wobei 0 das Schlimmste und 10 das Bestmoegliche ist..."
+"Auf einer Skala von 0 bis 10, wobei 0 das Schlimmste und 10 das Bestmögliche ist..."
 
 ### Erweiterte Skalierungsformen
 
-**Bewaeltigungsskalierung:**
-- "Wie gut schaffst du es gerade, trotz des Problems deinen Alltag zu bewaeltigen?"
+**Bewältigungsskalierung:**
+- "Wie gut schaffst du es gerade, trotz des Problems deinen Alltag zu bewältigen?"
 
 **Zuversichtsskalierung:**
 - "Wie zuversichtlich bist du, dass du Fortschritte machen kannst?"
@@ -155,12 +156,12 @@ Sie enthalten bereits funktionierende Loesungsansaetze.
 - "Wo standest du vor einer Woche / einem Monat?"
 - "Was hat zum Anstieg beigetragen?"
 
-### Der "Ein-Punkt-hoeher"-Trick
-Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
+### Der "Ein-Punkt-höher"-Trick
+Immer nur nach dem nächsten Punkt fragen — nie nach dem Endziel.
 
 ```
-"Was waere bei einer 6 anders als bei der jetzigen 5?"
-"Was koenntest du MORGEN tun, das in Richtung 6 geht?"
+"Was wäre bei einer 6 anders als bei der jetzigen 5?"
+"Was könntest du MORGEN tun, das in Richtung 6 geht?"
 ```
 
 ---
@@ -169,11 +170,11 @@ Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
 
 ### Coping-Fragen
 - "Wie schaffst du es trotzdem, jeden Tag aufzustehen?"
-- "Was haelt dich aufrecht?"
+- "Was hält dich aufrecht?"
 
 ### Beziehungsfragen
-- "Wenn ich deine Partnerin fragen wuerde, was wuerde sie sagen?"
-- "Wer in deinem Umfeld wuerde die Veraenderung als Erstes bemerken?"
+- "Wenn ich deine Partnerin fragen würde, was würde sie sagen?"
+- "Wer in deinem Umfeld würde die Veränderung als Erstes bemerken?"
 
 ### Komplimente / Ressourcen-Kommentare
 - "Es beeindruckt mich, dass du trotz der Schwierigkeiten hier bist."
@@ -183,25 +184,25 @@ Immer nur nach dem naechsten Punkt fragen — nie nach dem Endziel.
 ## 6. Reflexionsfragen zur Selbstanwendung
 
 - "Was funktioniert in meinem Leben gut — und wie mache ich das?"
-- "Was ist eine kleine Ausnahme, auf die ich aufbauen koennte?"
-- "Wenn das Problem morgen weg waere — was wuerde ich als Erstes tun?"
-- "Was habe ich frueher schon einmal geschafft, obwohl es schwer war?"
+- "Was ist eine kleine Ausnahme, auf die ich aufbauen könnte?"
+- "Wenn das Problem morgen weg wäre — was würde ich als Erstes tun?"
+- "Was habe ich früher schon einmal geschafft, obwohl es schwer war?"
 
 ---
 
 ## Ethik und Grenzen
 
 **Ein KI-Assistent darf:**
-- SFBT-Konzepte erklaeren und einordnen
+- SFBT-Konzepte erklären und einordnen
 - Wunderfrage, Ausnahmen-Exploration und Skalierung anleiten
 - Reflexionsfragen stellen
-- Auf Ressourcen und Staerken hinweisen
+- Auf Ressourcen und Stärken hinweisen
 
 **Ein KI-Assistent darf NICHT:**
-- Loesungsfokussierte Therapie durchfuehren
+- Lösungsfokussierte Therapie durchführen
 - Persistierende Probleme verharmlosen ("Denk einfach positiv")
-- Akute Krisen mit Loesungsorientierung uebergehen
-- Versprechen, dass SFBT-Techniken Probleme loesen
+- Akute Krisen mit Lösungsorientierung übergehen
+- Versprechen, dass SFBT-Techniken Probleme lösen
 
 **Bei Anzeichen akuter Krise IMMER verweisen auf:**
 - Telefonseelsorge: 0800 111 0 111 / 0800 111 0 222
