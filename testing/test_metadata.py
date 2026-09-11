@@ -92,7 +92,9 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         content = PYPROJECT_PATH.read_text(encoding="utf-8")
 
         self.assertIn('name = "ellmos-skills"', content)
+        self.assertIn('version = "1.4.2"', content)
         self.assertIn("[tool.pytest.ini_options]", content)
+        self.assertIn('addopts = "-ra -v"', content)
         self.assertIn("[tool.ruff]", content)
         self.assertIn("pythonpath", content)
         self.assertIn("Programming Language :: Python :: 3.13", content)
@@ -101,12 +103,15 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("Homepage", content)
         self.assertIn("Security", content)
         self.assertIn("Changelog", content)
+        self.assertIn("Parent Organization", content)
+        self.assertIn("Umbrella Ecosystem", content)
 
     def test_llms_txt_header_and_parity(self) -> None:
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-08-24", content)
+        self.assertIn("## Last-checked: 2026-09-11", content)
+        self.assertIn("278 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)
@@ -126,11 +131,37 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("SECURITY.md", content)
             self.assertIn("registry/components.json", content)
             self.assertIn("```mermaid", content)
+            self.assertIn("278", content)
+            self.assertIn("138", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
+        self.assertIn("2026-09-11", content)
+        self.assertIn("1.4.2", content)
         self.assertIn("2026-08-21", content)
+
+    def test_gitignore_hygiene(self) -> None:
+        gitignore_path = REPOSITORY_ROOT / ".gitignore"
+        self.assertTrue(gitignore_path.is_file(), ".gitignore missing")
+        content = gitignore_path.read_text(encoding="utf-8")
+        self.assertIn("*-conflict-*", content)
+        self.assertIn("*.sync-conflict-*", content)
+        self.assertIn("LOCK.*", content)
+        self.assertIn("LOCK.permissions.json", content)
+        self.assertIn("uv.lock", content)
+        self.assertIn(".coverage.*", content)
+
+    def test_ci_workflow_extended_gates(self) -> None:
+        content = CI_WORKFLOW_PATH.read_text(encoding="utf-8")
+        self.assertIn("concurrency:", content)
+        self.assertIn("cancel-in-progress: true", content)
+        self.assertIn("python -m compileall -q testing skills", content)
+        self.assertIn("python -m pytest -ra -v", content)
+
+    def test_security_supported_versions(self) -> None:
+        content = SECURITY_PATH.read_text(encoding="utf-8")
+        self.assertIn("1.4.x", content)
 
 
 if __name__ == "__main__":

@@ -81,12 +81,30 @@ UMSETZUNGSPLAN.md
 *VERSIONIERUNG*.md
 WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 
-# ---- Host-spezifische Dateien (nicht veröffentlichen) ----
+# ---- Host-spezifische Dateien & Multi-Host-Sync-Konflikte (nicht veröffentlichen) ----
 *-LOCAL-HOST.md
 *-MACSTUDIO.md
 *-WORKSTATION-*.md
+*-WORKSTATION.*
+*-WORKSTATION-LG.*
+*-ASUS-GEI.*
 *-DESKTOP-*.md
 *-LAPTOP-*.md
+*-conflict-*
+*.sync-conflict-*
+* (kopie)*
+* (copy)*
+
+# ---- Multi-Agent-Locks & Test-Caches ----
+LOCK
+LOCK.*
+LOCK.permissions.json
+uv.lock
+.coverage
+.coverage.*
+coverage/
+*.tmp
+*.bak
 
 # ---- Persönliche Präferenzen / Nutzerdaten ----
 skills/assist/prefs.json

@@ -17,13 +17,13 @@
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 145 bestanden](https://img.shields.io/badge/Pytest-145%20bestanden%20(186%20Subtests)-success.svg)](testing/)
+[![Pytest: 278 bestanden](https://img.shields.io/badge/Pytest-278%20bestanden%20(186%20Subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Öffentliche Skills: 135 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-135%20Katalog-brightgreen.svg)](registry/components.json)
+[![Öffentliche Skills: 138 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-138%20Katalog-brightgreen.svg)](registry/components.json)
 [![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 

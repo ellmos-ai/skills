@@ -12,8 +12,8 @@ We actively support the latest release of `ellmos-ai/skills` on the default bran
 
 | Version | Supported | Notes |
 | ------- | --------- | ----- |
-| 1.3.x   | Yes       | Current active release line |
-| < 1.3.0 | No        | Please upgrade to the latest version |
+| 1.4.x   | Yes       | Current active release line |
+| < 1.4.0 | No        | Please upgrade to the latest version |
 
 ---
 
@@ -66,8 +66,8 @@ Wir unterstützen aktiv die neueste Version von `ellmos-ai/skills` auf dem Stand
 
 | Version | Unterstützt | Hinweise |
 | ------- | ----------- | -------- |
-| 1.3.x   | Ja          | Aktuelle Release-Linie |
-| < 1.3.0 | Nein        | Bitte auf die neueste Version aktualisieren |
+| 1.4.x   | Ja          | Aktuelle Release-Linie |
+| < 1.4.0 | Nein        | Bitte auf die neueste Version aktualisieren |
 
 ---
 

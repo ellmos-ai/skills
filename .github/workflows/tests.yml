@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     strategy:
@@ -40,9 +44,13 @@ jobs:
         run: |
           ruff check .
 
+      - name: Bytecode compilation check
+        run: |
+          python -m compileall -q testing skills
+
       - name: Run test suite
         run: |
-          python -m pytest
+          python -m pytest -ra -v
 
       - name: Check public registry
         run: python build_public_registry.py --check

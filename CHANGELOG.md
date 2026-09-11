@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-09-11
+
+- **Technical hygiene, version 1.4.2 & CI standardization**:
+  - Bumped package version to `1.4.2` in `pyproject.toml`.
+  - Added PEP 621 metadata URLs (`Parent Organization`, `Umbrella Ecosystem`) and standardized pytest `addopts = "-ra -v"`.
+  - Hardened `.gitignore` against multi-host sync conflict artifacts, lock files, and test coverage caches (`*-conflict-*`, `*.sync-conflict-*`, host-scoped sync patterns, `LOCK`, `uv.lock`, `.coverage.*`).
+  - Added concurrency controls (`cancel-in-progress: true`), bytecode pre-compilation gate (`python -m compileall`), and standardized pytest options (`-ra -v`) to CI workflow `.github/workflows/tests.yml`.
+  - Updated `SECURITY.md` supported release lines to `1.4.x`.
+  - Synchronized Pytest test counts (278 passed, 186 subtests) and Public Skills badge (138 catalog components) across `README.md`, `README_de.md`, and `llms.txt`.
+  - Added contract tests in `testing/test_metadata.py` verifying extended hygiene, PEP 621 URLs, CI concurrency, and documentation parity.
+
 ## 2026-08-26
 
 - **Gitless privacy-gate delegation**: removed the host-specific canonical
