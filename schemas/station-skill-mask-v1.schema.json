@@ -1,5 +1,6 @@
 {
-  "": "https://ellmos.local/skills/schemas/station-skill-mask-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/station-skill-mask-v1.schema.json",
   "title": ".SKILLS Station Skill Mask v1",
   "description": "Belegpflichtige Maske zur Erzeugung von Skillentwuerfen aus Chat-Stationsfolgen (Hermes-Prinzip, D-20260906-012, T-20260831-971906399). Jedes Feld erzwingt Belegquellen; unbelegte Felder muessen explizit als nicht_belegt markiert werden.",
   "type": "object",
