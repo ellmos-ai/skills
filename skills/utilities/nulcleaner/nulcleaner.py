@@ -158,7 +158,9 @@ def cli():
 
     if args.mode == "gui":
         root = tk.Tk()
-        app = NulCleanerGUI(root)
+        # Referenz bewusst halten: bei Tkinter kann eine nur lokal gebundene
+        # Fensterklasse eingesammelt werden, waehrend mainloop laeuft.
+        app = NulCleanerGUI(root)  # noqa: F841
         root.mainloop()
         return
 

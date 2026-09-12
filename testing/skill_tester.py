@@ -50,7 +50,6 @@ def parse_frontmatter(text):
 
     fm = {}
     current_key = None
-    current_indent = 0
     nested = {}
 
     for line in match.group(1).split('\n'):
