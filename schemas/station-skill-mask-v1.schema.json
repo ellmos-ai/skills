@@ -1,0 +1,290 @@
+{
+  "": "https://ellmos.local/skills/schemas/station-skill-mask-v1.schema.json",
+  "title": ".SKILLS Station Skill Mask v1",
+  "description": "Belegpflichtige Maske zur Erzeugung von Skillentwuerfen aus Chat-Stationsfolgen (Hermes-Prinzip, D-20260906-012, T-20260831-971906399). Jedes Feld erzwingt Belegquellen; unbelegte Felder muessen explizit als nicht_belegt markiert werden.",
+  "type": "object",
+  "required": [
+    "schema",
+    "skill_name",
+    "stationsfolge",
+    "ausloeser",
+    "ziel",
+    "ablauf",
+    "regeln_warum",
+    "fallstricke",
+    "ergebnisform",
+    "belege",
+    "hermes_review"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "const": "ellmos.station-skill-mask.v1"
+    },
+    "skill_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Vorgeschlagener Skill-Identifier in kebab-case."
+    },
+    "titel": {
+      "type": "string",
+      "description": "Menschenlesbarer Titel des vorgeschlagenen Skills."
+    },
+    "stationsfolge": {
+      "type": "object",
+      "required": [
+        "session_id",
+        "station_ids",
+        "station_count"
+      ],
+      "properties": {
+        "session_id": {
+          "type": "string"
+        },
+        "station_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "station_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "zeitfenster": {
+          "type": "object",
+          "properties": {
+            "start_zeit": {
+              "type": "string"
+            },
+            "end_zeit": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ausloeser": {
+      "type": "object",
+      "description": "Ausloeser des Ablaufs. Pflichtquelle: Erstprompt (SP) + Konkretisierungen (NT/NM/NS).",
+      "required": [
+        "beschreibung",
+        "quellen_prompt_ids"
+      ],
+      "properties": {
+        "beschreibung": {
+          "type": "string",
+          "minLength": 5
+        },
+        "quellen_prompt_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "ziel": {
+      "type": "object",
+      "description": "Aggregiertes Ziel des Skills. Pflichtquelle: Erstprompt + Konkretisierungen.",
+      "required": [
+        "beschreibung",
+        "quellen_prompt_ids"
+      ],
+      "properties": {
+        "beschreibung": {
+          "type": "string",
+          "minLength": 5
+        },
+        "quellen_prompt_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "ablauf": {
+      "type": "object",
+      "description": "Werkzeugkette der Stationen mit Bestaetigung (BE).",
+      "required": [
+        "schritte"
+      ],
+      "properties": {
+        "schritte": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "schritt_nr",
+              "werkzeug",
+              "aktion",
+              "beleg_station_id"
+            ],
+            "properties": {
+              "schritt_nr": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "werkzeug": {
+                "type": "string"
+              },
+              "aktion": {
+                "type": "string"
+              },
+              "beleg_station_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "regeln_warum": {
+      "type": "array",
+      "description": "Erzwungene Randbedingungen und Begruendungen. Pflichtquelle: Menschliche Korrekturen (KO).",
+      "items": {
+        "type": "object",
+        "required": [
+          "regel",
+          "begruendung",
+          "status"
+        ],
+        "properties": {
+          "regel": {
+            "type": "string"
+          },
+          "begruendung": {
+            "type": "string"
+          },
+          "korrektur_prompt_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "belegt",
+              "nicht_belegt"
+            ]
+          }
+        }
+      }
+    },
+    "fallstricke": {
+      "type": "array",
+      "description": "Gefahren und Fehlversuche. Pflichtquelle: is_error / tool_use_error + folgende KO oder Richtungsaenderungen (RA).",
+      "items": {
+        "type": "object",
+        "required": [
+          "fallstrick",
+          "signal_typ",
+          "status"
+        ],
+        "properties": {
+          "fallstrick": {
+            "type": "string"
+          },
+          "signal_typ": {
+            "type": "string",
+            "enum": [
+              "is_error",
+              "tool_use_error",
+              "isApiError",
+              "unterbruch",
+              "keines"
+            ]
+          },
+          "korrektur_prompt_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "belegt",
+              "nicht_belegt"
+            ]
+          }
+        }
+      }
+    },
+    "ergebnisform": {
+      "type": "object",
+      "description": "Endzustand der Abschlussstation. Pflichtquelle: Endstation mit Bestaetigung (BE).",
+      "required": [
+        "beschreibung",
+        "abschluss_station_id"
+      ],
+      "properties": {
+        "beschreibung": {
+          "type": "string",
+          "minLength": 5
+        },
+        "abschluss_station_id": {
+          "type": "string"
+        }
+      }
+    },
+    "belege": {
+      "type": "object",
+      "description": "Vollstaendige Quellennachweise im Transkript.",
+      "required": [
+        "station_ids",
+        "prompt_ids"
+      ],
+      "properties": {
+        "station_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "prompt_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "hermes_review": {
+      "type": "object",
+      "description": "Hermes-Prinzip (F1): Analyse nach langen Sessions; Chat-Vorschlag vor Skill-Generierung.",
+      "required": [
+        "status",
+        "chat_vorschlag_text"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "vorschlag_vorbereitet",
+            "im_chat_praesentiert",
+            "nutzer_bestaetigt",
+            "abgelehnt"
+          ]
+        },
+        "chat_vorschlag_text": {
+          "type": "string"
+        },
+        "nutzer_feedback": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
