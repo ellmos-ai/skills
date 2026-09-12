@@ -26,7 +26,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Iterable, TextIO
+from typing import Any, TextIO
 
 try:  # running as a module inside the package
     from .segment_stations import segment_file
@@ -78,7 +78,7 @@ TYPE_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
             "immer",
             "nie",
             "niemals",
-            "korrigier\\w*",
+            r"korrigier\w*",
             "so nicht",
         ),
     ),
