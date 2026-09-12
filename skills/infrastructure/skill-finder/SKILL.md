@@ -56,7 +56,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Autorisiertes Nutzerprofil aufbauen oder nutzen | Multi-Agent | `build-your-users-mind` (Aufbau) · `decision-avatar` (Nutzung) |
 | Bug / Testfehler | Coding & Debugging | `/bugfix-protocol` (1 Bug), `/bugsweep` (viele, vor Release) |
 | neues/bestehendes Projekt oder Pipeline | Projekt/Pipeline | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Roblox-Spiel | Game-Dev | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Roblox-Spiel | Game-Dev | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | Therapie / Beratung / Krise | Therapie | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Präsentation / Slides | Office | `/academic-pptx` (Inhalt) + `/pptx` (Datei) |
 | Orchestrierung vor komplexer Multi-Agent-Arbeit gemeinsam begrenzen | Multi-Agent | `choose-your-orchestrator` (`/choose-your-orchestrator`) |

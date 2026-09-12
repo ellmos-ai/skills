@@ -53,7 +53,7 @@ provenance:
 | Создать или использовать авторизованную модель предпочтений пользователя | Мультиагентность | `build-your-users-mind` (создание) · `decision-avatar` (использование) |
 | Баг / ошибка теста | Код и отладка | `/bugfix-protocol` (1 баг), `/bugsweep` (много, перед релизом) |
 | Новый/существующий проект или пайплайн | Проект/Пайплайн | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Игра Roblox | Разработка игр | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Игра Roblox | Разработка игр | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | Терапия / консультирование / кризис | Терапия | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Презентация / слайды | Офис | `/academic-pptx` (содержание) + `/pptx` (файл) |
 | Координация мультиагентов | Мультиагентность | `/swarm-operations`, `/model-strategy` |
