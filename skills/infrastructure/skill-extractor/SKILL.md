@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-08-31
+updated: 2026-09-12
 description: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
@@ -74,6 +74,36 @@ steckt, das teuer erworben wurde und wieder gebraucht wird:
 
 Halte pro Kandidat fest: Auslöser (wann braucht man das), Ablauf (Schritte), Begründungen
 (warum so und nicht anders), Fallstricke (was schiefging), Ergebnisform.
+
+**Bei JSONL-Transkripten die Suche nicht von Hand führen.** `scripts/score_stations.py` nimmt die
+Stationen aus Schritt 1 und liefert statt Fundstellen im Fließtext eine **bewertete Kandidatenliste**:
+
+```bash
+python scripts/score_stations.py <transkript.jsonl> [weitere.jsonl ...] --candidates-only
+```
+
+Die Bewertung ruht auf einer einzigen Beobachtung: **der Anschluss ist das Label.** Eine Station wird
+danach beurteilt, was der Mensch als Nächstes sagt — bestätigt er, war das Verfahren tragfähig;
+korrigiert er, fehlte eine Regel; ändert er die Richtung, war der Ansatz falsch. Damit sind die
+oben aufgezählten Signale zählbar statt nur auffällig:
+
+| Signal aus der Liste oben | maschinelle Entsprechung |
+| --- | --- |
+| Korrekturschleifen | Anschlusstyp `KO`, gedeckelt gewichtet |
+| Wiederholung | gleiche Werkzeugkettensignatur in ≥2 Sessions |
+| Werkzeugketten | Kettenlänge ≥3 Schritte |
+| Sackgassen | Anschlusstyp `RA` — Punktabzug, als Fallstrick trotzdem lesenswert |
+| Fallstricke | `is_error` mit folgender Korrektur (Fehler ohne Korrektur zählt nicht) |
+
+Eine **Stationsfolge** ist die Einheit, nicht die einzelne Station — ein Skill entspricht einem
+durchgearbeiteten Abschnitt, nicht einem Berichtspunkt.
+
+**Die Grenzen der Automatik gehören mitgelesen.** Der Anschlusstyp entsteht aus einem
+deterministischen Wortlisten-Vorfilter; was nicht eindeutig ist, bleibt `unknown` statt geraten zu
+werden. Steht `classified_ratio` unter 0,5, sagt die Ausgabe selbst, dass die Rangfolge nicht trägt
+— dann die Anschlüsse der obersten Kandidaten nachklassifizieren (Mensch oder kleines Modell, Schema:
+die sieben Typen der `promptarchaeologie`), bevor geerntet wird. Ein Score ist eine Leseempfehlung,
+keine Auswahlentscheidung: Schritt 3 bleibt Pflicht.
 
 ### 3. Dedup-Gate: Erweitern vor Neuanlegen
 
@@ -186,6 +216,16 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Änderungsprotokoll
+
+### 1.2.0 (2026-09-12)
+- Erntewert-Bewertung von Stationsfolgen ergänzt (`scripts/score_stations.py`): harte Signale je
+  Station, Anschlussklassifikation nach den sieben Typen der `promptarchaeologie`, Score und
+  Kandidatenliste. Schritt 2 „Extraktionswürdiges finden" bekommt damit eine bewertete Liste statt
+  einer Signalsuche im Fließtext. Ausgabe bleibt inhaltsfrei; `classified_ratio` weist aus, wie weit
+  die Automatik trägt, statt eine Rangfolge vorzutäuschen (Ticket T-20260831-971906399, S3/S4;
+  Nutzerentscheid D-20260906-012).
+- `station-skill-mask-v1.schema.json`: `$schema`/`$id` wiederhergestellt — beide Schlüssel waren
+  beim Anlegen einer Shell-Variablenexpansion zum Opfer gefallen (`""` als Schlüssel).
 
 ### 1.1.0 (2026-08-31)
 - Deterministischen, datensparsamen Stationssegmentierer für Claude-Code-JSONL ergänzt.
