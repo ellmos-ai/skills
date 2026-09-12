@@ -8,7 +8,6 @@ import json
 import re
 from pathlib import Path
 
-
 SCHEMA = "automation-self-care.plan.v1"
 PROFILE_SCHEMA = "automation-self-care.provider.v1"
 TITLE_SEPARATOR = " — "

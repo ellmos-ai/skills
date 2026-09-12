@@ -8,7 +8,6 @@ import json
 import re
 from pathlib import Path, PurePosixPath
 
-
 SCHEMA = "semantic-persona-routing.map.v1"
 STABLE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 GENERIC_TOKENS = {

@@ -11,8 +11,8 @@ These policies can be used standalone or integrated into
 code analysis and review workflows.
 """
 
-from .naming import NamingPolicy
 from .encoding import EncodingPolicy
+from .naming import NamingPolicy
 from .paths import PathPolicy
 
 __all__ = ["NamingPolicy", "EncodingPolicy", "PathPolicy"]

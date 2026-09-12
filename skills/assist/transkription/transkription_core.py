@@ -197,7 +197,8 @@ def _transcribe_vosk(file_path: str, language: str = "de") -> tuple[str, Optiona
     """Transkribiert mit Vosk (offline). Gibt (text, None) zurueck."""
     import json as _json
     import wave
-    from vosk import Model, KaldiRecognizer  # type: ignore
+
+    from vosk import KaldiRecognizer, Model  # type: ignore
 
     # Vosk-Modell: im prefs.json konfigurierbar via 'vosk_model_path'
     model_path = _read_pref("vosk_model_path")

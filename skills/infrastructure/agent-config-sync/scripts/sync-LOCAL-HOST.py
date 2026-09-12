@@ -463,7 +463,6 @@ def cmd_plan(args) -> int:
 
     providers_spec = config.get("providers", {})
     relations = registry.get("relations", [])
-    tools = registry.get("tools", {})
 
     print("[agent-config-sync --plan]  (read-only; no writes)")
     print()
@@ -509,7 +508,6 @@ def cmd_plan(args) -> int:
         if scope in ("mcp", "both"):
             source_mcp_path = source_cache.get("mcp_path")
             source_mcp_key = source_spec.get("mcp", {}).get("key", "mcpServers")
-            source_installed = tools.get(source_id, {}).get("installed", False)
 
             print(f"    [MCP] Quelle: {source_id}  ({source_mcp_path or 'Pfad unbekannt'})")
 
@@ -665,7 +663,6 @@ def cmd_apply(args) -> int:
 
     providers_spec = config.get("providers", {})
     relations = registry.get("relations", [])
-    tools = registry.get("tools", {})
 
     print("[agent-config-sync --apply]")
     print()
@@ -799,7 +796,7 @@ def cmd_apply(args) -> int:
 
     print(f"  Abgeschlossen: {writes_total} Schreibvorgaenge, {errors_total} Fehler.")
     if errors_total > 0:
-        print(f"  Einige Schritte fehlgeschlagen -- Logs pruefen.", file=sys.stderr)
+        print("  Einige Schritte fehlgeschlagen -- Logs pruefen.", file=sys.stderr)
         return 1
     return 0
 

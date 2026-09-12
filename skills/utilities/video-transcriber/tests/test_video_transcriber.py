@@ -10,7 +10,6 @@ sys.path.insert(0, str(SCRIPT_DIR))
 import video_transcriber as vt
 from video_transcriber import extract_video_id
 
-
 # --------------------------------------------------------------------------
 # Bestand: URL-Erkennung
 # --------------------------------------------------------------------------

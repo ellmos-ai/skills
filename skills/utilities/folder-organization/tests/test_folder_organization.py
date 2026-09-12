@@ -7,7 +7,6 @@ import re
 from pathlib import Path
 from time import time
 
-
 SCRIPT = Path(__file__).parents[1] / "scripts" / "folder_organization.py"
 SPEC = importlib.util.spec_from_file_location("folder_organization", SCRIPT)
 assert SPEC and SPEC.loader

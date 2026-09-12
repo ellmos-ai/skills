@@ -1,6 +1,16 @@
 repos:
   - repo: local
     hooks:
+      # T-20260912-382792744: bis 2026-09-12 war der gesamte skills/-Baum vom Lint
+      # ausgenommen, und nur die CI lintete ueberhaupt. Dieser Hook zeigt denselben
+      # Befund vor dem Push statt danach. --force-exclude ist noetig, weil ruff die
+      # exclude-Liste sonst ignoriert, sobald pre-commit Dateien namentlich uebergibt
+      # (dann wuerden _archive/ und _templates/ mitgelintet).
+      - id: ruff-lint
+        name: Lint Python with ruff
+        entry: python -m ruff check --force-exclude
+        language: system
+        types: [python]
       - id: skill-static-s-tests
         name: Validate changed skill frontmatter and static quality
         entry: python testing/skill_tester.py batch --type static --ci

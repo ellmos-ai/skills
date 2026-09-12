@@ -4,11 +4,12 @@ Demo-CLI-Anwendung mit Plugin-System
 Zeigt wie Plugins automatisch erkannt und ausgeführt werden
 """
 
-import sys
+import argparse
 import json
 import logging
-import argparse
+import sys
 from pathlib import Path
+
 from plugin_system import PluginManager
 
 # Logging konfigurieren

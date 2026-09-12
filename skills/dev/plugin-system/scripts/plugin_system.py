@@ -5,14 +5,12 @@ Plugin-System für CLI-Anwendungen
 - Strukturiertes Laden und Ausführen
 """
 
-import os
-import sys
 import importlib.util
+import logging
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass
-import logging
 
 logger = logging.getLogger(__name__)
 

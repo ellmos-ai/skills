@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import importlib.util
 import copy
+import importlib.util
 import unittest
 from pathlib import Path
-
 
 MODULE_PATH = Path(__file__).parents[1] / "scripts" / "build_core_set.py"
 SPEC = importlib.util.spec_from_file_location("build_core_set", MODULE_PATH)

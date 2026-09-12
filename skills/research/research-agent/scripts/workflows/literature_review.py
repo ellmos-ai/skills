@@ -6,7 +6,7 @@ fuehrt die Suchphase automatisch durch. Entspricht dem
 "Standard-Review (30 Min)" Workflow aus BACH.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
@@ -146,7 +146,7 @@ class LiteratureReview:
             ),
             ReviewStep(
                 phase="Fokussierte Suche",
-                description=f"Gezielte Suche mit verfeinerten Begriffen",
+                description="Gezielte Suche mit verfeinerten Begriffen",
             ),
             ReviewStep(
                 phase="Abstract-Screening",
