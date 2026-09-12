@@ -185,6 +185,24 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Privacy gate failed for {repo_root}:")
         for error in errors:
             print(f"- {error}")
+        if (repo_root / "testing" / "privacy_gate.py").is_file():
+            # The self-scan note in this module's docstring explains why these
+            # hits are expected -- but nobody reads a docstring after a line
+            # that says FAILED. Twice now this output has been reported as a
+            # defect ("the gate blocks itself"), each time costing a round of
+            # investigation. One line here, no change in behaviour: this module
+            # stays strict and exit 1 for arbitrary repositories, which is the
+            # whole point of it.
+            print(
+                "\nNOTE: this repository ships its own reviewed gate. For it, "
+                "testing/privacy_gate.py is authoritative -- its "
+                "CONTENT_SCAN_EXCLUSIONS allowlist covers the gate's own "
+                "detection patterns and the deliberately private-looking test "
+                "fixtures. Hits in testing/ are expected true positives of the "
+                "pattern set, not leaks (see the self-scan note in this "
+                "module's docstring). This module is the GENERIC scanner for "
+                "arbitrary repositories and takes no default exclusions."
+            )
         return 1
     print(
         f"Privacy gate passed for {repo_root}: no tracked private paths, "
