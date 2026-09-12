@@ -53,7 +53,7 @@ Before starting any non-trivial task, first check if a local skill handles it be
 | Build or use an authorized user preference model | Multi-Agent | `build-your-users-mind` (build) · `decision-avatar` (runtime) |
 | Bug / test failure | Coding & Debugging | `/bugfix-protocol` (1 bug), `/bugsweep` (many, before release) |
 | New/existing project or pipeline | Project/Pipeline | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Roblox game | Game Dev | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Roblox game | Game Dev | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | Therapy / counseling / crisis | Therapy | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Presentation / slides | Office | `/academic-pptx` (content) + `/pptx` (file) |
 | Bound orchestration together before complex multi-agent work | Multi-Agent | `choose-your-orchestrator` (`/choose-your-orchestrator`) |

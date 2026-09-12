@@ -53,7 +53,7 @@ Antes de iniciar cualquier tarea no trivial, verifica primero si una habilidad l
 | Crear o usar un modelo autorizado de preferencias del usuario | Multi-Agente | `build-your-users-mind` (creación) · `decision-avatar` (uso) |
 | Error / fallo de prueba | Código y depuración | `/bugfix-protocol` (1 bug), `/bugsweep` (muchos, antes del lanzamiento) |
 | Proyecto o pipeline nuevo/existente | Proyecto/Pipeline | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Juego de Roblox | Desarrollo de juegos | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Juego de Roblox | Desarrollo de juegos | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | Terapia / asesoramiento / crisis | Terapia | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | Presentación / diapositivas | Oficina | `/academic-pptx` (contenido) + `/pptx` (archivo) |
 | Coordinación multi-agente | Multi-Agente | `/swarm-operations`, `/model-strategy` |

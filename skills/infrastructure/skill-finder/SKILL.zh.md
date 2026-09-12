@@ -52,7 +52,7 @@ provenance:
 | 构建或使用经授权的用户偏好模型 | 多智能体 (Multi-Agent) | `build-your-users-mind`（构建）· `decision-avatar`（使用） |
 | Bug / 测试失败 | 编程与调试 (Coding & Debugging) | `/bugfix-protocol` (单个 Bug), `/bugsweep` (多个，发布前) |
 | 新建/已有项目或流水线 | 项目/流水线 (Projekt/Pipeline) | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Roblox 游戏 | 游戏开发 (Game-Dev) | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Roblox 游戏 | 游戏开发 (Game-Dev) | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | 心理咨询 / 辅导 / 危机 | 心理咨询 (Therapie) | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | 演示文稿 / 幻灯片 | 办公 (Office) | `/academic-pptx` (内容) + `/pptx` (文件) |
 | 多智能体协调 | 多智能体 (Multi-Agent) | `/swarm-operations`, `/model-strategy` |
