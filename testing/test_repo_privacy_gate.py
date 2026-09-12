@@ -118,5 +118,47 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
             self.assertIn("AWS access key", completed.stdout)
 
 
+class SelfScanHintTests(unittest.TestCase):
+    """Der Hinweis darf NUR dort erscheinen, wo er stimmt -- und er darf das
+    strikte Verhalten nirgends aufweichen. Zweimal wurde die Ausgabe dieses
+    Moduls auf dem eigenen Repo als Defekt gemeldet ("das Gate blockiert sich
+    selbst"); der Hinweis beantwortet das an der Stelle, an der die Frage
+    entsteht."""
+
+    def _repo_with_leak(self, root: Path) -> None:
+        _git("init", "-q", cwd=root)
+        (root / "notes.md").write_text(
+            r"See C:\_Local_DEV\repos\example for details." + "\n",
+            encoding="utf-8",
+        )
+        _git("add", "-A", cwd=root)
+
+    def _run(self, root: Path) -> "subprocess.CompletedProcess[str]":
+        return subprocess.run(
+            ["python", str(MODULE_PATH), "--repo", str(root)],
+            capture_output=True, text=True, encoding="utf-8",
+        )
+
+    def test_foreign_repo_stays_strict_and_silent(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._repo_with_leak(root)
+            completed = self._run(root)
+            self.assertEqual(1, completed.returncode)
+            self.assertNotIn("authoritative", completed.stdout)
+
+    def test_repo_with_own_gate_gets_the_hint_but_same_exit_code(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._repo_with_leak(root)
+            (root / "testing").mkdir()
+            (root / "testing" / "privacy_gate.py").write_text("", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            completed = self._run(root)
+            # Exit code unveraendert: der Hinweis erklaert, er entschuldigt nicht.
+            self.assertEqual(1, completed.returncode)
+            self.assertIn("privacy_gate.py is authoritative", completed.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()
