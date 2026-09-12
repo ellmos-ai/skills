@@ -59,15 +59,22 @@ addopts = "-ra -v"
 [tool.ruff]
 target-version = "py310"
 line-length = 120
+# "skills" stand hier bis 2026-09-12 und blendete den gesamten Skill-Baum aus --
+# also den groessten Teil des Repos. Ausgenommen bleiben nur Archiv und Vorlagen:
+# beides ist absichtlich unfertiger bzw. eingefrorener Code (T-20260912-382792744).
 exclude = [
     ".git",
     "__pycache__",
-    "skills",
     "_archive",
     "_templates",
 ]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
-ignore = ["E501", "E402", "F401", "F541", "F841"]
+# E501 (Zeilenlaenge) und E402 (Import nicht oben) bleiben aus: beides ist Stil und
+# beides trifft massenhaft gewachsene Skripte. F401/F541/F841 standen bis 2026-09-12
+# ebenfalls hier -- das sind aber echte Codemaengel (toter Import, f-String ohne
+# Platzhalter, tote Zuweisung), und genau ein solcher Fund war der Anlass dieses
+# Tickets. Sie bleiben scharf.
+ignore = ["E501", "E402"]
 
