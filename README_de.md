@@ -17,7 +17,7 @@
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 278 bestanden](https://img.shields.io/badge/Pytest-278%20bestanden%20(186%20Subtests)-success.svg)](testing/)
+[![Pytest: 291 bestanden](https://img.shields.io/badge/Pytest-291%20bestanden%20(186%20Subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)

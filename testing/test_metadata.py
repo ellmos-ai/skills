@@ -110,8 +110,8 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-09-11", content)
-        self.assertIn("278 passing pytest tests", content)
+        self.assertIn("## Last-checked: 2026-09-12", content)
+        self.assertIn("291 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)
@@ -131,7 +131,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("SECURITY.md", content)
             self.assertIn("registry/components.json", content)
             self.assertIn("```mermaid", content)
-            self.assertIn("278", content)
+            self.assertIn("291", content)
             self.assertIn("138", content)
 
     def test_changelog_exists_and_updated(self) -> None:

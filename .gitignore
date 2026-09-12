@@ -82,9 +82,14 @@ UMSETZUNGSPLAN.md
 WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 
 # ---- Host-spezifische Dateien & Multi-Host-Sync-Konflikte (nicht veröffentlichen) ----
-*-LOCAL-HOST.md
-*-MACSTUDIO.md
-*-WORKSTATION-*.md
+# Bis 2026-09-12 standen hier nur .md-Muster. Neun host-suffixierte .py/.json/.ps1/
+# .sh/.template-Dateien waren dadurch am 2026-07-29 mit dc2899c ins oeffentliche
+# Repo gerutscht -- alle byteidentische Kopien ihres neutralen Partners
+# (T-20260912-306872977). Die Muster gelten deshalb jetzt endungsunabhaengig.
+*-LOCAL-HOST.*
+*-MACSTUDIO.*
+*-WORKSTATION-*
+*-ASUS-GEI.*
 *-WORKSTATION.*
 *-WORKSTATION-LG.*
 *-ASUS-GEI.*
