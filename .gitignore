@@ -86,15 +86,18 @@ WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 # .sh/.template-Dateien waren dadurch am 2026-07-29 mit dc2899c ins oeffentliche
 # Repo gerutscht -- alle byteidentische Kopien ihres neutralen Partners
 # (T-20260912-306872977). Die Muster gelten deshalb jetzt endungsunabhaengig.
+# Eine Liste, alphabetisch, jedes Muster genau einmal. Beim Weiten am 2026-09-12
+# blieben zwei Muster auf .md stehen, *-ASUS-GEI.* stand doppelt und
+# *-WORKSTATION-LG.* war von *-WORKSTATION-* schon gedeckt -- korrigiert
+# 2026-09-13. Geprueft: kein getracktes File wird von den geweiteten Mustern
+# erfasst.
+*-ASUS-GEI.*
+*-DESKTOP-*
+*-LAPTOP-*
 *-LOCAL-HOST.*
 *-MACSTUDIO.*
 *-WORKSTATION-*
-*-ASUS-GEI.*
 *-WORKSTATION.*
-*-WORKSTATION-LG.*
-*-ASUS-GEI.*
-*-DESKTOP-*.md
-*-LAPTOP-*.md
 *-conflict-*
 *.sync-conflict-*
 * (kopie)*

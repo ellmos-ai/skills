@@ -322,3 +322,62 @@ def test_ratio_denominator_holds_only_human_prompts(tmp_path):
     # was der Vorfilter an echten Aeusserungen geschafft hat.
     assert sequence["classified_ratio"] == 1.0
     assert result["classification"]["model_stage"] is False
+
+
+def test_model_stage_labels_the_right_station_end_to_end(tmp_path):
+    """Der Modellpfad in score_files() wurde von keinem Test betreten: die Unit
+    deckt classify_with_command ab, aber nicht das Einsammeln, den Batch und das
+    Zurueckschreiben. Genau dort entscheidet sich, ob ein Label an SEINER Station
+    landet -- und genau dort faellt ein Fehler erst im Echtlauf auf."""
+    path = write(
+        tmp_path,
+        [
+            human("u1", "mach weiter"),          # BE, Vorfilter
+            tool_call("a1", "Read"),
+            stop("m1"),
+            human("u2", "der Ordner liegt woanders"),   # unknown -> Modell
+            tool_call("a2", "Edit"),
+            stop("m2"),
+        ],
+    )
+    # Stub statt echtem Modell: liefert fuer jede Eingabe RA, damit eindeutig
+    # sichtbar ist, WELCHE Station das Modell-Label bekommen hat.
+    stub = 'python -c "import json,sys;n=len(json.loads(sys.stdin.read()));print(json.dumps([\'RA\']*n))"'
+
+    without = score_stations.score_files([path])
+    with_model = score_stations.score_files([path], classifier_cmd=stub)
+
+    assert without["classification"] == {
+        "model_stage": False, "model_offered": 0, "model_labelled": 0}
+    assert with_model["classification"]["model_stage"] is True
+    assert with_model["classification"]["model_offered"] == 1
+    assert with_model["classification"]["model_labelled"] == 1
+
+    # Die vom Vorfilter entschiedene Station bleibt unangetastet; nur die offene
+    # bekommt das Modell-Label -- und die Quote steigt entsprechend.
+    types_before = [t for s in without["sequences"] for t in s["type_counts"]]
+    assert "unknown" in types_before
+    types_after = [t for s in with_model["sequences"] for t in s["type_counts"]]
+    assert "unknown" not in types_after
+    assert with_model["classified_ratio"] > without["classified_ratio"]
+
+
+def test_model_stage_reports_when_the_command_delivered_nothing(tmp_path):
+    """Ein stummes Kommando sieht sonst genauso aus wie ein Modell, das nichts
+    hinzuzufuegen hatte."""
+    path = write(
+        tmp_path,
+        [
+            human("u1", "der Ordner liegt woanders"),
+            tool_call("a1", "Read"),
+            stop("m1"),
+            human("u2", "und der zweite auch"),
+            tool_call("a2", "Edit"),
+            stop("m2"),
+        ],
+    )
+    failing = 'python -c "import sys;sys.stdin.read();sys.exit(1)"'
+    result = score_stations.score_files([path], classifier_cmd=failing)
+
+    assert result["classification"]["model_labelled"] == 0
+    assert any("--classifier-cmd" in w for w in result["warnings"])
