@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, TextIO
@@ -146,6 +147,47 @@ TYPE_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
 
 INTERRUPT_MARKER = "[Request interrupted by user"
 
+# Envelopes that ride in a human turn without being a human utterance. The
+# interrupt marker is deliberately NOT listed: it is a real human act (stopping
+# the agent) and classify_prompt maps it to NS.
+MACHINE_ENVELOPE = re.compile(
+    r"(?:<task-notification>"
+    r"|<system-reminder>"
+    r"|<command-message>"
+    r"|<command-name>"
+    r"|<local-command-std"
+    r"|<teammate-message"
+    r"|<local-command-caveat>"
+    r"|<bash-input>"
+    r"|<bash-stdout>"
+    r"|Another Claude session sent a message:"
+    r"|Caveat: The messages below were generated)",
+    re.IGNORECASE,
+)
+
+# A bare slash command is typed by a human but carries no prompt type: "/compact"
+# says nothing about the station it follows. Kept separate from the envelopes
+# above because it is a whole-string match -- "/loop arbeite Tickets ab" DOES
+# carry intent and must stay a human prompt.
+BARE_COMMAND = re.compile(r"^/[a-z0-9][\w-]*$", re.IGNORECASE)
+
+# The commissioning prompt -- anchored at the start, because only there does an
+# imperative name a new job instead of qualifying a running one.
+#
+# S3 concluded "a start prompt is not recognisable by wording". That holds for
+# the SESSION start, which is what was measured then -- but not for the
+# COMMISSIONING prompt, which announces a ticket or opens with a creating verb.
+# Measured against 57 hand-labelled follow-ups: these markers catch 14 of 25 SP
+# at 100% precision (no false positive), where a small model caught 15 and got
+# 17 other labels wrong. Cheaper AND more accurate, so it belongs in the
+# prefilter rather than in the model stage.
+SP_MARKERS = re.compile(
+    r"^(?:neues ticket|weiteres ticket|ein letztes ticket|ticket)\b"
+    r"|^(?:erstelle|baue|bau|starte|richte|lege|schreibe|oeffne|öffne|ziehe|gib mir)\b"
+    r"|^idee\s*:",
+    re.IGNORECASE,
+)
+
 
 def _text_of(record: dict[str, Any]) -> str:
     """Return the plain text of a message record (classification input only)."""
@@ -186,6 +228,26 @@ _COMPILED_MARKERS: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
 )
 
 
+def prompt_kind(text: str) -> str:
+    """Tell apart what a "follow-up" actually is: ``empty``, ``machine`` or ``human``.
+
+    Measured on three real transcripts (246 follow-ups): 19% carried no text at
+    all and 10% were machine envelopes that merely travel in a human turn --
+    task notifications, teammate messages, slash-command wrappers. Counting
+    those as failed classification made the prefilter look far worse than it is
+    (0.451 against 0.634 once the denominator holds only human utterances), and
+    it would have sent a model 71 inputs that have no prompt type to find.
+    Neither is a classification problem; both are decidable by looking.
+    """
+
+    stripped = text.strip()
+    if not stripped:
+        return "empty"
+    if MACHINE_ENVELOPE.match(stripped) or BARE_COMMAND.match(stripped):
+        return "machine"
+    return "human"
+
+
 def classify_prompt(text: str, *, is_first: bool = False) -> str:
     """Classify a human prompt into one of the seven types, else ``unknown``.
 
@@ -203,7 +265,67 @@ def classify_prompt(text: str, *, is_first: bool = False) -> str:
     for prompt_type, pattern in _COMPILED_MARKERS:
         if pattern.search(normalized):
             return prompt_type
+    # Checked last on purpose: "erstelle X, aber nicht so wie vorher" is a
+    # correction that happens to open with an imperative. The specific class
+    # wins; SP is the fallback mode of a prompt, not a competing marker.
+    if SP_MARKERS.search(normalized):
+        return "SP"
     return "SP" if is_first else "unknown"
+
+
+VALID_TYPES = frozenset({"SP", "NT", "NM", "NS", "KO", "BE", "RA"})
+
+
+def classify_with_command(
+    texts: list[str], command: str, *, timeout: float = 120.0
+) -> list[str]:
+    """Hand the prompts the prefilter could not decide to an external classifier.
+
+    Deliberately a COMMAND, not a provider adapter: this repository is public and
+    user-neutral, so it must not carry anyone's model endpoint, host path or key.
+    The caller points ``--classifier-cmd`` at whatever they already use locally
+    (a routing CLI, a local model, a batch script); the contract is one JSON
+    array of strings on stdin, one JSON array of labels of equal length on
+    stdout. Anything the command returns that is not one of the seven types
+    stays ``unknown`` -- a wrong label is worse than an honest gap, because the
+    score is built on these counts.
+
+    One call for the whole batch, never one per prompt.
+
+    PRIVACY: this is the one step that sends prompt text out of the process. The
+    prefilter reads text locally and emits only labels; a classifier command may
+    send it anywhere. That is why the stage is opt-in and off by default.
+    """
+
+    if not texts:
+        return []
+    payload = json.dumps(texts, ensure_ascii=False)
+    try:
+        completed = subprocess.run(
+            command,
+            shell=True,
+            input=payload,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        return ["unknown"] * len(texts)
+    if completed.returncode != 0:
+        return ["unknown"] * len(texts)
+    try:
+        labels = json.loads(completed.stdout)
+    except (json.JSONDecodeError, ValueError):
+        return ["unknown"] * len(texts)
+    if not isinstance(labels, list) or len(labels) != len(texts):
+        # A length mismatch means the labels no longer line up with the prompts.
+        # Mapping them anyway would attach real labels to the wrong stations.
+        return ["unknown"] * len(texts)
+    return [
+        label if isinstance(label, str) and label in VALID_TYPES else "unknown"
+        for label in labels
+    ]
 
 
 def _blank_signals() -> dict[str, Any]:
@@ -358,7 +480,16 @@ def build_sequences(stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
             signals["tool_chain"].extend(station_signals["tool_chain"])
             follow_up = station["follow_up_type"]
             type_counts[follow_up] = type_counts.get(follow_up, 0) + 1
-        classified = sum(count for key, count in type_counts.items() if key != "unknown")
+        # Only human utterances can carry a prompt type, so only they belong in
+        # the denominator. Counting empty turns and machine envelopes as failures
+        # understated the prefilter by ~18 points on real transcripts.
+        non_prompt = type_counts.get("non_prompt", 0) + type_counts.get("empty", 0)
+        human_prompts = len(current) - non_prompt
+        classified = sum(
+            count
+            for key, count in type_counts.items()
+            if key not in ("unknown", "non_prompt", "empty")
+        )
         sequences.append(
             {
                 "sequence_id": f"sequence-{len(sequences) + 1:04d}",
@@ -368,7 +499,11 @@ def build_sequences(stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "start_timestamp": current[0]["start_timestamp"],
                 "end_timestamp": current[-1]["end_timestamp"],
                 "type_counts": dict(sorted(type_counts.items())),
-                "classified_ratio": round(classified / len(current), 3),
+                "human_prompt_count": human_prompts,
+                "non_prompt_count": non_prompt,
+                "classified_ratio": (
+                    round(classified / human_prompts, 3) if human_prompts else 0.0
+                ),
                 "closing_type": current[-1]["follow_up_type"],
                 "tool_chain": signals["tool_chain"],
                 "signals": {k: v for k, v in signals.items() if k != "tool_chain"},
@@ -385,12 +520,18 @@ def build_sequences(stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def score_files(
-    paths: list[Path], *, gap_seconds: float | None = DEFAULT_GAP_SECONDS, min_score: int = 5
+    paths: list[Path],
+    *,
+    gap_seconds: float | None = DEFAULT_GAP_SECONDS,
+    min_score: int = 5,
+    classifier_cmd: str | None = None,
 ) -> dict[str, Any]:
     """Segment, sign, classify and score one or more transcripts."""
 
     all_sequences: list[dict[str, Any]] = []
     sources: list[dict[str, Any]] = []
+    model_pending: list[tuple[dict[str, Any], str]] = []
+    segmented: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]] = []
 
     for path in paths:
         segmentation = segment_file(path, gap_seconds=gap_seconds)
@@ -398,7 +539,36 @@ def score_files(
         follow_up_texts = collect_signals(path, stations)
         for position, station in enumerate(stations):
             # The opening prompt of a transcript labels no station -- it starts one.
-            station["follow_up_type"] = classify_prompt(follow_up_texts[position])
+            text = follow_up_texts[position]
+            kind = prompt_kind(text)
+            station["follow_up_kind"] = kind
+            if kind != "human":
+                # No human utterance, so no prompt type to find. Labelled apart
+                # from "unknown" so it never counts as a classification failure.
+                station["follow_up_type"] = "non_prompt" if kind == "machine" else "empty"
+                station["follow_up_source"] = "structure"
+                continue
+            station["follow_up_type"] = classify_prompt(text)
+            station["follow_up_source"] = (
+                "prefilter" if station["follow_up_type"] != "unknown" else "none"
+            )
+            if classifier_cmd and station["follow_up_type"] == "unknown":
+                model_pending.append((station, text))
+        segmented.append((path, segmentation, stations))
+
+    # The model stage runs BEFORE any sequence is built: type_counts and
+    # classified_ratio are computed at sequence level, so a label arriving later
+    # would not reach them. One call for every pending prompt across all files.
+    model_labelled = 0
+    if classifier_cmd and model_pending:
+        labels = classify_with_command([text for _, text in model_pending], classifier_cmd)
+        for (station, _), label in zip(model_pending, labels):
+            if label != "unknown":
+                station["follow_up_type"] = label
+                station["follow_up_source"] = "model"
+                model_labelled += 1
+
+    for path, segmentation, stations in segmented:
         sequences = build_sequences(stations)
         for sequence in sequences:
             sequence["source_name"] = path.name
@@ -437,9 +607,16 @@ def score_files(
     warnings: list[str] = []
     if overall_ratio < 0.5:
         warnings.append(
-            "Weniger als die Haelfte der Anschlussprompts konnte deterministisch "
+            "Weniger als die Haelfte der menschlichen Anschlussprompts konnte "
             "klassifiziert werden -- die Rangfolge ist nicht belastbar. Anschluesse "
-            "vor der Ernte manuell oder mit einem kleinen Modell nachklassifizieren."
+            "vor der Ernte manuell oder mit --classifier-cmd nachklassifizieren."
+        )
+    if classifier_cmd and model_pending and model_labelled == 0:
+        # Silence here would look exactly like "the model had nothing to add".
+        warnings.append(
+            f"--classifier-cmd lieferte fuer keinen der {len(model_pending)} offenen "
+            "Anschluesse ein gueltiges Label. Pruefen, ob das Kommando eine "
+            "JSON-Liste gleicher Laenge auf stdout schreibt."
         )
 
     return {
@@ -449,6 +626,13 @@ def score_files(
         "sequence_count": len(all_sequences),
         "candidate_count": sum(1 for s in all_sequences if s["candidate"]),
         "classified_ratio": overall_ratio,
+        "classification": {
+            # How the labels came about -- a ratio lifted by a model is a
+            # different claim than one the deterministic prefilter reached.
+            "model_stage": bool(classifier_cmd),
+            "model_offered": len(model_pending),
+            "model_labelled": model_labelled,
+        },
         "warnings": warnings,
         "sequences": ranked,
     }
@@ -485,6 +669,16 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="only emit sequences that reach --min-score",
     )
+    parser.add_argument(
+        "--classifier-cmd",
+        help=(
+            "optional second stage for follow-ups the prefilter left unknown: a "
+            "shell command that reads a JSON array of prompt strings on stdin and "
+            "writes a JSON array of labels (SP/NT/NM/NS/KO/BE/RA or unknown) of "
+            "equal length on stdout. PRIVACY: this sends prompt text to that "
+            "command; off by default"
+        ),
+    )
     return parser
 
 
@@ -493,7 +687,10 @@ def main(argv: list[str] | None = None) -> int:
     gap_seconds = args.gap_seconds if args.gap_seconds else None
     try:
         result = score_files(
-            args.input, gap_seconds=gap_seconds, min_score=args.min_score
+            args.input,
+            gap_seconds=gap_seconds,
+            min_score=args.min_score,
+            classifier_cmd=args.classifier_cmd,
         )
     except (OSError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
