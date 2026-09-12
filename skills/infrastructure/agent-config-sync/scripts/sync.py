@@ -799,7 +799,7 @@ def cmd_apply(args) -> int:
 
     print(f"  Abgeschlossen: {writes_total} Schreibvorgaenge, {errors_total} Fehler.")
     if errors_total > 0:
-        print(f"  Einige Schritte fehlgeschlagen -- Logs pruefen.", file=sys.stderr)
+        print("  Einige Schritte fehlgeschlagen -- Logs pruefen.", file=sys.stderr)
         return 1
     return 0
 

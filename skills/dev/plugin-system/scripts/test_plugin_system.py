@@ -3,11 +3,12 @@ Unit-Tests für das Plugin-System
 Zeigt wie man Plugins und den Manager testet
 """
 
-import unittest
-import tempfile
 import sys
+import tempfile
+import unittest
 from pathlib import Path
-from plugin_system import PluginBase, PluginManager, PluginInfo
+
+from plugin_system import PluginBase, PluginInfo, PluginManager
 
 
 class TestPlugin(PluginBase):

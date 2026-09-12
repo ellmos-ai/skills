@@ -7,7 +7,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).parents[1] / "scripts" / "build_routing_map.py"
 SPEC = importlib.util.spec_from_file_location("build_routing_map", MODULE_PATH)
 module = importlib.util.module_from_spec(SPEC)

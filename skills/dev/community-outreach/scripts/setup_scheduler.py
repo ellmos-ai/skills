@@ -16,7 +16,6 @@ Author: ellmos-ai / Antigravity Team
 
 import argparse
 import json
-import os
 import shlex
 import subprocess
 import sys
@@ -111,7 +110,7 @@ def setup_unix_cron(workspace_dir: Path, schedule_cron: str = "0 9 * * *") -> bo
         f"--workspace {shlex.quote(str(workspace_dir))} --full-run > /dev/null 2>&1"
     )
     print("\n=== Unix Crontab Entry ===")
-    print(f"Add the following line to your crontab (`crontab -e`):")
+    print("Add the following line to your crontab (`crontab -e`):")
     print(f"\n{cron_line}\n")
     return True
 

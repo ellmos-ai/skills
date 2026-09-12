@@ -24,7 +24,6 @@ Version: 1.0.0
 
 import ast
 import json
-import os
 import re
 import subprocess
 import sys
@@ -606,8 +605,8 @@ def run_u_tests_interactive(skill_path):
     print(f"\n{'='*60}")
     print(f"  U-TEST: User-Erfahrung fuer '{name}'")
     print(f"{'='*60}")
-    print(f"\nBitte bewerte den Skill nach deiner Nutzungserfahrung.")
-    print(f"Skala: 0 (unbrauchbar) bis 5 (exzellent)\n")
+    print("\nBitte bewerte den Skill nach deiner Nutzungserfahrung.")
+    print("Skala: 0 (unbrauchbar) bis 5 (exzellent)\n")
 
     tests = {
         'U001': 'Aufgaben-Erfuellung: Hat der Skill gemacht, was du wolltest?',
@@ -624,7 +623,7 @@ def run_u_tests_interactive(skill_path):
                 raw = input(f"  {test_id} - {question}\n  Score (0-5): ").strip()
                 score = float(raw)
                 if 0 <= score <= 5:
-                    notes = input(f"  Anmerkung (optional, Enter=skip): ").strip()
+                    notes = input("  Anmerkung (optional, Enter=skip): ").strip()
                     results[test_id] = {
                         'score': score,
                         'notes': notes if notes else ''
@@ -884,7 +883,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
             prompt_file = RESULTS_DIR / f"{name}_l_test_prompt.md"
             prompt_file.write_text(prompt, encoding='utf-8')
             print(f"  L-Test Prompt generiert: {prompt_file.name}")
-            print(f"  Fuehre diesen Prompt in einer separaten Claude-Session aus.")
+            print("  Fuehre diesen Prompt in einer separaten Claude-Session aus.")
             print(f"  Speichere das JSON-Ergebnis als: results/{name}_l_results.json")
             print()
 
@@ -898,7 +897,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
                             l_results[key.split('_')[0]] = val
                     print(f"  Vorhandene L-Ergebnisse geladen ({len(l_results)} Tests)")
                 except json.JSONDecodeError:
-                    print(f"  L-Ergebnisse nicht parsebar")
+                    print("  L-Ergebnisse nicht parsebar")
         print()
 
     # --- U-Tests ---
@@ -925,7 +924,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
             print(f"  U-Tests (User):         {sum(u_scores)/len(u_scores):.1f}/5")
 
     if dimensions:
-        print(f"\n  Dimensionen:")
+        print("\n  Dimensionen:")
         dim_labels = {
             'd1_clarity': 'Klarheit',
             'd2_completeness': 'Vollstaendigkeit',

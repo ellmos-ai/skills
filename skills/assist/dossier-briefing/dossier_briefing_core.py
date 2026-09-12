@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import json
 import sys
-import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -112,7 +111,7 @@ def create_briefing(
     lines: list[str] = []
 
     # Frontmatter-Kommentar
-    lines.append(f"<!-- Briefing-Geruest — bitte Abschnitte durch Recherche befuellen -->")
+    lines.append("<!-- Briefing-Geruest — bitte Abschnitte durch Recherche befuellen -->")
     lines.append("")
 
     # Titel
@@ -127,7 +126,7 @@ def create_briefing(
     lines.append(f"| **Erstellt** | {now} |")
     if author:
         lines.append(f"| **Erstellt von** | {author} |")
-    lines.append(f"| **Status** | Geruest (leer) |")
+    lines.append("| **Status** | Geruest (leer) |")
     lines.append("")
     lines.append("> **Hinweis:** Dieses Dokument ist ein leeres Geruest.")
     lines.append("> Abschnitte muessen durch Recherche befuellt werden.")

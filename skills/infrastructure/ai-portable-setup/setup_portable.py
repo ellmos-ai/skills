@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """AI-Portable Setup: Erstellt eine portable KI-Arbeitsumgebung auf einem Laufwerk."""
 
-import os
 import sys
-import json
 from pathlib import Path
 
 STRUCTURE = {
@@ -272,14 +270,14 @@ def create_structure(base_path: Path):
         "  4. python rag/query.py --mode icf \"Beobachtungen...\" (ICF-Modus)\n",
         encoding="utf-8",
     )
-    print(f"  [FILE] README.txt")
+    print("  [FILE] README.txt")
 
     print("=" * 50)
     print(f"Fertig! {base_path}")
-    print(f"\nNaechste Schritte:")
+    print("\nNaechste Schritte:")
     print(f"  cd {base_path}")
-    print(f"  python -m venv venv")
-    print(f"  pip install chromadb ollama")
+    print("  python -m venv venv")
+    print("  pip install chromadb ollama")
 
 
 def main():

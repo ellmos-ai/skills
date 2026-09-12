@@ -10,7 +10,6 @@ Run:
 from __future__ import annotations
 
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -21,7 +20,6 @@ SCRIPTS_DIR = Path(__file__).resolve().parent.parent / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 import sync  # noqa: E402 -- must come after sys.path manipulation
-
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 

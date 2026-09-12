@@ -44,14 +44,14 @@ Version: 1.2.0
 
 __version__ = "1.2.0"
 
-import sys
+import argparse
+import json
 import os
 import re
-import json
-import argparse
+import sys
 import urllib.request
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 
 # Exit-Codes. 2 bleibt argparse vorbehalten (Aufruffehler), deshalb 3 fuer den
 # fachlichen Fall "kein Transkript" -- sonst waere ein Tippfehler im Aufruf vom
