@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.2.0
+version: 1.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-12
+updated: 2026-09-13
 description: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
@@ -101,9 +101,37 @@ durchgearbeiteten Abschnitt, nicht einem Berichtspunkt.
 **Die Grenzen der Automatik gehören mitgelesen.** Der Anschlusstyp entsteht aus einem
 deterministischen Wortlisten-Vorfilter; was nicht eindeutig ist, bleibt `unknown` statt geraten zu
 werden. Steht `classified_ratio` unter 0,5, sagt die Ausgabe selbst, dass die Rangfolge nicht trägt
-— dann die Anschlüsse der obersten Kandidaten nachklassifizieren (Mensch oder kleines Modell, Schema:
-die sieben Typen der `promptarchaeologie`), bevor geerntet wird. Ein Score ist eine Leseempfehlung,
-keine Auswahlentscheidung: Schritt 3 bleibt Pflicht.
+— dann die Anschlüsse der obersten Kandidaten nachklassifizieren, bevor geerntet wird. Ein Score ist
+eine Leseempfehlung, keine Auswahlentscheidung: Schritt 3 bleibt Pflicht.
+
+**Nicht jeder Anschluss ist ein Prompt.** Leere Züge und Maschinen-Envelopes (Task-Benachrichtigung,
+Teammate-Nachricht, nacktes Slash-Kommando) tragen keinen Prompttyp und werden als `empty` bzw.
+`non_prompt` ausgewiesen — sie stehen **nicht** im Nenner von `classified_ratio`. Auf drei realen
+Transkripten waren das 127 von 246 Anschlüssen; sie als gescheiterte Klassifikation mitzuzählen
+drückte die Kennzahl von 0,64 auf 0,45 und hätte ein Modell auf Eingaben angesetzt, an denen es
+nichts zu erkennen gibt.
+
+**Optionale Modellstufe — und warum sie selten nötig ist.** `--classifier-cmd "<befehl>"` reicht die
+verbliebenen `unknown` an ein externes Kommando weiter (JSON-Liste rein auf stdin, JSON-Liste mit
+Labels gleicher Länge raus auf stdout; alles außerhalb der sieben Typen bleibt `unknown`). Bewusst
+ein **Kommando statt eines Provider-Adapters**: Diese Bibliothek ist nutzerneutral und trägt keinen
+Modell-Endpunkt. `follow_up_source` und der Block `classification` weisen aus, welche Labels vom
+Modell stammen.
+
+> **Datenschutz:** Das ist der einzige Schritt, bei dem Prompttext den Prozess verlässt. Der
+> Vorfilter liest Text nur lokal und gibt ausschließlich Labels aus; ein Klassifikator-Kommando
+> kann ihn beliebig weitergeben. Deshalb ist die Stufe standardmäßig **aus**.
+>
+> **Gemessen, bevor man sie einschaltet** (60 offene Anschlüsse, 57 handgelabelt, Gemini 3.7 Flash):
+> **70,2 % Treffer** — und in **0 %** der Fälle sagte das Modell ehrlich „weiß nicht". Es rät immer.
+> Die Fehler sind nicht gleichverteilt: 12 von 17 landeten auf `NM`, darunter 3 von 4 falsch
+> zugeordneten `KO`. Ausgerechnet `KO` vergibt im Score die Punkte — ein Modell, das Korrekturen
+> nach `NM` abräumt, verzerrt genau die Rangfolge, für die man es geholt hat. Für `--min-score` ist
+> dieser Stand **nicht** tragfähig.
+
+Wer die Quote heben will, hat den billigeren Hebel im Vorfilter: Auftragsprompts (`ticket:`,
+`erstelle`, `starte`, …) fingen in derselben Stichprobe **14 von 25 SP bei 100 % Präzision**,
+während das Modell 15 traf und dabei 17 andere Labels verdarb.
 
 ### 3. Dedup-Gate: Erweitern vor Neuanlegen
 
@@ -216,6 +244,29 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Änderungsprotokoll
+
+### 1.3.0 (2026-09-13)
+- **Anschlüsse, die keine Prompts sind, zählen nicht mehr als gescheiterte Klassifikation.**
+  `prompt_kind()` trennt `empty` (leerer Zug), `non_prompt` (Maschinen-Envelope, nacktes
+  Slash-Kommando) und `human`; nur letztere stehen im Nenner von `classified_ratio`. Auf drei
+  realen Transkripten waren 127 von 246 Anschlüssen keine Äußerung — ihre Mitzählung hatte die
+  Kennzahl von 0,64 auf 0,45 gedrückt und die Warnung „Rangfolge nicht belastbar" ausgelöst, ohne
+  dass am Vorfilter etwas falsch war. Nebenwirkung: Maschinentexte wurden vorher teils über ihre
+  Wortmarker als `BE`/`KO` **fehl**klassifiziert; das entfällt.
+- **Auftragsprompt (`SP`) im Vorfilter.** S3 hatte gemessen, dass ein Startprompt sprachlich nicht
+  erkennbar ist — das gilt für den SESSION-Start, nicht für den AUFTRAG (`ticket:`, `erstelle`,
+  `starte`, …). Gegen 57 handgelabelte Anschlüsse: 14 von 25 `SP` bei 100 % Präzision. Wird
+  **zuletzt** geprüft, damit „erstelle X, aber nicht so" eine Korrektur bleibt.
+- **Optionale Modellstufe `--classifier-cmd`** hinter dem Vorfilter: ein Kommando (JSON rein, JSON
+  raus), kein Provider-Adapter — die Bibliothek bleibt nutzerneutral. Ein Batch-Aufruf für alle
+  offenen Anschlüsse; Längendifferenz, kaputtes JSON oder Fehlerexit führen nie zu versetzten
+  Labels. `follow_up_source` und der Block `classification` weisen die Herkunft jedes Labels aus.
+- **Messung zur Modellstufe, die gegen ihren breiten Einsatz spricht** (60 offene Anschlüsse,
+  Gemini 3.7 Flash): 70,2 % Treffer, 0 % ehrliches „unknown", und 12 von 17 Fehlern landen auf
+  `NM` — darunter 3 von 4 verschobenen `KO`, also genau der Klasse, die den Score trägt. Für eine
+  `--min-score`-Kalibrierung reicht das nicht; die Stufe bleibt opt-in und ist als Datenschutz-
+  Übergang gekennzeichnet.
+- Quote auf denselben drei Transkripten: **0,451 → 0,644**, ohne Modellaufruf.
 
 ### 1.2.0 (2026-09-12)
 - Erntewert-Bewertung von Stationsfolgen ergänzt (`scripts/score_stations.py`): harte Signale je

@@ -222,3 +222,103 @@ def test_cli_writes_candidates_only(tmp_path):
     payload = json.loads(out.read_text(encoding="utf-8"))
     assert payload["schema"] == "ellmos.station-scoring.v1"
     assert payload["sequences"] == []
+
+
+# ─── S5: was ist ueberhaupt ein Prompt (deterministisch, vor jedem Modell) ───
+
+
+def test_empty_and_machine_turns_are_not_failed_classification():
+    """19% der Anschluesse waren leer, 10% Maschinen-Envelopes. Als 'unknown'
+    gezaehlt liessen sie den Vorfilter viel schlechter aussehen, als er ist --
+    und ein Modell haette daran nichts zu klassifizieren gehabt."""
+    assert score_stations.prompt_kind("") == "empty"
+    assert score_stations.prompt_kind("   \n ") == "empty"
+    assert score_stations.prompt_kind("<task-notification> <task-id>x</task-id>") == "machine"
+    assert score_stations.prompt_kind("<system-reminder>merk dir das</system-reminder>") == "machine"
+    assert score_stations.prompt_kind("Another Claude session sent a message: hi") == "machine"
+    assert score_stations.prompt_kind("<bash-input> npm publish</bash-input>") == "machine"
+    assert score_stations.prompt_kind("pruef das nochmal") == "human"
+
+
+def test_bare_slash_command_is_machine_but_a_command_with_intent_is_not():
+    """"/compact" sagt nichts ueber die Station davor. "/loop <Auftrag>" schon --
+    deshalb greift die Regel nur auf den nackten Befehl."""
+    assert score_stations.prompt_kind("/compact") == "machine"
+    assert score_stations.prompt_kind("/sync") == "machine"
+    assert score_stations.prompt_kind("/loop arbeite die Tickets ab") == "human"
+
+
+def test_commissioning_prompt_is_recognisable_even_though_a_session_start_is_not():
+    """S3 mass den SESSION-Start und fand ihn sprachlich nicht erkennbar. Der
+    AUFTRAGS-Prompt ist es sehr wohl: 14 von 25 SP bei 100% Praezision."""
+    assert score_stations.classify_prompt("neues ticket: USMC an hooker anbinden") == "SP"
+    assert score_stations.classify_prompt("erstelle daraus einen Artikel") == "SP"
+    assert score_stations.classify_prompt("starte die olympiade") == "SP"
+    assert score_stations.classify_prompt("Idee: eigener harness chat") == "SP"
+
+
+def test_specific_class_beats_the_opening_imperative():
+    """Ein Auftrag, der zugleich korrigiert, ist eine Korrektur -- sonst wandern
+    KO-Punkte (die einzigen, die im Score wirklich zaehlen) nach SP ab."""
+    assert score_stations.classify_prompt("erstelle das nochmal, so nicht") == "KO"
+    assert score_stations.classify_prompt("baue das, aber warte auf den Test") == "NS"
+
+
+# ─── S5: die optionale Modellstufe ───
+
+
+def test_classifier_command_labels_only_what_it_may_label():
+    """Ein Kommando darf Labels liefern -- aber nur die sieben Typen. Alles
+    andere bleibt 'unknown': ein erfundenes Label ist schlimmer als eine Luecke."""
+    good = 'python -c "import json,sys;sys.stdin.read();print(json.dumps([\'KO\',\'BE\']))"'
+    assert score_stations.classify_with_command(["a", "b"], good) == ["KO", "BE"]
+
+    junk = 'python -c "import json,sys;sys.stdin.read();print(json.dumps([\'VIELLEICHT\',\'BE\']))"'
+    assert score_stations.classify_with_command(["a", "b"], junk) == ["unknown", "BE"]
+
+
+def test_classifier_command_failures_never_produce_misaligned_labels():
+    """Laengendifferenz, kaputtes JSON oder ein Fehlerexit duerfen NICHT dazu
+    fuehren, dass echte Labels an den falschen Stationen landen."""
+    short = 'python -c "import json,sys;sys.stdin.read();print(json.dumps([\'KO\']))"'
+    assert score_stations.classify_with_command(["a", "b"], short) == ["unknown", "unknown"]
+
+    broken = 'python -c "import sys;sys.stdin.read();print(\'kein json\')"'
+    assert score_stations.classify_with_command(["a", "b"], broken) == ["unknown", "unknown"]
+
+    failing = 'python -c "import sys;sys.stdin.read();sys.exit(3)"'
+    assert score_stations.classify_with_command(["a"], failing) == ["unknown"]
+
+    assert score_stations.classify_with_command([], "does-not-run") == []
+
+
+def test_ratio_denominator_holds_only_human_prompts(tmp_path):
+    """Der Nenner entscheidet, ob die Kennzahl etwas ueber den Vorfilter sagt.
+    Eine Station, deren Anschluss eine Maschinennachricht ist, kann nicht
+    klassifiziert werden -- sie darf die Quote deshalb weder heben noch senken."""
+    path = write(
+        tmp_path,
+        [
+            human("u1", "starte den Lauf"),
+            tool_call("a1", "Read"),
+            stop("m1"),
+            human("u2", "so nicht, das ist falsch"),
+            tool_call("a2", "Edit"),
+            stop("m2"),
+            human("u3", "<task-notification> <task-id>x</task-id> fertig"),
+            tool_call("a3", "Write"),
+            stop("m3"),
+            human("u4", ""),
+        ],
+    )
+    result = score_stations.score_files([path])
+    sequence = result["sequences"][0]
+
+    assert sequence["type_counts"].get("non_prompt", 0) >= 1
+    assert sequence["human_prompt_count"] + sequence["non_prompt_count"] == (
+        sequence["station_count"]
+    )
+    # Die nicht-Prompts sind aus dem Nenner heraus: die Quote spiegelt nur,
+    # was der Vorfilter an echten Aeusserungen geschafft hat.
+    assert sequence["classified_ratio"] == 1.0
+    assert result["classification"]["model_stage"] is False
