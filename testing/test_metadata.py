@@ -214,7 +214,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("ZERO external runtime dependencies", content)
         self.assertIn("mattpocock/skills", content)
         for i in range(1, 11):
-            inv_prefix = f"INV-"
+            inv_prefix = "INV-"
             self.assertTrue(any(line.startswith(f"| **{inv_prefix}") for line in content.splitlines()), "Invariant missing")
 
         invariants = [
