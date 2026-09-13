@@ -8,6 +8,61 @@
 - Store runtime state and leases outside the synchronized folder, for example under ~/.pingpong/.
 - ListenSync observes systematically. WriteSync writes only to the actor's own slot. ListenSync also performs WriteSync.
 
+## STATE and CALL: who picks up
+
+Two separate marks with different meanings. Joining requires **both** at once, which is why
+a mere active state never keeps anyone awake.
+
+- **STATE** — "I am at the phone": field `pingpong` in `agents/registry/<slot>.state.json`,
+  per host and persistent. The file belongs to `mirror_rulefiles.py`, which regenerates it and
+  carries this field forward; writes are additive and never replace the whole file.
+- **CALL** — "who should join": file `agents/call-<from>-to-<target|all>.txt`. Sender and
+  target live in the **name**, so whether a call concerns you is decidable without opening it.
+  The body only carries `EXPIRES` and `REASON`. A slot name must not contain `-to-`.
+
+Rules:
+
+    another host active AND a call to me or to all  -> I pick up
+    active, but no call                             -> I do not pick up
+    I am active myself, no call left                -> hung up, I deactivate
+    my own work finished                            -> end my own call
+
+## Two-stage check
+
+Stage one is cheap and answers the most common case — nobody is working cross-host — with a
+glance at the state files. Only on a hit does stage two follow, matching call file names.
+Both run through `scripts/pingpong_runtime.py check`:
+
+    python "<skill-root>/scripts/pingpong_runtime.py" check --slot <slot> --sync-root <path>
+
+The result has **three** values so a failed check never looks like an empty one:
+
+| Exit | Verdict | Meaning |
+|---:|---|---|
+| 0 | `call-for-me` | activate and spawn a PingPong agent |
+| 1 | `idle` | nobody there, or no call for me; if active myself, deactivate |
+| 3 | `check-failed` | registry or call directory unreadable — do **not** treat as idle |
+
+`--json` returns the same finding machine-readable, including `self_active` and `active_hosts`.
+
+## Call expiry
+
+Regularly the caller ends the call once its purpose is met. As a safety net every call expires
+at `EXPIRES` (default six hours, following the ticket-master `DELEGIERT_AN` note). Whoever is
+still working keeps it fresh by running the same command again — that doubles as the heartbeat:
+
+    ... call --to <slot|all> --reason "<purpose>"   # open and refresh
+    ... call --to <slot|all> --end                  # end
+    ... call --list                                 # all calls with live/expired
+    ... state --activate | --deactivate             # own participation mark
+
+An expired call is ignored by `check` and therefore ends the conversation on its own; a file
+left behind is inert and gets removed when noticed. If `EXPIRES` is missing, modification time
+plus the default expiry applies — never "valid forever".
+
+**Transitional reading:** files with the old `pull-` prefix are still read, only `call-` is
+written. The read tolerance ends after 2026-12-31.
+
 ## FileCommander evidence requirement
 
 Every scan must be evidenced through the FileCommander MCP:

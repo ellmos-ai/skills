@@ -1,10 +1,10 @@
 ---
 name: pingpong
-version: 1.0.1
+version: 1.1.0
 type: protocol
 author: Lukas Geiger, OpenAI Codex
 created: 2026-08-03
-updated: 2026-09-09
+updated: 2026-09-13
 description: >
   Runs a time-bounded, session-scoped radio link over a shared synchronized
   folder. ListenSync systematically scans for assignments and news; WriteSync
@@ -62,6 +62,10 @@ Operate two or more systems as radio stations over a shared sync folder. Keep th
 - WriteSync: Every working actor may send its own relevant deltas, assignments, news, and receipts. This mode does not start a listener.
 - Default to ListenSync when the mode is omitted.
 
+## Settle participation (STATE and CALL)
+
+Before the run contract, the two-stage check decides whether anyone is reachable at all. `scripts/pingpong_runtime.py check --slot <slot> --sync-root <path>` answers with exactly three values: exit 0 `call-for-me` (activate and spawn an agent), exit 1 `idle` (if active yourself, deactivate), exit 3 `check-failed` (unreadable, never treat as idle). Participation requires STATE and CALL at once; whoever opens a call ends it once its purpose is met, otherwise it expires. Full rules in references/protocol.en.md.
+
 ## Define the run contract
 
 1. Default to 24h. Also accept relative durations such as 15m, 2h, 3d, or an absolute ISO-8601 deadline.
@@ -95,6 +99,10 @@ Invent no work during idle cycles. Report briefly: scan time, freshness files re
 Write only to the actor's own system slot or an explicitly global channel. State sender, recipient, time, reference, action, result, open points, and requested cadence. Merge rather than overwrite; include no credentials; respect locks. Read the canonical file back through FileCommander after writing.
 
 ## Changelog
+
+### 1.1.0 (2026-09-13)
+
+- Added the per-host participation mark STATE (field `pingpong` in `agents/registry/<slot>.state.json`) and addressed CALL files `call-<from>-to-<target|all>.txt` with expiry; `pingpong_runtime.py` gained `state`, `call` and the two-stage `check` with a three-valued result. Old `pull-` names are still read during the transition. Implements T-20260830-425388998 after the user decision of 2026-09-11 (smallest cut: STATE, CALL and expiry only).
 
 ### 1.0.1 (2026-09-09)
 

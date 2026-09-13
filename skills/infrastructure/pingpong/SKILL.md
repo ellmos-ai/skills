@@ -1,10 +1,10 @@
 ---
 name: pingpong
-version: 1.0.1
+version: 1.1.0
 type: protocol
 author: Lukas Geiger, OpenAI Codex
 created: 2026-08-03
-updated: 2026-09-09
+updated: 2026-09-13
 description: >
   Betreibt eine zeitlich begrenzte, sitzungsgebundene Funkstelle über einen
   gemeinsam synchronisierten Ordner. ListenSync scannt systematisch nach
@@ -63,6 +63,10 @@ Betreibe zwei oder mehr Systeme als Funkstellen über einen gemeinsamen Sync-Ord
 - WriteSync: Jeder arbeitende Akteur darf eigene relevante Deltas, Aufträge, Neuigkeiten und Receipts senden. Dieser Modus startet keinen Listener.
 - Fehlt der Modus, verwende ListenSync.
 
+## Teilnahme klären (STATE und CALL)
+
+Vor dem Laufvertrag entscheidet die zweistufige Prüfung, ob überhaupt jemand zu erreichen ist. `scripts/pingpong_runtime.py check --slot <slot> --sync-root <pfad>` antwortet mit genau drei Werten: Exit 0 `call-for-me` (aktivieren und einen Agenten spawnen), Exit 1 `idle` (bin ich selbst aktiv, deaktivieren), Exit 3 `check-failed` (unlesbar, niemals als Leerlauf behandeln). Teilnahme verlangt STATE und CALL zugleich; wer einen Call einberuft, beendet ihn bei Zweckerfüllung, sonst verfällt er. Vollständige Regeln in references/protocol.md.
+
 ## Laufvertrag festlegen
 
 1. Verwende standardmäßig 24h. Akzeptiere auch relative Dauern wie 15m, 2h, 3d oder einen absoluten ISO-8601-Endzeitpunkt.
@@ -96,6 +100,10 @@ Erfinde bei Leerlauf keine Arbeit. Melde knapp: Scanzeit, gelesene Freshness-Dat
 Schreibe nur in den eigenen Systemslot oder einen ausdrücklich globalen Kanal. Nenne Absender, Empfänger, Zeit, Bezug, Handlung, Ergebnis, offene Punkte und gewünschte Kadenz. Merge statt Überschreiben; keine Credentials; Locks respektieren. Lies die kanonische Datei nach dem Schreiben mit FileCommander zurück.
 
 ## Changelog
+
+### 1.1.0 (2026-09-13)
+
+- Hostbezogene Teilnahmemarke STATE (Feld `pingpong` in `agents/registry/<slot>.state.json`) und adressierte CALL-Dateien `call-<von>-to-<an|all>.txt` mit Verfall ergänzt; `pingpong_runtime.py` kennt dafür `state`, `call` und die zweistufige Prüfung `check` mit dreiwertigem Ergebnis. Alte `pull-`Namen werden übergangsweise noch gelesen. Umsetzung von T-20260830-425388998 nach Nutzerentscheid vom 2026-09-11 (kleinster Schnitt: nur STATE, CALL und Verfall).
 
 ### 1.0.1 (2026-09-09)
 
