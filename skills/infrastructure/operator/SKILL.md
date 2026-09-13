@@ -19,6 +19,7 @@ category: infrastructure
 tags: [operator, teamleader, orchestrierung, delegation, plan, evidenz, checkpoint]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1053,
+  "file_count": 1054,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -481,6 +481,7 @@
     "skills/infrastructure/metacognitive-injectors/SKILL.zh.md",
     "skills/infrastructure/open-compute-bridge/SKILL.en.md",
     "skills/infrastructure/open-compute-bridge/SKILL.md",
+    "skills/infrastructure/operator/SKILL.md",
     "skills/infrastructure/orchestrator/SKILL.en.md",
     "skills/infrastructure/orchestrator/SKILL.es.md",
     "skills/infrastructure/orchestrator/SKILL.fr.md",
