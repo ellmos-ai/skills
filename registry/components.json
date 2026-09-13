@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 139,
+    "component_count": 141,
     "categories": {
       "assist": 20,
       "dev": 24,
@@ -13,7 +13,7 @@
       "research": 1,
       "therapy": 20,
       "third-party": 3,
-      "utilities": 27,
+      "utilities": 29,
       "web": 1
     }
   },
@@ -2134,6 +2134,34 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "skill:utilities:decision-draw",
+      "name": "decision-draw",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/decision-draw/SKILL.md",
+      "version": "1.0.1",
+      "status": "active",
+      "description": "Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden, prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten. Zeigt, wie die Teilsysteme nach der Umsetzung konkret ineinandergreifen, statt den Nutzer durch Dutzende isolierte Einzelfragen zu zwingen. Der Nutzer nimmt das Bild als Ganzes ab oder gibt zielgerichtete Korrekturen, die automatisch in Einzelentscheidungen übersetzt und über decision-briefing Phase 4 ins Register zurückgeschrieben werden. Nutze diesen Skill bei \"wie sieht das Ganze aus wenn wir allem zustimmen\", \"zeichne mir das Gesamtbild\", \"Gesamtkonzept der Entscheidungen\", \"decision draw\", /decision-draw, \"wie greifen die Systeme zusammen\". NICHT nutzen, wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht decide.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
+      "id": "skill:utilities:decision-path",
+      "name": "decision-path",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/decision-path/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Erzeugt aus einem Bestand offener und gefallener Entscheidungen einen strukturierten ASCII-Abhängigkeitsgraphen (maximal 100 Spalten) für das Terminal. Bewertet Knoten nach fünf festen Kriterien: sinnvoll, empfohlen, usertypisch (Richtung und decision-avatar-Konfidenz getrennt), zusammenpassend und widersprechend; Kanten tragen Beziehungstyp und Belegstatus. Deckt Blocker, Freischaltungen, Reihenfolgen und widersprüchliche Empfehlungen gnadenlos auf. Nutze diesen Skill bei \"welche Entscheidungen hängen voneinander ab\", \"Abhängigkeitsgraph der Entscheidungen\", \"Entscheidungspfad visualisieren\", \"Widersprüche zwischen Entscheidungen prüfen\", \"Reihenfolge der Beschlüsse\", /decision-path. NICHT nutzen, um Entscheidungen erst zu inventarisieren -- das macht decision-briefing; NICHT nutzen, um das empfohlene Gesamtkonzept zur Abnahme zu bündeln -- das macht decision-draw; NICHT für kompakte Fünfteiler- Einzelblöcke mit Optionen und Pro/Contra -- das macht decision-shot; NICHT für die Einzelfall-Erwägung mit Frameworks -- das macht decide.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {

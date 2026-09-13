@@ -50,6 +50,8 @@ Before starting any non-trivial task, first check if a local skill handles it be
 | Think through / analyze a problem | Thinking Tools | `/structured-thinking` (guides `/think` → `/brainstorm` → `/decide`) |
 | New ideas / creativity | Thinking Tools | `/brainstorm` (vs `/think` analysis, `/decide` selection) |
 | Decision stack | Thinking Tools | `/decision-briefing` |
+| Which decision depends on which / do recommendations contradict each other? | Thinking Tools | `decision-path` (`/decision-path`; ASCII dependency graph, decides nothing) |
+| Accept the recommended overall variant as ONE concept/implementation text | Thinking Tools | `decision-draw` (`/decision-draw`; accept as a whole, corrections -> individual decisions) |
 | Build or use an authorized user preference model | Multi-Agent | `build-your-users-mind` (build) · `decision-avatar` (runtime) |
 | Bug / test failure | Coding & Debugging | `/bugfix-protocol` (1 bug), `/bugsweep` (many, before release) |
 | New/existing project or pipeline | Project/Pipeline | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |

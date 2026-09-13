@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1054,
+  "file_count": 1058,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -882,6 +882,10 @@
     "skills/utilities/decision-briefing/ja/SKILL.md",
     "skills/utilities/decision-briefing/ru/SKILL.md",
     "skills/utilities/decision-briefing/zh/SKILL.md",
+    "skills/utilities/decision-draw/SKILL.en.md",
+    "skills/utilities/decision-draw/SKILL.md",
+    "skills/utilities/decision-path/SKILL.en.md",
+    "skills/utilities/decision-path/SKILL.md",
     "skills/utilities/decision-shot/SKILL.en.md",
     "skills/utilities/decision-shot/SKILL.md",
     "skills/utilities/document-chunker/SKILL.en.md",
