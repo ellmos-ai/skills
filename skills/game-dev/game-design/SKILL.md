@@ -138,3 +138,7 @@ Plattform-Wissen, das die Konzeptarbeit für Roblox erdet (keine Garantie, nur F
 ### 1.0.0 (2026-06-17)
 - Initiale Version. Generisches Rollen-/Workflow-Framework, destilliert aus `.ROBLOX/AGENT_ROLES.md`
   & `GUIDE.md`, nutzerneutral (ohne projektspezifisches Portfolio).
+
+## Verwandte Skills
+
+- `roblox-team-lock` — Datei-, Studio- und MCP-Claims, sobald mehrere Agenten am selben Projekt arbeiten. Erst lesen, dann claimen, dann arbeiten, dann freigeben.

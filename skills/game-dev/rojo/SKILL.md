@@ -190,3 +190,7 @@ sie für geteilten Client-State nutzt. Selene aus dem Verzeichnis mit der Roblox
 ### 1.0.0 (2026-06-17)
 - Initiale Version. Destilliert aus der `.ROBLOX`-Pipeline (ROJO_FAQ, ROJO_START, _template),
   nutzerneutral gefasst.
+
+## Verwandte Skills
+
+- `roblox-team-lock` — Datei-, Studio- und MCP-Claims, sobald mehrere Agenten am selben Projekt arbeiten. Erst lesen, dann claimen, dann arbeiten, dann freigeben.
