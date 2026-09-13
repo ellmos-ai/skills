@@ -18,7 +18,7 @@ Date: 2026-02-20
 """
 
 import re
-from typing import List, Dict
+from typing import Dict, List
 
 
 class DocumentChunker:
@@ -183,7 +183,7 @@ if __name__ == "__main__":
         files = list(target.rglob("*.md")) + list(target.rglob("*.txt")) + list(target.rglob("*.py"))
         chunks = chunk_corpus([str(f) for f in files], source=target.name)
         print(f"{len(chunks)} Chunks aus {len(files)} Dateien:")
-        print(f"  Chunk-Size: 400 tokens, Overlap: 80 tokens")
+        print("  Chunk-Size: 400 tokens, Overlap: 80 tokens")
         print(f"  Gesamt-Text: {sum(c['tokens'] for c in chunks)} tokens")
 
     else:

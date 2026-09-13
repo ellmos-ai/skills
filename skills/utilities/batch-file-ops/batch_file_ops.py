@@ -22,10 +22,10 @@ __version__ = "1.0.0"
 __author__ = "Lukas Geiger"
 
 import argparse
-import sys
 import io
-from pathlib import Path
 import shutil
+import sys
+from pathlib import Path
 
 # Windows Console UTF-8 Fix
 if sys.platform == 'win32':

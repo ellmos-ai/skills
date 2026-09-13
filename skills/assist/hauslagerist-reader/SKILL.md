@@ -15,6 +15,7 @@ category: assist
 tags: [inventory, export, stock, analysis]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

@@ -22,6 +22,7 @@ category: therapy
 tags: [therapie, beratung, umbrella, meta, routing]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

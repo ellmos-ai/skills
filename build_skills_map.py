@@ -8,7 +8,6 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-
 REPOSITORY_ROOT = Path(__file__).resolve().parent
 REGISTRY_PATH = REPOSITORY_ROOT / "registry" / "components.json"
 OUTPUT_PATH = REPOSITORY_ROOT / "SKILLS-MAP.md"

@@ -14,6 +14,7 @@ category: utilities
 tags: [policy, ethics, law, impact-assessment, future-generations]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

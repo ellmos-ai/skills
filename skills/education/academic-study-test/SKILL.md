@@ -14,6 +14,7 @@ tags: [academic, test-preparation, mock-exams, self-testing]
 aliases: [academic-study-test, academic-study-test-de]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">

@@ -1,0 +1,6 @@
+{
+  "_hinweis": "Vorlage fuer die user-usecases.json eines produzierten Skills. Formgleich zu skill-creator's evals/evals.json (id/prompt/expected_output/expectations), damit dieselbe Eval-/Grading-Maschinerie spaeter darueber laufen kann -- hier stehen aber vom NUTZER vorgebrachte Faelle, nicht vom Skill-Autor entworfene Testfaelle. Schema: schemas/user-usecases-v1.schema.json im .SKILLS-Repo.",
+  "schema": "ellmos.user-usecases.v1",
+  "skill_name": "{{skill-name}}",
+  "usecases": []
+}

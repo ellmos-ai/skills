@@ -6,9 +6,9 @@ und liefert die Top-Ergebnisse als strukturiertes Resultat.
 Entspricht dem "Schnell-Recherche (5 Min)" Workflow aus BACH.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ..sources.base import Article, SearchResult, Source
 

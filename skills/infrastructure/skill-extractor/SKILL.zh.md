@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-08-31
 description: 从对话历史（当前会话或转录文件）中提取可复用的技能 — 或者改进非常相似的现有技能，而不是创建重复项。在出现“将其做成技能”、“我们应该将其记录为技能”、“从这些/旧对话历史中提取技能”、“使这种工作方式可复用”或使用 `/skill-extract` 时使用此技能。还涵盖针对许多旧转录的大批量运行（通过子 Agent 进行数据缩减）。对于重复发生的自动化任务（Cron/Schedule/Loop），请改用姐妹技能 workflow-extract。
 standalone: true
 anthropic_compatible: true
@@ -138,6 +138,9 @@ mach daraus einen Skill."
 - `swarm-operations` — 用于批量模式的蜂群模式。
 
 ## 变更日志
+
+### 1.1.0 (2026-08-31)
+- 新增面向 Claude Code JSONL 的确定性、数据最小化站点分段脚本。
 
 ### 1.0.0 (2026-07-03)
 - 初始版本。源于将 Codex 自动化和对话历史系统地抽象为 Skill 的任务。

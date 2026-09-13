@@ -1,0 +1,8 @@
+{
+  "_hinweis": "Vorlage fuer usecase-gaps.json. ABGELEITETE Datei -- gaps[].user_usecase_id/eval_id verweisen auf user-usecases.json/evals/evals.json, statt deren Inhalt zu kopieren. Schema: schemas/usecase-gaps-v1.schema.json im .SKILLS-Repo.",
+  "schema": "ellmos.usecase-gaps.v1",
+  "skill_name": "{{skill-name}}",
+  "geprueft_am": null,
+  "abdeckungsgrad": null,
+  "gaps": []
+}

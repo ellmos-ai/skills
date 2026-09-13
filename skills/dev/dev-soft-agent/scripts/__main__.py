@@ -10,8 +10,8 @@ Usage:
     python -m devSoftAgent status
 """
 
-import sys
 import io
+import sys
 
 if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(
@@ -22,8 +22,9 @@ if sys.platform == "win32":
 def main() -> None:
     import argparse
     from pathlib import Path
-    from .dev_loop import DevLoop
+
     from .config import Config
+    from .dev_loop import DevLoop
 
     parser = argparse.ArgumentParser(
         description="devSoftAgent -- Software Development Pipeline"

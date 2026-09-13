@@ -11,15 +11,20 @@
 
 # ellmos skills
 
-**Dokumentation in sechs Sprachen** · [Maschinenlesbarer Kontext](llms.txt)
+**Dokumentation in sechs Sprachen** · [Maschinenlesbarer Kontext](llms.txt) · **🗺️ [Skill-Bibliothek online durchstöbern](https://ellmos-ai.github.io/skills.html)** — jeden öffentlichen Skill im Browser lesen und kopieren
 
-> Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH und andere lokal-first LLM-Agentenlaufzeiten.
+> Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH, AGY/Gemini und andere lokal-first LLM-Agentenlaufzeiten.
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 86 passed](https://img.shields.io/badge/Pytest-86%20bestanden-success.svg)](testing/)
+[![Pytest: 291 bestanden](https://img.shields.io/badge/Pytest-291%20bestanden%20(186%20Subtests)-success.svg)](testing/)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
+[![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Skills: 120 getrackt](https://img.shields.io/badge/Skills-120%20getrackt-brightgreen.svg)](SKILLS-MAP.md)
+[![Öffentliche Skills: 138 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-138%20Katalog-brightgreen.svg)](registry/components.json)
+[![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -31,7 +36,7 @@
 > Forks und Spiegel werden **nicht** automatisch aktualisiert und können viele Commits
 > zurückliegen — prüfe dort, bevor du dich auf Inhalte hier verlässt.
 
-**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+**Schnelleinstieg:** [Einstieg](#einstieg) · [Besondere Skills](#besondere-skills) · [Skills](skills/) · [Karte aller Skills](SKILLS-MAP.md) · [Sicherheitsrichtlinie](SECURITY.md) · [Konventionen](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
@@ -39,21 +44,64 @@ Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems
 
 ```mermaid
 flowchart TD
-    Catalog["Öffentliche Registry (120 getrackte Skills)"] --> Categories
-    subgraph Categories ["10 Öffentliche Kategorien"]
+    Registry["Öffentliche Skill-Registry (138 Katalog / 380 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
+    
+    subgraph Catalog ["11 Öffentliche Domänen"]
         Assist["assist (20)"]
-        Dev["dev (19)"]
+        Dev["dev (24)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (25)"]
+        Infra["infrastructure (31)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
-        Utils["utilities (23)"]
+        ThirdParty["third-party (3)"]
+        Utils["utilities (27)"]
         Web["web (1)"]
     end
-    Categories --> Specs["SKILL.md (YAML-Frontmatter + Playbooks)"]
-    Specs --> Runtimes["LLM-Laufzeiten (Claude Code / Codex / AGY / BACH)"]
+    
+    Engine --> Catalog
+    Catalog --> Artifacts["SKILL.md Spezifikationen<br/>(YAML-Frontmatter + Playbooks + Skripte)"]
+    
+    subgraph MultiAgentRuntimes ["Multi-Agenten-Ausführungsarchitektur"]
+        ClaudeCode["Claude Code (~/.claude/skills)"]
+        Codex["Codex (~/.codex/skills)"]
+        AGY["Antigravity / Gemini"]
+        BACH["BACH Text-OS"]
+        LocalOllama["Ollama / Lokales LLM"]
+    end
+    
+    Artifacts --> MultiAgentRuntimes
+    
+    subgraph QualityGates ["Qualitäts- & Integritäts-Gates"]
+        STests["S-Tests (Statische Validierung)"]
+        LTests["L-Tests (LLM-Selbsterfahrung)"]
+        UTests["U-Tests (Nutzererfahrung)"]
+        PytestSuite["Pytest Testsuite (272 bestanden / 186 Subtests)"]
+    end
+    
+    Artifacts -.-> QualityGates
+```
+
+## Multi-Agenten Skill-Discovery & Ausführungslebenszyklus
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Operator as "Agent / Entwickler"
+    participant Dispatcher as "ellmos Skill Engine"
+    participant Registry as "Öffentlicher Katalog"
+    participant Gate as "Privacy- und Integritäts-Gate"
+    participant Runtime as "Ziel-Agent (Claude, Codex, AGY, BACH)"
+
+    Operator->>Dispatcher: Skill nach Domäne oder ID abfragen (dev/pipeline-optimizer)
+    Dispatcher->>Registry: Metadaten, Schema-Version und Abhängigkeiten auflösen
+    Registry-->>Dispatcher: Kategorie, Frontmatter-Spezifikation und Dateipfad zurückgeben
+    Dispatcher->>Gate: Privacy- und Non-Elevation-Grenzprüfung ausführen
+    Gate-->>Dispatcher: Grenze verifiziert (Zero-Egress und User-Mode sauber)
+    Dispatcher->>Runtime: SKILL.md und Kontext-Playbooks im Agenten-Workspace bereitstellen
+    Runtime->>Runtime: Strukturierte Workflow-Schritte deterministisch ausführen
+    Runtime-->>Operator: Artefakt, Verifikationslog und Statusquittung übergeben
 ```
 
 ## Einstieg
@@ -64,6 +112,7 @@ flowchart TD
 | Baumkarte aller getrackten Skills ansehen | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
 | Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
+| Sicherheitsrichtlinie & Boundary-Garantien | [`SECURITY.md`](SECURITY.md) |
 | Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
 | Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
 | Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
@@ -71,19 +120,20 @@ flowchart TD
 
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 385 getrackte Laufzeit-Skills:
+Der aktuelle öffentliche Katalog enthält 138 öffentliche Laufzeit-Skills (380 getrackt über lokale Testsuiten):
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | Nutzerneutrale Methoden für Büroarbeit, Notizen, Haushalt, Kontakte, Gesundheitsinformationen, Medien- und Bestandslisten, Sprachworkflows, Reisen, Wetter, Kalender und Transkription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 19 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung, Arbeitsblätter sowie nutzerneutrale Unterrichts- und Förderplanung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 25 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 31 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 23 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| `third-party` | 3 | Kuratierte externe Skills, die unter geprüften Lizenzen weitergegeben werden |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 27 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
 ## Besondere Skills
@@ -109,10 +159,10 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Verweis-Skill auf das eigenständige Modul `ellmos-ai/worksheet-generator`: erzeugt individualisierte Arbeitsblätter aus Förderziel, Niveau und Alter für pädagogische/therapeutische Fachkräfte, ICF-Referenz bring-your-own — Material-Generator, kein Therapieprogramm. |
 | <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | In sich geschlossener Workflow für wissenschaftliche Literatur rund um PubMed und arXiv (reine Python-Stdlib) — macht aus wilder Paper-Suche einen wiederholbaren, quellengestützten Recherche-Durchlauf, voll portabel ohne das ellmos-Ökosystem. |
 | <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Entdeckt Anbieter- und App-Klassen-Flächen und plant nutzergewählte Wahrheits-Topologien für MCPs, Skills und Regeldateien. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Anbieterneutrale Boot-Brücke: entdeckt Regel-Flächen und erzeugt Loader aus einer vom Nutzer gewählten einzelnen oder geordneten mehrteiligen Wahrheit. |
-| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
-| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
-| [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Öffentlicher, nutzerneutraler Verweis zum Aufbau eines autorisierten empirischen Präferenzmodells; persönliche Profile und Belege bleiben privat. |
+| <img src="assets/icons/agents-bridge.svg" width="20" height="20" alt=""> [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Portable anbieterneutrale Dateibrücke: erfasst explizite Boot-/Wahrheitsgraphen, getrennte Memory-Silos, Messenger, Presence und Locks und kann ein datenschutzgeprüftes Instanzpaket planen, wiederherstellen, prüfen oder zurückrollen. |
+| <img src="assets/icons/automation-self-care.svg" width="20" height="20" alt=""> [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Baut ein anbieterneutrales Pflege-Core-Set für geplante LLM-Aufgaben und Desktop-App-Automationen mit nativem Readback, Rollback und systemübergreifender Abdeckung. |
+| <img src="assets/icons/semantic-persona-routing.svg" width="20" height="20" alt=""> [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Routet Anfragen über koordinierende Rollen, Experten und verifizierte Live-Skill-Endpunkte und trennt Persona-Overlays von Fähigkeiten und Rechten. |
+| <img src="assets/icons/build-your-users-mind.svg" width="20" height="20" alt=""> [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.md) | Öffentlicher, nutzerneutraler Verweis zum Aufbau eines autorisierten empirischen Präferenzmodells; persönliche Profile und Belege bleiben privat. |
 | <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Eigenständige Entwicklungs-Automatisierungs-Pipeline (Code-Analyse, Task-Engine, Policies, Prompt-Templates) in Zero-Dependency-Python — ein vollständiger Dev-Agent-Workflow ohne externe Dienste. |
 | <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Entfernt KI-Spuren und Chat-Reste aus fertigen Texten und behandelt KI-Disclosure-Stufen — hält publizierte Dokumente frei von LLM-Artefakten. |
 | <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Eigenständige Mehrtechniken-Methodik, um Ideen aus festgefahrenen Problemen zu schürfen — die strukturierte Alternative zum freien Brainstorming, wenn ein Projekt feststeckt. |
@@ -121,6 +171,23 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/ai-portable-setup.svg" width="20" height="20" alt=""> [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | Erstellt eine portable Offline-KI-Arbeitsumgebung auf USB-Stick oder beliebigem Laufwerk: lokale LLM-Modelle und RAG-Pipeline, ganz ohne Cloud. |
 | <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | Bewerbungsunterstützung von A bis Z: Stellenanzeigen-Analyse, CV-/LinkedIn-Optimierung, Anschreiben, plus DB-/Ordner-gespeister ASCII-Lebenslauf-Generator. |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`-Kollektion](skills/therapy/) | Die 19-teilige Therapie-Familie (Flaggschiffe: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.md)) — evidenzzitierte, zweisprachige, ethik-gegatete Psychoedukations- und Gesprächsführungs-Playbooks; der tiefste zusammenhängende Block der Bibliothek. |
+| <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.md) | Operationalisierte Verfassungs-Superposition ('Position der Ungeborenen'): räumt künftigen und ungeborenen Generationen über einen algorithmischen Rawls-Schleier und eine 5-CORE-Prüfarchitektur mit Gegenfaktual-Pflicht ein formales Veto-Recht gegen kurzfristige Gegenwartsoptimierungen ein. |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | Beweisbasierte Nicht-Abbruch-Prüfkette (WAAFAP) gegen Agentic Laziness: invertiert die Abbruchbedingung autonomer Schleifen – Beenden erfordert den formalen, falsifizierbaren Nachweis der Aufgabenabwesenheit ('Quit requires Proof of Inactivity'). |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | Zero-State Privacy-Hosting-Muster (Huckepack-Hosting): betreibt relationale SQLite-Datenbanken via SQLite-WASM/OPFS direkt im Browser des Besuchers mit clientseitigem BYOK – eliminiert Server-Datenbanken, Benutzerkonten und DSGVO-Haftung konstruktiv. |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | Bidirektionale UI-Text/Prompt-Synthese ('Der Klick ist der Prompt'): typisiertes ASCII-Blueprint mit 4D-Feldlegende, das Benutzeroberflächen und Agenten-Instruktionen buildfrei und dauerhaft synchron hält. |
+| <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.md) | Neuropsychologische exekutive Kontrollfunktionen (Miyake-Inhibition, Arbeitsgedächtnis-Puffer, Mental Rehearsal) als Preflight-Checks vor Mutationen zur Unterdrückung von Sycophancy und vorzeitigem Beenden. |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | Deterministische, modellfreie Regelkompression: kürzt große Markdown-Regel- und Gedächtnisdateien um bis zu 40 % Token-Volumen ohne LLM-Inferenz, Halluzinationen oder semantischen Drift. |
+| <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.md) | Universelle nautische Navigationsmetriken (Nordstern-Peilung, Koppelnavigation) für desorientierte Agenten: Heuristiken zur Selbstorientierung und Zustandswiederherstellung bei Kontextdrift oder Schleifen. |
+| <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.md) | Deklarative Condition-Gate-Sprache für Prompts: übersetzt Vorbedingungen, Meilensteine und Reihenfolgen in prüfbare Fail-Closed-Gates direkt in Standard-Markdown. |
+| <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.md) | Preflight-Bootloader für hooklose CLI-Agenten: injiziert Governance-Regeln, Gedächtnis-Traversierung und selbstheilende Kontextanreicherung vor dem ersten Turn ohne native JSON-Lifecycle-Hooks. |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | Sitzungsgebundene Funkstelle über gemeinsam synchronisierte Ordner: trennt asymmetrische Rollen (`ListenSync`-Hörer vs. `WriteSync`-Sender) für brokerlose Multi-Agenten-Koordination ohne Server. |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | Session-Vertragsverhandlung vor Multi-Agenten-Programmen: legt Orchestrierungs-Topologie, Parallelität, Modellslots und Eskalationsschwellen vor Arbeitsbeginn verbindlich fest. |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | Reißverschluss-Merge-Verfahren für hochgradig divergente Branches: abschnittsweiser Abgleich per Entscheidungstabelle mit Absichtsrekonstruktion ('Rebuild statt Merge') als letzter Eskalationsstufe. |
+| <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.md) | Evolutionäre Datei- und Modulumbenennung mit temporären Wrappern und MOVED-Stubs: verhindert Migrationsbrüche in Agentenflotten, während sich Verweise organisch durch reale Nutzung aktualisieren. |
+| <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.md) | Taxonomischer 2x2-Pipeline-Kompass (Greenfield vs. Brownfield x Projekt vs. Pipeline): verhindert den Scaffolding-Bias von Sprachmodellen und leitet zielsicher zum passenden Bootstrapper oder Renovierer. |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | Deterministischer 3-Rollen-Sessionabschluss (Tasksolver, Writer, Maintainer): löst offene Registerpunkte ohne neue Agenden, zieht Doku auf den gemessenen Ist-Stand nach und archiviert Strays reversibel nach dem Papierkorb-Prinzip. |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Asynchrones Reißverschluss-Pipelining im Human-in-the-Loop: während der Nutzer Objekt N testet, startet der Agent bereits Objekt N+1 und delegiert Reparaturen für N-1, statt blockierend zu warten. |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantische Dateisystembereinigung nach dem Cut-and-Clue-Prinzip: trennt aktive von historischen Inhalten mit maschinenlesbaren Zeigern am Ursprungsort unter Erhalt aller Taxonomien und Prüf-Logs. |
 
 ## Grenze zwischen öffentlichem Kern und privaten Profilen
 
@@ -149,6 +216,13 @@ weiterveröffentlicht. Die öffentliche
 reduzierter Discovery-Index. Interne Herkunftsbewertungen,
 Privacy-Klassifizierungen und die vollständige Maintainer-Registry bleiben in
 einem getrennten No-Push-Repository.
+
+Sowohl [`registry/components.json`](registry/components.json) als auch
+[`SKILLS-MAP.md`](SKILLS-MAP.md) sind **generiert**. Nach jeder Änderung unter
+`skills/` beide Generatoren ausführen (`python build_public_registry.py`,
+`python build_skills_map.py`), den Diff prüfen und committen. Nichts wird still
+neu erzeugt: Der CI-Schritt `Check public catalog outputs` und die pre-commit-Hooks
+`public-registry-current` / `skills-map-current` schlagen bei veraltetem Katalog laut fehl.
 
 ## Education-Skills
 
@@ -231,15 +305,18 @@ Dieses Repository ist relevant für Suchbegriffe wie:
 
 Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden. Es handelt sich um einen wiederverwendbaren Skill-Katalog, nicht um einen MCP-Server, einen gehosteten SaaS-Marktplatz, ein Prompt-Pack oder einen privaten Skill-Installer.
 
-## Verwandte ellmos-Projekte
+## Ökosystem & Geschwister-Projekte
 
-| Projekt | Rolle |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | Vollständiges textbasiertes LLM-Betriebssystem |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Leichte lokal-first LLM-Agenteninfrastruktur |
-| [USMC](https://github.com/ellmos-ai/usmc) | Gemeinsamer Speicherbaustein für Agentensysteme |
-| [Gardener](https://github.com/ellmos-ai/gardener) | Datenbankbasierter Betriebssystem-Gegenpart |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | Framework zur Ausführung von LLM-Ketten |
+| Projekt | Organisation | Rolle |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Vollständiges textbasiertes LLM-Betriebssystem |
+| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Kern-Laufzeitprimitive und Ausführungsplattform |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Zentrales Werkzeug- und Profil-Gateway MCP-Server |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Agentenflotten-Komposition und Systemexploration |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Transaktionaler Workflow-Hook-Dispatcher |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Offline-First Transitsynchronisation & Snapshot-Retention |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop-Entwickler-Workstation-Suite |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Mehrsprachiger Code-Editor & Sandbox-Umgebung |
 
 ## Lizenz
 

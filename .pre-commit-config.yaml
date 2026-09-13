@@ -1,9 +1,34 @@
 repos:
   - repo: local
     hooks:
+      # T-20260912-382792744: bis 2026-09-12 war der gesamte skills/-Baum vom Lint
+      # ausgenommen, und nur die CI lintete ueberhaupt. Dieser Hook zeigt denselben
+      # Befund vor dem Push statt danach. --force-exclude ist noetig, weil ruff die
+      # exclude-Liste sonst ignoriert, sobald pre-commit Dateien namentlich uebergibt
+      # (dann wuerden _archive/ und _templates/ mitgelintet).
+      - id: ruff-lint
+        name: Lint Python with ruff
+        entry: python -m ruff check --force-exclude
+        language: system
+        types: [python]
       - id: skill-static-s-tests
         name: Validate changed skill frontmatter and static quality
         entry: python testing/skill_tester.py batch --type static --ci
         language: system
         files: ^skills/.+/SKILL\.md$
         types: [text]
+      # Fail-loud catalog guard (T-20260903-333546285): the generated public catalog
+      # must be current whenever skill sources or the generators change. It never
+      # regenerates by itself - run the two build_*.py scripts, review, commit.
+      - id: public-registry-current
+        name: Public registry (registry/components.json) is current
+        entry: python build_public_registry.py --check
+        language: system
+        pass_filenames: false
+        files: ^(skills/.+/SKILL\.md|build_public_registry\.py|registry/.+\.json)$
+      - id: skills-map-current
+        name: Skills map (SKILLS-MAP.md) is current
+        entry: python build_skills_map.py --check
+        language: system
+        pass_filenames: false
+        files: ^(skills/.+/SKILL\.md|build_skills_map\.py|registry/components\.json|SKILLS-MAP\.md)$

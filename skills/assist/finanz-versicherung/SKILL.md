@@ -15,6 +15,7 @@ category: assist
 tags: [finance, insurance, documents, checklist]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

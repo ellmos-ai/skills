@@ -14,6 +14,7 @@ category: dev
 tags: [release, privacy, license, repository, publication]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: [git]
   services: []

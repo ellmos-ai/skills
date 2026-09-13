@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/known-providers-v1.schema.json",
+  "title": ".SKILLS known-providers-and-abilities v1",
+  "description": "Katalog der fuer eine Skill-Rolle bekannten Anbieter/Faehigkeiten (State-of-the-Art, Ersatzanbieter, eigene ellmos-Komponenten -- gleichrangig gelistet). Felder an das etablierte A2A-Protokoll (Agent2Agent, AgentSkill: id/name/description/tags) angelehnt statt eigenes Vokabular zu erfinden -- siehe VENDOR-AWARENESS.md. Getrennt von connections.json: hier steht der KANDIDATENRAUM (bekannt, ob genutzt oder nicht), dort der TATSAECHLICH AUFGELOESTE Zustand (grounding-seed LocalStore).",
+  "type": "object",
+  "required": ["schema", "rolle", "anbieter"],
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "const": "ellmos.known-providers.v1"
+    },
+    "rolle": {
+      "type": "string",
+      "description": "Die Faehigkeits-Rolle, fuer die Anbieter gesammelt werden, z.B. 'text-zu-sprache'."
+    },
+    "letzte_recherche": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "anbieter": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kategorie"],
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "kategorie": {
+            "type": "string",
+            "enum": ["state-of-the-art", "ersatzanbieter", "ellmos-komponente", "sonstige"]
+          },
+          "ellmos_komponente": {
+            "type": "boolean",
+            "default": false
+          },
+          "installiert": {
+            "type": ["boolean", "null"],
+            "description": "Aus grounding_seed.scan.scan_resources() abgeleitet, falls geprueft -- sonst null (ungeprueft, nicht 'nein')."
+          }
+        }
+      }
+    }
+  }
+}

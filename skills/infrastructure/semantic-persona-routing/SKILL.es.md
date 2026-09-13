@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   Construye y utiliza un gráfico de enrutamiento semántico neutral respecto al proveedor a partir de personas,
   roles de coordinación, expertos y puntos de enlace de habilidades (skills) en vivo. Utilícelo cuando un LLM deba
@@ -19,7 +19,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: es
 status: active
 dependencies:
@@ -74,7 +74,39 @@ El generador comprende campos comunes de `SKILL.md` como `type`, `orchestrates.e
 
 No promueva automáticamente los `candidate_skills`. Confíermelos primero frente a un resolvedor de habilidades en vivo o metadatos de origen.
 
+## Crear y guardar personas
+
+El núcleo construye mapas; nunca inventa personas. Para usar las tuyas,
+guárdalas **junto al skill** y reconstruye el mapa: `personas/<persona-id>.md`
+(un archivo por persona), `roles/<rol>/SKILL.md` (roles coordinadores y
+expertos), `routing-map.json` (mapa generado) y `config.json` (local al host,
+nunca publicado). El constructor lee roles solo de archivos `SKILL.md` y
+personas de cualquier Markdown con frontmatter. Copia
+[templates/persona.template.md](templates/persona.template.md) y completa el
+contrato: `name` y `type: persona`; `persona.display_name`, `short_name`,
+`gender`, `role`, `default_prompt`; `parent_agents` (roles coordinadores);
+`skills` (**nombres de skills, nunca rutas**; solo estos se resuelven a
+endpoints); `optional_skills` (skills ligados al host; si faltan, quedan como
+`GAP` visible). Una persona nunca otorga herramientas ni permisos y nunca
+anula reglas de seguridad, bloqueos o decisiones del usuario.
+
+**Rutas:** el skill no nombra rutas del host. `config.example.json` muestra el
+patrón (`ellmos.skill-config.v1`, `einstellungen.paths` con marcadores como
+`<HOME>/<ONEDRIVE>/<TOPICS>`); la copia local es `config.json`, se conserva
+al desplegar y nunca se versiona.
+
+**Catálogo limpio:** `--skills-layout catalog` acepta solo
+`<categoría>/<nombre>/SKILL.md` y omite directorios con prefijo `_`
+(`_archive`, `_reference`, `_templates`), evitando issues
+`duplicate-skill-id` por copias archivadas o de referencia.
+
 ## Enrutar una solicitud
+
+### 0. Ofrecer las personas existentes
+
+Si hay personas junto al skill (`personas/`), enuméralas al invocar con nombre,
+rol y skills y enruta a la adecuada; si la solicitud no nombra ninguna, elígela
+en el paso 4. El formato del comprobante de ruta no cambia.
 
 ### 1. Seleccionar semánticamente el rol coordinador
 
@@ -131,6 +163,13 @@ Solicitud: "Organiza mis recibos y prepara el resumen del año fiscal."
 El enrutador selecciona un coordinador de oficina, luego al experto fiscal, resuelve la habilidad fiscal instalada y finalmente aplica una persona fiscal meticulosa vinculada explícitamente. Si el experto fiscal existe pero no hay ninguna habilidad fiscal portable instalada, informe `GAP` y continúe únicamente mediante una alternativa (fallback) configurada explícitamente.
 
 ## Historial de cambios (Changelog)
+
+### 1.1.0 (2026-09-03)
+
+- Crear y guardar personas: convención de almacenamiento junto al skill,
+  contrato de frontmatter, plantilla neutral `templates/persona.template.md`,
+  convención de rutas con `config.example.json`, comportamiento de invocación y
+  `--skills-layout catalog` contra ids de skill duplicados.
 
 ### 1.0.0 (2026-07-28)
 

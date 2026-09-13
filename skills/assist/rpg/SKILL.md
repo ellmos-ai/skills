@@ -15,6 +15,7 @@ category: assist
 tags: [rpg, tabletop, campaign, storytelling]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

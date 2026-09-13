@@ -22,6 +22,7 @@ category: dev
 tags: [projekt, pipeline, bootstrap, umbau, umbrella, meta, routing]
 language: de
 status: active
+visibility: public
 
 dependencies:
   tools: []

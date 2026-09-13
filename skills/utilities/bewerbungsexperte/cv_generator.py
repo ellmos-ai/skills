@@ -34,13 +34,12 @@ __version__ = "1.1.0"
 __author__ = "BACH Team / ellmos (standalone port)"
 
 import argparse
-import os
 import re
 import sqlite3
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # ---------------------------------------------------------------------------
 # CV-Generator-Klasse

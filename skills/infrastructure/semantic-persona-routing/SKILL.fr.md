@@ -1,17 +1,17 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: [Français] Compétence d'agent pour semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: fr
 status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
@@ -69,7 +69,40 @@ format.
 Do not automatically promote `candidate_skills`. Confirm them against a live skill
 resolver or source metadata first.
 
+## Créer et ranger des personas
+
+Le noyau construit des cartes ; il n'invente jamais de personas. Pour utiliser
+les vôtres, rangez-les **à côté du skill** et reconstruisez la carte :
+`personas/<persona-id>.md` (un fichier par persona), `roles/<role>/SKILL.md`
+(rôles coordinateurs et experts), `routing-map.json` (carte générée) et
+`config.json` (local à l'hôte, jamais publié). Le constructeur lit les rôles
+uniquement dans des `SKILL.md` et les personas dans tout Markdown avec
+frontmatter. Copiez [templates/persona.template.md](templates/persona.template.md)
+et remplissez le contrat : `name` et `type: persona` ; `persona.display_name`,
+`short_name`, `gender`, `role`, `default_prompt` ; `parent_agents` (rôles
+coordinateurs) ; `skills` (**noms de skills, jamais des chemins** ; seuls
+ceux-ci sont résolus en endpoints) ; `optional_skills` (skills liés à l'hôte ;
+absents, ils restent un `GAP` visible). Un persona n'accorde ni outils ni
+droits et ne remplace jamais les règles de sécurité, les verrous ou les
+décisions de l'utilisateur.
+
+**Chemins :** le skill ne nomme aucun chemin d'hôte. `config.example.json`
+montre le modèle (`ellmos.skill-config.v1`, `einstellungen.paths` avec des
+espaces réservés comme `<HOME>/<ONEDRIVE>/<TOPICS>`) ; la copie locale est
+`config.json`, conservée au déploiement et jamais versionnée.
+
+**Catalogue propre :** `--skills-layout catalog` n'accepte que
+`<catégorie>/<nom>/SKILL.md` et ignore les dossiers préfixés par `_`
+(`_archive`, `_reference`, `_templates`), ce qui supprime les issues
+`duplicate-skill-id` dues aux copies archivées ou de référence.
+
 ## Route a request
+
+### 0. Proposer les personas existants
+
+Si des personas se trouvent à côté du skill (`personas/`), listez-les à l'appel
+avec nom, rôle et skills et routez vers le bon ; si la demande n'en nomme
+aucun, choisissez-le à l'étape 4. Le format du reçu de route reste inchangé.
 
 ### 1. Select the coordinator role semantically
 
@@ -143,6 +176,13 @@ persona. If the tax expert exists but no portable tax skill is installed, report
 `GAP` and continue only through an explicitly configured fallback.
 
 ## Journal des Modifications
+
+### 1.1.0 (2026-09-03)
+
+- Créer et ranger des personas : convention de rangement à côté du skill,
+  contrat frontmatter, modèle neutre `templates/persona.template.md`, convention
+  de chemins avec `config.example.json`, comportement à l'appel et
+  `--skills-layout catalog` contre les identifiants de skill en double.
 
 ### 1.0.0 (2026-07-28)
 

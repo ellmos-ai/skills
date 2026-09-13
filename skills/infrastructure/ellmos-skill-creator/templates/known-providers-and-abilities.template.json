@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Vorlage fuer known-providers-and-abilities.json. Kandidatenraum je Rolle (State-of-the-Art, Ersatzanbieter, ellmos-eigene Komponente -- gleichrangig gelistet, siehe references/VENDOR-AWARENESS.md). Feldnamen an A2A/AgentSkill (id/name/description/tags) angelehnt statt eigenes Vokabular. Schema: schemas/known-providers-v1.schema.json im .SKILLS-Repo.",
+  "schema": "ellmos.known-providers.v1",
+  "rolle": "{{rollen-name, z.B. text-zu-sprache}}",
+  "letzte_recherche": null,
+  "anbieter": []
+}

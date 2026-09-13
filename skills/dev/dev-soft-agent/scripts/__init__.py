@@ -18,11 +18,11 @@ Author: Lukas Geiger
 License: MIT
 """
 
-from .dev_loop import DevLoop, SessionResult
-from .config import Config
-from .project_manager import ProjectManager, Project
-from .task_engine import TaskEngine, Task, TaskStatus, TaskType
 from .code_analyzer import CodeAnalyzer, ProjectAnalysis
+from .config import Config
+from .dev_loop import DevLoop, SessionResult
+from .project_manager import Project, ProjectManager
+from .task_engine import Task, TaskEngine, TaskStatus, TaskType
 
 __version__ = "0.1.0"
 __all__ = [

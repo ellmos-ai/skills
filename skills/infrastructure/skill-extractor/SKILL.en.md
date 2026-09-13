@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-08-31
 description: Extracts a reusable skill from a chat history (current session or transcript files) — or improves a closely matching existing skill instead of creating a duplicate. Use this skill when asked "make a skill out of this", "we should capture this as a skill", "extract skills from this/old chat histories", "make this workflow reusable", or on `/skill-extract`. Also covers bulk runs over many old transcripts (with data reduction via subagents). For recurring AUTOMATIONS (cron/schedule/loop), use the sister skill workflow-extract instead.
 standalone: true
 anthropic_compatible: true
@@ -43,6 +43,10 @@ Three input formats:
 | **Current Session** | Use conversation context directly — no files needed |
 | **Individual Transcripts** | Read files; locations and parsing: `transcript-quellen.md` |
 | **Bulk (many old histories)** | First data reduction via subagents, then extraction: section "Bulk Mode" |
+
+For Claude Code JSONL, run `scripts/segment_stations.py` first. It creates deterministic
+stations between report boundaries without copying chat text or tool parameters into the
+output. See `transcript-quellen.md` for markers, options, and the output contract.
 
 ### 2. Identify What Is Worth Extracting
 
@@ -138,6 +142,9 @@ mach daraus einen Skill."
 - `swarm-operations` — swarm pattern for bulk mode.
 
 ## Changelog
+
+### 1.1.0 (2026-08-31)
+- Added a deterministic, data-minimizing station segmenter for Claude Code JSONL.
 
 ### 1.0.0 (2026-07-03)
 - Initial version. Created from the assignment to systematically abstract Codex automations and chat histories into skills.

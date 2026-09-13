@@ -1,0 +1,109 @@
+{
+  "": "../schemas/station-skill-mask-v1.schema.json",
+  "schema": "ellmos.station-skill-mask.v1",
+  "skill_name": "transkript-station-analyzer",
+  "titel": "Transkript-Stationen-Analyse und Workflow-Ernte",
+  "stationsfolge": {
+    "session_id": "sess-2026-08-31-01",
+    "station_ids": [
+      "st-01",
+      "st-02",
+      "st-03"
+    ],
+    "station_count": 3,
+    "zeitfenster": {
+      "start_zeit": "2026-08-31T09:00:00Z",
+      "end_zeit": "2026-08-31T09:45:00Z"
+    }
+  },
+  "ausloeser": {
+    "beschreibung": "Nutzer moechte aus einem langen Chat-Transkript wiederkehrende Workflows extrahieren.",
+    "quellen_prompt_ids": [
+      "turn-01-SP",
+      "turn-05-NT"
+    ]
+  },
+  "ziel": {
+    "beschreibung": "Deterministische Segmentierung in Stationen, Heuristik-Bewertung und strukturierte JSON-Masken-Generierung.",
+    "quellen_prompt_ids": [
+      "turn-01-SP",
+      "turn-08-NM"
+    ]
+  },
+  "ablauf": {
+    "schritte": [
+      {
+        "schritt_nr": 1,
+        "werkzeug": "segment_stations.py",
+        "aktion": "Transkript nach harten Markern segmentieren (stop_hook_summary, compact_boundary).",
+        "beleg_station_id": "st-01"
+      },
+      {
+        "schritt_nr": 2,
+        "werkzeug": "station_evaluator",
+        "aktion": "Erntewert-Score ueber KO-Dichte und BE-Abschluss berechnen.",
+        "beleg_station_id": "st-02"
+      },
+      {
+        "schritt_nr": 3,
+        "werkzeug": "mask_generator",
+        "aktion": "Validierbare JSON-Maske erstellen und Chat-Vorschlag vorbereiten.",
+        "beleg_station_id": "st-03"
+      }
+    ]
+  },
+  "regeln_warum": [
+    {
+      "regel": "Keine freie Text-Halluzination; alle Felder erzwingen Pflichtquellen.",
+      "begruendung": "Freies Schreiben erfindet plausible Begruendungen, die bei Sonderfaellen brechen.",
+      "korrektur_prompt_id": "turn-12-KO",
+      "status": "belegt"
+    },
+    {
+      "regel": "Hermes-Prinzip: Chat-Vorschlag vor Skill-Erstellung vorlegen.",
+      "begruendung": "Nutzerentscheidung D-20260906-012 verhindert Skill-Muell durch unueberwachte Auto-Generierung.",
+      "korrektur_prompt_id": "turn-18-KO",
+      "status": "belegt"
+    }
+  ],
+  "fallstricke": [
+    {
+      "fallstrick": "Tool-Fehler ohne menschliche Korrektur sind meist triviale Tippfehler, keine echten Fallstricke.",
+      "signal_typ": "is_error",
+      "korrektur_prompt_id": "turn-15-KO",
+      "status": "belegt"
+    },
+    {
+      "fallstrick": "Datensaetze ohne session_id innerhalb einer Session duerfen keine falschen Stationsgrenzen ausloesen.",
+      "signal_typ": "tool_use_error",
+      "korrektur_prompt_id": "turn-22-KO",
+      "status": "belegt"
+    }
+  ],
+  "ergebnisform": {
+    "beschreibung": "Fertig validierte JSON-Maskendatei mit allen Pflichtquellen und belegtem Hermes-Vorschlagstext.",
+    "abschluss_station_id": "st-03"
+  },
+  "belege": {
+    "station_ids": [
+      "st-01",
+      "st-02",
+      "st-03"
+    ],
+    "prompt_ids": [
+      "turn-01-SP",
+      "turn-05-NT",
+      "turn-08-NM",
+      "turn-12-KO",
+      "turn-15-KO",
+      "turn-18-KO",
+      "turn-22-KO",
+      "turn-25-BE"
+    ]
+  },
+  "hermes_review": {
+    "status": "vorschlag_vorbereitet",
+    "chat_vorschlag_text": "Aus der letzten Session wurde ein konsistenter Workflow fuer Transkript-Stationen-Analyse identifiziert (Score: 8.5/10, 3 Stationen, 2 verifizierte Regeln). Moechtest du daraus einen Skill erzeugen?",
+    "nutzer_feedback": null
+  }
+}

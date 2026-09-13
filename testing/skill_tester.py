@@ -22,14 +22,13 @@ Usage:
 Version: 1.0.0
 """
 
-import sys
-import os
-import re
-import json
 import ast
+import json
+import re
 import subprocess
-from pathlib import Path, PurePosixPath
+import sys
 from datetime import datetime
+from pathlib import Path, PurePosixPath
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -51,7 +50,6 @@ def parse_frontmatter(text):
 
     fm = {}
     current_key = None
-    current_indent = 0
     nested = {}
 
     for line in match.group(1).split('\n'):
@@ -117,7 +115,51 @@ def parse_frontmatter(text):
 FRONTMATTER_REQUIRED_FIELDS = (
     'name', 'version', 'type', 'author', 'created', 'updated', 'description',
     'standalone',
+    # Pflicht seit 2026-08-23: Jeder Skill deklariert selbst, ob er nach aussen
+    # darf. Ohne Feld gilt er als PRIVAT (fail-closed, siehe DEFAULT_VISIBILITY
+    # in build_public_registry.py) -- ein vergessenes Feld verschweigt also nichts,
+    # es haelt zurueck. Die Deklaration muss zum .gitignore-Zustand passen;
+    # testing/privacy_gate.py blockiert Abweichungen in beide Richtungen.
+    'visibility',
 )
+
+
+#: Minimal contract for the third-party areal. The nine house fields
+#: (standalone, bach_compatible, provenance, visibility ...) are *our* convention,
+#: not an external standard -- no foreign skill carries them. Demanding them would
+#: force us to edit foreign frontmatter, which inflates every diff against
+#: upstream, breaks resync, and turns "vendored unmodified" into a fiction. So the
+#: areal has its own, smaller contract; sitting in it implies public visibility.
+AREAL_REQUIRED_FIELDS = ('name', 'description', 'third_party', 'license', 'upstream')
+
+#: SPDX identifiers accepted for the ``license`` field. Not a permission check --
+#: that lives in testing/privacy_gate.py -- but a *form* check. Without one, the
+#: field drifts into "MIT", "mit", "MIT License", "Apache 2.0" and "siehe LICENSE"
+#: within months. The precedent is provenance.origin, which reached seven spellings
+#: including free text because nobody ever checked its shape.
+SPDX_PATTERN = re.compile(r'^[A-Za-z0-9.+-]+(?:\s+(?:AND|OR|WITH)\s+[A-Za-z0-9.+-]+)*$')
+
+
+def in_third_party_areal(skill_path):
+    """True when the skill lives in the areal for redistributed foreign material."""
+    parts = Path(skill_path).resolve().parts
+    return len(parts) >= 2 and parts[-2] == 'third-party'
+
+
+def inherits_visibility(skill_path):
+    """True fuer Sprachvarianten -- sie erben die Sichtbarkeit des Elternskills.
+
+    Ein Skill ist ein *Ordner*, keine Datei: `skills/dev/bugsweep/` enthaelt die
+    kanonische SKILL.md und daneben EN/, ES/, JA/, RU/, ZH/ mit Uebersetzungen.
+    Sichtbarkeit gilt fuer den ganzen Ordner -- .gitignore und die Registry
+    arbeiten ohnehin auf Ordnerebene. Das Feld in jeder Uebersetzung zu
+    wiederholen, waere nicht nur Redundanz, sondern eine zweite Wahrheit, die
+    von der ersten abweichen kann: eine deutsche Fassung auf `private-only` zu
+    setzen und die englische auf `public` zu vergessen, waere genau der stille
+    Widerspruch, den dieses Feld verhindern soll.
+    """
+    parent = Path(skill_path).resolve().parent
+    return (parent / "SKILL.md").is_file()
 
 
 def frontmatter_gate_errors(skill_path):
@@ -132,9 +174,21 @@ def frontmatter_gate_errors(skill_path):
         return ["YAML-Frontmatter fehlt oder ist nicht lesbar"]
 
     errors = []
-    for field in FRONTMATTER_REQUIRED_FIELDS:
+    inherits = inherits_visibility(skill_path)
+    areal = in_third_party_areal(skill_path)
+    required = AREAL_REQUIRED_FIELDS if areal else FRONTMATTER_REQUIRED_FIELDS
+    for field in required:
+        if field == 'visibility' and inherits:
+            continue
         if field not in fm or fm[field] in (None, ''):
             errors.append(f"Pflichtfeld fehlt: {field}")
+
+    licence = fm.get('license')
+    if licence not in (None, '') and not SPDX_PATTERN.fullmatch(str(licence).strip()):
+        errors.append(
+            f"license '{licence}' ist keine SPDX-Kennung (z. B. MIT, Apache-2.0, "
+            "GPL-3.0-or-later); siehe docs/CONVENTIONS.md"
+        )
 
     name = str(fm.get('name', ''))
     if name and not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name):
@@ -146,6 +200,28 @@ def frontmatter_gate_errors(skill_path):
 
     if 'standalone' in fm and not isinstance(fm['standalone'], bool):
         errors.append("standalone muss true oder false sein")
+
+    # T-20260818-730952791: Vier Skills wurden am 2026-08-17 in einen Kategorie-
+    # Ordner kopiert, der ihrem eigenen `category:`-Feld widersprach (z.B.
+    # category: dev, physisch aber unter utilities/). Genau dieser Widerspruch
+    # war in allen vier Faellen das eindeutige, billig pruefbare Erkennungsmerkmal
+    # -- category ist laut docs/CONVENTIONS.md "Themen-Kategorie (Ordnername)",
+    # also per Konvention identisch zum Elternordner. `_`-Ordner (_archive,
+    # _templates, _examples) sind bewusst ausgenommen: dort gilt die Konvention
+    # nicht (Archiv-/Vorlagen-Inhalte behalten ihr urspruengliches category-Feld).
+    category = fm.get('category')
+    if category and not areal:
+        # Im third-party-Areal gilt die Konvention bewusst nicht: Der Ordner sagt
+        # dort, WOHER der Skill kommt, nicht WORUM es geht. Ein fremder Videoskill
+        # bleibt inhaltlich 'utilities', auch wenn er unter third-party/ liegt --
+        # die Kategorie zu ueberschreiben wuerde Information vernichten.
+        category_folder = Path(skill_path).resolve().parent.name
+        if not category_folder.startswith('_') and str(category).strip() != category_folder:
+            errors.append(
+                f"category '{category}' widerspricht dem Ordner '{category_folder}/' "
+                "(Konvention: category muss dem Ordnernamen entsprechen, siehe "
+                "docs/CONVENTIONS.md)"
+            )
 
     return errors
 
@@ -163,7 +239,12 @@ def s001_frontmatter(skill_path):
     text = skill_md.read_text(encoding='utf-8', errors='replace')
     fm = parse_frontmatter(text)
 
-    required = list(FRONTMATTER_REQUIRED_FIELDS)
+    base_fields = (AREAL_REQUIRED_FIELDS if in_third_party_areal(skill_path)
+                   else FRONTMATTER_REQUIRED_FIELDS)
+    required = [
+        field for field in base_fields
+        if not (field == 'visibility' and inherits_visibility(skill_path))
+    ]
     recommended = ['anthropic_compatible', 'category', 'tags',
                    'language', 'status', 'dependencies']
 
@@ -523,8 +604,8 @@ def run_u_tests_interactive(skill_path):
     print(f"\n{'='*60}")
     print(f"  U-TEST: User-Erfahrung fuer '{name}'")
     print(f"{'='*60}")
-    print(f"\nBitte bewerte den Skill nach deiner Nutzungserfahrung.")
-    print(f"Skala: 0 (unbrauchbar) bis 5 (exzellent)\n")
+    print("\nBitte bewerte den Skill nach deiner Nutzungserfahrung.")
+    print("Skala: 0 (unbrauchbar) bis 5 (exzellent)\n")
 
     tests = {
         'U001': 'Aufgaben-Erfuellung: Hat der Skill gemacht, was du wolltest?',
@@ -541,7 +622,7 @@ def run_u_tests_interactive(skill_path):
                 raw = input(f"  {test_id} - {question}\n  Score (0-5): ").strip()
                 score = float(raw)
                 if 0 <= score <= 5:
-                    notes = input(f"  Anmerkung (optional, Enter=skip): ").strip()
+                    notes = input("  Anmerkung (optional, Enter=skip): ").strip()
                     results[test_id] = {
                         'score': score,
                         'notes': notes if notes else ''
@@ -801,7 +882,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
             prompt_file = RESULTS_DIR / f"{name}_l_test_prompt.md"
             prompt_file.write_text(prompt, encoding='utf-8')
             print(f"  L-Test Prompt generiert: {prompt_file.name}")
-            print(f"  Fuehre diesen Prompt in einer separaten Claude-Session aus.")
+            print("  Fuehre diesen Prompt in einer separaten Claude-Session aus.")
             print(f"  Speichere das JSON-Ergebnis als: results/{name}_l_results.json")
             print()
 
@@ -815,7 +896,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
                             l_results[key.split('_')[0]] = val
                     print(f"  Vorhandene L-Ergebnisse geladen ({len(l_results)} Tests)")
                 except json.JSONDecodeError:
-                    print(f"  L-Ergebnisse nicht parsebar")
+                    print("  L-Ergebnisse nicht parsebar")
         print()
 
     # --- U-Tests ---
@@ -842,7 +923,7 @@ def cmd_test(skill_identifier, profile_name='STANDARD', test_type=None):
             print(f"  U-Tests (User):         {sum(u_scores)/len(u_scores):.1f}/5")
 
     if dimensions:
-        print(f"\n  Dimensionen:")
+        print("\n  Dimensionen:")
         dim_labels = {
             'd1_clarity': 'Klarheit',
             'd2_completeness': 'Vollstaendigkeit',

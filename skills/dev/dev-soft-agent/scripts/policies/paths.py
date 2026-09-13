@@ -11,7 +11,7 @@ Enforces path normalization and structure rules:
 
 import re
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath, PureWindowsPath
+from pathlib import Path
 from typing import List
 
 
@@ -69,7 +69,7 @@ class PathPolicy:
                     issues.append(PathIssue(
                         path=str(path),
                         issue_type="absolute",
-                        message=f"Hardcoded absolute path found",
+                        message="Hardcoded absolute path found",
                         line_number=i,
                         severity="warning",
                     ))

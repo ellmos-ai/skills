@@ -15,10 +15,20 @@ Usage:
     python video_transcriber.py <url> --output transcript.md
     python video_transcriber.py <url> --meta-only
     python video_transcriber.py <url> --no-timestamps
+    python video_transcriber.py <url> --allow-empty-transcript
 
 Abhängigkeiten:
     - youtube_transcript_api (pip install youtube-transcript-api) — MIT-Lizenz
-    - yt-dlp (pip install yt-dlp) — optional, für Metadaten (Unlicense / Public Domain)
+    - yt-dlp (pip install yt-dlp) — optional, für Metadaten UND als Untertitel-Fallback
+      (Unlicense / Public Domain). Der Fallback liest ausschliesslich die
+      Untertitelspur aus den Metadaten; es wird kein Video und kein Audio geladen.
+
+Exit-Codes:
+    0  Erfolg
+    1  Keine gueltige Video-URL
+    2  Aufruffehler (von argparse vergeben)
+    3  Transkript angefordert, aber keines erhalten
+       (mit --allow-empty-transcript stattdessen 0)
 
 DISCLAIMER:
     Dieses Werkzeug ist NICHT mit YouTube oder Google verbunden und wird von diesen
@@ -29,18 +39,30 @@ DISCLAIMER:
     Keine Weiterveröffentlichung urheberrechtlich geschützter Transkripte ohne
     Zustimmung der Rechteinhaber.
 
-Version: 1.1.0
+Version: 1.2.0
 """
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
-import sys
+import argparse
+import json
 import os
 import re
-import json
-import argparse
+import sys
+import urllib.request
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
+
+# Exit-Codes. 2 bleibt argparse vorbehalten (Aufruffehler), deshalb 3 fuer den
+# fachlichen Fall "kein Transkript" -- sonst waere ein Tippfehler im Aufruf vom
+# Video ohne Untertitel nicht unterscheidbar.
+EXIT_OK = 0
+EXIT_BAD_URL = 1
+EXIT_NO_TRANSCRIPT = 3
+
+# Quelle, die das Transkript geliefert hat (landet im JSON-Output).
+SOURCE_PRIMARY = "youtube_transcript_api"
+SOURCE_YTDLP = "yt-dlp"
 
 # Encoding fix für Windows
 os.environ.setdefault("PYTHONIOENCODING", "utf-8")
@@ -156,9 +178,9 @@ def _fetch_metadata_fallback(video_id: str) -> dict:
 
 # --- Transkript via youtube_transcript_api ---
 
-def fetch_transcript(video_id: str, languages: list = None) -> dict:
+def fetch_transcript_primary(video_id: str, languages: list = None) -> dict:
     """
-    Holt Transkript eines YouTube-Videos.
+    Primaerweg: Transkript ueber youtube_transcript_api.
 
     Kompatibel mit youtube_transcript_api v1.2.x (Instance-API).
 
@@ -209,7 +231,7 @@ def fetch_transcript(video_id: str, languages: list = None) -> dict:
 
         if best is None:
             return {"segments": [], "language": "", "is_generated": False,
-                    "full_text": "", "error": "Kein Transkript verfügbar"}
+                    "full_text": "", "error": "Kein Transkript verfügbar", "source": None}
 
         # Transkript abrufen
         fetched = ytt.fetch(video_id, languages=[best.language_code])
@@ -230,11 +252,187 @@ def fetch_transcript(video_id: str, languages: list = None) -> dict:
             "language": fetched.language_code if hasattr(fetched, "language_code") else best.language_code,
             "is_generated": fetched.is_generated if hasattr(fetched, "is_generated") else best.is_generated,
             "full_text": full_text,
+            "source": SOURCE_PRIMARY,
         }
 
     except Exception as e:
         return {"segments": [], "language": "", "is_generated": False,
-                "full_text": "", "error": str(e)}
+                "full_text": "", "error": str(e), "source": None}
+
+
+# --- Untertitel-Fallback via yt-dlp (kein Video-/Audio-Download) ---
+
+def _base_lang(code: str) -> str:
+    """`de-orig`, `de-DE` und `de` haben dieselbe Basissprache `de`."""
+    if not code:
+        return ""
+    return code.split("-")[0].lower()
+
+
+def _iter_caption_tracks(manual_tracks: dict, automatic_tracks: dict, languages: list):
+    """
+    Liefert yt-dlp-Untertitelspuren in der gewünschten Priorität.
+
+    Für jede Wunschsprache: manuell exakt/Basis, dann automatisch exakt/Basis.
+    Erst danach folgen beliebige Spuren. JSON3 ist erforderlich, weil nur dort
+    Zeitmarken und Text strukturiert vorliegen.
+
+    Liefert Tupel aus Sprachcode, Spur und is_generated.
+    """
+    def json3(eintraege):
+        for e in eintraege or []:
+            if e.get("ext") == "json3" and e.get("url"):
+                return e
+        return None
+
+    seen = set()
+
+    def emit(code, spur, generiert):
+        if not spur:
+            return None
+        key = (code, spur["url"], generiert)
+        if key in seen:
+            return None
+        seen.add(key)
+        return code, spur, generiert
+
+    for wunsch in languages:
+        basis = _base_lang(wunsch)
+        for tracks, generiert in ((manual_tracks, False), (automatic_tracks, True)):
+            kandidat = emit(wunsch, json3(tracks.get(wunsch)), generiert)
+            if kandidat:
+                yield kandidat
+            for code in sorted(tracks):
+                if code != wunsch and _base_lang(code) == basis:
+                    kandidat = emit(code, json3(tracks.get(code)), generiert)
+                    if kandidat:
+                        yield kandidat
+
+    for tracks, generiert in ((manual_tracks, False), (automatic_tracks, True)):
+        for code in sorted(tracks):
+            kandidat = emit(code, json3(tracks.get(code)), generiert)
+            if kandidat:
+                yield kandidat
+
+
+def _pick_caption_track(tracks: dict, languages: list):
+    """Waehlt die beste JSON3-Spur aus einer einzelnen Untertitelkarte."""
+    for code, spur, _ in _iter_caption_tracks(tracks or {}, {}, languages):
+        return code, spur
+
+    return None
+
+
+def _parse_json3(rohtext: str) -> list:
+    """
+    Wandelt eine JSON3-Untertitelspur in dieselbe Segmentform wie der Primaerweg.
+
+    Ereignisse ohne `segs` sind Abstandsmarken und werden uebersprungen -- wuerde
+    man sie als leere Segmente uebernehmen, entstuende genau der Zustand, den
+    dieses Ticket beseitigt: sieht gefuellt aus, ist leer.
+    """
+    daten = json.loads(rohtext)
+    segmente = []
+    for ereignis in daten.get("events", []):
+        segs = ereignis.get("segs")
+        if not segs:
+            continue
+        text = "".join(s.get("utf8", "") for s in segs).strip()
+        if not text:
+            continue
+        segmente.append({
+            "start": float(ereignis.get("tStartMs", 0)) / 1000.0,
+            "duration": float(ereignis.get("dDurationMs", 0)) / 1000.0,
+            "text": text,
+        })
+    return segmente
+
+
+def _http_get_text(url: str) -> str:
+    """Laedt eine Untertitel-URL als Text. Stdlib, damit keine neue Abhaengigkeit."""
+    anfrage = urllib.request.Request(
+        url, headers={"User-Agent": f"video-transcriber/{__version__}"})
+    with urllib.request.urlopen(anfrage, timeout=30) as antwort:
+        return antwort.read().decode("utf-8", errors="replace")
+
+
+def fetch_transcript_ytdlp(video_id: str, languages: list = None) -> dict:
+    """
+    Fallback: Untertitel ueber die yt-dlp-Metadaten.
+
+    Benutzt ausschliesslich `extract_info(download=False)` und liest daraus die
+    Untertitel-URL. Bewusst NICHT `writesubtitles`/`writeautomaticsub`: die
+    schreiben Dateien und ziehen die Download-Maschinerie mit hinein. Kein Video,
+    kein Audio, kein Umgehen von Zugangsbeschraenkungen -- nur die Spur, die die
+    Plattform ohnehin zur Wiedergabe ausliefert.
+    """
+    if languages is None:
+        languages = ["de", "en"]
+
+    try:
+        import yt_dlp
+    except ImportError:
+        return {"segments": [], "language": "", "is_generated": False, "full_text": "",
+                "error": "yt-dlp nicht installiert (Fallback nicht verfügbar)", "source": None}
+
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    opts = {"quiet": True, "no_warnings": True, "skip_download": True}
+
+    try:
+        with yt_dlp.YoutubeDL(opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+    except Exception as e:
+        return {"segments": [], "language": "", "is_generated": False, "full_text": "",
+                "error": f"yt-dlp Fehler: {e}", "source": None}
+
+    info = info or {}
+    fehlschlaege = []
+    for code, spur, generiert in _iter_caption_tracks(
+            info.get("subtitles") or {}, info.get("automatic_captions") or {}, languages):
+        try:
+            segmente = _parse_json3(_http_get_text(spur["url"]))
+        except Exception as e:
+            fehlschlaege.append(f"{code}: {e}")
+            continue
+        if not segmente:
+            fehlschlaege.append(f"{code}: keine Segmente")
+            continue
+        return {
+            "segments": segmente,
+            "language": code,
+            "is_generated": generiert,
+            "full_text": " ".join(s["text"] for s in segmente),
+            "source": SOURCE_YTDLP,
+        }
+
+    fehler = "Keine verwertbare Untertitelspur (JSON3) gefunden"
+    if fehlschlaege:
+        fehler += f": {'; '.join(fehlschlaege)}"
+    return {"segments": [], "language": "", "is_generated": False, "full_text": "",
+            "error": fehler, "source": None}
+
+
+def fetch_transcript(video_id: str, languages: list = None) -> dict:
+    """
+    Holt das Transkript: erst der Primaerweg, bei leerem Ergebnis der yt-dlp-Fallback.
+
+    Der Fallback greift nicht nur bei einer Ausnahme, sondern immer dann, wenn der
+    Primaerweg KEINE Segmente liefert. Genau dieser Fall -- Ausnahme gefangen,
+    leeres Ergebnis zurueckgegeben -- war der stille Fehlschlag.
+    """
+    primaer = fetch_transcript_primary(video_id, languages)
+    if primaer.get("segments"):
+        primaer.setdefault("source", SOURCE_PRIMARY)
+        return primaer
+
+    ersatz = fetch_transcript_ytdlp(video_id, languages)
+    if ersatz.get("segments"):
+        return ersatz
+
+    # Beide leer: beide Befunde behalten, damit die Ursache sichtbar bleibt.
+    fehler = " | ".join(f for f in (primaer.get("error"), ersatz.get("error")) if f)
+    return {"segments": [], "language": "", "is_generated": False, "full_text": "",
+            "error": fehler or "Kein Transkript verfügbar", "source": None}
 
 
 # --- Formatierung ---
@@ -318,7 +516,7 @@ def format_markdown(meta: dict, transcript: dict, timestamps: bool = True) -> st
 
     # Transkript
     if transcript.get("error"):
-        lines.append(f"## Transkript")
+        lines.append("## Transkript")
         lines.append("")
         lines.append(f"**Fehler:** {transcript['error']}")
     elif transcript.get("segments"):
@@ -392,6 +590,8 @@ def main():
                         help="Transkript ohne Zeitstempel")
     parser.add_argument("--no-meta", action="store_true",
                         help="Metadaten-Abruf überspringen (schneller)")
+    parser.add_argument("--allow-empty-transcript", action="store_true",
+                        help="Leeres Transkript als Erfolg werten (Exit 0 statt 3)")
 
     args = parser.parse_args()
 
@@ -399,7 +599,7 @@ def main():
     video_id = extract_video_id(args.url)
     if not video_id:
         sys.stderr.write(f"[FEHLER] Keine gültige YouTube-URL: {args.url}\n")
-        sys.exit(1)
+        sys.exit(EXIT_BAD_URL)
 
     sys.stderr.write(f"[INFO] Video-ID: {video_id}\n")
 
@@ -416,11 +616,14 @@ def main():
     if not args.meta_only:
         sys.stderr.write("[INFO] Hole Transkript...\n")
         transcript = fetch_transcript(video_id, args.lang)
-        if transcript.get("error"):
-            sys.stderr.write(f"[WARNUNG] {transcript['error']}\n")
+        if transcript.get("segments"):
+            n = len(transcript["segments"])
+            quelle = transcript.get("source") or "unbekannt"
+            sys.stderr.write(f"[INFO] {n} Segmente geladen (Quelle: {quelle})\n")
+            if transcript.get("error"):
+                sys.stderr.write(f"[HINWEIS] Primaerweg meldete: {transcript['error']}\n")
         else:
-            n = len(transcript.get("segments", []))
-            sys.stderr.write(f"[INFO] {n} Segmente geladen\n")
+            sys.stderr.write(f"[FEHLER] Kein Transkript: {transcript.get('error', 'unbekannt')}\n")
 
     # Formatieren
     timestamps = not args.no_timestamps
@@ -437,6 +640,22 @@ def main():
         sys.stderr.write(f"[OK] Geschrieben: {args.output}\n")
     else:
         print(output)
+
+    # Exit-Semantik: Ein leeres Transkript ist KEIN Erfolg. Vorher lief dieser
+    # Fall mit Exit 0 durch -- die Ausgabe wurde geschrieben, das Segmentarray
+    # war leer, und jeder aufrufende Automat hielt das fuer gelungen.
+    # Wer nur Metadaten wollte, scheitert nicht am fehlenden Transkript.
+    transkript_gewuenscht = not args.meta_only
+    if transkript_gewuenscht and not transcript.get("segments"):
+        if args.allow_empty_transcript:
+            sys.stderr.write("[HINWEIS] Leeres Transkript wird auf Wunsch als Erfolg gewertet.\n")
+            sys.exit(EXIT_OK)
+        sys.stderr.write(
+            f"[FEHLER] Kein Transkript erhalten -- Exit {EXIT_NO_TRANSCRIPT}. "
+            f"Mit --allow-empty-transcript als Erfolg werten.\n")
+        sys.exit(EXIT_NO_TRANSCRIPT)
+
+    sys.exit(EXIT_OK)
 
 
 if __name__ == "__main__":

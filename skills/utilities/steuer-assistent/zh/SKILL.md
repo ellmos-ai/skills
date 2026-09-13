@@ -18,6 +18,8 @@ language: zh
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="steuer-assistent banner">
+
 > **中文** — `steuer-assistent` 官方中文版本。
 
 

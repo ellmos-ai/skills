@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ellmos-skills"
+version = "1.4.2"
+description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Lukas Geiger", email = "lukas@ellmos.ai" }
+]
+requires-python = ">=3.10"
+keywords = [
+    "ai",
+    "skills",
+    "agents",
+    "claude-code",
+    "codex",
+    "antigravity",
+    "bach",
+    "mcp",
+    "llm",
+    "local-first"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries"
+]
+
+[project.urls]
+Homepage = "https://github.com/ellmos-ai/skills"
+Documentation = "https://github.com/ellmos-ai/skills/blob/master/README.md"
+Repository = "https://github.com/ellmos-ai/skills.git"
+"Bug Tracker" = "https://github.com/ellmos-ai/skills/issues"
+Changelog = "https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md"
+Security = "https://github.com/ellmos-ai/skills/blob/master/SECURITY.md"
+"Parent Organization" = "https://github.com/ellmos-ai"
+"Umbrella Ecosystem" = "https://github.com/open-bricks"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["testing", "skills"]
+addopts = "-ra -v"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+# "skills" stand hier bis 2026-09-12 und blendete den gesamten Skill-Baum aus --
+# also den groessten Teil des Repos. Ausgenommen bleiben nur Archiv und Vorlagen:
+# beides ist absichtlich unfertiger bzw. eingefrorener Code (T-20260912-382792744).
+exclude = [
+    ".git",
+    "__pycache__",
+    "_archive",
+    "_templates",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# E501 (Zeilenlaenge) und E402 (Import nicht oben) bleiben aus: beides ist Stil und
+# beides trifft massenhaft gewachsene Skripte. F401/F541/F841 standen bis 2026-09-12
+# ebenfalls hier -- das sind aber echte Codemaengel (toter Import, f-String ohne
+# Platzhalter, tote Zuweisung), und genau ein solcher Fund war der Anlass dieses
+# Tickets. Sie bleiben scharf.
+ignore = ["E501", "E402"]
+

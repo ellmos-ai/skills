@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   Создает и использует нейтральный к провайдеру граф семантической маршрутизации на основе персонажей (personas),
   координирующих ролей, экспертов и активных конечных точек навыков (skills). Используйте, когда LLM должна
@@ -19,7 +19,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: ru
 status: active
 dependencies:
@@ -74,7 +74,39 @@ python scripts/build_routing_map.py \
 
 Не продвигайте `candidate_skills` автоматически. Сначала подтвердите их через активный резолвер навыков или исходные метаданные.
 
+## Создание и хранение персон
+
+Ядро строит карты и никогда не выдумывает персоны. Чтобы использовать свои,
+храните их **рядом со скиллом** и пересобирайте карту: `personas/<persona-id>.md`
+(один файл на персону), `roles/<role>/SKILL.md` (координирующие роли и
+эксперты), `routing-map.json` (сгенерированная карта) и `config.json`
+(локально для хоста, никогда не публикуется). Сборщик читает роли только из
+`SKILL.md`, а персоны — из любого Markdown с frontmatter. Скопируйте
+[templates/persona.template.md](templates/persona.template.md) и заполните
+контракт: `name` и `type: persona`; `persona.display_name`, `short_name`,
+`gender`, `role`, `default_prompt`; `parent_agents` (координирующие роли);
+`skills` (**имена скиллов, никогда не пути**; только они разрешаются в
+эндпоинты); `optional_skills` (скиллы, привязанные к хосту; если их нет, они
+остаются видимым `GAP`). Персона не даёт инструментов и прав и не
+переопределяет правила безопасности, блокировки или решения пользователя.
+
+**Пути:** скилл не содержит путей хоста. `config.example.json` показывает
+шаблон (`ellmos.skill-config.v1`, `einstellungen.paths` с плейсхолдерами вроде
+`<HOME>/<ONEDRIVE>/<TOPICS>`); локальная копия — `config.json`, сохраняется при
+деплое и никогда не коммитится.
+
+**Чистый каталог:** `--skills-layout catalog` принимает только
+`<category>/<name>/SKILL.md` и пропускает каталоги с префиксом `_`
+(`_archive`, `_reference`, `_templates`), устраняя issues `duplicate-skill-id`
+от архивных и справочных копий.
+
 ## Маршрутизация запроса
+
+### 0. Предложить существующие персоны
+
+Если персоны лежат рядом со скиллом (`personas/`), перечислите их при вызове с
+именем, ролью и скиллами и маршрутизируйте к подходящей; если запрос не
+называет персону, выберите её на шаге 4. Формат квитанции маршрута не меняется.
 
 ### 1. Семантический выбор координирующей роли
 
@@ -131,6 +163,13 @@ GAPS: <missing endpoints or stale-map warnings>
 Маршрутизатор выбирает офисного координатора, затем налогового эксперта, разрешает установленный налоговый навык и, наконец, применяет явно связанного скрупулезного налогового персонажа. Если налоговый эксперт существует, но портативный налоговый навык не установлен, сообщите о `GAP` и продолжайте только через явно настроенный запасной вариант (fallback).
 
 ## История изменений (Changelog)
+
+### 1.1.0 (2026-09-03)
+
+- Создание и хранение персон: соглашение о хранении рядом со скиллом, контракт
+  frontmatter, нейтральный шаблон `templates/persona.template.md`, соглашение о
+  путях с `config.example.json`, поведение при вызове и `--skills-layout catalog`
+  против дублирующихся идентификаторов скиллов.
 
 ### 1.0.0 (2026-07-28)
 

@@ -1,30 +1,33 @@
 ---
 name: automation-self-care
-version: 1.0.1
+version: 1.3.1
 type: skill
-author: Lukas Geiger + OpenAI
+author: Lukas Geiger + OpenAI + Google Gemini
 created: 2026-07-28
-updated: 2026-07-30
+updated: 2026-09-09
 description: >
-  Builds and operates a provider-neutral self-care core set for scheduled LLM
-  tasks and desktop-app automations. Use when an agent should discover its
-  native scheduler, install recurring hygiene, prompt-quality, frequency,
-  load, resource, cross-system, permission and runtime checks, or continuously
-  improve an existing automation fleet with rollback, readback and deletion
-  protection. Triggers on automation self-care, scheduler task care, desktop
-  app automation maintenance, automation fleet audit, self-healing schedules,
-  requests to recreate the ANTIGRAVITY-style maintenance task family,
-  core-set-textautomations, basic-text-automations, textbased-automation-core,
-  textbased-automation-drivers, or textbased-desktopapp-automations.
+  Baut und betreibt ein anbieterneutrales Self-Care-Kernset für geplante
+  LLM-Aufgaben und Desktop-App-Automationen. Ergänzt deterministisches
+  Policy-Linting, Lock- und Modell-Governance, semantische Prompt-Prüfung,
+  konsistente Mehrflächen-Updates, Mini-Checks und Regeldatei-Hygiene.
+  Nutzen, wenn ein Agent seinen nativen Scheduler entdecken oder eine
+  bestehende Automations-Flotte mit Rollback, Readback und Löschschutz
+  kontinuierlich verbessern soll. Löst aus bei automation self-care,
+  Scheduler-Task-Pflege, Desktop-App-Automations-Wartung,
+  Automations-Flotten-Audit, selbstheilende Zeitpläne,
+  core-set-textautomations, basic-text-automations,
+  textbased-automation-core, textbased-automation-drivers,
+  textbased-governance-automations oder textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system]
-language: en
+tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system, governance, token-governance, mini-check, policy-linter]
+language: de
 status: active
-aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+visibility: public
+aliases: [textbased-governance-automations-seed, tgas, textbasierte-governance-automationen-seed, textbased-governance-automations, textbasierte-governance-automationen, textbased-governance-automatisations-seed, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
 dependencies:
   tools: []
   services: []
@@ -37,91 +40,154 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
   last_sync_from_origin: null
   last_sync_to_origin: null
-  local_changes_since_sync: false
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="automation-self-care banner">
 
 # Automation Self-Care
 
-Create a native, provider-specific maintenance fleet from one provider-neutral
-control loop. Preserve the original intent of the ANTIGRAVITY task family while
-requiring evidence, reversible changes and native readback.
+Erstellt eine native, anbieterspezifische Wartungs-Flotte aus einer einzigen
+anbieterneutralen Regelschleife. Bewahrt die ursprüngliche Absicht der
+ANTIGRAVITY-Task-Familie, verlangt dabei aber Belege, reversible Änderungen
+und native Readbacks.
 
-## Non-negotiable boundaries
+## Nicht verhandelbare Grenzen
 
-- Treat discovery, planning, approval, mutation and readback as separate phases.
-- Use the target app's supported automation API, command or UI. Never assume that
-  editing a storage file changes live app state.
-- Read local rules, locks, deletion/suppression logs and existing schedules before
-  proposing a task.
-- Do not invent scheduler support. If create/update/readback cannot be proven,
-  produce a manual installation plan and stop before mutation.
-- Make at most one independently testable tuning change per care run.
-- Protect the care tasks from disabling themselves or reducing their own cadence
-  below the configured recovery floor.
-- Preserve the previous prompt, schedule, model, permissions and enabled state so
-  every mutation can be rolled back.
-- Count success only after outcome evidence, not merely scheduler start or exit 0.
-- Never copy secrets, private prompts or personal data into a shared registry.
+- Discovery, Planung, Freigabe, Mutation und Readback als getrennte Phasen
+  behandeln.
+- Die unterstützte Automations-API, den Befehl oder die UI der Ziel-App
+  nutzen. Niemals annehmen, dass das Bearbeiten einer Speicherdatei den
+  Live-App-State ändert.
+- Lokale Regeln, Locks, Lösch-/Suppression-Logs und bestehende Zeitpläne
+  lesen, bevor ein Task vorgeschlagen wird.
+- Keine Scheduler-Unterstützung erfinden. Kann Create/Update/Readback nicht
+  belegt werden, einen manuellen Installationsplan erstellen und vor der
+  Mutation anhalten.
+- Höchstens eine unabhängig testbare Tuning-Änderung je Care-Lauf.
+- Die Care-Tasks davor schützen, sich selbst zu deaktivieren oder ihren
+  eigenen Takt unter den konfigurierten Recovery Floor zu senken. Nur eine
+  ausdrückliche Nutzerentscheidung, ein Sicherheitsgate oder ein belegter
+  Notfall darf eine kontrollierte Pause autorisieren.
+- Stabile maschinelle Task-IDs unabhängig von sichtbaren Titeln halten. Ein
+  App-Präfix als zusätzlichen Erkennbarkeits-Schutz behandeln, niemals als
+  Identität oder als Ersatz für Recovery-, Suppression-, Rollback- und
+  Readback-Kontrollen.
+- Den vorherigen Prompt, Zeitplan, Modell, Berechtigungen und Aktiv-Status
+  bewahren, damit jede Mutation zurückgerollt werden kann.
+- Erfolg erst nach Ergebnis-Beleg zählen, nicht bloß nach Scheduler-Start
+  oder Exit 0.
+- Niemals Geheimnisse, private Prompts oder personenbezogene Daten in eine
+  geteilte Registry kopieren.
+- Vor jeder Mutation einen deterministischen, im Anbieterprofil benannten
+  Policy-Linter ausführen. Projektpfade, Prüfskripte und Policies über
+  Adapterfelder oder neutrale Platzhalter auflösen; keine Host-, Konto- oder
+  privaten Verzeichnispfade in den öffentlichen Skill übernehmen.
+- Den maßgeblichen Lock-Mechanismus des Zielsystems vor Datei-, Scheduler-,
+  Commit- oder Push-Aktionen prüfen. Ist die Lock-Autorität unbekannt,
+  unerreichbar oder widersprüchlich, gilt Fail-Closed und Read-only.
+- Modelle weder aufgrund fest codierter Produktversionen noch aufgrund
+  unbelegter Qualitätsannahmen ändern. Zulässige Modelle und Mindeststandards
+  aus der aktuellen Anbieteroberfläche und der gültigen lokalen Policy
+  auflösen. Downgrades und Upgrades brauchen die dort festgelegte Autorität;
+  bei Unklarheit bleibt das Modell unverändert.
+- Prompt-Tuning nicht allein aus Laufprotokollen ableiten. Den Vorschlag vor
+  der Mutation semantisch gegen die für das Zielprojekt geltenden Policies
+  prüfen und Sicherheits-, Forschungs- oder Freigabegrenzen bewahren.
+- Mehrere maßgebliche Zustandsflächen als eine Transaktion behandeln:
+  Vorzustände sichern, alle deklarierten Ziele aktualisieren, jedes Ziel
+  zurücklesen und bei Teilerfolg vollständig zurückrollen. Eine feste Zahl
+  oder lokale Verzeichnisstruktur niemals als universell voraussetzen.
+- Laufberichte ausschließlich in den dafür vorgesehenen lokalen Beleg- und
+  Statusspeichern ablegen, niemals in Agenten-Regeldateien. Namen und Orte
+  dieser Speicher kommen aus dem Anbieterprofil.
+- Schwere Wartung darf durch eng begrenzte Mini-Checks ergänzt werden.
+  Laufzeitgrenze, Prüfumfang, Muttertask und Eskalationsweg müssen im
+  Anbieterprofil stehen; ein Mini-Check darf keine Tiefenreparatur ausführen.
 
-## Workflow
+## Ablauf
 
-### 1. Discover the native automation surface
+### 1. Die native Automationsoberfläche entdecken
 
-Inventory the current actor, provider, app class, scheduler surface, supported
-operations, state files, run history, usage telemetry and readback method. Record
-capabilities using the profile contract in
-[provider-adapter-contract.md](references/provider-adapter-contract.md).
+Den aktuellen Akteur, Anbieter, nicht-sensitiven `app_display_name`,
+App-Klasse, Scheduler-Oberfläche, unterstützte Operationen, State-Dateien,
+Lauf-Historie, Nutzungstelemetrie und Readback-Methode inventarisieren.
+Fähigkeiten über den Profilvertrag in
+[provider-adapter-contract.md](references/provider-adapter-contract.md)
+festhalten.
 
-Distinguish native desktop-app schedules, CLI/headless execution, OS scheduler or
-service starter, general scheduler service, workflow engine, and unsupported or
-UI-only automation. Do not equate the existence of a config file with a supported
-mutation path.
+Native Desktop-App-Zeitpläne, CLI-/Headless-Ausführung, OS-Scheduler oder
+Service-Starter, allgemeinen Scheduler-Dienst, Workflow-Engine und nicht
+unterstützte oder nur-UI-Automation unterscheiden. Die Existenz einer
+Konfigurationsdatei nicht mit einem unterstützten Mutationspfad
+gleichsetzen.
 
-### 2. Inventory the fleet
+### 2. Die Flotte inventarisieren
 
-For each task capture a stable local identifier, purpose, prompt fingerprint,
-schedule, enabled state, model, permissions, target paths, last scheduler event,
-last successful outcome and current owner. Keep prompt content local.
+Für jeden Task einen stabilen lokalen Identifier, semantische Rolle,
+sichtbaren Titel, Zweck, Prompt-Fingerprint, Zeitplan, Aktiv-Status, Modell,
+Reasoning, Berechtigungen, Zielpfade, letztes Scheduler-Ereignis, letztes
+erfolgreiches Ergebnis und aktuellen Owner erfassen. Prompt-Inhalt lokal
+halten.
 
-Check the authoritative live surface twice before mutation when the app can rewrite
-state from memory.
+Bestehende Tasks semantisch abgleichen, bevor eine Neuanlage vorgeschlagen
+wird. Zuerst stabile Task-ID, dann anbieter-native ID, semantische Rolle und
+bekannter Legacy-Titel bevorzugen. Ein abweichender sichtbarer Titel ist
+kein Beleg dafür, dass ein neuer Task nötig ist. Mehrdeutige Treffer
+blockieren den Plan, statt ein Duplikat anzulegen.
 
-### 3. Design the core set
+Die maßgebliche Live-Oberfläche vor jeder Mutation zweimal prüfen, wenn die
+App State aus dem Gedächtnis neu schreiben kann.
 
-Read [core-set.md](references/core-set.md). Select either:
+### 3. Das Core-Set entwerfen
 
-- `compact`: five care tasks combining frequency with load distribution; or
-- `full`: nine focused tasks corresponding to the original maintenance family.
+[core-set.md](references/core-set.md) lesen. Wählen zwischen:
 
-Generate a provider-neutral plan:
+- `compact`: fünf Care-Tasks, die Frequenz mit Lastverteilung kombinieren;
+  oder
+- `full`: neun fokussierte Tasks entsprechend der ursprünglichen
+  Wartungs-Familie.
+
+Einen anbieterneutralen Plan erzeugen:
 
 ```bash
 python scripts/build_core_set.py provider-profile.json \
   --topology compact --out automation-care-plan.json
+python scripts/build_core_set.py --lint-plan automation-care-plan.json
 ```
 
-The generator never installs tasks. Review every `blocked` capability and choose
-collision-free local times before applying the plan.
+Der Generator installiert niemals Tasks. Jede `blocked`-Fähigkeit prüfen und
+kollisionsfreie lokale Zeiten wählen, bevor der Plan angewendet wird. Neue
+Anbieter-Profile setzen `app_display_name` ausdrücklich; CI kann das mit
+`--strict-profile` erzwingen. Erzeugte sichtbare Titel nutzen
+`<APP_DISPLAY_NAME> — <CARE_TITLE>`, während `automation-care.*`-Task-IDs
+unverändert bleiben. Ein Codex-Profil nutzt `CODEX`.
 
-### 4. Stage installation
+### 4. Installation stufenweise
 
-Install through the native provider adapter:
+Über den nativen Anbieter-Adapter installieren:
 
-1. Start with hygiene in read-only mode.
-2. Add resource protection.
-3. Add prompt-quality tuning with rollback.
-4. Add frequency and load tuning only after enough run evidence exists.
-5. Add cross-system coordination last.
+1. Mit Hygiene im Read-only-Modus beginnen.
+2. Ressourcenschutz ergänzen.
+3. Prompt-Qualitäts-Tuning mit Rollback ergänzen.
+4. Frequenz- und Lasttuning erst ergänzen, wenn genug Lauf-Belege
+   vorliegen.
+5. Cross-System-Koordination zuletzt ergänzen.
 
-Create new or imported tasks disabled unless the user explicitly approved active
-installation. For an unattended pilot, require a deletion log, before-state
-snapshot, run receipt and rollback path first.
+Für eine reine Titel-Migration den semantisch gematchten Task über die
+unterstützte native Oberfläche in-place aktualisieren. Die stabile ID und
+alle Nicht-Titel-Felder zurücklesen; jedes unerwartete operative Delta
+verlangt Rollback. Ein zweiter Plan-/Apply-Zyklus muss keine Änderung
+melden und darf keinen weiteren Task anlegen.
 
-### 5. Run the care loop
+Neue oder importierte Tasks deaktiviert anlegen, sofern der Nutzer die
+aktive Installation nicht ausdrücklich freigegeben hat. Für einen
+unbeaufsichtigten Pilotlauf zuerst ein Löschlog, einen
+Vorher-State-Snapshot, einen Laufbeleg und einen Rollback-Pfad verlangen.
 
-Every care task follows:
+### 5. Die Care-Schleife ausführen
+
+Jeder Care-Task folgt:
 
 ```text
 follow-up previous change
@@ -133,49 +199,90 @@ follow-up previous change
   -> write receipt and next-check condition
 ```
 
-Use the hypothesis catalogue and evidence rules in
-[core-set.md](references/core-set.md). Unknown cause means observe, narrow
-permissions or pause safely; never guess a repair.
+Den Hypothesen-Katalog und die Belegregeln in
+[core-set.md](references/core-set.md) nutzen. Unbekannte Ursache bedeutet
+beobachten, Berechtigungen einschränken oder sicher pausieren; niemals eine
+Reparatur raten.
 
-### 6. Coordinate across actors
+### 6. Über Akteure hinweg koordinieren
 
-Keep local app state authoritative. Share only task contracts, coverage, status,
-receipts and sanitized fingerprints. Redundant read-only reviews are allowed;
-single-writer mutations require a claim or an equivalent native lock.
+Lokalen App-State als maßgeblich behalten. Nur Task-Verträge, Abdeckung,
+Status, Belege und bereinigte Fingerprints teilen. Redundante Read-only-
+Reviews sind erlaubt; Single-Writer-Mutationen brauchen einen Claim oder
+einen gleichwertigen nativen Lock.
 
-### 7. Systems Without Native Event Hooks (Letter-Hooker Extension)
+### 7. Systeme ohne native Event-Hooks (Letter-Hooker-Erweiterung)
 
 
-Treat token or subscription limitation as capacity state, not a broken actor.
-Return delegated coverage after the original actor produces a successful receipt.
+Token- oder Abo-Limitierung als Kapazitätszustand behandeln, nicht als
+kaputten Akteur. Delegierte Abdeckung zurückgeben, nachdem der ursprüngliche
+Akteur einen erfolgreichen Beleg liefert.
 
-## Required outputs
+## Pflicht-Ausgaben
 
-For each setup or care run report:
+Für jeden Setup- oder Care-Lauf berichten:
 
-- discovered native surface and unsupported capabilities;
-- selected topology and tasks created, proposed or skipped;
-- exact mutation and before/after readback;
-- evidence of outcome or open observation window;
-- rollback location and return condition;
-- shared coverage update, if a coordination registry exists.
+- entdeckte native Oberfläche und nicht unterstützte Fähigkeiten;
+- gewählte Topologie und angelegte, vorgeschlagene oder übersprungene
+  Tasks;
+- exakte Mutation und Vorher-/Nachher-Readback;
+- Ergebnis-Beleg oder offenes Beobachtungsfenster;
+- Rollback-Ort und Rückkehrbedingung;
+- geteiltes Abdeckungs-Update, falls eine Koordinations-Registry existiert.
 
-## Example
+## Beispiel
 
-User: "Set up self-maintaining schedules in this desktop app."
+Nutzer: "Richte selbst-wartende Zeitpläne in dieser Desktop-App ein."
 
-Discover whether the app can list, create, update and verify scheduled tasks.
-Generate the compact plan, present unsupported capabilities, then install only the
-approved tasks through the native surface. A folder containing a task prompt
-without a live scheduler registration is not a completed setup.
+Entdecken, ob die App geplante Tasks auflisten, anlegen, aktualisieren und
+verifizieren kann. Den kompakten Plan erzeugen, nicht unterstützte
+Fähigkeiten darlegen, dann nur die freigegebenen Tasks über die native
+Oberfläche installieren. Ein Ordner mit einem Task-Prompt ohne
+Live-Scheduler-Registrierung ist kein abgeschlossenes Setup.
 
 ## Changelog
 
+### 1.3.1 (2026-09-09)
+
+- Die ausdrücklich beauftragten Self-Care-Härtungen aus den Versionen 1.2
+  und 1.3 anbieterneutral konsolidiert.
+- Host-, Konto- und private Projektpfade aus der öffentlichen Anleitung
+  entfernt und durch Adapterfelder beziehungsweise neutrale Platzhalter
+  ersetzt.
+- Modellwechsel an aktuelle Anbieterfähigkeit, lokale Policy und belegte
+  Autorität gebunden; feste Versionsrangfolgen und unbelegte
+  Qualitätsbehauptungen entfernt.
+- Policy-Linting, semantische Prompt-Prüfung, Lock-Gate,
+  transaktionale Mehrflächen-Updates, Regeldatei-Hygiene und Mini-Checks als
+  portable Verträge beschrieben.
+
+### 1.3.0 (2026-09-09)
+
+- Deterministisches Policy-Linting und semantische Policy-Prüfung ergänzt.
+- Mehrflächen-Parität und die Bereinigung widersprüchlicher Zustände
+  abgesichert.
+
+### 1.2.0 (2026-09-06)
+
+- Lock-Governance, Modell-Anti-Regression, Regeldatei-Hygiene und
+  Mini-Check-Architektur ergänzt.
+
+### 1.1.0 (2026-08-30)
+
+- Anbieterneutrales `app_display_name` und das sichtbare Titelformat
+  `<APP_DISPLAY_NAME> — <CARE_TITLE>` ergänzt, inklusive `CODEX — ...` über
+  das Codex-Adapter-Profil.
+- Plan-Linting, Stabile-ID-/Semantik-Abgleich und Duplikat-Schutz ergänzt.
+- Klargestellt, dass Naming zusätzlich zum Recovery Floor gilt und dass
+  reine Titel-Migrationen jeden Nicht-Titel-Fingerprint bewahren müssen.
+
 ### 1.0.1 (2026-07-30)
 
-- Added provider-neutral text-automation and desktop-app automation aliases.
+- Anbieterneutrale Text-Automations- und Desktop-App-Automations-Aliase
+  ergänzt.
 
 ### 1.0.0 (2026-07-28)
 
-- Consolidated the original ANTIGRAVITY maintenance family, the F1-F6 control
-  loop and later provider-specific adaptations into a neutral core-set skill.
+- Die ursprüngliche ANTIGRAVITY-Wartungsfamilie, die F1-F6-Regelschleife und
+  spätere anbieterspezifische Anpassungen zu einem neutralen
+  Core-Set-Skill konsolidiert.

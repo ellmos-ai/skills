@@ -17,6 +17,7 @@ tags: [metacognition, self-talk, metacognitive-injectors, evaluator-hook, qualit
 aliases: [self-talk, metacognitive-self-talk, metacognitive-auditing, evaluator-hook, preflight-checklist, inner-speech, active-retrieval, rehearsal]
 language: de
 status: active
+visibility: public
 dependencies:
   tools: []
   services: []

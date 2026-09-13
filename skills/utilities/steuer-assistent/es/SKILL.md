@@ -18,6 +18,8 @@ language: es
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="steuer-assistent banner">
+
 > **Español** — Versión oficial en español de `steuer-assistent`.
 
 

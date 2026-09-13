@@ -32,14 +32,14 @@ Voraussetzungen: MiKTeX (Windows) oder TeX Live (Mac/Linux)
   LaTeX-Pakete: geometry, fancyhdr, graphicx, hyperref, babel, xcolor, parskip
 """
 
-import os
-import sys
 import json
+import os
 import shutil
 import subprocess
+import sys
 import tempfile
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 os.environ.setdefault('PYTHONIOENCODING', 'utf-8')
 

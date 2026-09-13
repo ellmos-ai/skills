@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-09-03
 description: >
   基于 Persona（人设）、协调 Role（角色）、Expert（专家）与实时 Skill 终点，构建并使用供应商中立的语义路由图。当 LLM 需要将请求通过 Boss 角色路由至专家再到 Skill、从现有 Agent 系统提取便携式 Persona 路由器、将语义领域图与词法 Skill 注册表相结合，或显式暴露缺失的角色到 Skill 端口（而非静默降级）时使用。触发词包括语义 Persona 路由、Persona 伞形架构、角色路由器、Boss Agent 专家 Skill 路由、Agent 角色导出或使 Persona 跨 LLM 供应商复用的请求。
 standalone: true
@@ -12,7 +12,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [persona, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
+tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: zh
 status: active
 dependencies:
@@ -67,7 +67,33 @@ python scripts/build_routing_map.py \
 
 切勿自动提升 `candidate_skills`。请先通过实时 Skill 解析器或源元数据对其进行确认。
 
+## 创建并存放 Persona (Create and store personas)
+
+核心只构建映射图，从不臆造 Persona。要使用自己的 Persona，请把它们放在
+**技能旁边**并重新构建映射图：`personas/<persona-id>.md`（每个 Persona 一个文件）、
+`roles/<role>/SKILL.md`（协调角色与专家）、`routing-map.json`（生成的映射图）、
+`config.json`（主机本地，永不发布）。构建器只从 `SKILL.md` 读取角色，从任何带
+frontmatter 的 Markdown 读取 Persona。复制
+[templates/persona.template.md](templates/persona.template.md) 并填写契约：
+`name` 与 `type: persona`；`persona.display_name`、`short_name`、`gender`、`role`、
+`default_prompt`；`parent_agents`（所属协调角色）；`skills`（**技能名称，绝非路径**，
+只有它们会被解析为端点）；`optional_skills`（依赖主机的技能，缺失时保持为可见的
+`GAP`）。Persona 不授予工具或权限，也不覆盖安全规则、锁或用户决定。
+
+**路径：** 技能中不出现主机路径。`config.example.json` 展示模式
+（`ellmos.skill-config.v1`，`einstellungen.paths` 使用 `<HOME>/<ONEDRIVE>/<TOPICS>`
+等占位符）；主机本地副本为 `config.json`，部署时保留，永不提交。
+
+**清理目录：** `--skills-layout catalog` 只接受 `<category>/<name>/SKILL.md`，并跳过以
+`_` 开头的目录（`_archive`、`_reference`、`_templates`），避免归档或参考副本造成的
+`duplicate-skill-id` 问题。
+
 ## 路由请求 (Route a request)
+
+### 0. 提供已有的 Persona (Offer existing personas)
+
+若技能旁存在 Persona（`personas/`），调用时列出其显示名、角色和技能并路由到匹配者；
+请求未指明 Persona 时，在第 4 步再选择。路由回执格式保持不变。
 
 ### 1. 语义化选择协调角色 (Select the coordinator role semantically)
 
@@ -124,6 +150,12 @@ GAPS: <missing endpoints or stale-map warnings>
 路由器首先选择办公协调角色，接着选择税务专家，解析出已安装的税务 Skill，最后应用显式关联的细致税务 Persona。如果税务专家存在但未安装可移植的税务 Skill，则报告 `GAP` 并仅通过显式配置的回退方案继续执行。
 
 ## 更新日志 (Changelog)
+
+### 1.1.0 (2026-09-03)
+
+- 创建并存放 Persona：技能旁的存放约定、frontmatter 契约、中立模板
+  `templates/persona.template.md`、带 `config.example.json` 的路径约定、调用行为，
+  以及针对重复技能 ID 的 `--skills-layout catalog`。
 
 ### 1.0.0 (2026-07-28)
 

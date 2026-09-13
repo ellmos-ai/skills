@@ -30,10 +30,10 @@ import os
 import re
 import sqlite3
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 import uuid
-from datetime import datetime, date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Optional
 

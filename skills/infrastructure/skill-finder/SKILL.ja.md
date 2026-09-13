@@ -53,7 +53,7 @@ provenance:
 | 許可されたユーザー選好モデルの構築または利用 | マルチエージェント (Multi-Agent) | `build-your-users-mind`（構築）· `decision-avatar`（利用） |
 | バグ／テストの失敗 | コーディング＆デバッグ (Coding & Debugging) | `/bugfix-protocol` (1 バグ)、`/bugsweep` (多数、リリース前) |
 | 新規／既存のプロジェクトまたはパイプライン | プロジェクト／パイプライン | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
-| Roblox ゲーム | ゲーム開発 | `/roblox-dev` (→ `/rojo`, `/roblox-studio`, `/game-design`) |
+| Roblox ゲーム | ゲーム開発 | `/rbx-dev` (→ `/rojo`, `/rbx-studio`, `/game-design`) |
 | セラピー／カウンセリング／危機対応 | セラピー | `/therapie-umbrella` (→ stabilization/guideline/counseling) |
 | プレゼンテーション／スライド | オフィス | `/academic-pptx` (内容) + `/pptx` (ファイル) |
 | マルチエージェント調整 | マルチエージェント (Multi-Agent) | `/swarm-operations`, `/model-strategy` |

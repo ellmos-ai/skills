@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/gap-closing-analysis-v1.schema.json",
+  "title": ".SKILLS gap-closing-analysis v1",
+  "description": "Verbesserungsvorschlaege je Luecke aus usecase-gaps.json, mit Fokus auf STRUKTURELLE Schliessungswege (ellmos-Modul/Bundle/Fremdmodul/Neubau) -- nicht Ersatz fuer skill-creator's grading.json.eval_feedback (das erklaert, warum eine einzelne Assertion fehlschlug; hier geht es darum, WOMIT die Luecke ueberhaupt geschlossen werden koennte).",
+  "type": "object",
+  "required": [
+    "schema",
+    "skill_name",
+    "analysiert_am",
+    "vorschlaege"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "const": "ellmos.gap-closing-analysis.v1"
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "analysiert_am": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "vorschlaege": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gap_id",
+          "weg",
+          "beschreibung"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "gap_id": {
+            "type": "integer",
+            "description": "Verweist auf gaps[].gap_id in usecase-gaps.json."
+          },
+          "weg": {
+            "type": "string",
+            "enum": [
+              "ellmos-modul",
+              "ellmos-bundle",
+              "fremdmodul",
+              "eigener-neubau",
+              "vorhandenes-skript-erweitern"
+            ]
+          },
+          "kandidat": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name/Id des konkreten Moduls/Bundles/Fremdmoduls, falls bekannt."
+          },
+          "beschreibung": {
+            "type": "string"
+          },
+          "aufwand": {
+            "type": "string",
+            "enum": [
+              "klein",
+              "mittel",
+              "gross",
+              "unbekannt"
+            ],
+            "default": "unbekannt"
+          },
+          "umgesetzt": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}

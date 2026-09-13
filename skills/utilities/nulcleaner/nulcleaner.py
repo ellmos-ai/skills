@@ -24,10 +24,11 @@ Author: Lukas Geiger
 __version__ = "1.0.0"
 __author__ = "Lukas Geiger"
 
-import os
 import argparse
+import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
+
 
 def find_nul_files(root):
     """Findet alle NUL-Dateien rekursiv ab root."""
@@ -157,7 +158,9 @@ def cli():
 
     if args.mode == "gui":
         root = tk.Tk()
-        app = NulCleanerGUI(root)
+        # Referenz bewusst halten: bei Tkinter kann eine nur lokal gebundene
+        # Fensterklasse eingesammelt werden, waehrend mainloop laeuft.
+        app = NulCleanerGUI(root)  # noqa: F841
         root.mainloop()
         return
 

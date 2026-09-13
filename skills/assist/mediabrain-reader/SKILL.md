@@ -15,6 +15,7 @@ category: assist
 tags: [media, catalog, metadata, export]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

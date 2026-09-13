@@ -1,0 +1,34 @@
+{
+  "schema": "agents-bridge.profile.v3",
+  "profile_id": "synthetic-claude-primary",
+  "platform": {"path_style": "portable-relative", "encoding": "utf-8", "variables": {"instance_root": "."}},
+  "primary_surface": {"provider": "claude", "path": "CLAUDE.md"},
+  "provider_surfaces": [
+    {"id": "surface-claude", "provider": "claude", "path": "CLAUDE.md", "strategy": "primary"},
+    {"id": "surface-agents", "provider": "neutral", "path": "AGENTS.md", "strategy": "loader"},
+    {"id": "surface-gpt", "provider": "codex", "path": "GPT.md", "strategy": "loader"},
+    {"id": "surface-gemini", "provider": "gemini", "path": "GEMINI.md", "strategy": "projection"}
+  ],
+  "truth_sources": [
+    {"id": "truth-primary", "path": "CLAUDE.md", "order": 10, "owner": "operator", "scope": "instance"},
+    {"id": "truth-shared", "path": "rules/SHARED.md", "order": 20, "owner": "operator", "scope": "shared"}
+  ],
+  "pointer_graph": [
+    {"from": "surface-agents", "to": "surface-gpt", "kind": "loader"},
+    {"from": "surface-gpt", "to": "surface-claude", "kind": "loader"},
+    {"from": "surface-claude", "to": "truth-primary", "kind": "primary"},
+    {"from": "surface-gemini", "to": "truth-primary", "kind": "projection"}
+  ],
+  "recovery_pointers": ["RECOVERY.md"],
+  "memory": {
+    "index": {"path": "memory/MEMORY.md", "owner": "shared"},
+    "silos": [
+      {"id": "claude-memory", "path": "memory/claude", "owner": "claude", "writers": ["claude"], "readers": ["claude", "codex"], "scope": "provider", "refresh_rule": "owner-writes", "merge_rule": "manual-only"},
+      {"id": "codex-memory", "path": "memory/codex", "owner": "codex", "writers": ["codex"], "readers": ["codex", "claude"], "scope": "provider", "refresh_rule": "owner-writes", "merge_rule": "manual-only"}
+    ]
+  },
+  "messenger": {"root": "bridge/messenger", "actors": ["claude", "codex", "gemini", "neutral"], "transport": "files", "provenance": "append-only"},
+  "presence": {"root": "bridge/presence", "ttl_seconds": 300},
+  "locks": {"root": "bridge/locks", "ttl_seconds": 900, "conflict_policy": "fail-closed"},
+  "privacy": {"mode": "reject", "include": [], "exclude": ["**/.git/**", "**/*.key", "**/*.pem"]}
+}

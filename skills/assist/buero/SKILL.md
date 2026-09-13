@@ -15,6 +15,7 @@ category: assist
 tags: [office, planning, prioritization, correspondence]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

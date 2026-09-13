@@ -15,6 +15,7 @@ category: assist
 tags: [household, routines, tasks, planning]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

@@ -34,7 +34,7 @@ import os
 import sqlite3
 import sys
 import uuid
-from datetime import datetime, date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Optional
 

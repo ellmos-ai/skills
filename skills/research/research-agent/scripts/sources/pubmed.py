@@ -6,8 +6,8 @@ Dokumentation: https://www.ncbi.nlm.nih.gov/books/NBK25501/
 """
 
 import json
-import urllib.request
 import urllib.parse
+import urllib.request
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Optional
 

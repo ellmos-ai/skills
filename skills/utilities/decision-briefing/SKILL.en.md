@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-06-13
+updated: 2026-09-09
 description: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
@@ -198,6 +198,20 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 - **Mind reversibility:** decide reversible choices quickly, treat final ones more thoroughly
 - **Respect time pressure:** fast decisions need simpler methods — not every question deserves a weighted scoring analysis
 
+### Session provenance for generated artifacts
+
+When this skill creates an important new, persistent briefing, report, handoff, or receipt,
+the artifact ends with exactly one line:
+
+`session: <session-id> | <agent>@<host> | YYYY-MM-DD`
+
+- Source priority: explicit runtime/CLI value, then authoritative provider environment or hook,
+  otherwise `unbekannt`. Never guess values.
+- A subagent uses its parent session ID.
+- Routine chat, consulted source documents, policies, `CLAUDE.md`, READMEs, and decisions merely
+  written back to an existing source do not receive a blanket stamp. Do not blindly backfill old
+  files.
+
 ---
 
 ## Scope and Synergies
@@ -215,6 +229,10 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-09-09)
+- P-018 adds session provenance for important newly generated briefings, reports, handoffs, and
+  receipts, including source priority, parent-session inheritance, and narrow exclusions.
 
 ### 1.0.0 (2026-06-13)
 - Ported from the BACH expert `decision-briefing` v1.0.0; scanner component (scanner.py, sources.json, marker scans) deliberately removed — capture is lightweight, based on the context at hand

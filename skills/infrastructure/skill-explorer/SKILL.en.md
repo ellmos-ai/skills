@@ -1,10 +1,10 @@
 ---
 name: skill-explorer
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-24
 description: Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for "compare/audit skills", "which skills are duplicated", "form skill families", "clean up/consolidate skills", "maintain the skill register", "find skills/plugins for topic X", "install new skills", "browse the skill marketplace", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.
 standalone: true
 anthropic_compatible: true
@@ -80,6 +80,11 @@ Family sub-reports or sources/languages are independent work paths. If the platf
 - **Templates:** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Changelog
+
+### 1.1.1 (2026-08-24)
+- The inventory helper now accepts legacy one-line `dependencies` mappings and degrades
+  malformed values safely instead of aborting the whole audit. Its completion message is also
+  compatible with Windows consoles.
 
 ### 1.1.0 (2026-06-17)
 - Added branch mechanism: third-party/read-only skills can be customized via a fork copy (branch) — with a reference to the original, date, author, and reason; the original remains untouched. Iron rule "Survey ≠ mutation" extended with branch escape hatch. New section `## Branch Mechanism`. New files: `references/skill-branching.md`, `assets/branch-header.example.md`.

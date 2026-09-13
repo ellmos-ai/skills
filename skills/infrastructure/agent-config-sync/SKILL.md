@@ -15,6 +15,7 @@ category: infrastructure
 tags: [mcp, skills, rules, sync, provider-neutral, discovery, multi-agent]
 language: de
 status: active
+visibility: public
 aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}

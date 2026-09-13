@@ -1,0 +1,14 @@
+{
+  "_comment": "Neutrale Vorlage der kanonischen Skill-Bibliothek. Jeder Nutzer passt seine lokale Kopie dieser Datei selbst an; echte Pfade (z. B. zu einem Token-Tracking-Werkzeug) gehoeren NICHT hierher. Ohne diese Datei gilt exakt das dokumentierte Sparprofil.",
+  "active_profile": "spar",
+  "overrides": {},
+  "session_override": null,
+  "token_tracker": {
+    "enabled": false,
+    "report_path": null,
+    "db_path": null,
+    "auto_downgrade": { "to": "spar", "when_credit_below_pct": 50 },
+    "auto_upgrade": { "to": "spar", "when_credit_above_pct": 80 },
+    "on_unreadable": "assume_critical"
+  }
+}

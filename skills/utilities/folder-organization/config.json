@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "max_files": 5000,
+  "max_depth": 12,
+  "hash_max_bytes": 67108864,
+  "log_retention_days": 30,
+  "archive_dir": "_archive",
+  "trash_review_dir": "_trash_review",
+  "ignore_directories": [
+    ".git",
+    ".svn",
+    "node_modules",
+    "__pycache__",
+    ".pytest_cache",
+    ".venv",
+    "venv"
+  ],
+  "control_files": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "README.md",
+    "START.md",
+    "STATE.md",
+    "TODO.md",
+    "DONE.md",
+    "CHANGELOG.md",
+    "DECISIONS.md",
+    "MANIFEST.md"
+  ],
+  "log_extensions": [".log"],
+  "log_exact_names": ["stderr", "stdout"],
+  "log_name_tokens": ["log", "journal", "history", "trace"],
+  "active_log_tokens": ["active", "current", "live", "running"],
+  "evidence_log_tokens": ["audit", "evidence", "proof", "record"],
+  "text_extensions": [".md", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".csv"],
+  "secret_policy": {
+    "enabled": true,
+    "protected_name_patterns": [
+      ".env",
+      ".env.*",
+      "*.pem",
+      "*.key",
+      "*.p12",
+      "*.pfx",
+      "*.kdbx",
+      "id_rsa*",
+      "id_dsa*",
+      "id_ecdsa*",
+      "id_ed25519*",
+      "credentials*.json",
+      "credentials",
+      "credentials.*",
+      "service-account*.json",
+      "secrets*.json",
+      "secret-pointer-map.json",
+      ".envrc",
+      ".npmrc",
+      ".pypirc",
+      ".netrc"
+    ],
+    "protected_name_exclusions": [
+      ".env.example",
+      ".env.sample",
+      ".env.template",
+      ".env.dist",
+      "*.example.*",
+      "*.example",
+      "*.sample.*",
+      "*.sample",
+      "*.template.*",
+      "*.template",
+      "*.dist"
+    ],
+    "never_semantically_open_protected": true,
+    "incidental_content_detection": true,
+    "max_content_scan_bytes": 131072,
+    "content_signal_patterns": [
+      {
+        "id": "private-key-header",
+        "regex": "-----BEGIN[ A-Z0-9_-]{0,40}PRIVATE KEY-----"
+      },
+      {
+        "id": "secret-assignment",
+        "regex": "(?im)^\\s*(?:api[_-]?key|client[_-]?secret|password|access[_-]?token)\\s*[:=]\\s*[^\\s]{12,}"
+      }
+    ],
+    "cloud_detection": {
+      "configured_roots": [],
+      "environment_root_variables": [
+        "OneDrive",
+        "OneDriveConsumer",
+        "OneDriveCommercial",
+        "DROPBOX_HOME",
+        "GOOGLE_DRIVE_HOME",
+        "ICLOUD_DRIVE_HOME"
+      ],
+      "path_component_markers": [
+        "onedrive",
+        "dropbox",
+        "google drive",
+        "icloud drive"
+      ]
+    },
+    "cloud_action": "localize-after-approval",
+    "local_secret_root": null,
+    "pointer_mode": "control-file",
+    "pointer_control_file": "SECRETS-POINTERS.md",
+    "local_pointer_map": "SECRET-POINTER-MAP.json",
+    "include_local_path_in_cloud_pointer": false,
+    "require_destination_outside_cloud": true,
+    "require_restrictive_permissions": true,
+    "opaque_copy_hash_verify": true
+  }
+}

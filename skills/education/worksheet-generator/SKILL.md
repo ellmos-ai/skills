@@ -14,6 +14,7 @@ tags: [worksheets, icf, education, therapy-support, wrapper]
 aliases: [worksheet-generator, worksheet-generator-de]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">

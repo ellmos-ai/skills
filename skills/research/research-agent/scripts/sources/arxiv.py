@@ -7,8 +7,8 @@ Dokumentation: https://info.arxiv.org/help/api/index.html
 Status: Funktionsfaehig, aber als sekundaere Quelle gedacht.
 """
 
-import urllib.request
 import urllib.parse
+import urllib.request
 import xml.etree.ElementTree as ET
 from typing import List, Optional
 

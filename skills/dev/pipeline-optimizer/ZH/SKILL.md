@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
+<img src="banner.png" width="100%" alt="pipeline-optimizer banner">
+
 > **中文** — `pipeline-optimizer` 官方中文版本。
 
 

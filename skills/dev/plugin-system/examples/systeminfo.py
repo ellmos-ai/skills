@@ -1,7 +1,8 @@
 """System-Informationen Plugin"""
 
-import platform
 import os
+import platform
+
 from plugin_system import PluginBase
 
 

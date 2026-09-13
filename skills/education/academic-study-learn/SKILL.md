@@ -14,6 +14,7 @@ tags: [academic, active-learning, study-techniques, note-taking]
 aliases: [academic-study-learn, academic-study-learn-de]
 language: de
 status: active
+visibility: public
 ---
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">

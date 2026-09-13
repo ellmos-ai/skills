@@ -15,6 +15,7 @@ category: game-dev
 tags: [blender, bpy, 3d, assets, fbx, glb, gltf, mcp]
 language: de
 status: active
+visibility: public
 provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
 

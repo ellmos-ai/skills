@@ -1,10 +1,10 @@
 ---
 name: skill-explorer
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-24
 description: 自らのスキル景観を管理：既存スキルの調査と比較（監査モード）、新しいスキル/プラグインのWeb調査（探索モード）を行い、同時にモノリスを読み込む代わりに軽量なサブスキル（Skill-Finder、ファミリーアンブレラ、メンテナンススキル）を生成するインストーラーでもあります。「スキルの比較/監査」、「どのスキルが重複しているか」、「スキルファミリーの形成」、「スキルのクリーンアップ/集約」、「スキルレジストリの維持」、「トピックXのスキル/プラグインの検索」、「新しいスキルのインストール」、「スキルマーケットプレイスの閲覧」、または `/skill-explorer` に使用します。ファミリーごとのサブレポートと全域で番号付けされた決定リストを提供し、セキュリティチェックと明示的な承認の後にのみインストール/アンインストールを行います。
 standalone: true
 anthropic_compatible: true
@@ -80,6 +80,11 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/skill-explorer
 - **テンプレート：** `assets/family-umbrella-template.md`, `assets/skill-finder-template.md`, `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## 変更履歴
+
+### 1.1.1 (2026-08-24)
+- インベントリ補助ツールが、1 行でシリアライズされた旧形式の `dependencies`
+  マッピングを受け入れ、壊れた値があっても監査全体を中断しないようになりました。
+  完了メッセージも Windows コンソールに対応しました。
 
 ### 1.1.0 (2026-06-17)
 - ブランチメカニズムの追加：サードパーティ/読み取り専用スキルをフォークコピー（ブランチ）経由でカスタマイズ可能に — 元スキルへの参照、日付、作成者、理由を付与し、オリジナルは手つかずのまま保持。鉄の掟「調査 ≠ 変更」にブランチという救済措置を拡張。新セクション `## ブランチメカニズム`。新ファイル：`references/skill-branching.md`、`assets/branch-header.example.md`。

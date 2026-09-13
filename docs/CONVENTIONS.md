@@ -19,8 +19,72 @@ created: 2026-03-12                 # Erstelldatum (ISO 8601)
 updated: 2026-03-12                 # Letzte Aenderung (ISO 8601)
 description: >
   Kurze Beschreibung der Faehigkeit.
+visibility: public                  # public | public potential | private profile | private-only
 ---
 ```
+
+### `visibility` -- wie weit darf der Skill nach aussen?
+
+**Fail-closed:** Fehlt das Feld, gilt der Skill als **privat** (`DEFAULT_VISIBILITY` in
+`build_public_registry.py`). Ein vergessenes Feld veroeffentlicht also nichts -- es haelt
+zurueck. Deshalb ist das Feld Pflicht: Jeder Skill beantwortet die Frage selbst, statt sie
+offenzulassen.
+
+| Wert | Bedeutung | Im oeffentlichen Repo? |
+|---|---|---|
+| `public` | Nutzerneutral und freigegeben | ja, getrackt |
+| `public potential` | Koennte spaeter veroeffentlicht werden, noch nicht entschieden | nein |
+| `private profile` | Persoenliche Daten, Vorlagen, Vorgaben -- nie | nein |
+| `private-only` | Zweck/Implementierung host- oder systemgebunden -- nie als solcher | nein |
+
+**Die Deklaration muss zum Git-Zustand passen.** `visibility` steuert die Listung (Registry,
+`SKILLS-MAP.md`, Pages); die `.gitignore` plus `FORBIDDEN_PUBLIC_SKILL_DIRECTORIES` in
+`testing/privacy_gate.py` steuern, ob die Datei ueberhaupt im oeffentlichen Repo liegt.
+Widersprechen sich beide, luegt eine Seite -- `privacy_gate.py` blockiert dann den Push:
+
+* *privat deklariert, aber getrackt* -- oeffentlich lesbar, obwohl nirgends gelistet
+  (die gefaehrliche Richtung: eine Veroeffentlichung, die keine Liste je zeigen wuerde)
+* *`public`/undeklariert, aber ausgeschlossen* -- der Katalog verspricht etwas, das im
+  oeffentlichen Repo nicht liegt
+
+Statusbegriffe und die Paar-Tabelle "oeffentlicher Kern <-> privater Rest" fuehrt
+`SKILLS-MAP-PRIVATE.md` (nicht im oeffentlichen Repo).
+
+### `third_party` und `license` -- fremdes Material
+
+Beide Felder sind **freiwillig** und wirken nur, wenn sie gesetzt sind. Wer sie
+weglaesst, hat einen eigenen Skill unter der Repo-Lizenz (MIT) -- das ist der
+Normalfall und braucht keine Erklaerung.
+
+```yaml
+third_party: true                   # nur bei fremdem Material
+license: MIT                        # SPDX-Kennung; bei third_party Pflicht
+upstream: https://github.com/…      # Quelle; bei third_party Pflicht
+```
+
+**`license` darf jeder Skill fuehren**, auch ein eigener -- etwa wenn er
+bewusst unter einer anderen Lizenz stehen soll als das Repo. Ohne Feld gilt die
+Repo-Lizenz. Wenn gesetzt, wird die **Form** geprueft (SPDX-Kennung), nicht die
+Erlaubnis: `MIT`, `Apache-2.0`, `GPL-3.0-or-later`, auch `MIT OR Apache-2.0`.
+Diese Formpruefung existiert, weil `provenance.origin` ohne sie auf sieben
+Schreibweisen inklusive Freitext angewachsen ist.
+
+**`third_party: true` hat dagegen Konsequenzen.** Der Skill muss dann in
+`skills/third-party/` liegen, eine Lizenz aus der Allow-Liste fuehren, die
+Upstream-`LICENSE`-Datei danebenlegen und auf seine Quelle zeigen.
+`testing/privacy_gate.py` prueft das und blockiert Abweichungen -- in beide
+Richtungen, denn Ordner und Flag muessen uebereinstimmen.
+
+Im Areal gilt ein **eigener, kleinerer Pflichtfeld-Satz** (`name`,
+`description`, `third_party`, `license`, `upstream`): Die neun Hausfelder sind
+unsere Konvention, kein externer Standard -- kein fremder Skill fuehrt sie.
+Details, Lizenz-Allow-Liste und der Umgang mit Treffern des Content-Scans:
+`skills/third-party/README.md`.
+
+Fremdmaterial, das wir nur **nutzen und gut finden**, gehoert nicht hierher,
+sondern nach `skills/_reference/` (gitignored, lebt in der OneDrive-Bibliothek).
+Etwas zu benutzen und etwas weiterzugeben sind verschiedene Fragen; nur die
+zweite braucht eine Erlaubnis.
 
 ## Kompatibilitaets-Felder
 
@@ -111,6 +175,46 @@ BACH (Quelle)  ──export──>  .SKILLS (Bibliothek)  ──publish──>  
 - **Export (BACH -> .SKILLS):** `last_sync_from_origin` wird aktualisiert
 - **Import (.SKILLS -> BACH):** `last_sync_to_origin` wird aktualisiert
 - **Lokale Aenderung:** `local_changes_since_sync: true` + `updated` Datum
+
+---
+
+## Private Forks und Branch-Metadaten (ohne History-Rewrite)
+
+> Modell aus T-20260830-577766355 (Nachfolger von T-20260730-02, Nutzerentscheid B:
+> kein History-Rewrite/Force-Push). Private Varianten oeffentlicher Skills leben NIE
+> in diesem Repository, sondern im lokalen No-Push-Maintainer-Stand
+> (`skills-maintainer-private`, Remote `no_push://private-content`).
+
+**Drei Variant-Arten** (kontrollierte Werte fuer `variant_kind`):
+
+| `variant_kind` | Bedeutung | Sync-Richtung |
+|---|---|---|
+| `private-profile` | persoenliche Daten/Vorlagen ueber einem oeffentlichen Kern; Quellen in `derived_from[]` | `upstream-to-variant-only` |
+| `private-only` | host-/systemgebundener Zweck ohne oeffentlichen Kern | `none` |
+| `vendor-mirror` | unveraenderter Drittanbieterbestand mit echter Upstream-Provenienz | `vendor-pull-only` |
+
+**Wo die Metadaten liegen** (keine Doppelpflege):
+
+1. **Frontmatter der Variante** traegt das bestehende `provenance:`-Schema (oben)
+   plus `visibility: private-only`.
+2. **Registry des Maintainer-Stands** (`registry/private-variants.json`, daraus
+   generiert `forks.json` `forks-v1` / `branches.json` `branches-v1` via
+   `versionctl registry-generate --view private`, ausgefuehrt im privaten
+   No-Push-Maintainer-Stand -- dieses Repository enthaelt weder die Registry
+   noch das Tool) traegt je Variante:
+   `id`, `path`, `variant_kind`, `derived_from[]` sowie — seit diesem Modell —
+   `divergence_reason` (Abweichungsgrund in einem Satz, Pflicht fuer
+   `private-profile`/`private-only`) und `origin_commit` (Commit des
+   oeffentlichen Kerns zum Forkzeitpunkt; `null` erlaubt mit Bedeutung
+   "vor Registry-Einfuehrung geforkt, historisch nicht rekonstruierbar" —
+   nie nachtraeglich erfinden).
+3. Sync-Policy und Privacy-Level kommen aus den `variant_policies` der
+   Variant-Art, nicht aus Einzelpflege.
+
+**Regeln:** Rueckfluss privat -> oeffentlicher Kern ist fuer alle drei Arten
+verboten. Ein Fork-Eintrag ohne `derived_from[]` ist bei `private-profile` ein
+Fehler. Divergenz wird dokumentiert (`divergence_reason`), nie durch
+History-Rewrite "bereinigt".
 
 ---
 
@@ -211,7 +315,7 @@ aufeinander aufbauende Sets organisiert:
 |-----|----------|----------------------------|--------|
 | **Core Set** | DE, EN | ~20% | ✅ Pflicht für jeden Skill |
 | **Full Set** | Core + ES, ZH, JA, RU | ~40–45% | ✅ Aktueller Standard |
-| **World Set** | Full + FR, HI, AR, BN, PT | ~55–60% | 🔮 Reserviert für späteren Ausbau |
+| **World Set** | Full + FR, HI, AR, BN, PT | ~55–60% | 🟢 Ausbau beschlossen [U 2026-08-12] — Zielbild, schrittweise |
 
 ### Sprachkatalog
 
@@ -230,8 +334,11 @@ aufeinander aufbauende Sets organisiert:
 | `pt` | Portugiesisch | World | `SKILL.pt.md` | ~260 Mio. |
 
 **Aktueller Zielumfang:** Alle Skills werden auf **Full Set** gepflegt.
-World-Set-Sprachen existieren teilweise als Stubs (insb. `fr`) und werden
-erst bei explizitem Ausbaubeschluss vollständig übersetzt.
+Der World-Ausbaubeschluss ist erteilt [U 2026-08-12]: World-Set-Sprachen werden
+**nach und nach** vollständig übersetzt — bevorzugt als Leerlauf-Sprachzug
+(ein Objekt × eine Sprache je Leerlauf). Die Sets gelten über Skills hinaus
+als Sprachstufen für Repos, Module, Bundles und Stacks in `.AI` und
+`.SOFTWARE` (systemweite Regel: P-006 „Sprachstufen" im Policy-Register).
 
 ### Sprach-Feld
 
@@ -288,6 +395,24 @@ Discovery-Index `registry/components.json`. Er enthält ausschließlich die für
 Installation und Auffindbarkeit notwendigen Felder. Interne Bewertungen,
 Ownership-, Privacy-, Branch- und Wartungsdaten gehören in die vollständige
 Registry des getrennten No-Push-Repositories.
+
+Die nicht-zirkuläre Quellenautorität dafür ist
+`registry/public-skill-files.json`: In einem Git-Checkout wird sie aus den
+getrackten öffentlichen Skill- und Sprachdateien erzeugt und mit `--check`
+gegen Git geprüft. In gitlosen Archiven und angereicherten Plan-D-Projektionen
+ist ausschließlich diese versionierte Dateiliste maßgeblich. Physisch daneben
+liegende interne Zusatzskills werden weder veröffentlicht noch gelöscht;
+fehlende, unsichere oder veraltete Manifest-Einträge führen zu einem
+fail-closed Fehler.
+
+**Erzeugt wird der Katalog nur im Git-Checkout.** Ohne Git belegt das Manifest
+nur, dass die gelisteten Dateien existieren — nicht, dass ihr Inhalt aktuell
+ist. Ein Schreiblauf in einer zurückgebliebenen Arbeitskopie erzeugt deshalb
+still einen falschen Katalog: Ein dort veraltetes `SKILL.md` ohne `visibility`
+lässt einen öffentlichen Skill fail-closed herausfallen. Der Generator
+verweigert das Schreiben darum außerhalb eines Git-Checkouts; `--check` bleibt
+dort erlaubt und meldet den Rückstand als „stale". Gespiegelte Kopien (etwa die
+OneDrive-Bibliothek) bekommen den Katalog aus dem Klon, sie bauen ihn nicht neu.
 
 `python build_skills_map.py` erzeugt daraus die öffentliche `SKILLS-MAP.md`.
 

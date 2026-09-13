@@ -15,6 +15,7 @@ category: education
 tags: [education, support, lesson-planning, differentiation]
 language: de
 status: stable
+visibility: public
 dependencies:
   tools: []
   services: []

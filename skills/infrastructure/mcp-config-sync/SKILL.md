@@ -15,6 +15,7 @@ category: infrastructure
 tags: [mcp, config, sync, provider-neutral, discovery, multi-agent]
 language: de
 status: active
+visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---

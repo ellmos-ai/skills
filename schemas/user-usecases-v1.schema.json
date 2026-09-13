@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ellmos.local/skills/schemas/user-usecases-v1.schema.json",
+  "title": ".SKILLS user-usecases v1",
+  "description": "Vom Nutzer tatsaechlich vorgebrachte Anwendungsfaelle eines Skills -- absichtlich formgleich zu skill-creator's evals.json (id/prompt/expected_output/expectations), damit dieselbe Eval-/Grading-Maschinerie spaeter darueber laufen kann. Getrennt von evals.json gehalten, weil dort der Skill-Autor die Faelle waehlt, hier der Nutzer.",
+  "type": "object",
+  "required": ["schema", "skill_name", "usecases"],
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "const": "ellmos.user-usecases.v1"
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "usecases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "prompt", "erfasst_am"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Die Nutzeranfrage bzw. der Anwendungsfall in eigenen Worten."
+          },
+          "expected_output": {
+            "type": ["string", "null"],
+            "description": "Was der Nutzer als Erfolg ansehen wuerde, falls geaeussert."
+          },
+          "expectations": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional: pruefbare Teilaussagen, formgleich zu evals.json[].expectations."
+          },
+          "erfasst_am": {
+            "type": "string",
+            "format": "date"
+          },
+          "quelle": {
+            "type": "string",
+            "default": "user",
+            "description": "Woher der Anwendungsfall stammt (Chat, Ticket, Feedback, ...)."
+          }
+        }
+      }
+    }
+  }
+}

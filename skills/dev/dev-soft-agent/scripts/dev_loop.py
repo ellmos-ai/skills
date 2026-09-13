@@ -21,10 +21,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Union
 
-from .config import Config
-from .project_manager import ProjectManager, Project
-from .task_engine import TaskEngine, Task, TaskStatus, TaskType
 from .code_analyzer import CodeAnalyzer, ProjectAnalysis
+from .config import Config
+from .project_manager import Project, ProjectManager
+from .task_engine import Task, TaskEngine, TaskStatus, TaskType
 
 
 @dataclass

@@ -17,6 +17,8 @@ language: ja
 status: active
 ---
 
+<img src="banner.png" width="100%" alt="law-checker banner">
+
 > **日本語** — `law-checker` の公式日本語版。
 
 # law-checker (法務部門) -- Pointer Skill
