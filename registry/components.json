@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 138,
+    "component_count": 139,
     "categories": {
       "assist": 20,
       "dev": 24,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 31,
+      "infrastructure": 32,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1301,6 +1301,19 @@
       "languages": [
         "de",
         "en"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:operator",
+      "name": "operator",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/operator/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Providerneutrale Operator- und Teamleader-Rolle für komplexe, länger laufende oder planbasierte Vorhaben. Verwenden bei `$operator`, `/operator`, \"übernimm als Operator\" oder \"arbeite den Plan weiter ab\", um den nächsten substanziellen Planschritt zu wählen, unabhängige Arbeitspakete kontrolliert zu delegieren und Ergebnisse evidenzbasiert abzunehmen und zu integrieren.",
+      "languages": [
+        "de"
       ]
     },
     {
