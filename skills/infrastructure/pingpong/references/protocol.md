@@ -8,6 +8,63 @@
 - Laufzeit-State und Lease außerhalb des synchronisierten Ordners ablegen, zum Beispiel unter ~/.pingpong/.
 - ListenSync beobachtet systematisch. WriteSync schreibt ausschließlich in den eigenen Slot. ListenSync betreibt auch WriteSync.
 
+## STATE und CALL: wer geht ran
+
+Zwei getrennte Marken mit verschiedener Bedeutung. Die Teilnahme verlangt **beide**
+zugleich, deshalb hält ein bloßer Aktiv-Zustand niemanden wach.
+
+- **STATE** — „ich bin am Apparat": Feld `pingpong` in `agents/registry/<slot>.state.json`,
+  hostbezogen und dauerhaft. Die Datei gehört `mirror_rulefiles.py`, das sie neu erzeugt und
+  dieses Feld dabei mitführt; geschrieben wird nur additiv, nie die ganze Datei ersetzt.
+- **CALL** — „wer soll mittelefonieren": Datei `agents/call-<von>-to-<an|all>.txt`. Absender
+  und Empfänger stehen im **Namen**, damit ohne Öffnen entscheidbar ist, ob ein Call einen
+  betrifft. Im Rumpf stehen nur `EXPIRES` und `REASON`. Ein Slotname darf kein `-to-` enthalten.
+
+Regeln:
+
+    aktiver anderer Host UND Call an mich oder an alle  -> ich gehe ran
+    aktiv, aber kein Call                               -> ich gehe nicht ran
+    ich selbst aktiv, kein Call mehr                    -> aufgelegt, ich deaktiviere mich
+    eigene Arbeit fertig                                -> eigenen Call beenden
+
+## Zweistufige Prüfung
+
+Stufe 1 ist billig und beantwortet den häufigsten Fall — niemand arbeitet cross-host — mit
+einem Blick in die State-Dateien. Erst bei einem Treffer folgt Stufe 2, das Namens-Matching
+der Call-Dateien. Ausgeführt wird beides von `scripts/pingpong_runtime.py check`:
+
+    python "<skill-root>/scripts/pingpong_runtime.py" check --slot <slot> --sync-root <pfad>
+
+Der Rückgabewert hat **drei** Werte, damit ein fehlgeschlagener Check nie wie Leerlauf
+aussieht:
+
+| Exit | Verdict | Bedeutung |
+|---:|---|---|
+| 0 | `call-for-me` | aktivieren und einen PingPong-Agenten spawnen |
+| 1 | `idle` | belegt niemand da oder kein Call für mich; bin ich selbst aktiv, deaktivieren |
+| 3 | `check-failed` | Registry oder Call-Ordner unlesbar — **nicht** als Leerlauf behandeln |
+
+`--json` liefert denselben Befund maschinenlesbar samt `self_active` und `active_hosts`.
+
+## Verfall des Calls
+
+Regulär beendet der Einberufer seinen Call, sobald der Zweck erfüllt ist. Als Sicherheitsnetz
+verfällt jeder Call nach `EXPIRES` (Vorgabe 6 Stunden, angelehnt an den `DELEGIERT_AN`-Vermerk
+des ticket-master). Wer noch arbeitet, hält ihn frisch, indem er denselben Befehl erneut
+ausführt — das ist zugleich das Lebenszeichen:
+
+    ... call --to <slot|all> --reason "<zweck>"     # öffnen und auffrischen
+    ... call --to <slot|all> --end                  # beenden
+    ... call --list                                 # alle Calls mit live/expired
+    ... state --activate | --deactivate             # eigene Teilnahmemarke
+
+Ein verfallener Call wird von `check` ignoriert und beendet damit das Gespräch von selbst;
+eine liegengebliebene Datei ist wirkungslos und wird bei Gelegenheit entfernt. Fehlt das
+Feld `EXPIRES`, gilt Änderungszeit plus Vorgabe-Verfall — nie „unbegrenzt gültig".
+
+**Übergangslesung:** Dateien mit dem alten Präfix `pull-` werden weiterhin gelesen,
+geschrieben wird nur `call-`. Die Lesetoleranz entfällt nach dem 2026-12-31.
+
 ## Belegpflicht mit FileCommander
 
 Jeder Scan muss durch FileCommander-MCP belegt sein:
