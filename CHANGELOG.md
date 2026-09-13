@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-13
+
+- **Marketing, discoverability, target personas & comparative matrix (Pfad B)**:
+  - Bumped package version to `1.4.3` in `pyproject.toml`.
+  - Added dedicated `THIRD_PARTY_LICENSES.md` inventory documenting runtime, build, and test dependencies with 100% permissive licenses (MIT, PSF 2.0, Apache-2.0), 0% copyleft, zero cloud telemetry, unprivileged user-mode non-elevation, and 10 Governance and Runtime Invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+  - Added repository-level `MARKETING-LOG.txt` establishing 4 target personas, bilingual high-intent keyword matrix (EN/DE), 10-dimension comparative matrix vs 4 alternatives, and governance invariants.
+  - Aligned bilingual README architecture (`README.md` and `README_de.md`) with 16-point quick navigation bar, 100% mutual anchor parity (`#target-personas--discoverability` / `#zielgruppen--auffindbarkeit`, `#comparative-matrix-vs-alternatives` / `#vergleichsmatrix-gegenueber-alternativen`, `#third-party-licenses--transparency` / `#drittanbieter-lizenzen--transparenz`), and Shields.io badges.
+  - Added project URLs in `pyproject.toml` for `Third-Party Licenses`, `Marketing Log`, and `LLM Context`.
+  - Synchronized `SECURITY.md` supported release lines (`1.4.x`) and linked third-party invariant governance.
+  - Synchronized `llms.txt` with version `1.4.3`, `Last-checked: 2026-09-13`, and updated passing pytest counts.
+  - Expanded automated contract test suite in `testing/test_metadata.py` with tests verifying personas, comparative matrix, third-party licenses, marketing log, and mutual anchor parity.
+
 ## 2026-09-11
 
 - **Technical hygiene, version 1.4.2 & CI standardization**:

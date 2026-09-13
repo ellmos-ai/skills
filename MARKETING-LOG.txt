@@ -1,0 +1,31 @@
+# MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
+
+## Date: 2026-09-13
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.3
+
+### Discoverability & Marketing Architecture Initiatives (Pfad B Routine):
+1. **16-Point Navigation Architecture & Bilingual Parity**:
+   - Implemented 16-point Quick Navigation in `README.md` and `README_de.md` with 100% mutual anchor parity.
+   - Inserted top-level architectural sections: Target Personas & Discoverability (`#target-personas--discoverability` / `#zielgruppen--auffindbarkeit`), Comparative Matrix vs. Alternatives (`#comparative-matrix-vs-alternatives` / `#vergleichsmatrix-gegenueber-alternativen`), and Third-Party Licenses & Transparency (`#third-party-licenses--transparency` / `#drittanbieter-lizenzen--transparenz`).
+2. **Target Personas & Use Case Mapping**:
+   - Formulated 4 key technical personas:
+     * *Autonomous Multi-Agent Swarms & Orchestrators (Claude Code, AGY/Gemini, Codex, BACH)*: Need structured, deterministic YAML frontmatter, step-by-step playbooks, zero-elevation execution, and clear input/output contracts.
+     * *Enterprise DevOps & Platform Engineers*: Need standardized automation playbooks for pipeline optimization, project bootstrapping, repository hygiene, and Git clearing without vendor lock-in.
+     * *Local-First, Privacy & SecOps Specialists*: Require strict Zero-Egress execution, automated privacy boundary gates, unprivileged user-mode execution, and auditable open-source tooling.
+     * *Domain-Specific Skill Authors & Research Engineers*: Need standardized conventions, multi-language catalog support, and isolated testing harnesses (S-Tests, L-Tests, U-Tests) for reusable AI skill authoring.
+3. **10-Dimension Comparative Matrix vs. 4 Alternatives**:
+   - Structured 10-dimension comparison pitting `ellmos-skills` against Ad-Hoc System Prompts, Tool Calling / Function Calling Only, Centralized Cloud Hubs / Marketplaces, and Heavyweight Agent Frameworks (LangChain / CrewAI).
+   - Validates superiority in local-first zero egress, format standardization (Anthropic `SKILL.md` + YAML frontmatter), multi-agent portability, deterministic playbooks, automated quality/privacy gates, and offline self-contained execution.
+4. **High-Intent Keyword Matrix**:
+   - English: `ai skill library`, `claude code skills`, `codex agent skills`, `anthropic skill md`, `portable ai skills`, `local-first agent workflows`, `agentic coding playbooks`, `zero-egress llm skills`, `multi-agent skill catalog`, `bach skill engine`.
+   - Deutsch: `ki skill bibliothek`, `claude code skills deutsch`, `codex agenten skills`, `anthropic skill md standard`, `portable ki fähigkeiten`, `lokale llm workflows`, `agenten playbooks`, `datenschutz ki skills`, `multi-agenten katalog`, `open source agenten bibliothek`.
+5. **Third-Party Dependency & Licensing Audit (`THIRD_PARTY_LICENSES.md`)**:
+   - Audited and documented all runtime and dev dependencies: 100% Python Standard Library runtime, 0 external pip dependencies, curated MIT vendored skills (`mattpocock/skills`), and permissive dev tooling (`pytest` MIT, `ruff` MIT/Apache-2.0, `setuptools` MIT).
+   - Verified 0% copyleft (0 AGPL, 0 GPL, 0 LGPL) and anchored 10 Governance and Runtime Invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+6. **Automated Contract Test Suite Expansion (`testing/test_metadata.py`)**:
+   - Expanded automated contract test suite with contract tests verifying target personas, comparative matrix, third-party licenses, marketing log, and anchor parity.
+7. **Release Packaging & Manifest Parity**:
+   - Bumped version to `1.4.3` across `pyproject.toml`, `SECURITY.md`, `llms.txt`, and README badges.
+   - Synchronized `CHANGELOG.md` with release notes for version `1.4.3`.

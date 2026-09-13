@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ellmos-skills"
-version = "1.4.2"
+version = "1.4.3"
 description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
 readme = "README.md"
 license = { text = "MIT" }
@@ -50,6 +50,9 @@ Changelog = "https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md"
 Security = "https://github.com/ellmos-ai/skills/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
+"Third-Party Licenses" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md"
+"Marketing Log" = "https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt"
+"LLM Context" = "https://github.com/ellmos-ai/skills/blob/master/llms.txt"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

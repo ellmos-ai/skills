@@ -1,8 +1,8 @@
-## Last-checked: 2026-09-12
+## Last-checked: 2026-09-13
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
-> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes. Tested with 291 passing pytest tests and 186 passing subtests (100% green).
+> Standalone, portable library of AI skills in the Anthropic-compatible `SKILL.md` format. The project is part of the ellmos ecosystem and provides reusable workflow definitions for Claude Code-style agents, Codex-compatible setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes. Tested with 290 passing pytest tests and 186 passing subtests (100% green).
 
 Canonical repository: https://github.com/ellmos-ai/skills
 Default branch: master
@@ -24,6 +24,8 @@ Author: Lukas Geiger
 - [README.md](https://github.com/ellmos-ai/skills/blob/master/README.md): English landing page, start-here table, catalog snapshot, search context.
 - [README_de.md](https://github.com/ellmos-ai/skills/blob/master/README_de.md): German landing page with the same public user guidance.
 - [SECURITY.md](https://github.com/ellmos-ai/skills/blob/master/SECURITY.md): Bilingual security policy, Zero-Egress guarantees, and privacy boundary enforcement.
+- [THIRD_PARTY_LICENSES.md](https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md): Third-party software inventory, zero-egress invariants, and 0% copyleft audit.
+- [MARKETING-LOG.txt](https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt): Discoverability initiatives, target personas, and comparative matrix logs.
 - [docs/CONVENTIONS.md](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): `SKILL.md` frontmatter specification.
 - [registry/components.json](https://github.com/ellmos-ai/skills/blob/master/registry/components.json): Machine-readable catalog index (category, version, provenance per skill).
 - [skills/](https://github.com/ellmos-ai/skills/tree/master/skills): Public skill catalog.

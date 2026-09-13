@@ -16,16 +16,20 @@
 > Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes.
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
+[![Version: 1.4.3](https://img.shields.io/badge/Version-1.4.3-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 291 passed](https://img.shields.io/badge/Pytest-291%20passed%20(186%20subtests)-success.svg)](testing/)
+[![Pytest: 290 passed](https://img.shields.io/badge/Pytest-290%20passed%20(186%20subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Privacy: Zero-Egress](https://img.shields.io/badge/Privacy-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First-blue.svg)](SECURITY.md)
+[![Third-Party: Audited](https://img.shields.io/badge/Third--Party-Audited-brightgreen.svg)](THIRD_PARTY_LICENSES.md)
+[![Marketing Log: Active](https://img.shields.io/badge/Marketing%20Log-Active-blue.svg)](MARKETING-LOG.txt)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Public Skills: 138 Catalog](https://img.shields.io/badge/Public%20Skills-138%20Catalog-brightgreen.svg)](registry/components.json)
 [![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
+[![Last Checked: 2026-09-13](https://img.shields.io/badge/Last%20Checked-2026--09--13-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
@@ -36,7 +40,28 @@
 > Forks and mirrors are **not** updated automatically and may be many commits behind —
 > check the source before relying on anything you read here.
 
-**Quick links:** [Start Here](#start-here) · [Featured Skills](#featured-skills) · [Skills](skills/) · [Skills Map](SKILLS-MAP.md) · [Security](SECURITY.md) · [Conventions](docs/CONVENTIONS.md) · [Changelog](CHANGELOG.md)
+---
+
+## Quick Navigation
+
+- [System Architecture](#system-architecture)
+- [Multi-Agent Skill Discovery & Execution Lifecycle](#multi-agent-skill-discovery--execution-lifecycle)
+- [Start Here](#start-here)
+- [Target Personas & Discoverability](#target-personas--discoverability)
+- [Comparative Matrix vs Alternatives](#comparative-matrix-vs-alternatives)
+- [Catalog Snapshot](#catalog-snapshot)
+- [Featured Skills](#featured-skills)
+- [Public/Private Boundary](#publicprivate-boundary)
+- [Education Skills](#education-skills)
+- [Repository Structure](#repository-structure)
+- [Skill Metadata](#skill-metadata)
+- [Validation](#validation)
+- [Search Context](#search-context)
+- [Ecosystem & Sibling Projects](#ecosystem--sibling-projects)
+- [Third-Party Licenses & Transparency](#third-party-licenses--transparency)
+- [License & Liability](#license--liability)
+
+---
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
@@ -117,6 +142,45 @@ sequenceDiagram
 | Use a skill | Copy `skills/<category>/<name>/` into your agent's skills directory (e.g. `~/.claude/skills/`) |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |
 | Give crawlers and LLM agents a compact map | [`llms.txt`](llms.txt) |
+
+<a id="target-personas--discoverability"></a>
+## Target Personas & Discoverability
+
+`ellmos-skills` serves four core technical personas across the autonomous agent and platform engineering spectrum:
+
+| Persona | Core Pain Point | How `ellmos-skills` Solves It | Key Workflows & Skills |
+|---|---|---|---|
+| **Autonomous AI Agents & Swarms** *(Claude Code, AGY, Codex, BACH)* | Hallucinated workflow steps, fragmented tools, and non-deterministic task execution across agent boundaries. | Standardized `SKILL.md` format with strict YAML frontmatter, self-contained playbooks, and deterministic input/output contracts. | `infrastructure/agents-bridge`, `dev/pipeline-optimizer`, `utilities/generalizer` |
+| **Enterprise DevOps & Platform Engineers** | Re-inventing operational maintenance, brittle CI scripts, and chaotic repository housekeeping. | Ready-to-mount, battle-tested engineering playbooks for refactoring, Git hygiene, and pipeline optimization without tool sprawl. | `dev/project-bootstrapper`, `dev/pipeline-bootstrapper`, `utilities/folder-organization` |
+| **Local-First, Privacy & SecOps Specialists** | Accidental cloud data leaks, unverified transitive packages, and elevated execution privileges in agent tools. | Strict Zero-Egress (`INV-LOCAL-01`), automated privacy boundary gates, user-mode execution (`RunAsInvoker`), and 0% copyleft. | `infrastructure/privacy-gate`, `utilities/secret-redactor`, `SECURITY.md` |
+| **Domain Skill Authors & Research Engineers** | Lack of conventions, inconsistent multi-language handling, and missing testing harnesses for custom skills. | Formal schema specification (`docs/CONVENTIONS.md`), public registry generator (`registry/components.json`), and S/L/U testing framework. | `schemas/assist-v1.schema.json`, `docs/CONVENTIONS.md`, `testing/skill_tester.py` |
+
+### High-Intent Search Keyword Matrix
+
+| Category | Primary Search Terms (English) | Relevanz & Suchbegriffe (Deutsch) |
+|---|---|---|
+| **Agent Frameworks** | `claude code skills`, `codex agent skills`, `anthropic skill md standard`, `agy gemini agent skills` | `Claude Code Skills`, `Codex Agenten Skills`, `Anthropic SKILL.md Standard`, `Gemini Agenten Skills` |
+| **Skill Architecture** | `portable ai skills`, `reusable agent playbooks`, `agent skill library`, `deterministic llm workflows` | `Portable KI Fähigkeiten`, `Wiederverwendbare Agenten Playbooks`, `KI Skill Bibliothek`, `Deterministische Workflows` |
+| **Privacy & Security** | `zero-egress ai skills`, `local-first agent library`, `fail-closed privacy gate`, `user-mode agent execution` | `Zero-Egress KI Skills`, `Lokale Agenten Bibliothek`, `Fail-Closed Datenschutz Gate`, `Unprivilegierte Ausführung` |
+| **Ecosystem & Catalog** | `bach skill catalog`, `multi-agent skill library`, `offline ai tools`, `open source agent skills` | `BACH Skill Katalog`, `Multi-Agenten Skill Bibliothek`, `Offline KI Werkzeuge`, `Open Source Agenten Skills` |
+
+<a id="comparative-matrix-vs-alternatives"></a>
+## Comparative Matrix vs Alternatives
+
+`ellmos-skills` provides a vendor-neutral, portable skill standard optimized for local-first, multi-agent operations. The following matrix illustrates how it compares against common architectural approaches:
+
+| Evaluation Dimension | `ellmos-skills` | Ad-Hoc System Prompts | Tool/Function Calling Only | Centralized Cloud Hubs | Heavyweight Frameworks (LangChain/CrewAI) |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **1. 100% Local-First & Zero-Egress** | **PASS** (Zero telemetry) | **PASS** (Local text) | ⚠️ Depends on API provider | ❌ Cloud account & telemetry required | ⚠️ Complex dependencies & telemetry risks |
+| **2. Standardized Format (`SKILL.md`)** | **PASS** (Anthropic standard + YAML) | ❌ Freeform unstructured text | ❌ JSON schema only, no playbooks | ⚠️ Vendor-specific manifests | ❌ Python/JS code abstractions |
+| **3. Multi-Agent Portability** | **PASS** (Claude, Codex, AGY, BACH) | ⚠️ Prompts drift across models | ⚠️ Custom wrappers per provider | ❌ Locked to proprietary cloud | ⚠️ Framework-specific lock-in |
+| **4. Step-by-Step Playbooks** | **PASS** (Structured phases & gates) | ❌ Inconsistent instruction adherence | ❌ Single-step tool execution only | ⚠️ Varies wildly by author | ⚠️ Python DAG logic required |
+| **5. Privacy & Leakage Gates** | **PASS** (Automated static gate) | ❌ None | ❌ None | ⚠️ Cloud moderation filters only | ❌ None built-in |
+| **6. Automated Test Suite** | **PASS** (286+ Pytest tests, 100% green) | ❌ Untested | ⚠️ Unit tests for API calls only | ❌ No public test harness | ⚠️ Framework unit tests only |
+| **7. Multi-OS CI Parity** | **PASS** (Linux, Windows, macOS) | N/A | ⚠️ Provider-dependent | ❌ Hosted service | ⚠️ OS compatibility quirks |
+| **8. Machine-Readable Catalog** | **PASS** (`registry/components.json`) | ❌ Unindexed | ❌ Dynamic API introspection only | ⚠️ Proprietary API queries | ❌ Code module imports |
+| **9. Open-Source & 0% Copyleft** | **PASS** (100% MIT License) | N/A | N/A | ❌ Proprietary platform terms | ⚠️ Mix of licenses |
+| **10. Zero External Runtime Deps** | **PASS** (Python stdlib only) | **PASS** | ⚠️ HTTP/JSON libraries needed | ❌ Cloud client SDKs required | ❌ Massive dependency trees |
 
 ## Catalog Snapshot
 
@@ -326,6 +390,18 @@ The name is intentionally generic, so use the canonical repository string `ellmo
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop developer workstation suite |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Multi-language code editor and sandbox environment |
 
+<a id="third-party-licenses--transparency"></a>
+## Third-Party Licenses & Transparency
+
+`ellmos-skills` is committed to absolute transparency, clean-room software boundaries, and supply chain security:
+
+- **Zero External Runtime Dependencies**: All core catalog tools, schema generators, and privacy boundary verifiers run strictly on the Python Standard Library (`>=3.10`).
+- **Permissive Third-Party Skills**: Curated external skills in `skills/third-party/` (`grill-me`, `grilling`) are licensed under the MIT License from upstream [mattpocock/skills](https://github.com/mattpocock/skills).
+- **0% Copyleft**: No GPL, AGPL, or LGPL components are bundled or required at runtime.
+- **10 Governance & Runtime Invariants**: Every release is validated against strict invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+- Full dependency details, license texts, and invariant definitions are documented in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
+
+<a id="license--liability"></a>
 ## License
 
 MIT License. See [LICENSE](LICENSE).

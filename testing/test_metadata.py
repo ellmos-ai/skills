@@ -15,6 +15,8 @@ SECURITY_PATH = REPOSITORY_ROOT / "SECURITY.md"
 CI_WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "tests.yml"
 SKILL_VAL_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "skill-validation.yml"
 ASSIST_SCHEMA_PATH = REPOSITORY_ROOT / "schemas" / "assist-v1.schema.json"
+THIRD_PARTY_LICENSES_PATH = REPOSITORY_ROOT / "THIRD_PARTY_LICENSES.md"
+MARKETING_LOG_PATH = REPOSITORY_ROOT / "MARKETING-LOG.txt"
 
 
 class MetadataAndManifestParityTests(unittest.TestCase):
@@ -70,6 +72,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("security@ellmos.ai", content)
         self.assertIn("support@lukasgeiger.com", content)
         self.assertIn("github.com/ellmos-ai/skills/security/advisories", content)
+        self.assertIn("THIRD_PARTY_LICENSES.md", content)
 
     def test_ci_workflows_integrity(self) -> None:
         self.assertTrue(CI_WORKFLOW_PATH.is_file(), ".github/workflows/tests.yml missing")
@@ -92,7 +95,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         content = PYPROJECT_PATH.read_text(encoding="utf-8")
 
         self.assertIn('name = "ellmos-skills"', content)
-        self.assertIn('version = "1.4.2"', content)
+        self.assertIn('version = "1.4.3"', content)
         self.assertIn("[tool.pytest.ini_options]", content)
         self.assertIn('addopts = "-ra -v"', content)
         self.assertIn("[tool.ruff]", content)
@@ -105,18 +108,23 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("Changelog", content)
         self.assertIn("Parent Organization", content)
         self.assertIn("Umbrella Ecosystem", content)
+        self.assertIn("Third-Party Licenses", content)
+        self.assertIn("Marketing Log", content)
+        self.assertIn("LLM Context", content)
 
     def test_llms_txt_header_and_parity(self) -> None:
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-09-12", content)
-        self.assertIn("291 passing pytest tests", content)
+        self.assertIn("## Last-checked: 2026-09-13", content)
+        self.assertIn("290 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)
         self.assertIn("registry/components.json", content)
         self.assertIn("SECURITY.md", content)
+        self.assertIn("THIRD_PARTY_LICENSES.md", content)
+        self.assertIn("MARKETING-LOG.txt", content)
         self.assertIn("dev-bricks", content)
         self.assertIn("open-bricks", content)
 
@@ -129,17 +137,20 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("open-bricks", content)
             self.assertIn("llms.txt", content)
             self.assertIn("SECURITY.md", content)
+            self.assertIn("THIRD_PARTY_LICENSES.md", content)
+            self.assertIn("MARKETING-LOG.txt", content)
             self.assertIn("registry/components.json", content)
             self.assertIn("```mermaid", content)
-            self.assertIn("291", content)
+            self.assertIn("290", content)
             self.assertIn("138", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
+        self.assertIn("2026-09-13", content)
+        self.assertIn("1.4.3", content)
         self.assertIn("2026-09-11", content)
         self.assertIn("1.4.2", content)
-        self.assertIn("2026-08-21", content)
 
     def test_gitignore_hygiene(self) -> None:
         gitignore_path = REPOSITORY_ROOT / ".gitignore"
@@ -162,6 +173,92 @@ class MetadataAndManifestParityTests(unittest.TestCase):
     def test_security_supported_versions(self) -> None:
         content = SECURITY_PATH.read_text(encoding="utf-8")
         self.assertIn("1.4.x", content)
+
+    def test_target_personas_discoverability_parity(self) -> None:
+        en_content = README_EN_PATH.read_text(encoding="utf-8")
+        de_content = README_DE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("#target-personas--discoverability", en_content)
+        self.assertIn("Autonomous AI Agents & Swarms", en_content)
+        self.assertIn("Enterprise DevOps & Platform Engineers", en_content)
+        self.assertIn("Local-First, Privacy & SecOps Specialists", en_content)
+        self.assertIn("Domain Skill Authors & Research Engineers", en_content)
+
+        self.assertIn("#zielgruppen--auffindbarkeit", de_content)
+        self.assertIn("Autonome KI-Agenten & Multi-Agenten-Schwärme", de_content)
+        self.assertIn("Enterprise DevOps & Platform Engineers", de_content)
+        self.assertIn("Local-First, Privacy & SecOps Spezialisten", de_content)
+        self.assertIn("Domain Skill Autoren & Research Engineers", de_content)
+
+    def test_comparative_matrix_parity(self) -> None:
+        en_content = README_EN_PATH.read_text(encoding="utf-8")
+        de_content = README_DE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("#comparative-matrix-vs-alternatives", en_content)
+        self.assertIn("Ad-Hoc System Prompts", en_content)
+        self.assertIn("Tool/Function Calling Only", en_content)
+        self.assertIn("Centralized Cloud Hubs", en_content)
+        self.assertIn("Heavyweight Frameworks (LangChain/CrewAI)", en_content)
+
+        self.assertIn("#vergleichsmatrix-gegenueber-alternativen", de_content)
+        self.assertIn("Ad-hoc System-Prompts", de_content)
+        self.assertIn("Tool/Function-Calling ohne Playbooks", de_content)
+        self.assertIn("Zentrale Cloud-Hubs", de_content)
+        self.assertIn("Schwergewichtige Frameworks (LangChain/CrewAI)", de_content)
+
+    def test_third_party_licenses_inventory_and_invariants(self) -> None:
+        self.assertTrue(THIRD_PARTY_LICENSES_PATH.is_file(), "THIRD_PARTY_LICENSES.md missing")
+        content = THIRD_PARTY_LICENSES_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("0% Copyleft", content)
+        self.assertIn("ZERO external runtime dependencies", content)
+        self.assertIn("mattpocock/skills", content)
+        for i in range(1, 11):
+            inv_prefix = f"INV-"
+            self.assertTrue(any(line.startswith(f"| **{inv_prefix}") for line in content.splitlines()), "Invariant missing")
+
+        invariants = [
+            "INV-LOCAL-01",
+            "INV-PRIVACY-02",
+            "INV-UNPRIV-03",
+            "INV-SCHEMA-04",
+            "INV-ISOLATION-05",
+            "INV-PORTABLE-06",
+            "INV-DISCOVERY-07",
+            "INV-PLATFORM-08",
+            "INV-SYNC-09",
+            "INV-SLA-10",
+        ]
+        for inv in invariants:
+            self.assertIn(inv, content, f"Invariant {inv} missing in THIRD_PARTY_LICENSES.md")
+
+    def test_marketing_log_parity(self) -> None:
+        self.assertTrue(MARKETING_LOG_PATH.is_file(), "MARKETING-LOG.txt missing")
+        content = MARKETING_LOG_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("Date: 2026-09-13", content)
+        self.assertIn("Version: 1.4.3", content)
+        self.assertIn("Pfad B Routine", content)
+        self.assertIn("High-Intent Keyword Matrix", content)
+        self.assertIn("10-Dimension Comparative Matrix", content)
+
+    def test_quick_navigation_and_mutual_anchor_parity(self) -> None:
+        en_content = README_EN_PATH.read_text(encoding="utf-8")
+        de_content = README_DE_PATH.read_text(encoding="utf-8")
+
+        en_nav_lines = [
+            line.strip()
+            for line in en_content.split("## Quick Navigation")[1].split("---")[0].splitlines()
+            if line.strip().startswith("- [")
+        ]
+        de_nav_lines = [
+            line.strip()
+            for line in de_content.split("## Schnellnavigation")[1].split("---")[0].splitlines()
+            if line.strip().startswith("- [")
+        ]
+
+        self.assertEqual(len(en_nav_lines), 16, f"Expected 16 Quick Navigation points in EN, got {len(en_nav_lines)}")
+        self.assertEqual(len(de_nav_lines), 16, f"Expected 16 Schnellnavigation points in DE, got {len(de_nav_lines)}")
 
 
 if __name__ == "__main__":

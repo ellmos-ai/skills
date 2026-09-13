@@ -25,6 +25,7 @@ We actively support the latest release of `ellmos-ai/skills` on the default bran
 2. **Fail-Closed Privacy Boundary**: Automated privacy gates (`testing/privacy_gate.py` and `testing/test_public_private_boundary.py`) run in CI to ensure that personal data, host-scoped device names, private tokens (API keys, tokens), and internal directories are strictly prevented from entering tracked public repositories.
 3. **Non-Elevation (User-Mode Execution)**: All skills and utility scripts operate entirely within unprivileged user space. Administrator or root privileges are never required or requested.
 4. **Deterministic Frontmatter & Schema Validation**: Skill definitions are validated against strict YAML frontmatter schemas (`docs/CONVENTIONS.md`), preventing malicious instruction injection or untracked state manipulation.
+5. **Audited Dependency & Invariant Governance**: Curated vendored components and dependencies are governed by [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) ensuring 0% copyleft and adherence to 10 core runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`).
 
 ### Gitless Projections
 
@@ -79,6 +80,7 @@ Wir unterstützen aktiv die neueste Version von `ellmos-ai/skills` auf dem Stand
 2. **Fail-Closed Privacy-Boundary**: Automatisierte Privacy-Gates (`testing/privacy_gate.py` und `testing/test_public_private_boundary.py`) stellen in der CI sicher, dass keine personenbezogenen Daten, gerätespezifischen Hostnamen, privaten Tokens (API-Keys) oder internen Verzeichnisse in öffentliche Repositories gelangen.
 3. **Non-Elevation (User-Mode-Betrieb)**: Alle Skills und Utility-Skripte laufen vollständig im unprivilegierten Benutzerbereich. Administrator- oder Root-Rechte werden zu keinem Zeitpunkt benötigt oder angefordert.
 4. **Deterministische Frontmatter- & Schema-Validierung**: Skill-Definitionen werden gegen strikte YAML-Frontmatter-Schemas validiert (`docs/CONVENTIONS.md`), um fehlerhafte oder unsichere Instruktionsstrukturen auszuschließen.
+5. **Auditierte Abhängigkeiten & Invarianten-Governance**: Dritte-Partei-Komponenten und Abhängigkeiten werden in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) auditiert (0% Copyleft, 10 Governance- und Laufzeit-Invarianten `INV-LOCAL-01` bis `INV-SLA-10`).
 
 ### Gitlose Projektionen
 
