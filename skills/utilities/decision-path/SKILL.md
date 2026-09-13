@@ -101,7 +101,7 @@ Jeder Knoten im Graphen trägt eine kompakte Bewertungszeile mit genau fünf Dim
    - `E:<Option>`: Klare Option (z. B. `E:A`, `E:B`, `E:klaeren`, `E:Schritt1`).
    - `E-`: Keine Empfehlung möglich (etwa bei fehlenden Fakten oder echter Grundsatzfrage).
 
-3. **usertypisch (`U`)** — Übereinstimmung mit Arbeitsweise und Regeln des Nutzers (via `decision-avatar` / `tom-lm`):
+3. **usertypisch (`U`)** — Übereinstimmung mit Arbeitsweise und Regeln des Nutzers (via `decision-avatar`):
    Kodiert **Richtung** (Passt die Option zur Arbeitsweise?) und **Belegsicherheit / Konfidenz** getrennt:
    - **Richtung (erstes Zeichen nach U):**
      - `+`: Usertypisch — entspricht historisch belegten Entscheidungen, Richtlinien (`CLAUDE.md`, Policies) oder expliziten Nutzerpräferenzen.

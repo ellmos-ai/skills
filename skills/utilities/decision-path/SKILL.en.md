@@ -100,7 +100,7 @@ Every node in the graph displays a compact five-element assessment string:
    - `E:<Option>`: Clear choice (e.g. `E:A`, `E:B`, `E:resolve`, `E:Step1`).
    - `E-`: No actionable recommendation possible (missing facts or high-level policy question).
 
-3. **User-typical (`U`)** — Alignment with the user's past habits and codified rules (via `decision-avatar` / `tom-lm`):
+3. **User-typical (`U`)** — Alignment with the user's past habits and codified rules (via `decision-avatar`):
    Codes **direction** (does the option fit habits?) and **verification confidence** separately:
    - **Direction (first character after U):**
      - `+`: User-typical — matches past decisions, policies (`CLAUDE.md`), or explicit preferences.
