@@ -53,6 +53,8 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Problem durchdenken / analysieren | Denkwerkzeuge | `/structured-thinking` (führt `/think` → `/brainstorm` → `/decide`) |
 | neue Ideen / Kreativität | Denkwerkzeuge | `/brainstorm` (vs `/think` Analyse, `/decide` Auswahl) |
 | Entscheidungs-Stapel | Denkwerkzeuge | `/decision-briefing` |
+| Welche Entscheidung hängt an welcher / widersprechen sich Empfehlungen? | Denkwerkzeuge | `decision-path` (`/decision-path`; ASCII-Abhängigkeitsgraph, entscheidet nichts) |
+| Empfohlene Gesamtvariante als EIN Konzept-/Umsetzungstext abnehmen lassen | Denkwerkzeuge | `decision-draw` (`/decision-draw`; Abnahme als Ganzes, Korrekturen → Einzelentscheidungen) |
 | Autorisiertes Nutzerprofil aufbauen oder nutzen | Multi-Agent | `build-your-users-mind` (Aufbau) · `decision-avatar` (Nutzung) |
 | Bug / Testfehler | Coding & Debugging | `/bugfix-protocol` (1 Bug), `/bugsweep` (viele, vor Release) |
 | neues/bestehendes Projekt oder Pipeline | Projekt/Pipeline | `/projekt-pipeline-umbrella` (→ bootstrapper/onboarding/optimizer) |
