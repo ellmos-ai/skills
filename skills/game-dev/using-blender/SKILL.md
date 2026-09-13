@@ -69,3 +69,18 @@ Für Live-Steuerung lies [references/blender-mcp-review.md](references/blender-m
 
 ### 1.0.0 (2026-06-20)
 - Initialer nutzeragnostischer Blender-Skill mit GUI-, Headless- und MCP-Routing.
+
+## Ergebnis prüfen, ohne die GUI zu öffnen
+
+Für Assets gibt es ein fertiges Background-Gate, das **vier Renders und messbare Metriken**
+in einem Lauf liefert (Rotation, Pivot, schwebende Teile):
+
+```powershell
+blender.exe --background --factory-startup `
+  --python "<OneDrive>\.TOPICS\.ROBLOX\_tools\verify_asset_visual.py" -- `
+  --fbx "<asset.fbx>" --out "<ordner>" --json
+```
+
+Kein GUI, kein Fokus nötig. Details und Grenzen (u. a.: der MCP-Server `ellmos-blender-use`
+kann **nicht** rendern): `.ROBLOX\BLENDER_ASSET_CHANNELS.md`.
+Ausführlicher Workflow: Skill `build-assets-with-blender`.

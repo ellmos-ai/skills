@@ -282,12 +282,23 @@ Login-/Consent-Dialog, der eine sichtbare Interaktion braucht.
 
 ## Sichtbarkeit: Farbsignal
 
-`OC_SIGNAL_AUTO=control` ist seit 2026-08-02 **Standard** in allen drei registrierten
-MCP-Configs (`~/.claude.json`, `~/.codex/config.toml`, `~/.gemini/config/mcp_config.json`):
-sobald ein zustandsaenderndes Tool (`do`/`click_name`/`invoke`/`rec_replay`) das erste Mal
-tatsaechlich das Safety-Gate passiert, zeigt der Server selbst den roten Bildschirmrand
-("CONTROL - Modell steuert") -- am Bildschirm ist damit immer sichtbar, wenn open-compute
-gerade wirklich handelt, ohne dass der Agent daran denken muss.
+`OC_SIGNAL_AUTO=control` **soll** Standard in allen drei registrierten MCP-Configs sein
+(`~/.claude.json`, `~/.codex/config.toml`, `~/.gemini/config/mcp_config.json`) -- **Korrektur
+[C 2026-09-06, T-20260906-540234814]: das war auf einem der beiden Windows-Hosts bis zu
+diesem Datum nicht der Fall und ist kein Einzelfall-Nachlass, sondern der belegte
+Live-Stand.** `~/.codex/config.toml`
+und `~/.gemini/config/mcp_config.json` haben open-compute dort **ueberhaupt nicht registriert**
+(kein Eintrag, also auch keine Env-Variable zu setzen); `~/.claude.json` hatte
+`OC_SIGNAL_AUTO` bis zum CALL-E-Befund vom 2026-09-05 (Ticket T-20260905-467485001) schlicht
+nicht gesetzt -- die Sicherheitsanzeige lief nur, wenn der Agent selbst `signal_show()` aufrief.
+Seit 2026-09-06 ist `OC_SIGNAL_AUTO=control` in `~/.claude.json` (Claude Code) gesetzt; fuer
+Codex/agy bleibt es ein offener Punkt, solange dort keine open-compute-Registrierung existiert.
+Wenn die Env-Variable tatsaechlich aktiv ist, zeigt der Server selbst sobald ein
+zustandsaenderndes Tool (`do`/`click_name`/`invoke`/`rec_replay`) das erste Mal tatsaechlich das
+Safety-Gate passiert den roten Bildschirmrand ("CONTROL - Modell steuert") -- am Bildschirm ist
+damit sichtbar, wenn open-compute gerade wirklich handelt, ohne dass der Agent daran denken
+muss. **Vor jedem Einsatz den tatsaechlichen Live-Stand pruefen, nicht diese Aussage als
+gegeben annehmen.**
 
 - **In Sessions, die noch ohne diese env laufen** (alter Server-Prozess, noch nicht
   neu gestartet, oder ein viertes/eigenes MCP-Profil ohne `OC_SIGNAL_AUTO`): vor der

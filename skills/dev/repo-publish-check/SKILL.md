@@ -1,11 +1,11 @@
 ---
 name: repo-publish-check
 description: Nutzerneutrale Prüfung von Repositories vor einer Veröffentlichung oder bei einer erneuten öffentlichen Prüfung. Kontrolliert Privacy, Geheimnisse, Lizenzen, Drittinhalte, Dokumentation und Freigabestatus, ohne die Veröffentlichung selbst vorzunehmen.
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
+updated: 2026-09-05
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -102,6 +102,26 @@ Lizenzangabe, ein Datenschutzhinweis oder eine präzisere Beschreibung.
    - Hole die ausdrückliche Freigabe des Repository-Eigentümers ein.
    - Erst danach darf ein separater, autorisierter Schritt die Sichtbarkeit
      ändern.
+
+## Beispiel- und Evidenzdaten (Telefonnummern, Transkripte, IDs) [C 2026-09-05]
+
+Feldversuchs- und Testbelege sind der häufigste Weg, auf dem echte Daten in ein öffentliches
+Repository geraten — nicht Zugangsdaten. Prüfen, in Code, Tests, Fixtures, Doku **und der
+erreichbaren Git-History**:
+
+- **Telefonnummern:** Nur standardisiert reservierte Drama-/Fiktivbereiche des jeweiligen Landes
+  (DE: Bundesnetzagentur-Reservierungen; kein plausibler Mobilfunk- oder Festnetzblock). Regex-Scan
+  mit **Positivkontrolle** (eine eingespielte Beispielnummer muss der Scan finden), sonst ist ein
+  Negativbefund wertlos. Maskierte Formen (`+49 17x XXXX`, `+491 ••• •`) sind zulässig.
+- **Transkripte und Gesprächsauszüge:** nur als klar markierte synthetische Reproduktionen;
+  keine Roh-Transkripte, keine Namen, keine exakten Zeitstempel, keine Nummernfragmente.
+- **Anbieter-IDs:** keine Run-/Call-/Order-IDs (32-Hex-Muster), keine Dashboard-Links.
+- **History:** War so etwas jemals committet, reicht ein Bereinigungs-Commit nicht — Rewrite
+  (`git filter-repo`) plus Support-Purge der dangling Objekte; alte Commit-URLs danach live auf
+  404 prüfen. Ergebnis ohne Werte berichten (Datei, Zeile, Zähler).
+
+Ergebnisstufen wie beim Zugangsdaten-Scan: *blockiert* (echter Fund) · *ansehen* (verdächtig, evtl.
+Beispiel) · *sauber*. Lehrfall: CALL-E 2026-08-24/25 (Maintainer-Review erzwang drei History-Rewrites).
 
 ## Nachprüfung bereits öffentlicher Repositories
 
