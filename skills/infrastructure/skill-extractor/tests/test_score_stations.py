@@ -59,6 +59,14 @@ def test_unclear_prompt_stays_unknown_instead_of_being_guessed():
     assert score_stations.classify_prompt("") == "unknown"
 
 
+def test_follow_up_questions_and_additions_are_nt_without_overriding_specific_markers():
+    assert score_stations.classify_prompt("noch etwas zu den Tests") == "NT"
+    assert score_stations.classify_prompt("Kannst du die Datei öffnen?") == "NT"
+    assert score_stations.classify_prompt("Kannst du die Datei öffnen") == "NT"
+    # The specific NM marker remains higher priority than the question fallback.
+    assert score_stations.classify_prompt("Kannst du das prüfen?") == "NM"
+
+
 def test_short_confirmations_do_not_match_inside_longer_words():
     # "ja" must not fire on "jahrelang", "ok" not on "Oktober".
     assert score_stations.classify_prompt("jahrelang lief das so") == "unknown"

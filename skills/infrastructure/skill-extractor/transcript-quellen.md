@@ -91,6 +91,12 @@ Zeitpunkte. Nachrichtentext wird nur zum Klassifizieren gelesen, nie kopiert.
 eine Warnung und die Rangfolge gilt als nicht belastbar. Auf realen Transkripten liegt der Anteil
 bei etwa 0,5 — die obersten Kandidaten also nachklassifizieren, bevor geerntet wird.
 
+Eindeutige Rückfragen ohne klassisches Fragewort werden als `NT` erkannt, wenn sie ein Fragezeichen
+tragen oder mit einem kleinen, klaren Frageanfang wie „kannst du …“ beziehungsweise „sollen wir …“
+beginnen. Ergänzungen wie „noch etwas zu …“ zählen ebenfalls als `NT`. Eine bloße
+Zustandsmeldung ohne erkennbare Frage, Korrektur oder Auftrag bleibt `unknown`, damit der Vorfilter
+keine Bedeutung hineinliest.
+
 ## Datenreduktion vor Bulk-Extraktion
 
 Reihenfolge der Reduktionsstufen (jede Stufe verkleinert um eine Größenordnung):

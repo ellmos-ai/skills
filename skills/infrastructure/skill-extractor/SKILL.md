@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.3.0
+version: 1.3.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-13
+updated: 2026-09-14
 description: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
@@ -100,9 +100,12 @@ durchgearbeiteten Abschnitt, nicht einem Berichtspunkt.
 
 **Die Grenzen der Automatik gehören mitgelesen.** Der Anschlusstyp entsteht aus einem
 deterministischen Wortlisten-Vorfilter; was nicht eindeutig ist, bleibt `unknown` statt geraten zu
-werden. Steht `classified_ratio` unter 0,5, sagt die Ausgabe selbst, dass die Rangfolge nicht trägt
-— dann die Anschlüsse der obersten Kandidaten nachklassifizieren, bevor geerntet wird. Ein Score ist
-eine Leseempfehlung, keine Auswahlentscheidung: Schritt 3 bleibt Pflicht.
+werden. Eindeutige Rückfragen werden als `NT` erkannt: mit Fragezeichen, mit wenigen klaren
+Frageanfängen wie „kannst du …“ oder „sollen wir …“ und bei Ergänzungen wie „noch etwas zu …“.
+Vage Zustandsmeldungen ohne erkennbare Frage, Korrektur oder Auftrag bleiben bewusst `unknown`.
+Steht `classified_ratio` unter 0,5, sagt die Ausgabe selbst, dass die Rangfolge nicht trägt — dann
+die Anschlüsse der obersten Kandidaten nachklassifizieren, bevor geerntet wird. Ein Score ist eine
+Leseempfehlung, keine Auswahlentscheidung: Schritt 3 bleibt Pflicht.
 
 **Nicht jeder Anschluss ist ein Prompt.** Leere Züge und Maschinen-Envelopes (Task-Benachrichtigung,
 Teammate-Nachricht, nacktes Slash-Kommando) tragen keinen Prompttyp und werden als `empty` bzw.
@@ -244,6 +247,13 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Änderungsprotokoll
+
+### 1.3.1 (2026-09-14)
+- **Konservativer NT-Vorfilter für offene menschliche Anschlüsse:** Ergänzungen wie „noch etwas zu
+  …“ sowie eindeutige Rückfragen per Fragezeichen oder mit einem klaren Frageanfang werden als `NT`
+  erkannt. Bereits greifende spezifische Marker behalten Vorrang.
+- **Keine Scheinpräzision bei Zustandsmeldungen:** Sätze ohne erkennbare Frage, Korrektur oder Auftrag
+  bleiben `unknown`; die zusätzliche Abdeckung erfindet keinen Prompttyp.
 
 ### 1.3.0 (2026-09-13)
 - **Anschlüsse, die keine Prompts sind, zählen nicht mehr als gescheiterte Klassifikation.**

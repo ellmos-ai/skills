@@ -141,6 +141,8 @@ TYPE_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
             "wieso",
             "wie genau",
             "was bedeutet",
+            "noch etwas zu",
+            "noch was zu",
         ),
     ),
 )
@@ -185,6 +187,18 @@ SP_MARKERS = re.compile(
     r"^(?:neues ticket|weiteres ticket|ein letztes ticket|ticket)\b"
     r"|^(?:erstelle|baue|bau|starte|richte|lege|schreibe|oeffne|öffne|ziehe|gib mir)\b"
     r"|^idee\s*:",
+    re.IGNORECASE,
+)
+
+# A conservative question fallback for natural questions that have no question
+# word and are not covered by a more specific marker. It deliberately does not
+# classify every vague sentence as a question: explicit punctuation or a small
+# set of unambiguous question openers counts. Specific markers still win because
+# this check runs after ``_COMPILED_MARKERS``.
+QUESTION_OPENERS = re.compile(
+    r"^(?:kannst du|könntest du|koenntest du|können wir|koennen wir|"
+    r"soll ich|sollen wir|würdest du|wuerdest du|gibt es|hast du|"
+    r"habt ihr|ist das|sind das|war das|wäre das|waere das)\b",
     re.IGNORECASE,
 )
 
@@ -265,6 +279,10 @@ def classify_prompt(text: str, *, is_first: bool = False) -> str:
     for prompt_type, pattern in _COMPILED_MARKERS:
         if pattern.search(normalized):
             return prompt_type
+    # A clear follow-up question is NT even when it has no traditional question
+    # word. Keep the fallback narrow; vague state messages remain ``unknown``.
+    if normalized.endswith("?") or QUESTION_OPENERS.match(normalized):
+        return "NT"
     # Checked last on purpose: "erstelle X, aber nicht so wie vorher" is a
     # correction that happens to open with an imperative. The specific class
     # wins; SP is the fallback mode of a prompt, not a competing marker.

@@ -1393,7 +1393,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-extractor/SKILL.md",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "status": "active",
       "description": "Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill\", „das sollten wir als Skill festhalten\", „extrahiere Skills aus diesem/alten Chatverläufen\", „diese Arbeitsweise wiederverwendbar machen\", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.",
       "languages": [
