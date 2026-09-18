@@ -1,10 +1,10 @@
 ---
 name: decision-path
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-18
 description: >
   Erzeugt aus einem Bestand offener und gefallener Entscheidungen einen
   strukturierten ASCII-Abhängigkeitsgraphen (maximal 100 Spalten) für das
@@ -241,6 +241,7 @@ LEGENDE & BEWERTUNGSSCHLUESSEL
 1. **Keine Entscheidungen fällen:** Der Skill liefert eine transparente Kartierung der Lage. Die Entscheidungsgewalt verbleibt beim Nutzer.
 2. **Keine Optionen erarbeiten:** Der Skill diskutiert keine neuen Varianten oder Kriterienkataloge; das ist die Aufgabe von [decide](../decide/SKILL.md) oder [decision-briefing](../decision-briefing/SKILL.md).
 3. **Kein Rückschreiben ins Register:** Der Graph modifiziert keine Register- oder Ticketdateien. Das Rückschreiben nach erfolgter Entscheidung erfolgt durch [decision-briefing](../decision-briefing/SKILL.md) Phase 4 oder über die Rücktransfer-Mechanik von [decision-draw](../decision-draw/SKILL.md).
+4. **Keine unverständlichen Kryptokürzel im Fließtext an den Nutzer:** Werden die Ergebnisse des Graphen dem Nutzer erläutert, gilt die verbindliche Stilregel (T-20260913-883789445): 2–4 Sätze Alltagssprache in Ich-Form (Lage, „Ich mache …“, Rückfall). Knotenbeschriftungen nutzen lesbare Kurztitel. Technische Kennungen und Ticketnummern wandern in eine Anhangstabelle.
 
 ---
 
@@ -257,6 +258,12 @@ Wird der Abhängigkeitsgraph als dauerhaftes Analyse-Artefakt gespeichert, endet
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-09-18)
+- Stilregel für verständliche Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):
+  - Erläuterungen an den Nutzer in natürlicher Ich-Form ohne Nummernflut.
+  - Lesbare Kurztitel für Knoten im Terminal-Graph.
+  - Technische Zuordnung (Ticket-/D-Nummern) in Anhangstabelle ausgelagert.
 
 ### 1.0.0 (2026-09-13)
 - Erstfassung auf Basis des Nutzerauftrags T-20260913-107991667.

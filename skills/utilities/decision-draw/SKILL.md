@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-18
 description: >
   Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden,
   prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten.
@@ -78,18 +78,32 @@ provenance:
 
 ---
 
-## Verbindlicher Aufbau (sieben Teile)
+## Verbindliche Stilregel: Nutzertexte ohne Kürzel und Nummern
 
-Ein vollständiger `decision-draw` folgt ausnahmslos dieser siebenteiligen Struktur:
+> **Kanonische Nutzeranweisung (Feedback 2026-09-13 / Ticket T-20260913-883789445):**
+> *„Die decision draws sind mir zu technisch, das muss ohne Nummer sein, die kennst du im Hintergrund oder nutzt du zur Texterstellung [...].“*
 
-### 1. Bündel und Umfang
-Tabellarische Übersicht aller im Bündel zusammengefassten Posten:
-- Kürzel / ID (z. B. `BH-A`, `MD-A`, `CF-A`)
-- Ticket-Referenz
-- Kurztitel des Postens
-- Unterstellte Empfehlung (die Basis dieses Gesamtbilds)
-- `decision-avatar`-Konfidenz (🟢 belegt, 🟡 Abwägungssache, 🔴 Klärungsbedarf)
-- Link zur Vollanalyse / den Alternativen
+1. **Keine technischen Kürzel im sichtbaren Nutzertext:**
+   Im sichtbaren Fließtext für den Menschen (Bündel, Konzept, Zusammenspiel, Umsetzung, Abfrage) stehen **keine** internen Kürzel (wie `BH-A`, `MD-A`, `HA-A`, `PRA`), keine Ticketnummern (`T-2026...`), keine D-Nummern (`D-2026...`), keine relativen Pfade, Git-Hashes oder Messwerte.
+2. **Je Posten 2–4 Sätze Alltagssprache in Ich-Form:**
+   Jeder Posten des Bündels wird nach dem Dreiklang formuliert:
+   - *Lage:* Was ist die aktuelle Ausgangssituation?
+   - *„Ich mache …“:* Was plane ich konkret / was ist meine Handlungsempfehlung?
+   - *Rückfall:* Was passiert, wenn das scheitert oder was entscheidet der Nutzer danach?
+   *(Beispiel: „Hermes unterstützt bei Tasks nur Englisch. Ich melde das bei Hermes als Issue und für uns bauen wir einen Workaround. Es liegen im Moment nicht nutzbare Altsessions vor. Ich versuche die wieder nutzbar zu machen. Wenn das nicht klappt, gebe ich dir eine zufällige Stichprobe aus 10 Sessions und fasse diese zusammen — so kannst du entscheiden, ob eine Rettung sinnvoll ist.“)*
+3. **Klartext-Titel zur Orientierung:**
+   Jeder Posten trägt einen verständlichen deutschen Titel (z. B. *„Modell-Backend als eigenes Herzstück“*, *„Sichere Deploy-Schlüssel auf dem Mac“*). Der Nutzer interagiert über diesen Titel oder gibt eine Gesamtabnahme.
+4. **Technische Zuordnung ausschließlich im Anhang:**
+   Die Übersetzung zwischen Klartext-Titel, internem Kürzel, Ticket-ID und Register-Zustand erfolgt **ausschließlich in einer abschließenden Anhangstabelle** am Ende des Dokuments. Dort — und nur dort — greifen die automatisierten Parser und Register-Rückschreiber.
+
+---
+
+## Verbindlicher Aufbau (acht Teile)
+
+Ein vollständiger `decision-draw` folgt ausnahmslos dieser Struktur:
+
+### 1. Bündel und Umfang (im Klartext)
+Übersicht der gebündelten Posten in Alltagssprache (Ich-Form, 2–4 Sätze je Punkt, keine IDs/Kürzel im Text).
 
 ### 2. Konzept
 Der angestrebte Zielzustand als zusammenhängender Fließtext in Prosa:
@@ -100,7 +114,7 @@ Der angestrebte Zielzustand als zusammenhängender Fließtext in Prosa:
 ### 3. Zusammenspiel
 Das funktionale Herzstück des Skills:
 - Wie greifen die entschiedenen Teile **nach** der Umsetzung real ineinander?
-- Darstellung bevorzugt entlang eines konkreten End-to-End-Ablaufs (z. B. „Ein Ticket trifft ein → Agent startet → Backend weist zu → Deploy auf Host“) statt einer bloßen Komponentenliste.
+- Darstellung bevorzugt entlang eines konkreten End-to-End-Ablaufs statt einer bloßen Komponentenliste.
 - Macht Datenflüsse, Schnittstellen und Zuständigkeiten greifbar.
 
 ### 4. Umsetzung
@@ -120,40 +134,33 @@ Schutz vor Scheinvollständigkeit:
 Die Interaktion mit dem Nutzer:
 - Der Nutzer prüft das Bild als Ganzes.
 - Antwortmöglichkeit 1: **Ausdrückliche Gesamtabnahme** („Passt so“, „Abnahme“, „So umsetzen“). Nur hierbei werden alle Posten des Bündels als entschieden verbucht.
-- Antwortmöglichkeit 2: **Korrektur in Alltagssprache** („BH-A lieber die kleine Variante“, „MD-A kein Auto-Restart“, „VM-A bleibt wie es ist“). Führt zur Zerlegung in Einzelentscheidungen; alle unkorrigierten Posten bleiben offen.
+- Antwortmöglichkeit 2: **Korrektur über Klartext-Titel oder in Alltagssprache** („Beim Mac-Deploy lieber kein Auto-Restart“, „VersicherungsManager erst mal vertagen“). Führt zur Zerlegung in Einzelentscheidungen; alle unkorrigierten Posten bleiben offen.
 
 ### 7. Rücktransfer
 Die systematische Übersetzung von Nutzerkorrekturen in Einzelbeschlüsse:
 - **Keine automatische Mitbuchung:** Nur bei ausdrücklicher Gesamtabnahme werden die unveränderten Posten gebucht. Eine Teilkorrektur ist **keine** Gesamtabnahme!
 - **Isolierung bei Korrekturen:** Kommt eine Korrektur, wird sie in Einzelentscheidungen zerlegt; alle übrigen Posten des Bündels bleiben strikt **offen** (im Quellregister / der Vorlage), bis der Nutzer das bereinigte Bild als Ganzes annimmt oder die verbliebenen Posten einzeln bestätigt.
-- **Pflicht-Tabelle des Rücktransfers:** Jede Korrektur-Rückmeldung erzeugt zwingend eine strukturierte Auswertungstabelle mit vier Spalten:
-  1. *Originalkorrektur*: Exakter Wortlaut des Nutzers.
-  2. *Betroffene Kürzel*: Welche IDs aus dem Bündel bewegt werden (inkl. Mehrfachtreffern, wenn eine Äußerung mehrere Posten betrifft).
-  3. *Domino-Status*: Welche abhängigen Knoten oder Folgeannahmen im Graphen ([decision-path](../decision-path/SKILL.md)) dadurch kippen oder neu bewertet werden müssen.
-  4. *Offene Mehrdeutigkeiten*: Wo die Korrektur mehrere Lesarten zulässt und vor der Buchung Klärung erfordert.
-- **Mehrfachtreffer abbilden:** Eine Formulierung des Nutzers kann mehrere Entscheidungen gleichzeitig verändern. Der Rücktransfer muss diese Kopplung auflösen und alle betroffenen Kürzel gemeinsam erfassen.
-- **Ausschließlicher Schreibweg über Phase 4:** `decision-draw` besitzt **keinen** eigenen Schreibweg ins Register. Die Verbuchung erfolgt **ausschließlich** über das standardisierte Verfahren aus [decision-briefing](../decision-briefing/SKILL.md) Phase 4 (Protokoll & Rückschreiben nach `DECIDED-AND-DONE.md` bzw. `TO-DECIDE-USER.txt`).
+- **Pflicht-Tabelle des Rücktransfers:** Jede Korrektur-Rückmeldung erzeugt zwingend eine strukturierte Auswertungstabelle mit vier Spalten (Originalkorrektur, Betroffene Kürzel, Domino-Status, Offene Mehrdeutigkeiten).
+- **Ausschließlicher Schreibweg über Phase 4:** `decision-draw` besitzt **keinen** eigenen Schreibweg ins Register. Die Verbuchung erfolgt **ausschließlich** über das standardisierte Verfahren aus [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
+
+### 8. Anhang: Technische Referenztabelle (nur für Buchung & Audit)
+Kompakte Tabelle am Dokumentenende mit:
+`| Klartext-Titel | Internes Kürzel / ID | Ticket-Referenz | Unterstellte Empfehlung | Konfidenz | Link / Details |`
 
 ---
 
 ## Beispiel (Pilotauszug: Ticket-Master 2026-09-13 — BACH & Systemverbund)
-
-Reales Bündel aus der Entscheidungsvorlage des Ticket-Masters vom 2026-09-13: `BH-A`, `MD-A`, `CF-A`, `VM-A`, `PD-A`.
 
 ```markdown
 # DECISION-DRAW: BACH-Kernverbund & Betriebsintegrität
 
 ## 1. Bündel und Umfang
 
-| Kürzel | Ticket / Quelle | Thema | Unterstellte Empfehlung | Konfidenz | Alternativen & Details |
-|---|---|---|---|---|---|
-| `BH-A` | `T-20260913-896336887` | Modell-Backend = Herz | 1A / 2A / 3A / 4B / 5A / 6A | 🟢 | `docs/MODELL-BACKEND-KONZEPT_2026-09-13.md` |
-| `MD-A` | `T-20260913-799464688` | Mac-Deploy & Neustart | A1 + Skript (nur Melden für 24/7) | 🟢 | Ticket `T-20260913-799464688.txt` |
-| `CF-A` | `T-20260913-947070291` | Konfig-Sollwerte Hosts | 1C (begründet) / 2B (hostabh.) / 3B (high) | 🟢 / 🟡 | Ticket `T-20260913-947070291.<HOST>.txt` |
-| `VM-A` | `T-20260906-496406575` | VersicherungsManager Zone | A (app-weite settings wie routinika) | 🟢 | Ticket `T-20260906-496406575.<HOST>.txt` |
-| `PD-A` | `T-20260913-609930207` | USMC Seiten-Sichtbarkeit | A (auf public nachziehen, Status quo) | 🟢 | Ticket `T-20260913-609930207.txt` |
-
-*Hinweis: Alle verworfenen Alternativen (z. B. BH-A E5=B ocean-heart, MD-A A2 Vollschreibrecht, VM-A B Zonen je Profil) bleiben im decision-briefing des Ticket-Masters nachlesbar.*
+- **Modell-Backend als eigenes Herzstück:** Die Modellzuteilung ist aktuell eng mit dem Monolithen verzahnt. Ich lagere das Backend als eigenständiges Kernmodul aus, damit Rechte und Budgets unabhängig geprüft werden. Scheitert ein externer Dienst, schaltet das System automatisch auf das lokale Reservemodell zurück.
+- **Sichere Deploy-Schlüssel auf dem Mac:** Auf dem Mac laufen Dauerprozesse, die bei harten Updates unsauber abbrechen können. Ich richte einen lesenden Schlüssel und ein Meldeskript ein, das Aktualisierungen anzeigt, ohne laufende Dienste abzuschießen. Sollte ein Dienst dennoch hängen, meldet der Watcher das direkt an die Betriebsübersicht.
+- **Einheitliche Konfigurations-Sollwerte:** Die beiden Hauptrechner nutzen teilweise unterschiedliche Spracheinstellungen. Ich gleiche die Konfigurationen über das gemeinsame Sync-Verzeichnis an, lasse dem Laptop aber ausreichend Spielraum für mobile Tests.
+- **Feste Zeitzone im VersicherungsManager:** Datumsberechnungen bei Fristen hängen bisher vom Betriebssystem ab. Ich verankere eine feste Zeitzone in den Anwendungseinstellungen, damit Fristen überall auf die Minute genau übereinstimmen.
+- **Öffentliche Bereitstellung der USMC-Dokumentation:** Die Modul-Dokumentation ist im Webauftritt noch als privat markiert und löst Prüfwarnungen aus. Ich korrigiere die Sichtbarkeit auf öffentlich, damit der nächtliche Seiten-Bau ohne Fehler durchläuft.
 
 ---
 
@@ -256,6 +263,18 @@ Gibt der Nutzer eine inhaltliche Korrektur ein, z. B.:
 - Übergeben wird an **[decision-briefing](../decision-briefing/SKILL.md) Phase 4** nur, was die Tabelle als eindeutig ausweist: `CF-A` Gruppe 2 = A und Gruppe 3 = B.
 - **Nicht** übergeben werden `MD-A` und `CF-A` Gruppe 1 — für beide steht in der Spalte *Offene Mehrdeutigkeiten* eine Rückfrage. Eine Mehrdeutigkeit, die man vor der Buchung klären wollte, darf man nicht in derselben Runde als geklärt verbuchen.
 - Phase 4 trägt die eindeutigen Teile mit Begründung in Ticket `T-20260913-947070291.txt` ein und aktualisiert `DECIDED-AND-DONE.md`. Ticket `T-20260913-799464688.txt` (`MD-A`) bleibt offen, bis die Rückfrage beantwortet ist.
+
+---
+
+## 8. Anhang: Technische Referenztabelle (nur für Buchung & Audit)
+
+| Klartext-Titel | Internes Kürzel | Ticket / Quelle | Unterstellte Empfehlung | Konfidenz | Link / Details |
+|---|---|---|---|---|---|
+| Modell-Backend als eigenes Herzstück | `BH-A` | `T-20260913-896336887` | 1A / 2A / 3A / 4B / 5A / 6A | 🟢 | `docs/MODELL-BACKEND-KONZEPT_2026-09-13.md` |
+| Sichere Deploy-Schlüssel auf dem Mac | `MD-A` | `T-20260913-799464688` | A1 + Skript (nur Melden für 24/7) | 🟢 | Ticket `T-20260913-799464688.txt` |
+| Einheitliche Konfigurations-Sollwerte | `CF-A` | `T-20260913-947070291` | 1C (begründet) / 2B (hostabh.) / 3B (high) | 🟢 / 🟡 | Ticket `T-20260913-947070291.<HOST>.txt` |
+| Feste Zeitzone im VersicherungsManager | `VM-A` | `T-20260906-496406575` | A (app-weite settings wie routinika) | 🟢 | Ticket `T-20260906-496406575.<HOST>.txt` |
+| Öffentliche Bereitstellung der USMC-Dokumentation | `PD-A` | `T-20260913-609930207` | A (auf public nachziehen, Status quo) | 🟢 | Ticket `T-20260913-609930207.txt` |
 ```
 
 ---
@@ -268,6 +287,7 @@ Gibt der Nutzer eine inhaltliche Korrektur ein, z. B.:
 4. **Kein automatisches Mitbuchen bei Teilkorrekturen:** Nur bei ausdrücklicher Gesamtabnahme werden unveränderte Posten gebucht. Bei jeder Teilkorrektur bleiben alle nicht betroffenen Posten strikt offen, bis das Gesamtbild erneut freigegeben oder die Posten einzeln bestätigt werden.
 5. **Ausschließlicher Schreibweg über Phase 4:** `decision-draw` besitzt keinen eigenen Schreibweg ins Register. Buchungen erfolgen ausnahmslos über [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
 6. **Respektiere die Register-Verträge:** Buchungen erfolgen immer nach den Regeln des Entscheidungsregisters (keine Umnummerierung von IDs, eindeutige Buchungscodes, kanonisches Ziel `DECIDED-AND-DONE.md`).
+7. **Nutzertexte ohne technische Nummern und Kürzel:** Im sichtbaren Fließtext für den Menschen stehen keine IDs, Kürzel, Pfade oder Ticketnummern. Jeder Posten wird in verständlicher Ich-Form formuliert; alle Kennungen wandern in die Anhangstabelle.
 
 ---
 
@@ -284,6 +304,13 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-09-18)
+- Stilregel für nutzergerechte Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):
+  - Keine technischen Kürzel, Ticket-/D-Nummern, Pfade oder Messwerte im sichtbaren Nutzertext.
+  - 2–4 Sätze Alltagssprache in Ich-Form (Lage, „Ich mache …“, Rückfall) je Posten.
+  - Sprechende Klartext-Titel zur Identifikation und Abnahme.
+  - Technische Zuordnung (Kürzel, Ticket-ID, Register-Zustand) strikt in abschließende Anhangstabelle (Abschnitt 8) verlagert.
 
 ### 1.0.1 (2026-09-13)
 - Nacharbeit nach Review:

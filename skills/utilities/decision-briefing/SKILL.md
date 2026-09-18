@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-09-09
+updated: 2026-09-18
 description: Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.
 
 standalone: true
@@ -46,21 +46,27 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 ## Kern-UX
 
-Das Herzstück ist das Briefing-Format. Jede Entscheidung wird so vorgelegt, dass die Antwort nur einen Buchstaben kostet:
+Das Herzstück ist das Briefing-Format. Jede Entscheidung wird so vorgelegt, dass die Antwort schnell und ohne kognitiven Ballast erfolgen kann:
 
-- **Nummerierung:** `[E01]`, `[E02]`, … — stabile Referenz über die ganze Session
-- **Kurze Frage** + 1–2 Sätze Kontext
-- **Optionen als Buchstaben** A/B/C/D (2–4 Optionen, mehr nur wenn nötig)
-- **Markierte Empfehlung** mit 1-Satz-Begründung (z.B. `→ Empfehlung: A — weil …`)
-- Optional: Konsequenz-Hinweis (was folgt aus der Wahl)
+- **Sprechender Klartext-Titel** je Punkt (z. B. *„Hermes-Sprachunterstützung“*, *„Rettung alter Arbeitssitzungen“*)
+- **Alltagssprache in Ich-Form (Dreiklang):**
+  1. *Lage:* Was ist die Situation / das Problem?
+  2. *Ich mache ...:* Was plane/empfehle ich konkret zu tun?
+  3. *Rückfall:* Was passiert bei Fehlschlag oder was entscheidet der Nutzer danach?
+- **Keine technischen Kürzel im Fragetext:** Keine Ticketnummern (`T-...`), D-Kennungen, Git-Hashes oder Dateipfade im sichtbaren Text für den Menschen.
+- **Optionen als Buchstaben** A/B/C/D (2–4 Optionen, klar und verständlich formuliert)
+- **Markierte Empfehlung** in Ich-Form (z. B. `→ Ich empfehle Option A, weil ich damit ...`)
+- **Technische Referenztabelle nur im Anhang:** Stabile Nummern (`[E01]`, `[E02]`), Ticket-IDs und Zielregister werden am Ende in einer kompakten Tabelle geführt.
 
 **Antwortformate des Users:**
 
 ```
-Einzeln:   "E01: A"  oder  "1A"
-Batch:     "1A 2C 3B"  oder  "E01: A, E02: C, E03: B"
-Vertiefen: "E02: mehr Info"  oder  "2?"
-Vertagen:  "E03: später"
+Per Buchstabe:   "E01: A"  oder  "1A"
+Batch:           "1A 2C 3B"
+Per Klartext:    "Bei der Hermes-Sprachunterstützung Option A"
+Vertiefen:       "E02: mehr Info"  oder  "2?"
+Vertagen:        "E03: später"
+Gesamtabnahme:   "Passt so, alle Empfehlungen umsetzen"
 ```
 
 ---
@@ -98,13 +104,21 @@ Quellen: Was der User nennt, ein vorliegendes Dokument oder der Gesprächskontex
 Pro Entscheidung:
 
 ```
-[E01] <Kurze Frage>
-  Kontext: <1-2 Sätze: Warum steht das an? Was hängt dran?>
-  A) <Option>
-  B) <Option>
-  C) <Option>
-  → Empfehlung: <Buchstabe> — <1-Satz-Begruendung>
-  (optional) Konsequenz: <Was folgt aus der Wahl / naechste Aktion>
+[E01] <Sprechender Klartext-Titel>
+  Lage: <1 Satz: Was ist die Situation?>
+  Handlung: <1-2 Sätze in Ich-Form: Was schlage ich vor zu tun?>
+  Rückfall: <1 Satz: Was passiert bei Fehlschlag oder als nächster Schritt?>
+  A) <Option in Alltagssprache>
+  B) <Option in Alltagssprache>
+  → Meine Empfehlung: A — <Begründung in Ich-Form>
+```
+
+Am Ende des Briefings:
+```
+### Technische Referenztabelle (nur für Buchung & Audit)
+| Nummer | Klartext-Titel | Empfehlung | Ticket-ID / D-Nummer | Quelle / Pfad |
+|---|---|---|---|---|
+| E01 | Hermes-Sprachunterstützung | A | T-20260913-989062143 | hermes-agent |
 ```
 
 Regeln für gute Optionen:
@@ -228,6 +242,13 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 ---
 
 ## Changelog
+
+### 1.2.0 (2026-09-18)
+- Stilregel für verständliche Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):
+  - Keine kryptischen Ticketnummern, D-Kennungen oder Pfade im sichtbaren Fragetext.
+  - Dreiklang in Ich-Form (Lage, „Ich mache …“, Rückfall) für Kontext und Empfehlung.
+  - Sprechende Klartext-Titel je Entscheidungspunkt; Antwortformate um Klartext und Gesamtabnahme erweitert.
+  - Technische Zuordnung (Kürzel, Ticket-IDs, Registerpfade) in Anhangstabelle am Briefingende verlegt.
 
 ### 1.1.0 (2026-09-09)
 - P-018 ergänzt Session-Provenienz für wichtige neu erzeugte Briefings, Berichte, Handoffs und

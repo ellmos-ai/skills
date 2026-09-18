@@ -1,10 +1,10 @@
 ---
 name: decision-shot
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-09-09
+updated: 2026-09-18
 description: >
   Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder
   Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im
@@ -108,6 +108,10 @@ wird hier aber konsequent auf ein festes fuenfteiliges Format angewendet.
 
 ## Regeln
 
+- **Nutzertexte ohne technische Nummern/Kürzel (Ich-Form in Alltagssprache):**
+  Im sichtbaren Text für den Menschen (Titel, Kontext, Optionen, Talking Points, Empfehlung) stehen **keine** internen Kürzel, Ticketnummern (`T-...`), D-Kennungen oder relative Dateipfade.
+  Der Kontext beschreibt die Lage und die geplante Handlung in der Ich-Form („Ich schlage vor...“).
+  Technische Referenzen (Ticket-ID, genauer Dateipfad) stehen ausschließlich in der abschließenden Zeile `**Vollanalyse:**` bzw. in einer Referenztabelle.
 - **Zeilen sind Budget, kein Ziel.** 2-3 Zeilen Kontext, 2-4 Stichpunkte je
   Option, 2-3 Talking Points, 1 Satz Empfehlung -- mehr wird gestrichen, nicht
   gekuerzt-und-trotzdem-behalten. Passt eine Option nicht in 4 Stichpunkte,
@@ -150,8 +154,8 @@ READMEs und Altdateien werden nicht pauschal gestempelt oder nachgestempelt.
 ```
 ## Wo laeuft der naechtliche Backup-Job?
 
-**Kontext:** Aktuell auf dem Laptop, der oft schlaeft und den Job dann
-verpasst. Mac Studio laeuft 24/7 und hat freie Kapazitaet.
+**Kontext:** Ich beobachte wiederholte Ausfälle auf dem Laptop, weil das Gerät nachts
+schläft. Ich schlage vor, den Job auf den Mac Studio umzuziehen, der rund um die Uhr läuft.
 
 **Laptop (Status quo)**
 + Keine Netzwerkabhaengigkeit
@@ -170,10 +174,16 @@ verpasst. Mac Studio laeuft 24/7 und hat freie Kapazitaet.
 **Empfehlung:** Mac Studio -- einzige Option ohne den bekannten Schlafmodus-
 Ausfall, und die Abhaengigkeit (Tailscale) ist bereits im Betrieb bewaehrt.
 
-**Vollanalyse:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, Abschnitt "Backup-Jobs"
+**Vollanalyse:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, Abschnitt "Backup-Jobs" (Ticket T-20260620-42)
 ```
 
 ## Changelog
+
+### 1.2.0 (2026-09-18)
+- Stilregel für verständliche Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):
+  - Keine Ticketnummern, D-Kennungen oder internen Pfade im sichtbaren Text (Titel, Kontext, Talking Points).
+  - Kontext und Empfehlung in natürlicher Alltagssprache in Ich-Form.
+  - Technische Ticket- und Pfadreferenzen strikt auf die abschließende Vollanalyse-Zeile begrenzt.
 
 ### 1.1.0 (2026-09-09)
 - P-018 ergänzt den Session-Stempel für wichtige neu gespeicherte Decision-Shots mit enger
