@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.7.0
+version: 0.8.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-08-20
+updated: 2026-09-20
 description: >
   Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
   einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
@@ -79,6 +79,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | App-/GUI-Serie gemeinsam mit dem User durchtesten (live testen, Feedback sofort auswerten + Reparatur delegieren) | Coding & Debugging | `human-loop-audit` |
 | Projekt nach Sitzungsende aufräumen (Register lösen/einsortieren, Doku auf Ist-Stand bringen, Strays wegräumen) | Coding & Debugging | `tidy-up` (`/tidy-up`; zählt als `work-autonomous`-Ebene-1-Quelle) |
 | Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu verändern ("CLAUDE.md ist zu lang", "wird abgeschnitten") | Utilities | `paveman` (deterministisch, kein Modellaufruf; vs. `knappform` = LLM-Sprechstil) |
+| Mermaid-Diagramm rendert auf GitHub nicht („Unable to render rich display", „Schaltplan wird nicht angezeigt"), Mermaid-Blöcke orgweit prüfen | Coding & Debugging | `mermaid-lint` (echter Parser ohne Browser + Readback an der lebenden Seite) |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -97,6 +98,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.8.0 (2026-09-20)
+- Routing-Zeile für den neuen Skill `mermaid-lint` ergänzt (Familie Coding & Debugging):
+  Mermaid-Diagramme, die GitHub mit „Unable to render rich display" verweigert, sowie
+  orgweite Prüfläufe über alle ```mermaid-Blöcke.
 
 ### 0.7.0 (2026-08-20)
 - `choose-your-orchestrator` als vorgeschalteten Empfehlungs- und Vertragsdialog für
