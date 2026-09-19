@@ -38,6 +38,8 @@ provenance:
   decision_ref: "T-20260913-107991667 (Ticket-Master, Nutzerauftrag 2026-09-13)"
 ---
 
+<img src="banner.png" width="100%" alt="decision-path banner">
+
 # decision-path — ASCII-Abhängigkeitsgraph offener Entscheidungen
 
 > Entscheidungen fallen nicht im luftleeren Raum. Was isoliert betrachtet

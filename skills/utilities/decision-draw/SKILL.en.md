@@ -37,6 +37,8 @@ provenance:
   decision_ref: "T-20260913-107991667 (Ticket-Master, Nutzerauftrag 2026-09-13)"
 ---
 
+<img src="banner.png" width="100%" alt="decision-draw banner">
+
 # decision-draw — Big Picture and Overall Sign-Off for Bundled Decisions
 
 > When five or ten decisions are pending, one easily gets lost in the weeds of

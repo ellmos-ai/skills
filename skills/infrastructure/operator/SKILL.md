@@ -35,6 +35,8 @@ provenance:
   local_changes_since_sync: true
 ---
 
+<img src="banner.png" width="100%" alt="operator banner">
+
 # Operator
 
 ## Auftrag
