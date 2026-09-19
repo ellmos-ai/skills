@@ -100,8 +100,13 @@ entdeckt.
 | `got 'PS'` in einem Flowchart | Runde Klammern im Knotenlabel | Label quoten: `A["Start (hier)"]` |
 | `Lexical error ... Unrecognized text` | Backticks oder Doppelpunkt im Label | Label quoten, Backticks entfernen |
 | `Expecting 'SEMI', 'NEWLINE', 'EOF'` in `graph`/`flowchart` | `Note:` gibt es nur in Sequenz- und Klassendiagrammen | Hinweistext aus dem Block nehmen und als Markdown-Zeile darunter setzen, damit die Information sichtbar bleibt |
-| `Expecting 'SOLID_OPEN_ARROW' ... got 'NEWLINE'` | Klammern oder HTML-Entities im Nachrichtentext eines Sequenzdiagramms | Klammern durch Kommata oder Gedankenstriche ersetzen; Zahlenwerte niemals veraendern |
+| `Expecting 'SOLID_OPEN_ARROW' ... got 'NEWLINE'` in einem Sequenzdiagramm | **HTML-Entity** im Nachrichtentext (`&lambda;`, `&Delta;`, `&ge;`). Nicht die Klammern und nicht das `=` brechen hier — das abschliessende `;` der Entity liest der Lexer als Statement-Terminator, alles dahinter wird neue Anweisung. | Entity durch das literale Zeichen ersetzen (λ, Δ, ≥), Text sonst unveraendert. Klammern duerfen bleiben. Zahlenwerte und ihre Schreibweise niemals veraendern. |
 | Semikolon in einer Sequenznachricht | wird als Statement-Ende gelesen | durch ` - ` ersetzen |
+
+In **quotierten Flowchart-Labels** sind Entities unproblematisch — die Regel gilt nur fuer
+Sequenznachrichten. `mermaid_lint.mjs` meldet solche Entities als eigene `[WARN]`-Zeile
+(Feld `warnings` im JSON), zusaetzlich zum Parserfehler: der Parser sagt nur
+`got 'NEWLINE'` und nennt die Ursache nicht.
 
 **Grundsatz:** minimal-invasiv. Layout, Knoten-IDs, Reihenfolge und sichtbarer Text
 bleiben, soweit irgend moeglich, unveraendert. In wissenschaftlichen Repos gilt das
@@ -120,6 +125,11 @@ strukturgleich halten.
    Namensdopplung flach nach `<org>__<repo>` klonen und den frischen Stand linten.
 4. Vor jeder Aenderung Locks pruefen (`lock_scan.py`, `LOCK*.txt` im Klon **und** am
    OneDrive-Projektpfad), eigenen Lock setzen, nach dem Push wieder entfernen.
+   **Scope lesen, nicht nur die Existenz:** `LOCK.team.*` mit abgelaufener
+   `expires_after` ist ignorierbar; `LOCK.user.zenodo-upload.txt` sperrt ausschliesslich
+   die externe Zenodo-Schreiboperation und erlaubt Doku-Aenderungen ausdruecklich.
+   Ein `LOCK.user.until-winners-announcement.txt` (Judging) sperrt dagegen jeden Push —
+   dort nur lesend pruefen und den Befund als Ticket ablegen.
 5. Reparieren, linten bis gruen, committen, `git pull --rebase`, pushen.
 6. Readback mit Negativkontrolle. Erst dann gilt es als erledigt.
 

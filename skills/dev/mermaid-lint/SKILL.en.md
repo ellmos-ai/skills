@@ -102,8 +102,13 @@ iframe trap above was found.
 | `got 'PS'` in a flowchart | parentheses in a node label | Quote the label: `A["Start (here)"]` |
 | `Lexical error ... Unrecognized text` | backticks or a colon in a label | Quote the label, drop the backticks |
 | `Expecting 'SEMI', 'NEWLINE', 'EOF'` in `graph`/`flowchart` | `Note:` only exists in sequence and class diagrams | Move the note out of the block, put it below as a Markdown line so the information stays visible |
-| `Expecting 'SOLID_OPEN_ARROW' ... got 'NEWLINE'` | parentheses or HTML entities in a sequence message | Replace parentheses with commas or dashes; never alter numeric values |
+| `Expecting 'SOLID_OPEN_ARROW' ... got 'NEWLINE'` in a sequence diagram | **HTML entity** in the message text (`&lambda;`, `&Delta;`, `&ge;`). Neither the parentheses nor the `=` break it here — the entity's trailing `;` is read as a statement terminator and everything after it becomes a new statement. | Replace the entity with the literal character (λ, Δ, ≥), leave the rest untouched. Parentheses may stay. Never alter numeric values or their notation. |
 | semicolon in a sequence message | read as a statement terminator | replace with ` - ` |
+
+Inside **quoted flowchart labels** entities are harmless — the rule applies to sequence
+messages only. `mermaid_lint.mjs` reports such entities as a separate `[WARN]` line
+(field `warnings` in JSON) in addition to the parser error, because the parser only says
+`got 'NEWLINE'` and never names the cause.
 
 **Principle:** minimally invasive. Layout, node IDs, ordering and visible text stay
 unchanged wherever possible. In scientific repositories this applies especially to
@@ -122,6 +127,11 @@ identical.
    shallow into `<org>__<repo>` and lint the fresh copy.
 4. Check locks before any change (`lock_scan.py`, `LOCK*.txt` in the clone **and** at
    the OneDrive project path), set your own lock, remove it after the push.
+   **Read the scope, not just the file's existence:** a `LOCK.team.*` whose
+   `expires_after` has passed can be ignored; `LOCK.user.zenodo-upload.txt` blocks only
+   the external Zenodo write and explicitly permits documentation changes. A
+   `LOCK.user.until-winners-announcement.txt` (judging) blocks every push — check such
+   a repository read-only and file the finding as a ticket.
 5. Fix, lint until green, commit, `git pull --rebase`, push.
 6. Readback with a negative control. Only then is it done.
 

@@ -64,6 +64,25 @@ function extractBlocks(text) {
   return blocks;
 }
 
+// Vorpruefung: HTML-Entities in Sequenzdiagramm-Nachrichten. Ihr abschliessendes ';'
+// liest der Lexer als Statement-Terminator, alles danach wird neue Anweisung.
+// Wird auch dann gemeldet, wenn der Parser die Zeile noch durchlaesst -- in
+// quotierten Flowchart-Labels sind Entities dagegen unproblematisch.
+const ENTITY_RE = /&[a-zA-Z][a-zA-Z0-9]*;/g;
+
+function entityWarnings(body) {
+  const lines = body.split('\n');
+  if (!lines.some(l => /^\s*sequenceDiagram\b/.test(l))) return [];
+  const out = [];
+  lines.forEach((line, i) => {
+    // Nachrichtenzeile: A->>B: text   (auch -->>, ->, -->, -x, --x)
+    if (!/(-{1,2}>>?|--?x|--?\))\s*[^:]+:/.test(line)) return;
+    const hits = line.match(ENTITY_RE);
+    if (hits) out.push({ line: i + 1, entities: [...new Set(hits)], raw: line.trim().slice(0, 120) });
+  });
+  return out;
+}
+
 const asJson = process.argv.includes('--json');
 let targets = process.argv.slice(2).filter(a => !a.startsWith('--'));
 // --from <datei>: eine Pfad pro Zeile (umgeht Shell-Escaping von Windows-Backslashes)
@@ -81,6 +100,7 @@ async function lintTarget(target) {
 
   const findings = [];
   const envIssues = [];
+  const warnings = [];
   let blockCount = 0, fileWithBlocks = 0;
 
   for (const f of files) {
@@ -91,6 +111,16 @@ async function lintTarget(target) {
     for (let bi = 0; bi < blocks.length; bi++) {
       blockCount++;
       const b = blocks[bi];
+      const relFile = root ? relative(root, f).split(sep).join('/') : f;
+      for (const w of entityWarnings(b.body)) {
+        warnings.push({
+          file: relFile, block: bi + 1, blockStartLine: b.startLine,
+          fileLine: b.startLine + w.line,
+          type: 'html_entity_in_sequence_message',
+          detail: `HTML-Entity in Sequenznachricht: ${w.entities.join(', ')} -- das ';' beendet die Anweisung. `
+            + `Durch das literale Zeichen ersetzen. Zeile: ${w.raw}`,
+        });
+      }
       try {
         await mermaid.parse(b.body);
       } catch (err) {
@@ -111,7 +141,7 @@ async function lintTarget(target) {
     }
   }
   return { target, files: files.length, filesWithBlocks: fileWithBlocks, blocks: blockCount,
-    broken: findings.length, findings, envIssues };
+    broken: findings.length, findings, envIssues, warnings };
 }
 
 const results = [];
@@ -127,6 +157,9 @@ if (asJson) {
     for (const f of r.findings) {
       console.log(`\n[FAIL] ${f.file} (Block ${f.block}, beginnt Zeile ${f.blockStartLine}${f.fileLine ? `, Fehler ~Zeile ${f.fileLine}` : ''})`);
       console.log(`  ${f.error}`);
+    }
+    for (const w of r.warnings || []) {
+      console.log(`[WARN] ${w.file} (Block ${w.block}, ~Zeile ${w.fileLine})\n  ${w.detail}`);
     }
     for (const f of r.envIssues || []) {
       console.log(`[SKIP-ENV] ${f.file} Block ${f.block}: ${f.error.slice(0, 80)} (Node-Umgebung, kein Syntaxfehler)`);

@@ -46,6 +46,22 @@ Gut: quotiertes Label -- darf NICHT an DOMPurify scheitern.
 flowchart TD
     A["Start (hier)"] --> B[Ende]
 \`\`\`
+
+Warnung erwartet: HTML-Entity in einer Sequenznachricht.
+
+\`\`\`mermaid
+sequenceDiagram
+    participant A
+    participant B
+    A->>B: Gap validated &ge; 8.69
+\`\`\`
+
+Keine Warnung: Entity in einem quotierten Flowchart-Label ist unproblematisch.
+
+\`\`\`mermaid
+flowchart TD
+    X["Gap &ge; 8.69"] --> Y[Ende]
+\`\`\`
 `;
 
 const dir = mkdtempSync(join(tmpdir(), 'mermaid-selftest-'));
@@ -62,11 +78,12 @@ try {
   }
   const r = JSON.parse(out);
 
-  assert.equal(r.blocks, 4, `4 Bloecke erwartet, gezaehlt: ${r.blocks}`);
-  assert.equal(r.broken, 2, `2 defekte Bloecke erwartet, gemeldet: ${r.broken}`);
+  assert.equal(r.blocks, 6, `6 Bloecke erwartet, gezaehlt: ${r.blocks}`);
+  // Block 5 zaehlt mit: die Entity bricht den Parser wirklich, die Warnung erklaert nur warum.
+  assert.equal(r.broken, 3, `3 defekte Bloecke erwartet, gemeldet: ${r.broken}`);
 
   const blocks = r.findings.map(f => f.block).sort();
-  assert.deepEqual(blocks, [1, 3], `Bloecke 1 und 3 sollten defekt sein, waren: ${blocks}`);
+  assert.deepEqual(blocks, [1, 3, 5], `Bloecke 1, 3 und 5 sollten defekt sein, waren: ${blocks}`);
 
   assert.match(r.findings[0].error, /ACTOR|loop/i,
     'Block 1 sollte am reservierten Wort scheitern');
@@ -77,7 +94,14 @@ try {
   assert.equal((r.envIssues || []).length, 0,
     `Umgebungsfehler aufgetreten -- DOM-Shim pruefen: ${JSON.stringify(r.envIssues)}`);
 
-  console.log('selftest OK: 4 Bloecke, 2 defekt (1 und 3), 0 Umgebungsfehler');
+  // Entity-Vorpruefung: warnt in Sequenznachrichten, nicht in Flowchart-Labels.
+  const warns = r.warnings || [];
+  assert.equal(warns.length, 1,
+    `genau 1 Entity-Warnung erwartet (Block 5), gemeldet: ${JSON.stringify(warns)}`);
+  assert.equal(warns[0].block, 5, `Warnung sollte Block 5 betreffen, war: ${warns[0].block}`);
+  assert.match(warns[0].detail, /&ge;/, 'Warnung sollte die gefundene Entity nennen');
+
+  console.log('selftest OK: 6 Bloecke, 3 defekt (1, 3, 5), 1 Entity-Warnung (5), 0 Umgebungsfehler');
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }
