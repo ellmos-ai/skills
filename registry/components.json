@@ -2,10 +2,10 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 141,
+    "component_count": 142,
     "categories": {
       "assist": 20,
-      "dev": 24,
+      "dev": 25,
       "education": 5,
       "game-dev": 5,
       "infrastructure": 32,
@@ -567,6 +567,20 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
+      "id": "tool:dev:mermaid-lint",
+      "name": "mermaid-lint",
+      "type": "tool",
+      "category": "dev",
+      "path": "skills/dev/mermaid-lint/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Findet und behebt Mermaid-Diagramme, die GitHub nicht rendert (\"Unable to render rich display\"). Prueft jeden ```mermaid-Block mit dem echten Mermaid-Parser ohne Browser und belegt das Ergebnis danach an der lebenden GitHub-Seite.",
       "languages": [
         "de",
         "en"

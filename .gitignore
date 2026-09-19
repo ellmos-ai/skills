@@ -207,3 +207,7 @@ skills/_reference/
 
 # ---- Lokale, erweiterte Skill-Karte (inkl. privater Skills) — NIE pushen ----
 SKILLS-MAP-PRIVATE.md
+
+# mermaid-lint skill: npm-Abhaengigkeiten nicht tracken
+skills/dev/mermaid-lint/node_modules/
+skills/dev/mermaid-lint/package-lock.json

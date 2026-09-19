@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1058,
+  "file_count": 1060,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -227,6 +227,8 @@
     "skills/dev/github-repo-care/ZH/SKILL.md",
     "skills/dev/human-loop-audit/SKILL.en.md",
     "skills/dev/human-loop-audit/SKILL.md",
+    "skills/dev/mermaid-lint/SKILL.en.md",
+    "skills/dev/mermaid-lint/SKILL.md",
     "skills/dev/migrate-rename/EN/SKILL.md",
     "skills/dev/migrate-rename/ES/SKILL.md",
     "skills/dev/migrate-rename/JA/SKILL.md",
