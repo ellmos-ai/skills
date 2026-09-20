@@ -16,9 +16,9 @@
 > Portierbare KI-Skillbibliothek für Claude-Code-artige `SKILL.md`-Workflows, Codex-kompatible Agenten-Setups, BACH, AGY/Gemini und andere lokal-first LLM-Agentenlaufzeiten.
 
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
-[![Version: 1.4.3](https://img.shields.io/badge/Version-1.4.3-blue.svg)](pyproject.toml)
+[![Version: 1.4.4](https://img.shields.io/badge/Version-1.4.4-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 290 bestanden](https://img.shields.io/badge/Pytest-290%20bestanden%20(186%20Subtests)-success.svg)](testing/)
+[![Pytest: 305 bestanden](https://img.shields.io/badge/Pytest-305%20bestanden%20(186%20Subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
@@ -26,10 +26,10 @@
 [![Marketing Log: Aktiv](https://img.shields.io/badge/Marketing%20Log-Aktiv-blue.svg)](MARKETING-LOG.txt)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Dachverband: open-bricks](https://img.shields.io/badge/dachverband-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Öffentliche Skills: 138 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-138%20Katalog-brightgreen.svg)](registry/components.json)
+[![Öffentliche Skills: 142 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-142%20Katalog-brightgreen.svg)](registry/components.json)
 [![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
-[![Zuletzt geprüft: 2026-09-13](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--13-informational.svg)](MARKETING-LOG.txt)
+[![Zuletzt geprüft: 2026-09-20](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--20-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.

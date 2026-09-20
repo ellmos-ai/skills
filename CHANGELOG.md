@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-09-20
+
+- **Technical hygiene, version 1.4.4 & CI matrix hardening (Pfad A)**:
+  - Bumped package version to `1.4.4` in `pyproject.toml`.
+  - Added PEP 621 `license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]` and hardened pytest configuration (`minversion = "7.0"`, `norecursedirs`).
+  - Added `timeout-minutes: 15` runaway guardrails to the test matrix workflow (`.github/workflows/tests.yml`).
+  - Hardened `.github/workflows/skill-validation.yml` with `timeout-minutes: 10` and concurrency cancel-in-progress.
+  - Standardized `.github/workflows/stale.yml`, `.github/workflows/welcome.yml`, and `.github/workflows/auto-assign.yml` with explicit job timeouts and concurrency control.
+  - Hardened `.gitignore` against multi-host cloud-sync conflict copies (`*conflicted copy*`, `* (Kopie)*`, `* (Copy)*`, host-tagged conflict artifacts), canonical multi-agent lock patterns (`LOCK.user.*`, `LOCK.until.*`, `LOCK.condition.*`, `.automation-lock`, preserving `!package-lock.json`), and test caches (`.hypothesis/`, `.turbo/`, `.nyc_output/`, `.tox/`, `.mypy_cache/`, `*.orig`).
+  - Re-audited `THIRD_PARTY_LICENSES.md` for release `1.4.4` (100% Python standard library runtime, 0% copyleft, verified 10 invariants `INV-LOCAL-01` to `INV-SLA-10`).
+  - Fixed ruff F541 static linting issue in `testing/test_metadata.py`.
+  - Expanded automated contract test suite in `testing/test_metadata.py` verifying CI job timeouts, multi-host gitignore defenses, PEP 621 license files, and license audit recency.
+  - Synchronized version `1.4.4`, `Last-checked: 2026-09-20`, and documentation badges across `README.md`, `README_de.md`, and `llms.txt`.
+
 ## 2026-09-13
 
 - **Marketing, discoverability, target personas & comparative matrix (Pfad B)**:

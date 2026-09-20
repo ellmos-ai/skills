@@ -4,10 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ellmos-skills"
-version = "1.4.3"
+version = "1.4.4"
 description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
 readme = "README.md"
 license = { text = "MIT" }
+license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]
 authors = [
     { name = "Lukas Geiger", email = "lukas@ellmos.ai" }
 ]
@@ -55,9 +56,11 @@ Security = "https://github.com/ellmos-ai/skills/blob/master/SECURITY.md"
 "LLM Context" = "https://github.com/ellmos-ai/skills/blob/master/llms.txt"
 
 [tool.pytest.ini_options]
+minversion = "7.0"
 pythonpath = ["."]
 testpaths = ["testing", "skills"]
 addopts = "-ra -v"
+norecursedirs = [".git", ".pytest_cache", "__pycache__", "build", "dist", ".venv"]
 
 [tool.ruff]
 target-version = "py310"

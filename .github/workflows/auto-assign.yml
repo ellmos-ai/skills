@@ -7,8 +7,13 @@ on:
 permissions:
   pull-requests: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   assign:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v7

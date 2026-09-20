@@ -40,8 +40,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   static-s-tests:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

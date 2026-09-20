@@ -1,5 +1,32 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-09-20
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4
+
+### Technical Hygiene, CI Workflow Hardening & Metadata Parity (Pfad A Routine):
+1. **CI Matrix & Workflow Hardening**:
+   - Added `timeout-minutes: 15` runaway guardrail to CI matrix test job in `.github/workflows/tests.yml`.
+   - Hardened `.github/workflows/skill-validation.yml` with `timeout-minutes: 10` and concurrency cancel-in-progress.
+   - Hardened `.github/workflows/stale.yml` (`timeout-minutes: 10`), `.github/workflows/welcome.yml` (`timeout-minutes: 5`), and `.github/workflows/auto-assign.yml` (`timeout-minutes: 5`) with concurrency cancel-in-progress.
+2. **Multi-Host Cloud Sync & Lock Defense**:
+   - Hardened `.gitignore` with multi-host sync conflict copies (`*conflicted copy*`, `* (Kopie)*`, `* (Copy)*`, host-tagged conflict artifacts).
+   - Hardened lock file exclusions (`LOCK.user.*`, `LOCK.until.*`, `LOCK.condition.*`, `.automation-lock`, preserving `!package-lock.json`).
+   - Excluded coverage and test caches (`.hypothesis/`, `.turbo/`, `.nyc_output/`, `.tox/`, `.mypy_cache/`, `*.orig`).
+3. **PEP 621 Standard Packaging & Tooling Configuration**:
+   - Configured `license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]` in `pyproject.toml`.
+   - Hardened pytest configuration with `minversion = "7.0"` and `norecursedirs`.
+4. **Code Quality & Linter Compliance**:
+   - Resolved ruff F541 static lint issue in `testing/test_metadata.py`.
+5. **Drittanbieter-Audit & Third-Party SBOM Recency**:
+   - Re-audited `THIRD_PARTY_LICENSES.md` for version `1.4.4` (0% copyleft, zero external runtime dependencies, 10 invariants INV-LOCAL-01 to INV-SLA-10 verified).
+6. **Manifest & Discovery Context Synchronization**:
+   - Synchronized version `1.4.4` across `pyproject.toml`, `README.md`, `README_de.md`, `llms.txt`, and `CHANGELOG.md`.
+   - Updated `llms.txt` Last-checked date to `2026-09-20`.
+7. **Contract Test Suite Expansion (`testing/test_metadata.py`)**:
+   - Added automated contract tests for CI job timeouts, multi-host/lock gitignore defense, PEP 621 license files, and license audit recency.
+
 ## Date: 2026-09-13
 Repo: ellmos-ai/skills
 Branch: master

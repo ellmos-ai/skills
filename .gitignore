@@ -92,27 +92,45 @@ WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 # 2026-09-13. Geprueft: kein getracktes File wird von den geweiteten Mustern
 # erfasst.
 *-ASUS-GEI.*
+*-ASUS*
 *-DESKTOP-*
 *-LAPTOP-*
 *-LOCAL-HOST.*
 *-MACSTUDIO.*
+*-Mac Studio*
+*-MacBook*
 *-WORKSTATION-*
 *-WORKSTATION.*
+*-WORKSTATION-LG*
 *-conflict-*
 *.sync-conflict-*
+*conflicted copy*
 * (kopie)*
 * (copy)*
+* (Kopie)*
+* (Copy)*
 
 # ---- Multi-Agent-Locks & Test-Caches ----
 LOCK
 LOCK.*
+LOCK.user.*
+LOCK.until.*
+LOCK.condition.*
 LOCK.permissions.json
+.automation-lock
+!package-lock.json
 uv.lock
 .coverage
 .coverage.*
 coverage/
+.hypothesis/
+.turbo/
+.nyc_output/
+.tox/
+.mypy_cache/
 *.tmp
 *.bak
+*.orig
 
 # ---- Persönliche Präferenzen / Nutzerdaten ----
 skills/assist/prefs.json
