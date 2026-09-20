@@ -1462,7 +1462,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-register-care/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "status": "active",
       "description": "Pflege-Skill, der das dreiteilige Skill-Register konsistent hält (code-skill-index-Kataloge, Skill-Index, SKILL-MAP Family-/Routing-Map). Nutze diesen Skill für einen Drift-Check zwischen dem realen Skill-Inventar und dem dokumentierten Register: fehlende oder zu viele Einträge melden, Counts korrigieren, Stand-Datum setzen. Auch auslösen bei „Skill-Register pflegen\", „Index aktualisieren\", „Register-Drift prüfen\", „welche Skills fehlen in der Map\".",
       "languages": [
