@@ -942,6 +942,40 @@ def test_phase3_respects_cooldown_when_every_candidate_is_cooling_down(tmp_path:
     assert result["reason"] == "all-in-cooldown"
 
 
+def test_sync_drops_stale_per_skill_traffic(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    profile = dict(githubbot_bridge.SPECIFIC_SKILL_PROFILES[0])
+    profile["traffic"] = {"clones_unique_14d": 32, "views_unique_14d": 18, "traffic_score": 82}
+    usecases.write_text(json.dumps({"repositories": [profile]}), encoding="utf-8")
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    repo = json.loads(usecases.read_text(encoding="utf-8"))["repositories"][0]
+    assert set(repo["traffic"]) == {"updated_at"}
+    assert "32 Clones" not in (usecases.parent / "USECASES.md").read_text(encoding="utf-8")
+
+
+def test_synced_catalog_selects_only_confirmed_public_repositories(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    public_meta = {"visibility": "public", "archived": False, "fork": False}
+    repos = [
+        {"id": "org/unknown", "name": "unknown", "url": "https://github.com/org/unknown",
+         "github_meta": {"visibility": "unknown"}, "traffic": {"traffic_score": 999}},
+        {"id": "org/missing", "name": "missing", "url": "https://github.com/org/missing",
+         "traffic": {"traffic_score": 999}},
+        {"id": "org/public", "name": "public", "url": "https://github.com/org/public", "github_meta": public_meta},
+    ]
+    data = {"repositories": repos, "githubbot_sync": {"githubbot_source": ".GITHUBBOT"}}
+    (workspace / "usecases.json").write_text(json.dumps(data), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") == "public", result
+
+
 def test_failed_markdown_export_is_not_reported_as_success(tmp_path: Path) -> None:
     import githubbot_bridge
 

@@ -320,10 +320,13 @@ def select_candidate_repository(
     repositories: list[Mapping[str, Any]],
     cooldown_days: float = 7.0,
     now: datetime | None = None,
+    require_verified_visibility: bool = False,
 ) -> tuple[Mapping[str, Any] | None, dict[str, Any]]:
     """Selects the next repository to promote using traffic analysis and cooldown rules.
 
-    Excludes private, archived, and foreign fork repositories strictly.
+    Excludes private, archived, and foreign fork repositories strictly. Any github_meta present must
+    positively confirm a public, non-fork, non-archived repo; with require_verified_visibility (catalogs
+    synced from GitHubBot) github_meta is mandatory. Hand-curated legacy catalogs carry no github_meta.
     """
     eligible = []
     for repo in repositories:
@@ -333,12 +336,16 @@ def select_candidate_repository(
             continue
         if repo.get("exclusion_reason"):
             continue
-        gh_meta = repo.get("github_meta") or {}
-        if gh_meta.get("visibility") == "private":
+        gh_meta = repo.get("github_meta")
+        if gh_meta is None and not require_verified_visibility:
+            eligible.append(repo)
             continue
-        if gh_meta.get("archived") is True:
+        gh_meta = gh_meta or {}
+        if gh_meta.get("visibility") != "public":
             continue
-        if gh_meta.get("fork") is True:
+        if gh_meta.get("archived") is not False:
+            continue
+        if gh_meta.get("fork") is not False:
             continue
         eligible.append(repo)
 
@@ -673,7 +680,9 @@ class CommunityOutreachEngine:
             if not any(_repo_matches_catalog_entry(repo, ref) for ref in queued_refs)
         ]
 
-        candidate, score_meta = select_candidate_repository(eligible_repos)
+        candidate, score_meta = select_candidate_repository(
+            eligible_repos, require_verified_visibility="githubbot_sync" in data
+        )
         if not candidate:
             return {
                 "status": "needs-action",

@@ -733,6 +733,7 @@ def sync_githubbot_traffic(
             existing["active"] = True
             existing["exclusion_reason"] = None
             existing["github_meta"] = {"visibility": "public", "archived": False, "fork": False, "stars": 0}
+            existing["traffic"] = {"updated_at": now_iso}  # GitHub measures no per-skill traffic
             active_count += 1
         else:
             entry = dict(skill)
