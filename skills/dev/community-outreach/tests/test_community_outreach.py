@@ -942,6 +942,18 @@ def test_phase3_respects_cooldown_when_every_candidate_is_cooling_down(tmp_path:
     assert result["reason"] == "all-in-cooldown"
 
 
+def test_failed_markdown_export_is_not_reported_as_success(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    (usecases.parent / "USECASES.md").mkdir()  # export target cannot be written
+
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert "USECASES.md" in result["message"]
+
+
 def test_existing_catalog_entries_are_classified_fail_closed(tmp_path: Path) -> None:
     import githubbot_bridge
 

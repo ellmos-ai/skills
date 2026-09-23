@@ -770,7 +770,12 @@ def sync_githubbot_traffic(
     try:
         export_usecases_markdown(usecases_data, md_path)
     except Exception as exc:
+        # a stale USECASES.md may still carry old metadata: never report success over it
         logger.warning("Could not export USECASES.md: %s", exc)
+        return {
+            "status": "error",
+            "message": f"usecases.json updated, but USECASES.md is stale and must be regenerated: {exc}",
+        }
 
     return {
         "status": "success",
