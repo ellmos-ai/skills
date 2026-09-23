@@ -761,22 +761,17 @@ def sync_githubbot_traffic(
     if dry_run:
         return {"status": "dry-run", "total_repos": len(existing_repos), **usecases_data["githubbot_sync"]}
 
-    # Write atomically
-    temp_path = usecases_path.with_name(f".{usecases_path.name}.{os.getpid()}.tmp")
-    temp_path.write_text(json.dumps(usecases_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    temp_path.replace(usecases_path)
-
-    # Regenerate USECASES.md in parity with usecases.json
+    # USECASES.md first: if it cannot be written, usecases.json stays untouched and both remain in parity
     md_path = usecases_path.parent / "USECASES.md"
     try:
         export_usecases_markdown(usecases_data, md_path)
     except Exception as exc:
-        # a stale USECASES.md may still carry old metadata: never report success over it
         logger.warning("Could not export USECASES.md: %s", exc)
-        return {
-            "status": "error",
-            "message": f"usecases.json updated, but USECASES.md is stale and must be regenerated: {exc}",
-        }
+        return {"status": "error", "message": f"USECASES.md not writable, nothing changed: {exc}"}
+
+    temp_path = usecases_path.with_name(f".{usecases_path.name}.{os.getpid()}.tmp")
+    temp_path.write_text(json.dumps(usecases_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    temp_path.replace(usecases_path)
 
     return {
         "status": "success",
@@ -850,7 +845,7 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
         tf = r.get("traffic", {})
         clones_u = int(tf.get("clones_unique_14d", 0))
         views_u = int(tf.get("views_unique_14d", 0))
-        tf_str = f"{clones_u} Clones / {views_u} Views (14d)"
+        tf_str = f"{clones_u} Clones / {views_u} Views (14d)" if "traffic_score" in tf else "nicht gemessen"
         problems = "<br>• " + "<br>• ".join(_md(p) for p in (r.get("problems_solved") or ["Allgemeine Lösung"]))
         keywords = _md(", ".join(r.get("search_keywords") or [f"{r.get('name', '')} open source"]))
         lines.append(f"| [{name}]({url}) | {org} | {summary} | {tf_str} | {problems} | {keywords} |")
@@ -873,7 +868,7 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
             tf = r.get("traffic", {})
             lines.append(f"#### [{_md(r.get('name', ''))}]({_safe_url(r)})")
             lines.append(f"- **Beschreibung:** {_md(r.get('summary', ''))}")
-            if tf:
+            if "traffic_score" in tf:  # skill profiles carry no measured traffic
                 lines.append(
                     f"- **14-Tage-Traffic:** {int(tf.get('clones_14d', 0))} Clones "
                     f"({int(tf.get('clones_unique_14d', 0))} unique), {int(tf.get('views_14d', 0))} Views "

@@ -202,6 +202,33 @@ class PublishReceipt:
         )
 
 
+# Cut-and-Clue variant A: registers are split before they grow past ~200 lines
+REGISTRY_MAX_ROWS = 150
+PUBLICATION_STATUSES = ("entwurf", "freigegeben", "veroeffentlicht", "unbestaetigt")
+
+
+def publication_status(record: Mapping[str, Any]) -> str:
+    """History records are 'veroeffentlicht' only with a verified receipt, otherwise 'unbestaetigt'."""
+    verified = record.get("status") == "published" and record.get("receipt_verified") is True
+    if record.get("publication_status") == "unbestaetigt" or not verified:
+        return "unbestaetigt"
+    return "veroeffentlicht"
+
+
+def _registry_cell(value: object) -> str:
+    text = " ".join(str(value if value is not None else "").split())
+    for char in "\\`*_[]|<>":
+        text = text.replace(char, "\\" + char)
+    return text
+
+
+def _registry_link(url: object, label: str | None = None) -> str:
+    url = str(url or "").strip()
+    if not _is_valid_target_url(url) or any(c in url for c in " <>()\"'`"):
+        return label or _registry_cell(url)
+    return f"[{label or _registry_cell(url)}]({url})"
+
+
 def _atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
@@ -320,15 +347,14 @@ def select_candidate_repository(
     repositories: list[Mapping[str, Any]],
     cooldown_days: float = 7.0,
     now: datetime | None = None,
-    require_verified_visibility: bool = False,
 ) -> tuple[Mapping[str, Any] | None, dict[str, Any]]:
     """Selects the next repository to promote using traffic analysis and cooldown rules.
 
-    Excludes private, archived, and foreign fork repositories strictly. Any github_meta present must
-    positively confirm a public, non-fork, non-archived repo; with require_verified_visibility (catalogs
-    synced from GitHubBot) github_meta is mandatory. Hand-curated legacy catalogs carry no github_meta.
+    Fail-closed: only repositories whose github_meta positively confirms public, non-fork and
+    non-archived are eligible (set by --sync-githubbot or when bootstrapping the catalog).
     """
     eligible = []
+    unverified = 0
     for repo in repositories:
         if not isinstance(repo, Mapping):
             continue
@@ -336,12 +362,9 @@ def select_candidate_repository(
             continue
         if repo.get("exclusion_reason"):
             continue
-        gh_meta = repo.get("github_meta")
-        if gh_meta is None and not require_verified_visibility:
-            eligible.append(repo)
-            continue
-        gh_meta = gh_meta or {}
+        gh_meta = repo.get("github_meta") or {}
         if gh_meta.get("visibility") != "public":
+            unverified += 1
             continue
         if gh_meta.get("archived") is not False:
             continue
@@ -350,7 +373,7 @@ def select_candidate_repository(
         eligible.append(repo)
 
     if not eligible:
-        return None, {}
+        return None, {"unverified_visibility": unverified}
 
     current_time = now or datetime.now(timezone.utc).astimezone()
 
@@ -578,6 +601,7 @@ class CommunityOutreachEngine:
             "content_preview": proposal["text"][:150],
             "status": "published",
             "receipt_verified": True,
+            "publication_status": "veroeffentlicht",
         }
 
     def _finalize_local_projections(
@@ -590,9 +614,10 @@ class CommunityOutreachEngine:
         for _proposal, record, _status in finalized:
             outbox = self._append_outbox_record(outbox, record)
         _atomic_write_text(self.outbox_md, outbox)
-        _atomic_write_text(self.registry_md, self._render_registry(history))
+        remaining_inbox = _remove_spans(inbox, [proposal["span"] for proposal, _record, _status in finalized])
+        self._write_registry(history, remaining_inbox)
         self._update_rotation_from_history(history)
-        _atomic_write_text(self.inbox_md, _remove_spans(inbox, [proposal["span"] for proposal, _record, _status in finalized]))
+        _atomic_write_text(self.inbox_md, remaining_inbox)
 
     @staticmethod
     def _append_outbox_record(content: str, record: Mapping[str, Any]) -> str:
@@ -606,7 +631,7 @@ class CommunityOutreachEngine:
 - **Ziel-URL:** [{record.get('target_url', '')}]({record.get('target_url', '')})
 - **Veröffentlichungsbeleg:** [{record.get('platform_post_id', '')}]({record.get('published_url', '')})
 - **Lösungs-Repo:** `{record.get('repo', '')}`
-- **Status:** published (Receipt verifiziert)
+- **Status:** veroeffentlicht (Beleg verifiziert)
 - **Veröffentlichter Text:**
 ```text
 {record.get('content', '')}
@@ -615,24 +640,71 @@ class CommunityOutreachEngine:
 """
 
     @staticmethod
-    def _render_registry(history: list[dict[str, Any]]) -> str:
-        rows = []
-        for record in reversed(history):
-            if record.get("status") != "published" or record.get("receipt_verified") is not True:
-                continue
-            target = str(record.get("target_url", ""))
-            rows.append(
-                f"| {record.get('date', '')} | {record.get('platform', '')} | "
-                f"[{target}]({target}) | `{record.get('repo', '')}` | "
-                f"`{record.get('post_id', '')}` | {record.get('status', '')} |"
+    def _registry_row(record: Mapping[str, Any]) -> str:
+        target = _registry_link(record.get("target_url"))
+        evidence = _registry_link(record.get("published_url"), _registry_cell(record.get("platform_post_id")))
+        return (
+            f"| {_registry_cell(record.get('date'))} | {_registry_cell(record.get('platform'))} | {target} | "
+            f"{_registry_cell(record.get('repo'))} | {_registry_cell(record.get('post_id'))} | {evidence} |"
+        )
+
+    def _registry_documents(self, history: list[dict[str, Any]], inbox: str) -> dict[Path, str]:
+        """POSTVERZEICHNIS.md plus Cut-and-Clue archives (variant A), rendered deterministically."""
+        published = [r for r in history if isinstance(r, dict) and publication_status(r) == "veroeffentlicht"]
+        unconfirmed = [r for r in history if isinstance(r, dict) and publication_status(r) == "unbestaetigt"]
+        full_chunks = len(published) // REGISTRY_MAX_ROWS
+        archive = [self.archive_dir / f"POSTVERZEICHNIS_ARCHIV_v{k}.md" for k in range(1, full_chunks + 1)]
+        head = "| Datum | Plattform | Ziel-URL | Repository | Post-ID | Beleg |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        documents: dict[Path, str] = {}
+        for index, path in enumerate(archive):
+            rows = published[index * REGISTRY_MAX_ROWS : (index + 1) * REGISTRY_MAX_ROWS]
+            predecessor = f"Archiv: [{archive[index - 1].name}]({archive[index - 1].name})" if index else "keiner"
+            successor = (
+                f"Archiv: [{archive[index + 1].name}]({archive[index + 1].name})"
+                if index + 1 < len(archive)
+                else "Aktive Datei: [POSTVERZEICHNIS.md](../POSTVERZEICHNIS.md)"
             )
-        return """# POSTVERZEICHNIS: Globaler Duplikatschutz-Index
+            documents[path] = (
+                f"# POSTVERZEICHNIS — Archiv v{index + 1} (veröffentlichte Beiträge, älteste zuerst)\n\n"
+                f"---\nPointer / Vorläufer:\n{predecessor}\n---\n\n"
+                + head + "\n".join(self._registry_row(r) for r in rows) + "\n\n"
+                f"---\nPointer / Nachfolger:\n{successor}\n"
+            )
+        current = published[full_chunks * REGISTRY_MAX_ROWS :]
+        queue = _parse_proposals(inbox)
+        drafts = sum(1 for p in queue if not p.get("approved"))
+        approved = sum(1 for p in queue if p.get("approved"))
+        predecessor = f"Archiv: [_archive/{archive[-1].name}](_archive/{archive[-1].name})" if archive else "keiner"
+        text = (
+            "# POSTVERZEICHNIS: veröffentlichte und unbestätigte Beiträge\n\n"
+            f"---\nPointer / Vorläufer:\n{predecessor}\n---\n\n"
+            "> Jeder Beitrag hat genau einen Status: **entwurf** und **freigegeben** (Queue in POST-EINGANG.md),\n"
+            "> **veroeffentlicht** (nur mit Beleg: Kommentar-Permalink und Plattform-ID) oder **unbestaetigt**\n"
+            "> (als veröffentlicht gemeldet, aber ohne Beleg). Das Verzeichnis wird aus posts_history.json erzeugt.\n\n"
+            f"**Stand:** veroeffentlicht {len(published)} · unbestaetigt {len(unconfirmed)} · "
+            f"freigegeben {approved} · entwurf {drafts}\n\n"
+            f"## Veröffentlicht (mit Beleg, neueste zuerst; {len(current)} hier, ältere im Archiv)\n\n"
+            + head + "".join(self._registry_row(r) + "\n" for r in reversed(current))
+            + "\n## Unbestätigt (kein Beleg; Ziel-URL bleibt für den Duplikatschutz gesperrt)\n\n"
+            + head + "".join(self._registry_row(r) + "\n" for r in reversed(unconfirmed))
+        )
+        documents[self.registry_md] = text
+        return documents
 
-> Eine Ziel-URL wird nur nach einem verifizierten Veröffentlichungsbeleg eingetragen.
+    def _write_registry(self, history: list[dict[str, Any]], inbox: str) -> list[str]:
+        written = []
+        for path, text in self._registry_documents(history, inbox).items():
+            if not path.exists() or path.read_text(encoding="utf-8") != text:
+                _atomic_write_text(path, text)
+                written.append(path.name)
+        return written
 
-| Datum | Plattform | Ziel-URL | Repository | Post-ID | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-""" + "\n".join(rows) + ("\n" if rows else "")
+    def rebuild_registry(self) -> dict[str, Any]:
+        inbox = self.inbox_md.read_text(encoding="utf-8") if self.inbox_md.exists() else ""
+        history = self._history()
+        if self.dry_run:
+            return {"status": "dry-run", "documents": [p.name for p in self._registry_documents(history, inbox)]}
+        return {"status": "completed", "written": self._write_registry(history, inbox)}
 
     def _update_rotation_from_history(self, history: list[dict[str, Any]]) -> None:
         if not self.usecases_json.exists():
@@ -680,15 +752,14 @@ class CommunityOutreachEngine:
             if not any(_repo_matches_catalog_entry(repo, ref) for ref in queued_refs)
         ]
 
-        candidate, score_meta = select_candidate_repository(
-            eligible_repos, require_verified_visibility="githubbot_sync" in data
-        )
+        candidate, score_meta = select_candidate_repository(eligible_repos)
         if not candidate:
-            return {
-                "status": "needs-action",
-                "action": "configure-repositories",
-                "reason": "all-in-cooldown" if score_meta.get("all_in_cooldown") else "no-active-repositories",
-            }
+            reason = "no-active-repositories"
+            if score_meta.get("all_in_cooldown"):
+                reason = "all-in-cooldown"
+            elif score_meta.get("unverified_visibility"):
+                reason = "visibility-unverified: run --sync-githubbot"
+            return {"status": "needs-action", "action": "configure-repositories", "reason": reason}
 
         rotation = data.get("platform_rotation") or DEFAULT_PLATFORM_ROTATION
         if not isinstance(rotation, list) or not rotation:
@@ -760,6 +831,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--check-inbound", action="store_true", help="Count published threads requiring monitoring")
     parser.add_argument("--archive", action="store_true", help="Archive old complete outbox entries")
     parser.add_argument("--sync-githubbot", action="store_true", help="Sync repository metadata and traffic from GitHubBot")
+    parser.add_argument("--rebuild-registry", action="store_true", help="Re-render POSTVERZEICHNIS.md and its archives from history")
     parser.add_argument("--dry-run", action="store_true", help="Plan only; do not call publishers or modify the workspace")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON only")
     return parser
@@ -779,6 +851,8 @@ def main(argv: list[str] | None = None) -> int:
             result: Any = sync_githubbot_traffic(engine.usecases_json, dry_run=args.dry_run)
         except Exception as exc:
             result = {"status": "error", "message": str(exc)}
+    elif args.rebuild_registry:
+        result = engine.rebuild_registry()
     elif args.process_approvals:
         result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
     elif args.discover_candidate:
@@ -793,7 +867,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         print(json.dumps(result, indent=2, ensure_ascii=False))
-    return 0
+    return 1 if isinstance(result, Mapping) and result.get("status") == "error" else 0
 
 
 

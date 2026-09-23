@@ -15,6 +15,8 @@ sys.path.insert(0, str(RUNTIME_ROOT))
 
 from outreach_engine import CommunityOutreachEngine, canonicalize_url  # noqa: E402
 
+PUBLIC_META = {"visibility": "public", "archived": False, "fork": False}
+
 
 def _minimal_workspace(path: Path) -> None:
     path.mkdir()
@@ -159,6 +161,7 @@ def test_select_candidate_repository_prioritizes_traffic_and_enforces_cooldown()
             "name": "high-traffic-recent",
             "active": True,
             "last_promoted_at": "2026-09-06T12:00:00+00:00",
+            "github_meta": PUBLIC_META,
             "priority": "high",
             "traffic": {"clones_unique_14d": 500, "views_unique_14d": 100, "traffic_score": 1100},
         },
@@ -168,6 +171,7 @@ def test_select_candidate_repository_prioritizes_traffic_and_enforces_cooldown()
             "name": "medium-traffic-ready",
             "active": True,
             "last_promoted_at": None,
+            "github_meta": PUBLIC_META,
             "priority": "high",
             "traffic": {"clones_unique_14d": 50, "views_unique_14d": 20, "traffic_score": 120},
         },
@@ -177,6 +181,7 @@ def test_select_candidate_repository_prioritizes_traffic_and_enforces_cooldown()
             "name": "low-traffic",
             "active": True,
             "last_promoted_at": None,
+            "github_meta": PUBLIC_META,
             "priority": "normal",
             "traffic": {"clones_unique_14d": 1, "views_unique_14d": 1, "traffic_score": 3},
         },
@@ -212,6 +217,7 @@ def test_phase3_skips_queued_proposals(tmp_path: Path) -> None:
                         "url": "https://github.com/org/queued-tool",
                         "priority": "high",
                         "last_promoted_at": None,
+                        "github_meta": PUBLIC_META,
                         "traffic": {"clones_unique_14d": 500, "views_unique_14d": 50, "traffic_score": 1050},
                     },
                     {
@@ -220,6 +226,7 @@ def test_phase3_skips_queued_proposals(tmp_path: Path) -> None:
                         "url": "https://github.com/org/next-tool",
                         "priority": "normal",
                         "last_promoted_at": None,
+                        "github_meta": PUBLIC_META,
                         "traffic": {"clones_unique_14d": 100, "views_unique_14d": 10, "traffic_score": 210},
                     },
                 ]

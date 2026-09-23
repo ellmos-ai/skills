@@ -12,6 +12,8 @@ from pathlib import Path
 
 import pytest
 
+PUBLIC_META = {"visibility": "public", "archived": False, "fork": False}
+
 SKILL_DIR = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = SKILL_DIR / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -34,6 +36,7 @@ def sample_repos() -> list[dict]:
             "usecases": ["Testing", "Automation"],
             "solved_problems": ["Manuelle Tests", "Hohe Fehlerquote"],
             "last_promoted": None,
+            "github_meta": PUBLIC_META,
         },
         {
             "name": "data-cruncher",
@@ -43,6 +46,7 @@ def sample_repos() -> list[dict]:
             "usecases": ["Data Processing"],
             "solved_problems": ["Langsame Auswertung"],
             "last_promoted": "2026-08-01T00:00:00",
+            "github_meta": PUBLIC_META,
         },
     ]
 
@@ -170,6 +174,7 @@ def test_runtime_schema_is_read_compatibly(tmp_path: Path) -> None:
                         "url": "https://example.invalid/recent",
                         "problems_solved": ["Aktuelles Problem"],
                         "last_promoted_at": "2026-08-20T00:00:00+00:00",
+                        "github_meta": PUBLIC_META,
                     },
                     {
                         "id": "org/never",
@@ -177,6 +182,7 @@ def test_runtime_schema_is_read_compatibly(tmp_path: Path) -> None:
                         "url": "https://example.invalid/never",
                         "problems_solved": ["Noch ungelöst"],
                         "last_promoted_at": None,
+                        "github_meta": PUBLIC_META,
                     },
                 ],
                 "last_platform": "Reddit",
@@ -406,8 +412,10 @@ def test_registry_projection_excludes_unverified_legacy_claims(temp_workspace: P
     CommunityOutreachEngine(temp_workspace, publisher=DynamicPublisher()).phase2_outbound_execution()
 
     registry = (temp_workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
-    assert "OUTBOUND-PROPOSAL-VERIFIED-1" in registry
-    assert "LEGACY-WITHOUT-RECEIPT" not in registry
+    published, unconfirmed = registry.split("## Unbestätigt", 1)
+    assert "OUTBOUND-PROPOSAL-VERIFIED-1" in published
+    assert "LEGACY-WITHOUT-RECEIPT" not in published
+    assert "LEGACY-WITHOUT-RECEIPT" in unconfirmed
 
 
 def test_recovery_rejects_same_id_bound_to_another_target(temp_workspace: Path) -> None:
@@ -916,8 +924,8 @@ def test_phase3_queue_match_is_organisation_exact(tmp_path: Path) -> None:
     workspace = tmp_path / "workspace"
     workspace.mkdir()
     repos = [
-        {"id": "org-a/tool", "name": "tool", "url": "https://github.com/org-a/tool", "last_promoted_at": None},
-        {"id": "org-b/tool", "name": "tool", "url": "https://github.com/org-b/tool", "last_promoted_at": None},
+        {"id": "org-a/tool", "name": "tool", "url": "https://github.com/org-a/tool", "last_promoted_at": None, "github_meta": PUBLIC_META},
+        {"id": "org-b/tool", "name": "tool", "url": "https://github.com/org-b/tool", "last_promoted_at": None, "github_meta": PUBLIC_META},
     ]
     (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
     (workspace / "POST-EINGANG.md").write_text(_queued_inbox("org-a/tool"), encoding="utf-8")
@@ -933,7 +941,7 @@ def test_phase3_respects_cooldown_when_every_candidate_is_cooling_down(tmp_path:
     workspace = tmp_path / "workspace"
     workspace.mkdir()
     recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
-    repo = {"id": "org/tool", "name": "tool", "url": "https://github.com/org/tool", "last_promoted_at": recent}
+    repo = {"id": "org/tool", "name": "tool", "url": "https://github.com/org/tool", "last_promoted_at": recent, "github_meta": PUBLIC_META}
     (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
 
     result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
@@ -1041,3 +1049,116 @@ def test_usecases_markdown_escapes_foreign_metadata_and_hides_excluded_ids(tmp_p
     assert "javascript:" not in text
     assert "secret-internal" not in text
     assert "https://github.com/org/tool" in text
+
+
+def _history_entry(index: int, *, verified: bool = True, **extra: object) -> dict:
+    record = {
+        "post_id": f"P-{index:04d}",
+        "date": "2026-09-01",
+        "platform": "Reddit",
+        "target_url": f"https://www.reddit.com/r/test/comments/t{index}/thread/",
+        "published_url": f"https://www.reddit.com/r/test/comments/t{index}/thread/c{index}/",
+        "platform_post_id": f"t1_c{index}",
+        "repo": "org/tool",
+        "status": "published",
+        "receipt_verified": verified,
+    }
+    record.update(extra)
+    return record
+
+
+@pytest.mark.parametrize(
+    ("record", "expected"),
+    [
+        (_history_entry(1), "veroeffentlicht"),
+        (_history_entry(2, verified=False), "unbestaetigt"),
+        (_history_entry(3, publication_status="unbestaetigt"), "unbestaetigt"),
+        (_history_entry(4, verified=False, publication_status="veroeffentlicht"), "unbestaetigt"),
+        ({"post_id": "legacy", "status": "published"}, "unbestaetigt"),
+    ],
+)
+def test_every_history_record_has_exactly_one_publication_status(record: dict, expected: str) -> None:
+    assert outreach_engine.publication_status(record) == expected
+    assert expected in outreach_engine.PUBLICATION_STATUSES
+
+
+def test_registry_is_split_by_cut_and_clue_with_bidirectional_pointers(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    size = outreach_engine.REGISTRY_MAX_ROWS
+    history = [_history_entry(i) for i in range(2 * size + 5)] + [_history_entry(9999, verified=False)]
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-Q-1", approved=False, target_url="https://example.com/a")
+        + proposal_block("OUTBOUND-PROPOSAL-Q-2", approved=True, target_url="https://example.com/b"),
+        encoding="utf-8",
+    )
+    engine = CommunityOutreachEngine(workspace)
+
+    first = engine.rebuild_registry()
+    second = engine.rebuild_registry()
+
+    v1 = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").read_text(encoding="utf-8")
+    v2 = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v2.md").read_text(encoding="utf-8")
+    active = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "P-0000" in v1 and f"P-{size:04d}" in v2 and f"P-{2 * size + 4:04d}" in active
+    assert "POSTVERZEICHNIS_ARCHIV_v2.md" in v1 and "POSTVERZEICHNIS_ARCHIV_v1.md" in v2
+    assert "POSTVERZEICHNIS.md" in v2 and "_archive/POSTVERZEICHNIS_ARCHIV_v2.md" in active
+    assert "P-0000" not in active
+    published, unconfirmed = active.split("## Unbestätigt", 1)
+    assert "P-9999" in unconfirmed and "P-9999" not in published
+    assert "freigegeben 1 · entwurf 1" in active
+    assert len(active.splitlines()) < 200
+    assert first["status"] == "completed" and second["written"] == []
+
+
+def test_registry_neutralises_foreign_cells_and_links(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    record = _history_entry(1, post_id="<script>x</script>|", published_url="javascript:alert(1)")
+    (workspace / "posts_history.json").write_text(json.dumps([record]), encoding="utf-8")
+
+    CommunityOutreachEngine(workspace).rebuild_registry()
+
+    text = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "<script>" not in text and "](javascript:" not in text
+
+
+def test_rebuild_registry_dry_run_is_pure(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    (workspace / "posts_history.json").write_text(json.dumps([_history_entry(1)]), encoding="utf-8")
+    before = snapshot_tree(workspace)
+
+    result = CommunityOutreachEngine(workspace, dry_run=True).rebuild_registry()
+
+    assert result["status"] == "dry-run"
+    assert snapshot_tree(workspace) == before
+
+
+def test_cli_sync_error_exits_nonzero_and_changes_nothing(tmp_path: Path) -> None:
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    (usecases.parent / "USECASES.md").mkdir()
+    before = usecases.read_bytes()
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(usecases.parent), "--sync-githubbot"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**__import__("os").environ, "GITHUBBOT_DIR": str(githubbot), "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+
+    assert completed.returncode == 1
+    assert json.loads(completed.stdout)["status"] == "error"
+    assert usecases.read_bytes() == before
+
+
+def test_catalog_without_visibility_evidence_selects_nothing(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    repo = {"id": "private-org/private-only", "name": "private-only", "url": "https://github.com/private-org/private-only"}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") is None
+    assert result["reason"].startswith("visibility-unverified")
