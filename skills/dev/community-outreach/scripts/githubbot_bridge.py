@@ -491,6 +491,12 @@ def load_githubbot_registry(githubbot_dir: Path) -> dict[str, dict[str, Any]]:
         return {}
 
 
+def _registry_entry(registry_repos: Mapping[str, Any], *keys: str) -> Mapping[str, Any]:
+    """Registry lookup independent of GitHub's casing."""
+    wanted = {key.strip().casefold() for key in keys}
+    return next((value for key, value in registry_repos.items() if key.casefold() in wanted), None) or {}
+
+
 def classify_repo(
     repo_id: str,
     org: str,
@@ -518,19 +524,16 @@ def classify_repo(
     if id_lower in archived_set or name_lower in archived_set:
         return RepoClassification(is_active=False, reason="archived", is_archived=True)
 
-    # Check against GitHubBot repo_registry
-    gh_entry = registry_repos.get(repo_id) or registry_repos.get(f"{org}/{name}") or {}
-    gh_info = gh_entry.get("github") or {}
+    # Check against GitHubBot repo_registry -- fail-closed: only a positive public record activates
+    gh_info = _registry_entry(registry_repos, repo_id, f"{org}/{name}").get("github") or {}
+    visibility = gh_info.get("visibility")
 
-    visibility = gh_info.get("visibility", "public")
-    is_archived = gh_info.get("archived", False)
-    is_fork = gh_info.get("fork", False)
-
-    if visibility == "private":
-        return RepoClassification(is_active=False, reason="private", visibility="private")
-    if is_archived:
+    if visibility != "public":
+        reason = "private" if visibility == "private" else "unverified_visibility"
+        return RepoClassification(is_active=False, reason=reason, visibility=str(visibility or "unknown"))
+    if gh_info.get("archived") is not False:
         return RepoClassification(is_active=False, reason="archived", is_archived=True)
-    if is_fork:
+    if gh_info.get("fork") is not False:
         return RepoClassification(is_active=False, reason="foreign_fork", is_fork=True)
 
     # Deactivate generic monolithic skills hub -- specific skills are promoted individually
@@ -607,8 +610,7 @@ def sync_githubbot_traffic(
         repo["exclusion_reason"] = classification.reason if not classification.is_active else None
 
         # GitHub metadata
-        gh_entry = registry_repos.get(repo_id) or registry_repos.get(f"{org}/{name}") or {}
-        gh_info = gh_entry.get("github") or {}
+        gh_info = _registry_entry(registry_repos, repo_id, f"{org}/{name}").get("github") or {}
         repo["github_meta"] = {
             "visibility": gh_info.get("visibility", classification.visibility),
             "archived": gh_info.get("archived", classification.is_archived),
@@ -671,16 +673,7 @@ def sync_githubbot_traffic(
             if not classification.is_active:
                 continue
 
-            # traffic keys are casefolded, registry keys keep GitHub's casing
-            gh_entry = next((v for k, v in registry_repos.items() if k.casefold() == full_repo), None) or {}
-            gh_info = gh_entry.get("github") or {}
-            # fail-closed: import only what the registry positively confirms as public, own and live
-            if not (
-                gh_info.get("visibility") == "public"
-                and gh_info.get("fork") is False
-                and gh_info.get("archived") is False
-            ):
-                continue
+            gh_info = _registry_entry(registry_repos, full_repo).get("github") or {}
             desc = gh_info.get("description") or f"Open-source tool {name} by {org}"
             topics = gh_info.get("topics") or []
 

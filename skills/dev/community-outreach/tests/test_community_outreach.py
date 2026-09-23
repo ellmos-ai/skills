@@ -896,6 +896,32 @@ def test_sync_imports_only_repos_positively_known_as_public(tmp_path: Path) -> N
     assert str(tmp_path) not in json.dumps(data)
 
 
+def test_existing_catalog_entries_are_classified_fail_closed(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    registry = {
+        "Org/Secret": {"github": {"visibility": "private", "fork": False, "archived": False}},
+        "Org/Public": {"github": {"visibility": "public", "fork": False, "archived": False}},
+    }
+    githubbot, usecases = _githubbot_fixture(tmp_path, registry, "")
+    usecases.write_text(
+        json.dumps({"repositories": [
+            {"id": "org/secret", "org": "org", "name": "secret", "active": True},
+            {"id": "org/unregistered", "org": "org", "name": "unregistered", "active": True},
+            {"id": "org/public", "org": "org", "name": "public", "active": True},
+        ]}),
+        encoding="utf-8",
+    )
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot, import_missing_public=False)
+
+    data = {r["id"]: r for r in json.loads(usecases.read_text(encoding="utf-8"))["repositories"]}
+    assert data["org/secret"]["active"] is False and data["org/secret"]["exclusion_reason"] == "private"
+    assert data["org/unregistered"]["active"] is False
+    assert data["org/public"]["active"] is True
+    assert "secret" not in (usecases.parent / "USECASES.md").read_text(encoding="utf-8").casefold()
+
+
 def test_usecases_markdown_escapes_foreign_metadata_and_hides_excluded_ids(tmp_path: Path) -> None:
     import githubbot_bridge
 
