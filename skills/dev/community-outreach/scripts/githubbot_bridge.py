@@ -21,6 +21,7 @@ Responsibilities:
 
 from __future__ import annotations
 
+import html
 import json
 import logging
 import os
@@ -670,8 +671,16 @@ def sync_githubbot_traffic(
             if not classification.is_active:
                 continue
 
-            gh_entry = registry_repos.get(full_repo) or {}
+            # traffic keys are casefolded, registry keys keep GitHub's casing
+            gh_entry = next((v for k, v in registry_repos.items() if k.casefold() == full_repo), None) or {}
             gh_info = gh_entry.get("github") or {}
+            # fail-closed: import only what the registry positively confirms as public, own and live
+            if not (
+                gh_info.get("visibility") == "public"
+                and gh_info.get("fork") is False
+                and gh_info.get("archived") is False
+            ):
+                continue
             desc = gh_info.get("description") or f"Open-source tool {name} by {org}"
             topics = gh_info.get("topics") or []
 
@@ -743,7 +752,7 @@ def sync_githubbot_traffic(
 
     usecases_data["githubbot_sync"] = {
         "synced_at": now_iso,
-        "githubbot_dir": str(gb_dir),
+        "githubbot_source": gb_dir.name,
         "active_repos": active_count,
         "excluded_repos": excluded_count,
         "imported_repos": imported_count,
@@ -773,8 +782,33 @@ def sync_githubbot_traffic(
     }
 
 
+_REPO_ID = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+_ACTIVE_SCHEME = re.compile(r"(?i)\b(javascript|data|vbscript):")
+
+
+def _md(value: Any) -> str:
+    """Neutralise foreign metadata for Markdown: no HTML, no links, no table breaks."""
+    text = html.escape(str(value if value is not None else ""), quote=False)
+    text = _ACTIVE_SCHEME.sub(r"\1&#58;", text)
+    for char in "\\`*_[]|":
+        text = text.replace(char, "\\" + char)
+    return " ".join(text.split())
+
+
+def _safe_url(repo: Mapping[str, Any]) -> str:
+    url = str(repo.get("url") or "")
+    if url.startswith("https://github.com/") and not any(c in url for c in " <>()\"'`"):
+        return url
+    repo_id = str(repo.get("id") or "")
+    return f"https://github.com/{repo_id}" if _REPO_ID.match(repo_id) else ""
+
+
 def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -> None:
-    """Regenerates USECASES.md from usecases_data to maintain strict parity."""
+    """Regenerates USECASES.md from usecases_data to maintain strict parity.
+
+    Foreign GitHub metadata is escaped; excluded repositories appear only as counts per reason,
+    so names of private repositories never reach the Markdown file.
+    """
     repos = usecases_data.get("repositories", [])
     active_repos = [r for r in repos if r.get("active", True)]
     excluded_repos = [r for r in repos if not r.get("active", True)]
@@ -804,17 +838,17 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
     ]
 
     for r in active_repos:
-        name = r.get("name", "")
-        url = r.get("url", f"https://github.com/{r.get('id', '')}")
-        org = r.get("org", "")
-        summary = (r.get("summary") or "").replace("|", "\\|").replace("\n", " ")
+        name = _md(r.get("name", ""))
+        url = _safe_url(r)
+        org = _md(r.get("org", ""))
+        summary = _md(r.get("summary") or "")
         tf = r.get("traffic", {})
-        clones_u = tf.get("clones_unique_14d", 0)
-        views_u = tf.get("views_unique_14d", 0)
+        clones_u = int(tf.get("clones_unique_14d", 0))
+        views_u = int(tf.get("views_unique_14d", 0))
         tf_str = f"{clones_u} Clones / {views_u} Views (14d)"
-        problems = "<br>• " + "<br>• ".join((r.get("problems_solved") or ["Allgemeine Lösung"]).copy())
-        keywords = ", ".join(r.get("search_keywords") or [f"{name} open source"])
-        lines.append(f"| [{name}]({url}) | `{org}` | {summary} | {tf_str} | {problems} | `{keywords}` |")
+        problems = "<br>• " + "<br>• ".join(_md(p) for p in (r.get("problems_solved") or ["Allgemeine Lösung"]))
+        keywords = _md(", ".join(r.get("search_keywords") or [f"{r.get('name', '')} open source"]))
+        lines.append(f"| [{name}]({url}) | {org} | {summary} | {tf_str} | {problems} | {keywords} |")
 
     lines.extend(
         [
@@ -828,25 +862,24 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
 
     for org_name in sorted(orgs.keys()):
         org_items = orgs[org_name]
-        lines.append(f"### Organisation: `{org_name}` ({len(org_items)} Repos)")
+        lines.append(f"### Organisation: {_md(org_name)} ({len(org_items)} Repos)")
         lines.append("")
         for r in sorted(org_items, key=lambda x: str(x.get("name", ""))):
-            name = r.get("name", "")
-            url = r.get("url", f"https://github.com/{r.get('id', '')}")
-            summary = r.get("summary", "")
             tf = r.get("traffic", {})
-            lines.append(f"#### [{name}]({url})")
-            lines.append(f"- **Beschreibung:** {summary}")
+            lines.append(f"#### [{_md(r.get('name', ''))}]({_safe_url(r)})")
+            lines.append(f"- **Beschreibung:** {_md(r.get('summary', ''))}")
             if tf:
                 lines.append(
-                    f"- **14-Tage-Traffic:** {tf.get('clones_14d', 0)} Clones ({tf.get('clones_unique_14d', 0)} unique), {tf.get('views_14d', 0)} Views ({tf.get('views_unique_14d', 0)} unique)"
+                    f"- **14-Tage-Traffic:** {int(tf.get('clones_14d', 0))} Clones "
+                    f"({int(tf.get('clones_unique_14d', 0))} unique), {int(tf.get('views_14d', 0))} Views "
+                    f"({int(tf.get('views_unique_14d', 0))} unique)"
                 )
             lines.append("- **Gelöste Probleme:**")
             for p in r.get("problems_solved", []):
-                lines.append(f"  - {p}")
-            lines.append(f"- **Typische Usecases:** {', '.join(r.get('usecases', []))}")
-            lines.append(f"- **Relevante Plattformen:** {', '.join(r.get('target_platforms', []))}")
-            lines.append(f"- **Suchbegriffe:** `{', '.join(r.get('search_keywords', []))}`")
+                lines.append(f"  - {_md(p)}")
+            lines.append(f"- **Typische Usecases:** {_md(', '.join(r.get('usecases', [])))}")
+            lines.append(f"- **Relevante Plattformen:** {_md(', '.join(r.get('target_platforms', [])))}")
+            lines.append(f"- **Suchbegriffe:** {_md(', '.join(r.get('search_keywords', [])))}")
             lines.append("")
 
     if excluded_repos:
@@ -856,15 +889,18 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
                 "",
                 "## 3. Ausgeschlossene & Deaktivierte Repositories (Audit-Trail)",
                 "",
-                "| Repo | Organisation | Ausschlussgrund | Status |",
-                "| :--- | :--- | :--- | :--- |",
+                "> Nur Anzahl je Grund; Namen stehen ausschließlich in usecases.json.",
+                "",
+                "| Ausschlussgrund | Anzahl |",
+                "| :--- | :--- |",
             ]
         )
+        reasons: dict[str, int] = {}
         for r in excluded_repos:
-            rid = r.get("id", "")
-            org = r.get("org", "")
-            reason = r.get("exclusion_reason", "manual_deactivation")
-            lines.append(f"| `{rid}` | `{org}` | `{reason}` | Inaktiv (Fail-Closed) |")
+            reason = str(r.get("exclusion_reason") or "manual_deactivation")
+            reasons[reason] = reasons.get(reason, 0) + 1
+        for reason, count in sorted(reasons.items()):
+            lines.append(f"| {_md(reason)} | {count} |")
         lines.append("")
 
     temp_path = output_path.with_name(f".{output_path.name}.tmp")
@@ -873,7 +909,6 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
 
 
 if __name__ == "__main__":
-
     workspace = Path(__file__).resolve().parent
     uc_path = workspace / "usecases.json"
     print(f"Syncing {uc_path} with GitHubBot...")

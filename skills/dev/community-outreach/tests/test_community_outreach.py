@@ -863,3 +863,60 @@ def test_scripts_contain_no_user_specific_home_paths() -> None:
     for script in SCRIPTS_DIR.glob("*.py"):
         text = script.read_text(encoding="utf-8").replace("\\", "/").casefold()
         assert not home_path.search(text), script.name
+
+
+def _githubbot_fixture(tmp_path: Path, registry: dict, traffic: str) -> tuple[Path, Path]:
+    githubbot = tmp_path / "gb" / ".GITHUBBOT"
+    (githubbot / "config").mkdir(parents=True)
+    (githubbot / "config" / "repo_registry.json").write_text(json.dumps({"repos": registry}), encoding="utf-8")
+    (githubbot / "traffic_report.md").write_text(traffic, encoding="utf-8")
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
+    return githubbot, workspace / "usecases.json"
+
+
+def test_sync_imports_only_repos_positively_known_as_public(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    traffic = (
+        "**org/known**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n\n"
+        "**org/unknown**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n"
+    )
+    registry = {"org/known": {"github": {"visibility": "public", "fork": False, "archived": False}}}
+    githubbot, usecases = _githubbot_fixture(tmp_path, registry, traffic)
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    data = json.loads(usecases.read_text(encoding="utf-8"))
+    assert [repo["id"] for repo in data["repositories"] if repo["id"].startswith("org/")] == ["org/known"]
+    assert str(tmp_path) not in json.dumps(data)
+
+
+def test_usecases_markdown_escapes_foreign_metadata_and_hides_excluded_ids(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    output = tmp_path / "USECASES.md"
+    githubbot_bridge.export_usecases_markdown(
+        {
+            "repositories": [
+                {
+                    "id": "org/tool",
+                    "org": "org",
+                    "name": "tool<img src=x onerror=alert(1)>",
+                    "url": "javascript:alert(1)",
+                    "summary": "<script>alert(1)</script> | [x](javascript:alert(2))",
+                    "problems_solved": ["<b>p</b>"],
+                    "active": True,
+                },
+                {"id": "org/secret-internal", "org": "org", "active": False, "exclusion_reason": "private"},
+            ]
+        },
+        output,
+    )
+
+    text = output.read_text(encoding="utf-8")
+    assert "<img" not in text and "<script" not in text and "<b>" not in text
+    assert "javascript:" not in text
+    assert "secret-internal" not in text
+    assert "https://github.com/org/tool" in text
