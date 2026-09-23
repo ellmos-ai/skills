@@ -12,6 +12,8 @@ from pathlib import Path
 
 import pytest
 
+PUBLIC_META = {"visibility": "public", "archived": False, "fork": False}
+
 SKILL_DIR = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = SKILL_DIR / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -34,6 +36,7 @@ def sample_repos() -> list[dict]:
             "usecases": ["Testing", "Automation"],
             "solved_problems": ["Manuelle Tests", "Hohe Fehlerquote"],
             "last_promoted": None,
+            "github_meta": PUBLIC_META,
         },
         {
             "name": "data-cruncher",
@@ -43,6 +46,7 @@ def sample_repos() -> list[dict]:
             "usecases": ["Data Processing"],
             "solved_problems": ["Langsame Auswertung"],
             "last_promoted": "2026-08-01T00:00:00",
+            "github_meta": PUBLIC_META,
         },
     ]
 
@@ -170,6 +174,7 @@ def test_runtime_schema_is_read_compatibly(tmp_path: Path) -> None:
                         "url": "https://example.invalid/recent",
                         "problems_solved": ["Aktuelles Problem"],
                         "last_promoted_at": "2026-08-20T00:00:00+00:00",
+                        "github_meta": PUBLIC_META,
                     },
                     {
                         "id": "org/never",
@@ -177,6 +182,7 @@ def test_runtime_schema_is_read_compatibly(tmp_path: Path) -> None:
                         "url": "https://example.invalid/never",
                         "problems_solved": ["Noch ungelöst"],
                         "last_promoted_at": None,
+                        "github_meta": PUBLIC_META,
                     },
                 ],
                 "last_platform": "Reddit",
@@ -406,8 +412,10 @@ def test_registry_projection_excludes_unverified_legacy_claims(temp_workspace: P
     CommunityOutreachEngine(temp_workspace, publisher=DynamicPublisher()).phase2_outbound_execution()
 
     registry = (temp_workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
-    assert "OUTBOUND-PROPOSAL-VERIFIED-1" in registry
-    assert "LEGACY-WITHOUT-RECEIPT" not in registry
+    published, unconfirmed = registry.split("## Unbestätigt", 1)
+    assert "OUTBOUND-PROPOSAL-VERIFIED-1" in published
+    assert "LEGACY-WITHOUT-RECEIPT" not in published
+    assert "LEGACY-WITHOUT-RECEIPT" in unconfirmed
 
 
 def test_recovery_rejects_same_id_bound_to_another_target(temp_workspace: Path) -> None:
@@ -682,7 +690,13 @@ def test_runtime_deployer_is_path_agnostic_and_preserves_data(tmp_path: Path) ->
     assert completed.returncode == 0, completed.stderr
     receipt = json.loads(completed.stdout)
     assert receipt["status"] == "deployed"
-    assert set(receipt["files"]) == {"README.md", "outreach_engine.py", "outreach_runner.py", "tests/test_outreach.py"}
+    assert set(receipt["files"]) == {
+        "README.md",
+        "githubbot_bridge.py",
+        "outreach_engine.py",
+        "outreach_runner.py",
+        "tests/test_outreach.py",
+    }
     assert sentinel.read_text(encoding="utf-8") == '{"sentinel": true}\n'
     assert (target / "outreach_engine.py").read_bytes() == (SCRIPTS_DIR / "outreach_engine.py").read_bytes()
     assert (target / "outreach_runner.py").read_bytes() == (SCRIPTS_DIR / "outreach_runner.py").read_bytes()
@@ -783,3 +797,478 @@ def test_unix_cron_quotes_executable_script_and_workspace_paths(
     assert "'/opt/Python With Space/python'" in output
     assert f"'{workspace / 'outreach_runner.py'}'" in output
     assert f"'{workspace}'" in output
+
+
+def _queued_inbox(repo: str) -> str:
+    return f"""# POST-EINGANG
+
+### [OUTBOUND-PROPOSAL-Q-20260923-1200] Forum
+- **Plattform:** Reddit
+- **Ziel-URL:** https://example.com/thread/1
+- **Lösungs-Repo:** {repo}
+- [ ] Genehmigt
+
+#### Textvorschlag:
+```text
+Sample text
+```
+"""
+
+
+def test_phase3_never_falls_back_to_already_queued_repositories(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repo = {"id": "org/only-tool", "name": "only-tool", "url": "https://github.com/org/only-tool", "last_promoted_at": None}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(_queued_inbox("org/only-tool"), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None
+    assert result.get("repo_name") != "only-tool"
+    assert result["action"] == "configure-repositories"
+
+
+def test_sync_githubbot_respects_dry_run(tmp_path: Path) -> None:
+    githubbot = tmp_path / ".GITHUBBOT"
+    (githubbot / "config").mkdir(parents=True)
+    (githubbot / "config" / "repo_registry.json").write_text(
+        json.dumps({"repos": {"org/tool": {"github": PUBLIC_META}}}), encoding="utf-8")
+    (githubbot / "traffic_report.md").write_text(
+        "**org/tool**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n", encoding="utf-8")
+    workspace = tmp_path / "workspace"
+    deploy_runtime.deploy(workspace)  # deployed layout: engine and bridge live inside the workspace
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
+    before = snapshot_tree(workspace)
+    before_dirs = sorted(p.relative_to(workspace).as_posix() for p in workspace.rglob("*") if p.is_dir())
+    env = {k: v for k, v in __import__("os").environ.items() if k != "PYTHONDONTWRITEBYTECODE"}
+
+    completed = subprocess.run(
+        [sys.executable, str(workspace / "outreach_engine.py"), "--workspace", str(workspace),
+         "--sync-githubbot", "--dry-run"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**env, "GITHUBBOT_DIR": str(githubbot)},
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout)["status"] == "dry-run"
+    assert snapshot_tree(workspace) == before
+    assert sorted(p.relative_to(workspace).as_posix() for p in workspace.rglob("*") if p.is_dir()) == before_dirs
+
+
+def test_skill_profiles_only_reference_published_public_skills() -> None:
+    import githubbot_bridge
+
+    repo_root = SKILL_DIR.parent.parent.parent
+    for profile in githubbot_bridge.SPECIFIC_SKILL_PROFILES:
+        skill_md = repo_root / profile["id"] / "SKILL.md"
+        assert skill_md.exists(), profile["id"]
+        assert "visibility: public" in skill_md.read_text(encoding="utf-8"), profile["id"]
+        assert profile["url"].endswith(profile["id"]), profile["id"]
+        assert "traffic" not in profile, f"{profile['id']}: per-skill traffic is not measured by GitHub"
+
+
+def test_scripts_contain_no_user_specific_home_paths() -> None:
+    import re
+
+    home_path = re.compile(r"[a-z]:/users/[^/\"']+/")
+    for script in SCRIPTS_DIR.glob("*.py"):
+        text = script.read_text(encoding="utf-8").replace("\\", "/").casefold()
+        assert not home_path.search(text), script.name
+
+
+ANCHOR_TRAFFIC = "**lukisch/impressum**\n  Views (14d): 1 gesamt / 1 unique\n  Clones (14d): 1 gesamt / 1 unique\n\n"
+
+
+def _githubbot_fixture(tmp_path: Path, registry: dict, traffic: str) -> tuple[Path, Path]:
+    # a blocked meta repo keeps both sources non-empty without entering the catalog
+    registry = {"lukisch/impressum": {"github": {"visibility": "public", "fork": False, "archived": False}}, **registry}
+    githubbot = tmp_path / "gb" / ".GITHUBBOT"
+    (githubbot / "config").mkdir(parents=True)
+    (githubbot / "config" / "repo_registry.json").write_text(json.dumps({"repos": registry}), encoding="utf-8")
+    (githubbot / "traffic_report.md").write_text(ANCHOR_TRAFFIC + traffic, encoding="utf-8")
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
+    return githubbot, workspace / "usecases.json"
+
+
+def test_sync_imports_only_repos_positively_known_as_public(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    traffic = (
+        "**org/known**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n\n"
+        "**org/unknown**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n"
+    )
+    registry = {"org/known": {"github": {"visibility": "public", "fork": False, "archived": False}}}
+    githubbot, usecases = _githubbot_fixture(tmp_path, registry, traffic)
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    data = json.loads(usecases.read_text(encoding="utf-8"))
+    assert [repo["id"] for repo in data["repositories"] if repo["id"].startswith("org/")] == ["org/known"]
+    assert str(tmp_path) not in json.dumps(data)
+
+
+def test_repeated_sync_is_idempotent_for_skill_profiles(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    first = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+    snapshot = json.loads(usecases.read_text(encoding="utf-8"))["repositories"]
+    second = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+    repos = json.loads(usecases.read_text(encoding="utf-8"))["repositories"]
+
+    profiles = len(githubbot_bridge.SPECIFIC_SKILL_PROFILES)
+    assert (first["active_repos"], first["excluded_repos"]) == (profiles, 0)
+    assert (second["active_repos"], second["excluded_repos"]) == (profiles, 0)
+    assert [r["github_meta"] for r in repos] == [r["github_meta"] for r in snapshot]
+    assert all(r["github_meta"]["visibility"] == "public" for r in repos)
+
+
+def test_phase3_queue_match_is_organisation_exact(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "org-a/tool", "name": "tool", "url": "https://github.com/org-a/tool", "last_promoted_at": None, "github_meta": PUBLIC_META},
+        {"id": "org-b/tool", "name": "tool", "url": "https://github.com/org-b/tool", "last_promoted_at": None, "github_meta": PUBLIC_META},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(_queued_inbox("org-a/tool"), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_url") == "https://github.com/org-b/tool", result
+
+
+def test_phase3_respects_cooldown_when_every_candidate_is_cooling_down(tmp_path: Path) -> None:
+    from datetime import datetime, timedelta, timezone
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+    repo = {"id": "org/tool", "name": "tool", "url": "https://github.com/org/tool", "last_promoted_at": recent, "github_meta": PUBLIC_META}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") is None
+    assert result["reason"] == "all-in-cooldown"
+
+
+def test_sync_drops_stale_per_skill_traffic(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    profile = dict(githubbot_bridge.SPECIFIC_SKILL_PROFILES[0])
+    profile["traffic"] = {"clones_unique_14d": 32, "views_unique_14d": 18, "traffic_score": 82}
+    usecases.write_text(json.dumps({"repositories": [profile]}), encoding="utf-8")
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    repo = json.loads(usecases.read_text(encoding="utf-8"))["repositories"][0]
+    assert set(repo["traffic"]) == {"updated_at"}
+    assert "32 Clones" not in (usecases.parent / "USECASES.md").read_text(encoding="utf-8")
+
+
+def test_synced_catalog_selects_only_confirmed_public_repositories(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    public_meta = {"visibility": "public", "archived": False, "fork": False}
+    repos = [
+        {"id": "org/unknown", "name": "unknown", "url": "https://github.com/org/unknown",
+         "github_meta": {"visibility": "unknown"}, "traffic": {"traffic_score": 999}},
+        {"id": "org/missing", "name": "missing", "url": "https://github.com/org/missing",
+         "traffic": {"traffic_score": 999}},
+        {"id": "org/public", "name": "public", "url": "https://github.com/org/public", "github_meta": public_meta},
+    ]
+    data = {"repositories": repos, "githubbot_sync": {"githubbot_source": ".GITHUBBOT"}}
+    (workspace / "usecases.json").write_text(json.dumps(data), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") == "public", result
+
+
+def test_failed_markdown_export_is_not_reported_as_success(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    (usecases.parent / "USECASES.md").mkdir()  # export target cannot be written
+
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert "nothing changed" in result["message"]
+    assert sorted(p.name for p in usecases.parent.iterdir()) == ["USECASES.md", "usecases.json"]
+
+
+def test_failed_json_swap_restores_markdown_and_leaves_no_temp(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    md = usecases.parent / "USECASES.md"
+    md.write_text("old catalog\n", encoding="utf-8")
+    before_json = usecases.read_bytes()
+    real_replace = Path.replace
+
+    def failing_replace(self: Path, target: Path) -> Path:
+        if Path(target) == usecases:
+            raise PermissionError("locked")
+        return real_replace(self, target)
+
+    monkeypatch.setattr(Path, "replace", failing_replace)
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert usecases.read_bytes() == before_json
+    assert md.read_text(encoding="utf-8") == "old catalog\n"
+    assert sorted(p.name for p in usecases.parent.iterdir()) == ["USECASES.md", "usecases.json"]
+
+
+def test_rebuild_registry_neutralises_stale_archives(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    size = outreach_engine.REGISTRY_MAX_ROWS
+    history = [_history_entry(i) for i in range(size)]
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+    engine = CommunityOutreachEngine(workspace)
+    engine.rebuild_registry()
+    history[0]["publication_status"] = "unbestaetigt"
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+
+    engine.rebuild_registry()
+
+    archive = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").read_text(encoding="utf-8")
+    active = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "P-0000" not in archive
+    published, unconfirmed = active.split("## Unbestätigt", 1)
+    assert "P-0000" in unconfirmed and "P-0000" not in published
+    assert "veraltet" in archive and "POSTVERZEICHNIS.md" in archive
+
+
+def test_existing_catalog_entries_are_classified_fail_closed(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    registry = {
+        "Org/Secret": {"github": {"visibility": "private", "fork": False, "archived": False}},
+        "Org/Public": {"github": {"visibility": "public", "fork": False, "archived": False}},
+    }
+    githubbot, usecases = _githubbot_fixture(tmp_path, registry, "")
+    usecases.write_text(
+        json.dumps({"repositories": [
+            {"id": "org/secret", "org": "org", "name": "secret", "active": True},
+            {"id": "org/unregistered", "org": "org", "name": "unregistered", "active": True},
+            {"id": "org/public", "org": "org", "name": "public", "active": True},
+        ]}),
+        encoding="utf-8",
+    )
+
+    githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot, import_missing_public=False)
+
+    data = {r["id"]: r for r in json.loads(usecases.read_text(encoding="utf-8"))["repositories"]}
+    assert data["org/secret"]["active"] is False and data["org/secret"]["exclusion_reason"] == "private"
+    assert data["org/unregistered"]["active"] is False
+    assert data["org/public"]["active"] is True
+    assert "secret" not in (usecases.parent / "USECASES.md").read_text(encoding="utf-8").casefold()
+
+
+def test_usecases_markdown_escapes_foreign_metadata_and_hides_excluded_ids(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    output = tmp_path / "USECASES.md"
+    githubbot_bridge.export_usecases_markdown(
+        {
+            "repositories": [
+                {
+                    "id": "org/tool",
+                    "org": "org",
+                    "name": "tool<img src=x onerror=alert(1)>",
+                    "url": "javascript:alert(1)",
+                    "summary": "<script>alert(1)</script> | [x](javascript:alert(2))",
+                    "problems_solved": ["<b>p</b>"],
+                    "active": True,
+                },
+                {"id": "org/secret-internal", "org": "org", "active": False, "exclusion_reason": "private"},
+            ]
+        },
+        output,
+    )
+
+    text = output.read_text(encoding="utf-8")
+    assert "<img" not in text and "<script" not in text and "<b>" not in text
+    assert "javascript:" not in text
+    assert "secret-internal" not in text
+    assert "https://github.com/org/tool" in text
+
+
+def _history_entry(index: int, *, verified: bool = True, **extra: object) -> dict:
+    record = {
+        "post_id": f"P-{index:04d}",
+        "date": "2026-09-01",
+        "platform": "Reddit",
+        "target_url": f"https://www.reddit.com/r/test/comments/t{index}/thread/",
+        "published_url": f"https://www.reddit.com/r/test/comments/t{index}/thread/c{index}/",
+        "platform_post_id": f"t1_c{index}",
+        "repo": "org/tool",
+        "status": "published",
+        "receipt_verified": verified,
+    }
+    record.update(extra)
+    return record
+
+
+@pytest.mark.parametrize(
+    ("record", "expected"),
+    [
+        (_history_entry(1), "veroeffentlicht"),
+        (_history_entry(2, verified=False), "unbestaetigt"),
+        (_history_entry(3, publication_status="unbestaetigt"), "unbestaetigt"),
+        (_history_entry(4, verified=False, publication_status="veroeffentlicht"), "unbestaetigt"),
+        ({"post_id": "legacy", "status": "published"}, "unbestaetigt"),
+    ],
+)
+def test_every_history_record_has_exactly_one_publication_status(record: dict, expected: str) -> None:
+    assert outreach_engine.publication_status(record) == expected
+    assert expected in outreach_engine.PUBLICATION_STATUSES
+
+
+def test_registry_is_split_by_cut_and_clue_with_bidirectional_pointers(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    size = outreach_engine.REGISTRY_MAX_ROWS
+    history = [_history_entry(i) for i in range(2 * size + 5)] + [_history_entry(9999, verified=False)]
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-Q-1", approved=False, target_url="https://example.com/a")
+        + proposal_block("OUTBOUND-PROPOSAL-Q-2", approved=True, target_url="https://example.com/b"),
+        encoding="utf-8",
+    )
+    engine = CommunityOutreachEngine(workspace)
+
+    first = engine.rebuild_registry()
+    second = engine.rebuild_registry()
+
+    v1 = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").read_text(encoding="utf-8")
+    v2 = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v2.md").read_text(encoding="utf-8")
+    active = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "P-0000" in v1 and f"P-{size:04d}" in v2 and f"P-{2 * size + 4:04d}" in active
+    assert "POSTVERZEICHNIS_ARCHIV_v2.md" in v1 and "POSTVERZEICHNIS_ARCHIV_v1.md" in v2
+    assert "POSTVERZEICHNIS.md" in v2 and "_archive/POSTVERZEICHNIS_ARCHIV_v2.md" in active
+    assert "P-0000" not in active
+    published, unconfirmed = active.split("## Unbestätigt", 1)
+    assert "P-9999" in unconfirmed and "P-9999" not in published
+    assert "freigegeben 1 · entwurf 1" in active
+    assert len(active.splitlines()) < 200
+    assert first["status"] == "completed" and second["written"] == []
+
+
+def test_registry_neutralises_foreign_cells_and_links(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    record = _history_entry(1, post_id="<script>x</script>|", published_url="javascript:alert(1)")
+    (workspace / "posts_history.json").write_text(json.dumps([record]), encoding="utf-8")
+
+    CommunityOutreachEngine(workspace).rebuild_registry()
+
+    text = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "<script>" not in text and "](javascript:" not in text
+
+
+def test_rebuild_registry_dry_run_is_pure(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    (workspace / "posts_history.json").write_text(json.dumps([_history_entry(1)]), encoding="utf-8")
+    before = snapshot_tree(workspace)
+
+    result = CommunityOutreachEngine(workspace, dry_run=True).rebuild_registry()
+
+    assert result["status"] == "dry-run"
+    assert snapshot_tree(workspace) == before
+
+
+def test_cli_sync_error_exits_nonzero_and_changes_nothing(tmp_path: Path) -> None:
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    (usecases.parent / "USECASES.md").mkdir()
+    before = usecases.read_bytes()
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(usecases.parent), "--sync-githubbot"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**__import__("os").environ, "GITHUBBOT_DIR": str(githubbot), "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+
+    assert completed.returncode == 1
+    assert json.loads(completed.stdout)["status"] == "error"
+    assert usecases.read_bytes() == before
+
+
+def test_catalog_without_visibility_evidence_selects_nothing(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    repo = {"id": "private-org/private-only", "name": "private-only", "url": "https://github.com/private-org/private-only"}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") is None
+    assert result["reason"].startswith("visibility-unverified")
+
+
+@pytest.mark.parametrize("broken", ["missing-traffic", "empty-traffic", "missing-registry", "broken-registry"])
+def test_sync_refuses_missing_or_broken_githubbot_sources(tmp_path: Path, broken: str) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {"org/tool": {"github": PUBLIC_META}}, "")
+    catalog = {"repositories": [{"id": "org/tool", "org": "org", "name": "tool", "active": True,
+                                 "github_meta": PUBLIC_META, "traffic": {"traffic_score": 42}}]}
+    usecases.write_text(json.dumps(catalog), encoding="utf-8")
+    before = usecases.read_bytes()
+    if broken == "missing-traffic":
+        (githubbot / "traffic_report.md").unlink()
+    elif broken == "empty-traffic":
+        (githubbot / "traffic_report.md").write_text("# leer\n", encoding="utf-8")
+    elif broken == "missing-registry":
+        (githubbot / "config" / "repo_registry.json").unlink()
+    else:
+        (githubbot / "config" / "repo_registry.json").write_text("{kaputt", encoding="utf-8")
+
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert usecases.read_bytes() == before
+
+
+def test_registry_links_reject_whitespace_in_targets(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    record = _history_entry(1, published_url="https://example.com/a\n| injected | row |")
+    (workspace / "posts_history.json").write_text(json.dumps([record]), encoding="utf-8")
+
+    CommunityOutreachEngine(workspace).rebuild_registry()
+
+    text = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "\n| injected" not in text
+
+
+@pytest.mark.parametrize("args", [["--rebuild-registry"], ["--process-approvals"], ["--full-run"]])
+def test_unreadable_history_is_an_error_and_nothing_is_overwritten(temp_workspace: Path, args: list[str]) -> None:
+    (temp_workspace / "posts_history.json").write_text("{kaputt", encoding="utf-8")
+    (temp_workspace / "POSTVERZEICHNIS.md").write_text("# bestehendes Verzeichnis\n", encoding="utf-8")
+    (temp_workspace / "_archive").mkdir(exist_ok=True)
+    (temp_workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").write_text("# Archiv\n", encoding="utf-8")
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-H-1", approved=True, target_url="https://example.com/t"),
+        encoding="utf-8",
+    )
+    before = snapshot_tree(temp_workspace)
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace), *args],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**__import__("os").environ, "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+
+    assert completed.returncode == 1, completed.stdout + completed.stderr
+    assert json.loads(completed.stdout)["status"] == "error"
+    assert snapshot_tree(temp_workspace) == before

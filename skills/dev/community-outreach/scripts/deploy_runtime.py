@@ -16,6 +16,7 @@ SKILL_DIR = SCRIPT_DIR.parent
 SOURCE_FILES = {
     "outreach_engine.py": SCRIPT_DIR / "outreach_engine.py",
     "outreach_runner.py": SCRIPT_DIR / "outreach_runner.py",
+    "githubbot_bridge.py": SCRIPT_DIR / "githubbot_bridge.py",
     "README.md": SKILL_DIR / "references" / "runtime-readme.md",
     "tests/test_outreach.py": SKILL_DIR / "tests" / "test_runtime_projection.py",
 }
