@@ -589,12 +589,16 @@ def sync_githubbot_traffic(
     imported_count = 0
 
     known_ids = set()
+    # statically verified public skills (see test) are handled by the profile loop below
+    profile_ids = {skill["id"].casefold() for skill in SPECIFIC_SKILL_PROFILES}
 
     for repo in existing_repos:
         repo_id = str(repo.get("id", ""))
         org = str(repo.get("org", ""))
         name = str(repo.get("name", ""))
         known_ids.add(repo_id.casefold())
+        if repo_id.casefold() in profile_ids:
+            continue
 
         classification = classify_repo(
             repo_id=repo_id,
@@ -728,6 +732,8 @@ def sync_githubbot_traffic(
             existing.update(skill)
             existing["active"] = True
             existing["exclusion_reason"] = None
+            existing["github_meta"] = {"visibility": "public", "archived": False, "fork": False, "stars": 0}
+            active_count += 1
         else:
             entry = dict(skill)
             entry["last_promoted_at"] = None

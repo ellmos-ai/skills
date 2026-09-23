@@ -896,6 +896,52 @@ def test_sync_imports_only_repos_positively_known_as_public(tmp_path: Path) -> N
     assert str(tmp_path) not in json.dumps(data)
 
 
+def test_repeated_sync_is_idempotent_for_skill_profiles(tmp_path: Path) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    first = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+    snapshot = json.loads(usecases.read_text(encoding="utf-8"))["repositories"]
+    second = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+    repos = json.loads(usecases.read_text(encoding="utf-8"))["repositories"]
+
+    profiles = len(githubbot_bridge.SPECIFIC_SKILL_PROFILES)
+    assert (first["active_repos"], first["excluded_repos"]) == (profiles, 0)
+    assert (second["active_repos"], second["excluded_repos"]) == (profiles, 0)
+    assert [r["github_meta"] for r in repos] == [r["github_meta"] for r in snapshot]
+    assert all(r["github_meta"]["visibility"] == "public" for r in repos)
+
+
+def test_phase3_queue_match_is_organisation_exact(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "org-a/tool", "name": "tool", "url": "https://github.com/org-a/tool", "last_promoted_at": None},
+        {"id": "org-b/tool", "name": "tool", "url": "https://github.com/org-b/tool", "last_promoted_at": None},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(_queued_inbox("org-a/tool"), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_url") == "https://github.com/org-b/tool", result
+
+
+def test_phase3_respects_cooldown_when_every_candidate_is_cooling_down(tmp_path: Path) -> None:
+    from datetime import datetime, timedelta, timezone
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+    repo = {"id": "org/tool", "name": "tool", "url": "https://github.com/org/tool", "last_promoted_at": recent}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None and result.get("repo_name") is None
+    assert result["reason"] == "all-in-cooldown"
+
+
 def test_existing_catalog_entries_are_classified_fail_closed(tmp_path: Path) -> None:
     import githubbot_bridge
 

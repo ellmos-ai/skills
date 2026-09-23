@@ -392,9 +392,10 @@ def select_candidate_repository(
             "total_score": total_score,
         })
 
-    # Non-cooldown candidates have absolute priority over cooldown candidates
-    ready = [c for c in scored_candidates if not c["is_cooldown"]]
-    pool = ready if ready else scored_candidates
+    # The cooldown is binding: without a ready candidate nothing is selected
+    pool = [c for c in scored_candidates if not c["is_cooldown"]]
+    if not pool:
+        return None, {"all_in_cooldown": True}
 
     pool.sort(
         key=lambda c: (
@@ -662,24 +663,14 @@ class CommunityOutreachEngine:
         repositories = [repo for repo in data.get("repositories", []) if isinstance(repo, dict)]
 
         # Exclude repos that already have an active/pending proposal in POST-EINGANG.md
-        queued_repo_keys: set[str] = set()
+        queued_refs: list[str] = []
         if self.inbox_md.exists():
-            inbox_content = self.inbox_md.read_text(encoding="utf-8")
-            for proposal in _parse_proposals(inbox_content):
-                repo_ref = _normalize_repo_reference(proposal.get("repo", ""))
-                if repo_ref:
-                    queued_repo_keys.add(repo_ref.casefold())
-                    if "/" in repo_ref:
-                        queued_repo_keys.add(repo_ref.split("/", 1)[1].casefold())
-                repo_url = str(proposal.get("repo_url", "")).strip().rstrip("/")
-                if repo_url:
-                    queued_repo_keys.add(repo_url.split("/")[-1].casefold())
+            for proposal in _parse_proposals(self.inbox_md.read_text(encoding="utf-8")):
+                queued_refs += [ref for ref in (proposal.get("repo"), proposal.get("repo_url")) if ref]
 
         eligible_repos = [
             repo for repo in repositories
-            if repo.get("name", "").casefold() not in queued_repo_keys
-            and str(repo.get("id", "")).casefold() not in queued_repo_keys
-            and str(repo.get("url", "")).rstrip("/").split("/")[-1].casefold() not in queued_repo_keys
+            if not any(_repo_matches_catalog_entry(repo, ref) for ref in queued_refs)
         ]
 
         candidate, score_meta = select_candidate_repository(eligible_repos)
@@ -687,7 +678,7 @@ class CommunityOutreachEngine:
             return {
                 "status": "needs-action",
                 "action": "configure-repositories",
-                "reason": "no-active-repositories",
+                "reason": "all-in-cooldown" if score_meta.get("all_in_cooldown") else "no-active-repositories",
             }
 
         rotation = data.get("platform_rotation") or DEFAULT_PLATFORM_ROTATION
