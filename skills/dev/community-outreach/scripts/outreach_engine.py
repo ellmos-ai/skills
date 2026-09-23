@@ -316,7 +316,108 @@ def _remove_spans(content: str, spans: list[tuple[int, int]]) -> str:
     return updated
 
 
+def select_candidate_repository(
+    repositories: list[Mapping[str, Any]],
+    cooldown_days: float = 7.0,
+    now: datetime | None = None,
+) -> tuple[Mapping[str, Any] | None, dict[str, Any]]:
+    """Selects the next repository to promote using traffic analysis and cooldown rules.
+
+    Excludes private, archived, and foreign fork repositories strictly.
+    """
+    eligible = []
+    for repo in repositories:
+        if not isinstance(repo, Mapping):
+            continue
+        if not repo.get("active", True):
+            continue
+        if repo.get("exclusion_reason"):
+            continue
+        gh_meta = repo.get("github_meta") or {}
+        if gh_meta.get("visibility") == "private":
+            continue
+        if gh_meta.get("archived") is True:
+            continue
+        if gh_meta.get("fork") is True:
+            continue
+        eligible.append(repo)
+
+    if not eligible:
+        return None, {}
+
+    current_time = now or datetime.now(timezone.utc).astimezone()
+
+    def parse_promo_time(r: Mapping[str, Any]) -> datetime | None:
+        raw = r.get("last_promoted_at") or r.get("last_promoted")
+        if not raw:
+            return None
+        try:
+            dt = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=current_time.tzinfo)
+            return dt
+        except ValueError:
+            return None
+
+    scored_candidates = []
+    for repo in eligible:
+        promo_dt = parse_promo_time(repo)
+        if promo_dt:
+            days_since = max(0.0, (current_time - promo_dt).total_seconds() / 86400.0)
+            is_cooldown = days_since < cooldown_days
+            recency_bonus = min(30.0, days_since) * 2.0
+        else:
+            days_since = 999.0
+            is_cooldown = False
+            recency_bonus = 60.0
+
+        traffic = repo.get("traffic") or {}
+        clones_u = int(traffic.get("clones_unique_14d", 0))
+        views_u = int(traffic.get("views_unique_14d", 0))
+        traffic_score = int(traffic.get("traffic_score", clones_u * 2 + views_u))
+
+        priority = str(repo.get("priority", "normal")).casefold()
+        priority_bonus = 50.0 if priority == "high" else (-50.0 if priority == "low" else 0.0)
+
+        total_score = traffic_score + priority_bonus + recency_bonus
+
+        scored_candidates.append({
+            "repo": repo,
+            "is_cooldown": is_cooldown,
+            "days_since_promo": days_since,
+            "traffic_score": traffic_score,
+            "clones_unique_14d": clones_u,
+            "views_unique_14d": views_u,
+            "priority": repo.get("priority", "normal"),
+            "total_score": total_score,
+        })
+
+    # Non-cooldown candidates have absolute priority over cooldown candidates
+    ready = [c for c in scored_candidates if not c["is_cooldown"]]
+    pool = ready if ready else scored_candidates
+
+    pool.sort(
+        key=lambda c: (
+            -c["total_score"],
+            c["days_since_promo"] if c["days_since_promo"] < 999 else -1,
+            str(c["repo"].get("name", "")),
+        )
+    )
+
+    best = pool[0]
+    return best["repo"], {
+        "traffic_score": best["traffic_score"],
+        "clones_unique_14d": best["clones_unique_14d"],
+        "views_unique_14d": best["views_unique_14d"],
+        "priority": best["priority"],
+        "days_since_promo": round(best["days_since_promo"], 1) if best["days_since_promo"] < 999 else None,
+        "total_score": round(best["total_score"], 1),
+        "is_cooldown": best["is_cooldown"],
+    }
+
+
 class CommunityOutreachEngine:
+
     def __init__(self, workspace_dir: str | Path, dry_run: bool = False, publisher: object | None = None):
         self.workspace = Path(workspace_dir).resolve()
         self.dry_run = dry_run
@@ -558,18 +659,37 @@ class CommunityOutreachEngine:
 
     def phase3_research_and_stage(self) -> dict[str, Any] | None:
         data = self._usecases()
-        repositories = [repo for repo in data.get("repositories", []) if isinstance(repo, dict) and repo.get("active", True)]
-        if not repositories:
+        repositories = [repo for repo in data.get("repositories", []) if isinstance(repo, dict)]
+
+        # Exclude repos that already have an active/pending proposal in POST-EINGANG.md
+        queued_repo_keys: set[str] = set()
+        if self.inbox_md.exists():
+            inbox_content = self.inbox_md.read_text(encoding="utf-8")
+            for proposal in _parse_proposals(inbox_content):
+                repo_ref = _normalize_repo_reference(proposal.get("repo", ""))
+                if repo_ref:
+                    queued_repo_keys.add(repo_ref.casefold())
+                    if "/" in repo_ref:
+                        queued_repo_keys.add(repo_ref.split("/", 1)[1].casefold())
+                repo_url = str(proposal.get("repo_url", "")).strip().rstrip("/")
+                if repo_url:
+                    queued_repo_keys.add(repo_url.split("/")[-1].casefold())
+
+        eligible_repos = [
+            repo for repo in repositories
+            if repo.get("name", "").casefold() not in queued_repo_keys
+            and str(repo.get("id", "")).casefold() not in queued_repo_keys
+            and str(repo.get("url", "")).rstrip("/").split("/")[-1].casefold() not in queued_repo_keys
+        ]
+
+        candidate, score_meta = select_candidate_repository(eligible_repos)
+        if not candidate:
             return {
                 "status": "needs-action",
                 "action": "configure-repositories",
                 "reason": "no-active-repositories",
             }
 
-        def last_promoted(repo: Mapping[str, Any]) -> str:
-            return str(repo.get("last_promoted_at") or repo.get("last_promoted") or "1970-01-01T00:00:00")
-
-        candidate = min(repositories, key=lambda repo: (last_promoted(repo), str(repo.get("name", ""))))
         rotation = data.get("platform_rotation") or DEFAULT_PLATFORM_ROTATION
         if not isinstance(rotation, list) or not rotation:
             rotation = DEFAULT_PLATFORM_ROTATION
@@ -590,7 +710,12 @@ class CommunityOutreachEngine:
             "platform": platform,
             "target_problem": problems[0],
             "reason": "Eine echte, aktuelle und noch nicht verwendete Ziel-URL sowie ein geprüfter Entwurf fehlen.",
+            "traffic_score": score_meta.get("traffic_score", 0),
+            "clones_unique_14d": score_meta.get("clones_unique_14d", 0),
+            "views_unique_14d": score_meta.get("views_unique_14d", 0),
+            "priority": score_meta.get("priority", "normal"),
         }
+
 
     def phase4_cut_and_clue_archive(self, max_outbox_entries: int = 20) -> int:
         if not self.outbox_md.exists():
@@ -634,6 +759,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--discover-candidate", action="store_true", help="Return the next research task")
     parser.add_argument("--check-inbound", action="store_true", help="Count published threads requiring monitoring")
     parser.add_argument("--archive", action="store_true", help="Archive old complete outbox entries")
+    parser.add_argument("--sync-githubbot", action="store_true", help="Sync repository metadata and traffic from GitHubBot")
     parser.add_argument("--dry-run", action="store_true", help="Plan only; do not call publishers or modify the workspace")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON only")
     return parser
@@ -644,8 +770,14 @@ def main(argv: list[str] | None = None) -> int:
         sys.stdout.reconfigure(encoding="utf-8")
     args = _build_parser().parse_args(argv)
     engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run)
-    if args.process_approvals:
-        result: Any = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
+    if args.sync_githubbot:
+        try:
+            from githubbot_bridge import sync_githubbot_traffic
+            result: Any = sync_githubbot_traffic(engine.usecases_json, dry_run=args.dry_run)
+        except Exception as exc:
+            result = {"status": "error", "message": str(exc)}
+    elif args.process_approvals:
+        result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
     elif args.discover_candidate:
         result = engine.phase3_research_and_stage()
     elif args.check_inbound:
@@ -659,6 +791,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0
+
 
 
 if __name__ == "__main__":

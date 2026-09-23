@@ -682,7 +682,13 @@ def test_runtime_deployer_is_path_agnostic_and_preserves_data(tmp_path: Path) ->
     assert completed.returncode == 0, completed.stderr
     receipt = json.loads(completed.stdout)
     assert receipt["status"] == "deployed"
-    assert set(receipt["files"]) == {"README.md", "outreach_engine.py", "outreach_runner.py", "tests/test_outreach.py"}
+    assert set(receipt["files"]) == {
+        "README.md",
+        "githubbot_bridge.py",
+        "outreach_engine.py",
+        "outreach_runner.py",
+        "tests/test_outreach.py",
+    }
     assert sentinel.read_text(encoding="utf-8") == '{"sentinel": true}\n'
     assert (target / "outreach_engine.py").read_bytes() == (SCRIPTS_DIR / "outreach_engine.py").read_bytes()
     assert (target / "outreach_runner.py").read_bytes() == (SCRIPTS_DIR / "outreach_runner.py").read_bytes()
@@ -783,3 +789,77 @@ def test_unix_cron_quotes_executable_script_and_workspace_paths(
     assert "'/opt/Python With Space/python'" in output
     assert f"'{workspace / 'outreach_runner.py'}'" in output
     assert f"'{workspace}'" in output
+
+
+def _queued_inbox(repo: str) -> str:
+    return f"""# POST-EINGANG
+
+### [OUTBOUND-PROPOSAL-Q-20260923-1200] Forum
+- **Plattform:** Reddit
+- **Ziel-URL:** https://example.com/thread/1
+- **Lösungs-Repo:** {repo}
+- [ ] Genehmigt
+
+#### Textvorschlag:
+```text
+Sample text
+```
+"""
+
+
+def test_phase3_never_falls_back_to_already_queued_repositories(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repo = {"id": "org/only-tool", "name": "only-tool", "url": "https://github.com/org/only-tool", "last_promoted_at": None}
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": [repo]}), encoding="utf-8")
+    (workspace / "POST-EINGANG.md").write_text(_queued_inbox("org/only-tool"), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace).phase3_research_and_stage()
+
+    assert result is not None
+    assert result.get("repo_name") != "only-tool"
+    assert result["action"] == "configure-repositories"
+
+
+def test_sync_githubbot_respects_dry_run(tmp_path: Path) -> None:
+    githubbot = tmp_path / ".GITHUBBOT"
+    (githubbot / "config").mkdir(parents=True)
+    (githubbot / "config" / "repo_registry.json").write_text(json.dumps({"repos": {}}), encoding="utf-8")
+    (githubbot / "traffic_report.md").write_text(
+        "**org/tool**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n", encoding="utf-8")
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
+    before = {p.name: p.read_bytes() for p in workspace.iterdir()}
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(workspace),
+         "--sync-githubbot", "--dry-run"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**__import__("os").environ, "GITHUBBOT_DIR": str(githubbot), "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout)["status"] == "dry-run"
+    assert {p.name: p.read_bytes() for p in workspace.iterdir()} == before
+
+
+def test_skill_profiles_only_reference_published_public_skills() -> None:
+    import githubbot_bridge
+
+    repo_root = SKILL_DIR.parent.parent.parent
+    for profile in githubbot_bridge.SPECIFIC_SKILL_PROFILES:
+        skill_md = repo_root / profile["id"] / "SKILL.md"
+        assert skill_md.exists(), profile["id"]
+        assert "visibility: public" in skill_md.read_text(encoding="utf-8"), profile["id"]
+        assert profile["url"].endswith(profile["id"]), profile["id"]
+        assert "traffic" not in profile, f"{profile['id']}: per-skill traffic is not measured by GitHub"
+
+
+def test_scripts_contain_no_user_specific_home_paths() -> None:
+    import re
+
+    home_path = re.compile(r"[a-z]:/users/[^/\"']+/")
+    for script in SCRIPTS_DIR.glob("*.py"):
+        text = script.read_text(encoding="utf-8").replace("\\", "/").casefold()
+        assert not home_path.search(text), script.name
