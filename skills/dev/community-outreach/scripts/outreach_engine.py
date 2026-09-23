@@ -689,6 +689,14 @@ class CommunityOutreachEngine:
             + head + "".join(self._registry_row(r) + "\n" for r in reversed(unconfirmed))
         )
         documents[self.registry_md] = text
+        # archives no longer needed (e.g. a record became unbestaetigt) are neutralised, not deleted
+        for stale in sorted(self.archive_dir.glob("POSTVERZEICHNIS_ARCHIV_v*.md")):
+            if stale not in documents:
+                documents[stale] = (
+                    f"# {stale.stem} — veraltet, keine Einträge\n\n"
+                    "Dieses Archiv wird nicht mehr benötigt; alle Beiträge stehen in den aktuellen Dateien.\n"
+                    "Aktive Datei: [POSTVERZEICHNIS.md](../POSTVERZEICHNIS.md)\n"
+                )
         return documents
 
     def _write_registry(self, history: list[dict[str, Any]], inbox: str) -> list[str]:

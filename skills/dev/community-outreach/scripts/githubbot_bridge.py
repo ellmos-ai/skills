@@ -761,17 +761,26 @@ def sync_githubbot_traffic(
     if dry_run:
         return {"status": "dry-run", "total_repos": len(existing_repos), **usecases_data["githubbot_sync"]}
 
-    # USECASES.md first: if it cannot be written, usecases.json stays untouched and both remain in parity
+    # Both files change together or not at all: stage the JSON, write USECASES.md, then swap the JSON.
     md_path = usecases_path.parent / "USECASES.md"
-    try:
-        export_usecases_markdown(usecases_data, md_path)
-    except Exception as exc:
-        logger.warning("Could not export USECASES.md: %s", exc)
-        return {"status": "error", "message": f"USECASES.md not writable, nothing changed: {exc}"}
-
+    previous_md = md_path.read_bytes() if md_path.is_file() else None
     temp_path = usecases_path.with_name(f".{usecases_path.name}.{os.getpid()}.tmp")
-    temp_path.write_text(json.dumps(usecases_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    temp_path.replace(usecases_path)
+    try:
+        temp_path.write_text(json.dumps(usecases_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        export_usecases_markdown(usecases_data, md_path)
+        try:
+            temp_path.replace(usecases_path)
+        except Exception:
+            if previous_md is None:
+                md_path.unlink(missing_ok=True)
+            else:
+                md_path.write_bytes(previous_md)
+            raise
+    except Exception as exc:
+        logger.warning("Could not write the catalog: %s", exc)
+        return {"status": "error", "message": f"catalog not written, nothing changed: {exc}"}
+    finally:
+        temp_path.unlink(missing_ok=True)
 
     return {
         "status": "success",
@@ -903,9 +912,12 @@ def export_usecases_markdown(usecases_data: dict[str, Any], output_path: Path) -
             lines.append(f"| {_md(reason)} | {count} |")
         lines.append("")
 
-    temp_path = output_path.with_name(f".{output_path.name}.tmp")
-    temp_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    temp_path.replace(output_path)
+    temp_path = output_path.with_name(f".{output_path.name}.{os.getpid()}.tmp")
+    try:
+        temp_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        temp_path.replace(output_path)
+    finally:
+        temp_path.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

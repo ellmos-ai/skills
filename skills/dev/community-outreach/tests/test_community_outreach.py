@@ -993,7 +993,52 @@ def test_failed_markdown_export_is_not_reported_as_success(tmp_path: Path) -> No
     result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
 
     assert result["status"] == "error"
-    assert "USECASES.md" in result["message"]
+    assert "nothing changed" in result["message"]
+    assert sorted(p.name for p in usecases.parent.iterdir()) == ["USECASES.md", "usecases.json"]
+
+
+def test_failed_json_swap_restores_markdown_and_leaves_no_temp(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {}, "")
+    md = usecases.parent / "USECASES.md"
+    md.write_text("old catalog\n", encoding="utf-8")
+    before_json = usecases.read_bytes()
+    real_replace = Path.replace
+
+    def failing_replace(self: Path, target: Path) -> Path:
+        if Path(target) == usecases:
+            raise PermissionError("locked")
+        return real_replace(self, target)
+
+    monkeypatch.setattr(Path, "replace", failing_replace)
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert usecases.read_bytes() == before_json
+    assert md.read_text(encoding="utf-8") == "old catalog\n"
+    assert sorted(p.name for p in usecases.parent.iterdir()) == ["USECASES.md", "usecases.json"]
+
+
+def test_rebuild_registry_neutralises_stale_archives(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    size = outreach_engine.REGISTRY_MAX_ROWS
+    history = [_history_entry(i) for i in range(size)]
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+    engine = CommunityOutreachEngine(workspace)
+    engine.rebuild_registry()
+    history[0]["publication_status"] = "unbestaetigt"
+    (workspace / "posts_history.json").write_text(json.dumps(history), encoding="utf-8")
+
+    engine.rebuild_registry()
+
+    archive = (workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").read_text(encoding="utf-8")
+    active = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "P-0000" not in archive
+    published, unconfirmed = active.split("## Unbestätigt", 1)
+    assert "P-0000" in unconfirmed and "P-0000" not in published
+    assert "veraltet" in archive and "POSTVERZEICHNIS.md" in archive
 
 
 def test_existing_catalog_entries_are_classified_fail_closed(tmp_path: Path) -> None:
