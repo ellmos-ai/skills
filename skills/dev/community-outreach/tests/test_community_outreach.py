@@ -828,20 +828,23 @@ def test_sync_githubbot_respects_dry_run(tmp_path: Path) -> None:
     (githubbot / "traffic_report.md").write_text(
         "**org/tool**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n", encoding="utf-8")
     workspace = tmp_path / "workspace"
-    workspace.mkdir()
+    deploy_runtime.deploy(workspace)  # deployed layout: engine and bridge live inside the workspace
     (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
-    before = {p.name: p.read_bytes() for p in workspace.iterdir()}
+    before = snapshot_tree(workspace)
+    before_dirs = sorted(p.relative_to(workspace).as_posix() for p in workspace.rglob("*") if p.is_dir())
+    env = {k: v for k, v in __import__("os").environ.items() if k != "PYTHONDONTWRITEBYTECODE"}
 
     completed = subprocess.run(
-        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(workspace),
+        [sys.executable, str(workspace / "outreach_engine.py"), "--workspace", str(workspace),
          "--sync-githubbot", "--dry-run"],
         capture_output=True, text=True, encoding="utf-8", check=False,
-        env={**__import__("os").environ, "GITHUBBOT_DIR": str(githubbot), "PYTHONDONTWRITEBYTECODE": "1"},
+        env={**env, "GITHUBBOT_DIR": str(githubbot)},
     )
 
     assert completed.returncode == 0, completed.stderr
     assert json.loads(completed.stdout)["status"] == "dry-run"
-    assert {p.name: p.read_bytes() for p in workspace.iterdir()} == before
+    assert snapshot_tree(workspace) == before
+    assert sorted(p.relative_to(workspace).as_posix() for p in workspace.rglob("*") if p.is_dir()) == before_dirs
 
 
 def test_skill_profiles_only_reference_published_public_skills() -> None:

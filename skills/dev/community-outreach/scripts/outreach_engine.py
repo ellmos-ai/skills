@@ -772,7 +772,10 @@ def main(argv: list[str] | None = None) -> int:
     engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run)
     if args.sync_githubbot:
         try:
+            if args.dry_run:
+                sys.dont_write_bytecode = True  # the bridge lives in the workspace; a dry run leaves no __pycache__
             from githubbot_bridge import sync_githubbot_traffic
+
             result: Any = sync_githubbot_traffic(engine.usecases_json, dry_run=args.dry_run)
         except Exception as exc:
             result = {"status": "error", "message": str(exc)}
