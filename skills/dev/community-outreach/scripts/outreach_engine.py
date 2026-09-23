@@ -202,6 +202,10 @@ class PublishReceipt:
         )
 
 
+class HistoryUnreadable(ValueError):
+    """posts_history.json exists but cannot be trusted; nothing may be derived from or written over it."""
+
+
 # Cut-and-Clue variant A: registers are split before they grow past ~200 lines
 REGISTRY_MAX_ROWS = 150
 PUBLICATION_STATUSES = ("entwurf", "freigegeben", "veroeffentlicht", "unbestaetigt")
@@ -462,8 +466,16 @@ class CommunityOutreachEngine:
         self.config_json = self.workspace / "config.json"
 
     def _history(self) -> list[dict[str, Any]]:
-        value = _read_json(self.history_json, [])
-        return value if isinstance(value, list) else []
+        """A missing history is empty; an unreadable one is an error, never an empty list to overwrite."""
+        if not self.history_json.exists():
+            return []
+        try:
+            value = json.loads(self.history_json.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise HistoryUnreadable(f"posts_history.json unreadable: {exc}") from exc
+        if not isinstance(value, list):
+            raise HistoryUnreadable("posts_history.json is not a list")
+        return value
 
     def _usecases(self) -> dict[str, Any]:
         value = _read_json(self.usecases_json, {"repositories": []})
@@ -859,18 +871,22 @@ def main(argv: list[str] | None = None) -> int:
             result: Any = sync_githubbot_traffic(engine.usecases_json, dry_run=args.dry_run)
         except Exception as exc:
             result = {"status": "error", "message": str(exc)}
-    elif args.rebuild_registry:
-        result = engine.rebuild_registry()
-    elif args.process_approvals:
-        result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
-    elif args.discover_candidate:
-        result = engine.phase3_research_and_stage()
-    elif args.check_inbound:
-        result = {"status": "completed", "inbound_checks": engine.phase1_inbound_check()}
-    elif args.archive:
-        result = {"status": "completed", "archived_items": engine.phase4_cut_and_clue_archive()}
     else:
-        result = engine.run_full_cycle()
+        try:
+            if args.rebuild_registry:
+                result = engine.rebuild_registry()
+            elif args.process_approvals:
+                result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
+            elif args.discover_candidate:
+                result = engine.phase3_research_and_stage()
+            elif args.check_inbound:
+                result = {"status": "completed", "inbound_checks": engine.phase1_inbound_check()}
+            elif args.archive:
+                result = {"status": "completed", "archived_items": engine.phase4_cut_and_clue_archive()}
+            else:
+                result = engine.run_full_cycle()
+        except HistoryUnreadable as exc:
+            result = {"status": "error", "message": str(exc)}
     if args.json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:

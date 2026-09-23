@@ -1249,3 +1249,26 @@ def test_registry_links_reject_whitespace_in_targets(tmp_path: Path) -> None:
 
     text = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
     assert "\n| injected" not in text
+
+
+@pytest.mark.parametrize("args", [["--rebuild-registry"], ["--process-approvals"], ["--full-run"]])
+def test_unreadable_history_is_an_error_and_nothing_is_overwritten(temp_workspace: Path, args: list[str]) -> None:
+    (temp_workspace / "posts_history.json").write_text("{kaputt", encoding="utf-8")
+    (temp_workspace / "POSTVERZEICHNIS.md").write_text("# bestehendes Verzeichnis\n", encoding="utf-8")
+    (temp_workspace / "_archive").mkdir(exist_ok=True)
+    (temp_workspace / "_archive" / "POSTVERZEICHNIS_ARCHIV_v1.md").write_text("# Archiv\n", encoding="utf-8")
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-H-1", approved=True, target_url="https://example.com/t"),
+        encoding="utf-8",
+    )
+    before = snapshot_tree(temp_workspace)
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace), *args],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+        env={**__import__("os").environ, "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+
+    assert completed.returncode == 1, completed.stdout + completed.stderr
+    assert json.loads(completed.stdout)["status"] == "error"
+    assert snapshot_tree(temp_workspace) == before
