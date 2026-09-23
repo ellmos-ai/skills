@@ -832,7 +832,8 @@ def test_phase3_never_falls_back_to_already_queued_repositories(tmp_path: Path) 
 def test_sync_githubbot_respects_dry_run(tmp_path: Path) -> None:
     githubbot = tmp_path / ".GITHUBBOT"
     (githubbot / "config").mkdir(parents=True)
-    (githubbot / "config" / "repo_registry.json").write_text(json.dumps({"repos": {}}), encoding="utf-8")
+    (githubbot / "config" / "repo_registry.json").write_text(
+        json.dumps({"repos": {"org/tool": {"github": PUBLIC_META}}}), encoding="utf-8")
     (githubbot / "traffic_report.md").write_text(
         "**org/tool**\n  Views (14d): 5 gesamt / 2 unique\n  Clones (14d): 9 gesamt / 4 unique\n", encoding="utf-8")
     workspace = tmp_path / "workspace"
@@ -876,11 +877,16 @@ def test_scripts_contain_no_user_specific_home_paths() -> None:
         assert not home_path.search(text), script.name
 
 
+ANCHOR_TRAFFIC = "**lukisch/impressum**\n  Views (14d): 1 gesamt / 1 unique\n  Clones (14d): 1 gesamt / 1 unique\n\n"
+
+
 def _githubbot_fixture(tmp_path: Path, registry: dict, traffic: str) -> tuple[Path, Path]:
+    # a blocked meta repo keeps both sources non-empty without entering the catalog
+    registry = {"lukisch/impressum": {"github": {"visibility": "public", "fork": False, "archived": False}}, **registry}
     githubbot = tmp_path / "gb" / ".GITHUBBOT"
     (githubbot / "config").mkdir(parents=True)
     (githubbot / "config" / "repo_registry.json").write_text(json.dumps({"repos": registry}), encoding="utf-8")
-    (githubbot / "traffic_report.md").write_text(traffic, encoding="utf-8")
+    (githubbot / "traffic_report.md").write_text(ANCHOR_TRAFFIC + traffic, encoding="utf-8")
     workspace = tmp_path / "workspace"
     workspace.mkdir()
     (workspace / "usecases.json").write_text(json.dumps({"repositories": []}), encoding="utf-8")
@@ -1207,3 +1213,39 @@ def test_catalog_without_visibility_evidence_selects_nothing(tmp_path: Path) -> 
 
     assert result is not None and result.get("repo_name") is None
     assert result["reason"].startswith("visibility-unverified")
+
+
+@pytest.mark.parametrize("broken", ["missing-traffic", "empty-traffic", "missing-registry", "broken-registry"])
+def test_sync_refuses_missing_or_broken_githubbot_sources(tmp_path: Path, broken: str) -> None:
+    import githubbot_bridge
+
+    githubbot, usecases = _githubbot_fixture(tmp_path, {"org/tool": {"github": PUBLIC_META}}, "")
+    catalog = {"repositories": [{"id": "org/tool", "org": "org", "name": "tool", "active": True,
+                                 "github_meta": PUBLIC_META, "traffic": {"traffic_score": 42}}]}
+    usecases.write_text(json.dumps(catalog), encoding="utf-8")
+    before = usecases.read_bytes()
+    if broken == "missing-traffic":
+        (githubbot / "traffic_report.md").unlink()
+    elif broken == "empty-traffic":
+        (githubbot / "traffic_report.md").write_text("# leer\n", encoding="utf-8")
+    elif broken == "missing-registry":
+        (githubbot / "config" / "repo_registry.json").unlink()
+    else:
+        (githubbot / "config" / "repo_registry.json").write_text("{kaputt", encoding="utf-8")
+
+    result = githubbot_bridge.sync_githubbot_traffic(usecases, githubbot_dir=githubbot)
+
+    assert result["status"] == "error"
+    assert usecases.read_bytes() == before
+
+
+def test_registry_links_reject_whitespace_in_targets(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    record = _history_entry(1, published_url="https://example.com/a\n| injected | row |")
+    (workspace / "posts_history.json").write_text(json.dumps([record]), encoding="utf-8")
+
+    CommunityOutreachEngine(workspace).rebuild_registry()
+
+    text = (workspace / "POSTVERZEICHNIS.md").read_text(encoding="utf-8")
+    assert "\n| injected" not in text

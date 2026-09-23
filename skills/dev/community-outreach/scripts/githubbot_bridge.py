@@ -484,8 +484,8 @@ def load_githubbot_registry(githubbot_dir: Path) -> dict[str, dict[str, Any]]:
     if not registry_path.exists():
         return {}
     try:
-        data = json.loads(registry_path.read_text(encoding="utf-8"))
-        return data.get("repos", {})
+        repos = json.loads(registry_path.read_text(encoding="utf-8")).get("repos")
+        return repos if isinstance(repos, dict) else {}
     except Exception as exc:
         logger.warning("Could not read repo_registry.json: %s", exc)
         return {}
@@ -575,6 +575,12 @@ def sync_githubbot_traffic(
     traffic_text = traffic_file.read_text(encoding="utf-8") if traffic_file.exists() else ""
     traffic_map, private_set, archived_set = parse_traffic_report(traffic_text)
     registry_repos = load_githubbot_registry(gb_dir)
+    # a missing or broken source is not an empty snapshot: never deactivate or zero the catalog from it
+    if not traffic_map or not registry_repos:
+        missing = [
+            n for n, ok in (("traffic_report.md", traffic_map), ("repo_registry.json", registry_repos)) if not ok
+        ]
+        return {"status": "error", "message": f"GitHubBot source missing, empty or unreadable: {', '.join(missing)}"}
 
     if not usecases_path.exists():
         return {"status": "error", "message": f"usecases.json not found at {usecases_path}"}
@@ -806,7 +812,7 @@ def _md(value: Any) -> str:
 
 def _safe_url(repo: Mapping[str, Any]) -> str:
     url = str(repo.get("url") or "")
-    if url.startswith("https://github.com/") and not any(c in url for c in " <>()\"'`"):
+    if url.startswith("https://github.com/") and not any(c.isspace() or c in "<>()\"'`|" for c in url):
         return url
     repo_id = str(repo.get("id") or "")
     return f"https://github.com/{repo_id}" if _REPO_ID.match(repo_id) else ""

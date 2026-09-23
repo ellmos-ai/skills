@@ -224,7 +224,7 @@ def _registry_cell(value: object) -> str:
 
 def _registry_link(url: object, label: str | None = None) -> str:
     url = str(url or "").strip()
-    if not _is_valid_target_url(url) or any(c in url for c in " <>()\"'`"):
+    if not _is_valid_target_url(url) or any(c.isspace() or c in "<>()\"'`|" for c in url):
         return label or _registry_cell(url)
     return f"[{label or _registry_cell(url)}]({url})"
 
