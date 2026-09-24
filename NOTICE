@@ -1,0 +1,6 @@
+ellmos-skills
+Copyright (c) 2026 Lukas Geiger
+
+This product is developed as part of the ellmos-ai AI infrastructure organization under the open-bricks umbrella.
+Portable AI skill library for Claude Code, Codex, AGY/Gemini, BACH, and local-first LLM agents, maintained by Lukas Geiger and ellmos-ai contributors.
+Third-party dependency licenses and transparency inventory are documented in THIRD_PARTY_LICENSES.md.

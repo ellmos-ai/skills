@@ -29,7 +29,8 @@
 [![Public Skills: 142 Catalog](https://img.shields.io/badge/Public%20Skills-142%20Catalog-brightgreen.svg)](registry/components.json)
 [![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
-[![Last Checked: 2026-09-20](https://img.shields.io/badge/Last%20Checked-2026--09--20-informational.svg)](MARKETING-LOG.txt)
+[![Notice: MIT](https://img.shields.io/badge/Notice-Attributed-blue.svg)](NOTICE)
+[![Last Checked: 2026-09-24](https://img.shields.io/badge/Last%20Checked-2026--09--24-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
@@ -65,23 +66,24 @@
 
 This repository is the reusable skill catalog of the ellmos ecosystem. It contains standalone process skills, development workflows, research helpers, therapy-oriented methods, infrastructure playbooks, and utility tools in an Anthropic-compatible `SKILL.md` format. Each skill carries its own metadata directly in YAML frontmatter, so runtimes can inspect provenance, compatibility, and dependencies without a central registry.
 
+<a id="system-architecture"></a>
 ## System Architecture
 
 ```mermaid
 flowchart TD
-    Registry["Public Skill Registry (138 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    Registry["Public Skill Registry (142 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
     
     subgraph Catalog ["11 Public Domains"]
         Assist["assist (20)"]
-        Dev["dev (24)"]
+        Dev["dev (25)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (31)"]
+        Infra["infrastructure (32)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
         ThirdParty["third-party (3)"]
-        Utils["utilities (27)"]
+        Utils["utilities (29)"]
         Web["web (1)"]
     end
     
@@ -102,12 +104,13 @@ flowchart TD
         STests["S-Tests (Static Validation)"]
         LTests["L-Tests (LLM Self-Experience)"]
         UTests["U-Tests (User Experience)"]
-        PytestSuite["Pytest Suite (291 Passed / 186 Subtests)"]
+        PytestSuite["Pytest Suite (305 Passed / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
 ```
 
+<a id="multi-agent-skill-discovery--execution-lifecycle"></a>
 ## Multi-Agent Skill Discovery & Execution Lifecycle
 
 ```mermaid
@@ -129,6 +132,7 @@ sequenceDiagram
     Runtime-->>Operator: Deliver artifact, verification log and status receipt
 ```
 
+<a id="start-here"></a>
 ## Start Here
 
 | Need | File or command |
@@ -138,6 +142,7 @@ sequenceDiagram
 | Understand the `SKILL.md` schema | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Machine-readable catalog index | [`registry/components.json`](registry/components.json) |
 | Security policy & boundary guarantees | [`SECURITY.md`](SECURITY.md) |
+| Formal copyright & attribution notice | [`NOTICE`](NOTICE) |
 | Browse by category | [`skills/`](skills/) (one subfolder per category) |
 | Use a skill | Copy `skills/<category>/<name>/` into your agent's skills directory (e.g. `~/.claude/skills/`) |
 | Review public changes | [`CHANGELOG.md`](CHANGELOG.md) |
@@ -182,24 +187,26 @@ sequenceDiagram
 | **9. Open-Source & 0% Copyleft** | **PASS** (100% MIT License) | N/A | N/A | ❌ Proprietary platform terms | ⚠️ Mix of licenses |
 | **10. Zero External Runtime Deps** | **PASS** (Python stdlib only) | **PASS** | ⚠️ HTTP/JSON libraries needed | ❌ Cloud client SDKs required | ❌ Massive dependency trees |
 
+<a id="catalog-snapshot"></a>
 ## Catalog Snapshot
 
-The current public catalog contains 138 public runtime skills (380 tracked across local suites):
+The current public catalog contains 142 public runtime skills (380 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 25 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 31 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 32 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
 | `third-party` | 3 | Curated externally authored skills redistributed under verified licenses |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 27 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 29 | Batch operations, thinking frameworks, decision briefings, document chunking, encoding repair, video transcripts, private-mail drafting, job-application support, user-model tooling, and German-law and German-tax first-look pointer skills |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Web-reading protocol support |
 
+<a id="featured-skills"></a>
 ## Featured Skills
 
 Some skills are especially useful as entry points because they coordinate other tools, prevent messy agent workflows, or turn local procedures into repeatable playbooks:
@@ -253,6 +260,7 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Asynchronous human-in-the-loop pipelining: while the user tests item N live, the agent pre-launches item N+1 and delegates fix workers for item N-1, eliminating idle wait times. |
 | <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantic filesystem cleanup using Cut-and-Clue: separates active from legacy files with machine-readable pointer clues at the source, preserving taxonomies and audit logs. |
 
+<a id="publicprivate-boundary"></a>
 ## Public/Private Boundary
 
 Public skill folders contain only portable methods and neutral assets. App- or
@@ -289,6 +297,7 @@ review the diff and commit it. Nothing regenerates silently: the CI step
 `Check public catalog outputs` and the pre-commit hooks `public-registry-current` /
 `skills-map-current` fail loudly on a stale catalog.
 
+<a id="education-skills"></a>
 ## Education Skills
 
 Five institution- and user-neutral education skills. The public
@@ -303,6 +312,7 @@ personal support reports.
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.md) | User-neutral teaching and support planning with goals, measures, differentiation, observation criteria, and review points; no report generator. |
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Differentiated worksheets and learning materials based on a learning goal and level. |
 
+<a id="repository-structure"></a>
 ## Repository Structure
 
 ```text
@@ -317,9 +327,11 @@ docs/
   CONVENTIONS.md            # Frontmatter specification
 registry/components.json    # Minimal public catalog index
 registry/public-skill-files.json # Public source authority for gitless copies
+NOTICE                      # Formal copyright notice and attribution
 llms.txt                    # Compact project map for LLM crawlers
 ```
 
+<a id="skill-metadata"></a>
 ## Skill Metadata
 
 Every `SKILL.md` declares whether it works standalone, whether it is compatible with BACH, and where it came from:
@@ -339,6 +351,7 @@ provenance:
 
 Supported skill types are `skill`, `agent`, `expert`, `service`, `protocol`, and `tool`.
 
+<a id="validation"></a>
 ## Validation
 
 Pull requests and pushes that change a public `SKILL.md` run the complete static
@@ -359,6 +372,7 @@ as they become available (not run or commissioned by this project):
 
 - [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), tested 2026-08-08 on Gemini-3.6-flash, 22 cases: pass rate 22.7% -> 95.5% (+73pp), -14% tokens, security 15/15 checks (3/3).
 
+<a id="search-context"></a>
 ## Search Context
 
 Use this repository when searching for:
@@ -377,6 +391,7 @@ Use this repository when searching for:
 
 The name is intentionally generic, so use the canonical repository string `ellmos-ai/skills` when linking or indexing this project. It is a reusable skill catalog, not an MCP server, hosted SaaS marketplace, prompt pack, or private skill installer.
 
+<a id="ecosystem--sibling-projects"></a>
 ## Ecosystem & Sibling Projects
 
 | Project | Organization | Role |
@@ -397,6 +412,7 @@ The name is intentionally generic, so use the canonical repository string `ellmo
 
 - **Zero External Runtime Dependencies**: All core catalog tools, schema generators, and privacy boundary verifiers run strictly on the Python Standard Library (`>=3.10`).
 - **Permissive Third-Party Skills**: Curated external skills in `skills/third-party/` (`grill-me`, `grilling`) are licensed under the MIT License from upstream [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Formal Attribution & Notice**: Legal notices and open-source attribution are recorded in [`NOTICE`](NOTICE).
 - **0% Copyleft**: No GPL, AGPL, or LGPL components are bundled or required at runtime.
 - **10 Governance & Runtime Invariants**: Every release is validated against strict invariants (`INV-LOCAL-01` to `INV-SLA-10`).
 - Full dependency details, license texts, and invariant definitions are documented in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).

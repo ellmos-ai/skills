@@ -8,7 +8,7 @@ version = "1.4.4"
 description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
 readme = "README.md"
 license = { text = "MIT" }
-license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]
 authors = [
     { name = "Lukas Geiger", email = "lukas@ellmos.ai" }
 ]
@@ -23,7 +23,12 @@ keywords = [
     "bach",
     "mcp",
     "llm",
-    "local-first"
+    "local-first",
+    "zero-egress",
+    "portable-skills",
+    "agentic-workflows",
+    "multi-agent",
+    "playbooks"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -49,6 +54,7 @@ Repository = "https://github.com/ellmos-ai/skills.git"
 "Bug Tracker" = "https://github.com/ellmos-ai/skills/issues"
 Changelog = "https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md"
 Security = "https://github.com/ellmos-ai/skills/blob/master/SECURITY.md"
+Notice = "https://github.com/ellmos-ai/skills/blob/master/NOTICE"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
 "Third-Party Licenses" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md"

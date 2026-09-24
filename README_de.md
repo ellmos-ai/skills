@@ -29,7 +29,8 @@
 [![Öffentliche Skills: 142 Katalog](https://img.shields.io/badge/%C3%96ffentliche%20Skills-142%20Katalog-brightgreen.svg)](registry/components.json)
 [![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
-[![Zuletzt geprüft: 2026-09-20](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--20-informational.svg)](MARKETING-LOG.txt)
+[![Notice: MIT](https://img.shields.io/badge/Notice-Attribution-blue.svg)](NOTICE)
+[![Zuletzt geprüft: 2026-09-24](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--24-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.
@@ -65,23 +66,24 @@
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
+<a id="systemarchitektur"></a>
 ## Systemarchitektur
 
 ```mermaid
 flowchart TD
-    Registry["Öffentliche Skill-Registry (138 Katalog / 380 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
+    Registry["Öffentliche Skill-Registry (142 Katalog / 380 getrackt)"] --> Engine["ellmos Skill-Laufzeit & Dispatcher"]
     
     subgraph Catalog ["11 Öffentliche Domänen"]
         Assist["assist (20)"]
-        Dev["dev (24)"]
+        Dev["dev (25)"]
         Edu["education (5)"]
         Game["game-dev (5)"]
-        Infra["infrastructure (31)"]
+        Infra["infrastructure (32)"]
         Prod["production (1)"]
         Res["research (1)"]
         Therapy["therapy (20)"]
         ThirdParty["third-party (3)"]
-        Utils["utilities (27)"]
+        Utils["utilities (29)"]
         Web["web (1)"]
     end
     
@@ -102,12 +104,13 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (272 bestanden / 186 Subtests)"]
+        PytestSuite["Pytest Testsuite (305 bestanden / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
 ```
 
+<a id="multi-agenten-skill-discovery--ausfuehrungslebenszyklus"></a>
 ## Multi-Agenten Skill-Discovery & Ausführungslebenszyklus
 
 ```mermaid
@@ -129,6 +132,7 @@ sequenceDiagram
     Runtime-->>Operator: Artefakt, Verifikationslog und Statusquittung übergeben
 ```
 
+<a id="einstieg"></a>
 ## Einstieg
 
 | Bedarf | Datei oder Befehl |
@@ -138,6 +142,7 @@ sequenceDiagram
 | Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
 | Sicherheitsrichtlinie & Boundary-Garantien | [`SECURITY.md`](SECURITY.md) |
+| Formeller Urheberrechts- & Attributions-Hinweis | [`NOTICE`](NOTICE) |
 | Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
 | Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
 | Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
@@ -182,24 +187,26 @@ sequenceDiagram
 | **9. Open-Source & 0% Copyleft** | **PASS** (100% MIT-Lizenz) | Nicht anwendbar | Nicht anwendbar | ❌ Proprietäre Nutzungsbedingungen | ⚠️ Gemischte Lizenzmodelle |
 | **10. Null externe Laufzeit-Abhängigkeiten** | **PASS** (Nur Python-Standardbib) | **PASS** | ⚠️ Externe HTTP/JSON-Libs nötig | ❌ Cloud-Client-SDKs zwingend | ❌ Sehr große Dependency-Trees |
 
+<a id="katalogstand"></a>
 ## Katalogstand
 
-Der aktuelle öffentliche Katalog enthält 138 öffentliche Laufzeit-Skills (380 getrackt über lokale Testsuiten):
+Der aktuelle öffentliche Katalog enthält 142 öffentliche Laufzeit-Skills (380 getrackt über lokale Testsuiten):
 
 | Kategorie | Anzahl | Fokus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | Nutzerneutrale Methoden für Büroarbeit, Notizen, Haushalt, Kontakte, Gesundheitsinformationen, Medien- und Bestandslisten, Sprachworkflows, Reisen, Wetter, Kalender und Transkription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 24 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 25 | Entwicklungsprotokolle, Debugging, Bug-Sweeps, Pipeline-Renovierung, Migration, Dokumentation, Plugin-Systeme und Repository-Veröffentlichung |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Akademische Studienplanung, quellenbasiertes Lernen, Prüfungsvorbereitung, Arbeitsblätter sowie nutzerneutrale Unterrichts- und Förderplanung |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, Asset-Sicherheit und Game-Design-Workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 31 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 32 | Portables KI-Setup, System-Onboarding, Skill-Landschaftspflege, Automations-Selbstpflege, semantisches Persona-Routing, anbieterneutraler Config-Sync und Agent-Boot-Brücken |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Textproduktions-Router: allgemeine Texte, narrative Storys, PR mit lokalem LaTeX-Pressemitteilungs-Compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Unterstützung für Forschungsagenten-Workflows |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | Deutschsprachige Psychoedukation und Gesprächsführungs-Methoden |
 | `third-party` | 3 | Kuratierte externe Skills, die unter geprüften Lizenzen weitergegeben werden |
-| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 27 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
+| <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 29 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
+<a id="besondere-skills"></a>
 ## Besondere Skills
 
 Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koordinieren, chaotische Agentenabläufe verhindern oder lokale Verfahren als wiederholbare Playbooks nutzbar machen:
@@ -253,6 +260,7 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Asynchrones Reißverschluss-Pipelining im Human-in-the-Loop: während der Nutzer Objekt N testet, startet der Agent bereits Objekt N+1 und delegiert Reparaturen für N-1, statt blockierend zu warten. |
 | <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantische Dateisystembereinigung nach dem Cut-and-Clue-Prinzip: trennt aktive von historischen Inhalten mit maschinenlesbaren Zeigern am Ursprungsort unter Erhalt aller Taxonomien und Prüf-Logs. |
 
+<a id="grenze-zwischen-oeffentlichem-kern-und-privaten-profilen"></a>
 ## Grenze zwischen öffentlichem Kern und privaten Profilen
 
 Öffentliche Skill-Ordner enthalten ausschließlich übertragbare Methoden und
@@ -288,6 +296,7 @@ Sowohl [`registry/components.json`](registry/components.json) als auch
 neu erzeugt: Der CI-Schritt `Check public catalog outputs` und die pre-commit-Hooks
 `public-registry-current` / `skills-map-current` schlagen bei veraltetem Katalog laut fehl.
 
+<a id="education-skills"></a>
 ## Education-Skills
 
 Fünf institutions- und nutzerneutrale Education-Skills. Der öffentliche
@@ -302,6 +311,7 @@ Förderberichte erzeugt er nicht.
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.md) | Nutzerneutrale Unterrichts- und Förderplanung mit Zielen, Maßnahmen, Differenzierung, Beobachtungskriterien und Überprüfungsterminen; kein Berichtsgenerator. |
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Differenzierte Arbeitsblätter und Lernmaterialien passend zu Lernziel und Niveau. |
 
+<a id="repository-struktur"></a>
 ## Repository-Struktur
 
 ```text
@@ -315,9 +325,11 @@ skills/
 docs/
   CONVENTIONS.md            # Frontmatter-Spezifikation
 registry/components.json    # Reduzierter öffentlicher Katalog-Index
+NOTICE                      # Formeller Urheberrechts- und Attributions-Hinweis
 llms.txt                    # Kompakte Projektkarte für LLM-Crawler
 ```
 
+<a id="skill-metadaten"></a>
 ## Skill-Metadaten
 
 Jede `SKILL.md` deklariert, ob sie eigenständig läuft, ob sie BACH-kompatibel ist und woher sie stammt:
@@ -337,6 +349,7 @@ provenance:
 
 Unterstützte Skill-Typen sind `skill`, `agent`, `expert`, `service`, `protocol` und `tool`.
 
+<a id="validierung"></a>
 ## Validierung
 
 Pull Requests und Pushes, die eine öffentliche `SKILL.md` ändern, führen das
@@ -351,6 +364,7 @@ Wenn [pre-commit](https://pre-commit.com/) installiert ist, wird der Repository-
 Hook einmalig mit `pre-commit install` aktiviert. Vor einem Commit prüft er mit
 demselben Gate nur die geänderten `SKILL.md`-Dateien.
 
+<a id="suchkontext"></a>
 ## Suchkontext
 
 Dieses Repository ist relevant für Suchbegriffe wie:
@@ -369,6 +383,7 @@ Dieses Repository ist relevant für Suchbegriffe wie:
 
 Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden. Es handelt sich um einen wiederverwendbaren Skill-Katalog, nicht um einen MCP-Server, einen gehosteten SaaS-Marktplatz, ein Prompt-Pack oder einen privaten Skill-Installer.
 
+<a id="oekosystem--geschwister-projekte"></a>
 ## Ökosystem & Geschwister-Projekte
 
 | Projekt | Organisation | Rolle |
@@ -389,6 +404,7 @@ Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte desha
 
 - **Null externe Laufzeit-Abhängigkeiten**: Alle Kern-Katalogwerkzeuge, Schema-Generatoren und Privacy-Boundary-Prüfer laufen ausschließlich mit der Python-Standardbibliothek (`>=3.10`).
 - **Permissive Drittanbieter-Skills**: Kuratierte externe Skills unter `skills/third-party/` (`grill-me`, `grilling`) stehen unter der MIT-Lizenz aus [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Formelle Urheberrechts- & Attributions-Hinweise**: Rechtliche Hinweise und Attributionsangaben werden in [`NOTICE`](NOTICE) gepflegt.
 - **0% Copyleft**: Keine GPL-, AGPL- oder LGPL-Komponenten werden ausgeliefert oder zur Laufzeit benötigt.
 - **10 Governance- & Laufzeit-Invarianten**: Jeder Release wird gegen 10 strikte Invarianten validiert (`INV-LOCAL-01` bis `INV-SLA-10`).
 - Vollständige Details zu Abhängigkeiten, Lizenztexten und Invarianten sind in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) dokumentiert.

@@ -1,4 +1,4 @@
-## Last-checked: 2026-09-20
+## Last-checked: 2026-09-24
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
@@ -11,7 +11,7 @@ Author: Lukas Geiger
 
 ## What this repository contains
 
-- 138 public runtime skills organized into 11 categories (380 tracked skills total).
+- 142 public runtime skills organized into 11 categories (380 tracked skills total).
 - The public registry is a minimal discovery index. Internal ownership,
   privacy, review, and maintainer fields are kept in a separate No-Push
   repository.
@@ -24,6 +24,7 @@ Author: Lukas Geiger
 - [README.md](https://github.com/ellmos-ai/skills/blob/master/README.md): English landing page, start-here table, catalog snapshot, search context.
 - [README_de.md](https://github.com/ellmos-ai/skills/blob/master/README_de.md): German landing page with the same public user guidance.
 - [SECURITY.md](https://github.com/ellmos-ai/skills/blob/master/SECURITY.md): Bilingual security policy, Zero-Egress guarantees, and privacy boundary enforcement.
+- [NOTICE](https://github.com/ellmos-ai/skills/blob/master/NOTICE): Formal copyright notice and open-source attribution.
 - [THIRD_PARTY_LICENSES.md](https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md): Third-party software inventory, zero-egress invariants, and 0% copyleft audit.
 - [MARKETING-LOG.txt](https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt): Discoverability initiatives, target personas, and comparative matrix logs.
 - [docs/CONVENTIONS.md](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): `SKILL.md` frontmatter specification.
@@ -40,12 +41,12 @@ Author: Lukas Geiger
 - `dev`: 25 development protocols covering debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication.
 - `education`: 5 skills for academic study, worksheets, and user-neutral teaching and support planning.
 - `game-dev`: 5 skills for Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows.
-- `infrastructure`: 29 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
+- `infrastructure`: 32 skills for portable AI setup, system onboarding, automation self-care, semantic persona routing, skill landscape management, and provider-neutral config sync.
 - `production`: 1 text production router (general texts, narrative stories, PR with local LaTeX press-release compiler).
 - `research`: 1 research-agent workflow support.
 - `therapy`: 20 German-language psychoeducation and counseling method playbooks.
-- `third-party`: 2 curated externally authored skills redistributed under verified licenses.
-- `utilities`: 26 batch, document, reasoning, media, and first-look utility workflows.
+- `third-party`: 3 curated externally authored skills redistributed under verified licenses.
+- `utilities`: 29 batch, document, reasoning, media, and first-look utility workflows.
 - `web`: 1 web-reading protocol support.
 
 ## Audience

@@ -1,5 +1,30 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-09-24
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4 (Version-Freeze per T-20260920-167562623)
+
+### Repository Discoverability, Architecture Diagrams & Notice Attribution (Pfad B Routine):
+1. **Visual Architecture & Dual Mermaid Synchronisation**:
+   - Re-synchronized `System Architecture` flowchart in `README.md` and `README_de.md` with exact live metrics: updated public catalog count to 142 (380 tracked), updated category nodes across all 11 domains (`dev (25)`, `infrastructure (32)`, `utilities (29)`), and synchronized Pytest test suite node to 305 passing tests (186 subtests).
+   - Validated `Multi-Agent Skill Discovery & Execution Lifecycle` sequence diagram syntax, autonomous numbering, and zero semicolons.
+2. **Dual HTML Anchors & Navigation Parity**:
+   - Anchored all 16 Quick Navigation sections in both English (`README.md`) and German (`README_de.md`) with explicit `<a id="..."></a>` HTML anchor tags ensuring robust in-page jumping across diverse Markdown renderers.
+3. **Formal Open-Source Notice & Attribution**:
+   - Created root `NOTICE` file providing formal copyright notices and attribution for Lukas Geiger, `ellmos-ai`, and the `open-bricks` umbrella ecosystem under the MIT License.
+   - Updated PEP 621 packaging metadata in `pyproject.toml` to `license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]` and added `Notice` URL under `[project.urls]`.
+4. **High-Intent Keyword Saturation & GitHub Remote Topics**:
+   - Saturated GitHub remote repository topics to the maximum 20/20 limit by adding `zero-egress` alongside `ai-skills`, `anthropic`, `claude-code`, `llm`, `python`, `skill-library`, `agent-framework`, `automation`, `llm-agents`, `local-first`, `open-source`, `portable-skills`, `sqlite`, `agent-skills`, `bach`, `claude-skills`, `codex-skills`, `llm-tools`, and `skill-md`.
+   - Expanded keywords in `pyproject.toml` with `zero-egress`, `portable-skills`, `agentic-workflows`, `multi-agent`, and `playbooks`.
+5. **Drittanbieter-Audit & Re-Verification Recency**:
+   - Re-audited `THIRD_PARTY_LICENSES.md` for Pfad B governance: verified 0% copyleft, 100% Python standard library runtime, and active compliance with all 10 invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+6. **Discovery Context & LLM Readiness (`llms.txt`)**:
+   - Synchronized `llms.txt` with `Last-checked: 2026-09-24`, 142 public runtime skills across 11 categories, and added `NOTICE` to key files.
+   - Synchronized `Last Checked: 2026-09-24` and `Notice: MIT` badges in `README.md` and `README_de.md`.
+7. **Automated Contract Test Suite Expansion (`testing/test_metadata.py`)**:
+   - Expanded metadata contract tests with validations for `NOTICE` file integrity, PEP 621 license files array including `NOTICE`, `Notice` project URL, Mermaid architecture node counts (142 skills, 305 tests), and updated `llms.txt` Last-checked date.
+
 ## Date: 2026-09-20
 Repo: ellmos-ai/skills
 Branch: master

@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased] - 2026-09-24
+
+- **Repository discoverability, architecture diagrams & notice attribution (Pfad B)**:
+  - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).
+  - Synchronized `System Architecture` flowchart in `README.md` and `README_de.md` with exact live metrics: updated public catalog count to 142 (380 tracked), corrected domain counts across all 11 categories (`dev (25)`, `infrastructure (32)`, `utilities (29)`), and updated Pytest suite node to 305 passing tests (186 subtests).
+  - Anchored all 16 Quick Navigation sections in `README.md` and `README_de.md` with explicit `<a id="..."></a>` HTML anchor tags ensuring robust navigation parity across markdown viewers.
+  - Added root `NOTICE` file establishing formal open-source copyright notices and attribution for Lukas Geiger, `ellmos-ai`, and `open-bricks` under the MIT License.
+  - Updated PEP 621 packaging metadata in `pyproject.toml` to `license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]` and registered `Notice` URL in `[project.urls]`.
+  - Saturated GitHub remote repository topics to the maximum 20/20 limit by adding `zero-egress` and expanded packaging keywords with `zero-egress`, `portable-skills`, `agentic-workflows`, `multi-agent`, and `playbooks`.
+  - Re-audited `THIRD_PARTY_LICENSES.md` for Pfad B governance (100% Python standard library runtime, 0% copyleft, 10 invariants `INV-LOCAL-01` to `INV-SLA-10`).
+  - Synchronized `llms.txt` with `Last-checked: 2026-09-24`, 142 public skills across 11 categories, and updated documentation badges.
+  - Expanded automated contract test suite in `testing/test_metadata.py` verifying `NOTICE` integrity, PEP 621 license files array including `NOTICE`, `Notice` project URL, Mermaid architecture node counts, and updated `llms.txt` check date.
+
 ## 2026-09-20
 
 - **Technical hygiene, version 1.4.4 & CI matrix hardening (Pfad A)**:

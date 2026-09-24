@@ -16,6 +16,7 @@ CI_WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "tests.yml"
 SKILL_VAL_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "skill-validation.yml"
 ASSIST_SCHEMA_PATH = REPOSITORY_ROOT / "schemas" / "assist-v1.schema.json"
 THIRD_PARTY_LICENSES_PATH = REPOSITORY_ROOT / "THIRD_PARTY_LICENSES.md"
+NOTICE_PATH = REPOSITORY_ROOT / "NOTICE"
 MARKETING_LOG_PATH = REPOSITORY_ROOT / "MARKETING-LOG.txt"
 
 
@@ -96,7 +97,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
 
         self.assertIn('name = "ellmos-skills"', content)
         self.assertIn('version = "1.4.4"', content)
-        self.assertIn('license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]', content)
+        self.assertIn('license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]', content)
         self.assertIn("[tool.pytest.ini_options]", content)
         self.assertIn('minversion = "7.0"', content)
         self.assertIn("norecursedirs", content)
@@ -105,9 +106,11 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("pythonpath", content)
         self.assertIn("Programming Language :: Python :: 3.13", content)
         self.assertIn("Operating System :: OS Independent", content)
+        self.assertIn('"zero-egress"', content)
         self.assertIn("[project.urls]", content)
         self.assertIn("Homepage", content)
         self.assertIn("Security", content)
+        self.assertIn("Notice", content)
         self.assertIn("Changelog", content)
         self.assertIn("Parent Organization", content)
         self.assertIn("Umbrella Ecosystem", content)
@@ -119,13 +122,14 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-09-20", content)
+        self.assertIn("## Last-checked: 2026-09-24", content)
         self.assertIn("305 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)
         self.assertIn("registry/components.json", content)
         self.assertIn("SECURITY.md", content)
+        self.assertIn("NOTICE", content)
         self.assertIn("THIRD_PARTY_LICENSES.md", content)
         self.assertIn("MARKETING-LOG.txt", content)
         self.assertIn("dev-bricks", content)
@@ -140,6 +144,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("open-bricks", content)
             self.assertIn("llms.txt", content)
             self.assertIn("SECURITY.md", content)
+            self.assertIn("NOTICE", content)
             self.assertIn("THIRD_PARTY_LICENSES.md", content)
             self.assertIn("MARKETING-LOG.txt", content)
             self.assertIn("registry/components.json", content)
@@ -147,10 +152,13 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("1.4.4", content)
             self.assertIn("305", content)
             self.assertIn("142", content)
+            self.assertIn("2026-09-24", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
+        self.assertIn("## [Unreleased] - 2026-09-24", content)
+        self.assertIn("T-20260920-167562623", content)
         self.assertIn("2026-09-20", content)
         self.assertIn("1.4.4", content)
         self.assertIn("2026-09-13", content)
@@ -274,9 +282,32 @@ class MetadataAndManifestParityTests(unittest.TestCase):
     def test_pep621_license_files_and_distribution_assets(self) -> None:
         license_path = REPOSITORY_ROOT / "LICENSE"
         self.assertTrue(license_path.is_file(), "LICENSE missing")
+        self.assertTrue(NOTICE_PATH.is_file(), "NOTICE missing")
         self.assertTrue(THIRD_PARTY_LICENSES_PATH.is_file(), "THIRD_PARTY_LICENSES.md missing")
         pyproject_content = PYPROJECT_PATH.read_text(encoding="utf-8")
-        self.assertIn('license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]', pyproject_content)
+        self.assertIn('license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]', pyproject_content)
+
+    def test_notice_file_integrity(self) -> None:
+        self.assertTrue(NOTICE_PATH.is_file(), "NOTICE file missing")
+        content = NOTICE_PATH.read_text(encoding="utf-8")
+        self.assertIn("ellmos-skills", content)
+        self.assertIn("Copyright (c) 2026 Lukas Geiger", content)
+        self.assertIn("ellmos-ai", content)
+        self.assertIn("open-bricks", content)
+        self.assertIn("THIRD_PARTY_LICENSES.md", content)
+
+    def test_mermaid_architecture_metrics_parity(self) -> None:
+        en_content = README_EN_PATH.read_text(encoding="utf-8")
+        de_content = README_DE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn('Registry["Public Skill Registry (142 Catalog / 380 Tracked)"]', en_content)
+        self.assertIn('Registry["Öffentliche Skill-Registry (142 Katalog / 380 getrackt)"]', de_content)
+
+        for content in [en_content, de_content]:
+            self.assertIn('Dev["dev (25)"]', content)
+            self.assertIn('Infra["infrastructure (32)"]', content)
+            self.assertIn('Utils["utilities (29)"]', content)
+            self.assertIn("305", content)
 
     def test_quick_navigation_and_mutual_anchor_parity(self) -> None:
         en_content = README_EN_PATH.read_text(encoding="utf-8")
