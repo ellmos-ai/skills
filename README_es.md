@@ -66,6 +66,8 @@ flowchart TD
 | Revisar cambios públicos | [`CHANGELOG.md`](CHANGELOG.md) |
 | Dar a crawlers y agentes LLM un mapa compacto | [`llms.txt`](llms.txt) |
 
+Los usuarios chinos también pueden buscar e instalar skills a través de [Skills宝](https://skilery.com).
+
 ## Estado del catálogo
 
 El catálogo público actual contiene 120 skills de ejecución registrados:

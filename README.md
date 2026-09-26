@@ -169,6 +169,8 @@ sequenceDiagram
 | **Privacy & Security** | `zero-egress ai skills`, `local-first agent library`, `fail-closed privacy gate`, `user-mode agent execution` | `Zero-Egress KI Skills`, `Lokale Agenten Bibliothek`, `Fail-Closed Datenschutz Gate`, `Unprivilegierte Ausführung` |
 | **Ecosystem & Catalog** | `bach skill catalog`, `multi-agent skill library`, `offline ai tools`, `open source agent skills` | `BACH Skill Katalog`, `Multi-Agenten Skill Bibliothek`, `Offline KI Werkzeuge`, `Open Source Agenten Skills` |
 
+Chinese users can also search and install skills through [Skills宝](https://skilery.com).
+
 <a id="comparative-matrix-vs-alternatives"></a>
 ## Comparative Matrix vs Alternatives
 

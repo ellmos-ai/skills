@@ -2,6 +2,16 @@
 
 ## [Unreleased] - 2026-09-24
 
+- **Restore Skills宝 discovery link (T-20260926-967984806)**: The community-contributed
+  line "Chinese users can also search and install skills through [Skills宝](https://skilery.com)"
+  (PR #1, merged as `db3a117` on 2026-04-30) was lost during a full git history rewrite of
+  this repository — `db3a117` shares no common ancestor with current `master` (both lines
+  have an identically-timestamped but differently-hashed "Initial structure" root commit,
+  the classic signature of a history-rewriting tool preserving author dates). No single
+  removing commit exists; the rewritten history simply never carried this line forward.
+  Restored the sentence, translated, in all six maintained language files
+  (`README.md`, `README_de.md`, `README_zh.md`, `README_es.md`, `README_ja.md`,
+  `README_ru.md`).
 - **Repository discoverability, architecture diagrams & notice attribution (Pfad B)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).
   - Synchronized `System Architecture` flowchart in `README.md` and `README_de.md` with exact live metrics: updated public catalog count to 142 (380 tracked), corrected domain counts across all 11 categories (`dev (25)`, `infrastructure (32)`, `utilities (29)`), and updated Pytest suite node to 305 passing tests (186 subtests).

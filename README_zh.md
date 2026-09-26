@@ -65,6 +65,8 @@ flowchart TD
 | 查看公开变更 | [`CHANGELOG.md`](CHANGELOG.md) |
 | 获取供 LLM 使用的简洁地图 | [`llms.txt`](llms.txt) |
 
+中文用户也可以通过 [Skills宝](https://skilery.com) 搜索和安装 skills。
+
 ## 目录概览
 
 当前公开目录包含 120 个可运行 skills：
