@@ -1599,3 +1599,77 @@ def test_stage3_filters_archived_and_forked_repos_even_when_pool_is_otherwise_ex
     assert result["action"] == "propose-new-item", result
     names = [c["repo_name"] for c in result["candidates_for_new_angle"]]
     assert names == ["cooling-tool"], names
+
+
+# --- Posting je App: read-only Vorschau vor dem eigentlichen Post, T-20260926-665406367 ---
+# preview_post() ruehrt keinen Zustand an; sie liefert nur, was ein Browser-Automations-Schritt
+# (open-compute/Playwright/Claude-in-Chrome/API) komponieren wuerde, damit eine App das per
+# Screenshot zeigen und VOR dem Absenden abbrechen kann.
+
+def test_preview_post_renders_an_approved_proposal_read_only(temp_workspace: Path) -> None:
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    before = snapshot_tree(temp_workspace)
+
+    result = CommunityOutreachEngine(temp_workspace).preview_post("OUTBOUND-PROPOSAL-P-1")
+
+    assert result["status"] == "preview", result
+    assert result["target_url"] == target
+    assert result["platform"] == "Reddit"
+    assert "Eine konkrete, hilfreiche Antwort." in result["text"]
+    assert snapshot_tree(temp_workspace) == before  # touched nothing
+
+
+def test_preview_post_refuses_an_unapproved_proposal(temp_workspace: Path) -> None:
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-2", approved=False, target_url="https://example.com/t"),
+        encoding="utf-8",
+    )
+
+    result = CommunityOutreachEngine(temp_workspace).preview_post("OUTBOUND-PROPOSAL-P-2")
+
+    assert result["status"] == "error"
+    assert "not approved" in result["message"]
+
+
+def test_preview_post_unknown_id_is_an_error(temp_workspace: Path) -> None:
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-3", approved=True, target_url="https://example.com/t"),
+        encoding="utf-8",
+    )
+
+    result = CommunityOutreachEngine(temp_workspace).preview_post("OUTBOUND-PROPOSAL-DOES-NOT-EXIST")
+
+    assert result["status"] == "error"
+    assert "not found" in result["message"]
+
+
+def test_cli_preview_post_exits_nonzero_on_error(temp_workspace: Path) -> None:
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--preview-post", "OUTBOUND-PROPOSAL-DOES-NOT-EXIST", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+    assert completed.returncode == 1, completed.stdout + completed.stderr
+    assert json.loads(completed.stdout)["status"] == "error"
+
+
+def test_cli_preview_post_of_approved_proposal(temp_workspace: Path) -> None:
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--preview-post", "OUTBOUND-PROPOSAL-P-1", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["status"] == "preview"
+    assert result["target_url"] == target

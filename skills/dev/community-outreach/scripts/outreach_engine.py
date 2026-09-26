@@ -983,6 +983,45 @@ class CommunityOutreachEngine:
         }
 
 
+    def preview_post(self, proposal_id: str) -> dict[str, Any]:
+        """Read-only preview of ONE approved proposal: exactly what would be posted, nothing more.
+
+        T-20260926-665406367 (posting je App, pruefbar ohne echten Post): renders what a
+        browser-automation step (open-compute/Playwright/Claude-in-Chrome/API) needs to
+        compose -- platform, target thread, comment text -- so the calling app can show it
+        (screenshot/preview) and stop BEFORE clicking submit. Touches no state whatsoever;
+        refuses proposals that are not yet "- [x] Genehmigt", so a preview alone can never be
+        mistaken for permission to send.
+        """
+        if not self.inbox_md.exists():
+            return {"status": "error", "message": "POST-EINGANG.md not found"}
+        proposals = _parse_proposals(self.inbox_md.read_text(encoding="utf-8"))
+        proposal = next((p for p in proposals if p["id"] == proposal_id), None)
+        if proposal is None:
+            return {"status": "error", "message": f"proposal {proposal_id!r} not found in POST-EINGANG.md"}
+        if not proposal["approved"]:
+            return {
+                "status": "error",
+                "message": f"proposal {proposal_id!r} is not approved (- [x] Genehmigt missing) "
+                "-- nothing to preview for posting yet",
+            }
+        if not _is_valid_target_url(proposal["target_url"]):
+            return {"status": "error", "message": "invalid target_url"}
+        return {
+            "status": "preview",
+            "id": proposal["id"],
+            "platform": proposal["platform"],
+            "target_url": proposal["target_url"],
+            "repo": proposal["repo"],
+            "text": proposal["text"],
+            "instruction": (
+                "Compose exactly this text at target_url via the app's own browser tool, capture "
+                "a screenshot as evidence, then STOP -- do not click submit/comment. Only proceed "
+                "to an actual send after this preview has been shown to the user and the user's Go "
+                "for a desktop takeover (if open-compute) has been obtained via team-lead."
+            ),
+        }
+
     def phase4_cut_and_clue_archive(self, max_outbox_entries: int = 20) -> int:
         if not self.outbox_md.exists():
             return 0
@@ -1034,6 +1073,12 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--discover-candidate", action="store_true", help="Return the next research task")
     parser.add_argument(
+        "--preview-post", default=None, metavar="PROPOSAL_ID",
+        help="Read-only preview of an approved proposal (what would be posted, nothing more) -- "
+        "for a browser-automation step to compose and screenshot BEFORE ever submitting "
+        "(T-20260926-665406367, posting je App)",
+    )
+    parser.add_argument(
         "--org-allow", default="",
         help="Comma-separated org allowlist for phase 3 stage 1 (product cut per app, T-20260926-665406367)",
     )
@@ -1073,6 +1118,8 @@ def main(argv: list[str] | None = None) -> int:
                 result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
             elif args.discover_candidate:
                 result = engine.phase3_research_and_stage()
+            elif args.preview_post:
+                result = engine.preview_post(args.preview_post)
             elif args.check_inbound:
                 result = {"status": "completed", "inbound_checks": engine.phase1_inbound_check()}
             elif args.archive:
