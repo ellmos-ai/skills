@@ -1407,3 +1407,59 @@ def test_phase3_org_allow_defaults_from_constructor(tmp_path: Path) -> None:
 
     assert result["repo_name"] == "tool", result
     assert result["stage"] == 1
+
+
+# --- Sicherheitsfund merge-reviewer (T-20260926-665406367): Stufe 3 umging das
+# Sichtbarkeits-Gate von select_candidate_repository und konnte private, archivierte,
+# geforkte oder nie synchronisierte Repos vorschlagen -- am gefaehrlichsten genau dann,
+# wenn der Grund "visibility-unverified" war (ein fehlender Sync durfte das nie umgehen).
+
+def test_stage3_never_proposes_private_or_unsynced_repos(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "own-org/private-tool", "name": "private-tool", "org": "own-org",
+         "url": "https://github.com/own-org/private-tool", "total_promotions": 9,
+         "github_meta": {"visibility": "private", "archived": False, "fork": False}},
+        {"id": "own-org/never-synced", "name": "never-synced", "org": "own-org",
+         "url": "https://github.com/own-org/never-synced", "total_promotions": 9},
+        # kein github_meta -> nie synchronisiert
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace, org_allow=["own-org"]).phase3_research_and_stage()
+
+    # Ohne Fix: action == "propose-new-item" mit genau diesen beiden Repos in
+    # candidates_for_new_angle -- das ist der Sicherheitsfund. Mit Fix: Stufe 3 feuert bei
+    # unverified_visibility gar nicht, es bleibt bei der alten "run --sync-githubbot"-Meldung.
+    assert result["action"] == "configure-repositories", result
+    assert result["reason"] == "visibility-unverified: run --sync-githubbot"
+    assert "candidates_for_new_angle" not in result
+
+
+def test_stage3_filters_archived_and_forked_repos_even_when_pool_is_otherwise_exhausted(
+    tmp_path: Path,
+) -> None:
+    """Second _public_repo_gate condition (archived/fork), separate from visibility."""
+    from datetime import datetime, timedelta, timezone
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+    repos = [
+        # Public, but archived -- must never be a stage-3 candidate either.
+        {"id": "own-org/archived-tool", "name": "archived-tool", "org": "own-org",
+         "url": "https://github.com/own-org/archived-tool", "total_promotions": 9,
+         "github_meta": {"visibility": "public", "archived": True, "fork": False}},
+        # Public, not archived, in cooldown -- the one legitimate stage-3 candidate.
+        {"id": "own-org/cooling-tool", "name": "cooling-tool", "org": "own-org",
+         "url": "https://github.com/own-org/cooling-tool", "total_promotions": 3,
+         "last_promoted_at": recent, "github_meta": PUBLIC_META},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace, org_allow=["own-org"]).phase3_research_and_stage()
+
+    assert result["action"] == "propose-new-item", result
+    names = [c["repo_name"] for c in result["candidates_for_new_angle"]]
+    assert names == ["cooling-tool"], names
