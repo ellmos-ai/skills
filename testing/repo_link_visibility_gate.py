@@ -13,42 +13,67 @@ all 6 README language versions. That repo is PRIVATE -- the row had already
 been in README.md/README_de.md before the PR and nobody had ever checked
 whether the linked repos were actually public. Neither `check_language_parity.py`
 (link PARITY between language versions) nor `privacy_gate.py` (local paths,
-hostnames, token patterns) catch this: it needs an actual GitHub API lookup.
+hostnames, token patterns) catch this: it needs an actual GitHub visibility
+lookup.
 
-## Design decisions
+## Design decisions (round 2, merge-reviewer measurement on PR #39)
 
+- **Unauthenticated, on purpose.** The question this gate answers is "can a
+  stranger reading this public doc actually reach the linked repo?" -- an
+  authenticated lookup answers a different question (can *this token* see
+  it), which is useless in CI: `privacy_gate.py` runs in `skill-validation.yml`
+  and `tests.yml` with no `GH_TOKEN` set at all, so an authenticated call
+  always failed and downgraded every result to "unknown" -- the gate never
+  actually blocked anything in CI. `GET https://api.github.com/repos/<org>/<repo>`
+  with NO token returns 200 for a public repo and 404 for a private one
+  (measured: `ellmos-ai/ellmos-core` -> 404, `ellmos-ai/usmc` -> 200) -- and
+  404 also means "does not exist", but a public-facing link pointing at a
+  nonexistent repo is equally wrong, so both cases are a confirmed finding,
+  not "unknown". Only rate limiting (403/429 -- unauthenticated GitHub API
+  is capped at 60 requests/hour per IP) or an actual network error stay
+  "unknown" (warning only). No optional token-based rate-limit boost is
+  offered here: a token that happens to have read access to a linked private
+  repo would make that lookup return 200 again, silently defeating the exact
+  check this gate exists to run -- the 60/h ceiling is instead absorbed by
+  the cache below.
+- **The REST API, not a HEAD on the web page.** Considered and rejected: the
+  web page (`https://github.com/<org>/<repo>`) gives the same 404-for-private-
+  or-missing ambiguity with none of the API's benefits (a plain, unambiguous
+  status code, no HTML/redirect chain to reason about, no differing behavior
+  for org-SSO-enforced repos) -- there is no additional signal to gain from
+  it, only more fragility.
 - **Fail-open on uncertainty, fail-closed only on a confirmed hit.** A
-  network outage, `gh` rate limit, or a 404 (which GitHub also returns for a
-  private repo the current token cannot see -- indistinguishable from "does
-  not exist") must never block a commit or PR. Only a lookup that positively
-  returns `private: true` is a blocking finding. Team-lead instruction
-  (T-20260926-820252321): "ohne Netz nur warnen statt blocken."
-- **Cache to respect the rate limit.** `gh api` uses the authenticated
-  token's higher rate limit (5000/hour), but repeated CI/local runs over the
-  same well-known repos (ecosystem siblings referenced from many READMEs)
-  would still add up. Results are cached to a small JSON file outside any
-  repo (`~/.cache/ellmos-repo-link-visibility/cache.json`) with a TTL, so a
-  repeat run across repos or CI jobs on the same day does not re-query.
+  network outage or a 403/429 rate limit must never block a commit or PR.
+  Only a confirmed 200 (public) or 404 (private-or-nonexistent) is decisive;
+  anything else is "unknown" and only ever a warning.
+- **Cache only decisive results.** An "unknown" result (typically a rate
+  limit) must NOT be cached -- caching it would make the check silently
+  toothless for the rest of the cache TTL. Only "public"/"private" are
+  written to the cache file (`~/.cache/ellmos-repo-link-visibility/cache.json`,
+  24h TTL), which still absorbs the 60/h ceiling for the well-known,
+  repeatedly-referenced ecosystem repos across runs.
 - **Injectable prober for tests.** `check_visibility()` takes an optional
   `prober` callable so tests never hit the real network or burn real rate
-  limit; the default prober shells out to `gh api repos/<org>/<repo>`.
+  limit; the default prober performs the unauthenticated HTTP GET described
+  above.
 
 Usage:
     python repo_link_visibility_gate.py --repo <path>            # scan all tracked text files
     python repo_link_visibility_gate.py --repo <path> --paths README.md README_de.md
     python repo_link_visibility_gate.py --repo <path> --no-cache  # force a fresh lookup
 
-Exit 0: no confirmed-private repo linked (network/rate-limit/404 findings are
-        printed as non-blocking warnings).
-Exit 1: at least one linked repo is confirmed private.
+Exit 0: no confirmed-private (or confirmed-nonexistent) repo linked
+        (rate-limit/network findings are printed as non-blocking warnings).
+Exit 1: at least one linked repo is confirmed private or does not exist.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import re
-import subprocess
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Callable
 
@@ -57,9 +82,16 @@ try:  # reuse the generic tracked-file walker instead of duplicating it
 except ImportError:  # direct script/module import with testing/ on sys.path
     from repo_privacy_gate import tracked_text_files  # type: ignore[no-redef]
 
-_GITHUB_LINK = re.compile(
-    r"https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(?=[/)\s\"'>]|$)"
-)
+# Greedy captures bounded only by the character class itself -- no lookahead
+# assertion. A prior version required the character right after the repo name
+# to be one of a fixed set ("/", ")", whitespace, quote, ">"), which silently
+# dropped the ENTIRE match for any other terminator: "#readme", "?tab=x", and
+# a trailing "," in prose all failed to match at all (round-2 merge-reviewer
+# finding). Stopping wherever the character class stops needs no such list --
+# "#", "?", "," (and anything else outside the class) end the match on their
+# own. What the class DOES still swallow (".git", a trailing sentence period)
+# is stripped afterwards in _clean_repo_name(), not fought in the regex.
+_GITHUB_LINK = re.compile(r"https://github\.com/([A-Za-z0-9_-]+)/([A-Za-z0-9_.-]+)")
 
 _CACHE_DIR = Path.home() / ".cache" / "ellmos-repo-link-visibility"
 _CACHE_FILE = _CACHE_DIR / "cache.json"
@@ -73,14 +105,34 @@ _RESERVED_TOP_LEVEL_SEGMENTS = {
     "collections", "trending", "explore", "apps", "orgs", "codespaces",
 }
 
+_TRAILING_PUNCTUATION = ".,;:!?)]}>'\""
+
+
+def _clean_repo_name(repo: str) -> str:
+    """Strips a trailing `.git` and/or trailing sentence punctuation that the
+    greedy capture above still includes -- repeatedly, since either can
+    follow the other (e.g. "ellmos-core.git.", "ellmos-core.git),")."""
+    changed = True
+    while changed:
+        changed = False
+        if repo.lower().endswith(".git"):
+            repo = repo[:-4]
+            changed = True
+        if repo and repo[-1] in _TRAILING_PUNCTUATION:
+            repo = repo[:-1]
+            changed = True
+    return repo
+
 
 def extract_github_repo_links(text: str) -> set[tuple[str, str]]:
     """Returns the set of (org, repo) pairs linked via https://github.com/<org>/<repo>."""
     found = set()
-    for org, repo in _GITHUB_LINK.findall(text):
+    for org, raw_repo in _GITHUB_LINK.findall(text):
         if org.lower() in _RESERVED_TOP_LEVEL_SEGMENTS:
             continue
-        found.add((org, repo))
+        repo = _clean_repo_name(raw_repo)
+        if repo:
+            found.add((org, repo))
     return found
 
 
@@ -102,24 +154,22 @@ def _save_cache(cache: dict) -> None:
 
 
 def _default_prober(org: str, repo: str) -> str:
-    """Returns "public", "private", or "unknown" (network/rate-limit/404/other)."""
+    """Unauthenticated GitHub REST API lookup. Returns "public" (200),
+    "private" (404 -- private-and-inaccessible or nonexistent, both wrong as
+    a public link), or "unknown" (403/429 rate limit or a network error)."""
+    url = f"https://api.github.com/repos/{org}/{repo}"
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "ellmos-repo-link-visibility-gate"}
+    )
     try:
-        completed = subprocess.run(
-            ["gh", "api", f"repos/{org}/{repo}", "--jq", ".private"],
-            capture_output=True, text=True, timeout=15, encoding="utf-8",
-        )
-    except (OSError, subprocess.TimeoutExpired):
+        with urllib.request.urlopen(req, timeout=10) as response:
+            return "public" if response.status == 200 else "unknown"
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return "private"
+        return "unknown"  # 403/429 rate limit, or any other unexpected status
+    except (urllib.error.URLError, OSError, TimeoutError):
         return "unknown"
-    if completed.returncode != 0:
-        # Covers 404 (deleted/renamed/private-and-inaccessible -- ambiguous,
-        # never a confirmed positive), rate limiting, and auth issues alike.
-        return "unknown"
-    stdout = completed.stdout.strip().lower()
-    if stdout == "true":
-        return "private"
-    if stdout == "false":
-        return "public"
-    return "unknown"
 
 
 def check_visibility(
@@ -128,14 +178,16 @@ def check_visibility(
     prober: Callable[[str, str], str] = _default_prober,
     use_cache: bool = True,
 ) -> str:
-    """Returns "public", "private", or "unknown", using and updating `cache` in place."""
+    """Returns "public", "private", or "unknown". Only a decisive result
+    ("public"/"private") is written to `cache` -- "unknown" is never cached,
+    so a transient rate limit does not silence the check for the TTL."""
     key = f"{org}/{repo}".lower()
     if use_cache and cache is not None:
         entry = cache.get(key)
         if entry and time.time() - entry.get("checked_at", 0) < _CACHE_TTL_SECONDS:
             return entry["visibility"]
     result = prober(org, repo)
-    if cache is not None:
+    if cache is not None and result != "unknown":
         cache[key] = {"visibility": result, "checked_at": time.time()}
     return result
 
@@ -167,14 +219,15 @@ def run_gate(
         names = ", ".join(sorted(p.name for p in sources))
         if visibility == "private":
             findings.append(
-                f"{org}/{repo} is a PRIVATE repo, linked from: {names} -- "
-                f"remove the link or make the repo public before publishing."
+                f"{org}/{repo} is not a public repo (private, or does not "
+                f"exist), linked from: {names} -- remove the link or make "
+                f"the repo public before publishing."
             )
         elif visibility == "unknown":
             warnings.append(
-                f"{org}/{repo}: visibility could not be determined (network, "
-                f"rate limit, or 404) -- linked from: {names}. Not blocking; "
-                f"verify manually if this is a new/renamed repo."
+                f"{org}/{repo}: visibility could not be determined (rate "
+                f"limit or network error) -- linked from: {names}. Not "
+                f"blocking; re-run later or verify manually."
             )
     if use_cache:
         _save_cache(cache)
@@ -210,7 +263,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"- {finding}")
         return 1
 
-    print("Repo-link visibility gate passed: no confirmed-private repo links found.")
+    print("Repo-link visibility gate passed: no confirmed-private or confirmed-missing repo links found.")
     return 0
 
 

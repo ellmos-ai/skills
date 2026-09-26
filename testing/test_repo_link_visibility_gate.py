@@ -5,6 +5,8 @@ from __future__ import annotations
 import importlib.util
 import tempfile
 import unittest
+import unittest.mock
+import urllib.error
 from pathlib import Path
 
 MODULE_PATH = Path(__file__).with_name("repo_link_visibility_gate.py")
@@ -36,6 +38,39 @@ class ExtractLinksTests(unittest.TestCase):
 
     def test_no_links_found(self) -> None:
         self.assertEqual(set(), gate.extract_github_repo_links("Just plain text."))
+
+    # Round-2 merge-reviewer evasion examples on PR #39 (T-20260926-820252321):
+    # the previous lookahead-based regex silently produced an EMPTY match for
+    # the first three, and mis-extracted the repo name (still 404 -> merely
+    # "unknown", not a finding) for the last two.
+
+    def test_extracts_link_with_fragment(self) -> None:
+        text = "https://github.com/ellmos-ai/ellmos-core#readme"
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_query_string(self) -> None:
+        text = "https://github.com/ellmos-ai/ellmos-core?tab=readme-ov-file"
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_trailing_comma(self) -> None:
+        text = "See https://github.com/ellmos-ai/ellmos-core, for details."
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_trailing_period(self) -> None:
+        text = "See https://github.com/ellmos-ai/ellmos-core."
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_git_suffix(self) -> None:
+        text = "git clone https://github.com/ellmos-ai/ellmos-core.git"
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_git_suffix_and_trailing_punctuation(self) -> None:
+        text = "clone it (https://github.com/ellmos-ai/ellmos-core.git)."
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
+
+    def test_extracts_link_with_trailing_bracket(self) -> None:
+        text = "[link](https://github.com/ellmos-ai/ellmos-core)"
+        self.assertEqual({("ellmos-ai", "ellmos-core")}, gate.extract_github_repo_links(text))
 
 
 class CheckVisibilityTests(unittest.TestCase):
@@ -77,6 +112,72 @@ class CheckVisibilityTests(unittest.TestCase):
         self.assertEqual("private", result)
         self.assertEqual([("ellmos-ai", "skills")], calls)
 
+    def test_unknown_result_is_never_cached(self) -> None:
+        """Round-2 merge-reviewer finding: caching "unknown" would make a
+        transient rate limit silence the check for the whole TTL."""
+        cache: dict = {}
+
+        def fake_prober(org: str, repo: str) -> str:
+            return "unknown"
+
+        result = gate.check_visibility("some-org", "some-repo", cache=cache, prober=fake_prober)
+        self.assertEqual("unknown", result)
+        self.assertEqual({}, cache, "an unknown result must not be written to the cache")
+
+    def test_unknown_result_is_re_queried_every_time(self) -> None:
+        cache: dict = {}
+        calls: list[tuple[str, str]] = []
+
+        def fake_prober(org: str, repo: str) -> str:
+            calls.append((org, repo))
+            return "unknown"
+
+        gate.check_visibility("some-org", "some-repo", cache=cache, prober=fake_prober)
+        gate.check_visibility("some-org", "some-repo", cache=cache, prober=fake_prober)
+        self.assertEqual(2, len(calls), "an uncached 'unknown' must be re-probed, not skipped")
+
+
+class DefaultProberTests(unittest.TestCase):
+    """Unit-tests the real HTTP classification logic (no network): mocks
+    urllib.request.urlopen so the unauthenticated-GET decision table itself
+    (200/404/403/network-error) is verified, not just the injectable seam."""
+
+    def test_200_is_public(self) -> None:
+        class FakeResponse:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *exc): return False
+
+        with unittest.mock.patch("urllib.request.urlopen", return_value=FakeResponse()):
+            self.assertEqual("public", gate._default_prober("ellmos-ai", "usmc"))
+
+    def test_404_is_private(self) -> None:
+        error = urllib.error.HTTPError(
+            "https://api.github.com/repos/ellmos-ai/ellmos-core", 404, "Not Found", {}, None
+        )
+        with unittest.mock.patch("urllib.request.urlopen", side_effect=error):
+            self.assertEqual("private", gate._default_prober("ellmos-ai", "ellmos-core"))
+
+    def test_403_rate_limit_is_unknown(self) -> None:
+        error = urllib.error.HTTPError(
+            "https://api.github.com/repos/some-org/some-repo", 403, "rate limited", {}, None
+        )
+        with unittest.mock.patch("urllib.request.urlopen", side_effect=error):
+            self.assertEqual("unknown", gate._default_prober("some-org", "some-repo"))
+
+    def test_429_rate_limit_is_unknown(self) -> None:
+        error = urllib.error.HTTPError(
+            "https://api.github.com/repos/some-org/some-repo", 429, "too many requests", {}, None
+        )
+        with unittest.mock.patch("urllib.request.urlopen", side_effect=error):
+            self.assertEqual("unknown", gate._default_prober("some-org", "some-repo"))
+
+    def test_network_error_is_unknown(self) -> None:
+        with unittest.mock.patch(
+            "urllib.request.urlopen", side_effect=urllib.error.URLError("no network")
+        ):
+            self.assertEqual("unknown", gate._default_prober("some-org", "some-repo"))
+
 
 class RunGateTests(unittest.TestCase):
     def _prober_factory(self, visibility_map: dict[tuple[str, str], str]):
@@ -97,7 +198,7 @@ class RunGateTests(unittest.TestCase):
             )
             self.assertEqual(1, len(findings))
             self.assertIn("ellmos-ai/ellmos-core", findings[0])
-            self.assertIn("PRIVATE", findings[0])
+            self.assertIn("not a public repo", findings[0])
             self.assertEqual([], warnings)
 
     def test_public_repo_is_clean(self) -> None:
