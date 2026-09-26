@@ -93,6 +93,63 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
                 any("host-scoped local development path" in e for e in errors)
             )
 
+    def test_forbidden_internal_filenames_are_found(self) -> None:
+        """T-20260926-510472849: agent-internal files must never be tracked,
+        even under a name that isn't the exact match GITHUB-POLICY.md lists."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "BEFUNDE.md").write_text("intern\n", encoding="utf-8")
+            (root / "MARKETING-LOG.txt").write_text("intern\n", encoding="utf-8")
+            (root / "STORE_CONTRACT.md").write_text("intern\n", encoding="utf-8")
+            (root / "_WARTUNG" / "msix_staging").mkdir(parents=True)
+            (root / "_WARTUNG" / "msix_staging" / "AppxManifest.xml").write_text("x\n", encoding="utf-8")
+            (root / "_WARTUNG" / "generate_store_screenshots.py").write_text("x\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            joined = "\n".join(errors)
+            self.assertIn("BEFUNDE.md: agent findings log", joined)
+            self.assertIn("STORE_CONTRACT.md: release/store internal state doc", joined)
+            self.assertIn("_WARTUNG/msix_staging/AppxManifest.xml: build/packaging staging directory", joined)
+            self.assertNotIn("_WARTUNG/generate_store_screenshots.py", joined)  # maintenance script, not staged output
+            # MARKETING-LOG.txt is WARN_ONLY (team-lead correction 2026-09-26): several
+            # repos wire it in deliberately (pyproject.toml project.url, a dedicated
+            # test) -- it must never fail CI, only surface as a hint.
+            self.assertNotIn("MARKETING-LOG.txt", joined)
+            warnings = repo_privacy_gate.warning_findings(root)
+            self.assertTrue(
+                any("MARKETING-LOG.txt: agent marketing/status log" in w for w in warnings)
+            )
+
+    def test_runtime_daily_care_doc_is_warn_only(self) -> None:
+        """RUNTIME_DAILY_CARE.md (SoftwareCenter): a real, README-linked
+        migration/ops contract doc, not agent scratch state (team-lead
+        correction 2026-09-26) -- must warn, never block."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "RUNTIME_DAILY_CARE.md").write_text("contract\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            self.assertNotIn("agent daily-care runbook", "\n".join(errors))
+            warnings = repo_privacy_gate.warning_findings(root)
+            self.assertTrue(
+                any("RUNTIME_DAILY_CARE.md: agent daily-care runbook" in w for w in warnings)
+            )
+
+    def test_legitimate_contract_docs_are_not_flagged(self) -> None:
+        """CI_CONTRACT.md / PRODUCT_BOUNDARIES.md document behavior for
+        readers, not agent state -- they must stay unflagged (see the
+        FORBIDDEN_INTERNAL_FILENAME_PATTERNS docstring note)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "CI_CONTRACT.md").write_text("The CI workflow ...\n", encoding="utf-8")
+            (root / "PRODUCT_BOUNDARIES.md").write_text("Product A vs B ...\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            self.assertEqual([], errors)
+
     def test_non_git_directory_is_skipped_not_failed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             completed = subprocess.run(

@@ -85,6 +85,44 @@ CONTENT_PATTERNS = {
 WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
 POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")
 
+# Internal agent/process filenames that must never be tracked in ANY repo,
+# public or private (T-20260926-510472849): they are agent working notes, not
+# project content, and existing checks only catch a handful of exact names
+# (GITHUB-POLICY.md SS3) -- a slightly renamed sibling (STORE_CONTRACT.md next
+# to the already-forbidden STORE_READINESS.md) walks straight past an exact
+# match. These are patterns, not a fixed list, so a new "<X>-LOG.txt" or
+# "<X>_STATUS_*.md" convention is caught without editing this file again.
+# Genuinely useful project docs (CI_CONTRACT.md, PRODUCT_BOUNDARIES.md) are
+# deliberately NOT here -- they document behavior for readers, not agent state.
+FORBIDDEN_INTERNAL_FILENAME_PATTERNS = {
+    "agent findings log": re.compile(r"(?i)(?:^|/)BEFUNDE\.md$"),
+    "agent marketing/status log": re.compile(r"(?i)(?:^|/)[A-Z0-9_-]*(?:MARKETING|STATUS)-LOG\.txt$"),
+    "agent daily-care runbook": re.compile(r"(?i)(?:^|/)[A-Z0-9_]*_DAILY_CARE\.md$"),
+    "agent task-status snapshot": re.compile(r"(?i)(?:^|/)TASKPLAN_STATUS_.*\.md$"),
+    "release/store internal state doc": re.compile(r"(?i)(?:^|/)STORE_(?:CONTRACT|READINESS)\.md$"),
+    # Narrowed 2026-09-26 (T-20260926-510472849 rollout): a bare _WARTUNG/
+    # match also caught legitimate maintenance SCRIPTS some repos keep there
+    # (generate_store_screenshots.py, check_store_readiness.py) -- only the
+    # "staging" subpath (copied build output: msix_staging/, AppxManifest,
+    # icons) is the actual build artifact this pattern targets.
+    "build/packaging staging directory": re.compile(r"(?i)(?:^|/)_STAGING/|(?:^|/)_WARTUNG/[^/]*staging[^/]*/"),
+}
+
+# Warn, never block (T-20260926-510472849, team-lead correction 2026-09-26,
+# same set as internal_file_push_guard.py's WARN_ONLY_LABELS): a live scan of
+# several repos (usmc, zombie-killer-tray, SoftwareCenter) found
+# MARKETING-LOG.txt wired in as a DELIBERATE public artifact -- pyproject.toml
+# project.urls."Marketing Log" and a dedicated test asserting its presence --
+# not an accidental agent leak. Whether the convention continues is a user
+# decision, not something this gate enforces by failing CI.
+WARN_ONLY_LABELS = {
+    "agent marketing/status log",
+    # RUNTIME_DAILY_CARE.md (SoftwareCenter): a real, triple-linked migration/
+    # ops contract doc, not agent scratch state (team-lead correction 2026-09-26,
+    # matching internal_file_push_guard.py sha 5410800).
+    "agent daily-care runbook",
+}
+
 
 def git_lines(repo_root: Path, *arguments: str) -> list[str]:
     completed = subprocess.run(
@@ -146,12 +184,30 @@ def content_findings(path: Path) -> list[str]:
     return findings
 
 
+def warning_findings(repo_root: Path) -> list[str]:
+    """Non-blocking hints: tracked files matching a WARN_ONLY_LABELS pattern.
+
+    Kept separate from run_generic_gate()'s errors so a repo that
+    deliberately publishes e.g. MARKETING-LOG.txt doesn't fail CI over it --
+    but the hint still surfaces for anyone reviewing the rollout.
+    """
+    warnings = []
+    for relative in git_lines(repo_root, "ls-files"):
+        for label, pattern in FORBIDDEN_INTERNAL_FILENAME_PATTERNS.items():
+            if label in WARN_ONLY_LABELS and pattern.search(relative):
+                warnings.append(f"{relative}: {label} (informational only, not blocking)")
+    return warnings
+
+
 def run_generic_gate(
     repo_root: Path,
     content_scan_exclusions: frozenset[str] = frozenset(),
     allowed_tracked_ignored: frozenset[str] = frozenset(),
 ) -> list[str]:
-    """Runs the repo-agnostic checks and returns a flat list of findings."""
+    """Runs the repo-agnostic checks and returns a flat list of BLOCKING findings.
+
+    See warning_findings() for the non-blocking WARN_ONLY_LABELS hints.
+    """
     errors = []
     tracked = git_lines(repo_root, "ls-files")
     for path in tracked_ignored_files(repo_root, allowed_tracked_ignored):
@@ -160,6 +216,11 @@ def run_generic_gate(
         pattern = CONTENT_PATTERNS["host-scoped device name"]
         if pattern.search(relative):
             errors.append(f"{relative}: host-scoped device name in tracked path")
+        for label, forbidden in FORBIDDEN_INTERNAL_FILENAME_PATTERNS.items():
+            if label in WARN_ONLY_LABELS:
+                continue
+            if forbidden.search(relative):
+                errors.append(f"{relative}: {label} -- must not be tracked (git rm --cached, add to .gitignore)")
     for path in tracked_text_files(repo_root, content_scan_exclusions):
         relative = path.relative_to(repo_root).as_posix()
         for finding in content_findings(path):
@@ -179,6 +240,10 @@ def main(argv: list[str] | None = None) -> int:
     if not (repo_root / ".git").exists():
         print(f"Privacy gate skipped: {repo_root} is not a git repository root.")
         return 0
+
+    warnings = warning_findings(repo_root)
+    for warning in warnings:
+        print(f"WARNING (non-blocking): {warning}")
 
     errors = run_generic_gate(repo_root)
     if errors:
