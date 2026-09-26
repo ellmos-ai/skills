@@ -90,34 +90,33 @@ flowchart TD
 
 | Skill | Назначение |
 |---|---|
-| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.md) | Аудит, группировка, исследование и безопасная установка skills. |
-| [`model-strategy`](skills/dev/model-strategy/SKILL.md) | Маршрутизация между Claude, Codex, Gemini и Ollama. |
-| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | Шесть этапов безопасного обновления проекта. |
-| [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Gate публикации: правила, locks, privacy, i18n и releases. |
-| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Обнаружение MCP и синхронизация без неявного hub. |
-| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | Субтитры, транскрипции и метаданные видео. |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Roblox Studio, Rojo и обязательная проверка ресурсов. |
-| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Нумерованный обзор вариантов и рекомендаций. |
-| [`bugsweep`](skills/dev/bugsweep/SKILL.md) | Системный поиск ошибок с измеримой целью. |
-| [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Python plugin system без внешних зависимостей. |
-| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Синхронизация языковых версий и обнаружение расхождений. |
-| [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Эмпирическая проверка влияния правил документации. |
-| [`law-checker`](skills/utilities/law-checker/SKILL.md) | Первичная ориентация по немецкому праву на основе источников; не заменяет юриста. |
-| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Локальная таблица расходов работника; не налоговая консультация. |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Рабочие листы по цели, уровню и возрасту. |
-| [`research-agent`](skills/research/research-agent/SKILL.md) | Повторяемый поиск литературы в PubMed и arXiv. |
-| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Планирование выбранной топологии конфигурации. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Нейтральный загрузочный мост для правил. |
+| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.ru.md) | Аудит, группировка, исследование и безопасная установка skills. |
+| [`model-strategy`](skills/dev/model-strategy/SKILL.ru.md) | Маршрутизация между Claude, Codex, Gemini и Ollama. |
+| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.ru.md) | Шесть этапов безопасного обновления проекта. |
+| [`github-repo-care`](skills/dev/github-repo-care/SKILL.ru.md) | Gate публикации: правила, locks, privacy, i18n и releases. |
+| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.ru.md) | Обнаружение MCP и синхронизация без неявного hub. |
+| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.ru.md) | Субтитры, транскрипции и метаданные видео. |
+| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.ru.md) | Roblox Studio, Rojo и обязательная проверка ресурсов. |
+| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.ru.md) | Нумерованный обзор вариантов и рекомендаций. |
+| [`bugsweep`](skills/dev/bugsweep/SKILL.ru.md) | Системный поиск ошибок с измеримой целью. |
+| [`plugin-system`](skills/dev/plugin-system/SKILL.ru.md) | Python plugin system без внешних зависимостей. |
+| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.ru.md) | Синхронизация языковых версий и обнаружение расхождений. |
+| [`law-checker`](skills/utilities/law-checker/SKILL.ru.md) | Первичная ориентация по немецкому праву на основе источников; не заменяет юриста. |
+| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.ru.md) | Локальная таблица расходов работника; не налоговая консультация. |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ru.md) | Рабочие листы по цели, уровню и возрасту. |
+| [`research-agent`](skills/research/research-agent/SKILL.ru.md) | Повторяемый поиск литературы в PubMed и arXiv. |
+| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.ru.md) | Планирование выбранной топологии конфигурации. |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.ru.md) | Нейтральный загрузочный мост для правил. |
 | [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.ru.md) | Обслуживание автоматизаций с readback и rollback. |
 | [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.ru.md) | Разделение ролей, экспертов, endpoints, персон и прав. |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.ru.md) | Публичный модуль для авторизованной модели предпочтений без публикации личного профиля. |
-| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Автоматизация разработки без внешних сервисов. |
-| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Удаление следов чата и управление раскрытием AI. |
-| [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Извлечение идей из застрявших задач. |
-| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.md) | Создание повторно используемого skill из диалога. |
-| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.md) | Преобразование разговоров в повторяемые workflows. |
-| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | Переносимая среда с локальными моделями и RAG. |
-| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | Поддержка вакансий, CV, LinkedIn и писем. |
+| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.ru.md) | Автоматизация разработки без внешних сервисов. |
+| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.ru.md) | Удаление следов чата и управление раскрытием AI. |
+| [`idea-mining`](skills/utilities/idea-mining/SKILL.ru.md) | Извлечение идей из застрявших задач. |
+| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.ru.md) | Создание повторно используемого skill из диалога. |
+| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.ru.md) | Преобразование разговоров в повторяемые workflows. |
+| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.ru.md) | Переносимая среда с локальными моделями и RAG. |
+| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.ru.md) | Поддержка вакансий, CV, LinkedIn и писем. |
 | [`therapy/`](skills/therapy/) | Семейство психообразовательных методов с этическими границами. |
 
 ## Публичная и приватная граница
@@ -134,11 +133,11 @@ flowchart TD
 
 | Skill | Назначение |
 |---|---|
-| [`academic-study-control`](skills/education/academic-study-control/SKILL.md) | Семестры, сроки, регистрация и напоминания с проверкой источников. |
-| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.md) | Цель, ключевые идеи, словарь, перенос и практика воспроизведения. |
-| [`academic-study-test`](skills/education/academic-study-test/SKILL.md) | Режимы тренировки с rubric и запретом помощи на реальном экзамене. |
+| [`academic-study-control`](skills/education/academic-study-control/SKILL.ru.md) | Семестры, сроки, регистрация и напоминания с проверкой источников. |
+| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.ru.md) | Цель, ключевые идеи, словарь, перенос и практика воспроизведения. |
+| [`academic-study-test`](skills/education/academic-study-test/SKILL.ru.md) | Режимы тренировки с rubric и запретом помощи на реальном экзамене. |
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.ru.md) | Нейтральное планирование обучения и поддержки без личных отчётов. |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Дифференцированные учебные материалы. |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ru.md) | Дифференцированные учебные материалы. |
 
 ## Структура и проверка
 
