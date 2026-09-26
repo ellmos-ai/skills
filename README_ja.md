@@ -178,7 +178,6 @@ python testing/skill_tester.py batch --type static --ci
 | プロジェクト | 組織 | 役割 |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | テキストベースの完全な LLM OS |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | コアランタイムプリミティブと実行基盤 |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | 統合ツール・プロファイルゲートウェイ MCP サーバー |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | エージェントフリート構成とシステム探索 |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | トランザクション型ワークフローフックディスパッチャー |

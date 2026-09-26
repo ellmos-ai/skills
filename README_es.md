@@ -186,7 +186,6 @@ Usa la cadena canónica `ellmos-ai/skills` al enlazar o indexar el proyecto. Es 
 | Proyecto | Organización | Función |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Sistema operativo textual completo para LLM |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Primitivas de runtime central y plataforma de ejecución |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Servidor MCP unificado de herramientas y perfiles |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Composición de flotas de agentes y exploración del sistema |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Despachador transaccional de hooks de flujo de trabajo |

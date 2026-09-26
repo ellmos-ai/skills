@@ -177,7 +177,6 @@ python testing/skill_tester.py batch --type static --ci
 | 项目 | 组织 | 作用 |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | 完整的文本型 LLM 操作系统 |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | 核心运行时基元与执行框架 |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | 统一的工具与配置文件网关 MCP 服务器 |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | 智能体集群组合与系统探索 |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | 事务性工作流钩子调度器 |

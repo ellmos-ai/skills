@@ -174,7 +174,6 @@ python testing/skill_tester.py batch --type static --ci
 | Проект | Организация | Роль |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Полная текстовая LLM OS |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Базовые примитивы среды выполнения |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Единый MCP-шлюз инструментов и профилей |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Композиция флота агентов и исследование системы |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Транзакционный диспетчер хуков рабочих процессов |
