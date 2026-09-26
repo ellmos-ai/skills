@@ -202,6 +202,39 @@ class PublishReceipt:
         )
 
 
+class FileReceiptPublisher:
+    """Provider-neutral publisher: feeds back a receipt an agent already captured.
+
+    T-20260926-665406367 (posting je App): the actual post -- via open-compute, Playwright,
+    Claude-in-Chrome, or a platform API, whichever the calling app's own session can use --
+    happens BEFORE this is invoked. This class performs no network action and no browser
+    automation itself; it only hands the already-captured evidence to the engine's existing,
+    unchanged verification (PublishReceipt.validate still enforces platform/target_url/format
+    match, so a wrong or incomplete receipt is rejected exactly as before). Bound to exactly
+    one proposal id so a receipt can never be misapplied to a different, unrelated post.
+    """
+
+    def __init__(self, receipt_path: str | Path, proposal_id: str):
+        self.receipt_path = Path(receipt_path)
+        self.proposal_id = proposal_id
+
+    def publish(self, proposal: Mapping[str, Any]) -> Mapping[str, Any]:
+        if proposal.get("id") != self.proposal_id:
+            raise ValueError(
+                f"receipt is bound to proposal {self.proposal_id!r}, not {proposal.get('id')!r} "
+                "-- refusing to apply it to a different post"
+            )
+        data = _read_json(self.receipt_path, None)
+        if not isinstance(data, Mapping):
+            raise ValueError(f"receipt file {self.receipt_path} is missing or not valid JSON")
+        if data.get("proposal_id") != self.proposal_id:
+            raise ValueError(
+                f"receipt file's proposal_id {data.get('proposal_id')!r} does not match "
+                f"--receipt-proposal-id {self.proposal_id!r}"
+            )
+        return data
+
+
 class HistoryUnreadable(ValueError):
     """posts_history.json exists but cannot be trusted; nothing may be derived from or written over it."""
 
@@ -952,6 +985,16 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--workspace", default=".", help="Workspace containing the outreach state files")
     parser.add_argument("--full-run", action="store_true", help="Run the complete local planning cycle")
     parser.add_argument("--process-approvals", action="store_true", help="Process approved posts with an injected publisher")
+    parser.add_argument(
+        "--receipt-file", default=None,
+        help="Path to a JSON PublishReceipt for --receipt-proposal-id, captured by the calling "
+        "app's own session (open-compute/Playwright/Claude-in-Chrome/API) BEFORE this call. "
+        "This process performs no posting itself. Requires --receipt-proposal-id.",
+    )
+    parser.add_argument(
+        "--receipt-proposal-id", default=None,
+        help="The OUTBOUND-PROPOSAL-... id the --receipt-file belongs to (binding, refuses mismatches)",
+    )
     parser.add_argument("--discover-candidate", action="store_true", help="Return the next research task")
     parser.add_argument(
         "--org-allow", default="",
@@ -971,7 +1014,11 @@ def main(argv: list[str] | None = None) -> int:
         sys.stdout.reconfigure(encoding="utf-8")
     args = _build_parser().parse_args(argv)
     org_allow = [org.strip() for org in args.org_allow.split(",") if org.strip()]
-    engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run, org_allow=org_allow)
+    if bool(args.receipt_file) != bool(args.receipt_proposal_id):
+        print(json.dumps({"status": "error", "message": "--receipt-file and --receipt-proposal-id must be given together"}))
+        return 1
+    publisher = FileReceiptPublisher(args.receipt_file, args.receipt_proposal_id) if args.receipt_file else None
+    engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run, org_allow=org_allow, publisher=publisher)
     if args.sync_githubbot:
         try:
             if args.dry_run:

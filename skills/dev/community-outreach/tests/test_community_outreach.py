@@ -1407,3 +1407,103 @@ def test_phase3_org_allow_defaults_from_constructor(tmp_path: Path) -> None:
 
     assert result["repo_name"] == "tool", result
     assert result["stage"] == 1
+
+
+# --- Posting je App: injizierbarer Datei-Receipt-Publisher, T-20260926-665406367 -----
+# Der eigentliche Post (open-compute/Playwright/Claude-in-Chrome/API) geschieht in der
+# Session der aufrufenden App VOR diesem Aufruf; dieser Publisher fuehrt selbst keine
+# Netzwerk-/Browseraktion aus, er reicht nur das schon eingesammelte Ergebnis weiter.
+
+def test_file_receipt_publisher_applies_a_matching_receipt(temp_workspace: Path, tmp_path: Path) -> None:
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-1",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert results == [{"id": "OUTBOUND-PROPOSAL-P-1", "status": "published", "receipt": "t1_abc123"}], results
+
+
+def test_file_receipt_publisher_refuses_a_receipt_for_a_different_proposal(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    """A receipt file bound to the wrong proposal id must never be applied to this one."""
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-SOME-OTHER-POST",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert len(results) == 1
+    assert results[0]["id"] == "OUTBOUND-PROPOSAL-P-1"
+    assert results[0]["status"] == "needs-action"
+    assert "publisher-error" in results[0]["reason"]
+
+
+def test_file_receipt_publisher_missing_file_fails_closed(temp_workspace: Path, tmp_path: Path) -> None:
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    publisher = FileReceiptPublisher(tmp_path / "does-not-exist.json", "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert results[0]["status"] == "needs-action"
+    assert "publisher-error" in results[0]["reason"]
+
+
+def test_cli_receipt_flags_must_be_given_together(temp_workspace: Path) -> None:
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--process-approvals", "--receipt-file", "somewhere.json", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+    assert completed.returncode == 1, completed.stdout + completed.stderr
+    assert json.loads(completed.stdout)["status"] == "error"
+
+
+def test_cli_process_approvals_with_receipt_file_publishes(temp_workspace: Path, tmp_path: Path) -> None:
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-1",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--process-approvals", "--receipt-file", str(receipt_file),
+         "--receipt-proposal-id", "OUTBOUND-PROPOSAL-P-1", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["outbound_results"] == [{"id": "OUTBOUND-PROPOSAL-P-1", "status": "published", "receipt": "t1_abc123"}]
