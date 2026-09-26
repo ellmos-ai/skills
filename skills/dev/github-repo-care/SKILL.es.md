@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -51,7 +51,7 @@ Prepara el repositorio antes del primer push público. Un `.gitignore` correcto,
 11. **Hacer commit y push.** Haz commit solo después de superar la puerta de privacidad. Luego crea o conecta el repositorio de GitHub, haz push y verifica el estado remoto.
 12. **Establecer metadatos.** Revisa la descripción, temas (topics), página de inicio, visibilidad y rama por defecto.
 13. **Crear el lanzamiento.** Crea la etiqueta y el lanzamiento de GitHub (GitHub release); verifica la CI tanto para la rama como para la etiqueta.
-14. **Actualizar superficies de descubrimiento.** Enlaza desde el perfil de la organización, `llms.txt`, registros centrales, índices de módulos locales y READMEs del ecosistema.
+14. **Actualizar superficies de descubrimiento.** Enlaza desde el perfil de la organización, `llms.txt`, registros centrales, índices de módulos locales y READMEs del ecosistema. **Publicar ⇒ página de perfil (T-20260926-796851315):** si el repo tiene un banner, comprueba mecánicamente si ya aparece en la página de perfil de la organización (`<org>/.github/profile/README.md`) — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). Si falta, el script genera un fragmento markdown listo para pegar.
 15. **Verificación final.** Comprueba el README remoto, la página de lanzamientos, los temas, la CI y los enlaces.
 
 ## Puerta de Privacidad (Privacy Gate)
@@ -112,8 +112,15 @@ Si la CI está en rojo después de un lanzamiento, el repositorio aún no se ha 
 - [ ] Escaneos de privacidad, rutas, secretos, bases de datos y mojibake limpios.
 - [ ] Descripción de GitHub, temas, etiqueta, release y CI verificados.
 - [ ] Perfil de organización, registro y enlaces del ecosistema actualizados.
+- [ ] ¿Tiene banner? `org_profile_gate.py --org <org>` se ejecutó sin hallazgo para este repo.
 
 ## Historial de cambios
+
+### 1.1.0 (2026-09-26)
+- Añadido el paso "Publicar ⇒ página de perfil" (T-20260926-796851315): un repo con banner debe
+  comprobarse contra el README de perfil de su organización (`<org>/.github/profile/README.md`),
+  mecánicamente vía `.AI/.SKILLS/testing/org_profile_gate.py`, sin dejarlo a la memoria. Origen:
+  el banner de zombie-killer-tray nunca llegó a la página de dev-bricks tras su publicación.
 
 ### 1.0.0 (2026-06-18)
 - Creado el protocolo inicial de mantenimiento y publicación de repositorios.

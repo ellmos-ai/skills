@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -52,7 +52,7 @@ Prepare the repository before the first public push. A correct `.gitignore`, pri
 11. **Commit and push.** Commit only after the gate passes. Then create or connect the GitHub repository, push, and verify remote status.
 12. **Set metadata.** Check description, topics, homepage, visibility, and default branch.
 13. **Create the release.** Create the tag and GitHub release; verify CI for both branch and tag.
-14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs.
+14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs. **Publish ⇒ profile page (T-20260926-796851315):** if the repo has a banner, check mechanically whether it's already on the org profile page (`<org>/.github/profile/README.md`) — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). If missing, the script emits a ready-to-paste markdown snippet.
 15. **Final verification.** Check the remote README, release page, topics, CI, and links.
 
 ## Privacy Gate
@@ -113,8 +113,15 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Privacy, path, secret, database, and mojibake scans clean.
 - [ ] GitHub description, topics, tag, release, and CI verified.
 - [ ] Organization profile, registry, and ecosystem links updated.
+- [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Changelog
+
+### 1.1.0 (2026-09-26)
+- Added the "Publish ⇒ profile page" step (T-20260926-796851315): a repo with a banner must be
+  checked against its org's profile README (`<org>/.github/profile/README.md`), mechanically via
+  `.AI/.SKILLS/testing/org_profile_gate.py`, not left to memory. Anlass: zombie-killer-tray's
+  banner never made it onto the dev-bricks org page after publication.
 
 ### 1.0.0 (2026-06-18)
 - Created initial repository care and publication protocol.

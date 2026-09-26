@@ -40,6 +40,21 @@ class RepoMentionedInProfileTests(unittest.TestCase):
         profile = "https://GITHUB.com/Dev-Bricks/NewTool"
         self.assertTrue(gate.repo_mentioned_in_profile(profile, "dev-bricks", "NewTool"))
 
+    def test_prefix_collision_rss_book_vs_rss_bookstore(self) -> None:
+        """Real pair in file-bricks: a plain substring check reported RSS-BOOK
+        as already listed just because RSS-BOOKSTORE was -- both must be
+        judged independently."""
+        profile = "[RSS-BOOKSTORE](https://github.com/file-bricks/RSS-BOOKSTORE)"
+        self.assertFalse(gate.repo_mentioned_in_profile(profile, "file-bricks", "RSS-BOOK"))
+        self.assertTrue(gate.repo_mentioned_in_profile(profile, "file-bricks", "RSS-BOOKSTORE"))
+
+    def test_prefix_collision_reverse_order(self) -> None:
+        """Same collision, but the longer name is the one actually being
+        checked against a mention of only the shorter one."""
+        profile = "[RSS-BOOK](https://github.com/file-bricks/RSS-BOOK)"
+        self.assertTrue(gate.repo_mentioned_in_profile(profile, "file-bricks", "RSS-BOOK"))
+        self.assertFalse(gate.repo_mentioned_in_profile(profile, "file-bricks", "RSS-BOOKSTORE"))
+
 
 class FindMissingEntriesTests(unittest.TestCase):
     def test_repo_with_banner_and_no_mention_is_a_finding(self) -> None:

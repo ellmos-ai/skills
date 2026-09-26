@@ -50,9 +50,18 @@ def find_banner_path(tree_paths: list[str]) -> str | None:
 
 def repo_mentioned_in_profile(profile_text: str, org: str, repo: str) -> bool:
     """True if the profile README references this repo in any form (link,
-    banner gallery href, table row) -- format-agnostic on purpose."""
-    needle = f"github.com/{org}/{repo}".lower()
-    return needle in profile_text.lower()
+    banner gallery href, table row) -- format-agnostic on purpose.
+
+    A word boundary after the repo name is required, or "RSS-BOOK" would
+    also match inside "RSS-BOOKSTORE" (a real pair in file-bricks) -- a
+    plain substring check reported that repo as already listed when it
+    was not.
+    """
+    pattern = re.compile(
+        r"github\.com/" + re.escape(org) + r"/" + re.escape(repo) + r'(?=[/)#?"\s]|$)',
+        re.IGNORECASE,
+    )
+    return bool(pattern.search(profile_text))
 
 
 def banner_snippet(org: str, repo: str, banner_path: str, default_branch: str) -> str:
@@ -164,7 +173,9 @@ def main(argv: list[str] | None = None) -> int:
         for f in all_findings:
             print(f"{f['org']}/{f['repo']}: banner at {f['banner_path']}, not on profile page")
             print(f"  Snippet: {f['snippet']}")
-    return 0
+    # Exit non-zero on findings so this can gate CI, matching repo_privacy_gate.py's
+    # convention (a clean gate exits 0, a finding is a failure to act on).
+    return 1 if all_findings else 0
 
 
 if __name__ == "__main__":
