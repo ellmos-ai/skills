@@ -137,6 +137,27 @@ def _same_repo(left: object, right: object) -> bool:
     return left_ref.rsplit("/", 1)[-1] == right_ref.rsplit("/", 1)[-1]
 
 
+def _public_repo_gate(repo: Mapping[str, Any]) -> tuple[bool, bool]:
+    """Shared fail-closed gate: github_meta must positively confirm public, non-archived,
+    non-fork, set by --sync-githubbot or when bootstrapping the catalog.
+
+    Returns (passes, unverified_visibility). Used by BOTH select_candidate_repository
+    (stage 1/2) and the stage-3 new-proposal pool -- a repo must clear this gate no matter
+    which stage considers it. Merge-reviewer fix (T-20260926-665406367): stage 3 previously
+    only checked `active`/`exclusion_reason` and could surface private, archived, forked or
+    never-synced repos for outreach, most dangerously in exactly the case where the reason
+    was "visibility-unverified" -- a missing sync must never be routed around this way.
+    """
+    gh_meta = repo.get("github_meta") or {}
+    if gh_meta.get("visibility") != "public":
+        return False, True
+    if gh_meta.get("archived") is not False:
+        return False, False
+    if gh_meta.get("fork") is not False:
+        return False, False
+    return True, False
+
+
 def _repo_matches_catalog_entry(repo: Mapping[str, Any], published_repo: object) -> bool:
     published_ref = _normalize_repo_reference(published_repo)
     qualified = {
@@ -374,13 +395,10 @@ def select_candidate_repository(
             continue
         if repo.get("exclusion_reason"):
             continue
-        gh_meta = repo.get("github_meta") or {}
-        if gh_meta.get("visibility") != "public":
+        passes, unverified_hit = _public_repo_gate(repo)
+        if unverified_hit:
             unverified += 1
-            continue
-        if gh_meta.get("archived") is not False:
-            continue
-        if gh_meta.get("fork") is not False:
+        if not passes:
             continue
         eligible.append(repo)
 
@@ -791,10 +809,15 @@ class CommunityOutreachEngine:
         runs when stages 1+2 found nothing, so ALL known repos are either exhausted or
         in cooldown. The caller (the drafting LLM) picks a genuinely new use-case or
         channel for one of these, or researches a public repo not yet in usecases.json.
+
+        Still enforces the same fail-closed _public_repo_gate as select_candidate_repository
+        (merge-reviewer fix, T-20260926-665406367): a private, archived, forked or
+        never-synced repo must never be proposed here either.
         """
         pool = [
             repo for repo in repositories
             if isinstance(repo, Mapping) and repo.get("active", True) and not repo.get("exclusion_reason")
+            and _public_repo_gate(repo)[0]
         ]
         if org_allow:
             scoped = [repo for repo in pool if str(repo.get("org", "")).casefold() in org_allow]
@@ -850,14 +873,19 @@ class CommunityOutreachEngine:
             candidate, score_meta = select_candidate_repository(eligible_repos)
 
         if not candidate:
-            # Stufe 3 gilt nur im per-App-Zuschnitt (org_allow gesetzt): ohne Zuschnitt gibt
-            # es kein "eigener Bereich leer" und das alte Verhalten bleibt unveraendert.
-            proposals = self._stage3_new_proposal_pool(repositories, org_allow_norm) if org_allow_norm else []
             reason = "no-active-repositories"
             if score_meta.get("all_in_cooldown"):
                 reason = "all-in-cooldown"
             elif score_meta.get("unverified_visibility"):
                 reason = "visibility-unverified: run --sync-githubbot"
+            # Stufe 3 gilt nur im per-App-Zuschnitt (org_allow gesetzt) UND nur, wenn kein
+            # Sync-Gap vorliegt -- ein fehlender --sync-githubbot-Lauf darf niemals durch einen
+            # "neuen Vorschlag" umgangen werden (merge-reviewer-Fund, T-20260926-665406367).
+            proposals = (
+                self._stage3_new_proposal_pool(repositories, org_allow_norm)
+                if org_allow_norm and not score_meta.get("unverified_visibility")
+                else []
+            )
             if not proposals:
                 return {"status": "needs-action", "action": "configure-repositories", "reason": reason,
                         "stage": 2 if fallback_used else 1, "fallback_used": fallback_used}
