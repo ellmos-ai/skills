@@ -18,7 +18,7 @@ description: >
   What it does.
 third_party: true
 license: MIT                 # SPDX identifier
-upstream: https://github.com/someone/their-repo
+upstream: https://github.com/<owner>/<repo>
 ---
 ```
 

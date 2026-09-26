@@ -18,24 +18,28 @@ lookup.
 
 ## Design decisions (round 2, merge-reviewer measurement on PR #39)
 
-- **Unauthenticated, on purpose.** The question this gate answers is "can a
-  stranger reading this public doc actually reach the linked repo?" -- an
-  authenticated lookup answers a different question (can *this token* see
-  it), which is useless in CI: `privacy_gate.py` runs in `skill-validation.yml`
-  and `tests.yml` with no `GH_TOKEN` set at all, so an authenticated call
-  always failed and downgraded every result to "unknown" -- the gate never
-  actually blocked anything in CI. `GET https://api.github.com/repos/<org>/<repo>`
-  with NO token returns 200 for a public repo and 404 for a private one
-  (measured: `ellmos-ai/ellmos-core` -> 404, `ellmos-ai/usmc` -> 200) -- and
-  404 also means "does not exist", but a public-facing link pointing at a
+- **Unauthenticated by default, works either way.** The question this gate
+  answers is "can a stranger reading this public doc actually reach the
+  linked repo?" `GET https://api.github.com/repos/<org>/<repo>` with NO
+  token returns 200 for a public repo and 404 for a private one (measured:
+  `ellmos-ai/ellmos-core` -> 404, `ellmos-ai/usmc` -> 200) -- and 404 also
+  means "does not exist", but a public-facing link pointing at a
   nonexistent repo is equally wrong, so both cases are a confirmed finding,
-  not "unknown". Only rate limiting (403/429 -- unauthenticated GitHub API
-  is capped at 60 requests/hour per IP) or an actual network error stay
-  "unknown" (warning only). No optional token-based rate-limit boost is
-  offered here: a token that happens to have read access to a linked private
-  repo would make that lookup return 200 again, silently defeating the exact
-  check this gate exists to run -- the 60/h ceiling is instead absorbed by
-  the cache below.
+  not "unknown". Unauthenticated GitHub API calls are capped at 60/hour per
+  IP, which in CI (a shared runner IP) is reached fast enough in practice
+  that the gate degraded to "warn only" -- so an optional `GH_TOKEN` or
+  `GITHUB_TOKEN` env var, if present, is sent as a bearer header purely to
+  raise that ceiling. It does NOT change the verdict on its own: on a 200
+  response the JSON body's `private` field decides (`true` -> a confirmed
+  finding, `false` -> public) instead of assuming 200 always means public --
+  that is what makes a token safe to use here. A token whose owner happens
+  to have read access to a linked private repo (e.g. its own org's private
+  sibling) still gets `private: true` back and the finding still fires;
+  only a repo the token cannot see at all still falls through to 404 ->
+  finding, same as unauthenticated. 403/429 (rate limit) or a network error
+  stay "unknown" either way (warning only). Without a token: exactly the
+  previous behaviour (any 200 is public, since an unauthenticated caller
+  can only ever get a 200 for an actually-public repo).
 - **The REST API, not a HEAD on the web page.** Considered and rejected: the
   web page (`https://github.com/<org>/<repo>`) gives the same 404-for-private-
   or-missing ambiguity with none of the API's benefits (a plain, unambiguous
@@ -54,8 +58,8 @@ lookup.
   repeatedly-referenced ecosystem repos across runs.
 - **Injectable prober for tests.** `check_visibility()` takes an optional
   `prober` callable so tests never hit the real network or burn real rate
-  limit; the default prober performs the unauthenticated HTTP GET described
-  above.
+  limit; the default prober performs the (optionally token-bearing) HTTP GET
+  described above.
 
 Usage:
     python repo_link_visibility_gate.py --repo <path>            # scan all tracked text files
@@ -70,6 +74,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import time
 import urllib.error
@@ -154,16 +159,39 @@ def _save_cache(cache: dict) -> None:
 
 
 def _default_prober(org: str, repo: str) -> str:
-    """Unauthenticated GitHub REST API lookup. Returns "public" (200),
-    "private" (404 -- private-and-inaccessible or nonexistent, both wrong as
-    a public link), or "unknown" (403/429 rate limit or a network error)."""
+    """GitHub REST API lookup, authenticated only to raise the rate limit
+    (see the module docstring for why an authenticated 200 still cannot
+    silently mean "public"). Returns "public" (200 with private:false, or a
+    200 without a token at all -- an unauthenticated caller can only ever
+    get a 200 for an actually-public repo), "private" (404 -- inaccessible
+    or nonexistent, both wrong as a public link -- or 200 with
+    private:true), or "unknown" (403/429 rate limit, a network error, or an
+    unparsable 200 body)."""
     url = f"https://api.github.com/repos/{org}/{repo}"
-    req = urllib.request.Request(
-        url, headers={"User-Agent": "ellmos-repo-link-visibility-gate"}
-    )
+    headers = {
+        "User-Agent": "ellmos-repo-link-visibility-gate",
+        "Accept": "application/vnd.github+json",
+    }
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=10) as response:
-            return "public" if response.status == 200 else "unknown"
+            if response.status != 200:
+                return "unknown"
+            if not token:
+                return "public"
+            try:
+                body = json.loads(response.read().decode("utf-8"))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                return "unknown"
+            is_private = body.get("private")
+            if is_private is True:
+                return "private"
+            if is_private is False:
+                return "public"
+            return "unknown"  # body without a "private" field -- unexpected shape
     except urllib.error.HTTPError as exc:
         if exc.code == 404:
             return "private"

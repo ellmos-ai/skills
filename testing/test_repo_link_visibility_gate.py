@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import os
 import tempfile
 import unittest
 import unittest.mock
@@ -139,17 +140,67 @@ class CheckVisibilityTests(unittest.TestCase):
 
 class DefaultProberTests(unittest.TestCase):
     """Unit-tests the real HTTP classification logic (no network): mocks
-    urllib.request.urlopen so the unauthenticated-GET decision table itself
-    (200/404/403/network-error) is verified, not just the injectable seam."""
+    urllib.request.urlopen so the decision table itself (200/404/403/
+    network-error, with and without a token) is verified, not just the
+    injectable seam."""
 
-    def test_200_is_public(self) -> None:
+    def _no_token_env(self):
+        """Whatever the real environment is, with GH_TOKEN/GITHUB_TOKEN
+        removed -- so this test is not accidentally token-dependent when
+        run somewhere that happens to have one set."""
+        env_without_token = {
+            k: v for k, v in os.environ.items()
+            if k not in ("GH_TOKEN", "GITHUB_TOKEN")
+        }
+        return unittest.mock.patch.dict(os.environ, env_without_token, clear=True)
+
+    def test_200_is_public_without_token(self) -> None:
         class FakeResponse:
             status = 200
             def __enter__(self): return self
             def __exit__(self, *exc): return False
 
-        with unittest.mock.patch("urllib.request.urlopen", return_value=FakeResponse()):
+        with self._no_token_env(), \
+             unittest.mock.patch("urllib.request.urlopen", return_value=FakeResponse()):
             self.assertEqual("public", gate._default_prober("ellmos-ai", "usmc"))
+
+    def test_200_with_token_and_private_true_is_private(self) -> None:
+        # Round-3 merge-reviewer fix: with a token, a 200 no longer means
+        # "public" by itself -- the body's `private` field decides. A token
+        # whose owner happens to have read access to a linked private repo
+        # must still be caught, not silently waved through.
+        class FakeResponse:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *exc): return False
+            def read(self): return b'{"private": true, "name": "ellmos-core"}'
+
+        with unittest.mock.patch.dict(os.environ, {"GH_TOKEN": "test-token"}), \
+             unittest.mock.patch("urllib.request.urlopen", return_value=FakeResponse()):
+            self.assertEqual(
+                "private", gate._default_prober("ellmos-ai", "ellmos-core")
+            )
+
+    def test_200_with_token_and_private_false_is_public(self) -> None:
+        class FakeResponse:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *exc): return False
+            def read(self): return b'{"private": false, "name": "usmc"}'
+
+        with unittest.mock.patch.dict(os.environ, {"GH_TOKEN": "test-token"}), \
+             unittest.mock.patch("urllib.request.urlopen", return_value=FakeResponse()):
+            self.assertEqual("public", gate._default_prober("ellmos-ai", "usmc"))
+
+    def test_404_with_token_is_still_private(self) -> None:
+        error = urllib.error.HTTPError(
+            "https://api.github.com/repos/ellmos-ai/ellmos-core", 404, "Not Found", {}, None
+        )
+        with unittest.mock.patch.dict(os.environ, {"GITHUB_TOKEN": "test-token"}), \
+             unittest.mock.patch("urllib.request.urlopen", side_effect=error):
+            self.assertEqual(
+                "private", gate._default_prober("ellmos-ai", "ellmos-core")
+            )
 
     def test_404_is_private(self) -> None:
         error = urllib.error.HTTPError(

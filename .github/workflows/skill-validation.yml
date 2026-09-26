@@ -71,6 +71,14 @@ jobs:
         run: python -m unittest testing/test_privacy_gate.py testing/test_public_private_boundary.py
 
       - name: Validate the public/private boundary
+        env:
+          # Raises the repo-link visibility gate's rate limit (60/h
+          # unauthenticated per shared runner IP, reached fast enough in
+          # practice to degrade the check to warn-only). A 200 response no
+          # longer means "public" by itself once a token is present -- the
+          # body's own `private` field decides -- so this cannot mask a
+          # real private-repo link (T-20260926-820252321 round 3).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python testing/privacy_gate.py
 
       - name: Validate tracked skills

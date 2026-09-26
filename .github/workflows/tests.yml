@@ -60,5 +60,10 @@ jobs:
         run: python build_skills_map.py --check
 
       - name: Validate the privacy gate
+        env:
+          # See skill-validation.yml for why this is safe: with a token, a
+          # 200 response is only "public" if the body's own `private` field
+          # says so (T-20260926-820252321 round 3).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python testing/privacy_gate.py
