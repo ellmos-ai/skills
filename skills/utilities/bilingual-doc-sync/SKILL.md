@@ -1,10 +1,10 @@
 ---
 name: bilingual-doc-sync
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-09-26
 description: >
   Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de,
   SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen,
@@ -55,6 +55,54 @@ Vorab-Festlegung: **Welche Fassung führt?** Ohne Leitsprache-Regel wird jede Di
 zur Einzelfallentscheidung und der Abgleich unwiederholbar.
 
 ## Ablauf
+
+### 0. Einsprachigen Inhalt erkennen (VOR jedem Abgleich)
+
+Divergenz ist nicht immer „veraltet" — manchmal ist sie **neuer, echter Inhalt, der bisher
+nur in einer Fassung existiert** (externer Beitrag/PR in einer Nicht-Leitsprache, eine
+Änderung, die zuerst in der Nebenfassung ankam, oder Content-Verlust durch einen
+History-Rewrite o. ä.). Das ursprüngliche Verfahren kannte nur „in EN oder DE eintragen,
+dann an alle ausliefern" — keinen Fall, in dem etwas nur in einer Fassung steht. Belegfall:
+`ellmos-ai/skills` PR #1 fügte einen chinesischsprachigen Discovery-Link nur in README.md
+ein; ein späterer History-Rewrite verlor ihn wieder, weil kein Schritt geprüft hat, ob
+Inhalt existiert, der in keiner anderen Fassung steht (T-20260926-967984806).
+
+- **Prüfen, nicht annehmen:** Vor dem eigentlichen Abgleich (Schritt 3) einen Diff gegen
+  den letzten bekannten synchronisierten Stand (oder gegen die anderen Fassungen direkt)
+  ziehen und gezielt nach Inhalt suchen, der in EINER Fassung neu ist und in KEINER anderen
+  ein Gegenstück hat — nicht nur nach fehlenden Abschnitten der Leitsprache.
+- **Werkzeug:** `scripts/check_language_parity.py <datei1> <datei2> [...]` extrahiert
+  Markdown- UND HTML-Links (`[text](url)`, `<a href="url">`, `<img src="url">`) aus allen
+  übergebenen Fassungen (Links bleiben über Übersetzung hinweg unverändert und sind damit
+  ein robuster, sprachunabhängiger Indikator) und meldet jeden Link, der nicht in ALLEN
+  Fassungen vorkommt, mit Exit 1. Exit 0 heißt: keine Link-Teilmengen-Abweichung gefunden —
+  kein Beweis für vollständige Parität, aber ein gezielter Schritt-0-Rauchtest vor dem
+  manuellen Abgleich. Links innerhalb eines `<!-- lang-only: <code> -->`-Blocks werden nur
+  gegen Dateien geprüft, deren Sprachcode in der Markierung genannt ist (per Dateiname
+  erkannt, z. B. `README_zh.md` → `zh`, `README.md` → `en`) — sie zählen dort NICHT als
+  „fehlt in den anderen Fassungen". Zusätzlich filtert das Skript standardmäßig
+  `shields.io`-Badge-URLs mit codiertem Label-Text heraus (dort steckt oft die übersetzte
+  Beschriftung direkt in der URL — kein echter Contentverlust, sondern erwartete
+  Übersetzungs-Varianz; `--include-badges` schaltet den Filter ab). Nicht-UTF-8-lesbare
+  Dateien und fehlende Argumente enden mit Exit 2 und einer Fehlermeldung, nicht mit einem
+  Traceback.
+- **Entscheidung bei Fund:** einsprachiger Inhalt wird NIE still verworfen. Drei Auswege,
+  keine stille Löschung:
+  (a) **übersetzen und in ALLE Fassungen übernehmen** — der Normalfall bei allgemein
+  relevantem Inhalt;
+  (b) **bewusst auf eine/mehrere Sprache(n) beschränkt** ("lang-only") — wenn der Inhalt nur
+  für diese Zielgruppe gilt (Belegfall T-20260926-967984806: ein chinesischsprachiger
+  Discovery-Link ist für DE/ES/JA/RU-Leser:innen nicht relevant, eine Übersetzung in alle
+  sechs Fassungen wäre selbst falsch gewesen — Nutzerkorrektur nach der ersten Fassung
+  dieses Schritts). Markierung: **`<!-- lang-only: <code>[,<code>...] --> … <!-- /lang-only -->`**
+  (HTML-Kommentar, in Markdown-Renderern unsichtbar; für mehrere Zielsprachen kommagetrennt,
+  z. B. `zh,ja`). Kein etablierter Branchenstandard für diesen engen Fall bekannt (P-009
+  geprüft) — HTML-Kommentare sind die portabelste, unsichtbar rendernde Wahl für Markdown.
+  Markierter Inhalt wird beim Abgleich **weder übersetzt noch als fehlend gemeldet**;
+  (c) **als Konflikt eskalieren**, wenn unklar ist, ob der Inhalt noch gewollt ist (z. B. wirkt
+  widersprüchlich zur Leitfassung) — Nutzer/Entscheidungskette fragen.
+  In allen drei Fällen gilt: niemals kommentarlos aus der Fassung entfernen, in der der
+  Inhalt steht, nur weil die anderen ihn nicht haben.
 
 ### 1. Bestand feststellen
 
@@ -145,6 +193,16 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.2.0 (2026-09-26)
+- Schritt 0 „Einsprachigen Inhalt erkennen" ergänzt (T-20260926-967984806): Divergenz kann
+  neuer, noch nicht propagierter Inhalt sein statt Veralterung; drei Auswege (übersetzen+
+  überall / lang-only markieren / als Konflikt eskalieren), nie stille Löschung. Neue
+  `<!-- lang-only: <code> -->`-Markierung für bewusst zielgruppenbeschränkten Inhalt.
+- `scripts/check_language_parity.py` + `scripts/test_check_language_parity.py` ergänzt:
+  findet Links, die nur in einer Teilmenge der Sprachfassungen vorkommen (Markdown- und
+  HTML-Links), respektiert die lang-only-Markierung, filtert shields.io-Badge-Rauschen,
+  fängt Nicht-UTF-8-Dateien mit Exit 2 statt Traceback ab.
 
 ### 1.1.0 (2026-07-03)
 - Expansions-Audit ergänzt (i18n-Eignung bewerten, technische Vorbereitung, QA für

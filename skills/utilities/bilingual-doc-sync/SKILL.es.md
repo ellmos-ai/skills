@@ -1,10 +1,10 @@
 ---
 name: bilingual-doc-sync
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-30
+updated: 2026-09-26
 description: >
   Mantener sincronizadas las versiones lingüísticas paralelas de un documento (Paper DE/EN, README + README_de,
   SKILL.md + SKILL.en.md, textos de sitios web): actualizar la versión faltante,
@@ -54,6 +54,57 @@ crucial: **¿Qué versión es la principal?** Sin una regla de idioma principal,
 se convierte en un debate caso por caso y la alineación deja de ser repetible.
 
 ## Flujo de Trabajo
+
+### 0. Detectar contenido en un solo idioma (ANTES de cada comparación)
+
+La divergencia no siempre significa "desactualizado" — a veces es **contenido nuevo y
+genuino que hasta ahora solo existe en una versión** (una contribución externa/PR en un
+idioma no principal, un cambio que llegó primero a la versión secundaria, o pérdida de
+contenido por una reescritura de historial, etc.). El proceso original solo conocía
+"añadirlo en EN o DE y luego distribuirlo a todos" — ningún caso para contenido que existe
+solo en una versión. Caso de referencia: el PR #1 de `ellmos-ai/skills` añadió un enlace de
+descubrimiento en chino solo en README.md; una reescritura de historial posterior lo
+volvió a perder porque ningún paso comprobaba si existía contenido sin equivalente en
+ninguna otra versión (T-20260926-967984806).
+
+- **Comprobar, no asumir:** Antes de la comparación real (Paso 3), comparar contra el
+  último estado sincronizado conocido (o directamente contra las otras versiones) y buscar
+  específicamente contenido que sea nuevo en UNA versión y no tenga equivalente en NINGUNA
+  otra — no solo secciones faltantes del idioma principal.
+- **Herramienta:** `scripts/check_language_parity.py <archivo1> <archivo2> [...]` extrae
+  enlaces Markdown Y HTML (`[texto](url)`, `<a href="url">`, `<img src="url">`) de todas
+  las versiones dadas (los enlaces permanecen invariables a través de la traducción y son
+  por tanto un indicador robusto e independiente del idioma) y reporta con Exit 1 cualquier
+  enlace que no aparezca en TODAS las versiones. Exit 0 significa: no se encontró ninguna
+  discrepancia de subconjunto de enlaces — no es prueba de paridad completa, pero sí una
+  prueba rápida del Paso 0 antes de la comparación manual. Los enlaces dentro de un bloque
+  `<!-- lang-only: <código> -->` solo se comprueban contra archivos cuyo código de idioma
+  esté nombrado en la marca (detectado por el nombre de archivo, p. ej. `README_zh.md` →
+  `zh`, `README.md` → `en`) — ahí NO cuentan como "faltante en las otras versiones". El
+  script además filtra por defecto las URL de badges de `shields.io` con texto de etiqueta
+  codificado (la etiqueta traducida suele estar directamente en la URL — variación de
+  traducción esperada, no pérdida real de contenido; `--include-badges` desactiva el
+  filtro). Los archivos ilegibles en UTF-8 y los argumentos faltantes terminan con código
+  de salida 2 y un mensaje de error, no con un traceback.
+- **Decisión ante un hallazgo:** el contenido en un solo idioma NUNCA se descarta en
+  silencio. Tres salidas, ninguna es borrado silencioso:
+  (a) **traducir y adoptar en TODAS las versiones** — el caso normal para contenido
+  relevante en general;
+  (b) **deliberadamente limitado a uno/varios idioma(s)** ("lang-only") — cuando el
+  contenido solo aplica a ese público (caso de referencia T-20260926-967984806: un enlace
+  de descubrimiento en chino no es relevante para lectores de DE/ES/JA/RU; traducirlo a las
+  seis versiones fue en sí el error — corrección del usuario tras la primera versión de
+  este paso). Marca: **`<!-- lang-only: <código>[,<código>...] --> … <!-- /lang-only -->`**
+  (comentario HTML, invisible en los renderizadores de Markdown; separado por comas para
+  varios idiomas destino, p. ej. `zh,ja`). No se conoce ningún estándar de la industria
+  establecido para este caso concreto (P-009 verificado) — los comentarios HTML son la
+  opción más portable e invisible para Markdown. El contenido marcado **ni se traduce ni se
+  reporta como faltante** durante la comparación;
+  (c) **escalar como conflicto** cuando no está claro si el contenido sigue siendo deseado
+  (p. ej. parece contradecir la versión principal) — preguntar al usuario/cadena de
+  decisión.
+  En los tres casos: nunca eliminar contenido de la versión donde está sin comentario,
+  solo porque las otras no lo tengan.
 
 ### 1. Comprobación de Inventario
 
@@ -142,6 +193,17 @@ Tarea: "Comprobar si el artículo está sincronizado en DE y EN."
 - `workflow-extract` — Cuando esta comprobación deba configurarse como una automatización permanente.
 
 ## Registro de Cambios (Changelog)
+
+### 1.2.0 (2026-09-26)
+- Añadido el Paso 0 "Detectar contenido en un solo idioma" (T-20260926-967984806): la
+  divergencia puede ser contenido nuevo aún no propagado en vez de desactualización; tres
+  salidas (traducir a todas partes / marcar lang-only / escalar como conflicto), nunca
+  borrado silencioso. Nueva marca `<!-- lang-only: <código> -->` para contenido
+  deliberadamente limitado a un público.
+- Añadidos `scripts/check_language_parity.py` + `scripts/test_check_language_parity.py`:
+  encuentra enlaces presentes solo en un subconjunto de versiones (enlaces Markdown y
+  HTML), respeta la marca lang-only, filtra el ruido de badges de shields.io, sale con
+  código 2 (no un traceback) ante archivos no UTF-8.
 
 ### 1.1.0 (2026-07-03)
 - Se añadió la auditoría de expansión (evaluar idoneidad i18n, preparación técnica, control de calidad para
