@@ -1325,3 +1325,85 @@ def test_unreadable_history_is_an_error_and_nothing_is_overwritten(temp_workspac
     assert completed.returncode == 1, completed.stdout + completed.stderr
     assert json.loads(completed.stdout)["status"] == "error"
     assert snapshot_tree(temp_workspace) == before
+
+
+# --- Produktzuschnitt je App: Stufe 1 (eigener Bereich) -> Stufe 2 (Pool) -> Stufe 3
+# (neuer Vorschlag), T-20260926-665406367 -------------------------------------------
+
+def test_phase3_stage1_picks_only_from_org_allow(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "own-org/tool", "name": "tool", "org": "own-org",
+         "url": "https://github.com/own-org/tool", "github_meta": PUBLIC_META},
+        {"id": "other-org/tool2", "name": "tool2", "org": "other-org",
+         "url": "https://github.com/other-org/tool2", "github_meta": PUBLIC_META,
+         "traffic": {"traffic_score": 999}},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    result = CommunityOutreachEngine(workspace, org_allow=["own-org"]).phase3_research_and_stage()
+
+    # other-org/tool2 has the far higher traffic_score but is outside org_allow -> ignored in stage 1
+    assert result["repo_name"] == "tool", result
+    assert result["stage"] == 1
+    assert result["fallback_used"] is False
+
+
+def test_phase3_stage2_falls_back_to_whole_pool_when_own_org_is_empty(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "other-org/tool", "name": "tool", "org": "other-org",
+         "url": "https://github.com/other-org/tool", "github_meta": PUBLIC_META},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    # own-org has zero repos at all -> stage 1 empty -> stage 2 must pick from the whole pool
+    result = CommunityOutreachEngine(workspace, org_allow=["own-org"]).phase3_research_and_stage()
+
+    assert result["repo_name"] == "tool", result
+    assert result["stage"] == 2
+    assert result["fallback_used"] is True
+
+
+def test_phase3_stage3_proposes_new_angle_when_pool_is_exhausted(tmp_path: Path) -> None:
+    from datetime import datetime, timedelta, timezone
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    recent = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+    repos = [
+        {"id": "own-org/tool", "name": "tool", "org": "own-org",
+         "url": "https://github.com/own-org/tool", "last_promoted_at": recent,
+         "total_promotions": 3, "github_meta": PUBLIC_META},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    # The only repo everywhere is in cooldown -> stage 1 and stage 2 both empty -> stage 3
+    result = CommunityOutreachEngine(workspace, org_allow=["own-org"]).phase3_research_and_stage()
+
+    assert result["action"] == "propose-new-item", result
+    assert result["stage"] == 3
+    assert result["fallback_used"] is True
+    assert result["candidates_for_new_angle"][0]["repo_name"] == "tool"
+
+
+def test_phase3_org_allow_defaults_from_constructor(tmp_path: Path) -> None:
+    """--org-allow via CLI / Konstruktor gilt auch ohne expliziten Aufrufparameter."""
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    repos = [
+        {"id": "own-org/tool", "name": "tool", "org": "own-org",
+         "url": "https://github.com/own-org/tool", "github_meta": PUBLIC_META},
+        {"id": "other-org/tool2", "name": "tool2", "org": "other-org",
+         "url": "https://github.com/other-org/tool2", "github_meta": PUBLIC_META,
+         "traffic": {"traffic_score": 999}},
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+
+    engine = CommunityOutreachEngine(workspace, org_allow=["own-org"])
+    result = engine.phase3_research_and_stage()  # kein expliziter org_allow-Parameter
+
+    assert result["repo_name"] == "tool", result
+    assert result["stage"] == 1

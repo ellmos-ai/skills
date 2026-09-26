@@ -461,10 +461,19 @@ def select_candidate_repository(
 
 class CommunityOutreachEngine:
 
-    def __init__(self, workspace_dir: str | Path, dry_run: bool = False, publisher: object | None = None):
+    def __init__(
+        self,
+        workspace_dir: str | Path,
+        dry_run: bool = False,
+        publisher: object | None = None,
+        org_allow: list[str] | None = None,
+    ):
         self.workspace = Path(workspace_dir).resolve()
         self.dry_run = dry_run
         self.publisher = publisher
+        # Produktzuschnitt je App (T-20260926-665406367): welche Orgs Stufe 1 zuerst
+        # versucht, bevor phase3_research_and_stage auf den ganzen Pool ausweicht.
+        self.org_allow = list(org_allow) if org_allow else []
         self.usecases_json = self.workspace / "usecases.json"
         self.inbox_md = self.workspace / "POST-EINGANG.md"
         self.outbox_md = self.workspace / "POST-AUSGANG.md"
@@ -772,7 +781,42 @@ class CommunityOutreachEngine:
         data["updated_at"] = _now_iso()
         _atomic_write_json(self.usecases_json, data)
 
-    def phase3_research_and_stage(self) -> dict[str, Any] | None:
+    @staticmethod
+    def _stage3_new_proposal_pool(
+        repositories: list[Mapping[str, Any]], org_allow: list[str]
+    ) -> list[Mapping[str, Any]]:
+        """Candidates for a fresh angle (new use-case/channel) when nothing else is left.
+
+        Deliberately ignores cooldown and the "already queued" exclusion: stage 3 only
+        runs when stages 1+2 found nothing, so ALL known repos are either exhausted or
+        in cooldown. The caller (the drafting LLM) picks a genuinely new use-case or
+        channel for one of these, or researches a public repo not yet in usecases.json.
+        """
+        pool = [
+            repo for repo in repositories
+            if isinstance(repo, Mapping) and repo.get("active", True) and not repo.get("exclusion_reason")
+        ]
+        if org_allow:
+            scoped = [repo for repo in pool if str(repo.get("org", "")).casefold() in org_allow]
+            if scoped:
+                pool = scoped
+        pool.sort(
+            key=lambda repo: (
+                -int((repo.get("traffic") or {}).get("traffic_score", 0)),
+                -int(repo.get("total_promotions", 0)),
+            )
+        )
+        return pool[:5]
+
+    def phase3_research_and_stage(self, org_allow: list[str] | None = None) -> dict[str, Any] | None:
+        """Stufe 1 (eigener Bereich) -> Stufe 2 (ganzer Pool) -> Stufe 3 (neue Vorschlaege).
+
+        org_allow scopt Stufe 1 auf bestimmte Orgs (Produktzuschnitt je App,
+        T-20260926-665406367); ohne expliziten Wert gilt self.org_allow aus dem
+        Konstruktor. Beides leer -> Stufe 1 verhaelt sich wie bisher (ganzer Pool).
+        """
+        if org_allow is None:
+            org_allow = self.org_allow
         data = self._usecases()
         repositories = [repo for repo in data.get("repositories", []) if isinstance(repo, dict)]
 
@@ -787,14 +831,58 @@ class CommunityOutreachEngine:
             if not any(_repo_matches_catalog_entry(repo, ref) for ref in queued_refs)
         ]
 
-        candidate, score_meta = select_candidate_repository(eligible_repos)
+        org_allow_norm = [org.strip().casefold() for org in (org_allow or []) if org and org.strip()]
+
+        stage = 1
+        fallback_used = False
+        score_meta: dict[str, Any] = {}
+        candidate: Mapping[str, Any] | None = None
+
+        if org_allow_norm:
+            own_repos = [r for r in eligible_repos if str(r.get("org", "")).casefold() in org_allow_norm]
+            candidate, score_meta = select_candidate_repository(own_repos)
+            if not candidate:
+                # Stufe 2: eigener Bereich leer -> ganzer Pool (Dedup/Cooldown bleiben in Kraft)
+                stage = 2
+                fallback_used = True
+                candidate, score_meta = select_candidate_repository(eligible_repos)
+        else:
+            candidate, score_meta = select_candidate_repository(eligible_repos)
+
         if not candidate:
+            # Stufe 3 gilt nur im per-App-Zuschnitt (org_allow gesetzt): ohne Zuschnitt gibt
+            # es kein "eigener Bereich leer" und das alte Verhalten bleibt unveraendert.
+            proposals = self._stage3_new_proposal_pool(repositories, org_allow_norm) if org_allow_norm else []
             reason = "no-active-repositories"
             if score_meta.get("all_in_cooldown"):
                 reason = "all-in-cooldown"
             elif score_meta.get("unverified_visibility"):
                 reason = "visibility-unverified: run --sync-githubbot"
-            return {"status": "needs-action", "action": "configure-repositories", "reason": reason}
+            if not proposals:
+                return {"status": "needs-action", "action": "configure-repositories", "reason": reason,
+                        "stage": 2 if fallback_used else 1, "fallback_used": fallback_used}
+            return {
+                "status": "needs-action",
+                "action": "propose-new-item",
+                "stage": 3,
+                "fallback_used": True,
+                "reason": (
+                    "Weder im eigenen Bereich noch im gesamten Pool ein umsetzbarer Kandidat ("
+                    f"{reason}). Neuen Vorschlag erzeugen: neue Use-Case/neuer Zielkanal fuer eines "
+                    "der folgenden Repos, oder ein noch nicht in usecases.json gefuehrtes "
+                    "OEFFENTLICHES Repo recherchieren. Landet als Entwurf in der Queue, gleicher "
+                    "Genehmigungsmodus, keine Uebertreibungen/erfundenen Nutzerzahlen/Testimonials."
+                ),
+                "candidates_for_new_angle": [
+                    {
+                        "repo_name": repo.get("name", repo.get("id", "")),
+                        "repo_url": repo.get("url", ""),
+                        "org": repo.get("org", ""),
+                        "total_promotions": repo.get("total_promotions", 0),
+                    }
+                    for repo in proposals
+                ],
+            }
 
         rotation = data.get("platform_rotation") or DEFAULT_PLATFORM_ROTATION
         if not isinstance(rotation, list) or not rotation:
@@ -811,6 +899,8 @@ class CommunityOutreachEngine:
         return {
             "status": "needs-action",
             "action": "research-and-persist-valid-draft",
+            "stage": stage,
+            "fallback_used": fallback_used,
             "repo_name": candidate.get("name", candidate.get("id", "")),
             "repo_url": candidate.get("url", ""),
             "platform": platform,
@@ -863,6 +953,10 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--full-run", action="store_true", help="Run the complete local planning cycle")
     parser.add_argument("--process-approvals", action="store_true", help="Process approved posts with an injected publisher")
     parser.add_argument("--discover-candidate", action="store_true", help="Return the next research task")
+    parser.add_argument(
+        "--org-allow", default="",
+        help="Comma-separated org allowlist for phase 3 stage 1 (product cut per app, T-20260926-665406367)",
+    )
     parser.add_argument("--check-inbound", action="store_true", help="Count published threads requiring monitoring")
     parser.add_argument("--archive", action="store_true", help="Archive old complete outbox entries")
     parser.add_argument("--sync-githubbot", action="store_true", help="Sync repository metadata and traffic from GitHubBot")
@@ -876,7 +970,8 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     args = _build_parser().parse_args(argv)
-    engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run)
+    org_allow = [org.strip() for org in args.org_allow.split(",") if org.strip()]
+    engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run, org_allow=org_allow)
     if args.sync_githubbot:
         try:
             if args.dry_run:
