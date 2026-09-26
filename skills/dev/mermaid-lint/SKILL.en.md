@@ -20,6 +20,8 @@ visibility: public
 dependencies: {'tools': ['node', 'git'], 'services': ['GitHub'], 'protocols': [], 'python': [], 'npm': ['mermaid', 'jsdom', 'playwright-core']}
 ---
 
+<img src="banner.png" width="100%" alt="mermaid-lint banner">
+
 # mermaid-lint
 
 A Mermaid diagram with a syntax error shows **"Unable to render rich display"** on

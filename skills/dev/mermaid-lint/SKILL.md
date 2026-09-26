@@ -20,6 +20,8 @@ visibility: public
 dependencies: {'tools': ['node', 'git'], 'services': ['GitHub'], 'protocols': [], 'python': [], 'npm': ['mermaid', 'jsdom', 'playwright-core']}
 ---
 
+<img src="banner.png" width="100%" alt="mermaid-lint banner">
+
 # mermaid-lint
 
 Ein Mermaid-Diagramm mit Syntaxfehler zeigt auf GitHub statt der Grafik den Kasten
