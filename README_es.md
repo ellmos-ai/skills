@@ -11,12 +11,16 @@
 
 # ellmos skills
 
-**Documentación en seis idiomas** · [Contexto legible por máquinas](llms.txt)
+**Documentación en seis idiomas** · [Contexto legible por máquinas](llms.txt) · **🗺️ [Explora la biblioteca de skills online](https://ellmos-ai.github.io/skills.html)** — lee y copia cualquier skill público en el navegador
 
 > Biblioteca portátil de skills de IA para flujos `SKILL.md` al estilo Claude Code, configuraciones de agentes compatibles con Codex, BACH y otros entornos de agentes LLM local-first.
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![Licencia: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Skills: 120 registrados](https://img.shields.io/badge/Skills-120%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Organización: ellmos-ai](https://img.shields.io/badge/organizaci%C3%B3n-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
+[![Paraguas: open-bricks](https://img.shields.io/badge/paraguas-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Preparado para LLM: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -166,19 +170,36 @@ python testing/skill_tester.py batch --type static --ci
 
 Con [pre-commit](https://pre-commit.com/) instalado, activa el hook con `pre-commit install`.
 
+### Evaluaciones externas
+
+Evaluaciones A/B independientes de terceros sobre skills concretos, referenciadas
+aquí a medida que están disponibles (no ejecutadas ni encargadas por este proyecto):
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), probado el 2026-08-08 en Gemini-3.6-flash, 22 casos: tasa de acierto 22,7 % -> 95,5 % (+73pp), -14 % tokens, seguridad 15/15 comprobaciones (3/3).
+
 ## Contexto de búsqueda
 
 Usa la cadena canónica `ellmos-ai/skills` al enlazar o indexar el proyecto. Es un catálogo reutilizable, no un servidor MCP, un SaaS, un marketplace ni un instalador de skills privados.
 
 ## Proyectos relacionados
 
-| Proyecto | Función |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | Sistema operativo textual completo para LLM |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Infraestructura ligera de agentes local-first |
-| [USMC](https://github.com/ellmos-ai/usmc) | Primitiva de memoria compartida |
-| [Gardener](https://github.com/ellmos-ai/gardener) | Contraparte basada en base de datos |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | Framework para cadenas de LLM |
+| Proyecto | Organización | Función |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Sistema operativo textual completo para LLM |
+| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Primitivas de runtime central y plataforma de ejecución |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Servidor MCP unificado de herramientas y perfiles |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Composición de flotas de agentes y exploración del sistema |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Despachador transaccional de hooks de flujo de trabajo |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Sincronización offline-first y retención de snapshots |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | Framework de automatización local-first para cadenas de agentes LLM |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | Índice de memoria curado multi-fuente para sistemas agénticos |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | Memoria SQLite local y contexto compartido entre agentes |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Suite de estación de trabajo para desarrolladores de escritorio |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Editor de código multilenguaje y entorno sandbox |
+
+Skills de terceros seleccionados en `skills/third-party/` (`grill-me`, `grilling`)
+están bajo la licencia MIT del repositorio original
+[mattpocock/skills](https://github.com/mattpocock/skills).
 
 ## Licencia y responsabilidad
 

@@ -11,12 +11,16 @@
 
 # ellmos skills
 
-**6 言語のドキュメント** · [機械可読コンテキスト](llms.txt)
+**6 言語のドキュメント** · [機械可読コンテキスト](llms.txt) · **🗺️ [スキルライブラリをオンラインで閲覧](https://ellmos-ai.github.io/skills.html)** — ブラウザですべての公開スキルを閲覧・コピー
 
 > Claude Code 形式の `SKILL.md` ワークフロー、Codex 対応のエージェント構成、BACH、その他の local-first LLM エージェント環境向けのポータブル AI スキルライブラリです。
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![ライセンス: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Skills: 120](https://img.shields.io/badge/Skills-120%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
+[![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![LLM Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -160,17 +164,33 @@ python testing/skill_tester.py batch --type static --ci
 
 [pre-commit](https://pre-commit.com/) を利用する場合は `pre-commit install` で hook を有効にします。
 
+### 外部評価
+
+個別スキルに関する独立した第三者による A/B 評価。利用可能になり次第ここに掲載する
+（本プロジェクトが実施・依頼したものではない）：
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols)、2026-08-08 に Gemini-3.6-flash で 22 ケースをテスト：合格率 22.7% -> 95.5%（+73pp）、トークン -14%、セキュリティ 15/15 チェック（3/3）。
+
 ## 検索と関連プロジェクト
 
 リンクや索引には正規名 `ellmos-ai/skills` を使用してください。このプロジェクトは再利用可能なカタログであり、MCP サーバー、SaaS、marketplace、非公開スキルの installer ではありません。
 
-| プロジェクト | 役割 |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | テキストベースの完全な LLM OS |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | 軽量 local-first エージェント基盤 |
-| [USMC](https://github.com/ellmos-ai/usmc) | 共有メモリ基盤 |
-| [Gardener](https://github.com/ellmos-ai/gardener) | データベース型 OS 対応物 |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | LLM チェーン実行フレームワーク |
+| プロジェクト | 組織 | 役割 |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | テキストベースの完全な LLM OS |
+| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | コアランタイムプリミティブと実行基盤 |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | 統合ツール・プロファイルゲートウェイ MCP サーバー |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | エージェントフリート構成とシステム探索 |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | トランザクション型ワークフローフックディスパッチャー |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | オフラインファーストの転送同期とスナップショット保持 |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | 自律 LLM エージェントチェーン向けのローカルファースト自動化フレームワーク |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | エージェント系システム向けのキュレート済みクロスソースメモリインデックス |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | ローカル SQLite メモリとエージェント間コンテキスト共有 |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | デスクトップ開発者ワークステーションスイート |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | 多言語コードエディタとサンドボックス環境 |
+
+`skills/third-party/` にキュレートされたサードパーティスキル（`grill-me`、`grilling`）は、
+アップストリームの [mattpocock/skills](https://github.com/mattpocock/skills) から MIT ライセンスで提供されています。
 
 ## ライセンスと責任
 
