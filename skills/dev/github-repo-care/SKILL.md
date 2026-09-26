@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -65,6 +65,22 @@ rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|
 
 Bei öffentlichen Modulen zusätzlich ein `RELEASE_GATE.md` oder äquivalentes Gate dokumentieren: Datum, geprüfte Befehle, Ergebnis, Restwarnungen und bewusste Ausnahmen. Wenn ein Secret jemals committed wurde, reicht Löschen aus `HEAD` nicht; das Secret muss rotiert werden.
 
+**Verlinkte Repos auf Sichtbarkeit prüfen.** Ein Pfad-/Token-Scan findet keine
+Links auf private GitHub-Repos in öffentlichen READMEs (Lehrfall
+T-20260926-820252321: `ellmos-ai/ellmos-core` stand unbemerkt in einer
+README-Tabelle, obwohl das Repo privat ist). Falls im Repo vorhanden, den
+wiederverwendbaren Check laufen lassen:
+
+```bash
+python testing/repo_link_visibility_gate.py --repo .
+```
+
+Der Check ist fail-open bei Unsicherheit (Netzwerkausfall, Rate-Limit, 404 --
+alles nur ein Hinweis, kein Abbruch) und blockiert nur bei einem bestätigten
+`private: true`. Ohne dieses Script (Repo hat keinen eigenen Klon des Checks):
+mit `gh api repos/ORG/REPO --jq .private` jeden im README verlinkten Fremd-
+oder Geschwister-Repo-Link stichprobenartig prüfen.
+
 ## GitHub-Metadaten
 
 Nach dem Push Metadaten und Release explizit setzen.
@@ -114,6 +130,12 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 - [ ] Banner vorhanden? `org_profile_gate.py --org <org>` lief ohne Fund für dieses Repo.
 
 ## Changelog
+
+### 1.2.0 (2026-09-26)
+- Neuer Privacy-Gate-Schritt (T-20260926-820252321): verlinkte GitHub-Repos auf
+  Sichtbarkeit prüfen (`testing/repo_link_visibility_gate.py --repo .`, fail-open bei
+  Netzwerk/Rate-Limit/404, blockiert nur bei bestätigtem `private: true`). Anlass:
+  `ellmos-ai/ellmos-core` (privates Repo) stand unbemerkt in einer README-Tabelle.
 
 ### 1.1.0 (2026-09-26)
 - Added the "Publish ⇒ Profilseite" step (T-20260926-796851315): a repo with a banner must be

@@ -66,6 +66,8 @@ testing/*
 !testing/test_metadata.py
 !testing/repo_privacy_gate.py
 !testing/test_repo_privacy_gate.py
+!testing/repo_link_visibility_gate.py
+!testing/test_repo_link_visibility_gate.py
 !testing/org_profile_gate.py
 !testing/test_org_profile_gate.py
 tools/

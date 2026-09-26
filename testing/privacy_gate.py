@@ -29,9 +29,39 @@ from build_public_registry import (  # noqa: E402
     THIRD_PARTY_AREAL,
     effective_visibility,
 )
+from testing import repo_link_visibility_gate  # noqa: E402
 from testing import repo_privacy_gate as generic_privacy  # noqa: E402
 
 concrete_home_matches = generic_privacy.concrete_home_matches
+
+# Files carrying deliberately fictional org/repo names as test fixtures --
+# real repos that never existed on GitHub, so an unauthenticated 404 lookup
+# correctly (but uselessly) treats them as "not public". These are not the
+# public docs the gate exists to protect; excluded the same way
+# CONTENT_SCAN_EXCLUSIONS excludes this gate's own detection-pattern files.
+LINK_VISIBILITY_SCAN_EXCLUSIONS = {
+    "testing/test_repo_link_visibility_gate.py",
+    "skills/dev/community-outreach/scripts/init_outreach_workspace.py",
+    "skills/dev/community-outreach/tests/test_community_outreach.py",
+    "skills/dev/community-outreach/tests/test_runtime_projection.py",
+}
+
+# Module-level cache so a single gate run only computes this once, shared
+# between run_gate() (blocking findings) and main() (non-blocking warnings) --
+# see repo_link_visibility_gate.py docstring for why unknown-visibility is a
+# warning, never a blocker (T-20260926-820252321).
+_LINK_VISIBILITY_RESULT: tuple[list[str], list[str]] | None = None
+
+
+def _link_visibility_check() -> tuple[list[str], list[str]]:
+    global _LINK_VISIBILITY_RESULT
+    if _LINK_VISIBILITY_RESULT is None:
+        scan_paths = [
+            path for path in tracked_text_files()
+            if path.relative_to(REPOSITORY_ROOT).as_posix() not in LINK_VISIBILITY_SCAN_EXCLUSIONS
+        ]
+        _LINK_VISIBILITY_RESULT = repo_link_visibility_gate.run_gate(REPOSITORY_ROOT, scan_paths)
+    return _LINK_VISIBILITY_RESULT
 
 ALLOWED_TRACKED_IGNORED: set[str] = set()
 
@@ -285,6 +315,8 @@ def run_gate() -> list[str]:
             errors.append(f"{relative}: {finding}")
     errors.extend(visibility_consistency_errors(set(tracked)))
     errors.extend(third_party_errors(set(tracked)))
+    link_findings, _link_warnings = _link_visibility_check()
+    errors.extend(link_findings)
     return errors
 
 
@@ -367,6 +399,9 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     errors = run_gate()
+    _link_findings, link_warnings = _link_visibility_check()
+    for warning in link_warnings:
+        print(f"WARNING (non-blocking): {warning}")
     if errors:
         print("Privacy gate failed:")
         for error in errors:
