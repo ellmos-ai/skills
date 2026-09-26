@@ -27,6 +27,12 @@ sie in einer Fassung AUSSERHALB der Markierung, ist das kein Konflikt.
 
 Sprachcode einer Datei wird aus dem Dateinamen abgeleitet: `README.md` -> `en`,
 `README_de.md`/`README-de.md` -> `de`, usw. (Gross-/Kleinschreibung egal).
+Regionscodes werden erhalten und auf Bindestrich normalisiert:
+`README_zh-CN.md` und `README_zh_CN.md` liefern beide `zh-cn`.
+
+Ein lang-only-Code, der zu KEINER der uebergebenen Dateien passt (z.B. Tippfehler
+`cn` statt `zh`), wird fail-closed als Befund gemeldet -- der Link wird NICHT
+still freigestellt, sondern die Markierung selbst gilt als verdaechtig.
 
 ## Link-Formate
 
@@ -69,13 +75,17 @@ _BADGE_HOSTS = ("img.shields.io", "shields.io")
 
 
 def file_lang(path: Path) -> str:
-    """Leitet den Sprachcode einer Datei aus ihrem Namen ab (README.md -> en)."""
+    """Leitet den Sprachcode einer Datei aus ihrem Namen ab (README.md -> en).
+
+    Regionscodes bleiben erhalten und werden auf Bindestrich normalisiert:
+    README_zh-CN.md und README_zh_CN.md liefern beide "zh-cn".
+    """
     stem = path.stem
     if stem.lower() == "readme":
         return "en"
-    m = re.match(r"readme[_-](\w+)$", stem, re.IGNORECASE)
+    m = re.match(r"readme[_-](.+)$", stem, re.IGNORECASE)
     if m:
-        return m.group(1).lower()
+        return m.group(1).replace("_", "-").lower()
     return stem.lower()
 
 
@@ -123,7 +133,25 @@ def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
         per_file_tagged_links[p] = {link for _, links in tagged for link in links}
         lang_of[p] = file_lang(p)
 
+    known_langs = set(lang_of.values())
     conflicts: list[str] = []
+
+    # 0) Fail-closed: ein lang-only-Code, der zu keiner uebergebenen Datei
+    #    passt (Tippfehler wie "cn" statt "zh"), wird gemeldet statt den
+    #    betroffenen Link stillschweigend freizustellen.
+    reported_unknown: set[str] = set()
+    for p in paths:
+        for codes, block_links in per_file_tagged[p]:
+            for code in sorted(codes - known_langs):
+                if code in reported_unknown:
+                    continue
+                reported_unknown.add(code)
+                conflicts.append(
+                    f"lang-only-Code '{code}' in {p.name} passt zu keiner "
+                    f"uebergebenen Sprachfassung ({sorted(known_langs)}) -- "
+                    f"Tippfehler? Link(s) {sorted(block_links)} wurden NICHT "
+                    f"freigestellt."
+                )
 
     # 1) Unmarkierter Inhalt: muss in ALLEN uebergebenen Dateien vorkommen.
     all_untagged: set[str] = set()

@@ -18,6 +18,24 @@ def test_file_lang_infers_from_filename(tmp_path: Path) -> None:
     assert clp.file_lang(Path("README-zh.md")) == "zh"
 
 
+def test_file_lang_recognizes_region_code(tmp_path: Path) -> None:
+    assert clp.file_lang(Path("README_zh-CN.md")) == "zh-cn"
+    assert clp.file_lang(Path("README_zh_CN.md")) == "zh-cn"
+
+
+def test_lang_only_unknown_code_is_reported_fail_closed(tmp_path: Path) -> None:
+    en = _write(
+        tmp_path,
+        "README.md",
+        "<!-- lang-only: cn -->\n[Skills宝](https://skilery.com)\n<!-- /lang-only -->",
+    )
+    zh = _write(tmp_path, "README_zh.md", "Kein Skills-Link hier.")
+    conflicts = clp.check_parity([en, zh])
+    assert len(conflicts) == 1
+    assert "lang-only-Code 'cn'" in conflicts[0]
+    assert "skilery.com" in conflicts[0]
+
+
 def test_identical_links_no_conflict(tmp_path: Path) -> None:
     en = _write(tmp_path, "README.md", "See [docs](https://example.com/docs).")
     de = _write(tmp_path, "README_de.md", "Siehe [Doku](https://example.com/docs).")

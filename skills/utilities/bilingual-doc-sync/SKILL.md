@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.0
+version: 1.2.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -193,6 +193,13 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.2.1 (2026-09-26)
+- `scripts/check_language_parity.py`: ein lang-only-Code, der zu keiner der
+  uebergebenen Sprachfassungen passt (z.B. Tippfehler `cn` statt `zh`), wird
+  jetzt fail-closed als Befund gemeldet statt den Link still freizustellen.
+- Dateinamen mit Regionscode werden jetzt als Sprache erkannt:
+  `README_zh-CN.md` und `README_zh_CN.md` liefern beide `zh-cn`.
 
 ### 1.2.0 (2026-09-26)
 - Schritt 0 „Einsprachigen Inhalt erkennen" ergänzt (T-20260926-967984806): Divergenz kann
