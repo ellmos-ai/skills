@@ -263,6 +263,7 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | Deterministic 3-role session-end hygiene loop (Tasksolver, Writer, Maintainer): solves pending trivial tasks without agenda creep, syncs documentation to measured truth, and archives strays reversibly. |
 | <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Asynchronous human-in-the-loop pipelining: while the user tests item N live, the agent pre-launches item N+1 and delegates fix workers for item N-1, eliminating idle wait times. |
 | <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantic filesystem cleanup using Cut-and-Clue: separates active from legacy files with machine-readable pointer clues at the source, preserving taxonomies and audit logs. |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | Reduces large candidate lists step by step through optional topic pools, filter stages, and repeatedly reshuffled bundles -- for selecting, filtering, or mixing skills, tasks, ideas, or files in groups without permanently discarding the rest. |
 
 <a id="publicprivate-boundary"></a>
 ## Public/Private Boundary
