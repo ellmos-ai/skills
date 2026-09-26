@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-09-26
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.
 
@@ -67,6 +67,22 @@ rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|
 
 For public modules, also document a `RELEASE_GATE.md` or equivalent gate: date, checked commands, result, remaining warnings, and intentional exceptions. If a secret was ever committed, deleting it from `HEAD` is not enough; rotate the secret.
 
+**Check linked repos for visibility.** A path/token scan does not find links
+to private GitHub repos in public READMEs (reference case
+T-20260926-820252321: `ellmos-ai/ellmos-core` sat unnoticed in a README
+table even though that repo is private). If present in the repo, run the
+reusable check:
+
+```bash
+python testing/repo_link_visibility_gate.py --repo .
+```
+
+The check fails open on uncertainty (network outage, rate limit, 404 --
+all of these are only a hint, never a block) and only blocks on a confirmed
+`private: true`. Without this script (repo has no copy of the check): spot-
+check every sibling/third-party repo link in the README with
+`gh api repos/ORG/REPO --jq .private`.
+
 ## GitHub Metadata
 
 After the push, set metadata and release data explicitly.
@@ -116,6 +132,13 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Changelog
+
+### 1.2.0 (2026-09-26)
+- New privacy-gate step (T-20260926-820252321): check linked GitHub repos for
+  visibility (`testing/repo_link_visibility_gate.py --repo .`, fails open on
+  network/rate-limit/404, only blocks on a confirmed `private: true`).
+  Reference case: `ellmos-ai/ellmos-core` (a private repo) sat unnoticed in a
+  README table.
 
 ### 1.1.0 (2026-09-26)
 - Added the "Publish ⇒ profile page" step (T-20260926-796851315): a repo with a banner must be
