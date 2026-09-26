@@ -233,6 +233,14 @@ def _registry_link(url: object, label: str | None = None) -> str:
     return f"[{label or _registry_cell(url)}]({url})"
 
 
+def _fenced_cell(value: object) -> str:
+    """Escape text for embedding inside a ```text fence: break any run of
+    3+ backticks so foreign content (e.g. a quoted Reddit comment) can't
+    close the fence early and inject markdown/HTML into the document."""
+    text = str(value if value is not None else "")
+    return re.sub(r"`{3,}", lambda m: "​".join(m.group()), text)
+
+
 def _atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
@@ -639,14 +647,14 @@ class CommunityOutreachEngine:
         if content and not content.endswith("\n"):
             content += "\n"
         return content + f"""
-### [{record['post_id']}] Veröffentlicht am {record.get('date', '')} ({record.get('platform', '')})
-- **Ziel-URL:** [{record.get('target_url', '')}]({record.get('target_url', '')})
-- **Veröffentlichungsbeleg:** [{record.get('platform_post_id', '')}]({record.get('published_url', '')})
-- **Lösungs-Repo:** `{record.get('repo', '')}`
+### [{_registry_cell(record['post_id'])}] Veröffentlicht am {_registry_cell(record.get('date', ''))} ({_registry_cell(record.get('platform', ''))})
+- **Ziel-URL:** {_registry_link(record.get('target_url', ''))}
+- **Veröffentlichungsbeleg:** {_registry_link(record.get('published_url', ''), _registry_cell(record.get('platform_post_id', '')))}
+- **Lösungs-Repo:** `{_registry_cell(record.get('repo', ''))}`
 - **Status:** veroeffentlicht (Beleg verifiziert)
 - **Veröffentlichter Text:**
 ```text
-{record.get('content', '')}
+{_fenced_cell(record.get('content', ''))}
 ```
 
 """
