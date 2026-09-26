@@ -100,7 +100,12 @@ FORBIDDEN_INTERNAL_FILENAME_PATTERNS = {
     "agent daily-care runbook": re.compile(r"(?i)(?:^|/)[A-Z0-9_]*_DAILY_CARE\.md$"),
     "agent task-status snapshot": re.compile(r"(?i)(?:^|/)TASKPLAN_STATUS_.*\.md$"),
     "release/store internal state doc": re.compile(r"(?i)(?:^|/)STORE_(?:CONTRACT|READINESS)\.md$"),
-    "build/packaging staging directory": re.compile(r"(?i)(?:^|/)_(?:WARTUNG|STAGING)/"),
+    # Narrowed 2026-09-26 (T-20260926-510472849 rollout): a bare _WARTUNG/
+    # match also caught legitimate maintenance SCRIPTS some repos keep there
+    # (generate_store_screenshots.py, check_store_readiness.py) -- only the
+    # "staging" subpath (copied build output: msix_staging/, AppxManifest,
+    # icons) is the actual build artifact this pattern targets.
+    "build/packaging staging directory": re.compile(r"(?i)(?:^|/)_STAGING/|(?:^|/)_WARTUNG/[^/]*staging[^/]*/"),
 }
 
 
