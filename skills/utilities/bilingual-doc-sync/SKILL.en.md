@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.0
+version: 1.2.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -188,6 +188,23 @@ Task: "Check if the paper in DE and EN is synchronized."
 - `workflow-extract` — When this check should be set up as a standing automation.
 
 ## Changelog
+
+### 1.2.2 (2026-09-26)
+- `scripts/check_language_parity.py`: prefix rule for lang-only codes — a
+  base code (e.g. `zh`) now also covers its region variants (`zh-cn`,
+  `zh-tw`); the reverse does not hold.
+- The fail-closed check for a lang-only code now compares against ALL
+  README files in the directory, not just the supplied subset — a call
+  with only two of six versions no longer triggers a false alarm. A valid
+  code with no file in THIS call now yields only a note (no Exit 1); a
+  genuinely unknown code (a typo like `cn` instead of `zh`) still exits 1.
+
+### 1.2.1 (2026-09-26)
+- `scripts/check_language_parity.py`: a lang-only code that matches none of
+  the supplied language versions (e.g. a typo like `cn` instead of `zh`) is
+  now reported fail-closed instead of silently scoping the link away.
+- Filenames with a region code are now recognized as a language:
+  `README_zh-CN.md` and `README_zh_CN.md` both yield `zh-cn`.
 
 ### 1.2.0 (2026-09-26)
 - Added Step 0 "Detect Single-Language Content" (T-20260926-967984806): divergence can be

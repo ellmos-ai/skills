@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.0
+version: 1.2.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -193,6 +193,25 @@ Tarea: "Comprobar si el artículo está sincronizado en DE y EN."
 - `workflow-extract` — Cuando esta comprobación deba configurarse como una automatización permanente.
 
 ## Registro de Cambios (Changelog)
+
+### 1.2.2 (2026-09-26)
+- `scripts/check_language_parity.py`: regla de prefijo para códigos
+  lang-only — un código base (p. ej. `zh`) ahora también cubre sus
+  variantes regionales (`zh-cn`, `zh-tw`); lo contrario no aplica.
+- La comprobación fail-closed de un código lang-only ahora se compara con
+  TODOS los archivos README del directorio, no solo con el subconjunto
+  proporcionado — una llamada con solo dos de seis versiones ya no genera
+  una falsa alarma. Un código válido sin archivo en ESTA llamada ahora solo
+  produce un aviso (sin Exit 1); un código realmente desconocido (una
+  errata como `cn` en lugar de `zh`) sigue terminando en Exit 1.
+
+### 1.2.1 (2026-09-26)
+- `scripts/check_language_parity.py`: un código lang-only que no coincide con
+  ninguna de las versiones de idioma proporcionadas (p. ej. una errata como
+  `cn` en lugar de `zh`) ahora se reporta de forma fail-closed en vez de
+  eximir el enlace silenciosamente.
+- Los nombres de archivo con código de región ahora se reconocen como
+  idioma: `README_zh-CN.md` y `README_zh_CN.md` producen ambos `zh-cn`.
 
 ### 1.2.0 (2026-09-26)
 - Añadido el Paso 0 "Detectar contenido en un solo idioma" (T-20260926-967984806): la

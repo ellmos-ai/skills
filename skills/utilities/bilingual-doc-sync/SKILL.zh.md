@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.0
+version: 1.2.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -163,6 +163,23 @@ provenance:
 - `workflow-extract` — 当需要将此检查设置为常驻自动化流程时使用。
 
 ## 变更日志 (Changelog)
+
+### 1.2.2 (2026-09-26)
+- `scripts/check_language_parity.py`：为 lang-only 代码新增前缀规则——
+  基础代码（如 `zh`）现在也覆盖其地区变体（`zh-cn`、`zh-tw`）；反过来则
+  不成立。
+- lang-only 代码的失败关闭（fail-closed）检查现在会与目录中所有 README
+  文件比较，而不仅仅是本次调用传入的子集——仅传入六个版本中的两个也不
+  会再触发误报。若某代码有效但本次调用未包含对应文件，现在只会给出提
+  示（不触发 Exit 1）；真正未知的代码（例如把 `zh` 误写成 `cn`）仍然会
+  以 Exit 1 结束。
+
+### 1.2.1 (2026-09-26)
+- `scripts/check_language_parity.py`：与任何已提供语言版本都不匹配的
+  lang-only 代码（例如把 `zh` 误写成 `cn`）现在会以失败关闭
+  （fail-closed）的方式报告为问题，而不是悄悄将该链接排除在检查之外。
+- 带有地区代码的文件名现在也能被识别为语言：`README_zh-CN.md` 和
+  `README_zh_CN.md` 都会得到 `zh-cn`。
 
 ### 1.2.0 (2026-09-26)
 - 新增第0步"识别仅存在于单一语言版本的内容"（T-20260926-967984806）：差异可能是尚未传
