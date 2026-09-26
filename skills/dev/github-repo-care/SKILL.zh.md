@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -51,7 +51,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-car
 11. **提交并推送。** 仅在隐私关口检查通过后才进行 Commit 提交。然后创建或关联 GitHub 仓库，执行 Push 推送，并验证远端状态。
 12. **设置元数据。** 检查描述 (description)、主题标签 (topics)、主页 (homepage)、可见性 (visibility) 和默认分支 (default branch)。
 13. **创建 Release 发布。** 创建 Tag 标签和 GitHub Release；验证分支和 Tag 的 CI 状态。
-14. **更新入口与展示面。** 从组织主页、`llms.txt`、中央注册表、本地模块索引以及生态系统 README 中进行链接关联。
+14. **更新入口与展示面。** 从组织主页、`llms.txt`、中央注册表、本地模块索引以及生态系统 README 中进行链接关联。**发布 ⇒ 组织主页（T-20260926-796851315）：** 若仓库带有 Banner，需机械化检查它是否已出现在组织主页（`<org>/.github/profile/README.md`）上 —— `python org_profile_gate.py --org <org>`（`.AI/.SKILLS/testing/`）。若缺失，脚本会生成一段可直接粘贴的 Markdown 片段。
 15. **最终验证。** 检查远端 README、Release 页面、Topics 标签、CI 状态和链接。
 
 ## 隐私关口 (Privacy Gate)
@@ -112,8 +112,15 @@ gh run list --repo ORG/REPO --limit 5
 - [ ] 隐私、路径、密钥、数据库和乱码扫描干净。
 - [ ] GitHub 描述、Topics 标签、Tag 标签、Release 和 CI 验证通过。
 - [ ] 组织主页、注册表和生态系统链接已更新。
+- [ ] 是否有 Banner？针对此仓库运行 `org_profile_gate.py --org <org>` 无发现。
 
 ## 变更日志
+
+### 1.1.0 (2026-09-26)
+- 新增"发布 ⇒ 组织主页"步骤（T-20260926-796851315）：带 Banner 的仓库必须对照其组织主页 README
+  （`<org>/.github/profile/README.md`）进行检查，通过 `.AI/.SKILLS/testing/org_profile_gate.py`
+  机械化完成，而非依赖记忆。起因：zombie-killer-tray 的 Banner 在发布后一直未出现在
+  dev-bricks 组织主页上。
 
 ### 1.0.0 (2026-06-18)
 - 创建了初始仓库维护与发布协议。

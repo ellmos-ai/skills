@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-09-26
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links.
 
@@ -50,7 +50,7 @@ Bereite das Repository vor dem ersten öffentlichen Push vor. Eine korrekte `.gi
 11. **Committen und pushen.** Nur nach bestandenem Gate committen. Danach GitHub-Repo anlegen oder verbinden, pushen und Remote-Status prüfen.
 12. **Metadaten setzen.** Beschreibung, Topics, Homepage, Sichtbarkeit und Branch-Default prüfen.
 13. **Release erstellen.** Tag und GitHub-Release anlegen; CI für Branch und Tag prüfen.
-14. **Discovery-Flächen aktualisieren.** Organisationsprofil, `llms.txt`, zentrale Registries, lokale Modulindizes und Ökosystem-READMEs verlinken.
+14. **Discovery-Flächen aktualisieren.** Organisationsprofil, `llms.txt`, zentrale Registries, lokale Modulindizes und Ökosystem-READMEs verlinken. **Publish ⇒ Profilseite (T-20260926-796851315):** Hat das Repo ein Banner, prüfe mechanisch, ob es auf der Org-Profilseite (`<org>/.github/profile/README.md`) bereits auftaucht — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). Fehlt der Eintrag, liefert das Skript ein fertiges Markdown-Snippet zum Einfügen.
 15. **Abschluss prüfen.** Remote README, Release-Seite, Topics, CI und Links kontrollieren.
 
 ## Privacy-Gate
@@ -111,8 +111,15 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 - [ ] Privacy-, Pfad-, Secret-, Datenbank- und Mojibake-Scans sauber.
 - [ ] GitHub-Beschreibung, Topics, Tag, Release und CI verifiziert.
 - [ ] Organisationsprofil, Registry und Ökosystem-Links aktualisiert.
+- [ ] Banner vorhanden? `org_profile_gate.py --org <org>` lief ohne Fund für dieses Repo.
 
 ## Changelog
+
+### 1.1.0 (2026-09-26)
+- Added the "Publish ⇒ Profilseite" step (T-20260926-796851315): a repo with a banner must be
+  checked against its org's profile README (`<org>/.github/profile/README.md`), mechanically via
+  `.AI/.SKILLS/testing/org_profile_gate.py`, not left to memory. Anlass: zombie-killer-tray's
+  banner never made it onto the dev-bricks org page after publication.
 
 ### 1.0.0 (2026-06-18)
 - Initiale Version als Repository-Pflege- und Veröffentlichungsprotokoll erstellt.
