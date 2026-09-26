@@ -11,12 +11,16 @@
 
 # ellmos skills
 
-**Документация на шести языках** · [Машиночитаемый контекст](llms.txt)
+**Документация на шести языках** · [Машиночитаемый контекст](llms.txt) · **🗺️ [Просмотреть библиотеку skills онлайн](https://ellmos-ai.github.io/skills.html)** — читайте и копируйте любой публичный skill прямо в браузере
 
 > Переносимая библиотека AI skills для рабочих процессов `SKILL.md` в стиле Claude Code, конфигураций агентов Codex, BACH и других local-first сред LLM.
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![Лицензия: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Skills: 120](https://img.shields.io/badge/Skills-120%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
+[![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![LLM Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -156,17 +160,33 @@ python testing/skill_tester.py batch --type static --ci
 
 При использовании [pre-commit](https://pre-commit.com/) активируйте hook командой `pre-commit install`.
 
+### Внешние оценки
+
+Независимые сторонние A/B-оценки отдельных skills, приводятся здесь по мере
+появления (не проводятся и не заказываются этим проектом):
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), протестировано 2026-08-08 на Gemini-3.6-flash, 22 случая: доля успеха 22,7 % -> 95,5 % (+73pp), -14 % токенов, безопасность 15/15 проверок (3/3).
+
 ## Поиск и связанные проекты
 
 При ссылках и индексировании используйте каноническую строку `ellmos-ai/skills`. Это каталог, а не MCP-сервер, SaaS, marketplace или установщик приватных skills.
 
-| Проект | Роль |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | Полная текстовая LLM OS |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | Лёгкая local-first инфраструктура агентов |
-| [USMC](https://github.com/ellmos-ai/usmc) | Общий примитив памяти |
-| [Gardener](https://github.com/ellmos-ai/gardener) | Аналог на основе базы данных |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | Framework выполнения LLM-цепочек |
+| Проект | Организация | Роль |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Полная текстовая LLM OS |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Единый MCP-шлюз инструментов и профилей |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Композиция флота агентов и исследование системы |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Транзакционный диспетчер хуков рабочих процессов |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Офлайн-синхронизация транзита и хранение снапшотов |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | Локальный фреймворк автоматизации для цепочек автономных LLM-агентов |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | Курируемый кросс-источниковый индекс памяти для агентных систем |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | Локальная память SQLite и обмен контекстом между агентами |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Набор для рабочей станции разработчика |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Многоязычный редактор кода и песочница |
+
+Отобранные сторонние skills в `skills/third-party/` (`grill-me`, `grilling`)
+распространяются по лицензии MIT из исходного репозитория
+[mattpocock/skills](https://github.com/mattpocock/skills).
 
 ## Лицензия и ответственность
 

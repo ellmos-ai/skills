@@ -364,6 +364,13 @@ Wenn [pre-commit](https://pre-commit.com/) installiert ist, wird der Repository-
 Hook einmalig mit `pre-commit install` aktiviert. Vor einem Commit prüft er mit
 demselben Gate nur die geänderten `SKILL.md`-Dateien.
 
+### Externe Bewertungen
+
+Unabhängige Drittanbieter-A/B-Bewertungen einzelner Skills, hier referenziert
+sobald verfügbar (nicht von diesem Projekt durchgeführt oder beauftragt):
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), getestet 2026-08-08 auf Gemini-3.6-flash, 22 Fälle: Erfolgsquote 22,7 % -> 95,5 % (+73pp), -14 % Tokens, Sicherheit 15/15 Checks (3/3).
+
 <a id="suchkontext"></a>
 ## Suchkontext
 
@@ -389,11 +396,13 @@ Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte desha
 | Projekt | Organisation | Rolle |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Vollständiges textbasiertes LLM-Betriebssystem |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Kern-Laufzeitprimitive und Ausführungsplattform |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Zentrales Werkzeug- und Profil-Gateway MCP-Server |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Agentenflotten-Komposition und Systemexploration |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Transaktionaler Workflow-Hook-Dispatcher |
 | [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Offline-First Transitsynchronisation & Snapshot-Retention |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | Lokales Automatisierungs-Framework für autonome LLM-Agentenketten |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | Kuratierter Cross-Source-Gedächtnisindex für agentische Systeme |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | Lokales SQLite-Gedächtnis und Cross-Agent-Kontextaustausch |
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop-Entwickler-Workstation-Suite |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Mehrsprachiger Code-Editor & Sandbox-Umgebung |
 

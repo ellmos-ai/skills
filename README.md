@@ -401,11 +401,13 @@ The name is intentionally generic, so use the canonical repository string `ellmo
 | Project | Organization | Role |
 |---|---|---|
 | [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | Full text-based LLM operating system |
-| [ellmos-core](https://github.com/ellmos-ai/ellmos-core) | `ellmos-ai` | Core runtime primitives and execution fabric |
 | [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | Unified tool and profile gateway MCP server |
 | [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | Agent fleet composition and system exploration |
 | [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | Transactional workflow hook dispatcher |
 | [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | Offline-first transit sync and snapshot retention |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | Local-first automation framework for autonomous LLM agent chains |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | Curated cross-source memory index for agentic systems |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | Local SQLite memory and cross-agent context sharing |
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop developer workstation suite |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Multi-language code editor and sandbox environment |
 

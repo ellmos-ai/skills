@@ -11,12 +11,16 @@
 
 # ellmos skills
 
-**六种语言的文档** · [机器可读上下文](llms.txt)
+**六种语言的文档** · [机器可读上下文](llms.txt) · **🗺️ [在线浏览 skill 库](https://ellmos-ai.github.io/skills.html)** — 在浏览器中阅读并复制每一个公开 skill
 
 > 面向 Claude Code 风格 `SKILL.md` 工作流、兼容 Codex 的智能体配置、BACH 以及其他 local-first LLM 智能体运行环境的可移植 AI skill 库。
 
+[![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![许可证: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Skills: 120](https://img.shields.io/badge/Skills-120%20Tracked-brightgreen.svg)](SKILLS-MAP.md)
+[![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
+[![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
+[![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![LLM Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 
 > [!NOTE]
@@ -160,17 +164,31 @@ python testing/skill_tester.py batch --type static --ci
 
 如果使用 [pre-commit](https://pre-commit.com/)，请运行 `pre-commit install` 启用 hook。
 
+### 外部评估
+
+针对单个 skill 的独立第三方 A/B 评估，随可用性在此列出（并非本项目自行开展或委托）：
+
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols)，于 2026-08-08 在 Gemini-3.6-flash 上测试，22 个案例：通过率 22.7% -> 95.5%（+73pp），token 减少 14%，安全性 15/15 项检查（3/3）。
+
 ## 搜索与相关项目
 
 链接或建立索引时请使用权威名称 `ellmos-ai/skills`。本项目是可复用目录，不是 MCP 服务器、SaaS、marketplace 或私有 skills 安装器。
 
-| 项目 | 作用 |
-|---|---|
-| [BACH](https://github.com/ellmos-ai/bach) | 完整的文本型 LLM 操作系统 |
-| [Rinnsal](https://github.com/ellmos-ai/rinnsal) | 轻量 local-first 智能体基础设施 |
-| [USMC](https://github.com/ellmos-ai/usmc) | 共享记忆基础组件 |
-| [Gardener](https://github.com/ellmos-ai/gardener) | 基于数据库的操作系统对应项目 |
-| [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun) | LLM 链执行框架 |
+| 项目 | 组织 | 作用 |
+|---|---|---|
+| [BACH](https://github.com/ellmos-ai/bach) | `ellmos-ai` | 完整的文本型 LLM 操作系统 |
+| [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | `ellmos-ai` | 统一的工具与配置文件网关 MCP 服务器 |
+| [system-explorer](https://github.com/ellmos-ai/system-explorer) | `ellmos-ai` | 智能体集群组合与系统探索 |
+| [workflowhooker](https://github.com/ellmos-ai/workflowhooker) | `ellmos-ai` | 事务性工作流钩子调度器 |
+| [sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | `ellmos-ai` | 离线优先的传输同步与快照保留 |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | `ellmos-ai` | 面向自主 LLM 智能体链的本地优先自动化框架 |
+| [gardener](https://github.com/ellmos-ai/gardener) | `ellmos-ai` | 面向智能体系统的策展式跨来源记忆索引 |
+| [usmc](https://github.com/ellmos-ai/usmc) | `ellmos-ai` | 本地 SQLite 记忆与跨智能体上下文共享 |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | 桌面开发者工作站套件 |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | 多语言代码编辑器与沙盒环境 |
+
+`skills/third-party/` 中精选的第三方 skill（`grill-me`、`grilling`）依据上游
+[mattpocock/skills](https://github.com/mattpocock/skills) 的 MIT 许可证提供。
 
 ## 许可证与责任
 
