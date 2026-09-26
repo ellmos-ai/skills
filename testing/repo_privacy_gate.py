@@ -85,6 +85,24 @@ CONTENT_PATTERNS = {
 WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
 POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")
 
+# Internal agent/process filenames that must never be tracked in ANY repo,
+# public or private (T-20260926-510472849): they are agent working notes, not
+# project content, and existing checks only catch a handful of exact names
+# (GITHUB-POLICY.md SS3) -- a slightly renamed sibling (STORE_CONTRACT.md next
+# to the already-forbidden STORE_READINESS.md) walks straight past an exact
+# match. These are patterns, not a fixed list, so a new "<X>-LOG.txt" or
+# "<X>_STATUS_*.md" convention is caught without editing this file again.
+# Genuinely useful project docs (CI_CONTRACT.md, PRODUCT_BOUNDARIES.md) are
+# deliberately NOT here -- they document behavior for readers, not agent state.
+FORBIDDEN_INTERNAL_FILENAME_PATTERNS = {
+    "agent findings log": re.compile(r"(?i)(?:^|/)BEFUNDE\.md$"),
+    "agent marketing/status log": re.compile(r"(?i)(?:^|/)[A-Z0-9_-]*(?:MARKETING|STATUS)-LOG\.txt$"),
+    "agent daily-care runbook": re.compile(r"(?i)(?:^|/)[A-Z0-9_]*_DAILY_CARE\.md$"),
+    "agent task-status snapshot": re.compile(r"(?i)(?:^|/)TASKPLAN_STATUS_.*\.md$"),
+    "release/store internal state doc": re.compile(r"(?i)(?:^|/)STORE_(?:CONTRACT|READINESS)\.md$"),
+    "build/packaging staging directory": re.compile(r"(?i)(?:^|/)_(?:WARTUNG|STAGING)/"),
+}
+
 
 def git_lines(repo_root: Path, *arguments: str) -> list[str]:
     completed = subprocess.run(
@@ -160,6 +178,9 @@ def run_generic_gate(
         pattern = CONTENT_PATTERNS["host-scoped device name"]
         if pattern.search(relative):
             errors.append(f"{relative}: host-scoped device name in tracked path")
+        for label, forbidden in FORBIDDEN_INTERNAL_FILENAME_PATTERNS.items():
+            if forbidden.search(relative):
+                errors.append(f"{relative}: {label} -- must not be tracked (git rm --cached, add to .gitignore)")
     for path in tracked_text_files(repo_root, content_scan_exclusions):
         relative = path.relative_to(repo_root).as_posix()
         for finding in content_findings(path):

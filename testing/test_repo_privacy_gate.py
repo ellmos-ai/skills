@@ -93,6 +93,38 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
                 any("host-scoped local development path" in e for e in errors)
             )
 
+    def test_forbidden_internal_filenames_are_found(self) -> None:
+        """T-20260926-510472849: agent-internal files must never be tracked,
+        even under a name that isn't the exact match GITHUB-POLICY.md lists."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "BEFUNDE.md").write_text("intern\n", encoding="utf-8")
+            (root / "MARKETING-LOG.txt").write_text("intern\n", encoding="utf-8")
+            (root / "STORE_CONTRACT.md").write_text("intern\n", encoding="utf-8")
+            (root / "_WARTUNG").mkdir()
+            (root / "_WARTUNG" / "staged.txt").write_text("x\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            joined = "\n".join(errors)
+            self.assertIn("BEFUNDE.md: agent findings log", joined)
+            self.assertIn("MARKETING-LOG.txt: agent marketing/status log", joined)
+            self.assertIn("STORE_CONTRACT.md: release/store internal state doc", joined)
+            self.assertIn("_WARTUNG/staged.txt: build/packaging staging directory", joined)
+
+    def test_legitimate_contract_docs_are_not_flagged(self) -> None:
+        """CI_CONTRACT.md / PRODUCT_BOUNDARIES.md document behavior for
+        readers, not agent state -- they must stay unflagged (see the
+        FORBIDDEN_INTERNAL_FILENAME_PATTERNS docstring note)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "CI_CONTRACT.md").write_text("The CI workflow ...\n", encoding="utf-8")
+            (root / "PRODUCT_BOUNDARIES.md").write_text("Product A vs B ...\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            self.assertEqual([], errors)
+
     def test_non_git_directory_is_skipped_not_failed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             completed = subprocess.run(
