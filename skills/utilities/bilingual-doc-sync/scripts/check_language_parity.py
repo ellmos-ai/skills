@@ -30,9 +30,26 @@ Sprachcode einer Datei wird aus dem Dateinamen abgeleitet: `README.md` -> `en`,
 Regionscodes werden erhalten und auf Bindestrich normalisiert:
 `README_zh-CN.md` und `README_zh_CN.md` liefern beide `zh-cn`.
 
-Ein lang-only-Code, der zu KEINER der uebergebenen Dateien passt (z.B. Tippfehler
-`cn` statt `zh`), wird fail-closed als Befund gemeldet -- der Link wird NICHT
-still freigestellt, sondern die Markierung selbst gilt als verdaechtig.
+## Praefix-Regel + fail-closed-Pruefung
+
+Ein Basis-Code deckt seine Regionsvarianten mit ab: `lang-only: zh` gilt auch
+fuer `README_zh-CN.md`/`README_zh-TW.md` -- umgekehrt deckt ein regionsspezifischer
+Code wie `zh-cn` NICHT die blosse Basis `zh` ab (einseitige Praefixregel).
+
+Ob ein Code "erfunden" wirkt (Tippfehler wie `cn` statt `zh`), wird gegen ALLE
+README-Dateien im selben Verzeichnis geprueft -- nicht nur gegen die in diesem
+Aufruf uebergebene Teilmenge. So loest ein Teilmengen-Aufruf (z.B. nur
+`README.md README_de.md`, waehrend `README_zh.md` real existiert) keinen
+Fehlalarm aus. Ein Code gilt als gueltig, wenn er (a) BCP-47-artig ist
+(`ll` oder `ll-rr`, wobei ein `ll-rr`-Code sich selbst traegt) UND zu einer
+README-Sprachdatei im Verzeichnis passt (Praefixregel), ODER (b) selbst
+regionsspezifisch geschrieben ist (`ll-rr`) -- das gilt als Absichtserklaerung,
+auch ohne bereits vorhandene Datei. Ein gueltiger Code ohne passende Datei unter
+den UEBERGEBENEN Argumenten ergibt nur einen Hinweis (kein Exit 1) -- die Datei
+war schlicht nicht Teil dieses Aufrufs. Passt der Code dagegen zu KEINER Datei
+im Verzeichnis und ist selbst nicht regionsspezifisch (z.B. `cn`), gilt er als
+wirklich ungueltig und wird als Befund mit Exit 1 gemeldet -- der Link wird
+NICHT still freigestellt.
 
 ## Link-Formate
 
@@ -72,6 +89,7 @@ _LANG_ONLY_BLOCK = re.compile(
     re.DOTALL,
 )
 _BADGE_HOSTS = ("img.shields.io", "shields.io")
+_LANG_CODE_REGION = re.compile(r"^[a-z]{2,3}-[a-z]{2}$")
 
 
 def file_lang(path: Path) -> str:
@@ -91,6 +109,36 @@ def file_lang(path: Path) -> str:
 
 def _is_badge_url(link: str) -> bool:
     return any(host in link for host in _BADGE_HOSTS)
+
+
+def _code_covers(code: str, lang: str) -> bool:
+    """Praefixregel: ein Basis-Code (z.B. "zh") deckt seine Regionsvarianten
+    ab ("zh-cn", "zh-tw"). Ein regionsspezifischer Code ("zh-cn") deckt NUR
+    sich selbst ab, nicht die Basis "zh" -- die Regel ist einseitig."""
+    return lang == code or lang.startswith(code + "-")
+
+
+def _dir_known_langs(paths: list[Path]) -> set[str]:
+    """Sprachcodes aller README*.md-Dateien im (den) Elternverzeichnis(sen)
+    der uebergebenen Pfade -- nicht nur der in diesem Aufruf uebergebenen
+    Teilmenge. Damit erkennt die fail-closed-Pruefung einen Code als gueltig,
+    auch wenn die passende Datei bei einem Teilmengen-Aufruf nicht dabei war."""
+    langs: set[str] = set()
+    seen_dirs: set[Path] = set()
+    for p in paths:
+        d = p.parent
+        if d in seen_dirs:
+            continue
+        seen_dirs.add(d)
+        try:
+            entries = list(d.iterdir())
+        except OSError:
+            continue
+        for entry in entries:
+            name = entry.name.lower()
+            if name.startswith("readme") and name.endswith(".md"):
+                langs.add(file_lang(entry))
+    return langs
 
 
 def _find_links(text: str) -> set[str]:
@@ -116,9 +164,13 @@ def extract_links(path: Path) -> tuple[set[str], list[tuple[set[str], set[str]]]
     return untagged, tagged
 
 
-def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
-    """Liefert eine Konfliktzeile je Link, der nicht in allen dafuer relevanten
-    Dateien vorkommt."""
+def check_parity(
+    paths: list[Path], include_badges: bool = False
+) -> tuple[list[str], list[str]]:
+    """Liefert (conflicts, notes). `conflicts` sind Exit-1-wuerdige Befunde,
+    `notes` sind rein informative Hinweise ohne Einfluss auf den Exit-Code
+    (z.B. ein gueltiger lang-only-Code, dessen Datei bei einem Teilmengen-
+    Aufruf schlicht nicht mit uebergeben wurde)."""
     per_file_untagged: dict[Path, set[str]] = {}
     per_file_tagged: dict[Path, list[tuple[set[str], set[str]]]] = {}
     per_file_tagged_links: dict[Path, set[str]] = {}
@@ -133,25 +185,39 @@ def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
         per_file_tagged_links[p] = {link for _, links in tagged for link in links}
         lang_of[p] = file_lang(p)
 
-    known_langs = set(lang_of.values())
+    dir_known_langs = _dir_known_langs(paths)
     conflicts: list[str] = []
+    notes: list[str] = []
 
-    # 0) Fail-closed: ein lang-only-Code, der zu keiner uebergebenen Datei
-    #    passt (Tippfehler wie "cn" statt "zh"), wird gemeldet statt den
-    #    betroffenen Link stillschweigend freizustellen.
-    reported_unknown: set[str] = set()
+    # 0) Ein lang-only-Code wird gegen ALLE README-Dateien im Verzeichnis
+    #    geprueft (nicht nur die uebergebene Teilmenge), mit Praefixregel
+    #    (Basis-Code deckt Regionsvarianten ab). Passt er zu nichts und ist
+    #    selbst nicht regionsspezifisch, ist er wirklich ungueltig (Tippfehler
+    #    wie "cn" statt "zh") -- fail-closed als Befund, Exit 1. Passt er zu
+    #    einer Verzeichnisdatei, die in DIESEM Aufruf nur nicht dabei war,
+    #    ist das ein reiner Hinweis ohne Exit 1.
+    reported: set[str] = set()
     for p in paths:
         for codes, block_links in per_file_tagged[p]:
-            for code in sorted(codes - known_langs):
-                if code in reported_unknown:
+            for code in sorted(codes):
+                if code in reported:
                     continue
-                reported_unknown.add(code)
-                conflicts.append(
-                    f"lang-only-Code '{code}' in {p.name} passt zu keiner "
-                    f"uebergebenen Sprachfassung ({sorted(known_langs)}) -- "
-                    f"Tippfehler? Link(s) {sorted(block_links)} wurden NICHT "
-                    f"freigestellt."
-                )
+                reported.add(code)
+                covers_dir = any(_code_covers(code, dl) for dl in dir_known_langs)
+                is_region_code = bool(_LANG_CODE_REGION.match(code))
+                if not covers_dir and not is_region_code:
+                    conflicts.append(
+                        f"lang-only-Code '{code}' in {p.name} passt zu keiner "
+                        f"README-Datei im Verzeichnis ({sorted(dir_known_langs)}) -- "
+                        f"Tippfehler? Link(s) {sorted(block_links)} wurden NICHT "
+                        f"freigestellt."
+                    )
+                elif not any(_code_covers(code, lang_of[q]) for q in paths):
+                    notes.append(
+                        f"lang-only-Code '{code}' in {p.name} passt zu keiner der "
+                        f"in diesem Aufruf uebergebenen Dateien -- vermutlich nur "
+                        f"nicht Teil dieses Teilmengen-Aufrufs, kein Fehler."
+                    )
 
     # 1) Unmarkierter Inhalt: muss in ALLEN uebergebenen Dateien vorkommen.
     all_untagged: set[str] = set()
@@ -164,7 +230,8 @@ def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
             conflicts.append(f"{link}: vorhanden in {present}, fehlt in {missing}")
 
     # 2) lang-only-markierter Inhalt: nur relevant fuer Dateien, deren Sprache
-    #    in der Markierung genannt ist.
+    #    vom Code abgedeckt wird (Praefixregel: "zh" deckt "zh-cn"/"zh-tw" ab,
+    #    umgekehrt gilt das nicht).
     seen: set[tuple[frozenset[str], str]] = set()
     for p in paths:
         for codes, block_links in per_file_tagged[p]:
@@ -173,7 +240,10 @@ def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
                 if key in seen:
                     continue
                 seen.add(key)
-                relevant = [q for q in paths if lang_of[q] in codes]
+                relevant = [
+                    q for q in paths
+                    if any(_code_covers(code, lang_of[q]) for code in codes)
+                ]
                 if not relevant:
                     continue
                 present = [q.name for q in relevant if link in per_file_tagged_links[q]]
@@ -185,7 +255,7 @@ def check_parity(paths: list[Path], include_badges: bool = False) -> list[str]:
                         f"fehlt in {missing}"
                     )
 
-    return conflicts
+    return conflicts, notes
 
 
 def main(argv: list[str]) -> int:
@@ -208,10 +278,13 @@ def main(argv: list[str]) -> int:
             return 2
 
     try:
-        conflicts = check_parity(paths, include_badges=include_badges)
+        conflicts, notes = check_parity(paths, include_badges=include_badges)
     except UnicodeDecodeError as exc:
         print(f"FEHLER: Datei nicht als UTF-8 lesbar ({exc}).", file=sys.stderr)
         return 2
+
+    for note in notes:
+        print(f"HINWEIS: {note}")
 
     if not conflicts:
         print(f"OK: {len(paths)} Fassungen haben identische Link-Menge (Schritt-0-Rauchtest).")

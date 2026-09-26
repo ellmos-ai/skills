@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.1
+version: 1.2.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -174,6 +174,17 @@ provenance:
 - `workflow-extract` — このチェックを常駐自動化として設定する場合。
 
 ## 変更履歴 (Changelog)
+
+### 1.2.2 (2026-09-26)
+- `scripts/check_language_parity.py`：lang-only コードのプレフィックス
+  ルール — ベースコード（例：`zh`）は、そのリージョンバリアント
+  （`zh-cn`、`zh-tw`）もカバーするようになった。逆方向は成立しない。
+- lang-only コードのフェイルクローズド判定は、渡されたサブセットだけで
+  なく、ディレクトリ内のすべての README ファイルと比較されるように
+  なった — 6 バージョンのうち 2 つだけを渡す呼び出しでも、誤検知は起き
+  なくなった。今回の呼び出しにファイルが無いだけの有効なコードは、単な
+  る注意事項（Exit 1 なし）として扱われる。本当に不明なコード（`zh` の
+  代わりに `cn` と誤記した場合など）は引き続き Exit 1 となる。
 
 ### 1.2.1 (2026-09-26)
 - `scripts/check_language_parity.py`：どの提供言語バージョンにも一致しない
