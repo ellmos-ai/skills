@@ -121,6 +121,22 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
                 any("MARKETING-LOG.txt: agent marketing/status log" in w for w in warnings)
             )
 
+    def test_runtime_daily_care_doc_is_warn_only(self) -> None:
+        """RUNTIME_DAILY_CARE.md (SoftwareCenter): a real, README-linked
+        migration/ops contract doc, not agent scratch state (team-lead
+        correction 2026-09-26) -- must warn, never block."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "RUNTIME_DAILY_CARE.md").write_text("contract\n", encoding="utf-8")
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            self.assertNotIn("agent daily-care runbook", "\n".join(errors))
+            warnings = repo_privacy_gate.warning_findings(root)
+            self.assertTrue(
+                any("RUNTIME_DAILY_CARE.md: agent daily-care runbook" in w for w in warnings)
+            )
+
     def test_legitimate_contract_docs_are_not_flagged(self) -> None:
         """CI_CONTRACT.md / PRODUCT_BOUNDARIES.md document behavior for
         readers, not agent state -- they must stay unflagged (see the

@@ -115,7 +115,13 @@ FORBIDDEN_INTERNAL_FILENAME_PATTERNS = {
 # project.urls."Marketing Log" and a dedicated test asserting its presence --
 # not an accidental agent leak. Whether the convention continues is a user
 # decision, not something this gate enforces by failing CI.
-WARN_ONLY_LABELS = {"agent marketing/status log"}
+WARN_ONLY_LABELS = {
+    "agent marketing/status log",
+    # RUNTIME_DAILY_CARE.md (SoftwareCenter): a real, triple-linked migration/
+    # ops contract doc, not agent scratch state (team-lead correction 2026-09-26,
+    # matching internal_file_push_guard.py sha 5410800).
+    "agent daily-care runbook",
+}
 
 
 def git_lines(repo_root: Path, *arguments: str) -> list[str]:
