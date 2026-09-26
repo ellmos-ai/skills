@@ -632,6 +632,15 @@ class CommunityOutreachEngine:
             if self.publisher is None or not callable(getattr(self.publisher, "publish", None)):
                 results.append({"id": proposal["id"], "status": "needs-action", "reason": "publisher-unavailable"})
                 continue
+            # A publisher bound to one specific proposal (e.g. FileReceiptPublisher, T-20260926-
+            # 665406367) must be skipped WITHOUT consuming a cycle-limit slot for every OTHER
+            # approved proposal -- otherwise a bound receipt that isn't first in the queue gets
+            # "deferred: cycle-limit" instead of being applied, and the already-real evidence of
+            # that post is lost (merge-reviewer finding). Checked before counting an attempt.
+            bound_id = getattr(self.publisher, "proposal_id", None)
+            if bound_id is not None and bound_id != proposal["id"]:
+                results.append({"id": proposal["id"], "status": "needs-action", "reason": "publisher-unbound"})
+                continue
             if publisher_attempts >= max_posts:
                 results.append({"id": proposal["id"], "status": "deferred", "reason": "cycle-limit"})
                 continue

@@ -1460,6 +1460,42 @@ def test_file_receipt_publisher_refuses_a_receipt_for_a_different_proposal(
     assert "publisher-error" in results[0]["reason"]
 
 
+def test_bound_publisher_does_not_consume_cycle_limit_on_unbound_proposals(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    """merge-reviewer finding: an unbound proposal must not count against max_posts_per_cycle.
+
+    Two approved proposals, the bound one SECOND. With max_posts_per_cycle=1 (the default),
+    the old code counted an attempt for P-1 (the unbound one) before publish() even ran and
+    raised -- so P-2, the one with the real receipt, hit "deferred: cycle-limit" and its
+    already-real evidence was lost. Must be red without the fix.
+    """
+    from outreach_engine import FileReceiptPublisher
+
+    target_1 = "https://example.com/thread-1"
+    target_2 = "https://example.com/thread-2"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n"
+        + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target_1)
+        + proposal_block("OUTBOUND-PROPOSAL-P-2", approved=True, target_url=target_2),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-2",
+        **verified_receipt("t1_abc123", target_2),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-2")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    by_id = {r["id"]: r for r in results}
+    assert by_id["OUTBOUND-PROPOSAL-P-1"]["status"] == "needs-action", by_id
+    assert by_id["OUTBOUND-PROPOSAL-P-1"]["reason"] == "publisher-unbound"
+    assert by_id["OUTBOUND-PROPOSAL-P-2"]["status"] == "published", by_id
+    assert by_id["OUTBOUND-PROPOSAL-P-2"]["receipt"] == "t1_abc123"
+
+
 def test_file_receipt_publisher_missing_file_fails_closed(temp_workspace: Path, tmp_path: Path) -> None:
     from outreach_engine import FileReceiptPublisher
 
