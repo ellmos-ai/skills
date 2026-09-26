@@ -641,8 +641,15 @@ class CommunityOutreachEngine:
 
     @staticmethod
     def _append_outbox_record(content: str, record: Mapping[str, Any]) -> str:
-        marker = f"### [{record['post_id']}]"
-        if marker in content:
+        # Marker must match the ESCAPED heading actually written below (a raw
+        # post_id containing _ * ` < > | never matches its own escaped header
+        # again -> duplicate append on every re-finalize/recovery run), and
+        # must only match real H3 headings outside fenced code blocks (a
+        # quoted "### [ID]" inside the fenced published text -- e.g. someone
+        # replying with an excerpt of a previous entry -- would otherwise
+        # spoof-suppress a genuinely new entry with the same id).
+        marker = f"### [{_registry_cell(record['post_id'])}]"
+        if any(line.startswith(marker) for _, line in _markdown_h3_headings(content)):
             return content
         if content and not content.endswith("\n"):
             content += "\n"

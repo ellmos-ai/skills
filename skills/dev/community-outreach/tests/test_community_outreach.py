@@ -1270,6 +1270,40 @@ def test_outbox_record_escapes_fence_breakout_and_markdown() -> None:
     assert "[tool](evil)" not in rendered  # markdown link syntax in repo name is escaped
 
 
+def test_outbox_record_dedup_survives_special_characters_in_post_id() -> None:
+    """Regression: the dedup marker must be built from the ESCAPED post_id
+    (matching the escaped heading actually written), not the raw one -- a
+    raw id containing e.g. an underscore never matches its own escaped
+    heading again, causing a duplicate append on every re-finalize/recovery
+    run (reported on PR #31, head a1e5e13)."""
+    record = _history_entry(1, post_id="OUTBOUND-PROPOSAL-A_B")
+
+    once = outreach_engine.CommunityOutreachEngine._append_outbox_record("", record)
+    twice = outreach_engine.CommunityOutreachEngine._append_outbox_record(once, record)
+
+    assert twice == once
+    assert twice.count("Veröffentlicht am") == 1
+
+
+def test_outbox_record_dedup_ignores_a_spoofed_heading_inside_a_fence() -> None:
+    """Regression: 'marker in content' was a raw substring search over the
+    WHOLE file, including the content of fenced code blocks. A published
+    text that itself quotes a heading line ("### [ZED] ...") would then
+    suppress a later, genuinely new entry with the same post_id (reported on
+    PR #31, head a1e5e13). The dedup check must only look at real H3
+    headings outside fences."""
+    quoting_record = _history_entry(1, post_id="AAA", content="Someone quoted:\n### [ZED] Veröffentlicht am irgendwann")
+    outbox = outreach_engine.CommunityOutreachEngine._append_outbox_record("", quoting_record)
+    assert "Veröffentlicht am irgendwann" in outbox  # the quote is preserved as content
+
+    real_record = _history_entry(2, post_id="ZED", content="the real reply")
+    outbox = outreach_engine.CommunityOutreachEngine._append_outbox_record(outbox, real_record)
+
+    # Before the fix, the fenced quote's "### [ZED] ..." line made a bare
+    # 'marker in content' substring check believe ZED was already present.
+    assert "the real reply" in outbox
+
+
 @pytest.mark.parametrize("args", [["--rebuild-registry"], ["--process-approvals"], ["--full-run"]])
 def test_unreadable_history_is_an_error_and_nothing_is_overwritten(temp_workspace: Path, args: list[str]) -> None:
     (temp_workspace / "posts_history.json").write_text("{kaputt", encoding="utf-8")
