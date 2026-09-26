@@ -233,6 +233,14 @@ def _registry_link(url: object, label: str | None = None) -> str:
     return f"[{label or _registry_cell(url)}]({url})"
 
 
+def _fenced_cell(value: object) -> str:
+    """Escape text for embedding inside a ```text fence: break any run of
+    3+ backticks so foreign content (e.g. a quoted Reddit comment) can't
+    close the fence early and inject markdown/HTML into the document."""
+    text = str(value if value is not None else "")
+    return re.sub(r"`{3,}", lambda m: "​".join(m.group()), text)
+
+
 def _atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
@@ -633,20 +641,27 @@ class CommunityOutreachEngine:
 
     @staticmethod
     def _append_outbox_record(content: str, record: Mapping[str, Any]) -> str:
-        marker = f"### [{record['post_id']}]"
-        if marker in content:
+        # Marker must match the ESCAPED heading actually written below (a raw
+        # post_id containing _ * ` < > | never matches its own escaped header
+        # again -> duplicate append on every re-finalize/recovery run), and
+        # must only match real H3 headings outside fenced code blocks (a
+        # quoted "### [ID]" inside the fenced published text -- e.g. someone
+        # replying with an excerpt of a previous entry -- would otherwise
+        # spoof-suppress a genuinely new entry with the same id).
+        marker = f"### [{_registry_cell(record['post_id'])}]"
+        if any(line.startswith(marker) for _, line in _markdown_h3_headings(content)):
             return content
         if content and not content.endswith("\n"):
             content += "\n"
         return content + f"""
-### [{record['post_id']}] Veröffentlicht am {record.get('date', '')} ({record.get('platform', '')})
-- **Ziel-URL:** [{record.get('target_url', '')}]({record.get('target_url', '')})
-- **Veröffentlichungsbeleg:** [{record.get('platform_post_id', '')}]({record.get('published_url', '')})
-- **Lösungs-Repo:** `{record.get('repo', '')}`
+### [{_registry_cell(record['post_id'])}] Veröffentlicht am {_registry_cell(record.get('date', ''))} ({_registry_cell(record.get('platform', ''))})
+- **Ziel-URL:** {_registry_link(record.get('target_url', ''))}
+- **Veröffentlichungsbeleg:** {_registry_link(record.get('published_url', ''), _registry_cell(record.get('platform_post_id', '')))}
+- **Lösungs-Repo:** `{_registry_cell(record.get('repo', ''))}`
 - **Status:** veroeffentlicht (Beleg verifiziert)
 - **Veröffentlichter Text:**
 ```text
-{record.get('content', '')}
+{_fenced_cell(record.get('content', ''))}
 ```
 
 """
