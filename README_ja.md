@@ -65,8 +65,6 @@ flowchart TD
 | 公開変更を確認する | [`CHANGELOG.md`](CHANGELOG.md) |
 | LLM 向けの短い地図を読む | [`llms.txt`](llms.txt) |
 
-中国語ユーザーは [Skills宝](https://skilery.com) からスキルを検索・インストールすることもできます。
-
 ## カタログ概要
 
 公開カタログには 120 の実行用スキルがあります。
