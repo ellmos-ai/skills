@@ -1409,6 +1409,142 @@ def test_phase3_org_allow_defaults_from_constructor(tmp_path: Path) -> None:
     assert result["stage"] == 1
 
 
+# --- Posting je App: injizierbarer Datei-Receipt-Publisher, T-20260926-665406367 -----
+# Der eigentliche Post (open-compute/Playwright/Claude-in-Chrome/API) geschieht in der
+# Session der aufrufenden App VOR diesem Aufruf; dieser Publisher fuehrt selbst keine
+# Netzwerk-/Browseraktion aus, er reicht nur das schon eingesammelte Ergebnis weiter.
+
+def test_file_receipt_publisher_applies_a_matching_receipt(temp_workspace: Path, tmp_path: Path) -> None:
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-1",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert results == [{"id": "OUTBOUND-PROPOSAL-P-1", "status": "published", "receipt": "t1_abc123"}], results
+
+
+def test_file_receipt_publisher_refuses_a_receipt_for_a_different_proposal(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    """A receipt file bound to the wrong proposal id must never be applied to this one."""
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-SOME-OTHER-POST",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert len(results) == 1
+    assert results[0]["id"] == "OUTBOUND-PROPOSAL-P-1"
+    assert results[0]["status"] == "needs-action"
+    assert "publisher-error" in results[0]["reason"]
+
+
+def test_bound_publisher_does_not_consume_cycle_limit_on_unbound_proposals(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    """merge-reviewer finding: an unbound proposal must not count against max_posts_per_cycle.
+
+    Two approved proposals, the bound one SECOND. With max_posts_per_cycle=1 (the default),
+    the old code counted an attempt for P-1 (the unbound one) before publish() even ran and
+    raised -- so P-2, the one with the real receipt, hit "deferred: cycle-limit" and its
+    already-real evidence was lost. Must be red without the fix.
+    """
+    from outreach_engine import FileReceiptPublisher
+
+    target_1 = "https://example.com/thread-1"
+    target_2 = "https://example.com/thread-2"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n"
+        + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target_1)
+        + proposal_block("OUTBOUND-PROPOSAL-P-2", approved=True, target_url=target_2),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-2",
+        **verified_receipt("t1_abc123", target_2),
+    }), encoding="utf-8")
+
+    publisher = FileReceiptPublisher(receipt_file, "OUTBOUND-PROPOSAL-P-2")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    by_id = {r["id"]: r for r in results}
+    assert by_id["OUTBOUND-PROPOSAL-P-1"]["status"] == "needs-action", by_id
+    assert by_id["OUTBOUND-PROPOSAL-P-1"]["reason"] == "publisher-unbound"
+    assert by_id["OUTBOUND-PROPOSAL-P-2"]["status"] == "published", by_id
+    assert by_id["OUTBOUND-PROPOSAL-P-2"]["receipt"] == "t1_abc123"
+
+
+def test_file_receipt_publisher_missing_file_fails_closed(temp_workspace: Path, tmp_path: Path) -> None:
+    from outreach_engine import FileReceiptPublisher
+
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    publisher = FileReceiptPublisher(tmp_path / "does-not-exist.json", "OUTBOUND-PROPOSAL-P-1")
+    results = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+
+    assert results[0]["status"] == "needs-action"
+    assert "publisher-error" in results[0]["reason"]
+
+
+def test_cli_receipt_flags_must_be_given_together(temp_workspace: Path) -> None:
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--process-approvals", "--receipt-file", "somewhere.json", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+    assert completed.returncode == 1, completed.stdout + completed.stderr
+    assert json.loads(completed.stdout)["status"] == "error"
+
+
+def test_cli_process_approvals_with_receipt_file_publishes(temp_workspace: Path, tmp_path: Path) -> None:
+    target = "https://example.com/thread"
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n" + proposal_block("OUTBOUND-PROPOSAL-P-1", approved=True, target_url=target),
+        encoding="utf-8",
+    )
+    receipt_file = tmp_path / "receipt.json"
+    receipt_file.write_text(json.dumps({
+        "proposal_id": "OUTBOUND-PROPOSAL-P-1",
+        **verified_receipt("t1_abc123", target),
+    }), encoding="utf-8")
+
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS_DIR / "outreach_engine.py"), "--workspace", str(temp_workspace),
+         "--process-approvals", "--receipt-file", str(receipt_file),
+         "--receipt-proposal-id", "OUTBOUND-PROPOSAL-P-1", "--json"],
+        capture_output=True, text=True, encoding="utf-8", check=False,
+    )
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["outbound_results"] == [{"id": "OUTBOUND-PROPOSAL-P-1", "status": "published", "receipt": "t1_abc123"}]
+
+
 # --- Sicherheitsfund merge-reviewer (T-20260926-665406367): Stufe 3 umging das
 # Sichtbarkeits-Gate von select_candidate_repository und konnte private, archivierte,
 # geforkte oder nie synchronisierte Repos vorschlagen -- am gefaehrlichsten genau dann,
