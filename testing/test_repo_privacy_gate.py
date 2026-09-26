@@ -109,10 +109,17 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
             errors = repo_privacy_gate.run_generic_gate(root)
             joined = "\n".join(errors)
             self.assertIn("BEFUNDE.md: agent findings log", joined)
-            self.assertIn("MARKETING-LOG.txt: agent marketing/status log", joined)
             self.assertIn("STORE_CONTRACT.md: release/store internal state doc", joined)
             self.assertIn("_WARTUNG/msix_staging/AppxManifest.xml: build/packaging staging directory", joined)
             self.assertNotIn("_WARTUNG/generate_store_screenshots.py", joined)  # maintenance script, not staged output
+            # MARKETING-LOG.txt is WARN_ONLY (team-lead correction 2026-09-26): several
+            # repos wire it in deliberately (pyproject.toml project.url, a dedicated
+            # test) -- it must never fail CI, only surface as a hint.
+            self.assertNotIn("MARKETING-LOG.txt", joined)
+            warnings = repo_privacy_gate.warning_findings(root)
+            self.assertTrue(
+                any("MARKETING-LOG.txt: agent marketing/status log" in w for w in warnings)
+            )
 
     def test_legitimate_contract_docs_are_not_flagged(self) -> None:
         """CI_CONTRACT.md / PRODUCT_BOUNDARIES.md document behavior for
