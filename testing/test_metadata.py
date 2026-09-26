@@ -17,6 +17,7 @@ SKILL_VAL_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "skill-validation.y
 ASSIST_SCHEMA_PATH = REPOSITORY_ROOT / "schemas" / "assist-v1.schema.json"
 THIRD_PARTY_LICENSES_PATH = REPOSITORY_ROOT / "THIRD_PARTY_LICENSES.md"
 NOTICE_PATH = REPOSITORY_ROOT / "NOTICE"
+MARKETING_LOG_PATH = REPOSITORY_ROOT / "MARKETING-LOG.txt"
 
 
 class MetadataAndManifestParityTests(unittest.TestCase):
@@ -114,6 +115,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("Parent Organization", content)
         self.assertIn("Umbrella Ecosystem", content)
         self.assertIn("Third-Party Licenses", content)
+        self.assertIn("Marketing Log", content)
         self.assertIn("LLM Context", content)
 
     def test_llms_txt_header_and_parity(self) -> None:
@@ -129,6 +131,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("SECURITY.md", content)
         self.assertIn("NOTICE", content)
         self.assertIn("THIRD_PARTY_LICENSES.md", content)
+        self.assertIn("MARKETING-LOG.txt", content)
         self.assertIn("dev-bricks", content)
         self.assertIn("open-bricks", content)
 
@@ -143,6 +146,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("SECURITY.md", content)
             self.assertIn("NOTICE", content)
             self.assertIn("THIRD_PARTY_LICENSES.md", content)
+            self.assertIn("MARKETING-LOG.txt", content)
             self.assertIn("registry/components.json", content)
             self.assertIn("```mermaid", content)
             self.assertIn("1.4.4", content)
@@ -251,6 +255,18 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn(inv, content, f"Invariant {inv} missing in THIRD_PARTY_LICENSES.md")
             self.assertTrue(any(f"| **{inv}**" in line for line in content.splitlines()), f"Invariant table row missing for {inv}")
 
+    def test_marketing_log_parity(self) -> None:
+        self.assertTrue(MARKETING_LOG_PATH.is_file(), "MARKETING-LOG.txt missing")
+        content = MARKETING_LOG_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("Date: 2026-09-20", content)
+        self.assertIn("Version: 1.4.4", content)
+        self.assertIn("Pfad A Routine", content)
+        self.assertIn("Date: 2026-09-13", content)
+        self.assertIn("Version: 1.4.3", content)
+        self.assertIn("Pfad B Routine", content)
+        self.assertIn("High-Intent Keyword Matrix", content)
+        self.assertIn("10-Dimension Comparative Matrix", content)
 
     def test_ci_job_timeouts_and_concurrency_across_all_workflows(self) -> None:
         workflow_dir = REPOSITORY_ROOT / ".github" / "workflows"

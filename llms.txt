@@ -26,6 +26,7 @@ Author: Lukas Geiger
 - [SECURITY.md](https://github.com/ellmos-ai/skills/blob/master/SECURITY.md): Bilingual security policy, Zero-Egress guarantees, and privacy boundary enforcement.
 - [NOTICE](https://github.com/ellmos-ai/skills/blob/master/NOTICE): Formal copyright notice and open-source attribution.
 - [THIRD_PARTY_LICENSES.md](https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md): Third-party software inventory, zero-egress invariants, and 0% copyleft audit.
+- [MARKETING-LOG.txt](https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt): Discoverability initiatives, target personas, and comparative matrix logs.
 - [docs/CONVENTIONS.md](https://github.com/ellmos-ai/skills/blob/master/docs/CONVENTIONS.md): `SKILL.md` frontmatter specification.
 - [registry/components.json](https://github.com/ellmos-ai/skills/blob/master/registry/components.json): Machine-readable catalog index (category, version, provenance per skill).
 - [skills/](https://github.com/ellmos-ai/skills/tree/master/skills): Public skill catalog.

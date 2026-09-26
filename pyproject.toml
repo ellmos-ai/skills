@@ -58,6 +58,7 @@ Notice = "https://github.com/ellmos-ai/skills/blob/master/NOTICE"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
 "Third-Party Licenses" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md"
+"Marketing Log" = "https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt"
 "LLM Context" = "https://github.com/ellmos-ai/skills/blob/master/llms.txt"
 
 [tool.pytest.ini_options]

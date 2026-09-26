@@ -23,13 +23,14 @@
 [![Privacy: Zero-Egress](https://img.shields.io/badge/Privacy-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First-blue.svg)](SECURITY.md)
 [![Third-Party: Audited](https://img.shields.io/badge/Third--Party-Audited-brightgreen.svg)](THIRD_PARTY_LICENSES.md)
+[![Marketing Log: Active](https://img.shields.io/badge/Marketing%20Log-Active-blue.svg)](MARKETING-LOG.txt)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Public Skills: 142 Catalog](https://img.shields.io/badge/Public%20Skills-142%20Catalog-brightgreen.svg)](registry/components.json)
 [![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Notice: MIT](https://img.shields.io/badge/Notice-Attributed-blue.svg)](NOTICE)
-[![Last Checked: 2026-09-24](https://img.shields.io/badge/Last%20Checked-2026--09--24-informational.svg)](CHANGELOG.md)
+[![Last Checked: 2026-09-24](https://img.shields.io/badge/Last%20Checked-2026--09--24-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
