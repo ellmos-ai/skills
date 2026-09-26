@@ -1,10 +1,10 @@
 ---
 name: bilingual-doc-sync
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-30
+updated: 2026-09-26
 description: >
   Keep parallel language versions of a document (Paper DE/EN, README + README_de,
   SKILL.md + SKILL.en.md, website texts) synchronized: bring missing versions up to date,
@@ -54,6 +54,52 @@ upfront decision: **Which version is leading?** Without a lead language rule, ev
 becomes a case-by-case debate and the alignment process becomes non-repeatable.
 
 ## Workflow
+
+### 0. Detect Single-Language Content (BEFORE every alignment)
+
+Divergence is not always "outdated" — sometimes it is **new, genuine content that so far
+exists in only one version** (an external contribution/PR in a non-lead language, a change
+that landed in the secondary version first, or content loss through a history rewrite or
+similar). The original workflow only knew "enter it in EN or DE, then ship to all" — no
+case for content that exists in only one version. Reference case: `ellmos-ai/skills` PR #1
+added a Chinese-language discovery link only to README.md; a later history rewrite lost it
+again because no step checked whether content exists that has no counterpart in any other
+version (T-20260926-967984806).
+
+- **Check, don't assume:** Before the actual alignment (Step 3), diff against the last
+  known synchronized state (or directly against the other versions) and specifically look
+  for content that is new in ONE version and has no counterpart in ANY other — not just for
+  sections missing from the lead language.
+- **Tool:** `scripts/check_language_parity.py <file1> <file2> [...]` extracts Markdown AND
+  HTML links (`[text](url)`, `<a href="url">`, `<img src="url">`) from all supplied
+  versions (links stay unchanged across translation and are thus a robust,
+  language-independent indicator) and reports Exit 1 for any link that doesn't appear in
+  ALL versions. Exit 0 means: no link-subset mismatch found — not proof of full parity, but
+  a targeted Step-0 smoke test before the manual alignment. Links inside a
+  `<!-- lang-only: <code> -->` block are only checked against files whose language code is
+  named in the marker (detected from the filename, e.g. `README_zh.md` → `zh`, `README.md`
+  → `en`) — they don't count as "missing from the other versions" there. The script also
+  filters out `shields.io` badge URLs with encoded label text by default (the translated
+  label often sits directly in the URL — expected translation variance, not real content
+  loss; `--include-badges` turns the filter off). Non-UTF-8-readable files and missing
+  arguments exit with code 2 and an error message, not a traceback.
+- **Decision on a find:** single-language content is NEVER silently discarded. Three ways
+  out, none of them silent deletion:
+  (a) **translate and adopt into ALL versions** — the normal case for generally relevant
+  content;
+  (b) **deliberately scoped to one/several language(s)** ("lang-only") — when the content
+  only applies to that audience (reference case T-20260926-967984806: a Chinese-language
+  discovery link is not relevant to DE/ES/JA/RU readers; translating it into all six
+  versions was itself the mistake — user correction after the first version of this step).
+  Marker: **`<!-- lang-only: <code>[,<code>...] --> … <!-- /lang-only -->`** (HTML comment,
+  invisible in Markdown renderers; comma-separate for multiple target languages, e.g.
+  `zh,ja`). No established industry standard found for this narrow case (P-009 checked) —
+  HTML comments are the most portable, invisibly-rendering choice for Markdown. Marked
+  content is **neither translated nor reported as missing** during alignment;
+  (c) **escalate as a conflict** when it's unclear whether the content is still wanted
+  (e.g. seems to contradict the lead version) — ask the user/decision chain.
+  In all three cases: never remove content from the version where it lives without comment,
+  just because the others don't have it.
 
 ### 1. Inventory Check
 
@@ -142,6 +188,16 @@ Task: "Check if the paper in DE and EN is synchronized."
 - `workflow-extract` — When this check should be set up as a standing automation.
 
 ## Changelog
+
+### 1.2.0 (2026-09-26)
+- Added Step 0 "Detect Single-Language Content" (T-20260926-967984806): divergence can be
+  new, not-yet-propagated content rather than staleness; three ways out (translate
+  everywhere / mark lang-only / escalate as conflict), never silent deletion. New
+  `<!-- lang-only: <code> -->` marker for content deliberately scoped to an audience.
+- Added `scripts/check_language_parity.py` + `scripts/test_check_language_parity.py`: finds
+  links present in only a subset of language versions (Markdown and HTML links), respects
+  the lang-only marker, filters shields.io badge noise, exits with code 2 (not a traceback)
+  on non-UTF-8 files.
 
 ### 1.1.0 (2026-07-03)
 - Added expansion audit (evaluate i18n suitability, technical preparation, QA for

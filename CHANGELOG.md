@@ -2,6 +2,14 @@
 
 ## [Unreleased] - 2026-09-24
 
+- **Scope Skills宝 link to Chinese with a lang-only marker (T-20260926-967984806, follow-up)**:
+  Per user feedback, Skills宝 (skilery.com) is only relevant to Chinese users and should not
+  have been translated into all six language files (see the entry directly below). Removed
+  the translated copies from `README_de.md`/`README_es.md`/`README_ja.md`/`README_ru.md` and
+  wrapped the sentence in `README.md`/`README_zh.md` with a new, invisible
+  `<!-- lang-only: zh --> ... <!-- /lang-only -->` HTML-comment marker (no established single
+  standard exists for this narrow case). The `bilingual-doc-sync` skill's parity tooling
+  recognizes and respects this marker — see that skill's own changelog for details.
 - **Restore Skills宝 discovery link (T-20260926-967984806)**: The community-contributed
   line "Chinese users can also search and install skills through [Skills宝](https://skilery.com)"
   (PR #1, merged as `db3a117` on 2026-04-30) was lost during a full git history rewrite of
