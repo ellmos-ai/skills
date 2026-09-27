@@ -70,6 +70,8 @@ testing/*
 !testing/test_repo_link_visibility_gate.py
 !testing/org_profile_gate.py
 !testing/test_org_profile_gate.py
+!testing/readme_language_link_gate.py
+!testing/test_readme_language_link_gate.py
 !testing/skill_frontmatter_gate.py
 !testing/test_skill_frontmatter_gate.py
 tools/

@@ -90,34 +90,33 @@ flowchart TD
 
 | Skill | 特徴 |
 |---|---|
-| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.md) | スキルの監査、分類、調査、安全確認後の導入。 |
-| [`model-strategy`](skills/dev/model-strategy/SKILL.md) | Claude、Codex、Gemini、Ollama のモデルルーティング。 |
-| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | 既存プロジェクトを安全に整理する 6 段階手順。 |
-| [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | ルール、lock、privacy、i18n、release を含む公開ゲート。 |
-| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | 暗黙の hub を置かない MCP 検出・同期計画。 |
-| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | 動画字幕、文字起こし、メタデータの抽出。 |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Roblox Studio、Rojo、アセット安全確認。 |
-| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | 未決事項を番号付き選択肢と推奨に変換。 |
-| [`bugsweep`](skills/dev/bugsweep/SKILL.md) | 測定可能な目標と完了確認を持つバグ調査。 |
-| [`plugin-system`](skills/dev/plugin-system/SKILL.md) | 依存関係なしの Python プラグインシステム。 |
-| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | 言語版の欠落と構造ドリフトを検出。 |
-| [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | 文書規約が実際に行動を変えるか実証。 |
-| [`law-checker`](skills/utilities/law-checker/SKILL.md) | 出典に基づくドイツ法の初期案内。弁護士の代替ではありません。 |
-| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | ドイツの従業員経費用ローカルシート。税務助言ではありません。 |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | 目標、レベル、年齢に応じた教材生成。 |
-| [`research-agent`](skills/research/research-agent/SKILL.md) | PubMed と arXiv の再現可能な調査。 |
-| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | 選択された設定・ルール面の同期計画。 |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | 選択したルール面を読み込む中立ブリッジ。 |
+| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.ja.md) | スキルの監査、分類、調査、安全確認後の導入。 |
+| [`model-strategy`](skills/dev/model-strategy/SKILL.ja.md) | Claude、Codex、Gemini、Ollama のモデルルーティング。 |
+| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.ja.md) | 既存プロジェクトを安全に整理する 6 段階手順。 |
+| [`github-repo-care`](skills/dev/github-repo-care/SKILL.ja.md) | ルール、lock、privacy、i18n、release を含む公開ゲート。 |
+| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.ja.md) | 暗黙の hub を置かない MCP 検出・同期計画。 |
+| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.ja.md) | 動画字幕、文字起こし、メタデータの抽出。 |
+| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.ja.md) | Roblox Studio、Rojo、アセット安全確認。 |
+| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.ja.md) | 未決事項を番号付き選択肢と推奨に変換。 |
+| [`bugsweep`](skills/dev/bugsweep/SKILL.ja.md) | 測定可能な目標と完了確認を持つバグ調査。 |
+| [`plugin-system`](skills/dev/plugin-system/SKILL.ja.md) | 依存関係なしの Python プラグインシステム。 |
+| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.ja.md) | 言語版の欠落と構造ドリフトを検出。 |
+| [`law-checker`](skills/utilities/law-checker/SKILL.ja.md) | 出典に基づくドイツ法の初期案内。弁護士の代替ではありません。 |
+| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.ja.md) | ドイツの従業員経費用ローカルシート。税務助言ではありません。 |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ja.md) | 目標、レベル、年齢に応じた教材生成。 |
+| [`research-agent`](skills/research/research-agent/SKILL.ja.md) | PubMed と arXiv の再現可能な調査。 |
+| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.ja.md) | 選択された設定・ルール面の同期計画。 |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.ja.md) | 選択したルール面を読み込む中立ブリッジ。 |
 | [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.ja.md) | readback と rollback を備えた自動化保守。 |
 | [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.ja.md) | 役割、専門家、endpoint、persona、権限を分離。 |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.ja.md) | 個人プロファイルを公開せず、許可済み選好モデルを構築する公開モジュール。 |
-| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | 外部サービス不要の開発自動化パイプライン。 |
-| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | チャット残留物と AI 開示レベルを処理。 |
-| [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | 停滞した問題から案を抽出する複合手法。 |
-| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.md) | 会話から再利用可能なスキルを抽出。 |
-| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.md) | 会話や既存 prompt を反復可能な workflow に変換。 |
-| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | ローカルモデルと RAG を持つポータブル環境を作成。 |
-| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | 求人分析、履歴書、LinkedIn、応募文を支援。 |
+| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.ja.md) | 外部サービス不要の開発自動化パイプライン。 |
+| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.ja.md) | チャット残留物と AI 開示レベルを処理。 |
+| [`idea-mining`](skills/utilities/idea-mining/SKILL.ja.md) | 停滞した問題から案を抽出する複合手法。 |
+| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.ja.md) | 会話から再利用可能なスキルを抽出。 |
+| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.ja.md) | 会話や既存 prompt を反復可能な workflow に変換。 |
+| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.ja.md) | ローカルモデルと RAG を持つポータブル環境を作成。 |
+| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.ja.md) | 求人分析、履歴書、LinkedIn、応募文を支援。 |
 | [`therapy/`](skills/therapy/) | 倫理境界を持つ心理教育と対話手法のコレクション。 |
 
 ## 公開領域と非公開領域
@@ -134,11 +133,11 @@ flowchart TD
 
 | Skill | 内容 |
 |---|---|
-| [`academic-study-control`](skills/education/academic-study-control/SKILL.md) | 学期、期限、登録、通知を出典確認付きで管理。 |
-| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.md) | 目標、要点、用語集、応用、想起練習の学習サイクル。 |
-| [`academic-study-test`](skills/education/academic-study-test/SKILL.md) | rubric 付き試験練習。実試験支援は禁止。 |
+| [`academic-study-control`](skills/education/academic-study-control/SKILL.ja.md) | 学期、期限、登録、通知を出典確認付きで管理。 |
+| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.ja.md) | 目標、要点、用語集、応用、想起練習の学習サイクル。 |
+| [`academic-study-test`](skills/education/academic-study-test/SKILL.ja.md) | rubric 付き試験練習。実試験支援は禁止。 |
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.ja.md) | ユーザー中立の授業・支援計画。個人報告書は生成しません。 |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | 学習目標とレベルに応じたワークシート。 |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ja.md) | 学習目標とレベルに応じたワークシート。 |
 
 ## リポジトリ構造
 
