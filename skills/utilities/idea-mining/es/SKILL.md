@@ -5,7 +5,7 @@ description: Extraer ideas, filtrar contra el historial y explorar una hasta com
 
 > **Español** — Versión oficial en español de `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
+<img src="../banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Extraer ideas, filtrar, ejecutar una
 

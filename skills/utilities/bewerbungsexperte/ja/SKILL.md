@@ -21,7 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **日本語** — `bewerbungsexperte` の公式日本語版。
 
 
-<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
+<img src="../banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1 (日本語)
 
 > 次のキャリアステップのための戦略的パートナー。

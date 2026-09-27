@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
+<img src="../banner.png" width="100%" alt="trauma-psychoeducation banner">
 
 > **中文** — `trauma-psychoeducation` 官方中文版本。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psy
 
 > 关于创伤、创伤后应激反应及容受窗的知识：理解对异常事件的正常反应 — 仅限心理教育，严禁创伤加工
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

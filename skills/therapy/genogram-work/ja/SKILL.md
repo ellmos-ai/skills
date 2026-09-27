@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="genogram-work banner">
+<img src="../banner.png" width="100%" alt="genogram-work banner">
 
 > **日本語** — `genogram-work` の公式日本語版。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_
 
 > 家族の関係性パターンの把握とリフレクション：多世代的視点、ジェノグラム記号、パターン認識、家族史におけるリソース
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 ---
 

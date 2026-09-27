@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="systemic-questioning banner">
+<img src="../banner.png" width="100%" alt="systemic-questioning banner">
 
 > **日本語** — `systemic-questioning` の公式日本語版。
 
@@ -236,7 +236,7 @@ AIアシスタントが行ってはならないこと：
 - 急性クライシス時に質問のみで対応すること（安定化が最優先）
 - 精神的に脆弱な状態にある対象に悪化の質問を使用すること
 
-参照: [ETHICS.md](../ETHICS.md)
+参照: [ETHICS.md](../../ETHICS.md)
 
 **急性クライシス時には、必ず以下への相談を案内してください：**
 - 日本: こころの健康相談統一ダイヤル 0570-064-556 / よりそいホットライン 0120-279-338

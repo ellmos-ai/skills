@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="systemic-questioning banner">
+<img src="../banner.png" width="100%" alt="systemic-questioning banner">
 
 > **中文** — `systemic-questioning` 官方中文版本。
 
@@ -236,7 +236,7 @@ AI 助手严禁：
 - 在急性危机期间仅依赖提问 — 必须优先进行情绪稳定与危机干预
 - 对心理脆弱或不稳定状态的用户使用恶化提问
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 **在发生急性危机时，请务必引导用户联系：**
 - 988 自杀与危机生命热线 (美国): 988

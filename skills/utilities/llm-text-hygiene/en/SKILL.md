@@ -5,7 +5,7 @@ description: Clean AI artifacts, chat residue, placeholders, and LLM style patte
 
 > **English** — Official English version of `llm-text-hygiene`.
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+<img src="../banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Remove AI residue from finished texts
 

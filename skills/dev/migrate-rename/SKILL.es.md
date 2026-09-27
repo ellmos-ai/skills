@@ -82,11 +82,11 @@ Crea `old_file.md` con el siguiente contenido:
 1. **Deja una entrada en el registro** (en la tabla superior)
 2. **Comprueba el origen**: ¿Qué te envió aquí?
 3. **Corrige la referencia**: Cambia `old_file.md` -> `new_file.md`
-4. **Ve al archivo real**: [new_file.md](new_file.md)
+4. **Ve al archivo real**: `new_file.md`
 
 ---
 
-**Archivo de destino:** [new_file.md](new_file.md)
+**Archivo de destino:** `new_file.md`
 ```
 
 ### 3. Corregir inmediatamente referencias críticas

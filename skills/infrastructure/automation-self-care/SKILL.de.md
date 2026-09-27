@@ -94,8 +94,7 @@ TGAS ist vollständig **anbieterneutral** und bildet alle Desktop-KI-Agenten-Fra
 | **ChatGPT / Headless CLI** | OS Cron / Windows Aufgabenplanung | YAML- / JSON-Deskriptoren | Provider-APIs / Open-Compute |
 
 Detaillierte Implementierungsschemata und Fähigkeiten-Profile sind dokumentiert in:
-- [provider-profiles.md](references/provider-profiles.md) (Konkrete Provider-Adapter und Ausführungsmechanik)
-- [provider-adapter-contract.md](references/provider-adapter-contract.md) (Capability-Profile JSON-Schema und Mutations-Verträge)
+- [provider-adapter-contract.md](references/provider-adapter-contract.md) (Konkrete Provider-Adapter, Capability-Profile JSON-Schema und Mutations-Verträge)
 - [core-set.md](references/core-set.md) (Detaillierte Topologie- und Evidenzregeln)
 
 ---

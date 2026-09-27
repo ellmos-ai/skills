@@ -42,7 +42,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 **Palabras clave de activación:** decisiones abiertas, sesión de decisión, briefing, procesar, revisar, decidamos todo esto
 
-**Alcance:** [decide](../decide/SKILL.en.md) proporciona marcos de trabajo para UNA pregunta. `decision-briefing` coordina el procesamiento de MUCHAS decisiones sobre un tema y aplica `decide` a casos individuales complejos.
+**Alcance:** [decide](../../decide/SKILL.en.md) proporciona marcos de trabajo para UNA pregunta. `decision-briefing` coordina el procesamiento de MUCHAS decisiones sobre un tema y aplica `decide` a casos individuales complejos.
 
 ---
 
@@ -121,7 +121,7 @@ Reglas para buenas opciones:
 1. Presentar el briefing: una decisión por mensaje o todas a la vez en lote; con más de 5 decisiones, use bloques de 3–5
 2. Aceptar respuestas por letra y confirmarlas
 3. Ante una respuesta de "más información": profundizar en la decisión (caja de herramientas metodológicas a continuación)
-4. Para casos individuales complejos (múltiples criterios, alto riesgo): escalar a la habilidad [decide](../decide/SKILL.en.md) (puntuación ponderada, análisis de escenarios)
+4. Para casos individuales complejos (múltiples criterios, alto riesgo): escalar a la habilidad [decide](../../decide/SKILL.en.md) (puntuación ponderada, análisis de escenarios)
 5. Trasladar explícitamente las decisiones pospuestas como abiertas; nunca las omita en silencio
 
 ### Fase 4: Registrar y reescribir
@@ -210,7 +210,7 @@ El usuario responde en lote: **"1B 2C 3A"** → tabla de resultados, luego las t
 | Respuestas en lote ("1A 2C 3B") | — | ✓ |
 | Reescribir en documentos de origen | — | ✓ |
 
-**Sinergia:** Para casos individuales complejos dentro de una sesión, `decision-briefing` aplica los marcos de trabajo de `decide` (puntuación ponderada, análisis de escenarios). Para el proceso de pensamiento más amplio anterior (analizar → idear → decidir), consulte [structured-thinking](../structured-thinking/SKILL.en.md).
+**Sinergia:** Para casos individuales complejos dentro de una sesión, `decision-briefing` aplica los marcos de trabajo de `decide` (puntuación ponderada, análisis de escenarios). Para el proceso de pensamiento más amplio anterior (analizar → idear → decidir), consulte [structured-thinking](../../structured-thinking/SKILL.en.md).
 
 ---
 
@@ -223,4 +223,4 @@ El usuario responde en lote: **"1B 2C 3A"** → tabla de resultados, luego las t
 
 *Adaptado de BACH | Versión independiente sin escáner*
 
-**Vea también:** [decide](../decide/SKILL.en.md) (marcos de trabajo para una sola decisión) | [structured-thinking](../structured-thinking/SKILL.en.md) (analizar → idear → decidir como meta-flujo de trabajo)
+**Vea también:** [decide](../../decide/SKILL.en.md) (marcos de trabajo para una sola decisión) | [structured-thinking](../../structured-thinking/SKILL.en.md) (analizar → idear → decidir como meta-flujo de trabajo)

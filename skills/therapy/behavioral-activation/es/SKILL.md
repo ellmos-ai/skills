@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="behavioral-activation banner">
+<img src="../banner.png" width="100%" alt="behavioral-activation banner">
 
 > **Español** — Versión oficial en español de `behavioral-activation`.
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltens
 
 > Planificación de actividades, diario de estado de ánimo y actividades, y selección de actividades basadas en valores: contrarrestar el círculo vicioso de la inactividad y el bajo estado de ánimo
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

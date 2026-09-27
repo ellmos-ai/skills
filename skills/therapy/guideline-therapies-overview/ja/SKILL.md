@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
+<img src="../banner.png" width="100%" alt="guideline-therapies-overview banner">
 
 > **日本語** — `guideline-therapies-overview` の公式日本語版。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinie
 
 > ドイツで公的医療保険の適用対象となっている4つの標準心理療法（認知行動療法、精神力動的心理療法、精神分析、システム療法）の比較 — オリエンテーションガイド
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 ---
 

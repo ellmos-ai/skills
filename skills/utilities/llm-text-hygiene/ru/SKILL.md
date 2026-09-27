@@ -5,7 +5,7 @@ description: Удаление следов ИИ, обрывков чата, за
 
 > **Русский** — Официальная русская версия `llm-text-hygiene`.
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+<img src="../banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Удаление артефактов ИИ из готовых текстов
 

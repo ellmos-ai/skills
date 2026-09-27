@@ -10,7 +10,7 @@ standalone: true
 language: zh
 ---
 
-<img src="banner.png" width="100%" alt="lebende-verfassung banner">
+<img src="../banner.png" width="100%" alt="lebende-verfassung banner">
 > **中文** — `lebende-verfassung` 官方中文版本。
 
 # 活的宪法 — 中立审查机构（5-CORE 架构，v4）

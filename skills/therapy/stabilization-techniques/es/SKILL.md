@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="stabilization-techniques banner">
+<img src="../banner.png" width="100%" alt="stabilization-techniques banner">
 
 > **Español** — Versión oficial en español de `stabilization-techniques`.
 
@@ -278,7 +278,7 @@ Un asistente de IA NO debe:
 - Garantizar efectividad ("Esto ayudará" -> en su lugar "Esto puede ayudar")
 - Ignorar causas físicas (ataque de pánico vs. ataque cardíaco -> en caso de duda, recomendar evaluación médica)
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 **En caso de crisis aguda, SIEMPRE derivar a:**
 - 988 Línea de Prevención del Suicidio y Crisis (EE. UU.): 988

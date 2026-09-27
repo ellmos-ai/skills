@@ -10,7 +10,7 @@ standalone: true
 language: en
 ---
 
-<img src="banner.png" width="100%" alt="lebende-verfassung banner">
+<img src="../banner.png" width="100%" alt="lebende-verfassung banner">
 > **English** — Official English version of `lebende-verfassung`.
 
 # Living Constitution — Neutral Assessment Instance (5-CORE Architecture, v4)

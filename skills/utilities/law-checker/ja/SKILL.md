@@ -17,7 +17,7 @@ language: ja
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="law-checker banner">
+<img src="../banner.png" width="100%" alt="law-checker banner">
 
 > **日本語** — `law-checker` の公式日本語版。
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="schema-therapy banner">
+<img src="../banner.png" width="100%" alt="schema-therapy banner">
 
 > **Español** — Versión oficial en español de `schema-therapy`.
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schemather
 
 > Fundamentos de la Terapia de Esquemas según Jeffrey Young: Esquemas, modos, concepto del niño interior y estilos de afrontamiento — presentado psicoeducativamente
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

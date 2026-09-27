@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="stabilization-techniques banner">
+<img src="../banner.png" width="100%" alt="stabilization-techniques banner">
 
 > **中文** — `stabilization-techniques` 官方中文版本。
 
@@ -278,7 +278,7 @@ AI 助手绝不能：
 - 保证疗效（“这一定会有效” -> 改为 “这可能有所帮助”）
 - 忽略生理原因（惊恐发作 vs. 心脏病发作 -> 存疑时建议进行医疗评估）
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 **若处于急性危机中，务必转介至：**
 - 988 Suicide & Crisis Lifeline (US): 988

@@ -82,11 +82,11 @@ mv old_file.md new_file.md
 1. **留下一条日志记录**（在上方表格中）
 2. **检查来源**：是什么引导你来到这里的？
 3. **修正引用**：将 `old_file.md` 修改为 -> `new_file.md`
-4. **前往实际文件**：[new_file.md](new_file.md)
+4. **前往实际文件**：`new_file.md`
 
 ---
 
-**目标文件：** [new_file.md](new_file.md)
+**目标文件：** `new_file.md`
 ```
 
 ### 3. 立即修正关键引用

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
+<img src="../banner.png" width="100%" alt="trauma-psychoeducation banner">
 
 > **Русский** — Официальная русская версия `trauma-psychoeducation`.
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psy
 
 > Знания о травме, последствиях травмы и окне толерантности: Понимание нормальных реакций на ненормальные события — исключительно психообразование, БЕЗ проработки травмы
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-<img src="banner.png" width="100%" alt="structured-thinking banner">
+<img src="../banner.png" width="100%" alt="structured-thinking banner">
 
 > **Русский** — Официальная русская версия `structured-thinking`.
 
@@ -196,4 +196,4 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-*Meta-skill | Подробная ссылка: [think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | Подробная ссылка: [think](../../think/SKILL.md), [brainstorm](../../brainstorm/SKILL.md), [decide](../../decide/SKILL.md)*

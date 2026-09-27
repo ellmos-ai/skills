@@ -86,11 +86,11 @@ Create `old_file.md` with the following content:
 1. **Leave a log entry** (in table above)
 2. **Check origin**: What sent you here?
 3. **Correct reference**: Change `old_file.md` -> `new_file.md`
-4. **Go to the actual file**: [new_file.md](new_file.md)
+4. **Go to the actual file**: `new_file.md`
 
 ---
 
-**Target file:** [new_file.md](new_file.md)
+**Target file:** `new_file.md`
 ```
 
 ### 3. Immediately Correct Critical References

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="stabilization-techniques banner">
+<img src="../banner.png" width="100%" alt="stabilization-techniques banner">
 
 > **Русский** — Официальная русская версия `stabilization-techniques`.
 
@@ -278,7 +278,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisie
 - Гарантировать эффективность («Это поможет» -> вместо этого «Это может помочь»)
 - Игнорировать соматические причины (паническая атака vs. инфаркт -> при сомнениях рекомендовать медицинское обследование)
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 **В случае острого кризиса ВСЕГДА направляйте в:**
 - 988 Suicide & Crisis Lifeline (US): 988

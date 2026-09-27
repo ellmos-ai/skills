@@ -10,7 +10,7 @@ standalone: true
 language: es
 ---
 
-<img src="banner.png" width="100%" alt="lebende-verfassung banner">
+<img src="../banner.png" width="100%" alt="lebende-verfassung banner">
 > **Español** — Versión oficial en español de `lebende-verfassung`.
 
 # Constitución Viva — Instancia Neutra de Evaluación (Arquitectura 5-CORE, v4)

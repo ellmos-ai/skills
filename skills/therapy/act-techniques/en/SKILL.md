@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="act-techniques banner">
+<img src="../banner.png" width="100%" alt="act-techniques banner">
 
 > **English** — Official English version of `act-techniques`.
 
@@ -214,7 +214,7 @@ An AI assistant must NOT:
 - Act alone in cases of acute suicidality — refer to professional help
 - Present ACT as a substitute for psychotherapy
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 **In case of acute crisis, ALWAYS refer to:**
 - 988 Suicide & Crisis Lifeline (US): 988

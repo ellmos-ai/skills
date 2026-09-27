@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['utilities/think (v1.0.0)', 'utilities/brainstorm (v1.0.0)', 'utilities/decide (v1.0.0)'], 'local_changes_since_sync': False}
 ---
 
-<img src="banner.png" width="100%" alt="structured-thinking banner">
+<img src="../banner.png" width="100%" alt="structured-thinking banner">
 
 > **中文** — `structured-thinking` 官方中文版本。
 
@@ -196,4 +196,4 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 
 ---
 
-*Meta-skill | 详细参考：[think](../think/SKILL.md), [brainstorm](../brainstorm/SKILL.md), [decide](../decide/SKILL.md)*
+*Meta-skill | 详细参考：[think](../../think/SKILL.md), [brainstorm](../../brainstorm/SKILL.md), [decide](../../decide/SKILL.md)*

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="dev-cycle banner">
+<img src="../banner.png" width="100%" alt="dev-cycle banner">
 
 > **Español** — Versión oficial en español de `dev-cycle`.
 
@@ -266,11 +266,11 @@ El ciclo es un bucle: Los casos de uso validan las funcionalidades y, al mismo t
 | Fase | Skill especializada | Desencadenante (Trigger) |
 |-------|-------------------|---------|
 | Fases 1-3 | Project bootstrapper (si está disponible) | Crear un nuevo proyecto (desde cero / greenfield) |
-| Fase 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Asumir un proyecto existente |
-| Fases 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Verificar documentos de requisitos frente al código |
-| Fases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovar estructuras existentes |
-| Fase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Depuración sistemática en 6 fases |
-| Fases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Barrido convergente de errores antes de un lanzamiento |
+| Fase 2 | [project-onboarding](../../project-onboarding/SKILL.en.md) | Asumir un proyecto existente |
+| Fases 2-3 | [docs-analysis](../../docs-analysis/SKILL.en.md) | Verificar documentos de requisitos frente al código |
+| Fases 5-6 | [pipeline-optimizer](../../pipeline-optimizer/SKILL.en.md) | Renovar estructuras existentes |
+| Fase 7 | [bugfix-protocol](../../bugfix-protocol/SKILL.en.md) | Depuración sistemática en 6 fases |
+| Fases 7-8 | [bugsweep](../../bugsweep/SKILL.en.md) | Barrido convergente de errores antes de un lanzamiento |
 
 Si tu colección de skills tiene un índice de skills, búscala para obtener más skills específicas por fase.
 

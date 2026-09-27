@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="genogram-work banner">
+<img src="../banner.png" width="100%" alt="genogram-work banner">
 
 > **Español** — Versión oficial en español de `genogram-work`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_
 
 > Reconocimiento y reflexión sobre los patrones de relaciones familiares: Perspectiva multigeneracional, símbolos del genograma, reconocimiento de patrones y recursos en la historia familiar
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="dev-cycle banner">
+<img src="../banner.png" width="100%" alt="dev-cycle banner">
 
 > **Русский** — Официальная русская версия `dev-cycle`.
 
@@ -266,11 +266,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 | Фаза | Специализированный скилл | Триггер |
 |-------|-------------------|---------|
 | Фазы 1-3 | Project bootstrapper (при наличии) | Создание нового проекта (с нуля / greenfield) |
-| Фаза 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Принятие существующего проекта |
-| Фазы 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Сверка документов требований с кодом |
-| Фазы 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Реконструкция существующей структуры |
-| Фаза 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Систематический 6-фазный дебаг |
-| Фазы 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Сходящаяся зачистка багов (Bug Sweep) перед релизом |
+| Фаза 2 | [project-onboarding](../../project-onboarding/SKILL.en.md) | Принятие существующего проекта |
+| Фазы 2-3 | [docs-analysis](../../docs-analysis/SKILL.en.md) | Сверка документов требований с кодом |
+| Фазы 5-6 | [pipeline-optimizer](../../pipeline-optimizer/SKILL.en.md) | Реконструкция существующей структуры |
+| Фаза 7 | [bugfix-protocol](../../bugfix-protocol/SKILL.en.md) | Систематический 6-фазный дебаг |
+| Фазы 7-8 | [bugsweep](../../bugsweep/SKILL.en.md) | Сходящаяся зачистка багов (Bug Sweep) перед релизом |
 
 Если в вашей коллекции скиллов есть индекс скиллов, поищите в нем дополнительные скиллы, специфичные для фаз.
 

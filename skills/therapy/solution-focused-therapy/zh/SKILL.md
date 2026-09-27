@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="solution-focused-therapy banner">
+<img src="../banner.png" width="100%" alt="solution-focused-therapy banner">
 
 > **中文** — `solution-focused-therapy` 官方中文版本。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfo
 
 > 史蒂夫·德·沙泽尔（Steve de Shazer）与茵素·金·伯格（Insoo Kim Berg）焦点解决短期心理治疗（SFBT）核心原理：奇迹提问、例外探索、评定量表、资源激活
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 ---
 

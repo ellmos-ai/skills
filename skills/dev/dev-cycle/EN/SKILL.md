@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="dev-cycle banner">
+<img src="../banner.png" width="100%" alt="dev-cycle banner">
 
 > **English** — Official English version of `dev-cycle`.
 
@@ -267,11 +267,11 @@ generate new requirements.
 | Phase | Specialized skill | Trigger |
 |-------|-------------------|---------|
 | Phases 1-3 | Project bootstrapper (if available) | Create a new project (greenfield) |
-| Phase 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | Take on an existing project |
-| Phases 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | Check requirement documents against code |
-| Phases 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
-| Phase 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
-| Phases 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
+| Phase 2 | [project-onboarding](../../project-onboarding/SKILL.en.md) | Take on an existing project |
+| Phases 2-3 | [docs-analysis](../../docs-analysis/SKILL.en.md) | Check requirement documents against code |
+| Phases 5-6 | [pipeline-optimizer](../../pipeline-optimizer/SKILL.en.md) | Renovate existing structures |
+| Phase 7 | [bugfix-protocol](../../bugfix-protocol/SKILL.en.md) | Systematic 6-phase debugging |
+| Phases 7-8 | [bugsweep](../../bugsweep/SKILL.en.md) | Converging bug sweep before a release |
 
 If your skill collection has a skill index, search it for further phase-specific skills.
 
