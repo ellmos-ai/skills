@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.0
+version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -77,9 +77,10 @@ wiederverwendbaren Check laufen lassen:
 python testing/repo_link_visibility_gate.py --repo .
 ```
 
-Der Check ist fail-open bei Unsicherheit (Netzwerkausfall, Rate-Limit, 404 --
-alles nur ein Hinweis, kein Abbruch) und blockiert nur bei einem bestätigten
-`private: true`. Ohne dieses Script (Repo hat keinen eigenen Klon des Checks):
+Der Check ist fail-open nur bei echter Unsicherheit (Netzwerkausfall, Rate-Limit
+403/429 -- nur ein Hinweis, kein Abbruch); ein 404 blockiert wie ein bestätigtes
+`private: true`, da beides bedeutet, dass der Link für Fremde nicht auflösbar
+ist (privat oder gar nicht vorhanden). Ohne dieses Script (Repo hat keinen eigenen Klon des Checks):
 mit `gh api repos/ORG/REPO --jq .private` jeden im README verlinkten Fremd-
 oder Geschwister-Repo-Link stichprobenartig prüfen.
 
@@ -133,6 +134,13 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 
 ## Changelog
 
+### 1.3.1 (2026-09-27)
+- Doku-Fix: Die 404-Semantik der Privacy-Gate-Beschreibung war falsch. Laut
+  `testing/repo_link_visibility_gate.py` blockiert 404 (privat oder nicht
+  vorhanden) wie ein bestätigtes `private: true`; fail-open gilt nur bei
+  Netzwerkausfall und Rate-Limit (403/429). Korrigiert im Privacy-Gate-
+  Abschnitt und im 1.2.0-Changelog-Eintrag.
+
 ### 1.3.0 (2026-09-27)
 - Step 14 erweitert (T-20260926-299328659, Nutzerauftrag): eigenen Stern auf eigenen
   öffentlichen Repos prüfen/setzen sowie Stargazer-Pflege (folgen + Qualitäts-
@@ -142,7 +150,7 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 ### 1.2.0 (2026-09-26)
 - Neuer Privacy-Gate-Schritt (T-20260926-820252321): verlinkte GitHub-Repos auf
   Sichtbarkeit prüfen (`testing/repo_link_visibility_gate.py --repo .`, fail-open bei
-  Netzwerk/Rate-Limit/404, blockiert nur bei bestätigtem `private: true`). Anlass:
+  Netzwerk/Rate-Limit, blockiert bei 404 und bestätigtem `private: true`). Anlass:
   `ellmos-ai/ellmos-core` (privates Repo) stand unbemerkt in einer README-Tabelle.
 
 ### 1.1.0 (2026-09-26)

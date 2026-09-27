@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.0
+version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -74,7 +74,7 @@ rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|
 python testing/repo_link_visibility_gate.py --repo .
 ```
 
-该检查在不确定的情况下（网络故障、速率限制、404 —— 这些都只是提示，绝不构成阻断）会放行，只有在确认 `private: true` 时才会阻断。若没有此脚本（仓库中没有该检查的副本）：请用 `gh api repos/ORG/REPO --jq .private` 逐一抽查 README 中每个兄弟/第三方仓库链接。
+该检查仅在真正不确定的情况下（网络故障、速率限制 403/429 —— 只是提示，绝不构成阻断）才会放行；404 会像确认的 `private: true` 一样被阻断，因为两者都意味着该链接对外部人员不可解析（私有或不存在）。若没有此脚本（仓库中没有该检查的副本）：请用 `gh api repos/ORG/REPO --jq .private` 逐一抽查 README 中每个兄弟/第三方仓库链接。
 
 ## GitHub 元数据
 
@@ -126,6 +126,11 @@ gh run list --repo ORG/REPO --limit 5
 
 ## 变更日志
 
+### 1.3.1 (2026-09-27)
+- 文档修正：隐私关口说明中关于 404 的语义描述有误。根据 `testing/repo_link_visibility_gate.py`，
+  404（私有或不存在）会像确认的 `private: true` 一样被阻断；放行仅适用于网络故障和速率限制
+  （403/429）。已在隐私关口章节和 1.2.0 变更日志条目中更正。
+
 ### 1.3.0 (2026-09-27)
 - 扩展了步骤 14（T-20260926-299328659，用户需求）：检查/设置账号自身在其公开仓库上的加星状态，
   以及星标关注者维护（关注 + 高质量回赠星标），通过你自己的 GitHub 维护工具执行（如果有的话）——
@@ -133,8 +138,8 @@ gh run list --repo ORG/REPO --limit 5
 
 ### 1.2.0 (2026-09-26)
 - 新增隐私关口步骤（T-20260926-820252321）：检查关联 GitHub 仓库的可见性
-  （`testing/repo_link_visibility_gate.py --repo .`，在网络故障/速率限制/404 时放行，
-  仅在确认 `private: true` 时阻断）。参考案例：`ellmos-ai/ellmos-core`（一个私有仓库）
+  （`testing/repo_link_visibility_gate.py --repo .`，在网络故障/速率限制时放行，
+  在 404 及确认 `private: true` 时阻断）。参考案例：`ellmos-ai/ellmos-core`（一个私有仓库）
   曾在 README 的一张表格中被忽视多时未被发现。
 
 ### 1.1.0 (2026-09-26)

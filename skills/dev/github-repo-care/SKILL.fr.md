@@ -1,6 +1,6 @@
 ---
 language: fr
-version: 1.3.0
+version: 1.3.1
 ---
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
@@ -66,9 +66,10 @@ reusable check:
 python testing/repo_link_visibility_gate.py --repo .
 ```
 
-The check fails open on uncertainty (network outage, rate limit, 404 --
-all of these are only a hint, never a block) and only blocks on a confirmed
-`private: true`. Without this script (repo has no copy of the check): spot-
+The check fails open only on genuine uncertainty (network outage, rate limit
+403/429 -- only a hint, never a block); a 404 blocks just like a confirmed
+`private: true`, since both mean the link is unresolvable for outsiders
+(private or nonexistent). Without this script (repo has no copy of the check): spot-
 check every sibling/third-party repo link in the README with
 `gh api repos/ORG/REPO --jq .private`.
 
@@ -122,6 +123,13 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 
 ## Journal des Modifications
 
+### 1.3.1 (2026-09-27)
+- Docs fix: the 404 semantics in the privacy-gate description were wrong.
+  Per `testing/repo_link_visibility_gate.py`, a 404 (private or nonexistent)
+  blocks just like a confirmed `private: true`; fail-open only applies to
+  network outages and rate limits (403/429). Corrected in the Privacy Gate
+  section and the 1.2.0 changelog entry.
+
 ### 1.3.0 (2026-09-27)
 - Extended step 14 (T-20260926-299328659, user request): check/set the account's own
   star on its own public repos, plus stargazer care (follow + quality star-back), via
@@ -131,7 +139,8 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 ### 1.2.0 (2026-09-26)
 - New privacy-gate step (T-20260926-820252321): check linked GitHub repos for
   visibility (`testing/repo_link_visibility_gate.py --repo .`, fails open on
-  network/rate-limit/404, only blocks on a confirmed `private: true`).
+  network outages/rate limits, blocks on 404 and on a confirmed
+  `private: true`).
   Reference case: `ellmos-ai/ellmos-core` (a private repo) sat unnoticed in a
   README table.
 
