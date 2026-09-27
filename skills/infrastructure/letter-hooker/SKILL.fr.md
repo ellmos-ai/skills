@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-07-29
-description: [Français] Compétence d'agent pour letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols.
+description: "[Français] Compétence d'agent pour letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

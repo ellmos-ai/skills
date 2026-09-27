@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation.
+description: "Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation."
 
 standalone: true
 anthropic_compatible: true

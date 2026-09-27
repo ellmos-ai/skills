@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Навык календаря с адаптивным выбором бэкенда пользователем (Flag 3). По умолчанию: локальное хранилище SQLite. Опционально: Google Calendar MCP, Routinika или UpToday в качестве бэкенда — управляется через assist/prefs.json. Если предпочтение не задано, LLM опрашивает пользователя интерактивно.
+description: "Навык календаря с адаптивным выбором бэкенда пользователем (Flag 3). По умолчанию: локальное хранилище SQLite. Опционально: Google Calendar MCP, Routinika или UpToday в качестве бэкенда — управляется через assist/prefs.json. Если предпочтение не задано, LLM опрашивает пользователя интерактивно."
 
 standalone: true
 anthropic_compatible: true

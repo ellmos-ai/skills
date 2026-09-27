@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Resolución estructurada de problemas en 6 pasos: definición del problema, objetivos, lluvia de ideas, evaluación, implementación y revisión.
+description: "Resolución estructurada de problemas en 6 pasos: definición del problema, objetivos, lluvia de ideas, evaluación, implementación y revisión."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

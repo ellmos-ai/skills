@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer.
+description: "Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer."
 
 standalone: true
 anthropic_compatible: true

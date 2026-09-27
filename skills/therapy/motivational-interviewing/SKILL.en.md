@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change.
+description: "Motivational Interviewing (MI) according to Miller and Rollnick: OARS techniques, change talk, fostering readiness for change."
 
 standalone: true
 anthropic_compatible: true

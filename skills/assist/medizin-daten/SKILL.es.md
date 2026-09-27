@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Registro local y privado de datos médicos: diagnósticos, historial de síntomas y planes de examen. Sin origen BACH: diseño personalizado con su propio almacenamiento SQLite. Estrictamente local, sin transferencia a la nube.
+description: "Registro local y privado de datos médicos: diagnósticos, historial de síntomas y planes de examen. Sin origen BACH: diseño personalizado con su propio almacenamiento SQLite. Estrictamente local, sin transferencia a la nube."
 
 standalone: true
 anthropic_compatible: true

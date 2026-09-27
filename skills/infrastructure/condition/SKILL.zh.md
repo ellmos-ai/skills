@@ -5,11 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-30
-description: >
-  用于目标、提示词和任务的灵活条件语言。将条件、时间戳和顺序依赖关系翻译为可验证的关卡（gate），
-以便仅在经过证实批准后才执行子步骤。当出现 /condition, /if, /if-only, /when, /after, /and 或 /or
-以及“只有当”、“一旦”、“仅当”、“在……之后”、“等待直到”、“之后”或“之前不行”等表述时，始终使用此 Skill。
-当多个子目标互相依赖或某个 Goal 包含后续批准步骤时也可以使用。
+description: "用于目标、提示词和任务的灵活条件语言。将条件、时间戳和顺序依赖关系翻译为可验证的关卡（gate）， 以便仅在经过证实批准后才执行子步骤。当出现 /condition, /if, /if-only, /when, /after, /and 或 /or 以及“只有当”、“一旦”、“仅当”、“在……之后”、“等待直到”、“之后”或“之前不行”等表述时，始终使用此 Skill。 当多个子目标互相依赖或某个 Goal 包含后续批准步骤时也可以使用。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

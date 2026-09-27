@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
 updated: 2026-08-22
-description: agents-bridge — the Lifeboat, auch: Time Capsule. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
+description: "agents-bridge — the Lifeboat, auch: Time Capsule. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery."
 
 standalone: true
 anthropic_compatible: true

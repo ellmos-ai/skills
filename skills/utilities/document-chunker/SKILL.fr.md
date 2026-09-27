@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.
+description: "[Français] Compétence d'agent pour document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

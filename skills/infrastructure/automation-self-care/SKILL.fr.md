@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-07-28
-description: [Français] Compétence d'agent pour automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family.
+description: "[Français] Compétence d'agent pour automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

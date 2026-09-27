@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: ゲーム開発のための Roblox Studio 操作ガイド —— 3D シーンの構築、テスト、パブリッシュを行うビジュアルエディタ。このスキルは以下をカバーします：Studio の基本（Explorer、Workspace、プレイテスト、Place の .rbxl 保存）、Rojo との連携（Connect、シーンモード vs. コードモード）、Roblox-Studio-MCP による AI 制御（execute_luau、insert_from_creator_store、generate_material、screen_capture、Play/Stop、Console 読み取り）、完全なアセットパイプライン（Creator Store → クリーニング → キット化 → シーン構築 → .rbxl → Rojo による動力化）、そして何よりもマーケットプレイスアセットに対する必須のマルウェアスキャン。「Store からアセットを挿入」、「Studio MCP が動作しない」、「studios: []」、「マテリアル生成」、「シーン保存」、「この Roblox アセットは安全か」、「Play 後にスクリプトが消える」などのトリガーにも対応。
+description: "ゲーム開発のための Roblox Studio 操作ガイド —— 3D シーンの構築、テスト、パブリッシュを行うビジュアルエディタ。このスキルは以下をカバーします：Studio の基本（Explorer、Workspace、プレイテスト、Place の .rbxl 保存）、Rojo との連携（Connect、シーンモード vs. コードモード）、Roblox-Studio-MCP による AI 制御（execute_luau、insert_from_creator_store、generate_material、screen_capture、Play/Stop、Console 読み取り）、完全なアセットパイプライン（Creator Store → クリーニング → キット化 → シーン構築 → .rbxl → Rojo による動力化）、そして何よりもマーケットプレイスアセットに対する必須のマルウェアスキャン。「Store からアセットを挿入」、「Studio MCP が動作しない」、「studios: []」、「マテリアル生成」、「シーン保存」、「この Roblox アセットは安全か」、「Play 後にスクリプトが消える」などのトリガーにも対応。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

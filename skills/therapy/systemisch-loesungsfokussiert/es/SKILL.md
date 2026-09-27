@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-06-13
-description: Métodos sistémicos y enfocados en soluciones: pregunta del milagro, escala, exploración de excepciones, preguntas circulares, preguntas hipotéticas, preguntas de empeoramiento, preguntas de afrontamiento. Fusionado de solution-focused-therapy y systemic-questioning.
+description: "Métodos sistémicos y enfocados en soluciones: pregunta del milagro, escala, exploración de excepciones, preguntas circulares, preguntas hipotéticas, preguntas de empeoramiento, preguntas de afrontamiento. Fusionado de solution-focused-therapy y systemic-questioning."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

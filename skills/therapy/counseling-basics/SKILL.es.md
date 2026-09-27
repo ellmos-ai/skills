@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Fundamentos de la comunicación terapéutica: Escucha activa, reflejo, parafraseo, preguntas abiertas y validación.
+description: "Fundamentos de la comunicación terapéutica: Escucha activa, reflejo, parafraseo, preguntas abiertas y validación."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies.
+description: "[Français] Compétence d'agent pour encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Exposición graduada para trastornos de ansiedad: Jerarquía de miedo, escala SUDs, planificación y orientación de la exposición. Solo psicoeducación, no ejecución.
+description: "Exposición graduada para trastornos de ansiedad: Jerarquía de miedo, escala SUDs, planificación y orientación de la exposición. Solo psicoeducación, no ejecución."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

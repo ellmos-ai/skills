@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Позитивная психология по Селигману: модель PERMA, сильные стороны характера (VIA), упражнения на благодарность, теория потока (Flow) и факторы жизнестойкости.
+description: "Позитивная психология по Селигману: модель PERMA, сильные стороны характера (VIA), упражнения на благодарность, теория потока (Flow) и факторы жизнестойкости."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

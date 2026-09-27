@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Toma de decisiones estructurada: matriz de pros/contras, puntuación ponderada, árbol de decisión, análisis de escenarios y matriz de Eisenhower.
+description: "Toma de decisiones estructurada: matriz de pros/contras, puntuación ponderada, árbol de decisión, análisis de escenarios y matriz de Eisenhower."
 
 standalone: true
 anthropic_compatible: true

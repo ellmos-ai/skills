@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Procedimiento estándar para la incorporación (onboarding) de nuevos proyectos de software: Análisis de características, revisión de calidad de código, lista de verificación de incorporación y creación de tareas.
+description: "Procedimiento estándar para la incorporación (onboarding) de nuevos proyectos de software: Análisis de características, revisión de calidad de código, lista de verificación de incorporación y creación de tareas."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

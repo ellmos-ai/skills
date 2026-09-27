@@ -5,7 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: [Français] Compétence d'agent pour wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache.
+description: "[Français] Compétence d'agent pour wetter: Answers weather questions for a location or coordinates via wttr.in (free, no API key). Current weather + 3-day forecast. Location comes from the user request or preferences; optional short cache."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

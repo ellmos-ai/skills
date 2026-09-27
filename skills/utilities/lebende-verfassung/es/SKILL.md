@@ -1,11 +1,12 @@
 ---
 name: lebende-verfassung
-description: Instancia neutra de evaluación moral y jurídica para políticas y decisiones — el prototipo ejecutable del proyecto de investigación "La Posición de los No Nacidos" (Modo Sombra Nivel 1). Utiliza este skill siempre que se vaya a analizar, evaluar o dictaminar una decisión política, proyecto de ley, reforma, resolución presupuestaria o asunto social contencioso — incluidas peticiones como "evaluar desde la perspectiva de las generaciones futuras", "pasaporte legislativo", "¿qué dice la Ley Fundamental al respecto?", "evaluación de superposición", "historia legislativa/análisis de contenedores", "evaluación de impacto", "analiza esta reforma", "constitución viva" o cuando el usuario plantee una consulta política solicitando una evaluación neutra y multietapa. Orquesta la arquitectura 5-CORE (config.json): instancia moral de superposición, encarnaciones de códigos legales, evaluación de impacto en dos etapas (retrospectiva/prospectiva con jerarquía de evidencia), gestor de conocimiento con memoria local, flujo de trabajo configurable.
+description: "Instancia neutra de evaluación moral y jurídica para políticas y decisiones — el prototipo ejecutable del proyecto de investigación \"La Posición de los No Nacidos\" (Modo Sombra Nivel 1). Utiliza este skill siempre que se vaya a analizar, evaluar o dictaminar una decisión política, proyecto de ley, reforma, resolución presupuestaria o asunto social contencioso — incluidas peticiones como \"evaluar desde la perspectiva de las generaciones futuras\", \"pasaporte legislativo\", \"¿qué dice la Ley Fundamental al respecto?\", \"evaluación de superposición\", \"historia legislativa/análisis de contenedores\", \"evaluación de impacto\", \"analiza esta reforma\", \"constitución viva\" o cuando el usuario plantee una consulta política solicitando una evaluación neutra y multietapa. Orquesta la arquitectura 5-CORE (config.json): instancia moral de superposición, encarnaciones de códigos legales, evaluación de impacto en dos etapas (retrospectiva/prospectiva con jerarquía de evidencia), gestor de conocimiento con memoria local, flujo de trabajo configurable."
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-07-30
+standalone: true
 language: es
 ---
 

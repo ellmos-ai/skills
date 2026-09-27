@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Terapia Breve Centrada en Soluciones según de Shazer y Berg: Pregunta del milagro, exploración de excepciones, escalamiento, activación de recursos.
+description: "Terapia Breve Centrada en Soluciones según de Shazer y Berg: Pregunta del milagro, exploración de excepciones, escalamiento, activación de recursos."
 
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
 updated: 2026-07-27
-description: [Français] Compétence d'agent pour mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.
+description: "[Français] Compétence d'agent pour mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

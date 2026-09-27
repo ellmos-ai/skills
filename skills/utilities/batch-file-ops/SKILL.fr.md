@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
+description: "[Français] Compétence d'agent pour batch-file-ops: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

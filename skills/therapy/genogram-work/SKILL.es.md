@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Trabajo con genogramas: Reconocimiento y reflexión sobre los patrones de relaciones familiares. Perspectiva multigeneracional, símbolos del genograma, reconocimiento de patrones y recursos en la historia familiar.
+description: "Trabajo con genogramas: Reconocimiento y reflexión sobre los patrones de relaciones familiares. Perspectiva multigeneracional, símbolos del genograma, reconocimiento de patrones y recursos en la historia familiar."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

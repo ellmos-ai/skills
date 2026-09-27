@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks.
+description: "Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks."
 
 standalone: true
 anthropic_compatible: true

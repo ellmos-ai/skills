@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Crea un periódico diario personalizado a partir de fuentes RSS y fuentes web. Portado del sistema de noticias BACH (news.py + newspaper_generator.py). Almacenamiento SQLite propio (sin Origin-DB). feedparser opcional: fallback XML a través de stdlib. Exportación a PDF mediante Edge Headless (msedge.exe).
+description: "Crea un periódico diario personalizado a partir de fuentes RSS y fuentes web. Portado del sistema de noticias BACH (news.py + newspaper_generator.py). Almacenamiento SQLite propio (sin Origin-DB). feedparser opcional: fallback XML a través de stdlib. Exportación a PDF mediante Edge Headless (msedge.exe)."
 
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: expert
 author: ellmos
 created: 2026-06-22
 updated: 2026-06-22
-description: Asistente de desarrollo (sucesor de ATI). Proporciona una visión general rápida del proyecto mediante un escaneo headless y redirige a las herramientas de código disponibles: CodeCommander MCP (análisis/refactorización/diagnóstico) y el módulo ellmos-code-tools. Enrutamiento puro de herramientas + escaneo, sin almacenamiento propio.
+description: "Asistente de desarrollo (sucesor de ATI). Proporciona una visión general rápida del proyecto mediante un escaneo headless y redirige a las herramientas de código disponibles: CodeCommander MCP (análisis/refactorización/diagnóstico) y el módulo ellmos-code-tools. Enrutamiento puro de herramientas + escaneo, sin almacenamiento propio."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

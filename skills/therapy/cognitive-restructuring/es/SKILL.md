@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Terapia Cognitivo-Conductual: modelo ABC, pensamientos automáticos, identificación de distorsiones cognitivas y registro de pensamientos.
+description: "Terapia Cognitivo-Conductual: modelo ABC, pensamientos automáticos, identificación de distorsiones cognitivas y registro de pensamientos."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

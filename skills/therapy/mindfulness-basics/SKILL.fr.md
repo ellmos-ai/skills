@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
+description: "[Français] Compétence d'agent pour mindfulness-basics: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively.
+description: "Calendar skill with user-adaptive backend selection (Flag 3). Default: local SQLite store. Optional: Google Calendar MCP, Routinika or UpToday as backend — controlled via assist/prefs.json. Without preference the LLM asks the user interactively."
 
 standalone: true
 anthropic_compatible: true

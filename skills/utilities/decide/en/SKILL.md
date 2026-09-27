@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.
+description: "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

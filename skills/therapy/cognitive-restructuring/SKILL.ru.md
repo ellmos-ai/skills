@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Когнитивно-поведенческая терапия: модель ABC, автоматические мысли, выявление когнитивных искажений и ведение дневников мыслей.
+description: "Когнитивно-поведенческая терапия: модель ABC, автоматические мысли, выявление когнитивных искажений и ведение дневников мыслей."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

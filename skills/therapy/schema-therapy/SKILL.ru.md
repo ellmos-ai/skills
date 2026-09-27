@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Схема-терапия по Джеффри Янгу: схемы, режимы, концепция внутреннего ребенка и стили копинга — в психообразовательном формате.
+description: "Схема-терапия по Джеффри Янгу: схемы, режимы, концепция внутреннего ребенка и стили копинга — в психообразовательном формате."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

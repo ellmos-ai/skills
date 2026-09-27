@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Habilidad de calendario con selección de backend adaptable al usuario (Flag 3). Por defecto: almacenamiento SQLite local. Opcional: Google Calendar MCP, Routinika o UpToday como backend — controlado mediante assist/prefs.json. Sin preferencia, el LLM consulta al usuario de forma interactiva.
+description: "Habilidad de calendario con selección de backend adaptable al usuario (Flag 3). Por defecto: almacenamiento SQLite local. Opcional: Google Calendar MCP, Routinika o UpToday como backend — controlado mediante assist/prefs.json. Sin preferencia, el LLM consulta al usuario de forma interactiva."
 
 standalone: true
 anthropic_compatible: true

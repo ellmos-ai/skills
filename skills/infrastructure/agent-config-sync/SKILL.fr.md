@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
 updated: 2026-07-27
-description: [Français] Compétence d'agent pour agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
+description: "[Français] Compétence d'agent pour agent-config-sync: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

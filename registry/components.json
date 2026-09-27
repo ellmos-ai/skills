@@ -926,7 +926,7 @@
       "path": "skills/game-dev/game-design/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on \"plan a new game\", \"create Game Design Document\", \"which roles do I need for my game\", \"development workflow for a game\", \"who tests the game\", \"structure a game idea\", \"Roblox genre/monetization\".",
+      "description": "How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on \\\"plan a new game\\\", \\\"create Game Design Document\\\", \\\"which roles do I need for my game\\\", \\\"development workflow for a game\\\", \\\"who tests the game\\\", \\\"structure a game idea\\\", \\\"Roblox genre/monetization\\\".",
       "languages": [
         "de",
         "en",
@@ -945,7 +945,7 @@
       "path": "skills/game-dev/rbx-dev/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\".",
+      "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \\\"develop Roblox game\\\", \\\"build Roblox game\\\", \\\"new Roblox project\\\", \\\"Luau project structure\\\", \\\"how do I organize Roblox code\\\", \\\"Roblox dev setup\\\".",
       "languages": [
         "de",
         "en",
@@ -964,7 +964,7 @@
       "path": "skills/game-dev/rbx-studio/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on \"embed an asset from the Store\", \"Studio MCP not working\", \"studios: []\", \"generate material\", \"save scene\", \"is this Roblox asset safe\", \"scripts disappear after Play\".",
+      "description": "Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on \\\"embed an asset from the Store\\\", \\\"Studio MCP not working\\\", \\\"studios: []\\\", \\\"generate material\\\", \\\"save scene\\\", \\\"is this Roblox asset safe\\\", \\\"scripts disappear after Play\\\".",
       "languages": [
         "de",
         "en",
@@ -983,7 +983,7 @@
       "path": "skills/game-dev/rojo/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on \"rojo connect not working\", \"scripts end up in the wrong place in Studio\", \"how do I map src/ to Studio\", \"port 34872 in use\", \"ModuleScript vs Script in Rojo\".",
+      "description": "Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on \\\"rojo connect not working\\\", \\\"scripts end up in the wrong place in Studio\\\", \\\"how do I map src/ to Studio\\\", \\\"port 34872 in use\\\", \\\"ModuleScript vs Script in Rojo\\\".",
       "languages": [
         "de",
         "en",
@@ -1390,7 +1390,7 @@
       "path": "skills/infrastructure/skill-explorer/SKILL.md",
       "version": "1.1.1",
       "status": "active",
-      "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
+      "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \\\"compare/audit skills\\\", \\\"which skills are duplicated\\\", \\\"form skill families\\\", \\\"clean up/consolidate skills\\\", \\\"maintain the skill register\\\", \\\"find skills/plugins for topic X\\\", \\\"install new skills\\\", \\\"browse the skill marketplace\\\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
       "languages": [
         "de",
         "en",
@@ -2317,7 +2317,7 @@
       "path": "skills/utilities/law-checker/SKILL.md",
       "version": "0.1.0",
       "status": "active",
-      "description": "Points to the standalone module law-checker (\"Legal Department\"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.",
+      "description": "Points to the standalone module law-checker (\\\"Legal Department\\\"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer.",
       "languages": [
         "de",
         "en",
@@ -2336,7 +2336,7 @@
       "path": "skills/utilities/lebende-verfassung/SKILL.md",
       "version": "1.0.0",
       "status": "active",
-      "description": "Neutrale moralisch-rechtliche Prüfinstanz für Politik und Entscheidungen — der lauffähige Prototyp des Forschungsprojekts \"Die Position der Ungeborenen\" (Schattenmodus Stufe 1). Nutze diesen Skill, wann immer eine politische Entscheidung, ein Gesetz(entwurf), eine Reform, ein Haushaltsbeschluss oder eine gesellschaftliche Streitfrage analysiert, geprüft oder begutachtet werden soll — auch bei Formulierungen wie \"prüfe aus Sicht künftiger Generationen\", \"Gesetzespass\", \"was sagt das Grundgesetz dazu\", \"Superposition-Prüfung\", \"Gesetzesgeschichte/Containeranalyse\", \"Folgenabschätzung\", \"analysiere diese Reform\", \"lebende Verfassung\" oder wenn der User eine Politik-Fragestellung mit Bitte um neutrale, mehrstufige Bewertung einbringt. Orchestriert die 5-CORE-Architektur (config.json): moralische Superposition-Instanz, Gesetzbuch-Verkörperungen, zweistufige Folgenabschätzung (retrospektiv/prospektiv mit Evidenzhierarchie), Wissens-Handler mit lokalem Speicher, einstellbarer Workflow.",
+      "description": "Neutrale moralisch-rechtliche Prüfinstanz für Politik und Entscheidungen — der lauffähige Prototyp des Forschungsprojekts \\\"Die Position der Ungeborenen\\\" (Schattenmodus Stufe 1). Nutze diesen Skill, wann immer eine politische Entscheidung, ein Gesetz(entwurf), eine Reform, ein Haushaltsbeschluss oder eine gesellschaftliche Streitfrage analysiert, geprüft oder begutachtet werden soll — auch bei Formulierungen wie \\\"prüfe aus Sicht künftiger Generationen\\\", \\\"Gesetzespass\\\", \\\"was sagt das Grundgesetz dazu\\\", \\\"Superposition-Prüfung\\\", \\\"Gesetzesgeschichte/Containeranalyse\\\", \\\"Folgenabschätzung\\\", \\\"analysiere diese Reform\\\", \\\"lebende Verfassung\\\" oder wenn der User eine Politik-Fragestellung mit Bitte um neutrale, mehrstufige Bewertung einbringt. Orchestriert die 5-CORE-Architektur (config.json): moralische Superposition-Instanz, Gesetzbuch-Verkörperungen, zweistufige Folgenabschätzung (retrospektiv/prospektiv mit Evidenzhierarchie), Wissens-Handler mit lokalem Speicher, einstellbarer Workflow.",
       "languages": [
         "de",
         "en",

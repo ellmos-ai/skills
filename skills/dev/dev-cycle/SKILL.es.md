@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-06-13
-description: Ciclo de desarrollo de 8 fases: Solicitudes de funciones, estado actual, planificación funcional, frontend, planificación de backend, código de backend, pruebas, casos de uso. Marco iterativo para el desarrollo sistemático de software.
+description: "Ciclo de desarrollo de 8 fases: Solicitudes de funciones, estado actual, planificación funcional, frontend, planificación de backend, código de backend, pruebas, casos de uso. Marco iterativo para el desarrollo sistemático de software."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

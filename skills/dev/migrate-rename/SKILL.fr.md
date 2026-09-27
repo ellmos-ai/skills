@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: [Français] Compétence d'agent pour migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
+description: "[Français] Compétence d'agent pour migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

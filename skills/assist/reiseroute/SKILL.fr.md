@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: [Français] Compétence d'agent pour reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
+description: "[Français] Compétence d'agent pour reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required."
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true

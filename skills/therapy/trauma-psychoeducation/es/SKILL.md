@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Psicoeducación sobre el trauma: definición de trauma, reacciones normales, ventana de tolerancia, manejo de desencadenantes y autocuidado.
+description: "Psicoeducación sobre el trauma: definición de trauma, reacciones normales, ventana de tolerancia, manejo de desencadenantes y autocuidado."
 
 standalone: true
 anthropic_compatible: true
