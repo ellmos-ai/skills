@@ -82,11 +82,11 @@ mv old_file.md new_file.md
 1. **ログエントリを残す**（上の表に入力）
 2. **呼び出し元の確認**: 何があなたをここに誘導しましたか？
 3. **参照の修正**: `old_file.md` -> `new_file.md` に変更
-4. **実際のファイルへ移動**: [new_file.md](new_file.md)
+4. **実際のファイルへ移動**: `new_file.md`
 
 ---
 
-**対象ファイル:** [new_file.md](new_file.md)
+**対象ファイル:** `new_file.md`
 ```
 
 ### 3. 重要な参照の即时修正

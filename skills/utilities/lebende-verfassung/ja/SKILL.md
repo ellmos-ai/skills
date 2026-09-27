@@ -10,7 +10,7 @@ standalone: true
 language: ja
 ---
 
-<img src="banner.png" width="100%" alt="lebende-verfassung banner">
+<img src="../banner.png" width="100%" alt="lebende-verfassung banner">
 > **日本語** — `lebende-verfassung` の公式日本語版。
 
 # 生きている憲法 — 中立的検証機関（5-COREアーキテクチャ、v4）

@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="exposure-guidance banner">
+<img src="../banner.png" width="100%" alt="exposure-guidance banner">
 
 > **Español** — Versión oficial en español de `exposure-guidance`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition
 
 > Jerarquía de miedo, escala SUDs, exposición graduada y habituación: Planificación y orientación — la exposición real solo con un terapeuta
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="problem-solving-training banner">
+<img src="../banner.png" width="100%" alt="problem-solving-training banner">
 
 > **Español** — Versión oficial en español de `problem-solving-training`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloe
 
 > Resolución estructurada de problemas en 6 pasos según D'Zurilla y Goldfried: Abordar los problemas de forma sistemática en lugar de rumiar en círculos
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

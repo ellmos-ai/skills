@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="problem-solving-training banner">
+<img src="../banner.png" width="100%" alt="problem-solving-training banner">
 
 > **中文** — `problem-solving-training` 官方中文版本。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloe
 
 > 遵循 D'Zurilla 与 Goldfried 的六步骤结构化问题解决法：系统化应对问题，摆脱原地反刍与思维死循环
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 ---
 

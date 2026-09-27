@@ -80,11 +80,11 @@ Erstelle `alte_datei.md` mit folgendem Inhalt:
 1. **Log-Eintrag hinterlassen** (oben in Tabelle)
 2. **Herkunft pruefen**: Was hat dich hierher geschickt?
 3. **Verweis korrigieren**: Aendere `alte_datei.md` -> `neue_datei.md`
-4. **Zur eigentlichen Datei gehen**: [neue_datei.md](neue_datei.md)
+4. **Zur eigentlichen Datei gehen**: `neue_datei.md`
 
 ---
 
-**Zieldatei:** [neue_datei.md](neue_datei.md)
+**Zieldatei:** `neue_datei.md`
 ```
 
 ### 3. Kritische Verweise sofort korrigieren

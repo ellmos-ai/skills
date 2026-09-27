@@ -5,7 +5,7 @@ description: Добыча идей, фильтрация по истории и 
 
 > **Русский** — Официальная русская версия `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
+<img src="../banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Добыча идей, фильтрация, реализация одной идеи
 

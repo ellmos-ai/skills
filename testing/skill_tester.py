@@ -839,7 +839,24 @@ def resolve_batch_skills(identifiers=None, tracked_only=False):
             skill_path = find_skill(identifier)
         if not skill_path:
             raise ValueError(f"Skill nicht gefunden: {identifier}")
-        skills.append(Path(skill_path).resolve())
+        skill_path = Path(skill_path).resolve()
+
+        # A changed file can be a language-subfolder copy
+        # (skills/<category>/<name>/<lang>/SKILL.md) rather than the
+        # canonical skill root (skills/<category>/<name>/SKILL.md, exactly
+        # 2 parts below SKILLS_ROOT -- the same depth find_tracked_skills()
+        # requires). Running full S-tests against the subfolder itself
+        # would demand house fields (name/version/...) that a translation
+        # copy is deliberately exempt from. Walk up to the real skill root
+        # instead, same as the tracked-only full-repo scan already does.
+        try:
+            rel_parts = skill_path.relative_to(SKILLS_ROOT).parts
+        except ValueError:
+            rel_parts = ()
+        if len(rel_parts) > 2:
+            skill_path = SKILLS_ROOT.joinpath(*rel_parts[:2])
+
+        skills.append(skill_path)
 
     return sorted(set(skills), key=lambda p: str(p).lower())
 

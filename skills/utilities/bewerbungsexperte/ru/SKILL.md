@@ -21,7 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **Русский** — Официальная русская версия `bewerbungsexperte`.
 
 
-<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
+<img src="../banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1 (Русский)
 
 > Ваш стратегический партнер для следующего шага в карьере.

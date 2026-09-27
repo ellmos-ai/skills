@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="motivational-interviewing banner">
+<img src="../banner.png" width="100%" alt="motivational-interviewing banner">
 
 > **Русский** — Официальная русская версия `motivational-interviewing`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivation
 
 > Техники OARS, стадии изменений и высказывания в пользу изменений: формирование внутренней мотивации к переменам без давления и манипуляций
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 ---
 

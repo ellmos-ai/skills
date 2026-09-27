@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="solution-focused-therapy banner">
+<img src="../banner.png" width="100%" alt="solution-focused-therapy banner">
 
 > **日本語** — `solution-focused-therapy` の公式日本語版。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfo
 
 > スティーブ・ドゥ・シェーザー（Steve de Shazer）とインスー・キム・バーグ（Insoo Kim Berg）による解決志向ブリーフセラピー（SFBT）の基本：ミラクル・クエスチョン、例外の探索、スケーリング（尺度化）、リソースの活性化
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 ---
 

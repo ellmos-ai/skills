@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
+<img src="../banner.png" width="100%" alt="pmr-autogenic-training banner">
 
 > **中文** — `pmr-autogenic-training` 官方中文版本。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autoge
 
 > 基于 Jacobson 和 Schultz 的躯体放松技术
 
-参见: [ETHICS.md](../ETHICS.md)
+参见: [ETHICS.md](../../ETHICS.md)
 
 ---
 

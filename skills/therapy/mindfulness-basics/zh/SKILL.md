@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="mindfulness-basics banner">
+<img src="../banner.png" width="100%" alt="mindfulness-basics banner">
 
 > **中文** — `mindfulness-basics` 官方中文版本。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkei
 
 > MBSR 正念减压基础、身体扫描与日常生活呼吸训练
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 ---
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="psychoeducation banner">
+<img src="../banner.png" width="100%" alt="psychoeducation banner">
 
 > **日本語** — `psychoeducation` の公式日本語版。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoeduk
 
 > 精神疾患、症状、および治療アプローチに関する知識共有
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 ---
 

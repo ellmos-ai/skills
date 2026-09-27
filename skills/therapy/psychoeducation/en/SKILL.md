@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="psychoeducation banner">
+<img src="../banner.png" width="100%" alt="psychoeducation banner">
 
 > **English** — Official English version of `psychoeducation`.
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoeduk
 
 > Knowledge sharing about mental disorders, symptoms, and treatment approaches
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

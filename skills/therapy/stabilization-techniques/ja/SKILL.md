@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="stabilization-techniques banner">
+<img src="../banner.png" width="100%" alt="stabilization-techniques banner">
 
 > **日本語** — `stabilization-techniques` の公式日本語版。
 
@@ -278,7 +278,7 @@ AIアシスタントが行ってはならないこと：
 - 効果を保証すること（「これで良くなります」→「これが助けになる可能性があります」）
 - 身体的原因を無視すること（パニック発作 vs 心筋梗塞発作など → 疑わしい場合は医療機関の受診を推奨）
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 **急性危機の場合の緊急連絡先：**
 - 988 Suicide & Crisis Lifeline (US): 988

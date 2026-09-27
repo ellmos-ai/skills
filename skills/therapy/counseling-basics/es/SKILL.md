@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="counseling-basics banner">
+<img src="../banner.png" width="100%" alt="counseling-basics banner">
 
 > **Español** — Versión oficial en español de `counseling-basics`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechs
 
 > Fundamentos de la comunicación terapéutica: Escucha activa, reflejo, paráfrasis
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

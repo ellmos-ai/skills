@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="problem-solving-training banner">
+<img src="../banner.png" width="100%" alt="problem-solving-training banner">
 
 > **Русский** — Официальная русская версия `problem-solving-training`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloe
 
 > Структурированное решение проблем в 6 шагов по Д'Цурилла и Гольдфриду: Систематический подход к проблемам вместо навязчивого хождения по кругу
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 ---
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="dev-cycle banner">
+<img src="../banner.png" width="100%" alt="dev-cycle banner">
 
 > **中文** — `dev-cycle` 官方中文版本。
 
@@ -266,11 +266,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 | 阶段 | 专用技能 | 触发条件 |
 |-------|-------------------|---------|
 | 阶段 1-3 | Project bootstrapper（如果可用） | 创建新项目（全新开发 / greenfield） |
-| 阶段 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | 接管现有项目 |
-| 阶段 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | 根据代码核对需求文档 |
-| 阶段 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | 重构/改造现有结构 |
-| 阶段 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | 系统化 6 阶段调试 |
-| 阶段 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | 发布前的收敛性 Bug 排查 (Bug Sweep) |
+| 阶段 2 | [project-onboarding](../../project-onboarding/SKILL.en.md) | 接管现有项目 |
+| 阶段 2-3 | [docs-analysis](../../docs-analysis/SKILL.en.md) | 根据代码核对需求文档 |
+| 阶段 5-6 | [pipeline-optimizer](../../pipeline-optimizer/SKILL.en.md) | 重构/改造现有结构 |
+| 阶段 7 | [bugfix-protocol](../../bugfix-protocol/SKILL.en.md) | 系统化 6 阶段调试 |
+| 阶段 7-8 | [bugsweep](../../bugsweep/SKILL.en.md) | 发布前的收敛性 Bug 排查 (Bug Sweep) |
 
 如果你的技能集包含技能索引，请在其中搜索更多特定阶段的技能。
 

@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="dev-cycle banner">
+<img src="../banner.png" width="100%" alt="dev-cycle banner">
 
 > **日本語** — `dev-cycle` の公式日本語版。
 
@@ -266,11 +266,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 | フェーズ | 専門スキル | トリガー |
 |-------|-------------------|---------|
 | フェーズ 1-3 | Project bootstrapper (利用可能な場合) | 新規プロジェクトの作成 (新規開発 / greenfield) |
-| フェーズ 2 | [project-onboarding](../project-onboarding/SKILL.en.md) | 既存プロジェクトの引き継ぎ |
-| フェーズ 2-3 | [docs-analysis](../docs-analysis/SKILL.en.md) | 要件定義書とコードの照合 |
-| フェーズ 5-6 | [pipeline-optimizer](../pipeline-optimizer/SKILL.en.md) | 既存構造の刷新・リファクタリング |
-| フェーズ 7 | [bugfix-protocol](../bugfix-protocol/SKILL.en.md) | 体系的な6段階デバッグ |
-| フェーズ 7-8 | [bugsweep](../bugsweep/SKILL.en.md) | リリース前の収束型バグスイープ |
+| フェーズ 2 | [project-onboarding](../../project-onboarding/SKILL.en.md) | 既存プロジェクトの引き継ぎ |
+| フェーズ 2-3 | [docs-analysis](../../docs-analysis/SKILL.en.md) | 要件定義書とコードの照合 |
+| フェーズ 5-6 | [pipeline-optimizer](../../pipeline-optimizer/SKILL.en.md) | 既存構造の刷新・リファクタリング |
+| フェーズ 7 | [bugfix-protocol](../../bugfix-protocol/SKILL.en.md) | 体系的な6段階デバッグ |
+| フェーズ 7-8 | [bugsweep](../../bugsweep/SKILL.en.md) | リリース前の収束型バグスイープ |
 
 スキルコレクションにスキルインデックスがある場合は、より多くのフェーズ固有スキルを検索してください。
 

@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="cognitive-restructuring banner">
+<img src="../banner.png" width="100%" alt="cognitive-restructuring banner">
 
 > **日本語** — `cognitive-restructuring` の公式日本語版。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_
 
 > CBT的中核技法：ABCモデル、非機能的思考の同定と修正
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

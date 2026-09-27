@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="act-techniques banner">
+<img src="../banner.png" width="100%" alt="act-techniques banner">
 
 > **Русский** — Официальная русская версия `act-techniques`.
 
@@ -214,7 +214,7 @@ ACT имеет доказательную базу и эффективна пр�
 - Действовать самостоятельно в случаях острого суицидального риска — немедленно перенаправлять к специалистам
 - Представлять ACT как замену психотерапии
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 **В случае острого кризиса ВСЕГДА перенаправлять на:**
 - Единый телефон доверия (РФ): 8-800-2000-122 / 8-800-333-44-34

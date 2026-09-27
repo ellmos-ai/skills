@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="mindfulness-basics banner">
+<img src="../banner.png" width="100%" alt="mindfulness-basics banner">
 
 > **Русский** — Официальная русская версия `mindfulness-basics`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkei
 
 > Основы MBSR, сканирование тела и дыхательные упражнения для повседневной жизни
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 ---
 

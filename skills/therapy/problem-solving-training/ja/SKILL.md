@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="problem-solving-training banner">
+<img src="../banner.png" width="100%" alt="problem-solving-training banner">
 
 > **日本語** — `problem-solving-training` の公式日本語版。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloe
 
 > D'Zurilla と Goldfried による6つのステップに基づいた構造化問題解決：思考の空回りを防ぎ、体系的・解決指向で問題にアプローチする
 
-参照：[ETHICS.md](../ETHICS.md)
+参照：[ETHICS.md](../../ETHICS.md)
 
 ---
 

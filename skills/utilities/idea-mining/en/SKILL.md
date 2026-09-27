@@ -5,7 +5,7 @@ description: Mine ideas, filter against history, explore one to completion. A 5-
 
 > **English** — Official English version of `idea-mining`.
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
+<img src="../banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — Mine ideas, filter, execute one
 

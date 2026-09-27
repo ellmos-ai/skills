@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
+<img src="../banner.png" width="100%" alt="guideline-therapies-overview banner">
 
 > **Español** — Versión oficial en español de `guideline-therapies-overview`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinie
 
 > Comparativa de los cuatro enfoques psicoterapéuticos reglamentarios en Alemania: TCC, Psicoterapia Psicodinámica, Psicoanálisis, Terapia Sistémica — Guía de orientación
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

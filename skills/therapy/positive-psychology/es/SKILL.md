@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="positive-psychology banner">
+<img src="../banner.png" width="100%" alt="positive-psychology banner">
 
 > **Español** — Versión oficial en español de `positive-psychology`.
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_p
 
 > Enfoque en fortalezas, gratitud, flow y PERMA según Seligman y Csikszentmihalyi
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

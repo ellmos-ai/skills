@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="systemic-questioning banner">
+<img src="../banner.png" width="100%" alt="systemic-questioning banner">
 
 > **Русский** — Официальная русская версия `systemic-questioning`.
 
@@ -236,7 +236,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemisch
 - Работать исключительно вопросами во время острого кризиса — стабилизация в приоритете
 - Применять вопросы на ухудшение в нестабильных / хрупких состояниях
 
-См.: [ETHICS.md](../ETHICS.md)
+См.: [ETHICS.md](../../ETHICS.md)
 
 **В случае острого кризиса ВСЕГДА перенаправляйте на:**
 - Единый телефон доверия (РФ): 8-800-2000-122 / Горячая линия психологической помощи: 8-800-200-47-03

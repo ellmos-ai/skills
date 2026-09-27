@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="migrate-rename banner">
+<img src="../banner.png" width="100%" alt="migrate-rename banner">
 
 > **日本語** — `migrate-rename` の公式日本語版。
 
@@ -83,11 +83,11 @@ mv old_file.md new_file.md
 1. **Leave a log entry** (in table above)
 2. **Check origin**: What sent you here?
 3. **Correct reference**: Change `old_file.md` -> `new_file.md`
-4. **Go to the actual file**: [new_file.md](new_file.md)
+4. **Go to the actual file**: `new_file.md`
 
 ---
 
-**Target file:** [new_file.md](new_file.md)
+**Target file:** `new_file.md`
 ```
 
 ### 3. 重要な参照をすぐに修正する

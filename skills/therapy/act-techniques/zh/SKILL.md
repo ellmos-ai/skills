@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="act-techniques banner">
+<img src="../banner.png" width="100%" alt="act-techniques banner">
 
 > **中文** — `act-techniques` 官方中文版本。
 
@@ -214,7 +214,7 @@ AI 助手绝对禁止：
 - 在急性自杀风险情况下单独应对——必须立即引导求助专业人员
 - 将 ACT 宣传为替代心理治疗的方案
 
-参见：[ETHICS.md](../ETHICS.md)
+参见：[ETHICS.md](../../ETHICS.md)
 
 **如遇急性危机，请务必引导联系：**
 - 中国心理危机干预热线：400-161-9995 / 010-82951332

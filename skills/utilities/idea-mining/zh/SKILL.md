@@ -5,7 +5,7 @@ description: 挖掘创意，对照历史记录过滤，并深入探索其中一�
 
 > **中文** — `idea-mining` 官方中文版本。
 
-<img src="banner.png" width="100%" alt="idea-mining banner">
+<img src="../banner.png" width="100%" alt="idea-mining banner">
 
 # Idea-Mining — 挖掘创意、过滤、执行到底
 

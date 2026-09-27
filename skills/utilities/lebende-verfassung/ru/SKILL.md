@@ -10,7 +10,7 @@ standalone: true
 language: ru
 ---
 
-<img src="banner.png" width="100%" alt="lebende-verfassung banner">
+<img src="../banner.png" width="100%" alt="lebende-verfassung banner">
 > **Русский** — Официальная русская версия `lebende-verfassung`.
 
 # Живая Конституция — нейтральная экспертная инстанция (Архитектура 5-CORE, v4)

@@ -30,7 +30,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 > **Goal:** Structured process from feature request to validated system.
 > Every development goes through these 8 phases.
 
-> 📐 **Beilage:** [SCHALTPLAN-SOFTWAREENTWICKLUNG.html](SCHALTPLAN-SOFTWAREENTWICKLUNG.html) —
+> 📐 **Beilage:** `SCHALTPLAN-SOFTWAREENTWICKLUNG.html` —
 > menschlich lesbarer „Schaltplan der Softwareentwicklung" (HTML, im Browser öffnen):
 > recherchierte Gesamtkarte aus Phasen, Regelkreisen, Rollen, Prozessketten und Test-Gates
 > (Webrecherche 08/2026), in die sich dieser 8-Phasen-Zyklus einordnet.
@@ -301,7 +301,7 @@ the fix:
 
 Rule of thumb: keep commit-to-feedback under 10 minutes — a slow loop gets
 bypassed. Visual map of all loops with timings: enclosed
-[SCHALTPLAN-SOFTWAREENTWICKLUNG.html](SCHALTPLAN-SOFTWAREENTWICKLUNG.html), sheet BL-2.
+`SCHALTPLAN-SOFTWAREENTWICKLUNG.html`, sheet BL-2.
 
 ---
 

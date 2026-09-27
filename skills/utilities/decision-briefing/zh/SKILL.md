@@ -42,7 +42,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 **触发词：** 待办决策、决策会话、简报、梳理决策、逐一处理、让我们决定所有这些
 
-**适用范围：** [decide](../decide/SKILL.en.md) 为单项决策提供框架。`decision-briefing` 负责协调梳理某一主题上的多个决策，并将 `decide` 应用于复杂的个案。
+**适用范围：** [decide](../../decide/SKILL.en.md) 为单项决策提供框架。`decision-briefing` 负责协调梳理某一主题上的多个决策，并将 `decide` 应用于复杂的个案。
 
 ---
 
@@ -121,7 +121,7 @@ Phase 4: RECORD & WRITE BACK
 1. 展示简报——每个消息包含一个决策，或作为批量一次性展示；当决策数量 >5 时，按 3–5 个一组分块展示
 2. 接收字母答复并予以确认
 3. 收到“更多信息”答复时：对该决策进行深入分析（使用下文的方法工具箱）
-4. 对于复杂的单项决策（多标准、高风险）：升级至 [decide](../decide/SKILL.en.md) Skill（加权评分、情景分析）
+4. 对于复杂的单项决策（多标准、高风险）：升级至 [decide](../../decide/SKILL.en.md) Skill（加权评分、情景分析）
 5. 明确将推迟的决策记录为待决事项——绝不隐蔽丢弃
 
 ### 阶段 4：记录与写回
@@ -210,7 +210,7 @@ DECISION: <question>
 | 批量回答 ("1A 2C 3B") | — | ✓ |
 | 写回源文档 | — | ✓ |
 
-**协同效应：** 对于会话中复杂的个案，`decision-briefing` 会应用 `decide` 中的框架（加权评分、情景分析）。对于此前更广泛的思考过程（分析 → 构思 → 决策），请参阅 [structured-thinking](../structured-thinking/SKILL.en.md)。
+**协同效应：** 对于会话中复杂的个案，`decision-briefing` 会应用 `decide` 中的框架（加权评分、情景分析）。对于此前更广泛的思考过程（分析 → 构思 → 决策），请参阅 [structured-thinking](../../structured-thinking/SKILL.en.md)。
 
 ---
 
@@ -223,4 +223,4 @@ DECISION: <question>
 
 *移植自 BACH | 无扫描器独立版本*
 
-**另请参阅：** [decide](../decide/SKILL.en.md)（单项决策框架）| [structured-thinking](../structured-thinking/SKILL.en.md)（分析 → 构思 → 决策的元工作流）
+**另请参阅：** [decide](../../decide/SKILL.en.md)（单项决策框架）| [structured-thinking](../../structured-thinking/SKILL.en.md)（分析 → 构思 → 决策的元工作流）

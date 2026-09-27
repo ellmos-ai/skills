@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
+<img src="../banner.png" width="100%" alt="guideline-therapies-overview banner">
 
 > **中文** — `guideline-therapies-overview` 官方中文版本。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinie
 
 > 德国四种法定医保覆盖的心理治疗取向对比：认知行为疗法（CBT）、深层心理学取向心理治疗（PDT）、精神分析（AP）、系统疗法（ST）— 定向指南
 
-参阅：[ETHICS.md](../ETHICS.md)
+参阅：[ETHICS.md](../../ETHICS.md)
 
 ---
 

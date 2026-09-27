@@ -5,7 +5,7 @@ description: 完成したテキストから AI の痕跡、チャットの残骸
 
 > **日本語** — `llm-text-hygiene` の公式日本語版。
 
-<img src="banner.png" width="100%" alt="llm-text-hygiene banner">
+<img src="../banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — 完成したテキストから AI の残骸を除去する
 

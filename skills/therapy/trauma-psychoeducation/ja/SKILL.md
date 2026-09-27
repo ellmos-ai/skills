@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
+<img src="../banner.png" width="100%" alt="trauma-psychoeducation banner">
 
 > **日本語** — `trauma-psychoeducation` の公式日本語版。
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psy
 
 > トラウマ、トラウマ後遺症、ウインドウ・オブ・トレランスに関する知識：異常な出来事に対する正常な反応を理解する — 純粋な心理教育であり、トラウマ処理は行わない
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

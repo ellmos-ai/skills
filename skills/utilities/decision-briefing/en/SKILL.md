@@ -42,7 +42,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 **Trigger words:** open decisions, decision session, briefing, work through, go through, let's decide all of this
 
-**Scope:** [decide](../decide/SKILL.en.md) provides frameworks for ONE question. `decision-briefing` coordinates working through MANY decisions on one topic — and applies `decide` to complex individual cases.
+**Scope:** [decide](../../decide/SKILL.en.md) provides frameworks for ONE question. `decision-briefing` coordinates working through MANY decisions on one topic — and applies `decide` to complex individual cases.
 
 ---
 
@@ -121,7 +121,7 @@ Rules for good options:
 1. Present the briefing — one decision per message or all at once as a batch; with >5 decisions, use blocks of 3–5
 2. Accept letter answers and acknowledge them
 3. On a "more info" answer: deepen the decision (method toolbox below)
-4. For complex individual cases (many criteria, high stakes): escalate to the [decide](../decide/SKILL.en.md) skill (weighted scoring, scenario analysis)
+4. For complex individual cases (many criteria, high stakes): escalate to the [decide](../../decide/SKILL.en.md) skill (weighted scoring, scenario analysis)
 5. Carry deferred decisions forward explicitly as open — never drop them silently
 
 ### Phase 4: Record & Write Back
@@ -210,7 +210,7 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 | Batch answers ("1A 2C 3B") | — | ✓ |
 | Write back into source documents | — | ✓ |
 
-**Synergy:** For complex individual cases within a session, `decision-briefing` applies the frameworks from `decide` (weighted scoring, scenario analysis). For the larger thinking process before that (analyze → ideate → decide), see [structured-thinking](../structured-thinking/SKILL.en.md).
+**Synergy:** For complex individual cases within a session, `decision-briefing` applies the frameworks from `decide` (weighted scoring, scenario analysis). For the larger thinking process before that (analyze → ideate → decide), see [structured-thinking](../../structured-thinking/SKILL.en.md).
 
 ---
 
@@ -223,4 +223,4 @@ The user answers as a batch: **"1B 2C 3A"** → results table, then the three de
 
 *Ported from BACH | Standalone version without scanner*
 
-**See also:** [decide](../decide/SKILL.en.md) (frameworks for a single decision) | [structured-thinking](../structured-thinking/SKILL.en.md) (analyze → ideate → decide as a meta workflow)
+**See also:** [decide](../../decide/SKILL.en.md) (frameworks for a single decision) | [structured-thinking](../../structured-thinking/SKILL.en.md) (analyze → ideate → decide as a meta workflow)

@@ -21,7 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **中文** — `bewerbungsexperte` 官方中文版本。
 
 
-<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
+<img src="../banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1 (中文)
 
 > 您迈向职业生涯下一步的战略伙伴。

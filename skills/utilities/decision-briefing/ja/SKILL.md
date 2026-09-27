@@ -42,7 +42,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 **トリガーワード:** 意思決定セッション、ブリーフィング、保留中の決定、順次処理、まとめて決定、一括決定
 
-**スコープ:** [decide](../decide/SKILL.en.md) は「1つ」の質問に対するフレームワークを提供します。`decision-briefing` は1つのトピックに関する「多数」の意思決定の処理を調整し、複雑な個別ケースに対して `decide` を適用します。
+**スコープ:** [decide](../../decide/SKILL.en.md) は「1つ」の質問に対するフレームワークを提供します。`decision-briefing` は1つのトピックに関する「多数」の意思決定の処理を調整し、複雑な個別ケースに対して `decide` を適用します。
 
 ---
 
@@ -121,7 +121,7 @@ Phase 4: RECORD & WRITE BACK
 1. ブリーフィングを提示 — メッセージごとに1つの決定事項、またはバッチとして一度に提示。5を超える場合は3〜5個のブロックに分ける
 2. 文字による回答を受け入れ、確認を返す
 3. 「詳細情報」の回答に対して：意思決定を深掘りする（以下のメソッドツールボックスを参照）
-4. 複雑な個別ケース（多基準、高リスク）の場合：[decide](../decide/SKILL.en.md) スキル（重み付けスコアリング、シナリオ分析）へエスカレーションする
+4. 複雑な個別ケース（多基準、高リスク）の場合：[decide](../../decide/SKILL.en.md) スキル（重み付けスコアリング、シナリオ分析）へエスカレーションする
 5. 保留された決定事項は明示的に未解決として繰り越し、黙ってドロップしない
 
 ### フェーズ 4: 記録と書き戻し
@@ -210,7 +210,7 @@ DECISION: <question>
 | バッチ回答 ("1A 2C 3B") | — | ✓ |
 | 元ドキュメントへの書き戻し | — | ✓ |
 
-**シナジー:** セッション内の複雑な個別ケースについて、`decision-briefing` は `decide` のフレームワーク（重み付けスコアリング、シナリオ分析）を適用します。その前のより広範な思考プロセス（分析 → アイデア出し → 決定）については、[structured-thinking](../structured-thinking/SKILL.en.md) を参照してください。
+**シナジー:** セッション内の複雑な個別ケースについて、`decision-briefing` は `decide` のフレームワーク（重み付けスコアリング、シナリオ分析）を適用します。その前のより広範な思考プロセス（分析 → アイデア出し → 決定）については、[structured-thinking](../../structured-thinking/SKILL.en.md) を参照してください。
 
 ---
 
@@ -223,4 +223,4 @@ DECISION: <question>
 
 *BACH より移植 | スキャナーなしのスタンドアロン版*
 
-**関連項目:** [decide](../decide/SKILL.en.md)（単一の意思決定用フレームワーク）| [structured-thinking](../structured-thinking/SKILL.en.md)（メタワークフローとしての 分析 → アイデア出し → 決定）
+**関連項目:** [decide](../../decide/SKILL.en.md)（単一の意思決定用フレームワーク）| [structured-thinking](../../structured-thinking/SKILL.en.md)（メタワークフローとしての 分析 → アイデア出し → 決定）

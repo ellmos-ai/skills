@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="exposure-guidance banner">
+<img src="../banner.png" width="100%" alt="exposure-guidance banner">
 
 > **日本語** — `exposure-guidance` の公式日本語版。
 
@@ -27,7 +27,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition
 
 > 恐怖階層表、SUDs尺度、段階的曝露と慣れ（習慣化）：計画とガイダンス — 実際の曝露はセラピストの同席・指導下でのみ実施
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 ---
 

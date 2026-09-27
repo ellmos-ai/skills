@@ -18,7 +18,7 @@ language: ru
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="steuer-assistent banner">
+<img src="../banner.png" width="100%" alt="steuer-assistent banner">
 
 > **Русский** — Официальная русская версия `steuer-assistent`.
 

@@ -17,7 +17,7 @@ language: zh
 status: active
 ---
 
-<img src="banner.png" width="100%" alt="law-checker banner">
+<img src="../banner.png" width="100%" alt="law-checker banner">
 
 > **中文** — `law-checker` 官方中文版本。
 

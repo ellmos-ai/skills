@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="systemic-questioning banner">
+<img src="../banner.png" width="100%" alt="systemic-questioning banner">
 
 > **English** — Official English version of `systemic-questioning`.
 
@@ -236,7 +236,7 @@ An AI assistant must NOT:
 - Work exclusively with questions during acute crisis — stabilization first
 - Use deterioration questions with fragile states
 
-See: [ETHICS.md](../ETHICS.md)
+See: [ETHICS.md](../../ETHICS.md)
 
 **In case of acute crisis, ALWAYS refer to:**
 - 988 Suicide & Crisis Lifeline (US): 988

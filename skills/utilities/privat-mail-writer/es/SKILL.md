@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path'
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="privat-mail-writer banner">
+<img src="../banner.png" width="100%" alt="privat-mail-writer banner">
 
 > **Español** — Versión oficial en español de `privat-mail-writer`.
 

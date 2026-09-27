@@ -21,7 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **Español** — Versión oficial en español de `bewerbungsexperte`.
 
 
-<img src="banner.png" width="100%" alt="bewerbungsexperte banner">
+<img src="../banner.png" width="100%" alt="bewerbungsexperte banner">
 # BEWERBUNGSEXPERTE v1.1 (Español)
 
 > Tu socio estratégico para el siguiente paso en tu carrera.

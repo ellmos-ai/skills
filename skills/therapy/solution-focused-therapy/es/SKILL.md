@@ -19,7 +19,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="solution-focused-therapy banner">
+<img src="../banner.png" width="100%" alt="solution-focused-therapy banner">
 
 > **Español** — Versión oficial en español de `solution-focused-therapy`.
 
@@ -28,7 +28,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfo
 
 > Fundamentos de la Terapia Breve Centrada en Soluciones (TBCS / SFBT) según Steve de Shazer e Insoo Kim Berg: Pregunta del milagro, exploración de excepciones, escalas de valoración, activación de recursos
 
-Ver: [ETHICS.md](../ETHICS.md)
+Ver: [ETHICS.md](../../ETHICS.md)
 
 ---
 

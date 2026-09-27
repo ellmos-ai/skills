@@ -18,7 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
-<img src="banner.png" width="100%" alt="act-techniques banner">
+<img src="../banner.png" width="100%" alt="act-techniques banner">
 
 > **日本語** — `act-techniques` の公式日本語版。
 
@@ -214,7 +214,7 @@ AIアシスタントが絶対に行ってはならないこと：
 - 急性自殺リスクのケースに単独で対処すること — 直ちに専門機関へリファーする
 - ACTを心理療法の代用として提示すること
 
-参照: [ETHICS.md](../ETHICS.md)
+参照: [ETHICS.md](../../ETHICS.md)
 
 **緊急の危機状況では、必ず以下を案内してください：**
 - こころの健康相談統一ダイヤル（日本）: 0570-064-556

@@ -175,8 +175,14 @@ def scan_skill_bodies(repo_root: Path) -> tuple[list[str], int, int]:
         text = md_file.read_text(encoding="utf-8", errors="replace")
 
         for line_number, line in enumerate(text.splitlines(), start=1):
-            targets = [m.group(1) for m in MD_LINK.finditer(line)]
-            targets += [m.group(1) for m in IMG_SRC.finditer(line)]
+            # Strip inline code spans first: a line documenting this very
+            # gate's own target syntax (e.g. "`[text](url)`" as a worked
+            # example of what a Markdown link looks like) is not a real,
+            # navigable link -- Markdown renders code spans literally, and
+            # placeholders like "url" were never meant to resolve.
+            scan_line = re.sub(r"`[^`]*`", "", line)
+            targets = [m.group(1) for m in MD_LINK.finditer(scan_line)]
+            targets += [m.group(1) for m in IMG_SRC.finditer(scan_line)]
             for raw_target in targets:
                 target = raw_target.strip()
                 if not target or _is_external_or_anchor(target):
