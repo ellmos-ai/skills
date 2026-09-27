@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-06-13
-description: [Français] Compétence d'agent pour bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
+description: "[Français] Compétence d'agent pour bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

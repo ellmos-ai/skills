@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: [Français] Compétence d'agent pour dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
+description: "[Français] Compétence d'agent pour dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store."
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Мотивационное интервью (МИ) по Миллеру и Роллнику: техники OARS, высказывания в пользу изменений, стимулирование готовности к переменам.
+description: "Мотивационное интервью (МИ) по Миллеру и Роллнику: техники OARS, высказывания в пользу изменений, стимулирование готовности к переменам."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

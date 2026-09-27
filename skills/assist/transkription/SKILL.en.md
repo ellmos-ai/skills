@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run).
+description: "Transcribes audio/video files to text. Uses Whisper (openai-whisper) or Vosk (offline) as optional backend — both are detected via presence check. Without backend: placeholder mode with dummy output (dry-run)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

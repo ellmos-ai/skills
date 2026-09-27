@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: Usar cada vez que haya varias decisiones pendientes o acumuladas —ya sea dentro de un tema, proyecto, documento o a lo largo de una sesión: hacer un inventario, presentar un briefing numerado con opciones A/B/C/D y una recomendación marcada, aceptar respuestas por letras (incluidos lotes), registrar los resultados y escribirlos de nuevo en los documentos de origen.
+description: "Usar cada vez que haya varias decisiones pendientes o acumuladas —ya sea dentro de un tema, proyecto, documento o a lo largo de una sesión: hacer un inventario, presentar un briefing numerado con opciones A/B/C/D y una recomendación marcada, aceptar respuestas por letras (incluidos lotes), registrar los resultados y escribirlos de nuevo en los documentos de origen."
 
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors.
+description: "Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors."
 
 standalone: true
 anthropic_compatible: true

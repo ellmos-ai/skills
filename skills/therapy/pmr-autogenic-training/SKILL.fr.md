@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions.
+description: "[Français] Compétence d'agent pour pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

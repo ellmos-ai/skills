@@ -51,6 +51,10 @@ Lizenzangabe, ein Datenschutzhinweis oder eine präzisere Beschreibung.
    - Schließe interne Notizen, Berichte, Testdaten, lokale Konfigurationen und
      Sperrdateien aus.
    - Prüfe `.gitignore` und Paket-Allowlisten vor dem Commit.
+   - Bei Skill-Bibliotheken (`SKILL*.md`-Dateien vorhanden): jede Frontmatter
+     muss als YAML parsen. Falls `testing/skill_frontmatter_gate.py` im Repo
+     existiert, ausführen (`--fix` quotet mechanisch nach, ohne den
+     Wortlaut zu ändern); sonst stichprobenartig mit `yaml.safe_load` prüfen.
 
 2. **Privacy- und Secret-Scan**
    - Suche im Arbeitsbaum nach E-Mail-Adressen, Zugangsdaten, Tokens,

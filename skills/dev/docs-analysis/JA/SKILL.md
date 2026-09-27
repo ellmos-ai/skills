@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: ドキュメント要件分析: docs/ フォルダ内のコンセプトおよび要件ドキュメントを分析し、現在のコードと照らし合わせて要件を検証し、統合差異レポートを作成します。
+description: "ドキュメント要件分析: docs/ フォルダ内のコンセプトおよび要件ドキュメントを分析し、現在のコードと照らし合わせて要件を検証し、統合差異レポートを作成します。"
 
 standalone: true
 anthropic_compatible: true

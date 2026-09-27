@@ -5,13 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-30
-description: >
-  Flexible condition language for goals, prompts, and tasks. Translates conditions,
-timestamps, and sequence dependencies into verifiable gates so that a sub-step is only
-executed after proven approval. Always use for /condition, /if, /if-only,
-/when, /after, /and, or /or as well as for phrases like "only when", "as soon as",
-"only if", "after", "wait until", "then", or "not before". Also use when multiple sub-goals
-depend on each other or a goal contains a later release step.
+description: "Flexible condition language for goals, prompts, and tasks. Translates conditions, timestamps, and sequence dependencies into verifiable gates so that a sub-step is only executed after proven approval. Always use for /condition, /if, /if-only, /when, /after, /and, or /or as well as for phrases like \"only when\", \"as soon as\", \"only if\", \"after\", \"wait until\", \"then\", or \"not before\". Also use when multiple sub-goals depend on each other or a goal contains a later release step."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

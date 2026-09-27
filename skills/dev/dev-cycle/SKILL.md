@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-08-22
-description: 8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development.
+description: "8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development."
 
 standalone: true
 anthropic_compatible: true

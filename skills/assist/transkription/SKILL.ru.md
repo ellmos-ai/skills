@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Транскрибирует аудио-/видеофайлы в текст. Использует Whisper (openai-whisper) или Vosk (офлайн) в качестве опционального бэкенда — оба определяются через проверку наличия. Без бэкенда: режим заглушки с фиктивным выводом (dry-run).
+description: "Транскрибирует аудио-/видеофайлы в текст. Использует Whisper (openai-whisper) или Vosk (офлайн) в качестве опционального бэкенда — оба определяются через проверку наличия. Без бэкенда: режим заглушки с фиктивным выводом (dry-run)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

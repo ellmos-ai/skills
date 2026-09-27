@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records.
+description: "Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

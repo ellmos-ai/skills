@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-08-24
-description: Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones.
+description: "Fetch video transcripts (subtitles) and metadata from online video sources and output them as Markdown, JSON, or plain text. Currently supported: YouTube. Prefers manually created subtitles, falls back to auto-generated ones."
 
 standalone: true
 anthropic_compatible: true

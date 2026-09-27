@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-04-04
 updated: 2026-06-20
-description: Obtiene transcripciones (subtítulos) y metadatos de fuentes de video en línea y los emite en Markdown, JSON o texto plano. Actualmente compatible: YouTube. Prefiere subtítulos creados manualmente y recurre a los generados automáticamente.
+description: "Obtiene transcripciones (subtítulos) y metadatos de fuentes de video en línea y los emite en Markdown, JSON o texto plano. Actualmente compatible: YouTube. Prefiere subtítulos creados manualmente y recurre a los generados automáticamente."
 
 standalone: true
 anthropic_compatible: true

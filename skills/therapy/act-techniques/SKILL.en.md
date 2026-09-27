@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility.
+description: "Acceptance & Commitment Therapy (ACT) according to Steven Hayes: Hexaflex model with the six core processes of psychological flexibility."
 
 standalone: true
 anthropic_compatible: true

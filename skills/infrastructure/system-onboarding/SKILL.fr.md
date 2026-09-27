@@ -5,7 +5,7 @@ type: skill
 author: ellmos contributors
 created: 2026-05-16
 updated: 2026-07-29
-description: [Français] Compétence d'agent pour system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository.
+description: "[Français] Compétence d'agent pour system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

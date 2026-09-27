@@ -5,10 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-07-28
 updated: 2026-07-30
-description: >
-  When an authorized local decision profile exists: predict recurring decisions from
-proven feedback, calibrate confidence, and strictly separate prediction, decision,
-and execution.
+description: "When an authorized local decision profile exists: predict recurring decisions from proven feedback, calibrate confidence, and strictly separate prediction, decision, and execution."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

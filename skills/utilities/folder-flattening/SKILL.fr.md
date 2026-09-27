@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
+description: "[Français] Compétence d'agent pour folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

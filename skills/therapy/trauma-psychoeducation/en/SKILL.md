@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care.
+description: "Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care."
 
 standalone: true
 anthropic_compatible: true

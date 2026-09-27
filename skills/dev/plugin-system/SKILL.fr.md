@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
+description: "[Français] Compétence d'agent pour plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

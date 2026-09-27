@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Procedimiento estándar para la incorporación de nuevos proyectos de software: análisis de funciones, revisión de calidad de código, lista de verificación e integración de tareas.
+description: "Procedimiento estándar para la incorporación de nuevos proyectos de software: análisis de funciones, revisión de calidad de código, lista de verificación e integración de tareas."
 
 standalone: true
 anthropic_compatible: true

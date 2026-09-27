@@ -5,13 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-25
 updated: 2026-07-30
-description: >
-  Lenguaje flexible de condiciones para objetivos, prompts y tareas. Traduce condiciones,
-marcas de tiempo y dependencias de secuencia en puertas verificables, de modo que una subetapa solo se
-ejecute tras una aprobación comprobada. Usar siempre con /condition, /if, /if-only,
-/when, /after, /and o /or, así como con expresiones como "solo cuando", "tan pronto como",
-"solo si", "después de", "esperar hasta", "después" o "antes no". Usar también cuando varios subobjetivos
-dependen entre sí o un objetivo contiene una aprobación posterior.
+description: "Lenguaje flexible de condiciones para objetivos, prompts y tareas. Traduce condiciones, marcas de tiempo y dependencias de secuencia en puertas verificables, de modo que una subetapa solo se ejecute tras una aprobación comprobada. Usar siempre con /condition, /if, /if-only, /when, /after, /and o /or, así como con expresiones como \"solo cuando\", \"tan pronto como\", \"solo si\", \"después de\", \"esperar hasta\", \"después\" o \"antes no\". Usar también cuando varios subobjetivos dependen entre sí o un objetivo contiene una aprobación posterior."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

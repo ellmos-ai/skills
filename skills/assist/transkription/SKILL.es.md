@@ -5,7 +5,7 @@ type: assist
 author: ellmos-ai
 created: 2026-06-22
 updated: 2026-06-22
-description: Transcribe archivos de audio/video a texto. Utiliza Whisper (openai-whisper) o Vosk (offline) como backend opcional; ambos se detectan mediante comprobación de presencia. Sin backend: modo marcador de posición con salida simulada (dry-run).
+description: "Transcribe archivos de audio/video a texto. Utiliza Whisper (openai-whisper) o Vosk (offline) como backend opcional; ambos se detectan mediante comprobación de presencia. Sin backend: modo marcador de posición con salida simulada (dry-run)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

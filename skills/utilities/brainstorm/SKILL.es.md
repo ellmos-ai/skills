@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Métodos de creatividad estructurada para la generación de ideas: SCAMPER, Seis Sombreros para Pensar, Mapa Mental, Lluvia de Ideas Inversa, TRIZ e Ideación Rápida.
+description: "Métodos de creatividad estructurada para la generación de ideas: SCAMPER, Seis Sombreros para Pensar, Mapa Mental, Lluvia de Ideas Inversa, TRIZ e Ideación Rápida."
 
 standalone: true
 anthropic_compatible: true

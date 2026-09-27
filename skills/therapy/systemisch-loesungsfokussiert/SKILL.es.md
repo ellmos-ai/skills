@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-06-13
-description: Métodos sistémicos y centrados en soluciones: pregunta del milagro, escalas, exploración de excepciones, preguntas circulares, preguntas hipotéticas, preguntas de empeoramiento, preguntas de afrontamiento. Combinado de solución de problemas y preguntas sistémicas.
+description: "Métodos sistémicos y centrados en soluciones: pregunta del milagro, escalas, exploración de excepciones, preguntas circulares, preguntas hipotéticas, preguntas de empeoramiento, preguntas de afrontamiento. Combinado de solución de problemas y preguntas sistémicas."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -45,7 +45,11 @@ en un área privada externa o en un directorio ignorado como
 
 1. Define el contenido publicado con `git ls-files`, `.gitignore` y las listas
    de inclusión del paquete; excluye notas, informes, datos de prueba,
-   configuración local y bloqueos.
+   configuración local y bloqueos. En una biblioteca de skills (archivos
+   `SKILL*.md`): cada frontmatter debe analizarse como YAML -- ejecuta
+   `testing/skill_frontmatter_gate.py` si existe en el repo (`--fix` corrige
+   el entrecomillado mecánicamente sin cambiar el texto), si no,
+   verifica con `yaml.safe_load`.
 2. Busca en el árbol y en todo el historial credenciales, tokens, claves,
    rutas locales, datos de contacto y datos personales.
 3. Verifica una `LICENSE` adecuada e inventaría código, prompts, documentación

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: 使用 Roblox Studio 进行游戏开发 —— 用于构建、测试和发布 3D 场景的官方可视化编辑器。使用此 Skill 了解：Studio 基础知识（Explorer、Workspace、运行测试、将 Place 保存为 .rbxl）、与 Rojo 的协同工作（Connect、场景模式与代码模式）、通过 Roblox-Studio-MCP 进行 AI 控制（execute_luau、insert_from_creator_store、generate_material、screen_capture、Play/Stop、读取 Console）、完整的 Asset 流水线工作流（Creator Store → 清理 → 套件构建 → 场景搭建 → .rbxl → Rojo 赋予活力），以及最重要针对 Marketplace Asset 的强制恶意软件扫描。还可在包含以下词汇时触发："在 Store 中嵌入资产"、"Studio MCP 不工作"、"studios: []"、"生成材质"、"保存场景"、"这个 Roblox 资产安全吗"、"Play 之后脚本消失"。
+description: "使用 Roblox Studio 进行游戏开发 —— 用于构建、测试和发布 3D 场景的官方可视化编辑器。使用此 Skill 了解：Studio 基础知识（Explorer、Workspace、运行测试、将 Place 保存为 .rbxl）、与 Rojo 的协同工作（Connect、场景模式与代码模式）、通过 Roblox-Studio-MCP 进行 AI 控制（execute_luau、insert_from_creator_store、generate_material、screen_capture、Play/Stop、读取 Console）、完整的 Asset 流水线工作流（Creator Store → 清理 → 套件构建 → 场景搭建 → .rbxl → Rojo 赋予活力），以及最重要针对 Marketplace Asset 的强制恶意软件扫描。还可在包含以下词汇时触发：\"在 Store 中嵌入资产\"、\"Studio MCP 不工作\"、\"studios: []\"、\"生成材质\"、\"保存场景\"、\"这个 Roblox 资产安全吗\"、\"Play 之后脚本消失\"。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

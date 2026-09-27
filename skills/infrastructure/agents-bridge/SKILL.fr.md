@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
 updated: 2026-08-22
-description: [Français] Compétence d'agent pour agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules.
+description: "[Français] Compétence d'agent pour agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules."
 standalone: true
 anthropic_compatible: true
 category: infrastructure

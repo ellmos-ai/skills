@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide.
+description: "Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide."
 
 standalone: true
 anthropic_compatible: true

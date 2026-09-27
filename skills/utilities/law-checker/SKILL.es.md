@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: Apunta al módulo independiente law-checker ("Departamento Legal"): evaluaciones jurídicas preliminares impulsadas por IA fundadas en fuentes para el derecho alemán con un registro de estatutos y un agente de encarnación de estatutos. Utilice esta habilidad cuando una situación, contrato, notificación oficial o pregunta legal bajo el derecho alemán deba ser verificada con citas exactas (artículo/sección, párrafo, frase) -- con un límite claro: orientación inicial asistida por IA, no un sustituto de un abogado.
+description: "Apunta al módulo independiente law-checker (\"Departamento Legal\"): evaluaciones jurídicas preliminares impulsadas por IA fundadas en fuentes para el derecho alemán con un registro de estatutos y un agente de encarnación de estatutos. Utilice esta habilidad cuando una situación, contrato, notificación oficial o pregunta legal bajo el derecho alemán deba ser verificada con citas exactas (artículo/sección, párrafo, frase) -- con un límite claro: orientación inicial asistida por IA, no un sustituto de un abogado."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

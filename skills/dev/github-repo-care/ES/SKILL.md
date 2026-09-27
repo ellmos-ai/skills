@@ -6,7 +6,7 @@ author: Lukas Geiger + Codex
 created: 2026-06-18
 updated: 2026-06-18
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: Protocolo para crear, publicar, lanzar, auditar y mantener repositorios de GitHub de forma segura: verificar reglas locales y bloqueos, crear .gitignore antes del primer git add, realizar verificaciones de privacidad, preparar README/i18n/banner/metadatos, verificar etiquetas de release y lanzamientos de GitHub, y actualizar perfiles de organización, archivos llms.txt y enlaces a registros.
+description: "Protocolo para crear, publicar, lanzar, auditar y mantener repositorios de GitHub de forma segura: verificar reglas locales y bloqueos, crear .gitignore antes del primer git add, realizar verificaciones de privacidad, preparar README/i18n/banner/metadatos, verificar etiquetas de release y lanzamientos de GitHub, y actualizar perfiles de organización, archivos llms.txt y enlaces a registros."
 
 standalone: true
 anthropic_compatible: true

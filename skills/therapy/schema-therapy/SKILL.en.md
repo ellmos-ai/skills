@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented.
+description: "Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented."
 
 standalone: true
 anthropic_compatible: true

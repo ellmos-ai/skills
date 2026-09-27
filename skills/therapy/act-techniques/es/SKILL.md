@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Terapia de Aceptación y Compromiso (ACT) según Steven Hayes: modelo Hexaflex con los seis procesos nucleares de la flexibilidad psicológica.
+description: "Terapia de Aceptación y Compromiso (ACT) según Steven Hayes: modelo Hexaflex con los seis procesos nucleares de la flexibilidad psicológica."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

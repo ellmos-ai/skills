@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Activación conductual para la depresión: romper el círculo vicioso, registro de actividades, planificación semanal y actividades basadas en valores.
+description: "Activación conductual para la depresión: romper el círculo vicioso, registro de actividades, planificación semanal y actividades basadas en valores."
 
 standalone: true
 anthropic_compatible: true

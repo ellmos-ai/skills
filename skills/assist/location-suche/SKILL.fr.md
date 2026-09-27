@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: [Français] Compétence d'agent pour location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
+description: "[Français] Compétence d'agent pour location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text."
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Основы терапевтической коммуникации: активное слушание, отклики-отражения, парафразирование, открытые вопросы и валидация.
+description: "Основы терапевтической коммуникации: активное слушание, отклики-отражения, парафразирование, открытые вопросы и валидация."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
+description: "[Français] Compétence d'agent pour psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

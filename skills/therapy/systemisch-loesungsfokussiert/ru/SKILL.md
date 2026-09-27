@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-06-13
-description: Системные и ориентированные на решение методы: чудесный вопрос, шкалирование, поиск исключений, циркулярные вопросы, гипотетические вопросы, вопросы на ухудшение, вопросы на преодоление. Объединено из solution-focused-therapy и systemic-questioning.
+description: "Системные и ориентированные на решение методы: чудесный вопрос, шкалирование, поиск исключений, циркулярные вопросы, гипотетические вопросы, вопросы на ухудшение, вопросы на преодоление. Объединено из solution-focused-therapy и systemic-questioning."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

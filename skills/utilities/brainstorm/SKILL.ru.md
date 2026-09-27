@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Методы структурированного творчества для генерации идей: SCAMPER, Шесть шляп мышления, Интеллект-карты (Mind Mapping), Обратный брейншторминг, ТРИЗ и Быстрая генерация идей (Rapid Ideation).
+description: "Методы структурированного творчества для генерации идей: SCAMPER, Шесть шляп мышления, Интеллект-карты (Mind Mapping), Обратный брейншторминг, ТРИЗ и Быстрая генерация идей (Rapid Ideation)."
 
 standalone: true
 anthropic_compatible: true

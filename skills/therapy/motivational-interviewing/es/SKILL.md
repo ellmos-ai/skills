@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Entrevista Motivacional (EM) según Miller y Rollnick: técnicas OARS, discurso de cambio y fomento de la preparación para el cambio.
+description: "Entrevista Motivacional (EM) según Miller y Rollnick: técnicas OARS, discurso de cambio y fomento de la preparación para el cambio."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

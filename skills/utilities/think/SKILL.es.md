@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Resolución de problemas y análisis: Procesos de pensamiento estructurado para problemas complejos. Divide & Vencerás, Análisis de Causa Raíz, FODA (SWOT), Pareto y heurísticas de decisión.
+description: "Resolución de problemas y análisis: Procesos de pensamiento estructurado para problemas complejos. Divide & Vencerás, Análisis de Causa Raíz, FODA (SWOT), Pareto y heurísticas de decisión."
 
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-06-13
 updated: 2026-06-13
-description: Utilícelo siempre que haya varias decisiones pendientes o acumuladas, ya sea dentro de un tema, proyecto, documento o a lo largo de una sesión: inventaríelas, presente un briefing numerado con opciones A/B/C/D y una recomendación destacada, acepte respuestas por letra (incluidos envíos en lote), registre los resultados y escríbalos de nuevo en los documentos de origen.
+description: "Utilícelo siempre que haya varias decisiones pendientes o acumuladas, ya sea dentro de un tema, proyecto, documento o a lo largo de una sesión: inventaríelas, presente un briefing numerado con opciones A/B/C/D y una recomendación destacada, acepte respuestas por letra (incluidos envíos en lote), registre los resultados y escríbalos de nuevo en los documentos de origen."
 
 standalone: true
 anthropic_compatible: true

@@ -5,9 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-07-28
 updated: 2026-07-30
-description: >
-  当存在已明确授权的本地决策配置文件时：根据经过验证的反馈预测重复性决策，
-校准置信度，并严格区分预测、决策和执行。
+description: "当存在已明确授权的本地决策配置文件时：根据经过验证的反馈预测重复性决策， 校准置信度，并严格区分预测、决策和执行。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

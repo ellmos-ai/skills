@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Решение проблем и анализ: Процессы структурированного мышления для сложных проблем. Разделяй и властвуй (Divide & Conquer), анализ корневых причин (Root Cause Analysis), SWOT, Парето и эвристики принятия решений.
+description: "Решение проблем и анализ: Процессы структурированного мышления для сложных проблем. Разделяй и властвуй (Divide & Conquer), анализ корневых причин (Root Cause Analysis), SWOT, Парето и эвристики принятия решений."
 
 standalone: true
 anthropic_compatible: true

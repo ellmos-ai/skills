@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on "plan a new game", "create Game Design Document", "which roles do I need for my game", "development workflow for a game", "who tests the game", "structure a game idea", "Roblox genre/monetization".
+description: "How game development works as a process — roles, subtasks, workflows and role descriptions, especially (but not only) for Roblox. Use this skill when it's about the ORGANIZATION of game dev rather than concrete code: Which roles exist (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Who does which subtask? What does a development chain (concept → backend → frontend → polish → test) look like? How do you write a Game Design Document / KONZEPT.md? How do several (AI) agents divide up a game? Also trigger on \"plan a new game\", \"create Game Design Document\", \"which roles do I need for my game\", \"development workflow for a game\", \"who tests the game\", \"structure a game idea\", \"Roblox genre/monetization\"."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

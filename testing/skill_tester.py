@@ -215,7 +215,14 @@ def frontmatter_gate_errors(skill_path):
         # dort, WOHER der Skill kommt, nicht WORUM es geht. Ein fremder Videoskill
         # bleibt inhaltlich 'utilities', auch wenn er unter third-party/ liegt --
         # die Kategorie zu ueberschreiben wuerde Information vernichten.
-        category_folder = Path(skill_path).resolve().parent.name
+        # Uebersetzungs-Unterordner (z.B. skills/utilities/think/en/SKILL.md,
+        # `skill_path` = ".../think/en") schieben den erwarteten Themen-Ordner
+        # eine Ebene tiefer ein: der Vergleich muss weiterhin gegen
+        # "utilities" (den Elternordner des SKILL-Ordners "think/") laufen,
+        # nicht gegen dessen eigenen Sprachordner "en/". `inherits` erkennt
+        # genau diesen Fall bereits (Geschwister-SKILL.md eine Ebene hoeher).
+        skill_dir = Path(skill_path).resolve()
+        category_folder = (skill_dir.parent if inherits else skill_dir).parent.name
         if not category_folder.startswith('_') and str(category).strip() != category_folder:
             errors.append(
                 f"category '{category}' widerspricht dem Ordner '{category_folder}/' "

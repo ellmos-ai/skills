@@ -5,7 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-06-17
 updated: 2026-07-28
-description: [Français] Compétence d'agent pour orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+description: "[Français] Compétence d'agent pour orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
