@@ -1564,14 +1564,14 @@
       ]
     },
     {
-      "id": "skill:production:textproduction",
+      "id": "expert:production:textproduction",
       "name": "textproduction",
-      "type": "skill",
+      "type": "expert",
       "category": "production",
       "path": "skills/production/textproduction/SKILL.md",
-      "version": "0.0.0",
+      "version": "2.0.0",
       "status": "active",
-      "description": "",
+      "description": "KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich.",
       "languages": [
         "de",
         "en",
@@ -2283,9 +2283,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/idea-mining/SKILL.md",
-      "version": "0.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "",
+      "description": "Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen, hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik, Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X\" gebraucht werden, bei „wir drehen uns im Kreis\", oder für periodische Innovations-Läufe über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen brainstorm (SCAMPER, Six Hats etc.).",
       "languages": [
         "de",
         "en",

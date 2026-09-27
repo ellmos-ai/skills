@@ -30,6 +30,8 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-confi
 This is the MCP-focused entry point to `agent-config-sync`. It assumes no
 provider, app or master file.
 
+## Ablauf
+
 1. Ask which concrete endpoints or axes the user wants: within one provider
    across app classes, within one app class across providers, an explicit list,
    or every detected provider and class.
@@ -42,3 +44,20 @@ provider, app or master file.
 Discovery and offers are read-only. There is no implicit hub and no implicit
 “sync all”. The former Claude Code↔Claude Desktop scripts are a legacy profile,
 not the generic default.
+
+## Beispielaufruf
+
+```
+agent-config-sync/scripts/sync.py --discover
+agent-config-sync/scripts/sync.py --offer
+agent-config-sync/scripts/sync.py --plan
+agent-config-sync/scripts/sync.py --apply --yes
+```
+
+## Änderungsprotokoll
+
+- v2.0.0 (2026-07-27): Sync provider-neutral gemacht -- keine implizite
+  Hub-/Master-Datei mehr, Nutzer waehlt Quelle, Ziele, Richtung und
+  Konfliktpolitik selbst.
+- v1.0.1 (2026-06-13): Skill veroeffentlicht (Sync-Scripts + Vorlage auf
+  generische Pfade umgestellt, Referenzen anonymisiert, EN-Version).
