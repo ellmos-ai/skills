@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.1.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-09-27
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: 安全创建、发布、发行、审计和维护 GitHub 仓库的协议：检查本地规则和锁、在第一次 git add 之前创建 .gitignore、执行隐私检查、准备 README/i18n/Banner/元数据、验证发布标签与 GitHub Releases，并更新组织主页、llms.txt 文件和注册表链接。
 standalone: true
@@ -52,6 +52,8 @@ provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-car
 12. **设置元数据。** 检查描述 (description)、主题标签 (topics)、主页 (homepage)、可见性 (visibility) 和默认分支 (default branch)。
 13. **创建 Release 发布。** 创建 Tag 标签和 GitHub Release；验证分支和 Tag 的 CI 状态。
 14. **更新入口与展示面。** 从组织主页、`llms.txt`、中央注册表、本地模块索引以及生态系统 README 中进行链接关联。**发布 ⇒ 组织主页（T-20260926-796851315）：** 若仓库带有 Banner，需机械化检查它是否已出现在组织主页（`<org>/.github/profile/README.md`）上 —— `python org_profile_gate.py --org <org>`（`.AI/.SKILLS/testing/`）。若缺失，脚本会生成一段可直接粘贴的 Markdown 片段。
+    **为自己的仓库加星（T-20260926-299328659）：** 发布后维护会检查该账号是否已给自己的每个公开仓库加星，若未加星则加星 —— 通过你自己的 GitHub 维护工具执行（如果有的话；路径与调用方式来自本地配置，例如 `--self-star` 标志：不带仓库参数时对所有已配置组织执行补漏运行，带参数时在本次发布后对单个仓库执行）。绝不自动取消加星。
+    **星标关注者（Stargazer）维护：** 关注新的星标关注者，并在其最佳项目确实达到质量标准时回赠星标 —— 如果你的 GitHub 维护工具已有互惠模块，直接使用它（对主题相关性打分并建议回赠星标/邀请/复核/跳过；以速率限制、冷却时间和 dry-run/apply/confirm 安全网执行后续操作）。若已存在则不要重建；该模块会自行记录决策。绝不自动取消关注或取消加星。
 15. **最终验证。** 检查远端 README、Release 页面、Topics 标签、CI 状态和链接。
 
 ## 隐私关口 (Privacy Gate)
@@ -65,6 +67,14 @@ rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|
 ```
 
 对于公开模块，还需要记录 `RELEASE_GATE.md` 或同等检查文档：日期、检查过的命令、结果、剩余警告以及有意的例外情况。如果密钥曾被提交过，仅从 `HEAD` 中删除是不够的；必须轮换废弃该密钥。
+
+**检查关联仓库的可见性。** 路径/Token 扫描无法发现公开 README 中指向私有 GitHub 仓库的链接（参考案例 T-20260926-820252321：`ellmos-ai/ellmos-core` 是私有仓库，却在 README 的一张表格中被忽视多时未被发现）。如果仓库中存在该检查，请运行可复用脚本：
+
+```bash
+python testing/repo_link_visibility_gate.py --repo .
+```
+
+该检查在不确定的情况下（网络故障、速率限制、404 —— 这些都只是提示，绝不构成阻断）会放行，只有在确认 `private: true` 时才会阻断。若没有此脚本（仓库中没有该检查的副本）：请用 `gh api repos/ORG/REPO --jq .private` 逐一抽查 README 中每个兄弟/第三方仓库链接。
 
 ## GitHub 元数据
 
@@ -115,6 +125,17 @@ gh run list --repo ORG/REPO --limit 5
 - [ ] 是否有 Banner？针对此仓库运行 `org_profile_gate.py --org <org>` 无发现。
 
 ## 变更日志
+
+### 1.3.0 (2026-09-27)
+- 扩展了步骤 14（T-20260926-299328659，用户需求）：检查/设置账号自身在其公开仓库上的加星状态，
+  以及星标关注者维护（关注 + 高质量回赠星标），通过你自己的 GitHub 维护工具执行（如果有的话）——
+  不预设具体工具。绝不自动取消关注或取消加星。
+
+### 1.2.0 (2026-09-26)
+- 新增隐私关口步骤（T-20260926-820252321）：检查关联 GitHub 仓库的可见性
+  （`testing/repo_link_visibility_gate.py --repo .`，在网络故障/速率限制/404 时放行，
+  仅在确认 `private: true` 时阻断）。参考案例：`ellmos-ai/ellmos-core`（一个私有仓库）
+  曾在 README 的一张表格中被忽视多时未被发现。
 
 ### 1.1.0 (2026-09-26)
 - 新增"发布 ⇒ 组织主页"步骤（T-20260926-796851315）：带 Banner 的仓库必须对照其组织主页 README
