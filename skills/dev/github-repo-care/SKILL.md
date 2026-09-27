@@ -51,8 +51,8 @@ Bereite das Repository vor dem ersten öffentlichen Push vor. Eine korrekte `.gi
 12. **Metadaten setzen.** Beschreibung, Topics, Homepage, Sichtbarkeit und Branch-Default prüfen.
 13. **Release erstellen.** Tag und GitHub-Release anlegen; CI für Branch und Tag prüfen.
 14. **Discovery-Flächen aktualisieren.** Organisationsprofil, `llms.txt`, zentrale Registries, lokale Modulindizes und Ökosystem-READMEs verlinken. **Publish ⇒ Profilseite (T-20260926-796851315):** Hat das Repo ein Banner, prüfe mechanisch, ob es auf der Org-Profilseite (`<org>/.github/profile/README.md`) bereits auftaucht — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). Fehlt der Eintrag, liefert das Skript ein fertiges Markdown-Snippet zum Einfügen.
-    **Eigenen Stern setzen (T-20260926-299328659):** Aftercare prüft für jedes eigene öffentliche Repo, ob der Account selbst schon einen Stern gesetzt hat, und setzt ihn sonst nach — `python run.py --self-star` in `.GITHUBBOT` (ohne `--repo`: Nachhol-Lauf über alle 9 Orgs; mit `--repo <org>/<name>`: Einzelrepo, z. B. direkt nach diesem Publish). Nie automatisch entsternen.
-    **Stargazer-Pflege:** neuen Stargazern folgen und bei echter Qualität ihr bestes Projekt zurücksternen — dafür existiert bereits `.GITHUBBOT` `core/reciprocity.py` (`ReciprocityChecker` bewertet thematische Relevanz und schlägt `star_back`/`invite`/`review`/`skip` vor; `PersonalFollowback` führt das Folgen mit Rate-Caps, Cooldown und Dry-run/Apply/Confirm-Sicherheitsnetz aus — `python run.py --reciprocity` bzw. `--followback`). Nicht neu bauen; Entscheidungen protokolliert das Modul selbst in seinen State-/Report-Dateien. Nie automatisch entfolgen oder entsternen.
+    **Eigenen Stern setzen (T-20260926-299328659):** Aftercare prüft für jedes eigene öffentliche Repo, ob der Account selbst schon einen Stern gesetzt hat, und setzt ihn sonst nach — über das eigene GitHub-Pflege-Tool, falls vorhanden (Pfad und Aufruf per lokaler Config, z. B. ein `--self-star`-Flag: ohne Repo-Angabe ein Nachhol-Lauf über alle konfigurierten Organisationen, mit Repo-Angabe ein Einzellauf direkt nach diesem Publish). Nie automatisch entsternen.
+    **Stargazer-Pflege:** neuen Stargazern folgen und bei echter Qualität ihr bestes Projekt zurücksternen — falls das eigene GitHub-Pflege-Tool bereits ein Reziprozitäts-Modul mitbringt, dieses nutzen (bewertet thematische Relevanz und schlägt zurücksternen/einladen/prüfen/überspringen vor; führt das Folgen mit Rate-Caps, Cooldown und Dry-run/Apply/Confirm-Sicherheitsnetz aus). Nicht neu bauen, wenn es das schon gibt; Entscheidungen protokolliert das Modul selbst. Nie automatisch entfolgen oder entsternen.
 15. **Abschluss prüfen.** Remote README, Release-Seite, Topics, CI und Links kontrollieren.
 
 ## Privacy-Gate
@@ -135,10 +135,9 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 
 ### 1.3.0 (2026-09-27)
 - Step 14 erweitert (T-20260926-299328659, Nutzerauftrag): eigenen Stern auf eigenen
-  öffentlichen Repos prüfen/setzen (`.GITHUBBOT` `run.py --self-star`, neu gebaut) sowie
-  Stargazer-Pflege (folgen + Qualitäts-Rücksternen über bereits bestehende
-  `.GITHUBBOT`-Module `core/reciprocity.py`/`PersonalFollowback` — nicht neu gebaut, nur
-  referenziert). Nie automatisch entfolgen/entsternen.
+  öffentlichen Repos prüfen/setzen sowie Stargazer-Pflege (folgen + Qualitäts-
+  Rücksternen), über das eigene GitHub-Pflege-Tool, falls vorhanden — kein bestimmtes
+  Werkzeug vorgeschrieben. Nie automatisch entfolgen/entsternen.
 
 ### 1.2.0 (2026-09-26)
 - Neuer Privacy-Gate-Schritt (T-20260926-820252321): verlinkte GitHub-Repos auf

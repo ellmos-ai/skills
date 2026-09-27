@@ -1518,7 +1518,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/wayfinding-routing/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "description": "Universeller Skill für LLM-Navigation, Orientierung und Ausfallsicherheit. Stellt aktives Wayfinding, Selbstorientierung und Wiederherstellungsheuristiken bereit, wenn Agenten mit Kontextdrift, fehlschlagenden Werkzeugen, Schleifen oder Sackgassen konfrontiert sind. Enthält die synonymen Strategien survival-routing, dead-reckoning, pathfinder-routing und celestial-routing.",
       "languages": [

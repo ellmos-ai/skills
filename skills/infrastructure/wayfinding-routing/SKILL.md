@@ -1,10 +1,10 @@
 ---
 name: wayfinding-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
+updated: 2026-09-27
 description: >
   Universeller Skill für LLM-Navigation, Orientierung und
   Ausfallsicherheit. Stellt aktives Wayfinding, Selbstorientierung und
@@ -57,6 +57,7 @@ Ausführungsfehler, ausfallende APIs oder Sackgassen aus.
 | **`dead-reckoning`** | **Nautische Koppelnavigation:** Exakten Zustand aus schrittweisen Brotkrumen ohne externe Statusquelle rekonstruieren. | Ausführungsschritte in Scratch-Dateien oder `TODO.md` verfolgen, um präzise zurückzugehen. |
 | **`pathfinder-routing`** | **Pfadfinder und Vorauskommando:** Wege für Multi-Agenten-Teams vorab prüfen und vorbereiten. | Preflight-Prüfung von Verzeichnisbäumen, Sperren und Aufgabenabhängigkeiten. |
 | **`celestial-routing`** | **Astronavigation:** An unveränderlichen Nordstern-Ankerdokumenten ausrichten, wenn lokaler Kontext verrauscht ist. | Rückfall auf `CLAUDE.md`, `AGENTS.md` und `START.md`, wenn Prompt-Anweisungen widersprüchlich sind. |
+| **Strategie `likelihood-routing`** (eigener Skill, falls installiert) | **Wahrscheinlichkeits-Gradient als Wärmer/Kälter-Sensor:** Steuerdateien über die bedingte Folgewahrscheinlichkeit (Likelihood Scoring) eines Zielbegriffs bewerten und dem Gradienten ($\Delta S$) folgen. | Fallback ohne Memory-Dienst, wenn ein projektspezifischer Fachbegriff in keiner Session-Historie auftaucht. |
 
 ---
 
@@ -131,3 +132,16 @@ Ausführungsfehler, ausfallende APIs oder Sackgassen aus.
   Sperrprüfung und Brotkrumenprotokollierung.
 - **`staircase-routing`**: Nutzt `PROTOCOL-ANCHOR-RESET` für vertikale
   Verzeichnisnavigation.
+- **Strategie `likelihood-routing`** (eigener Skill, falls installiert): Liefert
+  den Wahrscheinlichkeits-Gradienten als Wärmer/Kälter-Sensor für
+  `PROTOCOL-ANCHOR-RESET`, wenn Steuerdateien mehrdeutig auf mehrere
+  plausible Äste verweisen — komplementär zu `staircase-routing`, das nach
+  Stichwort-Treffer statt nach Gradient sucht.
+
+## Changelog
+
+### 1.1.0 (2026-09-27)
+- Strategie `likelihood-routing` in Übersichtstabelle und
+  Integrationsabschnitt erwähnt (ohne Link -- der Skill ist private-only
+  und noch nicht Teil dieses öffentlichen Repos; die Sichtbarkeitsfrage
+  liegt beim Nutzer).
