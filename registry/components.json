@@ -2352,9 +2352,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/llm-text-hygiene/SKILL.md",
-      "version": "0.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "",
+      "description": "Entfernt KI-Spuren, Chat-Reste, Platzhalter und LLM-Stilmuster aus fertigen Texten und prüft die AI-Disclosure auf Vollständigkeit und korrekten Sitz.",
       "languages": [
         "de",
         "en",

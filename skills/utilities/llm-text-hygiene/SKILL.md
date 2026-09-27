@@ -1,6 +1,19 @@
 ---
+name: llm-text-hygiene
+version: 1.1.0
+type: skill
+author: Lukas Geiger
+created: 2026-07-04
+updated: 2026-09-27
+description: Entfernt KI-Spuren, Chat-Reste, Platzhalter und LLM-Stilmuster aus fertigen Texten und prüft die AI-Disclosure auf Vollständigkeit und korrekten Sitz.
+standalone: true
+anthropic_compatible: true
+category: utilities
+tags: [ai-disclosure, text-hygiene, qa, llm-cleanup, style-review]
+status: active
 language: de
 visibility: public
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 ---
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
@@ -85,6 +98,14 @@ Skills; das Ziel ist ein Text ohne Fremdkörper.
 6. **Periodisch über einen Bestand:** mit `rotation-check` kombinieren (ein Dokument/
    Projekt pro Lauf, Registry als Gedächtnis).
 
+**Optionales Werkzeug für Klasse 5 und AI-Disclosure:** Auf ausdrücklichen Nutzerwunsch —
+nie automatisch — kann [`pasta-press`](https://github.com/ellmos-ai/pasta-press)
+(öffentliches Repo, 100 % lokal über Ollama) zur Stilveredelung eingesetzt werden:
+`pastapress process <datei>` bzw. `pastapress text "…"`. Grenze aus den Red Flags oben:
+Dieser Skill poliert nicht selbst — pasta-press ersetzt nicht den Lese-Pass, und die
+Markerbereinigung (Klassen 1–4) bleibt eine Prüfentscheidung dieses Skills, unabhängig
+davon, ob pasta-press eingesetzt wird.
+
 ## Signal-Muster für den mechanischen Scan
 
 | Klasse | Suchmuster (DE) | Suchmuster (EN) |
@@ -124,14 +145,26 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
 | „Die deutsche Fassung reicht" | Residue sitzt oft nur in EINER Fassung — immer alle Sprachfassungen prüfen und synchron halten. |
 | „Disclosure raus, dann ist es sauber" | Falsch herum: LLM-Dank raus, korrekte Disclosure REIN — Verschleiern ist keine Hygiene. |
 
-## Verwandte Skills
+## Verwandte Skills & Werkzeuge
 
 - `encoding-fix` — Byte-/Encoding-Reparatur (Mojibake); dieser Skill hier arbeitet auf Inhaltsebene.
 - `bilingual-doc-sync` — Synchronhaltung der Sprachfassungen, in die Fixes eingepflegt werden.
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `textproduction` — Text-Erzeugung (dieser Skill ist die QA danach).
+- [`pasta-press`](https://github.com/ellmos-ai/pasta-press) — externes, öffentliches Werkzeug
+  (kein Skill dieser Bibliothek): lokale KI-Textpresse via Ollama für Stilveredelung,
+  Übersetzung und Marker-Entfernung. Optional für Klasse 5, nur auf Nutzerwunsch — dieser
+  Skill poliert nicht selbst (siehe Red Flags und Ablauf).
 
 ## Änderungsprotokoll
+
+### 1.1.0 (2026-09-27)
+- `pasta-press` (öffentliches Repo `ellmos-ai/pasta-press`) als optionales Werkzeug für
+  Klasse 5 (Stilmuster) und AI-Disclosure-Veredelung aufgenommen — nur auf Nutzerwunsch,
+  Markerbereinigung bleibt Prüfentscheidung dieses Skills. Abschnitt „Verwandte Skills"
+  zu „Verwandte Skills & Werkzeuge" erweitert. Alle sieben Sprachfassungen synchron
+  aktualisiert; `SKILL.fr.md` war dabei tatsächlich unübersetzter deutscher Text unter
+  französischem Deckblatt — als echte französische Übersetzung nachgezogen.
 
 ### 1.0.0 (2026-07-04)
 - Initiale Version. Abstrahiert aus der Codex-Automation „research-llm-muster-check"

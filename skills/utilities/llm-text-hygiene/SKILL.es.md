@@ -50,6 +50,15 @@ Transiciones formularias ("En resumen se puede decir", "Es importante destacar")
 5. **Documentar:** Registrar lo encontrado/modificado/marcado —en trabajos con obligación de versionado, anotar si se requiere una nueva versión/re-subida.
 6. **Pase periódico sobre un repositorio:** Combinar con `rotation-check` (un documento/proyecto por ejecución, registro como memoria).
 
+**Herramienta opcional para la clase 5 y la divulgación de IA:** Solo a petición expresa
+del usuario —nunca automáticamente— se puede usar
+[`pasta-press`](https://github.com/ellmos-ai/pasta-press) (repositorio público, 100 %
+local vía Ollama) para el pulido de estilo: `pastapress process <archivo>` o
+`pastapress text "…"`. Límite según las banderas rojas anteriores: esta habilidad no
+pule el estilo por sí misma —pasta-press no sustituye el pase de lectura, y la limpieza
+de marcadores (clases 1–4) sigue siendo una decisión de verificación de esta habilidad,
+independientemente de si se usa pasta-press.
+
 ## Patrones de señal para el escaneo mecánico
 
 | Clase | Patrón de búsqueda (DE) | Patrón de búsqueda (EN) |
@@ -86,14 +95,28 @@ Solicitud: "Comprueba el artículo en busca de residuos de IA antes de subirlo."
 | "La versión en alemán es suficiente" | Los residuos a menudo están en UNA SOLA versión —comprobar siempre todas las versiones lingüísticas y mantenerlas en sincronía. |
 | "Eliminar la divulgación, así queda limpio" | Al revés: eliminar agradecimientos a LLM, incluir la divulgación correcta de IA —ocultar no es higiene. |
 
-## Skills relacionadas
+## Skills y herramientas relacionadas
 
 - `encoding-fix` — Reparación de bytes/codificación (mojibake); esta habilidad trabaja a nivel de contenido.
 - `bilingual-doc-sync` — Mantenimiento de la sincronización entre versiones lingüísticas donde se aplican las soluciones.
 - `rotation-check` — Estructura para ejecuciones periódicas sobre un repositorio de documentos.
 - `textproduction` — Generación de texto (esta habilidad es el control de calidad posterior).
+- [`pasta-press`](https://github.com/ellmos-ai/pasta-press) — herramienta externa y
+  pública (no es una habilidad de esta biblioteca): prensa de texto por IA local vía
+  Ollama para pulido de estilo, traducción y eliminación de marcadores. Opcional para la
+  clase 5, solo a petición del usuario —esta habilidad no pule el estilo por sí misma
+  (ver Banderas Rojas y Flujo de trabajo).
 
 ## Registro de cambios
+
+### 1.1.0 (2026-09-27)
+- Se añadió `pasta-press` (repositorio público `ellmos-ai/pasta-press`) como herramienta
+  opcional para la clase 5 (patrones de estilo) y el pulido de la divulgación de IA —solo
+  a petición del usuario, la limpieza de marcadores sigue siendo decisión de esta
+  habilidad. "Skills relacionadas" ampliado a "Skills y herramientas relacionadas". Las
+  siete versiones lingüísticas se actualizaron de forma sincrónica; se detectó que
+  `SKILL.fr.md` era en realidad texto alemán sin traducir bajo una portada francesa y se
+  ha vuelto a traducir como francés real.
 
 ### 1.0.0 (2026-07-04)
 - Versión inicial. Abstraído de la automatización Codex "research-llm-muster-check"
