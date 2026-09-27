@@ -6,6 +6,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-07-30
+standalone: true
 language: zh
 ---
 

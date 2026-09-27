@@ -138,5 +138,110 @@ class ReadmeLanguageLinkGateTests(unittest.TestCase):
         self.assertIn("nicht git-getrackt", violations[0])
 
 
+class SkillBodyLinkGateTests(unittest.TestCase):
+    """T-20260927-518399776 (PR #48 review): wayfinding-routing linked
+    `../likelihood-routing/SKILL.md`, a private-only skill not tracked in
+    this repo -- a dead link to a private skill, undetected because the
+    README-only gate never looked inside SKILL*.md bodies."""
+
+    def test_repository_skill_bodies_have_no_untracked_links(self) -> None:
+        violations, checked_links, _baselined = gate.scan_skill_bodies(REPO_ROOT)
+        self.assertEqual([], violations, "\n".join(violations))
+        self.assertGreater(checked_links, 0)
+
+    def test_link_to_untracked_private_skill_is_a_violation(self) -> None:
+        """Regression case for the exact PR #48 bug: a relative markdown
+        link from one SKILL.md to a sibling skill that isn't git-tracked
+        (e.g. visibility: private-only in the library) must fail."""
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            _init_git_repo(root)
+            public_dir = root / "skills/infrastructure/wayfinding-routing"
+            public_dir.mkdir(parents=True)
+            (public_dir / "SKILL.md").write_text(
+                "See [likelihood-routing](../likelihood-routing/SKILL.md) for details.\n",
+                encoding="utf-8",
+            )
+            _git_add(root, "skills/infrastructure/wayfinding-routing/SKILL.md")
+            # The private skill exists on disk (as it would in the OneDrive
+            # library) but is deliberately never git-added.
+            private_dir = root / "skills/infrastructure/likelihood-routing"
+            private_dir.mkdir(parents=True)
+            (private_dir / "SKILL.md").write_text("---\nname: x\n---\n", encoding="utf-8")
+
+            violations, checked_links, baselined = gate.scan_skill_bodies(root)
+
+        self.assertEqual(1, checked_links)
+        self.assertEqual(0, baselined)
+        self.assertEqual(1, len(violations), "\n".join(violations))
+        self.assertIn("likelihood-routing/SKILL.md", violations[0])
+        self.assertIn("nicht git-getrackt", violations[0])
+
+    def test_link_to_tracked_sibling_skill_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            _init_git_repo(root)
+            a_dir = root / "skills/infrastructure/skill-a"
+            b_dir = root / "skills/infrastructure/skill-b"
+            a_dir.mkdir(parents=True)
+            b_dir.mkdir(parents=True)
+            (a_dir / "SKILL.md").write_text(
+                "See [skill-b](../skill-b/SKILL.md).\n", encoding="utf-8"
+            )
+            (b_dir / "SKILL.md").write_text("---\nname: b\n---\n", encoding="utf-8")
+            _git_add(
+                root,
+                "skills/infrastructure/skill-a/SKILL.md",
+                "skills/infrastructure/skill-b/SKILL.md",
+            )
+
+            violations, checked_links, baselined = gate.scan_skill_bodies(root)
+
+        self.assertEqual(1, checked_links)
+        self.assertEqual(0, baselined)
+        self.assertEqual([], violations)
+
+    def test_img_src_to_untracked_file_is_a_violation(self) -> None:
+        """Same bug class as the likelihood-routing links, but for
+        `<img src="...">` -- covers the sibling banner-path bug found in
+        decision-briefing during the same review round."""
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            _init_git_repo(root)
+            lang_dir = root / "skills/utilities/example/en"
+            lang_dir.mkdir(parents=True)
+            (lang_dir / "SKILL.md").write_text(
+                '<img src="banner.png" alt="banner">\n', encoding="utf-8"
+            )
+            _git_add(root, "skills/utilities/example/en/SKILL.md")
+            # banner.png lives at the skill root, NOT inside en/ -- this
+            # img src is wrong and its resolved target isn't tracked.
+
+            violations, checked_links, baselined = gate.scan_skill_bodies(root)
+
+        self.assertEqual(1, checked_links)
+        self.assertEqual(0, baselined)
+        self.assertEqual(1, len(violations), "\n".join(violations))
+
+    def test_external_and_anchor_links_are_not_checked(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            _init_git_repo(root)
+            skill_dir = root / "skills/utilities/example"
+            skill_dir.mkdir(parents=True)
+            (skill_dir / "SKILL.md").write_text(
+                "See [docs](https://example.com/docs), [mail](mailto:a@b.com), "
+                "[section](#usage), and [local file](file:///tmp/notes.md).\n",
+                encoding="utf-8",
+            )
+            _git_add(root, "skills/utilities/example/SKILL.md")
+
+            violations, checked_links, baselined = gate.scan_skill_bodies(root)
+
+        self.assertEqual(0, checked_links)
+        self.assertEqual(0, baselined)
+        self.assertEqual([], violations)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,10 @@
 ---
 name: location-suche
 version: 1.0.0
+type: assist
+author: ellmos-ai
+created: 2026-07-23
+updated: 2026-08-23
 category: assist
 description: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
 

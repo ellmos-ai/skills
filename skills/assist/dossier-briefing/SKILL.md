@@ -1,6 +1,10 @@
 ---
 name: dossier-briefing
 version: 1.0.0
+type: assist
+author: ellmos-ai
+created: 2026-07-23
+updated: 2026-08-23
 category: assist
 description: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
 

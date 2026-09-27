@@ -88,18 +88,49 @@ def read_frontmatter(path: Path) -> dict:
         if not match:
             continue
         first = match.group(1).strip()
-        if first in {">", ">-", "|", "|-"}:
+        if first in {">", ">-", ">+", "|", "|-", "|+"}:
+            # T-20260927-518399776 (skills#46 review, follow-up): `>+`/`|+`
+            # (keep chomping) were missing here -- a description using either
+            # would have fallen into the `else` branch below and been read as
+            # the literal 2-character string ">+"/"|+" instead of the folded
+            # body.
             for continuation in lines[index + 1 :]:
                 if continuation and not continuation[0].isspace():
                     break
                 if continuation.strip():
                     description_lines.append(continuation.strip())
             data["description"] = " ".join(description_lines)
+        elif first.startswith('"'):
+            # A double-quoted scalar CAN span multiple physical lines (YAML
+            # folds the embedded line breaks into single spaces, same as a
+            # plain scalar) -- rare in this repo today, but a single-line
+            # assumption here would silently truncate one if it ever occurs.
+            # Accumulate lines until the combined text parses as a JSON
+            # string (this repo's quoted scalars use JSON-compatible
+            # escaping, see testing/skill_frontmatter_gate.py), or give up
+            # after a bounded number of lines rather than looping forever on
+            # a scalar that never closes.
+            combined = first
+            parsed = _try_json_string(combined)
+            j = index + 1
+            while parsed is None and j < len(lines) and j < index + 40 and lines[j][:1].isspace():
+                combined += " " + lines[j].strip()
+                parsed = _try_json_string(combined)
+                j += 1
+            data["description"] = parsed if parsed is not None else unquote(first)
         else:
             data["description"] = unquote(first)
         break
 
     return data
+
+
+def _try_json_string(value: str) -> str | None:
+    try:
+        result = json.loads(value)
+    except json.JSONDecodeError:
+        return None
+    return result if isinstance(result, str) else None
 
 
 def is_registry_skill_artifact(relative: str) -> bool:
