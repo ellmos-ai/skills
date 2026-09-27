@@ -1,6 +1,46 @@
 ---
+name: idea-mining
+version: 1.1.0
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-07-03
+updated: 2026-09-27
+description: >
+  Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen,
+  hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken
+  füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik,
+  Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann
+  gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze
+  diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X"
+  gebraucht werden, bei „wir drehen uns im Kreis", oder für periodische Innovations-Läufe
+  über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen
+  brainstorm (SCAMPER, Six Hats etc.).
+
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+
+category: utilities
+tags: [ideen, kreativität, forschung, beweis, analogie, allegorie, recherche, innovation]
 language: de
+status: active
 visibility: public
+
+dependencies:
+  tools: []
+  services: [websearch]
+  protocols: []
+  python: []
+
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
 <img src="banner.png" width="100%" alt="idea-mining banner">

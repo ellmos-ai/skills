@@ -52,7 +52,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # T-20260927-335065820: fetch-depth: 2 only guarantees HEAD and its
+          # first parent are present. changed_skill_gate.py's BASE_SHA (the
+          # PR base sha, or on a plain push the pre-push sha) is routinely
+          # further back than that -- especially right after a merge commit,
+          # whose second parent is the whole feature branch history. `git
+          # diff base..head` then fails with "unknown revision", the gate
+          # silently falls back to diffing just the two newest commits, and
+          # that wrong range can pick up unrelated pre-existing files as
+          # "changed" (or miss ones that are). Full history removes the
+          # guessing entirely.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5

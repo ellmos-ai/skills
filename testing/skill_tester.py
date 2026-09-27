@@ -302,6 +302,14 @@ def s002_completeness(skill_path):
         'sections': body.count('\n## ') >= 2,
     }
 
+    # Third-party areal: the skill reproduces foreign upstream material as-is
+    # (docs/CONVENTIONS.md, skills/third-party/README.md) -- house structural
+    # conventions like changelog/title/sections are deliberately not imposed
+    # on it. Only the substance check (real content present) still applies.
+    if in_third_party_areal(skill_path):
+        for key in ('title', 'changelog', 'example', 'sections'):
+            checks.pop(key, None)
+
     # Therapy skills: ethics reference
     fm = parse_frontmatter(text)
     if fm.get('category') == 'therapy':
@@ -366,6 +374,7 @@ def s003_dependencies(skill_path):
         'configparser', 'threading', 'multiprocessing', 'concurrent',
         'asyncio', 'signal', 'getpass', 'secrets', 'wave', '__future__',
         'ast', 'queue', 'zipfile', 'tarfile', 'gzip', 'pickle', 'array',
+        'shlex',
     }
 
     for py_file in py_files:
@@ -386,12 +395,15 @@ def s003_dependencies(skill_path):
             score -= 0.5
             details.append(f"SyntaxError: {py_file.name}")
 
-    # Check declared vs actual
+    # Check declared vs actual. Scripts within the same skill (e.g. a test
+    # importing a sibling module via sys.path insertion) are not external
+    # dependencies, regardless of what the sibling happens to be named.
+    sibling_modules = {p.stem for p in py_files}
     declared = set(deps.get('python', [])) if isinstance(deps, dict) else set()
-    undeclared = external_imports - declared - {'scripts', 'generator', 'services',
-                                                 'sources', 'workflows', 'policies',
-                                                 'prompt_templates', 'kontext', 'schemas',
-                                                 'templates', 'examples'}
+    undeclared = external_imports - declared - sibling_modules - {
+        'scripts', 'generator', 'services', 'sources', 'workflows', 'policies',
+        'prompt_templates', 'kontext', 'schemas', 'templates', 'examples',
+    }
     if undeclared:
         score -= len(undeclared) * 0.3
         details.append(f"Nicht deklarierte Imports: {undeclared}")
@@ -462,9 +474,12 @@ def s005_standalone_check(skill_path):
         'BACH internal': r'from\s+(tools|core|hub)\.\w+\s+import',
         'BACH DB': r'bach\.db',
         'User path': (
-            r'C:\\Users\\(?!user(?:name)?\\|<|%|\$)[^\\\s]+'
-            r'|/c/Users/(?!user(?:name)?/|<|\$)[^/\s]+'
-            r'|/home/(?!user(?:name)?/|<|\$)[^/\s]+'
+            # Placeholder markers (<, %, $, an ellipsis, or a regex character
+            # class like [a-z]) after Users\/home/ mean the text is teaching
+            # about or scanning for the pattern, not leaking a real path.
+            r'C:\\Users\\(?!user(?:name)?\\|<|%|\$|…|\[)[^\\\s]+'
+            r'|/c/Users/(?!user(?:name)?/|<|\$|…|\[)[^/\s]+'
+            r'|/home/(?!user(?:name)?/|<|\$|…|\[)[^/\s]+'
         ),
         'parent_agent': r'^parent_agent:',
         'expert field': r'^expert:\s+\w',
