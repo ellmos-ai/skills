@@ -1,0 +1,20 @@
+{
+  "host_slot": "default",
+  "sync_dir": "~/OneDrive/.SYNC",
+  "sidecars_dir": "~/.gemini/config/sidecars",
+  "mirror_sidecars_dir": "~/.gemini/antigravity/sidecar_data",
+  "skills_root": "~/OneDrive/.TOPICS/.AI/.SKILLS/skills",
+  "automation_policy_path": "~/.gemini/AUTOMATION_POLICY.md",
+  "automations_memory_path": "~/.gemini/AUTOMATIONS-MEMORY.md",
+  "antigravity_log_path": "~/.gemini/antigravity/ANTIGRAVITY-LOG.txt",
+  "antigravity_registry_path": "~/.gemini/antigravity/ANTIGRAVITY-REGISTRY.md",
+  "skill_mappings": {
+    "routing": "infrastructure/semantic-persona-routing/SKILL.md",
+    "condition": "infrastructure/condition/SKILL.md",
+    "orchestrator": "infrastructure/orchestrator/SKILL.md",
+    "agents_bridge": "infrastructure/agents-bridge/SKILL.md",
+    "think": "utilities/think/SKILL.md",
+    "decide": "utilities/decide/SKILL.md",
+    "pipeline_optimizer": "dev/pipeline-optimizer/SKILL.md"
+  }
+}
