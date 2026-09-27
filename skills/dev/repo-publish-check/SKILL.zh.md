@@ -41,7 +41,10 @@ dependencies:
 ## 检查流程
 
 1. 通过 `git ls-files`、`.gitignore` 和软件包允许列表确定公开内容；排除内部笔记、
-   报告、测试数据、本地设置和锁文件。
+   报告、测试数据、本地设置和锁文件。对于技能库（存在 `SKILL*.md` 文件）：
+   每个 frontmatter 必须能作为 YAML 解析——如果仓库中存在
+   `testing/skill_frontmatter_gate.py`，运行它（`--fix` 会机械式地修正引号，
+   不改变措辞）；否则用 `yaml.safe_load` 抽查。
 2. 在工作树和所有可达历史中搜索凭据、Token、私钥、本地用户路径、联系方式和
    个人数据。
 3. 提供合适的 `LICENSE`，并记录第三方代码、Prompt、文档和媒体的来源与许可证。
