@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.0
+version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -74,7 +74,7 @@ Para módulos públicos, documenta también un `RELEASE_GATE.md` o puerta equiva
 python testing/repo_link_visibility_gate.py --repo .
 ```
 
-La comprobación falla en abierto ante la incertidumbre (caída de red, límite de tasa, 404 — todo esto es solo una pista, nunca un bloqueo) y solo bloquea ante un `private: true` confirmado. Sin este script (el repo no tiene una copia de la comprobación): revisa manualmente cada enlace a un repo hermano/de terceros en el README con `gh api repos/ORG/REPO --jq .private`.
+La comprobación falla en abierto solo ante la incertidumbre genuina (caída de red, límite de tasa 403/429 — solo una pista, nunca un bloqueo); un 404 bloquea igual que un `private: true` confirmado, porque ambos significan que el enlace es irresoluble para terceros (privado o inexistente). Sin este script (el repo no tiene una copia de la comprobación): revisa manualmente cada enlace a un repo hermano/de terceros en el README con `gh api repos/ORG/REPO --jq .private`.
 
 ## Metadatos de GitHub
 
@@ -133,12 +133,19 @@ Si la CI está en rojo después de un lanzamiento, el repositorio aún no se ha 
   tienes una — sin prescribir una herramienta concreta. Nunca dejar de seguir ni quitar
   estrellas automáticamente.
 
+### 1.3.1 (2026-09-27)
+- Corrección de documentación: la semántica del 404 en la descripción de la puerta de
+  privacidad era incorrecta. Según `testing/repo_link_visibility_gate.py`, un 404
+  (privado o inexistente) bloquea igual que un `private: true` confirmado; fallar en
+  abierto solo aplica a caídas de red y límites de tasa (403/429). Corregido en la
+  sección de la Puerta de Privacidad y en la entrada del historial de 1.2.0.
+
 ### 1.2.0 (2026-09-26)
 - Nuevo paso de puerta de privacidad (T-20260926-820252321): comprobar la visibilidad de los
   repos de GitHub enlazados (`testing/repo_link_visibility_gate.py --repo .`, falla en abierto
-  ante red/límite de tasa/404, solo bloquea ante un `private: true` confirmado). Caso de
-  referencia: `ellmos-ai/ellmos-core` (un repo privado) pasó desapercibido en una tabla de un
-  README.
+  ante caídas de red/límite de tasa, bloquea ante 404 y ante un `private: true` confirmado).
+  Caso de referencia: `ellmos-ai/ellmos-core` (un repo privado) pasó desapercibido en una
+  tabla de un README.
 
 ### 1.1.0 (2026-09-26)
 - Añadido el paso "Publicar ⇒ página de perfil" (T-20260926-796851315): un repo con banner debe
