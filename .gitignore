@@ -235,3 +235,7 @@ SKILLS-MAP-PRIVATE.md
 # mermaid-lint skill: npm-Abhaengigkeiten nicht tracken
 skills/dev/mermaid-lint/node_modules/
 skills/dev/mermaid-lint/package-lock.json
+
+# Agent work-in-progress reports (not public deliverables); content belongs
+# in the ticket, not in the repo.
+_codex/
