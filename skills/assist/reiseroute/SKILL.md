@@ -1,6 +1,10 @@
 ---
 name: reiseroute
 version: 1.0.0
+type: assist
+author: ellmos-ai
+created: 2026-07-23
+updated: 2026-08-23
 category: assist
 description: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
 

@@ -1,10 +1,10 @@
 ---
 name: wayfinding-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
+updated: 2026-09-27
 description: >
   Universal LLM navigation, orientation, and emergency resilience skill.
   Provides active wayfinding, self-orientation, and recovery heuristics when
@@ -16,7 +16,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
+tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, likelihood-routing, self-orientation, resilience, recovery, heuristics]
 language: en
 status: active
 dependencies:
@@ -52,6 +52,7 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 | **`dead-reckoning`** | **Nautical Dead Reckoning (Koppelnavigation):** Reconstructing exact state from step-by-step breadcrumbs without external status. | Tracking execution steps in scratch files or `TODO.md` to enable precise backtracking. |
 | **`pathfinder-routing`** | **Scout / Pathfinder Trailblazing:** Preflight scanning and paving paths for multi-agent teams. | Preflight inspection of directory trees, locks, and task dependencies. |
 | **`celestial-routing`** | **Astronavigation:** Aligning with immutable North-Star anchor documents when local context is noisy. | Fallback to `CLAUDE.md`, `AGENTS.md`, `START.md` when prompt instructions conflict. |
+| **[`likelihood-routing`](../likelihood-routing/SKILL.en.md)** | **Probability Gradient as Warm/Cold Sensor:** Scores control documents via the conditional continuation probability (likelihood scoring) of a target term and follows the gradient ($\Delta S$). | Fallback without a memory service, when a project-specific term has no hit in any session history; standalone skill, see link. |
 
 ---
 
@@ -101,3 +102,16 @@ It equips agents with proactive wayfinding heuristics during normal execution an
 - **`automation-self-care`**: Evaluates sidecar prompts against the 5 protocols to ensure self-healing capabilities.
 - **`workflowhooker`**: Provides standard heuristics for step-by-step lock checking and breadcrumb recording.
 - **`staircase-routing`**: Leverages `PROTOCOL-ANCHOR-RESET` for vertical directory navigation.
+- **[`likelihood-routing`](../likelihood-routing/SKILL.en.md)**: Supplies the
+  probability gradient as a warm/cold sensor for `PROTOCOL-ANCHOR-RESET` when
+  control documents point ambiguously to several plausible branches —
+  complementary to `staircase-routing`, which searches by keyword match
+  rather than gradient.
+
+## Changelog
+
+### 1.1.0 (2026-09-27)
+- Added `likelihood-routing` as a standalone strategy (overview table +
+  integration section); the technique itself has lived as its own skill
+  `skills/infrastructure/likelihood-routing/` since the same date, extracted
+  from `disambiguator` Phase 2.5.

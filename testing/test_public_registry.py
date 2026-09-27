@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import sys
 import tempfile
@@ -51,11 +52,40 @@ from build_public_registry import (
     validate_source_manifest,
 )
 
+MODULE_PATH = REPOSITORY_ROOT / "testing" / "skill_frontmatter_gate.py"
+_SPEC = importlib.util.spec_from_file_location("skill_frontmatter_gate", MODULE_PATH)
+assert _SPEC is not None and _SPEC.loader is not None
+frontmatter_gate = importlib.util.module_from_spec(_SPEC)
+_SPEC.loader.exec_module(frontmatter_gate)
+
 
 class PublicRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+
+    def test_registry_description_matches_independent_reparse(self) -> None:
+        """Cross-checks every registry description against
+        skill_frontmatter_gate.extract_scalar() -- a decoder with its own,
+        separately-written implementation (not imported from or sharing code
+        with build_public_registry.py's read_frontmatter()), so a bug shared
+        by both readers can't silently agree with itself. Named by the
+        skills#46 reviewer: catches multi-line double-quoted values and the
+        `>+`/`|+` chomping indicators specifically."""
+        mismatches = []
+        for component in self.registry["components"]:
+            path = REPOSITORY_ROOT / component["path"]
+            text = path.read_text(encoding="utf-8")
+            split = frontmatter_gate.split_frontmatter(text)
+            self.assertIsNotNone(split, component["path"])
+            fm, _ = split
+            # A marker/stub file with no description key at all (e.g. an
+            # unmigrated lang-only primary) reads as None here vs. "" in the
+            # registry -- both mean "no description", not a mismatch.
+            independent = frontmatter_gate.extract_scalar(fm, "description") or ""
+            if independent != component["description"]:
+                mismatches.append((component["path"], independent, component["description"]))
+        self.assertEqual(mismatches, [])
 
     def test_registry_descriptions_have_no_corrupted_escapes(self) -> None:
         """T-20260927-518399776 (skills#46 review, blocker 2): a naive quote

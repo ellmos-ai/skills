@@ -1,10 +1,10 @@
 ---
 name: wayfinding-routing
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
+updated: 2026-09-27
 description: >
   Universeller Skill für LLM-Navigation, Orientierung und
   Ausfallsicherheit. Stellt aktives Wayfinding, Selbstorientierung und
@@ -17,7 +17,7 @@ anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, self-orientation, resilience, recovery, heuristics]
+tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfinder-routing, celestial-routing, likelihood-routing, self-orientation, resilience, recovery, heuristics]
 language: de
 status: active
 visibility: public
@@ -57,6 +57,7 @@ Ausführungsfehler, ausfallende APIs oder Sackgassen aus.
 | **`dead-reckoning`** | **Nautische Koppelnavigation:** Exakten Zustand aus schrittweisen Brotkrumen ohne externe Statusquelle rekonstruieren. | Ausführungsschritte in Scratch-Dateien oder `TODO.md` verfolgen, um präzise zurückzugehen. |
 | **`pathfinder-routing`** | **Pfadfinder und Vorauskommando:** Wege für Multi-Agenten-Teams vorab prüfen und vorbereiten. | Preflight-Prüfung von Verzeichnisbäumen, Sperren und Aufgabenabhängigkeiten. |
 | **`celestial-routing`** | **Astronavigation:** An unveränderlichen Nordstern-Ankerdokumenten ausrichten, wenn lokaler Kontext verrauscht ist. | Rückfall auf `CLAUDE.md`, `AGENTS.md` und `START.md`, wenn Prompt-Anweisungen widersprüchlich sind. |
+| **[`likelihood-routing`](../likelihood-routing/SKILL.md)** | **Wahrscheinlichkeits-Gradient als Wärmer/Kälter-Sensor:** Steuerdateien über die bedingte Folgewahrscheinlichkeit (Likelihood Scoring) eines Zielbegriffs bewerten und dem Gradienten ($\Delta S$) folgen. | Fallback ohne Memory-Dienst, wenn ein projektspezifischer Fachbegriff in keiner Session-Historie auftaucht; eigenständiger Skill, siehe Verweis. |
 
 ---
 
@@ -131,3 +132,16 @@ Ausführungsfehler, ausfallende APIs oder Sackgassen aus.
   Sperrprüfung und Brotkrumenprotokollierung.
 - **`staircase-routing`**: Nutzt `PROTOCOL-ANCHOR-RESET` für vertikale
   Verzeichnisnavigation.
+- **[`likelihood-routing`](../likelihood-routing/SKILL.md)**: Liefert den
+  Wahrscheinlichkeits-Gradienten als Wärmer/Kälter-Sensor für
+  `PROTOCOL-ANCHOR-RESET`, wenn Steuerdateien mehrdeutig auf mehrere
+  plausible Äste verweisen — komplementär zu `staircase-routing`, das nach
+  Stichwort-Treffer statt nach Gradient sucht.
+
+## Changelog
+
+### 1.1.0 (2026-09-27)
+- `likelihood-routing` als eigenständige Strategie aufgenommen (Übersichtstabelle
+  + Integrationsabschnitt); die Technik selbst lebt seit demselben Datum als
+  eigener Skill `skills/infrastructure/likelihood-routing/`, herausgelöst aus
+  `disambiguator` Phase 2.5.

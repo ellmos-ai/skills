@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.2.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-09-26
+updated: 2026-09-27
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: "Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links."
 
@@ -53,6 +53,8 @@ Prepare the repository before the first public push. A correct `.gitignore`, pri
 12. **Set metadata.** Check description, topics, homepage, visibility, and default branch.
 13. **Create the release.** Create the tag and GitHub release; verify CI for both branch and tag.
 14. **Update discovery surfaces.** Link from the organization profile, `llms.txt`, central registries, local module indexes, and ecosystem READMEs. **Publish ⇒ profile page (T-20260926-796851315):** if the repo has a banner, check mechanically whether it's already on the org profile page (`<org>/.github/profile/README.md`) — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). If missing, the script emits a ready-to-paste markdown snippet.
+    **Star your own repo (T-20260926-299328659):** aftercare checks whether the account itself has already starred each own public repo, and stars it if not — `python run.py --self-star` in `.GITHUBBOT` (no `--repo`: one-time catch-up across all 9 orgs; with `--repo <org>/<name>`: single repo, e.g. right after this publish). Never auto-unstar.
+    **Stargazer care:** follow new stargazers and star back their best project when the quality is genuinely there — this already exists in `.GITHUBBOT`'s `core/reciprocity.py` (`ReciprocityChecker` scores thematic relevance and suggests `star_back`/`invite`/`review`/`skip`; `PersonalFollowback` executes the following with rate caps, cooldown, and a dry-run/apply/confirm safety net — `python run.py --reciprocity` / `--followback`). Don't rebuild it; the module logs its own decisions in its state/report files. Never auto-unfollow or auto-unstar.
 15. **Final verification.** Check the remote README, release page, topics, CI, and links.
 
 ## Privacy Gate
@@ -132,6 +134,13 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Changelog
+
+### 1.3.0 (2026-09-27)
+- Extended step 14 (T-20260926-299328659, user request): check/set the account's own
+  star on its own public repos (`.GITHUBBOT` `run.py --self-star`, newly built) plus
+  stargazer care (follow + quality star-back via the existing `.GITHUBBOT` modules
+  `core/reciprocity.py`/`PersonalFollowback` -- not rebuilt, just referenced). Never
+  auto-unfollow or auto-unstar.
 
 ### 1.2.0 (2026-09-26)
 - New privacy-gate step (T-20260926-820252321): check linked GitHub repos for

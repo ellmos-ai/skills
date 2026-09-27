@@ -190,6 +190,49 @@ def _top_level_field_presence(fm: str) -> dict[str, bool]:
     return presence
 
 
+def extract_scalar(fm: str, key: str) -> str | None:
+    """Decodes one top-level scalar's resolved value, or None if absent.
+
+    Independent of build_public_registry.py's own frontmatter reader -- used
+    by test_public_registry.py as a second-opinion cross-check so a bug
+    shared by both readers doesn't silently pass. Handles the three shapes
+    this repo actually uses: double-quoted (JSON-compatible escaping, see
+    the module docstring), a `>`/`|` (+ chomping variants) folded block, and
+    a bare unquoted scalar.
+    """
+    lines = fm.splitlines()
+    n = len(lines)
+    i = 0
+    while i < n:
+        line = lines[i]
+        if not line.strip() or line[0] in " \t":
+            i += 1
+            continue
+        m = TOP_KEY.match(line)
+        if not m:
+            i += 1
+            continue
+        if m.group(1) != key:
+            i += 1
+            continue
+        value = m.group(2).strip()
+        if value in BLOCK_SCALAR_VALUES:
+            body: list[str] = []
+            j = i + 1
+            while j < n and (lines[j].strip() == "" or lines[j][0] in " \t"):
+                if lines[j].strip():
+                    body.append(lines[j].strip())
+                j += 1
+            return " ".join(body)
+        if value.startswith('"'):
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return value[1:-1] if value.endswith('"') else value
+        return value
+    return None
+
+
 def pruefe(md: Path) -> list[str]:
     """Gibt alle Befunde zurueck; leere Liste = Datei ist in Ordnung."""
     text = md.read_text(encoding="utf-8", errors="replace")

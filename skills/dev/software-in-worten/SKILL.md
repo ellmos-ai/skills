@@ -4,6 +4,7 @@ version: 1.0.0
 type: method
 author: ellmos (aus einem Entwurfsgespräch von Lukas Geiger, 2026-08-02)
 created: 2026-08-02
+updated: 2026-08-23
 description: >
   Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer
   beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen,
