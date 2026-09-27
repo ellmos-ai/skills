@@ -377,6 +377,17 @@ skills/<kategorie>/<skill-name>/
 - Core- und Full-Set-Dateien werden aktiv gepflegt
 - World-Set-Dateien werden nur bei explizitem Ausbaubeschluss erstellt (Stubs erlaubt)
 
+### Sprachabhängige Skilllinks in READMEs
+
+Jede der sechs echten README-Dateien verlinkt bei Skill-Links auf die Datei
+ihrer eigenen Sprache: `README.md` auf `SKILL.en.md`, `README_de.md` auf
+`SKILL.md` und die Dateien `README_es.md`, `README_ja.md`, `README_ru.md` und
+`README_zh.md` jeweils auf `SKILL.es.md`, `SKILL.ja.md`, `SKILL.ru.md` und
+`SKILL.zh.md`. Wenn die passende Übersetzung für einen Skill fehlt, verweist
+der Link auf dessen deutsche Primärdatei `SKILL.md`. Fehlende Übersetzungen
+werden dadurch weder erfunden noch automatisch erzeugt. Das Gate
+`python testing/readme_language_link_gate.py` prüft Zieldatei und Sprache.
+
 ### BACH-DB als Quelle
 
 BACH enthaelt ~1870 Skills (942 DE, 927 EN) in der `skills`-Tabelle.

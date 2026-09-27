@@ -94,34 +94,33 @@ flowchart TD
 
 | Skill | 作用 |
 |---|---|
-| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.md) | 审计、分类、研究 skills，并在安全审查后安装。 |
-| [`model-strategy`](skills/dev/model-strategy/SKILL.md) | 在 Claude、Codex、Gemini 和 Ollama 之间路由。 |
-| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | 以六个阶段安全整理现有项目。 |
-| [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | 包含规则、锁、隐私、i18n 和 release 的发布 gate。 |
-| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | 不设置隐式 hub 的 MCP 发现和同步规划。 |
-| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | 提取视频字幕、转录文本和元数据。 |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Roblox Studio、Rojo 和资源安全检查。 |
-| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | 将未决事项变为带建议的编号选项。 |
-| [`bugsweep`](skills/dev/bugsweep/SKILL.md) | 具有可量化目标和完成验证的错误扫描。 |
-| [`plugin-system`](skills/dev/plugin-system/SKILL.md) | 无外部依赖的 Python plugin system。 |
-| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | 同步语言版本并发现结构漂移。 |
-| [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | 实证检查文档规则是否改变智能体行为。 |
-| [`law-checker`](skills/utilities/law-checker/SKILL.md) | 基于来源的德国法律初步指引；不能替代律师。 |
-| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | 德国雇员费用的本地工作表；不构成税务建议。 |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | 根据目标、水平和年龄生成工作表。 |
-| [`research-agent`](skills/research/research-agent/SKILL.md) | 面向 PubMed 和 arXiv 的可重复研究流程。 |
-| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | 规划用户选择的配置拓扑。 |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | 从选定规则面加载上下文的中立桥接。 |
+| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.zh.md) | 审计、分类、研究 skills，并在安全审查后安装。 |
+| [`model-strategy`](skills/dev/model-strategy/SKILL.zh.md) | 在 Claude、Codex、Gemini 和 Ollama 之间路由。 |
+| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.zh.md) | 以六个阶段安全整理现有项目。 |
+| [`github-repo-care`](skills/dev/github-repo-care/SKILL.zh.md) | 包含规则、锁、隐私、i18n 和 release 的发布 gate。 |
+| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.zh.md) | 不设置隐式 hub 的 MCP 发现和同步规划。 |
+| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.zh.md) | 提取视频字幕、转录文本和元数据。 |
+| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.zh.md) | Roblox Studio、Rojo 和资源安全检查。 |
+| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.zh.md) | 将未决事项变为带建议的编号选项。 |
+| [`bugsweep`](skills/dev/bugsweep/SKILL.zh.md) | 具有可量化目标和完成验证的错误扫描。 |
+| [`plugin-system`](skills/dev/plugin-system/SKILL.zh.md) | 无外部依赖的 Python plugin system。 |
+| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.zh.md) | 同步语言版本并发现结构漂移。 |
+| [`law-checker`](skills/utilities/law-checker/SKILL.zh.md) | 基于来源的德国法律初步指引；不能替代律师。 |
+| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.zh.md) | 德国雇员费用的本地工作表；不构成税务建议。 |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.zh.md) | 根据目标、水平和年龄生成工作表。 |
+| [`research-agent`](skills/research/research-agent/SKILL.zh.md) | 面向 PubMed 和 arXiv 的可重复研究流程。 |
+| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.zh.md) | 规划用户选择的配置拓扑。 |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.zh.md) | 从选定规则面加载上下文的中立桥接。 |
 | [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.zh.md) | 带 readback 和 rollback 的自动化维护。 |
 | [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.zh.md) | 分离角色、专家、endpoint、persona 和权限。 |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.zh.md) | 在不公开个人档案的前提下构建经授权的偏好模型。 |
-| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | 不依赖外部服务的开发自动化 pipeline。 |
-| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | 清除聊天残留并管理 AI 披露等级。 |
-| [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | 从停滞问题中挖掘方案。 |
-| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.md) | 从对话中提取可复用 skill。 |
-| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.md) | 将对话或现有 prompt 转换为可重复 workflow。 |
-| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | 创建包含本地模型和 RAG 的可移植环境。 |
-| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | 支持招聘广告、简历、LinkedIn 和求职信。 |
+| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.zh.md) | 不依赖外部服务的开发自动化 pipeline。 |
+| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.zh.md) | 清除聊天残留并管理 AI 披露等级。 |
+| [`idea-mining`](skills/utilities/idea-mining/SKILL.zh.md) | 从停滞问题中挖掘方案。 |
+| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.zh.md) | 从对话中提取可复用 skill。 |
+| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.zh.md) | 将对话或现有 prompt 转换为可重复 workflow。 |
+| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.zh.md) | 创建包含本地模型和 RAG 的可移植环境。 |
+| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.zh.md) | 支持招聘广告、简历、LinkedIn 和求职信。 |
 | [`therapy/`](skills/therapy/) | 具有伦理边界的心理教育和咨询方法集合。 |
 
 ## 公开与私有边界
@@ -138,11 +137,11 @@ flowchart TD
 
 | Skill | 功能 |
 |---|---|
-| [`academic-study-control`](skills/education/academic-study-control/SKILL.md) | 管理学期、截止日期、注册和提醒，并进行来源验证。 |
-| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.md) | 目标、核心观点、术语表、迁移和检索练习的学习循环。 |
-| [`academic-study-test`](skills/education/academic-study-test/SKILL.md) | 带 rubric 的训练模式，禁止在真实考试中提供协助。 |
+| [`academic-study-control`](skills/education/academic-study-control/SKILL.zh.md) | 管理学期、截止日期、注册和提醒，并进行来源验证。 |
+| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.zh.md) | 目标、核心观点、术语表、迁移和检索练习的学习循环。 |
+| [`academic-study-test`](skills/education/academic-study-test/SKILL.zh.md) | 带 rubric 的训练模式，禁止在真实考试中提供协助。 |
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.zh.md) | 用户中立的教学和支持规划，不生成个人报告。 |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | 根据学习目标和水平生成差异化材料。 |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.zh.md) | 根据学习目标和水平生成差异化材料。 |
 
 ## 仓库结构与验证
 

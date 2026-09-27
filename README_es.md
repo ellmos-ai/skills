@@ -93,34 +93,33 @@ Estos skills son buenos puntos de entrada porque coordinan herramientas, reducen
 
 | Skill | Por qué destaca |
 |---|---|
-| <img src="assets/icons/skill-explorer.svg" width="20" height="20" alt=""> [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.md) | Audita, agrupa e investiga skills y plugins; instala solo tras revisión de seguridad y autorización. |
-| <img src="assets/icons/model-strategy.svg" width="20" height="20" alt=""> [`model-strategy`](skills/dev/model-strategy/SKILL.md) | Routing multimodelo para Claude, Codex, Gemini y Ollama con selección, delegación y escalado. |
-| <img src="assets/icons/pipeline-optimizer.svg" width="20" height="20" alt=""> [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.md) | Protocolo de seis pasos para renovar proyectos y evitar estándares paralelos. |
-| <img src="assets/icons/github-repo-care.svg" width="20" height="20" alt=""> [`github-repo-care`](skills/dev/github-repo-care/SKILL.md) | Gate de publicación y mantenimiento con reglas, locks, privacidad, i18n y releases. |
-| <img src="assets/icons/mcp-config-sync.svg" width="20" height="20" alt=""> [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.md) | Descubrimiento MCP y planificación de sincronización sin hub implícito. |
-| <img src="assets/icons/video-transcriber.svg" width="20" height="20" alt=""> [`video-transcriber`](skills/utilities/video-transcriber/SKILL.md) | Extrae subtítulos, transcripciones y metadatos a Markdown, JSON o texto. |
-| <img src="assets/icons/rbx-studio.svg" width="20" height="20" alt=""> [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.md) | Operación de Roblox Studio, conexión con Rojo y revisión obligatoria de assets. |
-| <img src="assets/icons/decision-briefing.svg" width="20" height="20" alt=""> [`decision-briefing`](skills/utilities/decision-briefing/SKILL.md) | Convierte decisiones abiertas en un briefing numerado con opciones y recomendaciones. |
-| <img src="assets/icons/bugsweep.svg" width="20" height="20" alt=""> [`bugsweep`](skills/dev/bugsweep/SKILL.md) | Barrido sistemático de errores con objetivos medibles y verificación final. |
-| <img src="assets/icons/plugin-system.svg" width="20" height="20" alt=""> [`plugin-system`](skills/dev/plugin-system/SKILL.md) | Sistema de plugins Python sin dependencias, con descubrimiento y tolerancia a fallos. |
-| <img src="assets/icons/bilingual-doc-sync.svg" width="20" height="20" alt=""> [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.md) | Mantiene sincronizadas versiones lingüísticas y detecta secciones divergentes. |
-| <img src="assets/icons/trampelpfadanalyse.svg" width="20" height="20" alt=""> [`trampelpfadanalyse`](skills/dev/trampelpfadanalyse/SKILL.md) | Comprueba empíricamente si una convención documental cambia realmente el comportamiento del agente. |
-| <img src="assets/icons/law-checker.svg" width="20" height="20" alt=""> [`law-checker`](skills/utilities/law-checker/SKILL.md) | Referencia al módulo público de orientación jurídica alemana basada en fuentes; no sustituye a un abogado. |
-| <img src="assets/icons/steuer-assistent.svg" width="20" height="20" alt=""> [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.md) | Referencia a una hoja local para gastos laborales de empleados en Alemania; no es asesoría fiscal. |
-| <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Genera hojas individualizadas a partir de objetivo, nivel y edad. |
-| <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.md) | Flujo reproducible de literatura científica para PubMed y arXiv. |
-| <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.md) | Descubre superficies y planifica topologías seleccionadas por el usuario. |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.md) | Puente neutral de arranque para cargar reglas desde una o varias fuentes elegidas. |
-| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.md) | Mantiene tareas programadas y automatizaciones con readback, rollback y cobertura cruzada. |
-| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.md) | Separa roles, expertos, endpoints, personas y permisos. |
+| <img src="assets/icons/skill-explorer.svg" width="20" height="20" alt=""> [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.es.md) | Audita, agrupa e investiga skills y plugins; instala solo tras revisión de seguridad y autorización. |
+| <img src="assets/icons/model-strategy.svg" width="20" height="20" alt=""> [`model-strategy`](skills/dev/model-strategy/SKILL.es.md) | Routing multimodelo para Claude, Codex, Gemini y Ollama con selección, delegación y escalado. |
+| <img src="assets/icons/pipeline-optimizer.svg" width="20" height="20" alt=""> [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.es.md) | Protocolo de seis pasos para renovar proyectos y evitar estándares paralelos. |
+| <img src="assets/icons/github-repo-care.svg" width="20" height="20" alt=""> [`github-repo-care`](skills/dev/github-repo-care/SKILL.es.md) | Gate de publicación y mantenimiento con reglas, locks, privacidad, i18n y releases. |
+| <img src="assets/icons/mcp-config-sync.svg" width="20" height="20" alt=""> [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.es.md) | Descubrimiento MCP y planificación de sincronización sin hub implícito. |
+| <img src="assets/icons/video-transcriber.svg" width="20" height="20" alt=""> [`video-transcriber`](skills/utilities/video-transcriber/SKILL.es.md) | Extrae subtítulos, transcripciones y metadatos a Markdown, JSON o texto. |
+| <img src="assets/icons/rbx-studio.svg" width="20" height="20" alt=""> [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.es.md) | Operación de Roblox Studio, conexión con Rojo y revisión obligatoria de assets. |
+| <img src="assets/icons/decision-briefing.svg" width="20" height="20" alt=""> [`decision-briefing`](skills/utilities/decision-briefing/SKILL.es.md) | Convierte decisiones abiertas en un briefing numerado con opciones y recomendaciones. |
+| <img src="assets/icons/bugsweep.svg" width="20" height="20" alt=""> [`bugsweep`](skills/dev/bugsweep/SKILL.es.md) | Barrido sistemático de errores con objetivos medibles y verificación final. |
+| <img src="assets/icons/plugin-system.svg" width="20" height="20" alt=""> [`plugin-system`](skills/dev/plugin-system/SKILL.es.md) | Sistema de plugins Python sin dependencias, con descubrimiento y tolerancia a fallos. |
+| <img src="assets/icons/bilingual-doc-sync.svg" width="20" height="20" alt=""> [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.es.md) | Mantiene sincronizadas versiones lingüísticas y detecta secciones divergentes. |
+| <img src="assets/icons/law-checker.svg" width="20" height="20" alt=""> [`law-checker`](skills/utilities/law-checker/SKILL.es.md) | Referencia al módulo público de orientación jurídica alemana basada en fuentes; no sustituye a un abogado. |
+| <img src="assets/icons/steuer-assistent.svg" width="20" height="20" alt=""> [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.es.md) | Referencia a una hoja local para gastos laborales de empleados en Alemania; no es asesoría fiscal. |
+| <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.es.md) | Genera hojas individualizadas a partir de objetivo, nivel y edad. |
+| <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.es.md) | Flujo reproducible de literatura científica para PubMed y arXiv. |
+| <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.es.md) | Descubre superficies y planifica topologías seleccionadas por el usuario. |
+| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.es.md) | Puente neutral de arranque para cargar reglas desde una o varias fuentes elegidas. |
+| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.es.md) | Mantiene tareas programadas y automatizaciones con readback, rollback y cobertura cruzada. |
+| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.es.md) | Separa roles, expertos, endpoints, personas y permisos. |
 | [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.es.md) | Referencia pública para crear un modelo de preferencias autorizado sin publicar el perfil personal. |
-| <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.md) | Pipeline de automatización de desarrollo en Python sin servicios externos. |
-| <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.md) | Elimina residuos de chat y gestiona niveles de declaración de IA. |
-| <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.md) | Método multitécnica para extraer ideas de problemas bloqueados. |
-| <img src="assets/icons/skill-extractor.svg" width="20" height="20" alt=""> [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.md) | Extrae un skill reutilizable de una conversación o transcripción. |
-| <img src="assets/icons/workflow-extract.svg" width="20" height="20" alt=""> [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.md) | Convierte conversaciones y prompts existentes en flujos repetibles. |
-| <img src="assets/icons/ai-portable-setup.svg" width="20" height="20" alt=""> [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.md) | Crea un entorno portátil y sin nube con modelos locales y RAG. |
-| <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.md) | Apoyo integral para candidaturas, CV, LinkedIn y cartas. |
+| <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.es.md) | Pipeline de automatización de desarrollo en Python sin servicios externos. |
+| <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.es.md) | Elimina residuos de chat y gestiona niveles de declaración de IA. |
+| <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.es.md) | Método multitécnica para extraer ideas de problemas bloqueados. |
+| <img src="assets/icons/skill-extractor.svg" width="20" height="20" alt=""> [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.es.md) | Extrae un skill reutilizable de una conversación o transcripción. |
+| <img src="assets/icons/workflow-extract.svg" width="20" height="20" alt=""> [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.es.md) | Convierte conversaciones y prompts existentes en flujos repetibles. |
+| <img src="assets/icons/ai-portable-setup.svg" width="20" height="20" alt=""> [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.es.md) | Crea un entorno portátil y sin nube con modelos locales y RAG. |
+| <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.es.md) | Apoyo integral para candidaturas, CV, LinkedIn y cartas. |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`](skills/therapy/) | Familia coherente de psicoeducación y métodos de conversación con límites éticos. |
 
 ## Límite público/privado
@@ -139,11 +138,11 @@ Cinco skills educativos neutrales respecto a institución y usuario:
 
 | Skill | Función |
 |---|---|
-| [`academic-study-control`](skills/education/academic-study-control/SKILL.md) | Planificación semestral, plazos, inscripciones y recordatorios con verificación. |
-| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.md) | Ciclo de aprendizaje basado en fuentes, glosario, transferencia y recuperación. |
-| [`academic-study-test`](skills/education/academic-study-test/SKILL.md) | Modos de prueba con rúbricas y límite estricto contra asistencia en exámenes reales. |
+| [`academic-study-control`](skills/education/academic-study-control/SKILL.es.md) | Planificación semestral, plazos, inscripciones y recordatorios con verificación. |
+| [`academic-study-learn`](skills/education/academic-study-learn/SKILL.es.md) | Ciclo de aprendizaje basado en fuentes, glosario, transferencia y recuperación. |
+| [`academic-study-test`](skills/education/academic-study-test/SKILL.es.md) | Modos de prueba con rúbricas y límite estricto contra asistencia en exámenes reales. |
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.es.md) | Planificación neutral de enseñanza y apoyo; no genera informes personales. |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Hojas de trabajo diferenciadas según objetivo y nivel. |
+| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.es.md) | Hojas de trabajo diferenciadas según objetivo y nivel. |
 
 ## Estructura del repositorio
 
