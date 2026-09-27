@@ -69,6 +69,16 @@ class SkillFrontmatterGateTests(unittest.TestCase):
         with _temp_repo("---\nlanguage: fr\n---\nbody\n") as (_root, md):
             self.assertEqual(gate.pruefe(md), [])
 
+    def test_pruefe_akzeptiert_yaml_kommentar_als_abschnittsueberschrift(self) -> None:
+        """Real files (e.g. skills/dev/human-loop-audit/SKILL.md) use a full-line
+        `# Comment` as a section divider between frontmatter groups -- valid
+        YAML, must not be misread as a broken key line."""
+        with _temp_repo(
+            "---\nname: x\ndescription: \"fine\"\n\n# Section Header\nstandalone: true\n"
+            "---\nbody\n"
+        ) as (_root, md):
+            self.assertEqual(gate.pruefe(md), [])
+
     def test_pruefe_still_requires_description_when_name_is_present(self) -> None:
         """A file that DOES declare its own `name` is a real primary/skill,
         not a marker stub -- required fields still apply."""

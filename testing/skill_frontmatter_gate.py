@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Prüft, ob jede SKILL*.md-Frontmatter gültiges, vollständiges YAML ist.
+"""Prüft SKILL*.md-Frontmatter auf die zwei bekannten YAML-Bruchmuster + Pflichtfelder.
 
 WARUM ES DIESES GATE GIBT
 --------------------------
 Am 2026-09-27 wurde entdeckt, dass 279 `SKILL*.md`-Dateien ein Frontmatter
-hatten, das `yaml.safe_load` nicht parsen konnte -- meist eine unquotierte
+hatten, das ein YAML-Parser nicht lesen konnte -- meist eine unquotierte
 `description:` mit einem ": " im Fliesstext (YAML liest das als neue
 Mapping-Zeile) oder ein `description: >`-Faltblock, dessen Fortsetzungszeilen
 die Einrueckung verloren hatten (vermutlich durch einen Batch-Uebersetzer/
@@ -12,8 +12,21 @@ Zeilenumbruch-Skript). 11 der betroffenen Skills waren bereits deployt und
 warfen in Claude Code den Laufzeitfehler
 `Error in user YAML: mapping values are not allowed in this context`.
 Weder `language_gate.py` (prueft die SPRACHE des Bodys) noch `skill_tester.py`
-(prueft PFLICHTFELDER, aber ueber Regex auf dem Rohtext, nicht ueber einen
-YAML-Parse) haben einen kaputten Parse jemals VOR der Laufzeit erkannt.
+(prueft PFLICHTFELDER ueber eine tolerante Regex, nicht ueber einen echten
+Parse) haben einen kaputten Parse jemals VOR der Laufzeit erkannt.
+
+KEIN YAML-PARSER, ABSICHTLICH
+------------------------------
+Dieses Repo ist bewusst zero-dependency (kein Eintrag in pyproject.toml,
+mehrere Skills werben aktiv damit) -- ein erster Entwurf importierte PyYAML
+und brach die CI, weil `pip install ruff pytest` in tests.yml kein PyYAML
+mitbringt. Statt einer Fremdabhaengigkeit prueft dieses Skript stdlib-only
+gezielt genau die Struktur, die alle ~1060 echten Frontmatter-Bloecke dieses
+Repos tatsaechlich brauchen (flache `schluessel: wert`-Paare, gequotete oder
+blanke Skalare, `>`/`|`-Faltbloecke, `[...]`/`{...}`-Inline-Collections) und
+die zwei oben beschriebenen Bruchmuster. Es ist keine vollstaendige
+YAML-Engine und erkennt keine beliebige Fehlform -- fuer diesen Zweck reicht
+das nicht, war aber auch nie das Ziel.
 
 Dieses Skript ist bewusst wiederverwendbar an drei Stellen gedacht (Ticket
 T-20260927-518399776, Nutzerwunsch): (1) als CI-/Pre-Commit-Gate in diesem
@@ -23,14 +36,15 @@ bricht das Deployment eines kaputten Skills ab statt ihn live zu schalten),
 
 Aufruf:
     PYTHONIOENCODING=utf-8 python testing/skill_frontmatter_gate.py
-        Nur pruefen. Exit 0 = jede SKILL*.md-Frontmatter parst und hat die
-        Pflichtfelder `name` und `description`.
+        Nur pruefen. Exit 0 = jede SKILL*.md-Frontmatter ist frei von den
+        beiden bekannten Bruchmustern und hat die Pflichtfelder `name` und
+        `description`.
     PYTHONIOENCODING=utf-8 python testing/skill_frontmatter_gate.py --fix
         Quotet zusaetzlich mechanisch (json.dumps) jede unquotierte
         description mit einem problematischen Wert und fasst kaputte
         `description: >`-Bloecke zu einer Zeile zusammen -- die einzigen
         beiden bekannten Fehlerbilder. Validiert jede geaenderte Datei danach
-        erneut; eine Datei, die auch nach dem Fix nicht parst, wird als
+        erneut; eine Datei, die auch nach dem Fix nicht sauber ist, wird als
         Fehler gemeldet statt still "repariert".
     ... --repo <pfad>
         Andere Wurzel als dieses Skript pruefen (z. B. der OneDrive-Mirror).
@@ -43,8 +57,6 @@ import re
 import sys
 from pathlib import Path
 
-import yaml
-
 REPO = Path(__file__).resolve().parent.parent
 SKILLS_ROOT_NAME = "skills"
 
@@ -56,7 +68,9 @@ SKILL_FILE = re.compile(r"^SKILL(\.[a-z]{2})?\.md$")
 IGNORIERTE_TEILE = {"_archive", "__pycache__"}
 
 REQUIRED_FIELDS = ("name", "description")
+BLOCK_SCALAR_VALUES = (">", "|", ">-", "|-", ">+", "|+")
 
+TOP_KEY = re.compile(r"^([A-Za-z_][A-Za-z0-9_-]*):(.*)$")
 DESC_LINE = re.compile(r"^description:(.*)$")
 BLOCK_SCALAR_HEAD = re.compile(r"^description:\s*[>|][+-]?\s*$")
 NEXT_KEY = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*:")
@@ -83,6 +97,99 @@ def split_frontmatter(text: str) -> tuple[str, str] | None:
     return parts[1], parts[2]
 
 
+def _frontmatter_findings(fm: str) -> list[str]:
+    """Stdlib-only Strukturpruefung fuer die zwei bekannten Bruchmuster.
+
+    Lauft zeilenweise ueber die Frontmatter-Rohtexte. Jede nicht eingerueckte,
+    nicht-leere Zeile muss `schluessel: wert` sein; alles direkt darauf
+    folgende Eingerueckte/Leere gilt als Koerper dieses Schluessels (Faltblock
+    ODER verschachteltes Mapping -- Letzteres wird hier nicht tiefer geprueft,
+    das ist nicht der bekannte Fehlerfall). Zwei gezielte Zusatzchecks:
+    ein `>`/`|`-Header, dessen naechste Nichtleer-Zeile NICHT eingerueckt ist
+    (Bruchmuster 2), und ein blanker Ein-Zeilen-Wert mit einem ": " darin
+    (Bruchmuster 1 -- genau das, was YAML als neue Mapping-Zeile lesen wuerde).
+    """
+    lines = fm.splitlines()
+    n = len(lines)
+    findings: list[str] = []
+    i = 0
+    saw_any_key = False
+    while i < n:
+        line = lines[i]
+        stripped_line = line.strip()
+        if not stripped_line or stripped_line.startswith("#"):
+            i += 1  # leer oder ein voller YAML-Kommentar (z.B. Abschnittsueberschrift)
+            continue
+        if line[0] in " \t":
+            findings.append(
+                f"Zeile {i + 1}: eingerueckte Zeile ohne vorausgehenden "
+                f"Schluessel: {line.strip()[:60]!r}"
+            )
+            i += 1
+            continue
+        m = TOP_KEY.match(line)
+        if not m:
+            findings.append(f"Zeile {i + 1}: keine gueltige 'schluessel: wert'-Zeile: {line[:60]!r}")
+            i += 1
+            continue
+        saw_any_key = True
+        key, value = m.group(1), m.group(2).strip()
+
+        scan = i + 1
+        while scan < n and lines[scan].strip() == "":
+            scan += 1
+        if value in BLOCK_SCALAR_VALUES and scan < n and lines[scan][0] not in " \t":
+            findings.append(
+                f"Zeile {scan + 1}: Faltblock von '{key}:' (Zeile {i + 1}) verlor "
+                "die Einrueckung -- wird als eigene Mapping-Zeile gelesen"
+            )
+            i = scan
+            continue
+
+        if value and value not in BLOCK_SCALAR_VALUES and not value.startswith(('"', "'", "[", "{")):
+            if ": " in value or value.endswith(":"):
+                findings.append(
+                    f"Zeile {i + 1}: unquotierter Wert von '{key}:' enthaelt ': ' "
+                    f"-- wird als neue Mapping-Zeile gelesen: {value[:60]!r}"
+                )
+
+        j = i + 1
+        while j < n and (lines[j].strip() == "" or lines[j][0] in " \t"):
+            j += 1
+        i = j
+
+    if not saw_any_key:
+        findings.append("keine einzige gueltige 'schluessel: wert'-Zeile gefunden")
+    return findings
+
+
+def _top_level_field_presence(fm: str) -> dict[str, bool]:
+    """Schluessel -> traegt er einen nicht-leeren Wert (Einzeiler oder Koerper)?"""
+    lines = fm.splitlines()
+    n = len(lines)
+    presence: dict[str, bool] = {}
+    i = 0
+    while i < n:
+        line = lines[i]
+        if not line.strip() or line[0] in " \t":
+            i += 1
+            continue
+        m = TOP_KEY.match(line)
+        if not m:
+            i += 1
+            continue
+        key, value = m.group(1), m.group(2).strip()
+        has_content = bool(value) and value not in BLOCK_SCALAR_VALUES
+        j = i + 1
+        while j < n and (lines[j].strip() == "" or lines[j][0] in " \t"):
+            if lines[j].strip():
+                has_content = True
+            j += 1
+        presence[key] = has_content
+        i = j
+    return presence
+
+
 def pruefe(md: Path) -> list[str]:
     """Gibt alle Befunde zurueck; leere Liste = Datei ist in Ordnung."""
     text = md.read_text(encoding="utf-8", errors="replace")
@@ -91,12 +198,12 @@ def pruefe(md: Path) -> list[str]:
         return ["keine Frontmatter-Markierung '---' am Dateianfang bzw. "
                 "Frontmatter-Block nicht mit zweitem '---' geschlossen"]
     fm, _ = split
-    try:
-        daten = yaml.safe_load(fm)
-    except yaml.YAMLError as e:
-        return [str(e).splitlines()[0]]
-    if not isinstance(daten, dict):
-        return [f"Frontmatter ist kein Mapping (Typ: {type(daten).__name__})"]
+
+    struktur_befunde = _frontmatter_findings(fm)
+    if struktur_befunde:
+        return struktur_befunde
+
+    presence = _top_level_field_presence(fm)
 
     # Uebersetzungs-/Marker-Stubs (z.B. skills/assist/dev/SKILL.fr.md: nur
     # `language: fr`, Inhalt bleibt die englische Primaerfassung mit
@@ -106,12 +213,12 @@ def pruefe(md: Path) -> list[str]:
     # dieses Gates gemessen; kein einziger echter Primaer-Skill hat `language`
     # ohne `name`. Pflichtfelder gelten deshalb nur, wenn die Datei ueberhaupt
     # einen eigenen `name`-Schluessel deklariert.
-    if "name" not in daten and "language" in daten:
+    if "name" not in presence and "language" in presence:
         return []
 
     befunde = []
     for feld in REQUIRED_FIELDS:
-        if not daten.get(feld):
+        if not presence.get(feld):
             befunde.append(f"Pflichtfeld fehlt oder ist leer: {feld}")
     return befunde
 
@@ -174,20 +281,16 @@ def fixe(md: Path) -> str | None:
         return None
     fm, body = split
 
-    try:
-        yaml.safe_load(fm)
-        return None  # schon gueltig, nichts zu tun
-    except yaml.YAMLError:
-        pass
+    if not _frontmatter_findings(fm):
+        return None  # schon sauber, nichts zu tun
 
     neu = _fix_unquoted_description(fm) or _fix_broken_block_scalar(fm)
     if neu is None:
         return None
 
-    try:
-        yaml.safe_load(neu)
-    except yaml.YAMLError as e:
-        return f"FIX FEHLGESCHLAGEN (unveraendert gelassen): {str(e).splitlines()[0]}"
+    reststoerungen = _frontmatter_findings(neu)
+    if reststoerungen:
+        return f"FIX FEHLGESCHLAGEN (unveraendert gelassen): {reststoerungen[0]}"
 
     md.write_text("---" + neu + "---" + body, encoding="utf-8")
     return "requotiert"
