@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.1.0
+version: 1.3.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-09-27
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: "Protocolo para crear, publicar, lanzar, auditar y mantener repositorios de GitHub de forma segura: verificar reglas y bloqueos locales, crear .gitignore antes del primer add, realizar comprobaciones de privacidad, preparar README/i18n/banner/metadatos, verificar etiquetas de lanzamiento y publicaciones de GitHub, y actualizar perfiles de organización, archivos llms.txt y enlaces de registro."
 standalone: true
@@ -52,6 +52,8 @@ Prepara el repositorio antes del primer push público. Un `.gitignore` correcto,
 12. **Establecer metadatos.** Revisa la descripción, temas (topics), página de inicio, visibilidad y rama por defecto.
 13. **Crear el lanzamiento.** Crea la etiqueta y el lanzamiento de GitHub (GitHub release); verifica la CI tanto para la rama como para la etiqueta.
 14. **Actualizar superficies de descubrimiento.** Enlaza desde el perfil de la organización, `llms.txt`, registros centrales, índices de módulos locales y READMEs del ecosistema. **Publicar ⇒ página de perfil (T-20260926-796851315):** si el repo tiene un banner, comprueba mecánicamente si ya aparece en la página de perfil de la organización (`<org>/.github/profile/README.md`) — `python org_profile_gate.py --org <org>` (`.AI/.SKILLS/testing/`). Si falta, el script genera un fragmento markdown listo para pegar.
+    **Marcar con estrella el propio repositorio (T-20260926-299328659):** el mantenimiento posterior comprueba si la cuenta ya marcó con estrella cada uno de sus propios repos públicos, y lo hace si no — mediante tu propia herramienta de cuidado de GitHub, si tienes una (ruta e invocación desde la configuración local, p. ej. un flag `--self-star`: sin argumento de repo, una pasada de recuperación en todas las organizaciones configuradas; con uno, una pasada de un solo repo justo después de esta publicación). Nunca quitar la estrella automáticamente.
+    **Cuidado de stargazers:** sigue a los nuevos stargazers y devuélveles la estrella a su mejor proyecto cuando la calidad realmente lo justifique — si tu herramienta de cuidado de GitHub ya tiene un módulo de reciprocidad, úsalo (puntúa la relevancia temática y sugiere estrella-de-vuelta/invitar/revisar/omitir; ejecuta lo siguiente con límites de tasa, tiempo de espera y una red de seguridad dry-run/apply/confirm). No lo reconstruyas si ya existe; el módulo registra sus propias decisiones. Nunca dejar de seguir ni quitar estrellas automáticamente.
 15. **Verificación final.** Comprueba el README remoto, la página de lanzamientos, los temas, la CI y los enlaces.
 
 ## Puerta de Privacidad (Privacy Gate)
@@ -65,6 +67,14 @@ rg -n "C:\\\\Us[e]rs\\\\|C:/Us[e]rs/|/c/Us[e]rs/|s[k]-[A-Za-z0-9]|gh[p]_|gh[o]_|
 ```
 
 Para módulos públicos, documenta también un `RELEASE_GATE.md` o puerta equivalente: fecha, comandos ejecutados, resultado, advertencias restantes y excepciones intencionadas. Si alguna vez se incluyó un secreto en un commit, eliminarlo de `HEAD` no es suficiente; rota el secreto.
+
+**Comprobar la visibilidad de los repos enlazados.** Un escaneo de rutas/tokens no encuentra enlaces a repos privados de GitHub en READMEs públicos (caso de referencia T-20260926-820252321: `ellmos-ai/ellmos-core` pasó desapercibido en una tabla de un README aunque ese repo es privado). Si existe en el repositorio, ejecuta la comprobación reutilizable:
+
+```bash
+python testing/repo_link_visibility_gate.py --repo .
+```
+
+La comprobación falla en abierto ante la incertidumbre (caída de red, límite de tasa, 404 — todo esto es solo una pista, nunca un bloqueo) y solo bloquea ante un `private: true` confirmado. Sin este script (el repo no tiene una copia de la comprobación): revisa manualmente cada enlace a un repo hermano/de terceros en el README con `gh api repos/ORG/REPO --jq .private`.
 
 ## Metadatos de GitHub
 
@@ -115,6 +125,20 @@ Si la CI está en rojo después de un lanzamiento, el repositorio aún no se ha 
 - [ ] ¿Tiene banner? `org_profile_gate.py --org <org>` se ejecutó sin hallazgo para este repo.
 
 ## Historial de cambios
+
+### 1.3.0 (2026-09-27)
+- Ampliado el paso 14 (T-20260926-299328659, petición del usuario): comprobar/establecer la
+  propia estrella de la cuenta en sus repos públicos, más el cuidado de stargazers (seguir +
+  devolver estrella por calidad), mediante tu propia herramienta de cuidado de GitHub si
+  tienes una — sin prescribir una herramienta concreta. Nunca dejar de seguir ni quitar
+  estrellas automáticamente.
+
+### 1.2.0 (2026-09-26)
+- Nuevo paso de puerta de privacidad (T-20260926-820252321): comprobar la visibilidad de los
+  repos de GitHub enlazados (`testing/repo_link_visibility_gate.py --repo .`, falla en abierto
+  ante red/límite de tasa/404, solo bloquea ante un `private: true` confirmado). Caso de
+  referencia: `ellmos-ai/ellmos-core` (un repo privado) pasó desapercibido en una tabla de un
+  README.
 
 ### 1.1.0 (2026-09-26)
 - Añadido el paso "Publicar ⇒ página de perfil" (T-20260926-796851315): un repo con banner debe
