@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: アイデア出しのための構造化されたクリエイティビティ手法: SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーション。
+description: "アイデア出しのための構造化されたクリエイティビティ手法: SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーション。"
 
 standalone: true
 anthropic_compatible: true

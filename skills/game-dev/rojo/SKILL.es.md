@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: Uso de Rojo: la herramienta de sincronización del sistema de archivos a Roblox Studio para el desarrollo profesional de Roblox en VS Code / Claude Code en lugar del editor de Studio. Usa esta skill siempre que Rojo esté involucrado: `rojo serve`/`rojo build`, escribir o depurar `default.project.json`, versiones de herramientas y rokit/rokit.toml (Rojo, Lune, Wally), mapeo de rutas anidado frente a plano (ReplicatedStorage.Project.shared), problemas de conexión/puerto/sincronización o cuando sea necesario crear la estructura básica de un proyecto de Roblox. También activa con "rojo connect no funciona", "los scripts terminan en el lugar equivocado en Studio", "cómo mapear src/ a Studio", "puerto 34872 en uso", "ModuleScript vs Script en Rojo".
+description: "Uso de Rojo: la herramienta de sincronización del sistema de archivos a Roblox Studio para el desarrollo profesional de Roblox en VS Code / Claude Code en lugar del editor de Studio. Usa esta skill siempre que Rojo esté involucrado: `rojo serve`/`rojo build`, escribir o depurar `default.project.json`, versiones de herramientas y rokit/rokit.toml (Rojo, Lune, Wally), mapeo de rutas anidado frente a plano (ReplicatedStorage.Project.shared), problemas de conexión/puerto/sincronización o cuando sea necesario crear la estructura básica de un proyecto de Roblox. También activa con \"rojo connect no funciona\", \"los scripts terminan en el lugar equivocado en Studio\", \"cómo mapear src/ a Studio\", \"puerto 34872 en uso\", \"ModuleScript vs Script en Rojo\"."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

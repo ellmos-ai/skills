@@ -5,10 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-07-28
 updated: 2026-07-30
-description: >
-  明示的に承認されたローカルの意思決定プロファイルが存在する場合：検証された
-フィードバックから繰り返し発生する意思決定を予測し、確信度を調整し、予測・決定・実行を
-厳密に分離します。
+description: "明示的に承認されたローカルの意思決定プロファイルが存在する場合：検証された フィードバックから繰り返し発生する意思決定を予測し、確信度を調整し、予測・決定・実行を 厳密に分離します。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -31,9 +31,32 @@ class SourceManifestError(ValueError):
 
 
 def unquote(value: str) -> str:
+    """Strip a YAML scalar's quoting and resolve its escapes.
+
+    T-20260927-518399776 (skills#46 review, blocker 2): a naive `value[1:-1]`
+    strip left the backslash-escapes of a double-quoted YAML scalar (e.g.
+    `\"Some \\\"quoted\\\" phrase\"`) untouched inside the extracted string.
+    `json.dumps()` then re-escaped that literal backslash on the next write,
+    corrupting the registry with doubled escapes (`\\\\\"`) for every
+    description containing an escaped quote (7 skills measured: game-design,
+    rbx-dev, rbx-studio, rojo, skill-explorer, law-checker,
+    lebende-verfassung). A YAML double-quoted scalar uses the same escape
+    grammar as a JSON string for every sequence this repo's frontmatter
+    actually uses (`\\"`, `\\\\`, `\\n`, `\\t`, `\\uXXXX`) -- and every
+    double-quoted description here was itself produced via
+    `json.dumps(..., ensure_ascii=False)` (see testing/skill_frontmatter_gate.py),
+    so `json.loads()` is the exact inverse, not an approximation.
+    """
     value = value.strip()
-    if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
-        return value[1:-1]
+    if len(value) >= 2 and value[0] == '"' and value[-1] == '"':
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            pass  # malformed escape -- fall through to a naive strip
+    if len(value) >= 2 and value[0] == "'" and value[-1] == "'":
+        # YAML single-quoted scalars escape an embedded quote by doubling it
+        # (`'It''s fine'`), not with a backslash.
+        return value[1:-1].replace("''", "'")
     return value
 
 

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Técnicas de preguntas sistémicas: Preguntas circulares, preguntas de escala, la pregunta del milagro y preguntas de excepción para la reflexión y la ampliación de perspectivas.
+description: "Técnicas de preguntas sistémicas: Preguntas circulares, preguntas de escala, la pregunta del milagro y preguntas de excepción para la reflexión y la ampliación de perspectivas."
 
 standalone: true
 anthropic_compatible: true

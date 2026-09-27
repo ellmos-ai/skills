@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Análisis de requisitos de documentos: Analiza los documentos de concepto y requisitos en la carpeta docs/, verifica los requisitos con el código actual y crea un informe de diferencias consolidado.
+description: "Análisis de requisitos de documentos: Analiza los documentos de concepto y requisitos en la carpeta docs/, verifica los requisitos con el código actual y crea un informe de diferencias consolidado."
 
 standalone: true
 anthropic_compatible: true

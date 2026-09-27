@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Психообразование по травме: Определение травмы, нормальные реакции, окно толерантности, управление триггерами и самопомощь.
+description: "Психообразование по травме: Определение травмы, нормальные реакции, окно толерантности, управление триггерами и самопомощь."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

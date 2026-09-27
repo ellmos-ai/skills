@@ -5,10 +5,7 @@ type: protocol
 author: Claude + Codex
 created: 2026-07-28
 updated: 2026-07-30
-description: >
-  Con un perfil de decisión local existente y expresamente autorizado: predecir decisiones
-recurrentes a partir de comentarios comprobados, calibrar la confianza y separar
-estrictamente la predicción, la decisión y la ejecución.
+description: "Con un perfil de decisión local existente y expresamente autorizado: predecir decisiones recurrentes a partir de comentarios comprobados, calibrar la confianza y separar estrictamente la predicción, la decisión y la ejecución."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

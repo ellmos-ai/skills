@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Psicología Positiva según Seligman: modelo PERMA, fortalezas del carácter (VIA), ejercicios de gratitud, teoría del flujo (flow) y factores de resiliencia.
+description: "Psicología Positiva según Seligman: modelo PERMA, fortalezas del carácter (VIA), ejercicios de gratitud, teoría del flujo (flow) y factores de resiliencia."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation.
+description: "Fundamentals of therapeutic communication: Active listening, mirroring, paraphrasing, open questions, and validation."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

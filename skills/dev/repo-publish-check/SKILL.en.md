@@ -46,7 +46,10 @@ as license attribution, a privacy notice, or a more accurate description.
 
 1. **Define the release set:** inspect `git ls-files`, package allowlists, and
    `.gitignore`; exclude internal notes, reports, test data, local settings,
-   and lock files.
+   and lock files. For a skill library (`SKILL*.md` files present): every
+   frontmatter must parse as YAML -- run `testing/skill_frontmatter_gate.py`
+   if it exists in the repo (`--fix` re-quotes mechanically without changing
+   wording), otherwise spot-check with `yaml.safe_load`.
 2. **Scan privacy and secrets:** search the working tree and all reachable
    history for credentials, tokens, private keys, local user paths, contact
    details, and personal data. Classify and remediate every finding.

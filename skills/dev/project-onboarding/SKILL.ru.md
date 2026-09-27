@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Стандартная процедура адаптации/интеграции (onboarding) новых программных проектов: анализ функций, проверка качества кода, чек-лист адаптации и создание задач.
+description: "Стандартная процедура адаптации/интеграции (onboarding) новых программных проектов: анализ функций, проверка качества кода, чек-лист адаптации и создание задач."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

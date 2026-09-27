@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Técnicas de estabilización: Anclaje (grounding), lugar seguro, técnica de contenedor y ejercicios de respiración. Técnicas inmediatas para malestar agudo y ataques de pánico.
+description: "Técnicas de estabilización: Anclaje (grounding), lugar seguro, técnica de contenedor y ejercicios de respiración. Técnicas inmediatas para malestar agudo y ataques de pánico."
 
 standalone: true
 anthropic_compatible: true

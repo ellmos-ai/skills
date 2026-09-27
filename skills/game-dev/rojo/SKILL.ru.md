@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-06-17
-description: Работа с Rojo — инструментом синхронизации файловой системы с Roblox Studio для профессиональной разработки в VS Code / Claude Code вместо встроенного редактора Studio. Используйте этот skill во всех случаях, когда задействован Rojo: `rojo serve`/`rojo build`, написание или отладка `default.project.json`, версии инструментов и rokit/rokit.toml (Rojo, Lune, Wally), вложенное или плоское сопоставление путей (ReplicatedStorage.Project.shared), проблемы с подключением/портом/синхронизацией, а также при создании каркаса проекта Roblox. Также активируйте при запросах "rojo connect не работает", "скрипты попадают не туда в Studio", "как сопоставить src/ с Studio", "порт 34872 занят", "разница между ModuleScript и Script в Rojo".
+description: "Работа с Rojo — инструментом синхронизации файловой системы с Roblox Studio для профессиональной разработки в VS Code / Claude Code вместо встроенного редактора Studio. Используйте этот skill во всех случаях, когда задействован Rojo: `rojo serve`/`rojo build`, написание или отладка `default.project.json`, версии инструментов и rokit/rokit.toml (Rojo, Lune, Wally), вложенное или плоское сопоставление путей (ReplicatedStorage.Project.shared), проблемы с подключением/портом/синхронизацией, а также при создании каркаса проекта Roblox. Также активируйте при запросах \"rojo connect не работает\", \"скрипты попадают не туда в Studio\", \"как сопоставить src/ с Studio\", \"порт 34872 занят\", \"разница между ModuleScript и Script в Rojo\"."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

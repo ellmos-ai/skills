@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: Meta-skill: Pensamiento estructurado como un flujo de trabajo de 3 fases. Combina análisis (think), ideación (brainstorm) y toma de decisiones (decide) en un proceso continuo.
+description: "Meta-skill: Pensamiento estructurado como un flujo de trabajo de 3 fases. Combina análisis (think), ideación (brainstorm) y toma de decisiones (decide) en un proceso continuo."
 
 standalone: true
 anthropic_compatible: true

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities.
+description: "Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities."
 
 standalone: true
 anthropic_compatible: true

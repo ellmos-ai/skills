@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-03-12
-description: [Français] Compétence d'agent pour research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
+description: "[Français] Compétence d'agent pour research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

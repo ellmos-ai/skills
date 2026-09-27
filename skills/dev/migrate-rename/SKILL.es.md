@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Renombrado evolutivo de archivos con archivos wrapper. Permite renombrar sin interrupciones drásticas: las referencias se actualizan orgánicamente con el uso.
+description: "Renombrado evolutivo de archivos con archivos wrapper. Permite renombrar sin interrupciones drásticas: las referencias se actualizan orgánicamente con el uso."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

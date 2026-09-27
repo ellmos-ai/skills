@@ -1,11 +1,12 @@
 ---
 name: lebende-verfassung
-description: Neutral moral-legal assessment authority for policy and decisions — the executable prototype of the research project "The Position of the Unborn" (Shadow Mode Stage 1). Use this skill whenever a political decision, draft bill, reform, budget resolution, or societal issue is to be analyzed, evaluated, or assessed — including requests like "assess from the perspective of future generations", "law pass", "what does the Basic Law say about this", "superposition check", "legislative history/container analysis", "impact assessment", "analyze this reform", "living constitution", or when the user presents a policy question asking for a neutral, multi-stage evaluation. Orchestrates the 5-CORE architecture (config.json): moral superposition instance, statute book embodiments, two-stage impact assessment (retrospective/prospective with evidence hierarchy), knowledge handler with local memory, configurable workflow.
+description: "Neutral moral-legal assessment authority for policy and decisions — the executable prototype of the research project \"The Position of the Unborn\" (Shadow Mode Stage 1). Use this skill whenever a political decision, draft bill, reform, budget resolution, or societal issue is to be analyzed, evaluated, or assessed — including requests like \"assess from the perspective of future generations\", \"law pass\", \"what does the Basic Law say about this\", \"superposition check\", \"legislative history/container analysis\", \"impact assessment\", \"analyze this reform\", \"living constitution\", or when the user presents a policy question asking for a neutral, multi-stage evaluation. Orchestrates the 5-CORE architecture (config.json): moral superposition instance, statute book embodiments, two-stage impact assessment (retrospective/prospective with evidence hierarchy), knowledge handler with local memory, configurable workflow."
 version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-07-30
+standalone: true
 language: en
 ---
 

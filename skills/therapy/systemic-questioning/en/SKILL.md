@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion.
+description: "Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion."
 
 standalone: true
 anthropic_compatible: true

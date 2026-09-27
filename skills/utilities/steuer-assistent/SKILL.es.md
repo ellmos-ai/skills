@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-07-23
 updated: 2026-07-23
-description: Apunta al módulo independiente steuer-assistent: una hoja de trabajo de recibos local y offline-first para los gastos relacionados con los ingresos de empleados en Alemania (Werbungskosten): registrar, sumar al céntimo y exportación privada en ZIP. Utilice este skill cuando los recibos de Werbungskosten deban prepararse de forma estructurada, con un límite claro: no es asesoramiento fiscal, no comprueba la deducibilidad y no crea ni envía declaraciones de impuestos (eso se realiza a través de ELSTER o software autorizado).
+description: "Apunta al módulo independiente steuer-assistent: una hoja de trabajo de recibos local y offline-first para los gastos relacionados con los ingresos de empleados en Alemania (Werbungskosten): registrar, sumar al céntimo y exportación privada en ZIP. Utilice este skill cuando los recibos de Werbungskosten deban prepararse de forma estructurada, con un límite claro: no es asesoramiento fiscal, no comprueba la deducibilidad y no crea ni envía declaraciones de impuestos (eso se realiza a través de ELSTER o software autorizado)."
 
 standalone: true
 anthropic_compatible: true

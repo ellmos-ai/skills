@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Структурированное решение проблем за 6 шагов: определение проблемы, цели, мозговой штурм, оценка, реализация и проверка.
+description: "Структурированное решение проблем за 6 шагов: определение проблемы, цели, мозговой штурм, оценка, реализация и проверка."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Comparativa de los cuatro enfoques psicoterapéuticos reglamentarios en Alemania: Terapia Cognitivo-Conductual, Psicoterapia de Orientación Psicodinámica, Psicoanálisis y Terapia Sistémica — Guía de orientación.
+description: "Comparativa de los cuatro enfoques psicoterapéuticos reglamentarios en Alemania: Terapia Cognitivo-Conductual, Psicoterapia de Orientación Psicodinámica, Psicoanálisis y Terapia Sistémica — Guía de orientación."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

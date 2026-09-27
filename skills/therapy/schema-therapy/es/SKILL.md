@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-03-15
-description: Terapia de Esquemas según Jeffrey Young: Esquemas, modos, concepto del niño interior y estilos de afrontamiento — presentado psicoeducativamente.
+description: "Terapia de Esquemas según Jeffrey Young: Esquemas, modos, concepto del niño interior y estilos de afrontamiento — presentado psicoeducativamente."
 
 standalone: true
 anthropic_compatible: true

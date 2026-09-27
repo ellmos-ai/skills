@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-03-12
-description: Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review.
+description: "Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

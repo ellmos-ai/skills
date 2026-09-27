@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger
 created: 2026-05-19
 updated: 2026-05-19
-description: Мета-skill: Структурированное мышление как 3-фазный рабочий процесс. Объединяет анализ (think), генерацию идей (brainstorm) и принятие решений (decide) в один непрерывный процесс.
+description: "Мета-skill: Структурированное мышление как 3-фазный рабочий процесс. Объединяет анализ (think), генерацию идей (brainstorm) и принятие решений (decide) в один непрерывный процесс."
 
 standalone: true
 anthropic_compatible: true
