@@ -47,6 +47,7 @@ from build_public_registry import (
     serialized_registry,
     serialized_source_manifest,
     unknown_language_variant_errors,
+    unquote,
     validate_source_manifest,
 )
 
@@ -55,6 +56,31 @@ class PublicRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+
+    def test_registry_descriptions_have_no_corrupted_escapes(self) -> None:
+        """T-20260927-518399776 (skills#46 review, blocker 2): a naive quote
+        strip left YAML double-quoted escapes (`\\"`) untouched, and the next
+        json.dumps() doubled them into `\\\\"` -- corrupting 7 descriptions
+        (game-design, rbx-dev, rbx-studio, rojo, skill-explorer, law-checker,
+        lebende-verfassung). No component description may contain a literal
+        backslash-quote or start/end with a stray quote character."""
+        for component in self.registry["components"]:
+            description = component["description"]
+            self.assertNotIn('\\"', description, component["name"])
+            self.assertFalse(description.startswith('"'), component["name"])
+            self.assertFalse(description.endswith('"'), component["name"])
+
+    def test_unquote_resolves_double_quoted_escapes(self) -> None:
+        self.assertEqual(
+            unquote('"Routes to tools: A and B"'),
+            "Routes to tools: A and B",
+        )
+        self.assertEqual(
+            unquote('"He said \\"hi\\" to me"'),
+            'He said "hi" to me',
+        )
+        self.assertEqual(unquote("'It''s fine'"), "It's fine")
+        self.assertEqual(unquote("no quotes here"), "no quotes here")
 
     def test_public_schema_language_enum_matches_generator_contract(self) -> None:
         schema = json.loads(
