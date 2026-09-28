@@ -90,34 +90,52 @@ flowchart TD
 
 | Skill | 特徴 |
 |---|---|
-| [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.ja.md) | スキルの監査、分類、調査、安全確認後の導入。 |
-| [`model-strategy`](skills/dev/model-strategy/SKILL.ja.md) | Claude、Codex、Gemini、Ollama のモデルルーティング。 |
-| [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.ja.md) | 既存プロジェクトを安全に整理する 6 段階手順。 |
-| [`github-repo-care`](skills/dev/github-repo-care/SKILL.ja.md) | ルール、lock、privacy、i18n、release を含む公開ゲート。 |
-| [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.ja.md) | 暗黙の hub を置かない MCP 検出・同期計画。 |
-| [`video-transcriber`](skills/utilities/video-transcriber/SKILL.ja.md) | 動画字幕、文字起こし、メタデータの抽出。 |
-| [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.ja.md) | Roblox Studio、Rojo、アセット安全確認。 |
-| [`decision-briefing`](skills/utilities/decision-briefing/SKILL.ja.md) | 未決事項を番号付き選択肢と推奨に変換。 |
-| [`bugsweep`](skills/dev/bugsweep/SKILL.ja.md) | 測定可能な目標と完了確認を持つバグ調査。 |
-| [`plugin-system`](skills/dev/plugin-system/SKILL.ja.md) | 依存関係なしの Python プラグインシステム。 |
-| [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.ja.md) | 言語版の欠落と構造ドリフトを検出。 |
-| [`law-checker`](skills/utilities/law-checker/SKILL.ja.md) | 出典に基づくドイツ法の初期案内。弁護士の代替ではありません。 |
-| [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.ja.md) | ドイツの従業員経費用ローカルシート。税務助言ではありません。 |
-| [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ja.md) | 目標、レベル、年齢に応じた教材生成。 |
-| [`research-agent`](skills/research/research-agent/SKILL.ja.md) | PubMed と arXiv の再現可能な調査。 |
-| [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.ja.md) | 選択された設定・ルール面の同期計画。 |
-| [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.ja.md) | 選択したルール面を読み込む中立ブリッジ。 |
-| [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.ja.md) | readback と rollback を備えた自動化保守。 |
-| [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.ja.md) | 役割、専門家、endpoint、persona、権限を分離。 |
-| [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.ja.md) | 個人プロファイルを公開せず、許可済み選好モデルを構築する公開モジュール。 |
-| [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.ja.md) | 外部サービス不要の開発自動化パイプライン。 |
-| [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.ja.md) | チャット残留物と AI 開示レベルを処理。 |
-| [`idea-mining`](skills/utilities/idea-mining/SKILL.ja.md) | 停滞した問題から案を抽出する複合手法。 |
-| [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.ja.md) | 会話から再利用可能なスキルを抽出。 |
-| [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.ja.md) | 会話や既存 prompt を反復可能な workflow に変換。 |
-| [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.ja.md) | ローカルモデルと RAG を持つポータブル環境を作成。 |
-| [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.ja.md) | 求人分析、履歴書、LinkedIn、応募文を支援。 |
-| [`therapy/`](skills/therapy/) | 倫理境界を持つ心理教育と対話手法のコレクション。 |
+| <img src="assets/icons/skill-explorer.svg" width="20" height="20" alt=""> [`skill-explorer`](skills/infrastructure/skill-explorer/SKILL.ja.md) | スキルの監査、分類、調査、安全確認後の導入。 |
+| <img src="assets/icons/model-strategy.svg" width="20" height="20" alt=""> [`model-strategy`](skills/dev/model-strategy/SKILL.ja.md) | Claude、Codex、Gemini、Ollama のモデルルーティング。 |
+| <img src="assets/icons/pipeline-optimizer.svg" width="20" height="20" alt=""> [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.ja.md) | 既存プロジェクトを安全に整理する 6 段階手順。 |
+| <img src="assets/icons/github-repo-care.svg" width="20" height="20" alt=""> [`github-repo-care`](skills/dev/github-repo-care/SKILL.ja.md) | ルール、lock、privacy、i18n、release を含む公開ゲート。 |
+| <img src="assets/icons/mcp-config-sync.svg" width="20" height="20" alt=""> [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.ja.md) | 暗黙の hub を置かない MCP 検出・同期計画。 |
+| <img src="assets/icons/video-transcriber.svg" width="20" height="20" alt=""> [`video-transcriber`](skills/utilities/video-transcriber/SKILL.ja.md) | 動画字幕、文字起こし、メタデータの抽出。 |
+| <img src="assets/icons/rbx-studio.svg" width="20" height="20" alt=""> [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.ja.md) | Roblox Studio、Rojo、アセット安全確認。 |
+| <img src="assets/icons/decision-briefing.svg" width="20" height="20" alt=""> [`decision-briefing`](skills/utilities/decision-briefing/SKILL.ja.md) | 未決事項を番号付き選択肢と推奨に変換。 |
+| <img src="assets/icons/bugsweep.svg" width="20" height="20" alt=""> [`bugsweep`](skills/dev/bugsweep/SKILL.ja.md) | 測定可能な目標と完了確認を持つバグ調査。 |
+| <img src="assets/icons/plugin-system.svg" width="20" height="20" alt=""> [`plugin-system`](skills/dev/plugin-system/SKILL.ja.md) | 依存関係なしの Python プラグインシステム。 |
+| <img src="assets/icons/bilingual-doc-sync.svg" width="20" height="20" alt=""> [`bilingual-doc-sync`](skills/utilities/bilingual-doc-sync/SKILL.ja.md) | 言語版の欠落と構造ドリフトを検出。 |
+| <img src="assets/icons/law-checker.svg" width="20" height="20" alt=""> [`law-checker`](skills/utilities/law-checker/SKILL.ja.md) | 出典に基づくドイツ法の初期案内。弁護士の代替ではありません。 |
+| <img src="assets/icons/steuer-assistent.svg" width="20" height="20" alt=""> [`steuer-assistent`](skills/utilities/steuer-assistent/SKILL.ja.md) | ドイツの従業員経費用ローカルシート。税務助言ではありません。 |
+| <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.ja.md) | 目標、レベル、年齢に応じた教材生成。 |
+| <img src="assets/icons/research-agent.svg" width="20" height="20" alt=""> [`research-agent`](skills/research/research-agent/SKILL.ja.md) | PubMed と arXiv の再現可能な調査。 |
+| <img src="assets/icons/agent-config-sync.svg" width="20" height="20" alt=""> [`agent-config-sync`](skills/infrastructure/agent-config-sync/SKILL.ja.md) | 選択された設定・ルール面の同期計画。 |
+| <img src="assets/icons/agents-bridge.svg" width="20" height="20" alt=""> [`agents-bridge`](skills/infrastructure/agents-bridge/SKILL.ja.md) | 選択したルール面を読み込む中立ブリッジ。 |
+| <img src="assets/icons/automation-self-care.svg" width="20" height="20" alt=""> [`automation-self-care`](skills/infrastructure/automation-self-care/SKILL.ja.md) | readback と rollback を備えた自動化保守。 |
+| <img src="assets/icons/semantic-persona-routing.svg" width="20" height="20" alt=""> [`semantic-persona-routing`](skills/infrastructure/semantic-persona-routing/SKILL.ja.md) | 役割、専門家、endpoint、persona、権限を分離。 |
+| <img src="assets/icons/build-your-users-mind.svg" width="20" height="20" alt=""> [`build-your-users-mind`](skills/utilities/build-your-users-mind/SKILL.ja.md) | 個人プロファイルを公開せず、許可済み選好モデルを構築する公開モジュール。 |
+| <img src="assets/icons/dev-soft-agent.svg" width="20" height="20" alt=""> [`dev-soft-agent`](skills/dev/dev-soft-agent/SKILL.ja.md) | 外部サービス不要の開発自動化パイプライン。 |
+| <img src="assets/icons/llm-text-hygiene.svg" width="20" height="20" alt=""> [`llm-text-hygiene`](skills/utilities/llm-text-hygiene/SKILL.ja.md) | チャット残留物と AI 開示レベルを処理。 |
+| <img src="assets/icons/idea-mining.svg" width="20" height="20" alt=""> [`idea-mining`](skills/utilities/idea-mining/SKILL.ja.md) | 停滞した問題から案を抽出する複合手法。 |
+| <img src="assets/icons/skill-extractor.svg" width="20" height="20" alt=""> [`skill-extractor`](skills/infrastructure/skill-extractor/SKILL.ja.md) | 会話から再利用可能なスキルを抽出。 |
+| <img src="assets/icons/workflow-extract.svg" width="20" height="20" alt=""> [`workflow-extract`](skills/infrastructure/workflow-extract/SKILL.ja.md) | 会話や既存 prompt を反復可能な workflow に変換。 |
+| <img src="assets/icons/ai-portable-setup.svg" width="20" height="20" alt=""> [`ai-portable-setup`](skills/infrastructure/ai-portable-setup/SKILL.ja.md) | ローカルモデルと RAG を持つポータブル環境を作成。 |
+| <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.ja.md) | 求人分析、履歴書、LinkedIn、応募文を支援。 |
+| <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`](skills/therapy/) | 倫理境界を持つ 19 個の心理教育と対話手法のコレクション（主力: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.ja.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.ja.md)）。ライブラリで最も深くまとまった体系。 |
+| <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.ja.md) | 憲法上の重ね合わせ（「未生者の位置」）：5-CORE 監査と反実仮想分析を通じて、短期的最適化に対する未来世代のアルゴリズム的拒否権を付与。 |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | エージェントの手抜きを防ぐ証明ベースの非終了プロトコル（WAAFAP）：終了条件を反転させ、ループの終了にタスク不存在の反証可能な証明を要求。 |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | ゼロステート・プライバシー配信パターン：SQLite-WASM/OPFS とクライアント側 BYOK によりブラウザ内で SQLite を実行し、サーバー DB や GDPR 責任を排除。 |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | 双方向 UI プロンプト統合（「クリックがプロンプト」）：ビルド段階なしで GUI 設計と指示を同期させる 4D 凡例付き型定義 ASCII ブループリント。 |
+| <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.ja.md) | おもねりや時期尚早な終了を防ぐため、実行時プリフライトチェックに統合された神経心理学的実行制御機能（抑制、作業記憶、メンタルリハーサル）。 |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | 決定論的でモデル不要のルール圧縮：LLM 推論や幻覚、意味ドリフトなしに、Markdown ルールとメモリのトークン量を最大 40% 削減。 |
+| <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.ja.md) | 見失った AI エージェントのための普遍的航海ナビゲーション：コンテキストのドリフトやループに陥った際の回復ヒューリスティクスと状態再構築。 |
+| <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.ja.md) | プロンプト用の宣言的条件ゲート DSL：前提条件、マイルストーン、順序依存関係を標準 Markdown 内の fail-closed ゲートにカプセル化。 |
+| <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.ja.md) | フックのない CLI エージェント向けプリフライト・ブートローダー：ネイティブ JSON イベントフックなしで、ターン前に統治ルールとメモリを注入。 |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | 共有同期フォルダを介したセッション無線局：非対称な役割（`ListenSync` 受信者 vs `WriteSync` 送信者）を分離し、サーバーなしで自律協調。 |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | マルチエージェント作業のためのセッション契約交渉：実行開始前にオーケストレーション構造、並行性、モデル枠、エスカレーション条件を確定。 |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | 大きく乖離したブランチのためのジッパーマージ：決定表によるセクション比較と、最終エスカレーションとしての意図再構築（マージの代わりに再構築）。 |
+| <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.ja.md) | ラッパーと MOVED スタブを用いた進化的なファイル・モジュール改名：利用を通じて参照が自然に更新される間、破壊的変更を防止。 |
+| <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.ja.md) | パイプラインのための 2x2 分類コンパス：LLM のスキャフォールディング偏向を防ぎ、適切なオンボーディングや改修スキルに案内。 |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | 決定論的な 3 役セッション終了衛生ループ：新たな課題を作らずに保留タスクを解決し、実態に合わせてドキュメントを同期。 |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | 非同期の人間参加型パイプライン：ユーザーが項目 N をテストする間にエージェントが項目 N+1 を開始し、待機時間を排除。 |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Cut-and-Clue による意味論的ファイル整理：発生元に機械可読ポインタを残して現行と過去のファイルを分離し、分類とログを保持。 |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | トピックプールやフィルタ、再シャッフルバンドルにより候補リストを段階的に削減し、残りを破棄せずグループ単位で選択・混合。 |
 
 ## 公開領域と非公開領域
 
