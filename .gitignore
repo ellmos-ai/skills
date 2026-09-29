@@ -74,6 +74,8 @@ testing/*
 !testing/test_readme_language_link_gate.py
 !testing/skill_frontmatter_gate.py
 !testing/test_skill_frontmatter_gate.py
+!testing/skill_smoke_gate.py
+!testing/test_skill_smoke_gate.py
 !testing/skill_link_baseline.json
 tools/
 # Die öffentliche Registry ist ein minimales Discovery-Format. Vollständige
