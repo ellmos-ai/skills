@@ -53,9 +53,11 @@ If you discover a potential security issue, sensitive information leakage, or vu
    - Affected skill(s) or script path(s).
    - Minimal reproduction steps or proof-of-concept.
    - Potential impact assessment.
-4. Alternatively, use [GitHub Security Advisories](https://github.com/ellmos-ai/skills/security/advisories) to submit a private report.
+5. Response SLA: We commit to an initial response acknowledging receipt within 48 hours and an initial triage assessment within 5 business days.
 
-We will acknowledge receipt within 48 hours and provide remediation updates.
+### Statutory Notice & Liability Limitation (§ 521 BGB)
+
+This repository is an unpaid open-source contribution provided free of charge. Under statutory German law (§ 521 BGB Gefälligkeitsrecht), liability is strictly limited to intent (*Vorsatz*) and gross negligence (*grobe Fahrlässigkeit*). Use of skills, playbooks, and utility scripts is entirely at your own risk.
 
 ---
 
@@ -111,5 +113,8 @@ Wenn Sie ein mögliches Sicherheitsproblem, ein Datenleck oder eine Schwachstell
    - Minimale Schritte zur Reproduktion (Proof-of-Concept).
    - Einschätzung der potenziellen Auswirkungen.
 4. Alternativ können Sie private Sicherheitsberichte über [GitHub Security Advisories](https://github.com/ellmos-ai/skills/security/advisories) einreichen.
+5. Reaktions-SLA: Wir garantieren eine Bestätigung des Eingangs innerhalb von 48 Stunden sowie eine erste Triage-Einstufung innerhalb von 5 Werktagen.
 
-Wir bestätigen den Eingang innerhalb von 48 Stunden und halten Sie über Sicherheits-Updates auf dem Laufenden.
+### Gesetzlicher Hinweis & Haftungsbeschränkung (§ 521 BGB)
+
+Dieses Projekt ist eine unentgeltliche Open-Source-Bereitstellung. Gemäß § 521 BGB (Gefälligkeitsrecht / Schenkung) ist die Haftung auf Vorsatz und grobe Fahrlässigkeit beschränkt. Die Nutzung der Skills, Playbooks und Skripte erfolgt auf eigene Verantwortung.

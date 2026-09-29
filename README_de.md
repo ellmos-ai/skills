@@ -18,10 +18,11 @@
 [![CI: Tests](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/skills/actions/workflows/tests.yml)
 [![Version: 1.4.4](https://img.shields.io/badge/Version-1.4.4-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Pytest: 305 bestanden](https://img.shields.io/badge/Pytest-305%20bestanden%20(186%20Subtests)-success.svg)](testing/)
+[![Pytest: 455 bestanden](https://img.shields.io/badge/Pytest-455%20bestanden%20(186%20Subtests)-success.svg)](testing/)
 [![Python: >=3.10 | 3.13](https://img.shields.io/badge/Python->=3.10%20|%203.13-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Datenschutz: Zero-Egress](https://img.shields.io/badge/Datenschutz-Zero--Egress-10b981.svg)](SECURITY.md)
 [![Sicherheit: Local-First](https://img.shields.io/badge/Sicherheit-Local--First-blue.svg)](SECURITY.md)
+[![Sicherheits-SLA: 48h](https://img.shields.io/badge/Sicherheits--SLA-48h%20%2F%205d-orange.svg)](SECURITY.md)
 [![Drittanbieter: Auditiert](https://img.shields.io/badge/Drittanbieter-Auditiert-brightgreen.svg)](THIRD_PARTY_LICENSES.md)
 [![Marketing Log: Aktiv](https://img.shields.io/badge/Marketing%20Log-Aktiv-blue.svg)](MARKETING-LOG.txt)
 [![Organisation: ellmos-ai](https://img.shields.io/badge/organisation-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
@@ -30,7 +31,7 @@
 [![Getrackt: 380 Skills](https://img.shields.io/badge/Getrackt-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 [![Notice: MIT](https://img.shields.io/badge/Notice-Attribution-blue.svg)](NOTICE)
-[![Zuletzt geprüft: 2026-09-24](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--24-informational.svg)](MARKETING-LOG.txt)
+[![Zuletzt geprüft: 2026-09-29](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--09--29-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.
@@ -45,29 +46,31 @@
 
 ## Schnellnavigation
 
-- [Systemarchitektur](#systemarchitektur)
-- [Multi-Agenten Skill-Discovery & Ausführungslebenszyklus](#multi-agenten-skill-discovery--ausfuehrungslebenszyklus)
-- [Einstieg](#einstieg)
-- [Zielgruppen & Auffindbarkeit](#zielgruppen--auffindbarkeit)
-- [Vergleichsmatrix gegenüber Alternativen](#vergleichsmatrix-gegenueber-alternativen)
-- [Katalogstand](#katalogstand)
-- [Besondere Skills](#besondere-skills)
-- [Grenze zwischen öffentlichem Kern und privaten Profilen](#grenze-zwischen-oeffentlichem-kern-und-privaten-profilen)
-- [Education-Skills](#education-skills)
-- [Repository-Struktur](#repository-struktur)
-- [Skill-Metadaten](#skill-metadaten)
-- [Validierung](#validierung)
-- [Suchkontext](#suchkontext)
-- [Ökosystem & Geschwister-Projekte](#oekosystem--geschwister-projekte)
-- [Drittanbieter-Lizenzen & Transparenz](#drittanbieter-lizenzen--transparenz)
-- [Lizenz & Haftung](#lizenz--haftung)
+- [01. Systemarchitektur & Schnellübersicht](#sec-01)
+- [02. Multi-Agenten Skill-Discovery & Ausführungslebenszyklus](#sec-02)
+- [03. Zielgruppen & Auffindbarkeit](#sec-03)
+- [04. Vergleichsmatrix gegenüber Alternativen](#sec-04)
+- [05. ASCII Vier-Ebenen-Architektur-Topologie](#sec-05)
+- [06. Einstieg & Schnellstart-Leitfaden](#sec-06)
+- [07. Katalogstand & Domänenverteilung](#sec-07)
+- [08. Besondere Skills & Praxiserprobte Workflows](#sec-08)
+- [09. Grenze zwischen öffentlichem Kern und privaten Profilen](#sec-09)
+- [10. Education-Skills](#sec-10)
+- [11. Repository-Struktur & Verzeichnislayout](#sec-11)
+- [12. Skill-Metadaten & Frontmatter-Anatomie](#sec-12)
+- [13. Validierung & Automatisierte Qualitätstore](#sec-13)
+- [14. Suchkontext & High-Intent-Indexierung](#sec-14)
+- [15. Governance & Laufzeit-Invarianten-Matrix](#sec-15)
+- [16. Ökosystem & Geschwister-Projekte](#sec-16)
+- [17. Drittanbieter-Lizenzen, Level 1 SBOM & RunAsInvoker](#sec-17)
+- [18. Sicherheitsrichtlinie, § 521 BGB Haftungsausschluss & 48h SLA](#sec-18)
 
 ---
 
 Dieses Repository ist der wiederverwendbare Skill-Katalog des ellmos-Ökosystems. Es enthält eigenständige Prozess-Skills, Entwicklungs-Workflows, Forschungshelfer, therapieorientierte Methoden, Infrastruktur-Playbooks und Utility-Werkzeuge im Anthropic-kompatiblen `SKILL.md`-Format. Jeder Skill trägt seine Metadaten direkt im YAML-Frontmatter, sodass Laufzeiten Herkunft, Kompatibilität und Abhängigkeiten ohne zentrale Registry prüfen können.
 
-<a id="systemarchitektur"></a>
-## Systemarchitektur
+<a id="sec-01"></a><a id="systemarchitektur"></a>
+## 1. Systemarchitektur & Schnellübersicht
 
 ```mermaid
 flowchart TD
@@ -104,14 +107,14 @@ flowchart TD
         STests["S-Tests (Statische Validierung)"]
         LTests["L-Tests (LLM-Selbsterfahrung)"]
         UTests["U-Tests (Nutzererfahrung)"]
-        PytestSuite["Pytest Testsuite (305 bestanden / 186 Subtests)"]
+        PytestSuite["Pytest Testsuite (455 bestanden / 186 Subtests)"]
     end
     
     Artifacts -.-> QualityGates
 ```
 
-<a id="multi-agenten-skill-discovery--ausfuehrungslebenszyklus"></a>
-## Multi-Agenten Skill-Discovery & Ausführungslebenszyklus
+<a id="sec-02"></a><a id="multi-agenten-skill-discovery--ausfuehrungslebenszyklus"></a>
+## 2. Multi-Agenten Skill-Discovery & Ausführungslebenszyklus
 
 ```mermaid
 sequenceDiagram
@@ -132,26 +135,36 @@ sequenceDiagram
     Runtime-->>Operator: Artefakt, Verifikationslog und Statusquittung übergeben
 ```
 
-<a id="einstieg"></a>
-## Einstieg
-
-| Bedarf | Datei oder Befehl |
-|---|---|
-| Alle öffentlichen Skills ansehen | [`skills/`](skills/) |
-| Baumkarte aller getrackten Skills ansehen | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
-| Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
-| Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
-| Sicherheitsrichtlinie & Boundary-Garantien | [`SECURITY.md`](SECURITY.md) |
-| Formeller Urheberrechts- & Attributions-Hinweis | [`NOTICE`](NOTICE) |
-| Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
-| Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
-| Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
-| Kompakte Projektkarte für LLMs lesen | [`llms.txt`](llms.txt) |
-
-<a id="zielgruppen--auffindbarkeit"></a>
-## Zielgruppen & Auffindbarkeit
+<a id="sec-03"></a><a id="zielgruppen--auffindbarkeit"></a>
+## 3. Zielgruppen & Auffindbarkeit
 
 `ellmos-skills` bedient vier zentrale technische Zielgruppen im Spektrum autonomer Agenten- und Plattform-Entwicklung:
+
+### `[PERSONA-01]` Autonome KI-Agenten & Multi-Agenten-Schwärme
+- **Profil:** Multi-Agenten-Systeme, Orchestratoren und autonome Coding-Schleifen (*Claude Code, AGY, Codex, BACH*).
+- **Zentraler Pain Point:** Halluzinierte Zwischenschritte, unstrukturierte Tool-Aufrufe, nicht-deterministische Ausführung über Agentengrenzen hinweg und Kontext-Drift.
+- **Lösung durch `ellmos-skills`:** Standardisiertes `SKILL.md`-Format mit striktem YAML-Frontmatter, autarken Playbooks, deterministischen Ein-/Ausgabe-Verträgen und sofortiger Portabilität.
+- **Typische Workflows & Skills:** `infrastructure/agents-bridge`, `dev/pipeline-optimizer`, `utilities/generalizer`, `infrastructure/work-autonomous`.
+
+### `[PERSONA-02]` Enterprise DevOps & Platform Engineers
+- **Profil:** Plattform-Ingenieure und Infrastruktur-Teams, die Entwicklerflotten, geplante Aufgaben und CI-Pipelines betreuen.
+- **Zentraler Pain Point:** Wiederkehrende Neuerfindung von Wartungsabläufen, fragile CI-Skripte, fehlende Host-Parität und chaotische Repository-Verwaltung.
+- **Lösung durch `ellmos-skills`:** Sofort einhängbare, praxiserprobte Playbooks für Refactoring, Git-Hygiene und Pipeline-Renovierung ohne Tool-Sprawl.
+- **Typische Workflows & Skills:** `dev/project-bootstrapper`, `dev/pipeline-bootstrapper`, `utilities/folder-organization`, `dev/github-repo-care`.
+
+### `[PERSONA-03]` Local-First, Privacy & SecOps Spezialisten
+- **Profil:** Sicherheitsbeauftragte, Compliance-Auditoren und Datenschutz-Ingenieure in regulierten oder isolierten Umgebungen.
+- **Zentraler Pain Point:** Unbeabsichtigte Datenabflüsse in die Cloud, unüberprüfte transitive Pakete, Supply-Chain-Risiken und erhöhte Ausführungsrechte in Agenten-Tools.
+- **Lösung durch `ellmos-skills`:** Striktes Zero-Egress (`INV-LOCAL-01`), automatisierte statische Privacy-Boundary-Gates (`testing/privacy_gate.py`), User-Mode-Betrieb (`RunAsInvoker`), 0% Copyleft und Level 1 SBOM Transparenz.
+- **Typische Workflows & Skills:** `infrastructure/privacy-gate`, `utilities/secret-redactor`, `SECURITY.md`, `THIRD_PARTY_LICENSES.md`.
+
+### `[PERSONA-04]` Domain Skill Autoren & Research Engineers
+- **Profil:** KI-Forscher, Methodiker und Fachspezialisten, die reproduzierbare Agenten-Fähigkeiten entwickeln.
+- **Zentraler Pain Point:** Mangelnde Konventionen, inkonsistente Mehrsprachigkeit und fehlende Test-Harnische für benutzerdefinierte Skills.
+- **Lösung durch `ellmos-skills`:** Formale Schema-Spezifikation (`docs/CONVENTIONS.md`), öffentliche Registry-Generierung (`registry/components.json`) und dreistufiges S/L/U-Test-Framework.
+- **Typische Workflows & Skills:** `schemas/assist-v1.schema.json`, `docs/CONVENTIONS.md`, `testing/skill_tester.py`, `research/research-agent`.
+
+### Zielgruppen-Übersichtsmatrix
 
 | Zielgruppe | Zentraler Pain Point | Lösung durch `ellmos-skills` | Typische Workflows & Skills |
 |---|---|---|---|
@@ -169,10 +182,10 @@ sequenceDiagram
 | **Datenschutz & Sicherheit** | `Zero-Egress KI Skills`, `Lokale Agenten Bibliothek`, `Fail-Closed Datenschutz Gate`, `Unprivilegierte Ausführung` | `zero-egress ai skills`, `local-first agent library`, `fail-closed privacy gate`, `user-mode agent execution` |
 | **Ökosystem & Katalog** | `BACH Skill Katalog`, `Multi-Agenten Skill Bibliothek`, `Offline KI Werkzeuge`, `Open Source Agenten Skills` | `bach skill catalog`, `multi-agent skill library`, `offline ai tools`, `open source agent skills` |
 
-<a id="vergleichsmatrix-gegenueber-alternativen"></a>
-## Vergleichsmatrix gegenüber Alternativen
+<a id="sec-04"></a><a id="vergleichsmatrix-gegenueber-alternativen"></a>
+## 4. Vergleichsmatrix gegenüber Alternativen
 
-`ellmos-skills` definiert einen anbieterneutralen, portablen Skill-Standard, der speziell für lokale, multi-agentielle Arbeitsabläufe optimiert ist. Die folgende Matrix vergleicht den Ansatz mit gängigen Alternativen:
+`ellmos-skills` definiert einen anbieterneutralen, portablen Skill-Standard, der speziell für lokale, multi-agentielle Arbeitsabläufe optimiert ist. Die folgende Matrix vergleicht den Ansatz mit gängigen Alternativen über zehn fundamentale Dimensionen:
 
 | Bewertungsdimension | `ellmos-skills` | Ad-hoc System-Prompts | Tool/Function-Calling ohne Playbooks | Zentrale Cloud-Hubs | Schwergewichtige Frameworks (LangChain/CrewAI) |
 |---|:---:|:---:|:---:|:---:|:---:|
@@ -181,14 +194,91 @@ sequenceDiagram
 | **3. Multi-Agenten-Portabilität** | **PASS** (Claude, Codex, AGY, BACH) | ⚠️ Prompts driften je nach Modell | ⚠️ Spezifische Wrapper je Provider | ❌ An proprietäre Plattform gebunden | ⚠️ Framework-spezifischer Lock-in |
 | **4. Schritt-für-Schritt-Playbooks** | **PASS** (Strukturierte Phasen & Gates) | ❌ Unzuverlässige Instruktionsbefolgung | ❌ Nur Einzelschritt-Toolaufrufe | ⚠️ Sehr heterogene Autorenqualität | ⚠️ Python-DAG-Logik erforderlich |
 | **5. Datenschutz- & Leakage-Gates** | **PASS** (Automatisches statisches Gate) | ❌ Keine vorhanden | ❌ Keine vorhanden | ⚠️ Nur Cloud-Moderationsfilter | ❌ Standardmäßig nicht integriert |
-| **6. Automatisierte Test-Suite** | **PASS** (286+ Pytest-Tests, 100% grün) | ❌ Ungetestet | ⚠️ Nur Unit-Tests für API-Calls | ❌ Kein öffentlicher Test-Harnisch | ⚠️ Nur Framework-eigene Unit-Tests |
+| **6. Automatisierte Test-Suite** | **PASS** (455 Pytest-Tests, 186 Subtests, 100% grün) | ❌ Ungetestet | ⚠️ Nur Unit-Tests für API-Calls | ❌ Kein öffentlicher Test-Harnisch | ⚠️ Nur Framework-eigene Unit-Tests |
 | **7. Multi-OS CI-Parität** | **PASS** (Linux, Windows, macOS) | Nicht anwendbar | ⚠️ Provider-abhängig | ❌ Gehosteter Cloud-Dienst | ⚠️ Plattform-Inkonsistenzen |
 | **8. Maschinenlesbarer Katalog** | **PASS** (`registry/components.json`) | ❌ Nicht indexiert | ❌ Nur dynamische API-Introspektion | ⚠️ Proprietäre API-Abfragen | ❌ Code-Modulimporte |
 | **9. Open-Source & 0% Copyleft** | **PASS** (100% MIT-Lizenz) | Nicht anwendbar | Nicht anwendbar | ❌ Proprietäre Nutzungsbedingungen | ⚠️ Gemischte Lizenzmodelle |
 | **10. Null externe Laufzeit-Abhängigkeiten** | **PASS** (Nur Python-Standardbib) | **PASS** | ⚠️ Externe HTTP/JSON-Libs nötig | ❌ Cloud-Client-SDKs zwingend | ❌ Sehr große Dependency-Trees |
 
-<a id="katalogstand"></a>
-## Katalogstand
+<a id="sec-05"></a><a id="ascii-topologie"></a><a id="architektur-topologie"></a>
+## 5. ASCII Vier-Ebenen-Architektur-Topologie
+
+```text
++----------------------------------------------------------------------------------------------------+
+| EBENE 1: RUNTIME-DISPATCH & DISCOVERY-SCHICHT                                                      |
+|                                                                                                    |
+|  [ Operator / LLM-Agent ]                                                                          |
+|            |                                                                                       |
+|            v (Aufgaben-Intent / Suchanfrage)                                                       |
+|  +----------------------------------------------------------------------------------------------+  |
+|  | ellmos Skill-Laufzeit & Dispatcher (Reine Python-Standardbibliothek)                         |  |
+|  |  * Kategorie-Resolver    * Frontmatter-Validator    * Abhängigkeits- & Herkunftsprüfer       |  |
+|  +----------------------------------------------------------------------------------------------+  |
+|            |                                            |                                          |
+|            v (Discovery-Abfrage)                        v (Katalog-Index-Rücklesung)               |
+|  +-----------------------------------+        +-------------------------------------------------+  |
+|  | Öffentliche Katalog-Registry      |        | llms.txt & Kontext-Index                        |  |
+|  | (registry/components.json: 142)   |        | (Maschinenlesbares Markdown & Domänen-Hierarchie)|  |
+|  +-----------------------------------+        +-------------------------------------------------+  |
++----------------------------------------------------------------------------------------------------+
+| EBENE 2: MULTI-AGENTEN-CLIENT-INTEGRATIONSSCHICHT                                                  |
+|                                                                                                    |
+|  [ Claude Code ]      [ OpenAI Codex ]      [ Antigravity / Gemini ]     [ BACH Text-OS / Lokal ]  |
+|  (~/.claude/skills)   (~/.codex/skills)     (~/.gemini/.../skills)       (system/skills/...)       |
+|         \                   |                        |                          /                  |
+|          +------------------+------------------------+-------------------------+                   |
+|                             | Einheitliche Bereitstellung (Materialization)                        |
+|                             v                                                                      |
+|  +----------------------------------------------------------------------------------------------+  |
+|  | Standardisierte SKILL.md Ausführungsoberfläche                                               |  |
+|  |  * Anthropic YAML-Frontmatter-Vertrag    * Schritt-für-Schritt-Playbooks  * S/L/U-Prüfgates     |  |
+|  +----------------------------------------------------------------------------------------------+  |
++----------------------------------------------------------------------------------------------------+
+| EBENE 3: GOVERNANCE- & SICHERHEITSGRENZE (FAIL-CLOSED)                                             |
+|                                                                                                    |
+|  +----------------------------------------------------------------------------------------------+  |
+|  | Statisches Privacy-Gate (testing/privacy_gate.py)                                             |  |
+|  |  * Zero-Egress-Garantie (INV-LOCAL-01)       * Non-Elevation / RunAsInvoker (INV-UNPRIV-03)   |  |
+|  |  * Abweisung konkreter User-Pfade & Hostnamen * Abweisung privater Tokens, Keys & Geheimnisse |  |
+|  +----------------------------------------------------------------------------------------------+  |
+|            |                                            |                                          |
+|            v (Compliance-Audit)                         v (Öffentlich/Privat-Trennung)             |
+|  +-----------------------------------+        +-------------------------------------------------+  |
+|  | Level 1 SBOM Invarianten-Matrix   |        | No-Push Grenztrennung                           |  |
+|  | (THIRD_PARTY_LICENSES.md/.txt)    |        | (Generische Methoden öffentlich, Profile privat)|  |
+|  +-----------------------------------+        +-------------------------------------------------+  |
++----------------------------------------------------------------------------------------------------+
+| EBENE 4: DOMÄNEN-TOPOLOGIE & SKILL-AUFBAU                                                          |
+|                                                                                                    |
+|  skills/                                                                                           |
+|  +-- assist/ (20)        +-- dev/ (25)            +-- education/ (5)       +-- game-dev/ (5)       |
+|  +-- infrastructure/ (32)+-- production/ (1)      +-- research/ (1)        +-- therapy/ (20)       |
+|  +-- third-party/ (3)    +-- utilities/ (29)      +-- web/ (1)                                     |
+|                                                                                                    |
+|  [ Anatomie eines einzelnen Skills ]:                                                              |
+|  +-- SKILL.md (Frontmatter + Playbook)   +-- scripts/ (Helfer)    +-- references/ (Belege/Doku)    |
++----------------------------------------------------------------------------------------------------+
+```
+
+<a id="sec-06"></a><a id="einstieg"></a><a id="schnellstart"></a>
+## 6. Einstieg & Schnellstart-Leitfaden
+
+| Bedarf | Datei oder Befehl |
+|---|---|
+| Alle öffentlichen Skills ansehen | [`skills/`](skills/) |
+| Baumkarte aller getrackten Skills ansehen | [`SKILLS-MAP.md`](SKILLS-MAP.md) |
+| Das `SKILL.md`-Schema verstehen | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
+| Maschinenlesbarer Katalog-Index | [`registry/components.json`](registry/components.json) |
+| Sicherheitsrichtlinie & Boundary-Garantien | [`SECURITY.md`](SECURITY.md) |
+| Level 1 SBOM Plain-Text Begleitdokument | [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt) |
+| Formeller Urheberrechts- & Attributions-Hinweis | [`NOTICE`](NOTICE) |
+| Nach Kategorie browsen | [`skills/`](skills/) (ein Unterordner je Kategorie) |
+| Ein Skill nutzen | `skills/<kategorie>/<name>/` in das Skills-Verzeichnis deines Agenten kopieren (z.B. `~/.claude/skills/`) |
+| Öffentliche Änderungen nachvollziehen | [`CHANGELOG.md`](CHANGELOG.md) |
+| Kompakte Projektkarte für LLMs lesen | [`llms.txt`](llms.txt) |
+
+<a id="sec-07"></a><a id="katalogstand"></a><a id="domaenenverteilung"></a>
+## 7. Katalogstand & Domänenverteilung
 
 Der aktuelle öffentliche Katalog enthält 142 öffentliche Laufzeit-Skills (380 getrackt über lokale Testsuiten):
 
@@ -206,8 +296,8 @@ Der aktuelle öffentliche Katalog enthält 142 öffentliche Laufzeit-Skills (380
 | <img src="assets/icons/cat-utilities.svg" width="20" height="20" alt=""> `utilities` | 29 | Batch-Operationen, Denkrahmen, Entscheidungs-Briefings, Dokumenten-Chunking, Encoding-Reparatur, Video-Transkripte, Privat-Mail-Entwürfe, Bewerbungsunterstützung, Nutzerprofil-Werkzeuge sowie Verweis-Skills für deutsche Rechts- und Steuer-Erstorientierung |
 | <img src="assets/icons/cat-web.svg" width="20" height="20" alt=""> `web` | 1 | Protokoll zum Lesen und Auswerten von Webinhalten |
 
-<a id="besondere-skills"></a>
-## Besondere Skills
+<a id="sec-08"></a><a id="besondere-skills"></a><a id="praxiserprobte-workflows"></a>
+## 8. Besondere Skills & Praxiserprobte Workflows
 
 Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koordinieren, chaotische Agentenabläufe verhindern oder lokale Verfahren als wiederholbare Playbooks nutzbar machen:
 
@@ -260,8 +350,8 @@ Einige Skills sind besonders gute Einstiegspunkte, weil sie andere Werkzeuge koo
 | <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Semantische Dateisystembereinigung nach dem Cut-and-Clue-Prinzip: trennt aktive von historischen Inhalten mit maschinenlesbaren Zeigern am Ursprungsort unter Erhalt aller Taxonomien und Prüf-Logs. |
 | <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | Reduziert große Kandidatenlisten schrittweise durch optionale Themen-Pfützen, Filterstufen und wiederholt neu gemischte Bündel -- zum gruppenweisen Auswählen, Filtern oder Mischen von Skills, Aufgaben, Ideen oder Dateien, ohne übrige Einträge endgültig zu verwerfen. |
 
-<a id="grenze-zwischen-oeffentlichem-kern-und-privaten-profilen"></a>
-## Grenze zwischen öffentlichem Kern und privaten Profilen
+<a id="sec-09"></a><a id="grenze-zwischen-oeffentlichem-kern-und-privaten-profilen"></a><a id="oeffentlich-privat-grenze"></a>
+## 9. Grenze zwischen öffentlichem Kern und privaten Profilen
 
 Öffentliche Skill-Ordner enthalten ausschließlich übertragbare Methoden und
 neutrale Assets. App- oder host-spezifische Adapter, Konten, Datenbanken, lokale
@@ -287,7 +377,10 @@ weiterveröffentlicht. Die öffentliche
 [`registry/components.json`](registry/components.json) ist deshalb nur ein
 reduzierter Discovery-Index. Interne Herkunftsbewertungen,
 Privacy-Klassifizierungen und die vollständige Maintainer-Registry bleiben in
-einem getrennten No-Push-Repository.
+einem getrennten No-Push-Repository. Die nicht-zirkuläre Autoritätsquelle ist
+[`registry/public-skill-files.json`](registry/public-skill-files.json): Git
+generiert und prüft sie in Checkouts, während gitlose Archive und angereicherte
+Plan-D-Projektionen nur die dort geführten Dateien nutzen und lokale private Extras ignorieren.
 
 Sowohl [`registry/components.json`](registry/components.json) als auch
 [`SKILLS-MAP.md`](SKILLS-MAP.md) sind **generiert**. Nach jeder Änderung unter
@@ -296,8 +389,8 @@ Sowohl [`registry/components.json`](registry/components.json) als auch
 neu erzeugt: Der CI-Schritt `Check public catalog outputs` und die pre-commit-Hooks
 `public-registry-current` / `skills-map-current` schlagen bei veraltetem Katalog laut fehl.
 
-<a id="education-skills"></a>
-## Education-Skills
+<a id="sec-10"></a><a id="education-skills"></a>
+## 10. Education-Skills
 
 Fünf institutions- und nutzerneutrale Education-Skills. Der öffentliche
 `foerderplaner` plant Unterrichts- und Fördermaßnahmen; persönliche
@@ -311,8 +404,8 @@ Förderberichte erzeugt er nicht.
 | [`foerderplaner`](skills/education/foerderplaner/SKILL.md) | Nutzerneutrale Unterrichts- und Förderplanung mit Zielen, Maßnahmen, Differenzierung, Beobachtungskriterien und Überprüfungsterminen; kein Berichtsgenerator. |
 | <img src="assets/icons/worksheet-generator.svg" width="20" height="20" alt=""> [`worksheet-generator`](skills/education/worksheet-generator/SKILL.md) | Differenzierte Arbeitsblätter und Lernmaterialien passend zu Lernziel und Niveau. |
 
-<a id="repository-struktur"></a>
-## Repository-Struktur
+<a id="sec-11"></a><a id="repository-struktur"></a><a id="verzeichnislayout"></a>
+## 11. Repository-Struktur & Verzeichnislayout
 
 ```text
 skills/
@@ -325,12 +418,14 @@ skills/
 docs/
   CONVENTIONS.md            # Frontmatter-Spezifikation
 registry/components.json    # Reduzierter öffentlicher Katalog-Index
+registry/public-skill-files.json # Öffentliche Quell-Autorität für gitlose Kopien
 NOTICE                      # Formeller Urheberrechts- und Attributions-Hinweis
+THIRD_PARTY_LICENSES.txt    # Level 1 SBOM Begleitdokument im Klartext
 llms.txt                    # Kompakte Projektkarte für LLM-Crawler
 ```
 
-<a id="skill-metadaten"></a>
-## Skill-Metadaten
+<a id="sec-12"></a><a id="skill-metadaten"></a><a id="frontmatter-anatomie"></a>
+## 12. Skill-Metadaten & Frontmatter-Anatomie
 
 Jede `SKILL.md` deklariert, ob sie eigenständig läuft, ob sie BACH-kompatibel ist und woher sie stammt:
 
@@ -349,8 +444,8 @@ provenance:
 
 Unterstützte Skill-Typen sind `skill`, `agent`, `expert`, `service`, `protocol` und `tool`.
 
-<a id="validierung"></a>
-## Validierung
+<a id="sec-13"></a><a id="validierung"></a><a id="qualitaetstore"></a>
+## 13. Validierung & Automatisierte Qualitätstore
 
 Pull Requests und Pushes, die eine öffentliche `SKILL.md` ändern, führen das
 vollständige statische S-Test-Gate aus. Derselbe Check für alle git-getrackten
@@ -371,8 +466,8 @@ sobald verfügbar (nicht von diesem Projekt durchgeführt oder beauftragt):
 
 - [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), getestet 2026-08-08 auf Gemini-3.6-flash, 22 Fälle: Erfolgsquote 22,7 % -> 95,5 % (+73pp), -14 % Tokens, Sicherheit 15/15 Checks (3/3).
 
-<a id="suchkontext"></a>
-## Suchkontext
+<a id="sec-14"></a><a id="suchkontext"></a><a id="high-intent-indexierung"></a>
+## 14. Suchkontext & High-Intent-Indexierung
 
 Dieses Repository ist relevant für Suchbegriffe wie:
 
@@ -390,8 +485,26 @@ Dieses Repository ist relevant für Suchbegriffe wie:
 
 Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte deshalb der kanonische Repository-String `ellmos-ai/skills` verwendet werden. Es handelt sich um einen wiederverwendbaren Skill-Katalog, nicht um einen MCP-Server, einen gehosteten SaaS-Marktplatz, ein Prompt-Pack oder einen privaten Skill-Installer.
 
-<a id="oekosystem--geschwister-projekte"></a>
-## Ökosystem & Geschwister-Projekte
+<a id="sec-15"></a><a id="governance--laufzeit-invarianten"></a><a id="invarianten-matrix"></a>
+## 15. Governance & Laufzeit-Invarianten-Matrix
+
+Jeder Skill, jedes Hilfsskript und jedes Metadaten-Manifest in `ellmos-skills` unterliegt zehn verbindlichen Invarianten:
+
+| Invarianten-ID | Bezeichnung | Architektonischer & Operativer Geltungsbereich | Verifikations- & Erfüllungsstatus |
+|---|---|---|---|
+| **INV-LOCAL-01** | 100% Local-First & Zero-Egress | Netzwerk & Datenschutz | **PASS** — Reines Markdown und lokale Python-Skripte; null Telemetrie, null ausgehende Netzwerkverbindungen. |
+| **INV-PRIVACY-02** | Fail-Closed Privacy-Boundary-Gate | Datenschutz | **PASS** — Automatisiertes Privacy-Gate weist konkrete User-Pfade, Hostnamen und Tokenmuster ab. |
+| **INV-UNPRIV-03** | Non-Elevation & RunAsInvoker | Prozessausführung | **PASS** — Alle Workflows laufen ausnahmslos im unprivilegierten Benutzerraum; Root/Admin-Elevation verboten. |
+| **INV-SCHEMA-04** | Deterministisches Frontmatter & Schema-Integrität | Vertragstreue | **PASS** — YAML-Frontmatter entspricht strikt `docs/CONVENTIONS.md` und den Schema-Validierungstoren. |
+| **INV-ISOLATION-05** | Portable & Autarke Skill-Anatomie | Modularität | **PASS** — Skills kapseln eigene Playbooks, Referenzen und Skripte ohne implizite Host-Kopplungen. |
+| **INV-PORTABLE-06** | Multi-Agenten-Laufzeit-Portabilität | Interoperabilität | **PASS** — Vollständig kompatibel mit Claude Code, Codex, AGY/Gemini, BACH und lokalen Ollama-Runtimes. |
+| **INV-DISCOVERY-07** | Trennung öffentlicher Kern & private Profile | Grenztrennung | **PASS** — Öffentlicher Katalog (`registry/components.json`) exponiert nur verifizierte, unkritische Discovery-Felder. |
+| **INV-PLATFORM-08** | Multi-OS-Parität & Plattformunabhängigkeit | Portabilität | **PASS** — Linux, Windows und macOS über Multi-OS-CI-Matrix auf Python 3.10 bis 3.13 identisch validiert. |
+| **INV-SYNC-09** | Multi-Host Cloud-Sync & Lock-Resilienz | Nebenläufigkeit | **PASS** — Gehärtete `.gitignore` und kooperative Lock-Protokolle verhindern Cloud-Sync-Races und Datenkorruption. |
+| **INV-SLA-10** | 48h Security-Response- & Triage-Zusage | Governance | **PASS** — Verbindliches SLA: 48h Eingangsbestätigung, 5 Werktage Triage-Zusage via `SECURITY.md`. |
+
+<a id="sec-16"></a><a id="oekosystem--geschwister-projekte"></a>
+## 16. Ökosystem & Geschwister-Projekte
 
 | Projekt | Organisation | Rolle |
 |---|---|---|
@@ -406,23 +519,35 @@ Der Name ist bewusst generisch. Für Verlinkungen und Verzeichnisse sollte desha
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Desktop-Entwickler-Workstation-Suite |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Mehrsprachiger Code-Editor & Sandbox-Umgebung |
 
-<a id="drittanbieter-lizenzen--transparenz"></a>
-## Drittanbieter-Lizenzen & Transparenz
+<a id="sec-17"></a><a id="drittanbieter-lizenzen--transparenz"></a><a id="level-1-sbom"></a>
+## 17. Drittanbieter-Lizenzen, Level 1 SBOM & RunAsInvoker
 
 `ellmos-skills` verpflichtet sich zu vollständiger Transparenz, sauberen Softwaregrenzen und maximaler Supply-Chain-Sicherheit:
 
 - **Null externe Laufzeit-Abhängigkeiten**: Alle Kern-Katalogwerkzeuge, Schema-Generatoren und Privacy-Boundary-Prüfer laufen ausschließlich mit der Python-Standardbibliothek (`>=3.10`).
 - **Permissive Drittanbieter-Skills**: Kuratierte externe Skills unter `skills/third-party/` (`grill-me`, `grilling`) stehen unter der MIT-Lizenz aus [mattpocock/skills](https://github.com/mattpocock/skills).
 - **Formelle Urheberrechts- & Attributions-Hinweise**: Rechtliche Hinweise und Attributionsangaben werden in [`NOTICE`](NOTICE) gepflegt.
+- **Level 1 SBOM Begleitdokumente**: Vollständiges Drittanbieter-Lizenzinventar und Invarianten-Abbildung sind in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) und der Plaintext-Begleitdatei [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt) dokumentiert.
 - **0% Copyleft**: Keine GPL-, AGPL- oder LGPL-Komponenten werden ausgeliefert oder zur Laufzeit benötigt.
+- **Unprivilegierter Benutzermodus (RunAsInvoker)**: Alle Skripte laufen ausschließlich mit regulären Benutzerrechten ohne Rechteausweitung.
 - **10 Governance- & Laufzeit-Invarianten**: Jeder Release wird gegen 10 strikte Invarianten validiert (`INV-LOCAL-01` bis `INV-SLA-10`).
 - Vollständige Details zu Abhängigkeiten, Lizenztexten und Invarianten sind in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) dokumentiert.
 
-<a id="lizenz--haftung"></a>
-## Lizenz
+<a id="sec-18"></a><a id="sicherheitsrichtlinie--haftung"></a><a id="lizenz--haftung"></a>
+## 18. Sicherheitsrichtlinie, § 521 BGB Haftungsausschluss & 48h SLA
 
-MIT License. Siehe [LICENSE](LICENSE).
+### Sicherheitsrichtlinie & 48h SLA-Zusage
 
-## Haftung
+Wir nehmen Sicherheit und die Einhaltung von Datenschutzgrenzen über alle Agenten-Laufzeiten hinweg ernst:
+- **Verbindliches 48-Stunden Reaktions-SLA**: Der Eingang von Schwachstellenmeldungen wird innerhalb von 48 Stunden bestätigt.
+- **5-Tage Triage-Zusage**: Umfassende Sicherheitsbewertung und Behebungs-Fahrplan innerhalb von 5 Werktagen.
+- **Meldewege**: Kontakt über **[security@ellmos.ai](mailto:security@ellmos.ai)** mit CC an **[support@lukasgeiger.com](mailto:support@lukasgeiger.com)** oder über private [GitHub Security Advisories](https://github.com/ellmos-ai/skills/security/advisories). Bitte KEINE öffentlichen Issues für Sicherheitslücken anlegen.
+- Vollständige Richtlinie: [`SECURITY.md`](SECURITY.md).
 
-Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß § 521 BGB auf Vorsatz und grobe Fahrlässigkeit beschränkt. Nutzung auf eigenes Risiko. Es gibt keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit und keine Zusicherung der Eignung für einen bestimmten Zweck.
+### Gesetzlicher Hinweis & Haftungsbeschränkung (§ 521 BGB)
+
+Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß § 521 BGB (Gefälligkeitsrecht) auf Vorsatz und grobe Fahrlässigkeit beschränkt. Nutzung auf eigenes Risiko. Es gibt keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit und keine Zusicherung der Eignung für einen bestimmten Zweck.
+
+### Lizenz
+
+`ellmos-skills` steht unter der [MIT License](LICENSE). Formelle Attributions- und Urheberrechtshinweise werden in [`NOTICE`](NOTICE) geführt.

@@ -4,8 +4,10 @@ This document lists all third-party software components, libraries, and vendored
 
 **Project:** `ellmos-skills` (`ellmos-ai/skills`)  
 **License:** [MIT License](LICENSE)  
-**Audit Date:** 2026-09-20 (Initial Baseline) | **Re-Audit Date:** 2026-09-24
+**Audit Date:** 2026-09-20 (Initial Baseline) | **Re-Audit Date:** 2026-09-29
 **Status:** AUDITED & VERIFIED (Pfad A Technical Hygiene & Pfad B Architecture Governance)
+**Companion Plain-Text Level 1 SBOM:** [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt)
+**Formal Attribution Notice:** [`NOTICE`](NOTICE)
 
 ---
 
@@ -84,8 +86,8 @@ The following 10 invariants govern every skill, utility script, and metadata man
 - **Runtime Dependencies**: **0 external dependencies** (100% Python Standard Library).
 - **Upstream Permissive Third-Party Code**: **100% MIT Licensed**.
 - **Development Tooling**: **100% Permissive Open-Source** (MIT / Apache-2.0).
-- **Audit Date**: 2026-09-20 (Pfad A Technical Hygiene Compliance Verification) | Re-Audited: 2026-09-24 (Pfad B Discoverability & Notice Attribution).
-- **Formal Notice**: Root `NOTICE` file actively maintained under MIT License.
+- **Audit Date**: 2026-09-20 (Pfad A Technical Hygiene Compliance Verification) | Re-Audited: 2026-09-24 & 2026-09-29 (Pfad B Discoverability, Level 1 SBOM Companion & Notice Attribution).
+- **Formal Notice**: Root `NOTICE` file and plain-text companion `THIRD_PARTY_LICENSES.txt` actively maintained under MIT License.
 
 ---
 

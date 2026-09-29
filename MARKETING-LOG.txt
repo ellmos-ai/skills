@@ -1,5 +1,36 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-09-29
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4 (Version-Freeze per T-20260920-167562623)
+
+### Discoverability, Visual Architecture, 18-Point Navigation & Level 1 SBOM (Pfad B Routine):
+1. **Pytest Verification Baseline & Mermaid Sync**:
+   - Re-audited full test suite baseline: Pytest expanded to 455 passing tests and 186 passing subtests (100% green).
+   - Synchronized System Architecture flowchart in `README.md` and `README_de.md` to reflect 455 passing tests.
+   - Synchronized test badges to `455 passed (186 subtests)`.
+2. **ASCII Four-View Architectural Topology**:
+   - Introduced Section 05: ASCII Four-View Architectural Topology in `README.md` and `README_de.md` detailing:
+     * Layer 1: Runtime-Dispatch & Discovery Layer (Pure Python stdlib engine)
+     * Layer 2: Multi-Agent Client Integration Layer (Claude Code, Codex, AGY, BACH)
+     * Layer 3: Governance & Security Boundary (Fail-Closed, Zero-Egress, Non-Elevation)
+     * Layer 4: Domain Topology & Skill Anatomy (11 categories, 142 public skills)
+3. **18-Point Quick Navigation Parity & Dual Anchors**:
+   - Expanded Quick Navigation in `README.md` and `README_de.md` to 18 points with full bilingual parity.
+   - Implemented dual anchors (`sec-01` to `sec-18` + semantic IDs) across all 18 sections for flawless navigation across GitHub, GitLab, and local viewers.
+4. **Governance & Runtime Invariants Matrix (Section 15)**:
+   - Added dedicated Section 15 detailing all 10 foundational invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+5. **Level 1 SBOM Plain-Text Companion (`THIRD_PARTY_LICENSES.txt`)**:
+   - Created Level 1 SBOM companion file documenting 0% copyleft, standard library runtime, vendored MIT skills, dev tooling, and 10 runtime invariants.
+   - Cross-referenced companion in `THIRD_PARTY_LICENSES.md`, `NOTICE`, `pyproject.toml` (`license-files`), and `llms.txt`.
+6. **Statutory Notice (§ 521 BGB) & 48h Response SLA (Section 18 & `SECURITY.md`)**:
+   - Added binding 48-hour response SLA and 5-day triage commitment to `SECURITY.md` and Section 18.
+   - Documented statutory liability limitation under German law (§ 521 BGB Gefälligkeitsrecht) in both English and German.
+7. **PEP 621 Keywords & Metadata Saturation**:
+   - Saturated `pyproject.toml` keywords to 20/20 matching the 20 GitHub remote repository topics.
+   - Canonicalized `Homepage` to `https://github.com/ellmos-ai/skills#readme`.
+
 ## Date: 2026-09-24
 Repo: ellmos-ai/skills
 Branch: master

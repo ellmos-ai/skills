@@ -1,6 +1,20 @@
 # Changelog
 
-## [Unreleased] - 2026-09-24
+## [Unreleased] - 2026-09-29
+
+- **Repository Discoverability, Visual Architecture, 18-Point Navigation Parity & Level 1 SBOM Companion (Pfad B)**:
+  - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).
+  - Synchronized test execution baseline across documentation and metadata: Pytest suite expanded to 455 passing tests and 186 passing subtests (100% green).
+  - Introduced Section 05: ASCII Four-View Architectural Topology in `README.md` and `README_de.md` detailing Runtime-Dispatch, Multi-Agent Clients, Governance Boundaries, and Domain Topology.
+  - Expanded Quick Navigation to 18 points with full bilingual parity and dual anchor tags (`sec-01` to `sec-18` plus semantic IDs) across `README.md` and `README_de.md`.
+  - Added dedicated Section 15: Governance & Runtime Invariants Matrix with 10 runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+  - Added plain-text Level 1 SBOM companion file `THIRD_PARTY_LICENSES.txt` documenting 0% copyleft, Python standard library runtime, vendored MIT skills, dev tooling, and 10 runtime invariants.
+  - Added `THIRD_PARTY_LICENSES.txt` to PEP 621 `license-files` in `pyproject.toml` and updated `Homepage` to canonical URL `https://github.com/ellmos-ai/skills#readme`.
+  - Saturated `pyproject.toml` keywords to 20/20 matching the 20 GitHub remote repository topics.
+  - Section 18 / `SECURITY.md`: Integrated binding 48-Hour Response SLA & 5-Day Triage commitment and German statutory notice under § 521 BGB (Gefälligkeitsrecht) in both English and German.
+  - Synchronized `llms.txt` with `Last-checked: 2026-09-29`, 452 passing tests, and Level 1 SBOM companion reference.
+
+## 2026-09-24
 
 - **Scope Skills宝 link to Chinese with a lang-only marker (T-20260926-967984806, follow-up)**:
   Per user feedback, Skills宝 (skilery.com) is only relevant to Chinese users and should not

@@ -8,27 +8,32 @@ version = "1.4.4"
 description = "Portable AI skill library for Claude Code, Codex, AGY, BACH, and local-first LLM agents"
 readme = "README.md"
 license = { text = "MIT" }
-license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md", "THIRD_PARTY_LICENSES.txt"]
 authors = [
     { name = "Lukas Geiger", email = "lukas@ellmos.ai" }
 ]
 requires-python = ">=3.10"
 keywords = [
-    "ai",
-    "skills",
-    "agents",
-    "claude-code",
-    "codex",
-    "antigravity",
+    "agent-framework",
+    "agent-skills",
+    "ai-skills",
+    "anthropic",
+    "automation",
     "bach",
-    "mcp",
+    "claude-code",
+    "claude-skills",
+    "codex-skills",
     "llm",
+    "llm-agents",
+    "llm-tools",
     "local-first",
-    "zero-egress",
+    "open-source",
     "portable-skills",
-    "agentic-workflows",
-    "multi-agent",
-    "playbooks"
+    "python",
+    "skill-library",
+    "skill-md",
+    "sqlite",
+    "zero-egress"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -48,7 +53,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ellmos-ai/skills"
+Homepage = "https://github.com/ellmos-ai/skills#readme"
 Documentation = "https://github.com/ellmos-ai/skills/blob/master/README.md"
 Repository = "https://github.com/ellmos-ai/skills.git"
 "Bug Tracker" = "https://github.com/ellmos-ai/skills/issues"

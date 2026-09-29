@@ -1,0 +1,61 @@
+# Third-Party Licenses & Software Inventory
+
+Project: ellmos-skills (ellmos-ai/skills)
+Audited: 2026-09-29 against Level 1 SBOM and runtime invariants.
+License: MIT License (see LICENSE and NOTICE)
+Repository: https://github.com/ellmos-ai/skills
+Umbrella Collective: open-bricks (https://github.com/open-bricks)
+
+## Project License
+
+ellmos-skills is licensed under the MIT License. See `LICENSE` and `NOTICE`.
+
+## Core Runtime
+
+The base package declares zero external runtime dependencies.
+The entire catalog generator, static validation gates, privacy boundary verifiers, and indexing tools rely strictly on the official Python Standard Library.
+
+| Package / Module | Scope | Version Spec | License | Purpose |
+|---|---|---|---|---|
+| Python Standard Library | Runtime | >=3.10 | PSF-2.0 | Core runtime: argparse, contextlib, dataclasses, importlib, json, os, pathlib, re, subprocess, sys, typing, unittest |
+
+All state inspection, schema verification, and privacy audits operate entirely in-process.
+Zero third-party telemetry, analytics, cloud synchronization, or remote networking services are packaged or contacted.
+
+## Curated Third-Party Vendored Skills
+
+The repository redistributes curated, externally authored skills under permissive open-source licenses within `skills/third-party/`:
+
+| Skill / Path | Upstream Repository | Upstream Author | License | Notice & Boundary |
+|---|---|---|---|---|
+| skills/third-party/grill-me | mattpocock/skills | Matt Pocock | MIT | Entry point for plan interrogation. Upstream LICENSE preserved. |
+| skills/third-party/grilling | mattpocock/skills | Matt Pocock | MIT | Core interrogation protocol. Upstream LICENSE preserved. |
+
+## Direct Build and Development Dependencies
+
+The following tools are utilized exclusively for offline automated testing, code quality auditing, packaging, and linting:
+
+| Package | Declared Use | Constraint | License | Source |
+|---|---|---|---|---|
+| pytest | Development test runner | >=7.0 | MIT | https://pytest.org/ |
+| ruff | Development linter | >=0.1.0 | MIT / Apache-2.0 | https://github.com/astral-sh/ruff |
+| setuptools | Build backend | >=61.0 | MIT | https://github.com/pypa/setuptools |
+
+## Zero-Copyleft Guarantee & Unprivileged Execution
+
+- Zero-Copyleft Guarantee: All runtime code, vendored assets, and development dependencies are governed strictly by permissive, business-friendly open-source licenses (MIT, Apache-2.0, PSF-2.0). The codebase contains 0% copyleft (zero GPL, AGPL, or viral copyleft components).
+- Unprivileged User-Mode Operation (RunAsInvoker): All skills, validation scripts, catalog generators, and tests execute purely within unprivileged user space. No administrative rights, root elevation, sudo, or UAC prompts are ever required.
+
+## Governance & Runtime Invariants
+
+ellmos-skills strictly enforces ten foundational governance and runtime invariants:
+- INV-LOCAL-01: 100% Local-First & Zero Egress (Network & Privacy: pure Markdown and local Python scripts; zero telemetry and zero outbound network calls)
+- INV-PRIVACY-02: Fail-Closed Privacy Boundary Gate (Data Protection: automated privacy gate rejects concrete user homes, host-scoped names, and token patterns)
+- INV-UNPRIV-03: Non-Elevation & RunAsInvoker (Process Execution: all workflows execute strictly in unprivileged user space; root or admin elevation prohibited)
+- INV-SCHEMA-04: Deterministic Frontmatter & Schema Integrity (Contract Compliance: YAML frontmatter strictly conforms to conventions and schema validation gates)
+- INV-ISOLATION-05: Portable & Self-Contained Skill Anatomy (Modularity: skills package their own playbooks, references, and scripts without implicit host couplings)
+- INV-PORTABLE-06: Multi-Agent Runtime Portability (Interoperability: compatible with Claude Code, Codex, AGY/Gemini, BACH, and local Ollama runtimes)
+- INV-DISCOVERY-07: Public/Private Boundary Isolation (Boundary Hygiene: public catalog exposes only verified non-sensitive discovery fields)
+- INV-PLATFORM-08: Multi-OS Parity & Platform Independence (Portability: Linux, Windows, macOS validated identically via multi-OS CI matrix on Python 3.10 to 3.13)
+- INV-SYNC-09: Multi-Host Cloud Sync & Lock Resilience (Concurrency: hardened .gitignore and cooperative lock protocols prevent cloud sync races and data corruption)
+- INV-SLA-10: 48h Security Response & Triage Commitment (Governance: formal response SLA: 48h initial acknowledgment, 5-day triage commitment via SECURITY.md)
