@@ -256,7 +256,7 @@ ansteuern (`oc capture`, `oc do ...` -- siehe CLI-Fallback oben).
 ## Rezept: Tailscale-Reauth im Browser
 
 Haeufigster Ausloeser fuer diesen Skill: ein SSH-/Sync-Schritt auf ein Tailscale-Geraet
-(z. B. Mac Studio, `100.119.69.90`) schlaegt fehl, weil Tailscale eine erneute Anmeldung
+(z. B. ein Heimserver, `<TAILSCALE_IP>`) schlaegt fehl, weil Tailscale eine erneute Anmeldung
 verlangt.
 
 1. **Erkennen:** `tailscale status` zeigt `Logged out.` / `NeedsLogin` statt einer IP, oder
