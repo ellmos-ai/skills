@@ -123,7 +123,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-09-29", content)
+        self.assertIn("## Last-checked: 2026-10-01", content)
         self.assertIn("455 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
@@ -155,12 +155,13 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("1.4.4", content)
             self.assertIn("455", content)
             self.assertIn("142", content)
-            self.assertIn("2026-09-29", content)
+            self.assertIn("2026-10-01", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
-        self.assertIn("## [Unreleased] - 2026-09-29", content)
+        self.assertIn("## [Unreleased] - 2026-10-01", content)
+        self.assertIn("2026-09-29", content)
         self.assertIn("T-20260920-167562623", content)
         self.assertIn("2026-09-24", content)
         self.assertIn("2026-09-20", content)
@@ -237,7 +238,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
 
         self.assertIn("0% Copyleft", content)
         self.assertIn("ZERO external runtime dependencies", content)
-        self.assertIn("**Re-Audit Date:** 2026-09-29", content)
+        self.assertIn("**Re-Audit Date:** 2026-10-01", content)
         self.assertIn("Pfad B Architecture Governance", content)
         for i in range(1, 11):
             inv_prefix = "INV-"
@@ -263,6 +264,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(MARKETING_LOG_PATH.is_file(), "MARKETING-LOG.txt missing")
         content = MARKETING_LOG_PATH.read_text(encoding="utf-8")
 
+        self.assertIn("Date: 2026-10-01", content)
         self.assertIn("Date: 2026-09-29", content)
         self.assertIn("Version: 1.4.4", content)
         self.assertIn("Pfad B Routine", content)
@@ -353,6 +355,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         content = THIRD_PARTY_LICENSES_TXT_PATH.read_text(encoding="utf-8")
 
         self.assertIn("Level 1 SBOM", content)
+        self.assertIn("Audited: 2026-10-01", content)
         self.assertIn("0% copyleft", content)
         self.assertIn("RunAsInvoker", content)
         self.assertIn("Python Standard Library", content)

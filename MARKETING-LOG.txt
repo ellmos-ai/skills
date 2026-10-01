@@ -1,5 +1,37 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-10-01
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4 (Version-Freeze per T-20260920-167562623)
+
+### Discoverability, Visual Architecture, 18-Point Navigation & Level 1 SBOM (Pfad B Routine):
+1. **Pytest Verification Baseline & Mermaid Parity**:
+   - Full automated regression test suite executed: 455 passing tests and 186 passing subtests (100% green).
+   - Re-confirmed System Architecture flowchart and multi-agent execution fabric in `README.md` and `README_de.md`.
+   - Maintained test badges at `455 passed (186 subtests)`.
+2. **ASCII Four-View Architectural Topology Verification (Section 05)**:
+   - Validated Section 05: ASCII Four-View Architectural Topology in `README.md` and `README_de.md`:
+     * View / Ebene 1: Runtime-Dispatch & Discovery Layer (Pure Python stdlib engine)
+     * View / Ebene 2: Multi-Agent Client Integration Layer (Claude Code, Codex, AGY, BACH)
+     * View / Ebene 3: Governance & Security Boundary (Fail-Closed, Zero-Egress, Non-Elevation)
+     * View / Ebene 4: Domain Topology & Skill Anatomy (11 categories, 142 public skills)
+3. **18-Point Quick Navigation Parity & Dual Anchors**:
+   - Maintained 18-point Quick Navigation in `README.md` and `README_de.md` with complete bilingual parity.
+   - Dual HTML anchors (`sec-01` to `sec-18` alongside semantic anchors) verified functional.
+4. **Level 1 SBOM Stand 2026-10-01 Re-Audit & Runtime Invariants (`THIRD_PARTY_LICENSES.txt`)**:
+   - Re-audited standalone Level 1 SBOM companion `THIRD_PARTY_LICENSES.txt` and `THIRD_PARTY_LICENSES.md` Stand 2026-10-01.
+   - Verified compliance across all 10 governance and runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+   - Confirmed 0% copyleft, unprivileged user-mode execution (RunAsInvoker `INV-UNPRIV-03`), zero external runtime dependencies, and permissive MIT licensing.
+5. **Statutory Notice (§ 521 BGB) & 48h Response SLA (Section 18 & `SECURITY.md`)**:
+   - Binding 48-hour response SLA and 5-day triage commitment confirmed active.
+   - Statutory liability limitation under § 521 BGB (Gefälligkeitsrecht) re-asserted in English and German.
+6. **PEP 621 Keywords & Remote Topics Parity**:
+   - Remote repository topics saturated 20/20 on GitHub and in `pyproject.toml` keywords.
+   - Canonical `Homepage` maintained at `https://github.com/ellmos-ai/skills#readme`.
+7. **RAG-Manifest & Context Index Sync (`llms.txt`)**:
+   - Updated `llms.txt` header to `Last-checked: 2026-10-01`.
+
 ## Date: 2026-09-29
 Repo: ellmos-ai/skills
 Branch: master

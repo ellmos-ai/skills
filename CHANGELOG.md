@@ -1,6 +1,19 @@
 # Changelog
 
-## [Unreleased] - 2026-09-29
+## [Unreleased] - 2026-10-01
+
+- **Repository Discoverability, Visual Architecture, Level 1 SBOM Re-Audit & Test Parity (Pfad B)**:
+  - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).
+  - Full test suite baseline verified: 455 passed and 186 subtests passed across all test suites (100% green).
+  - Re-audited Level 1 SBOM plain-text companion `THIRD_PARTY_LICENSES.txt` and `THIRD_PARTY_LICENSES.md` Stand 2026-10-01 across all 10 governance and runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+  - Re-verified Zero-Copyleft isolation guarantee (100% Python standard library core runtime, zero external runtime dependencies, permissive open-source stack) and unprivileged `RunAsInvoker` non-elevation certification (`INV-UNPRIV-03`).
+  - Re-validated 18-point bilingual Quick Navigation and reciprocal dual HTML anchor parity (`<a id="sec-01"></a>`..`<a id="sec-18"></a>`) across `README.md` and `README_de.md`.
+  - Re-validated Section 05 ASCII Four-View Architectural Topology projection across EN/DE (Runtime Dispatch & Discovery Plane, Multi-Agent Client Integration Layer, Governance & Security Boundary, Domain Topology & Skill Anatomy).
+  - Re-confirmed binding 48-Hour Response SLA and statutory limitation under § 521 BGB (Gefälligkeitsrecht) in Section 18 and `SECURITY.md`.
+  - Synchronized documentation badges, `llms.txt` context index (`Last-checked: 2026-10-01`), and local `MARKETING-LOG.txt` Pfad B audit ledger.
+  - Synchronized contract test suite in `testing/test_metadata.py` verifying 2026-10-01 audit recency across all documentation, metadata, and licensing manifests.
+
+## 2026-09-29
 
 - **Repository Discoverability, Visual Architecture, 18-Point Navigation Parity & Level 1 SBOM Companion (Pfad B)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).
