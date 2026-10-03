@@ -31,7 +31,8 @@
 [![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Notice: MIT](https://img.shields.io/badge/Notice-Attributed-blue.svg)](NOTICE)
-[![Last Checked: 2026-10-01](https://img.shields.io/badge/Last%20Checked-2026--10--01-informational.svg)](MARKETING-LOG.txt)
+[![Contributing: Guidelines](https://img.shields.io/badge/Contributing-Guidelines-blue.svg)](CONTRIBUTING.md)
+[![Last Checked: 2026-10-03](https://img.shields.io/badge/Last%20Checked-2026--10--03-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **AI Agent & LLM Integration:** This repository provides standardized `SKILL.md` files with YAML frontmatter that can be consumed directly by Claude Code, Codex, AGY/Gemini, and custom agent runtimes. See [`llms.txt`](llms.txt) for machine-readable context.
@@ -549,6 +550,6 @@ We take security and privacy boundary enforcement seriously across all agent run
 
 This project is an unpaid open-source donation. Liability is limited to intent and gross negligence under Section 521 of the German Civil Code (§ 521 BGB Gefälligkeitsrecht). Use at your own risk. No warranty, maintenance guarantee, availability guarantee, or fitness-for-purpose guarantee is provided.
 
-### License
+### License & Contribution
 
-`ellmos-skills` is licensed under the [MIT License](LICENSE). Full attribution and copyright notices are maintained in [`NOTICE`](NOTICE).
+`ellmos-skills` is licensed under the [MIT License](LICENSE). Full attribution and copyright notices are maintained in [`NOTICE`](NOTICE). Detailed development guidelines, invariants, and submission protocols are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).

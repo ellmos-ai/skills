@@ -103,6 +103,9 @@ WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 *-ASUS-GEI.*
 *-ASUS*
 *-DESKTOP-*
+*-IDEAPAD*
+*-IDEAPAD-GEI*
+*-IDEAPAD-GEI.*
 *-LAPTOP-*
 *-LOCAL-HOST.*
 *-MACSTUDIO.*
@@ -118,6 +121,9 @@ WEITERE-VERSIONIERUNGS-RESSOURCEN.md
 * (copy)*
 * (Kopie)*
 * (Copy)*
+TASKPLAN_*.md
+*-TASKPLAN*
+ehthumbs.db
 
 # ---- Multi-Agent-Locks & Test-Caches ----
 LOCK
@@ -125,6 +131,9 @@ LOCK.*
 LOCK.user.*
 LOCK.until.*
 LOCK.condition.*
+LOCK.dev.*
+LOCK.antigravity.*
+LOCK.bugsearch.*
 LOCK.permissions.json
 .automation-lock
 !package-lock.json
@@ -137,9 +146,13 @@ coverage/
 .nyc_output/
 .tox/
 .mypy_cache/
+.pytest_temp/
+.pytest_tmp*/
 *.tmp
 *.bak
 *.orig
+*.swo
+*.swp
 
 # ---- Persönliche Präferenzen / Nutzerdaten ----
 skills/assist/prefs.json

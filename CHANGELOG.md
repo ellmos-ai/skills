@@ -1,6 +1,17 @@
 # Changelog
 
-## [Unreleased] - 2026-10-01
+## [Unreleased] - 2026-10-03
+
+- **Technical Hygiene, Bilingual Contributing Guidelines, Multi-Host Sync Defense & Contract Hardening (Pfad A)**:
+  - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A maintenance).
+  - Introduced bilingual `CONTRIBUTING.md` guidelines (EN/DE) with full specification of all 10 governance and runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`), unprivileged `RunAsInvoker` user-mode non-elevation (`INV-UNPRIV-03`), Plan D local development workflow, quality gates, § 521 BGB statutory liability limitation (*Gefälligkeitsrecht*), and 48h Security Response SLA.
+  - Hardened `.gitignore` against multi-host Ideapad collisions (`*-IDEAPAD*`, `*-IDEAPAD-GEI*`, `*-IDEAPAD-GEI.*`), extended multi-agent lock patterns (`LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*`), task planning files (`TASKPLAN_*.md`, `*-TASKPLAN*`), OS artifacts (`ehthumbs.db`), editor swap files (`*.swo`, `*.swp`), and test temp directories (`.pytest_temp/`, `.pytest_tmp*/`).
+  - Extended PEP 621 metadata in `pyproject.toml` with `Contributing`, `Plain-Text Licenses`, and `Level 1 SBOM` URLs under `[project.urls]`, and extended `[tool.pytest.ini_options]` `norecursedirs` with `.hypothesis`, `.turbo`, `.nyc_output`, `.tox`, and `.pytest_temp`.
+  - Re-audited Level 1 SBOM plain-text companion `THIRD_PARTY_LICENSES.txt` and `THIRD_PARTY_LICENSES.md` Stand 2026-10-03 across all 10 runtime invariants, unprivileged non-elevation, and 0% copyleft guarantee, linking to `CONTRIBUTING.md`.
+  - Synchronized documentation badges, `llms.txt` context index (`Last-checked: 2026-10-03`), and local `MARKETING-LOG.txt` Pfad A audit ledger.
+  - Expanded contract test suite in `testing/test_metadata.py` with new assertions validating `CONTRIBUTING.md` parity, `.gitignore` multi-host hardening, PEP 621 URLs, and 2026-10-03 audit currency across all manifests.
+
+## 2026-10-01
 
 - **Repository Discoverability, Visual Architecture, Level 1 SBOM Re-Audit & Test Parity (Pfad B)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A/B maintenance).

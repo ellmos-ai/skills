@@ -18,6 +18,7 @@ ASSIST_SCHEMA_PATH = REPOSITORY_ROOT / "schemas" / "assist-v1.schema.json"
 THIRD_PARTY_LICENSES_PATH = REPOSITORY_ROOT / "THIRD_PARTY_LICENSES.md"
 THIRD_PARTY_LICENSES_TXT_PATH = REPOSITORY_ROOT / "THIRD_PARTY_LICENSES.txt"
 NOTICE_PATH = REPOSITORY_ROOT / "NOTICE"
+CONTRIBUTING_PATH = REPOSITORY_ROOT / "CONTRIBUTING.md"
 MARKETING_LOG_PATH = REPOSITORY_ROOT / "MARKETING-LOG.txt"
 
 
@@ -102,6 +103,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("[tool.pytest.ini_options]", content)
         self.assertIn('minversion = "7.0"', content)
         self.assertIn("norecursedirs", content)
+        self.assertIn(".pytest_temp", content)
         self.assertIn('addopts = "-ra -v"', content)
         self.assertIn("[tool.ruff]", content)
         self.assertIn("pythonpath", content)
@@ -110,12 +112,16 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn('"zero-egress"', content)
         self.assertIn("[project.urls]", content)
         self.assertIn("Homepage", content)
+        self.assertIn("Documentation", content)
+        self.assertIn("Contributing", content)
         self.assertIn("Security", content)
         self.assertIn("Notice", content)
         self.assertIn("Changelog", content)
         self.assertIn("Parent Organization", content)
         self.assertIn("Umbrella Ecosystem", content)
         self.assertIn("Third-Party Licenses", content)
+        self.assertIn("Plain-Text Licenses", content)
+        self.assertIn("Level 1 SBOM", content)
         self.assertIn("Marketing Log", content)
         self.assertIn("LLM Context", content)
 
@@ -123,12 +129,13 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-10-01", content)
+        self.assertIn("## Last-checked: 2026-10-03", content)
         self.assertIn("455 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
         self.assertIn("MIT", content)
         self.assertIn("registry/components.json", content)
+        self.assertIn("CONTRIBUTING.md", content)
         self.assertIn("SECURITY.md", content)
         self.assertIn("NOTICE", content)
         self.assertIn("THIRD_PARTY_LICENSES.md", content)
@@ -145,6 +152,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("ellmos-ai/skills", content)
             self.assertIn("open-bricks", content)
             self.assertIn("llms.txt", content)
+            self.assertIn("CONTRIBUTING.md", content)
             self.assertIn("SECURITY.md", content)
             self.assertIn("NOTICE", content)
             self.assertIn("THIRD_PARTY_LICENSES.md", content)
@@ -155,12 +163,13 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("1.4.4", content)
             self.assertIn("455", content)
             self.assertIn("142", content)
-            self.assertIn("2026-10-01", content)
+            self.assertIn("2026-10-03", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
-        self.assertIn("## [Unreleased] - 2026-10-01", content)
+        self.assertIn("## [Unreleased] - 2026-10-03", content)
+        self.assertIn("2026-10-01", content)
         self.assertIn("2026-09-29", content)
         self.assertIn("T-20260920-167562623", content)
         self.assertIn("2026-09-24", content)
@@ -178,15 +187,23 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn("*-conflict-*", content)
         self.assertIn("*.sync-conflict-*", content)
         self.assertIn("*conflicted copy*", content)
+        self.assertIn("*-IDEAPAD*", content)
+        self.assertIn("*-IDEAPAD-GEI*", content)
         self.assertIn("LOCK.*", content)
         self.assertIn("LOCK.user.*", content)
         self.assertIn("LOCK.condition.*", content)
+        self.assertIn("LOCK.antigravity.*", content)
+        self.assertIn("LOCK.bugsearch.*", content)
+        self.assertIn("LOCK.dev.*", content)
         self.assertIn("LOCK.permissions.json", content)
         self.assertIn(".automation-lock", content)
         self.assertIn("!package-lock.json", content)
         self.assertIn("uv.lock", content)
         self.assertIn(".coverage.*", content)
         self.assertIn(".hypothesis/", content)
+        self.assertIn(".pytest_temp/", content)
+        self.assertIn("ehthumbs.db", content)
+        self.assertIn("TASKPLAN_*.md", content)
 
     def test_ci_workflow_extended_gates(self) -> None:
         content = CI_WORKFLOW_PATH.read_text(encoding="utf-8")
@@ -238,8 +255,8 @@ class MetadataAndManifestParityTests(unittest.TestCase):
 
         self.assertIn("0% Copyleft", content)
         self.assertIn("ZERO external runtime dependencies", content)
-        self.assertIn("**Re-Audit Date:** 2026-10-01", content)
-        self.assertIn("Pfad B Architecture Governance", content)
+        self.assertIn("**Re-Audit Date:** 2026-10-03", content)
+        self.assertIn("CONTRIBUTING.md", content)
         for i in range(1, 11):
             inv_prefix = "INV-"
             self.assertTrue(any(line.startswith(f"| **{inv_prefix}") for line in content.splitlines()), "Invariant missing")
@@ -264,6 +281,8 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(MARKETING_LOG_PATH.is_file(), "MARKETING-LOG.txt missing")
         content = MARKETING_LOG_PATH.read_text(encoding="utf-8")
 
+        self.assertIn("Date: 2026-10-03", content)
+        self.assertIn("Pfad A Routine", content)
         self.assertIn("Date: 2026-10-01", content)
         self.assertIn("Date: 2026-09-29", content)
         self.assertIn("Version: 1.4.4", content)
@@ -355,7 +374,8 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         content = THIRD_PARTY_LICENSES_TXT_PATH.read_text(encoding="utf-8")
 
         self.assertIn("Level 1 SBOM", content)
-        self.assertIn("Audited: 2026-10-01", content)
+        self.assertIn("Audited: 2026-10-03", content)
+        self.assertIn("Contributing: CONTRIBUTING.md", content)
         self.assertIn("0% copyleft", content)
         self.assertIn("RunAsInvoker", content)
         self.assertIn("Python Standard Library", content)
@@ -390,6 +410,62 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn('id="sec-18"', de_content)
         self.assertIn("48-Stunden Reaktions-SLA", de_content)
         self.assertIn("§ 521 BGB", de_content)
+
+    def test_contributing_guidelines_bilingual_parity(self) -> None:
+        self.assertTrue(CONTRIBUTING_PATH.is_file(), "CONTRIBUTING.md missing")
+        content = CONTRIBUTING_PATH.read_text(encoding="utf-8")
+
+        # Bilingual sections
+        self.assertIn("## English", content)
+        self.assertIn("## Deutsch", content)
+
+        # 10 Invariants across both languages
+        invariants = [
+            "INV-LOCAL-01",
+            "INV-PRIVACY-02",
+            "INV-UNPRIV-03",
+            "INV-SCHEMA-04",
+            "INV-ISOLATION-05",
+            "INV-PORTABLE-06",
+            "INV-DISCOVERY-07",
+            "INV-PLATFORM-08",
+            "INV-SYNC-09",
+            "INV-SLA-10",
+        ]
+        for inv in invariants:
+            self.assertIn(inv, content, f"Invariant {inv} missing in CONTRIBUTING.md")
+
+        # Core governance and quality standards
+        self.assertIn("RunAsInvoker", content)
+        self.assertIn("Zero Egress", content)
+        self.assertIn("§ 521 BGB", content)
+        self.assertIn("48h", content)
+        self.assertIn("T-20260920-167562623", content)
+        self.assertIn("1.4.4", content)
+        self.assertIn("Plan D", content)
+        self.assertIn('git diff -G"version = "', content)
+
+    def test_pep621_project_urls_complete_parity(self) -> None:
+        content = PYPROJECT_PATH.read_text(encoding="utf-8")
+        expected_urls = [
+            "Homepage",
+            "Documentation",
+            "Contributing",
+            "Repository",
+            "Bug Tracker",
+            "Changelog",
+            "Security",
+            "Notice",
+            "Parent Organization",
+            "Umbrella Ecosystem",
+            "Third-Party Licenses",
+            "Plain-Text Licenses",
+            "Level 1 SBOM",
+            "Marketing Log",
+            "LLM Context",
+        ]
+        for url_name in expected_urls:
+            self.assertIn(f'"{url_name}"' if " " in url_name else url_name, content, f"Missing URL {url_name} in pyproject.toml")
 
 
 if __name__ == "__main__":

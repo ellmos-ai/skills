@@ -1,4 +1,4 @@
-## Last-checked: 2026-10-01
+## Last-checked: 2026-10-03
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 
@@ -23,6 +23,7 @@ Author: Lukas Geiger
 
 - [README.md](https://github.com/ellmos-ai/skills/blob/master/README.md): English landing page, start-here table, catalog snapshot, search context.
 - [README_de.md](https://github.com/ellmos-ai/skills/blob/master/README_de.md): German landing page with the same public user guidance.
+- [CONTRIBUTING.md](https://github.com/ellmos-ai/skills/blob/master/CONTRIBUTING.md): Bilingual contribution guidelines, Plan D local workflow, 10 invariants, and quality gates.
 - [SECURITY.md](https://github.com/ellmos-ai/skills/blob/master/SECURITY.md): Bilingual security policy, Zero-Egress guarantees, 48h Response SLA, and privacy boundary enforcement.
 - [NOTICE](https://github.com/ellmos-ai/skills/blob/master/NOTICE): Formal copyright notice and open-source attribution.
 - [THIRD_PARTY_LICENSES.md](https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md): Third-party software inventory, zero-egress invariants, and 0% copyleft audit.

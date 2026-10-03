@@ -55,6 +55,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/ellmos-ai/skills#readme"
 Documentation = "https://github.com/ellmos-ai/skills/blob/master/README.md"
+Contributing = "https://github.com/ellmos-ai/skills/blob/master/CONTRIBUTING.md"
 Repository = "https://github.com/ellmos-ai/skills.git"
 "Bug Tracker" = "https://github.com/ellmos-ai/skills/issues"
 Changelog = "https://github.com/ellmos-ai/skills/blob/master/CHANGELOG.md"
@@ -63,6 +64,8 @@ Notice = "https://github.com/ellmos-ai/skills/blob/master/NOTICE"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
 "Third-Party Licenses" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.md"
+"Plain-Text Licenses" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.txt"
+"Level 1 SBOM" = "https://github.com/ellmos-ai/skills/blob/master/THIRD_PARTY_LICENSES.txt"
 "Marketing Log" = "https://github.com/ellmos-ai/skills/blob/master/MARKETING-LOG.txt"
 "LLM Context" = "https://github.com/ellmos-ai/skills/blob/master/llms.txt"
 
@@ -71,7 +74,7 @@ minversion = "7.0"
 pythonpath = ["."]
 testpaths = ["testing", "skills"]
 addopts = "-ra -v"
-norecursedirs = [".git", ".pytest_cache", "__pycache__", "build", "dist", ".venv"]
+norecursedirs = [".git", ".pytest_cache", "__pycache__", "build", "dist", ".venv", ".hypothesis", ".turbo", ".nyc_output", ".tox", ".pytest_temp"]
 
 [tool.ruff]
 target-version = "py310"

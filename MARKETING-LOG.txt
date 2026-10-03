@@ -1,5 +1,35 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-10-03
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4 (Version-Freeze per T-20260920-167562623)
+
+### Technical Hygiene, Bilingual Contributing Guidelines & Multi-Host Sync Defense (Pfad A Routine):
+1. **Bilingual Contribution Guidelines (`CONTRIBUTING.md`)**:
+   - Introduced comprehensive bilingual `CONTRIBUTING.md` (EN/DE) with full specification of all 10 governance and runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+   - Formalized unprivileged user-mode execution (RunAsInvoker `INV-UNPRIV-03`) and Zero-Egress local-first core architecture (`INV-LOCAL-01`).
+   - Documented Plan D local development workflow (canonical local repository workspace), quality gates (`pytest`, `ruff check`, `privacy_gate`, `compileall`, `git diff --check`, `git diff -G"version = "`).
+   - Reinforced § 521 BGB statutory liability limitation (*Gefälligkeitsrecht*) and 48-hour Security Response SLA.
+2. **Multi-Host Cloud-Sync & Lock-Defense Hardening in `.gitignore`**:
+   - Hardened `.gitignore` against multi-host Ideapad collisions (`*-IDEAPAD*`, `*-IDEAPAD-GEI*`, `*-IDEAPAD-GEI.*`).
+   - Added extended multi-agent lock patterns (`LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*`).
+   - Added task planning patterns (`TASKPLAN_*.md`, `*-TASKPLAN*`), OS artifacts (`ehthumbs.db`), editor swap files (`*.swo`, `*.swp`), and test temp directories (`.pytest_temp/`, `.pytest_tmp*/`).
+3. **PEP 621 Metadata Extension in `pyproject.toml`**:
+   - Added `Contributing`, `Plain-Text Licenses`, and `Level 1 SBOM` URLs under `[project.urls]`.
+   - Extended `[tool.pytest.ini_options]` `norecursedirs` with `.hypothesis`, `.turbo`, `.nyc_output`, `.tox`, and `.pytest_temp`.
+   - Maintained version freeze at `1.4.4` per `T-20260920-167562623`.
+4. **Level 1 SBOM Stand 2026-10-03 Re-Audit (`THIRD_PARTY_LICENSES.txt` & `THIRD_PARTY_LICENSES.md`)**:
+   - Re-audited Level 1 SBOM companion files Stand 2026-10-03 across all 10 invariants.
+   - Re-confirmed 0% copyleft, 100% Python standard library core runtime, and zero external runtime dependencies.
+   - Cross-referenced `CONTRIBUTING.md` and `NOTICE`.
+5. **Documentation & Context Parity**:
+   - Updated `README.md` and `README_de.md` badges with Contributing Guidelines and Last Checked / Zuletzt geprüft `2026-10-03`.
+   - Updated `llms.txt` header to `Last-checked: 2026-10-03` and added `CONTRIBUTING.md` reference.
+   - Documented all changes under `## [Unreleased] - 2026-10-03` in `CHANGELOG.md`.
+6. **Automated Contract Test Suite Extension (`testing/test_metadata.py`)**:
+   - Extended contract test assertions for `CONTRIBUTING.md`, `.gitignore` multi-host hardening, PEP 621 URLs, and 2026-10-03 audit recency.
+
 ## Date: 2026-10-01
 Repo: ellmos-ai/skills
 Branch: master

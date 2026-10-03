@@ -1,8 +1,9 @@
 # Third-Party Licenses & Software Inventory
 
 Project: ellmos-skills (ellmos-ai/skills)
-Audited: 2026-10-01 against Level 1 SBOM and runtime invariants.
+Audited: 2026-10-03 against Level 1 SBOM and runtime invariants.
 License: MIT License (see LICENSE and NOTICE)
+Contributing: CONTRIBUTING.md
 Repository: https://github.com/ellmos-ai/skills
 Umbrella Collective: open-bricks (https://github.com/open-bricks)
 
