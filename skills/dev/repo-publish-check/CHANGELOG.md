@@ -10,7 +10,7 @@
 ## 1.5.0 (2026-09-26)
 
 - **Zweiter Lehrfall am selben Tag (`accounts-core`):** Der in 1.4.0 gehärtete Grep meldete
-  erneut fälschlich "0 Treffer" — echter Fund war `C:\_Local_DEV\repos\accounts-core` in
+  erneut fälschlich "0 Treffer" — echter Fund war `<Laufwerk>:\<lokaler-Arbeitsordner>\repos\accounts-core` in
   `MARKETING-LOG.txt` (Arbeitsbaum) und dreimal in der Historie. Zwei unabhängige Ursachen:
   (1) Muster waren Inline-Strings im Befehl statt aus einer Datei — Backslashes können auf dem
   Transportweg zum Shell-Tool in falscher Anzahl ankommen, ohne dass der Fehler im Editor
