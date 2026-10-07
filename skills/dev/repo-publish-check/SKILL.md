@@ -1,11 +1,11 @@
 ---
 name: repo-publish-check
 description: Nutzerneutrale Prüfung von Repositories vor einer Veröffentlichung oder bei einer erneuten öffentlichen Prüfung. Kontrolliert Privacy, Geheimnisse, Lizenzen, Drittinhalte, Dokumentation und Freigabestatus, ohne die Veröffentlichung selbst vorzunehmen.
-version: 1.2.0
+version: 1.6.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-09-05
+updated: 2026-09-27
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -16,7 +16,7 @@ language: de
 status: active
 visibility: public
 dependencies:
-  tools: [git]
+  tools: [git, gh]
   services: []
   protocols: []
   python: []
@@ -57,12 +57,17 @@ Lizenzangabe, ein Datenschutzhinweis oder eine präzisere Beschreibung.
      Wortlaut zu ändern); sonst stichprobenartig mit `yaml.safe_load` prüfen.
 
 2. **Privacy- und Secret-Scan**
-   - Suche im Arbeitsbaum nach E-Mail-Adressen, Zugangsdaten, Tokens,
-     privaten Schlüsseln, lokalen Benutzerpfaden und personenbezogenen Daten.
-   - Prüfe zusätzlich die gesamte erreichbare Git-Historie.
+   - Suche im Arbeitsbaum UND in der gesamten erreichbaren Git-Historie (`git log -p --all`) nach
+     E-Mail-Adressen, Zugangsdaten, Tokens, privaten Schlüsseln, lokalen
+     Benutzerpfaden (`C:\Users\<name>`, `_Local_DEV`, `OneDrive`, `CREDENTIALS`)
+     und personenbezogenen Daten.
+   - Suchmuster zwingend aus einer Datei (`grep -f`) laden, nie als fehleranfällige
+     Inline-Strings; vorab eine Positivkontrolle mit einem Testpfad durchführen.
    - Klassifiziere jeden Fund als beabsichtigt, zu entfernen oder als
      dokumentiertes Restrisiko.
-   - Bereinige problematische historische Inhalte vor einer Veröffentlichung.
+   - Bereinige problematische historische Inhalte vor einer Veröffentlichung:
+     Ein Historienfund wird NIE durch einen simplen Bereinigungs-Commit gelöst,
+     sondern erfordert History-Rewrite (`git filter-repo`) oder Neuanlage/Nutzerfreigabe.
 
 3. **Lizenz und Herkunft**
    - Eine passende `LICENSE`-Datei muss vorhanden sein.
@@ -92,20 +97,33 @@ Lizenzangabe, ein Datenschutzhinweis oder eine präzisere Beschreibung.
    - Behaupte keine Zulassung, Zertifizierung oder Prüfqualität, die nicht
      belegt ist.
 
-7. **Name und Außendarstellung**
+7. **Name, Banner und Außendarstellung**
    - Prüfe Slug- und Paketnamen sowie mögliche Markenüberschneidungen.
    - Eine normale Web- oder Plattform-Suche ersetzt keine amtliche
      Markenrecherche.
    - README, Beschreibung und Badges müssen den tatsächlichen Funktionsumfang
      wiedergeben.
+   - **Pflicht-Banner-Prüfung vor Umschaltung auf public:**
+     * Prüfe, ob bereits ein Banner existiert (`assets/banner*` oder Root `banner.*`)
+       und im `README.md` eingebunden ist.
+     * Fehlt das Banner: zwingende Generierung VOR der Veröffentlichung!
+     * Generierungsweg: Antigravity / Gemini (`generate_image` oder agy CLI —
+       Standardregel: Banner/Artwork an agy; Default), Ersatzweg: Codex.
+     * Ablage unter `assets/banner.png` (bzw. `banner.svg`); Datei-Existenz und
+       -Größe direkt auf der Festplatte verifizieren (nicht allein auf die
+       Erfolgsmeldung des Modells verlassen).
+     * Banner im `README.md` oben (zentriert) einbinden.
 
-8. **Abschluss**
+8. **Abschluss und Sichtprüfung**
+   - Banner, Logo und Webansichten (wie Repo-Startseite oder Org-Profil) dem
+     Nutzer aktiv zur Sichtprüfung öffnen (`Invoke-Item` bzw. `Start-Process msedge`),
+     nicht nur verlinkt im Bericht hinterlassen.
    - Dokumentiere Funde, Korrekturen, offene Risiken und ein Ampelergebnis im
      privaten Prüfbericht.
    - Verifiziere den finalen Commit erneut.
    - Hole die ausdrückliche Freigabe des Repository-Eigentümers ein.
    - Erst danach darf ein separater, autorisierter Schritt die Sichtbarkeit
-     ändern.
+     auf public ändern (`gh repo edit <org>/<repo> --visibility public`).
 
 ## Beispiel- und Evidenzdaten (Telefonnummern, Transkripte, IDs) [C 2026-09-05]
 
@@ -126,6 +144,25 @@ erreichbaren Git-History**:
 
 Ergebnisstufen wie beim Zugangsdaten-Scan: *blockiert* (echter Fund) · *ansehen* (verdächtig, evtl.
 Beispiel) · *sauber*. Lehrfall: CALL-E 2026-08-24/25 (Maintainer-Review erzwang drei History-Rewrites).
+
+## Pflichtschritte nach der Umschaltung auf public
+
+Sobald die Sichtbarkeit eines Repositories auf `public` gestellt wurde (`gh repo edit <org>/<repo> --visibility public`), sind folgende Pflichtschritte abzuarbeiten:
+
+1. **Banner-Vollständigkeit im finalen Release/Commit verifizieren:**
+   - Prüfe auf GitHub, dass das Banner im README korrekt lädt (kein 404, Branch-/Asset-Pfad erreichbar).
+
+2. **Org-Profil-README aktualisieren (Banner + Verzeichniseintrag):**
+   - Jedes neu veröffentlichte Repo mit Banner muss auf der Organisations-Profilseite (`<org>/.github/profile/README.md` und `profile/README_de.md`) gelistet werden.
+   - Mechanische Prüfung über das Org-Profil-Gate:
+     ```bash
+     python testing/org_profile_gate.py --org <org>
+     ```
+   - Fehlt der Eintrag, generiert das Skript ein passendes HTML/Markdown-Snippet. Dieses in die Banner-Galerie der passenden Kategorie (z. B. Fachanwendungen, Module, Orchestrierung) einfügen und das Repo in die zugehörige Tabelle der Profil-READMEs aufnehmen.
+   - Anpassung per Branch und Pull Request gegen `<org>/.github` einreichen (siehe hierzu auch `github-repo-care` Schritt 14).
+
+3. **Eigenen Stern setzen:**
+   - Nach der Veröffentlichung für jedes eigene öffentliche Repo prüfen, ob der Account selbst schon einen Stern vergeben hat, und diesen setzen (z. B. via `.GITHUBBOT` `run.py --self-star --repo <org>/<name>` oder `gh api`). Details siehe `github-repo-care` Schritt 14.
 
 ## Nachprüfung bereits öffentlicher Repositories
 
@@ -158,3 +195,7 @@ Prüfberichts priorisiert werden.
 - Er ersetzt keine Rechtsberatung oder amtliche Markenrecherche.
 - Ein grüner Quellcode-Scan beweist nicht, dass frühere öffentliche Kopien,
   Paket-Registries oder Caches bereinigt sind.
+
+## Changelog
+
+Details siehe [CHANGELOG.md](CHANGELOG.md).
