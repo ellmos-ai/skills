@@ -20,7 +20,10 @@ dist/
 build/
 .DS_Store
 Thumbs.db
+thumbs.db
 desktop.ini
+Desktop.ini
+ehthumbs_vista.db
 .claude/
 .vscode/
 *.db

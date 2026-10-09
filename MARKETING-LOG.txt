@@ -1,5 +1,30 @@
 # MARKETING-LOG.txt — ellmos-skills (Pfad A/B Architecture & Quality Log)
 
+## Date: 2026-10-09
+Repo: ellmos-ai/skills
+Branch: master
+Version: 1.4.4 (Version-Freeze per T-20260920-167562623)
+
+### Technical Hygiene, Dependabot Lifecycle Automation & Contract Hardening (Pfad A Routine):
+1. **Automated Dependabot Lifecycle Guard (.github/dependabot.yml)**:
+   - Configured automated weekly checks for github-actions and pip dependencies (Europe/Berlin timezone, limit: 3 open PRs).
+   - Resolves the Dependabot monitoring gap for ellmos-ai/skills noted in fleet health audits.
+2. **Canonical Labels Provisioning (.github/labels.yml)**:
+   - Added `dependencies` (#0366d6), `github-actions` (#24292e), and `python` (#3572a5) labels for seamless coordination with `label-sync.yml` and `dependabot.yml`.
+3. **CI Lifecycle Concurrency Hardening (.github/workflows/stale.yml)**:
+   - Added concurrency group (`cancel-in-progress: true`) for uniform lifecycle management across all workflow runs.
+4. **Multi-Host OS & Filesystem Defense Hardening in `.gitignore`**:
+   - Added `thumbs.db` (lowercase), `Desktop.ini` (capitalized), and `ehthumbs_vista.db` to prevent unwanted OS artifact commits in multi-device developer setups.
+5. **Level 1 SBOM Stand 2026-10-09 Re-Audit (`THIRD_PARTY_LICENSES.txt` & `THIRD_PARTY_LICENSES.md`)**:
+   - Re-audited Level 1 SBOM plain-text companion files Stand 2026-10-09 across all 10 invariants (`INV-LOCAL-01` to `INV-SLA-10`).
+   - Re-confirmed 0% copyleft, 100% Python standard library core runtime, unprivileged `RunAsInvoker` non-elevation (`INV-UNPRIV-03`), § 521 BGB statutory liability limitation (*Gefälligkeitsrecht*), and 48-hour Security Response SLA.
+6. **Documentation & Context Parity**:
+   - Updated `README.md` and `README_de.md` badges with Last Checked / Zuletzt geprüft `2026-10-09`.
+   - Updated `llms.txt` header to `Last-checked: 2026-10-09`.
+   - Documented all changes under `## [Unreleased] - 2026-10-09` in `CHANGELOG.md`.
+7. **Automated Contract Test Suite Extension (`testing/test_metadata.py`)**:
+   - Added contract tests validating `.github/dependabot.yml`, `.github/labels.yml` dependabot labels, `.gitignore` multi-host OS patterns, version-freeze discipline (1.4.4), and 2026-10-09 audit recency.
+
 ## Date: 2026-10-03
 Repo: ellmos-ai/skills
 Branch: master

@@ -32,7 +32,7 @@
 [![LLM-Bereit: llms.txt](https://img.shields.io/badge/LLM--Bereit-llms.txt-purple.svg)](llms.txt)
 [![Notice: MIT](https://img.shields.io/badge/Notice-Attribution-blue.svg)](NOTICE)
 [![Mitwirken: Richtlinien](https://img.shields.io/badge/Mitwirken-Richtlinien-blue.svg)](CONTRIBUTING.md)
-[![Zuletzt geprüft: 2026-10-03](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--10--03-informational.svg)](MARKETING-LOG.txt)
+[![Zuletzt geprüft: 2026-10-09](https://img.shields.io/badge/Zuletzt%20gepr%C3%BCft-2026--10--09-informational.svg)](MARKETING-LOG.txt)
 
 > [!NOTE]
 > **KI-Agenten- & LLM-Integration:** Dieses Repository bietet standardisierte `SKILL.md`-Dateien mit YAML-Frontmatter, die direkt von Claude Code, Codex, AGY/Gemini und benutzerdefinierten Agenten-Laufzeiten verarbeitet werden können. Siehe [`llms.txt`](llms.txt) für maschinenlesbaren Kontext.

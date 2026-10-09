@@ -1,4 +1,4 @@
-## Last-checked: 2026-10-03
+## Last-checked: 2026-10-09
 
 # ellmos-ai/skills - Portable Skill Library for LLM Agents
 

@@ -1,6 +1,18 @@
 # Changelog
 
-## [Unreleased] - 2026-10-03
+## [Unreleased] - 2026-10-09
+
+- **Technical Hygiene, Dependabot Lifecycle Automation, Multi-Host OS Defense & Contract Hardening (Pfad A)**:
+  - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A maintenance).
+  - Provisioned `.github/dependabot.yml` for automated weekly updates of `github-actions` and `pip` dependencies (Europe/Berlin timezone, limit: 3 PRs, `dependencies` & `github-actions` / `python` labels), closing the Dependabot monitoring gap for `ellmos-ai/skills`.
+  - Added `dependencies` (#0366d6), `github-actions` (#24292e), and `python` (#3572a5) labels to `.github/labels.yml` for seamless integration with `label-sync.yml` and `dependabot.yml`.
+  - Hardened `.github/workflows/stale.yml` with concurrency group (`cancel-in-progress: true`) for uniform lifecycle protection across all CI workflows.
+  - Reinforced multi-host OS and filesystem defense in `.gitignore` with `thumbs.db` (lowercase), `Desktop.ini` (capitalized), and `ehthumbs_vista.db`.
+  - Re-audited Level 1 SBOM plain-text companion `THIRD_PARTY_LICENSES.txt` and `THIRD_PARTY_LICENSES.md` Stand 2026-10-09 across all 10 runtime invariants (`INV-LOCAL-01` to `INV-SLA-10`), unprivileged `RunAsInvoker` non-elevation (`INV-UNPRIV-03`), 0% copyleft guarantee, § 521 BGB statutory liability limitation (*Gefälligkeitsrecht*), and 48h Security Response SLA.
+  - Synchronized documentation badges, `llms.txt` context index (`Last-checked: 2026-10-09`), and local `MARKETING-LOG.txt` Pfad A audit ledger.
+  - Expanded automated contract test suite in `testing/test_metadata.py` with new assertions validating `.github/dependabot.yml` configuration, `.github/labels.yml` dependabot labels, `.gitignore` multi-host OS patterns, and 2026-10-09 audit currency across all manifests.
+
+## 2026-10-03
 
 - **Technical Hygiene, Bilingual Contributing Guidelines, Multi-Host Sync Defense & Contract Hardening (Pfad A)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A maintenance).

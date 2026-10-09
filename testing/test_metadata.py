@@ -129,7 +129,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(LLMS_PATH.is_file(), "llms.txt missing")
         content = LLMS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("## Last-checked: 2026-10-03", content)
+        self.assertIn("## Last-checked: 2026-10-09", content)
         self.assertIn("455 passing pytest tests", content)
         self.assertIn("ellmos-ai/skills", content)
         self.assertIn("https://github.com/ellmos-ai/skills", content)
@@ -163,12 +163,13 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("1.4.4", content)
             self.assertIn("455", content)
             self.assertIn("142", content)
-            self.assertIn("2026-10-03", content)
+            self.assertIn("2026-10-09", content)
 
     def test_changelog_exists_and_updated(self) -> None:
         self.assertTrue(CHANGELOG_PATH.is_file(), "CHANGELOG.md missing")
         content = CHANGELOG_PATH.read_text(encoding="utf-8")
-        self.assertIn("## [Unreleased] - 2026-10-03", content)
+        self.assertIn("## [Unreleased] - 2026-10-09", content)
+        self.assertIn("2026-10-03", content)
         self.assertIn("2026-10-01", content)
         self.assertIn("2026-09-29", content)
         self.assertIn("T-20260920-167562623", content)
@@ -203,6 +204,9 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertIn(".hypothesis/", content)
         self.assertIn(".pytest_temp/", content)
         self.assertIn("ehthumbs.db", content)
+        self.assertIn("ehthumbs_vista.db", content)
+        self.assertIn("thumbs.db", content)
+        self.assertIn("Desktop.ini", content)
         self.assertIn("TASKPLAN_*.md", content)
 
     def test_ci_workflow_extended_gates(self) -> None:
@@ -255,7 +259,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
 
         self.assertIn("0% Copyleft", content)
         self.assertIn("ZERO external runtime dependencies", content)
-        self.assertIn("**Re-Audit Date:** 2026-10-03", content)
+        self.assertIn("**Re-Audit Date:** 2026-10-09", content)
         self.assertIn("CONTRIBUTING.md", content)
         for i in range(1, 11):
             inv_prefix = "INV-"
@@ -281,6 +285,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         self.assertTrue(MARKETING_LOG_PATH.is_file(), "MARKETING-LOG.txt missing")
         content = MARKETING_LOG_PATH.read_text(encoding="utf-8")
 
+        self.assertIn("Date: 2026-10-09", content)
         self.assertIn("Date: 2026-10-03", content)
         self.assertIn("Pfad A Routine", content)
         self.assertIn("Date: 2026-10-01", content)
@@ -374,7 +379,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         content = THIRD_PARTY_LICENSES_TXT_PATH.read_text(encoding="utf-8")
 
         self.assertIn("Level 1 SBOM", content)
-        self.assertIn("Audited: 2026-10-03", content)
+        self.assertIn("Audited: 2026-10-09", content)
         self.assertIn("Contributing: CONTRIBUTING.md", content)
         self.assertIn("0% copyleft", content)
         self.assertIn("RunAsInvoker", content)
@@ -466,6 +471,42 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         ]
         for url_name in expected_urls:
             self.assertIn(f'"{url_name}"' if " " in url_name else url_name, content, f"Missing URL {url_name} in pyproject.toml")
+
+    def test_dependabot_lifecycle_hardening(self) -> None:
+        dependabot_path = REPOSITORY_ROOT / ".github" / "dependabot.yml"
+        self.assertTrue(dependabot_path.is_file(), ".github/dependabot.yml missing")
+        content = dependabot_path.read_text(encoding="utf-8")
+        self.assertIn('package-ecosystem: "github-actions"', content)
+        self.assertIn('package-ecosystem: "pip"', content)
+        self.assertIn('interval: "weekly"', content)
+        self.assertIn('timezone: "Europe/Berlin"', content)
+        self.assertIn("open-pull-requests-limit: 3", content)
+        self.assertIn("dependencies", content)
+        self.assertIn("github-actions", content)
+        self.assertIn("python", content)
+
+    def test_labels_yml_includes_dependabot_labels(self) -> None:
+        labels_path = REPOSITORY_ROOT / ".github" / "labels.yml"
+        self.assertTrue(labels_path.is_file(), ".github/labels.yml missing")
+        content = labels_path.read_text(encoding="utf-8")
+        self.assertIn("name: dependencies", content)
+        self.assertIn("name: github-actions", content)
+        self.assertIn("name: python", content)
+
+    def test_stale_workflow_concurrency_hardening(self) -> None:
+        stale_path = REPOSITORY_ROOT / ".github" / "workflows" / "stale.yml"
+        self.assertTrue(stale_path.is_file(), ".github/workflows/stale.yml missing")
+        content = stale_path.read_text(encoding="utf-8")
+        self.assertIn("concurrency:", content)
+        self.assertIn("cancel-in-progress: true", content)
+
+    def test_version_freeze_discipline(self) -> None:
+        pyproject_content = PYPROJECT_PATH.read_text(encoding="utf-8")
+        changelog_content = CHANGELOG_PATH.read_text(encoding="utf-8")
+        readme_content = README_EN_PATH.read_text(encoding="utf-8")
+        self.assertIn('version = "1.4.4"', pyproject_content)
+        self.assertIn("T-20260920-167562623", changelog_content)
+        self.assertIn("Version-1.4.4-blue", readme_content)
 
 
 if __name__ == "__main__":
