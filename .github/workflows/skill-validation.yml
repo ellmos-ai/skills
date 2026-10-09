@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # T-20260927-335065820: fetch-depth: 2 only guarantees HEAD and its
           # first parent are present. changed_skill_gate.py's BASE_SHA (the
