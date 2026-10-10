@@ -6,6 +6,8 @@ on:
       - "skills/**"
       - "testing/skill_tester.py"
       - "testing/test_skill_tester.py"
+      - "testing/skill_smoke_gate.py"
+      - "testing/test_skill_smoke_gate.py"
       - "testing/privacy_gate.py"
       - "testing/test_privacy_gate.py"
       - "testing/test_public_private_boundary.py"
@@ -23,6 +25,8 @@ on:
       - "skills/**"
       - "testing/skill_tester.py"
       - "testing/test_skill_tester.py"
+      - "testing/skill_smoke_gate.py"
+      - "testing/test_skill_smoke_gate.py"
       - "testing/privacy_gate.py"
       - "testing/test_privacy_gate.py"
       - "testing/test_public_private_boundary.py"
@@ -70,7 +74,7 @@ jobs:
           python-version: "3.12"
 
       - name: Test the static gate
-        run: python -m unittest testing/test_skill_tester.py testing/test_changed_skill_gate.py testing/test_public_registry.py
+        run: python -m unittest testing/test_skill_tester.py testing/test_skill_smoke_gate.py testing/test_changed_skill_gate.py testing/test_public_registry.py
 
       - name: Check public catalog outputs
         run: |
@@ -96,3 +100,6 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
           HEAD_SHA: ${{ github.sha }}
         run: python testing/changed_skill_gate.py
+
+      - name: Run skill smoke gate (warn-only)
+        run: python testing/skill_smoke_gate.py
