@@ -9,6 +9,7 @@ explicit Git checkout performs the authoritative scan.
 from __future__ import annotations
 
 import argparse
+import ast
 import re
 import subprocess
 import sys
@@ -140,7 +141,7 @@ def tracked_text_files() -> list[Path]:
     )
 
 
-def content_findings(path: Path) -> list[str]:
+def content_findings(path: Path, tracked_posix_paths: frozenset[str] = frozenset()) -> list[str]:
     """Same as the generic scan, plus this repository's own patterns (e.g.
     'private skill name'), which CONTENT_PATTERNS already includes above."""
     text = path.read_text(encoding="utf-8", errors="replace")
@@ -151,6 +152,8 @@ def content_findings(path: Path) -> list[str]:
     for label, pattern in CONTENT_PATTERNS.items():
         if pattern.search(text):
             findings.append(label)
+    for link in generic_privacy.unresolvable_file_links(text, tracked_posix_paths):
+        findings.append(f"unresolvable local file reference: {link}")
     return findings
 
 
@@ -292,9 +295,145 @@ def third_party_errors(tracked: set[str]) -> list[str]:
     return errors
 
 
+#: Python's own top-level standard-library module names (3.10+). A bare
+#: dependency entry naming one of these (or a dotted submodule of one, e.g.
+#: "urllib.request") needs nothing shipped or declared -- it ships with
+#: Python itself.
+_STDLIB_MODULES = frozenset(getattr(sys, "stdlib_module_names", ()))
+
+#: A dependency string entry is treated as "this skill's own file, must be
+#: shipped in its directory" only when it looks like one -- has a familiar
+#: extension and no spaces. Anything else (a bare command like "git", "gh",
+#: a package name like "requests") is an external tool/package, not
+#: something this repo can ship, so it is not checked for existence.
+_OWN_FILE_LIKE = re.compile(r"^[\w.-]+\.(?:py|md|json|txt|sh|ps1)$", re.IGNORECASE)
+
+
+def _dependencies_block(path: Path) -> dict:
+    """Best-effort parse of the frontmatter ``dependencies:`` value.
+
+    Two forms are used across this repo's ~45 skills that declare
+    dependencies (T-20260927-285118525): a multi-line block style
+    (``dependencies:\\n  python: [foo.py]``) and a single-line YAML flow
+    style that happens to also be valid Python literal syntax
+    (``dependencies: {'python': [{'name': 'feedparser', ...}]}``). The flow
+    style is parsed with ``ast.literal_eval`` -- no PyYAML dependency, matching
+    this repo's stdlib-only convention (see inventory_skills.py's own
+    from-scratch YAML parser). Anything neither form recognizes returns {}:
+    fail-open, same principle as the rest of this gate's uncertain cases --
+    a parse miss must never itself become a false "missing dependency".
+    """
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return {}
+    if not text.startswith("---"):
+        return {}
+    end = text.find("\n---", 3)
+    frontmatter = text[:end] if end != -1 else text
+    lines = frontmatter.splitlines()
+    for index, line in enumerate(lines):
+        if not line.startswith("dependencies:"):
+            continue
+        rest = line[len("dependencies:"):].strip()
+        if rest.startswith("{"):
+            try:
+                parsed = ast.literal_eval(rest)
+            except (ValueError, SyntaxError):
+                return {}
+            return parsed if isinstance(parsed, dict) else {}
+        if rest:
+            return {}  # unrecognized scalar form
+        block: dict = {}
+        for sub in lines[index + 1:]:
+            if not sub.strip():
+                continue
+            if not sub.startswith("  ") or sub.startswith("    "):
+                break  # dedent (block ended) or deeper nesting (not in observed corpus)
+            stripped = sub.strip()
+            sub_match = re.match(r"^([A-Za-z_]+):\s*(.*)$", stripped)
+            if not sub_match:
+                continue
+            key, value = sub_match.group(1), sub_match.group(2).strip()
+            if value.startswith("[") and value.endswith("]"):
+                inner = value[1:-1].strip()
+                block[key] = [x.strip().strip("'\"") for x in inner.split(",") if x.strip()]
+            elif value:
+                block[key] = [value.strip("'\"")]
+            else:
+                block[key] = []
+        return block
+    return {}
+
+
+def dependency_warnings(tracked: set[str]) -> list[str]:
+    """Non-blocking (V1 rollout, T-20260927-285118525): each declared
+    dependency that this repo can check gets checked --
+
+    * a bare ``dependencies.python``/``.tools`` entry that looks like this
+      skill's own file (``_OWN_FILE_LIKE``) must exist under the skill's
+      own directory -- a placeholder-dressed dead ``file://`` link
+      (``unresolvable_file_links``) is one way to hide this, a bare
+      frontmatter filename that was simply never shipped is another
+      (letter-hooker's ``agy_kontext_and_workflow_loader.py``, found live).
+    * a ``dependencies.protocols`` entry naming another skill must exist in
+      this repo and be declared public -- generalizes the old fixed
+      "private skill name" blocklist into a data-driven check.
+
+    A dict-form entry (already carries ``name``/``optional``/``install``/
+    ``external``/``path``) is a *declared* external dependency and is never
+    checked for existence -- that is the documented escape hatch for a false
+    positive from the filename heuristic, no schema migration required.
+
+    WARN_ONLY for the first rollout, same as WARN_ONLY_LABELS above: ~45
+    skills already use this field inconsistently, so this starts as a hint
+    that surfaces every run, not a sudden mass CI failure. See the ticket for
+    the planned switch to blocking after a fix pass over existing hits.
+    """
+    warnings: list[str] = []
+    for path in sorted(REPOSITORY_ROOT.glob("skills/*/*/SKILL.md")):
+        relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+        if "/_" in relative or relative not in tracked:
+            continue
+        skill_dir_prefix = relative.rsplit("/", 1)[0] + "/"
+        deps = _dependencies_block(path)
+        for field in ("python", "tools"):
+            for item in deps.get(field, []) or []:
+                if not isinstance(item, str):
+                    continue  # dict form: declared external/optional, not checked
+                if item in _STDLIB_MODULES or item.split(".", 1)[0] in _STDLIB_MODULES:
+                    continue
+                if not _OWN_FILE_LIKE.match(item):
+                    continue  # bare tool/package name, not something this repo ships
+                if not any(t.startswith(skill_dir_prefix) and t.endswith("/" + item) or t == skill_dir_prefix + item for t in tracked):
+                    warnings.append(
+                        f"{relative}: dependencies.{field} names '{item}' but no such "
+                        f"file is tracked under {skill_dir_prefix} (informational only, "
+                        "not blocking -- ship it, or mark it {'name': ..., 'external': true} "
+                        "if it is not this skill's own file)"
+                    )
+        for item in deps.get("protocols", []) or []:
+            if not isinstance(item, str):
+                continue
+            match = next(
+                (p for p in tracked if p.count("/") == 3 and p.endswith(f"/{item}/SKILL.md")),
+                None,
+            )
+            if match is None:
+                continue  # not a skill name at all -- an external protocol description
+            if declared_visibility(REPOSITORY_ROOT / match) in PRIVATE_VISIBILITY_VALUES:
+                warnings.append(
+                    f"{relative}: dependencies.protocols names '{item}', which exists "
+                    "but is declared private -- a public skill cannot depend on it "
+                    "(informational only, not blocking)"
+                )
+    return warnings
+
+
 def run_gate() -> list[str]:
     errors = []
     tracked = git_lines("ls-files")
+    tracked_posix_paths = frozenset(tracked)
     for path in tracked_ignored_files():
         errors.append(f"tracked although ignored: {path}")
     for relative in tracked:
@@ -311,7 +450,7 @@ def run_gate() -> list[str]:
             continue
         # content_findings() here uses this repo's CONTENT_PATTERNS (generic
         # set + "private skill name"), not run_generic_gate()'s narrower one.
-        for finding in content_findings(path):
+        for finding in content_findings(path, tracked_posix_paths):
             errors.append(f"{relative}: {finding}")
     errors.extend(visibility_consistency_errors(set(tracked)))
     errors.extend(third_party_errors(set(tracked)))
@@ -401,6 +540,8 @@ def main(argv: list[str] | None = None) -> int:
     errors = run_gate()
     _link_findings, link_warnings = _link_visibility_check()
     for warning in link_warnings:
+        print(f"WARNING (non-blocking): {warning}")
+    for warning in dependency_warnings(set(git_lines("ls-files"))):
         print(f"WARNING (non-blocking): {warning}")
     if errors:
         print("Privacy gate failed:")

@@ -62,6 +62,34 @@ class RepoPrivacyGateEngineTests(unittest.TestCase):
         pattern = repo_privacy_gate.CONTENT_PATTERNS["AWS access key"]
         self.assertIsNotNone(pattern.search("AKIA" + "A" * 16))
 
+    def test_rejects_tailscale_cgnat_address(self) -> None:
+        """T-20260927-285118525: a concrete Tailscale device address (e.g. a
+        real `100.119.69.90`) identifies a specific private machine, unlike
+        the CGNAT-excluded '100.0.0.1' or the doc-prose '100.x.x.x'."""
+        pattern = repo_privacy_gate.CONTENT_PATTERNS["Tailscale CGNAT address"]
+        self.assertIsNotNone(pattern.search("ssh device 100.119.69.90"))
+        self.assertIsNone(pattern.search("100.x.x.x"))
+        self.assertIsNone(pattern.search("100.0.0.1"))  # outside 100.64.0.0/10
+
+    def test_unresolvable_file_link_is_found(self) -> None:
+        """T-20260927-285118525: a `file:///<placeholder>/...` link naming a
+        doc this repo never ships is the same leak as a bare local path --
+        just placeholder-dressed enough to dodge the home-path checks."""
+        findings = repo_privacy_gate.unresolvable_file_links(
+            "See file:///<USER_HOME>/OneDrive/.SYNC/letter_hooks/foo.md",
+            tracked_posix_paths=frozenset({"skills/x/SKILL.md"}),
+        )
+        self.assertEqual(
+            ["file:///<USER_HOME>/OneDrive/.SYNC/letter_hooks/foo.md"], findings
+        )
+
+    def test_file_link_to_a_shipped_file_is_not_flagged(self) -> None:
+        findings = repo_privacy_gate.unresolvable_file_links(
+            "See file:///<USER_HOME>/repo/docs/hooks/foo.md",
+            tracked_posix_paths=frozenset({"docs/hooks/foo.md"}),
+        )
+        self.assertEqual([], findings)
+
 
 def _git(*args: str, cwd: Path) -> None:
     subprocess.run(["git", *args], cwd=cwd, check=True, capture_output=True)
@@ -91,6 +119,20 @@ class RepoPrivacyGateCliTests(unittest.TestCase):
             errors = repo_privacy_gate.run_generic_gate(root)
             self.assertTrue(
                 any("host-scoped local development path" in e for e in errors)
+            )
+
+    def test_unshipped_dependency_link_is_found(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _git("init", "-q", cwd=root)
+            (root / "SKILL.md").write_text(
+                "See file:///<USER_HOME>/OneDrive/.SYNC/letter_hooks/foo.md\n",
+                encoding="utf-8",
+            )
+            _git("add", "-A", cwd=root)
+            errors = repo_privacy_gate.run_generic_gate(root)
+            self.assertTrue(
+                any("unresolvable local file reference" in e for e in errors)
             )
 
     def test_forbidden_internal_filenames_are_found(self) -> None:

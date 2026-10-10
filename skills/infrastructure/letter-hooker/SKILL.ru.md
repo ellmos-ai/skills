@@ -25,7 +25,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: [agy_kontext_and_workflow_loader.py]
+  python: [scripts/agy_kontext_and_workflow_loader.py]
 provenance:
   origin: "fork of automation-self-care"
   origin_path: "skills/infrastructure/automation-self-care"
@@ -41,7 +41,7 @@ provenance:
 
 Навык **Letter-Hooker** расширяет `automation-self-care` для фреймворков AI-агентов (таких как **Antigravity / Gemini CLI**), не имеющих встроенных событийно-ориентированных загрузчиков JSON-хуков жизненного цикла (например, `~/.claude/settings.json` или `~/.codex/hooks.json`).
 
-Вместо использования пассивных хуков, срабатывающих при каждом нажатии клавиши, `letter-hooker` запускает **активный цикл предполётной загрузки и внедрения letter-хуков на уровне промпта** с помощью запланированных задач и скриптов обслуживания (`agy_kontext_and_workflow_loader.py`).
+Вместо использования пассивных хуков, срабатывающих при каждом нажатии клавиши, `letter-hooker` запускает **активный цикл предполётной загрузки и внедрения letter-хуков на уровне промпта** с помощью запланированных задач и скриптов обслуживания (`scripts/agy_kontext_and_workflow_loader.py`).
 
 ---
 
@@ -52,7 +52,7 @@ provenance:
    - **Предполётная проверка Memory и Gardener**: Обязательный предварительный запрос к `gardener` и `memoryhooker` перед выполнением деструктивных или сложных изменений.
 
 2. **Каталог Letter Hooks и справочные ссылки**:
-   - Модульные инструкции в формате `.md`, хранящиеся в `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
+   - Модульные инструкции в формате `.md`, хранящиеся в `hooks/`.
    - Внедряет явные ссылки `file://` непосредственно в текст промпта `sidecar.json`, чтобы агенты считывали точные протоколы безопасности и рабочих процессов при вызове.
 
 3. **Ежедневный список ключевых слов и самовосстанавливающееся обогащение промптов**:
@@ -66,10 +66,10 @@ provenance:
 
 ## Основные Letter Hooks
 
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -77,10 +77,12 @@ provenance:
 
 ```bash
 # Execute the Letter-Hooker Maintenance Engine
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+Запускайте эту команду из каталога навыка `letter-hooker`. Список ключевых слов создаётся в `<SYNC_DIR>/STICHWORTLISTE.json`; `<SYNC_DIR>` настраивается в `config.json`.
+
 1. **Сканирование Sidecar**: Чтение всех текстов промптов `sidecar.json` в `~/.gemini/config/sidecars/`.
-2. **Обновление списка ключевых слов**: Извлечение доменных терминов и сохранение в `.SYNC/STICHWORTLISTE.json`.
+2. **Обновление списка ключевых слов**: Извлечение доменных терминов и сохранение в `<SYNC_DIR>/STICHWORTLISTE.json`.
 3. **Внедрение Letter Hooks**: Добавление правил бутлоадера и справочных ссылок `file://` в промпты.
 4. **Журналирование результатов**: Запись обновлений в `ANTIGRAVITY-LOG.txt` и `ANTIGRAVITY-REGISTRY.md`.

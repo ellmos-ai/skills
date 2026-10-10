@@ -80,7 +80,40 @@ CONTENT_PATTERNS = {
     "GitHub token": re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b"),
     "OpenAI-style key": re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+    # Tailscale's CGNAT range (100.64.0.0/10, RFC 6598) is the address a
+    # concrete Tailscale device gets. A real one identifies a specific
+    # private machine on the author's tailnet (found in open-compute-bridge,
+    # T-20260927-285118525) -- unlike the surrounding "100.x.x.x" prose
+    # placeholder already used elsewhere in that same doc, which stays
+    # unmatched because it has no digits after the dots.
+    "Tailscale CGNAT address": re.compile(
+        r"\b100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d{1,3}\.\d{1,3}\b"
+    ),
 }
+
+#: A `file://` link naming a path this repo cannot ship is the same leak as a
+#: bare local path, just placeholder-dressed (e.g. `file:///<USER_HOME>/...`)
+#: so it slips past WINDOWS_HOME/POSIX_HOME, which only fire on a *concrete*
+#: home segment. Found in letter-hooker/automation-self-care
+#: (T-20260927-285118525): links to letter-hook docs that were never added to
+#: the repo, so the public skill points readers at files nobody else has.
+FILE_LINK = re.compile(r"file:///([^\s)\]\"']+)")
+
+
+def unresolvable_file_links(text: str, tracked_posix_paths: frozenset[str]) -> list[str]:
+    """Returns each `file://` link in *text* whose tail (its last two path
+    segments) matches no file this repo actually tracks -- i.e. a dependency
+    the repo claims but does not ship, placeholder or not."""
+    findings = []
+    for match in FILE_LINK.finditer(text):
+        link = match.group(0)
+        segments = [s for s in re.split(r"[\\/]+", match.group(1)) if s]
+        if len(segments) < 1:
+            continue
+        tail = "/".join(segments[-2:]) if len(segments) >= 2 else segments[-1]
+        if not any(p == tail or p.endswith("/" + tail) for p in tracked_posix_paths):
+            findings.append(link)
+    return findings
 
 WINDOWS_HOME = re.compile(r"(?i)(?:file:///)?[A-Z]:[\\/]+Users[\\/]+([^\\/\s\"'`]+)")
 POSIX_HOME = re.compile(r"(?i)(?:^|[\s(\"'`])/(?:home|Users)/([^/\s\"'`)]+)")
@@ -172,7 +205,7 @@ def concrete_home_matches(text: str) -> list[str]:
     return findings
 
 
-def content_findings(path: Path) -> list[str]:
+def content_findings(path: Path, tracked_posix_paths: frozenset[str] = frozenset()) -> list[str]:
     text = path.read_text(encoding="utf-8", errors="replace")
     findings = []
     homes = concrete_home_matches(text)
@@ -181,6 +214,8 @@ def content_findings(path: Path) -> list[str]:
     for label, pattern in CONTENT_PATTERNS.items():
         if pattern.search(text):
             findings.append(label)
+    for link in unresolvable_file_links(text, tracked_posix_paths):
+        findings.append(f"unresolvable local file reference: {link}")
     return findings
 
 
@@ -210,6 +245,7 @@ def run_generic_gate(
     """
     errors = []
     tracked = git_lines(repo_root, "ls-files")
+    tracked_posix_paths = frozenset(tracked)
     for path in tracked_ignored_files(repo_root, allowed_tracked_ignored):
         errors.append(f"tracked although ignored: {path}")
     for relative in tracked:
@@ -223,7 +259,7 @@ def run_generic_gate(
                 errors.append(f"{relative}: {label} -- must not be tracked (git rm --cached, add to .gitignore)")
     for path in tracked_text_files(repo_root, content_scan_exclusions):
         relative = path.relative_to(repo_root).as_posix()
-        for finding in content_findings(path):
+        for finding in content_findings(path, tracked_posix_paths):
             errors.append(f"{relative}: {finding}")
     return errors
 
