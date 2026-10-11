@@ -23,6 +23,10 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 > **Español** — Versión oficial en español de `model-strategy`.
 
+> ⚠️ **Desactualizada frente a v3.0.0 (2026-10-03)** — este archivo no se ha actualizado al
+> nuevo esquema de configuración (catálogo de modelos en `models.example.json` /
+> `models.local.json`, roles en lugar de niveles fijos). La versión vigente es `SKILL.md`
+> (alemán) o `SKILL.en.md` (inglés); este archivo queda como referencia histórica (v2.0.0).
 
 # Estrategia de cambio de modelo (Español)
 
