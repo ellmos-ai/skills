@@ -611,9 +611,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/model-strategy/SKILL.md",
-      "version": "2.2.0",
+      "version": "3.1.0",
       "status": "active",
-      "description": "Multi-model orchestration and model-switching strategy. Score-based model selection, reasoning-effort routing, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.",
+      "description": "Rollenbasierte Multi-Modell-Strategie. Modellkatalog liegt in einer lokalen Konfigurationsdatei statt im Skill-Text -- Rollen (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation), Reasoning-Effort als eigene Achse, Abnahmepflicht für Entwurfsmodelle, Anbieterwechsel für unabhängige Reviews, Kontingente, Delegationsablauf und Kosten/Qualität kleiner Worker.",
       "languages": [
         "de",
         "en",
