@@ -23,6 +23,9 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 > **中文** — `model-strategy` 官方中文版本。
 
+> ⚠️ **相对 v3.0.0（2026-10-03）已过时** — 本文件尚未更新为新的配置方案（模型目录已迁移至
+> `models.example.json` / `models.local.json`，以角色取代固定等级）。现行权威版本为 `SKILL.md`
+> （德文）或 `SKILL.en.md`（英文）；本文件仅作为历史参考（v2.0.0）保留。
 
 # 模型切换策略（中文）
 
