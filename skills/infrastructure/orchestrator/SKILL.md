@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.3.0
+version: 1.3.1
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-08-24
+updated: 2026-10-03
 description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
@@ -118,6 +118,10 @@ und Schwellenwerte darin sind Beispiele des jeweiligen Nutzers, keine Vorgabe
 des Skills. Der Skill selbst bleibt nutzer-, pfad-, modell- und
 providerneutral (siehe Changelog 1.1.0) — Pfade zu persönlichen Werkzeugen
 gehören ausschließlich in die lokale `config.json`, nie in diesen Text.
+
+Profile begrenzen die Parallelität; zeitbezogene Kontingente für teure Modelle,
+Reviewer oder Advisor (z. B. „2 Reviews je Stunde") samt Konto regelt der Skill
+`budgetierung`.
 
 ### profiles.json — benannte Ressourcenprofile
 
@@ -256,6 +260,10 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Änderungsprotokoll
+
+### 1.3.1 (2026-10-03)
+- Ressourcenprofil: Satz ergänzt, dass zeitbezogene Modellkontingente samt Konto
+  der Skill `budgetierung` regelt (Profile selbst begrenzen nur die Parallelität).
 
 ### 1.3.0 (2026-08-24)
 - Delta zu Ticket T-20260824-552689035 (Ist-Stand 1.2.0 hatte bereits
