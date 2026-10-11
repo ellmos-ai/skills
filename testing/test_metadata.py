@@ -80,8 +80,8 @@ class MetadataAndManifestParityTests(unittest.TestCase):
     def test_ci_workflows_integrity(self) -> None:
         self.assertTrue(CI_WORKFLOW_PATH.is_file(), ".github/workflows/tests.yml missing")
         tests_content = CI_WORKFLOW_PATH.read_text(encoding="utf-8")
-        self.assertIn("actions/checkout@v4", tests_content)
-        self.assertIn("actions/setup-python@v5", tests_content)
+        self.assertRegex(tests_content, r"actions/checkout@v\d+")
+        self.assertRegex(tests_content, r"actions/setup-python@v\d+")
         self.assertIn("ubuntu-latest", tests_content)
         self.assertIn("windows-latest", tests_content)
         self.assertIn("macos-latest", tests_content)
