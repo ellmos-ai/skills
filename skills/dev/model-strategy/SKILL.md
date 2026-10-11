@@ -1,18 +1,18 @@
 ---
 name: model-strategy
-version: 2.2.0
+version: 3.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-09-02
-description: Multi-model orchestration and model-switching strategy. Score-based model selection, reasoning-effort routing, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization.
+updated: 2026-10-03
+description: Rollenbasierte Multi-Modell-Strategie. Modellkatalog liegt in einer lokalen Konfigurationsdatei statt im Skill-Text -- Rollen (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation), Reasoning-Effort als eigene Achse, Abnahmepflicht für Entwurfsmodelle, Anbieterwechsel für unabhängige Reviews, Kontingente und Delegationsablauf.
 
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: dev
-tags: [model-switching, orchestration, multi-model, cost-optimization, routing, cross-agent, advisor]
+tags: [model-switching, orchestration, multi-model, cost-optimization, routing, cross-agent, advisor, roles]
 language: de
 status: active
 visibility: public
@@ -24,292 +24,257 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 # Model-Switching Strategie
 
-> Multi-Modell Orchestrierung: Score-basierte Modellauswahl, Cross-Agent-Delegation, Advisor-Pairing, Eskalations-Trigger und Kosten-Effizienz-Optimierung
+> Rollenbasierte Multi-Modell-Strategie: Konfiguration statt Textkatalog, Rollen statt starrer
+> Score-Tabelle, Abnahmepflicht für Entwürfe, Anbieterwechsel für unabhängige Reviews.
 
 ---
 
-## ⚠️ PRÄZEDENZ-REGEL (User-Entscheid 2026-07-02): Fable 5 ersetzt Opus 4.8
+## 0. Konfiguration
 
-Der Katalog unten (v2.0.0) wurde **vor** dem Erscheinen von Fable 5 als Spitzenmodell
-geschrieben. Seit 2026-07-02 gilt: **Überall, wo unten Opus 4.8 empfohlen wird
-(Level-4-Reviewer, Score 40–50, mathematische Beweisführung, höchste Rigorosität,
-Advisor), ist Fable 5 das Modell der Wahl.** Opus 4.8 ist nur noch Fallback, wenn
-Fable 5 nicht verfügbar ist. Lukas setzt Fable 5 **absichtlich** für diese Aufgaben ein —
-ein automatischer/stiller Wechsel auf Opus 4.8 entspricht NICHT seiner Strategie und
-ist dem User sofort zu melden (vgl. Memory `feedback_model_switch_transparency`:
-stiller Fable→Opus-Switch 2026-07-02, Modell-Attribution forensisch via
-Transkript-JSONL `message.model` prüfbar).
+**Modelle gehören nicht in diesen Text.** Welche konkreten Modelle, Provider und Aufrufwege
+gerade existieren, ändert sich schneller als ein Skill sinnvoll gepflegt werden kann — und ist
+pro Nutzer verschieden. Dieser Skill beschreibt deshalb nur **Rollen und Prinzipien**; der
+tatsächliche Katalog lebt in einer Konfigurationsdatei im Skill-Ordner.
 
----
+### Ladereihenfolge
 
-## Reasoning-Effort-Dimension (lokale Nutzerkonvention)
+1. **Lokale Datei** im Skill-Ordner: `models.local.json` oder `models.private.json` (beide
+   Namensmuster sind in der `.gitignore` dieser Bibliothek bereits als privat erfasst,
+   `skills/**/*.local.*` bzw. `skills/**/*.private.*` — nie veröffentlichen, nie committen).
+   Wenn vorhanden, ist das der maßgebliche Katalog.
+2. **Beispieldatei** `models.example.json` im selben Ordner — neutrale Platzhalter-Vorlage, die
+   das Schema zeigt. Dient nur als Vorlage zum Anlegen der eigenen lokalen Datei, nicht als
+   Katalog für echte Läufe.
+3. **Live-Erhebung**, wenn beide Dateien fehlen oder unvollständig sind: welche Modelle bietet
+   die aktuelle Runtime tatsächlich an (z. B. das `model`-Enum eines nativen Subagenten-Werkzeugs,
+   `codex debug models --bundled`, eine App-eigene Modellliste)? Ein geratenes Modell ist
+   schlechter als ein kurz erhobenes.
 
-Die Reasoning-Effort-Stufe ist eine **orthogonale Achse** zur Modellwahl: Zuerst
-ein live verfügbares, fachlich geeignetes Modell wählen, dann seine Denktiefe
-staffeln. Die folgende Staffelung ist Lukas' lokale Arbeitskonvention, kein
-universelles Gesetz über Provider oder Modelle.
+**Bei Widerspruch gilt die Live-Messung.** Eine Konfigurationsdatei kann veraltet sein (ein
+Modell wurde abgeschaltet, umbenannt oder ersetzt); eine frische Messung an der Runtime selbst
+schlägt jede Textquelle, inklusive der eigenen lokalen Konfiguration. Widerspruch kurz benennen
+und die Konfigurationsdatei danach aktualisieren, statt ihn stillschweigend zu übergehen.
 
-| Route | Konvention |
-|-------|------------|
-| `xhigh` | Session-Default für Lukas, sofern die Runtime diese Stufe anbietet. |
-| `max` | Nur als transparent benannter, gezielter Delegate für den härtesten Einzelschritt. Kurz begründen, warum `xhigh` dafür nicht genügt; keine stille Hochstufung des ganzen Laufs. |
-| `ultracode` | Breite beziehungsweise Fan-out statt zusätzlicher Tiefe: parallele, klar getrennte Teilaufgaben. Nur einsetzen, wenn die Runtime diese Route anbietet und die bereits geltende Bestätigungs-/Kostenregel für größere oder schwer kalkulierbare Fan-outs erfüllt ist. |
+**`deprecated: true` heißt: nie einsetzen.** Ein als `deprecated` markierter Katalogeintrag
+bleibt aus Erkennungs-/Historiengründen stehen (damit ein Agent eine alte Erwähnung einordnen
+kann), wird aber für keine neue Aufgabe mehr gewählt — auch nicht als Fallback.
 
-Erwartet ein einzelner Schritt grob mehr als 10–15 Minuten Compute oder summiert
-sich eine Reihe solcher Schritte entsprechend, wird er auf den konfigurierten
-Compute-Host (in Lukas' System in der Regel der Mac Studio) verlagert.
+### Schema (siehe `models.example.json`)
 
-Keine Effort-Stufe erweitert Schreib-, Kosten-, Freigabe- oder Publikationsrechte.
-Delegationen bleiben innerhalb der bestehenden Autorität. Ist eine Route in der
-aktuellen Runtime nicht verfügbar, wird das transparent benannt und nur auf eine
-belegt verfügbare Route ausgewichen; User-only-Grenzen bleiben bestehen.
-
----
-
-## 1. Modell-Katalog
-
-### Claude (Subagent-fähig via Agent-Tool)
-
-```
-Level 4 (Reviewer):   Opus 4.8  — Advisor, Math-Review    [nur User: /model, /advisor]
-Level 3 (Stratege):   Opus 4.6  — Architektur, Konzepte   [Subagent: model:"opus"]
-Level 3 (Kreativ):    Fable 5   — Kreative Texte, Stories  [Subagent: model:"fable"]
-Level 2 (Arbeitstier):Sonnet 4.6— Implementation, Debug    [Subagent: model:"sonnet"]
-Level 1 (Schnell):    Haiku 4.5 — Boilerplate, Formatting  [Subagent: model:"haiku"]
-```
-
-### Externe Agenten (Companion-Scripts / SSH)
-
-```
-Level 2-3: Gemini 3.5 pro  — Recherche, wiss. Datenbanken  [agy-companion CLI]
-Level 2:   Gemini 3.5 flash— Schnelle Recherche             [agy-companion CLI]
-Level 2-3: Codex 5.5 (GPT) — Code-Review, Code-Gen         [codex-companion CLI]
-Level 2:   Codex 4.5 (GPT) — Einfachere Code-Aufgaben      [codex-companion CLI]
-```
-
-### Lokale Modelle (Token-frei, 24/7)
-
-```
-Level 1-2: Ollama (Qwen 3.5:35b-a3b) — Haiku-bis-Sonnet-Niveau [<ollama-host>:11434]
-           Aufruf: SSH + curl http://<ollama-host>:11434/v1/chat/completions
-           Oder: Buddha-Delegation via BACH Control API :8081
-```
-
-### Erreichbarkeits-Matrix
-
-| Modell | LLM-startbar | Aufrufweg | Einschränkungen |
-|--------|-------------|-----------|-----------------|
-| Sonnet 4.6 | Ja | `Agent(model:"sonnet")` | — |
-| Opus 4.6 | Ja | `Agent(model:"opus")` | — |
-| Haiku 4.5 | Ja | `Agent(model:"haiku")` | — |
-| Fable 5 | Ja | `Agent(model:"fable")` | — |
-| Opus 4.8 | Nur als Advisor | `advisor()` in Session | User muss `/advisor` setzen |
-| Gemini 3.5 | Ja (Bash) | `companion-for-agy "prompt"` | Windows-only, stdout-Workaround |
-| Codex 5.5/4.5 | Ja (Bash) | `node codex-companion.mjs task "prompt"` | Auth nötig |
-| Ollama | Ja (SSH/curl) | SSH + curl an Ollama-Host-API | VPN/Tailscale muss aktiv sein |
-| Opus 4.8 als Hauptmodell | Nein | User: `/model opus 4.8` | Nur User-Aktion |
-| Fable 5 als Hauptmodell | Nein | User: `/model fable` | Nur User-Aktion |
+Jeder Katalogeintrag trägt: `id`, `provider`, `invoke` (Aufrufmuster, keine echten Pfade im
+Beispiel), `effort_levels`, `roles` (siehe Abschnitt 1), `strengths`, `weaknesses`, `guardrails`
+(Zuverlässigkeits-Einschränkungen wie „nur Entwurf", „nicht selbst ins Dateisystem schreiben",
+„enge Abnahme" — siehe Abschnitt 3), `budget_hint` (Verweis auf den Skill `budgetierung`) und
+`deprecated`.
 
 ---
 
-## 2. Score-Berechnung
+## 1. Rollen statt starrer Modell-Hierarchie
+
+Eine Modellwahl beantwortet zuerst **welche Rolle** eine Aufgabe braucht, danach erst welches
+konkrete Modell diese Rolle aktuell am besten/günstigsten füllt. Rollen sind stabiler als
+Modellnamen — ein Modell wird ausgetauscht, die Rolle bleibt.
+
+| Rolle | Frage | Typisches Merkmal |
+|---|---|---|
+| **Denker/Entscheider** | Architektur, Strategie, mehrdeutige Anforderungen, Abwägung von Alternativen | teurer, wird gezielt statt durchgehend eingesetzt |
+| **Dauer-Worker** | laufende Umsetzung über viele Schritte: Implementierung, Debugging, Standardaufgaben | güns­tig genug, um durchgehend zu laufen |
+| **Entwurfsgenerator** | schnelle erste Fassung (Design, Text, Code, Struktur, Übersetzung) | schnell, aber grundsätzlich mit Abnahmepflicht (Abschnitt 3) |
+| **Reviewer/Abnahme** | prüft Ergebnisse anderer Modelle | wirkt am stärksten bei einem anderen Anbieter als der Ersteller (Abschnitt 4) |
+| **Eskalation** | wird nur für den einzelnen schwierigsten Schritt hinzugezogen | nie für den ganzen Lauf, immer kurz begründet |
+
+Ein Modell kann mehrere Rollen tragen (z. B. gleichzeitig Dauer-Worker und gelegentlicher
+Reviewer). Welche Modelle welche Rollen aktuell füllen, steht in der Konfiguration
+(Abschnitt 0), nicht hier.
+
+### Grobe Schwierigkeits-Orientierung (keine feste Tabelle)
+
+Eine Score-Rechnung über feste Dimensionen (Klarheit, Komplexität, Kreativität, Kontext,
+Kritikalität) kann als **grobe Orientierung** dienen, um zwischen Dauer-Worker und
+Denker/Eskalation zu unterscheiden — sie ist kein verbindlicher Mechanismus, der ein Modell
+automatisch bestimmt:
 
 ```
-Dimensionen (0-10):
-  KLARHEIT      : Wie eindeutig ist die Aufgabe?
-  KOMPLEXITAET  : Wie viele Komponenten?
-  KREATIVITAET  : Neue Loesungen noetig?
-  KONTEXT       : Wie viel Vorwissen?
-  KRITIKALITAET : Wie wichtig ist Perfektion?
-
-SCORE = (10 - KLARHEIT) + KOMPLEXITAET + KREATIVITAET + KONTEXT + KRITIKALITAET
+SCORE = (10 - KLARHEIT) + KOMPLEXITAET + KREATIVITAET + KONTEXT + KRITIKALITAET   (je Dimension 0-10)
 ```
 
-### Score-Schwellwerte
-
-| Score | Modell | Beispiele |
-|-------|--------|-----------|
-| 0-8 | Ollama (lokaler Host) | Prompt generieren, Summaries, einfache Texte |
-| 9-12 | Haiku | __init__.py, Formatierung, Boilerplate |
-| 13-22 | Sonnet | Implementation, Bug-Fixes, Standard-Code |
-| 13-22 | Gemini 3.5 | Recherche, Literatursuche, wiss. Datenbanken |
-| 13-22 | Codex 5.5 | Code-Gen (Luau, Node.js), Compute-Scripts |
-| 23-28 | Sonnet + Advisor-Review | Komplexer Code mit Qualitätsprüfung |
-| 23-35 | Fable 5 | Kreative Texte, Marketing, Storytelling |
-| 29-40 | Opus 4.6 | Architektur, Strategie, Paper-Schreiben |
-| 35-50 | Opus 4.6 + Advisor | Beweise, Architektur-Entscheidungen, Statistik |
-| 40-50 | Opus 4.8 (User-Empfehlung) | Mathematische Beweisführung, höchste Rigorosität |
+Niedriger Score → Dauer-Worker oder sogar ein günstiges/token-freies lokales Modell reicht.
+Hoher Score (durchgehend widersprüchliche Anforderungen, mathematische Beweisführung, Statistik
+mit weitreichenden Konsequenzen) → Denker/Eskalation, meist mit anschließendem Review. Dazwischen
+liegt der breite Normalfall des Dauer-Workers. Die konkrete Schwelle, ab der eskaliert wird,
+hängt vom aktuellen Katalog ab (manche Nutzer haben nur zwei, andere sechs Rollen-Füllungen) und
+gehört deshalb nicht in eine feste Tabelle in diesem Text.
 
 ---
 
-## 3. Cross-Agent-Delegation
+## 2. Reasoning-Effort als eigene Achse
 
-### Wann welchen externen Agenten?
+Reasoning-Effort (z. B. `low`/`medium`/`high`/`xhigh`/`max`, oder eine feinere/andere Staffelung
+je Anbieter) ist eine **von der Modell-/Rollenwahl unabhängige Achse**: Erst ein fachlich
+geeignetes, live verfügbares Modell für die Rolle wählen, dann seine Denktiefe passend zur
+Schwierigkeit staffeln.
 
-| Aufgabe | Bester Agent | Grund |
-|---------|-------------|-------|
-| Wissenschaftliche Literatursuche | Gemini 3.5 pro | Native OpenAlex/arXiv/PubMed-Skills |
-| Code-Review (Zweitmeinung) | Codex 5.5 | Unabhängige Perspektive |
-| Einfache Text-Generierung | Ollama (lokaler Host) | Token-frei, 24/7 |
-| Kreative Texte, Marketing | Fable 5 | Stärkster kreativer Output |
-| Mathematische Beweise | Opus 4.8 (Advisor) | Höchste analytische Tiefe |
+- Niedrige Stufen für Routine und gut definierte Teilaufgaben.
+- Hohe Stufen für Wissenschaft, Beweisführung, Architekturentscheidungen mit Tragweite.
+- Eine Breitenroute (parallele, klar getrennte Teilaufgaben statt mehr Tiefe in einem Strang)
+  nur, wenn die aktuelle Runtime dafür einen eigenen Modus anbietet und die ohnehin geltende
+  Bestätigungs-/Kostenregel für größere oder schwer kalkulierbare Fan-outs erfüllt ist.
 
-### Ausschlüsse (dokumentierte Schwächen)
+**Keine Effort-Stufe erweitert Schreib-, Kosten-, Freigabe- oder Publikationsrechte.**
+Delegationen bleiben innerhalb der bestehenden Autorität (siehe Abschnitt 5). Ist eine Stufe in
+der aktuellen Runtime nicht verfügbar, wird das benannt und auf eine belegt verfügbare Stufe
+ausgewichen — nicht stillschweigend das billigere Verhalten als Erfolg gemeldet.
 
-- **Gemini:** NICHT für mathematische Reviews/Beweisführung (Richtungsfehler bei abc-Review, 2026-06-07)
-- **Codex 4.5:** Nur wenn 5.5 nicht verfügbar; sonst immer 5.5
-
-### Aufrufwege
-
-> Platzhalter `<host>`, `<ollama-host>`, `<tailscale-ip>`, `<user>` und `~/.ssh/<key>` durch die eigene Infrastruktur ersetzen.
-
-**Gemini (via companion-for-agy):**
-```
-companion-for-agy --researcher --json --timeout 120000 "Recherche-Prompt"
-```
-
-**Codex (via codex-companion):**
-```
-node "~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs" task --effort high "Code-Prompt"
-```
-
-**Ollama auf entferntem Host (via SSH):**
-```
-ssh -i ~/.ssh/<key> <user>@<tailscale-ip> "curl -s http://localhost:11434/v1/chat/completions -d '{\"model\":\"qwen3.5:35b-a3b\",\"messages\":[{\"role\":\"user\",\"content\":\"Prompt\"}]}'"
-```
-
-**Buddha-Delegation (BACH mit Tools):**
-```
-curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" -d '{"prompt": "...", "chat_id": "claude-delegate"}'
-```
+Lang laufende oder rechenintensive Einzelschritte gehören — unabhängig von der Effort-Stufe —
+auf den dafür vorgesehenen Compute-Host, nicht auf die lokale interaktive Maschine; die Schwelle
+dafür ist eine Umgebungsregel, keine Modellstrategie-Regel.
 
 ---
 
-## 4. Advisor-Pairing
+## 3. Abnahmepflicht für Entwurfsmodelle
 
-### Mechanik
+Modelle in der Rolle **Entwurfsgenerator** liefern grundsätzlich einen Entwurf, keine fertige
+Lieferung — unabhängig davon, wie gut der erste Eindruck ist. Das ist keine pauschale Abwertung
+eines einzelnen Modells, sondern eine Eigenschaft der Rolle: schnelle erste Fassungen sind
+wertvoll, weil sie schnell sind, und genau deshalb fehleranfälliger.
 
-`advisor()` ist ein **Session-Level-Tool** — das Advisor-Modell wird vom User per `/advisor` gesetzt, nicht programmatisch. Daraus ergeben sich drei Pairing-Muster:
+Daraus folgen drei feste Regeln, unabhängig vom konkreten Modell:
 
-| Muster | Wie es funktioniert | Wann einsetzen |
-|--------|-------------------|----------------|
-| **Session-Advisor** | User setzt `/advisor opus 4.8`, Agent ruft `advisor()` | Standard bei Beweis/Architektur |
-| **Orchestrator-als-Reviewer** | Opus-Hauptmodell reviewt Sonnet-Subagent-Output | Orchestrator ist leistungsfähiger als Worker |
-| **Gegen-Agent** | Agent A arbeitet, Agent B prüft adversarial | Unabhängige Verifikation, 2-Perspektiven |
-| **User-Empfehlung** | Agent empfiehlt: "Diese Aufgabe mit opus 4.8 + advisor" | Wenn aktuelle Session zu schwach |
-
-### Wann Advisor empfehlen?
-
-- Mathematische Beweisführung (Score ≥ 35)
-- Architektur-Entscheidungen mit langfristigen Konsequenzen
-- Statistische Methodik / Studiendesign
-- Komplexe Bugs nach 2+ erfolglosen Debug-Zyklen
-
-### Wann KEINEN Advisor?
-
-- Routine-Code, Content, Formatting (Score < 23)
-- Einfache Feature-Implementierung
-- Gut definierte, unkritische Aufgaben
+1. **Jeder Entwurf wird vor Übernahme geprüft** — durch ein Dauer-Worker- oder Reviewer-Modell,
+   nie durch bloßes Vertrauen in die Entwurfsqualität.
+2. **Ein Entwurfsmodell schreibt bevorzugt nicht selbst in das Zielsystem** (Zieldateisystem,
+   Produktionsdatenbank, veröffentlichter Ort). Es liefert das Ergebnis zurück; ein geprüftes
+   Modell setzt es ein. Diese Guardrail steht konkret im jeweiligen Katalogeintrag
+   (`guardrails`), weil sie je Werkzeug unterschiedlich technisch umgesetzt wird.
+3. **Fachlich enge Bereiche** (z. B. LaTeX, Rechts- oder Zahlentexte, sicherheitsrelevanter Code)
+   bekommen eine **engere** Abnahme als allgemeiner Text, auch wenn das Entwurfsmodell dort
+   erfahrungsgemäß gut abschneidet.
 
 ---
 
-## 5. Eskalations-Trigger
+## 4. Anbieterwechsel für unabhängige Reviews
 
-### Ollama -> Haiku
-- Dateizugriff benötigt
-- Analyse von Code nötig
+Ein Review ist am aussagekräftigsten, wenn Ersteller und Prüfer **nicht denselben Anbieter und
+nicht dasselbe Modell** nutzen — sonst teilen sie möglicherweise dieselben blinden Flecken.
 
-### Haiku -> Sonnet
-- Mehr als 2 Dateien betroffen
-- Entscheidung zwischen Alternativen nötig
-- Unerwarteter Fehler aufgetreten
-- Lösch-Operation angefordert
+- **Review-Muster:**
 
-### Sonnet -> Opus
-- Architektur-Entscheidung gefordert
-- 3+ Systeme müssen integriert werden
-- Anforderungen widersprüchlich/unklar
-- Strategische Planung nötig
+  | Muster | Wie es funktioniert | Wann einsetzen |
+  |---|---|---|
+  | **Session-Advisor** | Nutzer setzt einen Reviewer in der laufenden Session, Agent ruft ihn gezielt | Standard bei Beweis/Architektur |
+  | **Orchestrator-als-Reviewer** | das stärkere/koordinierende Modell reviewt den Output eines Worker-Subagenten | Orchestrator ist ohnehin leistungsfähiger als der Worker |
+  | **Gegen-Agent / Anbieterwechsel** | Modell A (Anbieter 1) arbeitet, Modell B (Anbieter 2) prüft adversarial | unabhängige Verifikation, zwei Perspektiven, höchste Aussagekraft |
+  | **Empfehlung statt Eigenausführung** | Agent empfiehlt explizit: „diese Aufgabe mit Rolle Eskalation + Review bearbeiten" | aktuelle Session ist für den Schritt zu schwach |
 
-### Sonnet -> Gemini (lateral)
-- Wissenschaftliche Recherche benötigt
-- Literaturverzeichnis-Verifikation
-
-### Sonnet -> Codex (lateral)
-- Code-Review als Zweitmeinung
-- Advisor überlastet (Fallback-Reviewer)
-
-### Opus -> Opus + Advisor
-- Beweis-Review benötigt
-- Kritische Architektur-Entscheidung
-- Statistische Methodik
-
-### De-Eskalation
-- Konzept definiert -> Sonnet übernimmt Implementation
-- Aufgabe trivial/repetitiv -> Haiku übernimmt
-- Nur Text, kein Tool-Zugriff -> Ollama übernimmt
+- **Wann Review einsetzen:** mathematische Beweisführung, Architekturentscheidungen mit
+  langfristigen Konsequenzen, statistische Methodik/Studiendesign, komplexe Bugs nach mehreren
+  erfolglosen Debug-Zyklen, jeder Entwurf aus Abschnitt 3.
+- **Wann kein Review nötig ist:** Routine-Code, Content, Formatierung; gut definierte,
+  unkritische Aufgaben im Rahmen eines bereits geprüften Vorgehens.
+- **Dokumentierte Schwächen bleiben in der Konfiguration, nicht hier** — z. B. „Modell X ist für
+  mathematische Reviews ungeeignet" gehört als `weaknesses`-Eintrag in den Katalog, weil er sich
+  mit dem Modell ändert, nicht mit dem Skill.
 
 ---
 
-## 6. Berechtigungsmatrix
+## 5. Rechte hängen am Auftrag, nicht am Modell
 
-| Operation | Ollama | Haiku | Sonnet | Opus | Gemini | Codex |
-|-----------|--------|-------|--------|------|--------|-------|
-| Dateien lesen | - | Ja | Ja | Ja | Ja* | Ja* |
-| Dateien schreiben | - | Ja | Ja | Ja | Ja* | Ja* |
-| Dateien löschen | - | - | Ja** | Ja | - | - |
-| System-Befehle | - | - | Ja** | Ja | Ja* | Ja* |
-| Architektur-Entscheidung | - | - | - | Ja | - | - |
-| Web-Recherche | - | - | Ja | Ja | Ja | - |
-| advisor() aufrufen | - | - | Ja | Ja | - | - |
+Es gibt bewusst **keine Berechtigungsmatrix nach Modellname** (welches Modell darf löschen,
+welches Systembefehle ausführen). Eine solche Matrix suggeriert, Rechte seien eine Eigenschaft
+des Modells — sie sind eine Eigenschaft des **Auftrags und der erteilten Autorität**:
 
-*via Companion-Script im eigenen Sandbox-Modus
-**mit User-Bestätigung
+- Was ein Agent lesen, schreiben, löschen oder ausführen darf, ergibt sich aus der aktuellen
+  Runtime-Sandbox, dem Scope des Auftrags und einer etwaigen Nutzerfreigabe — nicht daraus, ob
+  gerade ein teures oder ein günstiges Modell antwortet.
+- Guardrails im Katalog (`guardrails`-Feld) sind **Zuverlässigkeits-Hinweise**, keine
+  Rechteerweiterung oder -beschränkung: „nur Entwurf" sagt, wie sehr dem Ergebnis zu trauen ist,
+  nicht, was technisch erlaubt wäre.
+- Eine Delegation (an einen Subagenten, einen externen Agenten, ein anderes Modell) bleibt
+  innerhalb der Autorität des delegierenden Laufs. Sie erweitert nichts.
+
+### Eskalation und De-Eskalation (Muster, nicht Modellnamen)
+
+- **Nach oben (Rolle wechselt zu Denker/Eskalation):** Architektur-Entscheidung gefordert,
+  mehrere Systeme müssen integriert werden, Anforderungen widersprüchlich/unklar, strategische
+  Planung nötig, kritischer Bug nach mehreren erfolglosen Zyklen.
+- **Lateral (andere Rolle, gleiche Ebene):** fachfremde Recherche, unabhängiges Review,
+  Spezialwerkzeug eines anderen Anbieters.
+- **Nach unten (De-Eskalation):** Konzept ist definiert → Dauer-Worker übernimmt Umsetzung;
+  Aufgabe ist trivial/repetitiv → ein günstigeres Modell übernimmt; reine Textaufgabe ohne
+  Werkzeugzugriff → ein lokales/token-freies Modell übernimmt, falls im Bestand verfügbar und
+  belegt (`verified: true` im Katalog).
+
+### Transparenzregel bei Modellwechsel
+
+**Ein stiller Modellwechsel gegenüber der konfigurierten Besetzung ist zu melden.** Wählt eine
+Runtime aus eigenem Antrieb (Kontingent, Verfügbarkeit, interner Default) ein anderes Modell als
+in `models.local.json`/`models.private.json` festgelegt, ist das kein Fehler, aber es gehört
+transparent benannt — nicht stillschweigend als Erfolg der geplanten Strategie gemeldet. Das
+gilt unabhängig davon, welche zwei Modelle konkret betroffen sind; frühere Fassungen dieses
+Skills nannten hier ein bestimmtes Modellpaar als Präzedenzfall — die Regel ist seither bewusst
+neutral gehalten, weil sie nicht an einem einzelnen Modellwechsel hängen soll.
 
 ---
 
-## 7. Kosten-Effizienz
+## 6. Kontingente, Ablauf und Rollenzuschnitt — Verweise statt Doppelpflege
 
-### Token-Ersparnis durch Routing
+Dieser Skill beantwortet **welche Rolle** und **mit welcher Sorgfalt (Effort, Review)**. Zwei
+benachbarte Fragen werden bewusst nicht hier beantwortet, um Doppelpflege zu vermeiden:
 
-| Aufgaben-Typ | Ohne Routing | Mit Routing | Ersparnis |
-|--------------|--------------|-------------|-----------|
-| Trivial | Opus-Tokens | Ollama (frei) | 100% |
-| Boilerplate | Opus-Tokens | Haiku-Tokens | ~80% |
-| Standard-Code | Opus-Tokens | Sonnet-Tokens | ~50% |
-| Recherche | Claude-Tokens | Gemini-Tokens | ~70% (anderes Budget) |
-| Code-Review | advisor()-Tokens | Codex-Tokens | ~60% (anderes Budget) |
-
----
-
-## 8. Goldene Regel
-
-> "Opus denkt, Sonnet baut, Haiku führt aus, Ollama spart. Gemini recherchiert, Codex reviewt, Fable erzählt."
+- **„Wie oft darf ich ein teures/knappes Modell einsetzen?"** → Skill `budgetierung`: Aushandlung
+  von Kontingenten je Zeitfenster, laufendes Konto, Puzzleteil-Vorverfahren vor Eskalation.
+  `budget_hint` im Katalog verweist genau hierhin.
+- **„Wie zerlege ich die Aufgabe, delegiere ich Arbeitspakete und nehme ich Ergebnisse ab?"** →
+  Skill `orchestrator` (Protokoll zum Zerlegen, Beauftragen, Abnehmen) bzw. Skill
+  `choose-your-orchestrator` (wenn die passende Orchestrierungsform selbst erst ausgehandelt
+  werden muss — Session-Vertrag für Modellslots, Parallelität, Spawn-Tiefe, Schreibgrenzen,
+  Abnahme, Eskalation).
 
 ---
 
 ## Changelog
 
+### 3.0.0 (2026-10-03) — Breaking: Modellkatalog ausgelagert
+- Modellkatalog aus dem Skill-Text entfernt und in `models.example.json` (getrackt, neutral)
+  plus eine lokale, nicht veröffentlichte Konfigurationsdatei (`models.local.json` /
+  `models.private.json`, bereits über `.gitignore` als privat erfasst) verlagert
+- Ladereihenfolge dokumentiert: lokale Datei → Beispieldatei → Live-Erhebung; bei Widerspruch
+  gewinnt die Live-Messung; `deprecated: true` wird nie eingesetzt
+- Starre Level-1-bis-4-Modellhierarchie und feste Score→Modell-Tabelle ersetzt durch fünf Rollen
+  (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation); Score
+  bleibt nur noch als grobe Orientierung
+- Abnahmepflicht für Entwurfsmodelle als eigener Abschnitt (Prüfpflicht, keine
+  Direktschreibrechte ins Zielsystem, engere Abnahme in fachlich engen Bereichen)
+- Anbieterwechsel für unabhängige Reviews als Prinzip statt fester Modellpaar-Empfehlung
+- Berechtigungsmatrix nach Modellname entfernt — Rechte hängen am Auftrag/der Autorität, nicht
+  am Modell; Guardrails sind Zuverlässigkeits-Hinweise, keine Rechteklausel
+- Konkreter Companion-1.0.4-Aufrufweg, feste Ollama/Haiku-Eskalationskette und die
+  Fable/Opus-4.8-Präzedenzregel entfernt bzw. in eine neutrale „stiller Modellwechsel ist zu
+  melden"-Regel überführt
+- Kontingente an den Skill `budgetierung`, Delegationsablauf/Rollenzuschnitt an `orchestrator`
+  und `choose-your-orchestrator` verwiesen statt doppelt gepflegt
+
 ### 2.2.0 (2026-09-02)
-- Reasoning-Effort als orthogonale Achse zur Modellwahl ergänzt (`xhigh`, gezieltes `max`, breitenorientiertes `ultracode`)
+- Reasoning-Effort als orthogonale Achse zur Modellwahl ergänzt (`xhigh`, gezieltes `max`,
+  breitenorientiertes `ultracode`)
 - Lokale Compute-Schwelle sowie Runtime-, Kosten- und Autoritätsgrenzen klargestellt
 
 ### 2.1.0 (2026-07-02)
-- PRÄZEDENZ-REGEL: Fable 5 ersetzt Opus 4.8 in allen Level-4-/Reviewer-/Beweis-Empfehlungen (User-Entscheid; Katalog v2.0.0 entstand vor Fable 5)
-- Stiller-Modellwechsel-Warnung ergänzt (Vorfall 2026-07-02, Forensik via Transkript `message.model`)
+- PRÄZEDENZ-REGEL: ein bestimmtes Modell ersetzt ein anderes in allen Level-4-/Reviewer-/
+  Beweis-Empfehlungen (User-Entscheid; inzwischen mit 3.0.0 neutralisiert)
+- Stiller-Modellwechsel-Warnung ergänzt
 
 ### 2.0.0 (2026-06-12)
-- Cross-Agent-Delegation: Gemini, Codex, Ollama (lokaler Host) als Routing-Ziele
-- Advisor-Pairing: 4 Muster (Session-Advisor, Orchestrator-als-Reviewer, Gegen-Agent, User-Empfehlung)
-- Erreichbarkeits-Matrix: LLM-startbar vs. User-only dokumentiert
-- Ollama (Qwen 3.5:35b-a3b, Haiku-bis-Sonnet-Niveau) als Level 1-2 aufgenommen
-- Laterale Eskalation: Sonnet -> Gemini (Recherche), Sonnet -> Codex (Review)
-- Ausschlüsse dokumentiert (Gemini nicht für Math)
-- Score-Schwellwerte erweitert für alle Modelle
+- Cross-Agent-Delegation: externe Agenten und ein lokales Modell als Routing-Ziele
+- Advisor-Pairing: 4 Muster (Session-Advisor, Orchestrator-als-Reviewer, Gegen-Agent,
+  User-Empfehlung)
+- Erreichbarkeits-Matrix: Subagent-startbar vs. User-only dokumentiert
+- Laterale Eskalation zu externen Agenten (Recherche, Review)
+- Score-Schwellwerte erweitert
 
 ### 1.0.0 (2026-03-15)
 - Portiert aus BACH v3.8.0 (ing-strategie v2.0.0)
 
 ---
 
-*Portiert aus BACH v3.8.0 | Erweitert um Cross-Agent + Advisor v2.0.0*
+*Portiert aus BACH v3.8.0 | Rollenbasiert seit 3.0.0*
