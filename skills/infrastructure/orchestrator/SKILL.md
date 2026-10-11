@@ -59,7 +59,7 @@ Instanz, die zerlegt, beauftragt und abnimmt:
   (Uhrzeit, Prozessliste, Existenz einer Datei) und das erneute Öffnen einer
   Datei für den Nutzer, wenn ein Worker daran gescheitert ist.
 - **Modellwahl je Worker ausdrücklich setzen.** Ein günstigeres Modell für
-  Mechanik (Bauen nach klarer Vorgabe, Committen, Readback, Nacharbeit), ein
+  Mechanik nach klarer Vorgabe (Bauen, Committen, Readback, Nacharbeit), ein
   stärkeres für größere Bauaufträge und für Zweitmodell-Reviews. Nie ohne
   Modellangabe spawnen, sonst erbt der Worker das Modell des Operators.
 - **Der Brief enthält nur, was die Regeldateien nicht wissen können:** gemessene

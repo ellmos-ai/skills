@@ -38,7 +38,8 @@ Delegation does not expand authorization. Every worker receives at most the scop
 ## Operator Regime: Think and Delegate, Never Execute Yourself
 
 This regime applies when the user asks for it or the `burst` profile
-(`operating_mode: orchestrator`) is active. The operator, i.e. the instance that
+(`operating_mode: orchestrator`; resource profiles and operating modes are
+described in the German `SKILL.md`) is active. The operator, i.e. the instance that
 breaks down, commissions, and verifies work, then follows these rules:
 
 - **Principle.** The operator is the expensive thinking model. It designs,
@@ -48,8 +49,8 @@ breaks down, commissions, and verifies work, then follows these rules:
   maintains its own memory and handoff state, makes single-call measurements
   (time, process list, existence of a file), and reopens a file for the user
   when a worker failed at it.
-- **Set the model per worker explicitly.** A cheaper model for mechanics
-  (building to a clear spec, committing, readback, rework), a stronger one for
+- **Set the model per worker explicitly.** A cheaper model for mechanics to a
+  clear spec (building, committing, readback, rework), a stronger one for
   larger build jobs and for second-model reviews. Never spawn without a model
   setting, otherwise the worker inherits the operator's model.
 - **The brief contains only what the rule files cannot know:** measured baseline
