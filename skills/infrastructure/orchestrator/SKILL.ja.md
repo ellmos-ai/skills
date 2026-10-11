@@ -20,6 +20,8 @@ provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 
+> ⚠️ **v1.4.0 (2026-10-11) に対して古い版です** — このファイルは v1.1.0 のままで、「オペレーター体制」セクションとリソースプロファイルを含みません。現行版は `SKILL.md`（ドイツ語）または `SKILL.en.md`（英語）です。このファイルは履歴参照用として残されています。
+
 > **日本語** — `orchestrator` の公式日本語版。
 
 
