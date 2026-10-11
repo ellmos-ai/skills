@@ -1,10 +1,10 @@
 ---
 name: choose-your-orchestrator
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-03
 description: >
   Wählt vor komplexer Multi-Agent-Arbeit gemeinsam mit dem Nutzer eine passende,
   begrenzte Orchestrierung und erzeugt einen kompakten Session-Vertrag. Nutze den
@@ -28,7 +28,7 @@ visibility: public
 dependencies:
   tools: []
   services: []
-  protocols: [orchestrator, swarm-operations, model-strategy, decision-avatar]
+  protocols: [orchestrator, swarm-operations, model-strategy, decision-avatar, budgetierung]
   python: []
 
 provenance:
@@ -66,6 +66,7 @@ Nutzer gegatet, sofern der aktuelle Auftrag sie nicht ausdrücklich autorisiert.
 | `model-strategy` | Fähigkeits- und modellbezogene Route anhand der Live-Verfügbarkeit | feste Modellversionen oder Berechtigungen vorgeben |
 | `clutch` | optionaler externer Routingvorschlag | alleinige Autorität für Dispatch oder Scope |
 | `decision-avatar` | optionales autorisiertes Präferenzsignal bei reversiblen Unsicherheiten | Nutzerfreigaben ersetzen oder Autorität erweitern |
+| `budgetierung` | ausgehandelte Kontingente je Zeitfenster für teure Modelle/Reviewer/Advisor, Konto und Vorverfahren vor Eskalationen | Modelle fachlich auswählen (das tut `model-strategy`) oder Kontingente eigenmächtig festlegen |
 
 Nutze `clutch route "<kurze Aufgabenbeschreibung>" --json` nur, wenn `clutch`
 tatsächlich verfügbar ist. Behandle die JSON-Antwort als Vorschlag und gleiche sie
@@ -87,7 +88,8 @@ kleinsten passenden Routenvorschlag aus der Tabelle unten.
 Zeige einen kompakten Entwurf mit:
 
 1. Bausteinen und Rollen,
-2. Modell-/Budgetslots,
+2. Modell-/Budgetslots (bei mehrstündigen Läufen oder knappen/teuren Modellen über
+   `budgetierung` aushandeln und als Konto führen),
 3. maximaler Parallelität und Spawn-Tiefe,
 4. Schreibgrenzen und Locks,
 5. Abnahme und Evidenz,
@@ -150,7 +152,7 @@ SESSION-ORCHESTRIERUNGSVERTRAG
 Ziel und Typ: <Ergebnis; Audit/Bauprogramm/Einzelbau/Ticket-Betrieb>
 Bausteine: <geladene Skills und optionale Router>
 Chef: <Planung, Denkarbeit, Integration, Evidenzabnahme>
-Worker-Slots: <Rolle/Fähigkeitsklasse je Slot; Budgetgrenze>
+Worker-Slots: <Rolle/Fähigkeitsklasse je Slot; Budgetgrenze; Budget/Konto: <budgetierung-Konto, Pfad>>
 Parallelität: <maximal aktiv>; Spawn-Tiefe: <0..N>; Matruschka: <aus/an>
 Schreibgrenzen: <ein Schreiber je Bereich; Claims; Locks; negative Scopes>
 Abnahme: <Artefakte, Tests, Diffs, Quellen; wer prüft>
@@ -179,6 +181,11 @@ die Abnahme nicht unabhängig belegt werden kann. Frage den Nutzer statt eine ne
 Produkt-, Datenschutz- oder Autoritätsentscheidung zu erraten.
 
 ## Changelog
+
+### 1.1.0 (2026-10-03)
+- `budgetierung` als Baustein für ausgehandelte Modellkontingente/Konto ergänzt
+  (Bausteine-Tabelle, Modell-/Budgetslots im Vertragsdialog, Vertragsformat-Zeile
+  Worker-Slots).
 
 ### 1.0.0 (2026-08-20)
 - Empfehlungsdialog, Routentabelle und kompakter Session-Vertrag eingeführt.

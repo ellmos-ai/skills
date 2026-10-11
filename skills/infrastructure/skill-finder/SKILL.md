@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.8.0
+version: 0.9.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-09-20
+updated: 2026-10-03
 description: >
   Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
   einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
@@ -80,6 +80,7 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | Projekt nach Sitzungsende aufräumen (Register lösen/einsortieren, Doku auf Ist-Stand bringen, Strays wegräumen) | Coding & Debugging | `tidy-up` (`/tidy-up`; zählt als `work-autonomous`-Ebene-1-Quelle) |
 | Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu verändern ("CLAUDE.md ist zu lang", "wird abgeschnitten") | Utilities | `paveman` (deterministisch, kein Modellaufruf; vs. `knappform` = LLM-Sprechstil) |
 | Mermaid-Diagramm rendert auf GitHub nicht („Unable to render rich display", „Schaltplan wird nicht angezeigt"), Mermaid-Blöcke orgweit prüfen | Coding & Debugging | `mermaid-lint` (echter Parser ohne Browser + Readback an der lebenden Seite) |
+| Modell-Budget, Kontingente, teure Reviewer/Advisor begrenzt einsetzen | Multi-Agent | `budgetierung` (Konto + Aushandlung; Modellwahl selbst: `/model-strategy`) |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -98,6 +99,11 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.9.0 (2026-10-03)
+- Routing-Zeile für neuen Skill `budgetierung` (Familie Multi-Agent): Modellkontingente
+  aushandeln, führen und anpassen — Kontobuchführung ergänzend zu `model-strategy`
+  (dort steht, *welches* Modell passt; `budgetierung` regelt, *wie viel* davon).
 
 ### 0.8.0 (2026-09-20)
 - Routing-Zeile für den neuen Skill `mermaid-lint` ergänzt (Familie Coding & Debugging):
