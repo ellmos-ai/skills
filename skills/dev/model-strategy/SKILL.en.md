@@ -1,11 +1,11 @@
 ---
 name: model-strategy
-version: 3.0.0
+version: 3.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-03
-description: Role-based multi-model strategy. The model catalog lives in a local configuration file instead of the skill text -- roles (thinker/decision-maker, long-running worker, draft generator, reviewer/acceptance, escalation), reasoning effort as an independent axis, mandatory review for draft models, provider switching for independent reviews, budgets, and delegation flow.
+updated: 2026-10-11
+description: Role-based multi-model strategy. The model catalog lives in a local configuration file instead of the skill text -- roles (thinker/decision-maker, long-running worker, draft generator, reviewer/acceptance, escalation), reasoning effort as an independent axis, mandatory review for draft models, provider switching for independent reviews, budgets, delegation flow, and cost/quality of small workers.
 
 standalone: true
 anthropic_compatible: true
@@ -86,7 +86,8 @@ swapped out, the role stays.
 
 A model can carry several roles (e.g. being both a long-running worker and an occasional
 reviewer). Which models currently fill which roles lives in the configuration (Section 0), not
-here.
+here. For the smallest worker class (cost per task, quality by task type)
+see Section 7.
 
 ### Rough difficulty orientation (not a fixed table)
 
@@ -231,7 +232,60 @@ questions are deliberately not answered here, to avoid duplicate upkeep:
 
 ---
 
+## 7. Small workers (Haiku class): quality and cost per task
+
+Measured 2026-10 (Haiku 5.5, `claude-haiku-5-5`; family at the time Fable 5.1, Opus 5.5, Sonnet 5.5,
+Haiku 5.5; about 30 runs, compared against Sonnet 5.5). Prices per million tokens (as of 2026-10-06):
+Haiku 5.5 $0.10/$0.50 (up to 100k prompt), Sonnet 5.5 $2/$10, Opus 5.5 $4/$20 — per token about 1/20
+of Sonnet and 1/40 of Opus. Prices and findings age with the models: on conflict, a fresh measurement
+wins (Section 0).
+
+**Efficiency trap: cheap per token ≠ cheap per task.** A Haiku subagent inside the Claude Code harness
+costs ~180–360k tokens of base load per task, even for a 193-line file (skill/agent/MCP listings and
+startup hooks of the harness, not the project `CLAUDE.md`; repeat measurement after shortening the
+rules file: 186k → 182k). Countermeasures:
+
+- **Bundle:** several subtasks per worker so the base load is paid once; never one subagent per document.
+- **Naive headless worker** for bulk jobs with fixed input: `claude -p --model haiku
+  --strict-mcp-config --mcp-config '{"mcpServers":{}}' --disable-slash-commands --tools Read,Write`
+  → measured $0.018 per README translation (same token profile: Sonnet ≈ $0.35, Opus ≈ $0.66).
+  `--bare` saves more but needs an API key. For very large volumes use the API/batch instead of subagents.
+- **Result as a file plus a 3–5 line report**, few tool calls.
+
+**Quality by task type (measured):**
+
+| Task type | Finding |
+|---|---|
+| Fidelity check old → new (review swarm) | very good; found errors the author and the check script missed; ~6 % false alarms |
+| Single-file code review | good; 8 real findings vs. 6 from the comparison model, every finding needs a counter-check |
+| Translation (e.g. READMEs DE→EN) | ~9/10; terminology drifts between runs → glossary; UI labels/placeholders need context |
+| Docs↔code comparison | good; no false alarms in spot checks |
+| Duplicate mapping | usable; ~85–90 % recall, ~1 false alarm per section |
+| Small, clearly specified fix with a test | good |
+| Mechanics (tests in a worktree, readbacks, status overview via `git grep`) | good; reports flakiness and blockers honestly |
+
+**Recommendations:**
+
+1. Bulk translation: very suitable, with a glossary, a 1:1 parity rule, and a spot check by a stronger model.
+2. Review swarms (fidelity, docs↔code, before/after, link/path existence): the best use — an independent second reader.
+3. Updating a documentation base in the pattern *small model maps → long-running worker writes → small model checks → thinker signs off*; never let the small model rewrite normative texts on its own.
+4. Per-file code review pre-check and small fixes with a test; mechanics (tests, readbacks, evaluations).
+5. **Not** for architecture, merge and security decisions, normative rule files, and large cross-file syntheses.
+6. Never accept results unchecked (Section 3 applies here too).
+
+**Usage rule:** This model is a draft/review tool (role *draft generator*, Section 1), not a default
+long-running worker. Productive work runs on the configured long-running worker; the small class only
+on explicit request from the user or the configuration. Prefer API/batch for bulk jobs.
+
+---
+
 ## Changelog
+
+### 3.1.0 (2026-10-11) — Small workers (Haiku class) measured
+- New Section 7: Haiku 5.5 as a worker, measured 2026-10 (quality by task type, prices, recommendations)
+- Efficiency trap documented: subagent base load ~180–360k tokens per task; countermeasures bundling,
+  naive headless worker ($0.018 per README translation), API/batch for bulk jobs
+- Usage rule: small class only on explicit request, productive work on the long-running worker
 
 ### 3.0.0 (2026-10-03) — Breaking: model catalog externalized
 - Removed the model catalog from the skill text and moved it to `models.example.json` (tracked,

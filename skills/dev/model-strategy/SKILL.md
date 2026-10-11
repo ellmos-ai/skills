@@ -1,11 +1,11 @@
 ---
 name: model-strategy
-version: 3.0.0
+version: 3.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-03
-description: Rollenbasierte Multi-Modell-Strategie. Modellkatalog liegt in einer lokalen Konfigurationsdatei statt im Skill-Text -- Rollen (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation), Reasoning-Effort als eigene Achse, Abnahmepflicht für Entwurfsmodelle, Anbieterwechsel für unabhängige Reviews, Kontingente und Delegationsablauf.
+updated: 2026-10-11
+description: Rollenbasierte Multi-Modell-Strategie. Modellkatalog liegt in einer lokalen Konfigurationsdatei statt im Skill-Text -- Rollen (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation), Reasoning-Effort als eigene Achse, Abnahmepflicht für Entwurfsmodelle, Anbieterwechsel für unabhängige Reviews, Kontingente, Delegationsablauf und Kosten/Qualität kleiner Worker.
 
 standalone: true
 anthropic_compatible: true
@@ -85,7 +85,8 @@ Modellnamen — ein Modell wird ausgetauscht, die Rolle bleibt.
 
 Ein Modell kann mehrere Rollen tragen (z. B. gleichzeitig Dauer-Worker und gelegentlicher
 Reviewer). Welche Modelle welche Rollen aktuell füllen, steht in der Konfiguration
-(Abschnitt 0), nicht hier.
+(Abschnitt 0), nicht hier. Zur kleinsten Worker-Klasse (Kosten pro Auftrag, Qualität
+je Aufgabentyp) siehe Abschnitt 7.
 
 ### Grobe Schwierigkeits-Orientierung (keine feste Tabelle)
 
@@ -232,7 +233,62 @@ benachbarte Fragen werden bewusst nicht hier beantwortet, um Doppelpflege zu ver
 
 ---
 
+## 7. Kleine Worker (Haiku-Klasse): Qualität und Kosten pro Auftrag
+
+Messung 2026-10 (Haiku 5.5, `claude-haiku-5-5`; Familie damals Fable 5.1, Opus 5.5, Sonnet 5.5,
+Haiku 5.5; rund 30 Einsätze, gegen Sonnet 5.5 verglichen). Preise je Mio. Tokens (Stand 2026-10-06):
+Haiku 5.5 $0,10/$0,50 (bis 100k Prompt), Sonnet 5.5 $2/$10, Opus 5.5 $4/$20 — pro Token ≈ 1/20
+Sonnet, 1/40 Opus. Preise und Befunde veralten mit den Modellen: bei Abweichung gilt die frische
+Messung (Abschnitt 0).
+
+**Effizienz-Falle: billig pro Token ≠ billig pro Auftrag.** Ein Haiku-Subagent im Claude-Code-Harness
+kostet ~180–360k Tokens Grundlast je Auftrag, auch für eine 193-Zeilen-Datei (Skill-/Agenten-/MCP-Listen
+und Start-Hooks des Harness, nicht die Projekt-`CLAUDE.md`; Wiederholung nach Kürzung der Regeldatei:
+186k → 182k). Gegenmittel:
+
+- **Bündeln:** mehrere Teilaufgaben je Worker, damit die Grundlast nur einmal anfällt; nie ein
+  Subagent je Dokument.
+- **Naiver Headless-Worker** für Massenaufgaben mit fester Eingabe: `claude -p --model haiku
+  --strict-mcp-config --mcp-config '{"mcpServers":{}}' --disable-slash-commands --tools Read,Write`
+  → gemessen $0,018 je README-Übersetzung (gleiches Tokenprofil: Sonnet ≈ $0,35, Opus ≈ $0,66).
+  `--bare` spart weiter, braucht aber einen API-Key. Bei sehr großen Mengen API/Batch statt Subagent.
+- **Ergebnis als Datei plus Meldung von 3–5 Zeilen**, wenige Tool-Aufrufe.
+
+**Qualität je Aufgabentyp (gemessen):**
+
+| Aufgabentyp | Befund |
+|---|---|
+| Treueprüfung alt → neu (Prüfschwarm) | sehr gut; fand Fehler, die Autor und Prüfskript übersahen; ~6 % Fehlalarme |
+| Einzeldatei-Code-Review | gut; 8 echte Funde gegen 6 des Vergleichsmodells, jeder Fund braucht Gegenprüfung |
+| Übersetzung (z. B. READMEs DE→EN) | ~9/10; Fachbegriffe schwanken zwischen Läufen → Glossar; UI-Labels/Platzhalter brauchen Kontext |
+| Doku↔Code-Abgleich | gut; keine Fehlalarme in Stichproben |
+| Dubletten-Kartierung | brauchbar; ~85–90 % Recall, ~1 Fehlalarm je Abschnitt |
+| Kleiner, klar spezifizierter Fix mit Test | gut |
+| Mechanik (Tests im Worktree, Readbacks, Lagebild per `git grep`) | gut; meldet Flakiness und Blockaden ehrlich |
+
+**Empfehlungen:**
+
+1. Massenübersetzung: sehr geeignet, mit Glossar, 1:1-Paritätsregel und Stichprobe durch ein stärkeres Modell.
+2. Prüfschwärme (Treue, Doku↔Code, Vorher/Nachher, Link-/Pfad-Existenz): der beste Einsatz — unabhängiger Zweitleser.
+3. Dokumentationsbasis aktualisieren im Muster *kleines Modell kartiert → Dauer-Worker schreibt → kleines Modell prüft → Denker nimmt ab*; normative Texte nie allein vom kleinen Modell umschreiben lassen.
+4. Code-Review-Vorprüfung je Datei und kleine Fixes mit Test; Mechanik (Tests, Readbacks, Auswertungen).
+5. **Nicht** für Architektur-, Merge- und Sicherheitsentscheidungen, normative Regeldateien und große dateiübergreifende Synthesen.
+6. Ergebnisse nie ungeprüft übernehmen (Abschnitt 3 gilt auch hier).
+
+**Einsatzregel:** Das Modell ist ein Entwurfs-/Prüf-Werkzeug (Rolle *Entwurfsgenerator*, Abschnitt 1),
+kein Standard-Dauer-Worker. Produktivarbeit läuft über den Dauer-Worker der Konfiguration; die kleine
+Klasse nur auf ausdrücklichen Auftrag des Nutzers oder der Konfiguration. Massenaufgaben bevorzugt über
+API/Batch.
+
+---
+
 ## Changelog
+
+### 3.1.0 (2026-10-11) — Kleine Worker (Haiku-Klasse) gemessen
+- Neuer Abschnitt 7: Haiku 5.5 als Worker, Messung 2026-10 (Qualität je Aufgabentyp, Preise, Empfehlungen)
+- Effizienz-Falle dokumentiert: Subagent-Grundlast ~180–360k Tokens je Auftrag; Gegenmittel Bündeln,
+  naiver Headless-Worker ($0,018 je README-Übersetzung), API/Batch für Massenaufgaben
+- Einsatzregel: kleine Klasse nur auf ausdrücklichen Auftrag, Produktivarbeit über den Dauer-Worker
 
 ### 3.0.0 (2026-10-03) — Breaking: Modellkatalog ausgelagert
 - Modellkatalog aus dem Skill-Text entfernt und in `models.example.json` (getrackt, neutral)
