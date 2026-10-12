@@ -20,6 +20,8 @@ provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 
+> ⚠️ **Desactualizada frente a v1.4.0 (2026-10-11)** — este archivo sigue en v1.1.0 y no contiene la sección «Régimen del operador» ni los perfiles de recursos. La versión vigente es `SKILL.md` (alemán) o `SKILL.en.md` (inglés); este archivo queda como referencia histórica.
+
 > **Español** — Versión oficial en español de `orchestrator`.
 
 

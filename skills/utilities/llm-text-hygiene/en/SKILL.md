@@ -3,9 +3,10 @@ language: en
 description: Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures.
 ---
 
+<img src="../banner.png" width="100%" alt="llm-text-hygiene banner">
+
 > **English** — Official English version of `llm-text-hygiene`.
 
-<img src="../banner.png" width="100%" alt="llm-text-hygiene banner">
 
 # LLM-Text-Hygiene — Remove AI residue from finished texts
 
@@ -49,6 +50,14 @@ Formulaic transitions ("In summary, it can be said", "It is important to emphasi
 5. **Document:** Record what was found/changed/marked — for papers with versioning obligations, note whether a new version/re-upload is necessary.
 6. **Periodic pass over a repository:** Combine with `rotation-check` (one document/project per run, registry as memory).
 
+**Optional tool for class 5 and AI disclosure:** On explicit user request — never
+automatically — [`pasta-press`](https://github.com/ellmos-ai/pasta-press) (public repo,
+100% local via Ollama) can be used for style refinement: `pastapress process <file>` or
+`pastapress text "…"`. Boundary from the Red Flags above: this skill does not polish
+style itself — pasta-press does not replace the reading pass, and marker cleanup
+(classes 1–4) remains this skill's own judgment call regardless of whether pasta-press
+is used.
+
 ## Signal Patterns for Mechanical Scanning
 
 | Class | Search Pattern (DE) | Search Pattern (EN) |
@@ -85,14 +94,26 @@ Request: "Check the paper for AI residue before upload."
 | "The German version is enough" | Residue often resides in only ONE version — always check all language versions and keep them in sync. |
 | "Remove disclosure, then it's clean" | Backwards: Remove LLM thank-yous, put correct disclosure IN — concealing is not hygiene. |
 
-## Related Skills
+## Related Skills & Tools
 
 - `encoding-fix` — Byte/encoding repair (mojibake); this skill works on the content level.
 - `bilingual-doc-sync` — Keeping language versions in sync where fixes are applied.
 - `rotation-check` — Scaffolding for periodic runs across a document repository.
 - `textproduction` — Text generation (this skill is the QA afterwards).
+- [`pasta-press`](https://github.com/ellmos-ai/pasta-press) — external, public tool (not a
+  skill from this library): local AI text press via Ollama for style refinement,
+  translation, and marker removal. Optional for class 5, only on user request — this
+  skill does not polish style itself (see Red Flags and Workflow).
 
 ## Changelog
+
+### 1.1.0 (2026-09-27)
+- Added `pasta-press` (public repo `ellmos-ai/pasta-press`) as an optional tool for
+  class 5 (style patterns) and AI-disclosure polish — only on user request, marker
+  cleanup remains this skill's own judgment call. "Related Skills" expanded to
+  "Related Skills & Tools". All seven language versions updated synchronously;
+  `SKILL.fr.md` was found to actually be untranslated German text under a French cover
+  page and has been retranslated as real French.
 
 ### 1.0.0 (2026-07-04)
 - Initial version. Abstracted from Codex automation "research-llm-muster-check"

@@ -1,10 +1,10 @@
 ---
 name: choose-your-orchestrator
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-03
 description: >
   Selects a suitable, bounded orchestration together with the user before complex
   multi-agent work and produces a compact session contract. Use for
@@ -27,7 +27,7 @@ status: active
 dependencies:
   tools: []
   services: []
-  protocols: [orchestrator, swarm-operations, model-strategy, decision-avatar]
+  protocols: [orchestrator, swarm-operations, model-strategy, decision-avatar, budgetierung]
   python: []
 
 provenance:
@@ -64,6 +64,7 @@ the current request explicitly authorizes them.
 | `model-strategy` | Capability- and model-based routing from live availability | Prescribing fixed model versions or permissions |
 | `clutch` | Optional external routing suggestion | Sole authority for dispatch or scope |
 | `decision-avatar` | Optional authorized preference signal for reversible uncertainty | Replacing user approval or expanding authority |
+| `budgetierung` | Negotiated per-window quotas for expensive models/reviewers/advisors, ledger, and pre-procedure before escalations | Choosing models on their merits (that's `model-strategy`'s job) or setting quotas unilaterally |
 
 Use `clutch route "<short task description>" --json` only when `clutch` is
 actually available. Treat the JSON response as a suggestion and reconcile it with
@@ -84,7 +85,8 @@ from the table below.
 Show a compact draft covering:
 
 1. building blocks and roles,
-2. model and budget slots,
+2. model and budget slots (for multi-hour runs or scarce/expensive models, negotiate
+   via `budgetierung` and keep a ledger),
 3. maximum parallelism and spawn depth,
 4. write boundaries and locks,
 5. acceptance and evidence,
@@ -145,7 +147,7 @@ SESSION ORCHESTRATION CONTRACT
 Goal and type: <outcome; audit/build program/single build/ticket operation>
 Building blocks: <loaded skills and optional routers>
 Chief: <planning, reasoning, integration, evidence acceptance>
-Worker slots: <role/capability class per slot; budget limit>
+Worker slots: <role/capability class per slot; budget limit; budget/ledger: <budgetierung ledger, path>>
 Parallelism: <maximum active>; spawn depth: <0..N>; matryoshka: <off/on>
 Write boundaries: <one writer per area; claims; locks; negative scopes>
 Acceptance: <artifacts, tests, diffs, sources; who verifies>
@@ -174,6 +176,11 @@ independently evidenced. Ask the user instead of guessing a new product, privacy
 authority decision.
 
 ## Changelog
+
+### 1.1.0 (2026-10-03)
+- Added `budgetierung` as a building block for negotiated model quotas/ledger
+  (building blocks table, model/budget slots in the contract dialogue, worker
+  slots line in the contract format).
 
 ### 1.0.0 (2026-08-20)
 - Added the recommendation dialogue, routing table, and compact session contract.

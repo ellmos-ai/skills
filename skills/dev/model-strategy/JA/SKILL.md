@@ -23,6 +23,9 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 > **日本語** — `model-strategy` の公式日本語版。
 
+> ⚠️ **v3.0.0（2026-10-03）に対して古い内容です** — このファイルは新しい設定方式（モデルカタログは
+> `models.example.json` / `models.local.json` に分離、固定レベルではなくロール制）にまだ対応していません。
+> 現在の正本は `SKILL.md`（ドイツ語）または `SKILL.en.md`（英語)です。本ファイルは旧版（v2.0.0）の参考資料として残します。
 
 # モデル切り替え戦略（日本語）
 

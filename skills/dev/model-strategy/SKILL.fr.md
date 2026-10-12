@@ -22,6 +22,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 > **Français** — Documentation officielle complète traduite en français pour la compétence `model-strategy`.
 
+> ⚠️ **Obsolète par rapport à v3.0.0 (2026-10-03)** — ce fichier n'a pas été mis à jour vers le
+> nouveau schéma de configuration (catalogue de modèles dans `models.example.json` /
+> `models.local.json`, rôles au lieu de niveaux fixes). La version de référence est `SKILL.md`
+> (allemand) ou `SKILL.en.md` (anglais) ; ce fichier reste à titre historique.
+
 
 
 > **English** — Offizielle English-Version / Documento Oficial en English.
