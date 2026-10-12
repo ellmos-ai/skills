@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.1.0
+version: 1.4.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
+updated: 2026-10-11
 description: Provider-neutral protocol for breaking down complex tasks, commissioning independent workers, and evidence-based verification of their results.
 standalone: true
 anthropic_compatible: true
@@ -34,6 +34,56 @@ The skill describes a protocol. The actual starting, pausing, and resuming of wo
 ## Authority Limit
 
 Delegation does not expand authorization. Every worker receives at most the scope and modification rights that already apply to the main task. External, irreversible, or otherwise approval-requiring actions remain subject to approval.
+
+## Operator Regime: Think and Delegate, Never Execute Yourself
+
+This regime applies when the user asks for it or the `burst` profile
+(`operating_mode: orchestrator`; resource profiles and operating modes are
+described in the German `SKILL.md`) is active. The operator, i.e. the instance that
+breaks down, commissions, and verifies work, then follows these rules:
+
+- **Principle.** The operator is the expensive thinking model. It designs,
+  decides, verifies, and integrates; every execution goes to a worker: file
+  edits, screenshots, renderings, commits, pushes, research, measurement series,
+  creating image or media assets, even mini-edits. The operator itself only
+  maintains its own memory and handoff state, makes single-call measurements
+  (time, process list, existence of a file), and reopens a file for the user
+  when a worker failed at it.
+- **Set the model per worker explicitly.** A cheaper model for mechanics to a
+  clear spec (building, committing, readback, rework), a stronger one for
+  larger build jobs and for second-model reviews. Never spawn without a model
+  setting, otherwise the worker inherits the operator's model.
+- **The brief contains only what the rule files cannot know:** measured baseline
+  values, decisions made in the conversation (quote the user's instructions
+  verbatim), scope limits, abort conditions, the name of the lock file for the
+  sub-area (never the project-wide lock for partial changes, never touch a
+  user lock), review paths, commit trailers, and a cap on the report length
+  (e.g. 2 to 6 lines). Pass on the reasons so the worker can hit the intent when
+  the letter does not fit.
+- **Review before commit for anything the user judges** (graphics, texts,
+  layouts): the worker saves the result as a review file (check full paths
+  first), opens it in the user's default application, reports, and waits. The
+  commit follows only after the approval, which the operator relays verbatim.
+  For iterations always use new file names (a, b, c ...), never overwrite.
+- **Workers wait actively, not idle.** For serial resources (a tool that allows
+  only one run at a time), chain on the predecessor's output file or poll in
+  the foreground in bounded calls; never hope for a notification that may not
+  arrive. On a collision, end your own run and queue behind.
+- **Never discard foreign changes in the working directory:** secure them on a
+  rescue branch, read them line by line, then certify or archive them.
+  Security-relevant code is not merged by a worker but reported; a model other
+  than the author reviews it.
+- **Results count only with a readback at the destination,** not at the place
+  of creation (e.g. an API response with size or checksum; for animations two
+  time-shifted captures with a measurable difference; for private sources a
+  parser or API proof instead of a browser picture).
+- **The operator collects the leftovers:** file open points with context and
+  next step, measure times instead of guessing, secure insights in the memory
+  system. Report only decisions and results to the user; do not pass on the
+  workers' idle confirmations.
+- **Why:** The thinking model is too expensive for execution, and executing
+  operators overlook readbacks. An operator that does not have the destination
+  checked reports successes that never arrived there.
 
 ## Process
 
@@ -113,6 +163,18 @@ Stop the entire delegation if:
 - the required evidence cannot be generated or verified.
 
 ## Changelog
+
+### 1.4.0 (2026-10-11)
+- Added the section "Operator Regime: Think and Delegate, Never Execute
+  Yourself": the operator thinks, decides, verifies, and integrates; every
+  execution (even mini-edits) goes to workers. Covers model choice per worker,
+  brief content (only what cannot be looked up), review before commit for
+  user-judged results, active waiting on serial resources, handling of foreign
+  changes, the readback duty at the destination, and collecting leftovers.
+  Applies on the user's request or in the `burst` profile.
+- English text brought to this version for that section only; the resource
+  profile sections of 1.2.0 and 1.3.x exist only in the German `SKILL.md`.
+- No change to process steps 1-5, authority limit, or stop conditions.
 
 ### 1.1.0 (2026-07-28)
 - Removed user, path, model, and provider bindings.

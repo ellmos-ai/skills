@@ -56,11 +56,12 @@ Erstelle und betreibe eine native, anbieterneutrale **Textbasierte Governance- u
    AUFGABE: <Konkrete Arbeitsanweisungen, Kriterien, Schwellenwerte>
    
    --- GOVERNANCE, WORKFLOW & HOOKS ---
-   1. POLICY: file:///<USER_HOME>/.gemini/AUTOMATION_POLICY.md
-   2. PREFLIGHT & MEMORY: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md
-   3. PATHS & AUTHORITY: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md
-   4. WORKFLOW HYGIENE & LOCKS: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md
-   5. LOGGING: Registriere Ergebnisse in 'AUTOMATIONS-MEMORY.md' & 'ANTIGRAVITY-LOG.txt'.
+   1. POLICY: Lies eine lokale `~/.gemini/AUTOMATION_POLICY.md`, falls vorhanden; der Pfad ist in letter-hooker `config.example.json` konfigurierbar.
+   2. DOCUMENT TRAVERSAL: ../letter-hooker/hooks/bootloader_doc_traversal.md
+   3. PREFLIGHT & MEMORY: ../letter-hooker/hooks/preflight_gardener_query.md
+   4. PATHS & AUTHORITY: ../letter-hooker/hooks/path_validation_and_authority.md
+   5. WORKFLOW HYGIENE & LOCKS: ../letter-hooker/hooks/workflow_lock_and_git_hygiene.md
+   6. LOGGING: Registriere Ergebnisse in 'AUTOMATIONS-MEMORY.md' & 'ANTIGRAVITY-LOG.txt'.
    ```
 2. **Vier-Stufen-Modellallokation (Budget & Leistungsstufen)**:
    - **Tier 1 (High-Speed & Routine-Hygiene):** `Gemini 3.6 Flash (High)` (Wächter-Tasks, Token-Tracker, Verzeichnis-Sync, Umlaute, MCP-Pflege).
@@ -94,7 +95,7 @@ TGAS ist vollständig **anbieterneutral** und bildet alle Desktop-KI-Agenten-Fra
 | **ChatGPT / Headless CLI** | OS Cron / Windows Aufgabenplanung | YAML- / JSON-Deskriptoren | Provider-APIs / Open-Compute |
 
 Detaillierte Implementierungsschemata und Fähigkeiten-Profile sind dokumentiert in:
-- [provider-adapter-contract.md](references/provider-adapter-contract.md) (Konkrete Provider-Adapter, Capability-Profile JSON-Schema und Mutations-Verträge)
+- [provider-adapter-contract.md](references/provider-adapter-contract.md) (Capability-Profile JSON-Schema und Mutations-Verträge)
 - [core-set.md](references/core-set.md) (Detaillierte Topologie- und Evidenzregeln)
 
 ---

@@ -1,0 +1,147 @@
+{
+  "_comment": "Neutrale Vorlage der kanonischen Skill-Bibliothek. Modellnamen, Pfade und Aufrufmuster hier sind Platzhalter, keine echten Produkte. Jeder Nutzer legt sich eine eigene 'models.local.json' (oder 'models.private.json') im selben Ordner an -- beide Namensmuster sind bereits in der .gitignore ausgeschlossen (skills/**/*.local.* / skills/**/*.private.*) und werden NIE veroeffentlicht. Ohne lokale Datei siehe SKILL.md Abschnitt 'Konfiguration': der Skill erhebt die verfuegbaren Modelle live statt zu raten.",
+  "schema_version": "1.0.0",
+  "roles": {
+    "_comment": "Fuenf Rollen, auf die SKILL.md referenziert. Ein Modell kann mehrere roles tragen.",
+    "thinker": "Denken/Entscheiden: Architektur, Strategie, mehrdeutige Anforderungen, Abwaegung von Alternativen",
+    "worker": "Dauer-Worker: laufende Umsetzung, Standard-Implementierung, Debugging, Routinearbeit ueber viele Schritte",
+    "draft": "Entwurfsgenerator: schnelle erste Fassungen (Design, Text, Code, Struktur) -- grundsaetzlich mit Abnahmepflicht, siehe guardrails",
+    "reviewer": "Reviewer/Abnahme: prueft Ergebnisse anderer Modelle, bevorzugt bei einem anderen Anbieter als der Ersteller",
+    "escalation": "Eskalation: wird nur gezielt fuer den einzelnen schwierigsten Schritt hinzugezogen, nie fuer den ganzen Lauf"
+  },
+  "models": [
+    {
+      "id": "example-thinker-large",
+      "provider": "example-provider-a",
+      "deprecated": false,
+      "roles": ["thinker", "escalation"],
+      "effort_levels": ["low", "medium", "high", "max"],
+      "invoke": {
+        "runtime": "native-subagent",
+        "pattern": "Agent(model:\"<alias>\")"
+      },
+      "strengths": [
+        "Architektur- und Strategieentscheidungen",
+        "Abwaegung widerspruechlicher Anforderungen"
+      ],
+      "weaknesses": [
+        "Teuer/knapp -- nicht fuer Routineaufgaben einsetzen"
+      ],
+      "guardrails": [
+        "nur gezielt fuer den schwierigsten Einzelschritt eskalieren, nicht fuer den ganzen Lauf"
+      ],
+      "budget_hint": "siehe Skill budgetierung",
+      "verified": false,
+      "note": "Platzhalter -- in der lokalen Config durch das reale Modell ersetzen"
+    },
+    {
+      "id": "example-worker-standard",
+      "provider": "example-provider-a",
+      "deprecated": false,
+      "roles": ["worker"],
+      "effort_levels": ["low", "medium", "high"],
+      "invoke": {
+        "runtime": "native-subagent",
+        "pattern": "Agent(model:\"<alias>\")"
+      },
+      "strengths": [
+        "Implementierung, Debugging, Standardaufgaben ueber viele Schritte"
+      ],
+      "weaknesses": [],
+      "guardrails": [],
+      "budget_hint": "siehe Skill budgetierung",
+      "verified": false,
+      "note": "Platzhalter fuer den Dauer-Worker dieses Anbieters"
+    },
+    {
+      "id": "example-fast-worker",
+      "provider": "example-provider-a",
+      "deprecated": false,
+      "roles": ["worker", "draft"],
+      "effort_levels": ["low", "medium"],
+      "invoke": {
+        "runtime": "native-subagent",
+        "pattern": "Agent(model:\"<alias>\")"
+      },
+      "strengths": [
+        "Boilerplate, Formatierung, einfache gut abgegrenzte Teilaufgaben"
+      ],
+      "weaknesses": [
+        "schwach bei mehrdeutigen oder mehrstufigen Entscheidungen"
+      ],
+      "guardrails": [
+        "Ergebnisse vor Uebernahme pruefen (Entwurfsgenerator-Status)"
+      ],
+      "budget_hint": "siehe Skill budgetierung",
+      "verified": false,
+      "note": "Beispiel fuer ein kleines/schnelles Modell im eigenen Bestand -- nur aufnehmen, wenn tatsaechlich belegt verfuegbar"
+    },
+    {
+      "id": "example-draft-multimodal",
+      "provider": "example-provider-b",
+      "deprecated": false,
+      "roles": ["draft"],
+      "effort_levels": ["low", "medium", "high"],
+      "invoke": {
+        "runtime": "external-cli",
+        "pattern": "<cli-binary> --add-dir <arbeitsverzeichnis> --model <modell> --effort <stufe> -p \"<prompt>\""
+      },
+      "strengths": [
+        "Design-/Bild-/Video-/Audio-Entwuerfe, schnelles Aufbauen von Strukturen"
+      ],
+      "weaknesses": [
+        "schnell, aber fehleranfaellig -- Ergebnisse sind IMMER Entwuerfe"
+      ],
+      "guardrails": [
+        "nur Entwurf -- niemals ohne Abnahme uebernehmen",
+        "schreibt bevorzugt NICHT selbst in das Zieldateisystem; Ergebnis zurueckgeben lassen und selbst einsetzen"
+      ],
+      "budget_hint": "siehe Skill budgetierung",
+      "verified": false,
+      "note": "Beispiel fuer ein externes schnelles, aber unzuverlaessiges Entwurfsmodell"
+    },
+    {
+      "id": "example-reviewer-strict",
+      "provider": "example-provider-c",
+      "deprecated": false,
+      "roles": ["reviewer", "escalation"],
+      "effort_levels": ["high", "xhigh", "max"],
+      "invoke": {
+        "runtime": "external-cli",
+        "pattern": "<cli-binary> exec -m <modell> -c model_reasoning_effort=\"<stufe>\""
+      },
+      "strengths": [
+        "unabhaengige Zweitmeinung bei einem anderen Anbieter als der Ersteller",
+        "formale/mathematische Pruefung, Code-Review"
+      ],
+      "weaknesses": [],
+      "guardrails": [
+        "streng budgetiert einsetzen -- siehe Skill budgetierung"
+      ],
+      "budget_hint": "siehe Skill budgetierung",
+      "verified": false,
+      "note": "Beispiel fuer einen knappen, teuren Abnahme-/Review-Spezialisten bei einem anderen Anbieter"
+    },
+    {
+      "id": "example-legacy-model",
+      "provider": "example-provider-a",
+      "deprecated": true,
+      "roles": [],
+      "effort_levels": [],
+      "invoke": {
+        "runtime": "native-subagent",
+        "pattern": "Agent(model:\"<alte-alias>\")"
+      },
+      "strengths": [],
+      "weaknesses": [
+        "durch ein neueres Modell desselben Anbieters abgeloest"
+      ],
+      "guardrails": [
+        "nicht mehr einsetzen -- siehe SKILL.md Abschnitt Konfiguration"
+      ],
+      "budget_hint": null,
+      "verified": false,
+      "note": "Beispiel fuer einen Katalogeintrag, der bewusst stehen bleibt (Historie/Erkennung), aber nie mehr gewaehlt wird"
+    }
+  ]
+}
