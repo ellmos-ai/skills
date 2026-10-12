@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.3.0
+version: 1.4.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-08-24
+updated: 2026-10-11
 description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
 standalone: true
 anthropic_compatible: true
@@ -44,6 +44,56 @@ Delegation erweitert keine Berechtigung. Jeder Worker erhält höchstens den Sco
 und die Änderungsrechte, die für die Hauptaufgabe bereits gelten. Externe,
 irreversible oder anderweitig freigabepflichtige Aktionen bleiben
 freigabepflichtig.
+
+## Operator-Regime: denken und delegieren, nie selbst ausführen
+
+Dieses Regime gilt, wenn der Nutzer es verlangt oder das Profil `burst`
+(`operating_mode: orchestrator`) aktiv ist. Dann gilt für den Operator, also die
+Instanz, die zerlegt, beauftragt und abnimmt:
+
+- **Grundsatz.** Der Operator ist das teure Denkmodell. Er entwirft, entscheidet,
+  prüft und integriert; jede Ausführung geht an einen Worker: Datei-Edits,
+  Screenshots, Renderings, Commits, Pushes, Recherchen, Messreihen, Erzeugen von
+  Bild- oder Medien-Assets, auch Mini-Edits. Selbst tut der Operator nur die
+  Pflege seines eigenen Gedächtnisses und Übergabestands, Ein-Aufruf-Messungen
+  (Uhrzeit, Prozessliste, Existenz einer Datei) und das erneute Öffnen einer
+  Datei für den Nutzer, wenn ein Worker daran gescheitert ist.
+- **Modellwahl je Worker ausdrücklich setzen.** Ein günstigeres Modell für
+  Mechanik nach klarer Vorgabe (Bauen, Committen, Readback, Nacharbeit), ein
+  stärkeres für größere Bauaufträge und für Zweitmodell-Reviews. Nie ohne
+  Modellangabe spawnen, sonst erbt der Worker das Modell des Operators.
+- **Der Brief enthält nur, was die Regeldateien nicht wissen können:** gemessene
+  Ausgangswerte, im Gespräch getroffene Festlegungen (wörtliche Nutzervorgaben
+  zitieren), Scope-Grenzen, Abbruchbedingungen, den Namen der Sperrdatei für den
+  Teilbereich (nie die Projekt-Sperre für Teiländerungen, nie eine
+  Nutzer-Sperre anfassen), Review-Pfade, Commit-Trailer und eine Obergrenze für
+  den Bericht (z. B. 2 bis 6 Zeilen). Begründungen mitgeben, damit der Worker
+  die Absicht trifft, wenn der Buchstabe nicht passt.
+- **Review vor Commit bei allem, was der Nutzer beurteilt** (Grafiken, Texte,
+  Layouts): Der Worker legt das Ergebnis als Review-Datei ab (Vollpfade vorher
+  prüfen), öffnet es im Standardprogramm des Nutzers, meldet und wartet. Der
+  Commit folgt erst nach der Freigabe, die der Operator wörtlich weitergibt.
+  Bei Iterationen immer neue Dateinamen (a, b, c …), nie überschreiben.
+- **Worker warten aktiv, nicht idle.** Auf serielle Ressourcen (ein Werkzeug,
+  das nur einen Lauf gleichzeitig zulässt) per Kette auf die Ausgabedatei des
+  Vorgängers oder mit Vordergrund-Polling in begrenzten Aufrufen warten, nie auf
+  eine Benachrichtigung hoffen, die ausbleiben kann. Bei Kollision den eigenen
+  Lauf beenden und hinten einreihen.
+- **Fremdänderungen im Arbeitsverzeichnis nie verwerfen:** auf einen
+  Rescue-Branch sichern, Zeile für Zeile lesen, dann zertifizieren oder
+  archivieren. Sicherheitsrelevanter Code wird nicht vom Worker gemerged,
+  sondern gemeldet; ein anderes Modell als der Autor prüft.
+- **Ergebnisse gelten nur mit Readback am Zielort,** nicht am Ort der
+  Erzeugung (z. B. API-Antwort mit Größe oder Prüfsumme; bei Animationen zwei
+  zeitversetzte Aufnahmen mit messbarem Unterschied; bei privaten Quellen ein
+  Parser- oder API-Beleg statt des Browserbilds).
+- **Der Operator sammelt Reste ein:** offene Punkte mit Kontext und nächstem
+  Schritt ablegen, Uhrzeiten messen statt schätzen, Erkenntnisse im
+  Gedächtnissystem sichern. Dem Nutzer nur Entscheidungen und Ergebnisse
+  melden; Idle-Bestätigungen der Worker nicht weiterreichen.
+- **Warum:** Das Denkmodell ist für Ausführung zu teuer, und ausführende
+  Operatoren übersehen Readbacks. Ein Operator, der den Zielort nicht selbst
+  prüfen lässt, meldet Erfolge, die dort nicht angekommen sind.
 
 ## Ablauf
 
@@ -118,6 +168,10 @@ und Schwellenwerte darin sind Beispiele des jeweiligen Nutzers, keine Vorgabe
 des Skills. Der Skill selbst bleibt nutzer-, pfad-, modell- und
 providerneutral (siehe Changelog 1.1.0) — Pfade zu persönlichen Werkzeugen
 gehören ausschließlich in die lokale `config.json`, nie in diesen Text.
+
+Profile begrenzen die Parallelität; zeitbezogene Kontingente für teure Modelle,
+Reviewer oder Advisor (z. B. „2 Reviews je Stunde") samt Konto regelt der Skill
+`budgetierung`.
 
 ### profiles.json — benannte Ressourcenprofile
 
@@ -256,6 +310,24 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Änderungsprotokoll
+
+### 1.4.0 (2026-10-11)
+- Abschnitt „Operator-Regime: denken und delegieren, nie selbst ausführen"
+  ergänzt: Der Operator denkt, entscheidet, prüft und integriert, jede
+  Ausführung (auch Mini-Edits) geht an Worker. Deckt Modellwahl je Worker, den
+  Briefinhalt (nur Nicht-Nachschlagbares), Review vor Commit bei
+  nutzerbeurteilten Ergebnissen, aktives Warten auf serielle Ressourcen, den
+  Umgang mit Fremdänderungen, die Readback-Pflicht am Zielort und die
+  Resteinsammlung ab. Gilt auf Verlangen des Nutzers oder im Profil `burst`.
+- Allgemeingültiger Teil einer lokalen Fassung gleicher Nummer; personen-,
+  host- und vorfallgebundene Begründungen bleiben bewusst außerhalb des
+  öffentlichen Repos.
+- Kein Eingriff in Ablauf 1–5, Autoritätsgrenze, Ressourcenprofil oder
+  Stop-Bedingungen.
+
+### 1.3.1 (2026-10-03)
+- Ressourcenprofil: Satz ergänzt, dass zeitbezogene Modellkontingente samt Konto
+  der Skill `budgetierung` regelt (Profile selbst begrenzen nur die Parallelität).
 
 ### 1.3.0 (2026-08-24)
 - Delta zu Ticket T-20260824-552689035 (Ist-Stand 1.2.0 hatte bereits

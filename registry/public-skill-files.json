@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1060,
+  "file_count": 1062,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -426,6 +426,8 @@
     "skills/infrastructure/automation-self-care/SKILL.zh.md",
     "skills/infrastructure/backup/SKILL.en.md",
     "skills/infrastructure/backup/SKILL.md",
+    "skills/infrastructure/budgetierung/SKILL.en.md",
+    "skills/infrastructure/budgetierung/SKILL.md",
     "skills/infrastructure/choose-your-orchestrator/SKILL.en.md",
     "skills/infrastructure/choose-your-orchestrator/SKILL.md",
     "skills/infrastructure/cloud-communication-protocols/SKILL.en.md",
