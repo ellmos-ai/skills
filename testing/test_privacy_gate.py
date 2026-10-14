@@ -298,5 +298,93 @@ class ThirdPartyGateTests(unittest.TestCase):
         self.assertNotIn("CC-BY-NC-4.0", REDISTRIBUTABLE_LICENSES)
 
 
+class DependencyGateTests(unittest.TestCase):
+    """T-20260927-285118525: a declared dependency the repo cannot verify is
+    the same "looks portable, isn't" leak as a placeholder file:// link --
+    just hidden in the frontmatter instead of the body. V1 is WARN_ONLY."""
+
+    def setUp(self) -> None:
+        self.root = privacy_gate.REPOSITORY_ROOT
+        self.skill_dir = self.root / "skills/utilities/zz-test-deps"
+        self.other_skill_dir = self.root / "skills/utilities/zz-test-deps-protocol"
+        self.addCleanup(self._cleanup)
+
+    def _cleanup(self) -> None:
+        import shutil
+
+        for folder in (self.skill_dir, self.other_skill_dir):
+            shutil.rmtree(folder, ignore_errors=True)
+
+    def _write(self, folder: Path, frontmatter_deps_line: str) -> str:
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "SKILL.md").write_text(
+            "---\nname: zz-test\ndescription: test\n"
+            f"{frontmatter_deps_line}\n---\n\n# Demo\n",
+            encoding="utf-8",
+        )
+        return (folder / "SKILL.md").relative_to(self.root).as_posix()
+
+    def test_missing_own_script_warns(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [ghost_script.py]"
+        )
+        warnings = privacy_gate.dependency_warnings({relative})
+        self.assertTrue(any("ghost_script.py" in w for w in warnings))
+
+    def test_shipped_own_script_is_not_flagged(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [present_script.py]"
+        )
+        (self.skill_dir / "present_script.py").write_text("", encoding="utf-8")
+        warnings = privacy_gate.dependency_warnings(
+            {relative, "skills/utilities/zz-test-deps/present_script.py"}
+        )
+        self.assertEqual([], warnings)
+
+    def test_stdlib_module_is_not_flagged(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [json, urllib.request]"
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_bare_external_tool_is_not_flagged(self) -> None:
+        relative = self._write(self.skill_dir, "dependencies:\n  tools: [git, gh]")
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_flow_style_dict_form_is_declared_external_and_skipped(self) -> None:
+        relative = self._write(
+            self.skill_dir,
+            "dependencies: {'python': [{'name': 'feedparser', 'optional': True, "
+            "'install': 'pip install feedparser'}]}",
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_private_protocol_dependency_warns(self) -> None:
+        protocol_relative = self._write(
+            self.other_skill_dir, "visibility: private-only"
+        )
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  protocols: [zz-test-deps-protocol]"
+        )
+        warnings = privacy_gate.dependency_warnings({relative, protocol_relative})
+        self.assertTrue(any("zz-test-deps-protocol" in w for w in warnings))
+
+    def test_unresolvable_protocol_name_is_not_a_skill_ref(self) -> None:
+        """A protocols entry not matching any skill directory is an external
+        protocol description (e.g. "ICS / iCalendar"), not a broken link."""
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  protocols: [some-external-protocol]"
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_dependency_warnings_never_block(self) -> None:
+        """V1 is WARN_ONLY: run_gate()'s errors must stay unaffected."""
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [ghost_script.py]"
+        )
+        self.assertTrue(privacy_gate.dependency_warnings({relative}))
+        self.assertNotIn("ghost_script.py", "\n".join(privacy_gate.run_gate()))
+
+
 if __name__ == "__main__":
     unittest.main()

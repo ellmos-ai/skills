@@ -21,7 +21,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: [agy_kontext_and_workflow_loader.py]
+  python: [scripts/agy_kontext_and_workflow_loader.py]
 provenance:
   origin: "fork of automation-self-care"
   origin_path: "skills/infrastructure/automation-self-care"
@@ -37,7 +37,7 @@ provenance:
 
 **Letter-Hooker** Skill 为缺乏原生事件驱动型 JSON 生命周期钩子加载器（例如 `~/.claude/settings.json` 或 `~/.codex/hooks.json`）的 AI Agent 框架（如 **Antigravity / Gemini CLI**）扩展了 `automation-self-care`。
 
-`letter-hooker` 并非依赖按键触发的被动式钩子，而是通过定时任务和维护脚本（`agy_kontext_and_workflow_loader.py`）运行**主动的 Prompt 级预检 Bootloader 与 Letter-Hook 注入循环**。
+`letter-hooker` 并非依赖按键触发的被动式钩子，而是通过定时任务和维护脚本（`scripts/agy_kontext_and_workflow_loader.py`）运行**主动的 Prompt 级预检 Bootloader 与 Letter-Hook 注入循环**。
 
 ---
 
@@ -48,7 +48,7 @@ provenance:
    - **Memory 与 Gardener 预检**：在执行破坏性或复杂修改前，必须向 `gardener` 和 `memoryhooker` 发起预检查询。
 
 2. **Letter Hooks 目录与参考链接**：
-   - 模块化 `.md` 指令文件，存储于 `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/` 下。
+   - 模块化 `.md` 指令文件，存储于 `hooks/` 下。
    - 将显式的 `file://` 链接直接注入 `sidecar.json` 提示词文本中，以便 Agent 在调用时读取精确的安全与工作流协议。
 
 3. **每日关键词列表与自愈式 Prompt 增强**：
@@ -62,10 +62,10 @@ provenance:
 
 ## 核心 Letter Hooks
 
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -73,10 +73,12 @@ provenance:
 
 ```bash
 # Execute the Letter-Hooker Maintenance Engine
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+请从 `letter-hooker` 技能目录运行此命令。关键词列表会生成在 `<SYNC_DIR>/STICHWORTLISTE.json`；`<SYNC_DIR>` 可在 `config.json` 中配置。
+
 1. **扫描 Sidecar**：读取 `~/.gemini/config/sidecars/` 中的所有 `sidecar.json` Prompt 文本。
-2. **更新关键词列表**：提取领域术语并保存至 `.SYNC/STICHWORTLISTE.json`。
+2. **更新关键词列表**：提取领域术语并保存至 `<SYNC_DIR>/STICHWORTLISTE.json`。
 3. **注入 Letter Hooks**：在 Prompt 中追加 Bootloader 规则和 `file://` 参考链接。
 4. **记录结果**：将更新记录至 `ANTIGRAVITY-LOG.txt` 与 `ANTIGRAVITY-REGISTRY.md`。
