@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.5.0
+version: 1.5.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -322,6 +322,12 @@ Lockscan, Quellhashprüfung und atomarer Neuanlage.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.5.1 (2026-10-15)
+- Reguläre Thinking-Metadaten neben dem JSON-Reparaturtext verarbeiten;
+  Tool-Blöcke, unbekannte Antworttypen und Antworten ohne JSON-Text abweisen.
+- Regression mit gespeicherten echten Providerantworten und eindeutiger
+  Modulauswahl im Testprozess abgesichert.
 
 ### 1.5.0 (2026-10-15)
 - Begrenzte semantische Korrekturen mit vollständiger Quell-, Kandidaten-, Review-

@@ -11,10 +11,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPTS = Path(os.environ.get("WORLDSET_SCRIPTS", Path(__file__).resolve().parent))
+MODULE_DIR = Path(__file__).resolve().parent
+SCRIPTS = Path(os.environ.get("WORLDSET_SCRIPTS", MODULE_DIR))
 if not (SCRIPTS / "worldset.py").is_file():
     raise RuntimeError("set WORLDSET_SCRIPTS to the canonical scripts directory")
-sys.path.insert(0, str(SCRIPTS))
+sys.path[:0] = [str(MODULE_DIR), str(SCRIPTS)]
 
 import worldset_repair as repair
 import worldset_review
@@ -46,6 +47,10 @@ class FakeAPI:
 
 class RepairTests(unittest.TestCase):
     def setUp(self):
+        self.assertEqual(
+            Path(repair.__file__).resolve(),
+            (MODULE_DIR / "worldset_repair.py").resolve(),
+        )
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.workspace = Path(self.temp.name)
@@ -525,6 +530,71 @@ class RepairTests(unittest.TestCase):
                     (out / "candidates" / (self.job["id"] + ".md")).exists()
                 )
 
+    def test_collect_accepts_native_thinking_and_redacted_thinking_before_text(self):
+        receipt = self._receipt()
+        for name, prelude in (
+            (
+                "thinking",
+                {
+                    "type": "thinking",
+                    "thinking": "private reasoning",
+                    "signature": "signed",
+                },
+            ),
+            ("redacted", {"type": "redacted_thinking", "data": "opaque"}),
+        ):
+            with self.subTest(name=name):
+                row = self._row()
+                row["result"]["message"]["content"].insert(0, prelude)
+                out = self.staging / name
+                summary = repair.collect(
+                    lambda row=row: FakeAPI(rows=[row]), receipt, out, self.root
+                )
+                self.assertEqual(summary["counts"], {"review_required": 1})
+                self.assertTrue(
+                    (out / "candidates" / (self.job["id"] + ".md")).exists()
+                )
+
+    def test_collect_holds_unknown_blocks_and_thinking_without_text(self):
+        receipt = self._receipt()
+        for name, content in (
+            (
+                "tool_use",
+                [
+                    {"type": "tool_use", "id": "tool-1"},
+                    {"type": "text", "text": json.dumps(self.patch)},
+                ],
+            ),
+            (
+                "unknown",
+                [
+                    {"type": "future_block"},
+                    {"type": "text", "text": json.dumps(self.patch)},
+                ],
+            ),
+            (
+                "thinking_only",
+                [
+                    {
+                        "type": "thinking",
+                        "thinking": "private reasoning",
+                        "signature": "signed",
+                    }
+                ],
+            ),
+        ):
+            with self.subTest(name=name):
+                row = self._row()
+                row["result"]["message"]["content"] = content
+                out = self.staging / name
+                summary = repair.collect(
+                    lambda row=row: FakeAPI(rows=[row]), receipt, out, self.root
+                )
+                self.assertEqual(summary["counts"], {"held": 1})
+                self.assertFalse(
+                    (out / "candidates" / (self.job["id"] + ".md")).exists()
+                )
+
     def test_collect_holds_duplicate_json_keys_and_nonfinite_response(self):
         receipt = self._receipt()
         for name, body in (
@@ -590,7 +660,7 @@ class RepairTests(unittest.TestCase):
                 "-O",
                 "-c",
                 code,
-                json.dumps([str(SCRIPTS), str(Path(__file__).parent)]),
+                json.dumps([str(MODULE_DIR), str(SCRIPTS)]),
                 json.dumps(self.job),
                 str(self.root),
             ],

@@ -736,16 +736,30 @@ def _response(message: object, expected_model: str) -> dict:
     )
     check(message.get("stop_reason") == "end_turn", "incomplete repair response")
     blocks = message.get("content")
+    check(isinstance(blocks, list) and bool(blocks), "repair response has no blocks")
+    texts = []
+    for block in blocks:
+        check(isinstance(block, dict), "invalid repair response block")
+        kind = block.get("type")
+        if kind == "text":
+            check(isinstance(block.get("text"), str), "invalid repair text block")
+            texts.append(block["text"])
+        elif kind == "thinking":
+            check(
+                isinstance(block.get("thinking"), str)
+                and isinstance(block.get("signature"), str),
+                "invalid repair thinking block",
+            )
+        elif kind == "redacted_thinking":
+            check(
+                isinstance(block.get("data"), str),
+                "invalid redacted repair thinking block",
+            )
+        else:
+            raise ValueError("unsupported repair response block type")
     check(
-        isinstance(blocks, list)
-        and bool(blocks)
-        and all(
-            isinstance(block, dict)
-            and block.get("type") == "text"
-            and isinstance(block.get("text"), str)
-            for block in blocks
-        ),
-        "repair response contains non-text blocks",
+        texts and any(text.strip() for text in texts),
+        "repair response has no text JSON",
     )
 
     def unique_object(pairs):
@@ -759,7 +773,7 @@ def _response(message: object, expected_model: str) -> dict:
         raise ValueError("non-finite repair response value: " + value)
 
     value = json.loads(
-        "".join(block["text"] for block in blocks),
+        "".join(texts),
         object_pairs_hook=unique_object,
         parse_constant=reject_constant,
     )
