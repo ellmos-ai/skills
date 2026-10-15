@@ -103,6 +103,7 @@
         "fr",
         "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -234,6 +235,7 @@
         "fr",
         "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -490,7 +492,8 @@
       "description": "Use when the user wants to send the same prompt to several LLMs and compare the answers - sequentially (stopwatch, clean per-lane timing) or in parallel (true race), with optional repetitions per model, judged by the starting model across quality, correctness, completeness, instruction fidelity and latency (time is only one dimension). Triggers on /compare-race, 'model race', 'vergleiche modelle', 'gleicher prompt an mehrere modelle'.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ja"
       ]
     },
     {
@@ -1144,7 +1147,8 @@
       "description": "Plant, spiegelt, verifiziert, stellt wieder her oder archiviert Dateien explizit über den fail-closed mac-backup-Kern. Für die eigenen hostübergreifenden Backup-Jobs des Nutzers verwenden; nicht für allgemeine Cloud-Synchronisation oder beiläufiges Dateikopieren.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
@@ -1186,7 +1190,8 @@
       "description": "Dach-Skill für Cloud-gestützte Kommunikationsprotokolle zwischen Agenten auf unterschiedlichen Maschinen (Ping-Pong, agent-beam, Listener und künftige Protokolle). Nutzen, wenn Arbeit über Maschinen hinweg per gemeinsamem Sync-Ordner oder Message-Yard koordiniert wird.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
@@ -1409,7 +1414,8 @@
       "description": "Betreibt eine zeitlich begrenzte, sitzungsgebundene Funkstelle über einen gemeinsam synchronisierten Ordner. ListenSync scannt systematisch nach Aufträgen und Neuigkeiten; WriteSync versendet Deltas und Receipts. Verwenden bei PingPong, Dosentelefon, ListenSync, WriteSync, Sync-Listener, Auftragswache, News-Scan oder Goal-/Loop-Überwachung.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
