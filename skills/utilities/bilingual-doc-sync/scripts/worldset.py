@@ -22,6 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from markdown_it import MarkdownIt
+from markdown_it.rules_inline.backticks import backtick
 
 LANGS = dict(de="German", en="English", es="Spanish", zh="Simplified Chinese",
              ja="Japanese", ru="Russian", fr="French", hi="Hindi",
@@ -139,10 +140,51 @@ def protect(source: str) -> tuple[str, list[str], str]:
         token = f"ZXQPROTECT{len(chunks)-1:06d}QXZ"
         protected = protected[:first] + token + protected[j-1:]
         pos = first + len(token) + 1
-    pattern = (r"(?s)(`+)(?!`)(.+?)(?<!`)\1(?!`)"
-               r"|<!--.*?-->|<[^>\n]+>|(?m:^\[[^\]]+\]:[^\n]+)"
-               r"|\$\$.*?\$\$|\$[^$\n]+\$|https?://[^\s<>]+")
+    # A code span can cross soft line breaks, but never a Markdown block
+    # boundary. Unmatched backticks in prose must not hide later paragraphs.
+    lines = protected.splitlines(keepends=True)
+    inline_ranges = {t.map[0]: t.map[1] for t in MarkdownIt('commonmark').parse(protected)
+                     if t.type == 'inline' and t.map}
+    parts, i = [], 0
+    while i < len(lines):
+        if i in inline_ranges:
+            j = inline_ranges[i]
+            segment = ''.join(lines[i:j])
+            spans = []
+            def capture_code(state, silent):
+                start, count = state.pos, len(state.tokens)
+                matched = backtick(state, silent)
+                if not silent and any(t.type == 'code_inline' for t in state.tokens[count:]):
+                    spans.append((start, state.pos))
+                return matched
+            parser = MarkdownIt('commonmark')
+            parser.inline.ruler.at('backticks', capture_code)
+            parser.parseInline(segment)
+            for start, end in reversed(spans):
+                chunks.append(segment[start:end])
+                segment = segment[:start] + f'ZXQPROTECT{len(chunks)-1:06d}QXZ' + segment[end:]
+            parts.append(segment)
+            i = j
+        else:
+            parts.append(lines[i])
+            i += 1
+    protected = ''.join(parts)
+
+    def save_url(m):
+        url = m.group(0)
+        while url:
+            end = url[-1]
+            if end in '.,;' or (end in ')]}' and url.count(end) > url.count({')': '(', ']': '[', '}': '{'}[end])):
+                url = url[:-1]
+            else:
+                break
+        chunks.append(url)
+        return f'ZXQPROTECT{len(chunks)-1:06d}QXZ' + m.group(0)[len(url):]
+
+    pattern = (r'(?s)<!--.*?-->|<[^>\n]+>|(?m:^\[[^\]]+\]:[^\n]+)'
+               r'|\$\$.*?\$\$|\$[^$\n]+\$')
     protected = re.sub(pattern, save, protected)
+    protected = re.sub(r'https?://[^\s<>。，、；：！？（）「」『』【】]+', save_url, protected)
     return protected, chunks, fm
 
 
@@ -182,8 +224,35 @@ def gates(source: str, translated: str, lang: str) -> list[str]:
     # Remove our metadata comment before structural comparison.
     translated = re.sub(r"^<!-- worldset: .*?-->\n", "", translated)
     tp, tchunks, tfm = protect(translated)
-    if chunks != tchunks:
+    if Counter(chunks) != Counter(tchunks):
         errors.append("protected_regions_changed")
+    # Inline identifiers may move with target-language grammar. Executable
+    # blocks and HTML tag nesting retain their original order.
+    def ordered_regions(text, protected_chunks):
+        body = split_frontmatter(text)[1]
+        lines = body.splitlines(keepends=True)
+        code = [''.join(lines[t.map[0]:t.map[1]]) for t in MarkdownIt('commonmark').parse(body)
+                if t.type in ('fence', 'code_block') and t.map]
+        tags = [x for x in protected_chunks if re.match(r'</?[A-Za-z][\w:-]*(?:\s|/?>)', x)]
+        return code, tags
+    if ordered_regions(source, chunks) != ordered_regions(translated, tchunks):
+        errors.append('protected_region_order')
+    def inline_regions(text):
+        fm, body = split_frontmatter(text)
+        lines = body.splitlines(keepends=True)
+        description = DESCRIPTION.search(fm)
+        desc_values = protect(description.group(1))[1] if description else []
+        regions = [(Counter(desc_values), [v for v in desc_values if re.search(r'https?://', v)])]
+        for t in MarkdownIt('commonmark').parse(body):
+            if t.type == 'inline' and t.map:
+                values = protect(''.join(lines[t.map[0]:t.map[1]]))[1]
+                # Link labels and destinations must retain their association;
+                # inline command arguments can still follow local grammar.
+                links = [v for v in values if re.search(r'https?://', v)]
+                regions.append((Counter(values), links))
+        return regions
+    if inline_regions(source) != inline_regions(translated):
+        errors.append('protected_region_context')
     sb, tb = split_frontmatter(source)[1], split_frontmatter(translated)[1]
     for name, pattern in [("headings", r"^#{1,6}(?=\s)"), ("table_rows", r"^\s*\|"),
                           ("list_items", r"^\s*(?:[-*+] |\d+[.)] )")]:
@@ -293,7 +362,10 @@ def params(job, model, glossary=None, retry=False):
             "Return only the translated DESCRIPTION envelope and Markdown, without the source tags.\n"
             "<source_document>\n" + body + "\n</source_document>\n"
             f"End of source data. Now provide the complete {LANGS[lang]} translation.")
-    return dict(model=model, max_tokens=24000, system=system,
+    output_limit = job.get('max_output_tokens', 24000)
+    if type(output_limit) is not int or not 1 <= output_limit <= 128000:
+        raise ValueError('invalid output token limit')
+    return dict(model=model, max_tokens=output_limit, system=system,
                 messages=[dict(role="user", content=user)], thinking={"type": "disabled"},
                 output_config={"effort": "low"})
 
@@ -391,9 +463,21 @@ def collect(api: API, receipt: Path, out: Path):
 def retry_projection(receipt: dict, results: dict) -> dict:
     if receipt['batch_id'] != results['batch_id']:
         raise ValueError('results do not belong to this batch')
-    failed = {r['id'] for r in results['records'] if r['status'] == 'gate_failed'}
-    jobs = [dict(j, retry=True) for j in receipt['jobs'] if j['id'] in failed and not j.get('retry')]
-    return dict(schema='worldset-projection-v1', retry_of=receipt['batch_id'], jobs=jobs)
+    failed = {r['id']: r for r in results['records'] if r['status'] == 'gate_failed'}
+    jobs, oversized = [], []
+    for j in receipt['jobs']:
+        if j['id'] not in failed or j.get('retry'):
+            continue
+        result = failed[j['id']]
+        retry = dict(j, retry=True, review_feedback='Mechanical validation: ' + ', '.join(result.get('errors', [])))
+        if result.get('stop_reason') == 'max_tokens':
+            previous_limit = j.get('max_output_tokens', 24000)
+            if previous_limit >= 128000:
+                oversized.append(j['id'])
+                continue
+            retry['max_output_tokens'] = min(128000, max(64000, previous_limit * 2))
+        jobs.append(retry)
+    return dict(schema='worldset-projection-v1', retry_of=receipt['batch_id'], jobs=jobs, requires_segmentation=oversized)
 
 
 def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, owner: str):

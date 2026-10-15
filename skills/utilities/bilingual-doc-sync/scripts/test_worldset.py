@@ -10,6 +10,7 @@ from worldset import (
     check_writer,
     collect,
     gates,
+    params,
     protect,
     restore,
     retry_projection,
@@ -53,6 +54,65 @@ def english():
 
 
 class TranslationTests(unittest.TestCase):
+    def test_output_limit_retry_increases_capacity_once(self):
+        batch = dict(batch_id='a', jobs=[dict(id='x', max_output_tokens=24000)])
+        result = dict(batch_id='a', records=[dict(id='x', status='gate_failed', stop_reason='max_tokens')])
+        retry = retry_projection(batch, result)['jobs'][0]
+        self.assertEqual(retry['max_output_tokens'], 64000)
+        self.assertEqual(retry_projection(dict(batch_id='a', jobs=[retry]), result)['jobs'], [])
+        full = dict(batch_id='a', jobs=[dict(id='x', max_output_tokens=128000)])
+        self.assertEqual(retry_projection(full, result)['requires_segmentation'], ['x'])
+        for value in (True, 0, 128001):
+            with self.assertRaises(ValueError):
+                params(dict(source_text='Text', language='en', max_output_tokens=value), 'fixture')
+
+    def test_unmatched_backticks_do_not_hide_later_prose(self):
+        source = 'Prüft jeden ```mermaid-Block.\n\n# Prüfen\n\nDie Dateien werden geprüft.\n\nJeder ```mermaid-Block zählt.\n'
+        p, chunks, _ = protect(source)
+        self.assertIn('Die Dateien werden geprüft.', p)
+        self.assertFalse(any('Dateien' in c for c in chunks))
+        p, chunks, _ = protect('Use `multi\nline code` here.\n')
+        self.assertIn('`multi\nline code`', chunks)
+
+    def test_bare_url_sentence_punctuation_and_balanced_parentheses(self):
+        _, chunks, _ = protect('See https://example.org/a_(b). Also (https://example.org/x).\n')
+        self.assertEqual(chunks, ['https://example.org/a_(b)', 'https://example.org/x'])
+
+    def test_inline_identifiers_may_reorder_but_executable_blocks_may_not(self):
+        src = 'Use `first` with `second`.\n'
+        target = 'With `second`, use `first`.\n'
+        self.assertEqual(gates(src, target, 'en'), [])
+        src = '```sh\nfirst\n```\n\n```sh\nsecond\n```\n'
+        target = '```sh\nsecond\n```\n\n```sh\nfirst\n```\n'
+        self.assertIn('protected_region_order', gates(src, target, 'en'))
+
+    def test_inline_values_cannot_move_to_a_different_paragraph(self):
+        for first, second in [('`--force`', '`--dry-run`'), ('https://a.example', 'https://b.example')]:
+            src = f'# Delete\n\nUse {first}.\n\n# Preview\n\nUse {second}.\n'
+            target = f'# Delete\n\nUse {second}.\n\n# Preview\n\nUse {first}.\n'
+            self.assertIn('protected_region_context', gates(src, target, 'en'))
+
+    def test_escaped_backticks_remain_translatable_prose(self):
+        text = r'Use \`Prüfen Sie alle Dateien und öffnen Sie das Protokoll ohne Freigabe\` during review.'
+        p, chunks, _ = protect(text)
+        self.assertIn('Prüfen Sie alle Dateien', p)
+        self.assertFalse(any('Dateien' in c for c in chunks))
+        self.assertIn('german_residue', gates(text, text, 'en'))
+
+    def test_urls_end_at_cjk_punctuation_but_keep_empty_query(self):
+        _, chunks, _ = protect('https://example.org/x。を参照してください。')
+        self.assertEqual(chunks, ['https://example.org/x'])
+        src = 'See https://example.org/search?\n'
+        self.assertIn('protected_regions_changed', gates(src, src.replace('search?', 'search'), 'en'))
+
+    def test_same_paragraph_link_target_swap_is_rejected(self):
+        src = '[Delete](https://example.org/delete) and [Preview](https://example.org/preview).'
+        target = '[Delete](https://example.org/preview) and [Preview](https://example.org/delete).'
+        self.assertIn('protected_region_context', gates(src, target, 'en'))
+        src = '---\nname: x\ndescription: "Delete via https://a.example/delete and preview via https://b.example/preview today."\n---\nBody.\n'
+        target = src.replace('https://a.example/delete', 'TEMP').replace('https://b.example/preview', 'https://a.example/delete').replace('TEMP', 'https://b.example/preview')
+        self.assertIn('protected_region_context', gates(src, target, 'en'))
+
     def test_roundtrip_protects_code_links_and_metadata(self):
         translated = restore(SOURCE, english(), 'en', 'fixture', sha(SOURCE.encode()))
         self.assertEqual(gates(SOURCE, translated, 'en'), [])

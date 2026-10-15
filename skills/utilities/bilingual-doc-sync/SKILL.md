@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.3.0
+version: 1.3.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -234,12 +234,50 @@ Zielzustand und Locks erneut prüfen; danach reguläre Repository-, Privacy-,
 Commit- und Deployment-Gates ausführen. Hintergrundbetrieb nur über den bereits
 zuständigen Scheduler mit dessen Claim- und Ressourcenvertrag.
 
+### Separate API-Sprachprüfung
+
+`scripts/worldset_review.py` bereitet bestandene Kandidaten für eine unabhängige
+Sprachprüfung vor. Der Übersetzer bleibt Haiku; das Prüfmodell wird separat
+angegeben. Erst eine anhand bereits geprüfter Beispiele kontrollierte Probe
+verwenden, dann den weiteren Prüfumfang anhand der Fehlerquote festlegen.
+
+```bash
+python scripts/worldset_review.py prepare --translation-receipt batch.json --results-dir staging --out review-plan.json
+python scripts/worldset_review.py submit --projection review-plan.json --receipt review-batch.json --model claude-sonnet-5-5
+python scripts/worldset_review.py collect --receipt review-batch.json --out review-results
+```
+
+Die Prüfung liest jede ausgewählte Quelle und Fassung vollständig. Ihre
+Entscheidung ist an Quellhash, Kandidatenhash, Pfade, Sprache und tatsächlich
+beobachtetes Prüfmodell gebunden. Bedeutungsfehler und fehlende lokale Trigger
+blockieren die Übernahme auch bei hohem Gesamtwert. Wegen der Fehlerquote im
+Pilot verlangt der automatische Prüfer mindestens 4,5 von 5 Punkten.
+Fehlerhafte oder gekürzte
+Prüfantworten bleiben zurückgestellt. Die erzeugten `reviews-<batch-id>.json`
+sind Eingaben für `worldset.py apply`; die Sprachprüfung schreibt keine Ziele.
+Ein automatisches Urteil ersetzt keine projektspezifische Endabnahme.
+
+`retry-plan` erlaubt einen Korrekturlauf. Bei `max_tokens` wird dessen
+Ausgabelimit gezielt auf mindestens 64.000 erhöht; nach einem bereits
+ausgeschöpften Limit von 128.000 ist eine Aufteilung nötig. Die Freigabe der
+API-Kosten und das Verbot automatischer Guthabenaufladung gelten weiterhin.
+Rohdaten und eingefrorene Schutzverträge abgeschlossener Batches erhalten.
+Neue Parserregeln dürfen ältere Markerzuordnungen nicht nachträglich ersetzen.
+Bei nackten URLs ohne Trennzeichen zum Folgetext kann die Grenze mehrdeutig
+sein; solche Fälle bleiben zur Formatprüfung zurückgestellt. Eindeutige
+Markdown-Links oder Trennzeichen verhindern diese Mehrdeutigkeit.
+
 ## Verwandte Skills
 
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.3.1 (2026-10-15)
+- Separate, hashgebundene API-Sprachprüfung ergänzt; Code-Spans anhand des
+  CommonMark-Parsers geschützt, URL- und Absatzzuordnung geprüft und begrenzte
+  Korrekturläufe nach ausgeschöpftem Ausgabelimit ermöglicht.
 
 ### 1.3.0 (2026-10-15)
 - Autorisierte Serienübersetzungen mit unveränderlichen Eingabeprojektionen,
