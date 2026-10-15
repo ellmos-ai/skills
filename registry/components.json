@@ -83,6 +83,7 @@
         "fr",
         "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -263,7 +264,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -282,7 +284,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -301,7 +306,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar"
       ]
     },
     {
@@ -320,7 +326,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -358,7 +368,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -377,7 +390,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi"
       ]
     },
     {
@@ -415,7 +429,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -453,7 +468,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -502,7 +521,9 @@
         "de",
         "en",
         "es",
+        "zh",
         "ja",
+        "ru",
         "fr"
       ]
     },
@@ -522,7 +543,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -541,7 +565,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn"
       ]
     },
     {
@@ -560,7 +587,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -598,7 +628,8 @@
         "ja",
         "ru",
         "fr",
-        "ar"
+        "ar",
+        "pt"
       ]
     },
     {
@@ -613,7 +644,9 @@
       "languages": [
         "de",
         "en",
-        "ja"
+        "ja",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -648,7 +681,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -681,7 +715,10 @@
       "description": "Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr",
+        "hi",
+        "pt"
       ]
     },
     {
@@ -720,7 +757,8 @@
         "ja",
         "ru",
         "fr",
-        "hi"
+        "hi",
+        "pt"
       ]
     },
     {
@@ -739,7 +777,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -758,7 +797,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar"
       ]
     },
     {
@@ -772,7 +812,9 @@
       "description": "Reißverschluss-Verfahren (englisch: zipper merge) für sehr konfliktreiche Merges: Wenn zwei divergente Branches oder ein PR und sein Zielbranch BEIDE wertvolle, unvereinbar erscheinende Änderungen tragen, wird nicht pauschal eine Seite gewählt, sondern Abschnitt für Abschnitt verglichen, per Entscheidungstabelle (Nimm/Warum) die jeweils bessere Version übernommen, abschnittsweise committet und erst am Ende gepusht. Letzte Eskalationsstufe: Rebuild statt Merge — nur die Absicht/Funktionalität des Branches übernehmen und auf dem aktuellen Stand neu bauen. Nutzen bei: \"Merge-Konflikt\", \"divergente Branches\", \"main vs. master\", \"konfliktreicher PR\", \"zipper merge\", \"Reißverschluss\", \"beide Seiten haben Recht\", \"PR ist zu alt zum Mergen\".",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh"
       ]
     },
     {
@@ -808,7 +850,9 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi"
       ]
     },
     {
@@ -823,6 +867,8 @@
       "languages": [
         "de",
         "en",
+        "ja",
+        "bn",
         "pt"
       ]
     },
@@ -838,6 +884,11 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
+        "ja",
+        "fr",
+        "ar",
         "pt"
       ]
     },
@@ -856,7 +907,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr"
       ]
     },
     {
@@ -889,7 +941,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar"
       ]
     },
     {
@@ -908,7 +961,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "bn"
       ]
     },
     {
@@ -927,7 +981,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -946,7 +1002,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1003,7 +1060,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1022,7 +1080,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1080,7 +1139,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn"
       ]
     },
     {
@@ -1132,7 +1193,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1195,7 +1260,10 @@
       "description": "Wählt vor komplexer Multi-Agent-Arbeit gemeinsam mit dem Nutzer eine passende, begrenzte Orchestrierung und erzeugt einen kompakten Session-Vertrag. Nutze den Skill bei /choose-your-orchestrator, bei unsicherer Kombination aus Orchestrator, Schwarm, Modellrouting oder Nutzerpräferenzmodell sowie vor Agentenprogrammen, die Modellslots, Parallelität, Spawn-Tiefe, Schreibgrenzen, Abnahme und Eskalation ausdrücklich festlegen müssen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1210,7 +1278,9 @@
       "languages": [
         "de",
         "en",
-        "fr"
+        "es",
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1243,7 +1313,10 @@
       "languages": [
         "de",
         "en",
-        "fr"
+        "es",
+        "fr",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1277,7 +1350,9 @@
       "languages": [
         "de",
         "en",
-        "fr"
+        "es",
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1296,7 +1371,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -1315,7 +1392,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "pt"
       ]
     },
     {
@@ -1334,7 +1413,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1372,7 +1452,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "bn"
       ]
     },
     {
@@ -1401,6 +1482,7 @@
       "languages": [
         "de",
         "en",
+        "ru",
         "fr"
       ]
     },
@@ -1454,7 +1536,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi"
       ]
     },
     {
@@ -1511,7 +1594,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1568,7 +1652,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar"
       ]
     },
     {
@@ -1587,7 +1673,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn"
       ]
     },
     {
@@ -1606,7 +1694,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1620,7 +1709,8 @@
       "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es"
       ]
     },
     {
@@ -1790,7 +1880,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -1904,7 +1995,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "bn"
       ]
     },
     {
@@ -1923,7 +2015,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -2036,7 +2129,9 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "hi",
+        "pt"
       ]
     },
     {
@@ -2113,7 +2208,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2187,7 +2286,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "pt"
       ]
     },
     {
@@ -2206,7 +2306,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -2267,7 +2369,8 @@
       "description": "Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze diesen Skill bei \"gib mir das kurz mit Pro Contra und Empfehlung\", \"executive summary zur Entscheidung\", \"kurzkontext zu <Thema>\", \"fass die Entscheidung X in einer Kurzform zusammen\", /decision-shot, oder wenn ein Ergebnis an jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen, um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ru"
       ]
     },
     {
@@ -2286,7 +2389,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn"
       ]
     },
     {
@@ -2305,7 +2410,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2338,7 +2446,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -2456,6 +2567,7 @@
       "languages": [
         "de",
         "en",
+        "es",
         "ru",
         "hi"
       ]
@@ -2476,7 +2588,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2542,7 +2658,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "pt"
       ]
     },
     {
@@ -2561,7 +2679,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2580,7 +2701,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn"
       ]
     },
     {
@@ -2599,7 +2722,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "pt"
       ]
     },
     {
@@ -2618,7 +2742,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "bn"
       ]
     }
   ]
