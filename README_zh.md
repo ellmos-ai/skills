@@ -133,7 +133,7 @@ flowchart TD
 | <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.zh.md) | 无 Hook CLI Agent 的预检引导器：在每个回合前注入治理规则、记忆遍历和自愈上下文，无需原生 JSON 事件 Hook。 |
 | <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | 基于共享同步文件夹的会话级电台：分离非对称角色（`ListenSync` 侦听者 vs `WriteSync` 发送者），实现无需中心服务器的异步多 Agent 协作。 |
 | <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | 多 Agent 协作的会话契约协商器：在执行开始前约束编排拓扑、并发性、模型槽位和升级触发条件。 |
-| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | 严重分歧分支的拉链式合并协议：使用决策表逐节对比，以意图重构（“重构而非合并”）作为最终升级阶段。 |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.zh.md) | 严重分歧分支的拉链式合并协议：使用决策表逐节对比，以意图重构（“重构而非合并”）作为最终升级阶段。 |
 | <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.zh.md) | 使用包装器和 MOVED 存根的演进式文件与模块重命名：在引用随使用自然更新的过程中，防止 Agent 集群发生中断。 |
 | <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.zh.md) | Pipeline 的分类学 2x2 指南针：防止语言模型的脚手架偏向，精确路由到适合的新手引导、启动器或重构技能。 |
 | <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | 确定性的 3 角色会话结束清理循环：在不蔓延新计划的情况下解决待办日常任务，将文档同步至测量实况，并可逆归档游离文件。 |

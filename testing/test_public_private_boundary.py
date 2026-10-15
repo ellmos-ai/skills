@@ -16,6 +16,13 @@ LANGUAGES = {
     "SKILL.ru.md": "ru",
     "SKILL.zh.md": "zh",
 }
+WORLD_SET_LANGUAGES = {
+    **LANGUAGES,
+    "SKILL.hi.md": "hi",
+    "SKILL.ar.md": "ar",
+    "SKILL.bn.md": "bn",
+    "SKILL.pt.md": "pt",
+}
 PUBLIC_CORES = [
     "skills/assist/buero",
     "skills/assist/finanz-versicherung",
@@ -44,17 +51,20 @@ def frontmatter_value(text: str, key: str) -> str | None:
 
 
 class PublicPrivateBoundaryTests(unittest.TestCase):
-    def test_every_public_core_has_complete_language_set(self) -> None:
+    def test_public_cores_preserve_required_and_allow_world_set_languages(self) -> None:
         for relative in PUBLIC_CORES:
             skill_dir = REPOSITORY_ROOT / relative
             with self.subTest(skill=relative):
-                self.assertEqual(set(LANGUAGES), {path.name for path in skill_dir.glob("SKILL*.md")})
+                present = {path.name for path in skill_dir.glob("SKILL*.md")}
+                self.assertLessEqual(set(LANGUAGES), present)
+                self.assertLessEqual(present, set(WORLD_SET_LANGUAGES))
 
     def test_language_frontmatter_matches_filename(self) -> None:
         for relative in PUBLIC_CORES:
-            for filename, language in LANGUAGES.items():
-                path = REPOSITORY_ROOT / relative / filename
+            for path in sorted((REPOSITORY_ROOT / relative).glob("SKILL*.md")):
                 with self.subTest(path=path):
+                    self.assertIn(path.name, WORLD_SET_LANGUAGES)
+                    language = WORLD_SET_LANGUAGES[path.name]
                     text = path.read_text(encoding="utf-8")
                     self.assertEqual(language, frontmatter_value(text, "language"))
                     self.assertEqual("2.0.0", frontmatter_value(text, "version"))
@@ -62,8 +72,7 @@ class PublicPrivateBoundaryTests(unittest.TestCase):
 
     def test_private_bindings_are_absent_from_public_bodies(self) -> None:
         for relative in PUBLIC_CORES:
-            for filename in LANGUAGES:
-                path = REPOSITORY_ROOT / relative / filename
+            for path in sorted((REPOSITORY_ROOT / relative).glob("SKILL*.md")):
                 body = re.sub(
                     r"^---\s*\n.*?\n---\s*\n",
                     "",

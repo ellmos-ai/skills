@@ -121,7 +121,7 @@ flowchart TD
 | <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.ja.md) | 憲法上の重ね合わせ（「未生者の位置」）：5-CORE 監査と反実仮想分析を通じて、短期的最適化に対する未来世代のアルゴリズム的拒否権を付与。 |
 | <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | エージェントの手抜きを防ぐ証明ベースの非終了プロトコル（WAAFAP）：終了条件を反転させ、ループの終了にタスク不存在の反証可能な証明を要求。 |
 | <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | ゼロステート・プライバシー配信パターン：SQLite-WASM/OPFS とクライアント側 BYOK によりブラウザ内で SQLite を実行し、サーバー DB や GDPR 責任を排除。 |
-| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | 双方向 UI プロンプト統合（「クリックがプロンプト」）：ビルド段階なしで GUI 設計と指示を同期させる 4D 凡例付き型定義 ASCII ブループリント。 |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.ja.md) | 双方向 UI プロンプト統合（「クリックがプロンプト」）：ビルド段階なしで GUI 設計と指示を同期させる 4D 凡例付き型定義 ASCII ブループリント。 |
 | <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.ja.md) | おもねりや時期尚早な終了を防ぐため、実行時プリフライトチェックに統合された神経心理学的実行制御機能（抑制、作業記憶、メンタルリハーサル）。 |
 | <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | 決定論的でモデル不要のルール圧縮：LLM 推論や幻覚、意味ドリフトなしに、Markdown ルールとメモリのトークン量を最大 40% 削減。 |
 | <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.ja.md) | 見失った AI エージェントのための普遍的航海ナビゲーション：コンテキストのドリフトやループに陥った際の回復ヒューリスティクスと状態再構築。 |
@@ -133,8 +133,8 @@ flowchart TD
 | <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.ja.md) | ラッパーと MOVED スタブを用いた進化的なファイル・モジュール改名：利用を通じて参照が自然に更新される間、破壊的変更を防止。 |
 | <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.ja.md) | パイプラインのための 2x2 分類コンパス：LLM のスキャフォールディング偏向を防ぎ、適切なオンボーディングや改修スキルに案内。 |
 | <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | 決定論的な 3 役セッション終了衛生ループ：新たな課題を作らずに保留タスクを解決し、実態に合わせてドキュメントを同期。 |
-| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | 非同期の人間参加型パイプライン：ユーザーが項目 N をテストする間にエージェントが項目 N+1 を開始し、待機時間を排除。 |
-| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Cut-and-Clue による意味論的ファイル整理：発生元に機械可読ポインタを残して現行と過去のファイルを分離し、分類とログを保持。 |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.ja.md) | 非同期の人間参加型パイプライン：ユーザーが項目 N をテストする間にエージェントが項目 N+1 を開始し、待機時間を排除。 |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.ja.md) | Cut-and-Clue による意味論的ファイル整理：発生元に機械可読ポインタを残して現行と過去のファイルを分離し、分類とログを保持。 |
 | <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | トピックプールやフィルタ、再シャッフルバンドルにより候補リストを段階的に削減し、残りを破棄せずグループ単位で選択・混合。 |
 
 ## 公開領域と非公開領域
