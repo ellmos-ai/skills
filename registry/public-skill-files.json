@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1258,
+  "file_count": 1260,
   "files": [
     "skills/assist/buero/SKILL.ar.md",
     "skills/assist/buero/SKILL.bn.md",
@@ -392,8 +392,10 @@
     "skills/dev/reissverschluss-merge/SKILL.zh.md",
     "skills/dev/repo-publish-check/SKILL.en.md",
     "skills/dev/repo-publish-check/SKILL.es.md",
+    "skills/dev/repo-publish-check/SKILL.hi.md",
     "skills/dev/repo-publish-check/SKILL.ja.md",
     "skills/dev/repo-publish-check/SKILL.md",
+    "skills/dev/repo-publish-check/SKILL.pt.md",
     "skills/dev/repo-publish-check/SKILL.ru.md",
     "skills/dev/repo-publish-check/SKILL.zh.md",
     "skills/dev/rotation-check/SKILL.en.md",
