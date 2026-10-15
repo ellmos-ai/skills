@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.4.0
+version: 1.5.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -279,12 +279,54 @@ Bei nackten URLs ohne Trennzeichen zum Folgetext kann die Grenze mehrdeutig
 sein; solche Fälle bleiben zur Formatprüfung zurückgestellt. Eindeutige
 Markdown-Links oder Trennzeichen verhindern diese Mehrdeutigkeit.
 
+## Gezielte semantische Korrekturen
+
+`scripts/worldset_repair.py` bearbeitet vollständige Kandidaten, die die
+mechanischen Prüfungen bestehen, deren Sprachprüfung oder Operatorprüfung aber
+konkrete Fehler gefunden hat. Die Eingabe enthält Originalbatch und ID,
+vollständige Quelle und Kandidatenfassung, deren Hashes, das tatsächlich
+beobachtete Übersetzungsmodell, den vollständigen unabhängigen Reviewdatensatz
+und konkrete `repair_feedback`. Bei getrennten Quellbeständen jeden Bestand mit
+seiner eigenen `--repository-root` vorbereiten.
+
+```bash
+python scripts/worldset_repair.py --repository-root repo prepare --cases repair-cases.json --out repair-plan.json
+python scripts/worldset_repair.py --repository-root repo submit --projection repair-plan.json --receipt repair-batch.json
+python scripts/worldset_repair.py --repository-root repo collect --receipt repair-batch.json --out repair-staging
+```
+
+Der Reparaturauftrag bindet Quelle, Kandidat, vollständigen Review und Feedback
+an eine neue ID. Vor dem API-Aufruf müssen die aktuelle Quelle und das noch
+fehlende Ziel passen. Der native Batch bleibt das einzige Ausführungshandle;
+ein reserviertes Receipt nach unklarem Submit darf nicht erneut eingereicht
+werden. Der API-Schlüssel bleibt auf dem ausführenden Host. Bei verschiedenen
+Hosts eine separat abgelegte, per Hash geprüfte Quellkopie als Eingabewurzel
+verwenden; sie ersetzt nicht die erneute Prüfung der echten Quelle beim Apply.
+
+Haiku liefert höchstens 16 eindeutige, nicht überlappende Ersetzungen. Code,
+Links, Sprache und Provenienz bleiben geschützt; nur der Zeitstempel im
+Frontmatter wird vom Collector angepasst. Nach der letzten Änderung laufen
+die vollständigen mechanischen Prüfungen erneut. Vorhandene Zielfassungen und
+README-Kandidaten ohne YAML-Frontmatter sind für diesen Reparaturweg
+ausgeschlossen; diese Grenze wird bereits vor dem Submit geprüft.
+
+Das Ergebnis bleibt `review_required`. Danach mit `worldset_review.py` eine
+neue vollständige unabhängige Sprachprüfung durchführen und alle Befunde
+zusätzlich auflösen. Der frühere Review ist keine Freigabe des reparierten
+Kandidaten. Erst danach gilt der bestehende Apply-Vertrag mit frischem
+Lockscan, Quellhashprüfung und atomarer Neuanlage.
+
 ## Verwandte Skills
 
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.5.0 (2026-10-15)
+- Begrenzte semantische Korrekturen mit vollständiger Quell-, Kandidaten-, Review-
+  und Feedbackbindung, nativen Receipts und erneuter unabhängiger Sprachprüfung
+  ergänzt; explizite Prüfungen bleiben auch unter optimiertem Python aktiv.
 
 ### 1.4.0 (2026-10-15)
 - Deklarierte oder explizite Quellsprachen, flache Bibliotheken und vorhandene
