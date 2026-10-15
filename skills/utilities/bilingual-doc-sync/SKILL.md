@@ -1,6 +1,6 @@
 ---
 name: bilingual-doc-sync
-version: 1.3.1
+version: 1.4.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
@@ -236,6 +236,15 @@ zuständigen Scheduler mit dessen Claim- und Ressourcenvertrag.
 
 ### Separate API-Sprachprüfung
 
+Beim Scan gilt die deklarierte Quellsprache, sonst der deutsche Standard für
+eigene Skills. Für englische Fremdquellen ist \`--source-language en\` explizit
+anzugeben; \`--kind skills-flat\` unterstützt eine flache Skill-Bibliothek.
+\`--source-languages\` lädt bei gemischten Beständen eine geprüfte JSON-Zuordnung
+von relativem Quellpfad zu Sprachcode. Die Originalquelle bleibt erhalten;
+fehlende deutsche Fassungen werden dann als \`SKILL.de.md\` angelegt.
+Vorhandene ältere Sprachordner wie \`EN/SKILL.md\` oder \`fr/SKILL.md\` zählen als
+erhaltene Fassungen und werden nicht durch konkurrierende Dateien ergänzt.
+
 `scripts/worldset_review.py` bereitet bestandene Kandidaten für eine unabhängige
 Sprachprüfung vor. Der Übersetzer bleibt Haiku; das Prüfmodell wird separat
 angegeben. Erst eine anhand bereits geprüfter Beispiele kontrollierte Probe
@@ -276,6 +285,11 @@ Markdown-Links oder Trennzeichen verhindern diese Mehrdeutigkeit.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.4.0 (2026-10-15)
+- Deklarierte oder explizite Quellsprachen, flache Bibliotheken und vorhandene
+  ältere Sprachordner beim Scan berücksichtigt, einschließlich deutscher
+  Zielfassungen englischer Quellen.
 
 ### 1.3.1 (2026-10-15)
 - Separate, hashgebundene API-Sprachprüfung ergänzt; Code-Spans anhand des

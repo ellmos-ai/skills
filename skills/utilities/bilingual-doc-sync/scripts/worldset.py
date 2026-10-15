@@ -188,7 +188,7 @@ def protect(source: str) -> tuple[str, list[str], str]:
     return protected, chunks, fm
 
 
-def restore(source: str, output: str, lang: str, model: str, source_hash: str, contract=None) -> str:
+def restore(source: str, output: str, lang: str, model: str, source_hash: str, contract=None, translated_at=None) -> str:
     protected, chunks, fm = contract if contract is not None else protect(source)
     if Counter(TOKEN.findall(protected)) != Counter(TOKEN.findall(output)):
         raise ValueError("protected content missing, duplicated, or invented")
@@ -204,7 +204,7 @@ def restore(source: str, output: str, lang: str, model: str, source_hash: str, c
         if not m:
             raise ValueError("description envelope missing")
         desc, output = " ".join(m.group(1).split()), output[m.end():]
-    now = datetime.now(timezone.utc).isoformat()
+    now = translated_at or datetime.now(timezone.utc).isoformat()
     if fm:
         fm = META.sub("", fm)
         if desc is not None:
@@ -295,14 +295,24 @@ def safe_path(root: Path, relative: str) -> Path:
     return p
 
 
-def scan(root: Path, kind: str, languages: list[str], include_stale=False) -> dict:
+def scan(root: Path, kind: str, languages: list[str], include_stale=False,
+         source_language=None, source_languages=None) -> dict:
     """Inventory only; legacy files without provenance are retained, not erased."""
     if any(x not in LANGS for x in languages):
         raise ValueError("unknown language")
-    if kind == "skills":
-        sources = sorted(p for p in root.glob("skills/*/*/SKILL.md") if p.parts[-3] not in ("_archive", "_templates", "_reference"))
+    if source_language is not None and source_language not in LANGS:
+        raise ValueError('unknown source language')
+    source_languages = source_languages or {}
+    if any(v not in LANGS for v in source_languages.values()):
+        raise ValueError('unknown source language override')
+    if kind in ('skills', 'skills-flat'):
+        pattern = 'skills/*/SKILL.md' if kind == 'skills-flat' else 'skills/*/*/SKILL.md'
+        sources = sorted(p for p in root.glob(pattern) if p.parent.name not in ('_archive', '_templates', '_reference')
+                         and p.parts[-3] not in ('_archive', '_templates', '_reference'))
     else:
         sources = [root / "README.md"]
+    if set(source_languages) - {p.relative_to(root).as_posix() for p in sources}:
+        raise ValueError('source language override does not match a source path')
     jobs, retained, current = [], [], []
     for src in sources:
         raw = src.read_bytes()
@@ -310,15 +320,28 @@ def scan(root: Path, kind: str, languages: list[str], include_stale=False) -> di
         source_hash = sha(text.encode())
         if SECRET.search(text):
             raise ValueError("credential pattern in source: " + str(src.relative_to(root)))
+        language_dirs = {p.name.lower(): p for p in src.parent.iterdir() if p.is_dir()}
         for lang in languages:
-            if kind == "skills":
-                target = src.with_name("SKILL." + lang + ".md") if lang != "de" else src
+            if kind in ('skills', 'skills-flat'):
+                fm = split_frontmatter(text)[0]
+                declared = re.search(r'^language:[ \t]*[\"\']?([a-z]{2})(?:[\"\']|\s|$)', fm, re.M)
+                source_lang = source_languages.get(src.relative_to(root).as_posix(), source_language
+                    or (declared.group(1) if declared and declared.group(1) in LANGS else 'de'))
+                target = src if lang == source_lang else src.with_name('SKILL.' + lang + '.md')
             else:
                 source_lang = re.search(r"<!--\s*source-language:\s*(\w+)\s*-->", text)
                 source_lang = source_lang.group(1) if source_lang else "en"
                 target = src if lang == source_lang else src.with_name("README_" + lang + ".md")
             if target == src:
                 continue
+            # Retain older nested language variants without creating a second
+            # competing translation alongside them.
+            if kind in ('skills', 'skills-flat') and not target.exists():
+                legacy = [language_dirs[lang]/'SKILL.md'] if lang in language_dirs else []
+                found = next((p for p in legacy if p.is_file()), None)
+                if found:
+                    retained.append(str(found.relative_to(root)))
+                    continue
             old = target.read_bytes() if target.exists() else None
             if old is not None:
                 prev = old.decode("utf-8-sig").replace("\r\n", "\n")
@@ -443,7 +466,8 @@ def collect(api: API, receipt: Path, out: Path):
             try:
                 if msg["stop_reason"] != "end_turn":
                     raise ValueError("incomplete provider response: " + msg["stop_reason"])
-                translated = restore(job["source_text"], text, job["language"], msg["model"], job["source_sha256"], job.get('protection_contract'))
+                stamp = state.get('ended_at') or batch.get('submitted_at') or datetime.fromtimestamp(receipt.stat().st_mtime, timezone.utc).isoformat()
+                translated = restore(job["source_text"], text, job["language"], msg["model"], job["source_sha256"], job.get('protection_contract'), stamp)
                 errors = gates(job["source_text"], translated, job["language"])
                 rec.update(errors=errors, status="review_required" if not errors else "gate_failed")
                 if not errors:
@@ -563,7 +587,9 @@ def main():
     sub = ap.add_subparsers(dest="command", required=True)
     p = sub.add_parser("scan")
     p.add_argument("--root", type=Path, required=True)
-    p.add_argument("--kind", choices=["skills", "readme"], required=True)
+    p.add_argument("--kind", choices=["skills", "skills-flat", "readme"], required=True)
+    p.add_argument('--source-language', choices=list(LANGS))
+    p.add_argument('--source-languages', type=Path, help='Explicit relative-source-path to language JSON map')
     p.add_argument("--languages", default=",".join(LANGS))
     p.add_argument("--include-stale", action="store_true")
     p.add_argument("--out", type=Path, required=True)
@@ -587,7 +613,8 @@ def main():
     p.add_argument('--owner', required=True)
     a = ap.parse_args()
     if a.command == "scan":
-        d = scan(a.root, a.kind, a.languages.split(","), a.include_stale)
+        overrides = json.loads(a.source_languages.read_text(encoding='utf-8')) if a.source_languages else None
+        d = scan(a.root, a.kind, a.languages.split(","), a.include_stale, a.source_language, overrides)
         write_json(a.out, d)
         print(json.dumps(dict(jobs=len(d["jobs"]), retained=len(d["retained"]), current=len(d["current"]),
                               languages=dict(Counter(j["language"] for j in d["jobs"])))))

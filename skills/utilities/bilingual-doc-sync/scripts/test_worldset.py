@@ -54,6 +54,20 @@ def english():
 
 
 class TranslationTests(unittest.TestCase):
+    def test_english_flat_vendor_sources_get_german_without_duplicate_legacy(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            p = root/'skills/vendor'
+            (p/'FR').mkdir(parents=True)
+            (p/'SKILL.md').write_text('# English source\nUse the tool.\n', encoding='utf-8')
+            (p/'FR/SKILL.md').write_text('Independent French text', encoding='utf-8')
+            plan = scan(root, 'skills-flat', ['de', 'en', 'fr'], source_language='en')
+            self.assertEqual([j['target'] for j in plan['jobs']], ['skills/vendor/SKILL.de.md'])
+            self.assertEqual(plan['retained'], [str(Path('skills/vendor/FR/SKILL.md'))])
+            self.assertEqual((p/'FR/SKILL.md').read_text(encoding='utf-8'), 'Independent French text')
+            with self.assertRaisesRegex(ValueError, 'does not match'):
+                scan(root, 'skills-flat', ['de', 'en'], source_languages={'skills/vendors/SKILL.md': 'en'})
+
     def test_output_limit_retry_increases_capacity_once(self):
         batch = dict(batch_id='a', jobs=[dict(id='x', max_output_tokens=24000)])
         result = dict(batch_id='a', records=[dict(id='x', status='gate_failed', stop_reason='max_tokens')])

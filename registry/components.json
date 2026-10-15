@@ -60,6 +60,7 @@
         "fr",
         "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -80,6 +81,7 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
         "pt"
       ]
@@ -124,6 +126,7 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
         "bn",
         "pt"
@@ -147,6 +150,7 @@
         "ru",
         "fr",
         "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -213,7 +217,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -493,7 +501,9 @@
       "languages": [
         "de",
         "en",
-        "ja"
+        "es",
+        "ja",
+        "fr"
       ]
     },
     {
@@ -587,7 +597,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar"
       ]
     },
     {
@@ -601,7 +612,8 @@
       "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ja"
       ]
     },
     {
@@ -615,7 +627,9 @@
       "description": "Findet und behebt Mermaid-Diagramme, die GitHub nicht rendert (\"Unable to render rich display\"). Prueft jeden ```mermaid-Block mit dem echten Mermaid-Parser ohne Browser und belegt das Ergebnis danach an der lebenden GitHub-Seite.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -705,7 +719,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi"
       ]
     },
     {
@@ -807,7 +822,8 @@
       "description": "Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen, wenn eine Anwendung entworfen wird und der Ablauf noch unklar ist, wenn ein bestehendes Werkzeug als Skill verfügbar gemacht werden soll, wenn Oberfläche und Agentenzugang auseinanderdriften, oder wenn ein Skill zu lang wird und niemand weiß warum.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "pt"
       ]
     },
     {
@@ -821,7 +837,8 @@
       "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "pt"
       ]
     },
     {
@@ -1043,7 +1060,8 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar"
       ]
     },
     {
@@ -1162,7 +1180,8 @@
       "description": "Kontokonzept für den budgetierten Einsatz teurer oder knapper Modelle (Advisor, Reviewer, Spezialmodelle, Dauer-Worker) in längeren Agentenläufen. Beginnt mit einer gemeinsamen Aushandlung zwischen Nutzer und Modell über verfügbare Modelle, Rollen und Kontingente je Zeitfenster, führt ein Konto über jeden Einsatz, setzt vor jeder Eskalation ein Puzzleteil-Vorverfahren und erlaubt Anpassungen mitten im Lauf. Verwenden bei \"Budget\", \"Kontingent\", \"Konto führen\", \"nur einmal pro Stunde\", \"Reviewer sparsam einsetzen\", \"Fable/Codex/Sol/Astra/Luna/Advisor nur begrenzt\", \"/budgetierung\", und immer dann, wenn ein Operator-, Forschungs- oder Automationslauf mehrere Modelle mit unterschiedlichen Kosten kombinieren soll — auch wenn der Nutzer das Wort Budget nicht nennt, aber Einsatzgrenzen für Modelle vorgibt.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
@@ -1257,7 +1276,8 @@
       "description": "Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json, Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json, usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei \"erstelle einen Skill\", \"bau mir einen Skill für X\", \"skill-creator nutzen\", \"neuen Skill anlegen\", \"diesen Skill ellmos-konform machen\", \"Lernvertrag/Verhaltenscodex für einen Skill anlegen\", \"Usecase-Abdeckung eines Skills prüfen\". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder, für Landschafts-Audit skill-explorer.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
@@ -1509,7 +1529,9 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "pt"
       ]
     },
     {
@@ -2119,7 +2141,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
-      "version": "1.3.1",
+      "version": "1.4.0",
       "status": "active",
       "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
       "languages": [
@@ -2330,7 +2352,8 @@
       "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen. Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen. Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation, für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ja"
       ]
     },
     {
@@ -2432,7 +2455,9 @@
       "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "ru",
+        "hi"
       ]
     },
     {
