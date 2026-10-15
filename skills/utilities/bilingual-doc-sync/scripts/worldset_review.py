@@ -139,6 +139,7 @@ def assess(job, message, review_batch_id, expected_model):
     fields = {k: job[k] for k in ('source', 'target', 'language', 'source_sha256', 'candidate_sha256')}
     return dict(id=job['translation_id'], **fields, reviewer_model=message['model'], score=score,
                 verdict=d['verdict'], fully_reviewed=d['fully_reviewed'], findings=d['findings'],
+                operator_review_required=bool(d['findings']),
                 notes=json.dumps(d['findings'], ensure_ascii=False), review_batch_id=review_batch_id)
 
 
@@ -179,7 +180,8 @@ def collect(api, receipt: Path, out: Path):
         if not re.fullmatch(r'msgbatch_[A-Za-z0-9_-]+', original):
             raise ValueError('invalid original translation batch ID')
         write_json(out/('reviews-'+original+'.json'), dict(batch_id=original, reviews=reviews))
-    summary = dict(review_batch_id=bid, counts=dict(Counter(x['verdict'] for rs in grouped.values() for x in rs)), held=held)
+    summary = dict(review_batch_id=bid, counts=dict(Counter(x['verdict'] for rs in grouped.values() for x in rs)), held=held,
+                   evaluation_executor_sha256=sha(Path(__file__).read_bytes()))
     write_json(out/'summary.json', summary)
     return summary
 

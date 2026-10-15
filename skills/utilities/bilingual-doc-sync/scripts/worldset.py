@@ -538,6 +538,11 @@ def apply_candidates(receipt, results_dir, reviews, root, checker, fence_file, f
                 or not isinstance(score, (int, float)) or isinstance(score, bool)
                 or not math.isfinite(score) or not 3.5 <= score <= 5):
             raise ValueError('independent quality review required')
+        if (review.get('operator_review_required') or review.get('findings')) and (
+                review.get('operator_reviewed') is not True
+                or not isinstance(review.get('operator'), str) or not review['operator'].strip()
+                or not isinstance(review.get('operator_notes'), str) or not review['operator_notes'].strip()):
+            raise ValueError('operator must resolve all semantic reviewer findings')
         source, target = safe_path(root, j['source']), safe_path(root, j['target'])
         check_writer(checker, target.parent, fence_file, fence, owner)
         actual = source.read_text(encoding='utf-8-sig').replace('\r\n', '\n')

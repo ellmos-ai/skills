@@ -55,6 +55,11 @@ class ReviewTests(unittest.TestCase):
         self.assertEqual(review['target'], j['target'])
         self.assertEqual(review['reviewer_model'], 'claude-sonnet-fixture')
         self.assertEqual(review['verdict'], 'approve')
+        self.assertFalse(review['operator_review_required'])
+        finding = dict(severity='minor', blocking=False, reason='Style', required_correction='Optional')
+        reviewed = assess(j, message(findings=[finding]), 'msgbatch_review', 'claude-sonnet-fixture')
+        self.assertEqual(reviewed['verdict'], 'approve')
+        self.assertTrue(reviewed['operator_review_required'])
 
     def test_major_finding_incomplete_read_and_low_score_override_approval(self):
         finding = dict(severity='major', blocking=True, reason='Added free of charge', required_correction='Use voluntarily')

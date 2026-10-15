@@ -259,6 +259,11 @@ class TranslationTests(unittest.TestCase):
                 (root/name).write_text(json.dumps(obj), encoding='utf-8')
             args = (root/'batch.json', root, root/'reviews.json', root, root/'checker.py', root/'LOCK.txt', '1', 'fixture')
             with patch('worldset.check_writer') as check:
+                unresolved = dict(review, operator_review_required=True)
+                (root/'reviews.json').write_text(json.dumps(dict(batch_id='a', reviews=[unresolved])), encoding='utf-8')
+                with self.assertRaisesRegex(ValueError, 'operator must resolve'):
+                    apply_candidates(*args)
+                self.assertFalse((root/'SKILL.en.md').exists())
                 for score in [float('nan'), float('inf'), -1, 6, True]:
                     bad = dict(review, score=score)
                     (root/'reviews.json').write_text(json.dumps(dict(batch_id='a', reviews=[bad])), encoding='utf-8')

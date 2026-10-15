@@ -252,7 +252,10 @@ Entscheidung ist an Quellhash, Kandidatenhash, Pfade, Sprache und tatsächlich
 beobachtetes Prüfmodell gebunden. Bedeutungsfehler und fehlende lokale Trigger
 blockieren die Übernahme auch bei hohem Gesamtwert. Wegen der Fehlerquote im
 Pilot verlangt der automatische Prüfer mindestens 4,5 von 5 Punkten.
-Fehlerhafte oder gekürzte
+Jeder benannte Befund benötigt zusätzlich eine explizite Operatorprüfung:
+\`operator_reviewed: true\`, \`operator\` und \`operator_notes\` im hashgebundenen
+Reviewdatensatz. Auch als geringfügig bewertete Bedeutungsänderungen dürfen
+nicht automatisch durchlaufen. Fehlerhafte oder gekürzte
 Prüfantworten bleiben zurückgestellt. Die erzeugten `reviews-<batch-id>.json`
 sind Eingaben für `worldset.py apply`; die Sprachprüfung schreibt keine Ziele.
 Ein automatisches Urteil ersetzt keine projektspezifische Endabnahme.
