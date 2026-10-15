@@ -2359,7 +2359,8 @@
       "description": "Erzeugt aus einem Bestand offener und gefallener Entscheidungen einen strukturierten ASCII-Abhängigkeitsgraphen (maximal 100 Spalten) für das Terminal. Bewertet Knoten nach fünf festen Kriterien: sinnvoll, empfohlen, usertypisch (Richtung und decision-avatar-Konfidenz getrennt), zusammenpassend und widersprechend; Kanten tragen Beziehungstyp und Belegstatus. Deckt Blocker, Freischaltungen, Reihenfolgen und widersprüchliche Empfehlungen gnadenlos auf. Nutze diesen Skill bei \"welche Entscheidungen hängen voneinander ab\", \"Abhängigkeitsgraph der Entscheidungen\", \"Entscheidungspfad visualisieren\", \"Widersprüche zwischen Entscheidungen prüfen\", \"Reihenfolge der Beschlüsse\", /decision-path. NICHT nutzen, um Entscheidungen erst zu inventarisieren -- das macht decision-briefing; NICHT nutzen, um das empfohlene Gesamtkonzept zur Abnahme zu bündeln -- das macht decision-draw; NICHT für kompakte Fünfteiler- Einzelblöcke mit Optionen und Pro/Contra -- das macht decision-shot; NICHT für die Einzelfall-Erwägung mit Frameworks -- das macht decide.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es"
       ]
     },
     {
