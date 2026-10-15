@@ -239,23 +239,31 @@ def gates(source: str, translated: str, lang: str) -> list[str]:
         errors.append('protected_region_order')
     def inline_regions(text):
         fm, body = split_frontmatter(text)
-        lines = body.splitlines(keepends=True)
         description = DESCRIPTION.search(fm)
-        desc_values = protect(description.group(1))[1] if description else []
-        regions = [(Counter(desc_values), [v for v in desc_values if re.search(r'https?://', v)])]
+        # Decode folded/quoted YAML description through the same envelope as
+        # protect(), rather than comparing JSON escape spelling as code text.
+        desc_values = protect('---\n' + fm + '\n---\n')[1] if description else []
+        regions = [(('description',), Counter(desc_values), [v for v in desc_values if re.search(r'https?://', v)])]
+        containers = []
         for t in MarkdownIt('commonmark').parse(body):
+            if t.nesting == 1:
+                containers.append((t.type, t.tag))
             if t.type == 'inline' and t.map:
-                values = protect(''.join(lines[t.map[0]:t.map[1]]))[1]
+                # The parser has already removed list/quote container prefixes.
+                # Isolated raw indented list lines would be mistaken for code.
+                values = protect(t.content)[1]
                 # Link labels and destinations must retain their association;
                 # inline command arguments can still follow local grammar.
                 links = [v for v in values if re.search(r'https?://', v)]
-                regions.append((Counter(values), links))
+                regions.append((tuple(containers), Counter(values), links))
+            if t.nesting == -1:
+                containers.pop()
         return regions
     if inline_regions(source) != inline_regions(translated):
         errors.append('protected_region_context')
     sb, tb = split_frontmatter(source)[1], split_frontmatter(translated)[1]
     for name, pattern in [("headings", r"^#{1,6}(?=\s)"), ("table_rows", r"^\s*\|"),
-                          ("list_items", r"^\s*(?:[-*+] |\d+[.)] )")]:
+                          ("list_items", r"^[ \t]*(?:[-*+] |\d+[.)] )")]:
         if re.findall(pattern, sb, re.M) != re.findall(pattern, tb, re.M):
             errors.append(name)
     if sfm:
@@ -329,8 +337,9 @@ def scan(root: Path, kind: str, languages: list[str], include_stale=False,
                     or (declared.group(1) if declared and declared.group(1) in LANGS else 'de'))
                 target = src if lang == source_lang else src.with_name('SKILL.' + lang + '.md')
             else:
-                source_lang = re.search(r"<!--\s*source-language:\s*(\w+)\s*-->", text)
-                source_lang = source_lang.group(1) if source_lang else "en"
+                declared = re.search(r"<!--\s*source-language:\s*(\w+)\s*-->", text)
+                source_lang = source_languages.get(src.relative_to(root).as_posix(), source_language
+                    or (declared.group(1) if declared else "en"))
                 target = src if lang == source_lang else src.with_name("README_" + lang + ".md")
             if target == src:
                 continue

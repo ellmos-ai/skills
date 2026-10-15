@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1256,
+  "file_count": 1258,
   "files": [
     "skills/assist/buero/SKILL.ar.md",
     "skills/assist/buero/SKILL.bn.md",
@@ -371,6 +371,7 @@
     "skills/dev/project-onboarding/SKILL.en.md",
     "skills/dev/project-onboarding/SKILL.es.md",
     "skills/dev/project-onboarding/SKILL.fr.md",
+    "skills/dev/project-onboarding/SKILL.hi.md",
     "skills/dev/project-onboarding/SKILL.ja.md",
     "skills/dev/project-onboarding/SKILL.md",
     "skills/dev/project-onboarding/SKILL.pt.md",
@@ -541,6 +542,7 @@
     "skills/infrastructure/automation-self-care/SKILL.md",
     "skills/infrastructure/automation-self-care/SKILL.ru.md",
     "skills/infrastructure/automation-self-care/SKILL.zh.md",
+    "skills/infrastructure/backup/SKILL.bn.md",
     "skills/infrastructure/backup/SKILL.en.md",
     "skills/infrastructure/backup/SKILL.fr.md",
     "skills/infrastructure/backup/SKILL.md",

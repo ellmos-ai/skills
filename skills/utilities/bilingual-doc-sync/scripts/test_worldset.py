@@ -54,6 +54,42 @@ def english():
 
 
 class TranslationTests(unittest.TestCase):
+    def test_readme_source_language_override_retains_original(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root/'README.md').write_text('# Beschreibung\nDeutscher Text.\n', encoding='utf-8')
+            plan = scan(root, 'readme', ['de', 'en'], source_language='de')
+            self.assertEqual([j['target'] for j in plan['jobs']], ['README_en.md'])
+            plan = scan(root, 'readme', ['de', 'en'], source_languages={'README.md': 'de'})
+            self.assertEqual([j['target'] for j in plan['jobs']], ['README_en.md'])
+
+    def test_nested_list_prose_is_not_mistaken_for_indented_code(self):
+        source = '1. Pruefung\n   - Erster Schritt\n     * Nutze `tool` zum Testen.\n'
+        target = '1. Check\n   - First step\n     * Use `tool` for testing.\n'
+        self.assertEqual(gates(source, target, 'en'), [])
+        self.assertIn('protected_regions_changed', gates(source, target.replace('`tool`', '`other`'), 'en'))
+
+    def test_description_quoted_code_roundtrip_keeps_actual_value(self):
+        source = '---\nname: example\ndescription: Verwende `class="clip"` und `data-*`.\nlanguage: de\n---\n# Titel\n'
+        protected = protect(source)[0].replace('Verwende', 'Use').replace(' und ', ' and ').replace('Titel', 'Title')
+        target = restore(source, protected, 'en', 'fixture', sha(source.encode()), translated_at='fixed')
+        self.assertEqual(gates(source, target, 'en'), [])
+        self.assertIn('protected_regions_changed', gates(source, target.replace('clip', 'wrong'), 'en'))
+
+    def test_inline_values_keep_their_blockquote_and_list_containers(self):
+        source = '> Warning: use `--force` with care.\n\nPlain explanation.\n'
+        target = 'Warning: use `--force` with care.\n\n> Plain explanation.\n'
+        self.assertIn('protected_region_context', gates(source, target, 'en'))
+        source = '- Use `--force`.\n\n> Explain the risk.\n'
+        target = '> Use `--force`.\n\n- Explain the risk.\n'
+        self.assertIn('protected_region_context', gates(source, target, 'en'))
+
+    def test_blank_space_line_does_not_change_list_marker_identity(self):
+        source = '- First `one`\n  \n- Second `two`\n'
+        target = '- First `one`\n\n- Second `two`\n'
+        self.assertEqual(gates(source, target, 'en'), [])
+        self.assertIn('list_items', gates(source, target.replace('- Second', '+ Second'), 'en'))
+
     def test_english_flat_vendor_sources_get_german_without_duplicate_legacy(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
