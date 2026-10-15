@@ -34,7 +34,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -53,7 +57,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -72,7 +79,9 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -91,7 +100,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -110,7 +122,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -129,7 +144,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -148,7 +166,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -167,7 +189,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -205,7 +231,10 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "pt"
       ]
     },
     {
@@ -710,7 +739,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr"
       ]
     },
     {
@@ -1188,7 +1218,8 @@
       "description": "Selbstjustierende Takt-Regelschleife für wiederkehrende Agenten-Scans. Nutzen, wenn ein geplanter Scan sein Intervall bei Aktivität schärfen und bei Stille abkühlen soll, ohne Operator-Eingriff.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "fr"
       ]
     },
     {
@@ -1206,7 +1237,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr"
       ]
     },
     {
@@ -1276,7 +1308,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr"
       ]
     },
     {
@@ -1341,7 +1374,9 @@
       "status": "active",
       "description": "Providerneutrale Operator- und Teamleader-Rolle für komplexe, länger laufende oder planbasierte Vorhaben. Verwenden bei `$operator`, `/operator`, \"übernimm als Operator\" oder \"arbeite den Plan weiter ab\", um den nächsten substanziellen Planschritt zu wählen, unabhängige Arbeitspakete kontrolliert zu delegieren und Ergebnisse evidenzbasiert abzunehmen und zu integrieren.",
       "languages": [
-        "de"
+        "de",
+        "en",
+        "fr"
       ]
     },
     {
@@ -1449,7 +1484,8 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr"
       ]
     },
     {
@@ -2077,7 +2113,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
-      "version": "1.2.2",
+      "version": "1.3.0",
       "status": "active",
       "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
       "languages": [
