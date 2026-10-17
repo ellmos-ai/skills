@@ -1,0 +1,2 @@
+# Byte-exact, hash-bound test fixtures: never convert line endings on checkout.
+* -text

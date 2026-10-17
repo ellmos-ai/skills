@@ -95,7 +95,7 @@ language: de
 ---
 # Prüfen
 '''
-        for bad in (
+        for case, bad in enumerate((
             source.replace('  language: de\n', '  language: de\n  language: en\n'),
             source.replace('  language: de\n', '  language: [de, en]\n'),
             source.replace('metadata:\n', 'metadata: {language: de}\n'),
@@ -106,8 +106,10 @@ language: de
             source.replace('language: de\n---', '"language": de\n---'),
             source.replace('language: de\n---', 'language : de\n---'),
             source.replace('language: de\n---', "language: de\n'language': en\n---"),
-        ):
-            with self.subTest(bad=bad):
+        )):
+            # ASCII subtest label: the Windows CI runner failed while reporting
+            # the non-ASCII source text as a subtest parameter.
+            with self.subTest(case=case):
                 with self.assertRaises(ValueError):
                     restore(bad, protect(bad)[0], 'ja', 'fixture', sha(bad.encode()))
 
