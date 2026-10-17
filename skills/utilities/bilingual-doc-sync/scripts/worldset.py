@@ -78,11 +78,77 @@ def split_frontmatter(text: str) -> tuple[str, str]:
     return (m.group(1), text[m.end():]) if m else ("", text)
 
 
+def _language_scalar(value: str, lang: str) -> str:
+    """Replace a simple YAML language scalar without changing its formatting."""
+    match = re.fullmatch(r"([ \t]*)(['\"]?)([a-z]{2}|multi)\2([ \t]*(?:#.*)?)", value)
+    if not match:
+        raise ValueError("complex or invalid language scalar")
+    return match.group(1) + match.group(2) + lang + match.group(2) + match.group(4)
+
+
+def _metadata_language(fm: str, lang: str) -> str:
+    """Change only metadata.language when it is a direct, simple mapping child."""
+    lines = fm.splitlines(keepends=True)
+    heads = [i for i, line in enumerate(lines)
+             if re.match(r"^(['\"]?)metadata\1[ \t]*:", line)]
+    if len(heads) > 1:
+        raise ValueError("duplicate metadata mapping")
+    if not heads:
+        return fm
+    head = heads[0]
+    if not re.fullmatch(r"metadata:[ \t]*(?:#.*)?\n?", lines[head]):
+        raise ValueError("complex metadata mapping")
+    end = next((i for i in range(head + 1, len(lines))
+                if lines[i] and not lines[i][0].isspace() and lines[i][0] != '#'), len(lines))
+    children = []
+    for i in range(head + 1, end):
+        line = lines[i]
+        if not line.strip() or line.lstrip().startswith('#'):
+            continue
+        if line.startswith('\t'):
+            raise ValueError("tab-indented metadata mapping")
+        match = re.match(r"^( +)([^:#\n]+?):", line)
+        if match:
+            children.append((i, len(match.group(1)), match.group(2).strip().strip("'\"")))
+    if not children:
+        return fm
+    depth = min(indent for _, indent, _ in children)
+    fields = [i for i, indent, key in children if indent == depth and key == 'language']
+    if len(fields) > 1:
+        raise ValueError("duplicate metadata.language")
+    if not fields:
+        return fm
+    i = fields[0]
+    match = re.fullmatch(r"( +language:)([^\n]*)(\n?)", lines[i])
+    if not match:
+        raise ValueError("complex metadata.language key")
+    lines[i] = match.group(1) + _language_scalar(match.group(2), lang) + match.group(3)
+    return ''.join(lines)
+
+
+def _root_language(fm: str, lang: str) -> str:
+    lines = fm.splitlines(keepends=True)
+    fields = [i for i, line in enumerate(lines)
+              if re.match(r"^(['\"]?)language\1[ \t]*:", line)]
+    if len(fields) > 1:
+        raise ValueError("duplicate root language")
+    if not fields:
+        return fm + "\nlanguage: " + lang
+    i = fields[0]
+    match = re.fullmatch(r"(language:)([^\n]*)(\n?)", lines[i])
+    if not match:
+        raise ValueError("complex root language key")
+    lines[i] = match.group(1) + _language_scalar(match.group(2), lang) + match.group(3)
+    return ''.join(lines)
+
+
 def protect(source: str) -> tuple[str, list[str], str]:
     """Translate only description + prose; preserve exact code and metadata."""
     if TOKEN.search(source):
         raise ValueError("source contains reserved protection marker")
     fm, body = split_frontmatter(source)
+    # Match restore's leading-newline normalization before parsing HTML blocks.
+    body = body.lstrip("\n")
     desc = ""
     if fm:
         m = DESCRIPTION.search(fm)
@@ -209,13 +275,28 @@ def restore(source: str, output: str, lang: str, model: str, source_hash: str, c
         fm = META.sub("", fm)
         if desc is not None:
             fm = DESCRIPTION.sub(lambda _: "description: " + json.dumps(desc, ensure_ascii=False) + "\n", fm)
-        fm = re.sub(r"^language:.*$", "language: " + lang, fm, flags=re.M)
-        if not re.search(r"^language:", fm, re.M):
-            fm += "\nlanguage: " + lang
+        fm = _root_language(_metadata_language(fm, lang), lang)
         fm += f"\ntranslated_from_sha256: {source_hash}\ntranslator: {json.dumps(model)}\ntranslated_at: {json.dumps(now)}"
         return "---\n" + fm.rstrip() + "\n---\n" + output.strip("\n") + "\n"
     meta = json.dumps(dict(translated_from_sha256=source_hash, translator=model, translated_at=now))
     return "<!-- worldset: " + meta + " -->\n" + output.strip("\n") + "\n"
+
+
+def _table_shape(text: str) -> list[tuple[int, ...]]:
+    """Record real Markdown tables, ignoring prose pipes and blank-line spelling."""
+    tables, rows, cells = [], [], 0
+    for token in MarkdownIt('default').parse(split_frontmatter(text)[1]):
+        if token.type == 'table_open':
+            rows = []
+        elif token.type == 'tr_open':
+            cells = 0
+        elif token.type in ('th_open', 'td_open'):
+            cells += 1
+        elif token.type == 'tr_close':
+            rows.append(cells)
+        elif token.type == 'table_close':
+            tables.append(tuple(rows))
+    return tables
 
 
 def gates(source: str, translated: str, lang: str) -> list[str]:
@@ -262,7 +343,9 @@ def gates(source: str, translated: str, lang: str) -> list[str]:
     if inline_regions(source) != inline_regions(translated):
         errors.append('protected_region_context')
     sb, tb = split_frontmatter(source)[1], split_frontmatter(translated)[1]
-    for name, pattern in [("headings", r"^#{1,6}(?=\s)"), ("table_rows", r"^\s*\|"),
+    if _table_shape(source) != _table_shape(translated):
+        errors.append('table_rows')
+    for name, pattern in [("headings", r"^#{1,6}(?=\s)"),
                           ("list_items", r"^[ \t]*(?:[-*+] |\d+[.)] )")]:
         if re.findall(pattern, sb, re.M) != re.findall(pattern, tb, re.M):
             errors.append(name)
@@ -271,7 +354,16 @@ def gates(source: str, translated: str, lang: str) -> list[str]:
             fm = META.sub("", fm)
             fm = DESCRIPTION.sub("", fm)
             return re.sub(r"^language:.*\n?", "", fm, flags=re.M).strip()
-        if invariant(sfm) != invariant(tfm):
+        try:
+            expected = _metadata_language(sfm, lang)
+            # Validate both language declarations rather than allowing a
+            # stale or duplicated scalar to pass the invariant comparison.
+            if _root_language(tfm, lang) != tfm or _metadata_language(tfm, lang) != tfm:
+                errors.append("frontmatter_language")
+        except ValueError:
+            errors.append("frontmatter_language")
+            expected = sfm
+        if invariant(expected) != invariant(tfm):
             errors.append("frontmatter_metadata_changed")
     prose = TOKEN.sub("", tp)
     letters = re.findall(r"[^\W\d_]", prose)

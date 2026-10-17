@@ -54,6 +54,63 @@ def english():
 
 
 class TranslationTests(unittest.TestCase):
+    def test_document_language_inside_metadata_is_localized_without_other_metadata_changes(self):
+        source = '''---
+name: beispiel
+description: Prüft die Daten.
+metadata:
+  language: "de" # Sprache des Skills
+  privacy:
+    language: de # Sprache der Daten
+  visibility: private-only
+  license: Proprietary
+language: 'de' # Hauptsprache
+---
+# Prüfen
+
+Prüft die Daten.
+'''
+        output = protect(source)[0].replace('Prüft die Daten.', 'データを確認する。').replace('Prüfen', '確認')
+        translated = restore(source, output, 'ja', 'fixture', sha(source.encode()), translated_at='fixed')
+        self.assertIn('  language: "ja" # Sprache des Skills\n', translated)
+        self.assertIn("language: 'ja' # Hauptsprache\n", translated)
+        self.assertIn('    language: de # Sprache der Daten\n', translated)
+        self.assertIn('  visibility: private-only\n  license: Proprietary\n', translated)
+        self.assertEqual(gates(source, translated, 'ja'), [])
+        stale = translated.replace('  language: "ja"', '  language: "de"')
+        self.assertIn('frontmatter_language', gates(source, stale, 'ja'))
+        self.assertIn('frontmatter_metadata_changed', gates(source, stale, 'ja'))
+        self.assertIn('frontmatter_language', gates(source, translated.replace("language: 'ja'", "language: 'de'"), 'ja'))
+        self.assertIn('frontmatter_metadata_changed', gates(source, translated.replace('visibility: private-only', 'visibility: public'), 'ja'))
+        self.assertIn('frontmatter_metadata_changed', gates(source, translated.replace('    language: de', '    language: ja'), 'ja'))
+
+    def test_ambiguous_document_language_fails_closed(self):
+        source = '''---
+name: beispiel
+description: Prüft die Daten.
+metadata:
+  language: de
+  visibility: private-only
+language: de
+---
+# Prüfen
+'''
+        for bad in (
+            source.replace('  language: de\n', '  language: de\n  language: en\n'),
+            source.replace('  language: de\n', '  language: [de, en]\n'),
+            source.replace('metadata:\n', 'metadata: {language: de}\n'),
+            source.replace('metadata:\n', '"metadata":\n'),
+            source.replace('metadata:\n', 'metadata:\n"metadata":\n'),
+            source.replace('language: de\n---', 'language: de\nlanguage: en\n---'),
+            source.replace('language: de\n---', 'language: [de, en]\n---'),
+            source.replace('language: de\n---', '"language": de\n---'),
+            source.replace('language: de\n---', 'language : de\n---'),
+            source.replace('language: de\n---', "language: de\n'language': en\n---"),
+        ):
+            with self.subTest(bad=bad):
+                with self.assertRaises(ValueError):
+                    restore(bad, protect(bad)[0], 'ja', 'fixture', sha(bad.encode()))
+
     def test_readme_source_language_override_retains_original(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)

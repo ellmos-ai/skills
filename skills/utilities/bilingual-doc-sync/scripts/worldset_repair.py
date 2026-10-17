@@ -35,6 +35,13 @@ HEX_ID = re.compile(r"[0-9a-f]{40}\Z")
 BATCH_ID = re.compile(r"msgbatch_[A-Za-z0-9_-]+\Z")
 MODEL = re.compile(r"claude-[A-Za-z0-9._-]+\Z")
 FRONTMATTER = re.compile(r"\A---[ \t]*\n(.*?)\n---[ \t]*(?:\n|$)", re.DOTALL)
+HTML_PROVENANCE = re.compile(r"\A<!-- worldset: ([^\r\n]+) -->\n")
+HTML_PROVENANCE_MARKER = re.compile(r"<!--\s*worldset\s*:", re.IGNORECASE)
+HTML_PROVENANCE_KEYS = {
+    "translated_from_sha256",
+    "translator",
+    "translated_at",
+}
 REPAIR_SCHEMA = "worldset-repair-projection-v1"
 BATCH_SCHEMA = "worldset-batch-v1"
 STRATEGY = "bounded-semantic-repair"
@@ -174,12 +181,132 @@ def repair_id(
     return sha(encoded)[:40]
 
 
+def _frontmatter_mode(text: str) -> bool:
+    starts_frontmatter = re.match(r"\A---[ \t]*\n", text) is not None
+    frontmatter = split_frontmatter(text)[0]
+    check(
+        not starts_frontmatter or bool(frontmatter),
+        "malformed frontmatter is unsupported",
+    )
+    return bool(frontmatter)
+
+
+def _reject_json_constant(value: str):
+    raise ValueError("non-finite HTML provenance JSON value: " + value)
+
+
+def _unique_json_object(pairs):
+    result = {}
+    for key, value in pairs:
+        check(key not in result, "duplicate HTML provenance JSON key")
+        result[key] = value
+    return result
+
+
+def _html_provenance(candidate: str, source_hash: str) -> dict:
+    markers = list(HTML_PROVENANCE_MARKER.finditer(candidate))
+    check(len(markers) == 1, "missing, duplicate or unexpected HTML provenance")
+    match = HTML_PROVENANCE.match(candidate)
+    check(match is not None, "HTML provenance must be the exact leading comment")
+    check(
+        not split_frontmatter(candidate[match.end():])[0],
+        "mixed frontmatter and HTML README provenance modes",
+    )
+    raw = match.group(1)
+    try:
+        metadata = json.loads(
+            raw,
+            object_pairs_hook=_unique_json_object,
+            parse_constant=_reject_json_constant,
+        )
+    except (json.JSONDecodeError, TypeError) as exc:
+        raise ValueError("invalid HTML provenance JSON") from exc
+    check(type(metadata) is dict, "HTML provenance must be a JSON object")
+    check(set(metadata) == HTML_PROVENANCE_KEYS, "HTML provenance schema or extra fields")
+    check(
+        isinstance(metadata["translated_from_sha256"], str)
+        and re.fullmatch(r"[0-9a-f]{64}", metadata["translated_from_sha256"]) is not None
+        and metadata["translated_from_sha256"] == source_hash,
+        "HTML provenance source hash mismatch",
+    )
+    translator = metadata["translator"]
+    check(
+        isinstance(translator, str)
+        and bool(translator.strip())
+        and not any(0xD800 <= ord(char) <= 0xDFFF for char in translator)
+        and "<!--" not in translator
+        and "-->" not in translator,
+        "HTML provenance translator missing or invalid",
+    )
+    iso_time(metadata["translated_at"])
+    return {"metadata": metadata, "raw": raw, "comment": match.group(0), "match": match}
+
+
+def _json_value_span(raw: str, wanted: str) -> tuple[int, int]:
+    """Locate a top-level JSON string value after strict schema validation."""
+    decoder = json.JSONDecoder()
+    index = 0
+
+    def skip_space(position: int) -> int:
+        while position < len(raw) and raw[position] in " \t\r\n":
+            position += 1
+        return position
+
+    index = skip_space(index)
+    check(index < len(raw) and raw[index] == "{", "HTML provenance JSON object missing")
+    index += 1
+    while True:
+        index = skip_space(index)
+        if index < len(raw) and raw[index] == "}":
+            break
+        key, index = decoder.raw_decode(raw, index)
+        check(isinstance(key, str), "HTML provenance JSON key is invalid")
+        index = skip_space(index)
+        check(index < len(raw) and raw[index] == ":", "HTML provenance JSON colon missing")
+        index = skip_space(index + 1)
+        value_start = index
+        value, index = decoder.raw_decode(raw, index)
+        if key == wanted:
+            check(isinstance(value, str), "HTML provenance timestamp is not a string")
+            return value_start, index
+        index = skip_space(index)
+        if index < len(raw) and raw[index] == ",":
+            index += 1
+            continue
+        check(index < len(raw) and raw[index] == "}", "HTML provenance JSON object is incomplete")
+        break
+    raise ValueError("HTML provenance value is missing: " + wanted)
+
+
+def _refresh_html_timestamp(candidate: str, stamp: str, source_hash: str) -> str:
+    parsed = _html_provenance(candidate, source_hash)
+    raw = parsed["raw"]
+    start, end = _json_value_span(raw, "translated_at")
+    updated = raw[:start] + json.dumps(stamp, ensure_ascii=False) + raw[end:]
+    match = parsed["match"]
+    return candidate[:match.start(1)] + updated + candidate[match.end(1):]
+
+
 def validate_description(source: str, candidate: str) -> None:
+    source_has_frontmatter = _frontmatter_mode(source)
+    candidate_has_frontmatter = _frontmatter_mode(candidate)
+    check(
+        source_has_frontmatter == candidate_has_frontmatter,
+        "mixed frontmatter and HTML README provenance modes",
+    )
     source_fm = split_frontmatter(source)[0]
     candidate_fm = split_frontmatter(candidate)[0]
+    if not source_has_frontmatter:
+        _html_provenance(candidate, sha(source.encode("utf-8")))
+        check(
+            HTML_PROVENANCE_MARKER.search(source) is None,
+            "source contains translated HTML provenance",
+        )
+        return
     check(
-        bool(candidate_fm),
-        "frontmatter candidate required; HTML README provenance unsupported",
+        HTML_PROVENANCE_MARKER.search(source) is None
+        and HTML_PROVENANCE_MARKER.search(candidate) is None,
+        "mixed frontmatter and HTML README provenance modes",
     )
     source_descriptions = list(DESCRIPTION.finditer(source_fm)) if source_fm else []
     candidate_descriptions = list(DESCRIPTION.finditer(candidate_fm))
@@ -677,33 +804,46 @@ def apply_patches(job: dict, data: object, stamp: str, root: Path) -> str:
     text = base
     for start, end, new in reversed(edits):
         text = text[:start] + new + text[end:]
+    source_fm = split_frontmatter(job["source_text"])[0]
     oldfm, newfm = split_frontmatter(base)[0], split_frontmatter(text)[0]
-    check(bool(oldfm) and bool(newfm), "repair frontmatter missing")
-    check(META.findall(oldfm) == META.findall(newfm), "repair provenance changed")
-    check(
-        re.findall(r"^language:.*$", oldfm, re.MULTILINE)
-        == re.findall(r"^language:.*$", newfm, re.MULTILINE),
-        "repair language changed",
-    )
+    if source_fm:
+        check(bool(oldfm) and bool(newfm), "repair frontmatter missing")
+        check(META.findall(oldfm) == META.findall(newfm), "repair provenance changed")
+        check(
+            re.findall(r"^language:.*$", oldfm, re.MULTILINE)
+            == re.findall(r"^language:.*$", newfm, re.MULTILINE),
+            "repair language changed",
+        )
+    else:
+        check(not oldfm and not newfm, "mixed frontmatter and HTML README provenance modes")
+        original_provenance = _html_provenance(base, job["source_sha256"])
+        patched_provenance = _html_provenance(text, job["source_sha256"])
+        check(
+            original_provenance["comment"] == patched_provenance["comment"],
+            "repair provenance changed",
+        )
     validate_description(job["source_text"], text)
     errors = gates(job["source_text"], text, job["language"])
     check(not errors, "repair mechanical gates: " + ",".join(errors))
-    match = FRONTMATTER.match(text)
-    check(match is not None, "repair frontmatter missing")
-    fm = match.group(1)
-    check(
-        len(re.findall(r"^translated_at:.*$", fm, re.MULTILINE)) == 1,
-        "repair timestamp metadata missing or duplicated",
-    )
     stamp = iso_time(stamp)
-    fm = re.sub(
-        r"^translated_at:.*$",
-        lambda _: "translated_at: " + json.dumps(stamp),
-        fm,
-        count=1,
-        flags=re.MULTILINE,
-    )
-    text = text[: match.start(1)] + fm + text[match.end(1) :]
+    if source_fm:
+        match = FRONTMATTER.match(text)
+        check(match is not None, "repair frontmatter missing")
+        fm = match.group(1)
+        check(
+            len(re.findall(r"^translated_at:.*$", fm, re.MULTILINE)) == 1,
+            "repair timestamp metadata missing or duplicated",
+        )
+        fm = re.sub(
+            r"^translated_at:.*$",
+            lambda _: "translated_at: " + json.dumps(stamp),
+            fm,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        text = text[: match.start(1)] + fm + text[match.end(1) :]
+    else:
+        text = _refresh_html_timestamp(text, stamp, job["source_sha256"])
     validate_description(job["source_text"], text)
     errors = gates(job["source_text"], text, job["language"])
     check(not errors, "final repair mechanical gates: " + ",".join(errors))

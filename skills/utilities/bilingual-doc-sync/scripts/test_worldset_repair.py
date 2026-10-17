@@ -128,6 +128,62 @@ class RepairTests(unittest.TestCase):
             "patches": [{"old": "for the check", "new": "for the inspection"}]
         }
 
+    def _html_material(self, source=None, body=None, metadata=None):
+        source = source or (
+            "# Setup Guide\n\n"
+            "This guide explains how to inspect the package before installation.\n"
+            "Use the `--safe` option to verify the source before installation.\n"
+            "Open https://example.com/install for further instructions.\n"
+            '<div class="notice">Inspect the package first.</div>\n'
+        )
+        body = body or (
+            "# Einrichtungsanleitung\n\n"
+            "Diese Anleitung erklärt, wie das Paket vor dem Einrichten geprüft wird.\n"
+            "Nutze die Option `--safe`, um die Quelle vor der Installation zu prüfen.\n"
+            "Weitere Hinweise stehen unter https://example.com/install.\n"
+            '<div class="notice">Prüfe zuerst das Paket.</div>\n'
+        )
+        metadata = metadata or {
+            "translated_from_sha256": sha(source.encode("utf-8")),
+            "translator": "claude-haiku-5-5",
+            "translated_at": "2026-10-15T18:09:04.533291+00:00",
+        }
+        return source, '<!-- worldset: ' + json.dumps(metadata, ensure_ascii=False) + ' -->\n' + body
+
+    def _html_case(self, source, candidate, *, language="de", target="README.de.md"):
+        source_file = self.root / "README.md"
+        source_file.write_bytes(source.encode("utf-8"))
+        review = copy.deepcopy(self.cases[0]["review"])
+        review.update(
+            source="README.md",
+            target=target,
+            language=language,
+            source_sha256=sha(source.encode("utf-8")),
+            candidate_sha256=sha(candidate.encode("utf-8")),
+        )
+        original = {
+            "id": REVIEW_JOB_ID,
+            "translation_id": REVIEW_ID,
+            "translation_batch_id": BATCH,
+            "source": review["source"],
+            "target": review["target"],
+            "language": review["language"],
+            "source_sha256": review["source_sha256"],
+            "candidate_sha256": review["candidate_sha256"],
+            "source_text": source,
+            "candidate_text": candidate,
+            "author_model": "claude-haiku-5-5",
+            "source_group": "public",
+        }
+        decision = copy.deepcopy(self.decisions[0])
+        decision.update(
+            source_sha256=review["source_sha256"],
+            candidate_sha256=review["candidate_sha256"],
+            batch_id=BATCH,
+        )
+        case = {"review": review, "job": original, "batch_id": BATCH}
+        return [case], [decision]
+
     def test_prepare_binds_complete_review_feedback_and_source_group(self):
         job = self.job
         self.assertEqual(job["original_translation_id"], REVIEW_ID)
@@ -291,39 +347,154 @@ class RepairTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "candidate hash mismatch"):
             repair.prepare(direct, None, self.root)
 
-    def test_prepare_rejects_html_readme_without_frontmatter(self):
-        source = "# Example\n\nA clear sentence with enough words for the check.\n"
-        candidate = '<!-- worldset: {"translator":"example"} -->\n' + source
-        (self.root / "README.md").write_text(source, encoding="utf-8")
-        review = copy.deepcopy(self.cases[0]["review"])
-        review.update(
-            source="README.md",
-            target="README.de.md",
-            language="de",
-            source_sha256=sha(source.encode()),
-            candidate_sha256=sha(candidate.encode()),
+    def test_prepare_and_apply_real_html_readme_only_refreshes_timestamp(self):
+        fixture_dir = MODULE_DIR / "fixtures"
+        manifest = json.loads((fixture_dir / "manifest.json").read_text(encoding="ascii"))
+        source = (fixture_dir / manifest["source_file"]).read_bytes().decode("utf-8")
+        candidate = (fixture_dir / manifest["candidate_file"]).read_bytes().decode("utf-8")
+        self.assertEqual(sha(source.encode("utf-8")), manifest["source_sha256"])
+        self.assertEqual(sha(candidate.encode("utf-8")), manifest["candidate_sha256"])
+        self.assertEqual(manifest["origin_group"], "public")
+        self.assertEqual(manifest["language"], "pt")
+        self.assertEqual(gates(source, candidate, manifest["language"]), [])
+        cases, decisions = self._html_case(
+            source,
+            candidate,
+            language=manifest["language"],
+            target=manifest["target_path"],
         )
-        case = [
-            {
-                "batch_id": BATCH,
-                "job": {
-                    "id": REVIEW_ID,
-                    "source": "README.md",
-                    "target": "README.de.md",
-                    "language": "de",
-                    "source_sha256": review["source_sha256"],
-                    "target_sha256": None,
-                    "source_text": source,
-                    "base_candidate_text": candidate,
-                    "base_candidate_sha256": review["candidate_sha256"],
-                    "author_model": "claude-haiku-5-5",
+        projection = repair.prepare(cases, decisions, self.root)
+        job = projection["jobs"][0]
+        self.assertEqual(job["source"], "README.md")
+        self.assertEqual(job["target"], manifest["target_path"])
+        self.assertEqual(job["language"], manifest["language"])
+        self.assertEqual(job["source_sha256"], sha(source.encode("utf-8")))
+        self.assertEqual(job["base_candidate_text"], candidate)
+        source_marker = "<!-- lang-only: zh -->\n"
+        source_block = source.split(source_marker, 1)[1].split("\n", 1)[0]
+        candidate_block = candidate.split(source_marker, 1)[1].split("\n", 1)[0]
+        self.assertNotEqual(source_block, candidate_block)
+        metadata_match = repair.HTML_PROVENANCE.match(candidate)
+        self.assertIsNotNone(metadata_match)
+        original_metadata = json.loads(metadata_match.group(1))
+        patched = repair.apply_patches(
+            job,
+            {"patches": [{"old": candidate_block, "new": source_block}]},
+            STAMP,
+            self.root,
+        )
+        expected = candidate.replace(candidate_block, source_block, 1)
+        expected = expected.replace(
+            json.dumps(original_metadata["translated_at"]), json.dumps(STAMP), 1
+        )
+        self.assertEqual(patched, expected)
+        metadata_match = repair.HTML_PROVENANCE.match(patched)
+        self.assertIsNotNone(metadata_match)
+        metadata = json.loads(metadata_match.group(1))
+        self.assertEqual(
+            set(metadata),
+            {"translated_from_sha256", "translator", "translated_at"},
+        )
+        self.assertEqual(metadata["translated_from_sha256"], sha(source.encode("utf-8")))
+        self.assertEqual(metadata["translator"], "claude-haiku-5-5")
+        self.assertEqual(metadata["translated_at"], STAMP)
+        repair.validate_description(source, patched)
+        self.assertEqual(gates(source, patched, manifest["language"]), [])
+        path_markup = '<a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb"'
+        self.assertEqual(candidate.count(path_markup), 1)
+        with self.assertRaises(ValueError):
+            repair.apply_patches(
+                job,
+                {
+                    "patches": [
+                        {
+                            "old": path_markup,
+                            "new": '<a href="README_other.md"><img src="https://img.shields.io/badge/Language-English-2563eb"',
+                        }
+                    ]
                 },
-                "review": review,
-                "repair_feedback": "Correct a bounded prose phrase.",
-            }
+                STAMP,
+                self.root,
+            )
+
+    def test_prepare_rejects_missing_malformed_or_unbound_html_provenance(self):
+        source, valid = self._html_material()
+        match = repair.HTML_PROVENANCE.match(valid)
+        self.assertIsNotNone(match)
+        body = valid[match.end():]
+        metadata = json.loads(match.group(1))
+        wrong_hash = dict(metadata, translated_from_sha256="0" * 64)
+        extra = dict(metadata, unexpected="value")
+        empty_translator = dict(metadata, translator="  ")
+        bad_timestamp = dict(metadata, translated_at="tomorrow")
+        duplicate_key = (
+            '{"translated_from_sha256": "' + metadata["translated_from_sha256"]
+            + '", "translated_from_sha256": "' + metadata["translated_from_sha256"]
+            + '", "translator": "' + metadata["translator"]
+            + '", "translated_at": "' + metadata["translated_at"] + '"}'
+        )
+        candidates = {
+            "missing": body,
+            "malformed-json": "<!-- worldset: {not-json} -->\n" + body,
+            "duplicate-json-key": "<!-- worldset: " + duplicate_key + " -->\n" + body,
+            "wrong-source-hash": "<!-- worldset: " + json.dumps(wrong_hash) + " -->\n" + body,
+            "extra-field": "<!-- worldset: " + json.dumps(extra) + " -->\n" + body,
+            "empty-translator": "<!-- worldset: " + json.dumps(empty_translator) + " -->\n" + body,
+            "invalid-timestamp": "<!-- worldset: " + json.dumps(bad_timestamp) + " -->\n" + body,
+            "duplicate-comment": valid + "\n" + match.group(0) + body,
+            "not-leading": " \n" + valid,
+            "wrong-comment-shape": "<!-- worldset:" + match.group(1) + " -->\n" + body,
+            "non-finite-json": "<!-- worldset: {\"translated_from_sha256\": NaN} -->\n" + body,
+        }
+        for name, candidate in candidates.items():
+            with self.subTest(name=name):
+                cases, decisions = self._html_case(source, candidate)
+                with self.assertRaises(ValueError):
+                    repair.prepare(cases, decisions, self.root)
+
+    def test_html_and_frontmatter_modes_cannot_be_mixed(self):
+        source, candidate = self._html_material()
+        cases, decisions = self._html_case(self.source, candidate)
+        with self.assertRaisesRegex(ValueError, "mixed frontmatter"):
+            repair.prepare(cases, decisions, self.root)
+        cases, decisions = self._html_case(source, self.candidate)
+        with self.assertRaisesRegex(ValueError, "mixed frontmatter"):
+            repair.prepare(cases, decisions, self.root)
+        html_header = repair.HTML_PROVENANCE.match(candidate).group(0)
+        cases, decisions = self._html_case(source, html_header + self.candidate)
+        with self.assertRaisesRegex(ValueError, "mixed frontmatter"):
+            repair.prepare(cases, decisions, self.root)
+
+    def test_html_patches_cannot_change_provenance_or_protected_content(self):
+        source, candidate = self._html_material()
+        cases, decisions = self._html_case(source, candidate)
+        job = repair.prepare(cases, decisions, self.root)["jobs"][0]
+        metadata = json.loads(repair.HTML_PROVENANCE.match(candidate).group(1))
+        attempts = [
+            ('"translator": "claude-haiku-5-5"', '"translator": "other"'),
+            (
+                '"translated_from_sha256": "' + metadata["translated_from_sha256"] + '"',
+                '"translated_from_sha256": "' + "0" * 64 + '"',
+            ),
+            (
+                '"translated_at": "' + metadata["translated_at"] + '"',
+                '"translated_at": "' + STAMP + '"',
+            ),
+            ("`--safe`", "`--unsafe`"),
+            ("https://example.com/install", "https://other.example/install"),
+            ('<div class="notice">', '<section class="notice">'),
+            ("<!-- worldset:", "<!-- altered:"),
         ]
-        with self.assertRaisesRegex(ValueError, "HTML README provenance unsupported"):
-            repair.prepare(case, None, self.root)
+        for old, new in attempts:
+            with self.subTest(old=old), self.assertRaises(ValueError):
+                repair.apply_patches(job, {"patches": [{"old": old, "new": new}]}, STAMP, self.root)
+        with self.assertRaisesRegex(ValueError, "timestamp"):
+            repair.apply_patches(
+                job,
+                {"patches": [{"old": "vor dem Einrichten", "new": "vor der Installation"}]},
+                "not-a-time",
+                self.root,
+            )
 
     def test_prepare_rejects_nan_score_unknown_path_and_bad_binding(self):
         cases = copy.deepcopy(self.cases)
@@ -440,6 +611,9 @@ class RepairTests(unittest.TestCase):
 
     def test_apply_rejects_repeated_old_overlap_code_url_metadata_and_hash(self):
         cases = [
+            {"patches": [{"old": "for the check", "new": "for inspection"}], "extra": True},
+            {"patches": [{"old": "for the check", "new": "for inspection", "extra": True}]},
+            {"patches": [{"old": "for the check"}]},
             {"patches": [{"old": "Use", "new": "Employ"}]},
             {
                 "patches": [
