@@ -265,6 +265,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -285,6 +288,7 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
         "bn",
         "pt"
@@ -307,7 +311,10 @@
         "ja",
         "ru",
         "fr",
-        "ar"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -349,7 +356,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -370,6 +381,7 @@
         "ru",
         "fr",
         "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -391,7 +403,10 @@
         "ja",
         "ru",
         "fr",
-        "hi"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -410,7 +425,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -430,6 +449,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -449,7 +471,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -491,7 +517,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -505,7 +535,16 @@
       "description": "Systemneutrale Automatisierung für lösungsorientierten Community Outreach und Repo-Recommender in Foren, Reddit und Plattformen nach dem Human-in-the-Loop-Prinzip (EU AI Act konform).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -524,7 +563,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -545,6 +588,7 @@
         "ru",
         "fr",
         "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -610,7 +654,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -630,7 +679,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -646,9 +697,14 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
         "ja",
         "ru",
+        "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -664,8 +720,15 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -685,6 +748,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -704,7 +770,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -719,8 +789,14 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -740,7 +816,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -761,6 +841,8 @@
         "ru",
         "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -782,6 +864,8 @@
         "ru",
         "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -802,7 +886,10 @@
         "ja",
         "ru",
         "fr",
-        "ar"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -818,7 +905,14 @@
         "de",
         "en",
         "es",
-        "zh"
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -837,7 +931,10 @@
         "zh",
         "ja",
         "ru",
+        "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -858,7 +955,10 @@
         "ja",
         "ru",
         "fr",
-        "hi"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -873,7 +973,13 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
         "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -893,8 +999,11 @@
         "es",
         "zh",
         "ja",
+        "ru",
         "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -914,7 +1023,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -928,7 +1041,16 @@
       "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -948,7 +1070,10 @@
         "ja",
         "ru",
         "fr",
-        "ar"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -968,7 +1093,10 @@
         "ja",
         "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1011,6 +1139,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1030,7 +1161,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1049,7 +1184,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1069,6 +1208,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1089,6 +1231,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1108,7 +1253,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1128,7 +1277,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1166,7 +1317,16 @@
       "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\").",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1185,7 +1345,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1227,7 +1391,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1242,8 +1410,15 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1258,7 +1433,15 @@
       "languages": [
         "de",
         "en",
-        "fr"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1274,7 +1457,13 @@
         "de",
         "en",
         "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1291,7 +1480,13 @@
         "de",
         "en",
         "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1310,7 +1505,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1326,7 +1526,12 @@
         "de",
         "en",
         "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
+        "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -1347,7 +1552,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1363,7 +1572,13 @@
         "de",
         "en",
         "es",
+        "zh",
+        "ja",
+        "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1384,7 +1599,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1407,6 +1624,7 @@
         "fr",
         "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1427,6 +1645,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1447,7 +1668,10 @@
         "ja",
         "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1467,7 +1691,10 @@
         "ja",
         "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1481,7 +1708,14 @@
       "description": "Bindet das model-agnostische Computer-Use-Modul open-compute (Screenshot-Wahrnehmung, Windows-UIA-Elementklicks, sicherheitsgegatete Aktionen) fuer ALLE Agenten des Systems ein -- Claude Code, Codex und agy/Antigravity. Nutzen, wenn ein Dienst eine interaktive GUI- oder Browser-Aktion braucht, die kein reiner Text-/API-Weg loesen kann (Paradebeispiel: Tailscale-Reauth im Browser, sonstige Login-/Consent-Dialoge, Dialogfenster-Klicks). Standard ab 2026-08-02: open-compute statt Aufgeben oder Abwarten nutzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "ja",
+        "ru",
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1496,8 +1730,15 @@
       "languages": [
         "de",
         "en",
+        "es",
+        "zh",
+        "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1516,7 +1757,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1531,7 +1776,15 @@
       "languages": [
         "de",
         "en",
-        "fr"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1551,7 +1804,10 @@
         "ja",
         "ru",
         "fr",
-        "hi"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1570,7 +1826,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1589,7 +1849,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1609,6 +1873,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1629,6 +1896,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1647,7 +1917,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1668,7 +1943,9 @@
         "ru",
         "fr",
         "hi",
-        "ar"
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1689,7 +1966,9 @@
         "ru",
         "fr",
         "hi",
-        "bn"
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1709,6 +1988,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1724,7 +2006,15 @@
       "languages": [
         "de",
         "en",
-        "es"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1742,7 +2032,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1761,7 +2056,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1780,7 +2079,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1799,7 +2102,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1818,7 +2125,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1837,7 +2148,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1857,6 +2172,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1876,7 +2194,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1896,6 +2218,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -1915,7 +2240,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1934,7 +2263,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1953,7 +2286,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1972,7 +2309,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1991,7 +2332,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2011,7 +2356,10 @@
         "ja",
         "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2031,6 +2379,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2050,7 +2401,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2069,7 +2424,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2088,7 +2447,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2107,7 +2470,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2126,7 +2493,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2147,6 +2518,8 @@
         "ru",
         "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2166,7 +2539,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2179,7 +2556,17 @@
       "status": "active",
       "description": "A relentless interview to sharpen a plan or design. Use when the user says \"grill me\", \"grill mich\", \"grill mich zu diesem Plan\", or explicitly invokes /grill-me. Does NOT fire on generic \"review this\", \"poke holes\", \"stress-test\", \"devil's advocate\" or \"critique\" phrasing -- for reviewing an already-written artifact (code, PR, paper) use code-review, 3agenten-review, 7phasen-review or caveman-review instead; grill-me interrogates a still-open plan or idea before it is built.",
       "languages": [
-        "en"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2192,7 +2579,17 @@
       "status": "active",
       "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Entry point for the /grill-me command; can also be invoked directly.",
       "languages": [
-        "en"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2205,7 +2602,17 @@
       "status": "active",
       "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
       "languages": [
-        "en"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2247,7 +2654,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2265,7 +2676,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2284,7 +2700,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2304,6 +2724,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2324,7 +2747,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2344,7 +2769,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2358,7 +2787,15 @@
       "description": "Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden, prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten. Zeigt, wie die Teilsysteme nach der Umsetzung konkret ineinandergreifen, statt den Nutzer durch Dutzende isolierte Einzelfragen zu zwingen. Der Nutzer nimmt das Bild als Ganzes ab oder gibt zielgerichtete Korrekturen, die automatisch in Einzelentscheidungen übersetzt und über decision-briefing Phase 4 ins Register zurückgeschrieben werden. Nutze diesen Skill bei \"wie sieht das Ganze aus wenn wir allem zustimmen\", \"zeichne mir das Gesamtbild\", \"Gesamtkonzept der Entscheidungen\", \"decision draw\", /decision-draw, \"wie greifen die Systeme zusammen\". NICHT nutzen, wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht decide.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2373,7 +2810,14 @@
       "languages": [
         "de",
         "en",
-        "es"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2388,7 +2832,15 @@
       "languages": [
         "de",
         "en",
-        "ru"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2432,6 +2884,7 @@
         "ru",
         "fr",
         "hi",
+        "ar",
         "bn",
         "pt"
       ]
@@ -2447,7 +2900,15 @@
       "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2485,7 +2946,15 @@
       "languages": [
         "de",
         "en",
-        "ja"
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2504,7 +2973,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2517,7 +2990,17 @@
       "status": "active",
       "description": "Große Kandidatenlisten durch optionale Themen-Pfützen, Filterstufen und wiederholt neu gemischte Bündel schrittweise reduzieren. Nutzen, wenn der User Skills, Aufgaben, Ideen, Dateien oder andere Einträge gruppenweise auswählen, nach Merkmalen filtern oder nur innerhalb gemeinsamer Themenbereiche mischen will, ohne übrige Einträge endgültig zu verwerfen.",
       "languages": [
-        "de"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2536,7 +3019,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2554,7 +3041,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2573,7 +3065,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2589,8 +3085,14 @@
         "de",
         "en",
         "es",
+        "zh",
+        "ja",
         "ru",
-        "hi"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2627,7 +3129,16 @@
       "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2646,7 +3157,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2660,7 +3175,16 @@
       "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2681,6 +3205,8 @@
         "ru",
         "fr",
         "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2701,6 +3227,7 @@
         "ja",
         "ru",
         "fr",
+        "hi",
         "ar",
         "bn",
         "pt"
@@ -2724,7 +3251,9 @@
         "ru",
         "fr",
         "hi",
-        "bn"
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2744,6 +3273,9 @@
         "ja",
         "ru",
         "fr",
+        "hi",
+        "ar",
+        "bn",
         "pt"
       ]
     },
@@ -2764,7 +3296,10 @@
         "ja",
         "ru",
         "fr",
-        "bn"
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     }
   ]
