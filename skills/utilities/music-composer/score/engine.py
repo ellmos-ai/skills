@@ -484,7 +484,9 @@ def stage_gains(raw, t_bed, t_fg, fg_cap=12.0):
             # full step from 3 s, below that 2.5 dB less per second, at most 4 dB
             # (exception: the final chord after the last word gets the full step)
             s["target"] = t_fg - (0.0 if s["final"] else float(np.clip((3.0 - (s["end"] - s["start"])) * 2.5, 0, 4)))
-            s["g"] = float(np.clip(s["target"] - lufs(win(raw, s["start"] + 0.1, s["end"] - 0.1)), s["ref"], s["ref"] + fg_cap))
+            # inset 0.1 s per side; a pause too short for that is measured whole (an empty window gives NaN)
+            a, b = (s["start"] + 0.1, s["end"] - 0.1) if s["end"] - s["start"] > 0.3 else (s["start"], s["end"])
+            s["g"] = float(np.clip(s["target"] - lufs(win(raw, a, b)), s["ref"], s["ref"] + fg_cap))
     for _ in range(3):
         curve, _ = gain_curve(segs)
         y = raw * curve[:, None]
