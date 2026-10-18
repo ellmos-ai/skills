@@ -150,6 +150,20 @@ class ScoreModeTest(unittest.TestCase):
             self.build.main(["--speech-map", str(self.short_map), "--variant", str(bad), "--check"])
         self.assertIn("chord bars", str(cm.exception))
 
+    def test_short_final_gap_gives_finite_gains(self):
+        full = json.loads(self.speech_map.read_text(encoding="utf-8"))
+        voice = full["voices"][0]
+        short = self.tmp / "speech-map-short-end.json"
+        dur = voice["speech_end"] + 0.05
+        short.write_text(json.dumps({"duration": dur, "scenes": [dict(full["scenes"][0], end=dur)],
+                                     "voices": [voice]}), encoding="utf-8")
+        self.engine.configure(self.timeline.load_speech_map(short))
+        self.addCleanup(self.engine.configure, self.timeline.load_speech_map(self.short_map))
+        raw = np.random.default_rng(0).normal(0, 0.1, (int(self.engine.DUR * self.engine.SR), 2))
+        segs, curve, _ = self.engine.stage_gains(raw, -36.0, -24.0)
+        self.assertTrue(all(np.isfinite(s["g"]) for s in segs if "g" in s))
+        self.assertTrue(np.isfinite(curve).all())
+
     def test_speech_map_derives_pauses(self):
         m = self.timeline.load_speech_map(self.speech_map)
         self.assertEqual([p["before"] for p in m["pauses"]],
