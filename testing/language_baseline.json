@@ -185,16 +185,6 @@
       ]
     },
     {
-      "skill": "music-composer",
-      "klasse": "offen",
-      "grund": "SKILL.md englisch, keine SKILL.en.md -- wie piggyback-hosting",
-      "temporaer": true,
-      "aspekte": [
-        "body",
-        "description"
-      ]
-    },
-    {
       "skill": "piggyback-hosting",
       "klasse": "offen",
       "grund": "SKILL.md englisch, keine SKILL.en.md -- Herkunft klaeren (fremd? dann third_party-Flag), sonst deutsche Fassung anlegen",
