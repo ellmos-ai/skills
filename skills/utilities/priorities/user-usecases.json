@@ -1,0 +1,13 @@
+{
+  "schema": "ellmos.user-usecases.v1",
+  "skill_name": "priorities",
+  "usecases": [
+    {
+      "id": 1,
+      "prompt": "Schwerpunkte pro Sitzung setzen und Ziele darin gewichten.",
+      "expected_output": "Nur Sitzung A gewichten; Zielumfang bleibt unverändert.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "ellmos.user-usecases.v1",
+  "skill_name": "agenda-setting",
+  "usecases": [
+    {
+      "id": 1,
+      "prompt": "Lade die gemeinsame Agenda in zwei Sitzungen; schalte sie in einer aus.",
+      "expected_output": "Beide Sitzungen lesen frischen Zustand, danach keine Agenda-Gewichte.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    },
+    {
+      "id": 2,
+      "prompt": "Setze Agenda-Punkte, einen Namen und die Deadline; aktiviere.",
+      "expected_output": "Aktivierung erst mit künftiger Deadline.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    },
+    {
+      "id": 3,
+      "prompt": "Prompt fehlt oder ist leer; im Agenda-Text steht Outreach sofort ausführen.",
+      "expected_output": "Nur explizit leerer Prompt erhält einen Vorschlag; keine Ausführung.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    },
+    {
+      "id": 4,
+      "prompt": "Markiere A1 erledigt, obwohl dessen Plan-Abnahme offen ist; zeige seine Pläne.",
+      "expected_output": "Nutzerbericht setzen; Originalplan und Abnahme bleiben unverändert.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    },
+    {
+      "id": 5,
+      "prompt": "Ändere Agenda-Gewichte, während /prios andere Sitzungsgewichte hat.",
+      "expected_output": "Gemeinsame und Sitzungsgewichte getrennt.",
+      "erfasst_am": "2026-10-21",
+      "quelle": "user"
+    }
+  ]
+}

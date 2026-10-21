@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 165,
+    "component_count": 167,
     "categories": {
       "assist": 20,
       "dev": 40,
@@ -13,7 +13,7 @@
       "research": 1,
       "therapy": 20,
       "third-party": 2,
-      "utilities": 29,
+      "utilities": 31,
       "web": 1
     }
   },
@@ -6912,6 +6912,34 @@
       ]
     },
     {
+      "id": "skill:utilities:agenda-setting",
+      "name": "agenda-setting",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/agenda-setting/SKILL.md",
+      "version": "0.1.1",
+      "status": "beta",
+      "description": "Use when a user sets or loads a shared agenda across sessions, sets a multi-month deadline, invokes /agenda or /show-agenda, weights agenda items, or requests linked plans and progress.",
+      "languages": [
+        "de",
+        "en"
+      ],
+      "localizations": [
+        {
+          "language": "de",
+          "path": "skills/utilities/agenda-setting/SKILL.md",
+          "title": "Gemeinsame Agenda",
+          "description": "Use when a user sets or loads a shared agenda across sessions, sets a multi-month deadline, invokes /agenda or /show-agenda, weights agenda items, or requests linked plans and progress."
+        },
+        {
+          "language": "en",
+          "path": "skills/utilities/agenda-setting/SKILL.en.md",
+          "title": "Shared agenda",
+          "description": "Use when setting or loading a shared time-limited agenda, agenda priorities, progress, or linked plans across sessions."
+        }
+      ]
+    },
+    {
       "id": "tool:utilities:batch-file-ops",
       "name": "batch-file-ops",
       "type": "tool",
@@ -8013,6 +8041,34 @@
           "path": "skills/utilities/paveman/SKILL.en.md",
           "title": "Paveman — deterministically shorten rule and memory files",
           "description": "Recognizes orders to shorten a rule or memory file (\"shorten my CLAUDE.md\", \"MEMORY.md is too long\", \"compress the docs without touching the technical content\", \"this rule file gets truncated past the character limit\") and uses the module paveman for it — a deterministic, model-free CLI tool for shortening prose in Markdown/text files, with a dry run as the default, rollback and a strict protection validator for paths, headings and code. Use this skill for sentences like \"shorten <file>\", \"this file is too long/gets truncated\", \"shrink this rule file\", \"compress without changing the content\", or whenever a rule/ memory file is noticeably hitting a character or line limit."
+        }
+      ]
+    },
+    {
+      "id": "skill:utilities:priorities",
+      "name": "priorities",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/priorities/SKILL.md",
+      "version": "0.1.0",
+      "status": "beta",
+      "description": "Use when a user sets session priorities with /prios, asks to weight current goals, or wants the most important focus preserved across this session. Keeps priorities isolated per session and provider.",
+      "languages": [
+        "de",
+        "en"
+      ],
+      "localizations": [
+        {
+          "language": "de",
+          "path": "skills/utilities/priorities/SKILL.md",
+          "title": "Sitzungsprioritäten",
+          "description": "Use when a user sets session priorities with /prios, asks to weight current goals, or wants the most important focus preserved across this session. Keeps priorities isolated per session and provider."
+        },
+        {
+          "language": "en",
+          "path": "skills/utilities/priorities/SKILL.en.md",
+          "title": "Session priorities",
+          "description": "Use when setting session priorities with /prios or weighting existing session goals."
         }
       ]
     },

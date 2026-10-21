@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 935,
+  "file_count": 939,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -777,6 +777,8 @@
     "skills/therapy/trauma-psychoeducation/SKILL.zh.md",
     "skills/third-party/grilling/SKILL.md",
     "skills/third-party/taste-skill/SKILL.md",
+    "skills/utilities/agenda-setting/SKILL.en.md",
+    "skills/utilities/agenda-setting/SKILL.md",
     "skills/utilities/batch-file-ops/SKILL.en.md",
     "skills/utilities/batch-file-ops/SKILL.es.md",
     "skills/utilities/batch-file-ops/SKILL.fr.md",
@@ -894,6 +896,8 @@
     "skills/utilities/nulcleaner/SKILL.zh.md",
     "skills/utilities/paveman/SKILL.en.md",
     "skills/utilities/paveman/SKILL.md",
+    "skills/utilities/priorities/SKILL.en.md",
+    "skills/utilities/priorities/SKILL.md",
     "skills/utilities/privat-mail-writer/SKILL.en.md",
     "skills/utilities/privat-mail-writer/SKILL.es.md",
     "skills/utilities/privat-mail-writer/SKILL.fr.md",
