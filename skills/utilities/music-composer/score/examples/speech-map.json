@@ -1,0 +1,16 @@
+{
+ "duration": 42.0,
+ "scenes": [
+  {"id": "intro", "start": 0.0, "end": 8.3},
+  {"id": "problem", "start": 8.3, "end": 19.2},
+  {"id": "solution", "start": 19.2, "end": 33.1},
+  {"id": "outro", "start": 33.1, "end": 42.0}
+ ],
+ "voices": [
+  {"id": "v1_intro", "clip_start": 0.7, "clip_dur": 4.7, "speech_start": 0.8, "speech_end": 5.2},
+  {"id": "v2_problem", "clip_start": 8.95, "clip_dur": 8.4, "speech_start": 9.05, "speech_end": 17.2},
+  {"id": "v3_solution_a", "clip_start": 19.8, "clip_dur": 5.8, "speech_start": 19.9, "speech_end": 25.5},
+  {"id": "v4_solution_b", "clip_start": 28.4, "clip_dur": 4.2, "speech_start": 28.5, "speech_end": 32.4},
+  {"id": "v5_outro", "clip_start": 33.8, "clip_dur": 4.4, "speech_start": 33.9, "speech_end": 38.0}
+ ]
+}

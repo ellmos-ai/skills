@@ -2,6 +2,7 @@
 
 ## [Unreleased] - 2026-10-09
 
+- **`music-composer` 1.1.0: score mode (2026-10-18)**: new `score/` folder with a hand-written-score pipeline for video music (speech map, bar grid, score -> notes/audio/MIDI, fixed level steps without ducking, novelty proof, check tools), a neutral example speech map and example march score, and `tests/test_score_mode.py` (skipped without numpy/scipy). The storyline mode (`compose_music.py`) is unchanged and now documented as the sketch mode with its known limit. Package version stays frozen at `1.4.4`; `registry/components.json` and `SKILLS-MAP.md` regenerated with the repo generators.
 - **Technical Hygiene, Dependabot Lifecycle Automation, Multi-Host OS Defense & Contract Hardening (Pfad A)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A maintenance).
   - Provisioned `.github/dependabot.yml` for automated weekly updates of `github-actions` and `pip` dependencies (Europe/Berlin timezone, limit: 3 PRs, `dependencies` & `github-actions` / `python` labels), closing the Dependabot monitoring gap for `ellmos-ai/skills`.

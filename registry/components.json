@@ -2385,9 +2385,9 @@
       "type": "tool",
       "category": "utilities",
       "path": "skills/utilities/music-composer/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "stable",
-      "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst.",
+      "description": "Komponiert video-synchronisierte Hintergrundmusik per lokaler Synthese (numpy + scipy, ffmpeg optional). Empfohlen: der Partitur-Modus (handgeschriebene Partitur auf der Sprachzeitachse, feste Pegelstufen ohne Ducking, Neuheitsbeleg gegen Vorgängerstücke). Daneben der schnelle Storyline-Modus als Skizze (Chiptune, Ambient, Electronic). Deterministisch, offline, keine Samples, kein Cloud-Dienst.",
       "languages": [
         "de",
         "en"
