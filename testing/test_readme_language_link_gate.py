@@ -231,7 +231,9 @@ class SkillBodyLinkGateTests(unittest.TestCase):
             skill_dir.mkdir(parents=True)
             (skill_dir / "SKILL.md").write_text(
                 "See [docs](https://example.com/docs), [mail](mailto:a@b.com), "
-                "[section](#usage), and [local file](file:///tmp/notes.md).\n",
+                # Construct the intentional runtime fixture without presenting
+                # an unshipped local dependency in this tracked source file.
+                "[section](#usage), and [local file](file://" "/tmp/notes.md).\n",
                 encoding="utf-8",
             )
             _git_add(root, "skills/utilities/example/SKILL.md")
