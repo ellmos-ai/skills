@@ -20,7 +20,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: [agy_kontext_and_workflow_loader.py]
+  python: [scripts/agy_kontext_and_workflow_loader.py]
 provenance:
   origin: "fork of automation-self-care"
   origin_path: "skills/infrastructure/automation-self-care"
@@ -36,7 +36,7 @@ provenance:
 
 **Letter-Hooker** スキルは、ネイティブなイベント駆動型 JSON ライフサイクルフックローダー（例: `~/.claude/settings.json` や `~/.codex/hooks.json`）を持たない AI エージェントフレームワーク（**Antigravity / Gemini CLI** など）向けに `automation-self-care` を拡張します。
 
-受動的なキー入力ごとのフックに依存するのではなく、`letter-hooker` はスケジュールされたタスクとメンテナースクリプト（`agy_kontext_and_workflow_loader.py`）を介して、**アクティブなプロンプトレベルのプリフライトブートローダーおよび Letter-Hook 注入ループ**を運用します。
+受動的なキー入力ごとのフックに依存するのではなく、`letter-hooker` はスケジュールされたタスクとメンテナースクリプト（`scripts/agy_kontext_and_workflow_loader.py`）を介して、**アクティブなプロンプトレベルのプリフライトブートローダーおよび Letter-Hook 注入ループ**を運用します。
 
 ---
 
@@ -47,7 +47,7 @@ provenance:
    - **Memory & Gardener プリフライト**: 破壊的または複雑な変更を実行する前に、`gardener` および `memoryhooker` への必須プリフライトクエリを行います。
 
 2. **Letter Hooks カタログ & 参照リンク**:
-   - `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/` 配下に格納されたモジュール化された `.md` 指示ファイル。
+   - `hooks/` 配下に格納されたモジュール化された `.md` 指示ファイル。
    - 呼び出し時にエージェントが正確なセキュリティおよびワークフロープロトコルを読み取るよう、`sidecar.json` プロンプトテキスト内に明示的な `file://` リンクを直接注入します。
 
 3. **日次キーワードリスト & 自己修復型プロンプト拡張**:
@@ -61,10 +61,10 @@ provenance:
 
 ## 主要な Letter Hooks
 
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -72,10 +72,12 @@ provenance:
 
 ```bash
 # Execute the Letter-Hooker Maintenance Engine
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+このコマンドは `letter-hooker` スキルのディレクトリから実行してください。キーワード一覧は `<SYNC_DIR>/STICHWORTLISTE.json` に生成され、`<SYNC_DIR>` は `config.json` で設定できます。
+
 1. **サイドカーの走査**: `~/.gemini/config/sidecars/` 内のすべての `sidecar.json` プロンプトテキストを読み込みます。
-2. **キーワードリストの更新**: ドメイン用語を抽出し、`.SYNC/STICHWORTLISTE.json` に保存します。
+2. **キーワードリストの更新**: ドメイン用語を抽出し、`<SYNC_DIR>/STICHWORTLISTE.json` に保存します。
 3. **Letter Hooks の注入**: ブートローダールールおよび `file://` 参照リンクをプロンプトに追加します。
 4. **結果の記録**: 更新内容を `ANTIGRAVITY-LOG.txt` および `ANTIGRAVITY-REGISTRY.md` に記録します。
