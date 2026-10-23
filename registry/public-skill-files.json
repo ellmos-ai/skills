@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1062,
+  "file_count": 1064,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -446,6 +446,8 @@
     "skills/infrastructure/decision-avatar/SKILL.md",
     "skills/infrastructure/decision-avatar/SKILL.ru.md",
     "skills/infrastructure/decision-avatar/SKILL.zh.md",
+    "skills/infrastructure/doc-reality-loop/SKILL.en.md",
+    "skills/infrastructure/doc-reality-loop/SKILL.md",
     "skills/infrastructure/ellmos-skill-creator/SKILL.en.md",
     "skills/infrastructure/ellmos-skill-creator/SKILL.md",
     "skills/infrastructure/headless/SKILL.en.md",
