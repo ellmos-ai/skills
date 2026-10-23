@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 143,
+    "component_count": 144,
     "categories": {
       "assist": 20,
       "dev": 25,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 33,
+      "infrastructure": 34,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1207,6 +1207,20 @@
         "zh",
         "ja",
         "ru"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:doc-reality-loop",
+      "name": "doc-reality-loop",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/doc-reality-loop/SKILL.md",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Prüft Tatsachenaussagen in Dokumentation gegen belegte Wirkung und führt bestätigte Korrekturen durch einen unabhängigen Review mit erneuter Messung.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {
