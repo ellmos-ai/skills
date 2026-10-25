@@ -11,8 +11,11 @@ und gehoeren NIE in OneDrive (wie .venv / .git-Objekte).
 
 Loeschung ist long-path-sicher via robocopy-Purge (umgeht MAX_PATH).
 
+DEFAULT = DRY-RUN (zeigt nur). Geloescht wird erst mit ausdruecklichem --apply.
+--dry-run wird weiter akzeptiert und ist wirkungslos (alter Aufruf, jetzt ohnehin Standard).
+
 Nutzung:
-  PYTHONIOENCODING=utf-8 python scripts/clean_flutter_builds.py [WURZEL] [--dry-run]
+  PYTHONIOENCODING=utf-8 python scripts/clean_flutter_builds.py [WURZEL] [--apply]
 
 Default-WURZEL: $SOFTWARE_ROOT, sonst <OneDrive>/.TOPICS/.SOFTWARE (nicht der Skriptort).
 Exit 0 = ok. Idempotent: wiederholter Lauf findet dann nichts mehr.
@@ -87,7 +90,7 @@ def purge_dir(path):
 
 def main():
     raw = sys.argv[1:]
-    dry = "--dry-run" in raw
+    dry = "--apply" not in raw  # --dry-run ist nur noch ein Alias des Standards
     positional = [a for a in raw if not a.startswith("--")]
     root = positional[0] if positional else default_software_root()
     print(f"Wurzel: {root}{'  [DRY-RUN]' if dry else ''}")

@@ -241,7 +241,7 @@ Two scripts under `scripts/` remove regenerable build junk before it takes space
   `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` and `dist/` only next to a
   Python build marker, Flutter caches; with `--local` also age-based pruning of ephemeral working
   folders.
-- `scripts/clean_flutter_builds.py [ROOT] [--dry-run]`: Flutter/Gradle caches (`build/`,
+- `scripts/clean_flutter_builds.py [ROOT] [--apply]`: Flutter/Gradle caches (`build/`,
   `.dart_tool/`, `android/.gradle/`), long-path safe.
 
 **The default is a dry run**; `--apply` deletes for good (only exactly recognised, regenerable

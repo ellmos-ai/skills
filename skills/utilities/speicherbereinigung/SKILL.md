@@ -242,7 +242,7 @@ Zwei Skripte unter `scripts/` entfernen regenerierbaren Build-Müll, bevor er Pl
   `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` und `dist/` nur neben einem
   Python-Build-Marker, Flutter-Caches; mit `--local` zusätzlich altersbasiertes Pruning ephemerer
   Arbeitsordner.
-- `scripts/clean_flutter_builds.py [WURZEL] [--dry-run]`: Flutter-/Gradle-Caches (`build/`,
+- `scripts/clean_flutter_builds.py [WURZEL] [--apply]`: Flutter-/Gradle-Caches (`build/`,
   `.dart_tool/`, `android/.gradle/`), long-path-sicher.
 
 **Standard ist der Trockenlauf**; `--apply` löscht endgültig (nur exakt erkannte, regenerierbare
