@@ -57,7 +57,7 @@ provenance:
 - `skill-creator` (Anthropic, Marketplace `claude-plugins-official`) ist **Apache-2.0**
   lizenziert (LICENSE-Text im Klon gelesen und verifiziert, 2026-08-24) — ein Fork wäre
   rechtlich sauber möglich und ist im Repo an anderer Stelle bereits das etablierte Muster
-  (`skills/third-party/grill-me`, `skills/third-party/grilling`).
+  (`skills/third-party/grilling`).
 - Ein Fork hätte aber die komplette Eval-/Benchmark-Maschinerie des Originals mitgeschleppt
   (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`, 7 Scripts, 485-Zeilen-SKILL.md) —
   Fähigkeit, die bereits vorhanden und direkt aufrufbar ist (`Skill: skill-creator:skill-creator`).

@@ -127,9 +127,8 @@ skills/
 │   ├── systemisch-loesungsfokussiert — Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning.
 │   ├── therapie-umbrella — Meta-/Umbrella-Skill für die Familie „Therapie / Beratung". Kennt alle therapeutischen Skills (Stabilisierung, Methoden-Überblick, Gesprächsführung + deregistrierte Spezialverfahren) und leitet zum passenden weiter. Nutze diesen Skill, wenn unklar ist, welcher Therapie-/Beratungs-Skill passt, ein Überblick über die verfügbaren Verfahren gebraucht wird, oder eine Beratungs-/Krisensituation zuerst eingeordnet werden muss. Auch auslösen bei „welche Therapiemethode passt", „Beratung strukturieren", „Krise — was tun", „therapeutisches Vorgehen wählen".
 │   └── trauma-psychoeducation — Trauma-Psychoedukation: Traumadefinition, normale Reaktionen, Fenster der Belastbarkeit, Triggermanagement und Selbstfürsorge.
-├── third-party/ (3)
-│   ├── grill-me — A relentless interview to sharpen a plan or design. Use when the user says "grill me", "grill mich", "grill mich zu diesem Plan", or explicitly invokes /grill-me. Does NOT fire on generic "review this", "poke holes", "stress-test", "devil's advocate" or "critique" phrasing -- for reviewing an already-written artifact (code, PR, paper) use code-review, 3agenten-review, 7phasen-review or caveman-review instead; grill-me interrogates a still-open plan or idea before it is built.
-│   ├── grilling — Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Entry point for the /grill-me command; can also be invoked directly.
+├── third-party/ (2)
+│   ├── grilling — Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says "grill me" or types /grill-me, or uses any other 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Also use when a planning session ends and the user asks whether anything is still open.
 │   └── taste-skill — Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.
 ├── utilities/ (29)
 │   ├── batch-file-ops — Batch-Dateioperationen (Löschen, Verschieben, Kopieren, Auflisten) mit Glob-Mustern. CLI-Werkzeug für effiziente Dateisystem-Operationen. Ohne Abhängigkeiten.
@@ -165,7 +164,7 @@ skills/
     └── web-reading — Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module.
 ```
 
-**Gesamt: 143 öffentliche Skills in 11 Kategorien.**
+**Gesamt: 142 öffentliche Skills in 11 Kategorien.**
 
 ## Veröffentlichungsgrenze
 

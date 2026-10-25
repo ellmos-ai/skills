@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Entry point for the /grill-me command; can also be invoked directly.
+description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says "grill me" or types /grill-me, or uses any other 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Also use when a planning session ends and the user asks whether anything is still open.
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
@@ -34,17 +34,34 @@ Finding _facts_ is your job, never the user's. When a frontier question needs a 
 
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
 
+## Local additions
+
+These rules extend the upstream method; they do not change it.
+
+1. **Seed the tree from what is already written.** Before the first round, read the plan and the place where the project records its decisions, and collect every item still marked as open, proposed or unconfirmed. Those are frontier candidates. Never re-ask a point that is already decided there; cite it instead.
+2. **Write each answer down before the next round.** Record every answer where the project keeps its decisions, marked as decided, with date and source. An answer that exists only in the chat is lost after the next context reset.
+3. **Pause, don't restart, on interruptions.** If the user asks for something else first ("transfer first, then grill"), do that, then resume with the remaining frontier. Settled questions stay settled.
+4. **Back each recommendation with one reason.** Give the recommended answer and the single fact or rule it rests on. A recommendation is never a decision until the user confirms it.
+5. **Show the facts you measured.** When a question rests on something you looked up, state the finding and where you found it, so the user decides on evidence rather than on your summary.
+6. **Ask in the user's language.** Questions and recommendations follow the language the user writes in; identifiers stay as they are.
+7. **Close with a ledger.** When the frontier is empty, list what was decided and what was deliberately left open, then ask for confirmation of the shared understanding.
+
 <!--
 Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
-Modification vs. upstream: the `description` field was extended with German
-trigger phrases ("grill mich"). The `category` and `language` fields and this
-comment were added; all are local convention (recommended, not one of the
-nine house fields), not upstream content, and `language: en` reflects that
-the vendored body is unmodified English. The body (the design tree / frontier
-/ rounds method) is unchanged from upstream.
+Improved fork. Modifications vs. upstream:
+- `description`: German trigger phrases ("grill mich"), the "grill me" and
+  /grill-me triggers, and the end-of-planning trigger were added.
+- `category`, `language` and this comment were added (local convention).
+- "Local additions" (rules 1-7) were appended after the upstream body. The
+  upstream body above that heading is unchanged, so a resync only needs to
+  replace that part.
 
-Adopted 2026-08-24 per Ticket T-20260824-594031458 alongside skills/third-
-party/grill-me/ (the thin, explicit-only entry point that calls this skill).
+Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
+entry point skills/third-party/grill-me/ (upstream
+skills/productivity/grill-me, `disable-model-invocation: true`, body
+"Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
+the user's request: one skill instead of two, the triggers moved into this
+description. Rules 1-7 come from a planning session of the same day.
 -->

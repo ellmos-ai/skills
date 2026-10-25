@@ -528,7 +528,7 @@ Every skill, utility script, and metadata manifest within `ellmos-skills` is gov
 `ellmos-skills` is committed to absolute transparency, clean-room software boundaries, and supply chain security:
 
 - **Zero External Runtime Dependencies**: All core catalog tools, schema generators, and privacy boundary verifiers run strictly on the Python Standard Library (`>=3.10`).
-- **Permissive Third-Party Skills**: Curated external skills in `skills/third-party/` (`grill-me`, `grilling`) are licensed under the MIT License from upstream [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Permissive Third-Party Skills**: Curated external skills in `skills/third-party/` (`grilling`) are licensed under the MIT License from upstream [mattpocock/skills](https://github.com/mattpocock/skills).
 - **Formal Attribution & Notice**: Legal notices and open-source attribution are recorded in [`NOTICE`](NOTICE).
 - **Level 1 SBOM Companions**: Complete third-party license inventory and invariant mapping are documented in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) and plain-text companion [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt).
 - **0% Copyleft**: No GPL, AGPL, or LGPL components are bundled or required at runtime.
