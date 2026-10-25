@@ -39,3 +39,5 @@ JSON 契約は `ellmos.techshot.v1` と `ellmos.techshot-comparison.v1`。既存
 - オフラインのスナップショットと根拠品質付きホスト比較。
 
 ハードウェアの観測は在庫の申告値と分け、OS、アーキテクチャ、CPU、RAM、システムファイルシステム容量に出典または unknown を付ける。移植可能な収集手段がなければ GPU は unknown。Linux では dpkg-query または rpm を読む。ホスト比較の unknown を一致とみなさない。シリアル番号、MAC、PATH 全体は収集しない。
+
+比較契約: slot が異なれば hostname が同じでも axis=cross-host。同じ slot と hostname で収集時刻が異なる場合は axis=same-host-time。結果には chronology、双方のハッシュ、収集時刻、ホスト、元の在庫と収集範囲を残す。既知版が同じでも未知の追加インストールは version-uncertain として残す。必須の出典が欠ければ拒否し、完全な過去の記録は年齢に関係なく比較できる。比較時刻は新しい測定ではない。

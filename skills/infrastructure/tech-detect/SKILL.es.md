@@ -39,3 +39,5 @@ Contratos: `ellmos.techshot.v1` y `ellmos.techshot-comparison.v1`. Las instantá
 - Captura local y comparación entre equipos con calidad de evidencia explícita.
 
 Observaciones de hardware: sistema operativo, arquitectura, CPU, RAM y capacidad del sistema de archivos se miden por separado del inventario declarado, con fuente o unknown. GPU queda unknown sin un colector portátil. Linux admite dpkg-query o rpm. La comparación marca campos de hardware diferentes o desconocidos; unknown no significa igual. No recoger números de serie, MAC ni PATH completo.
+
+Comparación: distintos slot producen axis=cross-host aunque coincida hostname; el mismo slot y hostname con distintas horas capturadas produce axis=same-host-time. Se preservan el orden chronology, los hashes de entrada, horas, identidad, seed y cobertura. Una versión conocida igual con otra instalación desconocida sigue visible como version-uncertain. Rechazar procedencia obligatoria ausente; los archivos históricos completos siguen admitidos. La fecha de comparación no es una medición nueva.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -13,6 +14,23 @@ SPEC = importlib.util.spec_from_file_location("techshot", SCRIPT)
 techshot = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
 SPEC.loader.exec_module(techshot)
+
+
+def _snapshot(slot: str, hostname: str, components: list[dict],
+              captured_at: str = "2026-10-25T04:00:00Z") -> dict:
+    return {"schema_version": techshot.SCHEMA, "captured_at_utc": captured_at,
+            "host": {"slot": slot, "hostname": hostname},
+            "inventory": {"seed_sha256": "a" * 64, "seed_stand": "2026-10-24", "slot": slot},
+            "coverage": {"native_package_source": "fixture", "native_package_errors": [],
+                         "path_entries_considered": 0, "python_candidates": 0,
+                         "complete_installation_inventory": False},
+            "components": components}
+
+
+def _installation(install_id: str, version: str | None,
+                  quality: str = "observed") -> dict:
+    return {"install_id": install_id, "version": version,
+            "version_quality": quality, "source": "synthetic-fixture"}
 
 
 def _seed(path: Path, hostname: str = "host-a") -> Path:
@@ -100,12 +118,11 @@ def test_capture_refuses_foreign_seed_and_does_not_write(tmp_path):
 def test_compare_distinguishes_drift_from_missing_observation():
     def snapshot(slot, version, include_extra):
         rows = [{"component_id": "pip:vendor:widget", "installations": [
-            {"version": version, "version_quality": "observed"}]}]
+            _installation("widget-install", version)]}]
         if include_extra:
             rows.append({"component_id": "pip:vendor:other", "installations": [
-                {"version": "1.0", "version_quality": "reported"}]})
-        return {"schema_version": techshot.SCHEMA, "host": {"slot": slot},
-                "components": rows}
+                _installation("other-install", "1.0", "reported")]})
+        return _snapshot(slot, f"fixture-{slot}", rows)
     report = techshot.compare(snapshot("laptop", "1.0", True),
                               snapshot("workstation", "2.0", False))
     assert [(item["component_id"], item["status"]) for item in report["changes"]] == [
@@ -113,6 +130,98 @@ def test_compare_distinguishes_drift_from_missing_observation():
         ("pip:vendor:widget", "version-drift"),
     ]
     assert "not proof" in report["meaning"]
+
+
+def test_compare_keeps_unknown_installation_beside_equal_known_version():
+    known = _installation("runtime", "3.12.10")
+    unknown = _installation("path-candidate", None, "unknown")
+    left = _snapshot("host-a", "fixture-a", [{"component_id": "python", "installations":
+                                                [known, unknown]}])
+    right = _snapshot("host-b", "fixture-b", [{"component_id": "python", "installations":
+                                                 [known]}])
+    result = techshot.compare(left, right)
+    assert len(result["changes"]) == 1
+    change = result["changes"][0]
+    assert change["status"] == "version-uncertain"
+    assert change["versions"] == {"left": ["3.12.10"], "right": ["3.12.10"]}
+    assert change["unresolved_installations"]["left"] == [unknown]
+    assert change["unresolved_installations"]["right"] == []
+    assert result["inputs"]["left"]["hash_basis"] == "canonical-json"
+
+
+def test_version_drift_keeps_additional_uncertain_installation():
+    uncertain = _installation("other-install", "3.x", "uncertain")
+    left = _snapshot("a", "fixture-a", [
+        {"component_id": "python", "installations": [_installation("runtime", "3.11"), uncertain]}
+    ])
+    right = _snapshot("b", "fixture-b", [
+        {"component_id": "python", "installations": [_installation("runtime", "3.12")]}
+    ])
+    change = techshot.compare(left, right)["changes"][0]
+    assert change["status"] == "version-drift"
+    assert change["unresolved_installations"]["left"] == [uncertain]
+
+
+def test_same_host_history_uses_stable_identity_and_direction():
+    old = _snapshot("server", "fixture-server", [
+        {"component_id": "openssl", "installations": [_installation("package", "3.0.6")]}
+    ], "2020-01-01T00:00:00Z")
+    new = _snapshot("server", "fixture-server", [
+        {"component_id": "openssl", "installations": [_installation("package", "3.0.23")]}
+    ], "2026-10-25T04:00:00Z")
+    result = techshot.compare(old, new)
+    assert result["axis"] == "same-host-time"
+    assert result["chronology"] == "left-before-right"
+    assert result["hosts"] == ["server", "server"]
+    assert result["changes"][0]["status"] == "version-drift"
+    assert techshot.compare(new, old)["chronology"] == "right-before-left"
+    with pytest.raises(ValueError, match="distinct capture times"):
+        techshot.compare(old, {**new, "captured_at_utc": old["captured_at_utc"]})
+    with pytest.raises(ValueError, match="asset continuity"):
+        techshot.compare(old, {**new, "host": {"slot": "server", "hostname": "renamed-server"}})
+
+
+def test_distinct_slots_may_share_a_hostname_without_claiming_same_asset():
+    left = _snapshot("asset-a", "localhost", [])
+    right = _snapshot("asset-b", "localhost", [])
+    result = techshot.compare(left, right)
+    assert result["axis"] == "cross-host"
+    assert "share a hostname" in result["identity_note"]
+
+
+def test_same_host_history_cli_preserves_capture_times(tmp_path):
+    old = _snapshot("server", "fixture-server", [], "2020-01-01T00:00:00Z")
+    new = _snapshot("server", "fixture-server", [], "2026-10-25T04:00:00Z")
+    left, right, output = (tmp_path / name for name in ("old.json", "new.json", "compare.json"))
+    left.write_text(json.dumps(old), encoding="utf-8")
+    right.write_text(json.dumps(new), encoding="utf-8")
+    assert techshot.main(["compare", "--left", str(left), "--right", str(right),
+                          "--output", str(output)]) == 0
+    result = json.loads(output.read_text(encoding="utf-8"))
+    assert result["axis"] == "same-host-time"
+    assert result["inputs"]["left"]["captured_at_utc"] == "2020-01-01T00:00:00Z"
+    assert result["inputs"]["right"]["captured_at_utc"] == "2026-10-25T04:00:00Z"
+
+
+@pytest.mark.parametrize("missing", ["captured_at_utc", "inventory", "coverage"])
+def test_compare_refuses_missing_snapshot_provenance(missing):
+    left = _snapshot("a", "fixture-a", [])
+    right = _snapshot("b", "fixture-b", [])
+    del right[missing]
+    with pytest.raises(ValueError):
+        techshot.compare(left, right)
+
+
+@pytest.mark.parametrize("damage", ["missing-seed-stand", "empty-coverage-source"])
+def test_compare_refuses_incomplete_nested_provenance(damage):
+    left = _snapshot("a", "fixture-a", [])
+    right = _snapshot("b", "fixture-b", [])
+    if damage == "missing-seed-stand":
+        del right["inventory"]["seed_stand"]
+    else:
+        right["coverage"]["native_package_source"] = ""
+    with pytest.raises(ValueError):
+        techshot.compare(left, right)
 
 
 def test_hardware_live_evidence_separate_from_seed_and_unknown_not_drift(tmp_path, monkeypatch):
@@ -126,7 +235,9 @@ def test_hardware_live_evidence_separate_from_seed_and_unknown_not_drift(tmp_pat
     assert first["host"]["hardware_seed"]["cpu"] == "Example CPU"
     assert first["host"]["hardware_seed_quality"] == "inventory-reported-not-live-verified"
     assert first["hardware_observations"]["os"]["source"] == "platform"
-    other = {**first, "host": {**first["host"], "slot": "workstation"},
+    other = {**first, "host": {**first["host"], "slot": "workstation",
+                               "hostname": "fixture-workstation"},
+             "inventory": {**first["inventory"], "slot": "workstation"},
              "hardware_observations": {
                  "os": {"value": "Linux 6", "quality": "observed", "source": "platform"},
                  "gpu_model": {"value": None, "quality": "unknown", "source": "unavailable"},
@@ -140,15 +251,36 @@ def test_hardware_live_evidence_separate_from_seed_and_unknown_not_drift(tmp_pat
 
 
 def test_compare_cli_writes_new_versioned_file_and_refuses_overwrite(tmp_path):
-    a = {"schema_version": techshot.SCHEMA, "host": {"slot": "a"}, "components": []}
-    b = {"schema_version": techshot.SCHEMA, "host": {"slot": "b"}, "components": []}
+    a = _snapshot("a", "fixture-a", [], "2020-01-01T00:00:00Z")
+    b = _snapshot("b", "fixture-b", [])
     left, right, output = (tmp_path / name for name in ("a.json", "b.json", "out.json"))
     left.write_text(json.dumps(a), encoding="utf-8")
     right.write_text(json.dumps(b), encoding="utf-8")
     assert techshot.main(["compare", "--left", str(left), "--right", str(right),
                           "--output", str(output)]) == 0
-    assert json.loads(output.read_text(encoding="utf-8"))["schema_version"] == techshot.COMPARE_SCHEMA
+    result = json.loads(output.read_text(encoding="utf-8"))
+    assert result["schema_version"] == techshot.COMPARE_SCHEMA
+    assert result["axis"] == "cross-host"
+    assert result["inputs"]["left"]["sha256"] == hashlib.sha256(left.read_bytes()).hexdigest()
+    assert result["inputs"]["left"]["hash_basis"] == "file-bytes"
+    assert result["inputs"]["left"]["captured_at_utc"] == "2020-01-01T00:00:00Z"
+    assert result["inputs"]["right"]["inventory"] == b["inventory"]
+    assert result["inputs"]["right"]["coverage"] == b["coverage"]
     with pytest.raises(SystemExit) as error:
         techshot.main(["compare", "--left", str(left), "--right", str(right),
                        "--output", str(output)])
     assert error.value.code == 1
+
+
+def test_compare_cli_missing_coverage_writes_no_result(tmp_path):
+    a = _snapshot("a", "fixture-a", [])
+    b = _snapshot("b", "fixture-b", [])
+    del b["coverage"]
+    left, right, output = (tmp_path / name for name in ("a.json", "b.json", "out.json"))
+    left.write_text(json.dumps(a), encoding="utf-8")
+    right.write_text(json.dumps(b), encoding="utf-8")
+    with pytest.raises(SystemExit) as error:
+        techshot.main(["compare", "--left", str(left), "--right", str(right),
+                       "--output", str(output)])
+    assert error.value.code == 1
+    assert not output.exists()

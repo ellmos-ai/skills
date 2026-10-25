@@ -341,38 +341,121 @@ def capture(seed_path: Path, *, slot: str, hostname: str | None = None,
             "components": components}
 
 
+def _snapshot_identity(snapshot: dict, side: str) -> tuple[dict, datetime]:
+    if not isinstance(snapshot, dict) or snapshot.get("schema_version") != SCHEMA:
+        raise ValueError(f"{side} snapshot must use the techshot v1 schema")
+    host = snapshot.get("host")
+    if not isinstance(host, dict) or any(
+        not isinstance(host.get(key), str) or not host[key].strip()
+        for key in ("slot", "hostname")
+    ):
+        raise ValueError(f"{side} snapshot has no verified host slot and hostname")
+    captured = snapshot.get("captured_at_utc")
+    try:
+        if not isinstance(captured, str):
+            raise ValueError("missing capture time")
+        measured_at = datetime.fromisoformat(captured.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError(f"{side} snapshot has no valid captured_at_utc") from exc
+    if measured_at.tzinfo is None or measured_at.utcoffset() != timezone.utc.utcoffset(None):
+        raise ValueError(f"{side} snapshot capture time must be UTC")
+    inventory = snapshot.get("inventory")
+    if (not isinstance(inventory, dict)
+            or not isinstance(inventory.get("seed_sha256"), str)
+            or not re.fullmatch(r"[0-9a-fA-F]{64}", inventory["seed_sha256"])
+            or inventory.get("slot") != host["slot"]
+            or "seed_stand" not in inventory
+            or not isinstance(inventory.get("seed_stand"), (str, type(None)))):
+        raise ValueError(f"{side} snapshot has no valid inventory seed binding")
+    coverage = snapshot.get("coverage")
+    if (not isinstance(coverage, dict)
+            or not isinstance(coverage.get("native_package_source"), str)
+            or not coverage["native_package_source"]
+            or not isinstance(coverage.get("native_package_errors"), list)
+            or not all(isinstance(error, str) for error in coverage["native_package_errors"])
+            or not isinstance(coverage.get("complete_installation_inventory"), bool)
+            or any(not isinstance(coverage.get(key), int) or isinstance(coverage[key], bool)
+                   or coverage[key] < 0
+                   for key in ("path_entries_considered", "python_candidates"))):
+        raise ValueError(f"{side} snapshot has no valid coverage")
+    if not isinstance(snapshot.get("components"), list):
+        raise ValueError(f"{side} snapshot has no component list")
+    return host, measured_at
+
+
+def _component_map(snapshot: dict, side: str) -> dict[str, dict]:
+    mapping = {}
+    for row in snapshot["components"]:
+        if (not isinstance(row, dict) or not isinstance(row.get("component_id"), str)
+                or not row["component_id"] or not isinstance(row.get("installations"), list)):
+            raise ValueError(f"{side} snapshot has a malformed component")
+        key = row["component_id"]
+        if key in mapping:
+            raise ValueError(f"{side} snapshot has duplicate component identity")
+        install_ids = set()
+        for item in row["installations"]:
+            if (not isinstance(item, dict) or not isinstance(item.get("install_id"), str)
+                    or not item["install_id"] or item["install_id"] in install_ids
+                    or item.get("version_quality") not in
+                    {"observed", "reported", "uncertain", "unknown"}
+                    or not isinstance(item.get("source"), str)
+                    or not isinstance(item.get("version"), (str, type(None)))):
+                raise ValueError(f"{side} snapshot has a malformed installation")
+            install_ids.add(item["install_id"])
+        mapping[key] = row
+    return mapping
+
+
+def _version_evidence(row: dict | None) -> tuple[list[str], list[dict]]:
+    if row is None:
+        return [], []
+    versions = sorted({item["version"] for item in row["installations"]
+                       if item["version"] and item["version_quality"] in {"observed", "reported"}})
+    unresolved = [{key: item.get(key) for key in
+                   ("install_id", "source", "version", "version_quality")}
+                  for item in row["installations"]
+                  if not item["version"] or item["version_quality"] in {"unknown", "uncertain"}]
+    return versions, unresolved
+
+
 def compare(left: dict, right: dict) -> dict:
-    if left.get("schema_version") != SCHEMA or right.get("schema_version") != SCHEMA:
-        raise ValueError("both snapshots must use the techshot v1 schema")
-    a, b = left["host"]["slot"], right["host"]["slot"]
-    if a == b:
-        raise ValueError("compare distinct host slots")
-    by_side = []
-    for snapshot in (left, right):
-        mapping = {}
-        for row in snapshot["components"]:
-            key = row["component_id"]
-            if key in mapping:
-                raise ValueError("duplicate component identity")
-            mapping[key] = row
-        by_side.append(mapping)
+    identities = [_snapshot_identity(snapshot, side) for snapshot, side in
+                  ((left, "left"), (right, "right"))]
+    (host_a, time_a), (host_b, time_b) = identities
+    same_slot = host_a["slot"] == host_b["slot"]
+    same_host = host_a["hostname"].casefold() == host_b["hostname"].casefold()
+    if same_slot and not same_host:
+        raise ValueError("same host slot has changed hostname; asset continuity is unverified")
+    if same_slot and time_a == time_b:
+        raise ValueError("same-host comparison requires distinct capture times")
+    axis = "same-host-time" if same_slot else "cross-host"
+    chronology = ("left-before-right" if time_a < time_b else "right-before-left")
+    input_hashes = tuple(hashlib.sha256(json.dumps(
+        snapshot, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")).hexdigest() for snapshot in (left, right))
+    by_side = [_component_map(snapshot, side) for snapshot, side in
+               ((left, "left"), (right, "right"))]
     changes = []
     for key in sorted(set(by_side[0]) | set(by_side[1])):
         rows = [side.get(key) for side in by_side]
-        versions = [sorted({inst["version"] for inst in row["installations"]
-                            if inst["version"] and inst["version_quality"] in {"observed", "reported"}})
-                    if row else [] for row in rows]
+        versions, unresolved = zip(*(_version_evidence(row) for row in rows))
         if not all(rows):
-            status = "not-observed-on-one-host"
+            status = ("not-observed-on-one-timepoint" if same_slot
+                      else "not-observed-on-one-host")
         elif not all(versions):
             status = "version-unknown"
         elif versions[0] != versions[1]:
             status = "version-drift"
+        elif any(unresolved):
+            status = "version-uncertain"
         else:
             continue
         changes.append({"component_id": key, "status": status,
-                        "versions": {a: versions[0], b: versions[1]},
-                        "observed": {a: rows[0] is not None, b: rows[1] is not None}})
+                        "versions": {"left": versions[0], "right": versions[1]},
+                        "unresolved_installations": {"left": unresolved[0],
+                                                     "right": unresolved[1]},
+                        "observed": {"left": rows[0] is not None,
+                                     "right": rows[1] is not None}})
     hardware_changes = []
     for field in ("os", "architecture", "cpu_model", "logical_cpu_count",
                   "ram_total_bytes", "gpu_model", "system_filesystem_total_bytes"):
@@ -387,10 +470,21 @@ def compare(left: dict, right: dict) -> dict:
         else:
             continue
         hardware_changes.append({"field": field, "status": status,
-                                 "values": {a: values[0], b: values[1]}})
+                                 "values": {"left": values[0], "right": values[1]}})
+    inputs = {}
+    for side, snapshot, identity, digest in zip(
+        ("left", "right"), (left, right), identities, input_hashes
+    ):
+        host, _measured_at = identity
+        inputs[side] = {"sha256": digest, "hash_basis": "canonical-json",
+                        "captured_at_utc": snapshot["captured_at_utc"],
+                        "host": {"slot": host["slot"], "hostname": host["hostname"]},
+                        "inventory": snapshot["inventory"], "coverage": snapshot["coverage"]}
     return {"schema_version": COMPARE_SCHEMA, "compared_at_utc": _utc_now(),
-            "hosts": [a, b], "changes": changes,
-            "hardware_changes": hardware_changes,
+            "axis": axis, "chronology": chronology, "hosts": [host_a["slot"], host_b["slot"]],
+            "identity_note": ("distinct slots share a hostname; asset identity follows slots"
+                              if not same_slot and same_host else None),
+            "inputs": inputs, "changes": changes, "hardware_changes": hardware_changes,
             "meaning": "not observed is not proof that software is absent"}
 
 
@@ -423,8 +517,12 @@ def main(argv: list[str] | None = None) -> int:
             result = capture(args.seed, slot=args.slot, python_paths=args.python_path,
                              probe_paths=args.probe_python)
         else:
-            result = compare(json.loads(args.left.read_text(encoding="utf-8")),
-                             json.loads(args.right.read_text(encoding="utf-8")))
+            left_bytes, right_bytes = args.left.read_bytes(), args.right.read_bytes()
+            result = compare(json.loads(left_bytes.decode("utf-8-sig")),
+                             json.loads(right_bytes.decode("utf-8-sig")))
+            for side, payload in (("left", left_bytes), ("right", right_bytes)):
+                result["inputs"][side]["sha256"] = hashlib.sha256(payload).hexdigest()
+                result["inputs"][side]["hash_basis"] = "file-bytes"
         _write_new(args.output, result)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         parser.exit(1, f"techshot: {exc}\n")

@@ -39,3 +39,5 @@ JSON 合约为 `ellmos.techshot.v1` 和 `ellmos.techshot-comparison.v1`。快照
 - 离线主机快照、跨主机比较及显式证据质量。
 
 硬件观测与库存种子分开：操作系统、架构、CPU、内存和系统文件系统容量须附来源或标记 unknown；没有可移植读取器时 GPU 为 unknown。Linux 可读取 dpkg-query 或 rpm。跨主机比较将硬件标为不同或未知，未知不等于相同。不得采集序列号、MAC 地址或完整 PATH。
+
+比较约定：不同 slot 即为 axis=cross-host（即使 hostname 相同）；同一 slot 和 hostname 且采集时间不同为 axis=same-host-time。结果保留 chronology、两个输入哈希、采集时间、主机身份、种子绑定和覆盖信息。已知版本相同但另有未知安装时仍报告 version-uncertain。缺少必要来源时拒绝比较；完整的历史快照仍可使用。比较时间不是重新采集时间。
