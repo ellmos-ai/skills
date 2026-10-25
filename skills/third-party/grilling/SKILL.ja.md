@@ -1,14 +1,14 @@
 ---
 name: grilling
-description: "計画、決定、またはアイデアについて、ユーザーを容赦なく問い詰めます。ユーザーが自分の考えを厳しく検証したい場合や、「grill」系のトリガーフレーズ（「grill mich」、「grill mich zu diesem Plan」、「zerpflück meinen Plan im Grill-Modus」などのドイツ語を含む）や、「私をグリルして」「この計画を徹底的に追及して」などの日本語の表現を使った場合に使用します。/grill-me コマンドのエントリーポイントであり、直接呼び出すこともできます。"
+description: "計画、決定、アイデアについてユーザーに容赦なく問いかけます。ユーザーが考えを厳しく検証したい場合、「grill me」または「grill-me」と言った場合（旧コマンド /grill-me は /grilling に置き換わりました）、または「grill」を含む別のトリガーフレーズを使った場合に使用します。ドイツ語の「grill mich」「grill mich zu diesem Plan」「zerpflück meinen Plan im Grill-Modus」や、日本語の「私をグリルして」「この計画を徹底的に追及して」もトリガーに含まれます。計画セッションの終了時に、ユーザーが未解決の項目があるか尋ねた場合にも使用してください。"
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
 category: utilities
 language: ja
-translated_from_sha256: 7f0fe16de62ea366d79b723cbf52cd65c3f237415352cfa870ba0b12cf4fef53
-translator: "claude-haiku-5-5"
-translated_at: "2026-10-15T16:29:01.160760+00:00"
+translated_from_sha256: 5d1b8c01ac7dc1437fe7c47e90506f755b22bdd9df0555a5f556e96921337a3b
+translator: "claude-haiku-5-5 + Codex GPT-6 (Luna)"
+translated_at: "2026-10-25T11:15:53+00:00"
 ---
 <img src="banner.png" width="100%" alt="grilling banner">
 
@@ -36,17 +36,36 @@ _事実_を調べることはあなたの役割であり、ユーザーの役割
 
 セッションは、フロンティアが空になったときに完了します。つまり、設計ツリーのすべての分岐を訪れ、暗黙のうちに仮定されたままの事項が何も残っていない状態です。ユーザーが共通理解に達したことを確認するまで、それに基づいて行動しないでください。
 
+## ローカルな追加ルール
+
+これらのルールは元の方法を拡張しますが、変更はしません。
+
+1. **すでに書かれている内容から始めます。** 最初のラウンドの前に計画書と、プロジェクトで決定事項を記録している場所を読み、未解決・提案中・未確認の項目をすべて集めます。すでに決まった点は再質問せず、その記録を示します。
+2. **次のラウンドの前に各回答を記録します。** すべての回答を、日付と情報源を添えてプロジェクトの決定記録に「決定済み」として記入します。チャットにしかない回答は、次のコンテキストリセットで失われます。
+3. **中断時は一時停止し、最初からやり直しません。** ユーザーが先に別のことを頼んだら、それを済ませてから残っている未解決項目に戻ります。決着した問いはそのまま決着済みにします。
+4. **各提案には理由を一つ添えます。** 推奨する回答と、その根拠となる事実またはルールを一つ示します。ユーザーが確認するまでは、提案は決定ではありません。
+5. **確認した事実を示します。** 環境で調べた事実が質問の根拠になる場合は、分かったことと確認先を伝え、ユーザーが証拠に基づいて判断できるようにします。
+6. **ユーザーの言語で質問します。** 質問と提案はユーザーの言語で行い、識別子は変更しません。
+7. **最後に決定事項を一覧にします。** フロンティアが空になったら、決定したことと意図的に未決のまま残したことを列挙し、共通理解に達したかユーザーに確認します。
+
 <!--
 Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
-Modification vs. upstream: the `description` field was extended with German
-trigger phrases ("grill mich"). The `category` and `language` fields and this
-comment were added; all are local convention (recommended, not one of the
-nine house fields), not upstream content, and `language: en` reflects that
-the vendored body is unmodified English. The body (the design tree / frontier
-/ rounds method) is unchanged from upstream.
+Improved fork. Modifications vs. upstream:
+- `description`: German trigger phrases ("grill mich"), the "grill me" /
+  "grill-me" phrases, and the end-of-planning trigger were added.
+- `category`, `language` and this comment were added (local convention).
+- "Local additions" (rules 1-7) were appended after the upstream body. The
+  upstream body above that heading is unchanged, so a resync only needs to
+  replace that part.
 
-Adopted 2026-08-24 per Ticket T-20260824-594031458 alongside skills/third-
-party/grill-me/ (the thin, explicit-only entry point that calls this skill).
+Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
+entry point skills/third-party/grill-me/ (upstream
+skills/productivity/grill-me, `disable-model-invocation: true`, body
+"Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
+the user's request: one skill instead of two, the phrase triggers moved into
+this description. The native /grill-me command no longer exists; /grilling
+replaces it. The description only adds semantic matching and registers no
+alias command. Rules 1-7 come from a planning session of the same day.
 -->

@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T11:49:47.218639+00:00"
 ---
@@ -46,7 +46,7 @@ translated_at: "2026-10-15T11:49:47.218639+00:00"
 
 - `skill-creator` (Anthropic, маркетплейс `claude-plugins-official`) распространяется под лицензией **Apache-2.0**
   (текст LICENSE прочитан и проверен в клоне, 2026-08-24) — форк был бы юридически чистым
-  и в репозитории уже является устоявшейся практикой (`skills/third-party/grill-me`, `skills/third-party/grilling`).
+  и в репозитории уже является устоявшейся практикой (`skills/third-party/grilling`).
 - Однако форк унаследовал бы всю машинерию оценки/бенчмарков оригинала (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`,
   7 скриптов, SKILL.md на 485 строк) — возможность, которая уже есть и вызывается напрямую (`Skill: skill-creator:skill-creator`).
   Согласно правилу 4 `.PLUGINS/CLAUDE.md` («проверить возможности, прежде чем строить заново») и шаблону P10

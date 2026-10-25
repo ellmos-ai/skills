@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T12:49:12.458049+00:00"
 ---
@@ -44,7 +44,7 @@ translated_at: "2026-10-15T12:49:12.458049+00:00"
 
 **সিদ্ধান্ত: নিজস্ব তৈরি, Fork নয়।** কারণটি যাতে হারিয়ে না যায়:
 
-- `skill-creator` (Anthropic, Marketplace `claude-plugins-official`) **Apache-2.0** লাইসেন্সপ্রাপ্ত (ক্লোনে LICENSE-পাঠ পড়া ও যাচাই করা হয়েছে, 2026-08-24) — একটি Fork আইনগতভাবে নিরাপদভাবে সম্ভব এবং রিপোজিটরিতে অন্যত্র ইতিমধ্যে এটি প্রতিষ্ঠিত প্যাটার্ন (`skills/third-party/grill-me`, `skills/third-party/grilling`)।
+- `skill-creator` (Anthropic, Marketplace `claude-plugins-official`) **Apache-2.0** লাইসেন্সপ্রাপ্ত (ক্লোনে LICENSE-পাঠ পড়া ও যাচাই করা হয়েছে, 2026-08-24) — একটি Fork আইনগতভাবে নিরাপদভাবে সম্ভব এবং রিপোজিটরিতে অন্যত্র ইতিমধ্যে এটি প্রতিষ্ঠিত প্যাটার্ন (`skills/third-party/grilling`)।
 - তবে একটি Fork মূলের সম্পূর্ণ মূল্যায়ন/বেঞ্চমার্ক যন্ত্রপাতি সঙ্গে টেনে আনত (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`, 7টি Script, 485-লাইনের SKILL.md) — যে সক্ষমতা ইতিমধ্যে বিদ্যমান এবং সরাসরি আহ্বানযোগ্য (`Skill: skill-creator:skill-creator`)। `.PLUGINS/CLAUDE.md`-এর নিয়ম 4 ("পুনর্নির্মাণের আগে সক্ষমতা যাচাই করো") এবং P10 প্যাটার্ন ("দুটি সুইচ, যা কেউ তুলনা করে না") অনুযায়ী এটি হতো নকল, সম্প্রসারণ নয়।
 - প্রকৃত ঘাটতি **সম্পূর্ণভাবে ellmos-নির্দিষ্ট** এবং মূলের কাছে মূলত অজানা: হাউস-ফ্রন্টম্যাটার (`templates/SKILL.md`), `docs/CONVENTIONS.md`, অ্যানবিটার/ব্যবহারকারী/ellmos-নিরপেক্ষতা ellmos-সংবেদনশীলতার সঙ্গে, `grounding-seed`-সংযোগ, ভেন্ডর-সচেতনতা, স্ব-হালনাগাদ।
 - এই Skill-এ **কোনো Anthropic-পাঠ নেই** (সর্বত্র নিজস্ব শব্দচয়ন) — তাই পরিবর্তনের জন্য Apache-2.0 অ্যাট্রিবিউশন বাধ্যবাধকতাও সৃষ্টি করে না। এটি মূলকে কপি না করে **সংযুক্ত** করে: এটি একই সঙ্গে আইনগতভাবে সবচেয়ে পরিষ্কার এবং রক্ষণাবেক্ষণে সবচেয়ে কম খরচের পথ।

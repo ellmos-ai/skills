@@ -206,7 +206,7 @@ python testing/skill_tester.py batch --type static --ci
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Набор для рабочей станции разработчика |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Многоязычный редактор кода и песочница |
 
-Отобранные сторонние skills в `skills/third-party/` (`grill-me`, `grilling`)
+Отобранные сторонние skills в `skills/third-party/` (`grilling`)
 распространяются по лицензии MIT из исходного репозитория
 [mattpocock/skills](https://github.com/mattpocock/skills).
 

@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "4ab293a207e54a644d9c9752dc6e9a7aa5f7c6e4acf6ae978671ca351a73091d", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T23:32:56.291340+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "0523abb914ced8449b539c01d39cbc0aa219adcbf720b14c18ff3c32abb20687", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T23:32:56.291340+00:00"} -->
 <img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
@@ -504,7 +504,7 @@ python testing/skill_tester.py batch --type static --ci
 `ellmos-skills` সম্পূর্ণ স্বচ্ছতা, ক্লিন-রুম সফটওয়্যার সীমানা এবং সাপ্লাই চেইন নিরাপত্তার প্রতি প্রতিশ্রুতিবদ্ধ:
 
 - **শূন্য বাহ্যিক রানটাইম নির্ভরতা**: সকল কোর ক্যাটালগ টুল, স্কিমা জেনারেটর ও গোপনীয়তা সীমানা যাচাইকারী কঠোরভাবে Python Standard Library-তে চলে (`>=3.10`)।
-- **অনুমতিমূলক তৃতীয়-পক্ষের স্কিল**: `skills/third-party/`-এর কিউরেটেড বাহ্যিক স্কিলগুলো (`grill-me`, `grilling`) আপস্ট্রিম [mattpocock/skills](https://github.com/mattpocock/skills)-এর MIT License-এর অধীনে লাইসেন্সপ্রাপ্ত।
+- **অনুমতিমূলক তৃতীয়-পক্ষের স্কিল**: `skills/third-party/`-এর কিউরেটেড বাহ্যিক স্কিলগুলো (`grilling`) আপস্ট্রিম [mattpocock/skills](https://github.com/mattpocock/skills)-এর MIT License-এর অধীনে লাইসেন্সপ্রাপ্ত।
 - **আনুষ্ঠানিক অ্যাট্রিবিউশন ও নোটিশ**: আইনি নোটিশ ও ওপেন-সোর্স অ্যাট্রিবিউশন [`NOTICE`](NOTICE)-এ লিপিবদ্ধ আছে।
 - **লেভেল ১ SBOM সহায়ক ফাইল**: সম্পূর্ণ তৃতীয়-পক্ষের লাইসেন্স ইনভেন্টরি ও ইনভেরিয়েন্ট ম্যাপিং [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)-এ এবং প্লেইন-টেক্সট সহায়ক ফাইল [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt)-এ নথিভুক্ত।
 - **০% কপিলেফট**: রানটাইমে কোনো GPL, AGPL বা LGPL উপাদান বান্ডেল বা প্রয়োজন হয় না।

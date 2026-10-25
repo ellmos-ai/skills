@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "4ab293a207e54a644d9c9752dc6e9a7aa5f7c6e4acf6ae978671ca351a73091d", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T21:13:50.193695+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "0523abb914ced8449b539c01d39cbc0aa219adcbf720b14c18ff3c32abb20687", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T21:13:50.193695+00:00"} -->
 <img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
@@ -507,7 +507,7 @@ Chaque compétence, script utilitaire et manifeste de métadonnées au sein de `
 `ellmos-skills` s'engage pour une transparence absolue, des frontières logicielles de type clean-room et la sécurité de la chaîne d'approvisionnement :
 
 - **Zéro dépendance d'exécution externe** : tous les outils principaux du catalogue, générateurs de schémas et vérificateurs de frontières de confidentialité fonctionnent strictement avec la bibliothèque standard Python (`>=3.10`).
-- **Compétences tierces permissives** : les compétences externes sélectionnées dans `skills/third-party/` (`grill-me`, `grilling`) sont distribuées sous licence MIT depuis l'amont [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Compétences tierces permissives** : les compétences externes sélectionnées dans `skills/third-party/` (`grilling`) sont distribuées sous licence MIT depuis l'amont [mattpocock/skills](https://github.com/mattpocock/skills).
 - **Attribution et notice formelles** : les mentions légales et l'attribution open source sont consignées dans [`NOTICE`](NOTICE).
 - **Compagnons SBOM niveau 1** : l'inventaire complet des licences tierces et la correspondance des invariants sont documentés dans [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) et dans le compagnon en texte brut [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt).
 - **0 % copyleft** : aucun composant GPL, AGPL ou LGPL n'est intégré ni requis à l'exécution.

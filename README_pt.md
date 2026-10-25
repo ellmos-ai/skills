@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "4ab293a207e54a644d9c9752dc6e9a7aa5f7c6e4acf6ae978671ca351a73091d", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T21:13:50.193695+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "0523abb914ced8449b539c01d39cbc0aa219adcbf720b14c18ff3c32abb20687", "translator": "claude-haiku-5-5", "translated_at": "2026-10-15T21:13:50.193695+00:00"} -->
 <img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
@@ -505,7 +505,7 @@ Cada skill, script utilitário e manifesto de metadados dentro de `ellmos-skills
 `ellmos-skills` está comprometido com transparência absoluta, fronteiras de software clean-room e segurança da cadeia de suprimentos:
 
 - **Zero dependências externas de runtime**: Todas as ferramentas principais do catálogo, geradores de schema e verificadores de fronteira de privacidade rodam estritamente na Biblioteca Padrão do Python (`>=3.10`).
-- **Skills de terceiros permissivas**: Skills externas curadas em `skills/third-party/` (`grill-me`, `grilling`) são licenciadas sob a Licença MIT do upstream [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Skills de terceiros permissivas**: Skills externas curadas em `skills/third-party/` (`grilling`) são licenciadas sob a Licença MIT do upstream [mattpocock/skills](https://github.com/mattpocock/skills).
 - **Atribuição e aviso formais**: Avisos legais e atribuições de código aberto estão registrados em [`NOTICE`](NOTICE).
 - **Complementos de SBOM de nível 1**: O inventário completo de licenças de terceiros e o mapeamento de invariantes estão documentados em [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) e no complemento em texto simples [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt).
 - **0% copyleft**: Nenhum componente GPL, AGPL ou LGPL é incluído nem exigido em runtime.

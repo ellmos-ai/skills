@@ -210,7 +210,7 @@ python testing/skill_tester.py batch --type static --ci
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | デスクトップ開発者ワークステーションスイート |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | 多言語コードエディタとサンドボックス環境 |
 
-`skills/third-party/` にキュレートされたサードパーティスキル（`grill-me`、`grilling`）は、
+`skills/third-party/` にキュレートされたサードパーティスキル（`grilling`）は、
 アップストリームの [mattpocock/skills](https://github.com/mattpocock/skills) から MIT ライセンスで提供されています。
 
 ## ライセンスと責任

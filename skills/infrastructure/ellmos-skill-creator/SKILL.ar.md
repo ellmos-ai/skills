@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T16:28:53.391636+00:00"
 ---
@@ -46,7 +46,7 @@ translated_at: "2026-10-15T16:28:53.391636+00:00"
 
 - `skill-creator` (من Anthropic، والسوق `claude-plugins-official`) مرخّصة بموجب **Apache-2.0**
   (نص الترخيص في النسخة المحلية مقروء ومتحقَّق منه، 2026-08-24) — التفرّع كان ممكنًا قانونيًا
-  وهو النمط المعتمد في المستودع في أماكن أخرى (`skills/third-party/grill-me`، `skills/third-party/grilling`).
+  وهو النمط المعتمد في المستودع في أماكن أخرى (`skills/third-party/grilling`).
 - لكن التفرّع كان سيجرّ معه كامل آلية التقييم والقياس الأصلية (`agents/{analyzer,comparator,grader}.md`،
   `eval-viewer/`، 7 سكربتات، وملف SKILL.md من 485 سطرًا) — وهي قدرة موجودة بالفعل ويمكن
   استدعاؤها مباشرة (`Skill: skill-creator:skill-creator`). وفق `.PLUGINS/CLAUDE.md` القاعدة 4 ("تحقّق من القدرات

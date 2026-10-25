@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T12:49:09.407398+00:00"
 ---
@@ -46,7 +46,7 @@ translated_at: "2026-10-15T12:49:09.407398+00:00"
 
 - `skill-creator` (Anthropic, marketplace `claude-plugins-official`) est sous licence **Apache-2.0**
   (texte de LICENSE lu et vérifié dans le clone, 2026-08-24) — un fork serait juridiquement
-  possible et constitue déjà, ailleurs dans le dépôt, le modèle établi (`skills/third-party/grill-me`, `skills/third-party/grilling`).
+  possible et constitue déjà, ailleurs dans le dépôt, le modèle établi (`skills/third-party/grilling`).
 - Un fork aurait toutefois embarqué toute la machinerie d'évaluation/benchmark de l'original
   (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`, 7 scripts, SKILL.md de 485 lignes) —
   une capacité déjà présente et directement appelable (`Skill: skill-creator:skill-creator`).

@@ -209,7 +209,7 @@ python testing/skill_tester.py batch --type static --ci
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | 桌面开发者工作站套件 |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | 多语言代码编辑器与沙盒环境 |
 
-`skills/third-party/` 中精选的第三方 skill（`grill-me`、`grilling`）依据上游
+`skills/third-party/` 中精选的第三方 skill（`grilling`）依据上游
 [mattpocock/skills](https://github.com/mattpocock/skills) 的 MIT 许可证提供。
 
 ## 许可证与责任

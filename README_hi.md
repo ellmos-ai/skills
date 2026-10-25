@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "4ab293a207e54a644d9c9752dc6e9a7aa5f7c6e4acf6ae978671ca351a73091d", "translator": "claude-haiku-5-5", "translated_at": "2026-10-16T00:13:20.757759+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "0523abb914ced8449b539c01d39cbc0aa219adcbf720b14c18ff3c32abb20687", "translator": "claude-haiku-5-5", "translated_at": "2026-10-16T00:13:20.757759+00:00"} -->
 <img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
@@ -504,7 +504,7 @@ python testing/skill_tester.py batch --type static --ci
 `ellmos-skills` पूर्ण पारदर्शिता, क्लीन-रूम सॉफ़्टवेयर सीमाओं और आपूर्ति श्रृंखला सुरक्षा के प्रति प्रतिबद्ध है:
 
 - **शून्य बाहरी रनटाइम निर्भरताएँ**: सभी मुख्य कैटलॉग टूल, स्कीमा जनरेटर और गोपनीयता सीमा सत्यापनकर्ता सख्ती से Python Standard Library (`>=3.10`) पर चलते हैं।
-- **अनुमेय तृतीय-पक्ष स्किल**: `skills/third-party/` में क्यूरेटेड बाहरी स्किल (`grill-me`, `grilling`) upstream [mattpocock/skills](https://github.com/mattpocock/skills) से MIT License के तहत लाइसेंस प्राप्त हैं।
+- **अनुमेय तृतीय-पक्ष स्किल**: `skills/third-party/` में क्यूरेटेड बाहरी स्किल (`grilling`) upstream [mattpocock/skills](https://github.com/mattpocock/skills) से MIT License के तहत लाइसेंस प्राप्त हैं।
 - **औपचारिक श्रेय और सूचना**: कानूनी सूचनाएँ और ओपन-सोर्स श्रेय [`NOTICE`](NOTICE) में दर्ज हैं।
 - **स्तर 1 SBOM सहायक दस्तावेज़**: पूर्ण तृतीय-पक्ष लाइसेंस सूची और invariant मैपिंग [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) और सादा-पाठ सहायक [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt) में दस्तावेज़ित हैं।
 - **0% कॉपीलेफ़्ट**: रनटाइम पर कोई GPL, AGPL या LGPL घटक शामिल या आवश्यक नहीं है।

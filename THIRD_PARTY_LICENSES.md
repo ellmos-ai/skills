@@ -38,7 +38,6 @@ The repository hosts curated, externally authored skills redistributed under ver
 
 | Skill / Path | Upstream Repository | Upstream Author | License | Notice & Boundary |
 |:---|:---|:---|:---|:---|
-| `skills/third-party/grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | MIT License | Thin entry point for plan interrogation (`disable-model-invocation: true`). Upstream `LICENSE` file preserved. |
 | `skills/third-party/grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | MIT License | Core interrogation protocol (design-tree / frontier / rounds). Upstream `LICENSE` file preserved. |
 
 All third-party skill inclusions are validated against the strict Third-Party Gate (`testing/privacy_gate.py`), ensuring:

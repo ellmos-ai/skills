@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "4ab293a207e54a644d9c9752dc6e9a7aa5f7c6e4acf6ae978671ca351a73091d", "translator": "claude-haiku-5-5", "translated_at": "2026-10-16T00:13:20.757759+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "0523abb914ced8449b539c01d39cbc0aa219adcbf720b14c18ff3c32abb20687", "translator": "claude-haiku-5-5", "translated_at": "2026-10-16T00:13:20.757759+00:00"} -->
 <img src="assets/banner.png" width="100%" alt="ellmos skills Banner">
 
 <p align="center">
@@ -504,7 +504,7 @@ python testing/skill_tester.py batch --type static --ci
 تلتزم `ellmos-skills` بالشفافية المطلقة وحدود البرمجيات النظيفة وأمن سلسلة التوريد:
 
 - **عدم وجود تبعيات تشغيل خارجية**: تعمل جميع أدوات الكتالوج الأساسية ومولّدات المخططات ومدققات حدود الخصوصية حصريًا على مكتبة Python القياسية (`>=3.10`).
-- **مهارات خارجية مرخّصة بشكل تساهلي**: المهارات الخارجية المنتقاة في `skills/third-party/` (`grill-me`، `grilling`) مرخّصة بموجب ترخيص MIT من المصدر الأصلي [mattpocock/skills](https://github.com/mattpocock/skills).
+- **مهارات خارجية مرخّصة بشكل تساهلي**: المهارات الخارجية المنتقاة في `skills/third-party/` (`grilling`) مرخّصة بموجب ترخيص MIT من المصدر الأصلي [mattpocock/skills](https://github.com/mattpocock/skills).
 - **الإسناد والإشعار الرسمي**: تُسجَّل الإشعارات القانونية وإسناد المصادر المفتوحة في [`NOTICE`](NOTICE).
 - **ملحقات قائمة مكونات البرمجيات من المستوى 1**: يُوثَّق جرد التراخيص الخارجية الكامل وربط المعايير الثابتة في [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) والملحق النصي العادي [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt).
 - **صفر في المئة من حقوق النسخ المفتوحة (Copyleft)**: لا تُضمَّن ولا تُطلب أي مكونات من نوع GPL أو AGPL أو LGPL في وقت التشغيل.

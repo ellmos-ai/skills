@@ -1,14 +1,14 @@
 ---
 name: grilling
-description: "Stelle dem Nutzer zu einem Plan, einer Entscheidung oder Idee unnachgiebig Fragen. Verwenden, wenn der Nutzer seine Überlegungen auf die Probe stellen möchte oder einen beliebigen „grill“-Auslösesatz verwendet, einschließlich deutscher Formulierungen wie \"grill mich\", \"grill mich zu diesem Plan\" oder \"zerpflück meinen Plan im Grill-Modus\". Einstiegspunkt für den Befehl /grill-me; kann auch direkt aufgerufen werden."
+description: "Stelle dem Nutzer zu einem Plan, einer Entscheidung oder einer Idee unnachgiebig Fragen. Verwende diesen Skill, wenn der Nutzer seine Überlegungen auf die Probe stellen möchte, „grill me“ oder „grill-me“ sagt (der frühere Befehl /grill-me wurde durch /grilling ersetzt) oder einen anderen Auslösesatz mit „grill“ verwendet, darunter „grill mich“, „grill mich zu diesem Plan“ und „zerpflück meinen Plan im Grill-Modus“. Verwende ihn auch, wenn eine Planungssitzung endet und der Nutzer fragt, ob noch etwas offen ist."
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
 category: utilities
 language: de
-translated_from_sha256: 7f0fe16de62ea366d79b723cbf52cd65c3f237415352cfa870ba0b12cf4fef53
-translator: "claude-haiku-5-5"
-translated_at: "2026-10-15T20:40:39.337351+00:00"
+translated_from_sha256: 5d1b8c01ac7dc1437fe7c47e90506f755b22bdd9df0555a5f556e96921337a3b
+translator: "claude-haiku-5-5 + Codex GPT-6 (Luna)"
+translated_at: "2026-10-25T11:15:53+00:00"
 ---
 <img src="banner.png" width="100%" alt="grilling banner">
 
@@ -36,17 +36,36 @@ Das Ermitteln von _Fakten_ ist deine Aufgabe, nie die des Nutzers. Wenn eine Fra
 
 Die Sitzung ist beendet, wenn die Front leer ist: Jeder Zweig des Entscheidungsbaums ist besucht, und nichts wird stillschweigend vorausgesetzt. Handle nicht danach, bevor der Nutzer bestätigt, dass ihr ein gemeinsames Verständnis erreicht habt.
 
+## Lokale Ergänzungen
+
+Diese Regeln erweitern die ursprüngliche Methode, ändern sie aber nicht.
+
+1. **Beginne mit dem, was bereits festgehalten ist.** Lies vor der ersten Runde den Plan und die Stelle, an der das Projekt Entscheidungen dokumentiert. Sammle alle Punkte, die noch offen, vorgeschlagen oder unbestätigt sind. Frage bereits entschiedene Punkte nicht erneut ab; verweise stattdessen darauf.
+2. **Halte jede Antwort vor der nächsten Runde fest.** Trage jede Antwort im Entscheidungsprotokoll des Projekts als entschieden ein, mit Datum und Quelle. Eine Antwort, die nur im Chat steht, geht beim nächsten Zurücksetzen des Kontexts verloren.
+3. **Pausiere bei Unterbrechungen, statt neu zu beginnen.** Wenn der Nutzer zuerst um etwas anderes bittet, erledige es und setze danach mit den übrigen offenen Punkten fort. Bereits geklärte Fragen bleiben geklärt.
+4. **Begründe jede Empfehlung mit einem Grund.** Nenne die empfohlene Antwort und die einzelne Tatsache oder Regel, auf der sie beruht. Eine Empfehlung ist erst dann eine Entscheidung, wenn der Nutzer sie bestätigt.
+5. **Zeige die ermittelten Fakten.** Wenn eine Frage auf einer nachgeschlagenen Tatsache beruht, nenne den Befund und seine Fundstelle, damit der Nutzer anhand der Belege entscheidet.
+6. **Frage in der Sprache des Nutzers.** Formuliere Fragen und Empfehlungen in seiner Sprache; Bezeichner bleiben unverändert.
+7. **Schließe mit einem Entscheidungsprotokoll.** Wenn die Frontier leer ist, liste auf, was entschieden wurde und was bewusst offen blieb, und bitte um Bestätigung des gemeinsamen Verständnisses.
+
 <!--
 Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
-Modification vs. upstream: the `description` field was extended with German
-trigger phrases ("grill mich"). The `category` and `language` fields and this
-comment were added; all are local convention (recommended, not one of the
-nine house fields), not upstream content, and `language: en` reflects that
-the vendored body is unmodified English. The body (the design tree / frontier
-/ rounds method) is unchanged from upstream.
+Improved fork. Modifications vs. upstream:
+- `description`: German trigger phrases ("grill mich"), the "grill me" /
+  "grill-me" phrases, and the end-of-planning trigger were added.
+- `category`, `language` and this comment were added (local convention).
+- "Local additions" (rules 1-7) were appended after the upstream body. The
+  upstream body above that heading is unchanged, so a resync only needs to
+  replace that part.
 
-Adopted 2026-08-24 per Ticket T-20260824-594031458 alongside skills/third-
-party/grill-me/ (the thin, explicit-only entry point that calls this skill).
+Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
+entry point skills/third-party/grill-me/ (upstream
+skills/productivity/grill-me, `disable-model-invocation: true`, body
+"Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
+the user's request: one skill instead of two, the phrase triggers moved into
+this description. The native /grill-me command no longer exists; /grilling
+replaces it. The description only adds semantic matching and registers no
+alias command. Rules 1-7 come from a planning session of the same day.
 -->

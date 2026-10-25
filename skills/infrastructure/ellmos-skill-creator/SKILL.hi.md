@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-16T04:00:36.052261+00:00"
 ---
@@ -46,7 +46,7 @@ translated_at: "2026-10-16T04:00:36.052261+00:00"
 
 - `skill-creator` (Anthropic, Marketplace `claude-plugins-official`) **Apache-2.0** के अंतर्गत लाइसेंसित है
   (क्लोन में LICENSE-पाठ पढ़ा और सत्यापित किया गया, 2026-08-24) — एक Fork कानूनी रूप से साफ़ संभव होता और
-  रेपो में अन्यत्र यह पहले से स्थापित पैटर्न है (`skills/third-party/grill-me`, `skills/third-party/grilling`)।
+  रेपो में अन्यत्र यह पहले से स्थापित पैटर्न है (`skills/third-party/grilling`)।
 - लेकिन एक Fork मूल की पूरी Eval-/Benchmark-मशीनरी साथ ले आता (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`, 7 Scripts,
   485-पंक्ति SKILL.md) — वह क्षमता जो पहले से मौजूद है और सीधे कॉल की जा सकती है (`Skill: skill-creator:skill-creator`)।
   `.PLUGINS/CLAUDE.md` के नियम 4 ("दोबारा बनाने से पहले क्षमताएँ जाँचें") और पैटर्न P10 ("दो स्विच, जिनकी कोई तुलना नहीं

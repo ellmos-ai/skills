@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T15:41:56.704466+00:00"
 ---
@@ -44,7 +44,7 @@ translated_at: "2026-10-15T15:41:56.704466+00:00"
 
 **决策:自行构建,不分叉。** 记录理由以免丢失:
 
-- `skill-creator`(Anthropic,市场 `claude-plugins-official`)采用 **Apache-2.0** 许可(已于 2026-08-24 阅读并核对克隆库中的 LICENSE 文本),因此分叉在法律上完全可行,且本仓库其他地方已将其作为既定模式使用(`skills/third-party/grill-me`、`skills/third-party/grilling`)。
+- `skill-creator`(Anthropic,市场 `claude-plugins-official`)采用 **Apache-2.0** 许可(已于 2026-08-24 阅读并核对克隆库中的 LICENSE 文本),因此分叉在法律上完全可行,且本仓库其他地方已将其作为既定模式使用(`skills/third-party/grilling`)。
 - 但分叉会连带引入原版的整套评估/基准机制(`agents/{analyzer,comparator,grader}.md`、`eval-viewer/`、7 个脚本、485 行的 SKILL.md)——这些能力已经存在且可直接调用(`Skill: skill-creator:skill-creator`)。依据 `.PLUGINS/CLAUDE.md` 的规则 4("在重新构建前先检查已有能力")以及模式 P10("两个开关无人比较"),这将是重复而非扩展。
 - 真正的缺口纯属 ellmos 特定需求,原版从根本上并不了解:自有 frontmatter(`templates/SKILL.md`)、`docs/CONVENTIONS.md`、提供方/用户/ellmos 中立但对 ellmos 敏感的识别、`grounding-seed` 对接、供应商意识、自我更新。
 - 本 Skill **不包含任何 Anthropic 文本**(全部为自有表述),因此对修改版也不触发 Apache-2.0 的署名义务。它是**组合**原版,而非复制原版:这既是法律上最干净的做法,也是维护成本最低的做法。

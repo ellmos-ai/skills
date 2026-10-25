@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T11:49:44.966939+00:00"
 ---
@@ -46,7 +46,7 @@ translated_at: "2026-10-15T11:49:44.966939+00:00"
 
 - `skill-creator` (Anthropic, marketplace `claude-plugins-official`) tiene licencia **Apache-2.0**
   (texto de LICENSE leído y verificado en el clon, 2026-08-24); un fork sería legalmente posible
-  y en el repositorio ya es el patrón establecido en otros puntos (`skills/third-party/grill-me`, `skills/third-party/grilling`).
+  y en el repositorio ya es el patrón establecido en otros puntos (`skills/third-party/grilling`).
 - Un fork, sin embargo, arrastraría toda la maquinaria de evaluación y benchmark del original
   (`agents/{analyzer,comparator,grader}.md`, `eval-viewer/`, 7 scripts, SKILL.md de 485 líneas), una capacidad que ya
   existe y se puede invocar directamente (`Skill: skill-creator:skill-creator`). Según la regla 4 de `.PLUGINS/CLAUDE.md`

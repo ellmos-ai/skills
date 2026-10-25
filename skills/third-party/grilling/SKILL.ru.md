@@ -1,14 +1,14 @@
 ---
 name: grilling
-description: "Безжалостно допрашивать пользователя о плане, решении или идее. Использовать, когда пользователь хочет проверить свои рассуждения на прочность или использует любую фразу-триггер с «grill», включая немецкие, например «grill mich», «grill mich zu diesem Plan» или «zerpflück meinen Plan im Grill-Modus». Точка входа для команды /grill-me; может также вызываться напрямую."
+description: "Безжалостно расспрашивайте пользователя о плане, решении или идее. Используйте навык, когда пользователь хочет проверить свои рассуждения на прочность, говорит «grill me» или «grill-me» (прежнюю команду /grill-me заменила /grilling) либо использует другую фразу-триггер с «grill», включая немецкие «grill mich», «grill mich zu diesem Plan» и «zerpflück meinen Plan im Grill-Modus». Используйте навык и после завершения сессии планирования, если пользователь спрашивает, остались ли открытые вопросы."
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
 category: utilities
 language: ru
-translated_from_sha256: 7f0fe16de62ea366d79b723cbf52cd65c3f237415352cfa870ba0b12cf4fef53
-translator: "claude-haiku-5-5"
-translated_at: "2026-10-15T11:49:44.248639+00:00"
+translated_from_sha256: 5d1b8c01ac7dc1437fe7c47e90506f755b22bdd9df0555a5f556e96921337a3b
+translator: "claude-haiku-5-5 + Codex GPT-6 (Luna)"
+translated_at: "2026-10-25T11:15:53+00:00"
 ---
 <img src="banner.png" width="100%" alt="grilling banner">
 
@@ -36,17 +36,36 @@ translated_at: "2026-10-15T11:49:44.248639+00:00"
 
 Сессия завершена, когда фронтир пуст: каждая ветвь дерева проектирования пройдена, ничего не принято молча на веру. Не действуйте, пока пользователь не подтвердит, что вы достигли общего понимания.
 
+## Локальные дополнения
+
+Эти правила дополняют исходный метод, но не меняют его.
+
+1. **Начинайте с того, что уже записано.** До первого раунда прочитайте план и место, где проект фиксирует решения. Соберите все пункты, которые остаются открытыми, предложенными или неподтверждёнными. Не задавайте снова вопрос о том, что уже решено; вместо этого укажите на запись.
+2. **Записывайте каждый ответ до следующего раунда.** Внесите каждый ответ в журнал решений проекта как принятое решение, указав дату и источник. Ответ, оставшийся только в чате, потеряется при следующем сбросе контекста.
+3. **При прерывании поставьте работу на паузу, а не начинайте заново.** Если пользователь сначала просит о другом, выполните эту просьбу, а затем продолжите с оставшихся открытых вопросов. Решённые вопросы остаются решёнными.
+4. **Обосновывайте каждую рекомендацию одной причиной.** Назовите рекомендуемый ответ и единственный факт или правило, на котором он основан. Рекомендация становится решением только после подтверждения пользователя.
+5. **Показывайте проверенные факты.** Если вопрос опирается на факт, найденный в окружении, сообщите результат и его источник, чтобы пользователь принимал решение на основании свидетельств.
+6. **Задавайте вопросы на языке пользователя.** Вопросы и рекомендации должны быть на языке пользователя; идентификаторы остаются без изменений.
+7. **Завершайте перечнем решений.** Когда фронтир пуст, перечислите, что решено и что намеренно оставлено открытым, а затем попросите подтвердить общее понимание.
+
 <!--
 Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
-Modification vs. upstream: the `description` field was extended with German
-trigger phrases ("grill mich"). The `category` and `language` fields and this
-comment were added; all are local convention (recommended, not one of the
-nine house fields), not upstream content, and `language: en` reflects that
-the vendored body is unmodified English. The body (the design tree / frontier
-/ rounds method) is unchanged from upstream.
+Improved fork. Modifications vs. upstream:
+- `description`: German trigger phrases ("grill mich"), the "grill me" /
+  "grill-me" phrases, and the end-of-planning trigger were added.
+- `category`, `language` and this comment were added (local convention).
+- "Local additions" (rules 1-7) were appended after the upstream body. The
+  upstream body above that heading is unchanged, so a resync only needs to
+  replace that part.
 
-Adopted 2026-08-24 per Ticket T-20260824-594031458 alongside skills/third-
-party/grill-me/ (the thin, explicit-only entry point that calls this skill).
+Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
+entry point skills/third-party/grill-me/ (upstream
+skills/productivity/grill-me, `disable-model-invocation: true`, body
+"Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
+the user's request: one skill instead of two, the phrase triggers moved into
+this description. The native /grill-me command no longer exists; /grilling
+replaces it. The description only adds semantic matching and registers no
+alias command. Rules 1-7 come from a planning session of the same day.
 -->

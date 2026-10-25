@@ -1,14 +1,14 @@
 ---
 name: grilling
-description: "কোনো পরিকল্পনা, সিদ্ধান্ত বা ধারণা নিয়ে ব্যবহারকারীকে নিরলসভাবে প্রশ্ন করুন। যখন ব্যবহারকারী তাদের চিন্তাভাবনাকে চাপের মুখে যাচাই করতে চান, অথবা যেকোনো 'grill' ট্রিগার বাক্যাংশ ব্যবহার করেন, যেমন \"আমাকে গ্রিল করো\" বা \"আমার পরিকল্পনা নিয়ে আমাকে কড়া প্রশ্ন করো\" -- যার মধ্যে \"grill mich\", \"grill mich zu diesem Plan\" বা \"zerpflück meinen Plan im Grill-Modus\" এর মতো জার্মান বাক্যাংশও অন্তর্ভুক্ত -- তখন এটি ব্যবহার করুন। /grill-me কমান্ডের প্রবেশবিন্দু; সরাসরিও আহ্বান করা যায়।"
+description: "কোনো পরিকল্পনা, সিদ্ধান্ত বা ধারণা নিয়ে ব্যবহারকারীকে নিরলসভাবে প্রশ্ন করুন। ব্যবহারকারী তার চিন্তাভাবনাকে যাচাই করতে চাইলে, “grill me” বা “grill-me” বললে (আগের /grill-me কমান্ডটি /grilling দিয়ে প্রতিস্থাপিত হয়েছে), অথবা “grill” সম্পর্কিত অন্য কোনো ট্রিগার বাক্যাংশ ব্যবহার করলে এই Skill ব্যবহার করুন—যেমন বাংলা “আমাকে গ্রিল করো” ও “আমার পরিকল্পনা নিয়ে আমাকে কড়া প্রশ্ন করো”, এবং জার্মান “grill mich”, “grill mich zu diesem Plan” ও “zerpflück meinen Plan im Grill-Modus”। পরিকল্পনা-সেশন শেষে ব্যবহারকারী আর কিছু খোলা আছে কি না জিজ্ঞেস করলেও এটি ব্যবহার করুন।"
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
 category: utilities
 language: bn
-translated_from_sha256: 7f0fe16de62ea366d79b723cbf52cd65c3f237415352cfa870ba0b12cf4fef53
-translator: "claude-haiku-5-5"
-translated_at: "2026-10-15T16:29:01.217457+00:00"
+translated_from_sha256: 5d1b8c01ac7dc1437fe7c47e90506f755b22bdd9df0555a5f556e96921337a3b
+translator: "claude-haiku-5-5 + Codex GPT-6 (Luna)"
+translated_at: "2026-10-25T11:15:53+00:00"
 ---
 <img src="banner.png" width="100%" alt="grilling banner">
 
@@ -36,17 +36,36 @@ _তথ্য_ খুঁজে বের করা আপনার দায়�
 
 সেশনটি সম্পন্ন হয় যখন ফ্রন্টিয়ার খালি হয়: ডিজাইন ট্রির প্রতিটি শাখা পরিদর্শন করা হয়েছে, এবং নীরবে ধরে নেওয়া কিছু অবশিষ্ট নেই। ব্যবহারকারী নিশ্চিত না করা পর্যন্ত যে পারস্পরিক বোঝাপড়ায় পৌঁছানো হয়েছে, কোনো পদক্ষেপ নেবেন না।
 
+## স্থানীয় সংযোজন
+
+এই নিয়মগুলো মূল পদ্ধতিকে প্রসারিত করে; পদ্ধতিটি বদলে দেয় না।
+
+1. **আগে যা লেখা হয়েছে, সেখান থেকেই শুরু করুন।** প্রথম রাউন্ডের আগে পরিকল্পনা এবং প্রকল্পে সিদ্ধান্ত নথিভুক্ত করার স্থানটি পড়ুন। এখনও খোলা, প্রস্তাবিত বা অনিশ্চিত—এমন সব বিষয় সংগ্রহ করুন। ইতিমধ্যে সিদ্ধান্ত নেওয়া বিষয় আবার জিজ্ঞেস করবেন না; বরং নথির উল্লেখ করুন।
+2. **পরের রাউন্ডের আগে প্রতিটি উত্তর লিখে রাখুন।** প্রকল্পের সিদ্ধান্ত-নথিতে প্রতিটি উত্তরকে সিদ্ধান্ত হিসেবে চিহ্নিত করে তারিখ ও উৎসসহ লিখুন। শুধু চ্যাটে থাকা উত্তর পরের কনটেক্সট রিসেটে হারিয়ে যায়।
+3. **বাধা এলে বিরতি দিন, আবার শুরু করবেন না।** ব্যবহারকারী আগে অন্য কোনো কাজ চাইলে সেটি করুন, তারপর বাকি ফ্রন্টিয়ার থেকে আবার শুরু করুন। মীমাংসিত প্রশ্ন মীমাংসিতই থাকবে।
+4. **প্রতিটি সুপারিশের পক্ষে একটি কারণ দিন।** প্রস্তাবিত উত্তর এবং তার পেছনের একটিমাত্র তথ্য বা নিয়ম বলুন। ব্যবহারকারী নিশ্চিত না করা পর্যন্ত সুপারিশ সিদ্ধান্ত নয়।
+5. **যে তথ্য যাচাই করেছেন তা দেখান।** কোনো প্রশ্ন পরিবেশ থেকে খুঁজে পাওয়া তথ্যের ওপর নির্ভর করলে, কী পেয়েছেন এবং কোথায় পেয়েছেন তা জানান; এতে ব্যবহারকারী প্রমাণের ভিত্তিতে সিদ্ধান্ত নিতে পারবেন।
+6. **ব্যবহারকারীর ভাষায় প্রশ্ন করুন।** প্রশ্ন ও সুপারিশ ব্যবহারকারীর ভাষায় হবে; শনাক্তকারী অপরিবর্তিত থাকবে।
+7. **শেষে সিদ্ধান্তের তালিকা দিন।** ফ্রন্টিয়ার ফাঁকা হলে কী সিদ্ধান্ত হয়েছে এবং কী ইচ্ছাকৃতভাবে খোলা রাখা হয়েছে তা তালিকাভুক্ত করুন, তারপর পারস্পরিক বোঝাপড়া নিশ্চিত করতে বলুন।
+
 <!--
 Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
-Modification vs. upstream: the `description` field was extended with German
-trigger phrases ("grill mich"). The `category` and `language` fields and this
-comment were added; all are local convention (recommended, not one of the
-nine house fields), not upstream content, and `language: en` reflects that
-the vendored body is unmodified English. The body (the design tree / frontier
-/ rounds method) is unchanged from upstream.
+Improved fork. Modifications vs. upstream:
+- `description`: German trigger phrases ("grill mich"), the "grill me" /
+  "grill-me" phrases, and the end-of-planning trigger were added.
+- `category`, `language` and this comment were added (local convention).
+- "Local additions" (rules 1-7) were appended after the upstream body. The
+  upstream body above that heading is unchanged, so a resync only needs to
+  replace that part.
 
-Adopted 2026-08-24 per Ticket T-20260824-594031458 alongside skills/third-
-party/grill-me/ (the thin, explicit-only entry point that calls this skill).
+Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
+entry point skills/third-party/grill-me/ (upstream
+skills/productivity/grill-me, `disable-model-invocation: true`, body
+"Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
+the user's request: one skill instead of two, the phrase triggers moved into
+this description. The native /grill-me command no longer exists; /grilling
+replaces it. The description only adds semantic matching and registers no
+alias command. Rules 1-7 come from a planning session of the same day.
 -->

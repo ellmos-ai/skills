@@ -32,7 +32,7 @@ provenance:
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
-translated_from_sha256: df1b1afd8453bf4a4e39e0edf079608b4b5213e8b1378dcfe731c9e08930061f
+translated_from_sha256: 1e6dace03eb8afc639fa08debace08a61441912a22399c11a49f7fe6e7dc3ecb
 translator: "claude-haiku-5-5"
 translated_at: "2026-10-15T16:29:01.065724+00:00"
 ---
@@ -44,7 +44,7 @@ translated_at: "2026-10-15T16:29:01.065724+00:00"
 
 **決定：フォークではなく自作。** 失われないよう根拠を記す：
 
-- `skill-creator`（Anthropic、マーケットプレイス `claude-plugins-official`）は **Apache-2.0** でライセンスされている（クローン内の LICENSE 本文を読んで確認、2026-08-24）。ライセンス上、フォークは法的に問題なく可能であり、リポジトリ内の他の箇所では、フォークが既に確立されたパターンでもある（`skills/third-party/grill-me`、`skills/third-party/grilling`）。
+- `skill-creator`（Anthropic、マーケットプレイス `claude-plugins-official`）は **Apache-2.0** でライセンスされている（クローン内の LICENSE 本文を読んで確認、2026-08-24）。ライセンス上、フォークは法的に問題なく可能であり、リポジトリ内の他の箇所では、フォークが既に確立されたパターンでもある（`skills/third-party/grilling`）。
 - ただしフォークすると、原本の評価・ベンチマークの仕組み全体（`agents/{analyzer,comparator,grader}.md`、`eval-viewer/`、7 本のスクリプト、485 行の SKILL.md）も持ち込むことになる — これは既に存在し直接呼び出せる機能である（`Skill: skill-creator:skill-creator`）。`.PLUGINS/CLAUDE.md` のルール 4「作り直す前に機能を確認する」と、パターン P10「誰も比較していない二つのスイッチ」に従えば、それは拡張ではなく重複になる。
 - 本当の欠落は **ellmos 固有** のもので、原本には基本的に存在しない：ハウスのフロントマター（`templates/SKILL.md`）、`docs/CONVENTIONS.md`、プロバイダー・ユーザー・ellmos に対する中立性と ellmos への敏感性、`grounding-seed` との連携、ベンダー認識、自己更新。
 - このスキルには **Anthropic の文章を含めない**（終始独自の表現）。そのため改変に伴う Apache-2.0 の帰属表示義務も生じない。原本を **複製するのではなく構成して利用する**。これは法的に最もクリーンで、保守負担も最小の方法でもある。
