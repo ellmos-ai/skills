@@ -2,6 +2,11 @@
 
 ## [Unreleased] - 2026-10-09
 
+- **Eleven-language README navigation and link validation**:
+  - Expanded the full README editions and language-count labels to EN, DE, ES, ZH, JA, RU, FR, HI, AR, BN, and PT. `README_EN.md` remains the English redirect.
+  - Corrected all 265 skill links in the five new editions to their tracked localized skill files and rebound their Worldset source hashes to the updated English README.
+  - Extended the README language-link gate and regression coverage to all eleven editions while preserving the `1.4.4` version freeze.
+
 - **Technical Hygiene, Dependabot Lifecycle Automation, Multi-Host OS Defense & Contract Hardening (Pfad A)**:
   - Version freeze maintained strictly at `1.4.4` per `T-20260920-167562623` (no version bumping during Pfad A maintenance).
   - Provisioned `.github/dependabot.yml` for automated weekly updates of `github-actions` and `pip` dependencies (Europe/Berlin timezone, limit: 3 PRs, `dependencies` & `github-actions` / `python` labels), closing the Dependabot monitoring gap for `ellmos-ai/skills`.
