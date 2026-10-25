@@ -27,7 +27,7 @@
 [![Marketing Log: Active](https://img.shields.io/badge/Marketing%20Log-Active-blue.svg)](MARKETING-LOG.txt)
 [![Organization: ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-blue.svg)](https://github.com/ellmos-ai)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Public Skills: 142 Catalog](https://img.shields.io/badge/Public%20Skills-142%20Catalog-brightgreen.svg)](registry/components.json)
+[![Public Skills: 146 Catalog](https://img.shields.io/badge/Public%20Skills-146%20Catalog-brightgreen.svg)](registry/components.json)
 [![Tracked: 380 Skills](https://img.shields.io/badge/Tracked-380%20Skills-4f46e5.svg)](SKILLS-MAP.md)
 [![LLM-Ready: llms.txt](https://img.shields.io/badge/LLM--Ready-llms.txt-purple.svg)](llms.txt)
 [![Notice: MIT](https://img.shields.io/badge/Notice-Attributed-blue.svg)](NOTICE)
@@ -75,7 +75,7 @@ This repository is the reusable skill catalog of the ellmos ecosystem. It contai
 
 ```mermaid
 flowchart TD
-    Registry["Public Skill Registry (142 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
+    Registry["Public Skill Registry (146 Catalog / 380 Tracked)"] --> Engine["ellmos Skill Runtime & Dispatcher"]
     
     subgraph Catalog ["11 Public Domains"]
         Assist["assist (20)"]
@@ -223,7 +223,7 @@ Chinese users can also search and install skills through [Skills宝](https://ski
 |            v (Discovery Query)                          v (Catalog Index Readback)                 |
 |  +-----------------------------------+        +-------------------------------------------------+  |
 |  | Public Catalog Registry           |        | llms.txt & Context Index                        |  |
-|  | (registry/components.json: 142)   |        | (Machine-readable markdown & category hierarchy)|  |
+|  | (registry/components.json: 146)   |        | (Machine-readable markdown & category hierarchy)|  |
 |  +-----------------------------------+        +-------------------------------------------------+  |
 +----------------------------------------------------------------------------------------------------+
 | VIEW 2: MULTI-AGENT CLIENT INTEGRATION LAYER                                                       |
@@ -285,15 +285,15 @@ Chinese users can also search and install skills through [Skills宝](https://ski
 <a id="sec-07"></a><a id="catalog-snapshot"></a>
 ## 7. Catalog Snapshot & Domain Distribution
 
-The current public catalog contains 142 public runtime skills (380 tracked across local suites):
+The current public catalog contains 146 public runtime skills (380 tracked across local suites):
 
 | Category | Count | Focus |
 |---|---:|---|
 | <img src="assets/icons/cat-assist.svg" width="20" height="20" alt=""> `assist` | 20 | User-neutral methods for office work, notes, household planning, contacts, health-information organization, media and inventory exports, voice workflows, travel, weather, calendars, and transcription |
-| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 25 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, and repository publication |
+| <img src="assets/icons/cat-dev.svg" width="20" height="20" alt=""> `dev` | 26 | Development protocols, debugging, bug sweeps, pipeline renovation, migration, documentation, plugin systems, repository publication and tech-stack security checks |
 | <img src="assets/icons/cat-education.svg" width="20" height="20" alt=""> `education` | 5 | Academic planning, source-based learning, exam preparation, worksheet generation, and user-neutral teaching and support planning |
 | <img src="assets/icons/cat-game-dev.svg" width="20" height="20" alt=""> `game-dev` | 5 | Blender, Roblox, Rojo, Studio, asset safety, and game-design workflows |
-| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 32 | Portable AI setup, system onboarding, skill landscape management, automation self-care, semantic persona routing, provider-neutral config sync and agent boot bridges |
+| <img src="assets/icons/cat-infrastructure.svg" width="20" height="20" alt=""> `infrastructure` | 35 | Portable AI setup, system onboarding, skill landscape management, automation self-care, host techshots, scoped defense, semantic persona routing and agent boot bridges |
 | <img src="assets/icons/cat-production.svg" width="20" height="20" alt=""> `production` | 1 | Text production router: general texts, narrative stories, PR with a local LaTeX press-release compiler |
 | <img src="assets/icons/cat-research.svg" width="20" height="20" alt=""> `research` | 1 | Research-agent workflow support |
 | <img src="assets/icons/cat-therapy.svg" width="20" height="20" alt=""> `therapy` | 20 | German-language psychoeducation and counseling method playbooks |
@@ -312,6 +312,9 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/model-strategy.svg" width="20" height="20" alt=""> [`model-strategy`](skills/dev/model-strategy/SKILL.en.md) | Multi-model routing for Claude, Codex, Gemini, and Ollama with score-based selection, delegation paths, escalation triggers, and cost/quality tradeoffs. |
 | <img src="assets/icons/pipeline-optimizer.svg" width="20" height="20" alt=""> [`pipeline-optimizer`](skills/dev/pipeline-optimizer/SKILL.en.md) | Six-step renovation protocol for existing project folders, documentation systems, and software stacks; designed to avoid duplicate standards and broken workflows. |
 | <img src="assets/icons/github-repo-care.svg" width="20" height="20" alt=""> [`github-repo-care`](skills/dev/github-repo-care/SKILL.en.md) | Publication and maintenance gate for GitHub repos: local rules, locks, `.gitignore`, privacy checks, README/i18n, releases, and repository metadata. |
+| [`tech-detect`](skills/infrastructure/tech-detect/SKILL.en.md) | Read-only, source-labelled host software and hardware snapshots with cross-host comparison; it does not update the inventory seed. |
+| [`security-tech-stack-check`](skills/dev/security-tech-stack-check/SKILL.en.md) | Current primary-advisory review for measured components, with an explicitly authorized private per-asset fix mode. |
+| [`protection-shield`](skills/infrastructure/protection-shield/SKILL.en.md) | Scoped defensive incident and recurring log-review workflow; a skill file alone does not activate monitoring or network changes. |
 | <img src="assets/icons/mcp-config-sync.svg" width="20" height="20" alt=""> [`mcp-config-sync`](skills/infrastructure/mcp-config-sync/SKILL.en.md) | Provider-neutral MCP discovery and sync planning across user-selected providers and app classes; no implicit hub. |
 | <img src="assets/icons/video-transcriber.svg" width="20" height="20" alt=""> [`video-transcriber`](skills/utilities/video-transcriber/SKILL.en.md) | Extracts video subtitles/transcripts plus metadata (supports YouTube sources) into Markdown, JSON, or plain text so video analysis starts from source-backed text. |
 | <img src="assets/icons/rbx-studio.svg" width="20" height="20" alt=""> [`rbx-studio`](skills/game-dev/rbx-studio/SKILL.en.md) | Roblox Studio operation: Explorer/Play-Test workflow, Rojo scene-vs-code hookup, AI control of Studio via MCP, and a mandatory malware scan for Creator Store assets. |

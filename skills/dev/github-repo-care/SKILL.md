@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.1
+version: 1.3.2
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -34,6 +34,10 @@ Greift nicht für reine Code-Implementierung ohne GitHub-Veröffentlichung. In d
 ## Kernregel
 
 Bereite das Repository vor dem ersten öffentlichen Push vor. Eine korrekte `.gitignore`, ein sauberer Privacy-Gate, Lizenz, README, Metadaten und Release-Story sind vor öffentlicher Historie deutlich einfacher als danach.
+
+## Sicherheit des Repositorys
+
+Vor Push oder Release vorhandene Sicherheitsregeln, `SECURITY.md`, Abhängigkeiten, Secret- und Privacy-Gates, Branchschutz, CI und offene Advisories prüfen. Nutze vorhandene `codex-security`-Scans und, soweit eingerichtet, `github-health`/Dependabot; erfinde keinen zweiten Scanner. Funde an konkrete Versionen, betroffene Dateien, Exposition und aktuelle Herstellerhinweise binden. `unknown` ist kein Entwarnungsbeleg. Einen Fix nur im autorisierten Repo-Scope mit Tests und unabhängiger Abnahme übernehmen; Release- und Merge-Rechte bleiben unverändert. Für installierte Hostsoftware und Patchentscheidungen an `tech-detect` und `security-tech-stack-check` übergeben.
 
 ## Ablauf
 

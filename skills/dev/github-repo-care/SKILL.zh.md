@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.1
+version: 1.3.2
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -150,3 +150,7 @@ gh run list --repo ORG/REPO --limit 5
 
 ### 1.0.0 (2026-06-18)
 - 创建了初始仓库维护与发布协议。
+
+## 仓库安全
+
+发布前检查现有规则、SECURITY.md、依赖、密钥与隐私检查、CI、分支保护及最新公告。复用 codex-security 和可用的 github-health/Dependabot，不另建扫描器。将发现绑定到具体版本、文件和暴露条件；unknown 不能当作安全证明。修复须在授权范围内完成并经过测试和独立审查。主机软件使用 tech-detect 与 security-tech-stack-check。

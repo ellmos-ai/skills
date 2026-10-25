@@ -1,6 +1,6 @@
 ---
 language: fr
-version: 1.3.1
+version: 1.3.2
 ---
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
@@ -152,3 +152,7 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 
 ### 1.0.0 (2026-06-18)
 - Created initial repository care and publication protocol.
+
+## Sécurité du dépôt
+
+Avant une publication, vérifier les règles existantes, SECURITY.md, dépendances, secrets, confidentialité, CI, protection des branches et avis récents. Réutiliser codex-security et, si disponibles, github-health/Dependabot. Relier chaque constat à une version, un fichier et une exposition précis; unknown ne signifie pas sûr. Corriger seulement dans le périmètre autorisé, avec tests et revue indépendante. Pour le logiciel installé sur l'hôte, utiliser tech-detect et security-tech-stack-check.

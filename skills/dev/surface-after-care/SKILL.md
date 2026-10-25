@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -70,6 +70,8 @@ Abgrenzung zu den Nachbarskills:
 ## Kernidee
 
 Ein veröffentlichtes Repo driftet in zwei Richtungen auseinander: **Die Doku beschreibt eine ältere Software als die, die im Repo liegt**, und **es sammeln sich Dateien an, die nie für fremde Augen gedacht waren**. Beides ist selten dramatisch, aber beides kostet genau die Nutzer, die man gewinnen will — der eine springt ab, weil die Installationsanleitung nicht mehr passt, der andere, weil er im Wurzelverzeichnis auf `AUFGABEN.txt` und `Plan.txt` stößt und den Eindruck bekommt, hier arbeite jemand nur für sich selbst.
+
+Die Pflegerunde enthält einen Sicherheitsblick: vorhandene `codex-security`-Prüfung, Dependency-/Dependabot-Befunde, `SECURITY.md`, Secret-/Privacy-Gate und offene Advisories mit aktuellem Beleg lesen. Produkt, Version, betroffene Datei und Exposition prüfen; fehlende Quellen oder unklare Versionen als `unknown` benennen. Keinen zweiten Scanner und keine Host-Patchlogik bauen; dafür `github-repo-care`, `tech-detect` und `security-tech-stack-check` nutzen. Fixes nur im autorisierten Repo-Scope und mit den vorhandenen Review-/Merge-Gates übernehmen. `full-after-care` erbt diese Runde.
 
 Diese Runde räumt beides auf. Sie ist bewusst wiederholbar: lieber viermal im Jahr eine halbe Stunde als einmal ein Großputz.
 

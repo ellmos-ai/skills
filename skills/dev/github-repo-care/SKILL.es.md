@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.1
+version: 1.3.2
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -155,3 +155,7 @@ Si la CI está en rojo después de un lanzamiento, el repositorio aún no se ha 
 
 ### 1.0.0 (2026-06-18)
 - Creado el protocolo inicial de mantenimiento y publicación de repositorios.
+
+## Seguridad del repositorio
+
+Antes de publicar, revisar la política existente, SECURITY.md, dependencias, secretos, privacidad, CI, protección de ramas y avisos vigentes. Reutilizar codex-security y, si están disponibles, github-health/Dependabot. Vincular cada hallazgo a versión, archivo y exposición concretos; unknown no significa seguro. Aplicar cambios solo con autorización, pruebas y revisión independiente. Para software del host, usar tech-detect y security-tech-stack-check.

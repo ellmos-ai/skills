@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -458,3 +458,7 @@ El registro evita que la siguiente ronda tome las mismas decisiones de nuevo y c
 
 ### 1.0.0 (2026-07-24)
 - Versión inicial. Nivel 1 del mantenimiento posterior de repositorios, derivado de `github-repo-care`.
+
+## Seguridad en esta ronda de mantenimiento
+
+Revisar codex-security, dependencias/Dependabot, SECURITY.md, controles de secretos y privacidad y avisos actuales. Confirmar producto, versión, archivo y exposición; indicar unknown si faltan pruebas. Reutilizar github-repo-care para publicación y tech-detect/security-tech-stack-check para parches del host. No crear otro escáner ni omitir autorización, revisión o reglas de fusión. full-after-care hereda esta ronda.
