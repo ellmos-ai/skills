@@ -2,6 +2,13 @@
 
 ## [Unreleased] - 2026-10-25
 
+- **Incremental translation intake**: Added an offline World Set discovery adapter
+  for new projects/skills, EN/DE changes and typed locale catalogues. It exports
+  bounded native document projections and lossless protected chunks, preserves
+  unresolved source-pair baselines, and excludes user/archive/private scopes by
+  default. Execution, provider receipts, semantic review and publication remain
+  with the existing executor; no recurring deployment is installed by this tool.
+
 - **`skills/third-party/grilling` absorbs `grill-me`**: The thin entry point `skills/third-party/grill-me` (body: "Call the Skill tool with grilling") is removed at the user's request; its phrase triggers ("grill me", "grill-me") now live in the `grilling` description. The native `/grill-me` command is removed; `/grilling` replaces it (a description registers no alias command). `grilling` becomes an improved fork with a "Local additions" section (seed the tree from recorded decisions, write answers down before the next round, pause on interruptions, one reason per recommendation, show measured facts, ask in the user's language, close with a ledger). The upstream body stays unchanged above that heading. READMEs, `THIRD_PARTY_LICENSES.*` and `ellmos-skill-creator` no longer list `grill-me`.
 
 ## [Unreleased] - 2026-10-09
