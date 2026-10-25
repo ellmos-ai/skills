@@ -3,15 +3,20 @@
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb" alt="English"></a>
   <a href="README_de.md"><img src="https://img.shields.io/badge/Sprache-Deutsch-d97706" alt="Deutsch"></a>
-  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Español-dc2626" alt="Español"></a>
-  <a href="README_ja.md"><img src="https://img.shields.io/badge/言語-日本語-7c3aed" alt="日本語"></a>
-  <a href="README_ru.md"><img src="https://img.shields.io/badge/Язык-Русский-0891b2" alt="Русский"></a>
-  <a href="README_zh.md"><img src="https://img.shields.io/badge/语言-简体中文-059669" alt="简体中文"></a>
+  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Espa%C3%B1ol-dc2626" alt="Español"></a>
+  <a href="README_zh.md"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-059669" alt="简体中文"></a>
+  <a href="README_ja.md"><img src="https://img.shields.io/badge/%E8%A8%80%E8%AA%9E-%E6%97%A5%E6%9C%AC%E8%AA%9E-7c3aed" alt="日本語"></a>
+  <a href="README_ru.md"><img src="https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-0891b2" alt="Русский"></a>
+  <a href="README_fr.md"><img src="https://img.shields.io/badge/Langue-Fran%C3%A7ais-0ea5e9" alt="Français"></a>
+  <a href="README_hi.md"><img src="https://img.shields.io/badge/%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE-%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-7c3aed" alt="हिन्दी"></a>
+  <a href="README_ar.md"><img src="https://img.shields.io/badge/%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-059669" alt="العربية"></a>
+  <a href="README_bn.md"><img src="https://img.shields.io/badge/%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE-%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE-d97706" alt="বাংলা"></a>
+  <a href="README_pt.md"><img src="https://img.shields.io/badge/Idioma-Portugu%C3%AAs-dc2626" alt="Português"></a>
 </p>
 
 # ellmos skills
 
-**Documentación en seis idiomas** · [Contexto legible por máquinas](llms.txt) · **🗺️ [Explora la biblioteca de skills online](https://ellmos-ai.github.io/skills.html)** — lee y copia cualquier skill público en el navegador
+**Documentación en once idiomas** · [Contexto legible por máquinas](llms.txt) · **🗺️ [Explora la biblioteca de skills online](https://ellmos-ai.github.io/skills.html)** — lee y copia cualquier skill público en el navegador
 
 > Biblioteca portátil de skills de IA para flujos `SKILL.md` al estilo Claude Code, configuraciones de agentes compatibles con Codex, BACH y otros entornos de agentes LLM local-first.
 
@@ -122,23 +127,23 @@ Estos skills son buenos puntos de entrada porque coordinan herramientas, reducen
 | <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.es.md) | Apoyo integral para candidaturas, CV, LinkedIn y cartas. |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`](skills/therapy/) | Familia coherente de 19 skills de psicoeducación y métodos de conversación con límites éticos (insignias: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.es.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.es.md)); el bloque más profundo de la biblioteca. |
 | <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.es.md) | Superposición constitucional ('Posición de los No Nacidos'): otorga a generaciones futuras un derecho formal de veto rawlsiano mediante revisión 5-CORE y análisis contrafáctico. |
-| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | Protocolo de no interrupción basado en pruebas (WAAFAP): invertir la condición de parada exige prueba falsable de ausencia de tareas ('terminar requiere prueba de inactividad'). |
-| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | Patrón de despliegue de privacidad zero-state: ejecuta SQLite en el navegador vía SQLite-WASM/OPFS con BYOK del cliente, eliminando bases de datos de servidor y responsabilidad RGPD. |
-| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | Síntesis bidireccional UI-prompt ('El clic es el prompt'): plano ASCII tipado con leyenda 4D que sincroniza interfaces e instrucciones de agentes sin fase de compilación. |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.es.md) | Protocolo de no interrupción basado en pruebas (WAAFAP): invertir la condición de parada exige prueba falsable de ausencia de tareas ('terminar requiere prueba de inactividad'). |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.es.md) | Patrón de despliegue de privacidad zero-state: ejecuta SQLite en el navegador vía SQLite-WASM/OPFS con BYOK del cliente, eliminando bases de datos de servidor y responsabilidad RGPD. |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.es.md) | Síntesis bidireccional UI-prompt ('El clic es el prompt'): plano ASCII tipado con leyenda 4D que sincroniza interfaces e instrucciones de agentes sin fase de compilación. |
 | <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.es.md) | Funciones de control ejecutivo neuropsicológico integradas en comprobaciones previas para prevenir el sesgo de complacencia y la terminación prematura. |
-| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | Compresión determinista de reglas sin modelo: reduce archivos de reglas y memoria Markdown hasta un 40% de volumen de tokens sin inferencia LLM ni deriva semántica. |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.es.md) | Compresión determinista de reglas sin modelo: reduce archivos de reglas y memoria Markdown hasta un 40% de volumen de tokens sin inferencia LLM ni deriva semántica. |
 | <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.es.md) | Protocolos de navegación náutica universal para agentes desorientados: heurísticas de recuperación y reconstrucción de estado ante derivas de contexto o bucles. |
 | <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.es.md) | DSL declarativo de compuertas condicionales para prompts: encapsula condiciones previas, hitos y dependencias en compuertas fail-closed dentro de Markdown estándar. |
 | <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.es.md) | Cargador previo para agentes CLI sin hooks: inyecta reglas de gobernanza, recorrido de memoria y contexto autorreparable antes de cada turno sin eventos JSON nativos. |
-| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | Estación de radio a nivel de sesión sobre carpetas sincronizadas compartidas: separa roles asimétricos (`ListenSync` frente a `WriteSync`) para coordinación multiagente sin servidores. |
-| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | Negociador de contratos de sesión para trabajo multiagente: delimita topología de orquestación, concurrencia, ranuras de modelos y disparadores de escalado antes de la ejecución. |
-| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | Protocolo de fusión en cremallera para ramas divergentes: compara sección por sección mediante tabla de decisiones con reconstrucción de intención como escalado final. |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.es.md) | Estación de radio a nivel de sesión sobre carpetas sincronizadas compartidas: separa roles asimétricos (`ListenSync` frente a `WriteSync`) para coordinación multiagente sin servidores. |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.es.md) | Negociador de contratos de sesión para trabajo multiagente: delimita topología de orquestación, concurrencia, ranuras de modelos y disparadores de escalado antes de la ejecución. |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.es.md) | Protocolo de fusión en cremallera para ramas divergentes: compara sección por sección mediante tabla de decisiones con reconstrucción de intención como escalado final. |
 | <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.es.md) | Cambio de nombre evolutivo de archivos y módulos con envoltorios y stubs MOVED: evita roturas en flotas de agentes mientras las referencias se actualizan orgánicamente. |
 | <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.es.md) | Brújula taxonómica 2x2 para pipelines: previene el sesgo de andamiaje de los LLM enrutando al skill adecuado de incorporación, arranque o renovación. |
-| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | Bucle determinista de higiene de fin de sesión con 3 roles: resuelve tareas pendientes sin desviar la agenda, sincroniza documentación y archiva archivos dispersos. |
-| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Pipelining asíncrono con intervención humana: mientras el usuario prueba el elemento N, el agente lanza el N+1 y delega arreglos para el N-1, eliminando esperas. |
-| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Limpieza semántica del sistema de archivos mediante Cut-and-Clue: separa activos de legados con punteros legibles por máquina, preservando taxonomías y registros. |
-| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | Reduce listas grandes paso a paso mediante grupos temáticos opcionales, filtros y paquetes remezclados para seleccionar o filtrar sin descartar definitivamente el resto. |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.es.md) | Bucle determinista de higiene de fin de sesión con 3 roles: resuelve tareas pendientes sin desviar la agenda, sincroniza documentación y archiva archivos dispersos. |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.es.md) | Pipelining asíncrono con intervención humana: mientras el usuario prueba el elemento N, el agente lanza el N+1 y delega arreglos para el N-1, eliminando esperas. |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.es.md) | Limpieza semántica del sistema de archivos mediante Cut-and-Clue: separa activos de legados con punteros legibles por máquina, preservando taxonomías y registros. |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.es.md) | Reduce listas grandes paso a paso mediante grupos temáticos opcionales, filtros y paquetes remezclados para seleccionar o filtrar sin descartar definitivamente el resto. |
 
 ## Límite público/privado
 
@@ -192,7 +197,7 @@ Con [pre-commit](https://pre-commit.com/) instalado, activa el hook con `pre-com
 Evaluaciones A/B independientes de terceros sobre skills concretos, referenciadas
 aquí a medida que están disponibles (no ejecutadas ni encargadas por este proyecto):
 
-- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), probado el 2026-08-08 en Gemini-3.6-flash, 22 casos: tasa de acierto 22,7 % -> 95,5 % (+73pp), -14 % tokens, seguridad 15/15 comprobaciones (3/3).
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.es.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), probado el 2026-08-08 en Gemini-3.6-flash, 22 casos: tasa de acierto 22,7 % -> 95,5 % (+73pp), -14 % tokens, seguridad 15/15 comprobaciones (3/3).
 
 ## Contexto de búsqueda
 

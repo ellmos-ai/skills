@@ -46,9 +46,14 @@ README_LANGUAGES = {
     "README.md": "en",
     "README_de.md": "de",
     "README_es.md": "es",
+    "README_zh.md": "zh",
     "README_ja.md": "ja",
     "README_ru.md": "ru",
-    "README_zh.md": "zh",
+    "README_fr.md": "fr",
+    "README_hi.md": "hi",
+    "README_ar.md": "ar",
+    "README_bn.md": "bn",
+    "README_pt.md": "pt",
 }
 
 # Erfasst relative Skilldatei-Ziele mit den zwei Verzeichnisebenen des Katalogs.
