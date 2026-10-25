@@ -2002,7 +2002,7 @@
       "path": "skills/third-party/grilling/SKILL.md",
       "version": "0.0.0",
       "status": "active",
-      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says \"grill me\" or types /grill-me, or uses any other 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Also use when a planning session ends and the user asks whether anything is still open.",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says \"grill me\" or \"grill-me\" (the former /grill-me command is now /grilling), or uses any other 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Also use when a planning session ends and the user asks whether anything is still open.",
       "languages": [
         "en"
       ]

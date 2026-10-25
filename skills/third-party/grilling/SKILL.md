@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says "grill me" or types /grill-me, or uses any other 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Also use when a planning session ends and the user asks whether anything is still open.
+description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says "grill me" or "grill-me" (the former /grill-me command is now /grilling), or uses any other 'grill' trigger phrase -- including German ones such as "grill mich", "grill mich zu diesem Plan" or "zerpflück meinen Plan im Grill-Modus". Also use when a planning session ends and the user asks whether anything is still open.
 third_party: true
 license: MIT
 upstream: https://github.com/mattpocock/skills
@@ -51,8 +51,8 @@ Vendored from mattpocock/skills (skills/productivity/grilling/SKILL.md, MIT
 License, Copyright (c) 2026 Matt Pocock -- see LICENSE next to this file).
 
 Improved fork. Modifications vs. upstream:
-- `description`: German trigger phrases ("grill mich"), the "grill me" and
-  /grill-me triggers, and the end-of-planning trigger were added.
+- `description`: German trigger phrases ("grill mich"), the "grill me" /
+  "grill-me" phrases, and the end-of-planning trigger were added.
 - `category`, `language` and this comment were added (local convention).
 - "Local additions" (rules 1-7) were appended after the upstream body. The
   upstream body above that heading is unchanged, so a resync only needs to
@@ -62,6 +62,8 @@ Adopted 2026-08-24 per Ticket T-20260824-594031458, together with the thin
 entry point skills/third-party/grill-me/ (upstream
 skills/productivity/grill-me, `disable-model-invocation: true`, body
 "Call the Skill tool with grilling"). On 2026-10-25 grill-me was removed at
-the user's request: one skill instead of two, the triggers moved into this
-description. Rules 1-7 come from a planning session of the same day.
+the user's request: one skill instead of two, the phrase triggers moved into
+this description. The native /grill-me command no longer exists; /grilling
+replaces it. The description only adds semantic matching and registers no
+alias command. Rules 1-7 come from a planning session of the same day.
 -->
