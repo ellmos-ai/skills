@@ -11,7 +11,8 @@ def project(tmp_path, language='en'):
     root = tmp_path / 'project'
     root.mkdir()
     (root / 'README.md').write_text('# Example\n\nHello world.\n', encoding='utf-8')
-    return root, {'projects': [{'id': 'example', 'root': str(root), 'source_language': language}]}
+    return root, {'projects': [{'id': 'example', 'root': str(root), 'source_language': language,
+                                'source_visibility': 'public'}]}
 
 
 def jobs(result):
@@ -105,7 +106,8 @@ def test_chunks_reassemble_exact_protected_document(tmp_path):
 
 
 def test_new_project_discovery_and_directory_limit(tmp_path):
-    discovery = {'discovery_roots': [{'root': str(tmp_path), 'depth': 2, 'source_language': 'en'}]}
+    discovery = {'discovery_roots': [{'root': str(tmp_path), 'depth': 2, 'source_language': 'en',
+                                      'source_visibility': 'public'}]}
     assert collect(discovery)['packages'] == []
     root = tmp_path / 'new-project'
     root.mkdir()
@@ -195,6 +197,45 @@ def test_collection_readme_does_not_hide_new_projects(tmp_path):
                                          'min_project_depth': 1, 'source_language': 'en'}]})
     assert len(result['packages']) == 1
     assert result['packages'][0]['root'] == str(child)
+
+
+def test_unreviewed_discovered_readme_is_held_for_visibility(tmp_path):
+    root = tmp_path / 'collection'
+    project_root = root / 'new-project'
+    project_root.mkdir(parents=True)
+    (project_root / 'README.md').write_text(
+        '<!-- source-language: en -->\n# New project\n', encoding='utf-8')
+    result = collect({'discovery_roots': [{'root': str(root), 'depth': 1,
+                                           'min_project_depth': 1}]})
+    assert not jobs(result)
+    assert result['attention'][0]['reason'] == 'source_visibility_review_required'
+
+
+def test_unreviewed_catalogue_is_held_for_visibility(tmp_path):
+    root, config = project(tmp_path)
+    config['projects'][0].pop('source_visibility')
+    path = root / 'locales' / 'translations.json'
+    path.parent.mkdir()
+    path.write_text(json.dumps({'button': {'de': 'Öffnen', 'en': 'Open'}}), encoding='utf-8')
+    result = collect(config)
+    assert not result['packages'][0]['catalogue_candidates']
+    assert any(item['reason'] == 'catalogue_visibility_review_required'
+               for item in result['attention'])
+
+
+def test_reviewed_public_localized_map_skips_metadata_envelope(tmp_path):
+    root, config = project(tmp_path)
+    path = root / 'locales' / 'translations.json'
+    path.parent.mkdir()
+    path.write_text(json.dumps({
+        '_meta': {'description': 'UI catalogue', 'format': 1, 'languages': ['en', 'de'],
+                  'source': 'registry', 'instructions': 'Stable metadata.'},
+        'button': {'de': 'Öffnen', 'en': 'Open'},
+    }), encoding='utf-8')
+    result = collect(config)
+    assert len(result['packages'][0]['catalogue_candidates']) == 10
+    assert not any(item['reason'] == 'unsupported localized-map entry'
+                   for item in result['attention'])
 
 
 def test_archived_skill_frontmatter_is_not_translated(tmp_path):
@@ -412,7 +453,8 @@ def test_source_read_error_keeps_baseline_for_later_secondary_edit(tmp_path, mon
 
 def test_unreadable_discovery_fails_without_replacing_successful_snapshot(tmp_path, monkeypatch):
     root, _ = project(tmp_path)
-    config = {'discovery_roots': [{'root': str(tmp_path), 'source_language': 'en'}]}
+    config = {'discovery_roots': [{'root': str(tmp_path), 'source_language': 'en',
+                                   'source_visibility': 'public'}]}
     before = collect(config)
     original = worldset_discovery.os.scandir
     def unavailable(path):

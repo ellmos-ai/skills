@@ -131,7 +131,8 @@ def discover(config: dict) -> tuple[list[dict], list[dict]]:
                 if level >= minimum and (directory / 'README.md').is_file():
                     projects.append({'id': discovery.get('id', 'discovery') + '/' + directory.relative_to(root).as_posix(),
                                      'root': str(directory), 'kind': 'readme',
-                                     'source_language': discovery.get('source_language')})
+                                     'source_language': discovery.get('source_language'),
+                                     'source_visibility': discovery.get('source_visibility')})
                     continue
                 if level < depth:
                     with os.scandir(directory) as entries:
@@ -229,18 +230,28 @@ def catalogue_candidates(project: dict, previous: dict) -> tuple[list[dict], dic
                 raise ValueError('catalogue root must be an object')
             fields = []
             private_fields = set()
-            catalogue_private = data.get('visibility') in PRIVATE_VISIBILITY or project.get('visibility') in PRIVATE_VISIBILITY
+            metadata = data.get('_meta', {})
+            if not isinstance(metadata, dict):
+                raise ValueError('catalogue metadata must be an object')
+            catalogue_visibility = (metadata.get('source_visibility') or metadata.get('visibility')
+                                    or project.get('source_visibility') or project.get('visibility'))
+            catalogue_private = catalogue_visibility != 'public'
             if catalogue_private and project.get('allow_private') is not True:
-                attention.append({'project': project['id'], 'source': relative, 'reason': 'private_catalogue_excluded'})
+                reason = ('private_catalogue_excluded' if catalogue_visibility in PRIVATE_VISIBILITY
+                          else 'catalogue_visibility_review_required')
+                attention.append({'project': project['id'], 'source': relative, 'reason': reason})
                 continue
             if spec['shape'] == 'localized-map':
                 lang = spec.get('source_language')
                 if lang not in ('en', 'de'):
                     raise ValueError('catalogue leading language required')
                 for key, translations in data.items():
+                    if key == '_meta':
+                        continue
                     if not isinstance(translations, dict) or not isinstance(translations.get(lang), str):
                         raise ValueError('unsupported localized-map entry')
-                    if translations.get('visibility') in PRIVATE_VISIBILITY:
+                    field_visibility = translations.get('visibility')
+                    if field_visibility is not None and field_visibility != 'public':
                         if project.get('allow_private') is not True:
                             attention.append({'project': project['id'], 'source': relative, 'key': key,
                                               'reason': 'private_catalogue_field_excluded'})
@@ -257,7 +268,7 @@ def catalogue_candidates(project: dict, previous: dict) -> tuple[list[dict], dic
                 for index, row in enumerate(data['entries']):
                     if not isinstance(row, dict) or not isinstance(row.get('translations'), dict):
                         raise ValueError('typed catalogue entry must contain a translations object')
-                    if row.get('visibility') in PRIVATE_VISIBILITY:
+                    if row.get('visibility') is not None and row.get('visibility') != 'public':
                         if project.get('allow_private') is not True:
                             attention.append({'project': project['id'], 'source': relative, 'key': row.get('key'),
                                               'reason': 'private_catalogue_field_excluded'})
@@ -371,8 +382,8 @@ def collect(config: dict, previous: dict | None = None) -> dict:
                     continue
                 declared_visibility = re.search(r'^visibility:[ \t]*([^\n]*)$', frontmatter[1], re.M | re.I) if frontmatter else None
                 visibility = (declared_visibility[1].split(' #', 1)[0].strip().strip('\"\'').casefold()
-                              if declared_visibility else project.get('source_visibility'))
-                unresolved_visibility = kind.startswith('skills') and visibility != 'public'
+                              if declared_visibility else project.get('source_visibility') or project.get('visibility'))
+                unresolved_visibility = visibility != 'public'
                 private_source = (visibility in PRIVATE_VISIBILITY or visibility == 'public potential'
                                   or unresolved_visibility or project.get('visibility') in PRIVATE_VISIBILITY)
                 if private_source and project.get('allow_private') is not True:

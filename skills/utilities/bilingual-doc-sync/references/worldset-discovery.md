@@ -109,3 +109,40 @@ avoid overlapping runs, skip missing source volumes and leave executor receipts
 untouched. This module does not install a schedule or claim that a deployed worker
 exists. Document actual installation and a second-run readback in the private
 pipeline workspace before reporting automation as active.
+
+`scripts/worldset_collector.py` supplies one guarded pass for that scheduler:
+
+```sh
+python -B scripts/worldset_collector.py --config private/config.json \
+  --runtime private/intake --lock-tools installed/native-lock-tools
+```
+
+The configuration and runtime directory must already exist, outside source projects.
+`required_roots` is an optional list of mounted source directories; a missing root
+skips collection without replacing the last successful snapshot. Explicit eligible
+project roots and discovery roots must also exist. Native lock tools are an
+explicit installed dependency, never a bundled or weakened lock implementation.
+The runner claims only its runtime and publishes a content-addressed
+`discovery-<sha256>.json` snapshot before atomically updating `last-success.json`.
+That receipt points to the authoritative snapshot. Foreign claims are skipped;
+expired existing claims stay for operator inspection after the original process is
+proven terminal.
+
+The host scheduler must ignore overlapping instances and impose a run time below
+the thirty-minute claim lifetime. Retain the last snapshot on scan failure, record
+the scheduler exit status, and do not attach provider or translation-application
+commands. Install a new schedule only after two successful native runs and a fresh
+independent runner review. This reference does not assert a deployed schedule.
+
+Visibility is required for README and catalogue sources as well as skills. Missing
+or unknown visibility is held for review; successful parsing and an EN/DE source
+declaration do not establish that a project is public. Configure a reviewed public
+project or collection scope, or use a public registry entry. Catalogue `_meta`
+fields are skipped as metadata; visibility is honored only when explicitly declared.
+
+The collector writes an immutable content-addressed snapshot and updates its
+last-success receipt last. The receipt names the authoritative snapshot. If the
+receipt write fails, the previous receipt and snapshot remain valid. The runner
+rechecks eligible README/SKILL paths and configured catalogue files after scanning;
+a changed inventory preserves the prior receipt. It binds its lock to the fence
+returned by the native lock creator.
