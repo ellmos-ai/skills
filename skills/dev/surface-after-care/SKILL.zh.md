@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -453,3 +453,7 @@ git push
 
 ### 1.0.0 (2026-07-24)
 - 初始版本。仓库后续维护的第 1 阶段，衍生自 `github-repo-care`。
+
+## 仓库维护中的安全检查
+
+检查现有 codex-security、依赖/Dependabot、SECURITY.md、密钥与隐私检查及最新公告。确认产品、版本、受影响文件和暴露条件；证据缺失记为 unknown。发布门禁复用 github-repo-care，主机补丁使用 tech-detect/security-tech-stack-check。不得另建扫描器或绕过授权、审查与合并规则。full-after-care 继承此步骤。

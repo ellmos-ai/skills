@@ -162,7 +162,7 @@ class MetadataAndManifestParityTests(unittest.TestCase):
             self.assertIn("```mermaid", content)
             self.assertIn("1.4.4", content)
             self.assertIn("455", content)
-            self.assertIn("142", content)
+            self.assertIn(str(self.registry["summary"]["component_count"]), content)
             self.assertIn("2026-10-09", content)
 
     def test_changelog_exists_and_updated(self) -> None:
@@ -331,8 +331,11 @@ class MetadataAndManifestParityTests(unittest.TestCase):
         en_content = README_EN_PATH.read_text(encoding="utf-8")
         de_content = README_DE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn('Registry["Public Skill Registry (142 Catalog / 380 Tracked)"]', en_content)
-        self.assertIn('Registry["Öffentliche Skill-Registry (142 Katalog / 380 getrackt)"]', de_content)
+        count = self.registry["summary"]["component_count"]
+        self.assertIn(f'Registry["Public Skill Registry ({count} Catalog / 380 Tracked)"]',
+                      en_content)
+        self.assertIn(f'Registry["Öffentliche Skill-Registry ({count} Katalog / 380 getrackt)"]',
+                      de_content)
 
         for content in [en_content, de_content]:
             self.assertIn('Dev["dev (25)"]', content)

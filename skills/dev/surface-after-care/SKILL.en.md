@@ -1,6 +1,6 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -458,3 +458,7 @@ The log saves the next round from making the same decisions again and forms the 
 
 ### 1.0.0 (2026-07-24)
 - Initial version. Level 1 of repo maintenance, derived from `github-repo-care`.
+
+## Repository security in this care round
+
+Read existing codex-security, dependency/Dependabot, SECURITY.md, secret/privacy, and current advisory evidence. Confirm product, version, affected file, and exposure; report missing evidence as unknown. Reuse github-repo-care for publication gates and tech-detect/security-tech-stack-check for host patches. Do not build a second scanner or bypass authorized review and merge gates. full-after-care inherits this round.

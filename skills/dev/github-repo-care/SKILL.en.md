@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.1
+version: 1.3.2
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -21,6 +21,10 @@ provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-car
 ---
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
+
+## Repository security
+
+Before a push or release, inspect existing security policy, `SECURITY.md`, dependency and secret/privacy gates, branch protections, CI, and open advisories. Reuse installed `codex-security` and, when available, `github-health`/Dependabot instead of creating another scanner. Tie findings to exact versions, affected files, exposure, and current vendor evidence; `unknown` is not clearance. Apply fixes only within authorized repository scope with tests and independent review. Preserve merge and release gates. Use `tech-detect` and `security-tech-stack-check` for installed host software and patch decisions.
 
 > **English** — Offizielle English-Version / Documento Oficial en English.
 
