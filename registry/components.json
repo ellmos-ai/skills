@@ -508,9 +508,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/docs-analysis/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report.",
+      "description": "Prüft Konzept- und Anforderungsdokumente gegen die Umsetzung. Optionaler Modus Plankonsolidierung (Dokument-Synopse): führt mehrere Pläne zu einem aktuellen Dokument mit offenen Punkten zusammen und archiviert abgeschlossene oder abgelöste Inhalte mit folder-organization.",
       "languages": [
         "de",
         "en",
@@ -2438,7 +2438,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/speicherbereinigung/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
       "languages": [

@@ -1,11 +1,11 @@
 ---
 name: docs-analysis
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Document requirements analysis: Analyzes concept and requirements documents in the docs/ folder, checks requirements against current code, and creates a consolidated difference report."
+updated: 2026-10-15
+description: "Checks concept and requirements documents against implementation. Optional plan consolidation (document synopsis) combines multiple plans into a current list of open items and uses folder-organization to archive completed or superseded content."
 
 standalone: true
 anthropic_compatible: true
@@ -35,6 +35,16 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-anal
 Analyzes all concept and requirements documents in the ../docs/ folder, checks their requirements against the current code, and creates a consolidated difference report.
 
 ---
+
+## Choose a mode
+
+- **Requirements analysis (default):** Follow the code verification workflow below.
+- **Plan consolidation / document synopsis:** For merging several plans into a current
+  plan and archiving completed content, read [Plan consolidation](../references/plan-consolidation.en.md).
+  This mode uses `folder-organization` and also supports projects without code.
+  The default mode's percentage threshold and renaming scheme do not apply.
+
+The following sections describe the default mode only.
 
 ## Naming Convention
 
@@ -109,6 +119,9 @@ For each requirement:
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-10-15)
+- Optional plan consolidation with folder-organization, source coverage and evidence-based archiving.
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

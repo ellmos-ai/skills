@@ -1,10 +1,10 @@
 ---
 name: speicherbereinigung
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-08-05
+updated: 2026-10-18
 description: >
   Evidence-based Windows storage cleanup with a controlled emergency mode,
   physical usage measurement, process and origin forensics, and
@@ -233,6 +233,24 @@ After the last mutation:
 Don't claim a cleanup, process limitation or reaching the 50 GB target
 without a matching current readback.
 
+## Recurring build-junk run (scripts in the skill)
+
+Two scripts under `scripts/` remove regenerable build junk before it takes space or sync capacity:
+
+- `scripts/clean_build_junk.py [--all] [--apply] [--days N]`: Python caches (`__pycache__`,
+  `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` and `dist/` only next to a
+  Python build marker, Flutter caches; with `--local` also age-based pruning of ephemeral working
+  folders.
+- `scripts/clean_flutter_builds.py [ROOT] [--dry-run]`: Flutter/Gradle caches (`build/`,
+  `.dart_tool/`, `android/.gradle/`), long-path safe.
+
+**The default is a dry run**; `--apply` deletes for good (only exactly recognised, regenerable
+patterns, no recycle bin), so read the dry run first. The root comes from `$SOFTWARE_ROOT` or
+`<OneDrive>/.TOPICS/.SOFTWARE`, never from the script location. Local pruning needs a configuration
+outside the skill (`$BUILD_JUNK_CONFIG` or `~/.config/build-junk/config.json` with `local_dev`,
+`prune_globs`, `protect`) because it holds private folder names; without it the step is skipped and
+reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
+
 ## Known limits
 
 - Without administrative rights, pagefile, hibernation or service changes
@@ -246,6 +264,10 @@ without a matching current readback.
   decision is `nothing`.
 
 ## Changelog
+
+### 1.1.0 (2026-10-18)
+
+- Scripts `clean_build_junk.py` and `clean_flutter_builds.py` moved from the .SOFTWARE pipeline into the skill (root from the environment, private folder names in a configuration outside).
 
 ### 1.0.0 (2026-08-05)
 
