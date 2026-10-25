@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 143,
+    "component_count": 142,
     "categories": {
       "assist": 20,
       "dev": 25,
@@ -12,7 +12,7 @@
       "production": 1,
       "research": 1,
       "therapy": 20,
-      "third-party": 3,
+      "third-party": 2,
       "utilities": 29,
       "web": 1
     }
@@ -1995,19 +1995,6 @@
       ]
     },
     {
-      "id": "skill:third-party:grill-me",
-      "name": "grill-me",
-      "type": "skill",
-      "category": "third-party",
-      "path": "skills/third-party/grill-me/SKILL.md",
-      "version": "0.0.0",
-      "status": "active",
-      "description": "A relentless interview to sharpen a plan or design. Use when the user says \"grill me\", \"grill mich\", \"grill mich zu diesem Plan\", or explicitly invokes /grill-me. Does NOT fire on generic \"review this\", \"poke holes\", \"stress-test\", \"devil's advocate\" or \"critique\" phrasing -- for reviewing an already-written artifact (code, PR, paper) use code-review, 3agenten-review, 7phasen-review or caveman-review instead; grill-me interrogates a still-open plan or idea before it is built.",
-      "languages": [
-        "en"
-      ]
-    },
-    {
       "id": "skill:third-party:grilling",
       "name": "grilling",
       "type": "skill",
@@ -2015,7 +2002,7 @@
       "path": "skills/third-party/grilling/SKILL.md",
       "version": "0.0.0",
       "status": "active",
-      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Entry point for the /grill-me command; can also be invoked directly.",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says \"grill me\" or \"grill-me\" (the former /grill-me command is now /grilling), or uses any other 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Also use when a planning session ends and the user asks whether anything is still open.",
       "languages": [
         "en"
       ]

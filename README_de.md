@@ -527,7 +527,7 @@ Jeder Skill, jedes Hilfsskript und jedes Metadaten-Manifest in `ellmos-skills` u
 `ellmos-skills` verpflichtet sich zu vollständiger Transparenz, sauberen Softwaregrenzen und maximaler Supply-Chain-Sicherheit:
 
 - **Null externe Laufzeit-Abhängigkeiten**: Alle Kern-Katalogwerkzeuge, Schema-Generatoren und Privacy-Boundary-Prüfer laufen ausschließlich mit der Python-Standardbibliothek (`>=3.10`).
-- **Permissive Drittanbieter-Skills**: Kuratierte externe Skills unter `skills/third-party/` (`grill-me`, `grilling`) stehen unter der MIT-Lizenz aus [mattpocock/skills](https://github.com/mattpocock/skills).
+- **Permissive Drittanbieter-Skills**: Kuratierte externe Skills unter `skills/third-party/` (`grilling`) stehen unter der MIT-Lizenz aus [mattpocock/skills](https://github.com/mattpocock/skills).
 - **Formelle Urheberrechts- & Attributions-Hinweise**: Rechtliche Hinweise und Attributionsangaben werden in [`NOTICE`](NOTICE) gepflegt.
 - **Level 1 SBOM Begleitdokumente**: Vollständiges Drittanbieter-Lizenzinventar und Invarianten-Abbildung sind in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) und der Plaintext-Begleitdatei [`THIRD_PARTY_LICENSES.txt`](THIRD_PARTY_LICENSES.txt) dokumentiert.
 - **0% Copyleft**: Keine GPL-, AGPL- oder LGPL-Komponenten werden ausgeliefert oder zur Laufzeit benötigt.

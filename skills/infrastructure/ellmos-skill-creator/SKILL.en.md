@@ -65,8 +65,7 @@ lost:
 - `skill-creator` (Anthropic, marketplace `claude-plugins-official`) is
   **Apache-2.0** licensed (LICENSE text read and verified in the clone,
   2026-08-24) — a fork would be legally clean and is already the
-  established pattern elsewhere in the repo (`skills/third-party/grill-me`,
-  `skills/third-party/grilling`).
+  established pattern elsewhere in the repo (`skills/third-party/grilling`).
 - A fork, however, would have dragged along the original's entire
   eval/benchmark machinery (`agents/{analyzer,comparator,grader}.md`,
   `eval-viewer/`, 7 scripts, a 485-line SKILL.md) — a capability that
