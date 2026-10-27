@@ -129,21 +129,11 @@
         },
         "choices": {
           "type": "object",
+          "minProperties": 1,
           "additionalProperties": {
-            "type": "object",
-            "required": [
-              "accept",
-              "comment"
-            ],
-            "properties": {
-              "accept": {
-                "type": "boolean"
-              },
-              "comment": {
-                "type": "string"
-              }
-            }
-          }
+            "$ref": "#/$defs/choice"
+          },
+          "$comment": "Runtime additionally requires exact equality of these keys with all nodes[].id, including descendants."
         }
       }
     },
@@ -161,6 +151,14 @@
           ]
         }
       }
+    },
+    "draft_choices": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/choice"
+      },
+      "$comment": "Runtime additionally requires exact equality of these keys with all nodes[].id, including descendants."
     }
   },
   "$defs": {
@@ -218,6 +216,22 @@
           }
         }
       }
+    },
+    "choice": {
+      "type": "object",
+      "required": [
+        "accept",
+        "comment"
+      ],
+      "properties": {
+        "accept": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "allOf": [

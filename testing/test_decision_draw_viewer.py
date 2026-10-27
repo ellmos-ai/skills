@@ -151,6 +151,55 @@ def test_standalone_fresh_skill_copy_and_json_schema(tmp_path):
     jsonschema.Draft202012Validator(schema).validate(example)
 
 
+def test_saved_draft_choices_are_validated_before_gui(draft):
+    path, data, _ = draft
+    valid = viewer.default_choices(data)
+    valid["example-results"]["comment"] = "Änderung bitte\n" * 40
+    valid["example-results"]["accept"] = False
+    data["draft_choices"] = valid
+    viewer.validate(data)
+    invalid_maps = [None, [], {}, {**valid, "foreign-node": {"accept": True, "comment": ""}}]
+    missing = copy.deepcopy(valid)
+    missing.pop("example-results")
+    invalid_maps.append(missing)
+    for field, value in (("accept", 1), ("accept", "yes"), ("comment", None), ("comment", 7)):
+        broken = copy.deepcopy(valid)
+        broken["example-results"][field] = value
+        invalid_maps.append(broken)
+    extra_field = copy.deepcopy(valid)
+    extra_field["example-results"]["unexpected"] = True
+    invalid_maps.append(extra_field)
+    for broken in invalid_maps:
+        candidate = copy.deepcopy(data)
+        candidate["draft_choices"] = broken
+        with pytest.raises(viewer.DecisionError):
+            viewer.validate(candidate)
+    # Even the GUI CLI must reject the minimal repro without importing Tk.
+    data["draft_choices"] = {}
+    path.write_bytes(viewer.encode(data))
+    from unittest.mock import patch
+    with patch.dict(sys.modules, {"tkinter": None}), pytest.raises(SystemExit) as error:
+        viewer.main(["open", str(path)])
+    assert error.value.code == 2
+
+
+def test_undo_draft_is_schema_and_runtime_valid(draft):
+    import jsonschema
+    target, submitted, submitted_sha = submit(draft)
+    _, restored, _ = viewer.undo(target, submitted["submission"]["id"], submitted_sha)
+    schema = json.loads((SKILL / "references/draw.schema.json").read_text(encoding="utf-8"))
+    validator = jsonschema.Draft202012Validator(schema)
+    validator.validate(restored)
+    viewer.validate(restored)
+    assert restored["draft_choices"]["example-results"]["accept"] is False
+    assert restored["draft_choices"]["example-results"]["comment"].count("äöü") == 100
+    broken = copy.deepcopy(restored)
+    broken["draft_choices"]["example-results"]["accept"] = 1
+    assert not validator.is_valid(broken)
+    with pytest.raises(viewer.DecisionError):
+        viewer.validate(broken)
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk

@@ -60,6 +60,15 @@ def nodes(data):
     return result
 
 
+def validate_choices(choices, expected_ids, field):
+    if not isinstance(choices, dict) or set(choices) != expected_ids:
+        raise DecisionError(f"{field} muss exakt eine Auswahl für jeden Ast enthalten")
+    for choice in choices.values():
+        if (not isinstance(choice, dict) or set(choice) != {"accept", "comment"}
+                or type(choice["accept"]) is not bool or not isinstance(choice["comment"], str)):
+            raise DecisionError(f"{field}: Auswahl braucht ausschließlich accept (bool) und comment (Text)")
+
+
 def validate(data):
     if not isinstance(data, dict) or data.get("schema") != SCHEMA:
         raise DecisionError("Unbekanntes Draw-Format")
@@ -101,19 +110,15 @@ def validate(data):
 
     for key in ids:
         check(key)
+    if "draft_choices" in data:
+        validate_choices(data["draft_choices"], ids, "Gespeicherter Entwurf")
     if data["state"] == "submitted":
         submission = data.get("submission", {})
         if not isinstance(submission, dict) or submission.get("explicit_full_submission") is not True:
             raise DecisionError("Ausdrückliche Gesamteinreichung fehlt")
         for field in ("id", "submitted_at", "source_sha256", "source_path"):
             text(submission.get(field), field)
-        choices = submission.get("choices")
-        if not isinstance(choices, dict) or set(choices) != ids:
-            raise DecisionError("Einreichung muss jeden sichtbaren Ast umfassen")
-        for choice in choices.values():
-            if (not isinstance(choice, dict) or type(choice.get("accept")) is not bool
-                    or not isinstance(choice.get("comment"), str)):
-                raise DecisionError("Ungültige Auswahl oder Kommentar")
+        validate_choices(submission.get("choices"), ids, "Einreichung")
         if (not isinstance(data.get("processing"), dict)
                 or data["processing"].get("state") not in {"unprocessed", "processing", "processed"}):
             raise DecisionError("Verarbeitungsstand fehlt")
@@ -513,6 +518,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.command == "open":
+            # Reject malformed persisted selections before creating any Tk UI.
+            read(args.file)
             import tkinter as tk
             root = tk.Tk()
             DecisionWindow(root, args.file)

@@ -10,6 +10,13 @@ Absenden prüft Revision und Quellenhash unter einer exklusiven Dateisperre. Der
 
 Auf der Bestätigungsseite kann die eigene unveränderte, noch nicht verarbeitete Einreichung rückgängig gemacht werden. Das erzeugt wieder einen Entwurf mit steigender Revision, erhält Kommentare/Auswahl als `draft_choices` und vermerkt die Rücknahme mit Submission-ID im selben Dokument. Eine bereits vorhandene Quelldatei, Fremdänderung am Ergebnis oder begonnener Rücktransfer verhindert Undo. Ein externer Effekt wird niemals durch Dateiumbenennung zurückgedreht.
 
+Gespeicherte `draft_choices` müssen exakt alle Ast-IDs enthalten. Jeder Wert hat
+ausschließlich `accept` als echten Boolean und `comment` als Text. Fehlende,
+zusätzliche oder falsch typisierte Auswahlfelder werden vor dem Fensteraufbau
+abgelehnt. Das allgemeine JSON-Schema prüft Form und Typen; die vom konkreten
+Dokument abhängige exakte ID-Abdeckung prüft die Runtime zusätzlich, da Standard-
+JSON-Schema keine dynamische Gleichheit mit den IDs einer anderen Stelle beschreibt.
+
 Der Button „Übergabeprompt kopieren“ prüft die Ergebnisdatei frisch. Er kopiert Draw-ID, Submission-ID, Hash und den absoluten Pfad samt Anweisung zum kanonischen Rücktransfer. Es wird kein Shellbefehl aus JSON/Kommentaren ausgeführt und kein Register beschrieben.
 
 ## Rücktransfer mit Verarbeitungssperre
