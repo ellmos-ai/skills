@@ -41,6 +41,15 @@ provenance:
 
 # decision-draw — Big Picture and Overall Sign-Off for Bundled Decisions
 
+## Optional native decision window
+
+Run `python scripts/decision_viewer.py open /absolute/draw.json` for the standalone
+file-based Tk viewer. Read [the format and consumer contract](references/viewer.md)
+before creating or consuming a GUI decision. Default acceptance remains a draft;
+only explicit Submit confirms all visible selections and comments. Ordinary
+partial corrections retain the isolation rules below. Claim the file atomically
+before any external effect; canonical booking remains decision-briefing Phase 4.
+
 > When five or ten decisions are pending, one easily gets lost in the weeds of
 > isolated options and loses sight of the emerging system. decision-draw does not
 > describe the alternatives; it paints the working whole: How do the systems
