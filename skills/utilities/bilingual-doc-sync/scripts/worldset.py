@@ -697,9 +697,16 @@ def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, o
                  *, target: Path):
     """Require complete directory evidence and an exact native lock on target."""
     directory = Path(directory).resolve()
-    target = Path(target).resolve()
-    if target == directory or target.parent != directory:
+    target = Path(target)
+    if target.name in ('', '.', '..'):
         raise ValueError('writer target must be a direct child of checked directory')
+    if target.is_symlink():
+        raise ValueError('writer target must not be a symlink')
+    if target.parent.resolve() != directory:
+        raise ValueError('writer target must be a direct child of checked directory')
+    # Keep the checked leaf lexical: resolve() follows a symlink and changes
+    # the lock identity, while atomic publication replaces the named entry.
+    target = directory / target.name
     result = subprocess.run([sys.executable, str(checker), '--check-dir', str(directory), '--json'],
                             capture_output=True, text=True, encoding='utf-8', timeout=60)
     if result.returncode not in (0, 1):
@@ -718,13 +725,16 @@ def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, o
     if not isinstance(locks, list) or not isinstance(twins, list):
         raise ValueError('missing exact lock/twin observation')
 
-    native = _load_native_lock_utils(checker)
     exact_paths = {}
     native_targets = [target]
     for twin_dir in twins:
         if not isinstance(twin_dir, str):
             raise ValueError('invalid twin target observation')
-        native_targets.append(Path(twin_dir).resolve() / target.name)
+        twin_target = Path(twin_dir).resolve() / target.name
+        if twin_target.is_symlink():
+            raise ValueError('mapped twin writer target must not be a symlink')
+        native_targets.append(twin_target)
+    native = _load_native_lock_utils(checker)
     for native_target in native_targets:
         try:
             active = _native_exact_target_lock_paths(native, native_target)
@@ -754,6 +764,7 @@ def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, o
         raise ValueError('writer owner changed')
     if not re.search(r'^fence:[ \t]*' + re.escape(str(fence)) + r'[ \t]*$', content, re.M):
         raise ValueError('writer fence changed')
+    return target
 
 
 def apply_candidates(receipt, results_dir, reviews, root, checker, fence_file, fence, owner):

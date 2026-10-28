@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import pytest
+import worldset
 import worldset_discovery
 from worldset import protect
 from worldset_discovery import collect, excluded, select_documents
@@ -28,9 +29,15 @@ def test_persisted_discovery_checks_the_exact_output_target(tmp_path, monkeypatc
     output = runtime / 'discovery.json'
     checker = tmp_path / 'lock_scan.py'
     fence = runtime / 'LOCK.txt'
+    canonical_runtime = tmp_path / 'canonical-runtime'
+    canonical_runtime.mkdir()
+    checked_output = canonical_runtime / output.name
     checks = []
+    writes = []
+    monkeypatch.setattr(worldset_discovery, 'write_json',
+                        lambda path, value: writes.append((path, value)))
     monkeypatch.setattr(worldset_discovery, 'check_writer',
-                        lambda *args, **kwargs: checks.append((args, kwargs)))
+                        lambda *args, **kwargs: (checks.append((args, kwargs)), checked_output)[1])
     monkeypatch.setattr('sys.argv', [
         'worldset_discovery.py', '--config', str(config_path), '--out', str(output),
         '--checker', str(checker), '--fence-file', str(fence), '--fence', '17', '--owner', 'fixture',
@@ -39,6 +46,67 @@ def test_persisted_discovery_checks_the_exact_output_target(tmp_path, monkeypatc
     worldset_discovery.main()
 
     assert checks == [((checker, output.parent, fence, '17', 'fixture'), {'target': output})]
+    assert len(writes) == 1 and writes[0][0] == checked_output
+
+
+def test_persisted_discovery_rejects_symlink_output_before_scanning(tmp_path, monkeypatch):
+    _root, config = project(tmp_path)
+    config_path = tmp_path / 'config.json'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    runtime = tmp_path / 'runtime'
+    runtime.mkdir()
+    output = runtime / 'alias.json'
+    referent = runtime / 'referent.json'
+    referent.write_text('untouched', encoding='utf-8')
+    try:
+        output.symlink_to(referent)
+        real_symlink = True
+    except OSError:
+        real_symlink = False
+        monkeypatch.setattr(Path, 'is_symlink', lambda path: path == output)
+    checker = tmp_path / 'lock_scan.py'
+    fence = runtime / 'LOCK.txt'
+    scanner_calls = []
+    monkeypatch.setattr(worldset.subprocess, 'run',
+                        lambda *args, **kwargs: scanner_calls.append((args, kwargs)))
+    monkeypatch.setattr('sys.argv', [
+        'worldset_discovery.py', '--config', str(config_path), '--out', str(output),
+        '--checker', str(checker), '--fence-file', str(fence), '--fence', '17', '--owner', 'fixture',
+    ])
+
+    with pytest.raises(ValueError, match='writer target must not be a symlink'):
+        worldset_discovery.main()
+
+    assert not scanner_calls
+    if real_symlink:
+        assert output.is_symlink()
+        assert referent.read_text(encoding='utf-8') == 'untouched'
+    else:
+        assert not output.exists()
+
+
+def test_persisted_discovery_rechecks_source_boundary_after_path_normalization(tmp_path, monkeypatch):
+    source_root, config = project(tmp_path)
+    config_path = tmp_path / 'config.json'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    runtime = tmp_path / 'runtime'
+    runtime.mkdir()
+    output = runtime / 'discovery.json'
+    checked_output = source_root / 'discovery.json'
+    writes = []
+    monkeypatch.setattr(worldset_discovery, 'check_writer', lambda *args, **kwargs: checked_output)
+    monkeypatch.setattr(worldset_discovery, 'write_json',
+                        lambda path, value: writes.append((path, value)))
+    monkeypatch.setattr('sys.argv', [
+        'worldset_discovery.py', '--config', str(config_path), '--out', str(output),
+        '--checker', str(tmp_path / 'lock_scan.py'), '--fence-file', str(runtime / 'LOCK.txt'),
+        '--fence', '17', '--owner', 'fixture',
+    ])
+
+    with pytest.raises(SystemExit):
+        worldset_discovery.main()
+
+    assert not writes
 
 
 def test_stable_ids_and_no_changes_to_source_or_targets(tmp_path):

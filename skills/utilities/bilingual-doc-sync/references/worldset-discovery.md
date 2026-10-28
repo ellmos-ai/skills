@@ -98,8 +98,13 @@ directory, including descendant locks, registered twins, and hook guards. They
 also ask the installed `lock_utils.active_locks_for_path()` for the exact output
 file and each mapped twin target. A lock scoped only to a sibling file neither
 blocks nor satisfies the output fence; the writer's own fence must protect the
-exact output path. The collector keeps its whole-runtime claim and checks the
-specific snapshot or receipt path immediately before publishing it.
+exact output path. Output leaves that are symlinks are rejected for both the
+local target and mapped twins; resolving an alias could otherwise check a
+different filename from the one atomically replaced. Discovery publishes through
+the normalized path returned by that check, then rechecks that it remains outside
+all source projects. A symlinked parent cannot redirect the write after validation
+or move it into a source project. The collector keeps its whole-runtime claim and
+checks the specific snapshot or receipt path immediately before publishing it.
 
 Selection re-reads current source and target hashes. Stale snapshots cannot silently
 overwrite intervening work. The native executor still requires its own source,

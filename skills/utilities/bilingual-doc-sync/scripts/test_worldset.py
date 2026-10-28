@@ -584,6 +584,48 @@ language: de
                 safe_path(root, 'SKILL.en.md')
             self.assertFalse((root/'unreviewed.md').exists())
 
+    def test_writer_rejects_symlinked_mapped_twin_leaf(self):
+        from types import SimpleNamespace
+
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            twin = root/'twin'
+            twin.mkdir()
+            target = root/'snapshot.json'
+            twin_target = twin/target.name
+            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
+                        twins_checked=[str(twin)], hook_guards=[], locks=[])
+            real_is_symlink = Path.is_symlink
+
+            def is_symlink(path):
+                return path == twin_target or real_is_symlink(path)
+
+            with patch('worldset.subprocess.run', return_value=SimpleNamespace(
+                    returncode=0, stdout=json.dumps(data))):
+                with patch.object(Path, 'is_symlink', autospec=True, side_effect=is_symlink):
+                    with self.assertRaisesRegex(ValueError, 'mapped twin writer target must not be a symlink'):
+                        check_writer(root/'checker.py', root, root/'LOCK.txt', '1', 'fixture', target=target)
+
+    def test_writer_rejects_actual_symlinked_mapped_twin_leaf(self):
+        from types import SimpleNamespace
+
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            twin = root/'twin'
+            twin.mkdir()
+            target = root/'snapshot.json'
+            twin_target = twin/target.name
+            try:
+                twin_target.symlink_to(twin/'referent.json')
+            except OSError as exc:
+                self.skipTest(f'host lacks symlink permission: {exc}')
+            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
+                        twins_checked=[str(twin)], hook_guards=[], locks=[])
+            with patch('worldset.subprocess.run', return_value=SimpleNamespace(
+                    returncode=0, stdout=json.dumps(data))):
+                with self.assertRaisesRegex(ValueError, 'mapped twin writer target must not be a symlink'):
+                    check_writer(root/'checker.py', root, root/'LOCK.txt', '1', 'fixture', target=target)
+
 
 if __name__ == '__main__':
     unittest.main()
