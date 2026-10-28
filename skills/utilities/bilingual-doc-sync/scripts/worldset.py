@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -605,8 +606,100 @@ def retry_projection(receipt: dict, results: dict) -> dict:
     return dict(schema='worldset-projection-v1', retry_of=receipt['batch_id'], jobs=jobs, requires_segmentation=oversized)
 
 
-def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, owner: str):
-    """Require a fresh canonical scanner result and the expected writer fence."""
+def _load_native_lock_utils(checker: Path):
+    """Load the lock utility installed beside the canonical scanner."""
+    utility_path = Path(checker).resolve().with_name('lock_utils.py')
+    if not utility_path.is_file():
+        raise ValueError('native lock utilities are unavailable')
+    name = '_worldset_native_lock_utils_' + hashlib.sha256(
+        os.fsencode(str(utility_path))).hexdigest()[:16]
+    module = sys.modules.get(name)
+    if module is not None:
+        return module
+    spec = importlib.util.spec_from_file_location(name, utility_path)
+    if spec is None or spec.loader is None:
+        raise ValueError('native lock utilities could not be loaded')
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except Exception:
+        sys.modules.pop(name, None)
+        raise
+    if (not callable(getattr(module, 'active_locks_for_path', None))
+            or not callable(getattr(module, 'lock_applies_to_target', None))
+            or not callable(getattr(module, 'worktree_main_dir', None))):
+        raise ValueError('native lock utilities lack target-scope helpers')
+    return module
+
+
+def _native_exact_target_lock_paths(native, target: Path):
+    """Use native path semantics, with a directory query for worktree mapping."""
+    target = Path(target).resolve()
+    exact = {}
+
+    def add(entry):
+        if (not isinstance(entry, (list, tuple)) or len(entry) != 4
+                or not isinstance(entry[0], str)):
+            raise ValueError('native exact-target lock check returned invalid data')
+        lock_path = (Path(entry[3]) / entry[0]).resolve()
+        exact[os.path.normcase(str(lock_path))] = lock_path
+
+    try:
+        # A file-level query checks the exact local target. The helper's
+        # worktree main-clone mapping is directory-based, so retain the
+        # directory query below and filter its rows against both target chains.
+        target_entries = native.active_locks_for_path(target)
+        parent_entries = native.active_locks_for_path(target.parent)
+        if not isinstance(target_entries, (list, tuple)) or not isinstance(parent_entries, (list, tuple)):
+            raise ValueError('native exact-target lock check returned invalid data')
+        for entry in target_entries:
+            add(entry)
+        main_root = native.worktree_main_dir(target.parent)
+        mapped_target = target
+        if main_root is not None:
+            top = subprocess.run(
+                ['git', '-C', str(target.parent), 'rev-parse', '--show-toplevel'],
+                capture_output=True, text=True, timeout=10,
+                creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0,
+            )
+            if top.returncode != 0 or not top.stdout.strip():
+                raise ValueError('worktree target could not be mapped to its main clone')
+            worktree_root = Path(top.stdout.strip()).resolve()
+            mapped_target = Path(main_root).resolve() / target.relative_to(worktree_root)
+        comparison_targets = [target]
+        if mapped_target != target:
+            comparison_targets.append(mapped_target)
+        for entry in parent_entries:
+            if (not isinstance(entry, (list, tuple)) or len(entry) != 4
+                    or not isinstance(entry[0], str)):
+                raise ValueError('native exact-target lock check returned invalid data')
+            lock_path = (Path(entry[3]) / entry[0]).resolve()
+            source_dir = Path(entry[3]).resolve()
+            # A lock directory can be a common ancestor of the worktree and
+            # main-clone targets. Test every matching chain, not only the local
+            # one, so main-only protected paths remain visible.
+            applicable_chains = [candidate for candidate in comparison_targets
+                                 if source_dir == candidate or source_dir in candidate.parents]
+            if not applicable_chains:
+                raise ValueError('native lock source cannot be mapped to exact target')
+            if entry[2] or any(native.lock_applies_to_target(lock_path, candidate)
+                               for candidate in applicable_chains):
+                add(entry)
+    except ValueError:
+        raise
+    except Exception as exc:
+        raise ValueError('native exact-target lock check failed') from exc
+    return exact
+
+
+def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, owner: str,
+                 *, target: Path):
+    """Require complete directory evidence and an exact native lock on target."""
+    directory = Path(directory).resolve()
+    target = Path(target).resolve()
+    if target == directory or target.parent != directory:
+        raise ValueError('writer target must be a direct child of checked directory')
     result = subprocess.run([sys.executable, str(checker), '--check-dir', str(directory), '--json'],
                             capture_output=True, text=True, encoding='utf-8', timeout=60)
     if result.returncode not in (0, 1):
@@ -621,11 +714,41 @@ def check_writer(checker: Path, directory: Path, fence_file: Path, fence: str, o
     if any(h.get('embargo', True) for h in data.get('hook_guards', [])):
         raise ValueError('repository embargo or unknown hook guard')
     locks = data.get('locks')
-    if not isinstance(locks, list) or not locks:
-        raise ValueError('expected writer lock does not cover target')
+    twins = data.get('twins_checked')
+    if not isinstance(locks, list) or not isinstance(twins, list):
+        raise ValueError('missing exact lock/twin observation')
+
+    native = _load_native_lock_utils(checker)
+    exact_paths = {}
+    native_targets = [target]
+    for twin_dir in twins:
+        if not isinstance(twin_dir, str):
+            raise ValueError('invalid twin target observation')
+        native_targets.append(Path(twin_dir).resolve() / target.name)
+    for native_target in native_targets:
+        try:
+            active = _native_exact_target_lock_paths(native, native_target)
+        except Exception as exc:
+            raise ValueError('native exact-target lock check failed') from exc
+        exact_paths.update(active)
+
+    observed_paths = set()
     for lock in locks:
-        if Path(lock['path']).resolve() != fence_file.resolve():
-            raise ValueError('foreign or additional lock')
+        if not isinstance(lock, dict) or not isinstance(lock.get('path'), str):
+            raise ValueError('invalid lock observation')
+        lock_path = Path(lock['path']).resolve()
+        key = os.path.normcase(str(lock_path))
+        if key in exact_paths:
+            observed_paths.add(key)
+    if set(exact_paths) != observed_paths:
+        raise ValueError('exact target lock missing from complete scanner observation')
+
+    fence_path = Path(fence_file).resolve()
+    fence_key = os.path.normcase(str(fence_path))
+    if fence_key not in exact_paths:
+        raise ValueError('expected writer fence does not cover exact target')
+    if any(path != fence_key for path in exact_paths):
+        raise ValueError('foreign or additional lock affects exact target')
     content = fence_file.read_text(encoding='utf-8-sig')
     if not re.search(r'^owner:[ \t]*' + re.escape(owner) + r'[ \t]*$', content, re.M):
         raise ValueError('writer owner changed')
@@ -669,7 +792,7 @@ def apply_candidates(receipt, results_dir, reviews, root, checker, fence_file, f
                 or not isinstance(review.get('operator_notes'), str) or not review['operator_notes'].strip()):
             raise ValueError('operator must resolve all semantic reviewer findings')
         source, target = safe_path(root, j['source']), safe_path(root, j['target'])
-        check_writer(checker, target.parent, fence_file, fence, owner)
+        check_writer(checker, target.parent, fence_file, fence, owner, target=target)
         actual = source.read_text(encoding='utf-8-sig').replace('\r\n', '\n')
         if sha(actual.encode()) != j['source_sha256']:
             raise ValueError('source changed after translation')

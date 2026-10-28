@@ -1,5 +1,6 @@
 """Recurring intake must retain the last successful snapshot on failed scans."""
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -22,7 +23,7 @@ def fixture(tmp_path, monkeypatch):
                             lock_applies_to_target=lambda p, t: True)
     monkeypatch.setattr(collector, 'load_tools', lambda p: tools)
     guards = []
-    monkeypatch.setattr(collector, 'check_writer', lambda *args: guards.append(args))
+    monkeypatch.setattr(collector, 'check_writer', lambda *args, **kwargs: guards.append((args, kwargs)))
 
     def claim(args, **kwargs):
         (runtime / 'LOCK.txt').write_text('fence: 17\n')
@@ -52,6 +53,10 @@ def test_repeat_scan_retains_ids_and_releases_own_claim(fixture):
     assert first['snapshot_sha256'] == second['snapshot_sha256']
     assert not (f.runtime / 'LOCK.txt').exists()
     assert len(f.guards) == 6
+    targets = [kwargs['target'] for _args, kwargs in f.guards]
+    expected = [f.runtime / 'last-success.json', f.runtime / first_receipt['snapshot_file'],
+                f.runtime / 'last-success.json'] * 2
+    assert targets == expected
     assert json.loads((f.runtime / 'last-success.json').read_text())['api_calls'] == 0
 
 
@@ -157,6 +162,21 @@ def test_claim_fence_must_match_native_command_receipt(fixture, monkeypatch):
         collector.run(f.config, f.runtime, f.lock_tools)
     assert not list(f.runtime.glob('discovery-*.json'))
     assert (f.runtime / 'LOCK.txt').read_text() == 'fence: 18\n'
+
+
+def test_receipt_path_validation_failure_releases_own_claim(fixture, monkeypatch):
+    f = fixture
+    original_unlinked = collector.unlinked
+
+    def reject_receipt_path(path):
+        if Path(path).name == 'last-success.json':
+            raise ValueError('linked receipt path')
+        return original_unlinked(path)
+
+    monkeypatch.setattr(collector, 'unlinked', reject_receipt_path)
+    with pytest.raises(ValueError, match='linked receipt path'):
+        collector.run(f.config, f.runtime, f.lock_tools)
+    assert not (f.runtime / 'LOCK.txt').exists()
 
 
 def test_missing_registry_project_root_never_reports_success(fixture):

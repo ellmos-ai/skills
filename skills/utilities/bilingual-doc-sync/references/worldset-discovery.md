@@ -93,6 +93,14 @@ python -B scripts/worldset_discovery.py --input runtime/discovery.json \
   --checker lock_scan.py --fence-file runtime/LOCK.txt --fence OWN_FENCE --owner OPERATOR
 ```
 
+Writer checks keep the complete native `--check-dir` readback for the output
+directory, including descendant locks, registered twins, and hook guards. They
+also ask the installed `lock_utils.active_locks_for_path()` for the exact output
+file and each mapped twin target. A lock scoped only to a sibling file neither
+blocks nor satisfies the output fence; the writer's own fence must protect the
+exact output path. The collector keeps its whole-runtime claim and checks the
+specific snapshot or receipt path immediately before publishing it.
+
 Selection re-reads current source and target hashes. Stale snapshots cannot silently
 overwrite intervening work. The native executor still requires its own source,
 privacy, budget, lock, technical QA and independent semantic-review gates. A native

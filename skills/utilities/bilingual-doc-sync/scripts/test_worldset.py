@@ -396,6 +396,8 @@ language: de
                 self.assertEqual(apply_candidates(*args)['written'], ['SKILL.en.md'])
                 self.assertEqual((root/'SKILL.en.md').read_bytes(), data)
                 self.assertGreaterEqual(check.call_count, 3)
+                check.assert_any_call(args[4], (root/'SKILL.en.md').parent, args[5], args[6], args[7],
+                                      target=root/'SKILL.en.md')
 
     def test_collect_keeps_utf8_source_bytes_on_windows(self):
         source = SOURCE.replace('Kommentar', 'Änderung')
@@ -415,26 +417,160 @@ language: de
             self.assertEqual(collect(FixtureAPI(), receipt, root/'out')['counts'], {'review_required': 1})
             self.assertIn('# Änderung', (root/'out/candidates/abc.md').read_text(encoding='utf-8'))
 
-    def test_lock_scanner_missing_fields_foreign_locks_and_changed_fence_fail(self):
+    def test_lock_scanner_ignores_sibling_lock_but_requires_exact_fence(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
+            target = root/'target.md'
             fence = root/'LOCK.txt'
             fence.write_text('owner: fixture\nfence: 1\n', encoding='utf-8')
-            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
-                        hook_guards=[], locks=[{'path': str(fence)}])
             from types import SimpleNamespace
+            seen = []
+            sibling_lock = root/'LOCK.sibling.txt'
+
+            def active_locks_for_path(path):
+                path = Path(path).resolve()
+                seen.append(path)
+                if path == target.resolve():
+                    return [(fence.name, 'fixture', False, root)]
+                return [(fence.name, 'fixture', False, root),
+                        (sibling_lock.name, 'sibling', False, root)]
+
+            native = SimpleNamespace(active_locks_for_path=active_locks_for_path,
+                                     lock_applies_to_target=lambda lock_path, _target: Path(lock_path) == fence,
+                                     worktree_main_dir=lambda _path: None)
+            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
+                        twins_checked=[], hook_guards=[],
+                        locks=[{'path': str(fence)}, {'path': str(sibling_lock)}])
             with patch('worldset.subprocess.run') as run:
                 run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(data))
-                check_writer(root/'checker.py', root, fence, '1', 'fixture')
-                for bad in [dict(data, hook_guards=None), dict(data, checked='wrong'),
-                            dict(data, locks=[{'path': str(root/'FOREIGN.txt')}]),
-                            dict(data, descendants_complete=False)]:
-                    run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(bad))
-                    with self.assertRaises(ValueError):
-                        check_writer(root/'checker.py', root, fence, '1', 'fixture')
+                with patch('worldset._load_native_lock_utils', return_value=native):
+                    check_writer(root/'checker.py', root, fence, '1', 'fixture', target=target)
+                    self.assertEqual(seen, [target.resolve(), root.resolve()])
+                    self.assertEqual(run.call_args.args[0][1:4],
+                                     [str(root/'checker.py'), '--check-dir', str(root)])
+                    for bad in [dict(data, hook_guards=None), dict(data, checked='wrong'),
+                                dict(data, descendants_complete=False), dict(data, twins_checked=None),
+                                dict(data, twin_status='index-missing')]:
+                        run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(bad))
+                        with self.assertRaises(ValueError):
+                            check_writer(root/'checker.py', root, fence, '1', 'fixture', target=target)
+                    run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(data))
+                    with self.assertRaisesRegex(ValueError, 'fence changed'):
+                        check_writer(root/'checker.py', root, fence, '2', 'fixture', target=target)
+                    with self.assertRaisesRegex(ValueError, 'direct child'):
+                        check_writer(root/'checker.py', root, fence, '1', 'fixture',
+                                     target=root/'nested'/'out.md')
+
+    def test_lock_scanner_blocks_exact_foreign_and_twin_target_locks(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            target = root/'target.md'
+            twin_dir = root/'mirror'
+            twin_target = twin_dir/target.name
+            fence = root/'LOCK.txt'
+            foreign = root/'LOCK.foreign.txt'
+            twin_foreign = twin_dir/'LOCK.twin.txt'
+            fence.write_text('owner: fixture\nfence: 1\n', encoding='utf-8')
+            from types import SimpleNamespace
+            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
+                        twins_checked=[str(twin_dir)], hook_guards=[],
+                        locks=[{'path': str(fence)}, {'path': str(foreign)},
+                               {'path': str(twin_foreign)}])
+
+            def run_case(active_by_target):
+                native = SimpleNamespace(active_locks_for_path=lambda path: active_by_target.get(
+                    Path(path).resolve(), []),
+                    lock_applies_to_target=lambda _lock_path, _target: True,
+                    worktree_main_dir=lambda _path: None)
+                with patch('worldset.subprocess.run') as run:
+                    run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(data))
+                    with patch('worldset._load_native_lock_utils', return_value=native):
+                        check_writer(root/'checker.py', root, fence, '1', 'fixture', target=target)
+
+            root_fence = (fence.name, 'fixture', False, root)
+            with self.assertRaisesRegex(ValueError, 'foreign or additional lock'):
+                run_case({target.resolve(): [root_fence,
+                                             (foreign.name, 'foreign', False, root)],
+                          twin_target.resolve(): []})
+            with self.assertRaisesRegex(ValueError, 'foreign or additional lock'):
+                run_case({target.resolve(): [root_fence],
+                          twin_target.resolve(): [(twin_foreign.name, 'twin', False, twin_dir)]})
+
+    def test_lock_scanner_rejects_a_fence_that_only_covers_a_sibling(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            target = root/'target.md'
+            fence = root/'LOCK.txt'
+            fence.write_text('owner: fixture\nfence: 1\n', encoding='utf-8')
+            from types import SimpleNamespace
+            data = dict(checked=str(root), twin_status='ok', descendants_complete=True,
+                        twins_checked=[], hook_guards=[], locks=[{'path': str(fence)}])
+            native = SimpleNamespace(active_locks_for_path=lambda _path: [],
+                                     lock_applies_to_target=lambda _lock_path, _target: True,
+                                     worktree_main_dir=lambda _path: None)
+            with patch('worldset.subprocess.run') as run:
                 run.return_value = SimpleNamespace(returncode=1, stdout=json.dumps(data))
-                with self.assertRaisesRegex(ValueError, 'fence changed'):
-                    check_writer(root/'checker.py', root, fence, '2', 'fixture')
+                with patch('worldset._load_native_lock_utils', return_value=native):
+                    with self.assertRaisesRegex(ValueError, 'does not cover exact target'):
+                        check_writer(root/'checker.py', root, fence, '1', 'fixture', target=target)
+
+    def test_common_ancestor_main_target_lock_blocks_but_sibling_does_not(self):
+        with tempfile.TemporaryDirectory() as d:
+            common = Path(d)
+            worktree = common/'worktree'
+            main = common/'main'
+            target = worktree/'scripts'/'out.json'
+            target.parent.mkdir(parents=True)
+            main_target = main/'scripts'/'out.json'
+            sibling_target = main/'scripts'/'sibling.json'
+            main_lock = common/'LOCK.main-target.txt'
+            sibling_lock = common/'LOCK.main-sibling.txt'
+            fence = worktree/'LOCK.txt'
+            fence.write_text('owner: fixture\nfence: 1\n', encoding='utf-8')
+            from types import SimpleNamespace
+
+            def lock_applies_to_target(lock_path, exact_target):
+                lock_path = Path(lock_path).resolve()
+                exact_target = Path(exact_target).resolve()
+                return ((lock_path == main_lock and exact_target == main_target)
+                        or (lock_path == sibling_lock and exact_target == sibling_target))
+
+            def active_locks_for_path(path):
+                path = Path(path).resolve()
+                if path == target.resolve():
+                    return [(fence.name, 'own', False, worktree)]
+                if path == target.parent.resolve():
+                    return current_parent_locks
+                return []
+
+            native = SimpleNamespace(active_locks_for_path=active_locks_for_path,
+                                     lock_applies_to_target=lock_applies_to_target,
+                                     worktree_main_dir=lambda _path: main)
+
+            def check(parent_locks):
+                nonlocal current_parent_locks
+                current_parent_locks = parent_locks
+                scanner_locks = [{'path': str(fence)}]
+                scanner_locks.extend({'path': str(common / entry[0])} for entry in parent_locks)
+                data = dict(checked=str(target.parent.resolve()), twin_status='ok',
+                            descendants_complete=True, twins_checked=[], hook_guards=[],
+                            locks=scanner_locks)
+
+                def run(args, **_kwargs):
+                    if args[0] == 'git':
+                        return SimpleNamespace(returncode=0, stdout=str(worktree))
+                    return SimpleNamespace(returncode=1, stdout=json.dumps(data))
+
+                with patch('worldset.subprocess.run', side_effect=run):
+                    with patch('worldset._load_native_lock_utils', return_value=native):
+                        check_writer(worktree/'lock_scan.py', target.parent, fence, '1', 'fixture',
+                                     target=target)
+
+            current_parent_locks = []
+            with self.assertRaisesRegex(ValueError, 'foreign or additional lock'):
+                check([(main_lock.name, 'main-target', False, common),
+                       (sibling_lock.name, 'main-sibling', False, common)])
+            check([(sibling_lock.name, 'main-sibling', False, common)])
 
     def test_broken_target_symlink_does_not_redirect_writes(self):
         with tempfile.TemporaryDirectory() as d:

@@ -19,6 +19,28 @@ def jobs(result):
     return [job for package in result['packages'] for job in package['projection']['jobs']]
 
 
+def test_persisted_discovery_checks_the_exact_output_target(tmp_path, monkeypatch):
+    _root, config = project(tmp_path)
+    config_path = tmp_path / 'config.json'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    runtime = tmp_path / 'runtime'
+    runtime.mkdir()
+    output = runtime / 'discovery.json'
+    checker = tmp_path / 'lock_scan.py'
+    fence = runtime / 'LOCK.txt'
+    checks = []
+    monkeypatch.setattr(worldset_discovery, 'check_writer',
+                        lambda *args, **kwargs: checks.append((args, kwargs)))
+    monkeypatch.setattr('sys.argv', [
+        'worldset_discovery.py', '--config', str(config_path), '--out', str(output),
+        '--checker', str(checker), '--fence-file', str(fence), '--fence', '17', '--owner', 'fixture',
+    ])
+
+    worldset_discovery.main()
+
+    assert checks == [((checker, output.parent, fence, '17', 'fixture'), {'target': output})]
+
+
 def test_stable_ids_and_no_changes_to_source_or_targets(tmp_path):
     root, config = project(tmp_path)
     before = (root / 'README.md').read_bytes()

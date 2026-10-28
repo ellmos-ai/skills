@@ -13,6 +13,11 @@
   verification, content-addressed snapshots and a receipt published last.
   Unknown visibility on README and catalogue sources is held for review; no
   schedule is installed.
+- **Exact-target writer fence checks**: Retain the complete native directory/twin/hook
+  readback, then filter applicable locks with `lock_utils.active_locks_for_path()` for
+  the output file and mapped twin targets. Sibling-only locks no longer block or
+  satisfy the writer fence. The collector retains its runtime-wide claim and validates
+  each snapshot and receipt target before publication.
 
 - **`skills/third-party/grilling` absorbs `grill-me`**: The thin entry point `skills/third-party/grill-me` (body: "Call the Skill tool with grilling") is removed at the user's request; its phrase triggers ("grill me", "grill-me") now live in the `grilling` description. The native `/grill-me` command is removed; `/grilling` replaces it (a description registers no alias command). `grilling` becomes an improved fork with a "Local additions" section (seed the tree from recorded decisions, write answers down before the next round, pause on interruptions, one reason per recommendation, show measured facts, ask in the user's language, close with a ledger). The upstream body stays unchanged above that heading. READMEs, `THIRD_PARTY_LICENSES.*` and `ellmos-skill-creator` no longer list `grill-me`.
 

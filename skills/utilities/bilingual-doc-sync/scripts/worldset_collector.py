@@ -216,14 +216,14 @@ def run(config_path: Path, runtime: Path, lock_tools: Path, *, owner: str = 'wor
     fence = int(match.group(1))
     checker = lock_tools / 'lock_scan.py'
 
-    def guard():
+    def guard(target: Path):
         if tools.fence_status(lock, fence)[0] != 'held' or not tools.lock_applies_to_target(lock, runtime):
             raise ValueError('collector fence lost')
-        check_writer(checker, runtime, lock, str(fence), owner)
+        check_writer(checker, runtime, lock, str(fence), owner, target=target)
 
     try:
-        guard()
         receipt_path = unlinked(runtime / 'last-success.json')
+        guard(receipt_path)
         previous = _load_previous(runtime)
         report = collect(config, previous)
         if config_path.read_bytes() != config_bytes:
@@ -236,11 +236,11 @@ def run(config_path: Path, runtime: Path, lock_tools: Path, *, owner: str = 'wor
         _verify_snapshot_sources(report, confirmed_projects)
         if _source_inventory(confirmed_projects) != source_inventory:
             raise ValueError('source inventory changed during collection')
-        guard()
         snapshot_bytes = (json.dumps(report, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
         snapshot_digest = sha(snapshot_bytes)
         snapshot_name = f'discovery-{snapshot_digest}.json'
         snapshot_path = unlinked(runtime / snapshot_name)
+        guard(snapshot_path)
         if snapshot_path.exists():
             if _read_snapshot(snapshot_path) != snapshot_bytes:
                 raise ValueError('content-addressed snapshot collision')
@@ -258,7 +258,7 @@ def run(config_path: Path, runtime: Path, lock_tools: Path, *, owner: str = 'wor
             'attention': len(report['attention']), 'api_calls': 0,
             'translation_or_source_writes': 0, 'executor_state_owned_here': False,
         }
-        guard()
+        guard(receipt_path)
         write_json(receipt_path, receipt)
         return receipt
     finally:

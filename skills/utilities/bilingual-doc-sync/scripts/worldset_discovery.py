@@ -569,7 +569,8 @@ def main():
         for project in projects:
             if args.out.resolve().is_relative_to(Path(project['root']).resolve()):
                 parser.error('discovery output must not be inside a source project')
-        check_writer(args.checker, args.out.parent, args.fence_file, args.fence, args.owner)
+        check_writer(args.checker, args.out.parent, args.fence_file, args.fence, args.owner,
+                     target=args.out)
         write_json(args.out, result)
     if args.input:
         print(json.dumps({'exported_jobs': len(result['jobs']), 'api_calls': 0}))
