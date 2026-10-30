@@ -26,7 +26,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: [agy_kontext_and_workflow_loader.py]
+  python: [scripts/agy_kontext_and_workflow_loader.py]
 provenance:
   origin: "fork of automation-self-care"
   origin_path: "skills/infrastructure/automation-self-care"
@@ -40,7 +40,7 @@ provenance:
 
 Der Skill **Letter-Hooker** erweitert `automation-self-care` für KI-Agenten-Frameworks wie **Antigravity / Gemini CLI**, die keine nativen, ereignisgesteuerten JSON-Lifecycle-Hook-Loader besitzen (beispielsweise `~/.claude/settings.json` oder `~/.codex/hooks.json`).
 
-Anstelle passiver Hooks bei jedem Tastendruck betreibt `letter-hooker` über geplante Aufgaben (`antigravity-kontext-and-workflow-loader-and-divider`) und Wartungsskripte (`agy_kontext_and_workflow_loader.py`) einen **aktiven Preflight-Bootloader auf Prompt-Ebene, eine 3-Zeilen-Header-Injektion und einen Letter-Hook-Einfügeregelkreis**.
+Anstelle passiver Hooks bei jedem Tastendruck betreibt `letter-hooker` über geplante Aufgaben (`antigravity-kontext-and-workflow-loader-and-divider`) und Wartungsskripte (`scripts/agy_kontext_and_workflow_loader.py`) einen **aktiven Preflight-Bootloader auf Prompt-Ebene, eine 3-Zeilen-Header-Injektion und einen Letter-Hook-Einfügeregelkreis**.
 
 ---
 
@@ -59,18 +59,19 @@ AUFGABE: <Konkrete Arbeitsanweisungen, Kriterien, Schwellenwerte>
 - **Memory- und Gardener-Preflight**: Vor zerstörerischen oder komplexen Änderungen ist eine Preflight-Abfrage bei `gardener` und `memoryhooker` verpflichtend.
 
 ### 3. Letter-Hook-Katalog und Referenzlinks
-Modulare `.md`-Anweisungsdateien liegen unter `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`. Sie werden am Ende jedes Prompts angefügt:
+Modulare `.md`-Anweisungsdateien liegen unter `hooks/`. Sie werden am Ende jedes Prompts angefügt:
 ```text
 --- GOVERNANCE, WORKFLOW & HOOKS ---
-1. POLICY: file:///<USER_HOME>/.gemini/AUTOMATION_POLICY.md
-2. PREFLIGHT & MEMORY: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md
-3. PATHS & AUTHORITY: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md
-4. WORKFLOW HYGIENE & LOCKS: file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md
-5. AUTOMATIONS-MEMORY: Registriere wichtige Aktionen und Verifikationsergebnisse in 'AUTOMATIONS-MEMORY.md' & 'ANTIGRAVITY-LOG.txt'.
+1. POLICY: Lies eine lokale `~/.gemini/AUTOMATION_POLICY.md`, falls vorhanden; der Pfad ist in `config.example.json` konfigurierbar.
+2. BOOTLOADER: `hooks/bootloader_doc_traversal.md`
+3. PREFLIGHT & MEMORY: hooks/preflight_gardener_query.md
+4. PATHS & AUTHORITY: hooks/path_validation_and_authority.md
+5. WORKFLOW HYGIENE & LOCKS: hooks/workflow_lock_and_git_hygiene.md
+6. AUTOMATIONS-MEMORY: Registriere wichtige Aktionen und Verifikationsergebnisse in 'AUTOMATIONS-MEMORY.md' & 'ANTIGRAVITY-LOG.txt'.
 ```
 
 ### 4. Stündliche Stichwortliste und selbstheilende Prompt-Anreicherung
-- Pflegt stündlich die [STICHWORTLISTE.json](file:///<USER_HOME>/OneDrive/.SYNC/STICHWORTLISTE.json) (71 aktive Aufgaben).
+- Erzeugt die Stichwortliste beim Lauf unter `<SYNC_DIR>/STICHWORTLISTE.json`; `<SYNC_DIR>` ist über `config.example.json` konfigurierbar.
 - Analysiert Ausführungsprotokolle (`AUTOMATIONS-MEMORY.md`) auf Fehlermuster (fehlender Kontext, fehlende Workflow-Anleitung, ungültige Pfade) und passt Aufgaben-Prompts dynamisch an.
 
 ### 5. 4-Stufen-Modellallokations-Unterstützung
@@ -80,11 +81,11 @@ Modulare `.md`-Anweisungsdateien liegen unter `OneDrive/.SYNC/antigravity_kontex
 
 ## Wichtige Letter Hooks
 
-- **`HOOK-POLICY-01`**: [AUTOMATION_POLICY.md](file:///<USER_HOME>/.gemini/AUTOMATION_POLICY.md)
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-POLICY-01`**: Lies eine lokale `~/.gemini/AUTOMATION_POLICY.md`, falls vorhanden; der Pfad ist in `config.example.json` konfigurierbar.
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -92,11 +93,13 @@ Modulare `.md`-Anweisungsdateien liegen unter `OneDrive/.SYNC/antigravity_kontex
 
 ```bash
 # Letter-Hooker-Wartungsengine ausführen
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+Führe den Befehl aus dem Skill-Ordner `letter-hooker` heraus aus. Die Stichwortliste wird unter `<SYNC_DIR>/STICHWORTLISTE.json` erzeugt; `<SYNC_DIR>` ist in `config.json` konfigurierbar.
+
 1. **Sidecars prüfen**: Alle Prompttexte aus `sidecar.json` unter `~/.gemini/config/sidecars/` (oder `.gemini/antigravity/sidecar_data/`) lesen.
-2. **Stichwortliste aktualisieren**: Domänenbegriffe extrahieren und in `.SYNC/STICHWORTLISTE.json` speichern.
+2. **Stichwortliste aktualisieren**: Domänenbegriffe extrahieren und in `<SYNC_DIR>/STICHWORTLISTE.json` speichern.
 3. **Prompts formatieren**: 3-Zeilen-Header-Standard (`[TITEL]`, `ZWECK:`, `AUFGABE:`) sicherstellen.
 4. **Letter Hooks einfügen**: Bootloader-Regeln und `file://`-Referenzlinks an Prompts anhängen.
 5. **Ergebnisse protokollieren**: Aktualisierungen in `ANTIGRAVITY-LOG.txt` und `ANTIGRAVITY-REGISTRY.md` festhalten.
@@ -108,7 +111,7 @@ python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
 ### 1.1.0 (2026-08-20)
 - **Prompt-Struktur-Standard**: Aufnahme des 3-Zeilen-Prompt-Headers zur Vermeidung von UI-Titelverzerrungen.
 - **4-Stufen-Modell-Unterstützung**: Ergänzung von Modell-Tiering-Leitplanken (Gemini 3.7 Flash, 3.6 Flash, 3.1 Pro).
-- **Konsolidierte Governance-Verlinkung**: Direkte Anbindung von `AUTOMATION_POLICY.md` als primärer Governance-Hook.
+- **Optionale lokale Policy**: Eine vorhandene Automation-Policy kann über den in `config.example.json` konfigurierten Pfad eingebunden werden.
 - **Neuer Primär-Alias**: `textbased-governance-automations`.
 
 ### 1.0.0 (2026-07-29)

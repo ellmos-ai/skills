@@ -14,7 +14,7 @@ category: infrastructure
 tags: [automation, letter-hooker, letter-hooks, bootloader, prompt-enrichment, self-care, governance]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['agy_kontext_and_workflow_loader.py']}
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['scripts/agy_kontext_and_workflow_loader.py']}
 provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/infrastructure/automation-self-care', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
 
@@ -31,7 +31,7 @@ provenance: {'origin': 'fork of automation-self-care', 'origin_path': 'skills/in
 
 The **Letter-Hooker** skill extends `automation-self-care` for AI agent frameworks (like **Antigravity / Gemini CLI**) that do not possess native, event-driven JSON lifecycle hook loaders (e.g. `~/.claude/settings.json` or `~/.codex/hooks.json`).
 
-Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an **active, prompt-level preflight bootloader and letter-hook injection loop** via scheduled tasks and maintainer scripts (`agy_kontext_and_workflow_loader.py`).
+Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an **active, prompt-level preflight bootloader and letter-hook injection loop** via scheduled tasks and maintainer scripts (`scripts/agy_kontext_and_workflow_loader.py`).
 
 ---
 
@@ -42,7 +42,7 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
    - **Memory & Gardener Preflight**: Mandatory preflight query to `gardener` and `memoryhooker` before executing destructive or complex modifications.
 
 2. **Letter Hooks Catalog & Reference Links**:
-   - Modular `.md` instruction files stored under `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
+   - Modular `.md` instruction files stored under `hooks/`.
    - Injects explicit `file://` links directly into `sidecar.json` prompt text so agents read exact security and workflow protocols upon invocation.
 
 3. **Daily Keyword List & Self-Healing Prompt Enrichment**:
@@ -56,10 +56,10 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ## Crochets de Lettres Principaux (Letter Hooks)
 
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -67,10 +67,12 @@ Instead of relying on passive, per-keypress hooks, `letter-hooker` operates an *
 
 ```bash
 # Execute the Letter-Hooker Maintenance Engine (English)
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+Exécutez cette commande depuis le dossier du skill `letter-hooker`. La liste de mots-clés est créée dans `<SYNC_DIR>/STICHWORTLISTE.json`; `<SYNC_DIR>` se configure dans `config.json`.
+
 1. **Scan Sidecars**: Read all `sidecar.json` prompt texts in `~/.gemini/config/sidecars/`.
-2. **Update Keyword List**: Extract domain terms and save to `.SYNC/STICHWORTLISTE.json`.
+2. **Update Keyword List**: Extract domain terms and save to `<SYNC_DIR>/STICHWORTLISTE.json`.
 3. **Inject Letter Hooks**: Append bootloader rules and `file://` reference links to prompts.
 4. **Log Results**: Record updates in `ANTIGRAVITY-LOG.txt` and `ANTIGRAVITY-REGISTRY.md`.

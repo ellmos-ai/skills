@@ -27,7 +27,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: [agy_kontext_and_workflow_loader.py]
+  python: [scripts/agy_kontext_and_workflow_loader.py]
 provenance:
   origin: "fork of automation-self-care"
   origin_path: "skills/infrastructure/automation-self-care"
@@ -41,7 +41,7 @@ provenance:
 
 Der **Letter-Hooker**-Skill erweitert `automation-self-care` für KI-Agenten-Frameworks (wie **Antigravity / Gemini CLI**), die keine nativen, ereignisgetriebenen JSON-Lifecycle-Hook-Loader besitzen (z. B. `~/.claude/settings.json` oder `~/.codex/hooks.json`).
 
-Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker` einen **aktiven Prompt-Level-Preflight-Bootloader und Letter-Hook-Injection-Loop** über geplante Tasks und Maintainer-Skripte (`agy_kontext_and_workflow_loader.py`).
+Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker` einen **aktiven Prompt-Level-Preflight-Bootloader und Letter-Hook-Injection-Loop** über geplante Tasks und Maintainer-Skripte (`scripts/agy_kontext_and_workflow_loader.py`).
 
 ---
 
@@ -52,7 +52,7 @@ Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker`
    - **Memory- & Gardener-Preflight**: Pflicht-Preflight-Abfrage an `gardener` und `memoryhooker`, bevor destruktive oder komplexe Änderungen ausgeführt werden.
 
 2. **Letter-Hooks-Katalog & Referenz-Links**:
-   - Modulare `.md`-Instruktionsdateien unter `OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/`.
+   - Modulare `.md`-Instruktionsdateien unter `hooks/`.
    - Injiziert explizite `file://`-Links direkt in den `sidecar.json`-Prompt-Text, damit Agenten bei Aufruf exakte Sicherheits- und Workflow-Protokolle lesen.
 
 3. **Tägliche Stichwortliste & selbstheilende Prompt-Anreicherung**:
@@ -66,10 +66,10 @@ Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker`
 
 ## Wichtige Letter Hooks
 
-- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/bootloader_doc_traversal.md)
-- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/preflight_gardener_query.md)
-- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/workflow_lock_and_git_hygiene.md)
-- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](file:///<USER_HOME>/OneDrive/.SYNC/antigravity_kontext_and_workflow_loader_package/letter_hooks/path_validation_and_authority.md)
+- **`HOOK-DOC-TRAVERSAL-01`**: [bootloader_doc_traversal.md](hooks/bootloader_doc_traversal.md)
+- **`HOOK-GARDENER-MEMORY-01`**: [preflight_gardener_query.md](hooks/preflight_gardener_query.md)
+- **`HOOK-WORKFLOW-HYGIENE-01`**: [workflow_lock_and_git_hygiene.md](hooks/workflow_lock_and_git_hygiene.md)
+- **`HOOK-PATH-VALIDATION-01`**: [path_validation_and_authority.md](hooks/path_validation_and_authority.md)
 
 ---
 
@@ -77,10 +77,12 @@ Statt sich auf passive Per-Keypress-Hooks zu verlassen, betreibt `letter-hooker`
 
 ```bash
 # Letter-Hooker-Wartungs-Engine ausführen
-python OneDrive/.SYNC/scripts/agy_kontext_and_workflow_loader.py
+python scripts/agy_kontext_and_workflow_loader.py
 ```
 
+Führe den Befehl aus dem Skill-Ordner `letter-hooker` heraus aus. Die Stichwortliste wird unter `<SYNC_DIR>/STICHWORTLISTE.json` erzeugt; `<SYNC_DIR>` ist in `config.json` konfigurierbar.
+
 1. **Sidecars scannen**: Alle `sidecar.json`-Prompt-Texte in `~/.gemini/config/sidecars/` lesen.
-2. **Stichwortliste aktualisieren**: Fachbegriffe extrahieren und nach `.SYNC/STICHWORTLISTE.json` speichern.
+2. **Stichwortliste aktualisieren**: Fachbegriffe extrahieren und nach `<SYNC_DIR>/STICHWORTLISTE.json` speichern.
 3. **Letter Hooks injizieren**: Bootloader-Regeln und `file://`-Referenz-Links an Prompts anhängen.
 4. **Ergebnisse loggen**: Updates in `ANTIGRAVITY-LOG.txt` und `ANTIGRAVITY-REGISTRY.md` festhalten.
