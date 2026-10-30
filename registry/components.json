@@ -2438,7 +2438,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/speicherbereinigung/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
       "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
       "languages": [
