@@ -1,10 +1,10 @@
 ---
 name: speicherbereinigung
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-08-05
+updated: 2026-10-18
 description: >
   Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus,
   physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie
@@ -234,6 +234,24 @@ Nach der letzten Mutation:
 Behaupte keine Bereinigung, Prozessbegrenzung oder 50-GB-Zielerreichung ohne
 passenden aktuellen Readback.
 
+## Wiederkehrender Build-Müll-Lauf (Skripte im Skill)
+
+Zwei Skripte unter `scripts/` entfernen regenerierbaren Build-Müll, bevor er Platz oder Sync belegt:
+
+- `scripts/clean_build_junk.py [--all] [--apply] [--days N]`: Python-Caches (`__pycache__`,
+  `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` und `dist/` nur neben einem
+  Python-Build-Marker, Flutter-Caches; mit `--local` zusätzlich altersbasiertes Pruning ephemerer
+  Arbeitsordner.
+- `scripts/clean_flutter_builds.py [WURZEL] [--apply]`: Flutter-/Gradle-Caches (`build/`,
+  `.dart_tool/`, `android/.gradle/`), long-path-sicher.
+
+**Standard ist der Trockenlauf**; `--apply` löscht endgültig (nur exakt erkannte, regenerierbare
+Muster, kein Papierkorb), also erst den Trockenlauf lesen. Die Wurzel kommt aus `$SOFTWARE_ROOT`
+oder `<OneDrive>/.TOPICS/.SOFTWARE`, nie aus dem Skriptort. Das lokale Pruning braucht eine
+Konfiguration außerhalb des Skills (`$BUILD_JUNK_CONFIG` oder `~/.config/build-junk/config.json` mit
+`local_dev`, `prune_globs`, `protect`), weil sie private Ordnernamen enthält; ohne sie wird es
+übersprungen und gemeldet. Den wöchentlichen Lauf macht der Task `SOFTWARE-BuildJunk-Janitor`.
+
 ## Bekannte Grenzen
 
 - Ohne administrative Rechte können Pagefile-, Ruhezustands- oder Dienständerungen
@@ -246,6 +264,10 @@ passenden aktuellen Readback.
   die Entscheidung `nichts`.
 
 ## Changelog
+
+### 1.1.0 (2026-10-18)
+
+- Skripte `clean_build_junk.py` und `clean_flutter_builds.py` aus der .SOFTWARE-Pipeline in den Skill übernommen (Wurzel aus Umgebung, private Ordnernamen in einer Konfiguration außerhalb).
 
 ### 1.0.0 (2026-08-05)
 
