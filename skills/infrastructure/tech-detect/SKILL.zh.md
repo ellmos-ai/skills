@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # Tech Detect
 
-仅检查自有或明确授权的主机。先阅读现有清单及主机槽位规则。对于 `.SYNC/_inventory` 一类结构，`systems/<本机槽位>.json` 是输入；本技能不会更新该种子，更不会写入其他主机的槽位。
+仅检查自有或明确授权的主机。先阅读现有清单及主机槽位规则。对于 `<inventory>` 一类结构，`systems/<本机槽位>.json` 是输入；本技能不会更新该种子，更不会写入其他主机的槽位。
 
 1. 核对权限、锁、主机身份和私有输出路径。运行 `python -X utf8 scripts/techshot.py capture --seed <清单>/systems/<本机槽位>.json --slot <本机槽位> --output <私有目录>/techshot-<UTC>.json`。
 2. 离线工具读取本地平台及 Windows 卸载注册表、可用的 `dpkg-query` 或 Homebrew。这些来源都不能保证列出所有软件。不要查询 `Win32_Product`；[Microsoft 文档](https://learn.microsoft.com/en-us/powershell/scripting/samples/working-with-software-installations?view=powershell-7.6)说明该类查询可能触发 MSI 一致性检查和修复。

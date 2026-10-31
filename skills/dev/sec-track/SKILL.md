@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # sec-track - Funde nachverfolgbar machen
 
-Phase "track". Vertrag: `sec-scan/references/contract.md` (Regel 4 Geheimnisse, Regel 8 Tickets in §6; Feld `ticket` in §2/Schema). Nur Funde mit Status `validated` oder weiter - `candidate` wird nicht getrackt.
+Phase "track". Vertrag: `sec-scan/references/contract.md` (Regel 4 Geheimnisse, Regel 8 Tickets in §6; Feld `ticket` in `schemas/finding.schema.json`). Nur Funde mit Status `validated` oder weiter - `candidate` wird nicht getrackt.
 
 ## Ziel wählen
 

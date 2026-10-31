@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # sec-track - hacer trazables los hallazgos
 
-La fase «track». Contrato: `sec-scan/references/contract.md` (regla 4 secretos, regla 8 tickets en §6; campo `ticket` en §2/esquema). Solo hallazgos con estado `validated` o posterior - `candidate` no se rastrea.
+La fase «track». Contrato: `sec-scan/references/contract.md` (regla 4 secretos, regla 8 tickets en §6; campo `ticket` en `schemas/finding.schema.json`). Solo hallazgos con estado `validated` o posterior - `candidate` no se rastrea.
 
 ## Elegir el destino
 

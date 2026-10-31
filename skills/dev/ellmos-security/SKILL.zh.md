@@ -55,7 +55,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 - `security-tech-stack-check` + `tech-detect`：依据实测的技术栈检查依赖与 CVE。
 - `protection-shield`：针对你自己系统的紧急防御以及周期性的日志/技术栈检查。
 - `repo-publish-check`：仓库转为公开之前的发布关卡。
-- 如果你的系统上存在：一份私有的安全指引，以及一个针对个人账户/数据（不是代码）的技能。它们不属于这个公开的家族。
+- 如果你的系统上存在：一份自己的安全指引，以及一个针对个人账户/数据（不是代码）的技能。它们不属于这个公开的家族。
 
 ## 供应商适配器（契约 §7）
 

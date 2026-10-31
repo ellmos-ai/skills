@@ -229,3 +229,21 @@ def test_triaged_requires_priority():
     assert any("requires priority" in e for e in errs)
     ok, _ = seclib.validate_findings(doc(finding(status="triaged", validatedBy=vb, priority="P2")), cov())
     assert ok == []
+
+
+def test_review_round_two_edge_cases():
+    vb = {"provider": "codex", "model": "m", "verdict": "confirmed"}
+    cases = [
+        finding(rule=["py.x"]),
+        finding(priority="P1\n", status="triaged", validatedBy=vb),
+        finding(id=finding()["id"] + "\n"),
+        finding(location={"path": "a.py", "startLine": 1, "endLine": True}),
+        finding(location={"path": "../x/a.py", "startLine": 1}),
+        finding(location={"path": 5, "startLine": 1}),
+        finding(status="validated", validatedBy={"provider": 3, "model": "m", "verdict": "confirmed"}),
+    ]
+    for f in cases:
+        assert seclib.validate_findings(doc(f), cov())[0], f
+    assert seclib.validate_findings(doc(finding()), cov(scanned=[{"path": "a", "depth": "read", "languages": [1]}]))[0]
+    secret = "AKIA" + "ABCDEFGHIJKLMNOP"
+    assert seclib.validate_findings(doc(finding(ticket=f"T-{secret}")), cov())[0]

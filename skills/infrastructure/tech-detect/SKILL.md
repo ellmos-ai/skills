@@ -23,7 +23,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 ## Einsatz
 
-Nutze diesen Skill für eine belegte Istaufnahme eines **eigenen, autorisierten Hosts** oder einen Vergleich bereits vorhandener Hostaufnahmen. Eine Inventarliste ist Ausgangspunkt, kein Beweis für eine gerade installierte Version. Lies zuerst die vorhandene Inventarführung und ihre Host-Slot-Regeln. Bei `.SYNC/_inventory` sind die JSON-Seeds die Eingabe; Datenbank und Tabellenexport sind Projektionen. Aktualisiere den Seed nur über dessen vorhandenen Host-Workflow, niemals beiläufig durch diesen Skill. Fremde Slots bleiben lesend.
+Nutze diesen Skill für eine belegte Istaufnahme eines **eigenen, autorisierten Hosts** oder einen Vergleich bereits vorhandener Hostaufnahmen. Eine Inventarliste ist Ausgangspunkt, kein Beweis für eine gerade installierte Version. Lies zuerst die vorhandene Inventarführung und ihre Host-Slot-Regeln. Bei `<inventory>` sind die JSON-Seeds die Eingabe; Datenbank und Tabellenexport sind Projektionen. Aktualisiere den Seed nur über dessen vorhandenen Host-Workflow, niemals beiläufig durch diesen Skill. Fremde Slots bleiben lesend.
 
 Führe die folgenden Befehle im Skillverzeichnis oder mit aufgelöstem Skriptpfad über einen **expliziten Python-Interpreter** aus; eine `.py`-Datei nicht direkt starten.
 

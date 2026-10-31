@@ -55,7 +55,7 @@ Quer dazu: `sec-policy` (SECURITY.md), `sec-hardening` (strukturelle Maßnahmen)
 - `security-tech-stack-check` + `tech-detect`: Abhängigkeiten und CVEs gegen den gemessenen Tech-Stack.
 - `protection-shield`: akute Abwehr und wiederkehrende Log-/Stack-Prüfung auf eigenen Systemen.
 - `repo-publish-check`: Veröffentlichungs-Gate vor dem Öffentlichmachen eines Repos.
-- Falls auf deinem System vorhanden: ein privater Security-Wegweiser und ein Skill für persönliche Konten/Daten (kein Code). Sie sind nicht Teil dieser öffentlichen Familie.
+- Falls auf deinem System vorhanden: ein eigener Security-Wegweiser und ein Skill für persönliche Konten/Daten (kein Code). Sie sind nicht Teil dieser öffentlichen Familie.
 
 ## Anbieter-Adapter (Vertrag §7)
 

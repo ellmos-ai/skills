@@ -19,7 +19,8 @@ ausgehendem Netzwerk in Skripten, npm install-/prepare-Hooks, selbst-registriere
 Dateiauswahl: Dateien mit bekannter Text-Endung werden gelesen; alle anderen (auch ohne Endung, z. B.
 install, Makefile, Dockerfile, Git-Hooks) werden gelesen, sofern die ersten 8 KB kein NUL-Byte enthalten.
 Nicht prüfbare Dateien (Binär, zu groß, nicht lesbar, Symlink) zählen als "unchecked" und werden im
-Bericht aufgeführt. Symlinks werden nie gelesen. Der Ordner `.git` wird übergangen.
+Bericht aufgeführt. Symlinks werden nie gelesen. In `.git`-Ordnern (auch verschachtelten) werden hooks/*
+(außer *.sample), config u. a. mitgelesen; objects, refs, logs, index, packed-refs und *.sample entfallen.
 
 Exit-Code: 0 = PASS/REVIEW ohne Lücke, 1 = HIGH/CRITICAL gefunden (BLOCK), 2 = Nutzungsfehler,
 3 = kein HIGH/CRITICAL, aber unchecked-Dateien (PASS-MIT-LÜCKEN / REVIEW-MIT-LÜCKEN: Lücke manuell schließen).
@@ -41,6 +42,7 @@ TEXT_EXT = {".md", ".markdown", ".py", ".sh", ".bash", ".zsh", ".fish", ".js", "
             ".yaml", ".yml", ".bat", ".cmd", ".rb", ".pl", ".txt", ".cfg", ".ini", ".html", ".htm", ".xml"}
 MAX_BYTES = 2_000_000  # je Datei
 SNIFF_BYTES = 8192  # NUL-Byte-Sniff für Dateien mit unbekannter/fehlender Endung
+GIT_SKIP = {"objects", "refs", "logs", "index", "packed-refs"}  # Inhalt von .git, der nicht gemustert wird
 
 # (regex, severity, label). Regex case-insensitiv, multiline.
 PATTERNS: list[tuple[str, str, str]] = [
@@ -72,8 +74,11 @@ PATTERNS: list[tuple[str, str, str]] = [
      r"socket\.socket|netcat|Invoke-RestMethod|Invoke-WebRequest)\b|\bfetch\s*\(|\bnc\s+[-\w])",
      "MEDIUM", "Ausgehendes Netzwerk aus Skript"),
     (r"https?://\d{1,3}(\.\d{1,3}){3}", "HIGH", "Hartkodierte IP-URL"),
-    # npm install-Hooks (install und prepare laufen ebenfalls bei der Installation)
+    # npm install-Hooks (install und prepare laufen ebenfalls bei der Installation); nur package.json
     (r"\"(pre|post)?install\"\s*:|\"prepare\"\s*:", "HIGH", "npm install-/prepare-Hook"),
+    # Git-Config, die beim Checkout/Status Befehle ausführt; nur config/.gitconfig
+    (r"^\s*(fsmonitor|hookspath|sshcommand)\s*=", "MEDIUM", "Git-Config führt Befehle/Hooks aus (fsmonitor/hooksPath/sshCommand)"),
+    (r"^\s*[\w-]+\s*=\s*!", "MEDIUM", "Git-Alias mit Shell-Aufruf (!)"),
     # selbst-registrierende Hooks / Cron / Scheduler
     (r"\b(crontab|schtasks|Register-ScheduledTask|launchctl|systemctl\s+enable|atexit\.register)\b",
      "HIGH", "Selbst-registrierender Hook/Scheduler/Cron"),
@@ -89,8 +94,24 @@ PATTERNS: list[tuple[str, str, str]] = [
     (r"[​‌‍⁠﻿]", "MEDIUM", "Unsichtbare Unicode-Zeichen (mögliche versteckte Anweisung)"),
 ]
 
+ONLY_FILES = {  # Muster, die nur für bestimmte Dateinamen gelten (Rest: alle Dateien)
+    "npm install-/prepare-Hook": {"package.json"},
+    "Git-Config führt Befehle/Hooks aus (fsmonitor/hooksPath/sshCommand)": {"config", ".gitconfig"},
+    "Git-Alias mit Shell-Aufruf (!)": {"config", ".gitconfig"},
+}
+
 COMPILED = [(re.compile(p, re.IGNORECASE | re.MULTILINE), sev, lbl) for p, sev, lbl in PATTERNS]
 SEV_ORDER = {"CRITICAL": 3, "HIGH": 2, "MEDIUM": 1}
+
+
+def git_sub(rel_parts: tuple[str, ...]) -> tuple[str, ...] | None:
+    """Pfadteile nach dem ersten `.git` (auch verschachtelt, z. B. vendor/x/.git/...); None ohne `.git`."""
+    return rel_parts[rel_parts.index(".git") + 1:] if ".git" in rel_parts else None
+
+
+def skip_git_internal(rel_parts: tuple[str, ...]) -> bool:
+    sub = git_sub(rel_parts)
+    return bool(sub) and (sub[0] in GIT_SKIP or sub[-1].endswith(".sample"))
 
 
 def _finding(rel: str, severity: str, label: str, excerpt: str = "") -> dict:
@@ -117,7 +138,12 @@ def scan_file(path: Path, root: Path) -> tuple[list[dict], str | None]:
     else:
         text = data.decode("utf-8", errors="replace")
     findings = []
+    sub = git_sub(path.relative_to(root).parts)
+    if sub and len(sub) >= 2 and sub[0] == "hooks":
+        findings.append(_finding(rel, "MEDIUM", "Git-Hook vorhanden (läuft bei git-Aktionen) - manuell prüfen"))
     for rx, sev, lbl in COMPILED:
+        if lbl in ONLY_FILES and path.name.lower() not in ONLY_FILES[lbl]:
+            continue
         for m in rx.finditer(text):
             line_no = text.count("\n", 0, m.start()) + 1
             excerpt = text[max(0, m.start() - 10): m.start() + 70].replace("\n", " ")
@@ -145,7 +171,7 @@ def main() -> int:
     unchecked = []
     scanned = 0
     for p in root.rglob("*"):
-        if ".git" in p.relative_to(root).parts:
+        if skip_git_internal(p.relative_to(root).parts):
             continue
         if p.is_symlink() or p.is_file():
             found, reason = scan_file(p, root)

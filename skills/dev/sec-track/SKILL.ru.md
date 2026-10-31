@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # sec-track - сделать находки отслеживаемыми
 
-Фаза «track». Контракт: `sec-scan/references/contract.md` (правило 4 секреты, правило 8 тикеты в §6; поле `ticket` в §2/схеме). Только находки со статусом `validated` и выше - `candidate` не отслеживается.
+Фаза «track». Контракт: `sec-scan/references/contract.md` (правило 4 секреты, правило 8 тикеты в §6; поле `ticket` в `schemas/finding.schema.json`). Только находки со статусом `validated` и выше - `candidate` не отслеживается.
 
 ## Выбрать цель
 

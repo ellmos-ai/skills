@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # sec-track - 所見を追跡可能にする
 
-「track」フェーズ。コントラクト：`sec-scan/references/contract.md`（ルール 4 シークレット、ルール 8 チケットは §6。フィールド `ticket` は §2/スキーマ）。status が `validated` 以降の所見のみが対象で、`candidate` は追跡しない。
+「track」フェーズ。コントラクト：`sec-scan/references/contract.md`（ルール 4 シークレット、ルール 8 チケットは §6。フィールド `ticket` は `schemas/finding.schema.json`）。status が `validated` 以降の所見のみが対象で、`candidate` は追跡しない。
 
 ## 宛先を選ぶ
 

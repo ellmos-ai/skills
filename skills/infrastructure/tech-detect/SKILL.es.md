@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # Tech Detect
 
-Úsalo solo en un equipo propio o autorizado. Lee primero el inventario y sus reglas por equipo. En una estructura como `.SYNC/_inventory`, el JSON `systems/<slot-propio>.json` es la entrada; este skill no lo actualiza ni modifica otros equipos.
+Úsalo solo en un equipo propio o autorizado. Lee primero el inventario y sus reglas por equipo. En una estructura como `<inventory>`, el JSON `systems/<slot-propio>.json` es la entrada; este skill no lo actualiza ni modifica otros equipos.
 
 1. Comprueba permisos, bloqueos, identificador del equipo y una salida privada. Ejecuta `python -X utf8 scripts/techshot.py capture --seed <inventario>/systems/<slot-propio>.json --slot <slot-propio> --output <privado>/techshot-<UTC>.json`.
 2. El ayudante local lee el sistema y, según la plataforma, el registro de desinstalación de Windows, `dpkg-query` o Homebrew. Ninguna fuente cubre necesariamente todas las aplicaciones. No uses `Win32_Product`: [Microsoft Learn](https://learn.microsoft.com/en-us/powershell/scripting/samples/working-with-software-installations?view=powershell-7.6) documenta comprobaciones y posibles reparaciones MSI.

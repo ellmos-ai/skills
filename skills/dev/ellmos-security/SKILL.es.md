@@ -55,7 +55,7 @@ Transversales: `sec-policy` (SECURITY.md), `sec-hardening` (medidas estructurale
 - `security-tech-stack-check` + `tech-detect`: dependencias y CVE frente al stack tecnológico medido.
 - `protection-shield`: defensa aguda y comprobaciones periódicas de logs/stack en tus propios sistemas.
 - `repo-publish-check`: puerta de publicación antes de hacer público un repo.
-- Si existen en tu sistema: una guía de seguridad privada y un skill para cuentas/datos personales (no código). No forman parte de esta familia pública.
+- Si existen en tu sistema: una guía de seguridad propia y un skill para cuentas/datos personales (no código). No forman parte de esta familia pública.
 
 ## Adaptadores de proveedor (contrato §7)
 

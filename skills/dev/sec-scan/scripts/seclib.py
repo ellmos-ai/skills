@@ -90,6 +90,9 @@ def validate_coverage(cov: dict) -> tuple[list, list]:
         _req(s, ("path", "depth"), f"coverage.scanned[{i}]", errs)
         if s.get("depth") not in DEPTHS:
             errs.append(f"coverage.scanned[{i}]: depth must be one of {DEPTHS}")
+        langs = s.get("languages", [])
+        if not isinstance(langs, list) or not all(isinstance(x, str) for x in langs):
+            errs.append(f"coverage.scanned[{i}]: languages must be a list of strings")
     not_scanned = cov.get("notScanned") if isinstance(cov.get("notScanned"), list) else []
     for i, s in enumerate(not_scanned):
         s = _dict(s, f"coverage.notScanned[{i}]", errs)
@@ -108,8 +111,10 @@ def validate_coverage(cov: dict) -> tuple[list, list]:
 def _check_finding(f: dict, i: int, provider, errs: list, warns: list) -> None:
     w = f"findings[{i}]"
     _req(f, ("id", "rule", "title", "severity", "confidence", "status", "location", "evidence"), w, errs)
-    if "id" in f and not (isinstance(f["id"], str) and ID_RE.match(f["id"])):
+    if "id" in f and not (isinstance(f["id"], str) and ID_RE.fullmatch(f["id"])):
         errs.append(f"{w}: id must match SEC-<12 hex>")
+    if "rule" in f and not isinstance(f["rule"], str):
+        errs.append(f"{w}: rule must be a string")
     if f.get("severity") and f["severity"] not in SEVERITIES:
         errs.append(f"{w}: severity must be one of {SEVERITIES}")
     if f.get("confidence") and f["confidence"] not in CONFIDENCES:
@@ -117,33 +122,41 @@ def _check_finding(f: dict, i: int, provider, errs: list, warns: list) -> None:
     status = f.get("status")
     if status and status not in STATUSES:
         errs.append(f"{w}: status must be one of {STATUSES}")
-    if f.get("priority") is not None and not PRIORITY_RE.match(str(f["priority"])):
+    if f.get("priority") is not None and not PRIORITY_RE.fullmatch(str(f["priority"])):
         errs.append(f"{w}: priority must be P0..P4")
     cwes = f.get("cwe", [])
     if not isinstance(cwes, list):
         errs.append(f"{w}: cwe must be a list")
         cwes = []
     for c in cwes:
-        if not CWE_RE.match(str(c)):
+        if not CWE_RE.fullmatch(str(c)):
             errs.append(f"{w}: bad CWE '{c}'")
     loc = _dict(f["location"], f"{w}.location", errs) if "location" in f else {}
     _req(loc, ("path", "startLine"), f"{w}.location", errs)
     lp = loc.get("path")
+    if "path" in loc and not isinstance(lp, str):
+        errs.append(f"{w}.location: path must be a string")
+    if isinstance(lp, str) and ".." in lp.replace("\\", "/").split("/"):
+        errs.append(f"{w}.location: path must not contain .. segments")
     if isinstance(lp, str) and ("\\" in lp or lp.startswith(("/", "./")) or re.match(r"^[A-Za-z]:", lp)):
         errs.append(f"{w}.location: path must be repo-relative with '/' separators (no backslash, drive or leading ./)")
     start, end = loc.get("startLine"), loc.get("endLine")
     if start is not None and (not isinstance(start, int) or isinstance(start, bool) or start < 1):
         errs.append(f"{w}.location: startLine must be an integer >= 1")
-    elif end is not None and isinstance(start, int) and (not isinstance(end, int) or end < start):
+    elif end is not None and isinstance(start, int) and (
+            not isinstance(end, int) or isinstance(end, bool) or end < start):
         errs.append(f"{w}.location: endLine must be an integer >= startLine")
     # everything that is rendered into reports, tickets or advisories is checked for secret values
-    for key in ("title", "evidence", "description", "impact", "recommendation", "rejectedReason"):
+    for key in ("title", "evidence", "description", "impact", "recommendation", "rejectedReason", "ticket"):
         if key in f:
             _text(f[key], f"{w}.{key}", errs)
     vb = f.get("validatedBy")
     if vb is not None:
         vb = _dict(vb, f"{w}.validatedBy", errs)
         _req(vb, ("provider", "model", "verdict"), f"{w}.validatedBy", errs)
+        for key in ("provider", "model"):
+            if key in vb and not isinstance(vb[key], str):
+                errs.append(f"{w}.validatedBy.{key}: must be a string")
         if vb.get("verdict") is not None and vb["verdict"] not in VERDICTS:
             errs.append(f"{w}: validatedBy.verdict must be one of {VERDICTS}")
         if (isinstance(vb.get("provider"), str) and isinstance(provider, str)

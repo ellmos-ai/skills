@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # Tech Detect
 
-所有または明示的に許可されたホストだけを対象にする。既存インベントリとホスト別スロットの規則を先に読む。`.SYNC/_inventory` 型の構成では `systems/<自ホストのスロット>.json` を入力とし、このスキルは種ファイルや他ホストのスロットを更新しない。
+所有または明示的に許可されたホストだけを対象にする。既存インベントリとホスト別スロットの規則を先に読む。`<inventory>` 型の構成では `systems/<自ホストのスロット>.json` を入力とし、このスキルは種ファイルや他ホストのスロットを更新しない。
 
 1. 権限、ロック、ホスト識別、非公開の出力先を確認し、`python -X utf8 scripts/techshot.py capture --seed <インベントリ>/systems/<自ホスト>.json --slot <自ホスト> --output <非公開>/techshot-<UTC>.json` を実行する。
 2. オフラインの補助スクリプトはローカルのプラットフォームと Windows のアンインストール用レジストリ、利用可能な `dpkg-query` または Homebrew を読む。どの情報源も全アプリの網羅を保証しない。`Win32_Product` は使わない。[Microsoft の説明](https://learn.microsoft.com/en-us/powershell/scripting/samples/working-with-software-installations?view=powershell-7.6)では MSI の整合性確認と修復の副作用が示される。

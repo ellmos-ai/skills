@@ -155,10 +155,13 @@ def main(argv: list) -> int:
             print("ERROR", e)
         print(f"{len(errs)} error(s) - no report written")
         return 1
+    # build both outputs first: a failure while rendering must not leave a half-written result
+    report_md = render(doc, cov, warns, lang)
+    sarif_json = json.dumps(seclib.to_sarif(doc), indent=2)
     out = Path(args[2])
     out.mkdir(parents=True, exist_ok=True)
-    (out / "report.md").write_text(render(doc, cov, warns, lang), encoding="utf-8")
-    (out / "findings.sarif").write_text(json.dumps(seclib.to_sarif(doc), indent=2), encoding="utf-8")
+    (out / "report.md").write_text(report_md, encoding="utf-8")
+    (out / "findings.sarif").write_text(sarif_json, encoding="utf-8")
     for w in warns:
         print("WARN ", w)
     print(f"OK: {out / 'report.md'}, {out / 'findings.sarif'}")
