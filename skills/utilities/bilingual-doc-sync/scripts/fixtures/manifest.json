@@ -1,0 +1,13 @@
+{
+  "candidate_file": "README.pt.md",
+  "candidate_sha256": "ac4e0b9bd28aca95b8d627841dbf6e66e9315a2bff9aab7861118e1436689360",
+  "candidate_translator": "claude-haiku-5-5",
+  "language": "pt",
+  "origin_group": "public",
+  "origin_id": "d7a58b394bdf65c7ae3c7b088e7cf6d79252e48a",
+  "schema": "readme-repair-html-fixture-v1",
+  "source_file": "README.source.md",
+  "source_path": "README.md",
+  "source_sha256": "a3c1cb5a4f26588079627ba564555a2d0b66dd0e9af7ef8d0b5fa3f3dc3b4cbd",
+  "target_path": "README_pt.md"
+}

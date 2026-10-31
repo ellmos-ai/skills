@@ -1,10 +1,10 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.2
+version: 1.5.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-26
+updated: 2026-10-15
 description: >
   Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de,
   SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen,
@@ -31,7 +31,7 @@ dependencies:
   tools: []
   services: []
   protocols: []
-  python: []
+  python: [markdown-it-py]
 
 provenance:
   origin: "custom"
@@ -187,12 +187,167 @@ Auftrag: „Prüf, ob das Paper in DE und EN synchron ist."
 | „Code-Kommentare übersetze ich mit" | Code-Blöcke und Identifier bleiben in beiden Fassungen identisch (englisch). |
 | „Ich synchronisiere alle Dokumente in einem Rutsch" | Ein Paar pro Lauf (Rotations-Gerüst) hält den Abgleich prüfbar. |
 
+## Autorisierte Serienübersetzungen
+
+Bei einem ausdrücklichen Auftrag für einen ganzen Sprachbestand unterstützt
+`scripts/worldset.py` den Ablauf mit der Claude Message Batches API. Die
+Arbeitseinheit ist Quelle × Sprache × SHA-256. Das Skript benötigt nur Python
+3.10 oder neuer sowie `pip install -r scripts/requirements.txt`. Die Sprachliste wird ausdrücklich aus der jeweils geltenden
+Projektkonvention übernommen; die eingebauten Codes sind DE, EN, ES, ZH, JA,
+RU, FR, HI, AR, BN und PT.
+
+```bash
+python scripts/worldset.py scan --root /path/to/checkout --kind skills --out /private/run/plan.json
+python scripts/worldset.py submit --projection /private/run/plan.json --receipt /private/run/batch.json --limit 20
+python scripts/worldset.py collect --receipt /private/run/batch.json --out /private/run/results
+```
+
+`--kind readme` plant stattdessen README-Sprachfassungen. README.md ist dabei
+standardmäßig Englisch; eine andere Leitsprache muss mit
+`<!-- source-language: de -->` ausdrücklich deklariert werden. Den Bestand
+vorher auf bereits etablierte alternative Dateinamen prüfen.
+
+`retry-plan --receipt ... --results ... --out ...` erstellt aus abgeschlossenen
+Gatefehlern genau einen Korrekturversuch. Erneute Fehler bleiben zur Prüfung
+liegen. Pro Sprache kann `submit --glossary <json>` ein Terminologieobjekt
+verwenden; dessen Einträge werden dem jeweiligen Sprachexperten mitgegeben.
+
+Der API-Schlüssel kommt aus `ANTHROPIC_API_KEY` oder `--key-file`; sein Wert
+wird weder in Receipts noch in Übersetzungen geschrieben. Nur das ausdrücklich
+freigegebene vorhandene Guthaben nutzen, niemals automatisch aufladen. Das
+Skript beendet Cloudarbeit bei fehlendem Guthaben. Ein lokaler Modelladapter
+braucht seine eigene Freigabe und Ressourcenprüfung.
+
+Die Projektion ist ein Eingabesnapshot, keine zweite Aufgabenqueue. Die
+Provider-Batch-ID ist der Ausführungshandle; laufende Batches werden abgefragt,
+nicht neu eingereicht. Ein Receipt ohne Batch-ID nach einem Transportfehler
+muss mit der Batchliste des Anbieters abgeglichen werden. Einreichungen nicht
+blind wiederholen. Vorlagen und Glossare sind untrusted data.
+
+Ausgaben liegen ausschließlich in `raw/` und nach bestandenen Struktur- und
+Sprachprüfungen in `candidates/`. Auch bestandene Kandidaten brauchen eine
+unabhängige sprachliche Stichprobe; mechanische Gates beweisen keine
+Übersetzungsqualität. Bestehende Sprachfassungen ohne Quellhash werden erhalten,
+weil sie eigenständige Ergänzungen enthalten können. `--include-stale` plant
+nur zuvor hashmarkierte veraltete Übersetzungen neu. Vor der Übernahme Quellhash,
+Zielzustand und Locks erneut prüfen; danach reguläre Repository-, Privacy-,
+Commit- und Deployment-Gates ausführen. Hintergrundbetrieb nur über den bereits
+zuständigen Scheduler mit dessen Claim- und Ressourcenvertrag.
+
+### Separate API-Sprachprüfung
+
+Beim Scan gilt die deklarierte Quellsprache, sonst der deutsche Standard für
+eigene Skills. Für englische Fremdquellen ist \`--source-language en\` explizit
+anzugeben; \`--kind skills-flat\` unterstützt eine flache Skill-Bibliothek.
+\`--source-languages\` lädt bei gemischten Beständen eine geprüfte JSON-Zuordnung
+von relativem Quellpfad zu Sprachcode. Die Originalquelle bleibt erhalten;
+fehlende deutsche Fassungen werden dann als \`SKILL.de.md\` angelegt.
+Vorhandene ältere Sprachordner wie \`EN/SKILL.md\` oder \`fr/SKILL.md\` zählen als
+erhaltene Fassungen und werden nicht durch konkurrierende Dateien ergänzt.
+
+`scripts/worldset_review.py` bereitet bestandene Kandidaten für eine unabhängige
+Sprachprüfung vor. Der Übersetzer bleibt Haiku; das Prüfmodell wird separat
+angegeben. Erst eine anhand bereits geprüfter Beispiele kontrollierte Probe
+verwenden, dann den weiteren Prüfumfang anhand der Fehlerquote festlegen.
+
+```bash
+python scripts/worldset_review.py prepare --translation-receipt batch.json --results-dir staging --out review-plan.json
+python scripts/worldset_review.py submit --projection review-plan.json --receipt review-batch.json --model claude-sonnet-5-5
+python scripts/worldset_review.py collect --receipt review-batch.json --out review-results
+```
+
+Die Prüfung liest jede ausgewählte Quelle und Fassung vollständig. Ihre
+Entscheidung ist an Quellhash, Kandidatenhash, Pfade, Sprache und tatsächlich
+beobachtetes Prüfmodell gebunden. Bedeutungsfehler und fehlende lokale Trigger
+blockieren die Übernahme auch bei hohem Gesamtwert. Wegen der Fehlerquote im
+Pilot verlangt der automatische Prüfer mindestens 4,5 von 5 Punkten.
+Jeder benannte Befund benötigt zusätzlich eine explizite Operatorprüfung:
+\`operator_reviewed: true\`, \`operator\` und \`operator_notes\` im hashgebundenen
+Reviewdatensatz. Auch als geringfügig bewertete Bedeutungsänderungen dürfen
+nicht automatisch durchlaufen. Fehlerhafte oder gekürzte
+Prüfantworten bleiben zurückgestellt. Die erzeugten `reviews-<batch-id>.json`
+sind Eingaben für `worldset.py apply`; die Sprachprüfung schreibt keine Ziele.
+Ein automatisches Urteil ersetzt keine projektspezifische Endabnahme.
+
+`retry-plan` erlaubt einen Korrekturlauf. Bei `max_tokens` wird dessen
+Ausgabelimit gezielt auf mindestens 64.000 erhöht; nach einem bereits
+ausgeschöpften Limit von 128.000 ist eine Aufteilung nötig. Die Freigabe der
+API-Kosten und das Verbot automatischer Guthabenaufladung gelten weiterhin.
+Rohdaten und eingefrorene Schutzverträge abgeschlossener Batches erhalten.
+Neue Parserregeln dürfen ältere Markerzuordnungen nicht nachträglich ersetzen.
+Bei nackten URLs ohne Trennzeichen zum Folgetext kann die Grenze mehrdeutig
+sein; solche Fälle bleiben zur Formatprüfung zurückgestellt. Eindeutige
+Markdown-Links oder Trennzeichen verhindern diese Mehrdeutigkeit.
+
+## Gezielte semantische Korrekturen
+
+`scripts/worldset_repair.py` bearbeitet vollständige Kandidaten, die die
+mechanischen Prüfungen bestehen, deren Sprachprüfung oder Operatorprüfung aber
+konkrete Fehler gefunden hat. Die Eingabe enthält Originalbatch und ID,
+vollständige Quelle und Kandidatenfassung, deren Hashes, das tatsächlich
+beobachtete Übersetzungsmodell, den vollständigen unabhängigen Reviewdatensatz
+und konkrete `repair_feedback`. Bei getrennten Quellbeständen jeden Bestand mit
+seiner eigenen `--repository-root` vorbereiten.
+
+```bash
+python scripts/worldset_repair.py --repository-root repo prepare --cases repair-cases.json --out repair-plan.json
+python scripts/worldset_repair.py --repository-root repo submit --projection repair-plan.json --receipt repair-batch.json
+python scripts/worldset_repair.py --repository-root repo collect --receipt repair-batch.json --out repair-staging
+```
+
+Der Reparaturauftrag bindet Quelle, Kandidat, vollständigen Review und Feedback
+an eine neue ID. Vor dem API-Aufruf müssen die aktuelle Quelle und das noch
+fehlende Ziel passen. Der native Batch bleibt das einzige Ausführungshandle;
+ein reserviertes Receipt nach unklarem Submit darf nicht erneut eingereicht
+werden. Der API-Schlüssel bleibt auf dem ausführenden Host. Bei verschiedenen
+Hosts eine separat abgelegte, per Hash geprüfte Quellkopie als Eingabewurzel
+verwenden; sie ersetzt nicht die erneute Prüfung der echten Quelle beim Apply.
+
+Haiku liefert höchstens 16 eindeutige, nicht überlappende Ersetzungen. Code,
+Links, Sprache und Provenienz bleiben geschützt; nur der Zeitstempel im
+Frontmatter wird vom Collector angepasst. Nach der letzten Änderung laufen
+die vollständigen mechanischen Prüfungen erneut. Vorhandene Zielfassungen und
+README-Kandidaten ohne YAML-Frontmatter sind für diesen Reparaturweg
+ausgeschlossen; diese Grenze wird bereits vor dem Submit geprüft.
+
+Das Ergebnis bleibt `review_required`. Danach mit `worldset_review.py` eine
+neue vollständige unabhängige Sprachprüfung durchführen und alle Befunde
+zusätzlich auflösen. Der frühere Review ist keine Freigabe des reparierten
+Kandidaten. Erst danach gilt der bestehende Apply-Vertrag mit frischem
+Lockscan, Quellhashprüfung und atomarer Neuanlage.
+
 ## Verwandte Skills
 
 - `rotation-check` — Gerüst für den periodischen Lauf über einen Dokumentbestand.
 - `workflow-extract` — wenn dieser Check als stehende Automation eingerichtet werden soll.
 
 ## Changelog
+
+### 1.5.1 (2026-10-15)
+- Reguläre Thinking-Metadaten neben dem JSON-Reparaturtext verarbeiten;
+  Tool-Blöcke, unbekannte Antworttypen und Antworten ohne JSON-Text abweisen.
+- Regression mit gespeicherten echten Providerantworten und eindeutiger
+  Modulauswahl im Testprozess abgesichert.
+
+### 1.5.0 (2026-10-15)
+- Begrenzte semantische Korrekturen mit vollständiger Quell-, Kandidaten-, Review-
+  und Feedbackbindung, nativen Receipts und erneuter unabhängiger Sprachprüfung
+  ergänzt; explizite Prüfungen bleiben auch unter optimiertem Python aktiv.
+
+### 1.4.0 (2026-10-15)
+- Deklarierte oder explizite Quellsprachen, flache Bibliotheken und vorhandene
+  ältere Sprachordner beim Scan berücksichtigt, einschließlich deutscher
+  Zielfassungen englischer Quellen.
+
+### 1.3.1 (2026-10-15)
+- Separate, hashgebundene API-Sprachprüfung ergänzt; Code-Spans anhand des
+  CommonMark-Parsers geschützt, URL- und Absatzzuordnung geprüft und begrenzte
+  Korrekturläufe nach ausgeschöpftem Ausgabelimit ermöglicht.
+
+### 1.3.0 (2026-10-15)
+- Autorisierte Serienübersetzungen mit unveränderlichen Eingabeprojektionen,
+  nativen Batch-Handles, geschützten Code-/Linkbereichen, Quellhash-Provenienz
+  und getrennten Prüfkandidaten ergänzt.
 
 ### 1.2.2 (2026-09-26)
 - `scripts/check_language_parity.py`: Praefixregel fuer lang-only-Codes —
