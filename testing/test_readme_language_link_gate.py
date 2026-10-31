@@ -37,10 +37,69 @@ def _create_readmes(root: Path, tracked: bool = True) -> None:
 
 
 class ReadmeLanguageLinkGateTests(unittest.TestCase):
+    def test_language_catalog_covers_all_eleven_full_editions(self) -> None:
+        self.assertEqual(
+            {
+                "README.md": "en",
+                "README_de.md": "de",
+                "README_es.md": "es",
+                "README_zh.md": "zh",
+                "README_ja.md": "ja",
+                "README_ru.md": "ru",
+                "README_fr.md": "fr",
+                "README_hi.md": "hi",
+                "README_ar.md": "ar",
+                "README_bn.md": "bn",
+                "README_pt.md": "pt",
+            },
+            gate.README_LANGUAGES,
+        )
+
     def test_repository_readmes_match_their_skill_languages(self) -> None:
         violations, checked_links = gate.scan_readmes(REPO_ROOT)
         self.assertEqual([], violations, "\n".join(violations))
         self.assertGreater(checked_links, 0)
+
+    def test_localized_targets_and_german_fallback_cover_all_eleven_readmes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            _init_git_repo(root)
+            _create_readmes(root)
+
+            localized = root / "skills/testing/multilingual"
+            localized.mkdir(parents=True)
+            localized_files = ["skills/testing/multilingual/SKILL.md"]
+            for language in set(gate.README_LANGUAGES.values()) - {"de"}:
+                localized_files.append(
+                    f"skills/testing/multilingual/SKILL.{language}.md"
+                )
+                (localized / f"SKILL.{language}.md").touch()
+            (localized / "SKILL.md").touch()
+
+            german_only = root / "skills/utilities/german-only"
+            german_only.mkdir(parents=True)
+            (german_only / "SKILL.md").touch()
+            _git_add(
+                root,
+                *localized_files,
+                "skills/utilities/german-only/SKILL.md",
+            )
+
+            for readme_name, language in gate.README_LANGUAGES.items():
+                localized_target = (
+                    "SKILL.md" if language == "de" else f"SKILL.{language}.md"
+                )
+                (root / readme_name).write_text(
+                    f"[Localized](skills/testing/multilingual/{localized_target})\n"
+                    "[German fallback](skills/utilities/german-only/SKILL.md)\n",
+                    encoding="utf-8",
+                )
+            _git_add(root, *gate.README_LANGUAGES)
+
+            violations, checked_links = gate.scan_readmes(root)
+
+        self.assertEqual([], violations, "\n".join(violations))
+        self.assertEqual(22, checked_links)
 
     def test_accepts_localized_skill_and_german_fallback(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

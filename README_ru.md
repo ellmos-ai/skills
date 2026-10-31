@@ -3,15 +3,20 @@
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb" alt="English"></a>
   <a href="README_de.md"><img src="https://img.shields.io/badge/Sprache-Deutsch-d97706" alt="Deutsch"></a>
-  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Español-dc2626" alt="Español"></a>
-  <a href="README_ja.md"><img src="https://img.shields.io/badge/言語-日本語-7c3aed" alt="日本語"></a>
-  <a href="README_ru.md"><img src="https://img.shields.io/badge/Язык-Русский-0891b2" alt="Русский"></a>
-  <a href="README_zh.md"><img src="https://img.shields.io/badge/语言-简体中文-059669" alt="简体中文"></a>
+  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Espa%C3%B1ol-dc2626" alt="Español"></a>
+  <a href="README_zh.md"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-059669" alt="简体中文"></a>
+  <a href="README_ja.md"><img src="https://img.shields.io/badge/%E8%A8%80%E8%AA%9E-%E6%97%A5%E6%9C%AC%E8%AA%9E-7c3aed" alt="日本語"></a>
+  <a href="README_ru.md"><img src="https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-0891b2" alt="Русский"></a>
+  <a href="README_fr.md"><img src="https://img.shields.io/badge/Langue-Fran%C3%A7ais-0ea5e9" alt="Français"></a>
+  <a href="README_hi.md"><img src="https://img.shields.io/badge/%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE-%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-7c3aed" alt="हिन्दी"></a>
+  <a href="README_ar.md"><img src="https://img.shields.io/badge/%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-059669" alt="العربية"></a>
+  <a href="README_bn.md"><img src="https://img.shields.io/badge/%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE-%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE-d97706" alt="বাংলা"></a>
+  <a href="README_pt.md"><img src="https://img.shields.io/badge/Idioma-Portugu%C3%AAs-dc2626" alt="Português"></a>
 </p>
 
 # ellmos skills
 
-**Документация на шести языках** · [Машиночитаемый контекст](llms.txt) · **🗺️ [Просмотреть библиотеку skills онлайн](https://ellmos-ai.github.io/skills.html)** — читайте и копируйте любой публичный skill прямо в браузере
+**Документация на одиннадцати языках** · [Машиночитаемый контекст](llms.txt) · **🗺️ [Просмотреть библиотеку skills онлайн](https://ellmos-ai.github.io/skills.html)** — читайте и копируйте любой публичный skill прямо в браузере
 
 > Переносимая библиотека AI skills для рабочих процессов `SKILL.md` в стиле Claude Code, конфигураций агентов Codex, BACH и других local-first сред LLM.
 
@@ -119,23 +124,23 @@ flowchart TD
 | <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.ru.md) | Поддержка вакансий, CV, LinkedIn и писем. |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`](skills/therapy/) | Семейство из 19 психообразовательных методов с этическими границами (флагманы: [`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.ru.md), [`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.ru.md)); глубочайший целостный блок библиотеки. |
 | <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.ru.md) | Конституционная суперпозиция («Позиция нерождённых»): даёт будущим поколениям алгоритмическое право вето против краткосрочной выгоды через 5-CORE и контрфактический анализ. |
-| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | Протокол непрерывности на основе доказательств (WAAFAP): инвертирует условие остановки — завершение цикла требует опровержимого доказательства отсутствия задач. |
-| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | Шаблон zero-state приватного развёртывания: выполняет SQLite в браузере через SQLite-WASM/OPFS с клиентским BYOK, устраняя серверные БД и риски GDPR. |
-| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | Двунаправленный синтез UI и промптов («Клик как промпт»): типизированный ASCII-чертёж с 4D-легендой, синхронизирующий интерфейс и инструкции без шага сборки. |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.ru.md) | Протокол непрерывности на основе доказательств (WAAFAP): инвертирует условие остановки — завершение цикла требует опровержимого доказательства отсутствия задач. |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.ru.md) | Шаблон zero-state приватного развёртывания: выполняет SQLite в браузере через SQLite-WASM/OPFS с клиентским BYOK, устраняя серверные БД и риски GDPR. |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.ru.md) | Двунаправленный синтез UI и промптов («Клик как промпт»): типизированный ASCII-чертёж с 4D-легендой, синхронизирующий интерфейс и инструкции без шага сборки. |
 | <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.ru.md) | Нейропсихологические функции исполнительного контроля (торможение, буфер рабочей памяти, мысленная репетиция) для предотвращения поддакивания и ранней остановки. |
-| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | Детерминированное сжатие правил без модели: сокращает объём токенов Markdown-файлов правил и памяти до 40% без инференса LLM, галлюцинаций или потери смысла. |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.ru.md) | Детерминированное сжатие правил без модели: сокращает объём токенов Markdown-файлов правил и памяти до 40% без инференса LLM, галлюцинаций или потери смысла. |
 | <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.ru.md) | Универсальные морские протоколы навигации для дезориентированных AI-агентов: эвристики восстановления и реконструкции состояния при дрейфе контекста или петлях. |
 | <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.ru.md) | Декларативный DSL условных шлюзов для промптов: инкапсулирует предварительные условия, вехи и порядок зависимостей в fail-closed шлюзы в стандартном Markdown. |
 | <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.ru.md) | Загрузчик перед выполнением для CLI-агентов без хуков: внедряет правила управления, обход памяти и контекст до начала хода без нативных событий JSON. |
-| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | Сеансовая радиостанция через общие синхронизированные папки: разделяет асимметричные роли (`ListenSync` и `WriteSync`) для асинхронной координации без серверов. |
-| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | Согласование контракта сессии перед многоагентной работой: фиксирует топологию оркестрации, параллелизм, слоты моделей и триггеры эскалации. |
-| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | Протокол слияния-молнии для сильно расходящихся веток: пораздельное сопоставление через таблицу решений с реконструкцией замысла вместо слияния. |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.ru.md) | Сеансовая радиостанция через общие синхронизированные папки: разделяет асимметричные роли (`ListenSync` и `WriteSync`) для асинхронной координации без серверов. |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.ru.md) | Согласование контракта сессии перед многоагентной работой: фиксирует топологию оркестрации, параллелизм, слоты моделей и триггеры эскалации. |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.ru.md) | Протокол слияния-молнии для сильно расходящихся веток: пораздельное сопоставление через таблицу решений с реконструкцией замысла вместо слияния. |
 | <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.ru.md) | Эволюционное переименование файлов и модулей с обёртками и заглушками MOVED: предотвращает сбои у агентов, пока ссылки обновляются органически. |
 | <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.ru.md) | Таксономический компас 2x2 для пайплайнов: устраняет смещение шаблонов LLM, направляя к нужному skill для адаптации, начальной настройки или реновации. |
-| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | Детерминированный цикл гигиены завершения сессии с 3 ролями: решает ожидающие тривиальные задачи без расползания планов, синхронизирует документацию и архивирует файлы. |
-| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | Асинхронный конвейер с участием человека: пока пользователь тестирует элемент N, агент запускает N+1 и делегирует исправления для N-1, исключая ожидание. |
-| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | Семантическая очистка файловой системы по принципу Cut-and-Clue: отделяет активные файлы от устаревших с машиночитаемыми указателями, сохраняя журналы. |
-| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | Пошаговое сокращение списков кандидатов через тематические пулы, этапы фильтрации и перемешиваемые пакеты без окончательного удаления остального. |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.ru.md) | Детерминированный цикл гигиены завершения сессии с 3 ролями: решает ожидающие тривиальные задачи без расползания планов, синхронизирует документацию и архивирует файлы. |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.ru.md) | Асинхронный конвейер с участием человека: пока пользователь тестирует элемент N, агент запускает N+1 и делегирует исправления для N-1, исключая ожидание. |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.ru.md) | Семантическая очистка файловой системы по принципу Cut-and-Clue: отделяет активные файлы от устаревших с машиночитаемыми указателями, сохраняя журналы. |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.ru.md) | Пошаговое сокращение списков кандидатов через тематические пулы, этапы фильтрации и перемешиваемые пакеты без окончательного удаления остального. |
 
 ## Публичная и приватная граница
 
@@ -182,7 +187,7 @@ python testing/skill_tester.py batch --type static --ci
 Независимые сторонние A/B-оценки отдельных skills, приводятся здесь по мере
 появления (не проводятся и не заказываются этим проектом):
 
-- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), протестировано 2026-08-08 на Gemini-3.6-flash, 22 случая: доля успеха 22,7 % -> 95,5 % (+73pp), -14 % токенов, безопасность 15/15 проверок (3/3).
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.ru.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols), протестировано 2026-08-08 на Gemini-3.6-flash, 22 случая: доля успеха 22,7 % -> 95,5 % (+73pp), -14 % токенов, безопасность 15/15 проверок (3/3).
 
 ## Поиск и связанные проекты
 

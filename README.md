@@ -3,15 +3,20 @@
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb" alt="English"></a>
   <a href="README_de.md"><img src="https://img.shields.io/badge/Sprache-Deutsch-d97706" alt="Deutsch"></a>
-  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Español-dc2626" alt="Español"></a>
-  <a href="README_ja.md"><img src="https://img.shields.io/badge/言語-日本語-7c3aed" alt="日本語"></a>
-  <a href="README_ru.md"><img src="https://img.shields.io/badge/Язык-Русский-0891b2" alt="Русский"></a>
-  <a href="README_zh.md"><img src="https://img.shields.io/badge/语言-简体中文-059669" alt="简体中文"></a>
+  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Espa%C3%B1ol-dc2626" alt="Español"></a>
+  <a href="README_zh.md"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-059669" alt="简体中文"></a>
+  <a href="README_ja.md"><img src="https://img.shields.io/badge/%E8%A8%80%E8%AA%9E-%E6%97%A5%E6%9C%AC%E8%AA%9E-7c3aed" alt="日本語"></a>
+  <a href="README_ru.md"><img src="https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-0891b2" alt="Русский"></a>
+  <a href="README_fr.md"><img src="https://img.shields.io/badge/Langue-Fran%C3%A7ais-0ea5e9" alt="Français"></a>
+  <a href="README_hi.md"><img src="https://img.shields.io/badge/%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE-%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-7c3aed" alt="हिन्दी"></a>
+  <a href="README_ar.md"><img src="https://img.shields.io/badge/%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-059669" alt="العربية"></a>
+  <a href="README_bn.md"><img src="https://img.shields.io/badge/%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE-%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE-d97706" alt="বাংলা"></a>
+  <a href="README_pt.md"><img src="https://img.shields.io/badge/Idioma-Portugu%C3%AAs-dc2626" alt="Português"></a>
 </p>
 
 # ellmos skills
 
-**Six-language documentation** · [Machine-readable context](llms.txt) · **🗺️ [Browse the skill library online](https://ellmos-ai.github.io/skills.html)** — read and copy every public skill in the browser
+**Eleven-language documentation** · [Machine-readable context](llms.txt) · **🗺️ [Browse the skill library online](https://ellmos-ai.github.io/skills.html)** — read and copy every public skill in the browser
 
 > Portable AI skill library for Claude Code-style `SKILL.md` workflows, Codex-compatible agent setups, BACH, AGY/Gemini, and other local-first LLM agent runtimes.
 
@@ -353,7 +358,7 @@ Some skills are especially useful as entry points because they coordinate other 
 | <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.en.md) | Deterministic 3-role session-end hygiene loop (Tasksolver, Writer, Maintainer): solves pending trivial tasks without agenda creep, syncs documentation to measured truth, and archives strays reversibly. |
 | <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.en.md) | Asynchronous human-in-the-loop pipelining: while the user tests item N live, the agent pre-launches item N+1 and delegates fix workers for item N-1, eliminating idle wait times. |
 | <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.en.md) | Semantic filesystem cleanup using Cut-and-Clue: separates active from legacy files with machine-readable pointer clues at the source, preserving taxonomies and audit logs. |
-| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | Reduces large candidate lists step by step through optional topic pools, filter stages, and repeatedly reshuffled bundles -- for selecting, filtering, or mixing skills, tasks, ideas, or files in groups without permanently discarding the rest. |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.en.md) | Reduces large candidate lists step by step through optional topic pools, filter stages, and repeatedly reshuffled bundles -- for selecting, filtering, or mixing skills, tasks, ideas, or files in groups without permanently discarding the rest. |
 
 <a id="sec-09"></a><a id="publicprivate-boundary"></a>
 ## 9. Public/Private Boundary & Fail-Closed Isolation

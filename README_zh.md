@@ -3,15 +3,20 @@
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/Language-English-2563eb" alt="English"></a>
   <a href="README_de.md"><img src="https://img.shields.io/badge/Sprache-Deutsch-d97706" alt="Deutsch"></a>
-  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Español-dc2626" alt="Español"></a>
-  <a href="README_ja.md"><img src="https://img.shields.io/badge/言語-日本語-7c3aed" alt="日本語"></a>
-  <a href="README_ru.md"><img src="https://img.shields.io/badge/Язык-Русский-0891b2" alt="Русский"></a>
-  <a href="README_zh.md"><img src="https://img.shields.io/badge/语言-简体中文-059669" alt="简体中文"></a>
+  <a href="README_es.md"><img src="https://img.shields.io/badge/Idioma-Espa%C3%B1ol-dc2626" alt="Español"></a>
+  <a href="README_zh.md"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-059669" alt="简体中文"></a>
+  <a href="README_ja.md"><img src="https://img.shields.io/badge/%E8%A8%80%E8%AA%9E-%E6%97%A5%E6%9C%AC%E8%AA%9E-7c3aed" alt="日本語"></a>
+  <a href="README_ru.md"><img src="https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-0891b2" alt="Русский"></a>
+  <a href="README_fr.md"><img src="https://img.shields.io/badge/Langue-Fran%C3%A7ais-0ea5e9" alt="Français"></a>
+  <a href="README_hi.md"><img src="https://img.shields.io/badge/%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE-%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-7c3aed" alt="हिन्दी"></a>
+  <a href="README_ar.md"><img src="https://img.shields.io/badge/%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-059669" alt="العربية"></a>
+  <a href="README_bn.md"><img src="https://img.shields.io/badge/%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE-%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE-d97706" alt="বাংলা"></a>
+  <a href="README_pt.md"><img src="https://img.shields.io/badge/Idioma-Portugu%C3%AAs-dc2626" alt="Português"></a>
 </p>
 
 # ellmos skills
 
-**六种语言的文档** · [机器可读上下文](llms.txt) · **🗺️ [在线浏览 skill 库](https://ellmos-ai.github.io/skills.html)** — 在浏览器中阅读并复制每一个公开 skill
+**十一种语言的文档** · [机器可读上下文](llms.txt) · **🗺️ [在线浏览 skill 库](https://ellmos-ai.github.io/skills.html)** — 在浏览器中阅读并复制每一个公开 skill
 
 > 面向 Claude Code 风格 `SKILL.md` 工作流、兼容 Codex 的智能体配置、BACH 以及其他 local-first LLM 智能体运行环境的可移植 AI skill 库。
 
@@ -123,23 +128,23 @@ flowchart TD
 | <img src="assets/icons/bewerbungsexperte.svg" width="20" height="20" alt=""> [`bewerbungsexperte`](skills/utilities/bewerbungsexperte/SKILL.zh.md) | 支持招聘广告、简历、LinkedIn 和求职信。 |
 | <img src="assets/icons/therapy-collection.svg" width="20" height="20" alt=""> [`therapy/`](skills/therapy/) | 具有伦理边界的 19 个心理教育和咨询方法集合（代表性技能：[`cognitive-restructuring`](skills/therapy/cognitive-restructuring/SKILL.zh.md)、[`motivational-interviewing`](skills/therapy/motivational-interviewing/SKILL.zh.md)）；库中最深度的连贯体系。 |
 | <img src="assets/icons/lebende-verfassung.svg" width="20" height="20" alt=""> [`lebende-verfassung`](skills/utilities/lebende-verfassung/SKILL.zh.md) | 宪法级叠加态（“未出生者的立场”）：通过 5-CORE 审查架构和强制反事实分析，赋予后代对当下短期优化的算法否决权。 |
-| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.md) | 基于证明的防懒惰非终止协议（WAAFAP）：反转终止条件，结束自主循环必须提供任务不存在的可证伪证明（“退出需要无活动证明”）。 |
-| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.md) | 零状态隐私部署模式（Huckepack-Hosting）：通过 SQLite-WASM/OPFS 和客户端 BYOK 在浏览器中运行关系型 SQLite，从设计上消除服务端数据库和 GDPR 责任。 |
-| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.md) | 双向 UI-Prompt 综合（“点击即 Prompt”）：带 4D 元素图例的类型化 ASCII 蓝图，无需前端构建步骤即可连接 GUI 设计与 Agent 指令。 |
+| <img src="assets/icons/work-autonomous.svg" width="20" height="20" alt=""> [`work-autonomous`](skills/infrastructure/work-autonomous/SKILL.zh.md) | 基于证明的防懒惰非终止协议（WAAFAP）：反转终止条件，结束自主循环必须提供任务不存在的可证伪证明（“退出需要无活动证明”）。 |
+| <img src="assets/icons/piggyback-hosting.svg" width="20" height="20" alt=""> [`piggyback-hosting`](skills/dev/piggyback-hosting/SKILL.zh.md) | 零状态隐私部署模式（Huckepack-Hosting）：通过 SQLite-WASM/OPFS 和客户端 BYOK 在浏览器中运行关系型 SQLite，从设计上消除服务端数据库和 GDPR 责任。 |
+| <img src="assets/icons/software-in-worten.svg" width="20" height="20" alt=""> [`software-in-worten`](skills/dev/software-in-worten/SKILL.zh.md) | 双向 UI-Prompt 综合（“点击即 Prompt”）：带 4D 元素图例的类型化 ASCII 蓝图，无需前端构建步骤即可连接 GUI 设计与 Agent 指令。 |
 | <img src="assets/icons/metacognitive-injectors.svg" width="20" height="20" alt=""> [`metacognitive-injectors`](skills/infrastructure/metacognitive-injectors/SKILL.zh.md) | 将神经心理学执行控制功能（抑制、工作记忆缓冲、心理预演）集成到运行前检查中，以防止阿谀奉承和过早终止。 |
-| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.md) | 确定性且无模型的规则压缩：在没有 LLM 推理、幻觉或语义漂移的情况下，将大型 Markdown 规则和记忆文件缩减高达 40% 的 Token 量。 |
+| <img src="assets/icons/paveman.svg" width="20" height="20" alt=""> [`paveman`](skills/utilities/paveman/SKILL.zh.md) | 确定性且无模型的规则压缩：在没有 LLM 推理、幻觉或语义漂移的情况下，将大型 Markdown 规则和记忆文件缩减高达 40% 的 Token 量。 |
 | <img src="assets/icons/wayfinding-routing.svg" width="20" height="20" alt=""> [`wayfinding-routing`](skills/infrastructure/wayfinding-routing/SKILL.zh.md) | 面向迷向 AI Agent 的通用航海导航协议：在陷入上下文漂移或死循环时提供恢复启发式和状态重构。 |
 | <img src="assets/icons/condition.svg" width="20" height="20" alt=""> [`condition`](skills/infrastructure/condition/SKILL.zh.md) | 面向 Prompt 的声明式条件门控 DSL：在标准 Markdown 中将前置条件、里程碑和顺序依赖封装为 fail-closed 门控。 |
 | <img src="assets/icons/letter-hooker.svg" width="20" height="20" alt=""> [`letter-hooker`](skills/infrastructure/letter-hooker/SKILL.zh.md) | 无 Hook CLI Agent 的预检引导器：在每个回合前注入治理规则、记忆遍历和自愈上下文，无需原生 JSON 事件 Hook。 |
-| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.md) | 基于共享同步文件夹的会话级电台：分离非对称角色（`ListenSync` 侦听者 vs `WriteSync` 发送者），实现无需中心服务器的异步多 Agent 协作。 |
-| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.md) | 多 Agent 协作的会话契约协商器：在执行开始前约束编排拓扑、并发性、模型槽位和升级触发条件。 |
-| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.md) | 严重分歧分支的拉链式合并协议：使用决策表逐节对比，以意图重构（“重构而非合并”）作为最终升级阶段。 |
+| <img src="assets/icons/pingpong.svg" width="20" height="20" alt=""> [`pingpong`](skills/infrastructure/pingpong/SKILL.zh.md) | 基于共享同步文件夹的会话级电台：分离非对称角色（`ListenSync` 侦听者 vs `WriteSync` 发送者），实现无需中心服务器的异步多 Agent 协作。 |
+| <img src="assets/icons/choose-your-orchestrator.svg" width="20" height="20" alt=""> [`choose-your-orchestrator`](skills/infrastructure/choose-your-orchestrator/SKILL.zh.md) | 多 Agent 协作的会话契约协商器：在执行开始前约束编排拓扑、并发性、模型槽位和升级触发条件。 |
+| <img src="assets/icons/reissverschluss-merge.svg" width="20" height="20" alt=""> [`reissverschluss-merge`](skills/dev/reissverschluss-merge/SKILL.zh.md) | 严重分歧分支的拉链式合并协议：使用决策表逐节对比，以意图重构（“重构而非合并”）作为最终升级阶段。 |
 | <img src="assets/icons/migrate-rename.svg" width="20" height="20" alt=""> [`migrate-rename`](skills/dev/migrate-rename/SKILL.zh.md) | 使用包装器和 MOVED 存根的演进式文件与模块重命名：在引用随使用自然更新的过程中，防止 Agent 集群发生中断。 |
 | <img src="assets/icons/projekt-pipeline-umbrella.svg" width="20" height="20" alt=""> [`projekt-pipeline-umbrella`](skills/dev/projekt-pipeline-umbrella/SKILL.zh.md) | Pipeline 的分类学 2x2 指南针：防止语言模型的脚手架偏向，精确路由到适合的新手引导、启动器或重构技能。 |
-| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.md) | 确定性的 3 角色会话结束清理循环：在不蔓延新计划的情况下解决待办日常任务，将文档同步至测量实况，并可逆归档游离文件。 |
-| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.md) | 人在回路的异步拉链流水线：当用户实时测试项目 N 时，Agent 预先启动项目 N+1 并委托修复工人处理项目 N-1，消除空闲等待。 |
-| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.md) | 基于 Cut-and-Clue 的语义化文件系统清理：在源头保留机器可读线索的前提下分离当前与历史文件，完整保留分类与审计日志。 |
-| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.md) | 通过可选主题池、过滤阶段和反复重混捆绑包逐步精简庞大候选列表——分批选择、筛选或组合，而不彻底丢弃其余项。 |
+| <img src="assets/icons/tidy-up.svg" width="20" height="20" alt=""> [`tidy-up`](skills/dev/tidy-up/SKILL.zh.md) | 确定性的 3 角色会话结束清理循环：在不蔓延新计划的情况下解决待办日常任务，将文档同步至测量实况，并可逆归档游离文件。 |
+| <img src="assets/icons/human-loop-audit.svg" width="20" height="20" alt=""> [`human-loop-audit`](skills/dev/human-loop-audit/SKILL.zh.md) | 人在回路的异步拉链流水线：当用户实时测试项目 N 时，Agent 预先启动项目 N+1 并委托修复工人处理项目 N-1，消除空闲等待。 |
+| <img src="assets/icons/folder-organization.svg" width="20" height="20" alt=""> [`folder-organization`](skills/utilities/folder-organization/SKILL.zh.md) | 基于 Cut-and-Clue 的语义化文件系统清理：在源头保留机器可读线索的前提下分离当前与历史文件，完整保留分类与审计日志。 |
+| <img src="assets/icons/iterative-bundle-selection.svg" width="20" height="20" alt=""> [`iterative-bundle-selection`](skills/utilities/iterative-bundle-selection/SKILL.zh.md) | 通过可选主题池、过滤阶段和反复重混捆绑包逐步精简庞大候选列表——分批选择、筛选或组合，而不彻底丢弃其余项。 |
 
 ## 公开与私有边界
 
@@ -185,7 +190,7 @@ python testing/skill_tester.py batch --type static --ci
 
 针对单个 skill 的独立第三方 A/B 评估，随可用性在此列出（并非本项目自行开展或委托）：
 
-- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols)，于 2026-08-08 在 Gemini-3.6-flash 上测试，22 个案例：通过率 22.7% -> 95.5%（+73pp），token 减少 14%，安全性 15/15 项检查（3/3）。
+- [`cloud-communication-protocols`](skills/infrastructure/cloud-communication-protocols/SKILL.zh.md) -- [decimal.ai](https://app.decimal.ai/skills/ellmos-ai-cloud-communication-protocols)，于 2026-08-08 在 Gemini-3.6-flash 上测试，22 个案例：通过率 22.7% -> 95.5%（+73pp），token 减少 14%，安全性 15/15 项检查（3/3）。
 
 ## 搜索与相关项目
 

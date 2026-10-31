@@ -34,7 +34,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -53,7 +57,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -72,7 +80,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -91,7 +103,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -110,7 +126,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -129,7 +149,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -148,7 +172,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -167,7 +195,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -186,7 +218,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -205,7 +241,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -224,7 +264,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -243,7 +287,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -262,7 +310,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -281,7 +333,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -300,7 +356,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -319,7 +379,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -338,7 +402,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -357,7 +425,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -376,7 +448,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -395,7 +471,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -414,7 +494,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -433,7 +517,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -447,7 +535,16 @@
       "description": "Systemneutrale Automatisierung für lösungsorientierten Community Outreach und Repo-Recommender in Foren, Reddit und Plattformen nach dem Human-in-the-Loop-Prinzip (EU AI Act konform).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -461,7 +558,16 @@
       "description": "Use when the user wants to send the same prompt to several LLMs and compare the answers - sequentially (stopwatch, clean per-lane timing) or in parallel (true race), with optional repetitions per model, judged by the starting model across quality, correctness, completeness, instruction fidelity and latency (time is only one dimension). Triggers on /compare-race, 'model race', 'vergleiche modelle', 'gleicher prompt an mehrere modelle'.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -480,7 +586,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -499,7 +609,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -518,7 +632,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -536,7 +654,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -555,7 +678,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -569,7 +696,16 @@
       "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -583,7 +719,16 @@
       "description": "Findet und behebt Mermaid-Diagramme, die GitHub nicht rendert (\"Unable to render rich display\"). Prueft jeden ```mermaid-Block mit dem echten Mermaid-Parser ohne Browser und belegt das Ergebnis danach an der lebenden GitHub-Seite.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -602,7 +747,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -621,7 +770,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -635,7 +788,16 @@
       "description": "Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -654,7 +816,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -673,7 +839,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -692,7 +862,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -710,7 +884,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -724,7 +903,16 @@
       "description": "Reißverschluss-Verfahren (englisch: zipper merge) für sehr konfliktreiche Merges: Wenn zwei divergente Branches oder ein PR und sein Zielbranch BEIDE wertvolle, unvereinbar erscheinende Änderungen tragen, wird nicht pauschal eine Seite gewählt, sondern Abschnitt für Abschnitt verglichen, per Entscheidungstabelle (Nimm/Warum) die jeweils bessere Version übernommen, abschnittsweise committet und erst am Ende gepusht. Letzte Eskalationsstufe: Rebuild statt Merge — nur die Absicht/Funktionalität des Branches übernehmen und auf dem aktuellen Stand neu bauen. Nutzen bei: \"Merge-Konflikt\", \"divergente Branches\", \"main vs. master\", \"konfliktreicher PR\", \"zipper merge\", \"Reißverschluss\", \"beide Seiten haben Recht\", \"PR ist zu alt zum Mergen\".",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -742,7 +930,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -760,7 +953,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -774,7 +972,16 @@
       "description": "Übersetzt zwischen Benutzeroberfläche und Text — in beide Richtungen. Aus einer beschriebenen Oberfläche wird ein Skill; aus einem Skill wird eine Oberfläche. Nutzen, wenn eine Anwendung entworfen wird und der Ablauf noch unklar ist, wenn ein bestehendes Werkzeug als Skill verfügbar gemacht werden soll, wenn Oberfläche und Agentenzugang auseinanderdriften, oder wenn ein Skill zu lang wird und niemand weiß warum.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -788,7 +995,16 @@
       "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -806,7 +1022,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -820,7 +1041,16 @@
       "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -839,7 +1069,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -858,7 +1092,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -877,7 +1115,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -896,7 +1138,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -915,7 +1161,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -934,7 +1184,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -953,7 +1207,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -972,7 +1230,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -991,7 +1253,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1010,7 +1276,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1029,7 +1299,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1043,7 +1317,16 @@
       "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\").",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1062,7 +1345,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1081,7 +1368,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1100,7 +1391,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1114,7 +1409,16 @@
       "description": "Plant, spiegelt, verifiziert, stellt wieder her oder archiviert Dateien explizit über den fail-closed mac-backup-Kern. Für die eigenen hostübergreifenden Backup-Jobs des Nutzers verwenden; nicht für allgemeine Cloud-Synchronisation oder beiläufiges Dateikopieren.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1128,7 +1432,16 @@
       "description": "Kontokonzept für den budgetierten Einsatz teurer oder knapper Modelle (Advisor, Reviewer, Spezialmodelle, Dauer-Worker) in längeren Agentenläufen. Beginnt mit einer gemeinsamen Aushandlung zwischen Nutzer und Modell über verfügbare Modelle, Rollen und Kontingente je Zeitfenster, führt ein Konto über jeden Einsatz, setzt vor jeder Eskalation ein Puzzleteil-Vorverfahren und erlaubt Anpassungen mitten im Lauf. Verwenden bei \"Budget\", \"Kontingent\", \"Konto führen\", \"nur einmal pro Stunde\", \"Reviewer sparsam einsetzen\", \"Fable/Codex/Sol/Astra/Luna/Advisor nur begrenzt\", \"/budgetierung\", und immer dann, wenn ein Operator-, Forschungs- oder Automationslauf mehrere Modelle mit unterschiedlichen Kosten kombinieren soll — auch wenn der Nutzer das Wort Budget nicht nennt, aber Einsatzgrenzen für Modelle vorgibt.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1142,7 +1455,16 @@
       "description": "Wählt vor komplexer Multi-Agent-Arbeit gemeinsam mit dem Nutzer eine passende, begrenzte Orchestrierung und erzeugt einen kompakten Session-Vertrag. Nutze den Skill bei /choose-your-orchestrator, bei unsicherer Kombination aus Orchestrator, Schwarm, Modellrouting oder Nutzerpräferenzmodell sowie vor Agentenprogrammen, die Modellslots, Parallelität, Spawn-Tiefe, Schreibgrenzen, Abnahme und Eskalation ausdrücklich festlegen müssen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1156,7 +1478,16 @@
       "description": "Dach-Skill für Cloud-gestützte Kommunikationsprotokolle zwischen Agenten auf unterschiedlichen Maschinen (Ping-Pong, agent-beam, Listener und künftige Protokolle). Nutzen, wenn Arbeit über Maschinen hinweg per gemeinsamem Sync-Ordner oder Message-Yard koordiniert wird.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1174,7 +1505,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1188,7 +1524,16 @@
       "description": "Selbstjustierende Takt-Regelschleife für wiederkehrende Agenten-Scans. Nutzen, wenn ein geplanter Scan sein Intervall bei Aktivität schärfen und bei Stille abkühlen soll, ohne Operator-Eingriff.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1206,7 +1551,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1220,7 +1570,16 @@
       "description": "Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json, Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json, usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei \"erstelle einen Skill\", \"bau mir einen Skill für X\", \"skill-creator nutzen\", \"neuen Skill anlegen\", \"diesen Skill ellmos-konform machen\", \"Lernvertrag/Verhaltenscodex für einen Skill anlegen\", \"Usecase-Abdeckung eines Skills prüfen\". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder, für Landschafts-Audit skill-explorer.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1239,7 +1598,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1258,7 +1621,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1276,7 +1643,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1295,7 +1667,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1314,7 +1690,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1328,7 +1708,16 @@
       "description": "Bindet das model-agnostische Computer-Use-Modul open-compute (Screenshot-Wahrnehmung, Windows-UIA-Elementklicks, sicherheitsgegatete Aktionen) fuer ALLE Agenten des Systems ein -- Claude Code, Codex und agy/Antigravity. Nutzen, wenn ein Dienst eine interaktive GUI- oder Browser-Aktion braucht, die kein reiner Text-/API-Weg loesen kann (Paradebeispiel: Tailscale-Reauth im Browser, sonstige Login-/Consent-Dialoge, Dialogfenster-Klicks). Standard ab 2026-08-02: open-compute statt Aufgeben oder Abwarten nutzen.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1341,7 +1730,17 @@
       "status": "active",
       "description": "Providerneutrale Operator- und Teamleader-Rolle für komplexe, länger laufende oder planbasierte Vorhaben. Verwenden bei `$operator`, `/operator`, \"übernimm als Operator\" oder \"arbeite den Plan weiter ab\", um den nächsten substanziellen Planschritt zu wählen, unabhängige Arbeitspakete kontrolliert zu delegieren und Ergebnisse evidenzbasiert abzunehmen und zu integrieren.",
       "languages": [
-        "de"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1360,7 +1759,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1374,7 +1777,16 @@
       "description": "Betreibt eine zeitlich begrenzte, sitzungsgebundene Funkstelle über einen gemeinsam synchronisierten Ordner. ListenSync scannt systematisch nach Aufträgen und Neuigkeiten; WriteSync versendet Deltas und Receipts. Verwenden bei PingPong, Dosentelefon, ListenSync, WriteSync, Sync-Listener, Auftragswache, News-Scan oder Goal-/Loop-Überwachung.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1393,7 +1805,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1412,7 +1828,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1431,7 +1851,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1449,7 +1873,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1467,7 +1896,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1485,7 +1919,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1504,7 +1943,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1523,7 +1966,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1542,7 +1989,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1556,7 +2007,16 @@
       "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1574,7 +2034,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1593,7 +2058,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1612,7 +2081,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1631,7 +2104,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1650,7 +2127,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1669,7 +2150,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1688,7 +2173,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1707,7 +2196,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1726,7 +2219,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1745,7 +2242,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1764,7 +2265,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1783,7 +2288,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1802,7 +2311,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1821,7 +2334,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1840,7 +2357,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1859,7 +2380,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1878,7 +2403,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1897,7 +2426,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1916,7 +2449,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1935,7 +2472,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1954,7 +2495,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1972,7 +2517,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -1991,7 +2541,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2004,7 +2558,17 @@
       "status": "active",
       "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, says \"grill me\" or \"grill-me\" (the former /grill-me command is now /grilling), or uses any other 'grill' trigger phrase -- including German ones such as \"grill mich\", \"grill mich zu diesem Plan\" or \"zerpflück meinen Plan im Grill-Modus\". Also use when a planning session ends and the user asks whether anything is still open.",
       "languages": [
-        "en"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2017,7 +2581,17 @@
       "status": "active",
       "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
       "languages": [
-        "en"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2036,7 +2610,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2055,7 +2633,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2064,7 +2646,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
-      "version": "1.2.2",
+      "version": "1.5.1",
       "status": "active",
       "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
       "languages": [
@@ -2073,7 +2655,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2092,7 +2679,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2110,7 +2701,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2129,7 +2725,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2148,7 +2748,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2162,7 +2766,16 @@
       "description": "Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden, prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten. Zeigt, wie die Teilsysteme nach der Umsetzung konkret ineinandergreifen, statt den Nutzer durch Dutzende isolierte Einzelfragen zu zwingen. Der Nutzer nimmt das Bild als Ganzes ab oder gibt zielgerichtete Korrekturen, die automatisch in Einzelentscheidungen übersetzt und über decision-briefing Phase 4 ins Register zurückgeschrieben werden. Nutze diesen Skill bei \"wie sieht das Ganze aus wenn wir allem zustimmen\", \"zeichne mir das Gesamtbild\", \"Gesamtkonzept der Entscheidungen\", \"decision draw\", /decision-draw, \"wie greifen die Systeme zusammen\". NICHT nutzen, wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht decide.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2176,7 +2789,16 @@
       "description": "Erzeugt aus einem Bestand offener und gefallener Entscheidungen einen strukturierten ASCII-Abhängigkeitsgraphen (maximal 100 Spalten) für das Terminal. Bewertet Knoten nach fünf festen Kriterien: sinnvoll, empfohlen, usertypisch (Richtung und decision-avatar-Konfidenz getrennt), zusammenpassend und widersprechend; Kanten tragen Beziehungstyp und Belegstatus. Deckt Blocker, Freischaltungen, Reihenfolgen und widersprüchliche Empfehlungen gnadenlos auf. Nutze diesen Skill bei \"welche Entscheidungen hängen voneinander ab\", \"Abhängigkeitsgraph der Entscheidungen\", \"Entscheidungspfad visualisieren\", \"Widersprüche zwischen Entscheidungen prüfen\", \"Reihenfolge der Beschlüsse\", /decision-path. NICHT nutzen, um Entscheidungen erst zu inventarisieren -- das macht decision-briefing; NICHT nutzen, um das empfohlene Gesamtkonzept zur Abnahme zu bündeln -- das macht decision-draw; NICHT für kompakte Fünfteiler- Einzelblöcke mit Optionen und Pro/Contra -- das macht decision-shot; NICHT für die Einzelfall-Erwägung mit Frameworks -- das macht decide.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2190,7 +2812,16 @@
       "description": "Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze diesen Skill bei \"gib mir das kurz mit Pro Contra und Empfehlung\", \"executive summary zur Entscheidung\", \"kurzkontext zu <Thema>\", \"fass die Entscheidung X in einer Kurzform zusammen\", /decision-shot, oder wenn ein Ergebnis an jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen, um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2209,7 +2840,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2228,7 +2863,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2242,7 +2881,16 @@
       "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2261,7 +2909,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2275,7 +2927,16 @@
       "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen. Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen. Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation, für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2294,7 +2955,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2307,7 +2972,17 @@
       "status": "active",
       "description": "Große Kandidatenlisten durch optionale Themen-Pfützen, Filterstufen und wiederholt neu gemischte Bündel schrittweise reduzieren. Nutzen, wenn der User Skills, Aufgaben, Ideen, Dateien oder andere Einträge gruppenweise auswählen, nach Merkmalen filtern oder nur innerhalb gemeinsamer Themenbereiche mischen will, ohne übrige Einträge endgültig zu verwerfen.",
       "languages": [
-        "de"
+        "de",
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2326,7 +3001,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2344,7 +3023,12 @@
         "es",
         "zh",
         "ja",
-        "ru"
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2363,7 +3047,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2372,12 +3060,21 @@
       "type": "tool",
       "category": "utilities",
       "path": "skills/utilities/music-composer/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "stable",
-      "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst.",
+      "description": "Komponiert video-synchronisierte Hintergrundmusik per lokaler Synthese (numpy + scipy, ffmpeg optional). Empfohlen: der Partitur-Modus (handgeschriebene Partitur auf der Sprachzeitachse, feste Pegelstufen ohne Ducking, Neuheitsbeleg gegen Vorgängerstücke). Daneben der schnelle Storyline-Modus als Skizze (Chiptune, Ambient, Electronic). Deterministisch, offline, keine Samples, kein Cloud-Dienst.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2396,7 +3093,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2410,7 +3111,16 @@
       "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2429,7 +3139,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2443,7 +3157,16 @@
       "description": "Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus, physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru",
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2462,7 +3185,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2481,7 +3208,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2500,7 +3231,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2519,7 +3254,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     },
     {
@@ -2538,7 +3277,11 @@
         "zh",
         "ja",
         "ru",
-        "fr"
+        "fr",
+        "hi",
+        "ar",
+        "bn",
+        "pt"
       ]
     }
   ]
