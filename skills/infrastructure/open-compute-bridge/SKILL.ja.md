@@ -155,7 +155,7 @@ OC_SAFETY_MODE = "allow_all"
 
 ## レシピ: ブラウザでのTailscale再認証
 
-このスキルが最も頻繁に使われるきっかけは、Tailscaleデバイス（例: Mac Studio、`100.119.69.90`）へのSSH/同期ステップが、Tailscaleの再ログインを要求されて失敗する場合です。
+このスキルが最も頻繁に使われるきっかけは、Tailscaleデバイス（例: Mac Studio、`<TAILSCALE_IP>`）へのSSH/同期ステップが、Tailscaleの再ログインを要求されて失敗する場合です。
 
 1. **検出:** `tailscale status`がIPの代わりに`Logged out.` / `NeedsLogin`を表示する場合、またはTailscale IPへのSSH接続がハングする・失敗し、他のネットワークエラーがない場合。
 2. **まず簡単な方法:** `tailscale up`（PowerShell/Bash）を実行させます。ログインURLが直接表示されたら、`Start-Process <url>`で標準ブラウザで開きます。リンクを1つ開くだけならGUIエージェントは不要です。

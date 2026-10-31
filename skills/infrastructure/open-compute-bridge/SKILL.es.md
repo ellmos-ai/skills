@@ -233,7 +233,7 @@ shell (companion-for-agy o una llamada directa a `agy.exe -p "..."` con permisos
 ## Receta: reautenticación de Tailscale en el navegador
 
 El desencadenante más frecuente de esta skill: un paso SSH/sincronización hacia un dispositivo Tailscale
-(p. ej., Mac Studio, `100.119.69.90`) falla porque Tailscale exige volver a iniciar sesión.
+(p. ej., Mac Studio, `<TAILSCALE_IP>`) falla porque Tailscale exige volver a iniciar sesión.
 
 1. **Detectar:** `tailscale status` muestra `Logged out.` / `NeedsLogin` en lugar de una IP, o un intento SSH a la IP de Tailscale
    se queda colgado o falla sin otro error de red.

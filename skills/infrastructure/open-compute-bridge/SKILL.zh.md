@@ -160,7 +160,7 @@ agy 配置不属于本 skill 的任务范围):** 按照该文件中现有的
 
 ## 方案:在浏览器中重新进行 Tailscale 认证
 
-使用本 skill 最常见的触发原因:对某台 Tailscale 设备(例如 Mac Studio、`100.119.69.90`)执行的 SSH/同步步骤失败,因为 Tailscale 要求重新登录。
+使用本 skill 最常见的触发原因:对某台 Tailscale 设备(例如 Mac Studio、`<TAILSCALE_IP>`)执行的 SSH/同步步骤失败,因为 Tailscale 要求重新登录。
 
 1. **识别:** `tailscale status` 显示 `Logged out.` / `NeedsLogin` 而不是 IP,或者
    对 Tailscale IP 的 SSH 尝试卡住/失败,且没有其他网络错误。
