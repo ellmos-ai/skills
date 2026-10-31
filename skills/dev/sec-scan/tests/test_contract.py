@@ -149,6 +149,64 @@ def test_cli_exit_codes(tmp_path):
     c.write_text(json.dumps(cov(scanId="x")), encoding="utf-8")
     assert run_cli("validate", str(d), str(c)).returncode == 1
     assert run_cli("validate").returncode == 2
+    c.write_text(json.dumps(cov()), encoding="utf-8")
     out = tmp_path / "o.sarif"
-    assert run_cli("sarif", str(d), "-o", str(out)).returncode == 0
+    assert run_cli("sarif", str(d), str(c), "-o", str(out)).returncode == 0
     assert json.loads(out.read_text(encoding="utf-8"))["version"] == "2.1.0"
+
+
+def test_cli_sarif_refuses_invalid_input_and_bad_files(tmp_path):
+    d, c = tmp_path / "f.json", tmp_path / "c.json"
+    d.write_text(json.dumps(doc(finding())), encoding="utf-8")
+    c.write_text(json.dumps(cov()), encoding="utf-8")
+    out = tmp_path / "o.sarif"
+    # coverage passed as the findings file must not yield an empty-but-valid SARIF
+    assert run_cli("sarif", str(c), str(c), "-o", str(out)).returncode == 1
+    assert not out.exists()
+    # missing and malformed files are error lines, not tracebacks
+    missing = run_cli("validate", str(tmp_path / "nope.json"), str(c))
+    assert missing.returncode == 1 and "Traceback" not in missing.stderr
+    d.write_text("{not json", encoding="utf-8")
+    broken = run_cli("validate", str(d), str(c))
+    assert broken.returncode == 1 and "Traceback" not in broken.stderr
+
+
+def test_wrong_types_are_errors_not_crashes():
+    broken = [
+        ["not a dict"],
+        42,
+    ]
+    for case in broken:
+        assert seclib.validate_findings(case, cov())[0]
+    bad_docs = [
+        doc("string finding"),
+        doc(finding(location="app/db.py")),
+        doc(finding(validatedBy="codex")),
+        doc(finding(status="fixed", fix="p.diff", validatedBy={"provider": "x", "model": "m", "verdict": "confirmed"})),
+        doc(finding(evidence=["a", "b"])),
+        doc(finding(cwe="CWE-89")),
+        doc(finding(id=["x"])),
+    ]
+    for d in bad_docs:
+        errs, _ = seclib.validate_findings(d, cov())
+        assert errs, d
+    assert seclib.validate_findings(doc(finding()), "not a dict")[0]
+    assert seclib.validate_findings(doc(finding()), cov(scanned=["x"], notScanned=["y"], complete=False))[0]
+
+
+def test_validated_by_needs_provider_and_model():
+    vb = {"verdict": "confirmed"}
+    errs, _ = seclib.validate_findings(doc(finding(status="validated", validatedBy=vb)), cov())
+    assert any("validatedBy: missing 'provider'" in e for e in errs)
+    assert any("validatedBy: missing 'model'" in e for e in errs)
+
+
+def test_secret_in_any_rendered_field_is_rejected():
+    secret = "AKIA" + "ABCDEFGHIJKLMNOP"
+    for key in ("title", "description", "impact", "recommendation"):
+        errs, _ = seclib.validate_findings(doc(finding(**{key: f"key {secret}"})), cov())
+        assert any(key in e and "secret" in e for e in errs), key
+    rejected = finding(status="rejected", rejectedReason=f"was {secret}")
+    assert any("rejectedReason" in e for e in seclib.validate_findings(doc(rejected), cov())[0])
+    errs, _ = seclib.validate_findings(doc(finding()), cov(limits=[f"seen {secret}"]))
+    assert any("limits" in e for e in errs)

@@ -55,7 +55,7 @@ Ein vorhandener Anbieter-Scanner kann den Scan-Teil übernehmen (Vertrag 7): **C
 1. Scanner nach Preflight (Schritt 2) laufen lassen; seine Ausgabedateien lesen und feldweise auf `findings.json` / `coverage.json` abbilden. Die Dateien und Felder des Scanners werden hier nicht vorweggenommen; das Mapping entsteht beim Lesen der tatsächlichen Ausgabe und wird in `coverage.limits` vermerkt.
 2. **Alle Funde starten als `candidate`**, auch wenn der Scanner sie als bestätigt führt. Ein Adapter überspringt die Validierung nie.
 3. `provider.name` / `provider.model` nach dem Scan, `provider.engine` = Name des Scanners.
-4. Coverage aus dem Scan-Bericht übernehmen. Gibt er keine Abdeckung her, `complete: false` und unter `notScanned` bzw. `limits` angeben, dass die Abdeckung des Scanners nicht bekannt ist.
+4. Coverage aus dem Scan-Bericht übernehmen. Gibt er keine Abdeckung her, `complete: false` und unter `notScanned` einen Eintrag "Abdeckung des Scanners unbekannt" anlegen (ohne `notScanned`-Eintrag ist `complete: false` laut Validator ungültig; `limits` allein genügt nicht).
 5. `id`s per `secfind.py id` neu bilden, damit Funde mit denen anderer Läufe zusammenfallen. Danach Schritt 8.
 
 ## Grenzen

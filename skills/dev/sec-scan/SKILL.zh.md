@@ -55,7 +55,7 @@ ellmos 安全技能家族的核心。共享契约（阶段、文件、生命周�
 1. 预检（步骤 2）之后运行扫描器；读取其输出文件，并逐字段映射到 `findings.json` / `coverage.json`。此处不预设扫描器的文件与字段；映射在阅读实际输出时建立，并记录在 `coverage.limits` 中。
 2. **所有发现都以 `candidate` 开始**，即使扫描器将其报告为已确认。适配器绝不跳过验证。
 3. 扫描后设置 `provider.name` / `provider.model`，`provider.engine` = 扫描器名称。
-4. 覆盖范围取自扫描报告。若报告未提供，则设 `complete: false`，并在 `notScanned` 或 `limits` 中说明扫描器的覆盖范围未知。
+4. 覆盖范围取自扫描报告。若报告未提供，则设 `complete: false`，并在 `notScanned` 中添加一条「扫描器覆盖范围未知」（校验器会拒绝 `notScanned` 为空的 `complete: false`；仅有 `limits` 不够）。
 5. 通过 `secfind.py id` 重建 `id`，使发现与其他运行的结果一致。然后执行步骤 8。
 
 ## 限制

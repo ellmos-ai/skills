@@ -48,8 +48,29 @@ def _req(obj: dict, keys, where: str, errs: list) -> None:
             errs.append(f"{where}: missing '{k}'")
 
 
+def _dict(value, where: str, errs: list) -> dict:
+    """Wrong types become validation errors, never crashes (a crash is not a verdict)."""
+    if isinstance(value, dict):
+        return value
+    errs.append(f"{where}: must be an object")
+    return {}
+
+
+def _text(value, where: str, errs: list) -> None:
+    """Free text that ends up in reports and tickets: must be a string and carry no secret value."""
+    if not isinstance(value, str):
+        errs.append(f"{where}: must be a string")
+        return
+    for rx in SECRET_RES:
+        if rx.search(value):
+            errs.append(f"{where}: appears to contain a secret value - quote the code without the value")
+            return
+
+
 def validate_coverage(cov: dict) -> tuple[list, list]:
     errs, warns = [], []
+    if not isinstance(cov, dict):
+        return ["coverage: must be an object"], warns
     if cov.get("documentType") != "ellmos.sec.coverage":
         errs.append("coverage: documentType must be 'ellmos.sec.coverage'")
     if cov.get("schemaVersion") != 1:
@@ -62,19 +83,31 @@ def validate_coverage(cov: dict) -> tuple[list, list]:
         errs.append("coverage: 'complete' must be a boolean")
     elif isinstance(cov.get("notScanned"), list) and cov["complete"] != (not cov["notScanned"]):
         errs.append("coverage: 'complete' must be true exactly when notScanned is empty")
-    for i, s in enumerate(cov.get("scanned") or []):
+    scanned = cov.get("scanned") if isinstance(cov.get("scanned"), list) else []
+    for i, s in enumerate(scanned):
+        s = _dict(s, f"coverage.scanned[{i}]", errs)
         _req(s, ("path", "depth"), f"coverage.scanned[{i}]", errs)
         if s.get("depth") not in DEPTHS:
             errs.append(f"coverage.scanned[{i}]: depth must be one of {DEPTHS}")
-    for i, s in enumerate(cov.get("notScanned") or []):
+    not_scanned = cov.get("notScanned") if isinstance(cov.get("notScanned"), list) else []
+    for i, s in enumerate(not_scanned):
+        s = _dict(s, f"coverage.notScanned[{i}]", errs)
         _req(s, ("path", "reason"), f"coverage.notScanned[{i}]", errs)
+        if "reason" in s:
+            _text(s["reason"], f"coverage.notScanned[{i}].reason", errs)
+    limits = cov.get("limits", [])
+    if not isinstance(limits, list):
+        errs.append("coverage: 'limits' must be a list")
+    else:
+        for i, s in enumerate(limits):
+            _text(s, f"coverage.limits[{i}]", errs)
     return errs, warns
 
 
-def _check_finding(f: dict, i: int, provider: str | None, errs: list, warns: list) -> None:
+def _check_finding(f: dict, i: int, provider, errs: list, warns: list) -> None:
     w = f"findings[{i}]"
     _req(f, ("id", "rule", "title", "severity", "confidence", "status", "location", "evidence"), w, errs)
-    if f.get("id") and not ID_RE.match(f["id"]):
+    if "id" in f and not (isinstance(f["id"], str) and ID_RE.match(f["id"])):
         errs.append(f"{w}: id must match SEC-<12 hex>")
     if f.get("severity") and f["severity"] not in SEVERITIES:
         errs.append(f"{w}: severity must be one of {SEVERITIES}")
@@ -85,32 +118,38 @@ def _check_finding(f: dict, i: int, provider: str | None, errs: list, warns: lis
         errs.append(f"{w}: status must be one of {STATUSES}")
     if f.get("priority") is not None and not PRIORITY_RE.match(str(f["priority"])):
         errs.append(f"{w}: priority must be P0..P4")
-    for c in f.get("cwe") or []:
+    cwes = f.get("cwe", [])
+    if not isinstance(cwes, list):
+        errs.append(f"{w}: cwe must be a list")
+        cwes = []
+    for c in cwes:
         if not CWE_RE.match(str(c)):
             errs.append(f"{w}: bad CWE '{c}'")
-    loc = f.get("location") or {}
+    loc = _dict(f["location"], f"{w}.location", errs) if "location" in f else {}
     _req(loc, ("path", "startLine"), f"{w}.location", errs)
     start, end = loc.get("startLine"), loc.get("endLine")
-    if start is not None and (not isinstance(start, int) or start < 1):
+    if start is not None and (not isinstance(start, int) or isinstance(start, bool) or start < 1):
         errs.append(f"{w}.location: startLine must be an integer >= 1")
     elif end is not None and isinstance(start, int) and (not isinstance(end, int) or end < start):
         errs.append(f"{w}.location: endLine must be an integer >= startLine")
-    for rx in SECRET_RES:
-        if rx.search(str(f.get("evidence", ""))):
-            errs.append(f"{w}: evidence appears to contain a secret value - quote the code without the value")
-            break
+    # everything that is rendered into reports, tickets or advisories is checked for secret values
+    for key in ("title", "evidence", "description", "impact", "recommendation", "rejectedReason"):
+        if key in f:
+            _text(f[key], f"{w}.{key}", errs)
     vb = f.get("validatedBy")
-    if status in NEEDS_CONFIRMED:
-        if not vb or vb.get("verdict") != "confirmed":
-            errs.append(f"{w}: status '{status}' requires validatedBy.verdict == 'confirmed'")
-    if vb:
-        if vb.get("verdict") not in VERDICTS:
+    if vb is not None:
+        vb = _dict(vb, f"{w}.validatedBy", errs)
+        _req(vb, ("provider", "model", "verdict"), f"{w}.validatedBy", errs)
+        if vb.get("verdict") is not None and vb["verdict"] not in VERDICTS:
             errs.append(f"{w}: validatedBy.verdict must be one of {VERDICTS}")
-        if vb.get("provider") and provider and _family(vb["provider"]) == _family(provider):
+        if (isinstance(vb.get("provider"), str) and isinstance(provider, str)
+                and _family(vb["provider"]) == _family(provider)):
             warns.append(f"{w}: validated by the same provider ('{provider}') that found it")
+    if status in NEEDS_CONFIRMED and (not vb or vb.get("verdict") != "confirmed"):
+        errs.append(f"{w}: status '{status}' requires validatedBy.verdict == 'confirmed'")
     if status == "rejected" and not f.get("rejectedReason"):
         errs.append(f"{w}: status 'rejected' requires rejectedReason")
-    fix = f.get("fix") or {}
+    fix = _dict(f["fix"], f"{w}.fix", errs) if "fix" in f else {}
     if status in ("fixed", "verified") and not fix.get("patchFile"):
         errs.append(f"{w}: status '{status}' requires fix.patchFile")
     if status == "verified" and not fix.get("verifiedBy"):
@@ -121,13 +160,15 @@ def validate_findings(doc: dict, cov: dict | None) -> tuple[list, list]:
     """Return (errors, warnings). An empty findings list without coverage is an error:
     'nothing found' is only a statement when we know what was looked at."""
     errs, warns = [], []
+    if not isinstance(doc, dict):
+        return ["document must be an object"], warns
     if doc.get("documentType") != "ellmos.sec.findings":
         errs.append("documentType must be 'ellmos.sec.findings'")
     if doc.get("schemaVersion") != 1:
         errs.append("schemaVersion must be 1")
     _req(doc, ("scanId",), "doc", errs)
-    _req(doc.get("target") or {}, ("repo", "ref"), "target", errs)
-    prov = doc.get("provider") or {}
+    _req(_dict(doc.get("target"), "target", errs), ("repo", "ref"), "target", errs)
+    prov = _dict(doc.get("provider"), "provider", errs)
     _req(prov, ("name", "model"), "provider", errs)
     items = doc.get("findings")
     if not isinstance(items, list):
@@ -135,20 +176,26 @@ def validate_findings(doc: dict, cov: dict | None) -> tuple[list, list]:
         items = []
     seen = set()
     for i, f in enumerate(items):
+        if not isinstance(f, dict):
+            errs.append(f"findings[{i}]: must be an object")
+            continue
         _check_finding(f, i, prov.get("name"), errs, warns)
-        if f.get("id") in seen:
-            errs.append(f"findings[{i}]: duplicate id {f.get('id')}")
-        seen.add(f.get("id"))
+        fid = f.get("id")
+        if isinstance(fid, str):
+            if fid in seen:
+                errs.append(f"findings[{i}]: duplicate id {fid}")
+            seen.add(fid)
     if cov is None:
         errs.append("coverage document missing - a result without coverage is not a result")
     else:
         cerrs, cwarns = validate_coverage(cov)
         errs += cerrs
         warns += cwarns
-        if cov.get("scanId") != doc.get("scanId"):
-            errs.append("scanId differs between findings and coverage")
-        if not items and cov.get("complete") is not True:
-            warns.append("no findings, but coverage is incomplete - this is not a clean result")
+        if isinstance(cov, dict):
+            if cov.get("scanId") != doc.get("scanId"):
+                errs.append("scanId differs between findings and coverage")
+            if not items and cov.get("complete") is not True:
+                warns.append("no findings, but coverage is incomplete - this is not a clean result")
     return errs, warns
 
 

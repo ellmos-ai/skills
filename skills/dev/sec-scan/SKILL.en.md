@@ -57,7 +57,7 @@ An existing provider scanner can take over the scanning part (contract 7): **Cla
 1. Run the scanner after preflight (step 2); read its output files and map them field by field onto `findings.json` / `coverage.json`. The scanner's files and fields are not presupposed here; the mapping is built while reading the actual output and noted in `coverage.limits`.
 2. **All findings start as `candidate`**, even if the scanner reports them as confirmed. An adapter never skips validation.
 3. `provider.name` / `provider.model` after the scan, `provider.engine` = scanner name.
-4. Take coverage from the scan report. If it yields none, set `complete: false` and state under `notScanned` or `limits` that the scanner's coverage is unknown.
+4. Take coverage from the scan report. If it yields none, set `complete: false` and add a `notScanned` entry "scanner coverage unknown" (the validator rejects `complete: false` without a `notScanned` entry; `limits` alone is not enough).
 5. Rebuild `id`s via `secfind.py id` so findings coincide with those of other runs. Then step 8.
 
 ## Limits

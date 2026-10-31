@@ -55,7 +55,7 @@ Un escáner de proveedor existente puede encargarse de la parte de escaneo (cont
 1. Ejecutar el escáner tras el preflight (paso 2); leer sus archivos de salida y mapearlos campo a campo a `findings.json` / `coverage.json`. Aquí no se presuponen los archivos ni los campos del escáner; el mapeo se construye al leer la salida real y se anota en `coverage.limits`.
 2. **Todos los hallazgos empiezan como `candidate`**, incluso si el escáner los informa como confirmados. Un adaptador nunca omite la validación.
 3. `provider.name` / `provider.model` tras el escaneo, `provider.engine` = nombre del escáner.
-4. Tomar la cobertura del informe del escaneo. Si no la ofrece, poner `complete: false` e indicar en `notScanned` o `limits` que se desconoce la cobertura del escáner.
+4. Tomar la cobertura del informe del escaneo. Si no la ofrece, poner `complete: false` y añadir en `notScanned` una entrada «cobertura del escáner desconocida» (el validador rechaza `complete: false` sin entrada en `notScanned`; `limits` por sí solo no basta).
 5. Reconstruir los `id` con `secfind.py id` para que los hallazgos coincidan con los de otras ejecuciones. Luego el paso 8.
 
 ## Límites
