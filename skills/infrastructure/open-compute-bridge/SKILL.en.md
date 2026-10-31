@@ -288,7 +288,7 @@ fallback above).
 ## Recipe: Tailscale reauth in the browser
 
 The most common trigger for this skill: an SSH/sync step onto a Tailscale
-device (e.g. Mac Studio, `100.119.69.90`) fails because Tailscale demands
+device (e.g. a home server, `<TAILSCALE_IP>`) fails because Tailscale demands
 a fresh login.
 
 1. **Detect it:** `tailscale status` shows `Logged out.` / `NeedsLogin`
