@@ -80,6 +80,13 @@ def test_same_provider_validation_warns():
     assert errs == [] and any("same provider" in w for w in warns)
 
 
+def test_same_family_subagent_still_warns():
+    # a descriptive provider string must not switch the independence check off
+    vb = {"provider": "claude-subagent-independent", "model": "opus", "verdict": "confirmed"}
+    errs, warns = seclib.validate_findings(doc(finding(status="validated", validatedBy=vb)), cov())
+    assert errs == [] and any("same provider" in w for w in warns)
+
+
 def test_other_provider_validation_is_silent():
     vb = {"provider": "codex", "model": "m", "verdict": "confirmed"}
     errs, warns = seclib.validate_findings(doc(finding(status="validated", validatedBy=vb)), cov())

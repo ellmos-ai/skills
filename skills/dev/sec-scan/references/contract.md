@@ -36,17 +36,19 @@ Imports without an own scan (`sec-triage` from Code Scanning, Dependabot, ticket
 
 | Level | Meaning |
 |---|---|
-| critical | remotely exploitable without credentials, or direct compromise of secrets/data at scale |
-| high | exploitable by an authenticated or adjacent attacker with serious impact |
+| critical | remotely exploitable without credentials **and** leads to code execution, broad data read/write or disclosure of secrets; or direct compromise of secrets/data at scale |
+| high | exploitable by an authenticated or adjacent attacker with serious impact; or exploitable without credentials but limited to integrity/availability of individual records (e.g. an unauthenticated delete) |
 | medium | exploitable under specific conditions or limited impact |
 | low | hardening gap, small impact |
 | info | observation, no exploit path |
+
+Severity is reachability times impact: state both in `description` when you deviate from the table. A `rejected` finding keeps its original severity (SARIF marks it suppressed). The provider family is the part of `validatedBy.provider` before the first `-` (`claude-subagent-independent` is family `claude`), so a descriptive provider string never switches the same-provider warning off.
 
 Confidence (`high|medium|low`) says how sure the finder is that the path is real; it is not severity.
 
 ## 4. Finding id and rules
 
-- `id = make_id(rule, path, snippet)` (`scripts/seclib.py`): stable across line shifts and whitespace.
+- `id = make_id(rule, path, snippet)` (`scripts/seclib.py`): stable across line shifts and whitespace. **Snippet convention** (so independent scanners get the same id): the single source line of the dangerous call or assignment, exactly as in the file; for a secret, that line with the value replaced by `<masked>`.
 - `rule` is a dotted lowercase name (`py.sql-injection`, `js.path-traversal`, `any.hardcoded-secret`); add `cwe` where one applies.
 - `evidence` quotes the code or trace that proves the path. **Never put a secret value in evidence** - quote the line with the value masked. The validator rejects common key patterns.
 

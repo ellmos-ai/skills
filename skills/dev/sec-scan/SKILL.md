@@ -30,10 +30,10 @@ Kern der ellmos-Security-Familie. Der gemeinsame Vertrag (Phasen, Dateien, Leben
 
 ## Ablauf
 
-1. **Ziel und Scope:** Repo, Ref (Commit-SHA oder `working-tree`), ausgeschlossene Pfade. `scanId` vergeben, Scan-Verzeichnis anlegen (Vertrag 1).
+1. **Ziel und Scope:** Repo, Ref (Commit-SHA oder `working-tree`), ausgeschlossene Pfade. `scanId` vergeben. Das Scan-Verzeichnis heißt `sec-scan-<scanId>/` (Vertrag 1), liegt unter einem Basisordner **außerhalb des Repos** und wird erst nach dem Preflight angelegt.
 2. **Preflight:**
    - Eigener oder autorisierter Code? Sonst Abbruch (Vertrag 6.1).
-   - Lock-Prüfung für Repo und Scan-Verzeichnis: `python <lock_scan.py> --check-dir '<Pfad>' --json`, Exitcode sofort sichern. 0 = frei, 1 = gesperrt, alles andere (auch fehlendes Skript) = unbekannt = stopp (Vertrag 6.2). Interpreter ausdrücklich aufrufen, nie das Skript "öffnen".
+   - Lock-Prüfung für das Repo und den Basisordner des Scan-Verzeichnisses: `python <lock_scan.py> --check-dir '<Pfad>' --json`, Exitcode sofort sichern. 0 = frei, 1 = gesperrt, alles andere (auch fehlendes Skript) = unbekannt = stopp (Vertrag 6.2). Interpreter ausdrücklich aufrufen, nie das Skript "öffnen".
    - **Egress ansagen:** geht Code an einen Anbieter (gehostete Review-Schicht, Fremdmodell)? Private Repos nur in der lokalen Sitzung (Vertrag 6.6). **Kosten ansagen**, bei `deep` Bestätigung abwarten (6.5).
 3. **Bedrohungsmodell:** `threatmodel.md` vorhanden und aktuell? Sonst `sec-threat-model` ausführen.
 4. **Pakete bilden:** das Repo nach Vertrauensgrenzen und Einstiegspunkten aus dem Modell teilen, je Paket Dateien und Untersuchungsfragen. Sehr große Pakete teilen, statt oberflächlich zu lesen.

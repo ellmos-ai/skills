@@ -32,10 +32,10 @@ Core of the ellmos security family. The shared contract (phases, files, lifecycl
 
 ## Procedure
 
-1. **Target and scope:** repo, ref (commit SHA or `working-tree`), excluded paths. Assign a `scanId`, create the scan directory (contract 1).
+1. **Target and scope:** repo, ref (commit SHA or `working-tree`), excluded paths. Assign a `scanId`. The scan directory is named `sec-scan-<scanId>/` (contract 1), sits under a base folder **outside the repo** and is created only after the preflight.
 2. **Preflight:**
    - Own or authorised code? Otherwise abort (contract 6.1).
-   - Lock check for the repo and the scan directory: `python <lock_scan.py> --check-dir '<path>' --json`, capture the exit code immediately. 0 = free, 1 = locked, anything else (including a missing script) = unknown = stop (contract 6.2). Call the interpreter explicitly, never "open" the script.
+   - Lock check for the repo and the base folder of the scan directory: `python <lock_scan.py> --check-dir '<path>' --json`, capture the exit code immediately. 0 = free, 1 = locked, anything else (including a missing script) = unknown = stop (contract 6.2). Call the interpreter explicitly, never "open" the script.
    - **State egress:** does code go to a provider (hosted review layer, third-party model)? Private repos stay in the local session (contract 6.6). **State cost**, and for `deep` wait for confirmation (6.5).
 3. **Threat model:** is `threatmodel.md` present and current? If not, run `sec-threat-model`.
 4. **Form packages:** split the repo by trust boundaries and entry points from the model; per package, files and investigation questions. Split very large packages instead of reading them superficially.

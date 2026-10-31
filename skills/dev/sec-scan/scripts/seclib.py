@@ -37,6 +37,11 @@ def make_id(rule: str, path: str, snippet: str) -> str:
     return "SEC-" + digest[:12]
 
 
+def _family(provider: str) -> str:
+    """'claude-subagent-independent' and 'claude' are the same provider family."""
+    return provider.lower().split("-")[0]
+
+
 def _req(obj: dict, keys, where: str, errs: list) -> None:
     for k in keys:
         if k not in obj or obj[k] in (None, ""):
@@ -101,7 +106,7 @@ def _check_finding(f: dict, i: int, provider: str | None, errs: list, warns: lis
     if vb:
         if vb.get("verdict") not in VERDICTS:
             errs.append(f"{w}: validatedBy.verdict must be one of {VERDICTS}")
-        if vb.get("provider") and vb["provider"] == provider:
+        if vb.get("provider") and provider and _family(vb["provider"]) == _family(provider):
             warns.append(f"{w}: validated by the same provider ('{provider}') that found it")
     if status == "rejected" and not f.get("rejectedReason"):
         errs.append(f"{w}: status 'rejected' requires rejectedReason")
