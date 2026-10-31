@@ -89,3 +89,9 @@ def test_missing_coverage_content_writes_no_report(tmp_path):
 def test_usage_error(tmp_path):
     r = subprocess.run([sys.executable, str(CLI)], capture_output=True, text=True)
     assert r.returncode == 2
+
+
+def test_lang_equals_form_is_honoured(tmp_path):
+    r, out = run(tmp_path, doc(), cov(), "--lang=en")
+    assert r.returncode == 0
+    assert "No findings with complete coverage." in (out / "report.md").read_text(encoding="utf-8")

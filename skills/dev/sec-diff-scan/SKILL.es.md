@@ -42,7 +42,7 @@ Una de estas fuentes, siempre con el punto de comparación exacto:
    - ¿Se eliminó, debilitó o eludió una comprobación (decorador de autenticación, validación, escaping, comprobación de permisos)?
    - Regresión de patrones conocidos: la misma clase de error que en hallazgos anteriores o en otra parte del repo (valores de `rule` de un `findings.json` existente, si lo hay).
    - ¿Nueva dependencia o versión cambiada en el manifiesto/lockfile; secretos o tokens en el cambio; más aperturas de configuración (CORS, debug, permisos)?
-4. **Informar un hallazgo solo si la ruta alcanza realmente el punto modificado o afectado.** Fallos preexistentes en el contexto sin relación con el cambio: registrar como `info` con una nota en `description`, o nombrarlos en `coverage.limits`; no son objeto del diff.
+4. **Informar un hallazgo solo si la ruta alcanza realmente el punto modificado o afectado.** Fallos preexistentes en el contexto sin relación con el cambio: registrarlos con su severidad real según el contrato 3 e indicar en `description` «preexistente, no introducido por este cambio» (sin rebajarlos a `info`) o, si no se han verificado, nombrarlos solo en `coverage.limits`; no son objeto del diff.
 
 ## Cobertura
 

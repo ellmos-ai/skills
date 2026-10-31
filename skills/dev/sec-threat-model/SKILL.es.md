@@ -27,7 +27,7 @@ Fase 1 de la familia de seguridad ellmos (`sec-threat-model`, `sec-scan`, `sec-d
 
 - Solo código propio o expresamente autorizado (contrato 6.1). Sin acceso de red a sistemas de terceros, sin escaneos de puertos.
 - El modelo se construye a partir de **código fuente leído**, no de afirmaciones del README. Lo que solo se afirma allí o no puede respaldarse con evidencia entra como `open`, nunca como hecho.
-- Escribir solo en el directorio de escaneo (`<tmp>/ellmos-security/<repo>/<scanId>/`), nunca en el árbol de fuentes. Comprobar el bloqueo antes de escribir, como se describe en `sec-scan` > Preflight.
+- Escribir solo en el directorio de escaneo (`<tmp>/ellmos-security/<repo>/sec-scan-<scanId>/`), nunca en el árbol de fuentes. Comprobar el bloqueo antes de escribir, como se describe en `sec-scan` > Preflight.
 
 ## Procedimiento
 

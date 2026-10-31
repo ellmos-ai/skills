@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # Tech Detect
 
-Use this skill only on an owned or explicitly authorized host. Read the existing inventory and host-slot rules first. With a `.SYNC/_inventory` style setup, `systems/<own-slot>.json` is the input seed; database and spreadsheet exports are projections. This skill never refreshes another host's seed.
+Use this skill only on an owned or explicitly authorized host. Read the existing inventory and host-slot rules first. With a shared inventory folder, `systems/<own-slot>.json` is the input seed; database and spreadsheet exports are projections. This skill never refreshes another host's seed.
 
 Run the commands below from this skill directory, or resolve the script path first, with an **explicit Python interpreter**. Do not launch a `.py` file directly.
 

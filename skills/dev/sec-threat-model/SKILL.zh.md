@@ -27,7 +27,7 @@ ellmos 安全技能家族的第 1 阶段（`sec-threat-model`、`sec-scan`、`se
 
 - 仅限自有代码或明确获得授权的代码（契约 6.1）。不访问第三方系统的网络，不做端口扫描。
 - 模型建立在**已阅读的源代码**之上，而非 README 的说法。只有声称而无法证实的内容，一律作为 `open` 记入，绝不当作事实。
-- 只写入扫描目录（`<tmp>/ellmos-security/<repo>/<scanId>/`），绝不写入源码树。写入之前按 `sec-scan` > 预检 所述检查锁。
+- 只写入扫描目录（`<tmp>/ellmos-security/<repo>/sec-scan-<scanId>/`），绝不写入源码树。写入之前按 `sec-scan` > 预检 所述检查锁。
 
 ## 流程
 

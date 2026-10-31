@@ -29,7 +29,7 @@ Phase 1 of the ellmos security family (`sec-threat-model`, `sec-scan`, `sec-diff
 
 - Own or explicitly authorised code only (contract 6.1). No network access to third-party systems, no port scans.
 - The model is built from **source code that was read**, not from README claims. Whatever is only claimed there or cannot be evidenced goes in as `open`, never as fact.
-- Write only into the scan directory (`<tmp>/ellmos-security/<repo>/<scanId>/`), never into the source tree. Check the lock before writing as described in `sec-scan` > Preflight.
+- Write only into the scan directory (`<tmp>/ellmos-security/<repo>/sec-scan-<scanId>/`), never into the source tree. Check the lock before writing as described in `sec-scan` > Preflight.
 
 ## Procedure
 

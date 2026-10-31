@@ -126,12 +126,20 @@ def render(doc: dict, cov: dict, warns: list, lang: str = "de") -> str:
 
 
 def main(argv: list) -> int:
-    args = [a for a in argv[1:] if not a.startswith("--lang")]
+    rest = argv[1:]
     lang = "de"
-    if "--lang" in argv:
-        i = argv.index("--lang")
-        lang = argv[i + 1] if i + 1 < len(argv) else ""
-        args = [a for a in args if a != lang]
+    args = []
+    skip = False
+    for i, a in enumerate(rest):
+        if skip:
+            skip = False
+        elif a == "--lang":
+            lang = rest[i + 1] if i + 1 < len(rest) else ""
+            skip = True
+        elif a.startswith("--lang="):
+            lang = a.split("=", 1)[1]
+        else:
+            args.append(a)
     if len(args) != 3 or lang not in L:
         print(__doc__)
         return 2

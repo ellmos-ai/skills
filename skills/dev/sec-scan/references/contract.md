@@ -1,11 +1,11 @@
 # ellmos security contract (v1)
 
 Shared by every `sec-*` skill. Skills cite this file instead of repeating it.
-Clean-room: this contract was written from public skill names and open standards (SARIF 2.1.0, CWE); no vendor scan-tool text, schema or code was copied.
+Clean-room: this contract was written from public skill names and open standards (SARIF 2.1.0, CWE). Its structure follows common practice for scan results (document type, schema version, scan id, findings plus coverage); content, field set and wording are independent, and no vendor scan-tool text, schema or code was copied.
 
 ## 1. Scan directory
 
-One scan = one directory `sec-scan-<scanId>/` outside tracked source (default: `<tmp>/ellmos-security/<repo>/<scanId>/`).
+One scan = one directory `sec-scan-<scanId>/` outside tracked source (default location: `<tmp>/ellmos-security/<repo>/sec-scan-<scanId>/`).
 
 | File | Written by | Content |
 |---|---|---|
@@ -25,7 +25,7 @@ Validate after every write: `python scripts/secfind.py validate findings.json co
 |---|---|---|
 | candidate | scan | evidence, location |
 | validated | `sec-validate` | `validatedBy.verdict = confirmed`; validator should be a **different provider** than the finder (same provider only warns) |
-| triaged | `sec-triage` | severity and priority decided against the policy |
+| triaged | `sec-triage` | severity decided against the policy and `priority` (P0..P4) set; the validator requires both a confirmed validation and `priority` |
 | fixed | `sec-fix` | `fix.patchFile` |
 | verified | `sec-verify-fix` | `fix.verifiedBy` (a reviewer other than the fix author) |
 | rejected | validate / triage | `rejectedReason` |
@@ -48,7 +48,7 @@ Confidence (`high|medium|low`) says how sure the finder is that the path is real
 
 ## 4. Finding id and rules
 
-- `id = make_id(rule, path, snippet)` (`scripts/seclib.py`): stable across line shifts and whitespace. **Snippet convention** (so independent scanners get the same id): the single source line of the dangerous call or assignment, exactly as in the file; for a secret, that line with the value replaced by `<masked>`.
+- `id = make_id(rule, path, snippet)` (`scripts/seclib.py`): stable across line shifts and whitespace. **Snippet convention** (so independent scanners get the same id): the single source line of the dangerous call or assignment, exactly as in the file; for a secret, that line with the value replaced by `<masked>`. **Path convention:** `location.path` and the `PATH` given to `make_id` are repo-relative with `/` separators and without a leading `./` (`make_id` normalises backslashes and a leading `./`; the validator rejects absolute paths, drive letters and backslashes).
 - `rule` is a dotted lowercase name (`py.sql-injection`, `js.path-traversal`, `any.hardcoded-secret`); add `cwe` where one applies.
 - `evidence` quotes the code or trace that proves the path. **Never put a secret value in evidence** - quote the line with the value masked. The validator rejects common key patterns.
 

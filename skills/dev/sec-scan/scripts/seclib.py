@@ -33,6 +33,7 @@ SARIF_LEVEL = {"critical": "error", "high": "error", "medium": "warning", "low":
 def make_id(rule: str, path: str, snippet: str) -> str:
     """Stable id: independent of line numbers, so it survives unrelated edits."""
     norm = " ".join(snippet.split())
+    path = path.replace("\\", "/").removeprefix("./")
     digest = hashlib.sha256(f"{rule}\0{path}\0{norm}".encode("utf-8")).hexdigest()
     return "SEC-" + digest[:12]
 
@@ -127,6 +128,9 @@ def _check_finding(f: dict, i: int, provider, errs: list, warns: list) -> None:
             errs.append(f"{w}: bad CWE '{c}'")
     loc = _dict(f["location"], f"{w}.location", errs) if "location" in f else {}
     _req(loc, ("path", "startLine"), f"{w}.location", errs)
+    lp = loc.get("path")
+    if isinstance(lp, str) and ("\\" in lp or lp.startswith(("/", "./")) or re.match(r"^[A-Za-z]:", lp)):
+        errs.append(f"{w}.location: path must be repo-relative with '/' separators (no backslash, drive or leading ./)")
     start, end = loc.get("startLine"), loc.get("endLine")
     if start is not None and (not isinstance(start, int) or isinstance(start, bool) or start < 1):
         errs.append(f"{w}.location: startLine must be an integer >= 1")
@@ -147,6 +151,8 @@ def _check_finding(f: dict, i: int, provider, errs: list, warns: list) -> None:
             warns.append(f"{w}: validated by the same provider ('{provider}') that found it")
     if status in NEEDS_CONFIRMED and (not vb or vb.get("verdict") != "confirmed"):
         errs.append(f"{w}: status '{status}' requires validatedBy.verdict == 'confirmed'")
+    if status == "triaged" and not f.get("priority"):
+        errs.append(f"{w}: status 'triaged' requires priority (P0..P4)")
     if status == "rejected" and not f.get("rejectedReason"):
         errs.append(f"{w}: status 'rejected' requires rejectedReason")
     fix = _dict(f["fix"], f"{w}.fix", errs) if "fix" in f else {}

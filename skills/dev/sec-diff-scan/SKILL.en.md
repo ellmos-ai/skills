@@ -44,7 +44,7 @@ One of these sources, always with the exact comparison point:
    - Was a check removed, weakened or bypassed (auth decorator, validation, escaping, permission check)?
    - Regression of known patterns: the same bug class as in earlier findings or elsewhere in the repo (`rule` values from an existing `findings.json`, if available).
    - New dependency or changed version in manifest/lockfile; secrets or tokens in the change; further configuration opening (CORS, debug, permissions).
-4. **Report a finding only if the path really reaches the changed or touched spot.** Pre-existing flaws in the context that are unrelated to the change: record as `info` with a note in `description`, or name them in `coverage.limits`; they are not the subject of the diff.
+4. **Report a finding only if the path really reaches the changed or touched spot.** Pre-existing flaws in the context that are unrelated to the change: record them with their real severity per contract 3 and state "pre-existing, not introduced by this change" in `description` (do not downgrade to `info`), or, if not verified, name them only in `coverage.limits`; they are not the subject of the diff.
 
 ## Coverage
 

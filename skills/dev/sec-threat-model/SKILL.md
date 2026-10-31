@@ -27,7 +27,7 @@ Phase 1 der ellmos-Security-Familie (`sec-threat-model`, `sec-scan`, `sec-diff-s
 
 - Nur eigener oder ausdrücklich autorisierter Code (Vertrag 6.1). Kein Netzzugriff auf fremde Systeme, keine Port-Scans.
 - Das Modell entsteht aus **gelesenem Quelltext**, nicht aus README-Behauptungen. Was nur dort steht oder nicht belegbar ist, kommt als `offen` ins Modell, nie als Tatsache.
-- Schreiben nur in das Scan-Verzeichnis (`<tmp>/ellmos-security/<repo>/<scanId>/`), nicht in den Quelltext. Vor dem Schreiben Lock prüfen wie in `sec-scan` > Preflight.
+- Schreiben nur in das Scan-Verzeichnis (`<tmp>/ellmos-security/<repo>/sec-scan-<scanId>/`), nicht in den Quelltext. Vor dem Schreiben Lock prüfen wie in `sec-scan` > Preflight.
 
 ## Vorgehen
 

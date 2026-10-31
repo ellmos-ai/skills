@@ -55,7 +55,7 @@ Cross-cutting: `sec-policy` (SECURITY.md), `sec-hardening` (structural measures)
 - `security-tech-stack-check` + `tech-detect`: dependencies and CVEs against the measured tech stack.
 - `protection-shield`: acute defence and recurring log/stack checks on your own systems.
 - `repo-publish-check`: publication gate before making a repo public.
-- If present on your system: a private security signpost and a skill for personal accounts/data (not code). They are not part of this public family.
+- If present on your system: a security signpost of your own and a skill for personal accounts and data (not code). They are not part of this public family.
 
 ## Provider adapters (contract §7)
 

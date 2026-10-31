@@ -210,3 +210,22 @@ def test_secret_in_any_rendered_field_is_rejected():
     assert any("rejectedReason" in e for e in seclib.validate_findings(doc(rejected), cov())[0])
     errs, _ = seclib.validate_findings(doc(finding()), cov(limits=[f"seen {secret}"]))
     assert any("limits" in e for e in errs)
+
+
+def test_id_is_independent_of_path_spelling():
+    a = seclib.make_id("r", "app/db.py", "x")
+    assert a == seclib.make_id("r", "app\\db.py", "x") == seclib.make_id("r", "./app/db.py", "x")
+
+
+def test_absolute_and_backslash_paths_are_rejected():
+    for bad in ("C:\\repo\\app.py", "app\\db.py", "/etc/passwd", "./app/db.py", "D:/x.py"):
+        f = finding(location={"path": bad, "startLine": 1})
+        assert any("repo-relative" in e for e in seclib.validate_findings(doc(f), cov())[0]), bad
+
+
+def test_triaged_requires_priority():
+    vb = {"provider": "codex", "model": "m", "verdict": "confirmed"}
+    errs, _ = seclib.validate_findings(doc(finding(status="triaged", validatedBy=vb)), cov())
+    assert any("requires priority" in e for e in errs)
+    ok, _ = seclib.validate_findings(doc(finding(status="triaged", validatedBy=vb, priority="P2")), cov())
+    assert ok == []

@@ -42,7 +42,7 @@ Eine der Quellen, immer mit dem exakten Vergleichspunkt:
    - Wurde eine Prüfung entfernt, abgeschwächt oder umgangen (Auth-Decorator, Validierung, Escaping, Rechteprüfung)?
    - Regression bekannter Muster: derselbe Fehlertyp wie in früheren Funden oder im Rest des Repos (`rule` aus vorhandenen `findings.json`, falls vorliegend).
    - Neue Abhängigkeit oder geänderte Version in Manifest/Lockfile; Secrets oder Tokens in der Änderung; weitere Konfigurationsöffnung (CORS, Debug, Berechtigungen).
-4. **Befund nur, wenn der Pfad die geänderte oder berührte Stelle tatsächlich erreicht.** Vorbestehende Fehler im Kontext, die nicht mit der Änderung zusammenhängen, als `info` mit Hinweis in `description` aufnehmen oder in `coverage.limits` nennen; sie sind nicht der Gegenstand des Diffs.
+4. **Befund nur, wenn der Pfad die geänderte oder berührte Stelle tatsächlich erreicht.** Vorbestehende Fehler im Kontext, die nicht mit der Änderung zusammenhängen, mit ihrer tatsächlichen Severity nach Vertrag 3 aufnehmen und in `description` "vorbestehend, nicht durch diese Änderung eingeführt" vermerken (nicht auf `info` herabstufen) oder, wenn nicht geprüft, nur in `coverage.limits` nennen; sie sind nicht der Gegenstand des Diffs.
 
 ## Coverage
 

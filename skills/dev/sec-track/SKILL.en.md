@@ -21,7 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'o
 
 # sec-track - make findings traceable
 
-The "track" phase. Contract: `sec-scan/references/contract.md` (rule 4 secrets, rule 8 tickets in §6; field `ticket` in §2/schema). Only findings with status `validated` or later - `candidate` is not tracked.
+The "track" phase. Contract: `sec-scan/references/contract.md` (rule 4 secrets, rule 8 tickets in §6; field `ticket` in `schemas/finding.schema.json`). Only findings with status `validated` or later - `candidate` is not tracked.
 
 ## Choose the target
 
