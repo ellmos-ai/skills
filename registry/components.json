@@ -532,7 +532,11 @@
       "description": "Einstieg und Router der anbieterneutralen ellmos-Security-Familie (sec-*): ordnet Phasen von Bedrohungsmodell über Scan, Validierung, Triage, Fix, Verifikation und Tracking bis zum Bericht ein und verweist auf den passenden Skill. Auslöser: 'Sicherheitsprüfung', 'Repo auf Schwachstellen prüfen', 'welcher Security-Skill', 'PR sicherheitsprüfen', 'Fremdplugin prüfen', 'SECURITY.md', 'Disclosure'. Führt selbst keine Prüfung aus; die Arbeit machen die sec-*-Skills und die Nachbar-Skills, die hier nur verlinkt sind.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -788,7 +792,11 @@
       "description": "Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -802,7 +810,11 @@
       "description": "Erzeugt NUR auf ausdrücklichen Wunsch einen minimalen Sicherheitspatch für einen bestätigten Fund (Status validated oder triaged) - in einer Scratch-Kopie oder einem Worktree, nie im Original, als patches/<id>.diff ohne Anwenden, Commit oder Push. Auslöser: 'fix diesen Fund', 'Patch für SEC-...', 'Sicherheitslücke schließen'. Nicht für gewöhnliche Fehlerbehebung (dafür bugfix-protocol), nicht zum Prüfen eines Patches (sec-verify-fix), nicht zum Auffinden (sec-scan).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -816,7 +828,11 @@
       "description": "Leitet aus Funden, Vorfallberichten oder Assessments strukturelle Härtungsvorschläge ab statt Einzelpatches: Ursachen bündeln, Vorher/Nachher-Architekturbild (ASCII), Alternativen mit Abwägung (Aufwand, Risiko, Wirkung), Umsetzungsreihenfolge, Evidenz je Vorschlag. Liefert ein Dokument und ändert keinen Code. Auslöser: 'wie härten wir das grundsätzlich', 'warum tauchen immer wieder solche Funde auf', 'Architektur sicherer machen', 'Maßnahmenplan aus dem Vorfall'. Nicht für den Fix eines einzelnen Fundes (sec-fix) und nicht für akute Abwehr (protection-shield).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -830,7 +846,11 @@
       "description": "Definiert, prüft oder aktualisiert die SECURITY.md eines Repos (Geltungsbereich, ausgeschlossene Bereiche, verlangte Sicherheitseigenschaften, Meldeweg, Reaktionszeiten, unterstützte Versionen) und gleicht ihre Aussagen gegen den tatsächlichen Code ab. Die Richtlinie ist die Grundlage für sec-triage. Auslöser: 'SECURITY.md erstellen/prüfen', 'Sicherheitsrichtlinie', 'was gilt hier als Schwachstelle', 'Meldeweg festlegen'. Nicht für Funde (sec-scan), nicht für Offenlegungsberichte (sec-writeup).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -844,7 +864,11 @@
       "description": "Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -858,7 +882,11 @@
       "description": "Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -872,7 +900,11 @@
       "description": "Prüft fremde Skills, Plugins, MCP-Server und Hooks VOR der Installation nach dem Muster Staging-then-promote: in einen Staging-Ordner holen, dort vollständig lesen und mit einem Musterscanner vorsortieren, erst nach eigenem Urteil und ausdrücklicher Nutzerfreigabe installieren - ein Agent installiert nie selbst. Auslöser: 'Skill/Plugin/MCP von GitHub installieren', 'ist dieses Plugin sicher', 'fremden Hook prüfen', 'npm-Paket für den Agenten'. Nicht für eigene Repos (sec-scan) und nicht für Abhängigkeiten/CVEs des eigenen Stacks (security-tech-stack-check).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -886,7 +918,11 @@
       "description": "Erstellt oder aktualisiert das Bedrohungsmodell eines eigenen Repos (Assets, Vertrauensgrenzen, Einstiegspunkte, Datenflüsse, Angreiferziele, priorisierte Untersuchungsfragen) als threatmodel.md aus dem echten Quelltext. Nutzen bei 'Bedrohungsmodell', 'Threat Model', 'was muss ich in diesem Repo zuerst prüfen', 'Angriffsfläche', vor einem Security-Scan oder wenn sich die Architektur geändert hat. Läuft allein oder als Phase 1 von sec-scan; findet selbst keine Schwachstellen (dafür sec-scan / sec-diff-scan) und prüft keine Abhängigkeits-Advisories (dafür security-tech-stack-check).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -900,7 +936,11 @@
       "description": "Macht validierte Sicherheitsfunde nachverfolgbar: legt nach Vorschau und Bestätigung ein Ticket (ticket_writer.py), ein GitHub-Issue oder ein Draft-Security-Advisory (gh) an, prüft vorher Duplikate per Finding-id, schreibt keine Geheimnisse in den Text und trägt die Referenz in finding.ticket zurück. Auslöser: 'Fund tracken', 'Ticket für SEC-...', 'Advisory anlegen', 'Funde ins Backlog'. Kein Linear/Jira. Nicht für Fachberichte (sec-report) und nicht für die Offenlegung nach außen (sec-writeup).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -914,7 +954,11 @@
       "description": "Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -928,7 +972,11 @@
       "description": "Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -942,7 +990,11 @@
       "description": "Prüft unabhängig, ob ein Sicherheitspatch die Schwachstelle wirklich schließt (Source-to-Sink-Pfad am gepatchten Stand erneut verfolgen, Negativ- und Regressionstest), bewertet das Regressionsrisiko und ob automatisches Mergen vertretbar wäre (Standard: nein bei critical/high). Nur lesend und prüfend, wendet nichts an. Auslöser: 'schließt der Patch die Lücke', 'Patch prüfen', 'Fix verifizieren', Status fixed vorhanden. Nicht zum Schreiben des Patches (sec-fix), nicht für allgemeines Code-Review.",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {
@@ -956,7 +1008,11 @@
       "description": "Erstellt aus Notizen, PoC und Funden einen eigenständigen, skeptisch geprüften Schwachstellenbericht für die koordinierte Offenlegung: betroffene Versionen, Reproduktionsschritte, Auswirkung, Fix, Zeitleiste. PoC minimal (kein einsatzfähiger Exploit), Secrets geschwärzt, jede Behauptung durch Evidenz belegt oder als ungeprüft markiert. Auslöser: 'Disclosure schreiben', 'Schwachstellenbericht', 'Advisory-Text', 'Meldung an den Maintainer'. Nicht für den internen Scanbericht (sec-report) und nicht fürs Ticket (sec-track).",
       "languages": [
         "de",
-        "en"
+        "en",
+        "es",
+        "zh",
+        "ja",
+        "ru"
       ]
     },
     {

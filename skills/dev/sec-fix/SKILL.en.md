@@ -32,7 +32,7 @@ The "fix" phase of the ellmos security family. Contract: `sec-scan/references/co
 ## Procedure
 
 1. **Read the finding and its surroundings:** `findings.json` (finding, `evidence`, `recommendation`), the affected file and the callers of the spot. Fix the cause, not the symptom at one call site; if several callers use the same unsafe function, patch the shared point.
-2. **Check the lock (contract §6 rule 2):** `lock_scan.py --check-dir <repo> --json`; exit 0 = free, 1 = locked, anything else = unknown = stop. Never touch `LOCK.user.*`.
+2. **Check the lock (contract §6 rule 2):** `lock_scan.py --check-dir <repo> --json`; exit 0 = free, 1 = locked, anything else = unknown = stop; on a host without `lock_scan.py`, search the repo and its parent folders for `LOCK*.txt` instead (none = free, otherwise stop). Never touch `LOCK.user.*`.
 3. **Working copy:** scratch copy or `git worktree` in a folder outside the original. Nothing is written to the original.
 4. **Measure the baseline:** run the project's tests once before the patch and record the result (green/red, count). If there are no tests, say so - do not invent any.
 5. **Patch minimally:** the smallest change that closes the source-to-sink path (validation, parameterisation, allowlist, escaping at the right place). No refactoring, no style fixes, no new dependencies without need. A regression test for the finding belongs in the patch if the project has tests.
