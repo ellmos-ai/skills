@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ellmos-ai/skills/sec-scan/finding.schema.json",
+  "title": "ellmos security findings",
+  "type": "object",
+  "required": ["documentType", "schemaVersion", "scanId", "target", "provider", "findings"],
+  "properties": {
+    "documentType": {"const": "ellmos.sec.findings"},
+    "schemaVersion": {"const": 1},
+    "scanId": {"type": "string", "minLength": 1},
+    "target": {
+      "type": "object",
+      "required": ["repo", "ref"],
+      "properties": {
+        "repo": {"type": "string"},
+        "ref": {"type": "string", "description": "commit SHA or 'working-tree'"},
+        "scope": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "provider": {
+      "type": "object",
+      "required": ["name", "model"],
+      "properties": {"name": {"type": "string"}, "model": {"type": "string"}, "engine": {"type": "string"}}
+    },
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["id", "rule", "title", "severity", "confidence", "status", "location", "evidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^SEC-[0-9a-f]{12}$"},
+        "rule": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "cwe": {"type": "array", "items": {"type": "string", "pattern": "^CWE-[0-9]+$"}},
+        "severity": {"enum": ["critical", "high", "medium", "low", "info"]},
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "status": {"enum": ["candidate", "validated", "triaged", "fixed", "verified", "rejected"]},
+        "location": {
+          "type": "object",
+          "required": ["path", "startLine"],
+          "properties": {
+            "path": {"type": "string"},
+            "startLine": {"type": "integer", "minimum": 1},
+            "endLine": {"type": "integer", "minimum": 1}
+          }
+        },
+        "evidence": {"type": "string", "minLength": 1, "description": "source snippet or trace; never a secret value"},
+        "description": {"type": "string"},
+        "impact": {"type": "string"},
+        "recommendation": {"type": "string"},
+        "priority": {"type": "string", "pattern": "^P[0-4]$", "description": "set by sec-triage; P0 most urgent"},
+        "validatedBy": {
+          "type": "object",
+          "required": ["provider", "model", "verdict"],
+          "properties": {
+            "provider": {"type": "string"},
+            "model": {"type": "string"},
+            "verdict": {"enum": ["confirmed", "refuted", "uncertain"]}
+          }
+        },
+        "rejectedReason": {"type": "string"},
+        "fix": {
+          "type": "object",
+          "properties": {"patchFile": {"type": "string"}, "verifiedBy": {"type": "string"}}
+        },
+        "ticket": {"type": "string"}
+      }
+    }
+  }
+}

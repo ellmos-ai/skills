@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ellmos-ai/skills/sec-scan/coverage.schema.json",
+  "title": "ellmos security coverage",
+  "type": "object",
+  "required": ["documentType", "schemaVersion", "scanId", "complete", "scanned", "notScanned"],
+  "properties": {
+    "documentType": {"const": "ellmos.sec.coverage"},
+    "schemaVersion": {"const": 1},
+    "scanId": {"type": "string", "minLength": 1},
+    "complete": {"type": "boolean", "description": "true only if notScanned is empty"},
+    "scanned": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "depth"],
+        "properties": {
+          "path": {"type": "string"},
+          "depth": {"enum": ["read", "skimmed", "pattern-only"]},
+          "languages": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "notScanned": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "reason"],
+        "properties": {"path": {"type": "string"}, "reason": {"type": "string"}}
+      }
+    },
+    "limits": {"type": "array", "items": {"type": "string"}}
+  }
+}
