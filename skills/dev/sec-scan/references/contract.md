@@ -61,7 +61,7 @@ A result without `coverage.json` is not a result. "No findings" is only meaningf
 1. **Own code only.** Scan repositories the user owns or is authorised to test. No third-party systems, no port scans.
 2. **Locks.** Where the ellmos lock system exists (the script `lock_scan.py` is present), run `lock_scan.py --check-dir <dir> --json` before any write: exit 0 = free, 1 = locked, anything else (crash, unreadable output) = unknown = stop (fail-closed). On a host without that script, look for `LOCK*.txt` files in the target and its parent folders instead: none = free (say so in the report), any = stop. Never touch `LOCK.user.*`.
 3. **Patches, not commits.** `sec-fix` writes a patch file. Applying, committing or pushing needs a direct user order.
-4. **No secrets in outputs.** Reports, tickets, USMC notes and chat name the *location* of a secret, never the value. A leaked secret is rotated at the provider; removing it from history is not enough.
+4. **No secrets in outputs.** Reports, tickets, memory notes and chat name the *location* of a secret, never the value. A leaked secret is rotated at the provider; removing it from history is not enough.
 5. **Cost warning.** `deep` scans, multi-provider validation and fan-outs: estimate first, warn, wait for the user.
 6. **Egress.** State where the code goes. Provider-hosted review layers send diffs to the provider; private repos default to the local session only.
 7. **Independent validation.** Prefer another provider for `validate` and `verify-fix` (Claude <-> Codex). Without one, use an independent top-tier subagent and record that in `validatedBy`.
