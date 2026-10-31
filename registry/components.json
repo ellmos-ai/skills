@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 159,
+    "component_count": 160,
     "categories": {
       "assist": 20,
       "dev": 40,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 35,
+      "infrastructure": 36,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1424,6 +1424,20 @@
       "version": "1.0.0",
       "status": "active",
       "description": "Dach-Skill für Cloud-gestützte Kommunikationsprotokolle zwischen Agenten auf unterschiedlichen Maschinen (Ping-Pong, agent-beam, Listener und künftige Protokolle). Nutzen, wenn Arbeit über Maschinen hinweg per gemeinsamem Sync-Ordner oder Message-Yard koordiniert wird.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
+      "id": "protocol:infrastructure:computer-use-safety",
+      "name": "computer-use-safety",
+      "type": "protocol",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/computer-use-safety/SKILL.md",
+      "version": "1.2.0",
+      "status": "active",
+      "description": "Verhaltensregeln für Computer-Use und GUI-Automation durch KI-Agenten (Bildschirm sehen, klicken, tippen) innerhalb der Rechte, die der Betreiber vergeben hat. Nutzen, bevor ein Agent zum ersten Mal eine Oberfläche steuert -- mit open-compute oder einem vergleichbaren Werkzeug. Trennt fünf Ebenen: Rechte (Betreiber, nicht dieser Skill), Schritte, die der Server selbst erzwingt (Karenz, Not-Aus, Aktivitätswache), Wege als Vorzugsreihenfolge (scheitert ein Weg, weiter mit dem nächsten; nur ein Nutzerstopp hält an), Arbeitsmodi nach Anwesenheit des Nutzers (abwesend, nebeneinander, gemeinsam) und das Verhalten des Modells (sofort stoppen, Ziel prüfen, nicht vertrauenswürdige Bildschirminhalte, Zugangsdaten, irreversible Aktionen, Aufzeichnung).",
       "languages": [
         "de",
         "en"
