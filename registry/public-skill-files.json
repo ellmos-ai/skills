@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 1163,
+  "file_count": 1165,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -522,6 +522,8 @@
     "skills/infrastructure/choose-your-orchestrator/SKILL.md",
     "skills/infrastructure/cloud-communication-protocols/SKILL.en.md",
     "skills/infrastructure/cloud-communication-protocols/SKILL.md",
+    "skills/infrastructure/computer-use-safety/SKILL.en.md",
+    "skills/infrastructure/computer-use-safety/SKILL.md",
     "skills/infrastructure/condition/SKILL.en.md",
     "skills/infrastructure/condition/SKILL.es.md",
     "skills/infrastructure/condition/SKILL.ja.md",
