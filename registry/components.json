@@ -2,13 +2,13 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 160,
+    "component_count": 165,
     "categories": {
       "assist": 20,
       "dev": 40,
       "education": 5,
       "game-dev": 5,
-      "infrastructure": 36,
+      "infrastructure": 41,
       "production": 1,
       "research": 1,
       "therapy": 20,
@@ -1508,6 +1508,20 @@
       ]
     },
     {
+      "id": "skill:infrastructure:endpoint-triage",
+      "name": "endpoint-triage",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/endpoint-triage/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Schreibgeschützter Sammel- und Auswertungsplan für Laptops und PCs (Windows, macOS, Linux) bei Verdacht auf Schadsoftware, Persistenz oder Fehlkonfiguration: was gesammelt wird, wie die Sammelskripte sicher laufen, wie die Ausgabe auf einem sauberen Rechner gelesen wird (Prozesse, Autostarts, Dienste, Netzverbindungen, Konten, Patchstand) und wie Beobachtung von Deutung getrennt bleibt. Standard ist Diagnose ohne jede Änderung am Zielgerät.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
       "id": "skill:infrastructure:headless",
       "name": "headless",
       "type": "skill",
@@ -1524,6 +1538,20 @@
         "ja",
         "ru",
         "fr"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:incident-notes",
+      "name": "incident-notes",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/incident-notes/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Befundprotokoll und Beweiskette für Rettungs- und Vorfallfälle auf Laptops und PCs: wie Beobachtungen, Deutungen und durchgeführte Handlungen getrennt, mit gemessener UTC-Zeit und Prüfsummen festgehalten werden, wie Geheimnisse geschwärzt werden und wie die Eigentümerin oder der Eigentümer eine verständliche Zusammenfassung erhält. Begleitet endpoint-triage, malware-cleanup-guide und os-hardening-baseline.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {
@@ -1561,6 +1589,20 @@
         "zh",
         "ja",
         "ru"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:malware-cleanup-guide",
+      "name": "malware-cleanup-guide",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/malware-cleanup-guide/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Entscheidungsbaum nach einem Befund auf einem eigenen Laptop oder PC: isolieren, sichern, dann bereinigen oder neu aufsetzen. Legt fest, wann eine Bereinigung vertretbar ist und wann nur eine Neuinstallation verlässlich ist, wie Änderungen einzeln bestätigt und rückholbar durchgeführt werden und wie Zugangsdaten von einem sauberen Gerät aus erneuert werden. Defensiv; keine Änderung ohne vorheriges Abbild oder Backup.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {
@@ -1648,6 +1690,20 @@
       ]
     },
     {
+      "id": "skill:infrastructure:os-hardening-baseline",
+      "name": "os-hardening-baseline",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/os-hardening-baseline/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Prüfliste für die Grundabsicherung eines eigenen Laptops oder PCs unter Windows, macOS und Linux: Updates, Schutzprogramm, Firewall, Festplattenverschlüsselung, Konten und Rechte, Fernzugänge, Startkette. Je Punkt eine schreibgeschützte Prüfung und ein Soll; Änderungen nur nach Backup und einzelner Bestätigung. Defensiv, für den Privatgebrauch gedacht, kein Ersatz für Vorgaben einer verwaltenden IT.",
+      "languages": [
+        "de",
+        "en"
+      ]
+    },
+    {
       "id": "protocol:infrastructure:pingpong",
       "name": "pingpong",
       "type": "protocol",
@@ -1677,6 +1733,20 @@
         "zh",
         "ja",
         "ru"
+      ]
+    },
+    {
+      "id": "skill:infrastructure:rescue-intake",
+      "name": "rescue-intake",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/rescue-intake/SKILL.md",
+      "version": "1.0.0",
+      "status": "active",
+      "description": "Aufnahme eines Rettungsfalls für einen Laptop oder PC mit Verdacht auf Schadsoftware oder Fehlfunktion: Eigentum und Einwilligung bestätigen, den Betriebsmodus wählen (A: sammeln und auf einem sauberen Rechner auswerten, B: Agent vor Ort, nur aus einem Live-Boot), verhindern, dass echte Konten auf dem Zielrechner angemeldet werden, und festlegen, was anonymisiert wird, bevor Belege zu einem Cloud-Agenten gehen. Immer als Erstes nutzen, bevor irgendetwas auf dem Zielgerät läuft.",
+      "languages": [
+        "de",
+        "en"
       ]
     },
     {
