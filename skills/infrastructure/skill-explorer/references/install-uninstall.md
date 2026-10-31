@@ -24,12 +24,14 @@ User die jeweilige Empfehlungsnummer bestätigt hat.
 
 3. **Skript-Triage (unterstützend, nicht Ersatz):**
    ```bash
-   PYTHONIOENCODING=utf-8 python scripts/scan_skill_security.py \
+   python -I -X utf8 scripts/scan_skill_security.py \
        "<staging>/<name>" --json "<staging>/<name>.scan.json"
    ```
-   - `BLOCK` (CRITICAL/HIGH): starkes Warnsignal — die markierten Stellen gezielt nachlesen.
+   - `BLOCK` (CRITICAL/HIGH, Exit 1): starkes Warnsignal — die markierten Stellen gezielt nachlesen.
    - `REVIEW` (nur MEDIUM) / `PASS`: kein Freibrief — `PASS` heißt nur „keine bekannten Regex-Muster",
      **nicht** „sicher". Das Urteil aus Schritt 2 zählt.
+   - `PASS-MIT-LÜCKEN` / `REVIEW-MIT-LÜCKEN` (Exit 3): Teile wurden **nicht geprüft** (Binärdateien, über 2 MB,
+     unlesbar; als `[UNCHECKED]` gelistet) — wie ein offener Befund behandeln, nicht wie PASS.
    - Grenzen offenlegen: regex-basiert, blind für Semantik/Kontext/neue Obfuskation.
    - **Selbst-registrierende Hooks/Cron** werden als HIGH markiert (4-Augen-Prinzip): nur nach
      ausdrücklicher, gesonderter Bestätigung übernehmen.
