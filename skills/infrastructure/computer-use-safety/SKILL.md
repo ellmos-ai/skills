@@ -1,6 +1,6 @@
 ---
 name: computer-use-safety
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-10-31
@@ -9,10 +9,12 @@ description: >
   Verhaltensregeln für Computer-Use und GUI-Automation durch KI-Agenten (Bildschirm sehen,
   klicken, tippen) innerhalb der Rechte, die der Betreiber vergeben hat. Nutzen, bevor ein
   Agent zum ersten Mal eine Oberfläche steuert -- mit open-compute oder einem
-  vergleichbaren Werkzeug. Trennt drei Ebenen: Rechte (Betreiber, nicht dieser Skill),
-  Schritte, die der Server selbst erzwingt (Karenz, Not-Aus, Aktivitätswache), und das
-  Verhalten des Modells (sofort stoppen, Übernahme ankündigen, Ziel prüfen, nicht
-  vertrauenswürdige Bildschirminhalte, Zugangsdaten, irreversible Aktionen, Aufzeichnung).
+  vergleichbaren Werkzeug. Trennt fünf Ebenen: Rechte (Betreiber, nicht dieser Skill),
+  Schritte, die der Server selbst erzwingt (Karenz, Not-Aus, Aktivitätswache), Wege als
+  Vorzugsreihenfolge (scheitert ein Weg, weiter mit dem nächsten; nur ein Nutzerstopp hält
+  an), Arbeitsmodi nach Anwesenheit des Nutzers (abwesend, nebeneinander, gemeinsam) und das
+  Verhalten des Modells (sofort stoppen, Ziel prüfen, nicht vertrauenswürdige
+  Bildschirminhalte, Zugangsdaten, irreversible Aktionen, Aufzeichnung).
 
 standalone: true
 anthropic_compatible: true
@@ -34,7 +36,7 @@ dependencies:
 provenance:
   origin: custom
   origin_path: "skills/infrastructure/computer-use-safety/"
-  origin_version: "1.1.0"
+  origin_version: "1.2.0"
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
@@ -52,11 +54,13 @@ Werkzeug-Anbindung selbst beschreibt `open-compute-bridge`.
 Grundhaltung: Eine GUI-Aktion ist echt, sofort wirksam und oft nicht rücknehmbar. Im Zweifel
 nicht handeln, sondern beobachten, melden und den Menschen entscheiden lassen.
 
-Der Skill gliedert sich in drei Ebenen, damit nichts doppelt geregelt wird:
+Der Skill gliedert sich in fünf Ebenen, damit nichts doppelt geregelt wird:
 
 - **A. Rechte** -- wer sie vergibt (Betreiber), nicht dieser Skill.
 - **B. Was der Server selbst erzwingt** -- das Modell erledigt es nicht von Hand.
-- **C. Verhalten des Modells** innerhalb der vergebenen Rechte.
+- **C. Wege** -- eine Vorzugsreihenfolge, keine Bedingung; das Ziel zählt.
+- **D. Arbeitsmodi** -- wie das Modell vorgeht, je nachdem, ob und wie der Mensch anwesend ist.
+- **E. Verhalten des Modells** innerhalb der vergebenen Rechte.
 
 ## A. Rechte liegen beim Betreiber
 
@@ -110,20 +114,87 @@ oder Rückfragen:
   es nicht „aufräumen". `signal_show` ist optional, wenn der Mensch die Anzeige zusätzlich
   vorab sehen soll; die Karenz hängt davon nicht ab.
 
-## C. Verhalten des Modells innerhalb der Rechte
+## C. Wege sind Präferenzen, keine Bedingungen
+
+Für ein Ziel gibt es meist mehrere Wege. Die Reihenfolge ist eine **Vorzugsreihenfolge**
+(vom unauffälligsten zum eingreifendsten), keine Bedingung:
+
+1. **Web:** Browser-Automation (z. B. Playwright oder eine Browser-Erweiterung), nach
+   Möglichkeit mit eigenem Profil. Sie gehört nicht zu open-compute, dessen Browser-Treiber
+   laut Dokumentation nur Schnittstellen sind.
+2. **Programme mit UI-Automation:** `invoke` -- klickfrei, ohne Mausbewegung, laut
+   open-compute-Dokumentation auch bei nicht vollständig vordergründigem Fenster für die
+   meisten nativen Programme.
+3. **Sonst Übernahme des Desktops:** `click_name`, dann `do` mit echter Maus und Tastatur;
+   rohe Koordinaten als letzter Ausweg (Regel 3).
+
+**Scheitert ein Weg** (die Browser-Automation startet nicht, ein Element ist per UI-
+Automation nicht erreichbar, `invoke` findet keinen eindeutigen Treffer), besteht das Modell
+**nicht** auf ihm und bricht **nicht** ab, sondern wechselt zum nächsten Weg: das Ziel
+zählt. Den Wegwechsel meldet es dem Menschen knapp im Chat, es fragt nicht nach. Der
+Wechsel bleibt innerhalb der Ebenen A und B: Verweigert der Server einen Weg wegen des
+Sicherheitsmodus (`needs_confirmation`, `deny`), ist das kein gescheiterter Weg, sondern
+eine Rechtegrenze -- melden, nicht umgehen. Der Wechsel zu einem Weg mit Maus und Fokus
+richtet sich außerdem nach dem Arbeitsmodus (Ebene D).
+
+**„Weg gescheitert" ist etwas anderes als „Nutzer hat gestoppt".** Ein technisch
+gescheiterter Weg heißt: weiter mit dem nächsten. Ein `abort_reason`, eine Pause des
+Servers oder ein erkennbares Stopp-Wort des Menschen heißt: **stehen bleiben**, nichts
+wiederholen, nicht über `signal_show` neu freigeben (Regel 1). Abbrechen darf das Modell sonst
+nur aus Sicherheitsgründen (Ebene E) oder wenn kein sicherer Weg zum Ziel bleibt -- dann mit
+kurzem Bericht, welche Wege versucht wurden.
+
+## D. Arbeitsmodi nach Anwesenheit des Nutzers
+
+Die Modi beschreiben nur, **wie** das Modell vorgeht. Sie ändern weder Rechte (Ebene A)
+noch Sicherheitsregeln: Die Bestätigung irreversibler Aktionen (Regel 6), die Regeln zu
+Prompt-Injection (Regel 4) und zu Zugangsdaten (Regel 5) und die Karenz des Servers gelten
+in jedem Modus unverändert.
+
+- **(a) Nutzer abwesend.** Der Weg ist egal, das Ziel zählt. Alle Wege der Reihenfolge aus
+  Ebene C sind zulässig, auch die echte Maus; Fokus und Zwischenablage sind frei, solange
+  nichts Fremdes überschrieben wird. Taucht Nutzeraktivität auf (Pause der Aktivitätswache,
+  eigene Beobachtung, eine Nachricht des Menschen), wechselt das Modell nach (b).
+- **(b) Nutzer anwesend, nebeneinander (asynchron).** Standard, wenn der Modus unklar ist.
+  Wir stören einander nicht; die zeitgleiche Arbeit des Menschen hat Vorrang.
+  - Klickfreie, hintergrundtaugliche Wege bevorzugen (Browser-Automation mit eigenem Profil,
+    `invoke`); Fokus- und Mausübernahme vermeiden.
+  - Braucht ein Weg doch Fokus oder Maus, in **kurzen Stößen** arbeiten: vorher das
+    Vordergrundfenster des Menschen merken (`list_windows` liefert die Fenster mit dem
+    Feld `foreground`, Vordergrundfenster zuerst), dann Aktion oder Bildschirmfoto, dann das
+    gemerkte Fenster wiederherstellen (`activate_window` mit dem gemerkten Deskriptor), erst
+    danach weiter. Das ist eine **Gewohnheit des Modells**: Nach Kenntnis der open-compute-
+    Dokumentation stellt der Server den Fokus nicht selbst wieder her.
+  - Bei erkannter Nutzeraktivität sofort pausieren -- durch die Aktivitätswache des Servers,
+    falls aktiviert, sonst durch eigene Beobachtung (Fokus oder Fensterzustand hat sich
+    unerwartet geändert, der Mensch meldet sich) -- und erst nach seinem Go weitermachen.
+  - Die Zwischenablage nur nach vorherigem Sichern und mit Zurückschreiben nutzen.
+- **(c) Cowork (gemeinsam am selben Gegenstand).** Wir sehen dasselbe an. Der Mensch gibt
+  Anweisungen und Aufträge, das Modell macht Vorschläge; Aktionen werden **vorher angesagt**,
+  das Tempo richtet sich nach dem Menschen. Eine Ansage ersetzt nicht die Bestätigung
+  irreversibler Aktionen (Regel 6).
+
+**Woran das Modell den Modus erkennt:** an Aussagen des Menschen („ich bin weg", „ich bin am
+Rechner", „lass uns zusammen ...") und, wo aktiviert, an der Aktivitätswache. Ist es
+unklar, gilt (b). Der Modus kann sich im Lauf der Sitzung ändern; im Zweifel zur
+rücksichtsvolleren Variante wechseln und das kurz melden.
+
+## E. Verhalten des Modells innerhalb der Rechte
 
 1. **Bei `abort_reason` oder Pause sofort stoppen.** Kommt ein `abort_reason` oder meldet
    der Server eine Pause (Nutzereingabe erkannt, Aufruf abgewiesen): nichts wiederholen,
-   nichts „zu Ende bringen", die Freigabe **nicht selbst** per `signal_show` neu auslösen.
-   Dem Menschen Lage und Grund melden und erst nach seinem ausdrücklichen Go weitermachen.
-2. **Übernahme ankündigen, bei geschützter Arbeit Go abwarten.** Vor einer Sitzung, die den
-   Desktop übernimmt, im Chat ankündigen, was geplant ist -- besonders wenn der Mensch
-   womöglich selbst am Rechner arbeitet (laufende Interaktion, keine längere Funkstille).
-   Zeigt schon der erste Bildschirmfoto-Eindruck erkennbar geschützte Arbeit (etwa ein
-   Programm mit Klienten-, Patienten- oder Maildaten), anhalten und ein ausdrückliches Go
-   abwarten. Die Karenz des Servers ist das technische Netz, kein Ersatz für diese
-   Rücksicht. Sitzt der Mensch am Rechner, gehören Fokus und Zwischenablage ihm: warten statt
-   eingreifen; die Zwischenablage nur nach vorherigem Sichern und mit Zurückschreiben nutzen.
+   nichts „zu Ende bringen", die Freigabe **nicht selbst** per `signal_show` neu auslösen und
+   nicht auf einen anderen Weg ausweichen, um trotzdem weiterzumachen. Das ist ein
+   Nutzerstopp, kein gescheiterter Weg (Ebene C). Dem Menschen Lage und Grund melden und
+   erst nach seinem ausdrücklichen Go weitermachen.
+2. **Übernahme ankündigen, bei geschützter Arbeit Go abwarten.** Arbeitet der Mensch
+   womöglich selbst am Rechner (laufende Interaktion, keine längere Funkstille), vor der
+   Übernahme im Chat ankündigen, was geplant ist (Modus (b) oder (c); im Modus (a) genügt
+   der Bericht danach). Zeigt schon der erste Bildschirmfoto-Eindruck erkennbar geschützte
+   Arbeit (etwa ein Programm mit Klienten-, Patienten- oder Maildaten), anhalten und ein
+   ausdrückliches Go abwarten. Die Karenz des Servers ist das technische Netz, kein Ersatz
+   für diese Rücksicht. Fokus und Zwischenablage gehören dem Menschen, solange er am Rechner
+   sitzt (Ebene D).
 3. **Zielfenster belegen, nicht raten.** Nach `activate_window` erst `capture` und das Ziel
    prüfen, bevor eine Taste oder ein Klick folgt; ein unscharfer Namenstreffer kann das
    falsche Fenster aktivieren. Semantisch zielen (`invoke`, dann `click_name`, mit
@@ -155,15 +226,18 @@ oder Rückfragen:
 9. **Aktionsspur führen.** Jede Sitzung hinterlässt eine nachvollziehbare Spur: Absicht,
    Fenster, Aktion, Ergebnis -- mit clirec (Abschnitt „Aufzeichnung") und/oder einem
    Sitzungsprotokoll des Agenten. Ohne Spur keine Aktion mit Außenwirkung.
-10. **Bei Unerwartetem anhalten.** Unerwarteter Dialog, Berechtigungsabfrage, Fehlermeldung
-    mit Datenbezug, falsches Fenster, geänderter Fensterzustand, Anmelde- oder Zahlungsseite,
-    Hinweis auf fremde Daten: **anhalten, nichts „wegklicken",** Lage beschreiben und auf
-    Anweisung warten.
+10. **Bei Unerwartetem anhalten.** Ein technisch gescheiterter Weg gehört nicht dazu (dann
+    nächster Weg, Ebene C). Gemeint sind: unerwarteter Dialog, Berechtigungsabfrage,
+    Fehlermeldung mit Datenbezug, falsches Fenster, geänderter Fensterzustand, Anmelde- oder
+    Zahlungsseite, Hinweis auf fremde Daten: **anhalten, nichts „wegklicken",** Lage
+    beschreiben und auf Anweisung warten.
 
 ## Ablauf einer Sitzung
 
 **Vorher**
 - Auftrag und Grenzen festhalten: Ziel, erlaubte Fenster, ausdrücklich Verbotenes.
+- Arbeitsmodus bestimmen (Ebene D; unklar gilt „nebeneinander") und die Wege in der
+  Vorzugsreihenfolge wählen (Ebene C).
 - Sperren und Lease prüfen (Regel 8); Übernahme ankündigen (Regel 2).
 - Aufzeichnung vorbereiten (Regel 9), falls vorgesehen.
 - Die Karenz abwarten lassen: Der Server erledigt das (Ebene B).
@@ -171,7 +245,8 @@ oder Rückfragen:
 **Währenddessen**
 - Beobachten, dann handeln, dann prüfen. Kleine, überprüfbare Schritte; Stapelaktionen nur
   für harmlose, klar abgegrenzte Folgen.
-- Bei jeder Abweichung Regel 10, bei `abort_reason` oder Pause Regel 1 anwenden.
+- Bei jeder Abweichung Regel 10, bei `abort_reason` oder Pause Regel 1 anwenden; scheitert
+  nur ein Weg, zum nächsten wechseln und das knapp melden (Ebene C).
 - Das Overlay liegt im Bild. Soll ein Bildschirmfoto später dokumentiert oder gezeigt
   werden, die Anzeige kurz ausblenden (`signal_hide`), aufnehmen und das im Chat sagen --
   danach nur wieder einblenden, wenn kein Abbruch vorlag (Regel 1).
@@ -202,7 +277,8 @@ ersetzt; so landen keine Zugangsdaten in der Spur. Für die Aktionsspur gilt:
 
 ## Was dieser Skill nicht ist
 
-- Keine Rechtevergabe: Er erteilt und entzieht keine Berechtigungen (Ebene A).
+- Keine Rechtevergabe: Er erteilt und entzieht keine Berechtigungen (Ebene A). Auch die
+  Arbeitsmodi (Ebene D) ändern keine Rechte, sondern nur das Vorgehen des Modells.
 - Keine Freigabe für Eingriffe in fremde Konten, fremde Systeme oder die Umgehung von
   Zugangsschutz. Er beschreibt Verhalten innerhalb vergebener Rechte; er erweitert sie nicht.
 - Kein Ersatz für die Prüfung der Werkzeuge selbst. Gates, Tests und Konfiguration des

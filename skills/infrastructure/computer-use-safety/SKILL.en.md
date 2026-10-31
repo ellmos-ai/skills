@@ -1,6 +1,6 @@
 ---
 name: computer-use-safety
-version: 1.1.0
+version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-10-31
@@ -9,10 +9,12 @@ description: >
   Behavioural rules for computer use and GUI automation by AI agents (seeing the screen,
   clicking, typing) within the permissions the operator has granted. Use before an agent
   controls a user interface for the first time -- with open-compute or a comparable tool.
-  Separates three levels: permissions (the operator, not this skill), steps the server
-  enforces itself (grace countdown, kill switch, activity watch), and the model's own
-  behaviour (stop at once, announce a takeover, verify the target, untrusted screen content,
-  credentials, irreversible actions, recording).
+  Separates five levels: permissions (the operator, not this skill), steps the server
+  enforces itself (grace countdown, kill switch, activity watch), routes as a preference
+  order (if one route fails, continue with the next; only a user stop halts), working modes
+  by the user's presence (absent, side by side, together) and the model's own behaviour
+  (stop at once, verify the target, untrusted screen content, credentials, irreversible
+  actions, recording).
 
 standalone: true
 anthropic_compatible: true
@@ -34,7 +36,7 @@ dependencies:
 provenance:
   origin: custom
   origin_path: "skills/infrastructure/computer-use-safety/"
-  origin_version: "1.1.0"
+  origin_version: "1.2.0"
   last_sync_from_origin: null
   last_sync_to_origin: null
   local_changes_since_sync: false
@@ -52,11 +54,14 @@ wiring itself is described by `open-compute-bridge`.
 Basic stance: a GUI action is real, takes effect immediately and is often irreversible.
 When in doubt, do not act -- observe, report, and let the human decide.
 
-The skill has three levels so that nothing is regulated twice:
+The skill has five levels so that nothing is regulated twice:
 
 - **A. Permissions** -- who grants them (the operator), not this skill.
 - **B. What the server enforces itself** -- the model does not do it by hand.
-- **C. The model's behaviour** within the granted permissions.
+- **C. Routes** -- a preference order, not a condition; the goal counts.
+- **D. Working modes** -- how the model proceeds depending on whether and how the human is
+  present.
+- **E. The model's behaviour** within the granted permissions.
 
 ## A. Permissions belong to the operator
 
@@ -109,20 +114,84 @@ own:
   "clean up". `signal_show` is optional if the human should see the indicator in advance;
   the countdown does not depend on it.
 
-## C. The model's behaviour within the permissions
+## C. Routes are preferences, not conditions
+
+A goal can usually be reached in several ways. The order is a **preference order** (from
+least to most intrusive), not a condition:
+
+1. **Web:** browser automation (for example Playwright or a browser extension), with its
+   own profile where possible. It is not part of open-compute, whose browser drivers are,
+   according to its documentation, interfaces only.
+2. **Programs with UI automation:** `invoke` -- click-free, no mouse movement, and
+   according to the open-compute documentation it works for most native programs even when
+   the window is not fully in the foreground.
+3. **Otherwise take over the desktop:** `click_name`, then `do` with the real mouse and
+   keyboard; raw coordinates are the last resort (rule 3).
+
+**If a route fails** (browser automation does not start, an element cannot be reached via UI
+automation, `invoke` finds no unambiguous match), the model does **not** insist on it and
+does **not** give up, but switches to the next route: the goal counts. It reports the
+switch to the human briefly in the chat and does not ask. The switch stays within levels A
+and B: if the server refuses a route because of the safety mode (`needs_confirmation`,
+`deny`), that is not a failed route but a permission limit -- report it, do not get around
+it. Switching to a route that needs mouse and focus also depends on the working mode
+(level D).
+
+**"Route failed" is not the same as "user has stopped".** A technically failed route means:
+continue with the next one. An `abort_reason`, a server pause, or a recognisable stop word
+from the human means: **stand still**, repeat nothing, do not re-release via `signal_show`
+(rule 1). Otherwise the model may only abort for safety reasons (level E) or when no safe
+route to the goal remains -- then with a short report of which routes were tried.
+
+## D. Working modes by the user's presence
+
+The modes describe only **how** the model proceeds. They change neither permissions (level
+A) nor safety rules: confirming irreversible actions (rule 6), the rules on prompt injection
+(rule 4) and credentials (rule 5), and the server's countdown apply unchanged in every mode.
+
+- **(a) User absent.** The route does not matter, the goal does. All routes in the order
+  of level C are permitted, including the real mouse; focus and clipboard are free as long
+  as nothing belonging to someone else is overwritten. If user activity appears (activity
+  watch pause, own observation, a message from the human), the model switches to (b).
+- **(b) User present, side by side (asynchronous).** The default when the mode is unclear.
+  We do not disturb each other; the human's simultaneous work takes priority.
+  - Prefer click-free, background-capable routes (browser automation with its own profile,
+    `invoke`); avoid taking over focus and mouse.
+  - If a route does need focus or mouse, work in **short bursts:** first note the human's
+    foreground window (`list_windows` returns the windows with a `foreground` field,
+    foreground window first), then action or screenshot, then restore the noted window
+    (`activate_window` with the noted descriptor), and only then continue. This is a **habit
+    of the model:** as far as the open-compute documentation goes, the server does not
+    restore focus itself.
+  - On detected user activity, pause at once -- through the server's activity watch if
+    enabled, otherwise through own observation (focus or window state changed unexpectedly,
+    the human speaks up) -- and continue only after their go-ahead.
+  - Use the clipboard only after backing it up and writing it back.
+- **(c) Cowork (together on the same object).** We look at the same thing. The human gives
+  instructions and assignments, the model makes proposals; actions are **announced
+  beforehand**, and the pace follows the human. An announcement does not replace
+  confirming irreversible actions (rule 6).
+
+**How the model recognises the mode:** from the human's statements ("I'm away", "I'm at the
+machine", "let's do this together ...") and, where enabled, from the activity watch. If it
+is unclear, (b) applies. The mode can change during a session; when in doubt switch to the
+more considerate variant and say so briefly.
+
+## E. The model's behaviour within the permissions
 
 1. **Stop at once on `abort_reason` or a pause.** If an `abort_reason` arrives or the
    server reports a pause (user input detected, call rejected): repeat nothing, do not
-   "finish up", and do **not** re-trigger the release yourself with `signal_show`. Tell the
-   human the situation and the reason, and continue only after their explicit go-ahead.
-2. **Announce a takeover; wait for a go on protected work.** Before a session that takes
-   over the desktop, say in the chat what is planned -- especially if the human may be
-   working at the machine themselves (ongoing interaction, no longer silence). If the very
-   first screenshot shows recognisably protected work (for example a program holding client,
-   patient or mail data), stop and wait for an explicit go. The server's countdown is the
-   technical safety net, not a substitute for this consideration. If the human is at the
-   machine, focus and clipboard are theirs: wait instead of intervening; use the clipboard
-   only after backing it up and writing it back.
+   "finish up", do **not** re-trigger the release yourself with `signal_show`, and do not
+   switch to another route in order to carry on anyway. This is a user stop, not a failed
+   route (level C). Tell the human the situation and the reason, and continue only after
+   their explicit go-ahead.
+2. **Announce a takeover; wait for a go on protected work.** If the human may be working at
+   the machine themselves (ongoing interaction, no longer silence), say in the chat what is
+   planned before taking over (mode (b) or (c); in mode (a) the report afterwards is enough).
+   If the very first screenshot shows recognisably protected work (for example a program
+   holding client, patient or mail data), stop and wait for an explicit go. The server's
+   countdown is the technical safety net, not a substitute for this consideration. Focus
+   and clipboard belong to the human as long as they are at the machine (level D).
 3. **Prove the target window, do not guess.** After `activate_window`, first `capture` and
    check the target before a key press or click follows; a fuzzy name match can activate
    the wrong window. Target semantically (`invoke`, then `click_name`, with `exact=true`
@@ -154,15 +223,17 @@ own:
 9. **Keep an action trace.** Every session leaves a traceable record: intent, window,
    action, result -- with clirec (see the "Recording" section) and/or the agent's own
    session log. No action with external effect without a trace.
-10. **Stop on the unexpected.** Unexpected dialog, permission prompt, error message
-    involving data, wrong window, changed window state, sign-in or payment page, sign of
-    foreign data: **stop, do not "click it away",** describe the situation and wait for
-    instructions.
+10. **Stop on the unexpected.** A technically failed route does not count (then next route,
+    level C). What counts: unexpected dialog, permission prompt, error message involving
+    data, wrong window, changed window state, sign-in or payment page, sign of foreign data:
+    **stop, do not "click it away",** describe the situation and wait for instructions.
 
 ## Session flow
 
 **Before**
 - Record the task and its limits: goal, permitted windows, what is explicitly forbidden.
+- Determine the working mode (level D; if unclear, "side by side" applies) and choose
+  routes in the preference order (level C).
 - Check locks and lease (rule 8); announce the takeover (rule 2).
 - Prepare recording (rule 9), if planned.
 - Let the countdown run: the server handles it (level B).
@@ -170,7 +241,8 @@ own:
 **During**
 - Observe, then act, then verify. Small, verifiable steps; batch actions only for harmless,
   clearly delimited sequences.
-- Apply rule 10 on any deviation, rule 1 on `abort_reason` or a pause.
+- Apply rule 10 on any deviation, rule 1 on `abort_reason` or a pause; if only a route
+  fails, switch to the next one and report it briefly (level C).
 - The overlay is part of the image. If a screenshot will be documented or shown later,
   briefly hide the indicator (`signal_hide`), capture, and say so in the chat -- show it
   again afterwards only if no abort occurred (rule 1).
@@ -200,7 +272,8 @@ no credentials end up in the trace. For the action trace:
 
 ## What this skill is not
 
-- Not a grant of permissions: it neither gives nor withdraws authorisations (level A).
+- Not a grant of permissions: it neither gives nor withdraws authorisations (level A). The
+  working modes (level D) do not change permissions either, only the model's approach.
 - No permission to intervene in foreign accounts, foreign systems or to bypass access
   protection. It describes behaviour within granted permissions; it does not extend them.
 - No substitute for testing the tools themselves. Gates, tests and configuration of the
