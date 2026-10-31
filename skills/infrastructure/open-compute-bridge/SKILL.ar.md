@@ -225,7 +225,7 @@ Shell (companion-for-agy أو استدعاء مباشر لـ `agy.exe -p "..."` 
 ## وصفة: إعادة مصادقة Tailscale في المتصفح
 
 المحفّز الأكثر شيوعاً لهذه المهارة: تفشل خطوة SSH/مزامنة على جهاز Tailscale
-(مثل Mac Studio، `100.119.69.90`) لأن Tailscale يطلب تسجيل دخول جديد.
+(مثل Mac Studio، `<TAILSCALE_IP>`) لأن Tailscale يطلب تسجيل دخول جديد.
 
 1. **التعرّف:** يعرض `tailscale status` `Logged out.` / `NeedsLogin` بدلاً من IP، أو تعلق محاولة SSH
    على IP الخاص بـ Tailscale أو تفشل دون أي خطأ شبكي آخر.
