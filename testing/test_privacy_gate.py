@@ -5,7 +5,11 @@ from __future__ import annotations
 import contextlib
 import importlib.util
 import io
+import json
+import os
+import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -18,6 +22,21 @@ SPEC.loader.exec_module(privacy_gate)
 
 
 class PrivacyGateTests(unittest.TestCase):
+    def test_readme_link_fixture_keeps_full_content_scan_enabled(self) -> None:
+        relative = "testing/test_readme_language_link_gate.py"
+        self.assertNotIn(relative, privacy_gate.CONTENT_SCAN_EXCLUSIONS)
+        path = privacy_gate.REPOSITORY_ROOT / relative
+        self.assertEqual([], privacy_gate.content_findings(path))
+
+    def test_unshipped_documentation_link_remains_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "README.md"
+            path.write_text("See file:///tmp/notes.md", encoding="utf-8")
+            self.assertIn(
+                "unresolvable local file reference: file:///tmp/notes.md",
+                privacy_gate.content_findings(path),
+            )
+
     def test_rejects_concrete_windows_user_home(self) -> None:
         findings = privacy_gate.concrete_home_matches(
             r"Load C:\Users\Alice\OneDrive\private.json"
@@ -296,6 +315,175 @@ class ThirdPartyGateTests(unittest.TestCase):
         # Non-commercial clauses stay out on purpose: "non-commercial" is not
         # cleanly separable here, and an unappliable rule is worse than none.
         self.assertNotIn("CC-BY-NC-4.0", REDISTRIBUTABLE_LICENSES)
+
+
+class DependencyGateTests(unittest.TestCase):
+    """T-20260927-285118525: a declared dependency the repo cannot verify is
+    the same "looks portable, isn't" leak as a placeholder file:// link --
+    just hidden in the frontmatter instead of the body. V1 is WARN_ONLY."""
+
+    def setUp(self) -> None:
+        self.root = privacy_gate.REPOSITORY_ROOT
+        self.skill_dir = self.root / "skills/utilities/zz-test-deps"
+        self.other_skill_dir = self.root / "skills/utilities/zz-test-deps-protocol"
+        self.addCleanup(self._cleanup)
+
+    def _cleanup(self) -> None:
+        import shutil
+
+        for folder in (self.skill_dir, self.other_skill_dir):
+            shutil.rmtree(folder, ignore_errors=True)
+
+    def _write(self, folder: Path, frontmatter_deps_line: str) -> str:
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "SKILL.md").write_text(
+            "---\nname: zz-test\ndescription: test\n"
+            f"{frontmatter_deps_line}\n---\n\n# Demo\n",
+            encoding="utf-8",
+        )
+        return (folder / "SKILL.md").relative_to(self.root).as_posix()
+
+    def test_missing_own_script_warns(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [ghost_script.py]"
+        )
+        warnings = privacy_gate.dependency_warnings({relative})
+        self.assertTrue(any("ghost_script.py" in w for w in warnings))
+
+    def test_shipped_own_script_is_not_flagged(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [present_script.py]"
+        )
+        (self.skill_dir / "present_script.py").write_text("", encoding="utf-8")
+        warnings = privacy_gate.dependency_warnings(
+            {relative, "skills/utilities/zz-test-deps/present_script.py"}
+        )
+        self.assertEqual([], warnings)
+
+    def test_stdlib_module_is_not_flagged(self) -> None:
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [json, urllib.request]"
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_bare_external_tool_is_not_flagged(self) -> None:
+        relative = self._write(self.skill_dir, "dependencies:\n  tools: [git, gh]")
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_flow_style_dict_form_is_declared_external_and_skipped(self) -> None:
+        relative = self._write(
+            self.skill_dir,
+            "dependencies: {'python': [{'name': 'feedparser', 'optional': True, "
+            "'install': 'pip install feedparser'}]}",
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_private_protocol_dependency_warns(self) -> None:
+        protocol_relative = self._write(
+            self.other_skill_dir, "visibility: private-only"
+        )
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  protocols: [zz-test-deps-protocol]"
+        )
+        warnings = privacy_gate.dependency_warnings({relative, protocol_relative})
+        self.assertTrue(any("zz-test-deps-protocol" in w for w in warnings))
+
+    def test_unresolvable_protocol_name_is_not_a_skill_ref(self) -> None:
+        """A protocols entry not matching any skill directory is an external
+        protocol description (e.g. "ICS / iCalendar"), not a broken link."""
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  protocols: [some-external-protocol]"
+        )
+        self.assertEqual([], privacy_gate.dependency_warnings({relative}))
+
+    def test_dependency_warnings_never_block(self) -> None:
+        """V1 is WARN_ONLY: run_gate()'s errors must stay unaffected."""
+        relative = self._write(
+            self.skill_dir, "dependencies:\n  python: [ghost_script.py]"
+        )
+        self.assertTrue(privacy_gate.dependency_warnings({relative}))
+        self.assertNotIn("ghost_script.py", "\n".join(privacy_gate.run_gate()))
+
+
+LETTER_HOOKER_SOURCE = Path(__file__).resolve().parents[1] / "skills/infrastructure/letter-hooker"
+
+
+class LetterHookerLoaderTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.skill = self.root / "letter-hooker"
+        shutil.copytree(LETTER_HOOKER_SOURCE, self.skill, ignore=shutil.ignore_patterns("config.json", "__pycache__"))
+        self.script = self.skill / "scripts/agy_kontext_and_workflow_loader.py"
+        self.sidecars = self.root / "sidecars"
+        self.mirrors = self.root / "mirrors"
+        self.sync = self.root / "sync"
+        self.config = {
+            "host_slot": "test-slot",
+            "sync_dir": str(self.sync),
+            "sidecars_dir": str(self.sidecars),
+            "mirror_sidecars_dir": str(self.mirrors),
+            "skills_root": str(self.root / "skills"),
+            "automation_policy_path": str(self.root / "optional-policy.md"),
+            "automations_memory_path": str(self.root / "memory.md"),
+            "antigravity_log_path": str(self.root / "log.txt"),
+            "antigravity_registry_path": str(self.root / "registry.md"),
+        }
+        for name in ("active", "paused.DISABLED"):
+            target = self.sidecars / name / "sidecar.json"
+            target.parent.mkdir(parents=True)
+            target.write_text(json.dumps({"args": ["a", "b", "c", "TASK: Keep this task"]}), encoding="utf-8")
+        (self.mirrors / "active").mkdir(parents=True)
+        self._write_config()
+
+    def _write_config(self) -> None:
+        (self.skill / "config.json").write_text(json.dumps(self.config), encoding="utf-8")
+
+    def _run(self, *arguments: str) -> subprocess.CompletedProcess[str]:
+        environment = dict(os.environ)
+        environment.pop("LETTER_HOOKER_HOST_SLOT", None)
+        return subprocess.run(
+            [sys.executable, "-B", "-X", "utf8", str(self.script), *arguments],
+            cwd=self.skill, env=environment, capture_output=True,
+            text=True, encoding="utf-8", timeout=20,
+        )
+
+    def _snapshot(self) -> dict[str, bytes]:
+        return {path.relative_to(self.root).as_posix(): path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+
+    def test_check_is_read_only_and_apply_preserves_disabled_sidecars(self) -> None:
+        before = self._snapshot()
+        checked = self._run("--check")
+        self.assertEqual(0, checked.returncode, checked.stderr)
+        self.assertEqual(before, self._snapshot())
+
+        applied = self._run()
+        self.assertEqual(0, applied.returncode, applied.stderr)
+        disabled = "sidecars/paused.DISABLED/sidecar.json"
+        self.assertEqual(before[disabled], (self.root / disabled).read_bytes())
+        active = self.sidecars / "active/sidecar.json"
+        prompt = json.loads(active.read_text(encoding="utf-8"))["args"][3]
+        self.assertIn("TASK: Keep this task", prompt)
+        self.assertIn("Host slot: test-slot", prompt)
+        for hook in (self.skill / "hooks").glob("*.md"):
+            self.assertIn(hook.resolve().as_uri(), prompt)
+        self.assertEqual(active.read_bytes(), (self.mirrors / "active/sidecar.json").read_bytes())
+        self.assertTrue((self.sync / "STICHWORTLISTE.json").is_file())
+        once = active.read_bytes()
+        repeated = self._run()
+        self.assertEqual(0, repeated.returncode, repeated.stderr)
+        self.assertEqual(once, active.read_bytes())
+
+    def test_invalid_configuration_fails_before_any_write(self) -> None:
+        self.config["sync_dir"] = 42
+        self._write_config()
+        before = self._snapshot()
+        result = self._run()
+        self.assertEqual(2, result.returncode)
+        self.assertIn("Invalid letter-hooker config", result.stderr)
+        self.assertEqual(before, self._snapshot())
+
 
 
 if __name__ == "__main__":

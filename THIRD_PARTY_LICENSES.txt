@@ -29,7 +29,6 @@ The repository redistributes curated, externally authored skills under permissiv
 
 | Skill / Path | Upstream Repository | Upstream Author | License | Notice & Boundary |
 |---|---|---|---|---|
-| skills/third-party/grill-me | mattpocock/skills | Matt Pocock | MIT | Entry point for plan interrogation. Upstream LICENSE preserved. |
 | skills/third-party/grilling | mattpocock/skills | Matt Pocock | MIT | Core interrogation protocol. Upstream LICENSE preserved. |
 
 ## Direct Build and Development Dependencies

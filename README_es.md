@@ -213,7 +213,7 @@ Usa la cadena canónica `ellmos-ai/skills` al enlazar o indexar el proyecto. Es 
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | `dev-bricks` | Suite de estación de trabajo para desarrolladores de escritorio |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | `dev-bricks` | Editor de código multilenguaje y entorno sandbox |
 
-Skills de terceros seleccionados en `skills/third-party/` (`grill-me`, `grilling`)
+Skills de terceros seleccionados en `skills/third-party/` (`grilling`)
 están bajo la licencia MIT del repositorio original
 [mattpocock/skills](https://github.com/mattpocock/skills).
 

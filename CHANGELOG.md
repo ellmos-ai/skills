@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased] - 2026-10-25
+
+- **`skills/third-party/grilling` absorbs `grill-me`**: The thin entry point `skills/third-party/grill-me` (body: "Call the Skill tool with grilling") is removed at the user's request; its phrase triggers ("grill me", "grill-me") now live in the `grilling` description. The native `/grill-me` command is removed; `/grilling` replaces it (a description registers no alias command). `grilling` becomes an improved fork with a "Local additions" section (seed the tree from recorded decisions, write answers down before the next round, pause on interruptions, one reason per recommendation, show measured facts, ask in the user's language, close with a ledger). The upstream body stays unchanged above that heading. READMEs, `THIRD_PARTY_LICENSES.*` and `ellmos-skill-creator` no longer list `grill-me`.
+
 ## [Unreleased] - 2026-10-09
 
 - **`music-composer` 1.1.0: score mode (2026-10-18)**: new `score/` folder with a hand-written-score pipeline for video music (speech map, bar grid, score -> notes/audio/MIDI, fixed level steps without ducking, novelty proof, check tools), a neutral example speech map and example march score, and `tests/test_score_mode.py` (skipped without numpy/scipy). The storyline mode (`compose_music.py`) is unchanged and now documented as the sketch mode with its known limit. Package version stays frozen at `1.4.4`; `registry/components.json` and `SKILLS-MAP.md` regenerated with the repo generators.

@@ -1,10 +1,10 @@
 ---
 name: speicherbereinigung
-version: 1.0.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-08-05
+updated: 2026-10-25
 description: >
   Evidence-based Windows storage cleanup with a controlled emergency mode,
   physical usage measurement, process and origin forensics, and
@@ -233,6 +233,29 @@ After the last mutation:
 Don't claim a cleanup, process limitation or reaching the 50 GB target
 without a matching current readback.
 
+## Recurring build-junk run (scripts in the skill)
+
+Three scripts under `scripts/` remove regenerable build junk and ephemeral work areas before they take space or sync capacity:
+
+- `scripts/clean_build_junk.py [--all] [--apply] [--days N]`: Python caches (`__pycache__`,
+  `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` and `dist/` only next to a
+  Python build marker, Flutter caches; with `--local` also age-based pruning of ephemeral working
+  folders.
+- `scripts/clean_flutter_builds.py [ROOT] [--apply]`: Flutter/Gradle caches (`build/`,
+  `.dart_tool/`, `android/.gradle/`), long-path safe.
+- `scripts/prune_ephemeral.py [--apply] [--review-hours N] [--temp-days N] [--selftest]`: (1) review sandboxes
+  under `<local_dev>eviews` older than 24 h; kept are folders with a LOCK file, young subfolders,
+  uncommitted changes, a stash, or commits missing in the canonical clone; (2) first-level entries in
+  `%TEMP%` older than 7 days (pip leftovers 6 h, `claude` excluded). Windows script; `local_dev` comes from the
+  configuration, without it part (1) is skipped.
+
+**The default is a dry run**; `--apply` deletes for good (only exactly recognised, regenerable
+patterns, no recycle bin), so read the dry run first (applies to all three scripts; for `%TEMP%` the timestamp of the first-level entry counts, not that of the files inside). The root comes from `$SOFTWARE_ROOT` or
+`<OneDrive>/.TOPICS/.SOFTWARE`, never from the script location. Local pruning needs a configuration
+outside the skill (`$BUILD_JUNK_CONFIG` or `~/.config/build-junk/config.json` with `local_dev`,
+`prune_globs`, `protect`) because it holds private folder names; without it the step is skipped and
+reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
+
 ## Known limits
 
 - Without administrative rights, pagefile, hibernation or service changes
@@ -246,6 +269,15 @@ without a matching current readback.
   decision is `nothing`.
 
 ## Changelog
+
+### 1.2.0 (2026-10-25)
+
+- Added `prune_ephemeral.py` (review sandboxes and `%TEMP%`), created during the storage emergency of 25 Oct (C: at 0 GB); self-test and pytest cases added.
+- `clean_flutter_builds.py`: the default is now a dry run, deleting needs `--apply`.
+
+### 1.1.0 (2026-10-18)
+
+- Scripts `clean_build_junk.py` and `clean_flutter_builds.py` moved from the .SOFTWARE pipeline into the skill (root from the environment, private folder names in a configuration outside).
 
 ### 1.0.0 (2026-08-05)
 
