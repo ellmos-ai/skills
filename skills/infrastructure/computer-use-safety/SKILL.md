@@ -42,6 +42,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="computer-use-safety banner">
+
 # computer-use-safety (Deutsch)
 
 Verhaltensprotokoll für jeden Einsatz, bei dem ein Agent einen echten Bildschirm sieht und

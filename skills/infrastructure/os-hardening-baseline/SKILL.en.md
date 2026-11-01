@@ -38,6 +38,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="os-hardening-baseline banner">
+
 # os-hardening-baseline (English)
 
 A baseline for a device that is **your own**, after an incident or as prevention. The list is

@@ -38,6 +38,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="incident-notes banner">
+
 # incident-notes (Deutsch)
 
 Ohne Protokoll ist ein Rettungsfall nicht nachvollziehbar, und niemand kann später sagen, was

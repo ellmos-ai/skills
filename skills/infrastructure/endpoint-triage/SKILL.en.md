@@ -39,6 +39,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="endpoint-triage banner">
+
 # endpoint-triage (English)
 
 A collection plan and reading guide for a device that does not feel right. Precondition:

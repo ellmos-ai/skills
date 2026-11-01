@@ -39,6 +39,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="endpoint-triage banner">
+
 # endpoint-triage (Deutsch)
 
 Sammelplan und Leseanleitung für ein Gerät, dem etwas nicht geheuer ist. Voraussetzung:

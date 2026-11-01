@@ -38,6 +38,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="os-hardening-baseline banner">
+
 # os-hardening-baseline (Deutsch)
 
 Eine Grundabsicherung für ein **eigenes** Gerät, nach einem Vorfall oder vorbeugend. Die

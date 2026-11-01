@@ -42,6 +42,8 @@ provenance:
   local_changes_since_sync: false
 ---
 
+<img src="banner.png" width="100%" alt="computer-use-safety banner">
+
 # computer-use-safety (English)
 
 A behaviour protocol for every use where an agent sees a real screen and operates the mouse
