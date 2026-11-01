@@ -9,7 +9,7 @@ Die Windows-Speicheroptimierung war aktiv und hat %TEMP% trotzdem nicht erfasst.
     oder sofort bei abgeschlossenem Review (closeout.json) bzw. abgelaufener Ablaufmarke
     (owner.json mit expires_at <= jetzt).
     Behalten werden:
-    - LOCK*-Datei (Tiefe <= 2), Reparse-Points,
+    - echte Lock-Datei (LOCK.txt / LOCK.<scope>.txt wie lock_scan.py; Tiefe <= 2), Reparse-Points,
     - aktive Besitzer-/Ablaufmarke (owner.json mit expires_at in der Zukunft, sofern kein closeout.json),
     - Ordner/Unterordner juenger als die Grenze (sofern weder closeout.json noch abgelaufenes expires_at),
     - Arbeitsklone/Worktrees mit uncommitteten Aenderungen oder Stash,
@@ -41,6 +41,13 @@ from clean_flutter_builds import purge_dir  # noqa: E402
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 PIP_HOURS = 6
 CLOSEOUT_KEYS = ("head", "url", "report", "closed_at", "completed_at", "sha256")
+# Echte Lock-Dateien, dasselbe Muster wie lock_utils.LOCK_RE (lock_scan.py): LOCK.txt, LOCK.<scope>.txt, ...
+# Dokumente wie LOCK-SYSTEM.md sind keine Locks.
+LOCK_FILE_RE = re.compile(r"^LOCK(?:\.[A-Za-z0-9_-]+)*\.txt$", re.IGNORECASE)
+
+
+def is_lock_file(name):
+    return LOCK_FILE_RE.match(name) is not None
 
 
 def git(path, *args):
@@ -187,6 +194,12 @@ def _git_dir_of(repo, bare=False):
     return None
 
 
+def _is_linked_worktree(repo):
+    """True for `git worktree add` checkouts: their git dir is <canon>/.git/worktrees/<id>."""
+    gdir = _git_dir_of(repo)
+    return bool(gdir) and os.path.basename(os.path.dirname(gdir)).lower() == "worktrees"
+
+
 def _repo_from_git_or_objects_path(path):
     """Loest <repo>/.git/worktrees/<id>, <repo>/.git/objects oder <bare>/objects zum Repo-Pfad auf."""
     cur = os.path.abspath(path.replace("/", "\\"))
@@ -314,7 +327,7 @@ def review_verdict(full, review_root, cutoff, reach, now=None):
     repos = []
     has_young_sub = False
     for i, (p, names) in enumerate(walk_depth(full)):
-        if any(n.startswith("LOCK") and os.path.isfile(os.path.join(p, n)) for n in names):
+        if any(is_lock_file(n) and os.path.isfile(os.path.join(p, n)) for n in names):
             return "lock"
         if i == 0 and any(os.path.isdir(os.path.join(p, n)) and os.path.getmtime(os.path.join(p, n)) > cutoff
                           for n in names):
@@ -337,7 +350,9 @@ def review_verdict(full, review_root, cutoff, reach, now=None):
     for repo, bare in repos:
         if not bare and git(repo, "status", "--porcelain"):
             return f"dirty:{repo}"
-        if git(repo, "stash", "list"):
+        # refs/stash is shared by all worktrees of a repository: in a linked worktree `stash list` shows the
+        # stash of the canonical clone, which is never deleted here.  Own stashes (clone, shared clone) keep it.
+        if not _is_linked_worktree(repo) and git(repo, "stash", "list"):
             return f"stash:{repo}"
         canon = canon_of(repo, review_root, owner_canon=owner_canon)
         if not canon:

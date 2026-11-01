@@ -248,7 +248,7 @@ Vier Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere
   Täglicher Janitor (`SPEICHER-Ephemeral-Janitor`, 4x täglich) für Review-Sandboxen unter
   `<local_dev>/<review_dir>/<name>` und alte `%TEMP%`-Einträge. Wertet `owner.json` (`expires_at`,
   `canonical_repo`) und `closeout.json` (sofortige Freigabe abgeschlossener Reviews) aus, prüft
-  vor dem Löschen `LOCK*`, uncommittete Änderungen (`dirty`), `stash`, Erreichbarkeit aller
+  vor dem Löschen Lock-Dateien (`LOCK.txt`, `LOCK.<scope>.txt`), uncommittete Änderungen (`dirty`), `stash`, Erreichbarkeit aller
   Branch-Tips im kanonischen Klon (`worktree`, `alternates`, `origin.url`, `owner.json`) sowie
   Ketten-Klon-Abhängigkeiten (`ketten-abhaengig`), und räumt verwaiste Worktree-Einträge per
   `git worktree prune` auf.
@@ -297,6 +297,7 @@ Konfiguration außerhalb des Skills (`$BUILD_JUNK_CONFIG` oder `~/.config/build-
 - `clean_flutter_builds.py`: Standard ist jetzt der Trockenlauf, gelöscht wird nur mit `--apply`.
 - Review-Sandbox-Hygiene (Drei-Stufen-Härtung): `scripts/prune_ephemeral.py` um `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (sofortige Freigabe nach Review-Abschluss), Worktree-/`alternates`-Auflösung und Ketten-Klon-Abhängigkeitsschutz (`ketten-abhaengig`) erweitert; `scripts/review_sandbox.py` für `--no-hardlinks`-freie Sandbox-Erzeugung (`worktree`/`shared`) und sofortigen Closeout ergänzt.
 - Löschpfade abgesichert (2026-11-01): `remove_review_sandbox` löscht nur direkte Kinder der Review-Wurzel (kein Reparse-Point, keine Laufwerkswurzel); `review_sandbox.py closeout` verweigert Ordner außerhalb der Review-Wurzel oder ohne `owner.json` vor dem ersten Schreiben und fällt nicht mehr auf das Elternverzeichnis oder das aktuelle Verzeichnis zurück; `review_dirs` nur als einfache Ordnernamen unter `local_dev`.
+- Review-Urteil korrigiert (2026-11-01): nur echte Lock-Dateien (`LOCK.txt`, `LOCK.<scope>.txt`, gleiches Muster wie `lock_scan.py`) halten eine Sandbox, nicht jede Datei namens `LOCK*` (z. B. `LOCK-SYSTEM.md`); der gemeinsame Stash des kanonischen Klons zählt nicht gegen verknüpfte Worktrees.
 
 ### 1.1.0 (2026-10-18)
 

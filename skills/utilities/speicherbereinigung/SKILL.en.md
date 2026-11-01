@@ -246,7 +246,7 @@ Four scripts under `scripts/` remove regenerable build junk and ephemeral review
 - `scripts/prune_ephemeral.py [--review-hours 24] [--temp-days 7] [--apply] [--selftest]`:
   Daily janitor (`SPEICHER-Ephemeral-Janitor`, 4x daily) for review sandboxes under
   `<local_dev>/<review_dir>/<name>` and stale `%TEMP%` entries. Evaluates `owner.json` (`expires_at`,
-  `canonical_repo`) and `closeout.json` (immediate release of completed reviews), checks `LOCK*`,
+  `canonical_repo`) and `closeout.json` (immediate release of completed reviews), checks lock files (`LOCK.txt`, `LOCK.<scope>.txt`),
   uncommitted changes (`dirty`), `stash`, branch-tip reachability in the canonical clone (`worktree`,
   `alternates`, `origin.url`, `owner.json`), and chain-clone dependencies (`ketten-abhaengig`), and
   prunes stale worktree metadata via `git worktree prune`.
@@ -294,6 +294,7 @@ reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
 - `clean_flutter_builds.py`: the default is now a dry run, deleting needs `--apply`.
 - Review sandbox hygiene (three-stage hardening): extended `scripts/prune_ephemeral.py` with `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (immediate release after review completion), worktree/`alternates` resolution, and chain-clone dependency protection (`ketten-abhaengig`); added `scripts/review_sandbox.py` for `--no-hardlinks`-free sandbox creation (`worktree`/`shared`) and immediate closeout.
 - Deletion paths hardened (2026-11-01): `remove_review_sandbox` deletes only direct children of the review root (no reparse point, no drive root); `review_sandbox.py closeout` refuses folders outside the review root or without `owner.json` before the first write and no longer falls back to the parent or current directory; `review_dirs` only as plain folder names under `local_dev`.
+- Review verdict corrected (2026-11-01): only real lock files (`LOCK.txt`, `LOCK.<scope>.txt`, same pattern as `lock_scan.py`) keep a sandbox, not every file named `LOCK*` (for example `LOCK-SYSTEM.md`); the shared stash of the canonical clone no longer counts against linked worktrees.
 
 ### 1.1.0 (2026-10-18)
 
