@@ -65,7 +65,7 @@ def verdict(folder: Path, root: Path):
         ("LOCK.txt", True),
         ("lock.txt", True),
         ("LOCK.docs.txt", True),
-        ("LOCK.team.docs.ASUS-GEI.txt", True),
+        ("LOCK.team.docs.host-a.txt", True),
         ("LOCK.user.txt", True),
         ("LOCK-SYSTEM.md", False),
         ("LOCK-SYSTEM_de.md", False),
