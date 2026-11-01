@@ -23,17 +23,27 @@ from prune_ephemeral import (  # noqa: E402
     NO_WINDOW,
     _is_git_repo_dir,
     _is_outside_review_root,
+    is_direct_child,
+    read_owner_meta,
     remove_review_sandbox,
     review_verdict,
+    safe_review_roots,
     sandbox_dependencies,
 )
 
 
 def default_review_root():
-    if not LOCAL_DEV:
-        return ""
-    review_dirs = CONFIG.get("review_dirs") or ["reviews"]
-    return os.path.join(LOCAL_DEV, review_dirs[0])
+    """First configured review root (plain folder name under local_dev), or "" when none is configured."""
+    roots = safe_review_roots(LOCAL_DEV, CONFIG.get("review_dirs") or ["reviews"])
+    return roots[0] if roots else ""
+
+
+def _resolve_review_root(review_root):
+    """Explicit root or the configured one; never falls back to the current directory or a parent folder."""
+    root = review_root or default_review_root()
+    if not root:
+        raise ValueError("Kein review_root konfiguriert (--review-root oder local_dev in config.json).")
+    return os.path.abspath(root)
 
 
 def _iso_utc(ts=None):
@@ -52,9 +62,7 @@ def create_sandbox(
     review_root=None,
 ):
     """Legt eine Review-Sandbox mit owner.json und worktree/shared-Checkout an."""
-    review_root = os.path.abspath(review_root or default_review_root())
-    if not review_root:
-        raise ValueError("Kein review_root konfiguriert (--review-root oder local_dev in config.json).")
+    review_root = _resolve_review_root(review_root)
     canon = os.path.abspath(canonical_repo)
     if not _is_git_repo_dir(canon):
         raise ValueError(f"Kanonischer Klon ist kein gueltiges Git-Repository: {canon}")
@@ -144,7 +152,13 @@ def closeout_sandbox(
     sandbox_dir = os.path.abspath(sandbox_path)
     if not os.path.isdir(sandbox_dir):
         raise FileNotFoundError(f"Sandbox nicht gefunden: {sandbox_dir}")
-    review_root = os.path.abspath(review_root or os.path.dirname(sandbox_dir))
+    review_root = _resolve_review_root(review_root)
+    # Nur echte Sandboxen: direktes Kind der Review-Wurzel und von `create` angelegt (owner.json).
+    # Geprueft VOR dem ersten Schreiben, damit ein falscher Pfad weder closeout.json bekommt noch geloescht wird.
+    if not is_direct_child(sandbox_dir, review_root):
+        raise ValueError(f"Sandbox liegt nicht direkt unter der Review-Wurzel {review_root}: {sandbox_dir}")
+    if not read_owner_meta(sandbox_dir):
+        raise ValueError(f"Keine owner.json in {sandbox_dir}: nicht mit `create` angelegt, closeout verweigert.")
     closeout_path = os.path.join(sandbox_dir, "closeout.json")
     data = {}
     if os.path.isfile(closeout_path):
@@ -220,26 +234,30 @@ def main(argv=None):
     p_close.add_argument("--review-root", default=None, help="Optionale Review-Wurzel")
 
     args = parser.parse_args(argv)
-    if args.cmd == "create":
-        res = create_sandbox(
-            name=args.name,
-            canonical_repo=args.repo,
-            owner=args.owner,
-            ticket_id=args.ticket,
-            ttl_hours=args.ttl_hours,
-            mode=args.mode,
-            ref=args.ref,
-            review_root=args.review_root,
-        )
-    else:
-        res = closeout_sandbox(
-            sandbox_path=args.sandbox,
-            head=args.head,
-            url=args.url,
-            report=args.report,
-            delete_now=not args.keep,
-            review_root=args.review_root,
-        )
+    try:
+        if args.cmd == "create":
+            res = create_sandbox(
+                name=args.name,
+                canonical_repo=args.repo,
+                owner=args.owner,
+                ticket_id=args.ticket,
+                ttl_hours=args.ttl_hours,
+                mode=args.mode,
+                ref=args.ref,
+                review_root=args.review_root,
+            )
+        else:
+            res = closeout_sandbox(
+                sandbox_path=args.sandbox,
+                head=args.head,
+                url=args.url,
+                report=args.report,
+                delete_now=not args.keep,
+                review_root=args.review_root,
+            )
+    except (ValueError, FileNotFoundError, FileExistsError) as exc:
+        print(json.dumps({"error": str(exc)}, indent=2))
+        return 1
     print(json.dumps(res, indent=2))
     return 0
 

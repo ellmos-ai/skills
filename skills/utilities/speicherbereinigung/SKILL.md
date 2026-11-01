@@ -266,6 +266,10 @@ Vier Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere
     Worker `closeout.json` (`python scripts/review_sandbox.py closeout --sandbox <pfad> --head <sha>`)
     und löscht die Sandbox sofort, sobald alle Sicherheits-Gates grün sind. Dauerhafte Nachweise
     gehören in den PR-Kommentar, Review-Bericht oder das Ticket — nicht in die Sandbox.
+  - **Containment:** `closeout` und der Janitor löschen nur direkte Kinder der Review-Wurzel. `closeout`
+    verlangt zusätzlich die von `create` angelegte `owner.json` und verweigert jeden anderen Ordner, bevor
+    etwas geschrieben oder gelöscht wird. `review_dirs` in der Konfiguration sind einfache Ordnernamen
+    direkt unter `local_dev`; andere Einträge werden ignoriert.
 
 **Standard ist der Trockenlauf**; `--apply` löscht endgültig (nur exakt erkannte, regenerierbare
 Muster, kein Papierkorb), also erst den Trockenlauf lesen (gilt für alle drei Skripte; bei `%TEMP%` zählt der Zeitstempel des Eintrags der ersten Ebene, nicht der Dateien darin). Die Wurzel kommt aus `$SOFTWARE_ROOT`
@@ -292,6 +296,7 @@ Konfiguration außerhalb des Skills (`$BUILD_JUNK_CONFIG` oder `~/.config/build-
 - Skript `prune_ephemeral.py` (Review-Sandboxen und `%TEMP%`) aufgenommen, entstanden im Speichernotfall vom 25.10. (C: bei 0 GB); Selbsttest und Pytest-Fälle ergänzt.
 - `clean_flutter_builds.py`: Standard ist jetzt der Trockenlauf, gelöscht wird nur mit `--apply`.
 - Review-Sandbox-Hygiene (Drei-Stufen-Härtung): `scripts/prune_ephemeral.py` um `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (sofortige Freigabe nach Review-Abschluss), Worktree-/`alternates`-Auflösung und Ketten-Klon-Abhängigkeitsschutz (`ketten-abhaengig`) erweitert; `scripts/review_sandbox.py` für `--no-hardlinks`-freie Sandbox-Erzeugung (`worktree`/`shared`) und sofortigen Closeout ergänzt.
+- Löschpfade abgesichert (2026-11-01): `remove_review_sandbox` löscht nur direkte Kinder der Review-Wurzel (kein Reparse-Point, keine Laufwerkswurzel); `review_sandbox.py closeout` verweigert Ordner außerhalb der Review-Wurzel oder ohne `owner.json` vor dem ersten Schreiben und fällt nicht mehr auf das Elternverzeichnis oder das aktuelle Verzeichnis zurück; `review_dirs` nur als einfache Ordnernamen unter `local_dev`.
 
 ### 1.1.0 (2026-10-18)
 

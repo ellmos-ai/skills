@@ -262,6 +262,10 @@ Four scripts under `scripts/` remove regenerable build junk and ephemeral review
     `closeout.json` (`python scripts/review_sandbox.py closeout --sandbox <path> --head <sha>`) and
     deletes the sandbox immediately once all safety gates pass. Permanent evidence belongs in the PR
     comment, review report, or ticket — never in the sandbox.
+  - **Containment:** `closeout` and the janitor delete only direct children of the review root. `closeout`
+    also requires the `owner.json` written by `create` and refuses any other folder before anything is
+    written or deleted. `review_dirs` in the configuration are plain folder names directly under
+    `local_dev`; other entries are ignored.
 
 **The default is a dry run**; `--apply` deletes for good (only exactly recognised, regenerable
 patterns, no recycle bin), so read the dry run first (applies to all three scripts; for `%TEMP%` the timestamp of the first-level entry counts, not that of the files inside). The root comes from `$SOFTWARE_ROOT` or
@@ -289,6 +293,7 @@ reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
 - Added `prune_ephemeral.py` (review sandboxes and `%TEMP%`), created during the storage emergency of 25 Oct (C: at 0 GB); self-test and pytest cases added.
 - `clean_flutter_builds.py`: the default is now a dry run, deleting needs `--apply`.
 - Review sandbox hygiene (three-stage hardening): extended `scripts/prune_ephemeral.py` with `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (immediate release after review completion), worktree/`alternates` resolution, and chain-clone dependency protection (`ketten-abhaengig`); added `scripts/review_sandbox.py` for `--no-hardlinks`-free sandbox creation (`worktree`/`shared`) and immediate closeout.
+- Deletion paths hardened (2026-11-01): `remove_review_sandbox` deletes only direct children of the review root (no reparse point, no drive root); `review_sandbox.py closeout` refuses folders outside the review root or without `owner.json` before the first write and no longer falls back to the parent or current directory; `review_dirs` only as plain folder names under `local_dev`.
 
 ### 1.1.0 (2026-10-18)
 

@@ -56,6 +56,38 @@ def is_reparse(path):
         return False
 
 
+def is_direct_child(path, root):
+    """Fail-closed containment: `path` is an existing directory sitting directly under the existing
+    directory `root`.  False for empty arguments, a drive/filesystem root as `root`, reparse points
+    (junction/symlink) as `path` or `root`, `root` itself and anything deeper."""
+    if not path or not root or not os.path.isdir(path) or not os.path.isdir(root):
+        return False
+    if is_reparse(path) or is_reparse(root):
+        return False
+    real_path, real_root = (os.path.normcase(os.path.realpath(p)) for p in (path, root))
+    if os.path.dirname(real_root) == real_root:
+        return False
+    return os.path.dirname(real_path) == real_root
+
+
+def safe_review_roots(local_dev, review_dirs):
+    """Review roots named by the configuration: only plain folder names directly under `local_dev`.
+    Empty names, `.`/`..`, separators, drive letters and non-strings are ignored, so a bad
+    `review_dirs` entry can never point the janitor at `local_dev` itself or outside of it."""
+    if not local_dev:
+        return []
+    if isinstance(review_dirs, str):
+        review_dirs = [review_dirs]
+    if not isinstance(review_dirs, list):
+        return []
+    roots = []
+    for name in review_dirs:
+        if (isinstance(name, str) and name not in ("", ".", "..") and name == os.path.basename(name)
+                and "/" not in name and "\\" not in name and ":" not in name):
+            roots.append(os.path.join(local_dev, name))
+    return roots
+
+
 def walk_depth(root, depth=2):
     """(Pfad, Namen) bis Tiefe `depth` unterhalb von root, ohne in .git abzusteigen."""
     stack = [(root, 0)]
@@ -336,7 +368,11 @@ def remove(path):
 
 
 def remove_review_sandbox(full, review_root):
-    """Entfernt eine Review-Sandbox und raeumt etwaige Worktree-Metadaten im Kanon-Repo auf."""
+    """Entfernt eine Review-Sandbox und raeumt etwaige Worktree-Metadaten im Kanon-Repo auf.
+
+    Loescht nur ein direktes Kind von `review_root` (is_direct_child); alles andere bleibt unberuehrt."""
+    if not is_direct_child(full, review_root):
+        return False
     owner_canon = read_owner_meta(full).get("canonical_repo")
     canons = set()
     for repo, bare in _sandbox_repos(full):
@@ -502,8 +538,11 @@ def main():
     out(f"\n== prune_ephemeral {time.strftime('%Y-%m-%d %H:%M')} {'[APPLY]' if apply else '[DRY-RUN]'}"
         f"  frei {free_gb(os.environ.get('SystemDrive', 'C:') + os.sep):.1f} GB")
     if LOCAL_DEV:
-        for rd in CONFIG.get("review_dirs", ["reviews"]):
-            root = os.path.join(LOCAL_DEV, rd)
+        configured = CONFIG.get("review_dirs", ["reviews"])
+        roots = safe_review_roots(LOCAL_DEV, configured)
+        if len(roots) != len(configured if isinstance(configured, list) else [configured]):
+            out("[review] review_dirs: nur einfache Ordnernamen direkt unter local_dev sind erlaubt; Rest ignoriert")
+        for root in roots:
             if os.path.isdir(root):
                 prune_reviews(root, opt("--review-hours", 24), apply, out)
     else:
