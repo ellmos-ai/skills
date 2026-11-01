@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="protection-shield banner">
+
 # protection-shield
 
 仅适用于自有或明确授权的系统、网络及服务器。变更前核对资产、所有者、权限、锁、影响和恢复方案。警报本身不是生产变更授权；不得反击、访问他人资产或擅自扫描服务。

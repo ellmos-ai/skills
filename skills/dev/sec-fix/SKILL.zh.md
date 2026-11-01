@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-fix banner">
+
 # sec-fix - 最小化安全补丁
 
 ellmos 安全技能家族的「fix」阶段。契约：`sec-scan/references/contract.md`（目录 §1，生命周期 §2，规则 §6）。此处只描述其应用方式。

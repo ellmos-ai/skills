@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-threat-model banner">
+
 # sec-threat-model
 
 ellmos 安全技能家族的第 1 阶段（`sec-threat-model`、`sec-scan`、`sec-diff-scan`、`sec-validate`、`sec-triage`、`sec-report`）。共享契约：`sec-scan/references/contract.md`（第 1 节 扫描目录，第 6 节 规则）。此处不重复。

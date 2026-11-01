@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-verify-fix banner">
+
 # sec-verify-fix - 补丁堵住漏洞了吗？
 
 「verify-fix」阶段。契约：`sec-scan/references/contract.md`（生命周期 §2，规则 7 位于 §6）。要求发现的状态为 `fixed` 且带有 `fix.patchFile`。

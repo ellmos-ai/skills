@@ -19,6 +19,8 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="tech-detect banner">
+
 # Tech Detect
 
 仅检查自有或明确授权的主机。先阅读现有清单及主机槽位规则。对于 `<inventory>` 一类结构，`systems/<本机槽位>.json` 是输入；本技能不会更新该种子，更不会写入其他主机的槽位。

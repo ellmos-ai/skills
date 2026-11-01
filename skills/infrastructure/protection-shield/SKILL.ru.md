@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="protection-shield banner">
+
 # protection-shield
 
 Только для собственных или явно разрешённых систем, сетей и серверов. Перед изменением проверить актив, владельца, полномочия, блокировки, последствия и откат. Сигнал тревоги не даёт права менять продуктивную сеть. Никаких контратак, чужих активов и неразрешённого сканирования.

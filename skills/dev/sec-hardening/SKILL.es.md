@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - estructural en lugar de pieza a pieza
 
 Cuando los hallazgos de la misma clase reaparecen una y otra vez, la causa suele estar en la estructura (sin validación central, límite de confianza sin comprobar, secretos en el código). Este skill propone cambios a ese nivel. Contrato: `sec-scan/references/contract.md` (hallazgos §1/§2, regla 4 secretos, regla 5 coste).

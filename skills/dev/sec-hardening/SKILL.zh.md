@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - 从结构入手，而不是逐个修补
 
 当同一类发现反复出现时，原因通常在于结构（没有集中的校验、未经检查的信任边界、代码中的密钥）。本技能在这个层面提出变更建议。契约：`sec-scan/references/contract.md`（发现 §1/§2，规则 4 密钥，规则 5 成本）。

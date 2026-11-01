@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-report banner">
+
 # sec-report
 
 ellmos 安全技能家族的最后阶段。契约：`sec-scan/references/contract.md`（文件 1，严重度 3，覆盖范围 5，规则 6）。该脚本从同级文件夹 `sec-scan/scripts` 导入 `seclib`（在仓库的 `skills/dev/` 中，以及在扁平部署的 `~/.claude/skills/` 中；两个文件夹必须并排放置）。仅使用标准库。

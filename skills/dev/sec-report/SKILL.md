@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-report banner">
+
 # sec-report
 
 Letzte Phase der ellmos-Security-Familie. Vertrag: `sec-scan/references/contract.md` (Dateien 1, Severity 3, Coverage 5, Regeln 6). Das Skript importiert `seclib` aus dem Geschwisterordner `sec-scan/scripts` (im Repo `skills/dev/` und im flachen Deployment `~/.claude/skills/`; beide Ordner müssen nebeneinander liegen). Nur Standardbibliothek.

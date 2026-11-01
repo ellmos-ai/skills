@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-track banner">
+
 # sec-track - 所見を追跡可能にする
 
 「track」フェーズ。コントラクト：`sec-scan/references/contract.md`（ルール 4 シークレット、ルール 8 チケットは §6。フィールド `ticket` は `schemas/finding.schema.json`）。status が `validated` 以降の所見のみが対象で、`candidate` は追跡しない。

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-track banner">
+
 # sec-track - hacer trazables los hallazgos
 
 La fase «track». Contrato: `sec-scan/references/contract.md` (regla 4 secretos, regla 8 tickets en §6; campo `ticket` en `schemas/finding.schema.json`). Solo hallazgos con estado `validated` o posterior - `candidate` no se rastrea.

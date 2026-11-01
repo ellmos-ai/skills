@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-validate banner">
+
 # sec-validate
 
 Фаза 3 семейства навыков безопасности ellmos. Контракт: `sec-scan/references/contract.md` (жизненный цикл 2, серьёзность 3, правила 6). Валидатор: `sec-scan/scripts/secfind.py`. Позиция: **опровергать, а не подтверждать.** Кандидат считается `validated` только тогда, когда попытка его опровергнуть не удалась.

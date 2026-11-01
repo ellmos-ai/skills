@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - structural instead of piece by piece
 
 When findings of the same class keep recurring, the cause usually lies in the structure (no central validation, unchecked trust boundary, secrets in code). This skill proposes changes at that level. Contract: `sec-scan/references/contract.md` (findings §1/§2, rule 4 secrets, rule 5 cost).

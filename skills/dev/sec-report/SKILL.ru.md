@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-report banner">
+
 # sec-report
 
 Завершающая фаза семейства навыков безопасности ellmos. Контракт: `sec-scan/references/contract.md` (файлы 1, серьёзность 3, покрытие 5, правила 6). Скрипт импортирует `seclib` из соседней папки `sec-scan/scripts` (в репозитории `skills/dev/` и при плоском развёртывании `~/.claude/skills/`; обе папки должны лежать рядом). Только стандартная библиотека.

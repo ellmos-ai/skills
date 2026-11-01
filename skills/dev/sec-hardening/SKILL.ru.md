@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - структурно, а не по частям
 
 Когда находки одного класса повторяются, причина обычно лежит в структуре (нет центральной валидации, непроверенная граница доверия, секреты в коде). Этот навык предлагает изменения на этом уровне. Контракт: `sec-scan/references/contract.md` (находки §1/§2, правило 4 секреты, правило 5 стоимость).

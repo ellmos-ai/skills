@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-threat-model banner">
+
 # sec-threat-model
 
 Phase 1 der ellmos-Security-Familie (`sec-threat-model`, `sec-scan`, `sec-diff-scan`, `sec-validate`, `sec-triage`, `sec-report`). Gemeinsamer Vertrag: `sec-scan/references/contract.md` (Abschnitt 1 Scan-Verzeichnis, 6 Regeln). Hier nicht wiederholt.

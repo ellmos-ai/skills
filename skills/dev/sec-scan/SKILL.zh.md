@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-scan banner">
+
 # sec-scan
 
 ellmos 安全技能家族的核心。共享契约（阶段、文件、生命周期、严重度、规则、适配器）位于 `references/contract.md`，模式（schema）位于 `schemas/`，校验器位于 `scripts/secfind.py` + `scripts/seclib.py`（仅使用标准库）。本技能引用该契约而不重复其内容。相邻技能：`sec-threat-model`、`sec-diff-scan`、`sec-validate`、`sec-triage`、`sec-report`。

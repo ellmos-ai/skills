@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-writeup banner">
+
 # sec-writeup - 用于披露的漏洞报告
 
 一份无需背景知识就能读懂、并且不了解该缺陷的人也能复现的报告。契约：`sec-scan/references/contract.md`（规则 1 自有代码，规则 4 密钥，规则 6 数据外传，规则 9 如实报告）。

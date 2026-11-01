@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-verify-fix banner">
+
 # sec-verify-fix - パッチは穴を塞いだか
 
 「verify-fix」フェーズ。コントラクト：`sec-scan/references/contract.md`（ライフサイクル §2、ルール 7 は §6）。status が `fixed` で `fix.patchFile` がある所見が前提となる。

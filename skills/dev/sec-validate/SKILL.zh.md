@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-validate banner">
+
 # sec-validate
 
 ellmos 安全技能家族的第 3 阶段。契约：`sec-scan/references/contract.md`（生命周期 2，严重度 3，规则 6）。校验器：`sec-scan/scripts/secfind.py`。立场：**反驳，而非确认。** 只有当反驳的尝试失败时，候选项才算 `validated`。

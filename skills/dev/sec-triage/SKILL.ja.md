@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-triage banner">
+
 # sec-triage
 
 ellmos セキュリティファミリーのフェーズ 4。コントラクト：`sec-scan/references/contract.md`（ファイル 1、ライフサイクル 2、重大度 3、id 4、ルール 6）。バリデーター：`sec-scan/scripts/secfind.py`。**静的な証拠のみ：** 新たな発見（`sec-scan`）も、実行時の検証（`sec-validate`）も行わない。

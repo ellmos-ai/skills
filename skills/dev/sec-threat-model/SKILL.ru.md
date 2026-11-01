@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-threat-model banner">
+
 # sec-threat-model
 
 Фаза 1 семейства навыков безопасности ellmos (`sec-threat-model`, `sec-scan`, `sec-diff-scan`, `sec-validate`, `sec-triage`, `sec-report`). Общий контракт: `sec-scan/references/contract.md` (раздел 1 каталог сканирования, раздел 6 правила). Здесь не повторяется.

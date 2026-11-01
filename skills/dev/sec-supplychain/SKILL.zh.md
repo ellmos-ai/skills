@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-supplychain banner">
+
 # sec-supplychain - 在第三方代码运行之前检查它
 
 技能是对代理的指令；hook 和 MCP 服务器是以用户权限运行的代码。两者都属于供应链。契约：`sec-scan/references/contract.md`（规则 4 密钥，规则 6 数据外传，规则 9 如实报告）。

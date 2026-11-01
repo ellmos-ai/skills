@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - strukturell statt Stück für Stück
 
 Wiederholen sich Funde derselben Klasse, liegt die Ursache meist in der Struktur (fehlende zentrale Validierung, ungeprüfte Vertrauensgrenze, Geheimnisse im Code). Dieser Skill schlägt Änderungen auf dieser Ebene vor. Vertrag: `sec-scan/references/contract.md` (Funde §1/§2, Regel 4 Geheimnisse, Regel 5 Kosten).

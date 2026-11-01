@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-track banner">
+
 # sec-track - 让发现可追踪
 
 「track」阶段。契约：`sec-scan/references/contract.md`（规则 4 密钥，规则 8 工单，位于 §6；字段 `ticket` 见 `schemas/finding.schema.json`）。仅针对状态为 `validated` 或更靠后的发现，`candidate` 不予跟踪。

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-triage banner">
+
 # sec-triage
 
 Phase 4 der ellmos-Security-Familie. Vertrag: `sec-scan/references/contract.md` (Dateien 1, Lebenszyklus 2, Severity 3, id 4, Regeln 6). Validator: `sec-scan/scripts/secfind.py`. **Nur statische Evidenz:** keine Neuentdeckung (`sec-scan`), keine Laufzeitvalidierung (`sec-validate`).

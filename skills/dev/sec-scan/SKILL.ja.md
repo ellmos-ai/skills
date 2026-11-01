@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-scan banner">
+
 # sec-scan
 
 ellmos セキュリティファミリーの中核。共通コントラクト（フェーズ、ファイル、ライフサイクル、重大度、ルール、アダプター）は `references/contract.md` に、スキーマは `schemas/` に、バリデーターは `scripts/secfind.py` + `scripts/seclib.py`（標準ライブラリのみ）にある。このスキルはコントラクトを参照するだけで、内容は繰り返さない。隣接スキル：`sec-threat-model`、`sec-diff-scan`、`sec-validate`、`sec-triage`、`sec-report`。

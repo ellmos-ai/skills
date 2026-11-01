@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-validate banner">
+
 # sec-validate
 
 Phase 3 der ellmos-Security-Familie. Vertrag: `sec-scan/references/contract.md` (Lebenszyklus 2, Severity 3, Regeln 6). Validator: `sec-scan/scripts/secfind.py`. Haltung: **Widerlegen, nicht Bestätigen.** Ein Kandidat gilt erst als `validated`, wenn der Widerlegungsversuch scheitert.

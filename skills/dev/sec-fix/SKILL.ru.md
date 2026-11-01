@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-fix banner">
+
 # sec-fix - минимальный патч безопасности
 
 Фаза «fix» семейства навыков безопасности ellmos. Контракт: `sec-scan/references/contract.md` (каталог §1, жизненный цикл §2, правила §6). Здесь описано только применение.

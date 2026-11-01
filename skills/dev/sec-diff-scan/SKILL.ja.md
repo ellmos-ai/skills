@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-diff-scan banner">
+
 # sec-diff-scan
 
 `sec-scan` と同様だが、スコープは**変更**である。コントラクト、ファイル形式、ルール：`sec-scan/references/contract.md`。スキーマとバリデーターは `sec-scan/schemas/` と `sec-scan/scripts/` にある。プリフライト（所有権、ロック確認、外部送信、コスト）、候補の作成（`secfind.py id` による `id`、シークレットのマスク）、検証は `sec-scan` > 手順 と同じ。ここでは相違点のみを挙げる。

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-triage banner">
+
 # sec-triage
 
 ellmos 安全技能家族的第 4 阶段。契约：`sec-scan/references/contract.md`（文件 1，生命周期 2，严重度 3，id 4，规则 6）。校验器：`sec-scan/scripts/secfind.py`。**仅依据静态证据：** 不做新的发现（`sec-scan`），不做运行时验证（`sec-validate`）。

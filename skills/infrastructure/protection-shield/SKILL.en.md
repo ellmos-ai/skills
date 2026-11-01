@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="protection-shield banner">
+
 # Protection Shield
 
 Use only for owned or explicitly authorized systems, networks and servers. Before a live change, verify asset ID, owner, authority, locks, impact and rollback. An alert does not itself authorize a production network change. No counterattack, foreign-asset access or unauthorized service scan.

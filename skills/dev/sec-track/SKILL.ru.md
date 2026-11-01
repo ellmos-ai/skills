@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-track banner">
+
 # sec-track - сделать находки отслеживаемыми
 
 Фаза «track». Контракт: `sec-scan/references/contract.md` (правило 4 секреты, правило 8 тикеты в §6; поле `ticket` в `schemas/finding.schema.json`). Только находки со статусом `validated` и выше - `candidate` не отслеживается.

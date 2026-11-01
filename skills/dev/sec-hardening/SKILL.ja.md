@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-hardening banner">
+
 # sec-hardening - 一つずつではなく、構造から
 
 同じ種類の所見が繰り返し現れるとき、原因は多くの場合構造にある（一元的なバリデーションがない、チェックされていない信頼境界、コード内のシークレット）。このスキルは、その水準での変更を提案する。コントラクト：`sec-scan/references/contract.md`（所見 §1/§2、ルール 4 シークレット、ルール 5 コスト）。

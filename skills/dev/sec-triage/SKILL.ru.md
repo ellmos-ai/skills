@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-triage banner">
+
 # sec-triage
 
 Фаза 4 семейства навыков безопасности ellmos. Контракт: `sec-scan/references/contract.md` (файлы 1, жизненный цикл 2, серьёзность 3, id 4, правила 6). Валидатор: `sec-scan/scripts/secfind.py`. **Только статические доказательства:** без нового поиска (`sec-scan`), без валидации во время выполнения (`sec-validate`).

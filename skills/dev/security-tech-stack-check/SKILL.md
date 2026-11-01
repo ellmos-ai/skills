@@ -19,6 +19,8 @@ dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'py
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="security-tech-stack-check banner">
+
 # Security Tech Stack Check (STSC)
 
 ## Eintritt und Quellen

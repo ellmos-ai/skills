@@ -19,6 +19,8 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="tech-detect banner">
+
 # Tech Detect
 
 Úsalo solo en un equipo propio o autorizado. Lee primero el inventario y sus reglas por equipo. En una estructura como `<inventory>`, el JSON `systems/<slot-propio>.json` es la entrada; este skill no lo actualiza ni modifica otros equipos.

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-policy banner">
+
 # sec-policy - определить и проверить SECURITY.md
 
 Политика говорит, что считается уязвимостью в этом репозитории. `sec-triage` оценивает находки по ней (контракт `sec-scan/references/contract.md` §2: `triaged` = серьёзность и приоритет определены по политике). Без политики триаж гадает.

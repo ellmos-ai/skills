@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-supplychain banner">
+
 # sec-supplychain - проверить сторонний код до его запуска
 
 Навыки - это инструкции для агента; хуки и MCP-серверы - код, выполняемый с правами пользователя. И то и другое - цепочка поставок. Контракт: `sec-scan/references/contract.md` (правило 4 секреты, правило 6 egress, правило 9 сообщать достоверно).

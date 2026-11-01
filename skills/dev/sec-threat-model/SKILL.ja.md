@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-threat-model banner">
+
 # sec-threat-model
 
 ellmos セキュリティファミリー（`sec-threat-model`、`sec-scan`、`sec-diff-scan`、`sec-validate`、`sec-triage`、`sec-report`）のフェーズ 1。共通コントラクト：`sec-scan/references/contract.md`（第 1 節 スキャンディレクトリ、第 6 節 ルール）。ここでは繰り返さない。

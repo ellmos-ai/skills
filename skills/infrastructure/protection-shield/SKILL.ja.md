@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="protection-shield banner">
+
 # protection-shield
 
 所有または明示的に許可されたシステム・ネットワーク・サーバーのみを対象とする。変更前に資産、所有者、権限、ロック、影響、復旧を確認する。警報だけで本番変更は許可されない。反撃、他者資産へのアクセス、無許可のサービス走査はしない。

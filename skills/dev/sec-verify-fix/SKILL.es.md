@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-verify-fix banner">
+
 # sec-verify-fix - ¿el parche cierra la brecha?
 
 La fase «verify-fix». Contrato: `sec-scan/references/contract.md` (ciclo de vida §2, regla 7 en §6). Requiere un hallazgo con estado `fixed` y `fix.patchFile`.

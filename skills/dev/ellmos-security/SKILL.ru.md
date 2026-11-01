@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="ellmos-security banner">
+
 # ellmos-security - точка входа семейства навыков безопасности
 
 Семейство проверяет ваш собственный код на уязвимости и проводит каждую находку от подозрения до отслеживаемого, проверенного исправления. Все навыки опираются на один общий контракт (форматы файлов, жизненный цикл, серьёзность, правила): `sec-scan/references/contract.md`. Они работают в Claude, Codex, Gemini и Kimi и не зависят от сканера какого-либо одного провайдера; такие сканеры - лишь адаптеры (таблица ниже).

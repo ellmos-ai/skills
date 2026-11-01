@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-writeup banner">
+
 # sec-writeup - Schwachstellenbericht zur Offenlegung
 
 Ein Bericht, der ohne Vorwissen lesbar ist und von jemandem nachvollzogen werden kann, der die Lücke nicht kennt. Vertrag: `sec-scan/references/contract.md` (Regel 1 eigener Code, Regel 4 Geheimnisse, Regel 6 Egress, Regel 9 ehrlich berichten).

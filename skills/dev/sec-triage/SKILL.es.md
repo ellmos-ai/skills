@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-triage banner">
+
 # sec-triage
 
 Fase 4 de la familia de seguridad ellmos. Contrato: `sec-scan/references/contract.md` (archivos 1, ciclo de vida 2, severidad 3, id 4, reglas 6). Validador: `sec-scan/scripts/secfind.py`. **Solo evidencia estática:** sin nuevos descubrimientos (`sec-scan`), sin validación en tiempo de ejecución (`sec-validate`).

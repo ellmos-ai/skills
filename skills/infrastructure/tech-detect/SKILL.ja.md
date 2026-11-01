@@ -19,6 +19,8 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="tech-detect banner">
+
 # Tech Detect
 
 所有または明示的に許可されたホストだけを対象にする。既存インベントリとホスト別スロットの規則を先に読む。`<inventory>` 型の構成では `systems/<自ホストのスロット>.json` を入力とし、このスキルは種ファイルや他ホストのスロットを更新しない。

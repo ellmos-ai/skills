@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-writeup banner">
+
 # sec-writeup - 開示のための脆弱性レポート
 
 予備知識がなくても読め、その欠陥を知らない人でも再現できるレポート。コントラクト：`sec-scan/references/contract.md`（ルール 1 自分のコード、ルール 4 シークレット、ルール 6 外部送信、ルール 9 忠実に報告する）。

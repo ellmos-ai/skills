@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-supplychain banner">
+
 # sec-supplychain - Fremdes prüfen, bevor es läuft
 
 Skills sind Anweisungen an den Agenten, Hooks und MCP-Server sind Code, der mit den Rechten des Nutzers läuft. Beides ist Lieferkette. Vertrag: `sec-scan/references/contract.md` (Regel 4 Geheimnisse, Regel 6 Egress, Regel 9 ehrlich berichten).

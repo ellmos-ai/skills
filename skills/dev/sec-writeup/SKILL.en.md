@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-writeup banner">
+
 # sec-writeup - vulnerability report for disclosure
 
 A report readable without prior knowledge and reproducible by someone who does not know the flaw. Contract: `sec-scan/references/contract.md` (rule 1 own code, rule 4 secrets, rule 6 egress, rule 9 report faithfully).

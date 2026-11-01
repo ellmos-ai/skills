@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-diff-scan banner">
+
 # sec-diff-scan
 
 与 `sec-scan` 相同，只是范围为一次**变更**。契约、文件格式与规则：`sec-scan/references/contract.md`；模式（schema）与校验器位于 `sec-scan/schemas/` 与 `sec-scan/scripts/`。预检（所有权、锁检查、数据外传、成本）、候选项构造（通过 `secfind.py id` 生成 `id`，遮蔽密钥）以及校验，均与 `sec-scan` > 流程 相同。此处仅列出差异。

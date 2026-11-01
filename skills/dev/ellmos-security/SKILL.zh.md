@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="ellmos-security banner">
+
 # ellmos-security - 安全技能家族的入口
 
 这个家族检查你自己代码中的漏洞，并把每一个发现从怀疑一路推进到被跟踪、经核验的修复。所有技能共用一份契约（文件格式、生命周期、严重度、规则）：`sec-scan/references/contract.md`。它们可在 Claude、Codex、Gemini 和 Kimi 上运行，不依赖任何特定供应商的扫描器；这类扫描器仅作为适配器接入（见下表）。

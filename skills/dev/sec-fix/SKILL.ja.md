@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-fix banner">
+
 # sec-fix - 最小限のセキュリティパッチ
 
 ellmos セキュリティファミリーの「fix」フェーズ。コントラクト：`sec-scan/references/contract.md`（ディレクトリ §1、ライフサイクル §2、ルール §6）。ここでは適用方法のみを記す。

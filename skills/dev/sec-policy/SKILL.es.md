@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-policy banner">
+
 # sec-policy - definir y revisar SECURITY.md
 
 La política dice qué cuenta como vulnerabilidad en este repo. `sec-triage` valora los hallazgos frente a ella (contrato `sec-scan/references/contract.md` §2: `triaged` = severidad y prioridad decididas según la política). Sin política, el triaje adivina.

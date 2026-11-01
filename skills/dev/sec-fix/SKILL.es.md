@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-fix banner">
+
 # sec-fix - parche de seguridad mínimo
 
 La fase «fix» de la familia de seguridad ellmos. Contrato: `sec-scan/references/contract.md` (directorio §1, ciclo de vida §2, reglas §6). Aquí solo se describe la aplicación.

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-report banner">
+
 # sec-report
 
 Fase final de la familia de seguridad ellmos. Contrato: `sec-scan/references/contract.md` (archivos 1, severidad 3, cobertura 5, reglas 6). El script importa `seclib` de la carpeta hermana `sec-scan/scripts` (en el repo `skills/dev/` y en un despliegue plano `~/.claude/skills/`; ambas carpetas deben estar una junto a la otra). Solo biblioteca estándar.

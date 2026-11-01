@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-policy banner">
+
 # sec-policy - SECURITY.md の定義とレビュー
 
 ポリシーは、このリポジトリで何が脆弱性にあたるかを定める。`sec-triage` はそれに照らして所見を評価する（コントラクト `sec-scan/references/contract.md` §2：`triaged` = 重大度と優先度がポリシーに照らして決定されていること）。ポリシーがなければ、トリアージは推測になる。

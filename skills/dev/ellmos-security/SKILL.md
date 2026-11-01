@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="ellmos-security banner">
+
 # ellmos-security - Einstieg der Security-Familie
 
 Die Familie prüft eigenen Code auf Schwachstellen und führt jeden Fund vom Verdacht bis zum nachverfolgten, verifizierten Fix. Alle Skills teilen einen Vertrag (Dateiformate, Lebenszyklus, Severity, Regeln): `sec-scan/references/contract.md`. Sie laufen bei Claude, Codex, Gemini und Kimi und hängen von keinem herstellerspezifischen Scanner ab; solche Scanner sind nur Adapter (Tabelle unten).

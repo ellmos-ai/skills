@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-diff-scan banner">
+
 # sec-diff-scan
 
 Как `sec-scan`, но область - **изменение**. Контракт, форматы файлов и правила: `sec-scan/references/contract.md`; схемы и валидатор - в `sec-scan/schemas/` и `sec-scan/scripts/`. Preflight (принадлежность, проверка блокировки, egress, стоимость), построение кандидатов (`id` через `secfind.py id`, маскирование секретов) и валидация работают так же, как в `sec-scan` > Процедура. Здесь перечислены только отличия.

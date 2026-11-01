@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="protection-shield banner">
+
 # protection-shield
 
 Solo para sistemas, redes o servidores propios o autorizados. Antes de cambiar producción comprobar activo, propietario, autoridad, bloqueos, impacto y reversión. Una alerta no concede permiso. Prohibidos contraataques, acceso a activos ajenos y exploraciones no autorizadas.

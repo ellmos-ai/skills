@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-validate banner">
+
 # sec-validate
 
 Fase 3 de la familia de seguridad ellmos. Contrato: `sec-scan/references/contract.md` (ciclo de vida 2, severidad 3, reglas 6). Validador: `sec-scan/scripts/secfind.py`. Postura: **refutar, no confirmar.** Un candidato cuenta como `validated` solo cuando fracasa el intento de refutarlo.

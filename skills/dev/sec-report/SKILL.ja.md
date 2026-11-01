@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-report banner">
+
 # sec-report
 
 ellmos セキュリティファミリーの最終フェーズ。コントラクト：`sec-scan/references/contract.md`（ファイル 1、重大度 3、カバレッジ 5、ルール 6）。スクリプトは、隣接するフォルダー `sec-scan/scripts` から `seclib` をインポートする（リポジトリでは `skills/dev/`、フラットなデプロイでは `~/.claude/skills/`。2 つのフォルダーは並べて置く必要がある）。標準ライブラリのみ。

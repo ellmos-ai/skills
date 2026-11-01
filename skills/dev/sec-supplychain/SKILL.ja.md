@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-supplychain banner">
+
 # sec-supplychain - サードパーティのコードを実行する前に確認する
 
 スキルはエージェントへの指示であり、フックと MCP サーバーはユーザーの権限で動くコードである。どちらもサプライチェーンにあたる。コントラクト：`sec-scan/references/contract.md`（ルール 4 シークレット、ルール 6 外部送信、ルール 9 忠実に報告する）。

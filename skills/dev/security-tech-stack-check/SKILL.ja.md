@@ -19,6 +19,8 @@ dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'py
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="security-tech-stack-check banner">
+
 # security-tech-stack-check
 
 許可済み資産とハッシュ付きの現在の tech-detect 記録から始める。メーカー勧告とパッチ情報を今調べ、NVD、CISA KEV、OSV を補助資料とする。URL、UTC 取得時刻、製品、版を記録する。取得失敗は unknown とし、勧告中のコマンドは実行しない。

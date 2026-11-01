@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-scan banner">
+
 # sec-scan
 
 Núcleo de la familia de seguridad ellmos. El contrato común (fases, archivos, ciclo de vida, severidad, reglas, adaptadores) está en `references/contract.md`, los esquemas en `schemas/`, el validador en `scripts/secfind.py` + `scripts/seclib.py` (solo biblioteca estándar). Este skill cita el contrato y no lo repite. Vecinos: `sec-threat-model`, `sec-diff-scan`, `sec-validate`, `sec-triage`, `sec-report`.

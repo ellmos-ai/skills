@@ -19,6 +19,8 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="tech-detect banner">
+
 # Tech Detect
 
 Use this skill only on an owned or explicitly authorized host. Read the existing inventory and host-slot rules first. With a shared inventory folder, `systems/<own-slot>.json` is the input seed; database and spreadsheet exports are projections. This skill never refreshes another host's seed.

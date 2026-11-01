@@ -19,6 +19,8 @@ dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'py
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="security-tech-stack-check banner">
+
 # security-tech-stack-check
 
 从获授权资产及带哈希的当前 tech-detect 快照开始。现在查询厂商公告和补丁说明，以 NVD、CISA KEV、OSV 为补充，记录来源链接、UTC 时间、准确产品和版本。来源失败记为 unknown；不得执行公告中的命令。

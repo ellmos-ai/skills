@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-diff-scan banner">
+
 # sec-diff-scan
 
 Wie `sec-scan`, aber der Scope ist eine **Änderung**. Vertrag, Dateiformate und Regeln: `sec-scan/references/contract.md`; Schemas und Validator in `sec-scan/schemas/` und `sec-scan/scripts/`. Preflight (Eigentum, Lock-Prüfung, Egress, Kosten), Kandidaten-Aufbau (`id` per `secfind.py id`, Geheimnisse maskieren) und Validierung laufen wie in `sec-scan` > Ablauf. Hier nur die Unterschiede.

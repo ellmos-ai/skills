@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-diff-scan banner">
+
 # sec-diff-scan
 
 Como `sec-scan`, pero el alcance es un **cambio**. Contrato, formatos de archivo y reglas: `sec-scan/references/contract.md`; esquemas y validador en `sec-scan/schemas/` y `sec-scan/scripts/`. El preflight (propiedad, comprobación de bloqueo, egress, coste), la construcción de candidatos (`id` mediante `secfind.py id`, enmascarar secretos) y la validación funcionan como en `sec-scan` > Procedimiento. Aquí solo se enumeran las diferencias.

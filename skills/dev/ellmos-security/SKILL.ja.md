@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="ellmos-security banner">
+
 # ellmos-security - セキュリティファミリーの入口
 
 このファミリーは、自分のコードの脆弱性を調べ、すべての所見を、疑いの段階から、追跡され検証された修正に至るまで運ぶ。すべてのスキルは 1 つのコントラクト（ファイル形式、ライフサイクル、重大度、ルール）を共有する：`sec-scan/references/contract.md`。Claude、Codex、Gemini、Kimi で動作し、特定ベンダーのスキャナーには依存しない。そうしたスキャナーはアダプターとしてのみ接続される（下表）。

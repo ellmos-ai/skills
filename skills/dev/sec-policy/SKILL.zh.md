@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-policy banner">
+
 # sec-policy - 制定并审查 SECURITY.md
 
 策略规定了在这个仓库里什么算漏洞。`sec-triage` 依据它来评定发现（契约 `sec-scan/references/contract.md` §2：`triaged` = 严重度与优先级已依据策略确定）。没有策略，分类就只能靠猜。

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-policy banner">
+
 # sec-policy - SECURITY.md definieren und prüfen
 
 Die Richtlinie legt fest, was in diesem Repo als Schwachstelle zählt. `sec-triage` stuft Funde gegen sie ein (Vertrag `sec-scan/references/contract.md` §2: `triaged` = Severity und Priorität gegen die Richtlinie entschieden). Ohne Richtlinie rät die Triage.

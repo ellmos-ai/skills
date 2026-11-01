@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-writeup banner">
+
 # sec-writeup - отчёт об уязвимости для раскрытия
 
 Отчёт, понятный без предварительных знаний и воспроизводимый тем, кто не знает об ошибке. Контракт: `sec-scan/references/contract.md` (правило 1 собственный код, правило 4 секреты, правило 6 egress, правило 9 сообщать достоверно).

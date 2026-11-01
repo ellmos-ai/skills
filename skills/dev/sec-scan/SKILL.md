@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-scan banner">
+
 # sec-scan
 
 Kern der ellmos-Security-Familie. Der gemeinsame Vertrag (Phasen, Dateien, Lebenszyklus, Severity, Regeln, Adapter) steht in `references/contract.md`, Schemas in `schemas/`, Validator in `scripts/secfind.py` + `scripts/seclib.py` (nur Standardbibliothek). Dieser Skill zitiert den Vertrag, wiederholt ihn nicht. Nachbarn: `sec-threat-model`, `sec-diff-scan`, `sec-validate`, `sec-triage`, `sec-report`.

@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-verify-fix banner">
+
 # sec-verify-fix - закрывает ли патч брешь?
 
 Фаза «verify-fix». Контракт: `sec-scan/references/contract.md` (жизненный цикл §2, правило 7 в §6). Требуется находка со статусом `fixed` и `fix.patchFile`.

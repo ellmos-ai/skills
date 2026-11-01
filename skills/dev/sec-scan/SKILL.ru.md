@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-scan banner">
+
 # sec-scan
 
 Ядро семейства навыков безопасности ellmos. Общий контракт (фазы, файлы, жизненный цикл, серьёзность, правила, адаптеры) находится в `references/contract.md`, схемы - в `schemas/`, валидатор - в `scripts/secfind.py` + `scripts/seclib.py` (только стандартная библиотека). Этот навык ссылается на контракт и не повторяет его. Соседи: `sec-threat-model`, `sec-diff-scan`, `sec-validate`, `sec-triage`, `sec-report`.

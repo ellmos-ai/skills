@@ -19,6 +19,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
 
+<img src="banner.png" width="100%" alt="sec-verify-fix banner">
+
 # sec-verify-fix - does the patch close the hole?
 
 The "verify-fix" phase. Contract: `sec-scan/references/contract.md` (lifecycle §2, rule 7 in §6). Requires a finding with status `fixed` and `fix.patchFile`.
