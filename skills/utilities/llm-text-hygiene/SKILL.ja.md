@@ -1,4 +1,5 @@
 ---
+name: llm-text-hygiene
 language: ja
 description: 完成したテキストから AI の痕跡、チャットの残骸、プレースホルダー、LLM のスタイルパターンを削除し、AI 開示声明を監査します。
 ---

@@ -1,4 +1,5 @@
 ---
+name: llm-text-hygiene
 language: zh
 description: 从最终文本中清除 AI 痕迹、对话残留、占位符和 LLM 风格模式，并审核 AI 披露声明。
 ---

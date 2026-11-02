@@ -59,6 +59,9 @@ jobs:
       - name: Check skills map
         run: python build_skills_map.py --check
 
+      - name: Check skill locale identities and legacy entry points
+        run: python skill_localizations.py
+
       - name: Validate the privacy gate
         env:
           # See skill-validation.yml for why this is safe: with a token, a

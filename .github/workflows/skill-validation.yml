@@ -13,6 +13,9 @@ on:
       - "testing/test_changed_skill_gate.py"
       - "testing/test_public_registry.py"
       - "build_public_registry.py"
+      - "skill_localizations.py"
+      - "testing/test_skill_localizations.py"
+      - "testing/localization_omissions.json"
       - "build_skills_map.py"
       - "registry/components.json"
       - "SKILLS-MAP.md"
@@ -30,6 +33,9 @@ on:
       - "testing/test_changed_skill_gate.py"
       - "testing/test_public_registry.py"
       - "build_public_registry.py"
+      - "skill_localizations.py"
+      - "testing/test_skill_localizations.py"
+      - "testing/localization_omissions.json"
       - "build_skills_map.py"
       - "registry/components.json"
       - "SKILLS-MAP.md"
@@ -76,6 +82,7 @@ jobs:
         run: |
           python build_public_registry.py --check
           python build_skills_map.py --check
+          python skill_localizations.py
 
       - name: Test the privacy gate
         run: python -m unittest testing/test_privacy_gate.py testing/test_public_private_boundary.py

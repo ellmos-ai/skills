@@ -1,4 +1,5 @@
 ---
+name: llm-text-hygiene
 language: es
 description: Eliminar artefactos de IA, residuos de chat, marcadores de posición y patrones de estilo LLM de textos finales, y auditar divulgaciones de IA.
 ---
