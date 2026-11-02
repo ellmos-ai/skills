@@ -462,8 +462,15 @@ def prune_reviews(review_root, hours, apply, out):
             out(f"  [review] {'geloescht' if apply else 'wuerde loeschen'}: {name}")
         else:
             verdicts[name] = "nicht-loeschbar"
-            for parent in deps_of[name]:
+            # A retained clone still needs every transitive object-source parent,
+            # even when an intermediate parent is skipped later in this loop.
+            pending = list(deps_of[name])
+            while pending:
+                parent = pending.pop()
+                if parent in failed_parents:
+                    continue
                 failed_parents.add(parent)
+                pending.extend(deps_of[parent])
 
     for name in entries:
         why = verdicts[name]
