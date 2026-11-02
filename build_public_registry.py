@@ -611,6 +611,8 @@ def build_registry(
     *,
     repository_root: Path | None = None,
 ) -> dict:
+    from skill_localizations import skill_localizations
+
     components = []
     category_counts: Counter[str] = Counter()
     root = REPOSITORY_ROOT if repository_root is None else repository_root.resolve()
@@ -666,6 +668,7 @@ def build_registry(
                     source_files=source_set,
                     repository_root=root,
                 ),
+                "localizations": skill_localizations(path, source_set, root)[0],
             }
         )
         category_counts[category] += 1

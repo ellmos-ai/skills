@@ -1,4 +1,5 @@
 ---
+name: idea-mining
 language: es
 description: Extraer ideas, filtrar contra el historial y explorar una hasta completarla. Un flujo de trabajo de 5 fases (A-E) para la resolución de problemas complejos.
 ---

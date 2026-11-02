@@ -20,6 +20,7 @@ PUBLIC_FIELDS = {
     "status",
     "description",
     "languages",
+    "localizations",
 }
 PRIVATE_FIELDS = {
     "ownership",

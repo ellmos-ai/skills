@@ -73,6 +73,20 @@ def render() -> str:
             "",
         ]
     )
+    lines.extend([
+        "## Sprachfassungen derselben Skills", "",
+        "Eine Zeile bezeichnet eine Skill-Familie. Die Titel stammen aus den",
+        "Sprachdateien; technische Skill-Namen bleiben sprachneutral. Diese",
+        "Metadatenübersicht ist kein Nachweis einer vollständigen Sprachabnahme.", "",
+        "| Skill | Verfügbare Dokumentationsfassungen |", "|---|---|",
+    ])
+    for component in sorted(components, key=lambda item: (item["category"], item["name"])):
+        links = []
+        for locale in component.get("localizations", []):
+            title = locale["title"].replace("|", "&#124;").replace("[", "&#91;").replace("]", "&#93;")
+            links.append(f"[{title} ({locale['language']})]({locale['path']})")
+        lines.append(f"| {component['name']} | {' · '.join(links) or 'Metadatenprüfung ausstehend'} |")
+    lines.append("")
     return "\n".join(lines)
 
 

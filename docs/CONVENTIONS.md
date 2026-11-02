@@ -348,6 +348,21 @@ language: de            # de, en, es, zh, ja, ru, fr, hi, ar, bn, pt, multi
 
 ### Umsetzungsmodelle
 
+**Discovery-Vertrag (2026-11-02):** Pro Skill-Familie gibt es genau einen
+installierbaren Einstieg `SKILL.md`. Übersetzungen verwenden das bestehende flache
+Format `SKILL.<code>.md`, denselben technischen `name` und einen sprechenden
+nativen H1-Titel. Sprachcodes wie `en`, `zh` oder `zn` sind keine Skill-Namen.
+Die öffentliche Registry gruppiert benannte Fassungen unter `localizations`;
+dieses additive Feld ist unsere Erweiterung, kein allgemeiner Agent-Skills-Standard.
+Marker-Stubs ohne vollständige Metadaten werden darin nicht beworben.
+
+Alte Sprachordner-Einstiege werden in `README.md` umbenannt und bytegenau als
+abweichende Altstände erhalten. Sie sind keine zusätzlichen installierbaren
+Skills und keine geprüften Synonyme der flachen Fassung. CI verhindert neue
+aktive Sprachordner-Einstiege und neue Metadatenlücken. Konzept, Recherche,
+Migrationsvorschau und Grenzen fremder Crawler:
+[MULTILINGUAL-DISCOVERY.md](MULTILINGUAL-DISCOVERY.md).
+
 | Modell | Struktur | Wann verwenden |
 |--------|----------|----------------|
 | **Einsprachig** | `SKILL.md` (eine Sprache) | Standard, einfachste Variante |

@@ -1,4 +1,5 @@
 ---
+name: idea-mining
 language: en
 description: Mine ideas, filter against history, explore one to completion. A 5-phase workflow (A-E) for complex problem solving.
 ---

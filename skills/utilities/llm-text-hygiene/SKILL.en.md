@@ -1,4 +1,5 @@
 ---
+name: llm-text-hygiene
 language: en
 description: Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures.
 ---

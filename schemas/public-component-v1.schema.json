@@ -45,6 +45,21 @@
           "version": {"type": "string"},
           "status": {"type": "string"},
           "description": {"type": "string"},
+          "localizations": {
+            "description": "Additive documentation-discovery metadata, not a language-quality certification.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["language", "path", "title", "description"],
+              "properties": {
+                "language": {"enum": ["de", "en", "es", "zh", "ja", "ru", "fr", "hi", "ar", "bn", "pt"]},
+                "path": {"type": "string", "pattern": "^skills/[^/]+/[^/]+/SKILL(\\.[a-z]{2})?\\.md$"},
+                "title": {"type": "string", "minLength": 1},
+                "description": {"type": "string", "minLength": 1}
+              }
+            }
+          },
           "languages": {
             "type": "array",
             "uniqueItems": true,
