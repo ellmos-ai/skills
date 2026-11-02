@@ -4,7 +4,7 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-10-25
+updated: 2026-11-01
 description: >
   Evidence-based Windows storage cleanup with a controlled emergency mode,
   physical usage measurement, process and origin forensics, and
@@ -233,9 +233,9 @@ After the last mutation:
 Don't claim a cleanup, process limitation or reaching the 50 GB target
 without a matching current readback.
 
-## Recurring build-junk run (scripts in the skill)
+## Recurring build-junk run & ephemeral/review-sandbox hygiene (scripts in the skill)
 
-Three scripts under `scripts/` remove regenerable build junk and ephemeral work areas before they take space or sync capacity:
+Four scripts under `scripts/` remove regenerable build junk and ephemeral review sandboxes before they take space or sync capacity:
 
 - `scripts/clean_build_junk.py [--all] [--apply] [--days N]`: Python caches (`__pycache__`,
   `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` and `dist/` only next to a
@@ -243,11 +243,29 @@ Three scripts under `scripts/` remove regenerable build junk and ephemeral work 
   folders.
 - `scripts/clean_flutter_builds.py [ROOT] [--apply]`: Flutter/Gradle caches (`build/`,
   `.dart_tool/`, `android/.gradle/`), long-path safe.
-- `scripts/prune_ephemeral.py [--apply] [--review-hours N] [--temp-days N] [--selftest]`: (1) review sandboxes
-  under `<local_dev>eviews` older than 24 h; kept are folders with a LOCK file, young subfolders,
-  uncommitted changes, a stash, or commits missing in the canonical clone; (2) first-level entries in
-  `%TEMP%` older than 7 days (pip leftovers 6 h, `claude` excluded). Windows script; `local_dev` comes from the
-  configuration, without it part (1) is skipped.
+- `scripts/prune_ephemeral.py [--review-hours 24] [--temp-days 7] [--apply] [--selftest]`:
+  Daily janitor (`SPEICHER-Ephemeral-Janitor`, 4x daily) for review sandboxes under
+  `<local_dev>/<review_dir>/<name>` and stale `%TEMP%` entries. Evaluates `owner.json` (`expires_at`,
+  `canonical_repo`) and `closeout.json` (immediate release of completed reviews), checks lock files (`LOCK.txt`, `LOCK.<scope>.txt`),
+  uncommitted changes (`dirty`), `stash`, branch-tip reachability in the canonical clone (`worktree`,
+  `alternates`, `origin.url`, `owner.json`), and chain-clone dependencies (`ketten-abhaengig`), and
+  prunes stale worktree metadata via `git worktree prune`.
+- `scripts/review_sandbox.py create|closeout ...`: Lifecycle helper for workers creating an isolated
+  review sandbox and releasing it immediately upon completion:
+  - **Ban on `--no-hardlinks` and chain-cloning:** Never run `git clone --bare --no-hardlinks` and
+    never clone from another review folder (`review_sandbox.py` rejects both fail-closed). Always use
+    `git worktree add --detach` (`--mode worktree`, default) or `git clone --shared` (`--mode shared`)
+    directly against the canonical clone under `<local_dev>/repos/<repo>`.
+  - **Ownership/expiry marker (`owner.json`):** Every sandbox under `<local_dev>/reviews/<name>`
+    writes `owner.json` with `owner`, `ticket_id`, `canonical_repo`, `created_at`, and `expires_at`.
+  - **Immediate self-cleanup (`closeout`):** Upon completing the review, the worker writes
+    `closeout.json` (`python scripts/review_sandbox.py closeout --sandbox <path> --head <sha>`) and
+    deletes the sandbox immediately once all safety gates pass. Permanent evidence belongs in the PR
+    comment, review report, or ticket — never in the sandbox.
+  - **Containment:** `closeout` and the janitor delete only direct children of the review root. `closeout`
+    also requires the `owner.json` written by `create` and refuses any other folder before anything is
+    written or deleted. `review_dirs` in the configuration are plain folder names directly under
+    `local_dev`; other entries are ignored.
 
 **The default is a dry run**; `--apply` deletes for good (only exactly recognised, regenerable
 patterns, no recycle bin), so read the dry run first (applies to all three scripts; for `%TEMP%` the timestamp of the first-level entry counts, not that of the files inside). The root comes from `$SOFTWARE_ROOT` or
@@ -274,6 +292,9 @@ reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
 
 - Added `prune_ephemeral.py` (review sandboxes and `%TEMP%`), created during the storage emergency of 25 Oct (C: at 0 GB); self-test and pytest cases added.
 - `clean_flutter_builds.py`: the default is now a dry run, deleting needs `--apply`.
+- Review sandbox hygiene (three-stage hardening): extended `scripts/prune_ephemeral.py` with `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (immediate release after review completion), worktree/`alternates` resolution, and chain-clone dependency protection (`ketten-abhaengig`); added `scripts/review_sandbox.py` for `--no-hardlinks`-free sandbox creation (`worktree`/`shared`) and immediate closeout.
+- Deletion paths hardened (2026-11-01): `remove_review_sandbox` deletes only direct children of the review root (no reparse point, no drive root); `review_sandbox.py closeout` refuses folders outside the review root or without `owner.json` before the first write and no longer falls back to the parent or current directory; `review_dirs` only as plain folder names under `local_dev`.
+- Review verdict corrected (2026-11-01): only real lock files (`LOCK.txt`, `LOCK.<scope>.txt`, same pattern as `lock_scan.py`) keep a sandbox, not every file named `LOCK*` (for example `LOCK-SYSTEM.md`); the shared stash of the canonical clone no longer counts against linked worktrees.
 
 ### 1.1.0 (2026-10-18)
 

@@ -4,7 +4,7 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-10-25
+updated: 2026-11-01
 description: >
   Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus,
   physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie
@@ -234,9 +234,9 @@ Nach der letzten Mutation:
 Behaupte keine Bereinigung, Prozessbegrenzung oder 50-GB-Zielerreichung ohne
 passenden aktuellen Readback.
 
-## Wiederkehrender Build-Müll-Lauf (Skripte im Skill)
+## Wiederkehrender Build-Müll-Lauf & Ephemeral-/Review-Sandbox-Hygiene (Skripte im Skill)
 
-Drei Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere Arbeitsbereiche, bevor sie Platz oder Sync belegen:
+Vier Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere Review-Sandboxen, bevor sie Platz oder Sync belegen:
 
 - `scripts/clean_build_junk.py [--all] [--apply] [--days N]`: Python-Caches (`__pycache__`,
   `.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `*.egg-info`), `build/` und `dist/` nur neben einem
@@ -244,11 +244,32 @@ Drei Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere
   Arbeitsordner.
 - `scripts/clean_flutter_builds.py [WURZEL] [--apply]`: Flutter-/Gradle-Caches (`build/`,
   `.dart_tool/`, `android/.gradle/`), long-path-sicher.
-- `scripts/prune_ephemeral.py [--apply] [--review-hours N] [--temp-days N] [--selftest]`: (1) Review-Sandboxen
-  unter `<local_dev>eviews`, älter als 24 h; behalten werden Ordner mit LOCK-Datei, jungen Unterordnern,
-  uncommitteten Änderungen, Stash oder Commits, die im kanonischen Klon fehlen; (2) Einträge der ersten Ebene in
-  `%TEMP%`, älter als 7 Tage (pip-Reste 6 h, `claude` ausgenommen). Windows-Skript; `local_dev` kommt aus der
-  Konfiguration, ohne sie entfällt Teil (1).
+- `scripts/prune_ephemeral.py [--review-hours 24] [--temp-days 7] [--apply] [--selftest]`:
+  Täglicher Janitor (`SPEICHER-Ephemeral-Janitor`, 4x täglich) für Review-Sandboxen unter
+  `<local_dev>/<review_dir>/<name>` und alte `%TEMP%`-Einträge. Wertet `owner.json` (`expires_at`,
+  `canonical_repo`) und `closeout.json` (sofortige Freigabe abgeschlossener Reviews) aus, prüft
+  vor dem Löschen Lock-Dateien (`LOCK.txt`, `LOCK.<scope>.txt`), uncommittete Änderungen (`dirty`), `stash`, Erreichbarkeit aller
+  Branch-Tips im kanonischen Klon (`worktree`, `alternates`, `origin.url`, `owner.json`) sowie
+  Ketten-Klon-Abhängigkeiten (`ketten-abhaengig`), und räumt verwaiste Worktree-Einträge per
+  `git worktree prune` auf.
+- `scripts/review_sandbox.py create|closeout ...`: Lifecycle-Helper für Worker, die eine isolierte
+  Review-Sandbox anlegen und nach Abschluss sofort wieder freigeben:
+  - **Verbot von `--no-hardlinks` und Ketten-Klonen:** Niemals `git clone --bare --no-hardlinks`
+    verwenden und niemals aus einem anderen Review-Ordner klonen (`review_sandbox.py` weist beides
+    fail-closed ab). Stattdessen ausschließlich `git worktree add --detach` (`--mode worktree`,
+    Standard) oder `git clone --shared` (`--mode shared`) direkt gegen den kanonischen Klon unter
+    `<local_dev>/repos/<repo>` nutzen.
+  - **Besitzer-/Ablaufmarke (`owner.json`):** Jede Sandbox unter `<local_dev>/reviews/<name>` legt
+    beim Start eine `owner.json` mit `owner`, `ticket_id`, `canonical_repo`, `created_at` und
+    `expires_at` ab.
+  - **Sofortige Selbstbereinigung (`closeout`):** Nach Abschluss des Reviews schreibt der erzeugende
+    Worker `closeout.json` (`python scripts/review_sandbox.py closeout --sandbox <pfad> --head <sha>`)
+    und löscht die Sandbox sofort, sobald alle Sicherheits-Gates grün sind. Dauerhafte Nachweise
+    gehören in den PR-Kommentar, Review-Bericht oder das Ticket — nicht in die Sandbox.
+  - **Containment:** `closeout` und der Janitor löschen nur direkte Kinder der Review-Wurzel. `closeout`
+    verlangt zusätzlich die von `create` angelegte `owner.json` und verweigert jeden anderen Ordner, bevor
+    etwas geschrieben oder gelöscht wird. `review_dirs` in der Konfiguration sind einfache Ordnernamen
+    direkt unter `local_dev`; andere Einträge werden ignoriert.
 
 **Standard ist der Trockenlauf**; `--apply` löscht endgültig (nur exakt erkannte, regenerierbare
 Muster, kein Papierkorb), also erst den Trockenlauf lesen (gilt für alle drei Skripte; bei `%TEMP%` zählt der Zeitstempel des Eintrags der ersten Ebene, nicht der Dateien darin). Die Wurzel kommt aus `$SOFTWARE_ROOT`
@@ -274,6 +295,9 @@ Konfiguration außerhalb des Skills (`$BUILD_JUNK_CONFIG` oder `~/.config/build-
 
 - Skript `prune_ephemeral.py` (Review-Sandboxen und `%TEMP%`) aufgenommen, entstanden im Speichernotfall vom 25.10. (C: bei 0 GB); Selbsttest und Pytest-Fälle ergänzt.
 - `clean_flutter_builds.py`: Standard ist jetzt der Trockenlauf, gelöscht wird nur mit `--apply`.
+- Review-Sandbox-Hygiene (Drei-Stufen-Härtung): `scripts/prune_ephemeral.py` um `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (sofortige Freigabe nach Review-Abschluss), Worktree-/`alternates`-Auflösung und Ketten-Klon-Abhängigkeitsschutz (`ketten-abhaengig`) erweitert; `scripts/review_sandbox.py` für `--no-hardlinks`-freie Sandbox-Erzeugung (`worktree`/`shared`) und sofortigen Closeout ergänzt.
+- Löschpfade abgesichert (2026-11-01): `remove_review_sandbox` löscht nur direkte Kinder der Review-Wurzel (kein Reparse-Point, keine Laufwerkswurzel); `review_sandbox.py closeout` verweigert Ordner außerhalb der Review-Wurzel oder ohne `owner.json` vor dem ersten Schreiben und fällt nicht mehr auf das Elternverzeichnis oder das aktuelle Verzeichnis zurück; `review_dirs` nur als einfache Ordnernamen unter `local_dev`.
+- Review-Urteil korrigiert (2026-11-01): nur echte Lock-Dateien (`LOCK.txt`, `LOCK.<scope>.txt`, gleiches Muster wie `lock_scan.py`) halten eine Sandbox, nicht jede Datei namens `LOCK*` (z. B. `LOCK-SYSTEM.md`); der gemeinsame Stash des kanonischen Klons zählt nicht gegen verknüpfte Worktrees.
 
 ### 1.1.0 (2026-10-18)
 
