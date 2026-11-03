@@ -167,7 +167,7 @@ def test_create_needs_a_review_root(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     assert set(os.listdir(os.getcwd())) == before
 
 
-def test_closeout_deletes_a_clean_worktree_sandbox_and_prunes_the_canonical_repo(tmp_path: Path) -> None:
+def test_closeout_deletes_only_its_clean_worktree_sandbox(tmp_path: Path) -> None:
     root = tmp_path / "reviews"
     canon = make_repo(tmp_path / "canon")
     created = review_sandbox.create_sandbox("sb", str(canon), "tester", review_root=str(root))
@@ -180,6 +180,57 @@ def test_closeout_deletes_a_clean_worktree_sandbox_and_prunes_the_canonical_repo
     listed = subprocess.run(["git", "-C", str(canon), "worktree", "list"], capture_output=True, text=True,
                             creationflags=NO_WINDOW).stdout
     assert "sb" not in listed
+
+
+def test_closeout_preserves_an_unavailable_foreign_worktree_registration(tmp_path: Path) -> None:
+    root = tmp_path / "reviews"
+    canon = make_repo(tmp_path / "canon")
+    foreign = tmp_path / "foreign"
+    parked = tmp_path / "parked"
+    git(canon, "worktree", "add", "--detach", str(foreign), "HEAD")
+    # Simulate an unavailable mount without deleting its recoverable payload.
+    foreign.rename(parked)
+    created = review_sandbox.create_sandbox("sb", str(canon), "tester", review_root=str(root))
+
+    result = review_sandbox.closeout_sandbox(created["sandbox"], review_root=str(root))
+
+    assert result["deleted"] is True
+    listed = subprocess.run(
+        ["git", "-C", str(canon), "worktree", "list", "--porcelain"],
+        check=True, capture_output=True, text=True, creationflags=NO_WINDOW,
+    ).stdout
+    assert str(foreign).replace("\\", "/") in listed
+    assert (parked / "f.txt").read_text(encoding="utf-8") == "one"
+    assert str(Path(created["source"])).replace("\\", "/") not in listed
+
+
+def test_closeout_keeps_a_git_locked_worktree_payload(tmp_path: Path) -> None:
+    root = tmp_path / "reviews"
+    canon = make_repo(tmp_path / "canon")
+    created = review_sandbox.create_sandbox("sb", str(canon), "tester", review_root=str(root))
+    source = Path(created["source"])
+    git(canon, "worktree", "lock", str(source))
+
+    result = review_sandbox.closeout_sandbox(created["sandbox"], review_root=str(root))
+
+    assert result["deleted"] is False
+    assert (source / "f.txt").read_text(encoding="utf-8") == "one"
+    assert (Path(created["sandbox"]) / "owner.json").is_file()
+
+
+def test_closeout_from_inside_sandbox_keeps_its_payload(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "reviews"
+    canon = make_repo(tmp_path / "canon")
+    created = review_sandbox.create_sandbox("sb", str(canon), "tester", review_root=str(root))
+    source = Path(created["source"])
+    monkeypatch.chdir(source)
+
+    result = review_sandbox.closeout_sandbox(created["sandbox"], review_root=str(root))
+
+    assert result["deleted"] is False
+    assert (source / "f.txt").read_text(encoding="utf-8") == "one"
 
 
 def test_closeout_keeps_a_sandbox_with_uncommitted_work(tmp_path: Path) -> None:
