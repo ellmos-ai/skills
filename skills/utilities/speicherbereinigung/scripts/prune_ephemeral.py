@@ -383,23 +383,37 @@ def remove(path):
 
 
 def remove_review_sandbox(full, review_root):
-    """Entfernt eine Review-Sandbox und raeumt etwaige Worktree-Metadaten im Kanon-Repo auf.
+    """Remove one sandbox, deregistering only its own clean linked worktrees.
 
-    Loescht nur ein direktes Kind von `review_root` (is_direct_child); alles andere bleibt unberuehrt."""
+    Never prune other registrations or force removal of dirty/locked worktrees.
+    The caller must run outside the sandbox, including its container directory.
+    """
     if not is_direct_child(full, review_root):
         return False
+    sandbox = os.path.normcase(os.path.realpath(full))
+    current = os.path.normcase(os.path.realpath(os.getcwd()))
+    if current == sandbox or current.startswith(sandbox + os.sep):
+        return False
     owner_canon = read_owner_meta(full).get("canonical_repo")
-    canons = set()
+    linked = []
     for repo, bare in _sandbox_repos(full):
         if not bare and os.path.isfile(os.path.join(repo, ".git")):
             c = canon_of(repo, review_root, owner_canon=owner_canon)
-            if c:
-                canons.add(c)
-    ok = remove(full)
-    if ok:
-        for c in canons:
-            git(c, "worktree", "prune")
-    return ok
+            if not c:
+                return False
+            linked.append((c, os.path.abspath(repo)))
+    for canonical, repo in sorted(linked, key=lambda pair: len(pair[1]), reverse=True):
+        try:
+            result = subprocess.run(
+                ["git", "-C", canonical, "worktree", "remove", repo],
+                capture_output=True, text=True, encoding="utf-8", errors="replace",
+                timeout=300, creationflags=NO_WINDOW,
+            )
+        except (OSError, subprocess.SubprocessError):
+            return False
+        if result.returncode != 0:
+            return False
+    return remove(full)
 
 
 def prune_reviews(review_root, hours, apply, out):
