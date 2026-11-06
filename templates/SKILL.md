@@ -5,8 +5,7 @@ type: skill
 author: {{author}}
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-description: >
-  {{Kurzbeschreibung: Was kann dieser Skill? Wann wird er aktiviert?}}
+description: "{{Ausloeser zuerst: Verwenden, wenn ... (typische Formulierungen in einfachen Anfuehrungszeichen, /befehl). Dann: was der Skill tut. NICHT verwenden fuer ... (Nachbarskill). Regel: docs/CONVENTIONS.md, Beschreibung = Ausloeser}}"
 
 # Kompatibilitaet
 standalone: true

@@ -17,11 +17,34 @@ type: skill                         # skill | agent | expert | service | protoco
 author: Name                        # Ersteller (Person oder KI-Partner)
 created: 2026-03-12                 # Erstelldatum (ISO 8601)
 updated: 2026-03-12                 # Letzte Aenderung (ISO 8601)
-description: >
-  Kurze Beschreibung der Faehigkeit.
+description: "Verwenden, wenn ... (Ausloeser zuerst, siehe unten). Tut ... NICHT verwenden fuer ... (anderer-skill)."
 visibility: public                  # public | public potential | private profile | private-only
 ---
 ```
+
+### `description` -- Beschreibung = Ausloeser, nicht Inhaltsangabe [2026-11-06]
+
+Ausgewaehlt wird ein Skill **nur ueber `description`**. Der Rumpf der SKILL.md -- auch ein Abschnitt
+„Trigger words: …“ -- ist fuer die Auswahl unsichtbar; er wird erst gelesen, wenn der Skill schon gewaehlt ist.
+Eine Beschreibung, die nur sagt, WAS ein Skill ist („Structured decision making: Pro/Con matrix, …“), fuehrt
+dazu, dass er nie aufgerufen wird.
+
+1. **Das WANN steht vorn:** „Use when/for …“ bzw. „Verwenden, wenn …“, dann was der Skill tut.
+2. **Typische Formulierungen** der Nutzerin oder des Nutzers in einfachen Anfuehrungszeichen und der
+   Slash-Befehl (`/decide`).
+3. **Abgrenzung** zu Nachbarskills: „Do NOT use for … (anderer-skill)“.
+4. **Draengend, wo Claude sonst selbst loslegt:** Bei Aufgaben, die Claude fuer sein Kerngeschaeft haelt
+   (Bugs beheben, entscheiden), „for ANY …, before changing code, even if the cause seems obvious“. Das
+   offizielle `skill-creator`-Plugin empfiehlt dasselbe („a little bit pushy“, Claude „undertriggers“).
+5. **Doppelte Anfuehrungszeichen** um den YAML-Wert; der unabhaengige Leser in
+   `testing/skill_frontmatter_gate.py` dekodiert keine einfach gequoteten Skalare. Hoechstens 1024 Zeichen.
+6. **Alle Sprachfassungen** bekommen dieselbe Beschreibung in ihrer Sprache.
+
+**Belegt** mit `claude plugin eval` (Sonnet, je 3 Laeufe mit/ohne Plugin, skills#92): `decide` wurde mit reiner
+Inhaltsangabe 0/3-mal aufgerufen, mit Ausloeser 3/3 (Δ +1,00); `bugfix-protocol` 2/6 im ersten Entwurf, 4/4 mit
+der draengenden Fassung (Δ +0,56). **Messen an einem echten Fall** (Zielkonflikt, Ursache weit vom Symptom),
+nicht an einer trivialen Frage -- bei offensichtlichen Aufgaben ruft Claude keinen Skill auf, und das ist richtig.
+`testing/skill_frontmatter_gate.py` nennt Skills ohne erkennbaren Ausloeser als Hinweis (blockiert nicht).
 
 ### `visibility` -- wie weit darf der Skill nach aussen?
 

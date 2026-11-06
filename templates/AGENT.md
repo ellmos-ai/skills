@@ -5,8 +5,7 @@ type: service
 author: {{author}}
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-description: >
-  {{Kurzbeschreibung: Was ist die Rolle dieses Agenten? Fuer welche Aufgaben ist er spezialisiert?}}
+description: "{{Ausloeser zuerst: Verwenden, wenn ... (welche Aufgaben an diesen Agenten gehen, typische Formulierungen). Dann: Rolle und Spezialisierung. NICHT verwenden fuer ... Regel: docs/CONVENTIONS.md, Beschreibung = Ausloeser}}"
 
 # Kompatibilitaet
 standalone: true
