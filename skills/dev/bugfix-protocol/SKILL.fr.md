@@ -1,11 +1,11 @@
 ---
 name: bugfix-protocol
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour bugfix-protocol: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template."
+updated: 2026-11-06
+description: "À utiliser pour TOUT signalement de bug ou demande de débogage, avant de modifier le code, même si la cause semble évidente : résultats ou totaux erronés ('les clients paient trop', 'X renvoie -1 au lieu de 0'), erreurs, plantages, exceptions, tests en échec, régressions, 'débogue ça', 'trouve et corrige le bug', 'pourquoi ... se produit-il', /bugfix. Procède en six phases au lieu de corriger la première ligne suspecte : vérifications rapides, diagnostic, un test minimal qui reproduit le bug, une correction à la cause racine plutôt qu'au symptôme, vérification et un court rapport de bug (cause racine, correction, vérification) que l'utilisateur peut contrôler. Particulièrement utile quand le symptôme apparaît loin de la cause, pour les régressions et les défaillances intermittentes. NE PAS utiliser pour un balayage systématique de bugs inconnus dans toute une base de code (bugsweep)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
