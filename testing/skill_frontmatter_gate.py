@@ -70,6 +70,33 @@ IGNORIERTE_TEILE = {"_archive", "__pycache__"}
 REQUIRED_FIELDS = ("name", "description")
 BLOCK_SCALAR_VALUES = (">", "|", ">-", "|-", ">+", "|+")
 
+# Hinweis, kein Fehler (2026-11-06): Ausgewaehlt wird ein Skill nur ueber `description`; der Rumpf ist fuer
+# die Auswahl unsichtbar. Beschreibungen, die nur sagen WAS ein Skill ist, wurden in `claude plugin eval` nie
+# aufgerufen (decide 0/3 -> 3/3, bugfix-protocol 2/6 -> 4/4 nach Umformulierung, skills#92). Grobe
+# Stichwortsuche nach einem WANN-Satz in Englisch/Deutsch; geprueft wird je Skill die englische Fassung,
+# sonst die Hauptfassung. Regel: docs/CONVENTIONS.md, Abschnitt "Beschreibung = Ausloeser".
+# ponytail: Stichwortliste statt Sprachverstaendnis; uebersieht kreative Formulierungen, genuegt als Erinnerung.
+AUSLOESER = re.compile(
+    r"\b(use (when|for|this|whenever|it|to)|when the user|when you|trigger|invoke|"
+    r"verwenden|verwende|nutzen|nutze|einsetzen|aktiviert sich|immer wenn|wenn der nutzer)\b"
+    r"|(?:^|\s)/[a-z][\w-]+",
+    re.IGNORECASE,
+)
+
+
+def skills_ohne_ausloeser(repo: Path) -> list[str]:
+    """Skill-Ordner (relativ, mit /), deren description keinen erkennbaren Ausloeser nennt."""
+    ohne = []
+    for md in gefundene_skill_dateien(repo):
+        if md.name != "SKILL.md":
+            continue
+        quelle = md.with_name("SKILL.en.md") if md.with_name("SKILL.en.md").exists() else md
+        split = split_frontmatter(quelle.read_text(encoding="utf-8", errors="replace"))
+        beschreibung = extract_scalar(split[0], "description") if split else None
+        if beschreibung and not AUSLOESER.search(beschreibung):
+            ohne.append(str(md.parent.relative_to(repo)).replace("\\", "/"))
+    return sorted(ohne)
+
 TOP_KEY = re.compile(r"^([A-Za-z_][A-Za-z0-9_-]*):(.*)$")
 DESC_LINE = re.compile(r"^description:(.*)$")
 BLOCK_SCALAR_HEAD = re.compile(r"^description:\s*[>|][+-]?\s*$")
@@ -373,6 +400,16 @@ def main(argv: list[str] | None = None) -> int:
     for md in dateien:
         for fehler in pruefe(md):
             befunde.append((str(md.relative_to(repo)).replace("\\", "/"), fehler))
+
+    ohne_ausloeser = skills_ohne_ausloeser(repo)
+    if ohne_ausloeser:
+        print(f"Hinweis (blockiert nicht): {len(ohne_ausloeser)} Skill(s) ohne erkennbaren Ausloeser in "
+              "`description` -- docs/CONVENTIONS.md, Abschnitt \"Beschreibung = Ausloeser\":")
+        for pfad in ohne_ausloeser[:10]:
+            print(f"  {pfad}")
+        if len(ohne_ausloeser) > 10:
+            print(f"  ... und {len(ohne_ausloeser) - 10} weitere")
+        print()
 
     if befunde:
         print(f"FEHLER: {len(befunde)} Befund(e) in SKILL*.md-Frontmatter "

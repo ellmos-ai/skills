@@ -1,10 +1,10 @@
 ---
 name: ellmos-skill-creator
-version: 0.2.0
+version: 0.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-11-06
 description: >
   Creates or reworks a skill FOR THIS ECOSYSTEM: delegates the generic
   interview/design/eval loop to the official skill-creator plugin
@@ -101,6 +101,24 @@ clarification, designing the SKILL.md structure, test cases, the eval
 loop, description optimization (`scripts/improve_description.py`).
 **Don't reinvent it** — this part is generic and already well solved in
 the original.
+
+### Step 1b — description = trigger (mandatory, not optional)
+
+The `description` alone decides whether the skill is ever called; the body is invisible to selection.
+The description optimization from step 1 is therefore **not an offer here but mandatory**. Check before
+finishing:
+
+- The **WHEN comes first** ("Use when/for ..."), then what the skill does.
+- **Typical phrasings** in single quotes, plus the slash command.
+- **Boundary** to neighbouring skills ("Do NOT use for ... (other-skill)").
+- **Pushy** where Claude would otherwise just start (bugs, decisions): "for ANY ..., before ..., even if ...".
+- YAML value in **double quotes**, at most 1024 characters, in every language version.
+- `python testing/skill_frontmatter_gate.py` no longer lists the skill under "without a recognisable trigger".
+- Where a plugin eval exists: `claude plugin eval` on a **real** case, a control run with the old
+  description, `--judge-model sonnet`.
+
+Evidence and rule: `docs/CONVENTIONS.md`, section "`description` -- Beschreibung = Ausloeser"
+(`decide` called 0/3 -> 3/3, `bugfix-protocol` 2/6 -> 4/4).
 
 ### Step 2 — set up the ellmos house scaffold (mandatory, additive to the original format)
 
@@ -253,6 +271,9 @@ skill without them works unchanged.
   duplicated.
 
 ## Changelog
+
+### 0.3.0 (2026-11-06)
+- Step 1b: description = trigger is mandatory (WHEN first, phrasings, boundary, pushy for core tasks, gate hint, eval on a real case). Reason: `decide` and `bugfix-protocol` were never called with a what-only description.
 
 ### 0.2.0 (2026-08-24)
 - Follow-up (ticket T-20260824-218233618, scope addition): added a

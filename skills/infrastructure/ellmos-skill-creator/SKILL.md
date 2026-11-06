@@ -1,10 +1,10 @@
 ---
 name: ellmos-skill-creator
-version: 0.2.0
+version: 0.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-11-06
 description: >
   Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife
   an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die
@@ -86,6 +86,24 @@ Ruf den offiziellen `Skill: skill-creator:skill-creator` auf für: Intent-Kläru
 Entwurf der SKILL.md-Struktur, Testfälle, Eval-Loop, Description-Optimierung
 (`scripts/improve_description.py`). **Nicht neu erfinden** — dieser Teil ist
 generisch und im Original bereits gut gelöst.
+
+### Schritt 1b — Beschreibung = Auslöser (Pflicht, nicht optional)
+
+Die `description` entscheidet allein, ob der Skill je aufgerufen wird; der Rumpf ist für die Auswahl
+unsichtbar. Die Description-Optimierung aus Schritt 1 ist hier deshalb **kein Angebot, sondern Pflicht**.
+Vor dem Abschluss prüfen:
+
+- Das **WANN steht vorn** („Verwenden, wenn …“ / „Use when/for …“), danach was der Skill tut.
+- **Typische Formulierungen** in einfachen Anführungszeichen, dazu der Slash-Befehl.
+- **Abgrenzung** zu Nachbarskills („NICHT verwenden für … (anderer-skill)“).
+- **Drängend**, wo Claude sonst selbst loslegt (Bugs, Entscheidungen): „für JEDEN …, bevor …, auch wenn …“.
+- YAML-Wert in **doppelten Anführungszeichen**, höchstens 1024 Zeichen, in allen Sprachfassungen.
+- `python testing/skill_frontmatter_gate.py` nennt den Skill nicht mehr unter „ohne erkennbaren Auslöser“.
+- Wo ein Plugin-Eval existiert: `claude plugin eval` an einem **echten** Fall, Kontrolllauf mit der alten
+  Beschreibung, `--judge-model sonnet`.
+
+Beleg und Regel: `docs/CONVENTIONS.md`, Abschnitt „`description` — Beschreibung = Auslöser“
+(`decide` 0/3 → 3/3 aufgerufen, `bugfix-protocol` 2/6 → 4/4).
 
 ### Schritt 2 — ellmos-Haus-Scaffold aufsetzen (Pflicht, additiv zum Original-Format)
 
@@ -211,6 +229,9 @@ ein Skill ohne sie funktioniert unverändert.
   Andock-/Selbstversorgungs-Logik, hier nur referenziert, nicht dupliziert.
 
 ## Changelog
+
+### 0.3.0 (2026-11-06)
+- Schritt 1b: Beschreibung = Auslöser ist Pflicht (WANN zuerst, Formulierungen, Abgrenzung, drängend bei Kernaufgaben, Gate-Hinweis, Eval an echtem Fall). Anlass: `decide` und `bugfix-protocol` wurden mit reiner Inhaltsangabe nie aufgerufen.
 
 ### 0.2.0 (2026-08-24)
 - Nachtrag (Ticket T-20260824-218233618, Scope-Ergänzung): wiederverwendbares
