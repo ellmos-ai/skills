@@ -1,11 +1,11 @@
 ---
 name: decide
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 结构化决策：优缺点矩阵、加权评分、决策树、情景分析和艾森豪威尔矩阵。
+updated: 2026-11-06
+description: "当用户需要在两个或更多选项之间做出选择，且该选择涉及权衡、约束或多个标准（成本、风险、合规、工作量、团队能力、供应商锁定、时机）时使用，即使某个选项起初看起来显而易见：“X 还是 Y？”“我们该用 A 还是 B？”“哪个更适合……？”“帮我做决定”“权衡利弊”“你推荐什么？”“Decide.”、/decide。适用于技术选择（数据库、框架、库、架构、托管、供应商、工具），也适用于计划、采购和优先级。通过明确加权的标准和合适的框架（优缺点矩阵、加权评分、决策树、情景分析、艾森豪威尔矩阵）推导决策，并以有理有据的建议结束。不适用于收集大量待定决策（decision-briefing），也不适用于压缩已有的分析（decision-shot）。"
 
 standalone: true
 anthropic_compatible: true
@@ -166,6 +166,9 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ---
 
 ## 更新日志
+
+### 1.1.0 (2026-11-06)
+- 描述中加入明确的触发条件（何时使用）以及与 decision-briefing 和 decision-shot 的区分。插件评估：该技能现在会在涉及权衡的真实决策中触发（3/3 次运行，之前为 0/3），在简单问题上仍不触发。
 
 ### 1.0.0 (2026-03-15)
 - 从 BACH v3.8.0 移植

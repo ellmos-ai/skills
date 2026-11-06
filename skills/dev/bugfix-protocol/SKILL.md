@@ -1,11 +1,11 @@
 ---
 name: bugfix-protocol
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Systematic 6-phase debugging protocol. Structured approach to bugs with quick checks, isolated testing, 20-minute rule, and bug report template.
+updated: 2026-11-06
+description: "Für JEDEN Bug-Bericht und jede Debugging-Anfrage verwenden, bevor Code geändert wird, auch wenn die Ursache offensichtlich scheint: falsche Ausgaben oder Summen ('Kunden zahlen zu viel', 'X liefert -1 statt 0'), Fehlermeldungen, Abstürze, Exceptions, fehlschlagende Tests, Regressionen, 'debugge das', 'finde und behebe den Fehler', 'warum passiert ...', /bugfix. Arbeitet in sechs Phasen, statt die erste verdächtige Zeile zu flicken: Schnellprüfung, Diagnose, ein minimaler Test, der den Fehler reproduziert, ein Fix an der Ursache statt am Symptom, Verifikation und ein kurzer Bug-Bericht (Ursache, Fix, Verifikation), den der Nutzer prüfen kann. Besonders wertvoll, wenn das Symptom weit von der Ursache auftritt, bei Regressionen und sporadischen Fehlern. NICHT verwenden für eine systematische Suche nach unbekannten Fehlern in einer ganzen Codebasis (bugsweep)."
 
 standalone: true
 anthropic_compatible: true

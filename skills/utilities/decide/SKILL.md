@@ -1,11 +1,11 @@
 ---
 name: decide
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix."
+updated: 2026-11-06
+description: "Verwenden, wenn zwischen zwei oder mehr Optionen entschieden werden muss und die Wahl Zielkonflikte, Randbedingungen oder mehrere Kriterien berührt (Kosten, Risiko, Compliance, Aufwand, Teamkapazität, Anbieterbindung, Zeitpunkt), auch wenn eine Option zunächst offensichtlich wirkt: 'X oder Y?', 'sollen wir A oder B nehmen', 'was ist besser für ...', 'hilf mir entscheiden', 'wäge Vor- und Nachteile ab', 'was empfiehlst du', 'Entscheide.', /decide. Gilt für technische Entscheidungen (Datenbanken, Frameworks, Bibliotheken, Architekturen, Hosting, Anbieter, Werkzeuge) ebenso wie für Pläne, Anschaffungen und Prioritäten. Arbeitet die Entscheidung mit ausdrücklich gewichteten Kriterien und einem passenden Framework aus (Pro/Contra-Matrix, gewichtete Bewertung, Entscheidungsbaum, Szenarioanalyse, Eisenhower-Matrix) und endet mit einer begründeten Empfehlung. NICHT verwenden, um viele offene Entscheidungen zu sammeln (decision-briefing) oder eine vorliegende Analyse zu verdichten (decision-shot)."
 
 standalone: true
 anthropic_compatible: true
@@ -163,6 +163,9 @@ Vor finaler Empfehlung pruefen:
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-11-06)
+- Beschreibung mit klarem Auslöser (wann verwenden) und Abgrenzung zu decision-briefing und decision-shot. Plugin-Eval: Der Skill greift jetzt bei einer echten Entscheidung mit Zielkonflikten (3/3 Läufe, vorher 0/3) und bleibt bei einer trivialen Frage weiterhin außen vor.
 
 ### 1.0.0 (2026-03-15)
 - Portiert aus BACH v3.8.0

@@ -1,11 +1,11 @@
 ---
 name: bugfix-protocol
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Protocolo sistemático de depuración en 6 fases. Enfoque estructurado para errores con verificaciones rápidas, pruebas aisladas, regla de los 20 minutos y plantilla de informe de errores.
+updated: 2026-11-06
+description: "Usar para CUALQUIER informe de error o petición de depuración, antes de cambiar el código, aunque la causa parezca obvia: resultados o totales incorrectos ('los clientes pagan demasiado', 'X devuelve -1 en vez de 0'), errores, fallos, excepciones, tests que fallan, regresiones, 'depura esto', 'encuentra y corrige el error', '¿por qué ocurre ...?', /bugfix. Trabaja en seis fases en lugar de parchear la primera línea sospechosa: comprobaciones rápidas, diagnóstico, un test mínimo que reproduce el error, una corrección en la causa raíz y no en el síntoma, verificación y un breve informe del error (causa raíz, corrección, verificación) que el usuario puede revisar. Especialmente útil cuando el síntoma aparece lejos de la causa, en regresiones y fallos intermitentes. NO usar para un barrido sistemático de errores desconocidos en todo un código base (bugsweep)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
