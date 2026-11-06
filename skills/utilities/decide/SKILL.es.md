@@ -1,11 +1,11 @@
 ---
 name: decide
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Toma de decisiones estructurada: matriz de pros/contras, puntuación ponderada, árbol de decisión, análisis de escenarios y matriz de Eisenhower."
+updated: 2026-11-06
+description: "Usar cuando haya que elegir entre dos o más opciones y la elección implique compromisos, restricciones o varios criterios (coste, riesgo, cumplimiento normativo, esfuerzo, capacidad del equipo, dependencia del proveedor, plazos), aunque una opción parezca obvia al principio: '¿X o Y?', '¿usamos A o B?', '¿qué es mejor para ...?', 'ayúdame a decidir', 'sopesa los pros y contras', '¿qué recomiendas?', 'Decide.', /decide. Abarca decisiones técnicas (bases de datos, frameworks, bibliotecas, arquitecturas, hosting, proveedores, herramientas) y también planes, compras y prioridades. Desarrolla la decisión con criterios ponderados explícitos y un marco adecuado (matriz de pros y contras, puntuación ponderada, árbol de decisión, análisis de escenarios, matriz de Eisenhower) y termina con una recomendación justificada. NO usar para reunir muchas decisiones pendientes (decision-briefing) ni para resumir un análisis ya existente (decision-shot)."
 
 standalone: true
 anthropic_compatible: true
@@ -166,6 +166,9 @@ Verificar antes de la recomendación final:
 ---
 
 ## Registro de Cambios
+
+### 1.1.0 (2026-11-06)
+- Descripción con un disparador claro (cuándo usarla) y la delimitación frente a decision-briefing y decision-shot. Evaluación del plugin: la skill se activa ahora en una decisión real con compromisos (3/3 ejecuciones, antes 0/3) y sigue sin activarse en una pregunta trivial.
 
 ### 1.0.0 (2026-03-15)
 - Portado desde BACH v3.8.0

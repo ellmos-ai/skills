@@ -7212,9 +7212,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/decide/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix.",
+      "description": "Verwenden, wenn zwischen zwei oder mehr Optionen entschieden werden muss und die Wahl Zielkonflikte, Randbedingungen oder mehrere Kriterien berührt (Kosten, Risiko, Compliance, Aufwand, Teamkapazität, Anbieterbindung, Zeitpunkt), auch wenn eine Option zunächst offensichtlich wirkt: 'X oder Y?', 'sollen wir A oder B nehmen', 'was ist besser für ...', 'hilf mir entscheiden', 'wäge Vor- und Nachteile ab', 'was empfiehlst du', 'Entscheide.', /decide. Gilt für technische Entscheidungen (Datenbanken, Frameworks, Bibliotheken, Architekturen, Hosting, Anbieter, Werkzeuge) ebenso wie für Pläne, Anschaffungen und Prioritäten. Arbeitet die Entscheidung mit ausdrücklich gewichteten Kriterien und einem passenden Framework aus (Pro/Contra-Matrix, gewichtete Bewertung, Entscheidungsbaum, Szenarioanalyse, Eisenhower-Matrix) und endet mit einer begründeten Empfehlung. NICHT verwenden, um viele offene Entscheidungen zu sammeln (decision-briefing) oder eine vorliegende Analyse zu verdichten (decision-shot).",
       "languages": [
         "de",
         "en",
@@ -7229,37 +7229,37 @@
           "language": "de",
           "path": "skills/utilities/decide/SKILL.md",
           "title": "Decide — Strukturierte Entscheidungsfindung",
-          "description": "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix."
+          "description": "Verwenden, wenn zwischen zwei oder mehr Optionen entschieden werden muss und die Wahl Zielkonflikte, Randbedingungen oder mehrere Kriterien berührt (Kosten, Risiko, Compliance, Aufwand, Teamkapazität, Anbieterbindung, Zeitpunkt), auch wenn eine Option zunächst offensichtlich wirkt: 'X oder Y?', 'sollen wir A oder B nehmen', 'was ist besser für ...', 'hilf mir entscheiden', 'wäge Vor- und Nachteile ab', 'was empfiehlst du', 'Entscheide.', /decide. Gilt für technische Entscheidungen (Datenbanken, Frameworks, Bibliotheken, Architekturen, Hosting, Anbieter, Werkzeuge) ebenso wie für Pläne, Anschaffungen und Prioritäten. Arbeitet die Entscheidung mit ausdrücklich gewichteten Kriterien und einem passenden Framework aus (Pro/Contra-Matrix, gewichtete Bewertung, Entscheidungsbaum, Szenarioanalyse, Eisenhower-Matrix) und endet mit einer begründeten Empfehlung. NICHT verwenden, um viele offene Entscheidungen zu sammeln (decision-briefing) oder eine vorliegende Analyse zu verdichten (decision-shot)."
         },
         {
           "language": "en",
           "path": "skills/utilities/decide/SKILL.en.md",
           "title": "Decide — Structured Decision Making (English)",
-          "description": "Structured decision making: Pro/Con matrix, weighted scoring, decision tree, scenario analysis, and Eisenhower matrix."
+          "description": "Use when the user must choose between two or more options and the choice involves trade-offs, constraints or several criteria (cost, risk, compliance, effort, team capacity, lock-in, timing), even if one option looks obvious at first: 'X or Y?', 'should we use A or B', 'which is better for ...', 'help me decide', 'weigh the pros and cons', 'what do you recommend', 'Decide.', /decide. Covers technical choices (databases, frameworks, libraries, architectures, hosting, vendors, tools) as well as plans, purchases and priorities. Works the decision out with explicit weighted criteria and a fitting framework (pro/con matrix, weighted scoring, decision tree, scenario analysis, Eisenhower matrix) and ends with one justified recommendation. Do NOT use to collect and poll many pending decisions (decision-briefing) or to compress an analysis that already exists (decision-shot)."
         },
         {
           "language": "es",
           "path": "skills/utilities/decide/SKILL.es.md",
           "title": "Decide — Toma de Decisiones Estructurada (Español)",
-          "description": "Toma de decisiones estructurada: matriz de pros/contras, puntuación ponderada, árbol de decisión, análisis de escenarios y matriz de Eisenhower."
+          "description": "Usar cuando haya que elegir entre dos o más opciones y la elección implique compromisos, restricciones o varios criterios (coste, riesgo, cumplimiento normativo, esfuerzo, capacidad del equipo, dependencia del proveedor, plazos), aunque una opción parezca obvia al principio: '¿X o Y?', '¿usamos A o B?', '¿qué es mejor para ...?', 'ayúdame a decidir', 'sopesa los pros y contras', '¿qué recomiendas?', 'Decide.', /decide. Abarca decisiones técnicas (bases de datos, frameworks, bibliotecas, arquitecturas, hosting, proveedores, herramientas) y también planes, compras y prioridades. Desarrolla la decisión con criterios ponderados explícitos y un marco adecuado (matriz de pros y contras, puntuación ponderada, árbol de decisión, análisis de escenarios, matriz de Eisenhower) y termina con una recomendación justificada. NO usar para reunir muchas decisiones pendientes (decision-briefing) ni para resumir un análisis ya existente (decision-shot)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/decide/SKILL.zh.md",
           "title": "Decide — 结构化决策 (中文)",
-          "description": "结构化决策：优缺点矩阵、加权评分、决策树、情景分析和艾森豪威尔矩阵。"
+          "description": "当用户需要在两个或更多选项之间做出选择，且该选择涉及权衡、约束或多个标准（成本、风险、合规、工作量、团队能力、供应商锁定、时机）时使用，即使某个选项起初看起来显而易见：“X 还是 Y？”“我们该用 A 还是 B？”“哪个更适合……？”“帮我做决定”“权衡利弊”“你推荐什么？”“Decide.”、/decide。适用于技术选择（数据库、框架、库、架构、托管、供应商、工具），也适用于计划、采购和优先级。通过明确加权的标准和合适的框架（优缺点矩阵、加权评分、决策树、情景分析、艾森豪威尔矩阵）推导决策，并以有理有据的建议结束。不适用于收集大量待定决策（decision-briefing），也不适用于压缩已有的分析（decision-shot）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/decide/SKILL.ja.md",
           "title": "Decide — 構造化意思決定 (日本語)",
-          "description": "構造化意思決定：メリット・デメリット行列、加重スコアリング、意思決定ツリー、シナリオ分析、アイゼンハワーマトリクス。"
+          "description": "ユーザーが2つ以上の選択肢から選ぶ必要があり、その選択にトレードオフ、制約、または複数の基準（コスト、リスク、コンプライアンス、工数、チームの対応力、ロックイン、タイミング）が関わる場合に使用する。最初は一方が明らかに見える場合も含む：「XとYどちら？」「AとBどちらを使うべき？」「…にはどれが良い？」「決めるのを手伝って」「長所と短所を比較して」「おすすめは？」「Decide.」、/decide。データベース、フレームワーク、ライブラリ、アーキテクチャ、ホスティング、ベンダー、ツールなどの技術的な選択に加え、計画、購入、優先順位にも対応する。明示的に重み付けした基準と適切なフレームワーク（メリット・デメリット表、加重スコアリング、決定木、シナリオ分析、アイゼンハワー・マトリクス）で判断を導き、根拠のある推奨で締めくくる。保留中の多数の決定を集める用途（decision-briefing）や、既存の分析を要約する用途（decision-shot）には使用しない。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/decide/SKILL.ru.md",
           "title": "Decide — Структурированное принятие решений (Русский)",
-          "description": "Структурированное принятие решений: матрица «за/против», взвешенная оценка, дерево решений, сценарный анализ и матрица Эйзенхауэра."
+          "description": "Используйте, когда нужно выбрать между двумя или более вариантами и выбор связан с компромиссами, ограничениями или несколькими критериями (стоимость, риск, соответствие требованиям, трудозатраты, возможности команды, привязка к поставщику, сроки), даже если один вариант поначалу кажется очевидным: «X или Y?», «использовать A или B?», «что лучше для ...?», «помоги решить», «взвесь плюсы и минусы», «что ты рекомендуешь?», «Decide.», /decide. Подходит для технических решений (базы данных, фреймворки, библиотеки, архитектуры, хостинг, поставщики, инструменты), а также для планов, покупок и приоритетов. Прорабатывает решение с явно взвешенными критериями и подходящим методом (матрица «за/против», взвешенная оценка, дерево решений, сценарный анализ, матрица Эйзенхауэра) и завершает его обоснованной рекомендацией. НЕ используйте для сбора множества открытых решений (decision-briefing) или для сжатия готового анализа (decision-shot)."
         }
       ]
     },
