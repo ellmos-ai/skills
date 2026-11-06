@@ -281,10 +281,10 @@ def create_structure(base_path: Path):
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
         print("Nutzung: python setup_portable.py <zielpfad>")
         print("Beispiel: python setup_portable.py E:\\AI-Portable")
-        sys.exit(1)
+        sys.exit(0 if len(sys.argv) >= 2 and sys.argv[1] in ("-h", "--help") else 1)
 
     target = Path(sys.argv[1])
     if target.exists() and any(target.iterdir()):

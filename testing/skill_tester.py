@@ -517,12 +517,29 @@ def s005_standalone_check(skill_path):
     return round(score, 1), "; ".join(details)
 
 
+def s006_smoke_test(skill_path):
+    """S006: Smoke-Test fuer Python-Skripte und vorhandene Testsuites."""
+    try:
+        from testing.skill_smoke_gate import check_skill_smoke
+        result = check_skill_smoke(Path(skill_path))
+        status = result.get('status', 'PASS')
+        findings = result.get('findings', [])
+        if status == 'FAIL':
+            return 1.0, "; ".join(findings)
+        elif status == 'WARN':
+            return 4.0, "; ".join(findings)
+        return 5.0, "; ".join(findings) if findings else "Smoke-Test erfolgreich"
+    except Exception as e:
+        return 3.0, f"Smoke-Test Fehler: {e}"
+
+
 S_TESTS = {
     'S001': ('Frontmatter', s001_frontmatter),
     'S002': ('Vollstaendigkeit', s002_completeness),
     'S003': ('Dependencies', s003_dependencies),
     'S004': ('Code-Qualitaet', s004_code_quality),
     'S005': ('Standalone-Check', s005_standalone_check),
+    'S006': ('Smoke-Test', s006_smoke_test),
 }
 
 
@@ -703,6 +720,11 @@ PROFILES = {
         's_tests': [],
         'l_tests': [],
         'u_tests': ['U001', 'U002', 'U003', 'U004', 'U005'],
+    },
+    'SMOKE': {
+        's_tests': ['S001', 'S006'],
+        'l_tests': [],
+        'u_tests': [],
     },
 }
 
