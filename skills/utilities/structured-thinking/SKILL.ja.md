@@ -1,11 +1,11 @@
 ---
 name: structured-thinking
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-05-19
-description: メタスキル：3つのフェーズからなるワークフローとしての構造化思考。分析（think）、発想（brainstorm）、意思決定（decide）を1つの連続したプロセスに統合します。
+updated: 2026-11-06
+description: "込み入った、あるいは影響の大きい状況で、本当の問題の理解、選択肢の創出、決定という全工程を一度に通したいときに使います: '一緒にじっくり考えて'、'原因から決定まで'、'構造化思考'、'問題、アイデア、決定'、'... すべきか決められない'、'誰も理由を知らないが取締役会に何か伝えなければならない'、'まず分析し、次に選択肢、最後に推奨'、/structured-thinking。3つのフェーズ（分析 think、発想 brainstorm、決定 decide）から成るメタワークフローで、不要なフェーズは省き、根拠付きの1つの結果を返します。1つの工程だけが求められる場合には使わないでください: 純粋な分析や原因（think）、純粋なアイデア出し（brainstorm）、すでに出揃った選択肢からの選択（decide）、プロジェクト履歴と照合して追求するアイデア（idea-mining）。"
 
 standalone: true
 anthropic_compatible: true
@@ -190,6 +190,9 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ---
 
 ## 変更履歴
+
+### 1.1.0 (2026-11-06)
+- 説明文を明確なトリガーと境界づけで書き直し（docs/CONVENTIONS.md の規則）: 使用場面、典型的なユーザーの言い回し、スラッシュコマンドを先頭に置き、隣接スキルを「使わない場合」の節で明示。
 
 ### 1.0.0 (2026-05-19)
 - think, brainstorm, decide からメタスキルとして作成

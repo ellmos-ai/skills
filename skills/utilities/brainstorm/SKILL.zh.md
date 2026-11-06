@@ -1,11 +1,11 @@
 ---
 name: brainstorm
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 用于想法生成的结构化创意方法：SCAMPER（替换、组合、调整、修改、改变用途、消除、逆转）、六顶思考帽、思维导图、逆向头脑风暴、TRIZ（发明问题解决理论）和快速构思。
+updated: 2026-11-06
+description: "当需要大量新创意、暂不评判时使用：名称、功能、活动策划，或有别于常规做法的方案：'头脑风暴'、'给我 30 个点子'、'我需要 ... 的创意'、'我们还能试什么'、'欢迎疯狂的想法'、'我们只想得到常规做法'、'用 SCAMPER 过一遍'、'六顶思考帽'、/brainstorm。借助 SCAMPER、六顶思考帽、思维导图、逆向头脑风暴、TRIZ 或快速构思生成大量选项（先求数量，收集时不批评），再归类并初选最佳项。不要用于：查找问题原因（think）、在已有选项中做选择（decide）、对照项目历史挖掘创意并将其中一个做到底（idea-mining），或分析-创意-决策的完整流程（structured-thinking）。"
 
 standalone: true
 anthropic_compatible: true
@@ -146,6 +146,9 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstor
 ---
 
 ## 变更日志
+
+### 1.1.0 (2026-11-06)
+- 重写描述，明确触发条件与边界（docs/CONVENTIONS.md 中的规则）：先写使用场景、用户常见说法和斜杠命令，并在“不要用于”条款中点名相邻技能。
 
 ### 1.0.0 (2026-03-15)
 - 从 BACH v3.8.0 移植

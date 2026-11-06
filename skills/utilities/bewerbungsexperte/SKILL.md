@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
+updated: 2026-11-06
+description: "Verwenden, wenn sich jemand bewirbt: Stellenanzeige analysieren, Lebenslauf gegen die Anforderungen abgleichen, Lebenslauf oder LinkedIn-Profil schärfen, Anschreiben verfassen (auch bei Lücken im Lebenslauf) oder aus Berufsdaten (SQLite-Datenbank, Ordner für Arbeitgeber, Abschlüsse und Zertifikate als Inhaltsquelle) einen Text-Lebenslauf erzeugen: 'ich bewerbe mich auf ...', 'prüf meinen Lebenslauf gegen diese Anzeige', 'schreib ein Anschreiben', 'mein LinkedIn-Profil wirkt blass', 'Bewerbung', 'Lebenslauf generieren', /bewerbungsexperte. Macht ATS-sicheres Keyword-Matching, Unternehmens-Check, CV-Tuning und individuelle Anschreiben und führt den eigenständigen cv_generator.py aus (keine BACH-Laufzeit nötig). NICHT verwenden, um zwei Jobangebote gegeneinander abzuwägen (decide), KI-Formulierungen aus einem fertigen Anschreiben zu entfernen (llm-text-hygiene) oder für reine Dokumentverarbeitung wie Text extrahieren, OCR, Dateien umbenennen oder sortieren, auch bei Bewerbungsunterlagen."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -125,6 +125,9 @@ Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
 Kein pip-Install noetig, kein BACH-Runtime-Import.
 
 ## ÄNDERUNGSLOG
+
+### 1.2.0 (2026-11-06)
+- Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.
 
 ### 1.1.0 (2026-06-22)
 - Standalone portiert aus BACH v1.0.0

@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: 整个求职申请过程的专家。分析招聘广告，优化个人资料（LinkedIn/简历），并生成定制的求职信。从 SQLite 数据库和文件夹结构生成 ASCII 简历。cv_generator.py 已独立移植——无需 BACH 运行时。
+updated: 2026-11-06
+description: "当有人求职申请时使用：分析招聘广告、将简历与岗位要求比对、优化简历或 LinkedIn 个人资料、撰写求职信（包括简历有空档的情况），或依据职业数据（SQLite 数据库，以及作为内容来源的雇主、学历、证书文件夹）生成文本简历：'我要申请 ...'、'对照这个职位检查我的简历'、'写一封求职信'、'我的 LinkedIn 资料显得单薄'、'Bewerbung'、'生成我的简历'、/bewerbungsexperte。进行适配 ATS 的关键词匹配、公司检查、简历调整和个性化求职信，并运行独立的 cv_generator.py（无需 BACH 运行时）。不要用于：比较两个工作机会（decide）、清除已完成求职信中的 AI 措辞（llm-text-hygiene），或纯文档处理，如提取文本、OCR、重命名或整理文件（即使是求职材料）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -121,6 +121,9 @@ _Fortbildungen/
 无需 pip 安装，无需导入 BACH 运行时。
 
 ## 变更日志
+
+### 1.2.0 (2026-11-06)
+- 重写描述，明确触发条件与边界（docs/CONVENTIONS.md 中的规则）：先写使用场景、用户常见说法和斜杠命令，并在“不要用于”条款中点名相邻技能。
 
 ### 1.1.0 (2026-06-22)
 - 从 BACH v1.0.0 独立移植

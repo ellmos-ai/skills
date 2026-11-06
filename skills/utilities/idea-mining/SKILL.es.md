@@ -1,7 +1,7 @@
 ---
 name: idea-mining
 language: es
-description: Extraer ideas, filtrar contra el historial y explorar una hasta completarla. Un flujo de trabajo de 5 fases (A-E) para la resolución de problemas complejos.
+description: "Usar cuando un problema difícil lleva tiempo estancado y se quieren nuevos enfoques que se contrasten con lo ya intentado y de los que se lleve uno hasta el final: preguntas de investigación, demostraciones, bloqueos tercos de arquitectura o diseño, rondas periódicas de innovación de un proyecto: 'damos vueltas en círculo', 'llevamos semanas atascados', 'explora enfoques nuevos', 'reúne ideas y fíltralas con nuestras notas o el registro de decisiones', 'no repitamos callejones sin salida', 'ronda de innovación', /idea-mining. Llena IDEENSPEICHER.md con ideas de ocho técnicas (analogías de otras disciplinas, literatura, proyectos hermanos), las filtra con la documentación del proyecto, elige una, la desarrolla y documenta también los fracasos. NO usar para una lista rápida y libre de ideas sin filtro ni seguimiento (brainstorm), la elección entre opciones dadas (decide), el diagnóstico de un error concreto (think) ni la simple cadena análisis-ideas-decisión (structured-thinking)."
 ---
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
@@ -92,6 +92,9 @@ D) BEWEISNOTIZ.md actualizado (incluido el fallo de la idea 2), informe breve.
 - `swarm-operations` — subagentes imparciales para la técnica 3 y exploración paralela.
 
 ## Registro de cambios
+
+### 1.2.0 (2026-11-06)
+- Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
 
 ### 1.1.0 (2026-07-03)
 - Fase E "Siembra": transferencia externa opcional de resultados transferibles a

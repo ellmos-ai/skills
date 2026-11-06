@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: Especialista para todo el proceso de solicitud de empleo. Analiza ofertas de empleo, optimiza perfiles (LinkedIn/CV) y genera cartas de presentación personalizadas. Genera currículums en ASCII a partir de una base de datos SQLite y una estructura de carpetas. cv_generator.py está adaptado como herramienta independiente -- no se requiere BACH-Runtime.
+updated: 2026-11-06
+description: "Usar cuando alguien se postula a un empleo: analizar una oferta de trabajo, contrastar el currículum con sus requisitos, afinar el currículum o el perfil de LinkedIn, redactar una carta de presentación (también con lagunas en el currículum) o generar un currículum en texto a partir de datos profesionales (base SQLite y carpetas de empleadores, títulos y certificados como fuente de contenido): 'me postulo a ...', 'revisa mi currículum frente a esta oferta', 'escribe una carta de presentación', 'mi perfil de LinkedIn se ve flojo', 'Bewerbung', 'genera mi currículum', /bewerbungsexperte. Hace coincidencia de palabras clave apta para ATS, revisión de la empresa, ajuste del currículum y cartas individuales, y ejecuta el cv_generator.py independiente (sin runtime BACH). NO usar para comparar dos ofertas de empleo (decide), quitar giros de IA de una carta ya terminada (llm-text-hygiene) ni para tareas puras de documentos como extraer texto, OCR, renombrar u ordenar archivos, aunque sean documentos de solicitud."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -121,6 +121,9 @@ Solo biblioteca estándar de Python: `sqlite3`, `pathlib`, `argparse`, `re`, `da
 No requiere instalación por pip, ni importación en el tiempo de ejecución de BACH.
 
 ## REGISTRO DE CAMBIOS
+
+### 1.2.0 (2026-11-06)
+- Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
 
 ### 1.1.0 (2026-06-22)
 - Adaptado como herramienta independiente desde BACH v1.0.0

@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: "[Français] Compétence d'agent pour bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig."
+updated: 2026-11-06
+description: "À utiliser lorsque quelqu'un postule à un emploi : analyser une offre d'emploi, confronter le CV à ses exigences, affûter le CV ou le profil LinkedIn, rédiger une lettre de motivation (même avec des trous dans le CV) ou générer un CV en texte à partir de données professionnelles (base SQLite et dossiers employeurs, diplômes et certificats comme source de contenu) : 'je postule à ...', 'compare mon CV à cette annonce', 'écris une lettre de motivation', 'mon profil LinkedIn est fade', 'Bewerbung', 'génère mon CV', /bewerbungsexperte. Fait un appariement de mots-clés compatible ATS, une vérification de l'entreprise, la mise au point du CV et des lettres sur mesure, et exécute cv_generator.py en autonome (sans runtime BACH). NE PAS utiliser pour comparer deux offres d'emploi (decide), retirer les tournures d'IA d'une lettre terminée (llm-text-hygiene) ni pour le simple traitement de documents (extraire du texte, OCR, renommer ou trier des fichiers), même s'il s'agit de pièces de candidature."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -128,6 +128,9 @@ Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
 Kein pip-Install noetig, kein BACH-Runtime-Import.
 
 ## ÄNDERUNGSLOG
+
+### 1.2.0 (2026-11-06)
+- Description réécrite avec un déclencheur clair et une délimitation (règle de docs/CONVENTIONS.md) : situation d'usage, formulations typiques et commande slash en tête, skills voisins cités dans une clause NE PAS utiliser.
 
 ### 1.1.0 (2026-06-22)
 - Standalone portiert aus BACH v1.0.0

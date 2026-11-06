@@ -1,7 +1,7 @@
 ---
 name: llm-text-hygiene
 language: en
-description: Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures.
+description: "Use when a finished text (paper, thesis, README, newsletter, docs, language versions) is about to be published or uploaded and may still carry traces of how it was made: chat residue ('as discussed', 'Here is the revised version'), placeholders (TODO, '[insert reference]', '<example here>'), thanks to ChatGPT and similar tools, typical LLM style markers ('delve', 'it is worth noting') or an AI disclosure that is missing or no longer true: 'check before upload', 'remove the AI leftovers', 'are there placeholders left', 'does the AI disclosure match', 'bring both language versions to the same state', /llm-text-hygiene. Scans, cleans clear cases conservatively across all language versions, corrects the disclosure and only lists style findings; never changes the substance or rewrites the author's voice. Do NOT use to write new text (applications: bewerbungsexperte), to repair broken encoding or umlauts, or to choose between options (decide)."
 ---
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
@@ -107,6 +107,9 @@ Request: "Check the paper for AI residue before upload."
   skill does not polish style itself (see Red Flags and Workflow).
 
 ## Changelog
+
+### 1.2.0 (2026-11-06)
+- Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.
 
 ### 1.1.0 (2026-09-27)
 - Added `pasta-press` (public repo `ellmos-ai/pasta-press`) as an optional tool for

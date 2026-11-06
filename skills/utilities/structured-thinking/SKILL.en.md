@@ -1,11 +1,11 @@
 ---
 name: structured-thinking
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-05-19
-description: "Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process."
+updated: 2026-11-06
+description: "Use when a messy or high-stakes situation needs the whole chain in one run: understand the real problem, generate options, then decide: 'help me think this through', 'from cause to decision', 'structured thinking', 'problem, ideas, decision', 'I am stuck on whether to ...', 'nobody knows why ... and I have to tell the board something', 'analyse first, then options, then recommend', /structured-thinking. Meta-workflow of three phases: analyse (think), ideate (brainstorm), decide (decide); skips a phase that is not needed and returns one result with its rationale. Do NOT use when only one step is asked: pure analysis or causes (think), pure ideas (brainstorm), a choice between options already on the table (decide), or ideas filtered against project history and pursued (idea-mining)."
 
 standalone: true
 anthropic_compatible: true
@@ -190,6 +190,9 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-11-06)
+- Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.
 
 ### 1.0.0 (2026-05-19)
 - Created as a meta-skill from think, brainstorm, and decide
