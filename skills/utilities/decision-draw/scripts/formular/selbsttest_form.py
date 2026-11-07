@@ -327,6 +327,58 @@ class DatenSicherheit(unittest.TestCase):
         for value in values:
             self.assertRegex(value, allowed)
 
+    # --- Link-Nachtrag (s1/r1 zu #98): Netzwerkpfade und mehrfaches Entity-Aufloesen ---------------------------------------
+    NETWORK = {
+        "doppelter Schraegstrich": "[x](//evil/share)",
+        "Schraegstrich-Backslash": "[x](/\\evil\\share)",
+        "doppelter Backslash": "[x](\\\\evil\\share)",
+        "Prozent-Backslash": "[x](/%5Cevil)",
+        "Prozent-Schraegstrich": "[x](/%2Fevil)",
+        "Prozent klein": "[x](/%5cevil)",
+        "Entity-Tab im Pfad": "[x](/&#9;/evil)",
+        "Entity-Schraegstrich": "[x](&#47;/evil)",
+        "Entity-Backslash": "[x](/&#92;evil)",
+        "Leerzeichen": "[x](/ /evil)",
+    }
+
+    def test_f1_network_path_prefixes_are_refused(self):
+        # file://-Seite: //host oder /\host wird beim Klick ein UNC-Pfad, Windows kontaktiert den Host (SMB, NTLM)
+        for label in ("doppelter Schraegstrich", "Schraegstrich-Backslash", "doppelter Backslash", "Prozent-Backslash", "Prozent-Schraegstrich", "Prozent klein"):
+            with self.subTest(label):
+                d = load()
+                post(d, "V4")["details_markdown"] = self.NETWORK[label]
+                self.assertTrue(errors_of(d), f"{label}: muss abgelehnt werden")
+
+    def test_f1_no_network_path_survives_in_any_encoding(self):
+        for label, md in self.NETWORK.items():
+            with self.subTest(label):
+                d = load()
+                post(d, "V4")["details_markdown"] = md
+                try:
+                    page, _, _ = bf.build(d, HERE)
+                except bf.FormError:
+                    continue  # abgelehnt: in Ordnung
+                for url in Elements(page).urls():
+                    self.assertIsNone(re.match(r"^[/\\]{2}", url), (label, url))
+                    self.assertFalse(url.lower().startswith(("/%5c", "/%2f")), (label, url))
+
+    def test_f1_one_leading_slash_and_dot_slash_stay_allowed(self):
+        d = load()
+        post(d, "V4")["details_markdown"] = "[a](/ok/pfad) [b](./rel/pfad) [c](/) [d](#anker)"
+        page, _, _ = bf.build(d, HERE)
+        more = page.split('<details class="mehr">')[1].split("</details>")[0]
+        self.assertEqual(Elements(more).urls(), ["/ok/pfad", "./rel/pfad", "/", "#anker"])
+
+    def test_f1_entities_are_decoded_once_and_query_parameters_stay_exact(self):
+        # Browser: ein Attributwert wird einmal aufgeloest. '&copy=2' und '&sect=3' sind Parameternamen, kein Copyright- und Paragraphenzeichen.
+        for url in ("https://example.org/x?b=1&copy=2&sect=3&reg=4", "/p?b=1&copy=2&sect=3&reg=4", "https://example.org/a?x=1&amp=2&lt=3"):
+            with self.subTest(url):
+                d = load()
+                post(d, "V4")["details_markdown"] = f"[x]({url})"
+                page, _, _ = bf.build(d, HERE)
+                more = page.split('<details class="mehr">')[1].split("</details>")[0]
+                self.assertEqual(Elements(more).urls(), [url], "der Browser liest exakt die eingegebene Adresse")
+
     def test_f1_the_page_check_reads_any_spelling_of_tags_and_attributes(self):
         # Negativkontrolle des Pruefwerkzeugs: eine Regex nur fuer Kleinschreibung uebersaehe genau diese Formen (CodeQL: Bad HTML filtering regexp).
         probe = Elements('<SCRIPT>x</SCRIPT><ScRiPt >y</script\t><A HREF="javascript:1">a</A><IMG SRC=" data:text/html,z" onerror=q>'
