@@ -72,6 +72,7 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 4. UI tests headless only, never through a visible browser or the Playwright MCP tools (a visible test browser once filled in the form by itself).
 5. Deliver only after an independent check by another instance.
 6. Book only through decision-briefing Phase 4; comparing with a sealed avatar forecast is optional.
+7. Saving never depends on a dialog (rule 9 of the guide): download links, text to copy and "save draft" are in place before the folder dialog opens and stay after every abort or error; "saved" only after the files are completely written.
 
 ---
 
@@ -311,6 +312,7 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 ## Changelog
 
 ### 1.0.2 (2026-11-07)
+- Rule 9 "saving never depends on a dialog" (incident of 2026-11-07: after the folder dialog was aborted the form offered nothing more): the reference form now has download links per file (nothing starts by itself), text to copy, "save draft", honest success and error messages and no `startIn`; tests `HeadlessSave` (headless, simulated failures) and `SaveArea`.
 - Added the build guide "Decision document as a form" with the reference implementation `scripts/formular/` and the mandatory rules from the incident of 2026-11-07; added the status note for the Tk viewer (not accepted natively). The German `SKILL.md` is at 1.2.0 and also carries the style rules of 1.1.0, which this English file does not have yet.
 
 ### 1.0.1 (2026-09-13)

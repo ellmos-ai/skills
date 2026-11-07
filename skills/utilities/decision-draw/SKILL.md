@@ -77,6 +77,7 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 4. UI-Tests nur headless, nie über sichtbare Browser oder die Playwright-MCP-Werkzeuge (ein sichtbarer Testbrowser hat das Formular einmal selbst ausgefüllt).
 5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
 6. Buchung nur über `decision-briefing` Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
+7. Speichern hängt nie von einem Dialog ab (Regel 9 der Anleitung): Download-Links, Text zum Kopieren und „Zwischenstand sichern“ stehen schon vor dem Ordnerdialog bereit und bleiben nach jedem Abbruch oder Fehler stehen; „gespeichert“ erst nach vollständigem Schreiben.
 
 ---
 
@@ -339,6 +340,7 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ### 1.2.0 (2026-11-07)
 - Bauanleitung „Entscheidungsvorlage als Formular“ (Abschnitt oben und `references/formular.md`) mit Referenzimplementierung `scripts/formular/` (Generator, Skript, Stil, Selbsttest, Headless-Hilfen) und Antwortschema `ticket-master.decision-answers.v1`; Pflichtregeln aus dem Vorfall vom 2026-11-07.
 - Statusvermerk: Der Tk-Viewer ist nativ nicht abgenommen; bis zur ausdrücklichen Zustimmung das HTML-Formular verwenden.
+- Regel 9 „Speichern hängt nie von einem Dialog ab“ (Vorfall vom 2026-11-07: Nach dem Abbruch der Ordnerwahl bot das Formular nichts mehr an): Das Referenzformular hat jetzt Download-Links je Datei (nichts startet von allein), Text zum Kopieren, „Zwischenstand sichern“, ehrliche Erfolgs- und Fehlermeldungen, kein `startIn`; Tests `HeadlessSave` (headless, simulierte Ausfälle) und `SaveArea`.
 - `references/viewer.md` korrigiert: Die Prüfung der Rücknahme-Herkunft bei `preselect: none` schützt vor versehentlicher Vorbelegung, nicht vor absichtlicher Dateimanipulation. `history` ins `draw.schema.json` aufgenommen.
 
 ### 1.1.0 (2026-09-18)

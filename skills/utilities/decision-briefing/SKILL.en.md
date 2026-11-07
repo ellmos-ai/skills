@@ -160,6 +160,7 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 4. UI tests headless only, never through a visible browser or the Playwright MCP tools (a visible test browser once filled in the form by itself).
 5. Deliver only after an independent check by another instance.
 6. Book only through Phase 4; comparing with a sealed avatar forecast is optional.
+7. Saving never depends on a dialog (rule 9 of the guide): download links, text to copy and "save draft" are in place before the folder dialog opens and stay after every abort or error; "saved" only after the files are completely written.
 
 The Tk viewer of decision-draw is not accepted natively; open it only after the user's explicit consent.
 
@@ -248,6 +249,7 @@ the artifact ends with exactly one line:
 ## Changelog
 
 ### 1.2.0 (2026-11-07)
+- Added rule 9 "saving never depends on a dialog" (download links, text to copy, draft backup, honest success message); the reference implementation and its tests live in `decision-draw`.
 - Added the section "Briefing as a form (build guide)": a clickable HTML form instead of letters in the chat, pointing to the reference implementation and the guide in `decision-draw` (`references/formular.md`, `scripts/formular/`), and the mandatory rules from the incident of 2026-11-07. Booking stays Phase 4 only. The German `SKILL.md` is at 1.3.0 and also carries the style rules of its 1.2.0, which this English file does not have yet.
 
 ### 1.1.0 (2026-09-09)

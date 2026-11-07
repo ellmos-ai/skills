@@ -39,7 +39,7 @@ Faustregel: A, wenn das Dokument bereits als Markdown mit den Tabellen unten exi
    - `bundle_block()`: der Vorab-Block „AGPL bleibt“ im ersten Bündel und das Feld `agpl_bleibt` in Antwortdatei und Validator sind eine Besonderheit des Referenzdokuments und werden gestrichen oder durch eine eigene Vorab-Frage ersetzt;
    - im Selbsttest `EXPECTED_IDS`, `EXPECTED_MARKED`, `SEAL_SHA` (siehe Abschnitt 6).
 4. **Unabhängig prüfen lassen**, bevor es zugestellt wird (Abschnitt 5).
-5. **Zustellen**, die Nutzerin oder der Nutzer klickt, speichert und sagt dem Konsumenten Bescheid.
+5. **Zustellen**, die Nutzerin oder der Nutzer klickt, speichert und sagt dem Konsumenten Bescheid. Das Speichern klappt auch ohne Ordnerdialog (Regel 9): „Speichern und abschicken“ versucht zuerst den Ordner, die Download-Links, der Text und der Zwischenstand stehen immer bereit.
 6. **Antwortdatei lesen und buchen:** Der Konsument prüft die Datei mit `validate_answers()` (Schema, Hash, vollständige Kürzel, Zählung), zerlegt Teilantworten über den Rücktransfer des Skills und bucht ausschließlich über `decision-briefing` Phase 4.
 
 ## 4. Antwortschema `ticket-master.decision-answers.v1`
@@ -57,6 +57,7 @@ Eine JSON-Datei. Pflichtfelder (der Validator `validate_answers()` in `build_for
 | `gesamtabnahme` | `explicit` (nur `true` nach ausdrücklichem „Ja“ im Dialog **und** alle Posten wie empfohlen), `at` |
 | `counts` | `total`, `answered`, `open` (müssen zu `answers` passen) |
 | `agpl_bleibt` | Besonderheit des Referenzdokuments |
+| `draft` | nur im Zwischenstand (Knopf „Zwischenstand sichern“): `true`; sonst fehlt das Feld |
 
 Offene Posten bleiben `open`; eine Teilantwort ist **keine** Gesamtabnahme.
 
@@ -72,11 +73,19 @@ Jede Regel hat einen Grund; wer ein Formular baut, hält alle ein.
 6. **Zustellung erst nach unabhängiger Prüfung** durch eine andere Instanz (Hash, Posten gegen das Quelldokument, nichts vorausgewählt, Roundtrip der Antwortdatei, Headless-Wiederherstellung).
 7. **Buchung nur über `decision-briefing` Phase 4.** Das Formular, der Generator und der Viewer besitzen keinen eigenen Schreibweg ins Register.
 8. **Messung gegen eine versiegelte Avatar-Prognose (optional):** Die Prognose wird vor der Zustellung mit UTC-Zeit und SHA-256 versiegelt, im Formular als Avatar-Wahl und Konfidenz je Posten angezeigt und nach der Antwort ausgewertet. Antwortdatei und Siegel werden nicht vermischt; die Empfehlung des Schreibers ist ein dritter Vergleichsarm.
+9. **Speichern hängt nie von einem Dialog ab.** Jeder Weg über einen Browser-Dialog (Ordnerwahl, Dateispeichern) kann abgebrochen werden oder scheitern (`AbortError`, `SecurityError`, `NotAllowedError`, gesperrte Systemordner, blockierte Mehrfach-Downloads). Vorfall: Nach einem Abbruch der Ordnerwahl zeigte das Formular nur „abgebrochen“ und bot nichts mehr an; der Stand war nur durch eine Rettung gesichert. Deshalb:
+   - Das **Sicherungsnetz steht, bevor ein Dialog aufgeht**: ein sichtbarer Bereich mit „Als Datei herunterladen“, „Antwort als Text kopieren“ und „Zwischenstand sichern“, dazu je Datei ein eigener Download-Link. Nach jedem Abbruch oder Fehler bleibt er unverändert stehen.
+   - **Kein Download startet von allein.** Jeder Download ist eine eigene Nutzergeste (Link oder Knopf); es gibt keine zeitversetzten programmatischen Klicks, die ein Browser als Mehrfach-Download blockieren kann. Die Antwortdatei ist nötig, die beantwortete Kopie optional.
+   - **Antwort als Text:** ein Textfeld mit dem vollständigen JSON, markiert, mit Kopierknopf. Fehlt die Zwischenablage oder wird sie verweigert, bleibt das Feld zum manuellen Kopieren stehen und das Formular sagt es.
+   - **Zwischenstand jederzeit sichern** (Datei, `draft: true`, ohne Gesamtabnahme, solange sie nicht bestätigt wurde); `localStorage` ist nur eine Bequemlichkeit, keine Sicherung.
+   - **Keine falsche Erfolgsmeldung:** „Gespeichert in …“ steht erst, nachdem alle Dateien im Ordner vollständig geschlossen sind. Nach einem Download heißt es „Download angestoßen“ mit dem Hinweis, dass die Seite den Eingang nicht prüfen kann. Jeder Fehler nennt seinen Namen und den nächsten Schritt in Du-Form; auch der Bau der Kopie und der Antwort sind abgefangen, kein Fehler bleibt unsichtbar. Scheitert nur die Kopie, bleibt die Antwortdatei verfügbar.
+   - Kein `startIn` beim Ordnerdialog (Browser sperren Systemordner wie „Dokumente“); der gewünschte Ordner wird im Dokument genannt, mit dem Hinweis, dass der Browser ihn eventuell nicht zulässt.
+   - Ein **Headless-Test simuliert** Ordnerwahl-Abbruch, `SecurityError`, Schreibfehler bei der zweiten Datei, späten `close()`, fehlende Ordner-API, blockierten Download, fehlende und verweigerte Zwischenablage, einen Fehler beim Bau der Kopie und den Zwischenstand und prüft jedes Mal: Knopf sichtbar, Text gültig, keine falsche Erfolgsmeldung.
 
 ## 6. Prüfen
 
 - **Selbsttest** (Standardbibliothek plus `markdown`):
-  `FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<Messdatei.md>] python -m unittest selbsttest_formular -v` im Ordner `scripts/formular/`. Er prüft: reproduzierbarer Hash, Posten, Optionen, Empfehlung und Avatar-Angaben gegen das Quelldokument (und, falls lesbar, gegen die versiegelte Messdatei, nur lesend), nichts vorausgewählt, kein Netz, Text des Dokuments unverändert, Schema und Roundtrip der Antwortdatei, Wiederherstellung ohne Gesamtabnahme. Die Datei heißt nicht `test_*.py`, damit sie nicht automatisch eingesammelt wird; sie ist an das Referenzdokument gebunden und für ein neues Dokument anzupassen.
+  `FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<Messdatei.md>] python -m unittest selbsttest_formular -v` im Ordner `scripts/formular/`. Er prüft: reproduzierbarer Hash, Posten, Optionen, Empfehlung und Avatar-Angaben gegen das Quelldokument (und, falls lesbar, gegen die versiegelte Messdatei, nur lesend), nichts vorausgewählt, kein Netz, Text des Dokuments unverändert, Schema und Roundtrip der Antwortdatei, Wiederherstellung ohne Gesamtabnahme. Regel 9 prüfen `SaveArea` (statisch: Knopf-IDs, kein `startIn`, kein zeitversetzter Mehrfach-Download) und `HeadlessSave` (headless, simulierte Ausfälle). Die Datei heißt nicht `test_*.py`, damit sie nicht automatisch eingesammelt wird; sie ist an das Referenzdokument gebunden und für ein neues Dokument anzupassen.
 - **Fixtures** (`testdata/`) entstehen durch einen echten Headless-Lauf: `python make_fixtures.py <FORMULAR.html> <Zielordner>`. Ändert sich das Formular, ändert sich sein Hash, und die Fixtures müssen neu erzeugt werden. Sie sind nicht Teil des Skills.
 - **Weg B:** `python scripts/decision_viewer.py validate <draw.json>` ist headless; gezielte Tests in `testing/test_decision_draw_viewer.py`.
 

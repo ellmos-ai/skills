@@ -172,6 +172,7 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 4. UI-Tests nur headless, nie über sichtbare Browser oder die Playwright-MCP-Werkzeuge (ein sichtbarer Testbrowser hat das Formular einmal selbst ausgefüllt).
 5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
 6. Buchung nur über Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
+7. Speichern hängt nie von einem Dialog ab (Regel 9 der Anleitung): Download-Links, Text zum Kopieren und „Zwischenstand sichern“ stehen schon vor dem Ordnerdialog bereit und bleiben nach jedem Abbruch oder Fehler stehen; „gespeichert“ erst nach vollständigem Schreiben.
 
 Der Tk-Viewer von decision-draw ist nativ nicht abgenommen; er wird nur nach ausdrücklicher Zustimmung der Nutzerin oder des Nutzers geöffnet.
 
@@ -262,6 +263,7 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 
 ### 1.3.0 (2026-11-07)
 - Abschnitt „Briefing als Formular (Bauanleitung)“: klickbares HTML-Formular statt Buchstaben im Chat, Verweis auf die Referenzimplementierung und die Anleitung in `decision-draw` (`references/formular.md`, `scripts/formular/`), Pflichtregeln aus dem Vorfall vom 2026-11-07. Buchung bleibt ausschließlich Phase 4.
+- Regel 9 „Speichern hängt nie von einem Dialog ab“ ergänzt (Download-Links, Text zum Kopieren, Zwischenstand, ehrliche Erfolgsmeldung); Referenzimplementierung und Tests in `decision-draw`.
 
 ### 1.2.0 (2026-09-18)
 - Stilregel für verständliche Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):
