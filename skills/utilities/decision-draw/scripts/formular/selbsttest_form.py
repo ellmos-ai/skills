@@ -80,7 +80,7 @@ class Daten(unittest.TestCase):
         self.assertTrue(any("details_markdown" in e for e in errors_of(d)), "Hinweis: Details gehoeren in details_markdown")
 
     def test_required_fields_may_say_keine_but_not_be_missing(self):
-        for field in ("kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein"):
+        for field in ("kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein"):
             d = load()
             post(d, "V3")[field] = "keine"
             self.assertEqual(errors_of(d), [], field)
@@ -91,6 +91,37 @@ class Daten(unittest.TestCase):
                 else:
                     post(d, "V3")[field] = ""
                 self.assert_error(d, "V3", field)
+
+    def test_missing_frist_names_item_field_and_hint_and_the_cli_exits_2(self):
+        import contextlib
+        import io
+        import tempfile
+
+        d = load()
+        del post(d, "V3")["frist"]
+        errs = errors_of(d)
+        self.assertEqual(len(errs), 1, errs)
+        self.assertIn("V3", errs[0])
+        self.assertIn("frist fehlt", errs[0])
+        self.assertIn("keine", errs[0], "der Hinweis nennt, dass 'keine' erlaubt ist")
+        with tempfile.TemporaryDirectory() as tmp:
+            src, out = Path(tmp) / "daten.json", Path(tmp) / "form.html"
+            src.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+            err = io.StringIO()
+            with contextlib.redirect_stderr(err):
+                rc = bf.main([str(src), "--out", str(out)])
+            self.assertEqual(rc, 2)
+            self.assertFalse(out.exists(), "ohne Pflichtfeld wird keine Datei geschrieben")
+            self.assertIn("V3", err.getvalue())
+            self.assertIn("frist", err.getvalue())
+
+    def test_frist_keine_is_accepted_and_every_card_shows_the_row(self):
+        d = load()
+        for p in (post(d, "V1"), post(d, "V3"), post(d, "V4")):
+            p["frist"] = "keine"
+        page, _, _ = bf.build(d, HERE)
+        self.assertEqual(page.count("<dt>Frist</dt>"), 3, "die Zeile steht an jedem Posten")
+        self.assertEqual(page.count("<dt>Frist</dt><dd>keine</dd>"), 3)
 
     def test_options_and_recommendation(self):
         d = load()
@@ -171,7 +202,7 @@ class Daten(unittest.TestCase):
         for field in ("kontext", "frage", "kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein", "frist", "titel"):
             self.assertEqual(props[field]["maxLength"], bf.LIMITS[field], field)
         self.assertEqual(schema["properties"]["kontext_kurz"]["maxLength"], bf.LIMITS["kontext_kurz"])
-        for field in ("kuerzel", "titel", "kontext", "frage", "optionen", "kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein"):
+        for field in ("kuerzel", "titel", "kontext", "frage", "optionen", "kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein"):
             self.assertIn(field, schema["$defs"]["posten"]["required"], field)
         self.assertIn("bilder", props)
         try:
