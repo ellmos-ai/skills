@@ -252,6 +252,35 @@ def test_tk_variable_values_map_to_answers():
     assert [viewer.as_accept(v) for v in ("", "1", "0", True, False)] == [None, True, False, True, False]
 
 
+def deep_chain(data, depth):
+    """One branch per level, so every level below the first is a collapsed-at-open candidate."""
+    chain = None
+    for level in range(depth, 0, -1):
+        chain = {"id": f"level-{level}", "title": f"Ebene {level}", "text": "t", "source_ref": "s", "recommendation": "r",
+                 "alternatives_ref": "a", "addressee": "u", "children": [chain] if chain else []}
+    deep = copy.deepcopy(data)
+    deep["nodes"] = [chain]
+    return deep
+
+
+def test_deep_branches_are_expanded_at_open_and_must_have_been_shown(draft):
+    path, data, _ = draft
+    path.write_bytes(viewer.encode(deep_chain(data, 4)))
+    deep, sha, _ = viewer.read(path)
+    ids = {node["id"] for node in viewer.nodes(deep)}
+    assert len(ids) == 4 and viewer.initially_expanded(deep) == ids  # nothing starts collapsed
+    choices = viewer.default_choices(deep)
+    assert viewer.unseen_ids(deep, {"level-1", "level-2"}) == ["level-3", "level-4"]
+    with pytest.raises(viewer.DecisionError, match="Noch nicht angezeigt"):
+        viewer.check_ready(deep, choices, {"level-1", "level-2"})
+    decided = path.with_name(path.stem + "_decided.json")
+    with pytest.raises(viewer.DecisionError, match="Noch nicht angezeigt"):
+        viewer.submit(path, deep["revision"], sha, choices, seen={"level-1", "level-2"})
+    assert path.exists() and not decided.exists() and viewer.read(path)[1] == sha
+    _, result, _ = viewer.submit(path, deep["revision"], sha, choices, seen=ids)
+    assert set(result["submission"]["choices"]) == ids
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk

@@ -206,12 +206,32 @@ def initial_choices(data):
     return default_choices(data)
 
 
+def initially_expanded(data):
+    """Every branch starts expanded, so no level hides branches that a click could submit as consent."""
+    return {node["id"] for node in nodes(data)}
+
+
+def unseen_ids(data, seen):
+    return [node["id"] for node in nodes(data) if node["id"] not in seen]
+
+
+def check_ready(data, choices, seen):
+    """Same refusals as submit(), usable before any dialog: every branch answered and displayed at least once."""
+    unanswered = sum(1 for item in choices.values() if isinstance(item, dict) and item.get("accept") is None)
+    if unanswered:
+        raise DecisionError(f"Noch nicht beantwortet: {unanswered} von {len(choices)} Ästen. Jeder Ast braucht ausdrücklich + oder −.")
+    hidden = unseen_ids(data, seen)
+    if hidden:
+        raise DecisionError(f"Noch nicht angezeigt: {len(hidden)} Äste wurden nie sichtbar. Erst alle Äste ansehen.")
+
+
 def as_accept(value):
     """Tk variable value to answer: BooleanVar gives bool, an unset or clicked StringVar gives '', '1' or '0'."""
     return None if value in ("", None) else str(value).lower() in ("1", "true")
 
 
-def submit(path, expected_revision, expected_sha256, choices):
+def submit(path, expected_revision, expected_sha256, choices, seen=None):
+    """seen: ids of branches the window has displayed. The GUI always passes it; None (scripts, tests) skips that one check."""
     path = Path(path).absolute()
     if path.suffix.lower() != ".json" or path.stem.endswith("_decided"):
         raise DecisionError("Eine ursprüngliche .json-Datei ist erforderlich")
@@ -223,6 +243,8 @@ def submit(path, expected_revision, expected_sha256, choices):
         data, current_sha, _ = read(path)
         if data["state"] != "draft" or data["revision"] != expected_revision or current_sha != expected_sha256:
             raise DecisionError("Entwurf wurde verändert oder bereits eingereicht")
+        if seen is not None and unseen_ids(data, seen):
+            raise DecisionError(f"Noch nicht angezeigt: {len(unseen_ids(data, seen))} Äste wurden nie sichtbar. Erst alle Äste ansehen.")
         result = copy.deepcopy(data)
         result.update(state="submitted", revision=data["revision"] + 1,
                       submission={"id": str(uuid.uuid4()), "submitted_at": now(), "source_sha256": current_sha,
@@ -322,7 +344,8 @@ class DecisionWindow:
         self.data, self.sha, _ = read(self.path)
         self.submission_sha = self.sha
         self.choices = copy.deepcopy(self.data.get("draft_choices", initial_choices(self.data)))
-        self.expanded = {node["id"] for node in self.data["nodes"]}
+        self.expanded = initially_expanded(self.data)
+        self.seen = set()  # ids of branches drawn at least once; Submit is refused while any branch was never displayed
         self.comments_open = set()
         self.variables, self.comment_widgets = {}, {}
         root.title("Decision-Draw · Entscheidung im Gesamtbild")
@@ -408,6 +431,7 @@ class DecisionWindow:
     def draw_nodes(self, items, parent, depth=0):
         for node in items:
             key = node["id"]
+            self.seen.add(key)
             box = self.ttk.Frame(parent, style="Card.TFrame", padding=12)
             box.pack(fill="x", padx=(min(depth*20, 100), 0), pady=(0, 10))
             header = self.ttk.Frame(box, style="Card.TFrame")
@@ -466,7 +490,7 @@ class DecisionWindow:
     def on_submit(self):
         try:
             self.capture()
-            self.path, self.data, self.sha = submit(self.path, self.data["revision"], self.sha, self.choices)
+            self.path, self.data, self.sha = submit(self.path, self.data["revision"], self.sha, self.choices, self.seen)
             self.submission_sha = self.sha
             self.render()
             self.canvas.yview_moveto(0)
