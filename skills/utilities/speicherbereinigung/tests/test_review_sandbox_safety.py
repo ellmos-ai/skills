@@ -16,6 +16,7 @@ import pytest
 SCRIPTS = Path(__file__).parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
+import clean_flutter_builds  # noqa: E402
 import prune_ephemeral  # noqa: E402
 import review_sandbox  # noqa: E402
 
@@ -91,6 +92,93 @@ def test_junction_inside_a_sandbox_is_removed_without_touching_its_target(tmp_pa
 
     assert prune_ephemeral.remove_review_sandbox(str(sandbox), str(root)) is True
     assert not sandbox.exists()
+    assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
+
+
+def link_to(kind: str, link: Path, target: Path) -> None:
+    if kind == "junction":
+        junction(link, target)
+        return
+    try:
+        os.symlink(target, link, target_is_directory=True)
+    except OSError:
+        pytest.skip("no right to create directory symlinks (Developer Mode / SeCreateSymbolicLinkPrivilege)")
+
+
+@pytest.mark.parametrize("kind", ["junction", "symlink"])
+def test_robocopy_fallback_never_purges_through_a_link(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str,
+) -> None:
+    """Long-path leftovers make rmtree leave the tree, so remove() falls back to purge_dir (robocopy /PURGE).
+    A link left in the tree (e.g. a pnpm junction into the store) must go as a link; its target stays."""
+    outside = precious(tmp_path)
+    tree = tmp_path / "sb"
+    (tree / "node_modules").mkdir(parents=True)
+    link_to(kind, tree / "node_modules" / "pkg", outside)
+    real_rmtree = prune_ephemeral.shutil.rmtree
+    calls: list[str] = []
+
+    def rmtree_leaves_the_tree_once(path, *args, **kwargs):
+        calls.append(str(path))
+        if len(calls) > 1:
+            real_rmtree(path, *args, **kwargs)
+
+    monkeypatch.setattr(prune_ephemeral.shutil, "rmtree", rmtree_leaves_the_tree_once)
+
+    prune_ephemeral.remove(str(tree))
+
+    assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
+    assert not tree.exists()
+
+
+def test_purge_dir_drops_a_junction_behind_a_long_path(tmp_path: Path) -> None:
+    """The real leftover: a junction deeper than MAX_PATH, which only robocopy and \\\\?\\ paths reach."""
+    import _winapi
+
+    outside = precious(tmp_path)
+    tree = tmp_path / "sb"
+    deep = "\\\\?\\" + os.path.join(str(tree), *(["d" * 40] * 7))
+    os.makedirs(deep)
+    link = os.path.join(deep, "pkg")
+    _winapi.CreateJunction(str(outside), link)
+    assert len(link) > 260
+
+    clean_flutter_builds.purge_dir(str(tree))
+
+    assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
+    assert not tree.exists()
+
+
+def test_purge_dir_stays_away_when_a_link_cannot_be_dropped(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    outside = precious(tmp_path)
+    tree = tmp_path / "sb"
+    tree.mkdir()
+    junction(tree / "link", outside)
+    real_rmdir = os.rmdir
+
+    def rmdir_refuses_links(path, *args, **kwargs):
+        if clean_flutter_builds.is_link(path):
+            raise OSError("link in use")
+        real_rmdir(path, *args, **kwargs)
+
+    monkeypatch.setattr(clean_flutter_builds.os, "rmdir", rmdir_refuses_links)
+
+    clean_flutter_builds.purge_dir(str(tree))
+
+    assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
+    assert (tree / "link").exists()
+
+
+def test_purge_dir_on_a_junction_removes_only_the_link(tmp_path: Path) -> None:
+    outside = precious(tmp_path)
+    link = tmp_path / "link"
+    junction(link, outside)
+
+    clean_flutter_builds.purge_dir(str(link))
+
+    assert not os.path.lexists(link)
     assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
 
 
