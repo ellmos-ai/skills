@@ -43,6 +43,18 @@ provenance:
 
 # decision-draw — Gesamtbild und Abnahme gebündelter Entscheidungen
 
+## Optionales natives Entscheidungsfenster
+
+Der Skill enthält einen eigenständigen dateibasierten Tk/ttk-Viewer:
+`python scripts/decision_viewer.py open /absolut/draw.json`.
+[Format, Beispiel, Absenden, Undo und Consumer-Vertrag](references/viewer.md)
+vor dem Erzeugen oder Rücktransfer einer GUI-Entscheidung lesen.
+Vorwahl ist nur Entwurf. Ausschließlich der ausdrückliche Absenden-Klick bestätigt
+die gesamte sichtbare Auswahl samt Kommentaren; gewöhnliche Teilkorrekturen
+behalten die unten beschriebene Isolierung unberührter Posten.
+Vor jeder externen Buchung muss der Consumer den Dateistand atomar beanspruchen;
+der einzige Registerweg bleibt `decision-briefing` Phase 4.
+
 > Wenn fünf oder zehn Entscheidungen anstehen, verliert man im Klein-Klein der
 > Optionen leicht den Blick für das entstehende System. decision-draw beschreibt
 > nicht die Alternativen, sondern das funktionierende Ganze: Wie arbeiten die

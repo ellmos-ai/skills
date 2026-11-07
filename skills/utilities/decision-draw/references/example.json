@@ -1,0 +1,55 @@
+{
+  "schema": "ellmos.decision-draw.v1",
+  "draw_id": "example-draw",
+  "session_id": "example-session",
+  "revision": 1,
+  "state": "draft",
+  "title": "Ergebnisse übersichtlich lesen und bewusst entscheiden",
+  "created_at": "2026-10-27T12:00:00+00:00",
+  "parts": {
+    "bundle": "Ergebnisse und Entscheidungen sollen im Alltag leicht zugänglich sein. Ich stelle beides in eigenen Fenstern dar. Falls die Oberfläche nicht verfügbar ist, bleiben die Dateien lesbar.",
+    "concept": "Die Konsole und die Ergebnisanzeige stehen nebeneinander. Entscheidungen werden in einem eigenen übersichtlichen Fenster geprüft.",
+    "interaction": "Ich lese zuerst die Ergebnisse und prüfe anschließend das zusammenhängende Zielbild. Meine Auswahl und Kommentare gehen über die Konsole in den bestehenden Entscheidungsprozess zurück.",
+    "implementation": "Ergebnisanzeige und Entscheidungsanzeige können unabhängig erstellt werden. Der Rücktransfer einer Entscheidung beginnt erst nach ausdrücklichem Absenden.",
+    "boundaries": "Die Fenster führen keine Arbeiten im Hintergrund aus und ändern keine Entscheidungsregister. Fehlende Messwerte bleiben unbekannt.",
+    "acceptance": "Zustimmung ist zunächst nur vorgewählt. Mit Absenden bestätige ich die sichtbare Auswahl samt Kommentaren für alle Äste.",
+    "return_transfer": "Nach dem Absenden kopiere ich den Übergabeprompt in die Konsole. Mehrdeutige Kommentare werden geklärt, bevor der bestehende Entscheidungsprozess sie bucht."
+  },
+  "nodes": [
+    {
+      "id": "example-results",
+      "title": "Ergebnisse neben der Konsole anzeigen",
+      "text": "Ergebnisse gehen im langen Chat leicht unter. Ich sammle sie in einem eigenen lesbaren Fenster. Die zugrunde liegende Datei bleibt auch ohne Fenster zugänglich.",
+      "recommendation": "Ein eigenes Ergebnisfenster verwenden.",
+      "source_ref": "example-source:results",
+      "alternatives_ref": "example-analysis:results-alternatives",
+      "addressee": "Nutzer",
+      "confidence": "belegt",
+      "depends_on": [],
+      "children": [
+        {
+          "id": "example-filters",
+          "title": "Themen und Suchbegriffe nutzen",
+          "text": "Ein längerer Verlauf braucht Orientierung. Ich ergänze Themenfilter und Suche. Ohne gewählten Filter bleiben alle Ergebnisse sichtbar.",
+          "recommendation": "Filter optional anbieten.",
+          "source_ref": "example-source:filters",
+          "alternatives_ref": "example-analysis:filter-alternatives",
+          "addressee": "Nutzer",
+          "depends_on": ["example-results"],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "example-decision",
+      "title": "Entscheidungen bewusst absenden",
+      "text": "Vorwahlen sollen keine Entscheidung vortäuschen. Ich speichere die Auswahl erst nach dem ausdrücklichen Absenden. Vor dem Rücktransfer lässt sich die Einreichung zurücknehmen.",
+      "recommendation": "Explizites Absenden und sichere Rücknahme anbieten.",
+      "source_ref": "example-source:decision",
+      "alternatives_ref": "example-analysis:decision-alternatives",
+      "addressee": "Nutzer",
+      "depends_on": [],
+      "children": []
+    }
+  ]
+}

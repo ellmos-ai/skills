@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Decision draw v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "draw_id",
+    "session_id",
+    "revision",
+    "state",
+    "title",
+    "created_at",
+    "parts",
+    "nodes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "ellmos.decision-draw.v1"
+    },
+    "draw_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "preselect": {
+      "enum": [
+        "accept",
+        "none"
+      ],
+      "default": "accept",
+      "$comment": "accept: consent is preselected as a draft (default). none: nothing is preselected, every branch needs an explicit answer before Submit."
+    },
+    "state": {
+      "enum": [
+        "draft",
+        "submitted"
+      ]
+    },
+    "parts": {
+      "type": "object",
+      "required": [
+        "bundle",
+        "concept",
+        "interaction",
+        "implementation",
+        "boundaries",
+        "acceptance",
+        "return_transfer"
+      ],
+      "properties": {
+        "bundle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "concept": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interaction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundaries": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "return_transfer": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "submission": {
+      "type": "object",
+      "required": [
+        "id",
+        "submitted_at",
+        "source_sha256",
+        "source_path",
+        "source_revision",
+        "choices",
+        "explicit_full_submission"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submitted_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sha256": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "explicit_full_submission": {
+          "const": true
+        },
+        "choices": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/choice"
+          },
+          "$comment": "Runtime additionally requires exact equality of these keys with all nodes[].id, including descendants."
+        }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unprocessed",
+            "processing",
+            "processed"
+          ]
+        }
+      }
+    },
+    "draft_choices": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/choice"
+      },
+      "$comment": "Runtime additionally requires exact equality of these keys with all nodes[].id, including descendants."
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "text",
+        "source_ref",
+        "recommendation",
+        "alternatives_ref",
+        "addressee"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recommendation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alternatives_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "addressee": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sensitive": {
+          "type": "boolean",
+          "$comment": "true marks red, money, deletion, external or licence items: the window flags them and the confirmation dialog before Submit lists them."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "choice": {
+      "type": "object",
+      "required": [
+        "accept",
+        "comment"
+      ],
+      "properties": {
+        "accept": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "submitted"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "submission",
+          "processing"
+        ]
+      }
+    }
+  ]
+}
