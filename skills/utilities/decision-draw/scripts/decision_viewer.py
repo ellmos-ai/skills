@@ -114,6 +114,11 @@ def validate(data):
         check(key)
     if "draft_choices" in data:
         validate_choices(data["draft_choices"], ids, "Gespeicherter Entwurf")
+        history = data.get("history")
+        withdrawn = isinstance(history, list) and history and isinstance(history[-1], dict) and history[-1].get("event") == "withdrawn"
+        if data.get("preselect") == "none" and not (data["revision"] > 1 and withdrawn):
+            # A generator must not smuggle a pre-answered draft past "no preselection"; only undo() writes this provenance.
+            raise DecisionError("Bei preselect=none sind draft_choices nur nach einer Rücknahme (history: withdrawn, Revision > 1) erlaubt")
     if data["state"] == "submitted":
         submission = data.get("submission", {})
         if not isinstance(submission, dict) or submission.get("explicit_full_submission") is not True:
@@ -223,6 +228,18 @@ def check_ready(data, choices, seen):
     hidden = unseen_ids(data, seen)
     if hidden:
         raise DecisionError(f"Noch nicht angezeigt: {len(hidden)} Äste wurden nie sichtbar. Erst alle Äste ansehen.")
+
+
+def notice_text(data, choices):
+    """Notice line for the opening state; names the real number of branches that start answered."""
+    total = len(choices)
+    filled = sum(1 for item in choices.values() if item["accept"] is not None)
+    if data.get("preselect", "accept") == "none":
+        if filled:
+            return (f"Keine neue Vorwahl, aber {filled} von {total} Ästen sind aus deiner zurückgenommenen Einreichung vorbelegt. "
+                    "Erst Absenden bestätigt deine Auswahl samt Kommentaren.")
+        return "Keine Vorwahl: Du musst jeden Ast ausdrücklich mit + oder − beantworten. Erst Absenden bestätigt deine Auswahl samt Kommentaren."
+    return f"Vorwahl: Bei {filled} von {total} Ästen ist die Auswahl als Entwurf vorgewählt. Erst Absenden bestätigt deine Auswahl samt Kommentaren."
 
 
 def as_accept(value):
@@ -344,6 +361,7 @@ class DecisionWindow:
         self.data, self.sha, _ = read(self.path)
         self.submission_sha = self.sha
         self.choices = copy.deepcopy(self.data.get("draft_choices", initial_choices(self.data)))
+        self.initial = copy.deepcopy(self.choices)  # what the window opened with: basis for the notice and later for "unchanged"
         self.expanded = initially_expanded(self.data)
         self.seen = set()  # ids of branches drawn at least once; Submit is refused while any branch was never displayed
         self.comments_open = set()
@@ -363,7 +381,7 @@ class DecisionWindow:
         self.body.pack(fill="both", expand=True)
         self.title = ttk.Label(self.body, text=self.data["title"], font=("Segoe UI", 17, "bold"), wraplength=800)
         self.title.pack(anchor="w", pady=(0, 8))
-        self.notice = ttk.Label(self.body, text="Vorwahl: Zustimmung als Entwurf. Erst Absenden bestätigt Ihre Auswahl samt Kommentaren.", wraplength=800)
+        self.notice = ttk.Label(self.body, text=notice_text(self.data, self.initial), wraplength=800)
         self.notice.pack(anchor="w", pady=(0, 10))
         self.canvas = tk.Canvas(self.body, background="#eef2f7", highlightthickness=0)
         bar = ttk.Scrollbar(self.body, command=self.canvas.yview)
@@ -411,10 +429,7 @@ class DecisionWindow:
         if self.data["state"] == "submitted":
             self.confirmation()
         else:
-            if self.data.get("preselect", "accept") == "none":
-                self.notice.configure(text="Keine Vorwahl: Jeder Ast braucht Ihre ausdrückliche Antwort (+ oder −). Erst Absenden bestätigt die Auswahl samt Kommentaren.")
-            else:
-                self.notice.configure(text="Vorwahl: Zustimmung als Entwurf. Erst Absenden bestätigt Ihre Auswahl samt Kommentaren.")
+            self.notice.configure(text=notice_text(self.data, self.initial))
             # The complete prose concept remains available alongside the tree.
             for key, label in zip(PARTS, PART_LABELS):
                 box = self.ttk.Frame(self.content, style="Card.TFrame", padding=12)
@@ -520,6 +535,7 @@ class DecisionWindow:
         try:
             self.path, self.data, self.sha = undo(self.path, self.data["submission"]["id"], self.submission_sha)
             self.choices = copy.deepcopy(self.data["draft_choices"])
+            self.initial = copy.deepcopy(self.choices)
             self.render()
         except (ValueError, OSError) as exc:
             self.fail(exc)

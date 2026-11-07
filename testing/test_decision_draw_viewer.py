@@ -281,6 +281,48 @@ def test_deep_branches_are_expanded_at_open_and_must_have_been_shown(draft):
     assert set(result["submission"]["choices"]) == ids
 
 
+def test_preselect_none_rejects_generator_prefilled_draft_choices(draft):
+    path, data, _ = draft
+    data["preselect"] = "none"
+    data["draft_choices"] = viewer.default_choices(data)  # a generator pre-filling consent in a fresh draft
+    with pytest.raises(viewer.DecisionError, match="Rücknahme"):
+        viewer.validate(data)
+    data["history"] = [{"event": "withdrawn"}]  # forged history is not enough on revision 1
+    with pytest.raises(viewer.DecisionError, match="Rücknahme"):
+        viewer.validate(data)
+    data["revision"] = 2
+    data["history"] = [{"event": "other"}]
+    with pytest.raises(viewer.DecisionError, match="Rücknahme"):
+        viewer.validate(data)
+    from unittest.mock import patch
+    data["revision"] = 1
+    path.write_bytes(viewer.encode(data))
+    with patch.dict(sys.modules, {"tkinter": None}), pytest.raises(SystemExit) as error:
+        viewer.main(["open", str(path)])
+    assert error.value.code == 2  # refused before any window exists
+
+
+def test_preselect_none_keeps_answers_after_a_real_withdrawal_and_notice_counts_them(draft):
+    path, data, sha = with_preselect(draft, "none")
+    answers = {key: {"accept": index % 2 == 0, "comment": ""} for index, key in enumerate(viewer.initial_choices(data))}
+    target, result, result_sha = viewer.submit(path, data["revision"], sha, answers)
+    _, restored, _ = viewer.undo(target, result["submission"]["id"], result_sha)
+    viewer.validate(restored)  # the withdrawal event in history is the provenance of draft_choices
+    total = len(answers)
+    assert f"{total} von {total} Ästen" in viewer.notice_text(restored, restored["draft_choices"])
+    fresh = viewer.notice_text(data, viewer.initial_choices(data))
+    assert "Keine Vorwahl" in fresh and "vorbelegt" not in fresh
+
+
+def test_notice_names_the_actual_number_of_preselected_branches(draft):
+    _, data, _ = draft
+    choices = viewer.default_choices(data)
+    total = len(choices)
+    assert f"{total} von {total} Ästen" in viewer.notice_text(data, choices)
+    choices[next(iter(choices))]["accept"] = None
+    assert f"{total - 1} von {total} Ästen" in viewer.notice_text(data, choices)
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk
