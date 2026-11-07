@@ -50,7 +50,7 @@ Rückmeldung nach dem ersten Einsatz: Es war zu viel Text, und oft fehlte das En
 | `empfehlung` mit `option`, `grund` | nein | Grund 160 Zeichen (ein Satz) | die Empfehlung mit einem Grund; ohne sie steht „keine Empfehlung“ |
 | `kosten_aufwand` | ja | 160 Zeichen | Geld und Aufwand; darf „keine“ lauten, fehlen darf es nicht |
 | `risiko_rueckgaengig` | ja | 160 Zeichen | Risiko und ob es rückgängig zu machen ist; darf „keine“ lauten |
-| `frist` | nein | 160 Zeichen | bis wann |
+| `frist` | ja | 160 Zeichen | bis wann; darf „keine“ lauten, fehlen darf es nicht |
 | `folge_bei_nein` | ja | 160 Zeichen | was passiert, wenn nichts oder „Nein“ gewählt wird; darf „keine“ lauten |
 | `avatar` mit `wahl`, `konfidenz` | nein | – | Vorhersage und Konfidenz (grün, gelb, rot) für die Messung |
 | `sensitiv`, `sensitiv_grund` | nein | Grund 100 Zeichen | rot, Geld, Löschung, Außenwirkung, Lizenz, Rechte Dritter: wird vor dem Speichern noch einmal aufgelistet |

@@ -82,7 +82,7 @@ def _text(errs, where, obj, name, limit=None, required=True):
     value = obj.get(name) if isinstance(obj, dict) else None
     if value is None or (isinstance(value, str) and not value.strip()):
         if required:
-            errs.append(f"{where}: {name} fehlt (darf 'keine' lauten, aber nicht fehlen)." if name in ("kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein")
+            errs.append(f"{where}: {name} fehlt (darf 'keine' lauten, aber nicht fehlen)." if name in ("kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein")
                         else f"{where}: {name} fehlt.")
         return None
     if not isinstance(value, str):
@@ -245,9 +245,8 @@ def normalize(data, base_dir):
             if k in seen:
                 errs.append(f"{w}: Kürzel doppelt.")
             seen.add(k)
-            for name in ("titel", "kontext", "frage", "kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein"):
+            for name in ("titel", "kontext", "frage", "kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein"):
                 _text(errs, w, p, name)
-            _text(errs, w, p, "frist", required=False)
             opts = p.get("optionen")
             ids = []
             if not isinstance(opts, list) or not 2 <= len(opts) <= 6:
@@ -326,10 +325,8 @@ def _card(p, it, imgs, detail_html):
                     f'<span class="wirkung">{e(src["wirkung"])}</span></span>{mark}</label>')
     opts.append(f'<label class="opt rq"><input type="radio" name="{pid}" value="{RQ}"><span><b>?</b> {RQ_LABEL}'
                 '<span class="wirkung">Schreib deine Frage in die Anmerkung; sie gilt dann als Frage, nicht als Entscheidung.</span></span></label>')
-    facts = [("Kosten / Aufwand", p["kosten_aufwand"]), ("Risiko / rückgängig?", p["risiko_rueckgaengig"])]
-    if p.get("frist"):
-        facts.append(("Frist", p["frist"]))
-    facts.append(("Folge bei „Nein“", p["folge_bei_nein"]))
+    facts = [("Kosten / Aufwand", p["kosten_aufwand"]), ("Risiko / rückgängig?", p["risiko_rueckgaengig"]), ("Frist", p["frist"]),
+             ("Folge bei „Nein“", p["folge_bei_nein"])]
     fakten = '<dl class="fakten">' + "".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in facts) + "</dl>"
     figs = ""
     if imgs:

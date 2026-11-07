@@ -29,7 +29,7 @@
   "$defs": {
     "posten": {
       "type": "object",
-      "required": ["kuerzel", "titel", "kontext", "frage", "optionen", "kosten_aufwand", "risiko_rueckgaengig", "folge_bei_nein"],
+      "required": ["kuerzel", "titel", "kontext", "frage", "optionen", "kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein"],
       "additionalProperties": false,
       "properties": {
         "kuerzel": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,39}$"},
@@ -62,7 +62,7 @@
         },
         "kosten_aufwand": {"type": "string", "minLength": 1, "maxLength": 160, "description": "May say 'keine', must not be missing."},
         "risiko_rueckgaengig": {"type": "string", "minLength": 1, "maxLength": 160, "description": "Risk and whether it can be undone. May say 'keine', must not be missing."},
-        "frist": {"type": "string", "minLength": 1, "maxLength": 160},
+        "frist": {"type": "string", "minLength": 1, "maxLength": 160, "description": "Until when. May say 'keine', must not be missing."},
         "folge_bei_nein": {"type": "string", "minLength": 1, "maxLength": 160, "description": "What happens if nothing or 'no' is chosen. May say 'keine', must not be missing."},
         "avatar": {
           "type": "object",

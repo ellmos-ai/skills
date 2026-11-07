@@ -162,7 +162,7 @@ ENTSCHEIDUNG: <Frage>
 
 ## Briefing als Formular (Bauanleitung)
 
-Statt Buchstaben im Chat zu tippen, kann die Nutzerin oder der Nutzer ein fertiges Briefing im Dokument selbst anklicken: Optionen wählen, je Posten eine Anmerkung, „Alles wie empfohlen“ (Massenabnahme), Speichern und Abschicken. Aus den Briefing-Daten (kleine JSON, Format `form.schema.json`) erzeugt der Generator `scripts/formular/build_form.py` des Skills [decision-draw](../decision-draw/SKILL.md) **ein selbstenthaltenes HTML-Formular** (nicht jedes Mal neu bauen; je Posten kurzer Kontext, Kosten/Aufwand, Risiko/rückgängig, Folge bei „Nein“, Längeres nur aufklappbar; dazu die Wahl „Rückfrage / mehr Info nötig“); die Antwortdatei (`ticket-master.decision-answers.v1`) enthält je Posten die gewählte Option und liefert damit die Spalte „Gewählt“ der Ergebnis-Tabelle aus Phase 4. Die vollständige Anleitung (zwei Wege, Antwortschema, anzupassende Stellen): [decision-draw/references/formular.md](../decision-draw/references/formular.md). Das Formular schreibt in kein Register; gebucht wird weiter nur in Phase 4.
+Statt Buchstaben im Chat zu tippen, kann die Nutzerin oder der Nutzer ein fertiges Briefing im Dokument selbst anklicken: Optionen wählen, je Posten eine Anmerkung, „Alles wie empfohlen“ (Massenabnahme), Speichern und Abschicken. Aus den Briefing-Daten (kleine JSON, Format `form.schema.json`) erzeugt der Generator `scripts/formular/build_form.py` des Skills [decision-draw](../decision-draw/SKILL.md) **ein selbstenthaltenes HTML-Formular** (nicht jedes Mal neu bauen; je Posten kurzer Kontext, Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Längeres nur aufklappbar; dazu die Wahl „Rückfrage / mehr Info nötig“); die Antwortdatei (`ticket-master.decision-answers.v1`) enthält je Posten die gewählte Option und liefert damit die Spalte „Gewählt“ der Ergebnis-Tabelle aus Phase 4. Die vollständige Anleitung (zwei Wege, Antwortschema, anzupassende Stellen): [decision-draw/references/formular.md](../decision-draw/references/formular.md). Das Formular schreibt in kein Register; gebucht wird weiter nur in Phase 4.
 
 Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
@@ -263,7 +263,7 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 ## Changelog
 
 ### 1.3.0 (2026-11-07)
-- Formular aus Daten statt aus einem Dokumentgenerator (`build_form.py` in `decision-draw`): kurze Postenvorlage mit Kosten/Aufwand, Risiko/rückgängig, Folge bei „Nein“, Wahl „Rückfrage / mehr Info nötig“.
+- Formular aus Daten statt aus einem Dokumentgenerator (`build_form.py` in `decision-draw`): kurze Postenvorlage mit Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Wahl „Rückfrage / mehr Info nötig“.
 - Abschnitt „Briefing als Formular (Bauanleitung)“: klickbares HTML-Formular statt Buchstaben im Chat, Verweis auf die Referenzimplementierung und die Anleitung in `decision-draw` (`references/formular.md`, `scripts/formular/`), Pflichtregeln aus dem Vorfall vom 2026-11-07. Buchung bleibt ausschließlich Phase 4.
 - Regel 9 „Speichern hängt nie von einem Dialog ab“ ergänzt (Download-Links, Text zum Kopieren, Zwischenstand, ehrliche Erfolgsmeldung); Referenzimplementierung und Tests in `decision-draw`.
 
