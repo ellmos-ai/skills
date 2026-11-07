@@ -200,6 +200,58 @@ def test_undo_draft_is_schema_and_runtime_valid(draft):
         viewer.validate(broken)
 
 
+def with_preselect(draft, value):
+    path, data, _ = draft
+    data["preselect"] = value
+    path.write_bytes(viewer.encode(data))
+    return path, *viewer.read(path)[:2]
+
+
+def test_default_still_preselects_consent_as_draft(draft):
+    _, data, _ = draft
+    assert data.get("preselect", "accept") == "accept"
+    assert all(item["accept"] is True for item in viewer.initial_choices(data).values())
+
+
+def test_preselect_none_starts_unanswered_and_blocks_incomplete_submit(draft):
+    path, data, sha = with_preselect(draft, "none")
+    choices = viewer.initial_choices(data)
+    assert set(choices) == {node["id"] for node in viewer.nodes(data)}
+    assert all(item["accept"] is None and item["comment"] == "" for item in choices.values())
+    decided = path.with_name(path.stem + "_decided.json")
+    with pytest.raises(viewer.DecisionError, match="Noch nicht beantwortet"):
+        viewer.submit(path, data["revision"], sha, choices)
+    choices[next(iter(choices))]["accept"] = True  # one answer is still not a full submission
+    with pytest.raises(viewer.DecisionError, match="Noch nicht beantwortet"):
+        viewer.submit(path, data["revision"], sha, choices)
+    assert path.exists() and not decided.exists() and viewer.read(path)[1] == sha
+    for item in choices.values():
+        item["accept"] = False  # explicit refusals are answers; nothing is coerced to consent
+    _, result, _ = viewer.submit(path, data["revision"], sha, choices)
+    assert all(item["accept"] is False for item in result["submission"]["choices"].values())
+
+
+def test_preselect_value_is_validated_in_runtime_and_schema(draft):
+    import jsonschema
+    _, data, _ = draft
+    schema = json.loads((SKILL / "references/draw.schema.json").read_text(encoding="utf-8"))
+    validator = jsonschema.Draft202012Validator(schema)
+    for value in ("accept", "none"):
+        data["preselect"] = value
+        viewer.validate(data)
+        validator.validate(data)
+    for value in ("maybe", True, None, ""):
+        data["preselect"] = value
+        with pytest.raises(viewer.DecisionError):
+            viewer.validate(data)
+        assert not validator.is_valid(data)
+
+
+def test_tk_variable_values_map_to_answers():
+    # BooleanVar yields bool; an unset/clicked StringVar yields '', '1' or '0'.
+    assert [viewer.as_accept(v) for v in ("", "1", "0", True, False)] == [None, True, False, True, False]
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk

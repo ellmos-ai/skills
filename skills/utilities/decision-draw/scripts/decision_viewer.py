@@ -78,6 +78,8 @@ def validate(data):
         raise DecisionError("Ungültige Revision")
     if data.get("state") not in {"draft", "submitted"}:
         raise DecisionError("Draw muss draft oder submitted sein")
+    if data.get("preselect", "accept") not in {"accept", "none"}:
+        raise DecisionError("preselect muss accept oder none sein")
     if not isinstance(data.get("parts"), dict) or any(not isinstance(data["parts"].get(p), str) or not data["parts"][p].strip() for p in PARTS):
         raise DecisionError("Die sieben Konzeptteile müssen vorhanden sein")
     flat = nodes(data)
@@ -197,11 +199,26 @@ def default_choices(data):
     return {node["id"]: {"accept": True, "comment": ""} for node in nodes(data)}
 
 
+def initial_choices(data):
+    """Opening state: consent preselected as draft, or with preselect=none nothing answered (accept None)."""
+    if data.get("preselect", "accept") == "none":
+        return {node["id"]: {"accept": None, "comment": ""} for node in nodes(data)}
+    return default_choices(data)
+
+
+def as_accept(value):
+    """Tk variable value to answer: BooleanVar gives bool, an unset or clicked StringVar gives '', '1' or '0'."""
+    return None if value in ("", None) else str(value).lower() in ("1", "true")
+
+
 def submit(path, expected_revision, expected_sha256, choices):
     path = Path(path).absolute()
     if path.suffix.lower() != ".json" or path.stem.endswith("_decided"):
         raise DecisionError("Eine ursprüngliche .json-Datei ist erforderlich")
     output = path.with_name(path.stem + "_decided.json")
+    unanswered = sum(1 for item in choices.values() if isinstance(item, dict) and item.get("accept") is None)
+    if unanswered:
+        raise DecisionError(f"Noch nicht beantwortet: {unanswered} von {len(choices)} Ästen. Jeder Ast braucht ausdrücklich + oder −.")
     with locked(path):
         data, current_sha, _ = read(path)
         if data["state"] != "draft" or data["revision"] != expected_revision or current_sha != expected_sha256:
@@ -304,7 +321,7 @@ class DecisionWindow:
         self.path = Path(path).absolute()
         self.data, self.sha, _ = read(self.path)
         self.submission_sha = self.sha
-        self.choices = copy.deepcopy(self.data.get("draft_choices", default_choices(self.data)))
+        self.choices = copy.deepcopy(self.data.get("draft_choices", initial_choices(self.data)))
         self.expanded = {node["id"] for node in self.data["nodes"]}
         self.comments_open = set()
         self.variables, self.comment_widgets = {}, {}
@@ -354,7 +371,7 @@ class DecisionWindow:
 
     def capture(self):
         for key, variable in self.variables.items():
-            self.choices[key]["accept"] = variable.get()
+            self.choices[key]["accept"] = as_accept(variable.get())
         for key, widget in self.comment_widgets.items():
             self.choices[key]["comment"] = widget.get("1.0", "end-1c")
 
@@ -371,7 +388,10 @@ class DecisionWindow:
         if self.data["state"] == "submitted":
             self.confirmation()
         else:
-            self.notice.configure(text="Vorwahl: Zustimmung als Entwurf. Erst Absenden bestätigt Ihre Auswahl samt Kommentaren.")
+            if self.data.get("preselect", "accept") == "none":
+                self.notice.configure(text="Keine Vorwahl: Jeder Ast braucht Ihre ausdrückliche Antwort (+ oder −). Erst Absenden bestätigt die Auswahl samt Kommentaren.")
+            else:
+                self.notice.configure(text="Vorwahl: Zustimmung als Entwurf. Erst Absenden bestätigt Ihre Auswahl samt Kommentaren.")
             # The complete prose concept remains available alongside the tree.
             for key, label in zip(PARTS, PART_LABELS):
                 box = self.ttk.Frame(self.content, style="Card.TFrame", padding=12)
@@ -403,7 +423,9 @@ class DecisionWindow:
                 self.label(box, "Echte Voraussetzung: " + ", ".join(titles[x] for x in node["depends_on"]))
             actions = self.ttk.Frame(box, style="Card.TFrame")
             actions.pack(fill="x", pady=(4, 4))
-            variable = self.tk.BooleanVar(value=self.choices[key]["accept"])
+            accept = self.choices[key]["accept"]
+            # An unanswered branch (preselect=none) uses '' so that neither radio button shows as selected.
+            variable = self.tk.StringVar(value="") if accept is None else self.tk.BooleanVar(value=accept)
             self.variables[key] = variable
             self.ttk.Radiobutton(actions, text="+ Zustimmen", variable=variable, value=True).pack(side="left", padx=(0, 12))
             self.ttk.Radiobutton(actions, text="− Ablehnen", variable=variable, value=False).pack(side="left", padx=(0, 12))

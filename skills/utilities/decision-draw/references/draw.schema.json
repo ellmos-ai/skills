@@ -37,6 +37,14 @@
       "type": "integer",
       "minimum": 1
     },
+    "preselect": {
+      "enum": [
+        "accept",
+        "none"
+      ],
+      "default": "accept",
+      "$comment": "accept: consent is preselected as a draft (default). none: nothing is preselected, every branch needs an explicit answer before Submit."
+    },
     "state": {
       "enum": [
         "draft",
