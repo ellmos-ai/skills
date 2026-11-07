@@ -109,6 +109,7 @@
     clone.setAttribute('data-mode', 'answered');
     $$('#dlg', clone).forEach(function (d) { d.removeAttribute('open'); });
     $$('#toast', clone).forEach(function (t) { t.className = ''; t.textContent = ''; });
+    $$('#save-links,#save-state', clone).forEach(function (e) { e.innerHTML = ''; });
     var js = document.createElement('script'); js.type = 'application/json'; js.id = 'embedded-answers';
     js.textContent = JSON.stringify(a).replace(/<\//g, '<\\/');
     var top = clone.querySelector('#top-panel'); var sec = document.createElement('div'); sec.innerHTML = summaryHtml(a);
@@ -116,23 +117,50 @@
     clone.querySelector('body').appendChild(js);
     return '<!doctype html>\n' + clone.outerHTML + '\n';
   }
-  function download(name, text, type) {
-    var b = new Blob([text], { type: type }), u = URL.createObjectURL(b), a = document.createElement('a');
-    a.href = u; a.download = name; a.className = 'dl'; a.textContent = name; a.style.display = 'inline-block';
-    var box = $('#save-links'); if (box) { box.appendChild(a); box.appendChild(document.createTextNode(' ')); }
-    a.click(); setTimeout(function () { URL.revokeObjectURL(u); }, 60000);
+  /* ---------- Sichern: nie von einem Dialog abhaengig (Regel 9) ---------- */
+  function errName(e) { return (e && e.name) ? e.name : 'Fehler'; }
+  function errText(e) { return errName(e) + (e && e.message ? ': ' + e.message : ''); }
+  function say(html, cls) { var s = $('#save-state'); if (!s) return; s.innerHTML = html; s.className = cls || ''; }
+  function fail(title, e) {
+    say('<b>' + esc(title) + '</b> (' + esc(errText(e)) + '). Dein Stand geht dadurch nicht verloren: Nimm „Als Datei herunterladen“ oder „Antwort als Text kopieren“.', 'err');
   }
-  async function writeFiles(files) {
-    if (window.showDirectoryPicker) {
-      try {
-        var dir = await window.showDirectoryPicker({ id: 'ticket-master-entscheidungen', mode: 'readwrite', startIn: 'documents' });
-        for (var i = 0; i < files.length; i++) { var fh = await dir.getFileHandle(files[i].name, { create: true }); var w = await fh.createWritable(); await w.write(files[i].text); await w.close(); }
-        return { how: 'Ordner „' + dir.name + '“' };
-      } catch (e) { if (e && e.name === 'AbortError') return { aborted: true }; /* sonst Download-Fallback */ }
+  function nowUtc() { return new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC'; }
+
+  /* Antwortdatei und beantwortete Kopie werden getrennt gebaut: scheitert die Kopie, bleibt die Antwort verfuegbar. */
+  function makeFiles() {
+    var out = { files: [], notes: [] }, a;
+    try { a = buildAnswers(); out.json = JSON.stringify(a, null, 2) + '\n'; } catch (e) { out.fatal = e; return out; }
+    out.files.push({ name: DATA.answer_name, text: out.json, type: 'application/json', label: 'Antwortdatei (nötig)' });
+    try { out.files.push({ name: DATA.answered_name, text: buildAnsweredHtml(a), type: 'text/html', label: 'Beantwortete Kopie (optional)' }); }
+    catch (e) { out.notes.push('Die beantwortete Kopie konnte nicht gebaut werden (' + esc(errText(e)) + '). Die Antwortdatei ist davon unabhängig verfügbar.'); }
+    return out;
+  }
+  function showText(json) {
+    var t = $('#answer-text'); if (!t) return;
+    t.value = json || '';
+    var box = $('#answer-box'); if (box) box.open = true;
+  }
+  /* Je Datei ein eigener sichtbarer Link: jeder Download ist eine eigene Nutzergeste, keiner startet von allein. */
+  function renderLinks(files) {
+    var box = $('#save-links'); if (!box) return;
+    box.innerHTML = '';
+    files.forEach(function (f) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([f.text], { type: f.type })); a.download = f.name; a.className = 'dl';
+      a.textContent = f.label + ': ' + f.name;
+      a.addEventListener('click', function () {
+        say('<b>Download angestoßen:</b> ' + esc(f.name) + '. Ob die Datei angekommen ist, kann diese Seite nicht prüfen: Schau in den Download-Ordner. Fehlt sie, nimm „Antwort als Text kopieren“.', 'warn');
+      });
+      box.appendChild(a); box.appendChild(document.createElement('br'));
+    });
+  }
+  async function writeToFolder(files) {
+    var dir = await window.showDirectoryPicker({ id: 'ticket-master-entscheidungen', mode: 'readwrite' });
+    for (var i = 0; i < files.length; i++) {
+      var fh = await dir.getFileHandle(files[i].name, { create: true });
+      var w = await fh.createWritable(); await w.write(files[i].text); await w.close();
     }
-    $('#save-links').innerHTML = '';
-    files.forEach(function (f, i) { setTimeout(function () { download(f.name, f.text, f.type); }, i * 400); });
-    return { how: 'Download-Ordner des Browsers' };
+    return dir.name;
   }
   function listMarked() { return ITEMS.filter(function (it) { return it.marked; }); }
   async function saveAndSend() {
@@ -143,15 +171,50 @@
     if (!st.agpl.choice) body += '<p class="warn">„AGPL bleibt“ ist noch offen.</p>';
     if (marked.length) body += '<p><b>Markierte Posten (rot, Löschung, Geld, Außenwirkung, Lizenz) noch einmal:</b></p><ul>' + marked.map(function (m) { return '<li><b>' + esc(m.id) + '</b> ' + esc(m.theme) + ': ' + (st.choice[m.id] ? esc(st.choice[m.id]) + ' (' + esc(label(m, st.choice[m.id])) + ')' + (st.via[m.id] === 'bulk' ? ', per Massenaktion' : '') : '<i>offen</i>') + ' <span class="muted">[' + esc(m.marked_reason) + ']</span></li>'; }).join('') + '</ul>';
     body += '<p>' + (st.gesamt.explicit ? 'Gesamtabnahme: <b>ausdrücklich ja</b>.' : 'Gesamtabnahme: nicht erklärt (Teilantwort).') + '</p>';
+    body += '<p class="muted">Gleich öffnet dein Browser eine Ordnerwahl. Gewünscht ist <code>.USR\\entscheidungen</code>. Lässt Edge diesen Ordner nicht zu oder brichst du ab, geht nichts verloren: Die Download-Links und der Text bleiben unten stehen.</p>';
     var r = await ask('Speichern und abschicken?', body, [{ id: 'back', label: 'Zurück zum Bearbeiten' }, { id: 'save', label: open.length ? 'Offene bleiben offen, speichern' : 'Speichern', primary: true }]);
     if (r.id !== 'save') return;
-    var a = buildAnswers(), json = JSON.stringify(a, null, 2) + '\n', html = buildAnsweredHtml(a);
-    var res = await writeFiles([{ name: DATA.answer_name, text: json, type: 'application/json' }, { name: DATA.answered_name, text: html, type: 'text/html' }]);
-    var s = $('#save-state');
-    if (res.aborted) { s.textContent = 'Speichern abgebrochen. Nichts wurde geschrieben.'; return; }
-    var t = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
-    s.innerHTML = '<b>gespeichert:</b> ' + esc(DATA.answer_name) + ' und ' + esc(DATA.answered_name) + ' (' + esc(res.how) + '), ' + t + '.<br>Der Browser kann keine Nachricht senden: <b>sag ticket-master Bescheid</b>. ticket-master liest die Datei aus <code>.USR\\entscheidungen\\</code>; liegt sie im Download-Ordner, bitte dorthin verschieben.';
-    s.className = 'ok'; lsSet();
+    var m = makeFiles();
+    if (m.fatal) { fail('Die Antwort konnte nicht zusammengestellt werden', m.fatal); return; }
+    showText(m.json); renderLinks(m.files); /* das Sicherungsnetz steht, BEVOR ein Dialog aufgeht */
+    var notes = m.notes.length ? m.notes.join(' ') + ' ' : '';
+    if (!window.showDirectoryPicker) {
+      say(notes + '<b>Dieser Browser kann nicht direkt in einen Ordner schreiben.</b> Klicke unten auf die Links (je Datei einzeln) oder nimm „Antwort als Text kopieren“.', 'warn');
+      return;
+    }
+    try {
+      var dirName = await writeToFolder(m.files);
+      say(notes + '<b>Gespeichert in „' + esc(dirName) + '“</b> um ' + nowUtc() + ': ' + m.files.map(function (f) { return esc(f.name); }).join(' und ') + ' vollständig geschrieben.<br>Der Browser kann keine Nachricht senden: <b>sag ticket-master Bescheid</b>.', 'ok');
+      lsSet();
+    } catch (e) {
+      if (errName(e) === 'AbortError') say(notes + '<b>Speichern abgebrochen.</b> Es wurde nichts geschrieben. Du kannst jederzeit unten „Als Datei herunterladen“ (oder die Links) nehmen oder „Antwort als Text kopieren“.', 'warn');
+      else say(notes + '<b>Speichern im Ordner hat nicht geklappt</b> (' + esc(errText(e)) + '). Möglicherweise liegt die erste Datei schon im Ordner: Prüfe das. Sicher geht es über die Links oder „Antwort als Text kopieren“.', 'err');
+    }
+  }
+  function onDownload() {
+    var m = makeFiles();
+    if (m.fatal) { fail('Die Antwort konnte nicht zusammengestellt werden', m.fatal); return; }
+    showText(m.json); renderLinks(m.files);
+    try { $('#save-links a').click(); } /* eine Nutzergeste, genau EIN Download: die Antwortdatei */
+    catch (e) { say('<b>Der Download konnte nicht angestoßen werden</b> (' + esc(errText(e)) + '). Die Links unten bleiben klickbar, oder nimm „Antwort als Text kopieren“.', 'err'); }
+  }
+  function onCopy() {
+    var m = makeFiles();
+    if (m.fatal) { fail('Die Antwort konnte nicht zusammengestellt werden', m.fatal); return; }
+    showText(m.json);
+    var t = $('#answer-text'); try { t.focus(); t.select(); } catch (e) { /* ignorieren */ }
+    var manual = function (why) { say('<b>Kopieren geht nicht automatisch</b> (' + esc(why) + '). Markiere den Text im Feld unten und kopiere ihn mit Strg+C.', 'warn'); };
+    if (!navigator.clipboard || !navigator.clipboard.writeText) { manual('keine Zwischenablage'); return; }
+    navigator.clipboard.writeText(m.json).then(function () { say('<b>Kopiert.</b> Speichere den Text in eine Datei oder schick ihn weiter.', 'ok'); }, function (e) { manual(errName(e)); });
+  }
+  function onDraft() {
+    try {
+      var a = buildAnswers(); a.draft = true;
+      var name = DATA.document_id + '.zwischenstand.json', x = document.createElement('a');
+      x.href = URL.createObjectURL(new Blob([JSON.stringify(a, null, 2) + '\n'], { type: 'application/json' })); x.download = name; x.style.display = 'none';
+      document.body.appendChild(x); x.click(); document.body.removeChild(x);
+      say('<b>Zwischenstand-Download angestoßen:</b> ' + esc(name) + '. Ob er angekommen ist, kann diese Seite nicht prüfen: Schau in den Download-Ordner.', 'warn');
+    } catch (e) { fail('Der Zwischenstand konnte nicht gesichert werden', e); }
   }
 
   /* ---------- Verdrahtung ---------- */
@@ -173,7 +236,10 @@
     $$('input[name=agpl]').forEach(function (r) { r.addEventListener('change', function () { st.agpl.choice = r.value; lsSet(); render(); }); });
     var an = $('#agpl-note'); if (an) an.addEventListener('input', function () { st.agpl.note = an.value; lsSet(); });
     $$('[data-bulk]').forEach(function (b) { b.addEventListener('click', function () { bulk(b.getAttribute('data-bulk')); }); });
-    $$('.js-save').forEach(function (b) { b.addEventListener('click', saveAndSend); });
+    $$('.js-save').forEach(function (b) { b.addEventListener('click', function () { saveAndSend().catch(function (e) { fail('Unerwarteter Fehler beim Speichern', e); }); }); });
+    var bd = $('#btn-download'); if (bd) bd.addEventListener('click', onDownload);
+    var bc = $('#btn-copy'); if (bc) bc.addEventListener('click', onCopy);
+    var bt = $('#btn-draft'); if (bt) bt.addEventListener('click', onDraft);
     var f = $('#only-open'); if (f) f.addEventListener('change', function () { document.body.classList.toggle('only-open', f.checked); render(); });
     var rr = $('#restore-reset'); if (rr) rr.addEventListener('click', function () { st.choice = {}; st.note = {}; st.via = {}; st.agpl = { choice: null, note: '' }; st.bulk = {}; st.gesamt = { explicit: false, at: null }; st.restored = null; restoreHint = false; lsClear(); render(); });
     document.body.classList.add('ready');
@@ -186,7 +252,7 @@
     st.agpl = { choice: a.agpl_bleibt.choice, note: a.agpl_bleibt.note }; st.gesamt = a.gesamtabnahme;
     document.body.classList.add('answered');
     $$('input,textarea,button').forEach(function (e) { if (!e.classList.contains('keep')) e.disabled = true; });
-    $$('.actions,.sticky-bar,.filter,#restore-note').forEach(function (e) { e.hidden = true; });
+    $$('.actions,.sticky-bar,.filter,#restore-note,#backup').forEach(function (e) { e.hidden = true; });
     render();
   }
   window.__FORM__ = { state: st, buildAnswers: buildAnswers, ITEMS: ITEMS };

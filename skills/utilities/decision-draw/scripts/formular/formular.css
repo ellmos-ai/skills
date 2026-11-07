@@ -28,6 +28,8 @@ dialog{max-width:min(40rem,94vw);border:1px solid var(--line);border-radius:12px
 #dlg-buttons{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:flex-end;margin-top:1rem}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:5.5rem;background:var(--fg);color:var(--bg);padding:.6rem 1rem;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;max-width:90vw}#toast.show{opacity:1}
 #save-state.ok{border:1px solid var(--ok);border-radius:8px;padding:.6rem .8rem;margin-top:.6rem}
+#save-state.warn,#save-state.err{border:1px solid var(--warn);border-radius:8px;padding:.6rem .8rem;margin-top:.6rem}#save-state.err{border-width:2px}
+#answer-text{font:.85rem/1.4 ui-monospace,Consolas,monospace;min-height:8rem}#save-links a.dl{display:inline-block;margin:.3rem .5rem .3rem 0;text-decoration:none}
 .answered .primary,.answered .js-save{display:none}.answered #ergebnis{border:2px solid var(--ok);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
 .nav a{margin-right:.8rem;white-space:nowrap}
 @media (max-width:560px){.sticky-bar button{padding:.5rem .6rem}.sticky-bar .txt{display:none}}

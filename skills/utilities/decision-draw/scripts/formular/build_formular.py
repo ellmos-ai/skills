@@ -167,7 +167,13 @@ def build(md_path):
              '<button type="button" class="primary js-save">Speichern und abschicken</button></div>'
              '<p id="gesamt-state" class="muted">Gesamtabnahme: nicht erklärt</p>'
              '<div id="restore-note" class="warn" hidden><span id="restore-text"></span> <button type="button" id="restore-reset">Zwischenstand verwerfen</button></div>'
-             '<div id="save-state"></div><div id="save-links"></div></section>') % (len(items), nav)
+             '<div id="backup"><p class="muted">Gewünschter Ordner für „Speichern und abschicken“: <code>.USR\\entscheidungen</code>. '
+             'Lässt Edge diesen Ordner nicht zu oder brichst du ab, geht nichts verloren: Die drei Knöpfe hier funktionieren jederzeit, ohne Ordnerwahl.</p>'
+             '<div class="row actions"><button type="button" id="btn-download">Als Datei herunterladen</button>'
+             '<button type="button" id="btn-copy">Antwort als Text kopieren</button><button type="button" id="btn-draft">Zwischenstand sichern</button></div>'
+             '<div id="save-state" role="status" aria-live="polite"></div><div id="save-links"></div>'
+             '<details id="answer-box"><summary>Antwort als Text (JSON)</summary><p class="muted">Kopiere den Text in eine Datei oder schick ihn weiter.</p>'
+             '<textarea id="answer-text" readonly rows="8" aria-label="Antwort als Text (JSON)"></textarea></details></div></section>') % (len(items), nav)
     t1 = body.index("</h1>") + len("</h1>")  # Antwortbogen direkt unter der Ueberschrift, vor dem langen Inhaltsverzeichnis
     body = body[:t1] + "\n" + panel + body[t1:]
     css_base = ('<style>\n:root{--bg:#fdfdfb;--fg:#1d1f21;--muted:#5b6168;--line:#d9dcdf;--accent:#1f5fae;--code:#f1f2f4;--head:#eef2f7}\n'
