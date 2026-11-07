@@ -129,8 +129,10 @@ class Daten(unittest.TestCase):
             big = Path(tmp) / "gross.png"
             big.write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * (400 * 1024 + 10))
             d = load()
-            post(d, "V1")["bilder"] = [{"pfad": str(big), "beschriftung": "zu gross"}]
-            self.assert_error(d, "V1", "400")
+            post(d, "V1")["bilder"] = [{"pfad": "gross.png", "beschriftung": "zu gross"}]
+            with self.assertRaises(bf.FormError) as caught:
+                bf.build(d, Path(tmp))
+            self.assertTrue(any("V1" in e and "400" in e for e in caught.exception.errors), caught.exception.errors)
             small = Path(tmp) / "klein.png"
             small.write_bytes(bf.decode_data_uri(PNG)[1])
             d = load()
@@ -196,6 +198,243 @@ class Daten(unittest.TestCase):
         self.assertEqual(bf.validate_answers(d, ITEMS), [])
         d["answers"]["V3"]["state"] = "answered"
         self.assertTrue(bf.validate_answers(d, ITEMS))
+
+
+class DatenSicherheit(unittest.TestCase):
+    """Befunde F1 bis F7 der mechanischen Pruefung von skills#98 (s1): jede Nutzlast aus dem Befund, ohne FORMULAR_MD."""
+
+    def assert_error(self, data, *needles):
+        errs = errors_of(data)
+        self.assertTrue(any(all(n in e for n in needles) for e in errs), f"{needles} nicht in {errs}")
+
+    # --- F1: Link-Schemata in details_markdown (Normalisierung + Positivliste) -------------------------------------
+    UNSAFE = {
+        "LF im Schema": "[x](java\nscript:window.__pwn=14)",
+        "CR im Schema": "[x](java\rscript:window.__pwn=14)",
+        "0x01 vorn": "[x](\u0001javascript:window.__pwn=15)",
+        "0x04 vorn": "[x](\u0004javascript:window.__pwn=15)",
+        "0x08 vorn": "[x](\u0008javascript:window.__pwn=15)",
+        "0x0e vorn": "[x](\u000ejavascript:window.__pwn=15)",
+        "0x1b vorn": "[x](\u001bjavascript:window.__pwn=15)",
+        "klar": "[x](javascript:window.__pwn=10)",
+        "gross": "[x](JaVaScRiPt:window.__pwn=11)",
+        "Leerzeichen": "[x]( javascript:window.__pwn=12)",
+        "Tab": "[x](java\tscript:window.__pwn=13)",
+        "Referenz": "[x][1]\n\n[1]: javascript:window.__pwn=20",
+        "spitze Klammern": "[x](<javascript:window.__pwn=22>)",
+        "Entity": "[x](&#106;avascript:window.__pwn=19)",
+        "data": "[x](data:text/html;base64,PHNjcmlwdD4=)",
+        "vbscript": "[x](vbscript:msgbox(1))",
+        "Bild mit javascript": "![x](javascript:window.__pwn=27)",
+        "Bild aus dem Netz": "![x](https://tracker.example/p.png)",
+        "relativ ohne Schema": "[x](seite.html)",
+    }
+
+    def test_f1_unsafe_links_are_refused(self):
+        for label, md in self.UNSAFE.items():
+            with self.subTest(label):
+                d = load()
+                post(d, "V4")["details_markdown"] = md
+                self.assertTrue(errors_of(d), f"{label}: muss abgelehnt werden")
+
+    def test_f1_other_control_characters_in_the_text_are_refused(self):
+        for code in (0x00, 0x01, 0x04, 0x08, 0x0E, 0x1B, 0x7F, 0x85):
+            with self.subTest(hex(code)):
+                d = load()
+                post(d, "V4")["details_markdown"] = f"Text {chr(code)} mehr"
+                self.assert_error(d, "V4", "Steuerzeichen")
+
+    def test_f1_safe_links_are_emitted_in_exactly_the_checked_form(self):
+        d = load()
+        post(d, "V4")["details_markdown"] = "[a](https://example.org/x?y=1&z=2) [b](#anker) [c](mailto:a@example.org) [d](/pfad) [e](./rel)"
+        page, _, _ = bf.build(d, HERE)
+        more = page.split('<details class="mehr">')[1].split("</details>")[0]
+        self.assertEqual(re.findall(r'href="([^"]*)"', more),
+                         ["https://example.org/x?y=1&amp;z=2", "#anker", "mailto:a@example.org", "/pfad", "./rel"])
+
+    def test_f1_every_href_and_src_of_the_page_is_on_the_allow_list(self):
+        allowed = re.compile(r"^(?:https?:|mailto:|#|/|\./|data:image/(?:png|jpeg|webp|gif);base64,)")
+        body = re.sub(r"<script.*?</script>", "", PAGE, flags=re.S)
+        values = re.findall(r'(?:href|src)="([^"]*)"', body)
+        self.assertTrue(values)
+        for value in values:
+            self.assertRegex(value, allowed)
+
+    # --- F2: '<' in Datenfeldern darf das Skript-Parsing nie kippen ------------------------------------------------
+    def test_f2_no_less_than_sign_inside_the_embedded_data(self):
+        d = load()
+        post(d, "V1")["titel"] = "<!--<script>"
+        post(d, "V1")["frage"] = "</script><script>window.__x=1</script>"
+        post(d, "V1")["optionen"][0]["label"] = "a < b > c & d \u2028"
+        page, _, _ = bf.build(d, HERE)
+        data = page.split('id="form-data">', 1)[1].split("</script>", 1)[0]
+        for char in "<>&\u2028\u2029":
+            self.assertNotIn(char, data, repr(char))
+        self.assertEqual(page.count("<script"), page.count("</script>"))
+        self.assertEqual(json.loads(data)["items"][0]["theme"], "<!--<script>")
+
+    # --- F3: Bildpfade bleiben im Datenordner, kein Dateizugriff vor der Pruefung ------------------------------------
+    def test_f3_image_paths_stay_inside_the_data_folder(self):
+        import os
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp) / "daten"
+            (base / "sub").mkdir(parents=True)
+            png = bf.decode_data_uri(PNG)[1]
+            (Path(tmp) / "aussen.png").write_bytes(png)
+            (base / "sub" / "ok.png").write_bytes(png)
+            ok = load()
+            post(ok, "V1")["bilder"] = [{"pfad": "sub/ok.png", "beschriftung": "ok"}]
+            self.assertIn('<img src="data:image/png;base64,', bf.build(ok, base)[0])
+            bad = {
+                "..": "../aussen.png", "..\\": "..\\aussen.png", "sub/../..": "sub/../../aussen.png",
+                "absolut": str(Path(tmp) / "aussen.png"), "UNC": "\\\\attacker.example\\share\\x.png",
+                "UNC mit Schraegstrich": "//attacker.example/share/x.png", "Laufwerk": "C:\\Windows\\x.png",
+                "erweitert": "\\\\?\\C:\\x.png", "Wurzel": "/etc/x.png",
+            }
+            for label, path in bad.items():
+                with self.subTest(label):
+                    d = load()
+                    post(d, "V1")["bilder"] = [{"pfad": path, "beschriftung": "b"}]
+                    with mock.patch.object(Path, "read_bytes", side_effect=AssertionError("Dateizugriff vor der Pruefung")):
+                        self.assert_error(d, "V1", "pfad")
+            link = base / "link.png"
+            try:
+                os.symlink(Path(tmp) / "aussen.png", link)
+            except (OSError, NotImplementedError):
+                return  # Symlinks nicht erlaubt (Windows ohne Rechte): der Rest ist geprueft
+            d = load()
+            post(d, "V1")["bilder"] = [{"pfad": "link.png", "beschriftung": "b"}]
+            self.assert_error(d, "V1", "pfad")
+
+    # --- F5: bisher nicht belegte Sicherungen ------------------------------------------------------------------------
+    def test_f5_closing_script_tags_in_data_are_neutralised(self):
+        d = load()
+        post(d, "V3")["kontext"] = "</script><script>window.__x=1</script>"
+        page, _, _ = bf.build(d, HERE)
+        self.assertEqual(page.count("<script"), page.count("</script>"))
+        self.assertIn("&lt;/script&gt;&lt;script&gt;window.__x=1&lt;/script&gt;", page)
+
+    def test_f5_magic_bytes_are_checked(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "fake.png").write_bytes(b"<html><script>alert(1)</script></html>")
+            d = load()
+            post(d, "V1")["bilder"] = [{"pfad": "fake.png", "beschriftung": "b"}]
+            with self.assertRaises(bf.FormError) as caught:
+                bf.build(d, Path(tmp))
+            self.assertTrue(any("kein image/png" in e for e in caught.exception.errors), caught.exception.errors)
+
+    # --- F6: Nutzertext aus 64 Nullen bleibt Nutzertext -------------------------------------------------------------
+    def test_f6_user_text_of_64_zeros_is_not_replaced_by_the_hash(self):
+        zeros = "0" * 64
+        d = load()
+        post(d, "V3")["kontext"] = zeros
+        page, digest, _ = bf.build(d, HERE)
+        self.assertNotEqual(digest, zeros)
+        self.assertIn(f'<p class="kontext">{zeros}</p>', page)
+        self.assertEqual(page.count(digest), 2, "der Hash steht nur im Meta-Tag und in den Formulardaten")
+        self.assertEqual(bf.blank_hash(page), (digest, digest))
+
+    def test_f9_dead_option_id_branch_is_gone(self):
+        self.assertNotIn("oid == RQ", (HERE / "build_form.py").read_text(encoding="utf-8"))
+
+
+@unittest.skipUnless(hu.HAVE_PLAYWRIGHT and hu.HAVE_EDGE, "Playwright (Python) oder Edge fehlt: Browsertests uebersprungen")
+class HeadlessSicherheit(unittest.TestCase):
+    """F2, F5 (Restore) und F7 im Browser; nur headless, eigenes Temp-Profil, nie ein sichtbares Fenster."""
+
+    @classmethod
+    def setUpClass(cls):
+        import tempfile
+
+        cls.dir = Path(tempfile.mkdtemp(prefix="form_sicherheit_"))
+
+    @classmethod
+    def tearDownClass(cls):
+        import shutil
+
+        shutil.rmtree(cls.dir, ignore_errors=True)
+
+    def page_file(self, data, name):
+        page, digest, items = bf.build(data, HERE)
+        path = self.dir / f"{name}.html"
+        path.write_text(page, encoding="utf-8", newline="\n")
+        return path, digest
+
+    def test_f2_forms_with_comment_script_openers_in_every_field_still_run(self):
+        d = load()
+        evil = "<!--<script>"
+        d["titel"] = d["kontext_kurz"] = evil
+        post(d, "V1")["titel"] = post(d, "V1")["frage"] = post(d, "V1")["kontext"] = evil
+        post(d, "V1")["optionen"][0]["label"] = post(d, "V1")["optionen"][0]["wirkung"] = evil
+        path, _ = self.page_file(d, "f2")
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.goto(path.as_uri())
+            hu.ready(page)
+            self.assertEqual(page.evaluate("window.__FORM__.ITEMS.length"), 3)
+            self.assertEqual(page.evaluate("window.__FORM__.ITEMS[0].theme"), evil)
+
+    def test_f2_answered_copy_with_a_comment_script_note_still_opens_in_answered_mode(self):
+        path, _ = self.page_file(load(), "f2copy")
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.add_init_script("window.showDirectoryPicker = undefined;")
+            page.goto(path.as_uri())
+            hu.ready(page)
+            page.click('#item-V1 input[value="A"]')
+            page.fill("#item-V1 textarea", "x <!--<script> y </script><b>z")
+            page.click("#top-panel .js-save")
+            page.click("#dlg-buttons button.primary")
+            page.wait_for_selector("#save-links a")
+            html = page.evaluate("""async () => {
+                const a = Array.from(document.querySelectorAll('#save-links a')).find(x => x.download.indexOf('BEANTWORTET') >= 0);
+                return a ? await (await fetch(a.href)).text() : null; }""")
+            self.assertTrue(html)
+            copy = self.dir / "kopie_BEANTWORTET.html"
+            copy.write_text(html, encoding="utf-8", newline="\n")
+            second = ctx.new_page()
+            second.goto(copy.as_uri())
+            second.wait_for_selector("body.answered", timeout=15000)
+            self.assertTrue(second.evaluate("document.getElementById('ergebnis') !== null"))
+
+    def seeded(self, ctx, path, digest, state):
+        page = ctx.new_page()
+        page.goto(path.as_uri())
+        hu.ready(page)
+        key = f"ticket-master.decisions.{load()['dokument_id']}.{digest[:16]}"
+        page.evaluate("([k, s]) => localStorage.setItem(k, s)", [key, json.dumps(state)])
+        page.reload()
+        hu.ready(page)
+        return page
+
+    def test_f5_restore_never_adopts_the_overall_sign_off_at_the_template(self):
+        path, digest = self.page_file(load(), "restore")
+        state = {"choice": {"V1": "A", "V3": "C", "V4": "A"}, "note": {"V1": "alt"}, "via": {"V1": "bulk", "V3": "bulk", "V4": "bulk"},
+                 "agpl": {"choice": None, "note": ""}, "bulk": {"bundle-alle": True},
+                 "gesamt": {"explicit": True, "at": "2026-11-01T10:00:00.000Z"}, "restored": None, "savedLocal": "2026-11-01T10:00:00.000Z"}
+        with hu.headless_context() as ctx:
+            page = self.seeded(ctx, path, digest, state)
+            r = page.evaluate("""() => ({explicit: window.__FORM__.state.gesamt.explicit, n: Object.keys(window.__FORM__.state.choice).length,
+                answers: window.__FORM__.buildAnswers(), text: document.getElementById('gesamt-state').textContent})""")
+        self.assertEqual(r["n"], 3, "Einzelwahlen kommen zurueck")
+        self.assertFalse(r["explicit"], "die Gesamtabnahme wird aus einem alten Stand NIE uebernommen")
+        self.assertEqual(r["answers"]["bulk_actions"], {})
+        self.assertEqual(r["text"], "Gesamtabnahme: nicht erklärt")
+
+    def test_f7_restore_ignores_values_that_are_no_option(self):
+        path, digest = self.page_file(load(), "restore7")
+        state = {"choice": {"V1": "ZZZ", "V3": "A", "V4": ["A"], "X9": "A"}, "note": {"V1": {"a": 1}, "V3": "ok"}, "via": {}, "bulk": {},
+                 "gesamt": {"explicit": False, "at": None}, "savedLocal": "2026-11-01T10:00:00.000Z"}
+        with hu.headless_context() as ctx:
+            page = self.seeded(ctx, path, digest, state)
+            r = page.evaluate("() => ({choice: window.__FORM__.state.choice, note: window.__FORM__.state.note})")
+        self.assertEqual(r["choice"], {"V3": "A"})
+        self.assertEqual(r["note"].get("V3"), "ok")
+        self.assertNotIn("V1", r["note"])
 
 
 @unittest.skipUnless(hu.HAVE_PLAYWRIGHT and hu.HAVE_EDGE, "Playwright (Python) oder Edge fehlt: Browsertests uebersprungen")
