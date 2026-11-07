@@ -323,10 +323,64 @@ def test_notice_names_the_actual_number_of_preselected_branches(draft):
     assert f"{total - 1} von {total} Ästen" in viewer.notice_text(data, choices)
 
 
+def test_confirmation_text_names_unchanged_preselection_and_marked_items(draft):
+    _, data, _ = draft
+    ids = [node["id"] for node in viewer.nodes(data)]
+    total = len(ids)
+    marked = viewer.nodes(data)[0]
+    marked["sensitive"] = True
+    viewer.validate(data)
+    initial = viewer.initial_choices(data)
+    choices = copy.deepcopy(initial)
+    text = viewer.confirmation_text(data, initial, choices)
+    assert f"{total} von {total} Ästen sind unverändert vorausgewählt" in text
+    assert "Markierte Posten" in text and f"- {marked['title']}: Zustimmung, unverändert vorausgewählt" in text
+    assert '"Ja"' in text and '"Nein"' in text
+    choices[marked["id"]]["accept"] = False  # a touched, marked item is no longer "unchanged"
+    text = viewer.confirmation_text(data, initial, choices)
+    assert f"{total - 1} von {total} Ästen sind unverändert vorausgewählt" in text
+    assert f"- {marked['title']}: Ablehnung\n" in text
+    none_initial = {key: {"accept": None, "comment": ""} for key in ids}
+    answered = {key: {"accept": True, "comment": ""} for key in ids}
+    assert f"0 von {total} Ästen sind unverändert vorausgewählt" in viewer.confirmation_text(data, none_initial, answered)
+
+
+def test_confirmation_text_without_marked_items_and_with_many_of_them(draft):
+    _, data, _ = draft
+    initial = viewer.initial_choices(data)
+    assert "Markierte Posten" not in viewer.confirmation_text(data, initial, copy.deepcopy(initial))
+    many = deep_chain(data, 15)
+    for node in viewer.nodes(many):
+        node["sensitive"] = True
+    viewer.validate(many)
+    base = viewer.initial_choices(many)
+    text = viewer.confirmation_text(many, base, copy.deepcopy(base))
+    assert text.count("\n- ") == 12 and "und 3 weitere markierte Posten" in text
+
+
+def test_sensitive_marker_is_a_boolean_in_runtime_and_schema(draft):
+    import jsonschema
+    _, data, _ = draft
+    validator = jsonschema.Draft202012Validator(json.loads((SKILL / "references/draw.schema.json").read_text(encoding="utf-8")))
+    for value in (True, False):
+        data["nodes"][0]["sensitive"] = value
+        viewer.validate(data)
+        validator.validate(data)
+    for value in ("yes", 1, None):
+        data["nodes"][0]["sensitive"] = value
+        with pytest.raises(viewer.DecisionError):
+            viewer.validate(data)
+        assert not validator.is_valid(data)
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk
+    from unittest.mock import patch
     path, _, _ = draft
+    # Submit asks for confirmation first; answer "Ja" without a modal dialog that would block the smoke.
+    ask = patch("tkinter.messagebox.askyesno", return_value=True)
+    ask.start()
     root = tk.Tk()
     try:
         window = viewer.DecisionWindow(root, path)
@@ -354,4 +408,5 @@ def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
         assert window.undo_button.instate(["disabled"])
         assert viewer.read(window.path)[1] == claimed_sha
     finally:
+        ask.stop()
         root.destroy()

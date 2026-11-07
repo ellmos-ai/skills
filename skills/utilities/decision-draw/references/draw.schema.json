@@ -210,6 +210,10 @@
           "type": "string",
           "minLength": 1
         },
+        "sensitive": {
+          "type": "boolean",
+          "$comment": "true marks red, money, deletion, external or licence items: the window flags them and the confirmation dialog before Submit lists them."
+        },
         "children": {
           "type": "array",
           "items": {

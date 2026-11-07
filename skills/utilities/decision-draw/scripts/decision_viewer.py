@@ -89,6 +89,8 @@ def validate(data):
     for node in flat:
         for field in ("id", "title", "text", "source_ref", "recommendation", "alternatives_ref", "addressee"):
             text(node.get(field), field)
+        if "sensitive" in node and type(node["sensitive"]) is not bool:
+            raise DecisionError("sensitive muss true oder false sein")
         if node["id"] in ids:
             raise DecisionError("Doppelte Ast-ID")
         ids.add(node["id"])
@@ -240,6 +242,23 @@ def notice_text(data, choices):
                     "Erst Absenden bestätigt deine Auswahl samt Kommentaren.")
         return "Keine Vorwahl: Du musst jeden Ast ausdrücklich mit + oder − beantworten. Erst Absenden bestätigt deine Auswahl samt Kommentaren."
     return f"Vorwahl: Bei {filled} von {total} Ästen ist die Auswahl als Entwurf vorgewählt. Erst Absenden bestätigt deine Auswahl samt Kommentaren."
+
+
+def confirmation_text(data, initial, choices, limit=12):
+    """Text of the dialog shown before Submit: how much of the opening state is unchanged, and the marked items."""
+    flat = nodes(data)
+    unchanged = {key for key, item in choices.items() if initial.get(key, {}).get("accept") is not None and item == initial[key]}
+    lines = [f"{len(unchanged)} von {len(flat)} Ästen sind unverändert vorausgewählt."]
+    marked = [node for node in flat if node.get("sensitive") is True]
+    if marked:
+        lines += ["", "Markierte Posten (rot, Geld, Löschung, außen, Lizenz):"]
+        for node in marked[:limit]:
+            line = f"- {node['title']}: " + ("Zustimmung" if choices[node["id"]]["accept"] else "Ablehnung")
+            lines.append(line + (", unverändert vorausgewählt" if node["id"] in unchanged else ""))
+        if len(marked) > limit:
+            lines.append(f"… und {len(marked) - limit} weitere markierte Posten")
+    lines += ["", 'Mit "Ja" reichst du die Auswahl samt Kommentaren aller Äste ein. Mit "Nein" ändert sich nichts.']
+    return "\n".join(lines)
 
 
 def as_accept(value):
@@ -455,6 +474,8 @@ class DecisionWindow:
             self.ttk.Button(header, text=("▾" if key in self.expanded else "▸") if has_children else "•", width=3,
                             command=lambda k=key: self.rerender(self.expanded, k)).pack(side="left", padx=(0, 8))
             self.label(header, node["title"], True)
+            if node.get("sensitive"):
+                self.label(box, "Markierter Posten (rot, Geld, Löschung, außen oder Lizenz): bitte bewusst entscheiden.", True)
             self.label(box, node["text"])
             self.label(box, "Empfehlung: " + node["recommendation"])
             if node.get("depends_on"):
@@ -505,6 +526,12 @@ class DecisionWindow:
     def on_submit(self):
         try:
             self.capture()
+            check_ready(self.data, self.choices, self.seen)  # refuse first, never ask for a confirmation that cannot succeed
+            from tkinter import messagebox
+            if not messagebox.askyesno("Wirklich absenden?", confirmation_text(self.data, self.initial, self.choices),
+                                       icon="warning", default="no", parent=self.root):
+                self.status.set("Nichts eingereicht. Du kannst weiter auswählen.")
+                return
             self.path, self.data, self.sha = submit(self.path, self.data["revision"], self.sha, self.choices, self.seen)
             self.submission_sha = self.sha
             self.render()
