@@ -1,11 +1,11 @@
 ---
 name: document-chunker
-version: 1.0.0
+version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 将文档切分为重叠的 token 块，适用于 RAG 流水线和 LLM 上下文窗口。零依赖。
+updated: 2026-11-06
+description: "当需要把文本切成能放进某个上限的片段时使用：为 RAG、嵌入或向量库准备文档，或文本超出模型的上下文窗口 / token 上限：'把它切成 chunk'、'为 RAG 准备文档'、'我的嵌入模型只接受 512 个 token'、'上下文溢出了'、'有重叠的片段'、'每个片段需要 chunk_id 和来源'、/document-chunker。把 .txt、.md、.py、.sh 文件或整个文件夹切分为带编号和来源标签的重叠 token 块，确保边界处不丢信息（仅用 Python 标准库，无依赖）。不要用于：总结文档（无需技能）、清除文本中的 AI 痕迹（llm-text-hygiene）、把 PDF 或扫描件转成文本，或制作简历（bewerbungsexperte）。"
 
 standalone: true
 anthropic_compatible: true
@@ -71,6 +71,9 @@ python document_chunker.py ./docs/        # Entire directory
 `.txt`, `.md`, `.py`, `.sh`
 
 ## 更新日志
+
+### 1.1.0 (2026-11-06)
+- 重写描述，明确触发条件与边界（docs/CONVENTIONS.md 中的规则）：先写使用场景、用户常见说法和斜杠命令，并在“不要用于”条款中点名相邻技能。
 
 ### 1.0.0 (2026-03-12)
 - 从 BACH system/tools/document_chunker.py 移植

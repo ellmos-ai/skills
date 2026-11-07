@@ -6980,9 +6980,9 @@
       "type": "expert",
       "category": "utilities",
       "path": "skills/utilities/bewerbungsexperte/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
-      "description": "Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.",
+      "description": "Verwenden, wenn sich jemand bewirbt: Stellenanzeige analysieren, Lebenslauf gegen die Anforderungen abgleichen, Lebenslauf oder LinkedIn-Profil schärfen, Anschreiben verfassen (auch bei Lücken im Lebenslauf) oder aus Berufsdaten (SQLite-Datenbank, Ordner für Arbeitgeber, Abschlüsse und Zertifikate als Inhaltsquelle) einen Text-Lebenslauf erzeugen: 'ich bewerbe mich auf ...', 'prüf meinen Lebenslauf gegen diese Anzeige', 'schreib ein Anschreiben', 'mein LinkedIn-Profil wirkt blass', 'Bewerbung', 'Lebenslauf generieren', /bewerbungsexperte. Macht ATS-sicheres Keyword-Matching, Unternehmens-Check, CV-Tuning und individuelle Anschreiben und führt den eigenständigen cv_generator.py aus (keine BACH-Laufzeit nötig). NICHT verwenden, um zwei Jobangebote gegeneinander abzuwägen (decide), KI-Formulierungen aus einem fertigen Anschreiben zu entfernen (llm-text-hygiene) oder für reine Dokumentverarbeitung wie Text extrahieren, OCR, Dateien umbenennen oder sortieren, auch bei Bewerbungsunterlagen.",
       "languages": [
         "de",
         "en",
@@ -6997,43 +6997,43 @@
           "language": "de",
           "path": "skills/utilities/bewerbungsexperte/SKILL.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (Deutsch)",
-          "description": "Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig."
+          "description": "Verwenden, wenn sich jemand bewirbt: Stellenanzeige analysieren, Lebenslauf gegen die Anforderungen abgleichen, Lebenslauf oder LinkedIn-Profil schärfen, Anschreiben verfassen (auch bei Lücken im Lebenslauf) oder aus Berufsdaten (SQLite-Datenbank, Ordner für Arbeitgeber, Abschlüsse und Zertifikate als Inhaltsquelle) einen Text-Lebenslauf erzeugen: 'ich bewerbe mich auf ...', 'prüf meinen Lebenslauf gegen diese Anzeige', 'schreib ein Anschreiben', 'mein LinkedIn-Profil wirkt blass', 'Bewerbung', 'Lebenslauf generieren', /bewerbungsexperte. Macht ATS-sicheres Keyword-Matching, Unternehmens-Check, CV-Tuning und individuelle Anschreiben und führt den eigenständigen cv_generator.py aus (keine BACH-Laufzeit nötig). NICHT verwenden, um zwei Jobangebote gegeneinander abzuwägen (decide), KI-Formulierungen aus einem fertigen Anschreiben zu entfernen (llm-text-hygiene) oder für reine Dokumentverarbeitung wie Text extrahieren, OCR, Dateien umbenennen oder sortieren, auch bei Bewerbungsunterlagen."
         },
         {
           "language": "en",
           "path": "skills/utilities/bewerbungsexperte/SKILL.en.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (English)",
-          "description": "Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig."
+          "description": "Use when the user is applying for a job: analysing a job posting, matching a CV against its requirements, sharpening a CV or LinkedIn profile, writing a cover letter (also with gaps in the CV), or generating a plain-text CV from career data (a SQLite database plus employer, degree and certificate folders as sources of content): 'I am applying for ...', 'check my CV against this posting', 'write a cover letter', 'my LinkedIn profile looks weak', 'Bewerbung', 'Anschreiben', 'generate my CV', /bewerbungsexperte. Does ATS-safe keyword matching, a company check, CV tuning and individual cover letters, and runs the standalone cv_generator.py (no BACH runtime needed). Do NOT use to weigh two job offers against each other (decide), to strip AI phrasing from a finished letter (llm-text-hygiene) or for pure document handling such as extracting text, OCR, renaming or sorting files, even when they are application documents."
         },
         {
           "language": "es",
           "path": "skills/utilities/bewerbungsexperte/SKILL.es.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (Español)",
-          "description": "Especialista para todo el proceso de solicitud de empleo. Analiza ofertas de empleo, optimiza perfiles (LinkedIn/CV) y genera cartas de presentación personalizadas. Genera currículums en ASCII a partir de una base de datos SQLite y una estructura de carpetas. cv_generator.py está adaptado como herramienta independiente -- no se requiere BACH-Runtime."
+          "description": "Usar cuando alguien se postula a un empleo: analizar una oferta de trabajo, contrastar el currículum con sus requisitos, afinar el currículum o el perfil de LinkedIn, redactar una carta de presentación (también con lagunas en el currículum) o generar un currículum en texto a partir de datos profesionales (base SQLite y carpetas de empleadores, títulos y certificados como fuente de contenido): 'me postulo a ...', 'revisa mi currículum frente a esta oferta', 'escribe una carta de presentación', 'mi perfil de LinkedIn se ve flojo', 'Bewerbung', 'genera mi currículum', /bewerbungsexperte. Hace coincidencia de palabras clave apta para ATS, revisión de la empresa, ajuste del currículum y cartas individuales, y ejecuta el cv_generator.py independiente (sin runtime BACH). NO usar para comparar dos ofertas de empleo (decide), quitar giros de IA de una carta ya terminada (llm-text-hygiene) ni para tareas puras de documentos como extraer texto, OCR, renombrar u ordenar archivos, aunque sean documentos de solicitud."
         },
         {
           "language": "zh",
           "path": "skills/utilities/bewerbungsexperte/SKILL.zh.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (中文)",
-          "description": "整个求职申请过程的专家。分析招聘广告，优化个人资料（LinkedIn/简历），并生成定制的求职信。从 SQLite 数据库和文件夹结构生成 ASCII 简历。cv_generator.py 已独立移植——无需 BACH 运行时。"
+          "description": "当有人求职申请时使用：分析招聘广告、将简历与岗位要求比对、优化简历或 LinkedIn 个人资料、撰写求职信（包括简历有空档的情况），或依据职业数据（SQLite 数据库，以及作为内容来源的雇主、学历、证书文件夹）生成文本简历：'我要申请 ...'、'对照这个职位检查我的简历'、'写一封求职信'、'我的 LinkedIn 资料显得单薄'、'Bewerbung'、'生成我的简历'、/bewerbungsexperte。进行适配 ATS 的关键词匹配、公司检查、简历调整和个性化求职信，并运行独立的 cv_generator.py（无需 BACH 运行时）。不要用于：比较两个工作机会（decide）、清除已完成求职信中的 AI 措辞（llm-text-hygiene），或纯文档处理，如提取文本、OCR、重命名或整理文件（即使是求职材料）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/bewerbungsexperte/SKILL.ja.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (日本語)",
-          "description": "応募プロセス全体のためのスペシャリスト。求人情報を分析し、プロフィール（LinkedIn/CV）を最適化し、カスタマイズされたカバーレターを生成します。SQLite データベースとフォルダ構造から ASCII 形式の履歴書を生成します。cv_generator.py はスタンドアロン移植版です -- BACH ランタイムは不要です。"
+          "description": "就職・転職の応募をするときに使います。求人情報の分析、履歴書と要件の照合、履歴書や LinkedIn プロフィールの改善、カバーレターの作成（履歴書にブランクがある場合も）、職歴データ（SQLite データベース、勤務先・学位・資格のフォルダを内容の情報源として）からのテキスト形式履歴書の生成: '... に応募します'、'この求人に対して私の履歴書をチェックして'、'カバーレターを書いて'、'LinkedIn プロフィールが地味'、'Bewerbung'、'履歴書を生成して'、/bewerbungsexperte。ATS 対応のキーワードマッチング、企業チェック、履歴書の調整、個別のカバーレターを行い、スタンドアロンの cv_generator.py を実行します（BACH ランタイム不要）。次の用途には使わないでください: 2つの内定の比較検討（decide）、完成したカバーレターからの AI 的表現の除去（llm-text-hygiene）、テキスト抽出、OCR、ファイル名の変更や整理といった純粋な文書処理（応募書類であっても）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/bewerbungsexperte/SKILL.ru.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (Русский)",
-          "description": "Специалист по всему процессу подачи заявок на работу. Анализирует вакансии, оптимизирует профили (LinkedIn/CV) и генерирует персональные сопроводительные письма. Генерирует ASCII-резюме из базы данных SQLite и структуры папок. cv_generator.py перенесен в автономном режиме -- среда выполнения BACH не требуется."
+          "description": "Использовать, когда человек откликается на вакансию: анализ объявления, сопоставление резюме с требованиями, доработка резюме или профиля LinkedIn, сопроводительное письмо (в том числе при пробелах в резюме) или создание текстового резюме из данных о карьере (база SQLite, папки с работодателями, дипломами и сертификатами как источник содержания): 'я откликаюсь на ...', 'сверь моё резюме с этим объявлением', 'напиши сопроводительное письмо', 'мой профиль LinkedIn выглядит бледно', 'Bewerbung', 'сгенерируй моё резюме', /bewerbungsexperte. Делает ATS-совместимое сопоставление ключевых слов, проверку компании, настройку резюме и индивидуальные письма и запускает автономный cv_generator.py (среда BACH не нужна). НЕ использовать для сравнения двух предложений о работе (decide), удаления ИИ-оборотов из готового письма (llm-text-hygiene) и чисто документной работы: извлечения текста, OCR, переименования или сортировки файлов, даже если это документы для отклика."
         },
         {
           "language": "fr",
           "path": "skills/utilities/bewerbungsexperte/SKILL.fr.md",
           "title": "BEWERBUNGSEXPERTE v1.1 (English)",
-          "description": "[Français] Compétence d'agent pour bewerbungsexperte: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig."
+          "description": "À utiliser lorsque quelqu'un postule à un emploi : analyser une offre d'emploi, confronter le CV à ses exigences, affûter le CV ou le profil LinkedIn, rédiger une lettre de motivation (même avec des trous dans le CV) ou générer un CV en texte à partir de données professionnelles (base SQLite et dossiers employeurs, diplômes et certificats comme source de contenu) : 'je postule à ...', 'compare mon CV à cette annonce', 'écris une lettre de motivation', 'mon profil LinkedIn est fade', 'Bewerbung', 'génère mon CV', /bewerbungsexperte. Fait un appariement de mots-clés compatible ATS, une vérification de l'entreprise, la mise au point du CV et des lettres sur mesure, et exécute cv_generator.py en autonome (sans runtime BACH). NE PAS utiliser pour comparer deux offres d'emploi (decide), retirer les tournures d'IA d'une lettre terminée (llm-text-hygiene) ni pour le simple traitement de documents (extraire du texte, OCR, renommer ou trier des fichiers), même s'il s'agit de pièces de candidature."
         }
       ]
     },
@@ -7099,9 +7099,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/brainstorm/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation.",
+      "description": "Verwenden, wenn viele neue Ideen gewünscht sind, noch ohne Bewertung: Namen, Funktionen, Kampagnen, Veranstaltungskonzepte oder Alternativen zum Üblichen: 'brainstorm', 'gib mir 30 Ideen', 'ich brauche Ideen für ...', 'was könnten wir noch probieren', 'gern wilde Ideen', 'uns fallen nur die üblichen Sachen ein', 'mach einen SCAMPER-Durchgang', 'Six Thinking Hats', /brainstorm. Erzeugt mit SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ oder Rapid Ideation eine breite Auswahl (erst Menge, beim Sammeln keine Kritik), gruppiert sie und trifft eine Vorauswahl. NICHT verwenden, um die Ursache eines Problems zu finden (think), eine von vorliegenden Optionen zu wählen (decide), Ideen gegen die Projekthistorie zu schürfen und eine durchzuziehen (idea-mining) oder für die ganze Kette Analyse-Ideen-Entscheidung (structured-thinking).",
       "languages": [
         "de",
         "en",
@@ -7116,37 +7116,37 @@
           "language": "de",
           "path": "skills/utilities/brainstorm/SKILL.md",
           "title": "Brainstorm",
-          "description": "Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation."
+          "description": "Verwenden, wenn viele neue Ideen gewünscht sind, noch ohne Bewertung: Namen, Funktionen, Kampagnen, Veranstaltungskonzepte oder Alternativen zum Üblichen: 'brainstorm', 'gib mir 30 Ideen', 'ich brauche Ideen für ...', 'was könnten wir noch probieren', 'gern wilde Ideen', 'uns fallen nur die üblichen Sachen ein', 'mach einen SCAMPER-Durchgang', 'Six Thinking Hats', /brainstorm. Erzeugt mit SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ oder Rapid Ideation eine breite Auswahl (erst Menge, beim Sammeln keine Kritik), gruppiert sie und trifft eine Vorauswahl. NICHT verwenden, um die Ursache eines Problems zu finden (think), eine von vorliegenden Optionen zu wählen (decide), Ideen gegen die Projekthistorie zu schürfen und eine durchzuziehen (idea-mining) oder für die ganze Kette Analyse-Ideen-Entscheidung (structured-thinking)."
         },
         {
           "language": "en",
           "path": "skills/utilities/brainstorm/SKILL.en.md",
           "title": "Brainstorm (English)",
-          "description": "Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation."
+          "description": "Use when the user wants many new ideas, not yet judged: names, features, campaigns, event concepts or alternatives to the usual approach: 'brainstorm', 'give me 30 ideas', 'I need ideas for ...', 'what else could we try', 'wild ideas welcome', 'we only come up with the usual', 'run a SCAMPER pass', 'Six Thinking Hats', /brainstorm. Generates a wide set of options with SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ or Rapid Ideation (quantity first, no criticism while collecting), then clusters them and shortlists the best. Do NOT use to find the cause of a problem (think), to pick one of given options (decide), to mine ideas against project history and carry one through (idea-mining) or for the full analyse-ideate-decide chain (structured-thinking)."
         },
         {
           "language": "es",
           "path": "skills/utilities/brainstorm/SKILL.es.md",
           "title": "Brainstorm (Español)",
-          "description": "Métodos de creatividad estructurada para la generación de ideas: SCAMPER, Seis Sombreros para Pensar, Mapa Mental, Lluvia de Ideas Inversa, TRIZ e Ideación Rápida."
+          "description": "Usar cuando se quieren muchas ideas nuevas, todavía sin juzgar: nombres, funciones, campañas, conceptos de evento o alternativas a lo habitual: 'brainstorm', 'dame 30 ideas', 'necesito ideas para ...', '¿qué más podríamos probar?', 'se admiten ideas locas', 'solo se nos ocurre lo de siempre', 'haz una pasada SCAMPER', 'Seis Sombreros para Pensar', /brainstorm. Genera un abanico amplio de opciones con SCAMPER, Seis Sombreros, Mapa Mental, Lluvia de Ideas Inversa, TRIZ o Ideación Rápida (primero cantidad, sin críticas al recopilar), las agrupa y preselecciona las mejores. NO usar para hallar la causa de un problema (think), elegir entre opciones dadas (decide), explorar ideas frente al historial del proyecto y llevar una hasta el final (idea-mining) ni la cadena completa análisis-ideas-decisión (structured-thinking)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/brainstorm/SKILL.zh.md",
           "title": "Brainstorm (中文)",
-          "description": "用于想法生成的结构化创意方法：SCAMPER（替换、组合、调整、修改、改变用途、消除、逆转）、六顶思考帽、思维导图、逆向头脑风暴、TRIZ（发明问题解决理论）和快速构思。"
+          "description": "当需要大量新创意、暂不评判时使用：名称、功能、活动策划，或有别于常规做法的方案：'头脑风暴'、'给我 30 个点子'、'我需要 ... 的创意'、'我们还能试什么'、'欢迎疯狂的想法'、'我们只想得到常规做法'、'用 SCAMPER 过一遍'、'六顶思考帽'、/brainstorm。借助 SCAMPER、六顶思考帽、思维导图、逆向头脑风暴、TRIZ 或快速构思生成大量选项（先求数量，收集时不批评），再归类并初选最佳项。不要用于：查找问题原因（think）、在已有选项中做选择（decide）、对照项目历史挖掘创意并将其中一个做到底（idea-mining），或分析-创意-决策的完整流程（structured-thinking）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/brainstorm/SKILL.ja.md",
           "title": "Brainstorm (日本語)",
-          "description": "アイデア出しのための構造化されたクリエイティビティ手法: SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーション。"
+          "description": "まだ評価せずに、新しいアイデアをたくさん出したいときに使います。名前、機能、キャンペーン、イベントの企画、ありきたりとは違う案: 'ブレインストーミングして'、'アイデアを30個出して'、'... のアイデアが欲しい'、'ほかに何を試せる'、'突飛なアイデア歓迎'、'ありきたりなものしか思いつかない'、'SCAMPER をかけて'、'6つの帽子'、/brainstorm。SCAMPER、6つの思考帽子、マインドマッピング、逆ブレインストーミング、TRIZ、ラピッドアイデエーションで幅広い選択肢を出し（まず量、出している間は批判しない）、グルーピングして絞り込みます。次の用途には使わないでください: 問題の原因の特定（think）、与えられた選択肢からの選択（decide）、プロジェクト履歴と照合してアイデアを発掘し1つをやり遂げること（idea-mining）、分析・発想・決定を通した一連の流れ（structured-thinking）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/brainstorm/SKILL.ru.md",
           "title": "Brainstorm (Русский)",
-          "description": "Методы структурированного творчества для генерации идей: SCAMPER, Шесть шляп мышления, Интеллект-карты (Mind Mapping), Обратный брейншторминг, ТРИЗ и Быстрая генерация идей (Rapid Ideation)."
+          "description": "Использовать, когда нужно много новых идей, пока без оценки: названия, функции, кампании, концепции мероприятий или альтернативы привычному: 'брейншторм', 'дай 30 идей', 'мне нужны идеи для ...', 'что ещё можно попробовать', 'безумные идеи приветствуются', 'в голову приходит только привычное', 'прогони через SCAMPER', 'Шесть шляп', /brainstorm. Порождает широкий набор вариантов методами SCAMPER, «Шесть шляп мышления», интеллект-карты, обратный брейншторминг, ТРИЗ или быстрая генерация идей (сначала количество, при сборе без критики), затем группирует их и отбирает лучшие. НЕ использовать для поиска причины проблемы (think), выбора из имеющихся вариантов (decide), добычи идей с оглядкой на историю проекта и доведения одной до конца (idea-mining) и полной цепочки анализ-идеи-решение (structured-thinking)."
         }
       ]
     },
@@ -7410,9 +7410,9 @@
       "type": "tool",
       "category": "utilities",
       "path": "skills/utilities/document-chunker/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies.",
+      "description": "Verwenden, wenn Text in Stücke zerlegt werden muss, die in eine Grenze passen: Dokumente für RAG, Embeddings oder einen Vektorspeicher vorbereiten, oder Text, der das Kontextfenster bzw. das Token-Limit eines Modells sprengt: 'teil das in Chunks', 'bereite die Docs für RAG auf', 'mein Embedding-Modell nimmt nur 512 Tokens', 'der Kontext läuft über', 'überlappende Stücke', 'jedes Stück braucht chunk_id und Quelle', /document-chunker. Zerlegt .txt-, .md-, .py- und .sh-Dateien oder ganze Ordner in überlappende Token-Chunks mit Nummer und Quellenangabe, sodass an den Schnittstellen nichts verloren geht (nur Python-Standardbibliothek, keine Abhängigkeiten). NICHT verwenden, um ein Dokument zusammenzufassen (kein Skill nötig), KI-Reste aus einem Text zu entfernen (llm-text-hygiene), PDFs oder Scans in Text umzuwandeln oder einen Lebenslauf zu erstellen (bewerbungsexperte).",
       "languages": [
         "de",
         "en",
@@ -7427,43 +7427,43 @@
           "language": "de",
           "path": "skills/utilities/document-chunker/SKILL.md",
           "title": "Document Chunker (Deutsch)",
-          "description": "Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies."
+          "description": "Verwenden, wenn Text in Stücke zerlegt werden muss, die in eine Grenze passen: Dokumente für RAG, Embeddings oder einen Vektorspeicher vorbereiten, oder Text, der das Kontextfenster bzw. das Token-Limit eines Modells sprengt: 'teil das in Chunks', 'bereite die Docs für RAG auf', 'mein Embedding-Modell nimmt nur 512 Tokens', 'der Kontext läuft über', 'überlappende Stücke', 'jedes Stück braucht chunk_id und Quelle', /document-chunker. Zerlegt .txt-, .md-, .py- und .sh-Dateien oder ganze Ordner in überlappende Token-Chunks mit Nummer und Quellenangabe, sodass an den Schnittstellen nichts verloren geht (nur Python-Standardbibliothek, keine Abhängigkeiten). NICHT verwenden, um ein Dokument zusammenzufassen (kein Skill nötig), KI-Reste aus einem Text zu entfernen (llm-text-hygiene), PDFs oder Scans in Text umzuwandeln oder einen Lebenslauf zu erstellen (bewerbungsexperte)."
         },
         {
           "language": "en",
           "path": "skills/utilities/document-chunker/SKILL.en.md",
           "title": "Document Chunker (English)",
-          "description": "Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies."
+          "description": "Use when text has to be cut into pieces that fit a limit: preparing documents for RAG, embeddings or a vector store, or text that overflows a model's context window or token limit: 'split this into chunks', 'chunk the docs for RAG', 'my embedding model only accepts 512 tokens', 'the context overflows', 'overlapping chunks', 'each piece needs a chunk_id and a source', /document-chunker. Splits .txt, .md, .py and .sh files or whole folders into overlapping token chunks with chunk number and source label, so nothing is lost at the boundaries (Python standard library only, no dependencies). Do NOT use to summarise a document (no skill needed), to clean AI leftovers from a text (llm-text-hygiene), to convert PDFs or scans to text, or to build a CV (bewerbungsexperte)."
         },
         {
           "language": "es",
           "path": "skills/utilities/document-chunker/SKILL.es.md",
           "title": "Document Chunker (Español)",
-          "description": "Divide documentos en fragmentos de tokens superpuestos para canalizaciones RAG y ventanas de contexto de LLM. Sin dependencias."
+          "description": "Usar cuando hay que cortar texto en piezas que quepan en un límite: preparar documentos para RAG, embeddings o un almacén vectorial, o texto que desborda la ventana de contexto o el límite de tokens de un modelo: 'divide esto en chunks', 'prepara la documentación para RAG', 'mi modelo de embeddings solo acepta 512 tokens', 'el contexto se desborda', 'fragmentos solapados', 'cada fragmento necesita chunk_id y fuente', /document-chunker. Divide archivos .txt, .md, .py y .sh o carpetas enteras en fragmentos de tokens solapados con número y etiqueta de origen, de modo que no se pierda nada en los límites (solo biblioteca estándar de Python, sin dependencias). NO usar para resumir un documento (no hace falta ningún skill), limpiar restos de IA de un texto (llm-text-hygiene), convertir PDF o escaneos en texto ni crear un currículum (bewerbungsexperte)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/document-chunker/SKILL.zh.md",
           "title": "Document Chunker (中文)",
-          "description": "将文档切分为重叠的 token 块，适用于 RAG 流水线和 LLM 上下文窗口。零依赖。"
+          "description": "当需要把文本切成能放进某个上限的片段时使用：为 RAG、嵌入或向量库准备文档，或文本超出模型的上下文窗口 / token 上限：'把它切成 chunk'、'为 RAG 准备文档'、'我的嵌入模型只接受 512 个 token'、'上下文溢出了'、'有重叠的片段'、'每个片段需要 chunk_id 和来源'、/document-chunker。把 .txt、.md、.py、.sh 文件或整个文件夹切分为带编号和来源标签的重叠 token 块，确保边界处不丢信息（仅用 Python 标准库，无依赖）。不要用于：总结文档（无需技能）、清除文本中的 AI 痕迹（llm-text-hygiene）、把 PDF 或扫描件转成文本，或制作简历（bewerbungsexperte）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/document-chunker/SKILL.ja.md",
           "title": "Document Chunker (日本語)",
-          "description": "RAGパイプラインやLLMのコンテキストウィンドウ向けに、ドキュメントをオーバーラップするトークンチャンクに分割します。依存関係ゼロ。"
+          "description": "テキストを上限に収まる断片に分割する必要があるときに使います。RAG、埋め込み、ベクトルストア向けにドキュメントを準備する場合や、モデルのコンテキストウィンドウ／トークン上限を超えるテキスト: 'チャンクに分割して'、'RAG 用にドキュメントを準備して'、'埋め込みモデルが512トークンしか受け付けない'、'コンテキストがあふれる'、'重なりのある断片'、'各断片に chunk_id と出典が必要'、/document-chunker。.txt、.md、.py、.sh のファイルやフォルダ全体を、番号と出典ラベル付きのオーバーラップするトークンチャンクに分割し、境界で情報が失われないようにします（Python 標準ライブラリのみ、依存関係なし）。次の用途には使わないでください: ドキュメントの要約（スキル不要）、テキストからの AI 痕跡の除去（llm-text-hygiene）、PDF やスキャンのテキスト化、履歴書の作成（bewerbungsexperte）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/document-chunker/SKILL.ru.md",
           "title": "Document Chunker (Русский)",
-          "description": "Разделение документов на перекрывающиеся чанки токенов для конвейеров RAG и контекстных окон LLM. Нулевые зависимости."
+          "description": "Использовать, когда текст нужно разрезать на части, укладывающиеся в лимит: подготовка документов для RAG, эмбеддингов или векторного хранилища либо текст, не помещающийся в контекстное окно или лимит токенов модели: 'раздели на чанки', 'подготовь документацию для RAG', 'моя модель эмбеддингов принимает только 512 токенов', 'контекст переполняется', 'перекрывающиеся фрагменты', 'каждому фрагменту нужны chunk_id и источник', /document-chunker. Разбивает файлы .txt, .md, .py и .sh или целые папки на перекрывающиеся токенные чанки с номером и меткой источника, чтобы на границах ничего не терялось (только стандартная библиотека Python, без зависимостей). НЕ использовать для пересказа документа (навык не нужен), очистки текста от следов ИИ (llm-text-hygiene), преобразования PDF или сканов в текст и составления резюме (bewerbungsexperte)."
         },
         {
           "language": "fr",
           "path": "skills/utilities/document-chunker/SKILL.fr.md",
           "title": "Document Chunker (English)",
-          "description": "[Français] Compétence d'agent pour document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies."
+          "description": "À utiliser lorsqu'un texte doit être découpé en morceaux tenant dans une limite : préparer des documents pour le RAG, les embeddings ou une base vectorielle, ou texte qui dépasse la fenêtre de contexte ou la limite de tokens d'un modèle : 'découpe ça en chunks', 'prépare la doc pour le RAG', 'mon modèle d'embedding n'accepte que 512 tokens', 'le contexte déborde', 'morceaux qui se chevauchent', 'chaque morceau doit avoir un chunk_id et une source', /document-chunker. Découpe des fichiers .txt, .md, .py et .sh ou des dossiers entiers en chunks de tokens avec chevauchement, numéro et étiquette de source, afin que rien ne se perde aux jonctions (bibliothèque standard Python uniquement, sans dépendances). NE PAS utiliser pour résumer un document (aucun skill requis), nettoyer les résidus d'IA d'un texte (llm-text-hygiene), convertir des PDF ou scans en texte ni créer un CV (bewerbungsexperte)."
         }
       ]
     },
@@ -7655,9 +7655,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/idea-mining/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
-      "description": "Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen, hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik, Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X\" gebraucht werden, bei „wir drehen uns im Kreis\", oder für periodische Innovations-Läufe über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen brainstorm (SCAMPER, Six Hats etc.).",
+      "description": "Verwenden, wenn ein schweres Problem seit längerem feststeckt und neue Ansätze gewünscht sind, die gegen bereits Versuchtes geprüft werden und von denen einer bis zum Ende verfolgt wird: Forschungsfragen, Beweise, hartnäckige Architektur- oder Designblockaden, Innovationsrunden für ein Projekt: 'wir drehen uns im Kreis', 'wir hängen seit Wochen fest', 'schürf neue Ansätze', 'sammle Ideen und filtere sie gegen unsere Notizen bzw. das Decision-Log', 'keine Sackgassen wiederholen', 'Innovationsrunde', /idea-mining. Füllt IDEENSPEICHER.md mit Ideen aus acht Schürftechniken (u. a. Fachgebiets-Analogien, Literatur, Geschwisterprojekte), filtert sie gegen die Projektdokumentation, wählt eine aus, führt sie durch und dokumentiert auch Fehlschläge. NICHT verwenden für eine schnelle, freie Ideenliste ohne Filter und Weiterverfolgung (brainstorm), die Wahl zwischen vorliegenden Optionen (decide), die Diagnose eines konkreten Fehlers (think) oder die schlichte Kette Analyse-Ideen-Entscheidung (structured-thinking).",
       "languages": [
         "de",
         "en",
@@ -7672,37 +7672,37 @@
           "language": "de",
           "path": "skills/utilities/idea-mining/SKILL.md",
           "title": "Idea-Mining — Ideen schürfen, filtern, eine durchziehen (Deutsch)",
-          "description": "Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen, hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik, Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X\" gebraucht werden, bei „wir drehen uns im Kreis\", oder für periodische Innovations-Läufe über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen brainstorm (SCAMPER, Six Hats etc.)."
+          "description": "Verwenden, wenn ein schweres Problem seit längerem feststeckt und neue Ansätze gewünscht sind, die gegen bereits Versuchtes geprüft werden und von denen einer bis zum Ende verfolgt wird: Forschungsfragen, Beweise, hartnäckige Architektur- oder Designblockaden, Innovationsrunden für ein Projekt: 'wir drehen uns im Kreis', 'wir hängen seit Wochen fest', 'schürf neue Ansätze', 'sammle Ideen und filtere sie gegen unsere Notizen bzw. das Decision-Log', 'keine Sackgassen wiederholen', 'Innovationsrunde', /idea-mining. Füllt IDEENSPEICHER.md mit Ideen aus acht Schürftechniken (u. a. Fachgebiets-Analogien, Literatur, Geschwisterprojekte), filtert sie gegen die Projektdokumentation, wählt eine aus, führt sie durch und dokumentiert auch Fehlschläge. NICHT verwenden für eine schnelle, freie Ideenliste ohne Filter und Weiterverfolgung (brainstorm), die Wahl zwischen vorliegenden Optionen (decide), die Diagnose eines konkreten Fehlers (think) oder die schlichte Kette Analyse-Ideen-Entscheidung (structured-thinking)."
         },
         {
           "language": "en",
           "path": "skills/utilities/idea-mining/SKILL.en.md",
           "title": "Idea-Mining — Mine ideas, filter, execute one",
-          "description": "Mine ideas, filter against history, explore one to completion. A 5-phase workflow (A-E) for complex problem solving."
+          "description": "Use when a hard problem has been stuck for a while and the user wants new approaches that are checked against what was already tried, with one pursued to the end: research questions, proofs, stubborn architecture or design blockages, periodic innovation rounds on one project: 'we keep going in circles', 'we have been stuck for weeks', 'mine new approaches', 'collect ideas, then filter them against our notes / decision log', 'do not repeat dead ends', 'explore one idea fully', 'innovation round', /idea-mining. Fills IDEENSPEICHER.md with ideas from eight techniques (analogies from other fields, literature search, sibling projects), filters them against the project documentation, picks one, carries it through and documents failures too. Do NOT use for a quick, free list of ideas without filter and follow-up (brainstorm), for choosing between given options (decide), for diagnosing a concrete error (think) or for the plain analyse-ideate-decide chain (structured-thinking)."
         },
         {
           "language": "es",
           "path": "skills/utilities/idea-mining/SKILL.es.md",
           "title": "Idea-Mining — Extraer ideas, filtrar, ejecutar una",
-          "description": "Extraer ideas, filtrar contra el historial y explorar una hasta completarla. Un flujo de trabajo de 5 fases (A-E) para la resolución de problemas complejos."
+          "description": "Usar cuando un problema difícil lleva tiempo estancado y se quieren nuevos enfoques que se contrasten con lo ya intentado y de los que se lleve uno hasta el final: preguntas de investigación, demostraciones, bloqueos tercos de arquitectura o diseño, rondas periódicas de innovación de un proyecto: 'damos vueltas en círculo', 'llevamos semanas atascados', 'explora enfoques nuevos', 'reúne ideas y fíltralas con nuestras notas o el registro de decisiones', 'no repitamos callejones sin salida', 'ronda de innovación', /idea-mining. Llena IDEENSPEICHER.md con ideas de ocho técnicas (analogías de otras disciplinas, literatura, proyectos hermanos), las filtra con la documentación del proyecto, elige una, la desarrolla y documenta también los fracasos. NO usar para una lista rápida y libre de ideas sin filtro ni seguimiento (brainstorm), la elección entre opciones dadas (decide), el diagnóstico de un error concreto (think) ni la simple cadena análisis-ideas-decisión (structured-thinking)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/idea-mining/SKILL.zh.md",
           "title": "Idea-Mining — 挖掘创意、过滤、执行到底",
-          "description": "挖掘创意，对照历史记录过滤，并深入探索其中一个直至完成。用于解决复杂问题的 5 阶段工作流（A-E）。"
+          "description": "当一个难题长期卡住，需要对照已试过的做法提出新思路并把其中一个做到底时使用：研究问题、证明、顽固的架构或设计瓶颈、项目的定期创新轮：'我们在原地打转'、'卡了好几周'、'挖掘新思路'、'收集想法并对照我们的笔记或决策日志过滤'、'别重蹈覆辙'、'把一个想法彻底做透'、'创新轮'、/idea-mining。用八种挖掘技巧（其他学科的类比、文献检索、姐妹项目）把想法记入 IDEENSPEICHER.md，对照项目文档过滤，选出一个执行到底，并记录失败。不要用于：无需过滤和后续跟进的快速自由列点子（brainstorm）、在已有选项中做选择（decide）、诊断具体错误（think），或单纯的分析-创意-决策流程（structured-thinking）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/idea-mining/SKILL.ja.md",
           "title": "Idea-Mining — アイデアを発掘し、フィルタリングし、1つを完遂する",
-          "description": "アイデアを発掘し、履歴と照合してフィルタリングし、1つのアイデアを完了まで追求します。複雑な問題解決のための5つのフェーズ（A-E）ワークフロー。"
+          "description": "難しい問題がしばらく行き詰まっており、これまでに試したことと照合した新しいアプローチを出し、そのうち1つをやり遂げたいときに使います。研究課題、証明、手強いアーキテクチャ／設計上の障害、プロジェクトの定期的なイノベーションラウンド: '堂々巡りしている'、'何週間も詰まっている'、'新しいアプローチを掘り起こして'、'アイデアを集めてメモや決定ログと照合して'、'行き止まりを繰り返したくない'、'1つのアイデアを徹底的に追求して'、'イノベーションラウンド'、/idea-mining。8つの発掘手法（他分野からの類推、文献調査、兄弟プロジェクト）でアイデアを IDEENSPEICHER.md に蓄積し、プロジェクト文書と照合して絞り込み、1つを選んで遂行し、失敗も記録します。次の用途には使わないでください: フィルタや追求を伴わない手早い自由なアイデア出し（brainstorm）、与えられた選択肢からの選択（decide）、具体的なエラーの診断（think）、単純な分析・発想・決定の流れ（structured-thinking）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/idea-mining/SKILL.ru.md",
           "title": "Idea-Mining — Добыча идей, фильтрация, реализация одной идеи",
-          "description": "Добыча идей, фильтрация по истории и углубленная разработка одной идеи до конца. 5-фазный рабочий процесс (A-E) для решения сложных задач."
+          "description": "Использовать, когда сложная проблема давно буксует и нужны новые подходы, сверенные с уже испробованным, один из которых доводится до конца: исследовательские вопросы, доказательства, упорные тупики в архитектуре или дизайне, периодические раунды инноваций по проекту: 'мы ходим по кругу', 'застряли на недели', 'накопай новые подходы', 'собери идеи и отфильтруй по нашим заметкам или журналу решений', 'не повторяй тупики', 'проработай одну идею до конца', 'раунд инноваций', /idea-mining. Наполняет IDEENSPEICHER.md идеями из восьми техник (аналогии из других областей, поиск литературы, соседние проекты), фильтрует их по документации проекта, выбирает одну, доводит её и фиксирует также неудачи. НЕ использовать для быстрого свободного списка идей без фильтра и продолжения (brainstorm), выбора из имеющихся вариантов (decide), диагностики конкретной ошибки (think) и простой цепочки анализ-идеи-решение (structured-thinking)."
         }
       ]
     },
@@ -7846,9 +7846,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/llm-text-hygiene/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
-      "description": "Entfernt KI-Spuren, Chat-Reste, Platzhalter und LLM-Stilmuster aus fertigen Texten und prüft die AI-Disclosure auf Vollständigkeit und korrekten Sitz.",
+      "description": "Verwenden, wenn ein fertiger Text (Paper, Abschlussarbeit, README, Newsletter, Doku, Sprachfassungen) veröffentlicht oder hochgeladen werden soll und noch Spuren seiner Entstehung tragen könnte: Chat-Reste ('wie besprochen', 'Hier ist die überarbeitete Fassung'), Platzhalter (TODO, '[Quelle einfügen]'), Dank an ChatGPT & Co., LLM-Stilmarker ('delve', 'es ist wichtig zu betonen') oder eine fehlende bzw. nicht mehr zutreffende KI-Offenlegung: 'vor dem Upload prüfen', 'nimm die KI-Reste raus', 'sind noch Platzhalter drin', 'passt die KI-Offenlegung', /llm-text-hygiene. Scannt, bereinigt eindeutige Fälle vorsichtig über alle Sprachfassungen, korrigiert die Offenlegung und listet Stilbefunde nur auf; ändert nie den Inhalt und schreibt nicht die Stimme der Autorin bzw. des Autors um. NICHT verwenden, um neuen Text zu schreiben (Bewerbungen: bewerbungsexperte), kaputte Kodierung oder Umlaute zu reparieren oder zwischen Optionen zu wählen (decide).",
       "languages": [
         "de",
         "en",
@@ -7863,37 +7863,37 @@
           "language": "de",
           "path": "skills/utilities/llm-text-hygiene/SKILL.md",
           "title": "LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Deutsch)",
-          "description": "Entfernt KI-Spuren, Chat-Reste, Platzhalter und LLM-Stilmuster aus fertigen Texten und prüft die AI-Disclosure auf Vollständigkeit und korrekten Sitz."
+          "description": "Verwenden, wenn ein fertiger Text (Paper, Abschlussarbeit, README, Newsletter, Doku, Sprachfassungen) veröffentlicht oder hochgeladen werden soll und noch Spuren seiner Entstehung tragen könnte: Chat-Reste ('wie besprochen', 'Hier ist die überarbeitete Fassung'), Platzhalter (TODO, '[Quelle einfügen]'), Dank an ChatGPT & Co., LLM-Stilmarker ('delve', 'es ist wichtig zu betonen') oder eine fehlende bzw. nicht mehr zutreffende KI-Offenlegung: 'vor dem Upload prüfen', 'nimm die KI-Reste raus', 'sind noch Platzhalter drin', 'passt die KI-Offenlegung', /llm-text-hygiene. Scannt, bereinigt eindeutige Fälle vorsichtig über alle Sprachfassungen, korrigiert die Offenlegung und listet Stilbefunde nur auf; ändert nie den Inhalt und schreibt nicht die Stimme der Autorin bzw. des Autors um. NICHT verwenden, um neuen Text zu schreiben (Bewerbungen: bewerbungsexperte), kaputte Kodierung oder Umlaute zu reparieren oder zwischen Optionen zu wählen (decide)."
         },
         {
           "language": "en",
           "path": "skills/utilities/llm-text-hygiene/SKILL.en.md",
           "title": "LLM-Text-Hygiene — Remove AI residue from finished texts",
-          "description": "Clean AI artifacts, chat residue, placeholders, and LLM style patterns from final texts, and audit AI disclosures."
+          "description": "Use when a finished text (paper, thesis, README, newsletter, docs, language versions) is about to be published or uploaded and may still carry traces of how it was made: chat residue ('as discussed', 'Here is the revised version'), placeholders (TODO, '[insert reference]', '<example here>'), thanks to ChatGPT and similar tools, typical LLM style markers ('delve', 'it is worth noting') or an AI disclosure that is missing or no longer true: 'check before upload', 'remove the AI leftovers', 'are there placeholders left', 'does the AI disclosure match', 'bring both language versions to the same state', /llm-text-hygiene. Scans, cleans clear cases conservatively across all language versions, corrects the disclosure and only lists style findings; never changes the substance or rewrites the author's voice. Do NOT use to write new text (applications: bewerbungsexperte), to repair broken encoding or umlauts, or to choose between options (decide)."
         },
         {
           "language": "es",
           "path": "skills/utilities/llm-text-hygiene/SKILL.es.md",
           "title": "LLM-Text-Hygiene — Eliminar residuos de IA de textos terminados",
-          "description": "Eliminar artefactos de IA, residuos de chat, marcadores de posición y patrones de estilo LLM de textos finales, y auditar divulgaciones de IA."
+          "description": "Usar cuando un texto terminado (artículo, tesis, README, boletín, documentación, versiones en varios idiomas) va a publicarse o subirse y aún puede llevar huellas de cómo se hizo: restos de chat ('como comentamos', 'Aquí tienes la versión revisada'), marcadores (TODO, '[insertar referencia]', '<insertar ejemplo>'), agradecimientos a ChatGPT y similares, marcas típicas de estilo LLM ('delve', 'es importante destacar') o una declaración de uso de IA ausente o que ya no es cierta: 'revisa antes de subirlo', 'quita los restos de IA', '¿quedan marcadores?', '¿coincide la declaración de IA?', 'deja ambas versiones de idioma igual', /llm-text-hygiene. Escanea, limpia con cautela los casos claros en todas las versiones de idioma, corrige la declaración y solo enumera los hallazgos de estilo; nunca cambia el contenido ni reescribe la voz del autor. NO usar para escribir texto nuevo (solicitudes de empleo: bewerbungsexperte), reparar codificación o tildes rotas ni elegir entre opciones (decide)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/llm-text-hygiene/SKILL.zh.md",
           "title": "LLM-Text-Hygiene — 从成品文本中清除 AI 残留",
-          "description": "从最终文本中清除 AI 痕迹、对话残留、占位符和 LLM 风格模式，并审核 AI 披露声明。"
+          "description": "当一份已完成的文本（论文、毕业论文、README、通讯稿、文档、多语言版本）即将发布或上传，而可能仍带有制作痕迹时使用：聊天残留（'如前所述'、'这是修改后的版本'）、占位符（TODO、'[插入参考文献]'、'<此处插入示例>'）、对 ChatGPT 等的致谢、典型的 LLM 文风标记（'delve'、'值得注意的是'），或缺失、已不属实的 AI 使用声明：'上传前检查一下'、'清除 AI 痕迹'、'还有没有占位符'、'AI 声明与实际相符吗'、'让两个语言版本保持一致'、/llm-text-hygiene。扫描并在所有语言版本中谨慎清理明确的问题，修正声明，文风问题只列出清单；绝不改动内容，也不改写作者的文风。不要用于：撰写新文本（求职材料用 bewerbungsexperte）、修复乱码或编码问题，或在多个选项中做选择（decide）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/llm-text-hygiene/SKILL.ja.md",
           "title": "LLM-Text-Hygiene — 完成したテキストから AI の残骸を除去する",
-          "description": "完成したテキストから AI の痕跡、チャットの残骸、プレースホルダー、LLM のスタイルパターンを削除し、AI 開示声明を監査します。"
+          "description": "完成したテキスト（論文、学位論文、README、ニュースレター、ドキュメント、各言語版）を公開・アップロードする前に、作成過程の痕跡が残っていないか確認したいときに使います。チャットの名残（'ご相談のとおり'、'こちらが修正版です'）、プレースホルダー（TODO、'[参考文献を挿入]'、'<ここに例を挿入>'）、ChatGPT などへの謝辞、LLM 特有の文体マーカー（'delve'、'注目すべきは'）、欠落している、または実態と合わなくなった AI 開示声明: 'アップロード前にチェックして'、'AI の痕跡を取り除いて'、'プレースホルダーが残っていないか'、'AI 開示は実態と合っているか'、'両言語版を同じ状態にして'、/llm-text-hygiene。全言語版にわたって明白なケースを慎重にクリーニングし、開示声明を修正し、文体上の指摘は一覧にするだけで、内容は変更せず著者の文体も書き換えません。次の用途には使わないでください: 新規テキストの作成（応募書類は bewerbungsexperte）、文字化けやエンコードの修復、選択肢からの選択（decide）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/llm-text-hygiene/SKILL.ru.md",
           "title": "LLM-Text-Hygiene — Удаление артефактов ИИ из готовых текстов",
-          "description": "Удаление следов ИИ, обрывков чата, заполнителей и стилистических паттернов LLM из готовых текстов, а также аудит раскрытия информации об ИИ."
+          "description": "Использовать, когда готовый текст (статья, диплом, README, рассылка, документация, версии на разных языках) собираются опубликовать или загрузить, а в нём могут остаться следы его создания: обрывки чата ('как мы обсуждали', 'Вот исправленная версия'), заполнители (TODO, '[вставить ссылку]'), благодарности ChatGPT и подобным, типичные стилистические маркеры LLM ('delve', 'важно отметить') либо отсутствующее или неактуальное раскрытие использования ИИ: 'проверь перед загрузкой', 'убери следы ИИ', 'не остались ли заполнители', 'соответствует ли раскрытие ИИ действительности', /llm-text-hygiene. Сканирует, осторожно чистит очевидные случаи во всех языковых версиях, исправляет раскрытие и лишь перечисляет стилистические замечания; никогда не меняет содержание и не переписывает авторский голос. НЕ использовать для написания нового текста (заявки на работу: bewerbungsexperte), исправления сломанной кодировки или умлаутов и выбора между вариантами (decide)."
         }
       ]
     },
@@ -8170,9 +8170,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/structured-thinking/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process.",
+      "description": "Verwenden, wenn eine unübersichtliche oder folgenreiche Lage die ganze Kette in einem Durchgang braucht: das eigentliche Problem verstehen, Optionen erzeugen, dann entscheiden: 'hilf mir, das durchzudenken', 'von der Ursache bis zur Entscheidung', 'strukturiertes Denken', 'Problem, Ideen, Entscheidung', 'ich hänge fest, ob ich ... soll', 'keiner weiß, warum ..., und ich muss dem Vorstand etwas sagen', 'erst analysieren, dann Optionen, dann empfehlen', /structured-thinking. Meta-Ablauf in drei Phasen: analysieren (think), Ideen entwickeln (brainstorm), entscheiden (decide); lässt eine nicht nötige Phase aus und liefert ein Ergebnis mit Begründung. NICHT verwenden, wenn nur ein Schritt verlangt ist: reine Analyse oder Ursachen (think), reine Ideen (brainstorm), eine Wahl zwischen bereits vorliegenden Optionen (decide) oder Ideen, die gegen die Projekthistorie gefiltert und weiterverfolgt werden sollen (idea-mining).",
       "languages": [
         "de",
         "en",
@@ -8187,37 +8187,37 @@
           "language": "de",
           "path": "skills/utilities/structured-thinking/SKILL.md",
           "title": "Structured Thinking — Analysieren, Ideenfinden, Entscheiden",
-          "description": "Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process."
+          "description": "Verwenden, wenn eine unübersichtliche oder folgenreiche Lage die ganze Kette in einem Durchgang braucht: das eigentliche Problem verstehen, Optionen erzeugen, dann entscheiden: 'hilf mir, das durchzudenken', 'von der Ursache bis zur Entscheidung', 'strukturiertes Denken', 'Problem, Ideen, Entscheidung', 'ich hänge fest, ob ich ... soll', 'keiner weiß, warum ..., und ich muss dem Vorstand etwas sagen', 'erst analysieren, dann Optionen, dann empfehlen', /structured-thinking. Meta-Ablauf in drei Phasen: analysieren (think), Ideen entwickeln (brainstorm), entscheiden (decide); lässt eine nicht nötige Phase aus und liefert ein Ergebnis mit Begründung. NICHT verwenden, wenn nur ein Schritt verlangt ist: reine Analyse oder Ursachen (think), reine Ideen (brainstorm), eine Wahl zwischen bereits vorliegenden Optionen (decide) oder Ideen, die gegen die Projekthistorie gefiltert und weiterverfolgt werden sollen (idea-mining)."
         },
         {
           "language": "en",
           "path": "skills/utilities/structured-thinking/SKILL.en.md",
           "title": "Structured Thinking — Analyze, Ideate, Decide (English)",
-          "description": "Meta-skill: Structured thinking as a 3-phase workflow. Combines analysis (think), ideation (brainstorm), and decision-making (decide) into one continuous process."
+          "description": "Use when a messy or high-stakes situation needs the whole chain in one run: understand the real problem, generate options, then decide: 'help me think this through', 'from cause to decision', 'structured thinking', 'problem, ideas, decision', 'I am stuck on whether to ...', 'nobody knows why ... and I have to tell the board something', 'analyse first, then options, then recommend', /structured-thinking. Meta-workflow of three phases: analyse (think), ideate (brainstorm), decide (decide); skips a phase that is not needed and returns one result with its rationale. Do NOT use when only one step is asked: pure analysis or causes (think), pure ideas (brainstorm), a choice between options already on the table (decide), or ideas filtered against project history and pursued (idea-mining)."
         },
         {
           "language": "es",
           "path": "skills/utilities/structured-thinking/SKILL.es.md",
           "title": "Structured Thinking — Analizar, Idear, Decidir",
-          "description": "Meta-skill: Pensamiento estructurado como un flujo de trabajo de 3 fases. Combina análisis (think), ideación (brainstorm) y toma de decisiones (decide) en un proceso continuo."
+          "description": "Usar cuando una situación confusa o de gran impacto necesita toda la cadena en una sola pasada: entender el problema real, generar opciones y luego decidir: 'ayúdame a pensarlo a fondo', 'de la causa a la decisión', 'pensamiento estructurado', 'problema, ideas, decisión', 'no me decido si debo ...', 'nadie sabe por qué ... y tengo que decirle algo a la junta', 'primero analizar, luego opciones, luego recomendar', /structured-thinking. Metaflujo de tres fases: analizar (think), idear (brainstorm) y decidir (decide); omite la fase que no haga falta y entrega un resultado con su justificación. NO usar cuando solo se pide un paso: análisis o causas puras (think), ideas puras (brainstorm), una elección entre opciones ya sobre la mesa (decide) o ideas filtradas frente al historial del proyecto y desarrolladas (idea-mining)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/structured-thinking/SKILL.zh.md",
           "title": "Structured Thinking — 分析、构思、决策",
-          "description": "Meta-skill：作为 3 阶段工作流的结构化思维。将分析（think）、构思（brainstorm）和决策（decide）结合为一个连续的过程。"
+          "description": "当一个混乱或影响重大的局面需要一次走完整个链条时使用：弄清真正的问题、产生选项、再做决定：'帮我把这件事想透'、'从原因到决定'、'结构化思考'、'问题、创意、决策'、'我拿不定主意要不要 ...'、'没人知道为什么 ...，而我得向董事会交代'、'先分析，再列选项，最后给建议'、/structured-thinking。三阶段元工作流：分析（think）、构思（brainstorm）、决策（decide）；省略不需要的阶段，并给出附理由的单一结果。只需其中一步时不要使用：纯分析或找原因（think）、纯创意（brainstorm）、在已摆出的选项中选择（decide）、对照项目历史过滤并推进的创意（idea-mining）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/structured-thinking/SKILL.ja.md",
           "title": "Structured Thinking — 分析、発想、意思決定",
-          "description": "メタスキル：3つのフェーズからなるワークフローとしての構造化思考。分析（think）、発想（brainstorm）、意思決定（decide）を1つの連続したプロセスに統合します。"
+          "description": "込み入った、あるいは影響の大きい状況で、本当の問題の理解、選択肢の創出、決定という全工程を一度に通したいときに使います: '一緒にじっくり考えて'、'原因から決定まで'、'構造化思考'、'問題、アイデア、決定'、'... すべきか決められない'、'誰も理由を知らないが取締役会に何か伝えなければならない'、'まず分析し、次に選択肢、最後に推奨'、/structured-thinking。3つのフェーズ（分析 think、発想 brainstorm、決定 decide）から成るメタワークフローで、不要なフェーズは省き、根拠付きの1つの結果を返します。1つの工程だけが求められる場合には使わないでください: 純粋な分析や原因（think）、純粋なアイデア出し（brainstorm）、すでに出揃った選択肢からの選択（decide）、プロジェクト履歴と照合して追求するアイデア（idea-mining）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/structured-thinking/SKILL.ru.md",
           "title": "Structured Thinking — Анализировать, Генерировать идеи, Принимать решения",
-          "description": "Мета-skill: Структурированное мышление как 3-фазный рабочий процесс. Объединяет анализ (think), генерацию идей (brainstorm) и принятие решений (decide) в один непрерывный процесс."
+          "description": "Использовать, когда запутанной или ответственной ситуации нужна вся цепочка за один проход: понять настоящую проблему, породить варианты, затем решить: 'помоги всё продумать', 'от причины до решения', 'структурированное мышление', 'проблема, идеи, решение', 'не могу решить, стоит ли мне ...', 'никто не знает почему ..., а мне нужно что-то сказать совету директоров', 'сначала анализ, потом варианты, потом рекомендация', /structured-thinking. Мета-процесс из трёх фаз: анализ (think), генерация идей (brainstorm), решение (decide); ненужная фаза пропускается, результат выдаётся с обоснованием. НЕ использовать, когда нужен только один шаг: чистый анализ или причины (think), только идеи (brainstorm), выбор из уже имеющихся вариантов (decide) или идеи, которые нужно отфильтровать по истории проекта и довести до конца (idea-mining)."
         }
       ]
     },
@@ -8227,9 +8227,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/think/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics.",
+      "description": "Verwenden, wenn ein Problem außerhalb des Codes verstanden werden muss, bevor entschieden oder geändert wird: Ablauf, Organisation, Produkt, Strategie, Kennzahl oder Systemverhalten auf Geschäftsebene mit mehreren möglichen Ursachen, ein Knäuel, das in Teile zerlegt werden soll, oder eine Lage, die eine SWOT- oder 80/20-Sicht braucht: 'warum passiert ... immer wieder', 'finde die Ursache', 'fünf Warum', 'zerleg das in Teilprobleme', 'wo fange ich an', 'mach kurz eine SWOT', /think. Wendet Divide & Conquer, Ursachenanalyse, Analogiesuche, SWOT, Pareto und Fishbone an und endet mit der gefundenen Ursache bzw. Struktur und dem ersten Prüfpunkt. NICHT verwenden bei Software-Defekten (Fehlermeldungen, fehlschlagende Builds, Tests oder Deploys, Regressionen: bugfix-protocol), um viele Ideen zu erzeugen (brainstorm), zwischen vorliegenden Optionen zu wählen (decide), Ideen gegen die Projekthistorie zu schürfen (idea-mining) oder für die ganze Kette Analyse-Ideen-Entscheidung (structured-thinking).",
       "languages": [
         "de",
         "en",
@@ -8244,37 +8244,37 @@
           "language": "de",
           "path": "skills/utilities/think/SKILL.md",
           "title": "Think — Problemloesung & Analyse",
-          "description": "Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics."
+          "description": "Verwenden, wenn ein Problem außerhalb des Codes verstanden werden muss, bevor entschieden oder geändert wird: Ablauf, Organisation, Produkt, Strategie, Kennzahl oder Systemverhalten auf Geschäftsebene mit mehreren möglichen Ursachen, ein Knäuel, das in Teile zerlegt werden soll, oder eine Lage, die eine SWOT- oder 80/20-Sicht braucht: 'warum passiert ... immer wieder', 'finde die Ursache', 'fünf Warum', 'zerleg das in Teilprobleme', 'wo fange ich an', 'mach kurz eine SWOT', /think. Wendet Divide & Conquer, Ursachenanalyse, Analogiesuche, SWOT, Pareto und Fishbone an und endet mit der gefundenen Ursache bzw. Struktur und dem ersten Prüfpunkt. NICHT verwenden bei Software-Defekten (Fehlermeldungen, fehlschlagende Builds, Tests oder Deploys, Regressionen: bugfix-protocol), um viele Ideen zu erzeugen (brainstorm), zwischen vorliegenden Optionen zu wählen (decide), Ideen gegen die Projekthistorie zu schürfen (idea-mining) oder für die ganze Kette Analyse-Ideen-Entscheidung (structured-thinking)."
         },
         {
           "language": "en",
           "path": "skills/utilities/think/SKILL.en.md",
           "title": "Think — Problem Solving & Analysis (English)",
-          "description": "Problem solving and analysis: Structured thinking processes for complex problems. Divide & Conquer, Root Cause Analysis, SWOT, Pareto, and decision heuristics."
+          "description": "Use when a problem outside the code has to be understood before anything is decided or changed: a process, organisation, product, strategy, metric or business-level system behaviour with several possible causes, a tangle to break into parts, or a situation that needs a SWOT or 80/20 view: 'why does ... keep happening', 'find the root cause', 'five whys', 'split this into sub-problems', 'where do I start', 'quick SWOT', 'what is really going on', /think. Applies Divide & Conquer, Root Cause Analysis, Constraint Relaxation, Analogy Search, SWOT, Pareto and Fishbone, and ends with the cause or structure found and the first thing to check. Do NOT use for software defects (error messages, failing builds, tests or deploys, regressions: bugfix-protocol), to generate many ideas (brainstorm), to choose between given options (decide), to mine ideas against project history (idea-mining) or for the full analyse-ideate-decide chain (structured-thinking)."
         },
         {
           "language": "es",
           "path": "skills/utilities/think/SKILL.es.md",
           "title": "Think — Resolución de problemas y análisis",
-          "description": "Resolución de problemas y análisis: Procesos de pensamiento estructurado para problemas complejos. Divide & Vencerás, Análisis de Causa Raíz, FODA (SWOT), Pareto y heurísticas de decisión."
+          "description": "Usar cuando un problema ajeno al código debe entenderse antes de decidir o cambiar algo: proceso, organización, producto, estrategia, métrica o comportamiento de un sistema a nivel de negocio con varias causas posibles, un nudo que hay que dividir en partes o una situación que necesita un enfoque FODA (SWOT) o 80/20: '¿por qué sigue pasando ...?', 'encuentra la causa raíz', 'cinco porqués', 'divide esto en subproblemas', '¿por dónde empiezo?', 'un FODA rápido', '¿qué está pasando realmente?', /think. Aplica Divide y Vencerás, análisis de causa raíz, búsqueda de analogías, FODA, Pareto e Ishikawa, y termina con la causa o estructura hallada y lo primero que hay que comprobar. NO usar para defectos de software (mensajes de error, builds, pruebas o despliegues fallidos, regresiones: bugfix-protocol), generar muchas ideas (brainstorm), elegir entre opciones dadas (decide), explorar ideas frente al historial del proyecto (idea-mining) ni la cadena completa análisis-ideas-decisión (structured-thinking)."
         },
         {
           "language": "zh",
           "path": "skills/utilities/think/SKILL.zh.md",
           "title": "Think — 问题解决与分析",
-          "description": "问题解决与分析：针对复杂问题的结构化思维过程。分治法（Divide & Conquer）、根本原因分析（Root Cause Analysis）、SWOT、帕累托法则（Pareto）以及决策启发式方法。"
+          "description": "当需要在决策或改动之前先理解代码之外的问题时使用：流程、组织、产品、战略、指标或业务层面的系统行为，原因可能有多种，或是需要拆解成若干部分的一团乱麻，或需要 SWOT / 80-20 视角的局面：'为什么总是反复出现 ...'、'找出根本原因'、'五个为什么'、'拆成子问题'、'我该从哪里入手'、'快速做个 SWOT'、'到底发生了什么'、/think。运用分治法、根本原因分析、放宽约束、类比搜索、SWOT、帕累托和鱼骨图，最后给出找到的原因或结构，以及第一个要检查的点。不要用于：软件缺陷（错误信息、失败的构建、测试或部署、回归：bugfix-protocol）、产生大量创意（brainstorm）、在已有选项中做选择（decide）、对照项目历史挖掘创意（idea-mining），或分析-创意-决策的完整流程（structured-thinking）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/think/SKILL.ja.md",
           "title": "Think — 問題解決と分析",
-          "description": "問題解決と分析：複雑な問題のための構造化思考プロセス。Divide & Conquer（分割統治）、Root Cause Analysis（根本原因分析）、SWOT、Pareto（パレート法則）、および意思決定ヒューリスティクス。"
+          "description": "コード以外の問題を、決めたり変更したりする前にまず理解する必要があるときに使います。業務の流れ、組織、製品、戦略、指標、事業レベルのシステムの挙動など、原因が複数考えられる問題、部分に分解したい込み入った状況、SWOT や 80/20 の視点が必要な場面: 'なぜ ... が繰り返し起きるのか'、'根本原因を探して'、'なぜを5回'、'サブ問題に分けて'、'どこから手を付ければいい'、'簡単に SWOT して'、'実際には何が起きているのか'、/think。分割統治、根本原因分析、制約の緩和、類推探索、SWOT、パレート、特性要因図を使い、見つかった原因または構造と最初に確認すべき点で締めくくります。次の用途には使わないでください: ソフトウェアの欠陥（エラーメッセージ、失敗するビルド・テスト・デプロイ、リグレッション: bugfix-protocol）、多数のアイデア出し（brainstorm）、与えられた選択肢からの選択（decide）、プロジェクト履歴と照合したアイデア発掘（idea-mining）、分析・発想・決定を通した一連の流れ（structured-thinking）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/think/SKILL.ru.md",
           "title": "Think — Решение проблем и анализ",
-          "description": "Решение проблем и анализ: Процессы структурированного мышления для сложных проблем. Разделяй и властвуй (Divide & Conquer), анализ корневых причин (Root Cause Analysis), SWOT, Парето и эвристики принятия решений."
+          "description": "Использовать, когда нужно сначала понять проблему вне кода, прежде чем что-то решать или менять: процесс, организация, продукт, стратегия, метрика или поведение системы на уровне бизнеса с несколькими возможными причинами, клубок, который нужно разложить на части, или ситуация, требующая SWOT или взгляда 80/20: 'почему это постоянно повторяется ...', 'найди первопричину', 'пять почему', 'разбей на подзадачи', 'с чего начать', 'быстрый SWOT', 'что здесь на самом деле происходит', /think. Применяет «разделяй и властвуй», анализ первопричин (Root Cause), ослабление ограничений, поиск аналогий, SWOT, Парето и диаграмму Исикавы и завершается найденной причиной или структурой и первым, что нужно проверить. НЕ использовать для дефектов ПО (сообщения об ошибках, падающие сборки, тесты или деплои, регрессии: bugfix-protocol), генерации множества идей (brainstorm), выбора из имеющихся вариантов (decide), добычи идей с оглядкой на историю проекта (idea-mining) и полной цепочки анализ-идеи-решение (structured-thinking)."
         }
       ]
     },

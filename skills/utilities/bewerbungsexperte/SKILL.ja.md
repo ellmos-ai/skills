@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: 応募プロセス全体のためのスペシャリスト。求人情報を分析し、プロフィール（LinkedIn/CV）を最適化し、カスタマイズされたカバーレターを生成します。SQLite データベースとフォルダ構造から ASCII 形式の履歴書を生成します。cv_generator.py はスタンドアロン移植版です -- BACH ランタイムは不要です。
+updated: 2026-11-06
+description: "就職・転職の応募をするときに使います。求人情報の分析、履歴書と要件の照合、履歴書や LinkedIn プロフィールの改善、カバーレターの作成（履歴書にブランクがある場合も）、職歴データ（SQLite データベース、勤務先・学位・資格のフォルダを内容の情報源として）からのテキスト形式履歴書の生成: '... に応募します'、'この求人に対して私の履歴書をチェックして'、'カバーレターを書いて'、'LinkedIn プロフィールが地味'、'Bewerbung'、'履歴書を生成して'、/bewerbungsexperte。ATS 対応のキーワードマッチング、企業チェック、履歴書の調整、個別のカバーレターを行い、スタンドアロンの cv_generator.py を実行します（BACH ランタイム不要）。次の用途には使わないでください: 2つの内定の比較検討（decide）、完成したカバーレターからの AI 的表現の除去（llm-text-hygiene）、テキスト抽出、OCR、ファイル名の変更や整理といった純粋な文書処理（応募書類であっても）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -121,6 +121,9 @@ Python 標準ライブラリのみ: `sqlite3`, `pathlib`, `argparse`, `re`, `dat
 pip インストール不要、BACH ランタイムのインポート不要。
 
 ## 変更履歴
+
+### 1.2.0 (2026-11-06)
+- 説明文を明確なトリガーと境界づけで書き直し（docs/CONVENTIONS.md の規則）: 使用場面、典型的なユーザーの言い回し、スラッシュコマンドを先頭に置き、隣接スキルを「使わない場合」の節で明示。
 
 ### 1.1.0 (2026-06-22)
 - BACH v1.0.0 からスタンドアロン移植

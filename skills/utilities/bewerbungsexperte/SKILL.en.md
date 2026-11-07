@@ -1,11 +1,11 @@
 ---
 name: bewerbungsexperte
-version: 1.1.0
+version: 1.2.0
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-06-22
-description: Spezialist fuer den gesamten Bewerbungsprozess. Analysiert Stellenanzeigen, optimiert Profile (LinkedIn/CV) und generiert massgeschneiderte Anschreiben. Generiert ASCII-Lebenslaeufe aus einer SQLite-Datenbank und Ordnerstruktur. cv_generator.py ist standalone portiert -- keine BACH-Runtime noetig.
+updated: 2026-11-06
+description: "Use when the user is applying for a job: analysing a job posting, matching a CV against its requirements, sharpening a CV or LinkedIn profile, writing a cover letter (also with gaps in the CV), or generating a plain-text CV from career data (a SQLite database plus employer, degree and certificate folders as sources of content): 'I am applying for ...', 'check my CV against this posting', 'write a cover letter', 'my LinkedIn profile looks weak', 'Bewerbung', 'Anschreiben', 'generate my CV', /bewerbungsexperte. Does ATS-safe keyword matching, a company check, CV tuning and individual cover letters, and runs the standalone cv_generator.py (no BACH runtime needed). Do NOT use to weigh two job offers against each other (decide), to strip AI phrasing from a finished letter (llm-text-hygiene) or for pure document handling such as extracting text, OCR, renaming or sorting files, even when they are application documents."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -124,6 +124,9 @@ Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
 Kein pip-Install noetig, kein BACH-Runtime-Import.
 
 ## ÄNDERUNGSLOG
+
+### 1.2.0 (2026-11-06)
+- Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.
 
 ### 1.1.0 (2026-06-22)
 - Standalone portiert aus BACH v1.0.0

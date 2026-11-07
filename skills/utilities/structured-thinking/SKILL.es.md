@@ -1,11 +1,11 @@
 ---
 name: structured-thinking
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-05-19
-description: "Meta-skill: Pensamiento estructurado como un flujo de trabajo de 3 fases. Combina análisis (think), ideación (brainstorm) y toma de decisiones (decide) en un proceso continuo."
+updated: 2026-11-06
+description: "Usar cuando una situación confusa o de gran impacto necesita toda la cadena en una sola pasada: entender el problema real, generar opciones y luego decidir: 'ayúdame a pensarlo a fondo', 'de la causa a la decisión', 'pensamiento estructurado', 'problema, ideas, decisión', 'no me decido si debo ...', 'nadie sabe por qué ... y tengo que decirle algo a la junta', 'primero analizar, luego opciones, luego recomendar', /structured-thinking. Metaflujo de tres fases: analizar (think), idear (brainstorm) y decidir (decide); omite la fase que no haga falta y entrega un resultado con su justificación. NO usar cuando solo se pide un paso: análisis o causas puras (think), ideas puras (brainstorm), una elección entre opciones ya sobre la mesa (decide) o ideas filtradas frente al historial del proyecto y desarrolladas (idea-mining)."
 
 standalone: true
 anthropic_compatible: true
@@ -190,6 +190,9 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ---
 
 ## Historial de cambios
+
+### 1.1.0 (2026-11-06)
+- Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
 
 ### 1.0.0 (2026-05-19)
 - Creado como meta-skill a partir de think, brainstorm y decide

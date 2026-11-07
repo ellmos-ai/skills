@@ -1,11 +1,11 @@
 ---
 name: structured-thinking
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-05-19
-description: Meta-skill：作为 3 阶段工作流的结构化思维。将分析（think）、构思（brainstorm）和决策（decide）结合为一个连续的过程。
+updated: 2026-11-06
+description: "当一个混乱或影响重大的局面需要一次走完整个链条时使用：弄清真正的问题、产生选项、再做决定：'帮我把这件事想透'、'从原因到决定'、'结构化思考'、'问题、创意、决策'、'我拿不定主意要不要 ...'、'没人知道为什么 ...，而我得向董事会交代'、'先分析，再列选项，最后给建议'、/structured-thinking。三阶段元工作流：分析（think）、构思（brainstorm）、决策（decide）；省略不需要的阶段，并给出附理由的单一结果。只需其中一步时不要使用：纯分析或找原因（think）、纯创意（brainstorm）、在已摆出的选项中选择（decide）、对照项目历史过滤并推进的创意（idea-mining）。"
 
 standalone: true
 anthropic_compatible: true
@@ -190,6 +190,9 @@ NOT IMPORTANT 3. DELEGATE     4. ELIMINATE
 ---
 
 ## 变更日志
+
+### 1.1.0 (2026-11-06)
+- 重写描述，明确触发条件与边界（docs/CONVENTIONS.md 中的规则）：先写使用场景、用户常见说法和斜杠命令，并在“不要用于”条款中点名相邻技能。
 
 ### 1.0.0 (2026-05-19)
 - 作为元 skill 基于 think、brainstorm 和 decide 创建

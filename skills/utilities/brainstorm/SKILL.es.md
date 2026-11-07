@@ -1,11 +1,11 @@
 ---
 name: brainstorm
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Métodos de creatividad estructurada para la generación de ideas: SCAMPER, Seis Sombreros para Pensar, Mapa Mental, Lluvia de Ideas Inversa, TRIZ e Ideación Rápida."
+updated: 2026-11-06
+description: "Usar cuando se quieren muchas ideas nuevas, todavía sin juzgar: nombres, funciones, campañas, conceptos de evento o alternativas a lo habitual: 'brainstorm', 'dame 30 ideas', 'necesito ideas para ...', '¿qué más podríamos probar?', 'se admiten ideas locas', 'solo se nos ocurre lo de siempre', 'haz una pasada SCAMPER', 'Seis Sombreros para Pensar', /brainstorm. Genera un abanico amplio de opciones con SCAMPER, Seis Sombreros, Mapa Mental, Lluvia de Ideas Inversa, TRIZ o Ideación Rápida (primero cantidad, sin críticas al recopilar), las agrupa y preselecciona las mejores. NO usar para hallar la causa de un problema (think), elegir entre opciones dadas (decide), explorar ideas frente al historial del proyecto y llevar una hasta el final (idea-mining) ni la cadena completa análisis-ideas-decisión (structured-thinking)."
 
 standalone: true
 anthropic_compatible: true
@@ -146,6 +146,9 @@ Cantidad sobre calidad — más de 50 ideas en 20 minutos.
 ---
 
 ## Registro de cambios
+
+### 1.1.0 (2026-11-06)
+- Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
 
 ### 1.0.0 (2026-03-15)
 - Adaptado desde BACH v3.8.0

@@ -1,7 +1,7 @@
 ---
 name: idea-mining
 language: en
-description: Mine ideas, filter against history, explore one to completion. A 5-phase workflow (A-E) for complex problem solving.
+description: "Use when a hard problem has been stuck for a while and the user wants new approaches that are checked against what was already tried, with one pursued to the end: research questions, proofs, stubborn architecture or design blockages, periodic innovation rounds on one project: 'we keep going in circles', 'we have been stuck for weeks', 'mine new approaches', 'collect ideas, then filter them against our notes / decision log', 'do not repeat dead ends', 'explore one idea fully', 'innovation round', /idea-mining. Fills IDEENSPEICHER.md with ideas from eight techniques (analogies from other fields, literature search, sibling projects), filters them against the project documentation, picks one, carries it through and documents failures too. Do NOT use for a quick, free list of ideas without filter and follow-up (brainstorm), for choosing between given options (decide), for diagnosing a concrete error (think) or for the plain analyse-ideate-decide chain (structured-thinking)."
 ---
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
@@ -92,6 +92,9 @@ D) BEWEISNOTIZ.md updated (including failure of idea 2), short report.
 - `swarm-operations` — unbiased subagents for technique 3 and parallel exploration.
 
 ## Changelog
+
+### 1.2.0 (2026-11-06)
+- Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.
 
 ### 1.1.0 (2026-07-03)
 - Phase E "Seeding": optional outbound transfer of transferable results to

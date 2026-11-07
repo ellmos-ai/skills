@@ -1,11 +1,11 @@
 ---
 name: brainstorm
-version: 1.0.0
+version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Structured creativity methods for idea generation: SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, and Rapid Ideation."
+updated: 2026-11-06
+description: "Verwenden, wenn viele neue Ideen gewünscht sind, noch ohne Bewertung: Namen, Funktionen, Kampagnen, Veranstaltungskonzepte oder Alternativen zum Üblichen: 'brainstorm', 'gib mir 30 Ideen', 'ich brauche Ideen für ...', 'was könnten wir noch probieren', 'gern wilde Ideen', 'uns fallen nur die üblichen Sachen ein', 'mach einen SCAMPER-Durchgang', 'Six Thinking Hats', /brainstorm. Erzeugt mit SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ oder Rapid Ideation eine breite Auswahl (erst Menge, beim Sammeln keine Kritik), gruppiert sie und trifft eine Vorauswahl. NICHT verwenden, um die Ursache eines Problems zu finden (think), eine von vorliegenden Optionen zu wählen (decide), Ideen gegen die Projekthistorie zu schürfen und eine durchzuziehen (idea-mining) oder für die ganze Kette Analyse-Ideen-Entscheidung (structured-thinking)."
 
 standalone: true
 anthropic_compatible: true
@@ -143,6 +143,9 @@ Quantitaet vor Qualitaet — 50+ Ideen in 20 Min.
 ---
 
 ## Changelog
+
+### 1.1.0 (2026-11-06)
+- Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.
 
 ### 1.0.0 (2026-03-15)
 - Portiert aus BACH v3.8.0

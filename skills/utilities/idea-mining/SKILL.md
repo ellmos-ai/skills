@@ -1,20 +1,11 @@
 ---
 name: idea-mining
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-27
-description: >
-  Ideenschürf-Workflow für festgefahrene, schwere Probleme (Beweise, Forschungsfragen,
-  hartnäckige Design-/Architekturprobleme): einen Ideenspeicher über acht Schürftechniken
-  füllen (Wiedererkennung, Fern-Disziplin-Analogie, Alltags-Allegorie, Störgefühl/Ästhetik,
-  Märchen-Reframing, Web-/Literatur-Recherche, Geschwisterprojekte, Bestandsquerlauf), dann
-  gegen bereits Versuchtes filtern, eine Idee wählen und bis zur Substanz verfolgen. Nutze
-  diesen Skill, wenn ein Problem trotz mehrerer Anläufe feststeckt, wenn „neue Ideen für X"
-  gebraucht werden, bei „wir drehen uns im Kreis", oder für periodische Innovations-Läufe
-  über ein Projekt. Für breites, freies Ideensammeln ohne festgefahrenes Problem stattdessen
-  brainstorm (SCAMPER, Six Hats etc.).
+updated: 2026-11-06
+description: "Verwenden, wenn ein schweres Problem seit längerem feststeckt und neue Ansätze gewünscht sind, die gegen bereits Versuchtes geprüft werden und von denen einer bis zum Ende verfolgt wird: Forschungsfragen, Beweise, hartnäckige Architektur- oder Designblockaden, Innovationsrunden für ein Projekt: 'wir drehen uns im Kreis', 'wir hängen seit Wochen fest', 'schürf neue Ansätze', 'sammle Ideen und filtere sie gegen unsere Notizen bzw. das Decision-Log', 'keine Sackgassen wiederholen', 'Innovationsrunde', /idea-mining. Füllt IDEENSPEICHER.md mit Ideen aus acht Schürftechniken (u. a. Fachgebiets-Analogien, Literatur, Geschwisterprojekte), filtert sie gegen die Projektdokumentation, wählt eine aus, führt sie durch und dokumentiert auch Fehlschläge. NICHT verwenden für eine schnelle, freie Ideenliste ohne Filter und Weiterverfolgung (brainstorm), die Wahl zwischen vorliegenden Optionen (decide), die Diagnose eines konkreten Fehlers (think) oder die schlichte Kette Analyse-Ideen-Entscheidung (structured-thinking)."
 
 standalone: true
 anthropic_compatible: true
@@ -177,6 +168,9 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
 ## Änderungsprotokoll
+
+### 1.2.0 (2026-11-06)
+- Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.
 
 ### 1.1.0 (2026-07-03)
 - Phase E „Aussaat": optionaler Outbound-Transfer übertragbarer Ergebnisse in

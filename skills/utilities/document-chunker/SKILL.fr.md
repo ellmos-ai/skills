@@ -1,11 +1,11 @@
 ---
 name: document-chunker
-version: 1.0.0
+version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour document-chunker: Split documents into overlapping token chunks for RAG pipelines and LLM context windows. Zero dependencies."
+updated: 2026-11-06
+description: "À utiliser lorsqu'un texte doit être découpé en morceaux tenant dans une limite : préparer des documents pour le RAG, les embeddings ou une base vectorielle, ou texte qui dépasse la fenêtre de contexte ou la limite de tokens d'un modèle : 'découpe ça en chunks', 'prépare la doc pour le RAG', 'mon modèle d'embedding n'accepte que 512 tokens', 'le contexte déborde', 'morceaux qui se chevauchent', 'chaque morceau doit avoir un chunk_id et une source', /document-chunker. Découpe des fichiers .txt, .md, .py et .sh ou des dossiers entiers en chunks de tokens avec chevauchement, numéro et étiquette de source, afin que rien ne se perde aux jonctions (bibliothèque standard Python uniquement, sans dépendances). NE PAS utiliser pour résumer un document (aucun skill requis), nettoyer les résidus d'IA d'un texte (llm-text-hygiene), convertir des PDF ou scans en texte ni créer un CV (bewerbungsexperte)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -75,6 +75,9 @@ python document_chunker.py ./docs/        # Entire directory
 `.txt`, `.md`, `.py`, `.sh`
 
 ## Journal des Modifications
+
+### 1.1.0 (2026-11-06)
+- Description réécrite avec un déclencheur clair et une délimitation (règle de docs/CONVENTIONS.md) : situation d'usage, formulations typiques et commande slash en tête, skills voisins cités dans une clause NE PAS utiliser.
 
 ### 1.0.0 (2026-03-12)
 - Ported from BACH system/tools/document_chunker.py

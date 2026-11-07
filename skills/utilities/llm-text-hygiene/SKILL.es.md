@@ -1,7 +1,7 @@
 ---
 name: llm-text-hygiene
 language: es
-description: Eliminar artefactos de IA, residuos de chat, marcadores de posición y patrones de estilo LLM de textos finales, y auditar divulgaciones de IA.
+description: "Usar cuando un texto terminado (artículo, tesis, README, boletín, documentación, versiones en varios idiomas) va a publicarse o subirse y aún puede llevar huellas de cómo se hizo: restos de chat ('como comentamos', 'Aquí tienes la versión revisada'), marcadores (TODO, '[insertar referencia]', '<insertar ejemplo>'), agradecimientos a ChatGPT y similares, marcas típicas de estilo LLM ('delve', 'es importante destacar') o una declaración de uso de IA ausente o que ya no es cierta: 'revisa antes de subirlo', 'quita los restos de IA', '¿quedan marcadores?', '¿coincide la declaración de IA?', 'deja ambas versiones de idioma igual', /llm-text-hygiene. Escanea, limpia con cautela los casos claros en todas las versiones de idioma, corrige la declaración y solo enumera los hallazgos de estilo; nunca cambia el contenido ni reescribe la voz del autor. NO usar para escribir texto nuevo (solicitudes de empleo: bewerbungsexperte), reparar codificación o tildes rotas ni elegir entre opciones (decide)."
 ---
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
@@ -109,6 +109,9 @@ Solicitud: "Comprueba el artículo en busca de residuos de IA antes de subirlo."
   (ver Banderas Rojas y Flujo de trabajo).
 
 ## Registro de cambios
+
+### 1.2.0 (2026-11-06)
+- Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
 
 ### 1.1.0 (2026-09-27)
 - Se añadió `pasta-press` (repositorio público `ellmos-ai/pasta-press`) como herramienta

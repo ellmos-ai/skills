@@ -1,6 +1,6 @@
 ---
 language: fr
-description: Retirer les artefacts d'IA, les résidus de conversation, les espaces réservés et les tics de style LLM des textes finalisés, et auditer les mentions de divulgation d'IA.
+description: "À utiliser lorsqu'un texte terminé (article, mémoire, README, newsletter, documentation, versions en plusieurs langues) va être publié ou déposé et peut encore porter des traces de sa fabrication : résidus de conversation ('comme convenu', 'Voici la version révisée'), espaces réservés (TODO, '[insérer référence]'), remerciements à ChatGPT et consorts, marqueurs de style LLM typiques ('delve', 'il est important de souligner') ou déclaration d'usage de l'IA absente ou devenue inexacte : 'vérifie avant le dépôt', 'retire les restes d'IA', 'reste-t-il des espaces réservés', 'la déclaration d'IA est-elle exacte', /llm-text-hygiene. Analyse, nettoie prudemment les cas évidents dans toutes les versions linguistiques, corrige la déclaration et se borne à lister les constats de style ; ne change jamais le fond ni la voix de l'auteur. NE PAS utiliser pour rédiger un texte neuf (candidatures : bewerbungsexperte), réparer un encodage ou des accents cassés ni choisir entre des options (decide)."
 ---
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
@@ -106,6 +106,9 @@ Demande : « Vérifie l'article avant le dépôt pour d'éventuels résidus d'IA
   elle-même le style (voir Signaux d'alerte et Déroulement).
 
 ## Journal des modifications
+
+### 1.2.0 (2026-11-06)
+- Description réécrite avec un déclencheur clair et une délimitation (règle de docs/CONVENTIONS.md) : situation d'usage, formulations typiques et commande slash en tête, skills voisins cités dans une clause NE PAS utiliser.
 
 ### 1.1.0 (2026-09-27)
 - Ajout de `pasta-press` (dépôt public `ellmos-ai/pasta-press`) comme outil optionnel
