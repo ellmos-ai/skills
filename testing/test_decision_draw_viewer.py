@@ -373,6 +373,52 @@ def test_sensitive_marker_is_a_boolean_in_runtime_and_schema(draft):
         assert not validator.is_valid(data)
 
 
+def mocked_tkinter():
+    """tkinter replaced by mocks: no Tk object and no window are ever created."""
+    from unittest.mock import MagicMock
+    tk, ttk, messagebox = MagicMock(), MagicMock(), MagicMock()
+    tk.messagebox, tk.ttk = messagebox, ttk
+    tk.Canvas.return_value.winfo_width.return_value = 900
+    tk.Canvas.return_value.yview.return_value = (0.0, 1.0)
+    root = MagicMock()
+    root.winfo_screenwidth.return_value, root.winfo_screenheight.return_value = 1920, 1080
+    return {"tkinter": tk, "tkinter.ttk": ttk, "tkinter.messagebox": messagebox}, root, messagebox
+
+
+def test_gui_wiring_submit_asks_first_and_only_yes_submits_with_mocked_tkinter(draft):
+    from unittest.mock import patch
+    path, data, _ = draft
+    ids = {node["id"] for node in viewer.nodes(data)}
+    modules, root, messagebox = mocked_tkinter()
+    with patch.dict(sys.modules, modules):
+        window = viewer.DecisionWindow(root, path)
+        assert window.seen == ids and window.expanded == ids
+        for variable in window.variables.values():
+            variable.get.return_value = True
+        messagebox.askyesno.return_value = False
+        window.on_submit()
+        assert path.exists() and window.data["state"] == "draft" and messagebox.askyesno.call_count == 1
+        assert messagebox.askyesno.call_args.kwargs["default"] == "no"
+        assert "unverändert vorausgewählt" in messagebox.askyesno.call_args.args[1]
+        messagebox.askyesno.return_value = True
+        window.on_submit()
+        assert window.data["state"] == "submitted" and not path.exists()
+
+
+def test_gui_wiring_refuses_unanswered_branches_before_asking_with_mocked_tkinter(draft):
+    from unittest.mock import patch
+    path, _, _ = with_preselect(draft, "none")
+    modules, root, messagebox = mocked_tkinter()
+    with patch.dict(sys.modules, modules):
+        window = viewer.DecisionWindow(root, path)
+        assert all(item["accept"] is None for item in window.choices.values())
+        for variable in window.variables.values():
+            variable.get.return_value = ""  # nothing clicked
+        window.on_submit()
+        assert not messagebox.askyesno.called and messagebox.showerror.called
+        assert path.exists() and window.data["state"] == "draft"
+
+
 @pytest.mark.skipif(os.environ.get("TM_NATIVE_UI_TEST") != "1", reason="Opt-in native desktop smoke")
 def test_native_tree_comment_submit_copy_undo_and_foreign_update(draft):
     import tkinter as tk
