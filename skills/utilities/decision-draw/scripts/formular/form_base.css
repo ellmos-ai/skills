@@ -1,0 +1,14 @@
+:root{--bg:#fdfdfb;--fg:#1d1f21;--muted:#5b6168;--line:#d9dcdf;--accent:#1f5fae;--code:#f1f2f4;--head:#eef2f7}
+@media (prefers-color-scheme: dark){:root{--bg:#16181b;--fg:#e6e8ea;--muted:#a3a9b0;--line:#33383e;--accent:#7fb2ff;--code:#22262b;--head:#1f242b}}
+html{background:var(--bg)}body{background:var(--bg);color:var(--fg);font:16px/1.6 "Segoe UI",system-ui,sans-serif;max-width:60rem;margin:0 auto;padding:1.5rem 16px 4rem}
+h1,h2,h3,h4{line-height:1.25;margin-top:2em}h1{font-size:1.9rem;margin-top:.5em}h2{border-bottom:1px solid var(--line);padding-bottom:.3em}
+a{color:var(--accent)}code{background:var(--code);padding:.1em .3em;border-radius:4px;font-size:.92em;word-break:break-word}
+hr{border:0;border-top:2px solid var(--line);margin:2.5em 0}
+.kontext-kurz{font-size:1.05rem;margin:.2rem 0 1rem}.so-antwortest-du{margin:.4rem 0 .8rem;padding-left:1.3rem}
+.item .kontext{margin:.3rem 0}.item .frage{font-weight:600;margin:.5rem 0}
+.item .wirkung{display:block;color:var(--muted);font-size:.93em}
+.fakten{display:grid;grid-template-columns:max-content 1fr;gap:.15rem .9rem;margin:.6rem 0;font-size:.95em}.fakten dt{color:var(--muted)}.fakten dd{margin:0}
+details.mehr{margin:.5rem 0}details.mehr summary{cursor:pointer;color:var(--accent)}
+.bilder{display:flex;flex-wrap:wrap;gap:.8rem;margin:.6rem 0}.bilder figure{margin:0;flex:1 1 14rem;max-width:100%}
+.bilder img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:6px;display:block}.bilder figcaption{font-size:.9em;color:var(--muted);margin-top:.25rem}
+.item.question{outline:2px dashed var(--accent);outline-offset:3px}

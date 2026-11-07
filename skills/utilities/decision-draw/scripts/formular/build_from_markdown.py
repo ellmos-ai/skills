@@ -186,7 +186,7 @@ def build(md_path):
     css = (HERE / "formular.css").read_text(encoding="utf-8")
     js = (HERE / "formular.js").read_text(encoding="utf-8")
     data = {"schema": SCHEMA, "document_id": DOC_ID, "doc_sha256": ZERO, "answer_name": f"{DOC_ID}.antwort.json",
-            "answered_name": f"{DOC_ID}_BEANTWORTET.html", "items": items}
+            "answered_name": f"{DOC_ID}_BEANTWORTET.html", "zielordner": ".USR\\entscheidungen", "items": items}
     data_json = json.dumps(data, ensure_ascii=False, indent=1).replace("</", "<\\/")
     page = ('<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
             f'<meta name="document-id" content="{DOC_ID}">\n<meta name="document-sha256" content="{ZERO}">\n<meta name="color-scheme" content="light dark">\n'
@@ -235,6 +235,9 @@ def validate_answers(obj, items, expected_sha=None):
         if a["state"] == "answered":
             if a["choice"] not in valid or a["choice_label"] != valid[a["choice"]]:
                 err.append(f"{k}: choice/choice_label passt nicht zu den Optionen")
+        elif a["state"] == "question":
+            if a["choice"] != "rueckfrage":
+                err.append(f"{k}: Rueckfrage, aber choice ist nicht 'rueckfrage'")
         elif a["state"] == "open":
             if a["choice"] is not None:
                 err.append(f"{k}: offen, aber choice gesetzt")
@@ -245,7 +248,11 @@ def validate_answers(obj, items, expected_sha=None):
         if not isinstance(a["note"], str):
             err.append(f"{k}: note")
     n_ans = sum(1 for a in obj["answers"].values() if a.get("state") == "answered")
-    if obj["counts"] != {"total": len(items), "answered": n_ans, "open": len(items) - n_ans}:
+    n_q = sum(1 for a in obj["answers"].values() if a.get("state") == "question")
+    expected = {"total": len(items), "answered": n_ans, "open": len(items) - n_ans}
+    if "questions" in obj["counts"]:  # Schema v1, erweitert um die Wahl Rueckfrage
+        expected = {"total": len(items), "answered": n_ans, "questions": n_q, "open": len(items) - n_ans - n_q}
+    if obj["counts"] != expected:
         err.append("counts")
     if not isinstance(obj["gesamtabnahme"].get("explicit"), bool) or not isinstance(obj["bulk_actions"], dict):
         err.append("gesamtabnahme/bulk_actions")

@@ -5,6 +5,7 @@
   ITEMS.forEach(function (it) { BYID[it.id] = it; });
   var LSKEY = 'ticket-master.decisions.' + DATA.document_id + '.' + DATA.doc_sha256.slice(0, 16);
   var st = { choice: {}, note: {}, via: {}, agpl: { choice: null, note: '' }, bulk: {}, gesamt: { explicit: false, at: null }, restored: null };
+  var RQ = 'rueckfrage'; /* eigene Wahl je Posten: Rueckfrage / mehr Info noetig; die Anmerkung gilt dann als Frage */
   var answered = false; /* wird in init() gesetzt: das eingebettete Antwort-Skript steht im beantworteten Dokument NACH diesem Skript */
   var restoreHint = false; /* true, wenn ein wiederhergestellter Stand eine Gesamtabnahme trug, die bewusst NICHT uebernommen wurde */
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -14,8 +15,10 @@
   function lsSet() { try { st.savedLocal = new Date().toISOString(); localStorage.setItem(LSKEY, JSON.stringify(st)); } catch (e) { /* Seite funktioniert auch ohne */ } }
   function lsClear() { try { localStorage.removeItem(LSKEY); } catch (e) { /* ignorieren */ } }
 
-  function label(it, k) { var o = it.options.filter(function (x) { return x.k === k; })[0]; return o ? o.l : ''; }
-  function nAnswered() { return ITEMS.filter(function (it) { return st.choice[it.id]; }).length; }
+  function label(it, k) { if (k === RQ) return 'Rückfrage / mehr Info nötig'; var o = it.options.filter(function (x) { return x.k === k; })[0]; return o ? o.l : ''; }
+  function nAnswered() { return ITEMS.filter(function (it) { return st.choice[it.id] && st.choice[it.id] !== RQ; }).length; }
+  function nQuestions() { return ITEMS.filter(function (it) { return st.choice[it.id] === RQ; }).length; }
+  function hasVorab() { return !!document.getElementById('item-AGPL'); } /* nur das Referenzdokument vom 2026-11-07 hat die Vorab-Frage */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   function render() {
@@ -24,21 +27,22 @@
       if (!card) return;
       $$('input[type=radio]', card).forEach(function (r) { r.checked = (st.choice[it.id] === r.value); });
       var ta = $('textarea', card); if (ta && ta.value !== (st.note[it.id] || '')) ta.value = st.note[it.id] || '';
-      card.classList.toggle('done', !!st.choice[it.id]);
+      card.classList.toggle('done', !!st.choice[it.id] && st.choice[it.id] !== RQ);
+      card.classList.toggle('question', st.choice[it.id] === RQ);
       var v = $('.via', card); if (v) v.textContent = st.choice[it.id] ? (st.via[it.id] === 'bulk' ? 'per Massenaktion gesetzt' : 'von dir gewählt') : '';
     });
     $$('input[name=agpl]').forEach(function (r) { r.checked = (st.agpl.choice === r.value); });
     var at = $('#agpl-note'); if (at && at.value !== st.agpl.note) at.value = st.agpl.note;
-    var n = nAnswered();
-    $$('.js-progress').forEach(function (e) { e.textContent = n + ' von ' + ITEMS.length + ' beantwortet'; });
+    var n = nAnswered(), q = nQuestions();
+    $$('.js-progress').forEach(function (e) { e.textContent = n + ' von ' + ITEMS.length + ' beantwortet' + (q ? ', ' + q + (q === 1 ? ' Rückfrage' : ' Rückfragen') : ''); });
     $$('.js-bar').forEach(function (e) { e.style.width = Math.round(100 * n / ITEMS.length) + '%'; });
     var seen = {};
-    ITEMS.forEach(function (it) { var b = it.bundle; seen[b] = seen[b] || { n: 0, d: 0 }; seen[b].n++; if (st.choice[it.id]) seen[b].d++; });
+    ITEMS.forEach(function (it) { var b = it.bundle; seen[b] = seen[b] || { n: 0, d: 0 }; seen[b].n++; if (st.choice[it.id] && st.choice[it.id] !== RQ) seen[b].d++; });
     Object.keys(seen).forEach(function (b) { var e = document.getElementById('bcount-' + b); if (e) e.textContent = seen[b].d + ' von ' + seen[b].n + ' beantwortet'; });
     var g = $('#gesamt-state');
     if (g) g.textContent = st.gesamt.explicit ? 'Gesamtabnahme: ausdrücklich ja (' + (st.gesamt.at || '').replace('T', ' ').slice(0, 16) + ' UTC)' : 'Gesamtabnahme: nicht erklärt';
     var onlyOpen = document.body.classList.contains('only-open');
-    ITEMS.forEach(function (it) { var c = document.getElementById('item-' + it.id); if (c) c.hidden = onlyOpen && !!st.choice[it.id]; });
+    ITEMS.forEach(function (it) { var c = document.getElementById('item-' + it.id); if (c) c.hidden = onlyOpen && !!st.choice[it.id] && st.choice[it.id] !== RQ; });
     $$('.bundle-form').forEach(function (bf) { var vis = $$('.item', bf).some(function (c) { return !c.hidden; }); bf.classList.toggle('empty', onlyOpen && !vis); });
     var r = $('#restore-note'); if (r) { r.hidden = !st.restored; if (st.restored) $('#restore-text').textContent = 'Zwischenstand vom ' + st.restored.replace('T', ' ').slice(0, 16) + ' UTC wiederhergestellt.' + (restoreHint ? ' Die frühere Gesamtabnahme wurde nicht übernommen: Sie muss erneut ausdrücklich bestätigt werden (Alles wie empfohlen).' : ''); }
   }
@@ -79,7 +83,7 @@
       st.bulk['bundle-' + (scope === 'all' ? 'alle' : scope)] = true;
       var msg = n + ' Posten gesetzt.';
       if (scope === 'all') {
-        var allRec = ITEMS.every(function (it) { return !it.rec || st.choice[it.id] === it.rec; });
+        var allRec = nQuestions() === 0 && ITEMS.every(function (it) { return !it.rec || st.choice[it.id] === it.rec; });
         st.gesamt.explicit = allRec; st.gesamt.at = allRec ? new Date().toISOString() : null;
         if (!allRec) msg += ' Keine Gesamtabnahme: ' + deviates.length + ' bereits beantwortete Posten weichen von der Empfehlung ab.';
       }
@@ -91,18 +95,19 @@
   function buildAnswers() {
     var ans = {};
     ITEMS.forEach(function (it) {
-      ans[it.id] = { choice: st.choice[it.id] || null, choice_label: st.choice[it.id] ? label(it, st.choice[it.id]) : null, state: st.choice[it.id] ? 'answered' : 'open', note: st.note[it.id] || '', via: st.choice[it.id] ? (st.via[it.id] || 'single') : null,
+      ans[it.id] = { choice: st.choice[it.id] || null, choice_label: st.choice[it.id] ? label(it, st.choice[it.id]) : null, state: st.choice[it.id] === RQ ? 'question' : (st.choice[it.id] ? 'answered' : 'open'), note: st.note[it.id] || '', via: st.choice[it.id] ? (st.via[it.id] || 'single') : null,
         recommended: it.rec || null, avatar_prediction: it.av_pred || null, avatar_confidence: it.av_conf || null, marked: !!it.marked };
     });
-    return { schema: DATA.schema, document_id: DATA.document_id, document_sha256: DATA.doc_sha256, saved_at: new Date().toISOString(),
-      answers: ans, agpl_bleibt: { choice: st.agpl.choice, note: st.agpl.note, state: st.agpl.choice ? 'answered' : 'open' },
-      bulk_actions: st.bulk, gesamtabnahme: { explicit: !!st.gesamt.explicit, at: st.gesamt.at },
-      counts: { total: ITEMS.length, answered: nAnswered(), open: ITEMS.length - nAnswered() } };
+    var out = { schema: DATA.schema, document_id: DATA.document_id, document_sha256: DATA.doc_sha256, saved_at: new Date().toISOString(),
+      answers: ans, bulk_actions: st.bulk, gesamtabnahme: { explicit: !!st.gesamt.explicit, at: st.gesamt.at },
+      counts: { total: ITEMS.length, answered: nAnswered(), questions: nQuestions(), open: ITEMS.length - nAnswered() - nQuestions() } };
+    if (hasVorab()) out.agpl_bleibt = { choice: st.agpl.choice, note: st.agpl.note, state: st.agpl.choice ? 'answered' : 'open' };
+    return out;
   }
   function summaryHtml(a) {
     var rows = ITEMS.map(function (it) { var x = a.answers[it.id];
-      return '<tr><td>' + esc(it.id) + '</td><td>' + esc(it.question) + '</td><td>' + (x.choice ? esc(x.choice) + ': ' + esc(x.choice_label) : '<i>offen</i>') + '</td><td>' + esc(x.note) + '</td></tr>'; }).join('');
-    return '<section id="ergebnis"><h2>Deine Entscheidungen (gespeichert ' + esc(a.saved_at.replace('T', ' ').slice(0, 16)) + ' UTC)</h2><p>' + a.counts.answered + ' von ' + a.counts.total + ' beantwortet, ' + a.counts.open + ' offen. Gesamtabnahme: ' + (a.gesamtabnahme.explicit ? 'ausdrücklich ja' : 'nicht erklärt') + '. AGPL bleibt: ' + esc(a.agpl_bleibt.choice || 'offen') + (a.agpl_bleibt.note ? ' (' + esc(a.agpl_bleibt.note) + ')' : '') + '.</p><table><thead><tr><th>Kürzel</th><th>Frage</th><th>Entscheidung</th><th>Anmerkung</th></tr></thead><tbody>' + rows + '</tbody></table></section>';
+      return '<tr><td>' + esc(it.id) + '</td><td>' + esc(it.question) + '</td><td>' + (x.state === 'question' ? '<i>Rückfrage</i>' : (x.choice ? esc(x.choice) + ': ' + esc(x.choice_label) : '<i>offen</i>')) + '</td><td>' + esc(x.note) + '</td></tr>'; }).join('');
+    return '<section id="ergebnis"><h2>Deine Entscheidungen (gespeichert ' + esc(a.saved_at.replace('T', ' ').slice(0, 16)) + ' UTC)</h2><p>' + a.counts.answered + ' von ' + a.counts.total + ' beantwortet, ' + (a.counts.questions ? a.counts.questions + ' Rückfrage(n), ' : '') + a.counts.open + ' offen. Gesamtabnahme: ' + (a.gesamtabnahme.explicit ? 'ausdrücklich ja' : 'nicht erklärt') + '.' + (a.agpl_bleibt ? ' AGPL bleibt: ' + esc(a.agpl_bleibt.choice || 'offen') + (a.agpl_bleibt.note ? ' (' + esc(a.agpl_bleibt.note) + ')' : '') + '.' : '') + '</p><table><thead><tr><th>Kürzel</th><th>Frage</th><th>Entscheidung</th><th>Anmerkung</th></tr></thead><tbody>' + rows + '</tbody></table></section>';
   }
   function buildAnsweredHtml(a) {
     var clone = document.documentElement.cloneNode(true);
@@ -165,14 +170,16 @@
   function listMarked() { return ITEMS.filter(function (it) { return it.marked; }); }
   async function saveAndSend() {
     var open = ITEMS.filter(function (it) { return !st.choice[it.id]; });
+    var qs = ITEMS.filter(function (it) { return st.choice[it.id] === RQ; });
     var marked = listMarked();
     var body = '<p>' + nAnswered() + ' von ' + ITEMS.length + ' beantwortet.</p>';
     if (open.length) body += '<p class="warn"><b>' + open.length + ' unbeantwortet:</b> ' + open.map(function (m) { return esc(m.id); }).join(', ') + '. Sie werden als <b>offen</b> gespeichert und nicht still ersetzt.</p>';
-    if (!st.agpl.choice) body += '<p class="warn">„AGPL bleibt“ ist noch offen.</p>';
+    if (qs.length) body += '<p class="warn"><b>' + qs.length + (qs.length === 1 ? ' Rückfrage' : ' Rückfragen') + ':</b> ' + qs.map(function (m) { return esc(m.id); }).join(', ') + '. Sie werden als <b>Rückfrage</b> gespeichert; deine Anmerkung gilt als Frage, nicht als Entscheidung.' + (qs.filter(function (m) { return !(st.note[m.id] || '').trim(); }).length ? ' Ohne Text in der Anmerkung: ' + qs.filter(function (m) { return !(st.note[m.id] || '').trim(); }).map(function (m) { return esc(m.id); }).join(', ') + '.' : '') + '</p>';
+    if (hasVorab() && !st.agpl.choice) body += '<p class="warn">„AGPL bleibt“ ist noch offen.</p>';
     if (marked.length) body += '<p><b>Markierte Posten (rot, Löschung, Geld, Außenwirkung, Lizenz) noch einmal:</b></p><ul>' + marked.map(function (m) { return '<li><b>' + esc(m.id) + '</b> ' + esc(m.theme) + ': ' + (st.choice[m.id] ? esc(st.choice[m.id]) + ' (' + esc(label(m, st.choice[m.id])) + ')' + (st.via[m.id] === 'bulk' ? ', per Massenaktion' : '') : '<i>offen</i>') + ' <span class="muted">[' + esc(m.marked_reason) + ']</span></li>'; }).join('') + '</ul>';
     body += '<p>' + (st.gesamt.explicit ? 'Gesamtabnahme: <b>ausdrücklich ja</b>.' : 'Gesamtabnahme: nicht erklärt (Teilantwort).') + '</p>';
-    body += '<p class="muted">Gleich öffnet dein Browser eine Ordnerwahl. Gewünscht ist <code>.USR\\entscheidungen</code>. Lässt Edge diesen Ordner nicht zu oder brichst du ab, geht nichts verloren: Die Download-Links und der Text bleiben unten stehen.</p>';
-    var r = await ask('Speichern und abschicken?', body, [{ id: 'back', label: 'Zurück zum Bearbeiten' }, { id: 'save', label: open.length ? 'Offene bleiben offen, speichern' : 'Speichern', primary: true }]);
+    body += '<p class="muted">Gleich öffnet dein Browser eine Ordnerwahl.' + (DATA.zielordner ? ' Gewünscht ist <code>' + esc(DATA.zielordner) + '</code>.' : '') + ' Lässt dein Browser den Ordner nicht zu oder brichst du ab, geht nichts verloren: Die Download-Links und der Text bleiben unten stehen.</p>';
+    var r = await ask('Speichern und abschicken?', body, [{ id: 'back', label: 'Zurück zum Bearbeiten' }, { id: 'save', label: open.length ? 'Offene bleiben offen, speichern' : (qs.length ? 'Mit Rückfragen speichern' : 'Speichern'), primary: true }]);
     if (r.id !== 'save') return;
     var m = makeFiles();
     if (m.fatal) { fail('Die Antwort konnte nicht zusammengestellt werden', m.fatal); return; }
@@ -249,7 +256,7 @@
   function applyAnswered() {
     var a = JSON.parse(document.getElementById('embedded-answers').textContent);
     ITEMS.forEach(function (it) { var x = a.answers[it.id]; if (x && x.choice) { st.choice[it.id] = x.choice; st.via[it.id] = x.via || 'single'; } st.note[it.id] = x ? x.note : ''; });
-    st.agpl = { choice: a.agpl_bleibt.choice, note: a.agpl_bleibt.note }; st.gesamt = a.gesamtabnahme;
+    if (a.agpl_bleibt) st.agpl = { choice: a.agpl_bleibt.choice, note: a.agpl_bleibt.note }; st.gesamt = a.gesamtabnahme;
     document.body.classList.add('answered');
     $$('input,textarea,button').forEach(function (e) { if (!e.classList.contains('keep')) e.disabled = true; });
     $$('.actions,.sticky-bar,.filter,#restore-note,#backup').forEach(function (e) { e.hidden = true; });
