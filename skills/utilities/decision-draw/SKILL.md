@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-18
+updated: 2026-11-07
 description: >
   Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden,
   prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten.
@@ -55,11 +55,28 @@ behalten die unten beschriebene Isolierung unberührter Posten.
 Vor jeder externen Buchung muss der Consumer den Dateistand atomar beanspruchen;
 der einzige Registerweg bleibt `decision-briefing` Phase 4.
 
+> **Status:** Der Tk-Viewer ist nativ **nicht abgenommen**: Der Tk-Pfad wurde nie ausgeführt, die Tests laufen headless mit Attrappen. Der Nutzerin oder dem Nutzer ihn nur nach deren ausdrücklicher Zustimmung öffnen; bis dahin das HTML-Formular verwenden (Abschnitt „Entscheidungsvorlage als Formular“).
+
 > Wenn fünf oder zehn Entscheidungen anstehen, verliert man im Klein-Klein der
 > Optionen leicht den Blick für das entstehende System. decision-draw beschreibt
 > nicht die Alternativen, sondern das funktionierende Ganze: Wie arbeiten die
 > Systeme zusammen, wenn alle Empfehlungen angenommen werden? Der Nutzer nimmt
 > das Bild als Ganzes ab oder korrigiert gezielt.
+
+---
+
+## Entscheidungsvorlage als Formular (Bauanleitung)
+
+Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_formular.py` aus dem fertigen Markdown-Dokument **ein selbstenthaltenes HTML-Formular**. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
+
+Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
+
+1. Nichts vorausgewählt (oder ausdrücklich als vorausgewählt gekennzeichnet).
+2. Gesamtabnahme nur nach ausdrücklichem „Ja“ im Dokument-Dialog; bei der Wiederherstellung eines Zwischenstands nie übernehmen.
+3. Sensible Posten (rot, Geld, Löschung, Außenwirkung, Lizenz) vor dem Speichern auflisten.
+4. UI-Tests nur headless, nie über sichtbare Browser oder die Playwright-MCP-Werkzeuge (ein sichtbarer Testbrowser hat das Formular einmal selbst ausgefüllt).
+5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
+6. Buchung nur über `decision-briefing` Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
 
 ---
 
@@ -318,6 +335,11 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ---
 
 ## Changelog
+
+### 1.2.0 (2026-11-07)
+- Bauanleitung „Entscheidungsvorlage als Formular“ (Abschnitt oben und `references/formular.md`) mit Referenzimplementierung `scripts/formular/` (Generator, Skript, Stil, Selbsttest, Headless-Hilfen) und Antwortschema `ticket-master.decision-answers.v1`; Pflichtregeln aus dem Vorfall vom 2026-11-07.
+- Statusvermerk: Der Tk-Viewer ist nativ nicht abgenommen; bis zur ausdrücklichen Zustimmung das HTML-Formular verwenden.
+- `references/viewer.md` korrigiert: Die Prüfung der Rücknahme-Herkunft bei `preselect: none` schützt vor versehentlicher Vorbelegung, nicht vor absichtlicher Dateimanipulation. `history` ins `draw.schema.json` aufgenommen.
 
 ### 1.1.0 (2026-09-18)
 - Stilregel für nutzergerechte Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):

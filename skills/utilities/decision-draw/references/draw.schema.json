@@ -167,6 +167,34 @@
         "$ref": "#/$defs/choice"
       },
       "$comment": "Runtime additionally requires exact equality of these keys with all nodes[].id, including descendants."
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "event"
+        ],
+        "properties": {
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "at": {
+            "type": "string"
+          },
+          "submission_id": {
+            "type": "string"
+          },
+          "submission_sha256": {
+            "type": "string"
+          },
+          "source_sha256": {
+            "type": "string"
+          }
+        }
+      },
+      "$comment": "Written by the viewer when a submission is withdrawn (event 'withdrawn'). Not signed: with preselect=none it only protects against accidental pre-filling, not against deliberate file manipulation (revision 2 plus a hand-written 'withdrawn' entry passes)."
     }
   },
   "$defs": {

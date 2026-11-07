@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.0.1
+version: 1.0.2
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-11-07
 description: >
   Condenses bundled pending decisions into ONE cohesive, prose-based overall
   concept assuming all recommended choices are adopted. Shows how subsystems
@@ -50,11 +50,28 @@ only explicit Submit confirms all visible selections and comments. Ordinary
 partial corrections retain the isolation rules below. Claim the file atomically
 before any external effect; canonical booking remains decision-briefing Phase 4.
 
+> **Status:** The Tk viewer is **not accepted natively**: the Tk path has never been executed, and its tests run headless with mocks. Open it for a user only after their explicit consent; until then use the HTML form (section "Decision document as a form").
+
 > When five or ten decisions are pending, one easily gets lost in the weeds of
 > isolated options and loses sight of the emerging system. decision-draw does not
 > describe the alternatives; it paints the working whole: How do the systems
 > cooperate once all recommendations are in place? The user signs off on the picture
 > as a whole or provides targeted feedback.
+
+---
+
+## Decision document as a form (build guide)
+
+So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_formular.py` turns the finished Markdown document into **one self-contained HTML form**. The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
+
+Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
+
+1. Nothing preselected (or explicitly marked as preselected).
+2. An overall sign-off only after an explicit "yes" in the in-document dialog; never adopt it when restoring a saved draft.
+3. List sensitive items (red, money, deletion, external effect, licence) before saving.
+4. UI tests headless only, never through a visible browser or the Playwright MCP tools (a visible test browser once filled in the form by itself).
+5. Deliver only after an independent check by another instance.
+6. Book only through decision-briefing Phase 4; comparing with a sealed avatar forecast is optional.
 
 ---
 
@@ -292,6 +309,9 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 ---
 
 ## Changelog
+
+### 1.0.2 (2026-11-07)
+- Added the build guide "Decision document as a form" with the reference implementation `scripts/formular/` and the mandatory rules from the incident of 2026-11-07; added the status note for the Tk viewer (not accepted natively). The German `SKILL.md` is at 1.2.0 and also carries the style rules of 1.1.0, which this English file does not have yet.
 
 ### 1.0.1 (2026-09-13)
 - Rework following independent review:

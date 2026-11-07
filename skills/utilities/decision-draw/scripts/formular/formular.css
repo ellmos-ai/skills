@@ -1,0 +1,34 @@
+:root{--ok:#1d7a3c;--warn:#a15c00;--bad:#b3261e;--card:#fff;--chip:#eef2f7;--btn:#1f5fae;--btnfg:#fff}
+@media (prefers-color-scheme: dark){:root{--ok:#6fd08c;--warn:#f0b35a;--bad:#ff8a80;--card:#1c2025;--chip:#262b32;--btn:#7fb2ff;--btnfg:#10151c}}
+body{padding-bottom:6rem;overflow-wrap:break-word}
+tab{display:inline;white-space:normal}/* "<Tab>" steht im Quelltext der Messung als Wort; ohne diese Regel haelt der Browser es fuer ein Element und der Text laeuft ueber den Rand */
+.panel,.bundle-form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin:1.2rem 0}
+.bundle-form>h3{margin-top:0}.bundle-form.empty{display:none}
+.row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+button,.dl{font:inherit;border:1px solid var(--line);background:var(--chip);color:var(--fg);padding:.55rem .9rem;border-radius:8px;cursor:pointer;min-height:44px}
+button.primary,.primary{background:var(--btn);color:var(--btnfg);border-color:var(--btn);font-weight:600}
+button:disabled{opacity:.5;cursor:not-allowed}
+.bar{height:10px;background:var(--chip);border-radius:6px;overflow:hidden;margin:.5rem 0}.bar>i{display:block;height:100%;background:var(--btn);width:0}
+.muted{color:var(--muted)}.warn{color:var(--warn)}.ok{color:var(--ok)}
+fieldset.item{border:1px solid var(--line);border-radius:8px;margin:.9rem 0;padding:.7rem .9rem;background:var(--bg)}
+fieldset.item.done{border-left:5px solid var(--ok)}fieldset.item[data-marked="1"]{border-left:5px solid var(--warn)}fieldset.item.done[data-marked="1"]{border-left-color:var(--ok);border-style:solid}
+legend{font-weight:600;padding:0 .4rem}.kid{display:inline-block;min-width:2.6rem;text-align:center;background:var(--btn);color:var(--btnfg);border-radius:6px;padding:0 .4rem;margin-right:.4rem}
+.badges{display:flex;flex-wrap:wrap;gap:.35rem;margin:.2rem 0 .5rem}
+.badge{font-size:.85rem;padding:.1rem .55rem;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+.badge.rec{border-color:var(--ok);color:var(--ok)}.badge.rot{border-color:var(--bad);color:var(--bad)}.badge.gelb{border-color:var(--warn);color:var(--warn)}.badge.gruen{border-color:var(--ok);color:var(--ok)}.badge.sens{border-color:var(--warn);color:var(--warn)}
+.opts{display:grid;gap:.4rem}
+label.opt{display:flex;gap:.6rem;align-items:flex-start;padding:.55rem .6rem;border:1px solid var(--line);border-radius:8px;cursor:pointer;min-height:44px}
+label.opt:has(input:checked){border-color:var(--btn);background:var(--chip)}
+label.opt input{margin-top:.3rem;width:1.2rem;height:1.2rem}label.opt .recmark{margin-left:auto;font-size:.8rem;color:var(--ok);white-space:nowrap}
+textarea{width:100%;box-sizing:border-box;min-height:3.2rem;margin-top:.5rem;font:inherit;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:.45rem}
+.via{font-size:.85rem;color:var(--muted);margin-left:.5rem}
+.sticky-bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:.55rem 16px;display:flex;gap:.6rem;align-items:center;z-index:5}
+.sticky-bar .grow{flex:1;min-width:0}.sticky-bar .bar{margin:.2rem 0 0}
+dialog{max-width:min(40rem,94vw);border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--fg);padding:1.1rem}dialog::backdrop{background:rgba(0,0,0,.5)}
+#dlg-buttons{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:flex-end;margin-top:1rem}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:5.5rem;background:var(--fg);color:var(--bg);padding:.6rem 1rem;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;max-width:90vw}#toast.show{opacity:1}
+#save-state.ok{border:1px solid var(--ok);border-radius:8px;padding:.6rem .8rem;margin-top:.6rem}
+.answered .primary,.answered .js-save{display:none}.answered #ergebnis{border:2px solid var(--ok);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+.nav a{margin-right:.8rem;white-space:nowrap}
+@media (max-width:560px){.sticky-bar button{padding:.5rem .6rem}.sticky-bar .txt{display:none}}
+@media print{.sticky-bar,.actions,dialog,#toast{display:none!important}}

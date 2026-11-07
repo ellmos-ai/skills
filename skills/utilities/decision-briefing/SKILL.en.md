@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-09-09
+updated: 2026-11-07
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -148,6 +148,23 @@ DECISION: <question>
 
 ---
 
+## Briefing as a form (build guide)
+
+Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing as Markdown, the generator `scripts/formular/build_formular.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form**; the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only.
+
+Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
+
+1. Nothing preselected (or explicitly marked as preselected).
+2. An overall sign-off only after an explicit "yes" in the in-document dialog; never adopt it when restoring a saved draft.
+3. List sensitive items (red, money, deletion, external effect, licence) before saving.
+4. UI tests headless only, never through a visible browser or the Playwright MCP tools (a visible test browser once filled in the form by itself).
+5. Deliver only after an independent check by another instance.
+6. Book only through Phase 4; comparing with a sealed avatar forecast is optional.
+
+The Tk viewer of decision-draw is not accepted natively; open it only after the user's explicit consent.
+
+---
+
 ## Example & Usage
 
 Topic: relaunch of a club website — 3 open decisions from the project plan.
@@ -229,6 +246,9 @@ the artifact ends with exactly one line:
 ---
 
 ## Changelog
+
+### 1.2.0 (2026-11-07)
+- Added the section "Briefing as a form (build guide)": a clickable HTML form instead of letters in the chat, pointing to the reference implementation and the guide in `decision-draw` (`references/formular.md`, `scripts/formular/`), and the mandatory rules from the incident of 2026-11-07. Booking stays Phase 4 only. The German `SKILL.md` is at 1.3.0 and also carries the style rules of its 1.2.0, which this English file does not have yet.
 
 ### 1.1.0 (2026-09-09)
 - P-018 adds session provenance for important newly generated briefings, reports, handoffs, and
