@@ -75,7 +75,7 @@
         },
         "sensitiv": {"type": "boolean", "description": "Red, money, deletion, external effect, licence or rights of third parties: listed again before saving."},
         "sensitiv_grund": {"type": "string", "maxLength": 100},
-        "details_markdown": {"type": "string", "maxLength": 4000, "description": "Only collapsible. Escaped before conversion; only http:, https:, mailto:, #, / and ./ links are allowed (the emitted value is the checked one); control characters and images are refused."},
+        "details_markdown": {"type": "string", "maxLength": 4000, "description": "Only collapsible. Escaped before conversion; only http:, https:, mailto:, #, / and ./ links are allowed, with a single leading / (// and /\\ network paths are refused); the emitted value is the checked one; control characters and images are refused."},
         "bilder": {
           "type": "array",
           "maxItems": 12,

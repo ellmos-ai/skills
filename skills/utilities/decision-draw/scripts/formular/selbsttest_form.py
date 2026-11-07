@@ -315,7 +315,7 @@ class DatenSicherheit(unittest.TestCase):
 
     def test_f1_emitted_href_is_exactly_the_checked_value(self):
         d = load()
-        post(d, "V4")["details_markdown"] = "[a](https://exa&#9;mple.org/x)"  # ein Tab per Entity: geprueft UND ausgegeben ohne Tab
+        post(d, "V4")["details_markdown"] = "[a](https://exa mple.org/x)"  # Markdown laesst das Leerzeichen stehen: geprueft UND ausgegeben ohne
         page, _, _ = bf.build(d, HERE)
         more = page.split('<details class="mehr">')[1].split("</details>")[0]
         self.assertEqual(re.findall(r'href="([^"]*)"', more), ["https://example.org/x"])

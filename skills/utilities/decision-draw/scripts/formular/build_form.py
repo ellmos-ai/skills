@@ -163,20 +163,17 @@ def _image(errs, where, img, base_dir, sizes):
 
 CONTROL_RX = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]")
 URL_NOISE_RX = re.compile(r"[\x00-\x20\x7f-\x9f]")  # was ein Browser in einer URL ignoriert: Leerraum und Steuerzeichen
-LINK_OK_RX = re.compile(r"^(?:https?:|mailto:|#|/|\./)", re.I)
+# Genau EIN fuehrender '/' ist ein Pfad. '//host' und '/\host' (auch als %2F/%5C) waeren in einer file://-Seite ein UNC-Pfad:
+# Windows kontaktiert den Host (SMB, NTLM-Anmeldeversuch).
+LINK_OK_RX = re.compile(r"^(?:https?:|mailto:|#|\./|/(?![/\\]|%2f|%5c))", re.I)
 URL_ATTR_RX = re.compile(r'(\b(?:href|src|action|formaction|xlink:href|srcset|poster|background|data)\s*=\s*)"([^"]*)"', re.I)
 
 
 def clean_url(raw):
-    """Wie ein Browser lesen, dann pruefen: Entities aufloesen, Leerraum und Steuerzeichen entfernen (java<LF>script:,
-    <0x01>javascript:), kleinschreiben. Der geprueft Wert ist EXAKT der ausgegebene (T-20261107, F1 der Pruefung von #98)."""
-    value = raw
-    for _ in range(5):
-        decoded = H.unescape(value)
-        if decoded == value:
-            break
-        value = decoded
-    return URL_NOISE_RX.sub("", value)
+    """Wie ein Browser lesen, dann pruefen: Entities EINMAL aufloesen (ein Attributwert wird nur einmal decodiert; der Markdown-Text war
+    schon escaped, ein getipptes '&copy=2' kommt als '&amp;copy=2' an und bleibt '&copy=2'), Leerraum und Steuerzeichen entfernen
+    (java<LF>script:, <0x01>javascript:). Der geprueft Wert ist EXAKT der ausgegebene (F1 der Pruefung von #98)."""
+    return URL_NOISE_RX.sub("", H.unescape(raw))
 
 
 def render_details(md_text, where, errs):
