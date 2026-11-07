@@ -12,6 +12,7 @@ import copy
 import json
 import re
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 from unittest import mock
 
@@ -200,6 +201,35 @@ class Daten(unittest.TestCase):
         self.assertTrue(bf.validate_answers(d, ITEMS))
 
 
+class Elements(HTMLParser):
+    """Liest HTML mit dem Parser statt mit Regex (Gross-/Kleinschreibung und Endtags wie `</script\\t>` erledigt der Parser).
+
+    `starts` = (Tag, {Attribut: Wert}) aller Starttags AUSSERHALB von script/style, `scripts` = Zahl der script-Elemente."""
+
+    def __init__(self, html: str):
+        super().__init__(convert_charrefs=True)
+        self.starts: list[tuple[str, dict[str, str]]] = []
+        self.scripts = 0
+        self._raw = 0
+        self.feed(html)
+        self.close()
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "script":
+            self.scripts += 1
+        if tag in ("script", "style"):
+            self._raw += 1
+        elif not self._raw:
+            self.starts.append((tag, {k: v or "" for k, v in attrs}))
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style") and self._raw:
+            self._raw -= 1
+
+    def urls(self) -> list[str]:
+        return [v for _, attrs in self.starts for k, v in attrs.items() if k in ("href", "src")]
+
+
 class DatenSicherheit(unittest.TestCase):
     """Befunde F1 bis F7 der mechanischen Pruefung von skills#98 (s1): jede Nutzlast aus dem Befund, ohne FORMULAR_MD."""
 
@@ -261,11 +291,25 @@ class DatenSicherheit(unittest.TestCase):
 
     def test_f1_every_href_and_src_of_the_page_is_on_the_allow_list(self):
         allowed = re.compile(r"^(?:https?:|mailto:|#|/|\./|data:image/(?:png|jpeg|webp|gif);base64,)")
-        body = re.sub(r"<script.*?</script>", "", PAGE, flags=re.S)
-        values = re.findall(r'(?:href|src)="([^"]*)"', body)
+        values = Elements(PAGE).urls()
         self.assertTrue(values)
         for value in values:
             self.assertRegex(value, allowed)
+
+    def test_f1_the_page_check_reads_any_spelling_of_tags_and_attributes(self):
+        # Negativkontrolle des Pruefwerkzeugs: eine Regex nur fuer Kleinschreibung uebersaehe genau diese Formen (CodeQL: Bad HTML filtering regexp).
+        probe = Elements('<SCRIPT>x</SCRIPT><ScRiPt >y</script\t><A HREF="javascript:1">a</A><IMG SRC=" data:text/html,z" onerror=q>'
+                         '<STYLE>a{}</STYLE><SCRIPT><a href="javascript:inside"></SCRIPT>')
+        self.assertEqual(probe.scripts, 3)
+        self.assertEqual(probe.urls(), ["javascript:1", " data:text/html,z"], "Inhalt von script/style zaehlt nicht, die Gross-Schreibung schon")
+        self.assertIn("onerror", dict(probe.starts)["img"])
+
+    def test_f2_the_form_has_exactly_the_two_expected_script_elements(self):
+        d = load()
+        post(d, "V1")["titel"] = "<!--<script>"
+        post(d, "V1")["frage"] = "</SCRIPT><ScRiPt >window.__x=1</script\t>"
+        page, _, _ = bf.build(d, HERE)
+        self.assertEqual(Elements(page).scripts, 2, "Daten und Programm; kein weiteres Skript durch Nutzertext")
 
     # --- F2: '<' in Datenfeldern darf das Skript-Parsing nie kippen ------------------------------------------------
     def test_f2_no_less_than_sign_inside_the_embedded_data(self):
