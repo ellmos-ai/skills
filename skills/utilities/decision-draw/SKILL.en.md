@@ -62,7 +62,7 @@ before any external effect; canonical booking remains decision-briefing Phase 4.
 
 ## Decision document as a form (build guide)
 
-So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_formular.py` turns the finished Markdown document into **one self-contained HTML form**. The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
+So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_form.py` turns a small data JSON (`form.schema.json`, example `example_form.json`) into **one self-contained HTML form**. The form is not rebuilt each time: write the data, run `build_form.py`. Per item a short context (250 characters), one sentence of effect per option, a recommendation with one reason and the mandatory fields cost/effort, risk/reversibility and consequence of "no"; anything longer only collapsible; every item also has the choice "question / more info needed". The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
 
 Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
@@ -73,6 +73,7 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 5. Deliver only after an independent check by another instance.
 6. Book only through decision-briefing Phase 4; comparing with a sealed avatar forecast is optional.
 7. Saving never depends on a dialog (rule 9 of the guide): download links, text to copy and "save draft" are in place before the folder dialog opens and stay after every abort or error; "saved" only after the files are completely written.
+8. Short and decision-relevant (post template with limits and mandatory fields, anything longer only collapsible); the choice "question / more info needed" is never consent and blocks the overall sign-off.
 
 ---
 
@@ -312,6 +313,7 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 ## Changelog
 
 ### 1.0.2 (2026-11-07)
+- Template instead of a document generator: `scripts/formular/build_form.py <data.json>` with `formular.html`, `form.schema.json` and `example_form.json`. Post template with length limits (errors, no silent truncation) and mandatory fields cost/effort, risk/reversibility, consequence of "no"; the choice "question / more info needed" (answer schema extended by `state: question` and `counts.questions`); optional `bilder[]` embedded as `data:` URIs. The former generator is `build_from_markdown.py` (migration example); the rule 9 tests run as a shared mixin on both.
 - Rule 9 "saving never depends on a dialog" (incident of 2026-11-07: after the folder dialog was aborted the form offered nothing more): the reference form now has download links per file (nothing starts by itself), text to copy, "save draft", honest success and error messages and no `startIn`; tests `HeadlessSave` (headless, simulated failures) and `SaveArea`.
 - Added the build guide "Decision document as a form" with the reference implementation `scripts/formular/` and the mandatory rules from the incident of 2026-11-07; added the status note for the Tk viewer (not accepted natively). The German `SKILL.md` is at 1.2.0 and also carries the style rules of 1.1.0, which this English file does not have yet.
 

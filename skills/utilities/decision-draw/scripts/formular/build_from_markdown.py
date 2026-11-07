@@ -7,7 +7,7 @@ es kommen nur Formularelemente hinzu. Aus den Tabellen des Dokuments werden gele
   - Anhang Messung, Teil 1 (Frage, Optionen, Avatar-Wahl, Konfidenz) und Teil 2 (Empfehlung des Schreibers).
 Es werden weder die versiegelte Messdatei noch Register oder Tickets gelesen oder geschrieben.
 
-Aufruf:  python build_formular.py --md <ENTSCHEIDUNGEN_2026-11-07.md> --out <ENTSCHEIDUNGEN_2026-11-07_FORMULAR.html>
+Aufruf:  python build_from_markdown.py --md <ENTSCHEIDUNGEN_2026-11-07.md> --out <ENTSCHEIDUNGEN_2026-11-07_FORMULAR.html>
 Hash:    document_sha256 = SHA-256 der Datei mit 64 Nullen an Stelle des Hashs (ohne Antworten, unveraendert).
 """
 import argparse

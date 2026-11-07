@@ -1,4 +1,4 @@
-"""Tests fuer build_formular.py (Standardbibliothek + markdown): python -m unittest selbsttest_markdown -v
+"""Tests fuer build_from_markdown.py (Standardbibliothek + markdown; Beispielmigration): python -m unittest selbsttest_markdown -v
 
 Pruefen: reproduzierbarer Hash, Posten/Optionen/Empfehlung/Avatar gegen das Quelldokument (und, falls lesbar, gegen die versiegelte
 Messdatei, nur lesend), nichts vorausgewaehlt, kein Netz, Text des Dokuments unveraendert, Schema der Antwortdatei und Roundtrip

@@ -67,7 +67,7 @@ der einzige Registerweg bleibt `decision-briefing` Phase 4.
 
 ## Entscheidungsvorlage als Formular (Bauanleitung)
 
-Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_formular.py` aus dem fertigen Markdown-Dokument **ein selbstenthaltenes HTML-Formular**. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
+Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
 
 Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
@@ -78,6 +78,7 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
 6. Buchung nur über `decision-briefing` Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
 7. Speichern hängt nie von einem Dialog ab (Regel 9 der Anleitung): Download-Links, Text zum Kopieren und „Zwischenstand sichern“ stehen schon vor dem Ordnerdialog bereit und bleiben nach jedem Abbruch oder Fehler stehen; „gespeichert“ erst nach vollständigem Schreiben.
+8. Kurz und entscheidungsrelevant (Postenvorlage mit Grenzen und Pflichtfeldern, Längeres nur aufklappbar); die Wahl „Rückfrage / mehr Info nötig“ ist nie eine Zustimmung und blockiert die Gesamtabnahme.
 
 ---
 
@@ -338,6 +339,7 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ## Changelog
 
 ### 1.2.0 (2026-11-07)
+- Template statt Dokumentgenerator: `scripts/formular/build_form.py <daten.json>` mit `formular.html`, `form.schema.json` und `example_form.json`. Postenvorlage mit Längengrenzen (Fehler statt stillem Kürzen) und Pflichtfeldern Kosten/Aufwand, Risiko/rückgängig, Folge bei „Nein“; Wahl „Rückfrage / mehr Info nötig“ (Antwortschema um `state: question` und `counts.questions` erweitert); optionale `bilder[]` als eingebettete `data:`-URIs. Der frühere Generator ist `build_from_markdown.py` (Beispielmigration), die Regel-9-Tests laufen als gemeinsamer Mixin an beiden.
 - Bauanleitung „Entscheidungsvorlage als Formular“ (Abschnitt oben und `references/formular.md`) mit Referenzimplementierung `scripts/formular/` (Generator, Skript, Stil, Selbsttest, Headless-Hilfen) und Antwortschema `ticket-master.decision-answers.v1`; Pflichtregeln aus dem Vorfall vom 2026-11-07.
 - Statusvermerk: Der Tk-Viewer ist nativ nicht abgenommen; bis zur ausdrücklichen Zustimmung das HTML-Formular verwenden.
 - Regel 9 „Speichern hängt nie von einem Dialog ab“ (Vorfall vom 2026-11-07: Nach dem Abbruch der Ordnerwahl bot das Formular nichts mehr an): Das Referenzformular hat jetzt Download-Links je Datei (nichts startet von allein), Text zum Kopieren, „Zwischenstand sichern“, ehrliche Erfolgs- und Fehlermeldungen, kein `startIn`; Tests `HeadlessSave` (headless, simulierte Ausfälle) und `SaveArea`.

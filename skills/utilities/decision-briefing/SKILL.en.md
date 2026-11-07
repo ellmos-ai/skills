@@ -150,7 +150,7 @@ DECISION: <question>
 
 ## Briefing as a form (build guide)
 
-Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing as Markdown, the generator `scripts/formular/build_formular.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form**; the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only.
+Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing data (a small JSON, format `form.schema.json`), the generator `scripts/formular/build_form.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form** (not rebuilt each time; per item a short context, cost/effort, risk/reversibility, consequence of "no", anything longer only collapsible; plus the choice "question / more info needed"); the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only.
 
 Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
@@ -161,6 +161,7 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 5. Deliver only after an independent check by another instance.
 6. Book only through Phase 4; comparing with a sealed avatar forecast is optional.
 7. Saving never depends on a dialog (rule 9 of the guide): download links, text to copy and "save draft" are in place before the folder dialog opens and stay after every abort or error; "saved" only after the files are completely written.
+8. Short and decision-relevant (post template with limits and mandatory fields, anything longer only collapsible); the choice "question / more info needed" is never consent and blocks the overall sign-off.
 
 The Tk viewer of decision-draw is not accepted natively; open it only after the user's explicit consent.
 
@@ -249,6 +250,7 @@ the artifact ends with exactly one line:
 ## Changelog
 
 ### 1.2.0 (2026-11-07)
+- Form from data instead of a document generator (`build_form.py` in `decision-draw`): short post template with cost/effort, risk/reversibility, consequence of "no", and the choice "question / more info needed".
 - Added rule 9 "saving never depends on a dialog" (download links, text to copy, draft backup, honest success message); the reference implementation and its tests live in `decision-draw`.
 - Added the section "Briefing as a form (build guide)": a clickable HTML form instead of letters in the chat, pointing to the reference implementation and the guide in `decision-draw` (`references/formular.md`, `scripts/formular/`), and the mandatory rules from the incident of 2026-11-07. Booking stays Phase 4 only. The German `SKILL.md` is at 1.3.0 and also carries the style rules of its 1.2.0, which this English file does not have yet.
 
