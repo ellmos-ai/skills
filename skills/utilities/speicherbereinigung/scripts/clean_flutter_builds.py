@@ -62,10 +62,59 @@ def dir_size(path):
     return total
 
 
+# IO_REPARSE_TAG_MOUNT_POINT (Junction) und IO_REPARSE_TAG_SYMLINK. Andere Reparse-Punkte wie
+# OneDrive-Platzhalter sind normale Ordner und werden weiter geleert.
+LINK_TAGS = (0xA0000003, 0xA000000C)
+
+
+def is_link(path):
+    """Junction oder Symlink: ein Verweis, dessen Ziel nie mitgeloescht werden darf."""
+    try:
+        st = os.lstat(path)
+        return bool(st.st_file_attributes & 0x400) and st.st_reparse_tag in LINK_TAGS  # REPARSE_POINT
+    except (OSError, AttributeError):
+        return os.path.islink(path)
+
+
+def drop_links(path):
+    """Entfernt jede Junction und jeden Verzeichnis-Symlink im Baum nur als Link.
+
+    False, wenn einer stehen bleibt oder ein Teilbaum nicht lesbar war: Dann darf robocopy /PURGE
+    nicht laufen, denn es leert das Ziel jedes verbliebenen Links, auch mit /XJ (gemessen 2026-11-07)."""
+    ok = True
+
+    def unreadable(_err):
+        nonlocal ok
+        ok = False
+
+    top = os.path.abspath(path)
+    if os.name == "nt" and not top.startswith("\\\\"):
+        top = "\\\\?\\" + top  # erreicht wie robocopy auch Long-Path-Reste, an denen rmtree scheiterte
+    for dp, dirs, _files in os.walk(top, onerror=unreadable):
+        for name in list(dirs):
+            full = os.path.join(dp, name)
+            if is_link(full):
+                dirs.remove(name)  # nie hineinlaufen
+                try:
+                    os.rmdir(full)  # entfernt nur den Link, nie das Ziel
+                except OSError:
+                    ok = False
+    return ok
+
+
 def purge_dir(path):
     """Long-path-sichere Loeschung: robocopy spiegelt ein leeres Verzeichnis -> /PURGE leert,
-    danach wird die leere Huelle entfernt."""
-    if not os.path.isdir(path):
+    danach wird die leere Huelle entfernt.
+
+    Links werden nie verfolgt: Ist `path` selbst ein Link, faellt nur der Link. Im Baum entfernt
+    drop_links() vorher jeden Link als Link; bleibt einer, unterbleibt die Loeschung (fail-closed)."""
+    if is_link(path):
+        try:
+            os.rmdir(path)
+        except OSError:
+            pass
+        return
+    if not os.path.isdir(path) or not drop_links(path):
         return
     empty = tempfile.mkdtemp(prefix="__empty_mirror_")
     try:
