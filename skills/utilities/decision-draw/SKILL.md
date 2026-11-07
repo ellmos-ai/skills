@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.1.0
+version: 1.2.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-18
+updated: 2026-11-07
 description: >
   Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden,
   prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten.
@@ -55,11 +55,30 @@ behalten die unten beschriebene Isolierung unberührter Posten.
 Vor jeder externen Buchung muss der Consumer den Dateistand atomar beanspruchen;
 der einzige Registerweg bleibt `decision-briefing` Phase 4.
 
+> **Status:** Der Tk-Viewer ist nativ **nicht abgenommen**: Der Tk-Pfad wurde nie ausgeführt, die Tests laufen headless mit Attrappen. Der Nutzerin oder dem Nutzer ihn nur nach deren ausdrücklicher Zustimmung öffnen; bis dahin das HTML-Formular verwenden (Abschnitt „Entscheidungsvorlage als Formular“).
+
 > Wenn fünf oder zehn Entscheidungen anstehen, verliert man im Klein-Klein der
 > Optionen leicht den Blick für das entstehende System. decision-draw beschreibt
 > nicht die Alternativen, sondern das funktionierende Ganze: Wie arbeiten die
 > Systeme zusammen, wenn alle Empfehlungen angenommen werden? Der Nutzer nimmt
 > das Bild als Ganzes ab oder korrigiert gezielt.
+
+---
+
+## Entscheidungsvorlage als Formular (Bauanleitung)
+
+Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
+
+Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
+
+1. Nichts vorausgewählt (oder ausdrücklich als vorausgewählt gekennzeichnet).
+2. Gesamtabnahme nur nach ausdrücklichem „Ja“ im Dokument-Dialog; bei der Wiederherstellung eines Zwischenstands nie übernehmen.
+3. Sensible Posten (rot, Geld, Löschung, Außenwirkung, Lizenz) vor dem Speichern auflisten.
+4. UI-Tests nur headless, nie über sichtbare Browser oder die Playwright-MCP-Werkzeuge (ein sichtbarer Testbrowser hat das Formular einmal selbst ausgefüllt).
+5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
+6. Buchung nur über `decision-briefing` Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
+7. Speichern hängt nie von einem Dialog ab (Regel 9 der Anleitung): Download-Links, Text zum Kopieren und „Zwischenstand sichern“ stehen schon vor dem Ordnerdialog bereit und bleiben nach jedem Abbruch oder Fehler stehen; „gespeichert“ erst nach vollständigem Schreiben.
+8. Kurz und entscheidungsrelevant (Postenvorlage mit Grenzen und Pflichtfeldern, Längeres nur aufklappbar); die Wahl „Rückfrage / mehr Info nötig“ ist nie eine Zustimmung und blockiert die Gesamtabnahme.
 
 ---
 
@@ -318,6 +337,13 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ---
 
 ## Changelog
+
+### 1.2.0 (2026-11-07)
+- Template statt Dokumentgenerator: `scripts/formular/build_form.py <daten.json>` mit `formular.html`, `form.schema.json` und `example_form.json`. Postenvorlage mit Längengrenzen (Fehler statt stillem Kürzen) und Pflichtfeldern Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Wahl „Rückfrage / mehr Info nötig“ (Antwortschema um `state: question` und `counts.questions` erweitert); optionale `bilder[]` als eingebettete `data:`-URIs. Der frühere Generator ist `build_from_markdown.py` (Beispielmigration), die Regel-9-Tests laufen als gemeinsamer Mixin an beiden.
+- Bauanleitung „Entscheidungsvorlage als Formular“ (Abschnitt oben und `references/formular.md`) mit Referenzimplementierung `scripts/formular/` (Generator, Skript, Stil, Selbsttest, Headless-Hilfen) und Antwortschema `ticket-master.decision-answers.v1`; Pflichtregeln aus dem Vorfall vom 2026-11-07.
+- Statusvermerk: Der Tk-Viewer ist nativ nicht abgenommen; bis zur ausdrücklichen Zustimmung das HTML-Formular verwenden.
+- Regel 9 „Speichern hängt nie von einem Dialog ab“ (Vorfall vom 2026-11-07: Nach dem Abbruch der Ordnerwahl bot das Formular nichts mehr an): Das Referenzformular hat jetzt Download-Links je Datei (nichts startet von allein), Text zum Kopieren, „Zwischenstand sichern“, ehrliche Erfolgs- und Fehlermeldungen, kein `startIn`; Tests `HeadlessSave` (headless, simulierte Ausfälle) und `SaveArea`.
+- `references/viewer.md` korrigiert: Die Prüfung der Rücknahme-Herkunft bei `preselect: none` schützt vor versehentlicher Vorbelegung, nicht vor absichtlicher Dateimanipulation. `history` ins `draw.schema.json` aufgenommen.
 
 ### 1.1.0 (2026-09-18)
 - Stilregel für nutzergerechte Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):

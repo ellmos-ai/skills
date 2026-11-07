@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="document-id" content="{{DOC_ID}}">
+<meta name="document-sha256" content="{{HASH}}">
+<meta name="color-scheme" content="light dark">
+<title>{{TITLE}} – Formular</title>
+<style>
+{{BASE_CSS}}</style>
+<style>
+{{CSS}}</style>
+</head>
+<body>
+<h1>{{TITLE}}</h1>
+<p class="kontext-kurz">{{KONTEXT}}</p>
+<section class="panel" id="top-panel"><h2 id="antwortbogen">Antwortbogen</h2>
+<ol class="so-antwortest-du">
+<li>Klicke bei jedem Posten eine Option an. Nichts ist vorausgewählt.</li>
+<li>Unklar? Wähle „Rückfrage / mehr Info nötig“ und schreib deine Frage in die Anmerkung.</li>
+<li>Am Ende „Speichern und abschicken“. Dieses Formular schreibt nichts in Register oder Tickets.</li>
+</ol>
+<div class="row"><b class="js-progress">0 von {{N}} beantwortet</b><label class="filter"><input type="checkbox" id="only-open"> nur unbeantwortete zeigen</label></div>
+<div class="bar"><i class="js-bar"></i></div><p class="nav">Antworten: {{NAV}}</p>
+<div class="row actions"><button type="button" class="primary" data-bulk="all">Alles wie empfohlen</button>
+<button type="button" class="primary js-save">Speichern und abschicken</button></div>
+<p id="gesamt-state" class="muted">Gesamtabnahme: nicht erklärt</p>
+<div id="restore-note" class="warn" hidden><span id="restore-text"></span> <button type="button" id="restore-reset">Zwischenstand verwerfen</button></div>
+<div id="backup"><p class="muted">{{BACKUP_HINT}}</p>
+<div class="row actions"><button type="button" id="btn-download">Als Datei herunterladen</button>
+<button type="button" id="btn-copy">Antwort als Text kopieren</button><button type="button" id="btn-draft">Zwischenstand sichern</button></div>
+<div id="save-state" role="status" aria-live="polite"></div><div id="save-links"></div>
+<details id="answer-box"><summary>Antwort als Text (JSON)</summary><p class="muted">Kopiere den Text in eine Datei oder schick ihn weiter.</p>
+<textarea id="answer-text" readonly rows="8" aria-label="Antwort als Text (JSON)"></textarea></details></div></section>
+{{BUNDLES}}
+<div class="sticky-bar"><div class="grow"><span class="js-progress">0 von {{N}} beantwortet</span><div class="bar"><i class="js-bar"></i></div></div>
+<button type="button" class="primary js-save">Speichern und abschicken</button></div>
+<dialog id="dlg" aria-labelledby="dlg-title"><h3 id="dlg-title" style="margin-top:0"></h3><div id="dlg-body"></div><div id="dlg-buttons"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="application/json" id="form-data">
+{{FORM_DATA}}
+</script>
+<script>
+{{JS}}</script>
+</body>
+</html>
