@@ -1,0 +1,76 @@
+{
+  "schema": "ellmos.decision-form.v1",
+  "dokument_id": "BEISPIEL_2026-01-01",
+  "titel": "Beispiel: drei Entscheidungen zur Vereinswebsite",
+  "kontext_kurz": "Die Vereinswebsite wird neu aufgesetzt. Drei Entscheidungen stehen an. Je Posten steht kurz, worum es geht, was jede Option bewirkt und was die Empfehlung begründet.",
+  "buendel": [
+    {
+      "id": "relaunch",
+      "titel": "Relaunch der Website",
+      "posten": [
+        {
+          "kuerzel": "V1",
+          "titel": "Hosting wechseln",
+          "kontext": "Die Website läuft bei einem Anbieter, dessen Tarif im Frühjahr ausläuft. Es gibt einen günstigeren Anbieter mit deutschem Rechenzentrum.",
+          "frage": "Soll die Website zum neuen Anbieter umziehen?",
+          "optionen": [
+            {"id": "A", "label": "Ja, umziehen", "wirkung": "Die Seite zieht in dieser Woche um, die alte Adresse bleibt erreichbar."},
+            {"id": "B", "label": "Nein, beim alten Anbieter bleiben", "wirkung": "Nichts ändert sich, der Tarif wird zum neuen Preis verlängert."}
+          ],
+          "empfehlung": {"option": "A", "grund": "Der neue Tarif ist günstiger und der Umzug lässt sich zurückdrehen."},
+          "kosten_aufwand": "Einmalig etwa zwei Stunden Aufwand, danach 40 Euro weniger im Jahr.",
+          "risiko_rueckgaengig": "Gering: Die alte Seite bleibt vier Wochen als Rückfall bestehen.",
+          "frist": "Der alte Tarif läuft am 31. März aus.",
+          "folge_bei_nein": "Der alte Tarif verlängert sich zum höheren Preis.",
+          "avatar": {"wahl": "A", "konfidenz": "grün"},
+          "sensitiv": false,
+          "bilder": [
+            {"data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Startseite vorher", "alt": "Platzhalterbild der alten Startseite", "seite": "/", "variante": "alt"},
+            {"data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Startseite nachher", "alt": "Platzhalterbild der neuen Startseite", "seite": "/", "variante": "neu"}
+          ]
+        },
+        {
+          "kuerzel": "V3",
+          "titel": "Logo behalten",
+          "kontext": "Das Vereinslogo ist zwölf Jahre alt. Zum Relaunch könnte es erneuert werden.",
+          "frage": "Soll das Logo beim Relaunch erneuert werden?",
+          "optionen": [
+            {"id": "A", "label": "Logo behalten", "wirkung": "Der Relaunch bleibt bei der alten Gestaltung des Logos."},
+            {"id": "B", "label": "Logo erneuern", "wirkung": "Ein neuer Entwurf wird erstellt und im Verein abgestimmt."},
+            {"id": "C", "label": "Später entscheiden", "wirkung": "Der Relaunch startet mit dem alten Logo, die Frage bleibt offen."}
+          ],
+          "empfehlung": {"option": "C", "grund": "Der Relaunch wird dadurch nicht aufgehalten, das Logo kann später folgen."},
+          "kosten_aufwand": "Bei B etwa 300 Euro und zwei Wochen Abstimmung.",
+          "risiko_rueckgaengig": "Bei A und C gering, bei B ist ein bezahlter Entwurf nicht rückgängig zu machen.",
+          "frist": "keine",
+          "folge_bei_nein": "keine: Ohne Entscheidung bleibt das alte Logo.",
+          "sensitiv": false
+        }
+      ]
+    },
+    {
+      "id": "betrieb",
+      "titel": "Betrieb",
+      "posten": [
+        {
+          "kuerzel": "V4",
+          "titel": "Domain für drei Jahre verlängern",
+          "kontext": "Die Vereinsdomain läuft im Sommer ab. Eine Verlängerung für drei Jahre ist günstiger als jährlich.",
+          "frage": "Soll die Domain jetzt für drei Jahre verlängert werden?",
+          "optionen": [
+            {"id": "A", "label": "Ja, drei Jahre", "wirkung": "Die Gebühr für drei Jahre wird jetzt bezahlt."},
+            {"id": "B", "label": "Nur ein Jahr", "wirkung": "Die Gebühr für ein Jahr wird bezahlt, im nächsten Jahr folgt die nächste Entscheidung."}
+          ],
+          "empfehlung": {"option": "A", "grund": "Drei Jahre kosten zusammen weniger als drei einzelne Jahre."},
+          "kosten_aufwand": "45 Euro jetzt statt dreimal 20 Euro.",
+          "risiko_rueckgaengig": "Die Gebühr ist nach Zahlung nicht erstattbar.",
+          "frist": "Bis zum 30. Juni.",
+          "folge_bei_nein": "Läuft die Domain ab, ist die Website nicht mehr erreichbar.",
+          "sensitiv": true,
+          "sensitiv_grund": "Geld",
+          "details_markdown": "**Rechnung.** Die Domain gehört dem Verein; die Rechnung geht an die Kasse.\n\n- Jahrespreis: 20 Euro\n- Dreijahrespreis: 45 Euro"
+        }
+      ]
+    }
+  ]
+}
