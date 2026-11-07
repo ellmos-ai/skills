@@ -543,8 +543,8 @@ class DecisionWindow:
         self.notice.configure(text="Gespeichert. Der kanonische Rücktransfer erfolgt anschließend über decision-briefing.")
         box = self.ttk.Frame(self.content, style="Card.TFrame", padding=16)
         box.pack(fill="x", pady=(0, 12))
-        self.label(box, "Ihre Entscheidung wurde als Datei eingereicht.", True)
-        self.label(box, "Der Übergabeprompt informiert Ihre Konsole über die gespeicherte Auswahl. Bis der Rücktransfer beginnt, können Sie diese Einreichung hier rückgängig machen.")
+        self.label(box, "Deine Entscheidung wurde als Datei eingereicht.", True)
+        self.label(box, "Der Übergabeprompt informiert deine Konsole über die gespeicherte Auswahl. Bis der Rücktransfer beginnt, kannst du diese Einreichung hier rückgängig machen.")
         selected = self.data["submission"]["choices"]
         for node in nodes(self.data):
             item = selected[node["id"]]
@@ -585,7 +585,7 @@ class DecisionWindow:
                     self.data, self.sha = current, current_sha
                     self.render()
                 else:
-                    self.status.set("Quelle wurde verändert; Ihre lokale Auswahl bleibt erhalten. Einreichung erfordert erneutes Öffnen.")
+                    self.status.set("Quelle wurde verändert; deine lokale Auswahl bleibt erhalten. Einreichung erfordert erneutes Öffnen.")
         except (ValueError, OSError):
             self.status.set("Datei fehlt oder wurde verändert; keine automatische Entscheidung.")
         self.root.after(1200, self.watch)
