@@ -1,4 +1,6 @@
-"""Erzeugt die Testdaten testdata/{teil,voll}_{antwort.json,BEANTWORTET.html} reproduzierbar im HEADLESS-Edge (Python-Playwright, eigenes Temp-Profil,
+"""VERALTET (bekannte Lücke, Prüfung von #98, Befund F4): erwartet zwei automatische Downloads nach dem Speichern, der heutige
+Sicherungsbereich löst keine aus. Nicht repariert, weil das ohne das gebundene Dokument nicht belegbar ist; siehe README.
+Erzeugt die Testdaten testdata/{teil,voll}_{antwort.json,BEANTWORTET.html} reproduzierbar im HEADLESS-Edge (Python-Playwright, eigenes Temp-Profil,
 kein sichtbares Fenster, Download-Fallback). Aufruf: python make_fixtures.py <FORMULAR.html> <zielordner>
 Es sind TESTDATEN: keine Nutzerentscheidung (siehe testdata/UNGUELTIG-TESTDATEN.txt)."""
 import sys

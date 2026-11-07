@@ -75,7 +75,7 @@
         },
         "sensitiv": {"type": "boolean", "description": "Red, money, deletion, external effect, licence or rights of third parties: listed again before saving."},
         "sensitiv_grund": {"type": "string", "maxLength": 100},
-        "details_markdown": {"type": "string", "maxLength": 4000, "description": "Only collapsible. Escaped before conversion; links with javascript:, data: or vbscript: are refused."},
+        "details_markdown": {"type": "string", "maxLength": 4000, "description": "Only collapsible. Escaped before conversion; only http:, https:, mailto:, #, / and ./ links are allowed (the emitted value is the checked one); control characters and images are refused."},
         "bilder": {
           "type": "array",
           "maxItems": 12,
@@ -86,7 +86,7 @@
             "additionalProperties": false,
             "oneOf": [{"required": ["pfad"]}, {"required": ["data_uri"]}],
             "properties": {
-              "pfad": {"type": "string", "description": "Source file at build time, relative to the data file."},
+              "pfad": {"type": "string", "description": "Source file at build time, relative to the data folder only. Absolute, UNC and drive paths, .. and links that leave the folder are refused before any file access."},
               "data_uri": {"type": "string", "pattern": "^data:image/(png|jpeg|webp|gif);base64,"},
               "beschriftung": {"type": "string", "minLength": 1, "maxLength": 120},
               "alt": {"type": "string", "maxLength": 200},

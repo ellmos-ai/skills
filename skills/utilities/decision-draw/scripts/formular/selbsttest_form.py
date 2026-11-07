@@ -252,6 +252,13 @@ class DatenSicherheit(unittest.TestCase):
         self.assertEqual(re.findall(r'href="([^"]*)"', more),
                          ["https://example.org/x?y=1&amp;z=2", "#anker", "mailto:a@example.org", "/pfad", "./rel"])
 
+    def test_f1_emitted_href_is_exactly_the_checked_value(self):
+        d = load()
+        post(d, "V4")["details_markdown"] = "[a](https://exa&#9;mple.org/x)"  # ein Tab per Entity: geprueft UND ausgegeben ohne Tab
+        page, _, _ = bf.build(d, HERE)
+        more = page.split('<details class="mehr">')[1].split("</details>")[0]
+        self.assertEqual(re.findall(r'href="([^"]*)"', more), ["https://example.org/x"])
+
     def test_f1_every_href_and_src_of_the_page_is_on_the_allow_list(self):
         allowed = re.compile(r"^(?:https?:|mailto:|#|/|\./|data:image/(?:png|jpeg|webp|gif);base64,)")
         body = re.sub(r"<script.*?</script>", "", PAGE, flags=re.S)
@@ -299,14 +306,24 @@ class DatenSicherheit(unittest.TestCase):
                     post(d, "V1")["bilder"] = [{"pfad": path, "beschriftung": "b"}]
                     with mock.patch.object(Path, "read_bytes", side_effect=AssertionError("Dateizugriff vor der Pruefung")):
                         self.assert_error(d, "V1", "pfad")
-            link = base / "link.png"
+            outside = Path(tmp) / "draussen"
+            outside.mkdir()
+            (outside / "geheim.png").write_bytes(png)
+            link = base / "link"
             try:
-                os.symlink(Path(tmp) / "aussen.png", link)
+                os.symlink(outside, link, target_is_directory=True)
             except (OSError, NotImplementedError):
-                return  # Symlinks nicht erlaubt (Windows ohne Rechte): der Rest ist geprueft
+                import subprocess
+
+                made = os.name == "nt" and subprocess.run(["cmd", "/c", "mklink", "/J", str(link), str(outside)],
+                                                         capture_output=True).returncode == 0  # Junction braucht keine Rechte
+                if not made:
+                    self.skipTest("weder Symlink noch Junction anlegbar: nur die Textpruefungen wurden ausgefuehrt")
             d = load()
-            post(d, "V1")["bilder"] = [{"pfad": "link.png", "beschriftung": "b"}]
-            self.assert_error(d, "V1", "pfad")
+            post(d, "V1")["bilder"] = [{"pfad": "link/geheim.png", "beschriftung": "b"}]
+            with self.assertRaises(bf.FormError) as caught:
+                bf.build(d, base)  # der Link fuehrt aus dem Datenordner hinaus: abgelehnt, obwohl die Datei existiert
+            self.assertTrue(any("V1" in e and "ausserhalb" in e for e in caught.exception.errors), caught.exception.errors)
 
     # --- F5: bisher nicht belegte Sicherungen ------------------------------------------------------------------------
     def test_f5_closing_script_tags_in_data_are_neutralised(self):

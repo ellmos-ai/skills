@@ -116,7 +116,8 @@
     $$('#toast', clone).forEach(function (t) { t.className = ''; t.textContent = ''; });
     $$('#save-links,#save-state', clone).forEach(function (e) { e.innerHTML = ''; });
     var js = document.createElement('script'); js.type = 'application/json'; js.id = 'embedded-answers';
-    js.textContent = JSON.stringify(a).replace(/<\//g, '<\\/');
+    /* Jedes spitze Klammerzeichen, '&' und U+2028/2029 wird als Unicode-Escape geschrieben: schon ein Kommentaranfang mit Skript-Tag in einer Anmerkung wuerde das Skript-Parsing der Kopie kippen. Hier darf das Muster selbst nicht stehen. */
+    js.textContent = JSON.stringify(a).replace(/[<>&\u2028\u2029]/g, function (c) { return '\\u' + ('0000' + c.charCodeAt(0).toString(16)).slice(-4); });
     var top = clone.querySelector('#top-panel'); var sec = document.createElement('div'); sec.innerHTML = summaryHtml(a);
     if (top && top.parentNode) top.parentNode.insertBefore(sec.firstChild, top);
     clone.querySelector('body').appendChild(js);
@@ -230,7 +231,14 @@
     if (answered) { applyAnswered(); return; }
     var saved = lsGet();
     if (saved && saved.choice && Object.keys(saved.choice).length) {
-      st.choice = saved.choice; st.note = saved.note || {}; st.via = saved.via || {}; st.agpl = saved.agpl || st.agpl; st.restored = saved.savedLocal || '';
+      /* nur Werte uebernehmen, die zu diesem Formular passen: eine Option des Postens oder die Rueckfrage; Notizen nur als Text */
+      Object.keys(saved.choice).forEach(function (id) {
+        var it = BYID[id], v = saved.choice[id];
+        if (it && typeof v === 'string' && (v === RQ || it.options.some(function (o) { return o.k === v; }))) st.choice[id] = v;
+      });
+      Object.keys(saved.note || {}).forEach(function (id) { if (BYID[id] && typeof saved.note[id] === 'string') st.note[id] = saved.note[id]; });
+      Object.keys(saved.via || {}).forEach(function (id) { if (st.choice[id] && (saved.via[id] === 'single' || saved.via[id] === 'bulk')) st.via[id] = saved.via[id]; });
+      st.agpl = saved.agpl || st.agpl; st.restored = saved.savedLocal || '';
       /* Gesamtabnahme und Massenaktions-Bestaetigungen werden NIE aus einem alten Stand uebernommen (nur Einzelwahlen und Anmerkungen) */
       restoreHint = !!(saved.gesamt && saved.gesamt.explicit);
     }

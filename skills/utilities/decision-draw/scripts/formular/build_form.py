@@ -63,6 +63,15 @@ def decode_data_uri(uri):
         raise ValueError(f"base64 ungültig: {exc}") from exc
 
 
+def embed_json(obj, **kwargs):
+    """JSON fuer ein <script type="application/json">: JEDES '<' (auch '<!--<script>'), '>' und '&' sowie U+2028/2029 als \\uXXXX.
+    Allein '</' zu schuetzen reicht nicht: '<!--<script>' schaltet den HTML-Parser in den doppelt maskierten Zustand."""
+    text = json.dumps(obj, ensure_ascii=False, **kwargs)
+    for char in "<>&\u2028\u2029":
+        text = text.replace(char, "\\u%04x" % ord(char))
+    return text
+
+
 def _magic_ok(mime, raw):
     return ((mime == "image/png" and raw[:8] == b"\x89PNG\r\n\x1a\n") or (mime == "image/jpeg" and raw[:2] == b"\xff\xd8")
             or (mime == "image/gif" and raw[:4] == b"GIF8") or (mime == "image/webp" and raw[:4] == b"RIFF" and raw[8:12] == b"WEBP"))
@@ -91,6 +100,29 @@ def _unknown(errs, where, obj, allowed):
             errs.append(f"{where}: unbekanntes Feld '{key}' (erlaubt: {', '.join(sorted(allowed))}).")
 
 
+def _inside(value, base_dir):
+    """Bildpfad -> Path, der nach resolve() UNTER dem Datenordner liegt, sonst ValueError.
+
+    Erst rein textuell pruefen (absolut, UNC, Laufwerk, \\\\?\\, '..'), also BEVOR irgendein Dateisystemzugriff
+    stattfindet: ein UNC-Pfad wuerde unter Windows sonst eine SMB-Verbindung zu einem fremden Rechner oeffnen.
+    Danach resolve() und relative_to(): Symlinks und Junctions, die aus dem Ordner hinausfuehren, werden abgelehnt."""
+    if not isinstance(value, str) or not value.strip() or "\x00" in value:
+        raise ValueError("pfad muss ein nicht leerer Text sein")
+    text = value.replace("\\", "/")
+    if text.startswith("/") or re.match(r"^[A-Za-z]:", text) or Path(value).is_absolute():
+        raise ValueError("pfad: absolute, UNC- und Laufwerkspfade sind nicht erlaubt; nur relativ zum Datenordner")
+    parts = [p for p in text.split("/") if p not in ("", ".")]
+    if ".." in parts:
+        raise ValueError("pfad: '..' ist nicht erlaubt; die Datei muss im Datenordner liegen")
+    base = Path(base_dir).resolve()
+    target = (base / "/".join(parts)).resolve()
+    try:
+        target.relative_to(base)
+    except ValueError:
+        raise ValueError("pfad: die Datei liegt nach dem Aufloesen von Links ausserhalb des Datenordners") from None
+    return target
+
+
 def _image(errs, where, img, base_dir, sizes):
     """Liefert (mime, bytes) oder None; Fehler landen in errs."""
     if not isinstance(img, dict):
@@ -107,8 +139,7 @@ def _image(errs, where, img, base_dir, sizes):
         if "data_uri" in img:
             mime, raw = decode_data_uri(img["data_uri"])
         else:
-            path = Path(img["pfad"])
-            path = path if path.is_absolute() else Path(base_dir) / path
+            path = _inside(img["pfad"], base_dir)
             mime = EXT_TYPES.get(path.suffix.lower())
             if mime is None:
                 errs.append(f"{where}: Bildtyp {path.suffix or '(keiner)'} nicht erlaubt (png, jpg, webp, gif; kein svg).")
@@ -130,16 +161,46 @@ def _image(errs, where, img, base_dir, sizes):
     return mime, raw
 
 
+CONTROL_RX = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]")
+URL_NOISE_RX = re.compile(r"[\x00-\x20\x7f-\x9f]")  # was ein Browser in einer URL ignoriert: Leerraum und Steuerzeichen
+LINK_OK_RX = re.compile(r"^(?:https?:|mailto:|#|/|\./)", re.I)
+URL_ATTR_RX = re.compile(r'(\b(?:href|src|action|formaction|xlink:href|srcset|poster|background|data)\s*=\s*)"([^"]*)"', re.I)
+
+
+def clean_url(raw):
+    """Wie ein Browser lesen, dann pruefen: Entities aufloesen, Leerraum und Steuerzeichen entfernen (java<LF>script:,
+    <0x01>javascript:), kleinschreiben. Der geprueft Wert ist EXAKT der ausgegebene (T-20261107, F1 der Pruefung von #98)."""
+    value = raw
+    for _ in range(5):
+        decoded = H.unescape(value)
+        if decoded == value:
+            break
+        value = decoded
+    return URL_NOISE_RX.sub("", value)
+
+
 def render_details(md_text, where, errs):
     try:
         import markdown
     except ImportError:
         errs.append(f"{where}: details_markdown braucht das Paket markdown (pip install markdown).")
         return ""
+    if CONTROL_RX.search(md_text):
+        errs.append(f"{where}: Steuerzeichen in details_markdown (nur Tab, Zeilenumbruch und Wagenruecklauf sind erlaubt).")
+        return ""
     out = markdown.markdown(H.escape(md_text, quote=False), extensions=["tables"])
-    if re.search(r'href\s*=\s*"\s*(javascript|data|vbscript):', out, re.I):
-        errs.append(f"{where}: Link mit unerlaubtem Schema (javascript:, data:, vbscript:) in details_markdown.")
-    return out
+    if re.search(r"<img\b", out, re.I):
+        errs.append(f"{where}: Bilder gehoeren in bilder[], nicht in details_markdown (ein Bild aus dem Netz waere eine Verbindung).")
+        return ""
+
+    def check(match):
+        value = clean_url(match.group(2))
+        if not LINK_OK_RX.match(value):
+            errs.append(f"{where}: Link nicht erlaubt in details_markdown: {value[:40]!r} "
+                        "(erlaubt sind http:, https:, mailto:, #, / und ./).")
+        return f'{match.group(1)}"{H.escape(value, quote=True)}"'
+
+    return URL_ATTR_RX.sub(check, out)
 
 
 def normalize(data, base_dir):
@@ -195,7 +256,7 @@ def normalize(data, base_dir):
             for o in opts:
                 oid = str(o.get("id", "")) if isinstance(o, dict) else ""
                 wo = f"{w}, Option {oid or '?'}"
-                if not isinstance(o, dict) or not OPT_RX.fullmatch(oid) or oid == RQ or oid in ids:
+                if not isinstance(o, dict) or not OPT_RX.fullmatch(oid) or oid in ids:
                     errs.append(f"{wo}: id fehlt, ungültig oder doppelt.")
                     continue
                 ids.append(oid)
@@ -312,17 +373,21 @@ def build(data, base_dir=None):
              "BACKUP_HINT": hint, "BUNDLES": bundles,
              "BASE_CSS": (HERE / "form_base.css").read_text(encoding="utf-8"), "CSS": (HERE / "formular.css").read_text(encoding="utf-8"),
              "JS": (HERE / "formular.js").read_text(encoding="utf-8"),
-             "FORM_DATA": json.dumps(form, ensure_ascii=False, indent=1).replace("</", "<\\/")}
+             "FORM_DATA": embed_json(form, indent=1)}
     template = (HERE / "formular.html").read_text(encoding="utf-8")
     page = re.sub(r"\{\{([A-Z_]+)\}\}", lambda m: parts[m.group(1)], template)  # ein Durchgang: Inhalte werden nie erneut ersetzt
     digest = hashlib.sha256(page.encode("utf-8")).hexdigest()
-    return page.replace(ZERO, digest), digest, items
+    # Nur an den zwei Stellen ersetzen, an denen build() den Hash eingesetzt hat: 64 Nullen in Nutzertext bleiben Nutzertext.
+    page = page.replace(f'name="document-sha256" content="{ZERO}"', f'name="document-sha256" content="{digest}"', 1)
+    page = page.replace(f'"doc_sha256": "{ZERO}"', f'"doc_sha256": "{digest}"', 1)
+    return page, digest, items
 
 
 def blank_hash(page_text):
     """Hash des unveraenderten Formulars: den eingebetteten Hash durch Nullen ersetzen und neu rechnen."""
     d = re.search(r'name="document-sha256" content="([0-9a-f]{64})"', page_text).group(1)
-    return d, hashlib.sha256(page_text.replace(d, ZERO).encode("utf-8")).hexdigest()
+    blank = page_text.replace(f'content="{d}"', f'content="{ZERO}"', 1).replace(f'"doc_sha256": "{d}"', f'"doc_sha256": "{ZERO}"', 1)
+    return d, hashlib.sha256(blank.encode("utf-8")).hexdigest()
 
 
 def validate_answers(obj, items, expected_sha=None, document_id=None):

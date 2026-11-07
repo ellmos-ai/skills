@@ -11,7 +11,7 @@ Aus einer kleinen Daten-JSON entsteht **eine** selbstenthaltene HTML-Datei: kein
 | `formular.js`, `formular.css`, `form_base.css` | Verhalten und Aussehen; der Generator bettet sie ein |
 | `savetests.py` | gemeinsame Headless-Tests für Regel 9 (Speichern hängt nie von einem Dialog ab) |
 | `selbsttest_form.py` | Selbsttest des Templates (keine Umgebungsvariablen nötig) |
-| `headless_util.py`, `make_fixtures.py` | Hilfen für Browsertests und Fixtures; **nur headless** |
+| `headless_util.py`, `make_fixtures.py` | Hilfen für Browsertests; **nur headless**. `make_fixtures.py` ist veraltet (siehe unten) |
 | `build_from_markdown.py`, `selbsttest_markdown.py` | frühere Fassung: Gesamtdokument (Markdown) vom 2026-11-07 -> Formular. Nur noch Beispielmigration |
 
 ## Aufruf
@@ -34,7 +34,7 @@ python -m unittest selbsttest_form -v
 **Browsertests ausschließlich headless** (`headless_util.py`: eigenes Temp-Profil, `headless=True` fest verdrahtet). Nie ein sichtbares Browserfenster und nie die Playwright-MCP-Werkzeuge des Agenten verwenden: Dort öffnet sich ein sichtbarer Browser auf dem Rechner der Nutzerin oder des Nutzers, und ein Agent kann das Formular damit selbst ausfüllen (genau das ist am 2026-11-07 passiert).
 
 Der frühere Dokumentgenerator wird so geprüft (an das Dokument vom 2026-11-07 gebunden):
-`FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<versiegelte Messdatei.md>] python -m unittest selbsttest_markdown -v`. Die Klasse `Answers` braucht Browser-Fixtures in `testdata/` (hier nicht enthalten, mit `make_fixtures.py` erzeugbar) und wird sonst übersprungen.
+`FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<versiegelte Messdatei.md>] python -m unittest selbsttest_markdown -v`. Die Klasse `Answers` braucht Browser-Fixtures in `testdata/` (hier nicht enthalten) und wird sonst übersprungen. **Bekannte Lücke:** `make_fixtures.py` erwartet die frühere automatische Speicherung und läuft gegen das heutige `formular.js` nicht mehr (der Sicherungsbereich löst keine Downloads von selbst aus). Es wurde nicht repariert, weil sich das ohne das gebundene Dokument nicht belegen lässt; den Speicherweg prüfen `HeadlessSaveTemplate` und `HeadlessSicherheit` am allgemeinen Formular.
 
 ## Bedienung (Verhalten des Formulars)
 

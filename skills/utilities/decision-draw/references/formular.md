@@ -54,7 +54,7 @@ Rückmeldung nach dem ersten Einsatz: Es war zu viel Text, und oft fehlte das En
 | `folge_bei_nein` | ja | 160 Zeichen | was passiert, wenn nichts oder „Nein“ gewählt wird; darf „keine“ lauten |
 | `avatar` mit `wahl`, `konfidenz` | nein | – | Vorhersage und Konfidenz (grün, gelb, rot) für die Messung |
 | `sensitiv`, `sensitiv_grund` | nein | Grund 100 Zeichen | rot, Geld, Löschung, Außenwirkung, Lizenz, Rechte Dritter: wird vor dem Speichern noch einmal aufgelistet |
-| `details_markdown` | nein | 4000 Zeichen | Längeres **nur aufklappbar**; wird vor der Umwandlung escaped, Links mit `javascript:`, `data:`, `vbscript:` werden abgelehnt |
+| `details_markdown` | nein | 4000 Zeichen | Längeres **nur aufklappbar**; wird vor der Umwandlung escaped; erlaubt sind nur Links mit `http:`, `https:`, `mailto:`, `#`, `/` und `./` (geprüft wird der **ausgegebene** Wert nach dem Entfernen von Leerraum und Steuerzeichen); Steuerzeichen im Text und Bilder aus dem Netz (`![](…)`) werden abgelehnt, Bilder gehören in `bilder[]` |
 | `bilder[]` | nein | höchstens 12 | siehe unten |
 
 Das Dokument selbst hat `titel` (80), `kontext_kurz` (400 Zeichen, höchstens drei Sätze, erinnert an das Projekt), `dokument_id` (steckt in den Dateinamen der Antwort) und optional `zielordner`. Oben im Formular stehen nur dieser Kontext und „So antwortest du“ in drei Zeilen; lange Fließtexte und „Hinweise vor dem Lesen“ entfallen.
@@ -63,7 +63,7 @@ Das Dokument selbst hat `titel` (80), `kontext_kurz` (400 Zeichen, höchstens dr
 
 **Wahl „Rückfrage / mehr Info nötig“:** Jeder Posten hat sie als eigene Wahl neben den Optionen (`choice: "rueckfrage"`, `state: "question"`). Die Anmerkung gilt dann als Frage. Eine Rückfrage ist nie eine Zustimmung: Sie blockiert die Gesamtabnahme und wird vor dem Speichern gelistet (ohne Text in der Anmerkung mit Hinweis). Der Konsument beantwortet sie, statt zu buchen.
 
-**Bilder (optional):** Je Bild `pfad` (Quelle beim Bauen, relativ zur Daten-Datei) oder `data_uri`, `beschriftung` (Pflicht, kurz), optional `alt`, `seite`, `variante` (z. B. für Screenshots einer Oberfläche). Der Generator bettet jedes Bild als `data:`-URI ein: höchstens 400 KB je Bild und 8 MB je Formular, nur PNG, JPEG, WebP, GIF (kein SVG, Dateiinhalt wird geprüft); bei Überschreitung bricht er mit Klartext ab, ohne zu kürzen. Verkleinere vorher (Breite höchstens 1200 px). Die Bilderserie steht über den Entscheidungsfeldern; zur ganzen Serie gehört **eine** Entscheidung, Kommentar und Rückfrage gelten je Posten.
+**Bilder (optional):** Je Bild `pfad` (Quelle beim Bauen, **nur relativ zum Datenordner**: absolute, UNC- und Laufwerkspfade, `..` und Links, die aus dem Ordner herausführen, werden vor dem ersten Dateizugriff abgelehnt) oder `data_uri`, `beschriftung` (Pflicht, kurz), optional `alt`, `seite`, `variante` (z. B. für Screenshots einer Oberfläche). Der Generator bettet jedes Bild als `data:`-URI ein: höchstens 400 KB je Bild und 8 MB je Formular, nur PNG, JPEG, WebP, GIF (kein SVG, Dateiinhalt wird geprüft); bei Überschreitung bricht er mit Klartext ab, ohne zu kürzen. Verkleinere vorher (Breite höchstens 1200 px). Die Bilderserie steht über den Entscheidungsfeldern; zur ganzen Serie gehört **eine** Entscheidung, Kommentar und Rückfrage gelten je Posten.
 
 ## 5. Antwortschema `ticket-master.decision-answers.v1`
 
@@ -114,12 +114,12 @@ Im Ordner `scripts/formular/`, ohne Umgebungsvariablen:
 python -m unittest selbsttest_form -v
 ```
 
-- **`Daten`** (ohne Browser): Beispiel baut byte-stabil (Hash reproduzierbar), Längengrenzen sind Fehler und genau am Limit erlaubt, Pflichtfelder (auch mit „keine“), Empfehlung und Optionen, Bilder (Größe, Typ, Beschriftung, Gesamtgröße, Pfad), `details_markdown` escaped, nichts vorausgewählt, kein Netz, Schema und Generator im Gleichschritt (`form.schema.json`), Sicherungsbereich statisch vorhanden, Validator kennt die Rückfrage.
+- **`Daten`** (ohne Browser): Beispiel baut byte-stabil (Hash reproduzierbar), Längengrenzen sind Fehler und genau am Limit erlaubt, Pflichtfelder (auch mit „keine“), Empfehlung und Optionen, Bilder (Größe, Typ, Beschriftung, Gesamtgröße, Pfad), `details_markdown` escaped und Linkschemata nach der Positivliste geprüft (Nutzlasten der Prüfung von #98), `<` in eingebetteten Daten nie roh, nichts vorausgewählt, kein Netz, Schema und Generator im Gleichschritt (`form.schema.json`), Sicherungsbereich statisch vorhanden, Validator kennt die Rückfrage.
 - **`HeadlessSaveTemplate`** (Regel 9, headless): die gemeinsamen Tests aus `savetests.py` am Template (Abbruch, `SecurityError`, Schreibfehler, später `close()`, Download-Weg, blockierter Download, Zwischenablage, Fehler beim Bau der Kopie, Zwischenstand).
 - **`HeadlessTemplate`** (headless): Rückfrage als eigener Zustand (zählt nie als beantwortet, blockiert die Gesamtabnahme, wird im Dialog gelistet), Bilderserie über den Entscheidungsfeldern, Fakten sichtbar, Details zugeklappt.
 - Die Browserklassen brauchen Python-Playwright und Edge und laufen sonst nicht. **Nie sichtbar, nie über die Playwright-MCP-Werkzeuge (Regel 5).** Die Dateien heißen nicht `test_*.py`, damit die Suite dieses Repos sie nicht einsammelt.
 - **Beispielmigration:** `FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<Messdatei.md>] python -m unittest selbsttest_markdown -v` prüft den alten Dokumentgenerator gegen das Dokument vom 2026-11-07 (Hash, Posten, Wiederherstellung, Regel 9 über denselben Mixin).
-- **Fixtures** (`testdata/`) entstehen durch einen echten Headless-Lauf (`make_fixtures.py`); sie sind nicht Teil des Skills.
+- **Fixtures** (`testdata/`) gehören nur zum alten Dokumentgenerator und sind nicht Teil des Skills. `make_fixtures.py` ist seit dem Sicherungsbereich (Regel 9, keine automatischen Downloads) **nicht mehr lauffähig** und wird nicht repariert: ohne das gebundene Dokument ließe sich die Reparatur hier nicht belegen. Die Klasse `Answers` bleibt deshalb übersprungen; denselben Speicherweg prüfen `HeadlessSaveTemplate` und `HeadlessSicherheit` am allgemeinen Formular.
 - **Weg B:** `python scripts/decision_viewer.py validate <draw.json>` ist headless; gezielte Tests in `testing/test_decision_draw_viewer.py`.
 
 ## 8. Weg B: Draw als `draw.json` abbilden
