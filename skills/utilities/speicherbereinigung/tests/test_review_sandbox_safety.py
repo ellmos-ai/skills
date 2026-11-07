@@ -171,6 +171,23 @@ def test_purge_dir_stays_away_when_a_link_cannot_be_dropped(
     assert (tree / "link").exists()
 
 
+def test_clean_flutter_builds_apply_never_empties_a_junction_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Second caller path: clean_flutter_builds --apply purges build/ directly, without rmtree first."""
+    outside = precious(tmp_path)
+    app = tmp_path / "app"
+    (app / "build").mkdir(parents=True)
+    (app / "pubspec.yaml").write_text("name: demo\n", encoding="utf-8")
+    junction(app / "build" / "link", outside)
+    monkeypatch.setattr(sys, "argv", ["clean_flutter_builds.py", str(app), "--apply"])
+
+    assert clean_flutter_builds.main() == 0
+
+    assert (outside / "keep.txt").read_text(encoding="utf-8") == "keep"
+    assert not (app / "build").exists()
+
+
 def test_purge_dir_on_a_junction_removes_only_the_link(tmp_path: Path) -> None:
     outside = precious(tmp_path)
     link = tmp_path / "link"
