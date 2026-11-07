@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import contextlib
 import importlib.util
+import io
 import tempfile
 import unittest
 from pathlib import Path
@@ -133,6 +134,33 @@ class SkillFrontmatterGateTests(unittest.TestCase):
 
             exit_after = gate.main(["--repo", str(root)])
             self.assertEqual(exit_after, 0)
+
+    def test_ausloeser_hinweis_meldet_reine_inhaltsangabe_und_blockiert_nicht(self) -> None:
+        """2026-11-06: a description that only says WHAT a skill is never got the skill called; the gate names
+        such skills but keeps exit 0. A description with a WHEN clause (EN or DE) or a slash command passes."""
+        faelle = {
+            "nur-was": ('"Structured decision making: pro/con matrix and weighted scoring."', True),
+            "use-when": ('"Use when the user must choose between options."', False),
+            "verwenden": ('"Verwenden, wenn ein Fehler gemeldet wird."', False),
+            "slash": ('"Bug sweep with tracked areas. Start with /bugsweep."', False),
+            "pfad-ist-kein-befehl": ('"Reads files under docs/templates and writes reports."', True),
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for name, (beschreibung, _) in faelle.items():
+                d = root / "skills" / "utilities" / name
+                d.mkdir(parents=True)
+                (d / "SKILL.md").write_text(f"---\nname: {name}\ndescription: {beschreibung}\n---\nbody\n",
+                                            encoding="utf-8")
+            # the English version wins over the primary file when both exist
+            (root / "skills" / "utilities" / "use-when" / "SKILL.en.md").write_text(
+                "---\nname: use-when\ndescription: \"Use for any decision.\"\n---\nbody\n", encoding="utf-8")
+            ohne = gate.skills_ohne_ausloeser(root)
+            erwartet = sorted(f"skills/utilities/{n}" for n, (_, flag) in faelle.items() if flag)
+            self.assertEqual(ohne, erwartet)
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(gate.main(["--repo", str(root)]), 0)
+            self.assertIn("Hinweis (blockiert nicht): 2 Skill(s)", out.getvalue())
 
 
 if __name__ == "__main__":

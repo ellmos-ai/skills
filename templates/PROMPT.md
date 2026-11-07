@@ -5,8 +5,7 @@ type: prompt
 author: {{author}}
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-description: >
-  {{Kurzbeschreibung: Wozu dient dieses Prompt-Template?}}
+description: "{{Ausloeser zuerst: Verwenden, wenn ... Dann: wozu dieses Prompt-Template dient. Regel: docs/CONVENTIONS.md, Beschreibung = Ausloeser}}"
 
 # Kompatibilitaet
 standalone: true

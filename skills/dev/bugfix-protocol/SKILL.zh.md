@@ -1,11 +1,11 @@
 ---
 name: bugfix-protocol
-version: 1.0.0
+version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 系统化的 6 阶段调试协议。包含快速检查、隔离测试、20分钟规则和 Bug 报告模板的结构化 Bug 处理方法。
+updated: 2026-11-06
+description: "用于任何 Bug 报告或调试请求，在修改代码之前使用，即使原因看似显而易见：错误的输出或合计（“客户付多了”“X 返回 -1 而不是 0”）、报错、崩溃、异常、失败的测试、回归、“调试一下”“找到并修复这个 bug”“为什么会发生……”、/bugfix。按六个阶段进行，而不是修补第一行可疑代码：快速检查、诊断、复现 Bug 的最小测试、在根因而非症状处修复、验证，以及供用户核对的简短 Bug 报告（根因、修复、验证）。尤其适用于症状出现在远离原因之处的问题、回归和间歇性故障。不适用于在整个代码库中系统性排查未知 Bug（bugsweep）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

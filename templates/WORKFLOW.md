@@ -5,8 +5,7 @@ type: protocol
 author: {{author}}
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-description: >
-  {{Kurzbeschreibung: Was orchestriert dieser Workflow? Welche Schritte?}}
+description: "{{Ausloeser zuerst: Verwenden, wenn ... (typische Formulierungen, /befehl). Dann: was der Workflow orchestriert. NICHT verwenden fuer ... Regel: docs/CONVENTIONS.md, Beschreibung = Ausloeser}}"
 
 # Kompatibilitaet
 standalone: true
