@@ -4,7 +4,7 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-11-01
+updated: 2026-11-08
 description: >
   Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus,
   physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie
@@ -234,6 +234,17 @@ Nach der letzten Mutation:
 Behaupte keine Bereinigung, Prozessbegrenzung oder 50-GB-Zielerreichung ohne
 passenden aktuellen Readback.
 
+### Berichts- und Quittungsablage (Themenordner-Regel)
+
+Schriftliche Abschlussberichte, Evidenzdateien und Receipts (`Speicherbereinigung_*`,
+z. B. `<Datum>_Speicherbereinigung_<HOST>.md`, `*_Evidenz.json`, `*_Receipts.jsonl`)
+werden im passenden Themenordner unter `.USR` abgelegt:
+
+- **Kanonischer Ablagepfad:** `<OneDrive>\.USR\SYSTEM\Speicherbereinigung\Speicherbereinigung_*`
+  (bzw. `<OneDrive>\.USR\docs\SYSTEM\Speicherbereinigung\` oder `<OneDrive>\.USR\.SYSTEM\Speicherbereinigung\`).
+- **Verbot der flachen Root-Ablage:** Berichte und Receipts niemals direkt flach im
+  `.USR`-Root ablegen (Zustellregel laut `ARCHITECTURE.md` und `avatar/USER.md`).
+
 ## Wiederkehrender Build-Müll-Lauf & Ephemeral-/Review-Sandbox-Hygiene (Skripte im Skill)
 
 Vier Skripte unter `scripts/` entfernen regenerierbaren Build-Müll und ephemere Review-Sandboxen, bevor sie Platz oder Sync belegen:
@@ -293,6 +304,7 @@ Konfiguration außerhalb des Skills (`$BUILD_JUNK_CONFIG` oder `~/.config/build-
 
 ### 1.2.0 (2026-10-25)
 
+- Berichts- und Receipt-Ablage (`Speicherbereinigung_*`) von flachem `.USR`-Root auf Themenordner `.USR\SYSTEM\Speicherbereinigung\` umgestellt (Ticket T-20261107-534781331).
 - Skript `prune_ephemeral.py` (Review-Sandboxen und `%TEMP%`) aufgenommen, entstanden im Speichernotfall vom 25.10. (C: bei 0 GB); Selbsttest und Pytest-Fälle ergänzt.
 - `clean_flutter_builds.py`: Standard ist jetzt der Trockenlauf, gelöscht wird nur mit `--apply`.
 - Review-Sandbox-Hygiene (Drei-Stufen-Härtung): `scripts/prune_ephemeral.py` um `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (sofortige Freigabe nach Review-Abschluss), Worktree-/`alternates`-Auflösung und Ketten-Klon-Abhängigkeitsschutz (`ketten-abhaengig`) erweitert; `scripts/review_sandbox.py` für `--no-hardlinks`-freie Sandbox-Erzeugung (`worktree`/`shared`) und sofortigen Closeout ergänzt.

@@ -4,7 +4,7 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-11-01
+updated: 2026-11-08
 description: >
   Evidence-based Windows storage cleanup with a controlled emergency mode,
   physical usage measurement, process and origin forensics, and
@@ -233,6 +233,17 @@ After the last mutation:
 Don't claim a cleanup, process limitation or reaching the 50 GB target
 without a matching current readback.
 
+### Report and Receipt Storage (Topic Folder Rule)
+
+Written completion reports, evidence files and receipts (`Speicherbereinigung_*`,
+e.g. `<Date>_Speicherbereinigung_<HOST>.md`, `*_Evidenz.json`, `*_Receipts.jsonl`)
+must be stored in the matching topic folder under `.USR`:
+
+- **Canonical storage path:** `<OneDrive>\.USR\SYSTEM\Speicherbereinigung\Speicherbereinigung_*`
+  (or `<OneDrive>\.USR\docs\SYSTEM\Speicherbereinigung\` or `<OneDrive>\.USR\.SYSTEM\Speicherbereinigung\`).
+- **No flat root delivery:** Never store reports and receipts directly flat in the
+  `.USR` root (delivery rule according to `ARCHITECTURE.md` and `avatar/USER.md`).
+
 ## Recurring build-junk run & ephemeral/review-sandbox hygiene (scripts in the skill)
 
 Four scripts under `scripts/` remove regenerable build junk and ephemeral review sandboxes before they take space or sync capacity:
@@ -290,6 +301,7 @@ reported. The weekly run is done by the task `SOFTWARE-BuildJunk-Janitor`.
 
 ### 1.2.0 (2026-10-25)
 
+- Report and receipt storage (`Speicherbereinigung_*`) updated from flat `.USR` root to topic folder `.USR\SYSTEM\Speicherbereinigung\` (Ticket T-20261107-534781331).
 - Added `prune_ephemeral.py` (review sandboxes and `%TEMP%`), created during the storage emergency of 25 Oct (C: at 0 GB); self-test and pytest cases added.
 - `clean_flutter_builds.py`: the default is now a dry run, deleting needs `--apply`.
 - Review sandbox hygiene (three-stage hardening): extended `scripts/prune_ephemeral.py` with `owner.json` (`expires_at`, `canonical_repo`), `closeout.json` (immediate release after review completion), worktree/`alternates` resolution, and chain-clone dependency protection (`ketten-abhaengig`); added `scripts/review_sandbox.py` for `--no-hardlinks`-free sandbox creation (`worktree`/`shared`) and immediate closeout.
