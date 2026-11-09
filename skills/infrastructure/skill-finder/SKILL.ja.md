@@ -4,13 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  ローカルの自作スキルのためのアクティブなファインダー／ルーター（using-superpowers に相当）。
-  非定型なタスクの開始時には「常に」まずユーザーのスキルが適合するかを確認し、正しいスキルにルーティングします。
-  「どのスキルが合うか」、「これ用のスキルはあるか」、「スキルを探す」、またはアドホックな作業よりも
-  ローカルスキルで解決した方がよい一般的なタスクの前にアクティブ化されます。
-
+updated: 2026-11-09
+description: "非自明なタスクの着手時に、対応する適切なローカルスキルが存在するかを検索・評価して誘導する場合に使用する（例：'どのスキルが合うか'、'このタスク用のスキルを探す'、'〜できるスキルはあるか'、/skill-finder）。ローカルのスキル資産を走査し、ユーザーの目的に最も適合する専門スキルを推薦する。新規スキルの作成（ellmos-skill-creator）や全体棚卸し監査（skill-explorer）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -32,6 +27,7 @@ provenance:
   origin_path: "~/.claude/skills/skill-finder/"
   origin_version: "0.1.0"
 ---
+
 
 <img src="banner.png" width="100%" alt="skill-finder banner">
 # スキルファインダー (Skill-Finder)

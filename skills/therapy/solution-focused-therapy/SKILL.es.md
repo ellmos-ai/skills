@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Terapia Breve Centrada en Soluciones según de Shazer y Berg: pregunta del milagro, exploración de excepciones, escalas y activación de recursos."
+updated: 2026-11-09
+description: "Usar cuando se oriente rápidamente la atención hacia soluciones prácticas y fortalezas en lugar de las causas del problema (ej. 'pregunta del milagro', 'buscar excepciones al problema', 'escalas de progreso', /solution-focused-therapy). Aplica herramientas de Steve de Shazer e Insoo Kim Berg: pregunta milagro, exploración de excepciones y escalas. NO usar para indagar causas históricas profundas."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Define, revisa o actualiza el SECURITY.md de un repo (alcance, áreas excluidas, propiedades de seguridad exigidas, canal de notificación, plazos de respuesta, versiones soportadas) y contrasta sus afirmaciones con el código real. La política es la base de sec-triage. Disparadores: 'crear/revisar SECURITY.md', 'política de seguridad', 'qué cuenta aquí como vulnerabilidad', 'definir el canal de notificación'. No es para hallazgos (sec-scan) ni para informes de divulgación (sec-writeup)."
+updated: 2026-11-09
+description: "Usar cuando se defina, revise o actualice la política de seguridad (SECURITY.md) y las pautas de divulgación de un proyecto (ej. 'crear SECURITY.md', 'revisar política de seguridad', 'definir canal de reporte de vulnerabilidades', /sec-policy). Fija el alcance, acuerdos de nivel de servicio (SLA) y canales de reporte contrastándolos con el código real. NO usar para escanear vulnerabilidades (usar sec-scan) ni redactar avisos de divulgación (usar sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

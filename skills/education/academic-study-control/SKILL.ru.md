@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Управление академической учебой и дедлайнами с проверкой источников, конфиденциальностью
-  и реалистичным планированием.
+updated: 2026-11-09
+description: "Используйте, когда нужно организовать учебный план в вузе, дедлайны по предметам или подготовку к сессии (например, 'спланировать семестр', 'организовать сроки сдачи', 'график экзаменов', /academic-study-control). Структурирует дедлайны и требования учебных программ с проверкой источников и защитой данных. НЕ используйте для изучения материала (используйте academic-study-learn) или пробных тестов (используйте academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-ru]
 language: ru
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

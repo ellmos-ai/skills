@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: ネストされたフォルダ階層をフラットでマシン読み取り可能なレイアウトに再構築します。インテリジェントなマージロジックを備えた Bash ベース。
+updated: 2026-11-09
+description: "深くネストされたフォルダー階層を整理された機械可読なフラット構造に再編する場合に使用する（例：'フォルダー階層をフラット化'、'ネストしたディレクトリを統合'、/folder-flattening）。衝突回避と安全なマージロジックを備えた決定論的フォルダー平坦化を実行する。単純な単一ファイルの移動（batch-file-ops）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

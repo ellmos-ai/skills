@@ -4,9 +4,8 @@ version: 0.3.0
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-07-27
-description: エージェントプロバイダーおよびアプリクラス間でのMCP設定、スキル、ルールファイルの同期を行うプロバイダー非依存のプランナー。検出されたローカルの選択肢を発見し、ユーザーが信頼できる情報源（Truth）、ターゲット、方向性、衝突解決を選択できるようにします。
-
+updated: 2026-11-09
+description: "複数のAIエージェント間でMCPサーバー設定、スキル、ルールファイルをベンダー中立に同期・調整する場合に使用する（例：'エージェント設定を同期'、'ツール間でMCP設定を調整'、'エージェント間でスキルをミラーリング'、/agent-config-sync）。ローカル設定を検出してマスターデータや同期方向をユーザーが選択できるようにする。MCP設定単体の同期（mcp-config-sync）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 

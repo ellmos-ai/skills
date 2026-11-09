@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  以数据最小化方式整理自愿提供的联系人信息，并识别潜在重复项。
+updated: 2026-11-09
+description: "当在高度注重隐私保护的前提下管理通讯录、更新联系人详细信息或排查合并重复联系人时使用（例如 '保存联系人'、'更新地址信息'、'查找重复联系人'、/kontaktbuch）。在本地安全结构化通讯录条目并清理冗余数据，杜绝数据泄露。切勿用于社交媒体自动化外联（使用 dev/community-outreach）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

@@ -3,11 +3,8 @@ name: metacognitive-injectors
 version: 1.4.0
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Metacognitive injectors and self-talk strategies (Self-Talk, Metacognitive Auditing, Evaluator Hooks, Pre-Flight Checklists, State Persistence & Personas).
-  Integrates Active Information Search (Gardener & USMC System Memory), Rehearsal (Active Retrieval Practice), Baddeley's Working Memory (State + Hooks),
-  Miyake Executive Functions and CBT/ACT therapeutic strategies.
+updated: 2026-11-09
+description: "Use when enhancing agent reasoning and problem-solving through metacognitive auditing, self-talk strategies, and memory hooks (e.g. 'metacognitive reflection', 'structured self-talk', 'audit reasoning process', /metacognitive-injectors). Integrates active retrieval, working memory models, and executive function checks into complex workflows. Do NOT use for emotional crisis coping (use therapy/stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +14,7 @@ aliases: [self-talk, metacognitive-self-talk, metacognitive-auditing, evaluator-
 language: en
 status: active
 ---
+
 
 <img src="banner.png" width="100%" alt="metacognitive-injectors banner">
 

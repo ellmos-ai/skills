@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Psicoeducación sobre depresión, trastornos de ansiedad, TEPT, trastorno bipolar, esquizofrenia, TDAH y trastorno límite. Transmisión de conocimientos sin diagnóstico.
+updated: 2026-11-09
+description: "Usar cuando se requiera información objetiva y desestigmatizante sobre trastornos psicológicos y síntomas (ej. 'entender síntomas de ansiedad', 'psicoeducación sobre depresión/TDAH', /psychoeducation). Explica la etiología biopsicosocial, modelos de estrés-vulnerabilidad y tratamientos validados. NO usar para emitir diagnósticos médicos individuales ni sustituir terapia profesional."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

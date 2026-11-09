@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Превращает заметки, PoC и находки в самодостаточный, скептически проверенный отчёт об уязвимости для координированного раскрытия: затронутые версии, шаги воспроизведения, воздействие, исправление, хронология. PoC минимален (без превращённого в оружие эксплойта), секреты вычищены, каждое утверждение подкреплено доказательствами или помечено как непроверенное. Триггеры: 'написать раскрытие', 'отчёт об уязвимости', 'текст advisory', 'сообщить сопровождающему'. Не для внутреннего отчёта о сканировании (sec-report) и не для тикета (sec-track)."
+updated: 2026-11-09
+description: "Используйте для составления строгого доказательного отчета о скоординированном раскрытии уязвимости (CVD) для мейнтейнеров (например, 'написать отчет об уязвимости', 'составить текст advisory', 'отчет о скоординированном раскрытии', /sec-writeup). Описывает шаги воспроизведения, оценку ущерба и способы исправления с очищенным PoC. НЕ используйте для внутреннего трекинга задач (используйте sec-track)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

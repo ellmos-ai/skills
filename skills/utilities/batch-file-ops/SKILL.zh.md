@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 使用 glob 通配符模式进行批量文件操作（删除、移动、复制、列出）。用于高效文件系统操作的 CLI 工具。零依赖。
-
+updated: 2026-11-09
+description: "当需要通过通配符（glob）模式执行批量文件系统操作（如批量复制、移动、删除或列出文件）时使用（例如 '批量移动文件'、'按模式删除所有 *.tmp 文件'、/batch-file-ops）。使用 Python 标准库安全执行文件批处理，无外部依赖。切勿用于文件内文本替换或单文件交互式编辑。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 

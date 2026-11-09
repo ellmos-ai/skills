@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis.
-
+updated: 2026-11-09
+description: "Use when explaining mental health conditions, symptoms, and psychological vulnerability-stress models objectively (e.g. 'understand anxiety symptoms', 'psychoeducation depression/ADHD', /psychoeducation). Clarifies biopsychosocial etiology, neurobiology, and evidence-based treatments in destigmatizing language. Do NOT use for giving individual medical diagnoses or therapy substitute."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

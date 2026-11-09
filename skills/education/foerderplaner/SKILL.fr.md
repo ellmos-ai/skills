@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Planifie l'enseignement, les activités et le soutien individuel sans générateur de rapports ni modèles personnels.
+updated: 2026-11-09
+description: "Utiliser pour concevoir des plans d'accompagnement éducatif individualisés, des activités différenciées ou des interventions pédagogiques (ex. 'créer un plan d'aide individualisé', 'différencier la séance', 'définir des objectifs de soutien', /foerderplaner). Élabore des propositions d'accompagnement neutres et structurées sans fuite de données personnelles. Ne PAS utiliser pour générer de simples fiches d'exercices (utiliser worksheet-generator)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

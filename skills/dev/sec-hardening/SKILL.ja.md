@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "所見、インシデントレポート、評価から、その場しのぎのパッチではなく構造的な堅牢化の提案を導く。根本原因をまとめ、堅牢化前後のアーキテクチャ図（ASCII）、トレードオフ（工数、リスク、効果）付きの代替案、実施順序、提案ごとの根拠を示す。成果物は文書で、コードは変更しない。トリガー：「根本的に堅牢化するには」「なぜこの種の所見が繰り返し出るのか」「アーキテクチャを安全にして」「インシデントからアクションプランを」。単一の所見の修正（sec-fix）や緊急の防御（protection-shield）には使わない。"
+updated: 2026-11-09
+description: "セキュリティ所見やインシデントから構造的なアーキテクチャ堅牢化および多層防御策を導き出す場合に使用する（例：'アーキテクチャを根本から堅牢化'、'インシデント後のセキュリティ対策ロードマップ'、/sec-hardening）。コードを直接書き換えることなく、変更前後の設計図と優先順位付きの強化計画を策定する。個別の即時パッチ作成（sec-fix）や緊急遮断（protection-shield）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-hardening banner">
 

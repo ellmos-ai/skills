@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Reviews supplied form descriptions for structure, validation, clarity, and accessibility.
+updated: 2026-11-09
+description: "Use when inspecting form specifications, JSON schemas, or UI input forms for structure, accessibility, and validation logic (e.g. 'validate form schema', 'check form accessibility', 'review form field structure', /formbuilder-reader). Evaluates field types, error states, and WCAG accessibility standards. Do NOT use for automated web form execution (use web/web-reading)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

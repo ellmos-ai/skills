@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: RSSフィードやWebソースから個人の日刊紙を作成します。BACHニュースシステム（news.py + newspaper_generator.py）から移植。独自のSQLiteストア（Origin-DBなし）。feedparserはオプション — stdlib経由のXMLフォールバックあり。Edge Headless（msedge.exe）によるPDFエクスポート。
-
+updated: 2026-11-09
+description: "RSSフィードやWebソースからパーソナライズされた日刊新聞や朝のニュースまとめを生成する場合に使用する（例：'日刊新聞を作成'、'朝のニュースまとめ'、'ニュースブリーフィングをPDF出力'、/tageszeitung）。設定されたフィードをローカルSQLiteに集約し、Edge Headless経由で美しいPDFを発行する。学術文献の調査（research/research-agent）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HTML → PDF (Edge Headless); without Edge: HTML output only'}], 'services': [], 'protocols': [], 'python': [{'name': 'feedparser', 'optional': True, 'install': 'pip install feedparser', 'purpose': 'RSS parsing (main backend). Fallback: defusedxml → regex'}, {'name': 'defusedxml', 'optional': True, 'install': 'pip install defusedxml', 'purpose': 'XXE-safe XML parser as fallback when feedparser is missing. Without defusedxml a regex fallback is used (no ET.fromstring on network data).'}]}
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="tageszeitung banner">
 

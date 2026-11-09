@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Восстановление кракозябр (mojibake) при двойном/тройном кодировании UTF-8. Исправляет ошибки интерпретации Windows cp1252/Latin-1. Нулевые зависимости.
-
+updated: 2026-11-09
+description: "Используйте, когда текстовые файлы повреждены из-за неверной кодировки символов или кракозябр (например, 'исправить кодировку', 'починить кракозябры/моджибейк', 'двойная кодировка UTF-8', /encoding-fix). Восстанавливает файлы cp1252, Latin-1 и многократно закодированный UTF-8 без зависимостей. НЕ используйте для обычной смены форматов без повреждения кодировки."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 

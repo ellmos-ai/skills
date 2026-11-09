@@ -4,9 +4,9 @@ version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-09-27
+updated: 2026-11-09
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: GitHub リポジトリを安全に作成、公開、リリース、監査、および保守するためのプロトコル：ローカルルールとロックの確認、最初の git add の前の .gitignore 作成、プライバシーチェックの実行、README/i18n/バナー/メタデータの準備、リリースタグと GitHub リリースの検証、組織プロファイル・llms.txt ファイル・レジストリリンクの更新。
+description: "オープンソースのガバナンス基準に沿ってGitHubリポジトリを新規公開、初期化、または正式リリースする場合に使用する（例：'新規リポジトリを公開'、'GitHubリリースの準備'、'メタデータとプライバシーの監査'、/github-repo-care）。gitignoreの事前設定、プライバシー検査、README、バッジ、llms.txt、リリースタグの検証を行う。公開済みリポジトリの日常的なルーチン整備（surface-after-care）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,7 @@ status: active
 dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 

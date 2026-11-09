@@ -4,20 +4,8 @@ version: 0.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-06
-description: >
-  Erstellt oder überarbeitet einen Skill FÜR DIESES ÖKOSYSTEM: delegiert die generische Interview-/Entwurfs-/Eval-Schleife
-  an das offizielle skill-creator-Plugin (Anthropic, Apache-2.0), setzt aber zusätzlich die ellmos-Anforderungen durch, die
-  das offizielle Plugin nicht kennt — Haus-Frontmatter (9 Felder), Kategorie/Sichtbarkeits-Regeln, anbieter-/nutzer-/ellmos-neutrale
-  aber ellmos-sensitive Erkennung via grounding-seed, mitgelieferte config.json (inkl. Lernvertrag) + connections.json,
-  Anbieter-/Vendor-Bewusstsein (State-of-the-Art-Alternativen inkl. eigener ellmos-Komponenten vorschlagen), einen
-  Selbstaktualisierungs-Abschnitt UND einen wiederverwendbaren Lern-/Abdeckungs-Dateisatz (user-usecases.json,
-  usecase-gaps.json, known-providers-and-abilities.json, gap-closing-analysis.json — an skill-creators evals.json und
-  A2A/AgentSkill angelehnt, kein Parallelstandard). IMMER nutzen, wenn ein NEUER Skill für dieses System entstehen oder
-  ein bestehender auf ellmos-Konformität nachgerüstet werden soll — auch bei "erstelle einen Skill", "bau mir einen Skill
-  für X", "skill-creator nutzen", "neuen Skill anlegen", "diesen Skill ellmos-konform machen", "Lernvertrag/Verhaltenscodex
-  für einen Skill anlegen", "Usecase-Abdeckung eines Skills prüfen". Für reines Skill-FINDEN/ROUTEN stattdessen skill-finder,
-  für Landschafts-Audit skill-explorer.
+updated: 2026-11-09
+description: "Verwenden, wenn ein neuer Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'bau mir einen Skill für X', 'skill-creator nutzen', 'neuen Skill anlegen', 'diesen Skill ellmos-konform machen', 'Lernvertrag anlegen', 'Usecase-Abdeckung prüfen', /ellmos-skill-creator). Delegiert die Entwurfsschleife an das skill-creator-Plugin und setzt ellmos-Standards durch: 9-Felder-Frontmatter, grounding-seed, config.json mit Lernvertrag, connections.json, Vendor-Bewusstsein und Lern-/Abdeckungs-Dateisatz. NICHT verwenden für reines Skill-Finden/Routen (dafür skill-finder) oder Landschafts-Audits (dafür skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -45,6 +33,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-skill-creator banner">
 

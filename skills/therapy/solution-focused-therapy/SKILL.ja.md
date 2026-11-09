@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ド・シェザーとバーグによる解決志向ブリーフセラピー：ミラクル・クエスチョン、例外の探求、スケーリング、リソースの活性化。
+updated: 2026-11-09
+description: "問題の原因究明ではなく、実行可能な解決策や本人のリソース・例外に焦点を素早くシフトする場合に使用する（例：'ミラクルクエスチョン'、'問題が起きていない例外を探す'、'スケーリングクエスチョン'、/solution-focused-therapy）。スティーブ・ド・シェイザーとインスー・キム・バーグの解決志向ブリーフセラピー技法を解説する。過去の原因深層分析には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

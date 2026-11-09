@@ -4,10 +4,9 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger + Claude
 created: 2026-09-20
-updated: 2026-09-20
+updated: 2026-11-09
 aliases: [mermaid, mermaid-fehler, diagramm-render-fehler, unable-to-render-rich-display, schaltplan-fehler]
-description: Findet und behebt Mermaid-Diagramme, die GitHub nicht rendert ("Unable to render rich display"). Prueft jeden ```mermaid-Block mit dem echten Mermaid-Parser ohne Browser und belegt das Ergebnis danach an der lebenden GitHub-Seite.
-
+description: "Verwenden, wenn Mermaid-Diagramme in Markdown-Dateien auf Syntaxfehler und GitHub-Renderbarkeit geprüft oder repariert werden sollen (z. B. 'Mermaid-Syntax prüfen', 'Diagramm rendert nicht auf GitHub', 'Parse error in Diagramm', /mermaid-lint). Prüft ```mermaid-Blöcke deterministisch gegen die Mermaid-Grammatik und behebt problematische Knotenlabels und Kanten. NICHT verwenden für inhaltliche Code-Reviews außerhalb von Markdown-Diagrammen."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ status: active
 visibility: public
 dependencies: {'tools': ['node', 'git'], 'services': ['GitHub'], 'protocols': [], 'python': [], 'npm': ['mermaid', 'jsdom', 'playwright-core']}
 ---
+
 
 <img src="banner.png" width="100%" alt="mermaid-lint banner">
 

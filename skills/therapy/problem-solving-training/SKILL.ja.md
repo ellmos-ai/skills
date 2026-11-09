@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 6つのステップによる構造化された問題解決：問題の定義、目標設定、ブレインストーミング、評価、実行、振り返り。
+updated: 2026-11-09
+description: "日常の複雑な問題や生活上の行き詰まりを構造化された認知行動療法的アプローチで解決する場合に使用する（例：'問題を論理的に解決'、'ステップ式問題解決法'、'解決策の評価'、/problem-solving-training）。ズリラ＆ゴールドフリードの6段階モデル（問題同定、目標設定、選択肢創出、意思決定、実行、評価）を導く。ソフトウェアアーキテクチャの選定（utilities/decide）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

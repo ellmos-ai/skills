@@ -4,8 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Canalización automatizada de desarrollo de software. Escanea proyectos, prioriza tareas, analiza código u orquesta bucles de desarrollo. Cero dependencias (solo biblioteca estándar de Python).
+updated: 2026-11-09
+description: "Usar cuando se escanee, priorice y ejecute un bucle de desarrollo de software autónomo en un repositorio (ej. 'bucle de desarrollo autónomo', 'escanear proyecto y avanzar backlog', 'ejecutar agente de desarrollo', /dev-soft-agent). Orquesta escaneos del proyecto, priorización del backlog y ciclos iterativos sin dependencias externas. NO usar para ediciones puntuales y rápidas de un solo archivo."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 > **Español** — Versión oficial en español de `dev-soft-agent`.

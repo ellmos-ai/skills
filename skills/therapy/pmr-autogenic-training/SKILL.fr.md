@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour pmr-autogenic-training: Progressive Muscle Relaxation (PMR) according to Jacobson and Autogenic Training according to Schultz. Short forms and full versions."
+updated: 2026-11-09
+description: "Utiliser pour pratiquer des techniques de relaxation corporelle visant la réduction du stress et la détente musculaire (ex. 'relaxation progressive de Jacobson', 'entraînement autogène', 'relâcher la tension corporelle', /pmr-autogenic-training). Enseigne les séquences tension-relâchement de Jacobson (PMR) et les formules autogènes de Schultz. Ne PAS utiliser pour la méditation de pleine conscience sans travail musculaire (utiliser mindfulness-basics)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

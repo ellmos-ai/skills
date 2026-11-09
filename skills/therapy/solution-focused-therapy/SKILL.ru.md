@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Ориентированная на решение краткосрочная терапия по де Шейзеру и Берг: вопрос о чуде, поиск исключений, шкалирование, активация ресурсов."
+updated: 2026-11-09
+description: "Используйте, когда фокус нужно быстро переключить с причин проблем на поиск решений и имеющихся ресурсов (например, 'чудесный вопрос', 'поиск исключений из проблемы', 'шкалирование прогресса', /solution-focused-therapy). Применяет методы краткосрочной терапии де Шейзера и Берг: чудесный вопрос, шкалирование и поиск исключений. НЕ используйте для глубинного психоаналитического поиска причин."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

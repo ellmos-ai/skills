@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  提供された金融・保険資料を中立的な概要とチェックリストに整理します。
+updated: 2026-11-09
+description: "個人または事業の財務書類、保険契約、契約書類を整理・点検する場合に使用する（例：'保険証券を整理'、'財務資料を体系化'、'契約更新期限を確認'、/finanz-versicherung）。法的な投資・税務助言を行わずに、客観的な概要一覧、更新スケジュール、チェックリストを作成する。拘束力のある投資判断や税務申告の助言には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

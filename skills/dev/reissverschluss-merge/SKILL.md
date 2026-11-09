@@ -10,17 +10,8 @@ provenance:
   origin: live-session-extraction
   extracted: 2026-08-07
   method: skill-extractor
-updated: 2026-08-07
-description: >
-  Reißverschluss-Verfahren (englisch: zipper merge) für sehr konfliktreiche Merges:
-  Wenn zwei divergente Branches oder ein PR und sein Zielbranch BEIDE wertvolle,
-  unvereinbar erscheinende Änderungen tragen, wird nicht pauschal eine Seite gewählt,
-  sondern Abschnitt für Abschnitt verglichen, per Entscheidungstabelle (Nimm/Warum)
-  die jeweils bessere Version übernommen, abschnittsweise committet und erst am Ende
-  gepusht. Letzte Eskalationsstufe: Rebuild statt Merge — nur die Absicht/Funktionalität
-  des Branches übernehmen und auf dem aktuellen Stand neu bauen. Nutzen bei: "Merge-Konflikt",
-  "divergente Branches", "main vs. master", "konfliktreicher PR", "zipper merge",
-  "Reißverschluss", "beide Seiten haben Recht", "PR ist zu alt zum Mergen".
+updated: 2026-11-09
+description: "Verwenden, wenn zwei divergierende Code- oder Dokumentationsstände konfliktfrei nach dem Reißverschluss-Prinzip zusammengeführt werden sollen (z. B. 'Branches reißverschlussartig mergen', 'zwei Dokumente zusammenführen', /reissverschluss-merge). Gleicht Zeilen, Absätze und AST-Knoten deterministisch ab und verhindert das Überschreiben fremder Änderungen. NICHT verwenden für Standard-Git-Merges ohne inhaltliche Konflikte."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -31,6 +22,7 @@ aliases:
   - reissverschluss
 tags: [git, merge, konflikt, pull-request, branch, rebase, dev-workflow]
 ---
+
 
 <img src="banner.png" width="100%" alt="reissverschluss-merge banner">
 

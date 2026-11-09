@@ -4,12 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: >
-  Zu Beginn einer konkreten Projektaufgabe oder bei unklarem Kontext: Ziel
-  auflösen, geltende Regelhierarchie laden, verbindliche Referenzen verfolgen
-  und vor der eigentlichen Arbeit einen evidenzbasierten Lagebericht erstellen.
-
+updated: 2026-11-09
+description: "Verwenden, wenn eine neue Aufgabe in einem Projekt gestartet wird und Kontext, Regeln sowie Vorgaben präzise geladen werden müssen (z. B. 'Projektkontext laden', 'Regeln einlesen', 'Lagebericht vor Task-Start', /load-project). Löst das Projektziel auf, lädt die Regelhierarchie (CLAUDE.md, etc.) und erstellt einen evidenzbasierten Lagebericht vor der Arbeit. NICHT verwenden für das erstmalige Erfassen einer fremden Codebasis (dafür dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -36,6 +32,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="load-project banner">
 # Load Project

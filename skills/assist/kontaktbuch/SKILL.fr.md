@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organise les coordonnées fournies volontairement en minimisant les données et détecte les doublons.
+updated: 2026-11-09
+description: "Utiliser pour gérer son carnet d'adresses, mettre à jour des coordonnées ou dédoublonner des fiches de contact en préservant la vie privée (ex. 'enregistrer un contact', 'mettre à jour une adresse', 'trouver les doublons de contacts', /kontaktbuch). Structure les répertoires et fusionne les doublons localement en toute sécurité. Ne PAS utiliser pour la prospection sur les réseaux sociaux (utiliser dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

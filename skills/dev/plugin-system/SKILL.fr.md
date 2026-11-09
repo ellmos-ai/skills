@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour plugin-system: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only)."
+updated: 2026-11-09
+description: "Utiliser pour concevoir ou implémenter une architecture de plugins tolérante aux pannes avec détection automatique en Python (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'architecture extensible', /plugin-system). Fournit un chargeur de plugins modulaire avec cycle de vie et isolation sans dépendances externes. Ne PAS utiliser pour auditer des plugins tiers non fiables (utiliser dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 

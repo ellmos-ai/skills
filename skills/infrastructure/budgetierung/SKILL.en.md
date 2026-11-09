@@ -4,18 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-10-03
-updated: 2026-10-03
-description: >
-  Account concept for the budgeted use of expensive or scarce models (advisor,
-  reviewer, specialist models, long-running workers) in longer agent runs. Starts
-  with a joint negotiation between user and model about available models, roles
-  and quotas per time window, keeps a ledger of every use, runs a jigsaw-piece
-  pre-procedure before every escalation, and allows mid-run adjustments. Use on
-  "budget", "quota", "keep a ledger", "only once per hour", "use the reviewer
-  sparingly", "Fable/Codex/Sol/Astra/Luna/advisor only in limited numbers",
-  "/budgetierung", and whenever an operator, research, or automation run should
-  combine several models with different costs — even if the user does not say
-  "budget" but does specify usage limits for models.
+updated: 2026-11-09
+description: "Use when controlling and budgeting usage of expensive or quota-limited reasoning models in prolonged agent sessions (e.g. 'manage model budget', 'set quota for thinking models', 'budget expensive LLM calls', /budgetierung). Tracks model expenditure against negotiated time-window quotas and enforces pre-escalation filters. Do NOT use for static role assignment without quotas (use dev/model-strategy)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -39,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="budgetierung banner">
 

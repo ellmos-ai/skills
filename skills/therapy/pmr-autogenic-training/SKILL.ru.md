@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Прогрессивная мышечная релаксация (ПМР) по Якобсону и аутогенная тренировка по Шульцу. Краткие и полные версии.
-
+updated: 2026-11-09
+description: "Используйте для освоения методов физической релаксации с целью снижения стресса и регуляции напряжения (например, 'прогрессивная мышечная релаксация', 'аутогенная тренировка', 'снять телесное напряжение', /pmr-autogenic-training). Обучает циклам напряжения и расслабления по Джекобсону (ПМР) и аутогенным формулам Шульца. НЕ используйте для медитации осознанности без работы с мышечным напряжением (используйте mindfulness-basics)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

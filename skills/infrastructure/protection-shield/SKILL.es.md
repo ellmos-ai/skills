@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Coordina defensa inmediata autorizada y revisiones periódicas de registros y versiones con pruebas y reversión."
+updated: 2026-11-09
+description: "Usar cuando se coordinen medidas defensivas inmediatas ante ciberataques, picos de carga anómalos o actividad sospechosa en servidores (ej. 'proteger servidor', 'activar escudo de protección', 'respuesta defensiva de emergencia', /protection-shield). Gestiona análisis de registros, bloqueos temporales y mitigaciones con verificación y capacidad de reversión. NO usar para el endurecimiento rutinario del sistema base (usar os-hardening-baseline)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-tech-stack-check], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="protection-shield banner">
 

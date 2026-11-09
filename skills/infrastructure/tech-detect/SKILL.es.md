@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Registra versiones y hardware con pruebas en instantáneas privadas y compara equipos sin confundir ausencia de observación con desinstalación."
+updated: 2026-11-09
+description: "Usar cuando se registren, auditen o comparen versiones reales de hardware, sistema operativo, software y Python con evidencia ejecutable (ej. 'detectar pila tecnológica', 'inventario de hardware y software', 'medir versiones del sistema', /tech-detect). Genera un informe techshot respaldado por comandos y compara estados del host sin errores de interpretación. NO usar para evaluar vulnerabilidades o CVEs (usar dev/security-tech-stack-check)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="tech-detect banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Независимо от системы помогает с приключениями, сценами, персонажами и кампанией.
+updated: 2026-11-09
+description: "Используйте для подготовки и проведения настольных ролевых игр (НРИ), кампаний, приключений, создания NPC и боевых сцен (например, 'сгенерировать NPC', 'спланировать ролевую сессию', 'подготовить сцену приключения', /rpg). Помогает мастерам и игрокам с созданием игровых миров, сюжетов и персонажей. НЕ используйте для программного кода видеоигр или правил настолок."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

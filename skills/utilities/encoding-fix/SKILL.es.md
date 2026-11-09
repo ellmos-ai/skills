@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Reparación de mojibake para UTF-8 con doble/triple codificación. Corrige malas interpretaciones de Windows cp1252/Latin-1. Sin dependencias.
-
+updated: 2026-11-09
+description: "Usar cuando los archivos de texto presenten corrupción de codificación o mojibake (ej. 'reparar codificación rota', 'corregir mojibake/caracteres rotos', 'UTF-8 doblemente codificado', /encoding-fix). Repara archivos de texto con fallos en cp1252, Latin-1 o codificación múltiple UTF-8 sin dependencias. NO usar para conversiones de formato limpias sin bytes corruptos."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 

@@ -4,9 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: Puente neutral de proveedor y usuario para reglas de inicio de agentes, CLI e IDE. Descubre superficies de bootstrap conocidas, requiere que el usuario seleccione una o más fuentes de verdad ordenadas y genera cargadores pequeños sin duplicar reglas.
-
+updated: 2026-11-09
+description: "Usar cuando se establezca un puente de archivos neutral y robusto entre diferentes agentes de IA y sistemas host (ej. 'puente multiagente', 'conectar sistemas de agentes', 'comunicación entre agentes por archivos', /agents-bridge). Proporciona superficies de arranque, silos de memoria, presencia, mensajería y bloqueos cooperativos. NO usar para fusiones de ramas en git (usar dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -15,6 +14,7 @@ language: es
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

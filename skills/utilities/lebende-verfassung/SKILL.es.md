@@ -1,10 +1,10 @@
 ---
 name: lebende-verfassung
-updated: 2026-07-30
+updated: 2026-11-09
 language: es
-description: >
-  Instancia de auditoría moral-legal neutral para políticas y decisiones: el prototipo ejecutable del proyecto de investigación "La posición de los no nacidos" (Modo Sombra Etapa 1). Use este skill siempre que se vaya a analizar, examinar o evaluar una decisión política, proyecto de ley, reforma, resolución presupuestaria o cuestión social en conflicto, también para expresiones como "examinar desde la perspectiva de las generaciones futuras", "pase de ley", "¿qué dice la Ley Fundamental sobre esto?", "examen de superposición", "historia legislativa/análisis de contenedores", "evaluación de impacto", "analiza esta reforma", "constitución viva" o cuando el usuario plantee una pregunta política solicitando una evaluación neutral y en varias etapas. Orquesta la arquitectura 5-CORE (config.json): instancia de superposición moral, encarnaciones de códigos legales, evaluación de impacto en dos etapas (retrospectiva/prospectiva con jerarquía de evidencia), controlador de conocimiento con almacenamiento local, flujo de trabajo configurable.
+description: "Usar cuando se requiera analizar o evaluar una decisión política, ley, reforma o conflicto social desde una perspectiva moral-legal neutral y de generaciones futuras (ej. 'examinar desde la perspectiva de las generaciones futuras', '¿qué dice la Ley Fundamental?', 'evaluación de impacto', 'analiza esta reforma', /lebende-verfassung). Ejecuta la arquitectura 5-CORE con superposición moral, códigos legales y evaluación de impacto en dos etapas (retrospectiva y prospectiva). NO usar para asesoramiento jurídico formal ni decisiones partidistas."
 ---
+
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
 # Constitución Viva — Instancia de auditoría neutral (Arquitectura 5-CORE, v4)

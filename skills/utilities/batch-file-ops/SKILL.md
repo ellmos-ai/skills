@@ -4,10 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Batch-Dateioperationen (Löschen, Verschieben, Kopieren, Auflisten) mit Glob-Mustern. CLI-Werkzeug für effiziente Dateisystem-Operationen. Ohne Abhängigkeiten.
-
+updated: 2026-11-09
+description: "Verwenden, wenn dateisystemweite Batch-Operationen wie Löschen, Verschieben, Kopieren oder Auflisten über Glob-Muster ausgeführt werden sollen (z. B. 'alle *.log Dateien verschieben', 'Dateien im Batch umbenennen/löschen', /batch-file-ops). Führt sichere Dateioperationen ohne externe Abhängigkeiten aus. NICHT verwenden für semantische Textänderungen in Dateien oder interaktive Einzeldatei-Edits."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -31,6 +29,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 
 # batch_file_ops - Batch-Dateioperationen

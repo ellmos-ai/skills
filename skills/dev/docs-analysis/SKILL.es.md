@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Análisis de requisitos de documentos: analiza los documentos de concepto y requisitos en la carpeta docs/, verifica los requisitos con el código actual y crea un informe de diferencias consolidado."
+updated: 2026-11-09
+description: "Usar cuando se comparen documentos de arquitectura, especificaciones o requisitos con el código fuente real o se consoliden múltiples planes (ej. 'auditar documentación frente a código', 'consolidar planes dispersos', 'analizar brechas de documentación', /docs-analysis). Compara especificaciones escritas con la implementación y fusiona planes obsoletos. NO usar para validación de sintaxis de diagramas (usar dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 

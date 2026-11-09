@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Progressive Muskelentspannung (PMR) nach Jacobson und Autogenes Training nach Schultz. Kurz- und Langformen.
-
+updated: 2026-11-09
+description: "Verwenden, wenn körperliche Entspannungsverfahren zur Stressreduktion und Spannungsregulation erlernt werden sollen (z. B. 'Progressive Muskelentspannung lernen', 'Autogenes Training üben', 'Körper entspannen', /pmr-autogenic-training). Leitet PMR nach Jacobson (16er-, 7er- und 4er-Muskelgruppen) sowie Autogenes Training nach Schultz strukturiert an. NICHT verwenden für Atemachtsamkeit ohne Muskelanspannung (dafür mindfulness-basics)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 
 # Progressive Muskelrelaxation & Autogenes Training

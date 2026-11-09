@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Планирует занятия и индивидуальную поддержку без генератора отчетов и личных шаблонов.
+updated: 2026-11-09
+description: "Используйте, когда требуется составить индивидуальный план педагогической поддержки, дифференцированные учебные задания или развивающие меры (например, 'составить план поддержки', 'дифференцировать задания', 'сформулировать цели обучения', /foerderplaner). Разрабатывает структурированные нейтральные концепции поддержки без персональных данных. НЕ используйте для создания отдельных рабочих листов (используйте worksheet-generator)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

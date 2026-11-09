@@ -4,12 +4,8 @@ version: 1.0.0
 type: protocol
 author: Claude + Codex
 created: 2026-07-28
-updated: 2026-07-28
-description: >
-  Bei vorhandenem und ausdrücklich autorisiertem lokalem Entscheidungsprofil:
-  wiederkehrende Entscheidungen aus belegtem Feedback vorhersagen, Konfidenz
-  kalibrieren und Vorhersage, Entscheidung und Ausführung strikt trennen.
-
+updated: 2026-11-09
+description: "Verwenden, wenn wiederkehrende Nutzerentscheidungen anhand eines autorisierten, lokalen Entscheidungsprofils vorhergesagt und vorbereitet werden sollen (z. B. 'Entscheidungen vorhersagen', 'Nutzerpräferenzen anwenden', 'Entscheidungsprofil nutzen', /decision-avatar). Kalibriert Konfidenzwerte, trennt Vorhersage strikt von Ausführung und dokumentiert Begründungen transparent. NICHT verwenden zur ethischen Verfassungsprüfung von Gesetzen (dafür utilities/lebende-verfassung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -36,6 +32,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-avatar banner">
 # Decision Avatar

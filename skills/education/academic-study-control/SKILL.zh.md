@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  具备出处验证、隐私合规及务实规划能力的学术学习与截止日期管理。
+updated: 2026-11-09
+description: "当需要管理大学学业进度、模块截止日期或考试日程时使用（例如 '制定学期计划'、'管理学业截止时间'、'规划考试周'、/academic-study-control）。在注重隐私和依据来源的前提下组织截止日期与行动方案。切勿用于专业知识的主动学习（使用 academic-study-learn）或自测模拟（使用 academic-study-test）。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-zh]
 language: zh
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

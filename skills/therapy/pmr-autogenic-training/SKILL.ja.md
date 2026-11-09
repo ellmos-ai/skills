@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: ヤコブソンによる筋弛緩法（PMR）およびシュルツによる自律訓練法。短縮版と完全版。
-
+updated: 2026-11-09
+description: "ストレス軽減や自律神経調整のために神経筋肉弛緩法や自己暗示法を実践する場合に使用する（例：'漸進的筋弛緩法を学ぶ'、'自律訓練法を練習'、'身体の緊張を緩める'、/pmr-autogenic-training）。ジェイコブソンの漸進的筋弛緩法（緊張と弛緩の反復）およびシュルツの自律訓練法の手順を案内する。筋肉の緊張を伴わないマインドフルネス呼吸（mindfulness-basics）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

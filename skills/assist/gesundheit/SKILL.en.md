@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organizes voluntarily supplied health information and prepares questions for professionals.
+updated: 2026-11-09
+description: "Use when organizing personal health notes, symptom chronologies, or preparing consultations with doctors (e.g. 'prepare doctor visit', 'structure symptom notes', 'organize health questions', /gesundheit). Formats voluntary health information neutrally and drafts targeted questions for healthcare professionals. Do NOT use for medical diagnosis, treatment prescribing, or medical emergencies."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

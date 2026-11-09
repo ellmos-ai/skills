@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Terapia Cognitivo-Conductual: Modelo ABC, pensamientos automáticos, identificación de distorsiones cognitivas y registros de pensamientos."
+updated: 2026-11-09
+description: "Usar cuando se examinen pensamientos automáticos negativos, rumiaciones o distorsiones cognitivas (ej. 'reestructurar pensamientos', 'registro de pensamientos', 'identificar distorsiones cognitivas', /cognitive-restructuring). Enseña el modelo cognitivo ABC de Beck, identifica sesgos y guía el debate socrático. NO usar para defusión cognitiva sin debate (usar act-techniques) ni análisis genealógico (usar genogram-work)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

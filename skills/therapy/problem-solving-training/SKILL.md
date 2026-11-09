@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Strukturiertes Problemlösen in 6 Schritten nach D'Zurilla und Goldfried: Problemdefinition, Ziele, Brainstorming, Bewertung, Umsetzung und Rückblick.
-
+updated: 2026-11-09
+description: "Verwenden, wenn komplexe Lebensprobleme oder Alltagsblockaden strukturiert gelöst werden sollen (z. B. 'Problem strukturiert lösen', 'Schritt-für-Schritt Problemlösung', 'Lösungsoptionen bewerten', /problem-solving-training). Führt durch das 6-Schritte-Modell nach D'Zurilla und Goldfried: Problemdefinition, Zielklärung, Brainstorming, Bewertung, Umsetzung und Evaluation. NICHT verwenden für ethische/technische Architekturentscheidungen (dafür utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 
 # Problemloese-Training

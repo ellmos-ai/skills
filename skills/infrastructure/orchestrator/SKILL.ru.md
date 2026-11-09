@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: Провайдеронезависимый протокол для разбора сложных задач, поручения независимым Worker и приемки их результатов на основе доказательств.
+updated: 2026-11-09
+description: "Используйте для декомпозиции комплексных целей на параллельные или последовательные подзадачи для независимых субагентов с приемкой по доказательствам (например, 'оркестровать задачи', 'координировать субагентов', 'делегировать рабочие пакеты', /orchestrator). Составляет технические задания, распределяет работу и объективно верифицирует результаты. НЕ используйте для простых задач, решаемых одним запросом."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

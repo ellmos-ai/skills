@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 家系图（Genogram）工作：识别与反思家庭关系模式。跨世代视角、家系图符号、模式识别以及家庭历史中的资源。
+updated: 2026-11-09
+description: "当绘制跨代家庭关系模式、代际创伤动态或系统性家庭角色时使用（例如 '绘制家系图'、'分析家庭谱系动态'、'探索家族代际模式'、/genogram-work）。详细阐述标准家系图符号、关系连线以及贯穿 3 代以上家庭资源的挖掘。切勿用于个体认知重塑（使用 cognitive-restructuring）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="genogram-work banner">
 

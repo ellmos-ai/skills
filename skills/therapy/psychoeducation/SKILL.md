@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Psychoedukation zu Depression, Angststörungen, PTBS, bipolarer Störung, Schizophrenie, ADHS und Borderline. Wissensvermittlung ohne Diagnose.
-
+updated: 2026-11-09
+description: "Verwenden, wenn fundiertes, entstigmatisierendes Wissen über psychische Störungen und Symptome vermittelt werden soll (z. B. 'wie funktioniert Depression/Angst', 'Symptome von ADHS/PTBS verstehen', 'Psychoedukation psychische Störung', /psychoeducation). Erklärt Entstehungsmodelle, Vulnerabilitäts-Stress-Modelle und Behandlungsoptionen verständlich und evidenzbasiert. NICHT verwenden für individuelle Diagnosestellung oder Therapieersatz."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 
 # Psychoedukation

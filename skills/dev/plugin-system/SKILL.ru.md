@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Универсальная система плагинов для приложений Python. Автоматическое обнаружение, валидация, отказоустойчивость. Нулевые зависимости (только стандартная библиотека Python).
+updated: 2026-11-09
+description: "Используйте для проектирования или внедрения отказоустойчивой системы плагинов с автообнаружением в приложениях Python (например, 'реализовать систему плагинов', 'динамическая загрузка плагинов', 'расширяемая архитектура', /plugin-system). Предоставляет модульный загрузчик с хуками жизненного цикла без внешних зависимостей. НЕ используйте для аудита безопасности сторонних плагинов (используйте dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 

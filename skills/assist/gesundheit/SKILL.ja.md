@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  自発的に提供された健康情報を整理し、専門家への質問を準備します。
+updated: 2026-11-09
+description: "個人の健康メモ、症状の時系列記録の整理、または医師の診察前の質問準備を行う場合に使用する（例：'医師への相談を準備'、'症状記録を整理'、'健康に関する質問をまとめる'、/gesundheit）。提供された健康データを客観的に整理し、医療従事者に尋ねるべき要点を準備する。医学的診断の確定、治療方針の指示、緊急対応には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

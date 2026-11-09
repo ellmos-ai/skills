@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-06-13
-description: 系统性与焦点解决方法：奇迹提问、刻度提问、例外探索、循环提问、假设性提问、恶化提问及应对提问。合并自焦点解决短期心理治疗与系统性提问。
+updated: 2026-11-09
+description: "当在咨询或反思场景中整合系统式提问与焦点解决短期治疗技术时使用（例如 '系统性焦点解决咨询'、'循环提问与刻度量表'、/systemisch-loesungsfokussiert）。将循环提问、奇迹提问、例外探寻、刻度化及应对提问融合为一个协同的工具箱。切勿用于标准 CBT 思维记录表（使用 cognitive-restructuring）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 

@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Behavioral activation for depression: Breaking the vicious cycle, activity monitoring, weekly planning, and values-based activities."
-
+updated: 2026-11-09
+description: "Use when addressing low motivation, lethargy, or depressive withdrawal through structured behavioral activation (e.g. 'break inactivity spiral', 'plan weekly activities', 'rebuild daily routine', /behavioral-activation). Reverses avoidance cycles using activity logs, master-pleasure ratings, and graded task assignment. Do NOT use for acute crisis de-escalation (use stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

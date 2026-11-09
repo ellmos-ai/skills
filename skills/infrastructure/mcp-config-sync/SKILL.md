@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-07-27
-description: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub.
-
+updated: 2026-11-09
+description: "Verwenden, wenn MCP-Server-Konfigurationen zwischen verschiedenen Agenten-Tools (Claude, Gemini, Codex, etc.) abgeglichen und synchronisiert werden sollen (z. B. 'MCPs synchronisieren', 'MCP-Konfiguration abgleichen', 'MCP-Server übertragen', /mcp-config-sync). Ermittelt vorhandene Server-Definitionen und gleicht sie nutzergeführt ohne festen Master-Hub ab. NICHT verwenden, wenn zusätzlich Skills und Regeln gespiegelt werden sollen (dafür agent-config-sync)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Позитивная психология по Мартину Селигману: модель PERMA, сильные стороны характера (VIA), упражнения на благодарность, теория потока и факторы жизнестойкости."
+updated: 2026-11-09
+description: "Используйте для развития психологического благополучия, личных сильных сторон и жизнестойкости (например, 'определить сильные стороны', 'упражнения благодарности', 'применить модель PERMA', /positive-psychology). Опирается на модель PERMA Селигмана, сильные стороны характера VIA и состояние потока. НЕ используйте для лечения клинической депрессии или острых кризисов (используйте behavioral-activation или stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

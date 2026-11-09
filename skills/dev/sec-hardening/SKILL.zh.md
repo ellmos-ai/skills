@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "基于发现、事件报告或评估，推导结构性的加固建议，而不是一次性的补丁：归并根本原因，给出加固前后的架构图（ASCII）、带权衡（工作量、风险、效果）的备选方案、实施顺序，以及每项建议的证据。交付一份文档，不修改任何代码。触发词：「怎样从根本上加固」「为什么总是出现这类发现」「让架构更安全」「根据事件制定行动计划」。不用于修复单个发现（sec-fix），也不用于紧急防御（protection-shield）。"
+updated: 2026-11-09
+description: "当从安全审计漏洞或真实故障事件中提炼长效的架构加固与纵深防御措施时使用（例如 '从根本上加固系统架构'、'安全事件后的整改防范路线图'、/sec-hardening）。输出前后对比架构图与结构化加固清单，不直接修改代码。切勿用于编写单个漏洞补丁（使用 sec-fix）或应急拦截处置（使用 protection-shield）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-hardening banner">
 

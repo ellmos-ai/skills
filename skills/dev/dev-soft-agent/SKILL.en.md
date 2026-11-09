@@ -4,9 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only).
-
+updated: 2026-11-09
+description: "Use when scanning, prioritizing, and executing autonomous software development loops on a repository (e.g. 'autonomous dev loop', 'scan project and work on backlog', 'run dev agent', /dev-soft-agent). Orchestrates project scanning, backlog prioritization, and iterative coding loops with zero external dependencies. Do NOT use for quick single-file ad-hoc edits."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 

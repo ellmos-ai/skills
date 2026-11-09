@@ -4,12 +4,8 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-11-08
-description: >
-  Evidence-based Windows storage cleanup with a controlled emergency mode,
-  physical usage measurement, process and origin forensics, and
-  reversible measures against recurring storage fillers.
-
+updated: 2026-11-09
+description: "Use when Windows drives are running out of disk space and evidence-based cleanup is needed (e.g. 'disk space full', 'clean up drive C:', 'free up storage', /speicherbereinigung). Measures physical disk usage, diagnoses culprit processes, and frees space with rollback safeguards. Do NOT use for deleting source code repositories or git trees."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -33,6 +29,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+
 
 <img src="banner.png" width="100%" alt="speicherbereinigung banner">
 

@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-DEFAULT_PLATFORM_ROTATION = ["Reddit", "YouTube", "Dev.to / Foren", "GitHub Discussions"]
+DEFAULT_PLATFORM_ROTATION = ["Reddit", "YouTube", "GitHub Discussions", "Foren"]
 TRACKING_QUERY_KEYS = {
     "fbclid",
     "gclid",
@@ -364,6 +364,8 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
         platform = re.search(r"-\s*\*\*Plattform:\*\*\s*([^\n]+)", segment)
         target = re.search(r"-\s*\*\*Ziel-URL(?:\s*/\s*Thread)?:\*\*\s*([^\n]+)", segment)
         repo = re.search(r"-\s*\*\*(?:Lösungs-Repo|Repository):\*\*\s*([^\n]+)", segment)
+        code_evidence = re.search(r"-\s*\*\*Code-Beleg(?:\s*\([^\)]*\))?:\*\*\s*([^\n]+)", segment)
+        context_check = re.search(r"-\s*\*\*Umgebungs-Check(?:\s*\([^\)]*\))?:\*\*\s*([^\n]+)", segment)
         post_text = re.search(
             r"(?:####\s+Textvorschlag:|\*\*Vorgeschlagener Beitrag:\*\*)\s*\n"
             r"```(?:markdown|text)?[ \t]*\n(.*?)\n```",
@@ -393,6 +395,8 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
                 "target_url": _extract_url(target.group(1)),
                 "repo": repo_link.group(1).strip() if repo_link else repo_value,
                 "repo_url": repo_link.group(2).strip() if repo_link else "",
+                "code_evidence": code_evidence.group(1).strip() if code_evidence else "",
+                "context_check": context_check.group(1).strip() if context_check else "",
                 "text": post_text.group(1).strip(),
                 "approved": approval.group(1).lower() == "x",
                 "raw_block": raw_block,
@@ -401,6 +405,42 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
         )
     return proposals
 
+
+def _check_natural_human_style(text: str, platform: str = "") -> list[str]:
+    """Detect unmistakable LLM/AI-essay formatting tells in community comments.
+
+    Human comments on Reddit, YouTube, and forums are short, conversational paragraphs
+    without Markdown section headers (###), bolded bullet-list definitions (- **Label:**),
+    inline **bold** buzzword highlighting, em-dashes (—), or 2,500+ char structured essays.
+    """
+    violations: list[str] = []
+    body = str(text or "").strip()
+    if not body:
+        return ["empty-text"]
+
+    prose = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
+
+    if re.search(r"(?m)^\s*#{1,6}\s+\S", prose):
+        violations.append("markdown-headings-forbidden")
+    if re.search(r"\*\*[^*\n]+\*\*", prose):
+        violations.append("bold-markup-forbidden")
+    if "\u2014" in prose:
+        violations.append("em-dash-forbidden")
+    bullet_lines = re.findall(r"(?m)^\s*(?:[-*]|\d+\.)\s+\S", prose)
+    if len(bullet_lines) >= 3:
+        violations.append("structured-list-essay-forbidden")
+    max_len = 1200 if str(platform or "").strip().casefold() in {"reddit", "youtube"} else 1500
+    if len(body) > max_len:
+        violations.append(f"excessive-length-{len(body)}-gt-{max_len}")
+    if re.search(
+        r"\b(?:here are (?:two|three|four) (?:practical |architectural )?(?:patterns|approaches)|"
+        r"here is the architectural pattern|spot[- ]on thesis|really insightful breakdown|"
+        r"treating [a-z0-9 _-]+ as [a-z0-9 _-]+ gives you)\b",
+        prose,
+        re.IGNORECASE,
+    ):
+        violations.append("ai-cliche-phrasing")
+    return violations
 
 def _remove_spans(content: str, spans: list[tuple[int, int]]) -> str:
     updated = content
@@ -455,6 +495,8 @@ def select_candidate_repository(
     scored_candidates = []
     for repo in eligible:
         promo_dt = parse_promo_time(repo)
+        total_promotions = int(repo.get("total_promotions", 0))
+        is_unpromoted = (total_promotions == 0 and promo_dt is None)
         if promo_dt:
             days_since = max(0.0, (current_time - promo_dt).total_seconds() / 86400.0)
             is_cooldown = days_since < cooldown_days
@@ -477,6 +519,7 @@ def select_candidate_repository(
         scored_candidates.append({
             "repo": repo,
             "is_cooldown": is_cooldown,
+            "is_unpromoted": is_unpromoted,
             "days_since_promo": days_since,
             "traffic_score": traffic_score,
             "clones_unique_14d": clones_u,
@@ -492,6 +535,7 @@ def select_candidate_repository(
 
     pool.sort(
         key=lambda c: (
+            0 if c["is_unpromoted"] else 1,
             -c["total_score"],
             c["days_since_promo"] if c["days_since_promo"] < 999 else -1,
             str(c["repo"].get("name", "")),
@@ -530,8 +574,50 @@ class CommunityOutreachEngine:
         self.outbox_md = self.workspace / "POST-AUSGANG.md"
         self.registry_md = self.workspace / "POSTVERZEICHNIS.md"
         self.history_json = self.workspace / "posts_history.json"
+        self.rejected_json = self.workspace / "rejected_proposals.json"
         self.archive_dir = self.workspace / "_archive"
         self.config_json = self.workspace / "config.json"
+
+    def _blacklisted(self) -> tuple[set[str], set[str], set[str]]:
+        """Return (blacklisted_canonical_urls, blacklisted_proposal_ids, excluded_platforms)."""
+        urls: set[str] = set()
+        ids: set[str] = set()
+        platforms: set[str] = set()
+        data = _read_json(self.rejected_json, {})
+        if isinstance(data, Mapping):
+            for plat in data.get("platform_exclusions", []) or []:
+                if isinstance(plat, Mapping) and plat.get("platform"):
+                    platforms.add(str(plat["platform"]).strip().casefold())
+                elif isinstance(plat, str) and plat.strip():
+                    platforms.add(plat.strip().casefold())
+            for entry in data.get("rejected_proposals", []) or []:
+                if not isinstance(entry, Mapping):
+                    continue
+                if entry.get("proposal_id"):
+                    ids.add(str(entry["proposal_id"]).strip())
+                for key in ("canonical_url", "target_url"):
+                    raw_url = str(entry.get(key, "")).strip()
+                    if raw_url:
+                        urls.add(canonicalize_url(raw_url))
+        config = _read_json(self.config_json, {})
+        if isinstance(config, Mapping):
+            for plat in (config.get("compliance") or {}).get("excluded_platforms", []) or []:
+                if str(plat).strip():
+                    platforms.add(str(plat).strip().casefold())
+        return urls, ids, platforms
+
+    def _require_code_evidence(self) -> bool:
+        config = _read_json(self.config_json, {})
+        if not isinstance(config, Mapping):
+            return False
+        return bool((config.get("compliance") or {}).get("require_code_evidence", False))
+
+    def _require_natural_style(self) -> bool:
+        config = _read_json(self.config_json, {})
+        if not isinstance(config, Mapping):
+            return False
+        compliance = config.get("compliance") or {}
+        return bool(compliance.get("require_natural_style", False) or compliance.get("require_code_evidence", False))
 
     def _history(self) -> list[dict[str, Any]]:
         """A missing history is empty; an unreadable one is an error, never an empty list to overwrite."""
@@ -579,6 +665,8 @@ class CommunityOutreachEngine:
             return []
 
         history = self._history()
+        blacklisted_urls, blacklisted_ids, excluded_platforms = self._blacklisted()
+        require_evidence = self._require_code_evidence()
         results: list[dict[str, Any]] = []
         finalized: list[tuple[dict[str, Any], dict[str, Any], str]] = []
         publisher_attempts = 0
@@ -588,6 +676,27 @@ class CommunityOutreachEngine:
             if not _is_valid_target_url(proposal["target_url"]):
                 results.append({"id": proposal["id"], "status": "invalid-target"})
                 continue
+            target_key = canonicalize_url(proposal["target_url"])
+            if (
+                proposal["id"] in blacklisted_ids
+                or target_key in blacklisted_urls
+                or proposal["platform"].strip().casefold() in excluded_platforms
+            ):
+                results.append({"id": proposal["id"], "status": "blacklisted"})
+                continue
+            if require_evidence and not proposal.get("code_evidence", "").strip():
+                results.append({"id": proposal["id"], "status": "needs-action", "reason": "missing-code-evidence"})
+                continue
+            if self._require_natural_style():
+                style_violations = _check_natural_human_style(proposal["text"], proposal["platform"])
+                if style_violations:
+                    results.append({
+                        "id": proposal["id"],
+                        "status": "needs-action",
+                        "reason": "ai-style-violation",
+                        "violations": style_violations,
+                    })
+                    continue
             existing_id = next(
                 (
                     item
@@ -612,7 +721,6 @@ class CommunityOutreachEngine:
                 results.append({"id": proposal["id"], "status": "recovered"})
                 continue
 
-            target_key = canonicalize_url(proposal["target_url"])
             duplicate = next(
                 (
                     item
@@ -625,7 +733,6 @@ class CommunityOutreachEngine:
             if duplicate:
                 results.append({"id": proposal["id"], "status": "duplicate", "duplicate_of": duplicate.get("post_id")})
                 continue
-
             if self.dry_run:
                 results.append({"id": proposal["id"], "status": "needs-action", "reason": "dry-run"})
                 continue
@@ -1007,12 +1114,30 @@ class CommunityOutreachEngine:
             }
         if not _is_valid_target_url(proposal["target_url"]):
             return {"status": "error", "message": "invalid target_url"}
+        blacklisted_urls, blacklisted_ids, excluded_platforms = self._blacklisted()
+        if (
+            proposal["id"] in blacklisted_ids
+            or canonicalize_url(proposal["target_url"]) in blacklisted_urls
+            or proposal["platform"].strip().casefold() in excluded_platforms
+        ):
+            return {"status": "error", "message": f"proposal {proposal_id!r} or its target/platform is blacklisted"}
+        if self._require_code_evidence() and not proposal.get("code_evidence", "").strip():
+            return {"status": "error", "message": f"proposal {proposal_id!r} is missing mandatory Code-Beleg"}
+        if self._require_natural_style():
+            style_violations = _check_natural_human_style(proposal["text"], proposal["platform"])
+            if style_violations:
+                return {
+                    "status": "error",
+                    "message": f"proposal {proposal_id!r} violates natural human style: {', '.join(style_violations)}",
+                    "violations": style_violations,
+                }
         return {
             "status": "preview",
             "id": proposal["id"],
             "platform": proposal["platform"],
             "target_url": proposal["target_url"],
             "repo": proposal["repo"],
+            "code_evidence": proposal.get("code_evidence", ""),
             "text": proposal["text"],
             "instruction": (
                 "Compose exactly this text at target_url via the app's own browser tool, capture "
@@ -1020,6 +1145,123 @@ class CommunityOutreachEngine:
                 "to an actual send after this preview has been shown to the user and the user's Go "
                 "for a desktop takeover (if open-compute) has been obtained via team-lead."
             ),
+        }
+
+    def verify_proposals(self, repos_root: str | Path | None = None) -> dict[str, Any]:
+        """Verify all queued proposals against blacklist, duplicates, and real source code files."""
+        if not self.inbox_md.exists():
+            return {"status": "error", "message": "POST-EINGANG.md not found"}
+        proposals = _parse_proposals(self.inbox_md.read_text(encoding="utf-8"))
+        history = self._history()
+        blacklisted_urls, blacklisted_ids, excluded_platforms = self._blacklisted()
+
+        config = _read_json(self.config_json, {})
+        configured_root = (config.get("verification") or {}).get("local_repos_root") if isinstance(config, Mapping) else None
+        resolved_root: Path | None = None
+        if repos_root:
+            resolved_root = Path(repos_root).expanduser().resolve()
+        elif configured_root:
+            resolved_root = Path(str(configured_root)).expanduser().resolve()
+        else:
+            default_root = Path(os.environ.get("REPOS_ROOT") or os.environ.get("LOCAL_DEV_REPOS") or "repos")
+            if default_root.exists():
+                resolved_root = default_root
+
+        file_ext_re = re.compile(
+            r"\.(?:py|ts|tsx|js|jsx|rs|go|html|css|toml|json|yaml|yml|md|sh|ps1|sql|c|cpp|h)$",
+            re.IGNORECASE,
+        )
+
+        item_results: list[dict[str, Any]] = []
+        verified_count = 0
+        failed_count = 0
+
+        for proposal in proposals:
+            pid = proposal["id"]
+            t_url = proposal["target_url"]
+            t_key = canonicalize_url(t_url)
+            valid_url = _is_valid_target_url(t_url)
+            is_blacklisted = (
+                pid in blacklisted_ids
+                or (bool(t_key) and t_key in blacklisted_urls)
+                or proposal["platform"].strip().casefold() in excluded_platforms
+            )
+            is_duplicate = any(
+                item.get("status") == "published" and canonicalize_url(str(item.get("target_url", ""))) == t_key
+                for item in history
+            )
+            evidence_raw = str(proposal.get("code_evidence", "")).strip()
+            has_evidence = bool(evidence_raw)
+
+            repo_slug = _normalize_repo_reference(proposal["repo"]).rsplit("/", 1)[-1]
+            repo_dir = (resolved_root / repo_slug) if (resolved_root and repo_slug) else None
+            repo_exists = bool(repo_dir and repo_dir.is_dir())
+
+            verified_files: list[str] = []
+            missing_files: list[str] = []
+            if has_evidence and repo_dir is not None:
+                tokens = re.findall(r"`([^`]+)`", evidence_raw)
+                for token in tokens:
+                    cleaned = re.sub(r":(?:L?\d+(?:-L?\d+)?)$", "", token.strip())
+                    if not cleaned or " " in cleaned or "(" in cleaned or ")" in cleaned:
+                        continue
+                    candidate_path = Path(cleaned)
+                    if candidate_path.is_absolute():
+                        if candidate_path.is_file():
+                            verified_files.append(cleaned)
+                        elif file_ext_re.search(cleaned):
+                            missing_files.append(cleaned)
+                        continue
+                    if "/" in cleaned or "\\" in cleaned or file_ext_re.search(cleaned):
+                        full_path = repo_dir / cleaned
+                        if full_path.exists():
+                            verified_files.append(cleaned)
+                        else:
+                            missing_files.append(cleaned)
+
+            files_ok = bool(verified_files) and not missing_files if resolved_root is not None else has_evidence
+            style_violations = _check_natural_human_style(proposal["text"], proposal["platform"])
+            natural_style_ok = not style_violations
+            has_context_check = bool(str(proposal.get("context_check", "")).strip())
+            proposal_ok = (
+                valid_url
+                and not is_blacklisted
+                and not is_duplicate
+                and has_evidence
+                and (repo_exists if resolved_root is not None else True)
+                and files_ok
+                and natural_style_ok
+            )
+            if proposal_ok:
+                verified_count += 1
+            else:
+                failed_count += 1
+
+            item_results.append({
+                "id": pid,
+                "repo": proposal["repo"],
+                "approved": proposal["approved"],
+                "status": "verified" if proposal_ok else "failed",
+                "valid_target_url": valid_url,
+                "blacklisted": is_blacklisted,
+                "duplicate": is_duplicate,
+                "has_code_evidence": has_evidence,
+                "has_context_check": has_context_check,
+                "natural_style_ok": natural_style_ok,
+                "style_violations": style_violations,
+                "repo_clone_exists": repo_exists if resolved_root is not None else None,
+                "verified_files": verified_files,
+                "missing_files": missing_files,
+            })
+
+        overall = "verified" if failed_count == 0 else "failed"
+        return {
+            "status": overall,
+            "total": len(proposals),
+            "verified_count": verified_count,
+            "failed_count": failed_count,
+            "repos_root": str(resolved_root) if resolved_root else None,
+            "results": item_results,
         }
 
     def phase4_cut_and_clue_archive(self, max_outbox_entries: int = 20) -> int:
@@ -1079,6 +1321,14 @@ def _build_parser() -> argparse.ArgumentParser:
         "(T-20260926-665406367, posting je App)",
     )
     parser.add_argument(
+        "--verify-proposals", action="store_true",
+        help="Verify all proposals in POST-EINGANG.md against blacklist, duplicates, and real source code files",
+    )
+    parser.add_argument(
+        "--repos-root", default=None,
+        help="Local repositories root directory for code-evidence verification (default: env REPOS_ROOT or repos)",
+    )
+    parser.add_argument(
         "--org-allow", default="",
         help="Comma-separated org allowlist for phase 3 stage 1 (product cut per app, T-20260926-665406367)",
     )
@@ -1114,6 +1364,8 @@ def main(argv: list[str] | None = None) -> int:
         try:
             if args.rebuild_registry:
                 result = engine.rebuild_registry()
+            elif args.verify_proposals:
+                result = engine.verify_proposals(repos_root=args.repos_root)
             elif args.process_approvals:
                 result = {"status": "needs-action", "outbound_results": engine.phase2_outbound_execution()}
             elif args.discover_candidate:
@@ -1132,8 +1384,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         print(json.dumps(result, indent=2, ensure_ascii=False))
-    return 1 if isinstance(result, Mapping) and result.get("status") == "error" else 0
-
+    return 1 if isinstance(result, Mapping) and result.get("status") in {"error", "failed"} else 0
 
 
 if __name__ == "__main__":

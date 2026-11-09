@@ -4,13 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-09-27
-description: >
-  Universal LLM navigation, orientation, and emergency resilience skill.
-  Provides active wayfinding, self-orientation, and recovery heuristics when
-  agents face context drift, failing tools, loops, or dead ends. Includes
-  synonym strategies: survival-routing, dead-reckoning, pathfinder-routing,
-  and celestial-routing.
+updated: 2026-11-09
+description: "Use when an agent encounters context drift, repetitive loops, failing tools, or cognitive dead ends during task execution (e.g. 'lost context', 'agent stuck in loop', 'regain orientation and focus', /wayfinding-routing). Provides active wayfinding heuristics, dead-reckoning recovery, and landmark re-anchoring. Do NOT use for simple directory climbing (use staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -30,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="wayfinding-routing banner">
 

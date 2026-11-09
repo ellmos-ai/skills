@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Fundamentos de la comunicación terapéutica: Escucha activa, reflejo, parafraseo, preguntas abiertas y validación."
+updated: 2026-11-09
+description: "Usar cuando se apliquen principios básicos de asesoramiento centrado en la persona y comunicación empática (ej. 'escucha activa', 'reflejo y paráfrasis', 'formular preguntas abiertas', /counseling-basics). Desarrolla competencias de escucha empática, validación emocional y actitud sin juicios de valor. NO usar para protocolos de psicoterapia específicos de trastornos (usar guideline-therapies-overview)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 

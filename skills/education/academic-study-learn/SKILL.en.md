@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Active learning, concept synthesis, and structured knowledge organization.
+updated: 2026-11-09
+description: "Use when actively learning academic subject matter, synthesizing lecture material, or building conceptual study notes (e.g. 'summarize lecture', 'study chapter', 'create study guide', /academic-study-learn). Facilitates active recall, structured synthesis, and concept mapping. Do NOT use for managing deadlines (use academic-study-control) or mock exams (use academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-en]
 language: en
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

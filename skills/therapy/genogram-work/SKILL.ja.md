@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ジェノグラム（家族関係図）ワーク：家族の関係性パターンの把握とリフレクション。多世代的視点、ジェノグラム記号、パターン認識、家族史におけるリソース。
+updated: 2026-11-09
+description: "多世代にわたる家族関係のパターン、世代間連鎖、またはシステム的な役割を図式化して探求する場合に使用する（例：'ジェノグラムを作成'、'家系図の関係性を分析'、'家族パターンを探索'、/genogram-work）。標準的なジェノグラム記号、関係線、3世代以上にわたる家族資源の発見を解説する。個人の認知的再構成（cognitive-restructuring）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="genogram-work banner">
 

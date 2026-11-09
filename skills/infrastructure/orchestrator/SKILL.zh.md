@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: 用于分解复杂任务、委派独立 Worker 以及基于证据验收其结果的供应商中立协议。
+updated: 2026-11-09
+description: "当将复杂的大型工程目标分解为面向独立子智能体的并行或阶段性子任务、并依据客观证据进行交付验收时使用（例如 '任务编排调度'、'协调多子智能体'、'分派独立工作包'、/orchestrator）。制定清晰的工作契约，调度独立工作者并客观验证交付物质量。切勿用于单次交互即可直接解决的简单任务。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

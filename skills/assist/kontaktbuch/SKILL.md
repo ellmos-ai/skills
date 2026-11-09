@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Ordnet freiwillig bereitgestellte Kontaktdaten datensparsam und erkennt mögliche Dubletten.
+updated: 2026-11-09
+description: "Verwenden, wenn Adress- und Kontaktdaten datensparsam erfasst, gepflegt oder auf Dubletten geprüft werden sollen (z. B. 'Kontakt speichern', 'Kontaktdaten aktualisieren', 'Adressbuch auf Dubletten prüfen', /kontaktbuch). Strukturiert Kontakteingaben sicher und bereinigt redundante Einträge lokal. NICHT verwenden für automatisiertes Social-Media-Outreach (dafür dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

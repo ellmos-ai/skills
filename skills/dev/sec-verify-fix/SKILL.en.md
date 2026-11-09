@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Independently checks whether a security patch really closes the vulnerability (re-trace the source-to-sink path on the patched state, negative and regression test), rates the regression risk and whether automatic merging would be defensible (default: no for critical/high). Read-only review, applies nothing. Triggers: 'does the patch close the hole', 'review the patch', 'verify the fix', a finding in status fixed. Not for writing the patch (sec-fix), not for general code review."
+updated: 2026-11-09
+description: "Use when independently verifying that a security patch successfully eliminates a vulnerability without regressions (e.g. 'verify security fix', 'does patch close vulnerability', 'audit patch effectiveness', /sec-verify-fix). Retraces source-to-sink dataflows on patched code and evaluates regression risks read-only. Do NOT use for drafting the initial patch (use sec-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

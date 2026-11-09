@@ -4,10 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Erstellt einen portablen KI-Arbeitsbereich auf einem USB-Stick oder beliebigen Laufwerk. RAG-Pipeline mit lokalen LLM-Modellen (Ollama), Vektordatenbank (ChromaDB) und vorkonfigurierten Prompts.
-
+updated: 2026-11-09
+description: "Verwenden, wenn ein portabler, lokaler KI-Arbeitsbereich auf einem USB-Stick oder externen Laufwerk eingerichtet werden soll (z. B. 'portables KI-Setup', 'KI auf USB-Stick', 'lokale RAG-Pipeline offline', /ai-portable-setup). Konfiguriert lokale Modelle (Ollama), Vektordatenbank (ChromaDB) und modulare Prompts für autarke Offline-Nutzung. NICHT verwenden für vollständiges Rechner-Onboarding (dafür system-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 

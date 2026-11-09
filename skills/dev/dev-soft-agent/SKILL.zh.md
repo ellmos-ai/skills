@@ -4,8 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: 自动化软件开发 Pipeline。扫描项目、排定任务优先级、分析代码并编排开发循环。零依赖（仅使用 Python 标准库）。
+updated: 2026-11-09
+description: "当对软件仓库进行自动化扫描、任务优先级排序并开展持续自律开发循环时使用（例如 '自律开发循环'、'扫描项目并推进待办任务'、'运行开发智能体'、/dev-soft-agent）。仅依靠 Python 标准库组织项目扫描、任务优先级管理及迭代编码。切勿用于脱离工程流程的简单快速单文件修改。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 > **中文** — `dev-soft-agent` 官方中文版本。

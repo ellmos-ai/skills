@@ -4,24 +4,9 @@ version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-07-24
+updated: 2026-11-09
 aliases: [repo-after-care, repo-pflege, after-care, repo-nachpflege, repo-wartung]
-description: >
-  Regelmäßiger Pflegedurchlauf für ein bereits veröffentlichtes GitHub-Repository (Stufe 1,
-  günstig und oft wiederholbar): zuerst alle Distributionsflächen des Projekts ermitteln
-  (npm, PyPI, Registries, Marketplaces, Stores, Website) und Änderungen später dorthin spiegeln,
-  dann Topics setzen, Privacy-Gate, Dokumente auf Veröffentlichungsabsicht prüfen und interne
-  Planungsdateien nachträglich ignorieren, Banner ergänzen, Aussagen im README gegen den echten
-  Code-Stand abgleichen, Darstellung verbessern, Sprachfassungen der README vervollständigen,
-  Sichtbarkeitsmaßnahmen umsetzen, Eintrag auf der Organisationsseite prüfen sowie offene
-  Issues und Pull Requests abarbeiten.
-  Nutze diesen Skill, wenn ein bestehendes Repo gepflegt, aufgeräumt, aktualisiert, aufgehübscht
-  oder "mal wieder durchgesehen" werden soll, wenn ein Repo veraltet oder unaufgeräumt wirkt,
-  bei Formulierungen wie "Repo-Pflege", "after care", "Nachpflege", "Repo auf Stand bringen",
-  "aufräumen und pushen" oder bei rotierenden Qualitätsrunden über mehrere Repos.
-  Für die tiefe Runde inkl. Rechtscheck und orga-übergreifenden Querverweisen stattdessen
-  full-after-care nutzen; für die Erstveröffentlichung github-repo-care.
-
+description: "Verwenden, wenn ein bestehendes GitHub-Repository gepflegt, aufgeräumt, aktualisiert oder optisch aufgewertet werden soll (z. B. 'Repo-Pflege', 'after care', 'Nachpflege', 'Repo auf Stand bringen', 'aufräumen und pushen', /surface-after-care). Führt eine leichte Stufe-1-Pflege durch: Distributionsflächen prüfen, Topics setzen, Privacy-Gate ausführen, README-Aussagen mit dem Code abgleichen, Banner ergänzen, Sprachfassungen vervollständigen und offene Issues/PRs sichten. NICHT verwenden für tiefgehende Audits inkl. Rechtscheck und Orga-Querverweisen (dafür full-after-care) oder Erstveröffentlichungen (dafür github-repo-care)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -48,6 +33,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="surface-after-care banner">
 # Surface After Care — die regelmäßige Pflegerunde für ein veröffentlichtes Repo

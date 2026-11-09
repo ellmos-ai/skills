@@ -4,8 +4,8 @@ version: 0.2.0
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-06-19
-description: Dieser Skill sollte genutzt werden, wenn der User private oder halbformale E-Mails schreiben, beantworten, absagen, nachfassen, kürzen, umformulieren oder im eigenen Stil entwerfen lassen will, besonders bei Terminen, offiziellen Absagen, freundlichen Kurzantworten und kontaktabhängigem Ton. Profilanalyse erst bei einem konkreten Mail-Schreibauftrag starten.
+updated: 2026-11-09
+description: "Verwenden, wenn private oder halbformelle E-Mails geschrieben, beantwortet oder stilsicher formuliert werden sollen (z. B. 'schreib eine Mail an...', 'höfliche Absage verfassen', 'Mail kürzen und nachfassen', /privat-mail-writer). Formuliert kontaktabhängige, präzise Mails im passenden Tonfall. NICHT verwenden für geschäftliche Marketingkampagnen oder Massen-Mails (dafür dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,8 @@ visibility: public
 dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 

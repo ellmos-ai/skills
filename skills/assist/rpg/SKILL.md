@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Unterstützt systemneutral bei Abenteuern, Szenen, Figuren und Kampagnenorganisation.
+updated: 2026-11-09
+description: "Verwenden, wenn Rollenspiel-Kampagnen (Pen & Paper), Abenteuer, Nicht-Spieler-Charaktere (NPCs) oder Szenen vorbereitet und geleitet werden sollen (z. B. 'NPC generieren', 'RPG-Abenteuer planen', 'Rollenspielszene vorbereiten', /rpg). Unterstützt Spielleitung und Spielende systemneutral bei Abenteuern, Begegnungen und Weltenbau. NICHT verwenden für Brettspiel-Regelwerke oder Computerspiel-Code."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

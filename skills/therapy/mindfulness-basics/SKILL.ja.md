@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: MBSRの基本、ボディスキャン、および呼吸法。日常に活かすジョン・カバット・ジンによるエビデンスに基づくマインドフルネス技法。
+updated: 2026-11-09
+description: "マインドフルネス瞑想、MBSR（マインドフルネスストレス低減法）の実践、または身体感覚への気づきを日常に取り入れる場合に使用する（例：'マインドフルネスの練習'、'ボディスキャンのやり方'、'呼吸瞑想'、/mindfulness-basics）。ジョン・カバット・ジンのMBSRに基づくボディスキャン、歩行瞑想、3分間呼吸空間を案内する。筋肉の緊張弛緩法（pmr-autogenic-training）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

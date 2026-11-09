@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: "Ассистент разработчика (преемник ATI). Предоставляет быстрый обзор проекта с помощью автономного сканирования и маршрутизирует запросы к доступным инструментам разработки: CodeCommander MCP (анализ/рефакторинг/диагностика) и модулю ellmos-code-tools. Чистая маршрутизация инструментов + сканирование, без собственного хранилища."
+updated: 2026-11-09
+description: "Используйте для быстрого обзора программного проекта разработчиком с помощью headless-сканирования и маршрутизации к инструментам кодинга (например, 'сканировать проект', 'обзор структуры репозитория', 'направить к инструментам кода', /dev). Обеспечивает быстрый анализ структуры и маршрутизацию к CodeCommander и ellmos-code-tools без собственного хранилища. НЕ используйте для автономных циклов разработки (используйте dev/dev-soft-agent)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev banner">
 

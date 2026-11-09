@@ -4,10 +4,9 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger + Claude
 created: 2026-09-20
-updated: 2026-09-20
+updated: 2026-11-09
 aliases: [mermaid, mermaid-error, diagram-render-error, unable-to-render-rich-display]
-description: Finds and fixes Mermaid diagrams that GitHub refuses to render ("Unable to render rich display"). Checks every ```mermaid block with the real Mermaid parser without a browser, then proves the result against the live GitHub page.
-
+description: "Use when linting, validating, or fixing Mermaid diagram blocks in Markdown files that fail to render on GitHub (e.g. 'lint mermaid diagrams', 'fix diagram syntax on GitHub', 'unable to render rich display', /mermaid-lint). Checks and repairs special characters, unquoted labels, and invalid arrow notations using exact parser rules. Do NOT use for general code review unrelated to diagrams."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ status: active
 visibility: public
 dependencies: {'tools': ['node', 'git'], 'services': ['GitHub'], 'protocols': [], 'python': [], 'npm': ['mermaid', 'jsdom', 'playwright-core']}
 ---
+
 
 <img src="banner.png" width="100%" alt="mermaid-lint banner">
 

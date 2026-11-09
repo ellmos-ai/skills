@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-06-13
-description: 8段階の開発サイクル：機能リクエスト、現状確認、機能計画、フロントエンド、バックエンド計画、バックエンドコード、テスト、ユースケース。体系的なソフトウェア開発のための反復的フレームワーク。
+updated: 2026-11-09
+description: "構造化された8段階の開発サイクルを通じてソフトウェアの新機能や大規模改修を反復開発する場合に使用する（例：'体系的に機能を開発'、'開発サイクルを開始'、'8段階開発プロセス'、/dev-cycle）。要件定義、現状分析、機能設計、フロントエンド、バックエンド、テストまでを段階的に誘導する。単一の孤立したバグ修正（bugfix-protocol）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 > **日本語** — `dev-cycle` の公式日本語版。

@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Técnicas de estudio activo, síntesis de conceptos y estructuración del conocimiento.
+updated: 2026-11-09
+description: "Usar cuando se estudie activamente temario universitario, se sinteticen clases magistrales o se elaboren guías de estudio (ej. 'resumir clase', 'estudiar tema', 'crear guía de estudio', /academic-study-learn). Facilita el recuerdo activo, síntesis estructuradas y mapas conceptuales. NO usar para gestionar plazos (usar academic-study-control) ni simulacros de examen (usar academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-es]
 language: es
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

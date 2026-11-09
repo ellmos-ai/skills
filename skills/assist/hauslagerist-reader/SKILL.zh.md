@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  分析用户提供的库存清单或导出文件，不依赖特定库存软件。
+updated: 2026-11-09
+description: "当分析库存表格、家庭物资储备清单或仓储导出的存货数据时使用（例如 '检查库存导出文件'、'分析库存警戒线'、'核对物资储备'、/hauslagerist-reader）。以厂商中立的方式分析库存数据、最低安全余量及品类清单。切勿用于计算机磁盘存储空间清理（使用 utilities/speicherbereinigung）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

@@ -4,9 +4,8 @@ version: 3.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-11
-description: Role-based multi-model strategy. The model catalog lives in a local configuration file instead of the skill text -- roles (thinker/decision-maker, long-running worker, draft generator, reviewer/acceptance, escalation), reasoning effort as an independent axis, mandatory review for draft models, provider switching for independent reviews, budgets, delegation flow, and cost/quality of small workers.
-
+updated: 2026-11-09
+description: "Use when selecting and configuring the appropriate LLM models and reasoning effort across multi-agent workflows and subagents (e.g. 'choose model for task', 'subagent model strategy', 'select reviewer model', /model-strategy). Assigns model tiers to specific roles (thinker, worker, reviewer, escalation) based on complexity and cost. Do NOT use for runtime token budget bookkeeping (use infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

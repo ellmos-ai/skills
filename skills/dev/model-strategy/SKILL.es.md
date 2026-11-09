@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
-description: Orquestación multimodelo y estrategia de cambio de modelo. Selección de modelo basada en puntuación, delegación entre agentes (Gemini, Codex, Ollama), emparejamiento de asesores (advisor), disparadores de escalado, matriz de permisos y optimización de costes.
+updated: 2026-11-09
+description: "Usar cuando se seleccione y configure el modelo LLM y esfuerzo de razonamiento idóneo en flujos multiagente y subagentes (ej. 'elegir modelo para la tarea', 'estrategia de modelos para subagentes', 'seleccionar modelo revisor', /model-strategy). Asigna niveles de modelo según roles específicos (pensador, trabajador, revisor, escalación) equilibrando coste y calidad. NO usar para contabilidad de presupuesto de tokens en ejecución (usar infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

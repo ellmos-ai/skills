@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Ordnet freiwillig bereitgestellte Gesundheitsinformationen und bereitet Fragen für Fachpersonen vor.
+updated: 2026-11-09
+description: "Verwenden, wenn persönliche Gesundheitsnotizen, Symptomverläufe oder Arztfragen strukturiert vorbereitet werden sollen (z. B. 'Arztgespräch vorbereiten', 'Symptomtagebuch strukturieren', 'Gesundheitsnotizen ordnen', /gesundheit). Ordnet bereitgestellte Gesundheitsdaten neutral und bereitet gezielte Fragen für medizinisches Fachpersonal vor. NICHT verwenden für medizinische Diagnosen, Therapieempfehlungen oder Notfallhilfe."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

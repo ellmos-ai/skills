@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Systemic questioning techniques: Circular questions, scaling questions, miracle question, and exception questions for reflection and perspective expansion."
-
+updated: 2026-11-09
+description: "Use when broadening perspectives and loosening rigid cognitive frames through systemic inquiry (e.g. 'circular questioning', 'systemic reframing', 'hypothetical questions', /systemic-questioning). Details systemic inquiry techniques: circular triadic questions, scaling questions, hypothetical scenario questions, and paradoxical reframing. Do NOT use for quantitative decision matrices (use utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemic-questioning banner">
 

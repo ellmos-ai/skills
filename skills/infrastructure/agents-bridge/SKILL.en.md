@@ -4,9 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: agents-bridge — the Lifeboat, aka Time Capsule. Portable, provider-neutral file bridge for bootstrap surfaces, truth pointers, separate memory silos, messaging, presence, cooperative locks, and reversible host recovery.
-
+updated: 2026-11-09
+description: "Use when establishing a resilient, provider-neutral file bridge across different AI agents and hosts (e.g. 'multi-agent bridge', 'connect agent systems', 'agent communication file bridge', /agents-bridge). Provides bootstrap surfaces, memory silos, presence signaling, cross-agent messaging, and cooperative locks. Do NOT use for standard git merging (use dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -15,6 +14,7 @@ language: en
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

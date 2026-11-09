@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: 适配用户首选后端的日历 Skill（Flag 3）。默认：本地 SQLite 存储。可选：Google Calendar MCP、Routinika 或 UpToday 作为后端 —— 通过 assist/prefs.json 控制。未设置偏好时，LLM 将交互式询问用户。
-
+updated: 2026-11-09
+description: "当安排、管理或查询日常约会、日历事件及周期性待办事务时使用（例如 '添加日程约会'、'查看我的日历'、'列出明天的活动'、/kalender）。通过本地 SQLite 或配置的 MCP 后端（Google Calendar、Routinika、UpToday）自适应管理事件。切勿用于软件开发项目里程碑排期（使用 dev/dev-cycle）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'optional': True, 'purpose': 'Backend option when kalender_backend=google in prefs.json'}], 'protocols': [{'name': 'ICS / iCalendar', 'optional': True, 'purpose': 'Import/export of appointments (RFC 5545 subset)'}], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="kalender banner">
 

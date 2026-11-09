@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  独立于具体媒体应用分析用户提供的媒体清单和元数据。
+updated: 2026-11-09
+description: "当解析、整理及归档媒体清单、阅读书单、影视待看列表或音视频元数据时使用（例如 '分析影音藏品'、'图书与影视编目'、'结构化待看片单'、/mediabrain-reader）。以应用中立的方式组织媒体集合与元数据。切勿用于视频字幕文本的直接提取（使用 utilities/video-transcriber）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

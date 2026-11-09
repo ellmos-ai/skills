@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Упорядочивает добровольно предоставленную информацию о здоровье и готовит вопросы специалистам.
+updated: 2026-11-09
+description: "Используйте для структурирования личных заметок о здоровье, дневников симптомов и подготовки вопросов к врачу (например, 'подготовка к визиту к врачу', 'структурировать симптомы', 'составить вопросы о здоровье', /gesundheit). Нейтрально систематизирует данные о самочувствии и формулирует вопросы для медицинских специалистов. НЕ используйте для постановки диагнозов или экстренной помощи."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

@@ -4,13 +4,8 @@ version: 0.9.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-10-03
-description: >
-  Aktiver Finder/Router für die eigenen lokalen Skills (Analogon zu using-superpowers). IMMER zu Beginn
-  einer nicht-trivialen Aufgabe nutzen, um zu prüfen, ob ein user-Skill passt, und zum richtigen Skill
-  zu routen. Aktiviert sich bei „welcher Skill passt", „gibt es dafür einen Skill", „skill finden",
-  oder generell vor Aufgaben, die ein lokaler Skill besser löst als ad-hoc-Arbeit.
-
+updated: 2026-11-09
+description: "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -33,6 +28,7 @@ provenance:
   origin_path: "~/.claude/skills/skill-finder/"
   origin_version: "0.1.0"
 ---
+
 
 <img src="banner.png" width="100%" alt="skill-finder banner">
 # Skill-Finder

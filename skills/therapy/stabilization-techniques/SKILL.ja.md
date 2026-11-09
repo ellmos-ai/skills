@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 安定化技法：グラウンディング、安心感のある場所（セーフ・プレイス）、コンテインメント（容器法）、呼吸法。急性ストレスやパニック発作に対する即時介入技法。
+updated: 2026-11-09
+description: "急性パニック発作、フラッシュバック、感情的圧倒、または解離状態を緊急に鎮静・安定化させる場合に使用する（例：'パニック発作を止める'、'フラッシュバック時のグラウンディング'、'安全な場所のエクササイズ'、/stabilization-techniques）。5-4-3-2-1五感グラウンディング、金庫の技法、安全な場所のイメージ、呼吸調整などの緊急技法を提供する。危機的状況下でのトラウマ記憶の想起には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 

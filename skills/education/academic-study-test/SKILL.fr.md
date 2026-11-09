@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Préparation aux examens, auto-évaluations, examens blancs et entraînements.
+updated: 2026-11-09
+description: "Utiliser pour se préparer aux examens grâce à des quiz, des examens blancs ou l'analyse méthodique des erreurs (ex. 'interroge-moi sur ce sujet', 'créer un examen blanc', 'tester mes connaissances', /academic-study-test). Génère des tests d'entraînement, des grilles d'évaluation et le diagnostic des lacunes. Ne PAS utiliser pour la première phase d'apprentissage (utiliser academic-study-learn) ou le suivi d'échéances (utiliser academic-study-control)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-fr]
 language: fr
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

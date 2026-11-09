@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Градуированная экспозиция при тревожных расстройствах: иерархия страхов, шкала SUDs, планирование и сопровождение экспозиции. Только психообразование, не реализация."
+updated: 2026-11-09
+description: "Используйте для преодоления тревоги, фобий и избегающего поведения через психообразование по экспозиционной терапии (например, 'составить иерархию страхов', 'спланировать экспозицию', 'шкала SUDs', /exposure-guidance). Объясняет механизмы привыкания, построение иерархий in-vivo и в воображении, а также отказ от охранительного поведения. НЕ используйте для неконтролируемой травма-экспозиции или купирования паники (используйте stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 

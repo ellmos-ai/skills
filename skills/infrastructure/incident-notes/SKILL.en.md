@@ -4,13 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Finding log and chain of evidence for rescue and incident cases on laptops and PCs: how
-  observations, interpretations and actions taken are recorded separately, with measured UTC
-  time and checksums, how secrets are redacted and how the owner receives an understandable
-  summary. Accompanies endpoint-triage, malware-cleanup-guide and os-hardening-baseline.
-
+updated: 2026-11-09
+description: "Use when maintaining a structured forensic audit log and chain of custody during security incidents or recovery actions (e.g. 'log incident findings', 'record forensic timeline', 'secure chain of custody', /incident-notes). Separates raw observations from interpretations with UTC timestamps, file hashes, and secret sanitization. Do NOT use for general casual notes (use assist/notizblock)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -36,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="incident-notes banner">
 

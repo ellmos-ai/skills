@@ -9,13 +9,8 @@ provenance:
   origin: live-session-extraction
   extracted: 2026-08-07
   method: skill-extractor
-updated: 2026-08-07
-description: >
-  Zipper merge procedure for high-conflict branch merges: When two divergent branches
-  or a PR and its target branch BOTH carry valuable, seemingly incompatible changes,
-  do not arbitrarily pick one side. Compare section by section using a decision table
-  (Take/Why), commit incrementally, and push only upon completion. Final escalation
-  tier: Rebuild rather than merge — extract intent/functionality and rebuild cleanly.
+updated: 2026-11-09
+description: "Use when reconciling two diverging branches, document versions, or AST trees without losing changes (e.g. 'zipper merge branches', 'reconcile diverging documents', 'interleave changes safely', /reissverschluss-merge). Interleaves non-conflicting sections systematically and highlights structural collisions cleanly. Do NOT use for trivial non-conflicting git merges."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -26,6 +21,7 @@ aliases:
   - reissverschluss
 tags: [git, merge, conflict, pull-request, branch, rebase, dev-workflow]
 ---
+
 
 <img src="banner.png" width="100%" alt="reissverschluss-merge banner">
 

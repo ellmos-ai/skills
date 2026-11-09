@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plant Unterricht, Lernangebote und individuelle Förderung ohne Berichtsgenerator oder persönliche Vorlagen.
+updated: 2026-11-09
+description: "Verwenden, wenn Förderpläne, differenzierte Lernangebote oder sonderpädagogische Fördermaßnahmen konzipiert werden sollen (z. B. 'Förderplan erstellen', 'Lernangebote differenzieren', 'Förderziele formulieren', /foerderplaner). Erstellt neutrale, strukturierte Förderkonzepte ohne Personenbezug und Vorlagenzwang. NICHT verwenden für die Erstellung reiner Arbeitsblätter (dafür worksheet-generator)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

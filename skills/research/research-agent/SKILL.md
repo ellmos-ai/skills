@@ -4,9 +4,8 @@ version: 0.2.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-08-22
-description: Project-first Research pipeline with live gates, source/PDF evidence, claim boundaries, compute and publication controls; includes an optional PubMed/arXiv standard-library helper.
-
+updated: 2026-11-09
+description: "Verwenden, wenn wissenschaftliche Forschungsprojekte strukturiert durchgeführt, Quellen erhoben oder Claims validiert werden sollen (z. B. 'Forschungsstand erheben', 'Paper recherchieren', 'Quellen und Claims prüfen', /research-agent). Führt eine projektzentrierte Forschungspipeline mit Live-Gates, PDF-Evidenz, Claim-Grenzen und Publikationskontrollen aus. NICHT verwenden für formlose Websuchen ohne wissenschaftlichen Evidenzanspruch."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,8 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

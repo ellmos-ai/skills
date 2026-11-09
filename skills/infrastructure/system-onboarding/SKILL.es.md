@@ -4,12 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: >
-  Protocolo de incorporación agnóstico del proveedor para una estación de trabajo nueva, reconstruida o de reemplazo.
-  Establece los requisitos previos del sistema operativo, entornos de ejecución de agentes, superficies de reglas
-  compartidas, habilidades portátiles, configuración verificada y evidencias posteriores a la instalación sin copiar
-  credenciales, prompts privados o configuraciones específicas del host en un repositorio.
+updated: 2026-11-09
+description: "Usar al configurar un equipo de trabajo nuevo o recién reinstalado para entornos de agentes y desarrollo (ej. 'configurar nuevo equipo', 'onboarding de estación de trabajo', 'preparar entorno de agentes', /system-onboarding). Configura requisitos del sistema operativo, tiempos de ejecución, reglas compartidas y skills portátiles de forma segura. NO usar para integrar repositorios individuales de software (usar dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -31,6 +27,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

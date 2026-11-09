@@ -4,8 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: "[Français] Compétence d'agent pour system-onboarding: Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation. It establishes the operating-system prerequisites, agent runtimes, shared rule surfaces, portable skills, verified configuration and post-install evidence without copying credentials, private prompts, or host-specific configuration into a repository."
+updated: 2026-11-09
+description: "Utiliser pour configurer et intégrer un nouveau poste de travail ou une machine réinstallée pour le développement et les agents (ex. 'configurer nouvel ordinateur', 'onboarding station de travail', 'installer environnement d'agents', /system-onboarding). Installe les prérequis d'OS, les runtimes, les règles partagées et les compétences portables sans fuite de secrets. Ne PAS utiliser pour intégrer un dépôt logiciel isolé (utiliser dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

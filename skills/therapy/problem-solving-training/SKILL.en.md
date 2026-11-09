@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Structured problem solving in 6 steps: Problem definition, goals, brainstorming, evaluation, implementation, and review."
-
+updated: 2026-11-09
+description: "Use when resolving complex everyday dilemmas or life problems through structured cognitive-behavioral problem solving (e.g. 'structured problem solving', 'step-by-step problem resolution', /problem-solving-training). Guides D'Zurilla & Goldfried's 6-step model: problem orientation, definition, generation of alternatives, decision making, implementation, and review. Do NOT use for software architecture choices (use utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

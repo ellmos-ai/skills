@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: MBSR fundamentals, body scan, and breathing exercises. Evidence-based mindfulness techniques according to Jon Kabat-Zinn for everyday life.
-
+updated: 2026-11-09
+description: "Use when integrating mindfulness meditation, MBSR practices, or bodily awareness into daily routines (e.g. 'mindfulness exercises', 'body scan guide', 'breath awareness meditation', /mindfulness-basics). Guides Kabat-Zinn MBSR fundamentals including body scan, mindful walking, and the 3-minute breathing space. Do NOT use for progressive neuromuscular tension-release (use pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

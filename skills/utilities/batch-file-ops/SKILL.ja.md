@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: glob パターンを使用したバッチファイル操作（削除、移動、コピー、一覧表示）。効率的なファイルシステム操作のための CLI ツール。依存関係ゼロ。
-
+updated: 2026-11-09
+description: "ワイルドカード（glob）パターンによるファイルの一括コピー、移動、削除、一覧表示などのバッチ処理を行う場合に使用する（例：'ファイルを一括移動'、'パターンに一致するすべての*.tmpを削除'、/batch-file-ops）。外部依存関係なしで安全なバッチ操作を実行する。ファイル内テキストの置換や対話型の単一ファイル編集には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 

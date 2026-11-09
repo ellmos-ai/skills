@@ -4,12 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  Isolated navigation and routing strategy that searches upward and downward
-  through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md,
-  README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json
-  or config.json). Also known as Up-and-Down Routing or Walking Bass Routing.
+updated: 2026-11-09
+description: "Use when navigating directory hierarchies up and down to discover governing context files like CLAUDE.md, AGENTS.md, or RULES.md (e.g. 'search folder hierarchy for rules', 'find governing guidelines', 'staircase routing', /staircase-routing). Traverses parent and child directories systematically to resolve active guidelines and project pointers. Do NOT use when the target root is already known (use load-project)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -29,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 

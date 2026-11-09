@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  规划教学、学习活动和个别支持，不包含报告生成器或个人模板。
+updated: 2026-11-09
+description: "当构思个别化教育辅导计划、分层教学方案或特殊教育干预措施时使用（例如 '制定个别辅导计划'、'分层设计学习任务'、'明确个别教学目标'、/foerderplaner）。在不泄露个人隐私的前提下设计结构化、客观的教学支持方案。切勿用于单纯制作练习题纸（使用 worksheet-generator）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

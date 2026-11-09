@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Genogram work: Recognizing and reflecting on family relationship patterns. Multigenerational perspective, genogram symbols, pattern recognition, and resources in family history."
-
+updated: 2026-11-09
+description: "Use when mapping multigenerational family relationship patterns, transgenerational dynamics, or systemic roles (e.g. 'create genogram', 'map family tree dynamics', 'explore family patterns', /genogram-work). Details standard genogram symbology, relational lines, and transgenerational resource discovery. Do NOT use for single-subject cognitive restructuring (use cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_arbeit.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="genogram-work banner">
 

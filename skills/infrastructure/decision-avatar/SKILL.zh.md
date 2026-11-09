@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Claude + Codex
 created: 2026-07-28
-updated: 2026-07-30
-description: "当存在已明确授权的本地决策配置文件时：根据经过验证的反馈预测重复性决策， 校准置信度，并严格区分预测、决策和执行。"
+updated: 2026-11-09
+description: "当基于授权的本地决策档案预测并预对齐用户的周期性决策选择时使用（例如 '预测用户决定'、'应用用户偏好习惯'、'决策分身对齐'、/decision-avatar）。校准决策置信度，并将预测、确认与实际执行严格解耦。切勿用于宪制性法律政策评估（使用 utilities/lebende-verfassung）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -28,6 +28,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-avatar banner">
 

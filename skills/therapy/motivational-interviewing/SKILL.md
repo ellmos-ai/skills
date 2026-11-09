@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Motivational Interviewing (MI) nach Miller und Rollnick: OARS-Techniken, Change Talk, Veränderungsbereitschaft fördern.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Ambivalenzen bezüglich Verhaltensänderungen geklärt oder Veränderungsmotivation gestärkt werden soll (z. B. 'Motivation zur Veränderung finden', 'Ambivalenz abbauen', 'Change Talk fördern', /motivational-interviewing). Vermittelt MI nach Miller/Rollnick: OARS-Prinzipien, Diskrepanzerzeugung und Förderung von Veränderungsäußerungen. NICHT verwenden für Konfrontation oder direktive Handlungsanweisungen."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 

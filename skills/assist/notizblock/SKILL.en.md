@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Captures, organizes, and condenses supplied notes without depending on a storage location or note app.
+updated: 2026-11-09
+description: "Use when capturing, structuring, or synthesizing spontaneous notes, thoughts, and text snippets app-agnostically (e.g. 'quick note', 'organize thoughts', 'summarize scratch notes', /notizblock). Captures and condenses freeform notes without dependency on specific proprietary note apps. Do NOT use for deep research briefings (use assist/dossier-briefing) or incident logs (use infrastructure/incident-notes)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

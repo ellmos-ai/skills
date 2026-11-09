@@ -4,12 +4,8 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger und OpenAI Codex
 created: 2026-08-04
-updated: 2026-11-08
-description: >
-  Evidenzbasierte Windows-Speicherbereinigung mit kontrolliertem Notfallmodus,
-  physischer Belegungsmessung, Prozess- und Entstehungsforensik sowie
-  reversiblen Maßnahmen gegen wiederkehrende Speicherfüller.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Windows-Laufwerke vollaufen und Speicherplatz evidenzbasiert freigegeben werden soll (z. B. 'Festplatte voll', 'Speicher bereinigen', 'Windows C: aufräumen', /speicherbereinigung). Misst physische Belegung, identifiziert Prozessursachen und bereinigt Caches mit Rollback-Schutz. NICHT verwenden für das Löschen von Quellcode-Repositories oder Git-Daten."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -33,6 +29,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+
 
 <img src="banner.png" width="100%" alt="speicherbereinigung banner">
 

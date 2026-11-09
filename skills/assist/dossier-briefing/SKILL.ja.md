@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: トピックや人物の構造化されたリサーチブリーフィングをMarkdownスキャフォールド（標準出力またはファイル）として生成します。永続ストレージはありません。
+description: "特定のテーマや人物に関する構造化された調査ブリーフィング（レポート）をMarkdown形式で作成する場合に使用する（例：'調査レポートを作成'、'テーマXの概要報告'、'人物Yのブリーフィング'、/dossier-briefing）。永続ストレージを持たず、重要事実、情報源、未解決の疑問点を整理した構造化ドキュメントを作成する。意思決定の要約（decision-shot）や学術研究パイプライン（research/research-agent）には使用しない。"
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: dossier_briefing_core.py
 provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\n'}
 language: ja
 ---
+
 
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 

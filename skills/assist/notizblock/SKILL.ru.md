@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Фиксирует, упорядочивает и сокращает заметки без привязки к хранилищу или приложению.
+updated: 2026-11-09
+description: "Используйте для быстрой фиксации, структурирования и обобщения спонтанных заметок, мыслей и черновиков (например, 'быстрая заметка', 'упорядочить мысли', 'обобщить черновики', /notizblock). Записывает и сжимает произвольные заметки без привязки к конкретным приложениям. НЕ используйте для глубоких исследовательских досье (используйте assist/dossier-briefing) или журналов инцидентов (используйте infrastructure/incident-notes)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

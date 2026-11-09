@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Erfasst, ordnet und verdichtet bereitgestellte Notizen ohne Bindung an einen Speicherort oder eine Notiz-App.
+updated: 2026-11-09
+description: "Verwenden, wenn spontane Notizen, Gedanken, Mitschriften oder Textfetzen erfasst, geordnet und verdichtet werden sollen (z. B. 'Notiz erfassen', 'Notizen sortieren', 'Textnotizen zusammenfassen', /notizblock). Erfasst und strukturiert Freitext-Notizen flexibel ohne Bindung an bestimmte Notiz-Apps. NICHT verwenden für strukturierte Forschungs-Dossiers (dafür assist/dossier-briefing) oder IT-Vorfallsprotokolle (dafür infrastructure/incident-notes)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

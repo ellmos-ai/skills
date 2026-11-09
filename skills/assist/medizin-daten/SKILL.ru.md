@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Локальная, конфиденциальная фиксация медицинских данных: диагнозы, история симптомов и планы обследования. Без происхождения от BACH — индивидуальный проект со собственным хранилищем SQLite. Строго локально, без передачи в облако."
-
+updated: 2026-11-09
+description: "Используйте для строго локального и конфиденциального учета медицинских записей, анализов, диагнозов и графиков обследований в SQLite (например, 'сохранить медкарту локально', 'учет анализов', 'график обследований', /medizin-daten). Хранит медицинскую историю полностью локально без передачи в облако. НЕ используйте для автоматической постановки диагнозов или экстренной помощи."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 

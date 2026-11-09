@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "在安装之前，采用先暂存再晋升的方式检查第三方技能、插件、MCP 服务器和 hook：先拉取到暂存文件夹，在那里完整阅读所有内容并用模式扫描器做预筛选，只有在自己做出判断并获得用户明确批准之后才安装，代理绝不自行安装。触发词：「从 GitHub 安装这个技能/插件/MCP」「这个插件安全吗」「检查第三方 hook」「给代理用的 npm 包」。不用于自己的仓库（sec-scan），也不用于自己技术栈的依赖/CVE（security-tech-stack-check）。"
+updated: 2026-11-09
+description: "当在安装第三方技能、插件、MCP 服务端或依赖包之前对其进行供应链风险与恶意代码排查时使用（例如 '审计第三方插件'、'此 GitHub MCP 是否安全'、'供应链安全排查'、/sec-supplychain）。将外部未受信代码隔离到暂存目录并通过特征扫描器排查可疑持久化与外联。切勿用于内部自有仓库的代码审计（使用 sec-scan）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-supplychain banner">
 

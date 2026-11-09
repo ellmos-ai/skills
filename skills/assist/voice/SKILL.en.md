@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plans recording, transcription, and speech output with optional interchangeable tools.
+updated: 2026-11-09
+description: "Use when designing, configuring, or chaining audio recording, transcription, and text-to-speech (TTS) voice workflows (e.g. 'setup voice pipeline', 'configure TTS voice output', 'plan speech interaction', /voice). Coordinates modular audio tools for capture, transcription, and speech synthesis. Do NOT use for standalone file transcription (use assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

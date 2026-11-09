@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: スティーブン・ヘイズ（Steven Hayes）によるアクセプタンス＆コミットメント・セラピー（ACT）：心理的柔軟性の6つの核心プロセスを持つヘキサフレックス・モデル。
+updated: 2026-11-09
+description: "アクセプタンス＆コミットメント・セラピー（ACT）に基づき、心理的柔軟性、価値に基づく生活、または体験の受容を促進する場合に使用する（例：'価値の明確化'、'脱フュージョンの練習'、'回避ではなく受容'、/act-techniques）。ヘキサフレックスモデルと6つの核となるプロセスを解説する。自動思考の認知的再構成（cognitive-restructuring）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 

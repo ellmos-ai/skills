@@ -4,10 +4,9 @@ version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-09-27
+updated: 2026-11-09
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: "Protocol for safely creating, publishing, releasing, auditing, and maintaining GitHub repositories: check local rules and locks, create .gitignore before the first add, run privacy checks, prepare README/i18n/banner/metadata, verify release tags and GitHub releases, and update organization profiles, llms.txt files, and registry links."
-
+description: "Use when publishing, releasing, or initializing a GitHub repository according to rigorous open-source governance standards (e.g. 'publish new repo', 'prepare GitHub release', 'audit repo metadata and privacy', /github-repo-care). Sets up proper gitignore, enforces privacy checks, and validates README, badges, llms.txt, and release tags. Do NOT use for routine recurring maintenance of live repos (use surface-after-care)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ status: active
 dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 

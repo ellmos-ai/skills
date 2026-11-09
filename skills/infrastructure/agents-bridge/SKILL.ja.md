@@ -4,9 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: プロバイダーおよびユーザーに依存しない、エージェント、CLI、IDE のブートルール用ブリッジ。既知的ブートストラップサーフェスを検出し、ユーザーに順序付けられた1つ以上の真実のソースの選択を求め、ルールを重複させることなく軽量ローダーをレンダリングします。
-
+updated: 2026-11-09
+description: "異なるAIエージェントやホストシステム間でベンダー中立で堅牢なファイル連携ブリッジを構築する場合に使用する（例：'マルチエージェント連携ブリッジ'、'エージェントシステムの接続'、'ファイルベースのエージェント間通信'、/agents-bridge）。ブートストラップ環境、独立した記憶サイロ、生存通知、エージェント間通信、協調ロック機能を提供する。通常のgitマージ（dev/reissverschluss-merge）には使用しない。"
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -15,6 +14,7 @@ language: ja
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

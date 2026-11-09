@@ -4,9 +4,8 @@ version: 3.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-11
-description: Rollenbasierte Multi-Modell-Strategie. Modellkatalog liegt in einer lokalen Konfigurationsdatei statt im Skill-Text -- Rollen (Denker/Entscheider, Dauer-Worker, Entwurfsgenerator, Reviewer/Abnahme, Eskalation), Reasoning-Effort als eigene Achse, Abnahmepflicht für Entwurfsmodelle, Anbieterwechsel für unabhängige Reviews, Kontingente, Delegationsablauf und Kosten/Qualität kleiner Worker.
-
+updated: 2026-11-09
+description: "Verwenden, wenn bei mehrstufigen Agentenläufen, Reviews oder Subagenten-Aufgaben die optimale Modell- und Reasoning-Allokation gewählt werden soll (z. B. 'welches Modell für diese Aufgabe', 'Modellstrategie festlegen', 'Reviewer-Modell wählen', /model-strategy). Definiert rollenbasierte Modellzuweisungen (Denker, Worker, Reviewer, Eskalation) und steuert Reasoning-Aufwand kosteneffizient. NICHT verwenden für tokenbasierte Budgetkontenführung (dafür infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

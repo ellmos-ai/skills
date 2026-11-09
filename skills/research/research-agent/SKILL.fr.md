@@ -4,8 +4,8 @@ version: 0.1.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour research-agent: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library."
+updated: 2026-11-09
+description: "Utiliser pour mener ou valider des projets de recherche académique, recenser la littérature ou vérifier des affirmations scientifiques (ex. 'état de l'art', 'revue de littérature', 'vérifier citations et preuves', /research-agent). Orchestre un pipeline de recherche avec points de contrôle en direct, preuves PDF et limites de publication. Ne PAS utiliser pour des recherches web informelles sans exigences de preuves."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

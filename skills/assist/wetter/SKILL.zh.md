@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: 通过 wttr.in（免费，无需 API 密钥）回答特定位置或坐标的天气问题。包含当前天气 + 3 天预报。位置来自用户请求或首选项；支持可选的短期缓存。
+updated: 2026-11-09
+description: "当查询特定城市或经纬度坐标的实时天气实况或未来 3 天天气预报时使用（例如 '某地天气如何'、'明天的天气预报'、'今天会下雨吗'、/wetter）。无需 API 密钥即可通过 wttr.in 获取实时天气与预报数据。切勿用于历史气候科学研究或天文学计算。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="wetter banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "検証済みのセキュリティ所見を追跡可能にする。プレビューと確認の後で、チケット（ticket_writer.py）、GitHub issue、またはセキュリティアドバイザリのドラフト（gh）を作成する。まず所見の id で重複を確認し、シークレットをテキストに入れず、参照を finding.ticket に書き戻す。トリガー：「この所見を追跡して」「SEC-... のチケット」「アドバイザリを作って」「所見をバックログに入れて」。Linear/Jira は使わない。技術レポート（sec-report）や外部への開示（sec-writeup）には使わない。"
+updated: 2026-11-09
+description: "確認されたセキュリティ所見を追跡可能な課題管理チケット、GitHub Issues、またはドラフトSecurity Advisoryに登録する場合に使用する（例：'セキュリティ所見をトラッキング'、'SEC-...のチケットを作成'、'Advisoryドラフトを作成'、/sec-track）。機密情報を伏せた安全な形式でチケットを発行し、調査台帳と紐付ける。外部開発者向けの公式開示文書の作成（sec-writeup）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

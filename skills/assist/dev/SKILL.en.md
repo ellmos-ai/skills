@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: "Developer assistant (ATI successor). Provides a quick project overview via headless scan and routes to the available coding tools: CodeCommander MCP (analysis/refactor/diagnose) and the ellmos-code-tools module. Pure tool routing + scan, no own store."
+updated: 2026-11-09
+description: "Use when needing a quick developer overview of a software project via headless scan and routing to available coding tools (e.g. 'scan project status', 'overview repo structure', 'route to code tools', /dev). Provides fast project inspection and tool routing to CodeCommander and ellmos-code-tools without persistent storage. Do NOT use for autonomous multi-step development loops (use dev/dev-soft-agent)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev banner">
 

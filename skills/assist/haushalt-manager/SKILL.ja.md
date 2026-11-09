@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  特定アプリに依存せず、家事、習慣、担当を計画します。
+updated: 2026-11-09
+description: "家事分担、掃除ルーティン、家電や住居の保守点検間隔、生活スケジュールを計画する場合に使用する（例：'家事分担表を作成'、'掃除のルーティン化'、'住居の定期点検を管理'、/haushalt-manager）。特定のアプリに依存せず、家庭内の業務や定期タスクを整理する。オフィスの事務処理（assist/buero）や備蓄品管理（assist/hauslagerist-reader）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

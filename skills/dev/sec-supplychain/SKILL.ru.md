@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Проверяет сторонние навыки, плагины, MCP-серверы и хуки ДО установки по схеме staging-then-promote: загрузить в промежуточную папку, прочитать там всё и предварительно отсортировать сканером шаблонов, устанавливать только после собственного суждения и явного одобрения пользователя - агент никогда не устанавливает сам. Триггеры: 'установить этот навык/плагин/MCP с GitHub', 'безопасен ли этот плагин', 'проверить сторонний хук', 'npm-пакет для агента'. Не для собственных репозиториев (sec-scan) и не для зависимостей/CVE собственного стека (security-tech-stack-check)."
+updated: 2026-11-09
+description: "Используйте для проверки сторонних плагинов, MCP-серверов или пакетов перед установкой на риски цепочки поставок и вредоносный код (например, 'проверить сторонний плагин', 'безопасен ли этот MCP с GitHub', 'аудит supply chain', /sec-supplychain). Изолирует сторонний код в тестовой папке и проверяет его сканерами шаблонов до установки. НЕ используйте для сканирования собственных репозиториев (используйте sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-supplychain banner">
 

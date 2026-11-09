@@ -4,9 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: Нейтральный к провайдерам и пользователям мост для правил загрузки агентов, CLI и IDE. Он обнаруживает известные поверхности бутстрапа, требует от пользователя выбора одного или нескольких упорядоченных источников истины и рендерит небольшие загрузчики без дублирования правил.
-
+updated: 2026-11-09
+description: "Используйте для создания отказоустойчивого нейтрального файлового моста между разными ИИ-агентами и хостами (например, 'мультиагентный мост', 'соединить системы агентов', 'файловый обмен между агентами', /agents-bridge). Обеспечивает bootstrap-пространства, изолированные хранилища памяти, обмен сообщениями и блокировки. НЕ используйте для стандартных слияний веток git (используйте dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -15,6 +14,7 @@ language: ru
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

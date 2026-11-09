@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: wttr.in（無料、APIキー不要）を介して、指定された場所や座標の天気に関する質問に回答します。現在の天気 + 3日間の予報。位置情報はリクエストまたは設定から取得し、オプションの短期キャッシュも利用可能です。
+updated: 2026-11-09
+description: "指定した都市や座標の現在の気象状況または3日間の天気予報を確認する場合に使用する（例：'〜の天気はどう？'、'明日の天気予報'、'今日の降水確率'、/wetter）。APIキー不要でwttr.inからリアルタイムの天候や予報を取得する。過去の気候研究データや天文学的な計算には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="wetter banner">
 

@@ -4,8 +4,8 @@ version: 0.2.0
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-06-19
-description: Этот навык следует использовать, когда пользователь хочет написать, ответить, отклонить, уточнить, сократить, переформулировать или составить черновик личных или полуформальных электронных писем в своем собственном стиле, особенно при согласовании встреч, официальных отказах, дружелюбных кратких ответах и тоне, зависящем от контакта. Начинайте анализ профиля только при наличии конкретного поручения по написанию письма.
+updated: 2026-11-09
+description: "Используйте для составления, ответов или стилистической правки личных и полуформальных писем (например, 'напиши письмо...', 'составить вежливый отказ', 'сократить письмо и напомнить о себе', /privat-mail-writer). Составляет точные письма в подходящей тональности с учетом адресата. НЕ используйте для коммерческих маркетинговых рассылок (используйте dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 

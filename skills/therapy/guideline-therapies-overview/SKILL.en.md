@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide."
-
+updated: 2026-11-09
+description: "Use when seeking an objective comparative overview of the 4 German guideline-approved psychotherapy modalities (e.g. 'compare therapy modalities', 'CBT vs psychodynamic', 'which psychotherapy fits', /guideline-therapies-overview). Outlines indications, theoretical models, and settings for CBT, Psychodynamic, Psychoanalytic, and Systemic therapy. Do NOT use for clinical diagnostic decisions or acute interventions."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

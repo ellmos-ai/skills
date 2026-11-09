@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Preparación de exámenes, auto-evaluaciones, simulacros y pruebas de práctica.
+updated: 2026-11-09
+description: "Usar cuando se preparen exámenes mediante pruebas prácticas, simulacros o análisis sistemático de fallos (ej. 'hazme preguntas sobre este tema', 'crear examen de prueba', 'evaluar mis conocimientos', /academic-study-test). Genera exámenes de prueba, criterios de evaluación y diagnóstico de lagunas. NO usar para el estudio inicial (usar academic-study-learn) ni control de fechas (usar academic-study-control)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-es]
 language: es
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

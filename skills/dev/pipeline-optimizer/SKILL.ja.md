@@ -4,9 +4,9 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-06-13
+updated: 2026-11-09
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: 既存のパイプライン、個別プロジェクトフォルダ、ドキュメント構造、またはソフトウェアスタックを改善、刷新、再構築するための構造化された6段階の手順。「パイプライン最適化」（ソフトウェア、研究、ゲーム開発などのトピック全体のパイプライン対象）または「プロジェクトフォルダ最適化」（単一のソフトウェアツールや論文プロジェクトなど、パイプライン内の個別プロジェクトフォルダ対象）として呼び出し可能。「パイプラインXの改善」、「スタックの最適化」、「Yの再構築」、「リノベーション」、「パイプラインのリファクタリング」、「プロジェクトフォルダのクリーンアップ」、「フォルダ構造の改善」、「規約の統一」、「ドキュメント統合」、「既存システムへの統合」などのタスクで起動。現況構造の分析、目的の明確化、理想像のスケッチ、ギャップ計画、経験的課題の特定、新規サブエージェントによる再テストを提供。並行標準、重複、パイプラインの破損を防止。
+description: "既存のパイプライン、プロジェクトのフォルダー構造、ドキュメントフロー、ツールチェーンを抜本的に刷新・統合する場合に使用する（例：'パイプラインを刷新'、'プロジェクトのフォルダー構造を最適化'、'ツールチェーンをリファクタリング'、/pipeline-optimizer）。現状棚卸し、目的明確化、理想図策定、ギャップ解消、再検証の6段階手順を実行する。単一関数の個別バグ修正（bugfix-protocol）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 

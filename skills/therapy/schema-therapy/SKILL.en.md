@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented."
-
+updated: 2026-11-09
+description: "Use when examining deep-seated emotional schemas, lifelong patterns, or personality modes (e.g. 'schema therapy modes', 'vulnerable child and healthy adult', 'life traps', /schema-therapy). Teaches Jeffrey Young's schema model: core emotional needs, early maladaptive schemas, schema modes, and coping styles. Do NOT use for quick behavioral activation (use behavioral-activation)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

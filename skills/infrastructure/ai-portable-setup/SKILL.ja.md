@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: USBドライブやその他のドライブ上にポータブルAIワークスペースを作成します。ローカルLLMモデル (Ollama)、ベクトルデータベース (ChromaDB)、事前設定されたプロンプトを備えたRAGパイプライン。
-
+updated: 2026-11-09
+description: "USBドライブや外付けディスク上にポータブルで自己完結型のローカルAI作業環境を構築する場合に使用する（例：'ポータブルAIセットアップ'、'USBメモリにAI環境構築'、'オフラインローカルRAG構成'、/ai-portable-setup）。ローカルLLM（Ollama）、ベクトルDB（ChromaDB）、プロンプトを完全オフラインで動作するように設定する。ホストPCの初期セットアップ（system-onboarding）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 

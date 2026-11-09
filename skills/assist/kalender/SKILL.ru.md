@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Навык календаря с адаптивным выбором бэкенда пользователем (Flag 3). По умолчанию: локальное хранилище SQLite. Опционально: Google Calendar MCP, Routinika или UpToday в качестве бэкенда — управляется через assist/prefs.json. Если предпочтение не задано, LLM опрашивает пользователя интерактивно."
-
+updated: 2026-11-09
+description: "Используйте для планирования, управления или просмотра встреч, записей в календаре и регулярных событий (например, 'добавить встречу', 'проверить мой календарь', 'планы на завтра', /kalender). Управляет событиями локально через SQLite или подключенные MCP (Google Calendar, Routinika, UpToday). НЕ используйте для вех программных проектов (используйте dev/dev-cycle)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'optional': True, 'purpose': 'Backend option when kalender_backend=google in prefs.json'}], 'protocols': [{'name': 'ICS / iCalendar', 'optional': True, 'purpose': 'Import/export of appointments (RFC 5545 subset)'}], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin gefunden (kein kalender-Service in BACH/system/). Skill vollständig neu konzipiert mit Flag-3-Logik (user-adaptive backend). ICS-Felder angelehnt an RFC 5545, kein externer ICS-Parser benötigt.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="kalender banner">
 

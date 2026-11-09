@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Prüft fremde Skills, Plugins, MCP-Server und Hooks VOR der Installation nach dem Muster Staging-then-promote: in einen Staging-Ordner holen, dort vollständig lesen und mit einem Musterscanner vorsortieren, erst nach eigenem Urteil und ausdrücklicher Nutzerfreigabe installieren - ein Agent installiert nie selbst. Auslöser: 'Skill/Plugin/MCP von GitHub installieren', 'ist dieses Plugin sicher', 'fremden Hook prüfen', 'npm-Paket für den Agenten'. Nicht für eigene Repos (sec-scan) und nicht für Abhängigkeiten/CVEs des eigenen Stacks (security-tech-stack-check)."
+updated: 2026-11-09
+description: "Verwenden, wenn fremde Skills, Plugins, MCP-Server oder Pakete vor der Installation auf bösartigen Code und Supply-Chain-Risiken geprüft werden sollen (z. B. 'Fremd-Plugin prüfen', 'ist dieses GitHub-Repo/MCP sicher', 'Supply-Chain-Audit', /sec-supplychain). Isoliert fremden Code in einem Staging-Ordner und prüft ihn mit Musterscannern vor der Freigabe. NICHT verwenden für das Scannen eigener interner Repositories (dafür sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-supplychain banner">
 

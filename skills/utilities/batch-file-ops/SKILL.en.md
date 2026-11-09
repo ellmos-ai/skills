@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Batch file operations (delete, move, copy, list) with glob patterns. CLI tool for efficient filesystem operations. Zero dependencies.
-
+updated: 2026-11-09
+description: "Use when batch filesystem operations such as bulk copying, moving, deleting, or listing via glob patterns are needed (e.g. 'batch move files', 'delete all *.tmp files matching pattern', /batch-file-ops). Executes safe filesystem batch actions using Python standard library. Do NOT use for in-file text replacements or interactive single-file edits."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 

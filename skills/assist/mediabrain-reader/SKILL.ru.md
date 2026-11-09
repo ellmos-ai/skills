@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Анализирует предоставленные списки и метаданные независимо от медиаприложения.
+updated: 2026-11-09
+description: "Используйте для анализа и каталогизации медиатек, списков книг, фильмов или метаданных медиафайлов (например, 'анализ медиаколлекции', 'каталогизировать книги и фильмы', 'структурировать список к просмотру', /mediabrain-reader). Обрабатывает каталоги медиа независимо от сторонних приложений. НЕ используйте для скачивания субтитров к видео (используйте utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

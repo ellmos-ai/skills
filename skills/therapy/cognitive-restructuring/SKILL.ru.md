@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Когнитивно-поведенческая терапия: модель ABC, автоматические мысли, выявление когнитивных искажений и ведение дневников мыслей."
+updated: 2026-11-09
+description: "Используйте для проверки и оспаривания негативных автоматических мыслей, руминаций и когнитивных искажений (например, 'реструктурировать мысли', 'вести дневник мыслей', 'выявить ошибки мышления', /cognitive-restructuring). Обучает когнитивной модели ABC Бека, выявляет ошибки мышления и направляет сократовский диалог. НЕ используйте для чистой дефузии без оспаривания (используйте act-techniques) или анализа семейной истории (используйте genogram-work)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

@@ -4,22 +4,8 @@ version: 1.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-09-18
-description: >
-  Extrem kurzes, substantielles Ausgabe-FORMAT fuer EINE Entscheidung oder
-  Entscheidungsgruppe, wenn die dahinterstehende Analyse bereits existiert (im
-  Chat entstanden, aus `decide`, aus `decision-briefing`, aus einem Ticket
-  oder Dokument): Kontext in 2-3 Zeilen, Pro/Contra je Option als Stichpunkte
-  im paveman/caveman-reduzierten Stil, Talking Points, eine begruendete
-  Empfehlung, und ein Pfad/Link zur Vollanalyse zum Komplett-Nachlesen. Nutze
-  diesen Skill bei "gib mir das kurz mit Pro Contra und Empfehlung", "executive
-  summary zur Entscheidung", "kurzkontext zu <Thema>", "fass die Entscheidung
-  X in einer Kurzform zusammen", /decision-shot, oder wenn ein Ergebnis an
-  jemanden weitergereicht werden soll, der nur die Essenz braucht, nicht die
-  volle Herleitung. NICHT nutzen, um viele offene Entscheidungen zu SAMMELN
-  und per Buchstabe abzufragen -- das macht decision-briefing; NICHT nutzen,
-  um eine Entscheidung erst zu ANALYSIEREN -- das macht decide. decision-shot
-  setzt eine fertige Analyse voraus und komprimiert nur deren Praesentation.
+updated: 2026-11-09
+description: "Verwenden, wenn eine bereits analysierte Entscheidung extrem kompakt und substanziell aufbereitet werden soll (z. B. 'gib mir das kurz mit Pro Contra und Empfehlung', 'executive summary zur Entscheidung', 'fass die Entscheidung X in einer Kurzform zusammen', /decision-shot). Liefert Kontext in 2-3 Zeilen, stichpunktartige Pro/Contra-Punkte im reduzierten Stil, Talking Points, eine begründete Empfehlung und den Beleglink zur Vollanalyse. NICHT verwenden zum Sammeln offener Entscheidungen (dafür decision-briefing) oder zur Erstanalyse einer Frage (dafür decide)."
 visibility: public
 language: de
 standalone: true
@@ -40,6 +26,7 @@ provenance:
   origin: "custom"
   decision_ref: "T-20260824-673115956 (Ticket-Master, User-Auftrag 2026-08-24)"
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-shot banner">
 

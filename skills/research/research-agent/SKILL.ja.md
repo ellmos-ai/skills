@@ -4,9 +4,8 @@ version: 0.1.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: PubMed および arXiv 向け研究パイプライン。Python 標準ライブラリのみを使用した迅速な検索および構造化文献レビュー。
-
+updated: 2026-11-09
+description: "学術研究プロジェクトの実施・検証、文献調査、または科学的主張の確認を行う場合に使用する（例：'先行研究調査'、'文献レビューを実施'、'引用と主張を検証'、/research-agent）。ライブゲート、PDF根拠、主張境界、出版管理を備えたプロジェクト優先の研究パイプラインを実行する。根拠基準のない非公式なWeb検索には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

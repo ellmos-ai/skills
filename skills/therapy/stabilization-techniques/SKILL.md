@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Stabilization techniques: Grounding, safe place, containment, and breathing exercises. Immediate techniques for acute distress and panic attacks."
-
+updated: 2026-11-09
+description: "Verwenden, wenn akute emotionale Übererregung, Panikattacken, Flashbacks oder Dissoziation schnell reguliert werden müssen (z. B. 'akute Panik stoppen', 'Erdungsübungen bei Flashback', 'Sicherer Ort Übung', /stabilization-techniques). Vermittelt sofortige Notfalltechniken: 5-4-3-2-1-Erdung, Tresorübung, Imaginativer Sicherer Ort und physiologische Atemregulation. NICHT verwenden für aufdeckende Trauma-Exposition während der Krise."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 
 # Stabilisierungstechniken

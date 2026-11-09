@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Comprueba componentes medidos con avisos de seguridad actuales y solo permite correcciones configuradas y autorizadas."
+updated: 2026-11-09
+description: "Usar cuando se analice la pila tecnológica activa y sus dependencias en busca de vulnerabilidades CVE conocidas o fallos de configuración (ej. 'comprobar vulnerabilidades en stack', 'auditar dependencias del proyecto', 'escanear stack en busca de CVEs', /security-tech-stack-check). Contrasta componentes reales con avisos de seguridad primarios aportando evidencias. NO usar para auditar plugins desconocidos antes de instalarlos (usar dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

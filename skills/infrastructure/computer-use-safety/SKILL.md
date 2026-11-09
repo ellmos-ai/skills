@@ -4,18 +4,8 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Verhaltensregeln für Computer-Use und GUI-Automation durch KI-Agenten (Bildschirm sehen,
-  klicken, tippen) innerhalb der Rechte, die der Betreiber vergeben hat. Nutzen, bevor ein
-  Agent zum ersten Mal eine Oberfläche steuert -- mit open-compute oder einem
-  vergleichbaren Werkzeug. Trennt fünf Ebenen: Rechte (Betreiber, nicht dieser Skill),
-  Schritte, die der Server selbst erzwingt (Karenz, Not-Aus, Aktivitätswache), Wege als
-  Vorzugsreihenfolge (scheitert ein Weg, weiter mit dem nächsten; nur ein Nutzerstopp hält
-  an), Arbeitsmodi nach Anwesenheit des Nutzers (abwesend, nebeneinander, gemeinsam) und das
-  Verhalten des Modells (sofort stoppen, Ziel prüfen, nicht vertrauenswürdige
-  Bildschirminhalte, Zugangsdaten, irreversible Aktionen, Aufzeichnung).
-
+updated: 2026-11-09
+description: "Verwenden, bevor ein KI-Agent Bildschirme steuert, Mausklicks oder Tastatureingaben ausführt (z. B. 'GUI-Steuerung absichern', 'Computer-Use Leitplanken', 'Sicherheitsregeln für Mausklicks', /computer-use-safety). Setzt Not-Aus, Karenzzeiten, Aktivitätswachen und risikobasierte Bestätigungsschritte für Desktop-Automationen durch. NICHT verwenden für die Code-Reparatur von UI-Komponenten."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -41,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="computer-use-safety banner">
 

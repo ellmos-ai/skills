@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 杰弗里·扬的图式疗法：早期不良图式、模式模型、内在小孩概念与应对风格 — 心理教育视角呈现。
+updated: 2026-11-09
+description: "当探究根深蒂固的情感图式、重复的人生陷阱或人格模式时使用（例如 '图式疗法模式'、'脆弱儿童与健康成人模式'、'人生陷阱'、/schema-therapy）。讲授杰弗里·杨的图式理论模型：核心情感需求、早期不良图式、图式模式及应对风格。切勿用于短期的行为激活任务（使用 behavioral-activation）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

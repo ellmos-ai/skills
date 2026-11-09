@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Crea un periódico diario personalizado a partir de fuentes RSS y fuentes web. Portado del sistema de noticias BACH (news.py + newspaper_generator.py). Almacenamiento SQLite propio (sin Origin-DB). feedparser opcional: fallback XML a través de stdlib. Exportación a PDF mediante Edge Headless (msedge.exe)."
-
+updated: 2026-11-09
+description: "Usar cuando se genere un periódico diario personalizado o boletín de noticias a partir de fuentes RSS y webs (ej. 'crear periódico diario', 'compilar noticias matutinas', 'exportar boletín de noticias en PDF', /tageszeitung). Agrega canales RSS en una base de datos SQLite local y genera ediciones en PDF mediante Edge Headless. NO usar para revisiones de literatura científica (usar research/research-agent)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HTML → PDF (Edge Headless); without Edge: HTML output only'}], 'services': [], 'protocols': [], 'python': [{'name': 'feedparser', 'optional': True, 'install': 'pip install feedparser', 'purpose': 'RSS parsing (main backend). Fallback: defusedxml → regex'}, {'name': 'defusedxml', 'optional': True, 'install': 'pip install defusedxml', 'purpose': 'XXE-safe XML parser as fallback when feedparser is missing. Without defusedxml a regex fallback is used (no ET.fromstring on network data).'}]}
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="tageszeitung banner">
 

@@ -4,9 +4,8 @@ version: 0.1.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: 针对 PubMed 和 arXiv 的研究流水线。使用纯 Python 标准库实现快速检索与结构化文献综述。
-
+updated: 2026-11-09
+description: "当开展或验证学术研究项目、检索文献或核实科学论断时使用（例如 '调研研究现状'、'进行文献综述'、'核实引用与论据'、/research-agent）。编排具有实时关卡、PDF 证据、论点边界和出版控制的以项目为先的研究流程。切勿用于无严谨证据要求的非正式网络搜索。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

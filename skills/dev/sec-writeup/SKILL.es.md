@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Convierte notas, PoC y hallazgos en un informe de vulnerabilidad autocontenido y revisado con escepticismo para la divulgación coordinada: versiones afectadas, pasos de reproducción, impacto, corrección, cronología. PoC mínimo (sin exploit convertido en arma), secretos redactados, cada afirmación respaldada por evidencia o marcada como no verificada. Disparadores: 'redactar la divulgación', 'informe de vulnerabilidad', 'texto del advisory', 'notificar a quien mantiene el proyecto'. No es para el informe interno de escaneo (sec-report) ni para el ticket (sec-track)."
+updated: 2026-11-09
+description: "Usar cuando se redacte un informe riguroso y fundamentado de divulgación coordinada de vulnerabilidades o un aviso para mantenedores (ej. 'redactar aviso de divulgación', 'redactar informe de vulnerabilidad', 'informe de divulgación coordinada', /sec-writeup). Estructura pasos de reproducción, impacto y medidas correctoras con pruebas de concepto desinfectadas. NO usar para el seguimiento interno de incidencias (usar sec-track)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

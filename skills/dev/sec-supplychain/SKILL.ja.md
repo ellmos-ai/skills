@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "サードパーティのスキル、プラグイン、MCP サーバー、フックを、インストールの前にステージングしてから昇格させる方式で確認する。ステージング用フォルダーに取得し、そこで全体を読んでパターンスキャナーで事前選別し、自分の判断とユーザーの明示的な承認を経てからでなければインストールしない。エージェントが自分でインストールすることは決してない。トリガー：「この GitHub のスキル／プラグイン／MCP をインストールして」「このプラグインは安全か」「サードパーティのフックを確認して」「エージェント用の npm パッケージ」。自分のリポジトリ（sec-scan）や、自分のスタックの依存関係・CVE（security-tech-stack-check）には使わない。"
+updated: 2026-11-09
+description: "外部のプラグイン、MCPサーバー、スキル、または依存パッケージをインストールする前に、サプライチェーンリスクや不正コードを監査する場合に使用する（例：'外部プラグインを監査'、'このGitHubのMCPは安全か'、'サプライチェーンチェック'、/sec-supplychain）。未検証コードを一時隔離フォルダーにステージングし、不審な通信や永続化を検証する。自社の自作リポジトリの検査（sec-scan）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-supplychain banner">
 

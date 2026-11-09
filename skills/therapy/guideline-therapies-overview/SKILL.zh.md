@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 德国四种法定医保资助的心理治疗取向对比：认知行为疗法、深层心理学取向心理治疗、精神分析、系统疗法 — 定向指南。
+updated: 2026-11-09
+description: "当客观对比主流心理治疗流派（认知行为疗法、心理动力学疗法、精神分析疗法与家庭系统疗法）时使用（例如 '对比心理治疗流派'、'CBT 与动力学流派的区别'、'哪种心理咨询适合我'、/guideline-therapies-overview）。系统梳理各流派的适应症、理论模型及治疗设置。切勿用于临床疾病确诊或急性干预。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

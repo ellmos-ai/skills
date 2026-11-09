@@ -4,9 +4,8 @@ version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-04-04
-updated: 2026-06-20
-description: オンライン動画ソースから動画の書き起こし（字幕）とメタデータを取得し、Markdown、JSON、またはプレーンテキストで出力します。現在サポート中：YouTube。手動作成字幕を優先し、自動生成字幕にフォールバックします。
-
+updated: 2026-11-09
+description: "YouTubeなどのオンライン動画プラットフォームから字幕、文字起こし、メタデータを取得する場合に使用する（例：'YouTube動画を文字起こし'、'動画の字幕をダウンロード'、/video-transcriber）。手動および自動生成の字幕をMarkdown、JSON、テキストとして抽出する。Whisper等によるローカル音声ファイルの文字起こし（assist/transkription）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube-transcript-api', 'yt-dlp']}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="video-transcriber banner">
 

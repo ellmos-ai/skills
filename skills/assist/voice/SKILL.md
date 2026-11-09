@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plant Sprachaufnahme, Transkription und Sprachausgabe mit optionalen, austauschbaren Werkzeugen.
+updated: 2026-11-09
+description: "Verwenden, wenn Sprachaufnahmen, Transkriptionen und Text-to-Speech (TTS) zu einer durchgängigen Sprach-Pipeline kombiniert werden sollen (z. B. 'Sprachausgabe planen', 'Voice-Pipeline einrichten', 'Sprachinteraktion konfigurieren', /voice). Koordiniert modulare Audiowerkzeuge für Aufnahme, Transkription und Sprachsynthese. NICHT verwenden für reine Audio-Transkription bestehender Dateien (dafür assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

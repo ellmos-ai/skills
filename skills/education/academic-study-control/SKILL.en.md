@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Academic study and deadline management with source verification, privacy compliance,
-  and realistic action planning.
+updated: 2026-11-09
+description: "Use when managing academic study schedules, deadlines, or exam regulations (e.g. 'plan my semester', 'manage study deadlines', 'organize exam phase', /academic-study-control). Organizes deadlines and milestones with source verification and privacy compliance. Do NOT use for active learning of subjects (use academic-study-learn) or self-testing (use academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-en]
 language: en
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

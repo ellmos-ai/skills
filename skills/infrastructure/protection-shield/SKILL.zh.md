@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "协调获授权的即时防御及周期性服务器日志和版本核查，保留证据、回读与恢复。"
+updated: 2026-11-09
+description: "当遭遇异常服务器网络攻击、流量突发峰值或可疑活动而需紧急协同防御反制措施时使用（例如 '服务器应急防护'、'启动防御护盾'、'防御性应急响应'、/protection-shield）。统筹日志审计、临时速率封禁与安全防护，确保具备可验证的回滚能力。切勿用于平时的常规操作系统基准加固（使用 os-hardening-baseline）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-tech-stack-check], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="protection-shield banner">
 

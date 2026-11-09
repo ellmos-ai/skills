@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Resolución estructurada de problemas en 6 pasos: definición del problema, objetivos, lluvia de ideas, evaluación, implementación y revisión."
+updated: 2026-11-09
+description: "Usar cuando se resuelvan dilemas cotidianos o problemas vitales mediante entrenamiento cognitivo-conductual estructurado (ej. 'resolución estructurada de problemas', 'paso a paso para resolver problemas', /problem-solving-training). Aplica el modelo de 6 pasos de D'Zurilla y Goldfried: definición, metas, alternativas, toma de decisiones, acción y evaluación. NO usar para decisiones de arquitectura de software (usar utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

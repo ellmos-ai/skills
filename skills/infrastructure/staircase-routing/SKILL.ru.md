@@ -4,12 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  Изолированная стратегия навигации и маршрутизации, которая выполняет поиск вверх и вниз
-  по иерархии директорий для обнаружения указательных документов (CLAUDE.md, AGENTS.md,
-  README.md, RULES.md) и настраиваемых пользователем ключевых слов (через staircase-config.json
-  или config.json). Также известна как Up-and-Down Routing или Walking Bass Routing.
+updated: 2026-11-09
+description: "Используйте при обходе иерархии каталогов вверх и вниз для поиска управляющих файлов вроде CLAUDE.md, AGENTS.md или RULES.md (например, 'найти правила в иерархии папок', 'поиск руководящих файлов', 'ступенчатый роутинг', /staircase-routing). Систематически обходит родительские и дочерние папки для определения действующих инструкций. НЕ используйте, если корень проекта уже известен (используйте load-project)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -29,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 

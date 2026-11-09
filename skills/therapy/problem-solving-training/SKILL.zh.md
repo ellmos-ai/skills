@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 结构化问题解决六步法：问题定义、目标设定、头脑风暴、方案评估、实施与复盘。
+updated: 2026-11-09
+description: "当通过结构化认知行为问题解决训练应对复杂的日常生活难题或困境时使用（例如 '结构化问题解决'、'分步骤解决问题'、'评估解决方案'、/problem-solving-training）。引导德苏里拉（D'Zurilla）与戈德弗里德的 6 步模型：问题界定、目标明确、方案头脑风暴、决策、执行与复盘。切勿用于软件技术架构选型（使用 utilities/decide）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Техники стабилизации: Заземление, безопасное место, контейнирование и дыхательные упражнения. Экспресс-техники при остром дистрессе и панических атаках."
+updated: 2026-11-09
+description: "Используйте для экстренной регуляции панических атак, флешбэков, эмоционального захлестывания или диссоциации (например, 'остановить паническую атаку', 'заземление при флешбэке', 'упражнение безопасное место', /stabilization-techniques). Предоставляет техники первой помощи: заземление 5-4-3-2-1, технику контейнера, безопасное место и регуляцию дыхания. НЕ используйте для вскрытия травматических воспоминаний в кризисе."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 

@@ -4,9 +4,9 @@ version: 1.3.1
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-09-27
+updated: 2026-11-09
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
-description: 安全创建、发布、发行、审计和维护 GitHub 仓库的协议：检查本地规则和锁、在第一次 git add 之前创建 .gitignore、执行隐私检查、准备 README/i18n/Banner/元数据、验证发布标签与 GitHub Releases，并更新组织主页、llms.txt 文件和注册表链接。
+description: "当按照严谨的开源规范标准对 GitHub 仓库进行初次发布、初始化或正式版本发布时使用（例如 '发布新代码仓库'、'准备 GitHub 发布版本'、'审计仓库元数据与隐私'、/github-repo-care）。在首次提交前健全 gitignore，执行隐私关卡，并对齐 README、徽标、llms.txt 及发布标签。切勿用于已发布仓库的常规周期性维护（使用 surface-after-care）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,7 @@ status: active
 dependencies: {'tools': ['git', 'gh', 'rg'], 'services': ['GitHub'], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-care/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': '2026-06-18', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 

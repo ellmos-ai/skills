@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: 通过 OSRM（Open Source Routing Machine）规划从 A 到 B 的路线。支持汽车、自行车和步行。无需 API 密钥。
+description: "当计算从 A 地到 B 地的行车、骑行或步行交通路线、导航方向及通行耗时估算时使用（例如 '计算从 A 到 B 的路线'、'预估通行时间'、'规划骑行路线'、/reiseroute）。无需 API 密钥即可通过 OSRM 计算路线路径与几何形态。切勿用于周边单点兴趣点检索（使用 assist/location-suche）。"
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: reiseroute_core.py
 provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\n'}
 language: zh
 ---
+
 
 <img src="banner.png" width="100%" alt="reiseroute banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: 将音频/视频文件转录为文本。使用 Whisper (openai-whisper) 或 Vosk (离线) 作为可选后端——两者均通过存在性检查检测。在没有后端的情况下：使用占位符模式和虚拟输出 (dry-run)。
+updated: 2026-11-09
+description: "当需要将本地音视频文件转录为书面文本时使用（例如 '转录音频文件'、'语音转文字'、'转录语音备忘录'、/transkription）。采用 Whisper 或 Vosk 作为本地离线语音识别后端，具备自动回退保障。切勿用于下载 YouTube 在线字幕（使用 utilities/video-transcriber）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="transkription banner">
 

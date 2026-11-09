@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Пакетные операции с файлами (удаление, перемещение, копирование, список) с помощью шаблонов glob. CLI-инструмент для эффективных операций с файловой системой. Без зависимостей.
-
+updated: 2026-11-09
+description: "Используйте при необходимости пакетных операций с файловой системой (копирование, перемещение, удаление, просмотр) по glob-шаблонам (например, 'пакетное перемещение файлов', 'удалить все *.tmp по шаблону', /batch-file-ops). Выполняет безопасные файловые действия без внешних зависимостей. НЕ используйте для замены текста внутри файлов или интерактивного редактирования одного файла."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 

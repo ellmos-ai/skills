@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 用于修复双重/三重编码 UTF-8 的 Mojibake（乱码）修复工具。纠正 Windows cp1252/Latin-1 的误解析。零依赖。
-
+updated: 2026-11-09
+description: "当文本文件出现字符编码损坏或乱码（mojibake）时使用（例如 '修复乱码'、'修复损坏的编码'、'双重编码的 UTF-8'、/encoding-fix）。无需外部依赖即可修复 cp1252、Latin-1 以及多重编码的 UTF-8 文本文件。切勿用于未发生字节损坏的普通格式转换。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 

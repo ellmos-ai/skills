@@ -4,12 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  Al inicio de una tarea de proyecto concreta o cuando el contexto sea poco claro: resolver el
-  objetivo, cargar la jerarquía de reglas aplicable, seguir referencias vinculantes
-  y elaborar un informe de estado basado en evidencias antes de iniciar el trabajo real.
-
+updated: 2026-11-09
+description: "Usar al iniciar una tarea en un proyecto para establecer sistemáticamente el contexto, cargar la jerarquía de reglas y verificar dependencias (ej. 'cargar contexto del proyecto', 'leer reglas del proyecto', 'informe de situación previo al trabajo', /load-project). Resuelve el alcance, carga archivos normativos (CLAUDE.md, etc.) y genera un informe de situación con evidencias. NO usar para la integración inicial completa de un repo nuevo (usar dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -35,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="load-project banner">
 

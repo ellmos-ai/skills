@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "将笔记、PoC 和发现整理成一份可独立阅读、经过审慎检验的漏洞报告，用于协调披露：受影响版本、复现步骤、影响、修复、时间线。PoC 保持最小化（不含武器化的利用代码），密钥已脱敏，每一项声明要么有证据支撑，要么标明未验证。触发词：「撰写披露报告」「漏洞报告」「公告文本」「向维护者报告」。不用于内部的扫描报告（sec-report），也不用于工单（sec-track）。"
+updated: 2026-11-09
+description: "当为上游维护者撰写严谨规范、依据确凿的协同漏洞披露报告（CVD）或安全通报时使用（例如 '撰写漏洞披露报告'、'起草安全通报文书'、'协同漏洞披露文案'、/sec-writeup）。在脱敏 PoC 的前提下系统输出受影响版本、复现步骤、危害评估及修复建议。切勿用于内部待办工单录入（使用 sec-track）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

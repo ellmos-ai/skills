@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Produces, ONLY on explicit request, a minimal security patch for a confirmed finding (status validated or triaged) - in a scratch copy or worktree, never in the original, as patches/<id>.diff without applying, committing or pushing. Triggers: 'fix this finding', 'patch for SEC-...', 'close this vulnerability'. Not for ordinary bug fixing (use bugfix-protocol), not for judging a patch (sec-verify-fix), not for finding issues (sec-scan)."
+updated: 2026-11-09
+description: "Use when generating a minimal, isolated security patch for a validated vulnerability finding (e.g. 'fix security finding', 'generate patch for SEC-...', 'close vulnerability', /sec-fix). Produces targeted diff patches in scratch copies or isolated worktrees without direct commit or push. Do NOT use for non-security bug fixes (use bugfix-protocol) or patch verification (use sec-verify-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

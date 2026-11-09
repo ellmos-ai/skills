@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  報告書生成や個人テンプレートを含めず、授業、学習活動、個別支援を計画します。
+updated: 2026-11-09
+description: "個別の教育支援計画、習熟度別学習課題、または指導支援策を立案する場合に使用する（例：'個別指導計画を作成'、'授業課題を習熟度別に分ける'、'個別の支援目標を設定'、/foerderplaner）。個人情報を漏らすことなく、構造化された客観的な教育支援計画を立案する。単独の練習プリント作成（worksheet-generator）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ドキュメント要件分析：docs/ フォルダ内のコンセプトおよび要件ドキュメントを分析し、要件を現在のコードと照合して、統合された差分レポートを作成します。
+updated: 2026-11-09
+description: "設計書、仕様書、要件定義書を実際の実装コードと照合し、乖離を特定して複数ドキュメントを統合する場合に使用する（例：'仕様書とコードを照合'、'計画ドキュメントを統合'、'ドキュメントのギャップ分析'、/docs-analysis）。ドキュメントとコードの乖離を明確にし、複数の計画書を整理・統合する。ダイアグラム構文の検証（dev/mermaid-lint）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 

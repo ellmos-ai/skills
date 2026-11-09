@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Strukturiert bereitgestellte Finanz- und Versicherungsunterlagen als neutrale Übersicht und Checkliste.
+updated: 2026-11-09
+description: "Verwenden, wenn private oder geschäftliche Finanz- und Versicherungsunterlagen übersichtlich geordnet und geprüft werden sollen (z. B. 'Versicherungsverträge ordnen', 'Finanzunterlagen strukturieren', 'Vertragsfristen prüfen', /finanz-versicherung). Erstellt neutrale Übersichten, Fristenkalender und Checklisten ohne Rechts- oder Anlageberatung. NICHT verwenden für steuerliche oder bindende Anlageempfehlungen."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

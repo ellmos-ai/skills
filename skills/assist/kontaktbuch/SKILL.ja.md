@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  自発的に提供された連絡先を必要最小限で整理し、重複候補を検出します。
+updated: 2026-11-09
+description: "プライバシーに配慮しながらアドレス帳を管理し、連絡先情報を更新し、重複エントリーを整理・統合する場合に使用する（例：'連絡先を保存'、'住所録を更新'、'重複した連絡先を整理'、/kontaktbuch）。外部への情報漏洩を防ぎながら、安全に連絡先データを構造化・名寄せする。ソーシャルメディアでの営業・広報活動（dev/community-outreach）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  整理办公任务、往来事项和期限，不依赖特定办公应用。
+updated: 2026-11-09
+description: "当需要组织日常办公事务、商务函电、公文起草以及行政截止日期时使用（例如 '整理办公文档'、'起草商务信函'、'管理办公截止期限'、/buero）。以平台中立的方式梳理典型办公室工作、公函及期限清单。切勿用于私人日常简短邮件（使用 privat-mail-writer）或营销推广。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

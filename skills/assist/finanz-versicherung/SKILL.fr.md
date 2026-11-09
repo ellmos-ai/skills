@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Structure les documents financiers et d'assurance fournis sous forme d'aperçu et de liste neutres.
+updated: 2026-11-09
+description: "Utiliser pour organiser et synthétiser des documents financiers, polices d'assurance ou contrats personnels/professionnels (ex. 'classer mes contrats d'assurance', 'structurer mes documents financiers', 'suivi des échéances de contrats', /finanz-versicherung). Établit des vues d'ensemble neutres, calendriers d'échéances et check-lists sans conseil financier ou juridique. Ne PAS utiliser pour du conseil fiscal ou des recommandations d'investissement."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

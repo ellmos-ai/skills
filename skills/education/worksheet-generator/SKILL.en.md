@@ -4,9 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-30
-description: >
-  Worksheet and educational material generator tailored to learning goals.
+updated: 2026-11-09
+description: "Use when generating educational worksheets, practice exercises, or classroom handouts (e.g. 'create worksheet', 'generate practice problems', 'design exercise sheet', /worksheet-generator). Produces customizable worksheets with structured exercises and answer keys. Do NOT use for holistic educational support planning (use foerderplaner)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [worksheet-generator, worksheet-generator-en]
 language: en
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 

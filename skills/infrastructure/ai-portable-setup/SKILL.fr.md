@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour ai-portable-setup: Creates a portable AI workspace on a USB drive or any drive. RAG pipeline with local LLM models (Ollama), vector database (ChromaDB), and preconfigured prompts."
+updated: 2026-11-09
+description: "Utiliser pour mettre en place un environnement d'IA portable et autonome sur clé USB ou disque externe (ex. 'configuration IA portable', 'IA sur clé USB', 'RAG local hors ligne', /ai-portable-setup). Configure des LLM locaux (Ollama), une base vectorielle (ChromaDB) et des invites pour un usage 100 % hors ligne. Ne PAS utiliser pour l'installation complète d'une station de travail (utiliser system-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 

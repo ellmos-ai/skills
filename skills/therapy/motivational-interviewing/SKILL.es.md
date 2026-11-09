@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Entrevista Motivacional (EM) según Miller y Rollnick: técnicas OARS, discurso de cambio y fomento de la preparación para el cambio."
+updated: 2026-11-09
+description: "Usar cuando se aborde la ambivalencia ante el cambio de conducta o se busque fortalecer la motivación personal (ej. 'entrevista motivacional', 'resolver ambivalencia', 'fomentar lenguaje de cambio', /motivational-interviewing). Aplica el modelo de Miller y Rollnick: principios OARS, balance decisional y evocación del discurso de cambio. NO usar para dar órdenes directivas ni confrontación."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 

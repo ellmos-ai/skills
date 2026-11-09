@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Claude + Codex
 created: 2026-07-28
-updated: 2026-07-30
-description: "When an authorized local decision profile exists: predict recurring decisions from proven feedback, calibrate confidence, and strictly separate prediction, decision, and execution."
+updated: 2026-11-09
+description: "Use when predicting and pre-aligning recurring decisions using an authorized local decision profile (e.g. 'predict user decision', 'apply user preferences', 'decision avatar alignment', /decision-avatar). Calibrates decision confidence and strictly separates prediction, confirmation, and execution. Do NOT use for constitutional policy evaluations (use utilities/lebende-verfassung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -28,6 +28,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-avatar banner">
 

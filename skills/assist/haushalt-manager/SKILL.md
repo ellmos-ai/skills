@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plant Haushaltsaufgaben, Routinen und Zuständigkeiten ohne Bindung an eine bestimmte App.
+updated: 2026-11-09
+description: "Verwenden, wenn Aufgaben im Haushalt, Reinigungsroutinen, Wartungsintervalle oder Zuständigkeiten geplant werden sollen (z. B. 'Haushaltsplan erstellen', 'Putzroutine organisieren', 'Wartungsintervalle im Haus tracken', /haushalt-manager). Erstellt strukturierte, neutrale Haushalts- und Aufgabenpläne ohne Bindung an proprietäre Apps. NICHT verwenden für Büroablagen (dafür assist/buero) oder Inventarverwaltung (dafür assist/hauslagerist-reader)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

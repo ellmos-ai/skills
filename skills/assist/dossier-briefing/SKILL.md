@@ -4,10 +4,9 @@ version: 1.0.0
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-08-23
+updated: 2026-11-09
 category: assist
-description: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store.
-
+description: "Verwenden, wenn zu einem Thema oder einer Person ein strukturiertes Recherche-Briefing als Markdown-Dossier erstellt werden soll (z. B. 'Recherche-Dossier anlegen', 'Briefing zu Thema X erstellen', 'Dossier über Person Y', /dossier-briefing). Erzeugt ein strukturiertes Briefing-Dokument mit Kernfakten, Quellenbelegen und offenen Fragen. NICHT verwenden für akute Entscheidungsverdichtung (dafür decision-shot) oder formale Forschungsprotokolle (dafür research/research-agent)."
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -21,6 +20,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: de
 visibility: public
 ---
+
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 
 # Dossier-Briefing

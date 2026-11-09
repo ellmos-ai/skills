@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Erzeugt NUR auf ausdrücklichen Wunsch einen minimalen Sicherheitspatch für einen bestätigten Fund (Status validated oder triaged) - in einer Scratch-Kopie oder einem Worktree, nie im Original, als patches/<id>.diff ohne Anwenden, Commit oder Push. Auslöser: 'fix diesen Fund', 'Patch für SEC-...', 'Sicherheitslücke schließen'. Nicht für gewöhnliche Fehlerbehebung (dafür bugfix-protocol), nicht zum Prüfen eines Patches (sec-verify-fix), nicht zum Auffinden (sec-scan)."
+updated: 2026-11-09
+description: "Verwenden, wenn für einen bestätigten Sicherheitsfund ein minimaler, isolierter Patch erstellt werden soll (z. B. 'Sicherheitslücke beheben', 'Patch für SEC-... erstellen', 'Schwachstelle schließen', /sec-fix). Erstellt minimale Diff-Patches in einer Scratch-Kopie ohne direktes Anwenden, Committen oder Pushen. NICHT verwenden für gewöhnliche funktionale Bugfixes (dafür bugfix-protocol) oder Patch-Verifikation (dafür sec-verify-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

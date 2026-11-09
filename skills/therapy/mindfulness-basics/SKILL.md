@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  MBSR-Grundlagen, Bodyscan und Atemübungen. Evidenzbasierte Achtsamkeitstechniken nach Jon Kabat-Zinn für den Alltag.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Achtsamkeitspraxis, MBSR-Übungen oder Körperwahrnehmung erlernt und in den Alltag integriert werden sollen (z. B. 'Achtsamkeitsübungen', 'Bodyscan Anleitung', 'Atemmeditation im Alltag', /mindfulness-basics). Leitet evidenzbasierte Achtsamkeitsübungen nach Jon Kabat-Zinn an: Bodyscan, Gehmeditation und 3-Minuten-Atemraum. NICHT verwenden für gezielte Muskelrelaxation nach Jacobson (dafür pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

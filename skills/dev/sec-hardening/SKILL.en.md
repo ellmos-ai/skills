@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Derives structural hardening proposals from findings, incident reports or assessments instead of one-off patches: bundle root causes, before/after architecture picture (ASCII), alternatives with trade-offs (effort, risk, effect), implementation order, evidence per proposal. Delivers a document and changes no code. Triggers: 'how do we harden this fundamentally', 'why do findings like this keep appearing', 'make the architecture safer', 'action plan from the incident'. Not for fixing a single finding (sec-fix) and not for acute defence (protection-shield)."
+updated: 2026-11-09
+description: "Use when deriving architectural hardening strategies and preventative defense-in-depth measures from vulnerability patterns (e.g. 'harden application architecture', 'prevent recurring vulnerability classes', /sec-hardening). Produces before/after architectural blueprints and prioritized hardening roadmaps without altering code. Do NOT use for single vulnerability patches (use sec-fix) or emergency blocks (use protection-shield)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-hardening banner">
 

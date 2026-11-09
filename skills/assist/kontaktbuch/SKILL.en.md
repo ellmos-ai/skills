@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organizes voluntarily supplied contact data with data minimization and detects possible duplicates.
+updated: 2026-11-09
+description: "Use when managing address books, updating contact details, or deduplicating contact records privacy-consciously (e.g. 'save contact info', 'update address entry', 'find duplicate contacts', /kontaktbuch). Structures contact records and detects duplicate entries locally without data leakage. Do NOT use for automated public social outreach (use dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

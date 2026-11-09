@@ -4,9 +4,8 @@ version: 0.3.0
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-07-27
-description: Provider-neutral planner for synchronizing MCP configuration, skills and rule files across agent providers and app classes. It discovers evidenced local options and lets the user choose truth, targets, direction and conflicts.
-
+updated: 2026-11-09
+description: "Verwenden, wenn MCP-Server-Konfigurationen, Skills und Regeldateien anbieterneutral über mehrere Agenten-Frameworks synchronisiert werden sollen (z. B. 'Agenten-Konfiguration synchronisieren', 'MCPs abgleichen', 'Skills spiegeln', /agent-config-sync). Ermittelt lokale Konfigurationen und lässt den Nutzer Richtung, Ziele und Konfliktlösungen bestimmen. NICHT verwenden für reinen MCP-Server-Abgleich ohne Skills/Regeln (dafür mcp-config-sync)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -20,6 +19,7 @@ aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 

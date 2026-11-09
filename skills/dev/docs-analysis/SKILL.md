@@ -4,13 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-15
-description: >
-  Prüft Konzept- und Anforderungsdokumente gegen die Umsetzung. Optionaler Modus
-  Plankonsolidierung (Dokument-Synopse): führt mehrere Pläne zu einem aktuellen
-  Dokument mit offenen Punkten zusammen und archiviert abgeschlossene oder
-  abgelöste Inhalte mit folder-organization.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Spezifikationen, Architekturdokumente oder Anforderungspläne gegen den tatsächlichen Code-Stand abgeglichen oder konsolidiert werden sollen (z. B. 'Doku mit Code abgleichen', 'Pläne konsolidieren', 'Dokumentations-Gap analysieren', /docs-analysis). Vergleicht Konzepte mit der Umsetzung, deckt Lücken auf und führt mehrere Planungsdokumente sauber zusammen. NICHT verwenden für formale Mermaid-Syntaxprüfung (dafür dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -23,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 
 # Dokumenten-Anforderungsanalyse

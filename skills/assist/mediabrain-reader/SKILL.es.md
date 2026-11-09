@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analiza listas y metadatos multimedia sin depender de una aplicación concreta.
+updated: 2026-11-09
+description: "Usar cuando se analicen y cataloguen listas de medios, listas de lectura, películas pendientes o metadatos audiovisuales (ej. 'analizar colección multimedia', 'catalogar libros y películas', 'estructurar lista de visionado', /mediabrain-reader). Gestiona catálogos de medios y metadatos de forma agnóstica a apps comerciales. NO usar para extraer transcripciones de subtítulos de vídeo (usar utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

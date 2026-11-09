@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 基于 Miller 与 Rollnick 的动机访谈（MI）：OARS 技术、改变言语以及促进改变准备度。
+updated: 2026-11-09
+description: "当探讨行为改变的矛盾心态（纠结）或激发改变动力时使用（例如 '动机性访谈'、'化解犹豫不决'、'促进改变性谈话'、/motivational-interviewing）。系统引导米勒与罗尔尼克的 MI 框架：OARS 原则、决策平衡探索及激发改变言辞。切勿用于指令性说教或对抗性批评。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 

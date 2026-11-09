@@ -4,9 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-23
-description: >
-  支援目標・対象年齢・難易度に応じた教材・ワークシートの自動構造化生成。
+updated: 2026-11-09
+description: "教育用ワークシート、練習問題プリント、または教材を作成する場合に使用する（例：'ワークシートを作成'、'練習問題を生成'、'学習教材を設計'、/worksheet-generator）。明確な設問と解答例を備えたカスタマイズ可能なプリント教材を作成する。総合的な個別支援計画（foerderplaner）には使用しない。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [worksheet-generator, worksheet-generator-ja]
 language: ja
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 

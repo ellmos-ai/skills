@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  把用户提供的财务和保险材料整理成中立概览与清单。
+updated: 2026-11-09
+description: "当梳理、归档和核对个人或企业的财务单据、保险保单与合同文本时使用（例如 '整理保险保单'、'梳理财务资料'、'核对合同续约期限'、/finanz-versicherung）。在不提供法律或投资咨询的前提下输出中立清单、截止日期时间表与审查清单。切勿用于具备法律效力的税务或投资建言。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

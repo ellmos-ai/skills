@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-06-13
-description: "8-фазный цикл разработки: Запросы функций, текущее состояние, функциональное планирование, фронтенд, планирование бэкенда, код бэкенда, тесты, сценарии использования. Итеративная фреймворк-система для систематической разработки ПО."
+updated: 2026-11-09
+description: "Используйте для реализации программных функций через итеративный 8-фазный цикл разработки (например, 'разработать фичу по этапам', 'запустить цикл разработки', '8-фазный процесс', /dev-cycle). Проводит через анализ требований, текущее состояние, функциональные спецификации, фронтенд, бэкенд и тесты. НЕ используйте для точечного исправления отдельных багов (используйте bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 > **Русский** — Официальная русская версия `dev-cycle`.

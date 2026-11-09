@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Relajación Muscular Progresiva (PMR) según Jacobson y Entrenamiento Autógeno según Schultz. Formas cortas y versiones completas.
+updated: 2026-11-09
+description: "Usar cuando se practiquen técnicas de relajación física y muscular para reducir el estrés y regular la tensión (ej. 'aprender relajación muscular progresiva', 'ejercicios de entrenamiento autógeno', 'relajar tensión corporal', /pmr-autogenic-training). Guía las secuencias de tensión-distensión de Jacobson (PMR) y las fórmulas de Schultz. NO usar para la observación de mindfulness sin activación muscular (usar mindfulness-basics)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

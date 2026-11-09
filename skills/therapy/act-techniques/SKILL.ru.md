@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Терапия принятия и ответственности (ACT) Стивена Хейса: модель гексафлекса с шестью ключевыми процессами психологической гибкости."
+updated: 2026-11-09
+description: "Используйте для развития психологической гибкости, жизни в соответствии с ценностями или осознанного принятия по модели ACT (например, 'прояснить ценности', 'практика расцепления', 'принятие вместо избегания', /act-techniques). Знакомит с моделью гексафлекса и ее 6 ключевыми процессами. НЕ используйте для реструктуризации автоматических мыслей (используйте cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 

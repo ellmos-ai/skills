@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Exam preparation, self-testing, mock exams, and error diagnosis.
+updated: 2026-11-09
+description: "Use when preparing for exams through practice tests, mock exams, or systematic error analysis (e.g. 'quiz me on this topic', 'create practice exam', 'test my understanding', /academic-study-test). Generates mock tests, rubric assessments, and targeted error diagnostics. Do NOT use for initial studying (use academic-study-learn) or schedule tracking (use academic-study-control)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-en]
 language: en
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

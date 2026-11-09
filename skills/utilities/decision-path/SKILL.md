@@ -4,22 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-18
-description: >
-  Erzeugt aus einem Bestand offener und gefallener Entscheidungen einen
-  strukturierten ASCII-Abhängigkeitsgraphen (maximal 100 Spalten) für das
-  Terminal. Bewertet Knoten nach fünf festen Kriterien: sinnvoll, empfohlen,
-  usertypisch (Richtung und decision-avatar-Konfidenz getrennt), zusammenpassend
-  und widersprechend; Kanten tragen Beziehungstyp und Belegstatus. Deckt Blocker,
-  Freischaltungen, Reihenfolgen und widersprüchliche Empfehlungen gnadenlos auf.
-  Nutze diesen Skill bei "welche Entscheidungen hängen voneinander ab",
-  "Abhängigkeitsgraph der Entscheidungen", "Entscheidungspfad visualisieren",
-  "Widersprüche zwischen Entscheidungen prüfen", "Reihenfolge der Beschlüsse",
-  /decision-path. NICHT nutzen, um Entscheidungen erst zu inventarisieren -- das
-  macht decision-briefing; NICHT nutzen, um das empfohlene Gesamtkonzept zur
-  Abnahme zu bündeln -- das macht decision-draw; NICHT für kompakte Fünfteiler-
-  Einzelblöcke mit Optionen und Pro/Contra -- das macht decision-shot; NICHT für
-  die Einzelfall-Erwägung mit Frameworks -- das macht decide.
+updated: 2026-11-09
+description: "Verwenden, wenn Abhängigkeiten und Reihenfolgen zwischen Entscheidungen visualisiert oder Widersprüche aufgedeckt werden sollen (z. B. 'welche Entscheidungen hängen voneinander ab', 'Abhängigkeitsgraph der Entscheidungen', 'Entscheidungspfad visualisieren', 'Widersprüche zwischen Entscheidungen prüfen', /decision-path). Erzeugt einen kompakten ASCII-Abhängigkeitsgraphen für das Terminal mit Status, Blockern und Kantenbeziehungen. NICHT verwenden zur Erstinventarisierung (dafür decision-briefing), für das abnahmefertige Gesamtkonzept (dafür decision-draw), für kompakte 5-Zeiler-Entscheidungsblöcke (dafür decision-shot) oder für Einzelfall-Erwägungen (dafür decide)."
 visibility: public
 language: de
 standalone: true
@@ -37,6 +23,7 @@ provenance:
   origin: "custom"
   decision_ref: "T-20260913-107991667 (Ticket-Master, Nutzerauftrag 2026-09-13)"
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-path banner">
 

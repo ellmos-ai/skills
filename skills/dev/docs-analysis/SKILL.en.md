@@ -4,9 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-10-15
-description: "Checks concept and requirements documents against implementation. Optional plan consolidation (document synopsis) combines multiple plans into a current list of open items and uses folder-organization to archive completed or superseded content."
-
+updated: 2026-11-09
+description: "Use when comparing architecture documentation, specifications, or requirement documents against actual implementation code (e.g. 'audit docs against code', 'consolidate planning documents', 'check documentation gaps', /docs-analysis). Compares written specifications with source code, highlights implementation drift, and consolidates multi-plan backlogs. Do NOT use for syntax linting of diagrams (use dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 

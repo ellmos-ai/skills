@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Prüfungsvorbereitung, Selbsttests, Probeklausuren und systematische Fehleranalyse.
+updated: 2026-11-09
+description: "Verwenden, wenn Selbsttests, Probeklausuren oder systematische Fehleranalysen zur Prüfungsvorbereitung benötigt werden (z. B. 'erstelle Probeklausur', 'teste mein Wissen zu Thema X', 'Prüfungsfragen generieren', /academic-study-test). Erstellt formative Tests und analysiert Wissenslücken systematisch. NICHT verwenden für die Erstaneignung von Stoff (dafür academic-study-learn) oder Fristenplanung (dafür academic-study-control)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +15,8 @@ language: de
 status: active
 visibility: public
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

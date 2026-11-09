@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Fundamentos de MBSR, escaneo corporal (body scan) y ejercicios de respiración. Técnicas de atención plena basadas en la evidencia según Jon Kabat-Zinn para la vida cotidiana.
+updated: 2026-11-09
+description: "Usar cuando se incorpore la meditación de atención plena (mindfulness), ejercicios MBSR o conciencia corporal en la rutina diaria (ej. 'ejercicios de mindfulness', 'guía de escaneo corporal', 'meditación en la respiración', /mindfulness-basics). Enseña fundamentos del método MBSR de Kabat-Zinn: exploración corporal, paseo consciente y pausa de respiración de 3 minutos. NO usar para relajación muscular progresiva neuromuscular (usar pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organiza datos de contacto facilitados voluntariamente y detecta posibles duplicados.
+updated: 2026-11-09
+description: "Usar cuando se gestione la libreta de direcciones, actualicen datos de contacto o eliminen duplicados con total privacidad (ej. 'guardar contacto', 'actualizar dirección', 'buscar contactos duplicados', /kontaktbuch). Organiza fichas de contactos y detecta duplicados localmente protegiendo los datos. NO usar para prospección masiva en redes sociales (usar dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

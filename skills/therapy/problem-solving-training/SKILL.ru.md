@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Структурированное решение проблем за 6 шагов: определение проблемы, цели, мозговой штурм, оценка, реализация и проверка."
+updated: 2026-11-09
+description: "Используйте для структурированного решения сложных жизненных ситуаций и повседневных проблем (например, 'структурное решение проблем', 'пошаговое решение проблемы', 'оценка вариантов решения', /problem-solving-training). Ведет по 6-шаговой модели Д'Зуриллы и Голдфрида: ориентация, формулировка, генерация идей, выбор, реализация и оценка. НЕ используйте для выбора ИТ-архитектуры (используйте utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloese_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 

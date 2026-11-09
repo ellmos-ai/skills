@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 塞利格曼的积极心理学：PERMA模型、性格优势（VIA）、感恩练习、心流理论和心理韧性因素。
+updated: 2026-11-09
+description: "当培养心理幸福感、发挥性格优势及提升心理韧性时使用（例如 '发现标志性性格优势'、'感恩练习'、'应用 PERMA 模型'、/positive-psychology）。结合塞利格曼 PERMA 模型、VIA 优势分类及心流体验促进优势成长。切勿用于临床抑郁症治疗或急性危机处置（使用 behavioral-activation 或 stabilization-techniques）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

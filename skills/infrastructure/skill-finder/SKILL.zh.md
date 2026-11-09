@@ -4,12 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  用于本地自有技能的主动查找器/路由工具（类似于 using-superpowers）。在开始任何非平庸任务时，
-  务必首先使用此技能检查是否有合适的本地技能，并路由到正确的技能。当收到 "哪个技能合适"、"是否有对应的技能"、
-  "查找技能" 或在处理本地技能比临时解决更好的任务前自动激活。
-
+updated: 2026-11-09
+description: "当在开展非平凡任务之初检索、评估并精准路由至最适配的既有本地技能时使用（例如 '哪个技能适配此任务'、'为此任务查找技能'、'是否有用于……的技能'、/skill-finder）。检索本地技能资产库并根据任务需求推荐最佳专用技能。切勿用于编写创建全新技能（使用 ellmos-skill-creator）或全量技能普查审计（使用 skill-explorer）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +27,7 @@ provenance:
   origin_path: "~/.claude/skills/skill-finder/"
   origin_version: "0.1.0"
 ---
+
 
 <img src="banner.png" width="100%" alt="skill-finder banner">
 # 技能查找器 (Skill-Finder)

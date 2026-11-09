@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Definiert, prüft oder aktualisiert die SECURITY.md eines Repos (Geltungsbereich, ausgeschlossene Bereiche, verlangte Sicherheitseigenschaften, Meldeweg, Reaktionszeiten, unterstützte Versionen) und gleicht ihre Aussagen gegen den tatsächlichen Code ab. Die Richtlinie ist die Grundlage für sec-triage. Auslöser: 'SECURITY.md erstellen/prüfen', 'Sicherheitsrichtlinie', 'was gilt hier als Schwachstelle', 'Meldeweg festlegen'. Nicht für Funde (sec-scan), nicht für Offenlegungsberichte (sec-writeup)."
+updated: 2026-11-09
+description: "Verwenden, wenn die Sicherheitsrichtlinie (SECURITY.md) eines Projekts definiert, geprüft oder aktualisiert werden soll (z. B. 'SECURITY.md erstellen', 'Sicherheitsrichtlinie prüfen', 'Meldeweg für Schwachstellen festlegen', /sec-policy). Definiert Geltungsbereich, Reaktionszeiten, Meldekanäle und gleicht Richtlinien mit dem Code ab. NICHT verwenden für das Scannen von Schwachstellen (dafür sec-scan) oder Offenlegungsberichte (dafür sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Terapia de Aceptación y Compromiso (ACT) según Steven Hayes: Modelo Hexaflex con los seis procesos núcleo de la flexibilidad psicológica."
+updated: 2026-11-09
+description: "Usar cuando se busque fomentar la flexibilidad psicológica, la vida basada en valores o la aceptación vivencial mediante la Terapia de Aceptación y Compromiso (ej. 'clarificar valores', 'practicar defusión cognitiva', 'aceptación frente a evitación', /act-techniques). Explica el modelo Hexaflex y sus 6 procesos centrales. NO usar para reestructurar pensamientos automáticos (usar cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 

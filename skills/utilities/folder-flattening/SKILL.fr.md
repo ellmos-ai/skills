@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour folder-flattening: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic."
+updated: 2026-11-09
+description: "Utiliser pour aplatir des arborescences de répertoires profondément imbriquées en une structure claire et lisible par machine (ex. 'aplatir la hiérarchie de dossiers', 'réduire les sous-dossiers imbriqués', /folder-flattening). Exécute un aplatissement déterministe avec gestion des collisions et fusion sécurisée. Ne PAS utiliser pour déplacer de simples fichiers individuels (utiliser batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

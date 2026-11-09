@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: 用于 Python 应用程序的通用插件系统。支持自动发现、校验和容错。零依赖（仅使用 Python 标准库）。
+updated: 2026-11-09
+description: "当在 Python 应用程序中设计或实现具备自动发现与容错特性的插件扩展架构时使用（例如 '实现插件系统'、'动态加载插件'、'设计可扩展应用架构'、/plugin-system）。仅依赖标准库提供具备生命周期钩子与环境隔离的轻量插件加载器。切勿用于未受信第三方插件的安全审计（使用 dev/sec-supplychain）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 

@@ -4,12 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  具体的なプロジェクトタスクの開始時やコンテキストが不明確な場合：ターゲットを解決し、
-  適用されるルール階層を読み込み、拘束力のある参照を追跡し、
-  実際の作業の前にエビデンスに基づく状況報告を作成します。
-
+updated: 2026-11-09
+description: "プロジェクトの作業を開始する際に、文脈を体系的に整理し、ルール階層を読み込み、前提条件を確認する場合に使用する（例：'プロジェクトの文脈を読み込む'、'プロジェクトのルールを確認'、'作業前の現状レポートを作成'、/load-project）。目的を明確化し、統括ルール（CLAUDE.md等）を読み込んで根拠ある状況報告書を作成する。見知らぬコードベースの初回オンボーディング（dev/project-onboarding）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -35,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="load-project banner">
 

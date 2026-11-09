@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "制定、审查或更新仓库的 SECURITY.md（范围、排除区域、必须具备的安全属性、报告渠道、响应时间、受支持版本），并对照实际代码核查其中的声明。该策略是 sec-triage 的依据。触发词：「创建/检查 SECURITY.md」「安全策略」「在这里什么算漏洞」「确定报告渠道」。不用于处理发现（sec-scan），也不用于披露报告（sec-writeup）。"
+updated: 2026-11-09
+description: "当起草、审查或更新项目的安全政策（SECURITY.md）与合规披露指引时使用（例如 '编写 SECURITY.md'、'审核安全策略'、'确立漏洞上报渠道与 SLA'、/sec-policy）。确立适用范围、响应时效规范、漏洞上报通道并与真实代码核对。切勿用于主动执行漏洞扫描（使用 sec-scan）或撰写外部披露通报（使用 sec-writeup）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

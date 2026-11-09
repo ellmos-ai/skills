@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  システムに依存せず、冒険、場面、登場人物、キャンペーン整理を支援します。
+updated: 2026-11-09
+description: "テーブルトークRPG（TRPG）のセッション準備、キャンペーンシナリオ、NPCの作成、または遭遇シーンの構築を行う場合に使用する（例：'NPCを生成'、'TRPGセッションを計画'、'冒険イベントを設計'、/rpg）。特定のシステムに依存せず、世界観構築、ストーリー展開、NPC設定を支援する。テレビゲームのプログラムコードやボードゲームの取扱説明書作成には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

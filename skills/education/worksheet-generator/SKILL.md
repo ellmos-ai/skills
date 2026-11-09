@@ -4,9 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-30
-description: >
-  Erstellung von Arbeitsblättern und Übungsmaterialien für Unterricht und Förderung.
+updated: 2026-11-09
+description: "Verwenden, wenn didaktische Arbeitsblätter, Übungsaufgaben oder Kopiervorlagen für Unterricht und Förderung erstellt werden sollen (z. B. 'Arbeitsblatt erstellen', 'Übungsaufgaben generieren', 'Lernmaterial entwerfen', /worksheet-generator). Generiert anpassbare Arbeitsblätter mit klaren Aufgabenstellungen und Lösungsblättern. NICHT verwenden für übergeordnete Förderzielplanung (dafür foerderplaner)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +15,8 @@ language: de
 status: active
 visibility: public
 ---
+
+
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 

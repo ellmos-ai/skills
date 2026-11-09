@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Prüft bereitgestellte Formularbeschreibungen auf Struktur, Validierung, Verständlichkeit und Barrierefreiheit.
+updated: 2026-11-09
+description: "Verwenden, wenn Formularbeschreibungen, Formular-JSON oder Schemata auf Struktur, Barrierefreiheit und Validierung geprüft werden sollen (z. B. 'Formularstruktur prüfen', 'Formularvalidierung analysieren', 'Barrierefreiheit von Formular', /formbuilder-reader). Prüft Eingabefelder, Fehlermeldungen, Usability und Barrierefreiheitsstandards (WCAG). NICHT verwenden für die dynamische Ausführung von Web-Workflows (dafür web/web-reading)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

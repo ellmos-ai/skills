@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 雅各布森渐进性肌肉放松法（PMR）与舒尔茨自律训练法（AT）。包含简短版与完整版。
-
+updated: 2026-11-09
+description: "当通过身体肌肉放松法减压调适或调节自主神经张力时使用（例如 '学习渐进性肌肉放松法'、'练习自律训练法'、'释放躯体紧张'、/pmr-autogenic-training）。系统指导雅各布森 PMR 肌肉紧张-放松序列与舒尔茨自律训练公式。切勿用于无肌肉舒缩动作的纯正念观照（使用 mindfulness-basics）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autogenes_training.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 

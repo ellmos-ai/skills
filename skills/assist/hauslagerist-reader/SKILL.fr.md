@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analyse les listes ou exports d'inventaire sans dépendre d'un logiciel particulier.
+updated: 2026-11-09
+description: "Utiliser pour analyser des listes d'inventaire, l'état des stocks ou des fichiers d'export de réserve (ex. 'analyser un export d'inventaire', 'vérifier les niveaux de stock', 'suivi des réserves', /hauslagerist-reader). Examine les quantités, seuils de réapprovisionnement et exports sans logiciel propriétaire. Ne PAS utiliser pour nettoyer l'espace disque d'un ordinateur (utiliser utilities/speicherbereinigung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

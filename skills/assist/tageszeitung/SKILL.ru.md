@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: Создает персональную ежедневную газету из RSS-лент и веб-источников. Перенесено из новостной системы BACH (news.py + newspaper_generator.py). Собственное хранилище SQLite (без Origin-DB). feedparser опционален — XML-фоллбэк через stdlib. Экспорт в PDF через Edge Headless (msedge.exe).
-
+updated: 2026-11-09
+description: "Используйте для составления персональной ежедневной газеты или утреннего дайджеста новостей из RSS-лент и веб-источников (например, 'создать ежедневную газету', 'собрать утренние новости', 'экспортировать дайджест в PDF', /tageszeitung). Собирает ленты в локальную базу SQLite и верстает PDF через Edge Headless. НЕ используйте для обзоров академической литературы (используйте research/research-agent)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [{'name': 'msedge.exe', 'optional': True, 'purpose': 'HTML → PDF (Edge Headless); without Edge: HTML output only'}], 'services': [], 'protocols': [], 'python': [{'name': 'feedparser', 'optional': True, 'install': 'pip install feedparser', 'purpose': 'RSS parsing (main backend). Fallback: defusedxml → regex'}, {'name': 'defusedxml', 'optional': True, 'install': 'pip install defusedxml', 'purpose': 'XXE-safe XML parser as fallback when feedparser is missing. Without defusedxml a regex fallback is used (no ET.fromstring on network data).'}]}
 provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hub/_services/newspaper/newspaper_generator.py', 'origin_version': 'news.py v1.x, newspaper_generator.py v1.x', 'origin_repo': 'ellmos-ai/bach (privat)', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'notes': 'Schema (news_sources + news_items) 1:1 aus BACH news.py portiert. BaseHandler-Abhängigkeit entfernt. Origin-DB-Pfad entfernt. DB-Pfad konfigurierbar. newspaper_generator.py-Logik (HTML-Render + Edge-PDF) userneutral übernommen.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="tageszeitung banner">
 

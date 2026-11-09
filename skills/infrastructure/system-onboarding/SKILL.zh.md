@@ -4,11 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: >
-  用于全新、重建或替换工作站的跨供应商通用入职集成协议。它建立了操作系统前置条件、
-  Agent 运行时、共享规则集、便携式技能、验证配置及安装后凭证，而无需将凭据、
-  私有提示词或特定主机配置复制到代码库中。
+updated: 2026-11-09
+description: "当为智能体与开发环境配置全新或刚重装的工作站终端时使用（例如 '配置新开发机'、'工作站接入初始化'、'搭建智能体开发环境'、/system-onboarding）。安全配置操作系统先决环境、运行时、共享规则及便携技能，严防凭据泄露。切勿用于单个代码仓库的接入（使用 dev/project-onboarding）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -30,6 +27,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  整理用户自愿提供的健康信息，并准备向专业人士咨询的问题。
+updated: 2026-11-09
+description: "当整理个人健康笔记、症状发展时间轴或提前准备就医问诊清单时使用（例如 '准备就医咨询'、'梳理症状记录'、'整理健康疑问'、/gesundheit）。客观梳理健康观察数据并为专业医生会诊拟定针对性提问清单。切勿用于临床医学诊断、处方推荐或急症求助。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

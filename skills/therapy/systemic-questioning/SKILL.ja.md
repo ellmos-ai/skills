@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: システム論的質問法：循環質問、スケーリング質問、ミラクル・クエスチョン、例外質問による自己省察と視点拡大。
+updated: 2026-11-09
+description: "システム論的質問技法を通じて固定的な思考枠組みを解きほぐし、多面的な視座を開く場合に使用する（例：'円環的質問をする'、'視点を切り替える'、'仮説的質問を活用'、/systemic-questioning）。三者間の円環的質問、スケーリング質問、仮説的状況設定、逆説的介入などの技法を解説する。定量的な意思決定マトリクス（utilities/decide）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemic-questioning banner">
 

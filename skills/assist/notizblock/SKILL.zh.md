@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  记录、整理和提炼用户提供的笔记，不依赖存储位置或笔记应用。
+updated: 2026-11-09
+description: "当以平台中立的方式随手记录、整理及浓缩灵感随笔、即时心得或草稿片段时使用（例如 '快速便签'、'理清思绪想法'、'总结草稿随笔'、/notizblock）。无需依赖特定商业记事应用即可归纳自由文本笔记。切勿用于深度调研简报（使用 assist/dossier-briefing）或故障事件取证日志（使用 infrastructure/incident-notes）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

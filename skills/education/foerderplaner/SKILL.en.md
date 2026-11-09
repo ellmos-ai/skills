@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plans teaching, learning activities, and individual support without a report generator or personal templates.
+updated: 2026-11-09
+description: "Use when planning individual educational support plans, differentiated learning activities, or pedagogical interventions (e.g. 'create learning support plan', 'differentiate lesson', 'plan individual support goals', /foerderplaner). Designs structured, neutral pedagogical support concepts without personal data leaks. Do NOT use for generating standalone worksheets (use worksheet-generator)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

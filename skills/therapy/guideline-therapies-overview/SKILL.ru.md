@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Сравнение четырех психотерапевтических методов, утвержденных директивами в Германии: когнитивно-поведенческая терапия, психодинамическая терапия, психоанализ, системная терапия — Ориентировочное руководство."
+updated: 2026-11-09
+description: "Используйте для объективного сравнительного обзора четырех основных направлений доказательной психотерапии (например, 'сравнить направления терапии', 'КПТ против психодинамической', 'какой вид терапии выбрать', /guideline-therapies-overview). Описывает показания, теоретические модели и сеттинг для КПТ, психодинамической, психоаналитической и системной терапии. НЕ используйте для постановки диагнозов или экстренной помощи."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

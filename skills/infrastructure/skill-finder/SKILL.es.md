@@ -4,13 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  Buscador/enrutador activo para las habilidades locales propias (análogo a using-superpowers). Utilizar SIEMPRE
-  al inicio de una tarea no trivial para verificar si encaja una habilidad del usuario y enrutar a la correcta.
-  Se activa ante solicitudes de "¿qué habilidad encaja?", "¿hay una habilidad para esto?", "encontrar habilidad",
-  o en general antes de tareas que una habilidad local resuelva mejor que el trabajo ad-hoc.
-
+updated: 2026-11-09
+description: "Usar al inicio de cualquier tarea compleja para descubrir, evaluar y enrutar al skill local preexistente más adecuado (ej. 'qué skill encaja', 'buscar skill para esta tarea', 'existe un skill para...', /skill-finder). Examina la biblioteca local de skills para recomendar el componente exacto según el requerimiento. NO usar para crear nuevos skills (usar ellmos-skill-creator) ni para auditar el catálogo completo (usar skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -32,6 +27,7 @@ provenance:
   origin_path: "~/.claude/skills/skill-finder/"
   origin_version: "0.1.0"
 ---
+
 
 <img src="banner.png" width="100%" alt="skill-finder banner">
 # Buscador de Habilidades (Skill-Finder)

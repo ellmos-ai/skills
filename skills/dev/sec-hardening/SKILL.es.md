@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Deriva propuestas estructurales de hardening a partir de hallazgos, informes de incidentes o evaluaciones en lugar de parches puntuales: agrupar causas raíz, imagen de arquitectura antes/después (ASCII), alternativas con sus compromisos (esfuerzo, riesgo, efecto), orden de implementación, evidencia por propuesta. Entrega un documento y no cambia código. Disparadores: 'cómo reforzamos esto de raíz', 'por qué siguen apareciendo hallazgos como este', 'hacer más segura la arquitectura', 'plan de acción a partir del incidente'. No es para corregir un único hallazgo (sec-fix) ni para la defensa aguda (protection-shield)."
+updated: 2026-11-09
+description: "Usar cuando se deriven estrategias estructurales de endurecimiento de arquitectura y defensa en profundidad a partir de incidentes o hallazgos (ej. 'endurecer arquitectura de seguridad', 'plan de acción post-incidente', /sec-hardening). Diseña planos arquitectónicos antes/después y hojas de ruta priorizadas sin modificar código directamente. NO usar para parches individuales rápidos (usar sec-fix) ni mitigación de emergencia (usar protection-shield)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-hardening banner">
 

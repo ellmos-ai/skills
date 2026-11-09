@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organise les informations de santé fournies volontairement et prépare des questions pour les professionnels.
+updated: 2026-11-09
+description: "Utiliser pour organiser des notes de santé personnelles, retracer la chronologie de symptômes ou préparer une consultation médicale (ex. 'préparer rendez-vous médecin', 'structurer journal des symptômes', 'questions de santé', /gesundheit). Classe méthodiquement les observations et formule des questions précises pour le personnel médical. Ne PAS utiliser pour poser un diagnostic médical ou en cas d'urgence."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="gesundheit banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Koordiniert begrenzte defensive Sofortmaßnahmen und wiederkehrende Serverlog-/Stack-Prüfungen mit Assetautorität, Beweissicherung, Readback und Rollback."
+updated: 2026-11-09
+description: "Verwenden, wenn bei Angriffen, Lastspitzen oder verdächtigen Serveraktivitäten defensive Sofortmaßnahmen koordiniert werden sollen (z. B. 'Server schützen', 'Schutzschild aktivieren', 'defensive Abwehrmaßnahmen', /protection-shield). Koordiniert Log-Analysen, temporäre Blocklisten und Gegenmaßnahmen mit Prüfsummen, Readback und Rollback-Schutz. NICHT verwenden für routinemäßiges OS-Baseline-Hardening (dafür os-hardening-baseline)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-tech-stack-check], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="protection-shield banner">
 

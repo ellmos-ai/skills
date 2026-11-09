@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Akademisches Studien- und Fristenmanagement mit Quellenprüfung, Datenschutz
-  und realistischer Handlungsplanung.
+updated: 2026-11-09
+description: "Verwenden, wenn ein akademischer Studienplan, Modulfristen oder Prüfungsabläufe organisiert werden sollen (z. B. 'Studienplan erstellen', 'Fristen im Semester organisieren', 'Prüfungsphasen planen', /academic-study-control). Strukturiert Fristen, Prüfungsordnungen und Handlungsschritte mit Datenschutz und Quellenabgleich. NICHT verwenden für inhaltliches Lernen (dafür academic-study-learn) oder Probeklausuren (dafür academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -17,6 +15,8 @@ language: de
 status: active
 visibility: public
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

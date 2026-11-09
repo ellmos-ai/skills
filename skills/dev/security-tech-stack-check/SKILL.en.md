@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Check measured components against current primary security advisories, distinguish affected from uncertain, and perform only narrowly authorized configured fixes with readback."
+updated: 2026-11-09
+description: "Use when scanning an environment's active technology stack and dependencies for known CVEs and security advisories (e.g. 'check stack for vulnerabilities', 'audit project dependencies', 'scan stack for CVEs', /security-tech-stack-check). Compares measured components against primary security advisories with clear evidence. Do NOT use for pre-installation staging audits of plugins (use dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

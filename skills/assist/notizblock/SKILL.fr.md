@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Capture, organise et condense les notes fournies sans dépendre d'un emplacement ou d'une application.
+updated: 2026-11-09
+description: "Utiliser pour consigner, structurer ou synthétiser des notes spontanées, idées ou fragments de texte de manière fluide (ex. 'note rapide', 'organiser mes pensées', 'synthétiser des brouillons', /notizblock). Enregistre et condense les notes brutes sans dépendance envers un outil particulier. Ne PAS utiliser pour des dossiers de recherche approfondis (utiliser assist/dossier-briefing) ou des rapports d'incidents (utiliser infrastructure/incident-notes)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

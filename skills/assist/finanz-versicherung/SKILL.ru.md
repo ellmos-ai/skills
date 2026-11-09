@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Структурирует предоставленные финансовые и страховые документы в нейтральный обзор.
+updated: 2026-11-09
+description: "Используйте для структурирования и проверки личных или деловых финансовых документов, страховок и договоров (например, 'разобрать страховки', 'структурировать финансовые документы', 'проверить сроки договоров', /finanz-versicherung). Формирует нейтральные обзоры, календари сроков и чек-листы без финансовых или юридических консультаций. НЕ используйте для налоговых или инвестиционных рекомендаций."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

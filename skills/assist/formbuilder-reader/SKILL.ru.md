@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Проверяет описания форм на структуру, валидацию, ясность и доступность.
+updated: 2026-11-09
+description: "Используйте для анализа описаний форм, JSON-схем и полей ввода на предмет структуры, валидации и доступности (например, 'проверить схему формы', 'доступность формы', 'анализ валидации полей', /formbuilder-reader). Проверяет типы полей, обработку ошибок, удобство и стандарты WCAG. НЕ используйте для автоматического заполнения веб-форм (используйте web/web-reading)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

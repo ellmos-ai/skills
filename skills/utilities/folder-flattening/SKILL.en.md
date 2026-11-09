@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Restructure nested folder hierarchies into flat, machine-readable layouts. Bash-based with intelligent merge logic.
-
+updated: 2026-11-09
+description: "Use when deeply nested directory hierarchies need to be flattened into a clean, machine-readable structure (e.g. 'flatten folder hierarchy', 'collapse nested directories', /folder-flattening). Executes deterministic folder flattening with collision handling and safe merge logic. Do NOT use for simple single-file moves (use batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

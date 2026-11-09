@@ -4,18 +4,8 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Behavioural rules for computer use and GUI automation by AI agents (seeing the screen,
-  clicking, typing) within the permissions the operator has granted. Use before an agent
-  controls a user interface for the first time -- with open-compute or a comparable tool.
-  Separates five levels: permissions (the operator, not this skill), steps the server
-  enforces itself (grace countdown, kill switch, activity watch), routes as a preference
-  order (if one route fails, continue with the next; only a user stop halts), working modes
-  by the user's presence (absent, side by side, together) and the model's own behaviour
-  (stop at once, verify the target, untrusted screen content, credentials, irreversible
-  actions, recording).
-
+updated: 2026-11-09
+description: "Use when preparing or operating computer-use and GUI automation capabilities where an agent sees the screen and types or clicks (e.g. 'safeguard computer use', 'GUI automation safety guardrails', 'screen control rules', /computer-use-safety). Enforces safety stages, emergency kill-switches, grace periods, and human confirmation for irreversible GUI actions. Do NOT use for UI component frontend coding."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -41,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="computer-use-safety banner">
 

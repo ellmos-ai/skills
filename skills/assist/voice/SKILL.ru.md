@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Планирует запись, распознавание и синтез речи с заменяемыми необязательными инструментами.
+updated: 2026-11-09
+description: "Используйте для построения сквозных голосовых цепочек: записи звука, транскрипции и синтеза речи (TTS) (например, 'настроить голосовой пайплайн', 'настроить вывод речи TTS', 'спланировать голосовое взаимодействие', /voice). Координирует модульные инструменты записи, распознавания и синтеза речи. НЕ используйте для простой транскрипции готовых файлов (используйте assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

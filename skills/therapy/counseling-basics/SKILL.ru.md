@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Основы терапевтической коммуникации: активное слушание, отклики-отражения, парафразирование, открытые вопросы и валидация."
+updated: 2026-11-09
+description: "Используйте для применения базовых навыков личностно-центрированного консультирования и эмпатического общения (например, 'активное слушание', 'отражение и перефразирование', 'задавать открытые вопросы', /counseling-basics). Охватывает основы клиент-центрированного подхода Роджерса: эмпатию, валидацию и безоценочное принятие. НЕ используйте для специализированных протоколов лечения расстройств (используйте guideline-therapies-overview)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 

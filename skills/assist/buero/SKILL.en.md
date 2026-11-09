@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organizes office tasks, correspondence, and deadlines without depending on a specific office app.
+updated: 2026-11-09
+description: "Use when organizing office paperwork, business correspondence, administrative tasks, and deadlines (e.g. 'organize office tasks', 'draft business letter', 'manage administrative deadlines', /buero). Structures office workflows, formal correspondence, and deadlines vendor-neutrally. Do NOT use for casual personal emails (use privat-mail-writer) or marketing campaigns."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

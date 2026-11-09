@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Positive Psychologie nach Seligman: PERMA-Modell, Charakterstärken (VIA), Dankbarkeitsübungen, Flow-Theorie und Resilienzfaktoren.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Wohlbefinden, persönliche Stärken und psychologische Resilienz gefördert werden sollen (z. B. 'Charakterstärken finden', 'Dankbarkeitsübung', 'PERMA Modell anwenden', /positive-psychology). Vermittelt Seligmans PERMA-Modell, VIA-Stärken, Dankbarkeitsinterventionen und Flow-Konzepte zur Ressourcenaktivierung. NICHT verwenden zur Behandlung akuter Depressionen oder Krisen (dafür behavioral-activation oder stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 
 # Positive Psychologie

@@ -4,14 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Befundprotokoll und Beweiskette für Rettungs- und Vorfallfälle auf Laptops und PCs: wie
-  Beobachtungen, Deutungen und durchgeführte Handlungen getrennt, mit gemessener UTC-Zeit
-  und Prüfsummen festgehalten werden, wie Geheimnisse geschwärzt werden und wie die
-  Eigentümerin oder der Eigentümer eine verständliche Zusammenfassung erhält. Begleitet
-  endpoint-triage, malware-cleanup-guide und os-hardening-baseline.
-
+updated: 2026-11-09
+description: "Verwenden, wenn bei Sicherheitsvorfällen oder Rechner-Rettungen ein gerichtsfestes Befundprotokoll mit Beweiskette geführt werden soll (z. B. 'Vorfall protokollieren', 'Beweiskette sichern', 'Incident-Notizen anlegen', /incident-notes). Dokumentiert Beobachtungen, UTC-Zeitstempel, Prüfsummen und Handlungen sauber getrennt von Deutungen und schwärzt Geheimnisse. NICHT verwenden für alltägliche Code-Notizen (dafür assist/notizblock)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -37,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="incident-notes banner">
 

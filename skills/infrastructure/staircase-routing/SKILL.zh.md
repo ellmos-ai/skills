@@ -4,11 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  独立的导航与路由策略，通过在目录层级结构中向上和向下搜索指示牌文档（CLAUDE.md、AGENTS.md、
-  README.md、RULES.md）以及用户可配置的关键词（通过 staircase-config.json 或 config.json）。
-  亦被称为 Up-and-Down Routing（上下路由）或 Walking Bass Routing（低音步进路由）。
+updated: 2026-11-09
+description: "当在目录层级结构中上下遍历以发现 CLAUDE.md、AGENTS.md 或 RULES.md 等顶层规约指南文件时使用（例如 '在目录层级中检索规约'、'寻找管辖性指引'、'阶梯式路由导引'、/staircase-routing）。系统化遍历父级与子级目录以解析当前生效的规范指针。切勿用于目标项目根目录已被锁定的场景（使用 load-project）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -28,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 

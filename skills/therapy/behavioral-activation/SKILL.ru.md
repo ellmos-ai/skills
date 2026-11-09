@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Поведенческая активация при депрессии: преодоление порочного круга, мониторинг активности, недельное планирование и ценностно-ориентированные действия."
+updated: 2026-11-09
+description: "Используйте для преодоления апатии, упадка сил или депрессивного избегания с помощью структурированной поведенческой активации (например, 'разорвать круг бездействия', 'спланировать дела на неделю', 'восстановить режим дня', /behavioral-activation). Преодолевает избегание с помощью дневников активности, шкалы удовольствия/достижений и пошаговых задач. НЕ используйте для экстренной стабилизации в кризисе (используйте stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

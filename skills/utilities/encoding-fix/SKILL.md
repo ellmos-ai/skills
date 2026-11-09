@@ -4,10 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Mojibake-Reparatur für doppelt/dreifach kodiertes UTF-8. Behebt Windows-cp1252/Latin-1-Fehlinterpretationen. Ohne Abhängigkeiten.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Dateien durch falsche Zeichenkodierung beschädigt sind (z. B. 'Mojibake reparieren', 'Umlaute kaputt', 'UTF-8 doppelt kodiert', /encoding-fix). Behebt cp1252-, Latin-1- und doppelt/dreifach kodierte UTF-8-Fehler in Textdateien ohne Abhängigkeiten. NICHT verwenden für reine Formatkonvertierungen ohne Kodierungsschaden."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -31,6 +29,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
+
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 
 # Encoding Fix

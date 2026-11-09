@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "让已验证的安全发现可追踪：先预览并经确认，再创建工单（ticket_writer.py）、GitHub issue 或安全公告草稿（gh），先按发现 id 检查重复，不让密钥进入文本，并把引用写回 finding.ticket。触发词：「跟踪这个发现」「为 SEC-... 建工单」「创建公告」「把发现放进待办积压」。不使用 Linear/Jira。不用于技术报告（sec-report），也不用于对外披露（sec-writeup）。"
+updated: 2026-11-09
+description: "当将已确认的安全漏洞录入工单系统、内部 Issue 或 GitHub 安全通告草案（Security Advisory）进行闭环跟踪时使用（例如 '跟踪安全缺陷'、'为 SEC-... 创建缺陷工单'、'创建安全通告草案'、/sec-track）。在严格脱敏敏感凭据的前提下格式化跟踪记录并双向关联漏洞编号。切勿用于撰写对外协调披露文书（使用 sec-writeup）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

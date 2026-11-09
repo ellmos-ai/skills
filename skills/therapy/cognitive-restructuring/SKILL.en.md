@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Cognitive Behavioral Therapy: ABC model, automatic thoughts, identifying cognitive distortions, and keeping thought records."
-
+updated: 2026-11-09
+description: "Use when challenging unhelpful automatic thoughts, catastrophic thinking, or cognitive distortions (e.g. 'thought record', 'challenge negative thoughts', 'cognitive distortions', /cognitive-restructuring). Teaches Beck's cognitive ABC model, identifies cognitive biases, and guides Socratic disputation. Do NOT use for defusion without cognitive debate (use act-techniques) or family systems (use genogram-work)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

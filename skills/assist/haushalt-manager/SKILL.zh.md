@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  规划家务、日常安排和责任分配，不依赖特定应用。
+updated: 2026-11-09
+description: "当规划家庭杂务分工、居室保洁日常流程、家电维护周期或日程表时使用（例如 '制定家务分工表'、'规划清洁日常流程'、'跟踪居家设施维护周期'、/haushalt-manager）。以应用中立的方式科学规划家庭事务与周期性职责。切勿用于办公公文归档（使用 assist/buero）或库存备件核查（使用 assist/hauslagerist-reader）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Основы MBSR, сканирование тела (боди-скан) и дыхательные упражнения. Доказательные техники осознанности по Джону Кабат-Зинну для повседневной жизни.
+updated: 2026-11-09
+description: "Используйте для интеграции медитации осознанности, практик MBSR и телесного самосознания в повседневную жизнь (например, 'упражнения на осознанность', 'инструкция по бодискану', 'медитация дыхания', /mindfulness-basics). Руководствуется основами MBSR Кабат-Зинна: сканирование тела, осознанная ходьба и 3-минутное дыхательное пространство. НЕ используйте для прогрессивной мышечной релаксации (используйте pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

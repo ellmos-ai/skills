@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-07-05
-description: Webコンテンツの読み取りと抽出のためのルーターおよびプロトコル。最初に何が必要か（メインテキスト vs 構造 vs スクリーンショット）を決定し、次にシステム上で利用可能などのツールがそれを処理するかを決定します。適切なものが存在しない場合は、web-scraper モジュールのインストールを推奨します。
+updated: 2026-11-09
+description: "Webページの内容を読み取り、抽出、または分析する必要がある場合に使用する（例：'このWebページを読んで'、'URLからテキストを抽出'、'Webサイトの内容を分析'、/web-reading）。本文、構造、スクリーンショットのいずれが必要かを判断し、最適なツールにルーティングする。純粋なAPIクエリや単純なファイルダウンロードには使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['request
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="web-reading banner">
 

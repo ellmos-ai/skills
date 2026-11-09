@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour psychoeducation: Psychoeducation on depression, anxiety disorders, PTSD, bipolar disorder, schizophrenia, ADHD, and borderline. Knowledge sharing without diagnosis."
+updated: 2026-11-09
+description: "Utiliser pour transmettre des informations objectives et déstigmatisantes sur les troubles psychiques et les symptômes (ex. 'comprendre les symptômes de l'anxiété', 'psychoéducation dépression/TDAH', /psychoeducation). Clarifie les modèles vulnérabilité-stress, la neurobiologie et les prises en charge éprouvées. Ne PAS utiliser pour poser un diagnostic médical individuel ou remplacer un suivi médical."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

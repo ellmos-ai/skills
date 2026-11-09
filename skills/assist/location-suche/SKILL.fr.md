@@ -2,7 +2,7 @@
 name: location-suche
 version: 1.0.0
 category: assist
-description: "[Français] Compétence d'agent pour location-suche: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text."
+description: "Utiliser pour rechercher des lieux, adresses, restaurants ou points d'intérêt (POI) via OpenStreetMap (ex. 'trouver un restaurant à proximité', 'géocoder une adresse', 'chercher des POI en ville', /location-suche). Récupère POI et coordonnées via Nominatim et Overpass API sans clé d'API requise. Ne PAS utiliser pour le calcul d'itinéraires détaillés point à point (utiliser assist/reiseroute)."
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: location_suche_core.py
 provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/location_search.py', 'origin_version': '1.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (save_location, list_locations, _ensure_table, _get_db). Kein Store. Userneutral (keine privaten Pfade). Headless, nur Stdlib.\\n'}
 language: fr
 ---
+
 
 <img src="banner.png" width="100%" alt="location-suche banner">
 

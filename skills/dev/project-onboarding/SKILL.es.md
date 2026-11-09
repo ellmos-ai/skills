@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Procedimiento estándar para la incorporación (onboarding) de nuevos proyectos de software: Análisis de características, revisión de calidad de código, lista de verificación de incorporación y creación de tareas."
+updated: 2026-11-09
+description: "Usar cuando se incorpore un repositorio de software desconocido, se analice su arquitectura o se establezca el flujo inicial de trabajo (ej. 'onboarding en nuevo proyecto', 'analizar arquitectura de la base de código', 'configuración inicial de repo', /project-onboarding). Evalúa funciones, calidad del código y dependencias generando una lista de tareas de integración. NO usar para la simple navegación entre directorios (usar infrastructure/staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 

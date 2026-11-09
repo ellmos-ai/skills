@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-07-27
-description: 用于在用户选择的提供商与应用类之间发现、规划和同步 MCP 配置的提供商中立入口点。用户选择事实来源、目标和范围；没有任何提供商是隐式中心。
-
+updated: 2026-11-09
+description: "当在多个 AI 智能体工具之间发现、规划并同步模型上下文协议（MCP）服务端配置时使用（例如 '同步 MCP 服务端'、'核对 MCP 配置'、'迁移 MCP 服务'、/mcp-config-sync）。探查已安装的 MCP 实例并以中立方式对齐配置，无强制中心节点。切勿用于同时同步全量技能与规则体系（使用 agent-config-sync）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 

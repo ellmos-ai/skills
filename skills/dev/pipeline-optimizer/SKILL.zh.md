@@ -4,9 +4,9 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-06-13
+updated: 2026-11-09
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: 用于改进、改造或重建现有流水线、独立项目文件夹、文档结构或软件栈的结构化 6 步流程。可通过“流水线优化器”（针对整个主题流水线，如软件、研究或游戏开发流水线）或“项目文件夹优化器”（针对流水线内的单个项目文件夹，如单个软件工具或论文项目）进行调用。在诸如“改进流水线 X”、“优化技术栈”、“重建 Y”、“改造”、“流水线重构”、“清理项目文件夹”、“改进文件夹结构”、“统一规范”、“文档整合”、“集成到现有系统”或对已建立结构进行任何实质性干预的任务中触发。提供现有资产分析、目标明确、理想图景、差距计划、经验痛点识别以及使用全新子代理的重新测试。防止并行标准、重复和流水线中断。
+description: "当翻新、重构或统一既有的自动化流水线、项目目录结构或文档工具链时使用（例如 '重构流水线'、'整理项目目录架构'、'优化工具链'、/pipeline-optimizer）。执行严密的 6 步工程化流程：现状摸排、目标梳理、目标蓝图设计、短板填补方案与实证复测。切勿用于单个函数的零星缺陷修复（使用 bugfix-protocol）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 

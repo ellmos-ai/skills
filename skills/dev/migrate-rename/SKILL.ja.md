@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ラッパーファイルを使用した進化的なファイルのリネーム。ハードブレイク（強制断绝）なしでリネームを可能にし、日常的な使用を通じて参照が自然に更新されます。
+updated: 2026-11-09
+description: "既存のインポートや参照パスを壊すことなく、ファイル、モジュール、またはディレクトリの名前変更や移動を行う場合に使用する（例：'互換性を保ちファイル名を変更'、'ラッパーを残してモジュールを移動'、'MOVEDスタブを作成'、/migrate-rename）。後方互換性ラッパーと明確な転送スタブを生成し、安全な段階的移行を実現する。互換性破壊が許容される単純なgit移動には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

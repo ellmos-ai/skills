@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Plans household tasks, routines, and responsibilities without depending on a specific app.
+updated: 2026-11-09
+description: "Use when organizing household tasks, cleaning routines, appliance maintenance intervals, and chore schedules (e.g. 'create chore schedule', 'organize household routines', 'track maintenance intervals', /haushalt-manager). Plans household duties, recurring routines, and responsibilities app-agnostically. Do NOT use for office paperwork (use assist/buero) or stockroom inventory (use assist/hauslagerist-reader)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

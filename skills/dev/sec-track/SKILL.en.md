@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Makes validated security findings traceable: after preview and confirmation creates a ticket (ticket_writer.py), a GitHub issue or a draft security advisory (gh), checks for duplicates by finding id first, keeps secrets out of the text and writes the reference back into finding.ticket. Triggers: 'track this finding', 'ticket for SEC-...', 'create an advisory', 'put findings in the backlog'. No Linear/Jira. Not for technical reports (sec-report) and not for outward disclosure (sec-writeup)."
+updated: 2026-11-09
+description: "Use when tracking validated security findings in structured ticketing systems, internal issues, or draft GitHub Security Advisories (e.g. 'track security finding', 'create issue for SEC-...', 'draft advisory', /sec-track). Formats tracking records without leaking secrets and updates finding state references. Do NOT use for coordinating external vendor disclosures (use sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

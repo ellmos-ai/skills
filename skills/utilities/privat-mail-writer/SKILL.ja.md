@@ -4,8 +4,8 @@ version: 0.2.0
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-06-19
-description: ユーザーがプライベートまたは半公式の電子メールの作成、返信、お断り、フォローアップ、要約、言い換え、または自身のスタイルでの下書き作成を望む場合にこのスキルを使用します。特に日程調整、公式なお断り、親切な短文返信、相手に応じたトーンに最適です。具体的なメール作成依頼があった場合にのみプロファイル分析を開始します。
+updated: 2026-11-09
+description: "個人的または準公式なメールを作成、返信、推敲し、適切なトーンで表現する場合に使用する（例：'〜にメールを書いて'、'丁寧なお断りメールを作成'、'メールを短縮して再送'、/privat-mail-writer）。相手や文脈に応じた適切なトーンと簡潔さでメールを作成する。企業のマーケティングキャンペーンや一斉配信（dev/community-outreach）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 

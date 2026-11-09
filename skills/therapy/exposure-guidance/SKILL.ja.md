@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 不安症に対する段階的暴露療法：不安階層表、SUDs尺度、暴露の計画とガイド。心理教育のみ、実際の実施は不可。
+updated: 2026-11-09
+description: "段階的曝露（エクスポージャー）療法の心理教育を通じて、不安、恐怖症、または回避行動に向き合う場合に使用する（例：'不安階層表を作成'、'曝露課題を計画'、'SUDsスケールを活用'、/exposure-guidance）。慣れのメカニズム、生体・想像エクスポージャーの階層作成、安全確保行動の低減を解説する。専門家の同席のないトラウマ曝露や急性のパニック発作鎮静（stabilization-techniques）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 
