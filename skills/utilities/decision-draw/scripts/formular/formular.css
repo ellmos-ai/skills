@@ -12,9 +12,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .muted{color:var(--muted)}.warn{color:var(--warn)}.ok{color:var(--ok)}
 fieldset.item{border:1px solid var(--line);border-radius:8px;margin:.9rem 0;padding:.7rem .9rem;background:var(--bg)}
 fieldset.item.done{border-left:5px solid var(--ok)}fieldset.item[data-marked="1"]{border-left:5px solid var(--warn)}fieldset.item.done[data-marked="1"]{border-left-color:var(--ok);border-style:solid}
-legend{font-weight:600;padding:0 .4rem}.kid{display:inline-block;min-width:2.6rem;text-align:center;background:var(--btn);color:var(--btnfg);border-radius:6px;padding:0 .4rem;margin-right:.4rem}
+legend{font-weight:600;padding:0 .4rem;display:flex;align-items:center;justify-content:space-between;gap:.6rem;width:100%;box-sizing:border-box}
+.ktitle{flex:1;min-width:0}
+.kid{display:inline-block;min-width:2.2rem;text-align:center;font-size:.85rem;font-weight:normal;opacity:.85;background:var(--chip);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;margin-left:auto}
 .badges{display:flex;flex-wrap:wrap;gap:.35rem;margin:.2rem 0 .5rem}
 .badge{font-size:.85rem;padding:.1rem .55rem;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+.badge.avatar-badge[hidden]{display:none!important}
 .badge.rec{border-color:var(--ok);color:var(--ok)}.badge.rot{border-color:var(--bad);color:var(--bad)}.badge.gelb{border-color:var(--warn);color:var(--warn)}.badge.gruen{border-color:var(--ok);color:var(--ok)}.badge.sens{border-color:var(--warn);color:var(--warn)}
 .opts{display:grid;gap:.4rem}
 label.opt{display:flex;gap:.6rem;align-items:flex-start;padding:.55rem .6rem;border:1px solid var(--line);border-radius:8px;cursor:pointer;min-height:44px}
@@ -32,5 +35,42 @@ dialog{max-width:min(40rem,94vw);border:1px solid var(--line);border-radius:12px
 #answer-text{font:.85rem/1.4 ui-monospace,Consolas,monospace;min-height:8rem}#save-links a.dl{display:inline-block;margin:.3rem .5rem .3rem 0;text-decoration:none}
 .answered .primary,.answered .js-save{display:none}.answered #ergebnis{border:2px solid var(--ok);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
 .nav a{margin-right:.8rem;white-space:nowrap}
+.polaroid-grid{display:flex;flex-wrap:wrap;gap:1rem;margin:.8rem 0;justify-content:flex-start}
+.polaroid-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem .6rem .8rem;box-shadow:0 3px 8px rgba(0,0,0,.08);cursor:pointer;position:relative;transition:transform .15s,box-shadow .15s,border-color .15s;flex:1 1 12rem;max-width:18rem;box-sizing:border-box}
+.polaroid-card:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.14)}
+.polaroid-card:focus-visible{outline:2px solid var(--btn);outline-offset:2px}
+.polaroid-card.selected{border-color:var(--btn);box-shadow:0 0 0 2px var(--btn),0 6px 14px rgba(0,0,0,.14);background:var(--chip)}
+.polaroid-frame{position:relative;background:#000;border-radius:4px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.polaroid-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.polaroid-letter{position:absolute;top:.4rem;left:.4rem;background:var(--btn);color:var(--btnfg);font-size:1.1rem;font-weight:700;line-height:1;width:1.8rem;height:1.8rem;display:flex;align-items:center;justify-content:center;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,.3);z-index:2}
+.polaroid-caption{margin-top:.5rem;text-align:center}
+.polaroid-optlabel{display:block;font-size:.95rem}
+.polaroid-sub{display:block;font-size:.82rem;color:var(--muted);margin-top:.15rem}
+.swipe-deck-wrap{margin:.8rem 0;border:1px solid var(--line);border-radius:10px;padding:.8rem;background:var(--card)}
+.swipe-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;font-size:.9rem;color:var(--muted)}
+.swipe-deck{position:relative;height:260px;width:100%;max-width:24rem;margin:0 auto;perspective:1000px;user-select:none;touch-action:none}
+.swipe-card{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.12);display:none;flex-direction:column;overflow:hidden;cursor:grab;transition:transform .2s ease,opacity .2s ease}
+.swipe-card.active{display:flex;z-index:3}
+.swipe-card.next{display:flex;z-index:2;transform:scale(0.96) translateY(8px);opacity:.8}
+.swipe-card.swiping{transition:none;cursor:grabbing}
+.swipe-card-img-wrap{flex:1;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.swipe-card-img-wrap img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.swipe-card-caption{padding:.5rem .7rem;font-size:.9rem;background:var(--card);border-top:1px solid var(--line);text-align:center}
+.swipe-controls{display:flex;gap:.5rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap}
+.swipe-btn{min-height:40px;padding:.45rem .9rem;font-size:.95rem;font-weight:600}
+.swipe-btn-nein{border-color:var(--bad);color:var(--bad)}
+.swipe-btn-rq{border-color:var(--warn);color:var(--warn)}
+.swipe-btn-ja{border-color:var(--ok);color:var(--ok)}
+.swipe-btn-undo{border-color:var(--line);color:var(--muted);font-weight:normal}
+.swipe-summary{margin-top:1rem;border-top:1px dashed var(--line);padding-top:.8rem}
+.swipe-summary-title{margin:.2rem 0 .6rem;font-size:1rem}
+.swipe-summary-item{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.swipe-summary-item:last-child{border-bottom:none}
+.swipe-summary-btn-group{display:inline-flex;gap:.3rem}
+.swipe-summary-btn{padding:.2rem .5rem;min-height:30px;font-size:.82rem;border-radius:4px;cursor:pointer}
+.swipe-summary-btn.active-ja{background:var(--ok);color:#fff;border-color:var(--ok)}
+.swipe-summary-btn.active-nein{background:var(--bad);color:#fff;border-color:var(--bad)}
+.swipe-summary-btn.active-rq{background:var(--warn);color:#fff;border-color:var(--warn)}
+.swipe-summary-action{margin-top:.8rem;text-align:center}
 @media (max-width:560px){.sticky-bar button{padding:.5rem .6rem}.sticky-bar .txt{display:none}}
 @media print{.sticky-bar,.actions,dialog,#toast{display:none!important}}

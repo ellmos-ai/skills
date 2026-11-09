@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.2.0
+version: 1.4.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-07
+updated: 2026-11-09
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -48,21 +48,27 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 ## Core UX
 
-The heart of this skill is the briefing format. Each decision is presented so that answering costs only a single letter:
+The heart of this skill is the briefing format. Each decision is presented so that answering is fast and free from cognitive clutter:
 
-- **Numbering:** `[E01]`, `[E02]`, … — stable references throughout the session
-- **Short question** + 1–2 sentences of context
-- **Options as letters** A/B/C/D (2–4 options, more only if necessary)
-- **Marked recommendation** with a one-sentence rationale (e.g. `→ Recommendation: A — because …`)
-- Optional: consequence note (what follows from the choice)
+- **Clear human-readable title** per item (e.g. *"Hermes voice support"*, *"Salvage old work sessions"*)
+- **Everyday language in I-form (triad):**
+  1. *Situation:* What is the current situation / problem?
+  2. *I do ...:* What do I specifically plan / recommend to do?
+  3. *Fallback:* What happens if it fails or what does the user decide next?
+- **No technical codes in the question text:** No ticket numbers (`T-...`), D-identifiers, Git hashes, or file paths in the visible text for the human.
+- **Options as letters** A/B/C/D (2–4 options, clearly phrased in everyday language)
+- **Marked recommendation** in I-form (e.g. `→ I recommend option A because this allows me to ...`)
+- **Technical reference table in the appendix only:** Stable identifiers (`[E01]`, `[E02]`), ticket IDs, and target registers are listed in a compact table at the end.
 
 **User answer formats:**
 
 ```
-Single:    "E01: A"  or  "1A"
-Batch:     "1A 2C 3B"  or  "E01: A, E02: C, E03: B"
-Deepen:    "E02: more info"  or  "2?"
-Defer:     "E03: later"
+By letter:       "E01: A"  or  "1A"
+Batch:           "1A 2C 3B"
+By plain text:   "For Hermes voice support, option A"
+Deepen:          "E02: more info"  or  "2?"
+Defer:           "E03: later"
+Overall sign-off: "Looks good, implement all recommendations"
 ```
 
 ---
@@ -100,13 +106,21 @@ Sources: what the user names, a document at hand, or the conversation context. N
 Per decision:
 
 ```
-[E01] <Short question>
-  Context: <1-2 sentences: Why is this up? What depends on it?>
-  A) <Option>
-  B) <Option>
-  C) <Option>
-  → Recommendation: <letter> — <one-sentence rationale>
-  (optional) Consequence: <what follows from the choice / next action>
+[E01] <Clear human-readable title>
+  Situation: <1 sentence: What is the situation / problem?>
+  Action: <1-2 sentences in I-form: What do I propose to do?>
+  Fallback: <1 sentence: What happens if it fails or as next step?>
+  A) <Option in everyday language>
+  B) <Option in everyday language>
+  → My recommendation: A — <rationale in I-form>
+```
+
+At the end of the briefing:
+```
+### Technical reference table (for booking & audit only)
+| Number | Human-readable title | Recommendation | Ticket ID / D-Number | Source / Path |
+|---|---|---|---|---|
+| E01 | Hermes voice support | A | T-20260913-989062143 | hermes-agent |
 ```
 
 Rules for good options:
@@ -152,6 +166,11 @@ DECISION: <question>
 
 Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing data (a small JSON, format `form.schema.json`), the generator `scripts/formular/build_form.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form** (not rebuilt each time; per item a short context, cost/effort, risk/reversibility, deadline, consequence of "no", anything longer only collapsible; plus the choice "question / more info needed"); the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only.
 
+**Image modes (`bilder_modus`):**
+- `serie` (default, 1–12 images): Classic image gallery / series.
+- `polaroid` (2–12 images, exactly 1 image per option A, B, C...): Clickable variant cards with option letters in Polaroid style for visual design and layout decisions (selected via click or keyboard key `A`/`B`/`C`).
+- `swipe` (1–60 images): Stack decisions one by one (Yes / No / Question via button, arrow keys, or swipe gesture) with subsequent review and confirmation for bulk reviews (e.g. receipts, invoices, drafts).
+
 Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
 1. Nothing preselected (or explicitly marked as preselected).
@@ -159,9 +178,9 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 3. List sensitive items (red, money, deletion, external effect, licence) before saving.
 4. UI tests headless only, never through a visible browser or the Playwright MCP tools (a visible test browser once filled in the form by itself).
 5. Deliver only after an independent check by another instance.
-6. Book only through Phase 4; comparing with a sealed avatar forecast is optional.
+6. Book only through Phase 4; comparing with a sealed avatar forecast is optional. The avatar prediction becomes visible in the form only after a choice has been made.
 7. Saving never depends on a dialog (rule 9 of the guide): download links, text to copy and "save draft" are in place before the folder dialog opens and stay after every abort or error; "saved" only after the files are completely written.
-8. Short and decision-relevant (post template with limits and mandatory fields, anything longer only collapsible); the choice "question / more info needed" is never consent and blocks the overall sign-off.
+8. Short and decision-relevant (post template with limits and mandatory fields, anything longer only collapsible); the choice "question / more info needed" is never consent and blocks the overall sign-off. In the card header, the clear human-readable title stands first in `<legend>`, with the technical code discreetly placed at the end.
 
 The Tk viewer of decision-draw is not accepted natively; open it only after the user's explicit consent.
 
@@ -249,10 +268,23 @@ the artifact ends with exactly one line:
 
 ## Changelog
 
-### 1.2.0 (2026-11-07)
+### 1.4.0 (2026-11-09)
+- Documented image modes for form briefings (`bilder_modus` in `form.schema.json` / `build_form.py` of `decision-draw`): `serie` (default, 1–12 images), `polaroid` (2–12 images, exactly 1 image per option with letters A, B, C... for visual variant choices), and `swipe` (1–60 images for sequential yes/no/question bulk review with summary confirmation).
+- Avatar prediction: badge is only visible after a choice is made (preventing cognitive anchor).
+- Technical ID badge: clear human-readable title placed first in `<legend>`, technical code discreetly placed at the end.
+- Full parity between German `SKILL.md` and English `SKILL.en.md` restored.
+
+### 1.3.0 (2026-11-07)
 - Form from data instead of a document generator (`build_form.py` in `decision-draw`): short post template with cost/effort, risk/reversibility, consequence of "no", and the choice "question / more info needed".
-- Added rule 9 "saving never depends on a dialog" (download links, text to copy, draft backup, honest success message); the reference implementation and its tests live in `decision-draw`.
-- Added the section "Briefing as a form (build guide)": a clickable HTML form instead of letters in the chat, pointing to the reference implementation and the guide in `decision-draw` (`references/formular.md`, `scripts/formular/`), and the mandatory rules from the incident of 2026-11-07. Booking stays Phase 4 only. The German `SKILL.md` is at 1.3.0 and also carries the style rules of its 1.2.0, which this English file does not have yet.
+- Added section "Briefing as a form (build guide)" and mandatory rules from the incident of 2026-11-07. Booking remains strictly Phase 4.
+- Added rule 9 "saving never depends on a dialog" (download links, text to copy, draft backup, honest success message).
+
+### 1.2.0 (2026-09-18)
+- Style rules for user-friendly decision texts:
+  - No cryptic ticket numbers, D-identifiers, or paths in the visible question text.
+  - Triad in I-form (situation, "I do...", fallback) for context and recommendation.
+  - Clear human-readable titles per decision item; answer formats expanded to include plain text and overall sign-off.
+  - Technical mapping (codes, ticket IDs, register paths) moved to the appendix table at the end of the briefing.
 
 ### 1.1.0 (2026-09-09)
 - P-018 adds session provenance for important newly generated briefings, reports, handoffs, and

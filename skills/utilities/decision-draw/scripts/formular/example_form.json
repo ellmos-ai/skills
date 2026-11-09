@@ -24,6 +24,7 @@
           "folge_bei_nein": "Der alte Tarif verlängert sich zum höheren Preis.",
           "avatar": {"wahl": "A", "konfidenz": "grün"},
           "sensitiv": false,
+          "bilder_modus": "serie",
           "bilder": [
             {"data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Startseite vorher", "alt": "Platzhalterbild der alten Startseite", "seite": "/", "variante": "alt"},
             {"data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Startseite nachher", "alt": "Platzhalterbild der neuen Startseite", "seite": "/", "variante": "neu"}
@@ -44,7 +45,13 @@
           "risiko_rueckgaengig": "Bei A und C gering, bei B ist ein bezahlter Entwurf nicht rückgängig zu machen.",
           "frist": "keine",
           "folge_bei_nein": "keine: Ohne Entscheidung bleibt das alte Logo.",
-          "sensitiv": false
+          "sensitiv": false,
+          "bilder_modus": "polaroid",
+          "bilder": [
+            {"id": "logo-a", "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Altes Logo", "alt": "Das bisherige Vereinslogo", "variante": "A"},
+            {"id": "logo-b", "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Neuer Entwurf", "alt": "Vorschlag für ein neues Logo", "variante": "B"},
+            {"id": "logo-c", "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Status quo beibehalten", "alt": "Vorerst keine Logo-Änderung", "variante": "C"}
+          ]
         }
       ]
     },
@@ -68,7 +75,12 @@
           "folge_bei_nein": "Läuft die Domain ab, ist die Website nicht mehr erreichbar.",
           "sensitiv": true,
           "sensitiv_grund": "Geld",
-          "details_markdown": "**Rechnung.** Die Domain gehört dem Verein; die Rechnung geht an die Kasse.\n\n- Jahrespreis: 20 Euro\n- Dreijahrespreis: 45 Euro"
+          "details_markdown": "**Rechnung.** Die Domain gehört dem Verein; die Rechnung geht an die Kasse.\n\n- Jahrespreis: 20 Euro\n- Dreijahrespreis: 45 Euro",
+          "bilder_modus": "swipe",
+          "bilder": [
+            {"id": "beleg-1", "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Rechnung Tarif 1 Jahr", "alt": "Rechnungsbeleg einjährig", "seite": "1"},
+            {"id": "beleg-2", "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "beschriftung": "Rechnung Tarif 3 Jahre", "alt": "Rechnungsbeleg dreijährig", "seite": "2"}
+          ]
         }
       ]
     }

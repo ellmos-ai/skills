@@ -1,10 +1,12 @@
-"""VERALTET (bekannte Lücke, Prüfung von #98, Befund F4): erwartet zwei automatische Downloads nach dem Speichern, der heutige
-Sicherungsbereich löst keine aus. Nicht repariert, weil das ohne das gebundene Dokument nicht belegbar ist; siehe README.
-Erzeugt die Testdaten testdata/{teil,voll}_{antwort.json,BEANTWORTET.html} reproduzierbar im HEADLESS-Edge (Python-Playwright, eigenes Temp-Profil,
-kein sichtbares Fenster, Download-Fallback). Aufruf: python make_fixtures.py <FORMULAR.html> <zielordner>
-Es sind TESTDATEN: keine Nutzerentscheidung (siehe testdata/UNGUELTIG-TESTDATEN.txt)."""
+"""Erzeugt die Testdaten testdata/{teil,voll}_{antwort.json,BEANTWORTET.html} reproduzierbar im HEADLESS-Edge
+(Python-Playwright, eigenes Temp-Profil, kein sichtbares Fenster, Regel-9-Sicherungsbereich).
+
+Aufruf: python make_fixtures.py <FORMULAR.html> <zielordner>
+Es sind TESTDATEN: keine Nutzerentscheidung (siehe testdata/UNGUELTIG-TESTDATEN.txt).
+Funktioniert mit dem Regel-9-Sicherungsbereich: Nach dem Bestätigen im Speicherdialog wird auf die Download-Links
+in #save-links a gewartet und deren Inhalte (Antwortdatei und beantwortete HTML-Kopie) werden ausgelesen.
+"""
 import sys
-import tempfile
 from pathlib import Path
 
 import headless_util as hu
@@ -18,6 +20,7 @@ def run(page, steps):
             page.fill(a[0], a[1])
     page.click("#top-panel .js-save")
     page.click("#dlg-buttons button.primary")
+    page.wait_for_selector("#save-links a")
 
 
 SCENARIOS = {
@@ -34,23 +37,28 @@ def main(html, out):
     out.mkdir(parents=True, exist_ok=True)
     url = Path(html).resolve().as_uri()
     for name, steps in SCENARIOS.items():
-        tmp = Path(tempfile.mkdtemp(prefix="formular_dl_"))
         with hu.headless_context() as ctx:
-            got = []
-            ctx.on("download", lambda d: got.append(d))
             page = ctx.new_page()
             page.add_init_script("window.showDirectoryPicker = undefined;")  # Download-Fallback erzwingen
             page.goto(url)
             hu.ready(page)
             run(page, steps)
-            page.wait_for_timeout(2500)
-            for d in got:
-                d.save_as(str(tmp / d.suggested_filename))
-        files = {p.name: p for p in tmp.iterdir()}
-        assert len(files) == 2, (name, sorted(files))
-        (out / f"{name}_antwort.json").write_bytes(files["ENTSCHEIDUNGEN_2026-11-07.antwort.json"].read_bytes())
-        (out / f"{name}_BEANTWORTET.html").write_bytes(files["ENTSCHEIDUNGEN_2026-11-07_BEANTWORTET.html"].read_bytes())
-        print("geschrieben:", name)
+            blobs = page.evaluate("""async () => {
+                const links = Array.from(document.querySelectorAll('#save-links a'));
+                const res = [];
+                for (const a of links) {
+                    const resp = await fetch(a.href);
+                    const text = await resp.text();
+                    res.push({name: a.download, text: text});
+                }
+                return res;
+            }""")
+            assert len(blobs) >= 2, (name, blobs)
+            ans = next(b for b in blobs if b["name"].endswith(".antwort.json"))
+            copy = next(b for b in blobs if b["name"].endswith("_BEANTWORTET.html"))
+            (out / f"{name}_antwort.json").write_text(ans["text"], encoding="utf-8")
+            (out / f"{name}_BEANTWORTET.html").write_text(copy["text"], encoding="utf-8")
+            print("geschrieben:", name)
 
 
 if __name__ == "__main__":

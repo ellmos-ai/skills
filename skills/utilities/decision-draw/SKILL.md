@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.2.0
+version: 1.3.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-07
+updated: 2026-11-09
 description: >
   Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden,
   prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten.
@@ -67,7 +67,7 @@ der einzige Registerweg bleibt `decision-briefing` Phase 4.
 
 ## Entscheidungsvorlage als Formular (Bauanleitung)
 
-Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
+Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Je nach Entscheidungsart stehen drei Bild-Modi (`bilder_modus`) zur Verfügung: `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Karten mit Buchstaben A, B, C... passend zu den Optionen für Variantenvergleiche, wählbar per Klick oder Tastendruck) und `swipe` (1–60 Bilder nacheinander wie ein Stapel mit Ja/Nein/Rückfrage und Bestätigung der Gesamtzusammenfassung für Massenprüfungen). Die Avatar-Vorhersage wird erst nach getroffener Wahl sichtbar, um nicht als Anker zu wirken. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
 
 Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
@@ -337,6 +337,13 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ---
 
 ## Changelog
+
+### 1.3.0 (2026-11-09)
+- Bild-Modi für das Formular-Template (`build_form.py`, `form.schema.json`, `formular.js`, `formular.css`): `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Karten mit Buchstaben A, B, C... passend zu den Optionen, wählbar per Klick oder Tastendruck) und `swipe` (1–60 Bilder nacheinander wie ein Stapel mit Ja/Nein/Rückfrage und Bestätigung der Gesamtzusammenfassung für Massenprüfungen).
+- Avatar-Vorhersage: Badge wird erst nach getroffener Wahl sichtbar (kein kognitiver Vorab-Anker).
+- Kürzel-Badge im Kartenkopf: Sprechender Klartext-Titel im `<legend>` zuerst, technisches Kürzel dezent rechtsbündig.
+- `make_fixtures.py` für Regel-9-Sicherungsbereich repariert (wartet auf `#save-links a` und liest Blob-Inhalte aus).
+- Vollständige DE/EN-Parität mit `SKILL.en.md` sichergestellt.
 
 ### 1.2.0 (2026-11-07)
 - Template statt Dokumentgenerator: `scripts/formular/build_form.py <daten.json>` mit `formular.html`, `form.schema.json` und `example_form.json`. Postenvorlage mit Längengrenzen (Fehler statt stillem Kürzen) und Pflichtfeldern Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Wahl „Rückfrage / mehr Info nötig“ (Antwortschema um `state: question` und `counts.questions` erweitert); optionale `bilder[]` als eingebettete `data:`-URIs. Der frühere Generator ist `build_from_markdown.py` (Beispielmigration), die Regel-9-Tests laufen als gemeinsamer Mixin an beiden.

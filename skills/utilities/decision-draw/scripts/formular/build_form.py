@@ -32,6 +32,10 @@ LIMITS = {"titel": 80, "kontext_kurz": 400, "kontext": 250, "frage": 200, "label
           "sensitiv_grund": 100, "alt": 200, "seite": 60, "variante": 60, "zielordner": 120, "details_markdown": 4000}
 IMG_MAX = 400 * 1024
 IMG_TOTAL_MAX = 8 * 1024 * 1024
+IMG_SERIE_MAX = 12
+IMG_POLAROID_MIN = 2
+IMG_POLAROID_MAX = 12
+SWIPE_IMG_MAX = 60
 IMG_TYPES = {"image/png", "image/jpeg", "image/webp", "image/gif"}
 EXT_TYPES = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif"}
 CONF = {"grün": "grün", "gruen": "grün", "gelb": "gelb", "rot": "rot"}
@@ -40,8 +44,8 @@ OPT_RX = re.compile(r"[A-Za-z0-9]{1,3}")
 DOC_KEYS = {"schema", "dokument_id", "titel", "kontext_kurz", "zielordner", "buendel"}
 BUNDLE_KEYS = {"id", "titel", "posten"}
 POST_KEYS = {"kuerzel", "titel", "kontext", "frage", "optionen", "empfehlung", "kosten_aufwand", "risiko_rueckgaengig", "frist", "folge_bei_nein",
-             "avatar", "sensitiv", "sensitiv_grund", "details_markdown", "bilder"}
-IMG_KEYS = {"pfad", "data_uri", "beschriftung", "alt", "seite", "variante"}
+             "avatar", "sensitiv", "sensitiv_grund", "details_markdown", "bilder", "bilder_modus"}
+IMG_KEYS = {"id", "pfad", "data_uri", "beschriftung", "alt", "seite", "variante"}
 HINT = " Kürze den Text; Längeres gehört in details_markdown."
 
 
@@ -123,13 +127,19 @@ def _inside(value, base_dir):
     return target
 
 
-def _image(errs, where, img, base_dir, sizes):
+def _image(errs, where, img, base_dir, sizes, n=1):
     """Liefert (mime, bytes) oder None; Fehler landen in errs."""
     if not isinstance(img, dict):
         errs.append(f"{where}: Bild muss ein Objekt sein.")
         return None
     _unknown(errs, where, img, IMG_KEYS)
     _text(errs, where, img, "beschriftung")
+    if "id" in img:
+        iid = _text(errs, where, img, "id", required=False)
+        if iid and not ID_RX.fullmatch(iid):
+            errs.append(f"{where}: id fehlt oder ungültig.")
+    else:
+        img["id"] = f"bild-{n}"
     for opt in ("alt", "seite", "variante"):
         _text(errs, where, img, opt, required=False)
     if ("pfad" in img) == ("data_uri" in img):
@@ -278,23 +288,54 @@ def normalize(data, base_dir):
                 text = _text(errs, w, p, "details_markdown")
                 if text:
                     details[k] = render_details(text, w, errs)
+            modus = p.get("bilder_modus")
+            if modus is not None:
+                if not isinstance(modus, str) or modus not in ("serie", "polaroid", "swipe"):
+                    errs.append(f"{w}: unbekannter bilder_modus '{modus}' (erlaubt: serie, polaroid, swipe).")
+                    modus = None
+                elif not p.get("bilder"):
+                    errs.append(f"{w}: bilder_modus '{modus}' braucht mindestens ein Bild in bilder[].")
+            if p.get("bilder") and modus is None:
+                modus = "serie"
             imgs = []
             if p.get("bilder") is not None:
-                if not isinstance(p["bilder"], list) or len(p["bilder"]) > 12:
-                    errs.append(f"{w}: bilder muss eine Liste mit höchstens 12 Bildern sein.")
+                raw_imgs = p["bilder"]
+                if not isinstance(raw_imgs, list):
+                    errs.append(f"{w}: bilder muss eine Liste sein.")
+                elif not raw_imgs:
+                    pass
                 else:
-                    for n, img in enumerate(p["bilder"], 1):
-                        got = _image(errs, f"{w}, Bild {n}", img, base_dir, sizes)
+                    if modus == "serie" and len(raw_imgs) > IMG_SERIE_MAX:
+                        errs.append(f"{w}: bilder muss eine Liste mit höchstens {IMG_SERIE_MAX} Bildern sein.")
+                    elif modus == "polaroid":
+                        if len(raw_imgs) > IMG_POLAROID_MAX:
+                            errs.append(f"{w}: bilder_modus 'polaroid' erlaubt höchstens {IMG_POLAROID_MAX} Bilder (gefunden: {len(raw_imgs)}).")
+                        if len(raw_imgs) < IMG_POLAROID_MIN:
+                            errs.append(f"{w}: bilder_modus 'polaroid' braucht mindestens {IMG_POLAROID_MIN} Bilder (gefunden: {len(raw_imgs)}).")
+                        if len(raw_imgs) != len(ids):
+                            errs.append(f"{w}: bilder_modus 'polaroid' braucht genau ein Bild je Option ({len(ids)} Optionen, {len(raw_imgs)} Bilder).")
+                    elif modus == "swipe":
+                        if len(raw_imgs) > SWIPE_IMG_MAX:
+                            errs.append(f"{w}: bilder_modus 'swipe' erlaubt höchstens {SWIPE_IMG_MAX} Bilder (gefunden: {len(raw_imgs)}). Teile den Posten in mehrere Bündel auf.")
+                    for n, img in enumerate(raw_imgs, 1):
+                        got = _image(errs, f"{w}, Bild {n}", img, base_dir, sizes, n)
                         if got:
                             imgs.append((img, got))
             images[k] = imgs
             labels = {o["id"]: o["label"] for o in opts if isinstance(o, dict) and o.get("id") in ids}
-            items.append({
+            item_entry = {
                 "id": k, "bundle": bi, "theme": p.get("titel", ""), "question": p.get("frage", ""),
                 "options": [{"k": i, "l": labels[i]} for i in ids if i in labels], "writer_options": False,
                 "rec": rec_opt, "rec_note": rec_note or "", "av_pred": av_pred, "av_conf": av_conf,
                 "marked": sens, "marked_reason": reason if sens else "",
-            })
+                "bilder_modus": modus,
+            }
+            if modus == "swipe":
+                item_entry["swipe_bilder"] = [
+                    {"id": img.get("id") or f"bild-{n}", "beschriftung": img.get("beschriftung", "")}
+                    for n, (img, _) in enumerate(imgs, 1)
+                ]
+            items.append(item_entry)
     if sum(sizes) > IMG_TOTAL_MAX:
         errs.append(f"Bilder Gesamt: {sum(sizes)} Byte (Limit {IMG_TOTAL_MAX} Byte, etwa {IMG_TOTAL_MAX // (1024 * 1024)} MB). Weniger oder kleinere Bilder verwenden.")
     if errs:
@@ -312,7 +353,7 @@ def _card(p, it, imgs, detail_html):
         badges.append('<span class="badge">keine Empfehlung</span>')
     if it["av_conf"]:
         pred = f'Avatar: {e(it["av_pred"])}' if it["av_pred"] else "Avatar: keine Vorhersage"
-        badges.append(f'<span class="badge {"gruen" if it["av_conf"] == "grün" else e(it["av_conf"])}">{pred} · {e(it["av_conf"])}</span>')
+        badges.append(f'<span class="badge avatar-badge {"gruen" if it["av_conf"] == "grün" else e(it["av_conf"])}" data-avatar-badge="1" hidden>{pred} · {e(it["av_conf"])}</span>')
     if it["marked"]:
         badges.append(f'<span class="badge sens">markiert: {e(it["marked_reason"])}</span>')
     opts = []
@@ -326,7 +367,64 @@ def _card(p, it, imgs, detail_html):
              ("Folge bei „Nein“", p["folge_bei_nein"])]
     fakten = '<dl class="fakten">' + "".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in facts) + "</dl>"
     figs = ""
-    if imgs:
+    if it.get("bilder_modus") == "polaroid" and imgs:
+        parts = []
+        by_var = {img.get("variante"): (img, got) for img, got in imgs if img.get("variante")}
+        for idx, o in enumerate(it["options"]):
+            oid = o["k"]
+            olabel = o["l"]
+            pair = by_var.get(oid) if oid in by_var else imgs[idx]
+            img, (mime, raw) = pair
+            cap = e(img["beschriftung"])
+            extra = " · ".join(x for x in (img.get("seite"), img.get("variante")) if x)
+            extra_str = f" ({e(extra)})" if extra else ""
+            alt = e(img.get("alt") or img["beschriftung"])
+            uri = f"data:{mime};base64," + base64.b64encode(raw).decode("ascii")
+            parts.append(
+                f'<div class="polaroid-card" data-opt="{e(oid)}" tabindex="0" role="button" aria-pressed="false" aria-label="Variante {e(oid)}: {cap}">'
+                f'<div class="polaroid-frame">'
+                f'<span class="polaroid-letter">{e(oid)}</span>'
+                f'<img src="{uri}" alt="{alt}" loading="lazy">'
+                f'</div>'
+                f'<div class="polaroid-caption"><span class="polaroid-optlabel"><b>{e(oid)}</b>: {e(olabel)}</span><span class="polaroid-sub">{cap}{extra_str}</span></div>'
+                f'</div>'
+            )
+        figs = f'<div class="polaroid-grid" role="group" aria-label="Varianten">{ "".join(parts) }</div>'
+    elif it.get("bilder_modus") == "swipe" and imgs:
+        cards_html = []
+        for n, (img, (mime, raw)) in enumerate(imgs, 1):
+            bid = e(img.get("id") or f"bild-{n}")
+            cap = e(img["beschriftung"])
+            extra = " · ".join(x for x in (img.get("seite"), img.get("variante")) if x)
+            extra_str = f" ({e(extra)})" if extra else ""
+            alt = e(img.get("alt") or img["beschriftung"])
+            uri = f"data:{mime};base64," + base64.b64encode(raw).decode("ascii")
+            cards_html.append(
+                f'<div class="swipe-card{" active" if n == 1 else ""}" data-index="{n-1}" data-bid="{bid}">'
+                f'<div class="swipe-card-img-wrap"><img src="{uri}" alt="{alt}" loading="lazy"></div>'
+                f'<div class="swipe-card-caption"><b>Bild {n} von {len(imgs)}:</b> {cap}{extra_str}</div>'
+                f'</div>'
+            )
+        figs = (
+            f'<div class="swipe-deck-wrap" data-swipe-total="{len(imgs)}">'
+            f'<div class="swipe-header"><span class="swipe-progress">Bild 1 von {len(imgs)} · 0 entschieden</span></div>'
+            f'<div class="swipe-deck" aria-label="Bilder-Stapel">{"".join(cards_html)}</div>'
+            f'<div class="swipe-controls">'
+            f'<button type="button" class="swipe-btn swipe-btn-nein" title="Verwerfen / Ablehnen">← Nein</button>'
+            f'<button type="button" class="swipe-btn swipe-btn-rq" title="Rückfrage / Später">? Rückfrage</button>'
+            f'<button type="button" class="swipe-btn swipe-btn-ja" title="Behalten / Zustimmen">→ Ja</button>'
+            f'<button type="button" class="swipe-btn swipe-btn-undo" title="Letztes Bild rückgängig machen">↶ Rückgängig</button>'
+            f'</div>'
+            f'<div class="swipe-summary" hidden>'
+            f'<h4 class="swipe-summary-title">Übersicht der Einzelentscheidungen</h4>'
+            f'<div class="swipe-summary-list"></div>'
+            f'<div class="swipe-summary-action">'
+            f'<button type="button" class="primary swipe-confirm-btn">Einzelentscheidungen bestätigen</button>'
+            f'</div>'
+            f'</div>'
+            f'</div>'
+        )
+    elif imgs:
         parts = []
         for img, (mime, raw) in imgs:
             cap = e(img["beschriftung"])
@@ -337,7 +435,7 @@ def _card(p, it, imgs, detail_html):
         figs = '<div class="bilder">' + "".join(parts) + "</div>"
     more = f'<details class="mehr"><summary>Mehr Details</summary>{detail_html}</details>' if detail_html else ""
     return (f'<fieldset class="item" id="item-{pid}" data-id="{pid}" data-bundle="{it["bundle"]}" data-marked="{1 if it["marked"] else 0}">'
-            f'<legend><span class="kid">{pid}</span> {e(p["titel"])}</legend><p class="kontext">{e(p["kontext"])}</p>{figs}'
+            f'<legend><span class="ktitle">{e(p["titel"])}</span> <span class="kid">{pid}</span></legend><p class="kontext">{e(p["kontext"])}</p>{figs}'
             f'<p class="frage">{e(p["frage"])}</p><div class="badges">{"".join(badges)}</div>{fakten}<div class="opts">{"".join(opts)}</div>{more}'
             f'<textarea aria-label="Anmerkung zu {pid}" placeholder="Anmerkung (frei, optional; bei Rückfrage deine Frage)"></textarea>'
             f'<div class="row"><button type="button" class="reset">Antwort zurücknehmen</button><span class="via"></span></div></fieldset>')
@@ -425,6 +523,36 @@ def validate_answers(obj, items, expected_sha=None, document_id=None):
             err.append(f"{k}: recommended/avatar weichen vom Formular ab")
         if not isinstance(a["note"], str):
             err.append(f"{k}: note")
+        if it.get("bilder_modus") == "swipe":
+            if "swipe_decisions" in a:
+                sd = a.get("swipe_decisions")
+                if not isinstance(sd, list):
+                    err.append(f"{k}: swipe_decisions muss eine Liste sein")
+                else:
+                    expected_bilder = it.get("swipe_bilder", [])
+                    if len(sd) != len(expected_bilder):
+                        err.append(f"{k}: swipe_decisions Anzahl ({len(sd)}) weicht von Bildern ({len(expected_bilder)}) ab")
+                    else:
+                        for idx, (d, exp) in enumerate(zip(sd, expected_bilder)):
+                            if not isinstance(d, dict):
+                                err.append(f"{k}: swipe_decisions[{idx}] muss ein Objekt sein")
+                                continue
+                            if d.get("bild_id") != exp["id"] or d.get("beschriftung") != exp["beschriftung"]:
+                                err.append(f"{k}: swipe_decisions[{idx}] bild_id oder beschriftung weicht ab")
+                            entscheidung = d.get("entscheidung")
+                            if entscheidung not in ("ja", "nein", "rueckfrage", None):
+                                err.append(f"{k}: swipe_decisions[{idx}] ungültige entscheidung '{entscheidung}'")
+                if not isinstance(a.get("swipe_confirmed"), bool):
+                    err.append(f"{k}: swipe_confirmed muss boolean sein")
+                if a["state"] == "answered":
+                    if a.get("swipe_confirmed") is not True:
+                        err.append(f"{k}: beantwortet, aber swipe_confirmed ist nicht true")
+                    if isinstance(sd, list) and any(isinstance(d, dict) and d.get("entscheidung") == "rueckfrage" for d in sd):
+                        err.append(f"{k}: beantwortet, aber swipe_decisions enthält 'rueckfrage'")
+                    if isinstance(sd, list) and any(isinstance(d, dict) and d.get("entscheidung") is None for d in sd):
+                        err.append(f"{k}: beantwortet, aber unentschiedene Bilder in swipe_decisions")
+            elif a["state"] == "answered":
+                err.append(f"{k}: swipe-Posten beantwortet, aber swipe_decisions fehlt")
     states = [a.get("state") for a in obj["answers"].values()]
     n_ans, n_q = states.count("answered"), states.count("question")
     if obj["counts"] != {"total": len(items), "answered": n_ans, "questions": n_q, "open": len(items) - n_ans - n_q}:

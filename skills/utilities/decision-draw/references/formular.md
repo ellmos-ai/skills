@@ -52,10 +52,11 @@ Rückmeldung nach dem ersten Einsatz: Es war zu viel Text, und oft fehlte das En
 | `risiko_rueckgaengig` | ja | 160 Zeichen | Risiko und ob es rückgängig zu machen ist; darf „keine“ lauten |
 | `frist` | ja | 160 Zeichen | bis wann; darf „keine“ lauten, fehlen darf es nicht |
 | `folge_bei_nein` | ja | 160 Zeichen | was passiert, wenn nichts oder „Nein“ gewählt wird; darf „keine“ lauten |
-| `avatar` mit `wahl`, `konfidenz` | nein | – | Vorhersage und Konfidenz (grün, gelb, rot) für die Messung |
+| `avatar` mit `wahl`, `konfidenz` | nein | – | Vorhersage und Konfidenz (grün, gelb, rot) für die Messung; Badge erscheint im Formular erst nach getroffener Wahl |
 | `sensitiv`, `sensitiv_grund` | nein | Grund 100 Zeichen | rot, Geld, Löschung, Außenwirkung, Lizenz, Rechte Dritter: wird vor dem Speichern noch einmal aufgelistet |
 | `details_markdown` | nein | 4000 Zeichen | Längeres **nur aufklappbar**; wird vor der Umwandlung escaped; erlaubt sind nur Links mit `http:`, `https:`, `mailto:`, `#`, `/` und `./`, bei `/` genau ein führender Schrägstrich (`//host` und `/\host`, auch als `%2F`/`%5C`, wären in der lokal geöffneten Seite ein Netzwerkpfad und werden abgelehnt); geprüft wird der **ausgegebene** Wert nach einmaligem Auflösen der Entities und dem Entfernen von Leerraum und Steuerzeichen; Steuerzeichen im Text und Bilder aus dem Netz (`![](…)`) werden abgelehnt, Bilder gehören in `bilder[]` |
-| `bilder[]` | nein | höchstens 12 | siehe unten |
+| `bilder_modus` | nein | `serie`, `polaroid`, `swipe` | Format und Interaktionsmodus der Bilder: `serie` (Standard), `polaroid` oder `swipe` |
+| `bilder[]` | nein | `serie`: max. 12, `polaroid`: 2–12 (exakt Optionenanzahl), `swipe`: max. 60 | siehe unten |
 
 Das Dokument selbst hat `titel` (80), `kontext_kurz` (400 Zeichen, höchstens drei Sätze, erinnert an das Projekt), `dokument_id` (steckt in den Dateinamen der Antwort) und optional `zielordner`. Oben im Formular stehen nur dieser Kontext und „So antwortest du“ in drei Zeilen; lange Fließtexte und „Hinweise vor dem Lesen“ entfallen.
 
@@ -63,7 +64,24 @@ Das Dokument selbst hat `titel` (80), `kontext_kurz` (400 Zeichen, höchstens dr
 
 **Wahl „Rückfrage / mehr Info nötig“:** Jeder Posten hat sie als eigene Wahl neben den Optionen (`choice: "rueckfrage"`, `state: "question"`). Die Anmerkung gilt dann als Frage. Eine Rückfrage ist nie eine Zustimmung: Sie blockiert die Gesamtabnahme und wird vor dem Speichern gelistet (ohne Text in der Anmerkung mit Hinweis). Der Konsument beantwortet sie, statt zu buchen.
 
-**Bilder (optional):** Je Bild `pfad` (Quelle beim Bauen, **nur relativ zum Datenordner**: absolute, UNC- und Laufwerkspfade, `..` und Links, die aus dem Ordner herausführen, werden vor dem ersten Dateizugriff abgelehnt) oder `data_uri`, `beschriftung` (Pflicht, kurz), optional `alt`, `seite`, `variante` (z. B. für Screenshots einer Oberfläche). Der Generator bettet jedes Bild als `data:`-URI ein: höchstens 400 KB je Bild und 8 MB je Formular, nur PNG, JPEG, WebP, GIF (kein SVG, Dateiinhalt wird geprüft); bei Überschreitung bricht er mit Klartext ab, ohne zu kürzen. Verkleinere vorher (Breite höchstens 1200 px). Die Bilderserie steht über den Entscheidungsfeldern; zur ganzen Serie gehört **eine** Entscheidung, Kommentar und Rückfrage gelten je Posten.
+**Bilder (optional):** Je Bild `pfad` (Quelle beim Bauen, **nur relativ zum Datenordner**: absolute, UNC- und Laufwerkspfade, `..` und Links, die aus dem Ordner herausführen, werden vor dem ersten Dateizugriff abgelehnt) oder `data_uri`, `beschriftung` (Pflicht, kurz), optional `id` (Standard `bild-N`), `alt`, `seite`, `variante` (z. B. für Screenshots einer Oberfläche). Der Generator bettet jedes Bild als `data:`-URI ein: höchstens 400 KB je Bild und 8 MB je Formular, nur PNG, JPEG, WebP, GIF (kein SVG, Dateiinhalt wird geprüft); bei Überschreitung bricht er mit Klartext ab, ohne zu kürzen. Verkleinere vorher (Breite höchstens 1200 px).
+
+### Bild-Modi und Entscheidungsarten
+
+Das Feld `bilder_modus` steuert, wie Bilder dargestellt werden und wie die Nutzerin oder der Nutzer damit interagiert:
+
+| Entscheidungsart | Geeigneter Bild-Modus | Beschreibung & Interaktion |
+|---|---|---|
+| **Variantenvergleich** (Design A vs. B vs. C, Layouts, Mockups) | `polaroid` (`bilder_modus: "polaroid"`) | Jede Option erhält eine Polaroid-Karte mit großem Kennbuchstaben (A, B, C), Bild, Beschriftung und Label. Auswahl per Klick oder Tastendruck (A/B/C). Bildanzahl (2–12) muss exakt der Zahl der Optionen entsprechen. |
+| **Massenprüfung / Durchsicht** (Belege, Dokumente, Icons einzeln prüfen) | `swipe` (`bilder_modus: "swipe"`) | Jedes Bild (1–60) wird im Stapel einzeln entschieden (Rechts/Pfeil Rechts = Ja, Links/Pfeil Links = Nein, Oben/Pfeil Oben = Rückfrage, Backspace = Undo). Erst nach Klick auf „Einzelentscheidungen bestätigen“ zählt der Posten als entschieden. |
+| **Kontext-Bilderserie** (Vorher/Nachher, Arbeitsablauf, Status quo) | `serie` (`bilder_modus: "serie"`, Standard) | 1 bis 12 Bilder nebeneinander als Referenz zur Frage. Die Entscheidung bezieht sich auf die gesamte Serie. |
+
+**Weitere Entscheidungsformate (Erweiterungsausblick):**
+- **Checkliste:** Mehrere voneinander unabhängige Kriterien oder Teilentscheidungen mit Checkboxen.
+- **Diff:** Visueller Text- und Code-Vergleich mit hervorgehobenen Änderungen.
+- **Vorher / Nachher:** Gezielter Gegenüberstellungs- oder Schieberegler-Vergleich zweier Bildzustände.
+- **Markieren im Bild:** Klickbare Hotspots oder Markierungen auf einem Bild oder Screenshot.
+- **Matrix:** Tabellarischer Kriterien- und Bewertungsvergleich mehrerer Optionen.
 
 ## 5. Antwortschema `ticket-master.decision-answers.v1`
 
@@ -75,7 +93,7 @@ Eine JSON-Datei. Pflichtfelder (der Validator `validate_answers()` in `build_for
 | `document_id` | Kennung des Dokuments |
 | `document_sha256` | SHA-256 des unveränderten Formulars, in dem der eingebettete Hash durch 64 Nullen ersetzt ist (damit die Antwort an genau diese Fassung gebunden ist) |
 | `saved_at` | UTC, ISO 8601 |
-| `answers` | je Kürzel: `choice` (Optionskennung, `"rueckfrage"` oder `null`), `choice_label`, `state` (`answered`, `question` oder `open`), `note`, `via` (`single` oder `bulk`), `recommended`, `avatar_prediction`, `avatar_confidence`, `marked` |
+| `answers` | je Kürzel: `choice` (Optionskennung, `"rueckfrage"` oder `null`), `choice_label`, `state` (`answered`, `question` oder `open`), `note`, `via` (`single` oder `bulk`), `recommended`, `avatar_prediction`, `avatar_confidence`, `marked`; bei `bilder_modus == "swipe"` zusätzlich `swipe_decisions` (Liste der Einzelentscheidungen) und `swipe_confirmed` (`true`/`false`) |
 | `bulk_actions` | welche Massenaktionen ausgelöst wurden |
 | `gesamtabnahme` | `explicit` (nur `true` nach ausdrücklichem „Ja“ im Dialog, alle Posten wie empfohlen **und** keine Rückfrage), `at` |
 | `counts` | `total`, `answered`, `questions`, `open` (müssen zu `answers` passen; ältere Dateien ohne `questions` bleiben gültig) |
@@ -119,7 +137,7 @@ python -m unittest selbsttest_form -v
 - **`HeadlessTemplate`** (headless): Rückfrage als eigener Zustand (zählt nie als beantwortet, blockiert die Gesamtabnahme, wird im Dialog gelistet), Bilderserie über den Entscheidungsfeldern, Fakten sichtbar, Details zugeklappt.
 - Die Browserklassen brauchen Python-Playwright und Edge und laufen sonst nicht. **Nie sichtbar, nie über die Playwright-MCP-Werkzeuge (Regel 5).** Die Dateien heißen nicht `test_*.py`, damit die Suite dieses Repos sie nicht einsammelt.
 - **Beispielmigration:** `FORMULAR_MD=<DOKUMENT.md> [FORMULAR_MESSUNG=<Messdatei.md>] python -m unittest selbsttest_markdown -v` prüft den alten Dokumentgenerator gegen das Dokument vom 2026-11-07 (Hash, Posten, Wiederherstellung, Regel 9 über denselben Mixin).
-- **Fixtures** (`testdata/`) gehören nur zum alten Dokumentgenerator und sind nicht Teil des Skills. `make_fixtures.py` ist seit dem Sicherungsbereich (Regel 9, keine automatischen Downloads) **nicht mehr lauffähig** und wird nicht repariert: ohne das gebundene Dokument ließe sich die Reparatur hier nicht belegen. Die Klasse `Answers` bleibt deshalb übersprungen; denselben Speicherweg prüfen `HeadlessSaveTemplate` und `HeadlessSicherheit` am allgemeinen Formular.
+- **Fixtures** (`testdata/`) gehören nur zum alten Dokumentgenerator und sind nicht Teil des Skills. `make_fixtures.py` erzeugt Test-Fixtures über den Regel-9-Sicherungsbereich (wartet auf `#save-links a` und liest die Blob-Inhalte aus); den allgemeinen Speicherweg prüfen `HeadlessSaveTemplate` und `HeadlessSicherheit` am allgemeinen Formular.
 - **Weg B:** `python scripts/decision_viewer.py validate <draw.json>` ist headless; gezielte Tests in `testing/test_decision_draw_viewer.py`.
 
 ## 8. Weg B: Draw als `draw.json` abbilden
