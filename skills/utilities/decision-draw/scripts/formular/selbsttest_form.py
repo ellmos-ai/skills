@@ -141,7 +141,7 @@ class Daten(unittest.TestCase):
         self.assertEqual(errors_of(d), [], "ein Posten ohne Empfehlung ist erlaubt")
 
     def test_images_are_embedded_and_limited(self):
-        self.assertEqual(PAGE.count('<img src="data:image/png;base64,'), 2)
+        self.assertEqual(PAGE.count('<img src="data:image/png;base64,'), 7)
         self.assertIn("Startseite vorher", PAGE)
         d = load()
         post(d, "V1")["bilder"][0]["beschriftung"] = ""
@@ -153,6 +153,54 @@ class Daten(unittest.TestCase):
             self.assert_error(load(), "Gesamt", "100")
         with mock.patch.object(bf, "IMG_MAX", 50):
             self.assert_error(load(), "V1", "Bild", "50")
+
+    def test_bilder_modus_and_counts_validation(self):
+        # 1. Invalid modus
+        d = load()
+        post(d, "V1")["bilder_modus"] = "karussell"
+        self.assert_error(d, "V1", "bilder_modus", "karussell")
+
+        # 2. Modus specified but bilder missing or empty
+        d = load()
+        post(d, "V1")["bilder_modus"] = "polaroid"
+        post(d, "V1")["bilder"] = []
+        self.assert_error(d, "V1", "bilder_modus 'polaroid' braucht mindestens ein Bild")
+
+        d = load()
+        post(d, "V1")["bilder_modus"] = "swipe"
+        del post(d, "V1")["bilder"]
+        self.assert_error(d, "V1", "bilder_modus 'swipe' braucht mindestens ein Bild")
+
+        # 3. Serie limit > 12
+        d = load()
+        post(d, "V1")["bilder_modus"] = "serie"
+        b0 = copy.deepcopy(post(d, "V1")["bilder"][0])
+        post(d, "V1")["bilder"] = [copy.deepcopy(b0) for _ in range(13)]
+        self.assert_error(d, "V1", "12")
+
+        # 4. Polaroid limits: < 2, > 12, and len(bilder) == len(optionen)
+        d = load()
+        post(d, "V3")["bilder"] = [copy.deepcopy(post(d, "V3")["bilder"][0])]
+        self.assert_error(d, "V3", "polaroid", "2")
+
+        d = load()
+        post(d, "V3")["bilder"] = post(d, "V3")["bilder"][:2]
+        self.assert_error(d, "V3", "genau ein Bild je Option", "3 Optionen", "2 Bilder")
+
+        # 5. Swipe limit > 60
+        d = load()
+        b_swipe = copy.deepcopy(post(d, "V4")["bilder"][0])
+        post(d, "V4")["bilder"] = [copy.deepcopy(b_swipe) for _ in range(61)]
+        self.assert_error(d, "V4", "swipe", "60", "Teile den Posten in mehrere Bündel auf")
+
+        # 6. Optional image id pattern validation
+        d = load()
+        post(d, "V1")["bilder"][0]["id"] = "Ungültige ID!"
+        self.assert_error(d, "V1", "id", "ungültig")
+
+        d = load()
+        post(d, "V1")["bilder"][0]["id"] = "bild-hero-1"
+        self.assertEqual(errors_of(d), [])
 
     def test_image_from_path_and_oversize_file(self):
         import tempfile
@@ -230,6 +278,64 @@ class Daten(unittest.TestCase):
         self.assertEqual(bf.validate_answers(d, ITEMS), [])
         d["answers"]["V3"]["state"] = "answered"
         self.assertTrue(bf.validate_answers(d, ITEMS))
+
+    def test_validate_answers_swipe_decisions(self):
+        d = {"schema": bf.SCHEMA, "document_id": "BEISPIEL_2026-01-01", "document_sha256": DIGEST, "saved_at": "2026-01-01T10:00:00.000Z",
+             "bulk_actions": {}, "gesamtabnahme": {"explicit": False, "at": None},
+             "counts": {"total": 3, "answered": 3, "questions": 0, "open": 0}, "answers": {}}
+        for it in ITEMS:
+            opt0 = it["options"][0]
+            d["answers"][it["id"]] = {"choice": opt0["k"], "choice_label": opt0["l"], "state": "answered", "note": "", "via": "single",
+                                      "recommended": it["rec"], "avatar_prediction": it["av_pred"], "avatar_confidence": it["av_conf"],
+                                      "marked": it["marked"]}
+        v4_items = next(it for it in ITEMS if it["id"] == "V4")
+        self.assertEqual(v4_items.get("bilder_modus"), "swipe")
+        v4_imgs = v4_items["swipe_bilder"]
+
+        # Missing swipe_decisions when answered
+        errs = bf.validate_answers(d, ITEMS)
+        self.assertTrue(any("V4" in e and "swipe_decisions" in e for e in errs), errs)
+
+        # swipe_decisions present but unconfirmed
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": b["id"], "beschriftung": b["beschriftung"], "entscheidung": "ja"} for b in v4_imgs]
+        d["answers"]["V4"]["swipe_confirmed"] = False
+        errs = bf.validate_answers(d, ITEMS)
+        self.assertTrue(any("V4" in e and "swipe_confirmed" in e for e in errs), errs)
+
+        # swipe_decisions with question decision but state is answered
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": v4_imgs[0]["id"], "beschriftung": v4_imgs[0]["beschriftung"], "entscheidung": "ja"},
+                                                 {"bild_id": v4_imgs[1]["id"], "beschriftung": v4_imgs[1]["beschriftung"], "entscheidung": "rueckfrage"}]
+        d["answers"]["V4"]["swipe_confirmed"] = True
+        errs = bf.validate_answers(d, ITEMS)
+        self.assertTrue(any("V4" in e and "rueckfrage" in e for e in errs), errs)
+
+        # swipe_decisions with invalid decision value
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": v4_imgs[0]["id"], "beschriftung": v4_imgs[0]["beschriftung"], "entscheidung": "ja"},
+                                                 {"bild_id": v4_imgs[1]["id"], "beschriftung": v4_imgs[1]["beschriftung"], "entscheidung": "vielleicht"}]
+        errs = bf.validate_answers(d, ITEMS)
+        self.assertTrue(any("V4" in e and "entscheidung" in e for e in errs), errs)
+
+        # swipe_decisions with wrong image ID
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": "falsche-id", "beschriftung": v4_imgs[0]["beschriftung"], "entscheidung": "ja"},
+                                                 {"bild_id": v4_imgs[1]["id"], "beschriftung": v4_imgs[1]["beschriftung"], "entscheidung": "ja"}]
+        errs = bf.validate_answers(d, ITEMS)
+        self.assertTrue(any("V4" in e and "weicht ab" in e for e in errs), errs)
+
+        # Valid confirmed swipe decision
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": v4_imgs[0]["id"], "beschriftung": v4_imgs[0]["beschriftung"], "entscheidung": "ja"},
+                                                 {"bild_id": v4_imgs[1]["id"], "beschriftung": v4_imgs[1]["beschriftung"], "entscheidung": "nein"}]
+        d["answers"]["V4"]["swipe_confirmed"] = True
+        self.assertEqual(bf.validate_answers(d, ITEMS), [])
+
+        # Valid question state for swipe item
+        d["answers"]["V4"]["choice"] = "rueckfrage"
+        d["answers"]["V4"]["choice_label"] = "Rückfrage / mehr Info nötig"
+        d["answers"]["V4"]["state"] = "question"
+        d["answers"]["V4"]["swipe_decisions"] = [{"bild_id": v4_imgs[0]["id"], "beschriftung": v4_imgs[0]["beschriftung"], "entscheidung": "ja"},
+                                                 {"bild_id": v4_imgs[1]["id"], "beschriftung": v4_imgs[1]["beschriftung"], "entscheidung": "rueckfrage"}]
+        d["counts"]["answered"] = 2
+        d["counts"]["questions"] = 1
+        self.assertEqual(bf.validate_answers(d, ITEMS), [])
 
 
 class Elements(HTMLParser):
@@ -485,6 +591,16 @@ class DatenSicherheit(unittest.TestCase):
     def test_f9_dead_option_id_branch_is_gone(self):
         self.assertNotIn("oid == RQ", (HERE / "build_form.py").read_text(encoding="utf-8"))
 
+    def test_polaroid_and_swipe_cards_escape_html(self):
+        d = load()
+        evil = '<img src=x onerror="alert(1)">"\'&'
+        post(d, "V3")["bilder"][0]["beschriftung"] = evil
+        post(d, "V3")["bilder"][0]["alt"] = evil
+        post(d, "V4")["bilder"][0]["beschriftung"] = evil
+        page, _, _ = bf.build(d, HERE)
+        self.assertNotIn('<img src=x onerror="alert(1)">', page)
+        self.assertIn('&lt;img src=x onerror=&quot;alert(1)&quot;&gt;', page)
+
 
 @unittest.skipUnless(hu.HAVE_PLAYWRIGHT and hu.HAVE_EDGE, "Playwright (Python) oder Edge fehlt: Browsertests uebersprungen")
 class HeadlessSicherheit(unittest.TestCase):
@@ -651,6 +767,173 @@ class HeadlessTemplate(unittest.TestCase):
             self.assertIn(label, r["fakten"])
         self.assertFalse(r["detailsOpen"], "Details nur aufklappbar")
         self.assertTrue(r["detailsText"])
+
+    def test_avatar_badge_hidden_until_choice_made(self):
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.goto(self.file.as_uri())
+            hu.ready(page)
+            # Vor der Wahl: Avatar-Badge an V1 ist verborgen
+            r0 = page.evaluate("() => document.querySelector('#item-V1 .avatar-badge').hidden")
+            self.assertTrue(r0, "Avatar-Badge muss vor der Wahl verborgen sein")
+
+            # Option an V1 wählen -> Avatar-Badge wird sichtbar
+            page.click('#item-V1 input[value="A"]')
+            r1 = page.evaluate("() => document.querySelector('#item-V1 .avatar-badge').hidden")
+            self.assertFalse(r1, "Avatar-Badge wird nach getroffener Wahl sichtbar")
+
+            # Rückfrage an V1 -> Badge wird wieder verborgen
+            page.click('#item-V1 input[value="rueckfrage"]')
+            r2 = page.evaluate("() => document.querySelector('#item-V1 .avatar-badge').hidden")
+            self.assertTrue(r2, "Avatar-Badge bleibt bei Rückfrage verborgen")
+
+    def test_card_legend_order_title_first_kid_last(self):
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.goto(self.file.as_uri())
+            hu.ready(page)
+            r = page.evaluate("""() => {
+                const leg = document.querySelector('#item-V1 legend');
+                const ktitle = leg.querySelector('.ktitle');
+                const kid = leg.querySelector('.kid');
+                const titleFirst = !!(ktitle.compareDocumentPosition(kid) & Node.DOCUMENT_POSITION_FOLLOWING);
+                return { titleText: ktitle.textContent, kidText: kid.textContent, titleFirst };
+            }""")
+            self.assertTrue(r["titleFirst"], "Klartext-Titel steht vor dem technischen Kürzel")
+            self.assertEqual(r["kidText"], "V1")
+            self.assertIn("Hosting", r["titleText"])
+
+    def test_polaroid_click_and_keyboard_selection(self):
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.goto(self.file.as_uri())
+            hu.ready(page)
+            # V3 hat Polaroid-Karten für A, B, C
+            # 1. Klick auf Karte B
+            page.click('#item-V3 .polaroid-card[data-opt="B"]')
+            r_click = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V3,
+                radioBChecked: document.querySelector('#item-V3 input[value="B"]').checked,
+                cardBSelected: document.querySelector('#item-V3 .polaroid-card[data-opt="B"]').classList.contains('selected'),
+                cardBPressed: document.querySelector('#item-V3 .polaroid-card[data-opt="B"]').getAttribute('aria-pressed')
+            })""")
+            self.assertEqual(r_click["choice"], "B")
+            self.assertTrue(r_click["radioBChecked"])
+            self.assertTrue(r_click["cardBSelected"])
+            self.assertEqual(r_click["cardBPressed"], "true")
+
+            # 2. Tastatur Enter auf Karte C
+            card_c = page.locator('#item-V3 .polaroid-card[data-opt="C"]')
+            card_c.focus()
+            page.keyboard.press("Enter")
+            r_enter = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V3,
+                radioCChecked: document.querySelector('#item-V3 input[value="C"]').checked,
+                cardCSelected: document.querySelector('#item-V3 .polaroid-card[data-opt="C"]').classList.contains('selected')
+            })""")
+            self.assertEqual(r_enter["choice"], "C")
+            self.assertTrue(r_enter["radioCChecked"])
+            self.assertTrue(r_enter["cardCSelected"])
+
+            # 3. Buchstabentaste 'a' bei Fokus innerhalb des Fieldsets
+            page.locator('#item-V3 .polaroid-card[data-opt="A"]').focus()
+            page.keyboard.press("a")
+            r_key_a = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V3,
+                radioAChecked: document.querySelector('#item-V3 input[value="A"]').checked,
+                cardASelected: document.querySelector('#item-V3 .polaroid-card[data-opt="A"]').classList.contains('selected')
+            })""")
+            self.assertEqual(r_key_a["choice"], "A")
+            self.assertTrue(r_key_a["radioAChecked"])
+            self.assertTrue(r_key_a["cardASelected"])
+
+    def test_swipe_deck_buttons_keys_summary_and_confirm(self):
+        with hu.headless_context() as ctx:
+            page = ctx.new_page()
+            page.goto(self.file.as_uri())
+            hu.ready(page)
+            # Posten V4 hat 2 Bilder im Swipe-Modus
+            r0 = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V4,
+                currentIndex: window.__FORM__.state.swipe.V4.currentIndex,
+                summaryHidden: document.querySelector('#item-V4 .swipe-summary').hidden,
+                progress: document.querySelector('#item-V4 .swipe-progress').textContent
+            })""")
+            self.assertIsNone(r0["choice"], "Vor Bestätigung ist V4 unentschieden")
+            self.assertEqual(r0["currentIndex"], 0)
+            self.assertTrue(r0["summaryHidden"])
+            self.assertIn("1 von 2", r0["progress"])
+
+            # 1. Erstes Bild per 'Ja'-Button entscheiden
+            page.click('#item-V4 .swipe-btn-ja')
+            r1 = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V4,
+                currentIndex: window.__FORM__.state.swipe.V4.currentIndex,
+                d0: window.__FORM__.state.swipe.V4.decisions[0].entscheidung,
+                progress: document.querySelector('#item-V4 .swipe-progress').textContent
+            })""")
+            self.assertIsNone(r1["choice"])
+            self.assertEqual(r1["currentIndex"], 1)
+            self.assertEqual(r1["d0"], "ja")
+            self.assertIn("2 von 2", r1["progress"])
+
+            # 2. Undo-Button testen
+            page.click('#item-V4 .swipe-btn-undo')
+            r_undo = page.evaluate("""() => ({
+                currentIndex: window.__FORM__.state.swipe.V4.currentIndex,
+                d0: window.__FORM__.state.swipe.V4.decisions[0].entscheidung
+            })""")
+            self.assertEqual(r_undo["currentIndex"], 0)
+            self.assertIsNone(r_undo["d0"])
+
+            # 3. Bild 0 per Pfeiltaste rechts (Ja) entscheiden
+            page.locator('#item-V4 .swipe-card.active').focus()
+            page.keyboard.press("ArrowRight")
+            # Bild 1 per Pfeiltaste links (Nein) entscheiden
+            page.locator('#item-V4 .swipe-card.active').focus()
+            page.keyboard.press("ArrowLeft")
+
+            # Beide entschieden -> Zusammenfassung sichtbar, aber noch nicht bestätigt
+            r_all = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V4,
+                summaryHidden: document.querySelector('#item-V4 .swipe-summary').hidden,
+                confirmed: window.__FORM__.state.swipe.V4.confirmed,
+                cardDone: document.getElementById('item-V4').classList.contains('done')
+            })""")
+            self.assertIsNone(r_all["choice"], "Noch nicht bestätigt")
+            self.assertFalse(r_all["summaryHidden"], "Übersicht nach allen Entscheidungen sichtbar")
+            self.assertFalse(r_all["confirmed"])
+            self.assertFalse(r_all["cardDone"])
+
+            # 4. Bestätigungsknopf klicken
+            page.click('#item-V4 .swipe-confirm-btn')
+            r_conf = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V4,
+                confirmed: window.__FORM__.state.swipe.V4.confirmed,
+                cardDone: document.getElementById('item-V4').classList.contains('done'),
+                answers: window.__FORM__.buildAnswers()
+            })""")
+            self.assertEqual(r_conf["choice"], "A", "Posten ist nach Bestätigung entschieden")
+            self.assertTrue(r_conf["confirmed"])
+            self.assertTrue(r_conf["cardDone"])
+            v4_ans = r_conf["answers"]["answers"]["V4"]
+            self.assertEqual(v4_ans["state"], "answered")
+            self.assertTrue(v4_ans["swipe_confirmed"])
+            self.assertEqual(len(v4_ans["swipe_decisions"]), 2)
+            self.assertEqual(v4_ans["swipe_decisions"][0]["entscheidung"], "ja")
+            self.assertEqual(v4_ans["swipe_decisions"][1]["entscheidung"], "nein")
+            self.assertEqual(bf.validate_answers(r_conf["answers"], ITEMS), [])
+
+            # 5. Nachträgliche Änderung in der Übersicht auf Rückfrage
+            page.click('#item-V4 .swipe-summary-item[data-idx="1"] .swipe-summary-btn[data-dec="rueckfrage"]')
+            r_rq = page.evaluate("""() => ({
+                choice: window.__FORM__.state.choice.V4,
+                state: window.__FORM__.buildAnswers().answers.V4.state,
+                answers: window.__FORM__.buildAnswers()
+            })""")
+            self.assertEqual(r_rq["choice"], "rueckfrage")
+            self.assertEqual(r_rq["state"], "question")
+            self.assertEqual(bf.validate_answers(r_rq["answers"], ITEMS), [])
 
 
 if __name__ == "__main__":

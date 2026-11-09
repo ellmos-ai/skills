@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.3.0
+version: 1.4.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-07
+updated: 2026-11-09
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -164,6 +164,11 @@ ENTSCHEIDUNG: <Frage>
 
 Statt Buchstaben im Chat zu tippen, kann die Nutzerin oder der Nutzer ein fertiges Briefing im Dokument selbst anklicken: Optionen wählen, je Posten eine Anmerkung, „Alles wie empfohlen“ (Massenabnahme), Speichern und Abschicken. Aus den Briefing-Daten (kleine JSON, Format `form.schema.json`) erzeugt der Generator `scripts/formular/build_form.py` des Skills [decision-draw](../decision-draw/SKILL.md) **ein selbstenthaltenes HTML-Formular** (nicht jedes Mal neu bauen; je Posten kurzer Kontext, Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Längeres nur aufklappbar; dazu die Wahl „Rückfrage / mehr Info nötig“); die Antwortdatei (`ticket-master.decision-answers.v1`) enthält je Posten die gewählte Option und liefert damit die Spalte „Gewählt“ der Ergebnis-Tabelle aus Phase 4. Die vollständige Anleitung (zwei Wege, Antwortschema, anzupassende Stellen): [decision-draw/references/formular.md](../decision-draw/references/formular.md). Das Formular schreibt in kein Register; gebucht wird weiter nur in Phase 4.
 
+**Bild-Modi (`bilder_modus`):**
+- `serie` (Standard, 1–12 Bilder): Klassische Galerie/Serie.
+- `polaroid` (2–12 Bilder, genau 1 Bild je Option A, B, C...): Klickbare Variantenkarten mit Optionsbuchstaben im Polaroid-Stil für visuelle Design- und Layout-Entscheidungen (Auswahl per Klick oder Tastendruck `A`/`B`/`C`).
+- `swipe` (1–60 Bilder): Stapel-Entscheidungen nacheinander (Ja / Nein / Rückfrage per Button, Pfeiltasten oder Wischgeste) mit anschließender Übersicht und Bestätigung für Massenprüfungen (z. B. Belege, Rechnungen, Entwürfe).
+
 Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
 1. Nichts vorausgewählt (oder ausdrücklich als vorausgewählt gekennzeichnet).
@@ -171,9 +176,9 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 3. Sensible Posten (rot, Geld, Löschung, Außenwirkung, Lizenz) vor dem Speichern auflisten.
 4. UI-Tests nur headless, nie über sichtbare Browser oder die Playwright-MCP-Werkzeuge (ein sichtbarer Testbrowser hat das Formular einmal selbst ausgefüllt).
 5. Zustellung erst nach unabhängiger Prüfung durch eine andere Instanz.
-6. Buchung nur über Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional.
+6. Buchung nur über Phase 4; der Vergleich mit einer versiegelten Avatar-Prognose ist optional. Die Avatar-Vorhersage wird im Formular erst sichtbar, nachdem eine Wahl getroffen wurde.
 7. Speichern hängt nie von einem Dialog ab (Regel 9 der Anleitung): Download-Links, Text zum Kopieren und „Zwischenstand sichern“ stehen schon vor dem Ordnerdialog bereit und bleiben nach jedem Abbruch oder Fehler stehen; „gespeichert“ erst nach vollständigem Schreiben.
-8. Kurz und entscheidungsrelevant (Postenvorlage mit Grenzen und Pflichtfeldern, Längeres nur aufklappbar); die Wahl „Rückfrage / mehr Info nötig“ ist nie eine Zustimmung und blockiert die Gesamtabnahme.
+8. Kurz und entscheidungsrelevant (Postenvorlage mit Grenzen und Pflichtfeldern, Längeres nur aufklappbar); die Wahl „Rückfrage / mehr Info nötig“ ist nie eine Zustimmung und blockiert die Gesamtabnahme. Im Kartenkopf steht der verständliche Klartext-Titel im `<legend>` an erster Stelle, das Kürzel dezent am Ende.
 
 Der Tk-Viewer von decision-draw ist nativ nicht abgenommen; er wird nur nach ausdrücklicher Zustimmung der Nutzerin oder des Nutzers geöffnet.
 
@@ -261,6 +266,12 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 ---
 
 ## Changelog
+
+### 1.4.0 (2026-11-09)
+- Bild-Modi für Formular-Briefings dokumentiert (`bilder_modus` in `form.schema.json` / `build_form.py` von `decision-draw`): `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Bilder, exakt 1 Bild je Option mit Buchstaben A, B, C... für visuelle Variantenwahlen) und `swipe` (1–60 Bilder zur sequenziellen Ja/Nein/Rückfrage-Massenprüfung mit Bestätigungsübersicht).
+- Avatar-Vorhersage: Badge wird erst nach getroffener Wahl sichtbar (kein kognitiver Vorab-Anker).
+- Kürzel-Badge im Kartenkopf: Sprechender Klartext-Titel im `<legend>` zuerst, technisches Kürzel dezent rechtsbündig.
+- Vollständige DE/EN-Parität mit `SKILL.en.md` sichergestellt.
 
 ### 1.3.0 (2026-11-07)
 - Formular aus Daten statt aus einem Dokumentgenerator (`build_form.py` in `decision-draw`): kurze Postenvorlage mit Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Wahl „Rückfrage / mehr Info nötig“.

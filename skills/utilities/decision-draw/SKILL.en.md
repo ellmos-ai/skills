@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.0.2
+version: 1.3.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-07
+updated: 2026-11-09
 description: >
   Condenses bundled pending decisions into ONE cohesive, prose-based overall
   concept assuming all recommended choices are adopted. Shows how subsystems
@@ -62,7 +62,7 @@ before any external effect; canonical booking remains decision-briefing Phase 4.
 
 ## Decision document as a form (build guide)
 
-So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_form.py` turns a small data JSON (`form.schema.json`, example `example_form.json`) into **one self-contained HTML form**. The form is not rebuilt each time: write the data, run `build_form.py`. Per item a short context (250 characters), one sentence of effect per option, a recommendation with one reason and the mandatory fields cost/effort, risk/reversibility, deadline and consequence of "no"; anything longer only collapsible; every item also has the choice "question / more info needed". The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
+So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_form.py` turns a small data JSON (`form.schema.json`, example `example_form.json`) into **one self-contained HTML form**. The form is not rebuilt each time: write the data, run `build_form.py`. Per item a short context (250 characters), one sentence of effect per option, a recommendation with one reason and the mandatory fields cost/effort, risk/reversibility, deadline and consequence of "no"; anything longer only collapsible; every item also has the choice "question / more info needed". Depending on the decision type, three image modes (`bilder_modus`) are available: `serie` (default, 1–12 images), `polaroid` (2–12 cards with letters A, B, C... matching options for variant comparisons, selectable via click or keypress) and `swipe` (1–60 images sequentially as a deck with yes/no/question and mandatory confirmation of the overall summary for bulk reviews). The avatar prediction badge is displayed only after the user has made a choice, avoiding pre-decisional anchoring. The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
 
 Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
@@ -106,18 +106,32 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
 ---
 
-## Mandatory Structure (Seven Parts)
+## Binding Style Rule: User-Facing Texts Without Shorthand Codes and Numbers
 
-A complete `decision-draw` strictly follows this seven-part layout:
+> **Canonical user instruction (Feedback 2026-09-13 / Ticket T-20260913-883789445):**
+> *"The decision draws are too technical for me; they need to be without numbers, which you know in the background or use for text generation [...]."*
 
-### 1. Bundle and Scope
-Tabular summary of all items included in the bundle:
-- Abbreviation / ID (e.g. `BH-A`, `MD-A`, `CF-A`)
-- Ticket reference
-- Short title of the item
-- Assumed recommendation (the premise of this overarching picture)
-- `decision-avatar` confidence (🟢 documented, 🟡 trade-off, 🔴 needs escalation)
-- Link to full analysis / alternatives
+1. **No technical abbreviations in visible user text:**
+   In visible prose for human readers (bundle, concept, interplay, implementation, query), there must be **no** internal codes (such as `BH-A`, `MD-A`, `HA-A`, `PRA`), no ticket numbers (`T-2026...`), no D-numbers (`D-2026...`), no relative paths, git hashes, or raw telemetry.
+2. **2–4 sentences of everyday language in first person per item:**
+   Each item in the bundle is phrased following the three-part structure:
+   - *Situation:* What is the current starting point?
+   - *Action ("I do..."):* What do I specifically plan / recommend doing?
+   - *Fallback:* What happens if this fails, or what does the user decide next?
+   *(Example: "Hermes currently supports only English for tasks. I will file an issue with Hermes and build a local workaround for us. There are currently unusable legacy sessions. I will attempt to recover them. If that fails, I will give you a random sample of 10 sessions and summarize them so you can decide if recovery is worthwhile.")*
+3. **Descriptive plain-text titles for orientation:**
+   Each item bears an intuitive title (e.g. *"Model Backend as Dedicated Core"*, *"Secure Deploy Keys on the Mac"*). The user interacts via this title or provides an overall sign-off.
+4. **Technical mapping exclusively in the appendix:**
+   The translation between plain-text title, internal abbreviation, ticket ID, and ledger state happens **exclusively in a concluding appendix table** at the end of the document. Automated parsers and ledger back-transfer routines read from there, and only from there.
+
+---
+
+## Mandatory Structure (Eight Parts)
+
+A complete `decision-draw` strictly follows this eight-part layout:
+
+### 1. Bundle and Scope (in Plain Text)
+Overview of bundled items in everyday language (first person, 2–4 sentences per item, no technical IDs/codes in text).
 
 ### 2. Concept
 The target state in cohesive prose:
@@ -148,40 +162,33 @@ Boundary defense against false completeness:
 The user interaction:
 - The user reviews the picture as a whole.
 - Response option 1: **Explicit overall sign-off** ("Looks good", "Approved", "Implement everything as proposed"). Only in this case are all bundle items booked as decided.
-- Response option 2: **Targeted correction in natural language** ("Prefer the smaller variant for BH-A", "No auto-restart for MD-A", "Keep VM-A as is"). Triggers decomposition into discrete decisions; all uncorrected items remain open.
+- Response option 2: **Targeted correction in natural language or by plain title** ("No auto-restart for Mac deploy", "Postpone VersicherungsManager for now"). Triggers decomposition into discrete decisions; all uncorrected items remain open.
 
 ### 7. Back-Transfer
 The systematic translation of user feedback into individual ledger entries:
 - **No Automatic Co-Booking:** Unaltered items are booked **only upon explicit overall sign-off**. A partial correction is **not** an overall approval!
 - **Isolation upon Correction:** If the user submits a correction, it is decomposed into individual decisions; all other items in the bundle remain strictly **open** (in source tickets / ledger) until the user accepts the adjusted picture as a whole or confirms remaining items individually.
-- **Mandatory Back-Transfer Table:** Every partial feedback generates a structured evaluation table with four columns:
-  1. *Original Correction*: Verbatim user statement.
-  2. *Affected Keys*: Which bundle IDs are altered (including multi-hits when one statement touches multiple decisions).
-  3. *Domino Status*: Which dependent nodes or downstream assumptions in [decision-path](../decision-path/SKILL.md) collapse or require re-evaluation.
-  4. *Open Ambiguities*: Where the correction allows multiple interpretations requiring clarification before booking.
-- **Handling Multi-Hits:** A single user statement can alter multiple decisions simultaneously. The back-transfer must untangle this coupling and capture all affected keys together.
-- **Exclusive Write Path via Phase 4:** `decision-draw` has **no** native write path to tickets or registers. Ledger updates occur **exclusively** via the standardized protocol in [decision-briefing](../decision-briefing/SKILL.md) Phase 4 (logging and persistence into `DECIDED-AND-DONE.md` or `TO-DECIDE-USER.txt`).
+- **Mandatory Back-Transfer Table:** Every partial feedback generates a structured evaluation table with four columns (Original Correction, Affected Keys, Domino Status, Open Ambiguities).
+- **Exclusive Write Path via Phase 4:** `decision-draw` has **no** native write path to tickets or registers. Ledger updates occur **exclusively** via the standardized protocol in [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
+
+### 8. Appendix: Technical Reference Table (for Booking & Audit Only)
+Compact table at the end of the document:
+`| Plain Title | Internal Abbreviation / ID | Ticket Reference | Assumed Recommendation | Confidence | Link / Details |`
 
 ---
 
 ## Example (Pilot Dataset: Ticket-Master 2026-09-13 — BACH & System Cluster)
-
-Real bundle from the Ticket-Master decision briefing dated 2026-09-13: `BH-A`, `MD-A`, `CF-A`, `VM-A`, `PD-A`.
 
 ```markdown
 # DECISION-DRAW: BACH Core Cluster & Operational Integrity
 
 ## 1. Bundle and Scope
 
-| Key | Ticket / Source | Topic | Assumed Recommendation | Confidence | Alternatives & Details |
-|---|---|---|---|---|---|
-| `BH-A` | `T-20260913-896336887` | Model backend = Heart | 1A / 2A / 3A / 4B / 5A / 6A | 🟢 | `docs/MODELL-BACKEND-KONZEPT_2026-09-13.md` |
-| `MD-A` | `T-20260913-799464688` | Mac deploy & restart | A1 + script (report-only for 24/7) | 🟢 | Ticket `T-20260913-799464688.txt` |
-| `CF-A` | `T-20260913-947070291` | Config targets across hosts | 1C (justified) / 2B (host-dep.) / 3B (high) | 🟢 / 🟡 | Ticket `T-20260913-947070291.<HOST>.txt` |
-| `VM-A` | `T-20260906-496406575` | VersicherungsManager timezone | A (app-wide settings like routinika) | 🟢 | Ticket `T-20260906-496406575.<HOST>.txt` |
-| `PD-A` | `T-20260913-609930207` | USMC page visibility | A (align declaration to public, status quo) | 🟢 | Ticket `T-20260913-609930207.txt` |
-
-*Note: All discarded alternatives (e.g. BH-A E5=B ocean-heart, MD-A A2 full write keys, VM-A B per-profile zones) remain documented in the Ticket-Master decision briefing.*
+- **Model Backend as Its Own Core Heart:** Model assignment is currently tightly coupled with the monolith. I will decouple the backend as an independent core module so that rights and budgets are audited independently. If an external service fails, the system automatically falls back to the local reserve model.
+- **Secure Deploy Keys on the Mac:** Persistent background processes run on the Mac and can terminate uncleanly on hard updates. I will configure a read-only key and a reporting script that indicates updates without killing running services. If a service hangs, the watcher alerts operational monitoring directly.
+- **Unified Configuration Baselines:** The two main hosts currently use divergent language settings. I will align configurations via the shared sync directory while retaining sufficient flexibility on the laptop for mobile tests.
+- **Fixed Timezone in VersicherungsManager:** Date calculations for deadlines currently depend on the host operating system. I will anchor a fixed timezone in application settings so deadlines match to the minute everywhere.
+- **Public Deployment of USMC Documentation:** Module documentation is currently marked private in the web presence and triggers audit warnings. I will correct visibility to public so the nightly site build completes without errors.
 
 ---
 
@@ -206,83 +213,71 @@ the canonical public memory facade and retains its place on the public website.
 
 The five items do not form a serial causal chain; instead, they represent modular, decoupled pillars of daily operational integrity that interlock in parallel across the system:
 
-- **Core Architecture & Model Routing (`BH-A`):** The `agents-heart` module decouples model assignment. When a task arrives, BACH determines the domain-qualified candidate set and clutch selects the cost- and capacity-optimal model.
-- **Host Configuration & Deploy Integrity (`CF-A`, `MD-A`):** While consistent reasoning effort applies to the laptop and workstation (`CF-A`; host-dependent models remain transparent), the Mac Studio runs persistent background processes under validated settings. For updates, the Mac pulls code via read-only deploy key (`MD-A`); the GUI server restarts while long-running 24/7 services gently notify the dashboard of update requirements.
-- **Domain Persistence & Deadlines (`VM-A`):** Applications such as VersicherungsManager persist deadlines against an app-wide `settings` table following the routinika pattern. Calculations and deadline watchers operate deterministically across all profiles on the same IANA timezone.
-- **Public Presentation (`PD-A`):** The nightly site builder validates repository states. USMC is published cleanly under its corrected `public` declaration, triggering zero alerts in the security gates.
+- **Core Architecture & Model Routing:** The `agents-heart` module decouples model assignment. When a task arrives, BACH determines the domain-qualified candidate set and clutch selects the cost- and capacity-optimal model.
+- **Host Configuration & Deploy Integrity:** While consistent reasoning effort applies to the laptop and workstation (host-dependent models remain transparent), the Mac Studio runs persistent background processes under validated settings. For updates, the Mac pulls code via read-only deploy key; the GUI server restarts while long-running 24/7 services gently notify the dashboard of update requirements.
+- **Domain Persistence & Deadlines:** Applications such as VersicherungsManager persist deadlines against an app-wide `settings` table following the routinika pattern. Calculations and deadline watchers operate deterministically across all profiles on the same IANA timezone.
+- **Public Presentation:** The nightly site builder validates repository states. USMC is published cleanly under its corrected `public` declaration, triggering zero alerts in the security gates.
 
 ---
 
 ## 4. Implementation
 
-Because the source dataset does not substantiate a serial chain across these five items in the dependency graph ([decision-path](../decision-path/SKILL.md)), rollout is honestly structured into four independent, parallel workstreams (Approach a: parallel tracks instead of invented causality). Sequential ordering applies only where external deadlines or internal steps exist:
+Rollout is structured into four independent, parallel workstreams:
 
 - **Track A (Time-Critical — Deadline 2026-09-14):**
-  1. Align USMC metadata to `public` (`PD-A`); discard Draft PR #2. Delays cannot be tolerated due to the nightly builder run, yet this step is technically completely independent of all other tracks.
+  1. Align USMC metadata to `public`; discard Draft PR #2. Delays cannot be tolerated due to the nightly builder run.
 - **Track B (Host Configuration & Mac Deploy — Parallelizable):**
-  1. B1: Codify configuration targets in `.SYNC` (`CF-A`), synchronizing reasoning effort to `high` across both hosts.
-  2. B2 (independent of B1): Install read-only deploy key on Mac Studio and set up the pull-and-report automation script (`MD-A`).
+  1. B1: Codify configuration targets in `.SYNC`, synchronizing reasoning effort to `high` across both hosts.
+  2. B2: Install read-only deploy key on Mac Studio and set up the pull-and-report automation script.
 - **Track C (Domain Database — Parallelizable):**
-  1. Implement the app-wide `settings` table migration in VersicherungsManager following the routinika pattern (`VM-A`), establishing the clean baseline for subsequent publisher development.
+  1. Implement the app-wide `settings` table migration in VersicherungsManager following the routinika pattern.
 - **Track D (Architectural Extraction — Internal Multi-Stage Plan):**
-  1. D1: Set up SQLite schema for roles and budgets in `agents-heart` (`BH-A` E1).
-  2. D2: Carve out the backend catalog as a Python module (`BH-A` E3) and bind the clutch allocation seam (`BH-A` E2).
-  3. D3: Extract and bind the `agents-heart` module (`BH-A` E5, E6).
+  1. D1: Set up SQLite schema for roles and budgets in `agents-heart`.
+  2. D2: Carve out the backend catalog as a Python module and bind the clutch allocation seam.
+  3. D3: Extract and bind the `agents-heart` module.
 
 ---
 
 ## 5. What This Picture Does Not Cover
 
-- **Task-Claiming Race Condition:** The concurrency bug allowing duplicate task claims
-  is being addressed in a dedicated hotfix ticket and is outside this sign-off.
-- **Cockpit Frontend:** The monitoring cockpit (`BH-A` E4) is deliberately deferred until
-  the backend produces live operational telemetry.
-- **Publishing Public Repositories:** Merging and staging code does not automatically
-  make private repositories public; final visibility toggles remain reserved for the user.
+- **Task-Claiming Race Condition:** Addressed in a dedicated hotfix ticket.
+- **Cockpit Frontend:** Deferred until the backend produces live operational telemetry.
+- **Publishing Public Repositories:** Merging and staging code does not automatically make private repositories public; final visibility toggles remain reserved for the user.
 
 ---
 
 ## 6. Sign-Off
 
 You can sign off on this system cluster as a whole or provide natural-language adjustments:
-
-- **Explicit Overall Sign-Off:** "Looks good, implement exactly as proposed." (Only this triggers booking of all items).
-- **Example Corrections:**
-  - *"No host-specific special handling for the Mac: MD-A needs full write keys (A2) for direct pushing, and CF-A should strictly align all configurations to the workstation (Group 1=A, 2=A)."* (Multi-hit)
-  - *"For BH-A E5, name it ocean-heart instead of agents-heart."*
-  - *"Postpone VM-A for now; the publisher can wait."*
+- **Explicit Overall Sign-Off:** "Looks good, implement exactly as proposed."
+- **Example Corrections:** "No host-specific special handling for the Mac deploy key", "Postpone VersicherungsManager for now".
 
 ---
 
 ## 7. Back-Transfer
 
-When the concept is approved or amended, the skill translates the feedback into ledger entries:
-
-### Case A: Explicit Overall Sign-Off
-When the user explicitly approves the overarching picture as a whole (e.g. *"Looks good, implement exactly as proposed"*):
-- All five items (`BH-A: 1A/2A/3A/4B/5A/6A`, `MD-A: A1`, `CF-A: 1C/2B/3B`, `VM-A: A`, `PD-A: A`) are passed as DECIDED to [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
-- Phase 4 performs the ledger entry into `DECIDED-AND-DONE.md` and updates the five source tickets.
-
-### Case B: Partial Correction with Multi-Hit
-When the user submits substantive feedback, e.g.:
-> *"No host-specific special handling for the Mac: MD-A needs full write keys (A2) for direct pushing, and CF-A should strictly align all configurations to the workstation (Group 1=A, 2=A)."*
-
-**1. Structured Back-Transfer Table:**
+### Structured Back-Transfer Table:
 
 | Original Correction (User Wording) | Affected Keys | Domino Status (dependent nodes affected) | Open Ambiguities |
 |---|---|---|---|
-| *"No host-specific special handling for the Mac: MD-A needs full write keys (A2) for direct pushing, and CF-A should strictly align all configurations to the workstation (Group 1=A, 2=A)."* | `MD-A`, `CF-A` *(Multi-hit: 1 statement moves 2 items)* | **`MD-A`:** Flips from A1 to A2. Requires SSH write key on Mac Studio, push rights in GitHub repo `bach`, and security review of the LaunchAgent.<br>**`CF-A`:** Group 1 flips from C to A (laptop Claude Desktop becomes more restrictive). Group 2 flips from B to A (`codex.model` strictly aligned). Group 3 remains B (`high`), already synchronized. | **`CF-A` Group 1:** User demands alignment to workstation (1=A) — clarification required whether the previously deliberate permissiveness on the laptop should truly be revoked.<br>**`MD-A`:** Unclear whether write key applies to all repositories or exclusively to `bach`. |
+| *"No host-specific special handling for the Mac: MD-A needs full write keys (A2) for direct pushing, and CF-A should strictly align all configurations to the workstation (Group 1=A, 2=A)."* | `MD-A`, `CF-A` *(Multi-hit)* | **`MD-A`:** Flips from A1 to A2. Requires SSH write key on Mac Studio, push rights in GitHub repo `bach`, and security review.<br>**`CF-A`:** Group 1 flips from C to A. Group 2 flips from B to A. Group 3 remains B (`high`). | **`CF-A` Group 1:** Clarification required whether permissiveness on the laptop should truly be revoked.<br>**`MD-A`:** Unclear whether write key applies to all repositories or exclusively to `bach`. |
 
-**2. Status of Untouched Items (Protection against Unsolicited Co-Booking):**
-- The unaltered items `BH-A`, `VM-A`, and `PD-A` are **not** booked!
-- They remain strictly in status **OPEN** (`PENDING`) in the briefing template / register `TO-DECIDE-USER.txt`.
-- A partial correction is **not** an overall sign-off. Only when the adjusted overall picture is subsequently approved or the remaining items are individually confirmed may they be booked.
+### Status of Untouched Items:
+Unaltered items (`BH-A`, `VM-A`, `PD-A`) remain strictly **OPEN** until explicit overall approval.
 
-**3. Booking Path:**
-- `decision-draw` has no native write mechanism.
-- Only what the table marks as unambiguous is handed to **[decision-briefing](../decision-briefing/SKILL.md) Phase 4**: `CF-A` Group 2 = A and Group 3 = B.
-- `MD-A` and `CF-A` Group 1 are **not** handed over — both carry an entry in the *Open Ambiguities* column. An ambiguity you wanted clarified before booking must not be booked as clarified in the same round.
-- Phase 4 logs the unambiguous parts with rationales into ticket `T-20260913-947070291.txt` and updates `DECIDED-AND-DONE.md`. Ticket `T-20260913-799464688.txt` (`MD-A`) stays open until the clarification is answered.
+---
+
+## 8. Appendix: Technical Reference Table (for Booking & Audit Only)
+
+| Plain Title | Internal Abbreviation / ID | Ticket Reference | Assumed Recommendation | Confidence | Link / Details |
+|---|---|---|---|---|---|
+| Model Backend as Heart | `BH-A` | `T-20260913-896336887` | 1A / 2A / 3A / 4B / 5A / 6A | 🟢 | `docs/MODELL-BACKEND-KONZEPT_2026-09-13.md` |
+| Mac Deploy & Restart | `MD-A` | `T-20260913-799464688` | A1 + script (report-only for 24/7) | 🟢 | Ticket `T-20260913-799464688.txt` |
+| Host Configuration Targets | `CF-A` | `T-20260913-947070291` | 1C (justified) / 2B (host-dep.) / 3B (high) | 🟢 / 🟡 | Ticket `T-20260913-947070291.<HOST>.txt` |
+| VersicherungsManager Timezone | `VM-A` | `T-20260906-496406575` | A (app-wide settings like routinika) | 🟢 | Ticket `T-20260906-496406575.<HOST>.txt` |
+| USMC Page Visibility | `PD-A` | `T-20260913-609930207` | A (align declaration to public, status quo) | 🟢 | Ticket `T-20260913-609930207.txt` |
+
+*Note: All discarded alternatives remain documented in the Ticket-Master decision briefing.*
 ```
 
 ---
@@ -312,10 +307,24 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 
 ## Changelog
 
-### 1.0.2 (2026-11-07)
+### 1.3.0 (2026-11-09)
+- Image modes for the form template (`build_form.py`, `form.schema.json`, `formular.js`, `formular.css`): `serie` (default, 1–12 images), `polaroid` (2–12 cards with letters A, B, C... matching options, selectable by click or keypress) and `swipe` (1–60 images sequentially as a deck with yes/no/question and mandatory summary confirmation for bulk reviews).
+- Avatar prediction: Badge is displayed only after a choice has been made (avoiding cognitive anchoring).
+- Identifier badge in card header: Descriptive plain-text title in `<legend>` first, technical abbreviation discreetly aligned to the right.
+- `make_fixtures.py` repaired for Rule-9 save area (waits for `#save-links a` and reads blob contents).
+- Full DE/EN parity with `SKILL.md` established (including the 8-part structure with technical appendix table and the style rule for human-friendly plain texts).
+
+### 1.2.0 (2026-11-07)
 - Template instead of a document generator: `scripts/formular/build_form.py <data.json>` with `formular.html`, `form.schema.json` and `example_form.json`. Post template with length limits (errors, no silent truncation) and mandatory fields cost/effort, risk/reversibility, deadline, consequence of "no"; the choice "question / more info needed" (answer schema extended by `state: question` and `counts.questions`); optional `bilder[]` embedded as `data:` URIs. The former generator is `build_from_markdown.py` (migration example); the rule 9 tests run as a shared mixin on both.
 - Rule 9 "saving never depends on a dialog" (incident of 2026-11-07: after the folder dialog was aborted the form offered nothing more): the reference form now has download links per file (nothing starts by itself), text to copy, "save draft", honest success and error messages and no `startIn`; tests `HeadlessSave` (headless, simulated failures) and `SaveArea`.
-- Added the build guide "Decision document as a form" with the reference implementation `scripts/formular/` and the mandatory rules from the incident of 2026-11-07; added the status note for the Tk viewer (not accepted natively). The German `SKILL.md` is at 1.2.0 and also carries the style rules of 1.1.0, which this English file does not have yet.
+- Added the build guide "Decision document as a form" with the reference implementation `scripts/formular/` and the mandatory rules from the incident of 2026-11-07; added the status note for the Tk viewer (not accepted natively).
+
+### 1.1.0 (2026-09-18)
+- Style rule for user-friendly decision texts established (T-20260913-883789445, user instruction 2026-09-13):
+  - No technical codes, ticket/D-numbers, paths, or telemetry in visible text.
+  - 2–4 sentences of everyday language in first person (Situation, "I do...", Fallback) per item.
+  - Descriptive plain-text titles for identification and sign-off.
+  - Technical mapping (codes, ticket IDs, register states) strictly moved to concluding appendix table (Section 8).
 
 ### 1.0.1 (2026-09-13)
 - Rework following independent review:
@@ -328,5 +337,5 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 
 ### 1.0.0 (2026-09-13)
 - Initial release based on user order T-20260913-107991667.
-- Mandatory seven-part structure (bundle, concept, interplay, implementation, boundaries, sign-off, back-transfer).
+- Mandatory structure (bundle, concept, interplay, implementation, boundaries, sign-off, back-transfer).
 - Bundling logic based on `decision-path` and back-transfer bridge to `decision-briefing` Phase 4.

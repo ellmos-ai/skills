@@ -4,7 +4,7 @@
   var ITEMS = DATA.items, BYID = {};
   ITEMS.forEach(function (it) { BYID[it.id] = it; });
   var LSKEY = 'ticket-master.decisions.' + DATA.document_id + '.' + DATA.doc_sha256.slice(0, 16);
-  var st = { choice: {}, note: {}, via: {}, agpl: { choice: null, note: '' }, bulk: {}, gesamt: { explicit: false, at: null }, restored: null };
+  var st = { choice: {}, note: {}, via: {}, agpl: { choice: null, note: '' }, bulk: {}, gesamt: { explicit: false, at: null }, restored: null, swipe: {} };
   var RQ = 'rueckfrage'; /* eigene Wahl je Posten: Rueckfrage / mehr Info noetig; die Anmerkung gilt dann als Frage */
   var answered = false; /* wird in init() gesetzt: das eingebettete Antwort-Skript steht im beantworteten Dokument NACH diesem Skript */
   var restoreHint = false; /* true, wenn ein wiederhergestellter Stand eine Gesamtabnahme trug, die bewusst NICHT uebernommen wurde */
@@ -30,6 +30,19 @@
       card.classList.toggle('done', !!st.choice[it.id] && st.choice[it.id] !== RQ);
       card.classList.toggle('question', st.choice[it.id] === RQ);
       var v = $('.via', card); if (v) v.textContent = st.choice[it.id] ? (st.via[it.id] === 'bulk' ? 'per Massenaktion gesetzt' : 'von dir gewählt') : '';
+      var ab = $('.badge.avatar-badge', card);
+      if (ab) ab.hidden = !(st.choice[it.id] && st.choice[it.id] !== RQ);
+      if (it.bilder_modus === 'polaroid') {
+        $$('.polaroid-card', card).forEach(function (pc) {
+          var opt = pc.getAttribute('data-opt');
+          var sel = (st.choice[it.id] === opt);
+          pc.classList.toggle('selected', sel);
+          pc.setAttribute('aria-pressed', sel ? 'true' : 'false');
+        });
+      }
+      if (it.bilder_modus === 'swipe') {
+        renderSwipe(it, card);
+      }
     });
     $$('input[name=agpl]').forEach(function (r) { r.checked = (st.agpl.choice === r.value); });
     var at = $('#agpl-note'); if (at && at.value !== st.agpl.note) at.value = st.agpl.note;
@@ -79,7 +92,17 @@
     ask(title, body, [{ id: 'no', label: 'Abbrechen' }, { id: 'yes', label: 'Ja, ausdrücklich annehmen', primary: true }]).then(function (r) {
       if (r.id !== 'yes') return;
       var over = !!r.extra.over, n = 0;
-      withRec.forEach(function (it) { if (!st.choice[it.id] || over) { st.choice[it.id] = it.rec; st.via[it.id] = 'bulk'; n++; } });
+      withRec.forEach(function (it) {
+        if (!st.choice[it.id] || over) {
+          st.choice[it.id] = it.rec;
+          st.via[it.id] = 'bulk';
+          if (it.bilder_modus === 'swipe' && st.swipe[it.id]) {
+            st.swipe[it.id].decisions.forEach(function (d) { if (!d.entscheidung) d.entscheidung = 'ja'; });
+            st.swipe[it.id].confirmed = true;
+          }
+          n++;
+        }
+      });
       st.bulk['bundle-' + (scope === 'all' ? 'alle' : scope)] = true;
       var msg = n + ' Posten gesetzt.';
       if (scope === 'all') {
@@ -95,8 +118,16 @@
   function buildAnswers() {
     var ans = {};
     ITEMS.forEach(function (it) {
-      ans[it.id] = { choice: st.choice[it.id] || null, choice_label: st.choice[it.id] ? label(it, st.choice[it.id]) : null, state: st.choice[it.id] === RQ ? 'question' : (st.choice[it.id] ? 'answered' : 'open'), note: st.note[it.id] || '', via: st.choice[it.id] ? (st.via[it.id] || 'single') : null,
+      var a = { choice: st.choice[it.id] || null, choice_label: st.choice[it.id] ? label(it, st.choice[it.id]) : null, state: st.choice[it.id] === RQ ? 'question' : (st.choice[it.id] ? 'answered' : 'open'), note: st.note[it.id] || '', via: st.choice[it.id] ? (st.via[it.id] || 'single') : null,
         recommended: it.rec || null, avatar_prediction: it.av_pred || null, avatar_confidence: it.av_conf || null, marked: !!it.marked };
+      if (it.bilder_modus === 'swipe') {
+        var sw = st.swipe[it.id] || {};
+        a.swipe_decisions = (sw.decisions || []).map(function (d) {
+          return { bild_id: d.bild_id, beschriftung: d.beschriftung, entscheidung: d.entscheidung };
+        });
+        a.swipe_confirmed = !!sw.confirmed;
+      }
+      ans[it.id] = a;
     });
     var out = { schema: DATA.schema, document_id: DATA.document_id, document_sha256: DATA.doc_sha256, saved_at: new Date().toISOString(),
       answers: ans, bulk_actions: st.bulk, gesamtabnahme: { explicit: !!st.gesamt.explicit, at: st.gesamt.at },
@@ -225,6 +256,162 @@
     } catch (e) { fail('Der Zwischenstand konnte nicht gesichert werden', e); }
   }
 
+  /* ---------- Swipe-Modus Steuerung ---------- */
+  function renderSwipe(it, card) {
+    if (it.bilder_modus !== 'swipe') return;
+    var sw = st.swipe[it.id];
+    if (!sw) return;
+    var total = sw.decisions.length;
+    var decidedCount = sw.decisions.filter(function (d) { return d.entscheidung !== null; }).length;
+    var allDecided = (decidedCount === total);
+    var curIdx = sw.decisions.findIndex(function (d) { return d.entscheidung === null; });
+    if (curIdx === -1) curIdx = total;
+    sw.currentIndex = curIdx;
+
+    var prog = $('.swipe-progress', card);
+    if (prog) {
+      if (allDecided) {
+        prog.textContent = 'Alle ' + total + ' Bilder entschieden · ' + (sw.confirmed ? 'bestätigt' : 'bitte unten bestätigen');
+      } else {
+        prog.textContent = 'Bild ' + (curIdx + 1) + ' von ' + total + ' · ' + decidedCount + ' entschieden';
+      }
+    }
+    var cards = $$('.swipe-card', card);
+    cards.forEach(function (c, i) {
+      c.classList.remove('active', 'next');
+      if (i === curIdx) c.classList.add('active');
+      else if (i === curIdx + 1) c.classList.add('next');
+    });
+
+    var deckElem = $('.swipe-deck', card);
+    var ctrlElem = $('.swipe-controls', card);
+    var sumElem = $('.swipe-summary', card);
+
+    if (allDecided) {
+      if (deckElem) deckElem.style.display = 'none';
+      if (ctrlElem) ctrlElem.style.display = 'none';
+      if (sumElem) {
+        sumElem.hidden = false;
+        renderSwipeSummary(it, sumElem);
+      }
+    } else {
+      if (deckElem) deckElem.style.display = '';
+      if (ctrlElem) ctrlElem.style.display = '';
+      if (sumElem) sumElem.hidden = true;
+    }
+  }
+
+  function renderSwipeSummary(it, sumElem) {
+    var list = $('.swipe-summary-list', sumElem);
+    if (!list) return;
+    var sw = st.swipe[it.id];
+    list.innerHTML = sw.decisions.map(function (d, idx) {
+      return '<div class="swipe-summary-item" data-idx="' + idx + '">' +
+        '<span class="swipe-summary-label"><b>Bild ' + (idx + 1) + ':</b> ' + esc(d.beschriftung) + '</span>' +
+        '<div class="swipe-summary-btn-group">' +
+        '<button type="button" class="swipe-summary-btn' + (d.entscheidung === 'ja' ? ' active-ja' : '') + '" data-dec="ja">Ja</button>' +
+        '<button type="button" class="swipe-summary-btn' + (d.entscheidung === 'nein' ? ' active-nein' : '') + '" data-dec="nein">Nein</button>' +
+        '<button type="button" class="swipe-summary-btn' + (d.entscheidung === 'rueckfrage' ? ' active-rq' : '') + '" data-dec="rueckfrage">Rückfrage</button>' +
+        '</div></div>';
+    }).join('');
+
+    $$('.swipe-summary-btn', list).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.swipe-summary-item');
+        var idx = parseInt(item.getAttribute('data-idx'), 10);
+        var dec = btn.getAttribute('data-dec');
+        sw.decisions[idx].entscheidung = dec;
+        sw.confirmed = false;
+        if (dec === 'rueckfrage') {
+          st.choice[it.id] = RQ;
+          st.via[it.id] = 'single';
+        } else if (sw.decisions.some(function (x) { return x.entscheidung === 'rueckfrage'; })) {
+          st.choice[it.id] = RQ;
+          st.via[it.id] = 'single';
+        } else {
+          delete st.choice[it.id];
+          delete st.via[it.id];
+        }
+        touch(true);
+      });
+    });
+
+    var confBtn = $('.swipe-confirm-btn', sumElem);
+    if (confBtn) {
+      if (sw.confirmed) {
+        confBtn.textContent = '✓ Einzelentscheidungen bestätigt';
+        confBtn.classList.remove('primary');
+      } else {
+        confBtn.textContent = 'Einzelentscheidungen bestätigen';
+        confBtn.classList.add('primary');
+      }
+    }
+  }
+
+  function swipeDecide(it, decision) {
+    var sw = st.swipe[it.id];
+    if (!sw) return;
+    var idx = sw.decisions.findIndex(function (d) { return d.entscheidung === null; });
+    if (idx === -1) return;
+    sw.decisions[idx].entscheidung = decision;
+    sw.confirmed = false;
+    if (decision === 'rueckfrage') {
+      st.choice[it.id] = RQ;
+      st.via[it.id] = 'single';
+    } else if (sw.decisions.some(function (x) { return x.entscheidung === 'rueckfrage'; })) {
+      st.choice[it.id] = RQ;
+      st.via[it.id] = 'single';
+    } else if (st.choice[it.id]) {
+      delete st.choice[it.id];
+      delete st.via[it.id];
+    }
+    touch(true);
+  }
+
+  function swipeUndo(it) {
+    var sw = st.swipe[it.id];
+    if (!sw) return;
+    var lastIdx = -1;
+    for (var i = sw.decisions.length - 1; i >= 0; i--) {
+      if (sw.decisions[i].entscheidung !== null) { lastIdx = i; break; }
+    }
+    if (lastIdx === -1) return;
+    sw.decisions[lastIdx].entscheidung = null;
+    sw.confirmed = false;
+    if (sw.decisions.some(function (x) { return x.entscheidung === 'rueckfrage'; })) {
+      st.choice[it.id] = RQ;
+      st.via[it.id] = 'single';
+    } else {
+      delete st.choice[it.id];
+      delete st.via[it.id];
+    }
+    touch(true);
+  }
+
+  function swipeConfirm(it) {
+    var sw = st.swipe[it.id];
+    if (!sw) return;
+    if (sw.decisions.some(function (d) { return d.entscheidung === null; })) return;
+    if (sw.decisions.some(function (d) { return d.entscheidung === 'rueckfrage'; })) {
+      sw.confirmed = false;
+      st.choice[it.id] = RQ;
+      st.via[it.id] = 'single';
+    } else {
+      sw.confirmed = true;
+      var nJa = sw.decisions.filter(function (d) { return d.entscheidung === 'ja'; }).length;
+      var nNein = sw.decisions.filter(function (d) { return d.entscheidung === 'nein'; }).length;
+      if (st.choice[it.id] && st.choice[it.id] !== RQ) {
+        /* User already selected a specific radio option, keep it */
+      } else if (nNein > 0 && nJa === 0 && it.options.length > 1) {
+        st.choice[it.id] = it.options[1].k;
+      } else {
+        st.choice[it.id] = it.options[0].k;
+      }
+      st.via[it.id] = 'single';
+    }
+    touch(true);
+  }
+
   /* ---------- Verdrahtung ---------- */
   function init() {
     answered = !!document.getElementById('embedded-answers');
@@ -242,11 +429,119 @@
       /* Gesamtabnahme und Massenaktions-Bestaetigungen werden NIE aus einem alten Stand uebernommen (nur Einzelwahlen und Anmerkungen) */
       restoreHint = !!(saved.gesamt && saved.gesamt.explicit);
     }
+    if (saved && saved.swipe) {
+      Object.keys(saved.swipe).forEach(function (id) {
+        var it = BYID[id];
+        if (it && it.bilder_modus === 'swipe') st.swipe[id] = saved.swipe[id];
+      });
+    }
+    ITEMS.forEach(function (it) {
+      if (it.bilder_modus === 'swipe') {
+        var cur = st.swipe[it.id];
+        var expected = (it.swipe_bilder || []);
+        if (!cur || !Array.isArray(cur.decisions) || cur.decisions.length !== expected.length) {
+          st.swipe[it.id] = {
+            decisions: expected.map(function (b) { return { bild_id: b.id, beschriftung: b.beschriftung, entscheidung: null }; }),
+            confirmed: false, currentIndex: 0
+          };
+        }
+      }
+    });
     $$('.item[data-id]').forEach(function (card) {
       var id = card.getAttribute('data-id');
-      $$('input[type=radio]', card).forEach(function (r) { r.addEventListener('change', function () { st.choice[id] = r.value; st.via[id] = 'single'; touch(true); }); });
+      var it = BYID[id];
+      $$('input[type=radio]', card).forEach(function (r) {
+        r.addEventListener('change', function () {
+          st.choice[id] = r.value; st.via[id] = 'single';
+          if (it.bilder_modus === 'swipe' && r.value !== RQ) {
+            var sw = st.swipe[id];
+            if (sw && sw.confirmed) {
+              /* choice updated */
+            }
+          }
+          touch(true);
+        });
+      });
       var ta = $('textarea', card); ta.addEventListener('input', function () { st.note[id] = ta.value; lsSet(); });
-      var rs = $('.reset', card); if (rs) rs.addEventListener('click', function () { delete st.choice[id]; delete st.via[id]; touch(true); });
+      var rs = $('.reset', card);
+      if (rs) rs.addEventListener('click', function () {
+        delete st.choice[id]; delete st.via[id];
+        if (it.bilder_modus === 'swipe') {
+          var expected = (it.swipe_bilder || []);
+          st.swipe[id] = {
+            decisions: expected.map(function (b) { return { bild_id: b.id, beschriftung: b.beschriftung, entscheidung: null }; }),
+            confirmed: false, currentIndex: 0
+          };
+        }
+        touch(true);
+      });
+
+      if (it.bilder_modus === 'polaroid') {
+        $$('.polaroid-card', card).forEach(function (pc) {
+          var opt = pc.getAttribute('data-opt');
+          pc.addEventListener('click', function () {
+            st.choice[id] = opt; st.via[id] = 'single'; touch(true);
+          });
+          pc.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault(); st.choice[id] = opt; st.via[id] = 'single'; touch(true);
+            }
+          });
+        });
+      }
+      if (it.bilder_modus === 'swipe') {
+        var btnJa = $('.swipe-btn-ja', card); if (btnJa) btnJa.addEventListener('click', function () { swipeDecide(it, 'ja'); });
+        var btnNein = $('.swipe-btn-nein', card); if (btnNein) btnNein.addEventListener('click', function () { swipeDecide(it, 'nein'); });
+        var btnRq = $('.swipe-btn-rq', card); if (btnRq) btnRq.addEventListener('click', function () { swipeDecide(it, 'rueckfrage'); });
+        var btnUndo = $('.swipe-btn-undo', card); if (btnUndo) btnUndo.addEventListener('click', function () { swipeUndo(it); });
+        var btnConf = $('.swipe-confirm-btn', card); if (btnConf) btnConf.addEventListener('click', function () { swipeConfirm(it); });
+
+        var deck = $('.swipe-deck', card);
+        if (deck) {
+          var startX = 0, startY = 0, dragging = false;
+          var getActive = function () { return $('.swipe-card.active', deck); };
+          deck.addEventListener('pointerdown', function (e) {
+            var ac = getActive(); if (!ac) return;
+            dragging = true; startX = e.clientX; startY = e.clientY;
+            ac.classList.add('swiping'); if (ac.setPointerCapture) ac.setPointerCapture(e.pointerId);
+          });
+          deck.addEventListener('pointermove', function (e) {
+            if (!dragging) return;
+            var ac = getActive(); if (!ac) return;
+            var dx = e.clientX - startX, dy = e.clientY - startY;
+            ac.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) rotate(' + (dx * 0.05) + 'deg)';
+          });
+          var onEnd = function (e) {
+            if (!dragging) return;
+            dragging = false;
+            var ac = getActive(); if (!ac) return;
+            ac.classList.remove('swiping');
+            var dx = e.clientX - startX, dy = e.clientY - startY;
+            ac.style.transform = '';
+            if (dx >= 50) swipeDecide(it, 'ja');
+            else if (dx <= -50) swipeDecide(it, 'nein');
+            else if (dy <= -50) swipeDecide(it, 'rueckfrage');
+          };
+          deck.addEventListener('pointerup', onEnd);
+          deck.addEventListener('pointercancel', onEnd);
+        }
+      }
+
+      card.addEventListener('keydown', function (e) {
+        var t = e.target.tagName.toLowerCase();
+        if (t === 'textarea' || (t === 'input' && e.target.type === 'text')) return;
+        if (it.bilder_modus === 'polaroid') {
+          var k = e.key.toUpperCase();
+          if (it.options.some(function (o) { return o.k === k; })) {
+            e.preventDefault(); st.choice[id] = k; st.via[id] = 'single'; touch(true);
+          }
+        } else if (it.bilder_modus === 'swipe') {
+          if (e.key === 'ArrowRight') { e.preventDefault(); swipeDecide(it, 'ja'); }
+          else if (e.key === 'ArrowLeft') { e.preventDefault(); swipeDecide(it, 'nein'); }
+          else if (e.key === 'ArrowUp') { e.preventDefault(); swipeDecide(it, 'rueckfrage'); }
+          else if (e.key === 'Backspace') { e.preventDefault(); swipeUndo(it); }
+        }
+      });
     });
     $$('input[name=agpl]').forEach(function (r) { r.addEventListener('change', function () { st.agpl.choice = r.value; lsSet(); render(); }); });
     var an = $('#agpl-note'); if (an) an.addEventListener('input', function () { st.agpl.note = an.value; lsSet(); });
@@ -256,14 +551,39 @@
     var bc = $('#btn-copy'); if (bc) bc.addEventListener('click', onCopy);
     var bt = $('#btn-draft'); if (bt) bt.addEventListener('click', onDraft);
     var f = $('#only-open'); if (f) f.addEventListener('change', function () { document.body.classList.toggle('only-open', f.checked); render(); });
-    var rr = $('#restore-reset'); if (rr) rr.addEventListener('click', function () { st.choice = {}; st.note = {}; st.via = {}; st.agpl = { choice: null, note: '' }; st.bulk = {}; st.gesamt = { explicit: false, at: null }; st.restored = null; restoreHint = false; lsClear(); render(); });
+    var rr = $('#restore-reset');
+    if (rr) rr.addEventListener('click', function () {
+      st.choice = {}; st.note = {}; st.via = {}; st.agpl = { choice: null, note: '' }; st.bulk = {}; st.gesamt = { explicit: false, at: null }; st.restored = null; restoreHint = false;
+      st.swipe = {};
+      ITEMS.forEach(function (it) {
+        if (it.bilder_modus === 'swipe') {
+          var expected = (it.swipe_bilder || []);
+          st.swipe[it.id] = {
+            decisions: expected.map(function (b) { return { bild_id: b.id, beschriftung: b.beschriftung, entscheidung: null }; }),
+            confirmed: false, currentIndex: 0
+          };
+        }
+      });
+      lsClear(); render();
+    });
     document.body.classList.add('ready');
     render();
     if (restoreHint) toast('Gesamtabnahme nicht übernommen: Sie muss erneut ausdrücklich bestätigt werden.');
   }
   function applyAnswered() {
     var a = JSON.parse(document.getElementById('embedded-answers').textContent);
-    ITEMS.forEach(function (it) { var x = a.answers[it.id]; if (x && x.choice) { st.choice[it.id] = x.choice; st.via[it.id] = x.via || 'single'; } st.note[it.id] = x ? x.note : ''; });
+    ITEMS.forEach(function (it) {
+      var x = a.answers[it.id];
+      if (x && x.choice) { st.choice[it.id] = x.choice; st.via[it.id] = x.via || 'single'; }
+      st.note[it.id] = x ? x.note : '';
+      if (it.bilder_modus === 'swipe' && x && x.swipe_decisions) {
+        st.swipe[it.id] = {
+          decisions: x.swipe_decisions,
+          confirmed: !!x.swipe_confirmed,
+          currentIndex: x.swipe_decisions.length
+        };
+      }
+    });
     if (a.agpl_bleibt) st.agpl = { choice: a.agpl_bleibt.choice, note: a.agpl_bleibt.note }; st.gesamt = a.gesamtabnahme;
     document.body.classList.add('answered');
     $$('input,textarea,button').forEach(function (e) { if (!e.classList.contains('keep')) e.disabled = true; });
