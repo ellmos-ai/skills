@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Делает валидированные находки безопасности отслеживаемыми: после предпросмотра и подтверждения создаёт тикет (ticket_writer.py), GitHub issue или черновик security advisory (gh), сначала проверяет дубликаты по id находки, не допускает секретов в тексте и записывает ссылку обратно в finding.ticket. Триггеры: 'отследить эту находку', 'тикет для SEC-...', 'создать advisory', 'занести находки в бэклог'. Без Linear/Jira. Не для технических отчётов (sec-report) и не для раскрытия вовне (sec-writeup)."
+updated: 2026-11-09
+description: "Используйте для переноса подтвержденных уязвимостей в баг-трекеры, GitHub Issues или черновики Security Advisories (например, 'взять уязвимость на контроль', 'создать тикет для SEC-...', 'создать черновик advisory', /sec-track). Оформляет тикеты без утечки секретов и связывает трекинг-номера с базой находок. НЕ используйте для координации внешнего раскрытия (используйте sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

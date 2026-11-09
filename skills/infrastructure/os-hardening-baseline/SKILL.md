@@ -4,14 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Prüfliste für die Grundabsicherung eines eigenen Laptops oder PCs unter Windows, macOS
-  und Linux: Updates, Schutzprogramm, Firewall, Festplattenverschlüsselung, Konten und
-  Rechte, Fernzugänge, Startkette. Je Punkt eine schreibgeschützte Prüfung und ein Soll;
-  Änderungen nur nach Backup und einzelner Bestätigung. Defensiv, für den Privatgebrauch
-  gedacht, kein Ersatz für Vorgaben einer verwaltenden IT.
-
+updated: 2026-11-09
+description: "Verwenden, wenn die Grundabsicherung eines Arbeitsplatzrechners unter Windows, macOS oder Linux überprüft und gestärkt werden soll (z. B. 'Betriebssystem absichern', 'Härtungs-Checkliste durchgehen', 'OS-Hardening prüfen', /os-hardening-baseline). Prüft Updates, Firewall, Festplattenverschlüsselung, Kontenrechte und Startkette defensiv und schreibgeschützt. NICHT verwenden für akute Vorfallbereinigungen (dafür malware-cleanup-guide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -37,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="os-hardening-baseline banner">
 

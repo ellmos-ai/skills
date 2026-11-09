@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: >
-  Genogramm-Arbeit: Familien-Beziehungsmuster erkennen und reflektieren. Mehrgenerationen-Perspektive, Genogramm-Symbole, Muster-Erkennung und Ressourcen in der Familiengeschichte.
-
+updated: 2026-11-09
+description: "Verwenden, wenn familiäre Beziehungsmuster, Mehrgenerationenkonflikte oder systemische Verstrickungen visualisiert werden sollen (z. B. 'Genogramm erstellen', 'Familienmuster erkennen', 'Familiengeschichte analysieren', /genogram-work). Erklärt standardisierte Genogramm-Symbole, Beziehungsdynamiken und Ressourcenexploration über 3+ Generationen. NICHT verwenden für kognitive Einzelfallanalysen (dafür cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="genogram-work banner">
 

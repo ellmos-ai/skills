@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  試験対策、自己評価テスト、模擬試験の作成と分析手法を提供します。
+updated: 2026-11-09
+description: "試験対策として模擬試験、セルフテスト、または体系的な誤答分析を行う場合に使用する（例：'このトピックで小テストを出して'、'模擬試験を作成'、'理解度を確認'、/academic-study-test）。模擬テスト、採点基準、重点的な弱点診断を生成する。最初の基礎学習（academic-study-learn）や日程管理（academic-study-control）には使用しない。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-ja]
 language: ja
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

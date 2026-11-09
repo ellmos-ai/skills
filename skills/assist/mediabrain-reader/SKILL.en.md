@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analyzes supplied media lists and metadata independently of any specific media app.
+updated: 2026-11-09
+description: "Use when parsing and cataloging media lists, reading logs, movie watchlists, or media metadata (e.g. 'analyze media collection', 'catalog books and films', 'structure watchlist', /mediabrain-reader). Analyzes media catalogs and metadata app-agnostically. Do NOT use for fetching video subtitle transcripts (use utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

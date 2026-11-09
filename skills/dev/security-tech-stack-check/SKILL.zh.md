@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "依据当前权威安全公告核查实测组件，仅在明确授权和配置下执行可回读的修复。"
+updated: 2026-11-09
+description: "当扫描系统运行环境的技术栈与项目依赖项中已知的 CVE 漏洞或配置缺陷时使用（例如 '排查技术栈安全漏洞'、'审计项目依赖库'、'扫描环境 CVE'、/security-tech-stack-check）。基于真实测定的组件版本比对官方权威安全通告并区分实际受损与不确定性。切勿用于安装前的第三方插件暂存审计（使用 dev/sec-supplychain）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

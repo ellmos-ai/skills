@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analyzes supplied inventory lists or exports without depending on a specific inventory app.
+updated: 2026-11-09
+description: "Use when analyzing inventory sheets, pantry stocks, or exported storage lists (e.g. 'inspect inventory export', 'analyze stock levels', 'check pantry supplies', /hauslagerist-reader). Analyzes inventory spreadsheets, minimum thresholds, and stock exports vendor-neutrally. Do NOT use for computer disk storage cleanup (use utilities/speicherbereinigung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

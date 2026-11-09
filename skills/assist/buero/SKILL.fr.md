@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organise les tâches de bureau, la correspondance et les échéances sans dépendre d'une application particulière.
+updated: 2026-11-09
+description: "Utiliser pour organiser les tâches administratives, la correspondance professionnelle, les échéances et le classement (ex. 'organiser le bureau', 'rédiger un courrier officiel', 'gérer les délais administratifs', /buero). Structure les flux de travail de bureau et les délais indépendamment de tout logiciel spécifique. Ne PAS utiliser pour les courriels personnels informels (utiliser privat-mail-writer) ou le marketing."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

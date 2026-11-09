@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Systemische Fragetechniken: Zirkuläre Fragen, Skalierungsfragen, Wunderfrage und Ausnahmefragen zur Reflexion und Perspektiverweiterung.
-
+updated: 2026-11-09
+description: "Verwenden, wenn feste Denkmuster durch systemische Fragen aufgeweicht und neue Perspektiven eröffnet werden sollen (z. B. 'zirkuläre Fragen stellen', 'Perspektiven wechseln', 'Verschlimmerungsfragen nutzen', /systemic-questioning). Vermittelt systemische Fragetechniken: zirkuläre Fragen, hypothetische Fragen, Skalierungsfragen und paradoxe Reflexionsanstöße. NICHT verwenden für reine Datenabfragen oder strukturierte Entscheidungsmatrizen (dafür utilities/decide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 <img src="banner.png" width="100%" alt="systemic-questioning banner">
 
 # Systemische Fragetechniken

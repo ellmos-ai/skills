@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 文档需求分析：分析 docs/ 文件夹中的概念与需求文档，将需求与当前代码进行对比检查，并生成整合的差异报告。
+updated: 2026-11-09
+description: "当对照实际实现代码审计架构文档、技术规格或需求规划，或者整合汇总多份规划文档时使用（例如 '对照代码审计文档'、'合并整理多份规划'、'分析文档与代码偏差'、/docs-analysis）。客观比对纸面规划与代码实现，标出落地偏差并汇总待办事项。切勿用于图表语法的静态校验（使用 dev/mermaid-lint）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 

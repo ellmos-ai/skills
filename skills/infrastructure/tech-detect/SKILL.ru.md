@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Создаёт приватные снимки оборудования и версий ПО с указанием источников и сравнивает хосты, не считая отсутствие наблюдения удалением программы."
+updated: 2026-11-09
+description: "Используйте для аудита, инвентаризации и сравнения версий аппаратного обеспечения, ОС, ПО и сред Python на основе точных замеров (например, 'определить стек технологий', 'инвентаризация железа и софта', 'замер версий системы', /tech-detect). Формирует доказательный отчет techshot и сравнивает состояния хоста. НЕ используйте для оценки уязвимостей и CVE (используйте dev/security-tech-stack-check)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="tech-detect banner">
 

@@ -4,12 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  通用 LLM 导航、定向与紧急恢复能力 Skill。
-  在 Agent 面临上下文漂移、工具失效、循环死锁或到达死胡同（死局）时，
-  提供主动路径规划、自我定向与恢复启发式规则。包含同义词策略：
-  survival-routing、dead-reckoning、pathfinder-routing 以及 celestial-routing。
+updated: 2026-11-09
+description: "当智能体在任务执行中遭遇上下文漂移、陷入重复死循环、工具连续调用失败或认知死胡同时使用（例如 '丢失上下文'、'陷入重复死循环'、'重新找回方向与重点'、/wayfinding-routing）。提供主动寻路启发法、航位推测恢复及地标重新对齐机制以回归原始目标。切勿用于正常的目录层级遍历（使用 staircase-routing）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -29,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="wayfinding-routing banner">
 

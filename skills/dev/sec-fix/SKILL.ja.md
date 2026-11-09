@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "明示的な依頼があった場合にのみ、確認済みの所見（status が validated または triaged）に対する最小限のセキュリティパッチを作成する。作業は元のリポジトリではなく、スクラッチコピーまたは worktree で行い、patches/<id>.diff として出力する。適用、コミット、プッシュは行わない。トリガー：「この所見を修正して」「SEC-... のパッチ」「この脆弱性を塞いで」。通常のバグ修正（bugfix-protocol を使う）、パッチの評価（sec-verify-fix）、問題の発見（sec-scan）には使わない。"
+updated: 2026-11-09
+description: "検証済みのセキュリティ脆弱性に対して、最小限の隔離されたセキュリティパッチを作成する場合に使用する（例：'セキュリティ脆弱性を修正'、'SEC-...のパッチを作成'、'脆弱性を塞ぐ'、/sec-fix）。直接のコミットやプッシュを行わず、作業コピー内でピンポイントのdiffパッチを作成する。通常の機能バグ修正（bugfix-protocol）やパッチの有効性検証（sec-verify-fix）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

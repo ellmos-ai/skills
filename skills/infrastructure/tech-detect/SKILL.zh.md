@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "记录有来源证据的硬件和软件版本，生成私有快照，并在不把未观察到误判为卸载的前提下比较主机。"
+updated: 2026-11-09
+description: "当基于可验证的执行证据采集、审计或比对本地硬件配置、操作系统、应用软件及 Python 运行时版本时使用（例如 '探测技术栈环境'、'盘点主机软硬件资产'、'测定系统组件版本'、/tech-detect）。生成附带命令输出依据的 techshot 报告并精确比对主机演进状态。切勿用于 CVE 漏洞评估（使用 dev/security-tech-stack-check）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="tech-detect banner">
 

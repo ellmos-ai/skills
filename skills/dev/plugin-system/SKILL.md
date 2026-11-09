@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Generic plugin system for Python applications. Auto-discovery, validation, fault tolerance. Zero dependencies (Python stdlib only).
-
+updated: 2026-11-09
+description: "Verwenden, wenn eine Python-Anwendung um eine dynamische, fehlertolerante Plugin-Architektur mit Auto-Discovery erweitert werden soll (z. B. 'Plugin-System implementieren', 'Plugins dynamisch laden', 'Erweiterbarkeit für Tool', /plugin-system). Stellt eine saubere, erweiterbare Plugin-Architektur ohne externe Abhängigkeiten bereit. NICHT verwenden für die Sicherheitsprüfung fremder Plugins (dafür dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 

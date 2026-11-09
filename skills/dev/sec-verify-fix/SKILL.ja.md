@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "セキュリティパッチが脆弱性を本当に塞いでいるかを独立して確認する（パッチ適用後の状態で source-to-sink の経路をたどり直し、ネガティブテストと回帰テストを行う）。回帰リスクと、自動マージが妥当かどうか（critical/high では既定で不可）を評価する。読み取り専用のレビューで、何も適用しない。トリガー：「パッチで穴は塞がったか」「パッチをレビューして」「修正を検証して」、status が fixed の所見。パッチの作成（sec-fix）や一般的なコードレビューには使わない。"
+updated: 2026-11-09
+description: "セキュリティパッチが脆弱性を確実に解消し、リグレッションを引き起こしていないかを独立した視点から検証する場合に使用する（例：'セキュリティ修正を検証'、'パッチが穴を塞いでいるか確認'、'パッチの有効性を監査'、/sec-verify-fix）。読み取り専用でSource-to-Sinkのデータフローと回帰テストを追跡し、副作用リスクを判定する。パッチ自体の作成（sec-fix）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

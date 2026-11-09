@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Comprueba de forma independiente si un parche de seguridad cierra realmente la vulnerabilidad (volver a trazar la ruta source-to-sink sobre el estado parcheado, prueba negativa y de regresión), valora el riesgo de regresión y si un merge automático sería defendible (por defecto: no para critical/high). Revisión de solo lectura, no aplica nada. Disparadores: '¿el parche cierra la brecha?', 'revisar el parche', 'verificar la corrección', un hallazgo en estado fixed. No es para escribir el parche (sec-fix), ni para la revisión de código en general."
+updated: 2026-11-09
+description: "Usar cuando se verifique de forma independiente si un parche de seguridad elimina con éxito la vulnerabilidad sin causar regresiones (ej. 'verificar corrección de seguridad', 'comprobar si el parche cierra la brecha', 'auditar efectividad del parche', /sec-verify-fix). Vuelve a rastrear flujos de origen a destino en modo lectura y evalúa el riesgo de regresión. NO usar para programar el parche inicial (usar sec-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

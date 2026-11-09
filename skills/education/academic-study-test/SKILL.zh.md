@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  用于考试准备、自我测试、模拟考试设计及错误分析。
+updated: 2026-11-09
+description: "当通过练习测试、模拟试题或系统性错题分析来备考复习时使用（例如 '就此主题对我进行提问'、'生成模拟考卷'、'测试我的理解程度'、/academic-study-test）。生成模拟试题、评分标准并诊断知识盲区。切勿用于基础知识的初次研读（使用 academic-study-learn）或日程跟踪（使用 academic-study-control）。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-zh]
 language: zh
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

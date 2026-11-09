@@ -4,13 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  ユニバーサル LLM ナビゲーション、オリエンテーション、および緊急リカバリスキル。
-  エージェントがコンテキストの漂流（コンテキストドリフト）、ツールの失敗、ループ、
-  または行き止まりに直面した際に、アクティブな経路探索（Wayfinding）、自己定位、
-  および復旧ヒューリスティクスを提供します。同義語戦略：survival-routing、
-  dead-reckoning、pathfinder-routing、celestial-routing を含みます。
+updated: 2026-11-09
+description: "エージェントがコンテキストを見失ったり、反復ループに陥ったり、ツールが連続失敗して行き詰まった場合に使用する（例：'コンテキスト喪失'、'ループから抜け出せない'、'目的への再定位と集中'、/wayfinding-routing）。能動的な針路修正（ウェイファインディング）、推測航法、ランドマークへの再固定手順を提供する。通常のディレクトリ走査（staircase-routing）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -30,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="wayfinding-routing banner">
 

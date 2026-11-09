@@ -1,11 +1,11 @@
 ---
 name: repo-publish-check
-description: 在代码库首次公开前或后续复查时使用的用户中立检查，覆盖隐私、秘密信息、许可证、第三方内容、文档和批准状态，但不执行公开操作。
+description: "当在公开发布或版本发布前对 Git 仓库进行客观合规审计以杜绝泄密时使用（例如 '发布前检查代码仓库'、'发版前合规审查'、'核验发布就绪度'、/repo-publish-check）。以只读方式检查隐私边界、敏感密钥、开源许可证、第三方归属及文档健全度。切勿用于执行实际的代码推送或发布操作（使用 dev/github-repo-care）。"
 version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
+updated: 2026-11-09
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -20,6 +20,7 @@ dependencies:
   protocols: []
   python: []
 ---
+
 
 <img src="banner.png" width="100%" alt="repo-publish-check banner">
 

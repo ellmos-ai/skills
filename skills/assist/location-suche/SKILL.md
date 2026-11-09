@@ -4,10 +4,9 @@ version: 1.0.0
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-08-23
+updated: 2026-11-09
 category: assist
-description: Location, restaurant and hotel search via OpenStreetMap (Nominatim + Overpass API). Returns POIs (Points of Interest) near a location or searches by free text.
-
+description: "Verwenden, wenn Orte, Adressen, Restaurants oder Points of Interest (POI) über OpenStreetMap gesucht werden sollen (z. B. 'Restaurant in der Nähe suchen', 'Adresse geokodieren', 'POI in Stadt finden', /location-suche). Sucht standortbezogene POIs und Geokoordinaten via Nominatim und Overpass API ohne API-Key. NICHT verwenden für vollständige Routen- und Fahrzeitberechnung von A nach B (dafür assist/reiseroute)."
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
 standalone: true
 anthropic_compatible: true
@@ -21,6 +20,7 @@ provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/ag
 language: de
 visibility: public
 ---
+
 <img src="banner.png" width="100%" alt="location-suche banner">
 
 # Location-Suche

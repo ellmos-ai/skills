@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Создает портативное рабочее пространство ИИ на USB-накопителе или любом другом диске. RAG-пайплайн с локальными моделями LLM (Ollama), векторной базой данных (ChromaDB) и предустановленными промптами.
-
+updated: 2026-11-09
+description: "Используйте для развертывания портативного автономного ИИ-окружения на USB-накопителе или внешнем диске (например, 'портативный ИИ-стек', 'ИИ на флешке', 'офлайн локальный RAG', /ai-portable-setup). Настраивает локальные LLM (Ollama), векторную базу (ChromaDB) и промпты для полностью автономной работы без сети. НЕ используйте для общего онбординга ПК (используйте system-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 

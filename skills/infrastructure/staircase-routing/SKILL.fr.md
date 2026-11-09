@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: "[Français] Compétence d'agent pour staircase-routing: Isolated navigation and routing strategy that searches upward and downward through directory hierarchies for signpost documents (CLAUDE.md, AGENTS.md, README.md, RULES.md) and user-configurable buzzwords (via staircase-config.json or config.json). Also known as Up-and-Down Routing or Walking Bass Routing."
+updated: 2026-11-09
+description: "Utiliser pour parcourir l'arborescence des répertoires de haut en bas afin de découvrir les documents directeurs comme CLAUDE.md, AGENTS.md ou RULES.md (ex. 'rechercher les règles dans l'arborescence', 'trouver les guides de contexte', 'routage en escalier', /staircase-routing). Parcourt systématiquement les dossiers parents et enfants pour identifier les règles en vigueur. Ne PAS utiliser si la racine du projet est déjà connue (utiliser load-project)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
 ---
+
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 

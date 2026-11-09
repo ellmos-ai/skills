@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Aktives Lernen, Erarbeitung von Fachinhalten und strukturierte Erstellung von Synthesen.
+updated: 2026-11-09
+description: "Verwenden, wenn Fachinhalte im Studium aktiv erarbeitet, strukturiert zusammengefasst oder synthetisiert werden sollen (z. B. 'Vorlesung zusammenfassen', 'Fachliteratur erarbeiten', 'Lernskript erstellen', /academic-study-learn). Unterstützt aktives Lernen, Begriffsnetzwerke und Wissenssynthesen. NICHT verwenden für Fristenorganisation (dafür academic-study-control) oder Prüfungssimulationen (dafür academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +15,8 @@ language: de
 status: active
 visibility: public
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

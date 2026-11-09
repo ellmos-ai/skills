@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Organiza tareas de oficina, correspondencia y plazos sin depender de una aplicación concreta.
+updated: 2026-11-09
+description: "Usar cuando se requiera organizar tareas administrativas, correspondencia formal, plazos y trámites de oficina (ej. 'organizar tareas de oficina', 'redactar carta formal', 'gestionar plazos de oficina', /buero). Estructura flujos de trabajo administrativos y correspondencia de manera neutral respecto a aplicaciones. NO usar para correos personales breves (usar privat-mail-writer) ni campañas de marketing."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

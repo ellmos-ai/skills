@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "プロバイダー中立の ellmos セキュリティスキルファミリー（sec-*）の入口兼ルーター。脅威モデルからスキャン、検証、トリアージ、修正、確認、追跡、レポートまでの各フェーズを整理し、適切なスキルを案内する。トリガー：「セキュリティレビュー」「このリポジトリの脆弱性を確認して」「どのセキュリティスキルを使うべきか」「PR をセキュリティチェックして」「サードパーティのプラグインを確認して」「SECURITY.md」「開示」。自分では検査を行わない。作業は sec-* の各スキルと、ここではリンクするだけの隣接スキルが担う。"
+updated: 2026-11-09
+description: "セキュリティ監査の計画、脆弱性のトリアージ、またはsec-*ファミリーから適切なセキュリティスキルを選択する場合に使用する（例：'セキュリティレビュー'、'リポジトリの脆弱性チェック'、'どのセキュリティスキルを使うべきか'、/ellmos-security）。脅威モデリング、スキャン、トリアージ、修正、検証、開示をつなぐ総合案内役を務める。パッチの直接作成（sec-fix）やスキャンの直接実行（sec-scan）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

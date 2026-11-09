@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Provides system-neutral support for adventures, scenes, characters, and campaign organization.
+updated: 2026-11-09
+description: "Use when planning, running, or worldbuilding tabletop role-playing games (TTRPG), campaigns, adventures, and NPCs (e.g. 'generate NPC', 'plan RPG campaign session', 'design adventure encounter', /rpg). Supports game masters and players system-neutrally with worldbuilding, story arcs, and scenes. Do NOT use for video game source code or board game manuals."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

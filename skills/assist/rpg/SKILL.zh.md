@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  以系统中立方式支持冒险、场景、角色和战役组织。
+updated: 2026-11-09
+description: "当准备或主持桌面角色扮演游戏（TRPG/跑团）、战役剧本、非玩家角色（NPC）及冒险遭遇场景时使用（例如 '生成 NPC'、'规划跑团模组会话'、'设计冒险遭遇'、/rpg）。以规则系统中立的方式协助主持人与玩家进行世界观构建、剧情线推演与场景编排。切勿用于电子游戏代码开发或桌面桌游说明书编写。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

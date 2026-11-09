@@ -4,8 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Transcribe archivos de audio/video a texto. Utiliza Whisper (openai-whisper) o Vosk (offline) como backend opcional; ambos se detectan mediante comprobación de presencia. Sin backend: modo marcador de posición con salida simulada (dry-run)."
+updated: 2026-11-09
+description: "Usar cuando se transcriban archivos de audio o vídeo locales a texto escrito (ej. 'transcribir archivo de audio', 'convertir voz en texto', 'transcribir nota de voz', /transkription). Emplea Whisper o Vosk como motor local sin conexión con respaldo automático. NO usar para descargar subtítulos de YouTube en línea (usar utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="transkription banner">
 

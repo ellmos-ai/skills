@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Defines, reviews or updates a repo's SECURITY.md (scope, excluded areas, required security properties, reporting channel, response times, supported versions) and checks its claims against the actual code. The policy is the basis for sec-triage. Triggers: 'create/check SECURITY.md', 'security policy', 'what counts as a vulnerability here', 'define the reporting channel'. Not for findings (sec-scan), not for disclosure reports (sec-writeup)."
+updated: 2026-11-09
+description: "Use when authoring, reviewing, or updating a project's SECURITY.md policy and disclosure guidelines (e.g. 'create SECURITY.md', 'review security policy', 'define vulnerability disclosure channels', /sec-policy). Establishes scope, response SLAs, disclosure procedures, and verifies policy claims against code. Do NOT use for running vulnerability scans (use sec-scan) or writing disclosures (use sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

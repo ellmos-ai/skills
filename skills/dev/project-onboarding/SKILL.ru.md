@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Стандартная процедура адаптации/интеграции (onboarding) новых программных проектов: анализ функций, проверка качества кода, чек-лист адаптации и создание задач."
+updated: 2026-11-09
+description: "Используйте для быстрого погружения в новый программный репозиторий, анализа его архитектуры и настройки начального рабочего процесса (например, 'онбординг в проект', 'анализ архитектуры кодовой базы', 'первичная настройка репозитория', /project-onboarding). Оценивает функционал, качество кода и зависимости, формируя практический чек-лист внедрения. НЕ используйте для простого обхода папок (используйте infrastructure/staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 

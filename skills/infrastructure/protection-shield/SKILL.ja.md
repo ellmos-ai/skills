@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "許可された緊急防御と定期的なサーバーログ・構成確認を、証拠と復旧手順に結び付ける。"
+updated: 2026-11-09
+description: "サーバーへの攻撃、不審なアクセス急増、または異常な活動に対して、緊急の防御策やログ分析を迅速に調整・実行する場合に使用する（例：'サーバーを防御'、'プロテクションシールド起動'、'緊急防御対応'、/protection-shield）。ログ解析、一時的なアクセス制限、防護措置をロールバック可能な安全な手順で指揮する。平時の基本OS堅牢化（os-hardening-baseline）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-tech-stack-check], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="protection-shield banner">
 

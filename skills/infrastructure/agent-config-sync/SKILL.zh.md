@@ -4,9 +4,8 @@ version: 0.3.0
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-07-27
-description: 跨代理提供商和应用类同步 MCP 配置、Skill 和规则文件的无特定供应商规划器。它能自动发现本地有依据的选项，并允许用户选择事实源、目标、方向及冲突解决策略。
-
+updated: 2026-11-09
+description: "当在多个智能体提供方之间跨工具中立地规划和同步 MCP 服务端配置、技能库及规则指令文件时使用（例如 '同步智能体配置'、'跨工具对齐 MCP'、'跨智能体镜像技能'、/agent-config-sync）。探查本地配置选项并由用户决策唯一事实来源与冲突解决策略。切勿用于单纯的独立 MCP 配置同步（使用 mcp-config-sync）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 

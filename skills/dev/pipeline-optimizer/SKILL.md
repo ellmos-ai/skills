@@ -4,10 +4,9 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-06-13
+updated: 2026-11-09
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: Structured 6-step procedure for improving, renovating, or rebuilding existing pipelines, individual project folders, documentation structures, or software stacks. Addressable as "pipeline optimizer" (for whole topic pipelines, e.g. a software, research, or game-dev pipeline) or "project-folder optimizer" (for individual project folders within a pipeline, e.g. a single software tool or paper project). Triggers on tasks like "improve pipeline X", "optimize the stack", "rebuild Y", "renovation", "pipeline refactoring", "clean up project folder", "improve folder structure", "unify conventions", "documentation consolidation", "integrate into existing system", or any substantial intervention in established structures. Delivers building-stock analysis, purpose clarification, ideal sketch, gap plan, empirical pain-point identification, and retests with fresh subagents. Prevents parallel standards, duplication, and pipeline breaks.
-
+description: "Verwenden, wenn bestehende Toolchains, Projektstrukturen, Dokumentationsabläufe oder Pipelines renoviert und vereinheitlicht werden sollen (z. B. 'Pipeline renovieren', 'Ordnerstruktur aufräumen', 'Projektstruktur optimieren', /pipeline-optimizer). Führt ein strukturiertes 6-Schritte-Verfahren durch: Bestandsanalyse, Zweckklärung, Zielbild, Lückenplan, Pain Points und Neutests. NICHT verwenden für isolierte Bugfixes an einzelnen Funktionen (dafür bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -20,6 +19,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 

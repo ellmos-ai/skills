@@ -4,9 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-23
-description: >
-  根据支持目标、年龄及难度生成个性化工作单与练习材料。
+updated: 2026-11-09
+description: "当制作教学练习纸、训练习题或课堂讲义时使用（例如 '制作作业单'、'生成练习题'、'设计学习材料'、/worksheet-generator）。生成具有清晰题干和参考答案的可定制工作单。切勿用于整体教学辅导规划（使用 foerderplaner）。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [worksheet-generator, worksheet-generator-zh]
 language: zh
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 

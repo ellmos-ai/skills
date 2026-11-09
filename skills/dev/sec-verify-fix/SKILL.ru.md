@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Независимо проверяет, действительно ли патч безопасности закрывает уязвимость (повторно проследить путь source-to-sink на исправленном состоянии, негативный и регрессионный тест), оценивает риск регрессии и допустимость автоматического слияния (по умолчанию: нет для critical/high). Ревью только для чтения, ничего не применяет. Триггеры: 'закрывает ли патч брешь', 'проверить патч', 'верифицировать исправление', находка в статусе fixed. Не для написания патча (sec-fix), не для общего ревью кода."
+updated: 2026-11-09
+description: "Используйте для независимой проверки того, устраняет ли патч уязвимость без внесения регрессий (например, 'проверить исправление безопасности', 'закрывает ли патч брешь', 'аудит эффективности патча', /sec-verify-fix). В режиме чтения проверяет поток данных от источника к стоку и оценивает риск регрессий. НЕ используйте для самого написания патча (используйте sec-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

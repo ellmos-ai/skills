@@ -4,11 +4,8 @@ version: 1.4.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Metakognitive Injektoren und Selbstgesprächs-Strategien (Self-Talk, Metacognitive Auditing, Evaluator Hooks, Pre-Flight Checklists, State Persistence & Personas).
-  Integriert Aktive Informationssuche (Systemgedächtnis Gardener & USMC), Rehearsal (Aktives Abrufen & Wiedergeben), Baddeleys Arbeitsgedächtnis (State + Hooks),
-  Miyake Exekutivfunktionen sowie CBT/ACT therapeutische Strategien.
+updated: 2026-11-09
+description: "Verwenden, wenn Denk- und Problemlöseprozesse des Agenten durch metakognitive Selbstreflexion, strukturierte Checklisten oder Arbeitsgedächtnis-Hooks gestärkt werden sollen (z. B. 'metakognitiv reflektieren', 'Selbstgespräch-Audit', 'Denkprozess strukturieren', /metacognitive-injectors). Integriert aktives Abrufen, Arbeitsgedächtnis-Modelle und kognitive Selbstüberwachung in komplexe Aufgaben. NICHT verwenden für rein emotionale Selbstberuhigung (dafür therapy/stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -24,6 +21,7 @@ dependencies:
   protocols: []
   python: []
 ---
+
 
 <img src="banner.png" width="100%" alt="metacognitive-injectors banner">
 

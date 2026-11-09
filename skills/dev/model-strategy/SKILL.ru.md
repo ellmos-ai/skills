@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
-description: Мультимодельная оркестрация и стратегия переключения моделей. Выбор модели на основе оценки (score), делегирование между агентами (Gemini, Codex, Ollama), связывание с советником (advisor), триггеры эскалации, матрица прав и оптимизация стоимости.
+updated: 2026-11-09
+description: "Используйте для выбора оптимальной модели LLM и уровня рассуждений (reasoning) в мультиагентных процессах и подзадачах (например, 'выбрать модель для задачи', 'стратегия моделей для субагентов', 'модель для код-ревью', /model-strategy). Распределяет роли (мыслитель, исполнитель, ревьюер, эскалация) по уровням моделей с учетом сложности и затрат. НЕ используйте для финансового учета токенов (используйте infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

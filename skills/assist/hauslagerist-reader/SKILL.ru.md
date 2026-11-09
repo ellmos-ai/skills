@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Анализирует предоставленные списки или выгрузки без привязки к складской программе.
+updated: 2026-11-09
+description: "Используйте для анализа инвентарных описей, складских запасов или выгрузок по имуществу (например, 'проанализировать выгрузку склада', 'проверить уровень запасов', 'анализ инвентарного списка', /hauslagerist-reader). Оценивает списки запасов и минимальные остатки независимо от складских программ. НЕ используйте для очистки жесткого диска компьютера (используйте utilities/speicherbereinigung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

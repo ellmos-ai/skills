@@ -4,9 +4,9 @@ version: 1.2.0
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-06-13
+updated: 2026-11-09
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
-description: Procedimiento estructurado de 6 pasos para mejorar, renovar o reconstruir pipelines existentes, carpetas de proyectos individuales, estructuras de documentación o stacks de software. Se activa con tareas como "mejorar pipeline X", "optimizar el stack", "reconstruir Y", "renovación", "refactorización de pipeline", "limpiar carpeta de proyecto", "mejorar estructura de carpetas", "unificar convenciones", "consolidación de documentación", "integrar en sistema existente" o cualquier intervención sustancial en estructuras establecidas. Ofrece análisis de estructura existente, clarificación de propósito, boceto ideal, plan de brechas, identificación empírica de puntos de dolor y reevaluación con nuevos subagentes. Evita estándares paralelos, duplicación y rupturas en el pipeline.
+description: "Usar cuando se renueven, reestructuren o unifiquen cadenas de herramientas, arquitecturas de carpetas o flujos documentales existentes (ej. 'renovar pipeline', 'reestructurar carpeta del proyecto', 'optimizar toolchain', /pipeline-optimizer). Aplica un procedimiento de 6 pasos: inventario, clarificación de propósito, diseño ideal, plan de brechas y pruebas empíricas. NO usar para corregir errores puntuales en una sola función (usar bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optimizer/', 'origin_version': '1.1.1', 'last_sync_from_origin': '2026-05-16', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 

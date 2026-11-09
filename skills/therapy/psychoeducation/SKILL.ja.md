@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: うつ病、不安障害、PTSD、双極性障害、統合失調症、ADHD、境界性パーソナリティ障害に関する心理教育。診断を行わない知識の共有。
+updated: 2026-11-09
+description: "精神的健康状態、症状、または脆弱性-ストレスモデルについて客観的で偏見のない知識を提供する場合に使用する（例：'不安症状の理解'、'うつ病/ADHDの心理教育'、/psychoeducation）。生物心理社会モデル、神経生物学的知見、エビデンスに基づく治療選択肢を平易に解説する。個人の確定診断を下すことや専門的治療の代替には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

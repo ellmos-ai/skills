@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 二重/三重エンコードされたUTF-8の文字化け（Mojibake）修復。Windows cp1252/Latin-1 の誤解釈を修正。依存関係ゼロ。
-
+updated: 2026-11-09
+description: "テキストファイルが文字化けや誤ったエンコーディングによって破損している場合に使用する（例：'文字化けを修復'、'エンコーディングの不整合を修正'、'二重エンコードされたUTF-8'、/encoding-fix）。外部依存関係なしでcp1252、Latin-1、多重エンコードされたUTF-8ファイルを修復する。破損のない正常な形式変換には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 

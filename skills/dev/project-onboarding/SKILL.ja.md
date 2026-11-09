@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 新しいソフトウェアプロジェクトのオンボーディングに関する標準手順：機能分析、コード品質レビュー、オンボーディングチェックリスト、およびタスク作成。
+updated: 2026-11-09
+description: "初めて触れるソフトウェアリポジトリを体系的に分析し、全体像を把握して初期の開発ワークフローを立ち上げる場合に使用する（例：'新規プロジェクトのオンボーディング'、'コードベースの構造分析'、'リポジトリ初期セットアップ'、/project-onboarding）。機能、コード品質、依存関係を評価し、具体的なオンボーディングチェックリストを作成する。単純なフォルダー移動探索（infrastructure/staircase-routing）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 

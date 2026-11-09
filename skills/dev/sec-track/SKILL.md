@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Macht validierte Sicherheitsfunde nachverfolgbar: legt nach Vorschau und Bestätigung ein Ticket (ticket_writer.py), ein GitHub-Issue oder ein Draft-Security-Advisory (gh) an, prüft vorher Duplikate per Finding-id, schreibt keine Geheimnisse in den Text und trägt die Referenz in finding.ticket zurück. Auslöser: 'Fund tracken', 'Ticket für SEC-...', 'Advisory anlegen', 'Funde ins Backlog'. Kein Linear/Jira. Nicht für Fachberichte (sec-report) und nicht für die Offenlegung nach außen (sec-writeup)."
+updated: 2026-11-09
+description: "Verwenden, wenn bestätigte Sicherheitsfunde nachverfolgbar in Tickets, GitHub Issues oder Draft Security Advisories überführt werden sollen (z. B. 'Sicherheitsfund tracken', 'Security-Ticket für SEC-... anlegen', 'Draft Advisory erstellen', /sec-track). Erstellt Tickets ohne sensible Geheimnisse und verlinkt Tracking-IDs mit Fundakten. NICHT verwenden für öffentliche Offenlegungsberichte an Maintainer (dafür sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

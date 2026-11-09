@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-30
-updated: 2026-07-30
-description: Injecteurs métacognitifs et stratégies d'auto-dialogue (Self-Talk, Audit Métacognitif, Evaluator Hooks). Prévient les déclarations prématurées de succès via des évaluateurs de qualité multi-modèles.
+updated: 2026-11-09
+description: "Utiliser pour renforcer le raisonnement et la résolution de problèmes chez l'agent via l'audit métacognitif et des stratégies de mémoire de travail (ex. 'réflexion métacognitive', 'audit du dialogue interne', 'structurer le raisonnement', /metacognitive-injectors). Intègre le rappel actif, les modèles de mémoire de travail et l'auto-évaluation dans les tâches complexes. Ne PAS utiliser pour l'apaisement émotionnel de crise (utiliser therapy/stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -15,6 +15,7 @@ aliases: [self-talk, metacognitive-self-talk, metacognitive-auditing, evaluator-
 language: fr
 status: active
 ---
+
 
 <img src="banner.png" width="100%" alt="metacognitive-injectors banner">
 

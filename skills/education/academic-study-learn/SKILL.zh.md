@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  提供主动学习技术、概念合成与知识结构化方法。
+updated: 2026-11-09
+description: "当需要主动学习大学专业知识、提炼讲座内容或编写体系化学研笔记时使用（例如 '总结讲座'、'研读章节'、'制作复习笔记'、/academic-study-learn）。促进主动回忆、结构化综合以及概念图构建。切勿用于截止日期管理（使用 academic-study-control）或模拟考自测（使用 academic-study-test）。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-zh]
 language: zh
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

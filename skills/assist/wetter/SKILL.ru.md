@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: Отвечает на вопросы о погоде для указанного места или координат через wttr.in (бесплатно, без API-ключа). Текущая погода + прогноз на 3 дня. Местоположение берется из запроса пользователя или настроек; опциональное краткосрочное кэширование.
+updated: 2026-11-09
+description: "Используйте для запроса текущей погоды или прогноза на 3 дня для города либо координат (например, 'какая погода в...', 'прогноз погоды на завтра', 'будет ли сегодня дождь', /wetter). Получает погоду и прогноз в реальном времени через wttr.in без API-ключа. НЕ используйте для исторических климатических исследований или астрономических расчетов."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="wetter banner">
 

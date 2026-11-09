@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "[Français] Compétence d'agent pour migrate-rename: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage."
+updated: 2026-11-09
+description: "Utiliser pour renommer ou déplacer des fichiers, modules ou répertoires sans casser les imports et références existants (ex. 'renommer fichier sans casser les imports', 'déplacer module avec wrappers', 'créer un stub MOVED', /migrate-rename). Crée des wrappers rétrocompatibles et des stubs de redirection clairs pour une transition en douceur. Ne PAS utiliser pour de simples renommages git acceptant des ruptures de compatibilité."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

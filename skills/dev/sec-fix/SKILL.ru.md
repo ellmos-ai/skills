@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Создаёт, ТОЛЬКО по явному запросу, минимальный патч безопасности для подтверждённой находки (статус validated или triaged) - в рабочей копии или worktree, никогда в оригинале, как patches/<id>.diff без применения, коммита и push. Триггеры: 'исправить эту находку', 'патч для SEC-...', 'закрыть эту уязвимость'. Не для обычного исправления ошибок (использовать bugfix-protocol), не для оценки патча (sec-verify-fix), не для поиска проблем (sec-scan)."
+updated: 2026-11-09
+description: "Используйте для создания точечного изолированного патча безопасности под подтвержденную уязвимость (например, 'исправить уязвимость', 'создать патч для SEC-...', 'закрыть уязвимость', /sec-fix). Формирует минимальный diff-патч в рабочей копии без применения, коммита или пуша. НЕ используйте для обычных функциональных багов (используйте bugfix-protocol) или проверки патча (используйте sec-verify-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Gestión académica de estudios y plazos con verificación de fuentes, privacidad
-  y planificación realista de acciones.
+updated: 2026-11-09
+description: "Usar cuando se requiera gestionar calendarios de estudio universitario, plazos de módulos o normativas de exámenes (ej. 'planificar mi semestre', 'gestionar plazos de estudio', 'organizar periodo de exámenes', /academic-study-control). Organiza plazos y normativas con verificación de fuentes y privacidad. NO usar para el aprendizaje activo de asignaturas (usar academic-study-learn) ni simulacros de examen (usar academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-es]
 language: es
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

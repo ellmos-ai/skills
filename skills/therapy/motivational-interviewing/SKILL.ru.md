@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Мотивационное интервью (МИ) по Миллеру и Роллнику: техники OARS, высказывания в пользу изменений, стимулирование готовности к переменам."
+updated: 2026-11-09
+description: "Используйте для работы с амбивалентностью в отношении изменения поведения и укрепления мотивации к переменам (например, 'мотивационное интервью', 'разрешить сомнения', 'стимулировать разговоры об изменениях', /motivational-interviewing). Обучает методу Миллера и Роллника: принципам OARS, балансу решений и вызову реплик об изменениях. НЕ используйте для директивных предписаний или конфронтации."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 

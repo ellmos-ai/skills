@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Минимально обрабатывает добровольно предоставленные контакты и находит возможные дубликаты.
+updated: 2026-11-09
+description: "Используйте для ведения адресной книги, обновления контактных данных и устранения дубликатов с соблюдением конфиденциальности (например, 'сохранить контакт', 'обновить адресные данные', 'найти дубликаты контактов', /kontaktbuch). Надежно структурирует записи и выявляет совпадения локально. НЕ используйте для массового аутрича в соцсетях (используйте dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="kontaktbuch banner">
 

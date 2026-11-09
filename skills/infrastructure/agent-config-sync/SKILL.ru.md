@@ -4,9 +4,8 @@ version: 0.3.0
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-07-27
-description: Независимый от провайдера планировщик для синхронизации конфигураций MCP, навыков и файлов правил между провайдерами агентов и классами приложений. Он обнаруживает подтвержденные локальные параметры и позволяет пользователю выбирать источник истины, цели, направление и разрешение конфликтов.
-
+updated: 2026-11-09
+description: "Используйте для планирования и синхронизации настроек MCP-серверов, навыков и файлов правил между разными фреймворками агентов (например, 'синхронизировать настройки агентов', 'согласовать MCP между инструментами', 'зеркалировать навыки', /agent-config-sync). Находит локальные конфигурации и дает пользователю выбрать источник правды и разрешение конфликтов. НЕ используйте для синхронизации только MCP (используйте mcp-config-sync)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -19,6 +18,7 @@ aliases: [mcp-skill-sync, multi-agent-sync, tool-config-sync, agent-sync]
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-config-sync/', 'origin_version': '0.3.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 

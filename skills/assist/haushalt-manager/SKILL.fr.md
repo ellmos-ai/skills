@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Planifie les tâches, routines et responsabilités du foyer sans dépendre d'une application.
+updated: 2026-11-09
+description: "Utiliser pour planifier les tâches ménagères, les routines d'entretien, la maintenance des équipements et la répartition des corvées (ex. 'planning des tâches ménagères', 'organiser l'entretien du logement', 'calendrier de maintenance maison', /haushalt-manager). Établit des plannings de gestion domestique clairs et indépendants de toute application. Ne PAS utiliser pour les dossiers administratifs (utiliser assist/buero) ou l'inventaire des stocks (utiliser assist/hauslagerist-reader)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

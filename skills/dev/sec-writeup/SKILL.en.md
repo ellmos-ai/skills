@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Turns notes, PoC and findings into a self-contained, sceptically checked vulnerability report for coordinated disclosure: affected versions, reproduction steps, impact, fix, timeline. PoC kept minimal (no weaponised exploit), secrets redacted, every claim backed by evidence or marked unverified. Triggers: 'write the disclosure', 'vulnerability report', 'advisory text', 'report to the maintainer'. Not for the internal scan report (sec-report) and not for the ticket (sec-track)."
+updated: 2026-11-09
+description: "Use when writing a rigorous, evidence-based vulnerability disclosure report or advisory for maintainers (e.g. 'write vulnerability disclosure', 'draft security advisory', 'coordinated disclosure writeup', /sec-writeup). Formulates clear reproduction steps, impact assessments, and remediation guidance with sanitized PoCs. Do NOT use for internal backlog tracking (use sec-track)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

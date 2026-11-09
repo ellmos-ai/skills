@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 认知行为疗法（CBT）：ABC 模型、自动思维、识别认知歪曲以及填写思维记录表。
+updated: 2026-11-09
+description: "当审视并挑战消极自动思维、灾难化沉思或认知扭曲时使用（例如 '重构消极想法'、'填写思维记录表'、'识别认知偏差'、/cognitive-restructuring）。系统讲授贝克的认知 ABC 模型，识别认知偏差并引导苏格拉底式提问。切勿用于不进行认知辩驳的纯接纳解离（使用 act-techniques）或家族系统分析（使用 genogram-work）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

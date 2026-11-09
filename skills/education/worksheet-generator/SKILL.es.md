@@ -4,10 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-23
-description: >
-  Generación de hojas de trabajo y material de práctica individualizado
-  para profesionales educativos y terapéuticos a partir de un objetivo de apoyo.
+updated: 2026-11-09
+description: "Usar cuando se requiera generar fichas de trabajo didácticas, ejercicios de práctica o material imprimible (ej. 'crear ficha de trabajo', 'generar ejercicios prácticos', 'diseñar material educativo', /worksheet-generator). Crea fichas de trabajo adaptables con enunciados claros y hojas de respuestas. NO usar para la planificación pedagógica integral (usar foerderplaner)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +14,8 @@ aliases: [worksheet-generator, worksheet-generator-es]
 language: es
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 

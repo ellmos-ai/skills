@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Positive Psychology according to Seligman: PERMA model, character strengths (VIA), gratitude exercises, flow theory, and resilience factors."
-
+updated: 2026-11-09
+description: "Use when cultivating well-being, character strengths, and psychological resilience (e.g. 'identify signature strengths', 'gratitude interventions', 'apply PERMA model', /positive-psychology). Leverages Seligman's PERMA pillars, VIA character strengths, and flow experiences for strength-based growth. Do NOT use for treating clinical depression or acute crisis (use behavioral-activation or stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

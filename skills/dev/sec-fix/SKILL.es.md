@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Genera, SOLO a petición expresa, un parche de seguridad mínimo para un hallazgo confirmado (estado validated o triaged) - en una copia de trabajo o worktree, nunca en el original, como patches/<id>.diff sin aplicarlo, sin commit ni push. Disparadores: 'corregir este hallazgo', 'parche para SEC-...', 'cerrar esta vulnerabilidad'. No es para la corrección de errores ordinarios (usar bugfix-protocol), ni para juzgar un parche (sec-verify-fix), ni para encontrar problemas (sec-scan)."
+updated: 2026-11-09
+description: "Usar cuando se requiera elaborar un parche de seguridad mínimo y aislado para una vulnerabilidad validada (ej. 'corregir vulnerabilidad de seguridad', 'crear parche para SEC-...', 'cerrar brecha de seguridad', /sec-fix). Genera parches diff mínimos en copias de trabajo aisladas sin aplicar, confirmar ni empujar directamente. NO usar para correcciones funcionales comunes (usar bugfix-protocol) ni para verificar parches (usar sec-verify-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

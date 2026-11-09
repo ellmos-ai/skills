@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 德·沙泽尔与伯格的焦点解决短期治疗（SFBT）：奇迹提问、例外探索、评定量表与资源激活。
+updated: 2026-11-09
+description: "当将注意力迅速从问题根源转向切实可行的解决方案及已有资源潜能时使用（例如 '奇迹提问'、'寻找问题的例外情况'、'刻度量表提问'、/solution-focused-therapy）。应用德·沙泽尔与茵素·金·伯格的焦点解决短期治疗工具：奇迹提问、刻度化与例外探寻。切勿用于探究深层历史根源。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  特定の在庫アプリに依存せず、提供された在庫一覧やエクスポートを分析します。
+updated: 2026-11-09
+description: "在庫管理シート、パントリー備蓄リスト、または出力された倉庫データを分析・整理する場合に使用する（例：'在庫エクスポートを検査'、'備蓄レベルを分析'、'在庫品リストを照合'、/hauslagerist-reader）。特定の在庫管理ソフトに縛られず、数量、最小基準値、品目リストを評価する。PCのディスク容量削減（utilities/speicherbereinigung）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

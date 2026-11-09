@@ -4,8 +4,8 @@ version: 0.2.0
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-06-19
-description: 当用户希望以自己的风格撰写、回复、拒绝、跟进、缩短、重述或起草私人或半正式电子邮件时，尤其是在安排预约、官方拒绝、友好简短回复以及根据联系人调整语气时，应使用此 Skill。仅在有具体邮件撰写任务时才启动分析文件。
+updated: 2026-11-09
+description: "当以真实自然的个人语调起草、回复或润色私人或半正式电子邮件时使用（例如 '写邮件给……'、'起草礼貌的谢绝信'、'精简邮件并跟进'、/privat-mail-writer）。根据收件人和场景定制语气得体、简练明确的邮件。切勿用于商业营销推广或群发外联（使用 dev/community-outreach）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 

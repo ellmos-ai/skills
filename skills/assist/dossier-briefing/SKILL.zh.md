@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: 生成主题或人员的结构化研究简报 Markdown 骨架（标准输出或文件）。无持久化存储。
+description: "当需要就特定主题或人物生成结构化 Markdown 调研简报或深度档案时使用（例如 '建立调研档案'、'生成主题简报'、'整理人物背景档案'、/dossier-briefing）。无需持久化存储即可输出包含核心事实、信源依据及未决疑问的规范简报框架。切勿用于决策结论压缩（使用 decision-shot）或学术研究流程（使用 research/research-agent）。"
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: dossier_briefing_core.py
 provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\n'}
 language: zh
 ---
+
 
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 

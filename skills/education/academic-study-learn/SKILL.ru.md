@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Методы активного обучения, синтез концепций и структурирование знаний.
+updated: 2026-11-09
+description: "Используйте, когда нужно активно освоить учебный материал, законспектировать лекции или подготовить структурированный конспект (например, 'законспектировать лекцию', 'разобрать главу', 'составить конспект для учебы', /academic-study-learn). Помогает в активном повторении, структурировании знаний и концептуальных связях. НЕ используйте для контроля дедлайнов (используйте academic-study-control) или тестов (используйте academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-ru]
 language: ru
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Aide de façon neutre pour les aventures, scènes, personnages et campagnes.
+updated: 2026-11-09
+description: "Utiliser pour préparer et animer des campagnes de jeux de rôle sur table (JdR), aventures, personnages non-joueurs (PNJ) ou scènes (ex. 'générer un PNJ', 'préparer une session de JdR', 'créer une rencontre', /rpg). Accompagne meneurs et joueurs de façon neutre dans la création d'univers, d'arcs narratifs et d'intrigues. Ne PAS utiliser pour le code de jeux vidéo ou les règles de jeux de plateau."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

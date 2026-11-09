@@ -4,22 +4,9 @@ version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-07-30
+updated: 2026-11-09
 aliases: [repo-after-care, repo-pflege, after-care, repo-nachpflege, repo-wartung]
-description: >
-  Ronda de mantenimiento regular para un repositorio publicado de GitHub (Nivel 1,
-  económica y repetible con frecuencia): primero identificar todas las superficies de distribución del proyecto
-  (npm, PyPI, registros, marketplaces, tiendas, sitio web) y reflejar los cambios allí más adelante,
-  luego establecer temas (topics), ejecutar la puerta de privacidad, verificar documentos por intención de publicación e
-  ignorar retroactivamente archivos de planificación internos, agregar banners, cotejar afirmaciones en el README con el código real,
-  mejorar la presentación, completar versiones de idioma del README, implementar medidas de visibilidad, verificar la entrada
-  en la página de la organización y procesar issues y pull requests abiertos.
-  Usa esta habilidad cuando debas mantener, limpiar, actualizar, pulir o "revisar de nuevo" un repo existente,
-  cuando un repo parezca desactualizado o desordenado, con frases como "mantenimiento de repo", "after care",
-  "poner repo al día", "limpiar y pushear" o en rondas de calidad rotativas entre varios repositorios.
-  Para la ronda profunda que incluye chequeo legal y referencias cruzadas entre organizaciones, usa en su lugar full-after-care;
-  para la publicación inicial, usa github-repo-care.
-
+description: "Usar cuando se requiera mantener, limpiar, actualizar o pulir un repositorio de GitHub publicado (ej. 'mantenimiento de repo', 'after care', 'actualizar repo', 'limpiar y hacer push', /surface-after-care). Ejecuta un mantenimiento ligero de nivel 1: revisa canales de distribución, asigna topics, ejecuta puerta de privacidad, alinea el README con el código real, añade banners, completa traducciones y atiende issues/PRs abiertos. NO usar para auditorías profundas con revisión legal y referencias cruzadas (usar full-after-care) ni para la publicación inicial (usar github-repo-care)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -45,6 +32,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="surface-after-care banner">
 # Surface After Care — La ronda de mantenimiento regular para un repositorio publicado

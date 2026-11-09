@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Comparison of the four guideline-approved psychotherapy approaches in Germany: Cognitive Behavioral Therapy, Psychodynamic Therapy, Psychoanalysis, Systemic Therapy — Orientation guide."
-
+updated: 2026-11-09
+description: "Verwenden, wenn eine neutrale Orientierung über Richtlinienpsychotherapie-Verfahren in Deutschland gesucht wird (z. B. 'welche Therapieform passt', 'Unterschied KVT und Tiefenpsychologie', 'Therapieverfahren vergleichen', /guideline-therapies-overview). Vergleicht KVT, Tiefenpsychologisch fundierte Psychotherapie, Analytische Psychotherapie und Systemische Therapie hinsichtlich Indikation, Dauer und Setting. NICHT verwenden für akute Interventionen oder Diagnosevergabe."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

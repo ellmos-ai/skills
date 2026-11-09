@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analysiert bereitgestellte Medienlisten und Metadaten unabhängig von einer bestimmten Medien-App.
+updated: 2026-11-09
+description: "Verwenden, wenn Medienlisten, Watchlists, Buchsammlungen oder Audio-/Videometadaten strukturiert analysiert werden sollen (z. B. 'Medienliste auswerten', 'Filme/Bücher katalogisieren', 'Watchlist strukturieren', /mediabrain-reader). Verarbeitet und ordnet Mediensammlungen und Metadaten unabhängig von proprietären Streaming- oder Medien-Apps. NICHT verwenden für die Extraktion von Video-Untertiteltexten (dafür utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

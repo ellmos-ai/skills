@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  提供されたフォーム記述の構造、検証、明確さ、アクセシビリティを確認します。
+updated: 2026-11-09
+description: "フォーム定義仕様、JSONスキーマ、またはUI入力フォームの構造、アクセシビリティ、バリデーションロジックを検査する場合に使用する（例：'フォームスキーマを検証'、'フォームのアクセシビリティ確認'、'入力項目の構造レビュー'、/formbuilder-reader）。フィールド型、エラー表示、WCAG基準への準拠度を評価する。Webフォームの自動入力・送信実行（web/web-reading）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

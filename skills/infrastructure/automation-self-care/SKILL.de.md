@@ -1,33 +1,38 @@
 ---
 name: automation-self-care
-version: 1.1.0
+version: 1.6.0
 type: skill
 author: Lukas Geiger + OpenAI + Google Gemini
 created: 2026-07-28
-updated: 2026-08-20
+updated: 2026-11-01
 description: >
-  Erstellt und betreibt ein anbieterneutrales textbasiertes Governance- und Selbstpflege-Kernset
-  für geplante LLM-Aufgaben und Desktop-App-Automationen (TGAS - Text-Based Governance Automations Seed).
-  Erzwingt den strukturierten 3-Zeilen-Prompt-Standard ([TITEL], ZWECK, AUFGABE), 4-Stufen-Modellallokation
-  (inklusive Gemini 3.7 Flash), aktive Tokenverbrauchssteuerung mit dynamischer Drosselung,
-  Berechtigungs- und Sperrleitplanken sowie Fail-Closed-Sicherheit. Löst aus bei tgas,
-  textbased-governance-automations-seed, textbasierte-governance-automationen-seed,
-  textbased-governance-automations, textbasierte-governance-automationen, Automations-Selbstpflege,
-  Scheduler-Pflege, Prompt-Struktur-Standard oder ANTIGRAVITY-Governance-Aufgabenfamilie.
+  Baut und betreibt ein anbieterneutrales Self-Care-Kernset für geplante
+  LLM-Aufgaben und Desktop-App-Automationen. Nutzen, wenn ein Agent seinen
+  nativen Scheduler entdecken, wiederkehrende Hygiene-, Prompt-Qualitäts-,
+  Frequenz-, Last-, Ressourcen-, Cross-System-, Berechtigungs- und
+  Laufzeit-Checks installieren oder eine bestehende Automations-Flotte mit
+  Rollback, Readback und Löschschutz kontinuierlich verbessern soll. Löst
+  aus bei automation self-care, Scheduler-Task-Pflege, Desktop-App-
+  Automations-Wartung, Automations-Flotten-Audit, selbstheilende
+  Zeitpläne, Anfragen zur Wiederherstellung der ANTIGRAVITY-artigen
+  Wartungs-Task-Familie, core-set-textautomations, basic-text-automations,
+  textbased-automation-core, textbased-automation-drivers oder
+  textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
 bach_origin: false
 category: infrastructure
-tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, governance, token-governance, prompt-structure, tiering, tgas]
+tags: [automation, scheduler, desktop-apps, self-care, maintenance, rollback, cross-system, priority-matrix, indicator-tests]
 language: de
 status: active
-aliases: [textbased-governance-automations-seed, tgas, textbasierte-governance-automationen-seed, textbased-governance-automations, textbasierte-governance-automationen, textbased-governance-automatisations-seed, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations]
+visibility: public
+aliases: [core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-desktopapp-automations, goal-task-priority-matrix]
 dependencies:
   tools: []
   services: []
   protocols: []
-  python: [token_tracker.py, token_analytics_engine.py]
+  python: []
 provenance:
   origin: "custom"
   origin_path: null
@@ -35,113 +40,343 @@ provenance:
   origin_repo: "github.com/ellmos-ai/skills"
   last_sync_from_origin: null
   last_sync_to_origin: null
-  local_changes_since_sync: false
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="automation-self-care banner">
 
-# Automations-Selbstpflege & Textbasierte Governance-Engine
+# Automation Self-Care
 
-Erstelle und betreibe eine native, anbieterneutrale **Textbasierte Governance- und Selbstpflege-Flotte** für geplante Agenten-Automatisierungen und Hintergrund-Worker. Bewahre die vollständige Architektur und Absicht der ANTIGRAVITY-Wartungsfamilie durch evidenzbasierte Optimierung, reversible Änderungen, aktive Token-Governance, 4-Stufen-Modellallokation und nativen Readback.
+Erstellt eine native, anbieterspezifische Wartungs-Flotte aus einer einzigen
+anbieterneutralen Regelschleife. Bewahrt die ursprüngliche Absicht der
+ANTIGRAVITY-Task-Familie, verlangt dabei aber Belege, reversible Änderungen
+und native Readbacks.
 
----
+## Nicht verhandelbare Grenzen
 
-## Nicht verhandelbare Grenzen & Governance-Leitplanken
+- Discovery, Planung, Freigabe, Mutation und Readback als getrennte Phasen
+  behandeln.
+- Die unterstützte Automations-API, den Befehl oder die UI der Ziel-App
+  nutzen. Niemals annehmen, dass das Bearbeiten einer Speicherdatei den
+  Live-App-State ändert.
+- Lokale Regeln, Locks, Lösch-/Suppression-Logs und bestehende Zeitpläne
+  lesen, bevor ein Task vorgeschlagen wird.
+- Keine Scheduler-Unterstützung erfinden. Kann Create/Update/Readback nicht
+  belegt werden, einen manuellen Installationsplan erstellen und vor der
+  Mutation anhalten.
+- Höchstens eine unabhängig testbare Tuning-Änderung je Care-Lauf.
+- Die Care-Tasks davor schützen, sich selbst zu deaktivieren oder ihren
+  eigenen Takt unter den konfigurierten Recovery Floor zu senken. Nur eine
+  ausdrückliche Nutzerentscheidung, ein Sicherheitsgate oder ein belegter
+  Notfall darf eine kontrollierte Pause autorisieren.
+- Stabile maschinelle Task-IDs unabhängig von sichtbaren Titeln halten. Ein
+  App-Präfix als zusätzlichen Erkennbarkeits-Schutz behandeln, niemals als
+  Identität oder als Ersatz für Recovery-, Suppression-, Rollback- und
+  Readback-Kontrollen.
+- Den vorherigen Prompt, Zeitplan, Modell, Berechtigungen und Aktiv-Status
+  bewahren, damit jede Mutation zurückgerollt werden kann.
+- Erfolg erst nach Ergebnis-Beleg zählen, nicht bloß nach Scheduler-Start
+  oder Exit 0.
+- Niemals Geheimnisse, private Prompts oder personenbezogene Daten in eine
+  geteilte Registry kopieren.
 
-1. **Strukturierter 3-Zeilen-Prompt-Header-Standard**:
-   Jeder automatisierte Task-Prompt MUSS zwingend mit dem standardisierten 3-Zeilen-Kopf beginnen, um korrekte UI-Titelgenerierung in der Conversation History und sofortige Scope-Klarheit zu garantieren:
-   ```text
-   [TITEL_DER_AUTOMATION_IN_GROSSBUCHSTABEN]
-   ZWECK: <Prägnante 1-2 Zeilen Zusammenfassung des Ziels>
-   AUFGABE: <Konkrete Arbeitsanweisungen, Kriterien, Schwellenwerte>
-   
-   --- GOVERNANCE, WORKFLOW & HOOKS ---
-   1. POLICY: Lies eine lokale `~/.gemini/AUTOMATION_POLICY.md`, falls vorhanden; der Pfad ist in letter-hooker `config.example.json` konfigurierbar.
-   2. DOCUMENT TRAVERSAL: ../letter-hooker/hooks/bootloader_doc_traversal.md
-   3. PREFLIGHT & MEMORY: ../letter-hooker/hooks/preflight_gardener_query.md
-   4. PATHS & AUTHORITY: ../letter-hooker/hooks/path_validation_and_authority.md
-   5. WORKFLOW HYGIENE & LOCKS: ../letter-hooker/hooks/workflow_lock_and_git_hygiene.md
-   6. LOGGING: Registriere Ergebnisse in 'AUTOMATIONS-MEMORY.md' & 'ANTIGRAVITY-LOG.txt'.
-   ```
-2. **Vier-Stufen-Modellallokation (Budget & Leistungsstufen)**:
-   - **Tier 1 (High-Speed & Routine-Hygiene):** `Gemini 3.6 Flash (High)` (Wächter-Tasks, Token-Tracker, Verzeichnis-Sync, Umlaute, MCP-Pflege).
-   - **Tier 2 (Advanced Logic & Code Dev):** `Gemini 3.7 Flash (High)` (Software-Entwicklung, GitHubBot Discoverability/Marketing, Roblox Lua, LaTeX-Design, Prompt-Verbesserung).
-   - **Tier 3 (Deep Science & Kritische Reviews):** `Gemini 3.1 Pro (High)` / Claude (Mathematische Modellanalysen, Friedensforschung, Fachsprachen-Checks).
-   - **Tier 4 (Schwere Multi-File-Refactorings):** `Codex (GPT-5.4)` / Claude Code (Große Architektur-Umbauten).
-3. **Aktive Token-Governance & Drosselungsregeln**:
-   - **Immunitäts-Regel:** Aufgaben mit `ANTIGRAVITY` oder Kern-Governance-Rollen im Namen dürfen NIEMALS deaktiviert werden.
-   - **Guthaben > 50%:** Normalbetrieb; automatische Wiederherstellung aller zuvor gedrosselten Tasks und Originalmodelle (`RESTORED_ALL_SETTINGS`).
-   - **Guthaben < 20%:** Pausiere Aufgaben mit `LOW`-Priorität (`LOW_CREDIT_THROTTLING_ACTIVE`).
-   - **Guthaben < 10%:** Kritische Drosselung; belasse ausschließlich `HIGH`-Priorität aktiv und schalte Modelle auf Flash um (`CRITICAL_THROTTLING_ACTIVE`).
-4. **Wächter-Immunität & Probe-Aktivierungs-Protokoll**:
-   - Deaktiviere Wächter- oder Standby-Tasks niemals blind, nur weil ein Einzellauf keine Arbeit vorfand.
-   - Teste zuvor deaktivierte Aufgaben mit hoher Nutzerpriorität **schrittweise einzeln** (Probe-Aktivierung) und entscheide erst im Folgelauf anhand der Erfolgsnachweise über die dauerhafte Aktivierung.
-5. **Berechtigungs- & Sperrleitplanken (Fail-Closed)**:
-   - Respektiere aktive Repository-Sperren (z. B. `LOCK.user.buildweek-no-push.txt` für BACH und BYUM).
-   - Führe niemals unautorisierte Produktions-Uploads oder destruktive Massenänderungen durch.
-   - Bei unklaren Berechtigungen gilt sofortiges **Fail-Closed** (read-only Abbruch).
+## Ablauf
 
----
+### 1. Die native Automationsoberfläche entdecken
 
-## Multi-Provider-Unterstützung & Adapter-Zuordnung
+Den aktuellen Akteur, Anbieter, nicht-sensitiven `app_display_name`,
+App-Klasse, Scheduler-Oberfläche, unterstützte Operationen, State-Dateien,
+Lauf-Historie, Nutzungstelemetrie und Readback-Methode inventarisieren.
+Fähigkeiten über den Profilvertrag in
+[provider-adapter-contract.md](references/provider-adapter-contract.md)
+festhalten.
 
-TGAS ist vollständig **anbieterneutral** und bildet alle Desktop-KI-Agenten-Frameworks ab:
+Native Desktop-App-Zeitpläne, CLI-/Headless-Ausführung, OS-Scheduler oder
+Service-Starter, allgemeinen Scheduler-Dienst, Workflow-Engine und nicht
+unterstützte oder nur-UI-Automation unterscheiden. Die Existenz einer
+Konfigurationsdatei nicht mit einem unterstützten Mutationspfad
+gleichsetzen.
 
-| Anbieter / Framework | Native Scheduler-Oberfläche | Speicherort & Konfiguration | Primäre Modelle |
-| :--- | :--- | :--- | :--- |
-| **Google Antigravity / Gemini CLI** | `sidecar_data/<task>/sidecar.json` | JSON args-Array + Letter Hooks | `Gemini 3.6 Flash`, `3.7 Flash`, `3.1 Pro` |
-| **OpenAI Codex Desktop / Codex App** | `~/.codex/automations/` | `scheduled_tasks.toml` & `config.json` | `gpt-5.4`, `gpt-5-codex`, `gpt-5.1-mini` |
-| **Anthropic Claude Desktop / Cowork** | `claude-desktop` Sessions / Task Scheduler | `applied-tasks.json` & `settings.json` | `claude-3-7-sonnet`, `claude-3-5-haiku` |
-| **ChatGPT / Headless CLI** | OS Cron / Windows Aufgabenplanung | YAML- / JSON-Deskriptoren | Provider-APIs / Open-Compute |
+### 2. Die Flotte inventarisieren
 
-Detaillierte Implementierungsschemata und Fähigkeiten-Profile sind dokumentiert in:
-- [provider-adapter-contract.md](references/provider-adapter-contract.md) (Capability-Profile JSON-Schema und Mutations-Verträge)
-- [core-set.md](references/core-set.md) (Detaillierte Topologie- und Evidenzregeln)
+Für jeden Task einen stabilen lokalen Identifier, semantische Rolle,
+sichtbaren Titel, Zweck, Prompt-Fingerprint, Zeitplan, Aktiv-Status, Modell,
+Reasoning, Berechtigungen, Zielpfade, letztes Scheduler-Ereignis, letztes
+erfolgreiches Ergebnis und aktuellen Owner erfassen. Prompt-Inhalt lokal
+halten.
 
----
+Bestehende Tasks semantisch abgleichen, bevor eine Neuanlage vorgeschlagen
+wird. Zuerst stabile Task-ID, dann anbieter-native ID, semantische Rolle und
+bekannter Legacy-Titel bevorzugen. Ein abweichender sichtbarer Titel ist
+kein Beleg dafür, dass ein neuer Task nötig ist. Mehrdeutige Treffer
+blockieren den Plan, statt ein Duplikat anzulegen.
 
-## Vollständige 10-Task Governance-Topologie
+Die maßgebliche Live-Oberfläche vor jeder Mutation zweimal prüfen, wenn die
+App State aus dem Gedächtnis neu schreiben kann.
 
-| # | Task-Bezeichner | Standard-Takt | Modell-Tier | Kern-Governance-Verantwortung |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | `antigravity-maintainer` | `35 1,13 * * *` | Tier 1 (3.6 Flash) | Verzeichnishygienie, SQLite-Vakuumierung, Bereinigung verwaister Dateien. |
-| 2 | `antigravity-token-watcher` | `18 * * * *` | Tier 1 (3.6 Flash) | Live-Telemetrie, SQLite-Sync, 7d/30d Burn-Vorhersagen, dynamische Drosselung. |
-| 3 | `antigravity-permissioner` | `37 19 * * *` | Tier 1 (3.6 Flash) | Workspace-Grenzen, Lock-Durchsetzung, Pfad-Autorisierung. |
-| 4 | `antigravity-sheduler-state-controller` | `26 5,17 * * *` | Tier 1 (3.6 Flash) | Statuskontrolle, Probe-Aktivierungen, Erkennung defekter Tasks. |
-| 5 | `antigravity-sheduled-task-sentiziser` | `27 2,14 * * *` | Tier 1 (3.6 Flash) | Arbeitslast-basierte Cron-Taktregulierung (Frequenz anheben/senken). |
-| 6 | `antigravity-task-sheduler-burden-divisor` | `40 20 * * *` | Tier 1 (3.6 Flash) | Lastverteilung, Entzerrung von Lastspitzen, Kollisionsvermeidung. |
-| 7 | `antigravity-sheduler-text-improver` | `30 6 * * *` | Tier 2 (3.7 Flash) | Prompt-Qualitätsaudits, Behebung irreführender Guidance (3-Zeilen-Kopf). |
-| 8 | `antigravity-task-sync` | `50 10,22 * * *` | Tier 1 (3.6 Flash) | Bidirektionale Spiegelung zwischen aktiven Sidecars und Referenzkatalog. |
-| 9 | `antigravity-file-bond-corrector` | `57 23 * * *` | Tier 1 (3.6 Flash) | Pfadbindungen, Namenskonventionen (`NAMING-SYSTEM.md`), Reparatur defekter Links. |
-| 10 | `antigravity-kontext-and-workflow-loader-and-divider` | `2 * * * *` | Tier 1 (3.6 Flash) | Stichwortindex-Pflege (`STICHWORTLISTE.json`), Kontext- & Letter-Hook-Ladung. |
+### 3. Das Core-Set entwerfen
 
----
+[core-set.md](references/core-set.md) lesen. Wählen zwischen:
 
-## Pflegeschleifen-Ablauf
+- `compact`: fünf Care-Tasks, die Frequenz mit Lastverteilung kombinieren;
+  oder
+- `full`: neun fokussierte Tasks entsprechend der ursprünglichen
+  Wartungs-Familie.
 
-```text
-Prüfung des vorigen Laufs
-  -> Evidenz des Arbeitsergebnisses erheben
-  -> Token- & Guthabenstatus prüfen (token_tracker.py)
-  -> Locks & Permissions prüfen (Fail-Closed)
-  -> Höchstens EINE reversible Änderung anwenden (Prompt / Takt / Modell)
-  -> Nativen Readback & Verifikation durchführen
-  -> Quittung in AUTOMATIONS-MEMORY.md & ANTIGRAVITY-LOG.txt registrieren
+Einen anbieterneutralen Plan erzeugen:
+
+```bash
+python scripts/build_core_set.py provider-profile.json \
+  --topology compact --out automation-care-plan.json
+python scripts/build_core_set.py --lint-plan automation-care-plan.json
 ```
 
----
+Der Generator installiert niemals Tasks. Jede `blocked`-Fähigkeit prüfen und
+kollisionsfreie lokale Zeiten wählen, bevor der Plan angewendet wird. Neue
+Anbieter-Profile setzen `app_display_name` ausdrücklich; CI kann das mit
+`--strict-profile` erzwingen. Erzeugte sichtbare Titel nutzen
+`<APP_DISPLAY_NAME> — <CARE_TITLE>`, während `automation-care.*`-Task-IDs
+unverändert bleiben. Ein Codex-Profil nutzt `CODEX`.
 
-## Änderungsprotokoll
+### 4. Installation stufenweise
 
-### 1.1.0 (2026-08-20)
-- **Prompt-Struktur-Standard**: Verbindlicher 3-Zeilen-Prompt-Kopf (`[TITEL]`, `ZWECK:`, `AUFGABE:`) zur Vermeidung von UI-Titelverzerrungen.
-- **4-Stufen-Modellallokation**: Offizielle Aufnahme von `Gemini 3.7 Flash (High)` für Tier-2-Entwicklungsaufgaben.
-- **Token-Governance-Integration**: Kodifizierung der 3-Stufen-Drosselungslogik (`>50%`, `<20%`, `<10%`) und der `ANTIGRAVITY`-Immunitätsregel.
-- **10-Task Governance-Topologie**: Vollständige Dokumentation der 10 spezialisierten Wartungsaufgaben.
-- **Neuer Primär-Alias**: `textbased-governance-automations` / `textbasierte-governance-automationen`.
+Über den nativen Anbieter-Adapter installieren:
+
+1. Mit Hygiene im Read-only-Modus beginnen.
+2. Ressourcenschutz ergänzen.
+3. Prompt-Qualitäts-Tuning mit Rollback ergänzen.
+4. Frequenz- und Lasttuning erst ergänzen, wenn genug Lauf-Belege
+   vorliegen.
+5. Cross-System-Koordination zuletzt ergänzen.
+
+Für eine reine Titel-Migration den semantisch gematchten Task über die
+unterstützte native Oberfläche in-place aktualisieren. Die stabile ID und
+alle Nicht-Titel-Felder zurücklesen; jedes unerwartete operative Delta
+verlangt Rollback. Ein zweiter Plan-/Apply-Zyklus muss keine Änderung
+melden und darf keinen weiteren Task anlegen.
+
+Neue oder importierte Tasks deaktiviert anlegen, sofern der Nutzer die
+aktive Installation nicht ausdrücklich freigegeben hat. Für einen
+unbeaufsichtigten Pilotlauf zuerst ein Löschlog, einen
+Vorher-State-Snapshot, einen Laufbeleg und einen Rollback-Pfad verlangen.
+
+### 5. Die Care-Schleife ausführen
+
+Jeder Care-Task folgt:
+
+```text
+follow-up previous change
+  -> collect current evidence
+  -> classify one cause
+  -> choose zero or one change
+  -> mutate through native surface
+  -> read back
+  -> write receipt and next-check condition
+```
+
+Den Hypothesen-Katalog und die Belegregeln in
+[core-set.md](references/core-set.md) nutzen. Unbekannte Ursache bedeutet
+beobachten, Berechtigungen einschränken oder sicher pausieren; niemals eine
+Reparatur raten.
+
+### 6. Über Akteure hinweg koordinieren
+
+Lokalen App-State als maßgeblich behalten. Nur Task-Verträge, Abdeckung,
+Status, Belege und bereinigte Fingerprints teilen. Redundante Read-only-
+Reviews sind erlaubt; Single-Writer-Mutationen brauchen einen Claim oder
+einen gleichwertigen nativen Lock.
+
+### 7. Systeme ohne native Event-Hooks (Letter-Hooker-Erweiterung)
+
+
+Token- oder Abo-Limitierung als Kapazitätszustand behandeln, nicht als
+kaputten Akteur. Delegierte Abdeckung zurückgeben, nachdem der ursprüngliche
+Akteur einen erfolgreichen Beleg liefert.
+
+### 8. Antigravity / Gemini Plugin-Brücke & CareCenter-Integration
+
+Dieser Skill bleibt vollständig **anbieterneutral** für Codex, Claude, Kimi
+und generische Runner. Für **Google Antigravity / Gemini** gilt zusätzlich:
+
+- Da Antigravity den `<skills>`-Katalog bei großem Kontextbudget alphabetisch
+  abschneiden kann (`excluded due to context budget limits`), stellt dieser
+  Skill für Antigravity/Gemini ein dediziertes **Antigravity-Plugin** bereit:
+  `~/.gemini/config/plugins/automation-self-care/` (mit `plugin.json`,
+  `rules/AGENTS.md` und gebündeltem `skills/automation-self-care/SKILL.md`).
+- **Automatische Installation / Synchronisation:** Wenn ein Antigravity- oder
+  Gemini-Agent diesen Skill liest oder einrichtet, prüft er, ob das Plugin unter
+  `~/.gemini/config/plugins/automation-self-care/` installiert und in
+  `~/.gemini/config/config.json` unter `"plugins"` registriert ist, und führt
+  bei Bedarf sofort aus:
+  ```bash
+  python scripts/install_antigravity_plugin.py
+  ```
+- **Operative Werkzeuganbindung (`CareCenter-for-Antigravity`):** Für
+  Antigravity-spezifische Laufzeit-, DB-, Patch- und Start-Schutz-Operationen
+  (`safe-start`, `db-clean`, `ls-patch`, `switch`, `lint-sidecars`,
+  `report-bug`) verweist das Plugin auf **CareCenter for Antigravity**
+  (`<LOCAL_DEV_REPOS>/CareCenter-for-Antigravity`, CLI: `acc` bzw.
+  `python -m carecenter_antigravity`, inkl. `acc matrix init|test`).
+
+### 9. Minderabdeckungs-Erkennung (Under-Coverage) & Anbieter-spezifischer Lifecycle
+
+Ein häufiger Architekturfehler in Multi-App-Flotten ist die Annahme, dass alle
+Anbieter-Apps (z. B. Antigravity, Codex, Claude) immer gleichzeitig laufen. In
+der Praxis fällt regelmäßig ein Anbieter wegen Token-Limits, Fokus-Pausen oder
+Systemressourcen aus (**Solo-Betrieb**). Deshalb müssen die Self-Care-Tasks
+(`automation-care.scheduler-tuning`, `antigravity-sheduler-state-controller`,
+`antigravity-sheduled-task-sentiziser`, `antigravity-system-sync`) aktiv auf
+**Minderabdeckung (Under-Coverage)** prüfen und reagieren:
+
+1. **Drei quantitative Minderabdeckungs-Indikatoren (`coverage_audit`):**
+   - **Solo-Rotationszyklus ($T_{\text{cycle,solo}}$):** Verhältnis aus realer
+     Ziel-Pool-Größe $N_{\text{targets}}$ (z. B. 239 GitHub-Repos, 21
+     Roblox-Spiele) zur effektiven Tagesfrequenz eines einzelnen Anbieters
+     $F_{\text{solo}}$. Überschreitet $T_{\text{cycle,solo}} = N_{\text{targets}} / F_{\text{solo}}$
+     den Domänen-Schwellenwert (GitHub-Repos: $>25\text{ Tage}$, Roblox-Spiele:
+     $>14\text{ Tage}$), liegt eine Minderabdeckung vor.
+   - **Producer-Consumer-Ungleichgewicht:** Wenn arbeitserzeugende Tasks
+     (Producer, z. B. PR-Ersteller `githubbot-one-repo-cleaner` +
+     `githubbot-one-repo-marketing-and-design` mit $12 + 12 = 24\text{ Läufen/Tag}$)
+     häufiger laufen als abarbeitende Tasks (Consumer, z. B. PR-Merger
+     `githubbot-multi-bot`), wächst der Backlog ungebremst an. Regel:
+     $F_{\text{consumer,solo}} \ge F_{\text{producer,solo}}$.
+   - **Verwaiste Fach-Stationen (`Station Gap`):** Fällt für eine notwendige
+     Pipeline-Rolle (z. B. `ARTIST`, `SUBSYSTEM_SCOUT`, `SYSTEMS_DESIGNER`) die
+     Solo-Frequenz auf $F_{\text{solo}} = 0$, während dieselbe Rolle beim
+     Partner-Anbieter laut `automation-changes.log` ebenfalls pausiert oder
+     archiviert ist, muss der Care-Task reagieren.
+2. **Reaktion auf erkannte Minderabdeckung (Hypothese `h9`):**
+   - Anhebung der Cron-Frequenz (`args[0]`) des unterabgedeckten Tasks auf einem
+     freien Slot des harmonischen 8-Slot-Gitters (`:00, :07, :14, :20, :27, :35, :43, :51`), oder
+   - Probe-Aktivierung eines pausierten Spezial-Tasks inkl. Aktualisierung der
+     `STATUS-NOTIZ` und Eintrag in `OneDrive/.SYNC/automation-changes.log`.
+3. **Anbieter-spezifische Archivierung, Pausierung & `automation-changes.log`:**
+   - **Anbieter-Scope:** Eine Archivierung (`ARCHIVED`) oder Pausierung (`PAUSED`)
+     bleibt immer auf den jeweiligen Anbieter selbst beschränkt (damit
+     Redundanz/Failover bei anderen Anbietern erhalten bleibt).
+   - **Aus der GUI archivieren (`--archive-delete <id>`):** Nicht mehr benötigte
+     Automationen werden aus der Live-GUI entfernt (`config.json` + 3
+     Spiegelordner) und als `.prompt.txt` (reine Textdatei mit Begründungskopf),
+     `.md` und `.json` unter `OneDrive/.SYNC/_archive/deleted_automations/<provider>/`
+     gespeichert (jederzeit per `--restore <id>` wiederherstellbar).
+   - **Dauerhaft pausieren / reaktivieren (`STATUS-NOTIZ`):** Bei Automationen,
+     die pausiert oder wieder aktiviert werden, steht der Grund direkt unterhalb
+     der Kopfzeile (`[TAG] | ZWECK: ... | STATUS-NOTIZ (PAUSIERT/REAKTIVIERT <Datum> [Scope: <provider>]): <Grund> | AUFGABE: ...`),
+     sodass der Namens-/Tag-Präfix am Anfang unberührt bleibt.
+   - **Gemeinsames Log (`OneDrive/.SYNC/automation-changes.log`):** Alle Anbieter
+     protokollieren jede Erstellung, Pausierung, Reaktivierung, Taktänderung und
+     Archivierung mit Begründung in `OneDrive/.SYNC/automation-changes.log`
+     (Spiegel: `automatization-changes.log`).
+
+### 10. Nutzerneutrale Ziel-Aufgaben-Prioritäts- & Erfüllungs-Matrix v2.1 (`goal-task-priority-matrix`)
+
+Automationen sind Abdeckungsträger für **in Aufgaben kristallisierte Nutzerziele** (`T-01`–`T-NN`). Die vollständige, nutzer- und anbieterneutrale Vorlage samt Anleitungsskill ist direkt im Skill-Paket enthalten:
+- **Nutzerneutrale Referenz-Matrix & Template:** `references/goal-task-priority-matrix-template.md`
+- **Nutzerneutrales JSON-Schema-Template:** `references/priority_matrix.template.json`
+- **Anbieterneutraler Evaluator:** `python scripts/evaluate_task_fulfillment.py <path/to/priority_matrix.json>`
+- **Eigenständiger Anleitungsskill:** `../goal-task-priority-matrix/SKILL.md`
+- **Antigravity-optimierte Implementierung in CareCenter:** `acc matrix init` / `acc matrix test [--auto-heal-prompts]` (`docs/ANTIGRAVITY_GOAL_TASK_PRIORITY_MATRIX.md`)
+
+Kernprinzipien der Matrix-Steuerung (`<SYNC_DIR>/GOAL_TASK_PRIORITY_MODEL.md`, `<SYNC_DIR>/priority_matrix.json`, `<SYNC_DIR>/priority-change-log.txt`):
+
+1. **Zwei-Achsen-Priorisierung ($P_{\text{eff}}$):**
+   - **Achse 1 — Zweck-Cluster-Priorität ($P_{\text{Cluster}}$, `C-01` bis `C-12`):** Grundgewicht (`0..100`) nach ursprünglichem Nutzeranliegen.
+   - **Achse 2 — Thematische / Projekt-Priorität ($\Delta P_{\text{Project}}$):** Schwerpunkt-Boost für aktive Fokusprojekte (`<FOCUS_PROJECT_P0> = P0 (+30)`), sodass das wichtigste Projekt auch bei `<20%` Token-Quota (`LOW_CREDIT_SPARMODUS`) ungedrosselt weiterläuft.
+2. **Die 6 Ökosystem-Anschlusspunkte (Prioritäts- & Kontext-Sensoren):**
+   - **(1) Aktueller User-Chat & `/prios`** (`~/.local/state/agent-priorities/`)
+   - **(2) `/agenda-setting` & Strategische Pläne** (`~/.config/agent-agenda/profile.json`, `<CONTROL_DIR>/_PLANS/`)
+   - **(3) `decision-registry`** (`<CONTROL_DIR>/_DECISIONS/TO-DECIDE-USER.txt`, `DECIDED-AND-DONE.md`)
+   - **(4) `policy-registry`** (`<SYNC_DIR>/_policies/library/P-*.md`, insbes. `P-014` risikobasierte Autoritätsanpassung & `P-019` Multi-App-Abdeckung)
+   - **(5) Aktivitäts- & Backlog-Scanner (`gardener` / `scanner_tasks`)** (FTS5/Time-Decay `30m -> 24h -> 7d`)
+   - **(6) Empirisches Präferenz-Gedächtnis (`build-your-users-mind` / Prompt-Listener)** (`<CONTROL_DIR>/_USER-MIND/avatar/WHAT-USER-SAID.md`, `PROFIL.md`)
+3. **Autoritäts- & Einmaligkeits-Hierarchie (*„Einmal heißt nicht immer wieder“*):**
+   - **Einmal-Aufforderungen im Chat** sind zu **100 % autoritativ für den aktuellen Moment**, ändern aber **niemals** dauerhaft Cron-Takte oder Cluster-Prioritäten.
+   - **Regelmäßige Abläufe & Qualitäts-Gates** folgen den **kanonischen Regeln, Policies (`P-*.md`), lokalen Steuerdateien (`START.md`, `RULES.md`) und `SKILL.md`**.
+   - **Explizite Richtungsänderungen / Monatsagenden** im Chat aktualisieren `priority-change-log.txt` und `priority_matrix.json`.
+   - **Selbstheilende Lückenfüllung:** Neue Regeln/Upload-Gates werden in Projekt-Root-Steuerdateien (`START.md`, `GITHUB-POLICY.md`) und Skills hinterlegt; Automationen lesen diese beim Booten ein und füllen die Lücke dynamisch ohne Prompt-Hardcoding.
+4. **Falscher-Indikator-Schutz & Evidenz-Pflicht:**
+   - Cron-Frequenz und Cluster-Besetzungsstärke sind **keine verlässlichen Prioritäts-Marker** (oft nur durch Poolgröße wie 200+ Repos bedingt).
+   - Jede Prioritätsänderung in `priority-change-log.txt` benötigt ein wörtliches Evidenz-Zitat (`[EVIDENZ:STATUS-NOTIZ]`, `[EVIDENZ:CHAT-ZITAT]`, `[EVIDENZ:DECISION]`, `[EVIDENZ:POLICY]`, `[EVIDENZ:AGENDA]`, `[EVIDENZ:INDICATOR_TEST]`).
+5. **Aufgabenerfüllungs-Regelkreis (Qualität $I_{\text{Qual}}$ vs. Quantität/Masse $I_{\text{Quant}}$):**
+   Jede Teilaufgabe `T-01`–`T-NN` besitzt explizite, ausführbare **Indikator-Tests**:
+   - **Quantität ROT ($I_{\text{Quant}}$ = Stau/Backlog wächst oder `0%` aktive Abdeckung auf `P1`-Aufgabe bei GRÜNER Qualität):** Consumer-Frequenz erhöhen, Producer temporär drosseln oder pausierten `P1`-Spezialisten reaktivieren (Substance Gate).
+   - **Qualität ROT ($I_{\text{Qual}}$ = Fehlalarme durch fremde Provider-States, `Locked: 100%`-Bug, Step-3-Abbrüche, generische `ZWECK:`-Stubs, korrupte DB-Zeilen oder Root-Pollution in PRs):** **Kein** Frequenz-Hochziehen! Schreibpfad einschränken, Ursache in Code/Prompt/DB heilen (`PR-Self-Clearing Gate`, `Headless-Stabilitäts-Gate`, `db-clean`) und erst nach grünem Readback skalieren.
+
+## Pflicht-Ausgaben
+
+Für jeden Setup- oder Care-Lauf berichten:
+
+- entdeckte native Oberfläche und nicht unterstützte Fähigkeiten;
+- gewählte Topologie und angelegte, vorgeschlagene oder übersprungene
+  Tasks;
+- exakte Mutation und Vorher-/Nachher-Readback;
+- Ergebnis-Beleg oder offenes Beobachtungsfenster;
+- Rollback-Ort und Rückkehrbedingung;
+- geteiltes Abdeckungs-Update, falls eine Koordinations-Registry existiert.
+
+## Beispiel
+
+Nutzer: "Richte selbst-wartende Zeitpläne in dieser Desktop-App ein."
+
+Entdecken, ob die App geplante Tasks auflisten, anlegen, aktualisieren und
+verifizieren kann. Den kompakten Plan erzeugen, nicht unterstützte
+Fähigkeiten darlegen, dann nur die freigegebenen Tasks über die native
+Oberfläche installieren. Ein Ordner mit einem Task-Prompt ohne
+Live-Scheduler-Registrierung ist kein abgeschlossenes Setup.
+
+## Changelog
+
+### 1.6.0 (2026-11-01)
+
+- **Nutzer- & Anbieterneutrale Matrix-Vorlage (`v2.1`), Evaluator & Begleit-Skill (`goal-task-priority-matrix`):**
+  Bereitstellung von `references/goal-task-priority-matrix-template.md`, `references/priority_matrix.template.json` und `scripts/evaluate_task_fulfillment.py` sowie Verknüpfung mit dem eigenständigen Anleitungsskill `goal-task-priority-matrix` in `.SKILLS` und der Antigravity-optimierten Implementierung in `CareCenter-for-Antigravity` (`acc matrix init` / `acc matrix test`). Bereinigung aller persönlichen Pfade/Projektnamen zugunsten nutzerneutraler Platzhalter (`<SYNC_DIR>`, `<LOCAL_DEV_REPOS>`, `<FOCUS_PROJECT_P0>`).
+
+### 1.5.0 (2026-11-01)
+
+- **Modell v2.0 — 6 Ökosystem-Anschlusspunkte, Einmaligkeits-Hierarchie & Erfüllungs-Indikatoren ($I_{\text{Qual}}$ vs. $I_{\text{Quant}}$):**
+  Erweiterung von `GOAL_TASK_PRIORITY_MODEL.md` und `priority_matrix.json` auf v2.0: Anbindung an `/agenda-setting`, `/prios`, `decision-registry`, `policy-registry` (`P-014`/`P-019`), `gardener` und `build-your-users-mind` (`WHAT-LUKAS-SAID.md`). Verankerung der Einmaligkeits-Regel (*„Einmal heißt nicht immer wieder“*), des Falscher-Indikator-Schutzes, der 5 Evidenz-Klassen in `priority-change-log.txt` sowie der 56 Qualitäts-/Quantitäts-Indikatortests (`T-01`–`T-56`) mit differenziertem Self-Care-Eingriff bei ROT (Takt-Nachziehen bei Stau vs. `P-014`-Einschränkung + `text-improver` bei Qualitätsmangel).
+
+### 1.4.0 (2026-11-01)
+
+- **Ziel-Aufgaben-Prioritäts-Modell (2-Achsen-Priorisierung & GUI-Signal-Disambiguierung):**
+  Anbindung an `OneDrive/.SYNC/GOAL_TASK_PRIORITY_MODEL.md` (56 deduplizierte Teilaufgaben `T-01`–`T-56` in 12 Clustern `C-01`–`C-12`), `OneDrive/.SYNC/priority_matrix.json` und `OneDrive/.SYNC/priority-change-log.txt` (Cluster-Priorität vs. Projekt-Boost wie `BACH = P0` sowie Diagnose-Matrix für GUI-Pausierung vs. GUI-Löschung).
+
+### 1.3.0 (2026-11-01)
+
+- **Minderabdeckungs-Erkennung (Under-Coverage & Solo-Resilienz, Hypothese `h9`):**
+  Prüfung von Ziel-Pool-Größe vs. Solo-Tagesfrequenz ($T_{\text{cycle,solo}}$),
+  Producer-vs-Consumer-Gleichgewicht und verwaisten Pipeline-Stationen ergänzt.
+- **Anbieter-spezifisches Lifecycle-System:** GUI-entfernende Text-/JSON-Archivierung
+  (`--archive-delete` / `--restore`), `STATUS-NOTIZ` unterhalb des `[TAG] | ZWECK:`-Kopfes
+  und gemeinsames Cross-Provider-Log `OneDrive/.SYNC/automation-changes.log` verankert.
+
+### 1.2.0 (2026-10-31)
+
+- Anbieterneutralen Skill um die **Antigravity / Gemini Plugin-Brücke**
+  (`scripts/install_antigravity_plugin.py` -> `~/.gemini/config/plugins/automation-self-care/`)
+  ergänzt, damit `rules/AGENTS.md` dauerhaft im `<user_rules>`-Kontext
+  geladen bleibt, während der Skill für alle anderen Provider unverändert
+  anbieterneutral weiterläuft.
+- Anbindung an `CareCenter-for-Antigravity` (`dev-bricks`) für Safe Start,
+  SQLite-/Protobuf-Summary-Hygiene, Lifecycle-Patch und Bug-Reporting ergänzt.
+
+### 1.1.0 (2026-08-30)
+
+- Anbieterneutrales `app_display_name` und das sichtbare Titelformat
+  `<APP_DISPLAY_NAME> — <CARE_TITLE>` ergänzt, inklusive `CODEX — ...` über
+  das Codex-Adapter-Profil.
+- Plan-Linting, Stabile-ID-/Semantik-Abgleich und Duplikat-Schutz ergänzt.
+- Klargestellt, dass Naming zusätzlich zum Recovery Floor gilt und dass
+  reine Titel-Migrationen jeden Nicht-Titel-Fingerprint bewahren müssen.
 
 ### 1.0.1 (2026-07-30)
-- Ergänzung anbieterneutraler Alias-Begriffe für Text- und Desktop-App-Automationen.
+
+- Anbieterneutrale Text-Automations- und Desktop-App-Automations-Aliase
+  ergänzt.
 
 ### 1.0.0 (2026-07-28)
-- Konsolidierung der ursprünglichen ANTIGRAVITY-Aufgabenfamilie und des F1-F6-Regelkreises.
+
+- Die ursprüngliche ANTIGRAVITY-Wartungsfamilie, die F1-F6-Regelschleife und
+  spätere anbieterspezifische Anpassungen zu einem neutralen
+  Core-Set-Skill konsolidiert.

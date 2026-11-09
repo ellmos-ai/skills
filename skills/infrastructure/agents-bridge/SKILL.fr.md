@@ -4,8 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: "[Français] Compétence d'agent pour agents-bridge: Provider- and user-neutral bridge for agent, CLI, and IDE boot rules. It discovers known bootstrap surfaces, requires the user to select one or more ordered truth sources, and renders small loaders without duplicating rules."
+updated: 2026-11-09
+description: "Utiliser pour établir une passerelle de fichiers résiliente et neutre entre différents agents IA et machines (ex. 'passerelle multi-agents', 'connecter des systèmes d'agents', 'communication entre agents par fichiers', /agents-bridge). Fournit des espaces d'amorçage, des silos de mémoire, des signaux de présence, une messagerie et des verrous partagés. Ne PAS utiliser pour les fusions git courantes (utiliser dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -14,6 +14,7 @@ language: fr
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
-description: マルチモデルオーケストレーションおよびモデル切り替え戦略。スコアベースのモデル選択、クロスエージェント委任 (Gemini, Codex, Ollama)、アドバイザーペアリング、エスカレーションのトリガー、権限マトリクス、およびコスト効率の最適化。
+updated: 2026-11-09
+description: "マルチエージェント連携やサブエージェント業務において、適切なLLMモデルと推論リソース（Reasoning Effort）を割り当てる場合に使用する（例：'タスクに最適なモデルを選択'、'サブエージェントのモデル戦略'、'レビュアーモデルの指定'、/model-strategy）。複雑さとコストに応じて役割（思考役、作業役、レビュー役、エスカレーション役）ごとにモデル層を配分する。トークン予算の会計管理（infrastructure/budgetierung）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

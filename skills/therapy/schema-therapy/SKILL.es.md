@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Terapia de Esquemas según Jeffrey Young: esquemas, modos, concepto del niño interior y estilos de afrontamiento, presentados de forma psicoeducativa."
+updated: 2026-11-09
+description: "Usar cuando se examinen esquemas emocionales arraigados, patrones de vida repetitivos o modos de personalidad (ej. 'modos de terapia de esquemas', 'niño vulnerable y adulto sano', 'trampas vitales', /schema-therapy). Enseña el modelo de Jeffrey Young: esquemas tempranos desadaptativos, modos esquemáticos y estilos de afrontamiento. NO usar para activación conductual breve (usar behavioral-activation)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

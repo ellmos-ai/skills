@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Local, private capture of medical data: diagnoses, symptom histories and examination plans. No BACH origin — custom design with its own SQLite store. Strictly local, no cloud transfer."
-
+updated: 2026-11-09
+description: "Use when recording medical records, lab results, diagnoses, and examination schedules in a strictly private local SQLite store (e.g. 'store private medical record', 'track lab values locally', 'save clinical examination plan', /medizin-daten). Maintains medical history locally with zero cloud transmission. Do NOT use for automated clinical diagnoses or acute medical triage."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 

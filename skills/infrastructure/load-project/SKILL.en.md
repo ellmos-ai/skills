@@ -4,12 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  At the start of a concrete project task or when context is unclear: resolve
-  target, load applicable rule hierarchy, trace binding references, and build an
-  evidence-based status report before starting actual work.
-
+updated: 2026-11-09
+description: "Use when beginning work on a project task to systematically establish context, load rule hierarchies, and verify dependencies (e.g. 'load project context', 'read project rules', 'initial status report before work', /load-project). Resolves project scope, loads rule files (CLAUDE.md etc.), and compiles an evidence-backed situational report. Do NOT use for full initial repo onboarding (use dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -35,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="load-project banner">
 

@@ -2,7 +2,7 @@
 name: reiseroute
 version: 1.0.0
 category: assist
-description: "[Français] Compétence d'agent pour reiseroute: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required."
+description: "Utiliser pour calculer des itinéraires de déplacement, distances et temps de trajet d'un point A à un point B en voiture, vélo ou à pied (ex. 'calculer l'itinéraire de A à B', 'estimation du temps de trajet', 'planifier trajet à vélo', /reiseroute). Calcule les trajets et profils d'élévation via OSRM sans clé d'API. Ne PAS utiliser pour rechercher des POI à proximité (utiliser assist/location-suche)."
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: reiseroute_core.py
 provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_services/routing/routing_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'urllib.parse-Import an den Kopf verschoben (war im Original nur im else-Zweig). geocode_place (Nominatim) integriert. Keine Origin-DB. Kein Store. Userneutral, headless, nur Stdlib.\\n'}
 language: fr
 ---
+
 
 <img src="banner.png" width="100%" alt="reiseroute banner">
 

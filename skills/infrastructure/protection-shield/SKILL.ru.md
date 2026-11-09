@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Координирует разрешённую срочную защиту и периодические проверки журналов и стека с доказательствами и возвратом."
+updated: 2026-11-09
+description: "Используйте для координации срочных защитных мер при подозрительной активности на сервере или сетевых атаках (например, 'защитить сервер', 'активировать щит защиты', 'экстренное защитное реагирование', /protection-shield). Координирует аудит логов, временные блокировки и защитные меры с проверкой контрольных сумм и откатом. НЕ используйте для планового базового укрепления ОС (используйте os-hardening-baseline)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [tech-detect, security-tech-stack-check], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="protection-shield banner">
 

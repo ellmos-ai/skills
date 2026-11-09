@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-06-13
-description: 8 阶段开发周期：特性请求、当前状态检查、功能规划、前端、后端规划、后端代码、测试、用例。用于系统化软件开发的迭代框架。
+updated: 2026-11-09
+description: "当通过迭代的结构化 8 阶段开发生命周期来实现软件新功能或重大变更时使用（例如 '系统化开发功能'、'启动开发周期'、'8 阶段研发流程'、/dev-cycle）。逐步引导需求分析、现状评估、功能规格、前端、后端及用例测试。切勿用于孤立的单个缺陷修复（使用 bugfix-protocol）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 > **中文** — `dev-cycle` 官方中文版本。

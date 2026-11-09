@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analiza listas o exportaciones de inventario sin depender de un programa concreto.
+updated: 2026-11-09
+description: "Usar cuando se analicen hojas de inventario, existencias en despensa o exportaciones de almacenamiento (ej. 'revisar exportación de inventario', 'analizar niveles de stock', 'controlar existencias', /hauslagerist-reader). Evalúa hojas de cálculo de existencias y umbrales mínimos de manera independiente del software. NO usar para limpiar espacio en disco (usar utilities/speicherbereinigung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
-description: "[Français] Compétence d'agent pour model-strategy: Multi-model orchestration and model-switching strategy. Score-based model selection, cross-agent delegation (Gemini, Codex, Ollama), advisor pairing, escalation triggers, permission matrix, and cost-efficiency optimization."
+updated: 2026-11-09
+description: "Utiliser pour choisir et configurer le bon modèle de LLM et l'effort de raisonnement dans les workflows multi-agents et sous-agents (ex. 'choisir le modèle pour cette tâche', 'stratégie de modèles sous-agents', 'modèle de révision', /model-strategy). Associe chaque rôle (concepteur, exécutant, réviseur, escalade) au modèle adapté selon la complexité et le coût. Ne PAS utiliser pour la gestion comptable du budget de tokens (utiliser infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

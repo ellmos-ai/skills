@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  保存場所やアプリに依存せず、提供されたノートを記録、整理、要約します。
+updated: 2026-11-09
+description: "思いついたメモ、アイデア、講義録、または断片的なテキストをアプリに縛られず迅速に記録・整理・要約する場合に使用する（例：'クイックメモ'、'思考の整理'、'走り書きの要約'、/notizblock）。特定のノートアプリに依存せずに自由記述のメモを構造化する。本格的な調査レポート（assist/dossier-briefing）やインシデント記録（infrastructure/incident-notes）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

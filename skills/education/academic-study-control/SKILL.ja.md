@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  情報源検証、プライバシー遵守、現実的な行動計画に基づく学術的学習・締切管理。
+updated: 2026-11-09
+description: "大学の履修計画、モジュールの締切、または試験日程を管理する場合に使用する（例：'学期計画を立てる'、'課題の締切を管理'、'試験期間を計画'、/academic-study-control）。情報源の検証とプライバシー保護を維持しながら、締切や手続きを体系化する。科目の能動的学習（academic-study-learn）や模擬試験（academic-study-test）には使用しない。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-ja]
 language: ja
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

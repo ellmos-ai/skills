@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: うつ病に対する行動活性化：悪循環の打破、活動モニタリング、週間計画、および価値に基づく活動。
+updated: 2026-11-09
+description: "意欲低下、無気力、または抑うつ的な引きこもりに対して、構造化された行動活性化を通じて活動を段階的に再構築する場合に使用する（例：'無活動のスパイラルを断つ'、'週間の活動計画を立てる'、'日常のルーティンを再建'、/behavioral-activation）。活動記録表や達成感・喜びの評価を用いて回避パターンを打破する。急性期の危機介入や緊急安定化（stabilization-techniques）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

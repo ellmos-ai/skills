@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ドイツにおける公的医療保険適用対象の4つのガイドライン療法（認知行動療法、精神力動的心理療法、精神分析、システム療法）の比較 — オリエンテーションガイド。
+updated: 2026-11-09
+description: "認知行動療法（CBT）、精神分析的心理療法、精神分析、システム療法の4大心理療法アプローチを比較検討する場合に使用する（例：'心理療法の種類を比較'、'CBTと精神力動療法の違い'、'どの心理療法が合うか'、/guideline-therapies-overview）。適応、理論的枠組み、実施形態を客観的に整理する。確定診断の決定や急性期の介入には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

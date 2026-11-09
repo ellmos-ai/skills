@@ -4,14 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Checklist for the baseline hardening of your own laptop or PC on Windows, macOS and Linux:
-  updates, protection program, firewall, disk encryption, accounts and privileges, remote
-  access, boot chain. Each item has a read-only check and a target state; changes only after
-  a backup and individual confirmation. Defensive, meant for private use, no substitute for
-  the rules of a managing IT department.
-
+updated: 2026-11-09
+description: "Use when reviewing and enforcing baseline security hardening on Windows, macOS, or Linux workstations (e.g. 'harden operating system', 'OS security checklist', 'audit workstation security', /os-hardening-baseline). Evaluates updates, firewall, disk encryption, accounts, and secure boot with safe read-only checks. Do NOT use for active incident cleanup (use malware-cleanup-guide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -37,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="os-hardening-baseline banner">
 

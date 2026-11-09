@@ -4,12 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: >
-  Provider-neutral onboarding protocol for a new, rebuilt, or replacement workstation.
-  It establishes the operating-system prerequisites, agent runtimes, shared rule
-  surfaces, portable skills, verified configuration and post-install evidence without
-  copying credentials, private prompts, or host-specific configuration into a repository.
+updated: 2026-11-09
+description: "Use when setting up and configuring a new or freshly reinstalled workstation for agent development environments (e.g. 'onboard new workstation', 'setup developer machine', 'system onboarding', /system-onboarding). Provisions OS prerequisites, runtimes, shared rule files, and portable skills safely without credential leakage. Do NOT use for single repository onboarding (use dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -31,6 +27,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

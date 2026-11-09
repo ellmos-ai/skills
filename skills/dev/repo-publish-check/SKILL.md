@@ -1,11 +1,11 @@
 ---
 name: repo-publish-check
-description: Nutzerneutrale Prüfung von Repositories vor einer Veröffentlichung oder bei einer erneuten öffentlichen Prüfung. Kontrolliert Privacy, Geheimnisse, Lizenzen, Drittinhalte, Dokumentation und Freigabestatus, ohne die Veröffentlichung selbst vorzunehmen.
+description: "Verwenden, wenn ein Git-Repository vor dem Veröffentlichen oder einem Release neutral auditiert werden soll (z. B. 'Repo vor Veröffentlichung prüfen', 'Release-Check durchführen', 'Pre-Publish Audit', /repo-publish-check). Kontrolliert Privacy, Secrets, Lizenzen, Drittanbieter-Code, Dokumentation und Gates ohne automatischen Push. NICHT verwenden für das eigentliche Pushen oder Veröffentlichen auf GitHub (dafür dev/github-repo-care)."
 version: 1.6.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-09-27
+updated: 2026-11-09
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -21,6 +21,7 @@ dependencies:
   protocols: []
   python: []
 ---
+
 
 <img src="banner.png" width="100%" alt="repo-publish-check banner">
 

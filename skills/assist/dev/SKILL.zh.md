@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: 开发者助手（ATI 的继任者）。通过无头扫描提供快速的项目概览，并路由到可用的编程工具：CodeCommander MCP（分析/重构/诊断）和 ellmos-code-tools 模块。纯工具路由 + 扫描，无自定义存储。
+updated: 2026-11-09
+description: "当需要通过无界面（headless）快速扫描掌握软件项目全貌并路由至可用代码工具时使用（例如 '扫描项目状态'、'概览仓库架构'、'路由至代码工具'、/dev）。提供快速的代码仓库结构检查并精准对接 CodeCommander 与 ellmos-code-tools，无需独立存储。切勿用于多阶段自律开发循环（使用 dev/dev-soft-agent）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev banner">
 

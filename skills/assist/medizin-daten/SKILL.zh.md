@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: 本地私密记录医疗数据：诊断、症状历史和检查计划。无 BACH 来源 — 采用具有独立 SQLite 存储的自定义设计。严格局限于本地，无云端传输。
-
+updated: 2026-11-09
+description: "当在高度隐私的本地 SQLite 数据库中记录就诊病历、化验结果、诊断报告及体检复查日程时使用（例如 '本地保存个人就诊记录'、'本地跟踪化验指标'、'制定临床检查计划'、/medizin-daten）。在本地严密保护敏感医疗历史数据，绝不上传云端。切勿用于自动化临床诊断或急症分诊。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 

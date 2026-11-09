@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Claude + Codex
 created: 2026-07-28
-updated: 2026-07-30
-description: "明示的に承認されたローカルの意思決定プロファイルが存在する場合：検証された フィードバックから繰り返し発生する意思決定を予測し、確信度を調整し、予測・決定・実行を 厳密に分離します。"
+updated: 2026-11-09
+description: "承認されたローカルの意思決定プロファイルに基づき、反復的なユーザーの意思決定を予測・事前調整する場合に使用する（例：'ユーザーの判断を予測'、'ユーザーの選好を適用'、'意思決定アバターの適用'、/decision-avatar）。信頼度スコアを較正し、予測、確認、実行を厳密に分離する。憲法や政策の倫理的評価（utilities/lebende-verfassung）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -28,6 +28,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-avatar banner">
 

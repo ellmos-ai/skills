@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Определяет, проверяет или обновляет SECURITY.md репозитория (область применения, исключённые области, требуемые свойства безопасности, канал сообщений, сроки реакции, поддерживаемые версии) и сверяет его утверждения с реальным кодом. Политика - основа для sec-triage. Триггеры: 'создать/проверить SECURITY.md', 'политика безопасности', 'что здесь считается уязвимостью', 'определить канал сообщений'. Не для находок (sec-scan), не для отчётов о раскрытии (sec-writeup)."
+updated: 2026-11-09
+description: "Используйте для создания, проверки или обновления политики безопасности проекта (SECURITY.md) и правил раскрытия (например, 'создать SECURITY.md', 'проверить политику безопасности', 'определить канал сообщения об уязвимостях', /sec-policy). Задает область действия, SLA реагирования, каналы связи и сверяет текст политики с кодом. НЕ используйте для сканирования уязвимостей (используйте sec-scan) или составления отчетов (используйте sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

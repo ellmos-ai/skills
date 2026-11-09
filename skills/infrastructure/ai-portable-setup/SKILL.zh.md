@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 在 USB 驱动器或任何磁盘上创建便携式 AI 工作区。带有本地 LLM 模型 (Ollama)、向量数据库 (ChromaDB) 和预配置 prompt 的 RAG 流水线。
-
+updated: 2026-11-09
+description: "当在 USB 移动硬盘或外置存储介质上配置便携、自包含的本地 AI 离线工作区时使用（例如 '便携式 AI 环境搭建'、'U 盘部署 AI'、'离线本地 RAG 流水线'、/ai-portable-setup）。配置本地大模型（Ollama）、向量数据库（ChromaDB）及标准化提示词以实现完全离线运行。切勿用于工作站全盘初始化接入（使用 system-onboarding）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 

@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-07-05
-description: "[Français] Compétence d'agent pour web-reading: Router and protocol for reading and extracting web content. Decides first WHAT is needed (main text vs. structure vs. screenshot) and then WHICH tool available on the system delivers it. If nothing suitable is present, it recommends installing the web-scraper module."
+updated: 2026-11-09
+description: "Utiliser lorsque le contenu d'une page web doit être lu, extrait ou analysé (ex. 'lire cette page web', 'extraire le texte de l'URL', 'analyser le contenu du site', /web-reading). Détermine s'il faut le texte principal, la structure ou une capture d'écran et oriente vers le bon outil. Ne PAS utiliser pour les requêtes d'API directes ou les simples téléchargements."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['request
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="web-reading banner">
 

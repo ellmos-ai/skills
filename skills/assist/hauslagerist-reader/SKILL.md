@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Analysiert bereitgestellte Bestandslisten oder Exporte ohne Bindung an ein bestimmtes Lagerprogramm.
+updated: 2026-11-09
+description: "Verwenden, wenn Inventarlisten, Vorratsübersichten oder Lager-Exporte analysiert und strukturiert werden sollen (z. B. 'Bestandsliste auswerten', 'Vorratsinventar prüfen', 'Lagerliste analysieren', /hauslagerist-reader). Analysiert Bestände, Mindestmengen und Exportdateien unabhängig von spezifischer Lagersoftware. NICHT verwenden für physische Dateisystem-Bereinigungen (dafür utilities/speicherbereinigung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -26,6 +25,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="hauslagerist-reader banner">
 

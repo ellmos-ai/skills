@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  能動的学習法、概念合成、知識構造化テクニックを提供します。
+updated: 2026-11-09
+description: "大学の学習内容を能動的に学び、講義資料を要約し、体系的なまとめを作成する場合に使用する（例：'講義を要約'、'専門書を読解'、'学習ノートを作成'、/academic-study-learn）。アクティブリコール、構造化された統合、概念マップの作成を支援する。締切管理（academic-study-control）や模擬試験（academic-study-test）には使用しない。"
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-ja]
 language: ja
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

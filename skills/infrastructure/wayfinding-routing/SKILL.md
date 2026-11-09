@@ -4,14 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-09-27
-description: >
-  Universeller Skill für LLM-Navigation, Orientierung und
-  Ausfallsicherheit. Stellt aktives Wayfinding, Selbstorientierung und
-  Wiederherstellungsheuristiken bereit, wenn Agenten mit Kontextdrift,
-  fehlschlagenden Werkzeugen, Schleifen oder Sackgassen konfrontiert sind.
-  Enthält die synonymen Strategien survival-routing, dead-reckoning,
-  pathfinder-routing und celestial-routing.
+updated: 2026-11-09
+description: "Verwenden, wenn ein Agent in Schleifen gerät, den Kontext verliert, Werkzeuge fehlschlagen oder eine Sackgasse erreicht ist (z. B. 'Kontext verloren', 'in Schleife gefangen', 'Orientierung wiederfinden', /wayfinding-routing). Stellt Heuristiken für Selbstreorientierung, Dead-Reckoning und schrittweise Rückkehr zum Ausgangsziel bereit. NICHT verwenden für die reguläre Pfadsuche in intakten Ordnerbäumen (dafür staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -32,6 +26,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="wayfinding-routing banner">
 

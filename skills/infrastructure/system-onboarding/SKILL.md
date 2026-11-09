@@ -4,14 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: >
-  Anbieterneutrales Onboarding-Protokoll für einen neuen, neu aufgesetzten
-  oder ausgetauschten Arbeitsplatzrechner. Es richtet
-  Betriebssystemvoraussetzungen, Agentenlaufzeiten, gemeinsame Regelflächen,
-  portable Skills, verifizierte Konfiguration und Nachweise nach der
-  Installation ein, ohne Zugangsdaten, private Prompts oder
-  host-spezifische Konfiguration in ein Repository zu kopieren.
+updated: 2026-11-09
+description: "Verwenden, wenn ein neuer oder neu aufgesetzter Arbeitsplatzrechner für Agenten und Entwicklungsumgebungen eingerichtet werden soll (z. B. 'neuen Rechner einrichten', 'Workstation Onboarding', 'Agentenumgebung aufsetzen', /system-onboarding). Richtet Betriebssystemvoraussetzungen, Laufzeiten, gemeinsame Regelflächen und portable Skills sicher und verifiziert ein. NICHT verwenden für das Onboarding einzelner Repositories (dafür dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -34,6 +28,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

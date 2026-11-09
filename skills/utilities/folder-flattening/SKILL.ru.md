@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Реструктуризация вложенных иерархий папок в плоские, машиночитаемые структуры. На базе Bash с интеллектуальной логикой объединения.
+updated: 2026-11-09
+description: "Используйте, когда глубоко вложенные каталоги необходимо преобразовать в плоскую машиночитаемую структуру (например, 'сделать структуру папок плоской', 'развернуть вложенные директории', /folder-flattening). Выполняет детерминированное сглаживание папок с безопасным слиянием и обработкой коллизий. НЕ используйте для простого перемещения отдельных файлов (используйте batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-06-13
-description: "Systemic and solution-focused methods: miracle question, scaling, exception exploration, circular questions, hypothetical questions, worsening questions, coping questions. Merged from solution-focused-therapy and systemic-questioning."
-
+updated: 2026-11-09
+description: "Use when integrating systemic inquiry and solution-focused brief therapy techniques in coaching or advisory contexts (e.g. 'systemic solution-focused coaching', 'circular and scaling questions', /systemisch-loesungsfokussiert). Unifies circular questions, miracle question, exception exploration, scaling, and coping questions. Do NOT use for standard CBT thought records (use cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 

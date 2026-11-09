@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  特定のオフィスアプリに依存せず、業務、連絡、期限を整理します。
+updated: 2026-11-09
+description: "事務処理、ビジネス文書の作成、提出期限、事務手続きを整理・体系化する場合に使用する（例：'事務書類を整理'、'ビジネスレターを下書き'、'オフィスの期限を管理'、/buero）。特定のアプリに依存せず、事務作業、書簡、期限リストを中立的に管理する。私的な短文メール（privat-mail-writer）やマーケティング施策には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

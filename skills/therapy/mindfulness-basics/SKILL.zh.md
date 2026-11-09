@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: MBSR 正念减压基础、身体扫描与呼吸训练。基于 Jon Kabat-Zinn 的循证正念技术，适用于日常生活。
+updated: 2026-11-09
+description: "当将正念冥想、正念减压（MBSR）练习或身心觉知融入日常生活时使用（例如 '正念练习指南'、'身体扫描指导'、'日常呼吸觉察'、/mindfulness-basics）。系统讲授卡巴金 MBSR 基础方法：身体扫描、正念行走及 3 分钟呼吸空间。切勿用于渐进性神经肌肉紧张-放松训练（使用 pmr-autogenic-training）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkeit_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 

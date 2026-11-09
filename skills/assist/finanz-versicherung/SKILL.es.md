@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Estructura documentos financieros y de seguros proporcionados en un resumen y una lista neutrales.
+updated: 2026-11-09
+description: "Usar cuando se organicen y revisen documentos financieros, pólizas de seguro y contratos personales o del negocio (ej. 'organizar pólizas de seguro', 'estructurar documentos financieros', 'revisar plazos contractuales', /finanz-versicherung). Elabora resúmenes neutrales, calendarios de vencimiento y listas de verificación sin asesoramiento financiero o legal. NO usar para recomendaciones tributarias o de inversión vinculantes."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

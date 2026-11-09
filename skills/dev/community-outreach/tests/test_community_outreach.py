@@ -1673,3 +1673,124 @@ def test_cli_preview_post_of_approved_proposal(temp_workspace: Path) -> None:
     result = json.loads(completed.stdout)
     assert result["status"] == "preview"
     assert result["target_url"] == target
+
+
+def test_verify_proposals_checks_real_files_and_blacklist(temp_workspace: Path, tmp_path: Path) -> None:
+    repos_root = tmp_path / "repos"
+    (repos_root / "super-tool" / "src").mkdir(parents=True)
+    (repos_root / "super-tool" / "src" / "engine.py").write_text("class Engine: pass\n", encoding="utf-8")
+
+    (temp_workspace / "config.json").write_text(
+        json.dumps({"compliance": {"require_code_evidence": True}}),
+        encoding="utf-8",
+    )
+    (temp_workspace / "rejected_proposals.json").write_text(
+        json.dumps(
+            {
+                "platform_exclusions": [{"platform": "Dev.to"}],
+                "rejected_proposals": [
+                    {
+                        "proposal_id": "OUTBOUND-PROPOSAL-REJECTED-1",
+                        "canonical_url": "https://reddit.com/r/python/comments/rejected1/thread",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    inbox = """# Queue
+
+### [OUTBOUND-PROPOSAL-VERIFIED-1] Verified
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** [https://www.reddit.com/r/python/comments/ok1/thread/](https://www.reddit.com/r/python/comments/ok1/thread/)
+- **Lösungs-Repo:** `my-org/super-tool`
+- **Code-Beleg (Verifiziert):** `src/engine.py` (`Engine`)
+- [x] Genehmigt
+
+#### Textvorschlag:
+```markdown
+Geprüfter Beitrag.
+```
+
+### [OUTBOUND-PROPOSAL-MISSING-FILE-1] Missing File
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** [https://www.reddit.com/r/python/comments/ok2/thread/](https://www.reddit.com/r/python/comments/ok2/thread/)
+- **Lösungs-Repo:** `my-org/super-tool`
+- **Code-Beleg (Verifiziert):** `src/nonexistent.py`
+- [x] Genehmigt
+
+#### Textvorschlag:
+```markdown
+Halluzinierte Datei.
+```
+"""
+    (temp_workspace / "POST-EINGANG.md").write_text(inbox, encoding="utf-8")
+    engine = CommunityOutreachEngine(temp_workspace)
+    report = engine.verify_proposals(repos_root=repos_root)
+    assert report["status"] == "failed"
+    assert report["verified_count"] == 1
+    assert report["failed_count"] == 1
+    assert report["results"][0]["status"] == "verified"
+    assert report["results"][1]["status"] == "failed"
+    assert report["results"][1]["missing_files"] == ["src/nonexistent.py"]
+
+
+def test_verify_proposals_and_phase2_reject_ai_essay_style(temp_workspace: Path, tmp_path: Path) -> None:
+    repos_root = tmp_path / "repos"
+    (repos_root / "super-tool" / "src").mkdir(parents=True)
+    (repos_root / "super-tool" / "src" / "engine.py").write_text("class Engine: pass\n", encoding="utf-8")
+
+    (temp_workspace / "config.json").write_text(
+        json.dumps({"compliance": {"require_code_evidence": True, "require_natural_style": True}}),
+        encoding="utf-8",
+    )
+
+    inbox = """# Queue
+
+### [OUTBOUND-PROPOSAL-AI-ESSAY-1] AI Essay Style
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** [https://www.reddit.com/r/softwarearchitecture/comments/1s6lc2e/thread/](https://www.reddit.com/r/softwarearchitecture/comments/1s6lc2e/thread/)
+- **Lösungs-Repo:** `my-org/super-tool`
+- **Code-Beleg (Verifiziert):** `src/engine.py`
+- **Umgebungs-Check (Ton & Länge):** Umgebungs-Kommentare sind 2-4 kurze Sätze ohne Überschriften.
+- [x] Genehmigt
+
+#### Textvorschlag:
+```markdown
+Here are three practical patterns that solve this problem — and why they matter:
+
+### 1. Deterministic Schema
+- **Full Snapshot:** Always export a **deterministic** snapshot.
+- **Delta Bundle:** Sign every bundle.
+- **Idempotent Apply:** Never overwrite newer rows.
+
+Treating sync as a transit problem gives you a resilient architecture.
+```
+"""
+    (temp_workspace / "POST-EINGANG.md").write_text(inbox, encoding="utf-8")
+    engine = CommunityOutreachEngine(temp_workspace)
+    report = engine.verify_proposals(repos_root=repos_root)
+    assert report["status"] == "failed"
+    item = report["results"][0]
+    assert item["natural_style_ok"] is False
+    assert "markdown-headings-forbidden" in item["style_violations"]
+    assert "bold-markup-forbidden" in item["style_violations"]
+    assert "em-dash-forbidden" in item["style_violations"]
+    assert "structured-list-essay-forbidden" in item["style_violations"]
+    assert "ai-cliche-phrasing" in item["style_violations"]
+    assert item["has_context_check"] is True
+
+    outbound = engine.phase2_outbound_execution()
+    assert outbound == [
+        {
+            "id": "OUTBOUND-PROPOSAL-AI-ESSAY-1",
+            "status": "needs-action",
+            "reason": "ai-style-violation",
+            "violations": item["style_violations"],
+        }
+    ]
+    preview = engine.preview_post("OUTBOUND-PROPOSAL-AI-ESSAY-1")
+    assert preview["status"] == "error"
+    assert "violates natural human style" in preview["message"]
+

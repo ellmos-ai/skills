@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "根拠付きのハードウェア・ソフトウェア版数を私的なスナップショットに記録し、未観測を未インストールと断定せずホストを比較する。"
+updated: 2026-11-09
+description: "ローカルマシンのハードウェア構成、OS、ソフトウェア、Pythonバージョンを実行コマンドの客観的証拠に基づき記録・比較する場合に使用する（例：'技術スタックを検出'、'ハードウェア・ソフトウェアの棚卸し'、'システム環境の測定'、/tech-detect）。コマンド出力の裏付けを持つtechshotレポートを生成し、環境の差分を正確に比較する。CVE脆弱性監査（dev/security-tech-stack-check）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="tech-detect banner">
 

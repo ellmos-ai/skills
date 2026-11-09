@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Einstieg und Router der anbieterneutralen ellmos-Security-Familie (sec-*): ordnet Phasen von Bedrohungsmodell über Scan, Validierung, Triage, Fix, Verifikation und Tracking bis zum Bericht ein und verweist auf den passenden Skill. Auslöser: 'Sicherheitsprüfung', 'Repo auf Schwachstellen prüfen', 'welcher Security-Skill', 'PR sicherheitsprüfen', 'Fremdplugin prüfen', 'SECURITY.md', 'Disclosure'. Führt selbst keine Prüfung aus; die Arbeit machen die sec-*-Skills und die Nachbar-Skills, die hier nur verlinkt sind."
+updated: 2026-11-09
+description: "Verwenden, wenn ein Sicherheitsaudit geplant, eine Schwachstelle gemeldet oder ein passender Security-Skill der sec-*-Familie gesucht wird (z. B. 'Sicherheitsprüfung', 'Repo auf Schwachstellen prüfen', 'welcher Security-Skill', /ellmos-security). Fungiert als zentraler Wegweiser und Router für Bedrohungsanalyse, Scans, Triage, Fixes, Verifikation und Offenlegung. NICHT verwenden für die direkte Ausführung von Patches (dafür sec-fix) oder Scans (dafür sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

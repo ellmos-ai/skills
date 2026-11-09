@@ -2,7 +2,7 @@
 name: dossier-briefing
 version: 1.0.0
 category: assist
-description: "[Français] Compétence d'agent pour dossier-briefing: Generates a structured research briefing for a topic or person as a Markdown scaffold (stdout or file). No persistent store."
+description: "Utiliser pour générer un dossier de recherche structuré ou une note de synthèse sur un sujet ou une personne en Markdown (ex. 'créer un dossier de recherche', 'note de cadrage sur un sujet', 'dossier de synthèse', /dossier-briefing). Produit un modèle clair avec faits essentiels, sources et questions en suspens sans stockage permanent. Ne PAS utiliser pour condenser une décision immédiate (utiliser decision-shot) ou pour la recherche scientifique (utiliser research/research-agent)."
 tags: [briefing, dossier, recherche, markdown, research]
 standalone: true
 anthropic_compatible: true
@@ -15,6 +15,7 @@ entry_point: dossier_briefing_core.py
 provenance: {'origin': 'BACH persoenlicher-assistent', 'origin_path': 'system/agents/persoenlicher-assistent/tools/dossier_generator.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': 'None', 'local_changes_since_sync': 'Alle Origin-DB-Abhaengigkeiten entfernt (create_dossier, update_dossier, DOSSIERS_DIR, DossierGenerator-Klasse mit DB-Methoden). Nur _create_markdown-Logik portiert und verallgemeinert (Person→Subjekt). Kein Store. One-Shot-Scaffold-Generator. Headless, nur Stdlib.\\n'}
 language: fr
 ---
+
 
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 

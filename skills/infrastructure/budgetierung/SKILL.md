@@ -4,19 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-10-03
-updated: 2026-10-03
-description: >
-  Kontokonzept für den budgetierten Einsatz teurer oder knapper Modelle (Advisor,
-  Reviewer, Spezialmodelle, Dauer-Worker) in längeren Agentenläufen. Beginnt mit
-  einer gemeinsamen Aushandlung zwischen Nutzer und Modell über verfügbare Modelle,
-  Rollen und Kontingente je Zeitfenster, führt ein Konto über jeden Einsatz, setzt
-  vor jeder Eskalation ein Puzzleteil-Vorverfahren und erlaubt Anpassungen mitten im
-  Lauf. Verwenden bei "Budget", "Kontingent", "Konto führen", "nur einmal pro Stunde",
-  "Reviewer sparsam einsetzen", "Fable/Codex/Sol/Astra/Luna/Advisor nur begrenzt",
-  "/budgetierung", und immer dann, wenn ein Operator-, Forschungs- oder
-  Automationslauf mehrere Modelle mit unterschiedlichen Kosten kombinieren soll —
-  auch wenn der Nutzer das Wort Budget nicht nennt, aber Einsatzgrenzen für Modelle
-  vorgibt.
+updated: 2026-11-09
+description: "Verwenden, wenn der Einsatz teurer oder knapper Modelle (z. B. Denker, Reviewer, Spezialmodelle) über Kontingente und Budgets gesteuert werden soll (z. B. 'Modell-Budget verwalten', 'Kontingent für teure Modelle', 'Reviewer sparsam einsetzen', /budgetierung). Führt Konten über Modellaufrufe, vereinbart Limits vorab und setzt ein strukturiertes Vorverfahren vor teuren Eskalationen ein. NICHT verwenden für bloße statische Modellrollenzuweisung (dafür dev/model-strategy)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -40,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="budgetierung banner">
 

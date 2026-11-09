@@ -4,9 +4,8 @@ version: 0.1.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Исследовательский пайплайн для PubMed и arXiv. Быстрый поиск и структурированные обзоры литературы с использованием только стандартной библиотеки Python.
-
+updated: 2026-11-09
+description: "Используйте, когда нужно провести или проверить академическое исследование, собрать литературу или подтвердить научные утверждения (например, 'исследовать состояние области', 'литературный обзор', 'проверить цитаты и утверждения', /research-agent). Управляет исследовательским пайплайном с живыми контрольными точками, доказательствами из PDF и контролем публикаций. НЕ используйте для неформального поиска без стандартов доказательности."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

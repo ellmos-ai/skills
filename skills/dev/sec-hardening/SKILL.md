@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Leitet aus Funden, Vorfallberichten oder Assessments strukturelle Härtungsvorschläge ab statt Einzelpatches: Ursachen bündeln, Vorher/Nachher-Architekturbild (ASCII), Alternativen mit Abwägung (Aufwand, Risiko, Wirkung), Umsetzungsreihenfolge, Evidenz je Vorschlag. Liefert ein Dokument und ändert keinen Code. Auslöser: 'wie härten wir das grundsätzlich', 'warum tauchen immer wieder solche Funde auf', 'Architektur sicherer machen', 'Maßnahmenplan aus dem Vorfall'. Nicht für den Fix eines einzelnen Fundes (sec-fix) und nicht für akute Abwehr (protection-shield)."
+updated: 2026-11-09
+description: "Verwenden, wenn aus Sicherheitsfunden oder Vorfällen langfristige, strukturelle Architektur- und Härtungsmaßnahmen abgeleitet werden sollen (z. B. 'Architektur grundsätzlich härten', 'Maßnahmenplan nach Sicherheitsvorfall', /sec-hardening). Entwickelt strukturelle Abwehrkonzepte, Vorher/Nachher-Architekturbilder und priorisierte Härtungspläne. NICHT verwenden für schnelle Einzelpatches (dafür sec-fix) oder akute Abwehrmaßnahmen (dafür protection-shield)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-hardening banner">
 

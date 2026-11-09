@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Claude + Codex
 created: 2026-07-28
-updated: 2026-07-30
-description: "Con un perfil de decisión local existente y expresamente autorizado: predecir decisiones recurrentes a partir de comentarios comprobados, calibrar la confianza y separar estrictamente la predicción, la decisión y la ejecución."
+updated: 2026-11-09
+description: "Usar cuando se predigan y preparen decisiones recurrentes del usuario mediante un perfil de decisiones local autorizado (ej. 'predecir decisión del usuario', 'aplicar preferencias del usuario', 'alineación con avatar de decisiones', /decision-avatar). Calibra la confianza y separa estrictamente predicción, confirmación y ejecución. NO usar para evaluaciones constitucionales de políticas (usar utilities/lebende-verfassung)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -28,6 +28,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="decision-avatar banner">
 

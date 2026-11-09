@@ -4,8 +4,8 @@ version: 1.4.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-10-11
-description: Provider-neutral protocol for breaking down complex tasks, commissioning independent workers, and evidence-based verification of their results.
+updated: 2026-11-09
+description: "Use when decomposing complex multi-step objectives into parallel or staged sub-tasks for independent workers with evidence-based acceptance (e.g. 'orchestrate tasks', 'coordinate subagents', 'delegate work packages', /orchestrator). Formulates work contracts, dispatches independent workers, and verifies deliverables objectively. Do NOT use for simple tasks solvable in a single pass."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

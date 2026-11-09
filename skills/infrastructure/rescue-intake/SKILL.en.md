@@ -4,14 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Intake of a rescue case for a laptop or PC suspected of malware or malfunction: confirm
-  ownership and consent, choose the operating mode (A: collect and analyse on a clean
-  machine, B: agent on site, only from a live boot), prevent real accounts from being signed
-  in on the target machine, and decide what gets anonymised before evidence goes to a cloud
-  agent. Always use first, before anything runs on the target device.
-
+updated: 2026-11-09
+description: "Use before touching or inspecting a potentially compromised host to establish ownership, consent, mode, and data sanitation (e.g. 'intake compromised computer', 'intake rescue case', 'start device forensics', /rescue-intake). Defines authorization, selects analysis mode (clean machine vs live boot), and prevents credential leakage. Do NOT use after forensic data is already gathered (use endpoint-triage)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -37,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="rescue-intake banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "独立检查安全补丁是否真正堵住了漏洞（在已打补丁的状态下重新追踪 source-to-sink 路径，做反向测试与回归测试），评估回归风险，以及自动合并是否站得住脚（对 critical/high 默认不允许）。只读审查，不应用任何内容。触发词：「补丁是否堵住了漏洞」「审查这个补丁」「验证这个修复」，以及状态为 fixed 的发现。不用于编写补丁（sec-fix），也不用于一般的代码审查。"
+updated: 2026-11-09
+description: "当独立核验安全补丁是否确已消除漏洞且未引入任何功能回退时使用（例如 '核验安全修复有效性'、'此补丁是否彻底关闭漏洞'、'评估补丁回归风险'、/sec-verify-fix）。以只读方式复盘补丁代码的污点传播路径并评估回归风险。切勿用于编写补丁代码本身（使用 sec-fix）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

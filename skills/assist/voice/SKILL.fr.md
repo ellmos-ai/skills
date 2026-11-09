@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Planifie enregistrement, transcription et synthèse vocale avec des outils optionnels interchangeables.
+updated: 2026-11-09
+description: "Utiliser pour concevoir, configurer et enchaîner l'enregistrement, la transcription et la synthèse vocale (TTS) (ex. 'mettre en place un pipeline vocal', 'configurer la synthèse vocale TTS', 'interaction vocale', /voice). Orchestre des outils audio modulaires pour la capture, la transcription et la synthèse. Ne PAS utiliser pour la seule transcription de fichiers existants (utiliser assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

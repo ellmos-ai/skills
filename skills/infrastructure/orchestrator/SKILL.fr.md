@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: "[Français] Compétence d'agent pour orchestrator: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse."
+updated: 2026-11-09
+description: "Utiliser pour décomposer des objectifs complexes en sous-tâches parallèles ou séquentielles confiées à des sous-agents avec validation basée sur des preuves (ex. 'orchestrer des tâches', 'coordonner des sous-agents', 'déléguer des lots de travail', /orchestrator). Établit des contrats de tâches, missionne des agents autonomes et valide les livrables avec rigueur. Ne PAS utiliser pour les tâches simples traitables en une seule réponse."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

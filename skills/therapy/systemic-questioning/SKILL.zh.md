@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 系统性提问技术：循环提问、刻度提问、奇迹提问和例外提问，用于自我反思与视角拓展。
+updated: 2026-11-09
+description: "当通过系统性提问拓宽视野、松动僵化认知框架时使用（例如 '循环提问'、'系统性重塑'、'假设性提问'、/systemic-questioning）。详细介绍系统式提问技术：三元循环提问、刻度提问、假设情景提问及悖论式反思。切勿用于量化决策打分矩阵（使用 utilities/decide）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemische_fragetechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemic-questioning banner">
 

@@ -4,10 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas / Antigravity
 created: 2026-08-13
-updated: 2026-08-29
-description: >
-  System-agnostic automation for solution-oriented community outreach and repository recommendation
-  across forums, Reddit, and social platforms following Human-in-the-Loop principles (EU AI Act compliant).
+updated: 2026-11-09
+description: "Use when conducting helpful community outreach and recommending open-source repositories on Reddit, forums, or GitHub Discussions (e.g. 'find relevant discussions', 'draft community reply', 'recommend project', /community-outreach). Implements a human-in-the-loop pipeline with code-fact verification, natural comment style checks, and blacklist gates. Do NOT use for unsolicited mass marketing or automated spam."
 category: dev
 tags: [outreach, marketing, community, automation, scheduler, github, solution-recommender]
 language: en
@@ -25,6 +23,7 @@ dependencies:
   python: [pytest]
 status: active
 ---
+
 
 <img src="banner.png" width="100%" alt="community-outreach banner">
 

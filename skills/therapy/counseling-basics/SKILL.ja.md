@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 治療的コミュニケーションの基礎：アクティブ・リスニング（傾聴）、ミラーリング、言い換え（パラフレージング）、開かれた質問、およびバリデーション（感情の承認）。
+updated: 2026-11-09
+description: "来談者中心療法の基本原則や共感的コミュニケーション技法を適用する場合に使用する（例：'積極的傾聴'、'感情の反映とパラフレーズ'、'開かれた質問をする'、/counseling-basics）。傾聴、感情の明確化、受容的態度などの相談面接の基礎スキルを解説する。特定の精神疾患に対する専門的治療プロトコル（guideline-therapies-overview）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 

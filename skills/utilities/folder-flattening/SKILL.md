@@ -4,10 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Verschachtelte Ordnerhierarchien in flache, maschinenlesbare Strukturen umbauen. Bash-basiert mit intelligenter Merge-Logik.
-
+updated: 2026-11-09
+description: "Verwenden, wenn tief verschachtelte Ordnerstrukturen in eine flache, maschinenlesbare Hierarchie umgebaut werden sollen (z. B. 'Ordnerstruktur abflachen', 'verschachtelte Verzeichnisse auflösen', /folder-flattening). Führt deterministisches Ordner-Flattening mit Tripel-Analyse und konfliktfreiem Dateimerge durch. NICHT verwenden für einfaches Verschieben einzelner Dateien (dafür batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,8 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
+
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 
 # Workflow: Ordner-Flattening

@@ -89,6 +89,7 @@ Classify a failure before changing anything:
 | h6 | guidance level does not fit the model | adjust structure and degree of freedom |
 | h7 | a new evidenced cause exists | add it to the local catalogue with evidence |
 | h8 | cause remains unknown | observe, narrow permissions or pause; do not guess |
+| h9 | domain under-coverage or producer-consumer backlog drift in solo mode | raise cadence on harmonic grid (`:00,:07,:14,:20,:27,:35,:43,:51`) or probe-activate paused station and log in `automation-changes.log` |
 
 ---
 

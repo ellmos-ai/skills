@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: "Registro local y privado de datos médicos: diagnósticos, historial de síntomas y planes de examen. Sin origen BACH: diseño personalizado con su propio almacenamiento SQLite. Estrictamente local, sin transferencia a la nube."
-
+updated: 2026-11-09
+description: "Usar cuando se registren historiales médicos, resultados de laboratorio o calendarios de revisiones en una base de datos SQLite estrictamente local y privada (ej. 'guardar historial médico privado', 'registrar analíticas localmente', 'plan de revisiones clínicas', /medizin-daten). Almacena datos médicos sensibles en local sin conexión a la nube. NO usar para diagnósticos médicos automatizados ni triaje de emergencias."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 

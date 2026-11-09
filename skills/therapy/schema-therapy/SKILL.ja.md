@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: ヤングのスキーマ療法：早期不適応的スキーマ、モードモデル、インナーチャイルド概念、コーピングスタイル（心理教育的解説）。
+updated: 2026-11-09
+description: "根深い感情スキーマ、反復する人生の罠、またはパーソナリティ・モードを内省・検討する場合に使用する（例：'スキーマ療法のモードを理解'、'傷ついた子どもと健全な大人'、'人生の罠'、/schema-therapy）。ジェフリー・ヤングのスキーマモデル（中核的感情欲求、早期不適応的スキーマ、コーピング様式）を解説する。短期的な行動活性化（behavioral-activation）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

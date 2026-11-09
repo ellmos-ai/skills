@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Подготовка к экзаменам, самопроверка, создание пробных тестов и анализ ошибок.
+updated: 2026-11-09
+description: "Используйте при подготовке к экзаменам с помощью пробных тестов, тренировочных заданий и систематического анализа ошибок (например, 'проэкзаменуй меня по теме', 'создай пробный экзамен', 'проверь мои знания', /academic-study-test). Создает тренировочные задания, критерии оценки и выявляет пробелы в знаниях. НЕ используйте для первичного изучения материала (используйте academic-study-learn) или планирования сроков (используйте academic-study-control)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-test, academic-study-test-ru]
 language: ru
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-test banner">
 

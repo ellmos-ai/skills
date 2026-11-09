@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: 複雑なタスクの分解、独立した Worker への委任、およびエビデンスに基づく成果検証のためのプロバイダーに依存しないプロトコル。
+updated: 2026-11-09
+description: "複雑な全体目標を独立したサブエージェント用の並行または逐次タスクに分解し、客観的証拠に基づき検収を行う場合に使用する（例：'タスクを統括オーケストレーション'、'サブエージェントを調整'、'作業パッケージを委託'、/orchestrator）。明確な作業仕様を策定し、独立したワーカーを動員して成果物を厳密に検証する。単一の指示で直接解決できる単純な作業には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

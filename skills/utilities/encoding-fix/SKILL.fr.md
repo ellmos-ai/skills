@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour encoding-fix: Mojibake repair for double/triple encoded UTF-8. Fixes Windows cp1252/Latin-1 misinterpretations. Zero dependencies."
+updated: 2026-11-09
+description: "Utiliser lorsque des fichiers texte souffrent de corruption d'encodage ou de mojibake (ex. 'réparer encodage corrompu', 'corriger accents/mojibake', 'UTF-8 doublement encodé', /encoding-fix). Corrige les erreurs cp1252, Latin-1 et UTF-8 multi-encodé sans dépendances externes. Ne PAS utiliser pour de simples conversions de format sans altération d'encodage."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 

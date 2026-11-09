@@ -4,27 +4,8 @@ version: 0.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-06
-description: >
-  Creates or reworks a skill FOR THIS ECOSYSTEM: delegates the generic
-  interview/design/eval loop to the official skill-creator plugin
-  (Anthropic, Apache-2.0), but additionally enforces the ellmos
-  requirements the official plugin doesn't know about — house frontmatter
-  (9 fields), category/visibility rules, provider-/user-/ellmos-neutral but
-  ellmos-sensitive detection via grounding-seed, a bundled config.json
-  (incl. a learning contract) + connections.json, provider/vendor
-  awareness (proposing state-of-the-art alternatives including our own
-  ellmos components), a self-update section AND a reusable learning/
-  coverage file set (user-usecases.json, usecase-gaps.json,
-  known-providers-and-abilities.json, gap-closing-analysis.json — modeled
-  on skill-creator's evals.json and A2A/AgentSkill, not a parallel
-  standard). ALWAYS use it when a NEW skill for this system should be
-  created or an existing one retrofitted for ellmos conformance — also for
-  "create a skill", "build me a skill for X", "use skill-creator", "create
-  a new skill", "make this skill ellmos-conformant", "create a learning
-  contract/code of conduct for a skill", "check a skill's usecase
-  coverage". For pure skill FINDING/ROUTING use skill-finder instead, for a
-  landscape audit use skill-explorer.
+updated: 2026-11-09
+description: "Use when a new skill for this ecosystem is to be created or an existing one retrofitted for ellmos conformance (e.g. 'create a skill', 'build me a skill for X', 'use skill-creator', 'create a new skill', 'make this skill ellmos-conformant', 'create a learning contract', 'check usecase coverage', /ellmos-skill-creator). Delegates the design loop to the official skill-creator plugin while enforcing ellmos standards: 9-field frontmatter, grounding-seed, config.json with learning contract, connections.json, vendor awareness, and learning/coverage file sets. Do NOT use for pure skill finding/routing (use skill-finder) or landscape audits (use skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -52,6 +33,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-skill-creator banner">
 

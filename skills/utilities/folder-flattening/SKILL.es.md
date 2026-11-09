@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Reestructura jerarquías de carpetas anidadas en diseños planos y legibles por máquina. Basado en Bash con lógica de fusión inteligente.
+updated: 2026-11-09
+description: "Usar cuando las jerarquías de carpetas profundamente anidadas deban aplanarse en una estructura limpia y legible por máquinas (ej. 'aplanar jerarquía de carpetas', 'reducir directorios anidados', /folder-flattening). Aplica un aplanamiento determinista con resolución de conflictos y fusión segura. NO usar para mover archivos individuales simples (usar batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

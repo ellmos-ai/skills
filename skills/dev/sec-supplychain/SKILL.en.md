@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Checks third-party skills, plugins, MCP servers and hooks BEFORE installation using staging-then-promote: fetch into a staging folder, read everything there and pre-sort with a pattern scanner, install only after your own judgement and explicit user approval - an agent never installs by itself. Triggers: 'install this skill/plugin/MCP from GitHub', 'is this plugin safe', 'check a third-party hook', 'npm package for the agent'. Not for your own repos (sec-scan) and not for dependencies/CVEs of your own stack (security-tech-stack-check)."
+updated: 2026-11-09
+description: "Use when inspecting third-party skills, plugins, MCP servers, or packages for supply chain risks and malicious code before installation (e.g. 'audit third-party plugin', 'is this GitHub MCP safe', 'supply chain check', /sec-supplychain). Stages untrusted packages in an isolated directory and scans for persistence and telemetry. Do NOT use for scanning internal first-party repos (use sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-supplychain banner">
 

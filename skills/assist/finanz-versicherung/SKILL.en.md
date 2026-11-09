@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Structures supplied finance and insurance documents into a neutral overview and checklist.
+updated: 2026-11-09
+description: "Use when organizing and reviewing personal or business financial documents, insurance policies, and contracts (e.g. 'organize insurance policies', 'structure financial documents', 'review contract terms', /finanz-versicherung). Builds neutral overviews, deadline trackers, and checklists without financial or legal advice. Do NOT use for binding tax or investment recommendations."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="finanz-versicherung banner">
 

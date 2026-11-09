@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  检查用户提供的表单描述的结构、验证规则、清晰度和无障碍性。
+updated: 2026-11-09
+description: "当审查表单设计规范、JSON Schema 或 UI 输入表单的结构、无障碍访问性及校验逻辑时使用（例如 '验证表单模式'、'检查表单无障碍访问'、'审核表单输入字段'、/formbuilder-reader）。评估输入字段、错误提示、易用性及 WCAG 无障碍标准。切勿用于自动化网页表单提交（使用 web/web-reading）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 针对焦虑障碍的阶梯式暴露疗法：恐惧等级表、SUDs 主观痛苦评分、暴露计划与引导。仅限于心理教育，不包含实际实施。
+updated: 2026-11-09
+description: "当通过渐进式暴露疗法的心理教育直面焦虑、恐惧症或回避行为时使用（例如 '制定恐惧层级表'、'规划暴露练习'、'运用主观困扰度SUDs量表'、/exposure-guidance）。系统讲解习惯化机制、体内与想象暴露层级设计以及安全行为的消退。切勿用于无专业监护的创伤重现暴露或急性恐慌镇定（使用 stabilization-techniques）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 

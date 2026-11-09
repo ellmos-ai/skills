@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Graduierte Exposition bei Angststörungen: Angsthierarchie, SUDs-Skala, Expositionsplanung und -begleitung. Nur Psychoedukation, keine Durchführung.
-
+updated: 2026-11-09
+description: "Verwenden, wenn Ängste, Phobien oder Vermeidungsverhalten durch Konfrontation überwunden werden sollen (z. B. 'Expositionsübungen planen', 'Angsthierarchie erstellen', 'SUDs-Skala nutzen', /exposure-guidance). Bietet fundierte Psychoedukation zu Habituation, Reizkonfrontation und Expositionsplanung. NICHT verwenden zur unbegleiteten Durchführung hochgradiger Traumakonfrontation oder akuten Panikstabilisierung (dafür stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "リポジトリの SECURITY.md（スコープ、除外領域、必要なセキュリティ特性、報告窓口、応答時間、サポート対象バージョン）を定義・レビュー・更新し、その記述を実際のコードと照らし合わせて確認する。このポリシーが sec-triage の基準になる。トリガー：「SECURITY.md を作成／確認して」「セキュリティポリシー」「ここでは何が脆弱性にあたるのか」「報告窓口を決めて」。所見の扱い（sec-scan）や開示レポート（sec-writeup）には使わない。"
+updated: 2026-11-09
+description: "プロジェクトのセキュリティポリシー（SECURITY.md）や脆弱性報告ガイドラインを策定・点検・更新する場合に使用する（例：'SECURITY.mdを作成'、'セキュリティポリシーの確認'、'脆弱性報告窓口の策定'、/sec-policy）。適用範囲、対応期限SLA、連絡窓口を定義し、ポリシー内容を実装コードと照合する。脆弱性スキャンの実行（sec-scan）や脆弱性開示報告書の作成（sec-writeup）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-policy banner">
 

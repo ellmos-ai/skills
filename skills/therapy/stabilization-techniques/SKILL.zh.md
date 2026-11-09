@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 稳定技术：接地/着陆技术、安全岛、封存/容器技术及呼吸练习。用于急性心理困扰和惊恐发作的即时干预技术。
+updated: 2026-11-09
+description: "当需要立即平复急性惊恐发作、创伤闪回、情绪过载或解离状态时使用（例如 '平息恐慌发作'、'闪回时的着陆技术'、'安全岛想象练习'、/stabilization-techniques）。提供即刻应急工具：5-4-3-2-1 五感着陆法、心理保险箱、安全岛想象及节律呼吸法。切勿用于急性发作期的创伤暴露重现。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 

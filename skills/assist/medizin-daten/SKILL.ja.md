@@ -4,9 +4,8 @@ version: 0.1.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-06-22
-description: 医療データのローカルかつプライベートな記録：診断、症状の履歴、検査計画。BACH由来なし — 独自のSQLiteストアを備えたカスタム設計。厳密にローカル対応、クラウド転送なし。
-
+updated: 2026-11-09
+description: "診療記録、血液検査値、診断結果、および検診予定を厳格にプライベートなローカルSQLiteに記録・管理する場合に使用する（例：'個人の医療記録を保存'、'検査値をローカルに記録'、'検診スケジュールを管理'、/medizin-daten）。クラウド送信を一切行わずに機微な医療情報をローカル管理する。自動臨床診断や救急トリアージには使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: stable
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
+
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 

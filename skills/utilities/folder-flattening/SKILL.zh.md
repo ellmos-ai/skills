@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 将嵌套的文件夹层级结构重构为扁平、机器可读的布局。基于 Bash 并包含智能合并逻辑。
+updated: 2026-11-09
+description: "当需要将深度嵌套的目录层级重构为整洁、机器可读的扁平结构时使用（例如 '扁平化文件夹层级'、'瓦解嵌套目录'、/folder-flattening）。通过冲突处理和安全合并逻辑执行确定性的文件夹扁平化。切勿用于简单的单文件移动（使用 batch-file-ops）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 

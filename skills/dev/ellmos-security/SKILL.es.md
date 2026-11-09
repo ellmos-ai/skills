@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Punto de entrada y enrutador de la familia de seguridad ellmos (sec-*), independiente del proveedor: ubica las fases desde el modelo de amenazas, pasando por escaneo, validación, triaje, corrección, verificación y seguimiento, hasta el informe, y remite al skill adecuado. Disparadores: 'security review', 'revisar este repo en busca de vulnerabilidades', 'qué skill de seguridad uso', 'security check de un PR', 'revisar un plugin de terceros', 'SECURITY.md', 'disclosure'. No realiza comprobaciones por sí mismo; el trabajo lo hacen los skills sec-* y los skills vecinos, que aquí solo se enlazan."
+updated: 2026-11-09
+description: "Usar cuando se planifique una auditoría de seguridad, se clasifique una vulnerabilidad o se busque el skill adecuado de la familia sec-* (ej. 'revisión de seguridad', 'comprobar vulnerabilidades en repo', 'qué skill de seguridad usar', /ellmos-security). Actúa como punto de entrada y enrutador para modelado de amenazas, escaneo, triaje, parches y divulgación. NO usar para aplicar parches directamente (usar sec-fix) ni ejecutar escaneos (usar sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

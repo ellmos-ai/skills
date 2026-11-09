@@ -4,8 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 新软件项目接管与新成员入职的标准流程：功能分析、代码质量审查、入职检查清单以及任务创建。
+updated: 2026-11-09
+description: "当快速熟悉一个陌生的软件代码仓库、剖析其整体架构或建立初期开发工作流时使用（例如 '新项目快速上手'、'分析代码库架构'、'仓库初始接入'、/project-onboarding）。全面评估功能特性、代码质量与依赖栈，生成可执行的接入排查清单。切勿用于简单的目录层级爬取（使用 infrastructure/staircase-routing）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 

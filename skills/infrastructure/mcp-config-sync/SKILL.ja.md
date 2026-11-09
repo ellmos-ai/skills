@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-07-27
-description: ユーザーが選択したプロバイダーとアプリクラス間の MCP 設定を検出、計画、同期するためのプロバイダー中立のエントリーポイント。ユーザーが信頼できる情報源、ターゲット、スコープを選択し、暗黙のハブとなるプロバイダーは存在しません。
-
+updated: 2026-11-09
+description: "複数のAIエージェント間でModel Context Protocol（MCP）サーバー設定を検出、計画、同期する場合に使用する（例：'MCPサーバーを同期'、'MCP設定を調整'、'MCP環境を複製'、/mcp-config-sync）。インストール済みMCPサーバーを検出し、暗黙のマスターハブを持たずに中立的に設定を整合させる。スキルやルールファイル全体の同期（agent-config-sync）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 

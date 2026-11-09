@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-07-05
-description: Router y protocolo para leer y extraer contenido web. Decide primero QUÉ se necesita (texto principal vs. estructura vs. captura de pantalla) y luego QUÉ herramienta disponible en el sistema lo ofrece. Si no hay nada adecuado presente, recomienda instalar el módulo web-scraper.
+updated: 2026-11-09
+description: "Usar cuando se requiera leer, extraer o analizar contenido de páginas web (ej. 'lee esta página web', 'extrae texto de URL', 'analizar contenido web', /web-reading). Decide si se necesita texto principal, estructura o captura de pantalla y enruta a la herramienta adecuada. NO usar para consultas de API sin interfaz ni descargas simples de archivos."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['request
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="web-reading banner">
 

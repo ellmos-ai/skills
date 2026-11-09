@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Сверяет измеренные компоненты с текущими первичными рекомендациями и допускает только настроенные и разрешённые исправления."
+updated: 2026-11-09
+description: "Используйте для сканирования активного технологического стека и зависимостей на наличие известных уязвимостей CVE (например, 'проверить стек на уязвимости', 'аудит зависимостей проекта', 'сканировать стек на CVE', /security-tech-stack-check). Сопоставляет установленные компоненты с официальными бюллетенями безопасности. НЕ используйте для предварительного аудита плагинов до установки (используйте dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

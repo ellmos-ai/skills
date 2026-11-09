@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: >
-  Grundlagen der Schematherapie nach Jeffrey Young: Schemata, Modi, Inneres-Kind-Konzept und Bewältigungsstile — psychoedukativ vermittelt.
-
+updated: 2026-11-09
+description: "Verwenden, wenn tief sitzende emotionale Schemata, Persönlichkeitsmodi oder wiederkehrende Lebensfallen reflektiert werden sollen (z. B. 'Schematherapie Modi verstehen', 'Inneres Kind heilen', 'Lebensfallen erkennen', /schema-therapy). Vermittelt Youngs Schematherapie: 18 Schemata, Modi (Verletzliches/Wütendes Kind, Strafender Modus, Gesunder Erwachsener) und Bewältigungsstile. NICHT verwenden für rein kurzfristige Verhaltensaktivierung (dafür behavioral-activation)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

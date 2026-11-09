@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Planifica grabación, transcripción y síntesis de voz con herramientas opcionales e intercambiables.
+updated: 2026-11-09
+description: "Usar cuando se diseñen, configuren o encadenen flujos de voz integrales de grabación, transcripción y síntesis de voz TTS (ej. 'configurar canal de voz', 'configurar salida de voz TTS', 'planificar interacción por voz', /voice). Coordina herramientas modulares de audio para captura, transcripción y habla sintética. NO usar para transcribir únicamente un archivo existente (usar assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

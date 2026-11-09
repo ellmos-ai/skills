@@ -4,15 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Read-only collection and analysis plan for laptops and PCs (Windows, macOS, Linux) when
-  malware, persistence or misconfiguration is suspected: what is collected, how the
-  collection scripts run safely, how the output is read on a clean machine (processes,
-  autostarts, services, network connections, accounts, patch level) and how observation
-  stays separate from interpretation. The default is diagnosis without any change to the
-  target device.
-
+updated: 2026-11-09
+description: "Use when conducting a read-only forensic inspection of a computer suspected of malware, persistence, or tampering (e.g. 'triage infected computer', 'check endpoint for persistence', 'investigate suspicious processes', /endpoint-triage). Gathers autostarts, active services, processes, and network connections safely without modifying the target host. Do NOT use for premature remediation (use malware-cleanup-guide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -38,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="endpoint-triage banner">
 

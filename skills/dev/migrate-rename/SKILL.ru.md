@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: Эволюционное переименование файлов с помощью файлов-оберток (wrapper). Позволяет переименовывать файлы без жестких сбоев — ссылки органично обновляются в процессе использования.
+updated: 2026-11-09
+description: "Используйте для переименования или перемещения файлов, модулей и папок без нарушения существующих импортов и путей (например, 'переименовать файл без поломки импортов', 'переместить модуль с обертками', 'создать заглушку MOVED', /migrate-rename). Создает обратно совместимые файлы-обертки и компактные заглушки для безопасной миграции. НЕ используйте для простых git-переименований, допускающих ломающие изменения."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

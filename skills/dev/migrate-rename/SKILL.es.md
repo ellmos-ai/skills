@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Renombrado evolutivo de archivos con archivos wrapper. Permite renombrar sin interrupciones drásticas: las referencias se actualizan orgánicamente con el uso."
+updated: 2026-11-09
+description: "Usar cuando se renombren o muevan archivos, módulos o directorios sin romper importaciones ni referencias existentes (ej. 'renombrar archivo sin romper importaciones', 'mover módulo con wrappers', 'crear stub MOVED', /migrate-rename). Genera wrappers compatibles hacia atrás y stubs de redirección concisos para una migración segura. NO usar para renombrados simples de git donde se acepten cambios incompatibles."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "与供应商无关的 ellmos 安全技能家族（sec-*）的入口与路由：把从威胁模型到扫描、验证、分类、修复、核验、跟踪直至报告的各个阶段对应起来，并指向合适的技能。触发词：「安全审查」「检查这个仓库有没有漏洞」「该用哪个安全技能」「对 PR 做安全检查」「检查第三方插件」「SECURITY.md」「披露」。本身不执行任何检查；工作由 sec-* 技能以及此处仅作链接的相邻技能完成。"
+updated: 2026-11-09
+description: "当规划安全审计、对漏洞进行分级处置或在 sec-* 安全家族中查找匹配技能时使用（例如 '安全审计'、'排查仓库安全漏洞'、'选用哪个安全技能'、/ellmos-security）。充当涵盖威胁建模、扫描、分流、修复、验证及漏洞披露的全局路由总指挥。切勿用于直接生成代码补丁（使用 sec-fix）或执行扫描（使用 sec-scan）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

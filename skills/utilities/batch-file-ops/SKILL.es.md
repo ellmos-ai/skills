@@ -4,9 +4,8 @@ version: 1.0.0
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Operaciones de archivos en lote (eliminar, mover, copiar, listar) con patrones glob. Herramienta de CLI para operaciones eficientes del sistema de archivos. Sin dependencias.
-
+updated: 2026-11-09
+description: "Usar cuando se necesiten operaciones masivas en el sistema de archivos como copiar, mover, eliminar o listar mediante patrones glob (ej. 'mover archivos en lote', 'eliminar todos los *.tmp por patrón', /batch-file-ops). Ejecuta acciones seguras sobre archivos sin dependencias externas. NO usar para reemplazos de texto dentro de archivos o ediciones interactivas individuales."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 

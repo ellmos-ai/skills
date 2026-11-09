@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Activación conductual para la depresión: romper el círculo vicioso, registro de actividades, planificación semanal y actividades basadas en valores."
+updated: 2026-11-09
+description: "Usar cuando se afronte desmotivación, letargo o aislamiento depresivo mediante activación conductual estructurada (ej. 'romper espiral de inactividad', 'planificar actividades semanales', 'recuperar rutina diaria', /behavioral-activation). Revierte ciclos de evitación mediante registros de actividad, escalas de agrado/logro y tareas graduadas. NO usar para intervención en crisis agudas (usar stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

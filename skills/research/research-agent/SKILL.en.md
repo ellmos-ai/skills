@@ -4,9 +4,8 @@ version: 0.1.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Research pipeline for PubMed and arXiv. Quick search and structured literature reviews using pure Python standard library.
-
+updated: 2026-11-09
+description: "Use when conducting or validating academic research projects, gathering literature, or checking scientific claims (e.g. 'research state of the art', 'conduct literature review', 'verify citations and claims', /research-agent). Orchestrates a project-first research pipeline with live gates, PDF evidence, claim boundaries, and publication controls. Do NOT use for informal web searches without evidence standards."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 

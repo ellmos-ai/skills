@@ -4,10 +4,9 @@ version: 1.0.0
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-08-23
+updated: 2026-11-09
 category: assist
-description: Route planning from A to B via OSRM (Open Source Routing Machine). Supports car, bicycle and pedestrian. No API key required.
-
+description: "Verwenden, wenn Wegstrecken, Routen und Reisezeiten von A nach B für Auto, Fahrrad oder Fußgänger berechnet werden sollen (z. B. 'Route von A nach B berechnen', 'Fahrzeit ermitteln', 'Fahrradroute planen', /reiseroute). Berechnet Wegstrecken und Geometrien via OSRM (Open Source Routing Machine) ohne API-Key. NICHT verwenden für reine POI-Umkreissuche (dafür assist/location-suche)."
 tags: [routing, navigation, osrm, openstreetmap, reise]
 standalone: true
 anthropic_compatible: true
@@ -21,6 +20,7 @@ provenance: {'origin': 'BACH hub routing-service', 'origin_path': 'system/hub/_s
 language: de
 visibility: public
 ---
+
 <img src="banner.png" width="100%" alt="reiseroute banner">
 
 # Reiseroute

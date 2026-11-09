@@ -4,8 +4,8 @@ version: 1.0.0
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Python アプリケーション向けの汎用プラグインシステム。自動検出、検証、耐障害性を備える。依存関係ゼロ（Python 標準ライブラリのみ）。
+updated: 2026-11-09
+description: "Pythonアプリケーションに自動検出機能と耐障害性を備えた拡張プラグインアーキテクチャを設計・実装する場合に使用する（例：'プラグインシステムを実装'、'プラグインを動的ロード'、'拡張可能なアプリ設計'、/plugin-system）。標準ライブラリのみでライフサイクルフックと分離性を備えた軽量ローダーを提供する。信頼できないサードパーティ製プラグインの安全性監査（dev/sec-supplychain）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 

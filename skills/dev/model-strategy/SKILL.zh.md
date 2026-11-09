@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-06-13
-description: 多模型编排与模型切换策略。基于评分的模型选择、跨 Agent 委托（Gemini、Codex、Ollama）、顾问（Advisor）配对、升级触发条件、权限矩阵和成本效率优化。
+updated: 2026-11-09
+description: "当在多智能体协同流水线或子智能体分工中选取最佳 LLM 模型与推理强度（Reasoning Effort）时使用（例如 '为此任务选择合适模型'、'子智能体模型选型策略'、'指定审查模型'、/model-strategy）。依据复杂度与成本将模型梯队分配给特定角色（思考者、执行工、审查者、升级兜底）。切勿用于运行时代币配额记账（使用 infrastructure/budgetierung）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strategie.md', 'origin_version': '2.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 

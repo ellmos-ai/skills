@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-07-05
-description: 用于读取和提取 Web 内容的路由器和协议。首先决定需要什么（主要文本 vs 结构 vs 截图），然后决定系统上可用的哪个工具可以提供该内容。如果没有合适的内容，建议安装 web-scraper 模块。
+updated: 2026-11-09
+description: "当需要读取、提取或分析网页内容时使用（例如 '读取此网页'、'从 URL 提取文本'、'分析网页内容'、/web-reading）。按需决策需要正文文本、结构还是屏幕截图，并路由到最佳可用工具。切勿用于纯 API 查询或简单文件下载。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +18,8 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['request
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="web-reading banner">
 

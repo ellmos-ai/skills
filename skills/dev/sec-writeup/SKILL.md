@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Erstellt aus Notizen, PoC und Funden einen eigenständigen, skeptisch geprüften Schwachstellenbericht für die koordinierte Offenlegung: betroffene Versionen, Reproduktionsschritte, Auswirkung, Fix, Zeitleiste. PoC minimal (kein einsatzfähiger Exploit), Secrets geschwärzt, jede Behauptung durch Evidenz belegt oder als ungeprüft markiert. Auslöser: 'Disclosure schreiben', 'Schwachstellenbericht', 'Advisory-Text', 'Meldung an den Maintainer'. Nicht für den internen Scanbericht (sec-report) und nicht fürs Ticket (sec-track)."
+updated: 2026-11-09
+description: "Verwenden, wenn ein fundierter, nachvollziehbarer Schwachstellenbericht für eine koordinierte Offenlegung (Coordinated Vulnerability Disclosure) verfasst werden soll (z. B. 'Schwachstellenbericht schreiben', 'Disclosure verfassen', 'Advisory-Text formulieren', /sec-writeup). Erstellt faktenbasierte Berichte mit betroffenen Versionen, Proof-of-Concept, Auswirkungen und Abhilfe. NICHT verwenden für interne Ticket-Erfassung (dafür sec-track)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

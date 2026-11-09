@@ -4,9 +4,8 @@ version: 1.1.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-06-13
-description: "8-phase development cycle: Feature requests, current state, functional planning, frontend, backend planning, backend code, tests, use cases. Iterative framework for systematic software development."
-
+updated: 2026-11-09
+description: "Use when implementing software features through an iterative, structured 8-phase development cycle (e.g. 'develop feature systematically', 'start development cycle', '8-phase engineering', /dev-cycle). Guides engineering teams through requirements, current state, functional specs, frontend, backend, and testing. Do NOT use for small isolated bug fixes (use bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklus.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 

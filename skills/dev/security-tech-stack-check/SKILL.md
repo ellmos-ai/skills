@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Prüft den gemessenen Tech-Stack anhand aktueller primärer Sicherheitshinweise, trennt Betroffenheit von Unsicherheit und führt nur eng autorisierte, konfigurierte Korrekturen mit Readback aus."
+updated: 2026-11-09
+description: "Verwenden, wenn der gemessene Tech-Stack auf bekannte Sicherheitslücken, veraltete Bibliotheken oder Fehlkonfigurationen geprüft werden soll (z. B. 'Tech-Stack auf Schwachstellen prüfen', 'Abhängigkeiten prüfen', 'CVEs im Stack finden', /security-tech-stack-check). Gleicht installierte Komponenten mit primären Sicherheitshinweisen ab und trennt Betroffenheit von Unsicherheit. NICHT verwenden für die Prüfung fremder Plugins vor der Installation (dafür dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

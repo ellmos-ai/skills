@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: Compétence universelle de navigation, d'orientation et de résilience d'urgence pour les agents LLM. Fournit des heuristiques actives de repérage, d'auto-orientation et de récupération lorsque les agents font face à une dérive de contexte, des échecs d'outils, des boucles ou des impasses.
+updated: 2026-11-09
+description: "Utiliser lorsqu'un agent subit une dérive de contexte, tourne en boucle, fait face à des échecs d'outils ou une impasse cognitive (ex. 'contexte perdu', 'bloqué dans une boucle', 'retrouver orientation et cap', /wayfinding-routing). Fournit des heuristiques de réorientation, navigation à l'estime et recalage sur les objectifs initiaux. Ne PAS utiliser pour la navigation ordinaire dans les répertoires (utiliser staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,6 +14,7 @@ tags: [wayfinding, wayfinding-routing, survival-routing, dead-reckoning, pathfin
 language: fr
 status: active
 ---
+
 
 <img src="banner.png" width="100%" alt="wayfinding-routing banner">
 

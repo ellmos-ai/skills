@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-06-13
-description: "Métodos sistémicos y centrados en soluciones: pregunta del milagro, escalas, exploración de excepciones, preguntas circulares, preguntas hipotéticas, preguntas de empeoramiento, preguntas de afrontamiento. Combinado de solución de problemas y preguntas sistémicas."
+updated: 2026-11-09
+description: "Usar cuando se integren la perspectiva sistémica y la terapia breve centrada en soluciones en procesos de asesoramiento o reflexión (ej. 'asesoramiento sistémico centrado en soluciones', 'preguntas circulares y de escala', /systemisch-loesungsfokussiert). Unifica preguntas circulares, la pregunta del milagro, búsqueda de excepciones y escalas de avance. NO usar para registros de pensamientos de TCC (usar cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 

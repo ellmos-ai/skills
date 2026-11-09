@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 斯蒂芬·海斯（Steven Hayes）的接纳承诺疗法（ACT）：包含心理灵活性六大核心过程的 Hexaflex 模型。
+updated: 2026-11-09
+description: "当通过接纳承诺疗法（ACT）提升心理灵活性、践行基于价值观的生活或体验性接纳时使用（例如 '明确价值观'、'练习认知解离'、'接纳而非回避'、/act-techniques）。系统介绍六边形模型（Hexaflex）及其 6 大核心过程。切勿用于自动思维的认知重塑（使用 cognitive-restructuring）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 

@@ -4,11 +4,8 @@ version: 1.2.0
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-07-29
-description: >
-  新規、再構築、または交換用のワークステーション向けのプロバイダーに依存しないオンボーディングプロトコル。
-  認証情報、プライベートプロンプト、またはホスト固有の構成をリポジトリにコピーすることなく、OSの前提条件、
-  エージェント実行環境、共有ルール面、ポータブルスキル、検証済み構成、およびインストール後のエビデンスを確立します。
+updated: 2026-11-09
+description: "新規または再インストールされたワークステーションをエージェント開発環境向けにセットアップ・初期設定する場合に使用する（例：'新しいPCをセットアップ'、'ワークステーションのオンボーディング'、'エージェント開発環境の構築'、/system-onboarding）。資格情報の漏洩を防ぎながら、OS前提条件、ランタイム、共通ルール、ポータブルスキルを安全に配備する。単一リポジトリの導入（dev/project-onboarding）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -30,6 +27,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 

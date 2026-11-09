@@ -4,9 +4,8 @@ version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-04-04
-updated: 2026-06-20
-description: "Obtiene transcripciones (subtítulos) y metadatos de fuentes de video en línea y los emite en Markdown, JSON o texto plano. Actualmente compatible: YouTube. Prefiere subtítulos creados manualmente y recurre a los generados automáticamente."
-
+updated: 2026-11-09
+description: "Usar cuando se requiera descargar transcripciones, subtítulos o metadatos de plataformas de vídeo online como YouTube (ej. 'transcribir vídeo de YouTube', 'descargar subtítulos de vídeo', /video-transcriber). Extrae subtítulos manuales y automáticos en Markdown, JSON o texto plano. NO usar para transcribir archivos de audio locales con Whisper (usar assist/transkription)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube-transcript-api', 'yt-dlp']}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="video-transcriber banner">
 

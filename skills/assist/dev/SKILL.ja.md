@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: 開発者アシスタント（ATI の後継）。ヘッドレススキャンによりプロジェクトの概要を迅速に取得し、利用可能なコーディングツール（CodeCommander MCP（分析/リファクタリング/診断）および ellmos-code-tools モジュール）へルーティングします。独自のストアを持たず、純粋なツールルーティングとスキャンを実行します。
+updated: 2026-11-09
+description: "ヘッドレススキャンによってソフトウェアプロジェクトの開発状況を素早く把握し、適切なコーディングツールへ案内する場合に使用する（例：'プロジェクトをスキャン'、'リポジトリ構造の概要把握'、'コードツールへ誘導'、/dev）。独自の永続ストレージを持たず、迅速なプロジェクト構造分析とCodeCommanderやellmos-code-toolsへのルーティングを行う。自律的な開発ループ（dev/dev-soft-agent）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
 provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev banner">
 

@@ -4,11 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
-description: >
-  ディレクトリ階層を上下に検索して道標ドキュメント（CLAUDE.md、AGENTS.md、README.md、RULES.md）や
-  ユーザー設定可能なキーワード（staircase-config.json または config.json 経由）を探す
-  独立したナビゲーションおよびルーティング戦略。Up-and-Down Routing または Walking Bass Routing としても知られています。
+updated: 2026-11-09
+description: "ディレクトリ階層を上下に探索し、CLAUDE.md、AGENTS.md、RULES.mdなどの統括ガイドラインやポインタ文書を特定する場合に使用する（例：'フォルダー階層からルールを探索'、'統括ガイドラインを見つける'、'ステアケースルーティング'、/staircase-routing）。親ディレクトリや子ディレクトリを体系的に走査して適用ルールを解決する。対象プロジェクトの起点が既に判明している場合（load-project）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -28,6 +25,7 @@ provenance:
   origin_version: null
   origin_repo: "github.com/ellmos-ai/skills"
 ---
+
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 

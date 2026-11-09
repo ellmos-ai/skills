@@ -4,22 +4,9 @@ version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-07-30
+updated: 2026-11-09
 aliases: [repo-after-care, repo-pflege, after-care, repo-nachpflege, repo-wartung]
-description: >
-  Regular maintenance round for an already published GitHub repository (Level 1,
-  low-cost and frequently repeatable): first identify all distribution channels of the project
-  (npm, PyPI, registries, marketplaces, stores, website) and mirror changes there later,
-  then set topics, run privacy gate, check documents for intent to publish and retroactively ignore
-  internal planning files, add banners, align statements in the README with the actual code state,
-  improve presentation, complete README language versions, implement visibility measures, check entry
-  on the organization page, and process open issues and pull requests.
-  Use this skill when an existing repo needs to be maintained, cleaned up, updated, polished,
-  or "reviewed again", when a repo appears outdated or cluttered, on phrases like "repo maintenance",
-  "after care", "bring repo up to date", "clean up and push", or during rotating quality rounds across multiple repos.
-  For the deep round including legal check and cross-organization references, use full-after-care instead;
-  for initial publishing, use github-repo-care.
-
+description: "Use when an existing published GitHub repository needs maintenance, cleanup, updating, or visual polish (e.g. 'repo care', 'after care', 'update repo', 'clean up and push', /surface-after-care). Runs lightweight level-1 maintenance: checks distribution surfaces, sets topics, runs privacy gate, verifies README claims against real code, adds banners, completes translations, and reviews open issues/PRs. Do NOT use for deep audits including legal reviews and cross-org references (use full-after-care) or initial publication (use github-repo-care)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -45,6 +32,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="surface-after-care banner">
 # Surface After Care — The Regular Maintenance Round for a Published Repo

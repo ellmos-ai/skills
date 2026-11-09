@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Ayuda de forma neutral con aventuras, escenas, personajes y organización de campañas.
+updated: 2026-11-09
+description: "Usar cuando se preparen o dirijan campañas de rol de mesa (TTRPG), aventuras, personajes no jugadores (PNJ) o escenas (ej. 'generar PNJ', 'planificar sesión de rol', 'diseñar encuentro de aventura', /rpg). Asiste a directores de juego y jugadores de forma neutral con creación de mundos, tramas y encuentros. NO usar para código de videojuegos ni reglamentos de juegos de mesa."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="rpg banner">
 

@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Entry point and router of the provider-neutral ellmos security family (sec-*): places phases from threat model through scan, validation, triage, fix, verification and tracking to the report, and points to the right skill. Triggers: 'security review', 'check this repo for vulnerabilities', 'which security skill', 'security-check a PR', 'check a third-party plugin', 'SECURITY.md', 'disclosure'. Performs no checks itself; the work is done by the sec-* skills and the neighbour skills that are only linked here."
+updated: 2026-11-09
+description: "Use when planning a security review, triaging a vulnerability, or identifying the right skill within the sec-* security family (e.g. 'security review', 'check repo for vulnerabilities', 'which security skill', /ellmos-security). Serves as entry point and router across threat modeling, scanning, triage, fixing, verification, and disclosure. Do NOT use for directly patching code (use sec-fix) or running scanners (use sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

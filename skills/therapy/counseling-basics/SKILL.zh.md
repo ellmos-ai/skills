@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 治疗性沟通基础：倾听、共情回应、释义重述、开放式提问以及情绪确认与接纳。
+updated: 2026-11-09
+description: "当应用以人为中心（罗杰斯）的咨询基本功与共情沟通技巧时使用（例如 '积极倾听'、'情感共鸣与释义重述'、'提开放式问题'、/counseling-basics）。涵盖共情理解、情感确认、无条件积极关注与非评判性姿态。切勿用于特定心理障碍的治疗方案设计（使用 guideline-therapies-overview）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechsfuehrung_basis.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 

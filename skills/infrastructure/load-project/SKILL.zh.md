@@ -4,11 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-30
-description: >
-  在具体的项目任务开始时或上下文不明确时：解析目标，加载适用的规则层级，
-  跟踪绑定引用，并在实际工作前构建基于证据的现状报告。
-
+updated: 2026-11-09
+description: "当在项目中启动新任务、需要系统化建立工作上下文、加载规约层级并核查先决依赖时使用（例如 '加载项目上下文'、'读取项目规约'、'任务开工前形势评估报告'、/load-project）。解析项目范围，加载规则文件（CLAUDE.md 等）并在开工前输出依据确凿的态势报告。切勿用于陌生代码库的初次整体接入（使用 dev/project-onboarding）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -34,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="load-project banner">
 

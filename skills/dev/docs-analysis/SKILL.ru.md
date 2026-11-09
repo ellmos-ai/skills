@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Анализ требований к документам: анализирует концептуальные документы и документы требований в папке docs/, проверяет требования по текущему коду и создает сводный отчет о различиях."
+updated: 2026-11-09
+description: "Используйте для сверки архитектурной документации, ТЗ или требований с реальным кодом, а также для консолидации планов (например, 'сверить документацию с кодом', 'консолидировать планы', 'анализ расхождений в документации', /docs-analysis). Сопоставляет спецификации с реализацией и объединяет разрозненные планы в актуальный документ. НЕ используйте для синтаксической проверки диаграмм (используйте dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 

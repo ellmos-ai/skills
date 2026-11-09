@@ -4,9 +4,8 @@ version: 1.0.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Standard procedure for onboarding new software projects: Feature analysis, code quality review, onboarding checklist, and task creation."
-
+updated: 2026-11-09
+description: "Verwenden, wenn ein bestehendes oder neues Software-Projekt strukturiert analysiert, verstanden und initial in den Workflow eingebunden werden soll (z. B. 'Projekt einlesen', 'Onboarding für Repository', 'Codebasis verstehen', /project-onboarding). Analysiert Features, Codequalität, Abhängigkeiten und generiert eine Onboarding-Checkliste mit ersten Aufgaben. NICHT verwenden für die bloße Ordnernavigation (dafür infrastructure/staircase-routing)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -19,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-aufnahme.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 
 # Standardaufnahmeverfahren fuer neue Software-Projekte

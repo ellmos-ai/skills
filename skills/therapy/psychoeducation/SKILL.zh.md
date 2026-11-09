@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 关于抑郁症、焦虑障碍、PTSD、双相情感障碍、精神分裂症、ADHD及边缘型人格障碍的心理教育。科普心理健康知识，不作诊断。
+updated: 2026-11-09
+description: "当客观、去病耻化地科普心理健康状况、症状表现及易感性-应激模型时使用（例如 '了解焦虑症状'、'抑郁/ADHD 心理宣教'、/psychoeducation）。以通俗易懂的方式讲解生物-心理-社会发病机制与循证治疗选择。切勿用于做出个体医学诊断或替代专业诊疗。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

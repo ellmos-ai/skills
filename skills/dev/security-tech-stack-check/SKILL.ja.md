@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "実測した構成要素を最新の一次セキュリティ情報と照合し、設定済みで権限のある修正だけを実施する。"
+updated: 2026-11-09
+description: "現在稼働中の技術スタックや依存パッケージをスキャンし、既知の脆弱性（CVE）や設定不備を点検する場合に使用する（例：'技術スタックの脆弱性を検査'、'プロジェクトの依存関係を監査'、'CVEスキャンを実行'、/security-tech-stack-check）。実測された環境のコンポーネントを公的セキュリティ勧告と照合し客観的根拠を示す。外部プラグインの導入前事前隔離審査（dev/sec-supplychain）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['web'], 'services': [], 'protocols': [tech-detect], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="security-tech-stack-check banner">
 

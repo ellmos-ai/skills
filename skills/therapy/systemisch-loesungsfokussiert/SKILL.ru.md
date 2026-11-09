@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-06-13
-description: "Системные и ориентированные на решение методы: чудесный вопрос, шкалирование, исследование исключений, циркулярные вопросы, гипотетические вопросы, вопросы на ухудшение, вопросы на преодоление. Объединено из ориентированной на решение терапии и системных вопросов."
+updated: 2026-11-09
+description: "Используйте для интеграции системного подхода и ориентированной на решение краткосрочной терапии в консультировании (например, 'системное консультирование', 'вопросы о решениях и циркулярность', /systemisch-loesungsfokussiert). Объединяет циркулярные вопросы, чудесный вопрос, поиск исключений и шкалы в единый инструментарий. НЕ используйте для стандартных дневников мыслей КПТ (используйте cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-therapy (v1.0.0, BACH skills/therapie/loesungsfokussierte_therapie.md)', 'therapy/systemic-questioning (v1.0.0, BACH skills/therapie/systemische_fragetechniken.md)'], 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-05-19', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 

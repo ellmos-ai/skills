@@ -4,8 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: "[Français] Compétence d'agent pour dev-soft-agent: Automated software development pipeline. Scans projects, prioritizes tasks, analyzes code, and orchestrates development loops. Zero dependencies (Python stdlib only)."
+updated: 2026-11-09
+description: "Utiliser pour scanner, hiérarchiser et faire progresser un projet logiciel en continu via des boucles de développement automatisées (ex. 'boucle de développement autonome', 'scanner projet et traiter le backlog', 'lancer l'agent de dev', /dev-soft-agent). Pilote l'analyse du code, la priorisation des tâches et les itérations sans dépendances externes. Ne PAS utiliser pour de simples modifications ponctuelles sans cadre de projet."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 

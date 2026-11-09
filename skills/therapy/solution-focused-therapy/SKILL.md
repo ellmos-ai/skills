@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: >
-  Grundlagen der lösungsfokussierten Kurztherapie nach Steve de Shazer und Insoo Kim Berg: Wunderfrage, Ausnahmen-Exploration, Skalierung, Ressourcenaktivierung.
-
+updated: 2026-11-09
+description: "Verwenden, wenn der Fokus schnell und ressourcenorientiert auf Lösungen und Ausnahmen statt auf Problemursachen gerichtet werden soll (z. B. 'Wunderfrage stellen', 'Ausnahmen vom Problem finden', 'Skalierungsfragen nutzen', /solution-focused-therapy). Vermittelt die de Shazer / Berg Kurztherapie: Wunderfrage, Ausnahmen-Exploration, Skalierung und Ressourcenaktivierung. NICHT verwenden für tiefenpsychologische Ursachenforschung."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

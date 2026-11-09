@@ -256,3 +256,88 @@ Sample text
 
     assert result is not None
     assert result["repo_name"] == "next-tool"
+
+
+def test_verify_proposals_and_blacklist_gate(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    _minimal_workspace(workspace)
+    repos_root = tmp_path / "repos"
+    repo_dir = repos_root / "tool" / "src"
+    repo_dir.mkdir(parents=True)
+    (repo_dir / "main.py").write_text("def run(): pass\n", encoding="utf-8")
+
+    (workspace / "config.json").write_text(
+        json.dumps({"compliance": {"require_code_evidence": True}}),
+        encoding="utf-8",
+    )
+    (workspace / "rejected_proposals.json").write_text(
+        json.dumps(
+            {
+                "platform_exclusions": [{"platform": "Dev.to"}],
+                "rejected_proposals": [
+                    {
+                        "proposal_id": "OUTBOUND-PROPOSAL-BLACKLISTED-1",
+                        "canonical_url": "https://reddit.com/r/python/comments/bad123/thread",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    inbox_content = """# POST-EINGANG
+
+### [OUTBOUND-PROPOSAL-GOOD-1] Valid Proposal
+- **Plattform:** Reddit
+- **Ziel-URL:** https://www.reddit.com/r/python/comments/good123/thread/
+- **Lösungs-Repo:** org/tool
+- **Code-Beleg (Verifiziert):** `src/main.py` (`run`)
+- [x] Genehmigt
+
+#### Textvorschlag:
+```text
+Verified post text
+```
+
+### [OUTBOUND-PROPOSAL-NO-EVIDENCE-1] Missing Code Evidence
+- **Plattform:** Reddit
+- **Ziel-URL:** https://www.reddit.com/r/python/comments/noev123/thread/
+- **Lösungs-Repo:** org/tool
+- [x] Genehmigt
+
+#### Textvorschlag:
+```text
+Unverified post text
+```
+
+### [OUTBOUND-PROPOSAL-BAD-URL-1] Blacklisted URL
+- **Plattform:** Reddit
+- **Ziel-URL:** https://www.reddit.com/r/python/comments/bad123/thread/
+- **Lösungs-Repo:** org/tool
+- **Code-Beleg (Verifiziert):** `src/main.py` (`run`)
+- [x] Genehmigt
+
+#### Textvorschlag:
+```text
+Blacklisted URL text
+```
+"""
+    (workspace / "POST-EINGANG.md").write_text(inbox_content, encoding="utf-8")
+
+    engine = CommunityOutreachEngine(workspace)
+    verification = engine.verify_proposals(repos_root=repos_root)
+    assert verification["status"] == "failed"
+    assert verification["verified_count"] == 1
+    assert verification["failed_count"] == 2
+    by_id = {item["id"]: item for item in verification["results"]}
+    assert by_id["OUTBOUND-PROPOSAL-GOOD-1"]["status"] == "verified"
+    assert by_id["OUTBOUND-PROPOSAL-GOOD-1"]["verified_files"] == ["src/main.py"]
+    assert by_id["OUTBOUND-PROPOSAL-NO-EVIDENCE-1"]["has_code_evidence"] is False
+    assert by_id["OUTBOUND-PROPOSAL-BAD-URL-1"]["blacklisted"] is True
+
+    outbound = engine.phase2_outbound_execution()
+    out_by_id = {item["id"]: item for item in outbound}
+    assert out_by_id["OUTBOUND-PROPOSAL-GOOD-1"]["reason"] == "publisher-unavailable"
+    assert out_by_id["OUTBOUND-PROPOSAL-NO-EVIDENCE-1"]["reason"] == "missing-code-evidence"
+    assert out_by_id["OUTBOUND-PROPOSAL-BAD-URL-1"]["status"] == "blacklisted"
+

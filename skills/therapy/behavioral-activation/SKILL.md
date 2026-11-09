@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Verhaltensaktivierung bei Depression: Den Teufelskreis durchbrechen, Aktivitätsprotokoll, Wochenplanung und wertebasierte Aktivitäten.
-
+updated: 2026-11-09
+description: "Verwenden, wenn bei Antriebslosigkeit, Erschöpfung oder depressiven Verstimmungen schrittweise Aktivitäten aufgebaut werden sollen (z. B. 'Antriebslosigkeit überwinden', 'Aktivitäten planen', 'Tagesstruktur aufbauen', /behavioral-activation). Durchbricht depressive Rückzugsmuster mit Aktivitätsprotokollen, Wochenplanung und werteorientierter Aktivierung. NICHT verwenden für akute Krisenintervention oder Notfallstabilisierung (dafür stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

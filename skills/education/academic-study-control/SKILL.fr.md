@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Gestion académique des études et des délais avec vérification des sources, confidentialité
-  et planification d'action réaliste.
+updated: 2026-11-09
+description: "Utiliser pour organiser le calendrier d'études universitaires, les échéances de modules ou les plannings d'examens (ex. 'planifier mon semestre', 'gérer les dates limites d'études', 'organiser les examens', /academic-study-control). Structure délais et étapes avec vérification des sources et respect de la confidentialité. Ne PAS utiliser pour l'apprentissage actif (utiliser academic-study-learn) ou les examens blancs (utiliser academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -16,6 +14,8 @@ aliases: [academic-study-control, academic-study-control-fr]
 language: fr
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-control banner">
 

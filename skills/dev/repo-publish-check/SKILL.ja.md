@@ -1,11 +1,11 @@
 ---
 name: repo-publish-check
-description: リポジトリの公開前または公開後の再確認で、プライバシー、秘密情報、ライセンス、第三者コンテンツ、文書、承認状況を確認する利用者中立の Skill。公開操作自体は行わない。
+description: "リポジトリを公開またはリリースする前に、情報漏洩やライセンス違反がないかを第三者的に監査・検証する場合に使用する（例：'公開前にリポジトリを点検'、'リリース前監査'、'公開準備状況の確認'、/repo-publish-check）。プライバシー境界、シークレット、ライセンス、外部帰属表示を読み取り専用で検査する。実際のgit pushやリリースの実行（dev/github-repo-care）には使用しない。"
 version: 1.1.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
+updated: 2026-11-09
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -20,6 +20,7 @@ dependencies:
   protocols: []
   python: []
 ---
+
 
 <img src="banner.png" width="100%" alt="repo-publish-check banner">
 

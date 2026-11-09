@@ -4,18 +4,8 @@ version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-30
-description: >
-  Construye una automatización de flujo de trabajo ejecutable y neutral para el usuario a partir de una transcripción de chat
-  o de prompts de automatización existentes (ej. de otro sistema de agentes): un prompt recurrente
-  o skill de automatización para Cron/Schedule/Loop. Alias: automations-extractor. Úsalo cuando se solicite:
-  "haz una automatización de esto", "esto debe ejecutarse regularmente/por la noche", "extrae flujos de trabajo de estas
-  transcripciones/automatizaciones", "construye una automatización a partir de esta sesión", o en `/workflow-extract`.
-  Complementa sistemáticamente los bloques de construcción de automatización faltantes (selección por rotación,
-  registro de verificación, idempotencia, higiene de logs, puerta de aprobación, traspaso de escalación, disciplina de reporte).
-  También incluye el modo Auditoría de Flota (Fleet Audit): examinar flotas de automatización existentes en busca de fallos silenciosos,
-  redundancia, desviación y vacíos. Si se necesita un skill ejecutable a petición, usa el skill hermano skill-extractor.
-
+updated: 2026-11-09
+description: "Usar cuando se solicite automatizar flujos de trabajo a partir de transcripciones o sesiones (ej. 'haz una automatización de esto', 'esto debe ejecutarse regularmente', 'extrae flujos de trabajo', /workflow-extract). Construye automatizaciones ejecutables para Cron/Schedule/Loop con rotación, idempotencia, higiene de logs y puertas de aprobación, o audita flotas de automatización existentes en busca de fallos y derivas. NO usar para crear skills bajo demanda interactiva (usar skill-extractor)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -41,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="workflow-extract banner">
 # Workflow-Extract — Construir automatizaciones a partir de transcripciones de chat y automatizaciones externas (Español)

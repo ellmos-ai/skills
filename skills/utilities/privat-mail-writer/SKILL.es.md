@@ -4,8 +4,8 @@ version: 0.2.0
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-06-19
-description: Esta skill debe utilizarse cuando el usuario desee escribir, responder, rechazar, hacer seguimiento, acortar, reformular o redactar correos electrónicos privados o semi-formales en su propio estilo, especialmente para citas, rechazos oficiales, respuestas cortas amables y un tono adaptado al contacto. Iniciar el análisis del perfil solo cuando haya un encargo concreto de redacción de correo.
+updated: 2026-11-09
+description: "Usar cuando se redacten, respondan o pulan correos electrónicos personales o semiformales con tono auténtico (ej. 'escribe un correo a...', 'redactar cancelación educada', 'acortar y hacer seguimiento a correo', /privat-mail-writer). Redacta correos precisos adaptados al contacto y al contexto. NO usar para campañas de marketing empresarial o correos masivos (usar dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,8 @@ status: active
 dependencies: {'tools': [], 'optional_tools': [{'name': 'mail-connector', 'path': '.AI/.MODULES/mail-connector/', 'cli': 'mailc', 'python_module': 'mail_connector.cli', 'usage': 'mailc context <kontakt> --mode reply --json  # Liefert Mail-Kontext als JSON für Profilaufbau', 'note': 'Optionales lokales IMAP-CLI-Tool. Nur nutzen wenn installiert (`pip install -e .` im Modulordner). Ohne dieses Tool arbeitet der Skill ohne Mailzugriff.'}], 'services': ['mail-backend-optional'], 'protocols': ['kontaktprofil', 'usecase-registry'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'None', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
+
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 

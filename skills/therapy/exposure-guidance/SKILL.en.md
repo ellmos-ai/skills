@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Graded exposure for anxiety disorders: Fear hierarchy, SUDs scale, exposure planning and guidance. Psychoeducation only, not implementation."
-
+updated: 2026-11-09
+description: "Use when confronting anxiety, phobias, or avoidance behavior through graded exposure psychoeducation (e.g. 'create fear hierarchy', 'plan exposure exercise', 'SUDs scale', /exposure-guidance). Explains habituation mechanisms, in-vivo/in-sensu hierarchy design, and safety behavior fading. Do NOT use for unguided trauma exposure or acute distress calming (use stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  使用可替换的可选工具规划录音、转写和语音输出。
+updated: 2026-11-09
+description: "当设计、配置或串联录音、转录及文本转语音（TTS）等端到端全流程语音工作流时使用（例如 '搭建语音交互流程'、'配置 TTS 语音朗读输出'、'规划人机语音交互'、/voice）。编排用于录音捕获、文字转写及语音合成的模块化音频工具。切勿用于现有音频文件的单纯离线转写（使用 assist/transkription）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

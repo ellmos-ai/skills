@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Точка входа и маршрутизатор независимого от провайдера семейства навыков безопасности ellmos (sec-*): размещает фазы от модели угроз через сканирование, валидацию, триаж, исправление, проверку и отслеживание до отчёта и указывает на нужный навык. Триггеры: 'security review', 'проверить репозиторий на уязвимости', 'какой навык безопасности использовать', 'проверка безопасности PR', 'проверить сторонний плагин', 'SECURITY.md', 'disclosure'. Сам проверок не выполняет; работу делают навыки sec-* и соседние навыки, на которые здесь лишь даны ссылки."
+updated: 2026-11-09
+description: "Используйте для планирования аудита безопасности, оценки уязвимости или подбора нужного навыка из семейства sec-* (например, 'проверка безопасности', 'проверить репозиторий на уязвимости', 'какой навык безопасности выбрать', /ellmos-security). Служит навигатором по моделированию угроз, сканированию, триажу, патчам, верификации и раскрытию. НЕ используйте для прямого создания патчей (используйте sec-fix) или сканирования (используйте sec-scan)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="ellmos-security banner">
 

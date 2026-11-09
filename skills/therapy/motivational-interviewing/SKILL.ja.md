@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: ミラーとロールニックに基づく動機づけ面接（MI）：OARS手法、チェンジトーク、変容への準備性の促進。
+updated: 2026-11-09
+description: "行動変容に関する両価性（アンビバレンス）の解消や、変化への動機づけを高める場合に使用する（例：'動機づけ面接'、'迷いや葛藤の解消'、'チェンジトークを引き出す'、/motivational-interviewing）。ミラー＆ロルニックのMI原則（OARS技法、決定バランスの探求、チェンジトークの誘発）を解説する。指示的な説教や対決的な指導には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivational_interviewing.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 

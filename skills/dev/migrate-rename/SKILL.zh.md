@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: 使用 Wrapper 包装文件进行渐进式文件重命名。无需强行打断即可实现重命名 — 引用会在日常使用中自然被更新。
+updated: 2026-11-09
+description: "当重命名或移动文件、模块或目录且不能破坏既有导入与路径依赖时使用（例如 '无损重命名文件保持导入兼容'、'带包装器迁移模块'、'创建 MOVED 转向桩'、/migrate-rename）。生成向下兼容的包装器文件与精简的重定向存根以实现平滑演进。切勿用于允许破坏性变更的普通 git 重命名。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

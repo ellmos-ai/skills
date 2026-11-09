@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Схема-терапия по Джеффри Янгу: схемы, режимы, концепция внутреннего ребенка и стили копинга — в психообразовательном формате."
+updated: 2026-11-09
+description: "Используйте для исследования глубинных эмоциональных схем, повторяющихся жизненных ловушек и режимов (например, 'режимы схема-терапии', 'уязвимый ребенок и здоровый взрослый', 'ловушки жизни', /schema-therapy). Знакомит с моделью Джеффри Янга: базовыми эмоциональными потребностями, ранними дезадаптивными схемами и копингами. НЕ используйте для быстрой поведенческой активации (используйте behavioral-activation)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schematherapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 

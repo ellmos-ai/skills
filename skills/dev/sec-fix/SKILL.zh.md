@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "仅在明确请求时，为已确认的发现（状态 validated 或 triaged）生成最小化的安全补丁：在临时副本或 worktree 中进行，绝不在原始仓库中，输出为 patches/<id>.diff，不应用、不提交、不推送。触发词：「修复这个发现」「SEC-... 的补丁」「关闭这个漏洞」。不用于普通的缺陷修复（使用 bugfix-protocol），不用于评判补丁（sec-verify-fix），不用于发现问题（sec-scan）。"
+updated: 2026-11-09
+description: "当针对已确认的安全漏洞生成极简、隔离的安全补丁时使用（例如 '修复安全漏洞'、'为 SEC-... 创建补丁'、'修补安全短板'、/sec-fix）。在隔离副本或工作区中生成针对性 diff 补丁，严禁直接应用、提交或推送。切勿用于常规功能缺陷修复（使用 bugfix-protocol）或补丁有效性核验（使用 sec-verify-fix）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-fix banner">
 

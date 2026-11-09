@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  交換可能な任意ツールで録音、文字起こし、音声出力を計画します。
+updated: 2026-11-09
+description: "音声録音、文字起こし、音声合成（TTS）を統合した対話型音声処理パイプラインを設計・構成する場合に使用する（例：'音声パイプラインを構築'、'TTS音声出力を設定'、'音声対話を設計'、/voice）。録音、書き起こし、音声合成のためのモジュール化されたオーディオツールを統括する。既存ファイルの単独文字起こし（assist/transkription）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="voice banner">
 

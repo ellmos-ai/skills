@@ -4,8 +4,8 @@ version: 2.0.0
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-07-27
-description: "[Français] Compétence d'agent pour mcp-config-sync: Provider-neutral entry point for discovering, planning and synchronizing MCP configuration between user-selected providers and app classes. The user selects truth, targets and scope; no provider is an implicit hub."
+updated: 2026-11-09
+description: "Utiliser pour identifier, planifier et synchroniser les configurations de serveurs Model Context Protocol (MCP) entre plusieurs agents d'IA (ex. 'synchroniser serveurs MCP', 'harmoniser configs MCP', 'transférer les serveurs MCP', /mcp-config-sync). Détecte les serveurs installés et aligne les réglages sans imposer de hub central. Ne PAS utiliser si la synchronisation complète des compétences et règles est nécessaire (utiliser agent-config-sync)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': ['agent-config-sync'], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-config-sync/', 'origin_version': '2.0.0', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 

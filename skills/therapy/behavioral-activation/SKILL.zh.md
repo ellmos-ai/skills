@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 针对抑郁症的行为激活：打破恶性循环、活动监测、周计划制定以及基于价值观的活动。
+updated: 2026-11-09
+description: "当针对动力低下、倦怠乏力或抑郁性回避退缩开展结构化行为激活时使用（例如 '打破消极不活动恶性循环'、'规划周计划活动'、'重建日常作息结构'、/behavioral-activation）。借助活动记录表、胜任感与愉悦感评分及分级任务安排逆转回避模式。切勿用于急性心理危机干预或紧急稳定化（使用 stabilization-techniques）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltensaktivierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 

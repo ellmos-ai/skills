@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: セリグマンのポジティブ心理学：PERMAモデル、強み（VIA）、感謝のワーク、フロー理論、レジリエンス要因。
+updated: 2026-11-09
+description: "主観的幸福感、個人の強み、および心理的レジリエンスを向上させる場合に使用する（例：'強みを見つける'、'感謝のエクササイズ'、'PERMAモデルの適用'、/positive-psychology）。セリグマンのPERMAモデル、VIA強みテストの概念、フロー体験によるリソース活性化を解説する。臨床的うつ病の治療や急性期の危機（behavioral-activationやstabilization-techniques）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

@@ -4,9 +4,8 @@ version: 1.1.0
 type: tool
 author: Lukas Geiger
 created: 2026-04-04
-updated: 2026-06-20
-description: 从在线视频源获取视频逐字稿（字幕）和元数据，并以 Markdown、JSON 或纯文本形式输出。目前支持：YouTube。优先使用手动创建的字幕，备用自动生成的字幕。
-
+updated: 2026-11-09
+description: "当需要从 YouTube 等在线视频平台获取字幕、文字记录或元数据时使用（例如 '转录 YouTube 视频'、'下载视频字幕'、/video-transcriber）。将人工或自动生成的字幕提取为 Markdown、JSON 或纯文本格式。切勿用于通过 Whisper 进行本地音频转录（使用 assist/transkription）。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['youtube-transcript-api', 'yt-dlp']}
 provenance: {'origin': 'bach', 'origin_path': 'system/tools/youtube_extractor.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-04-04', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="video-transcriber banner">
 

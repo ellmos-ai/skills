@@ -4,8 +4,8 @@ version: 0.1.0
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-06-22
-description: Responde a preguntas sobre el tiempo para una ubicación o coordenadas a través de wttr.in (gratuito, sin clave API). Tiempo actual + pronóstico de 3 días. La ubicación proviene de la solicitud del usuario o preferencias; caché corto opcional.
+updated: 2026-11-09
+description: "Usar cuando se consulten las condiciones meteorológicas actuales o el pronóstico para los próximos 3 días de una localidad o coordenadas (ej. 'qué tiempo hace en...', 'pronóstico del tiempo para mañana', 'probabilidad de lluvia hoy', /wetter). Obtiene datos meteorológicos en tiempo real a través de wttr.in sin necesidad de clave de API. NO usar para datos de investigación climática histórica ni astronomía."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': ['wetter_core.py'], 'services': [], 'protocols': [], 'python': ['urllib', 'json']}
 provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weather_service.py', 'origin_version': '1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'origin_license': 'MIT', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="wetter banner">
 

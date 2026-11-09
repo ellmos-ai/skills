@@ -4,8 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: 自動ソフトウェア開発パイプライン。プロジェクトのスキャン、タスクの優先順位付け、コード分析、開発ループのオーケストレーションを行います。依存関係ゼロ（Python 標準ライブラリのみ）。
+updated: 2026-11-09
+description: "リポジトリを自動スキャンし、タスクの優先順位を決定して自律的な反復開発ループを進める場合に使用する（例：'自律開発ループを実行'、'プロジェクトをスキャンしてバックログ消化'、'開発エージェントを起動'、/dev-soft-agent）。外部依存関係なしでプロジェクトスキャン、優先度付け、コーディングループを統括する。単一ファイルの迅速なアドホック編集には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 > **日本語** — `dev-soft-agent` の公式日本語版。

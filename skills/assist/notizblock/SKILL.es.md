@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Captura, organiza y resume notas proporcionadas sin depender de una ubicación o aplicación.
+updated: 2026-11-09
+description: "Usar cuando se registren, organicen o sinteticen notas espontáneas, ideas o fragmentos de texto de manera independiente a cualquier app (ej. 'nota rápida', 'organizar ideas sueltas', 'resumir notas de borrador', /notizblock). Recoge y estructura notas en texto libre sin ataduras a aplicaciones específicas. NO usar para dosieres de investigación profundos (usar assist/dossier-briefing) ni actas de incidentes (usar infrastructure/incident-notes)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="notizblock banner">
 

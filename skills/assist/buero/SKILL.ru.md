@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Упорядочивает офисные задачи, переписку и сроки без привязки к конкретному приложению.
+updated: 2026-11-09
+description: "Используйте для организации офисных задач, деловой переписки, контроля сроков и документооборота (например, 'организовать документы в офисе', 'составить деловое письмо', 'контроль офисных сроков', /buero). Структурирует офисные процессы и переписку нейтрально к приложениям. НЕ используйте для личных коротких писем (используйте privat-mail-writer) или маркетинга."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="buero banner">
 

@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: Психообразование при депрессии, тревожных расстройствах, ПТСР, биполярном расстройстве, шизофрении, СДВГ и пограничном расстройстве. Передача знаний без постановки диагноза.
+updated: 2026-11-09
+description: "Используйте для объективного и дестигматизирующего информирования о психических расстройствах и симптомах (например, 'понять симптомы тревоги', 'психообразование депрессия/СДВГ', /psychoeducation). Объясняет биопсихосоциальную модель, механизмы стресс-уязвимости и доказанные методы лечения. НЕ используйте для постановки диагнозов или замены очной терапии."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoedukation.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 

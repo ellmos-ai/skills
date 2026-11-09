@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Comparativa de los cuatro enfoques psicoterapéuticos reglamentarios en Alemania: Terapia Cognitivo-Conductual, Psicoterapia de Orientación Psicodinámica, Psicoanálisis y Terapia Sistémica — Guía de orientación."
+updated: 2026-11-09
+description: "Usar cuando se busque una orientación comparativa objetiva sobre los 4 enfoques de psicoterapia reconocidos por las directrices sanitarias (ej. 'comparar enfoques terapéuticos', 'TCC frente a psicodinámica', 'qué psicoterapia elegir', /guideline-therapies-overview). Describe indicaciones, marcos teóricos y formatos para TCC, psicodinámica, psicoanálisis y terapia sistémica. NO usar para decisiones diagnósticas clínicas ni intervenciones agudas."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinienverfahren_ueberblick.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 

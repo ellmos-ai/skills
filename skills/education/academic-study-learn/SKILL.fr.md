@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
-description: >
-  Techniques d'apprentissage actif, synthèse de concepts et structuration des connaissances.
+updated: 2026-11-09
+description: "Utiliser pour assimiler activement des contenus universitaires, synthétiser des cours ou élaborer des fiches d'étude (ex. 'résumer le cours', 'étudier un chapitre', 'créer une fiche de révision', /academic-study-learn). Favorise le rappel actif, les synthèses structurées et la cartographie conceptuelle. Ne PAS utiliser pour la gestion des plannings (utiliser academic-study-control) ou les examens blancs (utiliser academic-study-test)."
 standalone: true
 anthropic_compatible: true
 category: education
@@ -15,6 +14,8 @@ aliases: [academic-study-learn, academic-study-learn-fr]
 language: fr
 status: active
 ---
+
+
 
 <img src="banner.png" width="100%" alt="academic-study-learn banner">
 

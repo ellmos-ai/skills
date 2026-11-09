@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: Evolutionary file renaming with wrapper files. Enables renames without hard breaks — references are organically updated through usage.
-
+updated: 2026-11-09
+description: "Use when renaming or moving files, modules, or directories without breaking existing imports and references (e.g. 'rename file without breaking imports', 'relocate module with wrappers', 'create MOVED stub', /migrate-rename). Generates backward-compatible wrappers and concise redirection stubs for safe migration. Do NOT use for simple git renames where breaking changes are acceptable."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 

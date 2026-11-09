@@ -1,10 +1,14 @@
 # Community Outreach – Runtime
 
-Diese Runtime verwaltet eine Human-in-the-Loop-Queue für lösungsorientierte Community-Beiträge. Sie trennt Planung, ausdrückliche Freigabe, externe Veröffentlichung und lokale Verbuchung strikt voneinander.
+Diese Runtime verwaltet eine Human-in-the-Loop-Queue für lösungsorientierte Community-Beiträge. Sie trennt Planung, echte Quellcode-Verifikation, natürlichen Stil-Check, ausdrückliche Freigabe, externe Veröffentlichung und lokale Verbuchung strikt voneinander.
 
 ## Sicherheitsvertrag
 
 - `- [x] Genehmigt` erlaubt einen Veröffentlichungsversuch, belegt aber noch keine Veröffentlichung.
+- **Code-Fact Verification Gate (Pflicht seit 2026-11-02):** Jeder Entwurf in `POST-EINGANG.md` muss direkt am echten Quellcode in `<LOCAL_DEV_REPOS>/<repo>` geprüft sein (nicht nur aus `usecases.json` oder aus dem Gedächtnis) und ein Feld `- **Code-Beleg (Verifiziert):**` mit real existierenden Quellcode-Dateien (in Backticks) enthalten. Mit `--verify-proposals` wird maschinell geprüft, dass das lokale Repo und alle zitierten Dateien existieren. Ist `compliance.require_code_evidence: true` in `config.json` gesetzt, verweigert Phase 2 jeden Vorschlag ohne `Code-Beleg` (`missing-code-evidence`).
+- **Natural Human Style & Anti-AI-Pattern Gate (Pflicht seit 2026-11-03):** Jeder Entwurf muss sich in Länge (1–3 kurze Absätze, 250–850 Zeichen, max. 1.200 Zeichen auf Reddit/YouTube) und Tonfall an die umgebenden Kommentare im Ziel-Thread anpassen (`- **Umgebungs-Check (Ton & Länge):**`). `_check_natural_human_style()` blockiert in `--verify-proposals`, `preview_post` und `phase2_outbound_execution` jeden Textvorschlag mit Markdown-Überschriften (`###`), Fettdruck (`**...**`), Geviertstrichen (`—`), strukturierten Aufzählungslisten (3+ Punkte) oder typischen KI-Floskeln (`reason: "ai-style-violation"`).
+- **Blacklist-Gate (`rejected_proposals.json` & `BLACKLIST.md`):** Abgelehnte Vorschläge und gesperrte Plattformen (`dev.to`) werden in `rejected_proposals.json` geführt und vor jedem Publisher-Aufruf technisch blockiert (`status: "blacklisted"`).
+- **Modell-Pflicht:** Entwürfe und Code-Verifikationen dürfen ausschließlich von `Gemini 4 Argon (High)` (`--model=pro`) oder gleichwertigen `thinker_reviewer`-Modellen erstellt werden (keine Flash-/Haiku-Modelle).
 - Der mitgelieferte Runner führt selbst keine Browser-, Login- oder Plattformaktion aus.
 - Nur ein angebundener Publisher darf einen Beitrag senden. Erst ein vollständiger, auf Plattform und Ziel-URL gebundener `PublishReceipt` darf History, Rotation, `POST-AUSGANG.md` und `POSTVERZEICHNIS.md` verändern.
 - Doppelte Ziel-URLs werden vor dem Publisher-Aufruf exakt und plattformspezifisch erkannt. Ähnliche, aber andere URLs bleiben unterscheidbar.
@@ -12,7 +16,7 @@ Diese Runtime verwaltet eine Human-in-the-Loop-Queue für lösungsorientierte Co
 - Jeder Beitrag hat genau einen Status: `entwurf` und `freigegeben` (Queue in `POST-EINGANG.md`), `veroeffentlicht` (nur mit Beleg: Kommentar-Permalink und Plattform-ID) oder `unbestaetigt`. Status wird nie von Hand in `posts_history.json`, `POST-AUSGANG.md` oder `POSTVERZEICHNIS.md` geschrieben.
 - Phase 3 wählt nur Repositories, deren `github_meta` öffentlich, kein Fork und nicht archiviert belegt (`--sync-githubbot`); ohne diesen Beleg meldet sie `visibility-unverified`. Der 7-Tage-Cooldown ist bindend.
 - Ein `--dry-run` ruft keinen Publisher auf, verändert keine Datei und legt kein Verzeichnis an.
-- Phase 3 erzeugt keine Platzhalter-URL. Sie liefert `needs-action`, bis eine getrennte Recherche einen echten, aktuellen, regelkonformen und noch unbenutzten Ziel-Thread samt geprüftem Entwurf in `POST-EINGANG.md` abgelegt hat.
+- Phase 3 erzeugt keine Platzhalter-URL. Sie liefert `needs-action`, bis eine getrennte Recherche einen echten, aktuellen (< 2 Jahre), regelkonformen und noch unbenutzten Ziel-Thread samt am Quellcode geprüftem, natürlich formuliertem Entwurf in `POST-EINGANG.md` abgelegt hat.
 - Phase 1 zählt nur das lokale Monitoring-Inventar. Externe Antworten werden ohne getrennten autorisierten Inbound-Adapter nicht abgerufen.
 
 ## Dateien
@@ -22,7 +26,10 @@ Diese Runtime verwaltet eine Human-in-the-Loop-Queue für lösungsorientierte Co
 | `outreach_runner.py` | Dünner, portabler CLI-Adapter |
 | `outreach_engine.py` | Aus dem kanonischen Skill projizierter Core |
 | `usecases.json` | Repositories und Rotationsstand |
-| `POST-EINGANG.md` | Freigabe-Queue; offene oder unbelegte Einträge bleiben erhalten |
+| `POST-EINGANG.md` | Freigabe-Queue; erfordert `- **Code-Beleg (Verifiziert):**` und natürlichen Kommentar-Stil je Vorschlag |
+| `BLACKLIST.md` | Menschenlesbares Sperrregister abgelehnter Vorschläge und Plattformen |
+| `rejected_proposals.json` | Maschinenlesbare Sperrliste für URLs, Proposal-IDs und Plattformen |
+| `config.json` | Instanz-Konfiguration (`require_code_evidence`, `require_natural_style`, `local_repos_root`, `excluded_platforms`) |
 | `posts_history.json` | Maschinenlesbare, Receipt-gebundene Veröffentlichungshistorie |
 | `POST-AUSGANG.md` | Nach verifiziertem Receipt erzeugte lesbare Ausgangsansicht |
 | `POSTVERZEICHNIS.md` | Aus der History erzeugtes Verzeichnis: veröffentlichte (mit Beleg) und unbestätigte Beiträge, Queue-Zähler |
@@ -39,6 +46,9 @@ Die Projektion erfolgt aus dem Skill-Verzeichnis mit `python scripts/deploy_runt
 ```powershell
 # Schreibfreier Planlauf mit maschinenlesbarer Ausgabe
 python outreach_runner.py --workspace . --full-run --dry-run --json
+
+# Alle Vorschläge in POST-EINGANG.md gegen Blacklist, Duplikate, echten Repo-Quellcode und natürlichen Stil prüfen
+python outreach_runner.py --workspace . --verify-proposals --repos-root "<LOCAL_DEV_REPOS>" --json
 
 # Freigaben lokal prüfen; ohne angebundenen Publisher bleibt needs-action bestehen
 python outreach_runner.py --workspace . --process-approvals --json

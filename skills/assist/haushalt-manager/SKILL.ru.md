@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Планирует домашние задачи, рутины и ответственность без привязки к приложению.
+updated: 2026-11-09
+description: "Используйте для планирования домашних обязанностей, графиков уборки, обслуживания техники и распределения дел (например, 'составить график домашних дел', 'организовать уборку', 'отслеживать обслуживание дома', /haushalt-manager). Составляет практичные планы домашних дел без привязки к конкретным приложениям. НЕ используйте для офисной документации (используйте assist/buero) или складского учета (используйте assist/hauslagerist-reader)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="haushalt-manager banner">
 

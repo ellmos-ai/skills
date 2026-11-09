@@ -4,15 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Schreibgeschützter Sammel- und Auswertungsplan für Laptops und PCs (Windows, macOS,
-  Linux) bei Verdacht auf Schadsoftware, Persistenz oder Fehlkonfiguration: was gesammelt
-  wird, wie die Sammelskripte sicher laufen, wie die Ausgabe auf einem sauberen Rechner
-  gelesen wird (Prozesse, Autostarts, Dienste, Netzverbindungen, Konten, Patchstand) und wie
-  Beobachtung von Deutung getrennt bleibt. Standard ist Diagnose ohne jede Änderung am
-  Zielgerät.
-
+updated: 2026-11-09
+description: "Verwenden, wenn ein PC oder Laptop bei Verdacht auf Schadsoftware, Persistenz oder Fehlkonfiguration schreibgeschützt diagnostiziert werden soll (z. B. 'Rechner auf Schadsoftware prüfen', 'Endpoint-Triage durchführen', 'verdächtige Prozesse analysieren', /endpoint-triage). Sammelt Autostarts, Dienste, Prozesse und Netzverbindungen forensisch sauber ohne Änderungen am Zielgerät. NICHT verwenden für das voreilige Löschen von Dateien (dafür malware-cleanup-guide)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -38,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="endpoint-triage banner">
 

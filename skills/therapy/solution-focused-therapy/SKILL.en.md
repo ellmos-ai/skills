@@ -4,9 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-03-15
-description: "Solution-Focused Brief Therapy according to de Shazer and Berg: Miracle question, exception exploration, scaling, resource activation."
-
+updated: 2026-11-09
+description: "Use when shifting focus rapidly from problem causes to workable solutions and existing strengths (e.g. 'miracle question', 'explore exceptions to problems', 'scaling progress', /solution-focused-therapy). Applies Steve de Shazer and Insoo Kim Berg's solution-focused brief therapy tools: miracle question, scaling, and exception hunting. Do NOT use for analyzing deep historical origins."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfokussierte_therapie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 

@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  特定アプリに依存せず、提供されたメディア一覧とメタデータを分析します。
+updated: 2026-11-09
+description: "メディアリスト、読書履歴、映画の鑑賞リスト、または音声・動画メタデータを体系的に分析・カタログ化する場合に使用する（例：'メディアコレクションを分析'、'書籍や映画を目録化'、'観たい作品リストを整理'、/mediabrain-reader）。商用アプリに依存せずメディアリストを構造化する。動画字幕テキストの抽出（utilities/video-transcriber）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="mediabrain-reader banner">
 

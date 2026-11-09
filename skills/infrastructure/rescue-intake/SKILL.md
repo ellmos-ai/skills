@@ -4,15 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: >
-  Aufnahme eines Rettungsfalls für einen Laptop oder PC mit Verdacht auf Schadsoftware oder
-  Fehlfunktion: Eigentum und Einwilligung bestätigen, den Betriebsmodus wählen (A: sammeln
-  und auf einem sauberen Rechner auswerten, B: Agent vor Ort, nur aus einem Live-Boot),
-  verhindern, dass echte Konten auf dem Zielrechner angemeldet werden, und festlegen, was
-  anonymisiert wird, bevor Belege zu einem Cloud-Agenten gehen. Immer als Erstes nutzen,
-  bevor irgendetwas auf dem Zielgerät läuft.
-
+updated: 2026-11-09
+description: "Verwenden, bevor ein potenziell kompromittierter Rechner untersucht wird, um rechtliche Einwilligung, Modus und Datenschutz festzulegen (z. B. 'Rettungsfall aufnehmen', 'kompromittierten Rechner annehmen', 'Erstaufnahme Schadensfall', /rescue-intake). Klärt Eigentum, wählt den Betriebsmodus (Offline-Analyse vs. Live-Boot) und verhindert Konto- oder Datenlecks vor Beginn der technischen Analyse. NICHT verwenden nach bereits erfolgter Triage (dafür endpoint-triage)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -38,6 +31,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: false
 ---
+
 
 <img src="banner.png" width="100%" alt="rescue-intake banner">
 

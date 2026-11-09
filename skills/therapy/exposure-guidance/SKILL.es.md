@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Exposición graduada para trastornos de ansiedad: Jerarquía de miedos, escala SUDs, planificación y orientación de la exposición. Solo psicoeducación, no implementación."
+updated: 2026-11-09
+description: "Usar cuando se afronte la ansiedad, fobias o conductas de evitación mediante psicoeducación en exposición gradual (ej. 'crear jerarquía de temores', 'planificar ejercicio de exposición', 'escala SUDs', /exposure-guidance). Explica la habituación, el diseño de jerarquías en vivo o en imaginación y la retirada de conductas de seguridad. NO usar para exposición traumática sin supervisión ni contención de pánico agudo (usar stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition_begleitung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 

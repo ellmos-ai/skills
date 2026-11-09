@@ -4,9 +4,8 @@ version: 2.0.0
 type: skill
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Planifica enseñanza, actividades y apoyo individual sin generador de informes ni plantillas personales.
+updated: 2026-11-09
+description: "Usar cuando se elaboren planes de apoyo educativo individual, actividades diferenciadas o intervenciones pedagógicas (ej. 'crear plan de apoyo educativo', 'diferenciar actividades de clase', 'planificar objetivos pedagógicos', /foerderplaner). Diseña propuestas de apoyo pedagógico estructuradas y neutrales sin exponer datos personales. NO usar para generar fichas de trabajo individuales (usar worksheet-generator)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,8 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
+
 
 <img src="banner.png" width="100%" alt="foerderplaner banner">
 

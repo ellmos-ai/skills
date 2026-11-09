@@ -4,8 +4,8 @@ version: 1.4.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-10-11
-description: Providerneutrales Protokoll zum Zerlegen komplexer Aufgaben, zum Beauftragen unabhängiger Worker und zur evidenzbasierten Abnahme ihrer Ergebnisse.
+updated: 2026-11-09
+description: "Verwenden, wenn eine komplexe Gesamtaufgabe in parallele oder sequenzielle Teilaufgaben für Subagenten zerlegt und evidenzbasiert abgenommen werden soll (z. B. 'Aufgabe orchestrieren', 'Subagenten koordinieren', 'Teilaufgaben delegieren', /orchestrator). Plant Arbeitspakete, beauftragt unabhängige Worker und validiert deren Arbeitsergebnisse anhand klarer Qualitätskriterien. NICHT verwenden für triviale Aufgaben, die ein einzelner Prompt direkt löst."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

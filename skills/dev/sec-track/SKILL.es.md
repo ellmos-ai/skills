@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Hace trazables los hallazgos de seguridad validados: tras vista previa y confirmación crea un ticket (ticket_writer.py), un issue de GitHub o un borrador de security advisory (gh), comprueba antes duplicados por id de hallazgo, mantiene los secretos fuera del texto y escribe la referencia de vuelta en finding.ticket. Disparadores: 'hacer seguimiento de este hallazgo', 'ticket para SEC-...', 'crear un advisory', 'poner los hallazgos en el backlog'. Sin Linear/Jira. No es para informes técnicos (sec-report) ni para la divulgación hacia el exterior (sec-writeup)."
+updated: 2026-11-09
+description: "Usar cuando se trasladen hallazgos de seguridad confirmados a tickets internos, incidencias de GitHub o borradores de avisos de seguridad (ej. 'hacer seguimiento a hallazgo de seguridad', 'crear ticket para SEC-...', 'crear borrador de advisory', /sec-track). Genera registros de seguimiento sin exponer secretos y vincula las incidencias a los hallazgos. NO usar para coordinar avisos públicos con mantenedores (usar sec-writeup)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-track banner">
 

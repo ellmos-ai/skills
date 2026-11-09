@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Psicología Positiva según Seligman: modelo PERMA, fortalezas del carácter (VIA), ejercicios de gratitud, teoría del flujo (flow) y factores de resiliencia."
+updated: 2026-11-09
+description: "Usar cuando se busque cultivar el bienestar psicológico, las fortalezas personales y la resiliencia (ej. 'identificar fortalezas personales', 'ejercicios de gratitud', 'aplicar modelo PERMA', /positive-psychology). Integra el modelo PERMA de Seligman, las fortalezas VIA y experiencias de flujo para el desarrollo personal. NO usar para el tratamiento de depresión clínica aguda ni crisis (usar behavioral-activation o stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_psychologie.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 

@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Kognitive Verhaltenstherapie: ABC-Modell, automatische Gedanken, kognitive Verzerrungen erkennen und Gedankenprotokolle führen.
-
+updated: 2026-11-09
+description: "Verwenden, wenn belastende Gedanken, Grübelschleifen oder kognitive Verzerrungen hinterfragt werden sollen (z. B. 'Gedanken umstrukturieren', 'Gedankenprotokoll führen', 'Denkfehler erkennen', /cognitive-restructuring). Vermittelt das kognitive ABC-Modell, identifiziert Verzerrungen (z. B. Katastrophisieren) und leitet sokratische Realitätsprüfungen an. NICHT verwenden für reine Akzeptanz/Defusion (dafür act-techniques) oder Tiefenanalyse der Familiengeschichte (dafür genogram-work)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

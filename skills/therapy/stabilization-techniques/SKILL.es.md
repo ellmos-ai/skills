@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: "Técnicas de estabilización: Anclaje (grounding), lugar seguro, contención y ejercicios de respiración. Técnicas inmediatas para malestar agudo y ataques de pánico."
+updated: 2026-11-09
+description: "Usar cuando sea necesario regular inmediatamente crisis de angustia, ataques de pánico, flashbacks o disociación (ej. 'frenar ataque de pánico', 'ejercicios de anclaje para flashback', 'lugar seguro mental', /stabilization-techniques). Facilita técnicas inmediatas de emergencia: toma de tierra 5-4-3-2-1, técnica del contenedor, visualización del lugar seguro y respiración lenta. NO usar para revivir traumas durante la crisis."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 

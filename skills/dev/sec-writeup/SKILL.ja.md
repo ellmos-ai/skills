@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "メモ、PoC、所見を、協調的開示のための、それだけで読めて懐疑的に検証済みの脆弱性レポートにまとめる。影響を受けるバージョン、再現手順、影響、修正、タイムラインを含む。PoC は最小限にとどめ（兵器化されたエクスプロイトは含めない）、シークレットは伏せ、すべての主張は根拠付きか、未検証と明記する。トリガー：「開示文を書いて」「脆弱性レポート」「アドバイザリの文面」「メンテナーに報告」。社内のスキャンレポート（sec-report）やチケット（sec-track）には使わない。"
+updated: 2026-11-09
+description: "責任ある協調的脆弱性開示（CVD）に向けて、開発元向けの論理的かつ実証的な脆弱性報告書を作成する場合に使用する（例：'脆弱性報告書を作成'、'セキュリティ勧告文を起草'、'協調的開示レポート'、/sec-writeup）。秘匿情報を除外した再現手順、影響度評価、修正策を客観的に記述する。内部でのチケット追跡（sec-track）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-writeup banner">
 

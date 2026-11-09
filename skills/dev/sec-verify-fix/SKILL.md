@@ -4,8 +4,8 @@ version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Prüft unabhängig, ob ein Sicherheitspatch die Schwachstelle wirklich schließt (Source-to-Sink-Pfad am gepatchten Stand erneut verfolgen, Negativ- und Regressionstest), bewertet das Regressionsrisiko und ob automatisches Mergen vertretbar wäre (Standard: nein bei critical/high). Nur lesend und prüfend, wendet nichts an. Auslöser: 'schließt der Patch die Lücke', 'Patch prüfen', 'Fix verifizieren', Status fixed vorhanden. Nicht zum Schreiben des Patches (sec-fix), nicht für allgemeines Code-Review."
+updated: 2026-11-09
+description: "Verwenden, wenn unabhängig geprüft werden soll, ob ein Sicherheitspatch eine Schwachstelle wirklich schließt und keine Regressionen verursacht (z. B. 'schließt der Patch die Lücke', 'Sicherheitsfix verifizieren', 'Patch prüfen', /sec-verify-fix). Prüft den Source-to-Sink-Pfad, Regressionstests und bewertet das Ausfallrisiko rein lesend. NICHT verwenden zum Schreiben des Patches (dafür sec-fix)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="sec-verify-fix banner">
 

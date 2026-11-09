@@ -4,8 +4,8 @@ version: 1.1.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-07-28
-description: Protocolo neutral en cuanto a proveedores para descomponer tareas complejas, encargar workers independientes y verificar de forma basada en evidencia sus resultados.
+updated: 2026-11-09
+description: "Usar cuando se descompongan objetivos complejos en subtareas paralelas o secuenciales para subagentes independientes con verificación basada en evidencias (ej. 'orquestar tareas', 'coordinar subagentes', 'delegar paquetes de trabajo', /orchestrator). Planifica contratos de trabajo, despacha ejecutores independientes y valida entregables objetivamente. NO usar para tareas triviales que un solo mensaje puede resolver."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator/', 'origin_version': '1.0.0', 'origin_repo': 'None', 'last_sync_from_origin': '2026-07-28', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 

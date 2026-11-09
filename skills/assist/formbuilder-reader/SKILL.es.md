@@ -4,9 +4,8 @@ version: 2.0.0
 type: assist
 author: ellmos contributors
 created: 2026-07-30
-updated: 2026-07-30
-description: >
-  Revisa descripciones de formularios por estructura, validación, claridad y accesibilidad.
+updated: 2026-11-09
+description: "Usar cuando se inspeccionen especificaciones de formularios, esquemas JSON o interfaces de entrada para evaluar estructura, accesibilidad y lógica de validación (ej. 'validar esquema de formulario', 'evaluar accesibilidad de formulario', 'revisar campos de formulario', /formbuilder-reader). Analiza tipos de campo, estados de error y estándares WCAG. NO usar para la ejecución automatizada de formularios web (usar web/web-reading)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -25,6 +24,7 @@ provenance:
   origin_license: MIT
   notes: Public core only; adapters and private profiles are excluded.
 ---
+
 
 <img src="banner.png" width="100%" alt="formbuilder-reader banner">
 

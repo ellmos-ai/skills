@@ -4,9 +4,8 @@ version: 3.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-08-22
-description: 独立于供应商和用户的 Agent、CLI 与 IDE 启动规则桥接工具。用于探索已知引导界面，要求用户选择一个或多个有序的单一事实来源，并在不重复规则的情况下渲染小型加载器。
-
+updated: 2026-11-09
+description: "当在不同 AI 智能体与主机之间建立具备高弹性、厂商中立的文件通信桥梁时使用（例如 '多智能体网桥'、'打通智能体系统'、'基于文件的智能体间通信'、/agents-bridge）。提供引导工作区、独立记忆仓、心跳状态、跨智能体消息传递及协作锁机制。切勿用于标准分支合并（使用 dev/reissverschluss-merge）。"
 standalone: true
 anthropic_compatible: true
 category: infrastructure
@@ -15,6 +14,7 @@ language: zh
 status: active
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
+
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 

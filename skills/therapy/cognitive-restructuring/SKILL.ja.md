@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: 認知行動療法：ABCモデル、自動思考、認知の歪みの同定、およびコラム法（思考記録）のつけ方。
+updated: 2026-11-09
+description: "苦痛を伴う自動思考、破局的思考、または認知の歪みに疑問を投げかけ検討する場合に使用する（例：'認知を再構成する'、'思考記録表をつける'、'認知の歪みに気づく'、/cognitive-restructuring）。ベックの認知ABCモデルを学び、認知の偏りを特定し、ソクラテス式問答による現実検証を導く。思考の吟味を伴わない脱フュージョン（act-techniques）や家族歴の分析（genogram-work）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_umstrukturierung.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
+
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 

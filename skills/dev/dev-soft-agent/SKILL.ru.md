@@ -4,8 +4,8 @@ version: 0.1.0
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-03-12
-description: Автоматизированный пайплайн разработки программного обеспечения. Сканирует проекты, расставляет приоритеты задач, анализирует код и оркестрирует циклы разработки. Ноль зависимостей (только стандартная библиотека Python).
+updated: 2026-11-09
+description: "Используйте для автоматического сканирования, расстановки приоритетов и циклической разработки программного проекта (например, 'автономный цикл разработки', 'сканировать проект и закрывать задачи', 'запустить dev-агента', /dev-soft-agent). Организует сканирование, приоритизацию бэклога и итеративное написание кода без внешних зависимостей. НЕ используйте для быстрых правок отдельных файлов без пайплайна."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -17,6 +17,7 @@ status: active
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
+
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 > **Русский** — Официальная русская версия `dev-soft-agent`.

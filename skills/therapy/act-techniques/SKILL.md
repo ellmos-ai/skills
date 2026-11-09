@@ -4,10 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
-description: >
-  Acceptance & Commitment Therapy (ACT) nach Steven Hayes: Hexaflex-Modell mit den sechs Kernprozessen psychischer Flexibilität.
-
+updated: 2026-11-09
+description: "Verwenden, wenn psychische Flexibilität, Werteorientierung oder Akzeptanz nach dem ACT-Modell gefördert werden sollen (z. B. 'Werte klären', 'Defusion üben', 'Akzeptanz statt Vermeidung', /act-techniques). Vermittelt das Hexaflex-Modell mit 6 Kernprozessen (kognitive Defusion, Akzeptanz, Kontakt mit dem Gegenwärtigen, Selbst-als-Kontext, Werte, engagiertes Handeln). NICHT verwenden für kognitives Umstrukturieren automatischer Gedanken (dafür cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -31,6 +29,7 @@ provenance:
   last_sync_to_origin: null
   local_changes_since_sync: true
 ---
+
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 

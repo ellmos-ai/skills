@@ -4,8 +4,8 @@ version: 1.0.0
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-10-25
-updated: 2026-10-25
-description: "Erfasst lokale Hardware, Software- und Python-Versionen mit Quellenbelegen als privaten, versionierten Techshot und vergleicht Hoststände ohne fehlende Beobachtungen als Deinstallation auszugeben."
+updated: 2026-11-09
+description: "Verwenden, wenn lokale Hardware, Betriebssystem-, Software- und Python-Versionen evidenzbasiert erfasst und verglichen werden sollen (z. B. 'Tech-Stack erfassen', 'Hardware und Software inventarisieren', 'Systemstand messen', /tech-detect). Erstellt einen versionierten, privaten Techshot mit Befehlsbelegen und erkennt Systemänderungen ohne Fehlinterpretationen. NICHT verwenden für CVE-Schwachstellen-Scans (dafür dev/security-tech-stack-check)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -18,6 +18,7 @@ visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 provenance: {'origin': 'custom', 'origin_path': null, 'origin_version': null, 'origin_repo': null, 'last_sync_from_origin': null, 'last_sync_to_origin': null, 'local_changes_since_sync': false}
 ---
+
 
 <img src="banner.png" width="100%" alt="tech-detect banner">
 
