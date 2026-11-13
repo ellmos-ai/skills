@@ -695,7 +695,7 @@ def _sentence_starts_software_claim(
     primary_slug: str,
     unambiguous_catalog_names: set[str],
 ) -> bool:
-    if "github.com/" in sentence.casefold():
+    if re.search(r"(?<![\w.-])github\.com/", sentence, re.IGNORECASE):
         return True
     prose = re.sub(r"https?://\S+", " ", sentence)
     if primary_slug and len(primary_slug) >= 4 and primary_slug not in _QUALIFIED_ONLY_REPO_NAMES:
