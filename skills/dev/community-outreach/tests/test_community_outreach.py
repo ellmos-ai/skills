@@ -2339,3 +2339,61 @@ We built ellmos-ai/super-tool with zero runtime dependencies in engine.py. Our p
     outbound = engine.phase2_outbound_execution()
     assert outbound[0]["status"] == "needs-action"
     assert outbound[0]["reason"] == "invalid-claim-contract"
+
+
+def test_runtime_dependencies_fail_closed_without_tomllib(tmp_path, monkeypatch):
+    """Python 3.10 has no tomllib; the manifest gate must still read dependencies."""
+    monkeypatch.setattr(outreach_engine, "tomllib", None)
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "super-tool"\ndependencies = [\n'
+        '  "requests[socks]>=2",  # http\n  \'rich\',\n]\n\n'
+        '[tool.other]\ndependencies = ["ignored"]\n',
+        encoding="utf-8",
+    )
+    assert outreach_engine._extract_runtime_dependencies(tmp_path) == (
+        True,
+        ["requests[socks]>=2", "rich"],
+    )
+
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "super-tool"\ndependencies = [some.ref]\n',
+        encoding="utf-8",
+    )
+    has_manifest, deps = outreach_engine._extract_runtime_dependencies(tmp_path)
+    assert has_manifest is True
+    assert deps == ["<unparseable-pyproject.toml>"]
+
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "super-tool"\n', encoding="utf-8"
+    )
+    assert outreach_engine._extract_runtime_dependencies(tmp_path) == (True, [])
+
+
+@pytest.mark.parametrize(
+    "toml_text",
+    [
+        'project.dependencies = ["requests"]\n',
+        'project = { name = "x", dependencies = ["requests"] }\n',
+    ],
+)
+def test_fallback_rejects_dotted_and_inline_project_tables(tmp_path, monkeypatch, toml_text):
+    monkeypatch.setattr(outreach_engine, "tomllib", None)
+    (tmp_path / "pyproject.toml").write_text(toml_text, encoding="utf-8")
+    assert outreach_engine._extract_runtime_dependencies(tmp_path) == (
+        True,
+        ["<unparseable-pyproject.toml>"],
+    )
+
+
+@pytest.mark.parametrize(
+    ("sentence", "expected"),
+    [
+        ("See https://github.com/acme/tool for details.", True),
+        ("See www.github.com/acme/tool for details.", True),
+        ("See gist.github.com/acme/abc for details.", True),
+        ("See GitHub.com/acme/tool for details.", True),
+        ("See notgithub.com/acme/tool for details.", False),
+    ],
+)
+def test_software_claim_detects_github_links(sentence, expected):
+    assert outreach_engine._sentence_starts_software_claim(sentence, "", set()) is expected

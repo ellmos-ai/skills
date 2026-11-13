@@ -23,8 +23,11 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 try:
     import tomllib
-except ModuleNotFoundError:  # pragma: no cover
-    tomllib = None  # type: ignore[assignment]
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10
+    try:
+        import tomli as tomllib  # type: ignore[no-redef]
+    except ModuleNotFoundError:
+        tomllib = None  # type: ignore[assignment]
 
 DEFAULT_PLATFORM_ROTATION = ["Reddit", "YouTube", "GitHub Discussions", "Foren"]
 DEFAULT_EXCLUDED_ORGS = {"biotec-line"}
@@ -600,15 +603,78 @@ def _split_into_paragraphs_and_sentences(text: str) -> list[list[str]]:
     return result
 
 
+def _fallback_project_dependencies(text: str) -> list[str]:
+    """Read ``[project].dependencies`` without tomllib (Python 3.10).
+
+    Fail-closed: anything this minimal reader cannot interpret raises
+    ``ValueError`` so the caller records the manifest as unparseable.
+    """
+    section = None
+    pos = 0
+    for line in text.splitlines(keepends=True):
+        stripped = line.strip()
+        header = re.fullmatch(r"\[\s*([A-Za-z0-9_.\-\s\"']+?)\s*\]\s*(?:#.*)?", stripped)
+        if header and not stripped.startswith("[["):
+            section = header.group(1).strip()
+        elif section is None and re.match(r"\s*project\s*[.=]", line):
+            raise ValueError("dotted or inline project table is not supported")
+        elif section == "project":
+            match = re.match(r"\s*dependencies\s*=\s*", line)
+            if match:
+                return _scan_toml_string_array(text, pos + match.end())
+        pos += len(line)
+    return []
+
+
+def _scan_toml_string_array(text: str, start: int) -> list[str]:
+    if start >= len(text) or text[start] != "[":
+        raise ValueError("dependencies is not an inline array")
+    items: list[str] = []
+    idx = start + 1
+    expect_value = True
+    while idx < len(text):
+        char = text[idx]
+        if char in " \t\r\n":
+            idx += 1
+        elif char == "#":
+            newline = text.find("\n", idx)
+            idx = len(text) if newline < 0 else newline + 1
+        elif char == "]":
+            return items
+        elif char == ",":
+            if expect_value:
+                raise ValueError("unexpected comma in dependencies")
+            expect_value = True
+            idx += 1
+        elif char in "\"'" and expect_value:
+            end = idx + 1
+            while end < len(text) and text[end] != char:
+                if text[end] == "\n":
+                    raise ValueError("unsupported multi-line string in dependencies")
+                end += 2 if char == '"' and text[end] == "\\" else 1
+            if end >= len(text):
+                break
+            items.append(text[idx + 1 : end])
+            expect_value = False
+            idx = end + 1
+        else:
+            raise ValueError("unsupported dependencies syntax")
+    raise ValueError("unterminated dependencies array")
+
+
 def _extract_runtime_dependencies(repo_dir: Path) -> tuple[bool, list[str]]:
     deps: list[str] = []
     has_manifest = False
     pyproject = repo_dir / "pyproject.toml"
-    if pyproject.is_file() and tomllib is not None:
+    if pyproject.is_file():
         has_manifest = True
         try:
-            parsed = tomllib.loads(pyproject.read_text(encoding="utf-8"))
-            raw_deps = (parsed.get("project") or {}).get("dependencies") or []
+            text = pyproject.read_text(encoding="utf-8")
+            if tomllib is not None:
+                parsed = tomllib.loads(text)
+                raw_deps = (parsed.get("project") or {}).get("dependencies") or []
+            else:
+                raw_deps = _fallback_project_dependencies(text)
             if isinstance(raw_deps, list):
                 deps.extend(str(item).strip() for item in raw_deps if str(item).strip())
         except Exception:
@@ -631,7 +697,7 @@ def _sentence_starts_software_claim(
     primary_slug: str,
     unambiguous_catalog_names: set[str],
 ) -> bool:
-    if "github.com/" in sentence.casefold():
+    if re.search(r"(?<![\w-])github\.com/", sentence, re.IGNORECASE):
         return True
     prose = re.sub(r"https?://\S+", " ", sentence)
     if primary_slug and len(primary_slug) >= 4 and primary_slug not in _QUALIFIED_ONLY_REPO_NAMES:
