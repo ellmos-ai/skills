@@ -616,6 +616,8 @@ def _fallback_project_dependencies(text: str) -> list[str]:
         header = re.fullmatch(r"\[\s*([A-Za-z0-9_.\-\s\"']+?)\s*\]\s*(?:#.*)?", stripped)
         if header and not stripped.startswith("[["):
             section = header.group(1).strip()
+        elif section is None and re.match(r"\s*project\s*[.=]", line):
+            raise ValueError("dotted or inline project table is not supported")
         elif section == "project":
             match = re.match(r"\s*dependencies\s*=\s*", line)
             if match:
@@ -695,7 +697,7 @@ def _sentence_starts_software_claim(
     primary_slug: str,
     unambiguous_catalog_names: set[str],
 ) -> bool:
-    if re.search(r"(?<![\w.-])github\.com/", sentence, re.IGNORECASE):
+    if re.search(r"(?<![\w-])github\.com/", sentence, re.IGNORECASE):
         return True
     prose = re.sub(r"https?://\S+", " ", sentence)
     if primary_slug and len(primary_slug) >= 4 and primary_slug not in _QUALIFIED_ONLY_REPO_NAMES:

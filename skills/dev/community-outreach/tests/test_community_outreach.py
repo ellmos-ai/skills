@@ -2367,3 +2367,33 @@ def test_runtime_dependencies_fail_closed_without_tomllib(tmp_path, monkeypatch)
         '[project]\nname = "super-tool"\n', encoding="utf-8"
     )
     assert outreach_engine._extract_runtime_dependencies(tmp_path) == (True, [])
+
+
+@pytest.mark.parametrize(
+    "toml_text",
+    [
+        'project.dependencies = ["requests"]\n',
+        'project = { name = "x", dependencies = ["requests"] }\n',
+    ],
+)
+def test_fallback_rejects_dotted_and_inline_project_tables(tmp_path, monkeypatch, toml_text):
+    monkeypatch.setattr(outreach_engine, "tomllib", None)
+    (tmp_path / "pyproject.toml").write_text(toml_text, encoding="utf-8")
+    assert outreach_engine._extract_runtime_dependencies(tmp_path) == (
+        True,
+        ["<unparseable-pyproject.toml>"],
+    )
+
+
+@pytest.mark.parametrize(
+    ("sentence", "expected"),
+    [
+        ("See https://github.com/acme/tool for details.", True),
+        ("See www.github.com/acme/tool for details.", True),
+        ("See gist.github.com/acme/abc for details.", True),
+        ("See GitHub.com/acme/tool for details.", True),
+        ("See notgithub.com/acme/tool for details.", False),
+    ],
+)
+def test_software_claim_detects_github_links(sentence, expected):
+    assert outreach_engine._sentence_starts_software_claim(sentence, "", set()) is expected
