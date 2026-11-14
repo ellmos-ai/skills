@@ -315,6 +315,10 @@ def sandbox_dependencies(full, review_root):
 
 def review_verdict(full, review_root, cutoff, reach, now=None):
     """None = loeschbar, sonst Grund fuers Behalten."""
+    # Top-Level-Ordner mit fuehrendem Unterstrich (_agy-results, _tools, _verified-dependencies ...) sind
+    # dauerhafte Infrastruktur ohne .git und ohne Lock; ohne diese Pruefung galten sie nach 24 h als loeschbar.
+    if os.path.basename(os.path.abspath(full)).startswith("_"):
+        return "geschuetzt-infrastruktur"
     if is_reparse(full):
         return "reparse"
     if now is None:
