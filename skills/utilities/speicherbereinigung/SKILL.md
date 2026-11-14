@@ -238,8 +238,8 @@ Schriftliche Abschlussberichte, Evidenzdateien und Receipts (`Speicherbereinigun
 z. B. `<Datum>_Speicherbereinigung_<HOST>.md`, `*_Evidenz.json`, `*_Receipts.jsonl`)
 werden im passenden Themenordner unter `.USR` abgelegt:
 
-- **Kanonischer Ablagepfad:** `<OneDrive>\.USR\SYSTEM\Speicherbereinigung\Speicherbereinigung_*`
-  (bzw. `<OneDrive>\.USR\docs\SYSTEM\Speicherbereinigung\` oder `<OneDrive>\.USR\.SYSTEM\Speicherbereinigung\`).
+- **Kanonischer Ablagepfad:** `<OneDrive>\.USR\docs\system-und-betrieb\speicherbereinigung\Speicherbereinigung_*`
+  (Altpfade `.USR\SYSTEM\Speicherbereinigung\` und `.USR\docs\SYSTEM\Speicherbereinigung\` sind aufgelöst).
 - **Verbot der flachen Root-Ablage:** Berichte und Receipts niemals direkt flach im
   `.USR`-Root ablegen (Zustellregel laut `ARCHITECTURE.md` und `avatar/USER.md`).
 

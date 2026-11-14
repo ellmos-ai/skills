@@ -1,10 +1,10 @@
 ---
 name: skill-finder
-version: 0.9.0
+version: 0.11.0
 type: skill
-author: Lukas Geiger + Claude
+author: Lukas Geiger + Claude + Gemini
 created: 2026-06-17
-updated: 2026-11-09
+updated: 2026-11-10
 description: "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
 standalone: true
 anthropic_compatible: true
@@ -72,11 +72,13 @@ aus dem Gedächtnis arbeiten). Trifft kein Skill zu, normal fortfahren.
 | KI-Spuren/Chat-Reste aus Texten, AI-Disclosure | Utilities | `llm-text-hygiene` |
 | Bedingung/Zeitpunkt/Reihenfolge im Auftrag („erst wenn", „ab 6 Uhr", „sobald X fertig") | Prozess | `condition` (`/if` · `/when` · `/if-only` · `/after` · `/and` · `/or`) |
 | Dateien aus einem Ordner regelbasiert einsammeln/sortieren ("hole aus X immer Y und sammle sie in Z", "sortiere Ordner automatisch") | Utilities | `file-collect-sort-action` |
+| Ordner/Dokumentenbestand semantisch in Themencluster sortieren, Cluster-Anzahl kalibrieren, Dupletten per SHA-256 bereinigen, Alt-Taxonomien zusammenführen, Steuerdateien & aktive Schreiber nachziehen | Utilities | `folder-organization` (vs. `tidy-up` = Sitzungsabschluss in bestehender Struktur, `file-collect-sort-action` = wiederkehrende Sammelregel, `folder-flattening` = reines Einebnen) |
 | App-/GUI-Serie gemeinsam mit dem User durchtesten (live testen, Feedback sofort auswerten + Reparatur delegieren) | Coding & Debugging | `human-loop-audit` |
 | Projekt nach Sitzungsende aufräumen (Register lösen/einsortieren, Doku auf Ist-Stand bringen, Strays wegräumen) | Coding & Debugging | `tidy-up` (`/tidy-up`; zählt als `work-autonomous`-Ebene-1-Quelle) |
 | Regel-/Gedächtnisdatei kürzen, ohne Inhalt zu verändern ("CLAUDE.md ist zu lang", "wird abgeschnitten") | Utilities | `paveman` (deterministisch, kein Modellaufruf; vs. `knappform` = LLM-Sprechstil) |
 | Mermaid-Diagramm rendert auf GitHub nicht („Unable to render rich display", „Schaltplan wird nicht angezeigt"), Mermaid-Blöcke orgweit prüfen | Coding & Debugging | `mermaid-lint` (echter Parser ohne Browser + Readback an der lebenden Seite) |
 | Modell-Budget, Kontingente, teure Reviewer/Advisor begrenzt einsetzen | Multi-Agent | `budgetierung` (Konto + Aushandlung; Modellwahl selbst: `/model-strategy`) |
+| Wissenschaftliches LaTeX-Paper sprachlich/stilistisch überarbeiten, ohne Inhalt zu ändern („Stilcheck“, „Fachsprache prüfen“, „Text ist gestelzt“, „scientific writing“) | Research | `scientific-style-check` (`/scientific-style-check`; Fremdmodell-Lektorat + mechanischer Invariantenbeweis; vs. `llm-text-hygiene` = KI-Spuren, `bilingual-doc-sync` = DE/EN angleichen) |
 
 Vollständige Liste: Skill `code-skill-index`.
 
@@ -95,6 +97,16 @@ Routing-Tabelle bei Familienänderung aktualisieren (Subskill `skill-family-care
 `inventory_skills.py`-Lauf aus `skill-explorer`).
 
 ## Changelog
+
+### 0.11.0 (2026-11-10)
+- Routing-Zeile für `folder-organization` (v1.2.0, Familie Utilities) ergänzt: semantisches
+  Themenlisten-Clustering, Cluster-Kalibrierung, zweistufige SHA-256-Duplikat-Auflösung,
+  Cut-and-Clue sowie Nachziehen von Steuerdateien und aktiven Schreibern; abgegrenzt von `tidy-up`,
+  `file-collect-sort-action` und `folder-flattening`.
+
+### 0.10.0 (2026-11-08)
+- Routing-Zeile für neuen Skill `scientific-style-check` (Familie Research): Fachsprach- und Stillektorat
+  wissenschaftlicher LaTeX-Paper ohne Inhaltsänderung; abgegrenzt von `llm-text-hygiene` und `bilingual-doc-sync`.
 
 ### 0.9.0 (2026-10-03)
 - Routing-Zeile für neuen Skill `budgetierung` (Familie Multi-Agent): Modellkontingente

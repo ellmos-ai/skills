@@ -1,10 +1,10 @@
 ---
 name: tidy-up
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-11-10
 description: >
   Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session
   gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene
@@ -223,6 +223,10 @@ Changelog-Eintrag.
   Register) uebernimmt `tidy-up` nur die Registerpflege, nicht die Bugsuche selbst.
 - **`dev-cycle`** — 8-Phasen-Rahmen fuer neue Feature-Entwicklung. `tidy-up` ist kein
   Entwicklungsrahmen, sondern ein Abschluss-/Hygiene-Durchlauf nach bereits geleisteter Arbeit.
+- **`folder-organization`** — semantisches Ordner-Aufräumen mit Themencluster-Synthese,
+  Cluster-Kalibrierung, zweistufiger SHA-256-Duplikat-Auflösung und Schreiber-Rückverfolgung.
+  Wenn nicht nur Sitzungsreste innerhalb der bestehenden Struktur weggeräumt, sondern ein
+  gewachsener Ordnerbestand in Themencluster neu geordnet werden soll, greift `folder-organization`.
 - **`folder-flattening`** — restrukturiert verschachtelte Ordnerhierarchien. `tidy-up` raeumt
   Dateien innerhalb der bestehenden Struktur auf, aendert die Struktur selbst nicht.
 
@@ -257,6 +261,11 @@ Kombiniert mit /goal + /work-autonomous:
 ```
 
 ## Changelog
+
+### 1.1.1 (2026-11-10)
+- Abgrenzung zu `folder-organization` (v1.2.0) unter „Verwandte Skills" ergänzt: Sitzungsabschluss
+  innerhalb bestehender Struktur (`tidy-up`) vs. semantische Themencluster-Neuordnung,
+  SHA-256-Deduplizierung und Schreiber-Rückverfolgung (`folder-organization`).
 
 ### 1.1.0 (2026-08-19)
 - Ergaenzung aus einem live nachgereichten Zusatz zu T-20260819-461890468 (User, woertlich: "bis

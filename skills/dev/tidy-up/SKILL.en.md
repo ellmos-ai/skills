@@ -1,10 +1,10 @@
 ---
 name: tidy-up
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-11-10
 description: >
   One-time Tasksolver+Writer+Maintainer pass for the project folder the
   session has been working in anyway (including subfolders) — not a
@@ -262,6 +262,12 @@ project") is part of this extension — see its changelog entry.
 - **`dev-cycle`** — 8-phase framework for new feature development.
   `tidy-up` is not a development framework, but a wrap-up/hygiene pass
   after work already done.
+- **`folder-organization`** — semantic folder cleanup with topic-cluster
+  synthesis, cluster count calibration, two-stage SHA-256 duplicate
+  resolution, and upstream writer back-propagation. Use
+  `folder-organization` when a grown directory collection must be
+  reorganized into thematic clusters rather than tidied within its
+  existing structure.
 - **`folder-flattening`** — restructures nested folder hierarchies.
   `tidy-up` tidies files within the existing structure, it doesn't change
   the structure itself.
@@ -302,6 +308,12 @@ Combined with /goal + /work-autonomous:
 ```
 
 ## Changelog
+
+### 1.1.1 (2026-11-10)
+- Added boundary to `folder-organization` (v1.2.0) under "Related skills":
+  session closeout within an existing structure (`tidy-up`) vs. semantic
+  topic-cluster reorganization, SHA-256 deduplication, and upstream writer
+  back-propagation (`folder-organization`).
 
 ### 1.1.0 (2026-08-19)
 - Addition from a live follow-up to T-20260819-461890468 (user, verbatim:
