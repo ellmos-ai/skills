@@ -1,24 +1,24 @@
 ---
 name: decision-draw
-version: 1.3.0
+version: 1.4.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-09
+updated: 2026-11-14
 description: >
-  Condenses bundled pending decisions into ONE cohesive, prose-based overall
-  concept assuming all recommended choices are adopted. Shows how subsystems
-  interlock after implementation instead of forcing the user through dozens of
-  isolated individual questions. The user accepts the picture as a whole or
-  provides natural-language corrections, which are automatically translated back
-  into individual decisions and written to the register via decision-briefing
-  Phase 4. Use for "what does the whole thing look like if we agree to everything",
-  "draw the big picture", "overall decision concept", "decision draw",
-  /decision-draw, "how do the systems work together". Do NOT use when alternatives
-  per item must be debated -- that's decision-briefing; do NOT use for dependency
-  graphs -- that's decision-path; do NOT use for discrete blocks with options
-  and pro/con breakdown (even for tightly grouped decisions) -- that's
-  decision-shot; do NOT use to work out a single choice -- that's decide.
+  Use when several bundled pending decisions should be presented for sign-off
+  at once, e.g. "decision draw", /decision-draw, "give me all decisions in their
+  recommended form", "what does the whole thing look like if we agree to
+  everything", "draw the big picture". The default is the short form -- each
+  decision written out in one or two sentences exactly as it reads under the
+  recommendation, then an overall sign-off ("looks good") or a correction by
+  number. Corrections are translated into individual decisions and booked via
+  decision-briefing Phase 4. The detailed big picture (concept, interplay,
+  implementation, appendix) only on explicit request. Do NOT use when
+  alternatives per item must be debated -- that's decision-briefing; do NOT use
+  for dependency graphs -- that's decision-path; do NOT use for discrete blocks
+  with options and pro/con breakdown (even for tightly grouped decisions) --
+  that's decision-shot; do NOT use to work out a single choice -- that's decide.
 visibility: public
 language: en
 standalone: true
@@ -26,7 +26,7 @@ anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: utilities
-tags: [entscheidung, konzeptbild, gesamtabnahme, buendelung, zusammenspiel, ruecktransfer, workflow]
+tags: [entscheidung, kurzfassung, konzeptbild, gesamtabnahme, buendelung, zusammenspiel, ruecktransfer, workflow]
 status: active
 dependencies:
   tools: []
@@ -53,10 +53,42 @@ before any external effect; canonical booking remains decision-briefing Phase 4.
 > **Status:** The Tk viewer is **not accepted natively**: the Tk path has never been executed, and its tests run headless with mocks. Open it for a user only after their explicit consent; until then use the HTML form (section "Decision document as a form").
 
 > When five or ten decisions are pending, one easily gets lost in the weeds of
-> isolated options and loses sight of the emerging system. decision-draw does not
-> describe the alternatives; it paints the working whole: How do the systems
-> cooperate once all recommendations are in place? The user signs off on the picture
-> as a whole or provides targeted feedback.
+> isolated options. decision-draw does not show the alternatives; it writes out
+> each decision briefly, exactly as it reads under the recommendation. The user
+> signs off on the list as a whole or corrects specific items. The detailed big
+> picture of how the systems work together afterwards is available on explicit
+> request.
+
+---
+
+## Default: short form
+
+> **User instruction (2026-11-14):**
+> *"I want a short decision draw [...] To me that means: give me all decisions written out in their recommended form"*
+
+Unless the detailed version is explicitly requested, a `decision-draw` consists of only three parts:
+
+1. **Intro line:** one sentence on what it is about.
+2. **Numbered list of all decisions:** per item a **plain-text title:** followed by one or two sentences that write out the decision exactly as it reads under the recommendation. Result form in the indicative ("The audit tool is brought up to the published version"), no situation report and no first-person narrative. A fallback only as a half-sentence, if the recommendation contains one ("…; otherwise …").
+3. **Sign-off line:** "**Looks good** books all; otherwise number plus correction, the remaining items stay open."
+
+The short form does not include concept, interplay, implementation tracks, a boundaries section, explanations of the back-transfer or the appendix table. Dependencies appear only where they change a decision, as a half-sentence in the affected item. The style rule below still applies: no codes, ticket numbers, paths, hashes or measurements in visible text.
+
+The technical mapping (code, source, assumed variant) stays in the background and is only needed when booking via `decision-briefing` Phase 4. If the short form is stored as a file, the mapping goes at the end as a collapsed appendix (`<details>`). The back-transfer rules (no co-booking on partial corrections, mandatory table for corrections, write path only via Phase 4) apply to both versions.
+
+Example (BACH & system cluster pilot as short form):
+
+```markdown
+Five pending decisions on the BACH core cluster, each in its recommended form:
+
+1. **Model backend as its own core:** Model assignment is extracted from the monolith into an independent core module; if an external service fails, the local reserve model takes over.
+2. **Secure deploy keys on the Mac:** The Mac pulls updates with a read-only key; running 24/7 services are not restarted but report the pending update.
+3. **Unified configuration baselines:** Both main hosts use the same baselines from the sync directory; the laptop keeps leeway for mobile tests.
+4. **Fixed timezone in VersicherungsManager:** Deadlines are calculated everywhere with a fixed configured timezone instead of the operating system's.
+5. **Public USMC documentation:** The module documentation is listed as public on the website so the nightly site build runs without warnings.
+
+**Looks good** books all five; otherwise number plus correction, the rest stay open.
+```
 
 ---
 
@@ -80,9 +112,9 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 ## When to use
 
 - Multiple interdependent decisions (from [decision-briefing](../decision-briefing/SKILL.md) or a decision briefing document) should not be grinded through as a tedious checklist of individual questions.
-- The user wants to see how components actually interact in daily practice after implementation before approving them.
+- The user wants to see how components actually interact in daily practice after implementation before approving them (then the detailed version).
 - A cluster of tightly coupled decisions identified via the dependency graph ([decision-path](../decision-path/SKILL.md)) can be signed off together as a functional unit.
-- Trigger words: `/decision-draw`, "what does the whole thing look like if we agree to everything", "draw the big picture", "overall decision concept", "decision draw", "how do the systems work together afterwards", "overall sign-off picture".
+- Trigger words: `/decision-draw`, "give me all decisions in their recommended form", "what does the whole thing look like if we agree to everything", "draw the big picture", "overall decision concept", "decision draw", "how do the systems work together afterwards", "overall sign-off picture".
 - Do **not** use:
   - When the user wants to evaluate distinct options per item and choose via letters (A/B/C) — that is done by [decision-briefing](../decision-briefing/SKILL.md).
   - For pure causality and bottleneck analysis in the terminal — that is done by [decision-path](../decision-path/SKILL.md).
@@ -97,12 +129,12 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 |---|---|---|---|
 | `decision-briefing` | **Decomposes** into individual items | Shows all options A/B/C/D | Letter codes (`1A 2C 3B`) |
 | `decision-path` | **Structures** causalities | Evaluates options in graph | Terminal diagnostics (ASCII) |
-| `decision-draw` | **Cohesive target picture** (bundles interdependent decisions) | Describes **only the recommended variant** (alternatives linked) | Holistic sign-off or correction sentence |
+| `decision-draw` | **Short list of all decisions** in recommended form (default); cohesive target picture only on request | Describes **only the recommended variant** (alternatives linked or on request) | "Looks good" or correction by number/title |
 | `decision-shot` | **Structured discrete blocks** (for single issues or tight groups) | Shows options with 2–4 pro/con bullet points | Executive decision / individual review |
 | `decide` | **Works out** single issue | Evaluation matrix (criteria) | Analytical recommendation |
 
 > **Core Rule:**
-> `decision-draw` describes **exclusively the recommended variant**. The discarded alternatives have not vanished — they are documented in [decision-briefing](../decision-briefing/SKILL.md), [decision-shot](../decision-shot/SKILL.md), or linked tickets, and are referenced in the header table. A draw without this link takes away the user's choice instead of simplifying it.
+> `decision-draw` describes **exclusively the recommended variant**. The discarded alternatives have not vanished — they are documented in [decision-briefing](../decision-briefing/SKILL.md), [decision-shot](../decision-shot/SKILL.md), or linked tickets, and are referenced in the header table. A draw without this link takes away the user's choice instead of simplifying it. In the short form it is enough to supply the alternatives per item on request.
 
 ---
 
@@ -113,7 +145,7 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
 1. **No technical abbreviations in visible user text:**
    In visible prose for human readers (bundle, concept, interplay, implementation, query), there must be **no** internal codes (such as `BH-A`, `MD-A`, `HA-A`, `PRA`), no ticket numbers (`T-2026...`), no D-numbers (`D-2026...`), no relative paths, git hashes, or raw telemetry.
-2. **2–4 sentences of everyday language in first person per item:**
+2. **Detailed version: 2–4 sentences of everyday language in first person per item** (in the short form one or two sentences in result form, see above):
    Each item in the bundle is phrased following the three-part structure:
    - *Situation:* What is the current starting point?
    - *Action ("I do..."):* What do I specifically plan / recommend doing?
@@ -122,13 +154,13 @@ Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 3. **Descriptive plain-text titles for orientation:**
    Each item bears an intuitive title (e.g. *"Model Backend as Dedicated Core"*, *"Secure Deploy Keys on the Mac"*). The user interacts via this title or provides an overall sign-off.
 4. **Technical mapping exclusively in the appendix:**
-   The translation between plain-text title, internal abbreviation, ticket ID, and ledger state happens **exclusively in a concluding appendix table** at the end of the document. Automated parsers and ledger back-transfer routines read from there, and only from there.
+   The translation between plain-text title, internal abbreviation, ticket ID, and ledger state happens **exclusively in a concluding appendix table** at the end of the document. Automated parsers and ledger back-transfer routines read from there, and only from there. In the short form the mapping stays in the background (collapsed at the end when stored as a file).
 
 ---
 
-## Mandatory Structure (Eight Parts)
+## Detailed Version (Eight Parts, Only on Request)
 
-A complete `decision-draw` strictly follows this eight-part layout:
+If the user explicitly asks for the detailed big picture ("detailed", "with interplay", "long version"), the draw follows this eight-part layout:
 
 ### 1. Bundle and Scope (in Plain Text)
 Overview of bundled items in everyday language (first person, 2–4 sentences per item, no technical IDs/codes in text).
@@ -177,7 +209,7 @@ Compact table at the end of the document:
 
 ---
 
-## Example (Pilot Dataset: Ticket-Master 2026-09-13 — BACH & System Cluster)
+## Example, Detailed Version (Pilot Dataset: Ticket-Master 2026-09-13 — BACH & System Cluster)
 
 ```markdown
 # DECISION-DRAW: BACH Core Cluster & Operational Integrity
@@ -290,6 +322,8 @@ Unaltered items (`BH-A`, `VM-A`, `PD-A`) remain strictly **OPEN** until explicit
 4. **No Automatic Co-Booking upon Partial Corrections:** Only explicit overall sign-off books unaltered items. For every partial correction, all untouched items remain strictly open until the revised picture is approved or items are individually confirmed.
 5. **Exclusive Write Path via Phase 4:** `decision-draw` possesses no native write mechanism. All ledger and ticket bookings proceed strictly via [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
 6. **Adhere to Ledger Rules:** All bookings must comply with register contracts (no ID renumbering, canonical booking codes, canonical target `DECIDED-AND-DONE.md`).
+7. **User-Facing Text Without Technical Numbers and Codes:** Visible prose for humans contains no IDs, codes, paths or ticket numbers. Every item is phrased plainly; all identifiers go into the appendix table or, in the short form, stay in the background.
+8. **Short Form Is the Default:** Without an explicit request, no concept, interplay, implementation or appendix sections. Rules 1 and 2 apply only to the detailed version.
 
 ---
 
@@ -306,6 +340,10 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 ---
 
 ## Changelog
+
+### 1.4.0 (2026-11-14)
+- Short form as the default (user instruction 2026-11-14: "give me all decisions written out in their recommended form"): intro line, numbered list with one or two sentences per decision in result form, sign-off line. The eight-part layout is now called "Detailed Version" and is used only on explicit request. Reason: a draw covering eight audit decisions came out so long under the mandatory layout that the user rejected it as bloated.
+- `description` starts with the trigger and names the short form; new example (pilot as short form); style rules 2 and 4, the boundaries table and practical rule 8 adjusted accordingly (practical rule 7 added for DE/EN parity). Back-transfer and form rules unchanged.
 
 ### 1.3.0 (2026-11-09)
 - Image modes for the form template (`build_form.py`, `form.schema.json`, `formular.js`, `formular.css`): `serie` (default, 1–12 images), `polaroid` (2–12 cards with letters A, B, C... matching options, selectable by click or keypress) and `swipe` (1–60 images sequentially as a deck with yes/no/question and mandatory summary confirmation for bulk reviews).

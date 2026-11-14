@@ -1,26 +1,26 @@
 ---
 name: decision-draw
-version: 1.3.0
+version: 1.4.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-09
+updated: 2026-11-14
 description: >
-  Verdichtet gebündelte offene Entscheidungen zu EINEM zusammenhängenden,
-  prosa-basierten Gesamtkonzept auf Basis aller empfohlenen Varianten.
-  Zeigt, wie die Teilsysteme nach der Umsetzung konkret ineinandergreifen,
-  statt den Nutzer durch Dutzende isolierte Einzelfragen zu zwingen. Der Nutzer
-  nimmt das Bild als Ganzes ab oder gibt zielgerichtete Korrekturen, die
-  automatisch in Einzelentscheidungen übersetzt und über decision-briefing
-  Phase 4 ins Register zurückgeschrieben werden. Nutze diesen Skill bei
-  "wie sieht das Ganze aus wenn wir allem zustimmen", "zeichne mir das Gesamtbild",
-  "Gesamtkonzept der Entscheidungen", "decision draw", /decision-draw, "wie greifen
-  die Systeme zusammen". NICHT nutzen, wenn Alternativen pro Einzelpunkt
-  diskutiert werden sollen -- das macht decision-briefing; NICHT für den
-  Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte
-  Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen
-  Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen
-  Entscheidung -- das macht decide.
+  Verwenden, wenn mehrere gebündelte offene Entscheidungen auf einmal zur
+  Abnahme vorgelegt werden sollen, etwa bei "decision draw", /decision-draw,
+  "gib mir alle Entscheidungen in der empfohlenen Form", "wie sieht das Ganze
+  aus wenn wir allem zustimmen", "zeichne mir das Gesamtbild". Standard ist die
+  Kurzfassung -- jede Entscheidung in ein bis zwei Sätzen so ausgeschrieben, wie
+  sie nach der Empfehlung lautet, danach Gesamtabnahme ("Passt so") oder
+  Korrektur per Nummer. Korrekturen werden in Einzelentscheidungen übersetzt und
+  über decision-briefing Phase 4 gebucht. Das ausführliche Gesamtbild (Konzept,
+  Zusammenspiel, Umsetzung, Anhang) nur auf ausdrücklichen Wunsch. NICHT nutzen,
+  wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht
+  decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht
+  decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und
+  Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht
+  decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht
+  decide.
 visibility: public
 language: de
 standalone: true
@@ -28,7 +28,7 @@ anthropic_compatible: true
 bach_compatible: false
 bach_origin: false
 category: utilities
-tags: [entscheidung, konzeptbild, gesamtabnahme, buendelung, zusammenspiel, ruecktransfer, workflow]
+tags: [entscheidung, kurzfassung, konzeptbild, gesamtabnahme, buendelung, zusammenspiel, ruecktransfer, workflow]
 status: active
 dependencies:
   tools: []
@@ -58,10 +58,42 @@ der einzige Registerweg bleibt `decision-briefing` Phase 4.
 > **Status:** Der Tk-Viewer ist nativ **nicht abgenommen**: Der Tk-Pfad wurde nie ausgeführt, die Tests laufen headless mit Attrappen. Der Nutzerin oder dem Nutzer ihn nur nach deren ausdrücklicher Zustimmung öffnen; bis dahin das HTML-Formular verwenden (Abschnitt „Entscheidungsvorlage als Formular“).
 
 > Wenn fünf oder zehn Entscheidungen anstehen, verliert man im Klein-Klein der
-> Optionen leicht den Blick für das entstehende System. decision-draw beschreibt
-> nicht die Alternativen, sondern das funktionierende Ganze: Wie arbeiten die
-> Systeme zusammen, wenn alle Empfehlungen angenommen werden? Der Nutzer nimmt
-> das Bild als Ganzes ab oder korrigiert gezielt.
+> Optionen leicht den Überblick. decision-draw zeigt nicht die Alternativen,
+> sondern schreibt jede Entscheidung kurz so aus, wie sie nach der Empfehlung
+> lautet. Der Nutzer nimmt die Liste als Ganzes ab oder korrigiert gezielt. Das
+> ausführliche Gesamtbild, wie die Systeme danach zusammenarbeiten, gibt es auf
+> ausdrücklichen Wunsch.
+
+---
+
+## Standard: Kurzfassung
+
+> **Nutzeranweisung (2026-11-14):**
+> *„ich möchte einen kurzen decision draw [...] Für mich heisst das: Gib mir alle Entscheidungen in der empfohlenen Form ausgeschrieben“*
+
+Ohne ausdrücklichen Wunsch nach der ausführlichen Fassung besteht ein `decision-draw` nur aus drei Teilen:
+
+1. **Einleitungszeile:** ein Satz, worum es geht.
+2. **Nummerierte Liste aller Entscheidungen:** je Posten **Klartext-Titel:** und ein bis zwei Sätze, die die Entscheidung so ausschreiben, wie sie nach der Empfehlung lautet. Ergebnisform im Indikativ („Das Prüfwerkzeug wird auf den veröffentlichten Stand gebracht“), kein Lagebericht und keine Ich-Erzählung. Einen Rückfall nur als Halbsatz, wenn die Empfehlung ihn enthält („…; sonst …“).
+3. **Abnahmezeile:** „**Passt so** bucht alle; sonst Nummer und Korrektur, die übrigen Posten bleiben offen.“
+
+Nicht in die Kurzfassung gehören Konzept, Zusammenspiel, Umsetzungsstränge, Grenzen-Abschnitt, Erklärungen zum Rücktransfer und die Anhangstabelle. Abhängigkeiten erscheinen nur, wenn sie eine Entscheidung ändern, dann als Halbsatz im betroffenen Posten. Die Stilregel unten gilt unverändert: keine Kürzel, Ticketnummern, Pfade, Hashes oder Messwerte im sichtbaren Text.
+
+Die technische Zuordnung (Kürzel, Quelle, unterstellte Variante) bleibt im Hintergrund und wird erst bei der Buchung über `decision-briefing` Phase 4 gebraucht. Wird die Kurzfassung als Datei abgelegt, steht sie als eingeklappter Anhang (`<details>`) am Ende. Die Rücktransfer-Regeln (keine Mitbuchung bei Teilkorrekturen, Pflicht-Tabelle bei Korrekturen, Schreibweg nur über Phase 4) gelten für beide Fassungen.
+
+Beispiel (Pilot BACH & Systemverbund als Kurzfassung):
+
+```markdown
+Fünf offene Entscheidungen zum BACH-Kernverbund, jeweils in der empfohlenen Form:
+
+1. **Modell-Backend als eigenes Herzstück:** Die Modellzuteilung wird als eigenständiges Kernmodul aus dem Monolithen gelöst; fällt ein externer Dienst aus, übernimmt das lokale Reservemodell.
+2. **Sichere Deploy-Schlüssel auf dem Mac:** Der Mac zieht Updates mit einem nur lesenden Schlüssel; laufende Dauerdienste werden nicht neu gestartet, sondern melden den Update-Bedarf.
+3. **Einheitliche Konfigurations-Sollwerte:** Beide Hauptrechner nutzen dieselben Sollwerte aus dem Sync-Verzeichnis; der Laptop behält Spielraum für mobile Tests.
+4. **Feste Zeitzone im VersicherungsManager:** Fristen rechnen überall mit einer fest eingestellten Zeitzone statt mit der des Betriebssystems.
+5. **Öffentliche USMC-Dokumentation:** Die Modul-Dokumentation wird im Webauftritt als öffentlich geführt, damit der nächtliche Seitenbau ohne Warnung durchläuft.
+
+**Passt so** bucht alle fünf; sonst Nummer und Korrektur, die übrigen bleiben offen.
+```
 
 ---
 
@@ -85,9 +117,9 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 ## Wann nutzen
 
 - Mehrere zusammenhängende Entscheidungen (aus [decision-briefing](../decision-briefing/SKILL.md) oder einer Entscheidungsvorlage) sollen nicht als zäher Einzelfragen-Katalog abgearbeitet werden.
-- Der Nutzer möchte vor dem Beschluss sehen, wie die Komponenten nach der Umsetzung im Alltag tatsächlich zusammenwirken.
+- Der Nutzer möchte vor dem Beschluss sehen, wie die Komponenten nach der Umsetzung im Alltag tatsächlich zusammenwirken (dann die ausführliche Fassung).
 - Aus dem Abhängigkeitsgraphen ([decision-path](../decision-path/SKILL.md)) wurde ein Bündel eng gekoppelter Entscheidungen identifiziert, das als funktionale Einheit abgenommen werden kann.
-- Trigger-Wörter: `/decision-draw`, "wie sieht das Ganze aus wenn wir allem zustimmen", "zeichne mir das Gesamtbild", "Gesamtkonzept der Entscheidungen", "decision draw", "wie greifen die Systeme danach zusammen", "Bild zur Gesamtabnahme".
+- Trigger-Wörter: `/decision-draw`, "gib mir alle Entscheidungen in der empfohlenen Form", "wie sieht das Ganze aus wenn wir allem zustimmen", "zeichne mir das Gesamtbild", "Gesamtkonzept der Entscheidungen", "decision draw", "wie greifen die Systeme danach zusammen", "Bild zur Gesamtabnahme".
 - **Nicht** nutzen:
   - Wenn der Nutzer einzelne Optionen je Frage abwägen und per Buchstabe (A/B/C) wählen will — das macht [decision-briefing](../decision-briefing/SKILL.md).
   - Zur reinen Kausal- und Blockaden-Analyse im Terminal — das macht [decision-path](../decision-path/SKILL.md).
@@ -102,12 +134,12 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 |---|---|---|---|
 | `decision-briefing` | **Zerlegt** in Einzelfragen | Zeigt alle Optionen A/B/C/D | Buchstabencodes (`1A 2C 3B`) |
 | `decision-path` | **Strukturiert** Kausalitäten | Bewertet Optionen im Graphen | Diagnose im Terminal (ASCII) |
-| `decision-draw` | **Zusammenhängendes Zielbild** (bündelt vernetzte Entscheidungen) | Beschreibt **nur die empfohlene Variante** (Alternativen verlinkt) | Gesamtabnahme oder Korrektursatz |
+| `decision-draw` | **Kurzliste aller Entscheidungen** in empfohlener Form (Standard); zusammenhängendes Zielbild nur auf Wunsch | Beschreibt **nur die empfohlene Variante** (Alternativen verlinkt oder auf Nachfrage) | „Passt so“ oder Korrektur per Nummer/Titel |
 | `decision-shot` | **Strukturierte Einzelblöcke** (für Einzelfragen oder enge Gruppen) | Zeigt Optionen mit 2–4 Pro/Contra-Punkten | Executive Decision / Einzelabnahme |
 | `decide` | **Erarbeitet** Einzelfall | Bewertungsmatrix (Kriterien) | Analytische Empfehlung |
 
 > **Zentrale Regel:**
-> `decision-draw` beschreibt **ausschließlich die empfohlene Variante**. Die verworfenen Alternativen sind nicht verschwunden — sie sind in [decision-briefing](../decision-briefing/SKILL.md), [decision-shot](../decision-shot/SKILL.md) oder den verlinkten Tickets dokumentiert und werden im Header verlinkt. Ein Draw ohne diesen Verweis würde dem Nutzer die Wahl nehmen, statt sie ihm zu erleichtern.
+> `decision-draw` beschreibt **ausschließlich die empfohlene Variante**. Die verworfenen Alternativen sind nicht verschwunden — sie sind in [decision-briefing](../decision-briefing/SKILL.md), [decision-shot](../decision-shot/SKILL.md) oder den verlinkten Tickets dokumentiert und werden im Header verlinkt. Ein Draw ohne diesen Verweis würde dem Nutzer die Wahl nehmen, statt sie ihm zu erleichtern. In der Kurzfassung genügt es, die Alternativen auf Nachfrage je Posten nachzureichen.
 
 ---
 
@@ -118,7 +150,7 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
 1. **Keine technischen Kürzel im sichtbaren Nutzertext:**
    Im sichtbaren Fließtext für den Menschen (Bündel, Konzept, Zusammenspiel, Umsetzung, Abfrage) stehen **keine** internen Kürzel (wie `BH-A`, `MD-A`, `HA-A`, `PRA`), keine Ticketnummern (`T-2026...`), keine D-Nummern (`D-2026...`), keine relativen Pfade, Git-Hashes oder Messwerte.
-2. **Je Posten 2–4 Sätze Alltagssprache in Ich-Form:**
+2. **Ausführliche Fassung: je Posten 2–4 Sätze Alltagssprache in Ich-Form** (in der Kurzfassung ein bis zwei Sätze in Ergebnisform, siehe oben):
    Jeder Posten des Bündels wird nach dem Dreiklang formuliert:
    - *Lage:* Was ist die aktuelle Ausgangssituation?
    - *„Ich mache …“:* Was plane ich konkret / was ist meine Handlungsempfehlung?
@@ -127,13 +159,13 @@ Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 3. **Klartext-Titel zur Orientierung:**
    Jeder Posten trägt einen verständlichen deutschen Titel (z. B. *„Modell-Backend als eigenes Herzstück“*, *„Sichere Deploy-Schlüssel auf dem Mac“*). Der Nutzer interagiert über diesen Titel oder gibt eine Gesamtabnahme.
 4. **Technische Zuordnung ausschließlich im Anhang:**
-   Die Übersetzung zwischen Klartext-Titel, internem Kürzel, Ticket-ID und Register-Zustand erfolgt **ausschließlich in einer abschließenden Anhangstabelle** am Ende des Dokuments. Dort — und nur dort — greifen die automatisierten Parser und Register-Rückschreiber.
+   Die Übersetzung zwischen Klartext-Titel, internem Kürzel, Ticket-ID und Register-Zustand erfolgt **ausschließlich in einer abschließenden Anhangstabelle** am Ende des Dokuments. Dort — und nur dort — greifen die automatisierten Parser und Register-Rückschreiber. In der Kurzfassung bleibt die Zuordnung im Hintergrund (bei Ablage als Datei eingeklappt am Ende).
 
 ---
 
-## Verbindlicher Aufbau (acht Teile)
+## Ausführliche Fassung (acht Teile, nur auf Wunsch)
 
-Ein vollständiger `decision-draw` folgt ausnahmslos dieser Struktur:
+Verlangt der Nutzer ausdrücklich das ausführliche Gesamtbild („ausführlich“, „mit Zusammenspiel“, „Langfassung“), folgt der Draw dieser Struktur:
 
 ### 1. Bündel und Umfang (im Klartext)
 Übersicht der gebündelten Posten in Alltagssprache (Ich-Form, 2–4 Sätze je Punkt, keine IDs/Kürzel im Text).
@@ -182,7 +214,7 @@ Kompakte Tabelle am Dokumentenende mit:
 
 ---
 
-## Beispiel (Pilotauszug: Ticket-Master 2026-09-13 — BACH & Systemverbund)
+## Beispiel ausführliche Fassung (Pilotauszug: Ticket-Master 2026-09-13 — BACH & Systemverbund)
 
 ```markdown
 # DECISION-DRAW: BACH-Kernverbund & Betriebsintegrität
@@ -320,7 +352,8 @@ Gibt der Nutzer eine inhaltliche Korrektur ein, z. B.:
 4. **Kein automatisches Mitbuchen bei Teilkorrekturen:** Nur bei ausdrücklicher Gesamtabnahme werden unveränderte Posten gebucht. Bei jeder Teilkorrektur bleiben alle nicht betroffenen Posten strikt offen, bis das Gesamtbild erneut freigegeben oder die Posten einzeln bestätigt werden.
 5. **Ausschließlicher Schreibweg über Phase 4:** `decision-draw` besitzt keinen eigenen Schreibweg ins Register. Buchungen erfolgen ausnahmslos über [decision-briefing](../decision-briefing/SKILL.md) Phase 4.
 6. **Respektiere die Register-Verträge:** Buchungen erfolgen immer nach den Regeln des Entscheidungsregisters (keine Umnummerierung von IDs, eindeutige Buchungscodes, kanonisches Ziel `DECIDED-AND-DONE.md`).
-7. **Nutzertexte ohne technische Nummern und Kürzel:** Im sichtbaren Fließtext für den Menschen stehen keine IDs, Kürzel, Pfade oder Ticketnummern. Jeder Posten wird in verständlicher Ich-Form formuliert; alle Kennungen wandern in die Anhangstabelle.
+7. **Nutzertexte ohne technische Nummern und Kürzel:** Im sichtbaren Fließtext für den Menschen stehen keine IDs, Kürzel, Pfade oder Ticketnummern. Jeder Posten wird verständlich formuliert; alle Kennungen wandern in die Anhangstabelle bzw. in der Kurzfassung in den Hintergrund.
+8. **Kurzfassung ist der Standard:** Ohne ausdrücklichen Wunsch keine Konzept-, Zusammenspiel-, Umsetzungs- oder Anhangabschnitte. Regel 1 und 2 betreffen nur die ausführliche Fassung.
 
 ---
 
@@ -337,6 +370,10 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 ---
 
 ## Changelog
+
+### 1.4.0 (2026-11-14)
+- Kurzfassung als Standard (Nutzeranweisung 2026-11-14: „Gib mir alle Entscheidungen in der empfohlenen Form ausgeschrieben“): Einleitungszeile, nummerierte Liste mit ein bis zwei Sätzen je Entscheidung in Ergebnisform, Abnahmezeile. Der achtteilige Aufbau heißt jetzt „Ausführliche Fassung“ und kommt nur auf ausdrücklichen Wunsch. Anlass: Ein Draw über acht Audit-Entscheidungen fiel nach dem Pflichtaufbau so lang aus, dass der Nutzer ihn als aufgebläht zurückwies.
+- `description` beginnt mit dem Auslöser und nennt die Kurzfassung; neues Beispiel (Pilot als Kurzfassung); Stilregel 2 und 4, Abgrenzungstabelle und Praxisregel 8 entsprechend angepasst. Rücktransfer- und Formularregeln unverändert.
 
 ### 1.3.0 (2026-11-09)
 - Bild-Modi für das Formular-Template (`build_form.py`, `form.schema.json`, `formular.js`, `formular.css`): `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Karten mit Buchstaben A, B, C... passend zu den Optionen, wählbar per Klick oder Tastendruck) und `swipe` (1–60 Bilder nacheinander wie ein Stapel mit Ja/Nein/Rückfrage und Bestätigung der Gesamtzusammenfassung für Massenprüfungen).
