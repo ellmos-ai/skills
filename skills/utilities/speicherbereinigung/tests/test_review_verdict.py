@@ -138,3 +138,25 @@ def test_uncommitted_work_in_a_worktree_sandbox_is_still_kept_when_the_canon_has
 
     assert str(result["verdict"]).startswith("dirty:") and result["deleted"] is False
     assert (Path(created["source"]) / "mine.txt").is_file()
+
+
+@pytest.mark.parametrize("name", ["_agy-results", "_tools", "_verified-dependencies", "_archive"])
+def test_underscore_infrastructure_folders_are_never_deletable(tmp_path: Path, name: str) -> None:
+    """Folders with a leading underscore carry no .git and no lock, so they used to look deletable after 24 h."""
+    root = tmp_path / "worktrees"
+    folder = root / name
+    folder.mkdir(parents=True)
+    (folder / "data.txt").write_text("keep", encoding="utf-8")
+    old = time.time() - 10 * 86400
+    import os
+    os.utime(folder, (old, old))
+    os.utime(folder / "data.txt", (old, old))
+
+    assert verdict(folder, root) == "geschuetzt-infrastruktur"
+
+
+def test_a_plain_closed_sandbox_without_underscore_is_still_deletable(tmp_path: Path) -> None:
+    root = tmp_path / "reviews"
+    folder = closed_folder(root, "plain")
+    assert verdict(folder, root) is None
+
