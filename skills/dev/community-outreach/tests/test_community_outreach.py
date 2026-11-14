@@ -1794,3 +1794,548 @@ Treating sync as a transit problem gives you a resilient architecture.
     assert preview["status"] == "error"
     assert "violates natural human style" in preview["message"]
 
+
+def test_biotec_line_is_permanently_excluded_across_selection_verification_preview_and_outbound(
+    temp_workspace: Path,
+) -> None:
+    repos = [
+        {
+            "id": "biotec-line/VFDistiller",
+            "name": "VFDistiller",
+            "org": "biotec-line",
+            "url": "https://github.com/biotec-line/VFDistiller",
+            "github_meta": PUBLIC_META,
+            "traffic": {"traffic_score": 9999},
+        },
+        {
+            "id": "ellmos-ai/agent-orchestrator",
+            "name": "agent-orchestrator",
+            "org": "ellmos-ai",
+            "url": "https://github.com/ellmos-ai/agent-orchestrator",
+            "github_meta": PUBLIC_META,
+            "traffic": {"traffic_score": 50},
+        },
+    ]
+    (temp_workspace / "usecases.json").write_text(
+        json.dumps({"repositories": repos}), encoding="utf-8"
+    )
+    (temp_workspace / "POST-EINGANG.md").write_text(
+        "# Queue\n\n"
+        + proposal_block(
+            "OUTBOUND-PROPOSAL-BIOTEC-1",
+            approved=True,
+            target_url="https://www.reddit.com/r/bioinformatics/comments/1abc/thread/",
+            repo="biotec-line/VFDistiller",
+        ),
+        encoding="utf-8",
+    )
+
+    engine = CommunityOutreachEngine(temp_workspace)
+
+    # 1. Phase 3 never selects biotec-line even if it has highest traffic or org_allow requests it
+    staged = engine.phase3_research_and_stage()
+    assert staged["repo_name"] == "agent-orchestrator"
+    staged_forced = engine.phase3_research_and_stage(org_allow=["biotec-line"])
+    assert staged_forced["repo_name"] != "VFDistiller"
+
+    # 2. verify_proposals marks biotec-line proposals as failed & blacklisted (excluded_org)
+    report = engine.verify_proposals()
+    assert report["status"] == "failed"
+    assert report["results"][0]["blacklisted"] is True
+    assert report["results"][0]["excluded_org"] is True
+
+    # 3. preview_post refuses biotec-line proposals
+    preview = engine.preview_post("OUTBOUND-PROPOSAL-BIOTEC-1")
+    assert preview["status"] == "error"
+    assert "blacklisted" in preview["message"]
+
+    # 4. phase2_outbound_execution blocks biotec-line proposals as blacklisted without calling publisher
+    publisher = DynamicPublisher()
+    outbound = CommunityOutreachEngine(temp_workspace, publisher=publisher).phase2_outbound_execution()
+    assert outbound == [
+        {"id": "OUTBOUND-PROPOSAL-BIOTEC-1", "status": "blacklisted"}
+    ]
+    assert publisher.calls == []
+
+
+def test_primary_orgs_focus_and_research_line_discourse_mode(tmp_path: Path) -> None:
+    workspace = tmp_path / "org_policy_ws"
+    workspace.mkdir()
+    repos = [
+        {
+            "id": "research-line/functional-stability-theory",
+            "name": "functional-stability-theory",
+            "org": "research-line",
+            "url": "https://github.com/research-line/functional-stability-theory",
+            "outreach_mode": "discourse_positioning",
+            "github_meta": PUBLIC_META,
+            "traffic": {"traffic_score": 5000},
+        },
+        {
+            "id": "um-bruch/web",
+            "name": "web",
+            "org": "um-bruch",
+            "url": "https://github.com/um-bruch/web",
+            "github_meta": PUBLIC_META,
+            "traffic": {"traffic_score": 2000},
+        },
+        {
+            "id": "dev-bricks/api-probe",
+            "name": "api-probe",
+            "org": "dev-bricks",
+            "url": "https://github.com/dev-bricks/api-probe",
+            "github_meta": PUBLIC_META,
+            "traffic": {"traffic_score": 100},
+        },
+    ]
+    (workspace / "usecases.json").write_text(json.dumps({"repositories": repos}), encoding="utf-8")
+    (workspace / "config.json").write_text(
+        json.dumps(
+            {
+                "compliance": {
+                    "primary_orgs": ["ellmos-ai", "dev-bricks", "file-bricks", "doc-bricks", "open-bricks"],
+                    "excluded_orgs": ["biotec-line"],
+                    "discourse_only_orgs": ["research-line"],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    engine = CommunityOutreachEngine(workspace)
+
+    # Default routine run selects from primary_orgs (dev-bricks/api-probe) and skips research-line
+    routine = engine.phase3_research_and_stage()
+    assert routine["repo_name"] == "api-probe"
+    assert routine["stage"] == 1
+    assert routine["outreach_mode"] == "solution-outreach"
+
+    # Explicit discourse run with org_allow=["research-line"] selects research-line in discourse-positioning mode
+    discourse = engine.phase3_research_and_stage(org_allow=["research-line"])
+    assert discourse["repo_name"] == "functional-stability-theory"
+    assert discourse["outreach_mode"] == "discourse-positioning"
+    assert "wissenschaftliche Stellungnahme" in discourse["reason"]
+
+
+def test_three_stage_quality_and_attention_selection_model(tmp_path: Path) -> None:
+    import githubbot_bridge
+    from outreach_engine import select_candidate_repository
+
+    # 1. classify_repo activates ellmos-ai/skills ("skills allgemein")
+    reg = {"ellmos-ai/skills": {"github": {"visibility": "public", "fork": False, "archived": False}}}
+    cls_skills = githubbot_bridge.classify_repo(
+        repo_id="ellmos-ai/skills",
+        org="ellmos-ai",
+        name="skills",
+        registry_repos=reg,
+        private_set=set(),
+        archived_set=set(),
+        all_catalog_repos=[],
+    )
+    assert cls_skills.is_active is True
+
+    # 2. compute_selection_tier classifies Tier 1, Tier 2, and Tier 3 accurately
+    t1_module = {
+        "id": "ellmos-ai/workflowhooker",
+        "total_promotions": 0,
+        "traffic": {"views_unique_14d": 0, "clones_unique_14d": 54, "traffic_score": 108},
+    }
+    tier1, label1, q1 = githubbot_bridge.compute_selection_tier(t1_module)
+    assert (tier1, label1, q1) == (1, "tier1_quality_low_medium_attention", 98)
+
+    t1_flagship = {
+        "id": "ellmos-ai/bach",
+        "total_promotions": 1,
+        "traffic": {"views_unique_14d": 28, "clones_unique_14d": 93, "traffic_score": 214},
+    }
+    assert githubbot_bridge.compute_selection_tier(t1_flagship) == (1, "tier1_core_flagship", 99)
+
+    t1_skill = {
+        "id": "skills/infrastructure/skill-extractor",
+        "total_promotions": 0,
+        "traffic": {},
+    }
+    assert githubbot_bridge.compute_selection_tier(t1_skill) == (1, "tier1_standout_skill", 95)
+
+    t2_module = {
+        "id": "file-bricks/ExplorerPro",
+        "total_promotions": 0,
+        "traffic": {"views_unique_14d": 15, "clones_unique_14d": 120, "traffic_score": 255},
+    }
+    assert githubbot_bridge.compute_selection_tier(t2_module) == (2, "tier2_quality_existing_attention", 92)
+
+    t3_smaller = {
+        "id": "ellmos-ai/source-resolver",
+        "total_promotions": 0,
+        "traffic": {"views_unique_14d": 0, "clones_unique_14d": 63, "traffic_score": 126},
+    }
+    assert githubbot_bridge.compute_selection_tier(t3_smaller) == (3, "tier3_smaller_modules", 60)
+
+    # 3. select_candidate_repository strictly orders Tier 1 -> Tier 2 -> Tier 3
+    candidates = [
+        {
+            "id": "ellmos-ai/source-resolver",
+            "name": "source-resolver",
+            "org": "ellmos-ai",
+            "url": "https://github.com/ellmos-ai/source-resolver",
+            "selection_tier": 3,
+            "selection_tier_label": "tier3_smaller_modules",
+            "quality_score": 60,
+            "total_promotions": 0,
+            "github_meta": PUBLIC_META,
+            "traffic": {"views_unique_14d": 0, "clones_unique_14d": 500, "traffic_score": 1000},
+        },
+        {
+            "id": "file-bricks/ExplorerPro",
+            "name": "ExplorerPro",
+            "org": "file-bricks",
+            "url": "https://github.com/file-bricks/ExplorerPro",
+            "selection_tier": 2,
+            "selection_tier_label": "tier2_quality_existing_attention",
+            "quality_score": 92,
+            "total_promotions": 0,
+            "github_meta": PUBLIC_META,
+            "traffic": {"views_unique_14d": 15, "clones_unique_14d": 300, "traffic_score": 615},
+        },
+        {
+            "id": "ellmos-ai/workflowhooker",
+            "name": "workflowhooker",
+            "org": "ellmos-ai",
+            "url": "https://github.com/ellmos-ai/workflowhooker",
+            "selection_tier": 1,
+            "selection_tier_label": "tier1_quality_low_medium_attention",
+            "quality_score": 98,
+            "total_promotions": 0,
+            "github_meta": PUBLIC_META,
+            "traffic": {"views_unique_14d": 0, "clones_unique_14d": 54, "traffic_score": 108},
+        },
+    ]
+    selected, meta = select_candidate_repository(candidates)
+    assert selected is not None and selected["id"] == "ellmos-ai/workflowhooker"
+    assert meta["selection_tier"] == 1
+    assert meta["quality_score"] == 98
+
+    # When Tier 1 is removed, Tier 2 beats Tier 3 even if Tier 3 has higher raw clone traffic
+    selected2, meta2 = select_candidate_repository(candidates[:2])
+    assert selected2 is not None and selected2["id"] == "file-bricks/ExplorerPro"
+    assert meta2["selection_tier"] == 2
+
+
+def test_verify_proposals_resolves_specific_skill_paths(tmp_path: Path) -> None:
+    workspace = tmp_path / "ws"
+    workspace.mkdir()
+    repos_root = tmp_path / "repos"
+    skill_dir = repos_root / "skills" / "skills" / "infrastructure" / "skill-extractor"
+    skill_dir.mkdir(parents=True)
+    (skill_dir / "SKILL.md").write_text("---\nname: skill-extractor\n---\n", encoding="utf-8")
+
+    (workspace / "POST-EINGANG.md").write_text(
+        """# POST-EINGANG
+
+### [OUTBOUND-PROPOSAL-SKILL-EXTRACTOR-1] Skill Extractor
+- **Plattform:** Reddit
+- **Ziel-URL:** https://www.reddit.com/r/ClaudeAI/comments/abc123/reusable_skills/
+- **Lösungs-Repo:** skills/infrastructure/skill-extractor
+- **Code-Beleg (Verifiziert):** `SKILL.md`
+- **Umgebungs-Check (Ton & Länge):** Geprüft am 2026-11-09
+- [x] Genehmigt
+#### Textvorschlag:
+```text
+We handle session-to-skill distillation in ellmos-ai/skills under skills/infrastructure/skill-extractor by segmenting long transcripts into stations first and scoring each station before generating a SKILL.md package.
+```
+""",
+        encoding="utf-8",
+    )
+    report = CommunityOutreachEngine(workspace).verify_proposals(repos_root=repos_root)
+    assert report["status"] == "verified", report
+    assert report["verified_count"] == 1
+    assert report["failed_count"] == 0
+
+
+def _init_git_repo(repo_dir: Path, files: dict[str, str]) -> None:
+    repo_dir.mkdir(parents=True, exist_ok=True)
+    for rel_path, content in files.items():
+        full_path = repo_dir / rel_path
+        full_path.parent.mkdir(parents=True, exist_ok=True)
+        full_path.write_text(content, encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo_dir), "init", "-q"], check=True)
+    subprocess.run(["git", "-C", str(repo_dir), "add", "."], check=True)
+
+
+def test_claim_contract_valid_zero_dep_and_sister_repo_publishes_and_cleans_span(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    repos_root = tmp_path / "repos"
+    _init_git_repo(
+        repos_root / "super-tool",
+        {
+            "pyproject.toml": '[project]\nname = "super-tool"\ndependencies = []\n',
+            "src/lock_guard.py": (
+                "class LockGuard:\n"
+                "    def acquire_fenced_lease(self, fence: int) -> bool:\n"
+                "        return fence > 0\n"
+            ),
+        },
+    )
+    _init_git_repo(
+        repos_root / "clutch",
+        {
+            "clutch/router.py": (
+                "class ModelRouter:\n"
+                "    def select_gear(self, budget_ratio: float) -> str:\n"
+                "        return 'eco' if budget_ratio < 0.2 else 'pro'\n"
+            ),
+        },
+    )
+
+    (temp_workspace / "usecases.json").write_text(
+        json.dumps(
+            {
+                "repositories": [
+                    {
+                        "id": "ellmos-ai/super-tool",
+                        "name": "super-tool",
+                        "org": "ellmos-ai",
+                        "url": "https://example.org/super-tool",
+                        "github_meta": PUBLIC_META,
+                    },
+                    {
+                        "id": "ellmos-ai/clutch",
+                        "name": "clutch",
+                        "org": "ellmos-ai",
+                        "url": "https://github.com/ellmos-ai/clutch",
+                        "github_meta": PUBLIC_META,
+                    },
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    (temp_workspace / "config.json").write_text(
+        json.dumps(
+            {
+                "compliance": {
+                    "require_code_evidence": True,
+                    "require_natural_style": True,
+                    "require_claim_contract": True,
+                },
+                "verification": {"local_repos_root": str(repos_root)},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    contract = [
+        {
+            "text_anchor": "We built ellmos-ai/super-tool in Python with zero dependencies and monotonic fenced leases in lock_guard.py.",
+            "repo": "ellmos-ai/super-tool",
+            "file": "src/lock_guard.py",
+            "lines": "L1-L3",
+            "verbatim_code": "class LockGuard:\n    def acquire_fenced_lease(self, fence: int) -> bool:",
+        },
+        {
+            "text_anchor": "with zero dependencies",
+            "repo": "ellmos-ai/super-tool",
+            "file": "pyproject.toml",
+            "lines": "L1-L3",
+            "verbatim_code": 'name = "super-tool"\ndependencies = []',
+        },
+        {
+            "text_anchor": "When routing models alongside it, we pair it with Clutch for budget-aware gear selection in router.py.",
+            "repo": "ellmos-ai/clutch",
+            "file": "clutch/router.py",
+            "lines": "L1-L3",
+            "verbatim_code": "class ModelRouter:\n    def select_gear(self, budget_ratio: float) -> str:",
+        },
+    ]
+
+    inbox = f"""# Queue
+
+### [OUTBOUND-PROPOSAL-CONTRACT-OK-1] Verified Contract
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** [https://www.reddit.com/r/python/comments/okcontract/thread/](https://www.reddit.com/r/python/comments/okcontract/thread/)
+- **Lösungs-Repo:** `ellmos-ai/super-tool`
+- **Code-Beleg (Verifiziert):** `src/lock_guard.py`, `pyproject.toml`
+- **Umgebungs-Check (Ton & Länge):** Kurzer Kommentar ohne Listen
+#### Claim-Beleg-Vertrag (Verifiziert):
+```json
+{json.dumps(contract, indent=2)}
+```
+- [x] Genehmigt
+
+#### Textvorschlag:
+```text
+Stale lock files after crashes bit us constantly too. We built ellmos-ai/super-tool in Python with zero dependencies and monotonic fenced leases in lock_guard.py. When routing models alongside it, we pair it with Clutch for budget-aware gear selection in router.py.
+```
+"""
+    (temp_workspace / "POST-EINGANG.md").write_text(inbox, encoding="utf-8")
+
+    engine = CommunityOutreachEngine(temp_workspace, publisher=DynamicPublisher())
+    report = engine.verify_proposals()
+    assert report["status"] == "verified", report
+    item = report["results"][0]
+    assert item["claim_contract_ok"] is True
+    assert item["verified_claims"] == 3
+    assert item["software_sentence_count"] == 2
+    assert item["covered_sentence_count"] == 2
+
+    preview = engine.preview_post("OUTBOUND-PROPOSAL-CONTRACT-OK-1")
+    assert preview["status"] == "preview", preview
+
+    outbound = engine.phase2_outbound_execution()
+    assert len(outbound) == 1 and outbound[0]["status"] == "published", outbound
+    remaining_inbox = (temp_workspace / "POST-EINGANG.md").read_text(encoding="utf-8")
+    assert "OUTBOUND-PROPOSAL-CONTRACT-OK-1" not in remaining_inbox
+    assert "Claim-Beleg-Vertrag" not in remaining_inbox
+
+
+def test_claim_contract_missing_blocks_verify_preview_and_outbound(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    repos_root = tmp_path / "repos"
+    _init_git_repo(repos_root / "super-tool", {"src/engine.py": "class Engine:\n    pass\n"})
+    (temp_workspace / "config.json").write_text(
+        json.dumps(
+            {
+                "compliance": {"require_code_evidence": True, "require_claim_contract": True},
+                "verification": {"local_repos_root": str(repos_root)},
+            }
+        ),
+        encoding="utf-8",
+    )
+    inbox = """# Queue
+
+### [OUTBOUND-PROPOSAL-NO-CONTRACT-1] Missing Contract
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** https://www.reddit.com/r/python/comments/nocontract/thread/
+- **Lösungs-Repo:** `ellmos-ai/super-tool`
+- **Code-Beleg (Verifiziert):** `src/engine.py`
+- [x] Genehmigt
+
+#### Textvorschlag:
+```text
+We built ellmos-ai/super-tool with a deterministic Engine class.
+```
+"""
+    (temp_workspace / "POST-EINGANG.md").write_text(inbox, encoding="utf-8")
+    publisher = DynamicPublisher()
+    engine = CommunityOutreachEngine(temp_workspace, publisher=publisher)
+
+    report = engine.verify_proposals()
+    assert report["status"] == "failed"
+    assert report["results"][0]["contract_violations"] == ["missing-claim-contract"]
+
+    preview = engine.preview_post("OUTBOUND-PROPOSAL-NO-CONTRACT-1")
+    assert preview["status"] == "error"
+    assert "missing-claim-contract" in preview["contract_violations"]
+
+    outbound = engine.phase2_outbound_execution()
+    assert outbound == [
+        {
+            "id": "OUTBOUND-PROPOSAL-NO-CONTRACT-1",
+            "status": "needs-action",
+            "reason": "missing-claim-contract",
+            "violations": ["missing-claim-contract"],
+        }
+    ]
+    assert publisher.calls == []
+
+
+def test_claim_contract_rejects_verbatim_mismatch_untracked_uncovered_and_false_predicates(
+    temp_workspace: Path, tmp_path: Path
+) -> None:
+    repos_root = tmp_path / "repos"
+    _init_git_repo(
+        repos_root / "super-tool",
+        {
+            "pyproject.toml": '[project]\nname = "super-tool"\ndependencies = ["hook-master>=0.2.0"]\n',
+            "src/engine.py": "class Engine:\n    def run_gate(self) -> bool:\n        return True\n",
+        },
+    )
+    # Create an untracked file on disk that is NOT in git index
+    (repos_root / "super-tool" / "src" / "untracked.py").write_text(
+        "def secret_untracked_helper() -> int:\n    return 42\n", encoding="utf-8"
+    )
+    _init_git_repo(
+        repos_root / "clutch",
+        {"clutch/router.py": "class ModelRouter:\n    pass\n"},
+    )
+
+    (temp_workspace / "usecases.json").write_text(
+        json.dumps(
+            {
+                "repositories": [
+                    {"id": "ellmos-ai/super-tool", "name": "super-tool", "org": "ellmos-ai", "github_meta": PUBLIC_META},
+                    {"id": "ellmos-ai/clutch", "name": "clutch", "org": "ellmos-ai", "github_meta": PUBLIC_META},
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    (temp_workspace / "config.json").write_text(
+        json.dumps(
+            {
+                "compliance": {"require_code_evidence": True, "require_claim_contract": True},
+                "verification": {"local_repos_root": str(repos_root)},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    bad_contract = [
+        {
+            "text_anchor": "We built ellmos-ai/super-tool with zero runtime dependencies in engine.py.",
+            "repo": "ellmos-ai/super-tool",
+            "file": "src/engine.py",
+            "lines": "L1-L3",
+            "verbatim_code": "class Engine:\n    def run_gate(self) -> bool:",
+        },
+        {
+            "text_anchor": "We built ellmos-ai/super-tool with zero runtime dependencies in engine.py.",
+            "repo": "ellmos-ai/super-tool",
+            "file": "src/engine.py",
+            "lines": "L1-L3",
+            "verbatim_code": "def hallucinated_method_that_does_not_exist():",
+        },
+        {
+            "text_anchor": "We built ellmos-ai/super-tool with zero runtime dependencies in engine.py.",
+            "repo": "ellmos-ai/super-tool",
+            "file": "src/untracked.py",
+            "lines": "L1-L2",
+            "verbatim_code": "def secret_untracked_helper() -> int:",
+        },
+    ]
+    inbox = f"""# Queue
+
+### [OUTBOUND-PROPOSAL-BAD-CLAIMS-1] Bad Claims
+- **Plattform:** Reddit
+- **Ziel-URL / Thread:** https://www.reddit.com/r/python/comments/badclaims/thread/
+- **Lösungs-Repo:** `ellmos-ai/super-tool`
+- **Code-Beleg (Verifiziert):** `src/engine.py`
+- [x] Genehmigt
+#### Claim-Beleg-Vertrag (Verifiziert):
+```json
+{json.dumps(bad_contract, indent=2)}
+```
+
+#### Textvorschlag:
+```text
+We built ellmos-ai/super-tool with zero runtime dependencies in engine.py. Our package also ships a distributed consensus layer alongside Clutch and router.py.
+```
+"""
+    (temp_workspace / "POST-EINGANG.md").write_text(inbox, encoding="utf-8")
+    engine = CommunityOutreachEngine(temp_workspace)
+
+    report = engine.verify_proposals()
+    assert report["status"] == "failed"
+    violations = report["results"][0]["contract_violations"]
+    assert any(v.startswith("verbatim-code-mismatch:1:") for v in violations), violations
+    assert any(v.startswith("untracked-claim-file:2:") for v in violations), violations
+    assert any(v.startswith("uncovered-software-sentence:") for v in violations), violations
+    assert "predicate-contradiction:zero-dependency:super-tool" in violations, violations
+    assert "unverified-sister-repo:ellmos-ai/clutch" in violations, violations
+    assert "unverified-mentioned-file:router.py" in violations, violations
+
+    outbound = engine.phase2_outbound_execution()
+    assert outbound[0]["status"] == "needs-action"
+    assert outbound[0]["reason"] == "invalid-claim-contract"

@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -20,7 +21,17 @@ from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover
+    tomllib = None  # type: ignore[assignment]
+
 DEFAULT_PLATFORM_ROTATION = ["Reddit", "YouTube", "GitHub Discussions", "Foren"]
+DEFAULT_EXCLUDED_ORGS = {"biotec-line"}
+DEFAULT_PRIMARY_ORGS = ("ellmos-ai", "dev-bricks", "file-bricks", "doc-bricks", "open-bricks")
+DEFAULT_DISCOURSE_ORGS = {"research-line"}
+DEFAULT_EXCLUDED_REPOS: set[str] = set()
+CORE_ECOSYSTEM_FLAGSHIPS = {"ellmos-ai/bach", "ellmos-ai/open-ocean", "ellmos-ai/skills"}
 TRACKING_QUERY_KEYS = {
     "fbclid",
     "gclid",
@@ -123,6 +134,17 @@ def _normalize_repo_reference(value: object) -> str:
     if reference.lower().endswith(".git"):
         reference = reference[:-4]
     return reference.casefold()
+
+
+def _extract_repo_org(repo_or_ref: object) -> str:
+    if isinstance(repo_or_ref, Mapping):
+        org = str(repo_or_ref.get("org", "")).strip().casefold()
+        if org:
+            return org
+        ref = _normalize_repo_reference(repo_or_ref.get("id", "") or repo_or_ref.get("url", ""))
+        return ref.split("/", 1)[0] if "/" in ref else ""
+    ref = _normalize_repo_reference(repo_or_ref)
+    return ref.split("/", 1)[0] if "/" in ref else ""
 
 
 def _same_repo(left: object, right: object) -> bool:
@@ -366,6 +388,12 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
         repo = re.search(r"-\s*\*\*(?:Lösungs-Repo|Repository):\*\*\s*([^\n]+)", segment)
         code_evidence = re.search(r"-\s*\*\*Code-Beleg(?:\s*\([^\)]*\))?:\*\*\s*([^\n]+)", segment)
         context_check = re.search(r"-\s*\*\*Umgebungs-Check(?:\s*\([^\)]*\))?:\*\*\s*([^\n]+)", segment)
+        claim_contract = re.search(
+            r"####\s+Claim-Beleg-Vertrag(?:\s*\([^\)]*\))?:\s*\n"
+            r"```(?:json)?[ \t]*\n(.*?)\n```",
+            segment,
+            re.DOTALL,
+        )
         post_text = re.search(
             r"(?:####\s+Textvorschlag:|\*\*Vorgeschlagener Beitrag:\*\*)\s*\n"
             r"```(?:markdown|text)?[ \t]*\n(.*?)\n```",
@@ -375,7 +403,7 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
         if not all((approval, platform, target, repo, post_text)):
             continue
 
-        semantic_end = post_text.end()
+        semantic_end = max(post_text.end(), claim_contract.end() if claim_contract else 0)
         trailing = re.match(r"[ \t]*(?:\r?\n[ \t]*)*", segment[semantic_end:])
         if trailing:
             semantic_end += trailing.end()
@@ -397,6 +425,7 @@ def _parse_proposals(content: str) -> list[dict[str, Any]]:
                 "repo_url": repo_link.group(2).strip() if repo_link else "",
                 "code_evidence": code_evidence.group(1).strip() if code_evidence else "",
                 "context_check": context_check.group(1).strip() if context_check else "",
+                "claim_contract_raw": claim_contract.group(1).strip() if claim_contract else "",
                 "text": post_text.group(1).strip(),
                 "approved": approval.group(1).lower() == "x",
                 "raw_block": raw_block,
@@ -442,6 +471,479 @@ def _check_natural_human_style(text: str, platform: str = "") -> list[str]:
         violations.append("ai-cliche-phrasing")
     return violations
 
+
+_SOURCE_CODE_EXT_RE = re.compile(
+    r"\.(?:py|ts|tsx|js|jsx|mjs|cjs|rs|go|c|cpp|h|hpp|cs|java|kt|swift|sql|sh|ps1)$",
+    re.IGNORECASE,
+)
+_MENTIONED_CODE_FILE_RE = re.compile(
+    r"(?<![/\w.-])([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\.(?:py|ts|tsx|js|jsx|rs|go|toml))(?!\.[A-Za-z0-9_]|[\w-])"
+)
+_ZERO_DEP_CLAIM_RE = re.compile(
+    r"\b(?:zero[- ]dependenc(?:y|ies)|zero runtime dependencies|"
+    r"no (?:external |runtime )?dependencies|stdlib[- ]only|pure standard library)\b",
+    re.IGNORECASE,
+)
+_AMBIGUOUS_CAPITALIZED_REPO_NAMES = {
+    "anonymizer",
+    "bundles",
+    "clutch",
+    "coma",
+    "connectors",
+    "gardener",
+    "profiler",
+    "stacks",
+}
+_QUALIFIED_ONLY_REPO_NAMES = {
+    "skills",
+    "web",
+    "think",
+    "decide",
+    "condition",
+    "headless",
+    "migration",
+    "slideshow",
+    "figma",
+    "swarm",
+}
+
+
+def _resolve_repo_clone(repos_root: Path, repo_ref: object) -> tuple[Path | None, Path | None, str]:
+    raw_repo_ref = _normalize_repo_reference(repo_ref)
+    skill_rel_dir: Path | None = None
+    if (
+        raw_repo_ref.startswith("skills/")
+        or "/tree/master/skills/" in raw_repo_ref
+        or "/tree/main/skills/" in raw_repo_ref
+    ):
+        repo_slug = "skills"
+        if "/tree/master/" in raw_repo_ref:
+            skill_rel_dir = Path(raw_repo_ref.split("/tree/master/", 1)[1])
+        elif "/tree/main/" in raw_repo_ref:
+            skill_rel_dir = Path(raw_repo_ref.split("/tree/main/", 1)[1])
+        else:
+            skill_rel_dir = Path(raw_repo_ref)
+    else:
+        repo_slug = raw_repo_ref.rsplit("/", 1)[-1]
+    repo_dir = (repos_root / repo_slug) if repo_slug else None
+    return repo_dir, skill_rel_dir, repo_slug
+
+
+def _parse_line_range(lines_spec: object, max_span: int = 80) -> tuple[int, int] | None:
+    if isinstance(lines_spec, int):
+        return (lines_spec, lines_spec) if lines_spec >= 1 else None
+    raw = str(lines_spec or "").strip()
+    match = re.fullmatch(r"L?(\d+)(?:\s*-\s*L?(\d+))?", raw, re.IGNORECASE)
+    if not match:
+        return None
+    start = int(match.group(1))
+    end = int(match.group(2)) if match.group(2) else start
+    if start < 1 or end < start or (end - start) > max_span:
+        return None
+    return start, end
+
+
+def _git_tracked_files(repo_dir: Path, cache: dict[Path, set[str] | None]) -> set[str] | None:
+    resolved = repo_dir.resolve()
+    if resolved in cache:
+        return cache[resolved]
+    if not (resolved / ".git").exists():
+        cache[resolved] = None
+        return None
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(resolved), "-c", "core.quotepath=false", "ls-files"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=10,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        )
+    except OSError:
+        cache[resolved] = None
+        return None
+    if proc.returncode != 0:
+        cache[resolved] = set()
+        return cache[resolved]
+    tracked = {line.strip().replace("\\", "/") for line in proc.stdout.splitlines() if line.strip()}
+    cache[resolved] = tracked
+    return tracked
+
+
+def _split_into_paragraphs_and_sentences(text: str) -> list[list[str]]:
+    norm = str(text or "").replace("\r\n", "\n").strip()
+    if not norm:
+        return []
+    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", norm) if p.strip()]
+    result: list[list[str]] = []
+    for para in paragraphs:
+        masked = re.sub(r"https?://\S+", lambda m: "X" * len(m.group(0)), para)
+        masked = re.sub(
+            r"\b(?:e\.g|i\.e|vs|etc|cf|approx|min|max)\.",
+            lambda m: "X" * len(m.group(0)),
+            masked,
+            flags=re.IGNORECASE,
+        )
+        sentences: list[str] = []
+        last_idx = 0
+        for boundary in re.finditer(r"(?<=[.!?])(\s+)(?=[A-Z0-9\"'(\[])", masked):
+            chunk = para[last_idx : boundary.start()].strip()
+            if chunk:
+                sentences.append(chunk)
+            last_idx = boundary.end()
+        tail = para[last_idx:].strip()
+        if tail:
+            sentences.append(tail)
+        if sentences:
+            result.append(sentences)
+    return result
+
+
+def _extract_runtime_dependencies(repo_dir: Path) -> tuple[bool, list[str]]:
+    deps: list[str] = []
+    has_manifest = False
+    pyproject = repo_dir / "pyproject.toml"
+    if pyproject.is_file() and tomllib is not None:
+        has_manifest = True
+        try:
+            parsed = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+            raw_deps = (parsed.get("project") or {}).get("dependencies") or []
+            if isinstance(raw_deps, list):
+                deps.extend(str(item).strip() for item in raw_deps if str(item).strip())
+        except Exception:
+            deps.append("<unparseable-pyproject.toml>")
+    package_json = repo_dir / "package.json"
+    if package_json.is_file():
+        has_manifest = True
+        try:
+            parsed_pkg = json.loads(package_json.read_text(encoding="utf-8"))
+            raw_pkg_deps = parsed_pkg.get("dependencies") or {}
+            if isinstance(raw_pkg_deps, Mapping):
+                deps.extend(str(k).strip() for k in raw_pkg_deps.keys() if str(k).strip())
+        except Exception:
+            deps.append("<unparseable-package.json>")
+    return has_manifest, deps
+
+
+def _sentence_starts_software_claim(
+    sentence: str,
+    primary_slug: str,
+    unambiguous_catalog_names: set[str],
+) -> bool:
+    if "github.com/" in sentence.casefold():
+        return True
+    prose = re.sub(r"https?://\S+", " ", sentence)
+    if primary_slug and len(primary_slug) >= 4 and primary_slug not in _QUALIFIED_ONLY_REPO_NAMES:
+        if re.search(rf"(?<![/\w-]){re.escape(primary_slug)}(?![\w-])", prose, re.IGNORECASE):
+            return True
+    if re.search(
+        r"\b(?:we|our)\s+(?:built|bundled|solved|handle|handled|use|used|wrote|added|"
+        r"ship|shipped|track|route|enforce|extract|split|pair|check|call|map|maintain|"
+        r"created|designed|wired|implemented)\b",
+        prose,
+        re.IGNORECASE,
+    ):
+        return True
+    if re.search(
+        r"\b(?:our|its)\s+(?:[A-Za-z0-9_.-]+\s+){0,4}"
+        r"(?:package|toolkit|stack|queue|module|modules|system|agent|os|library|skill|router|engine|bridge|layer|core)\b",
+        prose,
+        re.IGNORECASE,
+    ):
+        return True
+    if re.search(r"\bin\s+our\s+[A-Za-z0-9_.-]+", prose, re.IGNORECASE):
+        return True
+    if _MENTIONED_CODE_FILE_RE.search(prose):
+        return True
+    for cname in unambiguous_catalog_names:
+        if re.search(rf"(?<![/\w-]){re.escape(cname)}(?![\w-])", prose, re.IGNORECASE):
+            return True
+    return False
+
+
+def _verify_claim_contract(
+    proposal: Mapping[str, Any],
+    *,
+    repos_root: Path | None,
+    catalog_repos: list[Mapping[str, Any]],
+    require_contract: bool,
+    git_cache: dict[Path, set[str] | None] | None = None,
+) -> dict[str, Any]:
+    """Deterministically verify a proposal's Claim-Beleg-Vertrag against real source code."""
+    raw_contract = str(proposal.get("claim_contract_raw") or "").strip()
+    if not raw_contract:
+        violations = ["missing-claim-contract"] if require_contract else []
+        return {
+            "present": False,
+            "valid": not violations,
+            "claim_count": 0,
+            "verified_claims": 0,
+            "software_sentence_count": 0,
+            "covered_sentence_count": 0,
+            "uncovered_sentences": [],
+            "violations": violations,
+        }
+
+    violations: list[str] = []
+    try:
+        items = json.loads(raw_contract)
+    except json.JSONDecodeError as exc:
+        return {
+            "present": True,
+            "valid": False,
+            "claim_count": 0,
+            "verified_claims": 0,
+            "software_sentence_count": 0,
+            "covered_sentence_count": 0,
+            "uncovered_sentences": [],
+            "violations": [f"invalid-contract-json:{exc.msg}"],
+        }
+
+    if not isinstance(items, list) or not items:
+        return {
+            "present": True,
+            "valid": False,
+            "claim_count": 0,
+            "verified_claims": 0,
+            "software_sentence_count": 0,
+            "covered_sentence_count": 0,
+            "uncovered_sentences": [],
+            "violations": ["empty-claim-contract"],
+        }
+
+    if repos_root is None or not repos_root.is_dir():
+        return {
+            "present": True,
+            "valid": False,
+            "claim_count": len(items),
+            "verified_claims": 0,
+            "software_sentence_count": 0,
+            "covered_sentence_count": 0,
+            "uncovered_sentences": [],
+            "violations": ["repos-root-unavailable"],
+        }
+
+    tracked_cache = git_cache if git_cache is not None else {}
+    norm_text = str(proposal.get("text") or "").replace("\r\n", "\n")
+    verified_entries: list[dict[str, Any]] = []
+
+    for idx, entry in enumerate(items):
+        if not isinstance(entry, Mapping):
+            violations.append(f"invalid-claim-entry:{idx}:not-an-object")
+            continue
+        anchor = str(entry.get("text_anchor") or "").replace("\r\n", "\n").strip()
+        repo_ref = str(entry.get("repo") or "").strip()
+        rel_file = str(entry.get("file") or "").strip()
+        lines_spec = entry.get("lines")
+        verbatim = str(entry.get("verbatim_code") or "").replace("\r\n", "\n").strip("\n")
+
+        if len(anchor) < 8:
+            violations.append(f"invalid-claim-entry:{idx}:text-anchor-too-short")
+            continue
+        if not repo_ref or not rel_file or Path(rel_file).is_absolute() or ".." in Path(rel_file).parts:
+            violations.append(f"invalid-claim-entry:{idx}:invalid-repo-or-file")
+            continue
+        line_range = _parse_line_range(lines_spec)
+        if line_range is None:
+            violations.append(f"invalid-claim-entry:{idx}:invalid-line-range")
+            continue
+        if len(re.sub(r"\s+", "", verbatim)) < 10:
+            violations.append(f"invalid-claim-entry:{idx}:verbatim-code-too-short")
+            continue
+        if anchor not in norm_text:
+            violations.append(f"anchor-not-in-text:{idx}")
+            continue
+
+        repo_dir, skill_rel_dir, repo_slug = _resolve_repo_clone(repos_root, repo_ref)
+        if repo_dir is None or not repo_dir.is_dir():
+            violations.append(f"missing-claim-repo:{idx}:{repo_ref}")
+            continue
+        repo_resolved = repo_dir.resolve()
+        candidate_path = repo_dir / rel_file
+        if not candidate_path.is_file() and skill_rel_dir is not None:
+            alt_candidate = repo_dir / skill_rel_dir / rel_file
+            if alt_candidate.is_file():
+                candidate_path = alt_candidate
+        try:
+            resolved_file = candidate_path.resolve()
+            rel_to_repo = resolved_file.relative_to(repo_resolved).as_posix()
+        except (OSError, ValueError):
+            violations.append(f"path-traversal:{idx}:{rel_file}")
+            continue
+        if not resolved_file.is_file():
+            violations.append(f"missing-claim-file:{idx}:{rel_file}")
+            continue
+
+        tracked = _git_tracked_files(repo_resolved, tracked_cache)
+        if tracked is not None and rel_to_repo not in tracked:
+            violations.append(f"untracked-claim-file:{idx}:{rel_to_repo}")
+            continue
+
+        try:
+            source_text = resolved_file.read_text(encoding="utf-8").replace("\r\n", "\n")
+        except (OSError, UnicodeDecodeError):
+            violations.append(f"unreadable-claim-file:{idx}:{rel_file}")
+            continue
+        source_lines = source_text.split("\n")
+        start_line, end_line = line_range
+        if end_line > len(source_lines):
+            violations.append(f"line-range-out-of-bounds:{idx}:{start_line}-{end_line}>{len(source_lines)}")
+            continue
+
+        window_text = "\n".join(source_lines[start_line - 1 : end_line])
+        if verbatim not in window_text:
+            violations.append(f"verbatim-code-mismatch:{idx}:{rel_to_repo}:{start_line}-{end_line}")
+            continue
+
+        verified_entries.append(
+            {
+                "index": idx,
+                "anchor": anchor,
+                "repo_ref": repo_ref,
+                "repo_slug": repo_slug,
+                "repo_dir": repo_resolved,
+                "rel_file": rel_to_repo,
+                "file_name": resolved_file.name,
+                "verbatim": verbatim,
+            }
+        )
+
+    primary_repo_norm = _normalize_repo_reference(proposal.get("repo", ""))
+    _primary_dir, primary_skill_rel, primary_slug = _resolve_repo_clone(repos_root, primary_repo_norm)
+    is_skill_target = primary_skill_rel is not None or primary_slug == "skills"
+    if verified_entries and not is_skill_target:
+        has_primary_source_code = any(
+            (_same_repo(e["repo_ref"], primary_repo_norm) or e["repo_slug"] == primary_slug)
+            and bool(_SOURCE_CODE_EXT_RE.search(e["rel_file"]))
+            for e in verified_entries
+        )
+        if not has_primary_source_code:
+            violations.append("code-file-required:primary-repo")
+
+    unambiguous_catalog: dict[str, str] = {}
+    ambiguous_catalog: dict[str, str] = {}
+    for cat in catalog_repos:
+        if not isinstance(cat, Mapping) or not cat.get("active", True):
+            continue
+        cid = _normalize_repo_reference(cat.get("id", "") or cat.get("url", ""))
+        cname = str(cat.get("name", "")).strip()
+        cname_low = cname.casefold()
+        if not cid or len(cname_low) < 4 or cname_low in _QUALIFIED_ONLY_REPO_NAMES:
+            continue
+        if cname_low in _AMBIGUOUS_CAPITALIZED_REPO_NAMES:
+            ambiguous_catalog[cname_low] = cid
+        else:
+            unambiguous_catalog[cname_low] = cid
+
+    paragraphs = _split_into_paragraphs_and_sentences(norm_text)
+    software_sentences: list[str] = []
+    comment_active = False
+    for para_sentences in paragraphs:
+        para_active = comment_active
+        for sent in para_sentences:
+            if not para_active and _sentence_starts_software_claim(
+                sent, primary_slug, set(unambiguous_catalog.keys())
+            ):
+                para_active = True
+                comment_active = True
+            if para_active:
+                software_sentences.append(sent)
+
+    if not software_sentences and norm_text.strip():
+        software_sentences = [s for para in paragraphs for s in para]
+
+    uncovered_sentences: list[str] = []
+    covered_count = 0
+    verified_file_names = {e["file_name"].casefold() for e in verified_entries}
+    for sent in software_sentences:
+        covering = [e for e in verified_entries if e["anchor"] in sent or sent in e["anchor"]]
+        if covering:
+            covered_count += 1
+        else:
+            preview = sent[:80] + ("..." if len(sent) > 80 else "")
+            uncovered_sentences.append(preview)
+            violations.append(f"uncovered-software-sentence:{preview}")
+
+        prose_sent = re.sub(r"https?://\S+", " ", sent)
+        for m_file in _MENTIONED_CODE_FILE_RE.finditer(prose_sent):
+            fname = m_file.group(1)
+            if fname.casefold() not in verified_file_names or not any(
+                fname in e["anchor"] for e in verified_entries
+            ):
+                violations.append(f"unverified-mentioned-file:{fname}")
+
+        if _ZERO_DEP_CLAIM_RE.search(prose_sent):
+            zero_dep_entries = [e for e in covering if _ZERO_DEP_CLAIM_RE.search(e["anchor"])]
+            target_entries = zero_dep_entries or covering or verified_entries
+            checked_dirs: dict[Path, str] = {}
+            for e in target_entries:
+                checked_dirs[e["repo_dir"]] = e["repo_slug"]
+            if not checked_dirs and _primary_dir is not None and _primary_dir.is_dir():
+                checked_dirs[_primary_dir.resolve()] = primary_slug
+            for r_dir, r_slug in checked_dirs.items():
+                has_manifest, runtime_deps = _extract_runtime_dependencies(r_dir)
+                if runtime_deps:
+                    violations.append(f"predicate-contradiction:zero-dependency:{r_slug}")
+                elif has_manifest:
+                    has_manifest_entry = any(
+                        e["repo_dir"] == r_dir and e["file_name"] in {"pyproject.toml", "package.json"}
+                        for e in verified_entries
+                    )
+                    if not has_manifest_entry:
+                        violations.append(f"missing-manifest-proof:zero-dependency:{r_slug}")
+
+    known_orgs = set(DEFAULT_PRIMARY_ORGS) | set(DEFAULT_DISCOURSE_ORGS)
+    mentioned_sisters: dict[str, str] = {}
+    for m_gh in re.finditer(r"https?://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)", norm_text):
+        gh_ref = _normalize_repo_reference(m_gh.group(1))
+        gh_org = gh_ref.split("/", 1)[0]
+        if gh_org in known_orgs and not _same_repo(gh_ref, primary_repo_norm):
+            mentioned_sisters[gh_ref] = gh_ref.rsplit("/", 1)[-1]
+
+    prose_all = re.sub(r"https?://\S+", " ", "\n".join(software_sentences))
+    for cname_low, cid in unambiguous_catalog.items():
+        if _same_repo(cid, primary_repo_norm) or cname_low == primary_slug:
+            continue
+        if cid.startswith("skills/") and "-" not in cname_low:
+            continue
+        if re.search(rf"(?<![/\w-]){re.escape(cname_low)}(?![\w-])", prose_all, re.IGNORECASE):
+            mentioned_sisters[cid] = cname_low
+
+    for cname_low, cid in ambiguous_catalog.items():
+        if _same_repo(cid, primary_repo_norm) or cname_low == primary_slug:
+            continue
+        cap_name = cname_low[0].upper() + cname_low[1:]
+        for match_cap in re.finditer(rf"(?<![/\w-]){re.escape(cap_name)}(?![\w-])", prose_all):
+            prefix = prose_all[: match_cap.start()].rstrip(" \t\"'([")
+            if prefix and prefix[-1] not in ".!?\n":
+                mentioned_sisters[cid] = cname_low
+                break
+
+    for sister_id, sister_name in sorted(mentioned_sisters.items()):
+        sister_ok = any(
+            sister_name in e["anchor"].casefold()
+            and (
+                _same_repo(e["repo_ref"], sister_id)
+                or e["repo_slug"] == sister_id.rsplit("/", 1)[-1]
+                or sister_name in e["verbatim"].casefold()
+            )
+            for e in verified_entries
+        )
+        if not sister_ok:
+            violations.append(f"unverified-sister-repo:{sister_id}")
+
+    return {
+        "present": True,
+        "valid": len(violations) == 0,
+        "claim_count": len(items),
+        "verified_claims": len(verified_entries),
+        "software_sentence_count": len(software_sentences),
+        "covered_sentence_count": covered_count,
+        "uncovered_sentences": uncovered_sentences,
+        "violations": violations,
+    }
+
 def _remove_spans(content: str, spans: list[tuple[int, int]]) -> str:
     updated = content
     for start, end in sorted(spans, reverse=True):
@@ -453,16 +955,29 @@ def select_candidate_repository(
     repositories: list[Mapping[str, Any]],
     cooldown_days: float = 7.0,
     now: datetime | None = None,
+    excluded_orgs: set[str] | None = None,
+    excluded_repos: set[str] | None = None,
 ) -> tuple[Mapping[str, Any] | None, dict[str, Any]]:
     """Selects the next repository to promote using traffic analysis and cooldown rules.
 
     Fail-closed: only repositories whose github_meta positively confirms public, non-fork and
     non-archived are eligible (set by --sync-githubbot or when bootstrapping the catalog).
+    Organizations in excluded_orgs (default: biotec-line) are strictly excluded.
     """
+    blocked_orgs = {
+        str(o).strip().casefold() for o in (excluded_orgs or DEFAULT_EXCLUDED_ORGS) if str(o).strip()
+    } | DEFAULT_EXCLUDED_ORGS
+    blocked_repos = {
+        str(r).strip().casefold() for r in (excluded_repos or DEFAULT_EXCLUDED_REPOS) if str(r).strip()
+    } | DEFAULT_EXCLUDED_REPOS
     eligible = []
     unverified = 0
     for repo in repositories:
         if not isinstance(repo, Mapping):
+            continue
+        if _extract_repo_org(repo) in blocked_orgs:
+            continue
+        if str(repo.get("name", "")).strip().casefold() in blocked_repos:
             continue
         if not repo.get("active", True):
             continue
@@ -515,11 +1030,24 @@ def select_candidate_repository(
         priority_bonus = 50.0 if priority == "high" else (-50.0 if priority == "low" else 0.0)
 
         total_score = traffic_score + priority_bonus + recency_bonus
+        repo_id_norm = _normalize_repo_reference(repo.get("id", "") or repo.get("url", ""))
+        is_core_flagship = repo_id_norm in CORE_ECOSYSTEM_FLAGSHIPS
+        selection_tier = int(repo.get("selection_tier", 1 if is_core_flagship else 3))
+        selection_tier_label = str(
+            repo.get("selection_tier_label", "tier1_core_flagship" if is_core_flagship else "tier3_smaller_modules")
+        )
+        quality_score = int(repo.get("quality_score", 99 if is_core_flagship else 60))
+        effective_quality_score = quality_score - (total_promotions * 3)
 
         scored_candidates.append({
             "repo": repo,
             "is_cooldown": is_cooldown,
             "is_unpromoted": is_unpromoted,
+            "is_core_flagship": is_core_flagship,
+            "selection_tier": selection_tier,
+            "selection_tier_label": selection_tier_label,
+            "quality_score": quality_score,
+            "effective_quality_score": effective_quality_score,
             "days_since_promo": days_since,
             "traffic_score": traffic_score,
             "clones_unique_14d": clones_u,
@@ -533,17 +1061,34 @@ def select_candidate_repository(
     if not pool:
         return None, {"all_in_cooldown": True}
 
-    pool.sort(
-        key=lambda c: (
-            0 if c["is_unpromoted"] else 1,
-            -c["total_score"],
-            c["days_since_promo"] if c["days_since_promo"] < 999 else -1,
-            str(c["repo"].get("name", "")),
+    use_tiered_selection = any("selection_tier" in c["repo"] for c in pool)
+    if use_tiered_selection:
+        pool.sort(
+            key=lambda c: (
+                c["selection_tier"],
+                0 if (c["is_unpromoted"] or c["is_core_flagship"]) else 1,
+                -c["effective_quality_score"],
+                c["views_unique_14d"],
+                -c["total_score"],
+                c["days_since_promo"] if c["days_since_promo"] < 999 else -1,
+                str(c["repo"].get("name", "")),
+            )
         )
-    )
+    else:
+        pool.sort(
+            key=lambda c: (
+                0 if c["is_unpromoted"] else 1,
+                -c["total_score"],
+                c["days_since_promo"] if c["days_since_promo"] < 999 else -1,
+                str(c["repo"].get("name", "")),
+            )
+        )
 
     best = pool[0]
     return best["repo"], {
+        "selection_tier": best["selection_tier"],
+        "selection_tier_label": best["selection_tier_label"],
+        "quality_score": best["quality_score"],
         "traffic_score": best["traffic_score"],
         "clones_unique_14d": best["clones_unique_14d"],
         "views_unique_14d": best["views_unique_14d"],
@@ -562,10 +1107,12 @@ class CommunityOutreachEngine:
         dry_run: bool = False,
         publisher: object | None = None,
         org_allow: list[str] | None = None,
+        repos_root: str | Path | None = None,
     ):
         self.workspace = Path(workspace_dir).resolve()
         self.dry_run = dry_run
         self.publisher = publisher
+        self.repos_root = repos_root
         # Produktzuschnitt je App (T-20260926-665406367): welche Orgs Stufe 1 zuerst
         # versucht, bevor phase3_research_and_stage auf den ganzen Pool ausweicht.
         self.org_allow = list(org_allow) if org_allow else []
@@ -606,11 +1153,104 @@ class CommunityOutreachEngine:
                     platforms.add(str(plat).strip().casefold())
         return urls, ids, platforms
 
+    def _excluded_orgs(self) -> set[str]:
+        orgs = set(DEFAULT_EXCLUDED_ORGS)
+        data = _read_json(self.rejected_json, {})
+        if isinstance(data, Mapping):
+            for entry in data.get("excluded_orgs", []) or []:
+                if isinstance(entry, Mapping) and entry.get("org"):
+                    orgs.add(str(entry["org"]).strip().casefold())
+                elif isinstance(entry, str) and entry.strip():
+                    orgs.add(entry.strip().casefold())
+        config = _read_json(self.config_json, {})
+        if isinstance(config, Mapping):
+            for org in (config.get("compliance") or {}).get("excluded_orgs", []) or []:
+                if str(org).strip():
+                    orgs.add(str(org).strip().casefold())
+        return orgs
+
+    def _primary_orgs(self) -> list[str]:
+        config = _read_json(self.config_json, {})
+        if not isinstance(config, Mapping):
+            return []
+        raw = (config.get("compliance") or {}).get("primary_orgs", []) or []
+        return [str(o).strip().casefold() for o in raw if str(o).strip()]
+
+    def _discourse_only_orgs(self) -> set[str]:
+        orgs = set(DEFAULT_DISCOURSE_ORGS)
+        config = _read_json(self.config_json, {})
+        if isinstance(config, Mapping):
+            for org in (config.get("compliance") or {}).get("discourse_only_orgs", []) or []:
+                if str(org).strip():
+                    orgs.add(str(org).strip().casefold())
+        return orgs
+
+    def _excluded_repos(self) -> set[str]:
+        repos = set(DEFAULT_EXCLUDED_REPOS)
+        data = _read_json(self.rejected_json, {})
+        if isinstance(data, Mapping):
+            for entry in data.get("excluded_repos", []) or []:
+                if isinstance(entry, Mapping) and entry.get("repo"):
+                    repos.add(_normalize_repo_reference(entry["repo"]).rsplit("/", 1)[-1])
+                elif isinstance(entry, str) and entry.strip():
+                    repos.add(_normalize_repo_reference(entry).rsplit("/", 1)[-1])
+        config = _read_json(self.config_json, {})
+        if isinstance(config, Mapping):
+            for entry in (config.get("compliance") or {}).get("excluded_repos", []) or []:
+                if str(entry).strip():
+                    repos.add(_normalize_repo_reference(entry).rsplit("/", 1)[-1])
+        return repos
+
+    def _is_repo_from_excluded_org(self, repo_ref: object, repo_url: object = "") -> bool:
+        blocked = self._excluded_orgs()
+        blocked_repos = self._excluded_repos()
+        for candidate in (repo_ref, repo_url):
+            org = _extract_repo_org(candidate)
+            if org and org in blocked:
+                return True
+            slug = _normalize_repo_reference(candidate).rsplit("/", 1)[-1]
+            if slug and slug in blocked_repos:
+                return True
+        for entry in self._usecases().get("repositories", []) or []:
+            if not isinstance(entry, Mapping):
+                continue
+            if _repo_matches_catalog_entry(entry, repo_ref) or (
+                repo_url and _repo_matches_catalog_entry(entry, repo_url)
+            ):
+                if _extract_repo_org(entry) in blocked:
+                    return True
+        return False
+
     def _require_code_evidence(self) -> bool:
         config = _read_json(self.config_json, {})
         if not isinstance(config, Mapping):
             return False
         return bool((config.get("compliance") or {}).get("require_code_evidence", False))
+
+    def _require_claim_contract(self) -> bool:
+        config = _read_json(self.config_json, {})
+        if not isinstance(config, Mapping):
+            return False
+        return bool((config.get("compliance") or {}).get("require_claim_contract", False))
+
+    def _resolve_repos_root(self, repos_root: str | Path | None = None) -> Path | None:
+        effective = repos_root or self.repos_root
+        if effective:
+            return Path(effective).expanduser().resolve()
+        config = _read_json(self.config_json, {})
+        configured_root = (
+            (config.get("verification") or {}).get("local_repos_root")
+            if isinstance(config, Mapping)
+            else None
+        )
+        if configured_root:
+            return Path(str(configured_root)).expanduser().resolve()
+        env_root = os.environ.get("OUTREACH_REPOS_ROOT") or os.environ.get("LOCAL_DEV_REPOS")
+        if env_root:
+            candidate = Path(env_root).expanduser().resolve()
+            if candidate.exists():
+                return candidate
+        return None
 
     def _require_natural_style(self) -> bool:
         config = _read_json(self.config_json, {})
@@ -667,6 +1307,10 @@ class CommunityOutreachEngine:
         history = self._history()
         blacklisted_urls, blacklisted_ids, excluded_platforms = self._blacklisted()
         require_evidence = self._require_code_evidence()
+        require_contract = self._require_claim_contract()
+        resolved_repos_root = self._resolve_repos_root()
+        catalog_repos = [r for r in self._usecases().get("repositories", []) if isinstance(r, Mapping)]
+        git_cache: dict[Path, set[str] | None] = {}
         results: list[dict[str, Any]] = []
         finalized: list[tuple[dict[str, Any], dict[str, Any], str]] = []
         publisher_attempts = 0
@@ -681,6 +1325,7 @@ class CommunityOutreachEngine:
                 proposal["id"] in blacklisted_ids
                 or target_key in blacklisted_urls
                 or proposal["platform"].strip().casefold() in excluded_platforms
+                or self._is_repo_from_excluded_org(proposal.get("repo", ""), proposal.get("repo_url", ""))
             ):
                 results.append({"id": proposal["id"], "status": "blacklisted"})
                 continue
@@ -695,6 +1340,27 @@ class CommunityOutreachEngine:
                         "status": "needs-action",
                         "reason": "ai-style-violation",
                         "violations": style_violations,
+                    })
+                    continue
+            if require_contract or str(proposal.get("claim_contract_raw") or "").strip():
+                contract_report = _verify_claim_contract(
+                    proposal,
+                    repos_root=resolved_repos_root,
+                    catalog_repos=catalog_repos,
+                    require_contract=require_contract,
+                    git_cache=git_cache,
+                )
+                if not contract_report["valid"]:
+                    reason = (
+                        "missing-claim-contract"
+                        if contract_report["violations"] == ["missing-claim-contract"]
+                        else "invalid-claim-contract"
+                    )
+                    results.append({
+                        "id": proposal["id"],
+                        "status": "needs-action",
+                        "reason": reason,
+                        "violations": contract_report["violations"],
                     })
                     continue
             existing_id = next(
@@ -950,7 +1616,11 @@ class CommunityOutreachEngine:
 
     @staticmethod
     def _stage3_new_proposal_pool(
-        repositories: list[Mapping[str, Any]], org_allow: list[str]
+        repositories: list[Mapping[str, Any]],
+        org_allow: list[str],
+        excluded_orgs: set[str] | None = None,
+        discourse_orgs: set[str] | None = None,
+        excluded_repos: set[str] | None = None,
     ) -> list[Mapping[str, Any]]:
         """Candidates for a fresh angle (new use-case/channel) when nothing else is left.
 
@@ -963,13 +1633,28 @@ class CommunityOutreachEngine:
         (merge-reviewer fix, T-20260926-665406367): a private, archived, forked or
         never-synced repo must never be proposed here either.
         """
+        blocked = {
+            str(o).strip().casefold() for o in (excluded_orgs or DEFAULT_EXCLUDED_ORGS) if str(o).strip()
+        } | DEFAULT_EXCLUDED_ORGS
+        blocked_repos = {
+            str(r).strip().casefold() for r in (excluded_repos or DEFAULT_EXCLUDED_REPOS) if str(r).strip()
+        } | DEFAULT_EXCLUDED_REPOS
+        discourse = {
+            str(o).strip().casefold() for o in (discourse_orgs or DEFAULT_DISCOURSE_ORGS) if str(o).strip()
+        }
+        allow_discourse = any(o in discourse for o in org_allow)
         pool = [
             repo for repo in repositories
-            if isinstance(repo, Mapping) and repo.get("active", True) and not repo.get("exclusion_reason")
+            if isinstance(repo, Mapping)
+            and _extract_repo_org(repo) not in blocked
+            and str(repo.get("name", "")).strip().casefold() not in blocked_repos
+            and (allow_discourse or _extract_repo_org(repo) not in discourse)
+            and repo.get("active", True)
+            and not repo.get("exclusion_reason")
             and _public_repo_gate(repo)[0]
         ]
         if org_allow:
-            scoped = [repo for repo in pool if str(repo.get("org", "")).casefold() in org_allow]
+            scoped = [repo for repo in pool if _extract_repo_org(repo) in org_allow]
             if scoped:
                 pool = scoped
         pool.sort(
@@ -981,16 +1666,35 @@ class CommunityOutreachEngine:
         return pool[:5]
 
     def phase3_research_and_stage(self, org_allow: list[str] | None = None) -> dict[str, Any] | None:
-        """Stufe 1 (eigener Bereich) -> Stufe 2 (ganzer Pool) -> Stufe 3 (neue Vorschlaege).
+        """Stufe 1 (eigener Bereich / primary_orgs) -> Stufe 2 (ganzer Pool) -> Stufe 3 (neue Vorschlaege).
 
         org_allow scopt Stufe 1 auf bestimmte Orgs (Produktzuschnitt je App,
-        T-20260926-665406367); ohne expliziten Wert gilt self.org_allow aus dem
-        Konstruktor. Beides leer -> Stufe 1 verhaelt sich wie bisher (ganzer Pool).
+        T-20260926-665406367, bzw. primary_orgs laut Nutzerentscheid 2026-11-09);
+        ohne expliziten Wert gilt self.org_allow aus dem Konstruktor bzw. primary_orgs aus config.json.
+        Excluded orgs (biotec-line) sind in allen Stufen gesperrt; discourse_only_orgs (research-line)
+        laufen nur bei explizitem Aufruf im Diskurs-/Stellungnahme-Modus statt im Standard-Tool-Outreach.
         """
         if org_allow is None:
-            org_allow = self.org_allow
+            org_allow = self.org_allow if self.org_allow else self._primary_orgs()
+        blocked_orgs = self._excluded_orgs()
+        blocked_repos = self._excluded_repos()
+        discourse_orgs = self._discourse_only_orgs()
+        org_allow_norm = [
+            org.strip().casefold()
+            for org in (org_allow or [])
+            if org and org.strip() and org.strip().casefold() not in blocked_orgs
+        ]
+        allow_discourse = any(org in discourse_orgs for org in org_allow_norm)
+
         data = self._usecases()
-        repositories = [repo for repo in data.get("repositories", []) if isinstance(repo, dict)]
+        repositories = [
+            repo
+            for repo in data.get("repositories", [])
+            if isinstance(repo, dict)
+            and _extract_repo_org(repo) not in blocked_orgs
+            and str(repo.get("name", "")).strip().casefold() not in blocked_repos
+            and (allow_discourse or _extract_repo_org(repo) not in discourse_orgs)
+        ]
 
         # Exclude repos that already have an active/pending proposal in POST-EINGANG.md
         queued_refs: list[str] = []
@@ -1003,23 +1707,27 @@ class CommunityOutreachEngine:
             if not any(_repo_matches_catalog_entry(repo, ref) for ref in queued_refs)
         ]
 
-        org_allow_norm = [org.strip().casefold() for org in (org_allow or []) if org and org.strip()]
-
         stage = 1
         fallback_used = False
         score_meta: dict[str, Any] = {}
         candidate: Mapping[str, Any] | None = None
 
         if org_allow_norm:
-            own_repos = [r for r in eligible_repos if str(r.get("org", "")).casefold() in org_allow_norm]
-            candidate, score_meta = select_candidate_repository(own_repos)
+            own_repos = [r for r in eligible_repos if _extract_repo_org(r) in org_allow_norm]
+            candidate, score_meta = select_candidate_repository(
+                own_repos, excluded_orgs=blocked_orgs, excluded_repos=blocked_repos
+            )
             if not candidate:
                 # Stufe 2: eigener Bereich leer -> ganzer Pool (Dedup/Cooldown bleiben in Kraft)
                 stage = 2
                 fallback_used = True
-                candidate, score_meta = select_candidate_repository(eligible_repos)
+                candidate, score_meta = select_candidate_repository(
+                    eligible_repos, excluded_orgs=blocked_orgs, excluded_repos=blocked_repos
+                )
         else:
-            candidate, score_meta = select_candidate_repository(eligible_repos)
+            candidate, score_meta = select_candidate_repository(
+                eligible_repos, excluded_orgs=blocked_orgs, excluded_repos=blocked_repos
+            )
 
         if not candidate:
             reason = "no-active-repositories"
@@ -1031,7 +1739,13 @@ class CommunityOutreachEngine:
             # Sync-Gap vorliegt -- ein fehlender --sync-githubbot-Lauf darf niemals durch einen
             # "neuen Vorschlag" umgangen werden (merge-reviewer-Fund, T-20260926-665406367).
             proposals = (
-                self._stage3_new_proposal_pool(repositories, org_allow_norm)
+                self._stage3_new_proposal_pool(
+                    repositories,
+                    org_allow_norm,
+                    excluded_orgs=blocked_orgs,
+                    discourse_orgs=discourse_orgs,
+                    excluded_repos=blocked_repos,
+                )
                 if org_allow_norm and not score_meta.get("unverified_visibility")
                 else []
             )
@@ -1072,17 +1786,32 @@ class CommunityOutreachEngine:
             platform = rotation[(rotation.index(last_platform) + 1) % len(rotation)]
         except ValueError:
             platform = rotation[0]
+        is_discourse_candidate = (
+            _extract_repo_org(candidate) in discourse_orgs
+            or str(candidate.get("outreach_mode", "")).strip().casefold() == "discourse_positioning"
+        )
         problems = candidate.get("problems_solved") or candidate.get("solved_problems") or ["Allgemeine Automatisierung"]
         return {
             "status": "needs-action",
             "action": "research-and-persist-valid-draft",
+            "outreach_mode": "discourse-positioning" if is_discourse_candidate else "solution-outreach",
             "stage": stage,
             "fallback_used": fallback_used,
             "repo_name": candidate.get("name", candidate.get("id", "")),
             "repo_url": candidate.get("url", ""),
             "platform": platform,
             "target_problem": problems[0],
-            "reason": "Eine echte, aktuelle und noch nicht verwendete Ziel-URL sowie ein geprüfter Entwurf fehlen.",
+            "reason": (
+                "Aktuelle Fachdiskussionen und Tendenzen zum Forschungsthema suchen, um unsere eigene "
+                "wissenschaftliche Stellungnahme sachlich einzubringen (kein Tool-Pitch)."
+                if is_discourse_candidate
+                else "Eine echte, aktuelle und noch nicht verwendete Ziel-URL sowie ein geprüfter Entwurf fehlen."
+            ),
+            "selection_tier": score_meta.get("selection_tier", candidate.get("selection_tier", 3)),
+            "selection_tier_label": score_meta.get(
+                "selection_tier_label", candidate.get("selection_tier_label", "tier3_smaller_modules")
+            ),
+            "quality_score": score_meta.get("quality_score", candidate.get("quality_score", 60)),
             "traffic_score": score_meta.get("traffic_score", 0),
             "clones_unique_14d": score_meta.get("clones_unique_14d", 0),
             "views_unique_14d": score_meta.get("views_unique_14d", 0),
@@ -1119,6 +1848,7 @@ class CommunityOutreachEngine:
             proposal["id"] in blacklisted_ids
             or canonicalize_url(proposal["target_url"]) in blacklisted_urls
             or proposal["platform"].strip().casefold() in excluded_platforms
+            or self._is_repo_from_excluded_org(proposal.get("repo", ""), proposal.get("repo_url", ""))
         ):
             return {"status": "error", "message": f"proposal {proposal_id!r} or its target/platform is blacklisted"}
         if self._require_code_evidence() and not proposal.get("code_evidence", "").strip():
@@ -1130,6 +1860,24 @@ class CommunityOutreachEngine:
                     "status": "error",
                     "message": f"proposal {proposal_id!r} violates natural human style: {', '.join(style_violations)}",
                     "violations": style_violations,
+                }
+        require_contract = self._require_claim_contract()
+        if require_contract or str(proposal.get("claim_contract_raw") or "").strip():
+            catalog_repos = [r for r in self._usecases().get("repositories", []) if isinstance(r, Mapping)]
+            contract_report = _verify_claim_contract(
+                proposal,
+                repos_root=self._resolve_repos_root(),
+                catalog_repos=catalog_repos,
+                require_contract=require_contract,
+            )
+            if not contract_report["valid"]:
+                return {
+                    "status": "error",
+                    "message": (
+                        f"proposal {proposal_id!r} failed Claim-Beleg-Vertrag: "
+                        f"{', '.join(contract_report['violations'])}"
+                    ),
+                    "contract_violations": contract_report["violations"],
                 }
         return {
             "status": "preview",
@@ -1148,24 +1896,16 @@ class CommunityOutreachEngine:
         }
 
     def verify_proposals(self, repos_root: str | Path | None = None) -> dict[str, Any]:
-        """Verify all queued proposals against blacklist, duplicates, and real source code files."""
+        """Verify all queued proposals against blacklist, duplicates, real source code files, and Claim-Beleg-Vertrag."""
         if not self.inbox_md.exists():
             return {"status": "error", "message": "POST-EINGANG.md not found"}
         proposals = _parse_proposals(self.inbox_md.read_text(encoding="utf-8"))
         history = self._history()
         blacklisted_urls, blacklisted_ids, excluded_platforms = self._blacklisted()
-
-        config = _read_json(self.config_json, {})
-        configured_root = (config.get("verification") or {}).get("local_repos_root") if isinstance(config, Mapping) else None
-        resolved_root: Path | None = None
-        if repos_root:
-            resolved_root = Path(repos_root).expanduser().resolve()
-        elif configured_root:
-            resolved_root = Path(str(configured_root)).expanduser().resolve()
-        else:
-            default_root = Path(os.environ.get("REPOS_ROOT") or os.environ.get("LOCAL_DEV_REPOS") or "repos")
-            if default_root.exists():
-                resolved_root = default_root
+        resolved_root = self._resolve_repos_root(repos_root)
+        require_contract = self._require_claim_contract()
+        catalog_repos = [r for r in self._usecases().get("repositories", []) if isinstance(r, Mapping)]
+        git_cache: dict[Path, set[str] | None] = {}
 
         file_ext_re = re.compile(
             r"\.(?:py|ts|tsx|js|jsx|rs|go|html|css|toml|json|yaml|yml|md|sh|ps1|sql|c|cpp|h)$",
@@ -1181,10 +1921,12 @@ class CommunityOutreachEngine:
             t_url = proposal["target_url"]
             t_key = canonicalize_url(t_url)
             valid_url = _is_valid_target_url(t_url)
+            is_excluded_org = self._is_repo_from_excluded_org(proposal.get("repo", ""), proposal.get("repo_url", ""))
             is_blacklisted = (
                 pid in blacklisted_ids
                 or (bool(t_key) and t_key in blacklisted_urls)
                 or proposal["platform"].strip().casefold() in excluded_platforms
+                or is_excluded_org
             )
             is_duplicate = any(
                 item.get("status") == "published" and canonicalize_url(str(item.get("target_url", ""))) == t_key
@@ -1193,9 +1935,13 @@ class CommunityOutreachEngine:
             evidence_raw = str(proposal.get("code_evidence", "")).strip()
             has_evidence = bool(evidence_raw)
 
-            repo_slug = _normalize_repo_reference(proposal["repo"]).rsplit("/", 1)[-1]
-            repo_dir = (resolved_root / repo_slug) if (resolved_root and repo_slug) else None
+            if resolved_root is not None:
+                repo_dir, skill_rel_dir, _repo_slug = _resolve_repo_clone(resolved_root, proposal["repo"])
+            else:
+                repo_dir, skill_rel_dir = None, None
             repo_exists = bool(repo_dir and repo_dir.is_dir())
+            if repo_exists and skill_rel_dir is not None and repo_dir is not None:
+                repo_exists = (repo_dir / skill_rel_dir).is_dir()
 
             verified_files: list[str] = []
             missing_files: list[str] = []
@@ -1214,7 +1960,8 @@ class CommunityOutreachEngine:
                         continue
                     if "/" in cleaned or "\\" in cleaned or file_ext_re.search(cleaned):
                         full_path = repo_dir / cleaned
-                        if full_path.exists():
+                        alt_path = (repo_dir / skill_rel_dir / cleaned) if skill_rel_dir is not None else None
+                        if full_path.exists() or (alt_path is not None and alt_path.exists()):
                             verified_files.append(cleaned)
                         else:
                             missing_files.append(cleaned)
@@ -1223,6 +1970,14 @@ class CommunityOutreachEngine:
             style_violations = _check_natural_human_style(proposal["text"], proposal["platform"])
             natural_style_ok = not style_violations
             has_context_check = bool(str(proposal.get("context_check", "")).strip())
+            contract_report = _verify_claim_contract(
+                proposal,
+                repos_root=resolved_root,
+                catalog_repos=catalog_repos,
+                require_contract=require_contract,
+                git_cache=git_cache,
+            )
+            claim_contract_ok = contract_report["valid"]
             proposal_ok = (
                 valid_url
                 and not is_blacklisted
@@ -1231,6 +1986,7 @@ class CommunityOutreachEngine:
                 and (repo_exists if resolved_root is not None else True)
                 and files_ok
                 and natural_style_ok
+                and claim_contract_ok
             )
             if proposal_ok:
                 verified_count += 1
@@ -1244,11 +2000,20 @@ class CommunityOutreachEngine:
                 "status": "verified" if proposal_ok else "failed",
                 "valid_target_url": valid_url,
                 "blacklisted": is_blacklisted,
+                "excluded_org": is_excluded_org,
                 "duplicate": is_duplicate,
                 "has_code_evidence": has_evidence,
                 "has_context_check": has_context_check,
                 "natural_style_ok": natural_style_ok,
                 "style_violations": style_violations,
+                "claim_contract_present": contract_report["present"],
+                "claim_contract_ok": claim_contract_ok,
+                "claim_count": contract_report["claim_count"],
+                "verified_claims": contract_report["verified_claims"],
+                "software_sentence_count": contract_report["software_sentence_count"],
+                "covered_sentence_count": contract_report["covered_sentence_count"],
+                "uncovered_sentences": contract_report["uncovered_sentences"],
+                "contract_violations": contract_report["violations"],
                 "repo_clone_exists": repo_exists if resolved_root is not None else None,
                 "verified_files": verified_files,
                 "missing_files": missing_files,
@@ -1326,7 +2091,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--repos-root", default=None,
-        help="Local repositories root directory for code-evidence verification (default: env REPOS_ROOT or repos)",
+        help="Local repositories root directory for code-evidence verification (default: verification.local_repos_root in config.json or $OUTREACH_REPOS_ROOT)",
     )
     parser.add_argument(
         "--org-allow", default="",
@@ -1350,7 +2115,13 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"status": "error", "message": "--receipt-file and --receipt-proposal-id must be given together"}))
         return 1
     publisher = FileReceiptPublisher(args.receipt_file, args.receipt_proposal_id) if args.receipt_file else None
-    engine = CommunityOutreachEngine(args.workspace, dry_run=args.dry_run, org_allow=org_allow, publisher=publisher)
+    engine = CommunityOutreachEngine(
+        args.workspace,
+        dry_run=args.dry_run,
+        org_allow=org_allow,
+        publisher=publisher,
+        repos_root=args.repos_root,
+    )
     if args.sync_githubbot:
         try:
             if args.dry_run:
