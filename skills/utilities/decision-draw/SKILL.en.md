@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.4.0
+version: 1.5.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-14
+updated: 2026-11-15
 description: >
   Use when several bundled pending decisions should be presented for sign-off
   at once, e.g. "decision draw", /decision-draw, "give me all decisions in their
@@ -94,7 +94,7 @@ Five pending decisions on the BACH core cluster, each in its recommended form:
 
 ## Decision document as a form (build guide)
 
-So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_form.py` turns a small data JSON (`form.schema.json`, example `example_form.json`) into **one self-contained HTML form**. The form is not rebuilt each time: write the data, run `build_form.py`. Per item a short context (250 characters), one sentence of effect per option, a recommendation with one reason and the mandatory fields cost/effort, risk/reversibility, deadline and consequence of "no"; anything longer only collapsible; every item also has the choice "question / more info needed". Depending on the decision type, three image modes (`bilder_modus`) are available: `serie` (default, 1–12 images), `polaroid` (2–12 cards with letters A, B, C... matching options for variant comparisons, selectable via click or keypress) and `swipe` (1–60 images sequentially as a deck with yes/no/question and mandatory confirmation of the overall summary for bulk reviews). The avatar prediction badge is displayed only after the user has made a choice, avoiding pre-decisional anchoring. The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md).
+So that the user can click through a decision document inside the document itself (bulk acceptance, a note per item, save and send, a machine-readable answer file `ticket-master.decision-answers.v1`), `scripts/formular/build_form.py` turns a small data JSON (`form.schema.json`, example `example_form.json`) into **one self-contained HTML form**. The form is not rebuilt each time: write the data, run `build_form.py`. Per item a short context (250 characters), one sentence of effect per option, a recommendation with one reason and the mandatory fields cost/effort, risk/reversibility, deadline and consequence of "no"; anything longer only collapsible; every item also has the choice "question / more info needed". Depending on the decision type, three image modes (`bilder_modus`) are available: `serie` (default, 1–12 images), `polaroid` (2–12 cards with letters A, B, C... matching options for variant comparisons, selectable via click or keypress) and `swipe` (1–60 images sequentially as a deck with yes/no/question and mandatory confirmation of the overall summary for bulk reviews). The avatar prediction badge is displayed only after the user has made a choice, avoiding pre-decisional anchoring. The full guide covers the two routes (A: HTML form, B: Tk window with `draw.json`), the answer schema and the places to adapt for a new document: [references/formular.md](references/formular.md) (German). The same route applies to [decision-briefing](../decision-briefing/SKILL.en.md). **Opening and saving:** Never open the form directly as a file or with `Invoke-Item` (saving then shows a folder dialog); instead start `python <skill>/scripts/formular/serve_form.py <form.html> [--out-dir <target folder>]` as a background process. The local service (127.0.0.1 only) opens the form in the user's normal Edge, writes the answer file (`<document_id>.antwort.json`) and the answered copy (`<document_id>_BEANTWORTET.html`) into the target folder without a dialog when "Save and send" is clicked (default: the form's folder; set `--out-dir` if the document names a `zielordner`), and ends itself. The target folder is shown in the form after saving; tell the user. Without Python the form opens as a file and saves through download links, text and, last, the folder dialog (rule 9).
 
 Mandatory rules from the incident of 2026-11-07 (reasons in the guide):
 
@@ -341,6 +341,9 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 
 ## Changelog
 
+
+### 1.5.0 (2026-11-15)
+- Save the form without a folder dialog: `scripts/formular/serve_form.py` (local save service on 127.0.0.1, standard library only) opens the form in the user's normal Edge and writes the answer itself; opening and saving instructions are in the form section, the fallback without Python stays (download links, text, folder dialog last). Reason: ticket T-20261115-242335144.
 ### 1.4.0 (2026-11-14)
 - Short form as the default (user instruction 2026-11-14: "give me all decisions written out in their recommended form"): intro line, numbered list with one or two sentences per decision in result form, sign-off line. The eight-part layout is now called "Detailed Version" and is used only on explicit request. Reason: a draw covering eight audit decisions came out so long under the mandatory layout that the user rejected it as bloated.
 - `description` starts with the trigger and names the short form; new example (pilot as short form); style rules 2 and 4, the boundaries table and practical rule 8 adjusted accordingly (practical rule 7 added for DE/EN parity). Back-transfer and form rules unchanged.
