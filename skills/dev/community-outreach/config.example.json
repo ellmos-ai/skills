@@ -11,7 +11,8 @@
     "rotation": [
       "Reddit",
       "YouTube",
-      "Dev.to / Foren"
+      "GitHub Discussions",
+      "Foren"
     ],
     "reddit": {
       "enabled": true,
@@ -23,12 +24,21 @@
     },
     "forums": {
       "enabled": true,
-      "domains": ["dev.to", "news.ycombinator.com"]
+      "domains": ["news.ycombinator.com"]
     }
   },
   "compliance": {
     "human_in_the_loop": true,
     "require_approval_checkbox": true,
-    "max_posts_per_cycle": 1
+    "require_code_evidence": true,
+    "require_claim_contract": true,
+    "require_natural_style": true,
+    "max_posts_per_cycle": 1,
+    "excluded_orgs": ["biotec-line"]
+  },
+  "verification": {
+    "local_repos_root": "./repos",
+    "forbid_memory_or_summary_only_drafts": true,
+    "forbid_ai_essay_formatting": true
   }
 }

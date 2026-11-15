@@ -45,6 +45,25 @@ BLOCKED_META_NAMES = {
     ".github",
 }
 
+# Organizations completely excluded from outreach due to legal/regulatory compliance (Nutzerentscheid 2026-11-09)
+BLOCKED_ORGS = {
+    "biotec-line",
+}
+
+# Primary organizations for regular product/solution outreach (Nutzerentscheid 2026-11-09)
+PRIMARY_OUTREACH_ORGS = {
+    "ellmos-ai",
+    "dev-bricks",
+    "file-bricks",
+    "doc-bricks",
+    "open-bricks",
+}
+
+# Organizations used for scientific discourse & positioning on research topics rather than product promotion
+DISCOURSE_ONLY_ORGS = {
+    "research-line",
+}
+
 # Concrete high-value skills & innovative procedures promoted individually for specific problems
 # Sourced from Innovations_Inventar_und_Prior_Art.md and Top_10_Innovativste_Verfahren.md
 SPECIFIC_SKILL_PROFILES = [
@@ -376,7 +395,282 @@ SPECIFIC_SKILL_PROFILES = [
         ],
         "priority": "high",
     },
+    {
+        "id": "skills/infrastructure/skill-extractor",
+        "org": "ellmos-ai",
+        "name": "skill-extractor",
+        "url": "https://github.com/ellmos-ai/skills/tree/master/skills/infrastructure/skill-extractor",
+        "stars": 0,
+        "summary": "Skill-Extraktor aus Session-Transkripten: Segmentiert echte Chatverläufe in Stationen, bewertet Wiederverwendbarkeit und destilliert daraus portable SKILL.md-Pakete statt ad-hoc-Prompts.",
+        "problems_solved": [
+            "Erfolgreiche Problemlösungen in langen Coding-Agent-Sessions gehen im Chatverlauf verloren",
+            "Manuelles Schreiben wiederverwendbarer Agent-Skills kostet Zeit und vergisst kritische Randfälle",
+            "Unstrukturierte Massen-Transkripte lassen sich ohne Vorsegmentierung nicht sauber auswerten",
+        ],
+        "usecases": [
+            "Automatische Destillation wiederverwendbarer Skills aus Claude/Codex/Gemini-Transkripten",
+            "Bulk-Auswertung historischer Agent-Sessions per Stationen-Scoring",
+            "Vermeidung von Skill-Duplikaten durch Abgleich mit bestehenden Skills",
+        ],
+        "target_platforms": ["Reddit r/ClaudeAI", "Reddit r/LocalLLaMA", "Reddit r/ChatGPTCoding"],
+        "search_keywords": [
+            "extract agent skill from chat transcript",
+            "reusable claude code skill from session",
+            "skill extractor llm transcripts",
+        ],
+        "priority": "high",
+    },
+    {
+        "id": "skills/infrastructure/skill-explorer",
+        "org": "ellmos-ai",
+        "name": "skill-explorer",
+        "url": "https://github.com/ellmos-ai/skills/tree/master/skills/infrastructure/skill-explorer",
+        "stars": 0,
+        "summary": "Skill-Landschafts-Manager & Security-Auditor: Inventarisiert lokale Agent-Skills, erkennt Duplikate, bildet schlanke Familien-Router statt Kontext-Monolithen und prüft fremde Skills vor der Installation.",
+        "problems_solved": [
+            "Wachsende Sammlungen von 50+ SKILL.md-Dateien blähen das Kontextfenster von Coding-Agenten auf",
+            "Überlappende oder doppelt installierte Skills führen zu widersprüchlichem Agentenverhalten",
+            "Fehlende Sicherheitsprüfung beim Übernehmen externer Community-Skills",
+        ],
+        "usecases": [
+            "Audit und Konsolidierung großer SKILL.md-Bibliotheken",
+            "Generierung leichtgewichtiger Familien-Umbrella-Router",
+            "Vorab-Sicherheitsprüfung neuer Skills und Plugins",
+        ],
+        "target_platforms": ["Reddit r/ClaudeAI", "Reddit r/LocalLLaMA", "Reddit r/AI_Agents"],
+        "search_keywords": [
+            "manage many claude skills context bloat",
+            "skill router umbrella claude code",
+            "audit agent skills library",
+        ],
+        "priority": "high",
+    },
+    {
+        "id": "skills/dev/sec-supplychain",
+        "org": "ellmos-ai",
+        "name": "sec-supplychain",
+        "url": "https://github.com/ellmos-ai/skills/tree/master/skills/dev/sec-supplychain",
+        "stars": 0,
+        "summary": "Supply-Chain-Gate für KI-Skills, Plugins, Hooks und MCP-Server: Erzwingt 'Staging-then-promote' mit statischem Musterscanner gegen Prompt-Injection, Exfiltration und versteckte Shell-Payloads.",
+        "problems_solved": [
+            "Ungeprüft installierte Agent-Skills, MCP-Server oder Hooks können versteckte Prompt-Injections oder Credential-Exfiltration enthalten",
+            "Agenten installieren fremde Pakete oft direkt in produktive Konfigurationsordner ohne Quarantäne-Stufe",
+            "Fehlender deterministischer Vorab-Scanner für SKILL.md, hooks.json und MCP-Manifeste",
+        ],
+        "usecases": [
+            "Quarantäne-Prüfung (Staging-then-promote) vor der Installation fremder Skills und MCP-Server",
+            "Automatischer Musterscan auf verdächtige Netzwerk-, Shell- und Prompt-Injection-Muster",
+            "Supply-Chain-Absicherung lokaler Multi-Agent-Umgebungen",
+        ],
+        "target_platforms": ["Reddit r/ClaudeAI", "Reddit r/netsec", "Reddit r/LocalLLaMA"],
+        "search_keywords": [
+            "mcp server security check before install",
+            "agent skill prompt injection supply chain",
+            "staging then promote ai plugins",
+        ],
+        "priority": "high",
+    },
+    {
+        "id": "skills/infrastructure/automation-self-care",
+        "org": "ellmos-ai",
+        "name": "automation-self-care",
+        "url": "https://github.com/ellmos-ai/skills/tree/master/skills/infrastructure/automation-self-care",
+        "stars": 0,
+        "summary": "Anbieterneutrales Self-Care-Kernset für geplante KI-Automationen: Verbindet Policy-Linting, Lock-Governance, Readback-Pflicht und Rollback für unbeaufsichtigte Scheduled-Tasks über Claude, Codex und Gemini.",
+        "problems_solved": [
+            "Geplante Hintergrund-Agenten driften mit der Zeit auseinander, überschreiben gesperrte Dateien oder scheitern stillschweigend",
+            "Fehlende einheitliche Sicherheits- und Readback-Gates über verschiedene Agent-Scheduler hinweg",
+            "Regeldateien (CLAUDE.md, GEMINI.md) werden durch ungefilterte Automations-Laufberichte zugemüllt",
+        ],
+        "usecases": [
+            "Selbstheilende Wartung für geplante KI-Agenten-Läufe und Desktop-Automationen",
+            "Deterministisches Policy- und Lock-Linting vor jedem Scheduled-Task",
+            "Flotten-Audit für wiederkehrende Hintergrund-Workflows",
+        ],
+        "target_platforms": ["Reddit r/ClaudeAI", "Reddit r/LocalLLaMA", "Reddit r/AI_Agents"],
+        "search_keywords": [
+            "scheduled ai agents self healing governance",
+            "unattended coding agent tasks lock safety",
+            "automation fleet audit llm",
+        ],
+        "priority": "high",
+    },
+    {
+        "id": "skills/dev/compare-race",
+        "org": "ellmos-ai",
+        "name": "compare-race",
+        "url": "https://github.com/ellmos-ai/skills/tree/master/skills/dev/compare-race",
+        "stars": 0,
+        "summary": "Multi-Modell-Vergleichsrennen (Stoppuhr oder Parallel-Race): Schickt denselben Prompt an mehrere LLMs und lässt das Startmodell Qualität, Korrektheit, Vollständigkeit, Instruktionstreue und Latenz bewerten.",
+        "problems_solved": [
+            "Subjektives Rätselraten, welches Modell (Claude, GPT/Codex, Gemini, lokales Ollama) eine konkrete Aufgabe besser löst",
+            "Reine Latenz-Benchmarks ignorieren Instruktionstreue und inhaltliche Vollständigkeit",
+            "Manuelles Copy-Pasten desselben Prompts in mehrere CLI-Agenten kostet unnötig Zeit",
+        ],
+        "usecases": [
+            "Direkter A/B/C-Modellvergleich am selben Prompt (sequenziell per Stoppuhr oder parallel)",
+            "Strukturierte Richter-Bewertung nach Qualität, Korrektheit und Zeit",
+            "Empirische Modellauswahl für spezifische Projekt-Aufgaben",
+        ],
+        "target_platforms": ["Reddit r/LocalLLaMA", "Reddit r/ClaudeAI", "Reddit r/ChatGPTCoding"],
+        "search_keywords": [
+            "compare multiple llm models same prompt cli",
+            "model race benchmark judge claude codex gemini",
+            "parallel prompt evaluation local llm",
+        ],
+        "priority": "high",
+    },
 ]
+
+# Core ecosystem flagships (always Tier 1 when not in cooldown)
+CORE_ECOSYSTEM_FLAGSHIPS = {
+    "ellmos-ai/bach": 99,
+    "ellmos-ai/open-ocean": 99,
+    "ellmos-ai/skills": 101,
+}
+
+CORE_FLAGSHIP_PROFILES = {
+    "ellmos-ai/bach": {
+        "summary": "BACH (Binary Autonomous Code Host): Lokales, datei- & textbasiertes Betriebssystem für LLM-Agenten mit 110+ Handlern, SQLite-Memory, Task-Queue, Lock-Governance und MCP-Brücke.",
+        "problems_solved": [
+            "LLM-Agenten verlieren ihren Kontext, Arbeitsstand und ihre Werkzeuge zwischen Sessions (Context Window Amnesie)",
+            "Hohe Cloud-Abhängigkeit und fehlende deterministische Dateisystem-/SQLite-Steuerung bei proprietären Agent-Frameworks",
+            "Mangelnde Nachvollziehbarkeit, fehlende Audit-Trails und unkoordinierte parallele Zugriffe mehrerer Agenten",
+        ],
+        "usecases": [
+            "Persistentes lokales Agenten-Betriebssystem mit CLI-, API- und MCP-Schnittstelle",
+            "Zentrale Koordination von Tasks, Skills, Memory und Wissen für Claude, Codex, Gemini und Ollama",
+            "Nachvollziehbare Local-First-Automatisierung ohne Cloud-Lock-in",
+        ],
+        "target_platforms": ["Reddit r/LocalLLaMA", "Reddit r/AI_Agents", "Reddit r/ClaudeAI", "GitHub Discussions"],
+        "search_keywords": [
+            "local agent operating system sqlite memory",
+            "persistent cli runtime for coding agents",
+            "local first multi agent host open source",
+        ],
+    },
+    "ellmos-ai/open-ocean": {
+        "summary": "open-ocean: Local-first, verifizierbarer Kompositions-Installer mit Rollback-Lifecycle, der komplette KI-Agenten-Systeme aus deklarativen Rezepten und Bundles zusammensetzt — das freie Community-Gesamtsystem des ellmos-Ökosystems.",
+        "problems_solved": [
+            "Komplexe lokale Multi-Agenten-Setups lassen sich schwer reproduzierbar installieren, verifizieren und bei Fehlern sauber zurückrollen",
+            "Fragmentierte Einzel-Tools, MCP-Server und Skills ohne deklarative Rezept- und Bundle-Komposition",
+            "Intransparente Installer ohne kryptografische/deterministische Verifikation und Zero-Egress-Garantie",
+        ],
+        "usecases": [
+            "Deklarative Zusammenstellung und Installation kompletter lokaler KI-Agenten-Umgebungen per Rezept",
+            "Verifizierbare Updates und atomares Rollback für lokale Agent-Stacks",
+            "Freies Community-Gesamtsystem des ellmos- und open-bricks-Ökosystems",
+        ],
+        "target_platforms": ["Reddit r/LocalLLaMA", "Reddit r/OpenSource", "Reddit r/AI_Agents", "GitHub Discussions"],
+        "search_keywords": [
+            "declarative installer for ai agent stack",
+            "local first ai ecosystem recipe composer rollback",
+            "open source agent system installer",
+        ],
+    },
+    "ellmos-ai/skills": {
+        "summary": "ellmos skills: Anbieterneutrale, portable SKILL.md-Bibliothek (140+ kuratierte öffentliche Skills mit CI-Quality-Gates, Katalog-CLI & JSON-Registry) für Claude Code, Codex, AGY/Gemini, BACH und lokale LLM-Workflows.",
+        "problems_solved": [
+            "Jeder Coding-Agent (Claude Code, Codex, Gemini/AGY) nutzt eigene Prompt-Ablagen statt einer gemeinsamen, geprüften SKILL.md-Bibliothek",
+            "Ungetestete Community-Prompts ohne Frontmatter-Validierung, Sicherheits-Scanner und deterministische Begleitskripte",
+            "Fehlender durchsuchbarer Katalog über Dev-, Infrastruktur-, Research- und Utility-Skills hinweg",
+        ],
+        "usecases": [
+            "Gemeinsame portable Skill-Bibliothek für Claude Code, Codex, Gemini und lokale Agenten",
+            "Einsatz geprüfter Standalone-Skills mit Python-Werkzeugen und CI-Vertragstests",
+            "Browsen und Übernehmen einzelner SKILL.md-Pakete über Katalog-CLI oder Web-Katalog",
+        ],
+        "target_platforms": ["Reddit r/ClaudeAI", "Reddit r/ChatGPTCoding", "Reddit r/LocalLLaMA", "GitHub Discussions"],
+        "search_keywords": [
+            "portable SKILL.md library claude code codex",
+            "shared agent skills repository open source",
+            "reusable skills for coding agents",
+        ],
+    },
+}
+
+# Curated quality & idea scores for top module repositories (Tier 1 when low/medium attention <=6 views & unpromoted; Tier 2 when higher attention)
+TOP_QUALITY_MODULE_SCORES = {
+    "ellmos-ai/workflowhooker": 98,
+    "doc-bricks/dokuzen": 98,
+    "ellmos-ai/task-master": 97,
+    "ellmos-ai/lock-master": 97,
+    "dev-bricks/carecenter-for-codex": 96,
+    "file-bricks/cloudlockfixer": 96,
+    "ellmos-ai/decision-clicker": 94,
+    "ellmos-ai/memoryhooker": 94,
+    "ellmos-ai/usmc": 94,
+    "ellmos-ai/hook-master": 93,
+    "ellmos-ai/clirec": 93,
+    "dev-bricks/codebox": 92,
+    "file-bricks/explorerpro": 92,
+    "ellmos-ai/clutch": 92,
+    "file-bricks/softwarecenter": 91,
+    "file-bricks/winstorepackager": 91,
+    "file-bricks/promptboard": 91,
+    "dev-bricks/methodenanalyser": 90,
+    "doc-bricks/universaldocsgrabber": 90,
+    "doc-bricks/universalinvoicemail": 89,
+    "file-bricks/profiler": 89,
+    "dev-bricks/devcenter": 89,
+    "doc-bricks/mediabrain": 88,
+    "doc-bricks/pdftopdfocr": 88,
+    "file-bricks/sqliteviewer": 88,
+    "ellmos-ai/swarm_ai": 88,
+    "ellmos-ai/swarm-ai": 88,
+    "ellmos-ai/rinnsal": 87,
+    "ellmos-ai/compare-race": 87,
+    "file-bricks/prosync": 86,
+    "doc-bricks/litzentrum": 86,
+    "ellmos-ai/doc-services": 86,
+    "dev-bricks/safe-start-for-codex": 85,
+    "ellmos-ai/anonymizer": 85,
+    "ellmos-ai/coma": 85,
+    "ellmos-ai/open-compute": 85,
+    "ellmos-ai/sqlite-transit-sync": 85,
+    "file-bricks/notespacellm": 85,
+    "ellmos-ai/system-auditor": 84,
+    "ellmos-ai/system-gap-master": 84,
+    "ellmos-ai/marblerun": 84,
+    "ellmos-ai/gardener": 84,
+    "ellmos-ai/ai-media-editor": 84,
+    "file-bricks/profiprompt": 84,
+    "file-bricks/ampelclip": 84,
+    "doc-bricks/cleanmarkdown": 84,
+    "doc-bricks/dokureader": 84,
+    "doc-bricks/universalmailcleaner": 83,
+}
+
+
+def compute_selection_tier(repo: Mapping[str, Any]) -> tuple[int, str, int]:
+    """Classify a repository into the 3-stage outreach priority model (Nutzerentscheid 2026-11-09):
+    - Tier 1: Best module repos by quality/idea with low-to-medium attention (views_unique_14d <= 6, unpromoted)
+              PLUS core flagships (bach, open-ocean, skills) and standout skills (skills/*).
+    - Tier 2: Best module repos by quality/idea that already have higher attention (views_unique_14d > 6 or already promoted).
+    - Tier 3: Smaller repositories, specialty modules, seeds, and helper tools.
+    """
+    repo_id = str(repo.get("id", "")).strip().casefold()
+    total_promotions = int(repo.get("total_promotions", 0))
+    traffic = repo.get("traffic") or {}
+    views_u = int(traffic.get("views_unique_14d", 0))
+
+    if repo_id in CORE_ECOSYSTEM_FLAGSHIPS:
+        base_q = CORE_ECOSYSTEM_FLAGSHIPS[repo_id]
+        return 1, "tier1_core_flagship", base_q
+
+    if repo_id.startswith("skills/"):
+        base_q = 95
+        if total_promotions == 0:
+            return 1, "tier1_standout_skill", base_q
+        return 2, "tier2_standout_skill_promoted", base_q
+
+    if repo_id in TOP_QUALITY_MODULE_SCORES:
+        base_q = TOP_QUALITY_MODULE_SCORES[repo_id]
+        if total_promotions == 0 and views_u <= 6:
+            return 1, "tier1_quality_low_medium_attention", base_q
+        return 2, "tier2_quality_existing_attention", base_q
+
+    return 3, "tier3_smaller_modules", 60
 
 
 @dataclass
@@ -517,6 +811,10 @@ def classify_repo(
     if id_lower in BLOCKED_META_REPOS or name_lower in BLOCKED_META_NAMES or name_lower.startswith("."):
         return RepoClassification(is_active=False, reason="profile_meta")
 
+    # Check excluded organizations (e.g. biotec-line: legal/regulatory compliance exclusion)
+    if org_lower in BLOCKED_ORGS or any(id_lower.startswith(f"{blocked}/") for blocked in BLOCKED_ORGS):
+        return RepoClassification(is_active=False, reason="excluded_org_legal_compliance")
+
     # Check against parsed traffic report private/archived lists
     if id_lower in private_set or name_lower in private_set:
         return RepoClassification(is_active=False, reason="private", visibility="private")
@@ -536,9 +834,7 @@ def classify_repo(
     if gh_info.get("fork") is not False:
         return RepoClassification(is_active=False, reason="foreign_fork", is_fork=True)
 
-    # Deactivate generic monolithic skills hub -- specific skills are promoted individually
-    if id_lower == "ellmos-ai/skills":
-        return RepoClassification(is_active=False, reason="generic_hub_promoted_via_specific_skills")
+    # ellmos-ai/skills is promoted both as the general cross-agent skill library and via specific standout skills
 
     # Check duplicate personal mirrors under lukisch/ if canonical org repo exists
     if org_lower == "lukisch" and all_catalog_repos:
@@ -586,7 +882,15 @@ def sync_githubbot_traffic(
         return {"status": "error", "message": f"usecases.json not found at {usecases_path}"}
 
     usecases_data = json.loads(usecases_path.read_text(encoding="utf-8"))
-    existing_repos = usecases_data.get("repositories", [])
+    raw_existing_repos = usecases_data.get("repositories", [])
+    # Remove any repositories belonging to permanently blocked organizations (e.g. biotec-line)
+    existing_repos = [
+        r
+        for r in raw_existing_repos
+        if str(r.get("org", "")).strip().casefold() not in BLOCKED_ORGS
+        and not any(str(r.get("id", "")).strip().casefold().startswith(f"{b}/") for b in BLOCKED_ORGS)
+    ]
+    usecases_data["repositories"] = existing_repos
     now_iso = datetime.now(timezone.utc).astimezone().isoformat()
 
     active_count = 0
@@ -654,9 +958,30 @@ def sync_githubbot_traffic(
         # Priority adjustment based on proven traffic
         if repo["active"]:
             active_count += 1
+            org_norm = org.strip().casefold()
+            if org_norm in DISCOURSE_ONLY_ORGS:
+                repo["outreach_mode"] = "discourse_positioning"
+                probs = repo.get("problems_solved") or []
+                if any("Bedarf an einer leichtgewichtigen, lokalen Open-Source-Lösung" in str(p) for p in probs):
+                    repo["problems_solved"] = [
+                        f"Fachdiskussionen und aktuelle Tendenzen zum Forschungsthema von {name} identifizieren",
+                        "Eigene wissenschaftliche Haltung, Methodik und Forschungsergebnisse sachlich in den Fachdiskurs einbringen",
+                    ]
+                    repo["usecases"] = [
+                        "Wissenschaftlicher Themendiskurs & Positionsbestimmung (kein klassischer Tool-Pitch)",
+                        f"Forschungsaustausch rund um {name}",
+                    ]
+            else:
+                repo["outreach_mode"] = "solution_outreach"
+            if key_id in CORE_FLAGSHIP_PROFILES:
+                repo.update(CORE_FLAGSHIP_PROFILES[key_id])
             tf_score = repo["traffic"]["traffic_score"]
-            # High interest tools get priority boost if not explicitly set
-            if tf_score >= 80 or repo["traffic"]["clones_unique_14d"] >= 40:
+            sel_tier, sel_label, q_score = compute_selection_tier(repo)
+            repo["selection_tier"] = sel_tier
+            repo["selection_tier_label"] = sel_label
+            repo["quality_score"] = q_score
+            # High quality (Tier 1/2) or high interest tools get priority boost
+            if sel_tier in (1, 2) or tf_score >= 80 or repo["traffic"]["clones_unique_14d"] >= 40:
                 repo["priority"] = "high"
             elif repo.get("priority") not in ["high", "low"]:
                 repo["priority"] = "normal"
@@ -686,6 +1011,7 @@ def sync_githubbot_traffic(
             gh_info = _registry_entry(registry_repos, full_repo).get("github") or {}
             desc = gh_info.get("description") or f"Open-source tool {name} by {org}"
             topics = gh_info.get("topics") or []
+            is_discourse = org.strip().casefold() in DISCOURSE_ONLY_ORGS
 
             new_repo = {
                 "id": f"{org}/{name}",
@@ -694,15 +1020,30 @@ def sync_githubbot_traffic(
                 "url": f"https://github.com/{org}/{name}",
                 "stars": gh_info.get("stars", 0),
                 "summary": desc,
-                "problems_solved": [
-                    f"Bedarf an einer leichtgewichtigen, lokalen Open-Source-Lösung für {name}",
-                    f"Vermeidung von Cloud-Abhängigkeiten und Vendor-Lock-in im Bereich {org}",
-                    "Fehlende flexible Automatisierung oder spezialisiertes Tooling für Entwickler",
-                ],
-                "usecases": [
-                    f"Einsatz im Bereich {org}",
-                    f"Lokale Entwicklung und Automatisierung mit {name}",
-                ],
+                "outreach_mode": "discourse_positioning" if is_discourse else "solution_outreach",
+                "problems_solved": (
+                    [
+                        f"Fachdiskussionen und aktuelle Tendenzen zum Forschungsthema von {name} identifizieren",
+                        "Eigene wissenschaftliche Haltung, Methodik und Forschungsergebnisse sachlich in den Fachdiskurs einbringen",
+                    ]
+                    if is_discourse
+                    else [
+                        f"Bedarf an einer leichtgewichtigen, lokalen Open-Source-Lösung für {name}",
+                        f"Vermeidung von Cloud-Abhängigkeiten und Vendor-Lock-in im Bereich {org}",
+                        "Fehlende flexible Automatisierung oder spezialisiertes Tooling für Entwickler",
+                    ]
+                ),
+                "usecases": (
+                    [
+                        "Wissenschaftlicher Themendiskurs & Positionsbestimmung (kein klassischer Tool-Pitch)",
+                        f"Forschungsaustausch rund um {name}",
+                    ]
+                    if is_discourse
+                    else [
+                        f"Einsatz im Bereich {org}",
+                        f"Lokale Entwicklung und Automatisierung mit {name}",
+                    ]
+                ),
                 "target_platforms": ["Reddit r/LocalLLaMA", "Reddit r/OpenSource", "Reddit r/Python"],
                 "search_keywords": [f"{name} open source", f"{name} alternative", f"{org} {name}"] + topics[:3],
                 "last_promoted_at": None,
@@ -725,6 +1066,14 @@ def sync_githubbot_traffic(
                     "updated_at": now_iso,
                 },
             }
+            if full_repo.casefold() in CORE_FLAGSHIP_PROFILES:
+                new_repo.update(CORE_FLAGSHIP_PROFILES[full_repo.casefold()])
+            sel_tier, sel_label, q_score = compute_selection_tier(new_repo)
+            new_repo["selection_tier"] = sel_tier
+            new_repo["selection_tier_label"] = sel_label
+            new_repo["quality_score"] = q_score
+            if sel_tier in (1, 2):
+                new_repo["priority"] = "high"
             existing_repos.append(new_repo)
             known_ids.add(full_repo.casefold())
             imported_count += 1
@@ -740,6 +1089,11 @@ def sync_githubbot_traffic(
             existing["exclusion_reason"] = None
             existing["github_meta"] = {"visibility": "public", "archived": False, "fork": False, "stars": 0}
             existing["traffic"] = {"updated_at": now_iso}  # GitHub measures no per-skill traffic
+            existing["outreach_mode"] = "solution_outreach"
+            sel_tier, sel_label, q_score = compute_selection_tier(existing)
+            existing["selection_tier"] = sel_tier
+            existing["selection_tier_label"] = sel_label
+            existing["quality_score"] = q_score
             active_count += 1
         else:
             entry = dict(skill)
@@ -747,9 +1101,14 @@ def sync_githubbot_traffic(
             entry["total_promotions"] = 0
             entry["active"] = True
             entry["exclusion_reason"] = None
+            entry["outreach_mode"] = "solution_outreach"
             entry["github_meta"] = {"visibility": "public", "archived": False, "fork": False, "stars": 0}
             entry["traffic"] = dict(skill.get("traffic", {}))
             entry["traffic"]["updated_at"] = now_iso
+            sel_tier, sel_label, q_score = compute_selection_tier(entry)
+            entry["selection_tier"] = sel_tier
+            entry["selection_tier_label"] = sel_label
+            entry["quality_score"] = q_score
             existing_repos.append(entry)
             imported_count += 1
             active_count += 1

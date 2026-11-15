@@ -1232,9 +1232,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/community-outreach/SKILL.md",
-      "version": "1.3.0",
+      "version": "1.6.0",
       "status": "active",
-      "description": "Verwenden, wenn lösungsorientierter Community-Outreach und Repo-Empfehlungen in Foren, Reddit oder GitHub Discussions durchgeführt werden sollen (z. B. 'passenden Thread finden', 'Community-Antwort entwerfen', 'Repo empfehlen', /community-outreach). Führt eine Human-in-the-Loop-Queue mit Code-Fact-Verifikation, Anti-KI-Stilprüfung und Blacklist-Schutz. NICHT verwenden für ungenehmigte automatische Massen-Postings oder Spam.",
+      "description": "Systemneutrale Automatisierung für lösungsorientierten Community Outreach und Repo-Recommender nach dem Human-in-the-Loop-Prinzip mit deterministischem Claim-Beleg-Vertrag am Originalcode, 3-stufigem Qualitäts- & Aufmerksamkeits-Auswahlmodell, Organisations-Governance, Anti-KI-Stil-Gate und Blacklist-Schutz. Verwenden bei Community-Outreach-Entwürfen, Queue-Verifikation (--verify-proposals) oder der Planung lösungsorientierter Antworten auf Reddit, YouTube und Fachforen.",
       "languages": [
         "de",
         "en"
@@ -1244,13 +1244,13 @@
           "language": "de",
           "path": "skills/dev/community-outreach/SKILL.md",
           "title": "Community Outreach & Solution Recommender",
-          "description": "Verwenden, wenn lösungsorientierter Community-Outreach und Repo-Empfehlungen in Foren, Reddit oder GitHub Discussions durchgeführt werden sollen (z. B. 'passenden Thread finden', 'Community-Antwort entwerfen', 'Repo empfehlen', /community-outreach). Führt eine Human-in-the-Loop-Queue mit Code-Fact-Verifikation, Anti-KI-Stilprüfung und Blacklist-Schutz. NICHT verwenden für ungenehmigte automatische Massen-Postings oder Spam."
+          "description": "Systemneutrale Automatisierung für lösungsorientierten Community Outreach und Repo-Recommender nach dem Human-in-the-Loop-Prinzip mit deterministischem Claim-Beleg-Vertrag am Originalcode, 3-stufigem Qualitäts- & Aufmerksamkeits-Auswahlmodell, Organisations-Governance, Anti-KI-Stil-Gate und Blacklist-Schutz. Verwenden bei Community-Outreach-Entwürfen, Queue-Verifikation (--verify-proposals) oder der Planung lösungsorientierter Antworten auf Reddit, YouTube und Fachforen."
         },
         {
           "language": "en",
           "path": "skills/dev/community-outreach/SKILL.en.md",
           "title": "Community Outreach & Solution Recommender",
-          "description": "Use when conducting helpful community outreach and recommending open-source repositories on Reddit, forums, or GitHub Discussions (e.g. 'find relevant discussions', 'draft community reply', 'recommend project', /community-outreach). Implements a human-in-the-loop pipeline with code-fact verification, natural comment style checks, and blacklist gates. Do NOT use for unsolicited mass marketing or automated spam."
+          "description": "System-agnostic automation for solution-oriented community outreach and repository recommendation following Human-in-the-Loop principles with a deterministic Claim-to-Code Evidence Contract, 3-stage quality & attention selection model, organization governance, natural human comment style gate, and blacklist enforcement. Use when drafting, verifying (--verify-proposals), or auditing community outreach responses across Reddit, YouTube, GitHub Discussions, and developer forums."
         }
       ]
     },
