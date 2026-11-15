@@ -1,24 +1,11 @@
 ---
 name: file-collect-sort-action
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-08-18
-updated: 2026-08-18
-description: >
-  Recognizes user requests of the form "always pull certain files from a
-  folder and collect them at a destination" and sets up the module
-  file-collect-sort-action (CLI fcsa) for it — a configuration-driven agent
-  that scans folders, categorizes files by template and applies staged
-  actions (move/copy/duplicate-check/delete/OCR/place-information). Use
-  this skill for sentences like "always pull <file type> from <folder> and
-  collect them in <destination>", "automatically sort folder X by ...",
-  "collect incoming files from ... into ...", "clean up this folder based
-  on rules", or "automatically move all <file type> from <folder>". ALWAYS
-  sets up a dry run first and only arms it after explicit user go-ahead;
-  deletion always stays in `_trash` mode by default.
-
-# Compatibility
+updated: 2026-11-15
+description: "Use this skill for sentences like \"always pull <file type> from <folder> and collect them in <destination>\", \"automatically sort folder X by ...\", \"collect incoming files from ... into ...\", \"clean up this folder based on rules\", or \"automatically move all <file type> from <folder>\". Recognizes user requests of the form \"always pull certain files from a folder and collect them at a destination\" and sets up the module file-collect-sort-action (CLI fcsa) for it — a configuration-driven agent that scans folders, categorizes files by template and applies staged actions (move/copy/duplicate-check/delete/OCR/place-information). ALWAYS sets up a dry run first and only arms it after explicit user go-ahead; deletion always stays in `_trash` mode by default."
 standalone: false
 anthropic_compatible: true
 bach_compatible: false

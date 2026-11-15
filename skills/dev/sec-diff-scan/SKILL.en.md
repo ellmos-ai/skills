@@ -1,11 +1,11 @@
 ---
 name: sec-diff-scan
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Security scan of a change instead of the whole repository: PR, commit, branch diff or working-tree patch. Reviews changed lines together with their callers and callees, looks for regressions of known patterns and writes candidates to findings.json plus coverage.json listing diff and context files. Use for 'security review of this PR', 'check this diff for vulnerabilities', 'look at this before merge', 'did this change open something up'. Whole-repo scan: sec-scan. Refuting candidates: sec-validate. Report: sec-report."
+updated: 2026-11-15
+description: "Use for 'security review of this PR', 'check this diff for vulnerabilities', 'look at this before merge', 'did this change open something up'. Security scan of a change instead of the whole repository: PR, commit, branch diff or working-tree patch. Reviews changed lines together with their callers and callees, looks for regressions of known patterns and writes candidates to findings.json plus coverage.json listing diff and context files. Whole-repo scan: sec-scan. Refuting candidates: sec-validate. Report: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

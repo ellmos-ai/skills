@@ -1,22 +1,11 @@
 ---
 name: folder-organization
-version: 1.2.0
+version: 1.2.1
 type: protocol
 author: Lukas Geiger + OpenAI Codex + Gemini
 created: 2026-08-24
-updated: 2026-11-10
-description: >
-  Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien
-  als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien
-  zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs
-  archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs.
-  Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen
-  sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“,
-  „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“,
-  „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und
-  gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral;
-  für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen.
-
+updated: 2026-11-15
+description: "Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

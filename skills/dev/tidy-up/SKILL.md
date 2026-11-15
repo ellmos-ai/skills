@@ -1,20 +1,11 @@
 ---
 name: tidy-up
-version: 1.1.1
+version: 1.1.2
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-11-10
-description: >
-  Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session
-  gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene
-  triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand
-  (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp-
-  Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, "raeum das Projekt
-  auf", "mach hier sauber bevor wir weitermachen", am Ende einer Arbeitssitzung an einem Projekt,
-  oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.
-
-# Kompatibilitaet
+updated: 2026-11-15
+description: "Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal. Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

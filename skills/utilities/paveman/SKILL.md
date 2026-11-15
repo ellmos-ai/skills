@@ -1,21 +1,11 @@
 ---
 name: paveman
-version: 1.0.1
+version: 1.0.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-08-20
-description: >
-  Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen ("kürze meine CLAUDE.md",
-  "MEMORY.md ist zu lang", "komprimiere die Doku, ohne Technik anzutasten", "diese Regeldatei
-  wird über die Zeichengrenze abgeschnitten") und nutzt dafür das Modul paveman — ein
-  deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit
-  Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und
-  Code. Nutze diesen Skill bei Sätzen wie "kürze <Datei>", "diese Datei ist zu lang/wird
-  abgeschnitten", "shrink this rule file", "komprimiere ohne Inhalt zu verändern" oder wenn eine
-  Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.
-
-# Kompatibilität
+updated: 2026-11-15
+description: "Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt. Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code."
 standalone: false
 anthropic_compatible: true
 bach_compatible: false

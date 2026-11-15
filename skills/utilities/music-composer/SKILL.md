@@ -1,14 +1,11 @@
 ---
 name: music-composer
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: ellmos contributors
 created: 2026-07-31
-updated: 2026-07-31
-description: >
-  Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON
-  per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient,
-  Electronic. Deterministisch, offline, kein Cloud-Dienst.
+updated: 2026-11-15
+description: "Verwenden, wenn zu einem Video passende Hintergrundmusik komponiert werden soll (z. B. 'Hintergrundmusik für das Video', 'Soundtrack aus Storyline', 'Chiptune-/Ambient-/Electronic-Musik erzeugen'). Komponiert video-synchronisierte Musik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg); Stile Chiptune, Ambient, Electronic; deterministisch, offline, kein Cloud-Dienst."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

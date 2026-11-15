@@ -1,20 +1,11 @@
 ---
 name: agent-role-scaffolder
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-25
-updated: 2026-08-25
-description: >
-  Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code-
-  Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage-
-  wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das
-  bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen
-  (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem
-  wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine
-  neue Rolle entstehen soll ("neue Agentenrolle bauen", "Subagent anlegen",
-  "Companion-Worker starten") oder eine bestehende gegen die Haus-Konventionen
-  geprüft werden soll ("ist dieser Agent richtig aufgesetzt?").
+updated: 2026-11-15
+description: "Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\"). Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf."
 visibility: public
 language: de
 standalone: true

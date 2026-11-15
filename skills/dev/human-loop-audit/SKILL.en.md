@@ -1,23 +1,11 @@
 ---
 name: human-loop-audit
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-08-18
-updated: 2026-08-18
-description: >
-  Interactive zip-merge-style audit procedure for a series of apps/review
-  objects: the user tests live and gives short feedback in the chat, while
-  the agent already starts the next object AND evaluates the previous
-  feedback in parallel (capture it in a structured way, delegate repair
-  orders to workers immediately) — instead of waiting sequentially. Use
-  this skill for "human-loop-audit", "let's zip-test the apps", "I test,
-  you evaluate and repair", or whenever a series of GUIs/products should be
-  tested together with the user and findings should turn into repairs
-  immediately. Completion is a structured finding list per object
-  (Works/Broken/Wish) plus the list of repairs already started.
-
-# Compatibility
+updated: 2026-11-15
+description: "Use this skill for \"human-loop-audit\", \"let's zip-test the apps\", \"I test, you evaluate and repair\", or whenever a series of GUIs/products should be tested together with the user and findings should turn into repairs immediately. Interactive zip-merge-style audit procedure for a series of apps/review objects: the user tests live and gives short feedback in the chat, while the agent already starts the next object AND evaluates the previous feedback in parallel (capture it in a structured way, delegate repair orders to workers immediately) — instead of waiting sequentially. Completion is a structured finding list per object (Works/Broken/Wish) plus the list of repairs already started."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

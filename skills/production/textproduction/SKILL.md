@@ -1,16 +1,11 @@
 ---
 name: textproduction
-version: 2.0.0
+version: 2.0.1
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-09-27
-description: >
-  KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost,
-  Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte,
-  RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit
-  lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich.
-
+updated: 2026-11-15
+description: "Verwenden, wenn Texte mit KI erstellt werden sollen (z. B. 'schreibe einen Blogpost', 'Newsletter entwerfen', 'Kurzgeschichte', 'Pressemitteilung', 'Positionspapier'). Drei Teilskills: allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

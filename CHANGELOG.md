@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased] - 2026-11-15
+
+- **Trigger first in the skill list (T-20261115-110755565):** Claude Code caps every entry of the skill list and, on overflow of the total budget, drops whole descriptions of the least-used skills (code.claude.com/docs/en/skills, "Skill descriptions are cut short"). 25 skills had their trigger ("Use when ...") only after the first 250 characters or none at all; their `description` now starts with the trigger sentence (content otherwise unchanged, patch version bumped, `SKILL.md` and `SKILL.en.md`). Other language versions are not yet adjusted.
+- `testing/skill_frontmatter_gate.py` additionally reports skills whose trigger starts only after the first 250 characters (`skills_ausloeser_zu_spaet`, a hint that never blocks); `docs/CONVENTIONS.md` and `ellmos-skill-creator` 0.3.1 state the rule.
+
 ## [Unreleased] - 2026-11-03
 
 - Restrict review-sandbox cleanup to its own registered worktrees using non-forced `git worktree remove`; preserve unrelated unavailable worktree registrations instead of pruning the repository globally. Refuse cleanup from inside the sandbox and preserve Git-locked checkouts. Add real Git regression fixtures for these safety boundaries; version remains unchanged.

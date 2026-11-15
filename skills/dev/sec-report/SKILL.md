@@ -1,11 +1,11 @@
 ---
 name: sec-report
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage."
+updated: 2026-11-15
+description: "Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

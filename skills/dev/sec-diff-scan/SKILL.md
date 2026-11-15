@@ -1,11 +1,11 @@
 ---
 name: sec-diff-scan
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report."
+updated: 2026-11-15
+description: "Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

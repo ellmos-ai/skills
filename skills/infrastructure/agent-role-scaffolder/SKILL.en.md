@@ -1,20 +1,11 @@
 ---
 name: agent-role-scaffolder
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-25
-updated: 2026-08-25
-description: >
-  Builds and verifies new agent roles inside the ellmos ecosystem: native
-  Claude Code subagents (durable role definitions) and Companion Workers
-  (SendMessage-reused instances for a ticket/task series). Formalizes
-  previously informal, hands-on knowledge from building agent roles
-  (ati-agent, bueroassistent, versicherungs-agent, etc.) into a reusable
-  scaffold-plus-verify workflow. Use this skill when a new role needs to be
-  created ("build a new agent role", "set up a subagent", "start a companion
-  worker") or an existing one needs to be checked against house conventions
-  ("is this agent set up correctly?").
+updated: 2026-11-15
+description: "Use this skill when a new role needs to be created (\"build a new agent role\", \"set up a subagent\", \"start a companion worker\") or an existing one needs to be checked against house conventions (\"is this agent set up correctly?\"). Builds and verifies new agent roles inside the ellmos ecosystem: native Claude Code subagents (durable role definitions) and Companion Workers (SendMessage-reused instances for a ticket/task series). Formalizes previously informal, hands-on knowledge from building agent roles (ati-agent, bueroassistent, versicherungs-agent, etc.) into a reusable scaffold-plus-verify workflow."
 visibility: public
 language: en
 standalone: true

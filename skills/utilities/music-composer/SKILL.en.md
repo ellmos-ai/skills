@@ -1,14 +1,11 @@
 ---
 name: music-composer
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: ellmos contributors
 created: 2026-07-31
-updated: 2026-07-31
-description: >
-  Compose video-synced background scores from a storyline JSON using local
-  waveform synthesis (numpy + ffmpeg). Styles: chiptune, ambient, electronic.
-  Deterministic, offline, no cloud service.
+updated: 2026-11-15
+description: "Use when background music should be composed for a video (e.g. 'background music for this video', 'soundtrack from a storyline', 'generate chiptune/ambient/electronic music'). Composes video-synced background scores from a storyline JSON using local waveform synthesis (numpy + ffmpeg); styles chiptune, ambient, electronic; deterministic, offline, no cloud service."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

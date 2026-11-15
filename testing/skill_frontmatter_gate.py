@@ -97,6 +97,32 @@ def skills_ohne_ausloeser(repo: Path) -> list[str]:
             ohne.append(str(md.parent.relative_to(repo)).replace("\\", "/"))
     return sorted(ohne)
 
+# Hinweis, kein Fehler (2026-11-15, T-20261115-110755565): Die Skill-Liste kuerzt jeden Eintrag (hier 300 Zeichen
+# eingestellt, Standard 1536) und laesst bei Ueberlauf ganze Beschreibungen weg, zuerst die der am seltensten
+# aufgerufenen Skills. Ein Ausloeser, der erst hinter dem Fenster steht, erreicht das Modell dann nicht. Quelle:
+# code.claude.com/docs/en/skills (Abschnitt "Skill descriptions are cut short"). Regel: docs/CONVENTIONS.md.
+AUSLOESER_FENSTER = 250
+
+
+def skills_ausloeser_zu_spaet(repo: Path, fenster: int = AUSLOESER_FENSTER) -> list[str]:
+    """Skill-Ordner, deren description einen Ausloeser nennt, aber erst NACH den ersten `fenster` Zeichen.
+
+    Skills ganz ohne Ausloeser meldet `skills_ohne_ausloeser`; hier stehen nur die uebrigen mit zu spaetem WANN.
+    """
+    zu_spaet = []
+    for md in gefundene_skill_dateien(repo):
+        if md.name != "SKILL.md":
+            continue
+        quelle = md.with_name("SKILL.en.md") if md.with_name("SKILL.en.md").exists() else md
+        split = split_frontmatter(quelle.read_text(encoding="utf-8", errors="replace"))
+        beschreibung = extract_scalar(split[0], "description") if split else None
+        if not beschreibung or not AUSLOESER.search(beschreibung):
+            continue
+        if not AUSLOESER.search(beschreibung[:fenster]):
+            zu_spaet.append(str(md.parent.relative_to(repo)).replace("\\", "/"))
+    return sorted(zu_spaet)
+
+
 TOP_KEY = re.compile(r"^([A-Za-z_][A-Za-z0-9_-]*):(.*)$")
 DESC_LINE = re.compile(r"^description:(.*)$")
 BLOCK_SCALAR_HEAD = re.compile(r"^description:\s*[>|][+-]?\s*$")
@@ -409,6 +435,17 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {pfad}")
         if len(ohne_ausloeser) > 10:
             print(f"  ... und {len(ohne_ausloeser) - 10} weitere")
+        print()
+
+    zu_spaet = skills_ausloeser_zu_spaet(repo)
+    if zu_spaet:
+        print(f"Hinweis (blockiert nicht): {len(zu_spaet)} Skill(s), deren Ausloeser erst nach den ersten "
+              f"{AUSLOESER_FENSTER} Zeichen der `description` steht -- docs/CONVENTIONS.md, Abschnitt "
+              "\"Beschreibung = Ausloeser\":")
+        for pfad in zu_spaet[:10]:
+            print(f"  {pfad}")
+        if len(zu_spaet) > 10:
+            print(f"  ... und {len(zu_spaet) - 10} weitere")
         print()
 
     if befunde:

@@ -1,23 +1,11 @@
 ---
 name: paveman
-version: 1.0.1
+version: 1.0.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-08-20
-description: >
-  Recognizes orders to shorten a rule or memory file ("shorten my
-  CLAUDE.md", "MEMORY.md is too long", "compress the docs without touching
-  the technical content", "this rule file gets truncated past the
-  character limit") and uses the module paveman for it — a deterministic,
-  model-free CLI tool for shortening prose in Markdown/text files, with a
-  dry run as the default, rollback and a strict protection validator for
-  paths, headings and code. Use this skill for sentences like "shorten
-  <file>", "this file is too long/gets truncated", "shrink this rule
-  file", "compress without changing the content", or whenever a rule/
-  memory file is noticeably hitting a character or line limit.
-
-# Compatibility
+updated: 2026-11-15
+description: "Use this skill for sentences like \"shorten <file>\", \"this file is too long/gets truncated\", \"shrink this rule file\", \"compress without changing the content\", or whenever a rule/ memory file is noticeably hitting a character or line limit. Recognizes orders to shorten a rule or memory file (\"shorten my CLAUDE.md\", \"MEMORY.md is too long\", \"compress the docs without touching the technical content\", \"this rule file gets truncated past the character limit\") and uses the module paveman for it — a deterministic, model-free CLI tool for shortening prose in Markdown/text files, with a dry run as the default, rollback and a strict protection validator for paths, headings and code."
 standalone: false
 anthropic_compatible: true
 bach_compatible: false

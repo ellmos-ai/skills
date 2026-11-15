@@ -1,24 +1,11 @@
 ---
 name: decision-path
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-09-13
-description: >
-  Builds a structured ASCII dependency graph (max 100 columns) for terminal
-  output from a set of pending and settled decisions. Evaluates nodes across five
-  fixed dimensions: sensible, recommended, user-typical (direction and
-  decision-avatar confidence coded separately), coherent, and contradictory;
-  edges carry relationship type and verification status. Relentlessly exposes
-  blockers, unlocked paths, execution orders, and conflicting recommendations.
-  Use for "which decisions depend on each other", "decision dependency graph",
-  "visualize decision path", "check contradictions between decisions", "sequence
-  of decisions", /decision-path. Do NOT use to first inventory decisions -- that's
-  decision-briefing; do NOT use to bundle the recommended overall concept for
-  sign-off -- that's decision-draw; do NOT use for compact five-part blocks with
-  options and pro/contra -- that's decision-shot; do NOT use to work out a single
-  complex choice with frameworks -- that's decide.
+updated: 2026-11-15
+description: "Use for \"which decisions depend on each other\", \"decision dependency graph\", \"visualize decision path\", \"check contradictions between decisions\", \"sequence of decisions\", /decision-path. Builds a structured ASCII dependency graph (max 100 columns) for terminal output from a set of pending and settled decisions. Evaluates nodes across five fixed dimensions: sensible, recommended, user-typical (direction and decision-avatar confidence coded separately), coherent, and contradictory; edges carry relationship type and verification status. Relentlessly exposes blockers, unlocked paths, execution orders, and conflicting recommendations. Do NOT use to first inventory decisions -- that's decision-briefing; do NOT use to bundle the recommended overall concept for sign-off -- that's decision-draw; do NOT use for compact five-part blocks with options and pro/contra -- that's decision-shot; do NOT use to work out a single complex choice with frameworks -- that's decide."
 visibility: public
 language: en
 standalone: true
