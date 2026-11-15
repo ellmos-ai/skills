@@ -46,7 +46,7 @@ nach dem Installer-Prinzip (schlanker Subskill statt Monolith). Referenziert die
 
 ## Quellen (nicht duplizieren)
 
-- **Familienliste:** `<USER_HOME>\OneDrive\.USR\SKILL-MAP.md` (kanonische Family-/Routing-Map).
+- **Familienliste:** `<USER_HOME>\OneDrive\.USR\docs\referenzen-und-architektur\system-und-ordnerkarten\SKILL-MAP.md` (kanonische Family-/Routing-Map).
 - **Inventar (Ist-Stand):** `skill-explorer/scripts/inventory_skills.py`.
 - **Router setzen/entfernen:** `skill-explorer/scripts/inject_family_header.py`.
 - **Config (welche Familien verlinkt):** `~/.claude/skills/skill-explorer/config.json`.

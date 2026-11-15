@@ -42,7 +42,7 @@ Keeps skill **families** up to date — without running the full audit cycle of 
 
 ## Sources (Do Not Duplicate)
 
-- **Family list:** `<USER_HOME>\OneDrive\.USR\SKILL-MAP.md` (canonical family / routing map).
+- **Family list:** `<USER_HOME>\OneDrive\.USR\docs\referenzen-und-architektur\system-und-ordnerkarten\SKILL-MAP.md` (canonical family / routing map).
 - **Inventory (current state):** `skill-explorer/scripts/inventory_skills.py`.
 - **Set/Remove router:** `skill-explorer/scripts/inject_family_header.py`.
 - **Config (which families are linked):** `~/.claude/skills/skill-explorer/config.json`.

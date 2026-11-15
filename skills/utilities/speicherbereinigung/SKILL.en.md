@@ -237,8 +237,8 @@ Written completion reports, evidence files and receipts (`Speicherbereinigung_*`
 e.g. `<Date>_Speicherbereinigung_<HOST>.md`, `*_Evidenz.json`, `*_Receipts.jsonl`)
 must be stored in the matching topic folder under `.USR`:
 
-- **Canonical storage path:** `<OneDrive>\.USR\SYSTEM\Speicherbereinigung\Speicherbereinigung_*`
-  (or `<OneDrive>\.USR\docs\SYSTEM\Speicherbereinigung\` or `<OneDrive>\.USR\.SYSTEM\Speicherbereinigung\`).
+- **Canonical storage path:** `<OneDrive>\.USR\docs\system-und-betrieb\speicherbereinigung\Speicherbereinigung_*`
+  (legacy paths `.USR\SYSTEM\Speicherbereinigung\` and `.USR\docs\SYSTEM\Speicherbereinigung\` have been retired).
 - **No flat root delivery:** Never store reports and receipts directly flat in the
   `.USR` root (delivery rule according to `ARCHITECTURE.md` and `avatar/USER.md`).
 

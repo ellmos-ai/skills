@@ -29,8 +29,23 @@ Schwache Evidenz darf Suche und Gruppierung auslösen, aber keine irreversible E
 | predecessor | belegte frühere Fassung mit Nachfolger | Archivkandidat |
 | active-log | wird noch geschrieben oder aktueller Lauf | nicht bewegen |
 | rotated-log | abgeschlossener Verlauf außerhalb Retention | Logarchivkandidat |
-| duplicate | gleicher Hash, aber Bedeutung/Referenzen noch prüfen | Review, nicht löschen |
+| duplicate | gleicher Hash; über Kanonik-Priorität (Zielcluster → Datum → Original vor `*-HOST-2`) auflösen | Prüf-Papierkorb (`_trash_review` / `fc_safe_delete`) |
+| same-name-diff-hash | gleicher Dateiname, aber anderer SHA-256-Hash | per Datums-/Kontext-Suffix disambiguieren, niemals überschreiben |
 | unknown | unlesbar oder widersprüchlich | Entscheidungsliste |
+
+## Themencluster-Kalibrierung & Duplikat-Kanonik
+
+- **Themenliste zuerst:** Vor dem Zuschnitt von Ordnern aus Verzeichnisnamen, sprechenden Dateinamen
+  und den ersten Überschriften/Zeilen generischer Dateien (`README.md`, `index.html`, `NOTIZ.md`,
+  `konzept.md`) eine Themenliste bilden.
+- **Granularitäts-Korridor:** Bei 100–1.000 Dateien sind **8–15 disjunkte Themencluster** auf
+  oberster Ebene der Richtwert. Unter 5 Cluster entstehen undifferenzierte Sammelbecken; über 20
+  Cluster zerfasert die Navigation. Cluster ab ~40–50 Dateien erhalten 3–6 thematische Unterordner.
+- **Kanonik-Tupel bei SHA-256-Gleichheit:** `(im_kanonischen_cluster, hat_explizites_datum,
+  ist_keine_cloud_konfliktkopie, kuerzerer_sauberer_name)`. Die höchstbewertete Datei bleibt; alle
+  anderen identischen Kopien gehen in den Prüf-Papierkorb.
+- **Schreiber-Kopplung:** Jede Ordner-Neuordnung prüft im Nachgang aktive Schreiber (Skripte,
+  Sidecars, Cronjobs, Steuerdateien) und stellt sie auf die neuen Clusterpfade um.
 
 ## Konfidenz
 

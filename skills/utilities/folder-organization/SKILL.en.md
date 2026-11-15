@@ -1,20 +1,21 @@
 ---
 name: folder-organization
-version: 1.1.0
+version: 1.2.0
 type: protocol
-author: Lukas Geiger + OpenAI Codex
+author: Lukas Geiger + OpenAI Codex + Gemini
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-11-10
 description: >
-  Organize folders and file collections semantically: discover local rules and the existing
-  taxonomy, classify files by meaning, preserve related sets, archive clear predecessor/successor
-  chains and logs, separate mixed current and obsolete content with Cut-and-Clue, and stage deletion
-  candidates in a reversible review trash folder. Use for “clean up this folder”, “file these
-  documents sensibly”, “archive old versions”, “clean up logs”, “separate outdated and valid
-  content”, or when cleanup reveals secret files or secrets in cloud storage. The skill works
-  standalone and provider-neutrally; compatible modules and file services
-  are optional accelerators. Use a rule-based file automation for fully specified recurring
-  collection rules and a pipeline/project optimizer for redesigning an entire project architecture.
+  Organize folders and file collections semantically: discover local rules and taxonomy, treat
+  the inventory as a topic list to group files into an optimally calibrated number of thematic
+  clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/
+  successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two
+  stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in
+  a reversible review trash folder, and update root control files and active upstream writers.
+  Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”,
+  “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”,
+  “separate outdated and valid content”, or cloud secret localization. Standalone and provider-
+  neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture.
 
 standalone: true
 anthropic_compatible: true
@@ -22,7 +23,7 @@ bach_compatible: true
 bach_origin: false
 
 category: utilities
-tags: [folders, files, sorting, archiving, versions, logs, secrets, cloud, cut-and-clue, cleanup, standalone]
+tags: [folders, files, sorting, topic-clusters, duplicates, archiving, versions, logs, secrets, cloud, cut-and-clue, cleanup, standalone]
 language: en
 status: active
 visibility: public
@@ -94,9 +95,13 @@ Never upload material externally merely because a local reader is unavailable.
 - Choose the smallest common filing root; do not scan an entire home or cloud root for convenience.
 - Read controlling files at and above the root: agent rules, READMEs, naming rules, registries,
   manifests, and locks.
-- Record the mode: one-time semantic organization, archive maintenance, log maintenance,
-  Cut-and-Clue, or preparation of a recurring rule.
-- Existing target folders and their observed use outweigh an invented ideal taxonomy.
+- Record the mode: one-time semantic organization, **topic-cluster synthesis (consolidating
+  grown/competing subfolders)**, archive maintenance, log maintenance, Cut-and-Clue, or preparation
+  of a recurring rule.
+- Existing target folders and their observed use outweigh an invented ideal taxonomy. However, when
+  competing historical taxonomies from earlier cleanup passes coexist side by side (e.g. parallel
+  `UPPERCASE` and `lowercase` folders or mixed-language duplicate directories), reconcile them into
+  **one** consistent canonical scheme.
 
 ### 2. Apply the secrets policy before content access
 
@@ -119,9 +124,17 @@ until the policy decision is resolved.
 
 ### 3. Inventory files and relationships
 
-Record path, size, modification time, type, and proportionate SHA-256 hashes. Read content or
-metadata for ambiguous documents. Unreadable binaries remain unresolved; name and extension alone
-never justify an irreversible action.
+Record path, size, modification time, type, and proportionate SHA-256 hashes. Exclude transient
+bytecode and test caches (`__pycache__`, `.pytest_cache`) prior to hashing and stage them directly
+for cleanup. For ambiguous or generic filenames (`README.md`, `index.html`, `NOTIZ.md`,
+`concept.md`, `draft.md`, bare dates/numbers), inspect the first heading, opening lines, or
+metadata. Unreadable binaries remain unresolved; name and extension alone never justify an
+irreversible action.
+
+**3b. Treat the directory and file list as a topic list first:**
+Extract a flat **topic list** from existing folder names, descriptive filenames, and sampled
+document headings/opening lines before fixing target directories. This surfaces thematic links
+previously scattered across legacy folders or the root.
 
 Treat related files as sets: language editions, source/export, Markdown/PDF, document/assets,
 data/script/result, attachment/primary file, and predecessor/successor. Check links, manifests,
@@ -129,11 +142,23 @@ includes, code references, and registries before moving anything.
 
 For difficult collections, read [`references/heuristics.md`](references/heuristics.md).
 
-### 4. Plan structure and item decisions
+### 4. Plan structure, topic clusters, and item decisions
 
-Derive the target structure from purpose, existing rules, and observed clusters. The root is a
-routing surface, not permanent storage. Do not create a generic miscellaneous folder for unresolved
-items; use a review group or decision list.
+Derive the target structure from purpose, existing rules, and the extracted topic list. The root is
+a routing surface, not permanent storage. Do not create a generic miscellaneous folder for
+unresolved items; use a review group or decision list.
+
+**4a. Calibrate optimal cluster count & reconcile legacy taxonomies:**
+- **Find the sweet spot:** Too many clusters (e.g. 30+ micro-folders with 1–3 files each) dilute
+  navigation; too few (3–4 catch-all folders) under-differentiate. For medium to large collections
+  (100–1,000 files), **8–15 disjoint top-level thematic clusters** in consistent `kebab-case` (or
+  the root's prescribed naming convention) work best.
+- **Sub-divide large clusters:** When a thematic cluster exceeds ~40–50 files with distinct
+  sub-domains (e.g. separate research projects, sub-modules, or document types), introduce 3–6
+  clean subdirectories inside that cluster.
+- **Reconcile competing taxonomies:** Merge parallel legacy folders covering the same topic (e.g.
+  `FORSCHUNG/` and `forschung/`, `BACH/` and `bach-und-ocean/`) completely into the canonical
+  cluster.
 
 Each proposed change records source, target/action (`keep`, `move`, `rename`, `archive`,
 `trash-review`, `cut-and-clue`, or `review`), evidence, confidence, and affected relationships.
@@ -166,20 +191,59 @@ Read [`references/cut-and-clue.md`](references/cut-and-clue.md) for marker synta
 sidecars, and history preservation. `[sic]` marks a knowingly quoted error; use `OUTDATED` or
 `SUPERSEDED` for obsolete material.
 
-### 7. Stage deletion candidates for review
+### 7. Stage deletion candidates and resolve duplicates in two stages
 
-Move deletion candidates into `_trash_review/<run-id>/` inside the root. Preserve relative paths and
-write `MANIFEST.md` or `RESTORE.json` with source, staged path, hash, reason, and timestamp. Never
+Move deletion candidates into `_trash_review/<run-id>/` inside the root or remove them via the
+configured reversible trash adapter (`fc_safe_delete`). Preserve relative paths and write
+`MANIFEST.md` or `RESTORE.json` with source, staged path, hash, reason, and timestamp. Never
 permanently delete the folder automatically. Place trash and archives outside watched inboxes to
 avoid self-feeding loops.
 
-### 8. Execute and verify
+**7b. Two-stage duplicate resolution (Exact SHA-256 duplicates vs. same-name collisions):**
+1. **Stage A — Identical SHA-256 hash (true duplicate):** Keep exactly **one** canonical file using
+   this deterministic priority order:
+   - **(1) Canonical target cluster** over root storage or legacy duplicate folders,
+   - **(2) Explicit date stamp in the filename** (`*_YYYY-MM-DD.*`) over undated shadow copies,
+   - **(3) Clean original name** over cloud/OneDrive conflict copies (`*-<HOST>-2..N.*`, `*(1).*`).
+   Stage all remaining byte-identical copies and obsolete 1-line stub READMEs from dissolved legacy
+   folders reversibly in the review trash (`_trash_review` / `fc_safe_delete`).
+2. **Stage B — Identical filename, but different SHA-256 hash:** Never overwrite or delete as a
+   false duplicate! Disambiguate by date or context suffix (`<stem>_<YYYY-MM-DD>.<ext>` or
+   `<stem>_<subproject>.<ext>`) and retain both files in the target cluster (or evaluate as a
+   version chain under step 5).
+
+### 8. Execute, verify, and update upstream writers
 
 - Recheck source, hash, destination, and destination absence immediately before each action.
 - Never overwrite; block collisions or use an explicitly planned new name.
-- Read back targets, compare hashes, search references for stale paths, and update affected registers.
-- Remove only empty directories created by this run. Keep a rollback path or manifest for every move.
+- Read back targets, compare hashes, confirm 0 remaining SHA-256 duplicates (`fc_detect_duplicates`
+  or hash scan), search references for stale paths, and update affected registers.
+- Remove dissolved empty legacy directories. Keep a rollback path or manifest for every move.
 - Re-index CLUE markers when a local indexer exists; otherwise they remain visible ordinary text.
+
+**8b. Control files & writer back-propagation (Upstream protection against re-pollution):**
+A cleaned folder re-accumulates clutter within hours if automations, cronjobs, sidecars, or agent
+rules continue writing to legacy paths or directly into the root:
+- **Update root control files:** Bring `CLAUDE.md`, `ARCHITECTURE.md` (including Mermaid lint),
+  `README.md`/`LIESMICH.txt`, and `.MOVED.md` pointers up to the new cluster topology.
+- **Audit and patch active writers:** Search scripts, sidecar configs, scheduler definitions, and
+  global delivery rules (`USER.md`, `OneDrive/CLAUDE.md`) for references to the cleaned directory.
+  Point local writers to the new thematic clusters and eliminate dual "dated + undated" shadow
+  writes, which inevitably trigger `*-HOST-2` cloud conflict copies.
+- **Cross-actor / cross-host order:** For writers on other hosts or managed by other agents, file an
+  explicit adjustment order in the shared sync channel (`.SYNC/agents/AUFTRAG_*.md`).
+
+**8c. Pitfalls on Windows & Cloud-Sync drives (NTFS / OneDrive):**
+- **NTFS case-insensitivity on folder renames:** Renaming a directory from `UPPERCASE` to
+  `lowercase` (e.g. `FORSCHUNG` → `forschung`) on Windows/NTFS keeps the old uppercase directory
+  name if files are moved directly. Always perform a **two-step rename** via a temporary intermediate
+  name (`FORSCHUNG` → `FORSCHUNG__tmp` → `forschung`).
+- **OneDrive `WinError 5 (Access Denied)` on empty legacy directories:** When the cloud filter
+  driver (`cldflt`) blocks `rmdir()` on empty directories, move the empty directories via
+  `os.replace` into a temporary staging folder inside the same root and remove that staging folder
+  once via `fc_safe_delete`.
+- **Dehydrated cloud cache artifacts (`Errno 22 Invalid argument`):** Exclude `__pycache__` and
+  `.pytest_cache` before the SHA-256 pass so unsynced cloud cache files do not raise read errors.
 
 ## Short examples
 
@@ -213,6 +277,18 @@ or sensitive context. A plan is not an executed cleanup.
 - Folder flattening: only when flattening is the explicitly requested transformation.
 
 ## Changelog
+
+### 1.2.0 (2026-11-10)
+
+- Added topic-list clustering and cluster count calibration (sweet spot of 8–15 disjoint thematic
+  clusters, sub-clustering for clusters > 40 files, reconciliation of competing legacy taxonomies)
+  in steps 1, 3b, and 4a.
+- Added two-stage duplicate resolution in step 7b: deterministic canonical priority for exact
+  SHA-256 matches (target cluster → date stamp → clean original name over cloud conflict copies) vs.
+  date/context disambiguation for same-name files with different hashes.
+- Added upstream writer back-propagation (root control files, local scripts/sidecars, `.SYNC`
+  adjustment order) and Windows/OneDrive NTFS pitfalls (two-step case rename, staging empty folders
+  on `WinError 5`, excluding dehydrated cache artifacts before SHA-256) in steps 8b and 8c.
 
 ### 1.1.0 (2026-08-24)
 

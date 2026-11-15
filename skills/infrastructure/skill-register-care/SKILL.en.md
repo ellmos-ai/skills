@@ -1,10 +1,10 @@
 ---
 name: skill-register-care
-version: 0.2.0
+version: 0.2.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-09-20
+updated: 2026-11-10
 description: >
   Maintenance skill that keeps the three-part skill register consistent (code-skill-index catalogs,
   skill index, SKILL-MAP family/routing map). Use this skill for a drift check between the real skill
@@ -44,7 +44,7 @@ Keeps the **register** drift-free. The register consists of three interconnected
 |---|---|---|
 | `~/.claude/skills/code-skill-index/references/catalog-*.md` | category catalogs | curated, by hand |
 | `<USER_HOME>/OneDrive/.SYNC/CLAUDE-CODE-SKILLS.md` | cross-system index (the only skill view Claude Desktop has) | **automated**, see below |
-| `<USER_HOME>/OneDrive/.USR/SKILL-MAP.md` | family / routing map | curated, by hand |
+| `<USER_HOME>/OneDrive/.USR/docs/referenzen-und-architektur/system-und-ordnerkarten/SKILL-MAP.md` | family / routing map | curated, by hand |
 
 ## Automated: the cross-system index
 
@@ -101,6 +101,10 @@ Cross-check the output against the register artifacts (manually or via grep).
   the seed of the next silent drift.
 
 ## Changelog
+
+### 0.2.1 (2026-11-10)
+- Updated `SKILL-MAP.md` path to the new `.USR/docs` cluster structure
+  (`<USER_HOME>/OneDrive/.USR/docs/referenzen-und-architektur/system-und-ordnerkarten/SKILL-MAP.md`).
 
 ### 0.2.0 (2026-09-20)
 - Cross-system index `CLAUDE-CODE-SKILLS.md` moved onto `.SYNC/scripts/skill_index_care.py`

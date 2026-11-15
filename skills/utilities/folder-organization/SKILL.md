@@ -1,22 +1,21 @@
 ---
 name: folder-organization
-version: 1.1.0
+version: 1.2.0
 type: protocol
-author: Lukas Geiger + OpenAI Codex
+author: Lukas Geiger + OpenAI Codex + Gemini
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-11-10
 description: >
-  Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie
-  erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare
-  Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte
-  per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen.
-  Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen
-  archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim
-  Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen.
-  Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder
-  Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig
-  definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation,
-  für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden.
+  Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien
+  als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien
+  zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs
+  archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs.
+  Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen
+  sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“,
+  „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“,
+  „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und
+  gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral;
+  für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen.
 
 standalone: true
 anthropic_compatible: true
@@ -24,7 +23,7 @@ bach_compatible: true
 bach_origin: false
 
 category: utilities
-tags: [ordner, dateien, sortierung, archivierung, versionen, logs, geheimnisse, cloud, cut-and-clue, cleanup, standalone]
+tags: [ordner, dateien, sortierung, themencluster, dupletten, archivierung, versionen, logs, geheimnisse, cloud, cut-and-clue, cleanup, standalone]
 language: de
 status: active
 visibility: public
@@ -101,9 +100,13 @@ ein lokaler Reader fehlt.
   Cloud-Root scannen.
 - Steuerdateien im Root und aufwärts lesen, etwa `AGENTS.md`, `CLAUDE.md`, `README.md`,
   `START.md`, Namensregeln, Register, Manifeste und Locks.
-- Modus festhalten: einmalige semantische Ordnung, Archivpflege, Logpflege, Cut-and-Clue oder
+- Modus festhalten: einmalige semantische Ordnung, **Themencluster-Synthese (Konsolidierung
+  gewachsener/konkurrierender Unterordner)**, Archivpflege, Logpflege, Cut-and-Clue oder
   Vorbereitung einer wiederkehrenden Regel.
 - Bestehende Zielordner und ihre reale Verwendung sind stärker als eine erfundene Idealtaxonomie.
+  Liegen jedoch konkurrierende historische Taxonomien aus früheren Aufräumläufen nebeneinander
+  (z. B. parallele `GROSSBUCHSTABEN`- und `kleinbuchstaben`-Ordner oder deutsch/englisch gemischte
+  Dubletten-Ordner), werden sie in **ein** konsistentes kanonisches Schema zusammengeführt.
 
 ### 2. Geheimnis-Policy vor jedem Inhaltszugriff
 
@@ -126,9 +129,18 @@ zur Policy-Entscheidung aus normaler Sortierung, Archivierung, Cut-and-Clue und 
 
 ### 3. Bestand und Beziehungen erfassen
 
-Erfasse Pfad, Größe, Änderungszeit, Typ und – soweit verhältnismäßig – SHA-256. Lies bei
-mehrdeutigen Dokumenten Inhalt oder Metadaten. Unlesbare Binärdateien bleiben ausdrücklich
-ungeklärt; Dateiname und Endung allein rechtfertigen keine irreversible Aktion.
+Erfasse Pfad, Größe, Änderungszeit, Typ und – soweit verhältnismäßig – SHA-256. Klammere flüchtige
+Bytecode- und Test-Caches (`__pycache__`, `.pytest_cache`) vor dem Hashing aus und merke sie direkt
+für die Bereinigung vor. Lies bei mehrdeutigen oder nichtssagenden Dateinamen (`README.md`,
+`index.html`, `NOTIZ.md`, `konzept.md`, `entwurf.md`, reine Datums-/Nummernnamen) die erste
+Überschrift bzw. die ersten Inhaltszeilen oder Metadaten. Unlesbare Binärdateien bleiben
+ausdrücklich ungeklärt; Dateiname und Endung allein rechtfertigen keine irreversible Aktion.
+
+**3b. Verzeichnis- und Dateiliste als Themenliste behandeln:**
+Extrahiere aus den bestehenden Ordnernamen, sprechenden Dateinamen und den gelesenen
+Dokumenttiteln/Anfangszeilen zunächst eine flache **Themenliste**, bevor Zielordner festgelegt
+werden. So werden thematische Zusammenhänge sichtbar, die zuvor über verschiedene Altordner oder
+den Root verstreut waren.
 
 Behandle zusammengehörige Dateien als Set: Sprachfassungen, Quelle/Export, Markdown/PDF,
 Dokument/Assets, Daten/Skript/Ergebnis, Anhang/Hauptdatei sowie Vorgänger/Nachfolger. Prüfe vor
@@ -137,11 +149,23 @@ einer Verschiebung Links, Manifeste, Includes, Codeverweise und Register.
 Für die detaillierte Evidenz- und Konfidenzmatrix bei schwierigen Beständen
 [`references/heuristics.md`](references/heuristics.md) lesen.
 
-### 4. Zielstruktur und Einzelentscheidungen planen
+### 4. Zielstruktur, Themencluster und Einzelentscheidungen planen
 
-Die Zielstruktur aus Zweck, bestehenden Regeln und tatsächlichen Clustern ableiten. Der Root ist
+Die Zielstruktur aus Zweck, bestehenden Regeln und der erhobenen Themenliste ableiten. Der Root ist
 eine Routingfläche, kein Dauerlager. Keine pauschalen Ordner wie `_Sonstiges` anlegen, wenn der Fund
 inhaltlich ungeklärt ist; dafür `review/` oder eine Entscheidungsliste verwenden.
+
+**4a. Optimale Cluster-Anzahl kalibrieren & Unterordner schneiden:**
+- **Sweet Spot wählen:** Zu viele Cluster (z. B. 30+ Mikro-Ordner mit je 1–3 Dateien) verwässern die
+  Navigation; zu wenige (3–4 Großordner) differenzieren zu wenig. Für mittlere bis große Bestände
+  (100–1.000 Dateien) bewähren sich typischerweise **8–15 disjunkte Themencluster** auf oberster
+  Ebene in einheitlichem `kebab-case` (oder der im Root vorgeschriebenen Namenskonvention).
+- **Binnengliederung großer Cluster:** Überschreitet ein Themencluster ~40–50 Dateien mit klar
+  trennbaren Teilgebieten (z. B. verschiedene Forschungsprojekte, Teilmodule oder Dokumenttypen),
+  innerhalb des Themenordners 3–6 saubere Unterordner anlegen.
+- **Taxonomie-Versöhnung:** Parallele Altordner desselben Themas (z. B. `FORSCHUNG/` und
+  `forschung/`, `BACH/` und `bach-und-ocean/`) restlos in den gewählten kanonischen Cluster
+  zusammenführen.
 
 Jede geplante Änderung enthält mindestens:
 
@@ -184,9 +208,10 @@ Die Marker, Regeln für `[sic]`, Binärdateien und den Schutz vor Geschichtsverl
 [`references/cut-and-clue.md`](references/cut-and-clue.md). `[sic]` kennzeichnet einen bewusst
 zitierten Fehler; für Überholtheit `OUTDATED` oder `SUPERSEDED` verwenden.
 
-### 7. Prüf-Papierkorb statt Löschen
+### 7. Prüf-Papierkorb und zweistufige Duplikat-Auflösung
 
-Löschkandidaten innerhalb des Roots in einen Laufordner wie `_trash_review/<run-id>/` verschieben.
+Löschkandidaten innerhalb des Roots in einen Laufordner wie `_trash_review/<run-id>/` verschieben
+oder über den konfigurierten reversiblen Papierkorb-Adapter (`fc_safe_delete`) entsorgen.
 Relative Struktur erhalten und `MANIFEST.md` oder `RESTORE.json` mit Quelle, neuem Pfad, Hash,
 Grund und Zeitpunkt schreiben. Nichts daraus automatisch endgültig löschen. So kann der Nutzer den
 gesamten Lauf prüfen und später selbst entfernen oder zurückrollen.
@@ -194,16 +219,59 @@ gesamten Lauf prüfen und später selbst entfernen oder zurückrollen.
 Liegt eine überwachte Eingangsablage vor, Papierkorb und Archiv außerhalb ihres Scanbereichs
 anlegen, damit keine Selbstfütterung entsteht.
 
-### 8. Ausführen und nachweisen
+**7b. Zweistufige Duplikat-Auflösung (Exakte SHA-256-Dupletten vs. Namensgleichheit):**
+1. **Stufe A — Gleicher SHA-256-Hash (echte Duplette):** Existieren mehrere byteidentische Kopien,
+   bleibt genau **eine** kanonische Datei erhalten nach folgender deterministischer Priorität:
+   - **(1) Kanonischer Zielordner** vor Root-Ablage oder veraltetem Doppelordner,
+   - **(2) Expliziter Datumsstempel im Dateinamen** (`*_YYYY-MM-DD.*`) vor undatierter Schattenkopie,
+   - **(3) Sauberer Originalname** vor Cloud-/OneDrive-Konfliktkopien (`*-<HOST>-2..N.*`, `*(1).*`).
+   Alle übrigen identischen Kopien sowie inhaltsleere 1-Zeilen-Stub-READMEs aus aufgelösten
+   Altordnern werden reversibel in den Prüf-Papierkorb (`_trash_review` / `fc_safe_delete`) gelegt.
+2. **Stufe B — Gleicher Dateiname, aber verschiedener SHA-256-Hash:** Niemals überschreiben oder als
+   vermeintliche Duplette löschen! Stattdessen inhaltlich bzw. zeitlich **disambiguieren** (z. B.
+   durch Anhängen des Änderungs-/Inhaltsdatums `<stamm>_<YYYY-MM-DD>.<ext>` oder der Herkunft
+   `<stamm>_<teilprojekt>.<ext>`) und beide Stände im Zielcluster erhalten bzw. nach Schritt 5 als
+   belegte Versionsreihe behandeln.
+
+### 8. Ausführen, nachweisen und Schreiber nachziehen
 
 - Direkt vor jeder Aktion Quelle, Hash, Ziel und Ziel-Nichtvorhandensein erneut prüfen.
 - Niemals überschreiben; bei Kollision blockieren oder einen ausdrücklich geplanten neuen Namen
   verwenden.
-- Nach dem Lauf Zielbestand lesen, Hashes vergleichen, alte Pfadnamen in Referenzen suchen und
-  betroffene Register aktualisieren.
-- Nur selbst erzeugte leere Ordner entfernen. Für jede Mutation Rückweg oder Manifest erhalten.
+- Nach dem Lauf Zielbestand lesen, Hashes vergleichen, mit einem Duplikat-Check (`fc_detect_duplicates`
+  oder Hash-Scan) 0 verbleibende SHA-256-Dupletten bestätigen, alte Pfadnamen in Referenzen suchen
+  und betroffene Register aktualisieren.
+- Aufgelöste leere Altordner entfernen. Für jede Mutation Rückweg oder Manifest erhalten.
 - CLUE-Markierungen bei vorhandenem lokalen Indexer neu indizieren; ohne Indexer bleiben sie als
   normaler, auffälliger Text wirksam.
+
+**8b. Steuerdateien & Schreiber-Rückverfolgung (Upstream-Schutz gegen Neu-Vermüllung):**
+Ein aufgeräumter Ordner vermüllt binnen Stunden erneut, wenn Automationen, Cronjobs, Sidecars oder
+Agenten-Regeln weiter in die alten Pfade oder direkt in den Root schreiben:
+- **Steuerdateien im Root aktualisieren:** `CLAUDE.md`, `ARCHITECTURE.md` (inkl. Mermaid-Lint),
+  `README.md`/`LIESMICH.txt` und `.MOVED.md`-Wegweiser auf die neue Cluster-Topologie bringen.
+- **Aktive Schreiber ermitteln und umstellen:** Per Volltextsuche in Skripten, Sidecars,
+  Scheduler-Definitionen und globalen Auslieferungsregeln (`USER.md`, `OneDrive/CLAUDE.md`) prüfen,
+  wer in den bereinigten Ordner schreibt. Lokale Pfade sofort auf die neuen Themencluster umstellen
+  und das parallele Schreiben undatierter Schattenkopien (neben datierten Berichten) abstellen, da
+  dies auf Cloud-Drives zwangsläufig `*-HOST-2`-Konfliktkopien erzeugt.
+- **Cross-Actor-/Cross-Host-Auftrag:** Können Schreiber auf anderen Hosts oder von anderen Agenten
+  nicht direkt gepatcht werden, einen verbindlichen Anpassungsauftrag im gemeinsamen Sync-Kanal
+  (`.SYNC/agents/AUFTRAG_*.md`) hinterlegen.
+
+**8c. Fallstricke auf Windows & Cloud-Sync-Laufwerken (NTFS / OneDrive):**
+- **NTFS Case-Insensitivity bei Ordner-Umbenennungen:** Soll ein Ordner von `GROSSBUCHSTABEN` auf
+  `kleinbuchstaben` umgestellt werden (z. B. `FORSCHUNG` → `forschung`), erkennt Windows/NTFS den
+  Zielpfad als bereits existierend und behält die alte Großschreibung bei. Immer einen
+  **Zwei-Schritt-Rename** über einen temporären Zwischennamen (`FORSCHUNG` → `FORSCHUNG__tmp` →
+  `forschung`) ausführen.
+- **OneDrive `WinError 5 (Zugriff verweigert)` beim Löschen leerer Altordner:** Blockiert der
+  Cloud-Filtertreiber (`cldflt`) `rmdir()` auf leeren Verzeichnissen, die leeren Ordner per
+  `os.replace` in einen temporären Staging-Ordner innerhalb desselben Roots verschieben und diesen
+  gesammelt per `fc_safe_delete` entfernen.
+- **Dehydrierte Cloud-Cache-Dateien (`Errno 22 Invalid argument`):** Vor dem SHA-256-Scan
+  `__pycache__` und `.pytest_cache` ausklammern, da nicht-synchronisierte Cache-Artefakte in
+  Cloud-Ordnern Lese-Exceptions werfen.
 
 ## Kurzbeispiele
 
@@ -240,6 +308,18 @@ und vorgeschlagene wiederkehrende Regeln. Eine Planung ist keine ausgeführte Or
 - Folder-Flattening: nur wenn die ausdrücklich gewünschte Transformation das Einebnen ist.
 
 ## Changelog
+
+### 1.2.0 (2026-11-10)
+
+- Themenlisten-Clustering und Cluster-Kalibrierung (Sweet Spot 8–15 disjunkte Themencluster,
+  Binnengliederung großer Cluster ab ~40 Dateien, Zusammenführung konkurrierender Alt-Taxonomien)
+  in Schritt 1, 3b und 4a ergänzt.
+- Zweistufige Duplikat-Auflösung in Schritt 7b ergänzt: deterministische Kanonik-Priorität bei
+  exakter SHA-256-Gleichheit (Zielordner → Datumsstempel → Originalname vor Cloud-Konfliktkopie)
+  gegenüber inhaltlich/zeitlicher Disambiguierung bei Namensgleichheit mit verschiedenem Hash.
+- Schreiber-Rückverfolgung (Upstream-Schutz: Steuerdateien, lokale Skripte/Sidecars, `.SYNC`-Auftrag)
+  und Windows-/OneDrive-NTFS-Fallstricke (Zwei-Schritt-Case-Rename, Staging leerer Ordner bei
+  `WinError 5`, Ausklammern dehydrierter Cache-Artefakte vor SHA-256) in Schritt 8b/8c ergänzt.
 
 ### 1.1.0 (2026-08-24)
 

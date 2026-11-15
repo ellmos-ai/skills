@@ -3119,7 +3119,7 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/tidy-up/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "status": "active",
       "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.",
       "languages": [
@@ -5194,7 +5194,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-finder/SKILL.md",
-      "version": "0.9.0",
+      "version": "0.11.0",
       "status": "active",
       "description": "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer).",
       "languages": [
@@ -5250,7 +5250,7 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-register-care/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "status": "active",
       "description": "Pflege-Skill, der das dreiteilige Skill-Register konsistent hält (code-skill-index-Kataloge, Skill-Index, SKILL-MAP Family-/Routing-Map). Nutze diesen Skill für einen Drift-Check zwischen dem realen Skill-Inventar und dem dokumentierten Register: fehlende oder zu viele Einträge melden, Counts korrigieren, Stand-Datum setzen. Auch auslösen bei „Skill-Register pflegen\", „Index aktualisieren\", „Register-Drift prüfen\", „welche Skills fehlen in der Map\".",
       "languages": [
@@ -7627,9 +7627,9 @@
       "type": "protocol",
       "category": "utilities",
       "path": "skills/utilities/folder-organization/SKILL.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "status": "active",
-      "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen. Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen. Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation, für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden.",
+      "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen.",
       "languages": [
         "de",
         "en"
@@ -7639,13 +7639,13 @@
           "language": "de",
           "path": "skills/utilities/folder-organization/SKILL.md",
           "title": "Folder Organization",
-          "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und vorhandene Taxonomie erkennen, Dateien inhaltlich zuordnen, zusammengehörige Sets erhalten, klare Vorgänger-/Nachfolgerreihen und Logs archivieren, gemischte gültige und überholte Inhalte per Cut-and-Clue trennen und Löschkandidaten reversibel in einen Prüf-Papierkorb legen. Nutze diesen Skill bei „Ordner aufräumen“, „Dateien sinnvoll einsortieren“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder wenn beim Aufräumen Geheimnisdateien beziehungsweise Geheimnisse in einer Cloud-Ablage auffallen. Er funktioniert anbieter- und nutzerneutral allein; erkannte kompatible Module oder Dateidienste werden nur als optionale Beschleuniger genutzt. Für bereits vollständig definierte wiederkehrende Sammelregeln stattdessen eine regelbasierte Datei-Automation, für den Umbau einer ganzen Projektarchitektur einen Pipeline-/Projekt-Optimizer verwenden."
+          "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen."
         },
         {
           "language": "en",
           "path": "skills/utilities/folder-organization/SKILL.en.md",
           "title": "Folder Organization",
-          "description": "Organize folders and file collections semantically: discover local rules and the existing taxonomy, classify files by meaning, preserve related sets, archive clear predecessor/successor chains and logs, separate mixed current and obsolete content with Cut-and-Clue, and stage deletion candidates in a reversible review trash folder. Use for “clean up this folder”, “file these documents sensibly”, “archive old versions”, “clean up logs”, “separate outdated and valid content”, or when cleanup reveals secret files or secrets in cloud storage. The skill works standalone and provider-neutrally; compatible modules and file services are optional accelerators. Use a rule-based file automation for fully specified recurring collection rules and a pipeline/project optimizer for redesigning an entire project architecture."
+          "description": "Organize folders and file collections semantically: discover local rules and taxonomy, treat the inventory as a topic list to group files into an optimally calibrated number of thematic clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/ successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in a reversible review trash folder, and update root control files and active upstream writers. Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”, “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”, “separate outdated and valid content”, or cloud secret localization. Standalone and provider- neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture."
         }
       ]
     },
