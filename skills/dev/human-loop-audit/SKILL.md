@@ -1,11 +1,22 @@
 ---
 name: human-loop-audit
-version: 1.0.1
+version: 1.0.0
 type: skill
 author: Lukas Geiger
 created: 2026-08-18
-updated: 2026-11-15
-description: "Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen."
+updated: 2026-08-18
+description: >
+  Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der
+  User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das
+  nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen,
+  Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze
+  diesen Skill bei "human-loop-audit", "lass uns die Apps im Reißverschluss durchtesten",
+  "ich teste, du wertest aus und reparierst", oder wenn eine Reihe von GUIs/Produkten
+  gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen
+  münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt
+  (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.
+
+# Kompatibilitaet
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

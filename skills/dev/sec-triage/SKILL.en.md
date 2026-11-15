@@ -1,11 +1,11 @@
 ---
 name: sec-triage
-version: 0.1.1
+version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-15
-description: "Use for 'classify these scan results', 'prioritise Dependabot alerts', 'import code scanning findings', 'sort the security finding backlog'. Converts existing findings (scanner reports, SARIF, GitHub code scanning, Dependabot, tickets) into the findings.json format of the ellmos security family, de-duplicates them by id, sets severity and priority against the repository's security policy (SECURITY.md) and links tickets. Static evaluation only. Finding new vulnerabilities: sec-scan. Refuting or reproducing: sec-validate. Report: sec-report."
+updated: 2026-10-31
+description: "Converts existing findings (scanner reports, SARIF, GitHub code scanning, Dependabot, tickets) into the findings.json format of the ellmos security family, de-duplicates them by id, sets severity and priority against the repository's security policy (SECURITY.md) and links tickets. Static evaluation only. Use for 'classify these scan results', 'prioritise Dependabot alerts', 'import code scanning findings', 'sort the security finding backlog'. Finding new vulnerabilities: sec-scan. Refuting or reproducing: sec-validate. Report: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

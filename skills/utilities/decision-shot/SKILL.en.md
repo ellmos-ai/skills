@@ -1,11 +1,25 @@
 ---
 name: decision-shot
-version: 1.1.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-15
-description: "Use this skill for \"give me that short with pro/con and a recommendation\", \"executive summary of the decision\", \"short context on <topic>\", \"summarize decision X in a short form\", /decision-shot, or whenever a result should be handed to someone who only needs the essence, not the full derivation. Extremely short, substantial output FORMAT for ONE decision or group of decisions, when the analysis behind it already exists (produced in chat, from `decide`, from `decision-briefing`, from a ticket or a document): context in 2-3 lines, pro/con per option as bullet points in paveman/caveman-reduced style, talking points, a justified recommendation, and a path/link to the full analysis for complete follow-up reading. Do NOT use it to COLLECT many open decisions and poll them by letter -- that's decision-briefing; do NOT use it to first ANALYZE a decision -- that's decide. decision-shot presupposes a finished analysis and only compresses its presentation."
+updated: 2026-09-09
+description: >
+  Extremely short, substantial output FORMAT for ONE decision or group of
+  decisions, when the analysis behind it already exists (produced in chat,
+  from `decide`, from `decision-briefing`, from a ticket or a document):
+  context in 2-3 lines, pro/con per option as bullet points in
+  paveman/caveman-reduced style, talking points, a justified recommendation,
+  and a path/link to the full analysis for complete follow-up reading. Use
+  this skill for "give me that short with pro/con and a recommendation",
+  "executive summary of the decision", "short context on <topic>",
+  "summarize decision X in a short form", /decision-shot, or whenever a
+  result should be handed to someone who only needs the essence, not the
+  full derivation. Do NOT use it to COLLECT many open decisions and poll
+  them by letter -- that's decision-briefing; do NOT use it to first ANALYZE
+  a decision -- that's decide. decision-shot presupposes a finished analysis
+  and only compresses its presentation.
 visibility: public
 language: en
 standalone: true

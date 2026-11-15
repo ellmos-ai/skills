@@ -1,11 +1,12 @@
 ---
 name: software-testing
-version: 1.0.2
+version: 1.0.1
 type: knowledge-protocol
 author: Lukas Geiger
 created: 2026-08-22
-updated: 2026-11-15
-description: "Use this skill ALWAYS when tests are to be written, planned, prioritized or assessed — for \"write tests\", \"test strategy\", \"test plan\", \"test concept\", \"what/how should I test\", \"which tests are missing\", \"improve test coverage\", \"set up QA\", questions about regression/smoke/sanity/load/stress/security tests, or when setting up a test pipeline — even when \"test\" only comes up in passing. Test strategy advisor for software projects — chooses the right test levels (unit/integration/system/acceptance), test types (functional, non-functional, change-related) and test design techniques (equivalence partitioning, boundary values, decision tables, exploratory) for the given situation and SDLC/CI phase, including the test pyramid, CI/CD gates, shift-left and best practices. Boundary — use superpowers:test-driven-development for the TDD loop itself, bugfix-protocol for bug diagnosis, bugsweep for systematic bug search."
+updated: 2026-08-22
+description: Test strategy advisor for software projects — chooses the right test levels (unit/integration/system/acceptance), test types (functional, non-functional, change-related) and test design techniques (equivalence partitioning, boundary values, decision tables, exploratory) for the given situation and SDLC/CI phase, including the test pyramid, CI/CD gates, shift-left and best practices. Use this skill ALWAYS when tests are to be written, planned, prioritized or assessed — for "write tests", "test strategy", "test plan", "test concept", "what/how should I test", "which tests are missing", "improve test coverage", "set up QA", questions about regression/smoke/sanity/load/stress/security tests, or when setting up a test pipeline — even when "test" only comes up in passing. Boundary — use superpowers:test-driven-development for the TDD loop itself, bugfix-protocol for bug diagnosis, bugsweep for systematic bug search.
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

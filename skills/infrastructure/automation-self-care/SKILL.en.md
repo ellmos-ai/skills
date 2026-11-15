@@ -1,11 +1,22 @@
 ---
 name: automation-self-care
-version: 1.3.2
+version: 1.3.1
 type: skill
 author: Lukas Geiger + OpenAI + Google Gemini
 created: 2026-07-28
-updated: 2026-11-15
-description: "Use when an agent should discover its native scheduler or continuously improve an automation fleet with rollback, readback, and deletion protection. Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Adds deterministic policy linting, lock and model governance, semantic prompt review, consistent multi-surface updates, mini-checks, and rule-file hygiene. Triggers on automation self care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-governance-automations, or textbased-desktopapp-automations."
+updated: 2026-09-09
+description: >
+  Builds and operates a provider-neutral self-care core set for scheduled LLM
+  tasks and desktop-app automations. Adds deterministic policy linting, lock
+  and model governance, semantic prompt review, consistent multi-surface
+  updates, mini-checks, and rule-file hygiene. Use when an agent should
+  discover its native scheduler or continuously improve an automation fleet
+  with rollback, readback, and deletion protection. Triggers on automation
+  self care, scheduler task care, desktop app automation maintenance,
+  automation fleet audit, self-healing schedules, core-set-textautomations,
+  basic-text-automations, textbased-automation-core,
+  textbased-automation-drivers, textbased-governance-automations, or
+  textbased-desktopapp-automations.
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

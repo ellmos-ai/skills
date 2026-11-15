@@ -1521,9 +1521,9 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/full-after-care/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care.",
+      "description": "Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care.",
       "languages": [
         "de",
         "en",
@@ -1537,13 +1537,13 @@
           "language": "de",
           "path": "skills/dev/full-after-care/SKILL.md",
           "title": "Full After Care — die tiefe Runde (Synonym: Deep After Care)",
-          "description": "Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care."
+          "description": "Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care."
         },
         {
           "language": "en",
           "path": "skills/dev/full-after-care/SKILL.en.md",
           "title": "Full After Care — The Deep Round (Synonym: Deep After Care)",
-          "description": "Use this skill on \"full after care\", \"deep after care\", \"deep repo care\", \"large round\", \"thorough repo review\", when a repo hasn't been checked in a while, before major releases, or when legal relevance, cross-references, or multilingualism are explicitly required. Deep maintenance round for a published GitHub repository (Level 2): contains the full surface-after-care execution and supplements it with three expensive steps — preliminary legal assessment via the legal department with annual resubmission (opinion remains gitignored in the repo), cross-references to related repos across ALL organizations, and updating all languages at the app level, not just in docs. For the inexpensive, frequently repeated round use surface-after-care instead; for initial publishing use github-repo-care."
+          "description": "Deep maintenance round for a published GitHub repository (Level 2): contains the full surface-after-care execution and supplements it with three expensive steps — preliminary legal assessment via the legal department with annual resubmission (opinion remains gitignored in the repo), cross-references to related repos across ALL organizations, and updating all languages at the app level, not just in docs. Use this skill on \"full after care\", \"deep after care\", \"deep repo care\", \"large round\", \"thorough repo review\", when a repo hasn't been checked in a while, before major releases, or when legal relevance, cross-references, or multilingualism are explicitly required. For the inexpensive, frequently repeated round use surface-after-care instead; for initial publishing use github-repo-care."
         },
         {
           "language": "es",
@@ -1634,9 +1634,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/human-loop-audit/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
+      "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen.",
       "languages": [
         "de",
         "en"
@@ -1646,13 +1646,13 @@
           "language": "de",
           "path": "skills/dev/human-loop-audit/SKILL.md",
           "title": "Human-Loop-Audit",
-          "description": "Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen."
+          "description": "Interaktives Reißverschluss-Audit-Verfahren für eine Serie von Apps/Prüfobjekten: der User testet live und gibt kurzes Feedback im Chat, der Agent startet dabei bereits das nächste Objekt UND wertet parallel das Feedback des vorigen aus (strukturiert erfassen, Reparaturaufträge sofort an Worker delegieren) — statt sequenziell zu warten. Nutze diesen Skill bei \"human-loop-audit\", \"lass uns die Apps im Reißverschluss durchtesten\", \"ich teste, du wertest aus und reparierst\", oder wenn eine Reihe von GUIs/Produkten gemeinsam mit dem Nutzer durchgetestet werden soll und Befunde sofort in Reparaturen münden sollen. Abschluss ist eine strukturierte Befundliste je Objekt (Funktioniert/Defekt/Wunsch) plus die Liste der bereits gestarteten Reparaturen."
         },
         {
           "language": "en",
           "path": "skills/dev/human-loop-audit/SKILL.en.md",
           "title": "Human-Loop-Audit",
-          "description": "Use this skill for \"human-loop-audit\", \"let's zip-test the apps\", \"I test, you evaluate and repair\", or whenever a series of GUIs/products should be tested together with the user and findings should turn into repairs immediately. Interactive zip-merge-style audit procedure for a series of apps/review objects: the user tests live and gives short feedback in the chat, while the agent already starts the next object AND evaluates the previous feedback in parallel (capture it in a structured way, delegate repair orders to workers immediately) — instead of waiting sequentially. Completion is a structured finding list per object (Works/Broken/Wish) plus the list of repairs already started."
+          "description": "Interactive zip-merge-style audit procedure for a series of apps/review objects: the user tests live and gives short feedback in the chat, while the agent already starts the next object AND evaluates the previous feedback in parallel (capture it in a structured way, delegate repair orders to workers immediately) — instead of waiting sequentially. Use this skill for \"human-loop-audit\", \"let's zip-test the apps\", \"I test, you evaluate and repair\", or whenever a series of GUIs/products should be tested together with the user and findings should turn into repairs immediately. Completion is a structured finding list per object (Works/Broken/Wish) plus the list of repairs already started."
         }
       ]
     },
@@ -1816,9 +1816,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/piggyback-hosting/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
+      "description": "Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
       "languages": [
         "de",
         "en"
@@ -1828,13 +1828,13 @@
           "language": "de",
           "path": "skills/dev/piggyback-hosting/SKILL.md",
           "title": "piggyback-hosting",
-          "description": "Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen."
+          "description": "Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen."
         },
         {
           "language": "en",
           "path": "skills/dev/piggyback-hosting/SKILL.en.md",
           "title": "piggyback-hosting",
-          "description": "Use when a locally-built app is about to be hosted for multiple visitors, when asked to \"make this hostable without a login\", \"avoid building user accounts\", \"shrink the privacy policy for a hosted tool\", \"who is the data controller if we store nothing\", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references."
+          "description": "Hosting pattern for turning a locally-built application (own database, own API key, in-process state) into a safely hosted one without building user management. Core move — the host stores nothing, the visitor's browser stores everything — so per-visitor accounts, access checks and deletion deadlines become moot instead of needing to be solved. Use when a locally-built app is about to be hosted for multiple visitors, when asked to \"make this hostable without a login\", \"avoid building user accounts\", \"shrink the privacy policy for a hosted tool\", \"who is the data controller if we store nothing\", or when choosing/implementing a server mode (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Ships a data-flow-plan template, a privacy-notice template, and a first-look legal assessment (GDPR/TDDDG/UWG, German) as references."
         }
       ]
     },
@@ -2167,9 +2167,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/rotation-check/SKILL.md",
-      "version": "1.1.1",
+      "version": "1.1.0",
       "status": "active",
-      "description": "Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll. Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten.",
+      "description": "Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll.",
       "languages": [
         "de",
         "en",
@@ -2183,13 +2183,13 @@
           "language": "de",
           "path": "skills/dev/rotation-check/SKILL.md",
           "title": "Rotation-Check — ein Ziel pro Lauf, faire Abdeckung, Gedächtnis",
-          "description": "Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll. Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten."
+          "description": "Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll."
         },
         {
           "language": "en",
           "path": "skills/dev/rotation-check/SKILL.en.md",
           "title": "Rotation Check — One Target Per Run, Fair Coverage, Memory",
-          "description": "Use this skill when a recurring check needs to be distributed across many projects (\"regularly check all X for Y\"), when automation must avoid duplicate checks, when creating or using a check registry / CHECKS-LOG structure, or when a periodic quality round (source check, style check, health check, audit) should be fairly distributed across a pipeline. Standard framework for rotating pipeline checks: Select exactly one target per run from a set (projects, folders, repos) — preferably the one unchecked for the longest time —, perform the check, record the result in a check registry and a history log."
+          "description": "Standard framework for rotating pipeline checks: Select exactly one target per run from a set (projects, folders, repos) — preferably the one unchecked for the longest time —, perform the check, record the result in a check registry and a history log. Use this skill when a recurring check needs to be distributed across many projects (\"regularly check all X for Y\"), when automation must avoid duplicate checks, when creating or using a check registry / CHECKS-LOG structure, or when a periodic quality round (source check, style check, health check, audit) should be fairly distributed across a pipeline."
         },
         {
           "language": "es",
@@ -2223,9 +2223,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-diff-scan/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "status": "draft",
-      "description": "Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report.",
+      "description": "Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report.",
       "languages": [
         "de",
         "en",
@@ -2239,13 +2239,13 @@
           "language": "de",
           "path": "skills/dev/sec-diff-scan/SKILL.md",
           "title": "sec-diff-scan",
-          "description": "Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report."
+          "description": "Security-Scan einer Änderung statt des ganzen Repos: PR, Commit, Branch-Diff oder Working-Tree-Patch. Prüft geänderte Zeilen samt Aufrufern und Aufgerufenen, sucht Regressionen bekannter Muster und schreibt Kandidaten in findings.json plus coverage.json mit Diff- und Kontextdateien. Nutzen bei 'Security-Review dieses PR', 'Diff auf Schwachstellen prüfen', 'vor dem Merge sicherheitlich ansehen', 'hat diese Änderung etwas aufgerissen'. Voll-Repo-Scan: sec-scan. Kandidaten widerlegen: sec-validate. Bericht: sec-report."
         },
         {
           "language": "en",
           "path": "skills/dev/sec-diff-scan/SKILL.en.md",
           "title": "sec-diff-scan",
-          "description": "Use for 'security review of this PR', 'check this diff for vulnerabilities', 'look at this before merge', 'did this change open something up'. Security scan of a change instead of the whole repository: PR, commit, branch diff or working-tree patch. Reviews changed lines together with their callers and callees, looks for regressions of known patterns and writes candidates to findings.json plus coverage.json listing diff and context files. Whole-repo scan: sec-scan. Refuting candidates: sec-validate. Report: sec-report."
+          "description": "Security scan of a change instead of the whole repository: PR, commit, branch diff or working-tree patch. Reviews changed lines together with their callers and callees, looks for regressions of known patterns and writes candidates to findings.json plus coverage.json listing diff and context files. Use for 'security review of this PR', 'check this diff for vulnerabilities', 'look at this before merge', 'did this change open something up'. Whole-repo scan: sec-scan. Refuting candidates: sec-validate. Report: sec-report."
         },
         {
           "language": "es",
@@ -2447,9 +2447,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-report/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "status": "draft",
-      "description": "Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage.",
+      "description": "Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage.",
       "languages": [
         "de",
         "en",
@@ -2463,13 +2463,13 @@
           "language": "de",
           "path": "skills/dev/sec-report/SKILL.md",
           "title": "sec-report",
-          "description": "Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage."
+          "description": "Erzeugt aus findings.json und coverage.json den Sicherheitsbericht report.md (nach Severity gruppiert, Coverage-Abschnitt mit Lücken, abgelehnte Funde getrennt, Zusammenfassung ohne Schönfärberei) und findings.sarif (SARIF 2.1.0) per Skript render_report.py. Nutzen bei 'Security-Bericht erstellen', 'Ergebnis des Scans zusammenfassen', 'SARIF exportieren', 'Bericht für Code Scanning'. Bricht bei ungültigen Daten ab, ein partieller Scan wird als partiell gemeldet. Neue Funde: sec-scan / sec-diff-scan. Prüfen: sec-validate. Einordnen: sec-triage."
         },
         {
           "language": "en",
           "path": "skills/dev/sec-report/SKILL.en.md",
           "title": "sec-report",
-          "description": "Use for 'write the security report', 'summarise the scan result', 'export SARIF', 'report for code scanning'. Produces the security report report.md (grouped by severity, coverage section with gaps, rejected findings separate, summary without sugar-coating) and findings.sarif (SARIF 2.1.0) from findings.json and coverage.json via the script render_report.py. Aborts on invalid data; a partial scan is reported as partial. New findings: sec-scan / sec-diff-scan. Verifying: sec-validate. Classifying: sec-triage."
+          "description": "Produces the security report report.md (grouped by severity, coverage section with gaps, rejected findings separate, summary without sugar-coating) and findings.sarif (SARIF 2.1.0) from findings.json and coverage.json via the script render_report.py. Use for 'write the security report', 'summarise the scan result', 'export SARIF', 'report for code scanning'. Aborts on invalid data; a partial scan is reported as partial. New findings: sec-scan / sec-diff-scan. Verifying: sec-validate. Classifying: sec-triage."
         },
         {
           "language": "es",
@@ -2503,9 +2503,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-scan/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "status": "draft",
-      "description": "Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report.",
+      "description": "Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report.",
       "languages": [
         "de",
         "en",
@@ -2519,13 +2519,13 @@
           "language": "de",
           "path": "skills/dev/sec-scan/SKILL.md",
           "title": "sec-scan",
-          "description": "Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report."
+          "description": "Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report."
         },
         {
           "language": "en",
           "path": "skills/dev/sec-scan/SKILL.en.md",
           "title": "sec-scan",
-          "description": "Use for 'security scan', 'check this repo for vulnerabilities', 'security review', 'full scan', 'import a scanner result into the ellmos format'. Provider-neutral security scan of an owned repository: threat model, split by trust boundary, targeted review per package (injection, authn/authz, secrets, crypto, deserialisation, paths, SSRF, configuration, vulnerable dependency use), candidates with evidence in findings.json and an honest coverage.json. Modes standard and deep. Includes the adapter for /claude-security and codex-security. Changes/PRs only: sec-diff-scan. Refuting candidates: sec-validate. Importing foreign reports: sec-triage. Report: sec-report."
+          "description": "Provider-neutral security scan of an owned repository: threat model, split by trust boundary, targeted review per package (injection, authn/authz, secrets, crypto, deserialisation, paths, SSRF, configuration, vulnerable dependency use), candidates with evidence in findings.json and an honest coverage.json. Modes standard and deep. Use for 'security scan', 'check this repo for vulnerabilities', 'security review', 'full scan', 'import a scanner result into the ellmos format'. Includes the adapter for /claude-security and codex-security. Changes/PRs only: sec-diff-scan. Refuting candidates: sec-validate. Importing foreign reports: sec-triage. Report: sec-report."
         },
         {
           "language": "es",
@@ -2727,9 +2727,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-triage/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "status": "draft",
-      "description": "Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report.",
+      "description": "Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report.",
       "languages": [
         "de",
         "en",
@@ -2743,13 +2743,13 @@
           "language": "de",
           "path": "skills/dev/sec-triage/SKILL.md",
           "title": "sec-triage",
-          "description": "Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report."
+          "description": "Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report."
         },
         {
           "language": "en",
           "path": "skills/dev/sec-triage/SKILL.en.md",
           "title": "sec-triage",
-          "description": "Use for 'classify these scan results', 'prioritise Dependabot alerts', 'import code scanning findings', 'sort the security finding backlog'. Converts existing findings (scanner reports, SARIF, GitHub code scanning, Dependabot, tickets) into the findings.json format of the ellmos security family, de-duplicates them by id, sets severity and priority against the repository's security policy (SECURITY.md) and links tickets. Static evaluation only. Finding new vulnerabilities: sec-scan. Refuting or reproducing: sec-validate. Report: sec-report."
+          "description": "Converts existing findings (scanner reports, SARIF, GitHub code scanning, Dependabot, tickets) into the findings.json format of the ellmos security family, de-duplicates them by id, sets severity and priority against the repository's security policy (SECURITY.md) and links tickets. Static evaluation only. Use for 'classify these scan results', 'prioritise Dependabot alerts', 'import code scanning findings', 'sort the security finding backlog'. Finding new vulnerabilities: sec-scan. Refuting or reproducing: sec-validate. Report: sec-report."
         },
         {
           "language": "es",
@@ -2783,9 +2783,9 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-validate/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "status": "draft",
-      "description": "Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report.",
+      "description": "Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report.",
       "languages": [
         "de",
         "en",
@@ -2799,13 +2799,13 @@
           "language": "de",
           "path": "skills/dev/sec-validate/SKILL.md",
           "title": "sec-validate",
-          "description": "Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report."
+          "description": "Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report."
         },
         {
           "language": "en",
           "path": "skills/dev/sec-validate/SKILL.en.md",
           "title": "sec-validate",
-          "description": "Use for 'verify the findings', 'weed out false positives', 'is this really exploitable', 'independent second check of the scan'. Tries to REFUTE every candidate in findings.json: trace the source-to-sink path, check reachability and countermeasures, calibrate severity, reproduce locally where that is safe. Sets validatedBy (confirmed/refuted/uncertain) and status validated or rejected with a reason. The validator should be a different provider than the finder. Finding new issues: sec-scan. Classifying foreign reports: sec-triage. Report: sec-report."
+          "description": "Tries to REFUTE every candidate in findings.json: trace the source-to-sink path, check reachability and countermeasures, calibrate severity, reproduce locally where that is safe. Sets validatedBy (confirmed/refuted/uncertain) and status validated or rejected with a reason. Use for 'verify the findings', 'weed out false positives', 'is this really exploitable', 'independent second check of the scan'. The validator should be a different provider than the finder. Finding new issues: sec-scan. Classifying foreign reports: sec-triage. Report: sec-report."
         },
         {
           "language": "es",
@@ -3035,9 +3035,9 @@
       "type": "knowledge-protocol",
       "category": "dev",
       "path": "skills/dev/software-testing/SKILL.md",
-      "version": "1.0.2",
+      "version": "1.0.1",
       "status": "active",
-      "description": "Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
+      "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen.",
       "languages": [
         "de",
         "en"
@@ -3047,13 +3047,13 @@
           "language": "de",
           "path": "skills/dev/software-testing/SKILL.md",
           "title": "Software-Testing: Teststrategie & Testauswahl",
-          "description": "Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen."
+          "description": "Teststrategie-Berater für Softwareprojekte — wählt die richtigen Teststufen (Unit/Integration/System/Abnahme), Testarten (funktional, nicht-funktional, änderungsbezogen) und Testentwurfsverfahren (Äquivalenzklassen, Grenzwerte, Entscheidungstabellen, explorativ) für die jeweilige Situation und SDLC-/CI-Phase, inkl. Testpyramide, CI/CD-Gates, Shift-Left und Best Practices. Nutze diesen Skill IMMER, wenn Tests geschrieben, geplant, priorisiert oder bewertet werden sollen — bei \"schreibe Tests\", \"Teststrategie\", \"Testplan\", \"Testkonzept\", \"was/wie soll ich testen\", \"welche Tests fehlen\", \"Testabdeckung verbessern\", \"QA aufsetzen\", Fragen zu Regression/Smoke/Sanity/Last/Stress/Security-Tests oder beim Einrichten einer Test-Pipeline — auch wenn \"Test\" nur beiläufig fällt. Abgrenzung — für die TDD-Schleife selbst superpowers:test-driven-development, für Bug-Diagnose bugfix-protocol, für systematische Bug-Suche bugsweep nutzen."
         },
         {
           "language": "en",
           "path": "skills/dev/software-testing/SKILL.en.md",
           "title": "Software Testing: Test Strategy & Test Selection",
-          "description": "Use this skill ALWAYS when tests are to be written, planned, prioritized or assessed — for \"write tests\", \"test strategy\", \"test plan\", \"test concept\", \"what/how should I test\", \"which tests are missing\", \"improve test coverage\", \"set up QA\", questions about regression/smoke/sanity/load/stress/security tests, or when setting up a test pipeline — even when \"test\" only comes up in passing. Test strategy advisor for software projects — chooses the right test levels (unit/integration/system/acceptance), test types (functional, non-functional, change-related) and test design techniques (equivalence partitioning, boundary values, decision tables, exploratory) for the given situation and SDLC/CI phase, including the test pyramid, CI/CD gates, shift-left and best practices. Boundary — use superpowers:test-driven-development for the TDD loop itself, bugfix-protocol for bug diagnosis, bugsweep for systematic bug search."
+          "description": "Test strategy advisor for software projects — chooses the right test levels (unit/integration/system/acceptance), test types (functional, non-functional, change-related) and test design techniques (equivalence partitioning, boundary values, decision tables, exploratory) for the given situation and SDLC/CI phase, including the test pyramid, CI/CD gates, shift-left and best practices. Use this skill ALWAYS when tests are to be written, planned, prioritized or assessed — for \"write tests\", \"test strategy\", \"test plan\", \"test concept\", \"what/how should I test\", \"which tests are missing\", \"improve test coverage\", \"set up QA\", questions about regression/smoke/sanity/load/stress/security tests, or when setting up a test pipeline — even when \"test\" only comes up in passing. Boundary — use superpowers:test-driven-development for the TDD loop itself, bugfix-protocol for bug diagnosis, bugsweep for systematic bug search."
         }
       ]
     },
@@ -3119,9 +3119,9 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/tidy-up/SKILL.md",
-      "version": "1.1.2",
+      "version": "1.1.1",
       "status": "active",
-      "description": "Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal. Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg.",
+      "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal.",
       "languages": [
         "de",
         "en"
@@ -3131,13 +3131,13 @@
           "language": "de",
           "path": "skills/dev/tidy-up/SKILL.md",
           "title": "Tidy Up — Tasksolver+Writer+Maintainer-Durchlauf fuer den aktiven Projektordner",
-          "description": "Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal. Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg."
+          "description": "Einmaliger Tasksolver+Writer+Maintainer-Durchlauf fuer den Projektordner, in dem die Session gerade sowieso gearbeitet hat (inkl. Unterordner) — kein systemweiter Sweep. Loest offene triviale/autonome Register-Punkte, aktualisiert Dokumentation auf den gemessenen Ist-Stand (im Projekt UND in der Root der Pipeline, in der das Projekt liegt) und raeumt Strays/Temp- Dateien nach dem Papierkorb-Prinzip weg. Nutze diesen Skill bei /tidy-up, \"raeum das Projekt auf\", \"mach hier sauber bevor wir weitermachen\", am Ende einer Arbeitssitzung an einem Projekt, oder als faellige autonome Aufgabe innerhalb von /work-autonomous + /goal."
         },
         {
           "language": "en",
           "path": "skills/dev/tidy-up/SKILL.en.md",
           "title": "Tidy Up — Tasksolver+Writer+Maintainer pass for the active project folder",
-          "description": "Use this skill for /tidy-up, \"tidy up the project\", \"clean up here before we continue\", at the end of a work session on a project, or as a due autonomous task inside /work-autonomous + /goal. One-time Tasksolver+Writer+Maintainer pass for the project folder the session has been working in anyway (including subfolders) — not a system-wide sweep. Resolves open trivial/autonomous register points, updates documentation to the measured current state (in the project AND in the root of the pipeline the project lives in) and clears out strays/temp files following the trash-can principle."
+          "description": "One-time Tasksolver+Writer+Maintainer pass for the project folder the session has been working in anyway (including subfolders) — not a system-wide sweep. Resolves open trivial/autonomous register points, updates documentation to the measured current state (in the project AND in the root of the pipeline the project lives in) and clears out strays/temp files following the trash-can principle. Use this skill for /tidy-up, \"tidy up the project\", \"clean up here before we continue\", at the end of a work session on a project, or as a due autonomous task inside /work-autonomous + /goal."
         }
       ]
     },
@@ -3519,9 +3519,9 @@
       "type": "skill",
       "category": "game-dev",
       "path": "skills/game-dev/rbx-dev/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\".",
+      "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\".",
       "languages": [
         "de",
         "en",
@@ -3536,13 +3536,13 @@
           "language": "de",
           "path": "skills/game-dev/rbx-dev/SKILL.md",
           "title": "Roblox-Dev — Meta-Skill für Roblox-Spieleentwicklung",
-          "description": "Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\"."
+          "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\"."
         },
         {
           "language": "en",
           "path": "skills/game-dev/rbx-dev/SKILL.en.md",
           "title": "Roblox-Dev — Meta-Skill for Roblox Game Development (English)",
-          "description": "Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\"."
+          "description": "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\"."
         },
         {
           "language": "es",
@@ -3816,9 +3816,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/agent-role-scaffolder/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\"). Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf.",
+      "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\").",
       "languages": [
         "de",
         "en"
@@ -3828,13 +3828,13 @@
           "language": "de",
           "path": "skills/infrastructure/agent-role-scaffolder/SKILL.md",
           "title": "agent-role-scaffolder",
-          "description": "Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\"). Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf."
+          "description": "Baut und prüft neue Agentenrollen im ellmos-Ökosystem: native Claude-Code- Subagenten (dauerhafte Rollendefinition) und Companion-Worker (SendMessage- wiederverwendete Instanz für eine Ticket-/Aufgabenserie). Formalisiert das bislang unformalisierte eigene Wissen aus dem laufenden Bau von Agentenrollen (ati-agent, bueroassistent, versicherungs-agent u. a.) zu einem wiederverwendbaren Scaffold-plus-Verify-Ablauf. Nutze diesen Skill, wenn eine neue Rolle entstehen soll (\"neue Agentenrolle bauen\", \"Subagent anlegen\", \"Companion-Worker starten\") oder eine bestehende gegen die Haus-Konventionen geprüft werden soll (\"ist dieser Agent richtig aufgesetzt?\")."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/agent-role-scaffolder/SKILL.en.md",
           "title": "agent-role-scaffolder",
-          "description": "Use this skill when a new role needs to be created (\"build a new agent role\", \"set up a subagent\", \"start a companion worker\") or an existing one needs to be checked against house conventions (\"is this agent set up correctly?\"). Builds and verifies new agent roles inside the ellmos ecosystem: native Claude Code subagents (durable role definitions) and Companion Workers (SendMessage-reused instances for a ticket/task series). Formalizes previously informal, hands-on knowledge from building agent roles (ati-agent, bueroassistent, versicherungs-agent, etc.) into a reusable scaffold-plus-verify workflow."
+          "description": "Builds and verifies new agent roles inside the ellmos ecosystem: native Claude Code subagents (durable role definitions) and Companion Workers (SendMessage-reused instances for a ticket/task series). Formalizes previously informal, hands-on knowledge from building agent roles (ati-agent, bueroassistent, versicherungs-agent, etc.) into a reusable scaffold-plus-verify workflow. Use this skill when a new role needs to be created (\"build a new agent role\", \"set up a subagent\", \"start a companion worker\") or an existing one needs to be checked against house conventions (\"is this agent set up correctly?\")."
         }
       ]
     },
@@ -3993,7 +3993,7 @@
           "language": "en",
           "path": "skills/infrastructure/automation-self-care/SKILL.en.md",
           "title": "Automation Self-Care",
-          "description": "Use when an agent should discover its native scheduler or continuously improve an automation fleet with rollback, readback, and deletion protection. Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Adds deterministic policy linting, lock and model governance, semantic prompt review, consistent multi-surface updates, mini-checks, and rule-file hygiene. Triggers on automation self care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-governance-automations, or textbased-desktopapp-automations."
+          "description": "Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Adds deterministic policy linting, lock and model governance, semantic prompt review, consistent multi-surface updates, mini-checks, and rule-file hygiene. Use when an agent should discover its native scheduler or continuously improve an automation fleet with rollback, readback, and deletion protection. Triggers on automation self care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, core-set-textautomations, basic-text-automations, textbased-automation-core, textbased-automation-drivers, textbased-governance-automations, or textbased-desktopapp-automations."
         },
         {
           "language": "es",
@@ -4430,9 +4430,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/letter-hooker/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll. Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI).",
+      "description": "Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI). Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll.",
       "languages": [
         "de",
         "en",
@@ -4447,13 +4447,13 @@
           "language": "de",
           "path": "skills/infrastructure/letter-hooker/SKILL.md",
           "title": "Letter-Hooker (Prompt-Level Preflight & Governance Engine)",
-          "description": "Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll. Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI)."
+          "description": "Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI). Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/letter-hooker/SKILL.en.md",
           "title": "Letter-Hooker (Prompt-Level Preflight & Governance Engine)",
-          "description": "Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols. Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI)."
+          "description": "Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols."
         },
         {
           "language": "es",
@@ -5018,9 +5018,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/skill-explorer/SKILL.md",
-      "version": "1.1.2",
+      "version": "1.1.1",
       "status": "active",
-      "description": "Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
+      "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval.",
       "languages": [
         "de",
         "en",
@@ -5035,13 +5035,13 @@
           "language": "de",
           "path": "skills/infrastructure/skill-explorer/SKILL.md",
           "title": "Skill-Explorer — Skill-Landschaft verwalten (Audit · Explore · Installer)",
-          "description": "Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval."
+          "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/skill-explorer/SKILL.en.md",
           "title": "Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)",
-          "description": "Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval."
+          "description": "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval."
         },
         {
           "language": "es",
@@ -5551,9 +5551,9 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/work-autonomous/SKILL.md",
-      "version": "1.5.2",
+      "version": "1.5.1",
       "status": "active",
-      "description": "Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird. Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes.",
+      "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.",
       "languages": [
         "de",
         "en"
@@ -5563,13 +5563,13 @@
           "language": "de",
           "path": "skills/infrastructure/work-autonomous/SKILL.md",
           "title": "work-autonomous — Loop erst beenden, wenn belegt keine autonomen Aufgaben mehr vorliegen",
-          "description": "Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird. Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes."
+          "description": "Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/work-autonomous/SKILL.en.md",
           "title": "work-autonomous — Only end the loop once it is proven no autonomous tasks remain",
-          "description": "Use this skill for /work-autonomous, /waafap, \"keep working autonomously until there is nothing left to do\", as the goal condition inside a /loop, or whenever it needs checking whether autonomous work is truly exhausted before ending a loop or session. Termination condition for autonomous loops: keep working independently as far as possible AND only end a loop once it is PROVEN that no autonomously executable task remains. The mere impression \"nothing left to do\" is NOT enough — it triggers a four-step verification chain (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN new tasks before the loop is allowed to end. Each chain step now reports found/empty/unavailable instead of a binary result — \"exhausted\" only applies when EVERY source was actually queryable; if at least one source is unavailable, the skill reports \"blind\" instead of \"exhausted\" and claims nothing it never checked."
+          "description": "Termination condition for autonomous loops: keep working independently as far as possible AND only end a loop once it is PROVEN that no autonomously executable task remains. The mere impression \"nothing left to do\" is NOT enough — it triggers a four-step verification chain (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN new tasks before the loop is allowed to end. Each chain step now reports found/empty/unavailable instead of a binary result — \"exhausted\" only applies when EVERY source was actually queryable; if at least one source is unavailable, the skill reports \"blind\" instead of \"exhausted\" and claims nothing it never checked. Use this skill for /work-autonomous, /waafap, \"keep working autonomously until there is nothing left to do\", as the goal condition inside a /loop, or whenever it needs checking whether autonomous work is truly exhausted before ending a loop or session."
         }
       ]
     },
@@ -5635,9 +5635,9 @@
       "type": "expert",
       "category": "production",
       "path": "skills/production/textproduction/SKILL.md",
-      "version": "2.0.1",
+      "version": "2.0.0",
       "status": "active",
-      "description": "Verwenden, wenn Texte mit KI erstellt werden sollen (z. B. 'schreibe einen Blogpost', 'Newsletter entwerfen', 'Kurzgeschichte', 'Pressemitteilung', 'Positionspapier'). Drei Teilskills: allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich.",
+      "description": "KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich.",
       "languages": [
         "de",
         "en",
@@ -5652,7 +5652,7 @@
           "language": "de",
           "path": "skills/production/textproduction/SKILL.md",
           "title": "Textproduction — Router (Deutsch)",
-          "description": "Verwenden, wenn Texte mit KI erstellt werden sollen (z. B. 'schreibe einen Blogpost', 'Newsletter entwerfen', 'Kurzgeschichte', 'Pressemitteilung', 'Positionspapier'). Drei Teilskills: allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich."
+          "description": "KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich."
         }
       ]
     },
@@ -7043,9 +7043,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
-      "version": "1.2.3",
+      "version": "1.2.2",
       "status": "active",
-      "description": "Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
+      "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).",
       "languages": [
         "de",
         "en",
@@ -7059,13 +7059,13 @@
           "language": "de",
           "path": "skills/utilities/bilingual-doc-sync/SKILL.md",
           "title": "Bilingual-Doc-Sync — parallele Sprachfassungen synchron halten",
-          "description": "Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen)."
+          "description": "Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen)."
         },
         {
           "language": "en",
           "path": "skills/utilities/bilingual-doc-sync/SKILL.en.md",
           "title": "Bilingual-Doc-Sync — Keeping Parallel Language Versions Synchronized",
-          "description": "Use this skill when asked \"are DE and EN in sync?\", \"update the English/German version\", \"translation is outdated\", for bilingual papers/READMEs/skills, or as a periodic check across a document inventory. Keep parallel language versions of a document (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, website texts) synchronized: bring missing versions up to date, verify section parallelism, resolve divergences — with a clear lead-language rule and controlled back-transfer when the secondary version solves something better. Also includes the expansion audit: evaluating whether a project/document deserves ADDITIONAL languages (i18n suitability by target audience, technical preparation, no blind mass translation)."
+          "description": "Keep parallel language versions of a document (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, website texts) synchronized: bring missing versions up to date, verify section parallelism, resolve divergences — with a clear lead-language rule and controlled back-transfer when the secondary version solves something better. Use this skill when asked \"are DE and EN in sync?\", \"update the English/German version\", \"translation is outdated\", for bilingual papers/READMEs/skills, or as a periodic check across a document inventory. Also includes the expansion audit: evaluating whether a project/document deserves ADDITIONAL languages (i18n suitability by target audience, technical preparation, no blind mass translation)."
         },
         {
           "language": "es",
@@ -7372,7 +7372,7 @@
           "language": "en",
           "path": "skills/utilities/decision-path/SKILL.en.md",
           "title": "decision-path — ASCII Dependency Graph of Pending Decisions",
-          "description": "Use for \"which decisions depend on each other\", \"decision dependency graph\", \"visualize decision path\", \"check contradictions between decisions\", \"sequence of decisions\", /decision-path. Builds a structured ASCII dependency graph (max 100 columns) for terminal output from a set of pending and settled decisions. Evaluates nodes across five fixed dimensions: sensible, recommended, user-typical (direction and decision-avatar confidence coded separately), coherent, and contradictory; edges carry relationship type and verification status. Relentlessly exposes blockers, unlocked paths, execution orders, and conflicting recommendations. Do NOT use to first inventory decisions -- that's decision-briefing; do NOT use to bundle the recommended overall concept for sign-off -- that's decision-draw; do NOT use for compact five-part blocks with options and pro/contra -- that's decision-shot; do NOT use to work out a single complex choice with frameworks -- that's decide."
+          "description": "Builds a structured ASCII dependency graph (max 100 columns) for terminal output from a set of pending and settled decisions. Evaluates nodes across five fixed dimensions: sensible, recommended, user-typical (direction and decision-avatar confidence coded separately), coherent, and contradictory; edges carry relationship type and verification status. Relentlessly exposes blockers, unlocked paths, execution orders, and conflicting recommendations. Use for \"which decisions depend on each other\", \"decision dependency graph\", \"visualize decision path\", \"check contradictions between decisions\", \"sequence of decisions\", /decision-path. Do NOT use to first inventory decisions -- that's decision-briefing; do NOT use to bundle the recommended overall concept for sign-off -- that's decision-draw; do NOT use for compact five-part blocks with options and pro/contra -- that's decision-shot; do NOT use to work out a single complex choice with frameworks -- that's decide."
         }
       ]
     },
@@ -7400,7 +7400,7 @@
           "language": "en",
           "path": "skills/utilities/decision-shot/SKILL.en.md",
           "title": "decision-shot",
-          "description": "Use this skill for \"give me that short with pro/con and a recommendation\", \"executive summary of the decision\", \"short context on <topic>\", \"summarize decision X in a short form\", /decision-shot, or whenever a result should be handed to someone who only needs the essence, not the full derivation. Extremely short, substantial output FORMAT for ONE decision or group of decisions, when the analysis behind it already exists (produced in chat, from `decide`, from `decision-briefing`, from a ticket or a document): context in 2-3 lines, pro/con per option as bullet points in paveman/caveman-reduced style, talking points, a justified recommendation, and a path/link to the full analysis for complete follow-up reading. Do NOT use it to COLLECT many open decisions and poll them by letter -- that's decision-briefing; do NOT use it to first ANALYZE a decision -- that's decide. decision-shot presupposes a finished analysis and only compresses its presentation."
+          "description": "Extremely short, substantial output FORMAT for ONE decision or group of decisions, when the analysis behind it already exists (produced in chat, from `decide`, from `decision-briefing`, from a ticket or a document): context in 2-3 lines, pro/con per option as bullet points in paveman/caveman-reduced style, talking points, a justified recommendation, and a path/link to the full analysis for complete follow-up reading. Use this skill for \"give me that short with pro/con and a recommendation\", \"executive summary of the decision\", \"short context on <topic>\", \"summarize decision X in a short form\", /decision-shot, or whenever a result should be handed to someone who only needs the essence, not the full derivation. Do NOT use it to COLLECT many open decisions and poll them by letter -- that's decision-briefing; do NOT use it to first ANALYZE a decision -- that's decide. decision-shot presupposes a finished analysis and only compresses its presentation."
         }
       ]
     },
@@ -7536,9 +7536,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/file-collect-sort-action/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "active",
-      "description": "Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
+      "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.",
       "languages": [
         "de",
         "en"
@@ -7548,13 +7548,13 @@
           "language": "de",
           "path": "skills/utilities/file-collect-sort-action/SKILL.md",
           "title": "File Collect Sort Action",
-          "description": "Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus."
+          "description": "Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus."
         },
         {
           "language": "en",
           "path": "skills/utilities/file-collect-sort-action/SKILL.en.md",
           "title": "File Collect Sort Action",
-          "description": "Use this skill for sentences like \"always pull <file type> from <folder> and collect them in <destination>\", \"automatically sort folder X by ...\", \"collect incoming files from ... into ...\", \"clean up this folder based on rules\", or \"automatically move all <file type> from <folder>\". Recognizes user requests of the form \"always pull certain files from a folder and collect them at a destination\" and sets up the module file-collect-sort-action (CLI fcsa) for it — a configuration-driven agent that scans folders, categorizes files by template and applies staged actions (move/copy/duplicate-check/delete/OCR/place-information). ALWAYS sets up a dry run first and only arms it after explicit user go-ahead; deletion always stays in `_trash` mode by default."
+          "description": "Recognizes user requests of the form \"always pull certain files from a folder and collect them at a destination\" and sets up the module file-collect-sort-action (CLI fcsa) for it — a configuration-driven agent that scans folders, categorizes files by template and applies staged actions (move/copy/duplicate-check/delete/OCR/place-information). Use this skill for sentences like \"always pull <file type> from <folder> and collect them in <destination>\", \"automatically sort folder X by ...\", \"collect incoming files from ... into ...\", \"clean up this folder based on rules\", or \"automatically move all <file type> from <folder>\". ALWAYS sets up a dry run first and only arms it after explicit user go-ahead; deletion always stays in `_trash` mode by default."
         }
       ]
     },
@@ -7627,9 +7627,9 @@
       "type": "protocol",
       "category": "utilities",
       "path": "skills/utilities/folder-organization/SKILL.md",
-      "version": "1.2.1",
+      "version": "1.2.0",
       "status": "active",
-      "description": "Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen.",
+      "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen.",
       "languages": [
         "de",
         "en"
@@ -7639,13 +7639,13 @@
           "language": "de",
           "path": "skills/utilities/folder-organization/SKILL.md",
           "title": "Folder Organization",
-          "description": "Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen."
+          "description": "Ordner und Dateiablagen semantisch aufräumen: lokale Regeln und Taxonomie erkennen, Dateien als Themenliste in optimal kalibrierte Themencluster sortieren, konkurrierende Alt-Taxonomien zusammenführen, zusammengehörige Sets erhalten, Vorgänger-/Nachfolgerreihen und Logs archivieren, Gemischtes per Cut-and-Clue trennen, Dupletten zweistufig (SHA-256-Kanonik vs. Namens-Disambiguierung) auflösen, Löschkandidaten reversibel in den Prüf-Papierkorb legen sowie Steuerdateien und aktive Schreiber nachziehen. Nutze diesen Skill bei „Ordner aufräumen“, „in Themencluster sortieren“, „optimale Cluster-Anzahl finden“, „Dateien sinnvoll einsortieren“, „Dupletten entfernen“, „alte Versionen archivieren“, „Logdateien bereinigen“, „veraltete und gültige Inhalte trennen“ oder bei Geheimnisdateien in Cloud-Ablagen. Anbieter- und nutzerneutral; für feste Dauerregeln file-collect-sort-action, für Architektur-Umbau pipeline-optimizer nutzen."
         },
         {
           "language": "en",
           "path": "skills/utilities/folder-organization/SKILL.en.md",
           "title": "Folder Organization",
-          "description": "Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”, “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”, “separate outdated and valid content”, or cloud secret localization. Organize folders and file collections semantically: discover local rules and taxonomy, treat the inventory as a topic list to group files into an optimally calibrated number of thematic clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/ successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in a reversible review trash folder, and update root control files and active upstream writers. Standalone and provider- neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture."
+          "description": "Organize folders and file collections semantically: discover local rules and taxonomy, treat the inventory as a topic list to group files into an optimally calibrated number of thematic clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/ successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in a reversible review trash folder, and update root control files and active upstream writers. Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”, “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”, “separate outdated and valid content”, or cloud secret localization. Standalone and provider- neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture."
         }
       ]
     },
@@ -7903,9 +7903,9 @@
       "type": "tool",
       "category": "utilities",
       "path": "skills/utilities/music-composer/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "status": "stable",
-      "description": "Verwenden, wenn zu einem Video passende Hintergrundmusik komponiert werden soll (z. B. 'Hintergrundmusik für das Video', 'Soundtrack aus Storyline', 'Chiptune-/Ambient-/Electronic-Musik erzeugen'). Komponiert video-synchronisierte Musik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg); Stile Chiptune, Ambient, Electronic; deterministisch, offline, kein Cloud-Dienst.",
+      "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst.",
       "languages": [
         "de",
         "en"
@@ -7915,13 +7915,13 @@
           "language": "de",
           "path": "skills/utilities/music-composer/SKILL.md",
           "title": "music-composer — Storyline → Score",
-          "description": "Verwenden, wenn zu einem Video passende Hintergrundmusik komponiert werden soll (z. B. 'Hintergrundmusik für das Video', 'Soundtrack aus Storyline', 'Chiptune-/Ambient-/Electronic-Musik erzeugen'). Komponiert video-synchronisierte Musik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg); Stile Chiptune, Ambient, Electronic; deterministisch, offline, kein Cloud-Dienst."
+          "description": "Komponiert video-synchronisierte Hintergrundmusik aus einem Storyline-JSON per lokaler Waveform-Synthese (numpy + ffmpeg). Stile: Chiptune, Ambient, Electronic. Deterministisch, offline, kein Cloud-Dienst."
         },
         {
           "language": "en",
           "path": "skills/utilities/music-composer/SKILL.en.md",
           "title": "music-composer — Storyline → Score",
-          "description": "Use when background music should be composed for a video (e.g. 'background music for this video', 'soundtrack from a storyline', 'generate chiptune/ambient/electronic music'). Composes video-synced background scores from a storyline JSON using local waveform synthesis (numpy + ffmpeg); styles chiptune, ambient, electronic; deterministic, offline, no cloud service."
+          "description": "Compose video-synced background scores from a storyline JSON using local waveform synthesis (numpy + ffmpeg). Styles: chiptune, ambient, electronic. Deterministic, offline, no cloud service."
         }
       ]
     },
@@ -7994,9 +7994,9 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/paveman/SKILL.md",
-      "version": "1.0.2",
+      "version": "1.0.1",
       "status": "active",
-      "description": "Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt. Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code.",
+      "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt.",
       "languages": [
         "de",
         "en"
@@ -8006,13 +8006,13 @@
           "language": "de",
           "path": "skills/utilities/paveman/SKILL.md",
           "title": "Paveman — Regel- und Gedächtnisdateien deterministisch kürzen",
-          "description": "Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt. Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code."
+          "description": "Erkennt Aufträge, eine Regel- oder Gedächtnisdatei zu kürzen (\"kürze meine CLAUDE.md\", \"MEMORY.md ist zu lang\", \"komprimiere die Doku, ohne Technik anzutasten\", \"diese Regeldatei wird über die Zeichengrenze abgeschnitten\") und nutzt dafür das Modul paveman — ein deterministisches, modellfreies CLI-Werkzeug zum Kürzen von Prosa in Markdown-/Textdateien mit Trockenlauf als Standard, Rollback und strengem Schutz-Validator für Pfade, Überschriften und Code. Nutze diesen Skill bei Sätzen wie \"kürze <Datei>\", \"diese Datei ist zu lang/wird abgeschnitten\", \"shrink this rule file\", \"komprimiere ohne Inhalt zu verändern\" oder wenn eine Regel-/Gedächtnisdatei erkennbar an eine Zeichen- oder Zeilengrenze stößt."
         },
         {
           "language": "en",
           "path": "skills/utilities/paveman/SKILL.en.md",
           "title": "Paveman — deterministically shorten rule and memory files",
-          "description": "Use this skill for sentences like \"shorten <file>\", \"this file is too long/gets truncated\", \"shrink this rule file\", \"compress without changing the content\", or whenever a rule/ memory file is noticeably hitting a character or line limit. Recognizes orders to shorten a rule or memory file (\"shorten my CLAUDE.md\", \"MEMORY.md is too long\", \"compress the docs without touching the technical content\", \"this rule file gets truncated past the character limit\") and uses the module paveman for it — a deterministic, model-free CLI tool for shortening prose in Markdown/text files, with a dry run as the default, rollback and a strict protection validator for paths, headings and code."
+          "description": "Recognizes orders to shorten a rule or memory file (\"shorten my CLAUDE.md\", \"MEMORY.md is too long\", \"compress the docs without touching the technical content\", \"this rule file gets truncated past the character limit\") and uses the module paveman for it — a deterministic, model-free CLI tool for shortening prose in Markdown/text files, with a dry run as the default, rollback and a strict protection validator for paths, headings and code. Use this skill for sentences like \"shorten <file>\", \"this file is too long/gets truncated\", \"shrink this rule file\", \"compress without changing the content\", or whenever a rule/ memory file is noticeably hitting a character or line limit."
         }
       ]
     },

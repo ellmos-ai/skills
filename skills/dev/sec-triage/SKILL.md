@@ -1,11 +1,11 @@
 ---
 name: sec-triage
-version: 0.1.1
+version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-15
-description: "Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report."
+updated: 2026-10-31
+description: "Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

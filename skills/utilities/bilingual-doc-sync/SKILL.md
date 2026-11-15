@@ -1,11 +1,21 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.3
+version: 1.2.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-11-15
-description: "Nutze diesen Skill bei „sind DE und EN synchron?\", „zieh die englische/deutsche Version nach\", „Übersetzung ist veraltet\", bei zweisprachigen Papers/READMEs/Skills, oder als periodischen Check über einen Dokumentbestand. Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen, Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Enthält auch das Expansions-Audit: bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen)."
+updated: 2026-09-26
+description: >
+  Parallel geführte Sprachfassungen eines Dokuments (Paper DE/EN, README + README_de,
+  SKILL.md + SKILL.en.md, Website-Texte) synchron halten: fehlende Fassung nachziehen,
+  Abschnitts-Parallelität prüfen, Divergenzen beheben — mit klarer Leitsprache-Regel und
+  kontrolliertem Rücktransfer, wenn die Nebenfassung etwas besser löst. Nutze diesen Skill
+  bei „sind DE und EN synchron?", „zieh die englische/deutsche Version nach",
+  „Übersetzung ist veraltet", bei zweisprachigen Papers/READMEs/Skills, oder als
+  periodischen Check über einen Dokumentbestand. Enthält auch das Expansions-Audit:
+  bewerten, ob ein Projekt/Dokument WEITERE Sprachen verdient (i18n-Eignung nach
+  Zielgruppe, technische Vorbereitung, kein blindes Massenübersetzen).
+
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

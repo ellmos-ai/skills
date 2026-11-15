@@ -1,11 +1,11 @@
 ---
 name: sec-validate
-version: 0.1.1
+version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-15
-description: "Use for 'verify the findings', 'weed out false positives', 'is this really exploitable', 'independent second check of the scan'. Tries to REFUTE every candidate in findings.json: trace the source-to-sink path, check reachability and countermeasures, calibrate severity, reproduce locally where that is safe. Sets validatedBy (confirmed/refuted/uncertain) and status validated or rejected with a reason. The validator should be a different provider than the finder. Finding new issues: sec-scan. Classifying foreign reports: sec-triage. Report: sec-report."
+updated: 2026-10-31
+description: "Tries to REFUTE every candidate in findings.json: trace the source-to-sink path, check reachability and countermeasures, calibrate severity, reproduce locally where that is safe. Sets validatedBy (confirmed/refuted/uncertain) and status validated or rejected with a reason. Use for 'verify the findings', 'weed out false positives', 'is this really exploitable', 'independent second check of the scan'. The validator should be a different provider than the finder. Finding new issues: sec-scan. Classifying foreign reports: sec-triage. Report: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

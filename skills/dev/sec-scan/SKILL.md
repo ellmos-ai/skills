@@ -1,11 +1,11 @@
 ---
 name: sec-scan
-version: 0.1.1
+version: 0.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-15
-description: "Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report."
+updated: 2026-10-31
+description: "Anbieterneutraler Security-Scan eines eigenen Repos: Bedrohungsmodell, Aufteilung nach Vertrauensgrenzen, gezielte Prüfung je Paket (Injection, Authn/Authz, Secrets, Krypto, Deserialisierung, Pfade, SSRF, Konfiguration, verwundbare Abhängigkeiten), Kandidaten mit Evidenz in findings.json und ehrliche coverage.json. Modi standard und deep. Nutzen bei 'Security-Scan', 'Repo auf Schwachstellen prüfen', 'Sicherheitsreview', 'Vollscan', 'Scanner-Ergebnis in das ellmos-Format übernehmen'. Enthält den Adapter für /claude-security und codex-security. Nur Änderungen/PRs: sec-diff-scan. Kandidaten widerlegen: sec-validate. Fremde Berichte importieren: sec-triage. Bericht: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
