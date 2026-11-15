@@ -1,10 +1,10 @@
 ---
 name: decision-draw
-version: 1.4.0
+version: 1.5.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-14
+updated: 2026-11-15
 description: >
   Verwenden, wenn mehrere gebündelte offene Entscheidungen auf einmal zur
   Abnahme vorgelegt werden sollen, etwa bei "decision draw", /decision-draw,
@@ -99,7 +99,7 @@ Fünf offene Entscheidungen zum BACH-Kernverbund, jeweils in der empfohlenen For
 
 ## Entscheidungsvorlage als Formular (Bauanleitung)
 
-Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Je nach Entscheidungsart stehen drei Bild-Modi (`bilder_modus`) zur Verfügung: `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Karten mit Buchstaben A, B, C... passend zu den Optionen für Variantenvergleiche, wählbar per Klick oder Tastendruck) und `swipe` (1–60 Bilder nacheinander wie ein Stapel mit Ja/Nein/Rückfrage und Bestätigung der Gesamtzusammenfassung für Massenprüfungen). Die Avatar-Vorhersage wird erst nach getroffener Wahl sichtbar, um nicht als Anker zu wirken. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md).
+Damit die Nutzerin oder der Nutzer ein Entscheidungsdokument im Dokument selbst anklickt (Massenabnahme, Anmerkung je Posten, Speichern und Abschicken, maschinenlesbare Antwortdatei `ticket-master.decision-answers.v1`), erzeugt `scripts/formular/build_form.py` aus einer kleinen Daten-JSON (`form.schema.json`, Beispiel `example_form.json`) **ein selbstenthaltenes HTML-Formular**. Das Formular wird nicht jedes Mal neu gebaut: Daten schreiben, `build_form.py` aufrufen. Je Posten kurzer Kontext (250 Zeichen), je Option ein Satz Wirkung, Empfehlung mit einem Grund und die Pflichtfelder Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“; Längeres nur aufklappbar; die Wahl „Rückfrage / mehr Info nötig“ gibt es je Posten. Je nach Entscheidungsart stehen drei Bild-Modi (`bilder_modus`) zur Verfügung: `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Karten mit Buchstaben A, B, C... passend zu den Optionen für Variantenvergleiche, wählbar per Klick oder Tastendruck) und `swipe` (1–60 Bilder nacheinander wie ein Stapel mit Ja/Nein/Rückfrage und Bestätigung der Gesamtzusammenfassung für Massenprüfungen). Die Avatar-Vorhersage wird erst nach getroffener Wahl sichtbar, um nicht als Anker zu wirken. Die vollständige Anleitung mit den zwei Wegen (A: HTML-Formular, B: Tk-Fenster mit `draw.json`), dem Antwortschema und den Stellen, die für ein neues Dokument anzupassen sind: [references/formular.md](references/formular.md). Derselbe Weg gilt für [decision-briefing](../decision-briefing/SKILL.md). **Öffnen und Speichern:** Das Formular nie direkt als Datei oder per `Invoke-Item` öffnen (dann erscheint beim Speichern ein Ordnerdialog), sondern `python <skill>/scripts/formular/serve_form.py <formular.html> [--out-dir <Zielordner>]` als Hintergrundprozess starten. Der lokale Dienst (nur 127.0.0.1) öffnet das Formular im normalen Edge, schreibt beim Klick auf „Speichern und abschicken“ die Antwortdatei (`<dokument_id>.antwort.json`) und die beantwortete Kopie (`<dokument_id>_BEANTWORTET.html`) ohne Dialog in den Zielordner (Standard: Ordner des Formulars; `--out-dir` setzen, wenn das Dokument einen `zielordner` nennt) und beendet sich selbst. Der Zielordner steht nach dem Speichern im Formular; nenne ihn der Nutzerin oder dem Nutzer. Ohne Python öffnet sich das Formular als Datei und speichert über Download-Links, Text und zuletzt den Ordnerdialog (Regel 9).
 
 Pflichtregeln aus dem Vorfall vom 2026-11-07 (Begründungen in der Anleitung):
 
@@ -371,6 +371,9 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 
 ## Changelog
 
+
+### 1.5.0 (2026-11-15)
+- Formular ohne Ordnerdialog speichern: `scripts/formular/serve_form.py` (lokaler Speicherdienst auf 127.0.0.1, nur Standardbibliothek) öffnet das Formular im normalen Edge und schreibt die Antwort selbst; Anleitung zum Öffnen und Speichern im Formular-Abschnitt, Rückfall ohne Python bleibt (Download-Links, Text, Ordnerdialog zuletzt). Anlass: Ticket T-20261115-242335144.
 ### 1.4.0 (2026-11-14)
 - Kurzfassung als Standard (Nutzeranweisung 2026-11-14: „Gib mir alle Entscheidungen in der empfohlenen Form ausgeschrieben“): Einleitungszeile, nummerierte Liste mit ein bis zwei Sätzen je Entscheidung in Ergebnisform, Abnahmezeile. Der achtteilige Aufbau heißt jetzt „Ausführliche Fassung“ und kommt nur auf ausdrücklichen Wunsch. Anlass: Ein Draw über acht Audit-Entscheidungen fiel nach dem Pflichtaufbau so lang aus, dass der Nutzer ihn als aufgebläht zurückwies.
 - `description` beginnt mit dem Auslöser und nennt die Kurzfassung; neues Beispiel (Pilot als Kurzfassung); Stilregel 2 und 4, Abgrenzungstabelle und Praxisregel 8 entsprechend angepasst. Rücktransfer- und Formularregeln unverändert.

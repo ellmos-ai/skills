@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.4.0
+version: 1.5.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-09
+updated: 2026-11-15
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -164,7 +164,7 @@ DECISION: <question>
 
 ## Briefing as a form (build guide)
 
-Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing data (a small JSON, format `form.schema.json`), the generator `scripts/formular/build_form.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form** (not rebuilt each time; per item a short context, cost/effort, risk/reversibility, deadline, consequence of "no", anything longer only collapsible; plus the choice "question / more info needed"); the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only.
+Instead of typing letters in the chat, the user can click through a finished briefing inside the document: choose options, add a note per item, "accept everything as recommended" (bulk acceptance), save and send. From the briefing data (a small JSON, format `form.schema.json`), the generator `scripts/formular/build_form.py` of the [decision-draw](../decision-draw/SKILL.en.md) skill produces **one self-contained HTML form** (not rebuilt each time; per item a short context, cost/effort, risk/reversibility, deadline, consequence of "no", anything longer only collapsible; plus the choice "question / more info needed"); the answer file (`ticket-master.decision-answers.v1`) holds the chosen option per item and so supplies the "Chosen" column of the Phase 4 result table. The full guide (two routes, answer schema, places to adapt): [decision-draw/references/formular.md](../decision-draw/references/formular.md) (German). The form writes to no register; booking stays Phase 4 only. **Opening and saving:** Never open the form directly as a file or with `Invoke-Item` (saving then shows a folder dialog); instead start `python ../decision-draw/scripts/formular/serve_form.py <form.html> [--out-dir <target folder>]` as a background process. The local service (127.0.0.1 only) opens the form in the user's normal Edge, writes the answer file (`<document_id>.antwort.json`) and the answered copy (`<document_id>_BEANTWORTET.html`) into the target folder without a dialog when "Save and send" is clicked (default: the form's folder; set `--out-dir` if the document names a `zielordner`), and ends itself. The target folder is shown in the form after saving; tell the user. Without Python the form opens as a file and saves through download links, text and, last, the folder dialog (rule 9).
 
 **Image modes (`bilder_modus`):**
 - `serie` (default, 1–12 images): Classic image gallery / series.
@@ -268,6 +268,9 @@ the artifact ends with exactly one line:
 
 ## Changelog
 
+
+### 1.5.0 (2026-11-15)
+- Save the form without a folder dialog: `scripts/formular/serve_form.py` (local save service on 127.0.0.1, standard library only) opens the form in the user's normal Edge and writes the answer itself; opening and saving instructions are in the form section, the fallback without Python stays (download links, text, folder dialog last). Reason: ticket T-20261115-242335144.
 ### 1.4.0 (2026-11-09)
 - Documented image modes for form briefings (`bilder_modus` in `form.schema.json` / `build_form.py` of `decision-draw`): `serie` (default, 1–12 images), `polaroid` (2–12 images, exactly 1 image per option with letters A, B, C... for visual variant choices), and `swipe` (1–60 images for sequential yes/no/question bulk review with summary confirmation).
 - Avatar prediction: badge is only visible after a choice is made (preventing cognitive anchor).
