@@ -1,10 +1,10 @@
 ---
 name: ellmos-skill-creator
-version: 0.3.0
+version: 0.3.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-09
+updated: 2026-11-15
 description: "Verwenden, wenn ein neuer Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'bau mir einen Skill für X', 'skill-creator nutzen', 'neuen Skill anlegen', 'diesen Skill ellmos-konform machen', 'Lernvertrag anlegen', 'Usecase-Abdeckung prüfen', /ellmos-skill-creator). Delegiert die Entwurfsschleife an das skill-creator-Plugin und setzt ellmos-Standards durch: 9-Felder-Frontmatter, grounding-seed, config.json mit Lernvertrag, connections.json, Vendor-Bewusstsein und Lern-/Abdeckungs-Dateisatz. NICHT verwenden für reines Skill-Finden/Routen (dafür skill-finder) oder Landschafts-Audits (dafür skill-explorer)."
 standalone: true
 anthropic_compatible: true
@@ -82,12 +82,15 @@ Die `description` entscheidet allein, ob der Skill je aufgerufen wird; der Rumpf
 unsichtbar. Die Description-Optimierung aus Schritt 1 ist hier deshalb **kein Angebot, sondern Pflicht**.
 Vor dem Abschluss prüfen:
 
-- Das **WANN steht vorn** („Verwenden, wenn …“ / „Use when/for …“), danach was der Skill tut.
+- Das **WANN steht vorn** („Verwenden, wenn …“ / „Use when/for …“), danach was der Skill tut. Der Auslöser
+  (mit 2–3 Beispielphrasen) steht in den **ersten 250 Zeichen**: Die Skill-Liste kappt jeden Eintrag und lässt
+  bei Überlauf ganze Beschreibungen weg (zuerst die der am seltensten genutzten Skills).
 - **Typische Formulierungen** in einfachen Anführungszeichen, dazu der Slash-Befehl.
 - **Abgrenzung** zu Nachbarskills („NICHT verwenden für … (anderer-skill)“).
 - **Drängend**, wo Claude sonst selbst loslegt (Bugs, Entscheidungen): „für JEDEN …, bevor …, auch wenn …“.
 - YAML-Wert in **doppelten Anführungszeichen**, höchstens 1024 Zeichen, in allen Sprachfassungen.
-- `python testing/skill_frontmatter_gate.py` nennt den Skill nicht mehr unter „ohne erkennbaren Auslöser“.
+- `python testing/skill_frontmatter_gate.py` nennt den Skill weder unter „ohne erkennbaren Auslöser“ noch unter
+  „Auslöser erst nach den ersten 250 Zeichen“.
 - Wo ein Plugin-Eval existiert: `claude plugin eval` an einem **echten** Fall, Kontrolllauf mit der alten
   Beschreibung, `--judge-model sonnet`.
 
@@ -218,6 +221,9 @@ ein Skill ohne sie funktioniert unverändert.
   Andock-/Selbstversorgungs-Logik, hier nur referenziert, nicht dupliziert.
 
 ## Changelog
+
+### 0.3.1 (2026-11-15)
+- Schritt 1b: Der Auslöser steht in den ersten 250 Zeichen der `description` (Skill-Liste kappt Einträge und lässt bei Überlauf ganze Beschreibungen weg); Gate-Hinweis „Auslöser erst nach den ersten 250 Zeichen“.
 
 ### 0.3.0 (2026-11-06)
 - Schritt 1b: Beschreibung = Auslöser ist Pflicht (WANN zuerst, Formulierungen, Abgrenzung, drängend bei Kernaufgaben, Gate-Hinweis, Eval an echtem Fall). Anlass: `decide` und `bugfix-protocol` wurden mit reiner Inhaltsangabe nie aufgerufen.

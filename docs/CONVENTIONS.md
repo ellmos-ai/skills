@@ -29,7 +29,12 @@ Ausgewaehlt wird ein Skill **nur ueber `description`**. Der Rumpf der SKILL.md -
 Eine Beschreibung, die nur sagt, WAS ein Skill ist („Structured decision making: Pro/Con matrix, …“), fuehrt
 dazu, dass er nie aufgerufen wird.
 
-1. **Das WANN steht vorn:** „Use when/for …“ bzw. „Verwenden, wenn …“, dann was der Skill tut.
+1. **Das WANN steht vorn:** „Use when/for …“ bzw. „Verwenden, wenn …“, dann was der Skill tut. Der Ausloeser
+   (mit 2-3 Beispielphrasen) steht in den **ersten 250 Zeichen** -- die Skill-Liste kuerzt jeden Eintrag
+   (`skillListingMaxDescChars`, hier 300, Standard 1536) und laesst bei Ueberlauf des Gesamtbudgets
+   (`skillListingBudgetFraction`) **ganze Beschreibungen weg**, zuerst die der am seltensten aufgerufenen Skills
+   (code.claude.com/docs/en/skills, Abschnitt „Skill descriptions are cut short“). Ein Skill ohne Beschreibung in
+   der Liste wird kaum noch gewaehlt und damit noch seltener aufgerufen.
 2. **Typische Formulierungen** der Nutzerin oder des Nutzers in einfachen Anfuehrungszeichen und der
    Slash-Befehl (`/decide`).
 3. **Abgrenzung** zu Nachbarskills: „Do NOT use for … (anderer-skill)“.
@@ -44,7 +49,8 @@ dazu, dass er nie aufgerufen wird.
 Inhaltsangabe 0/3-mal aufgerufen, mit Ausloeser 3/3 (Δ +1,00); `bugfix-protocol` 2/6 im ersten Entwurf, 4/4 mit
 der draengenden Fassung (Δ +0,56). **Messen an einem echten Fall** (Zielkonflikt, Ursache weit vom Symptom),
 nicht an einer trivialen Frage -- bei offensichtlichen Aufgaben ruft Claude keinen Skill auf, und das ist richtig.
-`testing/skill_frontmatter_gate.py` nennt Skills ohne erkennbaren Ausloeser als Hinweis (blockiert nicht).
+`testing/skill_frontmatter_gate.py` nennt Skills ohne erkennbaren Ausloeser als Hinweis (blockiert nicht) und
+ebenso Skills, deren Ausloeser erst nach den ersten 250 Zeichen steht (`skills_ausloeser_zu_spaet`).
 
 ### `visibility` -- wie weit darf der Skill nach aussen?
 

@@ -162,6 +162,30 @@ class SkillFrontmatterGateTests(unittest.TestCase):
                 self.assertEqual(gate.main(["--repo", str(root)]), 0)
             self.assertIn("Hinweis (blockiert nicht): 2 Skill(s)", out.getvalue())
 
+    def test_ausloeser_zu_spaet_meldet_nur_spaeten_ausloeser_und_blockiert_nicht(self) -> None:
+        """2026-11-15: the skill list caps each entry; a trigger that only starts after the first 250 characters
+        is dropped with the rest. Skills without any trigger belong to skills_ohne_ausloeser, not here."""
+        fueller = "Beschreibt ausfuehrlich, was dieser Skill im Detail alles tut und liefert. " * 5
+        faelle = {
+            "vorn": (f'"Use when the user asks for a review. {fueller}"', False),
+            "spaet": (f'"{fueller}Use when the user asks for a review."', True),
+            "gar-nicht": (f'"{fueller}"', False),
+            "slash-spaet": (f'"{fueller}Start with /beispiel."', True),
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for name, (beschreibung, _) in faelle.items():
+                d = root / "skills" / "utilities" / name
+                d.mkdir(parents=True)
+                (d / "SKILL.md").write_text(f"---\nname: {name}\ndescription: {beschreibung}\n---\nbody\n",
+                                            encoding="utf-8")
+            self.assertEqual(gate.skills_ausloeser_zu_spaet(root),
+                             sorted(f"skills/utilities/{n}" for n, (_, flag) in faelle.items() if flag))
+            self.assertEqual(gate.skills_ausloeser_zu_spaet(root, fenster=10_000), [])
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(gate.main(["--repo", str(root)]), 0)
+            self.assertIn("2 Skill(s), deren Ausloeser erst nach den ersten 250 Zeichen", out.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()

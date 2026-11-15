@@ -1,10 +1,10 @@
 ---
 name: ellmos-skill-creator
-version: 0.3.0
+version: 0.3.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-09
+updated: 2026-11-15
 description: "Use when a new skill for this ecosystem is to be created or an existing one retrofitted for ellmos conformance (e.g. 'create a skill', 'build me a skill for X', 'use skill-creator', 'create a new skill', 'make this skill ellmos-conformant', 'create a learning contract', 'check usecase coverage', /ellmos-skill-creator). Delegates the design loop to the official skill-creator plugin while enforcing ellmos standards: 9-field frontmatter, grounding-seed, config.json with learning contract, connections.json, vendor awareness, and learning/coverage file sets. Do NOT use for pure skill finding/routing (use skill-finder) or landscape audits (use skill-explorer)."
 standalone: true
 anthropic_compatible: true
@@ -90,12 +90,15 @@ The `description` alone decides whether the skill is ever called; the body is in
 The description optimization from step 1 is therefore **not an offer here but mandatory**. Check before
 finishing:
 
-- The **WHEN comes first** ("Use when/for ..."), then what the skill does.
+- The **WHEN comes first** ("Use when/for ..."), then what the skill does. The trigger (with 2-3 example
+  phrasings) belongs in the **first 250 characters**: the skill list caps every entry and drops whole
+  descriptions on overflow (the least-used skills first).
 - **Typical phrasings** in single quotes, plus the slash command.
 - **Boundary** to neighbouring skills ("Do NOT use for ... (other-skill)").
 - **Pushy** where Claude would otherwise just start (bugs, decisions): "for ANY ..., before ..., even if ...".
 - YAML value in **double quotes**, at most 1024 characters, in every language version.
-- `python testing/skill_frontmatter_gate.py` no longer lists the skill under "without a recognisable trigger".
+- `python testing/skill_frontmatter_gate.py` lists the skill neither under "without a recognisable trigger" nor
+  under "trigger only after the first 250 characters".
 - Where a plugin eval exists: `claude plugin eval` on a **real** case, a control run with the old
   description, `--judge-model sonnet`.
 
@@ -253,6 +256,9 @@ skill without them works unchanged.
   duplicated.
 
 ## Changelog
+
+### 0.3.1 (2026-11-15)
+- Step 1b: the trigger belongs in the first 250 characters of the `description` (the skill list caps entries and drops whole descriptions on overflow); gate hint "trigger only after the first 250 characters".
 
 ### 0.3.0 (2026-11-06)
 - Step 1b: description = trigger is mandatory (WHEN first, phrasings, boundary, pushy for core tasks, gate hint, eval on a real case). Reason: `decide` and `bugfix-protocol` were never called with a what-only description.
