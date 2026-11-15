@@ -7269,7 +7269,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/decision-briefing/SKILL.md",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "status": "active",
       "description": "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents.",
       "languages": [
@@ -7326,7 +7326,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/decision-draw/SKILL.md",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "status": "active",
       "description": "Verwenden, wenn mehrere gebündelte offene Entscheidungen auf einmal zur Abnahme vorgelegt werden sollen, etwa bei \"decision draw\", /decision-draw, \"gib mir alle Entscheidungen in der empfohlenen Form\", \"wie sieht das Ganze aus wenn wir allem zustimmen\", \"zeichne mir das Gesamtbild\". Standard ist die Kurzfassung -- jede Entscheidung in ein bis zwei Sätzen so ausgeschrieben, wie sie nach der Empfehlung lautet, danach Gesamtabnahme (\"Passt so\") oder Korrektur per Nummer. Korrekturen werden in Einzelentscheidungen übersetzt und über decision-briefing Phase 4 gebucht. Das ausführliche Gesamtbild (Konzept, Zusammenspiel, Umsetzung, Anhang) nur auf ausdrücklichen Wunsch. NICHT nutzen, wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht decide.",
       "languages": [

@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.4.0
+version: 1.5.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-09
+updated: 2026-11-15
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -162,7 +162,7 @@ ENTSCHEIDUNG: <Frage>
 
 ## Briefing als Formular (Bauanleitung)
 
-Statt Buchstaben im Chat zu tippen, kann die Nutzerin oder der Nutzer ein fertiges Briefing im Dokument selbst anklicken: Optionen wählen, je Posten eine Anmerkung, „Alles wie empfohlen“ (Massenabnahme), Speichern und Abschicken. Aus den Briefing-Daten (kleine JSON, Format `form.schema.json`) erzeugt der Generator `scripts/formular/build_form.py` des Skills [decision-draw](../decision-draw/SKILL.md) **ein selbstenthaltenes HTML-Formular** (nicht jedes Mal neu bauen; je Posten kurzer Kontext, Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Längeres nur aufklappbar; dazu die Wahl „Rückfrage / mehr Info nötig“); die Antwortdatei (`ticket-master.decision-answers.v1`) enthält je Posten die gewählte Option und liefert damit die Spalte „Gewählt“ der Ergebnis-Tabelle aus Phase 4. Die vollständige Anleitung (zwei Wege, Antwortschema, anzupassende Stellen): [decision-draw/references/formular.md](../decision-draw/references/formular.md). Das Formular schreibt in kein Register; gebucht wird weiter nur in Phase 4.
+Statt Buchstaben im Chat zu tippen, kann die Nutzerin oder der Nutzer ein fertiges Briefing im Dokument selbst anklicken: Optionen wählen, je Posten eine Anmerkung, „Alles wie empfohlen“ (Massenabnahme), Speichern und Abschicken. Aus den Briefing-Daten (kleine JSON, Format `form.schema.json`) erzeugt der Generator `scripts/formular/build_form.py` des Skills [decision-draw](../decision-draw/SKILL.md) **ein selbstenthaltenes HTML-Formular** (nicht jedes Mal neu bauen; je Posten kurzer Kontext, Kosten/Aufwand, Risiko/rückgängig, Frist, Folge bei „Nein“, Längeres nur aufklappbar; dazu die Wahl „Rückfrage / mehr Info nötig“); die Antwortdatei (`ticket-master.decision-answers.v1`) enthält je Posten die gewählte Option und liefert damit die Spalte „Gewählt“ der Ergebnis-Tabelle aus Phase 4. Die vollständige Anleitung (zwei Wege, Antwortschema, anzupassende Stellen): [decision-draw/references/formular.md](../decision-draw/references/formular.md). Das Formular schreibt in kein Register; gebucht wird weiter nur in Phase 4. **Öffnen und Speichern:** Das Formular nie direkt als Datei oder per `Invoke-Item` öffnen (dann erscheint beim Speichern ein Ordnerdialog), sondern `python ../decision-draw/scripts/formular/serve_form.py <formular.html> [--out-dir <Zielordner>]` als Hintergrundprozess starten. Der lokale Dienst (nur 127.0.0.1) öffnet das Formular im normalen Edge, schreibt beim Klick auf „Speichern und abschicken“ die Antwortdatei (`<dokument_id>.antwort.json`) und die beantwortete Kopie (`<dokument_id>_BEANTWORTET.html`) ohne Dialog in den Zielordner (Standard: Ordner des Formulars; `--out-dir` setzen, wenn das Dokument einen `zielordner` nennt) und beendet sich selbst. Der Zielordner steht nach dem Speichern im Formular; nenne ihn der Nutzerin oder dem Nutzer. Ohne Python öffnet sich das Formular als Datei und speichert über Download-Links, Text und zuletzt den Ordnerdialog (Regel 9).
 
 **Bild-Modi (`bilder_modus`):**
 - `serie` (Standard, 1–12 Bilder): Klassische Galerie/Serie.
@@ -267,6 +267,9 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 
 ## Changelog
 
+
+### 1.5.0 (2026-11-15)
+- Formular ohne Ordnerdialog speichern: `scripts/formular/serve_form.py` (lokaler Speicherdienst auf 127.0.0.1, nur Standardbibliothek) öffnet das Formular im normalen Edge und schreibt die Antwort selbst; Anleitung zum Öffnen und Speichern im Formular-Abschnitt, Rückfall ohne Python bleibt (Download-Links, Text, Ordnerdialog zuletzt). Anlass: Ticket T-20261115-242335144.
 ### 1.4.0 (2026-11-09)
 - Bild-Modi für Formular-Briefings dokumentiert (`bilder_modus` in `form.schema.json` / `build_form.py` von `decision-draw`): `serie` (Standard, 1–12 Bilder), `polaroid` (2–12 Bilder, exakt 1 Bild je Option mit Buchstaben A, B, C... für visuelle Variantenwahlen) und `swipe` (1–60 Bilder zur sequenziellen Ja/Nein/Rückfrage-Massenprüfung mit Bestätigungsübersicht).
 - Avatar-Vorhersage: Badge wird erst nach getroffener Wahl sichtbar (kein kognitiver Vorab-Anker).

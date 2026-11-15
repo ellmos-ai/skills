@@ -191,6 +191,18 @@
       box.appendChild(a); box.appendChild(document.createElement('br'));
     });
   }
+  /* Stufe 1: lokaler Speicherdienst (scripts/formular/serve_form.py), nur auf http://127.0.0.1:<Port>/<Token>/ aktiv; als file:// ist SVC null. */
+  var SVC = (location.protocol === 'http:' && /^\/[A-Za-z0-9_-]{16,}\/$/.test(location.pathname)) ? location.pathname : null;
+  async function saveViaService(files) {
+    var ctl = new AbortController(), t = setTimeout(function () { ctl.abort(); }, 20000);
+    try {
+      var r = await fetch(SVC + 'save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
+        body: JSON.stringify({ files: files.map(function (f) { return { name: f.name, text: f.text }; }) }) });
+      var j = await r.json().catch(function () { return {}; });
+      if (!r.ok || !j.ok) throw new Error('Dienst antwortet mit ' + r.status + (j.error ? ' (' + j.error + ')' : ''));
+      return j;
+    } finally { clearTimeout(t); }
+  }
   async function writeToFolder(files) {
     var dir = await window.showDirectoryPicker({ id: 'ticket-master-entscheidungen', mode: 'readwrite' });
     for (var i = 0; i < files.length; i++) {
@@ -210,12 +222,20 @@
     if (hasVorab() && !st.agpl.choice) body += '<p class="warn">„AGPL bleibt“ ist noch offen.</p>';
     if (marked.length) body += '<p><b>Markierte Posten (rot, Löschung, Geld, Außenwirkung, Lizenz) noch einmal:</b></p><ul>' + marked.map(function (m) { return '<li><b>' + esc(m.id) + '</b> ' + esc(m.theme) + ': ' + (st.choice[m.id] ? esc(st.choice[m.id]) + ' (' + esc(label(m, st.choice[m.id])) + ')' + (st.via[m.id] === 'bulk' ? ', per Massenaktion' : '') : '<i>offen</i>') + ' <span class="muted">[' + esc(m.marked_reason) + ']</span></li>'; }).join('') + '</ul>';
     body += '<p>' + (st.gesamt.explicit ? 'Gesamtabnahme: <b>ausdrücklich ja</b>.' : 'Gesamtabnahme: nicht erklärt (Teilantwort).') + '</p>';
-    body += '<p class="muted">Gleich öffnet dein Browser eine Ordnerwahl.' + (DATA.zielordner ? ' Gewünscht ist <code>' + esc(DATA.zielordner) + '</code>.' : '') + ' Lässt dein Browser den Ordner nicht zu oder brichst du ab, geht nichts verloren: Die Download-Links und der Text bleiben unten stehen.</p>';
+    body += '<p class="muted">' + (SVC ? 'Die Antwort wird ohne Dialog direkt gespeichert (lokaler Dienst); eine Datei gleichen Namens wird ersetzt. Klappt das nicht, bleiben die Download-Links und der Text unten stehen.' : 'Gleich öffnet dein Browser eine Ordnerwahl.' + (DATA.zielordner ? ' Gewünscht ist <code>' + esc(DATA.zielordner) + '</code>.' : '') + ' Lässt dein Browser den Ordner nicht zu oder brichst du ab, geht nichts verloren: Die Download-Links und der Text bleiben unten stehen.') + '</p>';
     var r = await ask('Speichern und abschicken?', body, [{ id: 'back', label: 'Zurück zum Bearbeiten' }, { id: 'save', label: open.length ? 'Offene bleiben offen, speichern' : (qs.length ? 'Mit Rückfragen speichern' : 'Speichern'), primary: true }]);
     if (r.id !== 'save') return;
     var m = makeFiles();
     if (m.fatal) { fail('Die Antwort konnte nicht zusammengestellt werden', m.fatal); return; }
     showText(m.json); renderLinks(m.files); /* das Sicherungsnetz steht, BEVOR ein Dialog aufgeht */
+    if (SVC) { /* Stufe 1: lokaler Speicherdienst, kein Dialog */
+      try {
+        var j = await saveViaService(m.files);
+        say((m.notes.length ? m.notes.join(' ') + ' ' : '') + '<b>Gespeichert in „' + esc(j.dir) + '“</b> um ' + nowUtc() + ': ' + j.written.map(esc).join(' und ') + ' vollständig geschrieben (ohne Dialog).<br>Der Browser kann keine Nachricht senden: <b>sag ticket-master Bescheid</b>.', 'ok');
+        lsSet();
+        return;
+      } catch (e) { m.notes.push('Der lokale Speicherdienst hat nicht geantwortet (' + esc(errText(e)) + '); es geht über den Ordnerdialog weiter.'); }
+    }
     var notes = m.notes.length ? m.notes.join(' ') + ' ' : '';
     if (!window.showDirectoryPicker) {
       say(notes + '<b>Dieser Browser kann nicht direkt in einen Ordner schreiben.</b> Klicke unten auf die Links (je Datei einzeln) oder nimm „Antwort als Text kopieren“.', 'warn');
@@ -566,6 +586,8 @@
       });
       lsClear(); render();
     });
+    /* Lebenszeichen: solange der Tab offen ist, haelt es den lokalen Dienst am Leben; danach beendet er sich selbst. */
+    if (SVC && !answered) setInterval(function () { fetch(SVC + 'ping', { cache: 'no-store' }).catch(function () { /* Dienst weg: Rueckfall greift beim Speichern */ }); }, 60000);
     document.body.classList.add('ready');
     render();
     if (restoreHint) toast('Gesamtabnahme nicht übernommen: Sie muss erneut ausdrücklich bestätigt werden.');
