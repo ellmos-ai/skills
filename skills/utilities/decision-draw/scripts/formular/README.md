@@ -11,6 +11,8 @@ Aus einer kleinen Daten-JSON entsteht **eine** selbstenthaltene HTML-Datei: kein
 | `formular.js`, `formular.css`, `form_base.css` | Verhalten und Aussehen; der Generator bettet sie ein |
 | `savetests.py` | gemeinsame Headless-Tests für Regel 9 (Speichern hängt nie von einem Dialog ab) |
 | `selbsttest_form.py` | Selbsttest des Templates (keine Umgebungsvariablen nötig) |
+| `serve_form.py` | lokaler Speicherdienst + Öffner (127.0.0.1, Standardbibliothek): `python serve_form.py <formular.html> [--out-dir DIR]`; Speichern ohne Ordnerdialog, beendet sich selbst |
+| `selbsttest_serve.py` | Test des Speicherdienstes (`python -m unittest selbsttest_serve -v`; ein Headless-Ende-zu-Ende-Test) |
 | `headless_util.py`, `make_fixtures.py` | Hilfen für Browsertests; **nur headless**. `make_fixtures.py` erzeugt Test-Fixtures über den Regel-9-Sicherungsbereich |
 | `build_from_markdown.py`, `selbsttest_markdown.py` | frühere Fassung: Gesamtdokument (Markdown) vom 2026-11-07 -> Formular. Nur noch Beispielmigration |
 
