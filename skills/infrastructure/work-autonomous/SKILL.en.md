@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.5.1
+version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-09-09
+updated: 2026-11-22
 description: >
   Termination condition for autonomous loops: keep working independently as
   far as possible AND only end a loop once it is PROVEN that no autonomously
@@ -92,6 +92,26 @@ all.
 tickets kept arriving, including two at priority P1. Without this gate the loop would have reported
 `exhausted`/`blind` even though intake was still open — that is exactly what this gate prevents.
 
+#### Authority-desert gate (covered follow-up step, before any `USER/` ask)
+
+**Before routing an item to `USER/`, a combined ask, or a user question**, mandatorily check the
+**covered follow-up step rule (`Folgeschritt-Regel`)** — not only on empty-queue Tier 2, but right
+during ordinary Tier 1 work:
+1. **Goal:** Does the step serve a goal set or confirmed by the user in the active order, goal, or
+   plan (verbatim quote with date)?
+2. **Necessary:** Will the goal fail without it, with no milder equivalent path?
+3. **Intended path:** Does it use the intended system-internal path, with no new external recipient?
+4. **No new trade-off:** No significant cost, no external effect, no deletion/invalidation of
+   existing state, and no loosening of security or visibility?
+5. **No lock:** No `LOCK.user*`, no explicit ban, and no stricter project rule?
+
+Where `open-ocean` is available, invoke its checker (`python ocean.py authority check ...` or
+`tools.escalation_ladder.evaluate_cognitive_action_authority()`). **If covered:** execute without
+prompting and carry the verbatim goal quote in the report. If a technical guard (classifier/deny rule)
+blocks execution, that is not a new decision: return a ready-to-run command immediately instead of a
+decision prompt. Prompting despite context-secured intent is an **authority desert** error
+(`error_authority_desert`).
+
 Afterwards, look for further autonomously executable work the normal way (see the
 boundary section below) and do it: open `ACTIONABLE` tickets, unblocked `BLOCKED` tickets, due
 `WAITING` tickets, open `TODO.md`/`AUFGABEN.txt` items in projects with no user dependency, due
@@ -143,9 +163,10 @@ then — only if located — **content check** (the model actually reads whether
 there, using its own tools). A source that could not be located is NEVER content-checked — it
 counts as `unavailable`, not `empty`.
 
-1. Apply **`/think` + `/decide`** to the question: "Is there really no autonomously executable
-   work left, or am I overlooking something?" — structured analysis, not a gut feeling. No
-   found/empty/unavailable status (see above, not a source).
+1. Apply **`/think` + `/decide`** to the question: "Which goals has the user set in this session,
+   which open items follow directly from them, and is there really no autonomously executable work left
+   or am I overlooking something?" — structured analysis, not a gut feeling (first source of the
+   authority cascade). No found/empty/unavailable status (see above, not a source).
 2. **`decisions.ledger`** — location via `source_resolver.resolve("decisions.ledger")` /
    `grounding_seed.resolve(...)`, if installed; otherwise the known fallback path
    (`_control-center/_CONTROL/_DECISIONS/`, the `TO-DECIDE-USER*.txt` chain, the host's own
@@ -178,11 +199,13 @@ If any step finds new work → go back to Tier 1, do the work, set the guard sta
 
 ### Special case: only user-bound remainders left
 
-If the chain finds **no autonomous** task anymore, but `USER/*` tickets or undecided
-`_DECISIONS` items remain open, that is still a **stop for autonomy** — but not "nothing to do",
-rather "nothing *autonomous* to do". Per the ticket-master autonomy-loop rule, these items are
-presented **bundled** (one combined ask, not individual pings). The termination signal explicitly
-distinguishes this case from a genuinely empty backlog.
+If the chain finds **no autonomous** task anymore, but `USER/*` tickets or undecided `_DECISIONS` items
+remain open, **before bundling check every `USER` item once against the active order, goal, and
+decisions ("A bare `USER` label is not proof.")** — if covered by the follow-up rule, execute it
+directly instead of asking. Only for genuinely uncovered remainders is this a **stop for autonomy**
+(not "nothing to do", rather "nothing *autonomous* to do"). Per the ticket-master autonomy-loop rule,
+these remaining items are presented **bundled** (one combined ask, not individual pings). The
+termination signal explicitly distinguishes this case from a genuinely empty backlog.
 
 ## Boundary — what counts as "autonomously executable"?
 
@@ -195,17 +218,19 @@ Reference: `ticket-master` categories (`.AI/.MODULES/.CONTROL/ticket-master/docs
 | `BLOCKED/*` (host-receipt, foreign-state, lock, quota, dependency) | No, unless the blocker has **empirically** lapsed | A periodic re-check is allowed (autonomy loop); "present" alone is not sufficient proof — evidence is required. |
 | `WAITING/*` (scheduled, review-due, marker) before its date/marker | No | Time-bound. |
 | `WAITING/*` after the date/marker hits | **Yes** | Condition met → moves to `ACTIONABLE`. |
-| `USER/*` (decision, data, freigabe, hardware, session) | **Never autonomous** | Strictly requires a user decision/data/approval/hardware/session. Present bundled, see above. |
+| Step follows strictly from an active order, goal, or plan (quote present), uses the intended path, and introduces no new trade-off (covered follow-up rule) | **Yes (covered)** | Authority derived from the order; include the quote as evidence in the report. Asking the user here is an authority-desert error (`error_authority_desert`). |
+| `USER/*` (decision, data, freigabe, hardware, session) | **Never autonomous, once verified** that neither the active order, standing authority, nor a newer decision covers it | Strictly requires a user decision/data/approval/hardware/session; a self-assigned `USER` label is not proof. Present bundled, see above. |
 | `PARKED/*` (skip, backlog, until-trigger) | No, unless an explicit order/trigger exists | Deliberately deferred, no auto re-check. |
 | Open `TODO.md`/`AUFGABEN.txt` items without an approval/decision note | **Yes** | Project register, ordinary work. |
 | Due routine/hygiene checks (cooldown elapsed, no lock) | **Yes** | Regular maintenance per local policy. |
 | Areas locked by `LOCK.user.*` | **Never** | User lock — only the user removes it, see LOCK-SYSTEM. |
-| Irreversible or externally-effective steps without policy approval (Zenodo upload, pushing to judged/protected branches, server-spend decisions beyond the laptop threshold, permanent deletion without preview) | **No** | Requires approval/decision even when technically executable. |
+| Irreversible or externally-effective steps lacking coverage by an active order (quote), standing authority, or documented policy approval (Zenodo upload, pushing to judged/protected branches, server-spend decisions beyond the laptop threshold, permanent deletion without preview) | **No** | Requires order coverage, approval, or decision even when technically executable. |
 | A session only startable via GUI/login (e.g. a Claude Desktop task, interactive login, a physical hardware action) | **Never** | "A session only the user can start" — no loop can take that over. |
 
 Rule of thumb: something is autonomous if it can be brought to completion **without** a user
 decision, approval, data, hardware, or session, AND does not require an irreversible or
-externally-effective action lacking documented policy approval.
+externally-effective action lacking coverage by an active order (quote), standing authority, or
+documented policy approval.
 
 ## Guard against infinite loops (mandatory)
 
@@ -355,6 +380,15 @@ Tick 2 (user installs grounding-seed + usmc on this system):
 ```
 
 ## Changelog
+
+### 1.6.0 (2026-11-22)
+- Implemented the covered follow-up step rule (`Folgeschritt-Regel`) approved via avatar decision on
+  2026-11-21 (`T-20261115-774992728`, analysis `AUTORITAET-UND-ABSICHT_ANALYSE_2026-11-15.md` §4.1 a–f):
+  - Added the Tier 1 **Authority-desert gate** before any `USER/` routing, combined ask, or user
+    question, referencing `open-ocean` (`ocean authority check` / `tools/escalation_ladder.py`).
+  - Added the covered follow-up boundary row before `USER/*`, updated `USER/*`, bundling pre-check
+    ("A bare `USER` label is not proof."), the rule of thumb with order/goal/standing-authority coverage,
+    and chain step 1 with session-goal lookup.
 
 ### 1.5.1 (2026-09-09)
 - T-20260909-282509082: The documented fallback for `decisions.ledger` and `user.model` now follows the verified Control-Center move to `_CONTROL/_DECISIONS` and `_CONTROL/_USER-MIND`. Resolver priority and fail-closed behavior remain unchanged.

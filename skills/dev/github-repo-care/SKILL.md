@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.2
+version: 1.4.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -39,7 +39,7 @@ Bereite das Repository vor dem ersten öffentlichen Push vor. Eine korrekte `.gi
 
 1. **Lokale Regeln lesen.** Prüfe `AGENTS.md`, `CLAUDE.md`, `START.md`, Release-Policy, Naming-Policy und Lock-Policy, sofern vorhanden.
 2. **Sperren prüfen.** Wenn `LOCK.txt` oder eine passende `LOCK.*.txt` aktiv ist, diesen Scope nicht ändern.
-3. **Repository-Namen festlegen.** Namen, Organisation, Sichtbarkeit, Lizenz und Zweck in einem Satz festhalten.
+3. **Repository-Namen festlegen & Namens-Gate prüfen.** Namen, Organisation, Sichtbarkeit, Lizenz und Zweck in einem Satz festhalten. **Mechanisches Namens-Gate für Neuanlagen (`[U 2026-11-21]`):** Prüfe case-insensitiv, dass ein **neues** Repository, Paket oder Modul kein `ellmos` enthält (`python -c "import sys; s=sys.argv[1]; sys.exit(1 if 'ellmos' in s.lower() else 0)" "<slug>"`). Bei Treffer **sofort stoppen** und auf die lokale Naming-/Namespace-Registry bzw. einen geprüften Ersatznamen verweisen (bestehende `ellmos-*`-Repos und die Hintergrund-Org `ellmos-ai` behalten Bestandsschutz).
 4. **`.gitignore` vor `git add` anlegen.** Secrets, lokale Daten, Datenbanken, Build-Ausgaben, virtuelle Umgebungen, Caches, IDE-Dateien und private Notizen ausschließen.
 5. **Public-Basics ergänzen.** Typisch: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt` und CI.
 6. **README für Entdeckung schreiben.** Erste Bildschirmhöhe: Zweck, Installation, Nutzung, Privacy-Modell, Projektstruktur, Lizenz und kanonischer Repo-Name.
@@ -121,6 +121,7 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 ## Abschluss-Checkliste
 
 - [ ] Lokale Regeln und Sperren geprüft.
+- [ ] Namens-Gate für Neuanlagen bestanden (kein `ellmos` im neuen Repo-/Paketnamen; Bestandsschutz für Altbestände beachtet).
 - [ ] `.gitignore` existierte vor dem ersten Add.
 - [ ] Public-Dokumente, Lizenz, Security, Contributing, Changelog und `llms.txt` vorhanden.
 - [ ] README enthält Repo-Name, Zweck, Installation, Nutzung, Privacy und Lizenz.
@@ -133,6 +134,9 @@ Wenn CI nach einem Release rot ist, gilt das Repository noch nicht als sauber ve
 - [ ] Banner vorhanden? `org_profile_gate.py --org <org>` lief ohne Fund für dieses Repo.
 
 ## Changelog
+
+### 1.4.0 (2026-11-22)
+- Step 3 und Abschluss-Checkliste um das mechanische Namens-Gate für Neuanlagen ergänzt (`kein "ellmos"`, case-insensitiv mit Abbruch-Hinweis und Bestandsschutz für bestehende Repos/Org).
 
 ### 1.3.2 (2026-11-22)
 - Sprachhinweis korrigiert

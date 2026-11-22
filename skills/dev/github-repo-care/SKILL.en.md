@@ -1,6 +1,6 @@
 ---
 name: github-repo-care
-version: 1.3.2
+version: 1.4.0
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
@@ -40,7 +40,7 @@ Prepare the repository before the first public push. A correct `.gitignore`, pri
 
 1. **Read local rules.** Check `AGENTS.md`, `CLAUDE.md`, `START.md`, release policy, naming policy, and lock policy when present.
 2. **Check locks.** If `LOCK.txt` or a matching `LOCK.*.txt` is active, do not edit that scope.
-3. **Fix the repository identity.** Confirm name, organization, visibility, license, and one-sentence purpose.
+3. **Fix the repository identity & run the naming gate.** Confirm name, organization, visibility, license, and one-sentence purpose. **Mechanical naming gate for new creations (`[U 2026-11-21]`):** Check case-insensitively that any **new** repository, package, or module name does not contain `ellmos` (`python -c "import sys; s=sys.argv[1]; sys.exit(1 if 'ellmos' in s.lower() else 0)" "<slug>"`). On a match, **stop immediately** and point to the local naming/namespace registry or a cleared replacement name (existing `ellmos-*` repos and the background `ellmos-ai` organization remain grandfathered).
 4. **Create `.gitignore` before `git add`.** Exclude secrets, local data, databases, build output, virtual environments, caches, IDE files, and private notes.
 5. **Add public basics.** Typical files: `README.md`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `llms.txt`, and CI.
 6. **Write the README for discovery.** First viewport: purpose, installation, usage, privacy model, project layout, license, and canonical repository name.
@@ -122,6 +122,7 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 ## Final Checklist
 
 - [ ] Local rules and locks checked.
+- [ ] Naming gate passed for new creations (no `ellmos` in new repo/package names; existing names grandfathered).
 - [ ] `.gitignore` existed before the first add.
 - [ ] Public docs, license, security, contributing, changelog, and `llms.txt` present.
 - [ ] README includes repo name, purpose, installation, usage, privacy, and license.
@@ -134,6 +135,9 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Changelog
+
+### 1.4.0 (2026-11-22)
+- Added the mechanical naming gate for new creations to Step 3 and the final checklist (case-insensitive check rejecting `ellmos` in new repo/package names with hint, while keeping existing repos/org grandfathered).
 
 ### 1.3.2 (2026-11-22)
 - Language notice corrected
