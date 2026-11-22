@@ -1,6 +1,6 @@
 ---
 name: bewerbungsexperte
-version: 1.2.1
+version: 1.2.2
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
@@ -23,7 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **中文** — `bewerbungsexperte` 官方中文版本。
 
 
-# BEWERBUNGSEXPERTE v1.2.1 (中文)
+# BEWERBUNGSEXPERTE v1.2.2 (中文)
 
 > 您迈向职业生涯下一步的战略伙伴。
 
@@ -121,6 +121,9 @@ _Fortbildungen/
 无需 pip 安装，无需导入 BACH 运行时。
 
 ## 变更日志
+
+### 1.2.2 (2026-11-22)
+- 英文版和法文版正文已完整翻译（此前为德文原文）
 
 ### 1.2.1 (2026-11-22)
 - 更正标题中的版本号和语言提示

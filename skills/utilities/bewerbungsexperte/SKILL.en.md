@@ -1,6 +1,6 @@
 ---
 name: bewerbungsexperte
-version: 1.2.1
+version: 1.2.2
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
@@ -20,58 +20,58 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 
-> **English** — Translation pending: the text below is currently the German original. Description and changelog are already in English.
+> **English** — Official English version of `bewerbungsexperte`.
 
-# BEWERBUNGSEXPERTE v1.2.1 (English)
+# BEWERBUNGSEXPERTE v1.2.2 (English)
 
-> Dein strategischer Partner fuer den naechsten Karriereschritt.
+> Your strategic partner for the next career step.
 
-## AKTIVIERUNG
+## ACTIVATION
 
 ```bash
-# Beispiel-CV ohne Datenbankzugriff (English)
+# Sample CV without database access (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --dry-run
 
-# CV aus SQLite-Datenbank generieren (English)
+# Generate CV from SQLite database (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad/zu/daten.db>
 
-# CV in Datei speichern (English)
+# Save CV to file (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --output lebenslauf.txt
 
-# Mit Ordner-Scan (English)
+# With folder scan (English)
 PYTHONDONTWRITEBYTECODE=1 python cv_generator.py --db <pfad> --career-path <ordner>
 ```
 
-## LEISTUNGSKATALOG
+## SERVICE CATALOGUE
 
-### 1. CV-Generierung (`cv_generator.py`)
-- **Persoenliche Daten:** Aus `assistant_user_profile`-Tabelle lesen (key/value)
-- **Berufserfahrung:** Arbeitgeber-Ordner scannen (Zeugnisse, Vertraege)
-- **Ausbildung:** Abschluesse-Ordner scannen
-- **Fortbildungen:** Zertifikate-Ordner scannen
-- **Referenzen:** Aus `contacts`-Tabelle (category='beruflich')
-- **Dry-Run:** Ohne Datenbank -- Beispieldaten fuer Tests
+### 1. CV Generation (`cv_generator.py`)
+- **Personal Data:** Read from `assistant_user_profile` table (key/value)
+- **Work Experience:** Scan employer folders (reference letters, contracts)
+- **Education:** Scan degrees folder
+- **Further Training:** Scan certificates folder
+- **References:** From `contacts` table (category='beruflich')
+- **Dry-Run:** Without database -- sample data for testing
 
-### 2. Stellendiagnose
-- **Keyword-Matching:** Abgleich von CV mit Job-Requirements (ATS-Safe)
-- **Unternehmens-Check:** Recherche zu Firmenkultur und Benefits
+### 2. Job Diagnostics
+- **Keyword Matching:** Match CV against job requirements (ATS-safe)
+- **Company Check:** Research on company culture and benefits
 
-### 3. Unterlagen-Service
-- **CV-Tuning:** Strukturierung und Pointierung von Erfahrungen
-- **Anschreiben:** Erstellung von individuellen, ueberzeugenden Briefen
-- **Portfolio:** Beratung zu Arbeitsproben und Referenzen
+### 3. Document Service
+- **CV Tuning:** Structuring and sharpening of experience
+- **Cover Letter:** Drafting tailored, compelling cover letters
+- **Portfolio:** Advice on work samples and references
 
-## DATENBANK-TABELLEN (optional)
+## DATABASE TABLES (optional)
 
-`cv_generator.py` liest aus diesen Tabellen, wenn vorhanden:
+`cv_generator.py` reads from these tables if present:
 
-- `assistant_user_profile` (key TEXT, value TEXT) — Persoenliche Daten
-  - Felder: name, full_name, email, phone, address, birthday, nationality, marital_status
-- `contacts` (name, organization, position, phone, email, is_active, category) — Referenzen
+- `assistant_user_profile` (key TEXT, value TEXT) — Personal data
+  - Fields: name, full_name, email, phone, address, birthday, nationality, marital_status
+- `contacts` (name, organization, position, phone, email, is_active, category) — References
 
-Fehlende Tabellen werden ignoriert (leere Sektionen im CV).
+Missing tables are ignored (empty sections in the CV).
 
-## ORDNERSTRUKTUR (fuer --career-path etc.)
+## FOLDER STRUCTURE (for --career-path etc.)
 
 ```
 _Arbeitgeber/
@@ -87,57 +87,60 @@ _Fortbildungen/
   Zertifikat_Cloud_AWS_2024.pdf
 ```
 
-## CLI-OPTIONEN
+## CLI OPTIONS
 
 ```
---db <pfad>           Pfad zur SQLite-Datenbank (Pflicht ohne --dry-run)
---output, -o          Ausgabedatei (ansonsten stdout)
---career-path         Pfad zum Arbeitgeber-Ordner
---education-path      Pfad zum Abschluesse-Ordner
---certs-path          Pfad zum Fortbildungen-Ordner
---dry-run             Beispiel-CV ohne Datenbankzugriff
+--db <pfad>           Path to the SQLite database (required without --dry-run)
+--output, -o          Output file (otherwise stdout)
+--career-path         Path to the employers folder
+--education-path      Path to the degrees folder
+--certs-path          Path to the certificates folder
+--dry-run             Sample CV without database access
 ```
 
-## WORKFLOW: CV-GENERIERUNG
+## WORKFLOW: CV GENERATION
 
-1. **Vorbereitung**
-   - SQLite-DB bereitstellen (BACH-DB oder eigene)
-   - Ordnerstruktur mit Dokumenten anlegen (optional)
+1. **Preparation**
+   - Provide SQLite DB (BACH DB or your own)
+   - Create folder structure with documents (optional)
 
-2. **Test ohne DB**
-   - `python cv_generator.py --dry-run` -- prueft ob Tool funktioniert
+2. **Test without DB**
+   - `python cv_generator.py --dry-run` -- verifies that the tool works
 
-3. **Generierung**
+3. **Generation**
    - `python cv_generator.py --db <pfad> --career-path <arbeitgeber>`
-   - Ausgabe pruefen und ggf. anpassen
+   - Check output and adjust if necessary
 
 4. **Export**
    - `python cv_generator.py --db <pfad> --output lebenslauf.txt`
 
-## ABHÄNGIGKEITEN
+## DEPENDENCIES
 
-Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
-Kein pip-Install noetig, kein BACH-Runtime-Import.
+Python stdlib only: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
+No pip install required, no BACH runtime import.
 
-## ÄNDERUNGSLOG
+## CHANGELOG
+
+### 1.2.2 (2026-11-22)
+- Full English translation of the body text (previously German original)
 
 ### 1.2.1 (2026-11-22)
 - Version in the heading and language notes corrected
 
 ### 1.2.0 (2026-11-06)
-- Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.
+- Rewrote description with clear trigger and scope boundaries (rule from docs/CONVENTIONS.md): use case, typical user phrasings, and slash command upfront, neighbouring skills in a DO-NOT-use clause.
 
 ### 1.1.0 (2026-06-22)
-- Standalone portiert aus BACH v1.0.0
-- `--db <pfad>` statt hardcodiertem Origin-DB-Pfad
-- `--dry-run`-Modus hinzugefuegt
-- `--scan-folders` entfernt (erforderte BACH user_data_folders-Tabelle)
-- Footer-Text neutralisiert
-- BACH-Runtime-Unabhaengigkeit verifiziert
+- Ported as standalone from BACH v1.0.0
+- `--db <pfad>` instead of hardcoded origin DB path
+- Added `--dry-run` mode
+- Removed `--scan-folders` (required BACH user_data_folders table)
+- Neutralised footer text
+- Verified BACH runtime independence
 
-### 1.0.0 (2026-01-25, BACH-intern)
-- Initiale Version in BACH system/agents/_experts/bewerbungsexperte/
+### 1.0.0 (2026-01-25, BACH-internal)
+- Initial version in BACH system/agents/_experts/bewerbungsexperte/
 
 ---
-Status: AKTIV
-Domain: Karriereberatung
+Status: ACTIVE
+Domain: Career counselling

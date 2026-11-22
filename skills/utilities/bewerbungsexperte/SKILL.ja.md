@@ -1,6 +1,6 @@
 ---
 name: bewerbungsexperte
-version: 1.2.1
+version: 1.2.2
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
@@ -23,7 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **日本語** — `bewerbungsexperte` の公式日本語版。
 
 
-# BEWERBUNGSEXPERTE v1.2.1 (日本語)
+# BEWERBUNGSEXPERTE v1.2.2 (日本語)
 
 > 次のキャリアステップのための戦略的パートナー。
 
@@ -121,6 +121,9 @@ Python 標準ライブラリのみ: `sqlite3`, `pathlib`, `argparse`, `re`, `dat
 pip インストール不要、BACH ランタイムのインポート不要。
 
 ## 変更履歴
+
+### 1.2.2 (2026-11-22)
+- 英語版・フランス語版の本文を完全に翻訳（以前はドイツ語原文）
 
 ### 1.2.1 (2026-11-22)
 - 見出しのバージョン表記と言語表示を修正
