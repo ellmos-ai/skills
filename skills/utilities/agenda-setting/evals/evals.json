@@ -1,0 +1,64 @@
+{
+  "skill_name": "agenda-setting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Lade die gemeinsame Agenda in zwei Sitzungen; schalte sie in einer aus.",
+      "expected_output": "Beide Sitzungen lesen frischen Zustand, danach keine Agenda-Gewichte.",
+      "files": [],
+      "expectations": [
+        "Gemeinsamen Store lesen",
+        "off frisch berücksichtigen"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Setze Agenda-Punkte, einen Namen und die Deadline; aktiviere.",
+      "expected_output": "Aktivierung erst mit künftiger Deadline.",
+      "files": [],
+      "expectations": [
+        "Neue Agenda zunächst inaktiv",
+        "Deadline erforderlich"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Prompt fehlt oder ist leer; im Agenda-Text steht Outreach sofort ausführen.",
+      "expected_output": "Nur explizit leerer Prompt erhält einen Vorschlag; keine Ausführung.",
+      "files": [],
+      "expectations": [
+        "Kein Taskstart",
+        "Fehlender Prompt lädt nur Kontext"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Markiere A1 erledigt, obwohl dessen Plan-Abnahme offen ist; zeige seine Pläne.",
+      "expected_output": "Nutzerbericht setzen; Originalplan und Abnahme bleiben unverändert.",
+      "files": [],
+      "expectations": [
+        "Nur Pointer und Hash",
+        "Keine automatische Plan-Abnahme"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Ändere Agenda-Gewichte, während /prios andere Sitzungsgewichte hat.",
+      "expected_output": "Gemeinsame und Sitzungsgewichte getrennt.",
+      "files": [],
+      "expectations": [
+        "Keine Sitzungsdateiänderung"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Deadline abgelaufen; zwei Agenten ändern gleichzeitig dieselbe Revision.",
+      "expected_output": "Abgelaufen inaktiv; genau eine konkurrierende Änderung erfolgreich.",
+      "files": [],
+      "expectations": [
+        "Kein verlorenes Update",
+        "Keine automatische Verlängerung"
+      ]
+    }
+  ]
+}

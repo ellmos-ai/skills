@@ -1,0 +1,51 @@
+{
+  "skill_name": "priorities",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Setze /prios 100::Dienst betriebsfähig; 70::Aufgaben abarbeiten in Sitzung A, behalte alle Zielkriterien.",
+      "expected_output": "Nur Sitzung A gewichten; Zielumfang bleibt unverändert.",
+      "files": [],
+      "expectations": [
+        "Provider und vertrauenswürdige Sitzungs-ID binden",
+        "Kein Zielkriterium entfernen"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Sitzung B arbeitet parallel. Lade nur ihre Prioritäten.",
+      "expected_output": "Keine Schwerpunkte aus Sitzung A übernehmen.",
+      "files": [],
+      "expectations": [
+        "Sitzungen getrennt lesen"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Setze Schwerpunkte ohne vertrauenswürdige Sitzungs-ID.",
+      "expected_output": "Nur im Gespräch halten; keinen globalen Ersatz verwenden.",
+      "files": [],
+      "expectations": [
+        "Keine persistente globale Ersatz-ID"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Ein anderer Prozess hat die Prioritäten seit dem Lesen geändert.",
+      "expected_output": "Revisionkonflikt melden und aktuellen Stand lesen.",
+      "files": [],
+      "expectations": [
+        "Keine verlorene konkurrierende Änderung"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Ändere /agenda prios A1=90.",
+      "expected_output": "An agenda-setting routen; Sitzungsprioritäten bleiben unverändert.",
+      "files": [],
+      "expectations": [
+        "Agenda- und Sitzungsgewichte unterscheiden"
+      ]
+    }
+  ]
+}

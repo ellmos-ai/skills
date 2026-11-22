@@ -1,0 +1,21 @@
+{
+  "schema": "ellmos.known-providers.v1",
+  "rolle": "session-priorities",
+  "letzte_recherche": null,
+  "anbieter": [
+    {
+      "id": "conversation",
+      "name": "Gesprächskontext",
+      "kategorie": "sonstige",
+      "description": "Ohne verlässliche Laufzeit-ID möglich, nicht persistent.",
+      "installiert": null
+    },
+    {
+      "id": "priorities-local",
+      "name": "Lokaler Python-Store",
+      "kategorie": "ellmos-komponente",
+      "description": "Anbieter- und sitzungsgebundene Prioritäten mit Revision.",
+      "installiert": null
+    }
+  ]
+}

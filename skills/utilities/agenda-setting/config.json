@@ -1,0 +1,14 @@
+{
+  "schema": "ellmos.skill-config.v1",
+  "skill": "agenda-setting",
+  "version": "0.1.1",
+  "einstellungen": {},
+  "lernvertrag": {
+    "user_ist_koenig": true,
+    "waehle_beste_option": true,
+    "installiert_nie_selbststaendig": true,
+    "letzter_update_check": null,
+    "update_intervall_tage": 60
+  },
+  "letzter_check": null
+}

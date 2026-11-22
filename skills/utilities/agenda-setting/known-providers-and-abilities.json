@@ -1,0 +1,28 @@
+{
+  "schema": "ellmos.known-providers.v1",
+  "rolle": "shared-agenda",
+  "letzte_recherche": null,
+  "anbieter": [
+    {
+      "id": "existing-plans",
+      "name": "Vorhandene Projektpläne",
+      "kategorie": "sonstige",
+      "description": "Originale über Pointer anbinden.",
+      "installiert": null
+    },
+    {
+      "id": "hook-master",
+      "name": "hook-master",
+      "kategorie": "ellmos-komponente",
+      "description": "Optionaler Hook-Verwalter; ersetzt keine native Anbieterfreigabe.",
+      "installiert": null
+    },
+    {
+      "id": "native-hooks",
+      "name": "Native Anbieter-Hooks",
+      "kategorie": "sonstige",
+      "description": "SessionStart/UserPromptSubmit mit eigener Zustimmungsschnittstelle.",
+      "installiert": null
+    }
+  ]
+}

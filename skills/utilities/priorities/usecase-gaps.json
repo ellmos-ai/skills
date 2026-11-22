@@ -1,0 +1,8 @@
+{
+  "schema": "ellmos.usecase-gaps.v1",
+  "skill_name": "priorities",
+  "geprueft_am": "2026-10-21",
+  "abdeckungsgrad": 1.0,
+  "gaps": [],
+  "evidence": "Private independent review and isolated regression report; native hook lifecycle evaluated separately."
+}

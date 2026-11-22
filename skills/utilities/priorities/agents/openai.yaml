@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sitzungsprioritäten"
+  short_description: "Schwerpunkte innerhalb der Sitzungsziele gewichten"
+  default_prompt: "Nutze $priorities, um die Schwerpunkte dieser Sitzung zu setzen."

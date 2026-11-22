@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gemeinsame Agenda"
+  short_description: "Vorhaben, Fristen und Pläne über Sitzungen pflegen"
+  default_prompt: "Nutze $agenda-setting, um die gemeinsame Agenda zu laden."
