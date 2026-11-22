@@ -1,6 +1,6 @@
 ---
 name: bewerbungsexperte
-version: 1.2.1
+version: 1.2.2
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
@@ -23,7 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **Русский** — Официальная русская версия `bewerbungsexperte`.
 
 
-# BEWERBUNGSEXPERTE v1.2.1 (Русский)
+# BEWERBUNGSEXPERTE v1.2.2 (Русский)
 
 > Ваш стратегический партнер для следующего карьерного шага.
 
@@ -121,6 +121,9 @@ _Fortbildungen/
 Установка через pip не требуется, импорт среды выполнения BACH не требуется.
 
 ## ЖУРНАЛ ИЗМЕНЕНИЙ
+
+### 1.2.2 (2026-11-22)
+- Английская и французская версии полностью переведены (ранее текст был немецким)
 
 ### 1.2.1 (2026-11-22)
 - Исправлены версия в заголовке и языковые пометки

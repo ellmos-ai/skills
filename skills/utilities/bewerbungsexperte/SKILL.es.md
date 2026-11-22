@@ -1,6 +1,6 @@
 ---
 name: bewerbungsexperte
-version: 1.2.1
+version: 1.2.2
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
@@ -23,7 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **Español** — Versión oficial en español de `bewerbungsexperte`.
 
 
-# BEWERBUNGSEXPERTE v1.2.1 (Español)
+# BEWERBUNGSEXPERTE v1.2.2 (Español)
 
 > Su socio estratégico para el próximo paso en su carrera.
 
@@ -121,6 +121,9 @@ Solo biblioteca estándar de Python: `sqlite3`, `pathlib`, `argparse`, `re`, `da
 No requiere instalación por pip, ni importación en el tiempo de ejecución de BACH.
 
 ## REGISTRO DE CAMBIOS
+
+### 1.2.2 (2026-11-22)
+- Versiones EN y FR ahora traducidas por completo (antes el texto era alemán)
 
 ### 1.2.1 (2026-11-22)
 - Versión en el título y avisos de idioma corregidos

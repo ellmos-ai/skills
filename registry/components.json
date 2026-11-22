@@ -6980,7 +6980,7 @@
       "type": "expert",
       "category": "utilities",
       "path": "skills/utilities/bewerbungsexperte/SKILL.md",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "status": "active",
       "description": "Verwenden, wenn sich jemand bewirbt: Stellenanzeige analysieren, Lebenslauf gegen die Anforderungen abgleichen, Lebenslauf oder LinkedIn-Profil schärfen, Anschreiben verfassen (auch bei Lücken im Lebenslauf) oder aus Berufsdaten (SQLite-Datenbank, Ordner für Arbeitgeber, Abschlüsse und Zertifikate als Inhaltsquelle) einen Text-Lebenslauf erzeugen: 'ich bewerbe mich auf ...', 'prüf meinen Lebenslauf gegen diese Anzeige', 'schreib ein Anschreiben', 'mein LinkedIn-Profil wirkt blass', 'Bewerbung', 'Lebenslauf generieren', /bewerbungsexperte. Macht ATS-sicheres Keyword-Matching, Unternehmens-Check, CV-Tuning und individuelle Anschreiben und führt den eigenständigen cv_generator.py aus (keine BACH-Laufzeit nötig). NICHT verwenden, um zwei Jobangebote gegeneinander abzuwägen (decide), KI-Formulierungen aus einem fertigen Anschreiben zu entfernen (llm-text-hygiene) oder für reine Dokumentverarbeitung wie Text extrahieren, OCR, Dateien umbenennen oder sortieren, auch bei Bewerbungsunterlagen.",
       "languages": [
@@ -6996,43 +6996,43 @@
         {
           "language": "de",
           "path": "skills/utilities/bewerbungsexperte/SKILL.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (Deutsch)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (Deutsch)",
           "description": "Verwenden, wenn sich jemand bewirbt: Stellenanzeige analysieren, Lebenslauf gegen die Anforderungen abgleichen, Lebenslauf oder LinkedIn-Profil schärfen, Anschreiben verfassen (auch bei Lücken im Lebenslauf) oder aus Berufsdaten (SQLite-Datenbank, Ordner für Arbeitgeber, Abschlüsse und Zertifikate als Inhaltsquelle) einen Text-Lebenslauf erzeugen: 'ich bewerbe mich auf ...', 'prüf meinen Lebenslauf gegen diese Anzeige', 'schreib ein Anschreiben', 'mein LinkedIn-Profil wirkt blass', 'Bewerbung', 'Lebenslauf generieren', /bewerbungsexperte. Macht ATS-sicheres Keyword-Matching, Unternehmens-Check, CV-Tuning und individuelle Anschreiben und führt den eigenständigen cv_generator.py aus (keine BACH-Laufzeit nötig). NICHT verwenden, um zwei Jobangebote gegeneinander abzuwägen (decide), KI-Formulierungen aus einem fertigen Anschreiben zu entfernen (llm-text-hygiene) oder für reine Dokumentverarbeitung wie Text extrahieren, OCR, Dateien umbenennen oder sortieren, auch bei Bewerbungsunterlagen."
         },
         {
           "language": "en",
           "path": "skills/utilities/bewerbungsexperte/SKILL.en.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (English)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (English)",
           "description": "Use when the user is applying for a job: analysing a job posting, matching a CV against its requirements, sharpening a CV or LinkedIn profile, writing a cover letter (also with gaps in the CV), or generating a plain-text CV from career data (a SQLite database plus employer, degree and certificate folders as sources of content): 'I am applying for ...', 'check my CV against this posting', 'write a cover letter', 'my LinkedIn profile looks weak', 'Bewerbung', 'Anschreiben', 'generate my CV', /bewerbungsexperte. Does ATS-safe keyword matching, a company check, CV tuning and individual cover letters, and runs the standalone cv_generator.py (no BACH runtime needed). Do NOT use to weigh two job offers against each other (decide), to strip AI phrasing from a finished letter (llm-text-hygiene) or for pure document handling such as extracting text, OCR, renaming or sorting files, even when they are application documents."
         },
         {
           "language": "es",
           "path": "skills/utilities/bewerbungsexperte/SKILL.es.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (Español)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (Español)",
           "description": "Usar cuando alguien se postula a un empleo: analizar una oferta de trabajo, contrastar el currículum con sus requisitos, afinar el currículum o el perfil de LinkedIn, redactar una carta de presentación (también con lagunas en el currículum) o generar un currículum en texto a partir de datos profesionales (base SQLite y carpetas de empleadores, títulos y certificados como fuente de contenido): 'me postulo a ...', 'revisa mi currículum frente a esta oferta', 'escribe una carta de presentación', 'mi perfil de LinkedIn se ve flojo', 'Bewerbung', 'genera mi currículum', /bewerbungsexperte. Hace coincidencia de palabras clave apta para ATS, revisión de la empresa, ajuste del currículum y cartas individuales, y ejecuta el cv_generator.py independiente (sin runtime BACH). NO usar para comparar dos ofertas de empleo (decide), quitar giros de IA de una carta ya terminada (llm-text-hygiene) ni para tareas puras de documentos como extraer texto, OCR, renombrar u ordenar archivos, aunque sean documentos de solicitud."
         },
         {
           "language": "zh",
           "path": "skills/utilities/bewerbungsexperte/SKILL.zh.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (中文)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (中文)",
           "description": "当有人求职申请时使用：分析招聘广告、将简历与岗位要求比对、优化简历或 LinkedIn 个人资料、撰写求职信（包括简历有空档的情况），或依据职业数据（SQLite 数据库，以及作为内容来源的雇主、学历、证书文件夹）生成文本简历：'我要申请 ...'、'对照这个职位检查我的简历'、'写一封求职信'、'我的 LinkedIn 资料显得单薄'、'Bewerbung'、'生成我的简历'、/bewerbungsexperte。进行适配 ATS 的关键词匹配、公司检查、简历调整和个性化求职信，并运行独立的 cv_generator.py（无需 BACH 运行时）。不要用于：比较两个工作机会（decide）、清除已完成求职信中的 AI 措辞（llm-text-hygiene），或纯文档处理，如提取文本、OCR、重命名或整理文件（即使是求职材料）。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/bewerbungsexperte/SKILL.ja.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (日本語)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (日本語)",
           "description": "就職・転職の応募をするときに使います。求人情報の分析、履歴書と要件の照合、履歴書や LinkedIn プロフィールの改善、カバーレターの作成（履歴書にブランクがある場合も）、職歴データ（SQLite データベース、勤務先・学位・資格のフォルダを内容の情報源として）からのテキスト形式履歴書の生成: '... に応募します'、'この求人に対して私の履歴書をチェックして'、'カバーレターを書いて'、'LinkedIn プロフィールが地味'、'Bewerbung'、'履歴書を生成して'、/bewerbungsexperte。ATS 対応のキーワードマッチング、企業チェック、履歴書の調整、個別のカバーレターを行い、スタンドアロンの cv_generator.py を実行します（BACH ランタイム不要）。次の用途には使わないでください: 2つの内定の比較検討（decide）、完成したカバーレターからの AI 的表現の除去（llm-text-hygiene）、テキスト抽出、OCR、ファイル名の変更や整理といった純粋な文書処理（応募書類であっても）。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/bewerbungsexperte/SKILL.ru.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (Русский)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (Русский)",
           "description": "Использовать, когда человек откликается на вакансию: анализ объявления, сопоставление резюме с требованиями, доработка резюме или профиля LinkedIn, сопроводительное письмо (в том числе при пробелах в резюме) или создание текстового резюме из данных о карьере (база SQLite, папки с работодателями, дипломами и сертификатами как источник содержания): 'я откликаюсь на ...', 'сверь моё резюме с этим объявлением', 'напиши сопроводительное письмо', 'мой профиль LinkedIn выглядит бледно', 'Bewerbung', 'сгенерируй моё резюме', /bewerbungsexperte. Делает ATS-совместимое сопоставление ключевых слов, проверку компании, настройку резюме и индивидуальные письма и запускает автономный cv_generator.py (среда BACH не нужна). НЕ использовать для сравнения двух предложений о работе (decide), удаления ИИ-оборотов из готового письма (llm-text-hygiene) и чисто документной работы: извлечения текста, OCR, переименования или сортировки файлов, даже если это документы для отклика."
         },
         {
           "language": "fr",
           "path": "skills/utilities/bewerbungsexperte/SKILL.fr.md",
-          "title": "BEWERBUNGSEXPERTE v1.2.1 (Français)",
+          "title": "BEWERBUNGSEXPERTE v1.2.2 (Français)",
           "description": "À utiliser lorsque quelqu'un postule à un emploi : analyser une offre d'emploi, confronter le CV à ses exigences, affûter le CV ou le profil LinkedIn, rédiger une lettre de motivation (même avec des trous dans le CV) ou générer un CV en texte à partir de données professionnelles (base SQLite et dossiers employeurs, diplômes et certificats comme source de contenu) : 'je postule à ...', 'compare mon CV à cette annonce', 'écris une lettre de motivation', 'mon profil LinkedIn est fade', 'Bewerbung', 'génère mon CV', /bewerbungsexperte. Fait un appariement de mots-clés compatible ATS, une vérification de l'entreprise, la mise au point du CV et des lettres sur mesure, et exécute cv_generator.py en autonome (sans runtime BACH). NE PAS utiliser pour comparer deux offres d'emploi (decide), retirer les tournures d'IA d'une lettre terminée (llm-text-hygiene) ni pour le simple traitement de documents (extraire du texte, OCR, renommer ou trier des fichiers), même s'il s'agit de pièces de candidature."
         }
       ]
