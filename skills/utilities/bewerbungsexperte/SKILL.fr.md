@@ -1,10 +1,10 @@
 ---
 name: bewerbungsexperte
-version: 1.2.0
+version: 1.2.1
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-11-06
+updated: 2026-11-22
 description: "À utiliser lorsque quelqu'un postule à un emploi : analyser une offre d'emploi, confronter le CV à ses exigences, affûter le CV ou le profil LinkedIn, rédiger une lettre de motivation (même avec des trous dans le CV) ou générer un CV en texte à partir de données professionnelles (base SQLite et dossiers employeurs, diplômes et certificats comme source de contenu) : 'je postule à ...', 'compare mon CV à cette annonce', 'écris une lettre de motivation', 'mon profil LinkedIn est fade', 'Bewerbung', 'génère mon CV', /bewerbungsexperte. Fait un appariement de mots-clés compatible ATS, une vérification de l'entreprise, la mise au point du CV et des lettres sur mesure, et exécute cv_generator.py en autonome (sans runtime BACH). NE PAS utiliser pour comparer deux offres d'emploi (decide), retirer les tournures d'IA d'une lettre terminée (llm-text-hygiene) ni pour le simple traitement de documents (extraire du texte, OCR, renommer ou trier des fichiers), même s'il s'agit de pièces de candidature."
 standalone: true
 anthropic_compatible: true
@@ -20,17 +20,11 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `bewerbungsexperte`.
+> **Français** — Traduction en attente : le texte ci-dessous est pour l'instant l'original allemand. La description et le journal des modifications sont déjà en français.
 
 
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `bewerbungsexperte`.
-
-
-# BEWERBUNGSEXPERTE v1.1 (English)
+# BEWERBUNGSEXPERTE v1.2.1 (Français)
 
 > Dein strategischer Partner fuer den naechsten Karriereschritt.
 
@@ -128,6 +122,9 @@ Nur Python-Stdlib: `sqlite3`, `pathlib`, `argparse`, `re`, `datetime`.
 Kein pip-Install noetig, kein BACH-Runtime-Import.
 
 ## ÄNDERUNGSLOG
+
+### 1.2.1 (2026-11-22)
+- Version dans le titre et notes de langue corrigées
 
 ### 1.2.0 (2026-11-06)
 - Description réécrite avec un déclencheur clair et une délimitation (règle de docs/CONVENTIONS.md) : situation d'usage, formulations typiques et commande slash en tête, skills voisins cités dans une clause NE PAS utiliser.

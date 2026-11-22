@@ -1,10 +1,10 @@
 ---
 name: bewerbungsexperte
-version: 1.2.0
+version: 1.2.1
 type: expert
 author: BACH Team / ellmos (standalone port)
 created: 2026-01-25
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Usar cuando alguien se postula a un empleo: analizar una oferta de trabajo, contrastar el currículum con sus requisitos, afinar el currículum o el perfil de LinkedIn, redactar una carta de presentación (también con lagunas en el currículum) o generar un currículum en texto a partir de datos profesionales (base SQLite y carpetas de empleadores, títulos y certificados como fuente de contenido): 'me postulo a ...', 'revisa mi currículum frente a esta oferta', 'escribe una carta de presentación', 'mi perfil de LinkedIn se ve flojo', 'Bewerbung', 'genera mi currículum', /bewerbungsexperte. Hace coincidencia de palabras clave apta para ATS, revisión de la empresa, ajuste del currículum y cartas individuales, y ejecuta el cv_generator.py independiente (sin runtime BACH). NO usar para comparar dos ofertas de empleo (decide), quitar giros de IA de una carta ya terminada (llm-text-hygiene) ni para tareas puras de documentos como extraer texto, OCR, renombrar u ordenar archivos, aunque sean documentos de solicitud."
 standalone: true
 anthropic_compatible: true
@@ -23,7 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 > **Español** — Versión oficial en español de `bewerbungsexperte`.
 
 
-# BEWERBUNGSEXPERTE v1.1 (Español)
+# BEWERBUNGSEXPERTE v1.2.1 (Español)
 
 > Su socio estratégico para el próximo paso en su carrera.
 
@@ -121,6 +121,9 @@ Solo biblioteca estándar de Python: `sqlite3`, `pathlib`, `argparse`, `re`, `da
 No requiere instalación por pip, ni importación en el tiempo de ejecución de BACH.
 
 ## REGISTRO DE CAMBIOS
+
+### 1.2.1 (2026-11-22)
+- Versión en el título y avisos de idioma corregidos
 
 ### 1.2.0 (2026-11-06)
 - Descripción reescrita con un desencadenante claro y delimitación (regla de docs/CONVENTIONS.md): situación de uso, frases típicas del usuario y el comando slash al principio, y los skills vecinos en una cláusula NO usar.
