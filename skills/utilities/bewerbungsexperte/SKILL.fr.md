@@ -20,7 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `bewerbungsexperte`.
+> **Français** — Traduction en attente : le texte ci-dessous est pour l'instant l'original allemand. La description et le journal des modifications sont déjà en français.
 
 
 

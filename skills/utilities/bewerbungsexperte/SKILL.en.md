@@ -20,7 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/bewerbungs
 
 <img src="banner.png" width="100%" alt="bewerbungsexperte banner">
 
-> **English** — Official English version of `bewerbungsexperte`.
+> **English** — Translation pending: the text below is currently the German original. Description and changelog are already in English.
 
 # BEWERBUNGSEXPERTE v1.2.1 (English)
 
