@@ -1,10 +1,10 @@
 ---
 name: document-chunker
-version: 1.1.0
+version: 1.1.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Use when text has to be cut into pieces that fit a limit: preparing documents for RAG, embeddings or a vector store, or text that overflows a model's context window or token limit: 'split this into chunks', 'chunk the docs for RAG', 'my embedding model only accepts 512 tokens', 'the context overflows', 'overlapping chunks', 'each piece needs a chunk_id and a source', /document-chunker. Splits .txt, .md, .py and .sh files or whole folders into overlapping token chunks with chunk number and source label, so nothing is lost at the boundaries (Python standard library only, no dependencies). Do NOT use to summarise a document (no skill needed), to clean AI leftovers from a text (llm-text-hygiene), to convert PDFs or scans to text, or to build a CV (bewerbungsexperte)."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py'
 
 <img src="banner.png" width="100%" alt="document-chunker banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `document-chunker`.
 
 # Document Chunker (English)
 
@@ -72,6 +71,9 @@ python document_chunker.py ./docs/        # Entire directory
 `.txt`, `.md`, `.py`, `.sh`
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-11-06)
 - Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.

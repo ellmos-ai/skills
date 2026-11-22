@@ -1,10 +1,10 @@
 ---
 name: research-agent
-version: 0.1.0
+version: 0.1.1
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour mener ou valider des projets de recherche académique, recenser la littérature ou vérifier des affirmations scientifiques (ex. 'état de l'art', 'revue de littérature', 'vérifier citations et preuves', /research-agent). Orchestre un pipeline de recherche avec points de contrôle en direct, preuves PDF et limites de publication. Ne PAS utiliser pour des recherches web informelles sans exigences de preuves."
 standalone: true
 anthropic_compatible: true
@@ -22,12 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'o
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `research-agent`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Research Agent (English)
 
@@ -114,6 +109,9 @@ agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
 ## Journal des Modifications
+
+### 0.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 0.1.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/ResearchAgent to skill library

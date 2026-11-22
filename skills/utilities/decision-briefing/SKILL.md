@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.5.0
+version: 1.5.1
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-15
+updated: 2026-11-22
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -267,6 +267,9 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 
 ## Changelog
 
+
+### 1.5.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.5.0 (2026-11-15)
 - Formular ohne Ordnerdialog speichern: `scripts/formular/serve_form.py` (lokaler Speicherdienst auf 127.0.0.1, nur Standardbibliothek) öffnet das Formular im normalen Edge und schreibt die Antwort selbst; Anleitung zum Öffnen und Speichern im Formular-Abschnitt, Rückfall ohne Python bleibt (Download-Links, Text, Ordnerdialog zuletzt). Anlass: Ticket T-20261115-242335144.

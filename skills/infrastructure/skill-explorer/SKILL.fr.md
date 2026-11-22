@@ -4,12 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="skill-explorer banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `skill-explorer`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Skill-Explorer — Manage the Skill Landscape (Audit · Explore · Installer) (English)
 

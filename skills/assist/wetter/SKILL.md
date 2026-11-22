@@ -1,10 +1,10 @@
 ---
 name: wetter
-version: 0.1.0
+version: 0.1.1
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn aktuelle Wetterberichte oder 3-Tage-Vorhersagen für einen Ort oder Koordinaten abgefragt werden sollen (z. B. 'wie wird das Wetter in...', 'Wettervorhersage für morgen', 'Regenrisiko heute', /wetter). Ruft Wetterdaten und Vorhersagen direkt über wttr.in ohne API-Key ab. NICHT verwenden für historische Klimaforschungsdaten oder astronomische Berechnungen."
 standalone: true
 anthropic_compatible: true
@@ -82,6 +82,9 @@ andere Wetter-Backends (z.B. DWD/OpenWeather), falls der Nutzer das wuenscht.
 - `assist/reiseroute/` — nutzt Wetter ggf. fuer Reiseplanung (geplant)
 
 ## Changelog
+
+### 0.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 0.1.0 (2026-06-22)
 - Initiale Version. Portiert aus BACH `hub/_services/weather/weather_service.py` (MIT).

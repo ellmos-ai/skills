@@ -1,10 +1,10 @@
 ---
 name: law-checker
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-11-22
 description: "Points to the standalone module law-checker (\"Legal Department\"): source-grounded AI first-look legal assessments for German law with a statute registry and a statute-embodiment agent. Use this skill when a situation, contract, official notice, or legal question under German law should be checked with exact citations (article/section, paragraph, sentence) -- with a clear boundary: AI-assisted first orientation, not a substitute for a lawyer."
 
 standalone: true
@@ -81,6 +81,9 @@ statt -- Pflege und Versionierung bleiben allein im Modul-Repo
 `ellmos-ai/law-checker`.
 
 ## Changelog
+
+### 0.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 0.1.0 (2026-07-23)
 - Initialer Verweis-Skill auf `ellmos-ai/law-checker`.

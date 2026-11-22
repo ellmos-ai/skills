@@ -1,10 +1,10 @@
 ---
 name: pmr-autogenic-training
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour pratiquer des techniques de relaxation corporelle visant la réduction du stress et la détente musculaire (ex. 'relaxation progressive de Jacobson', 'entraînement autogène', 'relâcher la tension corporelle', /pmr-autogenic-training). Enseigne les séquences tension-relâchement de Jacobson (PMR) et les formules autogènes de Schultz. Ne PAS utiliser pour la méditation de pleine conscience sans travail musculaire (utiliser mindfulness-basics)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/pmr_autoge
 
 <img src="banner.png" width="100%" alt="pmr-autogenic-training banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `pmr-autogenic-training`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Progressive Muscle Relaxation & Autogenic Training (English)
 

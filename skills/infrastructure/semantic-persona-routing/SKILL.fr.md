@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-09-03
+updated: 2026-11-22
 description: "[Français] Compétence d'agent pour semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers."
 standalone: true
 anthropic_compatible: true
@@ -20,12 +20,7 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="semantic-persona-routing banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `semantic-persona-routing`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Semantic Persona Routing (English)
 
@@ -176,6 +171,9 @@ persona. If the tax expert exists but no portable tax skill is installed, report
 `GAP` and continue only through an explicitly configured fallback.
 
 ## Journal des Modifications
+
+### 1.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.1.0 (2026-09-03)
 

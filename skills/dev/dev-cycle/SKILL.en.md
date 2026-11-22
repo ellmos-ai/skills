@@ -1,10 +1,10 @@
 ---
 name: dev-cycle
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when implementing software features through an iterative, structured 8-phase development cycle (e.g. 'develop feature systematically', 'start development cycle', '8-phase engineering', /dev-cycle). Guides engineering teams through requirements, current state, functional specs, frontend, backend, and testing. Do NOT use for small isolated bug fixes (use bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `dev-cycle`.
 
 # Development Cycle (Dev Cycle) (English)
 
@@ -278,6 +277,9 @@ If your skill collection has a skill index, search it for further phase-specific
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-06-13)
 - New "Phase-specific skills" table with references to project-onboarding, docs-analysis, pipeline-optimizer, bugfix-protocol, and bugsweep

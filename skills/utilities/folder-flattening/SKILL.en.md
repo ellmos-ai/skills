@@ -1,10 +1,10 @@
 ---
 name: folder-flattening
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when deeply nested directory hierarchies need to be flattened into a clean, machine-readable structure (e.g. 'flatten folder hierarchy', 'collapse nested directories', /folder-flattening). Executes deterministic folder flattening with collision handling and safe merge logic. Do NOT use for simple single-file moves (use batch-file-ops)."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-fl
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `folder-flattening`.
 
 # Workflow: Folder Flattening (English)
 

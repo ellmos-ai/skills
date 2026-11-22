@@ -1,10 +1,10 @@
 ---
 name: mindfulness-basics
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour intégrer la méditation de pleine conscience, les pratiques MBSR ou la conscience corporelle dans le quotidien (ex. 'exercices de pleine conscience', 'guide du balayage corporel', 'méditation sur la respiration', /mindfulness-basics). Guide les bases du MBSR de Kabat-Zinn : bodyscan, marche consciente et espace de respiration de 3 minutes. Ne PAS utiliser pour la relaxation neuromusculaire progressive (utiliser pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/achtsamkei
 
 <img src="banner.png" width="100%" alt="mindfulness-basics banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `mindfulness-basics`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Mindfulness Basics (English)
 

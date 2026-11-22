@@ -1,10 +1,10 @@
 ---
 name: systemic-questioning
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when broadening perspectives and loosening rigid cognitive frames through systemic inquiry (e.g. 'circular questioning', 'systemic reframing', 'hypothetical questions', /systemic-questioning). Details systemic inquiry techniques: circular triadic questions, scaling questions, hypothetical scenario questions, and paradoxical reframing. Do NOT use for quantitative decision matrices (use utilities/decide)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/systemisch
 
 <img src="banner.png" width="100%" alt="systemic-questioning banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `systemic-questioning`.
 
 # Systemic Questioning Techniques (English)
 

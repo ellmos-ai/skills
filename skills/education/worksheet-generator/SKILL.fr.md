@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour générer des fiches pédagogiques, des exercices d'entraînement ou des supports de cours (ex. 'créer une fiche d'exercices', 'générer des exercices', 'concevoir du matériel éducatif', /worksheet-generator). Produit des fiches de travail modulables avec consignes précises et corrigés. Ne PAS utiliser pour l'élaboration globale de projets de soutien (utiliser foerderplaner)."
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 
-> **French** — Document Officiel en Français.
+> **Français** — Version française officielle de la compétence `worksheet-generator`.
 
 # Générateur de Fiches d'Exercices (Français)
 

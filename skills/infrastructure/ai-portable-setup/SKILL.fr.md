@@ -1,10 +1,10 @@
 ---
 name: ai-portable-setup
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour mettre en place un environnement d'IA portable et autonome sur clé USB ou disque externe (ex. 'configuration IA portable', 'IA sur clé USB', 'RAG local hors ligne', /ai-portable-setup). Configure des LLM locaux (Ollama), une base vectorielle (ChromaDB) et des invites pour un usage 100 % hors ligne. Ne PAS utiliser pour l'installation complète d'une station de travail (utiliser system-onboarding)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'ori
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `ai-portable-setup`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # AI Portable Setup (English)
 
@@ -113,6 +108,9 @@ Query -> Embedding -> Similarity Search -> Top-K Chunks
 - ~8 GB RAM for Mistral
 
 ## Journal des Modifications
+
+### 1.0.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.0.0 (2026-03-12)
 - Consolidation from MODULAR_AGENTS/AI-Portable

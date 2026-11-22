@@ -1,10 +1,10 @@
 ---
 name: document-chunker
-version: 1.1.0
+version: 1.1.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Verwenden, wenn Text in Stücke zerlegt werden muss, die in eine Grenze passen: Dokumente für RAG, Embeddings oder einen Vektorspeicher vorbereiten, oder Text, der das Kontextfenster bzw. das Token-Limit eines Modells sprengt: 'teil das in Chunks', 'bereite die Docs für RAG auf', 'mein Embedding-Modell nimmt nur 512 Tokens', 'der Kontext läuft über', 'überlappende Stücke', 'jedes Stück braucht chunk_id und Quelle', /document-chunker. Zerlegt .txt-, .md-, .py- und .sh-Dateien oder ganze Ordner in überlappende Token-Chunks mit Nummer und Quellenangabe, sodass an den Schnittstellen nichts verloren geht (nur Python-Standardbibliothek, keine Abhängigkeiten). NICHT verwenden, um ein Dokument zusammenzufassen (kein Skill nötig), KI-Reste aus einem Text zu entfernen (llm-text-hygiene), PDFs oder Scans in Text umzuwandeln oder einen Lebenslauf zu erstellen (bewerbungsexperte)."
 
 standalone: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/document_chunker.py'
 
 <img src="banner.png" width="100%" alt="document-chunker banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # Document Chunker (Deutsch)
 
@@ -73,6 +72,9 @@ python document_chunker.py ./docs/        # Entire directory
 `.txt`, `.md`, `.py`, `.sh`
 
 ## Änderungsprotokoll
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-11-06)
 - Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.

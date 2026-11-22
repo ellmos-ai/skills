@@ -1,10 +1,10 @@
 ---
 name: rbx-studio
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-11-22
 description: "Operating Roblox Studio for game development — the visual editor in which the 3D scene is built, tested, and published. Use this skill for: Studio basics (Explorer, Workspace, play-test, saving the place as .rbxl), the interplay with Rojo (Connect, scene-vs-code mode), AI control of Studio via the Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, reading the Console), the complete asset-pipeline workflow (Creator Store → clean up → kit → scene → .rbxl → Rojo brings it to life), and above all the MANDATORY malware scan for marketplace assets. Also trigger on \"embed an asset from the Store\", \"Studio MCP not working\", \"studios: []\", \"generate material\", \"save scene\", \"is this Roblox asset safe\", \"scripts disappear after Play\"."
 
 standalone: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-studio/', 
 
 <img src="banner.png" width="100%" alt="rbx-studio banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 
@@ -190,6 +189,9 @@ The most common ones that bite in Studio — the full list is kept by the skill 
   (`ROBLOX_MCP_FAQ.md`, `ASSET_PIPELINE.md`, `_malware_reports/PATTERNS.md`).
 
 ## Änderungsprotokoll
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-06-17)
 - Initial version. Distilled from the `.ROBLOX` pipeline (ROBLOX_MCP_FAQ, ASSET_PIPELINE,

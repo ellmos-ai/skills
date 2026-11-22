@@ -1,10 +1,10 @@
 ---
 name: agents-bridge
-version: 3.0.1
+version: 3.0.2
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn eine tragfähige, anbieterneutrale Dateibrücke zwischen verschiedenen KI-Agenten und Systemen eingerichtet werden soll (z. B. 'Multi-Agenten-Setup', 'Agenten verbinden', 'Dateibrücke zwischen Agenten', /agents-bridge). Stellt Bootstrap-Flächen, Wahrheitszeiger, getrennte Gedächtnissilos, Nachrichtenaustausch und kooperative Sperren bereit. NICHT verwenden für reines Git-Branch-Merging (dafür dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
@@ -19,8 +19,7 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # AGENTS-BRIDGE — the Lifeboat, auch: Time Capsule (Deutsch)
 
@@ -86,3 +85,8 @@ Host oder Cloud-Verzeichnis ist implizit kanonisch.
 Verträge und Beispiele stehen in `references/contracts.de.md`,
 `references/truth-topologies.md`, `references/inventory-contract.md` und
 `references/migration-2-to-3.de.md`. Die englische Fassung ist `SKILL.en.md`.
+
+## Changelog
+
+### 3.0.2 (2026-11-22)
+- Sprachhinweis korrigiert

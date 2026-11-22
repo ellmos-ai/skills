@@ -7,6 +7,9 @@ description: >
 ---
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
+
+> **English** — Translation pending: content is currently German.
+
 # Living Constitution — Neutral Auditing Instance (5-CORE Architecture, v4)
 
 Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die

@@ -1,10 +1,10 @@
 ---
 name: tageszeitung
-version: 0.1.0
+version: 0.1.1
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hu
 
 <img src="banner.png" width="100%" alt="tageszeitung banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `tageszeitung`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 ## Présentation et Objectif & Purpose
 
@@ -156,4 +151,5 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 | Version | Date | Change |
 |---|---|---|
+| 0.1.1 | 2026-11-22 | Note de langue corrigée |
 | 0.1.0 | 2026-06-22 | Initial creation — BACH schema ported, own store, feedparser optional |

@@ -1,10 +1,10 @@
 ---
 name: encoding-fix
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Dateien durch falsche Zeichenkodierung beschädigt sind (z. B. 'Mojibake reparieren', 'Umlaute kaputt', 'UTF-8 doppelt kodiert', /encoding-fix). Behebt cp1252-, Latin-1- und doppelt/dreifach kodierte UTF-8-Fehler in Textdateien ohne Abhängigkeiten. NICHT verwenden für reine Formatkonvertierungen ohne Kodierungsschaden."
 standalone: true
 anthropic_compatible: true
@@ -74,6 +74,9 @@ python encoding_fix.py              # Selbst-Test
 - **Zero Dependencies:** Nur Python stdlib
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-03-12)
 - Portiert aus BACH system/tools/encoding_fix.py

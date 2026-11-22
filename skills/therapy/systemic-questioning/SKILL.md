@@ -1,10 +1,10 @@
 ---
 name: systemic-questioning
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn feste Denkmuster durch systemische Fragen aufgeweicht und neue Perspektiven eröffnet werden sollen (z. B. 'zirkuläre Fragen stellen', 'Perspektiven wechseln', 'Verschlimmerungsfragen nutzen', /systemic-questioning). Vermittelt systemische Fragetechniken: zirkuläre Fragen, hypothetische Fragen, Skalierungsfragen und paradoxe Reflexionsanstöße. NICHT verwenden für reine Datenabfragen oder strukturierte Entscheidungsmatrizen (dafür utilities/decide)."
 standalone: true
 anthropic_compatible: true
@@ -258,3 +258,8 @@ Siehe: [ETHICS.md](../ETHICS.md)
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

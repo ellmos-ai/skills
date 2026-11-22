@@ -1,10 +1,10 @@
 ---
 name: staircase-routing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Verzeichnishierarchien nach Wegweiser-Dokumenten wie CLAUDE.md, AGENTS.md, README.md oder RULES.md durchsucht werden sollen (z. B. 'Ordnerhierarchie nach Regeln durchsuchen', 'Wegweiser finden', 'Staircase Routing', /staircase-routing). Wandert Verzeichnisbäume systematisch nach oben und unten ab, um verbindliche Kontextdateien zu finden. NICHT verwenden, wenn der Kontext bereits feststeht (dafür load-project)."
 standalone: true
 anthropic_compatible: true
@@ -137,3 +137,8 @@ gesuchten Wegweiser anzupassen:
 **`letter-hooker`** und die geplante Aufgabe
 **`antigravity-kontext-and-workflow-loader-and-divider`** eingebettet. Dadurch
 finden und befolgen Agenten Wegweiser-Dokumente, bevor sie Änderungen beginnen.
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

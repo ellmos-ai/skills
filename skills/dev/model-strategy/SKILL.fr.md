@@ -1,10 +1,10 @@
 ---
 name: model-strategy
-version: 2.0.0
+version: 2.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour choisir et configurer le bon modèle de LLM et l'effort de raisonnement dans les workflows multi-agents et sous-agents (ex. 'choisir le modèle pour cette tâche', 'stratégie de modèles sous-agents', 'modèle de révision', /model-strategy). Associe chaque rôle (concepteur, exécutant, réviseur, escalade) au modèle adapté selon la complexité et le coût. Ne PAS utiliser pour la gestion comptable du budget de tokens (utiliser infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
@@ -21,7 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 <img src="banner.png" width="100%" alt="model-strategy banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `model-strategy`.
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 > ⚠️ **Obsolète par rapport à v3.0.0 (2026-10-03)** — ce fichier n'a pas été mis à jour vers le
 > nouveau schéma de configuration (catalogue de modèles dans `models.example.json` /
@@ -30,7 +30,6 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ing-strat
 
 
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
 
 
 # Model-Switching Strategy (English)
@@ -262,6 +261,9 @@ curl -s -X POST http://<host>:8081/api/chat -H "Content-Type: application/json" 
 ---
 
 ## Journal des Modifications
+
+### 2.0.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 2.0.0 (2026-06-12)
 - Cross-agent delegation: Gemini, Codex, Ollama (local host) as routing targets

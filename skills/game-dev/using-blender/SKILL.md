@@ -1,10 +1,10 @@
 ---
 name: using-blender
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-11-22
 description: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way.
 standalone: true
 anthropic_compatible: true
@@ -21,11 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/game-dev/using-blender',
 
 <img src="banner.png" width="100%" alt="using-blender banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `using-blender`.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Using Blender (Deutsch)
 
@@ -66,6 +62,9 @@ Arbeite mit Blender in drei Modi, passend zur Aufgabe:
 Für Live-Steuerung lies [references/blender-mcp-review.md](references/blender-mcp-review.md), wenn ein Blender-MCP-Server ausgewählt, installiert oder bewertet werden soll.
 
 ## Änderungsprotokoll
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-06-20)
 - Initialer nutzeragnostischer Blender-Skill mit GUI-, Headless- und MCP-Routing.

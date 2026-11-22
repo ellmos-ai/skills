@@ -1,10 +1,10 @@
 ---
 name: automation-self-care
-version: 1.6.0
+version: 1.6.1
 type: skill
 author: Lukas Geiger + OpenAI + Google Gemini
 created: 2026-07-28
-updated: 2026-11-01
+updated: 2026-11-22
 description: >
   Baut und betreibt ein anbieterneutrales Self-Care-Kernset für geplante
   LLM-Aufgaben und Desktop-App-Automationen. Nutzen, wenn ein Agent seinen
@@ -326,6 +326,9 @@ Oberfläche installieren. Ein Ordner mit einem Task-Prompt ohne
 Live-Scheduler-Registrierung ist kein abgeschlossenes Setup.
 
 ## Changelog
+
+### 1.6.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.6.0 (2026-11-01)
 

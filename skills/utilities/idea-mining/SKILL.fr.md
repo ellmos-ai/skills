@@ -4,16 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `idea-mining`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
-
+> **Français** — Traduction en attente : le contenu est actuellement en allemand.
 
 # Idea-Mining — Ideen schürfen, filtern, eine durchziehen (English)
 

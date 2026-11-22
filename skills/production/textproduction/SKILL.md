@@ -1,10 +1,10 @@
 ---
 name: textproduction
-version: 2.0.0
+version: 2.0.1
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-09-27
+updated: 2026-11-22
 description: >
   KI-gestuetzte Textproduktion in drei Teilskills: Allgemeine Texte (Blogpost,
   Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte,
@@ -42,11 +42,7 @@ provenance:
 
 <img src="banner.png" width="100%" alt="textproduction banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `textproduction`.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Textproduction — Router (Deutsch)
 
@@ -80,6 +76,9 @@ passenden Teilskill weiter — lies die Detail-Anleitung im Unterordner.
 - Optionale Stiloptimierung: DeepL Write (kostenlos bis 500.000 Zeichen/Monat).
 
 ## Änderungsprotokoll
+
+### 2.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 2.0.0 (2026-06-22)
 - Umstrukturierung auf Router-Muster: SKILL.md = Einstieg + Routing-Tabelle.

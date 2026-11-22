@@ -1,10 +1,10 @@
 ---
 name: system-onboarding
-version: 1.2.0
+version: 1.2.1
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn ein neuer oder neu aufgesetzter Arbeitsplatzrechner für Agenten und Entwicklungsumgebungen eingerichtet werden soll (z. B. 'neuen Rechner einrichten', 'Workstation Onboarding', 'Agentenumgebung aufsetzen', /system-onboarding). Richtet Betriebssystemvoraussetzungen, Laufzeiten, gemeinsame Regelflächen und portable Skills sicher und verifiziert ein. NICHT verwenden für das Onboarding einzelner Repositories (dafür dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
@@ -108,6 +108,9 @@ Konfiguration geladen hat, noch dass eine geplante Aufgabe ihr beabsichtigtes
 Ergebnis erreicht hat.
 
 ## Änderungsprotokoll
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-07-29)
 

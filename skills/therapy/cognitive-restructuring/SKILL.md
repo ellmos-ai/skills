@@ -1,10 +1,10 @@
 ---
 name: cognitive-restructuring
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn belastende Gedanken, Grübelschleifen oder kognitive Verzerrungen hinterfragt werden sollen (z. B. 'Gedanken umstrukturieren', 'Gedankenprotokoll führen', 'Denkfehler erkennen', /cognitive-restructuring). Vermittelt das kognitive ABC-Modell, identifiziert Verzerrungen (z. B. Katastrophisieren) und leitet sokratische Realitätsprüfungen an. NICHT verwenden für reine Akzeptanz/Defusion (dafür act-techniques) oder Tiefenanalyse der Familiengeschichte (dafür genogram-work)."
 standalone: true
 anthropic_compatible: true
@@ -224,3 +224,8 @@ Was nehme ich mit: [...]
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Beck (1979), Ellis (1962) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

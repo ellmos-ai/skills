@@ -1,10 +1,10 @@
 ---
 name: mcp-config-sync
-version: 2.0.0
+version: 2.0.1
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn MCP-Server-Konfigurationen zwischen verschiedenen Agenten-Tools (Claude, Gemini, Codex, etc.) abgeglichen und synchronisiert werden sollen (z. B. 'MCPs synchronisieren', 'MCP-Konfiguration abgleichen', 'MCP-Server übertragen', /mcp-config-sync). Ermittelt vorhandene Server-Definitionen und gleicht sie nutzergeführt ohne festen Master-Hub ab. NICHT verwenden, wenn zusätzlich Skills und Regeln gespiegelt werden sollen (dafür agent-config-sync)."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-confi
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # MCP Config Sync (Deutsch)
 
@@ -56,6 +55,7 @@ agent-config-sync/scripts/sync.py --apply --yes
 
 ## Änderungsprotokoll
 
+- v2.0.1 (2026-11-22): Sprachhinweis korrigiert
 - v2.0.0 (2026-07-27): Sync provider-neutral gemacht -- keine implizite
   Hub-/Master-Datei mehr, Nutzer waehlt Quelle, Ziele, Richtung und
   Konfliktpolitik selbst.

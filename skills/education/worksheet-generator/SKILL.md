@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn didaktische Arbeitsblätter, Übungsaufgaben oder Kopiervorlagen für Unterricht und Förderung erstellt werden sollen (z. B. 'Arbeitsblatt erstellen', 'Übungsaufgaben generieren', 'Lernmaterial entwerfen', /worksheet-generator). Generiert anpassbare Arbeitsblätter mit klaren Aufgabenstellungen und Lösungsblättern. NICHT verwenden für übergeordnete Förderzielplanung (dafür foerderplaner)."
 standalone: true
 anthropic_compatible: true
@@ -41,3 +41,8 @@ Dieser Skill ermöglicht die automatische Erstellung differenzierter Arbeitsblä
 
 - **Anonymisierte Vorgaben:** Keine Nutzung von Schülernamen.
 - **Entwurfscharakter:** Alle Arbeitsblätter müssen vor der Ausgabe durch die Lehrkraft geprüft werden.
+
+## Changelog
+
+### 0.1.1 (2026-11-22)
+- Sprachhinweis korrigiert

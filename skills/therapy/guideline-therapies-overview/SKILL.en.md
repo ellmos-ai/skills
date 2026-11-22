@@ -1,10 +1,10 @@
 ---
 name: guideline-therapies-overview
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when seeking an objective comparative overview of the 4 German guideline-approved psychotherapy modalities (e.g. 'compare therapy modalities', 'CBT vs psychodynamic', 'which psychotherapy fits', /guideline-therapies-overview). Outlines indications, theoretical models, and settings for CBT, Psychodynamic, Psychoanalytic, and Systemic therapy. Do NOT use for clinical diagnostic decisions or acute interventions."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinie
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `guideline-therapies-overview`.
 
 # Guideline Therapies Overview (English)
 

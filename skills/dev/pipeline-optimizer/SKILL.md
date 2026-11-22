@@ -1,10 +1,10 @@
 ---
 name: pipeline-optimizer
-version: 1.2.0
+version: 1.2.1
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
 description: "Verwenden, wenn bestehende Toolchains, Projektstrukturen, Dokumentationsabläufe oder Pipelines renoviert und vereinheitlicht werden sollen (z. B. 'Pipeline renovieren', 'Ordnerstruktur aufräumen', 'Projektstruktur optimieren', /pipeline-optimizer). Führt ein strukturiertes 6-Schritte-Verfahren durch: Bestandsanalyse, Zweckklärung, Zielbild, Lückenplan, Pain Points und Neutests. NICHT verwenden für isolierte Bugfixes an einzelnen Funktionen (dafür bugfix-protocol)."
 standalone: true
@@ -288,6 +288,9 @@ Bei **Projektordner-Scope** zusätzlich immer kurz die übergeordneten Pipeline-
 ---
 
 ## Changelog
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-06-13)
 - Erstveröffentlichung in der Skill-Bibliothek: persönliche Pfade, konkrete Pipeline-/Projektnamen und Verweise auf private Skills durch generische Beispiele ersetzt; Verfahren (6 Schritte, Anti-Patterns, Lehrbeispiel, Checklisten) unverändert

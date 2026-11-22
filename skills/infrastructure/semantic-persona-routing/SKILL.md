@@ -1,10 +1,10 @@
 ---
 name: semantic-persona-routing
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
-updated: 2026-09-03
+updated: 2026-11-22
 description: >
   Erstellt und verwendet einen anbieterneutralen semantischen Routing-Graphen
   aus Personas, koordinierenden Rollen, Experten und aktiven Skill-Endpunkten.
@@ -231,6 +231,9 @@ kein portabler Steuer-Skill, meldet er `GAP` und fährt nur über einen
 ausdrücklich konfigurierten Ersatzweg fort.
 
 ## Änderungsprotokoll
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-09-03)
 

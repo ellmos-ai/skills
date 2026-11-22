@@ -1,10 +1,10 @@
 ---
 name: transkription
-version: 0.1.0
+version: 0.1.1
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn lokale Audio- oder Videodateien in Text transkribiert werden sollen (z. B. 'Audiodatei transkribieren', 'Sprachaufnahme in Text umwandeln', 'Voice-Memo transkribieren', /transkription). Nutzt Whisper oder Vosk als lokales Offline-Backend zur Spracherkennung mit automatischem Fallback. NICHT verwenden für den Download von YouTube-Online-Untertiteln (dafür utilities/video-transcriber)."
 standalone: true
 anthropic_compatible: true
@@ -143,4 +143,5 @@ CREATE TABLE IF NOT EXISTS transcripts (
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — eigener SQLite-Store, Whisper/Vosk-Presence-Check |

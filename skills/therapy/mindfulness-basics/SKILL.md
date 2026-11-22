@@ -1,10 +1,10 @@
 ---
 name: mindfulness-basics
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Achtsamkeitspraxis, MBSR-Übungen oder Körperwahrnehmung erlernt und in den Alltag integriert werden sollen (z. B. 'Achtsamkeitsübungen', 'Bodyscan Anleitung', 'Atemmeditation im Alltag', /mindfulness-basics). Leitet evidenzbasierte Achtsamkeitsübungen nach Jon Kabat-Zinn an: Bodyscan, Gehmeditation und 3-Minuten-Atemraum. NICHT verwenden für gezielte Muskelrelaxation nach Jacobson (dafür pmr-autogenic-training)."
 standalone: true
 anthropic_compatible: true
@@ -212,3 +212,8 @@ Das vollständige MBSR-Programm als Referenz:
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Kabat-Zinn (1990), MBSR-Programm — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

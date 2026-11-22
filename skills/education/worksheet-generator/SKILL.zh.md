@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "当制作教学练习纸、训练习题或课堂讲义时使用（例如 '制作作业单'、'生成练习题'、'设计学习材料'、/worksheet-generator）。生成具有清晰题干和参考答案的可定制工作单。切勿用于整体教学辅导规划（使用 foerderplaner）。"
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 
-> **Chinese** — 官方中文文档。
+> **中文** — `worksheet-generator` 官方中文版本。
 
 # 练习工作单与教学材料生成指南 (中文版)
 

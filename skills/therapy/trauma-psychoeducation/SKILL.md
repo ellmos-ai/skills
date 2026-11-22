@@ -1,10 +1,10 @@
 ---
 name: trauma-psychoeducation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-11-22
 description: >
   Trauma-Psychoedukation: Traumadefinition, normale Reaktionen, Fenster der Belastbarkeit, Triggermanagement und Selbstfürsorge.
 
@@ -372,3 +372,8 @@ an Fachperson.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Flatten et al. (2011), Siegel (2012), Reddemann (2001), S3-Leitlinie PTBS (2019) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

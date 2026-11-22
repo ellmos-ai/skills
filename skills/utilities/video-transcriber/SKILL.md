@@ -1,10 +1,10 @@
 ---
 name: video-transcriber
-version: 1.2.0
+version: 1.2.1
 type: tool
 author: Lukas Geiger
 created: 2026-04-04
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Transkripte, Untertitel oder Metadaten von Online-Videos heruntergeladen werden sollen (z. B. 'YouTube Video transkribieren', 'Untertitel von Video herunterladen', /video-transcriber). Extrahiert manuelle und automatische Untertitel als Markdown, JSON oder Text. NICHT verwenden für lokale Audio-Transkription via Whisper (dafür assist/transkription)."
 standalone: true
 anthropic_compatible: true
@@ -153,6 +153,9 @@ Beide Wege sind einzeln aufrufbar: `fetch_transcript_primary()` (nur
   Formate, endet der Lauf mit Exit 3 statt mit einer Teilausgabe
 
 ## Changelog
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-08-24)
 - **Exit-Semantik:** Leeres Transkript endet mit Exit `3` statt stillschweigend

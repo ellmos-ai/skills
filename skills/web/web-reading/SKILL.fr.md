@@ -1,10 +1,10 @@
 ---
 name: web-reading
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser lorsque le contenu d'une page web doit être lu, extrait ou analysé (ex. 'lire cette page web', 'extraire le texte de l'URL', 'analyser le contenu du site', /web-reading). Détermine s'il faut le texte principal, la structure ou une capture d'écran et oriente vers le bon outil. Ne PAS utiliser pour les requêtes d'API directes ou les simples téléchargements."
 standalone: true
 anthropic_compatible: true
@@ -23,12 +23,7 @@ bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks':
 
 <img src="banner.png" width="100%" alt="web-reading banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `web-reading`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Web Reading (Router) (English)
 
@@ -119,6 +114,9 @@ def extract_content(url: str) -> str:
 ```
 
 ## Journal des Modifications
+
+### 1.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.1.0 (2026-07-05)
 - Reworked from a plain protocol into a **router**: detects available web

@@ -1,10 +1,10 @@
 ---
 name: project-onboarding
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when onboarding to an unfamiliar software repository, analyzing its architecture, or establishing initial developer workflows (e.g. 'onboard new project', 'analyze codebase architecture', 'initial repo setup', /project-onboarding). Evaluates features, code health, and tech stack to generate an actionable onboarding checklist. Do NOT use for basic directory traversal (use infrastructure/staircase-routing)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/projekt-a
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `project-onboarding`.
 
 # Standard Onboarding Procedure for New Software Projects (English)
 

@@ -1,10 +1,10 @@
 ---
 name: idea-mining
-version: 1.2.0
+version: 1.2.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Verwenden, wenn ein schweres Problem seit längerem feststeckt und neue Ansätze gewünscht sind, die gegen bereits Versuchtes geprüft werden und von denen einer bis zum Ende verfolgt wird: Forschungsfragen, Beweise, hartnäckige Architektur- oder Designblockaden, Innovationsrunden für ein Projekt: 'wir drehen uns im Kreis', 'wir hängen seit Wochen fest', 'schürf neue Ansätze', 'sammle Ideen und filtere sie gegen unsere Notizen bzw. das Decision-Log', 'keine Sackgassen wiederholen', 'Innovationsrunde', /idea-mining. Füllt IDEENSPEICHER.md mit Ideen aus acht Schürftechniken (u. a. Fachgebiets-Analogien, Literatur, Geschwisterprojekte), filtert sie gegen die Projektdokumentation, wählt eine aus, führt sie durch und dokumentiert auch Fehlschläge. NICHT verwenden für eine schnelle, freie Ideenliste ohne Filter und Weiterverfolgung (brainstorm), die Wahl zwischen vorliegenden Optionen (decide), die Diagnose eines konkreten Fehlers (think) oder die schlichte Kette Analyse-Ideen-Entscheidung (structured-thinking)."
 
 standalone: true
@@ -36,12 +36,7 @@ provenance:
 
 <img src="banner.png" width="100%" alt="idea-mining banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `idea-mining`.
-
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Idea-Mining — Ideen schürfen, filtern, eine durchziehen (Deutsch)
 
@@ -168,6 +163,9 @@ D) BEWEISNOTIZ.md aktualisiert (auch der Fehlschlag von Idee 2), Kurzbericht.
 - `swarm-operations` — unbelastete Subagenten für Technik 3 und parallele Exploration.
 
 ## Änderungsprotokoll
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-11-06)
 - Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.

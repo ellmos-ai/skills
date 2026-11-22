@@ -1,10 +1,10 @@
 ---
 name: bugsweep
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger
 created: 2026-06-01
-updated: 2026-06-13
+updated: 2026-11-22
 description: "[Français] Compétence d'agent pour bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass."
 standalone: true
 anthropic_compatible: true
@@ -20,12 +20,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'o
 
 <img src="banner.png" width="100%" alt="bugsweep banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `bugsweep`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # /bugsweep — Systematic Bug-Sweep Workflow (English)
 
@@ -175,6 +170,9 @@ Once counter >= target AND any_bug_found:
 ---
 
 ## Journal des Modifications
+
+### 1.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.1.0 (2026-06-13)
 - Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly

@@ -4,15 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="textproduction banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `textproduction`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `textproduction`.
-
+> **Français** — Traduction en attente : le contenu est actuellement en allemand.
 
 # Textproduction — Router (English)
 

@@ -1,6 +1,6 @@
 ---
 name: reiseroute
-version: 1.0.0
+version: 1.0.1
 category: assist
 description: "Utiliser pour calculer des itinéraires de déplacement, distances et temps de trajet d'un point A à un point B en voiture, vélo ou à pied (ex. 'calculer l'itinéraire de A à B', 'estimation du temps de trajet', 'planifier trajet à vélo', /reiseroute). Calcule les trajets et profils d'élévation via OSRM sans clé d'API. Ne PAS utiliser pour rechercher des POI à proximité (utiliser assist/location-suche)."
 tags: [routing, navigation, osrm, openstreetmap, reise]
@@ -19,12 +19,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="reiseroute banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `reiseroute`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Travel Route (English)
 
@@ -130,4 +125,5 @@ no persistent data storage.
 
 | Version | Date | Change |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Note de langue corrigée |
 | 1.0.0 | 2026-06-22 | Created from BACH routing_service.py v1.0; geocoding integrated |

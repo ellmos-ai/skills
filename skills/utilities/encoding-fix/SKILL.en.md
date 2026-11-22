@@ -1,10 +1,10 @@
 ---
 name: encoding-fix
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when text files suffer from character encoding corruption or mojibake (e.g. 'fix broken encoding', 'repair umlauts/mojibake', 'double-encoded UTF-8', /encoding-fix). Repairs cp1252, Latin-1, and multi-encoded UTF-8 text files without external dependencies. Do NOT use for clean format conversions without corrupted bytes."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/encoding_fix.py', 'o
 
 <img src="banner.png" width="100%" alt="encoding-fix banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `encoding-fix`.
 
 # Encoding Fix (English)
 
@@ -66,6 +65,9 @@ python encoding_fix.py              # Self-test
 - **Zero dependencies:** Python stdlib only
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.0.0 (2026-03-12)
 - Ported from BACH system/tools/encoding_fix.py

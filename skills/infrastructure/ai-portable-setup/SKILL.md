@@ -1,10 +1,10 @@
 ---
 name: ai-portable-setup
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn ein portabler, lokaler KI-Arbeitsbereich auf einem USB-Stick oder externen Laufwerk eingerichtet werden soll (z. B. 'portables KI-Setup', 'KI auf USB-Stick', 'lokale RAG-Pipeline offline', /ai-portable-setup). Konfiguriert lokale Modelle (Ollama), Vektordatenbank (ChromaDB) und modulare Prompts für autarke Offline-Nutzung. NICHT verwenden für vollständiges Rechner-Onboarding (dafür system-onboarding)."
 standalone: true
 anthropic_compatible: true
@@ -118,6 +118,9 @@ Frage -> Embedding -> Similarity Search -> Top-K Chunks
 - ~8 GB RAM fuer Mistral
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-03-12)
 - Konsolidierung aus MODULAR_AGENTS/AI-Portable

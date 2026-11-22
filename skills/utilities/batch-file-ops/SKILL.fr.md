@@ -1,10 +1,10 @@
 ---
 name: batch-file-ops
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour effectuer des opérations de fichiers par lots (copier, déplacer, supprimer, lister) via des motifs glob (ex. 'déplacer des fichiers par lot', 'supprimer tous les *.tmp correspondants', /batch-file-ops). Exécute des actions sécurisées sur le système de fichiers sans dépendances externes. Ne PAS utiliser pour modifier du texte dans des fichiers ou éditer des fichiers un par un."
 standalone: true
 anthropic_compatible: true
@@ -22,12 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `batch-file-ops`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # batch_file_ops - Batch File Operations (English)
 

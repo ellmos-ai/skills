@@ -1,10 +1,10 @@
 ---
 name: systemisch-loesungsfokussiert
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when integrating systemic inquiry and solution-focused brief therapy techniques in coaching or advisory contexts (e.g. 'systemic solution-focused coaching', 'circular and scaling questions', /systemisch-loesungsfokussiert). Unifies circular questions, miracle question, exception exploration, scaling, and coping questions. Do NOT use for standard CBT thought records (use cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'custom', 'merged_from': ['therapy/solution-focused-thera
 
 <img src="banner.png" width="100%" alt="systemisch-loesungsfokussiert banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `systemisch-loesungsfokussiert`.
 
 # Systemic & Solution-Focused Methods (English)
 
@@ -317,6 +316,9 @@ Strengthen the sense of control: whoever can describe how to make the problem wo
 ---
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.0.0 (2026-05-19)
 - Merged from `solution-focused-therapy` (v1.0.0) and `systemic-questioning` (v1.0.0)

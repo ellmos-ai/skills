@@ -4,12 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="project-onboarding banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `project-onboarding`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Standard Onboarding Procedure for New Software Projects (English)
 

@@ -4,12 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `counseling-basics`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Counseling Basics (English)
 

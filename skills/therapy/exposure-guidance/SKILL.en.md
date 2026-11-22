@@ -1,10 +1,10 @@
 ---
 name: exposure-guidance
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when confronting anxiety, phobias, or avoidance behavior through graded exposure psychoeducation (e.g. 'create fear hierarchy', 'plan exposure exercise', 'SUDs scale', /exposure-guidance). Explains habituation mechanisms, in-vivo/in-sensu hierarchy design, and safety behavior fading. Do NOT use for unguided trauma exposure or acute distress calming (use stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/exposition
 
 <img src="banner.png" width="100%" alt="exposure-guidance banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `exposure-guidance`.
 
 # Exposure Guidance (English)
 

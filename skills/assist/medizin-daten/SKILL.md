@@ -1,10 +1,10 @@
 ---
 name: medizin-daten
-version: 0.1.0
+version: 0.1.1
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn medizinische Daten, Diagnosen, Laborwerte oder Befundhistorien rein lokal und privat erfasst werden sollen (z. B. 'Befund privat notieren', 'Laborwerte lokal erfassen', 'Untersuchungsplan speichern', /medizin-daten). Verwaltet sensible Medizindaten in einer privaten lokalen SQLite-Datenbank ohne Cloud-Übertragung. NICHT verwenden für medizinische Ferndiagnosen oder akute Notfallberatung."
 standalone: true
 anthropic_compatible: true
@@ -161,4 +161,5 @@ CREATE TABLE IF NOT EXISTS examination_plans (
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — Eigenentwurf, Privacy-Gate, 3-Tabellen-Schema |

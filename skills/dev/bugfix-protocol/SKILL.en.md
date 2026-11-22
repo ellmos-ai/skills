@@ -1,10 +1,10 @@
 ---
 name: bugfix-protocol
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Use for ANY bug report or debugging request, before changing code, even if the cause seems obvious: wrong output or totals ('customers pay too much', 'X returns -1 instead of 0'), errors, crashes, exceptions, failing tests, regressions, 'debug this', 'find and fix the bug', 'why does ... happen', /bugfix. Works through six phases instead of patching the first suspicious line: quick checks, diagnosis, a minimal test that reproduces the bug, a fix at the root cause rather than the symptom, verification, and a short bug report (root cause, fix, verification) the user can check. Especially valuable when the symptom shows up far from the cause, for regressions and intermittent failures. Do NOT use for a systematic sweep of a whole codebase for unknown bugs (bugsweep)."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-pr
 
 <img src="banner.png" width="100%" alt="bugfix-protocol banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `bugfix-protocol`.
 
 # Bugfix Protocol: Systematic 6-Phase Debugging (English)
 

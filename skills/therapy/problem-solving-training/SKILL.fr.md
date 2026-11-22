@@ -4,12 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `problem-solving-training`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Problem-Solving Training (English)
 

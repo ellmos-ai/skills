@@ -1,10 +1,10 @@
 ---
 name: exposure-guidance
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Ängste, Phobien oder Vermeidungsverhalten durch Konfrontation überwunden werden sollen (z. B. 'Expositionsübungen planen', 'Angsthierarchie erstellen', 'SUDs-Skala nutzen', /exposure-guidance). Bietet fundierte Psychoedukation zu Habituation, Reizkonfrontation und Expositionsplanung. NICHT verwenden zur unbegleiteten Durchführung hochgradiger Traumakonfrontation oder akuten Panikstabilisierung (dafür stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -471,3 +471,8 @@ professionelle Begleitung kann re-traumatisieren oder die Angst verstärken.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Foa & Kozak (1986), Craske et al. (2014), Bandelow et al. (2014), S3-Leitlinie Angststörungen (2014) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

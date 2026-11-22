@@ -1,10 +1,10 @@
 ---
 name: skill-explorer
-version: 1.1.1
+version: 1.1.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-08-24
+updated: 2026-11-22
 description: "Manages your own skill landscape: surveys and compares existing skills (Audit mode), researches the web for new skills/plugins (Explore mode), and is at the same time the installer that generates lean subskills (Skill-Finder, family umbrella, maintenance skills) instead of loading a monolith. Use this skill for \"compare/audit skills\", \"which skills are duplicated\", \"form skill families\", \"clean up/consolidate skills\", \"maintain the skill register\", \"find skills/plugins for topic X\", \"install new skills\", \"browse the skill marketplace\", or for `/skill-explorer`. Delivers a sub-report per family and a globally numbered decision list; installs/uninstalls only after a security check and explicit approval."
 
 standalone: true
@@ -107,6 +107,9 @@ beauftragen und als Orchestrator nur konsolidieren/prüfen (Spezialist-Schwarm).
   `assets/skill-register-template.md`, `assets/config.example.json`, `assets/branch-header.example.md`
 
 ## Changelog
+
+### 1.1.2 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.1 (2026-08-24)
 - Der Inventarhelfer akzeptiert nun auch ältere, einzeilig serialisierte

@@ -1,10 +1,10 @@
 ---
 name: system-onboarding
-version: 1.2.0
+version: 1.2.1
 type: skill
 author: ellmos contributors
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour configurer et intégrer un nouveau poste de travail ou une machine réinstallée pour le développement et les agents (ex. 'configurer nouvel ordinateur', 'onboarding station de travail', 'installer environnement d'agents', /system-onboarding). Installe les prérequis d'OS, les runtimes, les règles partagées et les compétences portables sans fuite de secrets. Ne PAS utiliser pour intégrer un dépôt logiciel isolé (utiliser dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (s
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `system-onboarding`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # System Onboarding (English)
 
@@ -90,6 +85,9 @@ successful command exit alone is not evidence that an application loaded its new
 configuration or that a scheduled task achieved its intended outcome.
 
 ## Journal des Modifications
+
+### 1.2.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.2.0 (2026-07-29)
 

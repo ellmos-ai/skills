@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Используйте для создания дидактических рабочих листов, практических упражнений или раздаточных материалов (например, 'создать рабочий лист', 'сгенерировать упражнения', 'разработать учебный материал', /worksheet-generator). Создает настраиваемые учебные материалы с четкими формулировками заданий и ответами. НЕ используйте для общего планирования поддержки (используйте foerderplaner)."
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 
-> **Russian** — Официальный документ на русском языке.
+> **Русский** — Официальная русская версия `worksheet-generator`.
 
 # Генератор Рабочих Листов и Упражнений (Русский)
 

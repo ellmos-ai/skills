@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "教育用ワークシート、練習問題プリント、または教材を作成する場合に使用する（例：'ワークシートを作成'、'練習問題を生成'、'学習教材を設計'、/worksheet-generator）。明確な設問と解答例を備えたカスタマイズ可能なプリント教材を作成する。総合的な個別支援計画（foerderplaner）には使用しない。"
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 
-> **Japanese** — 公式日本語ドキュメント。
+> **日本語** — `worksheet-generator` の公式日本語版。
 
 # ワークシート・教材生成スキル (日本語版)
 

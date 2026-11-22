@@ -1,10 +1,10 @@
 ---
 name: problem-solving-training
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn komplexe Lebensprobleme oder Alltagsblockaden strukturiert gelöst werden sollen (z. B. 'Problem strukturiert lösen', 'Schritt-für-Schritt Problemlösung', 'Lösungsoptionen bewerten', /problem-solving-training). Führt durch das 6-Schritte-Modell nach D'Zurilla und Goldfried: Problemdefinition, Zielklärung, Brainstorming, Bewertung, Umsetzung und Evaluation. NICHT verwenden für ethische/technische Architekturentscheidungen (dafür utilities/decide)."
 standalone: true
 anthropic_compatible: true
@@ -284,3 +284,8 @@ Naechster Schritt: [Abschluss / Neuer Versuch / Anderer Ansatz]
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: D'Zurilla & Goldfried (1971), Nezu et al. (2013), Malouff et al. (2007) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

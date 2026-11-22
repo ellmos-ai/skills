@@ -1,10 +1,10 @@
 ---
 name: act-techniques
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn psychische Flexibilität, Werteorientierung oder Akzeptanz nach dem ACT-Modell gefördert werden sollen (z. B. 'Werte klären', 'Defusion üben', 'Akzeptanz statt Vermeidung', /act-techniques). Vermittelt das Hexaflex-Modell mit 6 Kernprozessen (kognitive Defusion, Akzeptanz, Kontakt mit dem Gegenwärtigen, Selbst-als-Kontext, Werte, engagiertes Handeln). NICHT verwenden für kognitives Umstrukturieren automatischer Gedanken (dafür cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -239,3 +239,8 @@ Siehe: [ETHICS.md](../ETHICS.md)
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: dossier-briefing
-version: 1.0.0
+version: 1.0.1
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 category: assist
 description: "Verwenden, wenn zu einem Thema oder einer Person ein strukturiertes Recherche-Briefing als Markdown-Dossier erstellt werden soll (z. B. 'Recherche-Dossier anlegen', 'Briefing zu Thema X erstellen', 'Dossier über Person Y', /dossier-briefing). Erzeugt ein strukturiertes Briefing-Dokument mit Kernfakten, Quellenbelegen und offenen Fragen. NICHT verwenden für akute Entscheidungsverdichtung (dafür decision-shot) oder formale Forschungsprotokolle (dafür research/research-agent)."
 tags: [briefing, dossier, recherche, markdown, research]
@@ -127,4 +127,5 @@ Kein Netzwerkzugriff. Kein Store. Rein lokale Verarbeitung.
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 1.0.0 | 2026-06-22 | Erstellt aus BACH dossier_generator.py v1.0.0; Store entfernt, verallgemeinert |

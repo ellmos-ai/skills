@@ -1,10 +1,10 @@
 ---
 name: bugsweep
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger
 created: 2026-06-01
-updated: 2026-06-13
+updated: 2026-11-22
 description: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass.
 
 standalone: true
@@ -170,6 +170,9 @@ Nachdem zähler >= ziel UND je_bug_gefunden:
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-06-13)
 - Modell-Regel für Schritt B zurückportiert (aus lokaler Skill-Installation, Stand 2026-06-11): neuere Modellklassen verifizieren per Tests + realem Smoke-Lauf selbst, kein externer Review nötig; Protokoll-Feld "Review-Verdict" entsprechend erweitert

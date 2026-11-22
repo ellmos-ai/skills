@@ -1,10 +1,10 @@
 ---
 name: letter-hooker
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-07-29
+updated: 2026-11-22
 description: >
   Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader,
   Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext-
@@ -86,3 +86,8 @@ Führe den Befehl aus dem Skill-Ordner `letter-hooker` heraus aus. Die Stichwort
 2. **Stichwortliste aktualisieren**: Fachbegriffe extrahieren und nach `<SYNC_DIR>/STICHWORTLISTE.json` speichern.
 3. **Letter Hooks injizieren**: Bootloader-Regeln und `file://`-Referenz-Links an Prompts anhängen.
 4. **Ergebnisse loggen**: Updates in `ANTIGRAVITY-LOG.txt` und `ANTIGRAVITY-REGISTRY.md` festhalten.
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

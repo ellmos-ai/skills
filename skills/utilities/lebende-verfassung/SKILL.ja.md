@@ -7,6 +7,9 @@ description: >
 ---
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
+
+> **日本語** — 翻訳待ち：内容は現在ドイツ語のままです。
+
 # 生きている憲法 — 中立的な審査機関（5-COREアーキテクチャ, v4）
 
 Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die

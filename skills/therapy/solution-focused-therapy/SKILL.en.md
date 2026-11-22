@@ -1,10 +1,10 @@
 ---
 name: solution-focused-therapy
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when shifting focus rapidly from problem causes to workable solutions and existing strengths (e.g. 'miracle question', 'explore exceptions to problems', 'scaling progress', /solution-focused-therapy). Applies Steve de Shazer and Insoo Kim Berg's solution-focused brief therapy tools: miracle question, scaling, and exception hunting. Do NOT use for analyzing deep historical origins."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/loesungsfo
 
 <img src="banner.png" width="100%" alt="solution-focused-therapy banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `solution-focused-therapy`.
 
 # Solution-Focused Therapy (English)
 

@@ -1,10 +1,10 @@
 ---
 name: schema-therapy
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when examining deep-seated emotional schemas, lifelong patterns, or personality modes (e.g. 'schema therapy modes', 'vulnerable child and healthy adult', 'life traps', /schema-therapy). Teaches Jeffrey Young's schema model: core emotional needs, early maladaptive schemas, schema modes, and coping styles. Do NOT use for quick behavioral activation (use behavioral-activation)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/schemather
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `schema-therapy`.
 
 # Schema Therapy (English)
 

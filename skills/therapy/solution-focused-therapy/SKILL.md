@@ -1,10 +1,10 @@
 ---
 name: solution-focused-therapy
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn der Fokus schnell und ressourcenorientiert auf Lösungen und Ausnahmen statt auf Problemursachen gerichtet werden soll (z. B. 'Wunderfrage stellen', 'Ausnahmen vom Problem finden', 'Skalierungsfragen nutzen', /solution-focused-therapy). Vermittelt die de Shazer / Berg Kurztherapie: Wunderfrage, Ausnahmen-Exploration, Skalierung und Ressourcenaktivierung. NICHT verwenden für tiefenpsychologische Ursachenforschung."
 standalone: true
 anthropic_compatible: true
@@ -221,3 +221,8 @@ Immer nur nach dem nächsten Punkt fragen — nie nach dem Endziel.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: de Shazer (1988), Berg & Miller (1992), Gingerich & Peterson (2013), Kim et al. (2019) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

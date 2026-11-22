@@ -1,10 +1,10 @@
 ---
 name: stabilization-techniques
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn akute emotionale Übererregung, Panikattacken, Flashbacks oder Dissoziation schnell reguliert werden müssen (z. B. 'akute Panik stoppen', 'Erdungsübungen bei Flashback', 'Sicherer Ort Übung', /stabilization-techniques). Vermittelt sofortige Notfalltechniken: 5-4-3-2-1-Erdung, Tresorübung, Imaginativer Sicherer Ort und physiologische Atemregulation. NICHT verwenden für aufdeckende Trauma-Exposition während der Krise."
 standalone: true
 anthropic_compatible: true
@@ -283,3 +283,8 @@ Siehe: [ETHICS.md](../ETHICS.md)
 ---
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

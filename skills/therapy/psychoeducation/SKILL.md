@@ -1,10 +1,10 @@
 ---
 name: psychoeducation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn fundiertes, entstigmatisierendes Wissen über psychische Störungen und Symptome vermittelt werden soll (z. B. 'wie funktioniert Depression/Angst', 'Symptome von ADHS/PTBS verstehen', 'Psychoedukation psychische Störung', /psychoeducation). Erklärt Entstehungsmodelle, Vulnerabilitäts-Stress-Modelle und Behandlungsoptionen verständlich und evidenzbasiert. NICHT verwenden für individuelle Diagnosestellung oder Therapieersatz."
 standalone: true
 anthropic_compatible: true
@@ -212,3 +212,8 @@ affektive Instabilitaet, Selbstverletzung, chronische Leere, Dissoziationen
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: ICD-11, DGPPN-Leitlinien, Xia et al. (2011), Donker et al. (2009), Cochrane Reviews — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

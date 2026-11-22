@@ -1,10 +1,10 @@
 ---
 name: dev-soft-agent
-version: 0.1.0
+version: 0.1.1
 type: agent
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour scanner, hiérarchiser et faire progresser un projet logiciel en continu via des boucles de développement automatisées (ex. 'boucle de développement autonome', 'scanner projet et traiter le backlog', 'lancer l'agent de dev', /dev-soft-agent). Pilote l'analyse du code, la priorisation des tâches et les itérations sans dépendances externes. Ne PAS utiliser pour de simples modifications ponctuelles sans cadre de projet."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'or
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `dev-soft-agent`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Dev Soft Agent (English)
 
@@ -134,6 +129,9 @@ Quality policies that can be automatically checked against code:
 - **PathPolicy:** Detect and report hardcoded absolute paths
 
 ## Journal des Modifications
+
+### 0.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 0.1.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/devSoftAgent to skill library
