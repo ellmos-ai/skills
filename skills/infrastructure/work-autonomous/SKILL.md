@@ -102,8 +102,8 @@ Ebene 2, sondern mitten in der normalen Ebene-1-Arbeit:
    bestätigt hat (wörtliches Zitat mit Datum)?
 2. **Notwendig:** Wird das Ziel ohne ihn nicht erreicht, und existiert kein milderer gleichwertiger Weg?
 3. **Vorgesehener Weg:** Nutzt er den vorgesehenen Weg im eigenen System, ohne neuen Empfänger?
-4. **Keine neue Abwägung:** Keine nennenswerten Kosten, keine Außenwirkung, kein Löschen/Entwerten von
-   Bestehendem, keine Sicherheits-/Sichtbarkeitslockerung?
+4. **Keine neue Abwägung:** Keine nennenswerten Kosten, keine zusätzliche Außenwirkung außerhalb des
+   Auftrags, kein Löschen/Entwerten von Bestehendem, keine Sicherheits-/Sichtbarkeitslockerung?
 5. **Keine Sperre:** Kein `LOCK.user*`, kein ausdrückliches Verbot, keine engere Projektregel?
 
 Wo `open-ocean` verfügbar ist, die maschinelle Prüffunktion aufrufen (`python ocean.py authority check ...`

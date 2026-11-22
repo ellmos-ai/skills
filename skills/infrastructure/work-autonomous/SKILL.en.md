@@ -101,8 +101,8 @@ during ordinary Tier 1 work:
    plan (verbatim quote with date)?
 2. **Necessary:** Will the goal fail without it, with no milder equivalent path?
 3. **Intended path:** Does it use the intended system-internal path, with no new external recipient?
-4. **No new trade-off:** No significant cost, no external effect, no deletion/invalidation of
-   existing state, and no loosening of security or visibility?
+4. **No new trade-off:** No significant cost, no additional external effect beyond the order, no
+   deletion/invalidation of existing state, and no loosening of security or visibility?
 5. **No lock:** No `LOCK.user*`, no explicit ban, and no stricter project rule?
 
 Where `open-ocean` is available, invoke its checker (`python ocean.py authority check ...` or
