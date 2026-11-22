@@ -4,15 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="headless banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `headless`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `headless`.
-
+> **Français** — Traduction en attente : le contenu est actuellement en allemand.
 
 # Headless (English)
 

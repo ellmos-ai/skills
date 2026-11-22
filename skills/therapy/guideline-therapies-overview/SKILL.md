@@ -1,10 +1,10 @@
 ---
 name: guideline-therapies-overview
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn eine neutrale Orientierung über Richtlinienpsychotherapie-Verfahren in Deutschland gesucht wird (z. B. 'welche Therapieform passt', 'Unterschied KVT und Tiefenpsychologie', 'Therapieverfahren vergleichen', /guideline-therapies-overview). Vergleicht KVT, Tiefenpsychologisch fundierte Psychotherapie, Analytische Psychotherapie und Systemische Therapie hinsichtlich Indikation, Dauer und Setting. NICHT verwenden für akute Interventionen oder Diagnosevergabe."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/richtlinie
 
 <img src="banner.png" width="100%" alt="guideline-therapies-overview banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # Guideline Therapies Overview (Deutsch)
 
@@ -177,3 +176,8 @@ Research consistently shows: The most important therapeutic factor is the therap
 
 *Ported from BACH v3.8.0 | Standalone Version*
 *Sources: G-BA Guidelines, Wampold (2015), Leichsenring & Rabung (2011), von Sydow et al. (2010) — Not professional therapy*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

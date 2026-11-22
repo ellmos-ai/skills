@@ -1,10 +1,10 @@
 ---
 name: motivational-interviewing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when addressing ambivalence about behavioral change or boosting motivation to change (e.g. 'motivational interviewing', 'resolve ambivalence', 'foster change talk', /motivational-interviewing). Guides Miller and Rollnick's MI framework: OARS principles, exploring decisional balance, and eliciting change talk. Do NOT use for directive prescribing or confrontation."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/motivation
 
 <img src="banner.png" width="100%" alt="motivational-interviewing banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `motivational-interviewing`.
 
 # Motivational Interviewing (English)
 

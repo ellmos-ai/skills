@@ -1,10 +1,10 @@
 ---
 name: schema-therapy
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn tief sitzende emotionale Schemata, Persönlichkeitsmodi oder wiederkehrende Lebensfallen reflektiert werden sollen (z. B. 'Schematherapie Modi verstehen', 'Inneres Kind heilen', 'Lebensfallen erkennen', /schema-therapy). Vermittelt Youngs Schematherapie: 18 Schemata, Modi (Verletzliches/Wütendes Kind, Strafender Modus, Gesunder Erwachsener) und Bewältigungsstile. NICHT verwenden für rein kurzfristige Verhaltensaktivierung (dafür behavioral-activation)."
 standalone: true
 anthropic_compatible: true
@@ -229,3 +229,8 @@ Schreibe einen kurzen Brief an dein jüngeres Ich:
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Young et al. (2003), Giesen-Bloo et al. (2006), Roediger (2011) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

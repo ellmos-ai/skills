@@ -1,10 +1,10 @@
 ---
 name: github-repo-care
-version: 1.3.1
+version: 1.3.2
 type: protocol
 author: Lukas Geiger + Codex
 created: 2026-06-18
-updated: 2026-11-09
+updated: 2026-11-22
 aliases: [github-pflege, repo-veroeffentlichen, repo-release, privacy-gate, release-gate]
 description: "Use when publishing, releasing, or initializing a GitHub repository according to rigorous open-source governance standards (e.g. 'publish new repo', 'prepare GitHub release', 'audit repo metadata and privacy', /github-repo-care). Sets up proper gitignore, enforces privacy checks, and validates README, badges, llms.txt, and release tags. Do NOT use for routine recurring maintenance of live repos (use surface-after-care)."
 standalone: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.codex/skills/github-repo-car
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `github-repo-care`.
 
 # GitHub Repo Care — Publish and Maintain Repositories Cleanly (English)
 
@@ -135,6 +134,9 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Changelog
+
+### 1.3.2 (2026-11-22)
+- Language notice corrected
 
 ### 1.3.1 (2026-09-27)
 - Docs fix: the 404 semantics in the privacy-gate description were wrong.

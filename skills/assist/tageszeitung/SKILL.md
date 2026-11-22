@@ -1,10 +1,10 @@
 ---
 name: tageszeitung
-version: 0.1.0
+version: 0.1.1
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn eine personalisierte Tageszeitung oder Nachrichtenübersicht aus RSS-Feeds und Webquellen generiert werden soll (z. B. 'Tageszeitung erstellen', 'Nachrichten zusammenstellen', 'Morgen-Briefing als PDF generieren', /tageszeitung). Aggregiert konfigurierte Feeds in eine lokale SQLite-Datenbank und exportiert ansprechende PDFs via Edge Headless. NICHT verwenden für tiefe wissenschaftliche Literaturrecherchen (dafür research/research-agent)."
 standalone: true
 anthropic_compatible: true
@@ -149,4 +149,5 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — BACH-Schema portiert, eigener Store, feedparser optional |

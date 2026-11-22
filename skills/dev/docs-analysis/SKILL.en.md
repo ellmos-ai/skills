@@ -1,10 +1,10 @@
 ---
 name: docs-analysis
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when comparing architecture documentation, specifications, or requirement documents against actual implementation code (e.g. 'audit docs against code', 'consolidate planning documents', 'check documentation gaps', /docs-analysis). Compares written specifications with source code, highlights implementation drift, and consolidates multi-plan backlogs. Do NOT use for syntax linting of diagrams (use dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-anal
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `docs-analysis`.
 
 # Document Requirements Analysis (English)
 
@@ -119,6 +118,9 @@ For each requirement:
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-10-15)
 - Optional plan consolidation with folder-organization, source coverage and evidence-based archiving.

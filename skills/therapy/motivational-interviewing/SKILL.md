@@ -1,10 +1,10 @@
 ---
 name: motivational-interviewing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Ambivalenzen bezüglich Verhaltensänderungen geklärt oder Veränderungsmotivation gestärkt werden soll (z. B. 'Motivation zur Veränderung finden', 'Ambivalenz abbauen', 'Change Talk fördern', /motivational-interviewing). Vermittelt MI nach Miller/Rollnick: OARS-Prinzipien, Diskrepanzerzeugung und Förderung von Veränderungsäußerungen. NICHT verwenden für Konfrontation oder direktive Handlungsanweisungen."
 standalone: true
 anthropic_compatible: true
@@ -272,3 +272,8 @@ mitgehen (Rolling with Resistance), nicht dagegen.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Miller & Rollnick (2013), Prochaska & DiClemente (1983), Lundahl et al. (2010) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

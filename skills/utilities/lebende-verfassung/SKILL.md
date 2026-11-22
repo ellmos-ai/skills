@@ -1,11 +1,11 @@
 ---
 name: lebende-verfassung
 description: "Neutrale moralisch-rechtliche Prüfinstanz für Politik und Entscheidungen — der lauffähige Prototyp des Forschungsprojekts \"Die Position der Ungeborenen\" (Schattenmodus Stufe 1). Nutze diesen Skill, wann immer eine politische Entscheidung, ein Gesetz(entwurf), eine Reform, ein Haushaltsbeschluss oder eine gesellschaftliche Streitfrage analysiert, geprüft oder begutachtet werden soll — auch bei Formulierungen wie \"prüfe aus Sicht künftiger Generationen\", \"Gesetzespass\", \"was sagt das Grundgesetz dazu\", \"Superposition-Prüfung\", \"Gesetzesgeschichte/Containeranalyse\", \"Folgenabschätzung\", \"analysiere diese Reform\", \"lebende Verfassung\" oder wenn der User eine Politik-Fragestellung mit Bitte um neutrale, mehrstufige Bewertung einbringt. Orchestriert die 5-CORE-Architektur (config.json): moralische Superposition-Instanz, Gesetzbuch-Verkörperungen, zweistufige Folgenabschätzung (retrospektiv/prospektiv mit Evidenzhierarchie), Wissens-Handler mit lokalem Speicher, einstellbarer Workflow."
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-07-30
+updated: 2026-11-22
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -184,3 +184,8 @@ Abweichung gewinnt die neuere Fassung (versioniertes Bindungsmuster); Änderunge
 Agents: `~/.claude/agents/superposition-instanz.md`, `grundgesetz.md`, `bgb.md`.
 Referenzen: `prototyp/references/core1_gesetze.md`, `core3_folgenabschaetzung.md`,
 `containeranalyse_methodik.md`. Wissensspeicher: `prototyp/wissen/`.
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: migrate-rename
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Dateien, Module oder Ordner umbenannt oder verschoben werden sollen, ohne bestehende Importe und Pfadabhängigkeiten hart zu brechen (z. B. 'Datei umbenennen ohne Breaking Changes', 'Modul verschieben', 'Wrapper anlegen', /migrate-rename). Erstellt Wrapper-Dateien und MOVED-Stubs für eine bruchfreie, evolutionäre Migration von Bezeichnern. NICHT verwenden für schlichte Git-Moves ohne Kompatibilitätsbrücke."
 standalone: true
 anthropic_compatible: true
@@ -167,6 +167,9 @@ Nach ca. 30 Tagen oder wenn Log zeigt dass keine neuen Eintraege:
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-09-06)
 - Abschnitt "Ordner-/Datei-Umzug mit MOVED-Stub" ergänzt (Ticket T-20260906-688261413):

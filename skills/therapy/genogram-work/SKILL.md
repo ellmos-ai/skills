@@ -1,10 +1,10 @@
 ---
 name: genogram-work
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn familiäre Beziehungsmuster, Mehrgenerationenkonflikte oder systemische Verstrickungen visualisiert werden sollen (z. B. 'Genogramm erstellen', 'Familienmuster erkennen', 'Familiengeschichte analysieren', /genogram-work). Erklärt standardisierte Genogramm-Symbole, Beziehungsdynamiken und Ressourcenexploration über 3+ Generationen. NICHT verwenden für kognitive Einzelfallanalysen (dafür cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -236,3 +236,8 @@ Stärken, Talente, gemeisterte Krisen, positive Werte.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: McGoldrick et al. (2020), Bowen (1978), von Schlippe & Schweitzer (2012) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

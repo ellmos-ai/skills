@@ -1,10 +1,10 @@
 ---
 name: genogram-work
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when mapping multigenerational family relationship patterns, transgenerational dynamics, or systemic roles (e.g. 'create genogram', 'map family tree dynamics', 'explore family patterns', /genogram-work). Details standard genogram symbology, relational lines, and transgenerational resource discovery. Do NOT use for single-subject cognitive restructuring (use cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/genogramm_
 
 <img src="banner.png" width="100%" alt="genogram-work banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `genogram-work`.
 
 # Genogram Work (English)
 

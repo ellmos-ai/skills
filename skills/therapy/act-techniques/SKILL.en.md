@@ -1,10 +1,10 @@
 ---
 name: act-techniques
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when promoting psychological flexibility, value-based living, or experiential acceptance using Acceptance and Commitment Therapy (e.g. 'clarify values', 'practice cognitive defusion', 'acceptance vs avoidance', /act-techniques). Introduces the Hexaflex model and its 6 core processes. Do NOT use for restructuring automatic thoughts (use cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/act_techni
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `act-techniques`.
 
 # ACT Techniques — Acceptance & Commitment Therapy (English)
 

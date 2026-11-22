@@ -1,10 +1,10 @@
 ---
 name: psychoeducation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour transmettre des informations objectives et déstigmatisantes sur les troubles psychiques et les symptômes (ex. 'comprendre les symptômes de l'anxiété', 'psychoéducation dépression/TDAH', /psychoeducation). Clarifie les modèles vulnérabilité-stress, la neurobiologie et les prises en charge éprouvées. Ne PAS utiliser pour poser un diagnostic médical individuel ou remplacer un suivi médical."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/psychoeduk
 
 <img src="banner.png" width="100%" alt="psychoeducation banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `psychoeducation`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Psychoeducation (English)
 

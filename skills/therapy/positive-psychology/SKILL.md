@@ -1,10 +1,10 @@
 ---
 name: positive-psychology
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Wohlbefinden, persönliche Stärken und psychologische Resilienz gefördert werden sollen (z. B. 'Charakterstärken finden', 'Dankbarkeitsübung', 'PERMA Modell anwenden', /positive-psychology). Vermittelt Seligmans PERMA-Modell, VIA-Stärken, Dankbarkeitsinterventionen und Flow-Konzepte zur Ressourcenaktivierung. NICHT verwenden zur Behandlung akuter Depressionen oder Krisen (dafür behavioral-activation oder stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -224,3 +224,8 @@ Resilienz = psychische Widerstandskraft gegenueber Belastungen.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Seligman (2011), Csikszentmihalyi (1990), Peterson & Seligman (2004) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: nulcleaner
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-11-22
 description: >
   Findet und löscht Windows-reservierte NUL-Dateien, die durch die Nutzung von /dev/null in Git Bash entstehen. Headless oder mit GUI.
 
@@ -101,3 +101,8 @@ Am besten `/dev/null` in Git Bash vermeiden. Stattdessen:
 - Ausgabe einfach weglassen
 - `2>&1` fuer Stderr-Umleitung verwenden
 - In Shell-Skripten auf Windows-Kompatibilitaet achten
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

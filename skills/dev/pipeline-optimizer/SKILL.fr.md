@@ -1,10 +1,10 @@
 ---
 name: pipeline-optimizer
-version: 1.2.0
+version: 1.2.1
 type: protocol
 author: Lukas Geiger (method) + Claude (write-up)
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 aliases: [project-folder-optimizer, pipeline-renovator, project-renovator]
 description: "Utiliser pour rénover, restructurer ou unifier des chaînes d'outils, des architectures de dossiers ou des pipelines documentaires (ex. 'rénover le pipeline', 'restructurer l'arborescence du projet', 'optimiser la toolchain', /pipeline-optimizer). Met en œuvre une méthode structurée en 6 étapes : état des lieux, clarification des objectifs, plan cible, résorption des écarts et retests. Ne PAS utiliser pour corriger un bug ponctuel sur une fonction (utiliser bugfix-protocol)."
 standalone: true
@@ -22,12 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/pipeline-optim
 
 <img src="banner.png" width="100%" alt="pipeline-optimizer banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `pipeline-optimizer`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Pipeline Optimizer / Project-Folder Optimizer (English)
 
@@ -294,6 +289,9 @@ At **project-folder scope**, additionally always briefly check the parent pipeli
 ---
 
 ## Journal des Modifications
+
+### 1.2.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.2.0 (2026-06-13)
 - First publication in the skill library: personal paths, concrete pipeline/project names, and references to private skills replaced with generic examples; the procedure itself (6 steps, anti-patterns, case study, checklists) unchanged

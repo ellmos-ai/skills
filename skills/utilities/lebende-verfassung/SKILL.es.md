@@ -7,6 +7,9 @@ description: "Usar cuando se requiera analizar o evaluar una decisión política
 
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
+
+> **Español** — Traducción pendiente: el contenido está actualmente en alemán.
+
 # Constitución Viva — Instancia de auditoría neutral (Arquitectura 5-CORE, v4)
 
 Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die

@@ -1,10 +1,10 @@
 ---
 name: dev-cycle
-version: 1.2.0
+version: 1.2.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn ein neues Software-Feature oder eine größere Änderung über einen strukturierten 8-Phasen-Entwicklungszyklus umgesetzt werden soll (z. B. 'Feature systematisch entwickeln', 'Entwicklungszyklus starten', '8-Phasen-Zyklus', /dev-cycle). Leitet schrittweise durch Bedarfsanalyse, Ist-Zustand, Funktionsplanung, Frontend, Backend und Tests. NICHT verwenden für isolierte Einzel-Bugfixes (dafür bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/dev-zyklu
 
 <img src="banner.png" width="100%" alt="dev-cycle banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # Development Cycle (Dev Cycle) (Deutsch)
 
@@ -323,6 +322,9 @@ If your skill collection has a skill index, search it for further phase-specific
 ---
 
 ## Änderungsprotokoll
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-08-22)
 - Shift-Left verankert (Rechercheabgleich mit Beilage-Schaltplan): Abnahmekriterien als

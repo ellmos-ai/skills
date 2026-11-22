@@ -1,10 +1,10 @@
 ---
 name: dev
-version: 0.1.0
+version: 0.1.1
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn ein schneller Entwickler-Überblick über ein Softwareprojekt via Headless-Scan benötigt wird und zum passenden Code-Werkzeug geroutet werden soll (z. B. 'Projekt scannen', 'Entwicklungsstand überblicken', 'CodeCommander ansteuern', /dev). Analysiert die Projektstruktur und verweist gezielt auf CodeCommander MCP und ellmos-code-tools ohne eigenen Datenspeicher. NICHT verwenden für tiefgreifende automatisierte Dev-Pipelines (dafür dev/dev-soft-agent)."
 standalone: true
 anthropic_compatible: true
@@ -81,6 +81,9 @@ für andere (z.B. ruff/pylint/eslint), falls der Nutzer das vorzieht.
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
 ## Changelog
+
+### 0.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 0.1.0 (2026-06-22)
 - Initiale Version. ATI/entwickler-Nachfolger: headless Projekt-Scan (stdlib) +

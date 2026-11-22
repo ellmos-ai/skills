@@ -1,10 +1,10 @@
 ---
 name: think
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Use when a problem outside the code has to be understood before anything is decided or changed: a process, organisation, product, strategy, metric or business-level system behaviour with several possible causes, a tangle to break into parts, or a situation that needs a SWOT or 80/20 view: 'why does ... keep happening', 'find the root cause', 'five whys', 'split this into sub-problems', 'where do I start', 'quick SWOT', 'what is really going on', /think. Applies Divide & Conquer, Root Cause Analysis, Constraint Relaxation, Analogy Search, SWOT, Pareto and Fishbone, and ends with the cause or structure found and the first thing to check. Do NOT use for software defects (error messages, failing builds, tests or deploys, regressions: bugfix-protocol), to generate many ideas (brainstorm), to choose between given options (decide), to mine ideas against project history (idea-mining) or for the full analyse-ideate-decide chain (structured-thinking)."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/think.md'
 
 <img src="banner.png" width="100%" alt="think banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `think`.
 
 # Think — Problem Solving & Analysis (English)
 
@@ -90,6 +89,9 @@ New problem -> Similar known problem -> Adapt solution
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-11-06)
 - Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.

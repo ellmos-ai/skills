@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.4.0
+version: 1.4.1
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn eine komplexe Gesamtaufgabe in parallele oder sequenzielle Teilaufgaben für Subagenten zerlegt und evidenzbasiert abgenommen werden soll (z. B. 'Aufgabe orchestrieren', 'Subagenten koordinieren', 'Teilaufgaben delegieren', /orchestrator). Plant Arbeitspakete, beauftragt unabhängige Worker und validiert deren Arbeitsergebnisse anhand klarer Qualitätskriterien. NICHT verwenden für triviale Aufgaben, die ein einzelner Prompt direkt löst."
 standalone: true
 anthropic_compatible: true
@@ -22,11 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator
 
 <img src="banner.png" width="100%" alt="orchestrator banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `orchestrator`.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Orchestrator (Deutsch)
 
@@ -311,6 +307,9 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Änderungsprotokoll
+
+### 1.4.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.4.0 (2026-10-11)
 - Abschnitt „Operator-Regime: denken und delegieren, nie selbst ausführen"

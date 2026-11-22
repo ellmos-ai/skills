@@ -1,10 +1,10 @@
 ---
 name: agents-bridge
-version: 3.0.1
+version: 3.0.2
 type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour établir une passerelle de fichiers résiliente et neutre entre différents agents IA et machines (ex. 'passerelle multi-agents', 'connecter des systèmes d'agents', 'communication entre agents par fichiers', /agents-bridge). Fournit des espaces d'amorçage, des silos de mémoire, des signaux de présence, une messagerie et des verrous partagés. Ne PAS utiliser pour les fusions git courantes (utiliser dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
@@ -18,12 +18,7 @@ dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': [
 
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `agents-bridge`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # AGENTS-BRIDGE (English)
 

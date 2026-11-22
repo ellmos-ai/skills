@@ -1,10 +1,10 @@
 ---
 name: problem-solving-training
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when resolving complex everyday dilemmas or life problems through structured cognitive-behavioral problem solving (e.g. 'structured problem solving', 'step-by-step problem resolution', /problem-solving-training). Guides D'Zurilla & Goldfried's 6-step model: problem orientation, definition, generation of alternatives, decision making, implementation, and review. Do NOT use for software architecture choices (use utilities/decide)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/problemloe
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `problem-solving-training`.
 
 # Problem-Solving Training (English)
 

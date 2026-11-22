@@ -1,10 +1,10 @@
 ---
 name: positive-psychology
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when cultivating well-being, character strengths, and psychological resilience (e.g. 'identify signature strengths', 'gratitude interventions', 'apply PERMA model', /positive-psychology). Leverages Seligman's PERMA pillars, VIA character strengths, and flow experiences for strength-based growth. Do NOT use for treating clinical depression or acute crisis (use behavioral-activation or stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/positive_p
 
 <img src="banner.png" width="100%" alt="positive-psychology banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `positive-psychology`.
 
 # Positive Psychology (English)
 

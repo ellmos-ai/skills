@@ -1,10 +1,10 @@
 ---
 name: behavioral-activation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when addressing low motivation, lethargy, or depressive withdrawal through structured behavioral activation (e.g. 'break inactivity spiral', 'plan weekly activities', 'rebuild daily routine', /behavioral-activation). Reverses avoidance cycles using activity logs, master-pleasure ratings, and graded task assignment. Do NOT use for acute crisis de-escalation (use stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/verhaltens
 
 <img src="banner.png" width="100%" alt="behavioral-activation banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `behavioral-activation`.
 
 # Behavioral Activation (English)
 

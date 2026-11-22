@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.3.1
+version: 1.3.2
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-14
+updated: 2026-11-22
 description: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill", „das sollten wir als Skill festhalten", „extrahiere Skills aus diesem/alten Chatverläufen", „diese Arbeitsweise wiederverwendbar machen", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen.
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `skill-extractor`.
-
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Skill-Extractor — aus Chatverläufen Skills gewinnen (Deutsch)
 
@@ -247,6 +242,9 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Änderungsprotokoll
+
+### 1.3.2 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.3.1 (2026-09-14)
 - **Konservativer NT-Vorfilter für offene menschliche Anschlüsse:** Ergänzungen wie „noch etwas zu

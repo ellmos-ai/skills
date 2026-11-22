@@ -1,10 +1,10 @@
 ---
 name: skill-extractor
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-08-31
+updated: 2026-11-22
 description: "[Français] Compétence d'agent pour skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill\", „das sollten wir als Skill festhalten\", „extrahiere Skills aus diesem/alten Chatverläufen\", „diese Arbeitsweise wiederverwendbar machen\", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen."
 standalone: true
 anthropic_compatible: true
@@ -20,16 +20,7 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="skill-extractor banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `skill-extractor`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `skill-extractor`.
-
-
+> **Français** — Traduction en attente : le contenu est actuellement en allemand.
 
 # Skill-Extractor — aus Chatverläufen Skills gewinnen (English)
 
@@ -185,6 +176,9 @@ mach daraus einen Skill."
 - `swarm-operations` — Schwarm-Muster für den Bulk-Modus.
 
 ## Journal des Modifications
+
+### 1.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.1.0 (2026-08-31)
 - Ajout d'un segmenteur de stations déterministe et économe en données pour le JSONL de Claude Code.

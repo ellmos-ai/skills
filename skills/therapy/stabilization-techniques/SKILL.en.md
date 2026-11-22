@@ -1,10 +1,10 @@
 ---
 name: stabilization-techniques
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when managing acute distress, emotional overwhelm, panic attacks, flashbacks, or dissociation immediately (e.g. 'stop panic attack', 'grounding exercises for flashback', 'safe place visualization', /stabilization-techniques). Delivers rapid stabilization tools: 5-4-3-2-1 sensory grounding, mental container, safe place imagery, and paced breathing. Do NOT use for uncovering trauma memories during distress."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisie
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `stabilization-techniques`.
 
 # Stabilization Techniques (English)
 

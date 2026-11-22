@@ -1,10 +1,10 @@
 ---
 name: steuer-assistent
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-11-22
 description: "Points to the standalone module steuer-assistent: a local, offline-first receipt worksheet for German employee income-related expenses (Werbungskosten) -- record, sum to the cent, private ZIP export. Use this skill when Werbungskosten receipts should be prepared in a structured way -- with a clear boundary: not tax advice, no deductibility check, no creation or submission of a tax return (that happens via ELSTER or approved software)."
 
 standalone: true
@@ -20,8 +20,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="steuer-assistent banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `steuer-assistent`.
 
 # steuer-assistent -- Pointer Skill (English)
 
@@ -83,6 +82,9 @@ This wrapper was added on 2026-07-23 as a showcase entry for the
 and versioning stay solely in the `ellmos-ai/steuer-assistent` module repo.
 
 ## Changelog
+
+### 0.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 0.1.0 (2026-07-23)
 - Initial pointer skill for `ellmos-ai/steuer-assistent`.

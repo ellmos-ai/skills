@@ -392,6 +392,11 @@ review the diff and commit it. Nothing regenerates silently: the CI step
 `Check public catalog outputs` and the pre-commit hooks `public-registry-current` /
 `skills-map-current` fail loudly on a stale catalog.
 
+Language notices (the one-line banner above the title of `SKILL.<lang>.md`) are checked by
+`python fix_language_banners.py --check` (also run as a test); `--apply` repairs them. A banner must
+match the file's language and the language of the text below it; untranslated files carry an honest
+"translation pending" notice instead of an "official version" claim.
+
 <a id="sec-10"></a><a id="education-skills"></a>
 ## 10. Education Skills
 

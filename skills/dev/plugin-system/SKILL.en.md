@@ -1,10 +1,10 @@
 ---
 name: plugin-system
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when designing or implementing an auto-discovering, fault-tolerant plugin architecture in Python applications (e.g. 'implement plugin system', 'load plugins dynamically', 'extensible app architecture', /plugin-system). Provides a lightweight plugin loader with lifecycle hooks and isolation using Python standard library. Do NOT use for auditing untrusted third-party plugins (use dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `plugin-system`.
 
 # Plugin System (English)
 
@@ -115,6 +114,9 @@ Every plugin must:
 | No plugin in directory | Empty list, no crash |
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.0.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/plugins to skill library

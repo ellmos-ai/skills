@@ -1,10 +1,10 @@
 ---
 name: batch-file-ops
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when batch filesystem operations such as bulk copying, moving, deleting, or listing via glob patterns are needed (e.g. 'batch move files', 'delete all *.tmp files matching pattern', /batch-file-ops). Executes safe filesystem batch actions using Python standard library. Do NOT use for in-file text replacements or interactive single-file edits."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `batch-file-ops`.
 
 # batch_file_ops - Batch File Operations (English)
 

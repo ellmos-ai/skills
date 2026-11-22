@@ -1,10 +1,10 @@
 ---
 name: reiseroute
-version: 1.0.0
+version: 1.0.1
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 category: assist
 description: "Verwenden, wenn Wegstrecken, Routen und Reisezeiten von A nach B für Auto, Fahrrad oder Fußgänger berechnet werden sollen (z. B. 'Route von A nach B berechnen', 'Fahrzeit ermitteln', 'Fahrradroute planen', /reiseroute). Berechnet Wegstrecken und Geometrien via OSRM (Open Source Routing Machine) ohne API-Key. NICHT verwenden für reine POI-Umkreissuche (dafür assist/location-suche)."
 tags: [routing, navigation, osrm, openstreetmap, reise]
@@ -127,4 +127,5 @@ keine persistente Datenspeicherung.
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 1.0.0 | 2026-06-22 | Erstellt aus BACH routing_service.py v1.0; Geocoding integriert |

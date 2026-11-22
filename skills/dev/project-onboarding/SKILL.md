@@ -1,10 +1,10 @@
 ---
 name: project-onboarding
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn ein bestehendes oder neues Software-Projekt strukturiert analysiert, verstanden und initial in den Workflow eingebunden werden soll (z. B. 'Projekt einlesen', 'Onboarding für Repository', 'Codebasis verstehen', /project-onboarding). Analysiert Features, Codequalität, Abhängigkeiten und generiert eine Onboarding-Checkliste mit ersten Aufgaben. NICHT verwenden für die bloße Ordnernavigation (dafür infrastructure/staircase-routing)."
 standalone: true
 anthropic_compatible: true
@@ -233,3 +233,8 @@ file -i MyTool/main.py  # Encoding pruefen
 ---
 
 *Erstellt: 2026-01-10 | Portiert: 2026-03-12*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: privat-mail-writer
-version: 0.2.0
+version: 0.2.1
 type: skill
 author: Lukas Geiger + GPT
 created: 2026-06-19
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when drafting, answering, or refining private or semi-formal emails in an authentic personal tone (e.g. 'write an email to...', 'draft polite cancellation', 'shorten and follow up on email', /privat-mail-writer). Formulates context-aware emails with fitting tone and brevity. Do NOT use for business marketing campaigns or mass outreach (use dev/community-outreach)."
 standalone: true
 anthropic_compatible: true
@@ -22,11 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `privat-mail-writer`.
-
+> **English** — Translation pending: content is currently German.
 
 # Privat-Mail-Writer (English)
 
@@ -124,6 +120,9 @@ Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere
 Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
 
 ## Changelog
+
+### 0.2.1 (2026-11-22)
+- Language notice corrected
 
 ### 0.2.0 (2026-06-19)
 - `CONFIG.md` und `BLACKLIST.md` ergänzt.

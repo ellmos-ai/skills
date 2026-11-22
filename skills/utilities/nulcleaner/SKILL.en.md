@@ -1,10 +1,10 @@
 ---
 name: nulcleaner
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-11-22
 description: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI.
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'ori
 
 <img src="banner.png" width="100%" alt="nulcleaner banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `nulcleaner`.
 
 # nulcleaner - Windows NUL File Cleanup (English)
 

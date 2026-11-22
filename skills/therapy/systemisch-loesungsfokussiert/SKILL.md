@@ -1,10 +1,10 @@
 ---
 name: systemisch-loesungsfokussiert
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-05-19
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn systemische Perspektiven und lösungsfokussierte Fragetechniken integrativ in Beratung oder Reflexion eingesetzt werden sollen (z. B. 'systemisch beraten', 'Lösungsfokus und Zirkularität', /systemisch-loesungsfokussiert). Kombiniert zirkuläre Fragen, Wunderfragen, Ausnahmen-Exploration, Skalierungen und Verschlimmerungsfragen in einem kohärenten Werkzeugkasten. NICHT verwenden für standardisierte CBT-Gedankenprotokolle (dafür cognitive-restructuring)."
 standalone: true
 anthropic_compatible: true
@@ -317,6 +317,9 @@ Kontrollueberzeugung staerken: Wer beschreiben kann, wie er das Problem verschli
 ---
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-05-19)
 - Zusammengefuehrt aus `solution-focused-therapy` (v1.0.0) und `systemic-questioning` (v1.0.0)

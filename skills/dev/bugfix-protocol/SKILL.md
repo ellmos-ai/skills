@@ -1,10 +1,10 @@
 ---
 name: bugfix-protocol
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Für JEDEN Bug-Bericht und jede Debugging-Anfrage verwenden, bevor Code geändert wird, auch wenn die Ursache offensichtlich scheint: falsche Ausgaben oder Summen ('Kunden zahlen zu viel', 'X liefert -1 statt 0'), Fehlermeldungen, Abstürze, Exceptions, fehlschlagende Tests, Regressionen, 'debugge das', 'finde und behebe den Fehler', 'warum passiert ...', /bugfix. Arbeitet in sechs Phasen, statt die erste verdächtige Zeile zu flicken: Schnellprüfung, Diagnose, ein minimaler Test, der den Fehler reproduziert, ein Fix an der Ursache statt am Symptom, Verifikation und ein kurzer Bug-Bericht (Ursache, Fix, Verifikation), den der Nutzer prüfen kann. Besonders wertvoll, wenn das Symptom weit von der Ursache auftritt, bei Regressionen und sporadischen Fehlern. NICHT verwenden für eine systematische Suche nach unbekannten Fehlern in einer ganzen Codebasis (bugsweep)."
 
 standalone: true
@@ -329,3 +329,8 @@ Wenn du nach 20 Minuten festhaengst:
 3. **Pause** — 5 Minuten weggehen, dann mit frischem Blick
 4. **Hilfe holen** — Kollege fragen, Stack Overflow, Dokumentation
 5. **Zuruecksetzen** — `git stash`, komplett neu anfangen
+
+## Changelog
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert

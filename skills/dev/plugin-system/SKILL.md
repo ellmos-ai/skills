@@ -1,10 +1,10 @@
 ---
 name: plugin-system
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn eine Python-Anwendung um eine dynamische, fehlertolerante Plugin-Architektur mit Auto-Discovery erweitert werden soll (z. B. 'Plugin-System implementieren', 'Plugins dynamisch laden', 'Erweiterbarkeit für Tool', /plugin-system). Stellt eine saubere, erweiterbare Plugin-Architektur ohne externe Abhängigkeiten bereit. NICHT verwenden für die Sicherheitsprüfung fremder Plugins (dafür dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
@@ -113,6 +113,9 @@ Jedes Plugin muss:
 | Kein Plugin im Verzeichnis | Leere Liste, kein Crash |
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-03-12)
 - Migration aus MODULAR_AGENTS/plugins in Skillbibliothek

@@ -1,10 +1,10 @@
 ---
 name: cognitive-restructuring
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when challenging unhelpful automatic thoughts, catastrophic thinking, or cognitive distortions (e.g. 'thought record', 'challenge negative thoughts', 'cognitive distortions', /cognitive-restructuring). Teaches Beck's cognitive ABC model, identifies cognitive biases, and guides Socratic disputation. Do NOT use for defusion without cognitive debate (use act-techniques) or family systems (use genogram-work)."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/kognitive_
 
 <img src="banner.png" width="100%" alt="cognitive-restructuring banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `cognitive-restructuring`.
 
 # Cognitive Restructuring (English)
 

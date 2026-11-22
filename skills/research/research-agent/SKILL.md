@@ -1,10 +1,10 @@
 ---
 name: research-agent
-version: 0.2.0
+version: 0.2.1
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn wissenschaftliche Forschungsprojekte strukturiert durchgeführt, Quellen erhoben oder Claims validiert werden sollen (z. B. 'Forschungsstand erheben', 'Paper recherchieren', 'Quellen und Claims prüfen', /research-agent). Führt eine projektzentrierte Forschungspipeline mit Live-Gates, PDF-Evidenz, Claim-Grenzen und Publikationskontrollen aus. NICHT verwenden für formlose Websuchen ohne wissenschaftlichen Evidenzanspruch."
 standalone: true
 anthropic_compatible: true
@@ -23,8 +23,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/ResearchAgent', 'o
 
 <img src="banner.png" width="100%" alt="research-agent banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Research Agent (Deutsch)
 
@@ -173,6 +172,9 @@ agent = ResearchAgent(use_bach=True)  # Optional BACH integration
 ```
 
 ## Änderungsprotokoll
+
+### 0.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 0.2.0 (2026-08-22)
 - Projekt- und Pipeline-Autorität vor generischen Suchskripten verankert

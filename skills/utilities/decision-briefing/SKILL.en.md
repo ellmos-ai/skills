@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.5.0
+version: 1.5.1
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-15
+updated: 2026-11-22
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/agents/_experts/decision-b
 
 <img src="banner.png" width="100%" alt="decision-briefing banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `decision-briefing`.
 
 # Decision-Briefing — Work Through Many Decisions on One Topic (English)
 
@@ -268,6 +267,9 @@ the artifact ends with exactly one line:
 
 ## Changelog
 
+
+### 1.5.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.5.0 (2026-11-15)
 - Save the form without a folder dialog: `scripts/formular/serve_form.py` (local save service on 127.0.0.1, standard library only) opens the form in the user's normal Edge and writes the answer itself; opening and saving instructions are in the form section, the fallback without Python stays (download links, text, folder dialog last). Reason: ticket T-20261115-242335144.

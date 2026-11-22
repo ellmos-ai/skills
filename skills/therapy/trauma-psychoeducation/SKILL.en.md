@@ -1,10 +1,10 @@
 ---
 name: trauma-psychoeducation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-11-22
 description: "Trauma psychoeducation: Trauma definition, normal reactions, window of tolerance, trigger management, and self-care."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/trauma_psy
 
 <img src="banner.png" width="100%" alt="trauma-psychoeducation banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `trauma-psychoeducation`.
 
 # Trauma Psychoeducation (English)
 

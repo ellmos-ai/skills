@@ -1,10 +1,10 @@
 ---
 name: folder-flattening
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn tief verschachtelte Ordnerstrukturen in eine flache, maschinenlesbare Hierarchie umgebaut werden sollen (z. B. 'Ordnerstruktur abflachen', 'verschachtelte Verzeichnisse auflösen', /folder-flattening). Führt deterministisches Ordner-Flattening mit Tripel-Analyse und konfliktfreiem Dateimerge durch. NICHT verwenden für einfaches Verschieben einzelner Dateien (dafür batch-file-ops)."
 standalone: true
 anthropic_compatible: true
@@ -131,3 +131,8 @@ bash ordner_flattening_komplett.sh --phase cleanup
 - Nach Tripel v1: ~1561 Ordner
 - Nach Tripel v2 (8-Zeichen-Regel): weitere Reduktion
 - Medienformat-Phase: Audio/Video/Bilder-Ordner konsolidiert
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -7,6 +7,9 @@ description: >
 ---
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
+
+> **中文** — 翻译待完成：内容目前仍为德文。
+
 # 活的宪法 — 中立审查机构（5-CORE 架构，v4）
 
 Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die

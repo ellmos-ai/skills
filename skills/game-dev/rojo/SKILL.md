@@ -1,10 +1,10 @@
 ---
 name: rojo
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-11-22
 description: "Operating Rojo — the filesystem-to-Roblox-Studio sync tool for professional Roblox development in VS Code / Claude Code instead of the Studio editor. Use this skill whenever Rojo is involved: `rojo serve`/`rojo build`, writing or debugging `default.project.json`, rokit/rokit.toml and tool versions (Rojo, Lune, Wally), nested vs. flat path mapping (ReplicatedStorage.Project.shared), connect/port/sync problems, or when a Roblox project skeleton needs to be created. Also trigger on \"rojo connect not working\", \"scripts end up in the wrong place in Studio\", \"how do I map src/ to Studio\", \"port 34872 in use\", \"ModuleScript vs Script in Rojo\"."
 
 standalone: true
@@ -186,6 +186,9 @@ sie für geteilten Client-State nutzt. Selene aus dem Verzeichnis mit der Roblox
   `<your Roblox project pipeline>` (u. a. `ROJO_FAQ.md`, `SKILL.md`).
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-06-17)
 - Initiale Version. Destilliert aus der `.ROBLOX`-Pipeline (ROJO_FAQ, ROJO_START, _template),

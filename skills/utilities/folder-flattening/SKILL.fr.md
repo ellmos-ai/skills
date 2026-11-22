@@ -1,10 +1,10 @@
 ---
 name: folder-flattening
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour aplatir des arborescences de répertoires profondément imbriquées en une structure claire et lisible par machine (ex. 'aplatir la hiérarchie de dossiers', 'réduire les sous-dossiers imbriqués', /folder-flattening). Exécute un aplatissement déterministe avec gestion des collisions et fusion sécurisée. Ne PAS utiliser pour déplacer de simples fichiers individuels (utiliser batch-file-ops)."
 standalone: true
 anthropic_compatible: true
@@ -22,12 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-fl
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `folder-flattening`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Workflow: Folder Flattening (English)
 

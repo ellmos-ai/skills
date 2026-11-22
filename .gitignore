@@ -65,6 +65,7 @@ testing/*
 !testing/test_changed_skill_gate.py
 !testing/language_gate.py
 !testing/language_baseline.json
+!testing/test_language_banners.py
 !testing/test_public_registry.py
 !testing/test_skill_localizations.py
 !testing/localization_omissions.json

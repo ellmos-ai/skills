@@ -1,10 +1,10 @@
 ---
 name: behavioral-activation
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn bei Antriebslosigkeit, Erschöpfung oder depressiven Verstimmungen schrittweise Aktivitäten aufgebaut werden sollen (z. B. 'Antriebslosigkeit überwinden', 'Aktivitäten planen', 'Tagesstruktur aufbauen', /behavioral-activation). Durchbricht depressive Rückzugsmuster mit Aktivitätsprotokollen, Wochenplanung und werteorientierter Aktivierung. NICHT verwenden für akute Krisenintervention oder Notfallstabilisierung (dafür stabilization-techniques)."
 standalone: true
 anthropic_compatible: true
@@ -295,3 +295,8 @@ Verhaltensaktivierung ist Ergänzung, nicht Ersatz.
 
 *Portiert aus BACH v3.8.0 | Standalone-Version*
 *Quellen: Martell et al. (2010), Dimidjian et al. (2006), Richards et al. (2016) — Keine professionelle Therapie*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: agent-config-sync
-version: 0.3.0
+version: 0.3.1
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn MCP-Server-Konfigurationen, Skills und Regeldateien anbieterneutral über mehrere Agenten-Frameworks synchronisiert werden sollen (z. B. 'Agenten-Konfiguration synchronisieren', 'MCPs abgleichen', 'Skills spiegeln', /agent-config-sync). Ermittelt lokale Konfigurationen und lässt den Nutzer Richtung, Ziele und Konfliktlösungen bestimmen. NICHT verwenden für reinen MCP-Server-Abgleich ohne Skills/Regeln (dafür mcp-config-sync)."
 standalone: true
 anthropic_compatible: true
@@ -23,8 +23,7 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-con
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # Agent Config Sync (Deutsch)
 
@@ -46,3 +45,8 @@ implicit hub. Without a selected truth source, plans stay blocked.
 Review `--status` and `--plan`; only use `--apply --yes` after approval.
 MCP blocks and skill directories are implemented. Rule-file topologies remain
 fail-closed until the user selects a merge/redirect adapter.
+
+## Changelog
+
+### 0.3.1 (2026-11-22)
+- Sprachhinweis korrigiert

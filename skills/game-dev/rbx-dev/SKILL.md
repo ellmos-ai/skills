@@ -1,10 +1,10 @@
 ---
 name: rbx-dev
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-11-22
 description: "Meta-skill for complete Roblox game development with Rojo — the entry point that knows and unifies the three specialist skills `/rojo` (filesystem→Studio sync, project setup), `/rbx-studio` (editor, MCP, assets, malware scan) and `/game-design` (roles, workflows, GDD). Use this skill for ANY Roblox game-dev undertaking: planning/building/setting up a Roblox game, scaffolding a new project, defining code architecture (Main + manager modules, _G.ClientState + HUD, remotes in GameEnums), avoiding Luau/Roblox pitfalls, or when it is unclear which of the Roblox specialist skills fits — routing happens from here. Also trigger on \"develop Roblox game\", \"build Roblox game\", \"new Roblox project\", \"Luau project structure\", \"how do I organize Roblox code\", \"Roblox dev setup\"."
 
 standalone: true
@@ -150,6 +150,9 @@ Die häufigsten Stolperfallen — vollständige, kommentierte Liste:
   `AGENT_ROLES.md`, `_malware_reports/PATTERNS.md`, `_knowledge/` (lokaler API-Cache).
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.0.0 (2026-06-17)
 - Initiale Version. Meta-Skill über `/rojo`, `/rbx-studio`, `/game-design`; Projektstruktur,

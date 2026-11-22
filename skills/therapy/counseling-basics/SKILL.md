@@ -1,10 +1,10 @@
 ---
 name: counseling-basics
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Grundlagen der personenzentrierten Gesprächsführung und Beratung benötigt werden (z. B. 'aktiv zuhören', 'Spiegeln üben', 'offene Fragen stellen', /counseling-basics). Vermittelt Rogers' Beratungsgrundlagen: empathisches Verstehen, Paraphrasieren, Validierung und konstruktive Klärungsfragen. NICHT verwenden für störungsspezifische Psychotherapie-Interventionen (dafür guideline-therapies-overview)."
 standalone: true
 anthropic_compatible: true
@@ -22,8 +22,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/gespraechs
 
 <img src="banner.png" width="100%" alt="counseling-basics banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> **Deutsch** — Hinweis: Der Inhalt dieser Datei ist derzeit englisch.
 
 # Counseling Basics (Deutsch)
 
@@ -186,3 +185,8 @@ This template describes basic therapeutic communication techniques. It serves as
 
 *Ported from BACH v3.8.0 | Standalone Version*
 *Sources: Rogers (1951, 1961), Linehan (1993) — Not professional therapy*
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

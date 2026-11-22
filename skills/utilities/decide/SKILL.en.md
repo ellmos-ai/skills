@@ -1,10 +1,10 @@
 ---
 name: decide
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Use when the user must choose between two or more options and the choice involves trade-offs, constraints or several criteria (cost, risk, compliance, effort, team capacity, lock-in, timing), even if one option looks obvious at first: 'X or Y?', 'should we use A or B', 'which is better for ...', 'help me decide', 'weigh the pros and cons', 'what do you recommend', 'Decide.', /decide. Covers technical choices (databases, frameworks, libraries, architectures, hosting, vendors, tools) as well as plans, purchases and priorities. Works the decision out with explicit weighted criteria and a fitting framework (pro/con matrix, weighted scoring, decision tree, scenario analysis, Eisenhower matrix) and ends with one justified recommendation. Do NOT use to collect and poll many pending decisions (decision-briefing) or to compress an analysis that already exists (decision-shot)."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/decide.md
 
 <img src="banner.png" width="100%" alt="decide banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `decide`.
 
 # Decide — Structured Decision Making (English)
 
@@ -166,6 +165,9 @@ Check before final recommendation:
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-11-06)
 - Description with a clear trigger (when to use) and the boundary to decision-briefing and decision-shot. Plugin eval: the skill now fires on a real decision with trade-offs (3/3 runs, before 0/3) and still stays out of a trivial one.

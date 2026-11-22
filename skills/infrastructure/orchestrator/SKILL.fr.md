@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour décomposer des objectifs complexes en sous-tâches parallèles ou séquentielles confiées à des sous-agents avec validation basée sur des preuves (ex. 'orchestrer des tâches', 'coordonner des sous-agents', 'déléguer des lots de travail', /orchestrator). Établit des contrats de tâches, missionne des agents autonomes et valide les livrables avec rigueur. Ne PAS utiliser pour les tâches simples traitables en une seule réponse."
 standalone: true
 anthropic_compatible: true
@@ -23,15 +23,7 @@ provenance: {'origin': 'custom', 'origin_path': 'local-agent-skills/orchestrator
 
 > ⚠️ **Obsolète par rapport à v1.4.0 (2026-10-11)** — ce fichier reste en v1.1.0 et ne contient ni la section « Régime de l'opérateur » ni les profils de ressources. La version de référence est `SKILL.md` (allemand) ou `SKILL.en.md` (anglais) ; ce fichier reste à titre historique.
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `orchestrator`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
-
-> **English Translation** — Official English version of `orchestrator`.
-
+> **Français** — Traduction en attente : le contenu est actuellement en allemand.
 
 # Orchestrator (English)
 
@@ -134,6 +126,9 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Journal des Modifications
+
+### 1.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.1.0 (2026-07-28)
 - Nutzer-, Pfad-, Modell- und Providerbindungen entfernt.

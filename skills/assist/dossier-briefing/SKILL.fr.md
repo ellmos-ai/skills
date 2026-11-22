@@ -1,6 +1,6 @@
 ---
 name: dossier-briefing
-version: 1.0.0
+version: 1.0.1
 category: assist
 description: "Utiliser pour générer un dossier de recherche structuré ou une note de synthèse sur un sujet ou une personne en Markdown (ex. 'créer un dossier de recherche', 'note de cadrage sur un sujet', 'dossier de synthèse', /dossier-briefing). Produit un modèle clair avec faits essentiels, sources et questions en suspens sans stockage permanent. Ne PAS utiliser pour condenser une décision immédiate (utiliser decision-shot) ou pour la recherche scientifique (utiliser research/research-agent)."
 tags: [briefing, dossier, recherche, markdown, research]
@@ -19,12 +19,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `dossier-briefing`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Dossier-Briefing (English)
 
@@ -130,4 +125,5 @@ No network access. No store. Purely local processing.
 
 | Version | Date | Change |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Note de langue corrigée |
 | 1.0.0 | 2026-06-22 | Created from BACH dossier_generator.py v1.0.0; store removed, generalised |

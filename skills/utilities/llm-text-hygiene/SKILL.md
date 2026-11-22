@@ -1,10 +1,10 @@
 ---
 name: llm-text-hygiene
-version: 1.2.0
+version: 1.2.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-04
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Verwenden, wenn ein fertiger Text (Paper, Abschlussarbeit, README, Newsletter, Doku, Sprachfassungen) veröffentlicht oder hochgeladen werden soll und noch Spuren seiner Entstehung tragen könnte: Chat-Reste ('wie besprochen', 'Hier ist die überarbeitete Fassung'), Platzhalter (TODO, '[Quelle einfügen]'), Dank an ChatGPT & Co., LLM-Stilmarker ('delve', 'es ist wichtig zu betonen') oder eine fehlende bzw. nicht mehr zutreffende KI-Offenlegung: 'vor dem Upload prüfen', 'nimm die KI-Reste raus', 'sind noch Platzhalter drin', 'passt die KI-Offenlegung', /llm-text-hygiene. Scannt, bereinigt eindeutige Fälle vorsichtig über alle Sprachfassungen, korrigiert die Offenlegung und listet Stilbefunde nur auf; ändert nie den Inhalt und schreibt nicht die Stimme der Autorin bzw. des Autors um. NICHT verwenden, um neuen Text zu schreiben (Bewerbungen: bewerbungsexperte), kaputte Kodierung oder Umlaute zu reparieren oder zwischen Optionen zu wählen (decide)."
 standalone: true
 anthropic_compatible: true
@@ -18,12 +18,7 @@ dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
 
 <img src="banner.png" width="100%" alt="llm-text-hygiene banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
-
-> **English Translation** — Official English version of `llm-text-hygiene`.
-
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # LLM-Text-Hygiene — KI-Spuren aus fertigen Texten entfernen (Deutsch)
 
@@ -157,6 +152,9 @@ Auftrag: „Prüf das Paper vor dem Upload auf KI-Rückstände."
   Skill poliert nicht selbst (siehe Red Flags und Ablauf).
 
 ## Änderungsprotokoll
+
+### 1.2.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.2.0 (2026-11-06)
 - Beschreibung mit klarem Auslöser und Abgrenzung neu gefasst (Regel aus docs/CONVENTIONS.md): Einsatzsituation, typische Nutzerformulierungen und Slash-Befehl vorn, Nachbar-Skills in einer NICHT-verwenden-Klausel.

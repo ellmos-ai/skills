@@ -4,12 +4,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="rbx-dev banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `rbx-dev`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 > **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
 

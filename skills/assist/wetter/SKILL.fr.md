@@ -1,10 +1,10 @@
 ---
 name: wetter
-version: 0.1.0
+version: 0.1.1
 type: expert
 author: ellmos
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour consulter la météo actuelle ou les prévisions à 3 jours pour une ville ou des coordonnées (ex. 'quel temps fait-il à...', 'prévisions météo pour demain', 'risque de pluie aujourd'hui', /wetter). Récupère la météo en direct et les prévisions via wttr.in sans clé d'API. Ne PAS utiliser pour des données climatiques historiques ou des calculs astronomiques."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/hub/_services/weather/weat
 
 <img src="banner.png" width="100%" alt="wetter banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `wetter`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Weather (English)
 
@@ -89,6 +84,9 @@ backends (e.g. DWD/OpenWeather) if the user prefers them.
 - `assist/reiseroute/` — uses weather for travel planning (planned)
 
 ## Journal des Modifications
+
+### 0.1.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 0.1.0 (2026-06-22)
 - Initial version. Ported from BACH `hub/_services/weather/weather_service.py` (MIT).

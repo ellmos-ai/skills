@@ -1,10 +1,10 @@
 ---
 name: mcp-config-sync
-version: 2.0.0
+version: 2.0.1
 type: skill
 author: Lukas Geiger + Claude + Codex
 created: 2026-05-16
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour identifier, planifier et synchroniser les configurations de serveurs Model Context Protocol (MCP) entre plusieurs agents d'IA (ex. 'synchroniser serveurs MCP', 'harmoniser configs MCP', 'transférer les serveurs MCP', /mcp-config-sync). Détecte les serveurs installés et aligne les réglages sans imposer de hub central. Ne PAS utiliser si la synchronisation complète des compétences et règles est nécessaire (utiliser agent-config-sync)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/mcp-confi
 
 <img src="banner.png" width="100%" alt="mcp-config-sync banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `mcp-config-sync`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # MCP Config Sync (English)
 

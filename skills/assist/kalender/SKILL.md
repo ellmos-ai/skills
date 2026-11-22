@@ -1,10 +1,10 @@
 ---
 name: kalender
-version: 0.1.0
+version: 0.1.1
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Termine, Kalendereinträge oder Terminserien verwaltet und abgefragt werden sollen (z. B. 'Termin eintragen', 'Kalender abfragen', 'Termine für morgen anzeigen', /kalender). Verwaltet Termine flexibel über lokales SQLite oder konfigurierte MCP-Backends (Google Calendar, Routinika, UpToday). NICHT verwenden für reine Projekt-Meilenstein-Planung (dafür dev/dev-cycle)."
 standalone: true
 anthropic_compatible: true
@@ -159,4 +159,5 @@ CREATE TABLE IF NOT EXISTS events (
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — Flag-3-Logik, local-Backend, ICS-Export |

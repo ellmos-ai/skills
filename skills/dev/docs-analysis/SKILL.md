@@ -1,10 +1,10 @@
 ---
 name: docs-analysis
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Spezifikationen, Architekturdokumente oder Anforderungspläne gegen den tatsächlichen Code-Stand abgeglichen oder konsolidiert werden sollen (z. B. 'Doku mit Code abgleichen', 'Pläne konsolidieren', 'Dokumentations-Gap analysieren', /docs-analysis). Vergleicht Konzepte mit der Umsetzung, deckt Lücken auf und führt mehrere Planungsdokumente sauber zusammen. NICHT verwenden für formale Mermaid-Syntaxprüfung (dafür dev/mermaid-lint)."
 standalone: true
 anthropic_compatible: true
@@ -119,6 +119,9 @@ Für jede Anforderung:
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-10-15)
 - Optionaler Modus Plankonsolidierung mit folder-organization, Quellenabdeckung und

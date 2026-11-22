@@ -1,10 +1,10 @@
 ---
 name: headless
-version: 1.1.1
+version: 1.1.2
 type: skill
 author: Lukas Geiger
 created: 2026-06-17
-updated: 2026-09-01
+updated: 2026-11-22
 language: de
 visibility: public
 standalone: true
@@ -22,8 +22,7 @@ description: Autonomer Langlauf-Modus ohne laufende Rückfragen — Startbedingu
 
 <img src="banner.png" width="100%" alt="headless banner">
 
-> **Deutsch** — Offizielle Deutsch-Version / Documento Oficial en Deutsch.
-
+> Deutsche Originalfassung. Weitere Sprachen: [EN](SKILL.en.md) · [FR](SKILL.fr.md) · [ES](SKILL.es.md) · [JA](SKILL.ja.md) · [RU](SKILL.ru.md) · [ZH](SKILL.zh.md)
 
 # Headless (Deutsch)
 
@@ -129,6 +128,9 @@ Nächster sinnvoller Schritt:
 ```
 
 ## Changelog
+
+### 1.1.2 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.1 (2026-09-01)
 - Frontmatter nach Hauskonvention vervollständigt (T-20260830-412369231); Inhalt unverändert.

@@ -7,6 +7,9 @@ description: >
 ---
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
+
+> **Русский** — Перевод ожидается: содержимое пока на немецком языке.
+
 # Живая Конституция — Нейтральный аудиторский орган (Архитектура 5-CORE, v4)
 
 Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die

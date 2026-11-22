@@ -1,10 +1,10 @@
 ---
 name: location-suche
-version: 1.0.0
+version: 1.0.1
 type: assist
 author: ellmos-ai
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 category: assist
 description: "Verwenden, wenn Orte, Adressen, Restaurants oder Points of Interest (POI) über OpenStreetMap gesucht werden sollen (z. B. 'Restaurant in der Nähe suchen', 'Adresse geokodieren', 'POI in Stadt finden', /location-suche). Sucht standortbezogene POIs und Geokoordinaten via Nominatim und Overpass API ohne API-Key. NICHT verwenden für vollständige Routen- und Fahrzeitberechnung von A nach B (dafür assist/reiseroute)."
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
@@ -121,4 +121,5 @@ User-Agent wird gemäß Nominatim-Policy gesetzt.
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 1.0.0 | 2026-06-22 | Erstellt aus BACH location_search.py v1.1.0; Store entfernt |

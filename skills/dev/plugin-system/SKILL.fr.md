@@ -1,10 +1,10 @@
 ---
 name: plugin-system
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: BACH Team
 created: 2026-02-21
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour concevoir ou implémenter une architecture de plugins tolérante aux pannes avec détection automatique en Python (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'architecture extensible', /plugin-system). Fournit un chargeur de plugins modulaire avec cycle de vie et isolation sans dépendances externes. Ne PAS utiliser pour auditer des plugins tiers non fiables (utiliser dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `plugin-system`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Plugin System (English)
 
@@ -119,6 +114,9 @@ Every plugin must:
 | No plugin in directory | Empty list, no crash |
 
 ## Journal des Modifications
+
+### 1.0.1 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.0.0 (2026-03-12)
 - Migration from MODULAR_AGENTS/plugins to skill library

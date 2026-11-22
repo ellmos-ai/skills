@@ -1,10 +1,10 @@
 ---
 name: batch-file-ops
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn dateisystemweite Batch-Operationen wie Löschen, Verschieben, Kopieren oder Auflisten über Glob-Muster ausgeführt werden sollen (z. B. 'alle *.log Dateien verschieben', 'Dateien im Batch umbenennen/löschen', /batch-file-ops). Führt sichere Dateioperationen ohne externe Abhängigkeiten aus. NICHT verwenden für semantische Textänderungen in Dateien oder interaktive Einzeldatei-Edits."
 standalone: true
 anthropic_compatible: true
@@ -97,3 +97,8 @@ python batch_file_ops.py list /pfad --pattern "backup_202?-*"
 - **Glob-Patterns:** Nutzt Python `pathlib.glob()` / `pathlib.rglob()`
 - **Windows-kompatibel:** Automatisches UTF-8 Output-Encoding
 - **Nur Dateien:** Ordner werden uebersprungen (nur Dateien werden bearbeitet)
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Sprachhinweis korrigiert

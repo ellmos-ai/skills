@@ -1,16 +1,11 @@
 ---
 language: fr
-version: 1.3.1
+version: 1.3.2
 ---
 
 <img src="banner.png" width="100%" alt="github-repo-care banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `github-repo-care`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # GitHub Repo Care — Publish and Maintain Repositories Cleanly (English)
 
@@ -122,6 +117,9 @@ If CI is red after a release, the repository is not cleanly published yet. For a
 - [ ] Has a banner? `org_profile_gate.py --org <org>` ran with no finding for this repo.
 
 ## Journal des Modifications
+
+### 1.3.2 (2026-11-22)
+- Note de langue corrigée
 
 ### 1.3.1 (2026-09-27)
 - Docs fix: the 404 semantics in the privacy-gate description were wrong.

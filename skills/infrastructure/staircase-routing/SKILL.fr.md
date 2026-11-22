@@ -1,10 +1,10 @@
 ---
 name: staircase-routing
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour parcourir l'arborescence des répertoires de haut en bas afin de découvrir les documents directeurs comme CLAUDE.md, AGENTS.md ou RULES.md (ex. 'rechercher les règles dans l'arborescence', 'trouver les guides de contexte', 'routage en escalier', /staircase-routing). Parcourt systématiquement les dossiers parents et enfants pour identifier les règles en vigueur. Ne PAS utiliser si la racine du projet est déjà connue (utiliser load-project)."
 standalone: true
 anthropic_compatible: true
@@ -21,12 +21,7 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `staircase-routing`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
 

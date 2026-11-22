@@ -1,10 +1,10 @@
 ---
 name: worksheet-generator
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-07-23
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Usar cuando se requiera generar fichas de trabajo didácticas, ejercicios de práctica o material imprimible (ej. 'crear ficha de trabajo', 'generar ejercicios prácticos', 'diseñar material educativo', /worksheet-generator). Crea fichas de trabajo adaptables con enunciados claros y hojas de respuestas. NO usar para la planificación pedagógica integral (usar foerderplaner)."
 standalone: true
 anthropic_compatible: true
@@ -19,7 +19,7 @@ status: active
 
 <img src="banner.png" width="100%" alt="worksheet-generator banner">
 
-> **Spanish** — Documento Oficial en Español.
+> **Español** — Versión oficial en español de `worksheet-generator`.
 
 # Generador de Hojas de Trabajo (Español)
 

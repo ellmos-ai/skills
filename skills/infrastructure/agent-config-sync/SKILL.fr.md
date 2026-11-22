@@ -1,10 +1,10 @@
 ---
 name: agent-config-sync
-version: 0.3.0
+version: 0.3.1
 type: protocol
 author: Lukas Geiger + Claude + Codex
 created: 2026-06-20
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Utiliser pour planifier et synchroniser les configurations de serveurs MCP, les compétences et les règles entre plusieurs agents IA (ex. 'synchroniser la configuration des agents', 'harmoniser les MCPs', 'dupliquer les compétences entre agents', /agent-config-sync). Identifie les paramètres locaux et laisse l'utilisateur choisir la source de vérité. Ne PAS utiliser pour synchroniser uniquement les MCPs (utiliser mcp-config-sync)."
 standalone: true
 anthropic_compatible: true
@@ -22,12 +22,7 @@ provenance: {'origin': 'custom', 'origin_path': 'skills/infrastructure/agent-con
 
 <img src="banner.png" width="100%" alt="agent-config-sync banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `agent-config-sync`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Agent Config Sync (English)
 

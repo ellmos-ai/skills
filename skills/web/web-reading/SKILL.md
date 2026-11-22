@@ -1,10 +1,10 @@
 ---
 name: web-reading
-version: 1.1.0
+version: 1.1.1
 type: protocol
 author: BACH Team
 created: 2026-03-12
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn Webseiteninhalte gelesen, extrahiert oder analysiert werden sollen (z. B. 'lies diese Webseite', 'extrahiere Text von URL', 'Webseiten-Inhalt analysieren', /web-reading). Entscheidet bedarfsgerecht über Haupttext, Struktur oder Screenshot und routet zum passenden Tool auf dem System. NICHT verwenden für reine REST-API-Abfragen oder einfache Datei-Downloads."
 standalone: true
 anthropic_compatible: true
@@ -114,6 +114,9 @@ def extract_content(url: str) -> str:
 ```
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 1.1.0 (2026-07-05)
 - Umbau von reinem Protokoll zu **Router**: erkennt vorhandene Web-Fähigkeiten

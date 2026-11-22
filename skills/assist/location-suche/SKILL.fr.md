@@ -1,6 +1,6 @@
 ---
 name: location-suche
-version: 1.0.0
+version: 1.0.1
 category: assist
 description: "Utiliser pour rechercher des lieux, adresses, restaurants ou points d'intérêt (POI) via OpenStreetMap (ex. 'trouver un restaurant à proximité', 'géocoder une adresse', 'chercher des POI en ville', /location-suche). Récupère POI et coordonnées via Nominatim et Overpass API sans clé d'API requise. Ne PAS utiliser pour le calcul d'itinéraires détaillés point à point (utiliser assist/reiseroute)."
 tags: [location, openstreetmap, poi, nominatim, overpass, restaurant, hotel]
@@ -19,12 +19,7 @@ language: fr
 
 <img src="banner.png" width="100%" alt="location-suche banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `location-suche`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # Location Search (English)
 
@@ -124,4 +119,5 @@ User-Agent is set according to Nominatim policy.
 
 | Version | Date | Change |
 |---|---|---|
+| 1.0.1 | 2026-11-22 | Note de langue corrigée |
 | 1.0.0 | 2026-06-22 | Created from BACH location_search.py v1.1.0; store removed |

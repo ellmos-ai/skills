@@ -1,10 +1,10 @@
 ---
 name: nulcleaner
-version: 1.0.0
+version: 1.0.1
 type: tool
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-03-12
+updated: 2026-11-22
 description: "[Français] Compétence d'agent pour nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI."
 standalone: true
 anthropic_compatible: true
@@ -20,12 +20,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/tools/nulcleaner.py', 'ori
 
 <img src="banner.png" width="100%" alt="nulcleaner banner">
 
-> **Français** — Documentation officielle complète traduite en français pour la compétence `nulcleaner`.
-
-
-
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **Français** — Traduction en attente : le contenu est actuellement en anglais.
 
 # nulcleaner - Windows NUL File Cleanup (English)
 

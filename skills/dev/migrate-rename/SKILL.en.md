@@ -1,10 +1,10 @@
 ---
 name: migrate-rename
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Use when renaming or moving files, modules, or directories without breaking existing imports and references (e.g. 'rename file without breaking imports', 'relocate module with wrappers', 'create MOVED stub', /migrate-rename). Generates backward-compatible wrappers and concise redirection stubs for safe migration. Do NOT use for simple git renames where breaking changes are acceptable."
 standalone: true
 anthropic_compatible: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-r
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `migrate-rename`.
 
 # File Renaming with Wrappers (Evolutionary Migration) (English)
 
@@ -123,6 +122,9 @@ After approximately 30 days or when the log shows no new entries:
 ---
 
 ## Changelog
+
+### 1.0.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.0.0 (2026-03-15)
 - Ported from BACH v3.8.0

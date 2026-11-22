@@ -1,10 +1,10 @@
 ---
 name: brainstorm
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-06
+updated: 2026-11-22
 description: "Use when the user wants many new ideas, not yet judged: names, features, campaigns, event concepts or alternatives to the usual approach: 'brainstorm', 'give me 30 ideas', 'I need ideas for ...', 'what else could we try', 'wild ideas welcome', 'we only come up with the usual', 'run a SCAMPER pass', 'Six Thinking Hats', /brainstorm. Generates a wide set of options with SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ or Rapid Ideation (quantity first, no criticism while collecting), then clusters them and shortlists the best. Do NOT use to find the cause of a problem (think), to pick one of given options (decide), to mine ideas against project history and carry one through (idea-mining) or for the full analyse-ideate-decide chain (structured-thinking)."
 
 standalone: true
@@ -21,8 +21,7 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstor
 
 <img src="banner.png" width="100%" alt="brainstorm banner">
 
-> **English** — Offizielle English-Version / Documento Oficial en English.
-
+> **English** — Official English version of `brainstorm`.
 
 # Brainstorm (English)
 
@@ -146,6 +145,9 @@ Quantity over quality — 50+ ideas in 20 min.
 ---
 
 ## Changelog
+
+### 1.1.1 (2026-11-22)
+- Language notice corrected
 
 ### 1.1.0 (2026-11-06)
 - Description rewritten with a clear trigger and delimitation (rule from docs/CONVENTIONS.md): situation of use, typical user phrases and the slash command first, neighbouring skills named in a Do NOT clause.

@@ -1,10 +1,10 @@
 ---
 name: model-strategy
-version: 3.1.0
+version: 3.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-22
 description: "Verwenden, wenn bei mehrstufigen Agentenläufen, Reviews oder Subagenten-Aufgaben die optimale Modell- und Reasoning-Allokation gewählt werden soll (z. B. 'welches Modell für diese Aufgabe', 'Modellstrategie festlegen', 'Reviewer-Modell wählen', /model-strategy). Definiert rollenbasierte Modellzuweisungen (Denker, Worker, Reviewer, Eskalation) und steuert Reasoning-Aufwand kosteneffizient. NICHT verwenden für tokenbasierte Budgetkontenführung (dafür infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
@@ -286,6 +286,9 @@ API (Batch, ≈ $0,001 je README), nicht als Subagent im Harness.
 ---
 
 ## Changelog
+
+### 3.1.1 (2026-11-22)
+- Sprachhinweis korrigiert
 
 ### 3.1.0 (2026-10-11) — Kleine Worker (Haiku-Klasse) gemessen
 - Neuer Abschnitt 7: Haiku 5.5 als Worker, Messung 2026-10 (Qualität je Aufgabentyp, Preise, Empfehlungen)
