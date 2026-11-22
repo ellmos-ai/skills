@@ -8052,7 +8052,7 @@
       "path": "skills/utilities/priorities/SKILL.md",
       "version": "0.1.0",
       "status": "beta",
-      "description": "Use when a user sets session priorities with /prios, asks to weight current goals, or wants the most important focus preserved across this session. Keeps priorities isolated per session and provider.",
+      "description": "Verwenden, wenn Sitzungsprioritäten mit /prios gesetzt, aktuelle Ziele gewichtet oder der wichtigste Fokus über die Sitzung hinweg bewahrt werden sollen. Hält Prioritäten je Sitzung und Anbieter getrennt.",
       "languages": [
         "de",
         "en"
@@ -8062,7 +8062,7 @@
           "language": "de",
           "path": "skills/utilities/priorities/SKILL.md",
           "title": "Sitzungsprioritäten",
-          "description": "Use when a user sets session priorities with /prios, asks to weight current goals, or wants the most important focus preserved across this session. Keeps priorities isolated per session and provider."
+          "description": "Verwenden, wenn Sitzungsprioritäten mit /prios gesetzt, aktuelle Ziele gewichtet oder der wichtigste Fokus über die Sitzung hinweg bewahrt werden sollen. Hält Prioritäten je Sitzung und Anbieter getrennt."
         },
         {
           "language": "en",

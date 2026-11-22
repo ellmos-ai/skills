@@ -5,7 +5,7 @@ type: skill
 author: ellmos-ai
 created: 2026-10-21
 updated: 2026-10-21
-description: "Use when a user sets session priorities with /prios, asks to weight current goals, or wants the most important focus preserved across this session. Keeps priorities isolated per session and provider."
+description: "Verwenden, wenn Sitzungsprioritäten mit /prios gesetzt, aktuelle Ziele gewichtet oder der wichtigste Fokus über die Sitzung hinweg bewahrt werden sollen. Hält Prioritäten je Sitzung und Anbieter getrennt."
 visibility: public potential
 category: utilities
 language: de
