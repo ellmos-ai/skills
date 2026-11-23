@@ -1,10 +1,10 @@
 ---
 name: work-autonomous
-version: 1.5.1
+version: 1.6.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-09-09
+updated: 2026-11-22
 description: >
   Abbruchbedingung für autonome Loops: So weit wie möglich selbständig
   weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
@@ -93,6 +93,26 @@ ggf. Ebene 2 — überhaupt geprüft werden.
 laufend neue `INBOX`-Tickets eintrafen, darunter zwei mit Priorität P1. Ohne dieses Gate hätte der
 Loop `exhausted`/`blind` gemeldet, obwohl Eingang offen war — genau das verhindert das Gate.
 
+#### Gate gegen die Autoritätswüste (Folgeschritt-Regel, vor jeder `USER/`-Vorlage)
+
+**Bevor ein Punkt neu nach `USER/`, in eine Sammelvorlage oder als Rückfrage an den Nutzer geht**,
+ist verpflichtend die **Folgeschritt-Regel (gedeckter Schritt)** zu prüfen — nicht nur bei Leerstand in
+Ebene 2, sondern mitten in der normalen Ebene-1-Arbeit:
+1. **Ziel:** Dient der Schritt einem Ziel, das der Nutzer in Auftrag, Goal oder Plan gesetzt oder
+   bestätigt hat (wörtliches Zitat mit Datum)?
+2. **Notwendig:** Wird das Ziel ohne ihn nicht erreicht, und existiert kein milderer gleichwertiger Weg?
+3. **Vorgesehener Weg:** Nutzt er den vorgesehenen Weg im eigenen System, ohne neuen Empfänger?
+4. **Keine neue Abwägung:** Keine nennenswerten Kosten, keine zusätzliche Außenwirkung außerhalb des
+   Auftrags, kein Löschen/Entwerten von Bestehendem, keine Sicherheits-/Sichtbarkeitslockerung?
+5. **Keine Sperre:** Kein `LOCK.user*`, kein ausdrückliches Verbot, keine engere Projektregel?
+
+Wo `open-ocean` verfügbar ist, die maschinelle Prüffunktion aufrufen (`python ocean.py authority check ...`
+bzw. `tools.escalation_ladder.evaluate_cognitive_action_authority()`). **Ist der Schritt gedeckt:**
+ohne Rückfrage ausführen und das Ziel-Zitat im Bericht mitführen. Blockt eine technische Sperre
+(Klassifikator/Deny-Regel), ist das keine neue Entscheidung: sofort den fertigen Ausführungsbefehl liefern.
+Eine unnötige Nutzerfrage trotz kontextgesicherter Absicht ist der Fehler **Autoritätswüste**
+(`error_authority_desert`).
+
 Danach ganz normal nach weiterer autonom ausführbarer Arbeit suchen (siehe Abgrenzung
 unten) und sie erledigen: offene `ACTIONABLE`-Tickets, entblockte `BLOCKED`-Tickets, fällige
 `WAITING`-Tickets, offene `TODO.md`/`AUFGABEN.txt`-Punkte in Projekten ohne User-Abhängigkeit,
@@ -152,9 +172,10 @@ dann — nur wenn verortet — **Inhaltsprüfung** (das Modell liest tatsächlic
 Neues liegt, mit seinen eigenen Werkzeugen). Eine Quelle, die nicht verortet werden konnte, wird
 NIE inhaltlich geprüft — sie zählt `unavailable`, nicht `empty`.
 
-1. **`/think` + `/decide`** auf die Frage anwenden: „Gibt es wirklich keine autonom ausführbare
-   Arbeit mehr, oder übersehe ich etwas?" — strukturierte Analyse statt Bauchgefühl. Kein
-   found/empty/unavailable-Status (siehe oben, keine Quelle).
+1. **`/think` + `/decide`** auf die Frage anwenden: „Welche Ziele hat der Nutzer in dieser Sitzung
+   gesetzt, welche offenen Punkte folgen daraus, und gibt es wirklich keine autonom ausführbare Arbeit
+   mehr oder übersehe ich etwas?" — strukturierte Analyse statt Bauchgefühl (erste Quelle der
+   Autoritätskaskade). Kein found/empty/unavailable-Status (siehe oben, keine Quelle).
 2. **`decisions.ledger`** — Verortung über `source_resolver.resolve("decisions.ledger")` /
    `grounding_seed.resolve(...)`, falls installiert; sonst der bekannte Fallback-Pfad
    (`_control-center/_CONTROL/_DECISIONS/`, `TO-DECIDE-USER*.txt`-Kette, host-eigene
@@ -189,10 +210,13 @@ unten) auf „found" setzen statt „exhausted"/„blind".
 ### Sonderfall: nur User-gebundene Reste
 
 Wenn die Kette **keine autonome** Aufgabe mehr findet, aber `USER/*`-Tickets oder unentschiedene
-`_DECISIONS`-Punkte offen sind, ist das trotzdem ein **STOP für die Autonomie** — aber nicht
-„nichts zu tun", sondern „nichts *autonom* zu tun". Diese Punkte werden nach der Autonomie-Loop-Regel
-aus `ticket-master` **gebündelt** vorgelegt (eine Sammelvorlage, keine Einzel-Pings), nicht einzeln
-nachgefragt. Das Abbruchsignal unterscheidet diesen Fall ausdrücklich von echtem Leerstand.
+`_DECISIONS`-Punkte offen sind, **vor dem Bündeln jeden `USER`-Punkt einmal gegen aktiven Auftrag,
+Goal und Entscheidungen prüfen („Der reine `USER`-Status ist kein Beleg.")** — ist ein Punkt nach der
+Folgeschritt-Regel gedeckt, wird er direkt ausgeführt statt vorgelegt. Erst für echt ungedeckte Reste
+ist das ein **STOP für die Autonomie** (nicht „nichts zu tun", sondern „nichts *autonom* zu tun"). Diese
+verbleibenden Punkte werden nach der Autonomie-Loop-Regel aus `ticket-master` **gebündelt** vorgelegt
+(eine Sammelvorlage, keine Einzel-Pings). Das Abbruchsignal unterscheidet diesen Fall ausdrücklich von
+echtem Leerstand.
 
 ## Abgrenzung — was zählt als „autonom ausführbar"?
 
@@ -205,17 +229,18 @@ Referenz: `ticket-master` Kategorien (`.AI/.MODULES/.CONTROL/ticket-master/docs/
 | `BLOCKED/*` (host-receipt, foreign-state, lock, quota, dependency) | Nein, solange Blocker nicht **empirisch** entfallen ist | Periodischer Re-Check ist erlaubt (Autonomie-Loop), „vorhanden" reicht als Nachweis nicht — Beleg nötig. |
 | `WAITING/*` (scheduled, review-due, marker) vor Termin/Marker | Nein | Zeitgebunden. |
 | `WAITING/*` nach Termin/Marker-Eintritt | **Ja** | Bedingung erfüllt → zieht nach `ACTIONABLE`. |
-| `USER/*` (decision, data, freigabe, hardware, session) | **Nie autonom** | Zwingend Nutzerentscheidung/-daten/-freigabe/-hardware/-sitzung. Gebündelt vorlegen, siehe oben. |
+| Schritt folgt zwingend aus aktivem Auftrag, Goal oder Plan (Zitat vorhanden), nutzt den vorgesehenen Weg und bringt keine neue Abwägung mit (Folgeschritt-Regel) | **Ja (gedeckt)** | Autorität aus dem Auftrag; Zitat als Beleg im Bericht. Eine Nutzerfrage dafür ist ein Fehler (Autoritätswüste / `error_authority_desert`). |
+| `USER/*` (decision, data, freigabe, hardware, session) | **Nie autonom, nachdem geprüft ist**, dass weder aktiver Auftrag noch Standing Authority noch eine neuere Entscheidung den Punkt deckt | Zwingend Nutzerentscheidung/-daten/-freigabe/-hardware/-sitzung; ein selbst vergebenes `USER`-Etikett ist kein Beleg. Gebündelt vorlegen, siehe oben. |
 | `PARKED/*` (skip, backlog, until-trigger) | Nein, außer explizitem Auftrag/Trigger | Bewusst zurückgestellt, kein Auto-Re-Check. |
 | Offene `TODO.md`/`AUFGABEN.txt`-Punkte ohne Freigabe-/Entscheidungsvermerk | **Ja** | Projektregister, normale Arbeit. |
 | Fällige Routine-/Hygiene-Checks (Cooldown abgelaufen, kein Lock) | **Ja** | Reguläre Wartungsarbeit nach lokaler Policy. |
 | Von `LOCK.user.*` gesperrte Bereiche | **Nie** | User-Lock — nur der Nutzer hebt ihn auf, siehe LOCK-SYSTEM. |
-| Irreversible/extern wirksame Schritte ohne Policy-Freigabe (Zenodo-Upload, Push auf gejudgte/geschützte Branches, Server-Spend-Entscheidung jenseits der Laptop-Schwelle, endgültiges Löschen ohne Vorschau) | **Nein** | Braucht Freigabe/Entscheidung, auch wenn technisch ausführbar. |
+| Irreversible/extern wirksame Schritte ohne Deckung durch aktiven Auftrag (Zitat), Standing Authority oder dokumentierte Policy-Freigabe (Zenodo-Upload, Push auf gejudgte/geschützte Branches, Server-Spend-Entscheidung jenseits der Laptop-Schwelle, endgültiges Löschen ohne Vorschau) | **Nein** | Braucht Deckung, Freigabe oder Entscheidung, auch wenn technisch ausführbar. |
 | Nur per GUI/Login startbare Sitzung (z. B. Claude-Desktop-Aufgabe, interaktiver Login, physische Hardware-Handlung) | **Nie** | „Nur vom User startbare Sitzung" — kann kein Loop übernehmen. |
 
 Faustregel: Autonom ist, was **ohne** Nutzerentscheidung, -freigabe, -daten, -hardware oder
 -Sitzung zu Ende gebracht werden kann UND keine irreversible/extern wirksame Handlung ohne
-dokumentierte Policy-Freigabe voraussetzt.
+Deckung durch aktiven Auftrag (Zitat), Standing Authority oder dokumentierte Policy-Freigabe voraussetzt.
 
 ## Guard gegen Endlosschleifen (Pflicht)
 
@@ -368,6 +393,15 @@ Tick 2 (Nutzer installiert grounding-seed + usmc auf diesem System):
 ```
 
 ## Changelog
+
+### 1.6.0 (2026-11-22)
+- Umsetzung der am 2026-11-21 per Avatar-Entscheidung bestätigten Folgeschritt-Regel (`T-20261115-774992728`,
+  Analyse `AUTORITAET-UND-ABSICHT_ANALYSE_2026-11-15.md` §4.1 Punkte a–f):
+  - Neues Ebene-1-**Gate gegen die Autoritätswüste** vor jeder `USER/`-Einstufung, Sammelvorlage oder
+    Rückfrage, inkl. Verweis auf `open-ocean` (`ocean authority check` / `tools/escalation_ladder.py`).
+  - Neue Abgrenzungszeile „gedeckter Folgeschritt“ vor `USER/*`; `USER/*`-Zeile, Sonderfall-Bündelung
+    („Der reine `USER`-Status ist kein Beleg“) und Faustregel um Auftrags-/Goal-/Standing-Authority-Deckung
+    erweitert; Kettenschritt 1 um die Frage nach gesetzten Zielen in dieser Sitzung ergänzt.
 
 ### 1.5.1 (2026-09-09)
 - T-20260909-282509082: Der dokumentierte Fallback für `decisions.ledger` und `user.model` folgt dem belegten Control-Center-Umzug nach `_CONTROL/_DECISIONS` und `_CONTROL/_USER-MIND`. Resolver-Vorrang und das fail-closed Verhalten bleiben unverändert.
