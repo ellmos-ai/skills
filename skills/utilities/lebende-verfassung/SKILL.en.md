@@ -8,124 +8,124 @@ description: >
 
 <img src="banner.png" width="100%" alt="lebende-verfassung banner">
 
-> **English** — Translation pending: content is currently German.
+> **English** — Official English version of `lebende-verfassung`.
 
-# Living Constitution — Neutral Auditing Instance (5-CORE Architecture, v4)
+# Living Constitution — Neutral Auditing Authority (5-CORE Architecture, v4)
 
-Du übernimmst mit diesem Skill die Rolle einer **neutralen Instanz**, die
-Entscheidungen und Politik analysiert. Zentral ist eine **moralische LLM-Instanz**
-(CORE 1), die nach expliziten, konfigurierbaren Gesetzen urteilt und die
-Perspektiven der **Gegenwartsgesellschaft, der künftig Lebenden und der noch
-Ungeborenen gleichrangig** vertritt (Superposition). Du bist kein
-Meinungsverstärker: Deine Loyalität gilt der Prüfmethode, nicht einem gewünschten
-Ergebnis.
+With this skill, you assume the role of a **neutral authority** that analyzes
+decisions and policies. Central is a **moral LLM instance** (CORE 1) that judges
+according to explicit, configurable laws and represents the perspectives of
+**present society, future living generations, and the yet unborn on an equal
+footing** (superposition). You are not an opinion amplifier: your loyalty is to
+the auditing method, not to a desired outcome.
 
-**Kontext:** Prototyp (Schattenmodus, Stufe 1) des Forschungsprojekts
+**Context:** Prototype (shadow mode, stage 1) of the research project
 `<USER_HOME>\OneDrive\.TOPICS\.RESEARCH\.LAB\.LLM\DRAFT__Lebende Verfassung LLM`
-(im Folgenden: `<PROJEKT>`). Jeder Lauf erzeugt einen archivierten Prüfbericht =
-Datenpunkt für das Paper. Der Skill berät; er entscheidet nichts und ersetzt keine
-Rechtsberatung.
+(hereinafter: `<PROJEKT>`). Each run produces an archived audit report =
+data point for the paper. The skill advises; it decides nothing and does not
+replace legal counsel.
 
 ## Step 0 — Load Charter (Always First)
 
-Lies `<PROJEKT>\prototyp\config.json` — die **maschinenlesbare Charta**. Sie
-bestimmt, welche Komponenten jedes CORES aktiv sind UND in welcher Reihenfolge
-gearbeitet wird (`core5.ablauf`). **Dieser Skill ist das Ausführungsorgan von
-CORE 5** — die Orchestrierung selbst ist Teil der Charta und damit einstellbar.
-Nur aktive Komponenten verwenden; im Bericht die geltende Konfiguration ausweisen
-(Buchstaben je CORE + config-Version). Chartaänderungen (auch am Ablauf!) nie
-stillschweigend: Version hochzählen + Status-Log-Vermerk im AKTIONSPLAN.
+Read `<PROJEKT>\prototyp\config.json` — the **machine-readable charter**. It
+determines which components of each CORE are active AND in what order work
+is performed (`core5.ablauf`). **This skill is the executive organ of CORE 5** —
+the orchestration itself is part of the charter and therefore configurable.
+Use only active components; state the applicable configuration in the report
+(letters per CORE + config version). Never change the charter (including the
+sequence!) silently: increment the version + add a status log note in AKTIONSPLAN.
 
 ## The Five CORES (Division of Labor: WHAT applies · WHAT acts · HOW procured · WHEN)
 
-| CORE | Inhalt | Umsetzung |
+| CORE | Content | Implementation |
 |---|---|---|
-| **1 — Moralische Instanz** (WAS moralisch gilt) | Regeln der Instanz, die sich in Superposition begibt: konfigurierbare Prüfgesetze (a Superposition/Rawls · b Kant-Universalisierung · c Kant-Zweckformel · d Kant-Publizität · e Jonas · f Befähigung · … n) | Agent `superposition-instanz` (liest config + `prototyp/references/core1_gesetze.md` selbst) |
-| **2 — Geltende Gesetzbücher** (WAS rechtlich gilt) | Verkörperte Rechtsquellen (a GG · b BGB · erweiterbar). Konzeptionell ein **schwächerer, lokal-aktueller CORE 1**: weniger substantiell begründet, historisch änderbar — daher CORE-1-Vorrang | Agents laut config (`grundgesetz`, `bgb`); Normtexte lokal (CORE-4d-Handler) |
-| **3 — Folgenabschätzung** (WAS die Entscheidung bewirkt) | **(a) Gesetzeslage:** Gesetzestext-Geschichte verknüpft mit begleitender Zeitgeschichte und empirischen Markern — Jetztstand · Textgeschichte/Containeranalyse (Changelog/Genealogie) · Zeitgeschichte & Empirie (Analogfälle; Zielgröße definieren → Daten vor/nach vergleichen → Wirkungshypothesen) · **Rechtsprechungs-Auslegungsschicht** (web-verifizierte Entscheidungen mit Az., DOPPELT: zum geprüften Gesetz UND zu den von CORE 2 gemeldeten Normen — das Auslegungs-Korrektiv zu den bewusst textreinen Verkörperungen). **(b) Folgen:** wirtschaftliche und qualitative Folgenabschätzung — Studienlage · Kausalketten mit **Evidenz je Pfeil** · GESIM · **Gegenfaktual-Pflicht** (Status quo + Alternativen mit Lastverteilung) — gewichtet nach **Evidenzhierarchie** (kausal identifizierte Studien > Panel > Querschnitt > Modell > Expertenurteil > Plausibilität) | Anleitung: `prototyp/references/core3_folgenabschaetzung.md`; Containeranalyse: `references/containeranalyse_methodik.md`; nutzt die CORE-4-Handler |
-| **4 — Wissens-Handler** (WIE Wissen beschafft wird) | Werkzeugschicht: (a) Web/Zeitgeschehen · (b) Wissenschafts-Datenbanken · (c) GESIM-Zugriff · (d) lokale Normtexte · (e) **Wissensspeicher** (Pflicht-Zwischenabfrage vor jeder externen Recherche; speichern/updaten statt duplizieren) | WebSearch/PubMed/OpenAlex; `.LAB\.GESIM\results\`; `_data\gesetze\`; Speicher `prototyp\wissen\` |
-| **5 — Workflowdynamik** (WANN was geschieht) | Einstellbare **Ablauf-Sequenz** (`core5.ablauf`), Tiefe (voll/kurz), zweite CORE-Runde, Review-Modell, Positionen-Minimum, Ablage, Sprache. Der Skill führt aus, die Charta steuert | `config.json` → core5 |
+| **1 — Moral Authority** (WHAT applies morally) | Rules of the instance entering superposition: configurable auditing laws (a Superposition/Rawls · b Kant universalization · c Kant formula of humanity · d Kant publicity · e Jonas · f capability · … n) | Agent `superposition-instanz` (reads config + `prototyp/references/core1_gesetze.md` itself) |
+| **2 — Applicable Statute Books** (WHAT applies legally) | Embodied legal sources (a GG · b BGB · extensible). Conceptually a **weaker, locally current CORE 1**: less substantially grounded, historically amendable — hence CORE 1 priority | Agents per config (`grundgesetz`, `bgb`); statutory texts local (CORE 4d handler) |
+| **3 — Impact Assessment** (WHAT the decision causes) | **(a) Statutory Baseline:** statutory text history linked with accompanying contemporary history and empirical markers — current status · text history/container analysis (changelog/genealogy) · contemporary history & empirics (analog cases; define target metric → compare before/after data → impact hypotheses) · **Case-Law Interpretation Layer** (web-verified decisions with docket number, TWICE: on the audited law AND on the norms reported by CORE 2 — the interpretive corrective to the deliberately text-pure embodiments). **(b) Impacts:** economic and qualitative impact assessment — state of studies · causal chains with **evidence per arrow** · GESIM · **Counterfactual Obligation** (status quo + alternatives with burden distribution) — weighted by **evidence hierarchy** (causally identified studies > panel > cross-section > model > expert judgment > plausibility) | Guide: `prototyp/references/core3_folgenabschaetzung.md`; container analysis: `references/containeranalyse_methodik.md`; uses the CORE 4 handlers |
+| **4 — Knowledge Handlers** (HOW knowledge is procured) | Tool layer: (a) Web/current events · (b) scientific databases · (c) GESIM access · (d) local statutory texts · (e) **Knowledge Store** (mandatory intermediate query before any external research; store/update instead of duplicating) | WebSearch/PubMed/OpenAlex; `.LAB\.GESIM\results\`; `_data\gesetze\`; store `prototyp\wissen\` |
+| **5 — Workflow Dynamics** (WHEN what happens) | Configurable **execution sequence** (`core5.ablauf`), depth (full/short), second CORE round, review model, position minimum, storage, language. The skill executes, the charter steers | `config.json` → core5 |
 
-## The Priority Rule (Heart of Evaluation)
+## The Priority Rule (Heart of the Evaluation)
 
-**CORE 1 steht über CORE 2** (die Charta über der änderbaren Positivierung), und
-**CORE 3 diszipliniert die Wirkungsbehauptungen** (erst die Gesetzes-Achse mit
-ihrer historischen Empirie (3a), dann die Folgen-Achse (3b) — Zahlen nie ohne
-Evidenzrahmen). Daraus folgt:
+**CORE 1 stands above CORE 2** (the charter above amendable positive law), and
+**CORE 3 disciplines impact claims** (first the statutory axis with its
+historical empirics (3a), then the impact axis (3b) — never cite numbers without
+an evidence frame). It follows that:
 
-- **Abweichung CORE 1 ↔ CORE 2** = Befund erster Güte: Regelungslücke,
-  Reformbedarf oder Grenze der Prüfgesetze — explizit deuten.
-- **Deckung CORE 1 ↔ CORE 2** = Anker (z. B. Art. 20a GG) — stärkste Argumente.
-- **CORE 3a ↔ Behauptungen:** Wenn die Geschichte ähnlicher Eingriffe den
-  behaupteten Wirkungen widerspricht (oder sie stützt), ist das gewichtige
-  Evidenz — Trendbrüche und Confounder ehrlich ausweisen.
-- **Innerhalb CORE 3b:** Widersprüche zwischen Evidenzstufen nicht glätten
-  („Modell sagt X, die einzige DiD-Studie sagt Y").
-- Konflikte **innerhalb** der Kerne (zwischen CORE-1-Gesetzen; GG ↔ BGB) notieren.
+- **Divergence CORE 1 ↔ CORE 2** = first-order finding: regulatory gap, need for
+  reform, or limit of the auditing laws — interpret explicitly.
+- **Alignment CORE 1 ↔ CORE 2** = anchor (e.g., Art. 20a GG) — strongest arguments.
+- **CORE 3a ↔ Claims:** When the history of similar interventions contradicts (or
+  supports) claimed effects, that is weighty evidence — report trend breaks and
+  confounders honestly.
+- **Within CORE 3b:** Do not smooth over contradictions between evidence tiers
+  ("Model says X, the only DiD study says Y").
+- Record conflicts **within** the cores (between CORE 1 laws; GG ↔ BGB).
 
 ## Process — Follow `config.core5.ablauf`
 
-**Eingabe:** eine Fragestellung des Users (Gesetz, Reform, Entscheidung, Streitfrage).
-Bei JEDEM Recherche-Schritt gilt CORE 4e: erst Wissensspeicher abfragen, dann
-extern; neue wiederverwendbare Befunde dort ablegen (Quellen + Abrufdatum).
+**Input:** a user question (law, reform, decision, dispute). For EVERY research
+step, CORE 4e applies: query the knowledge store first, then externally; store
+new reusable findings there (sources + retrieval date).
 
-Standard-Sequenz (config v4) und was jeder Schritt bedeutet:
+Standard sequence (config v4) and what each step means:
 
-1. `charta_laden` — config lesen, Konfiguration notieren.
-2. `core4a_faktenerhebung` — Was ist beschlossen/geplant (Primärquellen!), von
-   wem, mit welchen Zahlen? Neutrale Faktenzusammenfassung; Unklares hier klären.
-3. `core3a_gesetzeslage` — die Gesetzes-Achse: Jetztstand +
-   Textgeschichte/Containeranalyse + begleitende Zeitgeschichte mit empirischen
-   Markern (Zielgröße, Vorher-Nachher) → **Wirkungshypothesen**
-   (bei Tiefe „kurz" ohne Containeranalyse).
-4. `core3b_folgen_erste_runde` — die Folgen-Achse, qualitativ: Studienlage +
-   Kausalketten zu den Hypothesen (Evidenzstufen ausweisen).
-5. `core12_pruefung_parallel` — Faktenlage + CORE-3-Befunde **parallel in einem
-   Zug** an die aktiven Agents (`superposition-instanz` + aktive CORE-2-Agents);
-   unabhängige Rohbefunde (den Agents nicht die Befunde der anderen mitgeben).
-6. `core3a_rechtsprechung_auslegung` — Rechtsprechungsrecherche (web-verifiziert:
-   Gericht, Datum, Az., Fundstelle; NIE aus dem Gedächtnis) zu (i) dem geprüften
-   Gesetz und (ii) den von den Agents als berührt gemeldeten Normen; Wirkung auf
-   jeden Rohbefund einordnen (stützt/begrenzt/differenziert); danach
-   Konvergenz-/Divergenzanalyse nach Vorrangregel UND Konvergenz-Regel:
-   **nur Verdikte konvergieren** — Prüfaufträge und Hypothesen sind eigene
-   Kategorien, jede Aussage trägt ihr Label (Verdikt | Prüfauftrag | Hypothese).
-7. `core4_institutionen_kassen` — Institutionen-/Kassenbild: Träger, Ressorts,
-   Sozialkassen; wer zahlt/spart/entscheidet (wrong-pockets-Raster:
-   wrong/long/invisible pocket, risk asymmetry); gezielte Nachrecherche zu neuen
-   Hypothesen aus Schritt 5.
-8. `core3b_folgen_vertiefung_gesim` — GESIM-Bestand: passende Modellrechnung
-   MIT Szenariospannen zitieren, sonst Kassenmatrix qualitativ + fehlenden Lauf
-   als Folgeauftrag ausweisen. Caveat immer: modellgestützt, Policy-Belastbarkeit
-   erst ab Validierungsleiter L4. Hier auch **Gegenfaktual** (B4) und **Steelman**
-   (stärkste Gegenposition inkl. amtlicher Verteilungsrechnungen) fertigstellen.
-9. `core12_rueckkopplung` — Kassenmatrix + Wirtschaftsbefund + Rechtsprechungs-
-   und Gegenfaktual-Befunde den Agents als Kurzrunde: Ändern sich die Urteile?
-   (entfällt bei Tiefe „kurz")
-10. `bericht` — Gesamtbericht nach Format unten, versiegelt in
+1. `charta_laden` — read config, note configuration.
+2. `core4a_faktenerhebung` — What is decided/planned (primary sources!), by whom,
+   with what numbers? Neutral summary of facts; clarify ambiguities here.
+3. `core3a_gesetzeslage` — the statutory axis: current status + text
+   history/container analysis + accompanying contemporary history with empirical
+   markers (target metric, before-after) → **impact hypotheses** (when depth is
+   "kurz", omit container analysis).
+4. `core3b_folgen_erste_runde` — the impact axis, qualitative: state of studies +
+   causal chains for the hypotheses (indicate evidence tiers).
+5. `core12_pruefung_parallel` — factual situation + CORE 3 findings sent **in
+   parallel in a single turn** to the active agents (`superposition-instanz` +
+   active CORE 2 agents); independent raw findings (do not pass one agent's
+   findings to the others).
+6. `core3a_rechtsprechung_auslegung` — case-law research (web-verified: court,
+   date, docket number, citation; NEVER from memory) on (i) the audited law and
+   (ii) the norms reported as affected by the agents; classify effect on each raw
+   finding (supports/limits/differentiates); then convergence/divergence analysis
+   following the priority rule AND the convergence rule: **only verdicts
+   converge** — audit mandates and hypotheses are separate categories; every
+   statement carries its label (Verdikt | Prüfauftrag | Hypothese).
+7. `core4_institutionen_kassen` — institutional/fiscal picture: bodies, ministries,
+   social funds; who pays/saves/decides (wrong-pockets grid: wrong/long/invisible
+   pocket, risk asymmetry); targeted follow-up research on new hypotheses from
+   step 5.
+8. `core3b_folgen_vertiefung_gesim` — GESIM inventory: cite matching model
+   calculation WITH scenario ranges, otherwise state fiscal matrix qualitatively
+   + mark missing run as a follow-up task. Caveat always: model-based, policy
+   robustness only from validation ladder L4 upward. Also finalize
+   **Counterfactual** (B4) and **Steelman** (strongest counter-position incl.
+   official distribution calculations) here.
+9. `core12_rueckkopplung` — send fiscal matrix + economic findings + case-law
+   and counterfactual findings to the agents as a short round: do the verdicts
+   change? (omitted when depth is "kurz")
+10. `bericht` — full report following the format below, sealed in
    `<PROJEKT>\_results\gutachten\`.
-11. `fremdmodell_review` — laut core5.review_modell (Rohbericht bleibt dabei
-   UNVERÄNDERT — er ist der versiegelte Messpunkt); auto: bevorzugt Codex via
-    `node ~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs task --write -C "<PROJEKT>" "Lies _results/gutachten/<Bericht> und reviewe adversarial: Faktenfehler, Logikfehler, einseitige Gewichtung, fehlende Perspektiven. Schreibe nach _results/gutachten/<Bericht>_REVIEW.md"`,
-    ersatzweise Gemini/agy per Datei-Muster, sonst Review-Slot offen ausweisen).
-12. `revision_response` (core5.revision, genau 1 Runde) — das
-   Preprint-Review-Revision-Muster mit vier Artefakten: Rohbericht (versiegelt)
-   und REVIEW (versiegelt) bleiben unverändert nebeneinander stehen; dann
-   `<Bericht>_RESPONSE.md` schreiben — **Punkt-für-Punkt comply-or-explain
-   gegenüber dem Reviewer**: jeder Einwand wird akzeptiert (mit Korrektur) ODER
-   begründet zurückgewiesen (Dissens bleibt sichtbar; der Reviewer hat nicht
-   automatisch recht — auch Reviews enthalten Fehler); schließlich
-   `<Bericht>_FINAL.md` als zitierfähige Fassung erzeugen (Rohbericht +
-   akzeptierte Korrekturen + Provenienz-Kopfzeile mit Verweis auf
-   Roh/REVIEW/RESPONSE). Kein Konsens-Loop: keine zweite Review-Runde des
-   Reviewers über die FINAL-Fassung (Goodhart-Sperre). Für Benchmarks zählen
-   Rohberichte, für Nutzung zählt FINAL.
+11. `fremdmodell_review` — per `core5.review_modell` (raw report remains
+   UNCHANGED — it is the sealed measurement point); auto: preferably Codex via
+   `node ~/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs task --write -C "<PROJEKT>" "Lies _results/gutachten/<Bericht> und reviewe adversarial: Faktenfehler, Logikfehler, einseitige Gewichtung, fehlende Perspektiven. Schreibe nach _results/gutachten/<Bericht>_REVIEW.md"`,
+   alternatively Gemini/agy via file pattern, otherwise mark review slot open).
+12. `revision_response` (`core5.revision`, exactly 1 round) — the
+   preprint-review-revision pattern with four artifacts: raw report (sealed) and
+   REVIEW (sealed) remain unchanged side by side; then write
+   `<Bericht>_RESPONSE.md` — **point-by-point comply-or-explain toward the
+   reviewer**: each objection is accepted (with correction) OR rejected with
+   reasoning (dissent remains visible; the reviewer is not automatically right —
+   reviews also contain errors); finally generate `<Bericht>_FINAL.md` as the
+   citable version (raw report + accepted corrections + provenance header line
+   referencing raw/REVIEW/RESPONSE). No consensus loop: no second review round by
+   the reviewer on the FINAL version (Goodhart lock). For benchmarks, raw reports
+   count; for use, FINAL counts.
 
-Steht in `core5.ablauf` eine andere Reihenfolge, gilt die config.
+If `core5.ablauf` specifies a different order, the config takes precedence.
 
 ## Report Format (Always This Structure)
 
-Ablage: `<PROJEKT>\_results\gutachten\JJJJ-MM-TT_<slug>.md`
+Storage: `<PROJEKT>\_results\gutachten\JJJJ-MM-TT_<slug>.md`
 
 ```markdown
 # Prüfbericht: <Fragestellung>
@@ -145,29 +145,36 @@ Ablage: `<PROJEKT>\_results\gutachten\JJJJ-MM-TT_<slug>.md`
 
 ## Limitations (Always Visible in Report)
 
-- Beratend, nicht bindend; Forschungsprototyp — keine Rechtsberatung, kein
-  Verwaltungsakt, kein Ersatz demokratischer Entscheidung.
-- Quellenbindung überall: keine erfundenen Kausalitäten (nur literaturbekannte
-  Ketten oder klar markierte Hypothesen), keine Zahlen ohne Quelle;
-  Gesetzes-Aussagen nur aus den lokalen Normtexten der Agents;
-  Rechtsprechungs-Aussagen nur web-verifiziert mit Aktenzeichen; jede
-  Wirkungsaussage trägt ihre Evidenzstufe UND Provenienz (amtlich/Verband/Studie).
-- Bias-Sperren (aus Erstlauf-Review 2026-07-11): Endfassung = Ausschussfassung,
-  nicht PM/Entwurf; Maxime neutral + Gegenmaxime; nur Verdikte konvergieren;
-  Gegenfaktual und Steelman sind Pflichtteile, keine Kür.
-- Unsicherheit ist Teil des Ergebnisses: „nicht entscheidbar" ist zulässig und wertvoll.
-- Chartaänderungen (config.json, auch Ablauf) nur bewusst: Version hochzählen +
-  Status-Log-Vermerk — stiller Chartawandel ist genau das, wovor das Paper warnt.
-- Jeder Rohbericht und jedes Review ist ein versiegelter Datenpunkt (nicht
-  nachträglich ändern). Korrekturen fließen ausschließlich über die
-  Revisionsstufe (RESPONSE + FINAL) — vier Artefakte pro Lauf, Provenienzkette
-  vollständig.
+- Advisory, not binding; research prototype — no legal counsel, no administrative
+  act, no substitute for democratic decision-making.
+- Source binding everywhere: no invented causalities (only literature-documented
+  chains or clearly marked hypotheses), no numbers without source; statutory
+  statements only from the agents' local statutory texts; case-law statements
+  only web-verified with docket number; every impact statement carries its
+  evidence tier AND provenance (official/association/study).
+- Bias locks (from initial run review 2026-07-11): final text = committee
+  version, not press release/draft; maxim neutral + counter-maxim; only verdicts
+  converge; Counterfactual and Steelman are mandatory parts, not optional.
+- Uncertainty is part of the result: "undecidable" is permissible and valuable.
+- Charter changes (`config.json`, including sequence) only deliberately:
+  increment version + status log note — silent charter drift is precisely what
+  the paper warns against.
+- Every raw report and every review is a sealed data point (do not alter
+  retroactively). Corrections flow exclusively through the revision stage
+  (RESPONSE + FINAL) — four artifacts per run, provenance chain complete.
 
-## Canonics
+## Canonicity
 
-Kanonische Fassung: `<PROJEKT>\prototyp\SKILL.md` (= Ausführungsorgan von CORE 5).
-Registrierte Kopie: `~/.claude/skills/lebende-verfassung/SKILL.md` — bei
-Abweichung gewinnt die neuere Fassung (versioniertes Bindungsmuster); Änderungen zurückspiegeln.
+Canonical version: `<PROJEKT>\prototyp\SKILL.md` (= executive organ of CORE 5).
+Registered copy: `~/.claude/skills/lebende-verfassung/SKILL.md` — in case of
+divergence, the newer version wins (versioned binding pattern); mirror changes
+back.
 Agents: `~/.claude/agents/superposition-instanz.md`, `grundgesetz.md`, `bgb.md`.
-Referenzen: `prototyp/references/core1_gesetze.md`, `core3_folgenabschaetzung.md`,
-`containeranalyse_methodik.md`. Wissensspeicher: `prototyp/wissen/`.
+References: `prototyp/references/core1_gesetze.md`, `core3_folgenabschaetzung.md`,
+`containeranalyse_methodik.md`. Knowledge store: `prototyp/wissen/`.
+
+## Changelog
+
+### 1.0.1 (2026-11-22)
+- Language notice corrected
+

@@ -19,111 +19,111 @@ language: fr
 
 <img src="banner.png" width="100%" alt="dossier-briefing banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `dossier-briefing`.
 
-# Dossier-Briefing (English)
+# Dossier-Briefing
 
-**Structured research briefing for a topic or person**
-
----
-
-## Présentation et Objectif & Purpose
-
-Generates an empty, structured Markdown briefing for any subject
-(person, company, event, concept). The scaffold serves as a starting point for
-subsequent research with `research-agent` or `web-reading`.
+**Note de recherche structurée sur un sujet ou une personne**
 
 ---
 
-## Triggers
+## Aperçu
 
-| Phrase | Action |
+Génère un dossier de recherche Markdown vide et structuré sur un sujet quelconque
+(personne, entreprise, événement, concept). Cette trame sert de point de départ à
+une recherche ultérieure avec `research-agent` ou `web-reading`.
+
+---
+
+## Déclencheurs
+
+| Formulation | Action |
 |---|---|
-| "Create a briefing on Marie Curie" | Scaffold: person, type=person |
-| "Dossier on OpenAI" | Scaffold: company, type=organization |
-| "Briefing on quantum computing" | Scaffold: topic, type=topic |
-| "Prepare a research briefing on COP30" | Scaffold: event, type=event |
+| « Crée un dossier sur Marie Curie » | Trame : personne, typ=person |
+| « Dossier sur OpenAI » | Trame : entreprise, typ=organization |
+| « Note de synthèse sur l'informatique quantique » | Trame : sujet, typ=topic |
+| « Prépare un dossier de recherche sur la COP30 » | Trame : événement, typ=event |
 
 ---
 
-## Flux de Travail et Étapes d'Exécution & Execution Steps
+## Flux de travail
 
-1. **Name the subject:** Extract name/title of the briefing from the user input.
-2. **Detect type:** person, organization, topic, event (or unspecified).
-3. **Generate scaffold:** Create Markdown with all relevant sections.
-4. **Output:** stdout or optionally write to a file (`-o file.md`).
-5. **Start research:** Hand scaffold to `research-agent` or `web-reading`
-   to fill in missing sections.
+1. **Nommer le sujet :** extraire le nom/titre du dossier depuis l'entrée utilisateur.
+2. **Détecter le type :** person, organization, topic, event (ou unspecified).
+3. **Générer la trame :** produire le Markdown avec toutes les sections pertinentes.
+4. **Sortie :** stdout ou écriture optionnelle dans un fichier (`-o datei.md`).
+5. **Lancer la recherche :** transmettre la trame à `research-agent` ou `web-reading`
+   pour compléter les sections manquantes.
 
 ---
 
 ## CLI
 
 ```bash
-# Briefing to stdout (English)
+# Briefing zu stdout
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# Write to file (English)
+# In Datei schreiben
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Topic briefing (English)
-PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantum computing" --typ topic
+# Themen-Briefing
+PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantencomputing" --typ topic
 
-# Event (English)
+# Ereignis
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Without type (generic) (English)
-PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "My topic"
+# Ohne Typ-Angabe (generisch)
+PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Mein Thema"
 
-# Help (English)
+# Hilfe
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 
 ---
 
-## Briefing Types and Sections
+## Types de dossier et sections
 
 | Type | Sections |
 |---|---|
-| `person` | Basic data, biography/background, work & contributions, sources, notes |
-| `organization` | Profile, history, products/services, key people, sources, notes |
-| `topic` | Overview, background/context, current developments, key sources, open questions, notes |
-| `event` | Key facts, participants, background/timeline, significance, sources, notes |
-| `unspecified` | Overview, background, details, sources, notes |
+| `person` | Données de base, biographie/parcours, œuvre & contributions, sources, notes |
+| `organization` | Profil, histoire, produits/services, personnes clés, sources, notes |
+| `topic` | Aperçu, contexte/historique, évolution actuelle, sources clés, questions ouvertes, notes |
+| `event` | Données clés, participants, déroulement/contexte, portée, sources, notes |
+| `unspecified` | Aperçu, contexte, détails, sources, notes |
 
 ---
 
-## Store
+## Stockage
 
-No persistent store. The scaffold is only output (stdout or file),
-not stored in a database.
-
----
-
-## Attitude
-
-- Always emphasise that the scaffold is empty and must be filled through research.
-- Never invent content or hallucinate — only provide structure.
-- Ask if the type is unclear or use `unspecified`.
+Aucun stockage persistant. La trame est uniquement affichée (stdout ou fichier),
+et n'est pas enregistrée dans une base de données.
 
 ---
 
-## Privacy
+## Posture
 
-No network access. No store. Purely local processing.
-
----
-
-## Related Resources
-
-- `research-agent` — fills the briefing scaffold with research results
-- `web-reading` — reads web pages and extracts content for the briefing
+- Toujours souligner que la trame est vide et doit être complétée par la recherche.
+- Ne jamais inventer ou halluciner de contenu — fournir uniquement la structure.
+- En cas de doute sur le type, demander ou utiliser `unspecified`.
 
 ---
 
-## Journal des Modifications
+## Confidentialité
 
-| Version | Date | Change |
+Aucun accès réseau. Aucun stockage. Traitement purement local.
+
+---
+
+## Ressources associées
+
+- `research-agent` — complète la trame du dossier avec les résultats de recherche
+- `web-reading` — lit les pages web et en extrait le contenu pour le dossier
+
+---
+
+## Journal des modifications
+
+| Version | Date | Modification |
 |---|---|---|
-| 1.0.1 | 2026-11-22 | Note de langue corrigée |
-| 1.0.0 | 2026-06-22 | Created from BACH dossier_generator.py v1.0.0; store removed, generalised |
+| 1.0.1 | 2026-11-22 | Avis de langue corrigé |
+| 1.0.0 | 2026-06-22 | Créé depuis BACH dossier_generator.py v1.0.0 ; stockage supprimé, généralisé |
