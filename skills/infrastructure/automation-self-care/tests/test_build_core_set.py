@@ -27,9 +27,9 @@ class CoreSetTests(unittest.TestCase):
             "recovery_floor": {"minimum_core_runs_per_day": 1},
         }
 
-    def test_compact_topology_has_five_tasks(self) -> None:
+    def test_compact_topology_has_six_tasks(self) -> None:
         plan = module.build_plan(self.profile([]), "compact")
-        self.assertEqual(5, len(plan["tasks"]))
+        self.assertEqual(6, len(plan["tasks"]))
         self.assertEqual("plan-only", plan["installation_state"])
 
     def test_missing_write_capability_blocks_mutating_task(self) -> None:
@@ -44,11 +44,15 @@ class CoreSetTests(unittest.TestCase):
             tasks["automation-care.prompt-quality"]["readiness"],
         )
 
-    def test_full_topology_preserves_nine_responsibilities(self) -> None:
+    def test_full_topology_preserves_ten_responsibilities(self) -> None:
         plan = module.build_plan(self.profile([]), "full")
-        self.assertEqual(9, len(plan["tasks"]))
+        self.assertEqual(10, len(plan["tasks"]))
         self.assertIn(
             "automation-care.permissions",
+            {task["task_id"] for task in plan["tasks"]},
+        )
+        self.assertIn(
+            "automation-care.3day-review",
             {task["task_id"] for task in plan["tasks"]},
         )
 
@@ -66,6 +70,7 @@ class CoreSetTests(unittest.TestCase):
                 "automation-care.scheduler-tuning",
                 "automation-care.resources",
                 "automation-care.cross-system",
+                "automation-care.3day-review",
             ],
             [task["task_id"] for task in plan["tasks"]],
         )

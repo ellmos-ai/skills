@@ -14,7 +14,7 @@
 
 ## 1. Compact and Full Topology
 
-### The compact topology (5 scheduled tasks):
+### The compact topology (6 scheduled tasks):
 
 | Task | Functions |
 |---|---|
@@ -23,21 +23,23 @@
 | `automation-care.scheduler-tuning` | frequency, probe-activation and load distribution |
 | `automation-care.resources` | usage, capacity, prediction, dynamic 3-stage throttling |
 | `automation-care.cross-system` | inventory exchange, coverage, deduplication and handback |
+| `automation-care.3day-review` | every 3 days: concise host- & app-local review of own runs over the last 1–3 days (successes, unvarnished anomalies/problems, recommendations; requires high-tier reviewer model) |
 
-### The full topology (10 specialized tasks):
+### The full topology (11 specialized tasks):
 
 | Task Identifier | Default Cadence | Model Tier | Core Responsibility |
 |---|---|---|---|
-| `antigravity-maintainer` | `35 1,13 * * *` | Tier 1 (3.6 Flash) | Definition completeness, DB vacuuming, orphaned file cleanup. |
-| `antigravity-token-watcher` | `18 * * * *` | Tier 1 (3.6 Flash) | Live telemetry, SQLite sync, 7d/30d predictions, dynamic throttling. |
-| `antigravity-permissioner` | `37 19 * * *` | Tier 1 (3.6 Flash) | Review least-required permissions, lock enforcement, path bounds. |
-| `antigravity-sheduler-state-controller` | `26 5,17 * * *` | Tier 1 (3.6 Flash) | State control, probe-activations, defective task detection. |
-| `antigravity-sheduled-task-sentiziser` | `27 2,14 * * *` | Tier 1 (3.6 Flash) | Workload-based cron cadence regulation (raise/lower frequency). |
-| `antigravity-task-sheduler-burden-divisor` | `40 20 * * *` | Tier 1 (3.6 Flash) | Load distribution, peak staggering, collision avoidance. |
-| `antigravity-sheduler-text-improver` | `30 6 * * *` | Tier 2 (3.7 Flash) | Prompt quality audits, misleading guidance correction (3-line header). |
-| `antigravity-task-sync` | `50 10,22 * * *` | Tier 1 (3.6 Flash) | Bidirectional mirroring between active sidecars and reference catalog. |
-| `antigravity-file-bond-corrector` | `57 23 * * *` | Tier 1 (3.6 Flash) | Path bindings, naming conventions (`NAMING-SYSTEM.md`), broken link repair. |
-| `antigravity-kontext-and-workflow-loader-and-divider` | `2 * * * *` | Tier 1 (3.6 Flash) | Keyword index updates (`STICHWORTLISTE.json`), context & Letter-Hook loading. |
+| `antigravity-maintainer` | `35 1,13 * * *` | Tier 1b (Carbon Medium) | Definition completeness, DB vacuuming, orphaned file cleanup. |
+| `antigravity-token-watcher` | `18 * * * *` | Tier 2 (Hydrogen High) | Live telemetry, SQLite sync, 7d/30d predictions, dynamic throttling. |
+| `antigravity-permissioner` | `37 19 * * *` | Tier 1b (Carbon Medium) | Review least-required permissions, lock enforcement, path bounds. |
+| `antigravity-sheduler-state-controller` | `26 5,17 * * *` | Tier 1b (Carbon Medium) | State control, probe-activations, defective task detection. |
+| `antigravity-sheduled-task-sentiziser` | `27 2,14 * * *` | Tier 1b (Carbon Medium) | Workload-based cron cadence regulation (raise/lower frequency). |
+| `antigravity-task-sheduler-burden-divisor` | `40 20 * * *` | Tier 1b (Carbon Medium) | Load distribution, peak staggering, collision avoidance. |
+| `antigravity-sheduler-text-improver` | `30 6 * * *` | Tier 1b (Carbon Medium) | Prompt quality audits, misleading guidance correction (3-line header). |
+| `antigravity-task-sync` | `50 10,22 * * *` | Tier 1b (Carbon Medium) | Bidirectional mirroring between active sidecars and reference catalog. |
+| `antigravity-file-bond-corrector` | `57 23 * * *` | Tier 1b (Carbon Medium) | Path bindings, naming conventions (`NAMING-SYSTEM.md`), broken link repair. |
+| `antigravity-kontext-and-workflow-loader-and-divider` | `2 * * * *` | Tier 1b (Carbon Medium) | Keyword index updates (`STICHWORTLISTE.json`), context & Letter-Hook loading. |
+| `antigravity-3day-review` | `23 8 */3 * *` | **Tier 1a (Carbon High)** | Every 3 days: host- & app-local 1–3 day run overview (evidenced successes, unvarnished problems, 3–5 concrete recommendations; skips cleanly with `NO_WORK` if 0 runs). |
 
 ---
 

@@ -118,10 +118,14 @@ App State aus dem Gedächtnis neu schreiben kann.
 
 [core-set.md](references/core-set.md) lesen. Wählen zwischen:
 
-- `compact`: fünf Care-Tasks, die Frequenz mit Lastverteilung kombinieren;
-  oder
-- `full`: neun fokussierte Tasks entsprechend der ursprünglichen
-  Wartungs-Familie.
+- `compact`: sechs Care-Tasks (fünf Wartungssäulen inkl. Frequenz/Lastverteilung
+  plus der 3-Tages-Automationsüberblick `automation-care.3day-review`); oder
+- `full`: zehn fokussierte Tasks entsprechend der ANTIGRAVITY-Wartungs-Familie
+  inklusive `3day-review` (`antigravity-3day-review`, alle 3 Tage, hochwertiges
+  Reviewer-Modell wie `Gemini 4 Carbon (High)` / `gpt-6.1-sol` / `claude-opus-5.5`,
+  damit Probleme und stille Fehler nicht weggelassen werden; streng pro Host
+  und App über die eigenen Läufe der letzten 1–3 Tage, bei 0 Läufen sauber
+  `NO_WORK`).
 
 Einen anbieterneutralen Plan erzeugen:
 

@@ -77,6 +77,13 @@ TASKS = {
         "cadence": "P1D",
         "mutation": "report-first",
     },
+    "3day-review": {
+        "title": "3-day host-local automation review",
+        "functions": ["F7", "review-digest"],
+        "required": ["inventory", "run-history"],
+        "cadence": "P3D",
+        "mutation": "report-only",
+    },
 }
 
 
@@ -167,7 +174,7 @@ def selected_tasks(topology: str) -> list[tuple[str, dict]]:
     if topology == "full":
         return list(TASKS.items())
     compact = []
-    for key in ("hygiene", "prompt-quality", "resources", "cross-system"):
+    for key in ("hygiene", "prompt-quality", "resources", "cross-system", "3day-review"):
         compact.append((key, dict(TASKS[key])))
     scheduler = {
         "title": "Frequency, activation and load tuning",
