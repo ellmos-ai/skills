@@ -66,14 +66,16 @@ Track measurements over time (`token_tracker.sqlite`).
 
 ---
 
-## 3. Four-Tier Model Allocation
+## 3. Four-Tier Model Allocation & Thinking Principle
 
-| Tier | Model | Profile & Purpose |
-|---|---|---|
-| **Tier 1** | `Gemini 3.6 Flash (High)` | Fast wardens, token tracking, hygiene, sync, umlaut checks. |
-| **Tier 2** | `Gemini 3.7 Flash (High)` | Software dev, GitHubBot marketing, Roblox Lua, LaTeX design, prompt improvement. |
-| **Tier 3** | `Gemini 3.1 Pro (High)` / Claude | Deep science, mathematical model analysis, peer reviews, technical style audits. |
-| **Tier 4** | `Codex (GPT-5.4)` / Claude Code | Multi-file refactorings and architecture migrations. |
+Select model and thinking level strictly by task difficulty — **when in doubt, choose one tier higher rather than too low** (avoid silent omissions and missed defects). `Gemini 3.8 Flash` is **forbidden for unattended automations** (allowed only for cost-saving under strict operator supervision with narrow gates and mandatory human/operator acceptance); replace any `3.8` or older Gemini models with `Gemini 4 Hydrogen` (or `Carbon` for complex tasks).
+
+| Tier | Model (Antigravity / Gemini 4) | Codex / Claude Equivalent | Profile & Purpose |
+|---|---|---|---|
+| **Tier 3 (`light_worker`)** | `Gemini 4 Hydrogen (Low)` | `gpt-6-luna` (`medium`) / Haiku | Fast read-only observers, 2s minichecks, conflict-copy checks, umlaut/mermaid mechanics. |
+| **Tier 2 (`worker`)** | `Gemini 4 Hydrogen (High)` | `gpt-6-luna` (`high`) / Sonnet | Standard software/Roblox dev, GitHub hygiene/marketing, BACH/Gardener, token telemetry. |
+| **Tier 1b (`thinker_medium`)** | `Gemini 4 Carbon (Medium)` | `gpt-6.1-sol` (`medium`/`high`) / Opus | Governance, `.SYNC`, publications, translations, community outreach, core self-care orchestration. |
+| **Tier 1a (`thinker_reviewer`)** | `Gemini 4 Carbon (High)` | `gpt-6.1-sol` (`high`/`xhigh`) / Opus 5.5 | Deep science (`.RESEARCH`), proofs, peer reviews, security/architecture audits, `antigravity-3day-review`. |
 
 ---
 
