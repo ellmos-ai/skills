@@ -21,75 +21,75 @@ provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hu
 
 <img src="banner.png" width="100%" alt="tageszeitung banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `tageszeitung`.
 
-## Présentation et Objectif & Purpose
+## Objectif
 
-Fetch articles from configured RSS feeds and web sources, sort them by category
-and render them as an HTML/PDF daily newspaper. Articles are stored locally in
-`tageszeitung/store.db` and marked as read.
+Récupérer des articles depuis des flux RSS et des sources web configurés, les
+trier par catégorie et les générer sous forme de journal quotidien HTML/PDF. Les
+articles sont enregistrés localement dans `tageszeitung/store.db` et marqués comme lus.
 
 ---
 
-## Triggers
+## Déclencheurs
 
-| Phrase | Action |
+| Formulation | Action |
 |---|---|
-| "Create my daily newspaper" | Fetch articles + render PDF |
-| "Daily newspaper for today" | Render today's newspaper |
-| "Add feed [URL]" | Register RSS source |
-| "Show my sources" | Output source list |
-| "Fetch news" | Fetch all sources (no render) |
+| « Crée mon journal du jour » | Récupérer les articles + générer le PDF |
+| « Journal du jour pour aujourd'hui » | Générer le journal d'aujourd'hui |
+| « Ajoute un flux [URL] » | Enregistrer une source RSS |
+| « Montre mes sources » | Afficher la liste des sources |
+| « Fetch News » | Récupérer toutes les sources (sans rendu) |
 
 ---
 
-## Flux de Travail et Étapes d'Exécution & Execution Steps
+## Flux de travail
 
-1. **Check sources**: Read all active sources from `news_sources`.
-2. **Fetch**: RSS via feedparser (or xml.etree fallback), web via urllib.
-3. **Deduplication**: UNIQUE(source_id, url) prevents duplicates.
-4. **Render**: Group unread articles by category → HTML → PDF.
-5. **Deliver**: Place HTML/PDF in output folder (configurable path).
+1. **Vérifier les sources** : lire toutes les sources actives depuis `news_sources`.
+2. **Récupération** : RSS via feedparser (ou repli xml.etree), web via urllib.
+3. **Déduplication** : UNIQUE(source_id, url) empêche les doublons.
+4. **Rendu** : regrouper les articles non lus par catégorie → HTML → PDF.
+5. **Livraison** : déposer le HTML/PDF dans le dossier de sortie (chemin configurable).
 
 ---
 
-## CLI Entry Point
+## Point d'entrée CLI
 
 ```bash
-# Add source (English)
+# Quelle hinzufügen
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Fetch all sources (English)
+# Alle Quellen abrufen
 python tageszeitung_core.py fetch
 
-# Render daily newspaper (HTML + PDF if Edge available) (English)
-python tageszeitung_core.py render [--date 2026-06-22] [--out /path/]
+# Tageszeitung rendern (HTML + PDF wenn Edge verfügbar)
+python tageszeitung_core.py render [--date 2026-06-22] [--out /pfad/]
 
-# List sources (English)
+# Quellen auflisten
 python tageszeitung_core.py sources
 
-# Unread articles (English)
+# Ungelesene Artikel
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Mark article as read (English)
+# Artikel als gelesen markieren
 python tageszeitung_core.py read <item_id>
 
-# Alternative store (e.g. for tests) (English)
+# Alternativer Store (z.B. für Tests)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 
 ---
 
-## Store
+## Stockage
 
-| Property | Value |
+| Propriété | Valeur |
 |---|---|
 | Type | SQLite |
-| Path (default) | `skills/assist/tageszeitung/store.db` |
-| Override | `--store <path>` or env `TAGESZEITUNG_STORE` |
+| Chemin (par défaut) | `skills/assist/tageszeitung/store.db` |
+| Surcharge | `--store <pfad>` ou variable d'env `TAGESZEITUNG_STORE` |
 | Tables | `news_sources`, `news_items` |
 
-### Schema (ported from BACH news.py)
+### Schéma (porté depuis BACH news.py)
 
 ```sql
 CREATE TABLE IF NOT EXISTS news_sources (
@@ -125,31 +125,31 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
-## Attitude
+## Posture
 
-- feedparser is preferred; without feedparser an xml.etree fallback handles simple RSS 2.0 feeds.
-- PDF generation requires `msedge.exe` in the system PATH or `MSEDGE_PATH` env. Without Edge only HTML is rendered.
-- Maximum articles per category: configurable via `assist/prefs.json` (`tageszeitung_max_per_category`, default: 5).
-
----
-
-## Privacy
-
-- Article contents stay local in `store.db`.
-- No external analysis services — only the configured RSS/web sources are called.
+- `feedparser` est privilégié ; sans `feedparser`, un repli `xml.etree` prend en charge les flux RSS 2.0 simples.
+- La génération PDF requiert `msedge.exe` dans le PATH système ou la variable d'environnement `MSEDGE_PATH`. Sans Edge, seul du HTML est généré.
+- Nombre maximal d'articles par catégorie : configurable via `assist/prefs.json` (`tageszeitung_max_per_category`, par défaut : 5).
 
 ---
 
-## Related Resources
+## Confidentialité
 
-- BACH `hub/news.py` — origin (read-only)
-- BACH `hub/_services/newspaper/newspaper_generator.py` — origin (read-only)
+- Le contenu des articles reste en local dans `store.db`.
+- Aucun service d'analyse externe — seules les sources RSS/web configurées sont appelées.
 
 ---
 
-## Journal des Modifications
+## Ressources associées
 
-| Version | Date | Change |
+- BACH `hub/news.py` — origine (lecture seule)
+- BACH `hub/_services/newspaper/newspaper_generator.py` — origine (lecture seule)
+
+---
+
+## Journal des modifications
+
+| Version | Date | Modification |
 |---|---|---|
-| 0.1.1 | 2026-11-22 | Note de langue corrigée |
-| 0.1.0 | 2026-06-22 | Initial creation — BACH schema ported, own store, feedparser optional |
+| 0.1.1 | 2026-11-22 | Avis de langue corrigé |
+| 0.1.0 | 2026-06-22 | Création initiale — schéma BACH porté, stockage propre, feedparser optionnel |

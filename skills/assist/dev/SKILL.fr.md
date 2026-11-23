@@ -4,68 +4,73 @@ language: fr
 
 <img src="banner.png" width="100%" alt="dev banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `dev`.
 
-# Dev — Developer Assistant (ATI) (English)
+# Dev — Assistant développeur (ATI)
 
-Gets an overview first, then hands off to the right tools.
+Fournit d'abord une vue d'ensemble, puis transmet aux bons outils.
 
-## Présentation et Objectif & Purpose
+## Objectif
 
-Successor to BACH's ATI/entwickler agent. Two tasks:
-1. **Project scan** (headless, stdlib): fast, token-efficient overview of
-   structure, languages and build markers of a project — before expensive analysis runs.
-2. **Tool routing:** delegates to existing coding tools instead of duplicating them.
+Successeur de l'agent ATI/entwickler de BACH. Deux missions :
+1. **Analyse du projet** (headless, stdlib) : vue d'ensemble rapide et économe en
+   tokens de la structure, des langages et des marqueurs de build d'un projet —
+   avant de lancer une analyse coûteuse.
+2. **Routage d'outils :** oriente vers les outils de développement existants au
+   lieu de les dupliquer.
 
-## Triggers
+## Déclencheurs
 
-| User input | Action |
+| Entrée utilisateur | Action |
 |---|---|
-| "Get an overview of project X" | `dev_core.py scan <path>` |
-| "What kind of project is this / which stack?" | `dev_core.py scan <path>` |
-| "Analyse this file / refactor" | → CodeCommander MCP |
-| "Generate/check Python code" | → CodeCommander MCP / ellmos-code-tools |
+| « Donne-moi une vue d'ensemble du projet X » | `dev_core.py scan <pfad>` |
+| « Quel est ce projet / quelle stack ? » | `dev_core.py scan <pfad>` |
+| « Analyse ce fichier / refactorise » | → CodeCommander-MCP |
+| « Génère/vérifie du code Python » | → CodeCommander-MCP / ellmos-code-tools |
 
-## Tool Landscape (Routing Targets)
+## Paysage d'outils (cibles de routage)
 
-- **CodeCommander MCP** (`.AI/.MCP/ellmos-codecommander-mcp`): `cc_analyze_code`,
+- **CodeCommander-MCP** (`.AI/.MCP/ellmos-codecommander-mcp`) : `cc_analyze_code`,
   `cc_analyze_methods`, `cc_extract_classes`, `cc_diagnose_imports`,
-  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation` etc.
-- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`): CLI dev tools (Structural-Edit,
-  pycutter context, Method-Analyzer).
-- **FileCommander MCP**: File/directory operations over large trees.
+  `cc_runtime_import_diagnose`, `cc_generate_python_code`, `cc_check_indentation`, etc.
+- **ellmos-code-tools** (`.AI/.MODULES/ellmos-code-tools`) : outils CLI de
+  développement (Structural-Edit, contexte pycutter, Method-Analyzer).
+- **FileCommander-MCP** : opérations sur fichiers et répertoires sur de grandes arborescences.
 
-## CLI Entry Point (dev_core.py)
+## Point d'entrée CLI (`dev_core.py`)
 
 ```bash
-python dev_core.py scan .              # current project
-python dev_core.py scan /path/project  # structure + languages + markers
+python dev_core.py scan .              # aktuelles Projekt
+python dev_core.py scan /pfad/projekt  # Struktur + Sprachen + Marker
 ```
 
-Detects e.g.: Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
-Java, Roblox (Rojo), Docker, Git repo.
+Détecte entre autres : Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,
+Java, Roblox (Rojo), Docker, dépôt Git.
 
-## Store
+## Stockage
 
-No store. Pure scan + routing.
+Aucun stockage. Analyse et routage uniquement.
 
-## Attitude
+## Posture
 
-We recommend CodeCommander/ellmos-code-tools as coding tools, but are open
-to others (e.g. ruff/pylint/eslint) if the user prefers them.
+Nous recommandons CodeCommander/ellmos-code-tools comme outils de développement, mais
+restons ouverts à d'autres (p. ex. ruff/pylint/eslint) si l'utilisateur le préfère.
 
-## Privacy
+## Confidentialité
 
-- `dev_core.py` only reads file/directory names (structure), no content, no upload.
-- Skipped: `.git`, `node_modules`, `.venv`, `__pycache__` etc.
+- `dev_core.py` ne lit que les noms de fichiers et de répertoires (structure), aucun contenu, aucun envoi.
+- Sont ignorés notamment : `.git`, `node_modules`, `.venv`, `__pycache__`.
 
-## Related Resources
+## Ressources associées
 
-- `assist/AGENTS.md` — Umbrella router
+- `assist/AGENTS.md` — Routeur principal
 - `.AI/.MCP/ellmos-codecommander-mcp` · `.AI/.MODULES/ellmos-code-tools`
 
-## Journal des Modifications
+## Journal des modifications
+
+### 0.1.1 (2026-11-22)
+- Avis de langue corrigé
 
 ### 0.1.0 (2026-06-22)
-- Initial version. ATI/entwickler successor: headless project scan (stdlib) +
-  routing to CodeCommander MCP / ellmos-code-tools. User-neutral, no store.
+- Version initiale. Successeur d'ATI/entwickler : analyse de projet headless (stdlib) +
+  routage vers CodeCommander-MCP / ellmos-code-tools. Neutre envers l'utilisateur, sans stockage.

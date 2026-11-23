@@ -20,95 +20,95 @@ provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/bugfix-pr
 
 <img src="banner.png" width="100%" alt="bugfix-protocol banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `bugfix-protocol`.
 
-# Bugfix Protocol: Systematic 6-Phase Debugging (English)
+# Protocole de correction de bugs : débogage systématique en 6 phases
 
-A structured approach to bugs — from symptom analysis to verification.
-Prevents aimless trial-and-error and ensures fixes are sustainable.
-
----
-
-## Présentation et Objectif & Purpose
-
-| Phase | Name | Goal | Max. Time |
-|-------|------|------|-----------|
-| 1 | Quick Checks | Rule out obvious causes | 2 min |
-| 2 | Diagnosis | Locate root cause | 10 min |
-| 3 | Isolated Test | Make bug reproducible | 5 min |
-| 4 | Fix | Minimal correction | 10 min |
-| 5 | Verification | Verify fix + check side effects | 5 min |
-| 6 | Documentation | Preserve knowledge | 2 min |
-
-**20-Minute Rule:** If no progress after 20 minutes, change approach or seek help.
+Approche structurée face aux bugs — de l'analyse des symptômes jusqu'à la vérification.
+Évite les tâtonnements désordonnés et garantit des corrections durables.
 
 ---
 
-## Phase 1: Quick Checks (2 min)
+## Aperçu
 
-Before diving deep — check the most common causes:
+| Phase | Nom | Objectif | Durée max. |
+|-------|-----|----------|------------|
+| 1 | Vérifications rapides | Exclure les causes évidentes | 2 min |
+| 2 | Diagnostic | Localiser la cause racine | 10 min |
+| 3 | Test isolé | Rendre le bug reproductible | 5 min |
+| 4 | Correction | Correction minimale | 10 min |
+| 5 | Vérification | Contrôler la correction + effets de bord | 5 min |
+| 6 | Documentation | Capitaliser les connaissances | 2 min |
 
-### Checklist
+**Règle des 20 minutes :** S'il n'y a aucun progrès après 20 minutes → changer d'approche ou demander de l'aide.
 
-- [ ] **Syntax error?** Read error message carefully, check line
-- [ ] **Import error?** Module installed? Correct name? Circular import?
-- [ ] **Typo?** Variable/function names correct?
-- [ ] **Wrong data type?** String instead of int? None where object expected?
-- [ ] **Stale cache?** Delete `__pycache__`, restart
-- [ ] **Wrong environment?** Correct venv active? Correct Python version?
-- [ ] **Encoding?** UTF-8 vs. cp1252 (Windows classic)
+---
 
-### Quick Actions
+## Phase 1 : Vérifications rapides (2 min)
+
+Avant d'aller plus loin — vérifier les causes les plus fréquentes :
+
+### Liste de contrôle
+
+- [ ] **Erreur de syntaxe ?** Lire attentivement le message d'erreur, vérifier la ligne
+- [ ] **Erreur d'import ?** Module installé ? Nom correct ? Import circulaire ?
+- [ ] **Faute de frappe ?** Noms de variables/fonctions corrects ?
+- [ ] **Mauvais type de données ?** Chaîne au lieu d'entier ? `None` là où un objet est attendu ?
+- [ ] **Cache obsolète ?** Supprimer `__pycache__`, redémarrer
+- [ ] **Mauvais environnement ?** Bon `venv` actif ? Bonne version de Python ?
+- [ ] **Encodage ?** UTF-8 vs cp1252 (classique sous Windows)
+
+### Actions rapides
 
 ```bash
-# Clear cache (English)
+# Cache leeren
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Check imports (English)
-python -c "import modulename"
+# Imports pruefen
+python -c "import modulname"
 
-# Check syntax (English)
-python -m py_compile file.py
+# Syntax pruefen
+python -m py_compile datei.py
 ```
 
 ---
 
-## Phase 2: Diagnosis (10 min)
+## Phase 2 : Diagnostic (10 min)
 
-### Strategy: Outside-In
+### Stratégie : de l'extérieur vers l'intérieur
 
-1. **Analyze error message** — Read traceback from bottom to top
-2. **Check recent changes** — `git diff`, `git log --oneline -10`
-3. **Use diagnostic tools** — Use project-specific diagnostic tools
+1. **Analyser le message d'erreur** — lire la pile d'appels (traceback) de bas en haut
+2. **Vérifier les modifications récentes** — `git diff`, `git log --oneline -10`
+3. **Utiliser des outils de diagnostic** — employer les outils de diagnostic propres au projet
 
-### Diagnostic Tools (Examples)
+### Outils de diagnostic (exemples)
 
-Depending on the project, specialized diagnostic scripts may be helpful:
+Selon le projet, des scripts de diagnostic spécialisés peuvent être utiles :
 
-| Tool | Purpose |
-|------|---------|
-| `import_diagnose.py` | Analyze import problems |
-| `method_analyzer.py` | Check method signatures |
-| `env_checker.py` | Validate environment variables/paths |
+| Outil | Rôle |
+|-------|------|
+| `import_diagnose.py` | Analyser les problèmes d'import |
+| `method_analyzer.py` | Vérifier les signatures de méthodes |
+| `env_checker.py` | Valider les variables d'environnement/chemins |
 
-> **Note:** Create project-specific diagnostic tools or use existing ones.
-> The systematic approach matters, not the specific tool.
+> **Remarque :** Créer des outils de diagnostic adaptés au projet ou utiliser ceux
+> déjà existants. C'est la démarche systématique qui importe, pas l'outil spécifique.
 
-### Debugging Techniques
+### Techniques de débogage
 
 ```python
-# 1. Print debugging (quick but effective) (English)
+# 1. Print-Debugging (schnell aber effektiv)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interactive) (English)
+# 2. Breakpoint (interaktiv)
 breakpoint()  # Python 3.7+
 
-# 3. Extended traceback (English)
+# 3. Traceback erweitern
 import traceback
 traceback.print_exc()
 
-# 4. Logging instead of print (English)
+# 4. Logging statt Print
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -117,171 +117,171 @@ logger.debug(f"State: {state!r}")
 
 ---
 
-## Phase 3: Isolated Test (5 min)
+## Phase 3 : Test isolé (5 min)
 
-### Minimal Reproducible Example (MRE)
+### Exemple minimal reproductible (MRE)
 
-Goal: Reproduce the bug with minimal code.
+Objectif : reproduire le bug avec un minimum de code.
 
 ```python
-# test_bug.py — Minimal Reproduction Test (English)
+# test_bug.py — Minimaler Reproduktions-Test
 """
-Bug: [Short description]
-Expected: [What should happen]
-Actual: [What happens instead]
+Bug: [Kurze Beschreibung]
+Erwartet: [Was sollte passieren]
+Tatsaechlich: [Was passiert stattdessen]
 """
 
-# Minimal setup (English)
-# ... only the essentials (English)
+# Minimaler Setup
+# ... nur das Noetigste
 
-# Bug trigger (English)
-# ... exact code that triggers the bug (English)
+# Bug-Ausloeser
+# ... exakter Code der den Bug triggert
 
-# Expected result (English)
-# assert result == expected, f"Got {result}" (English)
+# Erwartetes Ergebnis
+# assert result == expected, f"Got {result}"
 ```
 
-### Isolation Strategies
+### Stratégies d'isolation
 
-1. **New file:** Reproduce the bug in a separate file
-2. **Remove dependencies:** One by one, until the bug disappears
-3. **Binary search:** Halve the code block, check which half contains the bug
-4. **Git bisect:** `git bisect start`, `git bisect bad`, `git bisect good <commit>`
+1. **Nouveau fichier :** reproduire le bug dans un fichier dédié
+2. **Retirer les dépendances :** une par une, jusqu'à ce que le bug disparaisse
+3. **Dichotomie :** diviser le bloc de code par deux, vérifier quelle moitié contient le bug
+4. **Git Bisect :** `git bisect start`, `git bisect bad`, `git bisect good <commit>`
 
 ---
 
-## Phase 4: Fix (10 min)
+## Phase 4 : Correction (10 min)
 
-### Principles
+### Principes
 
-1. **Minimal:** Change as little as possible
-2. **Understand:** Never fix blindly — understand WHY it's broken
-3. **One thing:** One fix per commit, don't fix multiple issues at once
-4. **Backward-compatible:** Don't break existing functionality
+1. **Minimale :** modifier le moins de code possible
+2. **Comprendre :** ne jamais corriger à l'aveugle — comprendre POURQUOI c'est cassé
+3. **Une chose à la fois :** un correctif par commit, ne pas traiter plusieurs problèmes simultanément
+4. **Rétrocompatible :** ne pas casser les fonctionnalités existantes
 
-### Fix Patterns
+### Modèles de correction
 
 ```python
-# BAD: Treating the symptom (English)
+# SCHLECHT: Symptom behandeln
 try:
     result = broken_function()
-except:  # Swallow everything
+except:  # Alles schlucken
     result = default_value
 
-# GOOD: Fix the root cause (English)
+# GUT: Ursache beheben
 def broken_function():
-    if input_data is None:  # Actual cause: missing None check
+    if input_data is None:  # Eigentliche Ursache: None-Check fehlte
         return default_value
     return process(input_data)
 ```
 
-### Common Fix Categories
+### Catégories de corrections fréquentes
 
-| Category | Typical Fix |
-|----------|------------|
-| None/Null | Guard clause: `if x is None: return default` |
-| Index error | Bounds check: `if i < len(lst)` |
-| Type error | Explicit conversion: `str(x)`, `int(x)` |
-| Import error | Fix path, install package |
-| Encoding | Specify UTF-8 explicitly: `encoding='utf-8'` |
-| Race condition | Lock/Mutex, or change order |
-| State bug | Check initialization, add reset |
+| Catégorie | Correction typique |
+|-----------|--------------------|
+| None/Null | Clause de garde : `if x is None: return default` |
+| Erreur d'index | Contrôle des bornes : `if i < len(lst)` |
+| Erreur de type | Conversion explicite : `str(x)`, `int(x)` |
+| Erreur d'import | Corriger le chemin, installer le paquet |
+| Encodage | Indiquer UTF-8 explicitement : `encoding='utf-8'` |
+| Condition de course | Lock/Mutex, ou modifier l'ordre |
+| Bug d'état | Vérifier l'initialisation, ajouter une réinitialisation |
 
 ---
 
-## Phase 5: Verification (5 min)
+## Phase 5 : Vérification (5 min)
 
-### Checklist
+### Liste de contrôle
 
-- [ ] **Bug is fixed:** Original problem no longer occurs
-- [ ] **MRE passes:** Isolated test runs through
-- [ ] **No regression:** Existing tests still pass
-- [ ] **Edge cases:** Empty input, None, large data tested
-- [ ] **Project tools:** Check project tools directory for relevant test/validation tools
+- [ ] **Le bug est corrigé :** le problème initial ne se produit plus
+- [ ] **Le MRE passe :** le test isolé réussit
+- [ ] **Aucune régression :** les tests existants passent toujours
+- [ ] **Cas limites :** entrée vide, `None`, gros volumes testés
+- [ ] **Outils du projet :** vérifier dans le répertoire d'outils du projet s'il existe des outils de test ou de validation pertinents
 
-### Test Commands
+### Commandes de test
 
 ```bash
-# Unit tests (English)
+# Unit-Tests
 python -m pytest tests/ -v
 
-# Only affected tests (English)
-python -m pytest tests/test_module.py -v -k "test_name"
+# Nur betroffene Tests
+python -m pytest tests/test_modul.py -v -k "test_name"
 
-# Type check (English)
-python -m mypy file.py
+# Type-Check
+python -m mypy datei.py
 
-# Lint (English)
-python -m flake8 file.py
+# Lint
+python -m flake8 datei.py
 ```
 
 ---
 
-## Phase 6: Documentation (2 min)
+## Phase 6 : Documentation (2 min)
 
-### Bug Report Template
+### Modèle de rapport de bug
 
 ```markdown
-## Bug Report: [Short Title]
+## Bug-Report: [Kurztitel]
 
-**Date:** YYYY-MM-DD
-**Severity:** critical / high / medium / low
-**Component:** [Module/File]
+**Datum:** YYYY-MM-DD
+**Schwere:** kritisch / hoch / mittel / niedrig
+**Komponente:** [Modul/Datei]
 
 ### Symptom
-[What the user sees / error message]
+[Was der User sieht / Fehlermeldung]
 
-### Root Cause
-[Technical root cause]
+### Ursache
+[Technische Root-Cause]
 
 ### Fix
-[What was changed + why]
+[Was geaendert wurde + warum]
 
-### Affected Files
-- `file1.py` — [Change]
-- `file2.py` — [Change]
+### Betroffene Dateien
+- `datei1.py` — [Aenderung]
+- `datei2.py` — [Aenderung]
 
-### Prevention
-[How can this type of bug be prevented in the future?]
+### Praevention
+[Wie kann dieser Bug-Typ in Zukunft vermieden werden?]
 ```
 
-### Commit Message Format
+### Format de message de commit
 
 ```
-fix: [Short description of the fix]
+fix: [Kurze Beschreibung des Fixes]
 
-Cause: [Root cause in one sentence]
-Fix: [What was changed]
-Test: [How verified]
+Ursache: [Root-Cause in einem Satz]
+Fix: [Was geaendert wurde]
+Test: [Wie verifiziert]
 ```
 
 ---
 
-## PyQt6 / GUI Debugging — Common Pitfalls
+## Débogage PyQt6 / GUI — Pièges fréquents
 
-> This section is relevant for desktop GUI projects with PyQt6/PySide6.
+> Cette section concerne les projets d'interface graphique de bureau avec PyQt6/PySide6.
 
-### Top 5 PyQt6 Traps
+### Top 5 des pièges PyQt6
 
-| Trap | Problem | Solution |
-|------|---------|---------|
-| **Signal-Slot Disconnect** | Signal connected but handler doesn't run | `print` in handler, check signature |
-| **Thread Safety** | GUI update from worker thread | `QMetaObject.invokeMethod` or use signal |
-| **Layout Cascade** | Widget invisible/misplaced | `widget.show()`, check layout hierarchy |
-| **Event Loop Block** | GUI freezes | Move long operations to QThread |
-| **Garbage Collection** | Widget suddenly disappears | Keep reference as `self.widget` |
+| Piège | Problème | Solution |
+|-------|----------|----------|
+| **Déconnexion Signal-Slot** | Signal connecté mais le gestionnaire ne s'exécute pas | `print` dans le gestionnaire, vérifier la signature |
+| **Thread-Safety** | Mise à jour GUI depuis un thread worker | Utiliser `QMetaObject.invokeMethod` ou un signal |
+| **Cascade de layout** | Widget invisible ou mal placé | `widget.show()`, vérifier la hiérarchie des layouts |
+| **Blocage de la boucle d'événements** | L'interface se fige | Déporter les opérations longues dans un `QThread` |
+| **Garbage Collection** | Le widget disparaît soudainement | Conserver la référence via `self.widget` |
 
-### PyQt6 Debug Helpers
+### Outils de débogage PyQt6
 
 ```python
-# Dump widget hierarchy (English)
+# Widget-Hierarchie ausgeben
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal debugging (English)
+# Signal-Debugging
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):
@@ -291,41 +291,46 @@ def debug_connect(self, *args, **kwargs):
 
 ---
 
-## Quick Reference
+## Référence rapide
 
 ```
-BUG FOUND?
-     |
-     v
-[Phase 1: Quick Checks]  ──── Obvious? -> FIX
-     |
-     v
-[Phase 2: Diagnosis]  ────────── Cause clear? -> Phase 4
-     |
-     v
-[Phase 3: Isolated Test]  ── Reproducible? -> Phase 4
-     |                              |
-     |                         Not reproducible?
-     |                              |
-     |                         Add logging,
-     |                         wait for recurrence
-     v
-[Phase 4: Fix]  ─────────────── Minimal + understood
-     |
-     v
-[Phase 5: Verification]  ────── Tests green? -> Phase 6
-     |                              |
-     |                         Tests red? -> Back to Phase 4
-     v
-[Phase 6: Documentation]  ───── Bug report + commit
+BUG GEFUNDEN?
+     │
+     ▼
+[Phase 1: Schnell-Checks]  ──── Offensichtlich? → FIX
+     │
+     ▼
+[Phase 2: Diagnose]  ────────── Ursache klar? → Phase 4
+     │
+     ▼
+[Phase 3: Isolierter Test]  ── Reproduzierbar? → Phase 4
+     │                              │
+     │                         Nicht reproduzierbar?
+     │                              │
+     │                         Logging einbauen,
+     │                         auf erneutes Auftreten warten
+     ▼
+[Phase 4: Fix]  ─────────────── Minimal + verstanden
+     │
+     ▼
+[Phase 5: Verifikation]  ────── Tests gruen? → Phase 6
+     │                              │
+     │                         Tests rot? → Zurueck zu Phase 4
+     ▼
+[Phase 6: Dokumentation]  ───── Bug-Report + Commit
 ```
 
-### 20-Minute Rule
+### Règle des 20 minutes
 
-If you're stuck after 20 minutes:
+Si vous êtes bloqué après 20 minutes :
 
-1. **Change approach** — Try a different debugging technique
-2. **Rubber duck** — Explain the problem out loud (or write it down)
-3. **Take a break** — Step away for 5 minutes, return with fresh eyes
-4. **Get help** — Ask a colleague, Stack Overflow, documentation
-5. **Reset** — `git stash`, start completely fresh
+1. **Changer d'approche** — essayer une autre technique de débogage
+2. **Rubber Duck** — expliquer le problème à voix haute (ou par écrit)
+3. **Faire une pause** — s'éloigner 5 minutes, puis revenir avec un regard neuf
+4. **Demander de l'aide** — consulter un collègue, Stack Overflow, la documentation
+5. **Réinitialiser** — `git stash`, repartir complètement à zéro
+
+## Journal des modifications
+
+### 1.1.1 (2026-11-22)
+- Avis de langue corrigé
