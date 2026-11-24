@@ -10,6 +10,8 @@ visibility: public potential
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="agenda-setting banner">
+
 # Shared agenda
 
 Read `scripts/agenda.py show` using an absolute path. All providers use the same private profile `~/.config/agent-agenda/profile.json` or `AGENT_AGENDA_PROFILE`; the default store is `~/.local/state/agent-agenda`. The agenda is planning context. Current user direction, existing goals and applicable policies retain their authority.

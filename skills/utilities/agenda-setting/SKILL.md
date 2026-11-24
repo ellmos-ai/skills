@@ -17,6 +17,8 @@ anthropic_compatible: true
 bach_compatible: true
 ---
 
+<img src="banner.png" width="100%" alt="agenda-setting banner">
+
 # Gemeinsame Agenda
 
 <!-- FAMILY-ROUTER:planning-priorities START -->
