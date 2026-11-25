@@ -36,7 +36,7 @@ Jede Änderung benötigt die zuletzt gelesene `--if-revision N` (erstmals 0). Be
 | Nutzerbefehl | CLI-Aktion / Bedeutung |
 |---|---|
 | `/agenda`, `/show-agenda` | `show`: frische Agenda samt Zustand laden |
-| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--owner lukas|team|shared] [--category TAG]`: nach Zeiträumen sortierte Kurzübersicht erzeugen |
+| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--exact] [--include-ongoing] [--owner lukas|team|shared] [--category TAG] [--group-by timeframe|category|owner] [--output PFAD]`: sortierte bzw. thematische Auszüge erzeugen |
 | `/agenda set TEXT` | `set 'Punkt eins; Punkt zwei'`: Agenda ersetzen, neue Agenda-ID, zunächst inaktiv; bisheriger Stand im Verlauf |
 | `/agenda add TEXT` | `add 'TEXT' [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: einen Punkt mit der nächsten freien ID anhängen (nie wiederverwendet; Standardgewicht 50); Agenda-ID, Aktivität, Deadline und übrige Punkte bleiben erhalten |
 | `/agenda update ID` | `update ID [--text TEXT] [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: bestehenden Punkt gezielt aktualisieren; bestehende `plans`, `status` und nicht übergebene Felder bleiben erhalten |
@@ -57,6 +57,15 @@ Optionale Metadaten je Agendapunkt (vollständig rückwärtskompatibel zu `agent
 - `timeframe`: flexibel validierter Zeitraum — Monat (`YYYY-MM`), Quartal (`YYYY-Q1`..`Q4`), Halbjahr (`YYYY-H1`/`YYYY-H2`), Jahr (`YYYY`), Bereich (`YYYY..YYYY`, `YYYY-MM..YYYY-MM`), offenes Startfenster (`YYYY+`, `YYYY-MM+`) oder `ongoing`.
 - `owner`: Zuständigkeit (`lukas` | `team` | `shared`).
 - `category`: kurzes Themen-Tag (z. B. `technik`, `finanzen`, `office-business`, `gesundheit`, `auto`, `privat`, `studium`, `medien`, `wohnen`).
+
+## Auszüge & Ausgabeformate (`chat` / `.md` / `.pdf`)
+
+`summary --timeframe <Z>` prüft standardmäßig auf **Zeitraum-Überlappung** (`2026-12` erfasst z. B. auch `2026-12..2027-01` und `2026-12+`; `2027` erfasst auch `2027-01..12`, `2027-Q1..Q4`, `2027-H1..H2`, `2026-12+`, `2027+` und `2027..2029`). Für einen reinen Exakt-Treffer `--exact` ergänzen; `ongoing`-Punkte lassen sich gezielt über `--include-ongoing` einblenden.
+
+- **Monatsauszug im Chat:** `python scripts/agenda.py summary --timeframe 2026-12`
+- **Jahres- & Themenauszug:** `python scripts/agenda.py summary --timeframe 2027 --group-by category` (oder `--group-by owner`)
+- **Export als `.md` (oder `.json`):** `--output /PFAD/auszug-2026-12.md` schreibt die gerenderte Ausgabe atomar in UTF-8.
+- **Export als `.pdf`:** zuerst über `--output /PFAD/auszug.md` eine Markdown-Datei schreiben und anschließend ein vorhandenes lokales Markdown-zu-PDF-Werkzeug verwenden (z. B. `fc_md_to_pdf` oder `cc_md_to_pdf`; keine zusätzliche Python-Abhängigkeit im Kern).
 
 ## Hierarchie und Planverknüpfung
 

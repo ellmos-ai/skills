@@ -323,6 +323,71 @@ class AgendaTests(unittest.TestCase):
         a1 = [i for i in facts["items"] if i["id"] == "A1"][0]
         self.assertNotIn("timeframe", a1)
 
+    def test_summary_overlap_exact_ongoing_groupby_and_output(self):
+        self.active()
+        self.cli("add", "DezExakt", if_revision=3, weight=90, timeframe="2026-12", owner="lukas", category="auto")
+        self.cli("add", "Uebergang", if_revision=4, weight=95, timeframe="2026-12..2027-01", owner="shared", category="finanzen")
+        self.cli("add", "OffenAbDez", if_revision=5, weight=85, timeframe="2026-12+", owner="team", category="technik")
+        self.cli("add", "Halbjahr2", if_revision=6, weight=70, timeframe="2026-H2", owner="shared", category="privat")
+        self.cli("add", "Jahr27", if_revision=7, weight=80, timeframe="2027", owner="team", category="technik")
+        self.cli("add", "Quartal1", if_revision=8, weight=75, timeframe="2027-Q1", owner="shared", category="finanzen")
+        self.cli("add", "Ab28", if_revision=9, weight=50, timeframe="2028+", owner="shared", category="office-business")
+        self.cli("add", "Dauer", if_revision=10, weight=60, timeframe="ongoing", owner="shared", category="forschung")
+
+        # 2026-12 overlap matches 2026-12, 2026-12..2027-01, 2026-12+, 2026-H2, but not 2027, 2028+, ongoing.
+        r_dec = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12")
+        self.assertEqual(r_dec.returncode, 0, r_dec.stderr)
+        dec_ids = {i["id"] for g in json.loads(r_dec.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(dec_ids, {"A3", "A4", "A5", "A6"})
+
+        # --exact restricts strictly to 2026-12.
+        r_exact = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12", "--exact")
+        self.assertEqual(r_exact.returncode, 0)
+        exact_ids = {i["id"] for g in json.loads(r_exact.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(exact_ids, {"A3"})
+
+        # --include-ongoing adds ongoing items to bounded query.
+        r_ong = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12", "--include-ongoing")
+        self.assertEqual(r_ong.returncode, 0)
+        ong_ids = {i["id"] for g in json.loads(r_ong.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(ong_ids, {"A3", "A4", "A5", "A6", "A10"})
+
+        # 2027 overlap matches 2026-12..2027-01, 2026-12+, 2027, 2027-Q1, not 2026-12, 2026-H2, 2028+.
+        r_27 = self._raw_cli("summary", "--format", "json", "--timeframe", "2027")
+        self.assertEqual(r_27.returncode, 0)
+        y27_ids = {i["id"] for g in json.loads(r_27.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(y27_ids, {"A4", "A5", "A7", "A8"})
+
+        # --group-by category & --output atomic export.
+        out_md = Path(self.tmp.name) / "exports" / "agenda-2027.md"
+        r_cat = self._raw_cli(
+            "summary",
+            "--timeframe", "2027",
+            "--group-by", "category",
+            "--format", "markdown",
+            "--output", str(out_md),
+        )
+        self.assertEqual(r_cat.returncode, 0, r_cat.stderr)
+        receipt = json.loads(r_cat.stdout)
+        self.assertEqual(receipt["matched_items"], 4)
+        self.assertEqual(receipt["group_by"], "category")
+        md_text = out_md.read_text(encoding="utf-8")
+        self.assertIn("## finanzen", md_text)
+        self.assertIn("## technik", md_text)
+        self.assertIn("2027-Q1", md_text)
+        self.assertNotIn("Ab28", md_text)
+
+        # --group-by owner in JSON.
+        r_own = self._raw_cli("summary", "--timeframe", "2027-Q1", "--group-by", "owner", "--format", "json")
+        self.assertEqual(r_own.returncode, 0)
+        own_parsed = json.loads(r_own.stdout)
+        self.assertEqual(own_parsed["group_by"], "owner")
+        self.assertEqual([g["owner"] for g in own_parsed["groups"]], ["shared", "team"])
+
+        # Invalid --group-by or directory --output returns exit 2 JSON error.
+        self.assertEqual(self._raw_cli("summary", "--group-by", "invalid").returncode, 2)
+        self.assertEqual(self._raw_cli("summary", "--output", str(self.tmp.name)).returncode, 2)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

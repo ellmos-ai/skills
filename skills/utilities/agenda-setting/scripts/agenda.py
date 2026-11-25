@@ -18,6 +18,13 @@ from pathlib import Path
 
 VALID_OWNERS = ("lukas", "team", "shared")
 VALID_SUMMARY_FORMATS = ("markdown", "text", "json")
+VALID_GROUP_BY = ("timeframe", "category", "owner")
+_OWNER_ORDER = {"lukas": 0, "shared": 1, "team": 2}
+_EMPTY_GROUP_HEADINGS = {
+    "timeframe": "Ohne Zeitraum",
+    "category": "Ohne Kategorie",
+    "owner": "Ohne Zuständigkeit",
+}
 _TIMEFRAME_ATOM = re.compile(r"^(\d{4})(?:-(?:(0[1-9]|1[0-2])|Q([1-4])|H([12])))?$")
 _CATEGORY_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,49}$")
 
@@ -110,22 +117,30 @@ def _timeframe_sort_key(tf: str | None) -> tuple:
     return (0, anchor_end, s1, 1 if is_open else 0, tf)
 
 
-def _timeframe_matches(item_tf: str | None, filter_tf: str) -> bool:
+def _timeframe_matches(
+    item_tf: str | None,
+    filter_tf: str,
+    *,
+    exact: bool = False,
+    include_ongoing: bool = False,
+) -> bool:
     if not item_tf:
         return False
+    if item_tf == "ongoing":
+        return filter_tf == "ongoing" or include_ongoing
+    if filter_tf == "ongoing":
+        return False
+    if exact:
+        return item_tf == filter_tf
     if item_tf == filter_tf:
         return True
-    if item_tf == "ongoing" or filter_tf == "ongoing":
-        return False
     i_start, i_anchor_end, i_open, _ = _timeframe_bounds(item_tf)
     f_start, f_anchor_end, f_open, _ = _timeframe_bounds(filter_tf)
     assert i_start is not None and f_start is not None
     assert i_anchor_end is not None and f_anchor_end is not None
-    if f_open:
-        return i_start >= f_start
-    if i_open:
-        return f_start <= i_start and i_anchor_end <= f_anchor_end
-    return f_start <= i_start and i_anchor_end <= f_anchor_end
+    i_eff_end = date.max if i_open else i_anchor_end
+    f_eff_end = date.max if f_open else f_anchor_end
+    return i_start <= f_eff_end and f_start <= i_eff_end
 
 
 def now() -> datetime:
@@ -227,17 +242,22 @@ def view(data: dict, at: datetime | None = None) -> dict:
     return result
 
 
-def atomic_write(path: Path, data: dict) -> None:
+def atomic_write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     fd, name = tempfile.mkstemp(dir=path.parent, prefix=".agenda-", suffix=".tmp")
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
-            json.dump(data, stream, ensure_ascii=False, indent=2)
+            stream.write(text)
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(name, path)
     finally:
         if Path(name).exists():
             Path(name).unlink()
+
+
+def atomic_write(path: Path, data: dict) -> None:
+    atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2))
 
 
 def mutate(root: Path, expected: int, change) -> dict:
@@ -284,12 +304,26 @@ def plans(data: dict, item_id: str = "") -> list[dict]:
     return result
 
 
+def _group_sort_key(group_by: str, key: str | None) -> tuple:
+    if group_by == "timeframe":
+        return _timeframe_sort_key(key)
+    if group_by == "owner":
+        return (key is None, _OWNER_ORDER.get(key or "", 99), key or "")
+    return (key is None, key or "")
+
+
 def summary(
     data: dict,
     timeframe: str | None = None,
     owner: str | None = None,
     category: str | None = None,
+    *,
+    group_by: str = "timeframe",
+    exact: bool = False,
+    include_ongoing: bool = False,
 ) -> dict:
+    if group_by not in VALID_GROUP_BY:
+        raise ValueError(f"group_by must be one of: {', '.join(VALID_GROUP_BY)}")
     current = view(data)
     tf_filter = validate_timeframe(timeframe) if timeframe is not None else None
     owner_filter = validate_owner(owner) if owner is not None else None
@@ -297,7 +331,12 @@ def summary(
 
     matched = []
     for item in current["items"]:
-        if tf_filter is not None and not _timeframe_matches(item.get("timeframe"), tf_filter):
+        if tf_filter is not None and not _timeframe_matches(
+            item.get("timeframe"),
+            tf_filter,
+            exact=exact,
+            include_ongoing=include_ongoing,
+        ):
             continue
         if owner_filter is not None and item.get("owner") != owner_filter:
             continue
@@ -307,13 +346,19 @@ def summary(
 
     grouped: dict[str | None, list[dict]] = {}
     for item in matched:
-        key = item.get("timeframe") or None
+        key = item.get(group_by) or None
         grouped.setdefault(key, []).append(item)
 
     groups = []
-    for tf_key in sorted(grouped, key=_timeframe_sort_key):
-        items_sorted = sorted(grouped[tf_key], key=lambda item: (-item["weight"], int(item["id"][1:])))
-        groups.append({"timeframe": tf_key, "items": items_sorted})
+    for group_key in sorted(grouped, key=lambda k: _group_sort_key(group_by, k)):
+        if group_by == "timeframe":
+            items_sorted = sorted(grouped[group_key], key=lambda item: (-item["weight"], int(item["id"][1:])))
+        else:
+            items_sorted = sorted(
+                grouped[group_key],
+                key=lambda item: (-item["weight"], _timeframe_sort_key(item.get("timeframe") or None), int(item["id"][1:])),
+            )
+        groups.append({group_by: group_key, "items": items_sorted})
 
     return {
         "revision": current["revision"],
@@ -323,10 +368,13 @@ def summary(
         "expired": current["expired"],
         "active": current["active"],
         "deadline": current["deadline"],
+        "group_by": group_by,
         "filters": {
             "timeframe": tf_filter,
             "owner": owner_filter,
             "category": category_filter,
+            "exact": exact,
+            "include_ongoing": include_ongoing,
         },
         "total_items": len(current["items"]),
         "matched_items": len(matched),
@@ -336,12 +384,24 @@ def summary(
     }
 
 
+def _format_summary_item_meta(item: dict, group_by: str) -> str:
+    meta = [f"w={item['weight']}"]
+    for field in ("timeframe", "owner", "category"):
+        if field != group_by and item.get(field):
+            meta.append(item[field])
+    if item.get("plans"):
+        meta.append(f"Pläne: {len(item['plans'])}")
+    return " | ".join(meta)
+
+
 def render_summary(data: dict, fmt: str = "markdown") -> str:
     if fmt not in VALID_SUMMARY_FORMATS:
         raise ValueError(f"Format must be one of: {', '.join(VALID_SUMMARY_FORMATS)}")
     if fmt == "json":
         return json.dumps(data, ensure_ascii=False, indent=2)
 
+    group_by = data.get("group_by", "timeframe")
+    empty_heading = _EMPTY_GROUP_HEADINGS.get(group_by, "Ohne Zuordnung")
     status_label = "aktiv" if data["active"] else ("abgelaufen" if data["expired"] else "inaktiv")
     deadline_label = data["deadline"] or "keine"
     meta_line = (
@@ -349,7 +409,13 @@ def render_summary(data: dict, fmt: str = "markdown") -> str:
         f"Punkte: {data['matched_items']}/{data['total_items']} "
         f"(offen: {data['pending_items']}, erledigt: {data['done_items']})"
     )
-    active_filters = [f"{k}={v}" for k, v in data["filters"].items() if v is not None]
+    active_filters = [
+        f"{k}={v}"
+        for k, v in data["filters"].items()
+        if v is not None and v is not False
+    ]
+    if group_by != "timeframe":
+        active_filters.append(f"group_by={group_by}")
 
     if fmt == "markdown":
         lines = [f"# {data['name']}", "", meta_line]
@@ -358,18 +424,12 @@ def render_summary(data: dict, fmt: str = "markdown") -> str:
         if not data["groups"]:
             lines.extend(["", "_Keine passenden Punkte._"])
         for group in data["groups"]:
-            heading = group["timeframe"] or "Ohne Zeitraum"
+            heading = group.get(group_by) or empty_heading
             lines.extend(["", f"## {heading}"])
             for item in group["items"]:
                 mark = "x" if item["status"] == "done" else " "
-                meta = [f"w={item['weight']}"]
-                if item.get("owner"):
-                    meta.append(item["owner"])
-                if item.get("category"):
-                    meta.append(item["category"])
-                if item.get("plans"):
-                    meta.append(f"Pläne: {len(item['plans'])}")
-                lines.append(f"- [{mark}] **{item['id']}** ({' | '.join(meta)}) {item['text']}")
+                meta_str = _format_summary_item_meta(item, group_by)
+                lines.append(f"- [{mark}] **{item['id']}** ({meta_str}) {item['text']}")
         return "\n".join(lines)
 
     lines = [data["name"], meta_line]
@@ -378,18 +438,12 @@ def render_summary(data: dict, fmt: str = "markdown") -> str:
     if not data["groups"]:
         lines.extend(["", "Keine passenden Punkte."])
     for group in data["groups"]:
-        heading = group["timeframe"] or "Ohne Zeitraum"
+        heading = group.get(group_by) or empty_heading
         lines.extend(["", f"[{heading}]"])
         for item in group["items"]:
             mark = "x" if item["status"] == "done" else " "
-            meta = [f"w={item['weight']}"]
-            if item.get("owner"):
-                meta.append(item["owner"])
-            if item.get("category"):
-                meta.append(item["category"])
-            if item.get("plans"):
-                meta.append(f"Pläne: {len(item['plans'])}")
-            lines.append(f"  [{mark}] {item['id']} ({' | '.join(meta)}) {item['text']}")
+            meta_str = _format_summary_item_meta(item, group_by)
+            lines.append(f"  [{mark}] {item['id']} ({meta_str}) {item['text']}")
     return "\n".join(lines)
 
 
@@ -428,6 +482,10 @@ def main(argv=None) -> int:
     parser.add_argument("--owner", default=None)
     parser.add_argument("--category", default=None)
     parser.add_argument("--format", dest="output_format", default="markdown")
+    parser.add_argument("--group-by", dest="group_by", default="timeframe")
+    parser.add_argument("--exact", action="store_true")
+    parser.add_argument("--include-ongoing", dest="include_ongoing", action="store_true")
+    parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--path", type=Path)
     parser.add_argument("--kind", choices=["plan", "plan-register", "policy-register"], default="plan")
     parser.add_argument("--planner", default="")
@@ -438,14 +496,38 @@ def main(argv=None) -> int:
             result = view(read(root))
         elif args.action == "summary":
             if args.text.strip():
-                raise ValueError("summary takes filter flags (--timeframe, --owner, --category, --format)")
+                raise ValueError("summary takes filter flags (--timeframe, --owner, --category, --group-by, --format)")
             summary_data = summary(
                 read(root),
                 timeframe=args.timeframe,
                 owner=args.owner,
                 category=args.category,
+                group_by=args.group_by,
+                exact=args.exact,
+                include_ongoing=args.include_ongoing,
             )
-            print(render_summary(summary_data, fmt=args.output_format))
+            rendered = render_summary(summary_data, fmt=args.output_format)
+            if args.output is not None:
+                out_path = args.output.expanduser()
+                if out_path.exists() and out_path.is_dir():
+                    raise ValueError("Output path must be a file, not a directory")
+                payload = rendered if rendered.endswith("\n") else rendered + "\n"
+                atomic_write_text(out_path, payload)
+                print(
+                    json.dumps(
+                        {
+                            "output": str(out_path.resolve()),
+                            "format": args.output_format,
+                            "group_by": summary_data["group_by"],
+                            "matched_items": summary_data["matched_items"],
+                            "bytes": len(payload.encode("utf-8")),
+                        },
+                        ensure_ascii=False,
+                        indent=2,
+                    )
+                )
+                return 0
+            print(rendered)
             return 0
         elif args.action == "plans" and args.path is None:
             current = read(root)
