@@ -1,10 +1,10 @@
 ---
 name: agenda-setting
-version: 0.1.1
+version: 0.2.0
 type: skill
 author: ellmos-ai
 created: 2026-10-21
-updated: 2026-11-22
+updated: 2026-11-25
 description: "Use when a user sets or loads a shared agenda across sessions, sets a multi-month deadline, invokes /agenda or /show-agenda, weights agenda items, or requests linked plans and progress."
 visibility: public potential
 category: utilities
@@ -36,8 +36,10 @@ Jede Änderung benötigt die zuletzt gelesene `--if-revision N` (erstmals 0). Be
 | Nutzerbefehl | CLI-Aktion / Bedeutung |
 |---|---|
 | `/agenda`, `/show-agenda` | `show`: frische Agenda samt Zustand laden |
+| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--owner lukas|team|shared] [--category TAG]`: nach Zeiträumen sortierte Kurzübersicht erzeugen |
 | `/agenda set TEXT` | `set 'Punkt eins; Punkt zwei'`: Agenda ersetzen, neue Agenda-ID, zunächst inaktiv; bisheriger Stand im Verlauf |
-| `/agenda add TEXT` | `add 'TEXT' [--weight N]`: einen Punkt mit der nächsten freien ID anhängen (nie wiederverwendet; Standardgewicht 50); Agenda-ID, Aktivität, Deadline und übrige Punkte bleiben erhalten |
+| `/agenda add TEXT` | `add 'TEXT' [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: einen Punkt mit der nächsten freien ID anhängen (nie wiederverwendet; Standardgewicht 50); Agenda-ID, Aktivität, Deadline und übrige Punkte bleiben erhalten |
+| `/agenda update ID` | `update ID [--text TEXT] [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: bestehenden Punkt gezielt aktualisieren; bestehende `plans`, `status` und nicht übergebene Felder bleiben erhalten |
 | `/agenda name NAME` | `name 'NAME'` |
 | `/agenda-deadline DATUM` | `deadline '2027-01-31'` oder Zeitstempel mit Zeitzone |
 | `/agenda on` | `on`: benötigt Punkte und eine zukünftige Deadline |
@@ -50,6 +52,11 @@ Jede Änderung benötigt die zuletzt gelesene `--if-revision N` (erstmals 0). Be
 | `/agenda plans [A1]` | `plans [A1]`: Übersicht der Planverweise mit Auswahl |
 
 Eine reine Datumsangabe gilt einschließlich dieses Tages in UTC. Nenne diese Zeitzone beim Bestätigen; für lokale Tagesgrenzen verwende einen Zeitstempel mit Offset. Eine abgelaufene Agenda wird nicht mehr gewichtet. Verlängerung benötigt einen Nutzerauftrag. Das Laden aktiviert nichts.
+
+Optionale Metadaten je Agendapunkt (vollständig rückwärtskompatibel zu `agent-agenda.v1`):
+- `timeframe`: flexibel validierter Zeitraum — Monat (`YYYY-MM`), Quartal (`YYYY-Q1`..`Q4`), Halbjahr (`YYYY-H1`/`YYYY-H2`), Jahr (`YYYY`), Bereich (`YYYY..YYYY`, `YYYY-MM..YYYY-MM`), offenes Startfenster (`YYYY+`, `YYYY-MM+`) oder `ongoing`.
+- `owner`: Zuständigkeit (`lukas` | `team` | `shared`).
+- `category`: kurzes Themen-Tag (z. B. `technik`, `finanzen`, `office-business`, `gesundheit`, `auto`, `privat`, `studium`, `medien`, `wohnen`).
 
 ## Hierarchie und Planverknüpfung
 

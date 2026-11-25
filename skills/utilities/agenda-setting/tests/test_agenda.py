@@ -183,6 +183,146 @@ class AgendaTests(unittest.TestCase):
         self.assertEqual([i["id"] for i in a.read(self.root)["items"]], ["A7", "A2", "A8"])
         self.assertEqual(self.cli("add", "Y", if_revision=1)[0], 2)
 
+    def _raw_cli(self, *args):
+        cmd = [sys.executable, str(BASE / "agenda.py"), *args, "--root", str(self.root)]
+        return subprocess.run(cmd, capture_output=True, encoding="utf-8")
+
+    def test_add_with_metadata_and_backward_compatibility(self):
+        self.active()
+        code, res = self.cli(
+            "add",
+            "Winterreifen kaufen",
+            if_revision=3,
+            weight=85,
+            timeframe="2026-12",
+            owner="lukas",
+            category="auto",
+        )
+        self.assertEqual(code, 0)
+        added = [i for i in res["items"] if i["id"] == "A3"][0]
+        self.assertEqual(added["timeframe"], "2026-12")
+        self.assertEqual(added["owner"], "lukas")
+        self.assertEqual(added["category"], "auto")
+        # Legacy items without metadata remain untouched and omit optional keys.
+        legacy = [i for i in res["items"] if i["id"] == "A1"][0]
+        self.assertNotIn("timeframe", legacy)
+        self.assertNotIn("owner", legacy)
+        self.assertNotIn("category", legacy)
+
+    def test_update_preserves_plans_status_and_unset_fields(self):
+        self.active()
+        plan = Path(self.tmp.name) / "plan.md"
+        plan.write_text("my plan", encoding="utf-8")
+        self.assertEqual(self.cli("plans", "A1", path=plan, planner="writing-plans", if_revision=3)[0], 0)
+        self.assertEqual(self.cli("done", "A1", if_revision=4, note="erledigt")[0], 0)
+        code, res = self.cli(
+            "update",
+            "A1",
+            if_revision=5,
+            timeframe="2027-01",
+            owner="shared",
+            category="technik",
+        )
+        self.assertEqual(code, 0)
+        a1 = [i for i in res["items"] if i["id"] == "A1"][0]
+        self.assertEqual(a1["text"], "GUI fertigstellen")
+        self.assertEqual(a1["weight"], 100)
+        self.assertEqual(a1["status"], "done")
+        self.assertEqual(a1["note"], "erledigt")
+        self.assertEqual(len(a1["plans"]), 1)
+        self.assertEqual(a1["timeframe"], "2027-01")
+        self.assertEqual(a1["owner"], "shared")
+        self.assertEqual(a1["category"], "technik")
+
+        # Partial update of text and weight keeps timeframe/owner/category intact.
+        r2 = self._raw_cli("update", "A1", "--if-revision", "6", "--text", "GUI v2", "--weight", "95")
+        self.assertEqual(r2.returncode, 0, r2.stderr)
+        res2 = json.loads(r2.stdout)
+        a1_2 = [i for i in res2["items"] if i["id"] == "A1"][0]
+        self.assertEqual(a1_2["text"], "GUI v2")
+        self.assertEqual(a1_2["weight"], 95)
+        self.assertEqual(a1_2["timeframe"], "2027-01")
+        self.assertEqual(a1_2["owner"], "shared")
+        self.assertEqual(a1_2["category"], "technik")
+        # Revision conflict and no-op update rejected cleanly.
+        self.assertEqual(self.cli("update", "A1", if_revision=5, timeframe="2027-02")[0], 2)
+        self.assertEqual(self.cli("update", "A1", if_revision=7)[0], 2)
+        # History preserves pre-update revision 5.
+        hist5 = json.loads((self.root / "history/00000005.json").read_text(encoding="utf-8"))
+        self.assertNotIn("timeframe", hist5["items"][0])
+
+    def test_timeframe_owner_category_validation(self):
+        self.seed()
+        for valid_tf in (
+            "2026-12",
+            "2027-Q1",
+            "2027-Q4",
+            "2027",
+            "2027..2029",
+            "2026-12..2027-01",
+            "2026-12+",
+            "2028+",
+            "2027-H1",
+            "2027-H2",
+            "ongoing",
+        ):
+            self.assertEqual(a.validate_timeframe(valid_tf), valid_tf)
+
+        for invalid_tf in ("", "2026-13", "2026-00", "2027-Q5", "2027-H3", "2028..2027", "soon", "2027-1"):
+            with self.assertRaises(ValueError):
+                a.validate_timeframe(invalid_tf)
+
+        self.assertEqual(self.cli("add", "bad tf", if_revision=1, timeframe="2027-13")[0], 2)
+        self.assertEqual(self.cli("add", "bad owner", if_revision=1, owner="other")[0], 2)
+        self.assertEqual(self.cli("add", "bad cat", if_revision=1, category="invalid space")[0], 2)
+        # Corrupt state validation on read.
+        d = a.read(self.root)
+        d["items"][0]["owner"] = "bogus"
+        (self.root / "agenda.json").write_text(json.dumps(d), encoding="utf-8")
+        self.assertEqual(self.cli("show")[0], 2)
+
+    def test_summary_sorting_filtering_and_formats(self):
+        self.active()
+        self.cli("add", "Dezember", if_revision=3, weight=80, timeframe="2026-12", owner="lukas", category="auto")
+        self.cli("add", "Q1", if_revision=4, weight=70, timeframe="2027-Q1", owner="lukas", category="privat")
+        self.cli("add", "Februar", if_revision=5, weight=75, timeframe="2027-02", owner="shared", category="finanzen")
+        self.cli("add", "Langfrist", if_revision=6, weight=50, timeframe="2027..2029", owner="team", category="netzwerk")
+        self.cli("add", "Laufend", if_revision=7, weight=60, timeframe="ongoing", owner="team", category="technik")
+
+        r_json = self._raw_cli("summary", "--format", "json")
+        self.assertEqual(r_json.returncode, 0, r_json.stderr)
+        parsed = json.loads(r_json.stdout)
+        group_order = [g["timeframe"] for g in parsed["groups"]]
+        self.assertEqual(group_order, ["2026-12", "2027-02", "2027-Q1", "2027..2029", "ongoing", None])
+
+        r_md = self._raw_cli("summary")
+        self.assertEqual(r_md.returncode, 0)
+        self.assertIn("## 2026-12", r_md.stdout)
+        self.assertIn("## Ohne Zeitraum", r_md.stdout)
+        self.assertIn("(w=80 | lukas | auto)", r_md.stdout)
+
+        r_txt = self._raw_cli("summary", "--format", "text", "--owner", "lukas", "--timeframe", "2027")
+        self.assertEqual(r_txt.returncode, 0)
+        self.assertIn("[2027-Q1]", r_txt.stdout)
+        self.assertNotIn("Dezember", r_txt.stdout)
+        self.assertNotIn("Februar", r_txt.stdout)
+
+        r_bad = self._raw_cli("summary", "--format", "xml")
+        self.assertEqual(r_bad.returncode, 2)
+
+    def test_hook_compact_metadata(self):
+        self.active()
+        self.cli("add", "Reifen", if_revision=3, weight=90, timeframe="2026-12", owner="lukas", category="auto")
+        ctx = h.context({"prompt": ""}, "claude", self.settings)
+        self.assertIn('"timeframe": "2026-12"', ctx)
+        self.assertIn('"owner": "lukas"', ctx)
+        self.assertIn('"category": "auto"', ctx)
+        # Legacy item A1 does not inject empty optional fields.
+        payload_line = [line for line in ctx.splitlines() if "Gemeinsame Agenda (Nutzerdaten" in line][0]
+        facts = json.loads(payload_line.split(": ", 1)[1])
+        a1 = [i for i in facts["items"] if i["id"] == "A1"][0]
+        self.assertNotIn("timeframe", a1)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

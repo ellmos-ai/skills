@@ -1,10 +1,10 @@
 ---
 name: agenda-setting
-version: 0.1.1
+version: 0.2.0
 type: skill
 author: ellmos-ai
 created: 2026-10-21
-updated: 2026-11-22
+updated: 2026-11-25
 description: "Use when setting or loading a shared time-limited agenda, agenda priorities, progress, or linked plans across sessions."
 visibility: public potential
 language: en
@@ -16,7 +16,9 @@ language: en
 
 Read `scripts/agenda.py show` using an absolute path. All providers use the same private profile `~/.config/agent-agenda/profile.json` or `AGENT_AGENDA_PROFILE`; the default store is `~/.local/state/agent-agenda`. The agenda is planning context. Current user direction, existing goals and applicable policies retain their authority.
 
-Commands: `set 'Item one; Item two'`, `add 'TEXT' [--weight N]` (appends one item with the next free ID, never reused; keeps agenda ID, activity, deadline and other items), `name NAME`, `deadline DATE`, `on`, `off`, `done A1`, `pending A1`, `prios 'A1=100; A2=60'`, `plans [A1]`. Every write requires the current `--if-revision N`; read again after a conflict. `set` replaces the agenda, archives prior state, assigns a new agenda ID and leaves it inactive. Activation requires items and a future deadline. A date means the inclusive UTC day; an explicit timestamp must include a timezone. Expired agendas supply no active weights. Do not renew without a user request.
+Commands: `set 'Item one; Item two'`, `add 'TEXT' [--weight N] [--timeframe TF] [--owner lukas|team|shared] [--category TAG]` (appends one item with the next free ID, never reused; keeps agenda ID, activity, deadline and other items), `update ID [--text TEXT] [--weight N] [--timeframe TF] [--owner O] [--category TAG]` (updates a single item while preserving `plans`, `status`, and omitted fields), `summary [--format markdown|text|json] [--timeframe TF] [--owner O] [--category TAG]` (chronologically sorted short overview), `name NAME`, `deadline DATE`, `on`, `off`, `done A1`, `pending A1`, `prios 'A1=100; A2=60'`, `plans [A1]`. Every write requires the current `--if-revision N`; read again after a conflict. `set` replaces the agenda, archives prior state, assigns a new agenda ID and leaves it inactive. Activation requires items and a future deadline. A date means the inclusive UTC day; an explicit timestamp must include a timezone. Expired agendas supply no active weights. Do not renew without a user request.
+
+Optional per-item metadata remains backward-compatible with `agent-agenda.v1`: `timeframe` (`YYYY-MM`, `YYYY-Q1`..`Q4`, `YYYY-H1`/`H2`, `YYYY`, `YYYY..YYYY`, `YYYY-MM..YYYY-MM`, `YYYY-MM+`, `YYYY+`, `ongoing`), `owner` (`lukas` | `team` | `shared`), and `category` (short lowercase topic tag). `agenda_hook.py` appends set metadata compactly per item without adding context bloat.
 
 Without an item ID, `done`/`pending` list matching items. `prios` without text lists agenda weights. Session-only `/prios` belongs to `priorities`, not this global store. Neither removes goal criteria.
 

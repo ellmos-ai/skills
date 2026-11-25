@@ -6917,7 +6917,7 @@
       "type": "skill",
       "category": "utilities",
       "path": "skills/utilities/agenda-setting/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "status": "beta",
       "description": "Use when a user sets or loads a shared agenda across sessions, sets a multi-month deadline, invokes /agenda or /show-agenda, weights agenda items, or requests linked plans and progress.",
       "languages": [
