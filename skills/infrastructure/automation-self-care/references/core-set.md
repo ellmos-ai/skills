@@ -14,7 +14,7 @@
 
 ## 1. Compact and Full Topology
 
-### The compact topology (5 scheduled tasks):
+### The compact topology (6 scheduled tasks):
 
 | Task | Functions |
 |---|---|
@@ -23,21 +23,23 @@
 | `automation-care.scheduler-tuning` | frequency, probe-activation and load distribution |
 | `automation-care.resources` | usage, capacity, prediction, dynamic 3-stage throttling |
 | `automation-care.cross-system` | inventory exchange, coverage, deduplication and handback |
+| `automation-care.3day-review` | every 3 days: concise host- & app-local review of own runs over the last 1–3 days (successes, unvarnished anomalies/problems, recommendations; requires high-tier reviewer model) |
 
-### The full topology (10 specialized tasks):
+### The full topology (11 specialized tasks):
 
 | Task Identifier | Default Cadence | Model Tier | Core Responsibility |
 |---|---|---|---|
-| `antigravity-maintainer` | `35 1,13 * * *` | Tier 1 (3.6 Flash) | Definition completeness, DB vacuuming, orphaned file cleanup. |
-| `antigravity-token-watcher` | `18 * * * *` | Tier 1 (3.6 Flash) | Live telemetry, SQLite sync, 7d/30d predictions, dynamic throttling. |
-| `antigravity-permissioner` | `37 19 * * *` | Tier 1 (3.6 Flash) | Review least-required permissions, lock enforcement, path bounds. |
-| `antigravity-sheduler-state-controller` | `26 5,17 * * *` | Tier 1 (3.6 Flash) | State control, probe-activations, defective task detection. |
-| `antigravity-sheduled-task-sentiziser` | `27 2,14 * * *` | Tier 1 (3.6 Flash) | Workload-based cron cadence regulation (raise/lower frequency). |
-| `antigravity-task-sheduler-burden-divisor` | `40 20 * * *` | Tier 1 (3.6 Flash) | Load distribution, peak staggering, collision avoidance. |
-| `antigravity-sheduler-text-improver` | `30 6 * * *` | Tier 2 (3.7 Flash) | Prompt quality audits, misleading guidance correction (3-line header). |
-| `antigravity-task-sync` | `50 10,22 * * *` | Tier 1 (3.6 Flash) | Bidirectional mirroring between active sidecars and reference catalog. |
-| `antigravity-file-bond-corrector` | `57 23 * * *` | Tier 1 (3.6 Flash) | Path bindings, naming conventions (`NAMING-SYSTEM.md`), broken link repair. |
-| `antigravity-kontext-and-workflow-loader-and-divider` | `2 * * * *` | Tier 1 (3.6 Flash) | Keyword index updates (`STICHWORTLISTE.json`), context & Letter-Hook loading. |
+| `antigravity-maintainer` | `35 1,13 * * *` | Tier 1b (Carbon Medium) | Definition completeness, DB vacuuming, orphaned file cleanup. |
+| `antigravity-token-watcher` | `18 * * * *` | Tier 2 (Hydrogen High) | Live telemetry, SQLite sync, 7d/30d predictions, dynamic throttling. |
+| `antigravity-permissioner` | `37 19 * * *` | Tier 1b (Carbon Medium) | Review least-required permissions, lock enforcement, path bounds. |
+| `antigravity-sheduler-state-controller` | `26 5,17 * * *` | Tier 1b (Carbon Medium) | State control, probe-activations, defective task detection. |
+| `antigravity-sheduled-task-sentiziser` | `27 2,14 * * *` | Tier 1b (Carbon Medium) | Workload-based cron cadence regulation (raise/lower frequency). |
+| `antigravity-task-sheduler-burden-divisor` | `40 20 * * *` | Tier 1b (Carbon Medium) | Load distribution, peak staggering, collision avoidance. |
+| `antigravity-sheduler-text-improver` | `30 6 * * *` | Tier 1b (Carbon Medium) | Prompt quality audits, misleading guidance correction (3-line header). |
+| `antigravity-task-sync` | `50 10,22 * * *` | Tier 1b (Carbon Medium) | Bidirectional mirroring between active sidecars and reference catalog. |
+| `antigravity-file-bond-corrector` | `57 23 * * *` | Tier 1b (Carbon Medium) | Path bindings, naming conventions (`NAMING-SYSTEM.md`), broken link repair. |
+| `antigravity-kontext-and-workflow-loader-and-divider` | `2 * * * *` | Tier 1b (Carbon Medium) | Keyword index updates (`STICHWORTLISTE.json`), context & Letter-Hook loading. |
+| `antigravity-3day-review` | `23 8 */3 * *` | **Tier 1a (Carbon High)** | Every 3 days: host- & app-local 1–3 day run overview (evidenced successes, unvarnished problems, 3–5 concrete recommendations; skips cleanly with `NO_WORK` if 0 runs). |
 
 ---
 
@@ -64,14 +66,16 @@ Track measurements over time (`token_tracker.sqlite`).
 
 ---
 
-## 3. Four-Tier Model Allocation
+## 3. Four-Tier Model Allocation & Thinking Principle
 
-| Tier | Model | Profile & Purpose |
-|---|---|---|
-| **Tier 1** | `Gemini 3.6 Flash (High)` | Fast wardens, token tracking, hygiene, sync, umlaut checks. |
-| **Tier 2** | `Gemini 3.7 Flash (High)` | Software dev, GitHubBot marketing, Roblox Lua, LaTeX design, prompt improvement. |
-| **Tier 3** | `Gemini 3.1 Pro (High)` / Claude | Deep science, mathematical model analysis, peer reviews, technical style audits. |
-| **Tier 4** | `Codex (GPT-5.4)` / Claude Code | Multi-file refactorings and architecture migrations. |
+Select model and thinking level strictly by task difficulty — **when in doubt, choose one tier higher rather than too low** (avoid silent omissions and missed defects). `Gemini 3.8 Flash` is **forbidden for unattended automations** (allowed only for cost-saving under strict operator supervision with narrow gates and mandatory human/operator acceptance); replace any `3.8` or older Gemini models with `Gemini 4 Hydrogen` (or `Carbon` for complex tasks).
+
+| Tier | Model (Antigravity / Gemini 4) | Codex / Claude Equivalent | Profile & Purpose |
+|---|---|---|---|
+| **Tier 3 (`light_worker`)** | `Gemini 4 Hydrogen (Low)` | `gpt-6-luna` (`medium`) / Haiku | Fast read-only observers, 2s minichecks, conflict-copy checks, umlaut/mermaid mechanics. |
+| **Tier 2 (`worker`)** | `Gemini 4 Hydrogen (High)` | `gpt-6-luna` (`high`) / Sonnet | Standard software/Roblox dev, GitHub hygiene/marketing, BACH/Gardener, token telemetry. |
+| **Tier 1b (`thinker_medium`)** | `Gemini 4 Carbon (Medium)` | `gpt-6.1-sol` (`medium`/`high`) / Opus | Governance, `.SYNC`, publications, translations, community outreach, core self-care orchestration. |
+| **Tier 1a (`thinker_reviewer`)** | `Gemini 4 Carbon (High)` | `gpt-6.1-sol` (`high`/`xhigh`) / Opus 5.5 | Deep science (`.RESEARCH`), proofs, peer reviews, security/architecture audits, `antigravity-3day-review`. |
 
 ---
 
