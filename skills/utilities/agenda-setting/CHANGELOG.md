@@ -2,9 +2,9 @@
 
 ## 0.2.0 — 2026-11-25
 
-- Optionale rückwärtskompatible Punkt-Felder `timeframe`, `owner` (`lukas`/`team`/`shared`) und `category` ergänzt (inkl. Validierung in `read()`).
+- Optionale rückwärtskompatible Punkt-Felder `timeframe`, `owner` (`user`/`self`/`team`/`shared` oder kleingeschriebener Owner-Slug) und `category` ergänzt (inkl. Validierung in `read()`).
 - `add` um `--timeframe`, `--owner`, `--category` erweitert.
-- Neuer nicht-destruktiver Subcommand `update <ID>` zum gezielten Aktualisieren von `--text`, `--weight`, `--timeframe`, `--owner`, `--category` unter Erhalt bestehender `plans` und `status`.
+- Neuer nicht-destruktiver Subcommand `update <ID>` zum gezielten Aktualisieren und reversiblen Zurücksetzen (`""`/`none`/`-`) von `--timeframe`, `--owner`, `--category` sowie Aktualisieren von `--text` und `--weight` unter Erhalt bestehender `plans` und `status`.
 - Neuer Lese-Subcommand `summary` (`--format markdown|text|json`, `--timeframe`, `--exact`, `--include-ongoing`, `--owner`, `--category`, `--group-by timeframe|category|owner`, `--output PFAD`) mit Zeitraum-Overlap-Matching und atomarem Datei-Export.
 - `agenda_hook.py` gibt gesetzte `timeframe`/`owner`/`category`-Felder kompakt mit aus.
 

@@ -16,17 +16,25 @@ import uuid
 from datetime import date, datetime, time, timezone
 from pathlib import Path
 
-VALID_OWNERS = ("lukas", "team", "shared")
+VALID_OWNERS = ("user", "self", "team", "shared")
 VALID_SUMMARY_FORMATS = ("markdown", "text", "json")
 VALID_GROUP_BY = ("timeframe", "category", "owner")
-_OWNER_ORDER = {"lukas": 0, "shared": 1, "team": 2}
+_OWNER_ORDER = {"user": 0, "self": 1, "team": 2, "shared": 3}
+_CLEAR_SENTINELS = frozenset({"", "-", "none"})
 _EMPTY_GROUP_HEADINGS = {
     "timeframe": "Ohne Zeitraum",
     "category": "Ohne Kategorie",
     "owner": "Ohne Zuständigkeit",
 }
 _TIMEFRAME_ATOM = re.compile(r"^(\d{4})(?:-(?:(0[1-9]|1[0-2])|Q([1-4])|H([12])))?$")
+_OWNER_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,49}$")
 _CATEGORY_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,49}$")
+
+
+def _is_clear_sentinel(value: str) -> bool:
+    if not isinstance(value, str):
+        return False
+    return value.strip().lower() in _CLEAR_SENTINELS
 
 
 def _parse_timeframe_atom(atom: str) -> tuple[date, date]:
@@ -79,8 +87,10 @@ def validate_owner(value: str) -> str:
     if not isinstance(value, str):
         raise ValueError("Owner must be a string")
     text = value.strip()
-    if text not in VALID_OWNERS:
-        raise ValueError(f"Owner must be one of: {', '.join(VALID_OWNERS)}")
+    if text.lower() in _CLEAR_SENTINELS or not _OWNER_RE.fullmatch(text):
+        raise ValueError(
+            f"Owner must be one of {', '.join(VALID_OWNERS)} or a lowercase slug ([a-z0-9][a-z0-9_-]{{0,49}})"
+        )
     return text
 
 
@@ -88,7 +98,7 @@ def validate_category(value: str) -> str:
     if not isinstance(value, str):
         raise ValueError("Category must be a string")
     text = value.strip().lower()
-    if not _CATEGORY_RE.fullmatch(text):
+    if text in _CLEAR_SENTINELS or not _CATEGORY_RE.fullmatch(text):
         raise ValueError("Category must be 1..50 tag characters ([a-z0-9][a-z0-9_-]*)")
     return text
 
@@ -215,11 +225,17 @@ def read(root: Path) -> dict:
             raise ValueError("Invalid agenda item")
         ids.add(item["id"])
         if "timeframe" in item and item["timeframe"] is not None:
-            validate_timeframe(item["timeframe"])
+            if not isinstance(item["timeframe"], str) or validate_timeframe(item["timeframe"]) != item["timeframe"]:
+                raise ValueError("Invalid agenda item timeframe")
         if "owner" in item and item["owner"] is not None:
-            validate_owner(item["owner"])
+            if not isinstance(item["owner"], str) or validate_owner(item["owner"]) != item["owner"]:
+                raise ValueError("Invalid agenda item owner")
         if "category" in item and item["category"] is not None:
-            if not isinstance(item["category"], str) or not _CATEGORY_RE.fullmatch(item["category"]):
+            if (
+                not isinstance(item["category"], str)
+                or item["category"].lower() in _CLEAR_SENTINELS
+                or not _CATEGORY_RE.fullmatch(item["category"])
+            ):
                 raise ValueError("Invalid agenda item category")
         for link in item["plans"]:
             if (
@@ -554,9 +570,36 @@ def main(argv=None) -> int:
                     "planner": args.planner,
                 }
 
-            validated_timeframe = validate_timeframe(args.timeframe) if args.timeframe is not None else None
-            validated_owner = validate_owner(args.owner) if args.owner is not None else None
-            validated_category = validate_category(args.category) if args.category is not None else None
+            if args.action == "update":
+                tf_op = (
+                    None
+                    if args.timeframe is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.timeframe)
+                    else ("set", validate_timeframe(args.timeframe))
+                )
+                owner_op = (
+                    None
+                    if args.owner is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.owner)
+                    else ("set", validate_owner(args.owner))
+                )
+                category_op = (
+                    None
+                    if args.category is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.category)
+                    else ("set", validate_category(args.category))
+                )
+                validated_timeframe = None
+                validated_owner = None
+                validated_category = None
+            else:
+                tf_op = owner_op = category_op = None
+                validated_timeframe = validate_timeframe(args.timeframe) if args.timeframe is not None else None
+                validated_owner = validate_owner(args.owner) if args.owner is not None else None
+                validated_category = validate_category(args.category) if args.category is not None else None
             if args.weight is not None and not 1 <= args.weight <= 100:
                 raise ValueError("Weight must be 1..100")
 
@@ -599,9 +642,9 @@ def main(argv=None) -> int:
                         raise ValueError("Item ID required for update")
                     if (
                         args.new_text is None
-                        and validated_timeframe is None
-                        and validated_owner is None
-                        and validated_category is None
+                        and tf_op is None
+                        and owner_op is None
+                        and category_op is None
                         and args.weight is None
                     ):
                         raise ValueError(
@@ -615,12 +658,21 @@ def main(argv=None) -> int:
                         item["text"] = updated_text
                     if args.weight is not None:
                         item["weight"] = args.weight
-                    if validated_timeframe is not None:
-                        item["timeframe"] = validated_timeframe
-                    if validated_owner is not None:
-                        item["owner"] = validated_owner
-                    if validated_category is not None:
-                        item["category"] = validated_category
+                    if tf_op is not None:
+                        if tf_op[0] == "clear":
+                            item.pop("timeframe", None)
+                        else:
+                            item["timeframe"] = tf_op[1]
+                    if owner_op is not None:
+                        if owner_op[0] == "clear":
+                            item.pop("owner", None)
+                        else:
+                            item["owner"] = owner_op[1]
+                    if category_op is not None:
+                        if category_op[0] == "clear":
+                            item.pop("category", None)
+                        else:
+                            item["category"] = category_op[1]
                 elif args.action == "name":
                     if not args.text.strip() or len(args.text) > 200:
                         raise ValueError("Name must contain 1..200 characters")

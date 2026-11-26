@@ -36,10 +36,10 @@ Jede Änderung benötigt die zuletzt gelesene `--if-revision N` (erstmals 0). Be
 | Nutzerbefehl | CLI-Aktion / Bedeutung |
 |---|---|
 | `/agenda`, `/show-agenda` | `show`: frische Agenda samt Zustand laden |
-| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--exact] [--include-ongoing] [--owner lukas|team|shared] [--category TAG] [--group-by timeframe|category|owner] [--output PFAD]`: sortierte bzw. thematische Auszüge erzeugen |
+| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--exact] [--include-ongoing] [--owner user|self|team|shared|SLUG] [--category TAG] [--group-by timeframe|category|owner] [--output PFAD]`: sortierte bzw. thematische Auszüge erzeugen |
 | `/agenda set TEXT` | `set 'Punkt eins; Punkt zwei'`: Agenda ersetzen, neue Agenda-ID, zunächst inaktiv; bisheriger Stand im Verlauf |
 | `/agenda add TEXT` | `add 'TEXT' [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: einen Punkt mit der nächsten freien ID anhängen (nie wiederverwendet; Standardgewicht 50); Agenda-ID, Aktivität, Deadline und übrige Punkte bleiben erhalten |
-| `/agenda update ID` | `update ID [--text TEXT] [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: bestehenden Punkt gezielt aktualisieren; bestehende `plans`, `status` und nicht übergebene Felder bleiben erhalten |
+| `/agenda update ID` | `update ID [--text TEXT] [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: bestehenden Punkt gezielt aktualisieren (`""`, `none` oder `-` entfernt ein optionales Metadatenfeld); bestehende `plans`, `status` und nicht übergebene Felder bleiben erhalten |
 | `/agenda name NAME` | `name 'NAME'` |
 | `/agenda-deadline DATUM` | `deadline '2027-01-31'` oder Zeitstempel mit Zeitzone |
 | `/agenda on` | `on`: benötigt Punkte und eine zukünftige Deadline |
@@ -55,7 +55,7 @@ Eine reine Datumsangabe gilt einschließlich dieses Tages in UTC. Nenne diese Ze
 
 Optionale Metadaten je Agendapunkt (vollständig rückwärtskompatibel zu `agent-agenda.v1`):
 - `timeframe`: flexibel validierter Zeitraum — Monat (`YYYY-MM`), Quartal (`YYYY-Q1`..`Q4`), Halbjahr (`YYYY-H1`/`YYYY-H2`), Jahr (`YYYY`), Bereich (`YYYY..YYYY`, `YYYY-MM..YYYY-MM`), offenes Startfenster (`YYYY+`, `YYYY-MM+`) oder `ongoing`.
-- `owner`: Zuständigkeit (`lukas` | `team` | `shared`).
+- `owner`: Zuständigkeit — neutrale Standardrollen (`user`, `self`, `team`, `shared`) oder ein kleingeschriebener Owner-Slug (`[a-z0-9][a-z0-9_-]{0,49}`).
 - `category`: kurzes Themen-Tag (z. B. `technik`, `finanzen`, `office-business`, `gesundheit`, `auto`, `privat`, `studium`, `medien`, `wohnen`).
 
 ## Auszüge & Ausgabeformate (`chat` / `.md` / `.pdf`)
@@ -65,7 +65,7 @@ Optionale Metadaten je Agendapunkt (vollständig rückwärtskompatibel zu `agent
 - **Monatsauszug im Chat:** `python scripts/agenda.py summary --timeframe 2026-12`
 - **Jahres- & Themenauszug:** `python scripts/agenda.py summary --timeframe 2027 --group-by category` (oder `--group-by owner`)
 - **Export als `.md` (oder `.json`):** `--output /PFAD/auszug-2026-12.md` schreibt die gerenderte Ausgabe atomar in UTF-8.
-- **Export als `.pdf`:** zuerst über `--output /PFAD/auszug.md` eine Markdown-Datei schreiben und anschließend ein vorhandenes lokales Markdown-zu-PDF-Werkzeug verwenden (z. B. `fc_md_to_pdf` oder `cc_md_to_pdf`; keine zusätzliche Python-Abhängigkeit im Kern).
+- **Export als `.pdf`:** zuerst über `--output /PFAD/auszug.md` eine Markdown-Datei schreiben und anschließend ein vorhandenes lokales Markdown-zu-PDF-Konvertierungswerkzeug verwenden (keine zusätzliche Python-Abhängigkeit im Kern).
 
 ## Hierarchie und Planverknüpfung
 
