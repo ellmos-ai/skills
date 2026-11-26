@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import calendar
 import copy
 import hashlib
 import json
@@ -14,6 +15,142 @@ import tempfile
 import uuid
 from datetime import date, datetime, time, timezone
 from pathlib import Path
+
+VALID_OWNERS = ("user", "self", "team", "shared")
+VALID_SUMMARY_FORMATS = ("markdown", "text", "json")
+VALID_GROUP_BY = ("timeframe", "category", "owner")
+_OWNER_ORDER = {"user": 0, "self": 1, "team": 2, "shared": 3}
+_CLEAR_SENTINELS = frozenset({"", "-", "none"})
+_EMPTY_GROUP_HEADINGS = {
+    "timeframe": "Ohne Zeitraum",
+    "category": "Ohne Kategorie",
+    "owner": "Ohne Zuständigkeit",
+}
+_TIMEFRAME_ATOM = re.compile(r"^(\d{4})(?:-(?:(0[1-9]|1[0-2])|Q([1-4])|H([12])))?$")
+_OWNER_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,49}$")
+_CATEGORY_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,49}$")
+
+
+def _is_clear_sentinel(value: str) -> bool:
+    if not isinstance(value, str):
+        return False
+    return value.strip().lower() in _CLEAR_SENTINELS
+
+
+def _parse_timeframe_atom(atom: str) -> tuple[date, date]:
+    match = _TIMEFRAME_ATOM.fullmatch(atom)
+    if not match:
+        raise ValueError(f"Invalid timeframe: {atom!r}")
+    year = int(match.group(1))
+    if not 1900 <= year <= 2999:
+        raise ValueError(f"Timeframe year out of range: {atom!r}")
+    if match.group(2):
+        month = int(match.group(2))
+        return date(year, month, 1), date(year, month, calendar.monthrange(year, month)[1])
+    if match.group(3):
+        quarter = int(match.group(3))
+        m1 = 3 * (quarter - 1) + 1
+        m2 = 3 * quarter
+        return date(year, m1, 1), date(year, m2, calendar.monthrange(year, m2)[1])
+    if match.group(4):
+        half = int(match.group(4))
+        m1, m2 = (1, 6) if half == 1 else (7, 12)
+        return date(year, m1, 1), date(year, m2, calendar.monthrange(year, m2)[1])
+    return date(year, 1, 1), date(year, 12, 31)
+
+
+def validate_timeframe(value: str) -> str:
+    if not isinstance(value, str):
+        raise ValueError("Timeframe must be a string")
+    text = value.strip()
+    if not text or len(text) > 32:
+        raise ValueError("Timeframe must contain 1..32 characters")
+    if text == "ongoing":
+        return text
+    if ".." in text:
+        parts = text.split("..")
+        if len(parts) != 2 or not parts[0] or not parts[1]:
+            raise ValueError(f"Invalid timeframe range: {text!r}")
+        s1, e1 = _parse_timeframe_atom(parts[0])
+        s2, e2 = _parse_timeframe_atom(parts[1])
+        if s1 > s2 or e1 > e2:
+            raise ValueError(f"Reversed timeframe range: {text!r}")
+        return text
+    if text.endswith("+"):
+        _parse_timeframe_atom(text[:-1])
+        return text
+    _parse_timeframe_atom(text)
+    return text
+
+
+def validate_owner(value: str) -> str:
+    if not isinstance(value, str):
+        raise ValueError("Owner must be a string")
+    text = value.strip()
+    if text.lower() in _CLEAR_SENTINELS or not _OWNER_RE.fullmatch(text):
+        raise ValueError(
+            f"Owner must be one of {', '.join(VALID_OWNERS)} or a lowercase slug ([a-z0-9][a-z0-9_-]{{0,49}})"
+        )
+    return text
+
+
+def validate_category(value: str) -> str:
+    if not isinstance(value, str):
+        raise ValueError("Category must be a string")
+    text = value.strip().lower()
+    if text in _CLEAR_SENTINELS or not _CATEGORY_RE.fullmatch(text):
+        raise ValueError("Category must be 1..50 tag characters ([a-z0-9][a-z0-9_-]*)")
+    return text
+
+
+def _timeframe_bounds(text: str) -> tuple[date | None, date | None, bool, bool]:
+    if text == "ongoing":
+        return None, None, True, True
+    if ".." in text:
+        left, right = text.split("..", 1)
+        s1, _ = _parse_timeframe_atom(left)
+        _, e2 = _parse_timeframe_atom(right)
+        return s1, e2, False, False
+    if text.endswith("+"):
+        s1, e1 = _parse_timeframe_atom(text[:-1])
+        return s1, e1, True, False
+    s1, e1 = _parse_timeframe_atom(text)
+    return s1, e1, False, False
+
+
+def _timeframe_sort_key(tf: str | None) -> tuple:
+    if not tf:
+        return (2, date.max, date.max, 0, "")
+    if tf == "ongoing":
+        return (1, date.max, date.max, 1, "ongoing")
+    s1, anchor_end, is_open, _ = _timeframe_bounds(tf)
+    return (0, anchor_end, s1, 1 if is_open else 0, tf)
+
+
+def _timeframe_matches(
+    item_tf: str | None,
+    filter_tf: str,
+    *,
+    exact: bool = False,
+    include_ongoing: bool = False,
+) -> bool:
+    if not item_tf:
+        return False
+    if item_tf == "ongoing":
+        return filter_tf == "ongoing" or include_ongoing
+    if filter_tf == "ongoing":
+        return False
+    if exact:
+        return item_tf == filter_tf
+    if item_tf == filter_tf:
+        return True
+    i_start, i_anchor_end, i_open, _ = _timeframe_bounds(item_tf)
+    f_start, f_anchor_end, f_open, _ = _timeframe_bounds(filter_tf)
+    assert i_start is not None and f_start is not None
+    assert i_anchor_end is not None and f_anchor_end is not None
+    i_eff_end = date.max if i_open else i_anchor_end
+    f_eff_end = date.max if f_open else f_anchor_end
+    return i_start <= f_eff_end and f_start <= i_eff_end
 
 
 def now() -> datetime:
@@ -87,6 +224,19 @@ def read(root: Path) -> dict:
         ):
             raise ValueError("Invalid agenda item")
         ids.add(item["id"])
+        if "timeframe" in item and item["timeframe"] is not None:
+            if not isinstance(item["timeframe"], str) or validate_timeframe(item["timeframe"]) != item["timeframe"]:
+                raise ValueError("Invalid agenda item timeframe")
+        if "owner" in item and item["owner"] is not None:
+            if not isinstance(item["owner"], str) or validate_owner(item["owner"]) != item["owner"]:
+                raise ValueError("Invalid agenda item owner")
+        if "category" in item and item["category"] is not None:
+            if (
+                not isinstance(item["category"], str)
+                or item["category"].lower() in _CLEAR_SENTINELS
+                or not _CATEGORY_RE.fullmatch(item["category"])
+            ):
+                raise ValueError("Invalid agenda item category")
         for link in item["plans"]:
             if (
                 not isinstance(link, dict)
@@ -108,17 +258,22 @@ def view(data: dict, at: datetime | None = None) -> dict:
     return result
 
 
-def atomic_write(path: Path, data: dict) -> None:
+def atomic_write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     fd, name = tempfile.mkstemp(dir=path.parent, prefix=".agenda-", suffix=".tmp")
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
-            json.dump(data, stream, ensure_ascii=False, indent=2)
+            stream.write(text)
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(name, path)
     finally:
         if Path(name).exists():
             Path(name).unlink()
+
+
+def atomic_write(path: Path, data: dict) -> None:
+    atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2))
 
 
 def mutate(root: Path, expected: int, change) -> dict:
@@ -165,6 +320,149 @@ def plans(data: dict, item_id: str = "") -> list[dict]:
     return result
 
 
+def _group_sort_key(group_by: str, key: str | None) -> tuple:
+    if group_by == "timeframe":
+        return _timeframe_sort_key(key)
+    if group_by == "owner":
+        return (key is None, _OWNER_ORDER.get(key or "", 99), key or "")
+    return (key is None, key or "")
+
+
+def summary(
+    data: dict,
+    timeframe: str | None = None,
+    owner: str | None = None,
+    category: str | None = None,
+    *,
+    group_by: str = "timeframe",
+    exact: bool = False,
+    include_ongoing: bool = False,
+) -> dict:
+    if group_by not in VALID_GROUP_BY:
+        raise ValueError(f"group_by must be one of: {', '.join(VALID_GROUP_BY)}")
+    current = view(data)
+    tf_filter = validate_timeframe(timeframe) if timeframe is not None else None
+    owner_filter = validate_owner(owner) if owner is not None else None
+    category_filter = validate_category(category) if category is not None else None
+
+    matched = []
+    for item in current["items"]:
+        if tf_filter is not None and not _timeframe_matches(
+            item.get("timeframe"),
+            tf_filter,
+            exact=exact,
+            include_ongoing=include_ongoing,
+        ):
+            continue
+        if owner_filter is not None and item.get("owner") != owner_filter:
+            continue
+        if category_filter is not None and item.get("category") != category_filter:
+            continue
+        matched.append(item)
+
+    grouped: dict[str | None, list[dict]] = {}
+    for item in matched:
+        key = item.get(group_by) or None
+        grouped.setdefault(key, []).append(item)
+
+    groups = []
+    for group_key in sorted(grouped, key=lambda k: _group_sort_key(group_by, k)):
+        if group_by == "timeframe":
+            items_sorted = sorted(grouped[group_key], key=lambda item: (-item["weight"], int(item["id"][1:])))
+        else:
+            items_sorted = sorted(
+                grouped[group_key],
+                key=lambda item: (-item["weight"], _timeframe_sort_key(item.get("timeframe") or None), int(item["id"][1:])),
+            )
+        groups.append({group_by: group_key, "items": items_sorted})
+
+    return {
+        "revision": current["revision"],
+        "agenda_id": current["agenda_id"],
+        "name": current["name"],
+        "enabled": current["enabled"],
+        "expired": current["expired"],
+        "active": current["active"],
+        "deadline": current["deadline"],
+        "group_by": group_by,
+        "filters": {
+            "timeframe": tf_filter,
+            "owner": owner_filter,
+            "category": category_filter,
+            "exact": exact,
+            "include_ongoing": include_ongoing,
+        },
+        "total_items": len(current["items"]),
+        "matched_items": len(matched),
+        "pending_items": sum(1 for item in matched if item["status"] == "pending"),
+        "done_items": sum(1 for item in matched if item["status"] == "done"),
+        "groups": groups,
+    }
+
+
+def _format_summary_item_meta(item: dict, group_by: str) -> str:
+    meta = [f"w={item['weight']}"]
+    for field in ("timeframe", "owner", "category"):
+        if field != group_by and item.get(field):
+            meta.append(item[field])
+    if item.get("plans"):
+        meta.append(f"Pläne: {len(item['plans'])}")
+    return " | ".join(meta)
+
+
+def render_summary(data: dict, fmt: str = "markdown") -> str:
+    if fmt not in VALID_SUMMARY_FORMATS:
+        raise ValueError(f"Format must be one of: {', '.join(VALID_SUMMARY_FORMATS)}")
+    if fmt == "json":
+        return json.dumps(data, ensure_ascii=False, indent=2)
+
+    group_by = data.get("group_by", "timeframe")
+    empty_heading = _EMPTY_GROUP_HEADINGS.get(group_by, "Ohne Zuordnung")
+    status_label = "aktiv" if data["active"] else ("abgelaufen" if data["expired"] else "inaktiv")
+    deadline_label = data["deadline"] or "keine"
+    meta_line = (
+        f"Status: {status_label} | Revision: {data['revision']} | Frist: {deadline_label} | "
+        f"Punkte: {data['matched_items']}/{data['total_items']} "
+        f"(offen: {data['pending_items']}, erledigt: {data['done_items']})"
+    )
+    active_filters = [
+        f"{k}={v}"
+        for k, v in data["filters"].items()
+        if v is not None and v is not False
+    ]
+    if group_by != "timeframe":
+        active_filters.append(f"group_by={group_by}")
+
+    if fmt == "markdown":
+        lines = [f"# {data['name']}", "", meta_line]
+        if active_filters:
+            lines.append(f"Filter: {', '.join(active_filters)}")
+        if not data["groups"]:
+            lines.extend(["", "_Keine passenden Punkte._"])
+        for group in data["groups"]:
+            heading = group.get(group_by) or empty_heading
+            lines.extend(["", f"## {heading}"])
+            for item in group["items"]:
+                mark = "x" if item["status"] == "done" else " "
+                meta_str = _format_summary_item_meta(item, group_by)
+                lines.append(f"- [{mark}] **{item['id']}** ({meta_str}) {item['text']}")
+        return "\n".join(lines)
+
+    lines = [data["name"], meta_line]
+    if active_filters:
+        lines.append(f"Filter: {', '.join(active_filters)}")
+    if not data["groups"]:
+        lines.extend(["", "Keine passenden Punkte."])
+    for group in data["groups"]:
+        heading = group.get(group_by) or empty_heading
+        lines.extend(["", f"[{heading}]"])
+        for item in group["items"]:
+            mark = "x" if item["status"] == "done" else " "
+            meta_str = _format_summary_item_meta(item, group_by)
+            lines.append(f"  [{mark}] {item['id']} ({meta_str}) {item['text']}")
+    return "\n".join(lines)
+
+
 def main(argv=None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -173,14 +471,37 @@ def main(argv=None) -> int:
         "action",
         nargs="?",
         default="show",
-        choices=["show", "set", "add", "name", "on", "off", "deadline", "done", "pending", "prios", "plans"],
+        choices=[
+            "show",
+            "set",
+            "add",
+            "update",
+            "summary",
+            "name",
+            "on",
+            "off",
+            "deadline",
+            "done",
+            "pending",
+            "prios",
+            "plans",
+        ],
     )
     parser.add_argument("text", nargs="?", default="")
     parser.add_argument("--root", type=Path)
     parser.add_argument("--profile", type=Path)
     parser.add_argument("--if-revision", type=int)
     parser.add_argument("--note", default="")
-    parser.add_argument("--weight", type=int, default=50)
+    parser.add_argument("--weight", type=int, default=None)
+    parser.add_argument("--text", dest="new_text", default=None)
+    parser.add_argument("--timeframe", default=None)
+    parser.add_argument("--owner", default=None)
+    parser.add_argument("--category", default=None)
+    parser.add_argument("--format", dest="output_format", default="markdown")
+    parser.add_argument("--group-by", dest="group_by", default="timeframe")
+    parser.add_argument("--exact", action="store_true")
+    parser.add_argument("--include-ongoing", dest="include_ongoing", action="store_true")
+    parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--path", type=Path)
     parser.add_argument("--kind", choices=["plan", "plan-register", "policy-register"], default="plan")
     parser.add_argument("--planner", default="")
@@ -189,6 +510,41 @@ def main(argv=None) -> int:
         root = state_root(args.root, profile(args.profile))
         if args.action == "show":
             result = view(read(root))
+        elif args.action == "summary":
+            if args.text.strip():
+                raise ValueError("summary takes filter flags (--timeframe, --owner, --category, --group-by, --format)")
+            summary_data = summary(
+                read(root),
+                timeframe=args.timeframe,
+                owner=args.owner,
+                category=args.category,
+                group_by=args.group_by,
+                exact=args.exact,
+                include_ongoing=args.include_ongoing,
+            )
+            rendered = render_summary(summary_data, fmt=args.output_format)
+            if args.output is not None:
+                out_path = args.output.expanduser()
+                if out_path.exists() and out_path.is_dir():
+                    raise ValueError("Output path must be a file, not a directory")
+                payload = rendered if rendered.endswith("\n") else rendered + "\n"
+                atomic_write_text(out_path, payload)
+                print(
+                    json.dumps(
+                        {
+                            "output": str(out_path.resolve()),
+                            "format": args.output_format,
+                            "group_by": summary_data["group_by"],
+                            "matched_items": summary_data["matched_items"],
+                            "bytes": len(payload.encode("utf-8")),
+                        },
+                        ensure_ascii=False,
+                        indent=2,
+                    )
+                )
+                return 0
+            print(rendered)
+            return 0
         elif args.action == "plans" and args.path is None:
             current = read(root)
             result = {"revision": current["revision"], "plans": plans(current, args.text)}
@@ -214,6 +570,39 @@ def main(argv=None) -> int:
                     "planner": args.planner,
                 }
 
+            if args.action == "update":
+                tf_op = (
+                    None
+                    if args.timeframe is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.timeframe)
+                    else ("set", validate_timeframe(args.timeframe))
+                )
+                owner_op = (
+                    None
+                    if args.owner is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.owner)
+                    else ("set", validate_owner(args.owner))
+                )
+                category_op = (
+                    None
+                    if args.category is None
+                    else ("clear", None)
+                    if _is_clear_sentinel(args.category)
+                    else ("set", validate_category(args.category))
+                )
+                validated_timeframe = None
+                validated_owner = None
+                validated_category = None
+            else:
+                tf_op = owner_op = category_op = None
+                validated_timeframe = validate_timeframe(args.timeframe) if args.timeframe is not None else None
+                validated_owner = validate_owner(args.owner) if args.owner is not None else None
+                validated_category = validate_category(args.category) if args.category is not None else None
+            if args.weight is not None and not 1 <= args.weight <= 100:
+                raise ValueError("Weight must be 1..100")
+
             def change(data):
                 if args.action == "set":
                     entries = [s.strip() for s in re.split(r"[;\n]+", args.text) if s.strip()]
@@ -229,17 +618,61 @@ def main(argv=None) -> int:
                         ],
                     )
                 elif args.action == "add":
-                    text = args.text.strip()
+                    raw_text = args.text if args.text.strip() else (args.new_text or "")
+                    text = raw_text.strip()
                     if not text or len(text) > 2000:
                         raise ValueError("Item text must contain 1..2000 characters")
-                    if len(data["items"]) >= 100 or not 1 <= args.weight <= 100:
+                    weight = 50 if args.weight is None else args.weight
+                    if len(data["items"]) >= 100 or not 1 <= weight <= 100:
                         raise ValueError("At most 100 items; weight must be 1..100")
                     number = max((int(i["id"][1:]) for i in data["items"]), default=0) + 1
                     if number > 999:
                         raise ValueError("No free item ID left")
-                    data["items"].append(
-                        {"id": f"A{number}", "text": text, "weight": args.weight, "status": "pending", "plans": []}
-                    )
+                    new_item = {"id": f"A{number}", "text": text, "weight": weight, "status": "pending", "plans": []}
+                    if validated_timeframe is not None:
+                        new_item["timeframe"] = validated_timeframe
+                    if validated_owner is not None:
+                        new_item["owner"] = validated_owner
+                    if validated_category is not None:
+                        new_item["category"] = validated_category
+                    data["items"].append(new_item)
+                elif args.action == "update":
+                    item_id = args.text.strip()
+                    if not item_id:
+                        raise ValueError("Item ID required for update")
+                    if (
+                        args.new_text is None
+                        and tf_op is None
+                        and owner_op is None
+                        and category_op is None
+                        and args.weight is None
+                    ):
+                        raise ValueError(
+                            "Supply at least one field to update (--text, --timeframe, --owner, --category, --weight)"
+                        )
+                    item = select(data, item_id)
+                    if args.new_text is not None:
+                        updated_text = args.new_text.strip()
+                        if not updated_text or len(updated_text) > 2000:
+                            raise ValueError("Item text must contain 1..2000 characters")
+                        item["text"] = updated_text
+                    if args.weight is not None:
+                        item["weight"] = args.weight
+                    if tf_op is not None:
+                        if tf_op[0] == "clear":
+                            item.pop("timeframe", None)
+                        else:
+                            item["timeframe"] = tf_op[1]
+                    if owner_op is not None:
+                        if owner_op[0] == "clear":
+                            item.pop("owner", None)
+                        else:
+                            item["owner"] = owner_op[1]
+                    if category_op is not None:
+                        if category_op[0] == "clear":
+                            item.pop("category", None)
+                        else:
+                            item["category"] = category_op[1]
                 elif args.action == "name":
                     if not args.text.strip() or len(args.text) > 200:
                         raise ValueError("Name must contain 1..200 characters")

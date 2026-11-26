@@ -183,6 +183,268 @@ class AgendaTests(unittest.TestCase):
         self.assertEqual([i["id"] for i in a.read(self.root)["items"]], ["A7", "A2", "A8"])
         self.assertEqual(self.cli("add", "Y", if_revision=1)[0], 2)
 
+    def _raw_cli(self, *args):
+        cmd = [sys.executable, str(BASE / "agenda.py"), *args, "--root", str(self.root)]
+        return subprocess.run(cmd, capture_output=True, encoding="utf-8")
+
+    def test_add_with_metadata_and_backward_compatibility(self):
+        self.active()
+        code, res = self.cli(
+            "add",
+            "Winterreifen kaufen",
+            if_revision=3,
+            weight=85,
+            timeframe="2026-12",
+            owner="user",
+            category="auto",
+        )
+        self.assertEqual(code, 0)
+        added = [i for i in res["items"] if i["id"] == "A3"][0]
+        self.assertEqual(added["timeframe"], "2026-12")
+        self.assertEqual(added["owner"], "user")
+        self.assertEqual(added["category"], "auto")
+        # Legacy items without metadata remain untouched and omit optional keys.
+        legacy = [i for i in res["items"] if i["id"] == "A1"][0]
+        self.assertNotIn("timeframe", legacy)
+        self.assertNotIn("owner", legacy)
+        self.assertNotIn("category", legacy)
+
+    def test_update_preserves_plans_status_and_unset_fields(self):
+        self.active()
+        plan = Path(self.tmp.name) / "plan.md"
+        plan.write_text("my plan", encoding="utf-8")
+        self.assertEqual(self.cli("plans", "A1", path=plan, planner="writing-plans", if_revision=3)[0], 0)
+        self.assertEqual(self.cli("done", "A1", if_revision=4, note="erledigt")[0], 0)
+        code, res = self.cli(
+            "update",
+            "A1",
+            if_revision=5,
+            timeframe="2027-01",
+            owner="shared",
+            category="technik",
+        )
+        self.assertEqual(code, 0)
+        a1 = [i for i in res["items"] if i["id"] == "A1"][0]
+        self.assertEqual(a1["text"], "GUI fertigstellen")
+        self.assertEqual(a1["weight"], 100)
+        self.assertEqual(a1["status"], "done")
+        self.assertEqual(a1["note"], "erledigt")
+        self.assertEqual(len(a1["plans"]), 1)
+        self.assertEqual(a1["timeframe"], "2027-01")
+        self.assertEqual(a1["owner"], "shared")
+        self.assertEqual(a1["category"], "technik")
+
+        # Partial update of text and weight keeps timeframe/owner/category intact.
+        r2 = self._raw_cli("update", "A1", "--if-revision", "6", "--text", "GUI v2", "--weight", "95")
+        self.assertEqual(r2.returncode, 0, r2.stderr)
+        res2 = json.loads(r2.stdout)
+        a1_2 = [i for i in res2["items"] if i["id"] == "A1"][0]
+        self.assertEqual(a1_2["text"], "GUI v2")
+        self.assertEqual(a1_2["weight"], 95)
+        self.assertEqual(a1_2["timeframe"], "2027-01")
+        self.assertEqual(a1_2["owner"], "shared")
+        self.assertEqual(a1_2["category"], "technik")
+        # Revision conflict and no-op update rejected cleanly.
+        self.assertEqual(self.cli("update", "A1", if_revision=5, timeframe="2027-02")[0], 2)
+        self.assertEqual(self.cli("update", "A1", if_revision=7)[0], 2)
+        # History preserves pre-update revision 5.
+        hist5 = json.loads((self.root / "history/00000005.json").read_text(encoding="utf-8"))
+        self.assertNotIn("timeframe", hist5["items"][0])
+
+    def test_update_clear_sentinels_for_optional_metadata(self):
+        self.active()
+        code, _ = self.cli(
+            "add",
+            "Metadaten-Test",
+            if_revision=3,
+            timeframe="2027-03",
+            owner="self",
+            category="finanzen",
+        )
+        self.assertEqual(code, 0)
+
+        # Clear timeframe with empty string "".
+        r1 = self._raw_cli("update", "A3", "--if-revision", "4", "--timeframe", "")
+        self.assertEqual(r1.returncode, 0, r1.stderr)
+        a3_1 = [i for i in json.loads(r1.stdout)["items"] if i["id"] == "A3"][0]
+        self.assertNotIn("timeframe", a3_1)
+        self.assertEqual(a3_1["owner"], "self")
+        self.assertEqual(a3_1["category"], "finanzen")
+
+        # Clear owner with case-insensitive "NONE".
+        r2 = self._raw_cli("update", "A3", "--if-revision", "5", "--owner", "NONE")
+        self.assertEqual(r2.returncode, 0, r2.stderr)
+        a3_2 = [i for i in json.loads(r2.stdout)["items"] if i["id"] == "A3"][0]
+        self.assertNotIn("owner", a3_2)
+        self.assertEqual(a3_2["category"], "finanzen")
+
+        # Clear category with "-" and verify idempotent "none" on already-unset timeframe.
+        r3 = self._raw_cli("update", "A3", "--if-revision", "6", "--category", "-", "--timeframe", "none")
+        self.assertEqual(r3.returncode, 0, r3.stderr)
+        a3_3 = [i for i in json.loads(r3.stdout)["items"] if i["id"] == "A3"][0]
+        self.assertNotIn("timeframe", a3_3)
+        self.assertNotIn("owner", a3_3)
+        self.assertNotIn("category", a3_3)
+
+        # Clear sentinels remain invalid on add and summary.
+        for bad in ("", "none", "NONE", "-"):
+            self.assertEqual(self._raw_cli("add", "x", "--if-revision", "7", "--owner", bad).returncode, 2)
+            self.assertEqual(self._raw_cli("add", "x", "--if-revision", "7", "--category", bad).returncode, 2)
+            self.assertEqual(self._raw_cli("summary", "--owner", bad).returncode, 2)
+
+    def test_timeframe_owner_category_validation(self):
+        self.seed()
+        for valid_tf in (
+            "2026-12",
+            "2027-Q1",
+            "2027-Q4",
+            "2027",
+            "2027..2029",
+            "2026-12..2027-01",
+            "2026-12+",
+            "2028+",
+            "2027-H1",
+            "2027-H2",
+            "ongoing",
+        ):
+            self.assertEqual(a.validate_timeframe(valid_tf), valid_tf)
+
+        for invalid_tf in ("", "2026-13", "2026-00", "2027-Q5", "2027-H3", "2028..2027", "soon", "2027-1"):
+            with self.assertRaises(ValueError):
+                a.validate_timeframe(invalid_tf)
+
+        for valid_owner in ("user", "self", "team", "shared", "ops-team", "partner_1", "dev01"):
+            self.assertEqual(a.validate_owner(valid_owner), valid_owner)
+
+        for invalid_owner in ("", "-", "none", "NONE", "UpperCase", "bad space", "-leading", "a" * 51, "user@org"):
+            with self.assertRaises(ValueError):
+                a.validate_owner(invalid_owner)
+
+        self.assertEqual(self.cli("add", "custom slug", if_revision=1, owner="ops-team")[0], 0)
+        self.assertEqual(self.cli("add", "bad tf", if_revision=2, timeframe="2027-13")[0], 2)
+        self.assertEqual(self.cli("add", "bad owner", if_revision=2, owner="Bad Owner")[0], 2)
+        self.assertEqual(self.cli("add", "bad cat", if_revision=2, category="invalid space")[0], 2)
+        # Corrupt state validation on read.
+        d = a.read(self.root)
+        d["items"][0]["owner"] = "Bad Owner"
+        (self.root / "agenda.json").write_text(json.dumps(d), encoding="utf-8")
+        self.assertEqual(self.cli("show")[0], 2)
+
+    def test_summary_sorting_filtering_and_formats(self):
+        self.active()
+        self.cli("add", "Dezember", if_revision=3, weight=80, timeframe="2026-12", owner="user", category="auto")
+        self.cli("add", "Q1", if_revision=4, weight=70, timeframe="2027-Q1", owner="user", category="privat")
+        self.cli("add", "Februar", if_revision=5, weight=75, timeframe="2027-02", owner="shared", category="finanzen")
+        self.cli("add", "Langfrist", if_revision=6, weight=50, timeframe="2027..2029", owner="team", category="netzwerk")
+        self.cli("add", "Laufend", if_revision=7, weight=60, timeframe="ongoing", owner="team", category="technik")
+
+        r_json = self._raw_cli("summary", "--format", "json")
+        self.assertEqual(r_json.returncode, 0, r_json.stderr)
+        parsed = json.loads(r_json.stdout)
+        group_order = [g["timeframe"] for g in parsed["groups"]]
+        self.assertEqual(group_order, ["2026-12", "2027-02", "2027-Q1", "2027..2029", "ongoing", None])
+
+        r_md = self._raw_cli("summary")
+        self.assertEqual(r_md.returncode, 0)
+        self.assertIn("## 2026-12", r_md.stdout)
+        self.assertIn("## Ohne Zeitraum", r_md.stdout)
+        self.assertIn("(w=80 | user | auto)", r_md.stdout)
+
+        r_txt = self._raw_cli("summary", "--format", "text", "--owner", "user", "--timeframe", "2027")
+        self.assertEqual(r_txt.returncode, 0)
+        self.assertIn("[2027-Q1]", r_txt.stdout)
+        self.assertNotIn("Dezember", r_txt.stdout)
+        self.assertNotIn("Februar", r_txt.stdout)
+
+        r_bad = self._raw_cli("summary", "--format", "xml")
+        self.assertEqual(r_bad.returncode, 2)
+
+    def test_hook_compact_metadata(self):
+        self.active()
+        self.cli("add", "Reifen", if_revision=3, weight=90, timeframe="2026-12", owner="user", category="auto")
+        ctx = h.context({"prompt": ""}, "claude", self.settings)
+        self.assertIn('"timeframe": "2026-12"', ctx)
+        self.assertIn('"owner": "user"', ctx)
+        self.assertIn('"category": "auto"', ctx)
+        # Legacy item A1 does not inject empty optional fields.
+        payload_line = [line for line in ctx.splitlines() if "Gemeinsame Agenda (Nutzerdaten" in line][0]
+        facts = json.loads(payload_line.split(": ", 1)[1])
+        a1 = [i for i in facts["items"] if i["id"] == "A1"][0]
+        self.assertNotIn("timeframe", a1)
+
+    def test_summary_overlap_exact_ongoing_groupby_and_output(self):
+        self.active()
+        self.cli("add", "DezExakt", if_revision=3, weight=90, timeframe="2026-12", owner="user", category="auto")
+        self.cli("add", "Uebergang", if_revision=4, weight=95, timeframe="2026-12..2027-01", owner="shared", category="finanzen")
+        self.cli("add", "OffenAbDez", if_revision=5, weight=85, timeframe="2026-12+", owner="team", category="technik")
+        self.cli("add", "Halbjahr2", if_revision=6, weight=70, timeframe="2026-H2", owner="shared", category="privat")
+        self.cli("add", "Jahr27", if_revision=7, weight=80, timeframe="2027", owner="team", category="technik")
+        self.cli("add", "Quartal1", if_revision=8, weight=75, timeframe="2027-Q1", owner="shared", category="finanzen")
+        self.cli("add", "Ab28", if_revision=9, weight=50, timeframe="2028+", owner="self", category="office-business")
+        self.cli("add", "Dauer", if_revision=10, weight=60, timeframe="ongoing", owner="ops-team", category="forschung")
+
+        # 2026-12 overlap matches 2026-12, 2026-12..2027-01, 2026-12+, 2026-H2, but not 2027, 2028+, ongoing.
+        r_dec = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12")
+        self.assertEqual(r_dec.returncode, 0, r_dec.stderr)
+        dec_ids = {i["id"] for g in json.loads(r_dec.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(dec_ids, {"A3", "A4", "A5", "A6"})
+
+        # --exact restricts strictly to 2026-12.
+        r_exact = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12", "--exact")
+        self.assertEqual(r_exact.returncode, 0)
+        exact_ids = {i["id"] for g in json.loads(r_exact.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(exact_ids, {"A3"})
+
+        # --include-ongoing adds ongoing items to bounded query.
+        r_ong = self._raw_cli("summary", "--format", "json", "--timeframe", "2026-12", "--include-ongoing")
+        self.assertEqual(r_ong.returncode, 0)
+        ong_ids = {i["id"] for g in json.loads(r_ong.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(ong_ids, {"A3", "A4", "A5", "A6", "A10"})
+
+        # 2027 overlap matches 2026-12..2027-01, 2026-12+, 2027, 2027-Q1, not 2026-12, 2026-H2, 2028+.
+        r_27 = self._raw_cli("summary", "--format", "json", "--timeframe", "2027")
+        self.assertEqual(r_27.returncode, 0)
+        y27_ids = {i["id"] for g in json.loads(r_27.stdout)["groups"] for i in g["items"]}
+        self.assertEqual(y27_ids, {"A4", "A5", "A7", "A8"})
+
+        # --group-by category & --output atomic export.
+        out_md = Path(self.tmp.name) / "exports" / "agenda-2027.md"
+        r_cat = self._raw_cli(
+            "summary",
+            "--timeframe", "2027",
+            "--group-by", "category",
+            "--format", "markdown",
+            "--output", str(out_md),
+        )
+        self.assertEqual(r_cat.returncode, 0, r_cat.stderr)
+        receipt = json.loads(r_cat.stdout)
+        self.assertEqual(receipt["matched_items"], 4)
+        self.assertEqual(receipt["group_by"], "category")
+        md_text = out_md.read_text(encoding="utf-8")
+        self.assertIn("## finanzen", md_text)
+        self.assertIn("## technik", md_text)
+        self.assertIn("2027-Q1", md_text)
+        self.assertNotIn("Ab28", md_text)
+
+        # --group-by owner in JSON (canonical order: user -> self -> team -> shared -> custom slugs -> None).
+        r_own_q1 = self._raw_cli("summary", "--timeframe", "2027-Q1", "--group-by", "owner", "--format", "json")
+        self.assertEqual(r_own_q1.returncode, 0)
+        own_q1_parsed = json.loads(r_own_q1.stdout)
+        self.assertEqual(own_q1_parsed["group_by"], "owner")
+        self.assertEqual([g["owner"] for g in own_q1_parsed["groups"]], ["team", "shared"])
+
+        r_own_all = self._raw_cli("summary", "--group-by", "owner", "--format", "json")
+        self.assertEqual(r_own_all.returncode, 0)
+        own_all_parsed = json.loads(r_own_all.stdout)
+        self.assertEqual(
+            [g["owner"] for g in own_all_parsed["groups"]],
+            ["user", "self", "team", "shared", "ops-team", None],
+        )
+
+        # Invalid --group-by or directory --output returns exit 2 JSON error.
+        self.assertEqual(self._raw_cli("summary", "--group-by", "invalid").returncode, 2)
+        self.assertEqual(self._raw_cli("summary", "--output", str(self.tmp.name)).returncode, 2)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,7 +1,7 @@
 {
   "schema": "ellmos.skill-config.v1",
   "skill": "agenda-setting",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "einstellungen": {},
   "lernvertrag": {
     "user_ist_koenig": true,
