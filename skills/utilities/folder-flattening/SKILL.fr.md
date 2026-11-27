@@ -5,79 +5,90 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-11-22
-description: "Utiliser pour aplatir des arborescences de répertoires profondément imbriquées en une structure claire et lisible par machine (ex. 'aplatir la hiérarchie de dossiers', 'réduire les sous-dossiers imbriqués', /folder-flattening). Exécute un aplatissement déterministe avec gestion des collisions et fusion sécurisée. Ne PAS utiliser pour déplacer de simples fichiers individuels (utiliser batch-file-ops)."
+description: "À utiliser lorsque des arborescences de dossiers profondément imbriquées doivent être transformées en une hiérarchie plate et lisible par machine (ex. 'aplatir l'arborescence de dossiers', 'résoudre les répertoires imbriqués', /folder-flattening). Exécute un aplatissement déterministe des dossiers avec analyse par triplets et fusion de fichiers sans conflit. Ne PAS utiliser pour le simple déplacement de quelques fichiers isolés (utiliser batch-file-ops)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: utilities
-tags: [folder, flattening, filesystem, bash, reorganization, cleanup]
+tags: [ordner, flattening, filesystem, bash, reorganisation, cleanup]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/ordner-flattening.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/workflows/ordner-flattening.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
-
 
 
 <img src="banner.png" width="100%" alt="folder-flattening banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `folder-flattening`.
 
-# Workflow: Folder Flattening (English)
+# Workflow : Aplatissement de dossiers (Folder-Flattening)
 
-Goal: Convert nested folder structures into a flat, machine-readable structure.
-Advantage: No more clicking through directories — search via database (Verzeichnis.db) instead.
-Duplicates are allowed when thematically meaningful.
-
----
-
-## Phase Overview
-
-| Phase | What Happens | Script Section |
-|-------|-------------|----------------|
-| 1 | Flatten: Pull all subfolders to one level | `phase_flatten` |
-| 2 | Shorten: Truncate long path names to last segment, merge on conflicts | `phase_shorten` |
-| 3 | Clean up: Resolve multiple underscores (`___`), remove trailing `_` | `phase_cleanup_underscores` |
-| 4 | Group: Number folders, CD folders, short names into collection folders | `phase_group_problematic` |
-| 5 | Triplet analysis: Sliding groups of 3, shortest name as merge target | `phase_tripel_merge` |
-| 6 | Media format merge: Consolidate folders by file type (template) | `phase_media_merge` |
-| 7 | Clean up: Delete empty folders | `phase_cleanup_empty` |
+Objectif : transformer des arborescences de dossiers imbriquées en une structure plate et lisible par machine.
+Avantage : plus besoin de cliquer à travers les niveaux, mais recherche directe via base de données (`Verzeichnis.db`).
+Les doublons sont autorisés lorsqu'ils sont pertinents sur le plan thématique.
 
 ---
 
-## Important Rules
+## Vue d'ensemble des phases
 
-### Triplet Analysis Matching
-- **Substring**: `Education` in `EducationalBrochures` -> merge into `Education`
-- **Plural/Umlaut**: `Room` = `Rooms`, `Part` = `Parts`, `Book` = `Books`
-- **First word**: `Autism ADHD` matches `Autism Career` (same beginning)
-
-### Minimum Length
-- Single-word name without spaces: **at least 8 characters** (prevents `Hand`, `House`, `Form`)
-- With spaces (e.g., `ICF Catalog`): **from 3 characters OK**
-- This keeps `ICF`, `ASD Women` etc. permitted
-
-### Restart After Merge
-After each merge, the folder list is reloaded and restarted at the merge target.
-This way, e.g., `Autism` collects all extensions before moving on.
+| Phase | Ce qui se passe | Section du script |
+|-------|-----------------|-------------------|
+| 1 | Aplatir : ramener tous les sous-dossiers au même niveau | `phase_flatten` |
+| 2 | Raccourcir : réduire les longs noms de chemin au dernier segment, fusionner en cas de conflit | `phase_shorten` |
+| 3 | Nettoyer : supprimer les soulignements multiples (`___`), retirer les `_` en fin de nom | `phase_cleanup_underscores` |
+| 4 | Regrouper : dossiers numériques, dossiers de CD et noms courts dans des dossiers collecteurs | `phase_group_problematic` |
+| 5 | Analyse par triplets : groupes glissants de 3, le nom le plus court devient cible de fusion | `phase_tripel_merge` |
+| 6 | Fusion par format média : regrouper les dossiers selon le type de fichier (modèle) | `phase_media_merge` |
+| 7 | Ranger : supprimer les dossiers vides | `phase_cleanup_empty` |
 
 ---
 
-## Media Format Merge (Template System)
+## Règles importantes
 
-Phase 6 uses a template array `MEDIA_TYPES`. Each entry defines:
-- Target folder (with `_` prefix)
-- File extensions belonging to this type
+### Correspondance dans l'analyse par triplets
+- **Sous-chaîne :** `Aufklaerung` dans `Aufklaerungsbroschueren` -> fusion dans `Aufklaerung`
+- **Pluriel/Umlaut :** `Raum` = `Raeume`, `Teil` = `Teile`, `Buch` = `Buecher`
+- **Premier mot :** `Autismus ADHS` correspond à `Autismus Beruf` (même début)
+
+### Longueur minimale
+- Nom d'un seul mot sans espace : **au moins 8 caractères** (évite `Hand`, `Haus`, `Form`)
+- Avec espace (ex. `ICF Katalog`) : **acceptable dès 3 caractères**
+- Ainsi `ICF`, `ASS Frauen`, etc. restent autorisés
+
+### Redémarrage après fusion
+Après chaque fusion, la liste des dossiers est rechargée et relancée au niveau de la cible de fusion.
+Ainsi, `Autismus` collecte toutes ses extensions avant de poursuivre.
+
+---
+
+## Fusion par format média (système de modèles)
+
+La Phase 6 utilise un tableau modèle `MEDIA_TYPES`. Chaque entrée définit :
+- Dossier cible (avec préfixe `_`)
+- Extensions de fichiers appartenant à ce type
 
 ```bash
 MEDIA_TYPES=(
     "_Audio|mp3|m4a|wav|flac|ogg|wma|aac|opus|aiff"
     "_Video|mp4|avi|mkv|mov|wmv|flv|webm|m4v|mpg|mpeg|3gp"
-    "_Images|jpg|jpeg|png|gif|bmp|tiff|tif|webp|svg|ico|heic|heif|raw|cr2|nef"
-    # Extensible:
-    # "_Spreadsheets|xlsx|xls|csv|ods"
-    # "_Presentations|pptx|ppt|odp"
+    "_Bilder|jpg|jpeg|png|gif|bmp|tiff|tif|webp|svg|ico|heic|heif|raw|cr2|nef"
+    # Extensible :
+    # "_Tabellen|xlsx|xls|csv|ods"
+    # "_Prasentationen|pptx|ppt|odp"
     # "_Code|py|js|ts|sh|bat|ps1"
     # "_CAD|dwg|dxf|step|stl"
     # "_3D|obj|fbx|blend|gltf|glb"
@@ -85,26 +96,26 @@ MEDIA_TYPES=(
 )
 ```
 
-Only folders containing **exclusively** files of one type are moved.
-Folders with subfolders are skipped.
+Seuls les dossiers contenant **exclusivement** des fichiers d'un même type sont déplacés.
+Les dossiers comportant des sous-dossiers sont ignorés.
 
-### Adding a New Media Type
+### Ajouter un nouveau type média
 
-Simply add a new line to the `MEDIA_TYPES` array:
+Ajouter simplement une nouvelle ligne dans le tableau `MEDIA_TYPES` :
 ```bash
-"_TargetFolder|ext1|ext2|ext3"
+"_DossierCible|ext1|ext2|ext3"
 ```
 
 ---
 
-## Execution
+## Exécution
 
 ```bash
-# Complete run: (English)
-cd /path/to/target/directory
+# Passage complet :
+cd /chemin/vers/repertoire_cible
 bash ordner_flattening_komplett.sh
 
-# Or individual phases: (English)
+# Ou phases individuelles :
 bash ordner_flattening_komplett.sh --phase flatten
 bash ordner_flattening_komplett.sh --phase tripel
 bash ordner_flattening_komplett.sh --phase media
@@ -113,12 +124,17 @@ bash ordner_flattening_komplett.sh --phase cleanup
 
 ---
 
-## Experience Values (Session 2026-01-26)
+## Retour d'expérience de la session du 26.01.2026
 
-- Start: 206 folders + 252 loose files, ~5600 nested subfolders
-- After flatten: ~2200 folders on one level
-- After shorten + clean up: ~2005 folders
-- After grouping (numbers, CDs): ~2005 -> collection folders created
-- After triplet v1: ~1561 folders
-- After triplet v2 (8-character rule): further reduction
-- Media format phase: Audio/video/image folders consolidated
+- Départ : 206 dossiers + 252 fichiers isolés, ~5 600 sous-dossiers imbriqués
+- Après Flatten : ~2 200 dossiers sur un seul niveau
+- Après raccourcissement + nettoyage : ~2 005 dossiers
+- Après regroupement (nombres, CD) : ~2 005 -> dossiers collecteurs créés
+- Après Triplets v1 : ~1 561 dossiers
+- Après Triplets v2 (règle des 8 caractères) : réduction supplémentaire
+- Phase format média : dossiers Audio/Vidéo/Images consolidés
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Mention linguistique corrigée.

@@ -1255,8 +1255,8 @@
         {
           "language": "fr",
           "path": "skills/dev/bugsweep/SKILL.fr.md",
-          "title": "/bugsweep — Systematic Bug-Sweep Workflow (English)",
-          "description": "[Français] Compétence d'agent pour bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass."
+          "title": "/bugsweep — Flux de travail systématique de chasse aux bugs",
+          "description": "Utilisez cette compétence pour /bugsweep ou chaque fois que l'utilisateur demande un passage systématique de détection et correction de bugs. Effectue un balayage systématique avec un objectif proportionnel à la base de code, une escalade par doublement, un suivi des zones inspectées et une vérification finale."
         }
       ]
     },
@@ -1370,6 +1370,12 @@
           "path": "skills/dev/dev-cycle/SKILL.ru.md",
           "title": "Цикл разработки (Dev Cycle) (Русский)",
           "description": "Используйте для реализации программных функций через итеративный 8-фазный цикл разработки (например, 'разработать фичу по этапам', 'запустить цикл разработки', '8-фазный процесс', /dev-cycle). Проводит через анализ требований, текущее состояние, функциональные спецификации, фронтенд, бэкенд и тесты. НЕ используйте для точечного исправления отдельных багов (используйте bugfix-protocol)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/dev/dev-cycle/SKILL.fr.md",
+          "title": "Cycle de Développement (Dev Cycle)",
+          "description": "À utiliser lorsque vous souhaitez développer une nouvelle fonctionnalité logicielle ou une modification majeure selon un cycle de développement structuré en 8 phases (ex. 'développer systématiquement une fonctionnalité', 'lancer le cycle de développement', 'cycle en 8 phases', /dev-cycle). Guide étape par étape à travers l'analyse des besoins, l'état des lieux, la planification fonctionnelle, le frontend, le backend et les tests. Ne PAS utiliser pour des corrections de bugs isolées (utiliser bugfix-protocol)."
         }
       ]
     },
@@ -1431,7 +1437,7 @@
         {
           "language": "fr",
           "path": "skills/dev/dev-soft-agent/SKILL.fr.md",
-          "title": "Dev Soft Agent (English)",
+          "title": "Dev Soft Agent",
           "description": "Utiliser pour scanner, hiérarchiser et faire progresser un projet logiciel en continu via des boucles de développement automatisées (ex. 'boucle de développement autonome', 'scanner projet et traiter le backlog', 'lancer l'agent de dev', /dev-soft-agent). Pilote l'analyse du code, la priorisation des tâches et les itérations sans dépendances externes. Ne PAS utiliser pour de simples modifications ponctuelles sans cadre de projet."
         }
       ]
@@ -1490,6 +1496,12 @@
           "path": "skills/dev/docs-analysis/SKILL.ru.md",
           "title": "Анализ требований к документам (Русский)",
           "description": "Используйте для сверки архитектурной документации, ТЗ или требований с реальным кодом, а также для консолидации планов (например, 'сверить документацию с кодом', 'консолидировать планы', 'анализ расхождений в документации', /docs-analysis). Сопоставляет спецификации с реализацией и объединяет разрозненные планы в актуальный документ. НЕ используйте для синтаксической проверки диаграмм (используйте dev/mermaid-lint)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/dev/docs-analysis/SKILL.fr.md",
+          "title": "Analyse Documentaire des Exigences",
+          "description": "À utiliser lorsque des spécifications, documents d'architecture ou plans d'exigences doivent être comparés à l'état réel du code ou consolidés (ex. 'comparer la doc au code', 'consolider les plans', 'analyser les écarts de documentation', /docs-analysis). Compare les concepts à l'implémentation, révèle les lacunes et fusionne proprement plusieurs documents de planification. Ne PAS utiliser pour la vérification syntaxique formelle de Mermaid (utiliser dev/mermaid-lint)."
         }
       ]
     },
@@ -1659,6 +1671,12 @@
           "path": "skills/dev/github-repo-care/SKILL.ru.md",
           "title": "GitHub Repo Care — Аккуратная публикация и обслуживание репозиториев (Русский)",
           "description": "Используйте при первой публикации, инициализации или выпуске релизов репозитория GitHub по строгим стандартам открытого кода (например, 'опубликовать новый репозиторий', 'подготовить релиз на GitHub', 'аудит метаданных и приватности', /github-repo-care). Настраивает gitignore, проводит проверку приватности и проверяет README, бейджи, llms.txt и теги релизов. НЕ используйте для рутинного ухода за уже опубликованными репозиториями (используйте surface-after-care)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/dev/github-repo-care/SKILL.fr.md",
+          "title": "GitHub Repo Care — Publier et maintenir proprement un dépôt",
+          "description": "À utiliser lorsqu'un dépôt GitHub doit être publié, initialisé de façon sécurisée ou audité selon des standards de gouvernance officiels (ex. 'publier un nouveau dépôt', 'préparer une release GitHub', 'vérifier les métadonnées du dépôt', /github-repo-care). Vérifie les verrous, crée le .gitignore avant le premier ajout, exécute les contrôles de confidentialité et synchronise tags, badges et llms.txt. Ne PAS utiliser pour la maintenance routinière récurrente de dépôts publiés (utiliser surface-after-care)."
         }
       ]
     },
@@ -1776,8 +1794,8 @@
         {
           "language": "fr",
           "path": "skills/dev/migrate-rename/SKILL.fr.md",
-          "title": "File Renaming with Wrappers (Evolutionary Migration) (English)",
-          "description": "Utiliser pour renommer ou déplacer des fichiers, modules ou répertoires sans casser les imports et références existants (ex. 'renommer fichier sans casser les imports', 'déplacer module avec wrappers', 'créer un stub MOVED', /migrate-rename). Crée des wrappers rétrocompatibles et des stubs de redirection clairs pour une transition en douceur. Ne PAS utiliser pour de simples renommages git acceptant des ruptures de compatibilité."
+          "title": "Renommage de fichiers avec wrapper (migration évolutive)",
+          "description": "Utilisez cette compétence lorsque des fichiers, modules ou dossiers doivent être renommés ou déplacés sans casser brutalement les imports et dépendances de chemins existants (par ex. 'renommer fichier sans breaking changes', 'déplacer module', 'créer un wrapper', /migrate-rename). Crée des fichiers wrapper et des stubs MOVED pour une migration évolutive sans rupture. Ne PAS utiliser pour de simples déplacements Git sans pont de compatibilité."
         }
       ]
     },
@@ -1839,8 +1857,8 @@
         {
           "language": "fr",
           "path": "skills/dev/model-strategy/SKILL.fr.md",
-          "title": "Model-Switching Strategy (English)",
-          "description": "Utiliser pour choisir et configurer le bon modèle de LLM et l'effort de raisonnement dans les workflows multi-agents et sous-agents (ex. 'choisir le modèle pour cette tâche', 'stratégie de modèles sous-agents', 'modèle de révision', /model-strategy). Associe chaque rôle (concepteur, exécutant, réviseur, escalade) au modèle adapté selon la complexité et le coût. Ne PAS utiliser pour la gestion comptable du budget de tokens (utiliser infrastructure/budgetierung)."
+          "title": "Stratégie de changement de modèle (Model-Switching)",
+          "description": "À utiliser pour choisir l'allocation optimale de modèles et d'effort de raisonnement lors d'exécutions multi-agents, de revues ou de tâches de sous-agents (ex. 'quel modèle pour cette tâche', 'définir la stratégie de modèles', 'choisir un modèle de révision', /model-strategy). Définit des affectations basées sur les rôles (penseur, exécutant, réviseur, escalade) et pilote l'effort de raisonnement de manière rentable. Ne PAS utiliser pour la comptabilité des budgets de tokens (utiliser infrastructure/budgetierung)."
         }
       ]
     },
@@ -1930,8 +1948,8 @@
         {
           "language": "fr",
           "path": "skills/dev/pipeline-optimizer/SKILL.fr.md",
-          "title": "Pipeline Optimizer / Project-Folder Optimizer (English)",
-          "description": "Utiliser pour rénover, restructurer ou unifier des chaînes d'outils, des architectures de dossiers ou des pipelines documentaires (ex. 'rénover le pipeline', 'restructurer l'arborescence du projet', 'optimiser la toolchain', /pipeline-optimizer). Met en œuvre une méthode structurée en 6 étapes : état des lieux, clarification des objectifs, plan cible, résorption des écarts et retests. Ne PAS utiliser pour corriger un bug ponctuel sur une fonction (utiliser bugfix-protocol)."
+          "title": "Optimiseur de pipeline / Optimiseur de dossier de projet",
+          "description": "Utilisez cette compétence lorsque des chaînes d'outils, structures de projet, flux documentaires ou pipelines existants doivent être rénovés et harmonisés (par ex. 'rénover pipeline', 'nettoyer structure de dossiers', 'optimiser structure de projet', /pipeline-optimizer). Exécute une procédure structurée en 6 étapes : inventaire de l'existant, clarification du but, image cible, plan d'écarts, points de friction et retests. Ne PAS utiliser pour des corrections de bugs isolées sur des fonctions particulières (utilisez plutôt bugfix-protocol)."
         }
       ]
     },
@@ -1993,8 +2011,8 @@
         {
           "language": "fr",
           "path": "skills/dev/plugin-system/SKILL.fr.md",
-          "title": "Plugin System (English)",
-          "description": "Utiliser pour concevoir ou implémenter une architecture de plugins tolérante aux pannes avec détection automatique en Python (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'architecture extensible', /plugin-system). Fournit un chargeur de plugins modulaire avec cycle de vie et isolation sans dépendances externes. Ne PAS utiliser pour auditer des plugins tiers non fiables (utiliser dev/sec-supplychain)."
+          "title": "Système de Plugins",
+          "description": "À utiliser lorsqu'une application Python doit être dotée d'une architecture de plugins dynamique et tolérante aux pannes avec détection automatique (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'extensibilité pour outil', /plugin-system). Fournit une architecture modulaire propre et extensible sans dépendances externes. Ne PAS utiliser pour l'audit de sécurité de plugins tiers (utiliser dev/sec-supplychain)."
         }
       ]
     },
@@ -2052,6 +2070,12 @@
           "path": "skills/dev/project-onboarding/SKILL.ru.md",
           "title": "Стандартная процедура интеграции/адаптации (Onboarding) для новых программных проектов (Русский)",
           "description": "Используйте для быстрого погружения в новый программный репозиторий, анализа его архитектуры и настройки начального рабочего процесса (например, 'онбординг в проект', 'анализ архитектуры кодовой базы', 'первичная настройка репозитория', /project-onboarding). Оценивает функционал, качество кода и зависимости, формируя практический чек-лист внедрения. НЕ используйте для простого обхода папок (используйте infrastructure/staircase-routing)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/dev/project-onboarding/SKILL.fr.md",
+          "title": "Procédure standard d'intégration pour les nouveaux projets logiciels",
+          "description": "Utilisez cette compétence lorsqu'un projet logiciel existant ou nouveau doit être analysé de manière structurée, compris et intégré initialement au flux de travail (par ex. 'analyser un projet', 'onboarding d'un dépôt', 'comprendre la base de code', /project-onboarding). Analyse les fonctionnalités, la qualité du code, les dépendances et génère une check-list d'onboarding avec les premières tâches. Ne PAS utiliser pour la simple navigation de dossiers (utilisez plutôt infrastructure/staircase-routing)."
         }
       ]
     },
@@ -3544,6 +3568,12 @@
           "path": "skills/game-dev/game-design/SKILL.ru.md",
           "title": "Game Design — Роли, подзадачи и рабочие процессы",
           "description": "Как устроена разработка игр как процесс — роли, подзадачи, рабочие процессы и описания ролей, особенно (но не только) для Roblox. Используйте этот skill, когда речь идет об ОРГАНИЗАЦИИ разработки игр, а не о конкретном коде: Какие роли существуют (Creative Director, Engineer, Artist, Polish/Audio, Business, QA-Tester, Game Critic)? Кто какую подзадачу выполняет? Как выглядит цепочка разработки (концепт → бэкенд → фронтенд → полировка → тест)? Как написать Game Design Document / KONZEPT.md? Как несколько (AI) агентов разделяют игру? Также триггерится по запросам \"запланировать новую игру\", \"создать Game Design Document\", \"какие роли мне нужны для моей игры\", \"рабочий процесс разработки игры\", \"кто тестирует игру\", \"структурировать идею игры\", \"жанр/монетизация Roblox\"."
+        },
+        {
+          "language": "fr",
+          "path": "skills/game-dev/game-design/SKILL.fr.md",
+          "title": "Game Design — Rôles, sous-tâches & workflows",
+          "description": "À utiliser lorsque la tâche concerne l'ORGANISATION du développement de jeux plutôt que le code concret — rôles, sous-tâches, workflows et fiches de rôle, notamment (mais pas uniquement) pour Roblox. Déclencher également pour « planifier un nouveau jeu », « rédiger un Game Design Document / KONZEPT.md », « de quels rôles ai-je besoin pour mon jeu », « chaîne de développement d'un jeu », « qui teste le jeu », « structurer une idée de jeu » ou « genre et monétisation Roblox »."
         }
       ]
     },
@@ -3601,6 +3631,12 @@
           "path": "skills/game-dev/rbx-dev/SKILL.ru.md",
           "title": "Roblox-Dev — Мета-навык для разработки игр на Roblox (Русский)",
           "description": "Мета-навык для полноценной разработки игр на Roblox с использованием Rojo — точка входа, которая знает и объединяет три специализированных навыка: `/rojo` (синхронизация файловой системы→Studio, настройка проекта), `/rbx-studio` (редактор, MCP, ассеты, сканирование вредоносного ПО) и `/game-design` (роли, рабочие процессы, GDD). Используйте этот навык для ЛЮБОЙ разработки игр на Roblox: планирование/создание/настройка игры Roblox, генерация структуры нового проекта, определение архитектуры кода (Main + модули менеджеров, _G.ClientState + HUD, remotes в GameEnums), избежание подводных камней Luau/Roblox, или когда непонятно, какой из специализированных навыков Roblox подходит — маршрутизация происходит отсюда. Также активируется по запросам «разработка игры Roblox», «создать игру Roblox», «новый проект Roblox», «структура проекта Luau», «как организовать код Roblox», «настройка разработки Roblox»."
+        },
+        {
+          "language": "fr",
+          "path": "skills/game-dev/rbx-dev/SKILL.fr.md",
+          "title": "Roblox-Dev — Méta-compétence pour le développement de jeux Roblox",
+          "description": "Utilisez cette compétence pour TOUT projet de développement de jeu Roblox : planifier, construire ou configurer un jeu Roblox, structurer un nouveau projet, définir l'architecture du code (Main + modules manager, _G.ClientState + HUD, remotes dans GameEnums), éviter les pièges Luau/Roblox, ou orienter vers les compétences spécialisées /rojo, /rbx-studio et /game-design."
         }
       ]
     },
@@ -3658,6 +3694,12 @@
           "path": "skills/game-dev/rbx-studio/SKILL.ru.md",
           "title": "Roblox Studio — Редактор, Тестирование, Ассеты, MCP",
           "description": "Работа с Roblox Studio для разработки игр — визуальным редактором, в котором создается, тестируется и публикуется 3D-сцена. Используйте этот skill для: основ Studio (Explorer, Workspace, плей-тесты, сохранение плейса как .rbxl), взаимодействия с Rojo (Connect, режим сцены vs. режим кода), AI-управления Studio через Roblox-Studio-MCP (execute_luau, insert_from_creator_store, generate_material, screen_capture, Play/Stop, чтение консоли), полного пайплайна ассетов (Creator Store → очистка → кит → сцена → .rbxl → оживление через Rojo) и, главное, ОБЯЗАТЕЛЬНОЙ проверки на вредоносный код для ассетов из маркетплейса. Также вызывается по фразам: \"встроить ассет из Store\", \"Studio MCP не работает\", \"studios: []\", \"сгенерировать материал\", \"сохранить сцену\", \"безопасен ли этот ассет Roblox\", \"скрипты исчезают после Play\"."
+        },
+        {
+          "language": "fr",
+          "path": "skills/game-dev/rbx-studio/SKILL.fr.md",
+          "title": "Roblox Studio — Éditeur, Test, Assets, MCP",
+          "description": "À utiliser pour piloter Roblox Studio dans le développement de jeux — l'éditeur visuel où la scène 3D est construite, testée et publiée. Couvre les bases de Studio (Explorer, Workspace, Play-Test, sauvegarde .rbxl), l'articulation avec Rojo (Connect, mode scène vs mode code), le contrôle par IA via Roblox-Studio-MCP et l'analyse anti-malware OBLIGATOIRE des assets du Creator Store. Déclencher aussi pour « insérer un asset du Store », « Studio MCP ne répond pas », « studios: [] », « generate_material » ou « scripts disparus après Play »."
         }
       ]
     },
@@ -3715,6 +3757,12 @@
           "path": "skills/game-dev/rojo/SKILL.ru.md",
           "title": "Rojo — Синхронизация Файловой системы → Roblox Studio",
           "description": "Работа с Rojo — инструментом синхронизации файловой системы с Roblox Studio для профессиональной разработки в VS Code / Claude Code вместо встроенного редактора Studio. Используйте этот skill во всех случаях, когда задействован Rojo: `rojo serve`/`rojo build`, написание или отладка `default.project.json`, версии инструментов и rokit/rokit.toml (Rojo, Lune, Wally), вложенное или плоское сопоставление путей (ReplicatedStorage.Project.shared), проблемы с подключением/портом/синхронизацией, а также при создании каркаса проекта Roblox. Также активируйте при запросах \"rojo connect не работает\", \"скрипты попадают не туда в Studio\", \"как сопоставить src/ с Studio\", \"порт 34872 занят\", \"разница между ModuleScript и Script в Rojo\"."
+        },
+        {
+          "language": "fr",
+          "path": "skills/game-dev/rojo/SKILL.fr.md",
+          "title": "Rojo — Synchronisation Système de fichiers → Roblox Studio",
+          "description": "À utiliser pour piloter Rojo — l'outil de synchronisation système de fichiers vers Roblox Studio pour le développement professionnel dans VS Code / Claude Code au lieu de l'éditeur intégré. Couvre `rojo serve`/`rojo build`, `default.project.json`, `rokit`/`rokit.toml` (Rojo, Lune, Wally), mappages plats vs imbriqués et problèmes de connexion/port. Déclencher aussi pour « rojo connect ne fonctionne pas », « scripts au mauvais endroit dans Studio », « port 34872 occupé » ou « ModuleScript vs Script »."
         }
       ]
     },
@@ -3776,8 +3824,8 @@
         {
           "language": "fr",
           "path": "skills/game-dev/using-blender/SKILL.fr.md",
-          "title": "Using Blender (English)",
-          "description": "[Français] Compétence d'agent pour using-blender: General Blender workflow skill for AI agents working with .blend, .fbx, .obj, .glb, glTF, materials, scene inspection, bpy automation, headless Blender batch runs, export/reimport validation, previews, and optional Blender MCP control. Use when a task asks to open, inspect, create, automate, convert, optimize, render, or verify Blender or 3D asset files in a user-agnostic way."
+          "title": "Utiliser Blender",
+          "description": "Utilisez cette compétence lorsqu'une tâche demande d'ouvrir, inspecter, créer, automatiser, convertir, optimiser, rendre ou vérifier des fichiers Blender ou des assets 3D (.blend, .fbx, .obj, .glb, glTF, matériaux, automatisation bpy, exécutions headless ou contrôle MCP Blender optionnel) de manière agnostique."
         }
       ]
     },
@@ -3839,8 +3887,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/agent-config-sync/SKILL.fr.md",
-          "title": "Agent Config Sync (English)",
-          "description": "Utiliser pour planifier et synchroniser les configurations de serveurs MCP, les compétences et les règles entre plusieurs agents IA (ex. 'synchroniser la configuration des agents', 'harmoniser les MCPs', 'dupliquer les compétences entre agents', /agent-config-sync). Identifie les paramètres locaux et laisse l'utilisateur choisir la source de vérité. Ne PAS utiliser pour synchroniser uniquement les MCPs (utiliser mcp-config-sync)."
+          "title": "Agent Config Sync — Synchronisation des configurations d'agents",
+          "description": "À utiliser lorsque les configurations de serveurs MCP, compétences et fichiers de règles doivent être synchronisés de manière neutre vis-à-vis des fournisseurs sur plusieurs frameworks d'agents (ex. 'synchroniser la config agents', 'aligner les MCP', 'refléter les compétences', /agent-config-sync). Détecte les configurations locales et laisse l'utilisateur choisir direction, cibles et résolution de conflits. Ne PAS utiliser pour un simple alignement de serveurs MCP sans compétences/règles (utiliser mcp-config-sync)."
         }
       ]
     },
@@ -3930,8 +3978,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/agents-bridge/SKILL.fr.md",
-          "title": "AGENTS-BRIDGE (English)",
-          "description": "Utiliser pour établir une passerelle de fichiers résiliente et neutre entre différents agents IA et machines (ex. 'passerelle multi-agents', 'connecter des systèmes d'agents', 'communication entre agents par fichiers', /agents-bridge). Fournit des espaces d'amorçage, des silos de mémoire, des signaux de présence, une messagerie et des verrous partagés. Ne PAS utiliser pour les fusions git courantes (utiliser dev/reissverschluss-merge)."
+          "title": "AGENTS-BRIDGE — le canot de sauvetage (« the Lifeboat »), aussi : Time Capsule",
+          "description": "Utilisez cette compétence lorsqu'un pont de fichiers portable et indépendant du fournisseur doit être mis en place entre différents agents IA et systèmes (par ex. 'configuration multi-agents', 'connecter des agents', 'pont de fichiers entre agents', /agents-bridge). Fournit surfaces de bootstrap, pointeurs de vérité, silos de mémoire séparés, messagerie et verrous coopératifs. Ne PAS utiliser pour la simple fusion de branches Git (utilisez plutôt dev/reissverschluss-merge)."
         }
       ]
     },
@@ -3993,8 +4041,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/ai-portable-setup/SKILL.fr.md",
-          "title": "AI Portable Setup (English)",
-          "description": "Utiliser pour mettre en place un environnement d'IA portable et autonome sur clé USB ou disque externe (ex. 'configuration IA portable', 'IA sur clé USB', 'RAG local hors ligne', /ai-portable-setup). Configure des LLM locaux (Ollama), une base vectorielle (ChromaDB) et des invites pour un usage 100 % hors ligne. Ne PAS utiliser pour l'installation complète d'une station de travail (utiliser system-onboarding)."
+          "title": "AI Portable Setup — Espace IA portable",
+          "description": "À utiliser pour configurer un espace de travail IA portable et local sur une clé USB ou un disque externe (ex. 'installation IA portable', 'IA sur clé USB', 'pipeline RAG local hors ligne', /ai-portable-setup). Configure les modèles locaux (Ollama), la base vectorielle (ChromaDB) et les prompts modulaires pour un usage autonome hors ligne. Ne PAS utiliser pour l'onboarding complet d'un poste de travail (utiliser system-onboarding)."
         }
       ]
     },
@@ -4056,8 +4104,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/automation-self-care/SKILL.fr.md",
-          "title": "Automation Self-Care (English)",
-          "description": "[Français] Compétence d'agent pour automation-self-care: Builds and operates a provider-neutral self-care core set for scheduled LLM tasks and desktop-app automations. Use when an agent should discover its native scheduler, install recurring hygiene, prompt-quality, frequency, load, resource, cross-system, permission and runtime checks, or continuously improve an existing automation fleet with rollback, readback and deletion protection. Triggers on automation self-care, scheduler task care, desktop app automation maintenance, automation fleet audit, self-healing schedules, or requests to recreate the ANTIGRAVITY-style maintenance task family."
+          "title": "Automation Self-Care (Auto-maintenance des automatisations)",
+          "description": "Utilisez cette compétence lorsqu'un agent doit découvrir son planificateur natif, installer des contrôles récurrents d'hygiène, de qualité de prompt, de fréquence, de charge, de ressources, inter-systèmes, de permissions et d'exécution, ou améliorer en continu une flotte d'automations existante avec rollback, relecture et protection contre la suppression."
         }
       ]
     },
@@ -4399,6 +4447,12 @@
           "path": "skills/infrastructure/headless/SKILL.en.md",
           "title": "Headless (English)",
           "description": "Autonomous long-run mode without ongoing check-ins — start conditions (goal, scope, budgets, checkpoints), decision tiers and stop rules for unattended runs; raises endurance, not authority. Use when an extended autonomous run is explicitly requested."
+        },
+        {
+          "language": "fr",
+          "path": "skills/infrastructure/headless/SKILL.fr.md",
+          "title": "Mode Headless (Exécution autonome prolongée)",
+          "description": "À utiliser lorsqu'un fonctionnement autonome prolongé sans questions intermédiaires est explicitement demandé — définit les conditions de démarrage (objectif, périmètre, budgets, points de contrôle), les niveaux de décision et les règles d'arrêt pour les exécutions sans surveillance ; augmente l'endurance, pas les permissions."
         }
       ]
     },
@@ -4488,8 +4542,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/letter-hooker/SKILL.fr.md",
-          "title": "Letter-Hooker (Prompt-Level Preflight & Governance Engine) (English)",
-          "description": "[Français] Compétence d'agent pour letter-hooker: Extends automation-self-care with Letter Hooks, Preflight Bootloaders, Document Traversal Rules, and Self-Healing Prompt Context Enrichment for AI agents and CLIs that lack native, event-driven JSON lifecycle hooks (such as Antigravity / Gemini CLI). Use when an agent needs to inject preflight rules, search memory/gardener before work begins, enforce directory document reading strategies (CLAUDE.md / AGENTS.md), or dynamically route sidecar tasks to skills and security protocols."
+          "title": "Letter-Hooker — Moteur de préchargement et gouvernance au niveau du prompt",
+          "description": "Utilisez cette compétence lorsqu'un agent doit injecter des règles preflight, interroger Memory/Gardener avant de travailler, imposer des stratégies de lecture de documents de répertoire (CLAUDE.md / AGENTS.md) ou router dynamiquement des tâches sidecar vers des compétences et protocoles de sécurité."
         }
       ]
     },
@@ -4635,8 +4689,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/mcp-config-sync/SKILL.fr.md",
-          "title": "MCP Config Sync (English)",
-          "description": "Utiliser pour identifier, planifier et synchroniser les configurations de serveurs Model Context Protocol (MCP) entre plusieurs agents d'IA (ex. 'synchroniser serveurs MCP', 'harmoniser configs MCP', 'transférer les serveurs MCP', /mcp-config-sync). Détecte les serveurs installés et aligne les réglages sans imposer de hub central. Ne PAS utiliser si la synchronisation complète des compétences et règles est nécessaire (utiliser agent-config-sync)."
+          "title": "MCP Config Sync — Synchronisation des configurations MCP",
+          "description": "À utiliser lorsque des configurations de serveurs MCP doivent être comparées et synchronisées entre différents outils d'agents (Claude, Gemini, Codex, etc.) (ex. 'synchroniser les MCP', 'comparer la configuration MCP', 'transférer des serveurs MCP', /mcp-config-sync). Détecte les définitions de serveurs existantes et les aligne sous contrôle utilisateur sans hub maître fixe. Ne PAS utiliser si des compétences et règles doivent aussi être reflétées (utiliser agent-config-sync)."
         }
       ]
     },
@@ -4838,8 +4892,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/orchestrator/SKILL.fr.md",
-          "title": "Orchestrator (English)",
-          "description": "Utiliser pour décomposer des objectifs complexes en sous-tâches parallèles ou séquentielles confiées à des sous-agents avec validation basée sur des preuves (ex. 'orchestrer des tâches', 'coordonner des sous-agents', 'déléguer des lots de travail', /orchestrator). Établit des contrats de tâches, missionne des agents autonomes et valide les livrables avec rigueur. Ne PAS utiliser pour les tâches simples traitables en une seule réponse."
+          "title": "Orchestrator — Protocole d'orchestration",
+          "description": "À utiliser pour décomposer une tâche globale complexe en sous-tâches parallèles ou séquentielles pour sous-agents avec réception fondée sur des preuves (ex. 'orchestrer la tâche', 'coordonner des sous-agents', 'déléguer des sous-tâches', /orchestrator). Planifie les lots de travail, missionne des exécutants indépendants et valide leurs résultats selon des critères qualité clairs. Ne PAS utiliser pour des tâches triviales qu'un seul prompt résout directement."
         }
       ]
     },
@@ -5041,8 +5095,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/semantic-persona-routing/SKILL.fr.md",
-          "title": "Semantic Persona Routing (English)",
-          "description": "[Français] Compétence d'agent pour semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers."
+          "title": "Routage sémantique des personas",
+          "description": "Utilisez cette compétence lorsqu'un LLM doit router une demande d'un rôle coordonnateur via un expert vers une compétence, extraire un routeur de personas portable depuis un système d'agents existant, combiner une carte sémantique de domaines avec un registre lexical de compétences ou rendre visibles les liens manquants entre rôle et compétence."
         }
       ]
     },
@@ -5100,6 +5154,12 @@
           "path": "skills/infrastructure/skill-explorer/SKILL.ru.md",
           "title": "Skill-Explorer — Управление ландшафтом навыков (Аудит · Исследование · Установщик) (Русский)",
           "description": "Управляет собственным ландшафтом навыков: анализирует и сравнивает существующие навыки (режим Аудита), ищет в Сети новые навыки/плагины (режим Исследования) и одновременно является установщиком, генерирующим легкие поднавыки (Skill-Finder, семейный зонтик, навыки обслуживания) вместо загрузки монолита. Используйте этот навык для \"сравнения/аудита навыков\", \"выявления дублирующихся навыков\", \"формирования семейств навыков\", \"очистки/консолидации навыков\", \"ведения реестра навыков\", \"поиска навыков/плагинов по теме X\", \"установки новых навыков\", \"просмотра маркетплейса навыков\" или для `/skill-explorer`. Предоставляет подотчет по каждому семейству и сквозной пронумерованный список решений; выполняет установку/удаление только после проверки безопасности и явного одобрения."
+        },
+        {
+          "language": "fr",
+          "path": "skills/infrastructure/skill-explorer/SKILL.fr.md",
+          "title": "Skill-Explorer — Gérer le paysage de compétences (Audit · Explore · Installateur)",
+          "description": "À utiliser pour « comparer/auditer les compétences », « quelles compétences sont en double », « former des familles de compétences », « nettoyer/consolider les compétences », « entretenir le registre des compétences », « trouver des compétences/plugins pour le sujet X », « installer de nouvelles compétences », « parcourir le marketplace » ou pour `/skill-explorer`. Gère votre paysage de compétences : recense et compare l'existant (mode Audit), recherche de nouvelles compétences/plugins sur le web (mode Explore) et génère des sous-compétences légères (Skill-Finder, parapluies de famille, compétences de maintenance) au lieu d'un monolithe."
         }
       ]
     },
@@ -5161,8 +5221,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/skill-extractor/SKILL.fr.md",
-          "title": "Skill-Extractor — aus Chatverläufen Skills gewinnen (English)",
-          "description": "[Français] Compétence d'agent pour skill-extractor: Extrahiert aus einem Chatverlauf (aktuelle Session oder Transkript-Dateien) einen wiederverwendbaren Skill — oder verbessert einen sehr ähnlichen existierenden Skill, statt ein Duplikat zu erzeugen. Nutze diesen Skill bei „mach daraus einen Skill\", „das sollten wir als Skill festhalten\", „extrahiere Skills aus diesem/alten Chatverläufen\", „diese Arbeitsweise wiederverwendbar machen\", oder bei `/skill-extract`. Deckt auch Bulk-Läufe über viele alte Transkripte ab (mit Datenreduktion über Subagenten). Für wiederkehrende AUTOMATISIERUNGEN (Cron/Schedule/Loop) stattdessen den Schwester-Skill workflow-extract nutzen."
+          "title": "Skill-Extractor — Extraire des compétences depuis les historiques de discussion",
+          "description": "Utilisez cette compétence pour /skill-extract ou pour extraire d'un historique de chat (session courante ou fichiers de transcription) une compétence réutilisable — ou améliorer une compétence très proche au lieu de créer un doublon. Couvre aussi les lots sur de vieilles transcriptions ; pour des automatisations récurrentes, utilisez workflow-extract."
         }
       ]
     },
@@ -5392,8 +5452,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/staircase-routing/SKILL.fr.md",
-          "title": "Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)",
-          "description": "Utiliser pour parcourir l'arborescence des répertoires de haut en bas afin de découvrir les documents directeurs comme CLAUDE.md, AGENTS.md ou RULES.md (ex. 'rechercher les règles dans l'arborescence', 'trouver les guides de contexte', 'routage en escalier', /staircase-routing). Parcourt systématiquement les dossiers parents et enfants pour identifier les règles en vigueur. Ne PAS utiliser si la racine du projet est déjà connue (utiliser load-project)."
+          "title": "Staircase-Routing (Routage haut-bas / Walking Bass)",
+          "description": "À utiliser lorsque les hiérarchies de répertoires doivent être parcourues à la recherche de documents repères tels que CLAUDE.md, AGENTS.md, README.md ou RULES.md (ex. 'chercher les règles dans l'arborescence', 'trouver les repères', 'Staircase Routing', /staircase-routing). Parcourt systématiquement les arborescences vers le haut et vers le bas pour localiser les fichiers de contexte normatifs. Ne PAS utiliser si le contexte est déjà établi (utiliser load-project)."
         }
       ]
     },
@@ -5455,8 +5515,8 @@
         {
           "language": "fr",
           "path": "skills/infrastructure/system-onboarding/SKILL.fr.md",
-          "title": "System Onboarding (English)",
-          "description": "Utiliser pour configurer et intégrer un nouveau poste de travail ou une machine réinstallée pour le développement et les agents (ex. 'configurer nouvel ordinateur', 'onboarding station de travail', 'installer environnement d'agents', /system-onboarding). Installe les prérequis d'OS, les runtimes, les règles partagées et les compétences portables sans fuite de secrets. Ne PAS utiliser pour intégrer un dépôt logiciel isolé (utiliser dev/project-onboarding)."
+          "title": "System-Onboarding — Mise en service d'un poste de travail",
+          "description": "À utiliser lorsqu'un poste de travail neuf ou réinstallé doit être configuré pour des agents et environnements de développement (ex. 'configurer un nouveau PC', 'onboarding poste de travail', 'installer l'environnement d'agents', /system-onboarding). Installe et vérifie de façon sûre prérequis OS, runtimes, surfaces de règles communes et compétences portables. Ne PAS utiliser pour l'onboarding d'un dépôt isolé (utiliser dev/project-onboarding)."
         }
       ]
     },
@@ -5687,6 +5747,12 @@
           "path": "skills/production/textproduction/SKILL.md",
           "title": "Textproduction — Router (Deutsch)",
           "description": "Verwenden, wenn Texte mit KI erstellt werden sollen (z. B. 'schreibe einen Blogpost', 'Newsletter entwerfen', 'Kurzgeschichte', 'Pressemitteilung', 'Positionspapier'). Drei Teilskills: allgemeine Texte (Blogpost, Social, Newsletter, Copy, E-Mail, Bericht), narrative Storys (Skript, Kurzgeschichte, RPG, Weltenbau) und PR-Kommunikation (Pressemitteilung, Positionspapier) mit lokalem LaTeX-PDF-Compiler. Kein externer Dienst zwingend erforderlich."
+        },
+        {
+          "language": "fr",
+          "path": "skills/production/textproduction/SKILL.fr.md",
+          "title": "Textproduction — Routeur",
+          "description": "Utilisez cette compétence lorsque des textes doivent être créés avec l'IA (par ex. 'écrire un article de blog', 'rédiger une newsletter', 'nouvelle', 'communiqué de presse', 'prise de position'). Trois sous-compétences : textes généraux, histoires narratives et communication RP avec compilateur PDF LaTeX local."
         }
       ]
     },
@@ -5748,8 +5814,8 @@
         {
           "language": "fr",
           "path": "skills/research/research-agent/SKILL.fr.md",
-          "title": "Research Agent (English)",
-          "description": "Utiliser pour mener ou valider des projets de recherche académique, recenser la littérature ou vérifier des affirmations scientifiques (ex. 'état de l'art', 'revue de littérature', 'vérifier citations et preuves', /research-agent). Orchestre un pipeline de recherche avec points de contrôle en direct, preuves PDF et limites de publication. Ne PAS utiliser pour des recherches web informelles sans exigences de preuves."
+          "title": "Research Agent — Agent de recherche scientifique",
+          "description": "À utiliser lorsque des projets de recherche scientifique doivent être menés de façon structurée, des sources recueillies ou des affirmations validées (ex. 'établir l'état de l'art', 'rechercher des articles', 'vérifier sources et affirmations', /research-agent). Exécute un pipeline de recherche centré projet avec portes en direct, preuves PDF, limites d'affirmation et contrôles de publication. Ne PAS utiliser pour de simples recherches web informelles sans exigence de preuve scientifique."
         }
       ]
     },
@@ -5807,6 +5873,12 @@
           "path": "skills/therapy/act-techniques/SKILL.ru.md",
           "title": "Техники ACT — Терапия принятия и ответственности (Русский)",
           "description": "Используйте для развития психологической гибкости, жизни в соответствии с ценностями или осознанного принятия по модели ACT (например, 'прояснить ценности', 'практика расцепления', 'принятие вместо избегания', /act-techniques). Знакомит с моделью гексафлекса и ее 6 ключевыми процессами. НЕ используйте для реструктуризации автоматических мыслей (используйте cognitive-restructuring)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/act-techniques/SKILL.fr.md",
+          "title": "Techniques ACT — Thérapie d'acceptation et d'engagement",
+          "description": "Utilisez cette compétence lorsque la flexibilité psychologique, l'orientation vers les valeurs ou l'acceptation selon le modèle ACT doivent être favorisées (par ex. 'clarifier ses valeurs', 'pratiquer la défusion', 'acceptation plutôt qu'évitement', /act-techniques). Présente le modèle Hexaflex et ses 6 processus fondamentaux ; ne PAS utiliser pour la restructuration cognitive des pensées automatiques (cognitive-restructuring)."
         }
       ]
     },
@@ -5864,6 +5936,12 @@
           "path": "skills/therapy/behavioral-activation/SKILL.ru.md",
           "title": "Поведенческая активация (Русский)",
           "description": "Используйте для преодоления апатии, упадка сил или депрессивного избегания с помощью структурированной поведенческой активации (например, 'разорвать круг бездействия', 'спланировать дела на неделю', 'восстановить режим дня', /behavioral-activation). Преодолевает избегание с помощью дневников активности, шкалы удовольствия/достижений и пошаговых задач. НЕ используйте для экстренной стабилизации в кризисе (используйте stabilization-techniques)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/behavioral-activation/SKILL.fr.md",
+          "title": "Activation comportementale (Behavioral Activation)",
+          "description": "À utiliser lorsque l'apathie, l'épuisement ou les humeurs dépressives nécessitent de reconstruire progressivement des activités (ex. 'surmonter le manque d'élan', 'planifier des activités', 'structurer la journée', /behavioral-activation). Brise les schémas de repli dépressif par des journaux d'activité, la planification hebdomadaire et l'activation fondée sur les valeurs. Ne PAS utiliser pour l'intervention en crise aiguë ou la stabilisation d'urgence (utiliser stabilization-techniques)."
         }
       ]
     },
@@ -5921,6 +5999,12 @@
           "path": "skills/therapy/cognitive-restructuring/SKILL.ru.md",
           "title": "Когнитивная реструктуризация (Русский)",
           "description": "Используйте для проверки и оспаривания негативных автоматических мыслей, руминаций и когнитивных искажений (например, 'реструктурировать мысли', 'вести дневник мыслей', 'выявить ошибки мышления', /cognitive-restructuring). Обучает когнитивной модели ABC Бека, выявляет ошибки мышления и направляет сократовский диалог. НЕ используйте для чистой дефузии без оспаривания (используйте act-techniques) или анализа семейной истории (используйте genogram-work)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/cognitive-restructuring/SKILL.fr.md",
+          "title": "Restructuration cognitive",
+          "description": "Utilisez cette compétence lorsque des pensées pénibles, des boucles de rumination ou des distorsions cognitives doivent être remises en question (par ex. 'restructurer des pensées', 'tenir un journal de pensées', 'repérer les biais cognitifs', /cognitive-restructuring). Présente le modèle ABC, les biais cognitifs et le questionnement socratique ; ne PAS utiliser pour la simple acceptation/défusion (act-techniques)."
         }
       ]
     },
@@ -5978,6 +6062,12 @@
           "path": "skills/therapy/counseling-basics/SKILL.ru.md",
           "title": "Основы психологического консультирования и ведения беседы (Русский)",
           "description": "Используйте для применения базовых навыков личностно-центрированного консультирования и эмпатического общения (например, 'активное слушание', 'отражение и перефразирование', 'задавать открытые вопросы', /counseling-basics). Охватывает основы клиент-центрированного подхода Роджерса: эмпатию, валидацию и безоценочное принятие. НЕ используйте для специализированных протоколов лечения расстройств (используйте guideline-therapies-overview)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/counseling-basics/SKILL.fr.md",
+          "title": "Bases de l'entretien d'aide (Counseling Basics)",
+          "description": "À utiliser lorsque les bases de la communication thérapeutique centrée sur la personne et du conseil sont nécessaires (ex. 'écoute active', 'pratiquer le reflet', 'poser des questions ouvertes', /counseling-basics). Transmet les fondamentaux de Rogers : compréhension empathique, reformulation, validation et questions de clarification constructives. Ne PAS utiliser pour des interventions psychothérapeutiques spécifiques à un trouble (utiliser guideline-therapies-overview)."
         }
       ]
     },
@@ -6035,6 +6125,12 @@
           "path": "skills/therapy/exposure-guidance/SKILL.ru.md",
           "title": "Сопровождение экспозиционной терапии (Русский)",
           "description": "Используйте для преодоления тревоги, фобий и избегающего поведения через психообразование по экспозиционной терапии (например, 'составить иерархию страхов', 'спланировать экспозицию', 'шкала SUDs', /exposure-guidance). Объясняет механизмы привыкания, построение иерархий in-vivo и в воображении, а также отказ от охранительного поведения. НЕ используйте для неконтролируемой травма-экспозиции или купирования паники (используйте stabilization-techniques)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/exposure-guidance/SKILL.fr.md",
+          "title": "Accompagnement à l'exposition (Exposure Guidance)",
+          "description": "À utiliser lorsque des anxiétés, phobies ou comportements d'évitement doivent être surmontés par exposition (ex. 'planifier des exercices d'exposition', 'établir une hiérarchie des peurs', 'utiliser l'échelle SUDs', /exposure-guidance). Fournit une psychoéducation rigoureuse sur l'habituation, la confrontation aux stimuli et la planification d'exposition. Ne PAS utiliser pour mener sans encadrement une confrontation traumatique intense ni une stabilisation de panique aiguë (utiliser stabilization-techniques)."
         }
       ]
     },
@@ -6092,6 +6188,12 @@
           "path": "skills/therapy/genogram-work/SKILL.ru.md",
           "title": "Работа с генограммой (Genogram Work)",
           "description": "Используйте для исследования межпоколенческих паттернов семейных отношений и системных ролей (например, 'составить генограмму', 'динамика семейного древа', 'исследовать семейные паттерны', /genogram-work). Описывает стандартные символы генограммы, линии связей и поиск семейных ресурсов на протяжении 3+ поколений. НЕ используйте для индивидуальной когнитивной реструктуризации (используйте cognitive-restructuring)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/genogram-work/SKILL.fr.md",
+          "title": "Travail avec le génogramme",
+          "description": "Utilisez cette compétence lorsque des schémas relationnels familiaux, des conflits transgénérationnels ou des intrications systémiques doivent être visualisés (par ex. 'créer un génogramme', 'repérer les schémas familiaux', 'analyser l'histoire familiale', /genogram-work). Explique symboles normalisés, dynamiques et ressources sur 3+ générations ; ne PAS utiliser pour l'analyse cognitive individuelle (cognitive-restructuring)."
         }
       ]
     },
@@ -6149,6 +6251,12 @@
           "path": "skills/therapy/guideline-therapies-overview/SKILL.ru.md",
           "title": "Обзор психотерапевтических методов, утвержденных директивами (Guideline Therapies Overview)",
           "description": "Используйте для объективного сравнительного обзора четырех основных направлений доказательной психотерапии (например, 'сравнить направления терапии', 'КПТ против психодинамической', 'какой вид терапии выбрать', /guideline-therapies-overview). Описывает показания, теоретические модели и сеттинг для КПТ, психодинамической, психоаналитической и системной терапии. НЕ используйте для постановки диагнозов или экстренной помощи."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/guideline-therapies-overview/SKILL.fr.md",
+          "title": "Aperçu des psychothérapies conventionnées (Richtlinienverfahren)",
+          "description": "Utilisez cette compétence lorsqu'une orientation neutre sur les psychothérapies conventionnées en Allemagne est recherchée (par ex. 'quelle thérapie convient', 'différence entre TCC et psychodynamique', 'comparer les approches thérapeutiques', /guideline-therapies-overview). Compare TCC, psychothérapie psychodynamique, psychanalyse et thérapie systémique ; ne PAS utiliser pour des interventions d'urgence ou des diagnostics."
         }
       ]
     },
@@ -6210,8 +6318,8 @@
         {
           "language": "fr",
           "path": "skills/therapy/mindfulness-basics/SKILL.fr.md",
-          "title": "Mindfulness Basics (English)",
-          "description": "Utiliser pour intégrer la méditation de pleine conscience, les pratiques MBSR ou la conscience corporelle dans le quotidien (ex. 'exercices de pleine conscience', 'guide du balayage corporel', 'méditation sur la respiration', /mindfulness-basics). Guide les bases du MBSR de Kabat-Zinn : bodyscan, marche consciente et espace de respiration de 3 minutes. Ne PAS utiliser pour la relaxation neuromusculaire progressive (utiliser pmr-autogenic-training)."
+          "title": "Bases de la pleine conscience",
+          "description": "Utilisez cette compétence lorsque la pratique de la pleine conscience, les exercices MBSR ou la perception corporelle doivent être appris et intégrés au quotidien (par ex. 'exercices de pleine conscience', 'guide bodyscan', 'méditation respiratoire', /mindfulness-basics). Guide bodyscan, respiration et STOP ; ne PAS utiliser pour la relaxation musculaire de Jacobson (pmr-autogenic-training)."
         }
       ]
     },
@@ -6269,6 +6377,12 @@
           "path": "skills/therapy/motivational-interviewing/SKILL.ru.md",
           "title": "Мотивационное интервью (Русский)",
           "description": "Используйте для работы с амбивалентностью в отношении изменения поведения и укрепления мотивации к переменам (например, 'мотивационное интервью', 'разрешить сомнения', 'стимулировать разговоры об изменениях', /motivational-interviewing). Обучает методу Миллера и Роллника: принципам OARS, балансу решений и вызову реплик об изменениях. НЕ используйте для директивных предписаний или конфронтации."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/motivational-interviewing/SKILL.fr.md",
+          "title": "Entretien motivationnel (Motivational Interviewing)",
+          "description": "À utiliser lorsque des ambivalences face à un changement de comportement doivent être clarifiées ou la motivation au changement renforcée (ex. 'trouver la motivation pour changer', 'réduire l'ambivalence', 'encourager le discours-changement', /motivational-interviewing). Transmet l'entretien motivationnel selon Miller/Rollnick : principes OARS, développement de la divergence et valorisation des énoncés de changement. Ne PAS utiliser pour la confrontation ni des injonctions directives."
         }
       ]
     },
@@ -6330,8 +6444,8 @@
         {
           "language": "fr",
           "path": "skills/therapy/pmr-autogenic-training/SKILL.fr.md",
-          "title": "Progressive Muscle Relaxation & Autogenic Training (English)",
-          "description": "Utiliser pour pratiquer des techniques de relaxation corporelle visant la réduction du stress et la détente musculaire (ex. 'relaxation progressive de Jacobson', 'entraînement autogène', 'relâcher la tension corporelle', /pmr-autogenic-training). Enseigne les séquences tension-relâchement de Jacobson (PMR) et les formules autogènes de Schultz. Ne PAS utiliser pour la méditation de pleine conscience sans travail musculaire (utiliser mindfulness-basics)."
+          "title": "Relaxation musculaire progressive et training autogène",
+          "description": "Utilisez cette compétence lorsque des techniques de relaxation corporelle pour réduire le stress et réguler la tension doivent être apprises (par ex. 'apprendre la relaxation musculaire progressive', 'pratiquer le training autogène', /pmr-autogenic-training). Guide la RMP de Jacobson et le training autogène de Schultz ; ne PAS utiliser pour la pleine conscience respiratoire sans contraction (mindfulness-basics)."
         }
       ]
     },
@@ -6389,6 +6503,12 @@
           "path": "skills/therapy/positive-psychology/SKILL.ru.md",
           "title": "Позитивная психология (Русский)",
           "description": "Используйте для развития психологического благополучия, личных сильных сторон и жизнестойкости (например, 'определить сильные стороны', 'упражнения благодарности', 'применить модель PERMA', /positive-psychology). Опирается на модель PERMA Селигмана, сильные стороны характера VIA и состояние потока. НЕ используйте для лечения клинической депрессии или острых кризисов (используйте behavioral-activation или stabilization-techniques)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/positive-psychology/SKILL.fr.md",
+          "title": "Psychologie positive",
+          "description": "À utiliser lorsque le bien-être, les forces personnelles et la résilience psychologique doivent être encouragés (ex. 'trouver ses forces de caractère', 'exercice de gratitude', 'appliquer le modèle PERMA', /positive-psychology). Transmet le modèle PERMA de Seligman, les forces VIA, les exercices de gratitude et les concepts de flow pour activer les ressources. Ne PAS utiliser pour traiter les dépressions aiguës ou les crises (utiliser behavioral-activation ou stabilization-techniques)."
         }
       ]
     },
@@ -6446,6 +6566,12 @@
           "path": "skills/therapy/problem-solving-training/SKILL.ru.md",
           "title": "Тренинг решения проблем (Русский)",
           "description": "Используйте для структурированного решения сложных жизненных ситуаций и повседневных проблем (например, 'структурное решение проблем', 'пошаговое решение проблемы', 'оценка вариантов решения', /problem-solving-training). Ведет по 6-шаговой модели Д'Зуриллы и Голдфрида: ориентация, формулировка, генерация идей, выбор, реализация и оценка. НЕ используйте для выбора ИТ-архитектуры (используйте utilities/decide)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/problem-solving-training/SKILL.fr.md",
+          "title": "Entraînement à la résolution de problèmes",
+          "description": "Utilisez cette compétence lorsque des problèmes de vie complexes ou des blocages du quotidien doivent être résolus de manière structurée (par ex. 'résoudre un problème pas à pas', 'évaluer les options de solution', /problem-solving-training). Guide le modèle en 6 étapes de D'Zurilla et Goldfried ; ne PAS utiliser pour des décisions d'architecture technique ou éthiques (utilities/decide)."
         }
       ]
     },
@@ -6507,8 +6633,8 @@
         {
           "language": "fr",
           "path": "skills/therapy/psychoeducation/SKILL.fr.md",
-          "title": "Psychoeducation (English)",
-          "description": "Utiliser pour transmettre des informations objectives et déstigmatisantes sur les troubles psychiques et les symptômes (ex. 'comprendre les symptômes de l'anxiété', 'psychoéducation dépression/TDAH', /psychoeducation). Clarifie les modèles vulnérabilité-stress, la neurobiologie et les prises en charge éprouvées. Ne PAS utiliser pour poser un diagnostic médical individuel ou remplacer un suivi médical."
+          "title": "Psychoéducation",
+          "description": "À utiliser lorsque des connaissances rigoureuses et déstigmatisantes sur les troubles psychiques et leurs symptômes doivent être transmises (ex. 'comment fonctionne la dépression/l'anxiété', 'comprendre les symptômes du TDAH/TSPT', 'psychoéducation trouble psychique', /psychoeducation). Explique les modèles d'apparition, modèles vulnérabilité-stress et options de traitement de façon claire et fondée sur les preuves. Ne PAS utiliser pour poser un diagnostic individuel ou remplacer une thérapie."
         }
       ]
     },
@@ -6566,6 +6692,12 @@
           "path": "skills/therapy/schema-therapy/SKILL.ru.md",
           "title": "Схема-терапия (Русский)",
           "description": "Используйте для исследования глубинных эмоциональных схем, повторяющихся жизненных ловушек и режимов (например, 'режимы схема-терапии', 'уязвимый ребенок и здоровый взрослый', 'ловушки жизни', /schema-therapy). Знакомит с моделью Джеффри Янга: базовыми эмоциональными потребностями, ранними дезадаптивными схемами и копингами. НЕ используйте для быстрой поведенческой активации (используйте behavioral-activation)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/schema-therapy/SKILL.fr.md",
+          "title": "Thérapie des schémas",
+          "description": "Utilisez cette compétence lorsque des schémas émotionnels profonds, des modes de personnalité ou des pièges de vie récurrents doivent être explorés (par ex. 'comprendre les modes en thérapie des schémas', 'enfant intérieur', 'repérer les pièges de vie', /schema-therapy). Présente les 18 schémas, les modes et les styles d'adaptation selon Young ; ne PAS utiliser pour une simple activation comportementale à court terme (behavioral-activation)."
         }
       ]
     },
@@ -6623,6 +6755,12 @@
           "path": "skills/therapy/solution-focused-therapy/SKILL.ru.md",
           "title": "Ориентированная на решение терапия (Русский)",
           "description": "Используйте, когда фокус нужно быстро переключить с причин проблем на поиск решений и имеющихся ресурсов (например, 'чудесный вопрос', 'поиск исключений из проблемы', 'шкалирование прогресса', /solution-focused-therapy). Применяет методы краткосрочной терапии де Шейзера и Берг: чудесный вопрос, шкалирование и поиск исключений. НЕ используйте для глубинного психоаналитического поиска причин."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/solution-focused-therapy/SKILL.fr.md",
+          "title": "Thérapie brève centrée sur les solutions",
+          "description": "À utiliser lorsque l'accent doit être mis rapidement et de façon orientée ressources sur les solutions et les exceptions plutôt que sur les causes du problème (ex. 'poser la question miracle', 'trouver des exceptions au problème', 'utiliser des questions d'échelle', /solution-focused-therapy). Transmet la thérapie brève de de Shazer et Berg : question miracle, exploration des exceptions, échelles et activation des ressources. Ne PAS utiliser pour une recherche psychodynamique approfondie des causes."
         }
       ]
     },
@@ -6680,6 +6818,12 @@
           "path": "skills/therapy/stabilization-techniques/SKILL.ru.md",
           "title": "Техники стабилизации (Stabilization Techniques)",
           "description": "Используйте для экстренной регуляции панических атак, флешбэков, эмоционального захлестывания или диссоциации (например, 'остановить паническую атаку', 'заземление при флешбэке', 'упражнение безопасное место', /stabilization-techniques). Предоставляет техники первой помощи: заземление 5-4-3-2-1, технику контейнера, безопасное место и регуляцию дыхания. НЕ используйте для вскрытия травматических воспоминаний в кризисе."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/stabilization-techniques/SKILL.fr.md",
+          "title": "Techniques de stabilisation",
+          "description": "Utilisez cette compétence lorsqu'une hyperactivation émotionnelle aiguë, une attaque de panique, un flashback ou une dissociation doivent être régulés rapidement (par ex. 'calmer une crise de panique', 'ancrage en cas de flashback', 'lieu sûr', /stabilization-techniques). Guide ancrage 5-4-3-2-1, coffre-fort, lieu sûr et respiration ; ne PAS utiliser pour une exposition traumatique en crise."
         }
       ]
     },
@@ -6737,6 +6881,12 @@
           "path": "skills/therapy/systemic-questioning/SKILL.ru.md",
           "title": "Техники системных вопросов (Systemic Questioning Techniques)",
           "description": "Используйте для расширения кругозора и преодоления ригидных рамок с помощью системных вопросов (например, 'циркулярные вопросы', 'системный рефрейминг', 'гипотетические вопросы', /systemic-questioning). Описывает техники системных вопросов: циркулярные триадические, шкалирующие, гипотетические и парадоксальные интервенции. НЕ используйте для количественных матриц принятия решений (используйте utilities/decide)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/systemic-questioning/SKILL.fr.md",
+          "title": "Techniques de questionnement systémique",
+          "description": "À utiliser lorsque des schémas de pensée figés doivent être assouplis et de nouvelles perspectives ouvertes grâce aux questions systémiques (ex. 'poser des questions circulaires', 'changer de perspective', 'utiliser des questions d'aggravation', /systemic-questioning). Transmet les techniques systémiques : questions circulaires, hypothétiques, d'échelle et paradoxales. Ne PAS utiliser pour de simples requêtes de données ou des matrices de décision structurées (utiliser utilities/decide)."
         }
       ]
     },
@@ -6794,6 +6944,12 @@
           "path": "skills/therapy/systemisch-loesungsfokussiert/SKILL.ru.md",
           "title": "Системные и ориентированные на решение методы (Systemic & Solution-Focused Methods)",
           "description": "Используйте для интеграции системного подхода и ориентированной на решение краткосрочной терапии в консультировании (например, 'системное консультирование', 'вопросы о решениях и циркулярность', /systemisch-loesungsfokussiert). Объединяет циркулярные вопросы, чудесный вопрос, поиск исключений и шкалы в единый инструментарий. НЕ используйте для стандартных дневников мыслей КПТ (используйте cognitive-restructuring)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/systemisch-loesungsfokussiert/SKILL.fr.md",
+          "title": "Méthodes systémiques et orientées solutions",
+          "description": "Utilisez cette compétence lorsque des perspectives systémiques et des techniques de questionnement orientées solutions doivent être intégrées dans l'accompagnement ou la réflexion (par ex. 'accompagnement systémique', 'focus solution et circularité', /systemisch-loesungsfokussiert). Combine question du miracle, questions circulaires, exceptions et graduation ; ne PAS utiliser pour des journaux de pensées TCC (cognitive-restructuring)."
         }
       ]
     },
@@ -6907,6 +7063,12 @@
           "path": "skills/therapy/trauma-psychoeducation/SKILL.ru.md",
           "title": "Психообразование по травме (Trauma Psychoeducation)",
           "description": "Психообразование по травме: Определение травмы, нормальные реакции, окно толерантности, управление триггерами и самопомощь."
+        },
+        {
+          "language": "fr",
+          "path": "skills/therapy/trauma-psychoeducation/SKILL.fr.md",
+          "title": "Psychoéducation sur le traumatisme",
+          "description": "À utiliser pour transmettre une psychoéducation sur le traumatisme : définition du trauma, réactions normales face à des événements anormaux, fenêtre de tolérance, gestion des déclencheurs (triggers) et prise en soin de soi (ex. 'expliquer le trauma', 'fenêtre de tolérance', 'comprendre les triggers', /trauma-psychoeducation). Ne PAS utiliser pour le traitement du traumatisme ou l'exploration de souvenirs traumatiques."
         }
       ]
     },
@@ -7031,8 +7193,8 @@
         {
           "language": "fr",
           "path": "skills/utilities/batch-file-ops/SKILL.fr.md",
-          "title": "batch_file_ops - Batch File Operations (English)",
-          "description": "Utiliser pour effectuer des opérations de fichiers par lots (copier, déplacer, supprimer, lister) via des motifs glob (ex. 'déplacer des fichiers par lot', 'supprimer tous les *.tmp correspondants', /batch-file-ops). Exécute des actions sécurisées sur le système de fichiers sans dépendances externes. Ne PAS utiliser pour modifier du texte dans des fichiers ou éditer des fichiers un par un."
+          "title": "batch_file_ops — Opérations par lots sur fichiers",
+          "description": "Utilisez cette compétence lorsque des opérations par lots sur le système de fichiers telles que supprimer, déplacer, copier ou lister via des motifs glob doivent être exécutées (par ex. 'déplacer tous les fichiers *.log', 'renommer/supprimer en lot', /batch-file-ops). Sans dépendance externe ; ne PAS utiliser pour des modifications sémantiques de texte."
         }
       ]
     },
@@ -7209,6 +7371,12 @@
           "path": "skills/utilities/brainstorm/SKILL.ru.md",
           "title": "Brainstorm (Русский)",
           "description": "Использовать, когда нужно много новых идей, пока без оценки: названия, функции, кампании, концепции мероприятий или альтернативы привычному: 'брейншторм', 'дай 30 идей', 'мне нужны идеи для ...', 'что ещё можно попробовать', 'безумные идеи приветствуются', 'в голову приходит только привычное', 'прогони через SCAMPER', 'Шесть шляп', /brainstorm. Порождает широкий набор вариантов методами SCAMPER, «Шесть шляп мышления», интеллект-карты, обратный брейншторминг, ТРИЗ или быстрая генерация идей (сначала количество, при сборе без критики), затем группирует их и отбирает лучшие. НЕ использовать для поиска причины проблемы (think), выбора из имеющихся вариантов (decide), добычи идей с оглядкой на историю проекта и доведения одной до конца (idea-mining) и полной цепочки анализ-идеи-решение (structured-thinking)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/brainstorm/SKILL.fr.md",
+          "title": "Brainstorm — Créativité structurée",
+          "description": "À utiliser lorsque de nombreuses idées nouvelles sont souhaitées, encore sans évaluation : noms, fonctionnalités, campagnes, concepts d'événements ou alternatives à l'habituel ('brainstorm', 'donne-moi 30 idées', 'j'ai besoin d'idées pour...', 'fais un tour SCAMPER', 'Six Thinking Hats', /brainstorm). Produit un large éventail via SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ ou Rapid Ideation, regroupe et présélectionne. Ne PAS utiliser pour trouver la cause d'un problème (think), choisir entre des options existantes (decide) ou enchaîner analyse-idées-décision (structured-thinking)."
         }
       ]
     },
@@ -7350,6 +7518,12 @@
           "path": "skills/utilities/decide/SKILL.ru.md",
           "title": "Decide — Структурированное принятие решений (Русский)",
           "description": "Используйте, когда нужно выбрать между двумя или более вариантами и выбор связан с компромиссами, ограничениями или несколькими критериями (стоимость, риск, соответствие требованиям, трудозатраты, возможности команды, привязка к поставщику, сроки), даже если один вариант поначалу кажется очевидным: «X или Y?», «использовать A или B?», «что лучше для ...?», «помоги решить», «взвесь плюсы и минусы», «что ты рекомендуешь?», «Decide.», /decide. Подходит для технических решений (базы данных, фреймворки, библиотеки, архитектуры, хостинг, поставщики, инструменты), а также для планов, покупок и приоритетов. Прорабатывает решение с явно взвешенными критериями и подходящим методом (матрица «за/против», взвешенная оценка, дерево решений, сценарный анализ, матрица Эйзенхауэра) и завершает его обоснованной рекомендацией. НЕ используйте для сбора множества открытых решений (decision-briefing) или для сжатия готового анализа (decision-shot)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/decide/SKILL.fr.md",
+          "title": "Decide — Prise de décision structurée",
+          "description": "Utilisez cette compétence lorsqu'il faut trancher entre deux options ou plus et que le choix implique des compromis, contraintes ou critères multiples (coût, risque, conformité, effort, capacité, échéance) : 'X ou Y ?', 'aidez-moi à décider', 'peser le pour et le contre', /decide. Ne PAS utiliser pour lister de nombreuses décisions ouvertes (decision-briefing) ni pour synthétiser une analyse existante (decision-shot)."
         }
       ]
     },
@@ -7407,6 +7581,12 @@
           "path": "skills/utilities/decision-briefing/SKILL.ru.md",
           "title": "Decision-Briefing — Проработка множества решений по одной теме (Русский)",
           "description": "Используйте каждый раз, когда накоплено несколько нерешенных вопросов — в рамках темы, проекта, документа или в ходе сессии: проведите инвентаризацию, представьте пронумерованный брифинг с вариантами A/B/C/D и отмеченной рекомендацией, примите ответы буквами (включая пакетный ввод), зафиксируйте результаты и запишите их обратно в исходные документы."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/decision-briefing/SKILL.fr.md",
+          "title": "Decision-Briefing — Traiter de façon structurée de nombreuses décisions d'un même sujet",
+          "description": "À utiliser dès que plusieurs décisions sont en attente ou se sont accumulées — dans un sujet, un projet, un document ou au fil d'une session : les inventorier, présenter un briefing numéroté avec options A/B/C/D et recommandation marquée, accepter les réponses par lettres (y compris en lot), enregistrer les résultats et les répercuter dans les documents sources."
         }
       ]
     },
@@ -7615,8 +7795,8 @@
         {
           "language": "fr",
           "path": "skills/utilities/encoding-fix/SKILL.fr.md",
-          "title": "Encoding Fix (English)",
-          "description": "Utiliser lorsque des fichiers texte souffrent de corruption d'encodage ou de mojibake (ex. 'réparer encodage corrompu', 'corriger accents/mojibake', 'UTF-8 doublement encodé', /encoding-fix). Corrige les erreurs cp1252, Latin-1 et UTF-8 multi-encodé sans dépendances externes. Ne PAS utiliser pour de simples conversions de format sans altération d'encodage."
+          "title": "Encoding Fix — Correction d'encodage",
+          "description": "Utilisez cette compétence lorsque des fichiers sont corrompus par un mauvais encodage de caractères (par ex. 'réparer le mojibake', 'accents cassés', 'UTF-8 doublement encodé', /encoding-fix). Corrige les erreurs cp1252, Latin-1 et UTF-8 double/triple encodé sans dépendances ; ne PAS utiliser pour de simples conversions de format sans altération d'encodage."
         }
       ]
     },
@@ -7706,8 +7886,8 @@
         {
           "language": "fr",
           "path": "skills/utilities/folder-flattening/SKILL.fr.md",
-          "title": "Workflow: Folder Flattening (English)",
-          "description": "Utiliser pour aplatir des arborescences de répertoires profondément imbriquées en une structure claire et lisible par machine (ex. 'aplatir la hiérarchie de dossiers', 'réduire les sous-dossiers imbriqués', /folder-flattening). Exécute un aplatissement déterministe avec gestion des collisions et fusion sécurisée. Ne PAS utiliser pour déplacer de simples fichiers individuels (utiliser batch-file-ops)."
+          "title": "Workflow : Aplatissement de dossiers (Folder-Flattening)",
+          "description": "À utiliser lorsque des arborescences de dossiers profondément imbriquées doivent être transformées en une hiérarchie plate et lisible par machine (ex. 'aplatir l'arborescence de dossiers', 'résoudre les répertoires imbriqués', /folder-flattening). Exécute un aplatissement déterministe des dossiers avec analyse par triplets et fusion de fichiers sans conflit. Ne PAS utiliser pour le simple déplacement de quelques fichiers isolés (utiliser batch-file-ops)."
         }
       ]
     },
@@ -7793,6 +7973,12 @@
           "path": "skills/utilities/idea-mining/SKILL.ru.md",
           "title": "Idea-Mining — Добыча идей, фильтрация, реализация одной идеи",
           "description": "Использовать, когда сложная проблема давно буксует и нужны новые подходы, сверенные с уже испробованным, один из которых доводится до конца: исследовательские вопросы, доказательства, упорные тупики в архитектуре или дизайне, периодические раунды инноваций по проекту: 'мы ходим по кругу', 'застряли на недели', 'накопай новые подходы', 'собери идеи и отфильтруй по нашим заметкам или журналу решений', 'не повторяй тупики', 'проработай одну идею до конца', 'раунд инноваций', /idea-mining. Наполняет IDEENSPEICHER.md идеями из восьми техник (аналогии из других областей, поиск литературы, соседние проекты), фильтрует их по документации проекта, выбирает одну, доводит её и фиксирует также неудачи. НЕ использовать для быстрого свободного списка идей без фильтра и продолжения (brainstorm), выбора из имеющихся вариантов (decide), диагностики конкретной ошибки (think) и простой цепочки анализ-идеи-решение (structured-thinking)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/idea-mining/SKILL.fr.md",
+          "title": "Idea-Mining — Extraire des idées, filtrer, en mener une à terme",
+          "description": "Utilisez cette compétence lorsqu'un problème difficile stagne depuis longtemps et que de nouvelles pistes doivent être trouvées, filtrées contre ce qui a déjà été tenté, puis poussées jusqu'au bout : recherche, preuves, blocages d'architecture, /idea-mining. Ne PAS utiliser pour une liste rapide d'idées sans filtre (brainstorm) ni pour choisir entre des options déjà prêtes (decide)."
         }
       ]
     },
@@ -7871,6 +8057,12 @@
           "path": "skills/utilities/law-checker/SKILL.ru.md",
           "title": "law-checker (Юридический отдел) -- Pointer Skill",
           "description": "Ссылается на автономный модуль law-checker (\"Юридический отдел\"): первичные юридические оценки ИИ на основе первоисточников для немецкого права с реестром законов и агентом воплощения законов. Используйте этот скилл, когда ситуация, договор, официальное уведомление или юридический вопрос по немецкому праву должны быть проверены с точными цитатами (статья/параграф, абзац, предложение) -- со строгим ограничением: первичная ориентация с помощью ИИ, а не замена адвоката."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/law-checker/SKILL.fr.md",
+          "title": "law-checker — Compétence de renvoi juridique",
+          "description": "À utiliser lorsqu'une situation, un contrat, un avis administratif ou une question juridique relevant du droit allemand doit être analysé avec citations exactes (article/paragraphe, alinéa, phrase) via le module autonome `law-checker` (« Legal Department ») : registre de lois, agent incarnant les codes juridiques et première orientation IA sourcée — avec limite claire : aide à l'orientation, ne remplace pas un avocat."
         }
       ]
     },
@@ -7908,25 +8100,25 @@
           "language": "es",
           "path": "skills/utilities/lebende-verfassung/SKILL.es.md",
           "title": "Constitución Viva — Instancia de auditoría neutral (Arquitectura 5-CORE, v4)",
-          "description": "Usar cuando se requiera analizar o evaluar una decisión política, ley, reforma o conflicto social desde una perspectiva moral-legal neutral y de generaciones futuras (ej. 'examinar desde la perspectiva de las generaciones futuras', '¿qué dice la Ley Fundamental?', 'evaluación de impacto', 'analiza esta reforma', /lebende-verfassung). Ejecuta la arquitectura 5-CORE con superposición moral, códigos legales y evaluación de impacto en dos etapas (retrospectiva y prospectiva). NO usar para asesoramiento jurídico formal ni decisiones partidistas."
+          "description": "Úselo cuando se requiera analizar, examinar o dictaminar una decisión política, proyecto de ley, reforma, resolución presupuestaria o controversia social desde una perspectiva moral-legal neutral y de generaciones futuras (ej. 'evaluación de impacto', 'analiza esta reforma', /lebende-verfassung). Orquesta la arquitectura 5-CORE con superposición moral, códigos legales, evaluación de impacto en dos etapas y flujo configurable."
         },
         {
           "language": "zh",
           "path": "skills/utilities/lebende-verfassung/SKILL.zh.md",
-          "title": "活的宪法 — 中立审查机构（5-CORE 架构，v4）",
-          "description": "针对政治与决策的无偏见道德-法律审查机构 —— 研究项目“未出生者的立场”（阴影模式第1阶段）的可运行原型。每当需要分析、审查或评估一项政治决策、法律（草案）、改革、预算决议或社会争议问题时使用此 Skill —— 也包括诸如“从后代视角审查”、“法律通行证”、“基本法对此怎么说”、“叠加审查”、“立法历史/容器分析”、“影响评估”、“分析这项改革”、“活的宪法”等表述，或者当用户提出政治问题并要求提供中立的多阶段评估时。编排 5-CORE 架构（config.json）：道德叠加实例、法典化身、两阶段影响评估（具有证据层级的回顾性/前瞻性）、具有本地存储的知识句柄、可配置的工作流。"
+          "title": "活宪法（Lebende Verfassung）— 中立审查实例（5-CORE 架构，v4）",
+          "description": "当需要以中立、多层次的方式分析、审查或评估政治决策、法律草案、改革方案、预算决议或社会争议问题时使用此技能——研究项目《未出生者的立场》（Die Position der Ungeborenen）的可运行原型（影子模式第1阶段）。适用于“从未来世代视角审查”“法律通行证”“基本法对此有何规定”“叠加态审查”“法律文本史/容器分析”“影响评估”“分析这项改革”或“活宪法（lebende Verfassung）”等请求，负责编排 5-CORE 架构（config.json）：道德叠加态实例、法典化身、两阶段影响评估（回顾性/前瞻性与证据层级）、带本地存储的知识处理器以及可调工作流。"
         },
         {
           "language": "ja",
           "path": "skills/utilities/lebende-verfassung/SKILL.ja.md",
-          "title": "生きている憲法 — 中立的な審査機関（5-COREアーキテクチャ, v4）",
-          "description": "政治と意思決定味方のための中立的な道徳的・法的審査機関 — 研究プロジェクト「未だ生まれざる者の立場」（シャドウモードステージ1）の実行可能なプロトタイプ。政治的決定、法案、改革、予算決議、または社会的争点を分析、審査、評価する際にはいつでもこのSkillを使用してください。「将来の世代の視点から審査する」、「法律パス」、「基本法はこれについて何と言っているか」、「スーパーポジション審査」、「立法史/コンテナ分析」、「影響評価」、「この改革を分析する」、「生きている憲法」などの表現や、ユーザーが中立的で多段階の評価を求めて政治的質問を持ち込んだ場合にも使用します。5-COREアーキテクチャ（config.json）をオーケストレーションします：道徳的スーパーポジションインスタンス、法典の具現化、2段階の影響評価（エビデンス階層を伴う回顧的/展望的）、ローカルストレージを備えたナレッジハンドラー、設定可能なワークフロー。"
+          "title": "生きた憲法（Lebende Verfassung）— 中立的検証機関（5-CORE アーキテクチャ v4）",
+          "description": "政治的決定、法案・改正案、予算決議、社会的争点を中立的な道徳的・法的検証機関として多層的に分析・評価する場合に使用します（研究プロジェクト『Die Position der Ungeborenen』の実行可能なプロトタイプ／シャドーモード第1段階）。「将来世代の視点から検証して」「基本法・憲法の観点」「重ね合わせ（スーパーポジション）検証」「影響評価」「この改革を分析して」などの指示で起動し、5-COREアーキテクチャ（config.json）をオーケストレーションします。"
         },
         {
           "language": "ru",
           "path": "skills/utilities/lebende-verfassung/SKILL.ru.md",
           "title": "Живая Конституция — Нейтральный аудиторский орган (Архитектура 5-CORE, v4)",
-          "description": "Нейтральный морально-правовой аудиторский орган для политики и решений — рабочий прототип исследовательского проекта «Позиция неродившихся» (Теневой режим, Этап 1). Используйте этот skill всякий раз, когда необходимо проанализировать, проверить или оценить политическое решение, законопроект, реформу, бюджетную резолюцию или спорный общественный вопрос — также при таких формулировках, как «проверить с точки зрения будущих поколений», «паспорт закона», «что об этом говорит Основной закон», «проверка суперпозиции», «история законодательства/контейнерный анализ», «оценка воздействия», «проанализировать эту реформу», «живая конституция» или когда пользователь задает политический вопрос с просьбой о нейтральной многоэтапной оценке. Оркеструет архитектуру 5-CORE (config.json): экземпляр моральной суперпозиции, воплощения сводов законов, двухэтапную оценку воздействия (ретроспективную/проспективную с иерархией доказательств), обработчик знаний с локальным хранилищем, настраиваемый рабочий процесс."
+          "description": "Используйте этот навык, когда необходимо нейтрально проанализировать, проверить или оценить политическое решение, законопроект, реформу, бюджетное постановление или общественный спор с позиций морали, права и будущих поколений (напр., 'оценка воздействия', 'проанализируй реформу', /lebende-verfassung). Оркестрирует архитектуру 5-CORE с моральной суперпозицией, кодексами законов, двухэтапной оценкой воздействия и настраиваемым процессом."
         }
       ]
     },
@@ -8073,8 +8265,8 @@
         {
           "language": "fr",
           "path": "skills/utilities/nulcleaner/SKILL.fr.md",
-          "title": "nulcleaner - Windows NUL File Cleanup (English)",
-          "description": "[Français] Compétence d'agent pour nulcleaner: Finds and deletes Windows-reserved NUL files created by using /dev/null in Git Bash. Headless or with GUI."
+          "title": "nulcleaner — Nettoyage des fichiers NUL sous Windows",
+          "description": "Utilisez cette compétence pour trouver et supprimer les fichiers réservés Windows NUL créés lors de l'utilisation de /dev/null dans Git Bash. Fonctionne en mode headless ou avec interface graphique."
         }
       ]
     },
@@ -8192,8 +8384,8 @@
         {
           "language": "fr",
           "path": "skills/utilities/privat-mail-writer/SKILL.fr.md",
-          "title": "Privat-Mail-Writer (English)",
-          "description": "Utiliser pour rédiger, répondre ou affiner des e-mails personnels ou semi-formels avec un ton authentique (ex. 'écrire un e-mail à...', 'rédiger un refus poli', 'raccourcir et relancer par e-mail', /privat-mail-writer). Formule des courriels précis et adaptés au destinataire. Ne PAS utiliser pour les campagnes marketing ou le démarchage de masse (utiliser dev/community-outreach)."
+          "title": "Privat-Mail-Writer — Rédacteur d'e-mails personnels",
+          "description": "À utiliser lorsque des e-mails privés ou semi-formels doivent être rédigés, répondus ou formulés avec justesse de ton (ex. 'écris un mail à...', 'rédiger un refus poli', 'raccourcir le mail et relancer', /privat-mail-writer). Rédige des messages précis et adaptés à chaque contact. Ne PAS utiliser pour des campagnes marketing commerciales ou des envois en masse (utiliser dev/community-outreach)."
         }
       ]
     },
@@ -8279,6 +8471,12 @@
           "path": "skills/utilities/steuer-assistent/SKILL.ru.md",
           "title": "steuer-assistent -- Pointer Skill (Русский)",
           "description": "Указывает на автономный модуль steuer-assistent: локальный автономный (offline-first) рабочий лист квитанций для расходов немецких работников, связанных с получением дохода (Werbungskosten) -- запись, суммирование до цента, приватный экспорт в ZIP. Используйте этот skill, когда квитанции Werbungskosten должны быть подготовлены структурированным образом -- с четким ограничением: не является налоговой консультацией, не проверяет возможность вычета, не создает и не отправляет налоговую декларацию (это происходит через ELSTER или одобренное программное обеспечение)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/steuer-assistent/SKILL.fr.md",
+          "title": "steuer-assistent — Compétence de renvoi",
+          "description": "Utilisez cette compétence lorsque des justificatifs de frais professionnels allemands (Werbungskosten) doivent être préparés de manière structurée via le module autonome steuer-assistent : enregistrement local, somme au centime près, export ZIP privé. Limite stricte : aucun conseil fiscal ni dépôt via ELSTER."
         }
       ]
     },
@@ -8336,6 +8534,12 @@
           "path": "skills/utilities/structured-thinking/SKILL.ru.md",
           "title": "Structured Thinking — Анализировать, Генерировать идеи, Принимать решения",
           "description": "Использовать, когда запутанной или ответственной ситуации нужна вся цепочка за один проход: понять настоящую проблему, породить варианты, затем решить: 'помоги всё продумать', 'от причины до решения', 'структурированное мышление', 'проблема, идеи, решение', 'не могу решить, стоит ли мне ...', 'никто не знает почему ..., а мне нужно что-то сказать совету директоров', 'сначала анализ, потом варианты, потом рекомендация', /structured-thinking. Мета-процесс из трёх фаз: анализ (think), генерация идей (brainstorm), решение (decide); ненужная фаза пропускается, результат выдаётся с обоснованием. НЕ использовать, когда нужен только один шаг: чистый анализ или причины (think), только идеи (brainstorm), выбор из уже имеющихся вариантов (decide) или идеи, которые нужно отфильтровать по истории проекта и довести до конца (idea-mining)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/structured-thinking/SKILL.fr.md",
+          "title": "Pensée structurée — Analyser, trouver des idées, décider",
+          "description": "Utilisez cette compétence lorsqu'une situation confuse ou lourde de conséquences nécessite toute la chaîne en une seule passe : comprendre le vrai problème (think), générer des options (brainstorm), puis décider (decide), par ex. /structured-thinking. Ne PAS utiliser si une seule étape est demandée (think, brainstorm, decide) ou pour filtrer des idées contre l'historique (idea-mining)."
         }
       ]
     },
@@ -8393,6 +8597,12 @@
           "path": "skills/utilities/think/SKILL.ru.md",
           "title": "Think — Решение проблем и анализ",
           "description": "Использовать, когда нужно сначала понять проблему вне кода, прежде чем что-то решать или менять: процесс, организация, продукт, стратегия, метрика или поведение системы на уровне бизнеса с несколькими возможными причинами, клубок, который нужно разложить на части, или ситуация, требующая SWOT или взгляда 80/20: 'почему это постоянно повторяется ...', 'найди первопричину', 'пять почему', 'разбей на подзадачи', 'с чего начать', 'быстрый SWOT', 'что здесь на самом деле происходит', /think. Применяет «разделяй и властвуй», анализ первопричин (Root Cause), ослабление ограничений, поиск аналогий, SWOT, Парето и диаграмму Исикавы и завершается найденной причиной или структурой и первым, что нужно проверить. НЕ использовать для дефектов ПО (сообщения об ошибках, падающие сборки, тесты или деплои, регрессии: bugfix-protocol), генерации множества идей (brainstorm), выбора из имеющихся вариантов (decide), добычи идей с оглядкой на историю проекта (idea-mining) и полной цепочки анализ-идеи-решение (structured-thinking)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/think/SKILL.fr.md",
+          "title": "Think — Résolution de problèmes et analyse",
+          "description": "Utilisez cette compétence lorsqu'un problème hors code doit être compris avant de décider ou d'agir : processus, organisation, produit, stratégie, indicateur ou comportement système à causes multiples, /think. Applique Divide & Conquer, cause racine, SWOT et Pareto ; ne PAS utiliser pour les défauts logiciels (bugfix-protocol), l'idéation pure (brainstorm) ou le choix d'options (decide)."
         }
       ]
     },
@@ -8450,6 +8660,12 @@
           "path": "skills/utilities/video-transcriber/SKILL.ru.md",
           "title": "Video Transcriber (Русский)",
           "description": "Используйте для получения транскриптов, субтитров или метаданных из онлайн-видеосервисов (например, YouTube) (например, 'транскрибировать видео с YouTube', 'скачать субтитры к видео', /video-transcriber). Извлекает ручные и автоматические субтитры в форматах Markdown, JSON или обычном тексте. НЕ используйте для локальной транскрипции аудио через Whisper (используйте assist/transkription)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/utilities/video-transcriber/SKILL.fr.md",
+          "title": "Video-Transkriber — Transcripteur vidéo",
+          "description": "Utilisez cette compétence lorsque des transcriptions, sous-titres ou métadonnées de vidéos en ligne doivent être téléchargés (par ex. 'transcrire vidéo YouTube', 'télécharger sous-titres', /video-transcriber). Extrait sous-titres manuels et automatiques en Markdown, JSON ou texte ; ne PAS utiliser pour la transcription audio locale via Whisper (assist/transkription)."
         }
       ]
     },
@@ -8511,8 +8727,8 @@
         {
           "language": "fr",
           "path": "skills/web/web-reading/SKILL.fr.md",
-          "title": "Web Reading (Router) (English)",
-          "description": "Utiliser lorsque le contenu d'une page web doit être lu, extrait ou analysé (ex. 'lire cette page web', 'extraire le texte de l'URL', 'analyser le contenu du site', /web-reading). Détermine s'il faut le texte principal, la structure ou une capture d'écran et oriente vers le bon outil. Ne PAS utiliser pour les requêtes d'API directes ou les simples téléchargements."
+          "title": "Lecture de pages web (Routeur)",
+          "description": "Utilisez cette compétence lorsque le contenu de pages web doit être lu, extrait ou analysé (par ex. 'lis cette page web', 'extraire le texte de l'URL', 'analyser le contenu d'un site', /web-reading). Décide selon le besoin entre texte principal, structure ou capture d'écran et route vers l'outil adapté sur le système ; ne PAS utiliser pour de simples appels d'API REST."
         }
       ]
     }

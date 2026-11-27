@@ -1,80 +1,90 @@
 ---
+name: rbx-dev
+version: 1.0.2
+type: skill
+author: Lukas Geiger + Claude
+created: 2026-06-17
+updated: 2026-11-27
+description: "Utilisez cette compétence pour TOUT projet de développement de jeu Roblox : planifier, construire ou configurer un jeu Roblox, structurer un nouveau projet, définir l'architecture du code (Main + modules manager, _G.ClientState + HUD, remotes dans GameEnums), éviter les pièges Luau/Roblox, ou orienter vers les compétences spécialisées /rojo, /rbx-studio et /game-design."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: game-dev
+tags: [roblox, luau, rojo, studio, game-design, architektur, meta, gamedev]
 language: fr
+status: active
+visibility: public
+dependencies: {'tools': ['rojo', 'rokit'], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/rbx-dev/', 'origin_version': '1.0.0', 'origin_repo': None, 'last_sync_from_origin': None, 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
 <img src="banner.png" width="100%" alt="rbx-dev banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `rbx-dev`.
 
-> **Note:** Not affiliated with Roblox Corporation; "Roblox" is a trademark of its owners. "rbx" is the common community shorthand.
+> **Remarque :** Non affilié à Roblox Corporation ; « Roblox » est une marque de ses propriétaires respectifs. « rbx » est l'abréviation communautaire usuelle.
 
+# Roblox-Dev — Méta-compétence pour le développement de jeux Roblox
 
+## Finalité
 
-# Roblox-Dev — Meta-Skill for Roblox Game Development (English)
+Le point d'entrée central pour le développement de jeux Roblox avec un flux de travail versionnable basé sur Rojo. Cette compétence rassemble les connaissances transversales — structure de projet, patrons d'architecture et principaux pièges Luau — et oriente vers les trois sous-compétences spécialisées pour les questions pointues :
 
-## Présentation et Objectif & Purpose
-
-The central entry point for Roblox game dev with a Rojo-based, version-controllable workflow.
-This skill bundles the overarching knowledge — project structure, architecture patterns and the
-most important Luau pitfalls — and routes specialist questions to the three sub-skills:
-
-| Sub-skill | What for |
+| Sous-compétence | Pour quoi |
 | --- | --- |
-| **`/rojo`** | Filesystem→Studio sync, `default.project.json`, rokit/Wally/Lune, project skeleton, sync problems |
-| **`/rbx-studio`** | Studio operation, scene-vs-code mode, Studio MCP, asset pipeline, **malware scan** |
-| **`/game-design`** | Roles & subtasks, development chains, Game Design Document (KONZEPT.md), multi-agent |
+| **`/rojo`** | Sync système de fichiers → Studio, `default.project.json`, rokit/Wally/Lune, squelette de projet, problèmes de sync |
+| **`/rbx-studio`** | Utilisation de Studio, mode scène vs code, Studio-MCP, pipeline d'assets, **analyse anti-malware** |
+| **`/game-design`** | Rôles et sous-tâches, chaînes de développement, Game Design Document (`KONZEPT.md`), multi-agents |
 
-> Routing rule: If it's about **sync/build/setup** → `/rojo`. About **editor/assets/testing in Studio**
-> → `/rbx-studio`. About **concept/roles/process** → `/game-design`. About **code architecture,
-> Luau pitfalls or the overall flow** → stay here.
+> Règle de routage : Pour **Sync/Build/Setup** → `/rojo`. Pour **Éditeur/Assets/Tests dans Studio**
+> → `/rbx-studio`. Pour **Concept/Rôles/Processus** → `/game-design`. Pour **l'architecture du code,
+> les pièges Luau ou le déroulé global** → rester ici.
 
-## Stack at a Glance
+## Stack en un coup d'œil
 
-- **Language:** Luau (`.luau`, not `.lua`). Code in English, comments/docs in German, UI texts in German.
-- **Sync:** Rojo via rokit (pinned tool versions). Filesystem = source of truth.
-- **Tools:** Rojo (sync/build), Lune (tests/scripts outside Studio), Wally (packages),
-  optionally Knit (service/controller framework, new projects), Selene (linter).
-- **Control:** Roblox-Studio-MCP for AI-driven inspection/tests/asset insertion.
+- **Langage :** Luau (`.luau`, pas `.lua`). Code en anglais, commentaires/documentation en français ou langue du projet, textes UI localisés.
+- **Sync :** Rojo via rokit (versions d'outils figées). Système de fichiers = source de vérité.
+- **Outils :** Rojo (sync/build), Lune (tests/scripts hors Studio), Wally (paquets), optionnellement Knit (framework Services/Controllers pour nouveaux projets), Selene (linter).
+- **Pilotage :** Roblox-Studio-MCP pour inspection, tests et insertion d'assets pilotés par IA.
 
-## Project Structure (Standard)
+## Structure de projet (standard)
 
 ```
-ProjektName/
-├── default.project.json     # Rojo-Mapping
-├── rokit.toml               # gepinnte Tool-Versionen
-├── wally.toml               # Package-Dependencies
+NomProjet/
+├── default.project.json     # Mappage Rojo
+├── rokit.toml               # versions d'outils figées
+├── wally.toml               # dépendances de paquets
 ├── KONZEPT.md               # Game Design Document
 ├── src/
-│   ├── shared/              # → ReplicatedStorage(.ProjektName.shared)
-│   │   ├── Config.luau      # zentrale Werte, States, Gameplay-Parameter
-│   │   ├── GameEnums.luau   # Enums, Remote-Namen, Konstanten
-│   │   └── *Defs.luau       # Datendefinitionen (Items, Einheiten, Level)
-│   ├── server/              # → ServerScriptService(.ProjektName)
-│   │   ├── Main.server.luau # EINZIGER Server-Entry-Point (Script)
-│   │   └── *Manager.luau    # ModuleScripts, von Main per require() geladen
-│   ├── client/              # → StarterPlayerScripts(.ProjektName)
-│   │   └── GameClient.client.luau   # Client-Entry-Point (LocalScript)
-│   └── gui/                 # → StarterGui(.ProjektName)
-│       └── *HUD.client.luau # GUI-Aufbau + Heartbeat-Loop
-└── assets/                  # optionale .rbxm/.rbxl (scriptfrei)
+│   ├── shared/              # → ReplicatedStorage(.NomProjet.shared)
+│   │   ├── Config.luau      # valeurs centrales, états, paramètres de gameplay
+│   │   ├── GameEnums.luau   # énumérations, noms de Remotes, constantes
+│   │   └── *Defs.luau       # définitions de données (objets, unités, niveaux)
+│   ├── server/              # → ServerScriptService(.NomProjet)
+│   │   ├── Main.server.luau # UNIQUE point d'entrée serveur (Script)
+│   │   └── *Manager.luau    # ModuleScripts, chargés par Main via require()
+│   ├── client/              # → StarterPlayerScripts(.NomProjet)
+│   │   └── GameClient.client.luau   # point d'entrée client (LocalScript)
+│   └── gui/                 # → StarterGui(.NomProjet)
+│       └── *HUD.client.luau # construction GUI + boucle Heartbeat
+└── assets/                  # fichiers .rbxm/.rbxl optionnels (sans scripts)
 ```
 
-A skeleton is created by `/rojo` via `scaffold_roblox_project.sh`.
+Un squelette est créé par `/rojo` via `scaffold_roblox_project.sh`.
 
-## Architecture Patterns
+## Patrons d'architecture
 
-**Server — Main + manager modules.** Only **one** Script per project: `Main.server.luau`. It
-centrally creates the remotes folder and loads all feature modules via `require()`:
+**Serveur — Main + modules Manager.** Un seul `Script` par projet : `Main.server.luau`. Il crée centralement le dossier `Remotes` et charge tous les modules métier via `require()` :
 ```lua
 Main.server.luau (Script)
-  ├─ require(StationManager)     -- .luau ModuleScripts
+  ├─ require(StationManager)     -- ModuleScripts .luau
   ├─ require(PlayerSession)
-  └─ erstellt RemoteEvents → verbindet OnServerEvent-Handler
+  └─ crée les RemoteEvents → connecte les gestionnaires OnServerEvent
 ```
-All other server files are `.luau` (ModuleScripts).
+Tous les autres fichiers serveur sont des `.luau` (ModuleScripts).
 
-**Client — shared state + HUD.** The GameClient writes a shared state, the HUD reads
-it in the Heartbeat:
+**Client — état partagé + HUD.** Le `GameClient` écrit un état partagé et le HUD le lit dans le `Heartbeat` :
 ```lua
 -- GameClient:
 _G.ClientState = { gameState = "Lobby", health = 100 }
@@ -85,57 +95,53 @@ RunService.Heartbeat:Connect(function()
 end)
 ```
 
-**Remotes — centralized in GameEnums.** Define remote names once in `GameEnums.Remotes`;
-the server creates the events from them, the client looks them up via the same names. That way there are no
-string mismatches between server and client.
+**Remotes — centralisés dans GameEnums.** Définir les noms de Remotes une seule fois dans `GameEnums.Remotes` ; le serveur crée les événements à partir de là, le client les recherche avec ces mêmes noms. Ainsi, aucun décalage de chaîne ne survient entre serveur et client.
 
-## Overall Flow of a Game
+## Déroulé global d'un jeu
 
-1. **Concept** (`/game-design`): KONZEPT.md — genre, USP, 3–4 core mechanics, monetization.
-2. **Setup** (`/rojo`): scaffold the skeleton, define the `default.project.json` mapping.
-3. **Backend**: Config → GameEnums → *Defs → Main.server → *Manager.
-4. **Frontend**: GameClient → HUD.
-5. **Greybox playtest** (`/rbx-studio`): gameplay first, parts + optionally AI materials.
-6. **Asset upgrade** (`/rbx-studio`): Creator Store assets, **malware scan**, scene as .rbxl.
-7. **Test** (`/game-design`): QA + game critic + persona blind tests, iterate.
-8. **Release** (`/game-design` business role): store page, monetization, live ops.
+1. **Concept** (`/game-design`) : `KONZEPT.md` — genre, USP, 3 à 4 mécaniques cœur, monétisation.
+2. **Setup** (`/rojo`) : générer le squelette, définir le mappage `default.project.json`.
+3. **Backend** : Config → GameEnums → *Defs → Main.server → *Manager.
+4. **Frontend** : GameClient → HUD.
+5. **Playtest Greybox** (`/rbx-studio`) : gameplay d'abord, Parts + éventuellement matériaux IA.
+6. **Mise à niveau des assets** (`/rbx-studio`) : assets Creator Store, **analyse anti-malware**, scène en `.rbxl`.
+7. **Tests** (`/game-design`) : QA + critique de jeu + tests aveugles par personas, itérer.
+8. **Release** (`/game-design` rôle business) : page du store, monétisation, Live-Ops.
 
-## Luau/Roblox Pitfalls (Short List)
+## Pièges Luau / Roblox (liste courte)
 
-The most common pitfalls — full, annotated list:
+Les écueils les plus fréquents — liste complète et commentée :
 [`references/lessons-learned-luau.md`](references/lessons-learned-luau.md).
 
-- Semicolon after `task.wait(x)` when more code follows on the same line.
-- `Model.Position` does not exist → `model:GetPivot().Position`.
-- `#table` on dictionaries = 0 → count manually.
-- `mouse.Hit` can be nil → check before use.
-- DataStore calls **always** in `pcall`.
-- `tick()` deprecated → `os.clock()`; `SetPrimaryPartCFrame` → `PivotTo`.
-- Event names centralized in `GameEnums.Remotes`; create all remotes in `Main.server.luau`.
-- No circular `require`s (otherwise deadlock).
-- `require()` only on `.luau` ModuleScripts, never on Scripts/LocalScripts.
+- Point-virgule après `task.wait(x)` si d'autres instructions suivent sur la même ligne.
+- `Model.Position` n'existe pas → `model:GetPivot().Position`.
+- `#table` sur des dictionnaires = 0 → compter manuellement.
+- `mouse.Hit` peut être `nil` → vérifier avant usage.
+- Appels `DataStore` **toujours** dans `pcall`.
+- `tick()` obsolète → `os.clock()` ; `SetPrimaryPartCFrame` → `PivotTo`.
+- Noms d'événements centralisés dans `GameEnums.Remotes` ; créer tous les Remotes dans `Main.server.luau`.
+- Aucun `require` circulaire (sinon interblocage).
+- `require()` uniquement sur des ModuleScripts `.luau`, jamais sur des Scripts/LocalScripts.
 
-## Before Every Commit (Checklist)
+## Avant chaque commit (check-list)
 
-- [ ] Semicolons after `task.wait(...)` in multi-statement lines
-- [ ] no `Model.Position`, no `tick()`, no `SetPrimaryPartCFrame`
-- [ ] DataStore in `pcall`, `mouse.Hit` checked for nil
-- [ ] event names match server↔client (via GameEnums)
-- [ ] all RemoteEvents created in `Main.server.luau`
-- [ ] no circular requires
-- [ ] marketplace assets scanned (`/rbx-studio` → malware scan), reports filed
+- [ ] Points-virgules après `task.wait(...)` dans les instructions multiples
+- [ ] Aucun `Model.Position`, aucun `tick()`, aucun `SetPrimaryPartCFrame`
+- [ ] `DataStore` dans `pcall`, `mouse.Hit` vérifié contre `nil`
+- [ ] Noms d'événements cohérents serveur ↔ client (via `GameEnums`)
+- [ ] Tous les `RemoteEvent` créés dans `Main.server.luau`
+- [ ] Aucun `require` circulaire
+- [ ] Assets du Marketplace analysés (`/rbx-studio` → analyse anti-malware), rapports archivés
 
-## Knowledge Sources
+## Sources de connaissances
 
-- **Current engine/creator docs:** Context7 MCP — `resolve-library-id` →
-  `/websites/create_roblox_reference_engine` (engine API) and `/roblox/creator-docs`
-  (tutorials/guides); fallback <https://create.roblox.com/docs>.
-- **Reference pipeline** (if present on this system): `<your Roblox project pipeline>` —
-  including `SKILL.md`, `GUIDE.md`, `LESSONS_LEARNED.md`, `ROJO_FAQ.md`, `ROBLOX_MCP_FAQ.md`,
-  `AGENT_ROLES.md`, `_malware_reports/PATTERNS.md`, `_knowledge/` (local API cache).
+- **Documentation officielle Engine/Creator à jour :** Context7 MCP — `resolve-library-id` → `/websites/create_roblox_reference_engine` (API Engine) et `/roblox/creator-docs` (tutoriels/guides) ; solution de repli <https://create.roblox.com/docs>.
+- **Pipeline de référence** (si présent sur ce système) : `<votre pipeline de projet Roblox>` — notamment `SKILL.md`, `GUIDE.md`, `LESSONS_LEARNED.md`, `ROJO_FAQ.md`, `ROBLOX_MCP_FAQ.md`, `AGENT_ROLES.md`, `_malware_reports/PATTERNS.md`, `_knowledge/` (cache API local).
 
-## Journal des Modifications
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée
 
 ### 1.0.0 (2026-06-17)
-- Initial version. Meta-skill over `/rojo`, `/rbx-studio`, `/game-design`; project structure,
-  architecture patterns and Luau lessons distilled from the `.ROBLOX` pipeline, user-neutral.
+- Version initiale. Méta-compétence couvrant `/rojo`, `/rbx-studio`, `/game-design` ; structure de projet, patrons d'architecture et leçons Luau distillés depuis le pipeline `.ROBLOX`, de manière neutre vis-à-vis de l'utilisateur.

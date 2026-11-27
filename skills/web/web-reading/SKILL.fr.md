@@ -5,7 +5,7 @@ type: protocol
 author: BACH Team
 created: 2026-03-12
 updated: 2026-11-22
-description: "Utiliser lorsque le contenu d'une page web doit être lu, extrait ou analysé (ex. 'lire cette page web', 'extraire le texte de l'URL', 'analyser le contenu du site', /web-reading). Détermine s'il faut le texte principal, la structure ou une capture d'écran et oriente vers le bon outil. Ne PAS utiliser pour les requêtes d'API directes ou les simples téléchargements."
+description: "Utilisez cette compétence lorsque le contenu de pages web doit être lu, extrait ou analysé (par ex. 'lis cette page web', 'extraire le texte de l'URL', 'analyser le contenu d'un site', /web-reading). Décide selon le besoin entre texte principal, structure ou capture d'écran et route vers l'outil adapté sur le système ; ne PAS utiliser pour de simples appels d'API REST."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,97 +14,92 @@ category: web
 tags: [web-scraping, content-extraction, research, router]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': ['requests', 'beautifulsoup4']}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/webseiten-lesen.md', 'origin_version': '3.8.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 bach_integration: {'handler': 'web-parse, web-scrape', 'db_tables': [], 'hooks': [], 'bach_origin_path': 'system/skills/workflows/'}
 ---
 
-
-
 <img src="banner.png" width="100%" alt="web-reading banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `web-reading`.
 
-# Web Reading (Router) (English)
+# Lecture de pages web (Routeur)
 
-## Présentation et Objectif & Purpose
+## Finalité
 
-Fetch and process web content — but don't pick a tool blindly. This skill
-routes: **purpose first, then the best available tool.** The actual
-implementation lives in the **`web-scraper` module**; this skill only shows
-what is currently present and how to use it.
+Récupérer et traiter des contenus web — sans choisir un outil à l'aveugle. Cette compétence joue le rôle de routeur : **d'abord le besoin, ensuite le meilleur outil disponible.** L'implémentation proprement dite vit dans le **module `web-scraper`** ; cette compétence indique uniquement ce qui est disponible et comment l'utiliser.
 
-## Step 1 — What is needed?
+## Étape 1 — De quoi a-t-on besoin ?
 
 ```
-Process a web page?
+Traiter une page web ?
   |
-  +-- Main text (article / prose)   → "Content"     → Step 2A
-  +-- Links / forms / headers       → "Structure"   → Step 2B
-  +-- Rendered image of the page    → "Screenshot"  → Step 2C
+  +-- Texte principal (article / corps) → "Content"      → Étape 2A
+  +-- Liens / Formulaires / En-têtes    → "Structure"    → Étape 2B
+  +-- Image rendue de la page           → "Screenshot"   → Étape 2C
 ```
 
-## Step 2 — Which tool? (Router)
+## Étape 2 — Quel outil choisir ? (Routeur)
 
-Use the **first available** tool in each list. "Available" means the
-tool/skill/module is actually present in this session.
+Prenez le **premier outil disponible** dans la liste correspondante. « Disponible » signifie que l'outil, la compétence ou le module est effectivement présent dans cette session.
 
-### 2A — Content (main text, clean markdown)
+### 2A — Contenu (texte principal, Markdown propre)
 
-| Priority | Tool | Available when … | Usage |
+| Priorité | Outil | Disponible si … | Utilisation |
 |---|---|---|---|
-| 1 | **`defuddle`** skill | skill `defuddle` listed | clean markdown from normal web pages |
-| 2 | Built-in **`WebFetch`** | agent has the WebFetch tool | quick read/summary of a URL |
-| 3 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "extract"` |
-| 4 | **`web-scraper`** module | module installed/importable | `web-scraper extract <url>` / `extract(url)` |
+| 1 | Compétence **`defuddle`** | La compétence `defuddle` est listée | Markdown propre issu de pages web classiques |
+| 2 | **`WebFetch`** intégré | L'agent dispose de l'outil `WebFetch` | Lecture/synthèse rapide d'une URL |
+| 3 | **`fc_web_fetch`** (MCP) | MCP FileCommander chargé | `mode: "extract"` |
+| 4 | Module **`web-scraper`** | Module installé/importable | `web-scraper extract <url>` ou `extract(url)` |
 
-> Note: `.md` URLs are already markdown → use `WebFetch` directly, no extractor.
+> Remarque : les URL `.md` sont déjà du Markdown → directement `WebFetch`, pas d'extracteur.
 
-### 2B — Structure (links, forms, headers)
+### 2B — Structure (liens, formulaires, en-têtes)
 
-`WebFetch`/`defuddle` are **not** suitable here (they return processed text, not
-raw structure). Use instead:
+Ici `WebFetch`/`defuddle` ne conviennent **pas** (ils fournissent du texte mis en forme, pas la structure brute). Prenez donc :
 
-| Priority | Tool | Available when … | Usage |
+| Priorité | Outil | Disponible si … | Utilisation |
 |---|---|---|---|
-| 1 | **`fc_web_fetch`** (MCP) | FileCommander MCP loaded | `mode: "links" \| "forms" \| "headers"` |
-| 2 | **`web-scraper`** module | module installed/importable | `web-scraper links\|forms\|headers <url>` |
+| 1 | **`fc_web_fetch`** (MCP) | MCP FileCommander chargé | `mode: "links" \| "forms" \| "headers"` |
+| 2 | Module **`web-scraper`** | Module installé/importable | `web-scraper links\|forms\|headers <url>` |
 
-### 2C — Screenshot
+### 2C — Capture d'écran (Screenshot)
 
-| Priority | Tool | Available when … | Usage |
+| Priorité | Outil | Disponible si … | Utilisation |
 |---|---|---|---|
-| 1 | **`web-scraper`** module | module with `[screenshot]` extra | `web-scraper screenshot <url> --out img.png` |
-| 2 | Browser automation tool | e.g. Playwright/Computer-Use present | page-dependent |
+| 1 | Module **`web-scraper`** | Module avec l'extra `[screenshot]` | `web-scraper screenshot <url> --out image.png` |
+| 2 | Outil d'automatisation navigateur | par ex. Playwright/Computer-Use présent | selon la page |
 
-## Step 3 — Fallback: nothing suitable found?
+## Étape 3 — Solution de repli : rien d'adapté trouvé ?
 
-If **no** tool is available for the purpose, recommend installing the
-**`web-scraper` module** (full: get/links/forms/headers/extract/screenshot):
+Si **aucun** outil n'est disponible pour le besoin, recommandez l'installation du **module `web-scraper`** (complet : get/links/forms/headers/extract/screenshot) :
 
 ```bash
-# from the local module folder (.MODULES/.TOOLS/web-scraper) (English)
-pip install ".[http,extract]"          # + [screenshot] for screenshots
+# depuis le dossier local du module (.MODULES/.TOOLS/web-scraper)
+pip install ".[http,extract]"          # + [screenshot] pour les captures d'écran
 
-# then: (English)
+# ensuite :
 web-scraper extract <url>
 ```
 
-As a library:
+En tant que bibliothèque :
 
 ```python
 from web_scraper import WebScraper, extract
 print(extract("https://example.com")["content"])
 ```
 
-## Last resort — standalone snippet (no dependencies beyond requests/bs4)
+## Solution de secours — Extrait autonome (sans rien d'autre)
+
+Si seules la bibliothèque standard + `requests`/`bs4` sont disponibles :
 
 ```python
 import requests
 from bs4 import BeautifulSoup
 
 def extract_content(url: str) -> str:
-    """Simple content extraction."""
+    """Extraction de contenu simple."""
     response = requests.get(url, timeout=30)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
@@ -113,19 +108,15 @@ def extract_content(url: str) -> str:
     return soup.get_text(separator="\n", strip=True)
 ```
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 1.1.1 (2026-11-22)
-- Note de langue corrigée
+- Indication de langue corrigée
 
 ### 1.1.0 (2026-07-05)
-- Reworked from a plain protocol into a **router**: detects available web
-  capabilities (`defuddle`, `WebFetch`, `fc_web_fetch`, `web-scraper` module)
-  and routes by purpose (content/structure/screenshot); otherwise recommends the
-  `web-scraper` module.
-- Unified name to `web-reading` (was `webseiten-lesen` in the DE version).
-- Removed BACH CLI examples from the body (standalone-compliant; origin stays
-  documented in the `bach_integration` frontmatter).
+- Refonte d'un simple protocole en **routeur** : détecte les capacités web disponibles (`defuddle`, `WebFetch`, `fc_web_fetch`, module `web-scraper`) et route selon l'usage (Contenu/Structure/Capture d'écran) ; recommande sinon le module `web-scraper`.
+- Nom uniformisé sur `web-reading` (auparavant DE `webseiten-lesen`).
+- Suppression des exemples BACH-CLI du corps (conforme autonome ; la provenance reste documentée dans le frontmatter `bach_integration`).
 
 ### 1.0.0 (2026-03-12)
-- Export from BACH v3.8.0 workflow `webseiten-lesen.md`
+- Export depuis le workflow BACH v3.8.0 `webseiten-lesen.md`

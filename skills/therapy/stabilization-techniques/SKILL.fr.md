@@ -1,284 +1,292 @@
 ---
+name: stabilization-techniques
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-11-22
+description: "Utilisez cette compétence lorsqu'une hyperactivation émotionnelle aiguë, une attaque de panique, un flashback ou une dissociation doivent être régulés rapidement (par ex. 'calmer une crise de panique', 'ancrage en cas de flashback', 'lieu sûr', /stabilization-techniques). Guide ancrage 5-4-3-2-1, coffre-fort, lieu sûr et respiration ; ne PAS utiliser pour une exposition traumatique en crise."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [stabilization, grounding, safe-place, containment, breathing-exercises, crisis-management]
 language: fr
+status: active
+visibility: public
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/therapie/stabilisierungstechniken.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
 <img src="banner.png" width="100%" alt="stabilization-techniques banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `stabilization-techniques`.
 
-# Stabilization Techniques (English)
+# Techniques de stabilisation
 
-## Foundation
+## Fondements
 
-Stabilization techniques are **immediate interventions** for acute distress situations. They help return from overwhelming emotions, panic, dissociation, or flashbacks to the here and now. They do not replace therapy but serve as **psychological first aid**.
+Les techniques de stabilisation sont des **techniques d'intervention immédiate** pour les situations de détresse aiguë. Elles aident à sortir des émotions submergeantes, de la panique, de la dissociation ou des flashbacks pour revenir dans l'ici et maintenant. Elles ne remplacent pas une thérapie, mais constituent les **premiers secours psychologiques**.
 
-Core principle: **Back into the body, back into the moment, back into control.**
+Principe central : **Revenir dans le corps, revenir dans l'instant, reprendre le contrôle.**
 
 ---
 
-## 1. Grounding Techniques
+## 1. Techniques d'ancrage (Grounding)
 
-Grounding brings attention back to the present moment and one's own body. Particularly effective for dissociation, flashbacks, and panic.
+L'ancrage (*grounding*) ramène l'attention dans l'instant présent et dans son propre corps. Particulièrement efficace en cas de dissociation, de flashbacks et de panique.
 
-### 1.1 Sensory Grounding: The 5-4-3-2-1 Technique
+### 1.1 Ancrage sensoriel : la technique 5-4-3-2-1
 
-The most well-known and accessible grounding technique. Systematically activates all five senses.
+La technique d'ancrage la plus connue et la plus accessible. Sollicite systématiquement les cinq sens.
 
 #### Instructions
 
-> **5 things you SEE:**
-> Look around. Name five things you can see right now. Anything — the wall, your hand, a light switch. Describe details: color, shape, size.
+> **5 choses que tu VOIS :**
+> Regarde autour de toi. Nomme cinq choses que tu peux voir en ce moment. Peu importe lesquelles — le mur, ta main, un interrupteur. Décris des détails : couleur, forme, taille.
 >
-> **4 things you HEAR:**
-> Close your eyes briefly. What do you hear? The hum of the refrigerator, birds, your own breath, traffic.
+> **4 choses que tu ENTENDS :**
+> Ferme brièvement les yeux. Qu'entends-tu ? Le ronronnement du réfrigérateur, des oiseaux, ta propre respiration, la circulation.
 >
-> **3 things you FEEL (touch):**
-> What is touching your body right now? The chair beneath you, fabric on your skin, the temperature of the air.
+> **3 choses que tu TOUCHES (sens du toucher) :**
+> Qu'est-ce qui touche ton corps en ce moment ? La chaise sous toi, le tissu sur ta peau, la température de l'air.
 >
-> **2 things you SMELL:**
-> Consciously sniff. Room air, your shampoo, coffee, fresh air.
+> **2 choses que tu SENS (odorat) :**
+> Respire consciemment. L'air de la pièce, ton shampoing, du café, l'air frais.
 >
-> **1 thing you TASTE:**
-> What do you taste right now? The last coffee, toothpaste, simply your mouth.
+> **1 chose que tu GOÛTES :**
+> Quel goût as-tu en bouche en ce moment ? Le dernier café, du dentifrice, simplement ta bouche.
 
-#### Variation: Intensive Grounding
+#### Variante : Ancrage intensif
 
-For stronger dissociation — work with physical stimuli:
-- Hold an ice cube in your hand
-- Run cold water over your wrists
-- Smell something strong (peppermint oil, smelling salts)
-- Hot candy or chili
-- Stomp feet firmly on the ground
+Pour une dissociation plus forte — travailler avec des stimuli physiques intenses :
+- Prendre un glaçon dans la main
+- Laisser couler de l'eau froide sur les poignets
+- Sentir une odeur forte (huile essentielle de menthe poivrée, sels ammoniacaux)
+- Bonbon piquant ou piment
+- Taper fermement des pieds sur le sol
 
 ---
 
-### 1.2 Physical Grounding (Body Grounding)
+### 1.2 Ancrage corporel (Body Grounding)
 
-Brings attention deliberately into the body.
+Ramène délibérément l'attention dans le corps.
 
-#### Instructions: Body Scan (Short Version)
+#### Instructions : Scan corporel (version courte)
 
-> Sit upright. Feet flat on the floor.
+> Assieds-toi bien droit. Pieds à plat sur le sol.
 >
-> **Feet:** Feel the contact with the ground. Actively press your feet down. Feel the weight.
+> **Pieds :** Sens le contact avec le sol. Appuie activement les pieds vers le bas. Ressens le poids.
 >
-> **Legs:** Feel your thighs on the chair. The weight they carry.
+> **Jambes :** Sens les cuisses sur la chaise. Le poids qu'elles portent.
 >
-> **Back:** Feel the backrest. Consciously lean against it.
+> **Dos :** Sens le dossier. Appuie-toi consciemment contre lui.
 >
-> **Hands:** Place them on your thighs. Feel the warmth, the contact.
+> **Mains :** Pose-les sur tes cuisses. Ressens la chaleur, le contact.
 >
-> **Breath:** Feel how your belly rises and falls. Don't control it — just observe.
+> **Respiration :** Sens comment ton ventre se soulève et s'abaisse. Ne dirige rien — observe seulement.
 
-#### Progressive Muscle Relaxation (Short Version)
+#### Relaxation musculaire progressive (version courte)
 
-Tense each muscle area for 5 seconds, then relax for 10 seconds:
-
-1. **Hands:** Clench fists — release
-2. **Arms:** Tense biceps — release
-3. **Shoulders:** Pull up to ears — drop
-4. **Face:** Squeeze together — relax
-5. **Abdomen:** Tense — release
-6. **Legs:** Tense — release
-7. **Feet:** Curl toes — release
+Forme courte de RMP (7 zones, contraction 5 s / relâchement 10 s chacune) : mains, bras, épaules, visage, ventre, jambes, pieds.
+Instructions détaillées (versions à 16 et 7 groupes + training autogène) : voir [pmr-autogenic-training](../pmr-autogenic-training/SKILL.md).
 
 ---
 
-### 1.3 Cognitive Grounding
+### 1.3 Ancrage cognitif
 
-Uses mental activity to exit emotional flooding.
+Utilise l'activité mentale pour sortir du débordement émotionnel.
 
 #### Techniques
 
-- **Count backward:** From 100 in steps of 7 (100, 93, 86, 79...)
-- **List categories:** "5 car brands, 5 cities starting with B, 5 forest animals..."
-- **Orientation:** State the date, time, location, own name: "I am [name]. It is [day], [time]. I am in [place]. I am safe."
-- **Color game:** Find all red objects in the room. Then all blue. Then all green.
-- **Alphabet game:** For a category (e.g., animals), find a word for each letter
+- **Compter à rebours :** De 100 par pas de 7 (100, 93, 86, 79…)
+- **Énumérer des catégories :** « 5 marques de voiture, 5 villes commençant par B, 5 animaux de la forêt… »
+- **Orientation :** Dire à voix haute la date, l'heure, le lieu et son propre nom : « Je m'appelle [Nom]. Nous sommes le [Jour], il est [Heure]. Je suis à [Lieu]. Je suis en sécurité. »
+- **Jeu des couleurs :** Repérer tous les objets rouges dans la pièce. Puis tous les bleus. Puis tous les verts.
+- **Jeu de l'alphabet :** Pour une catégorie (par ex. animaux), trouver un mot pour chaque lettre.
 
 ---
 
-## 2. Safe Place
+## 2. Lieu sûr (Safe Place)
 
-An imaginative stabilization technique. Frequently used in trauma therapy (including EMDR protocol). Creates an inner refuge that can be accessed at any time.
+Une technique imaginative de stabilisation. Souvent utilisée en thérapie du trauma (notamment dans le protocole EMDR). Crée un refuge intérieur accessible à tout moment.
 
-### Instructions for Building
+### Instructions de construction
 
-> **Step 1: Find the place**
-> "Imagine a place where you feel completely safe and secure. It can be a real place (a beach, a room, a forest) or a completely imagined place. What matters is: YOU feel safe there."
+> **Étape 1 : Trouver le lieu**
+> « Imagine un endroit où tu te sens complètement en sécurité et protégé(e). Cela peut être un lieu réel (une plage, une chambre, une forêt) ou un lieu entièrement imaginé. Une seule chose compte : TOI, tu t'y sens en sécurité. »
 >
-> **Step 2: Activate the senses**
-> "What do you see at your safe place? What colors, what light?
-> What do you hear? Silence, birds, water, music?
-> What do you smell? Sea, forest, fresh laundry?
-> What do you feel on your skin? Warmth, wind, soft grass?
-> What is the temperature?"
+> **Étape 2 : Activer les sens**
+> « Que vois-tu dans ton lieu sûr ? Quelles couleurs, quelle lumière ?
+> Qu'entends-tu ? Le silence, des oiseaux, de l'eau, de la musique ?
+> Que sens-tu comme odeurs ? La mer, la forêt, du linge frais ?
+> Que ressens-tu sur ta peau ? De la chaleur, du vent, de l'herbe douce ?
+> Quelle température y fait-il ? »
 >
-> **Step 3: Anchor the body feeling**
-> "How does your body feel at this place? Where do you feel the safety? In your belly? In your chest? Let that feeling grow larger."
+> **Étape 3 : Ancrer la sensation corporelle**
+> « Comment se sent ton corps dans cet endroit ? Où ressens-tu la sécurité ? Dans le ventre ? Dans la poitrine ? Laisse ce sentiment grandir. »
 >
-> **Step 4: Choose a signal word**
-> "Choose a word or a brief image that instantly takes you to this place. For example, 'cove' or 'forest clearing.' When you think this word, you are there."
+> **Étape 4 : Choisir un mot-signal**
+> « Choisis un mot ou une courte image qui te ramène immédiatement à cet endroit. Par exemple "Crique" ou "Clairière". Dès que tu penses à ce mot, tu y es. »
 >
-> **Step 5: Practice**
-> "Over the next few days, briefly visit your safe place again and again (30-60 seconds). The more you practice, the faster and deeper you arrive there."
+> **Étape 5 : S'entraîner**
+> « Dans les jours qui viennent, rends-toi brièvement (30 à 60 secondes) dans ton lieu sûr à plusieurs reprises. Plus tu t'entraînes, plus tu y accèdes vite et profondément. »
 
-### Important Notes
+### Remarques importantes
 
-- The safe place should NOT contain real people (relationships can change)
-- With trauma: Sometimes no place feels safe enough — then a "safe room" can be built (with walls, locks, protective shield)
-- The place can change — this is normal and allowed
-- Don't force it if it doesn't work — choose a different technique instead
+- Le lieu sûr ne doit contenir AUCUNE personne réelle (les relations peuvent évoluer)
+- En cas de traumatisme : parfois aucun lieu ouvert ne semble assez sûr — on peut alors construire une « pièce sûre » (avec murs, serrure, bouclier protecteur)
+- Le lieu peut évoluer — c'est normal et permis
+- Ne pas forcer si cela ne fonctionne pas — choisir alors une autre technique
 
 ---
 
-## 3. Containment Technique (Vault Exercise)
+## 3. Technique de contenance (Exercice du coffre-fort)
 
-Helps temporarily "lock away" distressing thoughts, images, or feelings when they cannot be processed at the moment. **Not suppression**, but conscious regulation of timing.
+Aide à « mettre sous clé » provisoirement des pensées, images ou émotions pénibles lorsqu'elles ne peuvent pas être traitées sur le moment. **Pas du refoulement**, mais une régulation consciente du moment.
 
 ### Instructions
 
-> **Step 1: Choose a container**
-> "Imagine a container that is absolutely secure. A vault, a chest, a bunker — big enough for everything you want to put in. It has a lock, and only you have the key."
+> **Étape 1 : Choisir un contenant**
+> « Imagine un contenant absolument sûr. Un coffre-fort, une malle, un bunker — assez grand pour tout ce que tu souhaites y déposer. Il possède une serrure dont toi seul(e) as la clé. »
 >
-> **Step 2: Name what is distressing**
-> "What would you like to put in there right now? Name it. It can be images, feelings, thoughts, memories."
+> **Étape 2 : Nommer ce qui pèse**
+> « Qu'aimerais-tu y déposer en ce moment ? Nomme-le. Ce peuvent être des images, des émotions, des pensées, des souvenirs. »
 >
-> **Step 3: Place it inside**
-> "Put it in. Piece by piece. Watch as it slides into the container. It is safely stored."
+> **Étape 3 : Déposer à l'intérieur**
+> « Dépose-le à l'intérieur. Morceau par morceau. Regarde-le glisser dans le contenant. Il y est gardé en sécurité. »
 >
-> **Step 4: Lock it**
-> "Close the container. Turn the key. Hear the lock click shut. Take the key with you."
+> **Étape 4 : Verrouiller**
+> « Ferme le contenant. Tourne la clé. Entends la serrure s'enclencher. Prends la clé avec toi. »
 >
-> **Step 5: Store it**
-> "Place the container somewhere you choose. It stands there safely. You can return at any time and take something out — but YOU decide when."
+> **Étape 5 : Mettre de côté**
+> « Place le contenant à un endroit que tu choisis. Il y reste en sécurité. Tu peux revenir à tout moment et en ressortir quelque chose — mais c'est TOI qui décides quand. »
 
 ### Important
 
-- Containment is a TEMPORARY strategy
-- What is postponed must be processed later (ideally in therapy)
-- Not suitable as a permanent solution — otherwise it becomes avoidance
+- La contenance est une stratégie PROVISOIRE
+- Ce qui a été différé doit être travaillé ultérieurement (idéalement en thérapie)
+- Ne convient pas comme solution permanente — sinon cela devient de l'évitement
 
 ---
 
-## 4. Breathing Exercises
+## 4. Exercices de respiration
 
-The breath is the fastest bridge between body and psyche. Slow, deep breathing activates the parasympathetic nervous system and reduces the stress response.
+La respiration est le pont le plus rapide entre le corps et le psychisme. Respirer lentement et profondément active le système parasympathique et réduit la réaction de stress.
 
-### 4.1 Extended Exhale (Basic Technique)
+### 4.1 Expiration prolongée (Technique de base)
 
-**Effect:** Activates the parasympathetic nervous system. Lowers heart rate and blood pressure.
+**Effet :** Active le système parasympathique. Abaisse la fréquence cardiaque et la pression artérielle.
 
-> **Inhale:** 4 seconds through the nose
-> **Exhale:** 6-8 seconds through the mouth (longer than inhaling!)
+> **Inspirer :** 4 secondes par le nez
+> **Expirer :** 6 à 8 secondes par la bouche (plus longtemps que l'inspiration !)
 >
-> The exhale is the key. The longer the exhale relative to the inhale, the stronger the relaxation response.
+> L'expiration est la clé. Plus l'expiration est longue par rapport à l'inspiration, plus la réaction de détente est marquée.
 
-### 4.2 Box Breathing (4-4-4-4)
+### 4.2 Respiration carrée / Box-Breathing (4-4-4-4)
 
-**Effect:** Calming and focusing. Used by Navy SEALs and first responders.
+**Effet :** Apaisement et focalisation. Utilisée par les Navy SEALs et les secouristes.
 
-> **Inhale:** 4 seconds
-> **Hold:** 4 seconds
-> **Exhale:** 4 seconds
-> **Hold:** 4 seconds
+> **Inspirer :** 4 secondes
+> **Retenir :** 4 secondes
+> **Expirer :** 4 secondes
+> **Retenir :** 4 secondes
 >
-> Repeat 4-6 cycles.
+> Répéter 4 à 6 cycles.
 
-### 4.3 Physiological Sigh (Huberman Technique)
+### 4.3 Soupir physiologique (Technique Huberman)
 
-**Effect:** Fastest known method for stress reduction. A single double-inhale is sufficient.
+**Effet :** Méthode connue la plus rapide pour réduire le stress. Une seule double inspiration suffit.
 
-> **Double inhale:** Short and sharp through the nose, then IMMEDIATELY take another short breath (without exhaling in between)
-> **Long exhale:** Slowly and completely through the mouth
+> **Double inspiration :** Inspirer brièvement et nettement par le nez, puis IMMÉDIATEMENT réinspirer un peu par-dessus (sans expirer entre les deux)
+> **Longue expiration :** Expirer lentement et complètement par la bouche
 >
-> Even a single cycle measurably lowers heart rate.
+> Un seul cycle abaisse déjà la fréquence cardiaque de manière mesurable.
 
-### 4.4 4-7-8 Breathing Exercise (Andrew Weil)
+### 4.4 Exercice respiratoire 4-7-8 (Andrew Weil)
 
-**Effect:** Deep relaxation. Particularly good for falling asleep.
+**Effet :** Détente profonde. Particulièrement efficace pour s'endormir.
 
-> **Inhale:** 4 seconds through the nose
-> **Hold:** 7 seconds
-> **Exhale:** 8 seconds through the mouth
+> **Inspirer :** 4 secondes par le nez
+> **Retenir :** 7 secondes
+> **Expirer :** 8 secondes par la bouche
 >
-> 4 cycles. No more at the beginning — can cause dizziness.
+> 4 cycles. Pas davantage au début — peut provoquer des vertiges.
 
 ---
 
-## When to Use Which Technique?
+## Quelle technique pour quelle situation ?
 
-| Situation | Recommended Technique | Rationale |
-|-----------|----------------------|-----------|
-| Panic attack | Extended exhale + 5-4-3-2-1 | Activate parasympathetic, sensory anchoring |
-| Flashback / Intrusion | Cognitive grounding + orientation | Back to the here and now |
-| Dissociation | Intensive grounding (ice, cold water) | Strong sensory stimuli break through dissociation |
-| Overwhelming emotions | Containment + breathing exercise | Postponement + physical calming |
-| Sleep problems (rumination) | 4-7-8 breathing + safe place | Deep relaxation + positive imagery |
-| Acute stress | Box breathing or physiological sigh | Rapid regulation |
-| Before stressful situations | Safe place + breathing exercise | Activate resource |
-| After stressful conversations | Physical grounding + extended exhale | Calm down nervous system |
-
----
-
-## Daily Plan for Stabilization Practice
-
-Regular practice makes techniques accessible in emergencies. Recommended routine:
-
-| Time | Exercise | Duration |
-|------|----------|----------|
-| Morning after waking | 3x physiological sigh | 1 minute |
-| Midday | Brief body scan | 3 minutes |
-| During stress (ad hoc) | Box breathing or 5-4-3-2-1 | 2-5 minutes |
-| Evening before sleep | 4-7-8 breathing + safe place | 5 minutes |
-
-**Total effort: approximately 10-15 minutes daily.**
+| Situation | Technique recommandée | Justification |
+|---|---|---|
+| Attaque de panique | Expiration prolongée + 5-4-3-2-1 | Activer le parasympathique, ancrage sensoriel |
+| Flashback / intrusion | Ancrage cognitif + orientation | Revenir dans l'ici et maintenant |
+| Dissociation | Ancrage intensif (glace, eau froide) | Des stimuli sensoriels forts rompent la dissociation |
+| Émotions submergeantes | Contenance + exercice respiratoire | Report + apaisement corporel |
+| Troubles d'endormissement (rumination) | Respiration 4-7-8 + Lieu sûr | Détente profonde + imagination positive |
+| Stress aigu | Box-Breathing ou Soupir physiologique | Régulation rapide |
+| Avant des situations pénibles | Lieu sûr + exercice respiratoire | Activer la ressource |
+| Après des échanges éprouvants | Ancrage corporel + expiration prolongée | Faire redescendre le système nerveux |
 
 ---
 
-## Emergency Short Protocol
+## Programme quotidien de pratique de stabilisation
 
-When someone is in acute distress — follow this sequence:
+Une pratique régulière rend les techniques mobilisables en situation d'urgence. Routine recommandée :
 
-1. **BREATHE:** "Breathe with me. In... and out... In... and out..." (Guide extended exhale)
-2. **ORIENT:** "Tell me: Where are you right now? What day is it? What is your name?"
-3. **FEEL:** "Feel your feet on the ground. Press them down firmly."
-4. **SEE:** "Look around. Name 5 things you see."
-5. **NAME:** "What just happened? You don't need to go into detail — just one word or one sentence."
+| Moment | Exercice | Durée |
+|---|---|---|
+| Le matin au réveil | 3× Soupir physiologique | 1 minute |
+| À midi | Court scan corporel | 3 minutes |
+| En cas de stress (ad hoc) | Box-Breathing ou 5-4-3-2-1 | 2 à 5 minutes |
+| Le soir avant de dormir | Respiration 4-7-8 + Lieu sûr | 5 minutes |
 
-**After that: Clarify safety.** Is the person safe? Do they need professional help?
-
----
-
-## Ethical Guidelines
-
-An AI assistant may guide stabilization techniques when a person describes stress, anxiety, or overwhelm.
-
-An AI assistant must NOT:
-- Use stabilization techniques as a substitute for emergency help (for acute suicidality: refer to 988 / 112 / Telefonseelsorge 0800-1110111)
-- Conduct trauma processing — stabilization is NOT therapy
-- Guarantee effectiveness ("This will help" -> instead "This may help")
-- Ignore physical causes (panic attack vs. heart attack -> when in doubt, recommend medical evaluation)
-
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+**Investissement total : env. 10 à 15 minutes par jour.**
 
 ---
 
-## References
+## Protocole court d'urgence
+
+Lorsqu'une personne est en détresse aiguë — suivre cet ordre :
+
+1. **RESPIRER :** « Respire avec moi. Inspire… et expire… Inspire… et expire… » (guider l'expiration prolongée)
+2. **S'ORIENTER :** « Dis-moi : où es-tu en ce moment ? Quel jour sommes-nous ? Comment t'appelles-tu ? »
+3. **SENTIR :** « Sens tes pieds sur le sol. Appuie-les fermement vers le bas. »
+4. **VOIR :** « Regarde autour de toi. Nomme 5 choses que tu vois. »
+5. **NOMMER :** « Que vient-il de se passer ? Pas besoin d'entrer dans les détails — juste un mot ou une phrase. »
+
+**Ensuite : vérifier la sécurité.** La personne est-elle en sécurité ? A-t-elle besoin d'une aide professionnelle ?
+
+---
+
+## Lignes directrices éthiques
+
+Un assistant IA peut guider des techniques de stabilisation lorsqu'une personne décrit du stress, de l'anxiété ou un sentiment de débordement.
+
+Un assistant IA ne doit PAS :
+- Utiliser les techniques de stabilisation comme substitut aux secours d'urgence (en cas de suicidalité aiguë : orienter vers le 112 / Telefonseelsorge 0800-1110111)
+- Effectuer un traitement du trauma — la stabilisation n'est PAS une thérapie
+- Garantir l'efficacité (« Cela va t'aider » → à la place « Cela peut t'aider »)
+- Ignorer des causes somatiques (attaque de panique vs infarctus → en cas de doute, recommander un avis médical)
+
+Voir : [ETHICS.md](../ETHICS.md)
+
+---
+
+## Références bibliographiques
 
 - Reddemann, L. (2001). *Imagination als heilsame Kraft.* Klett-Cotta.
 - Levine, P. A. (1997). *Waking the Tiger: Healing Trauma.*
-- Huberman, A. (2023). Huberman Lab Podcast — Physiological Sighs.
+- Huberman, A. (2023). Huberman Lab Podcast -- Physiological Sighs.
 - Weil, A. (2015). *4-7-8 Breathing Technique.*
 - Jacobson, E. (1938). *Progressive Relaxation.*
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Porté depuis BACH v3.8.0 | Version autonome*
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée

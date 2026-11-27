@@ -5,7 +5,7 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-11-22
-description: "Utiliser pour effectuer des opérations de fichiers par lots (copier, déplacer, supprimer, lister) via des motifs glob (ex. 'déplacer des fichiers par lot', 'supprimer tous les *.tmp correspondants', /batch-file-ops). Exécute des actions sécurisées sur le système de fichiers sans dépendances externes. Ne PAS utiliser pour modifier du texte dans des fichiers ou éditer des fichiers un par un."
+description: "Utilisez cette compétence lorsque des opérations par lots sur le système de fichiers telles que supprimer, déplacer, copier ou lister via des motifs glob doivent être exécutées (par ex. 'déplacer tous les fichiers *.log', 'renommer/supprimer en lot', /batch-file-ops). Sans dépendance externe ; ne PAS utiliser pour des modifications sémantiques de texte."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,20 +14,29 @@ category: utilities
 tags: [batch, file-ops, glob, cli, filesystem, cleanup]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/tools/batch_file_ops.py', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/tools/batch_file_ops.py"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
-
-
 
 <img src="banner.png" width="100%" alt="batch-file-ops banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `batch-file-ops`.
 
-# batch_file_ops - Batch File Operations (English)
+# batch_file_ops — Opérations par lots sur fichiers
 
-CLI tool for efficient batch operations on files using glob patterns.
-Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
+Outil CLI pour exécuter efficacement des opérations par lots sur des fichiers à l'aide de motifs glob. Prend en charge : `delete`, `move`, `copy`, `list`. Zéro dépendance (uniquement la bibliothèque standard Python).
 
 ---
 
@@ -35,56 +44,61 @@ Supports: delete, move, copy, list. Zero dependencies (Python stdlib only).
 
 | Action | Description |
 |--------|-------------|
-| `delete` | Delete files matching a pattern |
-| `move` | Move files matching a pattern |
-| `copy` | Copy files matching a pattern |
-| `list` | List files matching a pattern |
+| `delete` | Supprimer les fichiers correspondant au motif |
+| `move` | Déplacer les fichiers correspondant au motif |
+| `copy` | Copier les fichiers correspondant au motif |
+| `list` | Lister les fichiers correspondant au motif |
 
-## CLI Usage
+## Utilisation CLI
 
 ```bash
-python batch_file_ops.py <action> <source> [<target>] --pattern "<glob>" [--dry-run] [--recursive]
+python batch_file_ops.py <action> <source> [<cible>] --pattern "<glob>" [--dry-run] [--recursive]
 ```
 
 ### Arguments
 
 | Argument | Description |
 |----------|-------------|
-| `action` | `delete`, `move`, `copy`, or `list` |
-| `source` | Source directory |
-| `target` | Target directory (only for `move` and `copy`) |
-| `--pattern`, `-p` | Glob pattern (e.g., `*.py`, `TOOLS_*.py`) - Default: `*` |
-| `--dry-run`, `-n` | Preview only, no changes |
-| `--recursive`, `-r` | Search recursively in subdirectories |
+| `action` | `delete`, `move`, `copy` ou `list` |
+| `source` | Dossier source |
+| `cible` | Dossier cible (uniquement pour `move` et `copy`) |
+| `--pattern`, `-p` | Motif glob (par ex. `*.py`, `TOOLS_*.py`) - par défaut : `*` |
+| `--dry-run`, `-n` | Afficher uniquement, ne rien modifier |
+| `--recursive`, `-r` | Rechercher récursivement dans les sous-dossiers |
 
 ---
 
-## Exemple et Mode d'Emploi & Usage
+## Exemples
 
 ```bash
-# List all Python files in a directory (English)
-python batch_file_ops.py list /path/to/directory --pattern "*.py"
+# Lister tous les fichiers Python dans un dossier
+python batch_file_ops.py list /chemin/vers/dossier --pattern "*.py"
 
-# Delete all .tmp files (dry-run first!) (English)
-python batch_file_ops.py delete /path/to/directory --pattern "*.tmp" --dry-run
-python batch_file_ops.py delete /path/to/directory --pattern "*.tmp"
+# Supprimer tous les fichiers .tmp (d'abord simulation à blanc !)
+python batch_file_ops.py delete /chemin/vers/dossier --pattern "*.tmp" --dry-run
+python batch_file_ops.py delete /chemin/vers/dossier --pattern "*.tmp"
 
-# Move files (English)
-python batch_file_ops.py move /source /target --pattern "*.txt"
+# Déplacer des fichiers
+python batch_file_ops.py move /source /cible --pattern "*.txt"
 
-# Copy files (recursive) (English)
-python batch_file_ops.py copy /source /target --pattern "*.md" --recursive
+# Copier des fichiers (récursif)
+python batch_file_ops.py copy /source /cible --pattern "*.md" --recursive
 
-# Pattern examples (English)
-python batch_file_ops.py delete /path --pattern "TOOLS_*.py"
-python batch_file_ops.py list /path --pattern "backup_202?-*"
+# Exemples de motifs
+python batch_file_ops.py delete /chemin --pattern "TOOLS_*.py"
+python batch_file_ops.py list /chemin --pattern "backup_202?-*"
 ```
 
 ---
 
-## Notes
+## Remarques
 
-- **Dry-run first:** Always use `--dry-run` first with `delete` and `move`
-- **Glob patterns:** Uses Python `pathlib.glob()` / `pathlib.rglob()`
-- **Windows-compatible:** Automatic UTF-8 output encoding
-- **Files only:** Directories are skipped (only files are processed)
+- **Simulation à blanc d'abord :** Pour `delete` et `move`, toujours utiliser `--dry-run` en premier
+- **Motifs glob :** Utilise `pathlib.glob()` / `pathlib.rglob()` de Python
+- **Compatible Windows :** Encodage de sortie UTF-8 automatique
+- **Fichiers uniquement :** Les dossiers sont ignorés (seuls les fichiers sont traités)
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée

@@ -1,125 +1,155 @@
 ---
+name: problem-solving-training
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-11-22
+description: "Utilisez cette compétence lorsque des problèmes de vie complexes ou des blocages du quotidien doivent être résolus de manière structurée (par ex. 'résoudre un problème pas à pas', 'évaluer les options de solution', /problem-solving-training). Guide le modèle en 6 étapes de D'Zurilla et Goldfried ; ne PAS utiliser pour des décisions d'architecture technique ou éthiques (utilities/decide)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [problemlösung, entscheidung, strukturiert, sechs-schritte, coping]
 language: fr
+status: active
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/problemloese_training.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="problem-solving-training banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `problem-solving-training`.
 
-# Problem-Solving Training (English)
+# Entraînement à la résolution de problèmes
 
-> Structured problem solving in 6 steps according to D'Zurilla and Goldfried: Approaching problems systematically instead of ruminating in circles
+> Résolution structurée de problèmes en 6 étapes selon D'Zurilla et Goldfried : aborder les problèmes méthodiquement plutôt que de tourner en rond dans les ruminations
 
-See: [ETHICS.md](../ETHICS.md)
+Voir : [ETHICS.md](../ETHICS.md)
 
----
-
-## Context
-
-Problem-Solving Training (Social Problem-Solving, SPS) is an evidence-based intervention from cognitive behavioral therapy. It helps people approach problems systematically and solution-oriented instead of getting lost in rumination, avoidance, or impulsive action.
-
-Evidence: Meta-analyses show significant effects for depression (d=0.83), anxiety disorders, and stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
-
-**Note:** This is support, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+**Voir aussi :** [decide](../../utilities/decide/SKILL.md) (scoring pondéré, matrice d'Eisenhower pour décisions complexes multicritères) | [behavioral-activation](../behavioral-activation/SKILL.md) (planification d'activités en cas de dépression)
 
 ---
 
-## 1. Problem-Solving Orientation
+## Contexte
 
-Before the actual steps begin, the inner attitude is decisive.
+L'entraînement à la résolution de problèmes (*Social Problem-Solving*, SPS) est une intervention fondée sur les preuves issue de la thérapie cognitivo-comportementale. Il aide à aborder les problèmes de manière systématique et orientée vers les solutions au lieu de se perdre dans la rumination, l'évitement ou l'action impulsive.
 
-### Helpful Attitude
-- "Problems are part of life — they are solvable"
-- "I can proceed step by step"
-- "There is rarely only one right solution"
-- "Not acting is also a decision — usually not a good one"
+Données probantes : Les méta-analyses montrent des effets significatifs dans la dépression (d=0,83), les troubles anxieux et la charge de stress (Malouff et al. 2007, Bell & D'Zurilla 2009).
 
-### Unhelpful Attitude
-- "None of this makes any sense"
-- "I can't do it anyway"
-- "There is no solution"
-- Impulsive action without thinking
-- Avoidance and procrastination
-
-**First step:** Reflect on your own problem-solving attitude.
+**Remarque :** Il s'agit d'un soutien, pas d'un substitut à une thérapie professionnelle.
+**Ne jamais implémenter :** EMDR, Exposition Prolongée (PE), Thérapie d'Exposition Narrative (NET)
 
 ---
 
-## 2. The 6-Step Model
+## 1. Orientation face aux problèmes
 
-### Step 1: Define the Problem
+Avant même de commencer les étapes proprement dites, l'attitude intérieure est déterminante.
 
-**Goal:** Formulate the problem clearly, concretely, and manageably.
+### Attitude aidante
+- « Les problèmes font partie de la vie — ils sont solubles »
+- « Je peux avancer étape par étape »
+- « Il existe rarement une seule bonne solution »
+- « Ne pas agir est aussi une décision — rarement une bonne »
 
-**Guide questions:**
-- What exactly is the problem? (Facts, not interpretations)
-- Who is involved?
-- When and where does it occur?
-- Why is it a problem for me?
+### Attitude bloquante
+- « Tout cela n'a aucun sens »
+- « Je n'y arriverai de toute façon pas »
+- « Il n'y a aucune solution »
+- Agir impulsivement sans réfléchir
+- Évitement et procrastination
 
-**Worksheet:**
+**Première étape :** Réfléchir à sa propre attitude face aux problèmes.
+
+---
+
+## 2. Le modèle en 6 étapes
+
+### Étape 1 : Définir le problème
+
+**Objectif :** Formuler le problème de manière claire, concrète et traitable.
+
+**Questions directrices :**
+- Quel est exactement le problème ? (des faits, pas des interprétations)
+- Qui est impliqué ?
+- Quand et où survient-il ?
+- Pourquoi est-ce un problème pour moi ?
+
+**Feuille de travail :**
 
 ```
-PROBLEM DEFINITION
+DÉFINITION DU PROBLÈME
 
-Situation: [What is happening concretely?]
-People involved: [Who is involved?]
-Frequency: [How often? When?]
-Impact: [What makes it a problem?]
+Situation : [Que se passe-t-il concrètement ?]
+Personnes impliquées : [Qui est impliqué ?]
+Fréquence : [À quelle fréquence ? Quand ?]
+Impact : [Qu'est-ce qui en fait un problème ?]
 
-Concrete problem statement:
+Formulation concrète du problème :
 [...]
 ```
 
-**Common mistakes:**
-- Problem too vague ("Everything is bad")
-- Mixing multiple problems together
-- Including the solution in the problem statement
+**Erreurs typiques :**
+- Problème trop vague (« Tout va mal »)
+- Mélanger plusieurs problèmes
+- Glisser déjà la solution dans la formulation
 
 ---
 
-### Step 2: Set Goals
+### Étape 2 : Fixer les objectifs
 
-**Goal:** What should be different after solving the problem?
+**Objectif :** Qu'est-ce qui doit être différent une fois le problème résolu ?
 
-**SMART Criteria:**
-- Specific: What exactly?
-- Measurable: How will I recognize success?
-- Attractive: Why do I want this?
-- Realistic: Is it achievable?
-- Time-bound: By when?
+**Critères SMART :**
+- Spécifique : quoi exactement ?
+- Mesurable : à quoi vais-je reconnaître le succès ?
+- Attractif : pourquoi est-ce que je le veux ?
+- Réaliste : est-ce faisable ?
+- Temporellement défini : pour quand ?
 
-**Worksheet:**
+**Feuille de travail :**
 
 ```
-GOAL SETTING
+FIXATION D'OBJECTIF
 
-My goal: [...]
-How will I know I've achieved it? [...]
-By when? [...]
-Realistic (0-10)? [...]
-Important to me (0-10)? [...]
+Mon objectif : [...]
+À quoi vais-je reconnaître que je l'ai atteint ? [...]
+Pour quand ? [...]
+Réaliste (0-10) ? [...]
+Important pour moi (0-10) ? [...]
 ```
 
 ---
 
-### Step 3: Generate Alternatives (Brainstorming)
+### Étape 3 : Recueillir des alternatives (Brainstorming)
 
-**Goal:** Generate as many solution ideas as possible — without immediate evaluation.
+**Objectif :** Générer autant d'idées de solutions que possible — sans évaluation immédiate.
 
-**Brainstorming rules:**
-1. Quantity over quality — the more ideas, the better
-2. No evaluation during collection
-3. Creative and unusual thinking is allowed
-4. Combine and vary existing ideas
+**Règles du brainstorming :**
+1. La quantité avant la qualité — plus il y a d'idées, mieux c'est
+2. Aucune critique pendant la collecte
+3. Les idées créatives et inhabituelles sont permises
+4. Combiner et varier les idées existantes
 
-**Worksheet:**
+**Feuille de travail :**
 
 ```
 BRAINSTORMING
 
-Solution ideas (at least 5-8):
+Idées de solutions (au moins 5 à 8) :
 1. [...]
 2. [...]
 3. [...]
@@ -130,127 +160,130 @@ Solution ideas (at least 5-8):
 8. [...]
 ```
 
-**Helper questions:**
-- "What would someone do who doesn't have this problem?"
-- "What have I done in similar situations before?"
-- "What would I advise a friend?"
-- "What would be the boldest solution?"
-- "What would be the simplest solution?"
+**Questions d'aide :**
+- « Que ferait quelqu'un qui n'a pas ce problème ? »
+- « Qu'ai-je fait par le passé dans des situations similaires ? »
+- « Que conseillerais-je à un ami ? »
+- « Quelle serait la solution la plus courageuse ? »
+- « Quelle serait la solution la plus simple ? »
 
 ---
 
-### Step 4: Evaluate Alternatives
+### Étape 4 : Évaluer les alternatives
 
-**Goal:** Systematically weigh pros and cons of each alternative.
+**Objectif :** Peser systématiquement les avantages et inconvénients de chaque alternative.
 
-**Evaluation criteria:**
-- Effectiveness: Does it solve the problem?
-- Feasibility: Can I implement it?
-- Time required: How long will it take?
-- Consequences: For me? For others?
-- Risks: What could go wrong?
+**Critères d'évaluation :**
+- Efficacité : résout-elle le problème ?
+- Faisabilité : puis-je la mettre en œuvre ?
+- Temps requis : combien de temps cela prend-il ?
+- Conséquences : sur moi ? sur les autres ?
+- Risques : qu'est-ce qui pourrait mal tourner ?
 
-**Worksheet:**
-
-```
-EVALUATION MATRIX
-
-| Alternative | Effectiveness (0-10) | Feasibility (0-10) | Effort (0-10) | Risk (0-10) | Total |
-|-------------|---------------------|--------------------|--------------|--------------||-------|
-| 1. [...]    |                     |                    |              |              |       |
-| 2. [...]    |                     |                    |              |              |       |
-| 3. [...]    |                     |                    |              |              |       |
-
-Preferred solution: [...]
-Reasoning: [...]
-```
-
----
-
-### Step 5: Implement
-
-**Goal:** Concretely plan and carry out the chosen solution.
-
-**Action plan:**
+**Feuille de travail :**
 
 ```
-ACTION PLAN
+MATRICE D'ÉVALUATION
 
-Chosen solution: [...]
+| Alternative | Efficacité (0-10) | Faisabilité (0-10) | Effort (0-10) | Risque (0-10) | Total |
+|-------------|-------------------|--------------------|---------------|---------------|-------|
+| 1. [...]    |                   |                    |               |               |       |
+| 2. [...]    |                   |                    |               |               |       |
+| 3. [...]    |                   |                    |               |               |       |
 
-Concrete steps:
-1. [What?] — [When?] — [Where?]
-2. [What?] — [When?] — [Where?]
-3. [What?] — [When?] — [Where?]
-
-Possible obstacles: [...]
-Plan B: [...]
-Support I need: [...]
-First step (today/tomorrow): [...]
+Solution retenue : [...]
+Justification : [...]
 ```
 
 ---
 
-### Step 6: Evaluate
+### Étape 5 : Mettre en œuvre
 
-**Goal:** Review the outcome and adjust if needed.
+**Objectif :** Planifier concrètement et exécuter la solution retenue.
 
-**Evaluation questions:**
-- Was the problem solved? (Fully / partially / not at all)
-- Am I satisfied with the result? (0-10)
-- What worked well?
-- What would I do differently next time?
-- Do I need a new attempt with a different alternative?
-
-**Worksheet:**
+**Plan de mise en œuvre :**
 
 ```
-EVALUATION
+PLAN D'ACTION
 
-Result: [Solved / Partially / Not solved]
-Satisfaction (0-10): [...]
-What worked: [...]
-What didn't: [...]
-Next step: [Conclude / New attempt / Different approach]
+Solution retenue : [...]
+
+Étapes concrètes :
+1. [Quoi ?] — [Quand ?] — [Où ?]
+2. [Quoi ?] — [Quand ?] — [Où ?]
+3. [Quoi ?] — [Quand ?] — [Où ?]
+
+Obstacles possibles : [...]
+Plan B : [...]
+Soutien dont j'ai besoin : [...]
+Premier pas (aujourd'hui/demain) : [...]
 ```
 
 ---
 
-## 3. Common Problems in Problem Solving
+### Étape 6 : Évaluer
 
-| Problem | Remedy |
-|---------|--------|
-| "I don't know where to start" | Back to Step 1, formulate problem smaller |
-| "No solution is good enough" | Question perfectionism, accept "good enough" |
-| "I don't dare" | Identify the smallest possible step |
-| "It doesn't work" | Evaluation: What exactly doesn't work? New attempt |
-| Problem is too big | Break into sub-problems, one at a time |
-| Emotions block | First emotion regulation (breathing, PMR), then problem solving |
+**Objectif :** Vérifier le résultat et ajuster si nécessaire.
 
----
+**Questions d'évaluation :**
+- Le problème a-t-il été résolu ? (Entièrement / partiellement / pas du tout)
+- Suis-je satisfait(e) du résultat ? (0-10)
+- Qu'est-ce qui a bien fonctionné ?
+- Que ferais-je différemment la prochaine fois ?
+- Ai-je besoin d'un nouvel essai avec une autre alternative ?
 
-## Ethics and Boundaries
+**Feuille de travail :**
 
-**An AI assistant may:**
-- Guide through the 6 steps and provide worksheet structure
-- Ask brainstorming questions
-- Support evaluation of alternatives
-- Document progress
+```
+ÉVALUATION
 
-**An AI assistant must NOT:**
-- Prescribe solutions or suggest "the right answer"
-- Conduct relationship or life counseling in the therapeutic sense
-- Be the sole support for severe psychological distress
-- Make diagnoses
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+Résultat : [Résolu / Partiellement / Non résolu]
+Satisfaction (0-10) : [...]
+Ce qui a fonctionné : [...]
+Ce qui n'a pas fonctionné : [...]
+Prochaine étape : [Clôture / Nouvel essai / Autre approche]
+```
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: D'Zurilla & Goldfried (1971), Nezu et al. (2013), Malouff et al. (2007) — Not professional therapy*
+## 3. Difficultés fréquentes lors de la résolution de problèmes
+
+| Difficulté | Remède |
+|------------|--------|
+| « Je ne sais pas par où commencer » | Revenir à l'étape 1, formuler le problème plus petit |
+| « Aucune solution n'est assez bonne » | Questionner le perfectionnisme, accepter « assez bon » |
+| « Je n'ose pas » | Identifier le plus petit pas possible |
+| « Ça ne marche pas » | Évaluation : qu'est-ce qui coince exactement ? Nouvel essai |
+| Le problème est trop vaste | Découper en sous-problèmes, traiter l'un après l'autre |
+| Les émotions bloquent | D'abord régulation émotionnelle (respiration, RMP), puis résolution |
+
+---
+
+## Éthique et limites
+
+**Un assistant IA peut :**
+- Guider à travers les 6 étapes et fournir la structure des feuilles de travail
+- Poser des questions de brainstorming
+- Soutenir lors de l'évaluation des alternatives
+- Documenter la progression
+
+**Un assistant IA ne doit PAS :**
+- Imposer des solutions ou suggérer « la bonne réponse »
+- Mener un conseil conjugal ou de vie au sens thérapeutique
+- Constituer l'unique soutien en cas de détresse psychique sévère
+- Poser des diagnostics
+
+**En cas de signe de crise aiguë, TOUJOURS orienter vers :**
+- Telefonseelsorge : 0800 111 0 111 / 0800 111 0 222
+- Urgences psychiatriques / secours : 112
+- Krisenchat : krisenchat.de
+
+---
+
+*Porté depuis BACH v3.8.0 | Version autonome*
+*Sources : D'Zurilla & Goldfried (1971), Nezu et al. (2013), Malouff et al. (2007) — Pas de thérapie professionnelle*
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée

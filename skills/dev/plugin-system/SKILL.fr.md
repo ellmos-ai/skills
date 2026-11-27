@@ -5,7 +5,7 @@ type: tool
 author: BACH Team
 created: 2026-02-21
 updated: 2026-11-22
-description: "Utiliser pour concevoir ou implémenter une architecture de plugins tolérante aux pannes avec détection automatique en Python (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'architecture extensible', /plugin-system). Fournit un chargeur de plugins modulaire avec cycle de vie et isolation sans dépendances externes. Ne PAS utiliser pour auditer des plugins tiers non fiables (utiliser dev/sec-supplychain)."
+description: "À utiliser lorsqu'une application Python doit être dotée d'une architecture de plugins dynamique et tolérante aux pannes avec détection automatique (ex. 'implémenter un système de plugins', 'charger des plugins dynamiquement', 'extensibilité pour outil', /plugin-system). Fournit une architecture modulaire propre et extensible sans dépendances externes. Ne PAS utiliser pour l'audit de sécurité de plugins tiers (utiliser dev/sec-supplychain)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,76 +14,77 @@ category: dev
 tags: [plugin, framework, extensibility, cli, architecture]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/plugins', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
 
 <img src="banner.png" width="100%" alt="plugin-system banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `plugin-system`.
 
-# Plugin System (English)
+# Système de Plugins
 
-Fault-tolerant plugin system for Python CLI applications.
-A faulty plugin never stops the rest of the application.
+Système de plugins tolérant aux pannes pour les applications CLI en Python.
+Un plugin défectueux n'interrompt jamais le reste de l'application.
 
-## Core Features
+## Fonctionnalités clés
 
-- **Auto-Discovery:** Automatically finds plugins in a directory
-- **Validation:** Checks `name`, `version`, `execute()` on each plugin class
-- **Fault Tolerance:** Defective plugins are logged but not loaded
-- **Zero Dependencies:** Python standard library only
+- **Découverte automatique (Auto-Discovery) :** détecte automatiquement les plugins dans un répertoire
+- **Validation :** vérifie `name`, `version`, `execute()` sur chaque classe de plugin
+- **Tolérance aux pannes :** les plugins défectueux sont journalisés mais ne sont pas chargés
+- **Zéro dépendance :** uniquement la bibliothèque standard Python
 
-## Files
+## Fichiers
 
 ```
 scripts/
-  plugin_system.py       Core: PluginBase (ABC) + PluginManager
-  cli_demo.py            Demo CLI with argparse
-  test_plugin_system.py  16+ unit tests
+  plugin_system.py       Cœur : PluginBase (ABC) + PluginManager
+  cli_demo.py            CLI de démonstration avec argparse
+  test_plugin_system.py  16+ tests unitaires
 examples/
-  hello.py               Hello World plugin
-  calculator.py          Calculator plugin
-  systeminfo.py          System Info plugin
+  hello.py               Plugin Hello-World
+  calculator.py          Plugin calculatrice
+  systeminfo.py          Plugin informations système
 ```
 
-## Quick Start
+## Démarrage rapide
 
-### 1. Create a Plugin
+### 1. Créer un plugin
 
 ```python
 from plugin_system import PluginBase
 
-class MyPlugin(PluginBase):
-    name = "MyPlugin"
+class MonPlugin(PluginBase):
+    name = "MonPlugin"
     version = "1.0.0"
 
     def execute(self, *args, **kwargs):
-        return {"status": "ok", "message": "Hello!"}
+        return {"status": "ok", "message": "Bonjour !"}
 ```
 
-### 2. Use PluginManager
+### 2. Utiliser PluginManager
 
 ```python
 from plugin_system import PluginManager
 
-manager = PluginManager(plugins_dir="./my_plugins")
+manager = PluginManager(plugins_dir="./mes_plugins")
 plugins = manager.discover_plugins()
 
-# List all plugins (English)
+# Lister tous les plugins
 manager.list_plugins()
 
-# Execute a plugin (English)
-success, result = manager.execute_plugin("MyPlugin", param="value")
+# Exécuter un plugin
+success, result = manager.execute_plugin("MonPlugin", param="valeur")
 if success:
     print(result)
 ```
 
-### 3. Integrate into Your App
+### 3. Intégrer dans votre propre application
 
 ```python
-class MyApp:
+class MonApplication:
     def __init__(self):
         self.plugins = PluginManager("./plugins")
         self.plugins.discover_plugins()
@@ -93,34 +94,34 @@ class MyApp:
         return result if success else None
 ```
 
-## Plugin Interface
+## Interface de plugin
 
-Every plugin must:
+Chaque plugin doit :
 
-| Requirement | Details |
-|-------------|---------|
-| Inherit `PluginBase` | `from plugin_system import PluginBase` |
-| Set `name` | Class attribute, non-empty |
-| Set `version` | Class attribute, semantic versioning |
-| Implement `execute()` | Arbitrary `*args, **kwargs` |
+| Exigence | Détails |
+|----------|---------|
+| Hériter de `PluginBase` | `from plugin_system import PluginBase` |
+| Définir `name` | Attribut de classe, non vide |
+| Définir `version` | Attribut de classe, versionnage sémantique |
+| Implémenter `execute()` | Accepte `*args, **kwargs` quelconques |
 
-## Fault Tolerance
+## Tolérance aux pannes
 
-| Error Type | Behavior |
-|-----------|----------|
-| SyntaxError in plugin | Plugin is skipped, rest loads |
-| Missing attributes | Plugin is marked as `is_valid=False` |
-| Exception in `execute()` | Returns `(False, error_message)` |
-| No plugin in directory | Empty list, no crash |
+| Type d'erreur | Comportement |
+|---------------|--------------|
+| `SyntaxError` dans le plugin | Le plugin est ignoré, le reste se charge |
+| Attributs manquants | Le plugin est marqué `is_valid=False` |
+| Exception dans `execute()` | Retourne `(False, error_message)` |
+| Aucun plugin dans le dossier | Liste vide, aucun plantage |
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 1.0.1 (2026-11-22)
-- Note de langue corrigée
+- Mention linguistique corrigée.
 
 ### 1.0.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/plugins to skill library
-- PluginBase ABC + PluginManager
-- 3 example plugins (Hello, Calculator, SystemInfo)
-- 16+ unit tests
-- CLI demo with argparse
+- Migration depuis `MODULAR_AGENTS/plugins` vers la bibliothèque de compétences
+- `PluginBase` (ABC) + `PluginManager`
+- 3 plugins d'exemple (Hello, Calculator, SystemInfo)
+- 16+ tests unitaires
+- CLI de démonstration avec `argparse`

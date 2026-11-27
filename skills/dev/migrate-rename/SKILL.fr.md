@@ -1,11 +1,11 @@
 ---
 name: migrate-rename
-version: 1.0.1
+version: 1.1.1
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
 updated: 2026-11-22
-description: "Utiliser pour renommer ou déplacer des fichiers, modules ou répertoires sans casser les imports et références existants (ex. 'renommer fichier sans casser les imports', 'déplacer module avec wrappers', 'créer un stub MOVED', /migrate-rename). Crée des wrappers rétrocompatibles et des stubs de redirection clairs pour une transition en douceur. Ne PAS utiliser pour de simples renommages git acceptant des ruptures de compatibilité."
+description: "Utilisez cette compétence lorsque des fichiers, modules ou dossiers doivent être renommés ou déplacés sans casser brutalement les imports et dépendances de chemins existants (par ex. 'renommer fichier sans breaking changes', 'déplacer module', 'créer un wrapper', /migrate-rename). Crée des fichiers wrapper et des stubs MOVED pour une migration évolutive sans rupture. Ne PAS utiliser pour de simples déplacements Git sans pont de compatibilité."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -14,121 +14,162 @@ category: dev
 tags: [migration, renaming, wrapper, evolutionary, refactoring]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': 'None', 'local_changes_since_sync': True}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/migrate-rename.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
-
 
 <img src="banner.png" width="100%" alt="migrate-rename banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `migrate-rename`.
 
-# File Renaming with Wrappers (Evolutionary Migration) (English)
+# Renommage de fichiers avec wrapper (migration évolutive)
 
-> Enables file renames WITHOUT hard breaks. References are organically updated through daily usage.
+> Permet de renommer des fichiers SANS ruptures brutales. Les références sont mises à jour organiquement au fil de l'utilisation quotidienne.
 
 ---
 
-## Principle: Evolutionary Migration
+## Principe : migration évolutive
 
 ```
-BEFORE:                          AFTER:
-old_file.md                      new_file.md (renamed)
+AVANT :                          APRÈS :
+ancien_fichier.md                nouveau_fichier.md (renommé)
    |                                |
-   +-- Reference A                  +-- old_file.md (wrapper)
-   +-- Reference B                         |
-   +-- Reference C                         +-- Log table
+   +-- Référence A                  +-- ancien_fichier.md (Wrapper)
+   +-- Référence B                         |
+   +-- Référence C                         +-- Tableau de journal
                                            +-- Instructions
-                                           +-- Link to new_file.md
+                                           +-- Lien vers nouveau_fichier.md
 ```
 
-When someone accesses the old path:
-1. Lands at the wrapper file
-2. Adds an entry to the log
-3. Corrects the reference that brought them here
-4. Proceeds to the actual file
+Quiconque appelle l'ancien chemin :
+1. Arrive sur le fichier wrapper
+2. S'inscrit dans le journal de migration
+3. Corrige la référence qui l'y a envoyé
+4. Accède au véritable fichier cible
 
 ---
 
-## Step by Step
+## Étape par étape
 
-### 1. Rename the File
+### 1. Renommer le fichier
 
 ```bash
-mv old_file.md new_file.md
+mv ancien_fichier.md nouveau_fichier.md
 ```
 
-### 2. Create Wrapper File
+### 2. Créer le fichier wrapper
 
-Create `old_file.md` with the following content:
+Créer `ancien_fichier.md` avec le contenu suivant :
 
 ```markdown
-# OLD_FILE.md - REDIRECTED (English)
+# ANCIEN_FICHIER.md - REDIRIGÉ
 
-**Status:** This file has been renamed to `new_file.md`
+**Statut :** Ce fichier a été renommé en `nouveau_fichier.md`
 
 ---
 
-## Migration Log
+## Journal de migration
 
-| Date | Who | Origin | Reference corrected? |
-|------|-----|--------|---------------------|
-| YYYY-MM-DD | [Name] | Initial migration | n/a (wrapper created) |
+| Date | Qui | Provenance | Référence corrigée ? |
+|------|-----|------------|----------------------|
+| YYYY-MM-DD | [Nom] | Migration initiale | n/a (wrapper créé) |
 
 ---
 
 ## Instructions
 
-1. **Leave a log entry** (in table above)
-2. **Check origin**: What sent you here?
-3. **Correct reference**: Change `old_file.md` -> `new_file.md`
-4. **Go to the actual file**: `new_file.md`
+1. **Laisser une entrée dans le journal** (dans le tableau ci-dessus)
+2. **Vérifier la provenance** : Qu'est-ce qui vous a envoyé ici ?
+3. **Corriger la référence** : Changer `ancien_fichier.md` -> `nouveau_fichier.md`
+4. **Aller au véritable fichier** : `nouveau_fichier.md`
 
 ---
 
-**Target file:** `new_file.md`
+**Fichier cible :** `nouveau_fichier.md`
 ```
 
-### 3. Immediately Correct Critical References
-- Help files (primary documentation)
-- System prompt references
-- CLI code that directly uses the path
+### 3. Corriger immédiatement les références critiques
+- Fichiers d'aide (documentation primaire)
+- Références dans les prompts système
+- Code CLI qui utilise directement le chemin
 
-### 4. Migrate Remaining References Evolutionarily
-The rest is automatically corrected through usage.
-
----
-
-## When to Use the Wrapper Method?
-
-**YES - Wrapper useful:**
-- Many potential references
-- File is referenced by various partners/tools
-- Not a critical system file
-
-**NO - Change all directly:**
-- Few, known references
-- Critical system files (config, DB schema)
-- Performance-critical paths
+### 4. Migrer les autres références de manière évolutive
+Le reste est corrigé automatiquement lors de l'utilisation.
 
 ---
 
-## Cleanup
+## Quand utiliser la méthode du wrapper ?
 
-After approximately 30 days or when the log shows no new entries:
-1. Move wrapper file to `_archive/deprecated/`
-2. Or delete completely (if no more entries)
+**OUI — Wrapper pertinent :**
+- Nombreuses références potentielles
+- Fichier référencé par différents partenaires ou outils
+- Pas un fichier système critique
+
+**NON — Tout modifier directement :**
+- Références peu nombreuses et connues
+- Fichiers système critiques (configuration, schéma de base de données)
+- Chemins critiques pour les performances
 
 ---
 
-## Journal des Modifications
+## Déplacement de dossier ou fichier avec stub MOVED
 
-### 1.0.1 (2026-11-22)
-- Note de langue corrigée
+> Formalisé le 2026-09-06 (Ticket T-20260906-688261413). Précédent apparu spontanément avec
+> `.ELLMOS.MIGRATED.md` (2026-08-11) et les stubs `_control-center/_CONTROL` (2026-09-06).
+
+Autre situation que le wrapper ci-dessus : ici, un **dossier entier** ou un **fichier sans nombreuses références actives** déménage complètement vers un nouvel emplacement (consolidation, renommage, réorganisation de pipeline). Il n'y a ni journal de migration, ni « corriger la référence » — seulement un pointeur concis qui indique : voici où il se trouve désormais.
+
+**Différence avec la procédure de wrapper ci-dessus :**
+
+| | Wrapper (étapes 1 à 4 ci-dessus) | Stub MOVED |
+|---|---|---|
+| Usage | Fichier unique, nombreuses références actives à mettre à jour organiquement | Dossier ou fichier, déménagement complet |
+| Contenu | Tableau de journal de migration, croît avec l'usage | Métadonnées statiques, 1 à 3 lignes de texte brut |
+| Durée de vie | Jusqu'à ce que le journal montre qu'il n'y a plus de nouvelles entrées | Jusqu'à ce que `remove_when` soit rempli |
+
+### Nom, emplacement, champs obligatoires
+
+Le schéma complet, un exemple et la sémantique des champs figurent dans le modèle ellmos `MOVED-STUB.md` (`.TOPICS/.AI/_templates/project-docs/MOVED-STUB.md`, qui ne fait pas partie de ce dépôt autonome — un résumé suffit ici) :
+
+- **Nom/Emplacement :** `<ancien-nom>.MOVED.md` se place là où le dossier ou le fichier se trouvait **auparavant**.
+- **Champs obligatoires** (`key: value`, dans cet ordre) : `moved_to`, `moved_on`, `ticket`, `reason`, `moved_by`, `remove_when` (par défaut : `90 jours ET 0 référence vivante`).
+- **Ensuite** 1 à 3 lignes de texte brut pour les humains. Pas de journal, pas de tableau, pas d'historique — celui-ci figure dans le ticket référencé.
+- **Suppression :** Le stub est **supprimé**, jamais archivé.
+
+### Règle (Policy)
+
+Applicable en tant que `.SYNC/_policies/library/P-017_umzugs-stub.md`.
+
+### Script de vérification
+
+`scripts/moved_stub_check.py` (dans ce dossier de compétence) répertorie tous les stubs `*.MOVED.md`/`*.MIGRATED.md` sous un répertoire racine, signale les champs obligatoires manquants et marque les stubs arrivés à échéance de suppression (plus anciens que les jours indiqués dans `remove_when`). Appel :
+
+```bash
+python scripts/moved_stub_check.py <repertoire_racine>
+```
+
+---
+
+## Nettoyage
+
+Après environ 30 jours ou lorsque le journal montre qu'il n'y a plus de nouvelles entrées :
+1. Déplacer le fichier wrapper vers `_archive/deprecated/`
+2. Ou le supprimer complètement (s'il n'y a plus d'entrées)
+
+---
+
+## Journal des modifications
+
+### 1.1.1 (2026-11-22)
+- Indication de langue corrigée
+
+### 1.1.0 (2026-09-06)
+- Ajout de la section « Déplacement de dossier ou fichier avec stub MOVED » (Ticket T-20260906-688261413) : formalise le pointeur de déplacement concis pour dossiers/fichiers complets (standard `<ancien-nom>.MOVED.md`, champs obligatoires `moved_to`/`moved_on`/`ticket`/`reason`/`moved_by`/`remove_when`), distingué de la méthode de wrapper ci-dessus. Ajout du script de vérification `scripts/moved_stub_check.py`.
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Porté depuis BACH v3.8.0
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Porté depuis BACH v3.8.0 | Version autonome*
