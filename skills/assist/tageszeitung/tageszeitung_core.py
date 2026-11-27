@@ -377,10 +377,10 @@ def _fetch_rss_stdlib(
                       re.DOTALL | re.IGNORECASE)
         if not m:
             return ""
-        # CDATA auspackeln
+        # CDATA auspackeln und XML/HTML-Entities konsistent zu defusedxml aufloesen
         inner = m.group(1)
         inner = re.sub(r"<!\[CDATA\[(.*?)]]>", r"\1", inner, flags=re.DOTALL)
-        return inner.strip()
+        return _html.unescape(inner).strip()
 
     item_blocks = re.findall(r"<item[^>]*>(.*?)</item>", raw_text,
                              re.DOTALL | re.IGNORECASE)

@@ -66,9 +66,10 @@ def test_source_crud_store_and_template_rendering(tmp_path):
             return rss_xml[:limit] if limit else rss_xml
 
     with mock.patch.object(tc.urllib.request, "urlopen", return_value=_FakeResp()):
-        # Ensure stdlib parser path works cleanly regardless of feedparser presence
+        # Ensure stdlib regex fallback path matches minimal CI (no feedparser / defusedxml)
         with mock.patch.object(tc, "_fetch_rss_feedparser", side_effect=ImportError):
-            new_cnt, err = tc.fetch_source(store, sources[0])
+            with mock.patch.dict(sys.modules, {"defusedxml": None, "defusedxml.ElementTree": None}):
+                new_cnt, err = tc.fetch_source(store, sources[0])
     assert err is None
     assert new_cnt == 2
 
