@@ -24,37 +24,172 @@ Verwendung (CLI):
 
 from __future__ import annotations
 
+import copy
 import html as _html
 import json as _json
 import os
 import re
+import shutil
 import sqlite3
 import sys
+import tempfile
 import urllib.error
 import urllib.request
 import uuid
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Any, Mapping, Optional
 
 # xml.etree.ElementTree wird NICHT direkt fuer Netz-XML verwendet (XXE-Risiko).
 # Stattdessen: defusedxml (optional) oder Regex-Fallback ohne Entity-Expansion.
 # NIEMALS ET.fromstring() auf rohen Netz-Daten aufrufen.
 
 # ---------------------------------------------------------------------------
-# Pfade (userneutral, relativ zum Skill)
+# Pfade & Konfiguration (userneutral, relativ zum Skill, mit Selbstheilung)
 # ---------------------------------------------------------------------------
 
 _SKILL_DIR = Path(__file__).resolve().parent
 _DEFAULT_STORE = _SKILL_DIR / "store.db"
 _ENV_STORE = os.environ.get("TAGESZEITUNG_STORE")
+_BASE_CONFIG_NAME = "zeitung-config.json"
+
+_DEFAULT_ZEITUNG_CONFIG: dict[str, Any] = {
+    "schema": "ocean.skill-config.v2",
+    "skill": "tageszeitung",
+    "version": "0.2.0",
+    "self_healing": {
+        "enabled": True,
+        "backup_suffix": ".corrupt.<ts>.bak",
+        "atomic_writes": True,
+    },
+    "edition": {
+        "default_title": "Tageszeitung",
+        "default_category": "Allgemein",
+        "max_per_category": 5,
+        "summary_max_chars": 500,
+        "fetch_limit": 500,
+    },
+    "sections": ["Nachrichten", "Technik", "Wissenschaft", "Wirtschaft", "Allgemein"],
+    "fetch": {
+        "timeout_seconds": 12,
+        "max_feed_bytes": 1048576,
+        "max_web_bytes": 32768,
+        "user_agent": "ellmos-tageszeitung/0.2 (+sovereign)",
+    },
+    "layout": {
+        "max_width_px": 900,
+        "font_family": "Georgia,serif",
+        "accent_color": "#0055aa",
+    },
+    "output": {
+        "default_format": "html",
+        "supported_formats": ["html", "md", "pdf"],
+        "output_dir": "./output",
+        "pdf_timeout_seconds": 30,
+    },
+    "templates": {
+        "dir": "./templates",
+        "html": "ausgabe.template.html",
+        "md": "ausgabe.template.md",
+        "custom_dir": None,
+    },
+    "delivery": {
+        "enabled": False,
+        "dry_run": True,
+        "mode": "draft",
+    },
+}
+
+
+def _deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:
+    merged: dict[str, Any] = copy.deepcopy(dict(base))
+    for key, val in override.items():
+        if key in ("_hinweis", "_comment") and key in merged:
+            continue
+        if isinstance(merged.get(key), dict) and isinstance(val, dict):
+            merged[key] = _deep_merge(merged[key], val)
+        else:
+            merged[key] = copy.deepcopy(val)
+    return merged
+
+
+def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = _json.dumps(dict(payload), ensure_ascii=False, indent=2) + "\n"
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(text)
+        os.replace(tmp_name, str(path))
+    except Exception:
+        if os.path.exists(tmp_name):
+            os.unlink(tmp_name)
+        raise
+
+
+def load_zeitung_config(
+    *,
+    skill_root: Path = _SKILL_DIR,
+    repair: bool = False,
+) -> dict[str, Any]:
+    """Laedt zeitung-config.json -> config.json (plus Legacy-prefs.json) mit Selbstheilung."""
+    warnings: list[str] = []
+    healed: list[dict[str, str]] = []
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    effective = copy.deepcopy(_DEFAULT_ZEITUNG_CONFIG)
+
+    for idx, fname in enumerate((_BASE_CONFIG_NAME, "config.json")):
+        candidate = skill_root / fname
+        if not candidate.is_file():
+            continue
+        try:
+            raw = _json.loads(candidate.read_text(encoding="utf-8-sig"))
+            if not isinstance(raw, dict):
+                raise ValueError("JSON root must be object")
+            effective = _deep_merge(effective, raw)
+        except (OSError, UnicodeDecodeError, ValueError, _json.JSONDecodeError) as exc:
+            warnings.append(f"{candidate.name}: corrupt config ({exc}); fell back to defaults")
+            if repair:
+                bak = candidate.with_name(f"{candidate.name}.corrupt.{ts}.bak")
+                shutil.copy2(str(candidate), str(bak))
+                _atomic_write_json(candidate, _DEFAULT_ZEITUNG_CONFIG if idx == 0 else {})
+                healed.append({"path": str(candidate), "backup_path": str(bak)})
+
+    legacy_max = _read_pref("tageszeitung_max_per_category", None)
+    if legacy_max is not None:
+        try:
+            effective["edition"]["max_per_category"] = int(legacy_max)
+        except (TypeError, ValueError):
+            warnings.append("prefs.json: invalid tageszeitung_max_per_category ignored")
+
+    return {"config": effective, "warnings": warnings, "healed": healed}
+
+
+def _resolve_template_text(fmt_key: str, cfg: Mapping[str, Any], skill_root: Path = _SKILL_DIR) -> str:
+    tpl_cfg = cfg.get("templates") if isinstance(cfg.get("templates"), dict) else {}
+    filename = str(tpl_cfg.get(fmt_key) or f"ausgabe.template.{fmt_key}")
+    search_dirs: list[Path] = []
+    custom_dir = tpl_cfg.get("custom_dir")
+    if isinstance(custom_dir, str) and custom_dir.strip():
+        cpath = Path(custom_dir)
+        search_dirs.append(cpath if cpath.is_absolute() else (skill_root / cpath))
+    rel_dir = str(tpl_cfg.get("dir") or "./templates")
+    dpath = Path(rel_dir)
+    search_dirs.append(dpath if dpath.is_absolute() else (skill_root / dpath))
+    search_dirs.append(_SKILL_DIR / "templates")
+    for folder in search_dirs:
+        candidate = folder / filename
+        if candidate.is_file():
+            return candidate.read_text(encoding="utf-8")
+    raise FileNotFoundError(f"Template {filename!r} not found in {search_dirs}")
 
 
 def _store_path(cli_override: Optional[str] = None) -> Path:
     if cli_override:
         return Path(cli_override)
-    if _ENV_STORE:
-        return Path(_ENV_STORE)
+    env_override = os.environ.get("TAGESZEITUNG_STORE") or _ENV_STORE
+    if env_override:
+        return Path(env_override)
     return _DEFAULT_STORE
 
 
@@ -166,7 +301,7 @@ def _strip_html(text: str) -> str:
     return _html.unescape(clean).strip()
 
 
-def _fetch_rss_feedparser(url: str) -> list[dict]:
+def _fetch_rss_feedparser(url: str, *, summary_max_chars: int = 500) -> list[dict]:
     """Holt RSS via feedparser (bevorzugt)."""
     import feedparser  # type: ignore
     feed = feedparser.parse(url)
@@ -180,12 +315,16 @@ def _fetch_rss_feedparser(url: str) -> list[dict]:
             "url": getattr(entry, "link", ""),
             "author": getattr(entry, "author", ""),
             "published_at": getattr(entry, "published", ""),
-            "summary": summary[:500],
+            "summary": summary[:summary_max_chars],
         })
     return items
 
 
-def _fetch_rss_stdlib(url: str) -> list[dict]:
+def _fetch_rss_stdlib(
+    url: str,
+    *,
+    cfg: Optional[Mapping[str, Any]] = None,
+) -> list[dict]:
     """
     Holt RSS sicher ohne externe Abhaengigkeit.
 
@@ -194,11 +333,17 @@ def _fetch_rss_stdlib(url: str) -> list[dict]:
     2. Regex-Fallback: extrahiert <item>-Bloecke als Text, parst Tags per Regex.
        Kein ET.fromstring() auf rohen Netz-Daten (stdlib ET ist XXE-anfaellig).
     """
-    req = urllib.request.Request(
-        url, headers={"User-Agent": "ellmos-tageszeitung/0.1 (+sovereign)"}
-    )
-    with urllib.request.urlopen(req, timeout=12) as resp:
-        raw_bytes = resp.read(1_048_576)  # max 1 MB — Groessenbegrenzung
+    eff = cfg or load_zeitung_config()["config"]
+    fetch_cfg = eff.get("fetch", {})
+    edition_cfg = eff.get("edition", {})
+    timeout_s = int(fetch_cfg.get("timeout_seconds", 12))
+    max_bytes = int(fetch_cfg.get("max_feed_bytes", 1_048_576))
+    summary_max = int(edition_cfg.get("summary_max_chars", 500))
+    ua = str(fetch_cfg.get("user_agent", "ellmos-tageszeitung/0.2 (+sovereign)"))
+
+    req = urllib.request.Request(url, headers={"User-Agent": ua})
+    with urllib.request.urlopen(req, timeout=timeout_s) as resp:
+        raw_bytes = resp.read(max_bytes)
 
     # --- Versuch 1: defusedxml (optional, pip install defusedxml) ---
     try:
@@ -216,7 +361,7 @@ def _fetch_rss_stdlib(url: str) -> list[dict]:
                 "url": _t("link"),
                 "author": _t("author"),
                 "published_at": _t("pubDate"),
-                "summary": summary[:500],
+                "summary": summary[:summary_max],
             })
         return items
     except ImportError:
@@ -247,18 +392,21 @@ def _fetch_rss_stdlib(url: str) -> list[dict]:
             "url": _tag(block, "link"),
             "author": _tag(block, "author"),
             "published_at": _tag(block, "pubDate"),
-            "summary": summary[:500],
+            "summary": summary[:summary_max],
         })
     return items
 
 
-def _fetch_web_title(url: str) -> list[dict]:
+def _fetch_web_title(url: str, *, cfg: Optional[Mapping[str, Any]] = None) -> list[dict]:
     """Holt den Seitentitel einer Web-URL (aus BACH news.py portiert)."""
-    req = urllib.request.Request(
-        url, headers={"User-Agent": "ellmos-tageszeitung/0.1 (+sovereign)"}
-    )
-    with urllib.request.urlopen(req, timeout=12) as resp:
-        content = resp.read(32768).decode("utf-8", errors="replace")
+    eff = cfg or load_zeitung_config()["config"]
+    fetch_cfg = eff.get("fetch", {})
+    timeout_s = int(fetch_cfg.get("timeout_seconds", 12))
+    max_bytes = int(fetch_cfg.get("max_web_bytes", 32768))
+    ua = str(fetch_cfg.get("user_agent", "ellmos-tageszeitung/0.2 (+sovereign)"))
+    req = urllib.request.Request(url, headers={"User-Agent": ua})
+    with urllib.request.urlopen(req, timeout=timeout_s) as resp:
+        content = resp.read(max_bytes).decode("utf-8", errors="replace")
     m = re.search(r"<title[^>]*>(.*?)</title>", content, re.IGNORECASE | re.DOTALL)
     title = _html.unescape(m.group(1).strip()) if m else "(kein Titel)"
     return [{"title": title, "url": url, "author": "", "published_at": "", "summary": ""}]
@@ -368,49 +516,90 @@ def mark_read(store: Path, item_id: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# HTML/PDF-Render (aus BACH newspaper_generator.py portiert, userneutral)
+# HTML/MD/PDF-Render (Template-basiert aus templates/ + Edge-PDF optional)
 # ---------------------------------------------------------------------------
 
-def _render_html(items_by_category: dict[str, list[dict]], target_date: str,
-                 title: str = "Tageszeitung") -> str:
-    """Rendert Artikel als HTML-String."""
-    lines = [
-        "<!DOCTYPE html><html lang='de'><head>",
-        "<meta charset='utf-8'>",
-        f"<title>{_html.escape(title)} — {target_date}</title>",
-        "<style>",
-        "body{font-family:Georgia,serif;max-width:900px;margin:auto;padding:2em}",
-        "h1{border-bottom:3px double #333;padding-bottom:.5em}",
-        "h2{color:#555;margin-top:2em;border-bottom:1px solid #ccc}",
-        "article{margin:1em 0;padding:.5em 0;border-bottom:1px solid #eee}",
-        "article h3{margin:0 0 .3em}a{color:#0055aa}",
-        ".meta{color:#888;font-size:.85em}",
-        "</style></head><body>",
-        f"<h1>{_html.escape(title)}</h1>",
-        f"<p class='meta'>{target_date}</p>",
-    ]
+def _render_html(
+    items_by_category: dict[str, list[dict]],
+    target_date: str,
+    title: Optional[str] = None,
+    *,
+    cfg: Optional[Mapping[str, Any]] = None,
+    skill_root: Path = _SKILL_DIR,
+) -> str:
+    """Rendert Artikel ueber templates/ausgabe.template.html als HTML-String."""
+    eff = cfg or load_zeitung_config(skill_root=skill_root)["config"]
+    layout = eff.get("layout", {})
+    edition = eff.get("edition", {})
+    eff_title = title or str(edition.get("default_title", "Tageszeitung"))
+    tpl = _resolve_template_text("html", eff, skill_root)
+
+    article_parts: list[str] = []
     for category, arts in items_by_category.items():
-        lines.append(f"<h2>{_html.escape(category)}</h2>")
+        article_parts.append(f"<h2>{_html.escape(category)}</h2>")
         for art in arts:
-            url = art.get("url", "")
-            t = _html.escape(art.get("title", "(kein Titel)"))
-            summary = _html.escape(art.get("summary", ""))
-            source = _html.escape(art.get("source_name", ""))
-            lines.append("<article>")
+            url = str(art.get("url") or "")
+            t = _html.escape(str(art.get("title") or "(kein Titel)"))
+            summary = _html.escape(str(art.get("summary") or ""))
+            source = _html.escape(str(art.get("source_name") or ""))
+            article_parts.append("<article>")
             if url:
-                lines.append(f"<h3><a href='{url}'>{t}</a></h3>")
+                article_parts.append(f"<h3><a href='{_html.escape(url, quote=True)}'>{t}</a></h3>")
             else:
-                lines.append(f"<h3>{t}</h3>")
+                article_parts.append(f"<h3>{t}</h3>")
             if summary:
-                lines.append(f"<p>{summary}</p>")
+                article_parts.append(f"<p>{summary}</p>")
             if source:
-                lines.append(f"<p class='meta'>{source}</p>")
-            lines.append("</article>")
-    lines.append("</body></html>")
-    return "\n".join(lines)
+                article_parts.append(f"<p class='meta'>{source}</p>")
+            article_parts.append("</article>")
+
+    return (
+        tpl.replace("{{title}}", _html.escape(eff_title))
+        .replace("{{date}}", _html.escape(target_date))
+        .replace("{{font_family}}", _html.escape(str(layout.get("font_family", "Georgia,serif"))))
+        .replace("{{max_width_px}}", str(int(layout.get("max_width_px", 900))))
+        .replace("{{accent_color}}", _html.escape(str(layout.get("accent_color", "#0055aa"))))
+        .replace("{{articles_html}}", "\n".join(article_parts))
+    )
 
 
-def _html_to_pdf(html_path: Path, pdf_path: Path) -> bool:
+def _render_markdown(
+    items_by_category: dict[str, list[dict]],
+    target_date: str,
+    title: Optional[str] = None,
+    *,
+    cfg: Optional[Mapping[str, Any]] = None,
+    skill_root: Path = _SKILL_DIR,
+) -> str:
+    """Rendert Artikel ueber templates/ausgabe.template.md als Markdown-String."""
+    eff = cfg or load_zeitung_config(skill_root=skill_root)["config"]
+    edition = eff.get("edition", {})
+    eff_title = title or str(edition.get("default_title", "Tageszeitung"))
+    tpl = _resolve_template_text("md", eff, skill_root)
+
+    md_parts: list[str] = []
+    for category, arts in items_by_category.items():
+        md_parts.append(f"## {category}\n")
+        for art in arts:
+            t = str(art.get("title") or "(kein Titel)")
+            url = str(art.get("url") or "")
+            summary = str(art.get("summary") or "")
+            source = str(art.get("source_name") or "")
+            heading = f"### [{t}]({url})" if url else f"### {t}"
+            md_parts.append(heading)
+            if summary:
+                md_parts.append(summary)
+            if source:
+                md_parts.append(f"_{source}_")
+            md_parts.append("")
+    return (
+        tpl.replace("{{title}}", eff_title)
+        .replace("{{date}}", target_date)
+        .replace("{{articles_md}}", "\n".join(md_parts).rstrip())
+    )
+
+
+def _html_to_pdf(html_path: Path, pdf_path: Path, *, timeout_seconds: int = 30) -> bool:
     """Konvertiert HTML -> PDF via Edge Headless. Gibt True bei Erfolg zurueck."""
     import subprocess
     msedge = os.environ.get("MSEDGE_PATH", "msedge.exe")
@@ -424,7 +613,7 @@ def _html_to_pdf(html_path: Path, pdf_path: Path) -> bool:
                 "--no-pdf-header-footer",
                 str(html_path),
             ],
-            timeout=30,
+            timeout=timeout_seconds,
             capture_output=True,
         )
         return result.returncode == 0 and pdf_path.exists()
@@ -432,19 +621,36 @@ def _html_to_pdf(html_path: Path, pdf_path: Path) -> bool:
         return False
 
 
-def render(store: Path, target_date: Optional[str] = None,
-           out_dir: Optional[str] = None, dry_run: bool = False,
-           title: str = "Tageszeitung") -> dict:
+def render(
+    store: Path,
+    target_date: Optional[str] = None,
+    out_dir: Optional[str] = None,
+    dry_run: bool = False,
+    title: Optional[str] = None,
+    fmt: Optional[str] = None,
+    *,
+    skill_root: Path = _SKILL_DIR,
+    repair: bool = False,
+) -> dict:
     """
-    Rendert die Tageszeitung als HTML (+ PDF wenn Edge verfuegbar).
-    Gibt {'html': pfad, 'pdf': pfad|None, 'article_count': n} zurueck.
+    Rendert die Tageszeitung als HTML (+ optional PDF via Edge) oder Markdown.
+    Gibt {'html': pfad|None, 'md': pfad|None, 'pdf': pfad|None, 'article_count': n} zurueck.
     """
+    cfg_res = load_zeitung_config(skill_root=skill_root, repair=repair)
+    cfg = cfg_res["config"]
+    edition = cfg.get("edition", {})
+    out_cfg = cfg.get("output", {})
+
     if target_date is None:
         target_date = date.today().isoformat()
-    max_per_cat = int(_read_pref("tageszeitung_max_per_category", 5))
+    eff_title = title or str(edition.get("default_title", "Tageszeitung"))
+    default_cat = str(edition.get("default_category", "Allgemein"))
+    max_per_cat = int(edition.get("max_per_category", 5))
+    fetch_limit = int(edition.get("fetch_limit", 500))
+    target_fmt = (fmt or str(out_cfg.get("default_format", "html"))).strip().lower()
+    pdf_timeout = int(out_cfg.get("pdf_timeout_seconds", 30))
 
     if dry_run:
-        # Dummy-Artikel fuer Dry-Run
         items_by_category: dict[str, list[dict]] = {
             "Demo": [
                 {"title": "Beispiel-Artikel 1", "url": "", "summary": "Demo-Inhalt",
@@ -454,7 +660,6 @@ def render(store: Path, target_date: Optional[str] = None,
             ]
         }
     else:
-        # Quellen-Namen fuer Join nachladen
         source_names: dict[str, str] = {}
         if store.exists():
             conn = _open_store(store)
@@ -462,33 +667,51 @@ def render(store: Path, target_date: Optional[str] = None,
                 source_names[row["id"]] = row["name"]
             conn.close()
 
-        raw_items = list_items(store, limit=500, only_unread=True)
-        # Nach Kategorie gruppieren
+        raw_items = list_items(store, limit=fetch_limit, only_unread=True)
         items_by_category = {}
         for item in raw_items:
-            cat = item.get("category") or "Allgemein"
+            cat = item.get("category") or default_cat
             if cat not in items_by_category:
                 items_by_category[cat] = []
             if len(items_by_category[cat]) < max_per_cat:
                 item["source_name"] = source_names.get(item.get("source_id", ""), "")
                 items_by_category[cat].append(item)
 
-    html_content = _render_html(items_by_category, target_date, title)
-
-    output_dir = Path(out_dir) if out_dir else _SKILL_DIR / "output"
+    if out_dir:
+        output_dir = Path(out_dir)
+    else:
+        rel_out = Path(str(out_cfg.get("output_dir", "./output")))
+        output_dir = rel_out if rel_out.is_absolute() else (skill_root / rel_out)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    html_path = output_dir / f"tageszeitung_{target_date}.html"
-    html_path.write_text(html_content, encoding="utf-8")
-
     article_count = sum(len(v) for v in items_by_category.values())
+    html_path_str: Optional[str] = None
+    md_path_str: Optional[str] = None
+    pdf_path_str: Optional[str] = None
 
-    pdf_path = output_dir / f"tageszeitung_{target_date}.pdf"
-    pdf_ok = _html_to_pdf(html_path, pdf_path) if not dry_run else False
+    if target_fmt == "md":
+        md_content = _render_markdown(
+            items_by_category, target_date, eff_title, cfg=cfg, skill_root=skill_root
+        )
+        md_path = output_dir / f"tageszeitung_{target_date}.md"
+        md_path.write_text(md_content, encoding="utf-8")
+        md_path_str = str(md_path)
+    else:
+        html_content = _render_html(
+            items_by_category, target_date, eff_title, cfg=cfg, skill_root=skill_root
+        )
+        html_path = output_dir / f"tageszeitung_{target_date}.html"
+        html_path.write_text(html_content, encoding="utf-8")
+        html_path_str = str(html_path)
+
+        pdf_path = output_dir / f"tageszeitung_{target_date}.pdf"
+        if not dry_run and _html_to_pdf(html_path, pdf_path, timeout_seconds=pdf_timeout):
+            pdf_path_str = str(pdf_path)
 
     return {
-        "html": str(html_path),
-        "pdf": str(pdf_path) if pdf_ok else None,
+        "html": html_path_str,
+        "md": md_path_str,
+        "pdf": pdf_path_str,
         "article_count": article_count,
         "date": target_date,
         "dry_run": dry_run,
@@ -636,6 +859,8 @@ def main(argv: Optional[list] = None) -> int:
         args = argv[1:]
         target_date = None
         out_dir = None
+        fmt = None
+        repair = "--repair" in args
         if "--date" in args:
             idx = args.index("--date")
             if idx + 1 < len(args):
@@ -644,12 +869,19 @@ def main(argv: Optional[list] = None) -> int:
             idx = args.index("--out")
             if idx + 1 < len(args):
                 out_dir = args[idx + 1]
-        result = render(store, target_date, out_dir, dry_run)
-        print(f"[tageszeitung] {result['article_count']} Artikel | HTML: {result['html']}")
-        if result["pdf"]:
-            print(f"[tageszeitung] PDF:  {result['pdf']}")
+        if "--format" in args:
+            idx = args.index("--format")
+            if idx + 1 < len(args):
+                fmt = args[idx + 1]
+        result = render(store, target_date, out_dir, dry_run, fmt=fmt, repair=repair)
+        if result.get("md"):
+            print(f"[tageszeitung] {result['article_count']} Artikel | MD: {result['md']}")
         else:
-            print("[tageszeitung] PDF: nicht erstellt (msedge.exe nicht gefunden oder Dry-Run)")
+            print(f"[tageszeitung] {result['article_count']} Artikel | HTML: {result['html']}")
+            if result["pdf"]:
+                print(f"[tageszeitung] PDF:  {result['pdf']}")
+            else:
+                print("[tageszeitung] PDF: nicht erstellt (msedge.exe nicht gefunden oder Dry-Run)")
         return 0
 
     print(f"Unbekannter Befehl: {cmd!r}")

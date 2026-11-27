@@ -1,0 +1,112 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "kalender",
+  "version": "0.3.0",
+  "self_healing": {
+    "enabled": true,
+    "backup_suffix": ".corrupt.<ts>.bak",
+    "atomic_writes": true
+  },
+  "defaults": {
+    "calendar": "user",
+    "import_calendar": "terminpilot",
+    "date_format": "%Y-%m-%d",
+    "time_format": "%H:%M",
+    "first_weekday": 0,
+    "default_list_limit": 50,
+    "default_color": "#3b82f6"
+  },
+  "silos": [
+    {
+      "id": "user",
+      "name": "Nutzerkalender",
+      "category": "personal",
+      "color": "#2563eb",
+      "description": "Persönlicher Standardkalender",
+      "is_default": 1
+    },
+    {
+      "id": "tickets",
+      "name": "Ticket-Kalender",
+      "category": "tasks",
+      "color": "#7c3aed",
+      "description": "Eingeplante Tickets und Arbeitsblöcke",
+      "is_default": 0
+    },
+    {
+      "id": "finanzen",
+      "name": "Finanzkalender / Zahlungstermine",
+      "category": "finance",
+      "color": "#059669",
+      "description": "Zahlungstermine, Fristen und Buchungen",
+      "is_default": 0
+    },
+    {
+      "id": "gesundheit",
+      "name": "Arzttermine & Gesundheit",
+      "category": "health",
+      "color": "#dc2626",
+      "description": "Arztbesuche, Vorsorge und Gesundheit",
+      "is_default": 0
+    },
+    {
+      "id": "geburtstage_privat",
+      "name": "Geburtstage (privat)",
+      "category": "birthdays",
+      "color": "#db2777",
+      "description": "Private Geburtstage und Jahrestage",
+      "is_default": 0
+    },
+    {
+      "id": "geburtstage_beruflich",
+      "name": "Geburtstage (beruflich)",
+      "category": "birthdays",
+      "color": "#d97706",
+      "description": "Berufliche Geburtstage und Jubiläen",
+      "is_default": 0
+    },
+    {
+      "id": "terminpilot",
+      "name": "TerminPilot / Terminabstimmung",
+      "category": "coordination",
+      "color": "#0891b2",
+      "description": "Terminabstimmungen und TerminPilot-Importe",
+      "is_default": 0
+    },
+    {
+      "id": "routinen",
+      "name": "Routinen",
+      "category": "routines",
+      "color": "#4b5563",
+      "description": "Wiederkehrende Routinen",
+      "is_default": 0
+    }
+  ],
+  "output": {
+    "default_format": "html",
+    "default_view": "month",
+    "supported_formats": [
+      "html",
+      "pdf",
+      "md",
+      "txt",
+      "ics"
+    ],
+    "max_chips_per_day_md": 4,
+    "output_dir": "./output"
+  },
+  "templates": {
+    "dir": "./templates",
+    "month_html": "month-sheet.template.html",
+    "week_html": "week-sheet.template.html",
+    "report_html": "agenda-report.template.html",
+    "report_md": "agenda-report.template.md",
+    "report_txt": "agenda-report.template.txt",
+    "custom_dir": null
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft"
+  }
+}

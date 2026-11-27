@@ -1,26 +1,11 @@
 ---
 name: decision-draw
-version: 1.5.0
+version: 1.6.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-15
-description: >
-  Verwenden, wenn mehrere gebündelte offene Entscheidungen auf einmal zur
-  Abnahme vorgelegt werden sollen, etwa bei "decision draw", /decision-draw,
-  "gib mir alle Entscheidungen in der empfohlenen Form", "wie sieht das Ganze
-  aus wenn wir allem zustimmen", "zeichne mir das Gesamtbild". Standard ist die
-  Kurzfassung -- jede Entscheidung in ein bis zwei Sätzen so ausgeschrieben, wie
-  sie nach der Empfehlung lautet, danach Gesamtabnahme ("Passt so") oder
-  Korrektur per Nummer. Korrekturen werden in Einzelentscheidungen übersetzt und
-  über decision-briefing Phase 4 gebucht. Das ausführliche Gesamtbild (Konzept,
-  Zusammenspiel, Umsetzung, Anhang) nur auf ausdrücklichen Wunsch. NICHT nutzen,
-  wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht
-  decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht
-  decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und
-  Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht
-  decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht
-  decide.
+updated: 2026-11-27
+description: "Verwenden, wenn mehrere gebündelte offene Entscheidungen auf einmal zur Abnahme vorgelegt werden sollen, etwa bei \"decision draw\", /decision-draw, \"gib mir alle Entscheidungen in der empfohlenen Form\", \"wie sieht das Ganze aus wenn wir allem zustimmen\", \"zeichne mir das Gesamtbild\". Standard ist die Kurzfassung -- jede Entscheidung in ein bis zwei Sätzen so ausgeschrieben, wie sie nach der Empfehlung lautet, danach Gesamtabnahme (\"Passt so\") oder Korrektur per Nummer. Korrekturen werden in Einzelentscheidungen übersetzt und über decision-briefing Phase 4 gebucht. Das ausführliche Gesamtbild (Konzept, Zusammenspiel, Umsetzung, Anhang) nur auf ausdrücklichen Wunsch. NICHT nutzen, wenn Alternativen pro Einzelpunkt diskutiert werden sollen -- das macht decision-briefing; NICHT für den Abhängigkeitsgraphen -- das macht decision-path; NICHT für strukturierte Einzelblöcke mit Optionen und Pro/Contra (auch bei eng zusammengehörigen Gruppen) -- das macht decision-shot; NICHT zur Herleitung einer einzelnen Entscheidung -- das macht decide."
 visibility: public
 language: de
 standalone: true
@@ -369,8 +354,15 @@ Wird ein Decision-Draw als dauerhaftes Konzeptdokument gespeichert, endet es mit
 
 ---
 
+## Konfiguration & Templates (`draw-config.json`, `templates/`)
+
+Farben, Fenstergrößen, Formular-Limits, Bildgrenzen und Server-Parameter liegen ausgelagert in [draw-config.json](draw-config.json) und werden über [scripts/draw_config.py](scripts/draw_config.py) mit automatischem Rückfall und Selbstheilung (`.corrupt.<ts>.bak` bei `--repair`) geladen. Austauschbare Markdown- und HTML-Vorlagen liegen unter `templates/` ([decision-draw-short.template.md](templates/decision-draw-short.template.md), [decision-draw-detailed.template.md](templates/decision-draw-detailed.template.md), [markdown_form_shell.template.html](templates/markdown_form_shell.template.html)).
+
 ## Changelog
 
+
+### 1.6.0 (2026-11-27)
+- Hardcodierte Theme-/Fenster-, Formular- und Server-Schwellen in `draw-config.json` ausgelagert (`scripts/draw_config.py` mit Selbstheilungs-Fallback); Markdown-/HTML-Ausgabe-Templates unter `templates/` ausgelagert und `tests/test_decision_draw.py` ergänzt.
 
 ### 1.5.0 (2026-11-15)
 - Formular ohne Ordnerdialog speichern: `scripts/formular/serve_form.py` (lokaler Speicherdienst auf 127.0.0.1, nur Standardbibliothek) öffnet das Formular im normalen Edge und schreibt die Antwort selbst; Anleitung zum Öffnen und Speichern im Formular-Abschnitt, Rückfall ohne Python bleibt (Download-Links, Text, Ordnerdialog zuletzt). Anlass: Ticket T-20261115-242335144.

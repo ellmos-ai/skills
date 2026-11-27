@@ -1,19 +1,11 @@
 ---
 name: letter-hooker
-version: 1.0.1
+version: 1.0.2
 type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
-updated: 2026-11-22
-description: >
-  Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader,
-  Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext-
-  Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene
-  JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI). Nutzen, wenn ein
-  Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener
-  durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen
-  (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und
-  Sicherheitsprotokolle routen soll.
+updated: 2026-11-27
+description: "Nutzen, wenn ein Agent Preflight-Regeln injizieren, vor Arbeitsbeginn Memory/Gardener durchsuchen, Verzeichnis-Dokument-Lesestrategien erzwingen (CLAUDE.md / AGENTS.md) oder Sidecar-Tasks dynamisch an Skills und Sicherheitsprotokolle routen soll. Erweitert automation-self-care um Letter Hooks, Preflight-Bootloader, Dokument-Traversierungsregeln und selbstheilende Prompt-Kontext- Anreicherung für KI-Agenten und CLIs ohne native, ereignisgetriebene JSON-Lifecycle-Hooks (wie Antigravity / Gemini CLI)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

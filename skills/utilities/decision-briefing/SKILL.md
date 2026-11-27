@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.5.1
+version: 1.6.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -265,8 +265,21 @@ ein Handoff oder einen Receipt, endet das Artefakt mit genau einer Zeile:
 
 ---
 
+## Konfiguration, Templates & Renderer (`briefing-config.json`, `scripts/render_briefing.py`)
+
+Parameter wie Blockgröße (`batch_threshold: 5`, `block_size: 4`), Optionsbuchstaben, Ausgabeformate (`md`, `html`, `txt`, `json`) und Template-Pfade liegen in [briefing-config.json](briefing-config.json) (Selbstheilungs-Kaskade mit optionaler `config.json` und `profiles/<kanal>.json`). Das Stdlib-Skript [scripts/render_briefing.py](scripts/render_briefing.py) rendert strukturierte Briefings gegen die austauschbaren Vorlagen in [templates/briefing.template.md](templates/briefing.template.md) und [templates/briefing.template.html](templates/briefing.template.html).
+
+```bash
+python scripts/render_briefing.py --dry-run --format html --out output/briefing.html
+python scripts/render_briefing.py daten.json --format md --repair
+```
+
+---
+
 ## Changelog
 
+### 1.6.0 (2026-11-27)
+- `briefing-config.json`, austauschbare Vorlagen (`templates/briefing.template.md`, `templates/briefing.template.html`), Stdlib-Renderer `scripts/render_briefing.py` (mit Selbstheilung) und `tests/test_decision_briefing.py` ergänzt.
 
 ### 1.5.1 (2026-11-22)
 - Sprachhinweis korrigiert

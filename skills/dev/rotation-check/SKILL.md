@@ -1,20 +1,11 @@
 ---
 name: rotation-check
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-03
-description: >
-  Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge
-  (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check
-  durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten. Nutze
-  diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll
-  („prüfe regelmäßig alle X auf Y"), wenn eine Automatisierung Doppelprüfungen vermeiden
-  muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn
-  eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über
-  eine Pipeline fair verteilt werden soll.
-
+updated: 2026-11-27
+description: "Nutze diesen Skill, wenn ein wiederkehrender Check über viele Projekte verteilt werden soll („prüfe regelmäßig alle X auf Y\"), wenn eine Automatisierung Doppelprüfungen vermeiden muss, wenn eine Check-Registry/CHECKS-LOG-Struktur angelegt oder benutzt wird, oder wenn eine periodische Qualitätsrunde (Quellencheck, Style-Check, Health-Check, Audit) über eine Pipeline fair verteilt werden soll. Standard-Gerüst für rotierende Pipeline-Checks: Pro Lauf genau ein Ziel aus einer Menge (Projekte, Ordner, Repos) wählen — bevorzugt das am längsten ungeprüfte —, den Check durchführen, Ergebnis in einer Check-Registry und einem Verlaufslog festhalten."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

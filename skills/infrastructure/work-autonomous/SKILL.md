@@ -1,25 +1,11 @@
 ---
 name: work-autonomous
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-11-22
-description: >
-  Abbruchbedingung für autonome Loops: So weit wie möglich selbständig
-  weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine
-  autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck "nichts mehr
-  zu tun" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide,
-  _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben
-  GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet
-  found/empty/unavailable statt eines binären Ergebnisses — "exhausted" gilt
-  nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine
-  Quelle unavailable, meldet der Skill "blind" statt "exhausted" und behauptet
-  nichts Ungeprüftes. Nutze diesen Skill bei /work-autonomous, /waafap,
-  "arbeite autonom weiter bis nichts mehr zu tun ist", als Goal-Bedingung
-  innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine
-  autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird.
-
+updated: 2026-11-27
+description: "Nutze diesen Skill bei /work-autonomous, /waafap, \"arbeite autonom weiter bis nichts mehr zu tun ist\", als Goal-Bedingung innerhalb eines /loop, oder wenn geprüft werden soll, ob wirklich keine autonome Arbeit mehr übrig ist, bevor ein Loop/eine Session beendet wird. Abbruchbedingung für autonome Loops: So weit wie möglich selbständig weiterarbeiten UND einen Loop erst beenden, wenn belegt ist, dass keine autonom ausführbare Aufgabe mehr vorliegt. Der bloße Eindruck \"nichts mehr zu tun\" reicht NICHT — er löst eine vierstufige Prüfkette aus (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM), die zuerst neue Aufgaben GEWINNEN muss, bevor der Loop enden darf. Jeder Kettenschritt meldet found/empty/unavailable statt eines binären Ergebnisses — \"exhausted\" gilt nur, wenn ALLE Quellen tatsächlich befragbar waren; ist mindestens eine Quelle unavailable, meldet der Skill \"blind\" statt \"exhausted\" und behauptet nichts Ungeprüftes."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

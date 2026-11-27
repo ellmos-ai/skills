@@ -16,26 +16,40 @@ import base64
 import binascii
 import hashlib
 import html as H
+import importlib.util
 import json
 import re
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+
+
+def _load_form_cfg():
+    cfg_script = HERE.parent / "draw_config.py"
+    spec = importlib.util.spec_from_file_location("draw_config", cfg_script)
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.load_draw_config()["config"]["form"]
+
+
+_FORM_CFG = _load_form_cfg()
+_IMG_CFG = _FORM_CFG["images"]
+_Q_OPT = _FORM_CFG["question_option"]
+
 SCHEMA = "ticket-master.decision-answers.v1"
 DATA_SCHEMA = "ellmos.decision-form.v1"
 ZERO = "0" * 64
-RQ = "rueckfrage"
-RQ_LABEL = "Rückfrage / mehr Info nötig"
-LIMITS = {"titel": 80, "kontext_kurz": 400, "kontext": 250, "frage": 200, "label": 100, "wirkung": 160, "grund": 160,
-          "kosten_aufwand": 160, "risiko_rueckgaengig": 160, "frist": 160, "folge_bei_nein": 160, "beschriftung": 120,
-          "sensitiv_grund": 100, "alt": 200, "seite": 60, "variante": 60, "zielordner": 120, "details_markdown": 4000}
-IMG_MAX = 400 * 1024
-IMG_TOTAL_MAX = 8 * 1024 * 1024
-IMG_SERIE_MAX = 12
-IMG_POLAROID_MIN = 2
-IMG_POLAROID_MAX = 12
-SWIPE_IMG_MAX = 60
+RQ = str(_Q_OPT["id"])
+RQ_LABEL = str(_Q_OPT["label"])
+LIMITS = dict(_FORM_CFG["limits"])
+IMG_MAX = int(_IMG_CFG["max_bytes"])
+IMG_TOTAL_MAX = int(_IMG_CFG["total_max_bytes"])
+IMG_SERIE_MAX = int(_IMG_CFG["serie_max"])
+IMG_POLAROID_MIN = int(_IMG_CFG["polaroid_min"])
+IMG_POLAROID_MAX = int(_IMG_CFG["polaroid_max"])
+SWIPE_IMG_MAX = int(_IMG_CFG["swipe_max"])
 IMG_TYPES = {"image/png", "image/jpeg", "image/webp", "image/gif"}
 EXT_TYPES = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif"}
 CONF = {"grün": "grün", "gruen": "grün", "gelb": "gelb", "rot": "rot"}

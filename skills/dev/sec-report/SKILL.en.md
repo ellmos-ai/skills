@@ -1,11 +1,11 @@
 ---
 name: sec-report
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Produces the security report report.md (grouped by severity, coverage section with gaps, rejected findings separate, summary without sugar-coating) and findings.sarif (SARIF 2.1.0) from findings.json and coverage.json via the script render_report.py. Use for 'write the security report', 'summarise the scan result', 'export SARIF', 'report for code scanning'. Aborts on invalid data; a partial scan is reported as partial. New findings: sec-scan / sec-diff-scan. Verifying: sec-validate. Classifying: sec-triage."
+updated: 2026-11-27
+description: "Use for 'write the security report', 'summarise the scan result', 'export SARIF', 'report for code scanning'. Produces the security report report.md (grouped by severity, coverage section with gaps, rejected findings separate, summary without sugar-coating) and findings.sarif (SARIF 2.1.0) from findings.json and coverage.json via the script render_report.py. Aborts on invalid data; a partial scan is reported as partial. New findings: sec-scan / sec-diff-scan. Verifying: sec-validate. Classifying: sec-triage."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

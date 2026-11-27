@@ -1,22 +1,11 @@
 ---
 name: file-collect-sort-action
-version: 1.0.0
+version: 1.0.1
 type: skill
 author: Lukas Geiger
 created: 2026-08-18
-updated: 2026-08-18
-description: >
-  Erkennt Nutzeraufträge der Form "hole aus einem Ordner immer bestimmte Dateien und sammle
-  sie an einem Ziel" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein —
-  ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert
-  und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information).
-  Nutze diesen Skill bei Sätzen wie "hole aus <Ordner> immer <Dateiart> und sammle sie in
-  <Ziel>", "sortiere den Ordner X automatisch nach ...", "sammle eingehende Dateien aus ...
-  in ...", "räume diesen Ordner regelbasiert auf" oder "verschiebe alle <Dateiart> aus <Ordner>
-  automatisch". Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem
-  Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus.
-
-# Kompatibilitaet
+updated: 2026-11-27
+description: "Nutze diesen Skill bei Sätzen wie \"hole aus <Ordner> immer <Dateiart> und sammle sie in <Ziel>\", \"sortiere den Ordner X automatisch nach ...\", \"sammle eingehende Dateien aus ... in ...\", \"räume diesen Ordner regelbasiert auf\" oder \"verschiebe alle <Dateiart> aus <Ordner> automatisch\". Erkennt Nutzeraufträge der Form \"hole aus einem Ordner immer bestimmte Dateien und sammle sie an einem Ziel\" und richtet dafür das Modul file-collect-sort-action (CLI fcsa) ein — ein konfigurationsgetriebener Agent, der Ordner scannt, Dateien per Schablone kategorisiert und gestufte Aktionen anwendet (move/copy/duplicate-check/delete/OCR/place-information). Richtet IMMER zuerst einen Dry-Run ein und schaltet erst nach ausdrücklichem Nutzer-Go scharf; Löschen bleibt grundsätzlich im _trash-Modus."
 standalone: false
 anthropic_compatible: true
 bach_compatible: false

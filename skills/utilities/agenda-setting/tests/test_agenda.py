@@ -445,6 +445,36 @@ class AgendaTests(unittest.TestCase):
         self.assertEqual(self._raw_cli("summary", "--group-by", "invalid").returncode, 2)
         self.assertEqual(self._raw_cli("summary", "--output", str(self.tmp.name)).returncode, 2)
 
+    def test_config_self_healing_and_html_board_template(self):
+        import shutil
+
+        cfg_root = Path(self.tmp.name) / "skill_cfg"
+        cfg_root.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(BASE.parent / "agenda-config.json", cfg_root / "agenda-config.json")
+        shutil.copytree(BASE.parent / "templates", cfg_root / "templates")
+
+        corrupt = cfg_root / "config.json"
+        corrupt.write_text("{broken json", encoding="utf-8")
+
+        loaded = a.load_agenda_config(skill_root=cfg_root, repair=True)
+        self.assertTrue(loaded["warnings"])
+        self.assertTrue(loaded["healed"])
+        self.assertTrue(list(cfg_root.glob("config.json.corrupt.*.bak")))
+        self.assertEqual(loaded["config"]["weights"]["default_add"], 50)
+
+        self.active()
+        self.cli("add", "Test <script>alert(1)</script>", if_revision=3, weight=88, timeframe="2027-01")
+        sum_data = a.summary(a.read(self.root))
+        html_out = a.render_summary(sum_data, fmt="html", config=loaded["config"], skill_root=cfg_root)
+        self.assertIn("<!DOCTYPE html>", html_out)
+        self.assertIn("@media print", html_out)
+        self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", html_out)
+        self.assertNotIn("<script>alert(1)</script>", html_out)
+
+        r_html = self._raw_cli("summary", "--format", "html")
+        self.assertEqual(r_html.returncode, 0, r_html.stderr)
+        self.assertIn('class="board"', r_html.stdout)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

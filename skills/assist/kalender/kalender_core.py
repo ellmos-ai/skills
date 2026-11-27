@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: MIT
 """
-kalender_core.py — Lokaler Multi-Silo-Kalender & Berichtsgenerator (v0.2.0).
+kalender_core.py — Lokaler Multi-Silo-Kalender & Berichtsgenerator (v0.3.0).
 
 Eigenschaften:
   - Lokaler SQLite-Store (`store.db`, überschreibbar per `--store` oder `KALENDER_STORE`)
+  - Externe Konfiguration via `kalender-config.json` (+ Selbstheilung mit `.corrupt.<ts>.bak`)
+  - Austauschbare Vorlagen unter `templates/` (`.template.html`, `.template.md`, `.template.txt`)
   - 100 % Python-Stdlib (`sqlite3`, `calendar`, `datetime`, `html`, `json`, ...)
   - Getrennte Kalender-Silos/Profile (`user`, `tickets`, `finanzen`, `gesundheit`,
     `geburtstage_privat`, `geburtstage_beruflich`, `terminpilot`, `routinen` + eigene)
@@ -24,25 +26,201 @@ Flag 3 — Backend-Wahl (in `assist/prefs.json` via `kalender_backend`):
 from __future__ import annotations
 
 import calendar as pycalendar
+import copy
 import html
 import json
 import os
 import re
+import shutil
 import sqlite3
 import sys
+import tempfile
 import uuid
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Mapping, Optional
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 # ---------------------------------------------------------------------------
-# Pfade & Präferenzen (nutzerneutral, relativ zum Skill)
+# Pfade, Konfiguration (Selbstheilung) & Präferenzen
 # ---------------------------------------------------------------------------
 
 _SKILL_DIR = Path(__file__).resolve().parent
 _DEFAULT_STORE = _SKILL_DIR / "store.db"
+_BASE_CONFIG_NAME = "kalender-config.json"
+
+DEFAULT_CALENDARS: tuple[tuple[str, str, str, str, str, int], ...] = (
+    ("user", "Nutzerkalender", "personal", "#2563eb", "Persönlicher Standardkalender", 1),
+    ("tickets", "Ticket-Kalender", "tasks", "#7c3aed", "Eingeplante Tickets und Arbeitsblöcke", 0),
+    ("finanzen", "Finanzkalender / Zahlungstermine", "finance", "#059669", "Zahlungstermine, Fristen und Buchungen", 0),
+    ("gesundheit", "Arzttermine & Gesundheit", "health", "#dc2626", "Arztbesuche, Vorsorge und Gesundheit", 0),
+    ("geburtstage_privat", "Geburtstage (privat)", "birthdays", "#db2777", "Private Geburtstage und Jahrestage", 0),
+    ("geburtstage_beruflich", "Geburtstage (beruflich)", "birthdays", "#d97706", "Berufliche Geburtstage und Jubiläen", 0),
+    ("terminpilot", "TerminPilot / Terminabstimmung", "coordination", "#0891b2", "Terminabstimmungen und TerminPilot-Importe", 0),
+    ("routinen", "Routinen", "routines", "#4b5563", "Wiederkehrende Routinen", 0),
+)
+
+_DEFAULT_KALENDER_CONFIG: dict[str, Any] = {
+    "schema": "ocean.skill-config.v2",
+    "skill": "kalender",
+    "version": "0.3.0",
+    "self_healing": {
+        "enabled": True,
+        "backup_suffix": ".corrupt.<ts>.bak",
+        "atomic_writes": True,
+    },
+    "defaults": {
+        "calendar": "user",
+        "import_calendar": "terminpilot",
+        "date_format": "%Y-%m-%d",
+        "time_format": "%H:%M",
+        "first_weekday": 0,
+        "default_list_limit": 50,
+        "default_color": "#3b82f6",
+    },
+    "silos": [
+        {
+            "id": cid,
+            "name": cname,
+            "category": ccat,
+            "color": ccol,
+            "description": cdesc,
+            "is_default": is_def,
+        }
+        for cid, cname, ccat, ccol, cdesc, is_def in DEFAULT_CALENDARS
+    ],
+    "output": {
+        "default_format": "html",
+        "default_view": "month",
+        "supported_formats": ["html", "pdf", "md", "txt", "ics"],
+        "max_chips_per_day_md": 4,
+        "output_dir": "./output",
+    },
+    "templates": {
+        "dir": "./templates",
+        "month_html": "month-sheet.template.html",
+        "week_html": "week-sheet.template.html",
+        "report_html": "agenda-report.template.html",
+        "report_md": "agenda-report.template.md",
+        "report_txt": "agenda-report.template.txt",
+        "custom_dir": None,
+    },
+    "delivery": {
+        "enabled": False,
+        "dry_run": True,
+        "mode": "draft",
+    },
+}
+
+
+def _deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:
+    merged: dict[str, Any] = copy.deepcopy(dict(base))
+    for key, val in override.items():
+        if key in ("_hinweis", "_comment") and key in merged:
+            continue
+        if isinstance(merged.get(key), dict) and isinstance(val, dict):
+            merged[key] = _deep_merge(merged[key], val)
+        else:
+            merged[key] = copy.deepcopy(val)
+    return merged
+
+
+def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    serialized = json.dumps(dict(payload), ensure_ascii=False, indent=2) + "\n"
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(serialized)
+        os.replace(tmp_name, str(path))
+    except Exception:
+        if os.path.exists(tmp_name):
+            os.unlink(tmp_name)
+        raise
+
+
+def load_kalender_config(
+    *,
+    skill_root: Path = _SKILL_DIR,
+    repair: bool = False,
+) -> dict[str, Any]:
+    """Lädt kalender-config.json -> config.json mit Selbstheilung (.corrupt.<ts>.bak)."""
+    warnings: list[str] = []
+    healed: list[dict[str, str]] = []
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    effective = copy.deepcopy(_DEFAULT_KALENDER_CONFIG)
+
+    for idx, filename in enumerate((_BASE_CONFIG_NAME, "config.json")):
+        candidate = skill_root / filename
+        if not candidate.is_file():
+            continue
+        try:
+            raw = json.loads(candidate.read_text(encoding="utf-8-sig"))
+            if not isinstance(raw, dict):
+                raise ValueError("JSON root must be object")
+            effective = _deep_merge(effective, raw)
+        except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+            warnings.append(f"{candidate.name}: corrupt config ({exc}); fell back to defaults")
+            if repair:
+                bak = candidate.with_name(f"{candidate.name}.corrupt.{ts}.bak")
+                shutil.copy2(str(candidate), str(bak))
+                _atomic_write_json(candidate, _DEFAULT_KALENDER_CONFIG if idx == 0 else {})
+                healed.append({"path": str(candidate), "backup_path": str(bak)})
+
+    pref_def_cal = _read_pref("kalender_default_calendar", None)
+    if isinstance(pref_def_cal, str) and pref_def_cal.strip():
+        effective["defaults"]["calendar"] = pref_def_cal.strip().lower()
+    pref_def_fmt = _read_pref("kalender_default_format", None)
+    if isinstance(pref_def_fmt, str) and pref_def_fmt.strip().lower() in VALID_REPORT_FORMATS:
+        effective["output"]["default_format"] = pref_def_fmt.strip().lower()
+
+    return {"config": effective, "warnings": warnings, "healed": healed}
+
+
+def _silo_rows_from_config(cfg: Mapping[str, Any] | None) -> tuple[tuple[str, str, str, str, str, int], ...]:
+    raw_silos = (cfg or {}).get("silos")
+    if not isinstance(raw_silos, list) or not raw_silos:
+        return DEFAULT_CALENDARS
+    rows: list[tuple[str, str, str, str, str, int]] = []
+    for entry in raw_silos:
+        if not isinstance(entry, dict):
+            continue
+        cid = str(entry.get("id") or "").strip().lower()
+        cname = str(entry.get("name") or cid).strip()
+        if not cid or not cname:
+            continue
+        ccat = str(entry.get("category") or "personal").strip().lower()
+        ccol = str(entry.get("color") or "#3b82f6").strip()
+        cdesc = str(entry.get("description") or "").strip()
+        is_def = 1 if entry.get("is_default") else 0
+        rows.append((cid, cname, ccat, ccol, cdesc, is_def))
+    return tuple(rows) if rows else DEFAULT_CALENDARS
+
+
+def _resolve_template_path(
+    template_key: str,
+    *,
+    cfg: Mapping[str, Any],
+    skill_root: Path = _SKILL_DIR,
+) -> Path:
+    tpl_cfg = cfg.get("templates") if isinstance(cfg.get("templates"), dict) else {}
+    default_tpls = _DEFAULT_KALENDER_CONFIG["templates"]
+    filename = str(tpl_cfg.get(template_key) or default_tpls.get(template_key) or template_key)
+    search_dirs: list[Path] = []
+    custom_dir = tpl_cfg.get("custom_dir")
+    if isinstance(custom_dir, str) and custom_dir.strip():
+        cpath = Path(custom_dir)
+        search_dirs.append(cpath if cpath.is_absolute() else (skill_root / cpath))
+    rel_dir = str(tpl_cfg.get("dir") or "./templates")
+    dpath = Path(rel_dir)
+    search_dirs.append(dpath if dpath.is_absolute() else (skill_root / dpath))
+    search_dirs.append(_SKILL_DIR / "templates")
+    for folder in search_dirs:
+        candidate = folder / filename
+        if candidate.is_file():
+            return candidate
+    raise FileNotFoundError(f"Template {filename!r} not found in {search_dirs}")
 
 
 def _store_path(cli_override: Optional[str] = None) -> Path:
@@ -83,19 +261,8 @@ def _write_pref(key: str, value: Any) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Standard-Kalender-Silos & additives SQLite-Schema (v0.1 -> v0.2)
+# Standard-Kalender-Silos & additives SQLite-Schema (v0.1 -> v0.3)
 # ---------------------------------------------------------------------------
-
-DEFAULT_CALENDARS: tuple[tuple[str, str, str, str, str, int], ...] = (
-    ("user", "Nutzerkalender", "personal", "#2563eb", "Persönlicher Standardkalender", 1),
-    ("tickets", "Ticket-Kalender", "tasks", "#7c3aed", "Eingeplante Tickets und Arbeitsblöcke", 0),
-    ("finanzen", "Finanzkalender / Zahlungstermine", "finance", "#059669", "Zahlungstermine, Fristen und Buchungen", 0),
-    ("gesundheit", "Arzttermine & Gesundheit", "health", "#dc2626", "Arztbesuche, Vorsorge und Gesundheit", 0),
-    ("geburtstage_privat", "Geburtstage (privat)", "birthdays", "#db2777", "Private Geburtstage und Jahrestage", 0),
-    ("geburtstage_beruflich", "Geburtstage (beruflich)", "birthdays", "#d97706", "Berufliche Geburtstage und Jubiläen", 0),
-    ("terminpilot", "TerminPilot / Terminabstimmung", "coordination", "#0891b2", "Terminabstimmungen und TerminPilot-Importe", 0),
-    ("routinen", "Routinen", "routines", "#4b5563", "Wiederkehrende Routinen", 0),
-)
 
 _CALENDAR_ID_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 _COLOR_HEX_RE = re.compile(r"^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")
@@ -183,7 +350,7 @@ def _ics_uid() -> str:
     return f"{uuid.uuid4()}@ellmos-kalender"
 
 
-def _migrate_and_seed(conn: sqlite3.Connection) -> None:
+def _migrate_and_seed(conn: sqlite3.Connection, *, cfg: Mapping[str, Any] | None = None) -> None:
     """Führt additive Schema-Migrationen durch und legt die Standard-Silos an."""
     conn.executescript(_BASE_SCHEMA)
 
@@ -207,8 +374,10 @@ def _migrate_and_seed(conn: sqlite3.Connection) -> None:
         "CREATE INDEX IF NOT EXISTS idx_events_calendar_date ON events(calendar_id, date)"
     )
 
+    active_cfg = cfg if cfg is not None else load_kalender_config()["config"]
+    silo_rows = _silo_rows_from_config(active_cfg)
     now_str = _now()
-    for cal_id, name, cat, color, desc, is_def in DEFAULT_CALENDARS:
+    for cal_id, name, cat, color, desc, is_def in silo_rows:
         conn.execute(
             """INSERT OR IGNORE INTO calendars
                (id, name, category, color, description, is_default, created_at)
@@ -218,12 +387,12 @@ def _migrate_and_seed(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
-def _open_store(store: Path) -> sqlite3.Connection:
-    """Öffnet den SQLite-Store und stellt v0.2-Tabellen & Standard-Silos sicher."""
+def _open_store(store: Path, *, cfg: Mapping[str, Any] | None = None) -> sqlite3.Connection:
+    """Öffnet den SQLite-Store und stellt Tabellen & Standard-Silos sicher."""
     store.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(store))
     conn.row_factory = sqlite3.Row
-    _migrate_and_seed(conn)
+    _migrate_and_seed(conn, cfg=cfg)
     return conn
 
 
@@ -330,7 +499,9 @@ def add_calendar(
     clean_name = str(name or "").strip()
     if not clean_name:
         raise ValueError("Kalendername (--name) darf nicht leer sein.")
-    clean_color = str(color).strip() if color else "#3b82f6"
+    cfg = load_kalender_config()["config"]
+    default_col = str((cfg.get("defaults") or {}).get("default_color") or "#3b82f6")
+    clean_color = str(color).strip() if color else default_col
     if not _COLOR_HEX_RE.fullmatch(clean_color):
         raise ValueError(f"Ungültiger Hex-Farbwert {clean_color!r} (erwartet z. B. '#2563eb').")
     clean_cat = str(category).strip().lower() if category and str(category).strip() else None
@@ -1286,13 +1457,21 @@ def _fmt_time_span(ev: dict[str, Any]) -> str:
     return "ganztägig"
 
 
-def _render_ascii_month_grid(year: int, month: int, events_by_day: dict[str, list[dict[str, Any]]]) -> str:
-    cal = pycalendar.Calendar(firstweekday=0)
+def _render_ascii_month_grid(
+    year: int,
+    month: int,
+    events_by_day: dict[str, list[dict[str, Any]]],
+    *,
+    first_weekday: int = 0,
+) -> str:
+    cal = pycalendar.Calendar(firstweekday=first_weekday)
     weeks = cal.monthdatescalendar(year, month)
+    wd_headers = [WEEKDAYS_SHORT_DE[(first_weekday + i) % 7] for i in range(7)]
+    header_bar = "  |" + "|".join(f"  {w}  " for w in wd_headers) + "|"
     lines = [
         f"  {MONTHS_DE[month]} {year}",
         "  +------+------+------+------+------+------+------+",
-        "  |  Mo  |  Di  |  Mi  |  Do  |  Fr  |  Sa  |  So  |",
+        header_bar,
         "  +------+------+------+------+------+------+------+",
     ]
     for week in weeks:
@@ -1316,31 +1495,34 @@ def _render_markdown(
     end_d: date,
     events: list[dict[str, Any]],
     legend: list[dict[str, Any]],
+    *,
+    cfg: Mapping[str, Any] | None = None,
+    skill_root: Path = _SKILL_DIR,
 ) -> str:
-    lines = [
-        f"# {title}",
-        "",
-        f"**Zeitraum:** `{start_d.isoformat()}` bis `{end_d.isoformat()}` | "
-        f"**Termine gesamt:** {len(events)}",
-        "",
-        "**Kalender-Silos:** " + (
-            ", ".join(f"`{s['id']}` ({s['name']}: {s['count']})" for s in legend)
-            if legend else "_keine_"
-        ),
-        "",
-    ]
+    eff = cfg or load_kalender_config(skill_root=skill_root)["config"]
+    first_wd = int((eff.get("defaults") or {}).get("first_weekday", 0))
+    max_chips = max(1, int((eff.get("output") or {}).get("max_chips_per_day_md", 4)))
+    tpl = _resolve_template_path("report_md", cfg=eff, skill_root=skill_root).read_text(encoding="utf-8")
+
+    legend_md = (
+        ", ".join(f"`{s['id']}` ({s['name']}: {s['count']})" for s in legend)
+        if legend
+        else "_keine_"
+    )
+    body_lines: list[str] = []
 
     events_by_day: dict[str, list[dict[str, Any]]] = {}
     for ev in events:
         events_by_day.setdefault(ev["date"], []).append(ev)
 
     if view == "month":
-        cal = pycalendar.Calendar(firstweekday=0)
+        cal = pycalendar.Calendar(firstweekday=first_wd)
         weeks = cal.monthdatescalendar(start_d.year, start_d.month)
-        lines.extend([
-            "## Monatsgitter (Mo–So)",
+        wd_headers = [WEEKDAYS_SHORT_DE[(first_wd + i) % 7] for i in range(7)]
+        body_lines.extend([
+            f"## Monatsgitter ({wd_headers[0]}–{wd_headers[-1]})",
             "",
-            "| Mo | Di | Mi | Do | Fr | Sa | So |",
+            "| " + " | ".join(wd_headers) + " |",
             "|---|---|---|---|---|---|---|",
         ])
         for week in weeks:
@@ -1356,52 +1538,59 @@ def _render_markdown(
                         chips = "<br>".join(
                             f"`{ev.get('time') or '--:--'}` [{ev['calendar_id']}] "
                             f"{ev['title'].replace('|', '/')}"
-                            for ev in day_evs[:4]
+                            for ev in day_evs[:max_chips]
                         )
-                        if len(day_evs) > 4:
-                            chips += f"<br>_(+{len(day_evs) - 4} weitere)_"
+                        if len(day_evs) > max_chips:
+                            chips += f"<br>_(+{len(day_evs) - max_chips} weitere)_"
                         row_cells.append(f"**{d.day}**<br>{chips}")
-            lines.append("| " + " | ".join(row_cells) + " |")
-        lines.append("")
+            body_lines.append("| " + " | ".join(row_cells) + " |")
+        body_lines.append("")
 
-    lines.append("## Terminliste")
-    lines.append("")
+    body_lines.append("## Terminliste")
+    body_lines.append("")
     if not events:
-        lines.append("_Keine Termine im gewählten Zeitraum._")
-        return "\n".join(lines) + "\n"
-
-    if view in {"year", "range"}:
+        body_lines.append("_Keine Termine im gewählten Zeitraum._")
+    elif view in {"year", "range"}:
         by_month: dict[str, list[dict[str, Any]]] = {}
         for ev in events:
             by_month.setdefault(ev["date"][:7], []).append(ev)
         for ym in sorted(by_month.keys()):
             y_i, m_i = int(ym[:4]), int(ym[5:7])
             m_evs = by_month[ym]
-            lines.extend([
+            body_lines.extend([
                 f"### {MONTHS_DE[m_i]} {y_i} ({len(m_evs)})",
                 "",
                 "| Datum | Zeit | Kalender | Titel | Ort | Notiz |",
                 "|---|---|---|---|---|---|",
             ])
             for ev in m_evs:
-                lines.append(
+                body_lines.append(
                     f"| {ev['date']} | {_fmt_time_span(ev)} | `{ev['calendar_id']}` | "
                     f"{ev['title'].replace('|', '/')} | {(ev.get('location') or '-').replace('|', '/')} | "
                     f"{(ev.get('description') or '-').replace('|', '/').replace(chr(10), ' ')} |"
                 )
-            lines.append("")
+            body_lines.append("")
     else:
-        lines.extend([
+        body_lines.extend([
             "| Datum | Zeit | Kalender | Titel | Ort | Notiz |",
             "|---|---|---|---|---|---|",
         ])
         for ev in events:
-            lines.append(
+            body_lines.append(
                 f"| {ev['date']} | {_fmt_time_span(ev)} | `{ev['calendar_id']}` | "
                 f"{ev['title'].replace('|', '/')} | {(ev.get('location') or '-').replace('|', '/')} | "
                 f"{(ev.get('description') or '-').replace('|', '/').replace(chr(10), ' ')} |"
             )
-    return "\n".join(lines) + "\n"
+
+    rendered = (
+        tpl.replace("{{title}}", title)
+        .replace("{{start_date}}", start_d.isoformat())
+        .replace("{{end_date}}", end_d.isoformat())
+        .replace("{{event_count}}", str(len(events)))
+        .replace("{{legend_md}}", legend_md)
+        .replace("{{body_md}}", "\n".join(body_lines).rstrip("\n"))
+    )
+    return rendered.rstrip("\n") + "\n"
 
 
 def _render_text(
@@ -1411,48 +1600,59 @@ def _render_text(
     end_d: date,
     events: list[dict[str, Any]],
     legend: list[dict[str, Any]],
+    *,
+    cfg: Mapping[str, Any] | None = None,
+    skill_root: Path = _SKILL_DIR,
 ) -> str:
+    eff = cfg or load_kalender_config(skill_root=skill_root)["config"]
+    first_wd = int((eff.get("defaults") or {}).get("first_weekday", 0))
+    tpl = _resolve_template_path("report_txt", cfg=eff, skill_root=skill_root).read_text(encoding="utf-8")
+
     sep = "=" * max(64, len(title) + 6)
-    lines = [
-        sep,
-        f"  {title}",
-        f"  Zeitraum: {start_d.isoformat()} bis {end_d.isoformat()} | Termine: {len(events)}",
-        "  Silos:    " + (
-            ", ".join(f"{s['id']} ({s['count']})" for s in legend) if legend else "-"
-        ),
-        sep,
-    ]
+    legend_txt = ", ".join(f"{s['id']} ({s['count']})" for s in legend) if legend else "-"
     events_by_day: dict[str, list[dict[str, Any]]] = {}
     for ev in events:
         events_by_day.setdefault(ev["date"], []).append(ev)
 
+    body_lines: list[str] = []
     if view == "month":
-        lines.append("")
-        lines.append(_render_ascii_month_grid(start_d.year, start_d.month, events_by_day))
-
-    lines.append("")
-    if not events:
-        lines.append("  Keine Termine im gewählten Zeitraum.")
-        return "\n".join(lines) + "\n"
-
-    current_group = ""
-    for ev in events:
-        grp = ev["date"][:7] if view in {"year", "range"} else ev["date"]
-        if grp != current_group:
-            current_group = grp
-            if view in {"year", "range"}:
-                y_i, m_i = int(grp[:4]), int(grp[5:7])
-                lines.append(f"\n--- {MONTHS_DE[m_i]} {y_i} ---")
-            else:
-                d_obj = date.fromisoformat(grp)
-                lines.append(f"\n--- {WEEKDAYS_SHORT_DE[d_obj.weekday()]}, {grp} ---")
-        loc = f" @ {ev['location']}" if ev.get("location") else ""
-        desc = f" — {ev['description']}" if ev.get("description") else ""
-        lines.append(
-            f"  [{ev['id']}] {ev['date']} {_fmt_time_span(ev):<13s} "
-            f"[{ev['calendar_id']}] {ev['title']}{loc}{desc}"
+        body_lines.append("")
+        body_lines.append(
+            _render_ascii_month_grid(start_d.year, start_d.month, events_by_day, first_weekday=first_wd)
         )
-    return "\n".join(lines) + "\n"
+
+    body_lines.append("")
+    if not events:
+        body_lines.append("  Keine Termine im gewählten Zeitraum.")
+    else:
+        current_group = ""
+        for ev in events:
+            grp = ev["date"][:7] if view in {"year", "range"} else ev["date"]
+            if grp != current_group:
+                current_group = grp
+                if view in {"year", "range"}:
+                    y_i, m_i = int(grp[:4]), int(grp[5:7])
+                    body_lines.append(f"\n--- {MONTHS_DE[m_i]} {y_i} ---")
+                else:
+                    d_obj = date.fromisoformat(grp)
+                    body_lines.append(f"\n--- {WEEKDAYS_SHORT_DE[d_obj.weekday()]}, {grp} ---")
+            loc = f" @ {ev['location']}" if ev.get("location") else ""
+            desc = f" — {ev['description']}" if ev.get("description") else ""
+            body_lines.append(
+                f"  [{ev['id']}] {ev['date']} {_fmt_time_span(ev):<13s} "
+                f"[{ev['calendar_id']}] {ev['title']}{loc}{desc}"
+            )
+
+    rendered = (
+        tpl.replace("{{sep}}", sep)
+        .replace("{{title}}", title)
+        .replace("{{start_date}}", start_d.isoformat())
+        .replace("{{end_date}}", end_d.isoformat())
+        .replace("{{event_count}}", str(len(events)))
+        .replace("{{legend_txt}}", legend_txt)
+        .replace("{{body_txt}}", "\n".join(body_lines))
+    )
+    return rendered.rstrip("\n") + "\n"
 
 
 def _render_html(
@@ -1462,9 +1662,17 @@ def _render_html(
     end_d: date,
     events: list[dict[str, Any]],
     legend: list[dict[str, Any]],
+    *,
+    cfg: Mapping[str, Any] | None = None,
+    skill_root: Path = _SKILL_DIR,
 ) -> str:
+    eff = cfg or load_kalender_config(skill_root=skill_root)["config"]
+    first_wd = int((eff.get("defaults") or {}).get("first_weekday", 0))
     esc = html.escape
     page_orient = "landscape" if view in {"month", "week"} else "portrait"
+    tpl_key = "month_html" if view == "month" else ("week_html" if view == "week" else "report_html")
+    tpl = _resolve_template_path(tpl_key, cfg=eff, skill_root=skill_root).read_text(encoding="utf-8")
+
     events_by_day: dict[str, list[dict[str, Any]]] = {}
     for ev in events:
         events_by_day.setdefault(ev["date"], []).append(ev)
@@ -1479,10 +1687,11 @@ def _render_html(
     body_parts: list[str] = []
 
     if view == "month":
-        cal = pycalendar.Calendar(firstweekday=0)
+        cal = pycalendar.Calendar(firstweekday=first_wd)
         weeks = cal.monthdatescalendar(start_d.year, start_d.month)
         body_parts.append('<table class="cal-grid"><thead><tr>')
-        for wd in WEEKDAYS_SHORT_DE:
+        for i in range(7):
+            wd = WEEKDAYS_SHORT_DE[(first_wd + i) % 7]
             body_parts.append(f"<th>{wd}</th>")
         body_parts.append("</tr></thead><tbody>")
         for week in weeks:
@@ -1550,7 +1759,6 @@ def _render_html(
         body_parts.append("</div>")
 
     else:
-        # year or range: grouped by YYYY-MM
         if not events:
             body_parts.append('<p class="empty-msg">Keine Termine im gewählten Zeitraum.</p>')
         by_month: dict[str, list[dict[str, Any]]] = {}
@@ -1581,67 +1789,14 @@ def _render_html(
             body_parts.append("</tbody></table></section>")
 
     content_html = "\n".join(body_parts)
-    return f"""<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{esc(title)}</title>
-<style>
-  @page {{ size: A4 {page_orient}; margin: 12mm; }}
-  * {{ box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
-  body {{
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #0f172a; background: #f8fafc; margin: 0; padding: 24px; line-height: 1.4;
-  }}
-  .sheet {{ max-width: 1280px; margin: 0 auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 20px 24px; }}
-  header {{ display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px; gap: 8px; }}
-  h1 {{ font-size: 1.5rem; margin: 0; letter-spacing: -0.02em; }}
-  .subtitle {{ color: #475569; font-size: 0.9rem; }}
-  .legend {{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }}
-  .legend-pill {{ display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 999px; padding: 3px 10px; }}
-  .legend-pill .dot {{ width: 10px; height: 10px; border-radius: 50%; background: var(--silo, #2563eb); display: inline-block; }}
-  .legend-pill code {{ color: #475569; font-size: 0.75rem; }}
-  .cal-grid {{ width: 100%; border-collapse: collapse; table-layout: fixed; }}
-  .cal-grid th {{ background: #0f172a; color: #ffffff; padding: 7px 8px; font-size: 0.82rem; text-align: center; border: 1px solid #0f172a; }}
-  .day-cell {{ vertical-align: top; border: 1px solid #cbd5e1; height: 112px; padding: 5px 6px; background: #ffffff; overflow: hidden; }}
-  .day-cell.weekend {{ background: #f8fafc; }}
-  .day-cell.outside {{ background: #f1f5f9; color: #94a3b8; }}
-  .day-num {{ font-weight: 700; font-size: 0.82rem; margin-bottom: 4px; color: #334155; }}
-  .day-cell.outside .day-num {{ color: #94a3b8; }}
-  .ev-chip {{ border-left: 4px solid #2563eb; background: #f8fafc; border-radius: 4px; padding: 3px 5px; margin-bottom: 4px; font-size: 0.74rem; word-break: break-word; }}
-  .ev-time {{ font-weight: 600; color: #334155; }}
-  .ev-badge {{ display: inline-block; color: #ffffff; font-size: 0.66rem; font-weight: 600; padding: 1px 5px; border-radius: 3px; vertical-align: middle; }}
-  .ev-title {{ font-weight: 500; }}
-  .loc, .ev-meta {{ color: #64748b; font-size: 0.7rem; }}
-  .day-card {{ border-left: 5px solid #2563eb; background: #f8fafc; border: 1px solid #e2e8f0; border-left-width: 5px; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }}
-  .day-card-top {{ display: flex; gap: 10px; align-items: center; font-size: 0.85rem; color: #475569; margin-bottom: 4px; }}
-  .day-card-title {{ font-size: 1.02rem; font-weight: 600; }}
-  .ev-desc {{ margin: 6px 0 0; font-size: 0.84rem; color: #475569; }}
-  .month-section {{ margin-bottom: 20px; break-inside: avoid; }}
-  .month-section h2 {{ font-size: 1.1rem; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin: 14px 0 8px; }}
-  .list-table {{ width: 100%; border-collapse: collapse; font-size: 0.83rem; }}
-  .list-table th, .list-table td {{ border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; vertical-align: top; }}
-  .list-table th {{ background: #f1f5f9; font-weight: 600; }}
-  .empty-msg, .empty-slot {{ color: #94a3b8; font-style: italic; font-size: 0.85rem; }}
-  @media print {{
-    body {{ background: #ffffff; padding: 0; }}
-    .sheet {{ border: none; padding: 0; max-width: none; }}
-  }}
-</style>
-</head>
-<body>
-<div class="sheet">
-  <header>
-    <h1>{esc(title)}</h1>
-    <div class="subtitle">{esc(start_d.isoformat())} – {esc(end_d.isoformat())} · {len(events)} Termine</div>
-  </header>
-  <div class="legend">{legend_html}</div>
-  {content_html}
-</div>
-</body>
-</html>
-"""
+    subtitle = f"{esc(start_d.isoformat())} – {esc(end_d.isoformat())} · {len(events)} Termine"
+    return (
+        tpl.replace("{{page_orient}}", page_orient)
+        .replace("{{title}}", esc(title))
+        .replace("{{subtitle}}", subtitle)
+        .replace("{{legend_html}}", legend_html)
+        .replace("{{content_html}}", content_html)
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -1938,9 +2093,12 @@ def render_report(
     search: Optional[str] = None,
     title: Optional[str] = None,
     out_path: Optional[Path | str] = None,
+    skill_root: Path = _SKILL_DIR,
+    repair: bool = False,
 ) -> dict[str, Any]:
     """Erzeugt einen Kalenderbericht in `html`, `md`, `txt`, `ics` oder `pdf`."""
-    fmt_norm = str(fmt or "html").strip().lower()
+    cfg = load_kalender_config(skill_root=skill_root, repair=repair)["config"]
+    fmt_norm = str(fmt or (cfg.get("output") or {}).get("default_format") or "html").strip().lower()
     if fmt_norm not in VALID_REPORT_FORMATS:
         raise ValueError(
             f"Unbekanntes Format {fmt!r} (erlaubt: {', '.join(VALID_REPORT_FORMATS)})"
@@ -1966,7 +2124,7 @@ def render_report(
             "description": cdesc,
             "is_default": cdef,
         }
-        for cid, cname, ccat, ccol, cdesc, cdef in DEFAULT_CALENDARS
+        for cid, cname, ccat, ccol, cdesc, cdef in _silo_rows_from_config(cfg)
     ]
     cals_map = {c["id"]: c for c in cals_list}
     events = _query_events(
@@ -1984,11 +2142,11 @@ def render_report(
     binary_output: Optional[bytes] = None
 
     if fmt_norm == "html":
-        text_output = _render_html(view, final_title, start_d, end_d, events, legend)
+        text_output = _render_html(view, final_title, start_d, end_d, events, legend, cfg=cfg, skill_root=skill_root)
     elif fmt_norm == "md":
-        text_output = _render_markdown(view, final_title, start_d, end_d, events, legend)
+        text_output = _render_markdown(view, final_title, start_d, end_d, events, legend, cfg=cfg, skill_root=skill_root)
     elif fmt_norm == "txt":
-        text_output = _render_text(view, final_title, start_d, end_d, events, legend)
+        text_output = _render_text(view, final_title, start_d, end_d, events, legend, cfg=cfg, skill_root=skill_root)
     elif fmt_norm == "ics":
         text_output = _events_to_ics(events)
     else:
@@ -2101,6 +2259,29 @@ def cmd_check_backend(*, as_json: bool = False) -> int:
     return 0
 
 
+def cmd_check_config(*, as_json: bool = False, repair: bool = False) -> int:
+    loaded = load_kalender_config(repair=repair)
+    payload = {
+        "core_version": __version__,
+        "config": loaded["config"],
+        "warnings": loaded["warnings"],
+        "healed": loaded["healed"],
+    }
+    if as_json:
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+    else:
+        cfg = loaded["config"]
+        print(
+            f"[kalender] Config v{cfg.get('version')} | Default-Silo: {cfg['defaults']['calendar']} | "
+            f"Format: {cfg['output']['default_format']} | Silos: {len(cfg.get('silos', []))}"
+        )
+        for warn in loaded["warnings"]:
+            print(f"  [WARN] {warn}")
+        for heal in loaded["healed"]:
+            print(f"  [HEALED] {heal['path']} -> Backup: {heal['backup_path']}")
+    return 0
+
+
 def _extract_flag(args: list[str], flag: str) -> tuple[Optional[str], list[str]]:
     if flag in args:
         idx = args.index(flag)
@@ -2153,17 +2334,25 @@ def main(argv: Optional[list[str]] = None) -> int:
         argv = [a for a in argv if a != "--dry-run"]
         as_json = "--json" in argv
         argv = [a for a in argv if a != "--json"]
+        repair_cfg = "--repair" in argv
+        argv = [a for a in argv if a != "--repair"]
 
         if not argv:
             print(__doc__.strip())
             return 0
 
+        cfg = load_kalender_config(repair=repair_cfg)["config"]
+        cfg_defaults = cfg.get("defaults") or {}
+        cfg_output = cfg.get("output") or {}
+
         cmd = argv[0].lower()
         rest = argv[1:]
 
-        # --- check-backend ---
+        # --- check-backend / check-config ---
         if cmd == "check-backend":
             return cmd_check_backend(as_json=as_json)
+        if cmd == "check-config":
+            return cmd_check_config(as_json=as_json, repair=repair_cfg)
 
         # --- calendar list | add | delete ---
         if cmd == "calendar":
@@ -2248,7 +2437,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 print("[kalender] --date YYYY-MM-DD ist Pflicht.")
                 return 1
             duration_min = int(dur_s) if dur_s else None
-            target_cal = cal_id or "user"
+            target_cal = cal_id or str(cfg_defaults.get("calendar") or "user")
 
             if dry_run:
                 payload = {
@@ -2412,7 +2601,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             lim_arg, rest = _extract_flag(rest, "--limit")
             from_arg, rest = _extract_flag(rest, "--from")
             to_arg, rest = _extract_flag(rest, "--to")
-            limit = int(lim_arg) if lim_arg else 50
+            limit = int(lim_arg) if lim_arg else int(cfg_defaults.get("default_list_limit") or 50)
             evs = (
                 list(_DRY_EVENTS)
                 if dry_run
@@ -2486,7 +2675,8 @@ def main(argv: Optional[list[str]] = None) -> int:
             cal_id, rest = _extract_flag(rest, "--calendar")
             if not rest:
                 raise ValueError("Verwendung: kalender_core.py import-ics <pfad.ics> [--calendar terminpilot]")
-            res = import_ics(store, Path(rest[0]), calendar_id=cal_id or "terminpilot")
+            default_imp = str(cfg_defaults.get("import_calendar") or "terminpilot")
+            res = import_ics(store, Path(rest[0]), calendar_id=cal_id or default_imp)
             if as_json:
                 print(json.dumps(res, ensure_ascii=False, indent=2))
             else:
@@ -2559,9 +2749,9 @@ def main(argv: Optional[list[str]] = None) -> int:
                 elif from_arg:
                     view_arg = "week"
                 else:
-                    view_arg = "month"
+                    view_arg = str(cfg_output.get("default_view") or "month")
 
-            fmt_norm = (fmt_arg or "html").strip().lower()
+            fmt_norm = (fmt_arg or str(cfg_output.get("default_format") or "html")).strip().lower()
             if fmt_norm == "pdf" and not out_arg:
                 raise ValueError("--format pdf erfordert --out <pfad.pdf>.")
 

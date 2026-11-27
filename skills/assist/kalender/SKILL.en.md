@@ -1,6 +1,6 @@
 ---
 name: kalender
-version: 0.2.0
+version: 0.3.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
@@ -174,10 +174,21 @@ CREATE TABLE IF NOT EXISTS events (
 
 ---
 
+## Configuration & Templates (`kalender-config.json`, `templates/`)
+
+Default silos, calendar/date defaults, first weekday, supported report formats, and template paths are externalized in [kalender-config.json](kalender-config.json) with self-healing fallback (`.corrupt.<ts>.bak` via `check-config --repair`). HTML, Markdown, and plain-text outputs load replaceable templates under `templates/` (`month-sheet.template.html`, `week-sheet.template.html`, `agenda-report.template.html`, `agenda-report.template.md`, `agenda-report.template.txt`, optionally overridden via `templates.custom_dir`).
+
+```bash
+python kalender_core.py check-config [--repair] [--json]
+```
+
+---
+
 ## Changelog
 
 | Version | Date | Change |
 |---|---|---|
+| 0.3.0 | 2026-11-27 | Externalized defaults, silos, and formatting options into `kalender-config.json` with self-healing (`check-config --repair`, `.corrupt.<ts>.bak`) and replaceable templates under `templates/*.template.{html,md,txt}` |
 | 0.2.0 | 2026-11-27 | Multi-calendar silos (`calendars` + lossless `events` migration), cross-silo operations (`mirror`, `sync-mirrors`, `transfer`, `clone`), idempotent TerminPilot/ICS import (`import-ics`), extended range queries (`day`, `year`, `range`, `--json`), and graphical calendar sheet / report generator (`html`, `pdf`, `md`, `txt`, `ics`) |
 | 0.1.1 | 2026-11-22 | Corrected language hint |
 | 0.1.0 | 2026-06-22 | Initial creation — Flag-3 logic, local backend, ICS export |

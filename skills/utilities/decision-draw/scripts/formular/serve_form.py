@@ -16,6 +16,7 @@ JSON-Pflicht beim POST; Groessenlimit (413); nur Dateinamen aus Buchstaben/Ziffe
 nie das Formular selbst; geschrieben wird ausschliesslich in den einen Zielordner; Inhalte werden nie ausgefuehrt."""
 import argparse
 import http.server
+import importlib.util
 import json
 import os
 import re
@@ -25,18 +26,30 @@ import threading
 import time
 from pathlib import Path
 
-MAX_BYTES = 32 * 1024 * 1024  # Formular mit Bildern (8 MB) plus beantwortete Kopie bleiben weit darunter
-IDLE_SECONDS = 300  # ohne Anfrage (Formular pingt alle 60 s) beendet sich der Dienst
-MAX_LIFETIME = 8 * 3600
+
+def _load_server_cfg():
+    cfg_script = Path(__file__).resolve().parents[1] / "draw_config.py"
+    spec = importlib.util.spec_from_file_location("draw_config", cfg_script)
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.load_draw_config()["config"]["server"]
+
+
+_SRV_CFG = _load_server_cfg()
+SERVER_HOST = str(_SRV_CFG["host"])
+MAX_BYTES = int(_SRV_CFG["max_bytes"])  # Formular mit Bildern (8 MB) plus beantwortete Kopie bleiben weit darunter
+IDLE_SECONDS = int(_SRV_CFG["idle_seconds"])  # ohne Anfrage (Formular pingt alle 60 s) beendet sich der Dienst
+MAX_LIFETIME = int(_SRV_CFG["max_lifetime_seconds"])
 NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,150}\.(json|html)$")
-MAX_FILES = 4
+MAX_FILES = int(_SRV_CFG["max_files"])
 
 
 class FormServer(http.server.ThreadingHTTPServer):
     daemon_threads = True
 
     def __init__(self, form_path, out_dir, token=None, max_bytes=MAX_BYTES, idle=IDLE_SECONDS, max_life=MAX_LIFETIME):
-        super().__init__(("127.0.0.1", 0), Handler)
+        super().__init__((SERVER_HOST, 0), Handler)
         self.form_path = Path(form_path).resolve()
         self.out_dir = Path(out_dir).resolve()
         self.token = token or secrets.token_urlsafe(24)

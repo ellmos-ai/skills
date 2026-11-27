@@ -1,21 +1,11 @@
 ---
 name: bilingual-doc-sync
-version: 1.2.2
+version: 1.2.3
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-09-26
-description: >
-  Keep parallel language versions of a document (Paper DE/EN, README + README_de,
-  SKILL.md + SKILL.en.md, website texts) synchronized: bring missing versions up to date,
-  verify section parallelism, resolve divergences — with a clear lead-language rule and
-  controlled back-transfer when the secondary version solves something better. Use this skill
-  when asked "are DE and EN in sync?", "update the English/German version",
-  "translation is outdated", for bilingual papers/READMEs/skills, or as a
-  periodic check across a document inventory. Also includes the expansion audit:
-  evaluating whether a project/document deserves ADDITIONAL languages (i18n suitability by
-  target audience, technical preparation, no blind mass translation).
-
+updated: 2026-11-27
+description: "Use this skill when asked \"are DE and EN in sync?\", \"update the English/German version\", \"translation is outdated\", for bilingual papers/READMEs/skills, or as a periodic check across a document inventory. Keep parallel language versions of a document (Paper DE/EN, README + README_de, SKILL.md + SKILL.en.md, website texts) synchronized: bring missing versions up to date, verify section parallelism, resolve divergences — with a clear lead-language rule and controlled back-transfer when the secondary version solves something better. Also includes the expansion audit: evaluating whether a project/document deserves ADDITIONAL languages (i18n suitability by target audience, technical preparation, no blind mass translation)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

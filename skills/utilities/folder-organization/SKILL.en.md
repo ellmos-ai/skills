@@ -1,22 +1,11 @@
 ---
 name: folder-organization
-version: 1.2.0
+version: 1.2.1
 type: protocol
 author: Lukas Geiger + OpenAI Codex + Gemini
 created: 2026-08-24
-updated: 2026-11-10
-description: >
-  Organize folders and file collections semantically: discover local rules and taxonomy, treat
-  the inventory as a topic list to group files into an optimally calibrated number of thematic
-  clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/
-  successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two
-  stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in
-  a reversible review trash folder, and update root control files and active upstream writers.
-  Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”,
-  “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”,
-  “separate outdated and valid content”, or cloud secret localization. Standalone and provider-
-  neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture.
-
+updated: 2026-11-27
+description: "Use for “clean up this folder”, “sort into topic clusters”, “find optimal cluster count”, “file documents sensibly”, “remove duplicates”, “archive old versions”, “clean up logs”, “separate outdated and valid content”, or cloud secret localization. Organize folders and file collections semantically: discover local rules and taxonomy, treat the inventory as a topic list to group files into an optimally calibrated number of thematic clusters, reconcile competing legacy taxonomies, preserve related sets, archive predecessor/ successor chains and logs, separate mixed content with Cut-and-Clue, resolve duplicates in two stages (SHA-256 canonical priority vs. same-name disambiguation), stage deletion candidates in a reversible review trash folder, and update root control files and active upstream writers. Standalone and provider- neutral; use file-collect-sort-action for recurring rules and pipeline-optimizer for architecture."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

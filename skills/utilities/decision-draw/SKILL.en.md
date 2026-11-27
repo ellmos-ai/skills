@@ -1,24 +1,11 @@
 ---
 name: decision-draw
-version: 1.5.0
+version: 1.6.0
 type: skill
 author: Lukas Geiger + agy
 created: 2026-09-13
-updated: 2026-11-15
-description: >
-  Use when several bundled pending decisions should be presented for sign-off
-  at once, e.g. "decision draw", /decision-draw, "give me all decisions in their
-  recommended form", "what does the whole thing look like if we agree to
-  everything", "draw the big picture". The default is the short form -- each
-  decision written out in one or two sentences exactly as it reads under the
-  recommendation, then an overall sign-off ("looks good") or a correction by
-  number. Corrections are translated into individual decisions and booked via
-  decision-briefing Phase 4. The detailed big picture (concept, interplay,
-  implementation, appendix) only on explicit request. Do NOT use when
-  alternatives per item must be debated -- that's decision-briefing; do NOT use
-  for dependency graphs -- that's decision-path; do NOT use for discrete blocks
-  with options and pro/con breakdown (even for tightly grouped decisions) --
-  that's decision-shot; do NOT use to work out a single choice -- that's decide.
+updated: 2026-11-27
+description: "Use when several bundled pending decisions should be presented for sign-off at once, e.g. \"decision draw\", /decision-draw, \"give me all decisions in their recommended form\", \"what does the whole thing look like if we agree to everything\", \"draw the big picture\". The default is the short form -- each decision written out in one or two sentences exactly as it reads under the recommendation, then an overall sign-off (\"looks good\") or a correction by number. Corrections are translated into individual decisions and booked via decision-briefing Phase 4. The detailed big picture (concept, interplay, implementation, appendix) only on explicit request. Do NOT use when alternatives per item must be debated -- that's decision-briefing; do NOT use for dependency graphs -- that's decision-path; do NOT use for discrete blocks with options and pro/con breakdown (even for tightly grouped decisions) -- that's decision-shot; do NOT use to work out a single choice -- that's decide."
 visibility: public
 language: en
 standalone: true
@@ -339,8 +326,15 @@ When a decision draw is stored as a persistent concept artifact, it concludes wi
 
 ---
 
+## Configuration & Templates (`draw-config.json`, `templates/`)
+
+Viewer colors and geometry, form field limits, image size bounds, and local save-server thresholds are externalized in [draw-config.json](draw-config.json) and loaded via [scripts/draw_config.py](scripts/draw_config.py) with self-healing fallback (`.corrupt.<ts>.bak` on repair). Replaceable Markdown and HTML templates live under `templates/` ([decision-draw-short.template.md](templates/decision-draw-short.template.md), [decision-draw-detailed.template.md](templates/decision-draw-detailed.template.md), [markdown_form_shell.template.html](templates/markdown_form_shell.template.html)).
+
 ## Changelog
 
+
+### 1.6.0 (2026-11-27)
+- Externalized viewer, form, and server parameters into `draw-config.json` with self-healing loader (`scripts/draw_config.py`), extracted output templates into `templates/`, and added `tests/test_decision_draw.py`.
 
 ### 1.5.0 (2026-11-15)
 - Save the form without a folder dialog: `scripts/formular/serve_form.py` (local save service on 127.0.0.1, standard library only) opens the form in the user's normal Edge and writes the answer itself; opening and saving instructions are in the form section, the fallback without Python stays (download links, text, folder dialog last). Reason: ticket T-20261115-242335144.

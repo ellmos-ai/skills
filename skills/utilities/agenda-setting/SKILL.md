@@ -1,10 +1,10 @@
 ---
 name: agenda-setting
-version: 0.2.0
+version: 0.3.0
 type: skill
 author: ellmos-ai
 created: 2026-10-21
-updated: 2026-11-25
+updated: 2026-11-27
 description: "Use when a user sets or loads a shared agenda across sessions, sets a multi-month deadline, invokes /agenda or /show-agenda, weights agenda items, or requests linked plans and progress."
 visibility: public potential
 category: utilities
@@ -36,7 +36,7 @@ Jede Änderung benötigt die zuletzt gelesene `--if-revision N` (erstmals 0). Be
 | Nutzerbefehl | CLI-Aktion / Bedeutung |
 |---|---|
 | `/agenda`, `/show-agenda` | `show`: frische Agenda samt Zustand laden |
-| `/agenda summary` | `summary [--format markdown|text|json] [--timeframe Z] [--exact] [--include-ongoing] [--owner user|self|team|shared|SLUG] [--category TAG] [--group-by timeframe|category|owner] [--output PFAD]`: sortierte bzw. thematische Auszüge erzeugen |
+| `/agenda summary` | `summary [--format markdown|text|html|json] [--timeframe Z] [--exact] [--include-ongoing] [--owner user|self|team|shared|SLUG] [--category TAG] [--group-by timeframe|category|owner] [--output PFAD]`: sortierte bzw. thematische Auszüge erzeugen |
 | `/agenda set TEXT` | `set 'Punkt eins; Punkt zwei'`: Agenda ersetzen, neue Agenda-ID, zunächst inaktiv; bisheriger Stand im Verlauf |
 | `/agenda add TEXT` | `add 'TEXT' [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: einen Punkt mit der nächsten freien ID anhängen (nie wiederverwendet; Standardgewicht 50); Agenda-ID, Aktivität, Deadline und übrige Punkte bleiben erhalten |
 | `/agenda update ID` | `update ID [--text TEXT] [--weight N] [--timeframe Z] [--owner O] [--category TAG]`: bestehenden Punkt gezielt aktualisieren (`""`, `none` oder `-` entfernt ein optionales Metadatenfeld); bestehende `plans`, `status` und nicht übergebene Felder bleiben erhalten |
@@ -58,11 +58,14 @@ Optionale Metadaten je Agendapunkt (vollständig rückwärtskompatibel zu `agent
 - `owner`: Zuständigkeit — neutrale Standardrollen (`user`, `self`, `team`, `shared`) oder ein kleingeschriebener Owner-Slug (`[a-z0-9][a-z0-9_-]{0,49}`).
 - `category`: kurzes Themen-Tag (z. B. `technik`, `finanzen`, `office-business`, `gesundheit`, `auto`, `privat`, `studium`, `medien`, `wohnen`).
 
-## Auszüge & Ausgabeformate (`chat` / `.md` / `.pdf`)
+## Auszüge, Konfiguration & Vorlagen (`agenda-config.json`, `templates/`)
+
+Horizonte, Gewichtsstufen (`min: 1`, `max: 100`, `default_add: 50`), Anzeigelimits (`max_hook_items: 20`, `max_items: 100`), Standard-Gruppierung und Template-Pfade sind in [agenda-config.json](agenda-config.json) ausgelagert und über `load_agenda_config(..., repair=True)` mit Selbstheilung (`.corrupt.<ts>.bak`) an `scripts/agenda.py` und `scripts/agenda_hook.py` angebunden. Die Übersicht (`markdown`) und das Agenda-Board (`html`) laden austauschbare Vorlagen unter `templates/` ([agenda-overview.template.md](templates/agenda-overview.template.md), [agenda-board.template.html](templates/agenda-board.template.html)).
 
 `summary --timeframe <Z>` prüft standardmäßig auf **Zeitraum-Überlappung** (`2026-12` erfasst z. B. auch `2026-12..2027-01` und `2026-12+`; `2027` erfasst auch `2027-01..12`, `2027-Q1..Q4`, `2027-H1..H2`, `2026-12+`, `2027+` und `2027..2029`). Für einen reinen Exakt-Treffer `--exact` ergänzen; `ongoing`-Punkte lassen sich gezielt über `--include-ongoing` einblenden.
 
 - **Monatsauszug im Chat:** `python scripts/agenda.py summary --timeframe 2026-12`
+- **HTML-Agenda-Board:** `python scripts/agenda.py summary --format html --output /PFAD/agenda-board.html`
 - **Jahres- & Themenauszug:** `python scripts/agenda.py summary --timeframe 2027 --group-by category` (oder `--group-by owner`)
 - **Export als `.md` (oder `.json`):** `--output /PFAD/auszug-2026-12.md` schreibt die gerenderte Ausgabe atomar in UTF-8.
 - **Export als `.pdf`:** zuerst über `--output /PFAD/auszug.md` eine Markdown-Datei schreiben und anschließend ein vorhandenes lokales Markdown-zu-PDF-Konvertierungswerkzeug verwenden (keine zusätzliche Python-Abhängigkeit im Kern).

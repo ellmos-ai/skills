@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --fg: #0f172a;
+    --muted: #475569;
+    --line: #cbd5e1;
+    --accent: #1d4ed8;
+    --rec-bg: #eff6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    padding: 24px;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  header {
+    border-bottom: 2px solid var(--fg);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .block-heading {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    break-inside: avoid;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 1.08rem; }
+  .triad p { margin: 4px 0; }
+  .options { margin: 10px 0 8px; padding-left: 20px; }
+  .rec {
+    background: var(--rec-bg);
+    border-left: 4px solid var(--accent);
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.88rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; }
+  footer {
+    margin-top: 24px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .container { border: none; padding: 0; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>{{title}}</h1>
+    <div class="meta">{{subtitle}} · {{item_count}} Entscheidungen · {{generated_at}}</div>
+  </header>
+  {{body_html}}
+  {{appendix_html}}
+  <footer>{{footer}}</footer>
+</div>
+</body>
+</html>

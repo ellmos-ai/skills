@@ -1,25 +1,11 @@
 ---
 name: decision-shot
-version: 1.1.0
+version: 1.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-09-09
-description: >
-  Extremely short, substantial output FORMAT for ONE decision or group of
-  decisions, when the analysis behind it already exists (produced in chat,
-  from `decide`, from `decision-briefing`, from a ticket or a document):
-  context in 2-3 lines, pro/con per option as bullet points in
-  paveman/caveman-reduced style, talking points, a justified recommendation,
-  and a path/link to the full analysis for complete follow-up reading. Use
-  this skill for "give me that short with pro/con and a recommendation",
-  "executive summary of the decision", "short context on <topic>",
-  "summarize decision X in a short form", /decision-shot, or whenever a
-  result should be handed to someone who only needs the essence, not the
-  full derivation. Do NOT use it to COLLECT many open decisions and poll
-  them by letter -- that's decision-briefing; do NOT use it to first ANALYZE
-  a decision -- that's decide. decision-shot presupposes a finished analysis
-  and only compresses its presentation.
+updated: 2026-11-27
+description: "Use this skill for \"give me that short with pro/con and a recommendation\", \"executive summary of the decision\", \"short context on <topic>\", \"summarize decision X in a short form\", /decision-shot, or whenever a result should be handed to someone who only needs the essence, not the full derivation. Extremely short, substantial output FORMAT for ONE decision or group of decisions, when the analysis behind it already exists (produced in chat, from `decide`, from `decision-briefing`, from a ticket or a document): context in 2-3 lines, pro/con per option as bullet points in paveman/caveman-reduced style, talking points, a justified recommendation, and a path/link to the full analysis for complete follow-up reading. Do NOT use it to COLLECT many open decisions and poll them by letter -- that's decision-briefing; do NOT use it to first ANALYZE a decision -- that's decide. decision-shot presupposes a finished analysis and only compresses its presentation."
 visibility: public
 language: en
 standalone: true
@@ -174,7 +160,14 @@ production.
 **Full analysis:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, section "Backup jobs"
 ```
 
+## Configuration & Template (`shot-config.json`, `templates/`)
+
+Line budgets, style flags, and output defaults are externalized in [shot-config.json](shot-config.json) (`context_max_lines: 3`, `option_bullets_max: 4`, `talking_points_max: 3`, `recommendation_sentences: 1`). The five-part layout is also available as a reusable template at [templates/decision-shot.template.md](templates/decision-shot.template.md).
+
 ## Changelog
+
+### 1.3.0 (2026-11-27)
+- Moved line budgets and style defaults into `shot-config.json`, added `templates/decision-shot.template.md`, and placed the activation trigger within the first 250 characters of `description`.
 
 ### 1.1.0 (2026-09-09)
 - P-018 adds the session stamp for important newly persisted decision shots, with narrow source

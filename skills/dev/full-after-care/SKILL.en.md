@@ -1,22 +1,12 @@
 ---
 name: full-after-care
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-07-30
+updated: 2026-11-27
 aliases: [deep-after-care, repo-after-care-full, tiefe-repo-pflege, repo-tiefenpflege]
-description: >
-  Deep maintenance round for a published GitHub repository (Level 2): contains the
-  full surface-after-care execution and supplements it with three expensive steps —
-  preliminary legal assessment via the legal department with annual resubmission
-  (opinion remains gitignored in the repo), cross-references to related repos across ALL
-  organizations, and updating all languages at the app level, not just in docs. Use this skill
-  on "full after care", "deep after care", "deep repo care", "large round", "thorough repo review",
-  when a repo hasn't been checked in a while, before major releases, or when legal relevance,
-  cross-references, or multilingualism are explicitly required. For the inexpensive, frequently repeated
-  round use surface-after-care instead; for initial publishing use github-repo-care.
-
+description: "Use this skill on \"full after care\", \"deep after care\", \"deep repo care\", \"large round\", \"thorough repo review\", when a repo hasn't been checked in a while, before major releases, or when legal relevance, cross-references, or multilingualism are explicitly required. Deep maintenance round for a published GitHub repository (Level 2): contains the full surface-after-care execution and supplements it with three expensive steps — preliminary legal assessment via the legal department with annual resubmission (opinion remains gitignored in the repo), cross-references to related repos across ALL organizations, and updating all languages at the app level, not just in docs. For the inexpensive, frequently repeated round use surface-after-care instead; for initial publishing use github-repo-care."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

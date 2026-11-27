@@ -1,10 +1,10 @@
 ---
 name: decision-briefing
-version: 1.5.1
+version: 1.6.0
 type: skill
 author: Lukas Geiger
 created: 2026-06-13
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Use whenever several decisions are pending or have accumulated -- whether within a topic, project, document, or over the course of a session: inventory them, present a numbered briefing with options A/B/C/D and a marked recommendation, accept letter answers (including batches), record the results, and write them back into the source documents."
 
 standalone: true
@@ -265,8 +265,21 @@ the artifact ends with exactly one line:
 
 ---
 
+## Configuration, Templates & Renderer (`briefing-config.json`, `scripts/render_briefing.py`)
+
+Batching thresholds (`batch_threshold: 5`, `block_size: 4`), option letters, supported output formats (`md`, `html`, `txt`, `json`), and template paths live in [briefing-config.json](briefing-config.json) with a self-healing override cascade (`config.json`, `profiles/<channel>.json`). The stdlib renderer [scripts/render_briefing.py](scripts/render_briefing.py) formats structured briefings via [templates/briefing.template.md](templates/briefing.template.md) and [templates/briefing.template.html](templates/briefing.template.html).
+
+```bash
+python scripts/render_briefing.py --dry-run --format html --out output/briefing.html
+python scripts/render_briefing.py data.json --format md --repair
+```
+
+---
+
 ## Changelog
 
+### 1.6.0 (2026-11-27)
+- Added `briefing-config.json`, replaceable templates (`templates/briefing.template.md`, `templates/briefing.template.html`), stdlib renderer `scripts/render_briefing.py` (with self-healing config cascade), and `tests/test_decision_briefing.py`.
 
 ### 1.5.1 (2026-11-22)
 - Language notice corrected

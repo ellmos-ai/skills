@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 import os
 import sys
@@ -20,6 +21,19 @@ from pathlib import Path
 SCHEMA = "ellmos.decision-draw.v1"
 PARTS = ("bundle", "concept", "interaction", "implementation", "boundaries", "acceptance", "return_transfer")
 PART_LABELS = ("Bündel und Umfang", "Konzept", "Zusammenspiel", "Umsetzung", "Grenzen", "Abnahme", "Rücktransfer")
+
+
+def _load_draw_cfg():
+    cfg_script = Path(__file__).resolve().parent / "draw_config.py"
+    spec = importlib.util.spec_from_file_location("draw_config", cfg_script)
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.load_draw_config()["config"]
+
+
+def _viewer_cfg():
+    return _load_draw_cfg()["viewer"]
 
 
 class DecisionError(ValueError):
@@ -244,8 +258,10 @@ def notice_text(data, choices):
     return f"Vorwahl: Bei {filled} von {total} Ästen ist die Auswahl als Entwurf vorgewählt. Erst Absenden bestätigt deine Auswahl samt Kommentaren."
 
 
-def confirmation_text(data, initial, choices, limit=12):
+def confirmation_text(data, initial, choices, limit=None):
     """Text of the dialog shown before Submit: how much of the opening state is unchanged, and the marked items."""
+    if limit is None:
+        limit = int(_viewer_cfg().get("confirmation_limit", 12))
     flat = nodes(data)
     unchanged = {key for key, item in choices.items() if initial.get(key, {}).get("accept") is not None and item == initial[key]}
     lines = [f"{len(unchanged)} von {len(flat)} Ästen sind unverändert vorausgewählt."]
@@ -385,24 +401,32 @@ class DecisionWindow:
         self.seen = set()  # ids of branches drawn at least once; Submit is refused while any branch was never displayed
         self.comments_open = set()
         self.variables, self.comment_widgets = {}, {}
+        vcfg = _viewer_cfg()
+        self._vcfg = vcfg
         root.title("Decision-Draw · Entscheidung im Gesamtbild")
         sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
-        width, height = min(960, max(680, sw//2)), min(1050, sh-70)
-        root.geometry(f"{width}x{height}+{max(0, sw-width-8)}+20")
-        root.minsize(640, 500)
+        width, height = min(int(vcfg["max_width"]), max(680, sw // 2)), min(1050, sh - 70)
+        root.geometry(f"{width}x{height}+{max(0, sw - width - 8)}+20")
+        root.minsize(int(vcfg["min_width"]), int(vcfg["min_height"]))
         style = ttk.Style(root)
-        style.theme_use("clam")
-        style.configure("TFrame", background="#eef2f7")
-        style.configure("TLabel", background="#eef2f7", foreground="#18304a", font=("Segoe UI", 11))
-        style.configure("Card.TFrame", background="white")
-        style.configure("Card.TLabel", background="white", foreground="#18304a", font=("Segoe UI", 11))
+        style.theme_use(str(vcfg["theme"]))
+        font_family = str(vcfg["font_family"])
+        font_size = int(vcfg["font_size"])
+        title_size = int(vcfg["title_font_size"])
+        bg = str(vcfg["bg"])
+        fg = str(vcfg["fg"])
+        card_bg = str(vcfg["card_bg"])
+        style.configure("TFrame", background=bg)
+        style.configure("TLabel", background=bg, foreground=fg, font=(font_family, font_size))
+        style.configure("Card.TFrame", background=card_bg)
+        style.configure("Card.TLabel", background=card_bg, foreground=fg, font=(font_family, font_size))
         self.body = ttk.Frame(root, padding=18)
         self.body.pack(fill="both", expand=True)
-        self.title = ttk.Label(self.body, text=self.data["title"], font=("Segoe UI", 17, "bold"), wraplength=800)
+        self.title = ttk.Label(self.body, text=self.data["title"], font=(font_family, title_size, "bold"), wraplength=800)
         self.title.pack(anchor="w", pady=(0, 8))
         self.notice = ttk.Label(self.body, text=notice_text(self.data, self.initial), wraplength=800)
         self.notice.pack(anchor="w", pady=(0, 10))
-        self.canvas = tk.Canvas(self.body, background="#eef2f7", highlightthickness=0)
+        self.canvas = tk.Canvas(self.body, background=bg, highlightthickness=0)
         bar = ttk.Scrollbar(self.body, command=self.canvas.yview)
         bar.pack(side="right", fill="y")
         self.canvas.pack(fill="both", expand=True)
@@ -417,7 +441,7 @@ class DecisionWindow:
         self.status = tk.StringVar()
         ttk.Label(self.body, textvariable=self.status, wraplength=800).pack(anchor="w", pady=(8, 0))
         self.render()
-        root.after(1200, self.watch)
+        root.after(int(vcfg["watch_interval_ms"]), self.watch)
 
     def wheel(self, event):
         if not isinstance(event.widget, self.tk.Text):
@@ -493,7 +517,16 @@ class DecisionWindow:
             if key in self.comments_open:
                 panel = self.ttk.Frame(box, style="Card.TFrame")
                 panel.pack(fill="both", expand=True, pady=(5, 0))
-                widget = self.tk.Text(panel, height=6, wrap="word", font=("Segoe UI", 11), relief="flat", bg="#f7f9fc", padx=8, pady=8)
+                widget = self.tk.Text(
+                    panel,
+                    height=6,
+                    wrap="word",
+                    font=(str(self._vcfg["font_family"]), int(self._vcfg["font_size"])),
+                    relief="flat",
+                    bg=str(self._vcfg["comment_bg"]),
+                    padx=8,
+                    pady=8,
+                )
                 scrollbar = self.ttk.Scrollbar(panel, command=widget.yview)
                 scrollbar.pack(side="right", fill="y")
                 widget.pack(fill="both", expand=True)
@@ -588,7 +621,7 @@ class DecisionWindow:
                     self.status.set("Quelle wurde verändert; deine lokale Auswahl bleibt erhalten. Einreichung erfordert erneutes Öffnen.")
         except (ValueError, OSError):
             self.status.set("Datei fehlt oder wurde verändert; keine automatische Entscheidung.")
-        self.root.after(1200, self.watch)
+        self.root.after(int(self._vcfg["watch_interval_ms"]), self.watch)
 
 
 def main(argv=None):

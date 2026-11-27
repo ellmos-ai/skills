@@ -1,0 +1,45 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "decision-briefing",
+  "version": "1.6.0",
+  "self_healing": {
+    "enabled": true,
+    "backup_suffix": ".corrupt.<ts>.bak",
+    "atomic_writes": true
+  },
+  "briefing": {
+    "batch_threshold": 5,
+    "block_size": 4,
+    "max_options": 4,
+    "option_letters": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "include_appendix_table": true,
+    "include_session_provenance": false,
+    "hide_technical_ids_in_body": true
+  },
+  "output": {
+    "default_format": "md",
+    "supported_formats": [
+      "md",
+      "html",
+      "txt",
+      "json"
+    ],
+    "output_dir": "./output"
+  },
+  "templates": {
+    "dir": "./templates",
+    "md": "briefing.template.md",
+    "html": "briefing.template.html",
+    "custom_dir": null
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft"
+  }
+}
