@@ -1,0 +1,20 @@
+{
+  "_hinweis": "Vorlage fuer kanalspezifische (<kanal>.json) oder chat-/zielspezifische (<kanal>.<chat>.json) Konfigurations-Overrides unter profiles/. Ueberschreibt ausschliesslich die angegebenen Teilfelder per Deep-Merge ueber default-config.json -> config.json.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "{{channel-name}}",
+  "chat": null,
+  "settings": {},
+  "output": {
+    "default_format": "md"
+  },
+  "templates": {
+    "custom_dir": null
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "channel": "{{channel-name}}",
+    "target": null
+  }
+}

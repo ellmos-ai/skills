@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-11-09
-description: "非自明なタスクの着手時に、対応する適切なローカルスキルが存在するかを検索・評価して誘導する場合に使用する（例：'どのスキルが合うか'、'このタスク用のスキルを探す'、'〜できるスキルはあるか'、/skill-finder）。ローカルのスキル資産を走査し、ユーザーの目的に最も適合する専門スキルを推薦する。新規スキルの作成（ellmos-skill-creator）や全体棚卸し監査（skill-explorer）には使用しない。"
+description: "非自明なタスクの着手時に、対応する適切なローカルスキルが存在するかを検索・評価して誘導する場合に使用する（例：'どのスキルが合うか'、'このタスク用のスキルを探す'、'〜できるスキルはあるか'、/skill-finder）。ローカルのスキル資産を走査し、ユーザーの目的に最も適合する専門スキルを推薦する。新規スキルの作成（ocean-skill-creator）や全体棚卸し監査（skill-explorer）には使用しない。"
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

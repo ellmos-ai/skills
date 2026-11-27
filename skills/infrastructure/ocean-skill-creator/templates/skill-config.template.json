@@ -1,0 +1,24 @@
+{
+  "_hinweis": "Vorlage fuer die lokale config.json eines produzierten Skills (Override-Stufe 2 ueber default-config.json). Enthaelt NUR skill-eigene Verhaltens-Einstellungen, keine aufgeloesten externen Andockstellen (die gehoeren nach connections.json). Abwaertskompatibel zu ellmos.skill-config.v1.",
+  "schema": "ocean.skill-config.v2",
+  "legacy_schema_compat": "ellmos.skill-config.v1",
+  "skill": "{{skill-name}}",
+  "version": "0.1.0",
+  "settings": {},
+  "output": {
+    "default_format": "md"
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft"
+  },
+  "lernvertrag": {
+    "user_ist_koenig": true,
+    "waehle_beste_option": true,
+    "installiert_nie_selbststaendig": true,
+    "letzter_update_check": null,
+    "update_intervall_tage": 60
+  },
+  "letzter_check": null
+}
