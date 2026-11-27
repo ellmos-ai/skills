@@ -30,8 +30,22 @@ def test_config_cascade_and_self_healing_repair(tmp_path):
     assert loaded["healed"]
     assert loaded["config"]["briefing"]["batch_threshold"] == 5
     assert list(tmp_path.glob("config.json.corrupt.*.bak"))
-    # Repaired config.json is valid JSON
-    assert isinstance(json.loads(corrupt.read_text(encoding="utf-8")), dict)
+    # Optional override config.json heals to {} rather than duplicating DEFAULT_CONFIG
+    assert json.loads(corrupt.read_text(encoding="utf-8")) == {}
+
+
+def test_corrupt_base_briefing_config_repairs_to_defaults(tmp_path):
+    mod = _load_renderer()
+    corrupt_base = tmp_path / "briefing-config.json"
+    corrupt_base.write_text("{corrupt base", encoding="utf-8")
+
+    loaded = mod.load_briefing_config(skill_root=tmp_path, repair=True)
+    assert loaded["warnings"]
+    assert loaded["healed"]
+    assert list(tmp_path.glob("briefing-config.json.corrupt.*.bak"))
+    repaired = json.loads(corrupt_base.read_text(encoding="utf-8"))
+    assert repaired["skill"] == "decision-briefing"
+    assert repaired["briefing"]["batch_threshold"] == 5
 
 
 def test_render_md_html_txt_json_and_xss_escape():

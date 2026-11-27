@@ -116,7 +116,7 @@ def load_briefing_config(
         if chat:
             candidates.append(skill_root / "profiles" / f"{channel}.{chat}.json")
 
-    for idx, candidate in enumerate(candidates):
+    for candidate in candidates:
         if not candidate.is_file():
             continue
         try:
@@ -129,7 +129,7 @@ def load_briefing_config(
             if repair:
                 bak = candidate.with_name(f"{candidate.name}.corrupt.{ts}.bak")
                 shutil.copy2(str(candidate), str(bak))
-                atomic_write_json(candidate, DEFAULT_CONFIG if idx == 0 else {})
+                atomic_write_json(candidate, {})
                 healed.append({"path": str(candidate), "backup_path": str(bak)})
 
     if cli_overrides:
