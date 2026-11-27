@@ -61,15 +61,15 @@ Avant d'aller plus loin — vérifier les causes les plus fréquentes :
 ### Actions rapides
 
 ```bash
-# Cache leeren
+# Vider le cache
 find . -name "__pycache__" -type d -exec rm -rf {} + 2>&1
 find . -name "*.pyc" -delete 2>&1
 
-# Imports pruefen
+# Vérifier les imports
 python -c "import modulname"
 
-# Syntax pruefen
-python -m py_compile datei.py
+# Vérifier la syntaxe
+python -m py_compile fichier.py
 ```
 
 ---
@@ -98,17 +98,17 @@ Selon le projet, des scripts de diagnostic spécialisés peuvent être utiles :
 ### Techniques de débogage
 
 ```python
-# 1. Print-Debugging (schnell aber effektiv)
+# 1. Print-Debugging (rapide mais efficace)
 print(f"DEBUG: variable={variable!r}, type={type(variable)}")
 
-# 2. Breakpoint (interaktiv)
+# 2. Point d'arrêt (interactif)
 breakpoint()  # Python 3.7+
 
-# 3. Traceback erweitern
+# 3. Afficher la pile d'appels (traceback)
 import traceback
 traceback.print_exc()
 
-# 4. Logging statt Print
+# 4. Logging au lieu de print
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -124,20 +124,20 @@ logger.debug(f"State: {state!r}")
 Objectif : reproduire le bug avec un minimum de code.
 
 ```python
-# test_bug.py — Minimaler Reproduktions-Test
+# test_bug.py — Test minimal de reproduction
 """
-Bug: [Kurze Beschreibung]
-Erwartet: [Was sollte passieren]
-Tatsaechlich: [Was passiert stattdessen]
+Bug : [Courte description]
+Attendu : [Ce qui devrait se passer]
+Observé : [Ce qui se passe à la place]
 """
 
-# Minimaler Setup
-# ... nur das Noetigste
+# Configuration minimale
+# ... uniquement l'essentiel
 
-# Bug-Ausloeser
-# ... exakter Code der den Bug triggert
+# Déclencheur du bug
+# ... code exact qui déclenche le bug
 
-# Erwartetes Ergebnis
+# Résultat attendu
 # assert result == expected, f"Got {result}"
 ```
 
@@ -162,15 +162,15 @@ Tatsaechlich: [Was passiert stattdessen]
 ### Modèles de correction
 
 ```python
-# SCHLECHT: Symptom behandeln
+# MAUVAIS : masquer le symptôme
 try:
     result = broken_function()
-except:  # Alles schlucken
+except:  # Tout avaler sans diagnostic
     result = default_value
 
-# GUT: Ursache beheben
+# BON : corriger la cause racine
 def broken_function():
-    if input_data is None:  # Eigentliche Ursache: None-Check fehlte
+    if input_data is None:  # Cause réelle : contrôle None manquant
         return default_value
     return process(input_data)
 ```
@@ -202,17 +202,17 @@ def broken_function():
 ### Commandes de test
 
 ```bash
-# Unit-Tests
+# Tests unitaires
 python -m pytest tests/ -v
 
-# Nur betroffene Tests
-python -m pytest tests/test_modul.py -v -k "test_name"
+# Uniquement les tests concernés
+python -m pytest tests/test_module.py -v -k "test_name"
 
-# Type-Check
-python -m mypy datei.py
+# Vérification des types
+python -m mypy fichier.py
 
 # Lint
-python -m flake8 datei.py
+python -m flake8 fichier.py
 ```
 
 ---
@@ -222,37 +222,37 @@ python -m flake8 datei.py
 ### Modèle de rapport de bug
 
 ```markdown
-## Bug-Report: [Kurztitel]
+## Rapport de bug : [Titre court]
 
-**Datum:** YYYY-MM-DD
-**Schwere:** kritisch / hoch / mittel / niedrig
-**Komponente:** [Modul/Datei]
+**Date :** YYYY-MM-DD
+**Sévérité :** critique / élevée / moyenne / faible
+**Composant :** [Module/Fichier]
 
-### Symptom
-[Was der User sieht / Fehlermeldung]
+### Symptôme
+[Ce que voit l'utilisateur / message d'erreur]
 
-### Ursache
-[Technische Root-Cause]
+### Cause
+[Cause racine technique]
 
-### Fix
-[Was geaendert wurde + warum]
+### Correction
+[Ce qui a été modifié + pourquoi]
 
-### Betroffene Dateien
-- `datei1.py` — [Aenderung]
-- `datei2.py` — [Aenderung]
+### Fichiers concernés
+- `fichier1.py` — [Modification]
+- `fichier2.py` — [Modification]
 
-### Praevention
-[Wie kann dieser Bug-Typ in Zukunft vermieden werden?]
+### Prévention
+[Comment éviter ce type de bug à l'avenir ?]
 ```
 
 ### Format de message de commit
 
 ```
-fix: [Kurze Beschreibung des Fixes]
+fix: [Courte description du correctif]
 
-Ursache: [Root-Cause in einem Satz]
-Fix: [Was geaendert wurde]
-Test: [Wie verifiziert]
+Cause : [Cause racine en une phrase]
+Correction : [Ce qui a été modifié]
+Test : [Comment vérifié]
 ```
 
 ---
@@ -274,14 +274,14 @@ Test: [Wie verifiziert]
 ### Outils de débogage PyQt6
 
 ```python
-# Widget-Hierarchie ausgeben
+# Afficher la hiérarchie des widgets
 def dump_widget_tree(widget, indent=0):
     print(" " * indent + f"{widget.__class__.__name__}: {widget.objectName()}")
     for child in widget.findChildren(QWidget):
         if child.parent() == widget:
             dump_widget_tree(child, indent + 2)
 
-# Signal-Debugging
+# Débogage des signaux
 from PyQt6.QtCore import QObject
 original_connect = QObject.connect
 def debug_connect(self, *args, **kwargs):
@@ -294,30 +294,30 @@ def debug_connect(self, *args, **kwargs):
 ## Référence rapide
 
 ```
-BUG GEFUNDEN?
+BUG TROUVÉ ?
      │
      ▼
-[Phase 1: Schnell-Checks]  ──── Offensichtlich? → FIX
+[Phase 1 : Vérifications rapides]  ──── Évident ? → CORRECTION
      │
      ▼
-[Phase 2: Diagnose]  ────────── Ursache klar? → Phase 4
+[Phase 2 : Diagnostic]             ──── Cause claire ? → Phase 4
      │
      ▼
-[Phase 3: Isolierter Test]  ── Reproduzierbar? → Phase 4
-     │                              │
-     │                         Nicht reproduzierbar?
-     │                              │
-     │                         Logging einbauen,
-     │                         auf erneutes Auftreten warten
+[Phase 3 : Test isolé]             ──── Reproductible ? → Phase 4
+     │                                       │
+     │                                  Non reproductible ?
+     │                                       │
+     │                                  Ajouter des logs,
+     │                                  attendre une réapparition
      ▼
-[Phase 4: Fix]  ─────────────── Minimal + verstanden
+[Phase 4 : Correction]             ──── Minimale + comprise
      │
      ▼
-[Phase 5: Verifikation]  ────── Tests gruen? → Phase 6
-     │                              │
-     │                         Tests rot? → Zurueck zu Phase 4
+[Phase 5 : Vérification]           ──── Tests verts ? → Phase 6
+     │                                       │
+     │                                  Tests rouges ? → Retour Phase 4
      ▼
-[Phase 6: Dokumentation]  ───── Bug-Report + Commit
+[Phase 6 : Documentation]          ──── Rapport de bug + Commit
 ```
 
 ### Règle des 20 minutes

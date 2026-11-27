@@ -1,10 +1,28 @@
 ---
+name: medizin-daten
+version: 0.1.1
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-11-22
+description: "Utiliser pour enregistrer de manière locale et strictement privée des données médicales personnelles, diagnostics, historiques de symptômes et plans d'examens (ex. 'noter un diagnostic', 'suivre des symptômes', 'enregistrer un bilan de santé', /medizin-daten). Stocke les données dans une base SQLite locale sans aucun envoi cloud. NE PAS utiliser pour un avis médical à distance ou une urgence médicale."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [medizin, diagnose, symptome, gesundheit, privat, lokal]
 language: fr
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin. Skill vollständig neu konzipiert. Kein bestehendes Implementierungs-Vorbild im Ökosystem gefunden.\n'}
 ---
 
 <img src="banner.png" width="100%" alt="medizin-daten banner">
 
 > **Français** — Version française officielle de la compétence `medizin-daten`.
+
+# Données médicales (`medizin-daten`)
 
 ## Objectif
 
@@ -43,25 +61,25 @@ médicale — il s'agit d'un carnet structuré pour les données de santé perso
 ## Point d'entrée CLI
 
 ```bash
-# Diagnose anlegen
-python medizin_daten_core.py add-diagnosis "Hypertonie" [--icd I10] [--note "Anmerkung"]
+# Ajouter un diagnostic
+python medizin_daten_core.py add-diagnosis "Hypertension" [--icd I10] [--note "Remarque"]
 
-# Diagnosen auflisten
+# Lister les diagnostics
 python medizin_daten_core.py diagnoses
 
-# Symptom erfassen
-python medizin_daten_core.py add-symptom "Kopfschmerzen" [--severity 7] [--date 2026-06-22] [--note "..."]
+# Saisir un symptôme
+python medizin_daten_core.py add-symptom "Maux de tête" [--severity 7] [--date 2026-06-22] [--note "..."]
 
-# Symptomverlauf für eine Bezeichnung
-python medizin_daten_core.py symptom-history "Kopfschmerzen" [--limit 30]
+# Historique d'un symptôme
+python medizin_daten_core.py symptom-history "Maux de tête" [--limit 30]
 
-# Untersuchung planen
-python medizin_daten_core.py add-exam "Blutbild" [--date 2026-07-01] [--note "nüchtern"]
+# Planifier un examen
+python medizin_daten_core.py add-exam "Bilan sanguin" [--date 2026-07-01] [--note "à jeun"]
 
-# Anstehende Untersuchungen
+# Examens à venir
 python medizin_daten_core.py exams [--upcoming]
 
-# Alternativer Store (z.B. für Tests)
+# Stockage alternatif (p. ex. pour les tests)
 python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 ```
 
@@ -73,38 +91,38 @@ python medizin_daten_core.py --store /tmp/med_test.db diagnoses --dry-run
 |---|---|
 | Type | SQLite |
 | Chemin (par défaut) | `skills/assist/medizin-daten/store.db` |
-| Surcharge | `--store <pfad>` ou variable d'env `MEDIZIN_STORE` |
+| Surcharge | `--store <chemin>` ou variable d'env `MEDIZIN_STORE` |
 | Tables | `diagnoses`, `symptoms`, `examination_plans` |
 
 ### Schéma
 
 ```sql
 CREATE TABLE IF NOT EXISTS diagnoses (
-    id          TEXT PRIMARY KEY,     -- UUID (kurz: 8 Hex)
-    name        TEXT NOT NULL,        -- Bezeichnung (z.B. "Hypertonie")
-    icd_code    TEXT,                 -- ICD-10-Code optional (z.B. "I10")
-    onset_date  TEXT,                 -- Beginn (ISO-8601, optional)
-    status      TEXT DEFAULT 'aktiv', -- aktiv | remission | abgeschlossen
-    note        TEXT,                 -- Freitext-Notiz
+    id          TEXT PRIMARY KEY,      -- UUID (court : 8 hex)
+    name        TEXT NOT NULL,         -- Désignation (ex. "Hypertension")
+    icd_code    TEXT,                  -- Code CIM-10 optionnel (ex. "I10")
+    onset_date  TEXT,                  -- Début (ISO-8601, optionnel)
+    status      TEXT DEFAULT 'actif',  -- actif | rémission | clôturé
+    note        TEXT,                  -- Note libre
     created_at  TEXT NOT NULL,
     updated_at  TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS symptoms (
     id           TEXT PRIMARY KEY,
-    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: Zuordnung
-    name         TEXT NOT NULL,       -- Bezeichnung (z.B. "Kopfschmerzen")
-    severity     INTEGER,             -- 1–10 Skala (optional)
-    recorded_at  TEXT NOT NULL,       -- ISO-8601 Zeitstempel
+    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optionnel : rattachement
+    name         TEXT NOT NULL,        -- Désignation (ex. "Maux de tête")
+    severity     INTEGER,              -- Échelle 1–10 (optionnel)
+    recorded_at  TEXT NOT NULL,        -- Horodatage ISO-8601
     note         TEXT
 );
 
 CREATE TABLE IF NOT EXISTS examination_plans (
     id           TEXT PRIMARY KEY,
-    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optional: Zuordnung
-    exam_name    TEXT NOT NULL,       -- Untersuchungsbezeichnung
-    planned_date TEXT,                -- Geplantes Datum (ISO-8601)
-    done_date    TEXT,                -- Durchgeführt am (NULL = ausstehend)
+    diagnosis_id TEXT REFERENCES diagnoses(id),  -- optionnel : rattachement
+    exam_name    TEXT NOT NULL,        -- Intitulé de l'examen
+    planned_date TEXT,                 -- Date prévue (ISO-8601)
+    done_date    TEXT,                 -- Réalisé le (NULL = en attente)
     note         TEXT,
     created_at   TEXT NOT NULL
 );

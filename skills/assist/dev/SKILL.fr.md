@@ -1,5 +1,21 @@
 ---
+name: dev
+version: 0.1.1
+type: expert
+author: ellmos
+created: 2026-06-22
+updated: 2026-11-22
+description: "Utiliser pour obtenir un aperçu rapide d'un projet logiciel via analyse headless et orienter vers les bons outils de développement (ex. 'scanner le projet', 'état du projet', 'lancer CodeCommander', /dev). Analyse la structure et route vers CodeCommander MCP et ellmos-code-tools sans stockage propre. NE PAS utiliser pour des pipelines de développement automatisés avancés (utiliser dev/dev-soft-agent)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: assist
+tags: [dev, coding, projekt-scan, ati, codecommander]
 language: fr
+status: active
+dependencies: {'tools': ['dev_core.py'], 'services': [], 'protocols': [], 'python': ['pathlib'], 'external': ['codecommander-mcp', 'ellmos-code-tools']}
+provenance: {'origin': 'bach', 'origin_path': 'system/agents/ati/ + system/agents/entwickler/', 'origin_version': 'n/a', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-06-22', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
 <img src="banner.png" width="100%" alt="dev banner">
@@ -40,8 +56,8 @@ Successeur de l'agent ATI/entwickler de BACH. Deux missions :
 ## Point d'entrée CLI (`dev_core.py`)
 
 ```bash
-python dev_core.py scan .              # aktuelles Projekt
-python dev_core.py scan /pfad/projekt  # Struktur + Sprachen + Marker
+python dev_core.py scan .              # projet actuel
+python dev_core.py scan /chemin/projet # structure + langages + marqueurs
 ```
 
 Détecte entre autres : Python (pyproject/requirements/setup), Node/TypeScript, Rust, Go,

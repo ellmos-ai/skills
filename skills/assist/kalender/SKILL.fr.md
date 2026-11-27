@@ -1,10 +1,28 @@
 ---
+name: kalender
+version: 0.1.1
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-11-22
+description: "Utiliser pour enregistrer, consulter, supprimer ou exporter des rendez-vous au format ICS avec stockage SQLite local et choix de backend (ex. 'ajouter un rendez-vous', 'agenda d'aujourd'hui', 'exporter le calendrier', /kalender). Gère les événements locaux avec Flag 3 de sélection de backend. NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [kalender, termine, events, ics, google-calendar, routinika]
 language: fr
+status: stable
+dependencies: {'tools': [], 'services': [{'name': 'Google Calendar MCP', 'optional': True, 'purpose': 'Backend option when kalender_backend=google in prefs.json'}], 'protocols': [{'name': 'ICS / iCalendar', 'optional': True, 'purpose': 'Export of appointments (RFC 5545 subset)'}], 'python': []}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein BACH-Origin vorhanden.\n'}
 ---
 
 <img src="banner.png" width="100%" alt="kalender banner">
 
 > **Français** — Version française officielle de la compétence `kalender`.
+
+# Calendrier (`kalender`)
 
 ## Objectif
 
@@ -55,31 +73,31 @@ Le LLM choisit au besoin un autre backend selon `assist/prefs.json`.
 ## Point d'entrée CLI
 
 ```bash
-# Termin anlegen
-python kalender_core.py add "Zahnarzt" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Praxis Dr. X"]
+# Ajouter un rendez-vous
+python kalender_core.py add "Dentiste" --date 2026-07-01 --time 10:00 [--duration 60] [--location "Cabinet Dr X"]
 
-# Heutige Termine
+# Rendez-vous du jour
 python kalender_core.py today
 
-# Wochenübersicht
+# Aperçu hebdomadaire
 python kalender_core.py week [--from 2026-06-22]
 
-# Monatsübersicht
+# Aperçu mensuel
 python kalender_core.py month [--month 2026-07]
 
-# Alle Termine (optional mit Suchbegriff)
-python kalender_core.py list [--search "Zahnarzt"] [--limit 50]
+# Tous les rendez-vous (avec filtre optionnel)
+python kalender_core.py list [--search "Dentiste"] [--limit 50]
 
-# Termin löschen
+# Supprimer un rendez-vous
 python kalender_core.py delete <id>
 
-# ICS-Export
+# Export ICS
 python kalender_core.py export [--id <id>] [--out kalender.ics]
 
-# Backend-Check
+# Vérifier le backend
 python kalender_core.py check-backend
 
-# Alternativer Store (z.B. für Tests)
+# Stockage alternatif (p. ex. pour les tests)
 python kalender_core.py --store /tmp/kal_test.db today --dry-run
 ```
 
@@ -91,22 +109,22 @@ python kalender_core.py --store /tmp/kal_test.db today --dry-run
 |---|---|
 | Type | SQLite (backend local) |
 | Chemin (par défaut) | `skills/assist/kalender/store.db` |
-| Surcharge | `--store <pfad>` ou variable d'env `KALENDER_STORE` |
+| Surcharge | `--store <chemin>` ou variable d'env `KALENDER_STORE` |
 | Tables | `events` |
 
 ### Schéma
 
 ```sql
 CREATE TABLE IF NOT EXISTS events (
-    id           TEXT PRIMARY KEY,      -- UUID (kurz: 8 Hex)
-    title        TEXT NOT NULL,         -- Termin-Bezeichnung
-    date         TEXT NOT NULL,         -- ISO-Datum YYYY-MM-DD
-    time         TEXT,                  -- HH:MM (optional)
-    duration_min INTEGER,               -- Dauer in Minuten (optional)
-    location     TEXT,                  -- Ort (optional)
-    description  TEXT,                  -- Notiz/Beschreibung
-    recurrence   TEXT,                  -- ICS RRULE (optional, z.B. "FREQ=WEEKLY")
-    ics_uid      TEXT UNIQUE,           -- ICS UID für Import/Export
+    id           TEXT PRIMARY KEY,      -- UUID (court : 8 hex)
+    title        TEXT NOT NULL,         -- Intitulé du rendez-vous
+    date         TEXT NOT NULL,         -- Date ISO YYYY-MM-DD
+    time         TEXT,                  -- HH:MM (optionnel)
+    duration_min INTEGER,               -- Durée en minutes (optionnel)
+    location     TEXT,                  -- Lieu (optionnel)
+    description  TEXT,                  -- Note / description
+    recurrence   TEXT,                  -- ICS RRULE (optionnel, ex. "FREQ=WEEKLY")
+    ics_uid      TEXT UNIQUE,           -- UID ICS pour import/export
     created_at   TEXT NOT NULL,
     updated_at   TEXT NOT NULL
 );

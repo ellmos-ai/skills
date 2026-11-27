@@ -39,7 +39,7 @@ dans le code — le lieu provient de la requête ou de `assist/prefs.json`
 
 | Entrée utilisateur | Action |
 |---|---|
-| « Météo pour Potsdam ? » / « Quel temps fera-t-il à Hambourg ? » | `wetter_core.py "<Ort>"` |
+| « Météo pour Potsdam ? » / « Quel temps fera-t-il à Hambourg ? » | `wetter_core.py "<Lieu>"` |
 | « Météo demain ? » (sans lieu) | `wetter_core.py --default` (lieu depuis prefs) |
 | « Mon lieu météo par défaut est Potsdam » | `wetter_core.py --set-default "Potsdam"` |
 | Coordonnées connues | `wetter_core.py <lat> <lon>` |
@@ -47,18 +47,18 @@ dans le code — le lieu provient de la requête ou de `assist/prefs.json`
 ## Flux de travail
 
 ```
-1. Ort bestimmen: aus Anfrage; sonst prefs.json (wetter_default_location);
-   sonst Nutzer interaktiv fragen + optional als Default speichern.
-2. wetter_core.py abfragen (wttr.in, 2 Versuche, 30-min-Cache).
-3. Lesbaren Wetter-Text + 3-Tage-Vorschau praesentieren.
+1. Déterminer le lieu : depuis la demande ; sinon prefs.json (wetter_default_location) ;
+   sinon demander interactivement à l'utilisateur + enregistrer en option par défaut.
+2. Interroger wetter_core.py (wttr.in, 2 tentatives, cache de 30 min).
+3. Présenter un bulletin météo lisible + prévision à 3 jours.
 ```
 
 ## Point d'entrée CLI (`wetter_core.py`)
 
 ```bash
-python wetter_core.py "Potsdam"          # Ort
-python wetter_core.py 52.6789 13.5878   # Koordinaten
-python wetter_core.py --default         # Ort aus prefs.json
+python wetter_core.py "Potsdam"          # Lieu
+python wetter_core.py 52.6789 13.5878   # Coordonnées
+python wetter_core.py --default         # Lieu depuis prefs.json
 python wetter_core.py --set-default "Potsdam"
 ```
 

@@ -60,22 +60,22 @@ une recherche ultérieure avec `research-agent` ou `web-reading`.
 ## CLI
 
 ```bash
-# Briefing zu stdout
+# Note de synthèse vers stdout
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Marie Curie" --typ person
 
-# In Datei schreiben
+# Écrire dans un fichier
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "OpenAI" --typ organization -o briefing_openai.md
 
-# Themen-Briefing
+# Dossier thématique
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Quantencomputing" --typ topic
 
-# Ereignis
+# Événement
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "COP30" --typ event
 
-# Ohne Typ-Angabe (generisch)
-PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Mein Thema"
+# Sans précision de type (générique)
+PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py "Mon sujet"
 
-# Hilfe
+# Aide
 PYTHONDONTWRITEBYTECODE=1 python dossier_briefing_core.py --help
 ```
 

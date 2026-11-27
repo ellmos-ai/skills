@@ -61,16 +61,16 @@ Aucune clé d'API requise. Aucun stockage persistant.
 ## CLI
 
 ```bash
-# POI-Suche (Kategorie + Ort)
+# Recherche POI (catégorie + lieu)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py restaurant München
 
-# Ort geocodieren
+# Géocoder un lieu
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --geocode "Brandenburger Tor Berlin"
 
-# Radius anpassen (Standard: 1000 m)
+# Ajuster le rayon (par défaut : 1000 m)
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py hotel Wien --radius 2000
 
-# Hilfe
+# Aide
 PYTHONDONTWRITEBYTECODE=1 python location_suche_core.py --help
 ```
 

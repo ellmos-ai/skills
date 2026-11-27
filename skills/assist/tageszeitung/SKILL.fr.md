@@ -23,6 +23,8 @@ provenance: {'origin': 'bach-port', 'origin_path': 'BACH/system/hub/news.py + hu
 
 > **Français** — Version française officielle de la compétence `tageszeitung`.
 
+# Quotidien (`tageszeitung`)
+
 ## Objectif
 
 Récupérer des articles depuis des flux RSS et des sources web configurés, les
@@ -56,25 +58,25 @@ articles sont enregistrés localement dans `tageszeitung/store.db` et marqués c
 ## Point d'entrée CLI
 
 ```bash
-# Quelle hinzufügen
+# Ajouter une source
 python tageszeitung_core.py add-source "Heise" rss https://www.heise.de/rss/heise-atom.xml --category tech
 
-# Alle Quellen abrufen
+# Récupérer toutes les sources
 python tageszeitung_core.py fetch
 
-# Tageszeitung rendern (HTML + PDF wenn Edge verfügbar)
-python tageszeitung_core.py render [--date 2026-06-22] [--out /pfad/]
+# Générer le quotidien (HTML + PDF si Edge est disponible)
+python tageszeitung_core.py render [--date 2026-06-22] [--out /chemin/]
 
-# Quellen auflisten
+# Lister les sources
 python tageszeitung_core.py sources
 
-# Ungelesene Artikel
+# Articles non lus
 python tageszeitung_core.py items [--limit 50] [--category tech]
 
-# Artikel als gelesen markieren
+# Marquer un article comme lu
 python tageszeitung_core.py read <item_id>
 
-# Alternativer Store (z.B. für Tests)
+# Stockage alternatif (p. ex. pour les tests)
 python tageszeitung_core.py --store /tmp/t.db sources --dry-run
 ```
 

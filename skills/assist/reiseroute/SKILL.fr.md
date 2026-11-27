@@ -60,22 +60,22 @@ et le mode de transport. Aucune clé d'API, aucun compte requis.
 ## CLI
 
 ```bash
-# Auto-Route zwischen zwei Orten
+# Itinéraire en voiture entre deux lieux
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Berlin" "Hamburg"
 
-# Fahrrad
+# À vélo
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Potsdam" "Berlin" --modus fahrrad
 
-# Zu Fuß
+# À pied
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "Kreuzberg, Berlin" "Mitte, Berlin" --modus fuss
 
-# Koordinaten direkt (lat,lon)
+# Coordonnées directes (lat,lon)
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "52.5200,13.4050" "53.5500,9.9937"
 
-# JSON-Ausgabe
+# Sortie JSON
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py "München" "Wien" --json
 
-# Hilfe
+# Aide
 PYTHONDONTWRITEBYTECODE=1 python reiseroute_core.py --help
 ```
 

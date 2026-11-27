@@ -1,10 +1,28 @@
 ---
+name: transkription
+version: 0.1.1
+type: assist
+author: ellmos-ai
+created: 2026-06-22
+updated: 2026-11-22
+description: "Utiliser pour transcrire des fichiers audio ou vidéo locaux en texte hors ligne (ex. 'transcrire ce fichier audio', 'convertir une note vocale en texte', 'retranscrire un enregistrement', /transkription). Détecte automatiquement Whisper ou Vosk avec mode dry-run de repli. NE PAS utiliser pour télécharger des sous-titres YouTube en ligne (utiliser utilities/video-transcriber)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: false
+category: assist
+tags: [transkription, audio, speech-to-text, whisper, vosk, offline]
 language: fr
+status: stable
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': [{'name': 'openai-whisper', 'optional': True, 'install': 'pip install openai-whisper', 'purpose': 'STT backend option 1 (cloud/local model)'}, {'name': 'vosk', 'optional': True, 'install': 'pip install vosk', 'purpose': 'STT backend option 2 (fully offline)'}]}
+provenance: {'origin': 'eigenentwurf', 'origin_path': '', 'origin_version': '', 'origin_repo': '', 'origin_license': 'MIT', 'last_sync_from_origin': '', 'notes': 'Kein direkter BACH-Origin vorhanden (transkriptions-service existiert nicht als Datei in BACH/system). Skill neu konzipiert. voice_stt.py aus BACH/hub/_services/voice/ hat das Backend-Muster inspiriert (optionale Imports mit Verfügbarkeits-Flags), wurde aber nicht direkt portiert.\n'}
 ---
 
 <img src="banner.png" width="100%" alt="transkription banner">
 
 > **Français** — Version française officielle de la compétence `transkription`.
+
+# Transcription audio/vidéo (`transkription`)
 
 ## Objectif
 
@@ -44,28 +62,28 @@ peuvent être consultées.
 ## Point d'entrée CLI
 
 ```bash
-# Datei transkribieren
+# Transcrire un fichier
 python transkription_core.py transcribe audio.wav
 
-# Mit expliziter Sprache
-python transkription_core.py transcribe audio.mp3 --lang de
+# Avec langue explicite
+python transkription_core.py transcribe audio.mp3 --lang fr
 
-# Dry-Run (kein Backend nötig)
+# Dry-run (aucun backend requis)
 python transkription_core.py transcribe audio.wav --dry-run
 
-# Transkripte auflisten
+# Lister les transcriptions
 python transkription_core.py list [--limit 20]
 
-# Volltextsuche
-python transkription_core.py search "Begriff"
+# Recherche plein texte
+python transkription_core.py search "terme"
 
-# Exportieren
-python transkription_core.py export <id> [--out datei.txt]
+# Exporter
+python transkription_core.py export <id> [--out fichier.txt]
 
-# Backend-Check
+# Vérifier les backends
 python transkription_core.py check
 
-# Alternativer Store-Pfad (z.B. für Tests)
+# Chemin de stockage alternatif (p. ex. pour les tests)
 python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 ```
 
@@ -77,22 +95,22 @@ python transkription_core.py --store /tmp/test.db transcribe audio.wav --dry-run
 |---|---|
 | Type | SQLite |
 | Chemin (par défaut) | `skills/assist/transkription/store.db` |
-| Surcharge | `--store <pfad>` ou variable d'env `TRANSKRIPTION_STORE` |
+| Surcharge | `--store <chemin>` ou variable d'env `TRANSKRIPTION_STORE` |
 | Tables | `transcripts` |
 
 ### Schéma `transcripts`
 
 ```sql
 CREATE TABLE IF NOT EXISTS transcripts (
-    id          TEXT PRIMARY KEY,  -- UUID (kurz: 8 Hex)
-    file_path   TEXT NOT NULL,     -- Originalpfad der Audiodatei
-    file_name   TEXT NOT NULL,     -- Dateiname (ohne Pfad, für Anzeige)
-    text        TEXT NOT NULL,     -- Transkribierter Text
-    language    TEXT,              -- Sprache (z.B. "de", "en")
+    id          TEXT PRIMARY KEY,  -- UUID (court : 8 hex)
+    file_path   TEXT NOT NULL,     -- Chemin d'origine du fichier audio
+    file_name   TEXT NOT NULL,     -- Nom du fichier (sans chemin, pour affichage)
+    text        TEXT NOT NULL,     -- Texte transcrit
+    language    TEXT,              -- Langue (ex. "de", "en", "fr")
     backend     TEXT,              -- "whisper" | "vosk" | "dry-run"
-    duration_s  REAL,              -- Dauer in Sekunden (wenn bekannt)
-    created_at  TEXT NOT NULL,     -- ISO-8601 Timestamp
-    tags        TEXT               -- Komma-getrennte Tags (optional)
+    duration_s  REAL,              -- Durée en secondes (si connue)
+    created_at  TEXT NOT NULL,     -- Horodatage ISO-8601
+    tags        TEXT               -- Tags séparés par des virgules (optionnel)
 );
 ```
 

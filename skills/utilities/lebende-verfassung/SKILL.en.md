@@ -128,19 +128,19 @@ If `core5.ablauf` specifies a different order, the config takes precedence.
 Storage: `<PROJEKT>\_results\gutachten\JJJJ-MM-TT_<slug>.md`
 
 ```markdown
-# Prüfbericht: <Fragestellung>
-> Skill lebende-verfassung v4 | Datum | Modell | Konfiguration: CORE1 [a–f] / CORE2 [a,b] / CORE3 [a,b] / CORE4 [a–e], config v<N> | Status: Schattenmodus (beratend, Forschungsprototyp)
-## A Faktenlage (CORE 4a — neutral, Primärquellen)
-## B Rechtsstand (CORE 3a — geltende Regelungen + Mechanismus; Endfassungs-Disziplin: Ausschussfassung/BT-Drs., synoptische Stand-Tabelle bei geänderten Entwürfen)
-## C Gesetzeslage: Textgeschichte × Zeitgeschichte × empirische Marker (CORE 3a — Genealogie/Container, Analogfälle, Zielgröße, Vorher-Nachher → Wirkungshypothesen)
-## D Folgenabschätzung (CORE 3b — Befundtabelle Wirkung·Richtung·Evidenzstufe·Quelle mit getrennter Provenienz amtlich/Verband/Studie; Kausalketten mit Evidenz je Pfeil; GESIM mit Spannen + Ladder-Caveat; **Gegenfaktual + Steelman**)
-## E CORE 1: Urteile der Superposition-Instanz (Maxime UND Gegenmaxime + Sensitivität; Einzelurteile je Gesetz + Positionen-Tableau + Synthese)
-## F CORE 2: Stimmen der Gesetzbücher (je aktivem Buch: Rohbefund + Einordnung)
-## F2 Rechtsprechungs-Auslegungsschicht (CORE 3a — Entscheidungen mit Az.; Wirkung auf jeden Rohbefund: stützt/begrenzt/differenziert; Normtext- vs. ausgelegter Befund)
-## G Konvergenzen und Divergenzen (CORE1↔CORE2, CORE3a↔Behauptungen, Evidenzstufen-Konflikte, innerhalb der Kerne — jede Aussage mit Kategorien-Label: Verdikt | Prüfauftrag | Hypothese; nur Verdikte konvergieren)
-## H Institutionen- und Kassenmatrix (wer zahlt/spart/entscheidet; wrong-pockets-Befund)
-## I Gesamturteil und Empfehlungen (+ offene Fragen, Unsicherheiten, Dissens, ggf. fehlender GESIM-Lauf als Folgeauftrag)
-## J Review (Modell, Datum, Kernpunkte, Umgang damit)
+# Audit Report: <Question / Issue>
+> Skill lebende-verfassung v4 | Date | Model | Configuration: CORE1 [a–f] / CORE2 [a,b] / CORE3 [a,b] / CORE4 [a–e], config v<N> | Status: Shadow Mode (advisory, research prototype)
+## A Factual Baseline (CORE 4a — neutral, primary sources)
+## B Current Legal Status (CORE 3a — applicable rules + mechanism; final-draft discipline: committee version/parliamentary print, synoptic status table for amended drafts)
+## C Statutory Situation: Text History × Contemporary History × Empirical Markers (CORE 3a — genealogy/container, analog cases, target metric, before-after → impact hypotheses)
+## D Impact Assessment (CORE 3b — findings table: effect · direction · evidence tier · source with separate provenance official/association/study; causal chains with evidence per arrow; GESIM with ranges + ladder caveat; **Counterfactual + Steelman**)
+## E CORE 1: Verdicts of the Superposition Instance (maxim AND counter-maxim + sensitivity; individual verdicts per law + positions tableau + synthesis)
+## F CORE 2: Voices of the Statute Books (per active statute book: raw finding + classification)
+## F2 Case-Law Interpretation Layer (CORE 3a — decisions with docket number; effect on each raw finding: supports/limits/differentiates; statutory-text vs. interpreted finding)
+## G Convergences and Divergences (CORE1↔CORE2, CORE3a↔claims, evidence-tier conflicts, conflicts within cores — every statement with category label: Verdict | Audit Mandate | Hypothesis; only verdicts converge)
+## H Institutional and Fiscal Matrix (who pays/saves/decides; wrong-pockets finding)
+## I Overall Assessment and Recommendations (+ open questions, uncertainties, dissent, missing GESIM run flagged as follow-up task if applicable)
+## J Review (model, date, key points, response)
 ```
 
 ## Limitations (Always Visible in Report)

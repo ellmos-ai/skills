@@ -135,6 +135,12 @@
           "path": "skills/assist/dev/SKILL.ru.md",
           "title": "Dev — Ассистент разработчика (ATI) (Русский)",
           "description": "Используйте для быстрого обзора программного проекта разработчиком с помощью headless-сканирования и маршрутизации к инструментам кодинга (например, 'сканировать проект', 'обзор структуры репозитория', 'направить к инструментам кода', /dev). Обеспечивает быстрый анализ структуры и маршрутизацию к CodeCommander и ellmos-code-tools без собственного хранилища. НЕ используйте для автономных циклов разработки (используйте dev/dev-soft-agent)."
+        },
+        {
+          "language": "fr",
+          "path": "skills/assist/dev/SKILL.fr.md",
+          "title": "Dev — Assistant développeur (ATI)",
+          "description": "Utiliser pour obtenir un aperçu rapide d'un projet logiciel via analyse headless et orienter vers les bons outils de développement (ex. 'scanner le projet', 'état du projet', 'lancer CodeCommander', /dev). Analyse la structure et route vers CodeCommander MCP et ellmos-code-tools sans stockage propre. NE PAS utiliser pour des pipelines de développement automatisés avancés (utiliser dev/dev-soft-agent)."
         }
       ]
     },
@@ -196,7 +202,7 @@
         {
           "language": "fr",
           "path": "skills/assist/dossier-briefing/SKILL.fr.md",
-          "title": "Dossier-Briefing (English)",
+          "title": "Dossier-Briefing",
           "description": "Utiliser pour générer un dossier de recherche structuré ou une note de synthèse sur un sujet ou une personne en Markdown (ex. 'créer un dossier de recherche', 'note de cadrage sur un sujet', 'dossier de synthèse', /dossier-briefing). Produit un modèle clair avec faits essentiels, sources et questions en suspens sans stockage permanent. Ne PAS utiliser pour condenser une décision immédiate (utiliser decision-shot) ou pour la recherche scientifique (utiliser research/research-agent)."
         }
       ]
@@ -534,7 +540,14 @@
         "ru",
         "fr"
       ],
-      "localizations": []
+      "localizations": [
+        {
+          "language": "fr",
+          "path": "skills/assist/kalender/SKILL.fr.md",
+          "title": "Calendrier (kalender)",
+          "description": "Utiliser pour enregistrer, consulter, supprimer ou exporter des rendez-vous au format ICS avec stockage SQLite local et choix de backend (ex. 'ajouter un rendez-vous', 'agenda d'aujourd'hui', 'exporter le calendrier', /kalender). Gère les événements locaux avec Flag 3 de sélection de backend. NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
+        }
+      ]
     },
     {
       "id": "assist:assist:kontaktbuch",
@@ -657,7 +670,7 @@
         {
           "language": "fr",
           "path": "skills/assist/location-suche/SKILL.fr.md",
-          "title": "Location Search (English)",
+          "title": "Recherche de lieux (location-suche)",
           "description": "Utiliser pour rechercher des lieux, adresses, restaurants ou points d'intérêt (POI) via OpenStreetMap (ex. 'trouver un restaurant à proximité', 'géocoder une adresse', 'chercher des POI en ville', /location-suche). Récupère POI et coordonnées via Nominatim et Overpass API sans clé d'API requise. Ne PAS utiliser pour le calcul d'itinéraires détaillés point à point (utiliser assist/reiseroute)."
         }
       ]
@@ -743,7 +756,14 @@
         "ru",
         "fr"
       ],
-      "localizations": []
+      "localizations": [
+        {
+          "language": "fr",
+          "path": "skills/assist/medizin-daten/SKILL.fr.md",
+          "title": "Données médicales (medizin-daten)",
+          "description": "Utiliser pour enregistrer de manière locale et strictement privée des données médicales personnelles, diagnostics, historiques de symptômes et plans d'examens (ex. 'noter un diagnostic', 'suivre des symptômes', 'enregistrer un bilan de santé', /medizin-daten). Stocke les données dans une base SQLite locale sans aucun envoi cloud. NE PAS utiliser pour un avis médical à distance ou une urgence médicale."
+        }
+      ]
     },
     {
       "id": "assist:assist:notizblock",
@@ -866,7 +886,7 @@
         {
           "language": "fr",
           "path": "skills/assist/reiseroute/SKILL.fr.md",
-          "title": "Travel Route (English)",
+          "title": "Itinéraire (reiseroute)",
           "description": "Utiliser pour calculer des itinéraires de déplacement, distances et temps de trajet d'un point A à un point B en voiture, vélo ou à pied (ex. 'calculer l'itinéraire de A à B', 'estimation du temps de trajet', 'planifier trajet à vélo', /reiseroute). Calcule les trajets et profils d'élévation via OSRM sans clé d'API. Ne PAS utiliser pour rechercher des POI à proximité (utiliser assist/location-suche)."
         }
       ]
@@ -952,7 +972,14 @@
         "ru",
         "fr"
       ],
-      "localizations": []
+      "localizations": [
+        {
+          "language": "fr",
+          "path": "skills/assist/tageszeitung/SKILL.fr.md",
+          "title": "Quotidien (tageszeitung)",
+          "description": "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
+        }
+      ]
     },
     {
       "id": "assist:assist:transkription",
@@ -972,7 +999,14 @@
         "ru",
         "fr"
       ],
-      "localizations": []
+      "localizations": [
+        {
+          "language": "fr",
+          "path": "skills/assist/transkription/SKILL.fr.md",
+          "title": "Transcription audio/vidéo (transkription)",
+          "description": "Utiliser pour transcrire des fichiers audio ou vidéo locaux en texte hors ligne (ex. 'transcrire ce fichier audio', 'convertir une note vocale en texte', 'retranscrire un enregistrement', /transkription). Détecte automatiquement Whisper ou Vosk avec mode dry-run de repli. NE PAS utiliser pour télécharger des sous-titres YouTube en ligne (utiliser utilities/video-transcriber)."
+        }
+      ]
     },
     {
       "id": "assist:assist:voice",
@@ -1095,7 +1129,7 @@
         {
           "language": "fr",
           "path": "skills/assist/wetter/SKILL.fr.md",
-          "title": "Weather (English)",
+          "title": "Météo (wetter)",
           "description": "Utiliser pour consulter la météo actuelle ou les prévisions à 3 jours pour une ville ou des coordonnées (ex. 'quel temps fait-il à...', 'prévisions météo pour demain', 'risque de pluie aujourd'hui', /wetter). Récupère la météo en direct et les prévisions via wttr.in sans clé d'API. Ne PAS utiliser pour des données climatiques historiques ou des calculs astronomiques."
         }
       ]
@@ -1158,7 +1192,7 @@
         {
           "language": "fr",
           "path": "skills/dev/bugfix-protocol/SKILL.fr.md",
-          "title": "Bugfix Protocol: Systematic 6-Phase Debugging (English)",
+          "title": "Protocole de correction de bugs : débogage systématique en 6 phases",
           "description": "À utiliser pour TOUT signalement de bug ou demande de débogage, avant de modifier le code, même si la cause semble évidente : résultats ou totaux erronés ('les clients paient trop', 'X renvoie -1 au lieu de 0'), erreurs, plantages, exceptions, tests en échec, régressions, 'débogue ça', 'trouve et corrige le bug', 'pourquoi ... se produit-il', /bugfix. Procède en six phases au lieu de corriger la première ligne suspecte : vérifications rapides, diagnostic, un test minimal qui reproduit le bug, une correction à la cause racine plutôt qu'au symptôme, vérification et un court rapport de bug (cause racine, correction, vérification) que l'utilisateur peut contrôler. Particulièrement utile quand le symptôme apparaît loin de la cause, pour les régressions et les défaillances intermittentes. NE PAS utiliser pour un balayage systématique de bugs inconnus dans toute une base de code (bugsweep)."
         }
       ]
@@ -7867,7 +7901,7 @@
         {
           "language": "en",
           "path": "skills/utilities/lebende-verfassung/SKILL.en.md",
-          "title": "Living Constitution — Neutral Auditing Instance (5-CORE Architecture, v4)",
+          "title": "Living Constitution — Neutral Auditing Authority (5-CORE Architecture, v4)",
           "description": "Neutral moral-legal auditing authority for politics and decisions — the runnable prototype of the research project \"The Position of the Unborn\" (Shadow Mode Stage 1). Use this skill whenever a political decision, draft law, reform, budget resolution, or societal issue is to be analyzed, audited, or evaluated — also for phrases like \"check from the perspective of future generations\", \"law pass\", \"what does the Basic Law say\", \"superposition check\", \"legislative history/container analysis\", \"impact assessment\", \"analyze this reform\", \"living constitution\", or when the user brings a policy question requesting a neutral, multi-stage assessment. Orchestrates the 5-CORE architecture (config.json): moral superposition instance, statute book embodiments, two-stage impact assessment (retrospective/prospective with evidence hierarchy), knowledge handler with local storage, configurable workflow."
         },
         {
