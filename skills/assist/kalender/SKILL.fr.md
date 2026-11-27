@@ -1,11 +1,11 @@
 ---
 name: kalender
-version: 0.1.1
+version: 0.3.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-22
-description: "Utiliser pour enregistrer, consulter, supprimer ou exporter des rendez-vous au format ICS avec stockage SQLite local et choix de backend (ex. 'ajouter un rendez-vous', 'agenda d'aujourd'hui', 'exporter le calendrier', /kalender). Gère les événements locaux avec Flag 3 de sélection de backend. NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
+updated: 2026-11-27
+description: "Utiliser pour gérer, refléter ou consulter des rendez-vous, des silos de calendrier séparés, des imports TerminPilot/ICS ou des feuilles et rapports graphiques (HTML/PDF/MD/TXT/ICS) (ex. 'ajouter un rendez-vous', 'agenda 2027 en PDF', /kalender). NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -157,9 +157,21 @@ CREATE TABLE IF NOT EXISTS events (
 
 ---
 
+## Configuration et modèles (`kalender-config.json`, `templates/`)
+
+Les silos par défaut, le calendrier standard, les formats de date/heure, le début de semaine, les formats d'export et les chemins de modèles sont externalisés de manière neutre dans [kalender-config.json](kalender-config.json) (auto-réparation vers les valeurs par défaut et sauvegarde `.corrupt.<ts>.bak` avec `--repair` / `check-config --repair`). Les sorties HTML, Markdown et texte utilisent des modèles remplaçables sous `templates/` (`month-sheet.template.html`, `week-sheet.template.html`, `agenda-report.template.html`, `agenda-report.template.md`, `agenda-report.template.txt`, surchargeables via `templates.custom_dir`).
+
+```bash
+python kalender_core.py check-config [--repair] [--json]
+```
+
+---
+
 ## Journal des modifications
 
 | Version | Date | Modification |
 |---|---|---|
+| 0.3.0 | 2026-11-27 | Configuration externe (`kalender-config.json`) avec auto-réparation (`check-config --repair`, `.corrupt.<ts>.bak`) et modèles remplaçables (`templates/*.template.{html,md,txt}`) |
+| 0.2.0 | 2026-11-27 | Silos multi-calendriers (`calendars`, `mirror`, `sync-mirrors`, `transfer`, `clone`), import TerminPilot/ICS idempotent (`import-ics`), requêtes étendues et générateur de rapports (`html`, `pdf`, `md`, `txt`, `ics`) |
 | 0.1.1 | 2026-11-22 | Avis de langue corrigé |
 | 0.1.0 | 2026-06-22 | Création initiale — logique Flag-3, backend local, export ICS |

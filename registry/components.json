@@ -545,7 +545,7 @@
           "language": "fr",
           "path": "skills/assist/kalender/SKILL.fr.md",
           "title": "Calendrier (kalender)",
-          "description": "Utiliser pour enregistrer, consulter, supprimer ou exporter des rendez-vous au format ICS avec stockage SQLite local et choix de backend (ex. 'ajouter un rendez-vous', 'agenda d'aujourd'hui', 'exporter le calendrier', /kalender). Gère les événements locaux avec Flag 3 de sélection de backend. NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
+          "description": "Utiliser pour gérer, refléter ou consulter des rendez-vous, des silos de calendrier séparés, des imports TerminPilot/ICS ou des feuilles et rapports graphiques (HTML/PDF/MD/TXT/ICS) (ex. 'ajouter un rendez-vous', 'agenda 2027 en PDF', /kalender). NE PAS utiliser pour la planification des jalons de projet logiciel (utiliser dev/dev-cycle)."
         }
       ]
     },
@@ -977,7 +977,7 @@
           "language": "fr",
           "path": "skills/assist/tageszeitung/SKILL.fr.md",
           "title": "Quotidien (tageszeitung)",
-          "description": "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
+          "description": "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions HTML, Markdown et PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
         }
       ]
     },

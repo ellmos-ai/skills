@@ -42,8 +42,9 @@
     "lawyer_review_required_for_external_contacts_or_participants": true
   },
   "templates": {
-    "data_flow": "../references/DATA-FLOW-TEMPLATE.md",
-    "privacy_notice": "../references/PRIVACY-TEMPLATE.md",
-    "deployment_audit": "./deployment-audit.template.md"
+    "dir": "./templates",
+    "data_flow": "./references/DATA-FLOW-TEMPLATE.md",
+    "privacy_notice": "./references/PRIVACY-TEMPLATE.md",
+    "deployment_audit": "deployment-audit.template.md"
   }
 }

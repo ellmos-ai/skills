@@ -1,11 +1,11 @@
 ---
 name: tageszeitung
-version: 0.1.1
+version: 0.2.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-22
-description: "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
+updated: 2026-11-27
+description: "Utiliser pour assembler un journal quotidien personnalisé ou une revue de presse à partir de flux RSS et de sources web (ex. 'créer le journal du jour', 'synthétiser les actualités du matin', 'exporter la revue de presse en PDF', /tageszeitung). Centralise les flux dans une base SQLite locale et produit des éditions HTML, Markdown et PDF via Edge Headless. Ne PAS utiliser pour les revues de littérature académique (utiliser research/research-agent)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
@@ -149,9 +149,16 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
+## Configuration et modèles (`zeitung-config.json`, `templates/`)
+
+Les rubriques (`sections`), limites d'articles (`max_per_category`, `summary_max_chars`, `fetch_limit`), délais réseau et options de mise en page résident dans [zeitung-config.json](zeitung-config.json) (auto-réparation vers les valeurs par défaut + `.corrupt.<ts>.bak` avec `--repair` ; les entrées existantes de `assist/prefs.json` restent compatibles). Le rendu utilise des modèles remplaçables sous [templates/ausgabe.template.html](templates/ausgabe.template.html) (`html`/PDF) et [templates/ausgabe.template.md](templates/ausgabe.template.md) (`--format md`).
+
+---
+
 ## Journal des modifications
 
 | Version | Date | Modification |
 |---|---|---|
+| 0.2.0 | 2026-11-27 | Ajout de `zeitung-config.json` (rubriques, limites, mise en page, auto-réparation), des modèles `templates/ausgabe.template.{html,md}` et de `tests/test_tageszeitung.py` |
 | 0.1.1 | 2026-11-22 | Avis de langue corrigé |
 | 0.1.0 | 2026-06-22 | Création initiale — schéma BACH porté, stockage propre, feedparser optionnel |
