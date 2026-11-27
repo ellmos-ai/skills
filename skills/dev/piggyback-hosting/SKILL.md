@@ -1,6 +1,6 @@
 ---
 name: piggyback-hosting
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-02
@@ -181,8 +181,10 @@ nicht in ihrer Art — was zugleich die ehrlichere Aussage über das Muster ist.
    Checkliste behandeln, nicht als Freigabe — vor dem ersten öffentlichen
    Lauf einen Anwalt einbeziehen.
 
-## Referenzen
+## Referenzen & Konfiguration
 
+- `piggyback-config.json` — ausgelagerte Server-Modi (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`-Stub), Browser-Speicherstufen und Sicherheits-/DSGVO-Invarianten.
+- `templates/deployment-audit.template.md` — kompakte Deployment-Audit-Checkliste für Moduswahl, Key-Maskierung und Export/Import-Nachweise.
 - `references/DATA-FLOW-TEMPLATE.md` — Vorlage und Verfahren für einen
   Data-Flow-Plan: jede Zeile braucht ein file:line, sonst ist es eine
   Vermutung, kein Befund.

@@ -1,6 +1,6 @@
 ---
 name: full-after-care
-version: 1.0.1
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -201,7 +201,16 @@ Ergänze `_after-care/LOG.md` um einen Eintrag mit der Stufe `full`:
 - [ ] Store-/Registry-Sprachfelder mitgezogen.
 - [ ] Laufprotokoll-Eintrag mit Stufe `full` geschrieben.
 
+## Konfiguration & Rechtscheck-Vorlage
+
+- **Externe Konfiguration:** [full-care-checks.json](full-care-checks.json) bündelt Rechtscheck-Wiedervorlage (`365` Tage), Auslösekriterien, Cross-Org-Beziehungstypen und App-i18n-Prüfpunkte.
+- **Vorlage:** [templates/rechtscheck.template.md](templates/rechtscheck.template.md) liefert die standardisierte Struktur für `_after-care/RECHTSCHECK.md` und den `full`-Protokolleintrag.
+
 ## Changelog
+
+### 1.1.0 (2026-11-27)
+- Rechtscheck-, Cross-Org- und App-i18n-Prüfparameter in `full-care-checks.json` ausgelagert.
+- Vorlage `templates/rechtscheck.template.md` ergänzt.
 
 ### 1.0.0 (2026-07-24)
 - Initiale Version. Stufe 2 der Repo-Nachpflege, aufbauend auf `surface-after-care`.

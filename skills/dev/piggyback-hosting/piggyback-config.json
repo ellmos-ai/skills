@@ -1,0 +1,49 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "piggyback-hosting",
+  "version": "1.1.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "default_mode": "local",
+  "modes": {
+    "local": {
+      "api_key_owner": "local_user",
+      "data_location": "local_machine",
+      "user_accounts_required": false
+    },
+    "huckepack-gift": {
+      "api_key_owner": "host",
+      "data_location": "visitor_browser",
+      "user_accounts_required": false
+    },
+    "huckepack-only-host": {
+      "api_key_owner": "visitor_byok",
+      "data_location": "visitor_browser",
+      "user_accounts_required": false,
+      "require_masked_key_input": true,
+      "forbid_key_logging": true
+    },
+    "pay-membership": {
+      "api_key_owner": "host_billed",
+      "data_location": "server",
+      "user_accounts_required": true,
+      "status": "stub_only"
+    }
+  },
+  "browser_storage_tiers": ["sqlite_wasm_opfs", "indexeddb", "localstorage_prefs_only"],
+  "invariants": {
+    "export_import_mandatory": true,
+    "evidence_requires_file_line_or_not_found": true,
+    "operator_remains_gdpr_controller_art_4_7": true,
+    "third_party_contacts_require_art_14_and_dpa": true,
+    "lawyer_review_required_for_external_contacts_or_participants": true
+  },
+  "templates": {
+    "data_flow": "../references/DATA-FLOW-TEMPLATE.md",
+    "privacy_notice": "../references/PRIVACY-TEMPLATE.md",
+    "deployment_audit": "./deployment-audit.template.md"
+  }
+}

@@ -1,10 +1,10 @@
 ---
 name: ellmos-security
-version: 0.1.0
+version: 0.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Use when planning a security review, triaging a vulnerability, or identifying the right skill within the sec-* security family (e.g. 'security review', 'check repo for vulnerabilities', 'which security skill', /ellmos-security). Serves as entry point and router across threat modeling, scanning, triage, fixing, verification, and disclosure. Do NOT use for directly patching code (use sec-fix) or running scanners (use sec-scan)."
 standalone: true
 anthropic_compatible: true
@@ -72,7 +72,7 @@ Adapters never skip validation: mapped findings start as `candidate`. Exact mapp
 
 ## Quick start
 
-**Whole repo:** `sec-threat-model` (short) -> `sec-scan` -> `python scripts/secfind.py validate findings.json coverage.json` (script in `sec-scan`) -> `sec-validate` with another provider -> `sec-triage` -> `sec-report`.
+**Whole repo:** `sec-threat-model` (short) -> `sec-scan` -> `python ../sec-scan/scripts/secfind.py validate findings.json coverage.json` -> `sec-validate` with another provider -> `sec-triage` -> `sec-report`.
 
 **Pull request:** `sec-diff-scan` on the diff -> findings in the PR go straight to the author; if confirmed `sec-validate`, then as above. Check coverage in `coverage.json`: having seen only the diff does not mean "code is safe".
 
@@ -82,7 +82,16 @@ Adapters never skip validation: mapped findings start as `candidate`. Exact mapp
 
 Own code only · lock before every write · patches instead of commits · no secret values in outputs · cost and egress warning before big runs · independent validation · a result without `coverage.json` is not a result.
 
+## Configuration & Audit Checklist
+
+- **External Routing Config:** [security-gates.json](security-gates.json) declares phase routing, provider adapter mapping, shared contract/validator paths (`../sec-scan/scripts/secfind.py`), and mandatory invariants.
+- **Template:** [templates/security-audit-checklist.template.md](templates/security-audit-checklist.template.md) for scope, lock, and gate sign-off.
+
 ## Changelog
+
+### 0.2.0 (2026-11-27)
+- Externalized phase routing, invariants, and adapter defaults into `security-gates.json`.
+- Added `templates/security-audit-checklist.template.md` and fixed quick-start validator path to `../sec-scan/scripts/secfind.py`.
 
 ### 0.1.0 (2026-10-31)
 - Initial version of the router.

@@ -1,10 +1,10 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.7.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-11-09
+updated: 2026-11-27
 aliases: [repo-after-care, repo-pflege, after-care, repo-nachpflege, repo-wartung]
 description: "Verwenden, wenn ein bestehendes GitHub-Repository gepflegt, aufgeräumt, aktualisiert oder optisch aufgewertet werden soll (z. B. 'Repo-Pflege', 'after care', 'Nachpflege', 'Repo auf Stand bringen', 'aufräumen und pushen', /surface-after-care). Führt eine leichte Stufe-1-Pflege durch: Distributionsflächen prüfen, Topics setzen, Privacy-Gate ausführen, README-Aussagen mit dem Code abgleichen, Banner ergänzen, Sprachfassungen vervollständigen und offene Issues/PRs sichten. NICHT verwenden für tiefgehende Audits inkl. Rechtscheck und Orga-Querverweisen (dafür full-after-care) oder Erstveröffentlichungen (dafür github-repo-care)."
 standalone: true
@@ -425,7 +425,16 @@ Das Protokoll erspart der nächsten Runde, dieselben Entscheidungen neu zu treff
 - [ ] Nicht behobene Befunde als Aufgaben im ordnerlokalen Aufgabensystem eingetragen.
 - [ ] Laufprotokoll in `_after-care/LOG.md` geschrieben.
 
+## Konfiguration & Berichtsvorlage
+
+- **Externe Konfiguration:** [after-care-checks.json](after-care-checks.json) bündelt Topics-Spannen, README-Zeilenlimit (`400`), Standard-Sprachmatrix, Ruff-Regelpins und Privacy-Suchmuster zentral als anpassbares JSON (mit Fallback- und Backup-Konvention gemäß `self_healing`).
+- **Vorlage:** [templates/after-care-report.template.md](templates/after-care-report.template.md) strukturiert den Abschluss- und `_after-care/LOG.md`-Bericht.
+
 ## Changelog
+
+### 1.7.0 (2026-11-27)
+- Prüfschwellen, Standard-Sprachmatrix, Ruff-Pinning-Defaults und Privacy-Muster in `after-care-checks.json` ausgelagert.
+- Austauschbare Berichtsvorlage `templates/after-care-report.template.md` ergänzt.
 
 ### 1.6.0 (2026-07-24)
 - Regel ergänzt: Eine inhaltliche Korrektur gilt für alle Flächen. Empirisch gelernt — eine

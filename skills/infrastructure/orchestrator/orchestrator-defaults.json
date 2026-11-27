@@ -1,0 +1,57 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "orchestrator",
+  "version": "1.5.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "assume_critical_spar_profile",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "config_cascade": ["config.json", "profiles.json", "orchestrator-defaults.json"],
+  "default_profile": "spar",
+  "profiles": {
+    "solo": {
+      "max_parallel_workers": 1,
+      "operating_mode": "alleine",
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "teammate_model_whitelist": []
+    },
+    "spar": {
+      "max_parallel_workers": 2,
+      "operating_mode": "delegation",
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "teammate_model_whitelist": []
+    },
+    "burst": {
+      "max_parallel_workers": 4,
+      "operating_mode": "orchestrator",
+      "default_worker_model": null,
+      "escalate_model_on": ["sicherheit", "architektur", "merge-konflikt"],
+      "teammate_model_whitelist": []
+    }
+  },
+  "token_tracker_defaults": {
+    "enabled": false,
+    "downgrade_when_credit_below_pct": 50,
+    "upgrade_when_credit_above_pct": 80,
+    "on_unreadable": "assume_critical"
+  },
+  "contract_required_fields": [
+    "id",
+    "goal",
+    "inputs",
+    "positive_scope",
+    "negative_scope",
+    "success_criterion",
+    "evidence",
+    "return_format"
+  ],
+  "operator_regime_invariants": {
+    "explicit_worker_model_required": true,
+    "verify_destination_readback": true,
+    "never_discard_foreign_changes": true,
+    "default_report_lines_range": [2, 6]
+  }
+}

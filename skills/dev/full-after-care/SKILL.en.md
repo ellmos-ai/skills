@@ -1,6 +1,6 @@
 ---
 name: full-after-care
-version: 1.0.1
+version: 1.1.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
@@ -201,7 +201,16 @@ Append an entry with the level `full` to `_after-care/LOG.md`:
 - [ ] Store/registry language fields updated.
 - [ ] Execution log entry with level `full` written.
 
+## Configuration & Legal Check Template
+
+- **External Configuration:** [full-care-checks.json](full-care-checks.json) externalizes the annual legal review interval (`365` days), trigger criteria, cross-org link relation types, and app i18n parity checks.
+- **Template:** [templates/rechtscheck.template.md](templates/rechtscheck.template.md) provides the structured `_after-care/RECHTSCHECK.md` and `full` execution log format.
+
 ## Changelog
+
+### 1.1.0 (2026-11-27)
+- Externalized legal check, cross-org, and app i18n check parameters into `full-care-checks.json`.
+- Added `templates/rechtscheck.template.md`.
 
 ### 1.0.0 (2026-07-24)
 - Initial version. Level 2 of repo maintenance, building on `surface-after-care`.

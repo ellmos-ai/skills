@@ -1,0 +1,37 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "ellmos-security",
+  "version": "0.2.0",
+  "contract": "../sec-scan/references/contract.md",
+  "validator_script": "../sec-scan/scripts/secfind.py",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "phases": [
+    {"phase": "threat_model", "skill": "sec-threat-model", "when": "before_first_scan"},
+    {"phase": "scan", "skill": "sec-scan", "when": "repo_or_path"},
+    {"phase": "diff_scan", "skill": "sec-diff-scan", "when": "pull_request_or_diff"},
+    {"phase": "validate", "skill": "sec-validate", "when": "confirm_or_refute_candidates"},
+    {"phase": "triage", "skill": "sec-triage", "when": "severity_and_priority_vs_policy"},
+    {"phase": "fix", "skill": "sec-fix", "when": "patch_on_explicit_request"},
+    {"phase": "verify_fix", "skill": "sec-verify-fix", "when": "verify_patch_and_regression"},
+    {"phase": "track", "skill": "sec-track", "when": "issue_ticket_or_private_advisory"},
+    {"phase": "report", "skill": "sec-report", "when": "markdown_and_sarif_output"}
+  ],
+  "cross_cutting_skills": ["sec-policy", "sec-hardening", "sec-writeup", "sec-supplychain"],
+  "invariants": {
+    "own_code_only": true,
+    "lock_before_write": true,
+    "patches_not_commits": true,
+    "mask_secret_values": true,
+    "require_coverage_json": true,
+    "independent_validation_required": true
+  },
+  "adapters": {
+    "claude": {"native_tool": "/claude-security", "starts_as": "candidate"},
+    "codex": {"native_tool": "codex-security", "starts_as": "candidate"},
+    "gemini_kimi": {"native_tool": null, "fallback_skill": "sec-scan", "starts_as": "candidate"}
+  }
+}

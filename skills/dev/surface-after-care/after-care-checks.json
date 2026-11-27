@@ -1,0 +1,37 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "surface-after-care",
+  "version": "1.7.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "checks": {
+    "topics_min": 5,
+    "topics_max": 12,
+    "readme_max_lines": 400,
+    "banner_size_px": [1200, 300],
+    "standard_languages": ["de", "en", "es", "zh", "ja", "ru"],
+    "ruff_pinned_defaults": ["E4", "E7", "E9", "F"],
+    "privacy_scan_checks": [
+      "windows_user_paths",
+      "posix_home_paths",
+      "api_tokens_and_keys",
+      "pem_private_keys",
+      "utf8_mojibake"
+    ],
+    "internal_structure_markers": [".SOFTWARE", ".RESEARCH", "_control-center"],
+    "forbidden_tracked_artifacts": ["AUFGABEN.txt", "Plan.txt", "TODO-intern.md", "_after-care/"]
+  },
+  "locks": {
+    "respect_scope": true,
+    "allow_branch_on_publish_freeze": true,
+    "forbid_remote_metadata_under_publish_freeze": true
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft"
+  }
+}

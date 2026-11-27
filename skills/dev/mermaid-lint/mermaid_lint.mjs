@@ -2,7 +2,8 @@
 // mermaid_lint.mjs — prueft alle ```mermaid-Bloecke unter einem Pfad mit dem echten
 // Mermaid-Parser (mermaid.parse), ohne Browser/Puppeteer.
 //
-//   node mermaid_lint.mjs <repo-pfad> [--json]
+//   node mermaid_lint.mjs <repo-pfad> [...] [--json] [--config <datei.json>] [--repair]
+//   node mermaid_lint.mjs --from <liste.txt> [--json]
 //
 // Exit 0 = alle Bloecke parsen, 1 = mindestens ein Block defekt.
 //
@@ -25,15 +26,26 @@ globalThis.SVGElement = _dom.window.SVGElement;
 const mermaid = (await import('mermaid')).default;
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
+import { loadMermaidLintConfig } from './lint_config.mjs';
 
-mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+const rawArgs = process.argv.slice(2);
+const cfgFlagIdx = rawArgs.indexOf('--config');
+const customConfigPath = (cfgFlagIdx > -1 && rawArgs[cfgFlagIdx + 1]) ? rawArgs[cfgFlagIdx + 1] : null;
+const repairConfig = rawArgs.includes('--repair');
+const { config: CFG, warnings: CONFIG_WARNINGS } = loadMermaidLintConfig({
+  configPath: customConfigPath,
+  repair: repairConfig,
+});
+
+mermaid.initialize({
+  startOnLoad: Boolean(CFG.mermaid?.start_on_load ?? false),
+  securityLevel: String(CFG.mermaid?.security_level || 'loose'),
+});
 
 // Fehlertexte, die die Node-Umgebung verursacht und nicht das Diagramm
-const ENV_ERRORS = [/DOMPurify/i, /addHook is not a function/i, /document is not defined/i,
-  /window is not defined/i, /getBBox/i, /createElementNS/i];
-
-const IGNORE = new Set(['.git', 'node_modules', 'dist', 'build', '.venv', 'venv',
-  '__pycache__', '.next', 'vendor', 'target', '.tox', 'site-packages']);
+const ENV_ERRORS = (CFG.scan?.env_error_patterns || []).map(p => new RegExp(p, 'i'));
+const IGNORE = new Set(CFG.scan?.ignore_dirs || []);
+const EXTENSIONS = (CFG.scan?.file_extensions || ['.md', '.markdown']).map(e => e.toLowerCase());
 
 function walk(dir, out = []) {
   let entries;
@@ -42,7 +54,7 @@ function walk(dir, out = []) {
     if (IGNORE.has(e.name)) continue;
     const p = join(dir, e.name);
     if (e.isDirectory()) walk(p, out);
-    else if (e.isFile() && /\.(md|markdown)$/i.test(e.name)) out.push(p);
+    else if (e.isFile() && EXTENSIONS.some(ext => e.name.toLowerCase().endsWith(ext))) out.push(p);
   }
   return out;
 }
@@ -68,7 +80,7 @@ function extractBlocks(text) {
 // liest der Lexer als Statement-Terminator, alles danach wird neue Anweisung.
 // Wird auch dann gemeldet, wenn der Parser die Zeile noch durchlaesst -- in
 // quotierten Flowchart-Labels sind Entities dagegen unproblematisch.
-const ENTITY_RE = /&[a-zA-Z][a-zA-Z0-9]*;/g;
+const ENTITY_RE = new RegExp(CFG.scan?.sequence_entity_regex || '&[a-zA-Z][a-zA-Z0-9]*;', 'g');
 
 function entityWarnings(body) {
   const lines = body.split('\n');
@@ -83,14 +95,21 @@ function entityWarnings(body) {
   return out;
 }
 
-const asJson = process.argv.includes('--json');
-let targets = process.argv.slice(2).filter(a => !a.startsWith('--'));
+const asJson = rawArgs.includes('--json');
+const skipValues = new Set();
+const fromIdx = rawArgs.indexOf('--from');
+if (fromIdx > -1 && rawArgs[fromIdx + 1]) skipValues.add(fromIdx + 1);
+if (cfgFlagIdx > -1 && rawArgs[cfgFlagIdx + 1]) skipValues.add(cfgFlagIdx + 1);
+
+let targets = rawArgs.filter((a, idx) => !a.startsWith('--') && !skipValues.has(idx));
 // --from <datei>: eine Pfad pro Zeile (umgeht Shell-Escaping von Windows-Backslashes)
-const fromIdx = process.argv.indexOf('--from');
-if (fromIdx > -1 && process.argv[fromIdx + 1]) {
-  targets = readFileSync(process.argv[fromIdx + 1], 'utf8').split(/\r?\n/).filter(Boolean);
+if (fromIdx > -1 && rawArgs[fromIdx + 1]) {
+  targets = readFileSync(rawArgs[fromIdx + 1], 'utf8').split(/\r?\n/).filter(Boolean);
 }
-if (!targets.length) { console.error('Pfad fehlt: node mermaid_lint.mjs <repo-pfad> [...] | --from <liste.txt> [--json]'); process.exit(2); }
+if (!targets.length) {
+  console.error('Pfad fehlt: node mermaid_lint.mjs <repo-pfad> [...] | --from <liste.txt> [--json] [--config <datei.json>]');
+  process.exit(2);
+}
 
 async function lintTarget(target) {
   let isDir = false;
@@ -142,6 +161,10 @@ async function lintTarget(target) {
   }
   return { target, files: files.length, filesWithBlocks: fileWithBlocks, blocks: blockCount,
     broken: findings.length, findings, envIssues, warnings };
+}
+
+for (const w of CONFIG_WARNINGS) {
+  console.error(`[CONFIG-WARN] ${w}`);
 }
 
 const results = [];

@@ -1,0 +1,52 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "mermaid-lint",
+  "version": "1.1.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "mermaid": {
+    "start_on_load": false,
+    "security_level": "loose"
+  },
+  "scan": {
+    "ignore_dirs": [
+      ".git",
+      "node_modules",
+      "dist",
+      "build",
+      ".venv",
+      "venv",
+      "__pycache__",
+      ".next",
+      "vendor",
+      "target",
+      ".tox",
+      "site-packages"
+    ],
+    "file_extensions": [".md", ".markdown"],
+    "sequence_entity_regex": "&[a-zA-Z][a-zA-Z0-9]*;",
+    "env_error_patterns": [
+      "DOMPurify",
+      "addHook is not a function",
+      "document is not defined",
+      "window is not defined",
+      "getBBox",
+      "createElementNS"
+    ]
+  },
+  "readback": {
+    "channel": "msedge",
+    "launch_args": ["--disable-gpu", "--no-sandbox"],
+    "retries": 2,
+    "goto_timeout_ms": 60000,
+    "render_wait_ms": 8000,
+    "error_patterns": [
+      "Unable to render rich display",
+      "Parse error on line",
+      "Syntax error in (?:text|graph)"
+    ]
+  }
+}

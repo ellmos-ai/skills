@@ -1,10 +1,10 @@
 ---
 name: ellmos-security
-version: 0.1.0
+version: 0.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Verwenden, wenn ein Sicherheitsaudit geplant, eine Schwachstelle gemeldet oder ein passender Security-Skill der sec-*-Familie gesucht wird (z. B. 'Sicherheitsprüfung', 'Repo auf Schwachstellen prüfen', 'welcher Security-Skill', /ellmos-security). Fungiert als zentraler Wegweiser und Router für Bedrohungsanalyse, Scans, Triage, Fixes, Verifikation und Offenlegung. NICHT verwenden für die direkte Ausführung von Patches (dafür sec-fix) oder Scans (dafür sec-scan)."
 standalone: true
 anthropic_compatible: true
@@ -72,7 +72,7 @@ Adapter überspringen nie die Validierung: abgebildete Funde starten als `candid
 
 ## Schnellstart
 
-**Ganzes Repo:** `sec-threat-model` (kurz) -> `sec-scan` -> `python scripts/secfind.py validate findings.json coverage.json` (Skript in `sec-scan`) -> `sec-validate` mit anderem Anbieter -> `sec-triage` -> `sec-report`.
+**Ganzes Repo:** `sec-threat-model` (kurz) -> `sec-scan` -> `python ../sec-scan/scripts/secfind.py validate findings.json coverage.json` -> `sec-validate` mit anderem Anbieter -> `sec-triage` -> `sec-report`.
 
 **Pull Request:** `sec-diff-scan` auf den Diff -> Funde des PR direkt an den Autor; bei Bestätigung `sec-validate`, danach wie oben. Abdeckung in `coverage.json` prüfen: nur den Diff gesehen heißt nicht "Code sicher".
 
@@ -82,7 +82,16 @@ Adapter überspringen nie die Validierung: abgebildete Funde starten als `candid
 
 Nur eigener Code · Lock vor jedem Schreiben · Patches statt Commits · keine Geheimnis-Werte in Ausgaben · Kosten- und Egress-Warnung vor großen Läufen · unabhängige Validierung · ein Ergebnis ohne `coverage.json` ist keins.
 
+## Konfiguration & Audit-Checkliste
+
+- **Externe Routing-Konfiguration:** [security-gates.json](security-gates.json) beschreibt Phasen-Routing, Adapter-Zuordnung, Pflicht-Invarianten und den gemeinsamen Vertrags-/Validator-Pfad (`../sec-scan/scripts/secfind.py`).
+- **Vorlage:** [templates/security-audit-checklist.template.md](templates/security-audit-checklist.template.md) für Umfangs-, Lock- und Invarianten-Freigaben.
+
 ## Changelog
+
+### 0.2.0 (2026-11-27)
+- Phasen-Routing, Invarianten und Adapter-Defaults in `security-gates.json` ausgelagert.
+- Checklisten-Vorlage `templates/security-audit-checklist.template.md` ergänzt und Validator-Pfad im Schnellstart auf `../sec-scan/scripts/secfind.py` präzisiert.
 
 ### 0.1.0 (2026-10-31)
 - Erstfassung des Routers.
