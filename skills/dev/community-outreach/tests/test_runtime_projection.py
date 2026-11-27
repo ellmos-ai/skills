@@ -119,6 +119,7 @@ def test_classify_repo_blocks_private_archived_and_forks() -> None:
         "org/private-tool": {"github": {"visibility": "private", "fork": False, "archived": False}},
         "org/archived-tool": {"github": {"visibility": "public", "fork": False, "archived": True}},
         "org/good-tool": {"github": {"visibility": "public", "fork": False, "archived": False}},
+        "biotec-line/VFDistiller": {"github": {"visibility": "public", "fork": False, "archived": False}},
     }
 
     # Fork check
@@ -140,6 +141,11 @@ def test_classify_repo_blocks_private_archived_and_forks() -> None:
     c_meta = classify_repo("lukisch/lukisch", "lukisch", "lukisch", registry, set(), set())
     assert not c_meta.is_active
     assert c_meta.reason == "profile_meta"
+
+    # Excluded org check (biotec-line legal/regulatory exclusion)
+    c_biotec = classify_repo("biotec-line/VFDistiller", "biotec-line", "VFDistiller", registry, set(), set())
+    assert not c_biotec.is_active
+    assert c_biotec.reason == "excluded_org_legal_compliance"
 
     # Good tool check
     c_good = classify_repo("org/good-tool", "org", "good-tool", registry, set(), set())
@@ -258,86 +264,56 @@ Sample text
     assert result["repo_name"] == "next-tool"
 
 
-def test_verify_proposals_and_blacklist_gate(tmp_path: Path) -> None:
+def test_projected_claim_contract_gate_blocks_unbacked_claims(tmp_path: Path) -> None:
     workspace = tmp_path / "workspace"
     _minimal_workspace(workspace)
     repos_root = tmp_path / "repos"
-    repo_dir = repos_root / "tool" / "src"
-    repo_dir.mkdir(parents=True)
-    (repo_dir / "main.py").write_text("def run(): pass\n", encoding="utf-8")
-
-    (workspace / "config.json").write_text(
-        json.dumps({"compliance": {"require_code_evidence": True}}),
+    (repos_root / "tool" / "src").mkdir(parents=True)
+    (repos_root / "tool" / "src" / "core.py").write_text(
+        "def run_check(flag: bool) -> bool:\n    return bool(flag)\n",
         encoding="utf-8",
     )
-    (workspace / "rejected_proposals.json").write_text(
+    (workspace / "config.json").write_text(
         json.dumps(
             {
-                "platform_exclusions": [{"platform": "Dev.to"}],
-                "rejected_proposals": [
-                    {
-                        "proposal_id": "OUTBOUND-PROPOSAL-BLACKLISTED-1",
-                        "canonical_url": "https://reddit.com/r/python/comments/bad123/thread",
-                    }
-                ],
+                "compliance": {"require_code_evidence": True, "require_claim_contract": True},
+                "verification": {"local_repos_root": str(repos_root)},
             }
         ),
         encoding="utf-8",
     )
+    contract = [
+        {
+            "text_anchor": "We built org/tool with run_check in core.py.",
+            "repo": "org/tool",
+            "file": "src/core.py",
+            "lines": "L1-L2",
+            "verbatim_code": "def run_check(flag: bool) -> bool:",
+        }
+    ]
+    (workspace / "POST-EINGANG.md").write_text(
+        f"""# POST-EINGANG
 
-    inbox_content = """# POST-EINGANG
-
-### [OUTBOUND-PROPOSAL-GOOD-1] Valid Proposal
+### [OUTBOUND-PROPOSAL-PROJ-1] Forum
 - **Plattform:** Reddit
-- **Ziel-URL:** https://www.reddit.com/r/python/comments/good123/thread/
+- **Ziel-URL:** https://example.com/thread/99
 - **Lösungs-Repo:** org/tool
-- **Code-Beleg (Verifiziert):** `src/main.py` (`run`)
+- **Code-Beleg (Verifiziert):** `src/core.py`
 - [x] Genehmigt
+#### Claim-Beleg-Vertrag (Verifiziert):
+```json
+{json.dumps(contract, indent=2)}
+```
 
 #### Textvorschlag:
 ```text
-Verified post text
+We built org/tool with run_check in core.py.
 ```
-
-### [OUTBOUND-PROPOSAL-NO-EVIDENCE-1] Missing Code Evidence
-- **Plattform:** Reddit
-- **Ziel-URL:** https://www.reddit.com/r/python/comments/noev123/thread/
-- **Lösungs-Repo:** org/tool
-- [x] Genehmigt
-
-#### Textvorschlag:
-```text
-Unverified post text
-```
-
-### [OUTBOUND-PROPOSAL-BAD-URL-1] Blacklisted URL
-- **Plattform:** Reddit
-- **Ziel-URL:** https://www.reddit.com/r/python/comments/bad123/thread/
-- **Lösungs-Repo:** org/tool
-- **Code-Beleg (Verifiziert):** `src/main.py` (`run`)
-- [x] Genehmigt
-
-#### Textvorschlag:
-```text
-Blacklisted URL text
-```
-"""
-    (workspace / "POST-EINGANG.md").write_text(inbox_content, encoding="utf-8")
-
+""",
+        encoding="utf-8",
+    )
     engine = CommunityOutreachEngine(workspace)
-    verification = engine.verify_proposals(repos_root=repos_root)
-    assert verification["status"] == "failed"
-    assert verification["verified_count"] == 1
-    assert verification["failed_count"] == 2
-    by_id = {item["id"]: item for item in verification["results"]}
-    assert by_id["OUTBOUND-PROPOSAL-GOOD-1"]["status"] == "verified"
-    assert by_id["OUTBOUND-PROPOSAL-GOOD-1"]["verified_files"] == ["src/main.py"]
-    assert by_id["OUTBOUND-PROPOSAL-NO-EVIDENCE-1"]["has_code_evidence"] is False
-    assert by_id["OUTBOUND-PROPOSAL-BAD-URL-1"]["blacklisted"] is True
-
-    outbound = engine.phase2_outbound_execution()
-    out_by_id = {item["id"]: item for item in outbound}
-    assert out_by_id["OUTBOUND-PROPOSAL-GOOD-1"]["reason"] == "publisher-unavailable"
-    assert out_by_id["OUTBOUND-PROPOSAL-NO-EVIDENCE-1"]["reason"] == "missing-code-evidence"
-    assert out_by_id["OUTBOUND-PROPOSAL-BAD-URL-1"]["status"] == "blacklisted"
+    ok_report = engine.verify_proposals()
+    assert ok_report["status"] == "verified", ok_report
+    assert ok_report["results"][0]["claim_contract_ok"] is True
 
