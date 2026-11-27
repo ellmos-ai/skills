@@ -1,10 +1,10 @@
 ---
 name: model-strategy
-version: 3.1.1
+version: 3.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Verwenden, wenn bei mehrstufigen Agentenläufen, Reviews oder Subagenten-Aufgaben die optimale Modell- und Reasoning-Allokation gewählt werden soll (z. B. 'welches Modell für diese Aufgabe', 'Modellstrategie festlegen', 'Reviewer-Modell wählen', /model-strategy). Definiert rollenbasierte Modellzuweisungen (Denker, Worker, Reviewer, Eskalation) und steuert Reasoning-Aufwand kosteneffizient. NICHT verwenden für tokenbasierte Budgetkontenführung (dafür infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
@@ -42,10 +42,13 @@ tatsächliche Katalog lebt in einer Konfigurationsdatei im Skill-Ordner.
    Namensmuster sind in der `.gitignore` dieser Bibliothek bereits als privat erfasst,
    `skills/**/*.local.*` bzw. `skills/**/*.private.*` — nie veröffentlichen, nie committen).
    Wenn vorhanden, ist das der maßgebliche Katalog.
-2. **Beispieldatei** `models.example.json` im selben Ordner — neutrale Platzhalter-Vorlage, die
-   das Schema zeigt. Dient nur als Vorlage zum Anlegen der eigenen lokalen Datei, nicht als
+2. **Neutrale Regel-Defaults** `models.defaults.json` (getrackt, modellneutral) — definiert
+   Rollentaxonomie, Score-Dimensionen, Reasoning-Stufen, Draft-Guardrails und Kleinst-Worker-Schutzregeln
+   ohne lokale Überschreibungen zu berühren.
+3. **Beispieldatei** `models.example.json` im selben Ordner — neutrale Platzhalter-Vorlage, die
+   das Katalog-Schema zeigt. Dient nur als Vorlage zum Anlegen der eigenen lokalen Datei, nicht als
    Katalog für echte Läufe.
-3. **Live-Erhebung**, wenn beide Dateien fehlen oder unvollständig sind: welche Modelle bietet
+4. **Live-Erhebung**, wenn lokale/Standard-Dateien fehlen oder unvollständig sind: welche Modelle bietet
    die aktuelle Runtime tatsächlich an (z. B. das `model`-Enum eines nativen Subagenten-Werkzeugs,
    `codex debug models --bundled`, eine App-eigene Modellliste)? Ein geratenes Modell ist
    schlechter als ein kurz erhobenes.
@@ -286,6 +289,9 @@ API (Batch, ≈ $0,001 je README), nicht als Subagent im Harness.
 ---
 
 ## Changelog
+
+### 3.2.0 (2026-11-27)
+- Neutrale Taxonomie-, Score-, Effort- und Guardrail-Defaults in `models.defaults.json` ausgelagert (unabhängig von `models.local.json` / `models.example.json`).
 
 ### 3.1.1 (2026-11-22)
 - Sprachhinweis korrigiert

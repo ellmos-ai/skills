@@ -1,6 +1,6 @@
 ---
 name: piggyback-hosting
-version: 1.0.1
+version: 1.1.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-02
@@ -172,8 +172,10 @@ pattern.
    `references/RECHT.md`'s recommendations as a checklist, not as clearance —
    involve a lawyer before the first public run.
 
-## References
+## References & Configuration
 
+- `piggyback-config.json` — externalized server modes (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership` stub), browser storage tiers, and security/GDPR invariants.
+- `templates/deployment-audit.template.md` — concise deployment audit checklist covering mode choice, key masking, and mandatory export/import wiring.
 - `references/DATA-FLOW-TEMPLATE.md` — template and method for a data-flow
   plan: every row needs a file:line, or it's a belief, not a finding.
 - `references/PRIVACY-TEMPLATE.md` — sample privacy notice with marked

@@ -1,10 +1,10 @@
 ---
 name: mermaid-lint
-version: 1.0.0
+version: 1.1.0
 type: tool
 author: Lukas Geiger + Claude
 created: 2026-09-20
-updated: 2026-11-09
+updated: 2026-11-27
 aliases: [mermaid, mermaid-error, diagram-render-error, unable-to-render-rich-display]
 description: "Use when linting, validating, or fixing Mermaid diagram blocks in Markdown files that fail to render on GitHub (e.g. 'lint mermaid diagrams', 'fix diagram syntax on GitHub', 'unable to render rich display', /mermaid-lint). Checks and repairs special characters, unquoted labels, and invalid arrow notations using exact parser rules. Do NOT use for general code review unrelated to diagrams."
 standalone: true
@@ -136,6 +136,10 @@ identical.
    a repository read-only and file the finding as a ticket.
 5. Fix, lint until green, commit, `git pull --rebase`, push.
 6. Readback with a negative control. Only then is it done.
+
+## Configuration & Self-Healing
+
+All scanner and browser readback settings (`ignore_dirs`, `file_extensions`, `security_level`, `env_error_patterns`, browser `channel`, `retries`, timeouts) live in [mermaid-lint-config.json](mermaid-lint-config.json) and load via the shared helper [lint_config.mjs](lint_config.mjs) (`mermaid-lint-config.json` -> `config.json` -> `--config <file.json>`). Corrupt JSON overlays automatically fall back to defaults and create `.corrupt.<ts>.bak` backups when `--repair` is passed; verified by `tests/test_mermaid_lint_config.py`.
 
 ## Setup
 

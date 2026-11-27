@@ -1,10 +1,10 @@
 ---
 name: mermaid-lint
-version: 1.0.0
+version: 1.1.0
 type: tool
 author: Lukas Geiger + Claude
 created: 2026-09-20
-updated: 2026-11-09
+updated: 2026-11-27
 aliases: [mermaid, mermaid-fehler, diagramm-render-fehler, unable-to-render-rich-display, schaltplan-fehler]
 description: "Verwenden, wenn Mermaid-Diagramme in Markdown-Dateien auf Syntaxfehler und GitHub-Renderbarkeit geprüft oder repariert werden sollen (z. B. 'Mermaid-Syntax prüfen', 'Diagramm rendert nicht auf GitHub', 'Parse error in Diagramm', /mermaid-lint). Prüft ```mermaid-Blöcke deterministisch gegen die Mermaid-Grammatik und behebt problematische Knotenlabels und Kanten. NICHT verwenden für inhaltliche Code-Reviews außerhalb von Markdown-Diagrammen."
 standalone: true
@@ -134,6 +134,10 @@ strukturgleich halten.
    dort nur lesend pruefen und den Befund als Ticket ablegen.
 5. Reparieren, linten bis gruen, committen, `git pull --rebase`, pushen.
 6. Readback mit Negativkontrolle. Erst dann gilt es als erledigt.
+
+## Konfiguration & Selbstheilung
+
+Alle Scanner- und Readback-Parameter (`ignore_dirs`, `file_extensions`, `security_level`, `env_error_patterns`, Browser-`channel`, `retries`, Timeouts) liegen in [mermaid-lint-config.json](mermaid-lint-config.json) und werden über den gemeinsamen Loader [lint_config.mjs](lint_config.mjs) geladen (`mermaid-lint-config.json` -> `config.json` -> `--config <datei.json>`). Bei defektem JSON fällt der Loader automatisch auf die Defaults zurück und sichert beschädigte Dateien mit `--repair` als `.corrupt.<ts>.bak`. Struktur und Selbstheilung prüft `tests/test_mermaid_lint_config.py`.
 
 ## Einrichtung
 

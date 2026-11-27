@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.4.0
+version: 1.5.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Use when decomposing complex multi-step objectives into parallel or staged sub-tasks for independent workers with evidence-based acceptance (e.g. 'orchestrate tasks', 'coordinate subagents', 'delegate work packages', /orchestrator). Formulates work contracts, dispatches independent workers, and verifies deliverables objectively. Do NOT use for simple tasks solvable in a single pass."
 standalone: true
 anthropic_compatible: true
@@ -139,7 +139,9 @@ Only then is a work package considered complete.
 - Clearly designate open, failed, and deferred packages.
 - For longer runs, save objective, status, evidence, and next step in a recoverable checkpoint.
 
-## Minimal Worker Prompt
+## Minimal Worker Prompt & Configuration Defaults
+
+The canonical schema defaults live in [orchestrator-defaults.json](orchestrator-defaults.json) (without modifying user-local `config.json` or `profiles.json`). Reusable templates live under [templates/worker-contract.template.md](templates/worker-contract.template.md) and [templates/handover-report.template.md](templates/handover-report.template.md).
 
 ```text
 Auftrag: <Kennung und Ziel>
@@ -164,6 +166,10 @@ Stop the entire delegation if:
 - the required evidence cannot be generated or verified.
 
 ## Changelog
+
+### 1.5.0 (2026-11-27)
+- Added canonical schema defaults in `orchestrator-defaults.json` without overwriting `config.json` or `profiles.json`.
+- Added reusable `templates/worker-contract.template.md` and `templates/handover-report.template.md`.
 
 ### 1.4.0 (2026-10-11)
 - Added the section "Operator Regime: Think and Delegate, Never Execute

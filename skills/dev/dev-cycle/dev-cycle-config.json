@@ -1,0 +1,31 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "dev-cycle",
+  "version": "1.3.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "phases": [
+    {"phase": 1, "name": "Feature Requests", "focus": "functional_requirements_and_acceptance_criteria"},
+    {"phase": 2, "name": "Check Current State", "focus": "inventory_tools_docs_schema_and_use_cases"},
+    {"phase": 3, "name": "Functional Planning", "focus": "workflows_agents_skills_and_shift_left_checks"},
+    {"phase": 4, "name": "Implement Functional Frontend", "focus": "skill_and_workflow_markdown_contracts"},
+    {"phase": 5, "name": "Plan and Align Backend", "focus": "cli_db_schema_and_api_alignment"},
+    {"phase": 6, "name": "Implement Backend Tasks", "focus": "tdd_code_empty_db_and_idempotency"},
+    {"phase": 7, "name": "Test Execution, Review Gate and Bugfixes", "focus": "boe_tests_four_eyes_review_and_20min_rule"},
+    {"phase": 8, "name": "Functional and Feature Test (Use Cases)", "focus": "e2e_user_validation_feedback_loop"}
+  ],
+  "control_loops": {
+    "commit_to_feedback_max_minutes": 10,
+    "tdd_takt": "seconds_to_minutes",
+    "ci_gate_takt_minutes": 10,
+    "review_gate_takt": "hours",
+    "bugfix_escalation_minutes": 20,
+    "use_case_loop_takt": "per_cycle"
+  },
+  "test_types": ["B", "O", "E"],
+  "shift_left_required": true,
+  "review_gate_before_phase_8": true
+}

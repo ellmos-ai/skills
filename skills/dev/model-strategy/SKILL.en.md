@@ -1,10 +1,10 @@
 ---
 name: model-strategy
-version: 3.1.0
+version: 3.2.0
 type: skill
 author: Lukas Geiger
 created: 2026-03-15
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Use when selecting and configuring the appropriate LLM models and reasoning effort across multi-agent workflows and subagents (e.g. 'choose model for task', 'subagent model strategy', 'select reviewer model', /model-strategy). Assigns model tiers to specific roles (thinker, worker, reviewer, escalation) based on complexity and cost. Do NOT use for runtime token budget bookkeeping (use infrastructure/budgetierung)."
 standalone: true
 anthropic_compatible: true
@@ -45,11 +45,14 @@ configuration file inside the skill folder.
    patterns are already covered by this library's `.gitignore`, `skills/**/*.local.*` and
    `skills/**/*.private.*` — never publish, never commit). If present, this is the authoritative
    catalog.
-2. **Example file** `models.example.json` in the same folder — a neutral placeholder template
-   that shows the schema. It is only a template for creating your own local file, never a
+2. **Neutral rule defaults** `models.defaults.json` (tracked, model-neutral) — defines role
+   taxonomy, difficulty score dimensions, reasoning effort ladder, draft guardrails, and
+   small-worker rules without touching local overrides.
+3. **Example file** `models.example.json` in the same folder — a neutral placeholder template
+   that shows the catalog schema. It is only a template for creating your own local file, never a
    catalog for real runs.
-3. **Live discovery**, when both files are missing or incomplete: which models does the current
-   runtime actually offer (e.g. a native subagent tool's `model` enum, `codex debug models
+4. **Live discovery**, when local/default files are missing or incomplete: which models does the
+   current runtime actually offer (e.g. a native subagent tool's `model` enum, `codex debug models
    --bundled`, an app's own model list)? A guessed model is worse than a briefly measured one.
 
 **On conflict, the live measurement wins.** A configuration file can be stale (a model was
@@ -285,6 +288,9 @@ through a subagent inside the harness.
 ---
 
 ## Changelog
+
+### 3.2.0 (2026-11-27)
+- Externalized neutral taxonomy, score, effort, and guardrail defaults into `models.defaults.json` (leaving `models.local.json` and `models.example.json` untouched).
 
 ### 3.1.0 (2026-10-11) — Small workers (Haiku class) measured
 - New Section 7: Haiku 5.5 as a worker, measured 2026-10 (quality by task type, prices, recommendations)

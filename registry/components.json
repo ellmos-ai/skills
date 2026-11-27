@@ -1288,7 +1288,7 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/dev-cycle/SKILL.md",
-      "version": "1.2.1",
+      "version": "1.3.0",
       "status": "active",
       "description": "Verwenden, wenn ein neues Software-Feature oder eine größere Änderung über einen strukturierten 8-Phasen-Entwicklungszyklus umgesetzt werden soll (z. B. 'Feature systematisch entwickeln', 'Entwicklungszyklus starten', '8-Phasen-Zyklus', /dev-cycle). Leitet schrittweise durch Bedarfsanalyse, Ist-Zustand, Funktionsplanung, Frontend, Backend und Tests. NICHT verwenden für isolierte Einzel-Bugfixes (dafür bugfix-protocol).",
       "languages": [
@@ -1465,7 +1465,7 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/ellmos-security/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "status": "draft",
       "description": "Verwenden, wenn ein Sicherheitsaudit geplant, eine Schwachstelle gemeldet oder ein passender Security-Skill der sec-*-Familie gesucht wird (z. B. 'Sicherheitsprüfung', 'Repo auf Schwachstellen prüfen', 'welcher Security-Skill', /ellmos-security). Fungiert als zentraler Wegweiser und Router für Bedrohungsanalyse, Scans, Triage, Fixes, Verifikation und Offenlegung. NICHT verwenden für die direkte Ausführung von Patches (dafür sec-fix) oder Scans (dafür sec-scan).",
       "languages": [
@@ -1521,7 +1521,7 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/full-after-care/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "status": "active",
       "description": "Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care.",
       "languages": [
@@ -1662,7 +1662,7 @@
       "type": "tool",
       "category": "dev",
       "path": "skills/dev/mermaid-lint/SKILL.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "description": "Verwenden, wenn Mermaid-Diagramme in Markdown-Dateien auf Syntaxfehler und GitHub-Renderbarkeit geprüft oder repariert werden sollen (z. B. 'Mermaid-Syntax prüfen', 'Diagramm rendert nicht auf GitHub', 'Parse error in Diagramm', /mermaid-lint). Prüft ```mermaid-Blöcke deterministisch gegen die Mermaid-Grammatik und behebt problematische Knotenlabels und Kanten. NICHT verwenden für inhaltliche Code-Reviews außerhalb von Markdown-Diagrammen.",
       "languages": [
@@ -1753,7 +1753,7 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/model-strategy/SKILL.md",
-      "version": "3.1.1",
+      "version": "3.2.0",
       "status": "active",
       "description": "Verwenden, wenn bei mehrstufigen Agentenläufen, Reviews oder Subagenten-Aufgaben die optimale Modell- und Reasoning-Allokation gewählt werden soll (z. B. 'welches Modell für diese Aufgabe', 'Modellstrategie festlegen', 'Reviewer-Modell wählen', /model-strategy). Definiert rollenbasierte Modellzuweisungen (Denker, Worker, Reviewer, Eskalation) und steuert Reasoning-Aufwand kosteneffizient. NICHT verwenden für tokenbasierte Budgetkontenführung (dafür infrastructure/budgetierung).",
       "languages": [
@@ -1816,7 +1816,7 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/piggyback-hosting/SKILL.md",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "status": "active",
       "description": "Nutzen, wenn eine lokal gebaute App für mehrere Besucher gehostet werden soll, bei \"mach das ohne Login hostbar\", \"keine Nutzerkonten bauen\", \"Datenschutzerklärung für ein gehostetes Tool verkleinern\", \"wer ist verantwortlich, wenn wir nichts speichern\" oder beim Wählen/Implementieren eines Server-Modus (`local`, `huckepack-gift`, `huckepack-only-host`, `pay-membership`). Hosting-Muster, um eine lokal gebaute Anwendung (eigene Datenbank, eigener API-Key, In-Process-State) sicher hostbar zu machen, ohne Nutzerverwaltung zu bauen. Kernzug — der Host speichert nichts, der Browser des Besuchers speichert alles — sodass Pro-Besucher-Accounts, Zugriffsprüfungen und Löschfristen gegenstandslos werden, statt gelöst werden zu müssen. Liefert eine Data-Flow-Plan-Vorlage, eine Datenschutz-Vorlage und eine rechtliche Ersteinschätzung (DSGVO/TDDDG/UWG, deutsch) als Referenzen.",
       "languages": [
@@ -2727,7 +2727,7 @@
       "type": "skill",
       "category": "dev",
       "path": "skills/dev/sec-triage/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "status": "draft",
       "description": "Nutzen bei 'Scan-Ergebnisse einordnen', 'Dependabot-Alerts priorisieren', 'Code-Scanning-Funde importieren', 'Backlog an Sicherheitsfunden sortieren'. Überführt vorhandene Funde (Scanner-Berichte, SARIF, GitHub Code Scanning, Dependabot, Tickets) in das findings.json-Format der ellmos-Security-Familie, entdoppelt sie per id, legt Severity und Priorität nach der Sicherheitsrichtlinie des Repos (SECURITY.md) fest und verknüpft Tickets. Nur statische Auswertung. Neue Schwachstellen suchen: sec-scan. Widerlegen oder nachstellen: sec-validate. Bericht: sec-report.",
       "languages": [
@@ -3063,7 +3063,7 @@
       "type": "protocol",
       "category": "dev",
       "path": "skills/dev/surface-after-care/SKILL.md",
-      "version": "1.6.0",
+      "version": "1.7.0",
       "status": "active",
       "description": "Verwenden, wenn ein bestehendes GitHub-Repository gepflegt, aufgeräumt, aktualisiert oder optisch aufgewertet werden soll (z. B. 'Repo-Pflege', 'after care', 'Nachpflege', 'Repo auf Stand bringen', 'aufräumen und pushen', /surface-after-care). Führt eine leichte Stufe-1-Pflege durch: Distributionsflächen prüfen, Topics setzen, Privacy-Gate ausführen, README-Aussagen mit dem Code abgleichen, Banner ergänzen, Sprachfassungen vervollständigen und offene Issues/PRs sichten. NICHT verwenden für tiefgehende Audits inkl. Rechtscheck und Orga-Querverweisen (dafür full-after-care) oder Erstveröffentlichungen (dafür github-repo-care).",
       "languages": [
@@ -4752,7 +4752,7 @@
       "type": "protocol",
       "category": "infrastructure",
       "path": "skills/infrastructure/orchestrator/SKILL.md",
-      "version": "1.4.1",
+      "version": "1.5.0",
       "status": "active",
       "description": "Verwenden, wenn eine komplexe Gesamtaufgabe in parallele oder sequenzielle Teilaufgaben für Subagenten zerlegt und evidenzbasiert abgenommen werden soll (z. B. 'Aufgabe orchestrieren', 'Subagenten koordinieren', 'Teilaufgaben delegieren', /orchestrator). Plant Arbeitspakete, beauftragt unabhängige Worker und validiert deren Arbeitsergebnisse anhand klarer Qualitätskriterien. NICHT verwenden für triviale Aufgaben, die ein einzelner Prompt direkt löst.",
       "languages": [

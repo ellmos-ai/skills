@@ -1,0 +1,44 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "full-after-care",
+  "version": "1.1.0",
+  "base_protocol": "surface-after-care",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "legal_check": {
+    "store_dir": "_after-care",
+    "filename": "RECHTSCHECK.md",
+    "gitignored_required": true,
+    "renewal_interval_days": 365,
+    "publish_only_consequences": true,
+    "trigger_criteria": [
+      "processes_personal_data",
+      "external_scraping_or_api_tos",
+      "regulated_domain_advice",
+      "third_party_trademarks",
+      "copyleft_or_unclear_licenses",
+      "minors_payments_or_crypto_export",
+      "automated_decisions_or_ai_regulation"
+    ]
+  },
+  "cross_org_linking": {
+    "bidirectional_required": true,
+    "exclude_archived": true,
+    "relation_types": [
+      "dependency",
+      "same_family",
+      "alternative_approach",
+      "predecessor_successor",
+      "building_block"
+    ]
+  },
+  "app_i18n": {
+    "check_completeness_against_lead_language": true,
+    "require_accessible_ui_switcher": true,
+    "verify_rendering_against_truncation_and_glyphs": true,
+    "sync_store_and_registry_locales": true
+  }
+}

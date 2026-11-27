@@ -1,0 +1,35 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "sec-triage",
+  "version": "0.2.0",
+  "contract": "../sec-scan/references/contract.md",
+  "validator_script": "../sec-scan/scripts/secfind.py",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_backup",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "severity_levels": ["critical", "high", "medium", "low", "info"],
+  "priority_map": {
+    "critical": {"priority": "P0", "default_sla_days": 1},
+    "high": {"priority": "P1", "default_sla_days": 7},
+    "medium": {"priority": "P2", "default_sla_days": 30},
+    "low": {"priority": "P3", "default_sla_days": 90},
+    "info": {"priority": "P4", "default_sla_days": null}
+  },
+  "triage_rules": {
+    "static_evidence_only": true,
+    "dedup_by": "id",
+    "merge_severity_strategy": "keep_higher",
+    "policy_file": "SECURITY.md",
+    "triaged_requires_confirmed_verdict": true,
+    "unvalidated_stays_status": "candidate",
+    "public_repo_advisory_mode": "private_draft",
+    "mask_secrets": true
+  },
+  "coverage_defaults": {
+    "scanned": [],
+    "complete": false,
+    "not_scanned_note": "Import ohne eigenen Scan, Repo nicht gelesen"
+  }
+}

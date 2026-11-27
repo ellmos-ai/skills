@@ -1,10 +1,10 @@
 ---
 name: dev-cycle
-version: 1.1.1
+version: 1.3.0
 type: protocol
 author: Lukas Geiger
 created: 2026-03-12
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Use when implementing software features through an iterative, structured 8-phase development cycle (e.g. 'develop feature systematically', 'start development cycle', '8-phase engineering', /dev-cycle). Guides engineering teams through requirements, current state, functional specs, frontend, backend, and testing. Do NOT use for small isolated bug fixes (use bugfix-protocol)."
 standalone: true
 anthropic_compatible: true
@@ -276,7 +276,16 @@ If your skill collection has a skill index, search it for further phase-specific
 
 ---
 
+## Configuration & Templates
+
+- **External Defaults:** [dev-cycle-config.json](dev-cycle-config.json) defines all 8 phases, control-loop cadences (`< 10 min` commit-to-feedback, `20 min` bugfix escalation threshold), and `B`/`O`/`E` test-type defaults.
+- **Templates:** [templates/phase-checklist.template.md](templates/phase-checklist.template.md) and [templates/use-case-test.template.md](templates/use-case-test.template.md).
+
 ## Changelog
+
+### 1.3.0 (2026-11-27)
+- Externalized phase, control-loop, and test-type parameters into `dev-cycle-config.json`.
+- Added `templates/phase-checklist.template.md` and `templates/use-case-test.template.md`.
 
 ### 1.1.1 (2026-11-22)
 - Language notice corrected

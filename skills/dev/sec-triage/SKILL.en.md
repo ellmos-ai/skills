@@ -1,6 +1,6 @@
 ---
 name: sec-triage
-version: 0.1.1
+version: 0.2.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
@@ -43,7 +43,16 @@ Existing findings: SARIF files or scanner reports, GitHub code scanning and Depe
 8. **Coverage:** a pure import scans nothing. `scanned: []`, `notScanned` with an entry "import without own scan, repo not read" (so `complete: false`), `limits` with sources, import state and findings not imported. `provider.name` = source (e.g. `github-code-scanning`), `model` = `n/a`, `engine` = source tool.
 9. **Check:** `python sec-scan/scripts/secfind.py validate findings.json coverage.json`, show the exit code. Then `sec-validate` for candidates, `sec-report` for the report.
 
+## Configuration & Triage Template
+
+- **External Severity/Priority Matrix:** [triage-severity.json](triage-severity.json) defines `critical`–`info`, `P0`–`P4` default SLA windows, deduplication strategy (`keep_higher`), and import-only coverage defaults.
+- **Template:** [templates/triage-summary.template.md](templates/triage-summary.template.md) for audit-ready triage summaries without secret values.
+
 ## Changelog
+
+### 0.2.0 (2026-11-27)
+- Externalized severity/priority mapping and triage rules into `triage-severity.json`.
+- Added `templates/triage-summary.template.md`.
 
 ### 0.1.0 (2026-10-31)
 

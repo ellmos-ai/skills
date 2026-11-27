@@ -1,0 +1,56 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "model-strategy",
+  "version": "3.2.0",
+  "self_healing": {
+    "enabled": true,
+    "on_corrupt": "fallback_to_defaults_with_live_discovery",
+    "backup_suffix": ".corrupt.<ts>.bak"
+  },
+  "config_cascade": [
+    "models.local.json",
+    "models.private.json",
+    "models.defaults.json",
+    "models.example.json",
+    "runtime_live_discovery"
+  ],
+  "roles": {
+    "thinker": "Architecture, strategy, ambiguous requirements, trade-off decisions",
+    "worker": "Sustained execution across many steps: coding, debugging, routine tasks",
+    "draft": "Fast initial versions (design, text, code, structure, translation) — mandatory review",
+    "reviewer": "Independent acceptance/verification — ideally different provider and model",
+    "escalation": "Targeted help for the single hardest step — never whole run"
+  },
+  "difficulty_score": {
+    "formula": "(10 - clarity) + complexity + creativity + context + criticality",
+    "dimension_range": [0, 10],
+    "dimensions": ["clarity", "complexity", "creativity", "context", "criticality"]
+  },
+  "reasoning_effort_levels": ["low", "medium", "high", "xhigh", "max"],
+  "draft_guardrails": {
+    "mandatory_review_before_adoption": true,
+    "avoid_direct_target_writes": true,
+    "tighter_review_domains": ["latex", "legal", "numeric", "security"]
+  },
+  "review_rules": {
+    "prefer_different_provider": true,
+    "patterns": [
+      "session_advisor",
+      "orchestrator_as_reviewer",
+      "counter_agent_provider_switch",
+      "escalation_plus_review_recommendation"
+    ]
+  },
+  "small_worker_guardrails": {
+    "bundle_subtasks": true,
+    "never_one_subagent_per_document": true,
+    "report_max_lines": 5,
+    "require_explicit_user_opt_in_for_prod": true,
+    "prefer_batch_api_for_bulk": true
+  },
+  "authority_invariants": {
+    "no_permission_matrix_by_model_name": true,
+    "report_silent_model_switch": true,
+    "never_use_deprecated_entries": true
+  }
+}

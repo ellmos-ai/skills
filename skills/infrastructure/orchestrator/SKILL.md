@@ -1,10 +1,10 @@
 ---
 name: orchestrator
-version: 1.4.1
+version: 1.5.0
 type: protocol
 author: Claude + Codex
 created: 2026-06-17
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Verwenden, wenn eine komplexe Gesamtaufgabe in parallele oder sequenzielle Teilaufgaben für Subagenten zerlegt und evidenzbasiert abgenommen werden soll (z. B. 'Aufgabe orchestrieren', 'Subagenten koordinieren', 'Teilaufgaben delegieren', /orchestrator). Plant Arbeitspakete, beauftragt unabhängige Worker und validiert deren Arbeitsergebnisse anhand klarer Qualitätskriterien. NICHT verwenden für triviale Aufgaben, die ein einzelner Prompt direkt löst."
 standalone: true
 anthropic_compatible: true
@@ -154,10 +154,11 @@ Erst danach gilt ein Arbeitspaket als abgeschlossen.
 ## Ressourcenprofil
 
 Der Skill funktioniert vollständig ohne Konfiguration. Ohne `profiles.json`
-und `config.json` im Skill-Ordner gilt exakt das hier dokumentierte
-Sparprofil: höchstens 1-2 parallele Worker, ein zweiter Slot nur bei
+und `config.json` im Skill-Ordner gelten die kanonischen Schema-Defaults aus
+`orchestrator-defaults.json` (Sparprofil: höchstens 1-2 parallele Worker, ein zweiter Slot nur bei
 unabhängigem Nutzen, ein kleineres Modell wenn ein Auftragsvertrag gut
-vorbereitet ist. Diese Regel ändert sich durch das Vorhandensein der Dateien
+vorbereitet ist). Für Verträge und Übergaben stehen zudem [templates/worker-contract.template.md](templates/worker-contract.template.md)
+und [templates/handover-report.template.md](templates/handover-report.template.md) bereit. Diese Regel ändert sich durch das Vorhandensein der Dateien
 nicht — sie macht sie nur explizit einstellbar.
 
 Beide Dateien sind eine OPTIONALE, nutzereigene Anpassungsschicht. Modellnamen
@@ -307,6 +308,10 @@ Stoppe die gesamte Delegation, wenn:
 - die geforderte Evidenz nicht erzeugt oder geprüft werden kann.
 
 ## Änderungsprotokoll
+
+### 1.5.0 (2026-11-27)
+- Kanonische Schema-Defaults in `orchestrator-defaults.json` ergänzt, ohne `config.json` oder `profiles.json` zu überschreiben.
+- Wiederverwendbare Vorlagen `templates/worker-contract.template.md` und `templates/handover-report.template.md` ergänzt.
 
 ### 1.4.1 (2026-11-22)
 - Sprachhinweis korrigiert

@@ -1,10 +1,10 @@
 ---
 name: surface-after-care
-version: 1.6.0
+version: 1.7.0
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-11-09
+updated: 2026-11-27
 aliases: [repo-after-care, repo-pflege, after-care, repo-nachpflege, repo-wartung]
 description: "Use when an existing published GitHub repository needs maintenance, cleanup, updating, or visual polish (e.g. 'repo care', 'after care', 'update repo', 'clean up and push', /surface-after-care). Runs lightweight level-1 maintenance: checks distribution surfaces, sets topics, runs privacy gate, verifies README claims against real code, adds banners, completes translations, and reviews open issues/PRs. Do NOT use for deep audits including legal reviews and cross-org references (use full-after-care) or initial publication (use github-repo-care)."
 standalone: true
@@ -424,7 +424,16 @@ The log saves the next round from making the same decisions again and forms the 
 - [ ] Unresolved findings recorded as tasks in folder-local task system.
 - [ ] Execution log written in `_after-care/LOG.md`.
 
+## Configuration & Report Template
+
+- **External Configuration:** [after-care-checks.json](after-care-checks.json) centralizes topic bounds, README line cap (`400`), standard language matrix, ruff rule pins, and privacy scan patterns as customizable JSON (with `self_healing` fallback defaults).
+- **Template:** [templates/after-care-report.template.md](templates/after-care-report.template.md) structures the completion and `_after-care/LOG.md` summary report.
+
 ## Changelog
+
+### 1.7.0 (2026-11-27)
+- Externalized check thresholds, standard language matrix, ruff pin defaults, and privacy patterns into `after-care-checks.json`.
+- Added replaceable `templates/after-care-report.template.md`.
 
 ### 1.6.0 (2026-07-24)
 - Added rule: A content correction applies to all surfaces. Empirically learned — a user clarification was corrected in run 1 in hub, but stood unnoticed five more times in org profile (EN, DE, `llms.txt`) and was only noticed nine runs later.
