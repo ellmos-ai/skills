@@ -1,0 +1,11 @@
+Kurzprotokoll: {{chat_label}} ({{timeframe}})
+Kurzfassung: {{summary_compact}}
+
+Beschlüsse ({{decision_count}}):
+{{decisions_compact}}
+
+Aufgaben ({{task_count}}):
+{{tasks_compact}}
+
+Offen / Blocker ({{open_count}}):
+{{open_points_compact}}

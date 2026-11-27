@@ -1,0 +1,30 @@
+{
+  "_hinweis": "Beispiel-Kanalprofil fuer WhatsApp-Chats. Zur Aktivierung als whatsapp.json im aktiven Config-/Profiles-Ordner ablegen.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "whatsapp",
+  "chat": null,
+  "doc_types": [
+    "zusammenfassung",
+    "aufgabenliste"
+  ],
+  "formats": [
+    "txt",
+    "pdf"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "detail_level": "compact",
+    "group_tasks_by": "owner",
+    "include_quotes": false
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": true,
+    "reply_format": "txt",
+    "reply_template": "kompakt-chat",
+    "target_channel": "whatsapp",
+    "target_chat": null
+  }
+}

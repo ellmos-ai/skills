@@ -2,7 +2,7 @@
   "summary": {
     "generated_by": "build_public_registry.py",
     "schema_version": "public-catalog-v1",
-    "component_count": 167,
+    "component_count": 168,
     "categories": {
       "assist": 20,
       "dev": 40,
@@ -13,7 +13,7 @@
       "research": 1,
       "therapy": 20,
       "third-party": 2,
-      "utilities": 31,
+      "utilities": 32,
       "web": 1
     }
   },
@@ -7231,6 +7231,34 @@
           "path": "skills/utilities/build-your-users-mind/SKILL.ru.md",
           "title": "build-your-users-mind — публичный нейтральный указатель",
           "description": "Указывает на публичный и нейтральный к поставщику модуль build-your-users-mind: метод с учётом конфиденциальности для создания эмпирической модели предпочтений авторизованного пользователя на основе его собственных журналов взаимодействия."
+        }
+      ]
+    },
+    {
+      "id": "skill:utilities:chat-mail-protocol",
+      "name": "chat-mail-protocol",
+      "type": "skill",
+      "category": "utilities",
+      "path": "skills/utilities/chat-mail-protocol/SKILL.md",
+      "version": "0.1.0",
+      "status": "active",
+      "description": "Verwenden, wenn aus Chatverläufen (WhatsApp, Discord, Slack, Telegram, Teams) oder E-Mail-Threads strukturierte Zusammenfassungen, Ergebnisprotokolle oder Aufgabenlisten entstehen sollen (z. B. 'Chat protokollieren', 'Mailverlauf zusammenfassen', /chat-mail-protocol, /protokoll). Nutzt eine selbstheilende Kanal-/Chat-Profil-Kaskade (default-config.json -> <kanal>.json -> <kanal>.<chat>.json), austauschbare Vorlagen und 5 Formate (html/pdf/md/txt/json) samt sicherem Dry-Run-Zustellplan. NICHT verwenden für das Neuformulieren einzelner E-Mails (privat-mail-writer) oder Multi-Quellen-Dossiers (dossier-briefing).",
+      "languages": [
+        "de",
+        "en"
+      ],
+      "localizations": [
+        {
+          "language": "de",
+          "path": "skills/utilities/chat-mail-protocol/SKILL.md",
+          "title": "chat-mail-protocol — Protokolle & Aufgabenlisten aus Chat- und Mailverläufen",
+          "description": "Verwenden, wenn aus Chatverläufen (WhatsApp, Discord, Slack, Telegram, Teams) oder E-Mail-Threads strukturierte Zusammenfassungen, Ergebnisprotokolle oder Aufgabenlisten entstehen sollen (z. B. 'Chat protokollieren', 'Mailverlauf zusammenfassen', /chat-mail-protocol, /protokoll). Nutzt eine selbstheilende Kanal-/Chat-Profil-Kaskade (default-config.json -> <kanal>.json -> <kanal>.<chat>.json), austauschbare Vorlagen und 5 Formate (html/pdf/md/txt/json) samt sicherem Dry-Run-Zustellplan. NICHT verwenden für das Neuformulieren einzelner E-Mails (privat-mail-writer) oder Multi-Quellen-Dossiers (dossier-briefing)."
+        },
+        {
+          "language": "en",
+          "path": "skills/utilities/chat-mail-protocol/SKILL.en.md",
+          "title": "chat-mail-protocol — Protocols & Action Lists from Chat and Email Threads",
+          "description": "Use when turning chat histories (WhatsApp, Discord, Slack, Telegram, Teams) or email threads into structured summaries, decision minutes, or action-item lists (e.g. 'create chat protocol', 'summarize email thread into tasks', /chat-mail-protocol, /protokoll). Uses a self-healing channel/chat profile cascade (default-config.json -> <channel>.json -> <channel>.<chat>.json), replaceable templates, and 5 formats (html/pdf/md/txt/json) with safe dry-run delivery planning. Do NOT use for drafting individual outgoing emails (privat-mail-writer) or multi-source research dossiers (dossier-briefing)."
         }
       ]
     },

@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Aufgeloeste externe Andockstellen fuer chat-mail-protocol (kompatibel zu grounding-seed / source-resolver). Keine persönlichen Konten im Repo speichern.",
+  "schema": "ellmos.source-resolver.user-config.v1",
+  "version": 1,
+  "rollen": {},
+  "gelernt": []
+}
