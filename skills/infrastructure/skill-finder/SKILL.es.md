@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude
 created: 2026-06-17
 updated: 2026-11-09
-description: "Usar al inicio de cualquier tarea compleja para descubrir, evaluar y enrutar al skill local preexistente más adecuado (ej. 'qué skill encaja', 'buscar skill para esta tarea', 'existe un skill para...', /skill-finder). Examina la biblioteca local de skills para recomendar el componente exacto según el requerimiento. NO usar para crear nuevos skills (usar ellmos-skill-creator) ni para auditar el catálogo completo (usar skill-explorer)."
+description: "Usar al inicio de cualquier tarea compleja para descubrir, evaluar y enrutar al skill local preexistente más adecuado (ej. 'qué skill encaja', 'buscar skill para esta tarea', 'existe un skill para...', /skill-finder). Examina la biblioteca local de skills para recomendar el componente exacto según el requerimiento. NO usar para crear nuevos skills (usar ocean-skill-creator) ni para auditar el catálogo completo (usar skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

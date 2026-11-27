@@ -4308,34 +4308,6 @@
       ]
     },
     {
-      "id": "skill:infrastructure:ellmos-skill-creator",
-      "name": "ellmos-skill-creator",
-      "type": "skill",
-      "category": "infrastructure",
-      "path": "skills/infrastructure/ellmos-skill-creator/SKILL.md",
-      "version": "0.3.1",
-      "status": "active",
-      "description": "Verwenden, wenn ein neuer Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'bau mir einen Skill für X', 'skill-creator nutzen', 'neuen Skill anlegen', 'diesen Skill ellmos-konform machen', 'Lernvertrag anlegen', 'Usecase-Abdeckung prüfen', /ellmos-skill-creator). Delegiert die Entwurfsschleife an das skill-creator-Plugin und setzt ellmos-Standards durch: 9-Felder-Frontmatter, grounding-seed, config.json mit Lernvertrag, connections.json, Vendor-Bewusstsein und Lern-/Abdeckungs-Dateisatz. NICHT verwenden für reines Skill-Finden/Routen (dafür skill-finder) oder Landschafts-Audits (dafür skill-explorer).",
-      "languages": [
-        "de",
-        "en"
-      ],
-      "localizations": [
-        {
-          "language": "de",
-          "path": "skills/infrastructure/ellmos-skill-creator/SKILL.md",
-          "title": "ellmos-skill-creator",
-          "description": "Verwenden, wenn ein neuer Skill für dieses System entstehen oder ein bestehender auf ellmos-Konformität nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'bau mir einen Skill für X', 'skill-creator nutzen', 'neuen Skill anlegen', 'diesen Skill ellmos-konform machen', 'Lernvertrag anlegen', 'Usecase-Abdeckung prüfen', /ellmos-skill-creator). Delegiert die Entwurfsschleife an das skill-creator-Plugin und setzt ellmos-Standards durch: 9-Felder-Frontmatter, grounding-seed, config.json mit Lernvertrag, connections.json, Vendor-Bewusstsein und Lern-/Abdeckungs-Dateisatz. NICHT verwenden für reines Skill-Finden/Routen (dafür skill-finder) oder Landschafts-Audits (dafür skill-explorer)."
-        },
-        {
-          "language": "en",
-          "path": "skills/infrastructure/ellmos-skill-creator/SKILL.en.md",
-          "title": "ellmos-skill-creator",
-          "description": "Use when a new skill for this ecosystem is to be created or an existing one retrofitted for ellmos conformance (e.g. 'create a skill', 'build me a skill for X', 'use skill-creator', 'create a new skill', 'make this skill ellmos-conformant', 'create a learning contract', 'check usecase coverage', /ellmos-skill-creator). Delegates the design loop to the official skill-creator plugin while enforcing ellmos standards: 9-field frontmatter, grounding-seed, config.json with learning contract, connections.json, vendor awareness, and learning/coverage file sets. Do NOT use for pure skill finding/routing (use skill-finder) or landscape audits (use skill-explorer)."
-        }
-      ]
-    },
-    {
       "id": "skill:infrastructure:endpoint-triage",
       "name": "endpoint-triage",
       "type": "skill",
@@ -4694,6 +4666,34 @@
           "path": "skills/infrastructure/metacognitive-injectors/SKILL.fr.md",
           "title": "Injecteurs Métacognitifs (Metacognitive-Injectors & Self-Talk)",
           "description": "Utiliser pour renforcer le raisonnement et la résolution de problèmes chez l'agent via l'audit métacognitif et des stratégies de mémoire de travail (ex. 'réflexion métacognitive', 'audit du dialogue interne', 'structurer le raisonnement', /metacognitive-injectors). Intègre le rappel actif, les modèles de mémoire de travail et l'auto-évaluation dans les tâches complexes. Ne PAS utiliser pour l'apaisement émotionnel de crise (utiliser therapy/stabilization-techniques)."
+        }
+      ]
+    },
+    {
+      "id": "skill:infrastructure:ocean-skill-creator",
+      "name": "ocean-skill-creator",
+      "type": "skill",
+      "category": "infrastructure",
+      "path": "skills/infrastructure/ocean-skill-creator/SKILL.md",
+      "version": "0.4.0",
+      "status": "active",
+      "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und erzwingt Ocean-Standards (abwärtskompatibel zu ellmos): 9-Felder-Frontmatter, default-config.json mit Profil-Kaskade und Selbstheilung, Berichts-/Template-Ausgabe (html/pdf/md/txt/json), grounding-seed, Vendor-Bewusstsein, Lernvertrag sowie Scaffold-/Audit-CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer).",
+      "languages": [
+        "de",
+        "en"
+      ],
+      "localizations": [
+        {
+          "language": "de",
+          "path": "skills/infrastructure/ocean-skill-creator/SKILL.md",
+          "title": "ocean-skill-creator — Ocean-Skill-Baukasten",
+          "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und erzwingt Ocean-Standards (abwärtskompatibel zu ellmos): 9-Felder-Frontmatter, default-config.json mit Profil-Kaskade und Selbstheilung, Berichts-/Template-Ausgabe (html/pdf/md/txt/json), grounding-seed, Vendor-Bewusstsein, Lernvertrag sowie Scaffold-/Audit-CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer)."
+        },
+        {
+          "language": "en",
+          "path": "skills/infrastructure/ocean-skill-creator/SKILL.en.md",
+          "title": "ocean-skill-creator — Ocean Skill Builder",
+          "description": "Use when creating a new skill or upgrading an existing one to Ocean standards (e.g. 'create a skill', 'scaffold a new skill', 'make this skill Ocean-conformant', /ocean-skill-creator, transition alias /ellmos-skill-creator). Delegates generic authoring to skill-creator while enforcing Ocean standards (backward-compatible with ellmos): 9-field frontmatter, default-config.json with profile cascade and self-healing, report/template outputs (html/pdf/md/txt/json), grounding-seed docking, vendor awareness, learning contract, and scaffold/audit CLI. Do NOT use for skill discovery (skill-finder) or catalog audits (skill-explorer)."
         }
       ]
     },
@@ -5196,7 +5196,7 @@
       "path": "skills/infrastructure/skill-finder/SKILL.md",
       "version": "0.11.0",
       "status": "active",
-      "description": "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer).",
+      "description": "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ocean-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer).",
       "languages": [
         "de",
         "en",
@@ -5210,37 +5210,37 @@
           "language": "de",
           "path": "skills/infrastructure/skill-finder/SKILL.md",
           "title": "Skill-Finder",
-          "description": "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
+          "description": "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ocean-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/skill-finder/SKILL.en.md",
           "title": "Skill Finder",
-          "description": "Use at the start of non-trivial tasks to discover, evaluate, and route to fitting existing local skills (e.g. 'which skill fits', 'find skill for this task', 'is there a skill for...', /skill-finder). Inspects local skill repositories to recommend and trigger the best matching skill for a user prompt. Do NOT use to author new skills (use ellmos-skill-creator) or audit landscapes (use skill-explorer)."
+          "description": "Use at the start of non-trivial tasks to discover, evaluate, and route to fitting existing local skills (e.g. 'which skill fits', 'find skill for this task', 'is there a skill for...', /skill-finder). Inspects local skill repositories to recommend and trigger the best matching skill for a user prompt. Do NOT use to author new skills (use ocean-skill-creator) or audit landscapes (use skill-explorer)."
         },
         {
           "language": "es",
           "path": "skills/infrastructure/skill-finder/SKILL.es.md",
           "title": "Buscador de Habilidades (Skill-Finder)",
-          "description": "Usar al inicio de cualquier tarea compleja para descubrir, evaluar y enrutar al skill local preexistente más adecuado (ej. 'qué skill encaja', 'buscar skill para esta tarea', 'existe un skill para...', /skill-finder). Examina la biblioteca local de skills para recomendar el componente exacto según el requerimiento. NO usar para crear nuevos skills (usar ellmos-skill-creator) ni para auditar el catálogo completo (usar skill-explorer)."
+          "description": "Usar al inicio de cualquier tarea compleja para descubrir, evaluar y enrutar al skill local preexistente más adecuado (ej. 'qué skill encaja', 'buscar skill para esta tarea', 'existe un skill para...', /skill-finder). Examina la biblioteca local de skills para recomendar el componente exacto según el requerimiento. NO usar para crear nuevos skills (usar ocean-skill-creator) ni para auditar el catálogo completo (usar skill-explorer)."
         },
         {
           "language": "zh",
           "path": "skills/infrastructure/skill-finder/SKILL.zh.md",
           "title": "技能查找器 (Skill-Finder)",
-          "description": "当在开展非平凡任务之初检索、评估并精准路由至最适配的既有本地技能时使用（例如 '哪个技能适配此任务'、'为此任务查找技能'、'是否有用于……的技能'、/skill-finder）。检索本地技能资产库并根据任务需求推荐最佳专用技能。切勿用于编写创建全新技能（使用 ellmos-skill-creator）或全量技能普查审计（使用 skill-explorer）。"
+          "description": "当在开展非平凡任务之初检索、评估并精准路由至最适配的既有本地技能时使用（例如 '哪个技能适配此任务'、'为此任务查找技能'、'是否有用于……的技能'、/skill-finder）。检索本地技能资产库并根据任务需求推荐最佳专用技能。切勿用于编写创建全新技能（使用 ocean-skill-creator）或全量技能普查审计（使用 skill-explorer）。"
         },
         {
           "language": "ja",
           "path": "skills/infrastructure/skill-finder/SKILL.ja.md",
           "title": "スキルファインダー (Skill-Finder)",
-          "description": "非自明なタスクの着手時に、対応する適切なローカルスキルが存在するかを検索・評価して誘導する場合に使用する（例：'どのスキルが合うか'、'このタスク用のスキルを探す'、'〜できるスキルはあるか'、/skill-finder）。ローカルのスキル資産を走査し、ユーザーの目的に最も適合する専門スキルを推薦する。新規スキルの作成（ellmos-skill-creator）や全体棚卸し監査（skill-explorer）には使用しない。"
+          "description": "非自明なタスクの着手時に、対応する適切なローカルスキルが存在するかを検索・評価して誘導する場合に使用する（例：'どのスキルが合うか'、'このタスク用のスキルを探す'、'〜できるスキルはあるか'、/skill-finder）。ローカルのスキル資産を走査し、ユーザーの目的に最も適合する専門スキルを推薦する。新規スキルの作成（ocean-skill-creator）や全体棚卸し監査（skill-explorer）には使用しない。"
         },
         {
           "language": "ru",
           "path": "skills/infrastructure/skill-finder/SKILL.ru.md",
           "title": "Поисковик навыков (Skill-Finder)",
-          "description": "Используйте в начале нетривиальных задач для поиска, оценки и перехода к подходящему локальному навыку (например, 'какой навык подходит', 'найти навык под задачу', 'есть ли навык для...', /skill-finder). Анализирует локальный репозиторий навыков и рекомендует точный инструмент под запрос. НЕ используйте для создания новых навыков (используйте ellmos-skill-creator) или общего аудита каталога (используйте skill-explorer)."
+          "description": "Используйте в начале нетривиальных задач для поиска, оценки и перехода к подходящему локальному навыку (например, 'какой навык подходит', 'найти навык под задачу', 'есть ли навык для...', /skill-finder). Анализирует локальный репозиторий навыков и рекомендует точный инструмент под запрос. НЕ используйте для создания новых навыков (используйте ocean-skill-creator) или общего аудита каталога (используйте skill-explorer)."
         }
       ]
     },

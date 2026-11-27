@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude + Gemini
 created: 2026-06-17
 updated: 2026-11-10
-description: "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ellmos-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
+description: "Verwenden, wenn zu Beginn einer nichttrivialen Aufgabe geprüft werden soll, ob ein bestehender lokaler Skill dafür existiert und passt (z. B. 'welcher Skill passt', 'gibt es dafür einen Skill', 'skill finden', /skill-finder). Durchsucht den lokalen Skill-Bestand anhand von Aufgabenprofilen und routet zielsicher zum spezialisierten Skill. NICHT verwenden für die Neuerstellung von Skills (dafür ocean-skill-creator) oder Bibliotheks-Audits (dafür skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

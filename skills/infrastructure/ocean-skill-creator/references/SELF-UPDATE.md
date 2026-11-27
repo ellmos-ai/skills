@@ -26,7 +26,7 @@ Abschnitt **"Selbstaktualisierung"**, gesteuert von drei Kräften zugleich:
 4. **Auslagerbar, wenn vorhanden:** Ist eine ellmos-Memory-Komponente da (USMC,
    Gardener), wird dorthin geschrieben (`usmc lesson`/`usmc fact` bzw. Gardener
    `put(..., type="memory")`) statt die lokale JSON unbegrenzt wachsen zu lassen —
-   erkannt über dasselbe `try/except`-Muster wie in `ELLMOS-PRINCIPLES.md`. Ist
+   erkannt über dasselbe `try/except`-Muster wie in [OCEAN-PRINCIPLES.md](OCEAN-PRINCIPLES.md). Ist
    nichts vorhanden, bleibt die lokale JSON die alleinige Quelle — das ist der
    "allein lauffähig"-Fall, kein Fehler.
 

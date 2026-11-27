@@ -1,0 +1,65 @@
+{
+  "_hinweis": "Versionierte, nutzerneutrale Fallback-Konfiguration fuer ocean-skill-creator (v0.4.0, abwaertskompatibel zu ellmos.skill-config.v1). Lokale Ueberschreibungen gehoeren in config.json oder profiles/<kanal>[.<chat>].json.",
+  "schema": "ocean.skill-config.v2",
+  "legacy_schema_compat": "ellmos.skill-config.v1",
+  "skill": "ocean-skill-creator",
+  "version": "0.4.0",
+  "verweise": {
+    "haus_frontmatter_vorlagen": "../../../templates/",
+    "konventionen": "../../../docs/CONVENTIONS.md",
+    "delegiert_an_plugin": "skill-creator:skill-creator",
+    "grounding_seed_repo": "https://github.com/ellmos-ai/grounding-seed",
+    "source_resolver_repo": "https://github.com/ellmos-ai/source-resolver",
+    "lern_und_abdeckungs_schemas": [
+      "../../../schemas/user-usecases-v1.schema.json",
+      "../../../schemas/usecase-gaps-v1.schema.json",
+      "../../../schemas/known-providers-v1.schema.json",
+      "../../../schemas/gap-closing-analysis-v1.schema.json"
+    ]
+  },
+  "settings": {
+    "visibility_default_for_new_skills": "private-only",
+    "required_core_languages": ["de", "en"],
+    "trigger_window_chars": 250,
+    "max_description_chars": 1024
+  },
+  "output": {
+    "default_format": "json",
+    "supported_formats": ["html", "pdf", "md", "txt", "json"],
+    "pdf_stdlib_fallback": true,
+    "output_dir": "./output"
+  },
+  "templates": {
+    "dir": "./templates/output",
+    "custom_dir": null,
+    "html": "report.template.html",
+    "md": "report.template.md",
+    "txt": "report.template.txt"
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "channel": null,
+    "target": null
+  },
+  "self_healing": {
+    "enabled": true,
+    "backup_corrupt": true,
+    "backup_suffix_format": ".corrupt.{timestamp}.bak",
+    "additive_migration": true,
+    "atomic_write": true
+  },
+  "profiles": {
+    "dir": "./profiles",
+    "active_channel": null,
+    "active_chat": null
+  },
+  "lernvertrag": {
+    "user_ist_koenig": true,
+    "waehle_beste_option": true,
+    "installiert_nie_selbststaendig": true,
+    "letzter_update_check": null,
+    "update_intervall_tage": 60
+  }
+}

@@ -134,12 +134,13 @@ four sections, kept short:
   must talk to Codex/Gemini/Kimi beyond Claude Code.
 - `skill-explorer` — checks whether a capability already exists BEFORE a new
   role is built (duplicate avoidance).
+- `ocean-skill-creator` — scaffolds or upgrades skills to Ocean standards.
 
 ## Changelog
 
 ### 1.0.0 (2026-08-25)
 - Initial version. Built following user decision M5 (`T-20260825-935905816`)
-  via `ellmos-skill-creator`. Formalizes the Companion-Worker pattern
+  via `ocean-skill-creator` (formerly `ellmos-skill-creator`). Formalizes the Companion-Worker pattern
   (primary source: `_control-center/_TICKETS/README.md`, section "Leitprinzip
   (Kontext-Ökonomie)"), the COMA lifecycle (primary source:
   `.MODULES/.ORCHESTRATION/coma/README.md`), and the observed "boss agent

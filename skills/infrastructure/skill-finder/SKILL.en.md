@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Claude + Gemini
 created: 2026-06-17
 updated: 2026-11-10
-description: "Use at the start of non-trivial tasks to discover, evaluate, and route to fitting existing local skills (e.g. 'which skill fits', 'find skill for this task', 'is there a skill for...', /skill-finder). Inspects local skill repositories to recommend and trigger the best matching skill for a user prompt. Do NOT use to author new skills (use ellmos-skill-creator) or audit landscapes (use skill-explorer)."
+description: "Use at the start of non-trivial tasks to discover, evaluate, and route to fitting existing local skills (e.g. 'which skill fits', 'find skill for this task', 'is there a skill for...', /skill-finder). Inspects local skill repositories to recommend and trigger the best matching skill for a user prompt. Do NOT use to author new skills (use ocean-skill-creator) or audit landscapes (use skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
