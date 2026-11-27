@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <style>
+    :root {
+      --fg: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --accent: #0284c7;
+      --accent-soft: #f0f9ff;
+      --card-bg: #f8fafc;
+      --warn-border: #d97706;
+      --warn-bg: #fffbeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--fg);
+      background: #ffffff;
+      line-height: 1.55;
+    }
+    main { max-width: 940px; margin: 0 auto; }
+    header {
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    h1 { margin: 0 0 0.4rem 0; font-size: 1.8rem; }
+    h2 {
+      margin: 1.6rem 0 0.75rem 0;
+      font-size: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.5rem 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+    .summary-box {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .decision-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid #16a34a;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .open-card {
+      background: var(--warn-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--warn-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .quote {
+      margin-top: 0.35rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1.25rem 0;
+      font-size: 0.94rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--card-bg); font-weight: 600; }
+    footer {
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      body { padding: 0; font-size: 10pt; }
+      .summary-box, .decision-card, .open-card, tr { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>{{title}}</h1>
+      <div class="meta-grid">
+        <div><strong>Kanal / Quelle:</strong> {{channel}}</div>
+        <div><strong>Chat / Betreff:</strong> {{chat_label}}</div>
+        <div><strong>Zeitraum:</strong> {{timeframe}}</div>
+        <div><strong>Beteiligte ({{participant_count}}):</strong> {{participants}}</div>
+        <div><strong>Nachrichten:</strong> {{message_count}}</div>
+        <div><strong>Erstellt:</strong> {{generated_at}}</div>
+      </div>
+    </header>
+
+    <section class="summary-box">
+      <strong>Kurzfassung:</strong>
+      <div>{{summary_html}}</div>
+    </section>
+
+    <section>
+      <h2>1. Beschlüsse &amp; Ergebnisse ({{decision_count}})</h2>
+      {{decisions_html}}
+    </section>
+
+    <section>
+      <h2>2. Aufgabenliste ({{task_count}})</h2>
+      {{tasks_html}}
+    </section>
+
+    <section>
+      <h2>3. Offene Fragen &amp; Blocker ({{open_count}})</h2>
+      {{open_points_html}}
+    </section>
+
+    {{chronology_section_html}}
+
+    <footer>
+      {{footer}}
+    </footer>
+  </main>
+</body>
+</html>

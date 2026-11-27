@@ -1,7 +1,7 @@
 {
   "schema_version": "public-skill-files-v1",
   "generated_by": "build_public_registry.py",
-  "file_count": 939,
+  "file_count": 941,
   "files": [
     "skills/assist/buero/SKILL.en.md",
     "skills/assist/buero/SKILL.es.md",
@@ -812,6 +812,8 @@
     "skills/utilities/build-your-users-mind/SKILL.md",
     "skills/utilities/build-your-users-mind/SKILL.ru.md",
     "skills/utilities/build-your-users-mind/SKILL.zh.md",
+    "skills/utilities/chat-mail-protocol/SKILL.en.md",
+    "skills/utilities/chat-mail-protocol/SKILL.md",
     "skills/utilities/decide/SKILL.en.md",
     "skills/utilities/decide/SKILL.es.md",
     "skills/utilities/decide/SKILL.fr.md",

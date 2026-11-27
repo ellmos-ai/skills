@@ -1,0 +1,30 @@
+{
+  "_hinweis": "Beispiel-Kanalprofil fuer Slack. Zur Aktivierung als slack.json im aktiven Config-/Profiles-Ordner ablegen.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "slack",
+  "chat": null,
+  "doc_types": [
+    "ergebnisprotokoll",
+    "aufgabenliste"
+  ],
+  "formats": [
+    "md",
+    "json"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "detail_level": "standard",
+    "group_tasks_by": "owner",
+    "include_quotes": true
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": true,
+    "reply_format": "txt",
+    "reply_template": "kompakt-chat",
+    "target_channel": "slack",
+    "target_chat": null
+  }
+}

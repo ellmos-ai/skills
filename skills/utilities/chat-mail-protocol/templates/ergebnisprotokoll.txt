@@ -1,0 +1,29 @@
+========================================================================
+{{title}}
+========================================================================
+Kanal / Quelle : {{channel}}
+Chat / Betreff : {{chat_label}}
+Zeitraum       : {{timeframe}}
+Beteiligte ({{participant_count}}) : {{participants}}
+Nachrichten    : {{message_count}}
+Erstellt am    : {{generated_at}}
+------------------------------------------------------------------------
+
+KURZFASSUNG
+-----------
+{{summary_txt}}
+
+1. BESCHLUESSE & ERGEBNISSE ({{decision_count}})
+------------------------------------------------
+{{decisions_txt}}
+
+2. AUFGABENLISTE ({{task_count}})
+---------------------------------
+{{tasks_txt}}
+
+3. OFFENE FRAGEN & BLOCKER ({{open_count}})
+-------------------------------------------
+{{open_points_txt}}
+{{chronology_section_txt}}
+------------------------------------------------------------------------
+{{footer}}

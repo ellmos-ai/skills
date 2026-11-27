@@ -1,0 +1,77 @@
+{
+  "_hinweis": "Nutzerneutrale Standard-Konfiguration (default-config.json) fuer chat-mail-protocol nach ocean-skill-creator v0.4.0. Lokale Ueberschreibungen liegen optional in config.json, <kanal>.json und <kanal>.<chat>.json.",
+  "schema": "ocean.skill-config.v2",
+  "skill": "chat-mail-protocol",
+  "version": "0.1.0",
+  "doc_types": [
+    "zusammenfassung",
+    "ergebnisprotokoll",
+    "aufgabenliste"
+  ],
+  "formats": [
+    "md",
+    "html",
+    "pdf"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "language": "de",
+    "detail_level": "standard",
+    "group_tasks_by": "owner",
+    "include_quotes": true,
+    "anonymize_participants": false
+  },
+  "output": {
+    "default_format": "md",
+    "supported_formats": [
+      "html",
+      "pdf",
+      "md",
+      "txt",
+      "json"
+    ],
+    "pdf_stdlib_fallback": true,
+    "output_dir": "./output"
+  },
+  "templates": {
+    "dir": "./templates",
+    "custom_dir": null,
+    "html": "ergebnisprotokoll.html",
+    "md": "ergebnisprotokoll.md",
+    "txt": "ergebnisprotokoll.txt",
+    "reply": "kompakt-chat.txt",
+    "tasks": "aufgabenliste.md"
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": false,
+    "reply_format": "txt",
+    "reply_template": "kompakt-chat",
+    "target_channel": null,
+    "target_chat": null,
+    "export_dir": null,
+    "handoff_tasks_to": null
+  },
+  "self_healing": {
+    "enabled": true,
+    "fallback_to_default": true,
+    "backup_corrupt": true,
+    "backup_suffix_format": ".corrupt.{timestamp}.bak",
+    "additive_migration": true,
+    "atomic_write": true
+  },
+  "profiles": {
+    "dir": "./profiles",
+    "active_channel": null,
+    "active_chat": null
+  },
+  "lernvertrag": {
+    "user_ist_koenig": true,
+    "waehle_beste_option": true,
+    "installiert_nie_selbststaendig": true,
+    "letzter_update_check": null,
+    "update_intervall_tage": 60
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "_hinweis": "Beispiel fuer ein spezifisches Chat-Profil (<kanal>.<chat>.json). Ueberschreibt whatsapp.json gezielt fuer den Chat 'projekt-alpha'. Zur Aktivierung als whatsapp.projekt-alpha.json ablegen.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "whatsapp",
+  "chat": "projekt-alpha",
+  "doc_types": [
+    "ergebnisprotokoll",
+    "aufgabenliste",
+    "protokoll"
+  ],
+  "formats": [
+    "html",
+    "pdf",
+    "md"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "detail_level": "detailed",
+    "group_tasks_by": "owner",
+    "include_quotes": true,
+    "anonymize_participants": false
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": true,
+    "reply_format": "txt",
+    "reply_template": "kompakt-chat",
+    "target_channel": "whatsapp",
+    "target_chat": "projekt-alpha",
+    "handoff_tasks_to": "ticket-master"
+  }
+}

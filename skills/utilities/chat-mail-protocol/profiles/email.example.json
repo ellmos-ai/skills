@@ -1,0 +1,32 @@
+{
+  "_hinweis": "Beispiel-Kanalprofil fuer mehrteilige E-Mail-Threads. Zur Aktivierung als email.json im aktiven Config-/Profiles-Ordner ablegen.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "email",
+  "chat": null,
+  "doc_types": [
+    "ergebnisprotokoll",
+    "aufgabenliste",
+    "protokoll"
+  ],
+  "formats": [
+    "html",
+    "pdf",
+    "md"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "detail_level": "detailed",
+    "group_tasks_by": "owner",
+    "include_quotes": true
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": false,
+    "reply_format": "md",
+    "reply_template": "ergebnisprotokoll",
+    "target_channel": "email",
+    "target_chat": null
+  }
+}

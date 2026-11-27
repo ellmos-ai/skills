@@ -1,0 +1,31 @@
+{
+  "_hinweis": "Beispiel-Kanalprofil fuer Discord-Kanaele und Threads. Zur Aktivierung als discord.json im aktiven Config-/Profiles-Ordner ablegen.",
+  "schema": "ocean.skill-profile.v1",
+  "channel": "discord",
+  "chat": null,
+  "doc_types": [
+    "zusammenfassung",
+    "ergebnisprotokoll",
+    "aufgabenliste"
+  ],
+  "formats": [
+    "md",
+    "txt"
+  ],
+  "template": "ergebnisprotokoll",
+  "presentation": {
+    "detail_level": "standard",
+    "group_tasks_by": "owner",
+    "include_quotes": true
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft",
+    "reply_in_chat": true,
+    "reply_format": "txt",
+    "reply_template": "kompakt-chat",
+    "target_channel": "discord",
+    "target_chat": null
+  }
+}
