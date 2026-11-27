@@ -1,11 +1,11 @@
 ---
 name: ocean-skill-creator
-version: 0.4.0
+version: 0.4.1
 type: skill
 author: Ocean Contributors
 created: 2026-08-24
 updated: 2026-11-27
-description: "Use when creating a new skill or upgrading an existing one to Ocean standards (e.g. 'create a skill', 'scaffold a new skill', 'make this skill Ocean-conformant', /ocean-skill-creator, transition alias /ellmos-skill-creator). Delegates generic authoring to skill-creator while enforcing Ocean standards (backward-compatible with ellmos): 9-field frontmatter, default-config.json with profile cascade and self-healing, report/template outputs (html/pdf/md/txt/json), grounding-seed docking, vendor awareness, learning contract, and scaffold/audit CLI. Do NOT use for skill discovery (skill-finder) or catalog audits (skill-explorer)."
+description: "Use when creating a new skill or upgrading an existing one to Ocean standards (e.g. 'create a skill', 'scaffold a new skill', 'make this skill Ocean-conformant', /ocean-skill-creator, transition alias /ellmos-skill-creator). Delegates generic authoring to skill-creator while applying pragmatic Ocean standards: 9-field frontmatter, externalized .json configs where needed (default-config.json or expressive custom filename) with self-healing, optional report templates (html/pdf/md/txt/json), grounding-seed, learning contract, and init/audit-skill CLI. Do NOT use for skill discovery (skill-finder) or catalog audits (skill-explorer)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -38,22 +38,26 @@ provenance:
 
 # ocean-skill-creator — Ocean Skill Builder
 
-> **Successor Note (`v0.4.0`):** `ocean-skill-creator` is the canonical successor to `ellmos-skill-creator`. Existing `ellmos.*` schemas, `grounding-seed` docking points, and the transition trigger `/ellmos-skill-creator` remain fully backward-compatible.
+> **Successor Note (`v0.4.1`):** `ocean-skill-creator` is the canonical successor to `ellmos-skill-creator`. Existing `ellmos.*` schemas, `grounding-seed` docking points, and the transition trigger `/ellmos-skill-creator` remain fully backward-compatible.
+
+> **Pragmatism Principle ("Only where genuinely useful"):**
+> 1. **Expressive `.json` filenames are equally first-class:** `default-config.json` is a recommended default convention, **not a mandatory filename**. Domain-specific names such as `models.local.json`, `kalender-profiles.json`, `routing-defaults.json`, `prefs.json`, or `<channel>.json` are recognized on equal footing by the loader and `audit-skill`.
+> 2. **Zero artificial boilerplate:** `.json` config files, `templates/`, and `scripts/` belong **only in skills where they add real value**. Pure guideline, advisory, therapy, thinking, or router/umbrella skills require neither dummy templates nor empty scripts and score a full `100/100 conformant` with clean `SKILL.md` + `SKILL.en.md` files alone.
 
 ## Origin and decision (fork vs. native composition)
 
 **Decision: standalone composition, no fork.** Documented so the rationale stays explicit:
 
 - `skill-creator` (Anthropic, marketplace `claude-plugins-official`) is **Apache-2.0** licensed — a fork would be legally clean, but would duplicate the entire generic eval and benchmark machinery (`agents/`, `eval-viewer/`, 7 helper scripts) that is already directly invocable via `Skill: skill-creator:skill-creator`.
-- The real gap solved here consists of **Ocean standards (backward-compatible with ellmos components)** that upstream cannot know about:
-  9-field house frontmatter, bilingual DE+EN core parity, strict anti-hardcoding via externalized configuration (`default-config.json` + 5-stage profile cascade), self-healing config loading with `.corrupt.<ts>.bak` preservation, standardized report and template architecture (`html`/`pdf`/`md`/`txt`/`json` + `templates/`), `grounding-seed` docking (`connections.json`), vendor awareness, and the learning/coverage file set.
-- This skill contains **no upstream text** and **composes** the original instead of copying it. In addition, it ships [ocean_skill_scaffold.py](scripts/ocean_skill_scaffold.py), a pure Python standard-library CLI and helper module for deterministic scaffolding, self-healing config validation, and read-only skill audits.
+- The real gap solved here consists of **pragmatic Ocean standards (backward-compatible with ellmos components)** that upstream cannot know about:
+  9-field house frontmatter, bilingual DE+EN core parity, anti-hardcoding via externalized `.json` settings with self-healing fallback (whenever a skill has configurable parameters), replaceable report templates (`html`/`pdf`/`md`/`txt`/`json`, whenever a skill renders documents/reports), `grounding-seed` docking (`connections.json`), vendor awareness, and the learning/coverage file set.
+- This skill contains **no upstream text** and **composes** the original instead of copying it. In addition, it ships [ocean_skill_scaffold.py](scripts/ocean_skill_scaffold.py), a pure Python standard-library CLI for right-sized scaffolding (`init`/`scaffold`), self-healing config validation (`validate-config`), and non-dogmatic skill audits (`audit-skill`).
 
 ## When to activate
 
 - "create a skill for X", "scaffold a new skill", "use skill-creator", `/ocean-skill-creator` (or transition alias `/ellmos-skill-creator`)
-- "upgrade this skill to Ocean standards", "retrofit a skill with default-config.json, profile cascade, or report templates"
-- "audit this skill for hardcoded settings or missing templates" (`audit-skill`)
+- "upgrade this skill to Ocean standards", "check whether this skill needs externalized JSON settings or report templates"
+- "audit this skill for hardcoded settings" (`audit-skill`)
 - Whenever the target is a skill in our Ocean/ellmos skill catalog — not for ad-hoc one-off prompts outside the ecosystem.
 
 ## Procedure
@@ -72,12 +76,19 @@ The `description` field alone determines whether a skill is ever selected; the M
 - **Wrap the YAML value in double quotes**, keep it at or below 1024 characters across every localization.
 - Confirm `python testing/skill_frontmatter_gate.py` flags neither a missing trigger nor a trigger starting after character 250.
 
-### Step 2 — create the Ocean house scaffold (mandatory, additive to Anthropic format)
+### Step 2 — create a right-sized Ocean house scaffold (`init` / `scaffold`)
 
-Prefer generating the initial structure with the bundled standard-library CLI:
+Pick the footprint that matches the skill's actual nature — from a lean prompt skill (`--minimal`) up to a full report engine (`--with-reports --with-profiles`):
 
 ```bash
-python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py scaffold <name> --category <category> --out skills/<category> --with-reports --with-profiles --json
+# A) Lean guideline, advisory, thinking, or router skill (SKILL.md + SKILL.en.md only)
+python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py init <name> --category <category> --out skills/<category> --minimal --json
+
+# B) Configurable skill with an expressive .json filename and no report templates
+python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py init <name> --category <category> --out skills/<category> --config-name <name>-defaults.json --no-templates --json
+
+# C) Full report/export skill with replaceable templates (html/pdf/md/txt/json) & channel profiles
+python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py init <name> --category <category> --out skills/<category> --with-reports --with-profiles --json
 ```
 
 Frontmatter and layout requirements (`docs/CONVENTIONS.md`):
@@ -91,36 +102,36 @@ Frontmatter and layout requirements (`docs/CONVENTIONS.md`):
 
 Full details and code patterns: [OCEAN-PRINCIPLES.md](references/OCEAN-PRINCIPLES.md). Summary:
 
-- **Viable standalone (`standalone`):** Every skill ships its own `default-config.json`, `templates/`, and pure-stdlib fallbacks so it runs cleanly in isolation.
+- **Viable standalone (`standalone`):** Any bundled configs, templates, or scripts run cleanly on the Python standard library with zero mandatory third-party packages.
 - **Ecosystem-sensitive at runtime:** When Ocean or backward-compatible ellmos modules (`grounding_seed.detect_ecosystem()`, `source-resolver`) are installed, the skill detects and uses them dynamically via `try/except ImportError` — never hard-wired and without inventing a second discovery mechanism.
 - **Strictly user-neutral in version control:** Zero personal names, internal hostnames, local development paths, or private IP addresses in tracked files (`author: Ocean Contributors` or neutral team attribution).
 
-### Step 4 — externalized JSON settings, profile cascade & self-healing (mandatory for configurable behavior)
+### Step 4 — externalized `.json` settings, profile cascade & self-healing (where parameters exist)
 
-Full specification, merge semantics, and self-healing protocol: [CONFIG-AND-SELF-HEALING.md](references/CONFIG-AND-SELF-HEALING.md).
+Full specification, naming flexibility, and self-healing protocol: [CONFIG-AND-SELF-HEALING.md](references/CONFIG-AND-SELF-HEALING.md).
 
-1. **Anti-hardcoding rule:** Paths, output formats, thresholds, time windows, languages, visual styles, and delivery channels must **never** be hardcoded inside Python scripts or prompt prose; store them in JSON configuration files.
-2. **Mandatory 5-stage configuration cascade (increasing precedence):**
-   `default-config.json` (tracked, user-neutral fallback inside the skill) -> `config.json` (local/private override) -> `<channel>.json` (e.g. `profiles/mail.json`) -> `<channel>.<chat>.json` (e.g. `profiles/mail.ops-weekly.json`) -> **CLI override** (`--set key=value` or explicit flags).
+1. **When external `.json` configuration is appropriate — and when it is not:**
+   - Whenever a skill has configurable thresholds, model/routing tables, paths, time windows, output formats, or channel profiles -> **externalize them into `.json` instead of hardcoding them in scripts or prompts**.
+   - When a skill is a pure guideline, counseling, thinking, or routing prompt with no configurable parameters -> **do not add an artificial `.json` file**.
+2. **Expressive custom filenames + recommended cascade:**
+   - `default-config.json` is the standard convention when no domain name is clearer; expressive filenames like `models.local.json`, `routing-defaults.json`, `kalender-profiles.json`, or `prefs.json` (`--config-name <file.json>`) are equally valid.
+   - For multi-layer overrides, merge from general to specific:
+     `<base-config>.json` (tracked, user-neutral fallback) -> `config.json` (local override) -> `<channel>.json` (e.g. `profiles/mail.json`) -> `<channel>.<chat>.json` (e.g. `profiles/mail.ops-weekly.json`) -> **CLI override** (`--set key=value`).
    - Templates: [default-config.template.json](templates/default-config.template.json), [skill-config.template.json](templates/skill-config.template.json), and [channel-profile.template.json](templates/channel-profile.template.json).
 3. **Self-healing configuration loader (`load_effective_config`):**
-   - Missing optional override files (`config.json`, channel/chat profiles) fall back seamlessly to `default-config.json`.
-   - Corrupt JSON files (`JSONDecodeError`), non-object roots, or invalid section types never crash the skill; the loader falls back gracefully to `default-config.json` and emits structured diagnostics (`warnings`).
-   - With `--repair` (`repair=True`), corrupt files are first preserved verbatim as `<filename>.corrupt.<UTC-timestamp>.bak`, newly introduced default keys are merged additively without clobbering valid user values, and the healed JSON is persisted atomically (temporary file in the same directory + `os.replace`).
-4. **Separate `connections.json`:** Resolved external binaries and service bindings stay in `connections.json` ([skill-connections.template.json](templates/skill-connections.template.json), schema `ellmos.source-resolver.user-config.v1` for `grounding-seed`).
+   - Missing optional overrides fall back seamlessly to the base JSON file.
+   - Corrupt JSON files (`JSONDecodeError`), non-object roots, or invalid section types never crash the skill; the loader falls back gracefully and emits structured `warnings`.
+   - With `--repair` (`repair=True`), corrupt files are first preserved verbatim as `<filename>.corrupt.<UTC-timestamp>.bak`, newly introduced keys are merged additively without clobbering valid user values, and healed JSON is persisted atomically (`tmp` + `os.replace`).
+4. **Separate `connections.json`:** Resolved external binaries and service bindings live in `connections.json` when needed ([skill-connections.template.json](templates/skill-connections.template.json), schema `ellmos.source-resolver.user-config.v1`).
 
-### Step 4b — report/output options & replaceable `templates/` as a first-class build step
+### Step 4b — report/output options & replaceable `templates/` (only for report/export skills)
 
 Full specification and rendering rules: [OUTPUT-AND-TEMPLATES.md](references/OUTPUT-AND-TEMPLATES.md).
 
-**Mandatory check during every skill creation or retrofit:** Does the skill generate reports, audit logs, summaries, schedules, digests, or structured exports? If **yes**, include by default:
+**Applicability check:** Does the skill generate reports, audit logs, summaries, schedules, digests, or formatted document exports?
 
-- **Replaceable `templates/` folder:** Keep data computation separate from presentation via [report.template.html](templates/output/report.template.html) (self-contained UTF-8 HTML with `@media print` styling), [report.template.md](templates/output/report.template.md), and [report.template.txt](templates/output/report.template.txt). Allow user template overrides via `templates.custom_dir` in config without editing skill code.
-- **Five standard output formats (`html`, `pdf`, `md`, `txt`, `json`):**
-  - `html` -> print-ready standalone HTML document with zero external CDN dependencies.
-  - `pdf` -> optional isolated headless renderer (never touch or close running user browser sessions or profiles!) **plus a mandatory 100% stdlib `%PDF-1.4` fallback** so `--format pdf` works deterministically on headless CI and server hosts without a browser.
-  - `md`, `txt`, and `json` -> clean human and machine-readable outputs.
-- **Safe delivery defaults (`delivery`):** Configure distribution targets via `default-config.json` / `<channel>.json` and always default to `enabled: false`, `dry_run: true`, `mode: "draft"` (never send externally without explicit opt-in).
+- **No** (pure guideline, router, stateless checker, converter): **No `templates/` directory needed** (`--no-templates` or `--minimal`).
+- **Yes:** Separate data computation from presentation via a replaceable `templates/` folder ([report.template.html](templates/output/report.template.html) with `@media print`, [report.template.md](templates/output/report.template.md), [report.template.txt](templates/output/report.template.txt)), support the relevant formats (`html`, `pdf` with a mandatory 100% stdlib `%PDF-1.4` fallback and zero browser profile interference, `md`, `txt`, `json`), and keep `delivery` defaults safe (`enabled: false`, `dry_run: true`, `mode: "draft"`).
 
 ### Step 5 — build in provider and vendor awareness
 
@@ -128,32 +139,26 @@ Full text: [VENDOR-AWARENESS.md](references/VENDOR-AWARENESS.md). Summary: Any s
 
 ### Step 6 — configure self-update
 
-Full text: [SELF-UPDATE.md](references/SELF-UPDATE.md). Summary: Every produced skill includes a "Self-update" section checking `letzter_update_check`, consulting `skill-finder` for better-fitting sibling skills, and recording dated findings in `connections.json` (`gelernt`) or optional ecosystem memory via `try/except`.
+Full text: [SELF-UPDATE.md](references/SELF-UPDATE.md). Summary: Every produced skill includes a "Self-update" section consulting `skill-finder` for better-fitting sibling skills and recording dated findings cleanly.
 
-### Step 6b — attach learning contract + usecase coverage
+### Step 6b — attach learning contract + usecase coverage (reusable pattern where helpful)
 
-Full text: [LEARNING-CONTRACT-AND-COVERAGE.md](references/LEARNING-CONTRACT-AND-COVERAGE.md). Reusable file set without inventing parallel schemas:
+Full text: [LEARNING-CONTRACT-AND-COVERAGE.md](references/LEARNING-CONTRACT-AND-COVERAGE.md). Reusable file set without inventing parallel schemas (`evals/evals.json`, [user-usecases.template.json](templates/user-usecases.template.json), [usecase-gaps.template.json](templates/usecase-gaps.template.json), [known-providers-and-abilities.template.json](templates/known-providers-and-abilities.template.json), [gap-closing-analysis.template.json](templates/gap-closing-analysis.template.json), and `lernvertrag`).
 
-- `evals/evals.json` — author-designed test cases (`skill-creator` standard).
-- `user-usecases.json` — real user prompts and scenarios ([user-usecases.template.json](templates/user-usecases.template.json)).
-- `usecase-gaps.json` — uncovered or untested user scenarios ([usecase-gaps.template.json](templates/usecase-gaps.template.json)).
-- `known-providers-and-abilities.json` — role candidate catalog modeled on A2A `AgentSkill` ([known-providers-and-abilities.template.json](templates/known-providers-and-abilities.template.json)).
-- `gap-closing-analysis.json` — structural remediation options ([gap-closing-analysis.template.json](templates/gap-closing-analysis.template.json)).
-- `default-config.json` / `config.json` `lernvertrag` object — behavioral contract (`user_ist_koenig: true`, `waehle_beste_option: true`, `installiert_nie_selbststaendig: true`).
+### Step 7 — validate (`audit-skill` & `validate-config`), register, and commit
 
-### Step 7 — validate (`validate-config` & `audit-skill`), register, and commit
-
-1. **Run automated config and skill-conformance checks:**
+1. **Run pragmatic conformance and config checks (never penalizes lean skills without templates/scripts!):**
    ```bash
-   python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py validate-config --default skills/<cat>/<name>/default-config.json --config skills/<cat>/<name>/config.json --json
    python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py audit-skill skills/<cat>/<name> --json
+   # When the skill uses a JSON configuration file:
+   python skills/infrastructure/ocean-skill-creator/scripts/ocean_skill_scaffold.py validate-config --default skills/<cat>/<name>/<config-file>.json --json
    ```
 2. **Run repository verification gates:** `skill_frontmatter_gate.py`, `language_gate.py`, `privacy_gate.py`, `changed_skill_gate.py`, unit tests (`pytest`), and `ruff check`.
-3. **Generate catalog artifacts instead of hand-editing:** On a clean checkout, run `python build_public_registry.py` and `python build_skills_map.py` (and verify with `--check`).
+3. **Generate catalog artifacts instead of hand-editing:** On a clean checkout, run `python build_public_registry.py` and `python build_skills_map.py` (verify with `--check`).
 
 ## Compatibility with Anthropic format and ellmos components
 
-All extra YAML frontmatter keys sit cleanly alongside `name` and `description`, so standard Claude Code installations consume produced skills unchanged. Likewise, the self-healing config loader accepts both `ocean.skill-config.v2` and legacy `ellmos.skill-config.v1` files seamlessly.
+All extra YAML frontmatter keys sit cleanly alongside `name` and `description`, so standard Claude Code installations consume produced skills unchanged. Likewise, the loader and auditor accept `ocean.skill-config.v2`, `ellmos.skill-config.v1`, and expressive domain-specific `.json` filenames seamlessly.
 
 ## Related skills
 
@@ -165,20 +170,23 @@ All extra YAML frontmatter keys sit cleanly alongside `name` and `description`, 
 
 ## Changelog
 
+### 0.4.1 (2026-11-27)
+- Pragmatic refinement ("only where genuinely useful"):
+  - `audit-skill` and the config loader recognize any expressive skill-specific `.json` configuration file (e.g. `models.local.json`, `routing-defaults.json`, `kalender-profiles.json`, `prefs.json`, `*.example.json`) alongside `default-config.json` (`config_files`, `has_external_config`).
+  - Lean guideline, advisory, therapy, thinking, and router/umbrella skills that need no `.json` config, `templates/`, or `scripts/` achieve `100/100 conformant` (`recommendations == []`) with zero boilerplate.
+  - Added CLI subcommand alias `init` plus `--config-name <file.json>`, `--no-templates`, `--no-scripts`, `--no-config`, and `--minimal`.
+
 ### 0.4.0 (2026-11-27)
-- Renamed `ellmos-skill-creator` to `ocean-skill-creator` (preserving transition alias `/ellmos-skill-creator` and full backward compatibility with `ellmos.*` schemas and `grounding-seed`).
-- Expanded Step 4: anti-hardcoding standard with `default-config.json`, 5-stage profile cascade (`default-config.json` -> `config.json` -> `<channel>.json` -> `<channel>.<chat>.json` -> CLI), and self-healing config loader (`.corrupt.<ts>.bak` backup, additive migration, atomic writes); documented in `references/CONFIG-AND-SELF-HEALING.md`.
-- Added Step 4b: mandatory report/output check (`html`, `pdf` with stdlib `%PDF-1.4` fallback, `md`, `txt`, `json`), replaceable `templates/` (`report.template.html/md/txt`), and safe dry-run delivery defaults; documented in `references/OUTPUT-AND-TEMPLATES.md`.
-- Added pure-stdlib CLI and library `scripts/ocean_skill_scaffold.py` (`scaffold`, `validate-config`, `audit-skill`) and test suite `tests/test_ocean_skill_scaffold.py`.
+- Renamed `ellmos-skill-creator` to `ocean-skill-creator` (preserving `/ellmos-skill-creator` transition alias), added 5-stage self-healing config cascade, report/template architecture (`html`/`pdf`/`md`/`txt`/`json`), and stdlib CLI `scripts/ocean_skill_scaffold.py`.
 
 ### 0.3.1 (2026-11-15)
-- Step 1b: trigger belongs in the first 250 characters of `description`; gate hint for late triggers.
+- Step 1b: trigger belongs in the first 250 characters of `description`.
 
 ### 0.3.0 (2026-11-06)
-- Step 1b: mandatory trigger-first `description` rule (WHEN first, example phrasings, boundary, gate check).
+- Step 1b: mandatory trigger-first `description` rule.
 
 ### 0.2.0 (2026-08-24)
-- Added reusable learning contract and usecase-coverage file set (`user-usecases.json`, `usecase-gaps.json`, `known-providers-and-abilities.json`, `gap-closing-analysis.json`, and `lernvertrag` in `config.json`).
+- Added reusable learning contract and usecase-coverage file set.
 
 ### 0.1.0 (2026-08-24)
-- Initial version as `ellmos-skill-creator`, composing `skill-creator:skill-creator` with house frontmatter, `grounding-seed` docking, vendor awareness, and self-update.
+- Initial version as `ellmos-skill-creator`.

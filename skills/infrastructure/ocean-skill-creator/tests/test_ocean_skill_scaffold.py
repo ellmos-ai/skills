@@ -1,4 +1,4 @@
-"""Comprehensive tests for ocean-skill-creator v0.4.0 (config cascade, self-healing, scaffold, reports, audit)."""
+"""Comprehensive tests for ocean-skill-creator v0.4.1 (pragmatic config names, optional templates/scripts, self-healing, scaffold/init, audit)."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ osc = _load_module()
 
 
 # ---------------------------------------------------------------------------
-# 1. 5-Stage Config Cascade (default -> config -> channel -> channel.chat -> CLI)
+# 1. 5-Stage Config Cascade (base .json -> config -> channel -> channel.chat -> CLI)
 # ---------------------------------------------------------------------------
 
 def test_five_stage_config_cascade_precedence(tmp_path: Path) -> None:
@@ -62,12 +62,12 @@ def test_five_stage_config_cascade_precedence(tmp_path: Path) -> None:
     assert res["ok"] is True
     assert res["warnings"] == []
     eff = res["config"]
-    assert eff["settings"]["include_summary"] is True  # from default-config.json
-    assert eff["delivery"]["channel"] == "mail"  # from mail.json
-    assert eff["settings"]["language"] == "en"  # from mail.weekly-board.json
-    assert eff["output"]["default_format"] == "pdf"  # from mail.weekly-board.json
-    assert eff["output"]["supported_formats"] == ["html", "pdf", "md", "txt", "json"]  # preserved nested key
-    assert eff["settings"]["max_items"] == 99  # CLI override wins
+    assert eff["settings"]["include_summary"] is True
+    assert eff["delivery"]["channel"] == "mail"
+    assert eff["settings"]["language"] == "en"
+    assert eff["output"]["default_format"] == "pdf"
+    assert eff["output"]["supported_formats"] == ["html", "pdf", "md", "txt", "json"]
+    assert eff["settings"]["max_items"] == 99
 
 
 def test_missing_optional_overrides_fall_back_cleanly(tmp_path: Path) -> None:
@@ -100,7 +100,6 @@ def test_corrupt_config_graceful_fallback_without_repair(tmp_path: Path) -> None
     assert len(res["warnings"]) == 1
     assert res["healed"] == []
     assert res["config"]["output"]["default_format"] == "md"
-    # Original corrupt file untouched when repair=False
     assert bad_cfg.read_text(encoding="utf-8").startswith("{ broken:")
 
 
@@ -162,7 +161,7 @@ def test_additive_migration_backfills_new_keys_without_clobbering_user_values(tm
     assert "settings.new_flag" in res["migrated_keys"]
     assert "self_healing" in res["migrated_keys"]
     persisted = json.loads((tmp_path / "config.json").read_text(encoding="utf-8"))
-    assert persisted["settings"]["keep_me"] == 42  # user customization preserved!
+    assert persisted["settings"]["keep_me"] == 42
     assert persisted["settings"]["new_flag"] is True
     assert persisted["self_healing"]["enabled"] is True
 
@@ -196,7 +195,7 @@ def test_render_report_all_five_formats_and_custom_template_override(tmp_path: P
         "generated_at": "2026-11-27T03:00:00Z",
         "summary": "3 Komponenten geprüft, 0 kritische Abweichungen.",
         "items": ["Config-Kaskade aktiv", "PDF-Fallback verifiziert"],
-        "footer": "Ocean Standard v0.4.0",
+        "footer": "Ocean Standard v0.4.1",
     }
     html_out = osc.render_report(payload, fmt="html")
     assert isinstance(html_out, str)
@@ -222,7 +221,6 @@ def test_render_report_all_five_formats_and_custom_template_override(tmp_path: P
     assert b"Quartalsuebersicht" in pdf_out
     assert pdf_out.rstrip().endswith(b"%%EOF")
 
-    # Custom template override without changing code
     custom_tpl_dir = tmp_path / "custom_tpl"
     custom_tpl_dir.mkdir()
     (custom_tpl_dir / "report.template.md").write_text("CUSTOM::{{title}}::{{summary}}\n", encoding="utf-8")
@@ -235,7 +233,201 @@ def test_render_report_all_five_formats_and_custom_template_override(tmp_path: P
 
 
 # ---------------------------------------------------------------------------
-# 4. Scaffold Subcommand & Generated Skill Verification
+# 4. Pragmatic v0.4.1 Regressions (lean skills, custom .json names, init flags)
+# ---------------------------------------------------------------------------
+
+def test_lean_guideline_skill_without_json_templates_or_scripts_scores_100_conformant(
+    tmp_path: Path,
+) -> None:
+    """v0.4.1 Regression #1: Lean guideline/counseling/router skill (SKILL.md + SKILL.en.md only) scores 100/100."""
+    lean_dir = tmp_path / "structured-reflection"
+    lean_dir.mkdir()
+    (lean_dir / "SKILL.md").write_text(
+        """---
+name: structured-reflection
+version: 0.2.0
+type: skill
+author: Ocean Contributors
+created: 2026-11-27
+updated: 2026-11-27
+description: "Verwenden, wenn komplexe Entscheidungen strukturiert durchdacht werden sollen (z. B. 'Entscheidung reflektieren', 'Überblick und Optionen klären', /structured-reflection). Bietet einen klaren Leitfaden ohne Skript-Ballast. NICHT verwenden für Dateivergleiche."
+standalone: true
+visibility: public
+---
+
+# structured-reflection — Reflexionsleitfaden
+
+Reiner Denk- und Beratungsleitfaden ohne Konfigurationsdateien, Vorlagen oder Skripte.
+""",
+        encoding="utf-8",
+    )
+    (lean_dir / "SKILL.en.md").write_text(
+        """---
+name: structured-reflection
+version: 0.2.0
+type: skill
+author: Ocean Contributors
+created: 2026-11-27
+updated: 2026-11-27
+description: "Use when reflecting on complex decisions systematically (e.g. 'reflect on this choice', 'decision overview and summary', /structured-reflection). Provides a clear thinking framework without script boilerplate. Do NOT use for file diffs."
+standalone: true
+visibility: public
+---
+
+# structured-reflection — Reflection Guide
+
+Pure advisory and thinking framework without JSON configs, templates, or scripts.
+""",
+        encoding="utf-8",
+    )
+
+    audit = osc.audit_skill(lean_dir)
+    assert audit["status"] == "conformant"
+    assert audit["score"] == 100
+    assert audit["recommendations"] == []
+    assert audit["hardcoding_signals"] == []
+    assert audit["config_files"] == []
+    assert audit["has_external_config"] is False
+    assert audit["checks"]["needs_templates"] is False
+
+
+def test_skill_with_custom_json_config_name_and_self_healing_is_conformant(tmp_path: Path) -> None:
+    """v0.4.1 Regression #2: Expressive custom .json filename (routing-defaults.json) is recognized on equal footing."""
+    skill_dir = tmp_path / "tier-router"
+    (skill_dir / "scripts").mkdir(parents=True)
+    (skill_dir / "tests").mkdir(parents=True)
+
+    (skill_dir / "SKILL.md").write_text(
+        """---
+name: tier-router
+version: 0.1.0
+type: skill
+author: Ocean Contributors
+created: 2026-11-27
+updated: 2026-11-27
+description: "Verwenden, wenn Aufgaben nach Komplexität geroutet werden sollen (z. B. 'Aufgabe routen', /tier-router). Lädt Stufengrenzen aus routing-defaults.json. NICHT verwenden für Skill-Suche (skill-finder)."
+standalone: true
+visibility: private-only
+---
+
+# tier-router
+""",
+        encoding="utf-8",
+    )
+    (skill_dir / "SKILL.en.md").write_text(
+        """---
+name: tier-router
+version: 0.1.0
+type: skill
+author: Ocean Contributors
+created: 2026-11-27
+updated: 2026-11-27
+description: "Use when routing tasks by complexity tier (e.g. 'route task', /tier-router). Loads thresholds from routing-defaults.json. Do NOT use for skill discovery (skill-finder)."
+standalone: true
+visibility: private-only
+---
+
+# tier-router (English)
+""",
+        encoding="utf-8",
+    )
+    osc.atomic_write_json(
+        skill_dir / "routing-defaults.json",
+        {"tiers": {"light": 10, "heavy": 30}},
+    )
+    (skill_dir / "scripts" / "router_core.py").write_text(
+        """import json
+from pathlib import Path
+
+def load_tiers(root: Path) -> dict:
+    fallback = json.loads((root / "routing-defaults.json").read_text(encoding="utf-8"))
+    local = root / "routing.local.json"
+    if not local.is_file():
+        return fallback
+    try:
+        return {**fallback, **json.loads(local.read_text(encoding="utf-8"))}
+    except json.JSONDecodeError:
+        return fallback
+""",
+        encoding="utf-8",
+    )
+    (skill_dir / "tests" / "test_router.py").write_text(
+        "def test_placeholder():\n    assert True\n",
+        encoding="utf-8",
+    )
+
+    audit = osc.audit_skill(skill_dir)
+    assert audit["status"] == "conformant"
+    assert audit["score"] == 100
+    assert audit["recommendations"] == []
+    assert audit["config_files"] == ["routing-defaults.json"]
+    assert audit["has_external_config"] is True
+    assert audit["checks"]["has_default_config"] is True
+    assert audit["checks"]["has_literal_default_config"] is False
+
+
+def test_init_cli_with_custom_config_name_and_no_templates_creates_lean_structure(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """v0.4.1 Regression #3: `init --config-name custom-prefs.json --no-templates` produces exact structure & passes tests."""
+    rc = osc.main([
+        "init",
+        "smart-router",
+        "--category", "infrastructure",
+        "--out", str(tmp_path),
+        "--config-name", "custom-prefs.json",
+        "--no-templates",
+        "--json",
+    ])
+    assert rc == 0
+    payload = json.loads(capsys.readouterr().out)
+    sdir = Path(payload["skill_dir"])
+    assert (sdir / "custom-prefs.json").is_file()
+    assert not (sdir / "default-config.json").exists()
+    assert not (sdir / "templates").exists()
+    assert (sdir / "scripts" / "smart_router_core.py").is_file()
+    assert (sdir / "tests" / "test_smart_router.py").is_file()
+
+    # Generated pytest suite runs cleanly against custom-prefs.json!
+    proc = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", str(sdir / "tests")],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        check=False,
+    )
+    assert proc.returncode == 0, f"Generated custom-config tests failed:\n{proc.stdout}\n{proc.stderr}"
+
+    audit = osc.audit_skill(sdir)
+    assert audit["status"] == "conformant"
+    assert audit["score"] == 100
+    assert audit["config_files"] == ["custom-prefs.json"]
+    assert audit["recommendations"] == []
+
+
+def test_init_cli_minimal_creates_pure_prompt_skill_scoring_100(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    rc = osc.main([
+        "init",
+        "calm-grounding",
+        "--category", "therapy",
+        "--out", str(tmp_path),
+        "--minimal",
+        "--json",
+    ])
+    assert rc == 0
+    payload = json.loads(capsys.readouterr().out)
+    sdir = Path(payload["skill_dir"])
+    assert sorted(p.name for p in sdir.iterdir()) == ["SKILL.en.md", "SKILL.md"]
+    audit = osc.audit_skill(sdir)
+    assert audit["status"] == "conformant"
+    assert audit["score"] == 100
+    assert audit["recommendations"] == []
+
+
+# ---------------------------------------------------------------------------
+# 5. Full Scaffold Subcommand & Audit-Skill on Hardcoded Fixtures
 # ---------------------------------------------------------------------------
 
 def test_scaffold_with_reports_and_profiles_creates_working_skill(tmp_path: Path) -> None:
@@ -259,7 +451,6 @@ def test_scaffold_with_reports_and_profiles_creates_working_skill(tmp_path: Path
     assert (sdir / "templates" / "report.template.md").is_file()
     assert (sdir / "templates" / "report.template.txt").is_file()
 
-    # Generated skill's own pytest suite passes out of the box!
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "-q", str(sdir / "tests")],
         capture_output=True,
@@ -269,16 +460,11 @@ def test_scaffold_with_reports_and_profiles_creates_working_skill(tmp_path: Path
     )
     assert proc.returncode == 0, f"Generated skill tests failed:\n{proc.stdout}\n{proc.stderr}"
 
-    # Generated skill audits as 'conformant' (>= 85/100, 0 hardcoding signals)
     audit = osc.audit_skill(sdir)
     assert audit["status"] == "conformant"
-    assert audit["score"] >= 90
+    assert audit["score"] == 100
     assert audit["hardcoding_signals"] == []
 
-
-# ---------------------------------------------------------------------------
-# 5. Audit-Skill on Minimal / Hardcoded vs. Full Conformant Skills
-# ---------------------------------------------------------------------------
 
 def test_audit_skill_detects_minimal_and_hardcoding_signals(tmp_path: Path) -> None:
     legacy_dir = tmp_path / "legacy-hardcoded-skill"
@@ -287,7 +473,6 @@ def test_audit_skill_detects_minimal_and_hardcoding_signals(tmp_path: Path) -> N
         "---\nname: legacy-hardcoded-skill\ndescription: \"Generates HTML reports.\"\n---\n# Legacy\n",
         encoding="utf-8",
     )
-    # Build synthetic path dynamically so static repo privacy scanners see zero concrete home paths
     synthetic_path = "/" + "opt" + "/fixed_account/output/report.html"
     (legacy_dir / "scripts" / "run.py").write_text(
         f'DEFAULT_TIMEOUT = 120\ndefault_format = "html"\nOUT = "{synthetic_path}"\n'
@@ -310,13 +495,9 @@ def test_ocean_skill_creator_audits_itself_cleanly() -> None:
     report = osc.audit_skill(SKILL_DIR)
     assert report["skill"] == "ocean-skill-creator"
     assert report["status"] == "conformant"
-    assert report["score"] >= 90
+    assert report["score"] == 100
     assert report["hardcoding_signals"] == []
 
-
-# ---------------------------------------------------------------------------
-# 6. CLI End-to-End & Bundled Templates / Privacy Neutrality
-# ---------------------------------------------------------------------------
 
 def test_cli_subcommands_scaffold_validate_and_audit_json(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     rc_scaf = osc.main([
