@@ -10,6 +10,8 @@ visibility: public potential
 language: en
 ---
 
+<img src="banner.png" width="100%" alt="priorities banner">
+
 # Session priorities
 
 Weight work within the current goals without reducing their scope or completion criteria. Use the provider namespace and a trusted runtime session ID. If unavailable, keep priorities in the conversation only. Never substitute a global or invented ID.
