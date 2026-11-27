@@ -14,40 +14,41 @@ category: dev
 tags: [development, code-analysis, task-management, automation, pipeline]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/devSoftAgent', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
 
 <img src="banner.png" width="100%" alt="dev-soft-agent banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `dev-soft-agent`.
 
-# Dev Soft Agent (English)
+# Dev Soft Agent
 
-Automated software development pipeline. Extracted from BACH's ATI agent,
-runs fully standalone with pure Python standard library.
+Pipeline automatisé de développement logiciel. Extrait de l'agent ATI de BACH,
+il fonctionne de manière entièrement autonome avec la bibliothèque standard Python pure.
 
-## Components
+## Composants
 
 ```
 scripts/
-  config.py              Configuration (scan folders, naming prefixes, weights)
-  project_manager.py     Project scan + classification by naming convention
-  task_engine.py          TASKS.txt parser + code scanner (TODO/FIXME)
-  code_analyzer.py       Static analysis (LOC, imports, classes, functions)
-  dev_loop.py            Orchestrator (DevLoop)
+  config.py              Configuration (dossiers à scanner, préfixes de nommage, poids)
+  project_manager.py     Analyse des projets + classification selon la convention de nommage
+  task_engine.py          Parseur AUFGABEN.txt + scanner de code (TODO/FIXME)
+  code_analyzer.py       Analyse statique (LOC, imports, classes, fonctions)
+  dev_loop.py            Orchestrateur (DevLoop)
   policies/
-    naming.py            snake_case / PascalCase / SCREAMING_SNAKE validation
-    encoding.py          UTF-8 enforcement + BOM detection
-    paths.py             Hardcoded path detection
+    naming.py            Vérification snake_case / PascalCase / SCREAMING_SNAKE
+    encoding.py          Application d'UTF-8 + détection BOM
+    paths.py             Détection de chemins codés en dur
   prompt_templates/
-    task_prompt.txt      LLM prompt for task processing
-    review_prompt.txt    LLM prompt for code review
-    analysis_prompt.txt  LLM prompt for project analysis
+    task_prompt.txt      Prompt LLM pour le traitement des tâches
+    review_prompt.txt    Prompt LLM pour la revue de code
+    analysis_prompt.txt  Prompt LLM pour l'analyse de projet
 ```
 
-## Usage as Python Library
+## Utilisation comme bibliothèque Python
 
 ```python
 from scripts.dev_loop import DevLoop
@@ -56,85 +57,85 @@ from scripts.config import Config
 config = Config()
 loop = DevLoop(config)
 
-# Scan projects (English)
+# Scanner les projets
 projects = loop.scan_projects()
 
-# Select project (weighted random selection by naming convention) (English)
+# Sélectionner un projet (sélection aléatoire pondérée selon la convention de nommage)
 project = loop.select_project()
 
-# Analyze code (English)
+# Analyser le code
 analysis = loop.analyze_project()
 print(f"{analysis.total_loc} LOC, {analysis.todo_count} TODOs")
 
-# Load and prioritize tasks (English)
+# Charger et prioriser les tâches
 tasks = loop.get_tasks()
 for task in tasks:
     print(f"[{task.task_type.name}] {task.description} (Prio: {task.priority})")
 
-# Complete dev session (English)
+# Session complète de développement
 result = loop.run_session()
 loop.save_session()
 ```
 
-## Usage as CLI
+## Utilisation en CLI
 
 ```bash
 cd scripts
 python -m devSoftAgent scan ~/projects
 python -m devSoftAgent select
-python -m devSoftAgent analyze /path/to/project
-python -m devSoftAgent tasks /path/to/project
-python -m devSoftAgent session --project my-project
+python -m devSoftAgent analyze /chemin/vers/projet
+python -m devSoftAgent tasks /chemin/vers/projet
+python -m devSoftAgent session --project mon-projet
 python -m devSoftAgent status
 ```
 
-## Naming Convention (Project Classification)
+## Convention de nommage (classification des projets)
 
-Projects are classified based on their folder name:
+Les projets sont classés en fonction du nom de leur dossier :
 
-| Prefix | Label | Weight | Meaning |
-|--------|-------|--------|---------|
-| `RDY` | Ready | 1.0 | Highest priority |
-| `RDY_FAST` | Fast Ready | 0.5 | Quick to complete |
-| `FAST` | Fast | 0.33 | Small task |
-| `DEV` | Development | 0.17 | In development |
-| `REL` | Released | 0.0 | Done, no work needed |
-| `ARC` | Archived | 0.0 | Archived |
+| Préfixe | Libellé | Poids | Signification |
+|---------|---------|-------|---------------|
+| `RDY` | Ready | 1.0 | Priorité maximale |
+| `RDY_FAST` | Fast Ready | 0.5 | Rapide à terminer |
+| `FAST` | Fast | 0.33 | Petite tâche |
+| `DEV` | Development | 0.17 | En cours de développement |
+| `REL` | Released | 0.0 | Terminé, aucun travail requis |
+| `ARC` | Archived | 0.0 | Archivé |
 
-Weight determines the probability in random selection.
+Le poids détermine la probabilité lors de la sélection aléatoire.
 
-## TASKS.txt Format
+## Format AUFGABEN.txt
 
 ```markdown
-# TASKS - ProjectName (English)
-# As of: 2026-03-12 (English)
+# AUFGABEN - NomDuProjet
+# État : 2026-03-12
 
-## OPEN
-- [ ] [BUG] Description of the bug
-- [ ] [FEATURE] New feature
+## OUVERT
+- [ ] [BUG] Description du bug
+- [ ] [FEATURE] Nouvelle fonctionnalité
 
-## IN PROGRESS
-- [-] [REFACTOR] Code restructuring
+## EN COURS
+- [-] [REFACTOR] Réorganisation du code
 
-## DONE
-- [x] [BUG] Fixed bug -- DONE 2026-03-01
+## TERMINÉ
+- [x] [BUG] Bug corrigé -- DONE 2026-03-01
 ```
 
-## Policies
+## Règles de qualité (Policies)
 
-Quality policies that can be automatically checked against code:
+Règles de qualité vérifiables automatiquement sur le code :
 
-- **NamingPolicy:** snake_case for modules/functions, PascalCase for classes
-- **EncodingPolicy:** Enforce UTF-8, detect BOM, flag CRLF
-- **PathPolicy:** Detect and report hardcoded absolute paths
+- **NamingPolicy :** `snake_case` pour les modules/fonctions, `PascalCase` pour les classes
+- **EncodingPolicy :** imposer UTF-8, détecter le BOM, signaler les CRLF
+- **PathPolicy :** détecter et signaler les chemins absolus codés en dur
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 0.1.1 (2026-11-22)
-- Note de langue corrigée
+- Mention linguistique corrigée.
 
 ### 0.1.0 (2026-03-12)
-- Migration from MODULAR_AGENTS/devSoftAgent to skill library
-- Project scanner, task engine, code analyzer, DevLoop
-- 3 policies (naming, encoding, paths)
-- 3 prompt templates (task, review, analysis)
+- Migration depuis `MODULAR_AGENTS/devSoftAgent` vers la bibliothèque de compétences
+- Scanner de projets, moteur de tâches, analyseur de code, `DevLoop`
+- 3 politiques (Naming, Encoding, Paths)
+- 3 modèles de prompts (Task, Review, Analysis)

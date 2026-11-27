@@ -1,100 +1,137 @@
 ---
+name: docs-analysis
+version: 1.1.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-11-22
+description: "À utiliser lorsque des spécifications, documents d'architecture ou plans d'exigences doivent être comparés à l'état réel du code ou consolidés (ex. 'comparer la doc au code', 'consolider les plans', 'analyser les écarts de documentation', /docs-analysis). Compare les concepts à l'implémentation, révèle les lacunes et fusionne proprement plusieurs documents de planification. Ne PAS utiliser pour la vérification syntaxique formelle de Mermaid (utiliser dev/mermaid-lint)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: dev
+tags: [docs-analysis, requirements, code-review, diff-report, quality-assurance]
 language: fr
+status: active
+visibility: public
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/workflows/docs-analyse.md', 'origin_version': '1.2.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
 ---
 
 <img src="banner.png" width="100%" alt="docs-analysis banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `docs-analysis`.
 
-# Document Requirements Analysis (English)
+# Analyse Documentaire des Exigences
 
-> Analyzes all concept and requirements documents, checks their requirements against the current code, and creates a consolidated difference report.
-
----
-
-## Présentation et Objectif & Purpose
-
-Analyzes all concept and requirements documents in the ../docs/ folder, checks their requirements against the current code, and creates a consolidated difference report.
+> Analyse l'ensemble des documents de conception et d'exigences, vérifie leur réalisation par rapport au code actuel et produit un rapport de différences consolidé.
 
 ---
 
-## Naming Convention
+## Objectif
 
-### Prefix and Suffix
-All analyzed documents receive:
-- **Prefix:** `conN_` where N = analysis version (1, 2, 3, ...)
-- **Suffix:** `_XX` where XX = fulfillment percentage (rounded to nearest 10)
-
-### Archiving Threshold
-- **>= 75% fulfilled:** Document is moved to `../docs/_archive/`
-- **< 75% fulfilled:** Document stays in `../docs/` with prefix/suffix
-- **Threshold configurable** (default: 75)
+Analyse tous les documents de conception et d'exigences dans le dossier `../docs/`, vérifie leurs exigences face au code actuel et génère un rapport d'écarts consolidé.
 
 ---
 
-## Process
+## Choix du mode
 
-### Phase 1: Collect Documents
-- List all *.md and *.txt files in ../docs/ (root)
-- Filter out README.txt
+- **Analyse des exigences (par défaut) :** vérifier les exigences face au code ; utiliser le déroulement
+  et les sorties décrits ci-dessous.
+- **Consolidation de plans / Synthèse documentaire :** pour « fusionner plusieurs plans »,
+  « plan actuel avec points ouverts » ou « archiver ce qui est terminé », lire
+  [Plan consolidation](references/plan-consolidation.md) et suivre cette branche.
+  Elle s'appuie sur `folder-organization` pour l'archivage et le Cut-and-Clue, et convient
+  également aux projets sans code. Le seuil en pourcentage et le renommage du mode standard
+  ne s'appliquent pas dans cette branche.
 
-### Phase 2: Extract Requirements
-For each document:
-- Read content
-- Identify requirements (checklists, tables, MISSING/TODO markers)
-- Categorize: Structure, Code, API, DB Schema, CLI, Feature
+Les sections suivantes décrivent exclusivement le mode standard.
 
-### Phase 3: Code Verification
-For each requirement:
-- Determine verification method (Glob, Grep, Read)
-- Execute verification
-- Mark as: FULFILLED, PARTIAL, MISSING
+### Convention de nommage du mode standard
 
-### Phase 4: Assessment
-- Count fulfilled vs. open requirements
-- Calculate fulfillment percentage (%)
-- Decide: archive (>= 75%) or keep (< 75%)
+### Préfixe et suffixe
+Tous les documents analysés reçoivent :
+- **Préfixe :** `conN_` où `N` = version de l'analyse (1, 2, 3, ...)
+- **Suffixe :** `_XX` où `XX` = taux de réalisation en pourcentage (arrondi à la dizaine)
 
-### Phase 5: Generate Output
-- Create REQUIREMENTS_ANALYSIS.md (summary)
-- Create consense_diff.md (only open requirements, by priority)
-
-### Phase 6: Versioning
-- Scan for highest conN_ prefix
-- New version = highest + 1
-
-### Phase 7: Rename and Move
-- Apply new prefix/suffix to documents
-- Archive or keep
+### Seuil d'archivage
+- **>= 75% réalisé :** le document est déplacé vers `../docs/_archive/`
+- **< 75% réalisé :** le document reste dans `../docs/` avec son préfixe/suffixe
+- **Seuil configurable** (par défaut : 75)
 
 ---
 
-## Output
+## Déroulement
 
-| File | Description |
-|------|-------------|
-| `conN_REQUIREMENTS_ANALYSIS.md` | Complete analysis (version N) |
-| `consense_diff_N.md` | Consolidated open requirements |
-| `_archive/conN_*_XX.*` | Archived (>=75%) documents |
+### Phase 1 : Collecter les documents
+- Lister tous les fichiers `*.md` et `*.txt` dans `../docs/` (racine)
+- Exclure `README.txt`
+
+### Phase 2 : Extraire les exigences
+Pour chaque document :
+- Lire le contenu
+- Identifier les exigences (check-lists, tableaux, marqueurs `FEHLT`/`MISSING`/`TODO`)
+- Catégoriser : Structure, Code, API, Schéma de BDD, CLI, Fonctionnalité
+
+### Phase 3 : Vérification dans le code
+Pour chaque exigence :
+- Déterminer la méthode de vérification (`Glob`, `Grep`, `Read`)
+- Exécuter la vérification
+- Marquer comme : `ERFÜLLT` (réalisé), `TEILWEISE` (partiel), `FEHLT` (manquant)
+
+### Phase 4 : Évaluation
+- Compter les exigences réalisées par rapport aux exigences ouvertes
+- Calculer le taux de réalisation (%)
+- Décider : archiver (>= 75 %) ou conserver (< 75 %)
+
+### Phase 5 : Générer les sorties
+- Créer `ANFORDERUNGSANALYSE.md` (résumé)
+- Créer `consense_diff.md` (uniquement les exigences ouvertes, par priorité)
+
+### Phase 6 : Versionnage
+- Rechercher le préfixe `conN_` le plus élevé
+- Nouvelle version = la plus élevée + 1
+
+### Phase 7 : Renommer et déplacer
+- Appliquer le nouveau préfixe/suffixe aux documents
+- Archiver ou conserver sur place
 
 ---
 
-## Priority Classification
+## Sorties
 
-| Priority | Criteria |
+| Fichier | Description |
+|---------|-------------|
+| `conN_ANFORDERUNGSANALYSE.md` | Analyse complète (version N) |
+| `consense_diff_N.md` | Exigences ouvertes consolidées |
+| `_archive/conN_*_XX.*` | Documents archivés (>=75 %) |
+
+---
+
+## Classification des priorités
+
+| Priorité | Critères |
 |:--------:|----------|
-| P1 | Core functionality missing, system unusable |
-| P2 | Important feature missing, workaround possible |
-| P3 | Nice-to-have, improves UX |
-| P4 | Cosmetic, documentation, code quality |
+| P1 | Fonctionnalité centrale manquante, système inutilisable |
+| P2 | Fonctionnalité importante manquante, contournement possible |
+| P3 | Souhaitable (nice-to-have), améliore l'expérience utilisateur |
+| P4 | Cosmétique, documentation, qualité de code |
 
 ---
 
-## Journal des Modifications
+## Journal des modifications
+
+### 1.1.1 (2026-11-22)
+- Mention linguistique corrigée.
+
+### 1.1.0 (2026-10-15)
+- Mode optionnel de consolidation de plans avec `folder-organization`, couverture des sources et
+  archivage fondé sur des preuves ; l'analyse des exigences reste le mode par défaut.
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Portage depuis BACH v3.8.0.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Porté depuis BACH v3.8.0 | Version autonome*

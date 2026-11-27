@@ -5,47 +5,61 @@ type: skill
 author: Lukas Geiger + Codex
 created: 2026-07-04
 updated: 2026-11-22
-description: "Utiliser pour établir une passerelle de fichiers résiliente et neutre entre différents agents IA et machines (ex. 'passerelle multi-agents', 'connecter des systèmes d'agents', 'communication entre agents par fichiers', /agents-bridge). Fournit des espaces d'amorçage, des silos de mémoire, des signaux de présence, une messagerie et des verrous partagés. Ne PAS utiliser pour les fusions git courantes (utiliser dev/reissverschluss-merge)."
+description: "Utilisez cette compétence lorsqu'un pont de fichiers portable et indépendant du fournisseur doit être mis en place entre différents agents IA et systèmes (par ex. 'configuration multi-agents', 'connecter des agents', 'pont de fichiers entre agents', /agents-bridge). Fournit surfaces de bootstrap, pointeurs de vérité, silos de mémoire séparés, messagerie et verrous coopératifs. Ne PAS utiliser pour la simple fusion de branches Git (utilisez plutôt dev/reissverschluss-merge)."
 standalone: true
 anthropic_compatible: true
 category: infrastructure
-tags: [multi-agent, bootstrap, rules, agents-md, provider-neutral]
+tags: [multi-agent, bootstrap, recovery, messaging, memory, provider-neutral]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': ['python'], 'services': [], 'protocols': [], 'python': []}
 ---
 
-
 <img src="banner.png" width="100%" alt="agents-bridge banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `agents-bridge`.
 
-# AGENTS-BRIDGE (English)
+# AGENTS-BRIDGE — le canot de sauvetage (« the Lifeboat »), aussi : Time Capsule
 
-Use this skill to connect an agent or IDE to explicitly selected rule files.
-No provider, filename, host, or cloud directory is implicitly canonical.
+> **Surnoms « Lifeboat » (canot de sauvetage) et « Time Capsule » (capsule temporelle) :** `agents-bridge`
+> EST le kit de restauration des fichiers de règles des agents (`CLAUDE.md`/
+> `GEMINI.md`/`GPT.md`/`AGENTS.md`) — il assurait jusqu'ici cette fonction sans nom
+> distinctif. « Lifeboat » s'inscrit dans la famille nautique autour de la métaphore
+> de la passerelle (Wheelhouse, Deep-Diver, Lower Decks) ; « Time Capsule » souligne
+> le second versant de la même fonction : un état scellé et vérifié par empreinte
+> (hash) qui peut être restauré intact ultérieurement. Aucun renommage : le nom
+> technique reste `agents-bridge`, les deux surnoms sont des synonymes parlants.
 
-## Flux de Travail et Étapes d'Exécution & Execution Steps
+Utilisez cette compétence pour inventorier, vérifier, transférer ou restaurer un petit système multi-fournisseurs basé sur des fichiers. Chaque instance possède exactement un fichier fournisseur principal explicitement choisi. Aucun fournisseur, nom de fichier, hôte ou répertoire cloud n'est implicitement canonique.
 
-1. Read all local instructions that govern the source and target paths.
-2. Run `python scripts/bridge.py discover` and optionally pass `--project`.
-3. Ask the user to select the ordered truth sources and the target. An empty
-   selection authorizes no write.
-4. Prefer a redirect or ordered loader. Use a generated copy only when the
-   target cannot load references, and record provenance plus drift checks.
-5. Preview with:
+## Flux de travail et procédure
+
+1. Lisez toutes les instructions locales, les verrous et les règles de confidentialité pour la source et la cible. Préservez les modifications tierces.
+2. Exécutez `python scripts/bridge.py discover --root <instance>`. `discover` ne peut retenir qu'un marqueur unique `agents-bridge-primary: true`. S'il n'y a aucune ou plusieurs revendications, le flux s'arrête avec un briefing de décision ; il n'existe aucun nom de fichier par défaut.
+3. Créez un profil conforme à `references/profile-v3.schema.json`. Il désigne la surface principale, les surfaces fournisseurs, les sources de vérité, le graphe de pointeurs, la récupération, les silos mémoire, la messagerie, la présence, les verrous ainsi que les inclusions/exclusions de confidentialité.
+4. Vérifiez le profil et capturez l'instance sans modifier la source :
 
    ```text
-   python scripts/bridge.py render --truth <path> --target-kind generic
+   python scripts/bridge.py profile-validate --profile <profil.json>
+   python scripts/bridge.py capture --profile <profil.json> --root <source> --output <nouveau-paquet>
    ```
 
-6. Create or change the target only after reviewing the preview.
-7. Prove that the target agent actually read every selected source.
+5. Vérifiez le paquet avec `doctor` et générez un aperçu avec `plan` ou `restore` sans `--apply`. Les fichiers existants ne sont jamais écrasés aveuglément.
+6. N'appliquez la restauration qu'après vérification avec `--apply --yes --backup-dir <backup> --receipt <receipt.json>`. Suivent ensuite `verify` et un véritable test de lecture natif pour Claude, Codex/GPT, Gemini ou le fournisseur neutre.
+7. En cas d'erreur : clarifier la dérive ou annuler avec le reçu exact via `rollback --yes`. Une deuxième restauration doit signaler `idempotent`.
+8. Utilisez `message send|ack|status`, `memory`, `presence` et `lock claim|release|status` uniquement comme de petits contrats de fichiers. La messagerie ne remplace ni Ticket-Master ni un planificateur ; les silos mémoire ne sont jamais fusionnés automatiquement.
 
-See `references/agent-conventions.md`,
-`references/truth-topologies.md`, and
-`references/inventory-contract.md`.
+## Limites de sécurité
 
-`agent-config-sync` manages broader configuration topologies.
-`agents-bridge` is limited to boot and rule access. Runtime partner bridges and
-schedulers are separate components.
+- Un chargeur (loader) ou une redirection est préférable. Une projection n'est autorisée que si les références natives ne fonctionnent pas ; elle contient les empreintes sources, la provenance, `generated_at` et une détection de dérive. La régénération contrôlée s'effectue uniquement dans un nouveau paquet avec `capture --regenerate-projections`.
+- Tous les chemins du profil sont encodés en UTF-8, relatifs et indépendants de la plateforme. Les exports sont manifestés et limités aux inclusions/exclusions.
+- Les secrets, identifiants et chemins absolus personnels sont rejetés en mode *fail closed* ou remplacés avec journalisation en mode explicite `redact`.
+- Si un Controlroom est présent, il reste l'autorité de coordination. `agents-bridge` sert alors exclusivement de bootstrap, de récupération et d'adaptateur de fichiers sans dupliquer de runtime central.
+
+Les contrats et exemples figurent dans `references/contracts.de.md`, `references/truth-topologies.md`, `references/inventory-contract.md` et `references/migration-2-to-3.de.md`. La version anglaise est `SKILL.en.md`.
+
+## Journal des modifications
+
+### 3.0.2 (2026-11-22)
+- Indication de langue corrigée

@@ -1,137 +1,162 @@
 ---
-language: fr
----
+name: brainstorm
+version: 1.1.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-11-22
+description: "À utiliser lorsque de nombreuses idées nouvelles sont souhaitées, encore sans évaluation : noms, fonctionnalités, campagnes, concepts d'événements ou alternatives à l'habituel ('brainstorm', 'donne-moi 30 idées', 'j'ai besoin d'idées pour...', 'fais un tour SCAMPER', 'Six Thinking Hats', /brainstorm). Produit un large éventail via SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ ou Rapid Ideation, regroupe et présélectionne. Ne PAS utiliser pour trouver la cause d'un problème (think), choisir entre des options existantes (decide) ou enchaîner analyse-idées-décision (structured-thinking)."
 
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: utilities
+tags: [brainstorm, creativity, ideation, scamper, six-hats, innovation]
+language: fr
+status: active
+visibility: public
+dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
+provenance: {'origin': 'bach', 'origin_path': 'system/skills/_services/brainstorm.md', 'origin_version': '1.0.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-15', 'last_sync_to_origin': None, 'local_changes_since_sync': True}
+---
 <img src="banner.png" width="100%" alt="brainstorm banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `brainstorm`.
 
-# Brainstorm (English)
+# Brainstorm — Créativité structurée
 
-> Structured creativity for innovation — SCAMPER, Six Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
-
----
-
-## When to Use?
-
-- New ideas needed
-- Stuck / creativity block
-- Innovation sought
-- Solve a problem creatively
-
-**Trigger words:** brainstorm, ideas, creative, innovative, ideation
+> Créativité structurée pour l'innovation — SCAMPER, Six Thinking Hats, Mind Mapping, Reverse Brainstorming, TRIZ, Rapid Ideation
 
 ---
 
-## Methods
+## Quand l'utiliser ?
+
+- Besoin de nouvelles idées
+- Blocage / panne de créativité
+- Recherche d'innovation
+- Résoudre un problème de manière créative
+
+**Mots déclencheurs :** brainstorm, idées, créatif, innovant, génération d'idées
+
+---
+
+## Méthodes
 
 ### 1. SCAMPER
 
 **Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse**
 
-Systematically improve existing solutions:
-- **S**ubstitute: What can be replaced?
-- **C**ombine: What can be combined?
-- **A**dapt: What can be adapted?
-- **M**odify: What can be changed?
-- **P**ut to other use: What else could it be used for?
-- **E**liminate: What can be removed?
-- **R**everse: What can be reversed?
+Améliorer systématiquement des solutions existantes :
+- **S**ubstituer : que peut-on remplacer ?
+- **C**ombiner : que peut-on associer ?
+- **A**dapter : que peut-on ajuster ?
+- **M**odifier : que peut-on transformer ?
+- **P**our un autre usage : à quoi d'autre cela peut-il servir ?
+- **É**liminer : que peut-on supprimer ?
+- **R**enverser : que peut-on inverser ?
 
 ---
 
 ### 2. Six Thinking Hats (Edward de Bono)
 
-Systematically think through 6 perspectives:
+Explorer systématiquement 6 perspectives :
 
-- **White Hat — Facts:** What information do we have? What's missing?
-- **Red Hat — Emotion:** How does it feel? Intuition, gut feeling
-- **Black Hat — Critique:** What could go wrong? Risks, weaknesses
-- **Yellow Hat — Optimism:** What are the opportunities? Best case
-- **Green Hat — Creativity:** New ideas? Out-of-the-box?
-- **Blue Hat — Meta:** Process control, summary, next steps
+- **Chapeau Blanc — Faits :** de quelles informations disposons-nous ? Que manque-t-il ?
+- **Chapeau Rouge — Émotion :** quel ressenti cela inspire-t-il ? Intuition, sentiment spontané
+- **Chapeau Noir — Critique :** qu'est-ce qui pourrait mal tourner ? Risques, faiblesses
+- **Chapeau Jaune — Optimisme :** quelles sont les opportunités ? Meilleur scénario
+- **Chapeau Vert — Créativité :** nouvelles idées ? Pensée hors des sentiers battus ?
+- **Chapeau Bleu — Méta :** pilotage du processus, synthèse, prochaines étapes
 
-**Process:** Define problem (Blue) -> Facts (White) -> Emotions (Red) -> Critique (Black) -> Positives (Yellow) -> New ideas (Green) -> Summarize (Blue)
-
----
-
-### 3. Mind Mapping
-
-Visualize thoughts hierarchically:
-1. Central topic
-2. Main branches (3-7)
-3. Sub-branches for each category
-4. Add details and ideas
-5. Identify connections
+**Processus :** définir le problème (Bleu) -> faits (Blanc) -> émotions (Rouge) -> critique (Noir) -> positif (Jaune) -> nouvelles idées (Vert) -> synthétiser (Bleu)
 
 ---
 
-### 4. Reverse Brainstorming
+### 3. Mind Mapping (Carte mentale)
 
-Invert the problem: "How do we make it WORSE?"
-
-1. Invert the problem
-2. Collect bad ideas
-3. Reverse = Good ideas
-
-Particularly effective when direct ideation is stalled.
-
----
-
-### 5. TRIZ (Theory of Inventive Problem Solving)
-
-Top 10 Principles for Software:
-1. **Segmentation:** Split monolith into modules
-2. **Extraction:** Isolate disturbing property
-3. **Local Quality:** Different components, different properties
-4. **Merging:** Combine similar functions
-5. **Universality:** One element, multiple functions
-6. **Nesting:** Components within components
-7. **Preliminary Action:** Preparation in advance
-8. **Feedback:** Monitoring and adaptation
-9. **Self-Service:** System maintains itself
-10. **Asymmetry:** Non-symmetrical designs
+Visualiser les idées de manière hiérarchique :
+1. Thème central
+2. Branches principales (3–7)
+3. Sous-branches pour chaque catégorie
+4. Ajouter détails et idées
+5. Repérer les connexions
 
 ---
 
-### 6. Rapid Ideation
+### 4. Reverse Brainstorming (Brainstorming inversé)
 
-Quantity over quality — 50+ ideas in 20 min.
+Inverser le problème : « Comment rendre les choses PIRES ? »
 
-**Rules:**
-- NO criticism during ideation
-- WILD ideas welcome
-- Build on others' ideas
-- Quantity FIRST
+1. Inverser le problème
+2. Recueillir de mauvaises idées
+3. Inverser chaque mauvaise idée = bonnes idées
 
-**Timer-based:**
-- Round 1 (5 min): Open ideation
-- Round 2 (5 min): Variations
-- Round 3 (5 min): Combinations
-- Round 4 (5 min): Extreme ideas
+Particulièrement efficace lorsque la recherche directe d'idées piétine.
 
 ---
 
-## Flux de Travail et Étapes d'Exécution & Execution Steps
+### 5. TRIZ (Théorie de résolution des problèmes inventifs)
+
+Top 10 des principes appliqués au logiciel :
+1. **Segmentation :** découper un monolithe en modules
+2. **Extraction :** isoler une propriété gênante
+3. **Qualité locale :** composants différents, propriétés différentes
+4. **Fusion :** combiner des fonctions similaires
+5. **Universalité :** un élément, plusieurs fonctions
+6. **Imbrication :** placer des composants les uns dans les autres
+7. **Action préalable :** préparer à l'avance
+8. **Rétroaction :** surveillance et ajustement
+9. **Auto-service :** le système s'entretient lui-même
+10. **Asymétrie :** conceptions non symétriques
+
+---
+
+### 6. Rapid Ideation (Idéation rapide)
+
+La quantité avant la qualité — 50+ idées en 20 minutes.
+
+**Règles :**
+- AUCUNE critique pendant la phase d'idéation
+- Idées FOLLES bienvenues
+- Rebondir sur les idées des autres
+- Quantité D'ABORD
+
+**Rythmé par minuteur :**
+- Tour 1 (5 min) : idéation libre
+- Tour 2 (5 min) : variations
+- Tour 3 (5 min) : combinaisons
+- Tour 4 (5 min) : idées extrêmes
+
+---
+
+## Workflow
 
 ```
-1. User request
-2. Understand goal
-3. Choose method(s)
-4. Generate ideas (no criticism!)
-5. Clustering
-6. Feasibility/Impact matrix
-7. Top 5-10 selection
-8. Output + recommendation
+1. Demande utilisateur
+2. Comprendre l'objectif
+3. Choisir la ou les méthodes
+4. Générer des idées (aucune critique !)
+5. Regroupement thématique (Clustering)
+6. Matrice Faisabilité / Impact
+7. Sélection du Top 5–10
+8. Restitution + recommandation
 ```
 
 ---
 
-## Journal des Modifications
+## Journal des modifications
+
+### 1.1.1 (2026-11-22)
+- Mention linguistique corrigée.
+
+### 1.1.0 (2026-11-06)
+- Description reformulée avec déclencheur clair et délimitation (règle de `docs/CONVENTIONS.md`) : situation d'emploi, formulations types et commande slash en tête, compétences voisines dans une clause « Ne PAS utiliser ».
 
 ### 1.0.0 (2026-03-15)
-- Ported from BACH v3.8.0
+- Portage depuis BACH v3.8.0.
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Porté depuis BACH v3.8.0 | Version autonome*
+
+**Voir aussi :** [think](../think/SKILL.md) (Analyse, cause racine, SWOT) | [decide](../decide/SKILL.md) (Cadres de décision)

@@ -1,214 +1,237 @@
 ---
+name: act-techniques
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-12
+updated: 2026-11-22
+description: "Utilisez cette compétence lorsque la flexibilité psychologique, l'orientation vers les valeurs ou l'acceptation selon le modèle ACT doivent être favorisées (par ex. 'clarifier ses valeurs', 'pratiquer la défusion', 'acceptation plutôt qu'évitement', /act-techniques). Présente le modèle Hexaflex et ses 6 processus fondamentaux ; ne PAS utiliser pour la restructuration cognitive des pensées automatiques (cognitive-restructuring)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [act, akzeptanz, defusion, werte, psychische-flexibilität, hayes]
 language: fr
+status: active
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/act_techniken.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="act-techniques banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `act-techniques`.
 
-# ACT Techniques — Acceptance & Commitment Therapy (English)
+> Thérapie d'acceptation et d'engagement (ACT) : modèle Hexaflex et les six processus fondamentaux de la flexibilité psychologique selon Steven Hayes
 
-## Foundation
+# Techniques ACT — Thérapie d'acceptation et d'engagement
 
-Acceptance & Commitment Therapy (ACT, pronounced as the word "act") was developed by **Steven C. Hayes** and belongs to the third wave of behavioral therapy. ACT does not aim at symptom reduction, but at **psychological flexibility** — the ability to act openly and consciously in the present moment, guided by personal values.
+## Fondements
 
-Core message: **The pain is not the problem — the struggle against the pain is.**
+La thérapie d'acceptation et d'engagement (ACT, prononcé comme le mot anglais « act ») a été développée par **Steven C. Hayes** et appartient à la troisième vague des thérapies comportementales. L'ACT ne vise pas la réduction des symptômes, mais la **flexibilité psychologique** — la capacité d'agir de manière ouverte et consciente dans l'instant présent, guidé par ses valeurs personnelles.
+
+Message central : **Ce n'est pas la douleur qui est le problème, mais la lutte contre la douleur.**
 
 ---
 
-## The Hexaflex Model
+## Le modèle Hexaflex
 
-The Hexaflex is the central model of ACT. Six core processes together form psychological flexibility. Each process is the counterpart to a pathological process (psychological inflexibility).
+L'Hexaflex est le modèle central de l'ACT. Six processus fondamentaux forment ensemble la flexibilité psychologique. Chaque processus est le pendant d'un processus pathologique (l'inflexibilité psychologique).
 
 ```
-                    Present Moment
+                    Moment présent
                          /    \
                         /      \
-              Acceptance          Self-as-Context
+             Acceptation        Soi-comme-contexte
                 |    \          /    |
-                |  PSYCHOLOGICAL |
-                |  FLEXIBILITY   |
-                |  /          \     |
-              Defusion          Values
+                |    FLEXIBILITÉ    |
+                |   PSYCHOLOGIQUE   |
+                |    /          \   |
+              Défusion          Valeurs
                         \      /
                          \    /
-                    Committed Action
+                    Action engagée
 ```
 
-### Flexibility vs. Inflexibility
+### Flexibilité vs inflexibilité
 
-| Core Process (flexible) | Counterpart (inflexible) |
+| Processus fondamental (flexible) | Pôle opposé (inflexible) |
 |---|---|
-| Acceptance | Experiential avoidance |
-| Cognitive Defusion | Cognitive fusion |
-| Present Moment Awareness | Past/future focus |
-| Self-as-Context | Conceptualized self |
-| Values | Lack of values clarity |
-| Committed Action | Inaction/impulsivity |
+| Acceptation | Évitement expérientiel |
+| Défusion cognitive | Fusion cognitive |
+| Moment présent | Centration sur le passé/futur |
+| Soi-comme-contexte | Soi conceptualisé |
+| Valeurs | Manque de clarification des valeurs |
+| Action engagée | Inaction / impulsivité |
 
 ---
 
-## The Six Core Processes
+## Les six processus fondamentaux
 
-### 1. Acceptance
+### 1. Acceptation
 
-**Definition:** Willingness to allow inner experiences (feelings, thoughts, bodily sensations) without trying to change, avoid, or control them.
+**Définition :** Disposition à accueillir les expériences intérieures (émotions, pensées, sensations corporelles) sans chercher à les modifier, les éviter ou les contrôler.
 
-**Important:** Acceptance is NOT resignation. It is an active, conscious decision to make room for experience.
+**Important :** L'acceptation n'est PAS la résignation. C'est un choix actif et conscient de faire de la place à l'expérience vécue.
 
 #### Techniques
 
-- **Willingness Scale (0-10):** "How willing are you right now to just let this feeling be there?"
-- **Expansion:** Locate the feeling in the body, give it shape/color/texture, let it "breathe"
-- **Struggle Switch Metaphor:** There's a switch inside us — not for pain, but for the struggle against pain. Acceptance means flipping the struggle switch.
+- **Échelle de disposition (0-10) :** « À quel point es-tu prêt(e) en ce moment à simplement laisser cette émotion être là ? »
+- **Expansion :** Localiser la sensation dans le corps, lui donner une forme/couleur/texture, la « laisser respirer ».
+- **Métaphore de l'interrupteur de lutte :** Nous avons en nous un interrupteur — non pas pour la douleur, mais pour la lutte contre la douleur. Accepter signifie basculer cet interrupteur.
 
-#### Metaphor: Quicksand
+#### Métaphore : Les sables mouvants
 
-> If you've fallen into quicksand, the natural instinct is to fight, resist, thrash. But that's exactly what pulls you deeper. The only helpful thing: Lie flat, increase the surface area, accept contact with the quicksand. Not because quicksand is great — but because the struggle against it is the real problem.
+> Lorsque tu es pris dans des sables mouvants, l'instinct naturel est de te débattre, de résister, de gesticuler. Mais c'est précisément cela qui t'enfonce plus profondément. La seule chose utile : s'allonger à plat, augmenter la surface de contact, accepter le contact avec les sables mouvants. Non pas parce que les sables mouvants sont agréables — mais parce que la lutte contre eux est le véritable problème.
 
 ---
 
-### 2. Cognitive Defusion
+### 2. Défusion cognitive
 
-**Definition:** Detaching from thoughts — seeing them for what they are: mental events, not reality itself. Instead of "I am worthless" -> "I am having the thought that I am worthless."
+**Définition :** Se détacher de ses pensées — les voir pour ce qu'elles sont : des événements mentaux, pas la réalité elle-même. Au lieu de « Je suis nul(le) » → « J'ai la pensée que je suis nul(le). »
 
 #### Techniques
 
-- **"I am having the thought that..."** — Linguistically distance thoughts
-- **"Thank you, mind!"** — Acknowledge the mind as an overactive advisor without obeying it
-- **Singing thoughts:** Sing the distressing thought to the melody of "Happy Birthday" (reduces its credibility)
-- **Leaves on a stream:** Imagine a stream. Place each thought on a leaf and let it float by
-- **Passenger naming:** Give the inner critic a name ("Ah, there's Perfectionist Pete again")
-- **Repetition exercise:** Rapidly repeat a distressing word for 30 seconds — it loses its emotional charge
+- **« J'ai la pensée que… »** — Mettre les pensées à distance par le langage
+- **« Merci, mon esprit ! »** — Reconnaître le mental comme un conseiller hyperactif, sans lui obéir
+- **Chanter la pensée :** Chanter la pensée pesante sur l'air de « Joyeux anniversaire » (réduit sa crédibilité)
+- **Pensées sur des feuilles :** Imaginer un ruisseau. Poser chaque pensée sur une feuille et la laisser dériver
+- **Nommer le passager :** Donner un nom au critique intérieur (« Ah, revoilà Pierre-le-Perfectionniste »)
+- **Exercice de répétition :** Répéter rapidement un mot pesant pendant 30 secondes — il perd sa charge émotionnelle
 
-#### Metaphor: The Uninvited Guest
+#### Métaphore : L'invité indésirable
 
-> Imagine you're throwing a party and an uninvited guest shows up. You have three options: (1) You throw them out — but they keep coming back and making noise. (2) You let them in and spend the whole evening monitoring them — then you miss your own party. (3) You let them in, acknowledge they're there, and continue enjoying your party. Option 3 is defusion.
+> Imagine que tu organises une fête et qu'un invité indésirable arrive. Tu as trois options : (1) Tu le mets dehors — mais il revient sans cesse et fait du vacarme. (2) Tu le laisses entrer et tu passes toute la soirée à le surveiller — alors tu rates ta propre fête. (3) Tu le laisses entrer, tu prends acte de sa présence et tu continues de profiter de ta fête. L'option 3, c'est la défusion.
 
 ---
 
-### 3. Present Moment Awareness (Contact with the Present Moment)
+### 3. Moment présent (Contact avec l'instant présent)
 
-**Definition:** Intentional, non-judgmental attention to the here and now. Neither ruminating about the past nor worrying about the future.
+**Définition :** Attention consciente et sans jugement portée sur l'ici et maintenant. Ni en train de ruminer le passé, ni de s'inquiéter pour l'avenir.
 
 #### Techniques
 
-- **5-4-3-2-1 Exercise:** 5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste
-- **Breath awareness:** 3 conscious breaths — just observe, don't control
-- **Sensory anchoring:** Explore an object with full attention (texture, weight, temperature)
-- **Check-in questions:** "What is happening in my body right now? What thoughts are here? What feelings?"
+- **Exercice 5-4-3-2-1 :** 5 choses à voir, 4 à entendre, 3 à toucher, 2 à sentir, 1 à goûter
+- **Pleine conscience du souffle :** 3 respirations conscientes — uniquement observer, sans diriger
+- **Ancrage sensoriel :** Explorer un objet avec une attention totale (texture, poids, température)
+- **Questions de check-in :** « Que se passe-t-il en ce moment dans mon corps ? Quelles pensées sont présentes ? Quelles émotions sont là ? »
 
 ---
 
-### 4. Self-as-Context (Observing Self)
+### 4. Soi-comme-contexte (Soi observateur)
 
-**Definition:** Distinguishing between the self as content ("I AM anxious") and the self as context ("I NOTICE anxiety"). The observing self is the space in which all experiences occur — but it is not those experiences.
+**Définition :** Distinction entre le soi-comme-contenu (« Je SUIS anxieux ») et le soi-comme-contexte (« J'OBSERVE de l'anxiété »). Le soi observateur est l'espace dans lequel se déroulent toutes les expériences — mais il n'est pas ces expériences.
 
 #### Techniques
 
-- **Sky Metaphor:** "You are the sky, not the weather. Clouds, storms, sunshine — everything passes through. But the sky is always there."
-- **Chessboard Metaphor:** "You are not the white or black pieces. You are the board on which the game takes place."
-- **Observer Exercise:** Close your eyes. Observe thoughts. Observe feelings. Observe bodily sensations. Then: "Who is it that observes all of this?"
-- **Perspective Exercises:** "If your 80-year-old self were to look back at this situation — what would they say?"
+- **Métaphore du ciel :** « Tu es le ciel, pas la météo. Nuages, tempêtes, soleil — tout passe. Mais le ciel est toujours là. »
+- **Métaphore de l'échiquier :** « Tu n'es ni les pièces blanches ni les pièces noires. Tu es l'échiquier sur lequel la partie se joue. »
+- **Exercice de l'observateur :** Fermer les yeux. Observer les pensées. Observer les émotions. Observer les sensations corporelles. Puis : « Qui est celui qui observe tout cela ? »
+- **Exercices de perspective :** « Si ton moi de 80 ans se retournait sur cette situation — que dirait-il ? »
 
 ---
 
-### 5. Values
+### 5. Valeurs
 
-**Definition:** Freely chosen life directions. Values are not goals (which can be achieved) but compass directions (which are followed). You never "complete" the value of "being a loving partner" — you live it, moment by moment.
+**Définition :** Directions de vie librement choisies. Les valeurs ne sont pas des objectifs (que l'on peut atteindre), mais des directions de boussole (que l'on suit). On n'« atteint » jamais la valeur « être un partenaire aimant » — on l'incarne, instant après instant.
 
-#### Values Clarification — Life Domains
+#### Clarification des valeurs — Domaines de vie
 
-| Life Domain | Guiding Question |
+| Domaine de vie | Question directrice |
 |---|---|
-| Relationships | What kind of partner/friend/family member do I want to be? |
-| Work/Career | What makes work meaningful to me? |
-| Personal Growth | In what direction do I want to develop? |
-| Health | How do I want to treat my body? |
-| Leisure/Recreation | What truly nourishes me? |
-| Spirituality | What gives my life deeper meaning? |
-| Community | What do I want to contribute to the world? |
+| Relations | Quel genre de partenaire / ami(e) / membre de la famille veux-je être ? |
+| Travail / Profession | Qu'est-ce qui rend le travail porteur de sens pour moi ? |
+| Développement personnel | Dans quelle direction est-ce que je souhaite évoluer ? |
+| Santé | Comment est-ce que je souhaite traiter mon corps ? |
+| Loisirs / Détente | Qu'est-ce qui me nourrit vraiment ? |
+| Spiritualité | Qu'est-ce qui donne un sens profond à ma vie ? |
+| Communauté | Qu'est-ce que je souhaite apporter au monde ? |
 
 #### Techniques
 
-- **Tombstone Exercise:** "What should be written on your tombstone? Not what you achieved, but what you stood for."
-- **Compass Exercise:** Determine a direction for each life domain and rate on a scale of 1-10: "How important is this to me?" and "How much am I living this right now?"
-- **Sweet Spot of Pain:** "Behind every pain lies a value. Those who don't love can't be hurt. That it hurts shows that something matters to you."
+- **Exercice de l'épitaphe :** « Que voudrais-tu voir inscrit sur ta pierre tombale ? Non pas ce que tu as accompli, mais ce que tu as incarné. »
+- **Exercice de la boussole :** Définir une direction pour chaque domaine de vie et évaluer sur une échelle de 1 à 10 : « Quelle importance cela a-t-il pour moi ? » et « À quel point est-ce que je le vis actuellement ? »
+- **Le point sensible de la douleur :** « Derrière chaque douleur se cache une valeur. Celui qui n'aime pas ne peut pas être blessé. Le fait que cela fasse mal montre que quelque chose compte pour toi. »
 
 ---
 
-### 6. Committed Action
+### 6. Action engagée
 
-**Definition:** Concrete actions that align with one's own values. Not perfect, not "when I'm ready," but NOW, with all difficulties.
+**Définition :** Des actions concrètes en accord avec ses propres valeurs. Pas parfaites, pas « quand je serai prêt(e) », mais MAINTENANT, avec toutes les difficultés présentes.
 
 #### Techniques
 
-- **SMART Value-Goals:** Specific, Measurable, Attractive, Realistic, Time-bound — but always linked to a value
-- **Smallest possible step:** "What is the smallest step you could take TODAY toward this value?"
-- **Willingness check:** "Are you willing to bring [unpleasant feeling] along if it shows up while you take this step?"
-- **Plan for obstacles:** "What inner barriers might arise? How do you want to handle them?" (not: "How will you eliminate them?")
+- **Objectifs de valeurs SMART :** Spécifiques, Mesurables, Attractifs, Réalistes, Temporellement définis — mais toujours reliés à une valeur
+- **Plus petit pas possible :** « Quel est le plus petit pas que tu pourrais faire AUJOURD'HUI dans la direction de cette valeur ? »
+- **Vérification de disposition :** « Es-tu prêt(e) à emmener [émotion désagréable] avec toi si elle apparaît pendant que tu fais ce pas ? »
+- **Prévoir les obstacles :** « Quelles barrières intérieures pourraient surgir ? Comment veux-tu y faire face ? » (et non : « Comment les éliminer ? »)
 
-#### Metaphor: Passengers on the Bus
+#### Métaphore : Les passagers du bus
 
-> You are the bus driver of your life. On the bus sit passengers — your thoughts, feelings, memories, bodily sensations. Some are loud, threatening, ugly. They shout: "Turn right! Turn left! Stop!" You have three options:
+> Tu es le conducteur du bus de ta vie. Dans le bus sont assis des passagers — ce sont tes pensées, émotions, souvenirs, sensations corporelles. Certains sont bruyants, menaçants, laids. Ils crient : « Tourne à droite ! Tourne à gauche ! Arrête-toi ! » Tu as trois options :
 >
-> 1. **Stop and fight:** You stop driving and try to throw the passengers out. But you don't move forward.
-> 2. **Negotiate:** You drive where the passengers want. But it's not YOUR direction.
-> 3. **Keep driving:** You let the passengers shout, take them along — and still drive in YOUR direction. The passengers are allowed to be there. But THEY don't determine the route.
+> 1. **S'arrêter et se battre :** Tu cesses de conduire et tu essaies de jeter les passagers dehors. Mais tu n'avances plus.
+> 2. **Négocier :** Tu conduis là où les passagers veulent aller. Mais ce n'est pas TA direction.
+> 3. **Continuer de rouler :** Tu laisses les passagers crier, tu les emmènes avec toi — et tu continues malgré tout dans TA direction. Les passagers ont le droit d'être là. Mais CE NE SONT PAS EUX qui décident de l'itinéraire.
 >
-> Committed action means: Driving the bus toward your values, no matter which passengers are on board.
+> L'action engagée signifie : conduire le bus dans la direction de tes valeurs, quels que soient les passagers à bord.
 
 ---
 
-## Areas of Application
+## Domaines d'application
 
-ACT is evidence-based and effective for:
+L'ACT dispose d'une efficacité fondée sur les preuves dans les domaines suivants :
 
-- **Depression and anxiety disorders**
-- **Chronic pain**
-- **Substance use disorders**
-- **Eating disorders**
-- **Burnout and workplace stress**
-- **Trauma and PTSD** (complementary)
-- **Psychotic disorders** (complementary)
+- **Dépression et troubles anxieux**
+- **Douleurs chroniques**
+- **Addictions**
+- **Troubles du comportement alimentaire**
+- **Burn-out et stress professionnel**
+- **Traumatisme et TSPT** (en complément)
+- **Troubles psychotiques** (en complément)
 
 ---
 
-## When to Address Which Process?
+## Quand solliciter quel processus ?
 
-| User's Situation | Primary ACT Process |
+| Situation de l'utilisateur | Processus ACT prioritaire |
 |---|---|
-| Avoids certain feelings/situations | Acceptance |
-| Trapped in rumination/worry | Defusion |
-| Living on autopilot, dissociated | Present Moment Awareness |
-| Defines self through problems ("I AM...") | Self-as-Context |
-| Feels directionless, meaningless | Values |
-| Knows what matters but doesn't act | Committed Action |
+| Évite certaines émotions ou situations | Acceptation |
+| Est piégé dans la rumination / les inquiétudes | Défusion |
+| Vit en pilote automatique, dissocié | Moment présent |
+| Se définit par ses problèmes (« Je SUIS… ») | Soi-comme-contexte |
+| Se sent désorienté, sans sens | Valeurs |
+| Sait ce qui compte, mais n'agit pas | Action engagée |
 
 ---
 
-## Ethical Guidelines
+## Lignes directrices éthiques
 
-An AI assistant may explain ACT techniques psychoeducationally and guide exercises.
+Un assistant IA peut expliquer les techniques ACT de manière psychoéducative et guider des exercices.
 
-An AI assistant must NOT:
-- Make diagnoses
-- Simulate a therapeutic relationship
-- Act alone in cases of acute suicidality — refer to professional help
-- Present ACT as a substitute for psychotherapy
+Un assistant IA ne doit PAS :
+- Poser de diagnostics
+- Simuler une relation thérapeutique
+- Agir seul en cas de suicidalité aiguë — orienter vers une aide professionnelle
+- Présenter l'ACT comme un substitut à une psychothérapie
 
-See: [ETHICS.md](../ETHICS.md)
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+Voir : [ETHICS.md](../ETHICS.md)
 
 ---
 
-## References
+## Références bibliographiques
 
 - Hayes, S. C., Strosahl, K. D., & Wilson, K. G. (2012). *Acceptance and Commitment Therapy: The Process and Practice of Mindful Change.* 2nd Edition.
 - Harris, R. (2009). *ACT Made Simple.*
@@ -216,4 +239,9 @@ See: [ETHICS.md](../ETHICS.md)
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
+*Porté depuis BACH v3.8.0 | Version autonome*
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée

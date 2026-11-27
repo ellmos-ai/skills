@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + OpenAI
 created: 2026-07-28
 updated: 2026-11-22
-description: "[Français] Compétence d'agent pour semantic-persona-routing: Builds and uses a provider-neutral semantic routing graph from personas, coordinating roles, experts and live skill endpoints. Use when an LLM should route a request through boss-role to expert to skill, extract a portable persona router from an existing agent system, combine a semantic domain map with a lexical skill registry, or expose missing role-to-skill ports instead of silently falling back. Triggers on semantic persona routing, persona umbrella, role router, boss-agent expert skill routing, agent-role export, or requests to make personas reusable across LLM providers."
+description: "Utilisez cette compétence lorsqu'un LLM doit router une demande d'un rôle coordonnateur via un expert vers une compétence, extraire un routeur de personas portable depuis un système d'agents existant, combiner une carte sémantique de domaines avec un registre lexical de compétences ou rendre visibles les liens manquants entre rôle et compétence."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,38 +14,46 @@ category: infrastructure
 tags: [persona, persona-authoring, semantic-routing, agents, experts, skills, umbrella, provider-neutral]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills', 'last_sync_from_origin': 'None', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
+  last_sync_from_origin: null
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
 <img src="banner.png" width="100%" alt="semantic-persona-routing banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `semantic-persona-routing`.
 
-# Semantic Persona Routing (English)
+# Routage sémantique des personas
 
-Route by capability first and apply personality second. Build a portable map that
-keeps semantic role choice, deterministic endpoint lookup and provider-specific
-loading separate.
+Routez d'abord selon la capacité, puis appliquez la personnalité ensuite. Créez une carte portable qui sépare le choix sémantique de rôle, la recherche déterministe de point de terminaison et le chargement spécifique au fournisseur.
 
-## Routing model
+## Modèle de routage
 
 ```text
-request
-  -> semantic domain/coordinator role
-  -> expert capability
-  -> explicit or live-resolved skill endpoint
-  -> optional persona overlay
-  -> provider adapter loads and executes
+Demande
+  -> domaine sémantique ou rôle coordonnateur
+  -> capacité d'expert
+  -> point de terminaison de compétence explicitement indiqué ou résolu en direct
+  -> superposition (overlay) de persona optionnelle
+  -> l'adaptateur fournisseur charge et exécute
 ```
 
-A persona controls communication style, priorities and interaction patterns. It
-does not grant tools, permissions or subject-matter capability. A role coordinates;
-an expert narrows the domain; a skill is the executable endpoint.
+Une persona pilote le style de communication, les priorités et les schémas d'interaction. Elle ne confère ni outils, ni permissions, ni compétences métier. Un rôle coordonne, un expert délimite le domaine et une compétence (skill) est le point de terminaison exécutable.
 
-## Build the routing map
+## Créer la carte de routage
 
-Use explicit metadata as authority and lexical similarity only as a candidate:
+Utilisez les métadonnées explicites comme source faisant autorité et la similarité lexicale uniquement pour la recherche de candidats :
 
 ```bash
 python scripts/build_routing_map.py \
@@ -55,134 +63,116 @@ python scripts/build_routing_map.py \
   --out routing-map.json
 ```
 
-The builder understands common `SKILL.md` fields such as `type`,
-`orchestrates.experts`, `parent_agents`, `skills`, descriptions and provenance.
-It produces a runtime map without requiring the source system to be installed.
-Read [routing-map-schema.md](references/routing-map-schema.md) before extending the
-format.
+Le générateur comprend les champs courants de `SKILL.md` tels que `type`, `orchestrates.experts`, `parent_agents`, `skills`, les descriptions et la provenance. Il génère une carte d'exécution sans que le système source doive être installé. Lisez [routing-map-schema.md](references/routing-map-schema.md) avant d'étendre le format.
 
-Do not automatically promote `candidate_skills`. Confirm them against a live skill
-resolver or source metadata first.
+Chaque identifiant de compétence exporté est unique. Si plusieurs fichiers sources déclarent le même identifiant stable, le générateur choisit de manière déterministe le premier chemin source relatif dans l'ordre lexicographique et consigne une anomalie `duplicate-skill-id` ; il n'émet jamais deux entrées de compétence portant le même identifiant. Les références de compétences déclarées par des experts ou des personas ne sont normalisées vers un identifiant assaini que si cet identifiant existe dans le registre exporté. Les références erronées, inconnues et normalisées restent visibles dans `issues` ; les références inconnues ou invalides ne deviennent jamais des points de terminaison ni des liens de compatibilité de persona.
 
-## Créer et ranger des personas
+Ne promouvez pas automatiquement `candidate_skills`. Confirmez-les d'abord via un résolveur actif de compétences ou les métadonnées sources.
 
-Le noyau construit des cartes ; il n'invente jamais de personas. Pour utiliser
-les vôtres, rangez-les **à côté du skill** et reconstruisez la carte :
-`personas/<persona-id>.md` (un fichier par persona), `roles/<role>/SKILL.md`
-(rôles coordinateurs et experts), `routing-map.json` (carte générée) et
-`config.json` (local à l'hôte, jamais publié). Le constructeur lit les rôles
-uniquement dans des `SKILL.md` et les personas dans tout Markdown avec
-frontmatter. Copiez [templates/persona.template.md](templates/persona.template.md)
-et remplissez le contrat : `name` et `type: persona` ; `persona.display_name`,
-`short_name`, `gender`, `role`, `default_prompt` ; `parent_agents` (rôles
-coordinateurs) ; `skills` (**noms de skills, jamais des chemins** ; seuls
-ceux-ci sont résolus en endpoints) ; `optional_skills` (skills liés à l'hôte ;
-absents, ils restent un `GAP` visible). Un persona n'accorde ni outils ni
-droits et ne remplace jamais les règles de sécurité, les verrous ou les
-décisions de l'utilisateur.
+## Créer et déposer des personas
 
-**Chemins :** le skill ne nomme aucun chemin d'hôte. `config.example.json`
-montre le modèle (`ellmos.skill-config.v1`, `einstellungen.paths` avec des
-espaces réservés comme `<HOME>/<ONEDRIVE>/<TOPICS>`) ; la copie locale est
-`config.json`, conservée au déploiement et jamais versionnée.
-
-**Catalogue propre :** `--skills-layout catalog` n'accepte que
-`<catégorie>/<nom>/SKILL.md` et ignore les dossiers préfixés par `_`
-(`_archive`, `_reference`, `_templates`), ce qui supprime les issues
-`duplicate-skill-id` dues aux copies archivées ou de référence.
-
-## Route a request
-
-### 0. Proposer les personas existants
-
-Si des personas se trouvent à côté du skill (`personas/`), listez-les à l'appel
-avec nom, rôle et skills et routez vers le bon ; si la demande n'en nomme
-aucun, choisissez-le à l'étape 4. Le format du reçu de route reste inchangé.
-
-### 1. Select the coordinator role semantically
-
-Compare the request with role names, descriptions and use cases. Prefer the
-narrowest role that can coordinate the whole request. Keep multiple candidates
-visible when confidence is low; ask the user only when the choice materially
-changes the result.
-
-### 2. Select an expert within the role
-
-Use only experts connected to the chosen coordinator unless the request clearly
-spans roles. A direct expert request may skip the coordinator for execution, but
-retain the coordinator link in the route explanation.
-
-### 3. Resolve executable endpoints
-
-Resolve in this order:
-
-1. `endpoint_skills` from explicit source metadata or exact provenance;
-2. a current external skill resolver or local skill finder;
-3. verified `candidate_skills`;
-4. visible `GAP` when no endpoint exists.
-
-Never route to an expert name as though it were an installed skill. A missing
-endpoint is a porting gap, not permission to fabricate one.
-
-Read [endpoint-resolution.md](references/endpoint-resolution.md) when connecting a
-live registry, lexical finder or provider-specific skill loader.
-
-### 4. Apply the persona overlay
-
-Choose a persona attached to the selected role or expert. If several personas fit,
-prefer one whose declared limits and style match the task. Apply no persona when
-none is explicitly connected.
-
-Persona instructions cannot override safety rules, locks, user decisions,
-professional boundaries or tool permissions.
-
-### 5. Load and execute
-
-Use the provider's native skill/agent loading mechanism. Load the selected live
-skill instructions before execution. Keep the router lean; execution belongs to
-the worker or current agent with the resolved skills loaded.
-
-## Route receipt
-
-Return or record:
+Le noyau génère des cartes, il n'invente pas de personas. Quiconque souhaite utiliser ses propres personas les dépose **à côté de la compétence** et reconstruit la carte :
 
 ```text
-ROLE: <coordinator or direct>
-EXPERT: <expert or n/a>
-SKILLS: <verified live endpoints>
-PERSONA: <overlay or none>
-RESOLUTION: explicit | provenance | live-resolver | verified-candidate | GAP
-CONFIDENCE: high | medium | low
-WHY: <one short reason>
-GAPS: <missing endpoints or stale-map warnings>
+semantic-persona-routing/
+  personas/<persona-id>.md          # un fichier par persona
+  roles/<role>/SKILL.md             # rôles coordonnateurs et experts
+  routing-map.json                  # carte générée
+  config.json                       # local à l'hôte, jamais publié
 ```
 
-Rebuild the map when source roles or skill inventory change. A live resolver may
-supersede a stale map for endpoint availability, but it must not silently rewrite
-the semantic role taxonomy.
+Le générateur lit les rôles exclusivement depuis les fichiers `SKILL.md`, et les personas depuis tout fichier Markdown doté d'un frontmatter. Copiez [templates/persona.template.md](templates/persona.template.md) vers `personas/<persona-id>.md` et remplissez le contrat :
 
-## Exemple et Mode d'Emploi & Usage
+| Champ | Signification |
+|---|---|
+| `name`, `type: persona` | identifiant stable de persona et type |
+| `persona.display_name`, `short_name`, `gender`, `role`, `default_prompt` | affichage, nom court, pronom/genre d'adresse, rôle en une phrase, phrase d'invocation du fournisseur |
+| `parent_agents` | rôles coordonnateurs auxquels la persona est rattachée |
+| `skills` | **noms de compétences, jamais des chemins** — eux seuls sont résolus en points de terminaison |
+| `optional_skills` | compétences liées à l'hôte ; si elles manquent, elles restent une `GAP` visible |
 
-Request: "Organize my receipts and prepare the tax-year overview."
+Une persona ne doit ni conférer ni outrepasser des outils, des permissions ni des règles de sécurité, de verrouillage ou des décisions de l'utilisateur ; elle est une couche superposée par-dessus le rôle et les compétences.
 
-The router selects an office coordinator, then the tax expert, resolves the
-installed tax skill, and finally applies an explicitly linked meticulous tax
-persona. If the tax expert exists but no portable tax skill is installed, report
-`GAP` and continue only through an explicitly configured fallback.
+**Chemins :** La compétence ne mentionne aucun chemin d'hôte. `config.example.json` montre le modèle (`ellmos.skill-config.v1`, `einstellungen.paths` avec des marqueurs tels que `<HOME>/<ONEDRIVE>/<TOPICS>`) ; la copie locale à l'hôte s'appelle `config.json`, est préservée lors du déploiement et n'est jamais intégrée au dépôt.
 
-## Journal des Modifications
+**Nettoyer le catalogue :** Une bibliothèque de compétences contenant des archives ou des copies de référence produit de nombreuses anomalies `duplicate-skill-id`. `--skills-layout catalog` ne prend que `<categorie>/<nom>/SKILL.md` et ignore les dossiers préfixés par `_` (`_archive`, `_reference`, `_templates`) :
+
+```bash
+python scripts/build_routing_map.py \
+  --roles-dir roles --personas-dir personas \
+  --skills-dir path/to/skills --skills-layout catalog \
+  --out routing-map.json
+```
+
+## Router une demande
+
+### 0. Proposer les personas existantes
+
+Si des personas se trouvent à côté de la compétence (`personas/`), listez-les à l'appel avec leur nom d'affichage, leur rôle et leurs compétences et routez vers celle qui convient ; si la demande ne mentionne aucune persona, ne la choisissez qu'à l'étape 4. Le format du reçu de routage reste inchangé.
+
+### 1. Choisir sémantiquement le rôle coordonnateur
+
+Comparez la demande avec les noms de rôles, descriptions et cas d'usage. Privilégiez le rôle le plus étroit capable de coordonner l'ensemble de la demande. En cas de faible confiance, gardez plusieurs candidats visibles ; ne sollicitez l'utilisateur que si le choix modifie substantiellement le résultat.
+
+### 2. Choisir l'expert au sein du rôle
+
+N'utilisez que les experts liés au rôle coordonnateur choisi, à moins que la demande ne couvre clairement plusieurs rôles. Une demande directe d'expert peut contourner le rôle coordonnateur lors de l'exécution, mais conserve son lien dans l'explication de route.
+
+### 3. Résoudre les points de terminaison exécutables
+
+Résolvez dans cet ordre :
+
+1. `endpoint_skills` issus des métadonnées sources explicites ou de la provenance exacte ;
+2. un résolveur de compétences externe à jour ou un localisateur de compétences local ;
+3. des `candidate_skills` vérifiées ;
+4. une `GAP` visible si aucun point de terminaison n'existe.
+
+Ne routez jamais vers un nom d'expert comme s'il s'agissait d'une compétence installée. Un point de terminaison manquant constitue une lacune de portage, pas une autorisation d'inventer un point de terminaison.
+
+Lisez [endpoint-resolution.md](references/endpoint-resolution.md) lorsque vous raccordez un registre actif, un chercheur lexical ou un chargeur de compétences spécifique au fournisseur.
+
+### 4. Appliquer la superposition de persona
+
+Choisissez une persona associée au rôle ou à l'expert sélectionné. Si plusieurs personas conviennent, privilégiez celle dont les limites déclarées et le style correspondent à la tâche. N'appliquez aucune persona si aucune n'est explicitement reliée.
+
+Les instructions de persona ne doivent pas outrepasser les règles de sécurité, les verrous, les décisions utilisateur, les limites professionnelles ni les permissions d'outils.
+
+### 5. Charger et exécuter
+
+Utilisez le mécanisme natif de chargement de compétences ou d'agents du fournisseur. Chargez les instructions de la compétence active sélectionnée avant l'exécution. Gardez le routeur léger ; l'exécution appartient au worker ou à l'agent courant muni des compétences chargées.
+
+## Reçu de routage
+
+Renvoyez ou consignez ce qui suit :
+
+```text
+ROLE: <rôle coordonnateur ou direct>
+EXPERT: <Expert ou n/a>
+SKILLS: <points de terminaison actifs vérifiés>
+PERSONA: <Overlay ou none>
+RESOLUTION: explicit | provenance | live-resolver | verified-candidate | GAP
+CONFIDENCE: high | medium | low
+WHY: <une brève justification>
+GAPS: <points de terminaison manquants ou avertissements de cartes obsolètes>
+```
+
+Reconstruisez la carte lorsque les rôles sources ou l'inventaire des compétences changent. Un résolveur actif peut prévaloir sur une carte obsolète concernant la disponibilité des points de terminaison, mais ne doit pas réécrire silencieusement la taxonomie sémantique des rôles.
+
+## Exemple
+
+Demande : « Range mes justificatifs et prépare la vue d'ensemble pour l'année fiscale. »
+
+Le routeur choisit une coordination bureautique, puis l'expert fiscal, résout la compétence fiscale installée et applique enfin une persona fiscale soigneuse explicitement reliée. Si l'expert fiscal existe mais qu'aucune compétence fiscale portable n'est disponible, il signale `GAP` et ne poursuit que par une voie de repli explicitement configurée.
+
+## Journal des modifications
 
 ### 1.1.1 (2026-11-22)
-- Note de langue corrigée
+- Indication de langue corrigée
 
 ### 1.1.0 (2026-09-03)
 
-- Créer et ranger des personas : convention de rangement à côté du skill,
-  contrat frontmatter, modèle neutre `templates/persona.template.md`, convention
-  de chemins avec `config.example.json`, comportement à l'appel et
-  `--skills-layout catalog` contre les identifiants de skill en double.
+- Créer et déposer des personas : convention de dépôt à côté de la compétence, contrat frontmatter, modèle neutre `templates/persona.template.md`, convention de chemins avec `config.example.json`, comportement à l'appel (proposer les personas présentes) et `--skills-layout catalog` contre les identifiants en double issus des copies d'archives et de référence.
 
 ### 1.0.0 (2026-07-28)
 
-- Extracted the provider-neutral role/expert/skill chain from a proven domain
-  router pattern and added portable map generation with visible endpoint gaps.
+- Extraction de la chaîne indépendante du fournisseur rôle, expert et compétence à partir d'un routeur de domaines éprouvé, avec ajout de la création de cartes portables et des lacunes de points de terminaison visibles.

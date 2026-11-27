@@ -5,115 +5,127 @@ type: tool
 author: Lukas Geiger
 created: 2026-03-12
 updated: 2026-11-22
-description: "Utiliser pour mettre en place un environnement d'IA portable et autonome sur clé USB ou disque externe (ex. 'configuration IA portable', 'IA sur clé USB', 'RAG local hors ligne', /ai-portable-setup). Configure des LLM locaux (Ollama), une base vectorielle (ChromaDB) et des invites pour un usage 100 % hors ligne. Ne PAS utiliser pour l'installation complète d'une station de travail (utiliser system-onboarding)."
+description: "À utiliser pour configurer un espace de travail IA portable et local sur une clé USB ou un disque externe (ex. 'installation IA portable', 'IA sur clé USB', 'pipeline RAG local hors ligne', /ai-portable-setup). Configure les modèles locaux (Ollama), la base vectorielle (ChromaDB) et les prompts modulaires pour un usage autonome hors ligne. Ne PAS utiliser pour l'onboarding complet d'un poste de travail (utiliser system-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false
 bach_origin: true
 category: infrastructure
-tags: [portable, rag, ollama, usb-drive, offline, local-llm]
+tags: [portable, rag, ollama, usb-stick, offline, local-llm]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': ['ollama'], 'protocols': [], 'python': ['chromadb', 'ollama']}
-provenance: {'origin': 'bach', 'origin_path': 'MODULAR_AGENTS/AI-Portable', 'origin_version': '0.1.0', 'origin_repo': 'github.com/ellmos-ai/bach', 'last_sync_from_origin': '2026-03-12', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+visibility: public
+dependencies:
+  tools: []
+  services: ['ollama']
+  protocols: []
+  python: ['chromadb', 'ollama']
+provenance:
+  origin: "bach"
+  origin_path: "MODULAR_AGENTS/AI-Portable"
+  origin_version: "0.1.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-12"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
 
 <img src="banner.png" width="100%" alt="ai-portable-setup banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `ai-portable-setup`.
 
-# AI Portable Setup (English)
+# AI Portable Setup — Espace IA portable
 
-Creates a portable AI workspace with a local RAG pipeline.
-Designed for USB drives or external drives — works offline
-with Ollama and local embedding models.
+Crée un environnement de travail IA portable équipé d'un pipeline RAG local.
+Conçu pour des clés USB ou des disques externes — fonctionne hors ligne
+avec Ollama et des modèles d'embeddings locaux.
 
-## Quick Start
+## Démarrage rapide
 
 ```bash
-# Create structure on USB drive (English)
+# Créer la structure sur la clé USB
 python setup_portable.py E:\AI-Portable
 
-# Then on the target system: (English)
+# Ensuite sur le système cible :
 cd E:\AI-Portable
 python -m venv venv
 venv\Scripts\activate          # Windows
 pip install chromadb ollama
 
-# Index documents (English)
+# Indexer les documents
 python rag/ingest.py
 
-# Query (English)
-python rag/query.py "My question..."
-python rag/query.py --mode icf "Observations about the client"
+# Interroger
+python rag/query.py "Ma question..."
+python rag/query.py --mode icf "Observations sur le client"
 ```
 
-## Generated Directory Structure
+## Arborescence générée
 
 ```
 AI-Portable/
   models/
-    llm/                  Local LLM models (Mistral, Llama, etc.)
-    embeddings/           Embedding models (nomic-embed-text, bge-small)
-    tts/                  Optional: Text-to-Speech (Piper, Coqui)
+    llm/                  Modèles LLM locaux (Mistral, Llama, etc.)
+    embeddings/           Modèles d'embeddings (nomic-embed-text, bge-small)
+    tts/                  Optionnel : synthèse vocale (Piper, Coqui)
   db/
-    chroma/               ChromaDB vector database
-    sqlite/               Metadata DB
+    chroma/               Base de données vectorielle ChromaDB
+    sqlite/               Base de métadonnées
   documents/
-    code/                 Code snippets, projects
-    general/              General documents
+    code/                 Extraits de code, projets
+    general/              Documents généraux
   rag/
-    ingest.py             Ingest and index files
-    query.py              RAG queries with mode selection
-    pipeline.py           Main RAG pipeline (embed + query + LLM)
+    ingest.py             Lire et indexer les fichiers
+    query.py              Requêtes RAG avec sélection de mode
+    pipeline.py           Pipeline RAG principal (Embed + Query + LLM)
   prompts/
-    coding.txt            Coding assistant prompt
-    icf.txt               ICF structuring prompt
-    rpg.txt               Pen-and-paper game master prompt
-  templates/              Word/PDF templates
-  venv/                   Portable Python environment
+    coding.txt            Prompt assistant de codage
+    icf.txt               Prompt structuration ICF
+    rpg.txt               Prompt maître de jeu jeu de rôle papier
+  templates/              Modèles Word/PDF
+  venv/                   Environnement Python portable
 ```
 
-## RAG Pipeline
+## Pipeline RAG
 
 ```
-Documents -> Chunking -> Embedding (nomic-embed-text)
-                              |
-                              v
-                         ChromaDB (local)
-                              |
-Query -> Embedding -> Similarity Search -> Top-K Chunks
-                                              |
-                                              v
-                                    Context + Prompt -> Ollama (Mistral)
-                                              |
-                                              v
-                                          Response
+Documents -> Découpage (Chunking) -> Embedding (nomic-embed-text)
+                                           |
+                                           v
+                                     ChromaDB (local)
+                                           |
+Question -> Embedding -> Recherche de similarité -> Top-K Chunks
+                                                       |
+                                                       v
+                                             Contexte + Prompt -> Ollama (Mistral)
+                                                       |
+                                                       v
+                                                   Réponse
 ```
 
-## Query Modes
+## Modes d'interrogation
 
-| Mode | Prompt | Usage |
-|------|--------|-------|
-| `default` | General assistant | Standard queries |
-| `icf` | ICF structuring | Classify observations according to ICF |
-| `coding` | Coding assistant | Write and explain code |
-| `rpg` | Game master | Pen-and-paper role-playing |
+| Mode | Prompt | Utilisation |
+|------|--------|-------------|
+| `default` | Assistant général | Requêtes standard |
+| `icf` | Structuration ICF | Classifier des observations selon la CIF (ICF) |
+| `coding` | Assistant de codage | Écrire et expliquer du code |
+| `rpg` | Maître de jeu | Jeu de rôle sur table |
 
-## Requirements on Target System
+## Prérequis sur le système cible
 
 - Python 3.10+
-- Ollama (with `mistral:instruct` and `nomic-embed-text`)
-- ~8 GB RAM for Mistral
+- Ollama (avec `mistral:instruct` et `nomic-embed-text`)
+- ~8 Go de RAM pour Mistral
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 1.0.1 (2026-11-22)
-- Note de langue corrigée
+- Mention linguistique corrigée.
 
 ### 1.0.0 (2026-03-12)
-- Consolidation from MODULAR_AGENTS/AI-Portable
-- Setup script as single-file skill
-- 4 preconfigured prompts (coding, icf, rpg, default)
-- RAG pipeline (ingest, query, pipeline)
+- Consolidation depuis `MODULAR_AGENTS/AI-Portable`
+- Script d'installation en tant que compétence autonome en un seul fichier
+- 4 prompts préconfigurés (`coding`, `icf`, `rpg`, `default`)
+- Pipeline RAG (`ingest`, `query`, `pipeline`)

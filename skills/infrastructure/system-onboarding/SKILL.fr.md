@@ -5,7 +5,7 @@ type: skill
 author: ellmos contributors
 created: 2026-05-16
 updated: 2026-11-22
-description: "Utiliser pour configurer et intégrer un nouveau poste de travail ou une machine réinstallée pour le développement et les agents (ex. 'configurer nouvel ordinateur', 'onboarding station de travail', 'installer environnement d'agents', /system-onboarding). Installe les prérequis d'OS, les runtimes, les règles partagées et les compétences portables sans fuite de secrets. Ne PAS utiliser pour intégrer un dépôt logiciel isolé (utiliser dev/project-onboarding)."
+description: "À utiliser lorsqu'un poste de travail neuf ou réinstallé doit être configuré pour des agents et environnements de développement (ex. 'configurer un nouveau PC', 'onboarding poste de travail', 'installer l'environnement d'agents', /system-onboarding). Installe et vérifie de façon sûre prérequis OS, runtimes, surfaces de règles communes et compétences portables. Ne PAS utiliser pour l'onboarding d'un dépôt isolé (utiliser dev/project-onboarding)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,83 +14,101 @@ category: infrastructure
 tags: [onboarding, setup, agent-runtimes, windows, macos, verification, sync]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'internal onboarding protocol (sanitized for portable publication)', 'origin_version': '1.2.0', 'last_sync_from_origin': '2026-07-29', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: "internal onboarding protocol (sanitized for portable publication)"
+  origin_version: "1.2.0"
+  last_sync_from_origin: "2026-07-29"
+  last_sync_to_origin: null
+  local_changes_since_sync: false
 ---
 
 
 <img src="banner.png" width="100%" alt="system-onboarding banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `system-onboarding`.
 
-# System Onboarding (English)
+# System-Onboarding — Mise en service d'un poste de travail
 
-Use this protocol to establish a new or rebuilt workstation for local-first agent
-work. It is a sequencing and verification guide, not an installer and not a source
-of credentials. Resolve product-specific instructions from each provider's current
-documentation before changing a live system.
+Utilisez ce protocole pour préparer un poste de travail neuf ou réinstallé
+en vue d'un travail d'agents *local-first*. Il s'agit d'un guide d'ordonnancement
+et de vérification, non d'un installateur ni d'une source d'identifiants. Vérifiez
+les instructions propres à chaque produit dans la documentation actuelle du fournisseur
+concerné avant de modifier un système en production.
 
 ## Activation
 
-Use for a new workstation, a reinstalled operating system, a replacement device, or
-a controlled recovery of one agent runtime. First identify the operating system,
-target runtime, owner, shared rule surface, and whether the request is a full rebuild
-or a bounded component repair. Do not assume that a configuration copied from one
-host is safe or supported on another.
+Utilisez cette compétence pour un nouveau poste de travail, un système d'exploitation
+fraîchement installé, un appareil de remplacement ou la restauration contrôlée d'un
+runtime d'agent isolé. Déterminez d'abord le système d'exploitation, le runtime cible,
+la personne responsable, la surface de règles commune et si une reconstruction complète
+ou une réparation ciblée de composants est souhaitée. Ne supposez pas qu'une configuration
+copiée depuis un autre hôte soit sûre ou prise en charge sur celui-ci.
 
-## Ordered workflow
+## Séquence de travail ordonnée
 
-1. Establish operating-system updates, Git, authenticated source control, Python and
-   the current supported Node.js LTS where needed.
-2. Install only the requested agent runtimes through their supported installers and
-   complete their native login flows without placing tokens in project files.
-3. Create local configuration roots and load an explicitly selected, canonical rule
-   surface. Merge templates; never overwrite existing local state blindly.
-4. Install portable skills and MCP or plugin configuration only through their stated
-   deployment procedures. Treat each provider's configuration format as distinct.
-5. Configure shared synchronization only after the local runtime works. Share
-   sanitized contracts and receipts, not credentials, full prompts, or machine-local
-   paths.
-6. Recreate a scheduler or automation only through its supported native surface.
-   Preserve prior state and leave new work disabled until its owner approves activation.
-7. Run the appropriate post-install checks and write a local receipt that distinguishes
-   installation, configuration, scheduler registration and successful outcome.
+1. Mettre en place les mises à jour du système d'exploitation, Git, la gestion de code source
+   authentifiée, Python et, si besoin, la version Node.js LTS actuellement prise en charge.
+2. N'installer que les runtimes d'agents demandés via leurs installateurs pris en charge.
+   Achever les parcours de connexion natifs sans déposer de jetons dans des fichiers de projet.
+3. Créer les racines de configuration locales et charger une surface de règles canonique
+   explicitement sélectionnée. Fusionner les modèles ; ne jamais écraser aveuglément un état
+   local existant.
+4. N'installer les compétences portables ainsi que la configuration MCP ou de plugins qu'avec
+   les procédures de déploiement documentées pour chacun. Traiter les formats de configuration
+   des fournisseurs comme distincts les uns des autres.
+5. Ne configurer la synchronisation partagée qu'une fois le runtime local opérationnel. Partager
+   des contrats et preuves assainis, jamais d'identifiants, de prompts complets ni de chemins
+   propres à la machine.
+6. Ne restaurer planificateurs ou automatisations que via leur interface native prise en charge.
+   Conserver l'état antérieur et laisser les nouvelles tâches désactivées jusqu'à ce que la
+   personne responsable valide leur activation.
+7. Exécuter les vérifications post-installation appropriées et rédiger une preuve locale
+   distinguant installation, configuration, enregistrement dans le planificateur et résultat probant.
 
-Read only the matching reference for the target platform:
+Ne lisez que la référence correspondant au système cible :
 
-- [overview](references/overview.md) for boundaries and data placement;
-- [Windows checklist](references/windows-checklist.md) for Windows;
-- [macOS checklist](references/mac-checklist.md) for macOS; and
-- [post-install](references/post-install.md) for verification and recovery.
+- [Vue d'ensemble](references/overview.md) pour les limites et le stockage des données ;
+- [Check-list Windows](references/windows-checklist.md) pour Windows ;
+- [Check-list macOS](references/mac-checklist.md) pour macOS ; et
+- [Vérification post-installation](references/post-install.md) pour la vérification
+  et la restauration.
 
-## Boundaries
+## Limites
 
-- Never publish credentials, recovery codes, private prompts, account identifiers, or
-  raw logs to a shared repository or synchronization folder.
-- Keep virtual environments, dependency caches and large runtime artifacts out of
-  cloud-synchronized project folders.
-- Do not make a copied configuration authoritative. The target host must discover and
-  read back its own supported state.
-- Do not register a schedule merely because a task file exists. Native registration
-  and outcome evidence are separate requirements.
-- When an existing host is being repaired, inventory its current state and locks before
-  changing any configuration.
+- Ne publiez jamais d'identifiants, codes de récupération, prompts privés,
+  identifiants de compte ou journaux bruts dans un dépôt partagé ou un
+  dossier de synchronisation.
+- Tenez les environnements virtuels, caches de dépendances et volumineux
+  artefacts d'exécution hors des dossiers de projets synchronisés dans le cloud.
+- Ne décrivez pas une configuration copiée comme source faisant foi. L'hôte cible
+  doit déterminer son propre état pris en charge et le confirmer par relecture (readback).
+- N'enregistrez pas une tâche planifiée du seul fait qu'un fichier de tâche existe.
+  L'enregistrement natif et la preuve de résultat sont deux exigences distinctes.
+- Lors de la réparation d'un hôte existant, inventoriez son état actuel et ses verrous
+  avant de modifier toute configuration.
 
-## Completion evidence
+## Preuve de clôture
 
-A complete onboarding receipt records the target operating system, selected runtimes,
-their verified versions, the canonical rule references loaded, the explicit skills or
-extensions deployed, unsupported capabilities, and any deferred user decisions. A
-successful command exit alone is not evidence that an application loaded its new
-configuration or that a scheduled task achieved its intended outcome.
+Une preuve d'onboarding complète consigne le système d'exploitation cible, les runtimes
+sélectionnés, les versions vérifiées, les références de règles canoniques chargées,
+les compétences ou extensions explicitement déployées, les capacités non prises en charge
+et les décisions utilisateur différées. La seule réussite d'une commande ne prouve ni qu'une
+application a chargé sa nouvelle configuration, ni qu'une tâche planifiée a atteint son
+résultat prévu.
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 1.2.1 (2026-11-22)
-- Note de langue corrigée
+- Mention linguistique corrigée.
 
 ### 1.2.0 (2026-07-29)
-
-- Ported the reusable onboarding sequence and platform references into the public
-  skills catalog after removing host-specific paths, account details and private
-  operational material.
+- Portage de l'ordre d'onboarding réutilisable et des références plateformes dans le catalogue
+  public de compétences après suppression des chemins spécifiques à l'hôte, détails de compte
+  et matériel d'exploitation privé.

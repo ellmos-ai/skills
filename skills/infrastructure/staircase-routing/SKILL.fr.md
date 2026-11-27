@@ -5,7 +5,7 @@ type: skill
 author: Lukas Geiger + Gemini (Antigravity)
 created: 2026-07-29
 updated: 2026-11-22
-description: "Utiliser pour parcourir l'arborescence des répertoires de haut en bas afin de découvrir les documents directeurs comme CLAUDE.md, AGENTS.md ou RULES.md (ex. 'rechercher les règles dans l'arborescence', 'trouver les guides de contexte', 'routage en escalier', /staircase-routing). Parcourt systématiquement les dossiers parents et enfants pour identifier les règles en vigueur. Ne PAS utiliser si la racine du projet est déjà connue (utiliser load-project)."
+description: "À utiliser lorsque les hiérarchies de répertoires doivent être parcourues à la recherche de documents repères tels que CLAUDE.md, AGENTS.md, README.md ou RULES.md (ex. 'chercher les règles dans l'arborescence', 'trouver les repères', 'Staircase Routing', /staircase-routing). Parcourt systématiquement les arborescences vers le haut et vers le bas pour localiser les fichiers de contexte normatifs. Ne PAS utiliser si le contexte est déjà établi (utiliser load-project)."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,68 +14,93 @@ category: infrastructure
 tags: [routing, staircase-routing, up-and-down-routing, walking-bass-routing, signpost, navigation, directory-traversal]
 language: fr
 status: active
-dependencies: {'tools': [], 'services': [], 'protocols': [], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None', 'origin_repo': 'github.com/ellmos-ai/skills'}
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "custom"
+  origin_path: null
+  origin_version: null
+  origin_repo: "github.com/ellmos-ai/skills"
 ---
 
 
 <img src="banner.png" width="100%" alt="staircase-routing banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `staircase-routing`.
 
-# Staircase-Routing (Up-and-Down / Walking Bass Routing) (English)
+# Staircase-Routing (Routage haut-bas / Walking Bass)
 
-The **Staircase-Routing** skill (also referred to as *Up-and-Down Routing* or *Walking Bass Routing*) isolates the directory document inspection strategy for AI agents.
+La compétence **Staircase-Routing**, également appelée *Up-and-Down Routing* ou *Walking Bass
+Routing*, encapsule la stratégie d'inspection des documents d'orientation dans les répertoires
+pour les agents IA.
 
-When an agent enters a directory or works on a file, it uses this strategy to locate authoritative context, rules, and signpost documents before modifying code or taking action.
-
----
-
-## 1. Signpost Document Standards
-
-By default, Staircase-Routing looks for standard signpost documents:
-- **Global & Project Controls:** `CLAUDE.md`, `AGENTS.md`, `START.md`, `RULES.md`
-- **Project Overview & Tasks:** `README.md`, `TODO.md`, `NOTIZ.md`, `BEWEISNOTIZ.md`
-- **Custom User Buzzwords:** Configured via `staircase-config.json` or `config.json`.
+Lorsqu'un agent entre dans un répertoire ou travaille sur un fichier, il utilise
+cette stratégie pour trouver le contexte faisant foi, les règles et les documents repères
+avant de modifier du code ou d'exécuter une action.
 
 ---
 
-## 2. Traversal Algorithm
+## 1. Standards pour les documents repères
 
+Staircase-Routing recherche par défaut ces documents repères :
+
+- **Pilotage global et lié au projet :** `CLAUDE.md`, `AGENTS.md`,
+  `START.md`, `RULES.md`
+- **Vue d'ensemble et tâches du projet :** `README.md`, `TODO.md`, `NOTIZ.md`,
+  `BEWEISNOTIZ.md`
+- **Mots-clés personnalisés :** configurés via
+  `staircase-config.json` ou `config.json`.
+
+---
+
+## 2. Algorithme de parcours
+
+```text
+                           [ Niveau racine / Workspace ]
+                           ┌───────────────────────────┐
+                           │   CLAUDE.md / RULES.md    │ ◄── (Étape 2 : lire les repères racine)
+                           └─────────────▲─────────────┘
+                                         │ (monter l'escalier)
+                           ┌─────────────┴─────────────┐
+                           │ Sous-dossier / Cible      │ ◄── (Étape 1 : commencer dans le CWD)
+                           └─────────────┬─────────────┘
+                                         │ (descendre l'escalier)
+                           ┌─────────────▼─────────────┐
+                           │ Dossier enfant / module   │ ◄── (Étape 3 : trouver les repères subordonnés)
+                           │   module-rules.md         │
+                           └───────────────────────────┘
 ```
-                           [ Root / Workspace Level ]
-                           ┌────────────────────────┐
-                           │   CLAUDE.md / RULES.md │ ◄── (Step 2: Read Root Signpost)
-                           └───────────▲────────────┘
-                                       │ (Staircase Up)
-                           ┌───────────┴────────────┐
-                           │ Subfolder / Target Dir │ ◄── (Step 1: Start at CWD)
-                           └───────────┬────────────┘
-                                       │ (Staircase Down)
-                           ┌───────────▼────────────┐
-                           │ Child / Module Dir     │ ◄── (Step 3: Discover Sub-Signposts)
-                           │   module-rules.md      │
-                           └────────────────────────┘
-```
 
-### Step 1: Current Working Directory (CWD) Inspection
-- Inspect the directory of the target file or active working directory.
-- If signpost documents exist, read them immediately.
+### Étape 1 : Vérifier le répertoire de travail courant (CWD)
 
-### Step 2: Upward Traversal (Staircase Up)
-- If **no** signpost document is found in CWD, move up to the parent directory (`..`).
-- Repeat step-by-step upward until a root signpost document (`CLAUDE.md` or `AGENTS.md`) or the workspace boundary is reached.
-- Read all discovered root signposts to establish global directives and project rules.
+- Contrôler le répertoire du fichier cible ou le répertoire de travail actif.
+- Si des documents repères sont présents, les lire immédiatement.
 
-### Step 3: Downward Inspection (Staircase Down)
-- From the established root directory, step downward into child directories relevant to the task.
-- Discover specialized module-level signposts, domain rules, or component configs. Read them.
+### Étape 2 : Remonter l'arborescence
+
+- Si **aucun** document repère n'est trouvé dans le CWD, passer au
+  répertoire parent (`..`).
+- Répéter progressivement vers le haut jusqu'à atteindre un document repère racine
+  (`CLAUDE.md` ou `AGENTS.md`) ou la limite du workspace.
+- Lire tous les repères racine trouvés afin d'établir les directives globales et les règles du projet.
+
+### Étape 3 : Descendre pour vérifier
+
+- Depuis le répertoire racine identifié, redescendre dans les sous-répertoires
+  pertinents pour la tâche.
+- Repérer les documents repères spécialisés au niveau module, les règles de domaine ou
+  les configurations de composants et les lire.
 
 ---
 
-## 3. User-Configurable Buzzwords (`staircase-config.json`)
+## 3. Mots-clés configurables par l'utilisateur (`staircase-config.json`)
 
-Agents can read a local or global `staircase-config.json` to customize target signposts:
+Les agents peuvent lire un fichier `staircase-config.json` local ou global pour adapter les
+repères recherchés :
 
 ```json
 {
@@ -107,6 +132,14 @@ Agents can read a local or global `staircase-config.json` to customize target si
 
 ---
 
-## 4. Integration with `letter-hooker` & Scheduled Tasks
+## 4. Intégration avec `letter-hooker` et les tâches planifiées
 
-`staircase-routing` is embedded as a core preflight bootloader in the **`letter-hooker`** skill and the **`antigravity-kontext-and-workflow-loader-and-divider`** scheduled task, ensuring agents always locate and obey signpost documents before initiating edits.
+`staircase-routing` est intégré comme chargeur préalable central dans la compétence
+**`letter-hooker`** et la tâche planifiée
+**`antigravity-kontext-and-workflow-loader-and-divider`**. Ainsi, les agents
+trouvent et respectent les documents repères avant d'engager toute modification.
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Mention linguistique corrigée.

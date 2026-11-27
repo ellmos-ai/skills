@@ -1,192 +1,218 @@
 ---
+name: schema-therapy
+version: 1.0.1
+type: skill
+author: Lukas Geiger
+created: 2026-03-15
+updated: 2026-11-22
+description: "Utilisez cette compétence lorsque des schémas émotionnels profonds, des modes de personnalité ou des pièges de vie récurrents doivent être explorés (par ex. 'comprendre les modes en thérapie des schémas', 'enfant intérieur', 'repérer les pièges de vie', /schema-therapy). Présente les 18 schémas, les modes et les styles d'adaptation selon Young ; ne PAS utiliser pour une simple activation comportementale à court terme (behavioral-activation)."
+standalone: true
+anthropic_compatible: true
+bach_compatible: false
+bach_origin: true
+category: therapy
+tags: [schematherapie, modi, inneres-kind, bewältigungsstile, persönlichkeit]
 language: fr
+status: active
+visibility: public
+dependencies:
+  tools: []
+  services: []
+  protocols: []
+  python: []
+provenance:
+  origin: "bach"
+  origin_path: "system/skills/therapie/schematherapie.md"
+  origin_version: "1.0.0"
+  origin_repo: "github.com/ellmos-ai/bach"
+  last_sync_from_origin: "2026-03-15"
+  last_sync_to_origin: null
+  local_changes_since_sync: true
 ---
 
 <img src="banner.png" width="100%" alt="schema-therapy banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `schema-therapy`.
 
-# Schema Therapy (English)
+# Thérapie des schémas
 
-> Fundamentals of Schema Therapy according to Jeffrey Young: Schemas, modes, inner child concept, and coping styles — psychoeducationally presented
+> Fondements de la thérapie des schémas selon Jeffrey Young : schémas, modes, concept de l'enfant intérieur et styles d'adaptation — présentés de façon psychoéducative
 
-See: [ETHICS.md](../ETHICS.md)
-
----
-
-## Context
-
-Schema Therapy was developed by Jeffrey E. Young from the 1990s onward as an extension of cognitive behavioral therapy. It integrates elements from CBT, attachment theory, Gestalt therapy, and psychodynamic approaches.
-
-Evidence: Schema Therapy is well supported empirically, particularly for personality disorders (Giesen-Bloo et al. 2006, Masley et al. 2012). In Germany, it is recognized as a method within behavioral therapy.
-
-**Note:** This is psychoeducation, not a substitute for professional therapy.
-**Never implement:** EMDR, Prolonged Exposure (PE), Narrative Exposure Therapy (NET)
+Voir : [ETHICS.md](../ETHICS.md)
 
 ---
 
-## 1. Early Maladaptive Schemas
+## Contexte
 
-### Principle
-Schemas are deeply rooted emotional and cognitive patterns that develop in childhood through unmet core needs. They influence how we perceive the world, ourselves, and others.
+La thérapie des schémas a été développée à partir des années 1990 par Jeffrey E. Young comme prolongement de la thérapie cognitivo-comportementale. Elle intègre des éléments issus de la TCC, de la théorie de l'attachement, de la Gestalt-thérapie et des approches psychodynamiques.
 
-### The Five Core Needs (according to Young)
+Données probantes : La thérapie des schémas est bien étayée empiriquement, en particulier pour les troubles de la personnalité (Giesen-Bloo et al. 2006, Masley et al. 2012). En Allemagne, elle est reconnue comme méthode au sein de la thérapie comportementale.
 
-| Core Need | When Unmet, May Lead To |
-|-----------|------------------------|
-| Secure attachment | Abandonment, mistrust |
-| Autonomy & competence | Dependence, fear of failure |
-| Realistic limits | Entitlement, insufficient self-control |
-| Freedom to express needs | Subjugation, self-sacrifice |
-| Spontaneity & play | Unrelenting standards, punitiveness |
-
-### The 18 Schemas — Overview (5 Domains)
-
-**Domain 1: Disconnection and Rejection**
-- Abandonment / Instability
-- Mistrust / Abuse
-- Emotional Deprivation
-- Defectiveness / Shame
-- Social Isolation
-
-**Domain 2: Impaired Autonomy and Performance**
-- Dependence / Incompetence
-- Vulnerability to Harm
-- Enmeshment / Undeveloped Self
-- Failure
-
-**Domain 3: Impaired Limits**
-- Entitlement / Grandiosity
-- Insufficient Self-Control
-
-**Domain 4: Other-Directedness**
-- Subjugation
-- Self-Sacrifice
-- Approval-Seeking
-
-**Domain 5: Overvigilance and Inhibition**
-- Negativity / Pessimism
-- Emotional Inhibition
-- Unrelenting Standards
-- Punitiveness
-
-### Reflection Questions for Schema Recognition
-- "What beliefs about yourself keep coming up again and again?"
-- "In which situations do you react particularly strongly emotionally?"
-- "Do you notice patterns that repeat across different relationships?"
-- "Which needs may have been insufficiently met in your childhood?"
+**Remarque :** Il s'agit de psychoéducation, pas d'un substitut à une thérapie professionnelle.
+**Ne jamais implémenter :** EMDR, Exposition Prolongée (PE), Thérapie d'Exposition Narrative (NET)
 
 ---
 
-## 2. The Mode Model
+## 1. Schémas précoces inadaptés
 
-### Principle
-Modes are momentary emotional states activated by schemas. The mode model helps understand and categorize different "inner parts."
+### Principe
+Les schémas sont des motifs émotionnels et cognitifs profondément enracinés qui se forment dans l'enfance à la suite de besoins fondamentaux non satisfaits. Ils influencent la façon dont nous percevons le monde, nous-mêmes et les autres.
 
-### The Four Mode Categories
+### Les cinq besoins fondamentaux (selon Young)
 
-**Child Modes:**
-- *Vulnerable Child:* Feels sad, lonely, anxious, overwhelmed
-- *Angry Child:* Angry about unmet needs
-- *Impulsive Child:* Acts without thinking, wants immediate gratification
-- *Happy Child:* Feels safe, loved, spontaneous
+| Besoin fondamental | Lorsqu'il n'est pas satisfait, il peut naître par ex. |
+|--------------------|------------------------------------------------------|
+| Attachement sécurisant | Abandon, méfiance |
+| Autonomie et compétence | Dépendance, peur de l'échec |
+| Limites réalistes | Exigence excessive / grandiosité, manque de maîtrise de soi |
+| Libre expression des besoins | Assujettissement, sacrifice de soi |
+| Spontanéité et jeu | Exigences élevées démesurées, punition |
 
-**Maladaptive Parent Modes:**
-- *Punitive Parent:* Inner voice that criticizes, punishes, devalues
-- *Demanding Parent:* Inner voice that demands perfection and achievement
+### Les 18 schémas — Vue d'ensemble (5 domaines)
 
-**Maladaptive Coping Modes:**
-- *Compliant Surrender:* Gives in, adapts excessively
-- *Detached Protector:* Numbs feelings, withdraws, distracts
-- *Overcompensation:* Dominates, controls, attacks
+**Domaine 1 : Séparation et rejet**
+- Abandon / instabilité
+- Méfiance / abus
+- Carence affective
+- Imperfection / honte
+- Isolement social
 
-**Healthy Adult:**
-- Can perceive needs and meet them appropriately
-- Sets healthy boundaries
-- Comforts and soothes the vulnerable child
-- Limits excessive parent modes
+**Domaine 2 : Manque d'autonomie et de performance**
+- Dépendance / incompétence
+- Peur du danger ou de la maladie (vulnérabilité)
+- Fusionnement / personnalité atrophiée
+- Échec
 
-### Exercise: Recognizing Modes in Daily Life
+**Domaine 3 : Manque de limites**
+- Droits personnels exagérés / grandiosité
+- Contrôle de soi / autodiscipline insuffisants
+
+**Domaine 4 : Orientation vers les autres**
+- Assujettissement
+- Sacrifice de soi
+- Recherche d'approbation et de reconnaissance
+
+**Domaine 5 : Survigilance et inhibition**
+- Négativité / pessimisme
+- Surcontrôle émotionnel
+- Idéaux exigeants / critique excessive
+- Punition
+
+### Questions de réflexion pour repérer les schémas
+- « Quelles convictions à propos de toi-même reviennent sans cesse ? »
+- « Dans quelles situations réagis-tu de manière particulièrement intense sur le plan émotionnel ? »
+- « Reconnais-tu des schémas qui se répètent dans différentes relations ? »
+- « Quels besoins ont peut-être été négligés durant ton enfance ? »
+
+---
+
+## 2. Le modèle des modes
+
+### Principe
+Les modes sont des états émotionnels momentanés activés par des schémas. Le modèle des modes aide à comprendre et situer différentes « parts intérieures ».
+
+### Les quatre catégories de modes
+
+**Modes Enfant :**
+- *Enfant vulnérable :* Se sent triste, seul, anxieux, submergé
+- *Enfant en colère :* En colère face à des besoins non satisfaits
+- *Enfant impulsif :* Agit sans réfléchir, veut une satisfaction immédiate
+- *Enfant heureux :* Se sent en sécurité, aimé, spontané
+
+**Modes Parents dysfonctionnels :**
+- *Parent punitif :* Voix intérieure qui critique, punit, dévalorise
+- *Parent exigeant :* Voix intérieure qui exige perfection et performance
+
+**Modes d'adaptation dysfonctionnels :**
+- *Soumission / résignation :* Cède, s'adapte de façon excessive
+- *Évitement :* Anesthésie les émotions, se retire, se distrait
+- *Surcompensation :* Domine, contrôle, attaque
+
+**Adulte sain :**
+- Sait percevoir ses besoins et y répondre de manière appropriée
+- Pose des limites saines
+- Réconforte et apaise l'enfant vulnérable
+- Limite les modes parentaux excessifs
+
+### Exercice : Repérer les modes au quotidien
 
 ```
-Situation: ______________
-Which mode am I feeling right now?
-  [ ] Vulnerable Child — "I feel small and helpless"
-  [ ] Angry Child — "That's unfair!"
-  [ ] Punitive Parent — "You're not good enough"
-  [ ] Demanding Parent — "You must do more"
-  [ ] Detached Protector — "I don't want to think about it"
-  [ ] Overcompensator — "I'll show them"
-  [ ] Healthy Adult — "What do I really need right now?"
+Situation : ______________
+Quel mode est-ce que je ressens en ce moment ?
+  [ ] Enfant vulnérable — « Je me sens petit(e) et impuissant(e) »
+  [ ] Enfant en colère — « C'est injuste ! »
+  [ ] Parent punitif — « Tu n'es pas assez bien »
+  [ ] Parent exigeant — « Tu dois en faire plus »
+  [ ] Évitement — « Je ne veux pas y penser »
+  [ ] Surcompensation — « Je vais leur montrer »
+  [ ] Adulte sain — « De quoi ai-je vraiment besoin maintenant ? »
 ```
 
 ---
 
-## 3. Inner Child Work (Psychoeducational)
+## 3. Travail avec l'enfant intérieur (psychoéducatif)
 
-### Principle
-Inner child work in Schema Therapy aims to develop a caring inner attitude toward one's own vulnerable parts.
+### Principe
+Le travail sur l'enfant intérieur en thérapie des schémas vise à développer une attitude intérieure bienveillante envers ses propres parts blessées.
 
-**CAUTION:** Deep inner child work belongs in professional therapeutic supervision.
+**ATTENTION :** Un travail approfondi sur l'enfant intérieur relève d'un accompagnement thérapeutique professionnel.
 
-### Reflection Exercise: Letter to the Inner Child
+### Exercice de réflexion : Lettre à l'enfant intérieur
 
 ```
-Write a brief letter to your younger self:
-1. What would you have needed back then?
-2. What would you say to that child today?
-3. What comfort would you offer?
+Écris une courte lettre à ton moi plus jeune :
+1. De quoi aurais-tu eu besoin à l'époque ?
+2. Que dirais-tu aujourd'hui à cet enfant ?
+3. Quel réconfort offrirais-tu ?
 ```
 
-### Reflection Questions
-- "When you think about that situation — how old do you feel inside?"
-- "What would a caring adult have said to you back then?"
-- "Which needs of the child within you are currently going unmet?"
+### Questions de réflexion
+- « Quand tu penses à cette situation — quel âge as-tu l'impression d'avoir intérieurement ? »
+- « Qu'aurait dit à l'époque un adulte bienveillant ? »
+- « Quels besoins de l'enfant en toi sont actuellement négligés ? »
 
 ---
 
-## 4. Understanding Coping Styles
+## 4. Comprendre les styles d'adaptation
 
-### The Three Basic Patterns
+### Les trois patrons de base
 
-| Coping Style | Strategy | Example |
-|-------------|----------|---------|
-| Surrender | Accept the schema, submit | "That's just how I am, I can't change it" |
-| Avoidance | Not wanting to feel the schema | Distraction, substance use, overwork |
-| Overcompensation | Living the opposite of the schema | Perfectionism instead of feeling like a failure |
+| Style d'adaptation | Stratégie | Exemple |
+|--------------------|-----------|---------|
+| Soumission | Accepter le schéma, s'y plier | « Je suis comme ça, je n'y peux rien » |
+| Évitement | Ne pas vouloir ressentir le schéma | Distraction, consommation de substances, surmenage |
+| Surcompensation | Vivre l'opposé du schéma | Perfectionnisme au lieu du sentiment d'échec |
 
-### Reflection Questions
-- "When you're under pressure — do you tend to submit, flee, or fight?"
-- "Which of your habits might be avoidance strategies?"
-- "Are there areas where you do the opposite of what you actually feel?"
-
----
-
-## Ethics and Boundaries
-
-**An AI assistant may:**
-- Explain schemas and modes as concepts
-- Ask reflection questions for self-exploration
-- Present coping styles as psychoeducation
-- Guide simple, written inner child reflection exercises
-
-**An AI assistant must NOT:**
-- Diagnose or attribute schemas
-- Conduct chair work or experiential exercises
-- Offer reparenting (limited reparenting)
-- Process traumatic childhood experiences
-- Replace schema mode therapy
-
-**In case of acute crisis, ALWAYS refer to:**
-- 988 Suicide & Crisis Lifeline (US): 988
-- Crisis Text Line (US): Text HOME to 741741
-- Samaritans (UK): 116 123
-- Telefonseelsorge (DE): 0800 111 0 111 / 0800 111 0 222
-- Emergency services: 911 (US) / 112 (EU)
+### Questions de réflexion
+- « Quand tu es sous pression — as-tu plutôt tendance à céder, à fuir ou à contre-attaquer ? »
+- « Lesquelles de tes habitudes pourraient être des stratégies d'évitement ? »
+- « Y a-t-il des domaines où tu fais l'inverse de ce que tu ressens réellement ? »
 
 ---
 
-## References
+## Éthique et limites
+
+**Un assistant IA peut :**
+- Expliquer les schémas et les modes comme concepts
+- Poser des questions de réflexion pour l'auto-exploration
+- Présenter les styles d'adaptation à titre psychoéducatif
+- Guider des exercices simples et écrits de réflexion sur l'enfant intérieur
+
+**Un assistant IA ne doit PAS :**
+- Diagnostiquer ou attribuer des schémas
+- Mener des exercices de chaises ou d'activation expérientielle
+- Proposer un reparentage (*reparenting*)
+- Traiter des expériences traumatiques de l'enfance
+- Remplacer une thérapie des schémas / des modes
+
+**En cas de signe de crise aiguë, TOUJOURS orienter vers :**
+- Telefonseelsorge : 0800 111 0 111 / 0800 111 0 222
+- Urgences psychiatriques / secours : 112
+- Krisenchat : krisenchat.de
+
+---
+
+## Références bibliographiques
 
 - Young, J. E., Klosko, J. S. & Weishaar, M. E. (2003). *Schema Therapy: A Practitioner's Guide.* Guilford Press.
 - Giesen-Bloo, J. et al. (2006). Outpatient Psychotherapy for Borderline Personality Disorder. *Archives of General Psychiatry*, 63(6), 649-658.
@@ -194,5 +220,10 @@ Write a brief letter to your younger self:
 
 ---
 
-*Ported from BACH v3.8.0 | Standalone Version*
-*Sources: Young et al. (2003), Giesen-Bloo et al. (2006), Roediger (2011) — Not professional therapy*
+*Porté depuis BACH v3.8.0 | Version autonome*
+*Sources : Young et al. (2003), Giesen-Bloo et al. (2006), Roediger (2011) — Pas de thérapie professionnelle*
+
+## Journal des modifications
+
+### 1.0.1 (2026-11-22)
+- Indication de langue corrigée

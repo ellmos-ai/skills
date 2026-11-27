@@ -5,7 +5,7 @@ type: protocol
 author: Lukas Geiger
 created: 2026-06-01
 updated: 2026-11-22
-description: "[Français] Compétence d'agent pour bugsweep: Systematic bug sweep with a codebase-scaled target value, doubling escalation, area tracking, and final verification. Use on /bugsweep or whenever the user requests a systematic bug pass."
+description: "Utilisez cette compétence pour /bugsweep ou chaque fois que l'utilisateur demande un passage systématique de détection et correction de bugs. Effectue un balayage systématique avec un objectif proportionnel à la base de code, une escalade par doublement, un suivi des zones inspectées et une vérification finale."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true
@@ -14,168 +14,162 @@ category: dev
 tags: [bugs, debugging, sweep, quality-assurance, workflow, convergence]
 language: fr
 status: active
+visibility: public
 dependencies: {'tools': [], 'services': [], 'protocols': ['bugfix-protocol'], 'python': []}
-provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': 'None', 'local_changes_since_sync': False}
+provenance: {'origin': 'custom', 'origin_path': '~/.claude/skills/bugsweep/', 'origin_version': '1.0.0', 'last_sync_from_origin': '2026-06-13', 'last_sync_to_origin': None, 'local_changes_since_sync': False}
 ---
 
 <img src="banner.png" width="100%" alt="bugsweep banner">
 
-> **Français** — Traduction en attente : le contenu est actuellement en anglais.
+> **Français** — Version française officielle de la compétence `bugsweep`.
 
-# /bugsweep — Systematic Bug-Sweep Workflow (English)
+# /bugsweep — Flux de travail systématique de chasse aux bugs
 
-Iterative bug hunting with a converging stop criterion. Scales with the codebase, escalates when the search looks superficial, and prevents repetition through area tracking.
+Recherche itérative de bugs avec critère d'arrêt convergent. S'adapte à la taille de la base de code, escalade en cas de soupçon de recherche superficielle et évite les répétitions grâce au suivi des zones.
 
-## 1. Compute the base rate
+## 1. Calculer le taux de base
 
 ```
-LOC = productive source lines (src/, lib/ — excluding tests, configs, docs, generated)
+LOC = lignes de code source productives (src/, lib/ — sans tests, configs, docs, fichiers générés)
 x = max(1, ceil(LOC / 1500))
-base_rate = x * 3
+Taux_de_base = x * 3
 ```
 
-| LOC | x | Base rate |
-|-----|---|-----------|
+| LOC | x | Taux de base |
+|-----|---|--------------|
 | ~1500 | 1 | 3 |
 | ~3000 | 2 | 6 |
 | ~4500 | 3 | 9 |
 | ~10000 | 7 | 21 |
 
-Report to the user: "Codebase: {LOC} LOC → base rate = {base_rate} clean search passes."
+Informer l'utilisateur : « Base de code : {LOC} LOC → Taux de base = {Taux_de_base} passes propres. »
 
-## 2. Search loop
+## 2. Boucle de recherche
 
 ```
-counter = 0
-target = base_rate
-any_bug_found = False
-checked = []  # (area_name, type: code|task)
+compteur = 0
+objectif = Taux_de_base
+bug_deja_trouve = False
+verifies = []  # (nom_zone, type: code|tache)
 
 LOOP:
-  area = pick_new_area()  # see area rules
-  checked.append(area)
-
-  Perform a thorough bug search
-
-  IF bug found:
-    any_bug_found = True
-    Fix following bugfix-protocol (phases 4+5)
-    Review: see model rule (newer model classes: no external review needed)
-    Commit + push
-    counter = 0  # RESET
+  zone = choisir_nouvelle_zone()  # Voir les règles de zone
+  verifies.append(zone)
+  
+  Effectuer une recherche approfondie de bugs
+  
+  IF Bug trouvé :
+    bug_deja_trouve = True
+    Correction selon bugfix-protocol (Phase 4+5)
+    Revue : voir la règle de modèle (classes de modèles récentes : pas de revue externe requise)
+    Commit + Push
+    compteur = 0  # RÉINITIALISATION
   ELSE:
-    counter += 1
-    Report: "✓ Clean: {area} — {counter}/{target}"
-
-  IF counter >= target:
-    IF NOT any_bug_found:
-      # Doubling escalation: not a single bug → search too shallow?
-      target = base_rate * 2
-      any_bug_found = True  # escalate only ONCE
-      Report: "⚠ No bug in {base_rate} passes → target doubled to {target}."
+    compteur += 1
+    Signaler : "✓ Propre : {zone} — {compteur}/{objectif}"
+  
+  IF compteur >= objectif :
+    IF NOT bug_deja_trouve :
+      # Escalade par doublement : aucun bug trouvé → recherche trop superficielle ?
+      objectif = Taux_de_base * 2
+      bug_deja_trouve = True  # Escalade UNE SEULE fois
+      Signaler : "⚠ Aucun bug en {Taux_de_base} passes → objectif doublé à {objectif}."
       CONTINUE LOOP
     ELSE:
-      GOTO final verification
+      GOTO Vérification finale
 ```
 
-### Practical notes on the search loop (learned from real sweeps)
+### Conseils pratiques sur la boucle de recherche (tirés des sweeps)
 
-- **Non-git repos:** Where there is no `git` (e.g. cloud-synced project folders), a **versioned backup** replaces "commit + push": create `file_<ts>.bak` before the first fix. **Caution — the pre-fix backup is NOT a backup of your work:** after the last fix, take a fresh `_FINAL_` backup, otherwise a sync hiccup can wipe the entire fix session.
-- **Many bugs known up front:** If N bugs are already known at the start (e.g. from a previous run), "per bug: fix → review → commit → reset" is impractical. Process the known bugs as ONE fix block (joint review at the end) and start counting the base rate / search loop from the first NEWLY found bug. The reset logic still applies to bugs newly found during the sweep.
-- **Same bug in multiple places:** A found defect (e.g. a wrong regex, a broken format assumption) is often copied elsewhere. After each fix, search for the same pattern in other locations — that is a worthwhile dedicated "area".
+- **Dépôts sans Git :** Là où `git` n'est pas disponible (par ex. dossiers de projet synchronisés dans le cloud), une **sauvegarde versionnée** remplace « Commit + Push » : avant la première correction, créer `fichier_<ts>.bak`. **Attention — la sauvegarde pré-correction n'est PAS une sauvegarde du travail :** après la dernière correction, créer une nouvelle sauvegarde `_FINAL_`, sinon tout le travail de correction est perdu en cas d'incident de synchronisation.
+- **Nombreux bugs connus à l'avance :** Si N bugs sont déjà connus au départ (par ex. issus d'une exécution précédente), « par bug : Correction → Revue → Commit → Réinitialisation » est impraticable. Traiter alors les bugs connus comme UN seul bloc de correction (avec une revue commune à la fin) et compter le taux de base / la boucle à partir du premier NOUVEAU bug découvert. La logique de réinitialisation continue de s'appliquer aux nouveaux bugs trouvés pendant le sweep.
+- **Même bug à plusieurs endroits :** Un défaut découvert (par ex. une regex erronée ou une hypothèse de format défaillante) est souvent copié ailleurs. Après chaque correction, rechercher si le même motif apparaît à d'autres endroits — cela constitue une « zone » dédiée très rentable.
 
-## 3. Area rules (anti-gaming)
+## 3. Règles de zone (anti-contournement)
 
-An "area" is either a **code focus** or a **task** (purpose of the code).
+Une « zone » est soit un **focus code**, soit une **tâche** (finalité du code).
 
-### Code focus
-- May be **extended** (more files) or **shifted** (different part) between passes
-- Must NOT be exactly the same selection as in an earlier pass
-- OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py + orchestrator.py` (extended)
-- NOT OK: pass 1 = `maintenance.py`, pass 5 = `maintenance.py` (identical)
+### Focus code
+- Peut être **élargi** (plus de fichiers) ou **déplacé** (autre partie) entre les passes.
+- Ne doit PAS être exactement la même sélection que lors d'une passe précédente.
+- Exemple OK : Passe 1 = `maintenance.py`, Passe 5 = `maintenance.py + orchestrator.py` (élargi).
+- Exemple NON OK : Passe 1 = `maintenance.py`, Passe 5 = `maintenance.py` (identique).
 
-### Task (purpose)
-- May be made **more granular** (check a subfunction) or **broader** (related functions together)
-- Must NOT be exactly the same task
-- OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety across the whole tray" (broader)
-- OK: pass 1 = "process detection", pass 5 = "store-marker matching inside process detection" (more granular)
-- NOT OK: pass 1 = "thread safety in the watchdog", pass 5 = "thread safety in the watchdog" (identical)
+### Tâche (finalité)
+- Peut être rendue plus **granulaire** (vérifier une sous-fonction) ou plus **large** (fonctions liées).
+- Ne doit PAS être exactement la même tâche.
+- Exemple OK : Passe 1 = « Thread-safety dans le watchdog », Passe 5 = « Thread-safety globale du tray » (plus large).
+- Exemple OK : Passe 1 = « Détection de processus », Passe 5 = « Correspondance des marqueurs de store dans la détection de processus » (plus granulaire).
+- Exemple NON OK : Passe 1 = « Thread-safety dans le watchdog », Passe 5 = « Thread-safety dans le watchdog » (identique).
 
-### Naming
-- The area MUST be named BEFORE the search (no retroactive assignment)
-- Format: `"{name}" ({type}: code|task)`
+### Nommage
+- La zone DOIT être nommée AVANT la recherche (pas d'attribution rétroactive).
+- Format : `"{Nom}" ({type}: code|tache)`
 
-## 4. Final verification
+## 4. Vérification finale
 
-Once counter >= target AND any_bug_found:
+Une fois que `compteur >= objectif` ET `bug_deja_trouve` :
 
-**Step A — bugfix-protocol phase 5:**
-- [ ] Full test suite green (`pytest`)
-- [ ] **Actually execute the changed execution path at least once** — not just tests. Green unit tests on code that never calls the changed location are false safety. Run the actually changed path (dry run, smoke run, CLI invocation) and check for tracebacks / signature / naming errors. `py_compile` or a plain import only checks syntax — not whether the path runs.
-- [ ] **Every fix has at least one test that touches it** — a fix without a test that actually triggers the changed branch counts as unverified (for orchestration/network paths, combine mock + dry run if needed).
-- [ ] Type check (if configured)
-- [ ] Lint (if configured)
-- [ ] Edge cases of the session's fixes checked
+**Étape A — bugfix-protocol Phase 5 :**
+- [ ] Suite de tests complète au vert (`pytest`)
+- [ ] **Exécuter réellement le chemin d'exécution modifié au moins une fois** — pas seulement les tests. Des tests unitaires verts sur du code qui n'appelle même pas l'endroit modifié donnent une fausse sécurité. Exécuter le chemin réellement modifié (dry-run, test de fumée, appel CLI) et vérifier l'absence de tracebacks / erreurs de signature / erreurs de nom. `py_compile` ou un simple import ne vérifie QUE la syntaxe, pas que le chemin fonctionne.
+- [ ] **Chaque correction possède au moins un test qui la sollicite** — une correction sans test déclenchant réellement la branche modifiée est considérée comme non vérifiée (pour les chemins d'orchestration/réseau, combiner si nécessaire mock + dry-run).
+- [ ] Vérification des types (si configurée)
+- [ ] Lint (si configuré)
+- [ ] Cas limites des corrections de la session vérifiés
 
-**Step B — review (model rule):**
-- **Newer model classes (e.g. Claude 5 / Fable class):** NO external advisor/second-model
-  review required. Step A (tests + a real smoke run) is the verification. Optionally, on
-  genuine uncertainty: a fresh review subagent — but verify its findings empirically
-  (test against the unchanged code) before counting them as bugs.
-  Background (sweep experience 2026-06-11): the second reviewer was unavailable, the
-  substitute subagent delivered 1 finding (confidence 85) that a test proved to be a
-  non-bug — an external review did not change the outcome.
-- **Older models:** closing discussion with the advisor (fallback: a second model as
-  reviewer); the advisor confirms or names gaps.
+**Étape B — Revue (règle de modèle) :**
+- **Classes de modèles récentes (par ex. classe Claude 5 / Fable) :** AUCUNE revue externe par conseiller ou second modèle requise. L'étape A (tests + exécution réelle de fumée) constitue la vérification. En cas de doute réel, optionnellement faire appel à un sous-agent de revue neuf — mais vérifier empiriquement ses constats (test contre le code non modifié) avant de les compter comme bugs. Contexte (retour d'expérience sweep 2026-06-11) : le second réviseur était indisponible, le sous-agent de remplacement a signalé 1 constat (confiance 85) qui s'est révélé ne pas être un bug par test — la revue externe n'a pas changé le résultat.
+- **Modèles plus anciens :** Discussion finale avec le conseiller (solution de repli : second modèle comme réviseur) ; le conseiller confirme ou identifie les lacunes.
 
-**If a bug is found during verification:**
-→ Fix + test + commit
-→ RESET: counter = 0, target = base_rate (fresh, NO doubling)
-→ Back to the search loop (checked list persists, any_bug_found = True)
+**Si un bug est trouvé lors de la vérification :**
+→ Correction + Test + Commit
+→ RÉINITIALISATION : `compteur = 0`, `objectif = Taux_de_base` (neuf, PAS de doublement)
+→ Retour à la boucle de recherche (la liste `verifies` est conservée, `bug_deja_trouve = True`)
 
-**If verification is clean:**
-→ DONE. Commit + push. Print the protocol.
+**Si la vérification est propre :**
+→ TERMINÉ. Commit + Push. Produire le rapport.
 
-## 5. Protocol (at the end)
+## 5. Rapport (à la fin)
 
 ```markdown
-## Bug Sweep Result
+## Résultat du Bug-Sweep
 
-- **Codebase:** {LOC} LOC
-- **Base rate:** {base_rate} (escalated: {target})
-- **Areas checked:** {len(checked)}
-- **Bugs found:** {count}
-- **Resets:** {reset_count}
-- **Doubling triggered:** yes/no
-- **Fixes:**
-  - {title} — {commit_hash}
+- **Base de code :** {LOC} LOC
+- **Taux de base :** {Taux_de_base} (escaladé : {objectif})
+- **Zones vérifiées :** {len(verifies)}
+- **Bugs trouvés :** {nombre}
+- **Réinitialisations :** {nombre_resets}
+- **Doublement déclenché :** oui/non
+- **Corrections :**
+  - {titre} — {commit_hash}
   - ...
-- **Final test suite:** {passed}/{total} green
-- **Review verdict:** self-verification (newer model class) / advisor confirmed / gaps named
+- **Suite de tests finale :** {passed}/{total} au vert
+- **Verdict de revue :** Auto-vérification (classe de modèle récente) / Confirmé par le conseiller / Lacunes signalées
 ```
 
-## When to use this workflow
+## Quand utiliser ce flux de travail
 
-- After feature development (quality assurance)
-- Before a release (acceptance sweep)
-- Periodically as a hygiene check
-- When the user types `/bugsweep`
+- Après le développement d'une fonctionnalité (assurance qualité)
+- Avant une release (balayage de réception)
+- Périodiquement comme contrôle d'hygiène
+- Lorsque l'utilisateur saisit `/bugsweep`
 
-## Interaction with other skills
+## Interaction avec d'autres compétences
 
-- **bugfix-protocol:** fix procedure (phases 4+5) for every found bug
-- **systematic-debugging:** for hard-to-reproduce bugs within the sweep
-- **code-review:** can be used as a task area
+- **bugfix-protocol :** Procédure de correction (Phase 4+5) pour chaque bug trouvé
+- **systematic-debugging :** Pour les bugs difficiles à reproduire au sein du sweep
+- **code-review :** Peut être utilisé comme zone de type tâche
 
 ---
 
-## Journal des Modifications
+## Journal des modifications
 
 ### 1.1.1 (2026-11-22)
-- Note de langue corrigée
+- Indication de langue corrigée
 
 ### 1.1.0 (2026-06-13)
-- Backported the model rule for step B (from the local skill installation, state 2026-06-11): newer model classes self-verify via tests + a real smoke run, no external review needed; protocol field "Review verdict" extended accordingly
+- Règle de modèle pour l'étape B rétroportée (depuis l'installation locale de la compétence, état au 2026-06-11) : les classes de modèles récentes vérifient elles-mêmes via les tests + un vrai test de fumée, aucune revue externe nécessaire ; champ « Verdict de revue » du rapport étendu en conséquence
 
 ### 1.0.0 (2026-06-13)
-- First publication in the skill library (adopted from local skill installation, state 2026-06-01)
+- Publication initiale dans la bibliothèque de compétences (reprise depuis l'installation locale, état au 2026-06-01)
