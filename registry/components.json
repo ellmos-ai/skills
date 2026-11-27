@@ -522,9 +522,9 @@
       "type": "assist",
       "category": "assist",
       "path": "skills/assist/kalender/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "status": "stable",
-      "description": "Verwenden, wenn Termine, Kalendereinträge oder Terminserien verwaltet und abgefragt werden sollen (z. B. 'Termin eintragen', 'Kalender abfragen', 'Termine für morgen anzeigen', /kalender). Verwaltet Termine flexibel über lokales SQLite oder konfigurierte MCP-Backends (Google Calendar, Routinika, UpToday). NICHT verwenden für reine Projekt-Meilenstein-Planung (dafür dev/dev-cycle).",
+      "description": "Verwenden, wenn Termine, getrennte Kalender-Silos, TerminPilot-/ICS-Importe oder grafische Kalenderblätter und Berichte (HTML/PDF/MD/TXT/ICS) verwaltet, gespiegelt oder abgefragt werden sollen (z. B. 'Termin eintragen', 'Arzttermine 2027 als PDF', /kalender). NICHT verwenden für reine Projekt-Meilenstein-Planung (dafür dev/dev-cycle).",
       "languages": [
         "de",
         "en",
