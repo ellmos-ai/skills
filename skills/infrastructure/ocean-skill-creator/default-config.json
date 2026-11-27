@@ -1,9 +1,15 @@
 {
-  "_hinweis": "Versionierte, nutzerneutrale Fallback-Konfiguration fuer ocean-skill-creator (v0.4.0, abwaertskompatibel zu ellmos.skill-config.v1). Lokale Ueberschreibungen gehoeren in config.json oder profiles/<kanal>[.<chat>].json.",
+  "_hinweis": "Versionierte, nutzerneutrale Fallback-Konfiguration fuer ocean-skill-creator (v0.4.1, abwaertskompatibel zu ellmos.skill-config.v1). Andere Skills duerfen ebenso sprechende .json-Namen (z. B. routing-defaults.json, models.local.json) oder bei reinen Leitfaden-Skills gar keine .json nutzen.",
   "schema": "ocean.skill-config.v2",
   "legacy_schema_compat": "ellmos.skill-config.v1",
   "skill": "ocean-skill-creator",
-  "version": "0.4.0",
+  "version": "0.4.1",
+  "pragmatic_defaults": {
+    "allow_custom_config_names": true,
+    "templates_optional": true,
+    "scripts_optional": true,
+    "config_optional_for_guideline_skills": true
+  },
   "verweise": {
     "haus_frontmatter_vorlagen": "../../../templates/",
     "konventionen": "../../../docs/CONVENTIONS.md",

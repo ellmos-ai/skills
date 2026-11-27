@@ -4675,9 +4675,9 @@
       "type": "skill",
       "category": "infrastructure",
       "path": "skills/infrastructure/ocean-skill-creator/SKILL.md",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "status": "active",
-      "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und erzwingt Ocean-Standards (abwärtskompatibel zu ellmos): 9-Felder-Frontmatter, default-config.json mit Profil-Kaskade und Selbstheilung, Berichts-/Template-Ausgabe (html/pdf/md/txt/json), grounding-seed, Vendor-Bewusstsein, Lernvertrag sowie Scaffold-/Audit-CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer).",
+      "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und setzt pragmatische Ocean-Standards durch: 9-Felder-Frontmatter, bei Bedarf ausgelagerte .json-Configs (default-config.json oder sprechender Dateiname) mit Selbstheilung, optionale Berichts-Templates (html/pdf/md/txt/json), grounding-seed, Lernvertrag sowie init/audit-skill CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer).",
       "languages": [
         "de",
         "en"
@@ -4687,13 +4687,13 @@
           "language": "de",
           "path": "skills/infrastructure/ocean-skill-creator/SKILL.md",
           "title": "ocean-skill-creator — Ocean-Skill-Baukasten",
-          "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und erzwingt Ocean-Standards (abwärtskompatibel zu ellmos): 9-Felder-Frontmatter, default-config.json mit Profil-Kaskade und Selbstheilung, Berichts-/Template-Ausgabe (html/pdf/md/txt/json), grounding-seed, Vendor-Bewusstsein, Lernvertrag sowie Scaffold-/Audit-CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer)."
+          "description": "Verwenden, wenn ein neuer Skill entstehen oder ein bestehender auf Ocean-Standards nachgerüstet werden soll (z. B. 'erstelle einen Skill', 'neuen Skill anlegen', 'Skill auf Ocean-Standard heben', /ocean-skill-creator, Übergangs-Alias /ellmos-skill-creator). Delegiert den Entwurf an skill-creator und setzt pragmatische Ocean-Standards durch: 9-Felder-Frontmatter, bei Bedarf ausgelagerte .json-Configs (default-config.json oder sprechender Dateiname) mit Selbstheilung, optionale Berichts-Templates (html/pdf/md/txt/json), grounding-seed, Lernvertrag sowie init/audit-skill CLI. NICHT verwenden für Skill-Suche (skill-finder) oder Bestands-Audits (skill-explorer)."
         },
         {
           "language": "en",
           "path": "skills/infrastructure/ocean-skill-creator/SKILL.en.md",
           "title": "ocean-skill-creator — Ocean Skill Builder",
-          "description": "Use when creating a new skill or upgrading an existing one to Ocean standards (e.g. 'create a skill', 'scaffold a new skill', 'make this skill Ocean-conformant', /ocean-skill-creator, transition alias /ellmos-skill-creator). Delegates generic authoring to skill-creator while enforcing Ocean standards (backward-compatible with ellmos): 9-field frontmatter, default-config.json with profile cascade and self-healing, report/template outputs (html/pdf/md/txt/json), grounding-seed docking, vendor awareness, learning contract, and scaffold/audit CLI. Do NOT use for skill discovery (skill-finder) or catalog audits (skill-explorer)."
+          "description": "Use when creating a new skill or upgrading an existing one to Ocean standards (e.g. 'create a skill', 'scaffold a new skill', 'make this skill Ocean-conformant', /ocean-skill-creator, transition alias /ellmos-skill-creator). Delegates generic authoring to skill-creator while applying pragmatic Ocean standards: 9-field frontmatter, externalized .json configs where needed (default-config.json or expressive custom filename) with self-healing, optional report templates (html/pdf/md/txt/json), grounding-seed, learning contract, and init/audit-skill CLI. Do NOT use for skill discovery (skill-finder) or catalog audits (skill-explorer)."
         }
       ]
     },

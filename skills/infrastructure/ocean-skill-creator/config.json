@@ -1,9 +1,15 @@
 {
-  "_hinweis": "Öffentlich mitgelieferte Standard-Konfiguration von ocean-skill-creator (synchron zu default-config.json; lokale/private Overrides nutzen dieselbe Struktur).",
+  "_hinweis": "Öffentlich mitgelieferte Standard-Konfiguration von ocean-skill-creator (v0.4.1, synchron zu default-config.json; lokale/private Overrides nutzen dieselbe Struktur).",
   "schema": "ocean.skill-config.v2",
   "legacy_schema_compat": "ellmos.skill-config.v1",
   "skill": "ocean-skill-creator",
-  "version": "0.4.0",
+  "version": "0.4.1",
+  "pragmatic_defaults": {
+    "allow_custom_config_names": true,
+    "templates_optional": true,
+    "scripts_optional": true,
+    "config_optional_for_guideline_skills": true
+  },
   "settings": {
     "visibility_default_for_new_skills": "private-only",
     "required_core_languages": ["de", "en"],

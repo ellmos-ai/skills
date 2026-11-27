@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-"""Ocean Skill Creator (v0.4.0) — Stdlib Scaffolding, Self-Healing Config & Skill Auditor.
+"""Ocean Skill Creator (v0.4.1) — Pragmatic Stdlib Scaffolding, Self-Healing Config & Skill Auditor.
 
-Provides:
-- 5-stage configuration cascade loader with self-healing backup & atomic writes:
-  ``default-config.json -> config.json -> <channel>.json -> <channel>.<chat>.json -> CLI``
-- Standard multi-format report rendering (``html``, ``pdf`` via pure-stdlib ``%PDF-1.4``,
-  ``md``, ``txt``, ``json``) backed by replaceable ``templates/``.
+Pragmatic v0.4.1 Principles ("only where genuinely useful"):
+- Externalized settings may use ``default-config.json`` OR any expressive domain-specific
+  ``.json`` filename (e.g. ``models.local.json``, ``routing-defaults.json``, ``prefs.json``).
+- ``templates/``, ``scripts/``, and ``.json`` configs are recommended ONLY when a skill
+  genuinely benefits from them (configurable parameters, deterministic parsing/computation,
+  or multi-format document/report output). Lean guideline, advisory, therapy, thinking,
+  and router/umbrella skills achieve ``100/100 conformant`` with ``SKILL.md`` + ``SKILL.en.md`` alone.
 - CLI subcommands:
-  - ``scaffold <name> --category <cat> --out <dir> [--with-reports] [--with-profiles] [--json]``
+  - ``init`` / ``scaffold <name> [--category <cat>] [--out <dir>] [--config-name <file.json>]
+    [--with-reports] [--no-templates] [--no-scripts] [--no-config] [--minimal] [--with-profiles] [--json]``
   - ``validate-config --default <path> [--config <path>] [--profile <path> ...] [--repair] [--json]``
   - ``audit-skill <skill_dir> [--json]``
 """
@@ -32,17 +35,30 @@ TEMPLATES_DIR = SKILL_CREATOR_ROOT / "templates"
 OUTPUT_TEMPLATES_DIR = TEMPLATES_DIR / "output"
 
 SKILL_SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+CONFIG_FILENAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,80}\.json$")
 TRIGGER_RE = re.compile(
     r"\b(use (when|for|this|whenever|it|to)|when the user|when you|trigger|invoke|"
     r"verwenden|verwende|nutzen|nutze|einsetzen|aktiviert sich|immer wenn|wenn der nutzer)\b"
     r"|(?:^|\s)/[a-z][\w-]+",
     re.IGNORECASE,
 )
-REPORT_SIGNAL_RE = re.compile(
-    r"\b(report|bericht|protokoll|export|digest|zusammenfassung|kalenderblatt|"
-    r"summary|overview|dossier|pdf|html)\b",
-    re.IGNORECASE,
-)
+
+# Non-config metadata, connection, build, or coverage JSON files that are not settings files
+NON_CONFIG_JSON_FILENAMES = frozenset({
+    "connections.json",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "jsconfig.json",
+    "user-usecases.json",
+    "usecase-gaps.json",
+    "known-providers-and-abilities.json",
+    "gap-closing-analysis.json",
+    "evals.json",
+    "grading.json",
+})
+SKIP_SCAN_DIRS = frozenset({"__pycache__", ".git", "node_modules", ".pytest_cache", "evals", "tests"})
+
 HARDCODED_PATH_RE = re.compile(
     r"""(?ix)
     (?:[A-Z]:[\\/]{1,2}(?:Users|Program\s+Files|Temp|tmp)[\\/][^\s"'`]+)
@@ -57,6 +73,13 @@ HARDCODED_FORMAT_RE = re.compile(
 )
 MAGIC_THRESHOLD_RE = re.compile(
     r"\b(?:MAX_[A-Z0-9_]+|DEFAULT_TIMEOUT|THRESHOLD_[A-Z0-9_]+|LIMIT_[A-Z0-9_]+)\s*=\s*\d+"
+)
+EXPLICIT_REPORT_ENGINE_RE = re.compile(
+    r"\b(?:render_report|render_protocol|report\.template\.|%PDF-1\.\d)\b"
+)
+REFERENCED_LOCAL_SCRIPT_RE = re.compile(
+    r"(?:^|[\s`\"'])(?:python3?\s+)?(scripts/[A-Za-z0-9_.-]+\.py)\b",
+    re.MULTILINE,
 )
 
 REQUIRED_FRONTMATTER_KEYS = (
@@ -80,6 +103,19 @@ SUPPORTED_REPORT_FORMATS = ("html", "pdf", "md", "txt", "json")
 def utc_compact_timestamp(now: datetime | None = None) -> str:
     dt = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     return dt.strftime("%Y%m%dT%H%M%SZ")
+
+
+def validate_config_filename(config_name: str) -> str:
+    cleaned = config_name.strip()
+    if "/" in cleaned or "\\" in cleaned or ".." in cleaned or not CONFIG_FILENAME_RE.fullmatch(cleaned):
+        raise ValueError(
+            f"Invalid --config-name {config_name!r}; expected a plain '*.json' filename without path separators"
+        )
+    if cleaned in NON_CONFIG_JSON_FILENAMES:
+        raise ValueError(
+            f"--config-name {cleaned!r} collides with reserved metadata/connection filename"
+        )
+    return cleaned
 
 
 def atomic_write_json(path: str | Path, data: Mapping[str, Any]) -> Path:
@@ -192,7 +228,7 @@ def resolve_profile_chain(
     chat: str | None = None,
     extra_profiles: Sequence[str | Path] = (),
 ) -> list[Path]:
-    """Build the standard override path list above ``default-config.json``."""
+    """Build the standard override path list above the base config file."""
     root = Path(skill_dir)
     chain: list[Path] = [Path(config_path) if config_path is not None else (root / "config.json")]
     profiles_dir = root / "profiles"
@@ -249,18 +285,17 @@ def load_effective_config(
 ) -> dict[str, Any]:
     """Load, validate, deep-merge, and optionally self-heal a skill config cascade.
 
-    Precedence:
-    ``default-config.json -> config.json -> <channel>.json -> <channel>.<chat>.json -> cli_overrides``
+    Works with ``default-config.json`` or any domain-specific base ``.json`` file.
     """
     def_path = Path(default_path)
     if not def_path.is_file():
-        raise ValueError(f"default-config.json not found: {def_path}")
+        raise ValueError(f"Base config JSON not found: {def_path}")
     try:
         default_raw = json.loads(def_path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as exc:
-        raise ValueError(f"default-config.json is invalid JSON ({def_path}): {exc}") from exc
+        raise ValueError(f"Base config JSON is invalid ({def_path}): {exc}") from exc
     if not isinstance(default_raw, dict):
-        raise ValueError(f"default-config.json root must be a JSON object: {def_path}")
+        raise ValueError(f"Base config JSON root must be a JSON object: {def_path}")
 
     ts = timestamp or utc_compact_timestamp()
     effective: dict[str, Any] = copy.deepcopy(default_raw)
@@ -286,7 +321,7 @@ def load_effective_config(
             if not isinstance(parsed, dict):
                 raise ValueError(f"JSON root must be object, got {type(parsed).__name__}")
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
-            warnings.append(f"{ov_path}: corrupt override ({exc}); fell back to default-config.json")
+            warnings.append(f"{ov_path}: corrupt override ({exc}); fell back to {def_path.name}")
             if repair:
                 backup_path = _backup_corrupt_file(ov_path, ts)
                 replacement: dict[str, Any] = copy.deepcopy(default_raw) if is_primary_config else {}
@@ -553,7 +588,7 @@ def render_report(
 
 
 # ---------------------------------------------------------------------------
-# Skill Scaffolding (scaffold subcommand)
+# Skill Scaffolding (init / scaffold subcommand)
 # ---------------------------------------------------------------------------
 
 def _build_scaffold_skill_md_de(
@@ -561,35 +596,55 @@ def _build_scaffold_skill_md_de(
     category: str,
     today_iso: str,
     *,
+    config_name: str | None,
     with_reports: bool,
+    with_scripts: bool,
 ) -> str:
     snake = name.replace("-", "_")
+    cfg_clause = (
+        f" Nutzt ausgelagerte Einstellungen über {config_name} samt Selbstheilung"
+        if config_name
+        else " Arbeitet als schlanker, direkt ausführbarer Leitfaden-Skill"
+    )
+    rep_clause = (
+        " und erzeugt Berichte über austauschbare Vorlagen (html/pdf/md/txt/json)."
+        if with_reports
+        else "."
+    )
     desc = (
         f"Verwenden, wenn Aufgaben rund um {name} ausgeführt oder geprüft werden sollen "
-        f"(z. B. '{name} starten', '{name} ausführen', /{name}). Nutzt ausgelagerte "
-        f"Einstellungen über default-config.json samt Selbstheilung"
-        + (
-            " und erzeugt Berichte über austauschbare Vorlagen (html/pdf/md/txt/json)."
-            if with_reports
-            else "."
-        )
+        f"(z. B. '{name} starten', '{name} anwenden', /{name})."
+        + cfg_clause
+        + rep_clause
         + " NICHT verwenden für allgemeine Skill-Suche (dafür skill-finder)."
     )
+    config_section = ""
+    if config_name:
+        config_section = f"""
+## Konfiguration & Selbstheilung
+
+Dieser Skill vermeidet feste Parameter im Code und lädt seine Einstellungen über `{config_name}`:
+
+`{config_name}` -> `config.json` -> `profiles/<kanal>.json` -> `profiles/<kanal>.<chat>.json` -> CLI-Flags.
+
+Beschädigte lokale Override-Dateien fallen automatisch auf `{config_name}` zurück und werden mit `--repair` verlustfrei als `.corrupt.<ts>.bak` gesichert.
+"""
     report_section = ""
     if with_reports:
+        cmd_line = (
+            f"\n```bash\npython scripts/{snake}_core.py --format pdf --out output/report.pdf\n```\n"
+            if with_scripts
+            else ""
+        )
         report_section = f"""
 ## Berichte, Ausgabeformate & Vorlagen
 
 Die Darstellung ist strikt von der Fachlogik getrennt (`templates/report.template.{{html,md,txt}}`):
 
 - Unterstützte Ausgabeformate: `html`, `pdf` (inkl. reinem Stdlib-`%PDF-1.4`-Fallback), `md`, `txt`, `json`.
-- Eigene Vorlagen können ohne Codeänderung über `templates.custom_dir` in `config.json` oder einem Kanalprofil hinterlegt werden.
+- Eigene Vorlagen können über `templates.custom_dir` hinterlegt werden.
 - Zustellungswege (`delivery`) stehen standardmäßig sicher auf **Entwurf / Dry-Run** (`enabled: false`, `dry_run: true`, `mode: "draft"`).
-
-```bash
-python scripts/{snake}_core.py --format pdf --out output/report.pdf
-```
-"""
+{cmd_line}"""
     return f"""---
 name: {name}
 version: 0.1.0
@@ -604,7 +659,7 @@ bach_compatible: true
 bach_origin: false
 
 category: {category}
-tags: [{name}, {category}, ocean-standard, config-cascade]
+tags: [{name}, {category}, ocean-standard]
 language: de
 status: active
 visibility: private-only
@@ -630,31 +685,22 @@ provenance:
 
 ## Wann aktivieren
 
-- „{name} starten“, „{name} ausführen“, `/{name}`
-- Wenn strukturierte Läufe in der Kategorie `{category}` mit nachvollziehbarer Konfiguration benötigt werden.
-
-## Konfiguration & Selbstheilung
-
-Dieser Skill vermeidet feste Parameter im Code und lädt seine Einstellungen über die 5-stufige Ocean-Kaskade:
-
-`default-config.json` -> `config.json` -> `profiles/<kanal>.json` -> `profiles/<kanal>.<chat>.json` -> CLI-Flags (`--set schluessel=wert`).
-
-Beschädigte lokale Override-Dateien fallen automatisch auf `default-config.json` zurück und werden mit `--repair` verlustfrei als `.corrupt.<ts>.bak` gesichert.
-{report_section}
+- „{name} starten“, „{name} anwenden“, `/{name}`
+- Wenn strukturierte Unterstützung in der Kategorie `{category}` benötigt wird.
+{config_section}{report_section}
 ## Anbieter & Alternativen
 
-- **Eigenständiger Betrieb:** Läuft ohne externe Pflichtabhängigkeiten mit der Python-Standardbibliothek.
-- **Ökosystem-Andockung:** Optionale externe Werkzeuge werden in `connections.json` aufgelöst (`grounding-seed`-kompatibel), niemals eigenmächtig installiert.
+- **Eigenständiger Betrieb:** Läuft ohne externe Pflichtabhängigkeiten.
+- **Ökosystem-Andockung:** Optionale externe Werkzeuge werden nur bei echtem Bedarf angebunden und niemals eigenmächtig installiert.
 
 ## Selbstaktualisierung
 
-- Prüfe regelmäßig `letzter_update_check` in `default-config.json` / `config.json` sowie Nachbarskills über `skill-finder`.
-- Halte neue Erkenntnisse datiert in `connections.json` (`gelernt`) und reale Nutzerfälle in `user-usecases.json` fest.
+- Prüfe regelmäßig verwandte Nachbarskills über `skill-finder` und halte neue Erkenntnisse nachvollziehbar fest.
 
 ## Changelog
 
 ### 0.1.0 ({today_iso})
-- Erstfassung erzeugt über `ocean-skill-creator` (`v0.4.0`) mit `default-config.json`, Selbstheilungs-Loader und Testgerüst.
+- Erstfassung erzeugt über `ocean-skill-creator` (`v0.4.1`).
 """
 
 
@@ -663,35 +709,55 @@ def _build_scaffold_skill_md_en(
     category: str,
     today_iso: str,
     *,
+    config_name: str | None,
     with_reports: bool,
+    with_scripts: bool,
 ) -> str:
     snake = name.replace("-", "_")
+    cfg_clause = (
+        f" Loads externalized settings via {config_name} with self-healing fallback"
+        if config_name
+        else " Operates as a lean, zero-boilerplate guideline skill"
+    )
+    rep_clause = (
+        " and renders reports through replaceable templates (html/pdf/md/txt/json)."
+        if with_reports
+        else "."
+    )
     desc = (
-        f"Use when running or inspecting {name} workflows (e.g. 'run {name}', "
-        f"'execute {name}', /{name}). Loads externalized settings via default-config.json "
-        f"with self-healing fallback"
-        + (
-            " and renders reports through replaceable templates (html/pdf/md/txt/json)."
-            if with_reports
-            else "."
-        )
+        f"Use when running or applying {name} workflows (e.g. 'run {name}', "
+        f"'apply {name}', /{name})."
+        + cfg_clause
+        + rep_clause
         + " Do NOT use for general skill routing (use skill-finder)."
     )
+    config_section = ""
+    if config_name:
+        config_section = f"""
+## Configuration & self-healing
+
+This skill avoids hardcoded settings and resolves configuration starting from `{config_name}`:
+
+`{config_name}` -> `config.json` -> `profiles/<channel>.json` -> `profiles/<channel>.<chat>.json` -> CLI flags.
+
+Corrupt local override files automatically fall back to `{config_name}` and are preserved as `.corrupt.<ts>.bak` when `--repair` is passed.
+"""
     report_section = ""
     if with_reports:
+        cmd_line = (
+            f"\n```bash\npython scripts/{snake}_core.py --format pdf --out output/report.pdf\n```\n"
+            if with_scripts
+            else ""
+        )
         report_section = f"""
 ## Reports, output formats & templates
 
-Presentation is strictly separated from domain logic (`templates/report.template.{{html,md,txt}}`):
+Presentation is separated from domain logic (`templates/report.template.{{html,md,txt}}`):
 
 - Supported output formats: `html`, `pdf` (including a pure-stdlib `%PDF-1.4` fallback), `md`, `txt`, `json`.
-- Custom templates can be configured via `templates.custom_dir` in `config.json` or channel profiles without code edits.
+- Custom templates can be configured via `templates.custom_dir` without code edits.
 - Delivery settings (`delivery`) default safely to **draft / dry-run** (`enabled: false`, `dry_run: true`, `mode: "draft"`).
-
-```bash
-python scripts/{snake}_core.py --format pdf --out output/report.pdf
-```
-"""
+{cmd_line}"""
     return f"""---
 name: {name}
 version: 0.1.0
@@ -706,7 +772,7 @@ bach_compatible: true
 bach_origin: false
 
 category: {category}
-tags: [{name}, {category}, ocean-standard, config-cascade]
+tags: [{name}, {category}, ocean-standard]
 language: en
 status: active
 visibility: private-only
@@ -732,43 +798,34 @@ provenance:
 
 ## When to activate
 
-- "run {name}", "execute {name}", `/{name}`
-- Whenever structured `{category}` tasks with auditable configuration are requested.
-
-## Configuration & self-healing
-
-This skill avoids hardcoded settings and resolves configuration through the 5-stage Ocean cascade:
-
-`default-config.json` -> `config.json` -> `profiles/<channel>.json` -> `profiles/<channel>.<chat>.json` -> CLI flags (`--set key=value`).
-
-Corrupt local override files automatically fall back to `default-config.json` and are preserved as `.corrupt.<ts>.bak` when `--repair` is passed.
-{report_section}
+- "run {name}", "apply {name}", `/{name}`
+- Whenever structured `{category}` support is requested.
+{config_section}{report_section}
 ## Providers & alternatives
 
-- **Standalone execution:** Runs on the Python standard library with zero mandatory third-party packages.
-- **Ecosystem docking:** Optional external bindings live in `connections.json` (`grounding-seed` compatible) and are never installed without user consent.
+- **Standalone execution:** Runs with zero mandatory third-party packages.
+- **Ecosystem docking:** Optional external bindings are resolved only when needed and never installed without user consent.
 
 ## Self-update
 
-- Check `letzter_update_check` in `default-config.json` / `config.json` periodically and consult `skill-finder` for adjacent skills.
-- Record dated findings in `connections.json` (`gelernt`) and real user requests in `user-usecases.json`.
+- Consult `skill-finder` periodically for adjacent skills and record dated lessons learned cleanly.
 
 ## Changelog
 
 ### 0.1.0 ({today_iso})
-- Initial scaffold generated via `ocean-skill-creator` (`v0.4.0`) with `default-config.json`, self-healing config loader, and test suite.
+- Initial scaffold generated via `ocean-skill-creator` (`v0.4.1`).
 """
 
 
-def _build_scaffold_core_py(name: str, *, with_reports: bool) -> str:
-    return f'''#!/usr/bin/env python3
-"""Core runtime for {name} — stdlib-only self-healing config cascade{ " + multi-format reports" if with_reports else ""}."""
+def _build_scaffold_core_py(name: str, *, config_name: str, with_reports: bool) -> str:
+    if not with_reports:
+        return f'''#!/usr/bin/env python3
+"""Core runtime for {name} — stdlib-only self-healing configuration loader ({config_name})."""
 
 from __future__ import annotations
 
 import argparse
 import copy
-import html
 import json
 import os
 import shutil
@@ -779,7 +836,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 SKILL_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_CONFIG_PATH = SKILL_ROOT / "default-config.json"
+BASE_CONFIG_NAME = {config_name!r}
 
 
 def deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:
@@ -816,10 +873,114 @@ def load_skill_config(
     cli_overrides: Mapping[str, Any] | None = None,
     repair: bool = False,
 ) -> dict[str, Any]:
-    default_cfg = json.loads((skill_root / "default-config.json").read_text(encoding="utf-8-sig"))
+    base_cfg_path = skill_root / BASE_CONFIG_NAME
+    default_cfg = json.loads(base_cfg_path.read_text(encoding="utf-8-sig"))
     effective = copy.deepcopy(default_cfg)
     warnings: list[str] = []
-    candidates = [skill_root / "config.json"]
+    candidates = []
+    if BASE_CONFIG_NAME != "config.json":
+        candidates.append(skill_root / "config.json")
+    if channel:
+        candidates.append(skill_root / "profiles" / f"{{channel}}.json")
+        if chat:
+            candidates.append(skill_root / "profiles" / f"{{channel}}.{{chat}}.json")
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    for idx, candidate in enumerate(candidates):
+        if not candidate.is_file():
+            continue
+        try:
+            raw = json.loads(candidate.read_text(encoding="utf-8-sig"))
+            if not isinstance(raw, dict):
+                raise ValueError("JSON root must be object")
+            effective = deep_merge(effective, raw)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            warnings.append(f"{{candidate.name}}: {{exc}}")
+            if repair:
+                bak = candidate.with_name(f"{{candidate.name}}.corrupt.{{ts}}.bak")
+                shutil.copy2(str(candidate), str(bak))
+                atomic_write_json(candidate, default_cfg if idx == 0 else {{}})
+    if cli_overrides:
+        effective = deep_merge(effective, cli_overrides)
+    return {{"config": effective, "warnings": warnings}}
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="{name}")
+    parser.add_argument("--channel", default=None)
+    parser.add_argument("--chat", default=None)
+    parser.add_argument("--repair", action="store_true")
+    args = parser.parse_args(list(argv) if argv is not None else None)
+
+    loaded = load_skill_config(channel=args.channel, chat=args.chat, repair=args.repair)
+    sys.stdout.write(json.dumps({{"skill": "{name}", "ok": True, "config": loaded["config"], "warnings": loaded["warnings"]}}, ensure_ascii=False, indent=2) + "\\n")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+'''
+
+    return f'''#!/usr/bin/env python3
+"""Core runtime for {name} — stdlib-only self-healing config cascade ({config_name}) + multi-format reports."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import html
+import json
+import os
+import shutil
+import sys
+import tempfile
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Mapping, Sequence
+
+SKILL_ROOT = Path(__file__).resolve().parent.parent
+BASE_CONFIG_NAME = {config_name!r}
+
+
+def deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:
+    merged: dict[str, Any] = copy.deepcopy(dict(base))
+    for key, val in override.items():
+        if key in ("_hinweis", "_comment") and key in merged:
+            continue
+        if isinstance(merged.get(key), dict) and isinstance(val, dict):
+            merged[key] = deep_merge(merged[key], val)
+        else:
+            merged[key] = copy.deepcopy(val)
+    return merged
+
+
+def atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(dict(payload), ensure_ascii=False, indent=2) + "\\n"
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{{path.name}}.", suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\\n") as handle:
+            handle.write(text)
+        os.replace(tmp_name, str(path))
+    except Exception:
+        if os.path.exists(tmp_name):
+            os.unlink(tmp_name)
+        raise
+
+
+def load_skill_config(
+    *,
+    skill_root: Path = SKILL_ROOT,
+    channel: str | None = None,
+    chat: str | None = None,
+    cli_overrides: Mapping[str, Any] | None = None,
+    repair: bool = False,
+) -> dict[str, Any]:
+    default_cfg = json.loads((skill_root / BASE_CONFIG_NAME).read_text(encoding="utf-8-sig"))
+    effective = copy.deepcopy(default_cfg)
+    warnings: list[str] = []
+    candidates = []
+    if BASE_CONFIG_NAME != "config.json":
+        candidates.append(skill_root / "config.json")
     if channel:
         candidates.append(skill_root / "profiles" / f"{{channel}}.json")
         if chat:
@@ -932,8 +1093,10 @@ if __name__ == "__main__":
 '''
 
 
-def _build_scaffold_test_py(name: str, *, with_reports: bool) -> str:
+def _build_scaffold_test_py(name: str, *, config_name: str, with_reports: bool) -> str:
     snake = name.replace("-", "_")
+    override_filename = "profiles/test_channel.json" if config_name == "config.json" else "config.json"
+    channel_arg = ', channel="test_channel"' if config_name == "config.json" else ""
     report_assertion = (
         f"""
 def test_{snake}_pdf_and_html_rendering():
@@ -966,37 +1129,54 @@ def _load_core():
     return mod
 
 
-def test_{snake}_default_config_and_corrupt_self_healing(tmp_path):
+def test_{snake}_base_config_and_corrupt_self_healing(tmp_path):
     mod = _load_core()
-    (tmp_path / "default-config.json").write_text(
-        (SKILL_ROOT / "default-config.json").read_text(encoding="utf-8"),
+    (tmp_path / {config_name!r}).write_text(
+        (SKILL_ROOT / {config_name!r}).read_text(encoding="utf-8"),
         encoding="utf-8",
     )
-    corrupt_cfg = tmp_path / "config.json"
+    corrupt_cfg = tmp_path / {override_filename!r}
+    corrupt_cfg.parent.mkdir(parents=True, exist_ok=True)
     corrupt_cfg.write_text("{{broken json", encoding="utf-8")
-    loaded = mod.load_skill_config(skill_root=tmp_path, repair=True)
+    loaded = mod.load_skill_config(skill_root=tmp_path{channel_arg}, repair=True)
     assert loaded["config"]["skill"] == "{name}"
     assert loaded["warnings"]
-    assert list(tmp_path.glob("config.json.corrupt.*.bak"))
+    assert list(corrupt_cfg.parent.glob(f"{{corrupt_cfg.name}}.corrupt.*.bak"))
 {report_assertion}'''
 
 
 def scaffold_skill(
     name: str,
     *,
-    category: str,
-    out_dir: str | Path,
+    category: str = "utilities",
+    out_dir: str | Path = ".",
+    config_name: str | None = "default-config.json",
     with_reports: bool = False,
+    no_templates: bool = False,
+    no_scripts: bool = False,
+    no_config: bool = False,
+    minimal: bool = False,
     with_profiles: bool = False,
     today: str | None = None,
 ) -> dict[str, Any]:
-    """Create a standard-conformant Ocean skill directory."""
+    """Create a standard-conformant Ocean skill directory (from minimal guideline to full report skill)."""
     clean_name = name.strip()
     clean_category = category.strip()
     if not SKILL_SLUG_RE.fullmatch(clean_name):
         raise ValueError(f"Skill name must be kebab-case, got {name!r}")
     if not SKILL_SLUG_RE.fullmatch(clean_category):
         raise ValueError(f"Category must be kebab-case, got {category!r}")
+
+    effective_reports = bool(with_reports and not no_templates and not minimal)
+    effective_scripts = bool(not no_scripts and not minimal)
+    effective_config_name: str | None
+    if no_config or (minimal and config_name in (None, "default-config.json")):
+        effective_config_name = None
+    else:
+        effective_config_name = validate_config_filename(config_name or "default-config.json")
+
+    if effective_scripts and effective_config_name is None:
+        effective_config_name = "default-config.json"
 
     base_out = Path(out_dir)
     skill_dir = base_out if base_out.name == clean_name else (base_out / clean_name)
@@ -1016,69 +1196,110 @@ def scaffold_skill(
     # 1. SKILL.md & SKILL.en.md
     _write_text(
         "SKILL.md",
-        _build_scaffold_skill_md_de(clean_name, clean_category, today_iso, with_reports=with_reports),
+        _build_scaffold_skill_md_de(
+            clean_name,
+            clean_category,
+            today_iso,
+            config_name=effective_config_name,
+            with_reports=effective_reports,
+            with_scripts=effective_scripts,
+        ),
     )
     _write_text(
         "SKILL.en.md",
-        _build_scaffold_skill_md_en(clean_name, clean_category, today_iso, with_reports=with_reports),
+        _build_scaffold_skill_md_en(
+            clean_name,
+            clean_category,
+            today_iso,
+            config_name=effective_config_name,
+            with_reports=effective_reports,
+            with_scripts=effective_scripts,
+        ),
     )
 
-    # 2. default-config.json & connections.json from bundled templates
-    default_tpl = json.loads(
-        (TEMPLATES_DIR / "default-config.template.json").read_text(encoding="utf-8")
-    )
-    default_tpl["skill"] = clean_name
-    if not with_reports:
-        default_tpl["output"]["default_format"] = "json"
-    atomic_write_json(skill_dir / "default-config.json", default_tpl)
-    created_files.append("default-config.json")
+    # 2. Optional JSON config (+ connections.json when scripts/profiles are included)
+    if effective_config_name is not None:
+        default_tpl = json.loads(
+            (TEMPLATES_DIR / "default-config.template.json").read_text(encoding="utf-8")
+        )
+        default_tpl["skill"] = clean_name
+        if not effective_reports:
+            default_tpl.pop("templates", None)
+            default_tpl["output"] = {
+                "default_format": "json",
+                "supported_formats": ["json", "md", "txt"],
+                "output_dir": "./output",
+            }
+        atomic_write_json(skill_dir / effective_config_name, default_tpl)
+        created_files.append(effective_config_name)
 
-    conn_tpl = json.loads(
-        (TEMPLATES_DIR / "skill-connections.template.json").read_text(encoding="utf-8")
-    )
-    atomic_write_json(skill_dir / "connections.json", conn_tpl)
-    created_files.append("connections.json")
+        if effective_scripts or with_profiles:
+            conn_tpl = json.loads(
+                (TEMPLATES_DIR / "skill-connections.template.json").read_text(encoding="utf-8")
+            )
+            atomic_write_json(skill_dir / "connections.json", conn_tpl)
+            created_files.append("connections.json")
 
     # 3. Optional profiles (<channel>.json & <channel>.<chat>.json)
-    if with_profiles:
+    if with_profiles and not minimal:
         chan_tpl = json.loads(
             (TEMPLATES_DIR / "channel-profile.template.json").read_text(encoding="utf-8")
         )
         example_channel = copy.deepcopy(chan_tpl)
         example_channel["channel"] = "example"
         example_channel["delivery"]["channel"] = "example"
+        if not effective_reports:
+            example_channel.pop("templates", None)
         atomic_write_json(skill_dir / "profiles" / "example.json", example_channel)
         created_files.append("profiles/example.json")
 
         example_chat = copy.deepcopy(example_channel)
         example_chat["chat"] = "team-digest"
-        example_chat["output"] = {"default_format": "html" if with_reports else "json"}
+        example_chat["output"] = {"default_format": "html" if effective_reports else "json"}
         atomic_write_json(skill_dir / "profiles" / "example.team-digest.json", example_chat)
         created_files.append("profiles/example.team-digest.json")
 
-    # 4. Optional replaceable report templates
-    if with_reports:
+    # 4. Optional replaceable report templates (only when requested and not disabled)
+    if effective_reports:
         for tpl_name in ("report.template.html", "report.template.md", "report.template.txt"):
             src = OUTPUT_TEMPLATES_DIR / tpl_name
             _write_text(f"templates/{tpl_name}", src.read_text(encoding="utf-8"))
 
-    # 5. Stdlib core script & pytest suite
-    _write_text(f"scripts/{snake}_core.py", _build_scaffold_core_py(clean_name, with_reports=with_reports))
-    _write_text(f"tests/test_{snake}.py", _build_scaffold_test_py(clean_name, with_reports=with_reports))
+    # 5. Optional stdlib core script & pytest suite
+    if effective_scripts and effective_config_name is not None:
+        _write_text(
+            f"scripts/{snake}_core.py",
+            _build_scaffold_core_py(
+                clean_name,
+                config_name=effective_config_name,
+                with_reports=effective_reports,
+            ),
+        )
+        _write_text(
+            f"tests/test_{snake}.py",
+            _build_scaffold_test_py(
+                clean_name,
+                config_name=effective_config_name,
+                with_reports=effective_reports,
+            ),
+        )
 
     return {
         "ok": True,
         "skill": clean_name,
         "category": clean_category,
         "skill_dir": str(skill_dir),
-        "with_reports": with_reports,
-        "with_profiles": with_profiles,
+        "config_name": effective_config_name,
+        "with_reports": effective_reports,
+        "with_scripts": effective_scripts,
+        "with_profiles": bool(with_profiles and not minimal),
+        "minimal": minimal,
         "created_files": sorted(created_files),
     }
 
 
 # ---------------------------------------------------------------------------
-# Read-Only Skill Conformance Auditor (audit-skill subcommand)
+# Read-Only Pragmatic Skill Conformance Auditor (audit-skill subcommand)
 # ---------------------------------------------------------------------------
 
 def _extract_frontmatter_dict(text: str) -> dict[str, str]:
@@ -1103,8 +1324,69 @@ def _extract_frontmatter_dict(text: str) -> dict[str, str]:
     return data
 
 
+def discover_skill_config_files(skill_root: Path) -> tuple[list[str], dict[str, Any]]:
+    """Discover all valid skill-specific JSON config files (regardless of filename)."""
+    candidates: list[Path] = []
+    for search_dir in (skill_root, skill_root / "config", skill_root / "profiles"):
+        if not search_dir.is_dir():
+            continue
+        for entry in sorted(search_dir.glob("*.json")):
+            if not entry.is_file():
+                continue
+            name_lower = entry.name.lower()
+            if (
+                name_lower in NON_CONFIG_JSON_FILENAMES
+                or name_lower.endswith(".template.json")
+                or ".corrupt." in name_lower
+            ):
+                continue
+            candidates.append(entry)
+
+    valid_rel_paths: list[str] = []
+    merged_cfg: dict[str, Any] = {}
+    # Load default-config.json first if present, then other root configs, then profiles
+    ordered = sorted(
+        candidates,
+        key=lambda p: (
+            0 if p.name == "default-config.json" else (1 if p.parent == skill_root else 2),
+            p.relative_to(skill_root).as_posix(),
+        ),
+    )
+    for cand in ordered:
+        try:
+            loaded = json.loads(cand.read_text(encoding="utf-8-sig"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        if isinstance(loaded, dict):
+            rel = cand.relative_to(skill_root).as_posix()
+            valid_rel_paths.append(rel)
+            # Only merge root/config JSONs into merged_cfg so example profiles don't skew base checks
+            if cand.parent in (skill_root, skill_root / "config"):
+                merged_cfg = deep_merge(merged_cfg, loaded)
+
+    return sorted(valid_rel_paths), merged_cfg
+
+
+def _script_has_self_healing_or_fallback(py_corpus: str) -> bool:
+    if any(
+        marker in py_corpus
+        for marker in (
+            ".corrupt.",
+            "load_effective_config",
+            "load_skill_config",
+            "load_effective_channel_config",
+            "JSONDecodeError",
+        )
+    ):
+        return True
+    return bool(
+        re.search(r"\btry\s*:.*?\bjson\.load", py_corpus, re.DOTALL)
+        and re.search(r"\bexcept\b", py_corpus)
+    )
+
+
 def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
-    """Inspect an existing skill directory read-only against Ocean v0.4.0 standards."""
+    """Inspect an existing skill directory read-only against pragmatic Ocean v0.4.1 standards."""
     root = Path(skill_dir)
     if not root.is_dir():
         raise FileNotFoundError(f"Skill directory not found: {root}")
@@ -1123,26 +1405,21 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
     frontmatter_complete = has_skill_md and len(missing_fm) == 0
     trigger_in_250 = bool(desc and TRIGGER_RE.search(desc[:250]))
 
-    default_cfg_path = root / "default-config.json"
-    config_json_path = root / "config.json"
-    has_default_config = default_cfg_path.is_file()
-    has_config_json = config_json_path.is_file()
+    config_files, parsed_cfg = discover_skill_config_files(root)
+    has_literal_default_config = (root / "default-config.json").is_file()
+    has_config_json = (root / "config.json").is_file()
+    has_connections_json = (root / "connections.json").is_file()
+    has_external_config = len(config_files) > 0
+    # Backward-compatible: any valid skill-specific JSON config satisfies default/base config presence
+    has_default_config = has_literal_default_config or has_external_config
     has_profiles_dir = (root / "profiles").is_dir()
-
-    parsed_cfg: dict[str, Any] = {}
-    for candidate in (default_cfg_path, config_json_path):
-        if candidate.is_file():
-            try:
-                loaded = json.loads(candidate.read_text(encoding="utf-8-sig"))
-                if isinstance(loaded, dict):
-                    parsed_cfg = deep_merge(parsed_cfg, loaded)
-            except (OSError, json.JSONDecodeError):
-                pass
 
     py_files = sorted(
         p
         for p in root.rglob("*.py")
-        if "__pycache__" not in p.parts and not p.name.startswith("test_")
+        if not (set(p.relative_to(root).parts) & SKIP_SCAN_DIRS)
+        and not p.name.startswith("test_")
+        and not p.name.endswith("_test.py")
     )
     test_files = sorted(
         p
@@ -1156,12 +1433,6 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
     py_corpus = "\n".join(
         p.read_text(encoding="utf-8", errors="replace") for p in py_files
     )
-    has_self_healing = bool(
-        isinstance(parsed_cfg.get("self_healing"), dict)
-        or ".corrupt." in py_corpus
-        or "load_effective_config" in py_corpus
-        or "load_skill_config" in py_corpus
-    )
 
     templates_root = root / "templates"
     template_files = (
@@ -1171,11 +1442,6 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
     )
     has_report_templates = any(
         p.endswith((".html", ".md", ".txt")) for p in template_files
-    )
-    produces_reports = bool(
-        has_report_templates
-        or isinstance(parsed_cfg.get("output"), dict)
-        or REPORT_SIGNAL_RE.search(desc)
     )
 
     hardcoding_signals: list[dict[str, str]] = []
@@ -1195,17 +1461,17 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
                 "kind": "inline_html_without_templates",
                 "detail": "Inline HTML/CSS found in script without replaceable templates/ directory",
             })
-        if HARDCODED_FORMAT_RE.search(src) and not (has_default_config or has_config_json):
+        if HARDCODED_FORMAT_RE.search(src) and not has_external_config:
             hardcoding_signals.append({
                 "file": rel,
                 "kind": "hardcoded_output_format",
-                "detail": "Default output format hardcoded in script without default-config.json",
+                "detail": "Default output format hardcoded in script without external JSON config",
             })
-        if MAGIC_THRESHOLD_RE.search(src) and not (has_default_config or has_config_json):
+        if MAGIC_THRESHOLD_RE.search(src) and not has_external_config:
             hardcoding_signals.append({
                 "file": rel,
                 "kind": "magic_thresholds_without_config",
-                "detail": "Numeric thresholds/limits hardcoded as module constants without JSON config",
+                "detail": "Numeric thresholds/limits hardcoded as module constants without external JSON config",
             })
 
     delivery_cfg = parsed_cfg.get("delivery")
@@ -1213,12 +1479,46 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
         delivery_cfg.get("enabled") is True and delivery_cfg.get("dry_run") is False
     ):
         hardcoding_signals.append({
-            "file": "default-config.json",
+            "file": config_files[0] if config_files else "config.json",
             "kind": "unsafe_delivery_default",
             "detail": "delivery.enabled=true with dry_run=false violates safe draft default",
         })
 
-    # Deterministic 0..100 score + actionable recommendations
+    # Pragmatic need evaluation ("only where genuinely useful")
+    signal_kinds = {s["kind"] for s in hardcoding_signals}
+    needs_external_config = bool(
+        not has_external_config
+        and (
+            signal_kinds & {"hardcoded_path", "hardcoded_output_format", "magic_thresholds_without_config"}
+        )
+    )
+    has_self_healing = bool(
+        isinstance(parsed_cfg.get("self_healing"), dict)
+        or _script_has_self_healing_or_fallback(py_corpus)
+        or (not has_scripts and not needs_external_config)
+    )
+    needs_self_healing = bool(has_scripts and (has_external_config or needs_external_config))
+
+    cfg_declares_html_templates = isinstance(parsed_cfg.get("templates"), dict) or (
+        isinstance(parsed_cfg.get("output"), dict)
+        and bool(set(parsed_cfg["output"].get("supported_formats") or []) & {"html", "pdf"})
+    )
+    produces_reports = bool(
+        has_report_templates
+        or "inline_html_without_templates" in signal_kinds
+        or cfg_declares_html_templates
+        or (has_scripts and EXPLICIT_REPORT_ENGINE_RE.search(py_corpus))
+    )
+    needs_templates = bool(produces_reports and not has_report_templates)
+
+    # Check if SKILL.md references local scripts/<name>.py that are missing on disk
+    referenced_local_scripts = sorted({
+        m.group(1)
+        for m in REFERENCED_LOCAL_SCRIPT_RE.finditer(md_text)
+        if not (root / m.group(1)).is_file()
+    })
+
+    # Deterministic 0..100 score + pragmatic recommendations
     score = 0
     recommendations: list[str] = []
 
@@ -1241,41 +1541,37 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
             "Place WHEN trigger ('Verwenden, wenn ...' / 'Use when ...') within the first 250 chars of description"
         )
 
-    if has_default_config:
+    if has_external_config or not needs_external_config:
         score += 20
-    elif has_config_json:
-        score += 10
-        recommendations.append(
-            "Add tracked neutral default-config.json so local config.json can remain a clean override"
-        )
     else:
         recommendations.append(
-            "Externalize settings into default-config.json (plus optional config.json & profiles/<channel>.json)"
+            "Externalize hardcoded parameters into a JSON config file (e.g. default-config.json or a skill-specific <name>.json)"
         )
 
-    if has_self_healing:
+    if not needs_self_healing or has_self_healing:
         score += 15
     else:
         recommendations.append(
-            "Wire self-healing config loading (graceful fallback to default-config.json + .corrupt.<ts>.bak backup)"
+            "Add graceful fallback / self-healing (.corrupt.<ts>.bak backup) when loading JSON configuration in scripts"
         )
 
-    if produces_reports:
-        if has_report_templates:
-            score += 15
-        else:
-            recommendations.append(
-                "Move report layout into replaceable templates/ (report.template.html/md/txt) and support html/pdf/md/txt/json"
-            )
-    else:
+    if not needs_templates:
         score += 15
+    else:
+        recommendations.append(
+            "Extract inline report/HTML layout into replaceable templates/ (e.g. report.template.html/md/txt)"
+        )
 
     if has_scripts:
         if has_tests:
             score += 10
         else:
             score += 4
-            recommendations.append("Add automated pytest coverage under tests/ for scripts and config cascade")
+            recommendations.append("Add automated pytest coverage under tests/ for bundled Python scripts")
+    elif referenced_local_scripts:
+        recommendations.append(
+            f"Referenced local script(s) missing in skill folder: {', '.join(referenced_local_scripts)}"
+        )
     else:
         score += 10
 
@@ -1283,7 +1579,7 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
     score = max(0, min(100, score - penalty))
     if hardcoding_signals:
         recommendations.append(
-            "Eliminate hardcoding signals by moving paths, formats, thresholds, and HTML markup into default-config.json and templates/"
+            "Eliminate hardcoding signals by moving paths, formats, thresholds, or inline HTML out of script code"
         )
 
     if score >= 85 and not hardcoding_signals:
@@ -1298,17 +1594,26 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
         "skill_dir": str(root),
         "score": score,
         "status": status,
+        "config_files": config_files,
+        "has_external_config": has_external_config,
         "checks": {
             "has_skill_md": has_skill_md,
             "has_skill_en_md": has_skill_en_md,
             "frontmatter_complete": frontmatter_complete,
             "missing_frontmatter_keys": missing_fm,
             "trigger_in_first_250_chars": trigger_in_250,
+            "config_files": config_files,
+            "detected_config_files": config_files,
+            "has_external_config": has_external_config,
             "has_default_config": has_default_config,
+            "has_literal_default_config": has_literal_default_config,
             "has_config_json": has_config_json,
+            "has_connections_json": has_connections_json,
             "has_profiles_dir": has_profiles_dir,
             "has_self_healing": has_self_healing,
+            "needs_external_config": needs_external_config,
             "produces_reports": produces_reports,
+            "needs_templates": needs_templates,
             "has_templates_dir": templates_root.is_dir(),
             "has_report_templates": has_report_templates,
             "template_files": template_files,
@@ -1327,21 +1632,34 @@ def audit_skill(skill_dir: str | Path) -> dict[str, Any]:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ocean_skill_scaffold",
-        description="Ocean Skill Creator v0.4.0 — Scaffold, Self-Healing Config Validator & Skill Auditor.",
+        description="Ocean Skill Creator v0.4.1 — Pragmatic Scaffold/Init, Self-Healing Config Validator & Skill Auditor.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p_scaf = sub.add_parser("scaffold", help="Create a new Ocean-conformant skill scaffold")
+    p_scaf = sub.add_parser(
+        "scaffold",
+        aliases=["init"],
+        help="Create a new Ocean-conformant skill (lean guideline or full config/report skill)",
+    )
     p_scaf.add_argument("name", help="Skill slug in kebab-case (e.g. invoice-digest)")
-    p_scaf.add_argument("--category", required=True, help="Target skill category folder (e.g. utilities)")
-    p_scaf.add_argument("--out", required=True, help="Parent output directory (creates <out>/<name>/)")
+    p_scaf.add_argument("--category", default="utilities", help="Target skill category folder (default: utilities)")
+    p_scaf.add_argument("--out", default=".", help="Parent output directory (creates <out>/<name>/)")
+    p_scaf.add_argument(
+        "--config-name",
+        default="default-config.json",
+        help="Custom JSON config filename (default: default-config.json; e.g. routing-defaults.json)",
+    )
     p_scaf.add_argument("--with-reports", action="store_true", help="Include templates/ and html/pdf/md/txt/json report support")
+    p_scaf.add_argument("--no-templates", action="store_true", help="Omit templates/ directory (for skills without report rendering)")
+    p_scaf.add_argument("--no-scripts", action="store_true", help="Omit scripts/ and tests/ (for declarative or guideline skills)")
+    p_scaf.add_argument("--no-config", action="store_true", help="Omit JSON config file (for pure prompt/guideline skills)")
+    p_scaf.add_argument("--minimal", action="store_true", help="Create a lean guideline skill (SKILL.md + SKILL.en.md only)")
     p_scaf.add_argument("--with-profiles", action="store_true", help="Include sample channel/chat override profiles/")
     p_scaf.add_argument("--json", action="store_true", help="Emit JSON result")
 
     p_val = sub.add_parser("validate-config", help="Validate, merge, and optionally self-heal a config cascade")
-    p_val.add_argument("--default", required=True, dest="default_path", help="Path to default-config.json")
-    p_val.add_argument("--config", default=None, dest="config_path", help="Optional path to local config.json")
+    p_val.add_argument("--default", required=True, dest="default_path", help="Path to base config JSON (e.g. default-config.json or <skill>.json)")
+    p_val.add_argument("--config", default=None, dest="config_path", help="Optional path to local config.json override")
     p_val.add_argument("--channel", default=None, help="Optional channel name (<channel>.json under profiles/)")
     p_val.add_argument("--chat", default=None, help="Optional chat/target name (<channel>.<chat>.json under profiles/)")
     p_val.add_argument("--profile", action="append", default=[], dest="profiles", help="Explicit profile JSON path(s) in cascade order")
@@ -1360,15 +1678,23 @@ def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = build_parser()
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    argv_list = list(argv) if argv is not None else sys.argv[1:]
+    explicit_cfg_flag = any(tok == "--config-name" or tok.startswith("--config-name=") for tok in argv_list)
+    args = parser.parse_args(argv_list)
 
     try:
-        if args.command == "scaffold":
+        if args.command in ("scaffold", "init"):
+            cfg_arg = args.config_name if (explicit_cfg_flag or not args.minimal) else None
             res = scaffold_skill(
                 args.name,
                 category=args.category,
                 out_dir=args.out,
+                config_name=cfg_arg,
                 with_reports=args.with_reports,
+                no_templates=args.no_templates,
+                no_scripts=args.no_scripts,
+                no_config=args.no_config,
+                minimal=args.minimal,
                 with_profiles=args.with_profiles,
             )
             if args.json:
