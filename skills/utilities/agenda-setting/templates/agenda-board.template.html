@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{name}} — Agenda-Board</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --fg: #0f172a;
+    --muted: #475569;
+    --line: #cbd5e1;
+    --accent: #2563eb;
+    --done: #059669;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    padding: 24px;
+    line-height: 1.45;
+  }
+  .board {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 26px;
+  }
+  header {
+    border-bottom: 2px solid var(--fg);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .filters { color: var(--accent); font-size: 0.85rem; margin-top: 4px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .lane {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: #fcfdff;
+    break-inside: avoid;
+  }
+  .lane h2 {
+    margin: 0 0 10px;
+    font-size: 1.02rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+  }
+  .item {
+    border-left: 4px solid var(--accent);
+    background: var(--card);
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+  .item.done { border-left-color: var(--done); opacity: 0.82; }
+  .item-head { font-size: 0.8rem; color: var(--muted); margin-bottom: 3px; }
+  .item-text { font-weight: 500; }
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .board { border: none; padding: 0; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<div class="board">
+  <header>
+    <h1>{{name}}</h1>
+    <div class="meta">{{meta_line}}</div>
+    {{filters_html}}
+  </header>
+  <div class="grid">
+    {{groups_html}}
+  </div>
+</div>
+</body>
+</html>

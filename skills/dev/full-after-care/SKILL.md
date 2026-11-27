@@ -1,23 +1,12 @@
 ---
 name: full-after-care
-version: 1.0.0
+version: 1.0.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-07-24
-updated: 2026-07-24
+updated: 2026-11-27
 aliases: [deep-after-care, repo-after-care-full, tiefe-repo-pflege, repo-tiefenpflege]
-description: >
-  Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den
-  vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte —
-  rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr
-  (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE
-  Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der
-  Doku. Nutze diesen Skill bei "full after care", "deep after care", "tiefe Repo-Pflege",
-  "große Runde", "Repo grundlegend durchgehen", wenn ein Repo länger nicht geprüft wurde,
-  vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit
-  ausdrücklich Thema sind. Für die günstige, oft wiederholte Runde stattdessen
-  surface-after-care; für die Erstveröffentlichung github-repo-care.
-
+description: "Nutze diesen Skill bei \"full after care\", \"deep after care\", \"tiefe Repo-Pflege\", \"große Runde\", \"Repo grundlegend durchgehen\", wenn ein Repo länger nicht geprüft wurde, vor größeren Releases oder wenn rechtliche Relevanz, Querverweise oder Mehrsprachigkeit ausdrücklich Thema sind. Tiefe Pflegerunde für ein veröffentlichtes GitHub-Repository (Stufe 2): enthält den vollständigen surface-after-care-Durchlauf und ergänzt ihn um drei teure Schritte — rechtliche Ersteinschätzung über die Law-Checker mit Wiedervorlage nach einem Jahr (Gutachten bleibt gitignored im Repo), Querverweise zu verwandten Repos über ALLE Organisationen hinweg sowie das Nachziehen aller Sprachen auf App-Ebene, nicht nur in der Doku. Für die günstige, oft wiederholte Runde stattdessen surface-after-care; für die Erstveröffentlichung github-repo-care."
 standalone: true
 anthropic_compatible: true
 bach_compatible: true

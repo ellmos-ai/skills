@@ -1,0 +1,85 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "decision-draw",
+  "version": "1.6.0",
+  "self_healing": {
+    "enabled": true,
+    "backup_suffix": ".corrupt.<ts>.bak",
+    "atomic_writes": true
+  },
+  "defaults": {
+    "mode": "short",
+    "preselect": "none"
+  },
+  "viewer": {
+    "theme": "clam",
+    "bg": "#eef2f7",
+    "fg": "#18304a",
+    "card_bg": "white",
+    "comment_bg": "#f7f9fc",
+    "font_family": "Segoe UI",
+    "font_size": 11,
+    "title_font_size": 17,
+    "max_width": 960,
+    "min_width": 640,
+    "min_height": 500,
+    "watch_interval_ms": 1200,
+    "confirmation_limit": 12
+  },
+  "form": {
+    "question_option": {
+      "id": "rueckfrage",
+      "label": "Rückfrage / mehr Info nötig"
+    },
+    "limits": {
+      "titel": 80,
+      "kontext_kurz": 400,
+      "kontext": 250,
+      "frage": 200,
+      "label": 100,
+      "wirkung": 160,
+      "grund": 160,
+      "kosten_aufwand": 160,
+      "risiko_rueckgaengig": 160,
+      "frist": 160,
+      "folge_bei_nein": 160,
+      "beschriftung": 120,
+      "sensitiv_grund": 100,
+      "alt": 200,
+      "seite": 60,
+      "variante": 60,
+      "zielordner": 120,
+      "details_markdown": 4000
+    },
+    "images": {
+      "max_bytes": 409600,
+      "total_max_bytes": 8388608,
+      "serie_max": 12,
+      "polaroid_min": 2,
+      "polaroid_max": 12,
+      "swipe_max": 60
+    }
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "max_bytes": 33554432,
+    "idle_seconds": 300,
+    "max_lifetime_seconds": 28800,
+    "max_files": 4
+  },
+  "output": {
+    "default_format": "md",
+    "supported_formats": [
+      "md",
+      "html",
+      "json"
+    ]
+  },
+  "templates": {
+    "dir": "./templates",
+    "short_md": "decision-draw-short.template.md",
+    "detailed_md": "decision-draw-detailed.template.md",
+    "markdown_form_html": "markdown_form_shell.template.html",
+    "custom_dir": null
+  }
+}

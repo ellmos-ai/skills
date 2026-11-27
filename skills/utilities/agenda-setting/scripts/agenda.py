@@ -7,17 +7,23 @@ import argparse
 import calendar
 import copy
 import hashlib
+import html
 import json
 import os
 import re
+import shutil
 import sys
 import tempfile
 import uuid
 from datetime import date, datetime, time, timezone
 from pathlib import Path
+from typing import Any, Mapping
+
+SKILL_ROOT = Path(__file__).resolve().parent.parent
+BASE_CONFIG_NAME = "agenda-config.json"
 
 VALID_OWNERS = ("user", "self", "team", "shared")
-VALID_SUMMARY_FORMATS = ("markdown", "text", "json")
+VALID_SUMMARY_FORMATS = ("markdown", "text", "html", "json")
 VALID_GROUP_BY = ("timeframe", "category", "owner")
 _OWNER_ORDER = {"user": 0, "self": 1, "team": 2, "shared": 3}
 _CLEAR_SENTINELS = frozenset({"", "-", "none"})
@@ -26,6 +32,127 @@ _EMPTY_GROUP_HEADINGS = {
     "category": "Ohne Kategorie",
     "owner": "Ohne Zuständigkeit",
 }
+
+DEFAULT_AGENDA_CONFIG: dict[str, Any] = {
+    "schema": "ocean.skill-config.v2",
+    "skill": "agenda-setting",
+    "version": "0.3.0",
+    "self_healing": {
+        "enabled": True,
+        "backup_suffix": ".corrupt.<ts>.bak",
+        "atomic_writes": True,
+    },
+    "horizons": {
+        "allowed_units": [
+            "YYYY-MM",
+            "YYYY-Q1..Q4",
+            "YYYY-H1..H2",
+            "YYYY",
+            "YYYY..YYYY",
+            "YYYY-MM+",
+            "YYYY+",
+            "ongoing",
+        ],
+        "year_min": 1900,
+        "year_max": 2999,
+        "default_include_ongoing": False,
+    },
+    "weights": {
+        "min": 1,
+        "max": 100,
+        "default_add": 50,
+        "levels": {
+            "critical": 90,
+            "high": 75,
+            "medium": 50,
+            "low": 25,
+        },
+    },
+    "display": {
+        "default_format": "markdown",
+        "supported_formats": ["markdown", "text", "html", "json"],
+        "default_group_by": "timeframe",
+        "max_hook_items": 20,
+        "max_items": 100,
+        "empty_group_headings": dict(_EMPTY_GROUP_HEADINGS),
+    },
+    "templates": {
+        "dir": "./templates",
+        "md": "agenda-overview.template.md",
+        "html": "agenda-board.template.html",
+        "custom_dir": None,
+    },
+}
+
+
+def _deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:
+    merged: dict[str, Any] = copy.deepcopy(dict(base))
+    for key, val in override.items():
+        if key in ("_hinweis", "_comment") and key in merged:
+            continue
+        if isinstance(merged.get(key), dict) and isinstance(val, dict):
+            merged[key] = _deep_merge(merged[key], val)
+        else:
+            merged[key] = copy.deepcopy(val)
+    return merged
+
+
+def load_agenda_config(
+    *,
+    skill_root: Path = SKILL_ROOT,
+    repair: bool = False,
+) -> dict[str, Any]:
+    """Load agenda-config.json -> config.json with .corrupt.<ts>.bak self-healing."""
+    warnings: list[str] = []
+    healed: list[dict[str, str]] = []
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    effective = copy.deepcopy(DEFAULT_AGENDA_CONFIG)
+
+    for idx, filename in enumerate((BASE_CONFIG_NAME, "config.json")):
+        candidate = skill_root / filename
+        if not candidate.is_file():
+            continue
+        try:
+            raw = json.loads(candidate.read_text(encoding="utf-8-sig"))
+            if not isinstance(raw, dict):
+                raise ValueError("JSON root must be object")
+            effective = _deep_merge(effective, raw)
+        except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+            warnings.append(f"{candidate.name}: corrupt config ({exc}); fell back to defaults")
+            if repair:
+                bak = candidate.with_name(f"{candidate.name}.corrupt.{ts}.bak")
+                shutil.copy2(str(candidate), str(bak))
+                fallback = DEFAULT_AGENDA_CONFIG if idx == 0 else {}
+                atomic_write(candidate, fallback)
+                healed.append({"path": str(candidate), "backup_path": str(bak)})
+
+    return {"config": effective, "warnings": warnings, "healed": healed}
+
+
+def _resolve_template_path(
+    template_key: str,
+    *,
+    skill_root: Path = SKILL_ROOT,
+    config: Mapping[str, Any] | None = None,
+) -> Path:
+    cfg = config if config is not None else load_agenda_config(skill_root=skill_root)["config"]
+    tpl_cfg = cfg.get("templates") if isinstance(cfg.get("templates"), dict) else {}
+    default_tpls = DEFAULT_AGENDA_CONFIG["templates"]
+    filename = str(tpl_cfg.get(template_key) or default_tpls.get(template_key) or template_key)
+    search_dirs: list[Path] = []
+    custom_dir = tpl_cfg.get("custom_dir")
+    if isinstance(custom_dir, str) and custom_dir.strip():
+        cpath = Path(custom_dir)
+        search_dirs.append(cpath if cpath.is_absolute() else (skill_root / cpath))
+    rel_dir = str(tpl_cfg.get("dir") or "./templates")
+    dpath = Path(rel_dir)
+    search_dirs.append(dpath if dpath.is_absolute() else (skill_root / dpath))
+    search_dirs.append(SKILL_ROOT / "templates")
+    for folder in search_dirs:
+        candidate = folder / filename
+        if candidate.is_file():
+            return candidate
+    raise FileNotFoundError(f"Template {filename!r} not found in {search_dirs}")
 _TIMEFRAME_ATOM = re.compile(r"^(\d{4})(?:-(?:(0[1-9]|1[0-2])|Q([1-4])|H([12])))?$")
 _OWNER_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,49}$")
 _CATEGORY_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,49}$")
@@ -410,14 +537,24 @@ def _format_summary_item_meta(item: dict, group_by: str) -> str:
     return " | ".join(meta)
 
 
-def render_summary(data: dict, fmt: str = "markdown") -> str:
-    if fmt not in VALID_SUMMARY_FORMATS:
-        raise ValueError(f"Format must be one of: {', '.join(VALID_SUMMARY_FORMATS)}")
+def render_summary(
+    data: dict,
+    fmt: str = "markdown",
+    *,
+    config: Mapping[str, Any] | None = None,
+    skill_root: Path = SKILL_ROOT,
+) -> str:
+    cfg = config if config is not None else load_agenda_config(skill_root=skill_root)["config"]
+    display_cfg = cfg.get("display") if isinstance(cfg.get("display"), dict) else {}
+    supported = tuple(display_cfg.get("supported_formats") or VALID_SUMMARY_FORMATS)
+    if fmt not in supported:
+        raise ValueError(f"Format must be one of: {', '.join(supported)}")
     if fmt == "json":
         return json.dumps(data, ensure_ascii=False, indent=2)
 
     group_by = data.get("group_by", "timeframe")
-    empty_heading = _EMPTY_GROUP_HEADINGS.get(group_by, "Ohne Zuordnung")
+    empty_headings = display_cfg.get("empty_group_headings") or _EMPTY_GROUP_HEADINGS
+    empty_heading = empty_headings.get(group_by, "Ohne Zuordnung")
     status_label = "aktiv" if data["active"] else ("abgelaufen" if data["expired"] else "inaktiv")
     deadline_label = data["deadline"] or "keine"
     meta_line = (
@@ -434,19 +571,64 @@ def render_summary(data: dict, fmt: str = "markdown") -> str:
         active_filters.append(f"group_by={group_by}")
 
     if fmt == "markdown":
-        lines = [f"# {data['name']}", "", meta_line]
-        if active_filters:
-            lines.append(f"Filter: {', '.join(active_filters)}")
+        tpl = _resolve_template_path("md", skill_root=skill_root, config=cfg).read_text(encoding="utf-8")
+        filters_block = f"\nFilter: {', '.join(active_filters)}" if active_filters else ""
         if not data["groups"]:
-            lines.extend(["", "_Keine passenden Punkte._"])
-        for group in data["groups"]:
-            heading = group.get(group_by) or empty_heading
-            lines.extend(["", f"## {heading}"])
-            for item in group["items"]:
-                mark = "x" if item["status"] == "done" else " "
-                meta_str = _format_summary_item_meta(item, group_by)
-                lines.append(f"- [{mark}] **{item['id']}** ({meta_str}) {item['text']}")
-        return "\n".join(lines)
+            groups_md = "_Keine passenden Punkte._"
+        else:
+            blocks: list[str] = []
+            for group in data["groups"]:
+                heading = group.get(group_by) or empty_heading
+                group_lines = [f"## {heading}"]
+                for item in group["items"]:
+                    mark = "x" if item["status"] == "done" else " "
+                    meta_str = _format_summary_item_meta(item, group_by)
+                    group_lines.append(f"- [{mark}] **{item['id']}** ({meta_str}) {item['text']}")
+                blocks.append("\n".join(group_lines))
+            groups_md = "\n\n".join(blocks)
+        rendered = (
+            tpl.replace("{{name}}", str(data["name"]))
+            .replace("{{meta_line}}", meta_line)
+            .replace("{{filters_block}}", filters_block)
+            .replace("{{groups_md}}", groups_md)
+        )
+        return rendered.rstrip("\n")
+
+    if fmt == "html":
+        tpl = _resolve_template_path("html", skill_root=skill_root, config=cfg).read_text(encoding="utf-8")
+        esc = html.escape
+        filters_html = (
+            f'<div class="filters">Filter: {esc(", ".join(active_filters))}</div>'
+            if active_filters
+            else ""
+        )
+        if not data["groups"]:
+            groups_html = '<p class="meta"><em>Keine passenden Punkte.</em></p>'
+        else:
+            lane_parts: list[str] = []
+            for group in data["groups"]:
+                heading = group.get(group_by) or empty_heading
+                items_html: list[str] = []
+                for item in group["items"]:
+                    cls = "item done" if item["status"] == "done" else "item"
+                    mark = "[x]" if item["status"] == "done" else "[ ]"
+                    meta_str = _format_summary_item_meta(item, group_by)
+                    items_html.append(
+                        f'<div class="{cls}">'
+                        f'<div class="item-head">{mark} <strong>{esc(str(item["id"]))}</strong> · {esc(meta_str)}</div>'
+                        f'<div class="item-text">{esc(str(item["text"]))}</div>'
+                        f"</div>"
+                    )
+                lane_parts.append(
+                    f'<section class="lane"><h2>{esc(str(heading))}</h2>{"".join(items_html)}</section>'
+                )
+            groups_html = "\n    ".join(lane_parts)
+        return (
+            tpl.replace("{{name}}", esc(str(data["name"])))
+            .replace("{{meta_line}}", esc(meta_line))
+            .replace("{{filters_html}}", filters_html)
+            .replace("{{groups_html}}", groups_html)
+        )
 
     lines = [data["name"], meta_line]
     if active_filters:
@@ -497,8 +679,8 @@ def main(argv=None) -> int:
     parser.add_argument("--timeframe", default=None)
     parser.add_argument("--owner", default=None)
     parser.add_argument("--category", default=None)
-    parser.add_argument("--format", dest="output_format", default="markdown")
-    parser.add_argument("--group-by", dest="group_by", default="timeframe")
+    parser.add_argument("--format", dest="output_format", default=None)
+    parser.add_argument("--group-by", dest="group_by", default=None)
     parser.add_argument("--exact", action="store_true")
     parser.add_argument("--include-ongoing", dest="include_ongoing", action="store_true")
     parser.add_argument("--output", type=Path, default=None)
@@ -507,6 +689,15 @@ def main(argv=None) -> int:
     parser.add_argument("--planner", default="")
     args = parser.parse_args(argv)
     try:
+        cfg = load_agenda_config()["config"]
+        cfg_weights = cfg.get("weights") or {}
+        cfg_display = cfg.get("display") or {}
+        weight_min = int(cfg_weights.get("min", 1))
+        weight_max = int(cfg_weights.get("max", 100))
+        default_add_weight = int(cfg_weights.get("default_add", 50))
+        max_items = int(cfg_display.get("max_items", 100))
+        eff_format = args.output_format or str(cfg_display.get("default_format") or "markdown")
+        eff_group_by = args.group_by or str(cfg_display.get("default_group_by") or "timeframe")
         root = state_root(args.root, profile(args.profile))
         if args.action == "show":
             result = view(read(root))
@@ -518,11 +709,11 @@ def main(argv=None) -> int:
                 timeframe=args.timeframe,
                 owner=args.owner,
                 category=args.category,
-                group_by=args.group_by,
+                group_by=eff_group_by,
                 exact=args.exact,
                 include_ongoing=args.include_ongoing,
             )
-            rendered = render_summary(summary_data, fmt=args.output_format)
+            rendered = render_summary(summary_data, fmt=eff_format, config=cfg)
             if args.output is not None:
                 out_path = args.output.expanduser()
                 if out_path.exists() and out_path.is_dir():
@@ -533,7 +724,7 @@ def main(argv=None) -> int:
                     json.dumps(
                         {
                             "output": str(out_path.resolve()),
-                            "format": args.output_format,
+                            "format": eff_format,
                             "group_by": summary_data["group_by"],
                             "matched_items": summary_data["matched_items"],
                             "bytes": len(payload.encode("utf-8")),
@@ -600,20 +791,20 @@ def main(argv=None) -> int:
                 validated_timeframe = validate_timeframe(args.timeframe) if args.timeframe is not None else None
                 validated_owner = validate_owner(args.owner) if args.owner is not None else None
                 validated_category = validate_category(args.category) if args.category is not None else None
-            if args.weight is not None and not 1 <= args.weight <= 100:
-                raise ValueError("Weight must be 1..100")
+            if args.weight is not None and not weight_min <= args.weight <= weight_max:
+                raise ValueError(f"Weight must be {weight_min}..{weight_max}")
 
             def change(data):
                 if args.action == "set":
                     entries = [s.strip() for s in re.split(r"[;\n]+", args.text) if s.strip()]
-                    if not entries or len(entries) > 100 or any(len(s) > 2000 for s in entries):
-                        raise ValueError("Supply 1..100 items, at most 2000 characters each")
+                    if not entries or len(entries) > max_items or any(len(s) > 2000 for s in entries):
+                        raise ValueError(f"Supply 1..{max_items} items, at most 2000 characters each")
                     data.update(
                         agenda_id=uuid.uuid4().hex,
                         enabled=False,
                         deadline=None,
                         items=[
-                            {"id": f"A{i + 1}", "text": s, "weight": 100 - i, "status": "pending", "plans": []}
+                            {"id": f"A{i + 1}", "text": s, "weight": weight_max - i, "status": "pending", "plans": []}
                             for i, s in enumerate(entries)
                         ],
                     )
@@ -622,9 +813,9 @@ def main(argv=None) -> int:
                     text = raw_text.strip()
                     if not text or len(text) > 2000:
                         raise ValueError("Item text must contain 1..2000 characters")
-                    weight = 50 if args.weight is None else args.weight
-                    if len(data["items"]) >= 100 or not 1 <= weight <= 100:
-                        raise ValueError("At most 100 items; weight must be 1..100")
+                    weight = default_add_weight if args.weight is None else args.weight
+                    if len(data["items"]) >= max_items or not weight_min <= weight <= weight_max:
+                        raise ValueError(f"At most {max_items} items; weight must be {weight_min}..{weight_max}")
                     number = max((int(i["id"][1:]) for i in data["items"]), default=0) + 1
                     if number > 999:
                         raise ValueError("No free item ID left")

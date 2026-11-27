@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<style>
+  @page { size: A4 {{page_orient}}; margin: 12mm; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a; background: #f8fafc; margin: 0; padding: 24px; line-height: 1.4;
+  }
+  .sheet { max-width: 1280px; margin: 0 auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 20px 24px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px; gap: 8px; }
+  h1 { font-size: 1.5rem; margin: 0; letter-spacing: -0.02em; }
+  .subtitle { color: #475569; font-size: 0.9rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .legend-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 999px; padding: 3px 10px; }
+  .legend-pill .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--silo, #2563eb); display: inline-block; }
+  .legend-pill code { color: #475569; font-size: 0.75rem; }
+  .cal-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .cal-grid th { background: #0f172a; color: #ffffff; padding: 7px 8px; font-size: 0.82rem; text-align: center; border: 1px solid #0f172a; }
+  .day-cell { vertical-align: top; border: 1px solid #cbd5e1; height: 112px; padding: 5px 6px; background: #ffffff; overflow: hidden; }
+  .day-cell.weekend { background: #f8fafc; }
+  .ev-chip { border-left: 4px solid #2563eb; background: #f8fafc; border-radius: 4px; padding: 4px 6px; margin-bottom: 5px; font-size: 0.75rem; word-break: break-word; }
+  .ev-head { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 2px; }
+  .ev-time { font-weight: 600; color: #334155; }
+  .ev-badge { display: inline-block; color: #ffffff; font-size: 0.66rem; font-weight: 600; padding: 1px 5px; border-radius: 3px; }
+  .ev-title { font-weight: 500; }
+  .ev-meta { color: #64748b; font-size: 0.7rem; }
+  .empty-slot { color: #94a3b8; font-style: italic; font-size: 0.85rem; }
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .sheet { border: none; padding: 0; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <h1>{{title}}</h1>
+    <div class="subtitle">{{subtitle}}</div>
+  </header>
+  <div class="legend">{{legend_html}}</div>
+  {{content_html}}
+</div>
+</body>
+</html>

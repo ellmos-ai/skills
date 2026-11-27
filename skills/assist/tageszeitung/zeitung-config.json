@@ -1,0 +1,56 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "tageszeitung",
+  "version": "0.2.0",
+  "self_healing": {
+    "enabled": true,
+    "backup_suffix": ".corrupt.<ts>.bak",
+    "atomic_writes": true
+  },
+  "edition": {
+    "default_title": "Tageszeitung",
+    "default_category": "Allgemein",
+    "max_per_category": 5,
+    "summary_max_chars": 500,
+    "fetch_limit": 500
+  },
+  "sections": [
+    "Nachrichten",
+    "Technik",
+    "Wissenschaft",
+    "Wirtschaft",
+    "Allgemein"
+  ],
+  "fetch": {
+    "timeout_seconds": 12,
+    "max_feed_bytes": 1048576,
+    "max_web_bytes": 32768,
+    "user_agent": "ellmos-tageszeitung/0.2 (+sovereign)"
+  },
+  "layout": {
+    "max_width_px": 900,
+    "font_family": "Georgia,serif",
+    "accent_color": "#0055aa"
+  },
+  "output": {
+    "default_format": "html",
+    "supported_formats": [
+      "html",
+      "md",
+      "pdf"
+    ],
+    "output_dir": "./output",
+    "pdf_timeout_seconds": 30
+  },
+  "templates": {
+    "dir": "./templates",
+    "html": "ausgabe.template.html",
+    "md": "ausgabe.template.md",
+    "custom_dir": null
+  },
+  "delivery": {
+    "enabled": false,
+    "dry_run": true,
+    "mode": "draft"
+  }
+}

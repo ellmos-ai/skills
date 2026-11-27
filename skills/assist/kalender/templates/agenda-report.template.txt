@@ -1,0 +1,6 @@
+{{sep}}
+  {{title}}
+  Zeitraum: {{start_date}} bis {{end_date}} | Termine: {{event_count}}
+  Silos:    {{legend_txt}}
+{{sep}}
+{{body_txt}}

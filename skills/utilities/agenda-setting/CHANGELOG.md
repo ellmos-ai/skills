@@ -1,5 +1,10 @@
 # Änderungsverlauf
 
+## 0.3.0 — 2026-11-27
+
+- Externe Konfiguration `agenda-config.json` (Horizonte, Gewichtsgrenzen, Anzeige-/Hook-Limits, Selbstheilung mit `.corrupt.<ts>.bak`) an `scripts/agenda.py` und `scripts/agenda_hook.py` angebunden.
+- Austauschbare Ausgabe-Vorlagen `templates/agenda-overview.template.md` und `templates/agenda-board.template.html` ergänzt, `summary --format html` aktiviert und `tests/test_agenda.py` erweitert.
+
 ## 0.2.0 — 2026-11-25
 
 - Optionale rückwärtskompatible Punkt-Felder `timeframe`, `owner` (`user`/`self`/`team`/`shared` oder kleingeschriebener Owner-Slug) und `category` ergänzt (inkl. Validierung in `read()`).

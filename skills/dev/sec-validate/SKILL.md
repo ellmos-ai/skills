@@ -1,11 +1,11 @@
 ---
 name: sec-validate
-version: 0.1.0
+version: 0.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-10-31
-updated: 2026-10-31
-description: "Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report."
+updated: 2026-11-27
+description: "Nutzen bei 'Funde prüfen', 'False Positives aussortieren', 'ist das wirklich ausnutzbar', 'unabhängige Zweitprüfung des Scans'. Versucht jeden Kandidaten aus findings.json zu WIDERLEGEN: Source-to-Sink-Pfad nachzeichnen, Erreichbarkeit und Gegenmaßnahmen prüfen, Schweregrad kalibrieren, wo gefahrlos möglich lokal nachstellen. Setzt validatedBy (confirmed/refuted/uncertain) und Status validated bzw. rejected mit Grund. Der Prüfer soll ein anderer Anbieter als der Finder sein. Neue Funde suchen: sec-scan. Fremde Berichte einordnen: sec-triage. Bericht: sec-report."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -1,10 +1,10 @@
 ---
 name: tageszeitung
-version: 0.1.0
+version: 0.2.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Use when assembling a customized daily newspaper or news briefing from RSS feeds and online sources (e.g. 'create daily newspaper', 'compile morning news', 'export news briefing PDF', /tageszeitung). Aggregates feeds into a local SQLite database and renders PDF editions via Edge Headless. Do NOT use for academic literature reviews (use research/research-agent)."
 standalone: true
 anthropic_compatible: true
@@ -148,8 +148,15 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
+## Configuration & Templates (`zeitung-config.json`, `templates/`)
+
+Sections, per-category article limits (`max_per_category`, `summary_max_chars`, `fetch_limit`), fetch timeouts, and layout options are externalized in [zeitung-config.json](zeitung-config.json) with self-healing fallback (`.corrupt.<ts>.bak` on `--repair`, keeping `assist/prefs.json` compatible). Output formatting uses replaceable templates under [templates/ausgabe.template.html](templates/ausgabe.template.html) (`html`/PDF) and [templates/ausgabe.template.md](templates/ausgabe.template.md) (`--format md`).
+
+---
+
 ## Changelog
 
 | Version | Date | Change |
 |---|---|---|
+| 0.2.0 | 2026-11-27 | Added `zeitung-config.json` (sections, limits, layout, self-healing), replaceable `templates/ausgabe.template.{html,md}`, and `tests/test_tageszeitung.py` |
 | 0.1.0 | 2026-06-22 | Initial creation — BACH schema ported, own store, feedparser optional |

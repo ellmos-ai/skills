@@ -1,6 +1,6 @@
 ---
 name: kalender
-version: 0.2.0
+version: 0.3.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
@@ -173,10 +173,21 @@ CREATE TABLE IF NOT EXISTS events (
 
 ---
 
+## Konfiguration & Vorlagen (`kalender-config.json`, `templates/`)
+
+Standard-Silos, Standardkalender, Datums-/Zeitformate, Wochenanfang, Exportformate und Template-Pfade sind nutzerneutral in [kalender-config.json](kalender-config.json) ausgelagert (Selbstheilung mit Rückfall auf Standardwerte und `.corrupt.<ts>.bak` bei `--repair` / `check-config --repair`). Die HTML-, Markdown- und Textausgaben laden austauschbare Vorlagen unter `templates/` (`month-sheet.template.html`, `week-sheet.template.html`, `agenda-report.template.html`, `agenda-report.template.md`, `agenda-report.template.txt`, optional überschreibbar über `templates.custom_dir`).
+
+```bash
+python kalender_core.py check-config [--repair] [--json]
+```
+
+---
+
 ## Changelog
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.3.0 | 2026-11-27 | Externe Konfiguration (`kalender-config.json`) mit Selbstheilung (`check-config --repair`, `.corrupt.<ts>.bak`) sowie austauschbare Ausgabe-Vorlagen (`templates/*.template.{html,md,txt}`) eingeführt |
 | 0.2.0 | 2026-11-27 | Multi-Kalender-Silos (`calendars` + additive `events`-Migration), Silo-Operationen (`mirror`, `sync-mirrors`, `transfer`, `clone`), idempotenter TerminPilot-/ICS-Import (`import-ics`), erweiterte Zeitraumabfragen (`day`, `year`, `range`, `--json`) sowie Berichts- & Kalenderblatt-Generator (`html`, `pdf`, `md`, `txt`, `ics`) |
 | 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — Flag-3-Logik, local-Backend, ICS-Export |

@@ -1,18 +1,11 @@
 ---
 name: rotation-check
-version: 1.1.0
+version: 1.1.1
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-07-03
-updated: 2026-07-30
-description: >
-  Standard framework for rotating pipeline checks: Select exactly one target per run from a set
-  (projects, folders, repos) — preferably the one unchecked for the longest time —, perform the check,
-  record the result in a check registry and a history log. Use this skill when a recurring check needs
-  to be distributed across many projects ("regularly check all X for Y"), when automation must avoid
-  duplicate checks, when creating or using a check registry / CHECKS-LOG structure, or when a periodic
-  quality round (source check, style check, health check, audit) should be fairly distributed across a pipeline.
-
+updated: 2026-11-27
+description: "Use this skill when a recurring check needs to be distributed across many projects (\"regularly check all X for Y\"), when automation must avoid duplicate checks, when creating or using a check registry / CHECKS-LOG structure, or when a periodic quality round (source check, style check, health check, audit) should be fairly distributed across a pipeline. Standard framework for rotating pipeline checks: Select exactly one target per run from a set (projects, folders, repos) — preferably the one unchecked for the longest time —, perform the check, record the result in a check registry and a history log."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

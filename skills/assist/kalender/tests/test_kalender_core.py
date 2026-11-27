@@ -519,14 +519,14 @@ class KalenderCoreV02Tests(unittest.TestCase):
 
         rc, out, _ = self._run_cli("check-backend", "--json")
         self.assertEqual(rc, 0)
-        self.assertEqual(json.loads(out)["core_version"], "0.2.0")
+        self.assertEqual(json.loads(out)["core_version"], "0.3.0")
 
     def test_15_stdlib_only_and_public_privacy_cleanliness(self) -> None:
         """Stellt sicher, dass keine Fremdpakete oder privaten Host-/Pfaddaten im Skill liegen."""
         allowed_stdlib = {
-            "__future__", "ast", "calendar", "contextlib", "datetime", "html",
-            "io", "json", "os", "pathlib", "re", "sqlite3", "sys", "tempfile",
-            "typing", "unittest", "uuid", "kalender_core",
+            "__future__", "ast", "calendar", "contextlib", "copy", "datetime", "html",
+            "io", "json", "os", "pathlib", "re", "shutil", "sqlite3", "sys",
+            "tempfile", "typing", "unittest", "uuid", "kalender_core",
         }
         for py_path in SKILL_DIR.rglob("*.py"):
             tree = ast.parse(py_path.read_text(encoding="utf-8"))
@@ -546,6 +546,51 @@ class KalenderCoreV02Tests(unittest.TestCase):
                 text = fpath.read_text(encoding="utf-8")
                 self.assertIsNone(private_ip_re.search(text), f"Private IP in {fpath.name}")
                 self.assertIsNone(abs_user_path_re.search(text), f"User path in {fpath.name}")
+
+    def test_16_external_config_self_healing_and_custom_templates(self) -> None:
+        """Prüft kalender-config.json, Selbstheilung (.corrupt.<ts>.bak) und eigene Templates."""
+        import shutil
+
+        cfg_root = self.tmp_path / "skill_cfg"
+        cfg_root.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(SKILL_DIR / "kalender-config.json", cfg_root / "kalender-config.json")
+        shutil.copytree(SKILL_DIR / "templates", cfg_root / "templates")
+
+        corrupt_override = cfg_root / "config.json"
+        corrupt_override.write_text("{corrupt json", encoding="utf-8")
+
+        loaded = kc.load_kalender_config(skill_root=cfg_root, repair=True)
+        self.assertTrue(loaded["warnings"])
+        self.assertTrue(loaded["healed"])
+        self.assertTrue(list(cfg_root.glob("config.json.corrupt.*.bak")))
+        self.assertEqual(loaded["config"]["defaults"]["calendar"], "user")
+
+        custom_tpl_dir = cfg_root / "custom_tpl"
+        custom_tpl_dir.mkdir(parents=True, exist_ok=True)
+        (custom_tpl_dir / "agenda-report.template.md").write_text(
+            "# CUSTOM {{title}}\n\n{{body_md}}\n",
+            encoding="utf-8",
+        )
+        corrupt_override.write_text(
+            json.dumps({"templates": {"custom_dir": "./custom_tpl"}}),
+            encoding="utf-8",
+        )
+        kc.add_event(self.store, "Vorlagencheck", "2027-06-15", "10:00", 30, calendar_id="user")
+        rep = kc.render_report(
+            self.store,
+            view="day",
+            fmt="md",
+            day_str="2027-06-15",
+            skill_root=cfg_root,
+        )
+        self.assertTrue(rep["content"].startswith("# CUSTOM "))
+        self.assertIn("Vorlagencheck", rep["content"])
+
+        rc, out, _ = self._run_cli("check-config", "--json")
+        self.assertEqual(rc, 0)
+        parsed = json.loads(out)
+        self.assertEqual(parsed["core_version"], "0.3.0")
+        self.assertEqual(parsed["config"]["skill"], "kalender")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} — {{date}}</title>
+<style>
+  body {
+    font-family: {{font_family}};
+    max-width: {{max_width_px}}px;
+    margin: auto;
+    padding: 2em;
+    color: #1f2937;
+    background: #ffffff;
+  }
+  h1 { border-bottom: 3px double #333; padding-bottom: .5em; margin-bottom: .2em; }
+  h2 { color: #555; margin-top: 2em; border-bottom: 1px solid #ccc; }
+  article { margin: 1em 0; padding: .5em 0; border-bottom: 1px solid #eee; }
+  article h3 { margin: 0 0 .3em; }
+  a { color: {{accent_color}}; }
+  .meta { color: #6b7280; font-size: .85em; }
+  @media print {
+    body { max-width: none; padding: 0; }
+    article { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<h1>{{title}}</h1>
+<p class="meta">{{date}}</p>
+{{articles_html}}
+</body>
+</html>

@@ -1,10 +1,10 @@
 ---
 name: decision-shot
-version: 1.2.0
+version: 1.3.0
 type: skill
 author: Lukas Geiger + Claude
 created: 2026-08-24
-updated: 2026-11-09
+updated: 2026-11-27
 description: "Verwenden, wenn eine bereits analysierte Entscheidung extrem kompakt und substanziell aufbereitet werden soll (z. B. 'gib mir das kurz mit Pro Contra und Empfehlung', 'executive summary zur Entscheidung', 'fass die Entscheidung X in einer Kurzform zusammen', /decision-shot). Liefert Kontext in 2-3 Zeilen, stichpunktartige Pro/Contra-Punkte im reduzierten Stil, Talking Points, eine begründete Empfehlung und den Beleglink zur Vollanalyse. NICHT verwenden zum Sammeln offener Entscheidungen (dafür decision-briefing) oder zur Erstanalyse einer Frage (dafür decide)."
 visibility: public
 language: de
@@ -164,7 +164,14 @@ Ausfall, und die Abhaengigkeit (Tailscale) ist bereits im Betrieb bewaehrt.
 **Vollanalyse:** `.SYNC/MAC_STUDIO_COMPUTE_HANDOFF.md`, Abschnitt "Backup-Jobs" (Ticket T-20260620-42)
 ```
 
+## Konfiguration & Vorlage (`shot-config.json`, `templates/`)
+
+Budgets, Stilregeln und Standardformat sind nutzerneutral in [shot-config.json](shot-config.json) ausgelagert (`context_max_lines: 3`, `option_bullets_max: 4`, `talking_points_max: 3`, `recommendation_sentences: 1`). Die kompakte Fünf-Teile-Struktur liegt zusätzlich als wiederverwendbare Vorlage unter [templates/decision-shot.template.md](templates/decision-shot.template.md).
+
 ## Changelog
+
+### 1.3.0 (2026-11-27)
+- Budgets, Stilparameter und Ausgabedefinitionen in `shot-config.json` ausgelagert sowie kompakte Markdown-Vorlage `templates/decision-shot.template.md` ergänzt.
 
 ### 1.2.0 (2026-09-18)
 - Stilregel für verständliche Entscheidungstexte verankert (T-20260913-883789445, Nutzeranweisung 2026-09-13):

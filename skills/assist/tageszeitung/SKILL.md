@@ -1,10 +1,10 @@
 ---
 name: tageszeitung
-version: 0.1.1
+version: 0.2.0
 type: assist
 author: ellmos-ai
 created: 2026-06-22
-updated: 2026-11-22
+updated: 2026-11-27
 description: "Verwenden, wenn eine personalisierte Tageszeitung oder Nachrichtenübersicht aus RSS-Feeds und Webquellen generiert werden soll (z. B. 'Tageszeitung erstellen', 'Nachrichten zusammenstellen', 'Morgen-Briefing als PDF generieren', /tageszeitung). Aggregiert konfigurierte Feeds in eine lokale SQLite-Datenbank und exportiert ansprechende PDFs via Edge Headless. NICHT verwenden für tiefe wissenschaftliche Literaturrecherchen (dafür research/research-agent)."
 standalone: true
 anthropic_compatible: true
@@ -145,9 +145,16 @@ CREATE TABLE IF NOT EXISTS news_items (
 
 ---
 
+## Konfiguration & Templates (`zeitung-config.json`, `templates/`)
+
+Ressorts (`sections`), Artikel-Limits (`max_per_category`, `summary_max_chars`, `fetch_limit`), Netzwerk-Timeouts und Layout-Optionen liegen in [zeitung-config.json](zeitung-config.json) (Selbstheilung mit Rückfall auf Standardwerte + `.corrupt.<ts>.bak` bei `--repair`; bestehende `assist/prefs.json`-Einträge bleiben kompatibel). Die Ausgabe erfolgt über austauschbare Vorlagen unter [templates/ausgabe.template.html](templates/ausgabe.template.html) (`html`/PDF) und [templates/ausgabe.template.md](templates/ausgabe.template.md) (`--format md`).
+
+---
+
 ## Changelog
 
 | Version | Datum | Änderung |
 |---|---|---|
+| 0.2.0 | 2026-11-27 | `zeitung-config.json` (Ressorts, Quellenlimits, Layout, Selbstheilung), austauschbare `templates/ausgabe.template.{html,md}` und `tests/test_tageszeitung.py` ergänzt |
 | 0.1.1 | 2026-11-22 | Sprachhinweis korrigiert |
 | 0.1.0 | 2026-06-22 | Erstanlage — BACH-Schema portiert, eigener Store, feedparser optional |

@@ -1,22 +1,11 @@
 ---
 name: tidy-up
-version: 1.1.1
+version: 1.1.2
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-19
-updated: 2026-11-10
-description: >
-  One-time Tasksolver+Writer+Maintainer pass for the project folder the
-  session has been working in anyway (including subfolders) — not a
-  system-wide sweep. Resolves open trivial/autonomous register points,
-  updates documentation to the measured current state (in the project AND
-  in the root of the pipeline the project lives in) and clears out
-  strays/temp files following the trash-can principle. Use this skill for
-  /tidy-up, "tidy up the project", "clean up here before we continue", at
-  the end of a work session on a project, or as a due autonomous task
-  inside /work-autonomous + /goal.
-
-# Compatibility
+updated: 2026-11-27
+description: "Use this skill for /tidy-up, \"tidy up the project\", \"clean up here before we continue\", at the end of a work session on a project, or as a due autonomous task inside /work-autonomous + /goal. One-time Tasksolver+Writer+Maintainer pass for the project folder the session has been working in anyway (including subfolders) — not a system-wide sweep. Resolves open trivial/autonomous register points, updates documentation to the measured current state (in the project AND in the root of the pipeline the project lives in) and clears out strays/temp files following the trash-can principle."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

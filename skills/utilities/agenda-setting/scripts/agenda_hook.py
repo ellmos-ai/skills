@@ -13,10 +13,12 @@ import agenda
 
 
 def context(payload: dict, provider: str, settings: dict) -> str:
+    cfg = agenda.load_agenda_config()["config"]
+    max_hook_items = max(1, int((cfg.get("display") or {}).get("max_hook_items", 20)))
     state = agenda.view(agenda.read(agenda.state_root(settings=settings)))
     parts = []
     if state["active"]:
-        pending = [item for item in state["items"] if item["status"] == "pending"][:20]
+        pending = [item for item in state["items"] if item["status"] == "pending"][:max_hook_items]
         compact_items = []
         for item in pending:
             entry = {"id": item["id"], "text": item["text"][:500], "weight": item["weight"]}

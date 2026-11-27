@@ -1,0 +1,59 @@
+{
+  "schema": "ocean.skill-config.v2",
+  "skill": "agenda-setting",
+  "version": "0.3.0",
+  "self_healing": {
+    "enabled": true,
+    "backup_suffix": ".corrupt.<ts>.bak",
+    "atomic_writes": true
+  },
+  "horizons": {
+    "allowed_units": [
+      "YYYY-MM",
+      "YYYY-Q1..Q4",
+      "YYYY-H1..H2",
+      "YYYY",
+      "YYYY..YYYY",
+      "YYYY-MM+",
+      "YYYY+",
+      "ongoing"
+    ],
+    "year_min": 1900,
+    "year_max": 2999,
+    "default_include_ongoing": false
+  },
+  "weights": {
+    "min": 1,
+    "max": 100,
+    "default_add": 50,
+    "levels": {
+      "critical": 90,
+      "high": 75,
+      "medium": 50,
+      "low": 25
+    }
+  },
+  "display": {
+    "default_format": "markdown",
+    "supported_formats": [
+      "markdown",
+      "text",
+      "html",
+      "json"
+    ],
+    "default_group_by": "timeframe",
+    "max_hook_items": 20,
+    "max_items": 100,
+    "empty_group_headings": {
+      "timeframe": "Ohne Zeitraum",
+      "category": "Ohne Kategorie",
+      "owner": "Ohne Zuständigkeit"
+    }
+  },
+  "templates": {
+    "dir": "./templates",
+    "md": "agenda-overview.template.md",
+    "html": "agenda-board.template.html",
+    "custom_dir": null
+  }
+}

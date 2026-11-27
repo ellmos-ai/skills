@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<style>
+  @page { size: A4 {{page_orient}}; margin: 12mm; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a; background: #f8fafc; margin: 0; padding: 24px; line-height: 1.4;
+  }
+  .sheet { max-width: 1280px; margin: 0 auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 20px 24px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px; gap: 8px; }
+  h1 { font-size: 1.5rem; margin: 0; letter-spacing: -0.02em; }
+  .subtitle { color: #475569; font-size: 0.9rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .legend-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 999px; padding: 3px 10px; }
+  .legend-pill .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--silo, #2563eb); display: inline-block; }
+  .legend-pill code { color: #475569; font-size: 0.75rem; }
+  .ev-badge { display: inline-block; color: #ffffff; font-size: 0.66rem; font-weight: 600; padding: 1px 5px; border-radius: 3px; vertical-align: middle; }
+  .day-card { border-left: 5px solid #2563eb; background: #f8fafc; border: 1px solid #e2e8f0; border-left-width: 5px; border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+  .day-card-top { display: flex; gap: 10px; align-items: center; font-size: 0.85rem; color: #475569; margin-bottom: 4px; }
+  .day-card-title { font-size: 1.02rem; font-weight: 600; }
+  .ev-desc { margin: 6px 0 0; font-size: 0.84rem; color: #475569; }
+  .month-section { margin-bottom: 20px; break-inside: avoid; }
+  .month-section h2 { font-size: 1.1rem; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin: 14px 0 8px; }
+  .list-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  .list-table th, .list-table td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; vertical-align: top; }
+  .list-table th { background: #f1f5f9; font-weight: 600; }
+  .empty-msg { color: #94a3b8; font-style: italic; font-size: 0.85rem; }
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .sheet { border: none; padding: 0; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <h1>{{title}}</h1>
+    <div class="subtitle">{{subtitle}}</div>
+  </header>
+  <div class="legend">{{legend_html}}</div>
+  {{content_html}}
+</div>
+</body>
+</html>

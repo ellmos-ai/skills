@@ -1,25 +1,11 @@
 ---
 name: work-autonomous
-version: 1.6.0
+version: 1.6.1
 type: protocol
 author: Lukas Geiger + Claude
 created: 2026-08-15
-updated: 2026-11-22
-description: >
-  Termination condition for autonomous loops: keep working independently as
-  far as possible AND only end a loop once it is PROVEN that no autonomously
-  executable task remains. The mere impression "nothing left to do" is NOT
-  enough — it triggers a four-step verification chain (think/decide,
-  _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN
-  new tasks before the loop is allowed to end. Each chain step now reports
-  found/empty/unavailable instead of a binary result — "exhausted" only
-  applies when EVERY source was actually queryable; if at least one source is
-  unavailable, the skill reports "blind" instead of "exhausted" and claims
-  nothing it never checked. Use this skill for /work-autonomous, /waafap,
-  "keep working autonomously until there is nothing left to do", as the goal
-  condition inside a /loop, or whenever it needs checking whether autonomous
-  work is truly exhausted before ending a loop or session.
-
+updated: 2026-11-27
+description: "Use this skill for /work-autonomous, /waafap, \"keep working autonomously until there is nothing left to do\", as the goal condition inside a /loop, or whenever it needs checking whether autonomous work is truly exhausted before ending a loop or session. Termination condition for autonomous loops: keep working independently as far as possible AND only end a loop once it is PROVEN that no autonomously executable task remains. The mere impression \"nothing left to do\" is NOT enough — it triggers a four-step verification chain (think/decide, _CONTROL/_DECISIONS, Gardener/USMC, decision-avatar/BYUM) that must first try to WIN new tasks before the loop is allowed to end. Each chain step now reports found/empty/unavailable instead of a binary result — \"exhausted\" only applies when EVERY source was actually queryable; if at least one source is unavailable, the skill reports \"blind\" instead of \"exhausted\" and claims nothing it never checked."
 standalone: true
 anthropic_compatible: true
 bach_compatible: false

@@ -13,6 +13,7 @@ Hash:    document_sha256 = SHA-256 der Datei mit 64 Nullen an Stelle des Hashs (
 import argparse
 import hashlib
 import html as H
+import importlib.util
 import json
 import re
 import sys
@@ -21,6 +22,15 @@ from pathlib import Path
 import markdown
 
 HERE = Path(__file__).resolve().parent
+
+
+def _resolve_shell_template() -> str:
+    cfg_script = HERE.parent / "draw_config.py"
+    spec = importlib.util.spec_from_file_location("draw_config", cfg_script)
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.resolve_template_path("markdown_form_html").read_text(encoding="utf-8")
 SCHEMA = "ticket-master.decision-answers.v1"
 DOC_ID = "ENTSCHEIDUNGEN_2026-11-07"
 ZERO = "0" * 64
@@ -176,26 +186,23 @@ def build(md_path):
              '<textarea id="answer-text" readonly rows="8" aria-label="Antwort als Text (JSON)"></textarea></details></div></section>') % (len(items), nav)
     t1 = body.index("</h1>") + len("</h1>")  # Antwortbogen direkt unter der Ueberschrift, vor dem langen Inhaltsverzeichnis
     body = body[:t1] + "\n" + panel + body[t1:]
-    css_base = ('<style>\n:root{--bg:#fdfdfb;--fg:#1d1f21;--muted:#5b6168;--line:#d9dcdf;--accent:#1f5fae;--code:#f1f2f4;--head:#eef2f7}\n'
-                '@media (prefers-color-scheme: dark){:root{--bg:#16181b;--fg:#e6e8ea;--muted:#a3a9b0;--line:#33383e;--accent:#7fb2ff;--code:#22262b;--head:#1f242b}}\n'
-                'html{background:var(--bg)}body{background:var(--bg);color:var(--fg);font:16px/1.6 "Segoe UI",system-ui,sans-serif;max-width:60rem;margin:0 auto;padding:1.5rem 16px 4rem}\n'
-                'h1,h2,h3,h4{line-height:1.25;margin-top:2em}h1{font-size:1.9rem;margin-top:.5em}h2{border-bottom:1px solid var(--line);padding-bottom:.3em}\n'
-                'a{color:var(--accent)}code{background:var(--code);padding:.1em .3em;border-radius:4px;font-size:.92em;word-break:break-word}\n'
-                'table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:1em 0}th,td{border:1px solid var(--line);padding:.4em .6em;vertical-align:top;text-align:left}\n'
-                'th{background:var(--head)}hr{border:0;border-top:2px solid var(--line);margin:2.5em 0}\n.toc{background:var(--head);border:1px solid var(--line);border-radius:6px;padding:.6em 1.2em}.toc .toctitle{font-weight:600}\n</style>\n')
     css = (HERE / "formular.css").read_text(encoding="utf-8")
     js = (HERE / "formular.js").read_text(encoding="utf-8")
     data = {"schema": SCHEMA, "document_id": DOC_ID, "doc_sha256": ZERO, "answer_name": f"{DOC_ID}.antwort.json",
             "answered_name": f"{DOC_ID}_BEANTWORTET.html", "zielordner": ".USR\\entscheidungen", "items": items}
     data_json = json.dumps(data, ensure_ascii=False, indent=1).replace("</", "<\\/")
-    page = ('<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-            f'<meta name="document-id" content="{DOC_ID}">\n<meta name="document-sha256" content="{ZERO}">\n<meta name="color-scheme" content="light dark">\n'
-            f'<title>{H.escape(title)} – Formular</title>\n{css_base}<style>\n{css}</style>\n</head>\n<body>\n{body}\n'
-            '<div class="sticky-bar"><div class="grow"><span class="js-progress">0 von {{N}} beantwortet</span><div class="bar"><i class="js-bar"></i></div></div>'
-            '<button type="button" class="primary js-save">Speichern und abschicken</button></div>\n'
-            '<dialog id="dlg" aria-labelledby="dlg-title"><h3 id="dlg-title" style="margin-top:0"></h3><div id="dlg-body"></div><div id="dlg-buttons"></div></dialog>\n'
-            '<div id="toast" role="status" aria-live="polite"></div>\n'
-            f'<script type="application/json" id="form-data">\n{data_json}\n</script>\n<script>\n{js}</script>\n</body>\n</html>\n').replace("{{N}}", str(len(items)))
+    shell = _resolve_shell_template()
+    replacements = {
+        "DOC_ID": DOC_ID,
+        "ZERO": ZERO,
+        "TITLE": H.escape(title),
+        "CSS": css,
+        "BODY": body,
+        "N": str(len(items)),
+        "DATA_JSON": data_json,
+        "JS": js,
+    }
+    page = re.sub(r"\{\{([A-Z_]+)\}\}", lambda match: replacements[match.group(1)], shell)
     digest = hashlib.sha256(page.encode("utf-8")).hexdigest()
     return page.replace(ZERO, digest), digest, items
 
