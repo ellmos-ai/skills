@@ -22,85 +22,85 @@ provenance: {'origin': 'custom', 'origin_path': 'None', 'origin_version': 'None'
 
 <img src="banner.png" width="100%" alt="privat-mail-writer banner">
 
-> **English** — Translation pending: content is currently German.
+> **English** — Official English version of `privat-mail-writer`.
 
 # Privat-Mail-Writer (English)
 
 ## Overview & Purpose
 
-Privat-Mail-Writer erstellt kurze, freundliche und kontaktabhängig passende Mailentwürfe. Der Skill ist nutzerneutral angelegt: Er enthält keine echten Kontakte, keine echten Signaturen und keine echten Mailinhalte.
+Privat-Mail-Writer creates short, friendly, and contact-appropriate email drafts. The skill is designed to be user-neutral: it contains no real contacts, no real signatures, and no real email content.
 
-Der Kern ist lazy und empirisch: Erst wenn der User eine konkrete Mail an einen Kontakt schreiben will, das Profil für genau diesen Kontakt anlegen oder aktualisieren. Keine Profile auf Vorrat erzeugen. Wenn keine Mailhistorie verfügbar ist, keine Stilbehauptungen erfinden, sondern neutral kurz schreiben oder gezielt nach Beispielen fragen.
+Its core is lazy and empirical: only when the user wants to write a concrete email to a contact should you create or update the profile for that specific contact. Do not generate profiles in advance. If no email history is available, do not invent style claims; instead, write briefly in a neutral tone or ask specifically for examples.
 
-## Ressourcen
+## Resources
 
-- `CONFIG.md` - zentrale Präferenzen, Wenn-dann-Regeln, Permission-Gates und Blacklist-Schalter.
-- `BLACKLIST.md` - Ausschlüsse für Newsletter, Systemsender und Kontakte ohne Profil.
-- `USECASES.md` - Usecase-Registry und Regeln für neue Usecases.
-- `SIGNATURES.md` - neutrale Signatur- und Grußformel-Regeln.
-- `MUSTER-BLOCKS.md` - kurze wiederverwendbare Textbausteine.
-- `kontaktprofile.json` - leeres, nutzerneutrales Schema für Kontaktprofile. Echte Profile nur lokal und datensparsam führen.
+- `CONFIG.md` - central preferences, if-then rules, permission gates, and blacklist switches.
+- `BLACKLIST.md` - exclusions for newsletters, system senders, and contacts without a profile.
+- `USECASES.md` - use case registry and rules for new use cases.
+- `SIGNATURES.md` - neutral signature and salutation rules.
+- `MUSTER-BLOCKS.md` - short reusable text snippets.
+- `kontaktprofile.json` - empty, user-neutral schema for contact profiles. Keep real profiles locally and data-minimized only.
 
-## Arbeitsablauf
+## Workflow
 
-1. **Konfig laden:** `CONFIG.md` lesen. Wenn Blacklist aktiv ist, zusätzlich `BLACKLIST.md` prüfen.
-2. **Trigger prüfen:** Nur bei einem konkreten Schreibauftrag für einen bestimmten Kontakt profilieren, z. B. "schreib eine Mail an Bruder Simon". Keine Inbox-Sweeps nur zur Profilanlage.
-3. **Blacklist prüfen:** Newsletter, No-Reply, Systemsender und ausgeschlossene Domains/Kontakte bekommen kein Kontaktprofil. Für solche Fälle neutral antworten oder nicht antworten.
-4. **Mailaufgabe erkennen:** Ziel, Empfänger, Anlass, gewünschte Kürze, Sprache, Ton und notwendige Fakten bestimmen.
-5. **Usecase bestimmen:** `USECASES.md` lesen und den passendsten Usecase auswählen. Wenn kein Usecase passt, einen neuen wiederverwendbaren Usecase anlegen oder bei fehlenden Pflichtangaben kurz nachfragen.
-6. **Kontaktprofil prüfen:** Für jeden nicht ausgeschlossenen Empfänger ein vorhandenes Profil in `kontaktprofile.json` oder in einer privaten lokalen Profilkopie suchen.
-7. **Profil erstellen oder aktualisieren:** Wenn kein belastbares Profil vorhanden ist, bis zu die letzten zehn relevanten Mails mit genau diesem Kontakt aus dem verfügbaren Mail-Backend lesen. Gesendete Mails sind für Schreibstil stärker zu gewichten als empfangene Mails.
-8. **Empirie speichern:** Im Kontaktprofil nur zusammenfassende, belegbare Stil-, Verhältnis- und Kategorie-Signale speichern. Keine Rohmails, keine langen Zitate und keine unnötigen personenbezogenen Details ablegen.
-9. **Permission-Gate anwenden:** Vor Senden, heiklen Inhalten oder fehlenden Pflichtangaben die Gates aus `CONFIG.md` beachten.
-10. **Entwurf schreiben:** Usecase-Form, Kontaktprofil und aktuelle Aufgabe zusammenführen. Den Stil nachahmen, ohne falsche Nähe, falsche Zusagen oder unbelegte Gründe zu erfinden.
-11. **Ausgabe liefern:** Standardmäßig Betreff und Mailtext ausgeben. Nur senden, wenn der User ausdrücklich das Senden freigegeben hat und ein passendes Mail-Tool verfügbar ist.
+1. **Load config:** Read `CONFIG.md`. If the blacklist is active, also check `BLACKLIST.md`.
+2. **Check trigger:** Only profile on a concrete writing task for a specific contact, e.g., "write an email to Brother Simon". No inbox sweeps just to create profiles.
+3. **Check blacklist:** Newsletters, no-reply addresses, system senders, and excluded domains/contacts do not get a contact profile. For such cases, reply neutrally or do not reply.
+4. **Identify email task:** Determine goal, recipient, occasion, desired brevity, language, tone, and necessary facts.
+5. **Determine use case:** Read `USECASES.md` and select the best-matching use case. If no use case fits, create a new reusable use case or briefly ask for missing mandatory details.
+6. **Check contact profile:** For each non-excluded recipient, look up an existing profile in `kontaktprofile.json` or in a private local profile copy.
+7. **Create or update profile:** If no reliable profile exists, read up to the last ten relevant emails with this exact contact from the available mail backend. Sent emails should be weighted more heavily for writing style than received emails.
+8. **Store empirics:** In the contact profile, store only summary, verifiable style, relationship, and category signals. Do not store raw emails, long quotes, or unnecessary personal details.
+9. **Apply permission gate:** Before sending, handling sensitive content, or dealing with missing mandatory details, observe the gates from `CONFIG.md`.
+10. **Write draft:** Combine use case form, contact profile, and current task. Match the style without inventing false closeness, false commitments, or unsubstantiated reasons.
+11. **Deliver output:** By default, output subject and email body. Only send if the user has explicitly approved sending and a suitable mail tool is available.
 
-## Kontaktprofile
+## Contact Profiles
 
-Ein Kontaktprofil beschreibt nicht die Person an sich, sondern das beobachtete Kommunikationsverhältnis und den Schreibstil des Kontoinhabers gegenüber dieser Person.
+A contact profile does not describe the person themselves, but the observed communication relationship and writing style of the account owner toward that person.
 
-Profilfelder sollen knapp bleiben:
+Profile fields should stay concise:
 
-- letzte Kontaktzeit
-- Anzahl und Zeitraum der ausgewerteten Mails
-- Anrede und Grußformel
-- Du/Sie/Formalität
-- Satzlänge und typische Kürze
-- Wärmegrad, Direktheit, Verbindlichkeit
-- Verhältnis-Einschätzung mit Konfidenz
-- Kontaktkategorie, z. B. `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`
-- Quelle der Kategorie: User-Aussage, Mailtext, Adressbuch, Signatur oder Inferenz
-- Evidenzgrad der Kategorie: `user-confirmed`, `strong`, `medium`, `weak`
-- kurze paraphrasierte Belege wie "mehrere gesendete Mails enden mit 'Viele Grüße'" oder "Antworten bleiben unter fünf Sätzen"
+- last contact time
+- number and time span of evaluated emails
+- salutation and closing formula
+- informal/formal address (`Du`/`Sie`/formality)
+- sentence length and typical brevity
+- warmth, directness, level of commitment
+- relationship assessment with confidence
+- contact category, e.g. `family`, `inner-circle`, `friends`, `colleagues`, `services`, `official`, `unknown`
+- source of category: user statement, email text, address book, signature, or inference
+- evidence level of category: `user-confirmed`, `strong`, `medium`, `weak`
+- short paraphrased evidence such as "several sent emails end with 'Viele Grüße'" or "replies stay under five sentences"
 
-Monatlich prüfen, ob ein Alters-Check fällig ist. Wenn der Monat des aktuellen Datums vom gespeicherten `last_age_check` abweicht, Profile löschen, deren `last_contact_at` mehr als ein Jahr zurückliegt, und `last_age_check` auf das aktuelle Datum setzen. Der Startwert im neutralen JSON ist `2026-06-18`.
+Check monthly whether an age check is due. If the month of the current date differs from the stored `last_age_check`, delete profiles whose `last_contact_at` is more than one year ago, and set `last_age_check` to the current date. The initial value in the neutral JSON is `2026-06-18`.
 
-## Stilregeln
+## Style Rules
 
-- Kurz schreiben. Privatmails brauchen selten lange Vorreden.
-- Freundlich bleiben, aber nicht übererklären.
-- Echte Gründe nur nennen, wenn sie vom User genannt oder aus dem Kontext sicher sind.
-- Bei offiziellen Absagen: höflich, klar, ohne Rechtfertigungsroman.
-- Bei Unsicherheit über Fakten: eine knappe Rückfrage stellen, bevor der Entwurf finalisiert wird.
-- Deutsche Texte mit echten Umlauten schreiben: ä, ö, ü, Ä, Ö, Ü, ß.
+- Write concisely. Private emails rarely need long preambles.
+- Stay friendly, but do not over-explain.
+- State real reasons only if given by the user or certain from context.
+- For formal declines: polite, clear, without a novel of justification.
+- When uncertain about facts: ask one brief clarifying question before finalizing the draft.
+- Write German texts with proper umlauts: ä, ö, ü, Ä, Ö, Ü, ß.
 
-## Neue Usecases
+## New Use Cases
 
-Wenn eine Mailaufgabe wiederverwendbar wirkt und in `USECASES.md` noch nicht abgedeckt ist, den Usecase ergänzen:
+If an email task seems reusable and is not yet covered in `USECASES.md`, add the use case:
 
-- stabile ID, z. B. `UC-002`
-- Name und typische Trigger
-- Ziel der Mail
-- Pflichtangaben und optionale Angaben
-- Standardlänge und Ton
-- kurze Vorlage oder Bausteinfolge
-- offene Rückfragen, falls Pflichtangaben fehlen
+- stable ID, e.g. `UC-002`
+- name and typical triggers
+- goal of the email
+- mandatory and optional details
+- default length and tone
+- short template or sequence of text blocks
+- open follow-up questions if mandatory details are missing
 
-Ein einmaliger Sonderfall wird nicht als Usecase aufgebläht. In diesem Fall nur den aktuellen Entwurf liefern.
+A one-off special case is not inflated into a use case. In that case, only deliver the current draft.
 
-## Ausgabeformat
+## Output Format
 
-Für normale Entwürfe:
+For normal drafts:
 
 ```text
 Betreff: ...
@@ -113,11 +113,11 @@ Mit freundlichen Grüßen
 [Signatur]
 ```
 
-Wenn der User nur Text ohne Betreff will, nur den Mailtext liefern. Wenn mehrere Varianten sinnvoll sind, höchstens zwei Varianten anbieten: "sehr kurz" und "etwas wärmer".
+If the user only wants text without a subject, deliver only the email body. If multiple variants make sense, offer at most two variants: "very short" and "a bit warmer".
 
-## Grenzen
+## Boundaries
 
-Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in die Antwort kopieren. Keine Mail ohne ausdrückliche Freigabe senden. Keine juristischen, medizinischen oder finanziellen Zusagen formulieren, wenn der User sie nicht klar vorgibt.
+Never invent a contact profile. Do not unnecessarily copy confidential details from emails into the response. Never send an email without explicit approval. Do not formulate legal, medical, or financial commitments unless clearly specified by the user.
 
 ## Changelog
 
@@ -125,9 +125,9 @@ Kein Kontaktprofil erfinden. Keine vertraulichen Details aus Mails unnötig in d
 - Language notice corrected
 
 ### 0.2.0 (2026-06-19)
-- `CONFIG.md` und `BLACKLIST.md` ergänzt.
-- Profilanlage auf konkrete Mail-Schreibaufträge begrenzt.
-- Kontaktkategorien mit Quelle und Evidenzgrad in das Profilschema aufgenommen.
+- Added `CONFIG.md` and `BLACKLIST.md`.
+- Restricted profile creation to concrete email writing tasks.
+- Added contact categories with source and evidence level to the profile schema.
 
 ### 0.1.0 (2026-06-19)
-- Initiale Version mit Usecase-Registry, Signaturregeln, Musterblöcken und leerem Kontaktprofil-JSON.
+- Initial version with use case registry, signature rules, sample blocks, and empty contact profile JSON.
